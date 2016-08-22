@@ -11,8 +11,7 @@ using static Nest.Infer;
 
 namespace Tests.Cluster.ClusterState
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class ClusterStateApiTests : ApiIntegrationTestBase<IClusterStateResponse, IClusterStateRequest, ClusterStateDescriptor, ClusterStateRequest>
+	public class ClusterStateApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IClusterStateResponse, IClusterStateRequest, ClusterStateDescriptor, ClusterStateRequest>
 	{
 		public ClusterStateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

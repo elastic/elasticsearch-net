@@ -8,11 +8,10 @@ using Xunit;
 
 namespace Tests.XPack.License.PostLicense
 {
-	[Collection(IntegrationContext.ReadOnly)]
 	[SkipVersion("<2.3.0", "")]
-	public class PostLicenseApiTests : ApiTestBase<IPostLicenseResponse, IPostLicenseRequest, PostLicenseDescriptor, PostLicenseRequest>
+	public class PostLicenseApiTests : ApiTestBase<XPackCluster, IPostLicenseResponse, IPostLicenseRequest, PostLicenseDescriptor, PostLicenseRequest>
 	{
-		public PostLicenseApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PostLicenseApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.PostLicense(f),
 			fluentAsync: (client, f) => client.PostLicenseAsync(f),

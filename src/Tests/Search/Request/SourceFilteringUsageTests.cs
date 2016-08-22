@@ -49,7 +49,7 @@ namespace Tests.Search.Request
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			foreach (var document in response.Documents)
 			{

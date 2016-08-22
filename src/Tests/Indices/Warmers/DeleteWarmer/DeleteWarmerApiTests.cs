@@ -9,10 +9,9 @@ using static Nest.Infer;
 
 namespace Tests.Indices.Warmers.DeleteWarmer
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class DeleteWarmerApiTests : ApiTestBase<IDeleteWarmerResponse, IDeleteWarmerRequest, DeleteWarmerDescriptor, DeleteWarmerRequest>
+	public class DeleteWarmerApiTests : ApiTestBase<IntrusiveOperationCluster, IDeleteWarmerResponse, IDeleteWarmerRequest, DeleteWarmerDescriptor, DeleteWarmerRequest>
 	{
-		public DeleteWarmerApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteWarmerApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.DeleteWarmer(Index<Project>(), "warmer1,warmer2", f),

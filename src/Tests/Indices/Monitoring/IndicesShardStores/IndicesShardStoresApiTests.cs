@@ -11,10 +11,9 @@ using Xunit;
 
 namespace Tests.Indices.Monitoring.IndicesShardStores
 {
-	[Collection(IntegrationContext.OwnIndex)]
-	public class IndicesShardStoresApiTests : ApiIntegrationTestBase<IIndicesShardStoresResponse, IIndicesShardStoresRequest, IndicesShardStoresDescriptor, IndicesShardStoresRequest>
+	public class IndicesShardStoresApiTests : ApiIntegrationTestBase<WritableCluster, IIndicesShardStoresResponse, IIndicesShardStoresRequest, IndicesShardStoresDescriptor, IndicesShardStoresRequest>
 	{
-		public IndicesShardStoresApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public IndicesShardStoresApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private static string IndexWithUnassignedShards = "nest-" + RandomString();
 

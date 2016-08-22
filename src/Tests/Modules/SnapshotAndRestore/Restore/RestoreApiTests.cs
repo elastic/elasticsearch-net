@@ -9,10 +9,9 @@ using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Restore
 {
-	[Collection(IntegrationContext.Indexing)]
-	public class RestoreApiTests : ApiTestBase<IRestoreResponse, IRestoreRequest, RestoreDescriptor, RestoreRequest>
+	public class RestoreApiTests : ApiTestBase<IntrusiveOperationCluster, IRestoreResponse, IRestoreRequest, RestoreDescriptor, RestoreRequest>
 	{
-		public RestoreApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		public RestoreApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 			if (!TestClient.Configuration.RunIntegrationTests) return;
 
@@ -26,7 +25,7 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 
 		    var getSnapshotResponse = this.Client.GetSnapshot(RepositoryName, SnapshotName);
 
-		    if ((!getSnapshotResponse.IsValid && getSnapshotResponse.ApiCall.HttpStatusCode == 404) || 
+		    if ((!getSnapshotResponse.IsValid && getSnapshotResponse.ApiCall.HttpStatusCode == 404) ||
                 !getSnapshotResponse.Snapshots.Any())
 		    {
                     var snapshot = this.Client.Snapshot(RepositoryName, SnapshotName, s => s
@@ -67,7 +66,7 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 
 		protected override RestoreRequest Initializer => new RestoreRequest(RepositoryName, SnapshotName)
 		{
-			RenamePattern = "nest-(.+)", 
+			RenamePattern = "nest-(.+)",
 			RenameReplacement = "nest-restored-$1"
 		};
 	}

@@ -11,22 +11,21 @@ using Xunit;
 
 namespace Tests.Reproduce
 {
-	[Collection(IntegrationContext.Indexing)]
-	public class GithubIssue2173
+	public class GithubIssue2173 : IClusterFixture<WritableCluster>
 	{
-		private readonly IndexingCluster _cluster;
-		public GithubIssue2173(IndexingCluster cluster)
+		private readonly WritableCluster _cluster;
+		public GithubIssue2173(WritableCluster cluster)
 		{
 			_cluster = cluster;
 		}
 
 		[I] public void UpdateByQueryWithInvalidScript()
 		{
-			var client = _cluster.Client();
+			var client = _cluster.Client;
 			var response = client.UpdateByQuery<Project>(typeof(Project), typeof(Project), u => u
 				.Script("invalid groovy")
 			);
-			response.IsValid.Should().BeFalse();
+			response.ShouldNotBeValid();
 		}
 	}
 }

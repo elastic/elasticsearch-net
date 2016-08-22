@@ -17,7 +17,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-bulk.html
 	///</pre>
 	///</summary>
-	public class BulkRequestParameters : FluentRequestParameters<BulkRequestParameters>
+	public partial class BulkRequestParameters : FluentRequestParameters<BulkRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -59,7 +59,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat-alias.html
 	///</pre>
 	///</summary>
-	public class CatAliasesRequestParameters : FluentRequestParameters<CatAliasesRequestParameters>
+	public partial class CatAliasesRequestParameters : FluentRequestParameters<CatAliasesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -97,7 +97,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat-allocation.html
 	///</pre>
 	///</summary>
-	public class CatAllocationRequestParameters : FluentRequestParameters<CatAllocationRequestParameters>
+	public partial class CatAllocationRequestParameters : FluentRequestParameters<CatAllocationRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -139,7 +139,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat-count.html
 	///</pre>
 	///</summary>
-	public class CatCountRequestParameters : FluentRequestParameters<CatCountRequestParameters>
+	public partial class CatCountRequestParameters : FluentRequestParameters<CatCountRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -177,7 +177,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat-fielddata.html
 	///</pre>
 	///</summary>
-	public class CatFielddataRequestParameters : FluentRequestParameters<CatFielddataRequestParameters>
+	public partial class CatFielddataRequestParameters : FluentRequestParameters<CatFielddataRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -223,7 +223,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat-health.html
 	///</pre>
 	///</summary>
-	public class CatHealthRequestParameters : FluentRequestParameters<CatHealthRequestParameters>
+	public partial class CatHealthRequestParameters : FluentRequestParameters<CatHealthRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -265,7 +265,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat.html
 	///</pre>
 	///</summary>
-	public class CatHelpRequestParameters : FluentRequestParameters<CatHelpRequestParameters>
+	public partial class CatHelpRequestParameters : FluentRequestParameters<CatHelpRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -287,7 +287,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat-indices.html
 	///</pre>
 	///</summary>
-	public class CatIndicesRequestParameters : FluentRequestParameters<CatIndicesRequestParameters>
+	public partial class CatIndicesRequestParameters : FluentRequestParameters<CatIndicesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -333,7 +333,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat-master.html
 	///</pre>
 	///</summary>
-	public class CatMasterRequestParameters : FluentRequestParameters<CatMasterRequestParameters>
+	public partial class CatMasterRequestParameters : FluentRequestParameters<CatMasterRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -371,7 +371,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat-nodeattrs.html
 	///</pre>
 	///</summary>
-	public class CatNodeattrsRequestParameters : FluentRequestParameters<CatNodeattrsRequestParameters>
+	public partial class CatNodeattrsRequestParameters : FluentRequestParameters<CatNodeattrsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -409,7 +409,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat-nodes.html
 	///</pre>
 	///</summary>
-	public class CatNodesRequestParameters : FluentRequestParameters<CatNodesRequestParameters>
+	public partial class CatNodesRequestParameters : FluentRequestParameters<CatNodesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -447,7 +447,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat-pending-tasks.html
 	///</pre>
 	///</summary>
-	public class CatPendingTasksRequestParameters : FluentRequestParameters<CatPendingTasksRequestParameters>
+	public partial class CatPendingTasksRequestParameters : FluentRequestParameters<CatPendingTasksRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -485,7 +485,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat-plugins.html
 	///</pre>
 	///</summary>
-	public class CatPluginsRequestParameters : FluentRequestParameters<CatPluginsRequestParameters>
+	public partial class CatPluginsRequestParameters : FluentRequestParameters<CatPluginsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -523,7 +523,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat-recovery.html
 	///</pre>
 	///</summary>
-	public class CatRecoveryRequestParameters : FluentRequestParameters<CatRecoveryRequestParameters>
+	public partial class CatRecoveryRequestParameters : FluentRequestParameters<CatRecoveryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -561,7 +561,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat-repositories.html
 	///</pre>
 	///</summary>
-	public class CatRepositoriesRequestParameters : FluentRequestParameters<CatRepositoriesRequestParameters>
+	public partial class CatRepositoriesRequestParameters : FluentRequestParameters<CatRepositoriesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -599,7 +599,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat-segments.html
 	///</pre>
 	///</summary>
-	public class CatSegmentsRequestParameters : FluentRequestParameters<CatSegmentsRequestParameters>
+	public partial class CatSegmentsRequestParameters : FluentRequestParameters<CatSegmentsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -629,7 +629,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat-shards.html
 	///</pre>
 	///</summary>
-	public class CatShardsRequestParameters : FluentRequestParameters<CatShardsRequestParameters>
+	public partial class CatShardsRequestParameters : FluentRequestParameters<CatShardsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -667,7 +667,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat-snapshots.html
 	///</pre>
 	///</summary>
-	public class CatSnapshotsRequestParameters : FluentRequestParameters<CatSnapshotsRequestParameters>
+	public partial class CatSnapshotsRequestParameters : FluentRequestParameters<CatSnapshotsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -705,7 +705,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cat-thread-pool.html
 	///</pre>
 	///</summary>
-	public class CatThreadPoolRequestParameters : FluentRequestParameters<CatThreadPoolRequestParameters>
+	public partial class CatThreadPoolRequestParameters : FluentRequestParameters<CatThreadPoolRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -747,7 +747,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-request-scroll.html
 	///</pre>
 	///</summary>
-	public class ClearScrollRequestParameters : FluentRequestParameters<ClearScrollRequestParameters>
+	public partial class ClearScrollRequestParameters : FluentRequestParameters<ClearScrollRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
@@ -765,7 +765,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cluster-update-settings.html
 	///</pre>
 	///</summary>
-	public class ClusterGetSettingsRequestParameters : FluentRequestParameters<ClusterGetSettingsRequestParameters>
+	public partial class ClusterGetSettingsRequestParameters : FluentRequestParameters<ClusterGetSettingsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -795,7 +795,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cluster-health.html
 	///</pre>
 	///</summary>
-	public class ClusterHealthRequestParameters : FluentRequestParameters<ClusterHealthRequestParameters>
+	public partial class ClusterHealthRequestParameters : FluentRequestParameters<ClusterHealthRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -845,7 +845,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cluster-pending.html
 	///</pre>
 	///</summary>
-	public class ClusterPendingTasksRequestParameters : FluentRequestParameters<ClusterPendingTasksRequestParameters>
+	public partial class ClusterPendingTasksRequestParameters : FluentRequestParameters<ClusterPendingTasksRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -871,7 +871,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cluster-update-settings.html
 	///</pre>
 	///</summary>
-	public class ClusterPutSettingsRequestParameters : FluentRequestParameters<ClusterPutSettingsRequestParameters>
+	public partial class ClusterPutSettingsRequestParameters : FluentRequestParameters<ClusterPutSettingsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
@@ -901,7 +901,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cluster-reroute.html
 	///</pre>
 	///</summary>
-	public class ClusterRerouteRequestParameters : FluentRequestParameters<ClusterRerouteRequestParameters>
+	public partial class ClusterRerouteRequestParameters : FluentRequestParameters<ClusterRerouteRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -939,7 +939,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cluster-state.html
 	///</pre>
 	///</summary>
-	public class ClusterStateRequestParameters : FluentRequestParameters<ClusterStateRequestParameters>
+	public partial class ClusterStateRequestParameters : FluentRequestParameters<ClusterStateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -981,7 +981,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cluster-stats.html
 	///</pre>
 	///</summary>
-	public class ClusterStatsRequestParameters : FluentRequestParameters<ClusterStatsRequestParameters>
+	public partial class ClusterStatsRequestParameters : FluentRequestParameters<ClusterStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -1011,7 +1011,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-count.html
 	///</pre>
 	///</summary>
-	public class CountRequestParameters : FluentRequestParameters<CountRequestParameters>
+	public partial class CountRequestParameters : FluentRequestParameters<CountRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -1081,7 +1081,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-percolate.html
 	///</pre>
 	///</summary>
-	public class PercolateCountRequestParameters : FluentRequestParameters<PercolateCountRequestParameters>
+	public partial class PercolateCountRequestParameters : FluentRequestParameters<PercolateCountRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -1135,7 +1135,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-delete.html
 	///</pre>
 	///</summary>
-	public class DeleteRequestParameters : FluentRequestParameters<DeleteRequestParameters>
+	public partial class DeleteRequestParameters : FluentRequestParameters<DeleteRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
@@ -1181,7 +1181,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/modules-scripting.html
 	///</pre>
 	///</summary>
-	public class DeleteScriptRequestParameters : FluentRequestParameters<DeleteScriptRequestParameters>
+	public partial class DeleteScriptRequestParameters : FluentRequestParameters<DeleteScriptRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
@@ -1207,7 +1207,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-template.html
 	///</pre>
 	///</summary>
-	public class DeleteSearchTemplateRequestParameters : FluentRequestParameters<DeleteSearchTemplateRequestParameters>
+	public partial class DeleteSearchTemplateRequestParameters : FluentRequestParameters<DeleteSearchTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
@@ -1233,7 +1233,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-get.html
 	///</pre>
 	///</summary>
-	public class DocumentExistsRequestParameters : FluentRequestParameters<DocumentExistsRequestParameters>
+	public partial class DocumentExistsRequestParameters : FluentRequestParameters<DocumentExistsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		
@@ -1271,7 +1271,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-explain.html
 	///</pre>
 	///</summary>
-	public class ExplainRequestParameters : FluentRequestParameters<ExplainRequestParameters>
+	public partial class ExplainRequestParameters : FluentRequestParameters<ExplainRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -1345,7 +1345,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-field-stats.html
 	///</pre>
 	///</summary>
-	public class FieldStatsRequestParameters : FluentRequestParameters<FieldStatsRequestParameters>
+	public partial class FieldStatsRequestParameters : FluentRequestParameters<FieldStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -1379,7 +1379,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-get.html
 	///</pre>
 	///</summary>
-	public class GetRequestParameters : FluentRequestParameters<GetRequestParameters>
+	public partial class GetRequestParameters : FluentRequestParameters<GetRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -1441,7 +1441,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/modules-scripting.html
 	///</pre>
 	///</summary>
-	public class GetScriptRequestParameters : FluentRequestParameters<GetScriptRequestParameters>
+	public partial class GetScriptRequestParameters : FluentRequestParameters<GetScriptRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -1467,7 +1467,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-get.html
 	///</pre>
 	///</summary>
-	public class SourceRequestParameters : FluentRequestParameters<SourceRequestParameters>
+	public partial class SourceRequestParameters : FluentRequestParameters<SourceRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -1525,7 +1525,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-template.html
 	///</pre>
 	///</summary>
-	public class GetSearchTemplateRequestParameters : FluentRequestParameters<GetSearchTemplateRequestParameters>
+	public partial class GetSearchTemplateRequestParameters : FluentRequestParameters<GetSearchTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -1551,7 +1551,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-index_.html
 	///</pre>
 	///</summary>
-	public class IndexRequestParameters : FluentRequestParameters<IndexRequestParameters>
+	public partial class IndexRequestParameters : FluentRequestParameters<IndexRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -1609,33 +1609,9 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-analyze.html
 	///</pre>
 	///</summary>
-	public class AnalyzeRequestParameters : FluentRequestParameters<AnalyzeRequestParameters>
+	public partial class AnalyzeRequestParameters : FluentRequestParameters<AnalyzeRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		
-		///<summary>The name of the analyzer to use</summary>
-		public AnalyzeRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);
-		
-		
-		///<summary>Deprecated : A comma-separated list of character filters to use for the analysis</summary>
-		public AnalyzeRequestParameters CharFilters(params string[] char_filters) => this.AddQueryString("char_filters", char_filters);
-		
-		
-		///<summary>A comma-separated list of character filters to use for the analysis</summary>
-		public AnalyzeRequestParameters CharFilter(params string[] char_filter) => this.AddQueryString("char_filter", char_filter);
-		
-		
-		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
-		public AnalyzeRequestParameters Field(string field) => this.AddQueryString("field", field);
-		
-		
-		///<summary>Deprecated : A comma-separated list of filters to use for the analysis</summary>
-		public AnalyzeRequestParameters Filters(params string[] filters) => this.AddQueryString("filters", filters);
-		
-		
-		///<summary>A comma-separated list of filters to use for the analysis</summary>
-		public AnalyzeRequestParameters Filter(params string[] filter) => this.AddQueryString("filter", filter);
-		
 		
 		///<summary>The name of the index to scope the operation</summary>
 		public AnalyzeRequestParameters Index(string index) => this.AddQueryString("index", index);
@@ -1643,14 +1619,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public AnalyzeRequestParameters PreferLocal(bool prefer_local) => this.AddQueryString("prefer_local", prefer_local);
-		
-		
-		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
-		public AnalyzeRequestParameters Text(params string[] text) => this.AddQueryString("text", text);
-		
-		
-		///<summary>The name of the tokenizer to use for the analysis</summary>
-		public AnalyzeRequestParameters Tokenizer(string tokenizer) => this.AddQueryString("tokenizer", tokenizer);
 		
 		
 		///<summary>With `true`, outputs more advanced details. (default: false)</summary>
@@ -1679,7 +1647,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-clearcache.html
 	///</pre>
 	///</summary>
-	public class ClearCacheRequestParameters : FluentRequestParameters<ClearCacheRequestParameters>
+	public partial class ClearCacheRequestParameters : FluentRequestParameters<ClearCacheRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -1733,7 +1701,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-open-close.html
 	///</pre>
 	///</summary>
-	public class CloseIndexRequestParameters : FluentRequestParameters<CloseIndexRequestParameters>
+	public partial class CloseIndexRequestParameters : FluentRequestParameters<CloseIndexRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -1771,7 +1739,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-create-index.html
 	///</pre>
 	///</summary>
-	public class CreateIndexRequestParameters : FluentRequestParameters<CreateIndexRequestParameters>
+	public partial class CreateIndexRequestParameters : FluentRequestParameters<CreateIndexRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
@@ -1801,7 +1769,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-delete-index.html
 	///</pre>
 	///</summary>
-	public class DeleteIndexRequestParameters : FluentRequestParameters<DeleteIndexRequestParameters>
+	public partial class DeleteIndexRequestParameters : FluentRequestParameters<DeleteIndexRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
@@ -1827,7 +1795,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-aliases.html
 	///</pre>
 	///</summary>
-	public class DeleteAliasRequestParameters : FluentRequestParameters<DeleteAliasRequestParameters>
+	public partial class DeleteAliasRequestParameters : FluentRequestParameters<DeleteAliasRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
@@ -1853,7 +1821,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-templates.html
 	///</pre>
 	///</summary>
-	public class DeleteIndexTemplateRequestParameters : FluentRequestParameters<DeleteIndexTemplateRequestParameters>
+	public partial class DeleteIndexTemplateRequestParameters : FluentRequestParameters<DeleteIndexTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
@@ -1879,7 +1847,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-warmers.html
 	///</pre>
 	///</summary>
-	public class DeleteWarmerRequestParameters : FluentRequestParameters<DeleteWarmerRequestParameters>
+	public partial class DeleteWarmerRequestParameters : FluentRequestParameters<DeleteWarmerRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
@@ -1901,7 +1869,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-exists.html
 	///</pre>
 	///</summary>
-	public class IndexExistsRequestParameters : FluentRequestParameters<IndexExistsRequestParameters>
+	public partial class IndexExistsRequestParameters : FluentRequestParameters<IndexExistsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		
@@ -1935,7 +1903,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-aliases.html
 	///</pre>
 	///</summary>
-	public class AliasExistsRequestParameters : FluentRequestParameters<AliasExistsRequestParameters>
+	public partial class AliasExistsRequestParameters : FluentRequestParameters<AliasExistsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		
@@ -1969,7 +1937,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-templates.html
 	///</pre>
 	///</summary>
-	public class IndexTemplateExistsRequestParameters : FluentRequestParameters<IndexTemplateExistsRequestParameters>
+	public partial class IndexTemplateExistsRequestParameters : FluentRequestParameters<IndexTemplateExistsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		
@@ -1995,7 +1963,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-types-exists.html
 	///</pre>
 	///</summary>
-	public class TypeExistsRequestParameters : FluentRequestParameters<TypeExistsRequestParameters>
+	public partial class TypeExistsRequestParameters : FluentRequestParameters<TypeExistsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		
@@ -2029,7 +1997,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-flush.html
 	///</pre>
 	///</summary>
-	public class FlushRequestParameters : FluentRequestParameters<FlushRequestParameters>
+	public partial class FlushRequestParameters : FluentRequestParameters<FlushRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -2067,7 +2035,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-synced-flush.html
 	///</pre>
 	///</summary>
-	public class SyncedFlushRequestParameters : FluentRequestParameters<SyncedFlushRequestParameters>
+	public partial class SyncedFlushRequestParameters : FluentRequestParameters<SyncedFlushRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -2097,7 +2065,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-forcemerge.html
 	///</pre>
 	///</summary>
-	public class ForceMergeRequestParameters : FluentRequestParameters<ForceMergeRequestParameters>
+	public partial class ForceMergeRequestParameters : FluentRequestParameters<ForceMergeRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -2147,7 +2115,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-get-index.html
 	///</pre>
 	///</summary>
-	public class GetIndexRequestParameters : FluentRequestParameters<GetIndexRequestParameters>
+	public partial class GetIndexRequestParameters : FluentRequestParameters<GetIndexRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -2189,7 +2157,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-aliases.html
 	///</pre>
 	///</summary>
-	public class GetAliasRequestParameters : FluentRequestParameters<GetAliasRequestParameters>
+	public partial class GetAliasRequestParameters : FluentRequestParameters<GetAliasRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -2223,7 +2191,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-aliases.html
 	///</pre>
 	///</summary>
-	public class GetAliasesRequestParameters : FluentRequestParameters<GetAliasesRequestParameters>
+	public partial class GetAliasesRequestParameters : FluentRequestParameters<GetAliasesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -2249,7 +2217,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-get-field-mapping.html
 	///</pre>
 	///</summary>
-	public class GetFieldMappingRequestParameters : FluentRequestParameters<GetFieldMappingRequestParameters>
+	public partial class GetFieldMappingRequestParameters : FluentRequestParameters<GetFieldMappingRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -2287,7 +2255,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-get-mapping.html
 	///</pre>
 	///</summary>
-	public class GetMappingRequestParameters : FluentRequestParameters<GetMappingRequestParameters>
+	public partial class GetMappingRequestParameters : FluentRequestParameters<GetMappingRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -2321,7 +2289,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-get-settings.html
 	///</pre>
 	///</summary>
-	public class GetIndexSettingsRequestParameters : FluentRequestParameters<GetIndexSettingsRequestParameters>
+	public partial class GetIndexSettingsRequestParameters : FluentRequestParameters<GetIndexSettingsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -2363,7 +2331,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-templates.html
 	///</pre>
 	///</summary>
-	public class GetIndexTemplateRequestParameters : FluentRequestParameters<GetIndexTemplateRequestParameters>
+	public partial class GetIndexTemplateRequestParameters : FluentRequestParameters<GetIndexTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -2393,7 +2361,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-upgrade.html
 	///</pre>
 	///</summary>
-	public class UpgradeStatusRequestParameters : FluentRequestParameters<UpgradeStatusRequestParameters>
+	public partial class UpgradeStatusRequestParameters : FluentRequestParameters<UpgradeStatusRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -2427,7 +2395,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-warmers.html
 	///</pre>
 	///</summary>
-	public class GetWarmerRequestParameters : FluentRequestParameters<GetWarmerRequestParameters>
+	public partial class GetWarmerRequestParameters : FluentRequestParameters<GetWarmerRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -2461,7 +2429,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-open-close.html
 	///</pre>
 	///</summary>
-	public class OpenIndexRequestParameters : FluentRequestParameters<OpenIndexRequestParameters>
+	public partial class OpenIndexRequestParameters : FluentRequestParameters<OpenIndexRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -2499,7 +2467,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-optimize.html
 	///</pre>
 	///</summary>
-	public class OptimizeRequestParameters : FluentRequestParameters<OptimizeRequestParameters>
+	public partial class OptimizeRequestParameters : FluentRequestParameters<OptimizeRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -2549,7 +2517,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-aliases.html
 	///</pre>
 	///</summary>
-	public class PutAliasRequestParameters : FluentRequestParameters<PutAliasRequestParameters>
+	public partial class PutAliasRequestParameters : FluentRequestParameters<PutAliasRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
@@ -2575,7 +2543,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-put-mapping.html
 	///</pre>
 	///</summary>
-	public class PutMappingRequestParameters : FluentRequestParameters<PutMappingRequestParameters>
+	public partial class PutMappingRequestParameters : FluentRequestParameters<PutMappingRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
@@ -2617,7 +2585,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-update-settings.html
 	///</pre>
 	///</summary>
-	public class UpdateIndexSettingsRequestParameters : FluentRequestParameters<UpdateIndexSettingsRequestParameters>
+	public partial class UpdateIndexSettingsRequestParameters : FluentRequestParameters<UpdateIndexSettingsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
@@ -2655,7 +2623,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-templates.html
 	///</pre>
 	///</summary>
-	public class PutIndexTemplateRequestParameters : FluentRequestParameters<PutIndexTemplateRequestParameters>
+	public partial class PutIndexTemplateRequestParameters : FluentRequestParameters<PutIndexTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
@@ -2689,7 +2657,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-warmers.html
 	///</pre>
 	///</summary>
-	public class PutWarmerRequestParameters : FluentRequestParameters<PutWarmerRequestParameters>
+	public partial class PutWarmerRequestParameters : FluentRequestParameters<PutWarmerRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
@@ -2727,7 +2695,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-recovery.html
 	///</pre>
 	///</summary>
-	public class RecoveryStatusRequestParameters : FluentRequestParameters<RecoveryStatusRequestParameters>
+	public partial class RecoveryStatusRequestParameters : FluentRequestParameters<RecoveryStatusRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -2757,7 +2725,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-refresh.html
 	///</pre>
 	///</summary>
-	public class RefreshRequestParameters : FluentRequestParameters<RefreshRequestParameters>
+	public partial class RefreshRequestParameters : FluentRequestParameters<RefreshRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -2795,7 +2763,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-segments.html
 	///</pre>
 	///</summary>
-	public class SegmentsRequestParameters : FluentRequestParameters<SegmentsRequestParameters>
+	public partial class SegmentsRequestParameters : FluentRequestParameters<SegmentsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -2837,7 +2805,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-shards-stores.html
 	///</pre>
 	///</summary>
-	public class IndicesShardStoresRequestParameters : FluentRequestParameters<IndicesShardStoresRequestParameters>
+	public partial class IndicesShardStoresRequestParameters : FluentRequestParameters<IndicesShardStoresRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -2875,7 +2843,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-stats.html
 	///</pre>
 	///</summary>
-	public class IndicesStatsRequestParameters : FluentRequestParameters<IndicesStatsRequestParameters>
+	public partial class IndicesStatsRequestParameters : FluentRequestParameters<IndicesStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -2917,7 +2885,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-aliases.html
 	///</pre>
 	///</summary>
-	public class BulkAliasRequestParameters : FluentRequestParameters<BulkAliasRequestParameters>
+	public partial class BulkAliasRequestParameters : FluentRequestParameters<BulkAliasRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -2943,7 +2911,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-upgrade.html
 	///</pre>
 	///</summary>
-	public class UpgradeRequestParameters : FluentRequestParameters<UpgradeRequestParameters>
+	public partial class UpgradeRequestParameters : FluentRequestParameters<UpgradeRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -2981,7 +2949,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-validate.html
 	///</pre>
 	///</summary>
-	public class ValidateQueryRequestParameters : FluentRequestParameters<ValidateQueryRequestParameters>
+	public partial class ValidateQueryRequestParameters : FluentRequestParameters<ValidateQueryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -3051,7 +3019,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/
 	///</pre>
 	///</summary>
-	public class RootNodeInfoRequestParameters : FluentRequestParameters<RootNodeInfoRequestParameters>
+	public partial class RootNodeInfoRequestParameters : FluentRequestParameters<RootNodeInfoRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -3069,7 +3037,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-multi-get.html
 	///</pre>
 	///</summary>
-	public class MultiGetRequestParameters : FluentRequestParameters<MultiGetRequestParameters>
+	public partial class MultiGetRequestParameters : FluentRequestParameters<MultiGetRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -3115,7 +3083,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-percolate.html
 	///</pre>
 	///</summary>
-	public class MultiPercolateRequestParameters : FluentRequestParameters<MultiPercolateRequestParameters>
+	public partial class MultiPercolateRequestParameters : FluentRequestParameters<MultiPercolateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -3145,7 +3113,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-multi-search.html
 	///</pre>
 	///</summary>
-	public class MultiSearchRequestParameters : FluentRequestParameters<MultiSearchRequestParameters>
+	public partial class MultiSearchRequestParameters : FluentRequestParameters<MultiSearchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -3167,7 +3135,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-multi-termvectors.html
 	///</pre>
 	///</summary>
-	public class MultiTermVectorsRequestParameters : FluentRequestParameters<MultiTermVectorsRequestParameters>
+	public partial class MultiTermVectorsRequestParameters : FluentRequestParameters<MultiTermVectorsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -3233,7 +3201,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cluster-nodes-hot-threads.html
 	///</pre>
 	///</summary>
-	public class NodesHotThreadsRequestParameters : FluentRequestParameters<NodesHotThreadsRequestParameters>
+	public partial class NodesHotThreadsRequestParameters : FluentRequestParameters<NodesHotThreadsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -3275,7 +3243,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cluster-nodes-info.html
 	///</pre>
 	///</summary>
-	public class NodesInfoRequestParameters : FluentRequestParameters<NodesInfoRequestParameters>
+	public partial class NodesInfoRequestParameters : FluentRequestParameters<NodesInfoRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -3305,7 +3273,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/cluster-nodes-stats.html
 	///</pre>
 	///</summary>
-	public class NodesStatsRequestParameters : FluentRequestParameters<NodesStatsRequestParameters>
+	public partial class NodesStatsRequestParameters : FluentRequestParameters<NodesStatsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -3355,7 +3323,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-percolate.html
 	///</pre>
 	///</summary>
-	public class PercolateRequestParameters : FluentRequestParameters<PercolateRequestParameters>
+	public partial class PercolateRequestParameters : FluentRequestParameters<PercolateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -3421,7 +3389,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/
 	///</pre>
 	///</summary>
-	public class PingRequestParameters : FluentRequestParameters<PingRequestParameters>
+	public partial class PingRequestParameters : FluentRequestParameters<PingRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		
@@ -3439,7 +3407,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/modules-scripting.html
 	///</pre>
 	///</summary>
-	public class PutScriptRequestParameters : FluentRequestParameters<PutScriptRequestParameters>
+	public partial class PutScriptRequestParameters : FluentRequestParameters<PutScriptRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
@@ -3469,7 +3437,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-template.html
 	///</pre>
 	///</summary>
-	public class PutSearchTemplateRequestParameters : FluentRequestParameters<PutSearchTemplateRequestParameters>
+	public partial class PutSearchTemplateRequestParameters : FluentRequestParameters<PutSearchTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
@@ -3499,7 +3467,7 @@ namespace Elasticsearch.Net
 	///https://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-reindex.html
 	///</pre>
 	///</summary>
-	public class ReindexOnServerRequestParameters : FluentRequestParameters<ReindexOnServerRequestParameters>
+	public partial class ReindexOnServerRequestParameters : FluentRequestParameters<ReindexOnServerRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -3529,7 +3497,7 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/2.3/search-template.html
 	///</pre>
 	///</summary>
-	public class RenderSearchTemplateRequestParameters : FluentRequestParameters<RenderSearchTemplateRequestParameters>
+	public partial class RenderSearchTemplateRequestParameters : FluentRequestParameters<RenderSearchTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -3547,7 +3515,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-request-scroll.html
 	///</pre>
 	///</summary>
-	public class ScrollRequestParameters : FluentRequestParameters<ScrollRequestParameters>
+	public partial class ScrollRequestParameters : FluentRequestParameters<ScrollRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -3565,7 +3533,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-search.html
 	///</pre>
 	///</summary>
-	public class SearchRequestParameters : FluentRequestParameters<SearchRequestParameters>
+	public partial class SearchRequestParameters : FluentRequestParameters<SearchRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -3655,7 +3623,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-exists.html
 	///</pre>
 	///</summary>
-	public class SearchExistsRequestParameters : FluentRequestParameters<SearchExistsRequestParameters>
+	public partial class SearchExistsRequestParameters : FluentRequestParameters<SearchExistsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -3725,7 +3693,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-shards.html
 	///</pre>
 	///</summary>
-	public class SearchShardsRequestParameters : FluentRequestParameters<SearchShardsRequestParameters>
+	public partial class SearchShardsRequestParameters : FluentRequestParameters<SearchShardsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -3767,7 +3735,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html
 	///</pre>
 	///</summary>
-	public class SearchTemplateRequestParameters : FluentRequestParameters<SearchTemplateRequestParameters>
+	public partial class SearchTemplateRequestParameters : FluentRequestParameters<SearchTemplateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -3813,7 +3781,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public class SnapshotRequestParameters : FluentRequestParameters<SnapshotRequestParameters>
+	public partial class SnapshotRequestParameters : FluentRequestParameters<SnapshotRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
@@ -3839,7 +3807,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public class CreateRepositoryRequestParameters : FluentRequestParameters<CreateRepositoryRequestParameters>
+	public partial class CreateRepositoryRequestParameters : FluentRequestParameters<CreateRepositoryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
@@ -3869,7 +3837,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public class DeleteSnapshotRequestParameters : FluentRequestParameters<DeleteSnapshotRequestParameters>
+	public partial class DeleteSnapshotRequestParameters : FluentRequestParameters<DeleteSnapshotRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
@@ -3891,7 +3859,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public class DeleteRepositoryRequestParameters : FluentRequestParameters<DeleteRepositoryRequestParameters>
+	public partial class DeleteRepositoryRequestParameters : FluentRequestParameters<DeleteRepositoryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
@@ -3917,7 +3885,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public class GetSnapshotRequestParameters : FluentRequestParameters<GetSnapshotRequestParameters>
+	public partial class GetSnapshotRequestParameters : FluentRequestParameters<GetSnapshotRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -3939,7 +3907,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public class GetRepositoryRequestParameters : FluentRequestParameters<GetRepositoryRequestParameters>
+	public partial class GetRepositoryRequestParameters : FluentRequestParameters<GetRepositoryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -3965,7 +3933,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public class RestoreRequestParameters : FluentRequestParameters<RestoreRequestParameters>
+	public partial class RestoreRequestParameters : FluentRequestParameters<RestoreRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -3991,7 +3959,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public class SnapshotStatusRequestParameters : FluentRequestParameters<SnapshotStatusRequestParameters>
+	public partial class SnapshotStatusRequestParameters : FluentRequestParameters<SnapshotStatusRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -4013,7 +3981,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public class VerifyRepositoryRequestParameters : FluentRequestParameters<VerifyRepositoryRequestParameters>
+	public partial class VerifyRepositoryRequestParameters : FluentRequestParameters<VerifyRepositoryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -4039,7 +4007,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-suggesters.html
 	///</pre>
 	///</summary>
-	public class SuggestRequestParameters : FluentRequestParameters<SuggestRequestParameters>
+	public partial class SuggestRequestParameters : FluentRequestParameters<SuggestRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -4077,7 +4045,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/tasks.html
 	///</pre>
 	///</summary>
-	public class TasksCancelRequestParameters : FluentRequestParameters<TasksCancelRequestParameters>
+	public partial class TasksCancelRequestParameters : FluentRequestParameters<TasksCancelRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -4111,7 +4079,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/tasks.html
 	///</pre>
 	///</summary>
-	public class TasksListRequestParameters : FluentRequestParameters<TasksListRequestParameters>
+	public partial class TasksListRequestParameters : FluentRequestParameters<TasksListRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -4153,7 +4121,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-termvectors.html
 	///</pre>
 	///</summary>
-	public class TermVectorsRequestParameters : FluentRequestParameters<TermVectorsRequestParameters>
+	public partial class TermVectorsRequestParameters : FluentRequestParameters<TermVectorsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -4223,7 +4191,7 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-update.html
 	///</pre>
 	///</summary>
-	public class UpdateRequestParameters : FluentRequestParameters<UpdateRequestParameters>
+	public partial class UpdateRequestParameters : FluentRequestParameters<UpdateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -4297,7 +4265,7 @@ namespace Elasticsearch.Net
 	///https://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-update-by-query.html
 	///</pre>
 	///</summary>
-	public class UpdateByQueryRequestParameters : FluentRequestParameters<UpdateByQueryRequestParameters>
+	public partial class UpdateByQueryRequestParameters : FluentRequestParameters<UpdateByQueryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -4475,7 +4443,7 @@ namespace Elasticsearch.Net
 	///https://www.elastic.co/guide/en/elasticsearch/plugins/2.3/plugins-delete-by-query.html
 	///</pre>
 	///</summary>
-	public class DeleteByQueryRequestParameters : FluentRequestParameters<DeleteByQueryRequestParameters>
+	public partial class DeleteByQueryRequestParameters : FluentRequestParameters<DeleteByQueryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
@@ -4529,7 +4497,7 @@ namespace Elasticsearch.Net
 	///https://www.elastic.co/guide/en/graph/current/explore.html
 	///</pre>
 	///</summary>
-	public class GraphExploreRequestParameters : FluentRequestParameters<GraphExploreRequestParameters>
+	public partial class GraphExploreRequestParameters : FluentRequestParameters<GraphExploreRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -4555,7 +4523,7 @@ namespace Elasticsearch.Net
 	///https://www.elastic.co/guide/en/shield/current/license-management.html
 	///</pre>
 	///</summary>
-	public class DeleteLicenseRequestParameters : FluentRequestParameters<DeleteLicenseRequestParameters>
+	public partial class DeleteLicenseRequestParameters : FluentRequestParameters<DeleteLicenseRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
@@ -4573,7 +4541,7 @@ namespace Elasticsearch.Net
 	///https://www.elastic.co/guide/en/shield/current/license-management.html
 	///</pre>
 	///</summary>
-	public class GetLicenseRequestParameters : FluentRequestParameters<GetLicenseRequestParameters>
+	public partial class GetLicenseRequestParameters : FluentRequestParameters<GetLicenseRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -4595,7 +4563,7 @@ namespace Elasticsearch.Net
 	///https://www.elastic.co/guide/en/shield/current/license-management.html
 	///</pre>
 	///</summary>
-	public class PostLicenseRequestParameters : FluentRequestParameters<PostLicenseRequestParameters>
+	public partial class PostLicenseRequestParameters : FluentRequestParameters<PostLicenseRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
@@ -4617,7 +4585,7 @@ namespace Elasticsearch.Net
 	///Retrieve details about the currently authenticated user
 	///</pre>
 	///</summary>
-	public class AuthenticateRequestParameters : FluentRequestParameters<AuthenticateRequestParameters>
+	public partial class AuthenticateRequestParameters : FluentRequestParameters<AuthenticateRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -4635,7 +4603,7 @@ namespace Elasticsearch.Net
 	///Clears the internal user caches for specified realms
 	///</pre>
 	///</summary>
-	public class ClearCachedRealmsRequestParameters : FluentRequestParameters<ClearCachedRealmsRequestParameters>
+	public partial class ClearCachedRealmsRequestParameters : FluentRequestParameters<ClearCachedRealmsRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -4657,7 +4625,7 @@ namespace Elasticsearch.Net
 	///Clears the internal caches for specified roles
 	///</pre>
 	///</summary>
-	public class ClearCachedRolesRequestParameters : FluentRequestParameters<ClearCachedRolesRequestParameters>
+	public partial class ClearCachedRolesRequestParameters : FluentRequestParameters<ClearCachedRolesRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
@@ -4675,7 +4643,7 @@ namespace Elasticsearch.Net
 	///Remove a role from the native shield realm
 	///</pre>
 	///</summary>
-	public class DeleteRoleRequestParameters : FluentRequestParameters<DeleteRoleRequestParameters>
+	public partial class DeleteRoleRequestParameters : FluentRequestParameters<DeleteRoleRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
@@ -4693,7 +4661,7 @@ namespace Elasticsearch.Net
 	///Remove a user from the native shield realm
 	///</pre>
 	///</summary>
-	public class DeleteUserRequestParameters : FluentRequestParameters<DeleteUserRequestParameters>
+	public partial class DeleteUserRequestParameters : FluentRequestParameters<DeleteUserRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
@@ -4711,7 +4679,7 @@ namespace Elasticsearch.Net
 	///Retrieve one or more roles from the native shield realm
 	///</pre>
 	///</summary>
-	public class GetRoleRequestParameters : FluentRequestParameters<GetRoleRequestParameters>
+	public partial class GetRoleRequestParameters : FluentRequestParameters<GetRoleRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -4729,7 +4697,7 @@ namespace Elasticsearch.Net
 	///Retrieve one or more users from the native shield realm
 	///</pre>
 	///</summary>
-	public class GetUserRequestParameters : FluentRequestParameters<GetUserRequestParameters>
+	public partial class GetUserRequestParameters : FluentRequestParameters<GetUserRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
@@ -4747,7 +4715,7 @@ namespace Elasticsearch.Net
 	///Update or create a role for the native shield realm
 	///</pre>
 	///</summary>
-	public class PutRoleRequestParameters : FluentRequestParameters<PutRoleRequestParameters>
+	public partial class PutRoleRequestParameters : FluentRequestParameters<PutRoleRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
@@ -4765,7 +4733,7 @@ namespace Elasticsearch.Net
 	///Update or create a user for the native shield realm
 	///</pre>
 	///</summary>
-	public class PutUserRequestParameters : FluentRequestParameters<PutUserRequestParameters>
+	public partial class PutUserRequestParameters : FluentRequestParameters<PutUserRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		

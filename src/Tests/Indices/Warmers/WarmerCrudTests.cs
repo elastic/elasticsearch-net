@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -9,11 +11,18 @@ using Xunit;
 
 namespace Tests.Indices.Warmers
 {
-	[Collection(IntegrationContext.ReadOnly)]
 	public class WarmerCrudTests
 		: CrudTestBase<IPutWarmerResponse, IGetWarmerResponse, IPutWarmerResponse, IDeleteWarmerResponse>
 	{
-		public WarmerCrudTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		private static readonly string WarmerIndexName = Guid.NewGuid().ToString("N").Substring(8);
+		public WarmerCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+			var createIndex = this.Client.CreateIndex(WarmerIndexName);
+			var waitForIndex = this.Client.ClusterHealth(c=>c
+				.WaitForStatus(WaitForStatus.Yellow)
+				.Index(WarmerIndexName)
+			);
+		}
 
 		protected override LazyResponses Create() => Calls<PutWarmerDescriptor, PutWarmerRequest, IPutWarmerRequest, IPutWarmerResponse>(
 			CreateInitializer,
@@ -24,7 +33,7 @@ namespace Tests.Indices.Warmers
 			requestAsync: (s, c, r) => c.PutWarmerAsync(r)
 		);
 
-		protected PutWarmerRequest CreateInitializer(string name) => new PutWarmerRequest(typeof(Project), name)
+		protected PutWarmerRequest CreateInitializer(string name) => new PutWarmerRequest(WarmerIndexName, name)
 		{
 			Search = new SearchRequest<Project>
 			{
@@ -37,7 +46,7 @@ namespace Tests.Indices.Warmers
 		};
 
 		protected IPutWarmerRequest CreateFluent(string name, PutWarmerDescriptor d) => d
-			.Index(typeof(Project))
+			.Index(WarmerIndexName)
 			.Search<Project>(s => s
 				.Query(q => q
 					.Match(m => m
@@ -52,25 +61,25 @@ namespace Tests.Indices.Warmers
 			ReadFluent,
 			fluent: (s, c, f) => c.GetWarmer(f),
 			fluentAsync: (s, c, f) => c.GetWarmerAsync(f),
-			request: (s, c, r) => c.GetWarmer(r),	
+			request: (s, c, r) => c.GetWarmer(r),
 			requestAsync: (s, c, r) => c.GetWarmerAsync(r)
 		);
-		
-		protected GetWarmerRequest ReadInitializer(string name) => new GetWarmerRequest(typeof(Project), name);
-		protected IGetWarmerRequest ReadFluent(string name, GetWarmerDescriptor d) => d.Index<Project>().Name(name);
+
+		protected GetWarmerRequest ReadInitializer(string name) => new GetWarmerRequest(WarmerIndexName, name);
+		protected IGetWarmerRequest ReadFluent(string name, GetWarmerDescriptor d) => d.Index(WarmerIndexName).Name(name);
 
 		protected override LazyResponses Update() => LazyResponses.Empty;
 
 		protected override LazyResponses Delete() => Calls<DeleteWarmerDescriptor, DeleteWarmerRequest, IDeleteWarmerRequest, IDeleteWarmerResponse>(
 			DeleteInitializer,
 			DeleteFluent,
-			fluent: (s, c, f) => c.DeleteWarmer(typeof(Project), s),
-			fluentAsync: (s, c, f) => c.DeleteWarmerAsync(typeof(Project), s),
-			request: (s, c, r) => c.DeleteWarmer(r),	
+			fluent: (s, c, f) => c.DeleteWarmer(WarmerIndexName, s),
+			fluentAsync: (s, c, f) => c.DeleteWarmerAsync(WarmerIndexName, s),
+			request: (s, c, r) => c.DeleteWarmer(r),
 			requestAsync: (s, c, r) => c.DeleteWarmerAsync(r)
 		);
 
-		protected DeleteWarmerRequest DeleteInitializer(string name) => new DeleteWarmerRequest(typeof(Project), name);
+		protected DeleteWarmerRequest DeleteInitializer(string name) => new DeleteWarmerRequest(WarmerIndexName, name);
 		protected IDeleteWarmerRequest DeleteFluent(string name, DeleteWarmerDescriptor d) => null;
 
 		// https://github.com/elastic/elasticsearch/issues/5155

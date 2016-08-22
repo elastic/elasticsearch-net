@@ -9,13 +9,12 @@ using Xunit;
 
 namespace Tests.Indices.AliasManagement.GetAlias
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class GetAliasApiTests : ApiIntegrationTestBase<IGetAliasesResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
+	public class GetAliasApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetAliasesResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
 	{
 		private static readonly Names Names = Infer.Names("alias, x", "y");
 
 		public GetAliasApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.GetAlias(f),
 			fluentAsync: (client, f) => client.GetAliasAsync(f),

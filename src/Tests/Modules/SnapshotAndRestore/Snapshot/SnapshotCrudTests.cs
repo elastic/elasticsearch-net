@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -9,13 +10,12 @@ using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot
 {
-	[Collection(IntegrationContext.Indexing)]
 	public class SnapshotCrudTests
-		: CrudTestBase<ISnapshotResponse, IGetSnapshotResponse, IAcknowledgedResponse, IDeleteSnapshotResponse>
+		: CrudTestBase<IntrusiveOperationCluster, ISnapshotResponse, IGetSnapshotResponse, IAcknowledgedResponse, IDeleteSnapshotResponse>
 	{
 		private static readonly string SnapshotIndexName = Guid.NewGuid().ToString("N").Substring(8);
 
-		public SnapshotCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		public SnapshotCrudTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 			//TODO move to own cluster collection with its own bootstrap
 			_repositoryLocation = Path.Combine(cluster.Node.RepositoryPath, RandomString());
@@ -30,6 +30,10 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 				throw new Exception($"Setup: failed to create snapshot repository\r\n{create.DebugInformation}");
 
 			var createIndex = this.Client.CreateIndex(SnapshotIndexName);
+			var waitForIndex = this.Client.ClusterHealth(c=>c
+				.WaitForStatus(WaitForStatus.Yellow)
+				.Index(SnapshotIndexName)
+			);
 		}
 
 		private string _repositoryLocation;

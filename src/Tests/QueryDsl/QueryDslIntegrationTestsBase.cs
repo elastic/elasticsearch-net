@@ -10,10 +10,9 @@ using Xunit;
 
 namespace Tests.QueryDsl
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public abstract class QueryDslIntegrationTestsBase : ApiIntegrationTestBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	public abstract class QueryDslIntegrationTestsBase : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		protected QueryDslIntegrationTestsBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected QueryDslIntegrationTestsBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<Project>(f),
 			fluentAsync: (client, f) => client.SearchAsync<Project>(f),

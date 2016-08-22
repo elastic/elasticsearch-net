@@ -16,14 +16,11 @@ namespace Tests.QueryDsl.Specialized.Script
 	*
 	* See the Elasticsearch documentation on {ref_current}/query-dsl-script-query.html[script query] for more details.
 	*/
-	[Collection(IntegrationContext.ReadOnly)]
 	public class ScriptQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public ScriptQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		private static readonly string _templateString = "doc['numberOfCommits'].value > param1";
-
-		protected override bool ForceInMemory => false;
 
 		protected override object QueryJson => new
 		{
@@ -54,15 +51,6 @@ namespace Tests.QueryDsl.Specialized.Script
 				.Inline(_templateString)
 				.Params(p => p.Add("param1", 50))
 			);
-
-		protected void ExpectResponse(ISearchResponse<Project> response)
-		{
-			response.IsValid.Should().BeTrue();
-			response.Documents.Count().Should().BeGreaterThan(0);
-		}
-
-		[I]
-		protected async Task ReturnsExpectedResponse() => await this.AssertOnAllResponses(ExpectResponse);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IScriptQuery>(a => a.Script)
 		{

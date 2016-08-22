@@ -17,7 +17,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		[U]
 		public void RequestPipeline()
 		{
-			var settings = TestClient.CreateSettings();
+			var settings = TestClient.GlobalDefaultSettings;
 
 			/** When calling `Request()` or `RequestAsync()` on an `ITransport`,
 			* the whole coordination of the request is deferred to a new instance in a `using` block.
@@ -56,7 +56,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		private IRequestPipeline CreatePipeline(
 			Func<IEnumerable<Uri>, IConnectionPool> setupPool, Func<ConnectionSettings, ConnectionSettings> settingsSelector = null, IDateTimeProvider dateTimeProvider = null)
 		{
-			var pool = setupPool(new[] { TestClient.CreateNode(), TestClient.CreateNode(9201) });
+			var pool = setupPool(new[] { TestClient.CreateUri(), TestClient.CreateUri(9201) });
 			var settings = new ConnectionSettings(pool, TestClient.CreateConnection());
 			settings = settingsSelector?.Invoke(settings) ?? settings;
 			return new FixedPipelineFactory(settings, dateTimeProvider ?? DateTimeProvider.Default).Pipeline;

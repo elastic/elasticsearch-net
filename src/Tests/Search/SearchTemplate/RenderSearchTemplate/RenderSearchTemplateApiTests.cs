@@ -10,8 +10,7 @@ using Xunit;
 
 namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class RenderSearchTemplateApiTests : ApiIntegrationTestBase<IRenderSearchTemplateResponse, IRenderSearchTemplateRequest, RenderSearchTemplateDescriptor, RenderSearchTemplateRequest>
+	public class RenderSearchTemplateApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IRenderSearchTemplateResponse, IRenderSearchTemplateRequest, RenderSearchTemplateDescriptor, RenderSearchTemplateRequest>
 	{
 		public RenderSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -29,15 +28,15 @@ namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 
 		private static string inlineSearchTemplate = @"
 {
-    ""query"": {
-      ""terms"": {
-        ""status"": [
-          ""{{#status}}"",
-          ""{{.}}"",
-          ""{{/status}}""
-        ]
-      }
-    }
+	""query"": {
+	  ""terms"": {
+		""status"": [
+		  ""{{#status}}"",
+		  ""{{.}}"",
+		  ""{{/status}}""
+		]
+	  }
+	}
   }";
 		private string[] statusValues = new[] { "pending", "published" };
 

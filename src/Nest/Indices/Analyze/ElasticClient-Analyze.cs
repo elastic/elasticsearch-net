@@ -31,10 +31,10 @@ namespace Nest
 			this.Analyze(selector?.Invoke(new AnalyzeDescriptor()));
 
 		/// <inheritdoc/>
-		public IAnalyzeResponse Analyze(IAnalyzeRequest request) => 
+		public IAnalyzeResponse Analyze(IAnalyzeRequest request) =>
 			this.Dispatcher.Dispatch<IAnalyzeRequest, AnalyzeRequestParameters, AnalyzeResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>(p, MoveTextFromQueryString(request))
+				this.LowLevelDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>
 			);
 
 		/// <inheritdoc/>
@@ -42,18 +42,10 @@ namespace Nest
 			this.AnalyzeAsync(selector?.Invoke(new AnalyzeDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request) => 
+		public Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request) =>
 			this.Dispatcher.DispatchAsync<IAnalyzeRequest, AnalyzeRequestParameters, AnalyzeResponse, IAnalyzeResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, MoveTextFromQueryString(request))
+				this.LowLevelDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>
 			);
-
-		private static string MoveTextFromQueryString(IAnalyzeRequest d)
-		{
-			IRequest<AnalyzeRequestParameters> request = d;
-			var text = request.RequestParameters.GetQueryStringValue<string[]>("text");
-			request.RequestParameters.RemoveQueryString("text");
-			return string.Join(",", text);
-		}
 	}
 }

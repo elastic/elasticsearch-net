@@ -3,9 +3,8 @@ using Xunit;
 
 namespace Tests.Framework.Integration
 {
-	[CollectionDefinition(IntegrationContext.ReadOnly)]
-	public class ReadOnlyCluster : ClusterBase, ICollectionFixture<ReadOnlyCluster>, IClassFixture<EndpointUsage>
+	public class ReadOnlyCluster : ClusterBase
 	{
-		public override void Boostrap() => new Seeder(this.Node).SeedNode();
+		public override void Bootstrap() => new Seeder(this.Node).SeedNode();
 	}
 }

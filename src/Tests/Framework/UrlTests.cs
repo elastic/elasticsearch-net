@@ -27,13 +27,11 @@ namespace Tests.Framework
 
 		protected override object ExpectJson => null;
 
-		internal UrlTester(HttpMethod method, string expectedUrl, Func<ConnectionSettings, ConnectionSettings> settings = null)
+		internal UrlTester(HttpMethod method, string expectedUrl)
 		{
 			this.ExpectedHttpMethod = method;
 			this.ExpectedUrl = expectedUrl;
-			this._connectionSettingsModifier = (settings ?? (c =>c.PrettyJson(false)));
 		}
-
 
 		public UrlTester Fluent<TResponse>(Func<IElasticClient, TResponse> call)
 			where TResponse : IResponse => WhenCalling(call, "fluent");
@@ -49,33 +47,31 @@ namespace Tests.Framework
 
 		public UrlTester LowLevel(Func<IElasticLowLevelClient, IApiCallDetails> call)
 		{
-			var callDetails = call(this.GetClient().LowLevel);
+			var callDetails = call(this.Client.LowLevel);
 			return Assert("lowlevel", callDetails);
 		}
 
 		internal UrlTester WhenCalling<TResponse>(Func<IElasticClient, TResponse> call, string typeOfCall)
 			where TResponse : IResponse
 		{
-			var callDetails = call(this.GetClient());
+			var callDetails = call(this.Client);
 			return Assert(typeOfCall, callDetails.CallDetails);
 		}
 
 		internal async Task<UrlTester> WhenCallingAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call, string typeOfCall)
 			where TResponse : IResponse
 		{
-			var callDetails = (await call(this.GetClient())).CallDetails;
+			var callDetails = (await call(this.Client)).CallDetails;
 			return Assert(typeOfCall, callDetails);
 		}
 
 		private UrlTester Assert(string typeOfCall, IApiCallDetails callDetails)
 		{
 			var url = callDetails.Uri.PathAndQuery;
-			url.Should().Be(this.ExpectedUrl, $"when calling the {typeOfCall} Api");
+			callDetails.Uri.PathEquals(this.ExpectedUrl);
 			callDetails.HttpMethod.Should().Be(this.ExpectedHttpMethod, typeOfCall);
 			return this;
 		}
-
-		public static IntermediateUrlTester WithConnectionSettings(Func<ConnectionSettings, ConnectionSettings> settings) =>  new IntermediateUrlTester(settings);
 
 		public static UrlTester ExpectUrl(HttpMethod method, string url) =>  new UrlTester(method, url);
 		public static UrlTester POST(string url) =>  new UrlTester(HttpMethod.POST, url);
@@ -86,21 +82,6 @@ namespace Tests.Framework
 		public static string EscapeUriString(string s) => Uri.EscapeDataString(s);
 	}
 
-	public class IntermediateUrlTester
-	{
-		private readonly Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier;
-
-		internal IntermediateUrlTester(Func<ConnectionSettings, ConnectionSettings> settings)
-		{
-			this._connectionSettingsModifier = settings;
-		}
-		public UrlTester ExpectUrl(HttpMethod method, string url) =>  new UrlTester(method, url, _connectionSettingsModifier);
-		public UrlTester POST(string url) =>  new UrlTester(HttpMethod.POST, url, _connectionSettingsModifier);
-		public UrlTester PUT(string url) =>  new UrlTester(HttpMethod.PUT, url, _connectionSettingsModifier);
-		public UrlTester GET(string url) =>  new UrlTester(HttpMethod.GET, url, _connectionSettingsModifier);
-		public UrlTester HEAD(string url) =>  new UrlTester(HttpMethod.HEAD, url, _connectionSettingsModifier);
-		public UrlTester DELETE(string url) =>  new UrlTester(HttpMethod.DELETE, url, _connectionSettingsModifier);
-	}
 
 	public static class CapturingUrlTesterExtensions
 	{
@@ -141,13 +122,13 @@ namespace Tests.Framework
 
 		internal CapturingUrlTester WhenCalling<TResponse>(Func<IElasticClient, TResponse> call, string typeOfCall)
 		{
-			call(this.GetClient());
+			call(this.Client);
 			return Assert(typeOfCall, CallDetails);
 		}
 
 		internal async Task<CapturingUrlTester> WhenCallingAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call, string typeOfCall)
 		{
-			await call(this.GetClient());
+			await call(this.Client);
 			return Assert(typeOfCall, CallDetails);
 		}
 

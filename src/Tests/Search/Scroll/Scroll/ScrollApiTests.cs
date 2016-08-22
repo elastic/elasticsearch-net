@@ -8,12 +8,11 @@ using Xunit;
 
 namespace Tests.Search.Scroll.Scroll
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class ScrollApiTests : ApiIntegrationTestBase<ISearchResponse<Project>, IScrollRequest, ScrollDescriptor<Project>, ScrollRequest>
+	public class ScrollApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, IScrollRequest, ScrollDescriptor<Project>, ScrollRequest>
 	{
 		public ScrollApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		private string _scrollId = "default-for-unit-tests"; 
+		private string _scrollId = "default-for-unit-tests";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (c, f) => c.Scroll("1m", _scrollId, f),
@@ -27,7 +26,7 @@ namespace Tests.Search.Scroll.Scroll
 			scroll = "1m",
 			scroll_id = _scrollId
 		};
-		
+
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;

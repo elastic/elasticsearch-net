@@ -4,15 +4,15 @@
     "warningsAsErrors": false
   },
   "dependencies": {
-    "Bogus": "7.1.4",
-    "DiffPlex": "2.0.0-alpha1",
     "Elasticsearch.Net": { "target": "project" },
-    "FluentAssertions": "4.6.3",
     "Nest": { "target": "project" },
+    "Bogus": "7.1.6",
+    "DiffPlex": "2.0.0-alpha1",
+    "FluentAssertions": "4.13.0",
     "Newtonsoft.Json": "9.0.1",
-    "Rx-Main": "2.3.0-beta2",
-    "xunit": "2.2.0-beta2-build3300",
-    "dotnet-test-xunit": "2.2.0-preview2-build1029"
+    "System.Reactive": "3.0.0",
+    "xunit": "2.2.0-beta3-build3330",
+    "dotnet-test-xunit": "2.2.0-preview3-build1032"
   },
   "configurations": {
     "Debug": {
@@ -41,7 +41,7 @@
         "System.Net.Http": "4.1.0",
         "System.Reflection": "4.1.0",
         "System.Runtime": "4.1.0",
-        "System.IO.Compression.ZipFile":  "4.0.1" 
+        "System.IO.Compression.ZipFile":  "4.0.1"
       },
       "imports": [
         "dnxcore50",

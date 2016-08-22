@@ -12,9 +12,8 @@ using Xunit;
 
 namespace Tests.Document.Single.Index
 {
-	[Collection(IntegrationContext.Indexing)]
 	public class IndexApiTests :
-		ApiIntegrationTestBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
+		ApiIntegrationTestBase<WritableCluster, IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
 		private Project Document => new Project
 		{
@@ -23,10 +22,10 @@ namespace Tests.Document.Single.Index
 			StartedOn = FixedDate,
 			LastActivity = FixedDate,
 			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}},
-			
+
 		};
 
-		public IndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		public IndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 		}
 
@@ -75,23 +74,22 @@ namespace Tests.Document.Single.Index
 
 	}
 
-	[Collection(IntegrationContext.Indexing)]
-	public class IndexIntegrationTests : SimpleIntegration
+	public class IndexIntegrationTests : SimpleIntegration, IClusterFixture<WritableCluster>
 	{
-		public IndexIntegrationTests(IndexingCluster cluster) : base(cluster)
+		public IndexIntegrationTests(WritableCluster cluster) : base(cluster)
 		{
 		}
 
 		[I]
 		public void OpTypeCreate()
 		{
-			var indexName = this.RandomString();
+			var indexName = RandomString();
 			var project = Project.Generator.Generate(1).First();
 			var indexResult = this.Client.Index(project, f => f
 				.Index(indexName)
 				.OpType(OpType.Create)
 				);
-			indexResult.IsValid.Should().BeTrue();
+			indexResult.ShouldBeValid();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Created.Should().BeTrue();
 			indexResult.Index.Should().Be(indexName);
@@ -103,7 +101,7 @@ namespace Tests.Document.Single.Index
 				.OpType(OpType.Create)
 				);
 
-			indexResult.IsValid.Should().BeFalse();
+			indexResult.ShouldNotBeValid();
 			indexResult.Created.Should().BeFalse();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(409);
 		}
@@ -111,10 +109,10 @@ namespace Tests.Document.Single.Index
 		[I]
 		public void Index()
 		{
-			var indexName = this.RandomString();
-			var commitActivity = CommitActivity.Generator.Generate(1).First();
+			var indexName = RandomString();
+			var commitActivity = CommitActivity.CommitActivities.First();
 			var indexResult = this.Client.Index(commitActivity, f => f.Index(indexName));
-			indexResult.IsValid.Should().BeTrue();
+			indexResult.ShouldBeValid();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Created.Should().BeTrue();
 			indexResult.Index.Should().Be(indexName);
@@ -124,23 +122,23 @@ namespace Tests.Document.Single.Index
 
 			indexResult = this.Client.Index(commitActivity, f => f.Index(indexName));
 
-			indexResult.IsValid.Should().BeTrue();
+			indexResult.ShouldBeValid();
 			indexResult.Created.Should().BeFalse();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(200);
 			indexResult.Version.Should().Be(2);
 		}
 	}
 
-	[Collection(IntegrationContext.Indexing)]
-	public class IndexJObjectIntegrationTests : SimpleIntegration
+	public class IndexJObjectIntegrationTests : SimpleIntegration, IClusterFixture<WritableCluster>
 	{
-		public IndexJObjectIntegrationTests(IndexingCluster cluster) : base(cluster)
+		public IndexJObjectIntegrationTests(WritableCluster cluster) : base(cluster)
 		{
 		}
 
 		[I]
 		public void Index()
 		{
+			var index = RandomString();
 			var jObjects = Enumerable.Range(1, 1000)
 				.Select(i =>
 					new JObject
@@ -161,21 +159,23 @@ namespace Tests.Document.Single.Index
 			var jObject = jObjects.First();
 
 			var indexResult = this.Client.Index(jObject, f => f
+				.Index(index)
 				.Id(jObject["id"].Value<int>())
 				);
 
-			indexResult.IsValid.Should().BeTrue();
+			indexResult.ShouldBeValid();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Created.Should().BeTrue();
-			indexResult.Index.Should().Be(Client.ConnectionSettings.DefaultIndex);
+			indexResult.Index.Should().Be(index);
 			indexResult.Type.Should().Be("jobject");
 
 			var bulkResponse = this.Client.Bulk(b => b
+				.Index(index)
 				.IndexMany(jObjects.Skip(1), (bi, d) => bi
 					.Document(d)
 					.Id(d["id"].Value<int>())
 				)
-				);
+			);
 
 			foreach (var response in bulkResponse.Items)
 			{
@@ -185,14 +185,14 @@ namespace Tests.Document.Single.Index
 		}
 	}
 
-	[Collection(IntegrationContext.Indexing)]
-	public class IndexAnonymousTypesIntegrationTests : SimpleIntegration
+	public class IndexAnonymousTypesIntegrationTests : SimpleIntegration, IClusterFixture<WritableCluster>
 	{
-		public IndexAnonymousTypesIntegrationTests(IndexingCluster cluster) : base(cluster) { }
+		public IndexAnonymousTypesIntegrationTests(WritableCluster cluster) : base(cluster) { }
 
 		[I]
 		public void Index()
 		{
+			var index = RandomString();
 			var anonymousType = new
 			{
 				name = "name",
@@ -206,13 +206,14 @@ namespace Tests.Document.Single.Index
 			};
 
 			var indexResult = this.Client.Index(anonymousType, f => f
+				.Index(index)
 				.Id(anonymousType.name)
 			);
 
-			indexResult.IsValid.Should().BeTrue();
+			indexResult.ShouldBeValid();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Created.Should().BeTrue();
-			indexResult.Index.Should().Be(Client.ConnectionSettings.DefaultIndex);
+			indexResult.Index.Should().Be(index);
 			indexResult.Type.Should().StartWith("<>");
 		}
 	}

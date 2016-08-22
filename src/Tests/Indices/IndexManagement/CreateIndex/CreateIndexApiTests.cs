@@ -8,10 +8,9 @@ using Xunit;
 
 namespace Tests.Indices.IndexManagement.CreateIndex
 {
-	[Collection(IntegrationContext.Indexing)]
-	public class CreateIndexApiTests : ApiIntegrationTestBase<ICreateIndexResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
+	public class CreateIndexApiTests : ApiIntegrationTestBase<WritableCluster, ICreateIndexResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
 	{
-		public CreateIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public CreateIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CreateIndex(CallIsolatedValue, f),
 			fluentAsync: (client, f) => client.CreateIndexAsync(CallIsolatedValue, f),

@@ -72,7 +72,7 @@ namespace Elasticsearch.Net
 			this.Pipelined = global.HttpPipeliningEnabled || (local?.EnableHttpPipelining).GetValueOrDefault(false);
 			this.HttpCompression = global.EnableHttpCompression;
 			this.ContentType = local?.ContentType ?? MimeType;
-			this.Headers = global.Headers;
+			this.Headers = new NameValueCollection(global.Headers ?? new NameValueCollection());
 			this.RunAs = local?.RunAs;
 
 			this.RequestTimeout = local?.RequestTimeout ?? global.RequestTimeout;

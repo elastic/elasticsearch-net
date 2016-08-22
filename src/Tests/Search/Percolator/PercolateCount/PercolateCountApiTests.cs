@@ -9,9 +9,8 @@ using Xunit;
 
 namespace Tests.Search.Percolator.PercolateCount
 {
-	[Collection(IntegrationContext.ReadOnly)]
 	public class PercolateCountApiTests
-		: ApiIntegrationTestBase<IPercolateCountResponse, IPercolateCountRequest<Project>, PercolateCountDescriptor<Project>, PercolateCountRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IPercolateCountResponse, IPercolateCountRequest<Project>, PercolateCountDescriptor<Project>, PercolateCountRequest<Project>>
 	{
 		public PercolateCountApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -72,9 +71,8 @@ namespace Tests.Search.Percolator.PercolateCount
 		};
 	}
 
-	[Collection(IntegrationContext.ReadOnly)]
 	public class PercolateCountExistingDocApiTests
-		: ApiIntegrationTestBase<IPercolateCountResponse, IPercolateCountRequest<Project>, PercolateCountDescriptor<Project>, PercolateCountRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IPercolateCountResponse, IPercolateCountRequest<Project>, PercolateCountDescriptor<Project>, PercolateCountRequest<Project>>
 	{
 		public PercolateCountExistingDocApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
