@@ -74,7 +74,7 @@ Target "Canary" <| fun _ ->
 "QuickCompile"
   ==> "QuickTest"
 
-"QuickCompile"
+"BuildApp"
   ==> "Integrate"
 
 "Build"

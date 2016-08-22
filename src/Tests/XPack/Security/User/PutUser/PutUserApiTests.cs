@@ -9,11 +9,10 @@ using Xunit;
 
 namespace Tests.XPack.Security.User.PutUser
 {
-	[Collection(IntegrationContext.Shield)]
 	[SkipVersion("<2.3.0", "")]
-	public class PutUserApiTests : ApiIntegrationTestBase<IPutUserResponse, IPutUserRequest, PutUserDescriptor, PutUserRequest>
+	public class PutUserApiTests : ApiIntegrationTestBase<XPackCluster, IPutUserResponse, IPutUserRequest, PutUserDescriptor, PutUserRequest>
 	{
-		public PutUserApiTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PutUserApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.PutUser(CallIsolatedValue, f),
@@ -76,10 +75,9 @@ namespace Tests.XPack.Security.User.PutUser
 		}
 	}
 
-	[Collection(IntegrationContext.Shield)]
 	public class PutUserRunAsApiTests : PutUserApiTests
 	{
-		public PutUserRunAsApiTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PutUserRunAsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 403;

@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
@@ -45,7 +46,7 @@ namespace Tests.Aggregations.Metric.Cardinality
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var projectCount = response.Aggs.Cardinality("state_count");
 			projectCount.Should().NotBeNull();
 			projectCount.Value.Should().Be(3);

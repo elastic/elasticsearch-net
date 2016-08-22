@@ -9,12 +9,11 @@ using Xunit;
 
 namespace Tests.ClientConcepts.Exceptions
 {
-	[Collection(IntegrationContext.Indexing)]
-	public class ExceptionTests
+	public class ExceptionTests : IClusterFixture<WritableCluster>
 	{
 		private readonly int _port;
 
-		public ExceptionTests(IndexingCluster cluster, EndpointUsage usage)
+		public ExceptionTests(WritableCluster cluster)
 		{
 			_port = cluster.Node.Port;
 		}

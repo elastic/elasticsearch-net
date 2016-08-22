@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
@@ -64,7 +65,7 @@ namespace Tests.Aggregations.Bucket.Sampler
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			var sample = response.Aggs.Sampler("sample");
 			sample.Should().NotBeNull();

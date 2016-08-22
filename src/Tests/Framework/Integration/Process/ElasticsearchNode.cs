@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
@@ -45,6 +46,7 @@ namespace Tests.Framework.Integration
 		private string RoamingFolder { get; }
 		private string RoamingClusterFolder { get; }
 
+		public string TypeOfCluster { get; }
 		public bool Started { get; private set; }
 		public bool RunningIntegrations { get; private set; }
 		public string ClusterName { get; }
@@ -52,6 +54,7 @@ namespace Tests.Framework.Integration
 		public string RepositoryPath { get; private set; }
 		public ElasticsearchNodeInfo Info { get; private set; }
 		public int Port { get; private set; }
+
 
 		private TimeSpan HandleTimeout { get; } = TimeSpan.FromMinutes(1);
 
@@ -110,6 +113,7 @@ namespace Tests.Framework.Integration
 			this._doNotSpawnIfAlreadyRunning = doNotSpawnIfAlreadyRunning;
 			this._shieldEnabled = shieldEnabled;
 
+			this.TypeOfCluster = name;
 			var prefix = name.ToLowerInvariant();
 			var suffix = Guid.NewGuid().ToString("N").Substring(0, 6);
 			this.ClusterName = $"{prefix}-cluster-{suffix}";
@@ -146,43 +150,39 @@ namespace Tests.Framework.Integration
 				return;
 			}
 
-			Console.WriteLine("========> {0}", this.RoamingFolder);
-			this.DownloadAndExtractElasticsearch();
-		}
-		private ConnectionSettings ClusterSettings(ConnectionSettings s, Func<ConnectionSettings, ConnectionSettings> settings) =>
-			AddBasicAuthentication(AppendClusterNameToHttpHeaders(settings(s)));
-
-		public IElasticClient Client(Func<Uri, IConnectionPool> createPool, Func<ConnectionSettings, ConnectionSettings> settings)
-		{
-			if (!this.Started && TestClient.Configuration.RunIntegrationTests)
-				throw new Exception("can not request a client from an ElasticsearchNode if that node hasn't started yet");
-			var port = this.Started ? this.Port : 9200;
-			settings = settings ?? (s => s);
-			var client = TestClient.GetClient(s => ClusterSettings(s, settings), port, createPool);
-			return client;
 		}
 
-		public IElasticClient Client(Func<ConnectionSettings, ConnectionSettings> settings = null, bool forceInMemory = false)
+		private object _lockGetClient = new object { };
+		private IElasticClient _client;
+		public IElasticClient Client
 		{
-			if (!this.Started && TestClient.Configuration.RunIntegrationTests)
-				throw new Exception("can not request a client from an ElasticsearchNode if that node hasn't started yet");
-			var port = this.Started ? this.Port : 9200;
-			return GetPrivateClient(settings, forceInMemory, port);
+			get
+			{
+				if (!this.Started && TestClient.Configuration.RunIntegrationTests)
+				{
+
+					throw new Exception("can not request a client from an ElasticsearchNode if that node hasn't started yet");
+				}
+
+				if (this._client != null) return this._client;
+
+				lock (_lockGetClient)
+				{
+					if (this._client != null) return this._client;
+
+					var port = this.Started ? this.Port : 9200;
+					this._client = TestClient.GetClient(ComposeSettings, port);
+					return this.Client;
+				}
+			}
 		}
 
-		private IElasticClient GetPrivateClient(Func<ConnectionSettings, ConnectionSettings> settings, bool forceInMemory, int port)
+		public IObservable<ElasticsearchMessage> Start(string[] additionalSettings = null)
 		{
-			settings = settings ?? (s => s);
-			var client = forceInMemory
-				? TestClient.GetInMemoryClient(s => ClusterSettings(s, settings), port)
-				: TestClient.GetClient(s => ClusterSettings(s, settings), port);
-			return client;
-		}
-
-		public IObservable<ElasticsearchMessage> Start(string typeOfCluster, string[] additionalSettings = null)
-		{
+			Console.WriteLine($"Started node {this.NodeName} which {(this.RunningIntegrations ? "will" : "WONT")} spawn an elasticsearch process");
 			if (!this.RunningIntegrations) return Observable.Empty<ElasticsearchMessage>();
 
+			this.DownloadAndExtractElasticsearch();
 			this.Stop();
 
 			var settingMarker = this.VersionInfo.ParsedVersion.Major >= 5 ? "-E " : "-D";
@@ -191,7 +191,7 @@ namespace Tests.Framework.Integration
 				.Select(s => $"{settingMarker}{s}")
 				.ToList();
 
-			var easyRunBat = Path.Combine(this.RoamingFolder, $"run-{typeOfCluster.ToLowerInvariant()}.bat");
+			var easyRunBat = Path.Combine(this.RoamingFolder, $"run-{this.TypeOfCluster.ToLowerInvariant()}.bat");
 			if (!File.Exists(easyRunBat))
 			{
 				var badSettings = new[] { "node.name", "cluster.name" };
@@ -209,14 +209,24 @@ namespace Tests.Framework.Integration
 
 			this._process = new ObservableProcess(this.Binary, settings.ToArray());
 
+
+			var sb = new StringBuilder();
 			var observable = Observable.Using(() => this._process, process => process.Start())
-				.Select(consoleLine => new ElasticsearchMessage(consoleLine));
+				.Select(consoleLine =>
+				{
+					if (!this.Started)
+					{
+						Console.WriteLine(consoleLine);
+						sb.AppendLine(consoleLine);
+					}
+					return new ElasticsearchMessage(consoleLine);
+				});
 			this._processListener = observable.Subscribe(onNext: s => HandleConsoleMessage(s, handle));
 
 			if (handle.WaitOne(this.HandleTimeout, true)) return observable;
 
 			this.Stop();
-			throw new Exception($"Could not start elasticsearch within {this.HandleTimeout}");
+			throw new Exception($"Could not start elasticsearch within {this.HandleTimeout}\r\n" + sb.ToString());
 		}
 
 #if DOTNETCORE
@@ -227,7 +237,7 @@ namespace Tests.Framework.Integration
 		{
 			if (!_doNotSpawnIfAlreadyRunning) return null;
 
-			var client = TestClient.GetClient();
+			var client = TestClient.Default;
 			var alreadyUp = client.RootNodeInfo();
 
 			if (!alreadyUp.IsValid) return null;
@@ -304,8 +314,11 @@ namespace Tests.Framework.Integration
 			}
 			else if (s.TryGetStartedConfirmation())
 			{
-				var healthyCluster = this.GetPrivateClient(null, false, this.Port)
-					.ClusterHealth(g => g.WaitForStatus(WaitForStatus.Yellow).Timeout(TimeSpan.FromSeconds(30)));
+				var client = this._shieldEnabled
+					? TestClient.GetClient(settings => settings.BasicAuthentication(ShieldInformation.Admin.Username, ShieldInformation.Admin.Password), port: this.Port)
+					: TestClient.GetClient(port: this.Port);
+
+				var healthyCluster = client.ClusterHealth(g => g.WaitForStatus(WaitForStatus.Yellow).Timeout(TimeSpan.FromSeconds(30)));
 				if (healthyCluster.IsValid)
 				{
 					this.Started = true;
@@ -313,7 +326,7 @@ namespace Tests.Framework.Integration
 				}
 				else
 				{
-					this._blockingSubject.OnError(new Exception("Did not see a healthy cluster after the node started for 30 seconds"));
+					this._blockingSubject.OnError(new Exception($"Did not see a healthy {this.NodeName} node after the node started for 30 seconds"));
 					handle.Set();
 					this.Stop();
 				}
@@ -443,7 +456,6 @@ namespace Tests.Framework.Integration
 			}
 		}
 
-
 		private string GetApplicationDataDirectory()
 		{
 #if DOTNETCORE
@@ -453,6 +465,7 @@ namespace Tests.Framework.Integration
 #endif
 		}
 
+		private ConnectionSettings ComposeSettings(ConnectionSettings s) => AddBasicAuthentication(AppendClusterNameToHttpHeaders(s));
 		private ConnectionSettings AddBasicAuthentication(ConnectionSettings settings)
 		{
 			if (!_shieldEnabled) return settings;
@@ -466,55 +479,61 @@ namespace Tests.Framework.Integration
 			return settings;
 		}
 
-		public void Stop()
+		private object _stopLock = new object();
+		public void Stop(bool disposing = false)
 		{
-
-			var hasStarted = this.Started;
-			this.Started = false;
-
-			Console.WriteLine($"Stopping... node has started {hasStarted} ran integrations: {this.RunningIntegrations}");
-
-			this._process?.Dispose();
-			this._processListener?.Dispose();
-
-			if (this.Info?.Pid != null)
+			lock (_stopLock)
 			{
-				var esProcess = Process.GetProcessById(this.Info.Pid.Value);
-				Console.WriteLine($"Killing elasticsearch PID {this.Info.Pid}");
-				esProcess.Kill();
-				esProcess.WaitForExit(5000);
-				esProcess.Close();
+				if (_disposed) return;
+
+				var hasStarted = this.Started;
+				this.Started = false;
+
+				if (disposing)
+				{
+					this._disposed = true;
+					Console.WriteLine($"Disposing node {this.NodeName} which {(hasStarted ? "" : "never ")}spawned an actual elasticsearch process");
+				}
+
+				this._process?.Dispose();
+				this._processListener?.Dispose();
+
+				if (this.Info?.Pid != null)
+				{
+					var esProcess = Process.GetProcessById(this.Info.Pid.Value);
+					Console.WriteLine($"Killing elasticsearch PID {this.Info.Pid}");
+					esProcess.Kill();
+					esProcess.WaitForExit(5000);
+					esProcess.Close();
+				}
+
+				if (!this.RunningIntegrations || !hasStarted) return;
+				Console.WriteLine($"Node had started on port: {this.Port} cleaning up log/data/repository files...");
+
+				if (this._doNotSpawnIfAlreadyRunning) return;
+				var dataFolder = Path.Combine(this.RoamingClusterFolder, "data", this.ClusterName);
+				if (Directory.Exists(dataFolder))
+				{
+					Directory.Delete(dataFolder, true);
+				}
+
+				var logPath = Path.Combine(this.RoamingClusterFolder, "logs");
+				var files = Directory.GetFiles(logPath, this.ClusterName + "*.log");
+				foreach (var f in files)
+				{
+					File.Delete(f);
+				}
+
+				if (Directory.Exists(this.RepositoryPath))
+				{
+					Directory.Delete(this.RepositoryPath, true);
+				}
+
 			}
 
-			if (!this.RunningIntegrations || !hasStarted) return;
-			Console.WriteLine($"Node started on port: {this.Port} using PID: {this.Info?.Pid}");
-
-			if (this._doNotSpawnIfAlreadyRunning) return;
-			var dataFolder = Path.Combine(this.RoamingClusterFolder, "data", this.ClusterName);
-			if (Directory.Exists(dataFolder))
-			{
-				Console.WriteLine($"attempting to delete cluster data: {dataFolder}");
-				Directory.Delete(dataFolder, true);
-			}
-
-			var logPath = Path.Combine(this.RoamingClusterFolder, "logs");
-			var files = Directory.GetFiles(logPath, this.ClusterName + "*.log");
-			foreach (var f in files)
-			{
-				Console.WriteLine($"attempting to delete log file: {f}");
-				File.Delete(f);
-			}
-
-			if (Directory.Exists(this.RepositoryPath))
-			{
-				Console.WriteLine("attempting to delete repositories");
-				Directory.Delete(this.RepositoryPath, true);
-			}
 		}
 
-		public void Dispose()
-		{
-			this.Stop();
-		}
+		private bool _disposed;
+		public void Dispose() => this.Stop(disposing: true);
 	}
 }

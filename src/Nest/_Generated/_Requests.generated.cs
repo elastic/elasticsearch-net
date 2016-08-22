@@ -82,32 +82,8 @@ namespace Nest
 		public AnalyzeRequest(IndexName index) : base(r=>r.Optional("index", index)){}
 		
 
-			///<summary>The name of the analyzer to use</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
-		
-		///<summary>Deprecated : A comma-separated list of character filters to use for the analysis</summary>
-		public  string[] CharFilters { get { return Q< string[]>("char_filters"); } set { Q("char_filters", value); } }
-		
-		///<summary>A comma-separated list of character filters to use for the analysis</summary>
-		public  string[] CharFilter { get { return Q< string[]>("char_filter"); } set { Q("char_filter", value); } }
-		
-		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
-		public Field Field { get { return Q<Field>("field"); } set { Q("field", value); } }
-		
-		///<summary>Deprecated : A comma-separated list of filters to use for the analysis</summary>
-		public  string[] Filters { get { return Q< string[]>("filters"); } set { Q("filters", value); } }
-		
-		///<summary>A comma-separated list of filters to use for the analysis</summary>
-		public  string[] Filter { get { return Q< string[]>("filter"); } set { Q("filter", value); } }
-		
-		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
+			///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public bool PreferLocal { get { return Q<bool>("prefer_local"); } set { Q("prefer_local", value); } }
-		
-		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
-		public  string[] Text { get { return Q< string[]>("text"); } set { Q("text", value); } }
-		
-		///<summary>The name of the tokenizer to use for the analysis</summary>
-		public string Tokenizer { get { return Q<string>("tokenizer"); } set { Q("tokenizer", value); } }
 		
 		///<summary>With `true`, outputs more advanced details. (default: false)</summary>
 		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }

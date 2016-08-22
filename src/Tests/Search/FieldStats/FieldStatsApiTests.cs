@@ -9,9 +9,8 @@ using static Nest.Infer;
 
 namespace Tests.Search.FieldStats
 {
-	[Collection(IntegrationContext.ReadOnly)]
 	public class FieldStatsApiTests
-		: ApiIntegrationTestBase<IFieldStatsResponse, IFieldStatsRequest, FieldStatsDescriptor, FieldStatsRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IFieldStatsResponse, IFieldStatsRequest, FieldStatsDescriptor, FieldStatsRequest>
 	{
 		public FieldStatsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

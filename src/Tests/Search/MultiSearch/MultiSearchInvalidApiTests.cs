@@ -12,8 +12,7 @@ using Xunit;
 
 namespace Tests.Search.MultiSearch
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class MultiSearchInvalidApiTests : ApiIntegrationTestBase<IMultiSearchResponse, IMultiSearchRequest, MultiSearchDescriptor, MultiSearchRequest>
+	public class MultiSearchInvalidApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IMultiSearchResponse, IMultiSearchRequest, MultiSearchDescriptor, MultiSearchRequest>
 	{
 		public MultiSearchInvalidApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -30,7 +29,7 @@ namespace Tests.Search.MultiSearch
 		protected override string UrlPath => "/project/project/_msearch";
 
 		protected override bool SupportsDeserialization => false;
-	
+
 		protected override object ExpectJson => new object[]
 		{
 			new { },
@@ -64,7 +63,7 @@ namespace Tests.Search.MultiSearch
 
 			/** GetResponses also returns invalid requests **/
 			var responses = r.GetResponses<Project>().ToList();
-			responses.First().IsValid.Should().BeTrue();
+			responses.First().ShouldBeValid();
 			this.AssertInvalidResponse(responses[1]);
 			this.AssertInvalidResponse(responses[2]);
 
@@ -77,7 +76,7 @@ namespace Tests.Search.MultiSearch
 
 		private void AssertInvalidResponse(IResponse searchResponse)
 		{
-			searchResponse.IsValid.Should().BeFalse();
+			searchResponse.ShouldNotBeValid();
 			searchResponse.ServerError.Should().NotBeNull();
 			searchResponse.ServerError.Status.Should().Be(-1);
 			searchResponse.ServerError.Error.Should().NotBeNull();

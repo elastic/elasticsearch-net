@@ -8,10 +8,9 @@ using Xunit;
 
 namespace Tests.Document.Single
 {
-	[Collection(IntegrationContext.Indexing)]
 	public class DocumentCrudTests : CrudTestBase<IIndexResponse, IGetResponse<Project>, IUpdateResponse<Project>, IDeleteResponse>
 	{
-		public DocumentCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DocumentCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool SupportsDeletes => true;
 
@@ -41,9 +40,9 @@ namespace Tests.Document.Single
 		protected IGetRequest ReadFluent(string id, GetDescriptor<Project> d) => d;
 
 		protected override LazyResponses Update() => Calls<
-			UpdateDescriptor<Project, Project>, 
-			UpdateRequest<Project, Project>, 
-			IUpdateRequest<Project, Project>, 
+			UpdateDescriptor<Project, Project>,
+			UpdateRequest<Project, Project>,
+			IUpdateRequest<Project, Project>,
 			IUpdateResponse<Project>
 			>(
 				UpdateInitializer,
@@ -74,10 +73,12 @@ namespace Tests.Document.Single
 		protected IDeleteRequest DeleteFluent(string id, DeleteDescriptor<Project> d) => d;
 
 		[I] protected async Task DocumentIsUpdated() => await this.AssertOnGetAfterUpdate(r =>
-			r.Source.Description.Should().EndWith("updated")
-		);
+		{
+			r.Source.Should().NotBeNull();
+			r.Source.Description.Should().EndWith("updated");
+		});
 
-		[I] protected async Task DocumentIsDeleted() => await this.AssertOnGetAfterDelete(r => 
+		[I] protected async Task DocumentIsDeleted() => await this.AssertOnGetAfterDelete(r =>
 			r.Found.Should().BeFalse()
 		);
 	}

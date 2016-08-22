@@ -32,7 +32,6 @@ namespace Tests.Framework.Integration
 
 		public ElasticsearchMessage(string consoleLine)
 		{
-			Console.WriteLine(consoleLine);
 			if (string.IsNullOrEmpty(consoleLine)) return;
 			var match = ConsoleLineParser.Match(consoleLine);
 			if (!match.Success) return;

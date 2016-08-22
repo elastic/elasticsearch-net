@@ -1,4 +1,5 @@
 using System;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.MockData;
@@ -12,7 +13,7 @@ namespace Tests.Framework.Integration
 
 		public Seeder(ElasticsearchNode node)
 		{
-			this.Client = node.Client();
+			this.Client = node.Client;
 		}
 
 		public void SeedNode()
@@ -23,6 +24,17 @@ namespace Tests.Framework.Integration
 				this.DeleteIndicesAndTemplates();
 				// and now recreate everything
 				this.CreateIndicesAndSeedIndexData();
+			}
+		}
+
+		public void SeedIndicesOnly()
+		{
+			if (TestClient.Configuration.ForceReseed || !AlreadySeeded())
+			{
+				// Ensure a clean slate by deleting everything regardless of whether they may already exist
+				this.DeleteIndicesAndTemplates();
+				// and now recreate everything
+				this.CreateIndices();
 			}
 		}
 
@@ -93,7 +105,13 @@ namespace Tests.Framework.Integration
 					)
 				)
 				);
-			putTemplateResult.IsValid.Should().BeTrue();
+			putTemplateResult.ShouldBeValid();
+		}
+
+		private void WaitForIndexCreation(IndexName index)
+		{
+			var wait = this.Client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow).Index(index));
+			wait.ShouldBeValid();
 		}
 
 		private void CreateDeveloperIndex()
@@ -106,7 +124,8 @@ namespace Tests.Framework.Integration
 					)
 				)
 			);
-			createDeveloperIndex.IsValid.Should().BeTrue();
+			createDeveloperIndex.ShouldBeValid();
+			this.WaitForIndexCreation(Index<Developer>());
 		}
 
 		private void CreateProjectIndex()
@@ -134,7 +153,9 @@ namespace Tests.Framework.Integration
 					)
 				)
 				);
-			createProjectIndex.IsValid.Should().BeTrue();
+			createProjectIndex.ShouldBeValid();
+			this.WaitForIndexCreation(Index<Project>());
+
 		}
 
 #pragma warning disable 618

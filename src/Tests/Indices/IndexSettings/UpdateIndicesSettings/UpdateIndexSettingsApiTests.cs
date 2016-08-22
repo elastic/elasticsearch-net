@@ -9,10 +9,9 @@ using static Nest.Infer;
 
 namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 {
-	[Collection(IntegrationContext.Indexing)]
-	public class UpdateIndexSettingsApiTests : ApiIntegrationTestBase<IUpdateIndexSettingsResponse, IUpdateIndexSettingsRequest, UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest>
+	public class UpdateIndexSettingsApiTests : ApiIntegrationTestBase<WritableCluster, IUpdateIndexSettingsResponse, IUpdateIndexSettingsRequest, UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest>
 	{
-		public UpdateIndexSettingsApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public UpdateIndexSettingsApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

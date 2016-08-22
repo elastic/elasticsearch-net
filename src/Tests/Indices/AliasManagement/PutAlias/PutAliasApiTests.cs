@@ -8,15 +8,9 @@ using Xunit;
 
 namespace Tests.Indices.AliasManagement.PutAlias
 {
-	[Collection(IntegrationContext.Indexing)]
-	public class PutAliasApiTests : ApiIntegrationTestBase<IPutAliasResponse, IPutAliasRequest, PutAliasDescriptor, PutAliasRequest>
+	public class PutAliasApiTests : ApiIntegrationAgainstNewIndexTestBase<WritableCluster, IPutAliasResponse, IPutAliasRequest, PutAliasDescriptor, PutAliasRequest>
 	{
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
-		{
-			foreach (var index in values.Values) client.CreateIndex(index);
-		}
-
-		public PutAliasApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PutAliasApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.PutAlias(CallIsolatedValue, CallIsolatedValue + "-alias"),
 			fluentAsync: (client, f) => client.PutAliasAsync(CallIsolatedValue, CallIsolatedValue + "-alias"),

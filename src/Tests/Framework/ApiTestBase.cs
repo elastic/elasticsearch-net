@@ -6,11 +6,13 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
+using Xunit;
 
 namespace Tests.Framework
 {
-	public abstract class ApiTestBase<TResponse, TInterface, TDescriptor, TInitializer>
-		: SerializationTestBase
+	public abstract class ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
+		: SerializationTestBase, IClusterFixture<TCluster>
+		where TCluster : ClusterBase, new()
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
@@ -24,7 +26,7 @@ namespace Tests.Framework
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 		protected bool RanIntegrationSetup => this._usage?.CalledSetup ?? false;
 
-		protected IIntegrationCluster Cluster { get; }
+		protected ClusterBase Cluster { get; }
 
 		protected string CallIsolatedValue => _uniqueValues.Value;
 		protected T ExtendedValue<T>(string key) where T : class => this._uniqueValues.ExtendedValue<T>(key);
@@ -32,10 +34,6 @@ namespace Tests.Framework
 		protected virtual void IntegrationSetup(IElasticClient client, CallUniqueValues values) { }
 		protected virtual void OnBeforeCall(IElasticClient client) { }
 		protected virtual void OnAfterCall(IElasticClient client) { }
-
-		protected virtual bool ForceInMemory => true;
-		protected IElasticClient Client => this.Cluster.Client(GetConnectionSettings, this.ForceInMemory);
-		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings;
 
 		protected virtual TDescriptor NewDescriptor() => Activator.CreateInstance<TDescriptor>();
 		protected virtual Func<TDescriptor, TInterface> Fluent { get; }
@@ -46,9 +44,7 @@ namespace Tests.Framework
 		protected abstract string UrlPath { get; }
 		protected abstract HttpMethod HttpMethod { get; }
 
-
-
-		protected ApiTestBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster)
+		protected ApiTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster)
 		{
 			this._usage = usage;
 			this.Cluster = cluster;
@@ -115,39 +111,7 @@ namespace Tests.Framework
 			});
 		}
 
-		private void AssertUrl(Uri u)
-		{
-			var paths = (this.UrlPath ?? "").Split(new[] { '?' }, 2);
-			string path = paths.First(), query = string.Empty;
-			if (paths.Length > 1)
-				query = paths.Last();
-
-			var expectedUri = new UriBuilder("http", "localhost", this._port, path, "?" + query).Uri;
-
-			u.AbsolutePath.Should().Be(expectedUri.AbsolutePath);
-			u = new UriBuilder(u.Scheme, u.Host, u.Port, u.AbsolutePath, u.Query.Replace("pretty=true&", "").Replace("pretty=true", "")).Uri;
-
-			var queries = new[] { u.Query, expectedUri.Query };
-			if (queries.All(string.IsNullOrWhiteSpace)) return;
-			if (queries.Any(string.IsNullOrWhiteSpace))
-			{
-				queries.Last().Should().Be(queries.First());
-				return;
-			}
-
-			var clientKeyValues = u.Query.Substring(1).Split('&')
-				.Select(v => v.Split('='))
-				.Where(k => !string.IsNullOrWhiteSpace(k[0]))
-				.ToDictionary(k => k[0], v => v.Last());
-			var expectedKeyValues = expectedUri.Query.Substring(1).Split('&')
-				.Select(v => v.Split('='))
-				.Where(k => !string.IsNullOrWhiteSpace(k[0]))
-				.ToDictionary(k => k[0], v => v.Last());
-
-			clientKeyValues.Count().Should().Be(expectedKeyValues.Count());
-			clientKeyValues.Should().ContainKeys(expectedKeyValues.Keys.ToArray());
-			clientKeyValues.Should().Equal(expectedKeyValues);
-		}
+		private void AssertUrl(Uri u) => u.PathEquals(this.UrlPath);
 
 		protected virtual async Task AssertOnAllResponses(Action<TResponse> assert)
 		{

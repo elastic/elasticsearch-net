@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
@@ -67,7 +68,7 @@ namespace Tests.Aggregations.Metric.Percentiles
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var commitsOutlier = response.Aggs.Percentiles("commits_outlier");
 			commitsOutlier.Should().NotBeNull();
 			commitsOutlier.Items.Should().NotBeNullOrEmpty();

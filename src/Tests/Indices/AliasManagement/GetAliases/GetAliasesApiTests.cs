@@ -7,8 +7,7 @@ using Xunit;
 
 namespace Tests.Indices.AliasManagement.GetAliases
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class GetAliasesApiTests : ApiIntegrationTestBase<IGetAliasesResponse, IGetAliasesRequest, GetAliasesDescriptor, GetAliasesRequest>
+	public class GetAliasesApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetAliasesResponse, IGetAliasesRequest, GetAliasesDescriptor, GetAliasesRequest>
 	{
 		private static readonly Names Names = Infer.Names("alias, x", "y");
 

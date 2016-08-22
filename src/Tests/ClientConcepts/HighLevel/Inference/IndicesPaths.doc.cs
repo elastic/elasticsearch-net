@@ -55,7 +55,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U]
 		public void UsingStaticPropertyField()
 		{
-			var client = TestClient.GetInMemoryClient();
+			var client = TestClient.Default;
 
 			var singleString = Nest.Indices.Index("name1"); // <1> specifying a single index using a string
 			var singleTyped = Nest.Indices.Index<Project>(); //<2> specifying a single index using a type
@@ -75,7 +75,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U]
 		public void MultipleIndices()
 		{
-			var client = TestClient.GetInMemoryClient();
+			var client = TestClient.Default;
 
 			var manyStrings = Nest.Indices.Index("name1", "name2"); //<1> specifying multiple indices using strings
 			var manyTypes = Nest.Indices.Index<Project>().And<Developer>(); //<2> specifying multiple indices using types
@@ -98,7 +98,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U]
 		public void IndicesAllAndAllIndicesSpecifiedWhenUsingStaticUsingDirective()
 		{
-			var client = TestClient.GetInMemoryClient();
+			var client = TestClient.Default;
 
 			var indicesAll = Nest.Indices.All;
 			var allIndices = Nest.Indices.AllIndices;

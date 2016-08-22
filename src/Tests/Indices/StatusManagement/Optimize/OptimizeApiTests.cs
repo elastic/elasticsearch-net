@@ -12,15 +12,11 @@ using static Nest.Infer;
 
 namespace Tests.Indices.StatusManagement.Optimize
 {
-	[Collection(IntegrationContext.OwnIndex)]
-	public class OptimizeApiTests : ApiIntegrationTestBase<IOptimizeResponse, IOptimizeRequest, OptimizeDescriptor, OptimizeRequest>
+	public class OptimizeApiTests
+		: ApiIntegrationAgainstNewIndexTestBase
+			<IntrusiveOperationCluster, IOptimizeResponse, IOptimizeRequest, OptimizeDescriptor, OptimizeRequest>
 	{
-		public OptimizeApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
-		{
-			foreach (var index in values.Values) client.CreateIndex(index);
-		}
+		public OptimizeApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Optimize(CallIsolatedValue, f),

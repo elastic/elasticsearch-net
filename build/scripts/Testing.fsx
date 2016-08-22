@@ -34,4 +34,4 @@ module Tests =
         
         for esVersion in esVersions do
             setProcessEnvironVar "NEST_INTEGRATION_VERSION" esVersion
-            testProjectJson "none"
+            testDesktopClr "all"

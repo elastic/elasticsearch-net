@@ -81,7 +81,7 @@ namespace Tests.Aggregations.Pipeline.ExtendedStatsBucket
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
 			projectsPerMonth.Should().NotBeNull();

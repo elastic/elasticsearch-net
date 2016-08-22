@@ -8,9 +8,8 @@ using Xunit;
 
 namespace Tests.Search.Count
 {
-	[Collection(IntegrationContext.ReadOnly)]
 	public class CountApiTests
-		: ApiIntegrationTestBase<ICountResponse, ICountRequest, CountDescriptor<Project>, CountRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ICountResponse, ICountRequest, CountDescriptor<Project>, CountRequest<Project>>
 	{
 		public CountApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

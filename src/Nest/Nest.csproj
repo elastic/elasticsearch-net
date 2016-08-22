@@ -456,6 +456,7 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\VerbatimDictionaryKeysConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\JsonNetSerializer.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\JsonReaderExtensions.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\SerializerFactory.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\StatefulDeserialization\ConcreteTypeConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\StatefulDeserialization\JsonConverterPiggyBackState.cs" />
     <Compile Include="CommonAbstractions\Static\Static.cs" />

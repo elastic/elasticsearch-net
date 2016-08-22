@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
@@ -24,7 +25,7 @@ namespace Tests.Aggregations.Bucket.IpRange
 						ranges = new object[]
 						{
 							new { to = "10.0.0.5" },
-							new { from = "10.0.0.5" } 
+							new { from = "10.0.0.5" }
 						}
 					}
 				}
@@ -58,7 +59,7 @@ namespace Tests.Aggregations.Bucket.IpRange
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var ipRanges = response.Aggs.IpRange("ip_ranges");
 			ipRanges.Should().NotBeNull();
 			ipRanges.Buckets.Should().NotBeNull();

@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
@@ -90,7 +91,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 							)
 							.Aggregations(aaa => aaa
 								.Sum("commits", sm => sm
-									.Field(p => p.NumberOfCommits)	
+									.Field(p => p.NumberOfCommits)
 								)
 							)
 						)
@@ -112,7 +113,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
-				Aggregations = 
+				Aggregations =
 					new SumAggregation("commits", "numberOfCommits") &&
 					new FilterAggregation("stable_state")
 					{
@@ -136,7 +137,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
 			projectsPerMonth.Should().NotBeNull();

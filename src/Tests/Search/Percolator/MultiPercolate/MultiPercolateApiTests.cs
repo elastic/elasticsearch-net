@@ -11,10 +11,9 @@ using Xunit;
 
 namespace Tests.Search.Percolator.MultiPercolate
 {
-	[Collection(IntegrationContext.Indexing)]
-	public class MultiPercolateApiTests : ApiIntegrationTestBase<IMultiPercolateResponse, IMultiPercolateRequest, MultiPercolateDescriptor, MultiPercolateRequest>
+	public class MultiPercolateApiTests : ApiIntegrationTestBase<WritableCluster, IMultiPercolateResponse, IMultiPercolateRequest, MultiPercolateDescriptor, MultiPercolateRequest>
 	{
-		public MultiPercolateApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public MultiPercolateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		public string Index => this.CallIsolatedValue + "-index";
 
@@ -25,7 +24,7 @@ namespace Tests.Search.Percolator.MultiPercolate
 					.Map<Project>(Seeder.MapProject)
 				)
 			);
-			this.Client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow));
+			this.Client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow).Index(this.Index));
 			this.Client.Index(Project.Instance, s => s.Index(this.Index).Refresh());
 			var registerPercolator = this.Client.RegisterPercolator<Project>("match_all", r => r
 				.Index(this.Index)
@@ -41,7 +40,7 @@ namespace Tests.Search.Percolator.MultiPercolate
 		);
 
 		protected override int ExpectStatusCode => 200;
-		protected override bool ExpectIsValid => true; 
+		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"/{this.Index}/project/_mpercolate";
 
@@ -66,7 +65,7 @@ namespace Tests.Search.Percolator.MultiPercolate
 			Percolations = new List<IPercolateOperation>
 			{
 				new PercolateRequest<Project>(Project.Instance, this.Index),
-				new PercolateCountRequest<Project>(Project.Instance, this.Index) 
+				new PercolateCountRequest<Project>(Project.Instance, this.Index)
 			}
 		};
 
@@ -76,7 +75,7 @@ namespace Tests.Search.Percolator.MultiPercolate
 			responses.Should().HaveCount(2);
 			foreach (var r in responses)
 			{
-				r.IsValid.Should().BeTrue();
+				r.ShouldBeValid();
 				r.Total.Should().BeGreaterThan(0);
 			}
 

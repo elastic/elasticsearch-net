@@ -10,13 +10,12 @@ using Xunit;
 
 namespace Tests.Cat.CatRepositories
 {
-	[Collection(IntegrationContext.Indexing)]
 	[SkipVersion("<2.1.0", "")]
-	public class CatRepositoriesApiTests : ApiIntegrationTestBase<ICatResponse<CatRepositoriesRecord>, ICatRepositoriesRequest, CatRepositoriesDescriptor, CatRepositoriesRequest>
+	public class CatRepositoriesApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, ICatResponse<CatRepositoriesRecord>, ICatRepositoriesRequest, CatRepositoriesDescriptor, CatRepositoriesRequest>
 	{
 		private static readonly string RepositoryName = RandomString();
 
-		public CatRepositoriesApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public CatRepositoriesApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

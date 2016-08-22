@@ -126,21 +126,17 @@ namespace Tests.Search.Request
 	* The inner hits feature can be used for this. This feature returns per search hit in the search response additional
 	* nested hits that caused a search hit to match in a different scope.
 	*
-    * Inner hits can be used by defining an `inner_hits` definition on a `nested`, `has_child` or `has_parent` query and filter.
+	* Inner hits can be used by defining an `inner_hits` definition on a `nested`, `has_child` or `has_parent` query and filter.
 	*
 	* See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.html[Inner hits] for more detail.
 	*/
-	[Collection(IntegrationContext.OwnIndex)]
-	public abstract class InnerHitsApiTestsBase<TRoyal> : ApiIntegrationTestBase<ISearchResponse<TRoyal>, ISearchRequest, SearchDescriptor<TRoyal>, SearchRequest<TRoyal>>
+	public abstract class InnerHitsApiTestsBase<TRoyal> : ApiIntegrationTestBase<IntrusiveOperationCluster, ISearchResponse<TRoyal>, ISearchRequest, SearchDescriptor<TRoyal>, SearchRequest<TRoyal>>
 		where TRoyal : class, IRoyal
 	{
-		public InnerHitsApiTestsBase(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public InnerHitsApiTestsBase(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected abstract IndexName Index { get; }
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => new RoyalSeeder(this.Client, Index).Seed();
-
-		protected override ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings
-			.DisableDirectStreaming();
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<TRoyal>(f),
@@ -162,10 +158,9 @@ namespace Tests.Search.Request
 	/**[float]
 	*== Global Inner Hits
 	*/
-	[Collection(IntegrationContext.OwnIndex)]
 	public class GlobalInnerHitsApiTests : InnerHitsApiTestsBase<Duke>
 	{
-		public GlobalInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GlobalInnerHitsApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private static IndexName IndexName { get; } = RandomString();
 		protected override IndexName Index => GlobalInnerHitsApiTests.IndexName;
@@ -228,7 +223,7 @@ namespace Tests.Search.Request
 
 		[I] public Task AssertResponse() => this.AssertOnAllResponses(r =>
 		{
-			r.IsValid.Should().BeTrue();
+			r.ShouldBeValid();
 			r.Hits.Should().NotBeEmpty();
 			foreach (var hit in r.Hits)
 			{
@@ -257,10 +252,9 @@ namespace Tests.Search.Request
 	/**[float]
 	*== Query Inner Hits
 	*/
-	[Collection(IntegrationContext.OwnIndex)]
 	public class QueryInnerHitsApiTests : InnerHitsApiTestsBase<King>
 	{
-		public QueryInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public QueryInnerHitsApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private static IndexName IndexName { get; } = RandomString();
 		protected override IndexName Index => QueryInnerHitsApiTests.IndexName;

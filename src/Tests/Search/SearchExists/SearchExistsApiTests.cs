@@ -9,8 +9,7 @@ using Xunit;
 
 namespace Tests.Search.SearchExists
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class SearchExistsApiTests : ApiIntegrationTestBase<IExistsResponse, ISearchExistsRequest, SearchExistsDescriptor<Project>, SearchExistsRequest<Project>>
+	public class SearchExistsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IExistsResponse, ISearchExistsRequest, SearchExistsDescriptor<Project>, SearchExistsRequest<Project>>
 	{
 		public SearchExistsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -20,7 +19,7 @@ namespace Tests.Search.SearchExists
 			request: (c, r) => c.SearchExists(r),
 			requestAsync: (c, r) => c.SearchExistsAsync(r)
 		);
-		
+
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
@@ -33,7 +32,7 @@ namespace Tests.Search.SearchExists
 				match_all = new { }
 			}
 		};
-		
+
 		protected override Func<SearchExistsDescriptor<Project>, ISearchExistsRequest> Fluent => s => s
 			.Query(q => q
 				.MatchAll()
@@ -45,9 +44,8 @@ namespace Tests.Search.SearchExists
 		};
 	}
 
-	[Collection(IntegrationContext.ReadOnly)]
-	public class SearchDoesntExistApiTests 
-		: ApiIntegrationTestBase<IExistsResponse, ISearchExistsRequest, SearchExistsDescriptor<Project>, SearchExistsRequest<Project>>
+	public class SearchDoesntExistApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IExistsResponse, ISearchExistsRequest, SearchExistsDescriptor<Project>, SearchExistsRequest<Project>>
 	{
 		public SearchDoesntExistApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -81,7 +79,7 @@ namespace Tests.Search.SearchExists
 
 		protected override void ExpectResponse(IExistsResponse response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			response.Exists.Should().BeFalse();
 		}
 

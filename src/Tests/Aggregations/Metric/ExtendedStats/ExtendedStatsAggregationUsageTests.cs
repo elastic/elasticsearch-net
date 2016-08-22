@@ -41,7 +41,7 @@ namespace Tests.Aggregations.Metric.ExtendedStats
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var commitStats = response.Aggs.ExtendedStats("commit_stats");
 			commitStats.Should().NotBeNull();
 			commitStats.Average.Should().BeGreaterThan(0);

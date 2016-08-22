@@ -72,7 +72,7 @@ namespace Tests.Aggregations.Bucket.Filter
 			* Using the `.Aggs` aggregation helper we can fetch our aggregation results easily
 			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 			*/
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			var filterAgg = response.Aggs.Filter("bethels_projects");
 			filterAgg.Should().NotBeNull();
@@ -126,7 +126,7 @@ namespace Tests.Aggregations.Bucket.Filter
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			response.Aggs.Filter("empty_filter").DocCount.Should().BeGreaterThan(0);
 		}
 	}
@@ -182,7 +182,7 @@ namespace Tests.Aggregations.Bucket.Filter
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			response.Aggs.Filter(_aggName).DocCount.Should().BeGreaterThan(0);
 		}
 	}

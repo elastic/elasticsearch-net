@@ -21,7 +21,6 @@ namespace Tests.Search.Search.Rescoring
 	 * [float]
 	 * == Single rescore query
 	 */
-	[Collection(IntegrationContext.ReadOnly)]
 	public class RescoreUsageTests : SearchUsageTestBase
 	{
 		public RescoreUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -108,7 +107,6 @@ namespace Tests.Search.Search.Rescoring
 	/**[float]
 	 *== Multiple rescore queries
 	 */
-	[Collection(IntegrationContext.ReadOnly)]
 	public class MultiRescoreUsageTests : SearchUsageTestBase
 	{
 		public MultiRescoreUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
