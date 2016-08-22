@@ -57,7 +57,7 @@ A single index can be specified using a CLR type or a string
 
 [source,csharp]
 ----
-var client = TestClient.GetInMemoryClient();
+var client = TestClient.Default;
 
 var singleString = Nest.Indices.Index("name1"); <1>
 
@@ -85,7 +85,7 @@ Similarly to a single index, multiple indices can be specified using multiple CL
 
 [source,csharp]
 ----
-var client = TestClient.GetInMemoryClient();
+var client = TestClient.Default;
 
 var manyStrings = Nest.Indices.Index("name1", "name2"); <1>
 
@@ -115,7 +115,7 @@ static imports too; in this scenario, `All` becomes ambiguous between `Indices.A
 
 [source,csharp]
 ----
-var client = TestClient.GetInMemoryClient();
+var client = TestClient.Default;
 
 var indicesAll = Nest.Indices.All;
 

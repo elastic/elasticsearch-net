@@ -70,7 +70,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 var allProjects = response.Aggs.Global("all_projects");
 allProjects.Should().NotBeNull();
 var names = allProjects.Terms("names");

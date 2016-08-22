@@ -55,7 +55,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 var commitStats = response.Aggs.ExtendedStats("commit_stats");
 commitStats.Should().NotBeNull();
 commitStats.Average.Should().BeGreaterThan(0);

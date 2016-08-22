@@ -66,7 +66,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 
 foreach (var document in response.Documents)
 {

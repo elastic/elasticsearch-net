@@ -69,7 +69,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 var commits = response.Aggs.Histogram("commits");
 commits.Should().NotBeNull();
 

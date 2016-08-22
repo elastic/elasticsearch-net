@@ -62,11 +62,3 @@ new ScriptQuery
 }
 ----
 
-=== Handling Responses
-
-[source,csharp]
-----
-response.IsValid.Should().BeTrue();
-response.Documents.Count().Should().BeGreaterThan(0);
-----
-

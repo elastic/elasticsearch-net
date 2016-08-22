@@ -60,7 +60,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 var centroid = response.Aggs.GeoCentroid("centroid");
 centroid.Should().NotBeNull();
 centroid.Location.Should().NotBeNull();

@@ -13,6 +13,9 @@ using Tests.Framework.MockData;
 using Xunit;
 using System.Net.Http;
 
+#pragma warning disable CS0618 // Type or member is obsolete
+#pragma warning disable CS0672 // Member overrides obsolete member
+
 namespace Tests.ClientConcepts.LowLevel
 {
 	public class Connecting
@@ -172,10 +175,10 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		/** [[complex-logging]]
-	* === Complex logging with OnRequestCompleted
-	* Here's an example of using `OnRequestCompleted()` for complex logging. Remember, if you would also like
+	    * === Complex logging with OnRequestCompleted
+	    * Here's an example of using `OnRequestCompleted()` for complex logging. Remember, if you would also like
 		* to capture the request and/or response bytes, you also need to set `.DisableDirectStreaming()` to `true`
-	*/
+	    */
 		[U]
 		public async Task UsingOnRequestCompletedForLogging()
 		{
@@ -269,9 +272,9 @@ namespace Tests.ClientConcepts.LowLevel
 			 */
 		}
 
-		/*
+		/**
 		 * If running on Core CLR, then a custom connection type must be created by deriving from `HttpConnection` and
-		 * overriding the `CreateHttpClientHandler` method in order to set the `ServerCertificateCustomValidationCallback` property:
+		 * overriding the `CreateHttpClientHandler` method in order to set the `ServerCertificateCustomValidationCallback` property.
 		*/
 
 #if DOTNETCORE
@@ -297,9 +300,7 @@ namespace Tests.ClientConcepts.LowLevel
 
 			public int CallToModify { get; set; } = 0;
 
-#pragma warning disable CS0672 // Member overrides obsolete member
 			protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings) => ++CallToModify; //<1> Override ModifyJsonSerializerSettings if you need access to `JsonSerializerSettings`
-#pragma warning restore CS0672 // Member overrides obsolete member
 
 			public int CallToContractConverter { get; set; } = 0;
 
@@ -321,9 +322,9 @@ namespace Tests.ClientConcepts.LowLevel
 		public void ModifyJsonSerializerSettingsIsCalled()
 		{
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-#pragma warning disable CS0618 // Type or member is obsolete
+
 			var settings = new ConnectionSettings(connectionPool, new InMemoryConnection(), s => new MyJsonNetSerializer(s));
-#pragma warning restore CS0618 // Type or member is obsolete
+
 			var client = new ElasticClient(settings);
 			client.RootNodeInfo();
 			client.RootNodeInfo();

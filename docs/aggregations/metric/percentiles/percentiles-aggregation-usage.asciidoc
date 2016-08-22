@@ -84,7 +84,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 var commitsOutlier = response.Aggs.Percentiles("commits_outlier");
 commitsOutlier.Should().NotBeNull();
 commitsOutlier.Items.Should().NotBeNullOrEmpty();

@@ -114,7 +114,7 @@ namespace DocGenerator.Walkers
 			this.Blocks.AddRange(walker.Blocks);
 		}
 
-		public override void VisitAccessorDeclaration(AccessorDeclarationSyntax node)
+	    public override void VisitAccessorDeclaration(AccessorDeclarationSyntax node)
 		{
 			if (node.ShouldBeHidden()) return;
 

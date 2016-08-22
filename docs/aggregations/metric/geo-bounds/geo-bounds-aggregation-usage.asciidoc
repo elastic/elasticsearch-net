@@ -60,7 +60,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 var viewport = response.Aggs.GeoBounds("viewport");
 viewport.Should().NotBeNull();
 viewport.Bounds.Should().NotBeNull();

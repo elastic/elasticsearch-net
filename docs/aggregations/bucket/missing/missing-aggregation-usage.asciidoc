@@ -58,7 +58,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 var projectsWithoutDesc = response.Aggs.Missing("projects_without_a_description");
 projectsWithoutDesc.Should().NotBeNull();
 ----

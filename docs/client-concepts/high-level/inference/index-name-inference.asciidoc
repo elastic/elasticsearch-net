@@ -81,8 +81,7 @@ on the request
 ----
 Uri requestUri = null;
 
-var client = TestClient.GetInMemoryClient(s => s
-    .OnRequestCompleted(r => { requestUri = r.Uri; }));
+var client = TestClient.GetInMemoryClient(s=>s.OnRequestCompleted(r => { requestUri = r.Uri; }));
 
 var response = client.Search<Project>(s => s.Index("some-other-index")); <1>
 
@@ -97,7 +96,7 @@ index name and any index name specified for the POCO type using `.MapDefaultType
 
 [source,csharp]
 ----
-var client = TestClient.GetInMemoryClient(s =>
+var client = TestClient.GetInMemoryClient(s=>
     new ConnectionSettings()
         .DefaultIndex("defaultindex")
         .MapDefaultTypeIndices(m => m

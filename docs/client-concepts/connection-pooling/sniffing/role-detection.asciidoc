@@ -142,8 +142,9 @@ await pipeline.SniffAsync();
 
 [source,csharp]
 ----
-this._settings =
-    this._cluster.Node.Client(u => new SniffingConnectionPool(new[] {u}), c => c.PrettyJson()).ConnectionSettings;
+var uri = TestClient.CreateUri(this._cluster.Node.Port);
+
+this._settings = new ConnectionSettings(new SniffingConnectionPool(new[] { uri }));
 
 var pipeline = new RequestPipeline(this._settings, DateTimeProvider.Default, new MemoryStreamFactory(),
     new SearchRequestParameters());

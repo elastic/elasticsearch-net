@@ -55,7 +55,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 var max = response.Aggs.Max("max_commits");
 max.Should().NotBeNull();
 max.Value.Should().BeGreaterThan(0);

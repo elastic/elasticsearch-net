@@ -283,34 +283,36 @@ var asyncResponse = await client.SearchAsync<object>(s => s
 
 list.Count.Should().Be(4);
 
-list.ShouldAllBeEquivalentTo(new []
-            {
-                "POST http://localhost:9200/_search?scroll=2m \n{\"sort\":[{\"_doc\":{\"order\":\"asc\"}}]}",
-                "Status: 200\n------------------------------\n",
-                "POST http://localhost:9200/_search?scroll=2m \n{\"sort\":[{\"_doc\":{\"order\":\"asc\"}}]}",
-                "Status: 200\n------------------------------\n"
-            });
+list.ShouldAllBeEquivalentTo(new[]
+{
+    "POST http://localhost:9200/_search?scroll=2m \n{\"sort\":[{\"_doc\":{\"order\":\"asc\"}}]}",
+    "Status: 200\n------------------------------\n",
+    "POST http://localhost:9200/_search?scroll=2m \n{\"sort\":[{\"_doc\":{\"order\":\"asc\"}}]}",
+    "Status: 200\n------------------------------\n"
+});
 ----
 <1> Here we use `InMemoryConnection`; in reality you would use another type of `IConnection` that actually makes a request.
 
 [[configuring-ssl]]
 === Configuring SSL
 
-SSL must be configured outside of the client using .NET's http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager]
-class and setting the http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager.servercertificatevalidationcallback.aspx[ServerCertificateValidationCallback]
-property.
+SSL can be configured via the `ServerCertificateValidationCallback` property on either `ServerPointManager` or `HttpClientHandler`
+depending on which version of the .NET framework is in use.
 
-The bare minimum to make .NET accept self-signed SSL certs that are not in the Windows CA store would be to have the callback simply return `true`:
+On the full .NET Framework, this must be done outside of the client using .NET's built-in http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager] class:
 
 [source,csharp]
 ----
 ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true;
 ----
 
+The bare minimum to make .NET accept self-signed SSL certs that are not in the Windows CA store would be to have the callback simply return `true`.
+
 However, this will accept **all** requests from the AppDomain to untrusted SSL sites,
 therefore **we recommend doing some minimal introspection on the passed in certificate.**
 
-IMPORTANT: Using `ServicePointManager` does not work on **Core CLR** as the request does not go through `ServicePointManager`; please file an {github}/issues[issue] if you need support for certificate validation on Core CLR.
+If running on Core CLR, then a custom connection type must be created by deriving from `HttpConnection` and
+overriding the `CreateHttpClientHandler` method in order to set the `ServerCertificateCustomValidationCallback` property.
 
 === Overriding default Json.NET behavior
 

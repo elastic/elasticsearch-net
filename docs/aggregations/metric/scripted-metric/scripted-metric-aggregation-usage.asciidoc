@@ -75,7 +75,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 var sumTheHardWay = response.Aggs.ScriptedMetric("sum_the_hard_way");
 sumTheHardWay.Should().NotBeNull();
 sumTheHardWay.Value<int>().Should().BeGreaterThan(0);
