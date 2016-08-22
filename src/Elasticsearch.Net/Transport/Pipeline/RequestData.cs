@@ -71,7 +71,7 @@ namespace Elasticsearch.Net
 			this.HttpCompression = global.EnableHttpCompression;
 			this.ContentType = local?.ContentType ?? MimeType;
 			this.Accept = local?.Accept ?? MimeType;
-			this.Headers = global.Headers;
+			this.Headers = new NameValueCollection(global.Headers ?? new NameValueCollection());
 			this.RunAs = local?.RunAs;
 
 			this.RequestTimeout = local?.RequestTimeout ?? global.RequestTimeout;

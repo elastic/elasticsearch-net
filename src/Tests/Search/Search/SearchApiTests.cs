@@ -11,8 +11,7 @@ using Xunit;
 
 namespace Tests.Search.Search
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class SearchApiTests : ApiIntegrationTestBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	public class SearchApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		public SearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -102,7 +101,6 @@ namespace Tests.Search.Search
 		};
 	}
 
-	[Collection(TypeOfCluster.ReadOnly)]
 	public class SearchApiFieldsTests : SearchApiTests
 	{
 		public SearchApiFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -187,7 +185,6 @@ namespace Tests.Search.Search
 		}
 	}
 
-	[Collection(TypeOfCluster.ReadOnly)]
 	public class SearchApiContainingConditionlessQueryContainerTests : SearchApiTests
 	{
 		public SearchApiContainingConditionlessQueryContainerTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -265,11 +262,10 @@ namespace Tests.Search.Search
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 		}
 	}
 
-	[Collection(TypeOfCluster.ReadOnly)]
 	public class SearchApiNullQueryContainerTests : SearchApiTests
 	{
 		public SearchApiNullQueryContainerTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -297,11 +293,10 @@ namespace Tests.Search.Search
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 		}
 	}
 
-	[Collection(TypeOfCluster.ReadOnly)]
 	public class SearchApiNullQueriesInQueryContainerTests : SearchApiTests
 	{
 		public SearchApiNullQueriesInQueryContainerTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -342,7 +337,7 @@ namespace Tests.Search.Search
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 		}
 	}
 }

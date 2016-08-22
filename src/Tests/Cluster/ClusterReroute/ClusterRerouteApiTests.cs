@@ -10,11 +10,10 @@ using Xunit;
 
 namespace Tests.Cluster.ClusterReroute
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class ClusterRerouteApiTests : ApiIntegrationTestBase<IClusterRerouteResponse, IClusterRerouteRequest, ClusterRerouteDescriptor, ClusterRerouteRequest>
+	public class ClusterRerouteApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IClusterRerouteResponse, IClusterRerouteRequest, ClusterRerouteDescriptor, ClusterRerouteRequest>
 	{
 
-		public ClusterRerouteApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public ClusterRerouteApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ClusterReroute(f),
 			fluentAsync: (client, f) => client.ClusterRerouteAsync(f),
@@ -111,7 +110,7 @@ namespace Tests.Cluster.ClusterReroute
 
 		protected override void ExpectResponse(IClusterRerouteResponse response)
 		{
-			response.IsValid.Should().BeFalse();
+			response.ShouldNotBeValid();
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Status.Should().Be(400);
 			response.ServerError.Error.Should().NotBeNull();

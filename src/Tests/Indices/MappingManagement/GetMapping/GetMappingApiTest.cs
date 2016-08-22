@@ -11,8 +11,7 @@ using static Nest.Infer;
 
 namespace Tests.Indices.MappingManagement.GetMapping
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class GetMappingApiTests : ApiIntegrationTestBase<IGetMappingResponse, IGetMappingRequest, GetMappingDescriptor<Project>, GetMappingRequest>
+	public class GetMappingApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetMappingResponse, IGetMappingRequest, GetMappingDescriptor<Project>, GetMappingRequest>
 	{
 		public GetMappingApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -56,8 +55,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		}
 	}
 
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class GetMappingNonExistentIndexApiTests : ApiIntegrationTestBase<IGetMappingResponse, IGetMappingRequest, GetMappingDescriptor<Project>, GetMappingRequest>
+	public class GetMappingNonExistentIndexApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetMappingResponse, IGetMappingRequest, GetMappingDescriptor<Project>, GetMappingRequest>
 	{
 		private string _nonExistentIndex = "non-existent-index";
 

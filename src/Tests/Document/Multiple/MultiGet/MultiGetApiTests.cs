@@ -12,8 +12,7 @@ using static Nest.Infer;
 
 namespace Tests.Document.Multiple.MultiGet
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class MultiGetSimplifiedApiTests : ApiIntegrationTestBase<IMultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
+	public class MultiGetSimplifiedApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IMultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
 	{
 		public MultiGetSimplifiedApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
@@ -62,8 +61,7 @@ namespace Tests.Document.Multiple.MultiGet
 		};
 	}
 
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class MultiGetApiTests : ApiIntegrationTestBase<IMultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
+	public class MultiGetApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IMultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
 	{
 		public MultiGetApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
@@ -111,8 +109,7 @@ namespace Tests.Document.Multiple.MultiGet
 	}
 
 
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class MultiGetMetadataApiTests : ApiIntegrationTestBase<IMultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
+	public class MultiGetMetadataApiTests : ApiIntegrationTestBase<ReadOnlyCluster,IMultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
 	{
 		public MultiGetMetadataApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
@@ -163,8 +160,7 @@ namespace Tests.Document.Multiple.MultiGet
 		}
 	}
 
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class MultiGetParentApiTests : ApiIntegrationTestBase<IMultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
+	public class MultiGetParentApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IMultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
 	{
 		public MultiGetParentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

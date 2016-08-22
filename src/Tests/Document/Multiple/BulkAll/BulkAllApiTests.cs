@@ -11,8 +11,7 @@ using Xunit;
 
 namespace Tests.Document.Multiple.BulkAll
 {
-	[Collection(TypeOfCluster.Indexing)]
-	public class BulkAllApiTests : SerializationTestBase
+	public class BulkAllApiTests : SerializationTestBase, IClusterFixture<WritableCluster>
 	{
 		private class SmallObject
 		{
@@ -29,9 +28,9 @@ namespace Tests.Document.Multiple.BulkAll
 				yield return new SmallObject() { Id = i };
 		}
 
-		public BulkAllApiTests(IndexingCluster cluster, EndpointUsage usage)
+		public BulkAllApiTests(WritableCluster cluster, EndpointUsage usage)
 		{
-			this._client = cluster.Client();
+			this._client = cluster.Client;
 		}
 
 		[I] public void ReturnsExpectedResponse()

@@ -9,16 +9,15 @@ using Xunit;
 
 namespace Tests.XPack.Security.Role
 {
-	[Collection(TypeOfCluster.Shield)]
+	[SkipVersion("<2.3.0", "")]
 	public class RoleCrudTests
-		: CrudTestBase<IPutRoleResponse, IGetRoleResponse, IPutRoleResponse, IDeleteRoleResponse>
+		: CrudTestBase<XPackCluster, IPutRoleResponse, IGetRoleResponse, IPutRoleResponse, IDeleteRoleResponse>
 	{
 		private string[] _roles = { "user" };
-		public RoleCrudTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public RoleCrudTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		//callisolated value can sometimes start with a digit which is not allowed for rolenames
 		private string CreateRoleName(string s) => $"role-{s}";
-
 
 		protected override LazyResponses Create() => Calls<PutRoleDescriptor, PutRoleRequest, IPutRoleRequest, IPutRoleResponse>(
 			CreateInitializer,

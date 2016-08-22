@@ -54,42 +54,6 @@
   "dependencies": {},
   "commands": {},
   "frameworks": {
-    "net46": {
-      "buildOptions": {
-        "define": [
-          "NET46"
-        ]
-      },
-      "frameworkAssemblies": {
-        "System": {
-          "type": "build"
-        },
-        "System.Runtime": {
-          "type": "build"
-        },
-        "System.Runtime.Serialization": {
-          "type": "build"
-        }
-      }
-    },
-    "net45": {
-      "buildOptions": {
-        "define": [
-          "NET45"
-        ]
-      },
-      "frameworkAssemblies": {
-        "System": {
-          "type": "build"
-        },
-        "System.Runtime": {
-          "type": "build"
-        },
-        "System.Runtime.Serialization": {
-          "type": "build"
-        }
-      }
-    },
     "netstandard1.3": {
       "buildOptions": {
         "define": [

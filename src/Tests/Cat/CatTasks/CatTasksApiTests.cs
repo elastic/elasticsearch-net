@@ -6,8 +6,7 @@ using Xunit;
 
 namespace Tests.Cat.CatTasks
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class CatTasksApiTests : ApiIntegrationTestBase<ICatResponse<CatTasksRecord>, ICatTasksRequest, CatTasksDescriptor, CatTasksRequest>
+	public class CatTasksApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatTasksRecord>, ICatTasksRequest, CatTasksDescriptor, CatTasksRequest>
 	{
 		public CatTasksApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

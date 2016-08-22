@@ -56,8 +56,8 @@ namespace Nest
 				new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetConverter(request))),
 				this.LowLevelDispatch.MgetDispatchAsync<MultiGetResponse>
 			);
-		private MultiGetResponse DeserializeMultiGetResponse(IApiCallDetails response, Stream stream, JsonConverter converter)=>
-			new JsonNetSerializer(this.ConnectionSettings, converter).Deserialize<MultiGetResponse>(stream);
+		private MultiGetResponse DeserializeMultiGetResponse(IApiCallDetails response, Stream stream, JsonConverter converter) =>
+			this.ConnectionSettings.StatefulSerializer(converter).Deserialize<MultiGetResponse>(stream);
 
 		private JsonConverter CreateCovariantMultiGetConverter(IMultiGetRequest descriptor) => new MultiGetHitJsonConverter(descriptor);
 

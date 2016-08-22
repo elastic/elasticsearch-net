@@ -2,32 +2,26 @@
 #r @"FakeLib.dll"
 
 #load @"Paths.fsx"
-#load @"Projects.fsx"
 #load @"Versioning.fsx"
-#load @"Building.fsx"
-
-open System
-open System.IO
 
 open Fake 
-open FSharp.Data
 
 open Paths
 open Projects
 open Versioning
-open Building
 
 type Release() = 
     static member NugetPack() =
-        DotNetProject.All
+        DotNetProject.AllPublishable
         |> Seq.iter(fun p ->
             CreateDir Paths.NugetOutput
+
             let name = p.Name;
             let nuspec = (sprintf @"build\%s.nuspec" name)
-            let outputDirectory = sprintf "%s/%s/" Paths.BuildOutput name
-            let nugetOutFile =  Paths.Output(sprintf "%s/%s.%s.nupkg" name name Versioning.FileVersion)
-            Tooling.Nuget.Exec ["pack"; nuspec; "-version"; Versioning.FileVersion; "-outputdirectory"; outputDirectory; ] |> ignore
-            traceFAKE "%s" outputDirectory
+            let nugetOutFile =  Paths.Output(sprintf "%s.%s.nupkg" name Versioning.FileVersion)
+
+            Tooling.Nuget.Exec ["pack"; nuspec; "-version"; Versioning.FileVersion; "-outputdirectory"; Paths.BuildOutput; ] |> ignore
+            traceFAKE "%s" Paths.BuildOutput
             MoveFile Paths.NugetOutput nugetOutFile
         )
 

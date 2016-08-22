@@ -11,11 +11,10 @@ using Xunit;
 
 namespace Tests.Search.Percolator.UnregisterPercolator
 {
-	[Collection(TypeOfCluster.Indexing)]
-	[SkipVersion("5.0.0-alpha2,5.0.0-alpha3", "deprecated")]
-	public class UnregisterPercolatorApiTests : ApiIntegrationTestBase<IUnregisterPercolatorResponse, IUnregisterPercolatorRequest, UnregisterPercolatorDescriptor<Project>, UnregisterPercolatorRequest>
+	[SkipVersion(">5.0.0-alpha1", "deprecated")]
+	public class UnregisterPercolatorApiTests : ApiIntegrationTestBase<WritableCluster, IUnregisterPercolatorResponse, IUnregisterPercolatorRequest, UnregisterPercolatorDescriptor<Project>, UnregisterPercolatorRequest>
 	{
-		public UnregisterPercolatorApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		public UnregisterPercolatorApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 
 		}

@@ -8,8 +8,8 @@ using static Nest.Infer;
 
 namespace Tests.Indices.IndexManagement.GetIndex
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class GetIndexApiTests : ApiIntegrationTestBase<IGetIndexResponse, IGetIndexRequest, GetIndexDescriptor, GetIndexRequest>
+	public class GetIndexApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IGetIndexResponse, IGetIndexRequest, GetIndexDescriptor, GetIndexRequest>
 	{
 		public GetIndexApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
@@ -28,8 +28,8 @@ namespace Tests.Indices.IndexManagement.GetIndex
 	}
 
 
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class GetAllIndicesApiTests : ApiTestBase<IGetIndexResponse, IGetIndexRequest, GetIndexDescriptor, GetIndexRequest>
+	public class GetAllIndicesApiTests
+		: ApiTestBase<ReadOnlyCluster,IGetIndexResponse, IGetIndexRequest, GetIndexDescriptor, GetIndexRequest>
 	{
 		public GetAllIndicesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

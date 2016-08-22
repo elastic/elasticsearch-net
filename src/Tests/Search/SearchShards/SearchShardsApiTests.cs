@@ -8,8 +8,7 @@ using Xunit;
 
 namespace Tests.Search.SearchShards
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class SearchShardsApiTests : ApiIntegrationTestBase<ISearchShardsResponse, ISearchShardsRequest, SearchShardsDescriptor<Project>, SearchShardsRequest<Project>>
+	public class SearchShardsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchShardsResponse, ISearchShardsRequest, SearchShardsDescriptor<Project>, SearchShardsRequest<Project>>
 	{
 		public SearchShardsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -19,7 +18,7 @@ namespace Tests.Search.SearchShards
 			request: (c, r) => c.SearchShards(r),
 			requestAsync: (c, r) => c.SearchShardsAsync(r)
 		);
-		
+
 
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;

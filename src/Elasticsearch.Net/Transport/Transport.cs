@@ -55,6 +55,7 @@ namespace Elasticsearch.Net
 				pipeline.FirstPoolUsage(this.Settings.BootstrapLock);
 
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
+				this.Settings.OnRequestDataCreated?.Invoke(requestData);
 				ElasticsearchResponse<TReturn> response = null;
 
 				var seenExceptions = new List<PipelineException>();
@@ -119,6 +120,7 @@ namespace Elasticsearch.Net
 				await pipeline.FirstPoolUsageAsync(this.Settings.BootstrapLock, cancellationToken).ConfigureAwait(false);
 
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
+				this.Settings.OnRequestDataCreated?.Invoke(requestData);
 				ElasticsearchResponse<TReturn> response = null;
 
 				var seenExceptions = new List<PipelineException>();

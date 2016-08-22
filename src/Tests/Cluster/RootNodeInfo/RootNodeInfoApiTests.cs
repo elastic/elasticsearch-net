@@ -7,8 +7,7 @@ using Xunit;
 
 namespace Tests.Cluster.RootNodeInfo
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class RootNodeInfoApiTests : ApiIntegrationTestBase<IRootNodeInfoResponse, IRootNodeInfoRequest, RootNodeInfoDescriptor, RootNodeInfoRequest>
+	public class RootNodeInfoApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IRootNodeInfoResponse, IRootNodeInfoRequest, RootNodeInfoDescriptor, RootNodeInfoRequest>
 	{
 		public RootNodeInfoApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

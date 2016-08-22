@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
@@ -10,15 +11,15 @@ using static Nest.Infer;
 namespace Tests.Aggregations.Bucket.Filters
 {
 	/**
-	 * Defines a multi bucket aggregations where each bucket is associated with a filter. 
+	 * Defines a multi bucket aggregations where each bucket is associated with a filter.
 	 * Each bucket will collect all documents that match its associated filter. For documents
 	 * that do not match any filter, these will be collected in the _other bucket_.
 	 *
 	 * Be sure to read the Elasticsearch documentation {ref_current}/search-aggregations-bucket-filters-aggregation.html[Filters Aggregation]
 	*/
 
-	/**[float] 
-	* == Named filters 
+	/**[float]
+	* == Named filters
 	*/
 	public class FiltersAggregationUsageTests : AggregationUsageTestBase
 	{
@@ -86,10 +87,10 @@ namespace Tests.Aggregations.Bucket.Filters
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			/** === Handling Responses
-			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily
 			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 			*/
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			var filterAgg = response.Aggs.Filters("projects_by_state");
 			filterAgg.Should().NotBeNull();
@@ -112,8 +113,8 @@ namespace Tests.Aggregations.Bucket.Filters
 		}
 	}
 
-	/**[float] 
-	*== Anonymous filters 
+	/**[float]
+	*== Anonymous filters
 	*/
 	public class AnonymousUsage : AggregationUsageTestBase
 	{
@@ -177,10 +178,10 @@ namespace Tests.Aggregations.Bucket.Filters
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			/** === Handling Responses
-			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily
 			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 			*/
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			var filterAgg = response.Aggs.Filters("projects_by_state");
 			filterAgg.Should().NotBeNull();
@@ -196,8 +197,8 @@ namespace Tests.Aggregations.Bucket.Filters
 		}
 	}
 
-	/**[float]  
-	* == Empty Filters 
+	/**[float]
+	* == Empty Filters
 	*/
 	public class EmptyFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
@@ -235,12 +236,12 @@ namespace Tests.Aggregations.Bucket.Filters
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			response.Aggs.Filters("empty_filters").Buckets.Should().BeEmpty();
 		}
 	}
 
-	/**[float] 
+	/**[float]
 	* == Conditionless Filters */
 	public class ConditionlessFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
@@ -283,7 +284,7 @@ namespace Tests.Aggregations.Bucket.Filters
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			response.Aggs.Filters("conditionless_filters").Buckets.Should().BeEmpty();
 		}
 	}

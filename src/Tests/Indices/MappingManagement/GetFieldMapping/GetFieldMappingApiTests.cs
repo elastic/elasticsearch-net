@@ -8,9 +8,8 @@ using Xunit;
 
 namespace Tests.Indices.MappingManagement.GetFieldMapping
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class GetFieldMappingApiTests 
-		: ApiIntegrationTestBase<IGetFieldMappingResponse, IGetFieldMappingRequest, GetFieldMappingDescriptor<Project>, GetFieldMappingRequest>
+	public class GetFieldMappingApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IGetFieldMappingResponse, IGetFieldMappingRequest, GetFieldMappingDescriptor<Project>, GetFieldMappingRequest>
 	{
 		private static readonly Fields Fields = Infer.Fields<Project>(p => p.Name, p => p.Tags);
 

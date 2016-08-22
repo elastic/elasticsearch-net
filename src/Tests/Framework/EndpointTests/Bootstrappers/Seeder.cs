@@ -13,7 +13,7 @@ namespace Tests.Framework.Integration
 
 		public Seeder(ElasticsearchNode node)
 		{
-			this.Client = node.Client();
+			this.Client = node.Client;
 		}
 
 		public void SeedNode()

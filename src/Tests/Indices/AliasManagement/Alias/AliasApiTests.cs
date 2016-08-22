@@ -8,16 +8,9 @@ using Xunit;
 
 namespace Tests.Indices.AliasManagement.Alias
 {
-	[Collection(TypeOfCluster.Indexing)]
-	public class AliasApiTests : ApiIntegrationTestBase<IBulkAliasResponse, IBulkAliasRequest, BulkAliasDescriptor, BulkAliasRequest>
+	public class AliasApiTests : ApiIntegrationAgainstNewIndexTestBase<WritableCluster, IBulkAliasResponse, IBulkAliasRequest, BulkAliasDescriptor, BulkAliasRequest>
 	{
-		public AliasApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
-		{
-			foreach (var index in values.Values)
-				client.CreateIndex(index);
-		}
+		public AliasApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Alias(f),
@@ -33,12 +26,12 @@ namespace Tests.Indices.AliasManagement.Alias
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override object ExpectJson => new 
+		protected override object ExpectJson => new
 		{
 			actions = new object[]
 			{
-				new Dictionary<string, object> { { "add", new { alias = "alias", index = CallIsolatedValue, index_routing="x", search_routing="y"} } }, 
-				new Dictionary<string, object> { { "remove", new { alias = "alias", index = CallIsolatedValue} } }, 
+				new Dictionary<string, object> { { "add", new { alias = "alias", index = CallIsolatedValue, index_routing="x", search_routing="y"} } },
+				new Dictionary<string, object> { { "remove", new { alias = "alias", index = CallIsolatedValue} } },
 			}
 		};
 

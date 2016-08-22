@@ -58,48 +58,6 @@
     "Newtonsoft.Json": "9.0.1"
   },
   "frameworks": {
-    "net46": {
-      "buildOptions": {
-        "define": [
-          "NET46"
-        ]
-      },
-      "frameworkAssemblies": {
-        "System.Dynamic.Runtime": {
-          "type": "build"
-        },
-        "System.Runtime": {
-          "type": "build"
-        },
-        "System.Runtime.Serialization": {
-          "type": "build"
-        },
-        "System.ServiceModel": {
-          "type": "build"
-        }
-      }
-    },
-    "net45": {
-      "buildOptions": {
-        "define": [
-          "NET45"
-        ]
-      },
-      "frameworkAssemblies": {
-        "System.Dynamic.Runtime": {
-          "type": "build"
-        },
-        "System.Runtime": {
-          "type": "build"
-        },
-        "System.Runtime.Serialization": {
-          "type": "build"
-        },
-        "System.ServiceModel": {
-          "type": "build"
-        }
-      }
-    },
     "netstandard1.3": {
       "buildOptions": {
         "define": [

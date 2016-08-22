@@ -12,10 +12,9 @@ using static Nest.Infer;
 
 namespace Tests.Document.Multiple.DeleteByQuery
 {
-	[Collection(TypeOfCluster.OwnIndex)]
-	public class DeleteByQueryApiTests : ApiIntegrationTestBase<IDeleteByQueryResponse, IDeleteByQueryRequest, DeleteByQueryDescriptor<Project>, DeleteByQueryRequest>
+	public class DeleteByQueryApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IDeleteByQueryResponse, IDeleteByQueryRequest, DeleteByQueryDescriptor<Project>, DeleteByQueryRequest>
 	{
-		public DeleteByQueryApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteByQueryApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -100,10 +99,9 @@ namespace Tests.Document.Multiple.DeleteByQuery
 	}
 
 
-	[Collection(TypeOfCluster.OwnIndex)]
 	public class DeleteByQueryWaitForCompletionApiTests : DeleteByQueryApiTests
 	{
-		public DeleteByQueryWaitForCompletionApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteByQueryWaitForCompletionApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override string UrlPath => $"/{CallIsolatedValue}/project/_delete_by_query?wait_for_completion=false&conflicts=proceed";
 
@@ -131,10 +129,9 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		}
 	}
 
-	[Collection(TypeOfCluster.OwnIndex)]
 	public class DeleteByQueryWithFailuresApiTests : DeleteByQueryApiTests
 	{
-		public DeleteByQueryWithFailuresApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteByQueryWithFailuresApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

@@ -9,37 +9,44 @@ using Xunit;
 
 namespace Tests.Indices.AliasManagement.GetIndicesPointingToAlias
 {
-	[Collection(TypeOfCluster.OwnIndex)]
-	public class GetIndicesPointingToAliasTests
+	public class GetIndicesPointingToAliasTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{
-		private readonly OwnIndexCluster _cluster;
+		private readonly WritableCluster _cluster;
 		private readonly IElasticClient _client;
-		private static readonly string Alias = "alias";
+		private static string Unique = RandomString();
 
-		private static readonly string[] Indices = { "alias-index-1", "alias-index-2", "alias-index-3" };
+		private static readonly string Alias = "alias-" + Unique;
 
-		public GetIndicesPointingToAliasTests(OwnIndexCluster cluster)
+		private static readonly string[] Indices = {
+			$"alias-index-{Unique}-1",
+			$"alias-index-{Unique}-2",
+			$"alias-index-{Unique}-3"
+		};
+
+		public GetIndicesPointingToAliasTests(WritableCluster cluster) : base(cluster)
 		{
 			_cluster = cluster;
-			_client = _cluster.Client();
+			_client = _cluster.Client;
 
 			foreach (var index in Indices)
 			{
-				if (_client.IndexExists(index).Exists)
-					_client.DeleteIndex(index);
+				if (_client.IndexExists(index).Exists) continue;
 
-				var createResponse = _client.CreateIndex(index, c => c
-					.Settings(s => s
-						.NumberOfShards(1)
-						.NumberOfReplicas(0)
-					)
-					.Aliases(a => a
-						.Alias(Alias)
-					)
-				);
+				lock (Unique)
+				{
+					if (_client.IndexExists(index).Exists) continue;
 
-				if (!createResponse.IsValid)
-					throw new Exception("problem creating index for integration test");
+					var createResponse = _client.CreateIndex(index, c => c
+						.Settings(s => s
+							.NumberOfShards(1)
+							.NumberOfReplicas(0)
+						)
+						.Aliases(a => a
+							.Alias(Alias)
+						)
+					);
+					createResponse.ShouldBeValid();
+				}
 			}
 		}
 

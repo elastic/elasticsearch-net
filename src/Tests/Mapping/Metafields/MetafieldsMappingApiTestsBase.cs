@@ -11,8 +11,8 @@ using Xunit;
 
 namespace Tests.Mapping.Metafields
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public abstract class MetafieldsMappingApiTestsBase : ApiTestBase<IPutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
+	public abstract class MetafieldsMappingApiTestsBase
+		: ApiTestBase<ReadOnlyCluster, IPutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
 	{
 		public MetafieldsMappingApiTestsBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

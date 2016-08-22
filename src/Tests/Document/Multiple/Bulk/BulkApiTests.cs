@@ -10,10 +10,9 @@ using Xunit;
 
 namespace Tests.Document.Multiple.Bulk
 {
-	[Collection(TypeOfCluster.Indexing)]
-	public class BulkApiTests : ApiIntegrationTestBase<IBulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
+	public class BulkApiTests : ApiIntegrationTestBase<WritableCluster, IBulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
 	{
-		public BulkApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public BulkApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Bulk(f),
 			fluentAsync: (client, f) => client.BulkAsync(f),

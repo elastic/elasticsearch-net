@@ -2,6 +2,7 @@
 using System.Linq;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
@@ -46,7 +47,7 @@ namespace Tests.Aggregations.Pipeline.Derivative
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
 			projectsPerMonth.Should().NotBeNull();
