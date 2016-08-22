@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Tests.Framework;
+using Xunit;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
@@ -54,10 +60,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		}
 
 		private IRequestPipeline CreatePipeline(
-			Func<IEnumerable<Uri>, IConnectionPool> setupPool, Func<ConnectionSettings, ConnectionSettings> settingsSelector = null, IDateTimeProvider dateTimeProvider = null)
+			Func<IEnumerable<Uri>, IConnectionPool> setupPool, Func<ConnectionSettings, ConnectionSettings> settingsSelector = null, IDateTimeProvider dateTimeProvider = null, InMemoryConnection connection = null)
 		{
 			var pool = setupPool(new[] { TestClient.CreateUri(), TestClient.CreateUri(9201) });
-			var settings = new ConnectionSettings(pool, new InMemoryConnection());
+			var settings = new ConnectionSettings(pool, connection ?? new InMemoryConnection());
 			settings = settingsSelector?.Invoke(settings) ?? settings;
 			return new FixedPipelineFactory(settings, dateTimeProvider ?? DateTimeProvider.Default).Pipeline;
 		}
@@ -85,6 +91,68 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			sniffingPipeline = CreatePipeline(uris => new SniffingConnectionPool(uris), s => s.SniffOnStartup(false)); //<1> Disable sniffing on startup
 			sniffingPipeline.FirstPoolUsageNeedsSniffing.Should().BeFalse();
 		}
+
+        /**==== Wait for first Sniff
+         * 
+         * All threads wait for the sniff on startup to finish, waiting the request timeout period. A
+         * https://msdn.microsoft.com/en-us/library/system.threading.semaphoreslim(v=vs.110).aspx[`SemaphoreSlim`] 
+         * is used to block threads until the sniff finishes and waiting threads release the `SemaphoreSlim` appropriately.
+         */
+        [U]
+	    public void FirstUsageCheckConcurrentThreads()
+	    {
+	        var response = new
+	        {
+	            cluster_name = "elasticsearch",
+	            nodes = new
+	            {
+	                node1 = new
+	                {
+	                    name = "Node Name 1",
+	                    transport_address = "127.0.0.1:9300",
+	                    host = "127.0.0.1",
+	                    ip = "127.0.01",
+	                    version = "5.0.0-alpha3",
+	                    build = "e455fd0",
+	                    http_address = "127.0.0.1:9200",
+	                    settings = new JObject
+	                    {
+	                        {"client.type", "node"},
+	                        {"cluster.name", "elasticsearch"},
+	                        {"config.ignore_system_properties", "true"},
+	                        {"name", "Node Name 1"},
+	                        {"path.home", "c:\\elasticsearch\\elasticsearch"},
+	                        {"path.logs", "c:/ elasticsearch/logs"}
+	                    }
+	                }
+	            }
+	        };
+
+	        var responseBody = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(response));
+
+	        var inMemoryConnection = new WaitingInMemoryConnection(
+                TimeSpan.FromSeconds(1), 
+                responseBody);
+
+	        var sniffingPipeline = CreatePipeline(
+                uris => new SniffingConnectionPool(uris), 
+                connection: inMemoryConnection, 
+                settingsSelector: s => s.RequestTimeout(TimeSpan.FromSeconds(2)));
+       
+            var semaphoreSlim = new SemaphoreSlim(1, 1);
+
+            /**
+             * start three tasks that will initiate a sniff on startup. The first task will successfully
+             * sniff on startup with the remaining two waiting tasks exiting without exception and releasing
+             * the `SemaphoreSlim`.
+             */
+            var task1 = Task.Run(() => sniffingPipeline.FirstPoolUsage(semaphoreSlim));
+            var task2 = Task.Run(() => sniffingPipeline.FirstPoolUsage(semaphoreSlim));
+            var task3 = Task.Run(() => sniffingPipeline.FirstPoolUsage(semaphoreSlim));
+
+	        var exception = Record.Exception(() => Task.WaitAll(task1, task2, task3));
+	        exception.Should().BeNull();
+	    }
 
 		/**==== Sniffing on Connection Failure */
 		[U]

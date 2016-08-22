@@ -100,7 +100,7 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			);
 
 			/**
-			* here for each hit we'll call the delegate passed to `ConcreteTypeSelector where
+			* here for each hit we'll call the delegate passed to `ConcreteTypeSelector` where
 			* - `d` is a representation of the `_source` exposed as a `dynamic` type
 			* - a typed `h` which represents the encapsulating hit of the source i.e. `Hit<dynamic>`
 			*/
