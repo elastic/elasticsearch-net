@@ -18,6 +18,8 @@ module Tests =
         )
 
         let testPath = Paths.Source "Tests/project.json"
+        DotNet.Exec ["restore"; testPath; "--verbosity Warning"]
+        DotNet.Exec ["build"; testPath; "--configuration Release"; "-f"; "netcoreapp1.0"]
         DotNet.Exec ["test"; testPath; "-parallel"; parallelization; "-xml"; Paths.Output("TestResults-Core-Clr.xml")]
 
     let private testDesktopClr parallelization = 
