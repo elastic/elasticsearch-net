@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Tests.Search.Percolator.PercolateCount
 {
+	[SkipVersion(">5.0.0-alpha1", "deprecated")]
 	public class PercolateCountApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, IPercolateCountResponse, IPercolateCountRequest<Project>, PercolateCountDescriptor<Project>, PercolateCountRequest<Project>>
 	{
@@ -75,6 +76,7 @@ namespace Tests.Search.Percolator.PercolateCount
 		};
 	}
 
+	[SkipVersion(">5.0.0-alpha1", "deprecated")]
 	public class PercolateCountExistingDocApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, IPercolateCountResponse, IPercolateCountRequest<Project>, PercolateCountDescriptor<Project>, PercolateCountRequest<Project>>
 	{

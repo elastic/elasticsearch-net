@@ -13,7 +13,8 @@ using Xunit;
 
 namespace Tests.Search.Percolator.MultiPercolate
 {
-	public class MultiPercolateApiTests : ApiIntegrationTestBase<WritableCluster, IMultiPercolateResponse, IMultiPercolateRequest, MultiPercolateDescriptor, MultiPercolateRequest>
+    [SkipVersion(">5.0.0-alpha1", "Deprecated. percolation changed in 5 to support percolate queries. Remove?")]
+    public class MultiPercolateApiTests : ApiIntegrationTestBase<WritableCluster, IMultiPercolateResponse, IMultiPercolateRequest, MultiPercolateDescriptor, MultiPercolateRequest>
 	{
 		public MultiPercolateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
