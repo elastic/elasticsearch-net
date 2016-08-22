@@ -1923,36 +1923,12 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
-		///<summary>The name of the analyzer to use</summary>
-		public AnalyzeRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);
-		
-		
-		///<summary>A comma-separated list of character filters to use for the analysis</summary>
-		public AnalyzeRequestParameters CharFilter(params string[] char_filter) => this.AddQueryString("char_filter", char_filter);
-		
-		
-		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
-		public AnalyzeRequestParameters Field(string field) => this.AddQueryString("field", field);
-		
-		
-		///<summary>A comma-separated list of filters to use for the analysis</summary>
-		public AnalyzeRequestParameters Filter(params string[] filter) => this.AddQueryString("filter", filter);
-		
-		
 		///<summary>The name of the index to scope the operation</summary>
 		public AnalyzeRequestParameters Index(string index) => this.AddQueryString("index", index);
 		
 		
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public AnalyzeRequestParameters PreferLocal(bool prefer_local) => this.AddQueryString("prefer_local", prefer_local);
-		
-		
-		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
-		public AnalyzeRequestParameters Text(params string[] text) => this.AddQueryString("text", text);
-		
-		
-		///<summary>The name of the tokenizer to use for the analysis</summary>
-		public AnalyzeRequestParameters Tokenizer(string tokenizer) => this.AddQueryString("tokenizer", tokenizer);
 		
 		
 		///<summary>With `true`, outputs more advanced details. (default: false)</summary>

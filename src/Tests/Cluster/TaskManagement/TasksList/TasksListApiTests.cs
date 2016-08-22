@@ -9,8 +9,8 @@ using Xunit;
 
 namespace Tests.Cluster.TaskManagement.TasksList
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class TasksListApiTests : ApiIntegrationTestBase<ITasksListResponse, ITasksListRequest, TasksListDescriptor, TasksListRequest>
+	[SkipVersion("<2.3.0", "")]
+	public class TasksListApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ITasksListResponse, ITasksListRequest, TasksListDescriptor, TasksListRequest>
 	{
 		public TasksListApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

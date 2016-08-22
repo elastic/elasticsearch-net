@@ -13,10 +13,10 @@ namespace Profiling
 			// TODO move the tests.yml to a more general location and Add Existing Item -> Add Link?
 			TestClient.Configuration = new ProfilingTestConfiguration();
 
-			using (var cluster = new ProfilingCluster())
-			{
-				var client = cluster.Client();
-				var output = new ColoredConsoleWriter();
+            using (var cluster = new ProfilingCluster())
+            {
+                var client = cluster.Client;
+                var output = new ColoredConsoleWriter();
 
 				using (Snapshot.Create())
 				{

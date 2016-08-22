@@ -13,7 +13,7 @@ namespace Tests.Framework.Integration
 
 		public Seeder(ElasticsearchNode node)
 		{
-			this.Client = node.Client();
+			this.Client = node.Client;
 		}
 
 		public void SeedNode()
@@ -61,6 +61,12 @@ namespace Tests.Framework.Integration
 				Id = "1",
 				Query = new QueryContainer(new MatchAllQuery())
 			});
+			this.Client.Bulk(b => b
+				.IndexMany(
+					CommitActivity.CommitActivities,
+					(d, c) => d.Document(c).Parent(c.ProjectName)
+				)
+			);
 			this.Client.Refresh(Nest.Indices.Index(typeof(Project), typeof(Developer), typeof(PercolatedQuery)));
 		}
 
@@ -122,6 +128,13 @@ namespace Tests.Framework.Integration
 					.Map<Project>(m => m
 						.AutoMap()
 						.Properties(ProjectProperties)
+						.TimestampField(t => t
+							.Enabled()
+						)
+						.TtlField(t => t
+							.Enabled()
+							.Default("7d")
+						)
 					)
 					.Map<CommitActivity>(m => m
 						.AutoMap()

@@ -142,14 +142,14 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		/** === OnRequestCompleted
-         * You can pass a callback of type `Action<IApiCallDetails>` that can eavesdrop every time a response (good or bad) is created.
-         * If you have complex logging needs this is a good place to add that in.
-        */
+		 * You can pass a callback of type `Action<IApiCallDetails>` that can eavesdrop every time a response (good or bad) is created.
+		 * If you have complex logging needs this is a good place to add that in.
+		*/
 		[U]
 		public void OnRequestCompletedIsCalled()
 		{
 			var counter = 0;
-			var client = TestClient.GetClient(s => s.OnRequestCompleted(r => counter++));
+			var client = TestClient.GetInMemoryClient(s => s.OnRequestCompleted(r => counter++));
 			client.RootNodeInfo();
 			counter.Should().Be(1);
 			client.RootNodeInfoAsync();
@@ -297,7 +297,9 @@ namespace Tests.ClientConcepts.LowLevel
 
 			public int CallToModify { get; set; } = 0;
 
+#pragma warning disable CS0672 // Member overrides obsolete member
 			protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings) => ++CallToModify; //<1> Override ModifyJsonSerializerSettings if you need access to `JsonSerializerSettings`
+#pragma warning restore CS0672 // Member overrides obsolete member
 
 			public int CallToContractConverter { get; set; } = 0;
 
@@ -318,7 +320,9 @@ namespace Tests.ClientConcepts.LowLevel
 		public void ModifyJsonSerializerSettingsIsCalled()
 		{
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+#pragma warning disable CS0618 // Type or member is obsolete
 			var settings = new ConnectionSettings(connectionPool, new InMemoryConnection(), s => new MyJsonNetSerializer(s));
+#pragma warning restore CS0618 // Type or member is obsolete
 			var client = new ElasticClient(settings);
 			client.RootNodeInfo();
 			client.RootNodeInfo();

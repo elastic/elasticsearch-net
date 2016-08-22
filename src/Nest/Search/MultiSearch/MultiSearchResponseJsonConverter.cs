@@ -54,7 +54,7 @@ namespace Nest
 				var descriptor = m.Descriptor.Value;
 				var concreteTypeSelector = descriptor.TypeSelector;
 				var baseType = m.Descriptor.Value.ClrType ?? typeof(object);
-				
+
 				var generic = MakeDelegateMethodInfo.MakeGenericMethod(baseType);
 
 				if (concreteTypeSelector != null)
@@ -62,15 +62,15 @@ namespace Nest
 					var state = typeof(ConcreteTypeConverter<>).CreateGenericInstance(baseType, concreteTypeSelector) as JsonConverter;
 					if (state != null)
 					{
-						var elasticSerializer = new JsonNetSerializer(this._settings, state);
+						var elasticSerializer = this._settings.StatefulSerializer(state);
 
-						generic.Invoke(null, new object[] { m, elasticSerializer.Serializer, response.Responses, this._settings });
+						generic.Invoke(null, new object[] { m, elasticSerializer, response.Responses, this._settings });
 						continue;
 					}
 				}
 				generic.Invoke(null, new object[] { m, serializer, response.Responses, this._settings });
 			}
-			
+
 			return response;
 		}
 
@@ -86,9 +86,9 @@ namespace Nest
 		}
 
 		private static void CreateMultiHit<T>(
-			MultiHitTuple tuple, 
-			JsonSerializer serializer, 
-			IDictionary<string, object> collection, 
+			MultiHitTuple tuple,
+			JsonSerializer serializer,
+			IDictionary<string, object> collection,
 			IConnectionSettingsValues settings
 		)
 			where T : class

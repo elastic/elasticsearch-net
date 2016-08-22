@@ -18,7 +18,6 @@ namespace Tests.Search.Search.Rescoring
 	 *
 	 * See the Elasticsearch documentation on {ref_current}/search-request-rescore.html[Rescoring] for more detail.
 	 */
-	[Collection(TypeOfCluster.ReadOnly)]
 	public class RescoreUsageTests : SearchUsageTestBase
 	{
 		public RescoreUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
@@ -40,7 +41,7 @@ namespace Tests.Aggregations.Metric.Min
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var min = response.Aggs.Max("min_commits");
 			min.Should().NotBeNull();
 			min.Value.Should().BeGreaterThan(0);

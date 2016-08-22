@@ -87,7 +87,7 @@ namespace Nest
 		{
 			a.Sort = a.Sort ?? new List<ISort>();
 			var sort = sortSelector?.Invoke(new SortFieldDescriptor<T>());
-            if (sort != null) a.Sort.Add(sort);		
+			if (sort != null) a.Sort.Add(sort);
 		});
 
 		public TopHitsAggregationDescriptor<T> Source(bool include = true) =>
@@ -104,7 +104,7 @@ namespace Nest
 		public TopHitsAggregationDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> scriptFieldsSelector) =>
 			Assign(a => a.ScriptFields = scriptFieldsSelector?.Invoke(new ScriptFieldsDescriptor())?.Value);
 
-		public TopHitsAggregationDescriptor<T> FielddataFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) => 
+		public TopHitsAggregationDescriptor<T> FielddataFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.FielddataFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public TopHitsAggregationDescriptor<T> Version(bool version = true) => Assign(a => a.Version = version);

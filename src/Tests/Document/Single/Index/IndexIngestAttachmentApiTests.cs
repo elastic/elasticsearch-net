@@ -10,9 +10,8 @@ using Xunit;
 
 namespace Tests.Document.Single.Index
 {
-	[Collection(TypeOfCluster.Indexing)]
 	public class IndexIngestAttachmentApiTests :
-		ApiIntegrationTestBase<IIndexResponse,
+		ApiIntegrationTestBase<WritableCluster, IIndexResponse,
 			IIndexRequest<IndexIngestAttachmentApiTests.IngestedAttachment>,
 			IndexDescriptor<IndexIngestAttachmentApiTests.IngestedAttachment>,
 			IndexRequest<IndexIngestAttachmentApiTests.IngestedAttachment>>
@@ -28,9 +27,7 @@ namespace Tests.Document.Single.Index
 
 		private static string PipelineId { get; } = "pipeline-" + Guid.NewGuid().ToString("N").Substring(0, 8);
 
-		public IndexIngestAttachmentApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public IndexIngestAttachmentApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

@@ -11,8 +11,7 @@ using Xunit;
 
 namespace Tests.Indices.IndexSettings.GetIndexSettings
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class GetIndexSettingsApiTests : ApiIntegrationTestBase<IGetIndexSettingsResponse, IGetIndexSettingsRequest, GetIndexSettingsDescriptor, GetIndexSettingsRequest>
+	public class GetIndexSettingsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetIndexSettingsResponse, IGetIndexSettingsRequest, GetIndexSettingsDescriptor, GetIndexSettingsRequest>
 	{
 		public GetIndexSettingsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
@@ -45,6 +44,5 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 			index.Settings.NumberOfShards.Should().HaveValue().And.BeGreaterThan(0);
 			index.Settings.NumberOfReplicas.Should().HaveValue();
 		}
-
 	}
 }

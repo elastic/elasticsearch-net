@@ -13,9 +13,8 @@ using Xunit;
 
 namespace Tests.Search.MultiSearch
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	[SkipVersion("5.0.0-alpha1", "format of percolate query changed.")]
-	public class MultiSearchApiTests : ApiIntegrationTestBase<IMultiSearchResponse, IMultiSearchRequest, MultiSearchDescriptor, MultiSearchRequest>
+	[SkipVersion(">5.0.0-alpha1", "format of percolate query changed.")]
+	public class MultiSearchApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IMultiSearchResponse, IMultiSearchRequest, MultiSearchDescriptor, MultiSearchRequest>
 	{
 		public MultiSearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -125,19 +124,19 @@ namespace Tests.Search.MultiSearch
 			allResponses.Should().NotBeEmpty().And.HaveCount(6).And.OnlyContain(rr => rr.IsValid);
 
 			var projects= r.GetResponse<Project>("10projects");
-			projects.IsValid.Should().BeTrue();
+			projects.ShouldBeValid();
 			projects.Documents.Should().HaveCount(10);
 
-			var dfsProjects = r.GetResponse<Project>("dfs_projects");
-			dfsProjects.IsValid.Should().BeTrue();
-			dfsProjects.Documents.Should().HaveCount(10);
+			var projectsCount = r.GetResponse<Project>("count_project");
+			projectsCount.ShouldBeValid();
+			projectsCount.Documents.Should().HaveCount(0);
 
 			var developers = r.GetResponse<Developer>("5developers");
-			developers.IsValid.Should().BeTrue();
+			developers.ShouldBeValid();
 			developers.Documents.Should().HaveCount(5);
 
 			var inferredTypeName = r.GetResponse<Developer>("infer_type_name");
-			inferredTypeName.IsValid.Should().BeTrue();
+			inferredTypeName.ShouldBeValid();
 			inferredTypeName.Documents.Should().HaveCount(5);
 
 			var percolateDocument = r.GetResponse<PercolatedQuery>("percolate_document");

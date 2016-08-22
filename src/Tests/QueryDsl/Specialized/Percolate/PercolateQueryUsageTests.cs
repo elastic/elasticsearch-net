@@ -25,9 +25,8 @@ namespace Tests.QueryDsl.Specialized.Percolate
 	* In this example, we have a document stored with a `query` field that is mapped as a `percolator` type. This field
 	* contains a `match` query.
 	*/
-	[Collection(TypeOfCluster.Indexing)]
 	[SkipVersion("5.0.0-alpha1", "percolate query changed property in query dsl from 'percolator' to 'percolate'")]
-	public class PercolateQueryUsageTests : ApiIntegrationTestBase<ISearchResponse<PercolatedQuery>, ISearchRequest, SearchDescriptor<PercolatedQuery>, SearchRequest<PercolatedQuery>>
+	public class PercolateQueryUsageTests : ApiIntegrationTestBase<WritableCluster, ISearchResponse<PercolatedQuery>, ISearchRequest, SearchDescriptor<PercolatedQuery>, SearchRequest<PercolatedQuery>>
 	{
 		private static readonly string PercolatorId = RandomString();
 
@@ -43,7 +42,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		public PercolateQueryUsageTests(IndexingCluster i, EndpointUsage usage) : base(i, usage) { }
+		public PercolateQueryUsageTests(WritableCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -142,9 +141,8 @@ namespace Tests.QueryDsl.Specialized.Percolate
 	*
 	* See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.html[percolate query] for more details.
 	*/
-	[Collection(TypeOfCluster.Indexing)]
 	[SkipVersion("5.0.0-alpha1", "percolate query changed property in query dsl from 'percolator' to 'percolate'")]
-	public class PercolateQueryExistingDocumentUsageTests : ApiIntegrationTestBase<ISearchResponse<PercolatedQuery>, ISearchRequest, SearchDescriptor<PercolatedQuery>, SearchRequest<PercolatedQuery>>
+	public class PercolateQueryExistingDocumentUsageTests : ApiIntegrationTestBase<WritableCluster, ISearchResponse<PercolatedQuery>, ISearchRequest, SearchDescriptor<PercolatedQuery>, SearchRequest<PercolatedQuery>>
 	{
 		private static readonly string PercolatorId = RandomString();
 
@@ -160,7 +158,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		public PercolateQueryExistingDocumentUsageTests(IndexingCluster i, EndpointUsage usage) : base(i, usage) { }
+		public PercolateQueryExistingDocumentUsageTests(WritableCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		//hide
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)

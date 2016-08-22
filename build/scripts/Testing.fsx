@@ -1,88 +1,43 @@
 ﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 
-#r "System.Xml.Linq.dll"
-
 #load @"Paths.fsx"
 
-open System
-open System.Xml.Linq;
-
+open System.IO
 open Fake 
-open Fake.Testing
-
 open Paths
-
-// xunit console runner is broken on mono 4.0.2 better run with a nightly build:
-// http://download.mono-project.com/archive/nightly/macos-10-x86/
-
-// however even in the latest beta 4.3.0 the runner hangs on mono for me
-// https://github.com/xunit/xunit/issues/158
+open Projects
+open Tooling
 
 module Tests = 
-    let xmlOutput = Paths.Output("TestResults.xml")
-    let htmlOutput = Paths.Output("TestResults.html")
+    let private testProjectJson parallelization =
+        DotNetProject.All
+        |> Seq.iter(fun p -> 
+            let path = Paths.ProjectJson p.Name
+            DotNet.Exec ["restore"; path; "--verbosity Warning"]
+        )
 
-    let Notify () =
-        match fileExists xmlOutput with
-        | false -> ignore
-        | _ ->
-            let results = XDocument.Load xmlOutput
-            let assembly = results.Root.Element <| XName.Get "assembly"
-            let attr name = 
-                let a = assembly.Attribute <| XName.Get name
-                Int32.Parse(a.Value)
+        let testPath = Paths.Source "Tests/project.json"
+        DotNet.Exec ["restore"; testPath; "--verbosity Warning"]
+        DotNet.Exec ["build"; testPath; "--configuration Release"; "-f"; "netcoreapp1.0"]
+        DotNet.Exec ["test"; testPath; "-parallel"; parallelization; "-xml"; Paths.Output("TestResults-Core-Clr.xml")]
 
-            let failed = 
-                (results.Root.Descendants <| XName.Get "test") 
-                |> Seq.filter(fun e -> (e.Attribute <| XName.Get "result").Value = "Fail")
+    let private testDesktopClr parallelization = 
+        let folder = Paths.ProjectOutputFolder (PrivateProject PrivateProject.Tests) DotNetFramework.Net46
+        let testDll = Path.Combine(folder, "Tests.dll")
+        XUnit.Exec [testDll; "-parallel"; parallelization; "-xml"; Paths.Output("TestResults-Desktop-Clr.xml")] 
+        |> ignore
+        
 
-            let errors = attr "failed"
-            let total = attr "total"
-            let skipped = attr "skipped"
-            let o = sprintf "\"%s\"" ((new System.Uri(System.IO.Path.GetFullPath(htmlOutput))).AbsoluteUri)
-            failed 
-                |> Seq.iter (fun e -> 
-                    let m  = (e.Attribute <| XName.Get "method").Value
-                    let t  = (e.Attribute <| XName.Get "type").Value
-                    traceError (sprintf "%s failed in %s" m t)
-                    let messages = (e.Descendants <| XName.Get "message")
-                    messages |> Seq.iter (fun m -> traceImportant m.Value )
-                )
+    let RunUnitTestsForever() = 
+        while true do testDesktopClr "all"
+        
+    let RunUnitTests() = 
+        testDesktopClr "all"
+        testProjectJson "all"
 
-            match errors with
-            | 0 ->
-                let successMessage = sprintf "\"All %i tests are passing!\"" total
-                printfn "%s" successMessage
-                if isLocalBuild then
-                    Paths.Tooling.Notifier.Exec ["-t " + successMessage; "-m " + successMessage]
-                ignore
-            | _ ->
-                let errorMessage = sprintf "\"%i failed %i run, %i skipped\"" errors total skipped
-                printfn "%s" errorMessage
-                if isLocalBuild then
-                    Paths.Tooling.Notifier.Exec ["-t " + errorMessage; "-m " + errorMessage; "-o " + o]
-                ignore
-
-    let private TestFailure errors =
-        raise (BuildException("The project tests failed.", errors |> List.ofSeq))
-
-    let Test runtime parallelization =
-       !! Paths.Source("Tests/project.json") 
-            |> Seq.map DirectoryName
-            |> Seq.map Paths.Quote
-            |> Seq.iter(fun project -> 
-                Tooling.DotNet.Exec runtime TestFailure "." ["restore"; project;]
-                Tooling.DotNet.Exec runtime TestFailure "." ["test"; project; "-parallel"; parallelization; "-xml"; Paths.Output("TestResults.xml")]) 
-
-    let RunUnitTests() =
-        !! Paths.Source("Tests/project.json") 
-        |> Seq.map DirectoryName
-        |> Seq.map Paths.Quote
-        |> Seq.iter(fun project -> Test Tooling.DotNetRuntime.Both "all")
 
     let RunIntegrationTests() commaSeparatedEsVersions =
-        ActivateBuildFailureTarget "NotifyTestFailures"
         let esVersions = 
             match commaSeparatedEsVersions with
             | "" -> failwith "when running integrate you have to pass a comma separated list of elasticsearch versions to test"
@@ -90,12 +45,4 @@ module Tests =
         
         for esVersion in esVersions do
             setProcessEnvironVar "NEST_INTEGRATION_VERSION" esVersion
-            !! Paths.Source("Tests/project.json") 
-            |> Seq.map DirectoryName
-            |> Seq.map Paths.Quote
-            |> Seq.iter(fun project -> Test Tooling.DotNetRuntime.Both "none")
-
-    let RunContinuous = fun _ ->
-        ActivateBuildFailureTarget "NotifyTestFailures"
-        Test Tooling.DotNetRuntime.Core "all"
-        Notify() |> ignore
+            testDesktopClr "all"

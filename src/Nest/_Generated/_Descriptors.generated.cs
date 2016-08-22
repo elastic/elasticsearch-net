@@ -1895,30 +1895,8 @@ namespace Nest
 		public AnalyzeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
 
 	
-		///<summary>The name of the analyzer to use</summary>
-		public AnalyzeDescriptor Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
-
-		///<summary>A comma-separated list of character filters to use for the analysis</summary>
-		public AnalyzeDescriptor CharFilter(params string[] char_filter) => AssignParam(p=>p.CharFilter(char_filter));
-
-		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
-		public AnalyzeDescriptor Field(string field) => AssignParam(p=>p.Field(field));
-
-		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
-		public AnalyzeDescriptor Field<T>(Expression<Func<T, object>> field) where T : class =>
-			AssignParam(p=>p._Field(field));
-
-		///<summary>A comma-separated list of filters to use for the analysis</summary>
-		public AnalyzeDescriptor Filter(params string[] filter) => AssignParam(p=>p.Filter(filter));
-
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public AnalyzeDescriptor PreferLocal(bool prefer_local = true) => AssignParam(p=>p.PreferLocal(prefer_local));
-
-		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
-		public AnalyzeDescriptor Text(params string[] text) => AssignParam(p=>p.Text(text));
-
-		///<summary>The name of the tokenizer to use for the analysis</summary>
-		public AnalyzeDescriptor Tokenizer(string tokenizer) => AssignParam(p=>p.Tokenizer(tokenizer));
 
 		///<summary>With `true`, outputs more advanced details. (default: false)</summary>
 		public AnalyzeDescriptor Explain(bool explain = true) => AssignParam(p=>p.Explain(explain));

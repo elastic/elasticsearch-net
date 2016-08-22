@@ -7,8 +7,7 @@ using Xunit;
 
 namespace Tests.Ingest.GetPipeline
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class GetPipelineApiTests : ApiTestBase<IGetPipelineResponse, IGetPipelineRequest, GetPipelineDescriptor, GetPipelineRequest>
+	public class GetPipelineApiTests : ApiTestBase<ReadOnlyCluster, IGetPipelineResponse, IGetPipelineRequest, GetPipelineDescriptor, GetPipelineRequest>
 	{
 		public GetPipelineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

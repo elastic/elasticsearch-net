@@ -7,10 +7,10 @@ using Xunit;
 
 namespace Tests.Indices.IndexSettings.IndexTemplates.IndexTemplateExists
 {
-	[Collection(TypeOfCluster.Indexing)]
-	public class IndexTemplateExistsApiTests : ApiTestBase<IExistsResponse, IIndexTemplateExistsRequest, IndexTemplateExistsDescriptor, IndexTemplateExistsRequest>
+	public class IndexTemplateExistsApiTests
+		: ApiTestBase<WritableCluster, IExistsResponse, IIndexTemplateExistsRequest, IndexTemplateExistsDescriptor, IndexTemplateExistsRequest>
 	{
-		public IndexTemplateExistsApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public IndexTemplateExistsApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.IndexTemplateExists(CallIsolatedValue, f),
 			fluentAsync: (client, f) => client.IndexTemplateExistsAsync(CallIsolatedValue, f),

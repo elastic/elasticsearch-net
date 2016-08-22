@@ -26,8 +26,7 @@ namespace Elasticsearch.Net
 				return ms.ToArray();
 			}
 		}
-		public static string SerializeToString(this IElasticsearchSerializer serializer, object data, SerializationFormatting formatting = SerializationFormatting.Indented) => 
+		public static string SerializeToString(this IElasticsearchSerializer serializer, object data, SerializationFormatting formatting = SerializationFormatting.Indented) =>
 			serializer.SerializeToBytes(data, formatting).Utf8String();
 	}
-
 }

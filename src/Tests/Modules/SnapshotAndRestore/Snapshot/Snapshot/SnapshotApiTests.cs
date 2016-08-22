@@ -9,8 +9,7 @@ using static Nest.Infer;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot.Snapshot
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class SnapshotApiTests : ApiTestBase<ISnapshotResponse, ISnapshotRequest, SnapshotDescriptor, SnapshotRequest>
+	public class SnapshotApiTests : ApiTestBase<ReadOnlyCluster, ISnapshotResponse, ISnapshotRequest, SnapshotDescriptor, SnapshotRequest>
 	{
 		public SnapshotApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

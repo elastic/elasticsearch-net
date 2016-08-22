@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
@@ -144,8 +145,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		}
 	}
 
-	[CollectionDefinition(TypeOfCluster.SniffRoleDetection)]
-	public class SniffRoleDetectionCluster : ClusterBase, ICollectionFixture<SniffRoleDetectionCluster>
+	public class SniffRoleDetectionCluster : ClusterBase
 	{
 		protected override string[] ServerSettings
 		{
@@ -162,8 +162,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		}
 	}
 
-	[Collection(TypeOfCluster.SniffRoleDetection)]
-	public class RealWorldRoleDetection
+	public class RealWorldRoleDetection : IClusterFixture<SniffRoleDetectionCluster>
 	{
 		private readonly SniffRoleDetectionCluster _cluster;
 		private IConnectionSettingsValues _settings;
@@ -201,7 +200,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 
 		private RequestPipeline CreatePipeline()
 		{
-			this._settings = TestClient.GetClient(c => c.PrettyJson(), this._cluster.Node.Port, createPool: u => new SniffingConnectionPool(new[] { u })).ConnectionSettings;
+			var uri = TestClient.CreateUri(this._cluster.Node.Port);
+			this._settings = new ConnectionSettings(new SniffingConnectionPool(new[] { uri }));
 			var pipeline = new RequestPipeline(this._settings, DateTimeProvider.Default, new MemoryStreamFactory(),
 				new SearchRequestParameters());
 			return pipeline;

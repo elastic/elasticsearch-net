@@ -38,9 +38,6 @@ namespace Tests.Framework
 			this.FluentInstance = this.Fluent(new TDescriptor())?.Value;
 		}
 
-		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings settings) => settings;
-		protected override IElasticClient Client => TestClient.GetClient(ConnectionSettings);
-
 		[U] protected void SerializesInitializer() =>
 			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
 

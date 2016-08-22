@@ -8,8 +8,7 @@ using Xunit;
 
 namespace Tests.Indices.AliasManagement.DeleteAlias
 {
-	[Collection(TypeOfCluster.Indexing)]
-	public class DeleteAliasApiTests : ApiIntegrationTestBase<IDeleteAliasResponse, IDeleteAliasRequest, DeleteAliasDescriptor, DeleteAliasRequest>
+	public class DeleteAliasApiTests : ApiIntegrationTestBase<WritableCluster, IDeleteAliasResponse, IDeleteAliasRequest, DeleteAliasDescriptor, DeleteAliasRequest>
 	{
 		private Names Names => Infer.Names(CallIsolatedValue + "-alias");
 
@@ -21,7 +20,7 @@ namespace Tests.Indices.AliasManagement.DeleteAlias
 				);
 		}
 
-		public DeleteAliasApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteAliasApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.DeleteAlias(Infer.AllIndices, Names),
 			fluentAsync: (client, f) => client.DeleteAliasAsync(Infer.AllIndices, Names),

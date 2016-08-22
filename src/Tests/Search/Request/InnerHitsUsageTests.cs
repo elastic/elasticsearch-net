@@ -129,17 +129,13 @@ namespace Tests.Search.Request
 	*
 	* See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.html[Inner hits] for more detail.
 	*/
-	[Collection(TypeOfCluster.OwnIndex)]
-	public abstract class InnerHitsApiTestsBase<TRoyal> : ApiIntegrationTestBase<ISearchResponse<TRoyal>, ISearchRequest, SearchDescriptor<TRoyal>, SearchRequest<TRoyal>>
+	public abstract class InnerHitsApiTestsBase<TRoyal> : ApiIntegrationTestBase<IntrusiveOperationCluster, ISearchResponse<TRoyal>, ISearchRequest, SearchDescriptor<TRoyal>, SearchRequest<TRoyal>>
 		where TRoyal : class, IRoyal
 	{
-		public InnerHitsApiTestsBase(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public InnerHitsApiTestsBase(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected abstract IndexName Index { get; }
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => new RoyalSeeder(this.Client, Index).Seed();
-
-		protected override ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings
-			.DisableDirectStreaming();
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<TRoyal>(f),
@@ -158,134 +154,12 @@ namespace Tests.Search.Request
 		protected override SearchDescriptor<TRoyal> NewDescriptor() => new SearchDescriptor<TRoyal>().Index(Index);
 	}
 
-
-	/**[float]
-	*== Inner Hits in descending Has Child Queries
-	*
-	* Inner Hits can be defined on descending `has_child` queries to return details of descendent children e.g. children,
-	* grandchildren, great-grandchildren, etc. In previous versions of Elasticsearch, Top Level Inner Hits would have been
-	* used to achieve this.
-	*/
-	[Collection(TypeOfCluster.OwnIndex)]
-	public class DescendentHasChildInnerHitsApiTests : InnerHitsApiTestsBase<Duke>
-	{
-		public DescendentHasChildInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		private static IndexName IndexName { get; } = RandomString();
-		protected override IndexName Index => DescendentHasChildInnerHitsApiTests.IndexName;
-
-		protected override object ExpectJson { get; } = new
-		{
-			query = new
-			{
-				has_child = new
-				{
-					type = "earl",
-					inner_hits = new
-					{
-						name = "earls",
-						size = 5,
-						fielddata_fields = new[] { "name" }
-					},
-					query = new
-					{
-						has_child = new
-						{
-							type = "baron",
-							inner_hits = new
-							{
-								name = "barons"
-							},
-							query = new
-							{
-								match_all = new {}
-							}
-						}
-					}
-				}
-			}
-		};
-
-		protected override Func<SearchDescriptor<Duke>, ISearchRequest> Fluent => s => s
-			.Index(Index)
-			.Query(q => q
-				.HasChild<Earl>(child => child
-					.InnerHits(i => i
-						.Name("earls")
-						.Size(5)
-						.FielddataFields(p => p.Name)
-					)
-					.Query(cq => cq
-						.HasChild<Baron>(grandchild => grandchild
-							.InnerHits(i => i
-								.Name("barons")
-							)
-							.Query(gq => gq
-								.MatchAll()
-							)
-						)
-					)
-				)
-			);
-
-		protected override SearchRequest<Duke> Initializer => new SearchRequest<Duke>(Index, typeof(Duke))
-		{
-			Query = new HasChildQuery
-			{
-				Type = typeof(Earl),
-				InnerHits = new InnerHits
-				{
-					Name = "earls",
-					Size = 5,
-					FielddataFields = new List<Field> { Infer.Field<Earl>(p => p.Name) }
-				},
-				Query = new HasChildQuery
-				{
-					Type = typeof(Baron),
-					InnerHits = new InnerHits
-					{
-						Name = "barons"
-					},
-					Query = new MatchAllQuery()
-				}
-			}
-		};
-
-		protected override void ExpectResponse(ISearchResponse<Duke> response)
-		{
-			response.Hits.Should().NotBeEmpty();
-			foreach (var hit in response.Hits)
-			{
-				hit.InnerHits.Should().NotBeEmpty();
-				hit.InnerHits.Should().ContainKey("earls");
-				var earlHits = hit.InnerHits["earls"].Hits;
-				earlHits.Total.Should().BeGreaterThan(0);
-				earlHits.Hits.Should().NotBeEmpty().And.HaveCount(5);
-				foreach (var earlHit in earlHits.Hits)
-					earlHit.Fields.ValuesOf<string>("name").Should().NotBeEmpty();
-				var earls = earlHits.Documents<Earl>();
-				earls.Should().NotBeEmpty().And.OnlyContain(earl => !string.IsNullOrWhiteSpace(earl.Name));
-				foreach (var earlHit in earlHits.Hits)
-				{
-					var earl = earlHit.Source.As<Earl>().Name;
-					var baronHits = earlHit.InnerHits["barons"];
-					baronHits.Should().NotBeNull();
-					var baron = baronHits.Documents<Baron>().FirstOrDefault();
-					baron.Should().NotBeNull();
-					baron.Name.Should().NotBeNullOrWhiteSpace();
-				}
-			}
-		}
-	}
-
 	/**[float]
 	*== Query Inner Hits
 	*/
-	[Collection(TypeOfCluster.OwnIndex)]
-	[SkipVersion("5.0.0-alpha2", "broken in alpha2. response reason: Neither a nested or parent/child inner hit")]
 	public class QueryInnerHitsApiTests : InnerHitsApiTestsBase<King>
 	{
-		public QueryInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public QueryInnerHitsApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private static IndexName IndexName { get; } = RandomString();
 		protected override IndexName Index => QueryInnerHitsApiTests.IndexName;

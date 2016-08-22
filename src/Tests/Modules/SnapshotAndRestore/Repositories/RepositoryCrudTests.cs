@@ -8,11 +8,10 @@ using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Repositories
 {
-	[Collection(TypeOfCluster.Indexing)]
 	public class RepositoryCrudTests
-		: CrudTestBase<ICreateRepositoryResponse, IGetRepositoryResponse, ICreateRepositoryResponse, IDeleteRepositoryResponse>
+		: CrudTestBase<IntrusiveOperationCluster, ICreateRepositoryResponse, IGetRepositoryResponse, ICreateRepositoryResponse, IDeleteRepositoryResponse>
 	{
-		public RepositoryCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		public RepositoryCrudTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 			_rootRepositoryPath = cluster.Node.FileSystem.RepositoryPath;
 		}

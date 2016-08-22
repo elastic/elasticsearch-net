@@ -9,8 +9,7 @@ using Xunit;
 
 namespace Tests.Cluster.ClusterAllocationExplain
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class ClusterAllocationExplainApiTests : ApiIntegrationTestBase<IClusterAllocationExplainResponse, IClusterAllocationExplainRequest, ClusterAllocationExplainDescriptor, ClusterAllocationExplainRequest>
+	public class ClusterAllocationExplainApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IClusterAllocationExplainResponse, IClusterAllocationExplainRequest, ClusterAllocationExplainDescriptor, ClusterAllocationExplainRequest>
 	{
 		public ClusterAllocationExplainApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

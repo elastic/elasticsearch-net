@@ -1,7 +1,10 @@
 ﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 
-#load @"Projects.fsx"
+#load @"Paths.fsx"
+
+open Paths.Projects
+
 
 open System
 open System.Diagnostics
@@ -12,11 +15,9 @@ open Fake
 open AssemblyInfoFile
 open SemVerHelper
 
-open Projects
-
 type Versioning() = 
     
-    static let RegexReplaceFirstOccurrence pattern (replacement:string) encoding file =
+    static let regexReplaceFirstOccurrence pattern (replacement:string) encoding file =
         let oldContent = File.ReadAllLines(file, encoding)
         let mutable replaced = false
         let newContent = oldContent |> Seq.map (fun l -> 
@@ -31,6 +32,7 @@ type Versioning() =
         File.WriteAllLines(file, newContent, encoding)
 
     static let suffix = fun (prerelease: PreRelease) -> sprintf "-%s%i" prerelease.Name prerelease.Number.Value
+
     //returns the current version number 
     //when version is passed to script we always use that
     //otherwise we get the current version number and append -ci-datestamp
@@ -108,7 +110,7 @@ type Versioning() =
     static member PatchProjectJsons() =
         !! "src/**/project.json"
         |> Seq.iter(fun f -> 
-            RegexReplaceFirstOccurrence 
+            regexReplaceFirstOccurrence 
                 "\"version\"\\s?:\\s?\".*\"" 
                 (sprintf "\"version\": \"%s\"" fileVersion) 
                 (new System.Text.UTF8Encoding(false)) f

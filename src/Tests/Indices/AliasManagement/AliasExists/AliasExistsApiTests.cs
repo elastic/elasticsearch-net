@@ -9,10 +9,11 @@ using static Nest.Infer;
 
 namespace Tests.Indices.AliasManagement.AliasExists
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class AliasExistsApiTests : ApiIntegrationTestBase<IExistsResponse, IAliasExistsRequest, AliasExistsDescriptor, AliasExistsRequest>
+	public class AliasExistsApiTests
+		: ApiIntegrationTestBase<WritableCluster, IExistsResponse, IAliasExistsRequest, AliasExistsDescriptor, AliasExistsRequest>
+
 	{
-		public AliasExistsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public AliasExistsApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

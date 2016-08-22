@@ -2,69 +2,52 @@
 #r @"FakeLib.dll"
 
 #load @"Paths.fsx"
-#load @"Projects.fsx"
-open System
 
 open Fake 
 
 open Paths
 open Projects
-
-let gitLink pdbDir projectName =
-    let exe = Paths.Tool("gitlink/lib/net45/GitLink.exe")
-    ExecProcess(fun p ->
-     p.FileName <- exe
-     p.Arguments <- sprintf @". -u %s -d %s -include %s" Paths.Repository pdbDir projectName
-    ) (TimeSpan.FromMinutes 5.0) |> ignore
+open Tooling;
 
 type Build() = 
 
-    static let allProjects = DotNetProject.All |> Seq.map(fun p -> p.Name)
+    static let runningRelease = hasBuildParam "version" || hasBuildParam "apikey" || getBuildParam "target" = "canary" || getBuildParam "target" = "release"
 
-    static let compileCore projects =
-        projects
+    static let compileCore() =
+        DotNetProject.AllPublishable
         |> Seq.iter(fun p -> 
-            let path = (Paths.Quote (Paths.ProjectJson p))
-            Tooling.DotNet.Exec Tooling.DotNetRuntime.Core Build.BuildFailure p ["restore"; path; "--verbosity Warning"]
-            Tooling.DotNet.Exec Tooling.DotNetRuntime.Core Build.BuildFailure p ["build"; path; "--configuration Release"]
-           )
+            let path = Paths.ProjectJson p.Name
+            let o = Paths.ProjectOutputFolder p DotNetFramework.NetStandard1_3
+            DotNet.Exec ["restore"; path; "--verbosity Warning"]
+            DotNet.Exec ["build"; path; "--configuration Release"; "-o"; o; "-f"; DotNetFramework.NetStandard1_3.Identifier.MSBuild]
+        )
 
-    static let compileDesktop projects =
-        projects
-        |> Seq.iter(fun project ->
-            Tooling.MsBuild.Exec (Paths.Net45BinFolder project) "Rebuild" Tooling.DotNetFramework.Net45.Identifier [Paths.CsProj(project)]
-            Tooling.MsBuild.Exec (Paths.Net46BinFolder project) "Rebuild" Tooling.DotNetFramework.Net46.Identifier [Paths.CsProj(project)]
-           )
+    static let compileDesktop target =
+        MsBuild.Build(target, DotNetFramework.Net45.Identifier)
+        MsBuild.Build(target, DotNetFramework.Net46.Identifier)
 
-    static let copyToOutput projects =
-        projects
+    static let gitLink() =
+        DotNetProject.AllPublishable
         |> Seq.iter(fun p ->
-            let projectName = (p |> directoryInfo).Name
-            let outputFolder = Paths.Output(projectName)
-            let binFolder = Paths.BinFolder(projectName)
-            if not isMono then
-                match projectName with
-                | "Nest" 
-                | "Elasticsearch.Net" ->
-                    gitLink (Paths.Net45BinFolder projectName) projectName
-                    gitLink (Paths.Net46BinFolder projectName) projectName
-                    gitLink (Paths.NetStandard13BinFolder projectName) projectName
-                | _  -> ()
-            CopyDir outputFolder binFolder allFiles
+            let projectName = (p.Name |> directoryInfo).Name
+            let link framework = 
+                GitLink.Exec ["."; "-u"; Paths.Repository; "-d"; (Paths.ProjectOutputFolder p framework); "-include"; projectName] 
+                |> ignore
+            link DotNetFramework.Net45
+            link DotNetFramework.Net46
+            link DotNetFramework.NetStandard1_3
         )
         
-    static member BuildFailure errors =
-        raise (BuildException("The project build failed.", errors |> List.ofSeq))
+    static let compile target = 
+        compileDesktop target
+        //we only need this output when doing a release otherwise depend on test to validate the build
+        if runningRelease then compileCore()
+        if not isMono && runningRelease then gitLink()
 
-    static member QuickCompile() = 
-        compileDesktop allProjects
-        compileCore allProjects
+    static member QuickCompile() = compile "Build"
 
-    static member Compile() =
-        compileDesktop allProjects
-        compileCore allProjects
-        copyToOutput allProjects
+    static member Compile() = compile "Rebuild"
 
     static member Clean() =
         CleanDir Paths.BuildOutput
-        allProjects |> Seq.iter(fun p -> CleanDir(Paths.BinFolder p))
+        DotNetProject.All |> Seq.iter(fun p -> CleanDir(Paths.BinFolder p.Name))

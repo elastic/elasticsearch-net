@@ -9,10 +9,9 @@ using Xunit;
 
 namespace Tests.Document.Single.Delete
 {
-	[Collection(TypeOfCluster.Indexing)]
-	public class DeleteApiTests : ApiIntegrationTestBase<IDeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>
+	public class DeleteApiTests : ApiIntegrationTestBase<WritableCluster, IDeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>
 	{
-		public DeleteApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

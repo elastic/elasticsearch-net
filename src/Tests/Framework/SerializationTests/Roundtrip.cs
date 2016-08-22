@@ -11,25 +11,22 @@ namespace Tests.Framework
 {
 	public class RoundTripper : SerializationTestBase
 	{
-		private readonly Func<ConnectionSettings, ConnectionSettings> _settings;
-		private readonly Func<ConnectionSettings, IElasticsearchSerializer> _serializerFactory;
+
 		protected override object ExpectJson { get; }
 
 		internal RoundTripper(
 			object expected,
 			Func<ConnectionSettings, ConnectionSettings> settings = null,
-			Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory = null
+			Func<ConnectionSettings, IElasticsearchSerializer> _serializerFactory = null
 			)
 		{
-			this._settings = settings;
-			this._serializerFactory = serializerFactory;
 			this.ExpectJson = expected;
+			this._connectionSettingsModifier = settings;
 
 			this._expectedJsonString = this.Serialize(expected);
 			this._expectedJsonJObject = JToken.Parse(this._expectedJsonString);
+			this._serializerFactory = _serializerFactory;
 		}
-
-		protected override IElasticClient Client => TestClient.GetInMemoryClientWithSerializerFactory(_settings, _serializerFactory);
 
 		public virtual RoundTripper<T> WhenSerializing<T>(T actual)
 		{
@@ -41,7 +38,6 @@ namespace Tests.Framework
 			this.Client.Infer.Id<T>(project).Should().Be((string)this.ExpectJson);
 			return this;
 		}
-
 		public RoundTripper ForField(Field field)
 		{
 			this.Client.Infer.Field(field).Should().Be((string)this.ExpectJson);
@@ -58,6 +54,7 @@ namespace Tests.Framework
 			sut.Should().BeEquivalentTo(serializedProperties);
 			return this;
 		}
+
 
 		public static IntermediateChangedSettings WithConnectionSettings(Func<ConnectionSettings, ConnectionSettings> settings) =>  new IntermediateChangedSettings(settings);
 
@@ -82,7 +79,7 @@ namespace Tests.Framework
 		}
 
 
-		public RoundTripper Expect(object expected) =>  new RoundTripper(expected, _connectionSettingsModifier, _serializerFactory);
+		public RoundTripper Expect(object expected) =>  new RoundTripper(expected, _connectionSettingsModifier, this._serializerFactory);
 	}
 
 	public class RoundTripper<T> : RoundTripper

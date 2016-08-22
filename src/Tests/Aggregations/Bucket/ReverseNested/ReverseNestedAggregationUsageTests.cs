@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
@@ -95,7 +96,7 @@ namespace Tests.Aggregations.Bucket.ReverseNested
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var tags = response.Aggs.Nested("tags");
 			tags.Should().NotBeNull();
 			var tagNames = tags.Terms("tag_names");

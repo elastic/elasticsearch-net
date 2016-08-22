@@ -9,10 +9,10 @@ using static Elasticsearch.Net.HttpMethod;
 
 namespace Tests.XPack.License.GetLicense
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class GetLicenseApiTests : ApiIntegrationTestBase<IGetLicenseResponse, IGetLicenseRequest, GetLicenseDescriptor, GetLicenseRequest>
+	[SkipVersion("<2.3.0", "")]
+	public class GetLicenseApiTests : ApiIntegrationTestBase<XPackCluster, IGetLicenseResponse, IGetLicenseRequest, GetLicenseDescriptor, GetLicenseRequest>
 	{
-		public GetLicenseApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetLicenseApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.GetLicense(f),
