@@ -121,9 +121,17 @@ namespace Elasticsearch.Net
 		public void FirstPoolUsage(SemaphoreSlim semaphore)
 		{
 			if (!this.FirstPoolUsageNeedsSniffing) return;
-			if (!semaphore.Wait(this._settings.RequestTimeout))
-				throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
-			if (!this.FirstPoolUsageNeedsSniffing) return;
+            if (!semaphore.Wait(this._settings.RequestTimeout))
+            {
+                if (this.FirstPoolUsageNeedsSniffing)
+                    throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
+                return;
+            }
+            if (!this.FirstPoolUsageNeedsSniffing)
+            {
+                semaphore.Release();
+                return;
+            }
 			try
 			{
 				using (this.Audit(SniffOnStartup))
@@ -142,10 +150,18 @@ namespace Elasticsearch.Net
 		{
 			if (!this.FirstPoolUsageNeedsSniffing) return;
 			var success = await semaphore.WaitAsync(this._settings.RequestTimeout, cancellationToken).ConfigureAwait(false);
-			if (!success)
-				throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
+            if (!success)
+            {
+                if(this.FirstPoolUsageNeedsSniffing)
+                    throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
+                return;
+            }
 
-			if (!this.FirstPoolUsageNeedsSniffing) return;
+			if (!this.FirstPoolUsageNeedsSniffing)
+            {
+                semaphore.Release();
+                return;
+            }
 			try
 			{
 				using (this.Audit(SniffOnStartup))
