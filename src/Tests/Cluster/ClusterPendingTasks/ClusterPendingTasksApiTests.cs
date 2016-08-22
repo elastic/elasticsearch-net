@@ -7,8 +7,8 @@ using Xunit;
 
 namespace Tests.Cluster.ClusterPendingTasks
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class ClusterPendingTasksApiTests : ApiIntegrationTestBase<IClusterPendingTasksResponse, IClusterPendingTasksRequest, ClusterPendingTasksDescriptor, ClusterPendingTasksRequest>
+	public class ClusterPendingTasksApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IClusterPendingTasksResponse, IClusterPendingTasksRequest, ClusterPendingTasksDescriptor, ClusterPendingTasksRequest>
 	{
 		public ClusterPendingTasksApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
@@ -25,7 +25,7 @@ namespace Tests.Cluster.ClusterPendingTasks
 
 		protected override void ExpectResponse(IClusterPendingTasksResponse response)
 		{
-			response.Tasks.Should().NotBeNull(); 
+			response.Tasks.Should().NotBeNull();
 		}
 	}
 

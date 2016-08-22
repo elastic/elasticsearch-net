@@ -9,14 +9,15 @@ using static Nest.Infer;
 
 namespace Tests.Indices.StatusManagement.Upgrade
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class UpgradeApiTests : ApiIntegrationTestBase<IUpgradeResponse, IUpgradeRequest, UpgradeDescriptor, UpgradeRequest>
+	public class UpgradeApiTests
+		: ApiIntegrationAgainstNewIndexTestBase
+			<IntrusiveOperationCluster, IUpgradeResponse, IUpgradeRequest, UpgradeDescriptor, UpgradeRequest>
 	{
-		public UpgradeApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public UpgradeApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Upgrade(Index<Project>(), f),
-			fluentAsync: (client, f) => client.UpgradeAsync(Index<Project>(), f),
+			fluent: (client, f) => client.Upgrade(CallIsolatedValue, f),
+			fluentAsync: (client, f) => client.UpgradeAsync(CallIsolatedValue, f),
 			request: (client, r) => client.Upgrade(r),
 			requestAsync: (client, r) => client.UpgradeAsync(r)
 		);
@@ -24,10 +25,10 @@ namespace Tests.Indices.StatusManagement.Upgrade
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/_upgrade?allow_no_indices=true";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_upgrade?allow_no_indices=true";
 
 		protected override Func<UpgradeDescriptor, IUpgradeRequest> Fluent => d => d.AllowNoIndices();
 
-		protected override UpgradeRequest Initializer => new UpgradeRequest(Index<Project>()) { AllowNoIndices = true };
+		protected override UpgradeRequest Initializer => new UpgradeRequest(CallIsolatedValue) { AllowNoIndices = true };
 	}
 }

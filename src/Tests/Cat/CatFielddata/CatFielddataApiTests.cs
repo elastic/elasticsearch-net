@@ -10,8 +10,7 @@ using Xunit;
 
 namespace Tests.Cat.CatFielddata
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class CatFielddataApiTests : ApiIntegrationTestBase<ICatResponse<CatFielddataRecord>, ICatFielddataRequest, CatFielddataDescriptor, CatFielddataRequest>
+	public class CatFielddataApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatFielddataRecord>, ICatFielddataRequest, CatFielddataDescriptor, CatFielddataRequest>
 	{
 		public CatFielddataApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

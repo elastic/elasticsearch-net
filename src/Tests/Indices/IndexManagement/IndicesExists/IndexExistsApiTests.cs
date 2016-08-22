@@ -8,8 +8,7 @@ using static Nest.Infer;
 
 namespace Tests.Indices.IndexManagement.IndicesExists
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class IndexExistsApiTests : ApiIntegrationTestBase<IExistsResponse, IIndexExistsRequest, IndexExistsDescriptor, IndexExistsRequest>
+	public class IndexExistsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IExistsResponse, IIndexExistsRequest, IndexExistsDescriptor, IndexExistsRequest>
 	{
 		public IndexExistsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

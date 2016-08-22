@@ -5,6 +5,7 @@ REM build build [skiptests]
 REM build release [version] [skiptests]
 REM build version [version] [skiptests]
 REM build integrate [elasticsearch_versions] [skiptests]
+REM build canary [apikey] [feed] [skiptests]
 
 REM - elasticsearch_versions can be multiple separated with a semi-colon ';'
 
@@ -20,9 +21,9 @@ if errorlevel 1 (
 SET TARGET="build"
 SET VERSION=
 SET ESVERSIONS=
-SET DNXVERSION="default"
 SET SKIPTESTS=0
 SET APIKEY=
+SET APIKEYPROVIDED="<empty>"
 SET FEED="elasticsearch-net"
 
 IF /I "%1"=="skiptests" (
@@ -50,8 +51,15 @@ IF /I "%1%"=="integrate" (
 )
 
 IF /I "%1%"=="canary" (
-	IF NOT [%2]==[] (set APIKEY="%2")
-	IF NOT [%3]==[] (set FEED="%3")
+	IF NOT [%2]==[] IF NOT "%2"=="skiptests" (
+		set APIKEY="%2"
+		SET APIKEYPROVIDED="<redacted>"
+	)
+	IF NOT [%3]==[] IF NOT "%3"=="skiptests" set FEED="%3"
+	IF /I "%4"=="skiptests" (set SKIPTESTS=1)
+	IF /I "%3"=="skiptests" (set SKIPTESTS=1)
+	IF /I "%2"=="skiptests" (set SKIPTESTS=1)
 )
 
-"packages\build\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%" "esversions=%ESVERSIONS%" "skiptests=%SKIPTESTS%" "apiKey=%APIKEY%" "feed=%FEED%" 
+ECHO starting build using target=%TARGET% version=%VERSION% esversions=%ESVERSIONS% skiptests=%SKIPTESTS% apiKey=%APIKEYPROVIDED% feed=%FEED%
+"packages\build\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%" "esversions=%ESVERSIONS%" "skiptests=%SKIPTESTS%" "apiKey=%APIKEY%" "feed=%FEED%"

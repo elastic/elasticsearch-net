@@ -9,8 +9,16 @@ namespace Nest
 		where TDescriptor : DescriptorBase<TDescriptor, TInterface>, TInterface
 		where TInterface : class
 	{
-		protected TInterface Self => (TDescriptor)this;
-		protected TDescriptor Assign(Action<TInterface> assigner) => Fluent.Assign((TDescriptor)this, assigner);
+		private readonly TDescriptor _self;
+
+		protected DescriptorBase()
+		{
+			_self = (TDescriptor)this;
+		}
+
+		protected TInterface Self => _self;
+
+		protected TDescriptor Assign(Action<TInterface> assigner) => Fluent.Assign(_self, assigner);
 
 		/// <summary>
 		/// Hides the <see cref="Equals"/> method.

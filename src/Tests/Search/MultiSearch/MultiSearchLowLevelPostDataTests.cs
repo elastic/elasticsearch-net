@@ -14,14 +14,13 @@ using Xunit;
 
 namespace Tests.Search.MultiSearch
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class MultiSearchLowLevelPostDataTests
+	public class MultiSearchLowLevelPostDataTests : IClusterFixture<ReadOnlyCluster>
 	{
 		private IElasticClient _client;
 
 		public MultiSearchLowLevelPostDataTests(ReadOnlyCluster cluster, EndpointUsage usage)
 		{
-			_client = cluster.Client();
+			_client = cluster.Client;
 		}
 
 		protected List<object> Search => new object[]

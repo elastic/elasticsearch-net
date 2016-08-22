@@ -7,10 +7,9 @@ using Xunit;
 
 namespace Tests.Search.SearchTemplate.DeleteSearchTemplate
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class DeleteSearchTemplateApiTests : ApiTestBase<IDeleteSearchTemplateResponse, IDeleteSearchTemplateRequest, DeleteSearchTemplateDescriptor, DeleteSearchTemplateRequest>
+	public class DeleteSearchTemplateApiTests : ApiTestBase<WritableCluster, IDeleteSearchTemplateResponse, IDeleteSearchTemplateRequest, DeleteSearchTemplateDescriptor, DeleteSearchTemplateRequest>
 	{
-		public DeleteSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteSearchTemplateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (c, f) => c.DeleteSearchTemplate(CallIsolatedValue, f),
@@ -18,7 +17,7 @@ namespace Tests.Search.SearchTemplate.DeleteSearchTemplate
 			request: (c, r) => c.DeleteSearchTemplate(r),
 			requestAsync: (c, r) => c.DeleteSearchTemplateAsync(r)
 		);
-		
+
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override string UrlPath => $"/_search/template/{CallIsolatedValue}";
 

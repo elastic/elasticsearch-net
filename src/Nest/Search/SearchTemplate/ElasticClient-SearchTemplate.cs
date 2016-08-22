@@ -101,7 +101,7 @@ namespace Nest
 		{
 			var converter = this.CreateCovariantSearchSelector<T, TResult>(d);
 			var dict = response.Success
-				? new JsonNetSerializer(this.ConnectionSettings, converter).Deserialize<SearchResponse<TResult>>(stream)
+				? this.ConnectionSettings.StatefulSerializer(converter).Deserialize<SearchResponse<TResult>>(stream)
 				: null;
 			return dict;
 		}

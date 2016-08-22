@@ -41,7 +41,7 @@ namespace Nest
 
 		[JsonProperty("missing")]
 		DateTime? Missing { get; set; }
-    }
+	}
 
 	public class DateHistogramAggregation : BucketAggregationBase, IDateHistogramAggregation
 	{

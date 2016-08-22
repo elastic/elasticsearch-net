@@ -24,8 +24,7 @@ namespace Tests.QueryDsl.BoolDsl
 		public static QueryContainer O(this QueryContainerDescriptor<A> q, E option) => q.Term(p => p.Option, option);
 	}
 
-	[CollectionDefinition(TypeOfCluster.Bool)]
-	public class BoolCluster : ClusterBase, ICollectionFixture<BoolCluster>
+	public class BoolCluster : ClusterBase
 	{
 		[JsonConverter(typeof(StringEnumConverter))]
 		public enum E { Option1, Option2 }
@@ -39,9 +38,9 @@ namespace Tests.QueryDsl.BoolDsl
 			public static IList<A> Documents => Enumerable.Range(0, 20).Select(i => new A { Id = i + 1, Option = Options[i % 2] }).ToList();
 		}
 
-		protected override void Boostrap()
+		public override void Bootstrap()
 		{
-			var client = this.Client();
+			var client = this.Node.Client;
 			var index = client.CreateIndex(Index<A>(), i => i
 				.Mappings(map => map
 					.Map<A>(m => m
@@ -58,10 +57,8 @@ namespace Tests.QueryDsl.BoolDsl
 		}
 	}
 
-	[Collection(TypeOfCluster.Bool)]
-	public class BoolsInPractice
+	public class BoolsInPractice : IClusterFixture<BoolCluster>
 	{
-
 		private readonly BoolCluster _cluster;
 
 		public BoolsInPractice(BoolCluster cluster)
@@ -79,7 +76,7 @@ namespace Tests.QueryDsl.BoolDsl
 			var documents = A.Documents.Where(programmatic).ToList();
 			documents.Count().Should().Be(expectedCount, " filtering the documents in memory did not yield the expected count");
 
-			var client = this._cluster.Client();
+			var client = this._cluster.Client;
 
 			var fluent = client.Search<A>(s => s.Query(fluentQuery));
 			var fluentAsync = await client.SearchAsync<A>(s => s.Query(fluentQuery));
@@ -90,7 +87,7 @@ namespace Tests.QueryDsl.BoolDsl
 			var responses = new[] { fluent, fluentAsync, initializer, initializerAsync };
 			foreach (var response in responses)
 			{
-				response.IsValid.Should().BeTrue();
+				response.ShouldBeValid();
 				response.Total.Should().Be(expectedCount);
 			}
 		}

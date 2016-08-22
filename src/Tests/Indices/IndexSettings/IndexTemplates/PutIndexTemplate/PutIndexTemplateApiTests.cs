@@ -8,11 +8,10 @@ using Xunit;
 
 namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 {
-	[Collection(TypeOfCluster.Indexing)]
-	public class PutIndexTemplateApiTests :
-		ApiTestBase<IPutIndexTemplateResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor, PutIndexTemplateRequest>
+	public class PutIndexTemplateApiTests
+		: ApiTestBase<WritableCluster, IPutIndexTemplateResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor, PutIndexTemplateRequest>
 	{
-		public PutIndexTemplateApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		public PutIndexTemplateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 		}
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
@@ -55,7 +56,7 @@ namespace Tests.Aggregations.Bucket.Histogram
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var commits = response.Aggs.Histogram("commits");
 			commits.Should().NotBeNull();
 			foreach (var item in commits.Buckets)

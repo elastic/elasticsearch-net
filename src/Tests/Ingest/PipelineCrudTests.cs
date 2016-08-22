@@ -12,11 +12,10 @@ using Xunit;
 
 namespace Tests.Ingest
 {
-	[Collection(TypeOfCluster.Indexing)]
 	public class PipelineCrudTests
 		: CrudTestBase<IPutPipelineResponse, IGetPipelineResponse, IPutPipelineResponse, IDeletePipelineResponse>
 	{
-		public PipelineCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PipelineCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses Create() => Calls<PutPipelineDescriptor, PutPipelineRequest, IPutPipelineRequest, IPutPipelineResponse>(
 			CreateInitializer,

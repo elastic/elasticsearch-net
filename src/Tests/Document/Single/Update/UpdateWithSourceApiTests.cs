@@ -13,10 +13,9 @@ using System.Linq;
 
 namespace Tests.Document.Single.Update
 {
-	[Collection(TypeOfCluster.Indexing)]
-	public class UpdateWithSourceApiTests : ApiIntegrationTestBase<IUpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>, UpdateRequest<Project, Project>>
+	public class UpdateWithSourceApiTests : ApiIntegrationTestBase<WritableCluster, IUpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>, UpdateRequest<Project, Project>>
 	{
-		public UpdateWithSourceApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public UpdateWithSourceApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

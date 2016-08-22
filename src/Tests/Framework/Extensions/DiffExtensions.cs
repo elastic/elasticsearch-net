@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 using DiffPlex;
 using DiffPlex.DiffBuilder;
 using DiffPlex.DiffBuilder.Model;
-using Nest;
 
 namespace Tests.Framework
 {
@@ -36,8 +35,21 @@ namespace Tests.Framework
 				return sb;
 			}, sb => sb.ToString());
 
-			diff += "\r\n C# approximation of actual: \r\n new ";
+			diff += "\r\n C# approximation of actual ------ ";
+			diff += "\r\n new ";
 			var approx = Regex.Replace(actual, @"^(?=.*:.*)[^:]+:", (s) => s
+				.Value.Replace("\"", "")
+				.Replace(":", " =")
+			, RegexOptions.Multiline)
+				.Replace(" = {", " = new {")
+				.Replace(" = [", " = new [] {")
+				;
+			approx = Regex.Replace(approx, @"^\s*\],?.*$", s => s.Value.Replace("]", "}"), RegexOptions.Multiline);
+			diff += approx + ";";
+
+			diff += "\r\n C# approximation of expected ------ ";
+			diff += "\r\n new ";
+			approx = Regex.Replace(expected , @"^(?=.*:.*)[^:]+:", (s) => s
 				.Value.Replace("\"", "")
 				.Replace(":", " =")
 			, RegexOptions.Multiline)

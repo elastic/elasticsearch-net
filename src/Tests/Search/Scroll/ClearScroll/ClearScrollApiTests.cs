@@ -8,8 +8,9 @@ using Xunit;
 
 namespace Tests.Search.Scroll.ClearScroll
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class ClearScrollApiTests : ApiIntegrationTestBase<IClearScrollResponse, IClearScrollRequest, ClearScrollDescriptor, ClearScrollRequest>
+	// ReadOnlyCluster because eventhough its technically a write action it does not hinder
+	// on going reads
+	public class ClearScrollApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IClearScrollResponse, IClearScrollRequest, ClearScrollDescriptor, ClearScrollRequest>
 	{
 		public ClearScrollApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -35,7 +36,6 @@ namespace Tests.Search.Scroll.ClearScroll
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override string UrlPath => $"/_search/scroll";
 		protected override bool SupportsDeserialization => false;
-		
 
 		protected override ClearScrollDescriptor NewDescriptor() => new ClearScrollDescriptor();
 

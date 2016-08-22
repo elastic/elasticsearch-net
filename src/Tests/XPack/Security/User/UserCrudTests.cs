@@ -7,12 +7,12 @@ using Xunit;
 
 namespace Tests.XPack.Security.User
 {
-	[Collection(TypeOfCluster.Shield)]
+	[SkipVersion("<2.3.0", "")]
 	public class UserCrudTests
-		: CrudTestBase<IPutUserResponse, IGetUserResponse, IPutUserResponse, IDeleteUserResponse>
+		: CrudTestBase<XPackCluster, IPutUserResponse, IGetUserResponse, IPutUserResponse, IDeleteUserResponse>
 	{
 		private string[] _roles = { "user" };
-		public UserCrudTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public UserCrudTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses Create() => Calls<PutUserDescriptor, PutUserRequest, IPutUserRequest, IPutUserResponse>(
 			CreateInitializer,

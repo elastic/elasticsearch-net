@@ -8,6 +8,7 @@ using Tests.Framework.MockData;
 using FluentAssertions;
 using Newtonsoft.Json.Linq;
 using Xunit;
+using Tests.Framework;
 
 namespace Tests.Search.Request
 {
@@ -188,7 +189,7 @@ namespace Tests.Search.Request
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			foreach (var highlightsByDocumentId in response.Highlights)
 			{

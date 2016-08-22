@@ -13,10 +13,9 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 	/**[[property-inference]]
 	* == Property Name Inference
 	*/
-	[Collection(TypeOfCluster.Indexing)]
-	public class PropertyNames : IntegrationDocumentationTestBase
+	public class PropertyNames : IntegrationDocumentationTestBase , IClusterFixture<WritableCluster>
 	{
-		public PropertyNames(IndexingCluster cluster) : base(cluster) { }
+		public PropertyNames(WritableCluster cluster) : base(cluster) { }
 
 		/**=== Appending suffixes to a Lambda expression body
 		 * Suffixes can be appended to the body of a lambda expression, useful in cases where
@@ -67,7 +66,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			);
 
 			/** The response is not valid */
-			createIndexResponse.IsValid.Should().BeFalse();
+			createIndexResponse.ShouldNotBeValid();
 
 			/** `DebugInformation` provides an audit trail of information to help diagnose the issue */
 			createIndexResponse.DebugInformation.Should().NotBeNullOrEmpty();

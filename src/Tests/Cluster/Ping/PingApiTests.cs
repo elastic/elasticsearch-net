@@ -6,8 +6,7 @@ using Xunit;
 
 namespace Tests.Cluster.Ping
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class PingApiTests : ApiIntegrationTestBase<IPingResponse, IPingRequest, PingDescriptor, PingRequest>
+	public class PingApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IPingResponse, IPingRequest, PingDescriptor, PingRequest>
 	{
 		public PingApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

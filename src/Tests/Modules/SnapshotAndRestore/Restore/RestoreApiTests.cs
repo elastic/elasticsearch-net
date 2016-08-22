@@ -9,10 +9,9 @@ using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Restore
 {
-	[Collection(TypeOfCluster.Indexing)]
-	public class RestoreApiTests : ApiTestBase<IRestoreResponse, IRestoreRequest, RestoreDescriptor, RestoreRequest>
+	public class RestoreApiTests : ApiTestBase<IntrusiveOperationCluster, IRestoreResponse, IRestoreRequest, RestoreDescriptor, RestoreRequest>
 	{
-		public RestoreApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		public RestoreApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 			if (!TestClient.Configuration.RunIntegrationTests) return;
 

@@ -10,8 +10,8 @@ using Xunit;
 
 namespace Tests.Cluster.TaskManagement.TasksCancel
 {
-	[Collection(TypeOfCluster.OwnIndex)]
-	public class TasksCancelApiTests : ApiIntegrationTestBase<ITasksCancelResponse, ITasksCancelRequest, TasksCancelDescriptor, TasksCancelRequest>
+	[SkipVersion("<2.3.0", "")]
+	public class TasksCancelApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, ITasksCancelResponse, ITasksCancelRequest, TasksCancelDescriptor, TasksCancelRequest>
 	{
 		private TaskId TaskId => this.RanIntegrationSetup ? this.ExtendedValue<TaskId>("taskId") : "foo:1";
 
@@ -21,7 +21,7 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 			public string Flag { get; set; }
 		}
 
-		public TasksCancelApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public TasksCancelApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

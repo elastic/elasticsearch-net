@@ -6,8 +6,7 @@ using Xunit;
 
 namespace Tests.Cat.CatRecovery
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class CatRecoveryApiTests : ApiIntegrationTestBase<ICatResponse<CatRecoveryRecord>, ICatRecoveryRequest, CatRecoveryDescriptor, CatRecoveryRequest>
+	public class CatRecoveryApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatRecoveryRecord>, ICatRecoveryRequest, CatRecoveryDescriptor, CatRecoveryRequest>
 	{
 		public CatRecoveryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

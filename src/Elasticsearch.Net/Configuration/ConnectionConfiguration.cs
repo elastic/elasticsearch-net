@@ -134,6 +134,10 @@ namespace Elasticsearch.Net
 		Action<IApiCallDetails> _completedRequestHandler = DefaultCompletedRequestHandler;
 		Action<IApiCallDetails> IConnectionConfigurationValues.OnRequestCompleted => _completedRequestHandler;
 
+		private static void DefaultRequestDataCreated(RequestData response) { }
+		private Action<RequestData> _onRequestDataCreated = DefaultRequestDataCreated;
+		Action<RequestData> IConnectionConfigurationValues.OnRequestDataCreated => _onRequestDataCreated;
+
 		private readonly NameValueCollection _queryString = new NameValueCollection();
 		NameValueCollection IConnectionConfigurationValues.QueryStringParameters => _queryString;
 
@@ -147,7 +151,6 @@ namespace Elasticsearch.Net
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer => _serializer;
 
 		private readonly IConnectionPool _connectionPool;
-		private readonly Func<T, IElasticsearchSerializer> _serializerFactory;
 		IConnectionPool IConnectionConfigurationValues.ConnectionPool => _connectionPool;
 
 		private readonly IConnection _connection;
@@ -160,9 +163,8 @@ namespace Elasticsearch.Net
 		{
 			this._connectionPool = connectionPool;
 			this._connection = connection ?? new HttpConnection();
-			this._serializerFactory = serializerFactory ?? (c=>this.DefaultSerializer((T)this));
 			// ReSharper disable once VirtualMemberCallInContructor
-			this._serializer = _serializerFactory((T)this);
+			this._serializer = serializerFactory?.Invoke((T)this) ?? this.DefaultSerializer((T)this);
 
 			this._requestTimeout = ConnectionConfiguration.DefaultTimeout;
 			this._sniffOnConnectionFault = true;
@@ -302,6 +304,9 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T OnRequestCompleted(Action<IApiCallDetails> handler) =>
 			Assign(a => a._completedRequestHandler += handler ?? DefaultCompletedRequestHandler);
+
+		public T OnRequestDataCreated(Action<RequestData> handler) =>
+			Assign(a => a._onRequestDataCreated += handler ?? DefaultRequestDataCreated);
 
 		/// <summary>
 		/// Basic access authentication credentials to specify with all requests.

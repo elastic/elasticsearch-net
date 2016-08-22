@@ -1,7 +1,3 @@
-Rx-Core
-Rx-Interfaces
-Rx-Linq
-Rx-Main
-Rx-PlatformServices
+System.Reactive
 Humanizer
 NDesk.Options

@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
@@ -40,7 +41,7 @@ namespace Tests.Aggregations.Metric.Stats
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var commitStats = response.Aggs.Stats("commit_stats");
 			commitStats.Should().NotBeNull();
 			commitStats.Average.Should().BeGreaterThan(0);

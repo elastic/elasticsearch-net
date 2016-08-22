@@ -11,10 +11,10 @@ using static Nest.Infer;
 
 namespace Tests.XPack.Security.Role.PutRole
 {
-	[Collection(TypeOfCluster.Shield)]
-	public class PutRoleApiTests : ApiIntegrationTestBase<IPutRoleResponse, IPutRoleRequest, PutRoleDescriptor, PutRoleRequest>
+	[SkipVersion("<2.3.0", "")]
+	public class PutRoleApiTests : ApiIntegrationTestBase<XPackCluster, IPutRoleResponse, IPutRoleRequest, PutRoleDescriptor, PutRoleRequest>
 	{
-		public PutRoleApiTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PutRoleApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.PutRole(this.Role, f),
@@ -88,10 +88,9 @@ namespace Tests.XPack.Security.Role.PutRole
 		}
 	}
 
-	[Collection(TypeOfCluster.Shield)]
 	public class PutRoleRunAsApiTests : PutRoleApiTests
 	{
-		public PutRoleRunAsApiTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PutRoleRunAsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 403;

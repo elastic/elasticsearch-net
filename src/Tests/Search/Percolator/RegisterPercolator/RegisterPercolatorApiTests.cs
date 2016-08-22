@@ -12,11 +12,10 @@ using Xunit;
 
 namespace Tests.Search.Percolator.RegisterPercolator
 {
-	[Collection(TypeOfCluster.Indexing)]
-	[SkipVersion("5.0.0-alpha2,5.0.0-alpha3", "deprecated")]
-	public class RegisterPercolatorApiTests : ApiIntegrationTestBase<IRegisterPercolatorResponse, IRegisterPercolatorRequest, RegisterPercolatorDescriptor<Project>, RegisterPercolatorRequest>
+	[SkipVersion(">5.0.0-alpha1", "deprecated")]
+	public class RegisterPercolatorApiTests : ApiIntegrationTestBase<WritableCluster, IRegisterPercolatorResponse, IRegisterPercolatorRequest, RegisterPercolatorDescriptor<Project>, RegisterPercolatorRequest>
 	{
-		public RegisterPercolatorApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public RegisterPercolatorApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{

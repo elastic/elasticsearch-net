@@ -92,7 +92,7 @@ namespace Tests.Reproduce
 
 			var searchResponse = client.Search<object>(s => s.Index("index"));
 
-			searchResponse.IsValid.Should().BeFalse();
+			searchResponse.ShouldNotBeValid();
 			searchResponse.ServerError.Should().NotBeNull();
 			searchResponse.ServerError.Error.Should().NotBeNull();
 			searchResponse.ServerError.Error.CausedBy.Should().NotBeNull();

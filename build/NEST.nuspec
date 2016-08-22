@@ -35,18 +35,18 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="output\Nest\net45\Nest.dll" target="lib\net45"/>
-		<file src="output\Nest\net45\Nest.pdb" target="lib\net45"/>
-		<file src="output\Nest\net45\Nest.pdb.srcsrv" target="lib\net45"/>
-		<file src="output\Nest\net45\Nest.XML" target="lib\net45"/>
+		<file src="output\v4.5\Nest\Nest.dll" target="lib\net45"/>
+		<file src="output\v4.5\Nest\Nest.pdb" target="lib\net45"/>
+		<file src="output\v4.5\Nest\Nest.pdb.srcsrv" target="lib\net45"/>
+		<file src="output\v4.5\Nest\Nest.XML" target="lib\net45"/>
 
-		<file src="output\Nest\net46\Nest.dll" target="lib\net46"/>
-		<file src="output\Nest\net46\Nest.pdb" target="lib\net46"/>
-		<file src="output\Nest\net46\Nest.pdb.srcsrv" target="lib\net46"/>
-		<file src="output\Nest\net46\Nest.XML" target="lib\net46"/>
+		<file src="output\v4.6\Nest\Nest.dll" target="lib\net46"/>
+		<file src="output\v4.6\Nest\Nest.pdb" target="lib\net46"/>
+		<file src="output\v4.6\Nest\Nest.pdb.srcsrv" target="lib\net46"/>
+		<file src="output\v4.6\Nest\Nest.XML" target="lib\net46"/>
 
-		<file src="output\Nest\netstandard1.3\Nest.dll" target="lib\netstandard1.3"/>
-		<file src="output\Nest\netstandard1.3\Nest.pdb" target="lib\netstandard1.3"/>
-		<file src="output\Nest\netstandard1.3\Nest.pdb.srcsrv" target="lib\netstandard1.3"/>
+		<file src="output\netstandard1.3\Nest\Nest.dll" target="lib\netstandard1.3"/>
+		<file src="output\netstandard1.3\Nest\Nest.pdb" target="lib\netstandard1.3"/>
+		<file src="output\netstandard1.3\Nest\Nest.pdb.srcsrv" target="lib\netstandard1.3"/>
 	</files>
 </package>

@@ -8,11 +8,10 @@ using Xunit;
 
 namespace Tests.Indices.IndexSettings.IndexTemplates
 {
-	[Collection(TypeOfCluster.ReadOnly)]
 	public class IndexTemplateCrudTests
 		: CrudTestBase<IPutIndexTemplateResponse, IGetIndexTemplateResponse, IPutIndexTemplateResponse, IDeleteIndexTemplateResponse>
 	{
-		public IndexTemplateCrudTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public IndexTemplateCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses Create() => Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, IPutIndexTemplateResponse>(
 			CreateInitializer,
@@ -43,10 +42,10 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			ReadFluent,
 			fluent: (s, c, f) => c.GetIndexTemplate(f),
 			fluentAsync: (s, c, f) => c.GetIndexTemplateAsync(f),
-			request: (s, c, r) => c.GetIndexTemplate(r),	
+			request: (s, c, r) => c.GetIndexTemplate(r),
 			requestAsync: (s, c, r) => c.GetIndexTemplateAsync(r)
 		);
-		
+
 		protected GetIndexTemplateRequest ReadInitializer(string name) => new GetIndexTemplateRequest(name);
 		protected IGetIndexTemplateRequest ReadFluent(string name, GetIndexTemplateDescriptor d) => d.Name(name);
 
@@ -64,7 +63,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			PutFluent,
 			fluent: (s, c, f) => c.PutIndexTemplate(s, f),
 			fluentAsync: (s, c, f) => c.PutIndexTemplateAsync(s, f),
-			request: (s, c, r) => c.PutIndexTemplate(r),	
+			request: (s, c, r) => c.PutIndexTemplate(r),
 			requestAsync: (s, c, r) => c.PutIndexTemplateAsync(r)
 		);
 		protected PutIndexTemplateRequest PutInitializer(string name) => new PutIndexTemplateRequest(name)
@@ -95,14 +94,14 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			DeleteFluent,
 			fluent: (s, c, f) => c.DeleteIndexTemplate(s, f),
 			fluentAsync: (s, c, f) => c.DeleteIndexTemplateAsync(s, f),
-			request: (s, c, r) => c.DeleteIndexTemplate(r),	
+			request: (s, c, r) => c.DeleteIndexTemplate(r),
 			requestAsync: (s, c, r) => c.DeleteIndexTemplateAsync(r)
 		);
 
 		protected DeleteIndexTemplateRequest DeleteInitializer(string name) => new DeleteIndexTemplateRequest(name);
 		protected IDeleteIndexTemplateRequest DeleteFluent(string name, DeleteIndexTemplateDescriptor d) => d;
 
-		protected override async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r => r.IsValid.Should().BeFalse());
+		protected override async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r => r.ShouldNotBeValid());
 
 	}
 }

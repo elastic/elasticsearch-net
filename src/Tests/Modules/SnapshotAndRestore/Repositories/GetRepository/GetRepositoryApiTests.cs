@@ -7,8 +7,7 @@ using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Repositories.GetRepository
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class GetRepositoryApiTests : ApiTestBase<IGetRepositoryResponse, IGetRepositoryRequest, GetRepositoryDescriptor, GetRepositoryRequest>
+	public class GetRepositoryApiTests : ApiTestBase<ReadOnlyCluster, IGetRepositoryResponse, IGetRepositoryRequest, GetRepositoryDescriptor, GetRepositoryRequest>
 	{
 		public GetRepositoryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
