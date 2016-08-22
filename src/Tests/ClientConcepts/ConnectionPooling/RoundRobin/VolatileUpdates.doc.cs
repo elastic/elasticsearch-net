@@ -12,7 +12,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 	{
 		/**== Volatile Updates */
 		protected int NumberOfNodes = 10;
-		private Random Random = new Random();
+		private readonly Random Random = new Random();
 
 		private List<Node> Update = Enumerable.Range(9200, 10).Select(p => new Uri("http://localhost:" + p)).Select(u => new Node(u)).ToList();
 

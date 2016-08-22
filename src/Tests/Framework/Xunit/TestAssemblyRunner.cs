@@ -68,7 +68,10 @@ namespace Xunit
 			{
 				var type = group.Key?.GetType();
 				var clusterName = type?.Name.Replace("Cluster", "") ?? "UNKNOWN";
-				var dop = group.Key.MaxConcurrency == 0 ? defaultMaxConcurrency : group.Key.MaxConcurrency;
+				var dop = group.Key != null && group.Key.MaxConcurrency > 0 
+                    ? group.Key.MaxConcurrency
+                    : defaultMaxConcurrency;
+
 				//if (type != typeof(ReadOnlyCluster)) continue;
 
 				clusterTotals.Add(clusterName, Stopwatch.StartNew());

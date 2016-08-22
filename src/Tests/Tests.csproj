@@ -573,6 +573,7 @@
     <Compile Include="Framework\Integration\Process\ElasticsearchMessage.cs" />
     <Compile Include="Framework\Integration\Process\ElasticsearchNodeInfo.cs" />
     <Compile Include="Framework\Integration\Process\ElasticsearchVersionInfo.cs" />
+    <Compile Include="Framework\VirtualClustering\WaitingInMemoryConnection.cs" />
     <Compile Include="Framework\Xunit\ForEachAsyncExtensions.cs" />
     <Compile Include="Framework\Xunit\IClusterFixture.cs" />
     <Compile Include="Framework\Xunit\TestAssemblyRunner.cs" />

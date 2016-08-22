@@ -122,45 +122,63 @@ namespace Elasticsearch.Net
 
 		public void FirstPoolUsage(SemaphoreSlim semaphore)
 		{
-			if (!this.FirstPoolUsageNeedsSniffing) return;
-			if (!semaphore.Wait(this._settings.RequestTimeout))
-				throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
-			if (!this.FirstPoolUsageNeedsSniffing) return;
-			try
-			{
-				using (this.Audit(SniffOnStartup))
-				{
-					this.Sniff();
-					this._connectionPool.SniffedOnStartup = true;
-				}
-			}
-			finally
-			{
-				semaphore.Release();
-			}
-		}
+            if (!this.FirstPoolUsageNeedsSniffing) return;
+            if (!semaphore.Wait(this._settings.RequestTimeout))
+            {
+                if (this.FirstPoolUsageNeedsSniffing)
+                    throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, null);
+                return;
+            }
+
+            if (!this.FirstPoolUsageNeedsSniffing)
+            {
+                semaphore.Release();
+                return;
+            }
+
+            try
+            {
+                using (this.Audit(SniffOnStartup))
+                {
+                    this.Sniff();
+                    this._connectionPool.SniffedOnStartup = true;
+                }
+            }
+            finally
+            {
+                semaphore.Release();
+            }
+        }
 
 		public async Task FirstPoolUsageAsync(SemaphoreSlim semaphore)
 		{
-			if (!this.FirstPoolUsageNeedsSniffing) return;
-			var success = await semaphore.WaitAsync(this._settings.RequestTimeout, this._cancellationToken).ConfigureAwait(false);
-			if (!success)
-				throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
+            if (!this.FirstPoolUsageNeedsSniffing) return;
+            var success = await semaphore.WaitAsync(this._settings.RequestTimeout, _cancellationToken).ConfigureAwait(false);
+            if (!success)
+            {
+                if (this.FirstPoolUsageNeedsSniffing)
+                    throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, null);
+                return;
+            }
 
-			if (!this.FirstPoolUsageNeedsSniffing) return;
-			try
-			{
-				using (this.Audit(SniffOnStartup))
-				{
-					await this.SniffAsync().ConfigureAwait(false);
-					this._connectionPool.SniffedOnStartup = true;
-				}
-			}
-			finally
-			{
-				semaphore.Release();
-			}
-		}
+            if (!this.FirstPoolUsageNeedsSniffing)
+            {
+                semaphore.Release();
+                return;
+            }
+            try
+            {
+                using (this.Audit(SniffOnStartup))
+                {
+                    await this.SniffAsync().ConfigureAwait(false);
+                    this._connectionPool.SniffedOnStartup = true;
+                }
+            }
+            finally
+            {
+                semaphore.Release();
+            }
+        }
 
 		public void SniffOnStaleCluster()
 		{
