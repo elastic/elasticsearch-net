@@ -107,4 +107,107 @@ namespace Tests.Document.Multiple.MultiGet
 			}
 		}
 	}
+
+	public class MultiGetMetadataApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IMultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
+	{
+		public MultiGetMetadataApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.MultiGet(f),
+			fluentAsync: (client, f) => client.MultiGetAsync(f),
+			request: (client, r) => client.MultiGet(r),
+			requestAsync: (client, r) => client.MultiGetAsync(r)
+		);
+
+		private IEnumerable<string> _ids = Project.Projects.Select(d => d.Name).Take(10);
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override string UrlPath => $"/project/project/_mget";
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override object ExpectJson => new
+		{
+			ids = this._ids
+		};
+
+		protected override Func<MultiGetDescriptor, IMultiGetRequest> Fluent => d => d
+			.Index<Project>()
+			.Type<Project>()
+			.GetMany<Project>(this._ids);
+
+		protected override MultiGetRequest Initializer => new MultiGetRequest(Index<Project>(), Type<Project>())
+		{
+			Documents = this._ids.Select(n => new MultiGetOperation<Project>(n))
+		};
+
+		protected override void ExpectResponse(IMultiGetResponse response)
+		{
+			response.Documents.Should().NotBeEmpty().And.HaveCount(10);
+
+			foreach (var hit in response.GetMany<Project>(_ids))
+			{
+				hit.Index.Should().NotBeNullOrWhiteSpace();
+				hit.Type.Should().NotBeNullOrWhiteSpace();
+				hit.Id.Should().NotBeNullOrWhiteSpace();
+				hit.Found.Should().BeTrue();
+				hit.Version.Should().Be(1);
+				hit.Timestamp.HasValue.Should().BeTrue();
+				hit.Ttl.HasValue.Should().BeTrue();
+			}
+		}
+	}
+
+	public class MultiGetParentApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IMultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
+	{
+		public MultiGetParentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.MultiGet(f),
+			fluentAsync: (client, f) => client.MultiGetAsync(f),
+			request: (client, r) => client.MultiGet(r),
+			requestAsync: (client, r) => client.MultiGetAsync(r)
+		);
+
+		private IEnumerable<CommitActivity> _activities = CommitActivity.CommitActivities.Take(10);
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override string UrlPath => $"/project/commits/_mget";
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override object ExpectJson => new
+		{
+			docs = _activities.Select(p => new { _id = p.Id, _routing = p.ProjectName })
+		};
+
+		protected override Func<MultiGetDescriptor, IMultiGetRequest> Fluent => d => d
+			.Index<Project>()
+			.Type<CommitActivity>()
+			.GetMany<CommitActivity>(this._activities.Select(c => c.Id), (m, id) => m.Routing(_activities.Single(a => a.Id == id).ProjectName));
+
+		protected override MultiGetRequest Initializer => new MultiGetRequest(Index<Project>(), Type<CommitActivity>())
+		{
+			Documents = this._activities.Select(n => new MultiGetOperation<CommitActivity>(n.Id) { Routing = n.ProjectName })
+		};
+
+		protected override void ExpectResponse(IMultiGetResponse response)
+		{
+			response.Documents.Should().NotBeEmpty().And.HaveCount(10);
+
+			foreach (var hit in response.GetMany<CommitActivity>(_activities.Select(c => c.Id)))
+			{
+				hit.Index.Should().NotBeNullOrWhiteSpace();
+				hit.Type.Should().NotBeNullOrWhiteSpace();
+				hit.Id.Should().NotBeNullOrWhiteSpace();
+				hit.Found.Should().BeTrue();
+				hit.Version.Should().Be(1);
+				hit.Timestamp.HasValue.Should().BeTrue();
+				hit.Parent.Should().NotBeNullOrEmpty();
+				hit.Routing.Should().NotBeNullOrEmpty();
+			}
+		}
+	}
 }

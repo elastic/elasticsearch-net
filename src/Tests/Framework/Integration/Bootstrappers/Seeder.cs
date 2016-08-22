@@ -64,6 +64,12 @@ namespace Tests.Framework.Integration
 		{
 			this.Client.IndexMany(Project.Projects);
 			this.Client.IndexMany(Developer.Developers);
+			this.Client.Bulk(b => b
+				.IndexMany(
+					CommitActivity.CommitActivities,
+					(d,c) => d.Document(c).Parent(c.ProjectName)
+				)
+			);
 			this.Client.Refresh(Nest.Indices.Index<Project>().And<Developer>());
 		}
 
@@ -133,7 +139,6 @@ namespace Tests.Framework.Integration
 #pragma warning disable 618
 					.Map<CommitActivity>(m => m
 						.Parent<Project>()
-
 						.TimestampField(t => t
 							.Enabled()
 						)
@@ -155,9 +160,12 @@ namespace Tests.Framework.Integration
 
 #pragma warning disable 618
 		public static TypeMappingDescriptor<Project> MapProject(TypeMappingDescriptor<Project> m) => m
-
 			.TimestampField(t => t
 				.Enabled()
+			)
+			.TtlField(t => t
+				.Enable()
+				.Default("7d")
 			)
 #pragma warning restore 618
 			.Properties(props => props

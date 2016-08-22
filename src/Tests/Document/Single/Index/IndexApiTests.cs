@@ -110,7 +110,7 @@ namespace Tests.Document.Single.Index
 		public void Index()
 		{
 			var indexName = RandomString();
-			var commitActivity = CommitActivity.Generator.Generate(1).First();
+			var commitActivity = CommitActivity.CommitActivities.First();
 			var indexResult = this.Client.Index(commitActivity, f => f.Index(indexName));
 			indexResult.ShouldBeValid();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
