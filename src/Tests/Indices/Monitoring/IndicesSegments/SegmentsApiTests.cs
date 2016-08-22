@@ -7,8 +7,7 @@ using Xunit;
 
 namespace Tests.Indices.Monitoring.IndicesSegments
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class SegmentsApiTests : ApiIntegrationTestBase<ISegmentsResponse, ISegmentsRequest, SegmentsDescriptor, SegmentsRequest>
+	public class SegmentsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISegmentsResponse, ISegmentsRequest, SegmentsDescriptor, SegmentsRequest>
 	{
 		public SegmentsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

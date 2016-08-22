@@ -11,8 +11,7 @@ using static Nest.Infer;
 
 namespace Tests.Document.Multiple.MultiTermVectors
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class MultiTermVectorsApiTests : ApiIntegrationTestBase<IMultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor, MultiTermVectorsRequest>
+	public class MultiTermVectorsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IMultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor, MultiTermVectorsRequest>
 	{
 		public MultiTermVectorsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
@@ -54,7 +53,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 
 		protected override void ExpectResponse(IMultiTermVectorsResponse response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			response.Documents.Should().NotBeEmpty().And.HaveCount(2).And.OnlyContain(d => d.Found);
 			var termvectorDoc = response.Documents.FirstOrDefault(d => d.TermVectors.Count > 0);
 

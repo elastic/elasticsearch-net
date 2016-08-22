@@ -1,5 +1,5 @@
 {
-  "version": "2.4.3",
+  "version": "2.5.0-ci20160810081439",
   "authors": [
     "Elastic and contributors"
   ],
@@ -25,7 +25,7 @@
       "type": "git",
       "url": "https://github.com/elastic/elasticsearch-net"
     },
-    "releaseNotes": "See https://github.com/elastic/elasticsearch-net/releases/tag/2.4.3"
+    "releaseNotes": "See https://github.com/elastic/elasticsearch-net/releases/tag/2.5.0-ci20160810081439"
   },
 
   "copyright": "2014-2016 Elasticsearch BV",
@@ -59,48 +59,6 @@
     "Newtonsoft.Json": "9.0.1"
   },
   "frameworks": {
-    "net46": {
-      "buildOptions": {
-        "define": [
-          "NET46"
-        ]
-      },
-      "frameworkAssemblies": {
-        "System.Dynamic.Runtime": {
-          "type": "build"
-        },
-        "System.Runtime": {
-          "type": "build"
-        },
-        "System.Runtime.Serialization": {
-          "type": "build"
-        },
-        "System.ServiceModel": {
-          "type": "build"
-        }
-      }
-    },
-    "net45": {
-      "buildOptions": {
-        "define": [
-          "NET45"
-        ]
-      },
-      "frameworkAssemblies": {
-        "System.Dynamic.Runtime": {
-          "type": "build"
-        },
-        "System.Runtime": {
-          "type": "build"
-        },
-        "System.Runtime.Serialization": {
-          "type": "build"
-        },
-        "System.ServiceModel": {
-          "type": "build"
-        }
-      }
-    },
     "netstandard1.3": {
       "buildOptions": {
         "define": [

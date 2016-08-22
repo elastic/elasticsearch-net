@@ -1,36 +1,48 @@
 using System;
 using System.Collections.Specialized;
+using System.Threading;
 using Elasticsearch.Net;
 using Nest;
 
 namespace Tests.Framework.Integration
 {
-	public abstract class ClusterBase : IIntegrationCluster, IDisposable
+	public abstract class ClusterBase : IDisposable
 	{
 		protected virtual bool DoNotSpawnIfAlreadyRunning => TestClient.Configuration.DoNotSpawnIfAlreadyRunning;
+
 		public ElasticsearchNode Node { get; }
-		protected IObservable<ElasticsearchMessage> ConsoleOut { get; set; }
+
+		public IElasticClient Client => this.Node.Client;
 
 		protected virtual bool EnableShield => false;
+
+		public virtual int MaxConcurrency => 0;
 
 		protected ClusterBase()
 		{
 			var name = this.GetType().Name.Replace("Cluster", "");
-			this.Node = new ElasticsearchNode(TestClient.Configuration.ElasticsearchVersion, TestClient.Configuration.RunIntegrationTests, DoNotSpawnIfAlreadyRunning, name, EnableShield);
+			this.Node = new ElasticsearchNode(
+				TestClient.Configuration.ElasticsearchVersion,
+				TestClient.Configuration.RunIntegrationTests,
+				DoNotSpawnIfAlreadyRunning, name, EnableShield);
+
 			this.Node.BootstrapWork.Subscribe(handle =>
 			{
-				this.Boostrap();
+				this.Bootstrap();
 				handle.Set();
 			});
-			this.ConsoleOut = this.Node.Start(name, this.ServerSettings);
+		}
+
+		public void Start()
+		{
+			this.Node.Start(this.ServerSettings);
 		}
 
 		protected virtual string[] ServerSettings { get; } = new string[] { };
 
-		public virtual void Boostrap() { }
+		public virtual void Bootstrap() { }
 
 		public void Dispose() => this.Node?.Dispose();
 
-		public IElasticClient Client(Func<ConnectionSettings, ConnectionSettings> settings = null, bool forceInMemory = false) => this.Node.Client(settings, forceInMemory);
 	}
 }

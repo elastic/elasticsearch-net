@@ -7,8 +7,8 @@ using Xunit;
 
 namespace Tests.Modules.Scripting.GetScript
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class GetScriptApiTests : ApiTestBase<IGetScriptResponse, IGetScriptRequest, GetScriptDescriptor, GetScriptRequest>
+	public class GetScriptApiTests
+		: ApiTestBase<ReadOnlyCluster, IGetScriptResponse, IGetScriptRequest, GetScriptDescriptor, GetScriptRequest>
 	{
 		public GetScriptApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

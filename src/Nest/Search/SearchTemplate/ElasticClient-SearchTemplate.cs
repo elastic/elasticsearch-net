@@ -9,7 +9,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// The /_search/template endpoint allows to use the mustache language to pre render search 
+		/// The /_search/template endpoint allows to use the mustache language to pre render search
 		/// requests, before they are executed and fill existing templates with template parameters.
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
@@ -99,7 +99,7 @@ namespace Nest
 		{
 			var converter = this.CreateCovariantSearchSelector<T, TResult>(d);
 			var dict = response.Success
-				? new JsonNetSerializer(this.ConnectionSettings, converter).Deserialize<SearchResponse<TResult>>(stream)
+				? this.ConnectionSettings.StatefulSerializer(converter).Deserialize<SearchResponse<TResult>>(stream)
 				: null;
 			return dict;
 		}

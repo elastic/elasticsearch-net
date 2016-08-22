@@ -10,10 +10,9 @@ using Xunit;
 
 namespace Tests.QueryDsl
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public abstract class QueryDslUsageTestsBase : ApiTestBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	public abstract class QueryDslUsageTestsBase : ApiTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		protected QueryDslUsageTestsBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected QueryDslUsageTestsBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<Project>(f),
 			fluentAsync: (client, f) => client.SearchAsync<Project>(f),
@@ -31,13 +30,10 @@ namespace Tests.QueryDsl
 
 		protected override object ExpectJson => new { query = this.QueryJson };
 
-		[U]
-		public void FluentIsNotConditionless() =>
+		[U] public void FluentIsNotConditionless() =>
 			AssertIsNotConditionless(this.QueryFluent(new QueryContainerDescriptor<Project>()));
 
-
-		[U]
-		public void InitializerIsNotConditionless() => AssertIsNotConditionless(this.QueryInitializer);
+		[U] public void InitializerIsNotConditionless() => AssertIsNotConditionless(this.QueryInitializer);
 
 		private void AssertIsNotConditionless(IQueryContainer c)
 		{
@@ -61,10 +57,9 @@ namespace Tests.QueryDsl
 
 		protected QueryContainer VerbatimQuery = new QueryContainer(new TermQuery { IsVerbatim = true });
 
-		[U]
-		public void SeenByVisitor()
+		[U] public void SeenByVisitor()
 		{
-			var visitor = new DslPrettyPrintVisitor(TestClient.CreateSettings());
+			var visitor = new DslPrettyPrintVisitor(TestClient.GlobalDefaultSettings);
 			var query = this.QueryFluent(new QueryContainerDescriptor<Project>());
 			query.Accept(visitor);
 			var pretty = visitor.PrettyPrint;
@@ -72,8 +67,7 @@ namespace Tests.QueryDsl
 		}
 
 
-		[U]
-		public void ConditionlessWhenExpectedToBe()
+		[U] public void ConditionlessWhenExpectedToBe()
 		{
 			if (ConditionlessWhen == null) return;
 			foreach (var when in ConditionlessWhen)
@@ -87,8 +81,7 @@ namespace Tests.QueryDsl
 			((IQueryContainer)this.QueryInitializer).IsConditionless.Should().BeFalse();
 		}
 
-		[U]
-		public void NotConditionlessWhenExpectedToBe()
+		[U] public void NotConditionlessWhenExpectedToBe()
 		{
 			if (NotConditionlessWhen == null) return;
 			foreach (var when in NotConditionlessWhen)

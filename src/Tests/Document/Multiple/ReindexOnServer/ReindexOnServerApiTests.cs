@@ -12,9 +12,8 @@ using static Nest.Infer;
 
 namespace Tests.Document.Multiple.ReindexOnServer
 {
-	[Collection(IntegrationContext.OwnIndex)]
 	[SkipVersion("<2.3.0", "")]
-	public class ReindexOnServerApiTests : ApiIntegrationTestBase<IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor, ReindexOnServerRequest>
+	public class ReindexOnServerApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor, ReindexOnServerRequest>
 	{
 		public class Test
 		{
@@ -22,7 +21,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			public string Flag { get; set; }
 		}
 
-		public ReindexOnServerApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public ReindexOnServerApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -54,8 +53,8 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			.Source(s=>s
 				.Index(CallIsolatedValue)
 				.Type("test")
-                .Size(100)
-                .Query<Test>(q=>q
+				.Size(100)
+				.Query<Test>(q=>q
 					.Match(m=>m
 						.Field(p=>p.Flag)
 						.Query("bar")
@@ -83,9 +82,9 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				Type = "test",
 				Query = new MatchQuery { Field = Field<Test>(p=>p.Flag), Query = "bar"},
 				Sort = new List<ISort> { new SortField { Field = "id", Order = SortOrder.Ascending } },
-                Size = 100
+				Size = 100
 
-            },
+			},
 			Destination = new ReindexDestination
 			{
 				Index = CallIsolatedValue + "-clone",
@@ -133,8 +132,8 @@ namespace Tests.Document.Multiple.ReindexOnServer
 					query = new { match = new { flag = new { query = "bar" } } },
 					sort = new [] { new { id = new { order = "asc" } } },
 					type = new [] { "test" },
-                    size = 100
-                }
+					size = 100
+				}
 			};
 	}
 }

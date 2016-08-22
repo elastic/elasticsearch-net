@@ -81,6 +81,29 @@ audit = await audit.TraceCall(
 );
 ----
 
+[[gateway-timeout]]
+=== 504 Gateway Timeout
+
+Will be treated as an error that requires retrying
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(10)
+    .ClientCalls(r => r.FailAlways(504))
+    .ClientCalls(r => r.OnPort(9201).SucceedAlways())
+    .StaticConnectionPool()
+    .Settings(s => s.DisablePing())
+);
+
+audit = await audit.TraceCall(
+    new ClientCall {
+        { BadResponse, 9200 },
+        { HealthyResponse, 9201 },
+    }
+);
+----
+
 If a call returns a valid http status code other than 502 or 503, the request won't be retried.
 
 IMPORTANT: Different requests may have different status codes that are deemed valid. For example,

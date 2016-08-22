@@ -2249,7 +2249,6 @@ namespace Nest
 		///<summary>A comma-separated list of alias names to return</summary>
 		public GetAliasDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetAliasDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 

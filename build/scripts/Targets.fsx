@@ -1,5 +1,4 @@
 #load @"Paths.fsx"
-#load @"Projects.fsx"
 #load @"Versioning.fsx"
 #load @"Testing.fsx"
 #load @"Signing.fsx"
@@ -9,24 +8,15 @@
 #load @"Profiling.fsx"
 
 open System
-open System.IO
 
 open Fake 
 
-open Paths
 open Building
 open Testing
 open Signing
 open Versioning
-open Documentation
 open Releasing
 open Profiling
-
-let private buildFailed errors =
-    raise (BuildException("The project build failed.", errors |> List.ofSeq))
-    
-let private testsFailed errors =
-    raise (BuildException("The project tests failed.", errors |> List.ofSeq))
 
 // Default target
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
@@ -40,18 +30,6 @@ Target "Test"  <| fun _ -> Tests.RunUnitTests()
 Target "QuickTest"  <| fun _ -> Tests.RunUnitTests()
 
 Target "Integrate"  <| fun _ -> Tests.RunIntegrationTests() (getBuildParamOrDefault "esversions" "")
-
-Target "WatchTests"  <| fun _ -> 
-    traceFAKE "Starting quick test (incremental compile then test)"
-    use watcher = (!! "src/Tests/**/*.cs").And("src/Tests/**/*.md") |> WatchChanges (fun changes -> 
-            printfn "%A" changes
-            Build.QuickCompile()
-            //Documentation.RunLitterateur()
-            Tests.RunContinuous()
-        )
-    
-    System.Console.ReadLine() |> ignore 
-    watcher.Dispose() 
 
 Target "Profile" <| fun _ -> Profiler.Run()
 
@@ -73,9 +51,6 @@ Target "Canary" <| fun _ ->
     let apiKey = (getBuildParam "apikey");
     let feed = (getBuildParamOrDefault "feed" "elasticsearch-net");
     if (not (String.IsNullOrWhiteSpace apiKey) || apiKey = "ignore") then Release.PublishCanaryBuild apiKey feed
-
-BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
-
 
 // Dependencies
 "Clean" 
@@ -99,17 +74,11 @@ BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
 "QuickCompile"
   ==> "QuickTest"
 
-"QuickCompile"
+"BuildApp"
   ==> "Integrate"
-
-"WatchTests"
 
 "Build"
   ==> "Release"
-
-"BuildApp"
-"CreateKeysIfAbsent"
-"Version"
 
 // start build
 RunTargetOrDefault "Build"

@@ -12,6 +12,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using Xunit.Abstractions;
 using static Nest.Infer;
+using Xunit.Sdk;
 
 namespace Tests.ClientConcepts.HighLevel.Caching
 {

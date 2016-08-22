@@ -9,14 +9,15 @@ using static Nest.Infer;
 
 namespace Tests.Indices.StatusManagement.SyncedFlush
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class SyncedFlushApiTests : ApiIntegrationTestBase<ISyncedFlushResponse, ISyncedFlushRequest, SyncedFlushDescriptor, SyncedFlushRequest>
+	public class SyncedFlushApiTests
+		: ApiIntegrationAgainstNewIndexTestBase
+			<IntrusiveOperationCluster, ISyncedFlushResponse, ISyncedFlushRequest, SyncedFlushDescriptor, SyncedFlushRequest>
 	{
-		public SyncedFlushApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public SyncedFlushApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.SyncedFlush(Index<Project>(), f),
-			fluentAsync: (client, f) => client.SyncedFlushAsync(Index<Project>(), f),
+			fluent: (client, f) => client.SyncedFlush(CallIsolatedValue, f),
+			fluentAsync: (client, f) => client.SyncedFlushAsync(CallIsolatedValue, f),
 			request: (client, r) => client.SyncedFlush(r),
 			requestAsync: (client, r) => client.SyncedFlushAsync(r)
 		);
@@ -24,10 +25,10 @@ namespace Tests.Indices.StatusManagement.SyncedFlush
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/_flush/synced?allow_no_indices=true";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_flush/synced?allow_no_indices=true";
 
 		protected override Func<SyncedFlushDescriptor, ISyncedFlushRequest> Fluent => d => d.AllowNoIndices();
 
-		protected override SyncedFlushRequest Initializer => new SyncedFlushRequest(Index<Project>()) { AllowNoIndices = true };
+		protected override SyncedFlushRequest Initializer => new SyncedFlushRequest(CallIsolatedValue) { AllowNoIndices = true };
 	}
 }

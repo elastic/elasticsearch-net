@@ -15,7 +15,7 @@ namespace Profiling
 
             using (var cluster = new ProfilingCluster())
             {
-                var client = cluster.Client();
+                var client = cluster.Client;
                 var output = new ColoredConsoleWriter();
 
 	            using (Snapshot.Create())

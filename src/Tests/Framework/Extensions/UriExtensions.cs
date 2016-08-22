@@ -1,0 +1,48 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using FluentAssertions;
+
+namespace Tests
+{
+	public static class UriExtensions
+	{
+
+		public static void PathEquals(this Uri u, string pathAndQueryString)
+		{
+			var paths = (pathAndQueryString ?? "").Split(new[] { '?' }, 2);
+
+			string path = paths.First(), query = string.Empty;
+			if (paths.Length > 1)
+				query = paths.Last();
+
+			var expectedUri = new UriBuilder("http", "localhost", u.Port, path, "?" + query).Uri;
+
+			u.AbsolutePath.Should().Be(expectedUri.AbsolutePath);
+			u = new UriBuilder(u.Scheme, u.Host, u.Port, u.AbsolutePath, u.Query.Replace("pretty=true&", "").Replace("pretty=true", "")).Uri;
+
+			var queries = new[] { u.Query, expectedUri.Query };
+			if (queries.All(string.IsNullOrWhiteSpace)) return;
+			if (queries.Any(string.IsNullOrWhiteSpace))
+			{
+				queries.Last().Should().Be(queries.First());
+				return;
+			}
+
+			var clientKeyValues = u.Query.Substring(1).Split('&')
+				.Select(v => v.Split('='))
+				.Where(k => !string.IsNullOrWhiteSpace(k[0]))
+				.ToDictionary(k => k[0], v => v.Last());
+			var expectedKeyValues = expectedUri.Query.Substring(1).Split('&')
+				.Select(v => v.Split('='))
+				.Where(k => !string.IsNullOrWhiteSpace(k[0]))
+				.ToDictionary(k => k[0], v => v.Last());
+
+			clientKeyValues.Count().Should().Be(expectedKeyValues.Count());
+			clientKeyValues.Should().ContainKeys(expectedKeyValues.Keys.ToArray());
+			clientKeyValues.Should().Equal(expectedKeyValues);
+		}
+	}
+}

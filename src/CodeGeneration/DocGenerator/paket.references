@@ -2,3 +2,4 @@ Microsoft.CodeAnalysis.CSharp
 AsciiDocNet
 Newtonsoft.Json
 System.Collections.Immutable
+System.Reflection.Metadata 

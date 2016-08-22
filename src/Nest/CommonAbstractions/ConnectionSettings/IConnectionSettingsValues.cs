@@ -16,5 +16,9 @@ namespace Nest
 		string DefaultIndex { get; }
 		Func<string, string> DefaultFieldNameInferrer { get; }
 		Func<Type, string> DefaultTypeNameInferrer { get; }
+
+		ISerializerFactory SerializerFactory { get; }
+
+		IElasticsearchSerializer StatefulSerializer(JsonConverter converter);
 	}
 }

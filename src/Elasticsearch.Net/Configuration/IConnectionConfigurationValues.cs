@@ -138,6 +138,8 @@ namespace Elasticsearch.Net
 		/// </summary>
 		BasicAuthenticationCredentials BasicAuthenticationCredentials { get; }
 
+		Action<RequestData> OnRequestDataCreated { get; }
+
 		/// <summary>
 		/// KeepAliveTime - specifies the timeout, in milliseconds, with no
 		/// activity until the first keep-alive packet is sent.

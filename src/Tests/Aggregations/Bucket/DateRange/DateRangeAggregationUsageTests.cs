@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
@@ -83,7 +84,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily
 			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 			*/
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			var dateHistogram = response.Aggs.DateRange("projects_date_ranges");
 			dateHistogram.Should().NotBeNull();

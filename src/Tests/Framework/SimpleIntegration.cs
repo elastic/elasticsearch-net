@@ -6,16 +6,15 @@ namespace Tests.Framework
 {
 	public abstract class SimpleIntegration
 	{
-		readonly IIntegrationCluster _cluster;
+		readonly ClusterBase _cluster;
 
-		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings;
-		protected virtual IElasticClient Client => this._cluster.Client(GetConnectionSettings);
+		protected virtual IElasticClient Client => this._cluster.Client;
 
-		public SimpleIntegration(IIntegrationCluster cluster)
+		public SimpleIntegration(ClusterBase cluster)
 		{
 			this._cluster = cluster;
 		}
 
-		public string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
+		public static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 	}
 }

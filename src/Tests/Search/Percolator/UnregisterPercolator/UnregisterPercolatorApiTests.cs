@@ -9,12 +9,11 @@ using Xunit;
 
 namespace Tests.Search.Percolator.UnregisterPercolator
 {
-	[Collection(IntegrationContext.Indexing)]
-	public class UnregisterPercolatorApiTests : ApiIntegrationTestBase<IUnregisterPercolatorResponse, IUnregisterPercolatorRequest, UnregisterPercolatorDescriptor<Project>, UnregisterPercolatorRequest>
+	public class UnregisterPercolatorApiTests : ApiIntegrationTestBase<WritableCluster, IUnregisterPercolatorResponse, IUnregisterPercolatorRequest, UnregisterPercolatorDescriptor<Project>, UnregisterPercolatorRequest>
 	{
-		public UnregisterPercolatorApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		public UnregisterPercolatorApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
-		
+
 		}
 
 		protected override void OnBeforeCall(IElasticClient client)

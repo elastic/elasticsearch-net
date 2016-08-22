@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq.Expressions;
 using Nest;
 using Tests.Framework;
@@ -13,21 +13,20 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 	/**[[property-inference]]
 	* == Property Name Inference
 	*/
-	[Collection(IntegrationContext.Indexing)]
-	public class PropertyNames : SimpleIntegration
+	public class PropertyNames : SimpleIntegration, IClusterFixture<WritableCluster>
 	{
 		private IElasticClient _client;
 
-		public PropertyNames(IndexingCluster cluster) : base(cluster)
+		public PropertyNames(WritableCluster cluster) : base(cluster)
 		{
-			_client = cluster.Client();
+			_client = cluster.Client;
 		}
 
 		/**=== Appending suffixes to a Lambda expression body
 		 * Suffixes can be appended to the body of a lambda expression, useful in cases where
-		 * you have a POCO property mapped as a {ref_current}/_multi_fields.html[multi_field]
+		 * you have a POCO property mapped as a multi field
 		 * and want to use strongly typed access based on the property, yet append a suffix to the
-		 * generated field name in order to access a particular `multi_field`.
+		 * generated field name in order to access a particular multi field.
 		 *
 		 * The `.Suffix()` extension method can be used for this purpose and when serializing expressions suffixed
 		 * in this way, the serialized field name resolves to the last token
@@ -52,7 +51,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 		/**=== Naming conventions
 		 * Currently, the name of a field cannot contain a `.` in Elasticsearch due to the potential for ambiguity with
-		 * a field that is mapped as a {ref_current}/_multi_fields.html[multi_field].
+		 * a field that is mapped as a multi field.
 		 *
 		 * In these cases, NEST allows the call to go to Elasticsearch, deferring the naming conventions to the server side and,
 		 * in the case of a `.` in a field name, a `400 Bad Response` is returned with a server error indicating the reason
@@ -72,7 +71,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			);
 
 			/** The response is not valid */
-			createIndexResponse.IsValid.Should().BeFalse();
+			createIndexResponse.ShouldNotBeValid();
 
 			/** `DebugInformation` provides an audit trail of information to help diagnose the issue */
 			createIndexResponse.DebugInformation.Should().NotBeNullOrEmpty();

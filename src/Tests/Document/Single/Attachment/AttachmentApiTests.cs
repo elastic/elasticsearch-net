@@ -15,9 +15,8 @@ namespace Tests.Document.Single.Attachment
 		public Nest.Attachment Attachment { get; set; }
 	}
 
-	[Collection(IntegrationContext.Indexing)]
 	public abstract class AttachmentApiTestsBase :
-		ApiIntegrationTestBase<IIndexResponse, IIndexRequest<Document>, IndexDescriptor<Document>, IndexRequest<Document>>
+		ApiIntegrationTestBase<WritableCluster, IIndexResponse, IIndexRequest<Document>, IndexDescriptor<Document>, IndexRequest<Document>>
 	{
 		// Base 64 encoded version of Attachment_Test_Document.pdf
 		protected static readonly string Content =
@@ -28,7 +27,7 @@ namespace Tests.Document.Single.Attachment
 
 		protected virtual Document ModifyDocument(Document document) => document;
 
-		protected AttachmentApiTestsBase(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		protected AttachmentApiTestsBase(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 		}
 
@@ -123,7 +122,7 @@ namespace Tests.Document.Single.Attachment
 
 		protected override void ExpectResponse(IIndexResponse response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			var searchResponse = Client.Search<Document>(s => s
 				.Index(CallIsolatedValue)
@@ -135,16 +134,15 @@ namespace Tests.Document.Single.Attachment
 				)
 			);
 
-			searchResponse.IsValid.Should().BeTrue();
+			searchResponse.ShouldBeValid();
 			searchResponse.Documents.Count().Should().Be(1);
 		}
 	}
 
-	[Collection(IntegrationContext.Indexing)]
 	public class AttachmentApiTests : AttachmentApiTestsBase
 	{
 
-		public AttachmentApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		public AttachmentApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 		}
 
@@ -156,7 +154,7 @@ namespace Tests.Document.Single.Attachment
 
 		protected override void ExpectResponse(IIndexResponse response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			var searchResponse = Client.Search<Document>(s => s
 				.Index(CallIsolatedValue)
@@ -168,7 +166,7 @@ namespace Tests.Document.Single.Attachment
 				)
 			);
 
-			searchResponse.IsValid.Should().BeTrue();
+			searchResponse.ShouldBeValid();
 			searchResponse.Documents.Count().Should().Be(1);
 
 			searchResponse = Client.Search<Document>(s => s
@@ -179,7 +177,7 @@ namespace Tests.Document.Single.Attachment
 				)
 			);
 
-			searchResponse.IsValid.Should().BeTrue();
+			searchResponse.ShouldBeValid();
 			searchResponse.Documents.Count().Should().Be(1);
 
 			// mapper attachment extracts content type
@@ -190,7 +188,6 @@ namespace Tests.Document.Single.Attachment
 		}
 	}
 
-	[Collection(IntegrationContext.Indexing)]
 	public class AttachmentExplicitWithMetadataApiTests : AttachmentApiTestsBase
 	{
 		protected override Document Document =>
@@ -206,7 +203,7 @@ namespace Tests.Document.Single.Attachment
 				}
 			};
 
-		public AttachmentExplicitWithMetadataApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		public AttachmentExplicitWithMetadataApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 		}
 
@@ -225,7 +222,7 @@ namespace Tests.Document.Single.Attachment
 
 		protected override void ExpectResponse(IIndexResponse response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			// search on attachment name
 			var searchResponse = Client.Search<Document>(s => s
@@ -238,7 +235,7 @@ namespace Tests.Document.Single.Attachment
 				)
 			);
 
-			searchResponse.IsValid.Should().BeTrue();
+			searchResponse.ShouldBeValid();
 			searchResponse.Documents.Count().Should().Be(1);
 
 			// search on content type
@@ -252,7 +249,7 @@ namespace Tests.Document.Single.Attachment
 				)
 			);
 
-			searchResponse.IsValid.Should().BeTrue();
+			searchResponse.ShouldBeValid();
 			searchResponse.Documents.Count().Should().Be(1);
 
 			// search on language
@@ -266,12 +263,11 @@ namespace Tests.Document.Single.Attachment
 				)
 			);
 
-			searchResponse.IsValid.Should().BeTrue();
+			searchResponse.ShouldBeValid();
 			searchResponse.Documents.Count().Should().Be(1);
 		}
 	}
 
-	[Collection(IntegrationContext.Indexing)]
 	public class AttachmentDetectLanguageApiTests : AttachmentApiTestsBase
 	{
 		protected override Document Document =>
@@ -284,7 +280,7 @@ namespace Tests.Document.Single.Attachment
 				}
 			};
 
-		public AttachmentDetectLanguageApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		public AttachmentDetectLanguageApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 		}
 
@@ -300,7 +296,7 @@ namespace Tests.Document.Single.Attachment
 
 		protected override void ExpectResponse(IIndexResponse response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			// search on language (document is detected as French)
 			var searchResponse = Client.Search<Document>(s => s
@@ -313,12 +309,11 @@ namespace Tests.Document.Single.Attachment
 				)
 			);
 
-			searchResponse.IsValid.Should().BeTrue();
+			searchResponse.ShouldBeValid();
 			searchResponse.Documents.Count().Should().Be(1);
 		}
 	}
 
-	[Collection(IntegrationContext.Indexing)]
 	public class AttachmentPopulatingFromHitApiTests : AttachmentApiTestsBase
 	{
 		protected override Document Document =>
@@ -331,7 +326,7 @@ namespace Tests.Document.Single.Attachment
 				}
 			};
 
-		public AttachmentPopulatingFromHitApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		public AttachmentPopulatingFromHitApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 		}
 
@@ -347,7 +342,7 @@ namespace Tests.Document.Single.Attachment
 
 		protected override void ExpectResponse(IIndexResponse response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			// search on language (document is detected as French)
 			var searchResponse = Client.Search<Document>(s => s

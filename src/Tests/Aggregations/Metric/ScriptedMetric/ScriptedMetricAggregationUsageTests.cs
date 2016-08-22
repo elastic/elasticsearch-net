@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
@@ -63,7 +64,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var sumTheHardWay = response.Aggs.ScriptedMetric("sum_the_hard_way");
 			sumTheHardWay.Should().NotBeNull();
 			sumTheHardWay.Value<int>().Should().BeGreaterThan(0);

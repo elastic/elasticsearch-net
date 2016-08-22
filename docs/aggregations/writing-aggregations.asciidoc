@@ -47,6 +47,11 @@ This is the json output for each example
           "max": {
             "field": "confidenceFactor"
           }
+        },
+        "min_per_child": {
+          "min": {
+            "field": "confidenceFactor"
+          }
         }
       }
     }
@@ -67,6 +72,7 @@ s => s
         .Aggregations(childAggs => childAggs
             .Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
             .Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+            .Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
         )
     )
 )
@@ -87,6 +93,7 @@ new SearchRequest<Project>
         Aggregations =
             new AverageAggregation("average_per_child", "confidenceFactor")
             && new MaxAggregation("max_per_child", "confidenceFactor")
+            && new MinAggregation("min_per_child", "confidenceFactor")
     }
 }
 ----
@@ -108,6 +115,7 @@ new SearchRequest<Project>
         Aggregations =
             new AverageAggregation("average_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
             && new MaxAggregation("max_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
+            && new MinAggregation("min_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
     }
 }
 ----
@@ -123,7 +131,8 @@ on the request. Using LINQ's `.Aggregate()` method, each function can be applied
 var aggregations = new List<Func<AggregationContainerDescriptor<CommitActivity>, IAggregationContainer>> <1>
 {
     a => a.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
-    a => a.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+    a => a.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
+    a => a.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
 };
 return s => s
     .Aggregations(aggs => aggs
@@ -137,6 +146,25 @@ return s => s
 <1> a list of aggregation functions to apply
 
 <2> Using LINQ's `Aggregate()` function to accumulate/apply all of the aggregation functions
+
+Combining multipe `AggregationDescriptor`'s is also possible using the bitwise `&` operator
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+var aggregations = new AggregationContainerDescriptor<CommitActivity>()
+    .Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+    .Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+    && new AggregationContainerDescriptor<CommitActivity>()
+        .Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor));
+return s => s
+    .Aggregations(aggs => aggs
+        .Children<CommitActivity>("name_of_child_agg", child => child
+            .Aggregations(childAggs => aggregations)
+        )
+    );
+----
 
 [[aggs-vs-aggregations]]
 === Aggs vs. Aggregations
@@ -158,6 +186,7 @@ s => s
         .Aggregations(childAggs => childAggs
             .Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
             .Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+            .Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
         )
     )
 )

@@ -7,10 +7,9 @@ using Xunit;
 
 namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class ClusterPutSettingsApiTests : ApiIntegrationTestBase<IClusterPutSettingsResponse, IClusterPutSettingsRequest, ClusterPutSettingsDescriptor, ClusterPutSettingsRequest>
+	public class ClusterPutSettingsApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IClusterPutSettingsResponse, IClusterPutSettingsRequest, ClusterPutSettingsDescriptor, ClusterPutSettingsRequest>
 	{
-		public ClusterPutSettingsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public ClusterPutSettingsApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ClusterPutSettings(f),
 			fluentAsync: (client, f) => client.ClusterPutSettingsAsync(f),
@@ -22,7 +21,7 @@ namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 		protected override string UrlPath => "/_cluster/settings";
 
 		protected override int ExpectStatusCode => 400;
-		protected override bool ExpectIsValid => false; 
+		protected override bool ExpectIsValid => false;
 
 		protected override ClusterPutSettingsRequest Initializer => new ClusterPutSettingsRequest
 		{
@@ -30,7 +29,7 @@ namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 
 		protected override void ExpectResponse(IClusterPutSettingsResponse response)
 		{
-			response.IsValid.Should().BeFalse();
+			response.ShouldNotBeValid();
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Status.Should().Be(400);
 			response.ServerError.Error.Should().NotBeNull();

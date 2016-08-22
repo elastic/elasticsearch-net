@@ -7,11 +7,10 @@ using Xunit;
 
 namespace Tests.Aggregations
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public abstract class AggregationUsageTestBase 
-		: ApiIntegrationTestBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	public abstract class AggregationUsageTestBase
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		protected AggregationUsageTestBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		protected AggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<Project>(f ),
 			fluentAsync: (client, f) => client.SearchAsync<Project>(f),

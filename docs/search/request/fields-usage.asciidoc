@@ -18,7 +18,7 @@ please modify the original csharp file found at the link and submit the PR with 
 Allows to selectively load specific stored fields for each document represented by a search hit.
 
 WARNING: The `fields` parameter is about fields that are explicitly marked as stored in the mapping,
-which is off by default and generally not recommended. 
+which is off by default and generally not recommended.
 Use <<source-filtering-usage,source filtering>> instead to select subsets of the original source document to be returned.
 
 See the Elasticsearch documentation on {ref_current}/search-request-fields.html[Fields] for more detail.
@@ -31,6 +31,7 @@ s => s
 .Fields(fs => fs
     .Field(p => p.Name)
     .Field(p => p.StartedOn)
+    .Field(p => p.DateString)
 )
 ----
 
@@ -40,7 +41,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
-    Fields = Fields<Project>(p => p.Name, p => p.StartedOn)
+    Fields = Fields<Project>(p => p.Name, p => p.StartedOn, p => p.DateString)
 }
 ----
 
@@ -50,7 +51,8 @@ new SearchRequest<Project>
 {
   "fields": [
     "name",
-    "startedOn"
+    "startedOn",
+    "dateString"
   ]
 }
 ----

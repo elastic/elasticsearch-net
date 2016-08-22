@@ -58,19 +58,19 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 				.Size(100)
 			);
 			/**
-			* NEST will translate this to a search over `/index/a,b,c/_search`; 
+			* NEST will translate this to a search over `/index/a,b,c/_search`;
 			* hits that have `"_type" : "a"` will be serialized to `A` and so forth
 			*/
-			
+
 			/**
 			* Here we assume our response is valid and that we received the 100 documents
 			* we are expecting. Remember `result.Documents` is an `IEnumerable&lt;ISearchResult&gt;`
 			*/
-			result.IsValid.Should().BeTrue();
+			result.ShouldBeValid();
 			result.Documents.Count().Should().Be(100);
-			
+
 			/**
-			* To prove the returned result set is covariant we filter the documents based on their 
+			* To prove the returned result set is covariant we filter the documents based on their
 			* actual type and assert the returned subsets are the expected sizes
 			*/
 			var aDocuments = result.Documents.OfType<A>();
@@ -100,20 +100,20 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			);
 
 			/**
-			* here for each hit we'll call the delegate passed to `ConcreteTypeSelector where 
+			* here for each hit we'll call the delegate passed to `ConcreteTypeSelector where
 			* - `d` is a representation of the `_source` exposed as a `dynamic` type
 			* - a typed `h` which represents the encapsulating hit of the source i.e. `Hit<dynamic>`
 			*/
-			
+
 			/**
 			* Here we assume our response is valid and that we received the 100 documents
 			* we are expecting. Remember `result.Documents` is an `IEnumerable&lt;ISearchResult&gt;`
 			*/
-			result.IsValid.Should().BeTrue();
+			result.ShouldBeValid();
 			result.Documents.Count().Should().Be(100);
-			
+
 			/**
-			* To prove the returned result set is covariant we filter the documents based on their 
+			* To prove the returned result set is covariant we filter the documents based on their
 			* actual type and assert the returned subsets are the expected sizes
 			*/
 			var aDocuments = result.Documents.OfType<A>();
@@ -137,7 +137,7 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 		[U] public void UsingCovariantTypesOnScroll()
 		{
 			/**
-			* The Scroll API is a continuation of the previous Search example so Types() are lost. 
+			* The Scroll API is a continuation of the previous Search example so Types() are lost.
 			* You can hint at the types using `.CovariantTypes()`
 			*/
 			var result = this._client.Scroll<ISearchResult>(TimeSpan.FromMinutes(60), "scrollId", s => s
@@ -147,16 +147,16 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			* NEST will translate this to a search over `/index/a,b,c/_search`;
 			* hits that have `"_type" : "a"` will be serialized to `A` and so forth
 			*/
-			
+
 			/**
 			* Here we assume our response is valid and that we received the 100 documents
 			* we are expecting. Remember `result.Documents` is an `IEnumerable&lt;ISearchResult&gt;`
 			*/
-			result.IsValid.Should().BeTrue();
+			result.ShouldBeValid();
 			result.Documents.Count().Should().Be(100);
-			
+
 			/**
-			* To prove the returned result set is covariant we filter the documents based on their 
+			* To prove the returned result set is covariant we filter the documents based on their
 			* actual type and assert the returned subsets are the expected sizes
 			*/
 			var aDocuments = result.Documents.OfType<A>();
@@ -189,16 +189,16 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			* - `d` is the `_source` typed as `dynamic`
 			* - `h` is the encapsulating typed hit
 			*/
-			
+
 			/**
 			* Here we assume our response is valid and that we received the 100 documents
 			* we are expecting. Remember `result.Documents` is an `IEnumerable&lt;ISearchResult&gt;`
 			*/
-			result.IsValid.Should().BeTrue();
+			result.ShouldBeValid();
 			result.Documents.Count().Should().Be(100);
-			
+
 			/**
-			* To prove the returned result set is covariant we filter the documents based on their 
+			* To prove the returned result set is covariant we filter the documents based on their
 			* actual type and assert the returned subsets are the expected sizes
 			*/
 			var aDocuments = result.Documents.OfType<A>();
@@ -232,21 +232,21 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			hits = new {
 				total = 100,
 				max_score = 1.0,
-				hits = Enumerable.Range(1, 25).Select(i => (object)new 
+				hits = Enumerable.Range(1, 25).Select(i => (object)new
 				{
 					_index = "project",
 					_type = "a",
 					_id = i,
 					_score = 1.0,
 					_source= new { name= "A object", propertyOnA = i }
-				}).Concat(Enumerable.Range(26, 25).Select(i => (object)new 
+				}).Concat(Enumerable.Range(26, 25).Select(i => (object)new
 				{
 					_index = "project",
 					_type = "b",
 					_id = i,
 					_score = 1.0,
 					_source= new { name= "B object", propertyOnB = i }
-				})).Concat(Enumerable.Range(51, 50).Select(i => new 
+				})).Concat(Enumerable.Range(51, 50).Select(i => new
 				{
 					_index = "project",
 					_type = "c",

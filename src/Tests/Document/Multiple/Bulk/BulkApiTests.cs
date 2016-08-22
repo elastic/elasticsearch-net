@@ -10,10 +10,9 @@ using Xunit;
 
 namespace Tests.Document.Multiple.Bulk
 {
-	[Collection(IntegrationContext.Indexing)]
-	public class BulkApiTests : ApiIntegrationTestBase<IBulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
+	public class BulkApiTests : ApiIntegrationTestBase<WritableCluster, IBulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
 	{
-		public BulkApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public BulkApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Bulk(f),
 			fluentAsync: (client, f) => client.BulkAsync(f),
@@ -45,9 +44,9 @@ namespace Tests.Document.Multiple.Bulk
 			.Update<Project, object>(b => b.Doc(new { leadDeveloper = new { firstName = "martijn" } }).Id(Project.Instance.Name))
 			.Create<Project>(b => b.Document(Project.Instance).Id(Project.Instance.Name + "1"))
 			.Delete<Project>(b=>b.Id(Project.Instance.Name + "1"));
-			
 
-		protected override BulkRequest Initializer => 
+
+		protected override BulkRequest Initializer =>
 			new BulkRequest(CallIsolatedValue)
 			{
 				Operations = new List<IBulkOperation>
