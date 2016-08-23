@@ -46,6 +46,7 @@ namespace Nest.Resolvers.Converters.Filters
 					SerializeProperty(writer, serializer, "gt", f.GreaterThan);
 					SerializeProperty(writer, serializer, "gte", f.GreaterThanOrEqualTo);
 					SerializeProperty(writer, serializer, "time_zone", f.TimeZone);
+					SerializeProperty(writer, serializer, "format", f.Format);
 				}
 				writer.WriteEndObject();
 
@@ -102,7 +103,15 @@ namespace Nest.Resolvers.Converters.Filters
 						var lt = jv.Value["lt"];
 						if (lt != null)
 							filter.LowerThan = ToString(lt);
-						
+
+						var format = jv.Value["format"];
+						if (format != null)
+							filter.Format = ToString(format);
+
+						var timezone = jv.Value["time_zone"];
+						if (timezone != null)
+							filter.TimeZone = ToString(timezone);
+							
 						break;
 				}
 			}
