@@ -86,7 +86,7 @@ namespace Nest
 		{
 			switch (task.Status)
 			{
-				case TaskStatus.RanToCompletion:
+				case System.Threading.Tasks.TaskStatus.RanToCompletion:
 					if (this._partionedBulkRequest.RefreshOnCompleted)
 					{
 						var refresh = this._client.Refresh(this._partionedBulkRequest.Index);
@@ -94,10 +94,10 @@ namespace Nest
 					}
 					observer.OnCompleted();
 					break;
-				case TaskStatus.Faulted:
+				case System.Threading.Tasks.TaskStatus.Faulted:
 					observer.OnError(task.Exception.InnerException);
 					break;
-				case TaskStatus.Canceled:
+				case System.Threading.Tasks.TaskStatus.Canceled:
 					observer.OnError(new TaskCanceledException(task));
 					break;
 			}

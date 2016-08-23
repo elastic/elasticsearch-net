@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Nest
 {
@@ -24,7 +25,6 @@ namespace Nest
 		public IDictionary<string, TaskExecutingNode> Nodes { get; internal set; }
 		public IEnumerable<Throwable> NodeFailures { get; internal set; }
 	}
-
 
 	public class TaskExecutingNode
 	{
@@ -58,6 +58,12 @@ namespace Nest
 		[JsonProperty("action")]
 		public string Action { get; internal set; }
 
+		[JsonProperty("status")]
+		public TaskStatus Status { get; internal set; }
+
+		[JsonProperty("description")]
+		public string Description { get; internal set; }
+
 		[JsonProperty("start_time_in_millis")]
 		public long StartTimeInMilliseconds { get; internal set; }
 
@@ -66,6 +72,29 @@ namespace Nest
 
 		[JsonProperty("parent_task_id")]
 		public TaskId ParentTaskId { get; internal set; }
+	}
 
+	public class TaskStatus
+	{
+		[JsonProperty("total")]
+		public long Total { get; internal set; }
+
+		[JsonProperty("updated")]
+		public long Updated { get; internal set; }
+
+		[JsonProperty("created")]
+		public long Created { get; internal set; }
+
+		[JsonProperty("deleted")]
+		public long Deleted { get; internal set; }
+
+		[JsonProperty("batches")]
+		public long Batches { get; internal set; }
+
+		[JsonProperty("version_conflicts")]
+		public long VersionConflicts { get; internal set; }
+
+		[JsonProperty("noops")]
+		public long Noops { get; internal set; }
 	}
 }
