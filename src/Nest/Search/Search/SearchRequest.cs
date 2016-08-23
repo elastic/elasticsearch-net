@@ -64,7 +64,6 @@ namespace Nest
 		IScriptFields ScriptFields { get; set; }
 
 		[JsonProperty(PropertyName = "_source")]
-		[JsonConverter(typeof(ReadAsTypeJsonConverter<SourceFilter>))]
 		ISourceFilter Source { get; set; }
 
 		[JsonProperty(PropertyName = "aggs")]
@@ -224,7 +223,7 @@ namespace Nest
 		public SearchDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
 			Assign(a => a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations);
 
-		public SearchDescriptor<T> Source(bool include = true) => Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
+		public SearchDescriptor<T> Source(bool include = true) => Assign(a => a.Source = new SourceFilter { Disable = !include });
 
 		public SearchDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> sourceSelector) =>
 			Assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));
@@ -416,8 +415,8 @@ namespace Nest
 		public SearchDescriptor<T> Rescore(Func<RescoreDescriptor<T>, IRescore> rescoreSelector) =>
 			Assign(a =>
 			{
-				a.Rescore = a.Rescore != null 
-					? new MultiRescore { a.Rescore, rescoreSelector?.Invoke(new RescoreDescriptor<T>()) } 
+				a.Rescore = a.Rescore != null
+					? new MultiRescore { a.Rescore, rescoreSelector?.Invoke(new RescoreDescriptor<T>()) }
 					: rescoreSelector?.Invoke(new RescoreDescriptor<T>());
 			});
 
