@@ -15,14 +15,15 @@ namespace Nest
 
 		///<summary>A collection of character filters to use for the analysis</summary>
 		[Obsolete("Deprecated in 2.4.0. Will be removed in 5.0. Use CharFilter instead")]
+		[JsonIgnore]
 		string[] CharFilters { get; set; }
 
 		///<summary>A collection of character filters to use for the analysis</summary>
-		[JsonProperty("char_filter")]
+		[JsonProperty("char_filters")]
 		string[] CharFilter { get; set; }
 
 		///<summary>A collection of filters to use for the analysis</summary>
-		[JsonProperty("filter")]
+		[JsonProperty("filters")]
 		string[] Filter { get; set; }
 
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
@@ -31,6 +32,7 @@ namespace Nest
 
 		///<summary>A collection of filters to use for the analysis</summary>
 		[Obsolete("Deprecated in 2.4.0. Will be removed in 5.0. Use Filter instead")]
+		[JsonIgnore]
 		string[] Filters { get; set; }
 
 		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
