@@ -26,11 +26,11 @@ See the Elasticsearch documentation on {ref_current}/search-request-source-filte
 [source,csharp]
 ----
 s => s
-.Source(so => so
-    .Include(f => f
+.Source(src => src
+    .IncludeAll()
+    .Exclude(e => e
         .Fields(
-            p => p.Name,
-            p => p.StartedOn
+            p => p.Description
         )
     )
 )
@@ -44,7 +44,8 @@ new SearchRequest<Project>
 {
     Source = new SourceFilter
     {
-        Include = Fields<Project>(p => p.Name, prop => prop.StartedOn)
+        Include = "*",
+        Exclude = Fields<Project>(p => p.Description)
     }
 }
 ----
@@ -55,8 +56,10 @@ new SearchRequest<Project>
 {
   "_source": {
     "include": [
-      "name",
-      "startedOn"
+      "*"
+    ],
+    "exclude": [
+      "description"
     ]
   }
 }
@@ -74,5 +77,50 @@ foreach (var document in response.Documents)
     document.StartedOn.Should().NotBe(default(DateTime));
     document.Description.Should().BeNull();
 }
+----
+
+[[disable-source-retrieval]]
+[float]
+== Disable Source Retrieval
+
+Source filtering can be disabled by setting disable to `true`.
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Source(src => src.Disable())
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Source = new SourceFilter
+    {
+        Disable = true
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "_source": false
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+
+foreach (var hit in response.Hits)
+    hit.Source.Should().BeNull();
 ----
 

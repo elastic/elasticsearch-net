@@ -62,6 +62,11 @@ namespace Tests.Search.Request
 		}
 	}
 
+	/**[float]
+	 * == Disable Source Retrieval
+	 * Source filtering can be disabled by setting disable to `true`.
+	 *
+	 */
 	public class SourceFilteringDisabledUsageTests : SearchUsageTestBase
 	{
 		public SourceFilteringDisabledUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
