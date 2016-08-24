@@ -26,9 +26,9 @@ namespace Tests.Indices.Analyze
 		protected override object ExpectJson => new
 		{
 			text = new[] { "hello world", "domination" },
-			char_filter = new[] { "html_strip" },
+			char_filters = new[] { "html_strip" },
 			tokenizer = "keyword",
-			filter = new[] { "lowercase", "stop" }
+			filters = new[] { "lowercase", "stop" }
 		};
 
 		protected override Func<AnalyzeDescriptor, IAnalyzeRequest> Fluent => d => d
