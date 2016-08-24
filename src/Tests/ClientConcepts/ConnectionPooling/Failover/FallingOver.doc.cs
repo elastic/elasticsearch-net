@@ -9,7 +9,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 		/**[[falling-over]]
 		* == Fail over
 		* When using connection pooling and the pool has sufficient nodes a request will be retried if
-		* the call to a node throws an exception or returns a 502 or 503
+		* the call to a node throws an exception or returns a 502, 503 or 504
 		*/
 
 		[U]
@@ -104,7 +104,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 		}
 
 		/**
-		* If a call returns a valid http status code other than 502 or 503, the request won't be retried.
+		* If a call returns a valid http status code other than 502, 503 or 504, the request won't be retried.
 		*
 		* IMPORTANT: Different requests may have different status codes that are deemed valid. For example,
 		* a *404 Not Found* response is a valid status code for an index exists request
