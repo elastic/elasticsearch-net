@@ -38,10 +38,10 @@ namespace Nest
 		IList<Field> IInnerHits.FielddataFields { get; set; }
 		IScriptFields IInnerHits.ScriptFields { get; set; }
 
-		public GlobalInnerHitDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) => 
+		public GlobalInnerHitDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
 			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
-		
-		public GlobalInnerHitDescriptor<T> InnerHits(Func<NamedInnerHitsDescriptor<T>, IPromise<INamedInnerHits>> selector) => 
+
+		public GlobalInnerHitDescriptor<T> InnerHits(Func<NamedInnerHitsDescriptor<T>, IPromise<INamedInnerHits>> selector) =>
 			Assign(a => a.InnerHits = selector?.Invoke(new NamedInnerHitsDescriptor<T>())?.Value);
 
 		public GlobalInnerHitDescriptor<T> From(int? from) => Assign(a => a.From = from);
@@ -52,7 +52,7 @@ namespace Nest
 
 		public GlobalInnerHitDescriptor<T> FielddataFields(params string[] fielddataFields) =>
 			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field) f).ToListOrNullIfEmpty());
-		
+
 		public GlobalInnerHitDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields) =>
 			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field) f).ToListOrNullIfEmpty());
 
@@ -63,17 +63,17 @@ namespace Nest
 		public GlobalInnerHitDescriptor<T> Sort(Func<SortDescriptor<T>, IPromise<IList<ISort>>> sortSelector) => Assign(a => a.Sort = sortSelector?.Invoke(new SortDescriptor<T>())?.Value);
 
 		/// <summary>
-		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter. 
+		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter.
 		/// </summary>
 		public GlobalInnerHitDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> highlightSelector) =>
 			Assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
-		
-		public GlobalInnerHitDescriptor<T> Source(bool include = true)=> Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
-		
+
+		public GlobalInnerHitDescriptor<T> Source(bool include = true) => Assign(a => a.Source = new SourceFilter { Disable = !include });
+
 		public GlobalInnerHitDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> sourceSelector) =>
 			Assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));
 
-		public GlobalInnerHitDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) => 
+		public GlobalInnerHitDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) =>
 			Assign(a => a.ScriptFields = selector?.Invoke(new ScriptFieldsDescriptor())?.Value);
 	}
 }

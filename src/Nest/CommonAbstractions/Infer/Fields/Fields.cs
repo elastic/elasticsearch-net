@@ -20,6 +20,8 @@ namespace Nest
 
 		public static implicit operator Fields(string[] fields) => new Fields(fields.Select(f => (Field)f));
 
+		public static implicit operator Fields(string field) => new Fields(new[] { (Field)field });
+
 		public static implicit operator Fields(Expression[] fields) => new Fields(fields.Select(f => (Field)f));
 
 		public static implicit operator Fields(Field[] fields) => new Fields(fields);

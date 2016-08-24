@@ -7,25 +7,48 @@ namespace Nest
 	public class SourceFilterJsonConverter : JsonConverter
 	{
 		public override bool CanRead => true;
-		public override bool CanWrite => false;
+		public override bool CanWrite => true;
 		public override bool CanConvert(Type objectType) => true;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
+			var filter = value as ISourceFilter;
+			if (filter == null)
+				return;
+			if (filter.Disable)
+				writer.WriteValue(false);
+			else
+			{
+				if (filter.Include == null && filter.Exclude == null)
+					return;
+
+				writer.WriteStartObject();
+				if (filter.Include != null)
+				{
+					writer.WritePropertyName("include");
+					serializer.Serialize(writer, filter.Include);
+				}
+				if (filter.Exclude != null)
+				{
+					writer.WritePropertyName("exclude");
+					serializer.Serialize(writer, filter.Exclude);
+				}
+				writer.WriteEndObject();
+			}
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType == JsonToken.Null) return null;
 
-			var filter =  new SourceFilter();
+			var filter = new SourceFilter();
 			switch (reader.TokenType)
 			{
 				case JsonToken.Boolean:
-					filter.Exclude = new[] { "*" };
+					filter.Disable = !(bool)reader.Value;
 					break;
 				case JsonToken.String:
-					filter.Include = new [] { (string)reader.Value };
+					filter.Include = new[] { (string)reader.Value };
 					break;
 				case JsonToken.StartArray:
 					var include = new List<string>();

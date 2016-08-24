@@ -24,16 +24,17 @@ namespace Tests.Search.Request
 			{
 				_source = new
 				{
-					include = new[] { "name", "startedOn" }
+					include = new[] { "*" },
+					exclude = new [] { "description" }
 				}
 			};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Source(so => so
-				.Include(f => f
+			.Source(src => src
+				.IncludeAll()
+				.Exclude(e => e
 					.Fields(
-						p => p.Name,
-						p => p.StartedOn
+						p => p.Description
 					)
 				)
 			);
@@ -43,7 +44,8 @@ namespace Tests.Search.Request
 			{
 				Source = new SourceFilter
 				{
-					Include = Fields<Project>(p => p.Name, prop => prop.StartedOn)
+					Include = "*",
+					Exclude = Fields<Project>(p => p.Description)
 				}
 			};
 
@@ -57,6 +59,36 @@ namespace Tests.Search.Request
 				document.StartedOn.Should().NotBe(default(DateTime));
 				document.Description.Should().BeNull();
 			}
+		}
+	}
+
+	public class SourceFilteringDisabledUsageTests : SearchUsageTestBase
+	{
+		public SourceFilteringDisabledUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson =>
+			new
+			{
+				_source = false
+			};
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Source(src => src.Disable());
+
+		protected override SearchRequest<Project> Initializer =>
+			new SearchRequest<Project>
+			{
+				Source = new SourceFilter
+				{
+					Disable = true
+				}
+			};
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.ShouldBeValid();
+			foreach (var hit in response.Hits)
+				hit.Source.Should().BeNull();
 		}
 	}
 
@@ -75,7 +107,9 @@ namespace Tests.Search.Request
 			var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": false }");
 			o.Should().NotBeNull();
 			o.SourceFilter.Should().NotBeNull();
-			o.SourceFilter.Exclude.Should().Contain("*");
+			o.SourceFilter.Exclude.Should().BeNull();
+			o.SourceFilter.Include.Should().BeNull();
+			o.SourceFilter.Disable.Should().BeTrue();
 		}
 
 		[U]

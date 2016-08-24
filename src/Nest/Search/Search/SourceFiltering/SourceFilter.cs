@@ -11,6 +11,9 @@ namespace Nest
 
 		[JsonProperty("exclude")]
 		Fields Exclude { get; set; }
+
+		[JsonIgnore]
+		bool Disable { get; set; }
 	}
 
 	public class SourceFilter : ISourceFilter
@@ -20,6 +23,8 @@ namespace Nest
 
 		public Fields Include { get; set; }
 		public Fields Exclude { get; set; }
+
+		public bool Disable { get; set; }
 	}
 
 	public class SourceFilterDescriptor<T> : DescriptorBase<SourceFilterDescriptor<T>, ISourceFilter>, ISourceFilter
@@ -29,11 +34,19 @@ namespace Nest
 
 		Fields ISourceFilter.Exclude { get; set; }
 
-		public SourceFilterDescriptor<T> Include(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) => 
+		bool ISourceFilter.Disable { get; set; }
+
+
+		public SourceFilterDescriptor<T> Include(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Include = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public SourceFilterDescriptor<T> Exclude(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) => 
+		public SourceFilterDescriptor<T> IncludeAll() => Assign(a => a.Include = new[] { "*" });
+
+		public SourceFilterDescriptor<T> Exclude(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Exclude = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
+		public SourceFilterDescriptor<T> ExcludeAll() => Assign(a => a.Exclude = new[] { "*" });
+
+		public SourceFilterDescriptor<T> Disable(bool disable = true) => Assign(a => a.Disable = disable);
 	}
 }

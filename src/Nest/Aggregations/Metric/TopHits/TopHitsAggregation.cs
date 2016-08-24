@@ -91,7 +91,7 @@ namespace Nest
 		});
 
 		public TopHitsAggregationDescriptor<T> Source(bool include = true) =>
-			Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
+			Assign(a => a.Source = new SourceFilter { Disable = !include });
 
 		public TopHitsAggregationDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> sourceSelector) =>
 			Assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));
