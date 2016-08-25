@@ -21,9 +21,6 @@ namespace Nest
 			var filter =  new SourceFilter();
 			switch (reader.TokenType)
 			{
-				case JsonToken.Boolean:
-					filter.Exclude = new[] { "*" };
-					break;
 				case JsonToken.String:
 					filter.Include = new [] { (string)reader.Value };
 					break;

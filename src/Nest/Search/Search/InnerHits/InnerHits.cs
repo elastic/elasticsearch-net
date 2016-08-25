@@ -28,7 +28,7 @@ namespace Nest
 		bool? Explain { get; set; }
 
 		[JsonProperty(PropertyName = "_source")]
-		ISourceFilter Source { get; set; }
+		Union<bool, ISourceFilter> Source { get; set; }
 
 		[JsonProperty(PropertyName = "version")]
 		bool? Version { get; set; }
@@ -54,7 +54,7 @@ namespace Nest
 
 		public bool? Explain { get; set; }
 
-		public ISourceFilter Source { get; set; }
+		public Union<bool, ISourceFilter> Source { get; set; }
 
 		public bool? Version { get; set; }
 
@@ -72,7 +72,7 @@ namespace Nest
 		IList<ISort> IInnerHits.Sort { get; set; }
 		IHighlight IInnerHits.Highlight { get; set; }
 		bool? IInnerHits.Explain { get; set; }
-		ISourceFilter IInnerHits.Source { get; set; }
+		Union<bool, ISourceFilter> IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
 		IList<Field> IInnerHits.FielddataFields { get; set; }
 		IScriptFields IInnerHits.ScriptFields { get; set; }
@@ -101,11 +101,10 @@ namespace Nest
 		public InnerHitsDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> selector) =>
 			Assign(a => a.Highlight = selector?.Invoke(new HighlightDescriptor<T>()));
 
-		//TODO map source of union bool/SourceFileter
-		public InnerHitsDescriptor<T> Source(bool include = true) => Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
+		public InnerHitsDescriptor<T> Source(bool enabled = true) => Assign(a => a.Source = enabled);
 
 		public InnerHitsDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> selector) =>
-			Assign(a => a.Source = selector?.Invoke(new SourceFilterDescriptor<T>()));
+			Assign(a => a.Source = new Union<bool, ISourceFilter>(selector?.Invoke(new SourceFilterDescriptor<T>())));
 
 		public InnerHitsDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) =>
 			Assign(a => a.ScriptFields = selector?.Invoke(new ScriptFieldsDescriptor())?.Value);

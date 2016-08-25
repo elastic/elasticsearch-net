@@ -18,7 +18,7 @@ namespace Nest
 		IList<ISort> Sort { get; set; }
 
 		[JsonProperty("_source")]
-		ISourceFilter Source { get; set; }
+		Union<bool, ISourceFilter> Source { get; set; }
 
 		[JsonProperty("highlight")]
 		IHighlight Highlight { get; set; }
@@ -42,7 +42,7 @@ namespace Nest
 		public int? From { get; set; }
 		public int? Size { get; set; }
 		public IList<ISort> Sort { get; set; }
-		public ISourceFilter Source { get; set; }
+		public Union<bool, ISourceFilter> Source { get; set; }
 		public IHighlight Highlight { get; set; }
 		public bool? Explain { get; set; }
 		public IScriptFields ScriptFields { get; set; }
@@ -67,7 +67,7 @@ namespace Nest
 
 		IList<ISort> ITopHitsAggregation.Sort { get; set; }
 
-		ISourceFilter ITopHitsAggregation.Source { get; set; }
+		Union<bool, ISourceFilter> ITopHitsAggregation.Source { get; set; }
 
 		IHighlight ITopHitsAggregation.Highlight { get; set; }
 
@@ -90,11 +90,11 @@ namespace Nest
 			if (sort != null) a.Sort.Add(sort);
 		});
 
-		public TopHitsAggregationDescriptor<T> Source(bool include = true) =>
-			Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
+		public TopHitsAggregationDescriptor<T> Source(bool enabled = true) =>
+			Assign(a => a.Source = enabled);
 
-		public TopHitsAggregationDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> sourceSelector) =>
-			Assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));
+		public TopHitsAggregationDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> selector) =>
+			Assign(a => a.Source = new Union<bool, ISourceFilter>(selector?.Invoke(new SourceFilterDescriptor<T>())));
 
 		public TopHitsAggregationDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> highlightSelector) =>
 			Assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));

@@ -29,11 +29,15 @@ namespace Nest
 
 		Fields ISourceFilter.Exclude { get; set; }
 
-		public SourceFilterDescriptor<T> Include(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) => 
+
+		public SourceFilterDescriptor<T> Include(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Include = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public SourceFilterDescriptor<T> Exclude(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) => 
+		public SourceFilterDescriptor<T> IncludeAll() => Assign(a => a.Include = new[] { "*" } );
+
+		public SourceFilterDescriptor<T> Exclude(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Exclude = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
+		public SourceFilterDescriptor<T> ExcludeAll() => Assign(a => a.Exclude = new[] { "*" } );
 	}
 }
