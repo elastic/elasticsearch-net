@@ -42,7 +42,11 @@ s => s
 ----
 new SearchRequest<Project>
 {
-    Fields = Fields<Project>(p => p.Name, p => p.StartedOn, p => p.NumberOfCommits, p => p.DateString)
+    Fields = Fields<Project>(
+        p => p.Name,
+        p => p.StartedOn,
+        p => p.NumberOfCommits,
+        p => p.DateString)
 }
 ----
 

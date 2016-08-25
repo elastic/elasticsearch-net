@@ -104,7 +104,7 @@ in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 
 var dateHistogram = response.Aggs.DateRange("projects_date_ranges");
 dateHistogram.Should().NotBeNull();

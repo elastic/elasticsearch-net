@@ -16,7 +16,7 @@ namespace Tests.Search.Request
 	* which is off by default and generally not recommended.
 	* Use <<source-filtering-usage,source filtering>> instead to select subsets of the original source document to be returned.
 	*
-	* See the Elasticsearch documentation on {ref_current}/search-request-fields.html[Fields] for more detail.
+	* See the Elasticsearch documentation on {ref_current}/search-request-stored-fields.html[Fields] for more detail.
 	*/
 	public class FieldsUsageTests : SearchUsageTestBase
 	{
@@ -38,7 +38,11 @@ namespace Tests.Search.Request
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Fields = Fields<Project>(p => p.Name, p => p.StartedOn, p => p.NumberOfCommits, p => p.DateString)
+				Fields = Fields<Project>(
+					p => p.Name,
+					p => p.StartedOn,
+					p => p.NumberOfCommits,
+					p => p.DateString)
 			};
 
 		[I] protected Task FieldsAreReturned() => this.AssertOnAllResponses(r =>

@@ -15,7 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 [[filters-aggregation-usage]]
 == Filters Aggregation Usage
 
-Defines a multi bucket aggregations where each bucket is associated with a filter. 
+Defines a multi bucket aggregations where each bucket is associated with a filter.
 Each bucket will collect all documents that match its associated filter. For documents
 that do not match any filter, these will be collected in the _other bucket_.
 
@@ -23,7 +23,7 @@ Be sure to read the Elasticsearch documentation {ref_current}/search-aggregation
 
 [[named-filters]]
 [float]
-== Named filters 
+== Named filters
 
 === Fluent DSL Example
 
@@ -115,12 +115,12 @@ new SearchRequest<Project>
 
 === Handling Responses
 
-Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+Using the `.Agg` aggregation helper we can fetch our aggregation results easily
 in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 
 var filterAgg = response.Aggs.Filters("projects_by_state");
 filterAgg.Should().NotBeNull();
@@ -140,7 +140,7 @@ namedResult.DocCount.Should().Be(0);
 
 [[anonymous-filters]]
 [float]
-== Anonymous filters 
+== Anonymous filters
 
 === Fluent DSL Example
 
@@ -229,12 +229,12 @@ new SearchRequest<Project>
 
 === Handling Responses
 
-Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+Using the `.Agg` aggregation helper we can fetch our aggregation results easily
 in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 
 var filterAgg = response.Aggs.Filters("projects_by_state");
 filterAgg.Should().NotBeNull();
@@ -252,7 +252,7 @@ results.Last().DocCount.Should().Be(0); <1>
 
 [[empty-filters]]
 [float]
-== Empty Filters 
+== Empty Filters
 
 === Fluent DSL Example
 
@@ -297,7 +297,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 response.Aggs.Filters("empty_filters").Buckets.Should().BeEmpty();
 ----
 
@@ -353,7 +353,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 response.Aggs.Filters("conditionless_filters").Buckets.Should().BeEmpty();
 ----
 

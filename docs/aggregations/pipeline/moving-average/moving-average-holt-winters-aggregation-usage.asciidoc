@@ -120,6 +120,6 @@ new SearchRequest<Project>()
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 ----
 

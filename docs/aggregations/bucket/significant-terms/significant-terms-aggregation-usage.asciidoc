@@ -74,7 +74,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 var sigNames = response.Aggs.SignificantTerms("significant_names");
 sigNames.Should().NotBeNull();
 sigNames.DocCount.Should().BeGreaterThan(0);

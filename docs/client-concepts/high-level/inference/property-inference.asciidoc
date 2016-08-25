@@ -73,7 +73,7 @@ The response is not valid
 
 [source,csharp]
 ----
-createIndexResponse.IsValid.Should().BeFalse();
+createIndexResponse.ShouldNotBeValid();
 ----
 
 `DebugInformation` provides an audit trail of information to help diagnose the issue 

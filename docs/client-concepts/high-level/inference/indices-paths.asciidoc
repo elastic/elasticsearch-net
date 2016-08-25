@@ -57,6 +57,8 @@ A single index can be specified using a CLR type or a string
 
 [source,csharp]
 ----
+var client = TestClient.Default;
+
 var singleString = Index("name1"); <1>
 
 var singleTyped = Index<Project>(); <2>
@@ -87,6 +89,8 @@ var manyStrings = Index("name1", "name2"); <1>
 
 var manyTypes = Index<Project>().And<Developer>(); <2>
 
+var client = TestClient.Default;
+
 ISearchRequest manyStringRequest = new SearchDescriptor<Project>().Index(manyStrings);
 
 ISearchRequest manyTypedRequest = new SearchDescriptor<Project>().Index(manyTypes);
@@ -114,6 +118,8 @@ static imports too; in this scenario, `All` becomes ambiguous between `Indices.A
 var indicesAll = All;
 
 var allIndices = AllIndices;
+
+var client = TestClient.Default;
 
 ISearchRequest indicesAllRequest = new SearchDescriptor<Project>().Index(indicesAll);
 

@@ -185,7 +185,7 @@ If you have complex logging needs this is a good place to add that in.
 ----
 var counter = 0;
 
-var client = TestClient.GetClient(s => s.OnRequestCompleted(r => counter++));
+var client = TestClient.GetInMemoryClient(s => s.OnRequestCompleted(r => counter++));
 
 client.RootNodeInfo();
 
@@ -296,21 +296,20 @@ list.ShouldAllBeEquivalentTo(new[]
 [[configuring-ssl]]
 === Configuring SSL
 
-SSL must be configured outside of the client using .NET's http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager]
-class and setting the http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager.servercertificatevalidationcallback.aspx[ServerCertificateValidationCallback]
-property.
+SSL can be configured via the `ServerCertificateValidationCallback` property on either `ServerPointManager` or `HttpClientHandler`
+depending on which version of the .NET framework is in use.
 
-The bare minimum to make .NET accept self-signed SSL certs that are not in the Windows CA store would be to have the callback simply return `true`:
+On the full .NET Framework, this must be done outside of the client using .NET's built-in http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager] class:
 
 [source,csharp]
 ----
 ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true;
 ----
 
+The bare minimum to make .NET accept self-signed SSL certs that are not in the Windows CA store would be to have the callback simply return `true`.
+
 However, this will accept **all** requests from the AppDomain to untrusted SSL sites,
 therefore **we recommend doing some minimal introspection on the passed in certificate.**
-
-IMPORTANT: Using `ServicePointManager` does not work on **Core CLR** as the request does not go through `ServicePointManager`; please file an {github}/issues[issue] if you need support for certificate validation on Core CLR.
 
 === Overriding default Json.NET behavior
 
@@ -325,7 +324,9 @@ public class MyJsonNetSerializer : JsonNetSerializer
 
     public int CallToModify { get; set; } = 0;
 
+#pragma warning disable CS0672 // Member overrides obsolete member
     protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings) => ++CallToModify; <1>
+#pragma warning restore CS0672 // Member overrides obsolete member
 
     public int CallToContractConverter { get; set; } = 0;
 
@@ -336,7 +337,6 @@ public class MyJsonNetSerializer : JsonNetSerializer
             return null;
         }
     };
-
 }
 ----
 <1> Override ModifyJsonSerializerSettings if you need access to `JsonSerializerSettings`

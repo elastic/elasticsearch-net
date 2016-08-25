@@ -75,7 +75,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 var commitsAvg = response.Aggs.Average("average_commits");
 commitsAvg.Should().NotBeNull();
 commitsAvg.Value.Should().BeGreaterThan(0);

@@ -60,7 +60,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 var projectCount = response.Aggs.Cardinality("state_count");
 projectCount.Should().NotBeNull();
 projectCount.Value.Should().Be(3);

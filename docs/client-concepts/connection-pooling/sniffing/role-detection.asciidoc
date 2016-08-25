@@ -127,7 +127,9 @@ await pipeline.SniffAsync(default(CancellationToken));
 
 [source,csharp]
 ----
-this._settings = TestClient.GetClient(c => c.PrettyJson(), this._cluster.Node.Port, createPool: u => new SniffingConnectionPool(new[] { u })).ConnectionSettings;
+var uri = TestClient.CreateUri(this._cluster.Node.Port);
+
+this._settings = new ConnectionSettings(new SniffingConnectionPool(new[] { uri }));
 
 var pipeline = new RequestPipeline(this._settings, DateTimeProvider.Default, new MemoryStreamFactory(),
     new SearchRequestParameters());

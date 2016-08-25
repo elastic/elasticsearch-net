@@ -81,7 +81,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 var commitRanges = response.Aggs.Range("commit_ranges");
 commitRanges.Should().NotBeNull();
 commitRanges.Buckets.Count.Should().Be(3);

@@ -66,7 +66,7 @@ var result = this._client.Search<ISearchResult>(s => s
 );
 ----
 
-NEST will translate this to a search over `/index/a,b,c/_search`; 
+NEST will translate this to a search over `/index/a,b,c/_search`;
 hits that have `"_type" : "a"` will be serialized to `A` and so forth
 
 Here we assume our response is valid and that we received the 100 documents
@@ -74,12 +74,12 @@ we are expecting. Remember `result.Documents` is an `IEnumerable<ISearchResult>`
 
 [source,csharp]
 ----
-result.IsValid.Should().BeTrue();
+result.ShouldBeValid();
 
 result.Documents.Count().Should().Be(100);
 ----
 
-To prove the returned result set is covariant we filter the documents based on their 
+To prove the returned result set is covariant we filter the documents based on their
 actual type and assert the returned subsets are the expected sizes
 
 [source,csharp]
@@ -115,7 +115,7 @@ var result = this._client.Search<ISearchResult>(s => s
 );
 ----
 
-here for each hit we'll call the delegate passed to `ConcreteTypeSelector where 
+here for each hit we'll call the delegate passed to `ConcreteTypeSelector` where
 
 * `d` is a representation of the `_source` exposed as a `dynamic` type
 
@@ -126,12 +126,12 @@ we are expecting. Remember `result.Documents` is an `IEnumerable<ISearchResult>`
 
 [source,csharp]
 ----
-result.IsValid.Should().BeTrue();
+result.ShouldBeValid();
 
 result.Documents.Count().Should().Be(100);
 ----
 
-To prove the returned result set is covariant we filter the documents based on their 
+To prove the returned result set is covariant we filter the documents based on their
 actual type and assert the returned subsets are the expected sizes
 
 [source,csharp]
@@ -162,7 +162,7 @@ cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);
 
 === Using CovariantTypes()
 
-The Scroll API is a continuation of the previous Search example so Types() are lost. 
+The Scroll API is a continuation of the previous Search example so Types() are lost.
 You can hint at the types using `.CovariantTypes()`
 
 [source,csharp]
@@ -180,12 +180,12 @@ we are expecting. Remember `result.Documents` is an `IEnumerable<ISearchResult>`
 
 [source,csharp]
 ----
-result.IsValid.Should().BeTrue();
+result.ShouldBeValid();
 
 result.Documents.Count().Should().Be(100);
 ----
 
-To prove the returned result set is covariant we filter the documents based on their 
+To prove the returned result set is covariant we filter the documents based on their
 actual type and assert the returned subsets are the expected sizes
 
 [source,csharp]
@@ -234,12 +234,12 @@ we are expecting. Remember `result.Documents` is an `IEnumerable<ISearchResult>`
 
 [source,csharp]
 ----
-result.IsValid.Should().BeTrue();
+result.ShouldBeValid();
 
 result.Documents.Count().Should().Be(100);
 ----
 
-To prove the returned result set is covariant we filter the documents based on their 
+To prove the returned result set is covariant we filter the documents based on their
 actual type and assert the returned subsets are the expected sizes
 
 [source,csharp]

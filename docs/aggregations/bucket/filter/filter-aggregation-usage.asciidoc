@@ -82,7 +82,7 @@ in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 
 var filterAgg = response.Aggs.Filter("bethels_projects");
 filterAgg.Should().NotBeNull();
@@ -147,7 +147,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 response.Aggs.Filter("empty_filter").DocCount.Should().BeGreaterThan(0);
 ----
 
@@ -205,7 +205,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 response.Aggs.Filter(_aggName).DocCount.Should().BeGreaterThan(0);
 ----
 

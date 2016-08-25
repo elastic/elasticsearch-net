@@ -67,7 +67,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 var myGeoHashGrid = response.Aggs.GeoHash("my_geohash_grid");
 myGeoHashGrid.Should().NotBeNull();
 ----
