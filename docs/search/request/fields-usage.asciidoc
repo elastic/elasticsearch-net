@@ -21,7 +21,7 @@ WARNING: The `fields` parameter is about fields that are explicitly marked as st
 which is off by default and generally not recommended.
 Use <<source-filtering-usage,source filtering>> instead to select subsets of the original source document to be returned.
 
-See the Elasticsearch documentation on {ref_current}/search-request-fields.html[Fields] for more detail.
+See the Elasticsearch documentation on {ref_current}/search-request-stored-fields.html[Fields] for more detail.
 
 === Fluent DSL Example
 
