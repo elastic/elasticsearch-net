@@ -258,7 +258,8 @@ various options for your properties (analyzer to use, whether to enable doc_valu
 In that case, it's possible to use `.AutoMap()` in conjunction with explicitly mapped properties.
 
 Here we are using `.AutoMap()` to automatically map our company type, but then we're
-overriding our employee property and making it a `nested` type, since by default,`.AutoMap()` will infer objects as `object`.
+overriding our employee property and making it a `nested` type, since by default,
+`.AutoMap()` will infer objects as `object`.
 
 [source,csharp]
 ----
