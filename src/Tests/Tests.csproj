@@ -342,7 +342,6 @@
     <Compile Include=".\Indices\StatusManagement\Upgrade\UpgradeApiTests.cs" />
     <Compile Include=".\Indices\StatusManagement\Upgrade\UpgradeUrlTests.cs" />
     <Compile Include=".\Mapping\Metafields\MetafieldsMappingApiTestsBase.cs" />
-    <Compile Include=".\Mapping\Metafields\Ttl\TypeMappingTestBase.cs" />
     <Compile Include=".\Mapping\Types\Complex\Nested\NestedMappingTests.cs" />
     <Compile Include=".\Mapping\Types\Complex\Object\ObjectMappingTests.cs" />
     <Compile Include=".\Mapping\Types\Core\Binary\BinaryMappingTests.cs" />

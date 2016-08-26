@@ -582,10 +582,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 					)
 					.Map<EmployeeWithAttributes>(m => m
 						.AutoMap()
-						.TtlField(ttl => ttl
-							.Enabled()
-							.Default("10m")
-						)
 						.Properties(ps => ps
 							.Text(s => s
 								.Name(e => e.FirstName)

@@ -128,20 +128,10 @@ namespace Tests.Framework.Integration
 					.Map<Project>(m => m
 						.AutoMap()
 						.Properties(ProjectProperties)
-						.TimestampField(t => t
-							.Enabled()
-						)
-						.TtlField(t => t
-							.Enabled()
-							.Default("7d")
-						)
 					)
 					.Map<CommitActivity>(m => m
 						.AutoMap()
 						.Parent<Project>()
-						.TimestampField(t => t
-							.Enabled()
-						)
 						.Properties(props => props
 							.Object<Developer>(o => o
 								.AutoMap()

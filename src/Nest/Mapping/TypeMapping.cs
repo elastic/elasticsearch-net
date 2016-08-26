@@ -41,14 +41,10 @@ namespace Nest
 		[JsonProperty("_size")]
 		ISizeField SizeField { get; set; }
 
-		[JsonProperty("_timestamp")]
-		ITimestampField TimestampField { get; set; }
 
 		[JsonProperty("_field_names")]
 		IFieldNamesField FieldNamesField { get; set; }
 
-		[JsonProperty("_ttl")]
-		ITtlField TtlField { get; set; }
 
 		[JsonProperty("_meta")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
@@ -99,9 +95,6 @@ namespace Nest
 		/// <inheritdoc/>
 		public ISourceField SourceField { get; set; }
 		/// <inheritdoc/>
-		public ITimestampField TimestampField { get; set; }
-		/// <inheritdoc/>
-		public ITtlField TtlField { get; set; }
 	}
 
 
@@ -124,8 +117,6 @@ namespace Nest
 		string ITypeMapping.SearchAnalyzer { get; set; }
 		ISizeField ITypeMapping.SizeField { get; set; }
 		ISourceField ITypeMapping.SourceField { get; set; }
-		ITimestampField ITypeMapping.TimestampField { get; set; }
-		ITtlField ITypeMapping.TtlField { get; set; }
 
 		/// <summary>
 		/// Convenience method to map as much as it can based on ElasticType attributes set on the type.
@@ -187,14 +178,10 @@ namespace Nest
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> RoutingField(Func<RoutingFieldDescriptor<T>, IRoutingField> routingFieldSelector) => Assign(a => a.RoutingField = routingFieldSelector?.Invoke(new RoutingFieldDescriptor<T>()));
 
-		/// <inheritdoc/>
-		public TypeMappingDescriptor<T> TimestampField(Func<TimestampFieldDescriptor<T>, ITimestampField> timestampFieldSelector) => Assign(a => a.TimestampField = timestampFieldSelector?.Invoke(new TimestampFieldDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> FieldNamesField(Func<FieldNamesFieldDescriptor<T>, IFieldNamesField> fieldNamesFieldSelector) => Assign(a => a.FieldNamesField = fieldNamesFieldSelector.Invoke(new FieldNamesFieldDescriptor<T>()));
 
-		/// <inheritdoc/>
-		public TypeMappingDescriptor<T> TtlField(Func<TtlFieldDescriptor, ITtlField> ttlFieldSelector) => Assign(a => a.TtlField = ttlFieldSelector?.Invoke(new TtlFieldDescriptor()));
 
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector) => Assign(a => a.Meta = metaSelector(new FluentDictionary<string, object>()));
