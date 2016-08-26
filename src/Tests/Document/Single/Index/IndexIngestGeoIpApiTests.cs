@@ -102,13 +102,13 @@ namespace Tests.Document.Single.Index
 		protected override IndexDescriptor<Project> NewDescriptor() => new IndexDescriptor<Project>(this.Document);
 
 		protected override Func<IndexDescriptor<Project>, IIndexRequest<Project>> Fluent => s => s
-			.Refresh()
+			.Refresh(Refresh.True)
 			.Pipeline(PipelineId);
 
 		protected override IndexRequest<Project> Initializer =>
 			new IndexRequest<Project>(this.Document)
 			{
-				Refresh = true,
+				Refresh = Refresh.True,
 				Pipeline = PipelineId
 			};
 

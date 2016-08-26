@@ -14,8 +14,8 @@ namespace Tests.Ingest.GetPipeline
 		private static readonly string _id = "pipeline-1";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.GetPipeline(_id, f),
-			fluentAsync: (client, f) => client.GetPipelineAsync(_id, f),
+			fluent: (client, f) => client.GetPipeline(f),
+			fluentAsync: (client, f) => client.GetPipelineAsync(f),
 			request: (client, r) => client.GetPipeline(r),
 			requestAsync: (client, r) => client.GetPipelineAsync(r)
 		);
@@ -23,9 +23,9 @@ namespace Tests.Ingest.GetPipeline
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"/_ingest/pipeline/{_id}";
 
-		protected override GetPipelineDescriptor NewDescriptor() => new GetPipelineDescriptor(_id);
+		protected override GetPipelineDescriptor NewDescriptor() => new GetPipelineDescriptor().Id(_id);
 
-		protected override Func<GetPipelineDescriptor, IGetPipelineRequest> Fluent => d => d;
+		protected override Func<GetPipelineDescriptor, IGetPipelineRequest> Fluent => d => d.Id(_id);
 
 		protected override GetPipelineRequest Initializer => new GetPipelineRequest(_id);
 	}

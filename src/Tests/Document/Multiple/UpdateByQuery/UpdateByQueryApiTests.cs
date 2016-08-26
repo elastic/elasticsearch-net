@@ -39,8 +39,8 @@ namespace Tests.Document.Multiple.UpdateByQuery
 					)
 				);
 #pragma warning restore 618
-				this.Client.Index(new Test { Text = "words words", Flag = "bar" }, i=>i.Index(index).Refresh());
-				this.Client.Index(new Test { Text = "words words", Flag = "foo" }, i=>i.Index(index).Refresh());
+				this.Client.Index(new Test { Text = "words words", Flag = "bar" }, i=>i.Index(index).Refresh(Refresh.True));
+				this.Client.Index(new Test { Text = "words words", Flag = "foo" }, i=>i.Index(index).Refresh(Refresh.True));
 				this.Client.Map<Test>(m => m
 					.Index(index)
 					.Properties(props => props
@@ -144,7 +144,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 						.RefreshInterval(-1)
 					)
 				);
-				this.Client.Index(new Test { Text = "test1", Flag = "bar" }, i=>i.Index(index).Id(1).Refresh());
+				this.Client.Index(new Test { Text = "test1", Flag = "bar" }, i=>i.Index(index).Id(1).Refresh(Refresh.True));
 				this.Client.Index(new Test { Text = "test2", Flag = "bar" }, i=>i.Index(index).Id(1));
 			}
 		}

@@ -98,13 +98,13 @@ namespace Tests.Document.Single.Index
 
 		protected override Func<IndexDescriptor<IngestedAttachment>, IIndexRequest<IngestedAttachment>> Fluent => s => s
 			.Index(CallIsolatedValue)
-			.Refresh()
+			.Refresh(Refresh.True)
 			.Pipeline(PipelineId);
 
 		protected override IndexRequest<IngestedAttachment> Initializer =>
 			new IndexRequest<IngestedAttachment>(this.Document, CallIsolatedValue)
 			{
-				Refresh = true,
+				Refresh = Refresh.True,
 				Pipeline = PipelineId
 			};
 

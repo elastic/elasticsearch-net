@@ -16,7 +16,7 @@ namespace Tests.Indices.IndexManagement.TypeExists
 			var index = "project";
 			var types = Type<Project>().And<CommitActivity>();
 			var type = "project%2Ccommits";
-			await HEAD($"/{index}/{type}")
+			await HEAD($"/{index}/_mapping/{type}")
 				.Fluent(c => c.TypeExists(indices, types))
 				.Request(c => c.TypeExists(new TypeExistsRequest(indices, types)))
 				.FluentAsync(c => c.TypeExistsAsync(indices, types))

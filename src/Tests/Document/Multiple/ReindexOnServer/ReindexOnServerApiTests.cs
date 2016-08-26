@@ -27,8 +27,8 @@ namespace Tests.Document.Multiple.ReindexOnServer
 		{
 			foreach (var index in values.Values)
 			{
-				this.Client.Index(new Test { Id = 1, Flag = "bar" }, i=>i.Index(index).Refresh());
-				this.Client.Index(new Test { Id = 2, Flag = "bar" }, i=>i.Index(index).Refresh());
+				this.Client.Index(new Test { Id = 1, Flag = "bar" }, i=>i.Index(index).Refresh(Refresh.True));
+				this.Client.Index(new Test { Id = 2, Flag = "bar" }, i=>i.Index(index).Refresh(Refresh.True));
 			}
 		}
 		protected override LazyResponses ClientUsage() => Calls(

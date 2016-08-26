@@ -10,6 +10,7 @@ namespace Nest
 		where TDocument : class
 		where TPartialDocument : class
 	{
+		// TODO replace these with IScript?
 		[JsonProperty(PropertyName = "script")]
 		string Script { get; set; }
 
@@ -45,6 +46,7 @@ namespace Nest
 	{
 		public string Script { get; set; }
 		public string ScriptFile { get; set; }
+		public string ScriptId { get; set; }
 		public string Language { get; set; }
 		public Dictionary<string, object> Params { get; set; }
 		public TDocument Upsert { get; set; }

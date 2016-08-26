@@ -55,7 +55,7 @@ namespace Tests.Document.Single.Index
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
 		protected override string UrlPath
-			=> $"/project/project/{CallIsolatedValue}?consistency=quorum&op_type=index&refresh=true&routing=route&pipeline={PipelineId}";
+			=> $"/project/project/{CallIsolatedValue}?wait_for_active_shards=1&op_type=index&refresh=true&routing=route&pipeline={PipelineId}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -72,18 +72,18 @@ namespace Tests.Document.Single.Index
 		protected override IndexDescriptor<Project> NewDescriptor() => new IndexDescriptor<Project>(this.Document);
 
 		protected override Func<IndexDescriptor<Project>, IIndexRequest<Project>> Fluent => s => s
-			.Consistency(Consistency.Quorum)
+			.WaitForActiveShards("1")
 			.OpType(OpType.Index)
-			.Refresh()
+			.Refresh(Refresh.True)
 			.Pipeline(PipelineId)
 			.Routing("route");
 
 		protected override IndexRequest<Project> Initializer =>
 			new IndexRequest<Project>(this.Document)
 			{
-				Refresh = true,
+				Refresh = Refresh.True,
 				OpType = OpType.Index,
-				Consistency = Consistency.Quorum,
+				WaitForActiveShards = "1",
 				Routing = "route",
 				Pipeline = PipelineId
 			};

@@ -103,13 +103,12 @@ namespace Tests.Cluster.TaskManagement.TasksList
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/_tasks/{Uri.EscapeDataString(_taskId.ToString())}?detailed=true";
+		protected override string UrlPath => $"/_tasks?detailed=true";
 
 		protected override Func<TasksListDescriptor, ITasksListRequest> Fluent => s => s
-			.TaskId(_taskId)
 			.Detailed();
 
-		protected override TasksListRequest Initializer => new TasksListRequest(_taskId)
+		protected override TasksListRequest Initializer => new TasksListRequest()
 		{
 			Detailed = true
 		};

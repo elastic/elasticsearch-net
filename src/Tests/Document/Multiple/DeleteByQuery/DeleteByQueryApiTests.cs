@@ -142,7 +142,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 						.RefreshInterval(-1)
 					)
 				);
-				this.Client.Index(new Project { Name = "project1", Description = "description" }, i => i.Index(index).Id(1).Refresh());
+				this.Client.Index(new Project { Name = "project1", Description = "description" }, i => i.Index(index).Id(1).Refresh(Refresh.True));
 				this.Client.Index(new Project { Name = "project2", Description = "description" }, i => i.Index(index).Id(1));
 			}
 		}

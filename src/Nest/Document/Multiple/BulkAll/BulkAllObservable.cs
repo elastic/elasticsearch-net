@@ -112,9 +112,9 @@ namespace Nest
 			{
 				s.IndexMany(buffer).Index(r.Index).Type(r.Type);
 				if (!string.IsNullOrEmpty(r.Pipeline)) s.Pipeline(r.Pipeline);
-				if (r.Refresh) s.Refresh(r.Refresh);
+				if (r.Refresh.HasValue) s.Refresh(r.Refresh.Value);
 				if (!string.IsNullOrEmpty(r.Routing)) s.Routing(r.Routing);
-				if (r.Consistency.HasValue) s.Consistency(r.Consistency.Value);
+				if (r.WaitForActiveShards.HasValue) s.WaitForActiveShards(r.WaitForActiveShards.ToString());
 				return s;
 			}, this._compositeCancelToken);
 

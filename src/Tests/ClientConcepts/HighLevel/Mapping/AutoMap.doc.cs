@@ -634,11 +634,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 					},
 					employee = new
 					{
-						_ttl = new
-						{
-							@default = "10m",
-							enabled = true
-						},
 						properties = new
 						{
 							birthday = new

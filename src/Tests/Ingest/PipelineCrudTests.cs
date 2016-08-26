@@ -79,15 +79,15 @@ namespace Tests.Ingest
 		protected override LazyResponses Read() => Calls<GetPipelineDescriptor, GetPipelineRequest, IGetPipelineRequest, IGetPipelineResponse>(
 			GetInitializer,
 			GetFluent,
-			fluent: (s, c, f) => c.GetPipeline(s, f),
-			fluentAsync: (s, c, f) => c.GetPipelineAsync(s, f),
+			fluent: (s, c, f) => c.GetPipeline(f),
+			fluentAsync: (s, c, f) => c.GetPipelineAsync(f),
 			request: (s, c, r) => c.GetPipeline(r),
 			requestAsync: (s, c, r) => c.GetPipelineAsync(r)
 		);
 
 		protected GetPipelineRequest GetInitializer(string pipelineId) => new GetPipelineRequest(pipelineId);
 
-		protected IGetPipelineRequest GetFluent(string pipelineId, GetPipelineDescriptor d) => d;
+		protected IGetPipelineRequest GetFluent(string pipelineId, GetPipelineDescriptor d) => d.Id(pipelineId);
 
 		protected override LazyResponses Update() => Calls<PutPipelineDescriptor, PutPipelineRequest, IPutPipelineRequest, IPutPipelineResponse>(
 			UpdateInitializer,

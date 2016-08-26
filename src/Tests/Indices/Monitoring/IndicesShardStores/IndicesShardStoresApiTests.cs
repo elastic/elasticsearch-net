@@ -28,7 +28,7 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 			client.Index(new IndexRequest<object>(IndexWithUnassignedShards)
 			{
 				Document = new { x = 1 },
-				Refresh = true
+				Refresh = Refresh.True
 			});
 		}
 

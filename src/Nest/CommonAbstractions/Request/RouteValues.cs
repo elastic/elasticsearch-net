@@ -27,6 +27,9 @@ namespace Nest
 		public string TaskId => GetResolved("task_id");
 		public string Realms => GetResolved("realms");
 		public string Username => GetResolved("username");
+		public string Target => GetResolved("target");
+		public string NewIndex => GetResolved("new_index");
+		public string Alias => GetResolved("alias");
 
 		private string GetResolved(string route)
 		{

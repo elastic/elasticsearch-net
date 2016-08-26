@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Nest;
 using Tests.Framework.MockData;
+using Elasticsearch.Net;
 
 namespace Profiling.Async
 {
@@ -19,7 +20,7 @@ namespace Profiling.Async
 		{
 			_developer = Developer.Generator.Generate();
 
-			var indexResponse = await client.IndexAsync(_developer, d => d.Index<Developer>().Refresh()).ConfigureAwait(false);
+			var indexResponse = await client.IndexAsync(_developer, d => d.Index<Developer>().Refresh(Refresh.True)).ConfigureAwait(false);
 
 			if (!indexResponse.IsValid)
 				output.WriteOrange($"error with id {indexResponse.Id}. message: {indexResponse.CallDetails.OriginalException}");

@@ -31,11 +31,15 @@ namespace Nest
 		///<summary>Default document type for items which don't provide one</summary>
 		TypeName Type { get; set; }
 
-		///<summary>Explicit write consistency setting for the operation</summary>
-		Consistency? Consistency { get; set; }
+		///<summary>
+		///Sets the number of shard copies that must be active before proceeding with the bulk operation.
+		///Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any
+		///non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
+		///</summary>
+		int? WaitForActiveShards { get; set; }
 
 		///<summary>Refresh the index after performing each operation (elasticsearch will refresh locally)</summary>
-		bool Refresh { get; set; }
+		Refresh? Refresh { get; set; }
 
 		///<summary>Refresh the index after performing ALL the bulk operations (NOTE this is an additional request)</summary>
 		bool RefreshOnCompleted { get; set; }
@@ -61,8 +65,8 @@ namespace Nest
 
 		public IndexName Index { get; set; }
 		public TypeName Type { get; set; }
-		public Consistency? Consistency { get; set; }
-		public bool Refresh { get; set; }
+		public int? WaitForActiveShards { get; set; }
+		public Refresh? Refresh { get; set; }
 		public bool RefreshOnCompleted { get; set; }
 		public string Routing { get; set; }
 		public Time Timeout { get; set; }
@@ -89,8 +93,8 @@ namespace Nest
 
 		IndexName IBulkAllRequest<T>.Index { get; set; }
 		TypeName IBulkAllRequest<T>.Type { get; set; }
-		Consistency? IBulkAllRequest<T>.Consistency { get; set; }
-		bool IBulkAllRequest<T>.Refresh { get; set; }
+		int? IBulkAllRequest<T>.WaitForActiveShards { get; set; }
+		Refresh? IBulkAllRequest<T>.Refresh { get; set; }
 		bool IBulkAllRequest<T>.RefreshOnCompleted { get; set; }
 		string IBulkAllRequest<T>.Routing { get; set; }
 		Time IBulkAllRequest<T>.Timeout { get; set; }
@@ -133,7 +137,7 @@ namespace Nest
 		public BulkAllDescriptor<T> RefreshOnCompleted(bool refresh = true) => Assign(p => p.RefreshOnCompleted = refresh);
 
 		/// <inheritdoc />
-		public BulkAllDescriptor<T> Refresh(bool refresh = true) => Assign(p => p.Refresh = refresh);
+		public BulkAllDescriptor<T> Refresh(Refresh refresh) => Assign(p => p.Refresh = refresh);
 
 		/// <inheritdoc />
 		public BulkAllDescriptor<T> Routing(string routing) => Assign(p => p.Routing = routing);

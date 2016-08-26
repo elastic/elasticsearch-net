@@ -108,12 +108,12 @@ namespace Tests.Document.Single.Attachment
 		protected override Func<IndexDescriptor<Document>, IIndexRequest<Document>> Fluent => s => s
 			.Index(CallIsolatedValue)
 			.Id(CallIsolatedValue)
-			.Refresh();
+			.Refresh(Refresh.True);
 
 		protected override IndexRequest<Document> Initializer =>
 			new IndexRequest<Document>(this.Document, CallIsolatedValue, id: CallIsolatedValue)
 			{
-				Refresh = true,
+				Refresh = Refresh.True,
 			};
 
 		protected override void ExpectResponse(IIndexResponse response)
