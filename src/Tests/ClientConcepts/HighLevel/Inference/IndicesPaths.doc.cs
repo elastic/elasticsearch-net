@@ -22,6 +22,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Nest.Indices singleIndexFromString = "name";
 			Nest.Indices multipleIndicesFromString = "name1, name2";
 			Nest.Indices allFromString = "_all";
+			Nest.Indices allFromEmptyString = string.Empty;
 			Nest.Indices allWithOthersFromString = "_all, name2";
 
 			singleIndexFromString.Match(
@@ -35,6 +36,11 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			);
 
 			allFromString.Match(
+				all => all.Should().NotBeNull(),
+				many => many.Indices.Should().BeNull()
+			);
+
+			allFromEmptyString.Match(
 				all => all.Should().NotBeNull(),
 				many => many.Indices.Should().BeNull()
 			);
@@ -110,5 +116,17 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			((IUrlParameter)allIndicesRequest.Index).GetString(client.ConnectionSettings).Should().Be("_all");
 		}
 
+		/**
+		 * You can also use an empty string to map to all indices
+		 */
+		[U]
+		public void IndicesAllWhenUsingEmptyString()
+		{
+			var client = TestClient.GetInMemoryClient();
+
+			ISearchRequest indicesAllRequest = new SearchDescriptor<Project>().Index(string.Empty);
+
+			((IUrlParameter)indicesAllRequest.Index).GetString(client.ConnectionSettings).Should().Be("_all");
+		}
 	}
 }
