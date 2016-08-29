@@ -6,6 +6,7 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
+using FluentAssertions;
 
 namespace Tests.Document.Single.Update
 {
@@ -53,5 +54,11 @@ namespace Tests.Document.Single.Update
 			DocAsUpsert = true,
 			DetectNoop = true
 		};
+
+		protected override void ExpectResponse(IUpdateResponse<Project> response)
+		{
+			response.IsValid.Should().BeTrue();
+			response.Result.Should().Be(Result.Noop);
+		}
 	}
 }

@@ -22,6 +22,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "get")]
 		InstantGet<T> Get { get; }
+
+		[JsonProperty("result")]
+		Result Result { get; }
 	}
 
 	[JsonObject]
@@ -34,5 +37,6 @@ namespace Nest
 		public string Id { get; private set; }
 		public long Version { get; private set; }
 		public InstantGet<T> Get { get; private set; }
+		public Result Result { get; private set; }
 	}
 }

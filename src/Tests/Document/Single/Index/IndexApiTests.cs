@@ -90,6 +90,7 @@ namespace Tests.Document.Single.Index
 			indexResult.ShouldBeValid();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Created.Should().BeTrue();
+			indexResult.Result.Should().Be(Result.Created);
 			indexResult.Index.Should().Be(indexName);
 			indexResult.Type.Should().Be(this.Client.Infer.TypeName<Project>());
 			indexResult.Id.Should().Be(project.Name);
@@ -113,6 +114,7 @@ namespace Tests.Document.Single.Index
 			indexResult.ShouldBeValid();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Created.Should().BeTrue();
+			indexResult.Result.Should().Be(Result.Created);
 			indexResult.Index.Should().Be(indexName);
 			indexResult.Type.Should().Be(this.Client.Infer.TypeName<CommitActivity>());
 			indexResult.Id.Should().Be(commitActivity.Id);
@@ -209,6 +211,7 @@ namespace Tests.Document.Single.Index
 			indexResult.ShouldBeValid();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Created.Should().BeTrue();
+			indexResult.Result.Should().Be(Result.Created);
 			indexResult.Index.Should().Be(index);
 			indexResult.Type.Should().StartWith("<>");
 		}

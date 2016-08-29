@@ -581,6 +581,7 @@
     <Compile Include="Document\Multiple\Reindex\ReindexObserver.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexRequest.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexResponse.cs" />
+    <Compile Include="Document\Result.cs" />
     <Compile Include="Document\Single\Delete\DeleteRequest.cs" />
     <Compile Include="Document\Single\Delete\DeleteResponse.cs" />
     <Compile Include="Document\Single\Delete\ElasticClient-Delete.cs" />

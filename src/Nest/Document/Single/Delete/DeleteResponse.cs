@@ -29,6 +29,10 @@ namespace Nest
 		/// </summary>
 		bool Found { get; }
 
+		/// <summary>
+		/// The operation that was performed on the document.
+		/// </summary>
+		Result Result { get; }
 	}
 
 
@@ -40,14 +44,17 @@ namespace Nest
 
 		[JsonProperty("_type")]
 		public string Type { get; internal set; }
-		
+
 		[JsonProperty("_id")]
 		public string Id { get; internal set; }
-		
+
 		[JsonProperty("_version")]
 		public string Version { get; internal set; }
-		
+
 		[JsonProperty("found")]
 		public bool Found { get; internal set; }
+
+		[JsonProperty("result")]
+		public Result Result { get; internal set; }
 	}
 }
