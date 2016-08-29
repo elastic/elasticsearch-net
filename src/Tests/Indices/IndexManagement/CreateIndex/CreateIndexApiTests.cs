@@ -66,6 +66,8 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 		protected override void ExpectResponse(ICreateIndexResponse response)
 		{
 			response.IsValid.Should().BeTrue();
+			response.Acknowledged.Should().BeTrue();
+			response.ShardsAcknowledged.Should().BeTrue();
 
 			var indexSettings = this.Client.GetIndexSettings(g => g.Index(CallIsolatedValue));
 
