@@ -1581,7 +1581,7 @@ namespace Nest
 		///<summary>ID of the parent document</summary>
 		public IndexDescriptor<TDocument> Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
-		///<summary>Refresh the shard after performing the operation</summary>
+		///<summary>Refresh the affected shards after performing the operation</summary>
 		public IndexDescriptor<TDocument> Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
 
 		///<summary>Specific routing value</summary>

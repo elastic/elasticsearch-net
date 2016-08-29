@@ -1567,7 +1567,7 @@ namespace Elasticsearch.Net
 		public IndexRequestParameters Parent(string parent) => this.AddQueryString("parent", parent);
 		
 		
-		///<summary>Refresh the shard after performing the operation</summary>
+		///<summary>Refresh the affected shards after performing the operation</summary>
 		public IndexRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
 		
 		

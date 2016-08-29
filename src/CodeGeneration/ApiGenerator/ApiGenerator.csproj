@@ -71,6 +71,7 @@
     <Compile Include="Overrides\Descriptors\FieldStatsDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\GraphExploreDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\IDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\IndexDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\IndicesStatsDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\MultiTermVectorsDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\NodesHotThreadsDescriptorOverrides.cs" />

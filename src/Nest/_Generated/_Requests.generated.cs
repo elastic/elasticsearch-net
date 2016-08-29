@@ -3132,7 +3132,7 @@ namespace Nest
 		///<summary>ID of the parent document</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
-		///<summary>Refresh the shard after performing the operation</summary>
+		///<summary>Refresh the affected shards after performing the operation</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
