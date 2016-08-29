@@ -4154,7 +4154,7 @@ namespace Elasticsearch.Net
 		///<param name="alias">The name of the alias to rollover</param>
 		///<param name="body">The conditions that needs to be met for executing rollover</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesRolloverForAll<T>(string alias, PostData<object> body, Func<IndicesRolloverRequestParameters, IndicesRolloverRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesRolloverForAll<T>(string alias, PostData<object> body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{alias.NotNull("alias")}/_rollover"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{alias}/_rollover
@@ -4169,7 +4169,7 @@ namespace Elasticsearch.Net
 		///<param name="alias">The name of the alias to rollover</param>
 		///<param name="body">The conditions that needs to be met for executing rollover</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesRolloverForAllAsync<T>(string alias, PostData<object> body, Func<IndicesRolloverRequestParameters, IndicesRolloverRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesRolloverForAllAsync<T>(string alias, PostData<object> body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{alias.NotNull("alias")}/_rollover"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{alias}/_rollover/{new_index}
@@ -4185,7 +4185,7 @@ namespace Elasticsearch.Net
 		///<param name="new_index">The name of the rollover index</param>
 		///<param name="body">The conditions that needs to be met for executing rollover</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesRolloverForAll<T>(string alias, string new_index, PostData<object> body, Func<IndicesRolloverRequestParameters, IndicesRolloverRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesRolloverForAll<T>(string alias, string new_index, PostData<object> body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{alias.NotNull("alias")}/_rollover/{new_index.NotNull("new_index")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{alias}/_rollover/{new_index}
@@ -4201,7 +4201,7 @@ namespace Elasticsearch.Net
 		///<param name="new_index">The name of the rollover index</param>
 		///<param name="body">The conditions that needs to be met for executing rollover</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesRolloverForAllAsync<T>(string alias, string new_index, PostData<object> body, Func<IndicesRolloverRequestParameters, IndicesRolloverRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesRolloverForAllAsync<T>(string alias, string new_index, PostData<object> body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{alias.NotNull("alias")}/_rollover/{new_index.NotNull("new_index")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_segments

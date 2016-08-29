@@ -2927,28 +2927,28 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html
 	///</pre>
 	///</summary>
-	public class IndicesRolloverRequestParameters : FluentRequestParameters<IndicesRolloverRequestParameters> 
+	public class RolloverIndexRequestParameters : FluentRequestParameters<RolloverIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>Explicit operation timeout</summary>
-		public IndicesRolloverRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public RolloverIndexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesRolloverRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public RolloverIndexRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
-		public IndicesRolloverRequestParameters WaitForActiveShards(string wait_for_active_shards) => this.AddQueryString("wait_for_active_shards", wait_for_active_shards);
+		public RolloverIndexRequestParameters WaitForActiveShards(string wait_for_active_shards) => this.AddQueryString("wait_for_active_shards", wait_for_active_shards);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
-		public IndicesRolloverRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public RolloverIndexRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndicesRolloverRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public RolloverIndexRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	

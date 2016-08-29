@@ -690,6 +690,9 @@
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\ElasticClient-OpenIndex.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexRequest.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexResponse.cs" />
+    <Compile Include="Indices\IndexManagement\RolloverIndex\RolloverConditions.cs" />
+    <Compile Include="Indices\IndexManagement\RolloverIndex\ElasticClient-RolloverIndex.cs" />
+    <Compile Include="Indices\IndexManagement\RolloverIndex\RolloverIndexResponse.cs" />
     <Compile Include="Indices\IndexManagement\TypesExists\ElasticClient-TypeExists.cs" />
     <Compile Include="Indices\IndexManagement\TypesExists\TypeExistsRequest.cs" />
     <Compile Include="Indices\IndexSettings\GetIndexSettings\ElasticClient-GetIndexSettings.cs" />
@@ -748,6 +751,7 @@
     <Compile Include="Indices\Monitoring\IndicesStats\IndicesStats.cs" />
     <Compile Include="Indices\Monitoring\IndicesStats\IndicesStatsRequest.cs" />
     <Compile Include="Indices\Monitoring\IndicesStats\IndicesStatsResponse.cs" />
+    <Compile Include="Indices\IndexManagement\RolloverIndex\RolloverIndexRequest.cs" />
     <Compile Include="Indices\StatusManagement\ClearCache\ClearCacheRequest.cs" />
     <Compile Include="Indices\StatusManagement\ClearCache\ClearCacheResponse.cs" />
     <Compile Include="Indices\StatusManagement\ClearCache\ElasticClient-ClearCache.cs" />

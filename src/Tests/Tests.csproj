@@ -367,6 +367,8 @@
     <Compile Include="Indices\AliasManagement\GetIndicesPointingToAlias\GetIndicesPointingToAliasTests.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexApiTests.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\RolloverIndex\RolloverIndexApiTests.cs" />
+    <Compile Include="Indices\IndexManagement\RolloverIndex\RolloverIndexUrlTests.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\GetIndexTemplate\GetIndexTemplateApiTests.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\GetIndexTemplate\GetIndexTemplateUrlTests.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\IndexTemplateCrudTests.cs" />

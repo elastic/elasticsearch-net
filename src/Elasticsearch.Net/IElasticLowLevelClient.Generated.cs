@@ -3871,7 +3871,7 @@ namespace Elasticsearch.Net
 		///<param name="alias">The name of the alias to rollover</param>
 		///<param name="body">The conditions that needs to be met for executing rollover</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesRolloverForAll<T>(string alias, PostData<object> body, Func<IndicesRolloverRequestParameters, IndicesRolloverRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IndicesRolloverForAll<T>(string alias, PostData<object> body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /{alias}/_rollover
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3885,7 +3885,7 @@ namespace Elasticsearch.Net
 		///<param name="alias">The name of the alias to rollover</param>
 		///<param name="body">The conditions that needs to be met for executing rollover</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesRolloverForAllAsync<T>(string alias, PostData<object> body, Func<IndicesRolloverRequestParameters, IndicesRolloverRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> IndicesRolloverForAllAsync<T>(string alias, PostData<object> body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a POST on /{alias}/_rollover/{new_index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3900,7 +3900,7 @@ namespace Elasticsearch.Net
 		///<param name="new_index">The name of the rollover index</param>
 		///<param name="body">The conditions that needs to be met for executing rollover</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesRolloverForAll<T>(string alias, string new_index, PostData<object> body, Func<IndicesRolloverRequestParameters, IndicesRolloverRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IndicesRolloverForAll<T>(string alias, string new_index, PostData<object> body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /{alias}/_rollover/{new_index}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3915,7 +3915,7 @@ namespace Elasticsearch.Net
 		///<param name="new_index">The name of the rollover index</param>
 		///<param name="body">The conditions that needs to be met for executing rollover</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesRolloverForAllAsync<T>(string alias, string new_index, PostData<object> body, Func<IndicesRolloverRequestParameters, IndicesRolloverRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> IndicesRolloverForAllAsync<T>(string alias, string new_index, PostData<object> body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a GET on /_segments
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
