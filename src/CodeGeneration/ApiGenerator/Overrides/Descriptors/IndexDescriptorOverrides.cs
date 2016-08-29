@@ -1,24 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using ApiGenerator.Domain;
 
 namespace ApiGenerator.Overrides.Descriptors
 {
-	public class AnalyzeDescriptorOverrides : DescriptorOverridesBase
-	{
-		public override IEnumerable<string> SkipQueryStringParams => new[]
-		{
-			"analyzer",
-			"char_filters",
-			"char_filter",
-			"field",
-			"filters",
-			"filter",
-			"text",
-			"tokenizer"
-		};
-	}
-
 	public class IndexDescriptorOverrides : DescriptorOverridesBase
 	{
 		public override CsharpMethod PatchMethod(CsharpMethod method)

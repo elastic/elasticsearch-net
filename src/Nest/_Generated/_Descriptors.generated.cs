@@ -1581,7 +1581,7 @@ namespace Nest
 		///<summary>ID of the parent document</summary>
 		public IndexDescriptor<TDocument> Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
-		///<summary>Refresh the index after performing the operation</summary>
+		///<summary>Refresh the shard after performing the operation</summary>
 		public IndexDescriptor<TDocument> Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
 
 		///<summary>Specific routing value</summary>
@@ -2249,6 +2249,7 @@ namespace Nest
 		///<summary>A comma-separated list of alias names to return</summary>
 		public GetAliasDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
+	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetAliasDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
