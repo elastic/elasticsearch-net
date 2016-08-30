@@ -3540,43 +3540,6 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIndicesShrinkRequest : IRequest<IndicesShrinkRequestParameters> 
-	{
-		IndexName Index { get; }
-		Name Target { get; }
-	 } 
-	///<summary>Request parameters for IndicesShrink <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
-	public partial class IndicesShrinkRequest  : PlainRequestBase<IndicesShrinkRequestParameters>, IIndicesShrinkRequest
-	{
-		protected IIndicesShrinkRequest Self => this;
-		IndexName IIndicesShrinkRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		Name IIndicesShrinkRequest.Target => Self.RouteValues.Get<Name>("target");
-			/// <summary>/{index}/_shrink/{target}</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="target">this parameter is required</param>
-		public IndicesShrinkRequest(IndexName index, Name target) : base(r=>r.Required("index", index).Required("target", target)){}
-		
-
-			///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
-		
-		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
-		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndicesStatsRequest : IRequest<IndicesStatsRequestParameters> 
 	{
 		Indices Index { get; }
@@ -5178,6 +5141,41 @@ namespace Nest
 		
 		///<summary>Includes detailed memory usage by Lucene.</summary>
 		public bool Verbose { get { return Q<bool>("verbose"); } set { Q("verbose", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IShrinkIndexRequest : IRequest<ShrinkIndexRequestParameters> 
+	{
+		IndexName Index { get; }
+		IndexName Target { get; }
+	 } 
+	///<summary>Request parameters for IndicesShrink <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
+	public partial class ShrinkIndexRequest  : PlainRequestBase<ShrinkIndexRequestParameters>, IShrinkIndexRequest
+	{
+		protected IShrinkIndexRequest Self => this;
+		IndexName IShrinkIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		IndexName IShrinkIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
+			/// <summary>/{index}/_shrink/{target}</summary>
+///<param name="index">this parameter is required</param>		
+///<param name="target">this parameter is required</param>
+		public ShrinkIndexRequest(IndexName index, IndexName target) : base(r=>r.Required("index", index).Required("target", target)){}
+		
+
+			///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
+		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }

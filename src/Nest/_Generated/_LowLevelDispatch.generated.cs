@@ -1929,7 +1929,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesShardStores", p, new [] { GET }, "/_shard_stores", "/{index}/_shard_stores");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesShrinkDispatch<T>(IRequest<IndicesShrinkRequestParameters> p , PostData<object> body) where T : class
+		internal ElasticsearchResponse<T> IndicesShrinkDispatch<T>(IRequest<ShrinkIndexRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1945,7 +1945,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesShrink", p, new [] { PUT, POST }, "/{index}/_shrink/{target}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesShrinkDispatchAsync<T>(IRequest<IndicesShrinkRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		internal Task<ElasticsearchResponse<T>> IndicesShrinkDispatchAsync<T>(IRequest<ShrinkIndexRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
 		{
 			switch(p.HttpMethod)
 			{

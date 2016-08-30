@@ -3037,28 +3037,28 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html
 	///</pre>
 	///</summary>
-	public class IndicesShrinkRequestParameters : FluentRequestParameters<IndicesShrinkRequestParameters> 
+	public class ShrinkIndexRequestParameters : FluentRequestParameters<ShrinkIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
 		///<summary>Explicit operation timeout</summary>
-		public IndicesShrinkRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public ShrinkIndexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesShrinkRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public ShrinkIndexRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
-		public IndicesShrinkRequestParameters WaitForActiveShards(string wait_for_active_shards) => this.AddQueryString("wait_for_active_shards", wait_for_active_shards);
+		public ShrinkIndexRequestParameters WaitForActiveShards(string wait_for_active_shards) => this.AddQueryString("wait_for_active_shards", wait_for_active_shards);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
-		public IndicesShrinkRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public ShrinkIndexRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndicesShrinkRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public ShrinkIndexRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	

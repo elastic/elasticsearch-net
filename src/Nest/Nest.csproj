@@ -690,6 +690,9 @@
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\ElasticClient-OpenIndex.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexRequest.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexResponse.cs" />
+    <Compile Include="Indices\IndexManagement\ShrinkIndex\ElasticClient-ShrinkIndex.cs" />
+    <Compile Include="Indices\IndexManagement\ShrinkIndex\ShrinkIndexRequest.cs" />
+    <Compile Include="Indices\IndexManagement\ShrinkIndex\ShrinkIndexResponse.cs" />
     <Compile Include="Indices\IndexManagement\TypesExists\ElasticClient-TypeExists.cs" />
     <Compile Include="Indices\IndexManagement\TypesExists\TypeExistsRequest.cs" />
     <Compile Include="Indices\IndexSettings\GetIndexSettings\ElasticClient-GetIndexSettings.cs" />

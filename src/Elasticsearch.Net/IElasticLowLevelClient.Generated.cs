@@ -4030,7 +4030,7 @@ namespace Elasticsearch.Net
 		///<param name="target">The name of the target index to shrink into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesShrink<T>(string index, string target, PostData<object> body, Func<IndicesShrinkRequestParameters, IndicesShrinkRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IndicesShrink<T>(string index, string target, PostData<object> body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a PUT on /{index}/_shrink/{target}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4045,7 +4045,7 @@ namespace Elasticsearch.Net
 		///<param name="target">The name of the target index to shrink into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesShrinkAsync<T>(string index, string target, PostData<object> body, Func<IndicesShrinkRequestParameters, IndicesShrinkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> IndicesShrinkAsync<T>(string index, string target, PostData<object> body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a POST on /{index}/_shrink/{target}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4060,7 +4060,7 @@ namespace Elasticsearch.Net
 		///<param name="target">The name of the target index to shrink into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesShrinkPost<T>(string index, string target, PostData<object> body, Func<IndicesShrinkRequestParameters, IndicesShrinkRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IndicesShrinkPost<T>(string index, string target, PostData<object> body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /{index}/_shrink/{target}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4075,7 +4075,7 @@ namespace Elasticsearch.Net
 		///<param name="target">The name of the target index to shrink into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesShrinkPostAsync<T>(string index, string target, PostData<object> body, Func<IndicesShrinkRequestParameters, IndicesShrinkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> IndicesShrinkPostAsync<T>(string index, string target, PostData<object> body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a GET on /_stats
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
