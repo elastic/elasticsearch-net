@@ -90,9 +90,10 @@ namespace Nest
 		public long ThrottledInMilliseconds { get; internal set; }
 
 		[JsonProperty("requests_per_second")]
-		public Union<string,float> RequestsPerSecond { get; internal set; }
+		public float RequestsPerSecond { get; internal set; }
 
 		[JsonProperty("throttled_until_millis")]
 		public long ThrottledUntilInMilliseconds { get; internal set; }
 	}
 }
+

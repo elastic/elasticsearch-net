@@ -36,7 +36,7 @@ namespace Nest
 		long ThrottledMilliseconds { get; }
 
 		[JsonProperty("requests_per_second")]
-		Union<string, float> RequestsPerSecond { get; }
+		float RequestsPerSecond { get; }
 
 		[JsonProperty("throttled_until_millis")]
 		long ThrottledUntilMilliseconds { get; }
@@ -70,7 +70,7 @@ namespace Nest
 
 		public long ThrottledMilliseconds { get; internal set; }
 
-		public Union<string, float> RequestsPerSecond { get; internal set; }
+		public float RequestsPerSecond { get; internal set; }
 
 		public long ThrottledUntilMilliseconds { get; internal set; }
 

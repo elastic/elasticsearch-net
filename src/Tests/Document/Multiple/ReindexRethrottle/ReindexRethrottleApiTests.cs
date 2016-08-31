@@ -88,17 +88,17 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override string UrlPath => $"/_reindex/{TaskId.NodeId}%3A{TaskId.TaskNumber}/_rethrottle?requests_per_second=unlimited";
+		protected override string UrlPath => $"/_reindex/{TaskId.NodeId}%3A{TaskId.TaskNumber}/_rethrottle?requests_per_second=-1";
 
 		protected override bool SupportsDeserialization => false;
 
 		protected override Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> Fluent => d => d
 			.TaskId(TaskId)
-			.RequestsPerSecond(float.PositiveInfinity);
+			.RequestsPerSecond(-1);
 
 		protected override ReindexRethrottleRequest Initializer => new ReindexRethrottleRequest(TaskId)
 		{
-			RequestsPerSecond = float.PositiveInfinity,
+			RequestsPerSecond = -1,
 		};
 
 		protected override void ExpectResponse(IReindexRethrottleResponse response)
@@ -126,10 +126,7 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 			task.Type.Should().NotBeNullOrEmpty();
 			task.Action.Should().NotBeNullOrEmpty();
 
-			task.Status.RequestsPerSecond.Match(
-				s => s.Should().Be("unlimited"),
-				l => l.Should().Be(0)
-			);
+			task.Status.RequestsPerSecond.Should().Be(-1);
 
 			task.StartTimeInMilliseconds.Should().BeGreaterThan(0);
 			task.RunningTimeInNanoseconds.Should().BeGreaterThan(0);

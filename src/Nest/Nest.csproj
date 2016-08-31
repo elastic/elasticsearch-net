@@ -550,6 +550,7 @@
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexRoutingJsonConverter.cs" />
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexSource.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ElasticClient-ReindexRethrottle.cs" />
+    <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleRequest.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexNode.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleResponse.cs" />
     <Compile Include="Document\Multiple\Retries.cs" />

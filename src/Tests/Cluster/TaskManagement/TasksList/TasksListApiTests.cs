@@ -122,7 +122,7 @@ namespace Tests.Cluster.TaskManagement.TasksList
 			taskExecutingNode.Name.Should().NotBeNullOrWhiteSpace();
 			taskExecutingNode.TransportAddress.Should().NotBeNullOrWhiteSpace();
 			taskExecutingNode.Tasks.Should().NotBeEmpty();
-			taskExecutingNode.Tasks.Count().Should().Be(1);
+			taskExecutingNode.Tasks.Count().Should().BeGreaterOrEqualTo(1);
 
 			var task = taskExecutingNode.Tasks[_taskId];
 			task.Action.Should().NotBeNullOrWhiteSpace();

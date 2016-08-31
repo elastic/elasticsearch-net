@@ -3828,7 +3828,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
-		public ReindexRethrottleRequestParameters RequestsPerSecond(float requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second == float.PositiveInfinity ? "unlimited" : requests_per_second.ToString());
+		public ReindexRethrottleRequestParameters RequestsPerSecond(float requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second);
 		
 		
 		///<summary>The URL-encoded request definition</summary>

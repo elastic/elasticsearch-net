@@ -4691,7 +4691,7 @@ namespace Nest
 		
 
 			///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
-		public float RequestsPerSecond { get { var q = Q<string>("requests_per_second"); return (q == "unlimited")? float.PositiveInfinity : float.Parse(q); } set { Q("requests_per_second", value == float.PositiveInfinity ? "unlimited" : value.ToString()); } }
+		public float RequestsPerSecond { get { return Q<float>("requests_per_second"); } set { Q("requests_per_second", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -4699,9 +4699,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRenderSearchTemplateRequest : IRequest<RenderSearchTemplateRequestParameters> 

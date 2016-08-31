@@ -90,9 +90,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			response.Retries.Bulk.Should().Be(0);
 			response.Retries.Search.Should().Be(0);
 
-			response.RequestsPerSecond.Match(
-				unlimited => unlimited.Should().Be("unlimited"),
-				f => f.Should().Be(0));
+			response.RequestsPerSecond.Should().Be(-1);
 
 			response.Failures.Should().BeEmpty();
 		}

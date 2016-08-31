@@ -39,7 +39,7 @@ namespace Nest
 		IEnumerable<BulkIndexByScrollFailure> Failures { get; }
 
 		[JsonProperty("requests_per_second")]
-		Union<string, float> RequestsPerSecond { get; }
+		float RequestsPerSecond { get; }
 	}
 
 	public class UpdateByQueryResponse : ResponseBase, IUpdateByQueryResponse
@@ -69,6 +69,6 @@ namespace Nest
 
 		public IEnumerable<BulkIndexByScrollFailure> Failures { get; internal set; }
 
-		public Union<string, float> RequestsPerSecond { get; internal set; }
+		public float RequestsPerSecond { get; internal set; }
 	}
 }
