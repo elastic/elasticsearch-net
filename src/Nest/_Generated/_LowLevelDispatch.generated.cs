@@ -2305,7 +2305,7 @@ namespace Nest
 			throw InvalidDispatch("Msearch", p, new [] { GET, POST }, "/_msearch", "/{index}/_msearch", "/{index}/{type}/_msearch");
 		}
 		
-		internal ElasticsearchResponse<T> MsearchTemplateDispatch<T>(IRequest<MsearchTemplateRequestParameters> p , PostData<object> body) where T : class
+		internal ElasticsearchResponse<T> MsearchTemplateDispatch<T>(IRequest<MultiSearchTemplateRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2323,7 +2323,7 @@ namespace Nest
 			throw InvalidDispatch("MsearchTemplate", p, new [] { GET, POST }, "/_msearch/template", "/{index}/_msearch/template", "/{index}/{type}/_msearch/template");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> MsearchTemplateDispatchAsync<T>(IRequest<MsearchTemplateRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		internal Task<ElasticsearchResponse<T>> MsearchTemplateDispatchAsync<T>(IRequest<MultiSearchTemplateRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
 		{
 			switch(p.HttpMethod)
 			{

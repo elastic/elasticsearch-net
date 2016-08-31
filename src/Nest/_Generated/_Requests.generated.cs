@@ -3635,48 +3635,6 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IMsearchTemplateRequest : IRequest<MsearchTemplateRequestParameters> 
-	{
-		Indices Index { get; }
-		Types Type { get; }
-	 } 
-	///<summary>Request parameters for MsearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
-	public partial class MsearchTemplateRequest  : PlainRequestBase<MsearchTemplateRequestParameters>, IMsearchTemplateRequest
-	{
-		protected IMsearchTemplateRequest Self => this;
-		Indices IMsearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types IMsearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_msearch/template</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public MsearchTemplateRequest() {}
-		
-
-		/// <summary>/{index}/_msearch/template</summary>
-///<param name="index">Optional, accepts null</param>
-		public MsearchTemplateRequest(Indices index) : base(r=>r.Optional("index", index)){}
-		
-
-		/// <summary>/{index}/{type}/_msearch/template</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>
-		public MsearchTemplateRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
-		
-
-			///<summary>Search operation type</summary>
-		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiGetRequest : IRequest<MultiGetRequestParameters> 
 	{
 		IndexName Index { get; }
@@ -3810,6 +3768,46 @@ namespace Nest
 		
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public long MaxConcurrentSearches { get { return Q<long>("max_concurrent_searches"); } set { Q("max_concurrent_searches", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMultiSearchTemplateRequest : IRequest<MultiSearchTemplateRequestParameters> 
+	{
+		Indices Index { get; }
+		Types Type { get; }
+	 } 
+	///<summary>Request parameters for MsearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
+	public partial class MultiSearchTemplateRequest  : PlainRequestBase<MultiSearchTemplateRequestParameters>, IMultiSearchTemplateRequest
+	{
+		protected IMultiSearchTemplateRequest Self => this;
+		Indices IMultiSearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IMultiSearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/_msearch/template</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public MultiSearchTemplateRequest() {}
+		
+
+		/// <summary>/{index}/_msearch/template</summary>
+///<param name="index">Optional, accepts null</param>
+		public MultiSearchTemplateRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		
+
+		/// <summary>/{index}/{type}/_msearch/template</summary>
+///<param name="index">Optional, accepts null</param>		
+///<param name="type">Optional, accepts null</param>
+		public MultiSearchTemplateRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
+		
+
+			///<summary>Search operation type</summary>
+		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }

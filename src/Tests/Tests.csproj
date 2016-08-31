@@ -602,6 +602,8 @@
     <Compile Include="Properties\Xunit.cs" />
     <Compile Include="QueryDsl\Verbatim\VerbatimAndStrictQueryUsageTests.cs" />
     <Compile Include="Reproduce\GithubIssue2101.cs" />
+    <Compile Include="Search\MultiSearch\MultiSearchTemplate\MultiSearchTemplateApiTests.cs" />
+    <Compile Include="Search\MultiSearch\MultiSearchTemplate\MultiSearchTemplateUrlTests.cs" />
     <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorUrlTests.cs" />
     <Compile Include="Reproduce\GithubIssue2052.cs" />
     <Compile Include="Reproduce\GithubIssue2173.cs" />

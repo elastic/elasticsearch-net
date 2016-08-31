@@ -3459,20 +3459,20 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html
 	///</pre>
 	///</summary>
-	public class MsearchTemplateRequestParameters : FluentRequestParameters<MsearchTemplateRequestParameters> 
+	public class MultiSearchTemplateRequestParameters : FluentRequestParameters<MultiSearchTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>Search operation type</summary>
-		public MsearchTemplateRequestParameters SearchType(SearchType search_type) => this.AddQueryString("search_type", search_type);
+		public MultiSearchTemplateRequestParameters SearchType(SearchType search_type) => this.AddQueryString("search_type", search_type);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
-		public MsearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public MultiSearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MsearchTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public MultiSearchTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	

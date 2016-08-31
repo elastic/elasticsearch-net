@@ -1120,6 +1120,9 @@
     <Compile Include="Search\FieldStats\FieldStatsResponse.cs" />
     <Compile Include="Search\FieldStats\IndexConstraint.cs" />
     <Compile Include="Search\FieldStats\IndexConstraints.cs" />
+    <Compile Include="Search\MultiSearch\MultiSearchTemplate\ElasticClient-MultiSearchTemplate.cs" />
+    <Compile Include="Search\MultiSearch\MultiSearchTemplate\MultiSearchTemplateJsonConverter.cs" />
+    <Compile Include="Search\MultiSearch\MultiSearchTemplate\MultiSearchTemplateRequest.cs" />
     <Compile Include="Search\MultiSearch\ElasticClient-MultiSearch.cs" />
     <Compile Include="Search\MultiSearch\IMultiSearchResponse.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchJsonConverter.cs" />

@@ -3620,44 +3620,41 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for MsearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
-	public partial class MsearchTemplateDescriptor  : RequestDescriptorBase<MsearchTemplateDescriptor,MsearchTemplateRequestParameters, IMsearchTemplateRequest>, IMsearchTemplateRequest
+	public partial class MultiSearchTemplateDescriptor  : RequestDescriptorBase<MultiSearchTemplateDescriptor,MultiSearchTemplateRequestParameters, IMultiSearchTemplateRequest>, IMultiSearchTemplateRequest
 	{ 
-		Indices IMsearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types IMsearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
+		Indices IMultiSearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IMultiSearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_msearch/template</summary>
-		public MsearchTemplateDescriptor() {}
+		public MultiSearchTemplateDescriptor() {}
 		
 
 			///<summary>A comma-separated list of index names to use as default</summary>
-		public MsearchTemplateDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public MultiSearchTemplateDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
 		///<summary>A comma-separated list of index names to use as default</summary>
-		public MsearchTemplateDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public MultiSearchTemplateDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
 		///<summary>A comma-separated list of index names to use as default</summary>
-		public MsearchTemplateDescriptor AllIndices() => this.Index(Indices.All);
+		public MultiSearchTemplateDescriptor AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to use as default</summary>
-		public MsearchTemplateDescriptor Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public MultiSearchTemplateDescriptor Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>A comma-separated list of document types to use as default</summary>
-		public MsearchTemplateDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
+		public MultiSearchTemplateDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
 
 		///<summary>A comma-separated list of document types to use as default</summary>
-		public MsearchTemplateDescriptor AllTypes() => this.Type(Types.All);
+		public MultiSearchTemplateDescriptor AllTypes() => this.Type(Types.All);
 
 	
 		///<summary>Search operation type</summary>
-		public MsearchTemplateDescriptor SearchType(SearchType search_type) => AssignParam(p=>p.SearchType(search_type));
+		public MultiSearchTemplateDescriptor SearchType(SearchType search_type) => AssignParam(p=>p.SearchType(search_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public MsearchTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public MultiSearchTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MsearchTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public MultiSearchTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
