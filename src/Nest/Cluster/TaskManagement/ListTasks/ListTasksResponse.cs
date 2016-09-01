@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface ITasksListResponse: IResponse
+	public interface IListTasksResponse: IResponse
 	{
 		[JsonProperty("nodes")]
 		IDictionary<string, TaskExecutingNode> Nodes { get; }
@@ -18,7 +18,7 @@ namespace Nest
 
 	}
 
-	public class TasksListResponse : ResponseBase, ITasksListResponse
+	public class ListTasksResponse : ResponseBase, IListTasksResponse
 	{
 		public override bool IsValid => base.IsValid && !this.NodeFailures.HasAny();
 

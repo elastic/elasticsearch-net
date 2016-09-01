@@ -7219,7 +7219,7 @@ namespace Elasticsearch.Net
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html </para>
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> TasksCancel<T>(Func<TasksCancelRequestParameters, TasksCancelRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> TasksCancel<T>(Func<CancelTasksRequestParameters, CancelTasksRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /_tasks/_cancel
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7231,7 +7231,7 @@ namespace Elasticsearch.Net
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html </para>
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> TasksCancelAsync<T>(Func<TasksCancelRequestParameters, TasksCancelRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> TasksCancelAsync<T>(Func<CancelTasksRequestParameters, CancelTasksRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a POST on /_tasks/{task_id}/_cancel
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7244,7 +7244,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="task_id">Cancel the task with specified task id (node_id:task_number)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> TasksCancel<T>(string task_id, Func<TasksCancelRequestParameters, TasksCancelRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> TasksCancel<T>(string task_id, Func<CancelTasksRequestParameters, CancelTasksRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /_tasks/{task_id}/_cancel
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7257,7 +7257,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="task_id">Cancel the task with specified task id (node_id:task_number)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> TasksCancelAsync<T>(string task_id, Func<TasksCancelRequestParameters, TasksCancelRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> TasksCancelAsync<T>(string task_id, Func<CancelTasksRequestParameters, CancelTasksRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a GET on /_tasks/{task_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7295,7 +7295,7 @@ namespace Elasticsearch.Net
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html </para>
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> TasksList<T>(Func<TasksListRequestParameters, TasksListRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> TasksList<T>(Func<ListTasksRequestParameters, ListTasksRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_tasks
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7307,7 +7307,7 @@ namespace Elasticsearch.Net
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html </para>
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> TasksListAsync<T>(Func<TasksListRequestParameters, TasksListRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> TasksListAsync<T>(Func<ListTasksRequestParameters, ListTasksRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a GET on /{index}/{type}/_termvectors
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

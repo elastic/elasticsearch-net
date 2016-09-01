@@ -11,7 +11,7 @@ using Xunit;
 namespace Tests.Cluster.TaskManagement.TasksCancel
 {
 	[SkipVersion("<2.3.0", "")]
-	public class TasksCancelApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, ITasksCancelResponse, ITasksCancelRequest, TasksCancelDescriptor, TasksCancelRequest>
+	public class TasksCancelApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, ICancelTasksResponse, ICancelTasksRequest, CancelTasksDescriptor, CancelTasksRequest>
 	{
 		private TaskId TaskId => this.RanIntegrationSetup ? this.ExtendedValue<TaskId>("taskId") : "foo:1";
 
@@ -43,16 +43,16 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 
 				var taskId = reindex.Task;
 				//TODO change this to GetTasks when it's implemented
-				var taskInfo = client.TasksList(new TasksListRequest());
+				var taskInfo = client.ListTasks(new ListTasksRequest());
 				taskInfo.IsValid.Should().BeTrue();
 				values.ExtendedValue("taskId", taskId);
 			}
 		}
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.TasksCancel(f),
-			fluentAsync: (client, f) => client.TasksCancelAsync(f),
-			request: (client, r) => client.TasksCancel(r),
-			requestAsync: (client, r) => client.TasksCancelAsync(r)
+			fluent: (client, f) => client.CancelTasks(f),
+			fluentAsync: (client, f) => client.CancelTasksAsync(f),
+			request: (client, r) => client.CancelTasks(r),
+			requestAsync: (client, r) => client.CancelTasksAsync(r)
 		);
 
 		protected override bool ExpectIsValid => true;
@@ -62,12 +62,12 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 		protected override bool SupportsDeserialization => false;
 
 
-		protected override Func<TasksCancelDescriptor, ITasksCancelRequest> Fluent => d => d
+		protected override Func<CancelTasksDescriptor, ICancelTasksRequest> Fluent => d => d
 			.TaskId(this.TaskId);
 
-		protected override TasksCancelRequest Initializer => new TasksCancelRequest(this.TaskId);
+		protected override CancelTasksRequest Initializer => new CancelTasksRequest(this.TaskId);
 
-		protected override void ExpectResponse(ITasksCancelResponse response)
+		protected override void ExpectResponse(ICancelTasksResponse response)
 		{
 			response.NodeFailures.Should().BeNullOrEmpty();
 			response.Nodes.Should().NotBeEmpty();

@@ -4339,32 +4339,32 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html
 	///</pre>
 	///</summary>
-	public class TasksCancelRequestParameters : FluentRequestParameters<TasksCancelRequestParameters> 
+	public class CancelTasksRequestParameters : FluentRequestParameters<CancelTasksRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public TasksCancelRequestParameters NodeId(params string[] node_id) => this.AddQueryString("node_id", node_id);
+		public CancelTasksRequestParameters NodeId(params string[] node_id) => this.AddQueryString("node_id", node_id);
 		
 		
 		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
-		public TasksCancelRequestParameters Actions(params string[] actions) => this.AddQueryString("actions", actions);
+		public CancelTasksRequestParameters Actions(params string[] actions) => this.AddQueryString("actions", actions);
 		
 		
 		///<summary>Cancel tasks with specified parent node.</summary>
-		public TasksCancelRequestParameters ParentNode(string parent_node) => this.AddQueryString("parent_node", parent_node);
+		public CancelTasksRequestParameters ParentNode(string parent_node) => this.AddQueryString("parent_node", parent_node);
 		
 		
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
-		public TasksCancelRequestParameters ParentTask(string parent_task) => this.AddQueryString("parent_task", parent_task);
+		public CancelTasksRequestParameters ParentTask(string parent_task) => this.AddQueryString("parent_task", parent_task);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
-		public TasksCancelRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public CancelTasksRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TasksCancelRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public CancelTasksRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4395,44 +4395,44 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html
 	///</pre>
 	///</summary>
-	public class TasksListRequestParameters : FluentRequestParameters<TasksListRequestParameters> 
+	public class ListTasksRequestParameters : FluentRequestParameters<ListTasksRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public TasksListRequestParameters NodeId(params string[] node_id) => this.AddQueryString("node_id", node_id);
+		public ListTasksRequestParameters NodeId(params string[] node_id) => this.AddQueryString("node_id", node_id);
 		
 		
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
-		public TasksListRequestParameters Actions(params string[] actions) => this.AddQueryString("actions", actions);
+		public ListTasksRequestParameters Actions(params string[] actions) => this.AddQueryString("actions", actions);
 		
 		
 		///<summary>Return detailed task information (default: false)</summary>
-		public TasksListRequestParameters Detailed(bool detailed) => this.AddQueryString("detailed", detailed);
+		public ListTasksRequestParameters Detailed(bool detailed) => this.AddQueryString("detailed", detailed);
 		
 		
 		///<summary>Return tasks with specified parent node.</summary>
-		public TasksListRequestParameters ParentNode(string parent_node) => this.AddQueryString("parent_node", parent_node);
+		public ListTasksRequestParameters ParentNode(string parent_node) => this.AddQueryString("parent_node", parent_node);
 		
 		
 		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
-		public TasksListRequestParameters ParentTask(string parent_task) => this.AddQueryString("parent_task", parent_task);
+		public ListTasksRequestParameters ParentTask(string parent_task) => this.AddQueryString("parent_task", parent_task);
 		
 		
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
-		public TasksListRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
+		public ListTasksRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
 		
 		
 		///<summary>Group tasks by nodes or parent/child relationships</summary>
-		public TasksListRequestParameters GroupBy(GroupBy group_by) => this.AddQueryString("group_by", group_by);
+		public ListTasksRequestParameters GroupBy(GroupBy group_by) => this.AddQueryString("group_by", group_by);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
-		public TasksListRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public ListTasksRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TasksListRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public ListTasksRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	

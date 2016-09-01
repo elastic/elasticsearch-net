@@ -194,6 +194,45 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ICancelTasksRequest : IRequest<CancelTasksRequestParameters> 
+	{
+		TaskId TaskId { get; }
+	 } 
+	///<summary>Request parameters for TasksCancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	public partial class CancelTasksRequest  : PlainRequestBase<CancelTasksRequestParameters>, ICancelTasksRequest
+	{
+		protected ICancelTasksRequest Self => this;
+		TaskId ICancelTasksRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+			/// <summary>/_tasks/_cancel</summary>
+		public CancelTasksRequest() : base(){}
+		
+
+		/// <summary>/_tasks/{task_id}/_cancel</summary>
+///<param name="task_id">Optional, accepts null</param>
+		public CancelTasksRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id)){}
+		
+
+			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
+		public  string[] NodeId { get { return Q< string[]>("node_id"); } set { Q("node_id", value); } }
+		
+		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
+		public  string[] Actions { get { return Q< string[]>("actions"); } set { Q("actions", value); } }
+		
+		///<summary>Cancel tasks with specified parent node.</summary>
+		public string ParentNode { get { return Q<string>("parent_node"); } set { Q("parent_node", value); } }
+		
+		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
+		public string ParentTask { get { return Q<string>("parent_task"); } set { Q("parent_task", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatAliasesRequest : IRequest<CatAliasesRequestParameters> 
 	{
 		Names Name { get; }
@@ -3661,6 +3700,43 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IListTasksRequest : IRequest<ListTasksRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for TasksList <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	public partial class ListTasksRequest  : PlainRequestBase<ListTasksRequestParameters>, IListTasksRequest
+	{
+		protected IListTasksRequest Self => this;
+				///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
+		public  string[] NodeId { get { return Q< string[]>("node_id"); } set { Q("node_id", value); } }
+		
+		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
+		public  string[] Actions { get { return Q< string[]>("actions"); } set { Q("actions", value); } }
+		
+		///<summary>Return detailed task information (default: false)</summary>
+		public bool Detailed { get { return Q<bool>("detailed"); } set { Q("detailed", value); } }
+		
+		///<summary>Return tasks with specified parent node.</summary>
+		public string ParentNode { get { return Q<string>("parent_node"); } set { Q("parent_node", value); } }
+		
+		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
+		public string ParentTask { get { return Q<string>("parent_task"); } set { Q("parent_task", value); } }
+		
+		///<summary>Wait for the matching tasks to complete (default: false)</summary>
+		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
+		
+		///<summary>Group tasks by nodes or parent/child relationships</summary>
+		public GroupBy GroupBy { get { return Q<GroupBy>("group_by"); } set { Q("group_by", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMsearchTemplateRequest : IRequest<MsearchTemplateRequestParameters> 
 	{
 		Indices Index { get; }
@@ -5501,82 +5577,6 @@ namespace Nest
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ITasksCancelRequest : IRequest<TasksCancelRequestParameters> 
-	{
-		TaskId TaskId { get; }
-	 } 
-	///<summary>Request parameters for TasksCancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
-	public partial class TasksCancelRequest  : PlainRequestBase<TasksCancelRequestParameters>, ITasksCancelRequest
-	{
-		protected ITasksCancelRequest Self => this;
-		TaskId ITasksCancelRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
-			/// <summary>/_tasks/_cancel</summary>
-		public TasksCancelRequest() : base(){}
-		
-
-		/// <summary>/_tasks/{task_id}/_cancel</summary>
-///<param name="task_id">Optional, accepts null</param>
-		public TasksCancelRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id)){}
-		
-
-			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public  string[] NodeId { get { return Q< string[]>("node_id"); } set { Q("node_id", value); } }
-		
-		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
-		public  string[] Actions { get { return Q< string[]>("actions"); } set { Q("actions", value); } }
-		
-		///<summary>Cancel tasks with specified parent node.</summary>
-		public string ParentNode { get { return Q<string>("parent_node"); } set { Q("parent_node", value); } }
-		
-		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
-		public string ParentTask { get { return Q<string>("parent_task"); } set { Q("parent_task", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ITasksListRequest : IRequest<TasksListRequestParameters> 
-	{
-	 } 
-	///<summary>Request parameters for TasksList <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
-	public partial class TasksListRequest  : PlainRequestBase<TasksListRequestParameters>, ITasksListRequest
-	{
-		protected ITasksListRequest Self => this;
-				///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public  string[] NodeId { get { return Q< string[]>("node_id"); } set { Q("node_id", value); } }
-		
-		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
-		public  string[] Actions { get { return Q< string[]>("actions"); } set { Q("actions", value); } }
-		
-		///<summary>Return detailed task information (default: false)</summary>
-		public bool Detailed { get { return Q<bool>("detailed"); } set { Q("detailed", value); } }
-		
-		///<summary>Return tasks with specified parent node.</summary>
-		public string ParentNode { get { return Q<string>("parent_node"); } set { Q("parent_node", value); } }
-		
-		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
-		public string ParentTask { get { return Q<string>("parent_task"); } set { Q("parent_task", value); } }
-		
-		///<summary>Wait for the matching tasks to complete (default: false)</summary>
-		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
-		
-		///<summary>Group tasks by nodes or parent/child relationships</summary>
-		public GroupBy GroupBy { get { return Q<GroupBy>("group_by"); } set { Q("group_by", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
