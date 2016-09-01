@@ -96,5 +96,26 @@ namespace Nest
 
 		[JsonProperty("noops")]
 		public long Noops { get; internal set; }
+
+		[JsonProperty("retries")]
+		public TaskRetries Retries { get; internal set; }
+
+		[JsonProperty("throttled_millis")]
+		public long ThrottledMilliseconds { get; internal set; }
+
+		[JsonProperty("requests_per_second")]
+		public long RequestsPerSecond { get; internal set; }
+
+		[JsonProperty("throttled_until_millis")]
+		public long ThrottledUntilMilliseconds { get; internal set; }
+	}
+
+	public class TaskRetries
+	{
+		[JsonProperty("bulk")]
+		public int Bulk { get; internal set; }
+
+		[JsonProperty("search")]
+		public int Search { get; internal set; }
 	}
 }

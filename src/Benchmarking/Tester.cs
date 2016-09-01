@@ -137,7 +137,7 @@ namespace Benchmarking
 					})
 				).ToArray();
 
-			Task.WaitAll(array);
+			System.Threading.Tasks.Task.WaitAll(array);
 			sw.Stop();
 
 			Console.WriteLine();
@@ -157,7 +157,7 @@ namespace Benchmarking
 
 		public void SearchUsingSingleClient(int numberOfSearches)
 		{
-			var tasks = new List<Task>();
+			var tasks = new List<System.Threading.Tasks.Task>();
 			for (var p = 0; p < numberOfSearches; p++)
 			{
 				var t = this.Client.SearchAsync<Message>(s => s.MatchAll())
@@ -170,7 +170,7 @@ namespace Benchmarking
 				tasks.Add(t);
 			}
 
-			Task.WaitAll(tasks.ToArray());
+			System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
 		}
 	}
 }

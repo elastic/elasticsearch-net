@@ -7270,7 +7270,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="task_id">Return the task with specified id (node_id:task_number)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> TasksGet<T>(string task_id, Func<TasksGetRequestParameters, TasksGetRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> TasksGet<T>(string task_id, Func<GetTaskRequestParameters, GetTaskRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_tasks/{task_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7283,7 +7283,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="task_id">Return the task with specified id (node_id:task_number)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> TasksGetAsync<T>(string task_id, Func<TasksGetRequestParameters, TasksGetRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> TasksGetAsync<T>(string task_id, Func<GetTaskRequestParameters, GetTaskRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a GET on /_tasks
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

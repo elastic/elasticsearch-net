@@ -4373,20 +4373,20 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html
 	///</pre>
 	///</summary>
-	public class TasksGetRequestParameters : FluentRequestParameters<TasksGetRequestParameters> 
+	public class GetTaskRequestParameters : FluentRequestParameters<GetTaskRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
-		public TasksGetRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
+		public GetTaskRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
-		public TasksGetRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public GetTaskRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TasksGetRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public GetTaskRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	

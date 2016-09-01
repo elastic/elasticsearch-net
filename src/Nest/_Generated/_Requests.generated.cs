@@ -3224,6 +3224,32 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetTaskRequest : IRequest<GetTaskRequestParameters> 
+	{
+		TaskId TaskId { get; }
+	 } 
+	///<summary>Request parameters for TasksGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
+	public partial class GetTaskRequest  : PlainRequestBase<GetTaskRequestParameters>, IGetTaskRequest
+	{
+		protected IGetTaskRequest Self => this;
+		TaskId IGetTaskRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+			/// <summary>/_tasks/{task_id}</summary>
+///<param name="task_id">Optional, accepts null</param>
+		public GetTaskRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id)){}
+		
+
+			///<summary>Wait for the matching tasks to complete (default: false)</summary>
+		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetUserRequest : IRequest<GetUserRequestParameters> 
 	{
 		Names Username { get; }
@@ -5522,34 +5548,6 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ITasksGetRequest : IRequest<TasksGetRequestParameters> 
-	{
-		TaskId TaskId { get; }
-	 } 
-	///<summary>Request parameters for TasksGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
-	public partial class TasksGetRequest  : PlainRequestBase<TasksGetRequestParameters>, ITasksGetRequest
-	{
-		protected ITasksGetRequest Self => this;
-		TaskId ITasksGetRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
-			/// <summary>/_tasks/{task_id}</summary>
-///<param name="task_id">Optional, accepts null</param>
-		public TasksGetRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id)){}
-		
-
-			///<summary>Wait for the matching tasks to complete (default: false)</summary>
-		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ITasksListRequest : IRequest<TasksListRequestParameters> 

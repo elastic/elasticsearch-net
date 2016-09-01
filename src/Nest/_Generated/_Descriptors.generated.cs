@@ -4605,28 +4605,25 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for TasksGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
-	public partial class TasksGetDescriptor  : RequestDescriptorBase<TasksGetDescriptor,TasksGetRequestParameters, ITasksGetRequest>, ITasksGetRequest
+	public partial class GetTaskDescriptor  : RequestDescriptorBase<GetTaskDescriptor,GetTaskRequestParameters, IGetTaskRequest>, IGetTaskRequest
 	{ 
-		TaskId ITasksGetRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+		TaskId IGetTaskRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 			/// <summary>/_tasks/{task_id}</summary>
-		public TasksGetDescriptor() : base(){}
+		public GetTaskDescriptor() : base(){}
 		
 
 			///<summary>Return the task with specified id (node_id:task_number)</summary>
-		public TasksGetDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
+		public GetTaskDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
 
 	
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
-		public TasksGetDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
+		public GetTaskDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
 
 		///<summary>The URL-encoded request definition</summary>
-		public TasksGetDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetTaskDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TasksGetDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public GetTaskDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

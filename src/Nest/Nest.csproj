@@ -371,6 +371,10 @@
     <Compile Include="Cluster\RootNodeInfo\ElasticClient-RootNodeInfo.cs" />
     <Compile Include="Cluster\RootNodeInfo\RootNodeInfoRequest.cs" />
     <Compile Include="Cluster\RootNodeInfo\RootVersionInfoResponse.cs" />
+    <Compile Include="Cluster\TaskManagement\GetTask\ElasticClient-GetTask.cs" />
+    <Compile Include="Cluster\TaskManagement\GetTask\GetTaskRequest.cs" />
+    <Compile Include="Cluster\TaskManagement\GetTask\GetTaskResponse.cs" />
+    <Compile Include="Cluster\TaskManagement\GetTask\TaskInfo.cs" />
     <Compile Include="Cluster\TaskManagement\TasksCancel\ElasticClient-TasksCancel.cs" />
     <Compile Include="Cluster\TaskManagement\TasksCancel\TasksCancelRequest.cs" />
     <Compile Include="Cluster\TaskManagement\TasksCancel\TasksCancelResponse.cs" />
