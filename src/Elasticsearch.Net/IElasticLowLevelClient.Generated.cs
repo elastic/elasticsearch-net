@@ -5147,7 +5147,7 @@ namespace Elasticsearch.Net
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> MsearchTemplateGet<T>(Func<MsearchTemplateRequestParameters, MsearchTemplateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> MsearchTemplateGet<T>(Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_msearch/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5159,7 +5159,7 @@ namespace Elasticsearch.Net
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> MsearchTemplateGetAsync<T>(Func<MsearchTemplateRequestParameters, MsearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> MsearchTemplateGetAsync<T>(Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a GET on /{index}/_msearch/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5172,7 +5172,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> MsearchTemplateGet<T>(string index, Func<MsearchTemplateRequestParameters, MsearchTemplateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> MsearchTemplateGet<T>(string index, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /{index}/_msearch/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5185,7 +5185,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> MsearchTemplateGetAsync<T>(string index, Func<MsearchTemplateRequestParameters, MsearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> MsearchTemplateGetAsync<T>(string index, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a GET on /{index}/{type}/_msearch/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5199,7 +5199,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> MsearchTemplateGet<T>(string index, string type, Func<MsearchTemplateRequestParameters, MsearchTemplateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> MsearchTemplateGet<T>(string index, string type, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /{index}/{type}/_msearch/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5213,7 +5213,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> MsearchTemplateGetAsync<T>(string index, string type, Func<MsearchTemplateRequestParameters, MsearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> MsearchTemplateGetAsync<T>(string index, string type, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a POST on /_msearch/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5226,7 +5226,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> MsearchTemplate<T>(PostData<object> body, Func<MsearchTemplateRequestParameters, MsearchTemplateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> MsearchTemplate<T>(PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /_msearch/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5239,7 +5239,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> MsearchTemplateAsync<T>(PostData<object> body, Func<MsearchTemplateRequestParameters, MsearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> MsearchTemplateAsync<T>(PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a POST on /{index}/_msearch/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5253,7 +5253,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> MsearchTemplate<T>(string index, PostData<object> body, Func<MsearchTemplateRequestParameters, MsearchTemplateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> MsearchTemplate<T>(string index, PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /{index}/_msearch/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5267,7 +5267,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> MsearchTemplateAsync<T>(string index, PostData<object> body, Func<MsearchTemplateRequestParameters, MsearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> MsearchTemplateAsync<T>(string index, PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a POST on /{index}/{type}/_msearch/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5282,7 +5282,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> MsearchTemplate<T>(string index, string type, PostData<object> body, Func<MsearchTemplateRequestParameters, MsearchTemplateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> MsearchTemplate<T>(string index, string type, PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /{index}/{type}/_msearch/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5297,7 +5297,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> MsearchTemplateAsync<T>(string index, string type, PostData<object> body, Func<MsearchTemplateRequestParameters, MsearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> MsearchTemplateAsync<T>(string index, string type, PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a GET on /_mtermvectors
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

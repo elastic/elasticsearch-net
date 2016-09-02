@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -9,19 +10,27 @@ namespace Nest
 		[JsonProperty("params")]
 		IDictionary<string, object> Params { get; set; }
 
-		[JsonProperty(PropertyName = "template")]
-		string Template { get; set; }
+		[JsonProperty("inline")]
+		string Inline { get; set; }
 
 		[JsonProperty("file")]
 		string File { get; set; }
 
 		[JsonProperty("id")]
 		string Id { get; set; }
+
+		string Preference { get; }
+
+		string Routing { get; }
+
+		SearchType? SearchType { get; }
+
+		bool? IgnoreUnavalable { get; }
 	}
 
 	public partial class SearchTemplateRequest
 	{
-		public string Template { get; set; }
+		public string Inline { get; set; }
 		public string File { get; set; }
 		public string Id { get; set; }
 		public IDictionary<string, object> Params { get; set; }
@@ -29,6 +38,16 @@ namespace Nest
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 		Type ICovariantSearchRequest.ClrType => this.ClrType;
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchTemplateRequest)this).Type;
+
+		SearchType? ISearchTemplateRequest.SearchType => RequestState.RequestParameters?.GetQueryStringValue<SearchType?>("search_type");
+
+		string ISearchTemplateRequest.Preference => RequestState.RequestParameters?.GetQueryStringValue<string>("preference");
+
+		string ISearchTemplateRequest.Routing => RequestState.RequestParameters?.GetQueryStringValue<string[]>("routing") == null
+			? null
+			: string.Join(",", RequestState.RequestParameters?.GetQueryStringValue<string[]>("routing"));
+
+		bool? ISearchTemplateRequest.IgnoreUnavalable => RequestState.RequestParameters?.GetQueryStringValue<bool?>("ignore_unavailable");
 	}
 
 	public class SearchTemplateRequest<T> : SearchTemplateRequest
@@ -42,15 +61,26 @@ namespace Nest
 	{
 		Type ICovariantSearchRequest.ClrType => typeof(T);
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchTemplateRequest)this).Type;
+
 		Func<dynamic, Hit<dynamic>, Type> ICovariantSearchRequest.TypeSelector { get; set; }
+		SearchType? ISearchTemplateRequest.SearchType => RequestState.RequestParameters?.GetQueryStringValue<SearchType?>("search_type");
+
+		string ISearchTemplateRequest.Preference => RequestState.RequestParameters?.GetQueryStringValue<string>("preference");
+
+		string ISearchTemplateRequest.Routing => RequestState.RequestParameters?.GetQueryStringValue<string[]>("routing") == null
+			? null
+			: string.Join(",", RequestState.RequestParameters?.GetQueryStringValue<string[]>("routing"));
+
+		bool? ISearchTemplateRequest.IgnoreUnavalable => RequestState.RequestParameters?.GetQueryStringValue<bool?>("ignore_unavailable");
+
 
 		/// <summary>
 		/// Whether conditionless queries are allowed or not
 		/// </summary>
 		internal bool _Strict { get; set; }
 
-		string ISearchTemplateRequest.Template { get; set; }
-		public SearchTemplateDescriptor<T> Template(string template) => Assign(a => a.Template = template);
+		string ISearchTemplateRequest.Inline { get; set; }
+		public SearchTemplateDescriptor<T> Inline(string template) => Assign(a => a.Inline = template);
 
 		string ISearchTemplateRequest.File { get; set; }
 		public SearchTemplateDescriptor<T> File(string file) => Assign(a => a.File = file);

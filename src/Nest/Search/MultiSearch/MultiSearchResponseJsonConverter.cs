@@ -15,12 +15,12 @@ namespace Nest
 		public override bool CanWrite => false;
 		public override bool CanRead => true;
 
-		private readonly IMultiSearchRequest _request;
+		private readonly IRequest _request;
 
 		private static readonly MethodInfo MakeDelegateMethodInfo = typeof(MultiSearchResponseJsonConverter).GetMethod(nameof(CreateMultiHit), BindingFlags.Static | BindingFlags.NonPublic);
 		private readonly IConnectionSettingsValues _settings;
 
-		public MultiSearchResponseJsonConverter(IConnectionSettingsValues settings, IMultiSearchRequest request)
+		public MultiSearchResponseJsonConverter(IConnectionSettingsValues settings, IRequest request)
 		{
 			this._settings = settings;
 			_request = request;
@@ -47,8 +47,12 @@ namespace Nest
 			if (this._request == null)
 				return multiSearchDescriptor;
 
-			var withMeta = docsJarray.Zip(this._request.Operations, (doc, desc) => new MultiHitTuple { Hit = doc, Descriptor = desc });
-			var originalResolver = serializer.ContractResolver;
+			var multiSearch = this._request as IMultiSearchRequest;
+			var multiSearchTemplate = this._request as IMultiSearchTemplateRequest;
+			var withMeta = multiSearch != null
+				? docsJarray.Zip(multiSearch.Operations, (doc, desc) => new MultiHitTuple { Hit = doc, Descriptor = new KeyValuePair<string, ICovariantSearchRequest>(desc.Key, desc.Value) })
+				: docsJarray.Zip(multiSearchTemplate.Operations, (doc, desc) => new MultiHitTuple { Hit = doc, Descriptor = new KeyValuePair<string, ICovariantSearchRequest>(desc.Key, desc.Value) });
+
 			foreach (var m in withMeta)
 			{
 				var descriptor = m.Descriptor.Value;
@@ -82,7 +86,7 @@ namespace Nest
 		private class MultiHitTuple
 		{
 			public JToken Hit { get; set; }
-			public KeyValuePair<string, ISearchRequest> Descriptor { get; set; }
+			public KeyValuePair<string, ICovariantSearchRequest> Descriptor { get; set; }
 		}
 
 		private static void CreateMultiHit<T>(

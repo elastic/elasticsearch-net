@@ -1,18 +1,27 @@
-﻿using System;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Nest
 {
-	internal class MultiSearchJsonConverter : JsonConverter
+	internal class MultiSearchTemplateJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => true;
 		public override bool CanRead => false;
 		public override bool CanWrite => true;
 
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			throw new NotImplementedException();
+		}
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var request = value as IMultiSearchRequest;
+			var request = value as IMultiSearchTemplateRequest;
 			if (request == null) return;
 			var settings = serializer.GetConnectionSettings();
 			var elasticsearchSerializer = settings.Serializer;
@@ -48,12 +57,7 @@ namespace Nest
 				writer.WriteRaw($"{headerString}\n");
 				var bodyString = elasticsearchSerializer.SerializeToBytes(operation, SerializationFormatting.None);
 				writer.WriteRaw($"{bodyString}\n");
-			}
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			throw new NotSupportedException();
+			};
 		}
 	}
 }
