@@ -15,14 +15,14 @@ namespace Nest
 		Time MaxAge { get; set; }
 
 		[JsonProperty("max_docs")]
-		int MaxDocs { get; set; }
+		long MaxDocs { get; set; }
 	}
 
 	public class RolloverConditions : IRolloverConditions
 	{
 		public Time MaxAge { get; set; }
 
-		public int MaxDocs { get; set; }
+		public long MaxDocs { get; set; }
 	}
 
 	public class RolloverConditionsDescriptor
@@ -30,7 +30,7 @@ namespace Nest
 	{
 		Time IRolloverConditions.MaxAge { get; set; }
 
-		int IRolloverConditions.MaxDocs { get; set; }
+		long IRolloverConditions.MaxDocs { get; set; }
 
 		public RolloverConditionsDescriptor MaxAge(Time maxAge) => Assign(a => a.MaxAge = maxAge);
 
