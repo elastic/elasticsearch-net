@@ -24,7 +24,7 @@ namespace Tests.Framework
 		/// <param name="factory">The delegate that is invoked on a background thread to produce the value when it is needed.</param>
 		public AsyncLazy(Func<T> factory)
 		{
-			instance = new Lazy<Task<T>>(() => Task.Run(factory));
+			instance = new Lazy<Task<T>>(() => System.Threading.Tasks.Task.Run(factory));
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace Tests.Framework
 		/// <param name="factory">The asynchronous delegate that is invoked on a background thread to produce the value when it is needed.</param>
 		public AsyncLazy(Func<Task<T>> factory)
 		{
-			instance = new Lazy<Task<T>>(() => Task.Run(factory));
+			instance = new Lazy<Task<T>>(() => System.Threading.Tasks.Task.Run(factory));
 		}
 
 		/// <summary>

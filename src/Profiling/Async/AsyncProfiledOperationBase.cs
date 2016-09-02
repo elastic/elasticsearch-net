@@ -7,12 +7,12 @@ namespace Profiling.Async
 	{
 		public virtual Task SetupAsync(IElasticClient client, ColoredConsoleWriter output)
 		{
-			return Task.FromResult(0);
+			return System.Threading.Tasks.Task.FromResult(0);
 		}
 
 		public virtual Task TeardownAsync(IElasticClient client, ColoredConsoleWriter output)
 		{
-			return Task.FromResult(0);
+			return System.Threading.Tasks.Task.FromResult(0);
 		}
 
 		public abstract Task ProfileAsync(IElasticClient client, ColoredConsoleWriter output);

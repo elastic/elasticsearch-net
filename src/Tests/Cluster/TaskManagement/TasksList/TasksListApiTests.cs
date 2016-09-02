@@ -11,14 +11,14 @@ using Xunit;
 namespace Tests.Cluster.TaskManagement.TasksList
 {
 	[SkipVersion("<2.3.0", "")]
-	public class TasksListApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ITasksListResponse, ITasksListRequest, TasksListDescriptor, TasksListRequest>
+	public class TasksListApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
 	{
 		public TasksListApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.TasksList(f),
-			fluentAsync: (client, f) => client.TasksListAsync(f),
-			request: (client, r) => client.TasksList(r),
-			requestAsync: (client, r) => client.TasksListAsync(r)
+			fluent: (client, f) => client.ListTasks(f),
+			fluentAsync: (client, f) => client.ListTasksAsync(f),
+			request: (client, r) => client.ListTasks(r),
+			requestAsync: (client, r) => client.ListTasksAsync(r)
 		);
 
 		protected override bool ExpectIsValid => true;
@@ -26,15 +26,15 @@ namespace Tests.Cluster.TaskManagement.TasksList
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_tasks?actions=%2Alists%2A";
 
-		protected override Func<TasksListDescriptor, ITasksListRequest> Fluent => s => s
+		protected override Func<ListTasksDescriptor, IListTasksRequest> Fluent => s => s
 			.Actions("*lists*");
 
-		protected override TasksListRequest Initializer => new TasksListRequest
+		protected override ListTasksRequest Initializer => new ListTasksRequest
 		{
 			Actions = new [] { "*lists*" }
 		};
 
-		protected override void ExpectResponse(ITasksListResponse response)
+		protected override void ExpectResponse(IListTasksResponse response)
 		{
 			response.Nodes.Should().NotBeEmpty();
 			var taskExecutingNode = response.Nodes.First().Value;
@@ -61,16 +61,16 @@ namespace Tests.Cluster.TaskManagement.TasksList
 	}
 
 	[SkipVersion("<2.3.0", "")]
-	public class TasksListDetailedApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, ITasksListResponse, ITasksListRequest, TasksListDescriptor, TasksListRequest>
+	public class TasksListDetailedApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
 	{
 		private static TaskId _taskId = new TaskId("fakeid:1");
 
 		public TasksListDetailedApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.TasksList(f),
-			fluentAsync: (client, f) => client.TasksListAsync(f),
-			request: (client, r) => client.TasksList(r),
-			requestAsync: (client, r) => client.TasksListAsync(r)
+			fluent: (client, f) => client.ListTasks(f),
+			fluentAsync: (client, f) => client.ListTasksAsync(f),
+			request: (client, r) => client.ListTasks(r),
+			requestAsync: (client, r) => client.ListTasksAsync(r)
 		);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
@@ -105,15 +105,15 @@ namespace Tests.Cluster.TaskManagement.TasksList
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"/_tasks?detailed=true";
 
-		protected override Func<TasksListDescriptor, ITasksListRequest> Fluent => s => s
+		protected override Func<ListTasksDescriptor, IListTasksRequest> Fluent => s => s
 			.Detailed();
 
-		protected override TasksListRequest Initializer => new TasksListRequest()
+		protected override ListTasksRequest Initializer => new ListTasksRequest()
 		{
 			Detailed = true
 		};
 
-		protected override void ExpectResponse(ITasksListResponse response)
+		protected override void ExpectResponse(IListTasksResponse response)
 		{
 			response.Nodes.Should().NotBeEmpty();
 			var taskExecutingNode = response.Nodes.First().Value;

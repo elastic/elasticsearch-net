@@ -4570,93 +4570,90 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for TasksCancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
-	public partial class TasksCancelDescriptor  : RequestDescriptorBase<TasksCancelDescriptor,TasksCancelRequestParameters, ITasksCancelRequest>, ITasksCancelRequest
+	public partial class CancelTasksDescriptor  : RequestDescriptorBase<CancelTasksDescriptor,CancelTasksRequestParameters, ICancelTasksRequest>, ICancelTasksRequest
 	{ 
-		TaskId ITasksCancelRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+		TaskId ICancelTasksRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 			/// <summary>/_tasks/_cancel</summary>
-		public TasksCancelDescriptor() : base(){}
+		public CancelTasksDescriptor() : base(){}
 		
 
 			///<summary>Cancel the task with specified task id (node_id:task_number)</summary>
-		public TasksCancelDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
+		public CancelTasksDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
 
 	
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public TasksCancelDescriptor NodeId(params string[] node_id) => AssignParam(p=>p.NodeId(node_id));
+		public CancelTasksDescriptor NodeId(params string[] node_id) => AssignParam(p=>p.NodeId(node_id));
 
 		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
-		public TasksCancelDescriptor Actions(params string[] actions) => AssignParam(p=>p.Actions(actions));
+		public CancelTasksDescriptor Actions(params string[] actions) => AssignParam(p=>p.Actions(actions));
 
 		///<summary>Cancel tasks with specified parent node.</summary>
-		public TasksCancelDescriptor ParentNode(string parent_node) => AssignParam(p=>p.ParentNode(parent_node));
+		public CancelTasksDescriptor ParentNode(string parent_node) => AssignParam(p=>p.ParentNode(parent_node));
 
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
-		public TasksCancelDescriptor ParentTask(string parent_task) => AssignParam(p=>p.ParentTask(parent_task));
+		public CancelTasksDescriptor ParentTask(string parent_task) => AssignParam(p=>p.ParentTask(parent_task));
 
 		///<summary>The URL-encoded request definition</summary>
-		public TasksCancelDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CancelTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TasksCancelDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public CancelTasksDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
 	///<summary>descriptor for TasksGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
-	public partial class TasksGetDescriptor  : RequestDescriptorBase<TasksGetDescriptor,TasksGetRequestParameters, ITasksGetRequest>, ITasksGetRequest
+	public partial class GetTaskDescriptor  : RequestDescriptorBase<GetTaskDescriptor,GetTaskRequestParameters, IGetTaskRequest>, IGetTaskRequest
 	{ 
-		TaskId ITasksGetRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+		TaskId IGetTaskRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 			/// <summary>/_tasks/{task_id}</summary>
-		public TasksGetDescriptor() : base(){}
+		public GetTaskDescriptor() : base(){}
 		
 
 			///<summary>Return the task with specified id (node_id:task_number)</summary>
-		public TasksGetDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
+		public GetTaskDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
 
 	
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
-		public TasksGetDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
+		public GetTaskDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
 
 		///<summary>The URL-encoded request definition</summary>
-		public TasksGetDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetTaskDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TasksGetDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public GetTaskDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
 	///<summary>descriptor for TasksList <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
-	public partial class TasksListDescriptor  : RequestDescriptorBase<TasksListDescriptor,TasksListRequestParameters, ITasksListRequest>, ITasksListRequest
+	public partial class ListTasksDescriptor  : RequestDescriptorBase<ListTasksDescriptor,ListTasksRequestParameters, IListTasksRequest>, IListTasksRequest
 	{ 
 			
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public TasksListDescriptor NodeId(params string[] node_id) => AssignParam(p=>p.NodeId(node_id));
+		public ListTasksDescriptor NodeId(params string[] node_id) => AssignParam(p=>p.NodeId(node_id));
 
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
-		public TasksListDescriptor Actions(params string[] actions) => AssignParam(p=>p.Actions(actions));
+		public ListTasksDescriptor Actions(params string[] actions) => AssignParam(p=>p.Actions(actions));
 
 		///<summary>Return detailed task information (default: false)</summary>
-		public TasksListDescriptor Detailed(bool detailed = true) => AssignParam(p=>p.Detailed(detailed));
+		public ListTasksDescriptor Detailed(bool detailed = true) => AssignParam(p=>p.Detailed(detailed));
 
 		///<summary>Return tasks with specified parent node.</summary>
-		public TasksListDescriptor ParentNode(string parent_node) => AssignParam(p=>p.ParentNode(parent_node));
+		public ListTasksDescriptor ParentNode(string parent_node) => AssignParam(p=>p.ParentNode(parent_node));
 
 		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
-		public TasksListDescriptor ParentTask(string parent_task) => AssignParam(p=>p.ParentTask(parent_task));
+		public ListTasksDescriptor ParentTask(string parent_task) => AssignParam(p=>p.ParentTask(parent_task));
 
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
-		public TasksListDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
+		public ListTasksDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
 
 		///<summary>Group tasks by nodes or parent/child relationships</summary>
-		public TasksListDescriptor GroupBy(GroupBy group_by) => AssignParam(p=>p.GroupBy(group_by));
+		public ListTasksDescriptor GroupBy(GroupBy group_by) => AssignParam(p=>p.GroupBy(group_by));
 
 		///<summary>The URL-encoded request definition</summary>
-		public TasksListDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ListTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TasksListDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public ListTasksDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

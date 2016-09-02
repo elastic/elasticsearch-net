@@ -3063,7 +3063,7 @@ namespace Nest
 			throw InvalidDispatch("Suggest", p, new [] { POST, GET }, "/_suggest", "/{index}/_suggest");
 		}
 		
-		internal ElasticsearchResponse<T> TasksCancelDispatch<T>(IRequest<TasksCancelRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> TasksCancelDispatch<T>(IRequest<CancelTasksRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3075,7 +3075,7 @@ namespace Nest
 			throw InvalidDispatch("TasksCancel", p, new [] { POST }, "/_tasks/_cancel", "/_tasks/{task_id}/_cancel");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> TasksCancelDispatchAsync<T>(IRequest<TasksCancelRequestParameters> p , CancellationToken cancellationToken) where T : class
+		internal Task<ElasticsearchResponse<T>> TasksCancelDispatchAsync<T>(IRequest<CancelTasksRequestParameters> p , CancellationToken cancellationToken) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3087,7 +3087,7 @@ namespace Nest
 			throw InvalidDispatch("TasksCancel", p, new [] { POST }, "/_tasks/_cancel", "/_tasks/{task_id}/_cancel");
 		}
 		
-		internal ElasticsearchResponse<T> TasksGetDispatch<T>(IRequest<TasksGetRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> TasksGetDispatch<T>(IRequest<GetTaskRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3099,7 +3099,7 @@ namespace Nest
 			throw InvalidDispatch("TasksGet", p, new [] { GET }, "/_tasks/{task_id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> TasksGetDispatchAsync<T>(IRequest<TasksGetRequestParameters> p , CancellationToken cancellationToken) where T : class
+		internal Task<ElasticsearchResponse<T>> TasksGetDispatchAsync<T>(IRequest<GetTaskRequestParameters> p , CancellationToken cancellationToken) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3111,7 +3111,7 @@ namespace Nest
 			throw InvalidDispatch("TasksGet", p, new [] { GET }, "/_tasks/{task_id}");
 		}
 		
-		internal ElasticsearchResponse<T> TasksListDispatch<T>(IRequest<TasksListRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> TasksListDispatch<T>(IRequest<ListTasksRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3122,7 +3122,7 @@ namespace Nest
 			throw InvalidDispatch("TasksList", p, new [] { GET }, "/_tasks");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> TasksListDispatchAsync<T>(IRequest<TasksListRequestParameters> p , CancellationToken cancellationToken) where T : class
+		internal Task<ElasticsearchResponse<T>> TasksListDispatchAsync<T>(IRequest<ListTasksRequestParameters> p , CancellationToken cancellationToken) where T : class
 		{
 			switch(p.HttpMethod)
 			{

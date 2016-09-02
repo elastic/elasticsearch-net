@@ -26,7 +26,7 @@ namespace Profiling.Async
 				var catThreadPoolAsync = client.CatThreadPoolAsync(s => s.V());
 				var catAliasesAsync = client.CatAliasesAsync(s => s.V());
 
-				await Task.WhenAll(
+				await System.Threading.Tasks.Task.WhenAll(
 					catAllocationAsync,
 					catCountAsync,
 					catFielddataAsync,

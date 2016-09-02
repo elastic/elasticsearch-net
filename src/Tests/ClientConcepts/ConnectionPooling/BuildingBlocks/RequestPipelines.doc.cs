@@ -146,11 +146,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
              * sniff on startup with the remaining two waiting tasks exiting without exception and releasing
              * the `SemaphoreSlim`.
              */
-            var task1 = Task.Run(() => sniffingPipeline.FirstPoolUsage(semaphoreSlim));
-            var task2 = Task.Run(() => sniffingPipeline.FirstPoolUsage(semaphoreSlim));
-            var task3 = Task.Run(() => sniffingPipeline.FirstPoolUsage(semaphoreSlim));
+            var task1 = System.Threading.Tasks.Task.Run(() => sniffingPipeline.FirstPoolUsage(semaphoreSlim));
+            var task2 = System.Threading.Tasks.Task.Run(() => sniffingPipeline.FirstPoolUsage(semaphoreSlim));
+            var task3 = System.Threading.Tasks.Task.Run(() => sniffingPipeline.FirstPoolUsage(semaphoreSlim));
 
-	        var exception = Record.Exception(() => Task.WaitAll(task1, task2, task3));
+	        var exception = Record.Exception(() => System.Threading.Tasks.Task.WaitAll(task1, task2, task3));
 	        exception.Should().BeNull();
 	    }
 

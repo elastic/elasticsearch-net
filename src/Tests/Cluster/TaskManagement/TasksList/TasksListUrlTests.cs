@@ -9,10 +9,10 @@ namespace Tests.Cluster.TaskManagement.TasksList
 		[U] public async Task Urls()
 		{
 			await UrlTester.GET("/_tasks")
-				.Fluent(c => c.TasksList())
-				.Request(c => c.TasksList(new TasksListRequest()))
-				.FluentAsync(c => c.TasksListAsync())
-				.RequestAsync(c => c.TasksListAsync(new TasksListRequest()))
+				.Fluent(c => c.ListTasks())
+				.Request(c => c.ListTasks(new ListTasksRequest()))
+				.FluentAsync(c => c.ListTasksAsync())
+				.RequestAsync(c => c.ListTasksAsync(new ListTasksRequest()))
 				;
 		}
 	}

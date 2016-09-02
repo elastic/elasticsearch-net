@@ -7,7 +7,7 @@ using System.Linq;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface ITasksCancelResponse: IResponse
+	public interface ICancelTasksResponse: IResponse
 	{
 		[JsonProperty("nodes")]
 		IDictionary<string, TaskExecutingNode> Nodes { get; }
@@ -16,7 +16,7 @@ namespace Nest
 		IEnumerable<Throwable> NodeFailures { get; }
 	}
 
-	public class TasksCancelResponse : ResponseBase, ITasksCancelResponse
+	public class CancelTasksResponse : ResponseBase, ICancelTasksResponse
 	{
 		public override bool IsValid => base.IsValid && !this.NodeFailures.HasAny();
 
