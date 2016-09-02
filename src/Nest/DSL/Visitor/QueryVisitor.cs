@@ -68,6 +68,7 @@
 		void Visit(ISpanNotQuery query);
 		void Visit(ISpanOrQuery query);
 		void Visit(ISpanTermQuery query);
+		void Visit(ISpanFieldMaskingQuery query);
 		void Visit(ITermQuery query);
 		void Visit(IWildcardQuery query);
 		void Visit(ITermsQuery query);
@@ -256,6 +257,10 @@
 		}
 
 		public virtual void Visit(ISpanTermQuery customFiltersScore)
+		{
+		}
+
+        public virtual void Visit(ISpanFieldMaskingQuery customFiltersScore)
 		{
 		}
 

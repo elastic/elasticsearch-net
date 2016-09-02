@@ -128,6 +128,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "span_multi")]
 		ISpanMultiTermQuery SpanMultiTerm { get; set; }
 
+        [JsonProperty(PropertyName = "field_masking_span")]
+		ISpanFieldMaskingQuery SpanFieldMasking { get; set; }
+
 		[JsonProperty(PropertyName = "top_children")]
 		ITopChildrenQuery TopChildren { get; set; }
 

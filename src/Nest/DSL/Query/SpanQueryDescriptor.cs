@@ -28,6 +28,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "span_multi")]
 		ISpanMultiTermQuery SpanMultiTerm { get; set; }
+
+        [JsonProperty(PropertyName = "field_masking_span")]
+		ISpanFieldMaskingQuery SpanFieldMasking { get; set; }
 	}
 
 	public class SpanQuery : ISpanQuery
@@ -40,6 +43,7 @@ namespace Nest
 		public ISpanOrQuery SpanOr { get; set; }
 		public ISpanNotQuery SpanNot { get; set; }
 		public ISpanMultiTermQuery SpanMultiTerm { get; set; }
+		public ISpanFieldMaskingQuery SpanFieldMasking { get; set; }
 	}
 
 	public class SpanQuery<T> : ISpanQuery where T : class
@@ -58,6 +62,8 @@ namespace Nest
 
 		ISpanMultiTermQuery ISpanQuery.SpanMultiTerm { get; set; }
 
+        ISpanFieldMaskingQuery ISpanQuery.SpanFieldMasking { get; set; }
+
 		string IQuery.Name { get; set; }
 
 		bool IQuery.IsConditionless
@@ -71,7 +77,8 @@ namespace Nest
 					Self.SpanNear as IQuery,
 					Self.SpanOr as IQuery,
 					Self.SpanNot as IQuery,
-					Self.SpanMultiTerm as IQuery
+					Self.SpanMultiTerm as IQuery,
+					Self.SpanFieldMasking as IQuery
 				};
 				return queries.All(q => q == null || q.IsConditionless);
 			}
@@ -133,6 +140,12 @@ namespace Nest
 			selector.ThrowIfNull("selector");
 			var q= selector(new SpanMultiTermQueryDescriptor<T>());
 			return CreateQuery(q, (sq) => sq.SpanMultiTerm = q);
+		}
+        public SpanQuery<T> SpanFieldMasking(Func<SpanFieldMaskingQueryDescriptor<T>, SpanFieldMaskingQueryDescriptor<T>> selector)
+		{
+			selector.ThrowIfNull("selector");
+			var q= selector(new SpanFieldMaskingQueryDescriptor<T>());
+			return CreateQuery(q, (sq) => sq.SpanFieldMasking = q);
 		}
 
 		private SpanQuery<T> CreateQuery<K>(K query, Action<ISpanQuery> setProperty) where K : ISpanSubQuery
