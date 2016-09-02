@@ -4325,7 +4325,7 @@ namespace Elasticsearch.Net
 		///<param name="target">The name of the target index to shrink into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesShrink<T>(string index, string target, PostData<object> body, Func<IndicesShrinkRequestParameters, IndicesShrinkRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesShrink<T>(string index, string target, PostData<object> body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/_shrink/{target.NotNull("target")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/_shrink/{target}
@@ -4341,7 +4341,7 @@ namespace Elasticsearch.Net
 		///<param name="target">The name of the target index to shrink into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesShrinkAsync<T>(string index, string target, PostData<object> body, Func<IndicesShrinkRequestParameters, IndicesShrinkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesShrinkAsync<T>(string index, string target, PostData<object> body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/_shrink/{target.NotNull("target")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_shrink/{target}
@@ -4357,7 +4357,7 @@ namespace Elasticsearch.Net
 		///<param name="target">The name of the target index to shrink into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesShrinkPost<T>(string index, string target, PostData<object> body, Func<IndicesShrinkRequestParameters, IndicesShrinkRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesShrinkPost<T>(string index, string target, PostData<object> body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_shrink/{target.NotNull("target")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_shrink/{target}
@@ -4373,7 +4373,7 @@ namespace Elasticsearch.Net
 		///<param name="target">The name of the target index to shrink into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesShrinkPostAsync<T>(string index, string target, PostData<object> body, Func<IndicesShrinkRequestParameters, IndicesShrinkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesShrinkPostAsync<T>(string index, string target, PostData<object> body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_shrink/{target.NotNull("target")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_stats

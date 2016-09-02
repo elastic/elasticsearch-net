@@ -3138,40 +3138,37 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for IndicesShrink <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
-	public partial class IndicesShrinkDescriptor  : RequestDescriptorBase<IndicesShrinkDescriptor,IndicesShrinkRequestParameters, IIndicesShrinkRequest>, IIndicesShrinkRequest
+	public partial class ShrinkIndexDescriptor  : RequestDescriptorBase<ShrinkIndexDescriptor,ShrinkIndexRequestParameters, IShrinkIndexRequest>, IShrinkIndexRequest
 	{ 
-		IndexName IIndicesShrinkRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		Name IIndicesShrinkRequest.Target => Self.RouteValues.Get<Name>("target");
+		IndexName IShrinkIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		IndexName IShrinkIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
 			/// <summary>/{index}/_shrink/{target}</summary>
 ///<param name="index"> this parameter is required</param>		
 ///<param name="target"> this parameter is required</param>
-		public IndicesShrinkDescriptor(IndexName index, Name target) : base(r=>r.Required("index", index).Required("target", target)){}
+		public ShrinkIndexDescriptor(IndexName index, IndexName target) : base(r=>r.Required("index", index).Required("target", target)){}
 		
 
 			///<summary>The name of the source index to shrink</summary>
-		public IndicesShrinkDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public ShrinkIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
 
 		///<summary>The name of the source index to shrink</summary>
-		public IndicesShrinkDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public ShrinkIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
 	
 		///<summary>Explicit operation timeout</summary>
-		public IndicesShrinkDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+		public ShrinkIndexDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesShrinkDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+		public ShrinkIndexDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
-		public IndicesShrinkDescriptor WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
+		public ShrinkIndexDescriptor WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
 
 		///<summary>The URL-encoded request definition</summary>
-		public IndicesShrinkDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ShrinkIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndicesShrinkDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public ShrinkIndexDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
