@@ -3521,48 +3521,6 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIndicesRolloverRequest : IRequest<IndicesRolloverRequestParameters> 
-	{
-		Name Alias { get; }
-		IndexName NewIndex { get; }
-	 } 
-	///<summary>Request parameters for IndicesRolloverForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</pre></summary>
-	public partial class IndicesRolloverRequest  : PlainRequestBase<IndicesRolloverRequestParameters>, IIndicesRolloverRequest
-	{
-		protected IIndicesRolloverRequest Self => this;
-		Name IIndicesRolloverRequest.Alias => Self.RouteValues.Get<Name>("alias");
-		IndexName IIndicesRolloverRequest.NewIndex => Self.RouteValues.Get<IndexName>("new_index");
-			/// <summary>/{alias}/_rollover</summary>
-///<param name="alias">this parameter is required</param>
-		public IndicesRolloverRequest(Name alias) : base(r=>r.Required("alias", alias)){}
-		
-
-		/// <summary>/{alias}/_rollover/{new_index}</summary>
-///<param name="alias">this parameter is required</param>		
-///<param name="new_index">Optional, accepts null</param>
-		public IndicesRolloverRequest(Name alias, IndexName new_index) : base(r=>r.Required("alias", alias).Optional("new_index", new_index)){}
-		
-
-			///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
-		
-		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
-		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndicesShardStoresRequest : IRequest<IndicesShardStoresRequestParameters> 
 	{
 		Indices Index { get; }
@@ -4816,6 +4774,46 @@ namespace Nest
 		
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IRolloverIndexRequest : IRequest<RolloverIndexRequestParameters> 
+	{
+		Name Alias { get; }
+		IndexName NewIndex { get; }
+	 } 
+	///<summary>Request parameters for IndicesRolloverForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</pre></summary>
+	public partial class RolloverIndexRequest  : PlainRequestBase<RolloverIndexRequestParameters>, IRolloverIndexRequest
+	{
+		protected IRolloverIndexRequest Self => this;
+		Name IRolloverIndexRequest.Alias => Self.RouteValues.Get<Name>("alias");
+		IndexName IRolloverIndexRequest.NewIndex => Self.RouteValues.Get<IndexName>("new_index");
+			/// <summary>/{alias}/_rollover</summary>
+///<param name="alias">this parameter is required</param>
+		public RolloverIndexRequest(Name alias) : base(r=>r.Required("alias", alias)){}
+		
+
+		/// <summary>/{alias}/_rollover/{new_index}</summary>
+///<param name="alias">this parameter is required</param>		
+///<param name="new_index">Optional, accepts null</param>
+		public RolloverIndexRequest(Name alias, IndexName new_index) : base(r=>r.Required("alias", alias).Optional("new_index", new_index)){}
+		
+
+			///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
+		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }

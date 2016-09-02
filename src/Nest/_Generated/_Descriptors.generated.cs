@@ -3019,36 +3019,33 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for IndicesRolloverForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</pre></summary>
-	public partial class IndicesRolloverDescriptor  : RequestDescriptorBase<IndicesRolloverDescriptor,IndicesRolloverRequestParameters, IIndicesRolloverRequest>, IIndicesRolloverRequest
+	public partial class RolloverIndexDescriptor  : RequestDescriptorBase<RolloverIndexDescriptor,RolloverIndexRequestParameters, IRolloverIndexRequest>, IRolloverIndexRequest
 	{ 
-		Name IIndicesRolloverRequest.Alias => Self.RouteValues.Get<Name>("alias");
-		IndexName IIndicesRolloverRequest.NewIndex => Self.RouteValues.Get<IndexName>("new_index");
+		Name IRolloverIndexRequest.Alias => Self.RouteValues.Get<Name>("alias");
+		IndexName IRolloverIndexRequest.NewIndex => Self.RouteValues.Get<IndexName>("new_index");
 			/// <summary>/{alias}/_rollover</summary>
 ///<param name="alias"> this parameter is required</param>
-		public IndicesRolloverDescriptor(Name alias) : base(r=>r.Required("alias", alias)){}
+		public RolloverIndexDescriptor(Name alias) : base(r=>r.Required("alias", alias)){}
 		
 
 			///<summary>The name of the rollover index</summary>
-		public IndicesRolloverDescriptor NewIndex(IndexName newIndex) => Assign(a=>a.RouteValues.Optional("new_index", newIndex));
+		public RolloverIndexDescriptor NewIndex(IndexName newIndex) => Assign(a=>a.RouteValues.Optional("new_index", newIndex));
 
 	
 		///<summary>Explicit operation timeout</summary>
-		public IndicesRolloverDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+		public RolloverIndexDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesRolloverDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+		public RolloverIndexDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
-		public IndicesRolloverDescriptor WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
+		public RolloverIndexDescriptor WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
 
 		///<summary>The URL-encoded request definition</summary>
-		public IndicesRolloverDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RolloverIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndicesRolloverDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public RolloverIndexDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

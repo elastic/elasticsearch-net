@@ -1855,7 +1855,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesRefresh", p, new [] { POST, GET }, "/_refresh", "/{index}/_refresh");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesRolloverDispatch<T>(IRequest<IndicesRolloverRequestParameters> p , PostData<object> body) where T : class
+		internal ElasticsearchResponse<T> IndicesRolloverDispatch<T>(IRequest<RolloverIndexRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1868,7 +1868,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesRollover", p, new [] { POST }, "/{alias}/_rollover", "/{alias}/_rollover/{new_index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesRolloverDispatchAsync<T>(IRequest<IndicesRolloverRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		internal Task<ElasticsearchResponse<T>> IndicesRolloverDispatchAsync<T>(IRequest<RolloverIndexRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
 		{
 			switch(p.HttpMethod)
 			{
