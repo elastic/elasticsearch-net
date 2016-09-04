@@ -133,6 +133,9 @@ public class Foo
 
   [ElasticProperty(Type = FieldType.Nested, IncludeInParent = true)]
   public List<Bar> Bars { get; set; }
+  
+  [ElasticProperty(OptOut = true)]
+  public bool HasDescription { get { return Description != null; } }
 }
 ```
 
@@ -159,6 +162,9 @@ public class Foo
 
   [Nested(IncludeInParent = true)]
   public List<Bar> Bars { get; set; }
+  
+  [Boolean(Ignore = true)]
+  public bool HasDescription { get { return Description != null; } }
 }
 ```
 
