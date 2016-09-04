@@ -22,6 +22,8 @@ namespace Nest
 		bool IQueryContainer.IsVerbatim { get; set; }
 		internal bool IsVerbatim => Self.IsVerbatim;
 
+		internal bool HoldsOnlyShouldMusts { get; set; }
+
 		public QueryContainer() { }
 
 		public QueryContainer(QueryBase query) : this()
@@ -29,7 +31,10 @@ namespace Nest
 			query?.WrapInContainer(this);
 		}
 
-		public static QueryContainer operator &(QueryContainer leftContainer, QueryContainer rightContainer)
+		public static QueryContainer operator &(QueryContainer leftContainer, QueryContainer rightContainer) =>
+			And(leftContainer, rightContainer);
+
+		internal static QueryContainer And(QueryContainer leftContainer, QueryContainer rightContainer)
 		{
 			QueryContainer queryContainer;
 			return IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer)
@@ -37,7 +42,10 @@ namespace Nest
 				: leftContainer.CombineAsMust(rightContainer);
 		}
 
-		public static QueryContainer operator |(QueryContainer leftContainer, QueryContainer rightContainer)
+		public static QueryContainer operator |(QueryContainer leftContainer, QueryContainer rightContainer) =>
+			Or(leftContainer, rightContainer);
+
+		internal static QueryContainer Or(QueryContainer leftContainer, QueryContainer rightContainer)
 		{
 			QueryContainer queryContainer;
 			return IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer)

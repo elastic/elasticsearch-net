@@ -939,6 +939,8 @@
     <Compile Include="QueryDsl\Abstractions\FieldName\FieldNameQueryDescriptorBase.cs" />
     <Compile Include="QueryDsl\Abstractions\FieldName\FieldNameQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\Abstractions\Query\BoolQueryExtensions.cs" />
+    <Compile Include="QueryDsl\Abstractions\Query\BoolQueryOrExtensions.cs" />
+    <Compile Include="QueryDsl\Abstractions\Query\BoolQueryAndExtensions.cs" />
     <Compile Include="QueryDsl\Abstractions\Query\QueryBase.cs" />
     <Compile Include="QueryDsl\Abstractions\Query\QueryDescriptorBase.cs" />
     <Compile Include="QueryDsl\Compound\And\AndQuery.cs" />

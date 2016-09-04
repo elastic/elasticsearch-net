@@ -336,6 +336,7 @@ namespace Tests.QueryDsl.BoolDsl
 			nestedBool.Bool.Name.Should().Be(firstName);
 		}
 
+
 		//hide
 		private void Assert(
 			Func<QueryContainerDescriptor<Project>, QueryContainer> fluent,

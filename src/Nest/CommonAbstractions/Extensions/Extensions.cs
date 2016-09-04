@@ -133,6 +133,14 @@ namespace Nest
 			if (other.HasAny()) l.AddRange(other);
 			return l;
 		}
+		internal static IEnumerable<T> AddIfNotNull<T>(this IEnumerable<T> list, T other)
+		{
+			if (other == null) return list;
+			list = list.HasAny() ? list : Enumerable.Empty<T>();
+			var l = new List<T>(list);
+			l.Add(other);
+			return l;
+		}
 
 		internal static bool HasAny<T>(this IEnumerable<T> list, Func<T, bool> predicate)
 		{
