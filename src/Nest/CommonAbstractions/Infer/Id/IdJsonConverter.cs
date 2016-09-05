@@ -17,12 +17,13 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var id = value as Id;
-			if (id == null)
+			if (value == null)
 			{
 				writer.WriteNull();
 				return;
 			}
+
+			var id = (Id)value;
 			if (id.Document != null)
 			{
 				var settings = serializer.GetConnectionSettings();
