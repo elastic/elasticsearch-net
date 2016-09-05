@@ -69,7 +69,14 @@ namespace Nest
 			return false;
 		}
 
-		public string GetString(IConnectionConfigurationValues settings) => ((IUrlParameter)(Indices)(Indices.Index(this))).GetString(settings);
+		public string GetString(IConnectionConfigurationValues settings)
+		{
+			var nestSettings = settings as IConnectionSettingsValues;
+			if (nestSettings == null)
+				throw new Exception("Tried to pass index name on querysting but it could not be resolved because no nest settings are available");
+
+			return nestSettings.Inferrer.IndexName(this);
+		}
 
 		public static IndexName From<T>() => typeof(T);
 

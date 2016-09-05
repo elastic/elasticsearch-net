@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -14,7 +15,6 @@ namespace Nest
 	{
 		private readonly IList<Func<Type, JsonConverter>> _contractConverters;
 		public static JsonSerializer Empty { get; } = new JsonSerializer();
-
 
 		/// <summary>
 		/// ConnectionSettings can be requested by JsonConverter's.
@@ -34,42 +34,44 @@ namespace Nest
 
 		protected override JsonContract CreateContract(Type objectType)
 		{
-			JsonContract contract = base.CreateContract(objectType);
+			// cache contracts per connection settings
+			return this.ConnectionSettings.Inferrer.Contracts.GetOrAdd(objectType, o =>
+			{				
+				var contract = base.CreateContract(o);
+				
+				if (typeof(IDictionary).IsAssignableFrom(o) && !typeof(IIsADictionary).IsAssignableFrom(o))
+					contract.Converter = new VerbatimDictionaryKeysJsonConverter();
+				if (typeof(IEnumerable<QueryContainer>).IsAssignableFrom(o))
+					contract.Converter = new QueryContainerCollectionJsonConverter();
+				else if (o == typeof(ServerError))
+					contract.Converter = new ServerErrorJsonConverter();
+				else if (o == typeof(DateTime) ||
+				         o == typeof(DateTime?) ||
+				         o == typeof(DateTimeOffset) ||
+				         o == typeof(DateTimeOffset?))
+					contract.Converter = new IsoDateTimeConverter();
+				else if (o == typeof(TimeSpan) ||
+				         o == typeof(TimeSpan?))
+					contract.Converter = new TimeSpanConverter();
 
-			// this will only be called once and then cached
-
-			if (typeof(IDictionary).IsAssignableFrom(objectType) && !typeof(IIsADictionary).IsAssignableFrom(objectType))
-				contract.Converter = new VerbatimDictionaryKeysJsonConverter();
-			if (typeof (IEnumerable<QueryContainer>).IsAssignableFrom(objectType))
-				contract.Converter = new QueryContainerCollectionJsonConverter();
-			else if (objectType == typeof(ServerError))
-				contract.Converter = new ServerErrorJsonConverter();
-			else if (objectType == typeof(DateTime) ||
-					 objectType == typeof(DateTime?) ||
-					 objectType == typeof(DateTimeOffset) ||
-					 objectType == typeof(DateTimeOffset?))
-				contract.Converter = new IsoDateTimeConverter();
-			else if (objectType == typeof(TimeSpan) ||
-					 objectType == typeof(TimeSpan?))
-				contract.Converter = new TimeSpanConverter();
-
-			if (this._contractConverters.HasAny())
-			{
-				foreach (var c in this._contractConverters)
+				if (this._contractConverters.HasAny())
 				{
-					var converter = c(objectType);
-					if (converter == null)
-						continue;
-					contract.Converter = converter;
-					break;
+					foreach (var c in this._contractConverters)
+					{
+						var converter = c(o);
+						if (converter == null)
+							continue;
+						contract.Converter = converter;
+						break;
+					}
 				}
-			}
-			if (!objectType.FullName.StartsWith("Nest.", StringComparison.OrdinalIgnoreCase)) return contract;
 
-			else if (ApplyExactContractJsonAttribute(objectType, contract)) return contract;
-			else if (ApplyContractJsonAttribute(objectType, contract)) return contract;
+				if (!o.FullName.StartsWith("Nest.", StringComparison.OrdinalIgnoreCase)) return contract;
+				if (ApplyExactContractJsonAttribute(o, contract)) return contract;
+				if (ApplyContractJsonAttribute(o, contract)) return contract;
 
-			return contract;
+				return contract;
+			});
 		}
 
 		private bool ApplyExactContractJsonAttribute(Type objectType, JsonContract contract)

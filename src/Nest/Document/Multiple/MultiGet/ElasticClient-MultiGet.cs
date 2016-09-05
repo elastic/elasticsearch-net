@@ -39,7 +39,7 @@ namespace Nest
 		public IMultiGetResponse MultiGet(IMultiGetRequest request) =>
 			this.Dispatcher.Dispatch<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse>(
 				request,
-				new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetConverter(request))),
+				(r, s) => this.DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetConverter(request)),
 				this.LowLevelDispatch.MgetDispatch<MultiGetResponse>
 			);
 
@@ -51,7 +51,7 @@ namespace Nest
 		public Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest request) =>
 			this.Dispatcher.DispatchAsync<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse, IMultiGetResponse>(
 				request,
-				new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetConverter(request))),
+				(r, s) => this.DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetConverter(request)),
 				this.LowLevelDispatch.MgetDispatchAsync<MultiGetResponse>
 			);
 		private MultiGetResponse DeserializeMultiGetResponse(IApiCallDetails response, Stream stream, JsonConverter converter) =>

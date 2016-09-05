@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
@@ -17,13 +18,15 @@ namespace Nest
 
 		private readonly IMultiSearchRequest _request;
 
-		private static readonly MethodInfo MakeDelegateMethodInfo = typeof(MultiSearchResponseJsonConverter).GetMethod(nameof(CreateMultiHit), BindingFlags.Static | BindingFlags.NonPublic);
+		private static readonly MethodInfo MakeDelegateMethodInfo =
+			typeof(MultiSearchResponseJsonConverter).GetMethod(nameof(CreateSearchResponse), BindingFlags.Static | BindingFlags.NonPublic);
+
 		private readonly IConnectionSettingsValues _settings;
 
 		public MultiSearchResponseJsonConverter(IConnectionSettingsValues settings, IMultiSearchRequest request)
 		{
 			this._settings = settings;
-			_request = request;
+			this._request = request;
 		}
 
 		public MultiSearchResponseJsonConverter() { }
@@ -33,8 +36,7 @@ namespace Nest
 			if (this._settings == null)
 			{
 				var realConverter = serializer.GetStatefulConverter<MultiSearchResponseJsonConverter>();
-				var mr = realConverter.ReadJson(reader, objectType, existingValue, serializer) as MultiSearchResponse;
-				return mr;
+				return realConverter.ReadJson(reader, objectType, existingValue, serializer);
 			}
 
 			var response = new MultiSearchResponse();
@@ -47,28 +49,41 @@ namespace Nest
 			if (this._request == null)
 				return multiSearchDescriptor;
 
-			var withMeta = docsJarray.Zip(this._request.Operations, (doc, desc) => new MultiHitTuple { Hit = doc, Descriptor = desc });
-			var originalResolver = serializer.ContractResolver;
+			var withMeta = docsJarray.Zip(this._request.Operations, (doc, desc) => new SearchHitTuple { Hit = doc, Descriptor = desc });
+
 			foreach (var m in withMeta)
 			{
 				var descriptor = m.Descriptor.Value;
 				var concreteTypeSelector = descriptor.TypeSelector;
 				var baseType = m.Descriptor.Value.ClrType ?? typeof(object);
-
-				var generic = MakeDelegateMethodInfo.MakeGenericMethod(baseType);
+				var cachedDelegate = serializer.GetConnectionSettings().Inferrer.CreateSearchResponseDelegates.GetOrAdd(baseType, t =>
+				{
+					// Compile a delegate from an expression
+					var methodInfo = MakeDelegateMethodInfo.MakeGenericMethod(t);
+					var tupleParameter = Expression.Parameter(typeof(SearchHitTuple), "tuple");
+					var serializerParameter = Expression.Parameter(typeof(JsonSerializer), "serializer");
+					var multiHitCollection = Expression.Parameter(typeof(IDictionary<string, object>), "collection");
+					var parameterExpressions = new[] { tupleParameter, serializerParameter, multiHitCollection };
+					var call = Expression.Call(null, methodInfo, parameterExpressions);
+					var lambda = Expression.Lambda<Action<SearchHitTuple, JsonSerializer, IDictionary<string, object>>>(call, parameterExpressions);
+					return lambda.Compile();
+				});
 
 				if (concreteTypeSelector != null)
 				{
 					var state = typeof(ConcreteTypeConverter<>).CreateGenericInstance(baseType, concreteTypeSelector) as JsonConverter;
 					if (state != null)
 					{
-						var elasticSerializer = this._settings.StatefulSerializer(state);
-
-						generic.Invoke(null, new object[] { m, elasticSerializer, response.Responses, this._settings });
-						continue;
+						var elasticSerializer = this._settings.StatefulSerializer(state) as JsonNetSerializer;
+						if (elasticSerializer != null)
+						{
+							cachedDelegate(m, elasticSerializer.Serializer, response.Responses);
+							continue;
+						}
 					}
 				}
-				generic.Invoke(null, new object[] { m, serializer, response.Responses, this._settings });
+
+				cachedDelegate(m, serializer, response.Responses);
 			}
 
 			return response;
@@ -79,27 +94,22 @@ namespace Nest
 			throw new NotSupportedException();
 		}
 
-		private class MultiHitTuple
+		internal class SearchHitTuple
 		{
 			public JToken Hit { get; set; }
 			public KeyValuePair<string, ISearchRequest> Descriptor { get; set; }
 		}
 
-		private static void CreateMultiHit<T>(
-			MultiHitTuple tuple,
+		private static void CreateSearchResponse<T>(
+			SearchHitTuple tuple,
 			JsonSerializer serializer,
-			IDictionary<string, object> collection,
-			IConnectionSettingsValues settings
-		)
-			where T : class
+			IDictionary<string, object> collection) where T : class
 		{
-			var response = new SearchResponse<T>();
-			var reader = tuple.Hit.CreateReader();
-			serializer.Populate(reader, response);
+			var response = tuple.Hit.ToObject<SearchResponse<T>>(serializer);
 
 			ServerError error;
 			if (tuple.Hit.TryParseServerError(serializer, out error))
-				response.MultiSearchError = error ;
+				response.MultiSearchError = error;
 
 			collection.Add(tuple.Descriptor.Key, response);
 		}

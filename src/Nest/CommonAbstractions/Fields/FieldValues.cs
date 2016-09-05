@@ -51,7 +51,7 @@ namespace Nest
 		}
 
 
-		private static JsonSerializer ForceNoDateInferrence = new JsonSerializer
+		private static readonly JsonSerializer ForceNoDateInferrence = new JsonSerializer
 		{
 			DateParseHandling = DateParseHandling.None
 		};
@@ -62,21 +62,21 @@ namespace Nest
 			if (this.BackingDictionary != null && this.BackingDictionary.TryGetValue(field, out o))
 			{
 				var t = typeof(K);
-				if (o is JArray && t.GetInterfaces().Contains(typeof(IEnumerable)))
+				var jArray = o as JArray;
+				if (jArray != null && t.GetInterfaces().Contains(typeof(IEnumerable)))
 				{
-					var array = (JArray)o;
-					if (typeof(K) == typeof(string[]) && array.Count > 0 && array.Any(p=>p.Type == JTokenType.Date))
+					if (typeof(K) == typeof(string[]) && jArray.Any(p=>p.Type == JTokenType.Date))
 					{
 						// https://github.com/elastic/elasticsearch-net/issues/2155
 						// o of type JArray has already decided the values are dates so there is no
 						// way around this.
 						// incredibly ugly and sad but the only way I found to cover this edgecase
-						var s = array.Root.ToString();
+						var s = jArray.Root.ToString();
 						using (var sr = new StringReader(s))
 						using (var jr = new JsonTextReader(sr) { DateParseHandling = DateParseHandling.None })
 							return ForceNoDateInferrence.Deserialize<K>(jr);
 					}
-					return array.ToObject<K>();
+					return jArray.ToObject<K>();
 				}
 				return (K)Convert.ChangeType(o, typeof(K));
 			}
