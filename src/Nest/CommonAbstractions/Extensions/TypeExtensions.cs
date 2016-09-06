@@ -12,18 +12,21 @@ namespace Nest
 {
 	internal static class TypeExtensions
 	{
-		private static MethodInfo GetActivatorMethodInfo = typeof(TypeExtensions).GetMethod("GetActivator", BindingFlags.Static | BindingFlags.NonPublic);
+		private static readonly MethodInfo GetActivatorMethodInfo =
+			typeof(TypeExtensions).GetMethod(nameof(GetActivator), BindingFlags.Static | BindingFlags.NonPublic);
 
-		private static ConcurrentDictionary<string, ObjectActivator<object>> _cachedActivators = new ConcurrentDictionary<string, ObjectActivator<object>>();
-		private static ConcurrentDictionary<string, Type> _cachedGenericClosedTypes = new ConcurrentDictionary<string, Type>();
+		private static readonly ConcurrentDictionary<string, ObjectActivator<object>> CachedActivators =
+			new ConcurrentDictionary<string, ObjectActivator<object>>();
 
+		private static readonly ConcurrentDictionary<string, Type> CachedGenericClosedTypes =
+			new ConcurrentDictionary<string, Type>();
 
-		private static ConcurrentDictionary<Type, IList<JsonProperty>> _cachedTypeProperties =
+		private static readonly ConcurrentDictionary<Type, IList<JsonProperty>> CachedTypeProperties =
 			new ConcurrentDictionary<Type, IList<JsonProperty>>();
 
 		//this contract is only used to resolve properties in class WE OWN.
 		//these are not subject to change depending on what the user passes as connectionsettings
-		private static ElasticContractResolver _jsonContract = new ElasticContractResolver(new ConnectionSettings(), null);
+		private static readonly ElasticContractResolver JsonContract = new ElasticContractResolver(new ConnectionSettings(), null);
 
 		public delegate T ObjectActivator<out T>(params object[] args);
 
@@ -37,10 +40,10 @@ namespace Nest
 			var argKey = closeOver.Aggregate(new StringBuilder(), (sb, gt) => sb.Append("--" + gt.FullName), sb => sb.ToString());
 			var key = t.FullName + argKey;
 			Type closedType;
-			if (!_cachedGenericClosedTypes.TryGetValue(key, out closedType))
+			if (!CachedGenericClosedTypes.TryGetValue(key, out closedType))
 			{
 				closedType = t.MakeGenericType(closeOver);
-				_cachedGenericClosedTypes.TryAdd(key, closedType);
+				CachedGenericClosedTypes.TryAdd(key, closedType);
 			}
 			return closedType.CreateInstance(args);
 		}
@@ -50,25 +53,23 @@ namespace Nest
 		internal static object CreateInstance(this Type t, params object[] args)
 		{
 			ObjectActivator<object> activator;
-			var argLength = args.Count();
-			//var argKey = string.Join(",", args.Select(a => a.GetType().Name));
-			var argKey = argLength;
+			var argKey = args.Length;
 			var key = argKey + "--" + t.FullName;
-			if (_cachedActivators.TryGetValue(key, out activator))
+			if (CachedActivators.TryGetValue(key, out activator))
 				return activator(args);
-			var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
 
+			var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
 			var constructors = from c in t.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
 							   let p = c.GetParameters()
 							   let k = string.Join(",", p.Select(a => a.ParameterType.Name))
-							   where p.Count() == argLength //&& k == argKey
+							   where p.Length == args.Length
 							   select c;
+
 			var ctor = constructors.FirstOrDefault();
 			if (ctor == null)
-				throw new Exception("Cannot create an instance of " + t.FullName
-				                    + " because it has no constructor taking " + argLength + " arguments");
+				throw new Exception($"Cannot create an instance of {t.FullName} because it has no constructor taking {args.Length} arguments");
 			activator = (ObjectActivator<object>)generic.Invoke(null, new[] { ctor });
-			_cachedActivators.TryAdd(key, activator);
+			CachedActivators.TryAdd(key, activator);
 			return activator(args);
 		}
 
@@ -85,7 +86,7 @@ namespace Nest
 			Expression[] argsExp =
 				new Expression[paramsInfo.Length];
 
-			//pick each arg from the params array 
+			//pick each arg from the params array
 			//and create a typed expression of them
 			for (int i = 0; i < paramsInfo.Length; i++)
 			{
@@ -118,10 +119,10 @@ namespace Nest
 		internal static IList<JsonProperty> GetCachedObjectProperties(this Type t, MemberSerialization memberSerialization = MemberSerialization.OptIn)
 		{
 			IList<JsonProperty> propertyDictionary;
-			if (_cachedTypeProperties.TryGetValue(t, out propertyDictionary))
+			if (CachedTypeProperties.TryGetValue(t, out propertyDictionary))
 				return propertyDictionary;
-			propertyDictionary = _jsonContract.PropertiesOfAll(t, memberSerialization);
-			_cachedTypeProperties.TryAdd(t, propertyDictionary);
+			propertyDictionary = JsonContract.PropertiesOfAll(t, memberSerialization);
+			CachedTypeProperties.TryAdd(t, propertyDictionary);
 			return propertyDictionary;
 		}
 

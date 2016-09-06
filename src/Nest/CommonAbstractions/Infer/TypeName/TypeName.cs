@@ -79,7 +79,14 @@ namespace Nest
 			return !other.IsNullOrEmpty() && other == this.Name;
 		}
 
-		string IUrlParameter.GetString(IConnectionConfigurationValues settings) => ((IUrlParameter)(Types)(Types.Type(this))).GetString(settings);
+		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
+		{
+			var nestSettings = settings as IConnectionSettingsValues;
+			if (nestSettings == null)
+				throw new Exception("Tried to pass type name on querystring but it could not be resolved because no nest settings are available");
+
+			return nestSettings.Inferrer.TypeName(this);
+		}
 
 		public static TypeName From<T>() => typeof(T);
 

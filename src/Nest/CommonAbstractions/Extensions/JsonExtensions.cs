@@ -14,7 +14,7 @@ namespace Nest
 		{
 			var contract = serializer.ContractResolver as ElasticContractResolver;
 			if (contract?.ConnectionSettings == null)
-				throw new Exception("If you use a custom contract resolver be sure to subclass from ElasticResolver");
+				throw new Exception("If you use a custom contract resolver be sure to subclass from " + nameof(ElasticContractResolver));
 			return contract.ConnectionSettings;
 		}
 
