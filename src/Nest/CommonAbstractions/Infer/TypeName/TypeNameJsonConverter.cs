@@ -12,14 +12,14 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var marker = value as TypeName;
-			if (marker == null)
+			if (value == null)
 			{
 				writer.WriteNull();
 				return;
 			}
-			var settings = serializer.GetConnectionSettings();
 
+			var marker = (TypeName)value;
+			var settings = serializer.GetConnectionSettings();
 			var typeName = settings.Inferrer.TypeName(marker);
 			writer.WriteValue(typeName);
 		}
