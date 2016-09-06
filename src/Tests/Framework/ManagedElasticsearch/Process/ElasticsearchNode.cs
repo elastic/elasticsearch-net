@@ -133,32 +133,37 @@ namespace Tests.Framework.Integration
 			if (exception != null) this._blockingSubject.OnError(exception);
 		}
 
+		private readonly object _stopLock = new object();
+
 		public void Stop()
 		{
-			var hasStarted = this.Started;
-			this.Started = false;
-
-			this._processListener?.Dispose();
-			this._process?.Dispose();
-
-			if (this.ProcessId != null)
+			lock (_stopLock)
 			{
-				var esProcess = Process.GetProcesses()
-					.FirstOrDefault(p => p.Id == this.ProcessId.Value);
-				if (esProcess != null)
+				var hasStarted = this.Started;
+				this.Started = false;
+
+				this._processListener?.Dispose();
+				this._process?.Dispose();
+
+				if (this.ProcessId != null)
 				{
-					Console.WriteLine($"Killing elasticsearch PID {this.ProcessId}");
-					esProcess.Kill();
-					esProcess.WaitForExit(5000);
-					esProcess.Close();
+					var esProcess = Process.GetProcesses()
+						.FirstOrDefault(p => p.Id == this.ProcessId.Value);
+					if (esProcess != null)
+					{
+						Console.WriteLine($"Killing elasticsearch PID {this.ProcessId}");
+						esProcess.Kill();
+						esProcess.WaitForExit(5000);
+						esProcess.Close();
+					}
 				}
+
+				this.FileSystem?.Dispose();
+
+				if (!this._config.RunIntegrationTests || !hasStarted) return;
+				Console.WriteLine($"Stopping... node has started and ran integrations: {this._config.RunIntegrationTests}");
+				Console.WriteLine($"Node started on port: {this.Port} using PID: {this.ProcessId}");
 			}
-
-			this.FileSystem?.Dispose();
-
-			if (!this._config.RunIntegrationTests || !hasStarted) return;
-			Console.WriteLine($"Stopping... node has started and ran integrations: {this._config.RunIntegrationTests}");
-			Console.WriteLine($"Node started on port: {this.Port} using PID: {this.ProcessId}");
 		}
 
 		private IObservable<ElasticsearchConsoleOut> UseAlreadyRunningInstance(XplatManualResetEvent handle)
