@@ -83,6 +83,7 @@
 		void Visit(ISpanContainingQuery query);
 		void Visit(ISpanWithinQuery query);
 		void Visit(ISpanMultiTermQuery query);
+		void Visit(ISpanFieldMaskingQuery query);
 
 		void Visit(IGeoIndexedShapeQuery query);
 		void Visit(IGeoShapeQuery query);
@@ -193,6 +194,12 @@
 
 		public virtual void Visit(ISpanTermQuery query) { }
 
+		public virtual void Visit(ISpanSubQuery query) { }
+
+		public virtual void Visit(ISpanMultiTermQuery query) { }
+
+		public virtual void Visit(ISpanFieldMaskingQuery query) { }
+
 		public virtual void Visit(ITermQuery query) { }
 
 		public virtual void Visit(IWildcardQuery query) { }
@@ -215,8 +222,6 @@
 
 		public virtual void Visit(ITemplateQuery query) { }
 
-		public virtual void Visit(ISpanMultiTermQuery query) { }
-
 		public virtual void Visit(IGeoShapeMultiPointQuery query) { }
 
 		public virtual void Visit(IGeoShapeMultiPolygonQuery query) { }
@@ -230,8 +235,6 @@
 		public virtual void Visit(IGeoShapeLineStringQuery query) { }
 
 		public virtual void Visit(IGeoShapeEnvelopeQuery query) { }
-
-		public virtual void Visit(ISpanSubQuery query) { }
 
 		public virtual void Visit(IGeoShapeCircleQuery query) { }
 

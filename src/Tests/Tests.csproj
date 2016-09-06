@@ -583,6 +583,7 @@
     <Compile Include="Indices\AliasManagement\GetIndicesPointingToAlias\GetIndicesPointingToAliasTests.cs" />
     <Compile Include="Indices\AliasManagement\GetAliasesPointingToIndex\GetAliasesPointingToIndexTests.cs" />
     <Compile Include="Properties\Xunit.cs" />
+    <Compile Include="QueryDsl\Span\FieldMasking\SpanFieldMaskingUsageTests.cs" />
     <Compile Include="QueryDsl\Verbatim\VerbatimAndStrictQueryUsageTests.cs" />
     <Compile Include="Reproduce\GithubIssue2101.cs" />
     <Compile Include="Reproduce\GithubIssue2152.cs" />
