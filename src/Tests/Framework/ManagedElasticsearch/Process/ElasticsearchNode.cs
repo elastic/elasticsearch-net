@@ -53,6 +53,7 @@ namespace Tests.Framework.Integration
 				$"{es}cluster.name={this.FileSystem.ClusterName}",
 				$"{es}node.name={this.FileSystem.NodeName}",
 				$"{es}path.repo={this.FileSystem.RepositoryPath}",
+				$"{es}path.data={Path.Combine(this.FileSystem.DataPath, this.FileSystem.ClusterName)}",
 				$"{es}script.inline=true",
 				$"{es}script.{indexedOrStored}=true",
 				$"{es}node.{attr}testingcluster=true"
