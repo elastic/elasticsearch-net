@@ -30,29 +30,25 @@ namespace Nest
 
 		protected virtual IList<Func<Type, JsonConverter>> ContractConverters => null;
 
-		public JsonNetSerializer(IConnectionSettingsValues settings) : this(settings, null) { }
+		public JsonNetSerializer(IConnectionSettingsValues settings, Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier) : this(settings, null, settingsModifier) { }
+
+		public JsonNetSerializer(IConnectionSettingsValues settings) : this(settings, null, null) { }
 
 		/// <summary>
 		/// this constructor is only here for stateful (de)serialization
 		/// </summary>
 		protected internal JsonNetSerializer(
 			IConnectionSettingsValues settings,
-			JsonConverter statefulConverter
+			JsonConverter statefulConverter,
+			Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier = null
 			)
 		{
 			this.Settings = settings;
-
 			var piggyBackState = statefulConverter == null ? null : new JsonConverterPiggyBackState { ActualJsonConverter = statefulConverter };
 			// ReSharper disable once VirtualMemberCallInContructor
 			this.ContractResolver = new ElasticContractResolver(this.Settings, this.ContractConverters) { PiggyBackState = piggyBackState };
 
-			this._defaultSerializer = JsonSerializer.Create(this.CreateSettings(SerializationFormatting.None));
-			var indentedSerializer = JsonSerializer.Create(this.CreateSettings(SerializationFormatting.Indented));
-			this._defaultSerializers = new Dictionary<SerializationFormatting, JsonSerializer>
-			{
-				{ SerializationFormatting.None, this._defaultSerializer },
-				{ SerializationFormatting.Indented, indentedSerializer }
-			};
+			OverwriteDefaultSerializers(settingsModifier ?? ((s, csv) => { }));
 		}
 
 		/// <summary>
