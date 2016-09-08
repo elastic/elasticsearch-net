@@ -37,6 +37,7 @@ namespace Nest
 				typeName = att.Name;
 			else
 				typeName = _connectionSettings.DefaultTypeNameInferrer(type);
+
 			TypeNames.TryAdd(type, typeName);
 			return typeName;
 		}

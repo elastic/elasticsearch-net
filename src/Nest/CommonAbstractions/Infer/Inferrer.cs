@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Nest
 {
@@ -12,6 +15,11 @@ namespace Nest
 		private TypeNameResolver TypeNameResolver { get; }
 		private FieldResolver FieldResolver { get; }
 
+		// TODO: Find some better place for this
+		internal ConcurrentDictionary<Type, JsonContract> Contracts { get; set; }
+		internal ConcurrentDictionary<Type, Action<MultiGetHitJsonConverter.MultiHitTuple, JsonSerializer, ICollection<IMultiGetHit<object>>>> CreateMultiHitDelegates { get; set; }
+		internal ConcurrentDictionary<Type, Action<MultiSearchResponseJsonConverter.SearchHitTuple, JsonSerializer, IDictionary<string, object>>> CreateSearchResponseDelegates { get; set; }
+
 		public Inferrer(IConnectionSettingsValues connectionSettings)
 		{
 			connectionSettings.ThrowIfNull(nameof(connectionSettings));
@@ -19,6 +27,9 @@ namespace Nest
 			this.IndexNameResolver = new IndexNameResolver(connectionSettings);
 			this.TypeNameResolver = new TypeNameResolver(connectionSettings);
 			this.FieldResolver = new FieldResolver(connectionSettings);
+			this.Contracts = new ConcurrentDictionary<Type, JsonContract>();
+			this.CreateMultiHitDelegates = new ConcurrentDictionary<Type, Action<MultiGetHitJsonConverter.MultiHitTuple, JsonSerializer, ICollection<IMultiGetHit<object>>>>();
+			this.CreateSearchResponseDelegates = new ConcurrentDictionary<Type, Action<MultiSearchResponseJsonConverter.SearchHitTuple, JsonSerializer, IDictionary<string, object>>>();
 		}
 
 		public string Field(Field field) => this.FieldResolver.Resolve(field);
@@ -28,7 +39,7 @@ namespace Nest
 		public string IndexName<T>() where T : class => this.IndexNameResolver.Resolve<T>();
 
 		public string IndexName(IndexName index) => this.IndexNameResolver.Resolve(index);
-		
+
 		public string Id<T>(T obj) where T : class => this.IdResolver.Resolve(obj);
 
 		public string Id(Type objType, object obj) => this.IdResolver.Resolve(objType, obj);

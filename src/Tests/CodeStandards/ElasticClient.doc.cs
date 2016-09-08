@@ -86,7 +86,9 @@ namespace Tests.CodeStandards
 					var parameterInfo = concreteParameters[i];
 					var interfaceParameter = interfaceParameters[i];
 
-					parameterInfo.Name.Should().Be(interfaceParameter.Name);
+					parameterInfo.Name.Should().Be(
+						interfaceParameter.Name,
+						$"{nameof(ElasticClient)}.{interfaceMethodInfo.Name} should have parameter named {interfaceParameter.Name}");
 
 					if (parameterInfo.HasDefaultValue != interfaceParameter.HasDefaultValue)
 						concreteMethodParametersDoNotMatchInterface.Add(

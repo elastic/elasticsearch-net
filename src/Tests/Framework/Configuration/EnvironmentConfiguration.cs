@@ -11,7 +11,7 @@ namespace Tests.Framework.Configuration
 	{
 		public override bool TestAgainstAlreadyRunningElasticsearch { get; protected set; } = false;
 		public override bool ForceReseed { get; protected set; } = true;
-		public override ElasticsearchVersion ElasticsearchVersion { get; protected set; } = new ElasticsearchVersion("2.0.0");
+		public override ElasticsearchVersion ElasticsearchVersion { get; protected set; } = new ElasticsearchVersion("5.0.0");
 		public override TestMode Mode { get; protected set; } = TestMode.Unit;
 
 		public EnvironmentConfiguration()
@@ -21,7 +21,7 @@ namespace Tests.Framework.Configuration
 			var version = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
 			if (!string.IsNullOrEmpty(version)) Mode = TestMode.Integration;
 
-			this.ElasticsearchVersion = new ElasticsearchVersion(string.IsNullOrWhiteSpace(version) ? "2.0.0" : version);
+			this.ElasticsearchVersion = new ElasticsearchVersion(string.IsNullOrWhiteSpace(version) ? "5.0.0" : version);
 		}
 	}
 }

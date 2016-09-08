@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -9,7 +10,7 @@ namespace Nest
 {
 	internal class MultiGetHitJsonConverter : JsonConverter
 	{
-		private class MultiHitTuple
+		internal class MultiHitTuple
 		{
 			public JToken Hit { get; set; }
 			public IMultiGetOperation Descriptor { get; set; }
@@ -17,11 +18,11 @@ namespace Nest
 
 		private readonly IMultiGetRequest _request;
 
-		private static MethodInfo MakeDelegateMethodInfo = typeof(MultiGetHitJsonConverter).GetMethod("CreateMultiHit", BindingFlags.Static | BindingFlags.NonPublic);
+		private static readonly MethodInfo MakeDelegateMethodInfo =
+			typeof(MultiGetHitJsonConverter).GetMethod(nameof(CreateMultiHit), BindingFlags.Static | BindingFlags.NonPublic);
 
 		internal MultiGetHitJsonConverter()
 		{
-
 		}
 
 		public MultiGetHitJsonConverter(IMultiGetRequest request)
@@ -36,10 +37,7 @@ namespace Nest
 
 		private static void CreateMultiHit<T>(MultiHitTuple tuple, JsonSerializer serializer, ICollection<IMultiGetHit<object>> collection) where T : class
 		{
-			var hit = new MultiGetHit<T>();
-			var reader = tuple.Hit.CreateReader();
-			serializer.Populate(reader, hit);
-
+			var hit = tuple.Hit.ToObject<MultiGetHit<T>>(serializer);
 			var settings = serializer.GetConnectionSettings();
 			var source = tuple.Hit["fields"];
 			if (source != null)
@@ -49,7 +47,6 @@ namespace Nest
 			}
 
 			collection.Add(hit);
-
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -62,7 +59,6 @@ namespace Nest
 
 			var response = new MultiGetResponse();
 			var jsonObject = JObject.Load(reader);
-
 			var docsJarray = (JArray)jsonObject["docs"];
 			if (this._request == null || docsJarray == null)
 				return response;
@@ -70,8 +66,20 @@ namespace Nest
 			var withMeta = docsJarray.Zip(this._request.Documents, (doc, desc) => new MultiHitTuple { Hit = doc, Descriptor = desc });
 			foreach (var m in withMeta)
 			{
-				var generic = MakeDelegateMethodInfo.MakeGenericMethod(m.Descriptor.ClrType);
-				generic.Invoke(null, new object[] { m, serializer, response._Documents });
+				var cachedDelegate = serializer.GetConnectionSettings().Inferrer.CreateMultiHitDelegates.GetOrAdd(m.Descriptor.ClrType, t =>
+				{
+					// Compile a delegate from an expression
+					var methodInfo = MakeDelegateMethodInfo.MakeGenericMethod(t);
+					var tupleParameter = Expression.Parameter(typeof(MultiHitTuple), "tuple");
+					var serializerParameter = Expression.Parameter(typeof(JsonSerializer), "serializer");
+					var multiHitCollection = Expression.Parameter(typeof(ICollection<IMultiGetHit<object>>), "collection");
+					var parameterExpressions = new[] { tupleParameter, serializerParameter, multiHitCollection };
+					var call = Expression.Call(null, methodInfo, parameterExpressions);
+					var lambda = Expression.Lambda<Action<MultiHitTuple, JsonSerializer, ICollection<IMultiGetHit<object>>>>(call, parameterExpressions);
+					return lambda.Compile();
+				});
+
+				cachedDelegate(m, serializer, response._Documents);
 			}
 
 			return response;

@@ -44,6 +44,8 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 
 		protected override string UrlPath => $"/{CallIsolatedValue}-alias/_rollover/{CallIsolatedValue}-new";
 
+		protected override RolloverIndexDescriptor NewDescriptor() => new RolloverIndexDescriptor(CallIsolatedValue + "-alias");
+
 		protected override object ExpectJson => new
 		{
 			conditions = new
