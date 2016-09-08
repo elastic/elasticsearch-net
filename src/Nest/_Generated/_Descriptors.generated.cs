@@ -4986,12 +4986,12 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for GraphExplore <pre>https://www.elastic.co/guide/en/graph/current/explore.html</pre></summary>
+	///<summary>descriptor for XpackGraphExplore <pre>https://www.elastic.co/guide/en/graph/current/explore.html</pre></summary>
 	public partial class GraphExploreDescriptor<T>  : RequestDescriptorBase<GraphExploreDescriptor<T>,GraphExploreRequestParameters, IGraphExploreRequest>, IGraphExploreRequest
 	{ 
 		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_xpack/graph/_explore</summary>
+			/// <summary>/{index}/_xpack/_graph/_explore</summary>
 ///<param name="index"> this parameter is required</param>
 		public GraphExploreDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 		
@@ -5029,7 +5029,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for LicenseDelete <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	///<summary>descriptor for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
 	public partial class DeleteLicenseDescriptor  : RequestDescriptorBase<DeleteLicenseDescriptor,DeleteLicenseRequestParameters, IDeleteLicenseRequest>, IDeleteLicenseRequest
 	{ 
 			
@@ -5041,7 +5041,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for LicenseGet <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	///<summary>descriptor for XpackLicenseGet <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
 	public partial class GetLicenseDescriptor  : RequestDescriptorBase<GetLicenseDescriptor,GetLicenseRequestParameters, IGetLicenseRequest>, IGetLicenseRequest
 	{ 
 			
@@ -5056,7 +5056,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for LicensePost <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	///<summary>descriptor for XpackLicensePost <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
 	public partial class PostLicenseDescriptor  : RequestDescriptorBase<PostLicenseDescriptor,PostLicenseRequestParameters, IPostLicenseRequest>, IPostLicenseRequest
 	{ 
 			
@@ -5071,7 +5071,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityAuthenticate <pre>Retrieve details about the currently authenticated user</pre></summary>
+	///<summary>descriptor for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-authenticate.html</pre></summary>
 	public partial class AuthenticateDescriptor  : RequestDescriptorBase<AuthenticateDescriptor,AuthenticateRequestParameters, IAuthenticateRequest>, IAuthenticateRequest
 	{ 
 			
@@ -5083,7 +5083,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityChangePassword <pre>Change the password of a user</pre></summary>
+	///<summary>descriptor for XpackSecurityChangePassword <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-change-password.html</pre></summary>
 	public partial class ChangePasswordDescriptor  : RequestDescriptorBase<ChangePasswordDescriptor,ChangePasswordRequestParameters, IChangePasswordRequest>, IChangePasswordRequest
 	{ 
 		Name IChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -5095,8 +5095,8 @@ namespace Nest
 		public ChangePasswordDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
 
 	
-		///<summary>Refresh the index after performing the operation</summary>
-		public ChangePasswordDescriptor Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public ChangePasswordDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
 		///<summary>The URL-encoded request definition</summary>
 		public ChangePasswordDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -5106,7 +5106,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityClearCachedRealms <pre>Clears the internal user caches for specified realms</pre></summary>
+	///<summary>descriptor for XpackSecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/x-pack/current/security-api-clear-cache.html</pre></summary>
 	public partial class ClearCachedRealmsDescriptor  : RequestDescriptorBase<ClearCachedRealmsDescriptor,ClearCachedRealmsRequestParameters, IClearCachedRealmsRequest>, IClearCachedRealmsRequest
 	{ 
 		Names IClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
@@ -5117,7 +5117,7 @@ namespace Nest
 
 		
 		///<summary>Comma-separated list of usernames to clear from the cache</summary>
-		public ClearCachedRealmsDescriptor Usernames(string usernames) => AssignParam(p=>p.Usernames(usernames));
+		public ClearCachedRealmsDescriptor Usernames(params string[] usernames) => AssignParam(p=>p.Usernames(usernames));
 
 		///<summary>The URL-encoded request definition</summary>
 		public ClearCachedRealmsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -5127,7 +5127,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityClearCachedRoles <pre>Clears the internal caches for specified roles</pre></summary>
+	///<summary>descriptor for XpackSecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-clear-role-cache</pre></summary>
 	public partial class ClearCachedRolesDescriptor  : RequestDescriptorBase<ClearCachedRolesDescriptor,ClearCachedRolesRequestParameters, IClearCachedRolesRequest>, IClearCachedRolesRequest
 	{ 
 		Names IClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
@@ -5145,7 +5145,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityDeleteRole <pre>Remove a role from the native shield realm</pre></summary>
+	///<summary>descriptor for XpackSecurityDeleteRole <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-delete-role</pre></summary>
 	public partial class DeleteRoleDescriptor  : RequestDescriptorBase<DeleteRoleDescriptor,DeleteRoleRequestParameters, IDeleteRoleRequest>, IDeleteRoleRequest
 	{ 
 		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -5155,8 +5155,8 @@ namespace Nest
 		
 
 		
-		///<summary>Refresh the index after performing the operation</summary>
-		public DeleteRoleDescriptor Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public DeleteRoleDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
 		///<summary>The URL-encoded request definition</summary>
 		public DeleteRoleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -5166,7 +5166,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityDeleteUser <pre>Remove a user from the native shield realm</pre></summary>
+	///<summary>descriptor for XpackSecurityDeleteUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-delete-user</pre></summary>
 	public partial class DeleteUserDescriptor  : RequestDescriptorBase<DeleteUserDescriptor,DeleteUserRequestParameters, IDeleteUserRequest>, IDeleteUserRequest
 	{ 
 		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -5176,8 +5176,8 @@ namespace Nest
 		
 
 		
-		///<summary>Refresh the index after performing the operation</summary>
-		public DeleteUserDescriptor Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public DeleteUserDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
 		///<summary>The URL-encoded request definition</summary>
 		public DeleteUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -5187,7 +5187,59 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityGetRole <pre>Retrieve one or more roles from the native shield realm</pre></summary>
+	///<summary>descriptor for XpackSecurityDisableUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-disable-user.html</pre></summary>
+	public partial class XpackSecurityDisableUserDescriptor  : RequestDescriptorBase<XpackSecurityDisableUserDescriptor,XpackSecurityDisableUserRequestParameters, IXpackSecurityDisableUserRequest>, IXpackSecurityDisableUserRequest
+	{ 
+		Name IXpackSecurityDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+			/// <summary>/_xpack/security/user/{username}/_disable</summary>
+		public XpackSecurityDisableUserDescriptor() : base(){}
+		
+
+			///<summary>The username of the user to disable</summary>
+		public XpackSecurityDisableUserDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
+
+	
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public XpackSecurityDisableUserDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
+
+		///<summary>The URL-encoded request definition</summary>
+		public XpackSecurityDisableUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public XpackSecurityDisableUserDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	
+	}
+	
+	///<summary>descriptor for XpackSecurityEnableUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-enable-user.html</pre></summary>
+	public partial class XpackSecurityEnableUserDescriptor  : RequestDescriptorBase<XpackSecurityEnableUserDescriptor,XpackSecurityEnableUserRequestParameters, IXpackSecurityEnableUserRequest>, IXpackSecurityEnableUserRequest
+	{ 
+		Name IXpackSecurityEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+			/// <summary>/_xpack/security/user/{username}/_enable</summary>
+		public XpackSecurityEnableUserDescriptor() : base(){}
+		
+
+			///<summary>The username of the user to enable</summary>
+		public XpackSecurityEnableUserDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
+
+	
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public XpackSecurityEnableUserDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
+
+		///<summary>The URL-encoded request definition</summary>
+		public XpackSecurityEnableUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public XpackSecurityEnableUserDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	
+	}
+	
+	///<summary>descriptor for XpackSecurityGetRole <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-get-role</pre></summary>
 	public partial class GetRoleDescriptor  : RequestDescriptorBase<GetRoleDescriptor,GetRoleRequestParameters, IGetRoleRequest>, IGetRoleRequest
 	{ 
 		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -5207,7 +5259,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityGetUser <pre>Retrieve one or more users from the native shield realm</pre></summary>
+	///<summary>descriptor for XpackSecurityGetUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-get-user</pre></summary>
 	public partial class GetUserDescriptor  : RequestDescriptorBase<GetUserDescriptor,GetUserRequestParameters, IGetUserRequest>, IGetUserRequest
 	{ 
 		Names IGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
@@ -5227,7 +5279,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityPutRole <pre>Update or create a role for the native shield realm</pre></summary>
+	///<summary>descriptor for XpackSecurityPutRole <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-put-role</pre></summary>
 	public partial class PutRoleDescriptor  : RequestDescriptorBase<PutRoleDescriptor,PutRoleRequestParameters, IPutRoleRequest>, IPutRoleRequest
 	{ 
 		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -5237,8 +5289,8 @@ namespace Nest
 		
 
 		
-		///<summary>Refresh the index after performing the operation</summary>
-		public PutRoleDescriptor Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public PutRoleDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
 		///<summary>The URL-encoded request definition</summary>
 		public PutRoleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -5248,7 +5300,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityPutUser <pre>Update or create a user for the native shield realm</pre></summary>
+	///<summary>descriptor for XpackSecurityPutUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-put-user</pre></summary>
 	public partial class PutUserDescriptor  : RequestDescriptorBase<PutUserDescriptor,PutUserRequestParameters, IPutUserRequest>, IPutUserRequest
 	{ 
 		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -5258,8 +5310,8 @@ namespace Nest
 		
 
 		
-		///<summary>Refresh the index after performing the operation</summary>
-		public PutUserDescriptor Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public PutUserDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
 		///<summary>The URL-encoded request definition</summary>
 		public PutUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));

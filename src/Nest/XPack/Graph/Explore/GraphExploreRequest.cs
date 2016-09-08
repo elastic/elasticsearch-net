@@ -31,6 +31,7 @@ namespace Nest
 		public IGraphExploreControls Controls { get; set; }
 	}
 
+	[DescriptorFor("XpackGraphExplore")]
 	public partial class GraphExploreDescriptor<T> : IGraphExploreRequest<T>
 		where T : class
 	{

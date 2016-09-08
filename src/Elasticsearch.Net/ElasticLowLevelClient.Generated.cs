@@ -8074,7 +8074,7 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> UpdateByQueryAsync<T>(string index, string type, PostData<object> body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_update_by_query"), cancellationToken, body, _params(requestParameters));
 		
-		///<summary>Represents a GET on /{index}/_xpack/graph/_explore
+		///<summary>Represents a GET on /{index}/_xpack/_graph/_explore
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
@@ -8085,10 +8085,10 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> GraphExploreGet<T>(string index, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_xpack/graph/_explore"), null, _params(requestParameters));
+		public ElasticsearchResponse<T> XpackGraphExploreGet<T>(string index, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_xpack/_graph/_explore"), null, _params(requestParameters));
 		
-		///<summary>Represents a GET on /{index}/_xpack/graph/_explore
+		///<summary>Represents a GET on /{index}/_xpack/_graph/_explore
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
@@ -8099,10 +8099,10 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> GraphExploreGetAsync<T>(string index, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
-			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_xpack/graph/_explore"), cancellationToken, null, _params(requestParameters));
+		public Task<ElasticsearchResponse<T>> XpackGraphExploreGetAsync<T>(string index, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_xpack/_graph/_explore"), cancellationToken, null, _params(requestParameters));
 		
-		///<summary>Represents a GET on /{index}/{type}/_xpack/graph/_explore
+		///<summary>Represents a GET on /{index}/{type}/_xpack/_graph/_explore
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
@@ -8114,10 +8114,10 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> GraphExploreGet<T>(string index, string type, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_xpack/graph/_explore"), null, _params(requestParameters));
+		public ElasticsearchResponse<T> XpackGraphExploreGet<T>(string index, string type, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_xpack/_graph/_explore"), null, _params(requestParameters));
 		
-		///<summary>Represents a GET on /{index}/{type}/_xpack/graph/_explore
+		///<summary>Represents a GET on /{index}/{type}/_xpack/_graph/_explore
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
@@ -8129,10 +8129,10 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> GraphExploreGetAsync<T>(string index, string type, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
-			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_xpack/graph/_explore"), cancellationToken, null, _params(requestParameters));
+		public Task<ElasticsearchResponse<T>> XpackGraphExploreGetAsync<T>(string index, string type, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_xpack/_graph/_explore"), cancellationToken, null, _params(requestParameters));
 		
-		///<summary>Represents a POST on /{index}/_xpack/graph/_explore
+		///<summary>Represents a POST on /{index}/_xpack/_graph/_explore
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
@@ -8144,10 +8144,10 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">Graph Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> GraphExplore<T>(string index, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_xpack/graph/_explore"), body, _params(requestParameters));
+		public ElasticsearchResponse<T> XpackGraphExplore<T>(string index, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_xpack/_graph/_explore"), body, _params(requestParameters));
 		
-		///<summary>Represents a POST on /{index}/_xpack/graph/_explore
+		///<summary>Represents a POST on /{index}/_xpack/_graph/_explore
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
@@ -8159,10 +8159,10 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">Graph Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> GraphExploreAsync<T>(string index, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
-			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_xpack/graph/_explore"), cancellationToken, body, _params(requestParameters));
+		public Task<ElasticsearchResponse<T>> XpackGraphExploreAsync<T>(string index, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_xpack/_graph/_explore"), cancellationToken, body, _params(requestParameters));
 		
-		///<summary>Represents a POST on /{index}/{type}/_xpack/graph/_explore
+		///<summary>Represents a POST on /{index}/{type}/_xpack/_graph/_explore
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
@@ -8175,10 +8175,10 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">Graph Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> GraphExplore<T>(string index, string type, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_xpack/graph/_explore"), body, _params(requestParameters));
+		public ElasticsearchResponse<T> XpackGraphExplore<T>(string index, string type, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_xpack/_graph/_explore"), body, _params(requestParameters));
 		
-		///<summary>Represents a POST on /{index}/{type}/_xpack/graph/_explore
+		///<summary>Represents a POST on /{index}/{type}/_xpack/_graph/_explore
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
@@ -8191,8 +8191,8 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">Graph Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> GraphExploreAsync<T>(string index, string type, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
-			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_xpack/graph/_explore"), cancellationToken, body, _params(requestParameters));
+		public Task<ElasticsearchResponse<T>> XpackGraphExploreAsync<T>(string index, string type, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_xpack/_graph/_explore"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_xpack/license
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -8204,7 +8204,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> LicenseDelete<T>(Func<DeleteLicenseRequestParameters, DeleteLicenseRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackLicenseDelete<T>(Func<DeleteLicenseRequestParameters, DeleteLicenseRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(DELETE, Url($"_xpack/license"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_xpack/license
@@ -8217,7 +8217,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> LicenseDeleteAsync<T>(Func<DeleteLicenseRequestParameters, DeleteLicenseRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackLicenseDeleteAsync<T>(Func<DeleteLicenseRequestParameters, DeleteLicenseRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(DELETE, Url($"_xpack/license"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/license
@@ -8230,7 +8230,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> LicenseGet<T>(Func<GetLicenseRequestParameters, GetLicenseRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackLicenseGet<T>(Func<GetLicenseRequestParameters, GetLicenseRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"_xpack/license"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/license
@@ -8243,7 +8243,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> LicenseGetAsync<T>(Func<GetLicenseRequestParameters, GetLicenseRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackLicenseGetAsync<T>(Func<GetLicenseRequestParameters, GetLicenseRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_xpack/license"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/license
@@ -8257,7 +8257,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">licenses to be installed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> LicensePost<T>(PostData<object> body, Func<PostLicenseRequestParameters, PostLicenseRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackLicensePost<T>(PostData<object> body, Func<PostLicenseRequestParameters, PostLicenseRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/license"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/license
@@ -8271,34 +8271,34 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">licenses to be installed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> LicensePostAsync<T>(PostData<object> body, Func<PostLicenseRequestParameters, PostLicenseRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackLicensePostAsync<T>(PostData<object> body, Func<PostLicenseRequestParameters, PostLicenseRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/license"), cancellationToken, body, _params(requestParameters));
 		
-		///<summary>Represents a GET on /_xpack/security/authenticate
+		///<summary>Represents a GET on /_xpack/security/_authenticate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Retrieve details about the currently authenticated user </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-authenticate.html </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> XpackSecurityAuthenticate<T>(Func<AuthenticateRequestParameters, AuthenticateRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_xpack/security/authenticate"), null, _params(requestParameters));
+			where T : class => this.DoRequest<T>(GET, Url($"_xpack/security/_authenticate"), null, _params(requestParameters));
 		
-		///<summary>Represents a GET on /_xpack/security/authenticate
+		///<summary>Represents a GET on /_xpack/security/_authenticate
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Retrieve details about the currently authenticated user </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-authenticate.html </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> XpackSecurityAuthenticateAsync<T>(Func<AuthenticateRequestParameters, AuthenticateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_xpack/security/authenticate"), cancellationToken, null, _params(requestParameters));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_xpack/security/_authenticate"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/security/user/{username}/_password
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -8307,7 +8307,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Change the password of a user </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-change-password.html </para>
 	    ///</summary>
 		///<param name="username">The username of the user to change the password for</param>
 		///<param name="body">the new password for the user</param>
@@ -8322,7 +8322,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Change the password of a user </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-change-password.html </para>
 	    ///</summary>
 		///<param name="username">The username of the user to change the password for</param>
 		///<param name="body">the new password for the user</param>
@@ -8337,7 +8337,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Change the password of a user </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-change-password.html </para>
 	    ///</summary>
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -8351,7 +8351,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Change the password of a user </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-change-password.html </para>
 	    ///</summary>
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -8365,7 +8365,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Change the password of a user </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-change-password.html </para>
 	    ///</summary>
 		///<param name="username">The username of the user to change the password for</param>
 		///<param name="body">the new password for the user</param>
@@ -8380,7 +8380,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Change the password of a user </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-change-password.html </para>
 	    ///</summary>
 		///<param name="username">The username of the user to change the password for</param>
 		///<param name="body">the new password for the user</param>
@@ -8395,7 +8395,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Change the password of a user </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-change-password.html </para>
 	    ///</summary>
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -8409,7 +8409,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Change the password of a user </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-change-password.html </para>
 	    ///</summary>
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -8423,7 +8423,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Clears the internal user caches for specified realms </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/current/security-api-clear-cache.html </para>
 	    ///</summary>
 		///<param name="realms">Comma-separated list of realms to clear</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -8437,7 +8437,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Clears the internal user caches for specified realms </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/current/security-api-clear-cache.html </para>
 	    ///</summary>
 		///<param name="realms">Comma-separated list of realms to clear</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -8451,7 +8451,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Clears the internal caches for specified roles </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-clear-role-cache </para>
 	    ///</summary>
 		///<param name="name">Role name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -8465,40 +8465,12 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Clears the internal caches for specified roles </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-clear-role-cache </para>
 	    ///</summary>
 		///<param name="name">Role name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> XpackSecurityClearCachedRolesAsync<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/security/role/{name.NotNull("name")}/_clear_cache"), cancellationToken, null, _params(requestParameters));
-		
-		///<summary>Represents a PUT on /_xpack/security/role/{name}/_clear_cache
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Clears the internal caches for specified roles </para>
-	    ///</summary>
-		///<param name="name">Role name</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityClearCachedRolesPut<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/security/role/{name.NotNull("name")}/_clear_cache"), null, _params(requestParameters));
-		
-		///<summary>Represents a PUT on /_xpack/security/role/{name}/_clear_cache
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Clears the internal caches for specified roles </para>
-	    ///</summary>
-		///<param name="name">Role name</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityClearCachedRolesPutAsync<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
-			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/security/role/{name.NotNull("name")}/_clear_cache"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_xpack/security/role/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -8507,7 +8479,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Remove a role from the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-delete-role </para>
 	    ///</summary>
 		///<param name="name">Role name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -8521,7 +8493,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Remove a role from the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-delete-role </para>
 	    ///</summary>
 		///<param name="name">Role name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -8535,7 +8507,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Remove a user from the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-delete-user </para>
 	    ///</summary>
 		///<param name="username">username</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -8549,12 +8521,124 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Remove a user from the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-delete-user </para>
 	    ///</summary>
 		///<param name="username">username</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> XpackSecurityDeleteUserAsync<T>(string username, Func<DeleteUserRequestParameters, DeleteUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(DELETE, Url($"_xpack/security/user/{username.NotNull("username")}"), cancellationToken, null, _params(requestParameters));
+		
+		///<summary>Represents a PUT on /_xpack/security/user/{username}/_disable
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-disable-user.html </para>
+	    ///</summary>
+		///<param name="username">The username of the user to disable</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> XpackSecurityDisableUser<T>(string username, Func<XpackSecurityDisableUserRequestParameters, XpackSecurityDisableUserRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/security/user/{username.NotNull("username")}/_disable"), null, _params(requestParameters));
+		
+		///<summary>Represents a PUT on /_xpack/security/user/{username}/_disable
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-disable-user.html </para>
+	    ///</summary>
+		///<param name="username">The username of the user to disable</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> XpackSecurityDisableUserAsync<T>(string username, Func<XpackSecurityDisableUserRequestParameters, XpackSecurityDisableUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/security/user/{username.NotNull("username")}/_disable"), cancellationToken, null, _params(requestParameters));
+		
+		///<summary>Represents a POST on /_xpack/security/user/{username}/_disable
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-disable-user.html </para>
+	    ///</summary>
+		///<param name="username">The username of the user to disable</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> XpackSecurityDisableUserPost<T>(string username, Func<XpackSecurityDisableUserRequestParameters, XpackSecurityDisableUserRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(POST, Url($"_xpack/security/user/{username.NotNull("username")}/_disable"), null, _params(requestParameters));
+		
+		///<summary>Represents a POST on /_xpack/security/user/{username}/_disable
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-disable-user.html </para>
+	    ///</summary>
+		///<param name="username">The username of the user to disable</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> XpackSecurityDisableUserPostAsync<T>(string username, Func<XpackSecurityDisableUserRequestParameters, XpackSecurityDisableUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/security/user/{username.NotNull("username")}/_disable"), cancellationToken, null, _params(requestParameters));
+		
+		///<summary>Represents a PUT on /_xpack/security/user/{username}/_enable
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-enable-user.html </para>
+	    ///</summary>
+		///<param name="username">The username of the user to enable</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> XpackSecurityEnableUser<T>(string username, Func<XpackSecurityEnableUserRequestParameters, XpackSecurityEnableUserRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/security/user/{username.NotNull("username")}/_enable"), null, _params(requestParameters));
+		
+		///<summary>Represents a PUT on /_xpack/security/user/{username}/_enable
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-enable-user.html </para>
+	    ///</summary>
+		///<param name="username">The username of the user to enable</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> XpackSecurityEnableUserAsync<T>(string username, Func<XpackSecurityEnableUserRequestParameters, XpackSecurityEnableUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/security/user/{username.NotNull("username")}/_enable"), cancellationToken, null, _params(requestParameters));
+		
+		///<summary>Represents a POST on /_xpack/security/user/{username}/_enable
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-enable-user.html </para>
+	    ///</summary>
+		///<param name="username">The username of the user to enable</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> XpackSecurityEnableUserPost<T>(string username, Func<XpackSecurityEnableUserRequestParameters, XpackSecurityEnableUserRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(POST, Url($"_xpack/security/user/{username.NotNull("username")}/_enable"), null, _params(requestParameters));
+		
+		///<summary>Represents a POST on /_xpack/security/user/{username}/_enable
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-enable-user.html </para>
+	    ///</summary>
+		///<param name="username">The username of the user to enable</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> XpackSecurityEnableUserPostAsync<T>(string username, Func<XpackSecurityEnableUserRequestParameters, XpackSecurityEnableUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/security/user/{username.NotNull("username")}/_enable"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/security/role/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -8563,7 +8647,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Retrieve one or more roles from the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-get-role </para>
 	    ///</summary>
 		///<param name="name">Role name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -8577,7 +8661,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Retrieve one or more roles from the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-get-role </para>
 	    ///</summary>
 		///<param name="name">Role name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -8591,7 +8675,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Retrieve one or more roles from the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-get-role </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> XpackSecurityGetRole<T>(Func<GetRoleRequestParameters, GetRoleRequestParameters> requestParameters = null)
@@ -8604,7 +8688,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Retrieve one or more roles from the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-get-role </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> XpackSecurityGetRoleAsync<T>(Func<GetRoleRequestParameters, GetRoleRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -8617,7 +8701,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Retrieve one or more users from the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-get-user </para>
 	    ///</summary>
 		///<param name="username">A comma-separated list of usernames</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -8631,7 +8715,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Retrieve one or more users from the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-get-user </para>
 	    ///</summary>
 		///<param name="username">A comma-separated list of usernames</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -8645,7 +8729,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Retrieve one or more users from the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-get-user </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> XpackSecurityGetUser<T>(Func<GetUserRequestParameters, GetUserRequestParameters> requestParameters = null)
@@ -8658,7 +8742,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Retrieve one or more users from the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-get-user </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> XpackSecurityGetUserAsync<T>(Func<GetUserRequestParameters, GetUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -8671,7 +8755,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Update or create a role for the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-put-role </para>
 	    ///</summary>
 		///<param name="name">Role name</param>
 		///<param name="body">The role to add</param>
@@ -8686,7 +8770,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Update or create a role for the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-put-role </para>
 	    ///</summary>
 		///<param name="name">Role name</param>
 		///<param name="body">The role to add</param>
@@ -8701,7 +8785,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Update or create a role for the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-put-role </para>
 	    ///</summary>
 		///<param name="name">Role name</param>
 		///<param name="body">The role to add</param>
@@ -8716,7 +8800,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Update or create a role for the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-put-role </para>
 	    ///</summary>
 		///<param name="name">Role name</param>
 		///<param name="body">The role to add</param>
@@ -8731,7 +8815,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Update or create a user for the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-put-user </para>
 	    ///</summary>
 		///<param name="username">The username of the User</param>
 		///<param name="body">The user to add</param>
@@ -8746,7 +8830,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Update or create a user for the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-put-user </para>
 	    ///</summary>
 		///<param name="username">The username of the User</param>
 		///<param name="body">The user to add</param>
@@ -8761,7 +8845,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Update or create a user for the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-put-user </para>
 	    ///</summary>
 		///<param name="username">The username of the User</param>
 		///<param name="body">The user to add</param>
@@ -8776,7 +8860,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: Update or create a user for the native shield realm </para>
+	    ///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-put-user </para>
 	    ///</summary>
 		///<param name="username">The username of the User</param>
 		///<param name="body">The user to add</param>

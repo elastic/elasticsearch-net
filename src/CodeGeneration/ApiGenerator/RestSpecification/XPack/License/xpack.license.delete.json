@@ -1,11 +1,11 @@
 {
-  "license.delete": {
+  "xpack.license.delete": {
     "documentation": "https://www.elastic.co/guide/en/shield/current/license-management.html",
-    "methods": [ "DELETE" ],
+    "methods": ["DELETE"],
     "url": {
       "path": "/_xpack/license",
-      "paths": [ "/_xpack/license" ],
-      "parts": { }
+      "paths": ["/_xpack/license"],
+      "parts" : {}
     },
     "body": null
   }

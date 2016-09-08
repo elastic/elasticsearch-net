@@ -32,7 +32,7 @@ namespace Nest
 		public IGraphExploreResponse GraphExplore(IGraphExploreRequest request) =>
 			this.Dispatcher.Dispatch<IGraphExploreRequest, GraphExploreRequestParameters, GraphExploreResponse>(
 				request,
-				this.LowLevelDispatch.GraphExploreDispatch<GraphExploreResponse>
+				this.LowLevelDispatch.XpackGraphExploreDispatch<GraphExploreResponse>
 			);
 
 		/// <inheritdoc/>
@@ -44,7 +44,7 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<IGraphExploreRequest, GraphExploreRequestParameters, GraphExploreResponse, IGraphExploreResponse>(
 				request,
 				cancellationToken,
-				this.LowLevelDispatch.GraphExploreDispatchAsync<GraphExploreResponse>
+				this.LowLevelDispatch.XpackGraphExploreDispatchAsync<GraphExploreResponse>
 			);
 	}
 }

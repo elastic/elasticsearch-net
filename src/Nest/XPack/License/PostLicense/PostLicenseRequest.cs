@@ -17,7 +17,7 @@ namespace Nest
 		public static implicit operator PostLicenseRequest(License license) => new PostLicenseRequest { License = license };
 	}
 
-	[DescriptorFor("LicensePost")]
+	[DescriptorFor("XpackLicensePost")]
 	public partial class PostLicenseDescriptor
 	{
 		License IPostLicenseRequest.License { get; set; }

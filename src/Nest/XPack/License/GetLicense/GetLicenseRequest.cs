@@ -12,7 +12,7 @@ namespace Nest
 	{
 	}
 
-	[DescriptorFor("LicenseGet")]
+	[DescriptorFor("XpackLicenseGet")]
 	public partial class GetLicenseDescriptor : IGetLicenseRequest
 	{
 

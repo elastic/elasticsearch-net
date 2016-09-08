@@ -12,7 +12,7 @@ namespace Nest
 	{
 	}
 
-	[DescriptorFor("LicenseDelete")]
+	[DescriptorFor("XpackLicenseDelete")]
 	public partial class DeleteLicenseDescriptor : IDeleteLicenseRequest
 	{
 

@@ -4750,7 +4750,7 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for GraphExplore
+	///<summary>Request parameters descriptor for XpackGraphExplore
 	///<pre>
 	///https://www.elastic.co/guide/en/graph/current/explore.html
 	///</pre>
@@ -4776,7 +4776,7 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for LicenseDelete
+	///<summary>Request parameters descriptor for XpackLicenseDelete
 	///<pre>
 	///https://www.elastic.co/guide/en/shield/current/license-management.html
 	///</pre>
@@ -4794,7 +4794,7 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for LicenseGet
+	///<summary>Request parameters descriptor for XpackLicenseGet
 	///<pre>
 	///https://www.elastic.co/guide/en/shield/current/license-management.html
 	///</pre>
@@ -4816,7 +4816,7 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for LicensePost
+	///<summary>Request parameters descriptor for XpackLicensePost
 	///<pre>
 	///https://www.elastic.co/guide/en/shield/current/license-management.html
 	///</pre>
@@ -4840,7 +4840,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityAuthenticate
 	///<pre>
-	///Retrieve details about the currently authenticated user
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-authenticate.html
 	///</pre>
 	///</summary>
 	public class AuthenticateRequestParameters : FluentRequestParameters<AuthenticateRequestParameters> 
@@ -4858,15 +4858,15 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityChangePassword
 	///<pre>
-	///Change the password of a user
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-change-password.html
 	///</pre>
 	///</summary>
 	public class ChangePasswordRequestParameters : FluentRequestParameters<ChangePasswordRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
-		///<summary>Refresh the index after performing the operation</summary>
-		public ChangePasswordRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public ChangePasswordRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -4880,7 +4880,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityClearCachedRealms
 	///<pre>
-	///Clears the internal user caches for specified realms
+	///https://www.elastic.co/guide/en/x-pack/current/security-api-clear-cache.html
 	///</pre>
 	///</summary>
 	public class ClearCachedRealmsRequestParameters : FluentRequestParameters<ClearCachedRealmsRequestParameters> 
@@ -4888,7 +4888,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>Comma-separated list of usernames to clear from the cache</summary>
-		public ClearCachedRealmsRequestParameters Usernames(string usernames) => this.AddQueryString("usernames", usernames);
+		public ClearCachedRealmsRequestParameters Usernames(params string[] usernames) => this.AddQueryString("usernames", usernames);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -4902,7 +4902,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityClearCachedRoles
 	///<pre>
-	///Clears the internal caches for specified roles
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-clear-role-cache
 	///</pre>
 	///</summary>
 	public class ClearCachedRolesRequestParameters : FluentRequestParameters<ClearCachedRolesRequestParameters> 
@@ -4920,15 +4920,15 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityDeleteRole
 	///<pre>
-	///Remove a role from the native shield realm
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-delete-role
 	///</pre>
 	///</summary>
 	public class DeleteRoleRequestParameters : FluentRequestParameters<DeleteRoleRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
-		///<summary>Refresh the index after performing the operation</summary>
-		public DeleteRoleRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public DeleteRoleRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -4942,15 +4942,15 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityDeleteUser
 	///<pre>
-	///Remove a user from the native shield realm
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-delete-user
 	///</pre>
 	///</summary>
 	public class DeleteUserRequestParameters : FluentRequestParameters<DeleteUserRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
-		///<summary>Refresh the index after performing the operation</summary>
-		public DeleteUserRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public DeleteUserRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -4962,9 +4962,53 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for XpackSecurityDisableUser
+	///<pre>
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-disable-user.html
+	///</pre>
+	///</summary>
+	public class XpackSecurityDisableUserRequestParameters : FluentRequestParameters<XpackSecurityDisableUserRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public XpackSecurityDisableUserRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public XpackSecurityDisableUserRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public XpackSecurityDisableUserRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackSecurityEnableUser
+	///<pre>
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-enable-user.html
+	///</pre>
+	///</summary>
+	public class XpackSecurityEnableUserRequestParameters : FluentRequestParameters<XpackSecurityEnableUserRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public XpackSecurityEnableUserRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public XpackSecurityEnableUserRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public XpackSecurityEnableUserRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for XpackSecurityGetRole
 	///<pre>
-	///Retrieve one or more roles from the native shield realm
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-get-role
 	///</pre>
 	///</summary>
 	public class GetRoleRequestParameters : FluentRequestParameters<GetRoleRequestParameters> 
@@ -4982,7 +5026,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityGetUser
 	///<pre>
-	///Retrieve one or more users from the native shield realm
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-get-user
 	///</pre>
 	///</summary>
 	public class GetUserRequestParameters : FluentRequestParameters<GetUserRequestParameters> 
@@ -5000,15 +5044,15 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityPutRole
 	///<pre>
-	///Update or create a role for the native shield realm
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-put-role
 	///</pre>
 	///</summary>
 	public class PutRoleRequestParameters : FluentRequestParameters<PutRoleRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
-		///<summary>Refresh the index after performing the operation</summary>
-		public PutRoleRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public PutRoleRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -5022,15 +5066,15 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityPutUser
 	///<pre>
-	///Update or create a user for the native shield realm
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-put-user
 	///</pre>
 	///</summary>
 	public class PutUserRequestParameters : FluentRequestParameters<PutUserRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
-		///<summary>Refresh the index after performing the operation</summary>
-		public PutUserRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public PutUserRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
 		
 		
 		///<summary>The URL-encoded request definition</summary>

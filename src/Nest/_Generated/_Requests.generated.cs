@@ -106,7 +106,7 @@ namespace Nest
 	public partial interface IAuthenticateRequest : IRequest<AuthenticateRequestParameters> 
 	{
 	 } 
-	///<summary>Request parameters for XpackSecurityAuthenticate <pre>Retrieve details about the currently authenticated user</pre></summary>
+	///<summary>Request parameters for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-authenticate.html</pre></summary>
 	public partial class AuthenticateRequest  : PlainRequestBase<AuthenticateRequestParameters>, IAuthenticateRequest
 	{
 		protected IAuthenticateRequest Self => this;
@@ -987,7 +987,7 @@ namespace Nest
 	{
 		Name Username { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityChangePassword <pre>Change the password of a user</pre></summary>
+	///<summary>Request parameters for XpackSecurityChangePassword <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-change-password.html</pre></summary>
 	public partial class ChangePasswordRequest  : PlainRequestBase<ChangePasswordRequestParameters>, IChangePasswordRequest
 	{
 		protected IChangePasswordRequest Self => this;
@@ -1001,8 +1001,8 @@ namespace Nest
 		public ChangePasswordRequest() : base(){}
 		
 
-			///<summary>Refresh the index after performing the operation</summary>
-		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
+			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1017,7 +1017,7 @@ namespace Nest
 	{
 		Names Realms { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityClearCachedRealms <pre>Clears the internal user caches for specified realms</pre></summary>
+	///<summary>Request parameters for XpackSecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/x-pack/current/security-api-clear-cache.html</pre></summary>
 	public partial class ClearCachedRealmsRequest  : PlainRequestBase<ClearCachedRealmsRequestParameters>, IClearCachedRealmsRequest
 	{
 		protected IClearCachedRealmsRequest Self => this;
@@ -1028,7 +1028,7 @@ namespace Nest
 		
 
 			///<summary>Comma-separated list of usernames to clear from the cache</summary>
-		public string Usernames { get { return Q<string>("usernames"); } set { Q("usernames", value); } }
+		public  string[] Usernames { get { return Q< string[]>("usernames"); } set { Q("usernames", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1043,7 +1043,7 @@ namespace Nest
 	{
 		Names Name { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityClearCachedRoles <pre>Clears the internal caches for specified roles</pre></summary>
+	///<summary>Request parameters for XpackSecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-clear-role-cache</pre></summary>
 	public partial class ClearCachedRolesRequest  : PlainRequestBase<ClearCachedRolesRequestParameters>, IClearCachedRolesRequest
 	{
 		protected IClearCachedRolesRequest Self => this;
@@ -2041,7 +2041,7 @@ namespace Nest
 	public partial interface IDeleteLicenseRequest : IRequest<DeleteLicenseRequestParameters> 
 	{
 	 } 
-	///<summary>Request parameters for LicenseDelete <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	///<summary>Request parameters for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
 	public partial class DeleteLicenseRequest  : PlainRequestBase<DeleteLicenseRequestParameters>, IDeleteLicenseRequest
 	{
 		protected IDeleteLicenseRequest Self => this;
@@ -2214,7 +2214,7 @@ namespace Nest
 	{
 		Name Name { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityDeleteRole <pre>Remove a role from the native shield realm</pre></summary>
+	///<summary>Request parameters for XpackSecurityDeleteRole <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-delete-role</pre></summary>
 	public partial class DeleteRoleRequest  : PlainRequestBase<DeleteRoleRequestParameters>, IDeleteRoleRequest
 	{
 		protected IDeleteRoleRequest Self => this;
@@ -2224,8 +2224,8 @@ namespace Nest
 		public DeleteRoleRequest(Name name) : base(r=>r.Required("name", name)){}
 		
 
-			///<summary>Refresh the index after performing the operation</summary>
-		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
+			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -2318,7 +2318,7 @@ namespace Nest
 	{
 		Name Username { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityDeleteUser <pre>Remove a user from the native shield realm</pre></summary>
+	///<summary>Request parameters for XpackSecurityDeleteUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-delete-user</pre></summary>
 	public partial class DeleteUserRequest  : PlainRequestBase<DeleteUserRequestParameters>, IDeleteUserRequest
 	{
 		protected IDeleteUserRequest Self => this;
@@ -2328,8 +2328,8 @@ namespace Nest
 		public DeleteUserRequest(Name username) : base(r=>r.Required("username", username)){}
 		
 
-			///<summary>Refresh the index after performing the operation</summary>
-		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
+			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -2900,7 +2900,7 @@ namespace Nest
 	public partial interface IGetLicenseRequest : IRequest<GetLicenseRequestParameters> 
 	{
 	 } 
-	///<summary>Request parameters for LicenseGet <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	///<summary>Request parameters for XpackLicenseGet <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
 	public partial class GetLicenseRequest  : PlainRequestBase<GetLicenseRequestParameters>, IGetLicenseRequest
 	{
 		protected IGetLicenseRequest Self => this;
@@ -3159,7 +3159,7 @@ namespace Nest
 	{
 		Name Name { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityGetRole <pre>Retrieve one or more roles from the native shield realm</pre></summary>
+	///<summary>Request parameters for XpackSecurityGetRole <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-get-role</pre></summary>
 	public partial class GetRoleRequest  : PlainRequestBase<GetRoleRequestParameters>, IGetRoleRequest
 	{
 		protected IGetRoleRequest Self => this;
@@ -3293,7 +3293,7 @@ namespace Nest
 	{
 		Names Username { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityGetUser <pre>Retrieve one or more users from the native shield realm</pre></summary>
+	///<summary>Request parameters for XpackSecurityGetUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-get-user</pre></summary>
 	public partial class GetUserRequest  : PlainRequestBase<GetUserRequestParameters>, IGetUserRequest
 	{
 		protected IGetUserRequest Self => this;
@@ -3321,18 +3321,18 @@ namespace Nest
 		Indices Index { get; }
 		Types Type { get; }
 	 } 
-	///<summary>Request parameters for GraphExplore <pre>https://www.elastic.co/guide/en/graph/current/explore.html</pre></summary>
+	///<summary>Request parameters for XpackGraphExplore <pre>https://www.elastic.co/guide/en/graph/current/explore.html</pre></summary>
 	public partial class GraphExploreRequest<T>  : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
 	{
 		protected IGraphExploreRequest Self => this;
 		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_xpack/graph/_explore</summary>
+			/// <summary>/{index}/_xpack/_graph/_explore</summary>
 ///<param name="index">this parameter is required</param>
 		public GraphExploreRequest(Indices index) : base(r=>r.Required("index", index)){}
 		
 
-		/// <summary>/{index}/{type}/_xpack/graph/_explore</summary>
+		/// <summary>/{index}/{type}/_xpack/_graph/_explore</summary>
 ///<param name="index">this parameter is required</param>		
 ///<param name="type">Optional, accepts null</param>
 		public GraphExploreRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
@@ -3351,18 +3351,18 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for GraphExplore <pre>https://www.elastic.co/guide/en/graph/current/explore.html</pre></summary>
+	///<summary>Request parameters for XpackGraphExplore <pre>https://www.elastic.co/guide/en/graph/current/explore.html</pre></summary>
 	public partial class GraphExploreRequest  : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
 	{
 		protected IGraphExploreRequest Self => this;
 		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_xpack/graph/_explore</summary>
+			/// <summary>/{index}/_xpack/_graph/_explore</summary>
 ///<param name="index">this parameter is required</param>
 		public GraphExploreRequest(Indices index) : base(r=>r.Required("index", index)){}
 		
 
-		/// <summary>/{index}/{type}/_xpack/graph/_explore</summary>
+		/// <summary>/{index}/{type}/_xpack/_graph/_explore</summary>
 ///<param name="index">this parameter is required</param>		
 ///<param name="type">Optional, accepts null</param>
 		public GraphExploreRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
@@ -4287,7 +4287,7 @@ namespace Nest
 	public partial interface IPostLicenseRequest : IRequest<PostLicenseRequestParameters> 
 	{
 	 } 
-	///<summary>Request parameters for LicensePost <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	///<summary>Request parameters for XpackLicensePost <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
 	public partial class PostLicenseRequest  : PlainRequestBase<PostLicenseRequestParameters>, IPostLicenseRequest
 	{
 		protected IPostLicenseRequest Self => this;
@@ -4494,7 +4494,7 @@ namespace Nest
 	{
 		Name Name { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityPutRole <pre>Update or create a role for the native shield realm</pre></summary>
+	///<summary>Request parameters for XpackSecurityPutRole <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-put-role</pre></summary>
 	public partial class PutRoleRequest  : PlainRequestBase<PutRoleRequestParameters>, IPutRoleRequest
 	{
 		protected IPutRoleRequest Self => this;
@@ -4504,8 +4504,8 @@ namespace Nest
 		public PutRoleRequest(Name name) : base(r=>r.Required("name", name)){}
 		
 
-			///<summary>Refresh the index after performing the operation</summary>
-		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
+			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -4569,7 +4569,7 @@ namespace Nest
 	{
 		Name Username { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityPutUser <pre>Update or create a user for the native shield realm</pre></summary>
+	///<summary>Request parameters for XpackSecurityPutUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-put-user</pre></summary>
 	public partial class PutUserRequest  : PlainRequestBase<PutUserRequestParameters>, IPutUserRequest
 	{
 		protected IPutUserRequest Self => this;
@@ -4579,8 +4579,8 @@ namespace Nest
 		public PutUserRequest(Name username) : base(r=>r.Required("username", username)){}
 		
 
-			///<summary>Refresh the index after performing the operation</summary>
-		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
+			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -6367,5 +6367,61 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IXpackSecurityDisableUserRequest : IRequest<XpackSecurityDisableUserRequestParameters> 
+	{
+		Name Username { get; }
+	 } 
+	///<summary>Request parameters for XpackSecurityDisableUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-disable-user.html</pre></summary>
+	public partial class XpackSecurityDisableUserRequest  : PlainRequestBase<XpackSecurityDisableUserRequestParameters>, IXpackSecurityDisableUserRequest
+	{
+		protected IXpackSecurityDisableUserRequest Self => this;
+		Name IXpackSecurityDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+			/// <summary>/_xpack/security/user/{username}/_disable</summary>
+///<param name="username">Optional, accepts null</param>
+		public XpackSecurityDisableUserRequest(Name username) : base(r=>r.Optional("username", username)){}
+		
+
+			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IXpackSecurityEnableUserRequest : IRequest<XpackSecurityEnableUserRequestParameters> 
+	{
+		Name Username { get; }
+	 } 
+	///<summary>Request parameters for XpackSecurityEnableUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-enable-user.html</pre></summary>
+	public partial class XpackSecurityEnableUserRequest  : PlainRequestBase<XpackSecurityEnableUserRequestParameters>, IXpackSecurityEnableUserRequest
+	{
+		protected IXpackSecurityEnableUserRequest Self => this;
+		Name IXpackSecurityEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+			/// <summary>/_xpack/security/user/{username}/_enable</summary>
+///<param name="username">Optional, accepts null</param>
+		public XpackSecurityEnableUserRequest(Name username) : base(r=>r.Optional("username", username)){}
+		
+
+			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
 }
  

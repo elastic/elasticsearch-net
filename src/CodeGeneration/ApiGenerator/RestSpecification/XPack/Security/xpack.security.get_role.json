@@ -1,18 +1,18 @@
 {
   "xpack.security.get_role": {
-    "documentation": "Retrieve one or more roles from the native shield realm",
+    "documentation": "https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-get-role",
     "methods": [ "GET" ],
     "url": {
       "path": "/_xpack/security/role/{name}",
       "paths": [ "/_xpack/security/role/{name}", "/_xpack/security/role" ],
       "parts": {
         "name": {
-          "type": "string",
-          "description": "Role name",
-          "required": false
+          "type" : "string",
+          "description" : "Role name",
+          "required" : false
         }
       },
-      "params": { }
+      "params": {}
     },
     "body": null
   }
