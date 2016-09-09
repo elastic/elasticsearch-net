@@ -51,33 +51,65 @@ namespace Nest
 		bool? DisableCoord { get; set; }
 
 		bool Locked { get; }
+		bool CreatedByBoolDsl { get; }
 	}
 
 	public class BoolQuery : QueryBase, IBoolQuery
 	{
 		internal static bool Locked(IBoolQuery q) => !q.Name.IsNullOrEmpty() || q.Boost.HasValue || q.DisableCoord.HasValue || q.MinimumShouldMatch != null;
 		bool IBoolQuery.Locked => BoolQuery.Locked(this);
+		private readonly bool _createdByBoolDsl;
+		bool IBoolQuery.CreatedByBoolDsl => _createdByBoolDsl;
+
+		private IList<QueryContainer> _must;
+		private IList<QueryContainer> _mustNot;
+		private IList<QueryContainer> _should;
+		private IList<QueryContainer> _filter;
+
+		public BoolQuery() { }
+
+		/// <summary>
+		/// Internal constructor which we use internally in the bool dsl so we know its safe to reuse a boolean query instance
+		/// </summary>
+		/// <param name="createdByBoolDsl">ignored</param>
+		internal BoolQuery(bool createdByBoolDsl)
+		{
+			this._createdByBoolDsl = true;
+		}
+
 
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
-		public IEnumerable<QueryContainer> Must { get; set; }
+		public IEnumerable<QueryContainer> Must {
+			get { return _must; }
+			set { _must = value.AsInstanceOrToListOrNull(); }
+		}
 
 		/// <summary>
 		/// The clause (query) must not appear in the matching documents. Note that it is not possible to search on documents that only consists of a must_not clauses.
 		/// </summary>
-		public IEnumerable<QueryContainer> MustNot { get; set; }
+		public IEnumerable<QueryContainer> MustNot {
+			get { return _mustNot; }
+			set { _mustNot = value.AsInstanceOrToListOrNull(); }
+		}
 
 		/// <summary>
 		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document.
 		/// The minimum number of should clauses to match can be set using <see cref="MinimumShouldMatch"/>.
 		/// </summary>
-		public IEnumerable<QueryContainer> Should { get; set; }
+		public IEnumerable<QueryContainer> Should {
+			get { return _should; }
+			set { _should = value.AsInstanceOrToListOrNull(); }
+		}
 
 		/// <summary>
 		/// The clause (query) which is to be used as a filter (in filter context).
 		/// </summary>
-		public IEnumerable<QueryContainer> Filter { get; set; }
+		public IEnumerable<QueryContainer> Filter {
+			get { return _filter; }
+			set { _filter = value.AsInstanceOrToListOrNull(); }
+		}
 
 		/// <summary>
 		/// Specifies a minimum number of the optional BooleanClauses which must be satisfied.
@@ -104,12 +136,29 @@ namespace Nest
 		, IBoolQuery where T : class
 	{
 		bool IBoolQuery.Locked => BoolQuery.Locked(this);
+		bool IBoolQuery.CreatedByBoolDsl { get; } = false;
 
 		protected override bool Conditionless => BoolQuery.IsConditionless(this);
-		IEnumerable<QueryContainer> IBoolQuery.Must { get; set; }
-		IEnumerable<QueryContainer> IBoolQuery.MustNot { get; set; }
-		IEnumerable<QueryContainer> IBoolQuery.Should { get; set; }
-		IEnumerable<QueryContainer> IBoolQuery.Filter { get; set; }
+		private IList<QueryContainer> _must;
+		private IList<QueryContainer> _mustNot;
+		private IList<QueryContainer> _should;
+		private IList<QueryContainer> _filter;
+		IEnumerable<QueryContainer> IBoolQuery.Must {
+			get { return _must; }
+			set { _must = value.AsInstanceOrToListOrNull(); }
+		}
+		IEnumerable<QueryContainer> IBoolQuery.MustNot {
+			get { return _mustNot; }
+			set { _mustNot = value.AsInstanceOrToListOrNull(); }
+		}
+		IEnumerable<QueryContainer> IBoolQuery.Should {
+			get { return _should; }
+			set { _should = value.AsInstanceOrToListOrNull(); }
+		}
+		IEnumerable<QueryContainer> IBoolQuery.Filter {
+			get { return _filter; }
+			set { _filter = value.AsInstanceOrToListOrNull(); }
+		}
 		MinimumShouldMatch IBoolQuery.MinimumShouldMatch { get; set; }
 		bool? IBoolQuery.DisableCoord { get; set; }
 

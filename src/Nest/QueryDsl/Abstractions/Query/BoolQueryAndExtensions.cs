@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Nest
 {
+	using Containers = System.Collections.Generic.List<QueryContainer>;
 	internal static class BoolQueryAndExtensions
 	{
 		internal static QueryContainer CombineAsMust(this QueryContainer leftContainer, QueryContainer rightContainer)
@@ -14,7 +15,7 @@ namespace Nest
 
 			//neither side is a bool, no special handling needed wrap in a bool must
 			if (leftBool == null && rightBool == null)
-				return CreateMustContainer(new[] { leftContainer, rightContainer }, null, null);
+				return CreateMustContainer(new Containers { leftContainer, rightContainer }, null);
 
 			else if (TryHandleBoolsWithOnlyShouldClauses(leftContainer, rightContainer, leftBool, rightBool, out c)) return c;
 			else if (TryHandleUnmergableBools(leftContainer, rightContainer, leftBool, rightBool, out c)) return c;
@@ -25,7 +26,8 @@ namespace Nest
 			var filterClauses = OrphanFilters(leftContainer).EagerConcat(OrphanFilters(rightContainer));
 			var mustClauses = OrphanMusts(leftContainer).EagerConcat(OrphanMusts(rightContainer));
 
-			var container = CreateMustContainer(mustClauses, mustNotClauses, filterClauses);
+			var reuseContainer = ContainerContainingBool(leftContainer, rightContainer);
+			var container = CreateMustContainer(mustClauses, mustNotClauses, filterClauses, reuseContainer);
 			return container;
 		}
 
@@ -43,7 +45,7 @@ namespace Nest
 			if (!leftCantMergeAnd && !rightCantMergeAnd) return false;
 
 			if (leftCantMergeAnd && rightCantMergeAnd)
-				c = CreateMustContainer(new[] { leftContainer, rightContainer }, null, null);
+				c = CreateMustContainer(leftContainer, rightContainer);
 			//right can't merge but left can and is a bool so we add left to the must clause of right
 			else if (!leftCantMergeAnd && leftBool != null && rightCantMergeAnd)
 			{
@@ -52,7 +54,7 @@ namespace Nest
 			}
 			//right can't merge and left is not a bool, we forcefully create a wrapped must container
 			else if (!leftCantMergeAnd && leftBool == null && rightCantMergeAnd)
-				c = CreateMustContainer(new[] { leftContainer, rightContainer }, null, null);
+				c = CreateMustContainer(leftContainer, rightContainer);
 			//left can't merge but right can and is a bool so we add left to the must clause of right
 			else if (leftCantMergeAnd && !rightCantMergeAnd && rightBool != null)
 			{
@@ -61,7 +63,7 @@ namespace Nest
 			}
 			//left can't merge and right is not a bool, we forcefully create a wrapped must container
 			else if (leftCantMergeAnd && !rightCantMergeAnd && rightBool == null)
-				c = CreateMustContainer(new[] { leftContainer, rightContainer }, null, null);
+				c = CreateMustContainer(new Containers { leftContainer, rightContainer }, null);
 			return c != null;
 		}
 
@@ -91,30 +93,63 @@ namespace Nest
 				}
 				else
 				{
-					c = CreateMustContainer(new[] { leftContainer, rightContainer }, null, null);
+					//c = CreateMustContainer(leftContainer, rightContainer);
+					c = CreateMustContainer(new Containers { leftContainer, rightContainer }, null);
 					c.HoldsOnlyShouldMusts = rightHasOnlyShoulds && leftHasOnlyShoulds;
 				}
 			}
 			return c != null;
 		}
 
+		private static QueryContainer CreateMustContainer(QueryContainer left, QueryContainer right)
+		{
+			return CreateMustContainer(new Containers { left, right }, ContainerContainingBool(left, right));
+		}
+
+		private static QueryContainer ContainerContainingBool(QueryContainer left, QueryContainer right)
+		{
+			var l = (left?.Self().Bool?.CreatedByBoolDsl).GetValueOrDefault();
+			var r = (right?.Self().Bool?.CreatedByBoolDsl).GetValueOrDefault();
+			return l ? left : r ? right : null;
+		}
+
+		private static QueryContainer CreateMustContainer(List<QueryContainer> mustClauses, QueryContainer reuse)
+		{
+			var existingBool = reuse?.Self().Bool;
+			if (existingBool != null && existingBool.CreatedByBoolDsl)
+			{
+				existingBool.Must = mustClauses.ToListOrNullIfEmpty();
+				return reuse;
+			}
+			return new QueryContainer(new BoolQuery(createdByBoolDsl: true) { Must = mustClauses.ToListOrNullIfEmpty() });
+		}
+
 		private static QueryContainer CreateMustContainer(
-			IList<QueryContainer> mustClauses,
-			IEnumerable<QueryContainer> mustNotClauses,
-			IEnumerable<QueryContainer> filters
+			List<QueryContainer> mustClauses,
+			List<QueryContainer> mustNotClauses,
+			List<QueryContainer> filters,
+			QueryContainer reuse
 			)
 		{
-			return new BoolQuery
+			var existingBool = reuse?.Self().Bool;
+			if (existingBool != null && existingBool.CreatedByBoolDsl)
+			{
+				existingBool.Must = mustClauses.ToListOrNullIfEmpty();
+				existingBool.MustNot = mustNotClauses.ToListOrNullIfEmpty();
+				existingBool.Filter = filters.ToListOrNullIfEmpty();
+				return reuse;
+			}
+			return new QueryContainer(new BoolQuery
 			{
 				Must = mustClauses.ToListOrNullIfEmpty(),
 				MustNot = mustNotClauses.ToListOrNullIfEmpty(),
 				Filter = filters.ToListOrNullIfEmpty()
-			};
+			});
 		}
 
-
 		private static bool CanMergeAnd(this IBoolQuery boolQuery) =>
-			boolQuery != null && boolQuery.IsWritable && !boolQuery.Locked && !boolQuery.Should.HasAny();
+			//boolQuery != null && boolQuery.IsWritable && !boolQuery.Locked && !boolQuery.Should.HasAny();
+			boolQuery != null && !boolQuery.Locked && !boolQuery.Should.HasAny();
 
 		private static bool CanMergeAnd(this IQueryContainer container) => container.Bool.CanMergeAnd();
 
@@ -122,10 +157,10 @@ namespace Nest
 		{
 			var lBoolQuery = container.Self().Bool;
 			if (lBoolQuery == null) return new[] { container };
-			return lBoolQuery?.Must?.ToList();
+			return lBoolQuery?.Must?.AsInstanceOrToListOrNull();
 		}
-		private static IEnumerable<QueryContainer> OrphanMustNots(IQueryContainer container) => container.Bool?.MustNot?.ToList();
+		private static IEnumerable<QueryContainer> OrphanMustNots(IQueryContainer container) => container.Bool?.MustNot?.AsInstanceOrToListOrNull();
 
-		private static IEnumerable<QueryContainer> OrphanFilters(IQueryContainer container) => container.Bool?.Filter?.ToList();
+		private static IEnumerable<QueryContainer> OrphanFilters(IQueryContainer container) => container.Bool?.Filter?.AsInstanceOrToListOrNull();
 	}
 }

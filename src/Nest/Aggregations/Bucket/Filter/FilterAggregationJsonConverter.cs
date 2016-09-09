@@ -14,7 +14,7 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var f = value as IFilterAggregation;
-			if (f == null || f.Filter == null)
+			if (f == null || f.Filter == null || !f.Filter.IsWritable)
 			{
 				writer.WriteStartObject();
 				writer.WriteEndObject();
@@ -36,4 +36,3 @@ namespace Nest
 	}
 
 }
-	
