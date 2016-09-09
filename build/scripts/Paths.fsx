@@ -146,7 +146,7 @@ module Tooling =
             ) timeout
         code
 
-    let private defaultTimeout = TimeSpan.FromMinutes (if isLocalBuild then 5.0 else 15.0)
+    let private defaultTimeout = TimeSpan.FromMinutes 15.0
 
     let execProcess proc arguments =
         let exitCode = execProcessWithTimeout proc arguments defaultTimeout
