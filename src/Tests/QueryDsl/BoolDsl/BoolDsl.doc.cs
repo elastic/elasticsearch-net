@@ -360,12 +360,12 @@ namespace Tests.QueryDsl.BoolDsl
 		 * As we can see while still fast its causes a lot of allocations to happen because on each iteration we need to re evaluate
 		 * the mergability of our bool query.
 		 *
-		 * [options="header"]
+		 *....
 		 * |===
-		 * |    Method|    Method|     Median|     StdDev|     Median|     StdDev|     Gen 0|  Gen 1|  Gen 2|  Bytes Allocated/Op
-		 * |  Allocate|  Allocate|  1.8507 ms|  0.1878 ms|  1.8507 ms|  0.1878 ms|  1,793.00|  21.00|      -|        1.872.672,28
+		 * |    Method|     Median|     StdDev|       Gen 0|  Gen 1|  Gen 2|  Bytes Allocated/Op
+		 * |  Allocate|  1.8507 ms|  0.1878 ms|    1,793.00|  21.00|      -|        1.872.672,28
 		 * |===
-		 *
+		 *....
 		 * Since we already know the shape of our bool query in advance its much much faster to do this instead:
 		 *
 		 */
@@ -382,13 +382,15 @@ namespace Tests.QueryDsl.BoolDsl
 		/**
 		 *  The drop both in performance and allocations is tremendous!
 		 *
-		 * [options="header"]
+		 *....
 		 * |===
-	 	 * |    Method|    Method|      Median|     StdDev|      Median|     StdDev|   Gen 0|  Gen 1|  Gen 2|  Bytes Allocated/Op
-		 * |  Allocate|  Allocate|  31.4610 us|  0.9495 us|  31.4610 us|  0.9495 us|  439.00|      -|      -|            7.912,95
+	 	 * |    Method|      Median|     StdDev|   Gen 0|  Gen 1|  Gen 2|  Bytes Allocated/Op
+		 * |  Allocate|  31.4610 us|  0.9495 us|  439.00|      -|      -|            7.912,95
 		 * |===
+		 *....
 		 *
 		 */
+		private static void Dummy() { }
 
 		//hide
 		private void Assert(

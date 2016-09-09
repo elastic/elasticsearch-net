@@ -69,12 +69,6 @@ namespace Nest
 
 			queryContainer = leftWritable ? leftContainer : rightContainer;
 			return !leftWritable || !rightWritable;
-
-
-			var combined = new[] { leftContainer, rightContainer };
-			var anyEmpty = combined.Any(q => q == null || !q.IsWritable);
-			queryContainer = anyEmpty ? combined.FirstOrDefault(q => q != null && q.IsWritable) : null;
-			return anyEmpty;
 		}
 
 		public static QueryContainer operator !(QueryContainer queryContainer) => queryContainer == null || (!queryContainer.IsWritable)
