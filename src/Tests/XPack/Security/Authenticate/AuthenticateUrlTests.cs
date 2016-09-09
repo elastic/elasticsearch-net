@@ -9,7 +9,7 @@ namespace Tests.XPack.Security.Authenticate
 	{
 		[U] public async Task Urls()
 		{
-			await GET("/_xpack/security/authenticate")
+			await GET("/_xpack/security/_authenticate")
 				.Fluent(c => c.Authenticate())
 				.Request(c => c.Authenticate(new AuthenticateRequest()))
 				.FluentAsync(c => c.AuthenticateAsync())
