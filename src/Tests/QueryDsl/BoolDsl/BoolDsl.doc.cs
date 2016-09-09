@@ -342,12 +342,8 @@ namespace Tests.QueryDsl.BoolDsl
 		*
 		* You *can* use bitwise assignments in a loop to combine many queries into a bigger bool.
 		*
-		* NOTE: This needs NEST 2.4.6 or higher. Prior versions did not do a good job flattening the result in the most optimal way and could cause a stackoverflow when doing ~2000 iterations In later version you can combine as many as you'd like but please keep mind of the following performance recommendations
+		* In this example we are creating a single bool query with a 1000 must clauses using the `&=` assign operator.
 		*/
-
-		/**
-		 * In this example we are creating a single bool query with a 1000 must clauses using the `&=` assign operator.
-		 */
 		private static void SlowCombine()
 		{
 			var c = new QueryContainer();
@@ -357,15 +353,16 @@ namespace Tests.QueryDsl.BoolDsl
 				c &= q;
 		}
 		/**
-		 * As we can see while still fast its causes a lot of allocations to happen because on each iteration we need to re evaluate
-		 * the mergability of our bool query.
+		 *....
+		 * |===
+		 * |     Median|     StdDev|       Gen 0|  Gen 1|  Gen 2|  Bytes Allocated/Op
+		 * |  1.8507 ms|  0.1878 ms|    1,793.00|  21.00|      -|        1.872.672,28
+		 * |===
+		 *....
 		 *
-		 *....
-		 * |===
-		 * |    Method|     Median|     StdDev|       Gen 0|  Gen 1|  Gen 2|  Bytes Allocated/Op
-		 * |  Allocate|  1.8507 ms|  0.1878 ms|    1,793.00|  21.00|      -|        1.872.672,28
-		 * |===
-		 *....
+		 * As you can see while still fast its causes a lot of allocations to happen because with each iteration
+		 * we need to re evaluate the mergability of our bool query.
+		 *
 		 * Since we already know the shape of our bool query in advance its much much faster to do this instead:
 		 *
 		 */
@@ -380,15 +377,21 @@ namespace Tests.QueryDsl.BoolDsl
 			};
 		}
 		/**
+		 *....
+		 * |===
+	 	 * |      Median|     StdDev|   Gen 0|  Gen 1|  Gen 2|  Bytes Allocated/Op
+		 * |  31.4610 us|  0.9495 us|  439.00|      -|      -|            7.912,95
+		 * |===
+		 *....
+		 *
 		 *  The drop both in performance and allocations is tremendous!
 		 *
-		 *....
-		 * |===
-	 	 * |    Method|      Median|     StdDev|   Gen 0|  Gen 1|  Gen 2|  Bytes Allocated/Op
-		 * |  Allocate|  31.4610 us|  0.9495 us|  439.00|      -|      -|            7.912,95
-		 * |===
-		 *....
-		 *
+		 * NOTE: If you assigning many bool queries prior to NEST 2.4.6 into a bigger bool using an assignment loop
+		 * the client did not do a good job flattening the result in the most optimal way and could
+		 * cause a stackoverflow when doing ~2000 iterations. This only applied to bitwise assigning many `boolean` queries.
+		 * Other queries behave fine in earlier versions. Since NEST 2.4.6 you can combine as many bool queries
+		 * as you'd like this way too.
+		 * See https://github.com/elastic/elasticsearch-net/pull/2235[PR #2335 on github for more information]
 		 */
 		private static void Dummy() { }
 
