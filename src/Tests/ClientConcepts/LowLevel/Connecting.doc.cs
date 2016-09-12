@@ -315,13 +315,15 @@ namespace Tests.ClientConcepts.LowLevel
 		 *
 		 * NOTE: this is subject to change in the next major release. NEST relies heavily on stateful deserializers (that have access to the original
 		 * request) for specialized features such a covariant search results. This requirement leaks into this abstraction.
+		 *
+		 *
 		 */
 		public class MyJsonNetSerializer : JsonNetSerializer
 		{
 			public MyJsonNetSerializer(IConnectionSettingsValues settings)
-				: base(settings, (s, csv) => s.PreserveReferencesHandling = PreserveReferencesHandling.All) //<1> Call this constructor if you only need access to `JsonSerializerSettings` without state
+				: base(settings, (s, csv) => s.PreserveReferencesHandling = PreserveReferencesHandling.All) //<1> Call this constructor if you only need access to `JsonSerializerSettings` without local state
 			{
-				OverwriteDefaultSerializers((s, cvs) => ModifySerializerSettings(s)); //<2> Call OverwriteDefaultSerializers if you need access to `JsonSerializerSettings` with state
+				OverwriteDefaultSerializers((s, cvs) => ModifySerializerSettings(s)); //<2> Call OverwriteDefaultSerializers if you need access to `JsonSerializerSettings` with local state
 			}
 
 			public int CallToModify { get; set; } = 0;

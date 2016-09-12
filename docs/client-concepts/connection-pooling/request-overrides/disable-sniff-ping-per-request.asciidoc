@@ -64,9 +64,7 @@ new ClientCall()
 );
 ----
 <1> disable sniffing
-
 <2> first call is a successful ping
-
 <3> sniff on startup call happens here, on the second call
 
 Now, let's disable pinging on the request 
@@ -89,7 +87,6 @@ audit = await audit.TraceCall(
 );
 ----
 <1> disable ping
-
 <2> No ping after sniffing
 
 Finally, let's demonstrate disabling both sniff and ping on the request 
@@ -111,6 +108,5 @@ audit = await audit.TraceCall(
 );
 ----
 <1> diable ping and sniff
-
 <2> no ping or sniff before the call
 
