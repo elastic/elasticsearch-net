@@ -598,10 +598,6 @@ var descriptor = new CreateIndexDescriptor("myindex")
         )
         .Map<EmployeeWithAttributes>(m => m
             .AutoMap()
-            .TtlField(ttl => ttl
-                .Enabled()
-                .Default("10m")
-            )
             .Properties(ps => ps
                 .Text(s => s
                     .Name(e => e.FirstName)
@@ -654,11 +650,6 @@ var expected = new
         },
         employee = new
         {
-            _ttl = new
-            {
-                @default = "10m",
-                enabled = true
-            },
             properties = new
             {
                 birthday = new

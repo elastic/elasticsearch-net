@@ -318,16 +318,12 @@ namespace Tests.ClientConcepts.LowLevel
 		public class MyJsonNetSerializer : JsonNetSerializer
 		{
 			public MyJsonNetSerializer(IConnectionSettingsValues settings)
-				: base(settings, (s, csv) => s.PreserveReferencesHandling = PreserveReferencesHandling.All) //<1> Call this constructor if you only need access to `JsonSerializerSettings` without local state
+				: base(settings, (s, csv) => s.PreserveReferencesHandling = PreserveReferencesHandling.All) //<1> Call this constructor if you only need access to `JsonSerializerSettings` without local state (properties on MyJsonNetSerializer)
 			{
-				OverwriteDefaultSerializers((s, cvs) => ModifySerializerSettings(s)); //<2> Call OverwriteDefaultSerializers if you need access to `JsonSerializerSettings` with local state
+				OverwriteDefaultSerializers((s, cvs) => s.PreserveReferencesHandling = PreserveReferencesHandling.All); //<2> Call OverwriteDefaultSerializers if you need access to `JsonSerializerSettings` with local state
 			}
 
 			public int CallToModify { get; set; } = 0;
-
-#pragma warning disable CS0672 // Member overrides obsolete member
-			protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings) => ++CallToModify; //<1> Override ModifyJsonSerializerSettings if you need access to `JsonSerializerSettings`
-#pragma warning restore CS0672 // Member overrides obsolete member
 
 			public int CallToContractConverter { get; set; } = 0;
 
