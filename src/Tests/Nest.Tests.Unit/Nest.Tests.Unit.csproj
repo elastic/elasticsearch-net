@@ -406,6 +406,7 @@
     <Compile Include="QueryParsers\Queries\SpanOrQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\SpanTermQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\TermQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\FieldMaskingSpanQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\TermsQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\WildCardQueryTests.cs" />
     <Compile Include="QueryParsers\Visitor\DslPrettyPrintVisitor.cs" />

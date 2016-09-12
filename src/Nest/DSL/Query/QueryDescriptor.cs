@@ -887,6 +887,27 @@ namespace Nest
 		}
 
 		/// <summary>
+		/// Wrapper to allow span queries participate in composite single-field span queries by 
+		/// 'lying' about their search field. The span field masking query maps to Lucene `SpanFieldMaskingQuery`
+		/// 
+		/// This can be used to support queries like `span-near` or `span-or` across different fields, which is not ordinarily permitted.
+		/// Span field masking query is invaluable in conjunction with *multi-fields* when same content is 
+		/// indexed with multiple analyzers. For instance we could index a field with the standard analyzer 
+		/// which breaks text up into words, and again with the english analyzer which stems words into their root 
+		/// form. That will add more precision to queries. Wrap a multi term query (one of fuzzy, prefix, term range or regexp query) 
+		/// as a span query so it can be nested.
+		/// </summary>
+		public QueryContainer SpanFieldMasking(Action<SpanFieldMaskingQueryDescriptor<T>> selector)
+		{
+			selector.ThrowIfNull("selector");
+			var span = new SpanFieldMaskingQueryDescriptor<T>();
+			selector(span);
+
+			return this.New(span, q => q.SpanFieldMasking= span);
+		}
+
+
+		/// <summary>
 		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
 		/// computation derived from other field values in the doc (numeric ones) using script or boost expression
 		/// </summary>
