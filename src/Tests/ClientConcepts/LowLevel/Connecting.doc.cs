@@ -296,15 +296,18 @@ namespace Tests.ClientConcepts.LowLevel
 		*/
 		public class MyJsonNetSerializer : JsonNetSerializer
 		{
-			public MyJsonNetSerializer(IConnectionSettingsValues settings) : base(settings) { }
+			public MyJsonNetSerializer(IConnectionSettingsValues settings) : base(settings, (s, csv) => s.PreserveReferencesHandling = PreserveReferencesHandling.All) //<1> Call this constructor if you only need access to `JsonSerializerSettings` without state
+			{
+				OverwriteDefaultSerializers((s, cvs) => ModifySerializerSettings(s)); //<2> Call OverwriteDefaultSerializers if you need access to `JsonSerializerSettings` with state
+			}
 
 			public int CallToModify { get; set; } = 0;
 
-			protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings) => ++CallToModify; //<1> Override ModifyJsonSerializerSettings if you need access to `JsonSerializerSettings`
+			private void ModifySerializerSettings(JsonSerializerSettings settings) => ++CallToModify;
 
 			public int CallToContractConverter { get; set; } = 0;
 
-			protected override IList<Func<Type, JsonConverter>> ContractConverters => new List<Func<Type, JsonConverter>> //<2> You can inject contract resolved converters by implementing the ContractConverters property. This can be much faster then registering them on `JsonSerializerSettings.Converters`
+			protected override IList<Func<Type, JsonConverter>> ContractConverters => new List<Func<Type, JsonConverter>> //<3> You can inject contract resolved converters by implementing the ContractConverters property. This can be much faster then registering them on `JsonSerializerSettings.Converters`
 			{
 				t => {
 					CallToContractConverter++;
