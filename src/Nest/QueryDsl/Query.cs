@@ -171,12 +171,6 @@ namespace Nest
 		public static QueryContainer SpanFieldMasking(Func<SpanFieldMaskingQueryDescriptor<T>, ISpanFieldMaskingQuery> selector) =>
 			new QueryContainerDescriptor<T>().SpanFieldMasking(selector);
 
-#pragma warning disable 618
-		[Obsolete("Scheduled to be removed in 5.0.  Setting Strict() at the container level is a noop and must be set on each individual query.")]
-		public static QueryContainerDescriptor<T> Strict(bool strict = true) =>
-			new QueryContainerDescriptor<T>().Strict(strict);
-#pragma warning restore 618
-
 		public static QueryContainer Template(Func<TemplateQueryDescriptor<T>, ITemplateQuery> selector) =>
 			new QueryContainerDescriptor<T>().Template(selector);
 
