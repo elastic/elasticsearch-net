@@ -13,21 +13,21 @@ namespace Nest
 			VisitQuery(qd.MoreLikeThis, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.MultiMatch, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.CommonTerms, visitor, (v, d) => v.Visit(d));
-			VisitQuery(qd.Fuzzy, visitor, (v, d) => 
+			VisitQuery(qd.Fuzzy, visitor, (v, d) =>
 			{
 				v.Visit(d);
 				VisitQuery(d as IFuzzyStringQuery, visitor, (vv, dd) => v.Visit(dd));
 				VisitQuery(d as IFuzzyNumericQuery, visitor, (vv, dd) => v.Visit(dd));
 				VisitQuery(d as IFuzzyDateQuery, visitor, (vv, dd) => v.Visit(dd));
 			});
-			VisitQuery(qd.Range, visitor, (v, d) => 
+			VisitQuery(qd.Range, visitor, (v, d) =>
 			{
 				v.Visit(d);
 				VisitQuery(d as IDateRangeQuery, visitor, (vv, dd) => v.Visit(dd));
 				VisitQuery(d as INumericRangeQuery, visitor, (vv, dd) => v.Visit(dd));
 				VisitQuery(d as ITermRangeQuery, visitor, (vv, dd) => v.Visit(dd));
 			});
-			VisitQuery(qd.GeoShape, visitor, (v, d) => 
+			VisitQuery(qd.GeoShape, visitor, (v, d) =>
 			{
 				v.Visit(d);
 				VisitQuery(d as IGeoIndexedShapeQuery, visitor, (vv, dd) => v.Visit(dd));
@@ -250,6 +250,11 @@ namespace Nest
 				Accept(visitor, d.Big);
 				Accept(visitor, d.Little);
 			});
+			VisitSpanSubQuery(qd.SpanFieldMasking, visitor, (v, d) =>
+			{
+				v.Visit(d);
+				Accept(visitor, d.Query);
+			});
 		}
 
 		private static void VisitQuery<T>(T qd, IQueryVisitor visitor, Action<IQueryVisitor, T> scoped)
@@ -269,7 +274,7 @@ namespace Nest
 			if (qd == null) return;
 			VisitQuery(qd, visitor, (v, d) =>
 			{
-				visitor.Visit(qd as ISpanSubQuery);
+				visitor.Visit(qd);
 				scoped(v, d);
 			});
 		}

@@ -1024,6 +1024,7 @@
     <Compile Include="QueryDsl\Operator.cs" />
     <Compile Include="QueryDsl\Query.cs" />
     <Compile Include="QueryDsl\Span\Containing\SpanContainingQuery.cs" />
+    <Compile Include="QueryDsl\Span\FieldMasking\SpanFieldMaskingQuery.cs" />
     <Compile Include="QueryDsl\Span\First\SpanFirstQuery.cs" />
     <Compile Include="QueryDsl\Span\ISpanSubQuery.cs" />
     <Compile Include="QueryDsl\Span\MultiTerm\SpanMultiTermQuery.cs" />

@@ -142,6 +142,8 @@ namespace Nest
 
 		public virtual void Visit(ISpanTermQuery query) => Write("span_term");
 
+		public virtual void Visit(ISpanFieldMaskingQuery query) => Write("field_masking_span");
+
 		public virtual void Visit(ITermQuery query) => Write("term", query.Field);
 
 		public virtual void Visit(IWildcardQuery query) => Write("wildcard");
