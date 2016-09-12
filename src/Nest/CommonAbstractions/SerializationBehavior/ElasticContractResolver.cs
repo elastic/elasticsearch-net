@@ -36,9 +36,9 @@ namespace Nest
 		{
 			// cache contracts per connection settings
 			return this.ConnectionSettings.Inferrer.Contracts.GetOrAdd(objectType, o =>
-			{				
+			{
 				var contract = base.CreateContract(o);
-				
+
 				if (typeof(IDictionary).IsAssignableFrom(o) && !typeof(IIsADictionary).IsAssignableFrom(o))
 					contract.Converter = new VerbatimDictionaryKeysJsonConverter();
 				if (typeof(IEnumerable<QueryContainer>).IsAssignableFrom(o))
@@ -46,12 +46,12 @@ namespace Nest
 				else if (o == typeof(ServerError))
 					contract.Converter = new ServerErrorJsonConverter();
 				else if (o == typeof(DateTime) ||
-				         o == typeof(DateTime?) ||
-				         o == typeof(DateTimeOffset) ||
-				         o == typeof(DateTimeOffset?))
+						 o == typeof(DateTime?) ||
+						 o == typeof(DateTimeOffset) ||
+						 o == typeof(DateTimeOffset?))
 					contract.Converter = new IsoDateTimeConverter();
 				else if (o == typeof(TimeSpan) ||
-				         o == typeof(TimeSpan?))
+						 o == typeof(TimeSpan?))
 					contract.Converter = new TimeSpanConverter();
 
 				if (this._contractConverters.HasAny())

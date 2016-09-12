@@ -18,18 +18,24 @@ namespace Nest
 	public class SerializerFactory : ISerializerFactory
 	{
 		private Func<IConnectionSettingsValues, IElasticsearchSerializer> _serializerFactoryFunc;
+		private Action<JsonSerializerSettings, IConnectionSettingsValues> _settingsModifier;
 
 		public SerializerFactory()
 		{
 
 		}
-		public SerializerFactory(Func<IConnectionSettingsValues , IElasticsearchSerializer> serializerFactoryFunc)
+		public SerializerFactory(Func<IConnectionSettingsValues, IElasticsearchSerializer> serializerFactoryFunc) : this(serializerFactoryFunc, null) { }
+
+		public SerializerFactory(Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier) : this(null, settingsModifier) { }
+
+		public SerializerFactory(Func<IConnectionSettingsValues, IElasticsearchSerializer> serializerFactoryFunc, Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier)
 		{
 			this._serializerFactoryFunc = serializerFactoryFunc;
+			this._settingsModifier = settingsModifier;
 		}
 
 		public IElasticsearchSerializer Create(IConnectionSettingsValues settings) =>
-			this._serializerFactoryFunc?.Invoke(settings) ?? new JsonNetSerializer(settings);
+			this._serializerFactoryFunc?.Invoke(settings) ?? new JsonNetSerializer(settings, this._settingsModifier);
 
 		public IElasticsearchSerializer CreateStateful(IConnectionSettingsValues settings, JsonConverter converter) =>
 			new JsonNetSerializer(settings, converter);
