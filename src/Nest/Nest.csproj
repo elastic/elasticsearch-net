@@ -243,6 +243,7 @@
     <Compile Include="DSL\FieldStatsDescriptor.cs" />
     <Compile Include="DSL\Filter\IndicesFilterDescriptor.cs" />
     <Compile Include="Domain\DSL\NoMatchShortcut.cs" />
+    <Compile Include="DSL\Query\SpanFieldMaskingQueryDescriptor.cs" />
     <Compile Include="DSL\SyncedFlushDescriptor.cs" />
     <Compile Include="DSL\Query\Functions\WeightFunction.cs" />
     <Compile Include="DSL\Search\IGlobalInnerHit.cs" />

@@ -79,6 +79,8 @@ namespace Nest
 
 		ISpanMultiTermQuery IQueryContainer.SpanMultiTerm { get; set; }
 
+		ISpanFieldMaskingQuery IQueryContainer.SpanFieldMasking { get; set; }
+
 		ITopChildrenQuery IQueryContainer.TopChildren { get; set; }
 
 		INestedQuery IQueryContainer.Nested { get; set; }

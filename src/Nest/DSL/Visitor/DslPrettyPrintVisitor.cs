@@ -230,6 +230,11 @@ namespace Nest.DSL.Visitor
 			Write("span_term");
 		}
 
+        public virtual void Visit(ISpanFieldMaskingQuery query)
+		{
+			Write("field_masking_span");
+		}
+
 		public virtual void Visit(ITermQuery query)
 		{
 			Write("term", query.Field);
