@@ -1295,6 +1295,12 @@
     <Compile Include="XPack\Security\User\DeleteUser\ElasticClient-DeleteUser.cs" />
     <Compile Include="XPack\Security\User\DeleteUser\DeleteUserRequest.cs" />
     <Compile Include="XPack\Security\User\DeleteUser\DeleteUserResponse.cs" />
+    <Compile Include="XPack\Security\User\DisableUser\DisableUserRequest.cs" />
+    <Compile Include="XPack\Security\User\DisableUser\DisableUserResponse.cs" />
+    <Compile Include="XPack\Security\User\DisableUser\ElasticClient-DisableUser.cs" />
+    <Compile Include="XPack\Security\User\EnableUser\ElasticClient-EnableUser.cs" />
+    <Compile Include="XPack\Security\User\EnableUser\EnableUserRequest.cs" />
+    <Compile Include="XPack\Security\User\EnableUser\EnableUserResponse.cs" />
     <Compile Include="XPack\Security\User\GetUser\ElasticClient-GetUser.cs" />
     <Compile Include="XPack\Security\User\GetUser\GetUserResponse.cs" />
     <Compile Include="XPack\Security\User\GetUser\GetUserRequest.cs" />

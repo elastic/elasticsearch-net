@@ -3471,7 +3471,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityDeleteUser", p, new [] { DELETE }, "/_xpack/security/user/{username}");
 		}
 		
-		internal ElasticsearchResponse<T> XpackSecurityDisableUserDispatch<T>(IRequest<XpackSecurityDisableUserRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> XpackSecurityDisableUserDispatch<T>(IRequest<DisableUserRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3487,7 +3487,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityDisableUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_disable");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> XpackSecurityDisableUserDispatchAsync<T>(IRequest<XpackSecurityDisableUserRequestParameters> p , CancellationToken cancellationToken) where T : class
+		internal Task<ElasticsearchResponse<T>> XpackSecurityDisableUserDispatchAsync<T>(IRequest<DisableUserRequestParameters> p , CancellationToken cancellationToken) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3503,7 +3503,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityDisableUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_disable");
 		}
 		
-		internal ElasticsearchResponse<T> XpackSecurityEnableUserDispatch<T>(IRequest<XpackSecurityEnableUserRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> XpackSecurityEnableUserDispatch<T>(IRequest<EnableUserRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3519,7 +3519,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityEnableUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_enable");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> XpackSecurityEnableUserDispatchAsync<T>(IRequest<XpackSecurityEnableUserRequestParameters> p , CancellationToken cancellationToken) where T : class
+		internal Task<ElasticsearchResponse<T>> XpackSecurityEnableUserDispatchAsync<T>(IRequest<EnableUserRequestParameters> p , CancellationToken cancellationToken) where T : class
 		{
 			switch(p.HttpMethod)
 			{

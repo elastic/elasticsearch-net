@@ -8539,7 +8539,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="username">The username of the user to disable</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityDisableUser<T>(string username, Func<XpackSecurityDisableUserRequestParameters, XpackSecurityDisableUserRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackSecurityDisableUser<T>(string username, Func<DisableUserRequestParameters, DisableUserRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/security/user/{username.NotNull("username")}/_disable"), null, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/security/user/{username}/_disable
@@ -8553,7 +8553,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="username">The username of the user to disable</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityDisableUserAsync<T>(string username, Func<XpackSecurityDisableUserRequestParameters, XpackSecurityDisableUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackSecurityDisableUserAsync<T>(string username, Func<DisableUserRequestParameters, DisableUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/security/user/{username.NotNull("username")}/_disable"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/security/user/{username}/_disable
@@ -8567,7 +8567,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="username">The username of the user to disable</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityDisableUserPost<T>(string username, Func<XpackSecurityDisableUserRequestParameters, XpackSecurityDisableUserRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackSecurityDisableUserPost<T>(string username, Func<DisableUserRequestParameters, DisableUserRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/security/user/{username.NotNull("username")}/_disable"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/security/user/{username}/_disable
@@ -8581,7 +8581,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="username">The username of the user to disable</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityDisableUserPostAsync<T>(string username, Func<XpackSecurityDisableUserRequestParameters, XpackSecurityDisableUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackSecurityDisableUserPostAsync<T>(string username, Func<DisableUserRequestParameters, DisableUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/security/user/{username.NotNull("username")}/_disable"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/security/user/{username}/_enable
@@ -8595,7 +8595,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="username">The username of the user to enable</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityEnableUser<T>(string username, Func<XpackSecurityEnableUserRequestParameters, XpackSecurityEnableUserRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackSecurityEnableUser<T>(string username, Func<EnableUserRequestParameters, EnableUserRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/security/user/{username.NotNull("username")}/_enable"), null, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/security/user/{username}/_enable
@@ -8609,7 +8609,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="username">The username of the user to enable</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityEnableUserAsync<T>(string username, Func<XpackSecurityEnableUserRequestParameters, XpackSecurityEnableUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackSecurityEnableUserAsync<T>(string username, Func<EnableUserRequestParameters, EnableUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/security/user/{username.NotNull("username")}/_enable"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/security/user/{username}/_enable
@@ -8623,7 +8623,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="username">The username of the user to enable</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityEnableUserPost<T>(string username, Func<XpackSecurityEnableUserRequestParameters, XpackSecurityEnableUserRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackSecurityEnableUserPost<T>(string username, Func<EnableUserRequestParameters, EnableUserRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/security/user/{username.NotNull("username")}/_enable"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/security/user/{username}/_enable
@@ -8637,7 +8637,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="username">The username of the user to enable</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityEnableUserPostAsync<T>(string username, Func<XpackSecurityEnableUserRequestParameters, XpackSecurityEnableUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackSecurityEnableUserPostAsync<T>(string username, Func<EnableUserRequestParameters, EnableUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/security/user/{username.NotNull("username")}/_enable"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/security/role/{name}

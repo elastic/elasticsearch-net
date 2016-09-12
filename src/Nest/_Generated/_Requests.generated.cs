@@ -2340,6 +2340,32 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDisableUserRequest : IRequest<DisableUserRequestParameters> 
+	{
+		Name Username { get; }
+	 } 
+	///<summary>Request parameters for XpackSecurityDisableUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-disable-user.html</pre></summary>
+	public partial class DisableUserRequest  : PlainRequestBase<DisableUserRequestParameters>, IDisableUserRequest
+	{
+		protected IDisableUserRequest Self => this;
+		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+			/// <summary>/_xpack/security/user/{username}/_disable</summary>
+///<param name="username">Optional, accepts null</param>
+		public DisableUserRequest(Name username) : base(r=>r.Optional("username", username)){}
+		
+
+			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDocumentExistsRequest : IRequest<DocumentExistsRequestParameters> 
 	{
 		Id Id { get; }
@@ -2416,6 +2442,32 @@ namespace Nest
 		
 		///<summary>Specific routing value</summary>
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IEnableUserRequest : IRequest<EnableUserRequestParameters> 
+	{
+		Name Username { get; }
+	 } 
+	///<summary>Request parameters for XpackSecurityEnableUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-enable-user.html</pre></summary>
+	public partial class EnableUserRequest  : PlainRequestBase<EnableUserRequestParameters>, IEnableUserRequest
+	{
+		protected IEnableUserRequest Self => this;
+		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+			/// <summary>/_xpack/security/user/{username}/_enable</summary>
+///<param name="username">Optional, accepts null</param>
+		public EnableUserRequest(Name username) : base(r=>r.Optional("username", username)){}
+		
+
+			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -6367,61 +6419,5 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IXpackSecurityDisableUserRequest : IRequest<XpackSecurityDisableUserRequestParameters> 
-	{
-		Name Username { get; }
-	 } 
-	///<summary>Request parameters for XpackSecurityDisableUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-disable-user.html</pre></summary>
-	public partial class XpackSecurityDisableUserRequest  : PlainRequestBase<XpackSecurityDisableUserRequestParameters>, IXpackSecurityDisableUserRequest
-	{
-		protected IXpackSecurityDisableUserRequest Self => this;
-		Name IXpackSecurityDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
-			/// <summary>/_xpack/security/user/{username}/_disable</summary>
-///<param name="username">Optional, accepts null</param>
-		public XpackSecurityDisableUserRequest(Name username) : base(r=>r.Optional("username", username)){}
-		
-
-			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IXpackSecurityEnableUserRequest : IRequest<XpackSecurityEnableUserRequestParameters> 
-	{
-		Name Username { get; }
-	 } 
-	///<summary>Request parameters for XpackSecurityEnableUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-enable-user.html</pre></summary>
-	public partial class XpackSecurityEnableUserRequest  : PlainRequestBase<XpackSecurityEnableUserRequestParameters>, IXpackSecurityEnableUserRequest
-	{
-		protected IXpackSecurityEnableUserRequest Self => this;
-		Name IXpackSecurityEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
-			/// <summary>/_xpack/security/user/{username}/_enable</summary>
-///<param name="username">Optional, accepts null</param>
-		public XpackSecurityEnableUserRequest(Name username) : base(r=>r.Optional("username", username)){}
-		
-
-			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
 }
  

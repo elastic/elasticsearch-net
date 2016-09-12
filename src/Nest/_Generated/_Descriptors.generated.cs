@@ -5188,54 +5188,48 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for XpackSecurityDisableUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-disable-user.html</pre></summary>
-	public partial class XpackSecurityDisableUserDescriptor  : RequestDescriptorBase<XpackSecurityDisableUserDescriptor,XpackSecurityDisableUserRequestParameters, IXpackSecurityDisableUserRequest>, IXpackSecurityDisableUserRequest
+	public partial class DisableUserDescriptor  : RequestDescriptorBase<DisableUserDescriptor,DisableUserRequestParameters, IDisableUserRequest>, IDisableUserRequest
 	{ 
-		Name IXpackSecurityDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 			/// <summary>/_xpack/security/user/{username}/_disable</summary>
-		public XpackSecurityDisableUserDescriptor() : base(){}
+		public DisableUserDescriptor() : base(){}
 		
 
 			///<summary>The username of the user to disable</summary>
-		public XpackSecurityDisableUserDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
+		public DisableUserDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
 
 	
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public XpackSecurityDisableUserDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
+		public DisableUserDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
 		///<summary>The URL-encoded request definition</summary>
-		public XpackSecurityDisableUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DisableUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public XpackSecurityDisableUserDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public DisableUserDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityEnableUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-enable-user.html</pre></summary>
-	public partial class XpackSecurityEnableUserDescriptor  : RequestDescriptorBase<XpackSecurityEnableUserDescriptor,XpackSecurityEnableUserRequestParameters, IXpackSecurityEnableUserRequest>, IXpackSecurityEnableUserRequest
+	public partial class EnableUserDescriptor  : RequestDescriptorBase<EnableUserDescriptor,EnableUserRequestParameters, IEnableUserRequest>, IEnableUserRequest
 	{ 
-		Name IXpackSecurityEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 			/// <summary>/_xpack/security/user/{username}/_enable</summary>
-		public XpackSecurityEnableUserDescriptor() : base(){}
+		public EnableUserDescriptor() : base(){}
 		
 
 			///<summary>The username of the user to enable</summary>
-		public XpackSecurityEnableUserDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
+		public EnableUserDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
 
 	
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public XpackSecurityEnableUserDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
+		public EnableUserDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
 		///<summary>The URL-encoded request definition</summary>
-		public XpackSecurityEnableUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public EnableUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public XpackSecurityEnableUserDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public EnableUserDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

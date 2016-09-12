@@ -4967,20 +4967,20 @@ namespace Elasticsearch.Net
 	///https://www.elastic.co/guide/en/x-pack/master/security-api-disable-user.html
 	///</pre>
 	///</summary>
-	public class XpackSecurityDisableUserRequestParameters : FluentRequestParameters<XpackSecurityDisableUserRequestParameters> 
+	public class DisableUserRequestParameters : FluentRequestParameters<DisableUserRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public XpackSecurityDisableUserRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
+		public DisableUserRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
-		public XpackSecurityDisableUserRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public DisableUserRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public XpackSecurityDisableUserRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public DisableUserRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4989,20 +4989,20 @@ namespace Elasticsearch.Net
 	///https://www.elastic.co/guide/en/x-pack/master/security-api-enable-user.html
 	///</pre>
 	///</summary>
-	public class XpackSecurityEnableUserRequestParameters : FluentRequestParameters<XpackSecurityEnableUserRequestParameters> 
+	public class EnableUserRequestParameters : FluentRequestParameters<EnableUserRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public XpackSecurityEnableUserRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
+		public EnableUserRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
-		public XpackSecurityEnableUserRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public EnableUserRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public XpackSecurityEnableUserRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public EnableUserRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
