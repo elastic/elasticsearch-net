@@ -118,6 +118,9 @@ namespace Nest
 		[JsonProperty("span_multi")]
 		ISpanMultiTermQuery SpanMultiTerm { get; set; }
 
+		[JsonProperty("field_masking_span")]
+		ISpanFieldMaskingQuery SpanFieldMasking { get; set; }
+
 		[JsonProperty("nested")]
 		INestedQuery Nested { get; set; }
 

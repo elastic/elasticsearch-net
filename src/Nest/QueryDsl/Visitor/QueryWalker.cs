@@ -233,6 +233,11 @@ namespace Nest
 				Accept(visitor, d.Big);
 				Accept(visitor, d.Little);
 			});
+			VisitSpanSubQuery(qd.SpanFieldMasking, visitor, (v, d) =>
+			{
+				v.Visit(d);
+				Accept(visitor, d.Query);
+			});
 		}
 
 		private static void VisitQuery<T>(T qd, IQueryVisitor visitor, Action<IQueryVisitor, T> scoped)

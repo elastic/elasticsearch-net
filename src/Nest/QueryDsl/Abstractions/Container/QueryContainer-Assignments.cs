@@ -37,6 +37,7 @@ namespace Nest
 		private ISpanContainingQuery _spanContaining;
 		private ISpanWithinQuery _spanWithin;
 		private ISpanMultiTermQuery _spanMultiTerm;
+		private ISpanFieldMaskingQuery _spanFieldMasking;
 		private INestedQuery _nested;
 
 #pragma warning disable 618
@@ -101,6 +102,7 @@ namespace Nest
 		ISpanContainingQuery IQueryContainer.SpanContaining { get { return _spanContaining; } set { _spanContaining = Set(value); } }
 		ISpanWithinQuery IQueryContainer.SpanWithin { get { return _spanWithin; } set { _spanWithin = Set(value); } }
 		ISpanMultiTermQuery IQueryContainer.SpanMultiTerm { get { return _spanMultiTerm; } set { _spanMultiTerm = Set(value); } }
+		ISpanFieldMaskingQuery IQueryContainer.SpanFieldMasking { get { return _spanFieldMasking; } set { _spanFieldMasking = Set(value); } }
 		INestedQuery IQueryContainer.Nested { get { return _nested; } set { _nested = Set(value); } }
 #pragma warning disable 618
 		IIndicesQuery IQueryContainer.Indices { get { return _indices; } set { _indices = Set(value); } }

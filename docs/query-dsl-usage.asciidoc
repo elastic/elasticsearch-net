@@ -78,6 +78,8 @@ include::query-dsl/nest-specific/raw/raw-query-usage.asciidoc[]
 
 include::query-dsl/span/container/span-containing-query-usage.asciidoc[]
 
+include::query-dsl/span/field-masking/span-field-masking-usage.asciidoc[]
+
 include::query-dsl/span/first/span-first-query-usage.asciidoc[]
 
 include::query-dsl/span/multi-term/span-multi-term-query-usage.asciidoc[]

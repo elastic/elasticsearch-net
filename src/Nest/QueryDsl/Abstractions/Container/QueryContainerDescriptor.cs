@@ -448,6 +448,15 @@ namespace Nest
 			WrapInContainer(selector, (query, container) => container.SpanWithin = query);
 
 		/// <summary>
+		/// Wraps span queries to allow them to participate in composite single-field Span queries by 'lying' about their search field.
+		/// That is, the masked span query will function as normal, but the field points back to the set field of the query.
+		/// This can be used to support queries like SpanNearQuery or SpanOrQuery across different fields,
+		/// which is not ordinarily permitted.
+		/// </summary>
+		public QueryContainer SpanFieldMasking(Func<SpanFieldMaskingQueryDescriptor<T>, ISpanFieldMaskingQuery> selector) =>
+			WrapInContainer(selector, (query, container) => container.SpanFieldMasking = query);
+
+		/// <summary>
 		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a
 		/// computation derived from other field values in the doc (numeric ones) using script or boost expression
 		/// </summary>

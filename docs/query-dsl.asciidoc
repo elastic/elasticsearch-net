@@ -85,6 +85,8 @@ NEST exposes all of the query DSL endpoints available in Elasticsearch
 
 * <<span-containing-query-usage,Span Containing Query Usage>>
 
+* <<span-field-masking-usage,Span Field Masking Usage>>
+
 * <<span-first-query-usage,Span First Query Usage>>
 
 * <<span-multi-term-query-usage,Span Multi Term Query Usage>>
