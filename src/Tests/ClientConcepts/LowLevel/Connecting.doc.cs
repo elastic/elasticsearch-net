@@ -289,14 +289,37 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 #endif
 
-		/**=== Overriding default Json.NET behavior
+		/**=== Overriding Json.NET settings
 		*
 		* Overriding the default Json.NET behaviour in NEST is an expert behavior but if you need to get to the nitty gritty, this can be really useful.
-		* First, create a subclass of the `JsonNetSerializer`
 		*/
+
+		/**
+		 * The easiest way is to create an instance of `SerializerFactory` that allows you to register a modification callback
+		 * in the constructor
+		 */
+		public void EasyWay()
+		{
+			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			var connectionSettings = new ConnectionSettings(
+				pool,
+				new HttpConnection(),
+				new SerializerFactory((jsonSettings, nestSettings) => jsonSettings.PreserveReferencesHandling = PreserveReferencesHandling.All));
+
+			var client = new ElasticClient(connectionSettings);
+		}
+
+
+		/**
+		 * A more involved and explicit way would be to implement your own JsonNetSerializer subclass.
+		 *
+		 * NOTE: this is subject to change in the next major release. NEST relies heavily on stateful deserializers (that have access to the original
+		 * request) for specialized features such a covariant search results. This requirement leaks into this abstraction.
+		 */
 		public class MyJsonNetSerializer : JsonNetSerializer
 		{
-			public MyJsonNetSerializer(IConnectionSettingsValues settings) : base(settings, (s, csv) => s.PreserveReferencesHandling = PreserveReferencesHandling.All) //<1> Call this constructor if you only need access to `JsonSerializerSettings` without state
+			public MyJsonNetSerializer(IConnectionSettingsValues settings)
+				: base(settings, (s, csv) => s.PreserveReferencesHandling = PreserveReferencesHandling.All) //<1> Call this constructor if you only need access to `JsonSerializerSettings` without state
 			{
 				OverwriteDefaultSerializers((s, cvs) => ModifySerializerSettings(s)); //<2> Call OverwriteDefaultSerializers if you need access to `JsonSerializerSettings` with state
 			}
