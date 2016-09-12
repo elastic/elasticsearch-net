@@ -20,9 +20,9 @@ namespace Tests.ClientConcepts.Serializer
 	public class ModifySerializationSettingsTests : SerializationTestBase
 	{
 
-		public class MyCystomResolver : ElasticContractResolver
+		public class MyCustomResolver : ElasticContractResolver
 		{
-			public MyCystomResolver(IConnectionSettingsValues connectionSettings, IList<Func<Type, JsonConverter>> contractConverters) : base(connectionSettings, contractConverters) { }
+			public MyCustomResolver(IConnectionSettingsValues connectionSettings, IList<Func<Type, JsonConverter>> contractConverters) : base(connectionSettings, contractConverters) { }
 
 			protected override string ResolvePropertyName(string fieldName)
 			{
@@ -32,16 +32,16 @@ namespace Tests.ClientConcepts.Serializer
 
 		private sealed class LocalJsonNetSerializer : JsonNetSerializer
 		{
-			public LocalJsonNetSerializer(IConnectionSettingsValues settings) : base(settings) { }
-
-#pragma warning disable CS0672 // Member overrides obsolete member
-			protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings)
-#pragma warning restore CS0672 // Member overrides obsolete member
+			public LocalJsonNetSerializer(IConnectionSettingsValues settings) : base(settings)
 			{
-				settings.DateParseHandling = DateParseHandling.None;
-				settings.MaxDepth = 1;
-				settings.ContractResolver = new MyCystomResolver(this.Settings, null);
-				settings.DateFormatHandling = DateFormatHandling.MicrosoftDateFormat;
+				OverwriteDefaultSerializers((s, cvs) =>
+					{
+						s.DateParseHandling = DateParseHandling.None;
+						s.MaxDepth = 1;
+						s.ContractResolver = new MyCustomResolver(this.Settings, null);
+						s.DateFormatHandling = DateFormatHandling.MicrosoftDateFormat;
+					}
+				);
 			}
 		}
 

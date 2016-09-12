@@ -31,9 +31,9 @@ namespace Tests.ClientConcepts.Serializer
 				new LocalJsonNetSerializer(settings, this._settingsOverride, converter);
 		}
 
-		public class MyCystomResolver : ElasticContractResolver
+		public class MyCustomResolver : ElasticContractResolver
 		{
-			public MyCystomResolver(IConnectionSettingsValues connectionSettings, IList<Func<Type, JsonConverter>> contractConverters) : base(connectionSettings, contractConverters)
+			public MyCustomResolver(IConnectionSettingsValues connectionSettings, IList<Func<Type, JsonConverter>> contractConverters) : base(connectionSettings, contractConverters)
 			{
 			}
 
@@ -100,7 +100,7 @@ namespace Tests.ClientConcepts.Serializer
 		[U] public void RespectsContractResolver()
 		{
 			var client = this.CreateClient("{}",
-				(jsonSettings, nestSettings)=> jsonSettings.ContractResolver = new MyCystomResolver(nestSettings, null));
+				(jsonSettings, nestSettings)=> jsonSettings.ContractResolver = new MyCustomResolver(nestSettings, null));
 			var serialized = client.Serializer.SerializeToString(new HasDateString { DateString = "1" }, SerializationFormatting.None);
 
 			serialized.Should().Be($@"{{""DATESTRING"":""1""}}");

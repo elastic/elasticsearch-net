@@ -42,13 +42,6 @@ namespace Tests.ClientConcepts.Serializer
 			{
 				this._settingsOverride = settingsOverride;
 			}
-
-#pragma warning disable CS0672 // Member overrides obsolete member
-			protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings)
-#pragma warning restore CS0672 // Member overrides obsolete member
-			{
-				this._settingsOverride.Should().BeNull("the value assigned in our custom constructor has not been assigned yet");
-			}
 		}
 
 		public class HasDateString
