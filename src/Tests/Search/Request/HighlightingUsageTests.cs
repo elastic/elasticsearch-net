@@ -103,7 +103,7 @@ namespace Tests.Search.Request
 				.Fields(
 					fs => fs
 						.Field(p => p.Name.Suffix("standard"))
-						.Type(HighlighterType.Plain)
+						.Type("plain")
 						.ForceSource()
 						.FragmentSize(150)
 						.NumberOfFragments(3)
@@ -161,7 +161,7 @@ namespace Tests.Search.Request
 						},
 						{ "leadDeveloper.firstName", new HighlightField
 							{
-								Type = HighlighterType.Fvh,
+								CustomType = "fvh",
 								PreTags = new[] { "<name>"},
 								PostTags = new[] { "</name>"},
 								HighlightQuery = new MatchQuery
