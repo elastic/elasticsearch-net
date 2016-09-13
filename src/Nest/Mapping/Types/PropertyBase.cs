@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -24,8 +25,11 @@ namespace Nest
 		[JsonProperty("fields", DefaultValueHandling = DefaultValueHandling.Ignore)]
 		IProperties Fields { get; set; }
 
-		[JsonProperty("similarity")]
 		SimilarityOption? Similarity { get; set; }
+
+		[JsonProperty("similarity")]
+		[Obsolete("This is a temporary binary backwards compatible hack to make sure you can specify named similarities in 2.x, scheduled for removal in 5.0")]
+		string CustomSimilarity { get; set; }
 
 		[JsonProperty("copy_to")]
 		Fields CopyTo { get; set; }
@@ -50,7 +54,8 @@ namespace Nest
 		public bool? DocValues { get; set; }
 		public IProperties Fields { get; set; }
 		public string IndexName { get; set; }
-		public SimilarityOption? Similarity { get; set; }
+		public SimilarityOption? Similarity { get { return this.CustomSimilarity?.ToEnum<SimilarityOption>(); } set { this.CustomSimilarity = value.GetStringValue(); } }
+		public string CustomSimilarity { get; set; }
 		public bool? Store { get; set; }
 		PropertyInfo IPropertyWithClrOrigin.ClrOrigin { get; set; }
 	}
