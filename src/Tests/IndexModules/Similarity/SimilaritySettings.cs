@@ -49,11 +49,16 @@ namespace Tests.IndexModules.Similarity
 				{
 					lambda = 2.0,
 					type = "LMJelinekMercer"
+				},
+				my_name = new
+				{
+					type = "plugin_sim",
+					some_property = "some value"
 				}
 			};
 
 			/**
-			 * 
+			 *
 			 */
 			protected override Func<SimilaritiesDescriptor, IPromise<ISimilarities>> Fluent => s => s
 				.BM25("bm25", b => b
@@ -73,7 +78,10 @@ namespace Tests.IndexModules.Similarity
 					.Distribution(IBDistribution.LogLogistic)
 				)
 				.LMDirichlet("lmd", d => d.Mu(2))
-				.LMJelinek("lmj", d => d.Lamdba(2.0));
+				.LMJelinek("lmj", d => d.Lamdba(2.0))
+				.Custom("my_name", "plugin_sim", d => d
+					.Add("some_property", "some value")
+				);
 			/**
 			 */
 			protected override Similarities Initializer =>
@@ -96,7 +104,10 @@ namespace Tests.IndexModules.Similarity
 						NormalizationH1C = 1.2
 					} },
 					{ "lmd", new LMDirichletSimilarity { Mu = 2 } },
-					{ "lmj", new LMJelinekMercerSimilarity { Lambda = 2.0 } }
+					{ "lmj", new LMJelinekMercerSimilarity { Lambda = 2.0 } },
+					{ "my_name", new CustomSimilarity("plugin_sim") {
+						{ "some_property", "some value" }
+					} }
 				};
 		}
 	}
