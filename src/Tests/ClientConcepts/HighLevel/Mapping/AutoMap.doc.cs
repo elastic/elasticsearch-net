@@ -173,7 +173,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 											{
 												type = "keyword"
 											}
-									},
+										},
 										type = "text"
 									},
 									hours = new
@@ -192,7 +192,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 											{
 												type = "keyword"
 											}
-									},
+										},
 										type = "text"
 									},
 									salary = new
@@ -209,10 +209,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									keyword = new
 									{
 										type = "keyword"
-							}
+									}
 								},
 								type = "text"
-						}
+							}
 						}
 					},
 					employee = new
@@ -236,7 +236,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									{
 										type = "keyword"
 									}
-							},
+								},
 								type = "text"
 							},
 							hours = new
@@ -255,7 +255,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									{
 										type = "keyword"
 									}
-							},
+								},
 								type = "text"
 							},
 							salary = new
@@ -356,7 +356,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[ElasticsearchType(Name = "company")]
 		public class CompanyWithAttributes
 		{
-			[Keyword(NullValue = "null", Similarity = SimilarityOption.BM25)]
+			[Keyword(NullValue = "null", Similarity = "BM25")]
 			public string Name { get; set; }
 
 			[Text(Name = "office_hours")]
@@ -429,7 +429,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 											{
 												type = "keyword"
 											}
-									},
+										},
 										type = "text"
 									},
 									hours = new
@@ -448,7 +448,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 											{
 												type = "keyword"
 											}
-									},
+										},
 										type = "text"
 									},
 									salary = new
@@ -503,7 +503,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 											{
 												type = "keyword"
 											}
-									},
+										},
 										type = "text"
 									},
 									hours = new
@@ -522,7 +522,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 											{
 												type = "keyword"
 											}
-									},
+										},
 										type = "text"
 									},
 									salary = new
@@ -682,7 +682,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 											{
 												type = "keyword"
 											}
-									},
+										},
 										type = "text"
 									},
 									salary = new
@@ -785,10 +785,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									keyword = new
 									{
 										type = "keyword"
+									}
+								}
 							}
 						}
-					}
-				}
 					}
 				}
 			};
@@ -960,7 +960,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		//endhide
 
 		/**[float]
-         * == Applying conventions through the Visitor pattern
+		 * == Applying conventions through the Visitor pattern
 		 * It is also possible to apply a transformation on all or specific properties.
 		 *
 		 * `.AutoMap()` internally implements the https://en.wikipedia.org/wiki/Visitor_pattern[visitor pattern]. The default visitor, `NoopPropertyVisitor`,

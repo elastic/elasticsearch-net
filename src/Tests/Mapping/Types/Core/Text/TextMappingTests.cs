@@ -16,7 +16,7 @@ namespace Tests.Mapping.Types.Core.Text
 			PositionIncrementGap = 5,
 			SearchAnalyzer = "mysearchanalyzer",
 			SearchQuoteAnalyzer = "mysearchquoteanalyzer",
-			Similarity = SimilarityOption.Classic,
+			Similarity = "classic",
 			Store = true,
 			Norms = false)]
 		public string Full { get; set; }
@@ -24,7 +24,7 @@ namespace Tests.Mapping.Types.Core.Text
 		[Text]
 		public string Minimal { get; set; }
 
-        public string Inferred { get; set; }
+		public string Inferred { get; set; }
 	}
 
 	public class TextMappingTests : TypeMappingTestBase<TextTest>
@@ -56,7 +56,7 @@ namespace Tests.Mapping.Types.Core.Text
 				{
 					type = "text"
 				},
-                inferred = new
+				inferred = new
 				{
 					type = "text",
 					fields = new

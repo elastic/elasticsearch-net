@@ -8,7 +8,7 @@ namespace Tests.Mapping.Types.Core.Number
 		[Number(
 			DocValues = true,
 			IndexName = "myindex",
-			Similarity = SimilarityOption.Classic,
+			Similarity = "classic",
 			Store = true,
 			Index = false,
 			Boost = 1.5,

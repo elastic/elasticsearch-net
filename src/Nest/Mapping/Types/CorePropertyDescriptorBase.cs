@@ -9,7 +9,7 @@ namespace Nest
 		where T : class
 	{
 		bool? ICoreProperty.Store { get; set; }
-		SimilarityOption? ICoreProperty.Similarity { get; set; }
+		Union<SimilarityOption, string> ICoreProperty.Similarity { get; set; }
 		Fields ICoreProperty.CopyTo { get; set; }
 		IProperties ICoreProperty.Fields { get; set; }
 
@@ -20,6 +20,8 @@ namespace Nest
 		public TDescriptor Fields(Func<PropertiesDescriptor<T>, IPromise<IProperties>> selector) => Assign(a => a.Fields = selector?.Invoke(new PropertiesDescriptor<T>())?.Value);
 
 		public TDescriptor Similarity(SimilarityOption similarity) => Assign(a => a.Similarity = similarity);
+
+		public TDescriptor Similarity(string similarity) => Assign(a => a.Similarity = similarity);
 
 		public TDescriptor CopyTo(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) => Assign(a => a.CopyTo = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 	}

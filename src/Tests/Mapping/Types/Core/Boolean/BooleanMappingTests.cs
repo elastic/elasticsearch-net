@@ -8,7 +8,7 @@ namespace Tests.Mapping.Types.Core.Boolean
 		[Boolean(
 			DocValues = false,
 			IndexName = "myindex",
-			Similarity = SimilarityOption.BM25,
+			Similarity = "BM25",
 			Index = false,
 			Store = true)]
 		public bool Full { get; set; }
