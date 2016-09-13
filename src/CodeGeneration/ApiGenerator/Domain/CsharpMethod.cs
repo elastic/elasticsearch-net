@@ -252,19 +252,19 @@ namespace ApiGenerator.Domain
 				{
 					code = $"public {returnType} {p.InterfaceName}<TOther>() where TOther : class ";
 					code += $"=> Assign(a=>a.RouteValues.{routeSetter}(\"{p.Name}\", ({p.ClrTypeName})typeof(TOther)));";
-					xmlDoc = $"///<summary>{p.Description}</summary>";
+					xmlDoc = $"///<summary>a shortcut into calling {p.InterfaceName}(typeof(TOther))</summary>";
 					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				}
 				if (paramName == "index" && p.Type == "list")
 				{
 					code = $"public {returnType} AllIndices() => this.Index(Indices.All);";
-					xmlDoc = $"///<summary>{p.Description}</summary>";
+					xmlDoc = $"///<summary>A shortcut into calling Index(Indices.All)</summary>";
 					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				}
 				if (paramName == "type" && p.Type == "list")
 				{
 					code = $"public {returnType} AllTypes() => this.Type(Types.All);";
-					xmlDoc = $"///<summary>{p.Description}</summary>";
+					xmlDoc = $"///<summary>a shortcut into calling Type(Types.All)</summary>";
 					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				}
 				if (paramName == "fields" && p.Type == "list")

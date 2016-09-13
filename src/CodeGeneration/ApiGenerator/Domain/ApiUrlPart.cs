@@ -6,9 +6,18 @@ namespace ApiGenerator.Domain
 	{
 		public string Name { get; set; }
 		public string Type { get; set; }
-		public string Description { get; set; }
+
+		private string _description;
+		public string Description { get { return _description; } set { _description = CleanUpDescription(value); } }
+
 		public bool Required { get; set; }
 		public IEnumerable<string> Options { get; set; }
+
+		private string CleanUpDescription(string value)
+		{
+			if (string.IsNullOrWhiteSpace(value)) return value;
+			return value.Replace("use `_all` or empty string", "use the special string `_all` or Indices.All");
+		}
 
 		public string ClrTypeName
 		{
