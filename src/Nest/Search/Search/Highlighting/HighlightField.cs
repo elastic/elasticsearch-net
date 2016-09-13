@@ -48,7 +48,7 @@ namespace Nest
 		string BoundaryChars { get; set; }
 
 		[JsonProperty("type")]
-		HighlighterType? Type { get; set; }
+		Union<HighlighterType, string> Type { get; set; }
 
 		[JsonProperty("force_source")]
 		bool? ForceSource { get; set; }
@@ -75,7 +75,7 @@ namespace Nest
 		public string TagsSchema { get; set; }
 		public bool? RequireFieldMatch { get; set; }
 		public string BoundaryChars { get; set; }
-		public HighlighterType? Type { get; set; }
+		public Union<HighlighterType, string> Type { get; set; }
 		public bool? ForceSource { get; set; }
 		public Fields MatchedFields { get; set; }
 		public QueryContainer HighlightQuery { get; set; }
@@ -110,7 +110,7 @@ namespace Nest
 
 		string IHighlightField.BoundaryChars { get; set; }
 
-		HighlighterType? IHighlightField.Type { get; set; }
+		Union<HighlighterType, string> IHighlightField.Type { get; set; }
 
 		bool? IHighlightField.ForceSource { get; set; }
 
@@ -128,6 +128,7 @@ namespace Nest
 		public HighlightFieldDescriptor<T> ForceSource(bool? force = true) => Assign(a => a.ForceSource = force);
 
 		public HighlightFieldDescriptor<T> Type(HighlighterType type) => Assign(a => a.Type = type);
+		public HighlightFieldDescriptor<T> Type(string type) => Assign(a => a.Type = type);
 
 		public HighlightFieldDescriptor<T> PreTags(string preTags) => Assign(a => a.PreTags = new[] { preTags });
 
@@ -154,7 +155,7 @@ namespace Nest
 		public HighlightFieldDescriptor<T> BoundaryCharacters(string boundaryCharacters) => Assign(a => a.BoundaryChars = boundaryCharacters);
 
 		public HighlightFieldDescriptor<T> BoundaryMaxSize(int? boundaryMaxSize) => Assign(a => a.BoundaryMaxSize = boundaryMaxSize);
-		
+
 		public HighlightFieldDescriptor<T> MatchedFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.MatchedFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
