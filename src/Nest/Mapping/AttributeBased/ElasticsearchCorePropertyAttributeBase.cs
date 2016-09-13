@@ -14,7 +14,16 @@ namespace Nest
 		IProperties ICoreProperty.Fields { get; set; }
 		Fields ICoreProperty.CopyTo { get; set; }
 
-		public string Similarity { get; set; }
+		Union<SimilarityOption, string> ICoreProperty.Similarity { get; set; }
+		public string Similarity {
+			set { Self.Similarity = value; }
+			get
+			{
+				var s = Self.Similarity;
+				if (s == null) return null;
+				return s.Match(f => f.GetStringValue(), str => str);
+			}
+		}
 		public bool Store { get { return Self.Store.GetValueOrDefault(); } set { Self.Store = value; } }
 
 		protected ElasticsearchCorePropertyAttributeBase(string typeName) : base(typeName)
