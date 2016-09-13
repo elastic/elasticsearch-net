@@ -94,7 +94,8 @@ namespace Nest
 			foreach (var r in Self.Ranges)
 			{
 				sb.Append(r.Item1.GetStringValue());
-				sb.Append(r.Item2);
+				//date math does not support fractional time units so e.g TimeSpan.FromHours(25) should not yield 1.04d
+				sb.Append(Time.ToFirstUnitYieldingInteger(r.Item2));
 			}
 			if (Self.Round.HasValue)
 				sb.Append("/" + Self.Round.Value.GetStringValue());
