@@ -935,13 +935,13 @@ namespace Nest
 		public ClusterStateDescriptor() : base(){}
 		
 
-			///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public ClusterStateDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public ClusterStateDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public ClusterStateDescriptor AllIndices() => this.Index(Indices.All);
 
 		///<summary>Limit the information returned to the specified metrics</summary>
@@ -1218,13 +1218,13 @@ namespace Nest
 		public DeleteByQueryDescriptor(Indices index) : base(r=>r.Required("index", index).Required("type", (Types)typeof(T))){}
 		
 
-			///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public DeleteByQueryDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
 
-		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public DeleteByQueryDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public DeleteByQueryDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
@@ -1580,13 +1580,13 @@ namespace Nest
 		public FieldStatsDescriptor() : base(){}
 		
 
-			///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public FieldStatsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public FieldStatsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public FieldStatsDescriptor AllIndices() => this.Index(Indices.All);
 
 	
@@ -2308,13 +2308,13 @@ namespace Nest
 		public FlushDescriptor() : base(){}
 		
 
-			///<summary>A comma-separated list of index names; use `_all` or empty string for all indices</summary>
+			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</summary>
 		public FlushDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string for all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</summary>
 		public FlushDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string for all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</summary>
 		public FlushDescriptor AllIndices() => this.Index(Indices.All);
 
 	
@@ -2349,13 +2349,13 @@ namespace Nest
 		public SyncedFlushDescriptor() : base(){}
 		
 
-			///<summary>A comma-separated list of index names; use `_all` or empty string for all indices</summary>
+			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</summary>
 		public SyncedFlushDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string for all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</summary>
 		public SyncedFlushDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string for all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</summary>
 		public SyncedFlushDescriptor AllIndices() => this.Index(Indices.All);
 
 	
@@ -2384,13 +2384,13 @@ namespace Nest
 		public ForceMergeDescriptor() : base(){}
 		
 
-			///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public ForceMergeDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public ForceMergeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public ForceMergeDescriptor AllIndices() => this.Index(Indices.All);
 
 	
@@ -2630,13 +2630,13 @@ namespace Nest
 		public GetIndexSettingsDescriptor() : base(){}
 		
 
-			///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public GetIndexSettingsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public GetIndexSettingsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public GetIndexSettingsDescriptor AllIndices() => this.Index(Indices.All);
 
 		///<summary>The name of the settings that should be included</summary>
@@ -2709,13 +2709,13 @@ namespace Nest
 		public UpgradeStatusDescriptor() : base(){}
 		
 
-			///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpgradeStatusDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpgradeStatusDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpgradeStatusDescriptor AllIndices() => this.Index(Indices.All);
 
 	
@@ -2876,13 +2876,13 @@ namespace Nest
 		public UpdateIndexSettingsDescriptor() : base(){}
 		
 
-			///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpdateIndexSettingsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpdateIndexSettingsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpdateIndexSettingsDescriptor AllIndices() => this.Index(Indices.All);
 
 	
@@ -2950,13 +2950,13 @@ namespace Nest
 		public RecoveryStatusDescriptor() : base(){}
 		
 
-			///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public RecoveryStatusDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public RecoveryStatusDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public RecoveryStatusDescriptor AllIndices() => this.Index(Indices.All);
 
 	
@@ -2985,13 +2985,13 @@ namespace Nest
 		public RefreshDescriptor() : base(){}
 		
 
-			///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public RefreshDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public RefreshDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public RefreshDescriptor AllIndices() => this.Index(Indices.All);
 
 	
@@ -3057,13 +3057,13 @@ namespace Nest
 		public SegmentsDescriptor() : base(){}
 		
 
-			///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SegmentsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SegmentsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SegmentsDescriptor AllIndices() => this.Index(Indices.All);
 
 	
@@ -3101,13 +3101,13 @@ namespace Nest
 		public IndicesShardStoresDescriptor() : base(){}
 		
 
-			///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public IndicesShardStoresDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public IndicesShardStoresDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public IndicesShardStoresDescriptor AllIndices() => this.Index(Indices.All);
 
 	
@@ -3178,13 +3178,13 @@ namespace Nest
 		public IndicesStatsDescriptor() : base(){}
 		
 
-			///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public IndicesStatsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public IndicesStatsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public IndicesStatsDescriptor AllIndices() => this.Index(Indices.All);
 
 		///<summary>Limit the information returned the specific metrics.</summary>
@@ -3255,13 +3255,13 @@ namespace Nest
 		public UpgradeDescriptor() : base(){}
 		
 
-			///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpgradeDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpgradeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpgradeDescriptor AllIndices() => this.Index(Indices.All);
 
 	
@@ -3297,13 +3297,13 @@ namespace Nest
 		public ValidateQueryDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
 		
 
-			///<summary>A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public ValidateQueryDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public ValidateQueryDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public ValidateQueryDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</summary>
@@ -4077,13 +4077,13 @@ namespace Nest
 		public SearchDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
 		
 
-			///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SearchDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SearchDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SearchDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
@@ -4185,13 +4185,13 @@ namespace Nest
 		public SearchShardsDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
 		
 
-			///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SearchShardsDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SearchShardsDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SearchShardsDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
@@ -4239,13 +4239,13 @@ namespace Nest
 		public SearchTemplateDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
 		
 
-			///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SearchTemplateDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SearchTemplateDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SearchTemplateDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
@@ -4527,13 +4527,13 @@ namespace Nest
 		public SuggestDescriptor() : base(){}
 		
 
-			///<summary>A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SuggestDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SuggestDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SuggestDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 	
@@ -4813,13 +4813,13 @@ namespace Nest
 		public UpdateByQueryDescriptor(Indices index) : base(r=>r.Required("index", index).Required("type", (Types)typeof(T))){}
 		
 
-			///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpdateByQueryDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
 
-		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpdateByQueryDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpdateByQueryDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
@@ -4996,13 +4996,13 @@ namespace Nest
 		public GraphExploreDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 		
 
-			///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public GraphExploreDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
 
-		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public GraphExploreDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
 
-		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public GraphExploreDescriptor<T> AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>

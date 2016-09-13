@@ -1226,7 +1226,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html </para>
 	    ///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ClusterState<T>(string metric, string index, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"_cluster/state/{metric.NotNull("metric")}/{index.NotNull("index")}"), null, _params(requestParameters));
@@ -1241,7 +1241,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html </para>
 	    ///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ClusterStateAsync<T>(string metric, string index, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_cluster/state/{metric.NotNull("metric")}/{index.NotNull("index")}"), cancellationToken, null, _params(requestParameters));
@@ -1643,7 +1643,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> DeleteByQuery<T>(string index, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null)
@@ -1658,7 +1658,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> DeleteByQueryAsync<T>(string index, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -1673,7 +1673,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -1689,7 +1689,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -1887,7 +1887,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> FieldStatsGet<T>(string index, Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_field_stats"), null, _params(requestParameters));
@@ -1901,7 +1901,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> FieldStatsGetAsync<T>(string index, Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_field_stats"), cancellationToken, null, _params(requestParameters));
@@ -1943,7 +1943,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">Field json objects containing the name and optionally a range to filter out indices result, that have results outside the defined bounds</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> FieldStats<T>(string index, PostData<object> body, Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null)
@@ -1958,7 +1958,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">Field json objects containing the name and optionally a range to filter out indices result, that have results outside the defined bounds</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> FieldStatsAsync<T>(string index, PostData<object> body, Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -2789,7 +2789,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesFlush<T>(string index, Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_flush"), null, _params(requestParameters));
@@ -2803,7 +2803,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesFlushAsync<T>(string index, Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_flush"), cancellationToken, null, _params(requestParameters));
@@ -2843,7 +2843,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesFlushGet<T>(string index, Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_flush"), null, _params(requestParameters));
@@ -2857,7 +2857,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesFlushGetAsync<T>(string index, Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_flush"), cancellationToken, null, _params(requestParameters));
@@ -2897,7 +2897,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesFlushSynced<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_flush/synced"), null, _params(requestParameters));
@@ -2911,7 +2911,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesFlushSyncedAsync<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_flush/synced"), cancellationToken, null, _params(requestParameters));
@@ -2951,7 +2951,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesFlushSyncedGet<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_flush/synced"), null, _params(requestParameters));
@@ -2965,7 +2965,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesFlushSyncedGetAsync<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_flush/synced"), cancellationToken, null, _params(requestParameters));
@@ -3005,7 +3005,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesForcemerge<T>(string index, Func<ForceMergeRequestParameters, ForceMergeRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_forcemerge"), null, _params(requestParameters));
@@ -3019,7 +3019,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesForcemergeAsync<T>(string index, Func<ForceMergeRequestParameters, ForceMergeRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_forcemerge"), cancellationToken, null, _params(requestParameters));
@@ -3461,7 +3461,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetSettings<T>(string index, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_settings"), null, _params(requestParameters));
@@ -3475,7 +3475,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetSettingsAsync<T>(string index, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_settings"), cancellationToken, null, _params(requestParameters));
@@ -3489,7 +3489,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="name">The name of the settings that should be included</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetSettings<T>(string index, string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null)
@@ -3504,7 +3504,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="name">The name of the settings that should be included</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetSettingsAsync<T>(string index, string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -3627,7 +3627,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetUpgrade<T>(string index, Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_upgrade"), null, _params(requestParameters));
@@ -3641,7 +3641,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetUpgradeAsync<T>(string index, Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_upgrade"), cancellationToken, null, _params(requestParameters));
@@ -3899,7 +3899,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesPutSettings<T>(string index, PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null)
@@ -3914,7 +3914,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesPutSettingsAsync<T>(string index, PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -4015,7 +4015,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesRecovery<T>(string index, Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_recovery"), null, _params(requestParameters));
@@ -4029,7 +4029,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesRecoveryAsync<T>(string index, Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_recovery"), cancellationToken, null, _params(requestParameters));
@@ -4069,7 +4069,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesRefresh<T>(string index, Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_refresh"), null, _params(requestParameters));
@@ -4083,7 +4083,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesRefreshAsync<T>(string index, Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_refresh"), cancellationToken, null, _params(requestParameters));
@@ -4123,7 +4123,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesRefreshGet<T>(string index, Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_refresh"), null, _params(requestParameters));
@@ -4137,7 +4137,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesRefreshGetAsync<T>(string index, Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_refresh"), cancellationToken, null, _params(requestParameters));
@@ -4239,7 +4239,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesSegments<T>(string index, Func<SegmentsRequestParameters, SegmentsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_segments"), null, _params(requestParameters));
@@ -4253,7 +4253,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesSegmentsAsync<T>(string index, Func<SegmentsRequestParameters, SegmentsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_segments"), cancellationToken, null, _params(requestParameters));
@@ -4293,7 +4293,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesShardStores<T>(string index, Func<IndicesShardStoresRequestParameters, IndicesShardStoresRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_shard_stores"), null, _params(requestParameters));
@@ -4307,7 +4307,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesShardStoresAsync<T>(string index, Func<IndicesShardStoresRequestParameters, IndicesShardStoresRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_shard_stores"), cancellationToken, null, _params(requestParameters));
@@ -4439,7 +4439,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesStats<T>(string index, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_stats"), null, _params(requestParameters));
@@ -4453,7 +4453,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesStatsAsync<T>(string index, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_stats"), cancellationToken, null, _params(requestParameters));
@@ -4467,7 +4467,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesStats<T>(string index, string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null)
@@ -4482,7 +4482,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesStatsAsync<T>(string index, string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -4551,7 +4551,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesUpgrade<T>(string index, Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_upgrade"), null, _params(requestParameters));
@@ -4565,7 +4565,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesUpgradeAsync<T>(string index, Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_upgrade"), cancellationToken, null, _params(requestParameters));
@@ -4605,7 +4605,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesValidateQueryGet<T>(string index, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_validate/query"), null, _params(requestParameters));
@@ -4619,7 +4619,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesValidateQueryGetAsync<T>(string index, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_validate/query"), cancellationToken, null, _params(requestParameters));
@@ -4633,7 +4633,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesValidateQueryGet<T>(string index, string type, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null)
@@ -4648,7 +4648,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesValidateQueryGetAsync<T>(string index, string type, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -4691,7 +4691,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesValidateQuery<T>(string index, PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null)
@@ -4706,7 +4706,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesValidateQueryAsync<T>(string index, PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -4721,7 +4721,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -4737,7 +4737,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -6739,7 +6739,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchGet<T>(string index, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_search"), null, _params(requestParameters));
@@ -6753,7 +6753,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(string index, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_search"), cancellationToken, null, _params(requestParameters));
@@ -6767,7 +6767,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchGet<T>(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
@@ -6782,7 +6782,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -6825,7 +6825,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Search<T>(string index, PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
@@ -6840,7 +6840,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -6855,7 +6855,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -6871,7 +6871,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -6913,7 +6913,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchShardsGet<T>(string index, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_search_shards"), null, _params(requestParameters));
@@ -6927,7 +6927,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchShardsGetAsync<T>(string index, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_search_shards"), cancellationToken, null, _params(requestParameters));
@@ -6941,7 +6941,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchShardsGet<T>(string index, string type, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null)
@@ -6956,7 +6956,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchShardsGetAsync<T>(string index, string type, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -6997,7 +6997,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchShards<T>(string index, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_search_shards"), null, _params(requestParameters));
@@ -7011,7 +7011,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchShardsAsync<T>(string index, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_search_shards"), cancellationToken, null, _params(requestParameters));
@@ -7025,7 +7025,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchShards<T>(string index, string type, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null)
@@ -7040,7 +7040,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchShardsAsync<T>(string index, string type, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -7081,7 +7081,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchTemplateGet<T>(string index, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_search/template"), null, _params(requestParameters));
@@ -7095,7 +7095,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchTemplateGetAsync<T>(string index, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_search/template"), cancellationToken, null, _params(requestParameters));
@@ -7109,7 +7109,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchTemplateGet<T>(string index, string type, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
@@ -7124,7 +7124,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchTemplateGetAsync<T>(string index, string type, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -7167,7 +7167,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchTemplate<T>(string index, PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
@@ -7182,7 +7182,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchTemplateAsync<T>(string index, PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -7197,7 +7197,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -7213,7 +7213,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -7667,7 +7667,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The request definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Suggest<T>(string index, PostData<object> body, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null)
@@ -7682,7 +7682,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The request definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SuggestAsync<T>(string index, PostData<object> body, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -7723,7 +7723,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SuggestGet<T>(string index, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_suggest"), null, _params(requestParameters));
@@ -7737,7 +7737,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SuggestGetAsync<T>(string index, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_suggest"), cancellationToken, null, _params(requestParameters));
@@ -8021,7 +8021,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> UpdateByQuery<T>(string index, PostData<object> body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null)
@@ -8036,7 +8036,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> UpdateByQueryAsync<T>(string index, PostData<object> body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -8051,7 +8051,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -8067,7 +8067,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -8083,7 +8083,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> XpackGraphExploreGet<T>(string index, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_xpack/_graph/_explore"), null, _params(requestParameters));
@@ -8097,7 +8097,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> XpackGraphExploreGetAsync<T>(string index, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_xpack/_graph/_explore"), cancellationToken, null, _params(requestParameters));
@@ -8111,7 +8111,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> XpackGraphExploreGet<T>(string index, string type, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null)
@@ -8126,7 +8126,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> XpackGraphExploreGetAsync<T>(string index, string type, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -8141,7 +8141,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">Graph Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> XpackGraphExplore<T>(string index, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null)
@@ -8156,7 +8156,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">Graph Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> XpackGraphExploreAsync<T>(string index, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -8171,7 +8171,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">Graph Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -8187,7 +8187,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 	    ///<para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>
 	    ///</summary>
-		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">Graph Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
