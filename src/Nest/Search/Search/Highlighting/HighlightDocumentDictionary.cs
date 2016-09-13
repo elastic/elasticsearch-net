@@ -17,10 +17,4 @@ namespace Nest
 			}
 		}
 	}
-
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-	public class HighlightDocumentDictionary : Dictionary<string, HighlightFieldDictionary>
-	{
-
-	}
 }
