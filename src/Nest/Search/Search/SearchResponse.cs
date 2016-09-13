@@ -35,7 +35,6 @@ namespace Nest
 		/// Otherwise this will always be an empty collection.
 		/// </summary>
 		IEnumerable<FieldValues> Fields { get; }
-		HighlightDocumentDictionary Highlights { get; }
 	}
 
 	[JsonObject]
@@ -46,9 +45,6 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "_shards")]
 		public ShardsMetaData Shards { get; internal set; }
-
-		[JsonProperty(PropertyName = "hits")]
-		public HitsMetaData<T> HitsMetaData { get; internal set; }
 
 		[JsonProperty(PropertyName = "aggregations")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
@@ -79,6 +75,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "_scroll_id")]
 		public string ScrollId { get; internal set; }
 
+		[JsonProperty(PropertyName = "hits")]
+		public HitsMetaData<T> HitsMetaData { get; internal set; }
+
 		[JsonIgnore]
 		public long Total => this.HitsMetaData?.Total ?? 0;
 
@@ -103,31 +102,5 @@ namespace Nest
 					.Select(h => h.Fields)
 					.ToList());
 
-
-		private HighlightDocumentDictionary _highlights = null;
-		/// <summary>
-		/// IDictionary of id -Highlight Collection for the document
-		/// </summary>
-		public HighlightDocumentDictionary Highlights
-		{
-			get
-			{
-				if (_highlights != null) return _highlights;
-
-				var dict = new HighlightDocumentDictionary();
-				if (this.HitsMetaData == null || !this.HitsMetaData.Hits.HasAny())
-					return dict;
-
-
-				foreach (var hit in this.HitsMetaData.Hits)
-				{
-					if (!hit.Highlights.Any())
-						continue;
-					dict.Add(hit.Id, hit.Highlights);
-				}
-				this._highlights = dict;
-				return dict;
-			}
-		}
 	}
 }

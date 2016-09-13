@@ -191,29 +191,29 @@ namespace Tests.Search.Request
 		{
 			response.ShouldBeValid();
 
-			foreach (var highlightsByDocumentId in response.Highlights)
+			foreach (var highlightsInEachHit in response.Hits.Select(d=>d.Highlights))
 			{
-				foreach (var highlightHit in highlightsByDocumentId.Value)
+				foreach (var highlightField in highlightsInEachHit)
 				{
-					if (highlightHit.Key == "name.standard")
+					if (highlightField.Key == "name.standard")
 					{
-						foreach (var highlight in highlightHit.Value.Highlights)
+						foreach (var highlight in highlightField.Value.Highlights)
 						{
 							highlight.Should().Contain("<tag1>");
 							highlight.Should().Contain("</tag1>");
 						}
 					}
-					else if (highlightHit.Key == "leadDeveloper.firstName")
+					else if (highlightField.Key == "leadDeveloper.firstName")
 					{
-						foreach (var highlight in highlightHit.Value.Highlights)
+						foreach (var highlight in highlightField.Value.Highlights)
 						{
 							highlight.Should().Contain("<name>");
 							highlight.Should().Contain("</name>");
 						}
 					}
-					else if (highlightHit.Key == "state.offsets")
+					else if (highlightField.Key == "state.offsets")
 					{
-						foreach (var highlight in highlightHit.Value.Highlights)
+						foreach (var highlight in highlightField.Value.Highlights)
 						{
 							highlight.Should().Contain("<state>");
 							highlight.Should().Contain("</state>");
@@ -221,7 +221,7 @@ namespace Tests.Search.Request
 					}
 					else
 					{
-						Assert.True(false, $"highlights contains unexpected key {highlightHit.Key}");
+						Assert.True(false, $"highlights contains unexpected key {highlightField.Key}");
 					}
 				}
 			}
