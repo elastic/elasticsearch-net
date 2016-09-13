@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace Nest
 {
@@ -20,7 +21,10 @@ namespace Nest
 
 			var typePropertyValue = typeProperty.Value.ToString();
 			var itemType = Type.GetType("Nest." + typePropertyValue + "Similarity", false, true);
-			return o.ToObject(itemType, ElasticContractResolver.Empty);
+			if (itemType != null) return o.ToObject(itemType, ElasticContractResolver.Empty);
+
+			var dict = o.ToObject<Dictionary<string, object>>();
+			return new CustomSimilarity(dict);
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

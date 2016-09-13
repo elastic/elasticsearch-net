@@ -22,7 +22,7 @@ namespace Nest
 		public void Add(string type, ISimilarity mapping) => BackingDictionary.Add(type, mapping);
 
 	}
-	
+
 	public class SimilaritiesDescriptor : IsADictionaryDescriptorBase<SimilaritiesDescriptor, ISimilarities, string, ISimilarity>
 	{
 		public SimilaritiesDescriptor() : base(new Similarities()) { }
@@ -33,6 +33,8 @@ namespace Nest
 		public SimilaritiesDescriptor LMJelinek(string name, Func<LMJelinekMercerSimilarityDescriptor, ILMJelinekMercerSimilarity> selector) => Assign(name, selector?.Invoke(new LMJelinekMercerSimilarityDescriptor()));
 		public SimilaritiesDescriptor DFR(string name, Func<DFRSimilarityDescriptor, IDFRSimilarity> selector) => Assign(name, selector?.Invoke(new DFRSimilarityDescriptor()));
 		public SimilaritiesDescriptor IB(string name, Func<IBSimilarityDescriptor, IIBSimilarity> selector) => Assign(name, selector?.Invoke(new IBSimilarityDescriptor()));
+		public SimilaritiesDescriptor Custom(string name, string type, Func<CustomSimilarityDescriptor, IPromise<ICustomSimilarity>> selector) =>
+			Assign(name, selector?.Invoke(new CustomSimilarityDescriptor().Type(type))?.Value);
 	}
 
 }
