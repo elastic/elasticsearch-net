@@ -13,7 +13,7 @@ namespace Nest
 		IProperties Fields { get; set; }
 
 		[JsonProperty("similarity")]
-		SimilarityOption? Similarity { get; set; }
+		string Similarity { get; set; }
 
 		[JsonProperty("copy_to")]
 		Fields CopyTo { get; set; }
@@ -27,7 +27,7 @@ namespace Nest
 
 		public Fields CopyTo { get; set; }
 		public IProperties Fields { get; set; }
-		public SimilarityOption? Similarity { get; set; }
+		public string Similarity { get; set; }
 		public bool? Store { get; set; }
 	}
 }

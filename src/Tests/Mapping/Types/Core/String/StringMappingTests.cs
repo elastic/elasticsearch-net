@@ -17,7 +17,7 @@ namespace Tests.Mapping.Types.Core.String
 			NullValue = "na",
 			PositionIncrementGap = 5,
 			SearchAnalyzer = "mysearchanalyzer",
-			Similarity = SimilarityOption.BM25,
+			Similarity = "BM25",
 			Store = true,
 			TermVector = TermVectorOption.WithPositionsOffsets)]
 		public string Full { get; set; }

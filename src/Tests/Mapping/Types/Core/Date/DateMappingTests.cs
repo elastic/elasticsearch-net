@@ -8,7 +8,7 @@ namespace Tests.Mapping.Types.Core.Date
 		[Date(
 			DocValues = true,
 			IndexName = "myindex",
-			Similarity = SimilarityOption.Classic,
+			Similarity = "classic",
 			Store = true,
 			Index = false,
 			Boost = 1.2,
@@ -22,9 +22,9 @@ namespace Tests.Mapping.Types.Core.Date
 		[Date]
 		public DateTime Minimal { get; set; }
 
-        public DateTime Inferred { get; set; }
+		public DateTime Inferred { get; set; }
 
-        public DateTimeOffset InferredOffset { get; set; }
+		public DateTimeOffset InferredOffset { get; set; }
 	}
 
 	public class DateMappingTests : TypeMappingTestBase<DateTest>
@@ -52,14 +52,14 @@ namespace Tests.Mapping.Types.Core.Date
 				{
 					type = "date"
 				},
-                inferred = new
-                {
-                    type = "date"
-                },
-                inferredOffset = new
-                {
-                    type = "date"
-                }
+				inferred = new
+				{
+					type = "date"
+				},
+				inferredOffset = new
+				{
+					type = "date"
+				}
 			}
 		};
 
@@ -81,11 +81,11 @@ namespace Tests.Mapping.Types.Core.Date
 			.Date(d => d
 				.Name(o => o.Minimal)
 			)
-            .Date(d => d
+			.Date(d => d
 				.Name(o => o.Inferred)
 			)
-            .Date(d => d
-                .Name(o => o.InferredOffset)
-            );
+			.Date(d => d
+				.Name(o => o.InferredOffset)
+			);
 	}
 }

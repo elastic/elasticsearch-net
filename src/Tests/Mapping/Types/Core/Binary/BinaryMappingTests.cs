@@ -8,7 +8,7 @@ namespace Tests.Mapping.Types.Core.Binary
 		[Binary(
 			DocValues = true,
 			IndexName = "myindex",
-			Similarity = SimilarityOption.Classic,
+			Similarity = "classic",
 			Store = true)]
 		public string Full { get; set; }
 

@@ -12,10 +12,9 @@ namespace Nest
 
 		bool? ICoreProperty.Store { get; set; }
 		IProperties ICoreProperty.Fields { get; set; }
-		SimilarityOption? ICoreProperty.Similarity { get; set; }
 		Fields ICoreProperty.CopyTo { get; set; }
 
-		public SimilarityOption Similarity { get { return Self.Similarity.GetValueOrDefault(); } set { Self.Similarity = value; } }
+		public string Similarity { get; set; }
 		public bool Store { get { return Self.Store.GetValueOrDefault(); } set { Self.Store = value; } }
 
 		protected ElasticsearchCorePropertyAttributeBase(string typeName) : base(typeName)
