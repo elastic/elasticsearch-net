@@ -72,6 +72,43 @@ namespace Nest
 			return 1;
 		}
 
+		public static Time ToFirstUnitYieldingInteger(Time fractionalTime)
+		{
+			var fraction = fractionalTime.Factor.GetValueOrDefault(double.Epsilon);
+			if (IsIntegerGreaterThen0(fraction)) return fractionalTime;
+
+			var ms = fractionalTime.Milliseconds;
+			if (ms > _week)
+			{
+				fraction = ms / _week;
+				if (IsIntegerGreaterThen0(fraction)) return new Time(fraction, TimeUnit.Week);
+			}
+			if (ms > _day)
+			{
+				fraction = ms / _day;
+				if (IsIntegerGreaterThen0(fraction)) return new Time(fraction, TimeUnit.Day);
+			}
+			if (ms > _hour)
+			{
+				fraction = ms / _hour;
+				if (IsIntegerGreaterThen0(fraction)) return new Time(fraction, TimeUnit.Hour);
+			}
+			if (ms > _minute)
+			{
+				fraction = ms / _minute;
+				if (IsIntegerGreaterThen0(fraction)) return new Time(fraction, TimeUnit.Minute);
+			}
+			if (ms > _second)
+			{
+				fraction = ms / _second;
+				if (IsIntegerGreaterThen0(fraction)) return new Time(fraction, TimeUnit.Second);
+			}
+			return new Time(ms, TimeUnit.Millisecond);
+		}
+
+		private static bool IsIntegerGreaterThen0(double d) => Math.Abs(d % 1) < double.Epsilon;
+
+
 		public static bool operator <(Time left, Time right) => left.CompareTo(right) < 0;
 		public static bool operator <=(Time left, Time right) => left.CompareTo(right) < 0 || left.Equals(right);
 
@@ -81,7 +118,7 @@ namespace Nest
 		public static bool operator ==(Time left, Time right) =>
 			ReferenceEquals(left, null) ? ReferenceEquals(right, null) : left.Equals(right);
 
-	    public static bool operator !=(Time left, Time right) => !(left == right);
+		public static bool operator !=(Time left, Time right) => !(left == right);
 
 		public TimeSpan ToTimeSpan() => TimeSpan.FromMilliseconds(this.Milliseconds);
 
