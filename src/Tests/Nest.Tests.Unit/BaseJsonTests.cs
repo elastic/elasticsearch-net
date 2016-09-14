@@ -90,6 +90,17 @@ namespace Nest.Tests.Unit
 			this.JsonNotEquals(json, method, fileName);
 		}
 
+		protected string Serialize(object o) => TestElasticClient.Serialize(o);
+		protected T Deserialize<T>(string json) where T : class => TestElasticClient.Deserialize<T>(json);
+
+
+		protected T Deserialize<T>(MethodBase method, string fileName = null)
+			where T : class 
+		{
+			var json = ReadMethodJson(method, fileName);
+			return TestElasticClient.Deserialize<T>(json);
+		}
+
 		protected string ReadMethodJson(MethodBase method, string fileName = null)
 		{
 			var file = this.GetFileFromMethod(method, fileName);

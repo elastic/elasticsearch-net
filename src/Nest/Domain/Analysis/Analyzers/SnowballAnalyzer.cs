@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Nest.Resolvers.Converters.Queries;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -7,16 +8,17 @@ namespace Nest
 	/// <para> The Snowball Analyzer is a stemming analyzer from Lucene that is originally based on the snowball project from snowball.tartarus.org.</para>
 	/// </summary>
 	public class SnowballAnalyzer : AnalyzerBase
-    {
-        public SnowballAnalyzer()
-        {
-            this.Type = "snowball";
-        }
+	{
+		public SnowballAnalyzer()
+		{
+			this.Type = "snowball";
+		}
 
-        [JsonProperty("language")]
-        public string Language { get; set; }
+		[JsonProperty("language")]
+		public string Language { get; set; }
 
-        [JsonProperty("stopwords")]
-        public string StopWords { get; set; }
-    }
+		[JsonProperty("stopwords")]
+		[JsonConverter(typeof(StopWordsToStringJsonConverter))]
+		public string StopWords { get; set; }
+	}
 }

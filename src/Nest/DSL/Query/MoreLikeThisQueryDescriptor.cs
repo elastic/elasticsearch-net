@@ -5,6 +5,7 @@ using System.Linq;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
+using Nest.Resolvers.Converters.Queries;
 
 namespace Nest
 {
@@ -25,6 +26,7 @@ namespace Nest
 		string MinimumShouldMatch { get; set; }
 
 		[JsonProperty(PropertyName = "stop_words")]
+		[JsonConverter(typeof(StopWordsToListJsonConverter))]
 		IEnumerable<string> StopWords { get; set; }
 
 		[JsonProperty(PropertyName = "min_term_freq")]
@@ -88,6 +90,7 @@ namespace Nest
 		public string LikeText { get; set; }
 		public double? TermMatchPercentage { get; set; }
 		public string MinimumShouldMatch { get; set; }
+		[JsonConverter(typeof(StopWordsToListJsonConverter))]
 		public IEnumerable<string> StopWords { get; set; }
 		public int? MinTermFrequency { get; set; }
 		public int? MaxQueryTerms { get; set; }
@@ -115,6 +118,7 @@ namespace Nest
 
 		string IMoreLikeThisQuery.MinimumShouldMatch { get; set; }
 		
+		[JsonConverter(typeof(StopWordsToListJsonConverter))]
 		IEnumerable<string> IMoreLikeThisQuery.StopWords { get; set; }
 		
 		int? IMoreLikeThisQuery.MinTermFrequency { get; set; }

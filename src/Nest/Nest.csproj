@@ -423,6 +423,7 @@
     <Compile Include="Obsolete\Obsolete.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FiltersAggregatorConverter.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />
+    <Compile Include="Resolvers\Converters\Analyzers\StopWordsJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\ClusterRerouteCommandCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\CatFielddataRecordConverter.cs" />
     <Compile Include="Resolvers\Converters\CompositeJsonConverter.cs" />
