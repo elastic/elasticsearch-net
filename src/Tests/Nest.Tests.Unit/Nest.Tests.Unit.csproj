@@ -415,6 +415,12 @@
     <None Include="Core\Update\UpdateDetectNoop.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="ObjectInitializer\Template\TemplateWithEmptyAliasResponse.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Template\TemplateWithAliasResponse.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Reproduce\Issue1528_ExplicitTypeAndIndex.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

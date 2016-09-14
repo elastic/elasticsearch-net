@@ -1,0 +1,12 @@
+{
+  "employees": {
+    "order": 0,
+    "template": "employees-v1-*",
+    "settings": {},
+    "mappings": {},
+    "warmers": {},
+    "aliases": {
+      "employees": { "routing" :  "name" }
+    }
+  }
+}

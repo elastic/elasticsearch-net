@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeConverter<CreateAliasOperation>))]
 	public interface ICreateAliasOperation
 	{
 		[JsonProperty("filter")]
