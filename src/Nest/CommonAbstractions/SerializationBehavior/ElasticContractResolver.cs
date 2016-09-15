@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Elasticsearch.Net;
@@ -46,10 +47,8 @@ namespace Nest
 				else if (o == typeof(ServerError))
 					contract.Converter = new ServerErrorJsonConverter();
 				else if (o == typeof(DateTime) ||
-						 o == typeof(DateTime?) ||
-						 o == typeof(DateTimeOffset) ||
-						 o == typeof(DateTimeOffset?))
-					contract.Converter = new IsoDateTimeConverter();
+						 o == typeof(DateTime?))
+					contract.Converter = new IsoDateTimeConverter { Culture = CultureInfo.InvariantCulture };
 				else if (o == typeof(TimeSpan) ||
 						 o == typeof(TimeSpan?))
 					contract.Converter = new TimeSpanConverter();
