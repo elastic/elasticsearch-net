@@ -39,9 +39,7 @@ namespace Nest
 			this._backOffRetries = this._partionedBulkRequest.BackOffRetries.GetValueOrDefault(0);
 			this._backOffTime = (this._partionedBulkRequest?.BackOffTime?.ToTimeSpan() ?? TimeSpan.FromMinutes(1));
 			this._bulkSize = this._partionedBulkRequest.Size ?? 1000;
-			this._maxDegreeOfParallelism = this._partionedBulkRequest.MaxDegreeOfParallelism.HasValue
-				? this._partionedBulkRequest.MaxDegreeOfParallelism.Value
-				: 20;
+			this._maxDegreeOfParallelism = _partionedBulkRequest.MaxDegreeOfParallelism ?? 20;
 			this._cancelToken = cancellationToken;
 			this._compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(this._cancelToken);
 			this._compositeCancelToken = this._compositeCancelTokenSource.Token;
@@ -116,20 +114,20 @@ namespace Nest
 				if (!string.IsNullOrEmpty(r.Routing)) s.Routing(r.Routing);
 				if (r.WaitForActiveShards.HasValue) s.WaitForActiveShards(r.WaitForActiveShards.ToString());
 				return s;
-			}, this._compositeCancelToken);
+			}, this._compositeCancelToken).ConfigureAwait(false);
 
 			this._compositeCancelToken.ThrowIfCancellationRequested();
 			if (!response.IsValid && backOffRetries < this._backOffRetries)
 			{
 				this._incrementRetries();
 				//wait before or after fishing out retriable docs?
-				await Task.Delay(this._backOffTime, this._compositeCancelToken);
+				await Task.Delay(this._backOffTime, this._compositeCancelToken).ConfigureAwait(false);
 				var retryDocuments = response.Items.Zip(buffer, (i, d) => new { i, d })
 					.Where(x => x.i.Status == 429)
 					.Select(x => x.d)
 					.ToList();
 
-				return await this.BulkAsync(retryDocuments, page, ++backOffRetries);
+				return await this.BulkAsync(retryDocuments, page, ++backOffRetries).ConfigureAwait(false);
 			}
 			else if (!response.IsValid)
 			{
@@ -195,10 +193,10 @@ namespace Nest
 				SemaphoreSlim semaphoreSlim,
 				long page)
 			{
-				if (semaphoreSlim != null) await semaphoreSlim.WaitAsync();
+				if (semaphoreSlim != null) await semaphoreSlim.WaitAsync().ConfigureAwait(false);
 				try
 				{
-					var result = await taskSelector(item, page);
+					var result = await taskSelector(item, page).ConfigureAwait(false);
 					resultProcessor(item, result);
 				}
 				catch
