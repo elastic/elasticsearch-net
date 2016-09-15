@@ -20,7 +20,8 @@ namespace Tests.QueryDsl.TermLevel.Terms
 					id = 12,
 					index = "devs",
 					path = "lastName",
-					type = "developer"
+					type = "developer",
+					routing = "myroutingvalue"
 				}
 			}
 		};
@@ -35,7 +36,8 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				Id = 12,
 				Index = Index<Developer>(),
 				Type = Type<Developer>(),
-				Path = Field<Developer>(p=>p.LastName)
+				Path = Field<Developer>(p=>p.LastName),
+				Routing = "myroutingvalue"
 			}
 		};
 
@@ -44,7 +46,11 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p => p.Description)
-				.TermsLookup<Developer>(e=>e.Path(p=>p.LastName).Id(12))
+				.TermsLookup<Developer>(e => e
+					.Path(p => p.LastName)
+					.Id(12)
+					.Routing("myroutingvalue")
+				)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITermsQuery>(a => a.Terms)
