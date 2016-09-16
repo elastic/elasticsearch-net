@@ -606,6 +606,10 @@
     <Compile Include="Framework\Xunit\TestFramework.cs" />
     <Compile Include="Framework\Xunit\TestFrameworkExecutor.cs" />
     <Compile Include="Properties\Xunit.cs" />
+    <Compile Include="QueryDsl\BoolDsl\Operators\AndAssignManyManualBoolsTests.cs" />
+    <Compile Include="QueryDsl\BoolDsl\Operators\OrOperatorOnManualBoolsTests.cs" />
+    <Compile Include="QueryDsl\BoolDsl\Operators\AndOperatorOnManualBoolsTests.cs" />
+    <Compile Include="QueryDsl\BoolDsl\Operators\OrAssignManyManualBoolsTests.cs" />
     <Compile Include="QueryDsl\Span\FieldMasking\SpanFieldMaskingUsageTests.cs" />
     <Compile Include="QueryDsl\Verbatim\VerbatimAndStrictQueryUsageTests.cs" />
     <Compile Include="Reproduce\GithubIssue2101.cs" />

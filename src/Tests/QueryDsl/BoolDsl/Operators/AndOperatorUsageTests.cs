@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
+using Tests.Framework.MockData;
 
 namespace Tests.QueryDsl.BoolDsl.Operators
 {
@@ -34,7 +36,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			ReturnsSingleQuery(Query && NullQuery, q => q.Query() && q.NullQuery(),
 				c => c.Term.Value.Should().NotBeNull());
 
-			ReturnsSingleQuery(NullQuery && Query, q=> q.NullQuery() && q.Query(), 
+			ReturnsSingleQuery(NullQuery && Query, q=> q.NullQuery() && q.Query(),
 				c => c.Term.Value.Should().NotBeNull());
 
 			ReturnsSingleQuery(ConditionlessQuery && ConditionlessQuery && ConditionlessQuery && Query,
@@ -42,7 +44,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 				c => c.Term.Value.Should().NotBeNull());
 
 			ReturnsSingleQuery(
-				NullQuery && NullQuery && ConditionlessQuery && Query, 
+				NullQuery && NullQuery && ConditionlessQuery && Query,
 				q=>q.NullQuery() && q.NullQuery() && q.ConditionlessQuery() && q.Query(),
 				c => c.Term.Value.Should().NotBeNull());
 
@@ -58,8 +60,8 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 				NullQuery && ConditionlessQuery && ConditionlessQuery && ConditionlessQuery,
 				q=>q.NullQuery() && q.ConditionlessQuery() && q.ConditionlessQuery() && q.ConditionlessQuery()
 			);
-
 		}
+
 		[U] public void CombiningManyUsingAggregate()
 		{
 			var lotsOfAnds = Enumerable.Range(0, 100).Aggregate(new QueryContainer(), (q, c) => q && Query, q => q);
@@ -68,7 +70,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 
 		[U] public void CombiningManyUsingForeachInitializingWithNull()
 		{
-			QueryContainer container = null; 
+			QueryContainer container = null;
 			foreach(var i in Enumerable.Range(0, 100))
 				container &= Query;
 			LotsOfAnds(container);
@@ -76,17 +78,17 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 
 		[U] public void CombiningManyUsingForeachInitializingWithDefault()
 		{
-			var container = new QueryContainer(); 
+			var container = new QueryContainer();
 			foreach(var i in Enumerable.Range(0, 100))
 				container &= Query;
 			LotsOfAnds(container);
 		}
 
-		private void LotsOfAnds(IQueryContainer lotsOfAnds)
+		private void LotsOfAnds(IQueryContainer lotsOfAnds, int iterations = 100)
 		{
 			lotsOfAnds.Should().NotBeNull();
 			lotsOfAnds.Bool.Should().NotBeNull();
-			lotsOfAnds.Bool.Must.Should().NotBeEmpty().And.HaveCount(100);
+			lotsOfAnds.Bool.Must.Should().NotBeEmpty().And.HaveCount(iterations);
 		}
 
 	}

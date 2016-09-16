@@ -126,11 +126,30 @@ namespace Nest
 				throw new ArgumentException("Argument can not be an empty collection", parameterName);
 		}
 
-		internal static IList<T> EagerConcat<T>(this IEnumerable<T> list, IEnumerable<T> other)
+		internal static List<T> AsInstanceOrToListOrDefault<T>(this IEnumerable<T> list)
 		{
-			list = list.HasAny() ? list : Enumerable.Empty<T>();
-			var l = new List<T>(list);
-			if (other.HasAny()) l.AddRange(other);
+			return list as List<T> ?? list?.ToList<T>() ?? new List<T>();
+		}
+		internal static List<T> AsInstanceOrToListOrNull<T>(this IEnumerable<T> list)
+		{
+			return list as List<T> ?? list?.ToList<T>();
+		}
+
+		internal static List<T> EagerConcat<T>(this IEnumerable<T> list, IEnumerable<T> other)
+		{
+			var first = list.AsInstanceOrToListOrDefault();
+			if (other == null) return first;
+			var second = other.AsInstanceOrToListOrDefault();
+			var newList = new List<T>(first.Count + second.Count);
+			newList.AddRange(first);
+			newList.AddRange(second);
+			return newList;
+		}
+		internal static IEnumerable<T> AddIfNotNull<T>(this IEnumerable<T> list, T other)
+		{
+			if (other == null) return list;
+			var l = list.AsInstanceOrToListOrDefault();
+			l.Add(other);
 			return l;
 		}
 
@@ -169,8 +188,8 @@ namespace Nest
 
 		internal static List<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> enumerable)
 		{
-			var list = enumerable?.ToList();
-			return list.HasAny() ? list : null;
+			var list = enumerable.AsInstanceOrToListOrNull();
+			return list != null && list.Count > 0 ? list : null;
 		}
 
 		internal static void AddIfNotNull<T>(this IList<T> list, T item) where T : class

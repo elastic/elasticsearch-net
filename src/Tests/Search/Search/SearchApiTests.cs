@@ -301,6 +301,11 @@ namespace Tests.Search.Search
 	{
 		public SearchApiNullQueriesInQueryContainerTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		// when we serialize we write and empty bool, when we read the fact it was verbatim is lost so while
+		// we technically DO support deserialization here (and empty bool will get set) when we write it a second
+		// time it will NOT write that bool because the is verbatim did not carry over.
+		protected override bool SupportsDeserialization => false;
+
 		protected override object ExpectJson => new
 		{
 			query = new

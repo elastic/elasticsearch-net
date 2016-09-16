@@ -22,14 +22,24 @@ namespace Nest
 		bool IQueryContainer.IsVerbatim { get; set; }
 		internal bool IsVerbatim => Self.IsVerbatim;
 
+		internal bool HoldsOnlyShouldMusts { get; set; }
+
 		public QueryContainer() { }
 
 		public QueryContainer(QueryBase query) : this()
 		{
-			query?.WrapInContainer(this);
+			if (query == null) return;
+
+			if (query.IsStrict && !query.IsWritable)
+				throw new ArgumentException("Query is conditionless but strict is turned on");
+
+			query.WrapInContainer(this);
 		}
 
-		public static QueryContainer operator &(QueryContainer leftContainer, QueryContainer rightContainer)
+		public static QueryContainer operator &(QueryContainer leftContainer, QueryContainer rightContainer) =>
+			And(leftContainer, rightContainer);
+
+		internal static QueryContainer And(QueryContainer leftContainer, QueryContainer rightContainer)
 		{
 			QueryContainer queryContainer;
 			return IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer)
@@ -37,7 +47,10 @@ namespace Nest
 				: leftContainer.CombineAsMust(rightContainer);
 		}
 
-		public static QueryContainer operator |(QueryContainer leftContainer, QueryContainer rightContainer)
+		public static QueryContainer operator |(QueryContainer leftContainer, QueryContainer rightContainer) =>
+			Or(leftContainer, rightContainer);
+
+		internal static QueryContainer Or(QueryContainer leftContainer, QueryContainer rightContainer)
 		{
 			QueryContainer queryContainer;
 			return IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer)
@@ -47,19 +60,24 @@ namespace Nest
 
 		private static bool IfEitherIsEmptyReturnTheOtherOrEmpty(QueryContainer leftContainer, QueryContainer rightContainer, out QueryContainer queryContainer)
 		{
-			var combined = new[] {leftContainer, rightContainer};
-			var anyEmpty = combined.Any(q => q == null || !q.IsWritable);
-			queryContainer = anyEmpty ? combined.FirstOrDefault(q => q != null && q.IsWritable) : null;
-			return anyEmpty;
+			queryContainer = null;
+			if (leftContainer == null && rightContainer == null) return true;
+			var leftWritable = (leftContainer?.IsWritable).GetValueOrDefault(false);
+			var rightWritable = (rightContainer?.IsWritable).GetValueOrDefault(false);
+			if (leftWritable && rightWritable) return false;
+			if (!leftWritable && !rightWritable) return true;
+
+			queryContainer = leftWritable ? leftContainer : rightContainer;
+			return !leftWritable || !rightWritable;
 		}
 
 		public static QueryContainer operator !(QueryContainer queryContainer) => queryContainer == null || (!queryContainer.IsWritable)
 			? null
-			: new QueryContainer(new BoolQuery {MustNot = new[] {queryContainer}});
+			: new QueryContainer(new BoolQuery { MustNot = new[] { queryContainer } });
 
 		public static QueryContainer operator +(QueryContainer queryContainer) => queryContainer == null || (!queryContainer.IsWritable)
 			? null
-			: new QueryContainer(new BoolQuery {Filter = new[] {queryContainer}});
+			: new QueryContainer(new BoolQuery { Filter = new[] { queryContainer } });
 
 		public static bool operator false(QueryContainer a) => false;
 
