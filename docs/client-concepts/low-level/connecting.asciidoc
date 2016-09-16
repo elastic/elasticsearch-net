@@ -356,27 +356,3 @@ public class MyJsonNetSerializer : JsonNetSerializer
 <2> Call OverwriteDefaultSerializers if you need access to `JsonSerializerSettings` with local state
 <3> You can inject contract resolved converters by implementing the ContractConverters property. This can be much faster then registering them on `JsonSerializerSettings.Converters`
 
-You can then register a factory on `ConnectionSettings` to create an instance of your subclass instead.
-This is **_called once per instance_** of ConnectionSettings.
-
-[source,csharp]
-----
-var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-
-var settings = new ConnectionSettings(connectionPool, new InMemoryConnection(), s => new MyJsonNetSerializer(s));
-
-var client = new ElasticClient(settings);
-
-client.RootNodeInfo();
-
-client.RootNodeInfo();
-
-var serializer = ((IConnectionSettingsValues)settings).Serializer as MyJsonNetSerializer;
-
-serializer.CallToModify.Should().BeGreaterThan(0);
-
-serializer.SerializeToString(new Project { });
-
-serializer.CallToContractConverter.Should().BeGreaterThan(0);
-----
-

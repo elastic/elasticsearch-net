@@ -188,7 +188,7 @@ var expected = new
                                 {
                                     type = "keyword"
                                 }
-                        },
+                            },
                             type = "text"
                         },
                         hours = new
@@ -207,7 +207,7 @@ var expected = new
                                 {
                                     type = "keyword"
                                 }
-                        },
+                            },
                             type = "text"
                         },
                         salary = new
@@ -224,10 +224,10 @@ var expected = new
                         keyword = new
                         {
                             type = "keyword"
-                }
+                        }
                     },
                     type = "text"
-            }
+                }
             }
         },
         employee = new
@@ -251,7 +251,7 @@ var expected = new
                         {
                             type = "keyword"
                         }
-                },
+                    },
                     type = "text"
                 },
                 hours = new
@@ -270,7 +270,7 @@ var expected = new
                         {
                             type = "keyword"
                         }
-                },
+                    },
                     type = "text"
                 },
                 salary = new
@@ -374,7 +374,7 @@ Here we define the same two types as before, but this time using attributes to d
 [ElasticsearchType(Name = "company")]
 public class CompanyWithAttributes
 {
-    [Keyword(NullValue = "null", Similarity = SimilarityOption.BM25)]
+    [Keyword(NullValue = "null", Similarity = "BM25")]
     public string Name { get; set; }
 
     [Text(Name = "office_hours")]
@@ -448,7 +448,7 @@ var expected = new
                                 {
                                     type = "keyword"
                                 }
-                        },
+                            },
                             type = "text"
                         },
                         hours = new
@@ -467,7 +467,7 @@ var expected = new
                                 {
                                     type = "keyword"
                                 }
-                        },
+                            },
                             type = "text"
                         },
                         salary = new
@@ -522,7 +522,7 @@ var expected = new
                                 {
                                     type = "keyword"
                                 }
-                        },
+                            },
                             type = "text"
                         },
                         hours = new
@@ -541,7 +541,7 @@ var expected = new
                                 {
                                     type = "keyword"
                                 }
-                        },
+                            },
                             type = "text"
                         },
                         salary = new
@@ -698,7 +698,7 @@ var expected = new
                                 {
                                     type = "keyword"
                                 }
-                        },
+                            },
                             type = "text"
                         },
                         salary = new
@@ -806,10 +806,10 @@ var expected = new
                         keyword = new
                         {
                             type = "keyword"
+                        }
+                    }
                 }
             }
-        }
-    }
         }
     }
 };
