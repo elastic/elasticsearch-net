@@ -153,12 +153,34 @@ namespace Nest
 			return fieldName.ToCamelCase();
 		}
 
+		protected static bool ShouldSerializeQueryContainer(object o, JsonProperty prop)
+		{
+			if (o == null) return false;
+			var q = prop.ValueProvider.GetValue(o) as QueryContainer;
+			if (q == null) return false;
+			if (q.IsWritable) return true;
+			var nq = q as NoMatchQueryContainer;
+			if (nq != null && nq.Shortcut != null) return true;
+			return false;
+		}
+
+		protected static bool ShouldSerializeQueryContainers(object o, JsonProperty prop)
+		{
+			if (o == null) return false;
+			var q = prop.ValueProvider.GetValue(o) as IEnumerable<QueryContainer>;
+			return (q.AsInstanceOrToListOrNull()?.Any(qq=>qq != null && qq.IsWritable)).GetValueOrDefault(false);
+		}
+
 		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
 		{
 			var property = base.CreateProperty(member, memberSerialization);
+			if (property.PropertyType == typeof(QueryContainer))
+				property.ShouldSerialize = o => ElasticContractResolver.ShouldSerializeQueryContainer(o, property);
+			else if (property.PropertyType == typeof(IEnumerable<QueryContainer>))
+				property.ShouldSerialize = o => ElasticContractResolver.ShouldSerializeQueryContainers(o, property);
 
 			// Skip serialization of empty collections that has DefaultValueHandling set to Ignore.
-			if (property.DefaultValueHandling.HasValue
+			else if (property.DefaultValueHandling.HasValue
 				&& property.DefaultValueHandling.Value == DefaultValueHandling.Ignore
 				&& !typeof(string).IsAssignableFrom(property.PropertyType)
 				&& typeof(IEnumerable).IsAssignableFrom(property.PropertyType))

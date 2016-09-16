@@ -34,42 +34,36 @@ namespace Tests.QueryDsl.Compound.Bool
 							must = new object[] {
 								new {
 									@bool = new {
-										must = new object[] {
+										//complex nested bool
+										should = new object[] {
 											new {
 												@bool = new {
-													//complex nested bool
-													should = new object[] {
-														new {
-															@bool = new {
-																filter = new object[] { new { term = new { x = new { value = "y" } } } }
-															}
-														},
-														new {
-															@bool = new {
-																filter = new object[] { new { term = new { x = new { value = "y" } } } }
-															}
-														},
-														new {
-															@bool = new {
-																must_not = new object[] {
-																	new { term = new { x = new { value = "y" } } },
-																	new { term = new { x = new { value = "y" } } }
-																}
-															}
-														}
-													}
+													filter = new object[] { new { term = new { x = new { value = "y" } } } }
 												}
 											},
-											//simple nested or
 											new {
 												@bool = new {
-													should = new object[] {
-														new { term = new { x = new { value = "y" } } },
+													filter = new object[] { new { term = new { x = new { value = "y" } } } }
+												}
+											},
+											new {
+												@bool = new {
+													must_not = new object[] {
 														new { term = new { x = new { value = "y" } } },
 														new { term = new { x = new { value = "y" } } }
 													}
 												}
 											}
+										}
+									}
+								},
+								//simple nested or
+								new {
+									@bool = new {
+										should = new object[] {
+											new { term = new { x = new { value = "y" } } },
+											new { term = new { x = new { value = "y" } } },
+											new { term = new { x = new { value = "y" } } }
 										}
 									}
 								},
@@ -139,18 +133,13 @@ namespace Tests.QueryDsl.Compound.Bool
 			//second bool
 			var secondBool = (container.Bool.Should.Last() as IQueryContainer)?.Bool;
 			secondBool.Should().NotBeNull();
-			secondBool.Must.Should().HaveCount(2); //the last bool query was all conditionless
+			secondBool.Must.Should().HaveCount(3); //the last bool query was all conditionless
 			secondBool.MustNot.Should().BeNull();
 			secondBool.Filter.Should().BeNull();
 			secondBool.Should.Should().BeNull();
 
 			//complex nested bool
-			var complexBool = (secondBool.Must.First() as IQueryContainer)?.Bool;
-			complexBool.Should().NotBeNull();
-			//complex bool is 3 ors and the next simple nested or bool query also has 3 should clauses
-			complexBool.Must.Should().HaveCount(2);
-
-			var complexNestedBool = (complexBool.Must.First() as IQueryContainer)?.Bool;
+			var complexNestedBool = (secondBool.Must.First() as IQueryContainer)?.Bool;
 			complexNestedBool.Should().NotBeNull();
 			complexNestedBool.Should.Should().HaveCount(3);
 
