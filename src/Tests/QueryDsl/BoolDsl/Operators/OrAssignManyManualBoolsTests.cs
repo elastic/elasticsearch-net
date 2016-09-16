@@ -7,7 +7,7 @@ using Tests.Framework.MockData;
 
 namespace Tests.QueryDsl.BoolDsl.Operators
 {
-	public class OrAssignManyManualBoolsUageTests : OperatorUsageBase
+	public class OrAssignManyManualBoolsTests : OperatorUsageBase
 	{
 		/** Or assigning many bool queries that are not locked should result in a single bool query with many
 		 * should clauses. Consider our combining logic where we try to merge should clauses or wrap in a new container:

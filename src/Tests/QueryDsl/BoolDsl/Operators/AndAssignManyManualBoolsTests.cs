@@ -7,7 +7,8 @@ using Tests.Framework.MockData;
 
 namespace Tests.QueryDsl.BoolDsl.Operators
 {
-	public class AndAssignManyManualBoolsUsageTests : OperatorUsageBase
+	//hide
+	public class AndAssignManyManualBoolsTests : OperatorUsageBase
 	{
 		private static QueryContainer ATermQuery(QueryContainerDescriptor<Project> must) => must.Term(p => p.Name, "foo");
 

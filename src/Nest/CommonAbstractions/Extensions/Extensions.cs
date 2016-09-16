@@ -189,7 +189,7 @@ namespace Nest
 		internal static List<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> enumerable)
 		{
 			var list = enumerable.AsInstanceOrToListOrNull();
-			return list == null || list.Count > 0 ? list : null;
+			return list != null && list.Count > 0 ? list : null;
 		}
 
 		internal static void AddIfNotNull<T>(this IList<T> list, T item) where T : class
