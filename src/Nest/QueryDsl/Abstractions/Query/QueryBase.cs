@@ -86,11 +86,9 @@ namespace Nest
 		{
 			if (query == null)
 				return null;
-			if (query.IsWritable)
-				return new QueryContainer(query);
-			if (query.IsStrict)
-				throw new ArgumentException("Query is conditionless but strict is turned on");
-			return null;
+			return new QueryContainer(query);
+
+
 		}
 
 		internal void WrapInContainer(IQueryContainer container)

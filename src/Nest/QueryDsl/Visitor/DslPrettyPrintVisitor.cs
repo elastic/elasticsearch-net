@@ -152,7 +152,7 @@ namespace Nest
 
 		public virtual void Visit(IGeoDistanceQuery query) => Write("geo_distance");
 
-        public virtual void Visit(IGeoHashCellQuery filter) => Write("geohash_cell");
+		public virtual void Visit(IGeoHashCellQuery filter) => Write("geohash_cell");
 
 		public virtual void Visit(ITemplateQuery query) => Write("template");
 
