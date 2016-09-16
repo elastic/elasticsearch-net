@@ -19,7 +19,9 @@ namespace Tests.Mapping.Types.Core.String
 			PositionIncrementGap = 5,
 #pragma warning restore 618
 			SearchAnalyzer = "mysearchanalyzer",
-			Similarity = SimilarityOption.BM25,
+#pragma warning disable CS0618 // Type or member is obsolete
+			CustomSimilarity = "my_custom_similarity",
+#pragma warning restore CS0618 // Type or member is obsolete
 			Store = true,
 			TermVector = TermVectorOption.WithPositionsOffsets)]
 		public string Full { get; set; }
@@ -53,7 +55,7 @@ namespace Tests.Mapping.Types.Core.String
 					null_value = "na",
 					position_increment_gap = 5,
 					search_analyzer = "mysearchanalyzer",
-					similarity = "BM25",
+					similarity = "my_custom_similarity",
 					store = true,
 					term_vector = "with_positions_offsets"
 				},
@@ -89,7 +91,7 @@ namespace Tests.Mapping.Types.Core.String
 				.NullValue("na")
 				.PositionIncrementGap(5)
 				.SearchAnalyzer("mysearchanalyzer")
-				.Similarity(SimilarityOption.BM25)
+				.Similarity("my_custom_similarity")
 				.Store(true)
 				.TermVector(TermVectorOption.WithPositionsOffsets)
 			)
