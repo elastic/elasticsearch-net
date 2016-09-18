@@ -3184,7 +3184,7 @@ namespace Nest
 		
 
 		///<summary>A comma-separated list of keys to clear when using the `filter_cache` parameter (default: all)</summary>
-		public ClearCacheDescriptor FilterKeys(bool filter_keys = true)
+		public ClearCacheDescriptor FilterKeys(params string[] filter_keys)
 		{
 			this.Request.RequestParameters.FilterKeys(filter_keys);
 			return this;

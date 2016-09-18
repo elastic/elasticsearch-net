@@ -35,6 +35,12 @@ namespace CodeGeneration.LowLevelClient.Domain
 					return this.Type;
 			}
 		}
-		
+
+	    public virtual string CsharpPropertyName(string cased)
+	    {
+	        return cased != "Type" && cased != "Index" && cased != "Script" 
+                ? cased 
+                : cased + "QueryString";
+	    }
 	}
 }
