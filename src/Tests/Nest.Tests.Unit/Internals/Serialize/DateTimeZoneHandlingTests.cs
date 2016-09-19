@@ -44,6 +44,7 @@ namespace Nest.Tests.Unit.Internals.Serialize
                 DepartureDateLocal = departureDateLocal,
                 DepartureDateOffset = new DateTimeOffset(2013, 1, 21, 0, 0, 0, _timeSpanOffset),
                 DepartureDateOffsetZero = new DateTimeOffset(2013, 1, 21, 0, 0, 0, TimeSpan.Zero),
+                DepartureDateOffsetNonLocal = new DateTimeOffset(2013, 1, 21, 0, 0, 0, TimeSpan.FromHours(-6.25)),
             };
 
             _offset = string.Format("{0}:{1}",
@@ -69,6 +70,7 @@ namespace Nest.Tests.Unit.Internals.Serialize
 			   ""DepartureDateLocal"": ""2013-01-21T00:00:00" + _offset + @""",
                ""DepartureDateOffset"": ""2013-01-21T00:00:00" + _offset + @""",
                ""DepartureDateOffsetZero"": ""2013-01-21T00:00:00+00:00"",
+               ""DepartureDateOffsetNonLocal"": ""2013-01-21T00:00:00-06:15""
 			}";
             jsonWithRoundtripTimeZone.JsonEquals(expected).Should().BeTrue("{0}", jsonWithRoundtripTimeZone);
 
@@ -80,6 +82,7 @@ namespace Nest.Tests.Unit.Internals.Serialize
 	        flight.DepartureDateUtc.Kind.Should().Be(_flight.DepartureDateUtc.Kind);
             flight.DepartureDateOffset.Offset.Should().Be(_flight.DepartureDateOffset.Offset);
             flight.DepartureDateOffsetZero.Offset.Should().Be(_flight.DepartureDateOffsetZero.Offset);
+            flight.DepartureDateOffsetNonLocal.Offset.Should().Be(_flight.DepartureDateOffsetNonLocal.Offset);
         }
 
         /// <remarks>
@@ -94,9 +97,8 @@ namespace Nest.Tests.Unit.Internals.Serialize
 	    {
 	        var dateTimeZoneHandling = DateTimeZoneHandling.Utc;
 	        var dateTimeKind = DateTimeKind.Utc;
-
-	        var departureDateLocal = _flight.DepartureDateUtc.Subtract(_timeSpanOffset);
-	        var depatureDateLocalString = departureDateLocal.ToString("yyyy-MM-ddTHH:mm:ssZ");
+            var departureDateLocalInUtc = TimeZoneInfo.ConvertTimeToUtc(_flight.DepartureDateLocal, TimeZoneInfo.Local);
+            var depatureDateLocalString = departureDateLocalInUtc.ToString("yyyy-MM-ddTHH:mm:ssZ");
 
             var jsonWithUtcTimeZone = this.SerializeUsing(_flight, dateTimeZoneHandling);
             var expected = @" {
@@ -105,6 +107,7 @@ namespace Nest.Tests.Unit.Internals.Serialize
 			   ""DepartureDateLocal"": """ + depatureDateLocalString + @""",
                ""DepartureDateOffset"": ""2013-01-21T00:00:00" + _offset + @""",
                ""DepartureDateOffsetZero"": ""2013-01-21T00:00:00+00:00"",
+               ""DepartureDateOffsetNonLocal"": ""2013-01-21T00:00:00-06:15""
 			}";
             jsonWithUtcTimeZone.JsonEquals(expected).Should().BeTrue("{0}", jsonWithUtcTimeZone);
 
@@ -115,7 +118,7 @@ namespace Nest.Tests.Unit.Internals.Serialize
 
             // The deserialized local will be the UTC DateTime + the local timezone offset,
             // AND with a DateTimeKind of UTC when deserialized.
-            flight.DepartureDateLocal.Should().Be(departureDateLocal);
+            flight.DepartureDateLocal.Should().Be(departureDateLocalInUtc);
             flight.DepartureDateLocal.Kind.Should().Be(dateTimeKind);
 
             flight.DepartureDateUtc.Should().Be(_flight.DepartureDateUtc);
@@ -126,6 +129,9 @@ namespace Nest.Tests.Unit.Internals.Serialize
 
             flight.DepartureDateOffsetZero.Should().Be(_flight.DepartureDateOffsetZero);
             flight.DepartureDateOffsetZero.Offset.Should().Be(_flight.DepartureDateOffsetZero.Offset);
+
+            flight.DepartureDateOffsetNonLocal.Should().Be(_flight.DepartureDateOffsetNonLocal);
+            flight.DepartureDateOffsetNonLocal.Offset.Should().Be(_flight.DepartureDateOffsetNonLocal.Offset);
         }
     
         /// <remarks>
@@ -144,6 +150,7 @@ namespace Nest.Tests.Unit.Internals.Serialize
 			   ""DepartureDateLocal"": ""2013-01-21T00:00:00"",
 			   ""DepartureDateOffset"": ""2013-01-21T00:00:00" + _offset + @""",
                ""DepartureDateOffsetZero"": ""2013-01-21T00:00:00+00:00"",
+               ""DepartureDateOffsetNonLocal"": ""2013-01-21T00:00:00-06:15""
 			 }";
             jsonWithUnspecifiedTimeZone.JsonEquals(expected).Should().BeTrue("{0}", jsonWithUnspecifiedTimeZone);
 
@@ -155,6 +162,7 @@ namespace Nest.Tests.Unit.Internals.Serialize
             flight.DepartureDateUtc.Kind.Should().Be(dateTimeKind);
             flight.DepartureDateOffset.Offset.Should().Be(_flight.DepartureDateOffset.Offset);
             flight.DepartureDateOffsetZero.Offset.Should().Be(_flight.DepartureDateOffsetZero.Offset);
+            flight.DepartureDateOffsetNonLocal.Offset.Should().Be(_flight.DepartureDateOffsetNonLocal.Offset);
         }
 
         /// <remarks>
@@ -169,8 +177,8 @@ namespace Nest.Tests.Unit.Internals.Serialize
 	        var dateTimeKind = DateTimeKind.Local;
 
 	        var jsonWithLocalTimeZone = this.SerializeUsing(_flight, dateTimeZoneHandling);
-	        var departureDateLocal = _flight.DepartureDateUtc.Add(_timeSpanOffset);
-	        var depatureDateLocalString = departureDateLocal.ToString("yyyy-MM-ddTHH:mm:ss");
+            var departureDateUtcInLocal = TimeZoneInfo.ConvertTimeFromUtc(_flight.DepartureDateUtc, TimeZoneInfo.Local);
+            var depatureDateLocalString = departureDateUtcInLocal.ToString("yyyy-MM-ddTHH:mm:ss");
 
             var expected = @"
 			{
@@ -179,6 +187,7 @@ namespace Nest.Tests.Unit.Internals.Serialize
 			  ""DepartureDateLocal"": ""2013-01-21T00:00:00" + _offset + @""",
 			  ""DepartureDateOffset"": ""2013-01-21T00:00:00" + _offset + @""",
               ""DepartureDateOffsetZero"": ""2013-01-21T00:00:00+00:00"",
+              ""DepartureDateOffsetNonLocal"": ""2013-01-21T00:00:00-06:15""
 			}";
             jsonWithLocalTimeZone.JsonEquals(expected).Should().BeTrue("{0}", jsonWithLocalTimeZone);
 
@@ -197,7 +206,7 @@ namespace Nest.Tests.Unit.Internals.Serialize
             //
             // Calling .ToUniversalTime() will return DepartureDateUtc with correct
             // UTC datetime and DateTimeKind.Utc
-            flight.DepartureDateUtc.Should().Be(departureDateLocal);
+            flight.DepartureDateUtc.Should().Be(departureDateUtcInLocal);
             flight.DepartureDateUtc.Kind.Should().Be(dateTimeKind);
 
             flight.DepartureDateOffset.Should().Be(_flight.DepartureDateOffset);
@@ -205,6 +214,9 @@ namespace Nest.Tests.Unit.Internals.Serialize
 
             flight.DepartureDateOffsetZero.Should().Be(_flight.DepartureDateOffsetZero);
             flight.DepartureDateOffsetZero.Offset.Should().Be(_flight.DepartureDateOffsetZero.Offset);
+
+            flight.DepartureDateOffsetNonLocal.Should().Be(_flight.DepartureDateOffsetNonLocal);
+            flight.DepartureDateOffsetNonLocal.Offset.Should().Be(_flight.DepartureDateOffsetNonLocal.Offset);
         }
 
         private string SerializeUsing(Flight flight, DateTimeZoneHandling handling)
@@ -215,7 +227,6 @@ namespace Nest.Tests.Unit.Internals.Serialize
                 .SetDefaultPropertyNameInferrer(p => p)
                 .SetJsonSerializerSettingsModifier(s =>
                 {
-                    s.DateFormatHandling = DateFormatHandling.IsoDateFormat;
                     s.DateTimeZoneHandling = handling;
                     s.Formatting = Formatting.Indented;
                     s.ContractResolver = new DefaultDateTimeContractResolver(settings);
@@ -230,7 +241,6 @@ namespace Nest.Tests.Unit.Internals.Serialize
                 .SetDefaultPropertyNameInferrer(p => p)
                 .SetJsonSerializerSettingsModifier(s =>
                 {
-                    s.DateFormatHandling = DateFormatHandling.IsoDateFormat;
                     s.DateTimeZoneHandling = handling;
                 });
             var client = new ElasticClient(settings);

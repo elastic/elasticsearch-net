@@ -9,6 +9,7 @@ namespace Nest.Tests.Unit.Internals.Serialize
         public DateTime DepartureDateLocal { get; set; }
         public DateTimeOffset DepartureDateOffset { get; set; }
         public DateTimeOffset DepartureDateOffsetZero { get; set; }
+        public DateTimeOffset DepartureDateOffsetNonLocal { get; set; }
 
         protected bool Equals(Flight other)
         {
@@ -16,7 +17,8 @@ namespace Nest.Tests.Unit.Internals.Serialize
                    DepartureDateUtc.Equals(other.DepartureDateUtc) &&
                    DepartureDateLocal.Equals(other.DepartureDateLocal) &&
                    DepartureDateOffset.Equals(other.DepartureDateOffset) &&
-                   DepartureDateOffsetZero.Equals(other.DepartureDateOffsetZero);
+                   DepartureDateOffsetZero.Equals(other.DepartureDateOffsetZero) &&
+                   DepartureDateOffsetNonLocal.Equals(other.DepartureDateOffsetNonLocal);
         }
 
         public override bool Equals(object obj)
@@ -36,6 +38,7 @@ namespace Nest.Tests.Unit.Internals.Serialize
                 hashCode = (hashCode * 397) ^ DepartureDateLocal.GetHashCode();
                 hashCode = (hashCode * 397) ^ DepartureDateOffset.GetHashCode();
                 hashCode = (hashCode * 397) ^ DepartureDateOffsetZero.GetHashCode();
+                hashCode = (hashCode * 397) ^ DepartureDateOffsetNonLocal.GetHashCode();
                 return hashCode;
             }
         }
