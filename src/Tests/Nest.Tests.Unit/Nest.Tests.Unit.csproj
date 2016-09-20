@@ -108,6 +108,7 @@
     <Compile Include="Core\Indices\Analysis\Analyzers\AnalyzerTests.cs" />
     <Compile Include="Core\Indices\Analysis\Analyzers\StopWords\StopWordsTests.cs" />
     <Compile Include="Core\Indices\Analysis\TokenFilters\TokenFilterTests.cs" />
+    <Compile Include="Core\Indices\ClearCache\ClearCacheUrlTests.cs" />
     <Compile Include="Core\Indices\Similarity\SimilarityTests.cs" />
     <Compile Include="Core\Map\CustomMapping\ImagePluginMappingTests.cs" />
     <Compile Include="Core\Map\Enums\EnumMappingTests.cs" />
