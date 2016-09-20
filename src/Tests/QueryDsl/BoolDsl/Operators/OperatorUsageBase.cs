@@ -42,5 +42,9 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			IQueryContainer c = combined;
 			containerAssert(c);
 		}
+
+
+
+
 	}
 }

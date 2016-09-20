@@ -168,6 +168,7 @@ namespace Nest
 
 		[JsonProperty("not")]
 		INotQuery Not { get; set; }
+
 #pragma warning restore 618
 
 		void Accept(IQueryVisitor visitor);

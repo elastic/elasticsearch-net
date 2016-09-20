@@ -47,8 +47,11 @@ namespace Nest
 		[JsonProperty("boundary_chars")]
 		string BoundaryChars { get; set; }
 
-		[JsonProperty("type")]
 		HighlighterType? Type { get; set; }
+
+		[JsonProperty("type")]
+		[Obsolete("This is a temporary binary backwards compatible hack to make sure you can specify any custom highlightertype in 2.x, scheduled for removal in 5.0")]
+		string CustomType { get; set; }
 
 		[JsonProperty("force_source")]
 		bool? ForceSource { get; set; }
@@ -75,7 +78,12 @@ namespace Nest
 		public string TagsSchema { get; set; }
 		public bool? RequireFieldMatch { get; set; }
 		public string BoundaryChars { get; set; }
-		public HighlighterType? Type { get; set; }
+		public HighlighterType? Type
+		{
+			get { return this.CustomType.ToEnum<HighlighterType>(); }
+			set { this.CustomType = value.GetStringValue(); }
+		}
+		public string CustomType { get; set; }
 		public bool? ForceSource { get; set; }
 		public Fields MatchedFields { get; set; }
 		public QueryContainer HighlightQuery { get; set; }
@@ -110,7 +118,14 @@ namespace Nest
 
 		string IHighlightField.BoundaryChars { get; set; }
 
-		HighlighterType? IHighlightField.Type { get; set; }
+		HighlighterType? IHighlightField.Type
+		{
+#pragma warning disable CS0618 // Type or member is obsolete
+			get { return Self.CustomType.ToEnum<HighlighterType>(); }
+			set { Self.CustomType = value.GetStringValue(); }
+#pragma warning restore CS0618 // Type or member is obsolete
+		}
+		string IHighlightField.CustomType { get; set; }
 
 		bool? IHighlightField.ForceSource { get; set; }
 
@@ -128,6 +143,9 @@ namespace Nest
 		public HighlightFieldDescriptor<T> ForceSource(bool? force = true) => Assign(a => a.ForceSource = force);
 
 		public HighlightFieldDescriptor<T> Type(HighlighterType type) => Assign(a => a.Type = type);
+#pragma warning disable CS0618 // Type or member is obsolete
+		public HighlightFieldDescriptor<T> Type(string type) => Assign(a => a.CustomType = type);
+#pragma warning restore CS0618 // Type or member is obsolete
 
 		public HighlightFieldDescriptor<T> PreTags(string preTags) => Assign(a => a.PreTags = new[] { preTags });
 
@@ -154,7 +172,7 @@ namespace Nest
 		public HighlightFieldDescriptor<T> BoundaryCharacters(string boundaryCharacters) => Assign(a => a.BoundaryChars = boundaryCharacters);
 
 		public HighlightFieldDescriptor<T> BoundaryMaxSize(int? boundaryMaxSize) => Assign(a => a.BoundaryMaxSize = boundaryMaxSize);
-		
+
 		public HighlightFieldDescriptor<T> MatchedFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.MatchedFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 

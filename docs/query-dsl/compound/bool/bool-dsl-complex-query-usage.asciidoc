@@ -80,84 +80,78 @@ Query && Query
           "must": [
             {
               "bool": {
-                "must": [
+                "should": [
                   {
                     "bool": {
-                      "should": [
+                      "filter": [
                         {
-                          "bool": {
-                            "filter": [
-                              {
-                                "term": {
-                                  "x": {
-                                    "value": "y"
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "bool": {
-                            "filter": [
-                              {
-                                "term": {
-                                  "x": {
-                                    "value": "y"
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "bool": {
-                            "must_not": [
-                              {
-                                "term": {
-                                  "x": {
-                                    "value": "y"
-                                  }
-                                }
-                              },
-                              {
-                                "term": {
-                                  "x": {
-                                    "value": "y"
-                                  }
-                                }
-                              }
-                            ]
+                          "term": {
+                            "x": {
+                              "value": "y"
+                            }
                           }
                         }
                       ]
+                    }
+                  },
+                  {
+                    "bool": {
+                      "filter": [
+                        {
+                          "term": {
+                            "x": {
+                              "value": "y"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "bool": {
+                      "must_not": [
+                        {
+                          "term": {
+                            "x": {
+                              "value": "y"
+                            }
+                          }
+                        },
+                        {
+                          "term": {
+                            "x": {
+                              "value": "y"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "bool": {
+                "should": [
+                  {
+                    "term": {
+                      "x": {
+                        "value": "y"
+                      }
                     }
                   },
                   {
-                    "bool": {
-                      "should": [
-                        {
-                          "term": {
-                            "x": {
-                              "value": "y"
-                            }
-                          }
-                        },
-                        {
-                          "term": {
-                            "x": {
-                              "value": "y"
-                            }
-                          }
-                        },
-                        {
-                          "term": {
-                            "x": {
-                              "value": "y"
-                            }
-                          }
-                        }
-                      ]
+                    "term": {
+                      "x": {
+                        "value": "y"
+                      }
+                    }
+                  },
+                  {
+                    "term": {
+                      "x": {
+                        "value": "y"
+                      }
                     }
                   }
                 ]

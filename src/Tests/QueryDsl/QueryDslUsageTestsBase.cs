@@ -72,10 +72,10 @@ namespace Tests.QueryDsl
 			if (ConditionlessWhen == null) return;
 			foreach (var when in ConditionlessWhen)
 			{
-				var query = this.QueryFluent(new QueryContainerDescriptor<Project>());
-				when(query);
-				query = this.QueryInitializer;
-				when(query);
+				var query = when(this.QueryFluent(new QueryContainerDescriptor<Project>()));
+				//this.JsonEquals(query, new { });
+				query = when(this.QueryInitializer);
+				//this.JsonEquals(query, new { });
 			}
 
 			((IQueryContainer)this.QueryInitializer).IsConditionless.Should().BeFalse();
@@ -88,6 +88,7 @@ namespace Tests.QueryDsl
 			{
 				var query = this.QueryFluent(new QueryContainerDescriptor<Project>());
 				when(query);
+
 				query = this.QueryInitializer;
 				when(query);
 			}
@@ -96,7 +97,7 @@ namespace Tests.QueryDsl
 		private void IsConditionless(IQueryContainer q, bool be) => q.IsConditionless.Should().Be(be);
 	}
 
-	public abstract class ConditionlessWhen : List<Action<QueryContainer>>
+	public abstract class ConditionlessWhen : List<Func<QueryContainer, QueryContainer>>
 	{
 	}
 	public class ConditionlessWhen<TQuery> : ConditionlessWhen where TQuery : IQuery
@@ -113,7 +114,7 @@ namespace Tests.QueryDsl
 			this.Add(q => Assert(q, when));
 		}
 
-		private void Assert(IQueryContainer c, Action<TQuery> when)
+		private QueryContainer Assert(IQueryContainer c, Action<TQuery> when)
 		{
 			TQuery q = this._dispatch(c);
 			q.Conditionless.Should().BeFalse();
@@ -121,6 +122,7 @@ namespace Tests.QueryDsl
 			when(q);
 			q.Conditionless.Should().BeTrue();
 			c.IsConditionless.Should().BeTrue();
+			return (QueryContainer)c;
 		}
 	}
 

@@ -91,9 +91,7 @@ var client = new ElasticLowLevelClient(config);
 var result = client.Search<SearchResponse<object>>(new { size = 12 });
 ----
 <1> Disable automatic proxy detection. When called, defaults to `true`.
-
 <2> Enable compressed request and responses from Elasticsearch (Note that nodes need to be configured to allow this. See the {ref_current}/modules-http.html[http module settings] for more info).
-
 <3> By default responses are deserialized directly from the response stream to the object you tell it to. For debugging purposes, it can be very useful to keep a copy of the raw response on the result object, which is what calling this method will do.
 
 `.ResponseBodyInBytes` will only have a value if the client configuration has `DisableDirectStreaming` set 
@@ -131,13 +129,9 @@ config = config
     .BasicAuthentication("username", "password");
 ----
 <1> Allows you to set querystring parameters that have to be added to every request. For instance, if you use a hosted elasticserch provider, and you need need to pass an `apiKey` parameter onto every request.
-
 <2> Sets proxy information on the connection.
-
 <3> [[request-timeout]] Sets the global maximum time a connection may take. Please note that this is the request timeout, the builtin .NET `WebRequest` has no way to set connection timeouts (see http://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.timeout(v=vs.110).aspx[the MSDN documentation on `HttpWebRequest.Timeout` Property]).
-
 <4> As an alternative to the C/go like error checking on `response.IsValid`, you can instead tell the client to <<thrown-exceptions, throw exceptions>>.
-
 <5> forces all serialization to be indented and appends `pretty=true` to all the requests so that the responses are indented as well
 
 NOTE: Basic authentication credentials can alternatively be specified on the node URI directly:
@@ -365,9 +359,7 @@ public class MyJsonNetSerializer : JsonNetSerializer
 }
 ----
 <1> Call this constructor if you only need access to `JsonSerializerSettings` without local state
-
 <2> Call OverwriteDefaultSerializers if you need access to `JsonSerializerSettings` with local state
-
 <3> You can inject contract resolved converters by implementing the ContractConverters property. This can be much faster then registering them on `JsonSerializerSettings.Converters`
 
 You can then register a factory on `ConnectionSettings` to create an instance of your subclass instead.
