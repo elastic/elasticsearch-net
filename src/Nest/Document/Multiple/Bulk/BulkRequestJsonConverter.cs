@@ -15,8 +15,7 @@ namespace Nest
 			var bulk = value as IBulkRequest;
 			var settings = serializer?.GetConnectionSettings();
 			var elasticsearchSerializer = settings?.Serializer;
-			if (elasticsearchSerializer == null
-				|| bulk?.Operations == null) return ;
+			if (elasticsearchSerializer == null|| bulk?.Operations == null) return ;
 
 			foreach(var op in bulk.Operations)
 			{
@@ -26,12 +25,12 @@ namespace Nest
 				if (op.Type.EqualsMarker(bulk.Type)) op.Type = null;
 				op.Id = op.GetIdForOperation(settings.Inferrer);
 
-				var opJson = elasticsearchSerializer.SerializeToBytes(op, SerializationFormatting.None);
-				writer.WriteRaw($"{{\"{op.Operation}\":" + opJson.Utf8String() + "}\n");
+				var opJson = elasticsearchSerializer.SerializeToString(op, SerializationFormatting.None);
+				writer.WriteRaw($"{{\"{op.Operation}\":" + opJson + "}\n");
 				var body = op.GetBody();
 				if (body == null) continue;
-				var bodyJson = elasticsearchSerializer.SerializeToBytes(body, SerializationFormatting.None);
-				writer.WriteRaw(bodyJson.Utf8String() + "\n");
+				var bodyJson = elasticsearchSerializer.SerializeToString(body, SerializationFormatting.None);
+				writer.WriteRaw(bodyJson + "\n");
 			}
 		}
 
