@@ -19,12 +19,13 @@ namespace CodeGeneration.LowLevelClient
 {
 	public static class ApiGenerator
 	{
-		private readonly static string _listingUrl = "https://github.com/elastic/elasticsearch/tree/1.6/rest-api-spec/api";
-		private readonly static string _rawUrlPrefix = "https://raw.github.com/elastic/elasticsearch/1.6/rest-api-spec/api/";
-		private readonly static string _nestFolder = @"..\..\..\..\..\src\Nest\";
-		private readonly static string _esNetFolder = @"..\..\..\..\..\src\Elasticsearch.Net\";
-		private readonly static string _viewFolder = @"..\..\Views\";
-		private readonly static string _apiEndpointsFolder = @"..\..\ApiEndpoints\";
+	    private static readonly string _version = "1.7";
+		private static readonly string _listingUrl = string.Format("https://github.com/elastic/elasticsearch/tree/{0}/rest-api-spec/api", _version);
+		private static readonly string _rawUrlPrefix = string.Format("https://raw.github.com/elastic/elasticsearch/{0}/rest-api-spec/api/", _version);
+		private static readonly string _nestFolder = @"..\..\..\..\..\src\Nest\";
+		private static readonly string _esNetFolder = @"..\..\..\..\..\src\Elasticsearch.Net\";
+		private static readonly string _viewFolder = @"..\..\Views\";
+		private static readonly string _apiEndpointsFolder = @"..\..\ApiEndpoints\";
 		private static readonly RazorMachine _razorMachine;
 
 		private static readonly Assembly _assembly;
@@ -188,6 +189,8 @@ namespace CodeGeneration.LowLevelClient
 					{
 						skipList = overrides.SkipQueryStringParams ?? skipList;
 						renameList = overrides.RenameQueryStringParams ?? renameList;
+
+					    method = overrides.PatchMethod(method);
 					}
 				}
 

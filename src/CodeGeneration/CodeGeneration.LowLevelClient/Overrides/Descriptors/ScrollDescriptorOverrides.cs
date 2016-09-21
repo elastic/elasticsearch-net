@@ -5,9 +5,9 @@ using System.Text;
 
 namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 {
-	public class ScrollDescriptorOverrides : IDescriptorOverrides
+	public class ScrollDescriptorOverrides : DescriptorOverridesBase
 	{
-		public IEnumerable<string> SkipQueryStringParams
+		public override IEnumerable<string> SkipQueryStringParams
 		{
 			get
 			{
@@ -17,7 +17,5 @@ namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 				};
 			}
 		}
-
-		public IDictionary<string, string> RenameQueryStringParams { get { return null; } }
 	}
 }

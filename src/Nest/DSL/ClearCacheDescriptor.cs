@@ -19,7 +19,10 @@ namespace Nest
 	
 	public partial class ClearCacheRequest : IndicesOptionalPathBase<ClearCacheRequestParameters>, IClearCacheRequest
 	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClearCacheRequestParameters> pathInfo)
+        [Obsolete("Use FilterCacheKeys to set filter_keys", true)]
+        public bool FilterKeys { get; set; }
+
+        protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClearCacheRequestParameters> pathInfo)
 		{
 			ClearCachePathInfo.Update(pathInfo, this);
 		}
@@ -28,8 +31,13 @@ namespace Nest
 	[DescriptorFor("IndicesClearCache")]
 	public partial class ClearCacheDescriptor : IndicesOptionalPathDescriptor<ClearCacheDescriptor, ClearCacheRequestParameters>, IClearCacheRequest
 	{
+        [Obsolete("Use FilterKeys(params string[] filter_keys)", true)]
+	    public ClearCacheDescriptor FilterKeys(bool filter_keys = true)
+        {
+            return this;
+        }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClearCacheRequestParameters> pathInfo)
+        protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClearCacheRequestParameters> pathInfo)
 		{
 			ClearCachePathInfo.Update(pathInfo, this);
 		}
