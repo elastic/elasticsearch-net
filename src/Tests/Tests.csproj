@@ -589,6 +589,7 @@
     <Compile Include="QueryDsl\BoolDsl\Operators\OrAssignManyManualBoolsTests.cs" />
     <Compile Include="QueryDsl\Span\FieldMasking\SpanFieldMaskingUsageTests.cs" />
     <Compile Include="QueryDsl\Verbatim\VerbatimAndStrictQueryUsageTests.cs" />
+    <Compile Include="Reproduce\AggsDeserialization.cs" />
     <Compile Include="Reproduce\GithubIssue2101.cs" />
     <Compile Include="Reproduce\GithubIssue2152.cs" />
     <Compile Include="Reproduce\GithubIssue2052.cs" />
