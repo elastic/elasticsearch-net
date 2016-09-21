@@ -71,10 +71,10 @@ namespace Tests.QueryDsl
 			if (ConditionlessWhen == null) return;
 			foreach (var when in ConditionlessWhen)
 			{
-				var query = this.QueryFluent(new QueryContainerDescriptor<Project>());
-				when(query);
-				query = this.QueryInitializer;
-				when(query);
+				when(this.QueryFluent(new QueryContainerDescriptor<Project>()));
+				//this.JsonEquals(query, new { });
+				when(this.QueryInitializer);
+				//this.JsonEquals(query, new { });
 			}
 
 			((IQueryContainer)this.QueryInitializer).IsConditionless.Should().BeFalse();
@@ -87,6 +87,7 @@ namespace Tests.QueryDsl
 			{
 				var query = this.QueryFluent(new QueryContainerDescriptor<Project>());
 				when(query);
+
 				query = this.QueryInitializer;
 				when(query);
 			}

@@ -11,7 +11,8 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			if (reader.TokenType == JsonToken.StartObject) return base.ReadJson(reader, objectType, existingValue, serializer);
+			if (reader.TokenType == JsonToken.StartObject)
+				return base.ReadJson(reader, objectType, existingValue, serializer);
 			if (reader.TokenType != JsonToken.String) return null;
 
 			//Some API's return the stored queries as escaped string, e.g the get shield role API

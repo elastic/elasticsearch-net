@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
+using Tests.Framework.MockData;
 
 namespace Tests.QueryDsl.BoolDsl.Operators
 {
@@ -68,16 +70,18 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			);
 		}
 
+		private static int Iterations = 10000;
+
 		[U] public void CombiningManyUsingAggregate()
 		{
-			var lotsOfOrs = Enumerable.Range(0, 100).Aggregate(new QueryContainer(), (q, c) => q || Query, q => q);
+			var lotsOfOrs = Enumerable.Range(0, Iterations).Aggregate(new QueryContainer(), (q, c) => q || Query, q => q);
 			LotsOfOrs(lotsOfOrs);
 		}
 
 		[U] public void CombiningManyUsingForeachInitializingWithNull()
 		{
 			QueryContainer container = null;
-			foreach(var i in Enumerable.Range(0, 100))
+			foreach(var i in Enumerable.Range(0, Iterations))
 				container |= Query;
 			LotsOfOrs(container);
 		}
@@ -85,7 +89,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 		[U] public void CombiningManyUsingForeachInitializingWithDefault()
 		{
 			var container = new QueryContainer();
-			foreach(var i in Enumerable.Range(0, 100))
+			foreach(var i in Enumerable.Range(0, Iterations))
 				container |= Query;
 			LotsOfOrs(container);
 		}
@@ -94,7 +98,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 		{
 			lotsOfOrs.Should().NotBeNull();
 			lotsOfOrs.Bool.Should().NotBeNull();
-			lotsOfOrs.Bool.Should.Should().NotBeEmpty().And.HaveCount(100);
+			lotsOfOrs.Bool.Should.Should().NotBeEmpty().And.HaveCount(Iterations);
 		}
 
 	}

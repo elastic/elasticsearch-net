@@ -89,7 +89,7 @@ namespace DocGenerator.Documentation.Files
 					if (!lastBlockWasCodeBlock)
 					{
 						builder.AppendLine($"[source,{codeBlock.Language.ToString().ToLowerInvariant()},method=\"{codeBlock.PropertyName ?? "unknown"}\"]");
-                        builder.AppendLine("----");
+						builder.AppendLine("----");
 					}
 					else
 					{
@@ -190,9 +190,7 @@ namespace DocGenerator.Documentation.Files
 
 		private void CleanDocumentAndWriteToFile(string body, FileInfo destination)
 		{
-			// tidy up the asciidoc
 			var document = Document.Parse(body);
-
 			var visitor = new GeneratedAsciidocVisitor(this.FileLocation, destination);
 			document = visitor.Convert(document);
 
@@ -202,6 +200,7 @@ namespace DocGenerator.Documentation.Files
 
 				document.Accept(new AsciiDocVisitor(file));
 			}
+
 		}
 	}
 }
