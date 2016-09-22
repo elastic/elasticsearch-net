@@ -9,6 +9,8 @@ namespace ApiGenerator.Overrides.Descriptors
 		{
 			var requestParam = method.Url.Params.First(p => p.Key == "requests_per_second");
 
+			requestParam.Value.Description = "The throttle to set on this request in sub-requests per second. float.PositiveInfinity means set no throttle.";
+
 			//Handle float.PositiveInfinity as though "unlimited"
 			requestParam.Value.Generator = (fieldType, mm, original, setter) =>
 				$"public {fieldType} {mm} {{ " +

@@ -2500,6 +2500,30 @@ namespace Nest
 			throw InvalidDispatch("Reindex", p, new [] { POST }, "/_reindex");
 		}
 		
+		internal ElasticsearchResponse<T> ReindexRethrottleDispatch<T>(IRequest<ReindexRethrottleRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.TaskId)) return _lowLevel.ReindexRethrottle<T>(p.RouteValues.TaskId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("ReindexRethrottle", p, new [] { POST }, "/_reindex/{task_id}/_rethrottle", "/_update_by_query/{task_id}/_rethrottle");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> ReindexRethrottleDispatchAsync<T>(IRequest<ReindexRethrottleRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.TaskId)) return _lowLevel.ReindexRethrottleAsync<T>(p.RouteValues.TaskId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("ReindexRethrottle", p, new [] { POST }, "/_reindex/{task_id}/_rethrottle", "/_update_by_query/{task_id}/_rethrottle");
+		}
+		
 		internal ElasticsearchResponse<T> RenderSearchTemplateDispatch<T>(IRequest<RenderSearchTemplateRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)

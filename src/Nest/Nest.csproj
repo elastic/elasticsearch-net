@@ -534,6 +534,10 @@
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexDestination.cs" />
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexRouting.cs" />
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexSource.cs" />
+    <Compile Include="Document\Multiple\ReindexRethrottle\ElasticClient-ReindexRethrottle.cs" />
+    <Compile Include="Document\Multiple\ReindexRethrottle\ReindexNode.cs" />
+    <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleRequest.cs" />
+    <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleResponse.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryRequest.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryResponse.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\ElasticClient-UpdateByQuery.cs" />

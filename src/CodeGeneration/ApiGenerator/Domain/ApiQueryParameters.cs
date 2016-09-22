@@ -28,9 +28,15 @@ namespace ApiGenerator.Domain
 					return "params string[]";
 				case "integer":
 				case "number":
-					return new [] {"boost", "percen", "score"}.Any(s=>paramName.ToLowerInvariant().Contains(s))
-						? "double"
-						: "long";
+					if (new[] { "boost", "percen", "score" }.Any(s => paramName.ToLowerInvariant().Contains(s)))
+					{
+						return "double";
+					}
+					if (new[] { "requests_per_second" }.Any(s => paramName.ToLowerInvariant().Contains(s)))
+					{
+						return "float";
+					}
+					return "long";
 				case "duration":
 				case "time":
 					return "TimeSpan";
