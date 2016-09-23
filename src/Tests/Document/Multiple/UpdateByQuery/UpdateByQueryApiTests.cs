@@ -13,7 +13,8 @@ using static Nest.Infer;
 namespace Tests.Document.Multiple.UpdateByQuery
 {
 	[SkipVersion("<2.3.0", "")]
-	public class UpdateByQueryApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IUpdateByQueryResponse, IUpdateByQueryRequest, UpdateByQueryDescriptor<UpdateByQueryApiTests.Test>, UpdateByQueryRequest>
+	public class UpdateByQueryApiTests
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IUpdateByQueryResponse, IUpdateByQueryRequest, UpdateByQueryDescriptor<UpdateByQueryApiTests.Test>, UpdateByQueryRequest>
 	{
 		public class Test
 		{
@@ -52,8 +53,8 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			}
 		}
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.UpdateByQuery(CallIsolatedValue, Type<Test>(), f),
-			fluentAsync: (client, f) => client.UpdateByQueryAsync(CallIsolatedValue, Type<Test>(), f),
+			fluent: (client, f) => client.UpdateByQuery(f),
+			fluentAsync: (client, f) => client.UpdateByQueryAsync(f),
 			request: (client, r) => client.UpdateByQuery(r),
 			requestAsync: (client, r) => client.UpdateByQueryAsync(r)
 		);
@@ -67,11 +68,13 @@ namespace Tests.Document.Multiple.UpdateByQuery
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override object ExpectJson { get; } = new { };
+		protected override object ExpectJson => new { };
 
-		protected override UpdateByQueryDescriptor<Test> NewDescriptor() => new UpdateByQueryDescriptor<Test>(CallIsolatedValue).Type<Test>();
+		protected override UpdateByQueryDescriptor<Test> NewDescriptor() => new UpdateByQueryDescriptor<Test>(CallIsolatedValue);
 
+		// need to call .Index() here to override the default index that would be applied for Test POCO
 		protected override Func<UpdateByQueryDescriptor<Test>, IUpdateByQueryRequest> Fluent => d => d
+			.Index(CallIsolatedValue)
 			.Refresh()
 			.Conflicts(Conflicts.Proceed);
 
@@ -107,7 +110,9 @@ namespace Tests.Document.Multiple.UpdateByQuery
 
 		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query?wait_for_completion=false&conflicts=proceed";
 
+		// need to call .Index() here to override the default index that would be applied for Test POCO
 		protected override Func<UpdateByQueryDescriptor<Test>, IUpdateByQueryRequest> Fluent => d => d
+			.Index(CallIsolatedValue)
 			.WaitForCompletion(false)
 			.Conflicts(Conflicts.Proceed);
 
@@ -150,15 +155,22 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		protected override int ExpectStatusCode => 409;
 
 		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query";
-		protected override object ExpectJson { get; } =
+		protected override object ExpectJson =>
 			new
 			{
 				query = new { match = new { flag = new { query = "bar" } } },
 				script = new { inline = "ctx._source.text = 'x'" }
 			};
 
+		// need to call .Index() here to override the default index that would be applied for Test POCO
 		protected override Func<UpdateByQueryDescriptor<Test>, IUpdateByQueryRequest> Fluent => d => d
-			.Query(q=>q.Match(m=>m.Field(p=>p.Flag).Query("bar")))
+			.Index(CallIsolatedValue)
+			.Query(q => q
+				.Match(m => m
+					.Field(p => p.Flag)
+					.Query("bar")
+				)
+			)
 			.Script(_script)
 			;
 
