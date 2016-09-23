@@ -1,6 +1,6 @@
 {
   "index": {
-    "documentation": "http://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-index_.html",
+    "documentation": "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html",
     "methods": ["POST", "PUT"],
     "url": {
       "path": "/{index}/{type}",
@@ -54,7 +54,7 @@
           "description" : "Explicit timestamp for the document"
         },
         "ttl": {
-          "type" : "duration",
+          "type" : "time",
           "description" : "Expiration time for the document"
         },
         "version" : {

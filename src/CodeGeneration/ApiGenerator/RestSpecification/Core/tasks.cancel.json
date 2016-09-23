@@ -1,6 +1,6 @@
 {
   "tasks.cancel": {
-    "documentation": "http://www.elastic.co/guide/en/elasticsearch/reference/2.3/tasks.html",
+    "documentation": "http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-cancel.html",
     "methods": ["POST"],
     "url": {
       "path": "/_tasks",
@@ -8,7 +8,7 @@
       "parts": {
         "task_id": {
           "type": "string",
-          "description": "Cancel the task with specified task id (node_id:task_number)"
+          "description": "Cancel the task with specified id"
         }
       },
       "params": {

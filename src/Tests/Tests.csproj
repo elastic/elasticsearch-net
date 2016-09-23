@@ -236,6 +236,8 @@
     <Compile Include=".\Framework\Extensions\WebClient-CoreFx.cs" />
     <Compile Include=".\Framework\Integration\Bootstrappers\Seeder.cs" />
     <Compile Include=".\Framework\Integration\Clusters\ClusterBase.cs" />
+    <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleApiTests.cs" />
+    <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleUrlTests.cs" />
     <Compile Include="Framework\Extensions\ShouldExtensions.cs" />
     <Compile Include="Framework\Integration\Clusters\WritableCluster.cs" />
     <Compile Include="Framework\Integration\Clusters\IntrusiveOperationCluster.cs" />
