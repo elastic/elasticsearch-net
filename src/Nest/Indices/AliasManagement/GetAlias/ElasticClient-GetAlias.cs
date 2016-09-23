@@ -36,7 +36,6 @@ namespace Nest
 		public IGetAliasesResponse GetAlias(IGetAliasRequest request) =>
 			this.Dispatcher.Dispatch<IGetAliasRequest, GetAliasRequestParameters, GetAliasesResponse>(
 				request,
-				DeserializeGetAliasesResponse,
 				(p, d) => this.LowLevelDispatch.IndicesGetAliasDispatch<GetAliasesResponse>(p)
 			);
 
@@ -48,7 +47,6 @@ namespace Nest
 		public Task<IGetAliasesResponse> GetAliasAsync(IGetAliasRequest request) =>
 			this.Dispatcher.DispatchAsync<IGetAliasRequest, GetAliasRequestParameters, GetAliasesResponse, IGetAliasesResponse>(
 				request,
-				DeserializeGetAliasesResponse,
 				(p, d) => this.LowLevelDispatch.IndicesGetAliasDispatchAsync<GetAliasesResponse>(p)
 			);
 	}

@@ -11,6 +11,7 @@ using static Nest.Infer;
 
 namespace Tests.Document.Multiple.ReindexRethrottle
 {
+	[SkipVersion("<2.4.0", "feature added in Elasticsearch 2.4.0")]
 	public class ReindexRethrottleReindexApiTests : ReindexRethrottleApiTests
 	{
 		public ReindexRethrottleReindexApiTests(ReindexCluster cluster, EndpointUsage usage) : base(cluster, usage)
@@ -37,6 +38,7 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 		}
 	}
 
+	[SkipVersion("<2.4.0", "feature added in Elasticsearch 2.4.0")]
 	public class ReindexRethrottleUpdateByQueryTests : ReindexRethrottleApiTests
 	{
 		public ReindexRethrottleUpdateByQueryTests(ReindexCluster cluster, EndpointUsage usage) : base(cluster, usage)

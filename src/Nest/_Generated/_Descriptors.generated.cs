@@ -4610,7 +4610,7 @@ namespace Nest
 		Types IUpdateByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/{index}/_update_by_query</summary>
 ///<param name="index"> this parameter is required</param>
-		public UpdateByQueryDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		public UpdateByQueryDescriptor(Indices index) : base(r=>r.Required("index", index).Required("type", (Types)typeof(T))){}
 		
 
 			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
