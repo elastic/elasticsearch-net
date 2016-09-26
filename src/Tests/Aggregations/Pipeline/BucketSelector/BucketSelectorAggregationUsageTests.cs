@@ -42,7 +42,8 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 								},
 								script = new
 								{
-									inline = "totalCommits >= 500"
+									inline = "totalCommits >= 500",
+									lang = "groovy"
 								}
 							}
 						}
@@ -65,7 +66,7 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 							.BucketsPath(bp => bp
 								.Add("totalCommits", "commits")
 							)
-							.Script("totalCommits >= 500")
+							.Script(ss => ss.Inline("totalCommits >= 500").Lang("groovy"))
 						)
 					)
 				)
@@ -85,7 +86,7 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 							{ "totalCommits", "commits" },
 						})
 					{
-						Script = (InlineScript)"totalCommits >= 500"
+						Script = new InlineScript("totalCommits >= 500") { Lang = "groovy" }
 					}
 			}
 		};
@@ -99,7 +100,7 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 			projectsPerMonth.Buckets.Should().NotBeNull();
 			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
-			foreach(var item in projectsPerMonth.Buckets)
+			foreach (var item in projectsPerMonth.Buckets)
 			{
 				var commits = item.Sum("commits");
 				commits.Should().NotBeNull();

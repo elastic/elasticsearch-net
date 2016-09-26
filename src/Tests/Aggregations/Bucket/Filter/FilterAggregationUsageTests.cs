@@ -151,7 +151,8 @@ namespace Tests.Aggregations.Bucket.Filter
 					filter = new {
 						script = new {
 							script = new {
-								inline = _ctxNumberofCommits
+								inline = _ctxNumberofCommits,
+								lang = "groovy"
 							}
 						}
 					}
@@ -165,6 +166,7 @@ namespace Tests.Aggregations.Bucket.Filter
 					.Filter(f => f
 						.Script(b => b
 							.Inline(_ctxNumberofCommits)
+							.Lang("groovy")
 						)
 					)
 				)
@@ -177,8 +179,9 @@ namespace Tests.Aggregations.Bucket.Filter
 				{
 					Filter = new ScriptQuery
 					{
-						Inline = _ctxNumberofCommits
-					}
+						Inline = _ctxNumberofCommits,
+						Lang = "groovy"
+				}
 				}
 			};
 

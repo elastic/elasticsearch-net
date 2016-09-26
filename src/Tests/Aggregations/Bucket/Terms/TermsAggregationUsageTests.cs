@@ -32,7 +32,8 @@ namespace Tests.Aggregations.Bucket.Terms
 						missing = "n/a",
 						script = new
 						{
-							inline = "'State of Being: '+_value"
+							inline = "'State of Being: '+_value",
+							lang = "groovy"
 						},
 						order = new object[]
 						{
@@ -53,7 +54,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					.ShardSize(100)
 					.ExecutionHint(TermsAggregationExecutionHint.Map)
 					.Missing("n/a")
-					.Script("'State of Being: '+_value")
+					.Script(ss => ss.Inline("'State of Being: '+_value").Lang("groovy"))
 					.Order(TermsOrder.TermAscending)
 					.Order(TermsOrder.CountDescending)
 					.Meta(m => m
@@ -73,7 +74,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					ShardSize = 100,
 					ExecutionHint = TermsAggregationExecutionHint.Map,
 					Missing = "n/a",
-					Script = new InlineScript("'State of Being: '+_value"),
+					Script = new InlineScript("'State of Being: '+_value") { Lang = "groovy" },
 					Order = new List<TermsOrder>
 					{
 						TermsOrder.TermAscending,

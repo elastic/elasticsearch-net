@@ -91,7 +91,7 @@ namespace Tests.Document.Single.Get
 	{
 		public GetApiFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override string UrlPath => $"/project/project/{ProjectIdForUrl}?fields=name%2CnumberOfCommits";
+		protected override string UrlPath => $"/project/project/{ProjectIdForUrl}?stored_fields=name%2CnumberOfCommits";
 
 		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g => g
 			.StoredFields(
