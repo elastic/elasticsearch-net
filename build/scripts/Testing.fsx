@@ -65,14 +65,14 @@ module Tests =
 
     let private testDesktopClr() = 
         let folder = Paths.ProjectOutputFolder (PrivateProject PrivateProject.Tests) DotNetFramework.Net46
-        let testDll = Path.Combine(folder, "Tests.dll")
+        let testDll = Path.Combine(folder, "Tests.exe")
         Tooling.XUnit.Exec [testDll; "-parallel"; "all"; "-xml"; Paths.Output("TestResults-Desktop-Clr.xml")] 
         |> ignore
         
     let RunTest() = 
         setLocalEnvVars()
         let folder = Paths.IncrementalOutputFolder (PrivateProject PrivateProject.Tests) DotNetFramework.Net45
-        let testDll = Path.Combine(folder, "Tests.dll")
+        let testDll = Path.Combine(folder, "Tests.exe")
         Tooling.XUnit.Exec [testDll; "-parallel"; "all"] |> ignore
 
     let RunUnitTestsForever() = 

@@ -29,6 +29,7 @@ SET APIKEYPROVIDED="<empty>"
 SET FEED="elasticsearch-net"
 SET NEST_INTEGRATION_CLUSTER=
 SET NEST_TEST_FILTER=
+SET ELASTICSEARCH=
 
 IF /I "%1"=="skiptests" (
 	set SKIPTESTS="1"
@@ -85,6 +86,10 @@ IF /I "%TARGET%"=="canary" (
 	)
 	IF NOT [%3]==[] set FEED="%3"
 )
+IF /I "%TARGET%"=="profile" (
+	IF NOT [%2]==[] (set ELASTICSEARCH="%2")
+	IF NOT [%3]==[] (set NEST_TEST_FILTER="%3")
+)
 
-ECHO build.bat: target=%TARGET% skippakket=%SKIPPAKET% version=%VERSION% esversions=%ESVERSIONS% skiptests=%SKIPTESTS% apiKey=%APIKEYPROVIDED% feed=%FEED% escluster=%NEST_INTEGRATION_CLUSTER% testfilter=%NEST_TEST_FILTER%
-"packages\build\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%" "esversions=%ESVERSIONS%" "skiptests=%SKIPTESTS%" "apiKey=%APIKEY%" "feed=%FEED%" "escluster=%NEST_INTEGRATION_CLUSTER%" "testfilter=%NEST_TEST_FILTER%"
+ECHO build.bat: target=%TARGET% skippakket=%SKIPPAKET% version=%VERSION% esversions=%ESVERSIONS% skiptests=%SKIPTESTS% apiKey=%APIKEYPROVIDED% feed=%FEED% escluster=%NEST_INTEGRATION_CLUSTER% testfilter=%NEST_TEST_FILTER% elasticsearch=%ELASTICSEARCH%
+"packages\build\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%" "esversions=%ESVERSIONS%" "skiptests=%SKIPTESTS%" "apiKey=%APIKEY%" "feed=%FEED%" "escluster=%NEST_INTEGRATION_CLUSTER%" "testfilter=%NEST_TEST_FILTER%" "elasticsearch=%ELASTICSEARCH%"

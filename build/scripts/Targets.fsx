@@ -7,18 +7,22 @@
 #load @"Building.fsx"
 #load @"Documentation.fsx"
 #load @"Releasing.fsx"
+#load @"Benchmarking.fsx"
 #load @"Profiling.fsx"
 #load @"XmlDocPatcher.fsx"
 
 open System
 open Fake 
 
+open Paths
 open Building
 open Testing
 open Signing
 open Versioning
+open Documentation
 open Releasing
 open Profiling
+open Benchmarking
 open XmlDocPatcher
 open Documentation
 
@@ -34,14 +38,17 @@ Target "CleanAfter" Build.CleanAfter
 Target "BuildApp" Build.Compile
 
 Target "Test" Tests.RunTest
-
+    
 Target "UnitTests" Tests.RunUnitTests
 
 Target "Forever"  Tests.RunUnitTestsForever
-    
-Target "Integrate"  Tests.RunIntegrationTests 
 
-Target "Profile" Profiler.Run
+Target "Profile" <| fun _ -> 
+    Profiler.Run()
+    let url = getBuildParam "elasticsearch"
+    Profiler.IndexResults url
+
+Target "Integrate"  Tests.RunIntegrationTests 
 
 Target "Benchmark" Benchmarker.Run
 
@@ -65,7 +72,7 @@ Target "Canary" <| fun _ ->
     if (not (String.IsNullOrWhiteSpace apiKey) || apiKey = "ignore") then Release.PublishCanaryBuild apiKey feed
 
 // Dependencies
-"Clean"
+"Clean" 
   =?> ("Version", hasBuildParam "version")
   ==> "BuildApp"
   ==> "CleanAfter"
@@ -74,8 +81,8 @@ Target "Canary" <| fun _ ->
   ==> "Documentation"
   ==> "Build"
 
-"Clean" 
-  ==> "BuildApp"
+"Clean"
+  ==> "BuildApp" 
   ==> "Profile"
 
 "Clean" 

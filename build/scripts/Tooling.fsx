@@ -95,25 +95,43 @@ module Tooling =
         member this.Path = path
         member this.Exec arguments = execProcess this.Path arguments
 
-    type ProfilerTooling(path) =
-        let dotTraceCommandLineTools = "JetBrains.dotTrace.CommandLineTools.10.0.20151114.191633"
+    type DotTraceTool = {
+        Name:string;
+        Download:string;
+        TargetDir:string;
+    }
+
+    let jetBrainsTools = [{ 
+                            DotTraceTool.Name = "JetBrains DotTrace Self-Profile API";
+                            Download = "https://download-cf.jetbrains.com/resharper/JetBrains.Profiler.SelfSdk.2016.3.2.zip";
+                            TargetDir = "dottrace-selfprofile";
+                         };
+                         { 
+                            DotTraceTool.Name = "JetBrains DotTrace Commandline Tools";
+                            Download = "https://download-cf.jetbrains.com/resharper/JetBrains.dotTrace.CommandLineTools.2016.3.20170126.121657.zip";
+                            TargetDir = "dottrace-commandline";
+                         }]
+
+    jetBrainsTools
+    |> Seq.iter(fun t -> 
+        let toolName = Path.GetFileNameWithoutExtension t.Download
         let buildToolsDirectory = Paths.Build("tools")
-        let dotTraceDirectory = sprintf "%s/%s" buildToolsDirectory dotTraceCommandLineTools
-        member this.Bootstrap = fun _ ->
-            if (not (Directory.Exists dotTraceDirectory)) then
-                trace (sprintf "No JetBrains DotTrace tooling found in %s. Downloading now" buildToolsDirectory) 
-                let url = sprintf "https://d1opms6zj7jotq.cloudfront.net/resharper/%s.zip" dotTraceCommandLineTools      
-                let zipFile = sprintf "%s/%s.zip" buildToolsDirectory dotTraceCommandLineTools
-                use webClient = new WebClient()
-                webClient.DownloadFile(url, zipFile)
-                System.IO.Compression.ZipFile.ExtractToDirectory(zipFile, dotTraceDirectory)
-                File.Delete zipFile
-                trace "JetBrains DotTrace tooling downloaded"
-            
-        member this.Path = sprintf "%s/%s" dotTraceDirectory path
-        member this.Exec arguments = 
-            this.Bootstrap()
-            execAt Environment.CurrentDirectory this.Path arguments
+        let targetDir = sprintf "%s/%s" buildToolsDirectory t.TargetDir
+        
+        if (not (Directory.Exists targetDir)) then
+            tracefn "No %s found in %s. Downloading now" t.Name buildToolsDirectory
+            let zipFile = sprintf "%s/%s.zip" buildToolsDirectory toolName
+            use webClient = new WebClient()
+            webClient.DownloadFile(t.Download, zipFile)
+            System.IO.Compression.ZipFile.ExtractToDirectory(zipFile, targetDir)
+            File.Delete zipFile
+            tracefn "%s downloaded" t.Name
+    )
+
+    type ProfilerTooling(path) =
+        let commandLineTool = Paths.CheckedInTool((jetBrainsTools.Item 1).TargetDir)
+        let toolPath = commandLineTool @@ path
+        member this.Exec arguments = execAt Environment.CurrentDirectory toolPath arguments
 
     let Nuget = new BuildTooling(nugetFile)
     let GitLink = new BuildTooling(Paths.Tool("gitlink/lib/net45/gitlink.exe"))
