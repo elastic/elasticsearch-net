@@ -3959,10 +3959,6 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters Df(string df) => this.AddQueryString("df", df);
 		
 		
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public SearchRequestParameters StoredFields(params string[] stored_fields) => this.AddQueryString("stored_fields", stored_fields);
-		
-		
 		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
 		public SearchRequestParameters DocvalueFields(params string[] docvalue_fields) => this.AddQueryString("docvalue_fields", docvalue_fields);
 		

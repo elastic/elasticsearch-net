@@ -5005,9 +5005,6 @@ namespace Nest
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
-		
 		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
 		public Fields DocvalueFields { get { return Q<Fields>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
 		
@@ -5094,9 +5091,6 @@ namespace Nest
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
-		
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
 		
 		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
 		public Fields DocvalueFields { get { return Q<Fields>("docvalue_fields"); } set { Q("docvalue_fields", value); } }

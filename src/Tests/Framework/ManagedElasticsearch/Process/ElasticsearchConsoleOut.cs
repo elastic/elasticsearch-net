@@ -88,6 +88,8 @@ namespace Tests.Framework.Integration
 			port = 0;
 			if (!this.InHttpSection) return false;
 
+			if (string.IsNullOrWhiteSpace(this.Message)) return false;
+
 			var match = PortParser.Match(this.Message);
 			if (!match.Success) return false;
 

@@ -4169,13 +4169,6 @@ namespace Nest
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public SearchDescriptor<T> Df(string df) => AssignParam(p=>p.Df(df));
 
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public SearchDescriptor<T> StoredFields(params string[] stored_fields) => AssignParam(p=>p.StoredFields(stored_fields));
-			
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public SearchDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._StoredFields(fields));
-
 		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
 		public SearchDescriptor<T> DocvalueFields(params string[] docvalue_fields) => AssignParam(p=>p.DocvalueFields(docvalue_fields));
 			

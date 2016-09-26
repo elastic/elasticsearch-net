@@ -124,10 +124,6 @@ namespace Nest
 		internal static NodesStatsRequestParameters _Fields<T>(this NodesStatsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
 			qs.AddQueryString("fields", fields.Select(e=>(Field)e));
 		
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		internal static SearchRequestParameters _StoredFields<T>(this SearchRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  stored_fields) where T : class =>
-			qs.AddQueryString("stored_fields", stored_fields.Select(e=>(Field)e));
-		
 		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
 		internal static SearchRequestParameters _DocvalueFields<T>(this SearchRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  docvalue_fields) where T : class =>
 			qs.AddQueryString("docvalue_fields", docvalue_fields.Select(e=>(Field)e));
