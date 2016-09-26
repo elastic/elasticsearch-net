@@ -3,42 +3,46 @@
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(CatThreadPoolRecordJsonConverter))]
 	public class CatThreadPoolRecord : ICatRecord
 	{
-		public string Id { get; set; }
-		public string Pid { get; set; }
+		[JsonProperty("node_name")]
+		public string NodeName { get; set; }
+		[JsonProperty("node_id")]
+		public string NodeId { get; set; }
+		[JsonProperty("ephemeral_node_id")]
+		public string EphemeralNodeId { get; set; }
+		[JsonProperty("pid")]
+		public int ProcessId { get; set; }
+		[JsonProperty("host")]
 		public string Host { get; set; }
+		[JsonProperty("ip")]
 		public string Ip { get; set; }
-		public string Port { get; set; }
-
-		public CatThreadPool Bulk { get; set; }
-		public CatThreadPool Flush { get; set; }
-		public CatThreadPool Generic { get; set; }
-		public CatThreadPool Get { get; set; }
-		public CatThreadPool Index { get; set; }
-		public CatThreadPool Management { get; set; }
-		public CatThreadPool Merge { get; set; }
-		public CatThreadPool Optimize { get; set; }
-		public CatThreadPool Percolate { get; set; }
-		public CatThreadPool Refresh { get; set; }
-		public CatThreadPool Search { get; set; }
-		public CatThreadPool Snapshot { get; set; }
-		public CatThreadPool Suggest { get; set; }
-		public CatThreadPool Warmer { get; set; }
-	}
-	public class CatThreadPool
-	{
+		[JsonProperty("port")]
+		public int Port { get; set; }
+		[JsonProperty("name")]
+		public string Name { get; set; }
+		[JsonProperty("type")]
 		public string Type { get; set; }
-		public string Active { get; set; }
-		public string Size { get; set; }
-		public string Queue { get; set; }
-		public string QueueSize { get; set; }
-		public string Rejected { get; set; }
-		public string Largest { get; set; }
-		public string Completed { get; set; }
-		public string Min { get; set; }
-		public string Max { get; set; }
-		public string KeepAlive { get; set; }
+		[JsonProperty("active")]
+		public int Active { get; set; }
+		[JsonProperty("size")]
+		public int Size { get; set; }
+		[JsonProperty("queue")]
+		public int Queue { get; set; }
+		[JsonProperty("queue_size")]
+		public int? QueueSize { get; set; }
+		[JsonProperty("rejected")]
+		public long Rejected { get; set; }
+		[JsonProperty("largest")]
+		public int Largest { get; set; }
+		[JsonProperty("completed")]
+		public long Completed { get; set; }
+		[JsonProperty("min")]
+		public int Minimum { get; set; }
+		[JsonProperty("max")]
+		public int Maximum { get; set; }
+		[JsonProperty("keep_alive")]
+		public Time KeepAlive { get; set; }
+
 	}
 }
