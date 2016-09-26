@@ -154,8 +154,6 @@ namespace Tests.Document.Multiple.MultiGet
 				hit.Id.Should().NotBeNullOrWhiteSpace();
 				hit.Found.Should().BeTrue();
 				hit.Version.Should().Be(1);
-				hit.Timestamp.HasValue.Should().BeTrue();
-				hit.Ttl.HasValue.Should().BeTrue();
 			}
 		}
 	}
@@ -205,7 +203,6 @@ namespace Tests.Document.Multiple.MultiGet
 				hit.Id.Should().NotBeNullOrWhiteSpace();
 				hit.Found.Should().BeTrue();
 				hit.Version.Should().Be(1);
-				hit.Timestamp.HasValue.Should().BeTrue();
 				hit.Parent.Should().NotBeNullOrEmpty();
 				hit.Routing.Should().NotBeNullOrEmpty();
 			}

@@ -34,9 +34,11 @@ namespace Nest
 		Id Parent { get; set; }
 
 		[JsonProperty("_timestamp")]
+		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
 		long? Timestamp { get; set; }
 
 		[JsonProperty("_ttl")]
+		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
 		Time Ttl { get; set; }
 
 		[JsonProperty("_retry_on_conflict")]

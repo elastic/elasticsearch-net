@@ -39,8 +39,6 @@ namespace Tests.Document.Single.Get
 		{
 			response.Source.Should().NotBeNull();
 			response.Source.Name.Should().Be(ProjectId);
-			response.Timestamp.HasValue.Should().BeTrue();
-			response.Ttl.HasValue.Should().BeTrue();
 		}
 	}
 
@@ -84,7 +82,6 @@ namespace Tests.Document.Single.Get
 		{
 			response.Source.Should().NotBeNull();
 			response.Source.Id.Should().Be(CommitActivityId);
-			response.Timestamp.HasValue.Should().BeTrue();
 			response.Parent.Should().NotBeNullOrEmpty();
 			response.Routing.Should().NotBeNullOrEmpty();
 		}

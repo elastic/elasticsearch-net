@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -20,8 +21,10 @@ namespace Nest
 
 		string Routing { get; }
 
+		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
 		long? Timestamp { get; }
 
+		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
 		long? Ttl { get; }
 	}
 
@@ -56,9 +59,11 @@ namespace Nest
 		public string Routing { get; internal set; }
 
 		[JsonProperty("_timestamp")]
+		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
 		public long? Timestamp { get; internal set; }
 
 		[JsonProperty("_ttl")]
+		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
 		public long? Ttl { get; internal set; }
 	}
 }

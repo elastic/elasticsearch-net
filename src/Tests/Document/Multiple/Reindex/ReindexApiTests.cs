@@ -141,7 +141,6 @@ namespace Tests.Document.Multiple.Reindex
 				searchResult = this._client.Scroll<CommitActivity>(scroll, result.ScrollId);
 				foreach (var hit in searchResult.Hits)
 				{
-					hit.Timestamp.Should().HaveValue();
 					hit.Parent.Should().NotBeNullOrEmpty();
 					hit.Routing.Should().NotBeNullOrEmpty();
 				}
