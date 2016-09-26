@@ -10,7 +10,7 @@ namespace ApiGenerator
 		static void Main(string[] args)
 		{
 			bool redownloadCoreSpecification = false;
-			string downloadBranch = "master";
+			string downloadBranch = "5.x";
 
 			var answer = "invalid";
 			while (answer != "y" && answer != "n" && answer != "")

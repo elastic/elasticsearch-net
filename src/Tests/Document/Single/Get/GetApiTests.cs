@@ -94,14 +94,14 @@ namespace Tests.Document.Single.Get
 		protected override string UrlPath => $"/project/project/{ProjectIdForUrl}?fields=name%2CnumberOfCommits";
 
 		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g => g
-			.Fields(
+			.StoredFields(
 				p => p.Name,
 				p => p.NumberOfCommits
 			);
 
 		protected override GetRequest<Project> Initializer => new GetRequest<Project>(ProjectId)
 		{
-			Fields = Infer.Fields<Project>(p => p.Name, p => p.NumberOfCommits)
+			StoredFields = Infer.Fields<Project>(p => p.Name, p => p.NumberOfCommits)
 		};
 
 		protected override void ExpectResponse(IGetResponse<Project> response)
