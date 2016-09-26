@@ -108,7 +108,8 @@ namespace Nest
 			var r = this._partionedBulkRequest;
 			var response = await this._client.BulkAsync(s =>
 			{
-				s.IndexMany(buffer).Index(r.Index).Type(r.Type);
+				s.IndexMany(buffer);
+				s.Index(r.Index).Type(r.Type);
 				if (!string.IsNullOrEmpty(r.Pipeline)) s.Pipeline(r.Pipeline);
 				if (r.Refresh.HasValue) s.Refresh(r.Refresh.Value);
 				if (!string.IsNullOrEmpty(r.Routing)) s.Routing(r.Routing);

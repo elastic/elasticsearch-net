@@ -13,7 +13,7 @@ namespace Tests.Framework.Versions
 		private static readonly string SonaTypeUrl = "https://oss.sonatype.org/content/repositories/snapshots/org/elasticsearch/distribution/zip/elasticsearch";
 		private string RootUrl => this.IsSnapshot
 			? SonaTypeUrl
-			: "https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch";
+			: "https://artifacts.elastic.co/downloads/elasticsearch";
 
 		private static string ResolveLatestSnapshot()
 		{
@@ -47,7 +47,8 @@ namespace Tests.Framework.Versions
 				this.Zip = LatestSnapshot.Value;
 
 			this.Zip = this.Zip ?? $"elasticsearch-{this.Version}.zip";
-			this.DownloadUrl = $"{this.RootUrl}/{this.Version}/{this.Zip}";
+			if (this.IsSnapshot) this.DownloadUrl = $"{this.RootUrl}/{this.Version}/{this.Zip}";
+			else this.DownloadUrl = $"{this.RootUrl}/{this.Zip}";
 		}
 
 		public string DownloadUrl { get; }
