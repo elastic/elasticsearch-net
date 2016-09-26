@@ -301,7 +301,6 @@
     <Compile Include="Cat\CatTasks\CatTasksRequest.cs" />
     <Compile Include="Cat\CatTasks\ElasticClient-CatTasks.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadPoolRecord.cs" />
-    <Compile Include="Cat\CatThreadPool\CatThreadPoolRecordJsonConverter.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadPoolRequest.cs" />
     <Compile Include="Cat\CatThreadPool\ElasticClient-CatThreadpool.cs" />
     <Compile Include="Cat\ElasticClient-Cat.cs" />
