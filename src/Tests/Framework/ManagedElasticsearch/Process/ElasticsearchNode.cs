@@ -62,7 +62,7 @@ namespace Tests.Framework.Integration
 			if (!this.Version.IsSnapshot)
 				this.DefaultNodeSettings.Add($"{es}xpack.{shieldOrSecurity}.enabled={this._config.ShieldEnabled.ToString().ToLowerInvariant()}");
 
-			if (this._config.RunIntegrationTests) return;
+			if (this._config.RunIntegrationTests && !this._config.TestAgainstAlreadyRunningElasticsearch) return;
 			this.Port = 9200;
 		}
 
@@ -112,8 +112,10 @@ namespace Tests.Framework.Integration
 			var observable = Observable.Using(() => this._process, process => process.Start())
 				.Select(c => new ElasticsearchConsoleOut(c.Error, c.Data));
 
+			Console.WriteLine($"Starting: {_process.Binary} {_process.Arguments}");
+
 			this._processListener = observable
-				.Subscribe(s => this.HandleConsoleMessage(s, handle));
+				.Subscribe(s => this.HandleConsoleMessage(s, handle), (e) => this.Stop(),  () => { });
 
 			if (!handle.WaitOne(HandleTimeout, true))
 			{
@@ -304,7 +306,7 @@ namespace Tests.Framework.Integration
 
 			string version; int? pid; int port;
 
-			if (consoleOut.TryParseNodeInfo(out version, out pid))
+			if (this.ProcessId == null && consoleOut.TryParseNodeInfo(out version, out pid))
 			{
 				var startedVersion = new ElasticsearchVersion(version);
 				this.ProcessId = pid;
