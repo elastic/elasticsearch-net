@@ -75,9 +75,14 @@ namespace Tests.XPack.Security.User.PutUser
 		}
 	}
 
+	//TODO disabled for now pending bug report
 	public class PutUserRunAsApiTests : PutUserApiTests
 	{
-		public PutUserRunAsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PutUserRunAsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+			var x = this.Client.GetUser(new GetUserRequest(ShieldInformation.User.Username));
+			var y = this.Client.GetRole(new GetRoleRequest(ShieldInformation.User.Role));
+		}
 
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 403;
@@ -96,7 +101,7 @@ namespace Tests.XPack.Security.User.PutUser
 		}
 
 		protected override Func<PutUserDescriptor, IPutUserRequest> Fluent => f => base.Fluent(f
-			.RequestConfiguration(c=>c
+			.RequestConfiguration(c => c
 				.RunAs(ShieldInformation.User.Username)
 			));
 

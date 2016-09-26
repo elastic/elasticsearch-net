@@ -7,9 +7,10 @@ using Xunit;
 namespace Tests.Search.SearchTemplate
 {
 	public class SearchTemplateCrudTests
-		: CrudTestBase<IPutSearchTemplateResponse, IGetSearchTemplateResponse, IPutSearchTemplateResponse, IDeleteSearchTemplateResponse>
+		: CrudTestBase<IntrusiveOperationCluster, IPutSearchTemplateResponse, IGetSearchTemplateResponse, IPutSearchTemplateResponse, IDeleteSearchTemplateResponse>
 	{
-		public SearchTemplateCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		//These calls have low priority and often cause `process_cluster_event_timeout_exception`'s
+		public SearchTemplateCrudTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool SupportsDeletes => true;
 

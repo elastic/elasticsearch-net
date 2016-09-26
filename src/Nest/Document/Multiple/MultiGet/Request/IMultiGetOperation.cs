@@ -16,8 +16,8 @@ namespace Nest
 		[JsonProperty(PropertyName = "_id")]
 		Id Id { get; set; }
 
-		[JsonProperty(PropertyName = "fields")]
-		Fields Fields { get; set; }
+		[JsonProperty(PropertyName = "stored_fields")]
+		Fields StoredFields { get; set; }
 
 		[JsonProperty(PropertyName = "_routing")]
 		string Routing { get; set; }

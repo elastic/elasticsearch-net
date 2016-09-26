@@ -15,7 +15,7 @@ namespace ApiGenerator.Overrides.Descriptors
 			"explain",
 			"version",
 			"q", //we dont support GET searches
-			"fields",
+			"stored_fields",
 			"indices_boost",
 			"source",
 			"sort",

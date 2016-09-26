@@ -20,7 +20,7 @@ namespace Nest
 
 		public Id Id { get; set; }
 
-		public Fields Fields { get; set; }
+		public Fields StoredFields { get; set; }
 
 		public Union<bool, ISourceFilter> Source { get; set; }
 
@@ -31,7 +31,7 @@ namespace Nest
 			&& this.Type == null
 			&& this.Routing == null
 			&& this.Source == null
-			&& this.Fields == null;
+			&& this.StoredFields == null;
 
 
 		public object Document { get; set; }
@@ -45,7 +45,7 @@ namespace Nest
 		Id IMultiGetOperation.Id { get; set; }
 		string IMultiGetOperation.Routing { get; set; }
 		Union<bool, ISourceFilter> IMultiGetOperation.Source { get; set; }
-		Fields IMultiGetOperation.Fields { get; set; }
+		Fields IMultiGetOperation.StoredFields { get; set; }
 		Type IMultiGetOperation.ClrType => typeof(T);
 
 		bool IMultiGetOperation.CanBeFlattened =>
@@ -53,7 +53,7 @@ namespace Nest
 			&& Self.Type == null
 			&& Self.Routing == null
 			&& Self.Source == null
-			&& Self.Fields == null;
+			&& Self.StoredFields == null;
 
 		public MultiGetOperationDescriptor()
 		{
@@ -109,10 +109,10 @@ namespace Nest
 		/// Allows to selectively load specific fields for each document
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
-		public MultiGetOperationDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+		public MultiGetOperationDescriptor<T> StoredFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
+			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public MultiGetOperationDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
+		public MultiGetOperationDescriptor<T> StoredFields(Fields fields) => Assign(a => a.StoredFields = fields);
 
 	}
 }

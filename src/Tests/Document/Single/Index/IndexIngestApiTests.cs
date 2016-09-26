@@ -10,11 +10,11 @@ using Xunit;
 namespace Tests.Document.Single.Index
 {
 	public class IndexIngestApiTests :
-		ApiIntegrationTestBase<WritableCluster, IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
+		ApiIntegrationTestBase<IntrusiveOperationCluster, IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
 		private static string PipelineId { get; } = "pipeline-" + Guid.NewGuid().ToString("N").Substring(0, 8);
 
-		public IndexIngestApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		public IndexIngestApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 		}
 

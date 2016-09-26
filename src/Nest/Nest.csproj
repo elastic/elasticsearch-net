@@ -1278,6 +1278,7 @@
     <Compile Include="XPack\Security\Role\ClearCachedRoles\ClearCachedRolesRequest.cs" />
     <Compile Include="XPack\Security\Role\ClearCachedRoles\ClearCachedRolesResponse.cs" />
     <Compile Include="XPack\Security\Role\ClearCachedRoles\ElasticClient-ClearCachedRoles.cs" />
+    <Compile Include="XPack\Security\Role\FieldSecurity.cs" />
     <Compile Include="XPack\Security\ShieldNode.cs" />
     <Compile Include="XPack\Security\ShieldNodeStatus.cs" />
     <Compile Include="XPack\Security\Role\DeleteRole\DeleteRoleRequest.cs" />

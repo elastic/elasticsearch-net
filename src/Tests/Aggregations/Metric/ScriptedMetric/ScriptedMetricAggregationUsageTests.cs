@@ -22,18 +22,22 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 						init_script = new
 						{
 							inline = "_agg['commits'] = []",
+							lang = "groovy"
 						},
 						map_script = new
 						{
-							inline = "if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }"
+							inline = "if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }",
+							lang = "groovy"
 						},
 						combine_script = new
 						{
-							inline = "sum = 0; for (c in _agg.commits) { sum += c }; return sum"
+							inline = "sum = 0; for (c in _agg.commits) { sum += c }; return sum",
+							lang = "groovy"
 						},
 						reduce_script = new
 						{
-							inline = "sum = 0; for (a in _aggs) { sum += a }; return sum"
+							inline = "sum = 0; for (a in _aggs) { sum += a }; return sum",
+							lang = "groovy"
 						}
 					}
 				}
@@ -43,10 +47,10 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(a => a
 				.ScriptedMetric("sum_the_hard_way", sm => sm
-					.InitScript("_agg['commits'] = []")
-					.MapScript("if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }")
-					.CombineScript("sum = 0; for (c in _agg.commits) { sum += c }; return sum")
-					.ReduceScript("sum = 0; for (a in _aggs) { sum += a }; return sum")
+					.InitScript(ss=>ss.Inline("_agg['commits'] = []").Lang("groovy"))
+					.MapScript(ss=>ss.Inline("if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }").Lang("groovy"))
+					.CombineScript(ss=>ss.Inline("sum = 0; for (c in _agg.commits) { sum += c }; return sum").Lang("groovy"))
+					.ReduceScript(ss=>ss.Inline("sum = 0; for (a in _aggs) { sum += a }; return sum").Lang("groovy"))
 				)
 			);
 
@@ -55,10 +59,10 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 			{
 				Aggregations = new ScriptedMetricAggregation("sum_the_hard_way")
 				{
-					InitScript = new InlineScript("_agg['commits'] = []"),
-					MapScript = new InlineScript("if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }"),
-					CombineScript = new InlineScript("sum = 0; for (c in _agg.commits) { sum += c }; return sum"),
-					ReduceScript = new InlineScript("sum = 0; for (a in _aggs) { sum += a }; return sum")
+					InitScript = new InlineScript("_agg['commits'] = []") { Lang = "groovy" },
+					MapScript = new InlineScript("if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }"){ Lang = "groovy" },
+					CombineScript = new InlineScript("sum = 0; for (c in _agg.commits) { sum += c }; return sum"){ Lang = "groovy" },
+					ReduceScript = new InlineScript("sum = 0; for (a in _aggs) { sum += a }; return sum"){ Lang = "groovy" }
 				}
 			};
 

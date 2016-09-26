@@ -15,9 +15,6 @@ namespace Nest
 		[JsonIgnore]
 		string Regex { get; set; }
 
-		[JsonProperty("payload")]
-		Fields Payload { get; set; }
-
 		[JsonProperty("fuzzy")]
 		IFuzzySuggester Fuzzy { get; set; }
 
@@ -34,8 +31,6 @@ namespace Nest
 		public string Prefix { get; set; }
 
 		public string Regex { get; set; }
-
-		public Fields Payload { get; set; }
 	}
 
 	public class CompletionSuggesterDescriptor<T> : SuggestDescriptorBase<CompletionSuggesterDescriptor<T>, ICompletionSuggester, T>, ICompletionSuggester
@@ -49,8 +44,6 @@ namespace Nest
 
 		string ICompletionSuggester.Regex { get; set; }
 
-		Fields ICompletionSuggester.Payload { get; set; }
-
 		public CompletionSuggesterDescriptor<T> Prefix(string prefix) => Assign(a => a.Prefix = prefix);
 
 		public CompletionSuggesterDescriptor<T> Regex(string regex) => Assign(a => a.Regex = regex);
@@ -61,9 +54,5 @@ namespace Nest
 		public CompletionSuggesterDescriptor<T> Contexts(Func<SuggestContextQueriesDescriptor<T>, IPromise<IDictionary<string, IList<ISuggestContextQuery>>>> contexts) =>
 			Assign(a => a.Contexts = contexts?.Invoke(new SuggestContextQueriesDescriptor<T>()).Value);
 
-		public CompletionSuggesterDescriptor<T> Payload(Func<FieldsDescriptor<T>, IPromise<Fields>> payload) =>
-			Assign(a => a.Payload = payload?.Invoke(new FieldsDescriptor<T>())?.Value);
-
-		public CompletionSuggesterDescriptor<T> Payload(Fields payload) => Assign(a => a.Payload = payload);
 	}
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Nest
@@ -136,7 +137,7 @@ namespace Nest
 							.Select(x =>
 								new HistogramBucket
 								{
-									Key = long.Parse(x.Key),
+									Key = double.Parse(x.Key, CultureInfo.InvariantCulture),
 									KeyAsString = x.Key,
 									DocCount = x.DocCount.GetValueOrDefault(0),
 									Aggregations = x.Aggregations

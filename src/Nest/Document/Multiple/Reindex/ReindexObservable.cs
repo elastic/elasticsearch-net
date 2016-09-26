@@ -125,10 +125,8 @@ namespace Nest
 					Index = toIndex,
 					Id = h.Id,
 					Routing = h.Routing,
-					Timestamp = h.Timestamp
 				};
 				if (h.Parent != null) item.Parent = h.Parent;
-				if (h.Ttl.HasValue) item.Ttl = h.Ttl;
 				this.Alter?.Invoke(h, h.Source, item);
 				bulkOperations.Add(item);
 			}

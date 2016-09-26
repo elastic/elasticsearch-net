@@ -8,11 +8,13 @@ namespace Nest
 		public IndexName Index { get; set; }
 		public TypeName Type { get; set; }
 		public Id Id { get; set; }
-        public long? Version { get; set; }
+		public long? Version { get; set; }
 		public VersionType? VersionType { get; set; }
 		public string Routing { get; set; }
 		public Id Parent { get; set; }
+		[Obsolete("This property is no longer returned on indices created in Elasticsearch 5.x and up")]
 		public long? Timestamp { get; set; }
+		[Obsolete("This property is no longer returned on indices created in Elasticsearch 5.x and up")]
 		public Time Ttl { get; set; }
 		public int? RetriesOnConflict { get; set; }
 
@@ -59,7 +61,9 @@ namespace Nest
 		VersionType? IBulkOperation.VersionType { get; set; }
 		string IBulkOperation.Routing { get; set; }
 		Id IBulkOperation.Parent { get; set; }
+		[Obsolete("This property is no longer returned on indices created in Elasticsearch 5.x and up")]
 		long? IBulkOperation.Timestamp { get; set; }
+		[Obsolete("This property is no longer returned on indices created in Elasticsearch 5.x and up")]
 		Time IBulkOperation.Ttl { get; set; }
 		int? IBulkOperation.RetriesOnConflict { get; set; }
 
@@ -89,8 +93,10 @@ namespace Nest
 
 		public TDescriptor Parent(Id parent) => Assign(a => a.Parent = parent);
 
+		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
 		public TDescriptor Timestamp(long? timestamp) => Assign(a => a.Timestamp = timestamp);
 
+		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
 		public TDescriptor Ttl(Time ttl) => Assign(a => a.Ttl = ttl);
 	}
 }

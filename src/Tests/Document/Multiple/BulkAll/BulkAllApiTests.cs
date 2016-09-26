@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Tests.Document.Multiple.BulkAll
 {
-	public class BulkAllApiTests : SerializationTestBase, IClusterFixture<WritableCluster>
+	public class BulkAllApiTests : SerializationTestBase, IClusterFixture<IntrusiveOperationCluster>
 	{
 		private class SmallObject
 		{
@@ -28,7 +28,7 @@ namespace Tests.Document.Multiple.BulkAll
 				yield return new SmallObject() { Id = i };
 		}
 
-		public BulkAllApiTests(WritableCluster cluster, EndpointUsage usage)
+		public BulkAllApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage)
 		{
 			this._client = cluster.Client;
 		}

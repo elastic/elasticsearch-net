@@ -50,12 +50,6 @@ namespace Nest
 		[JsonProperty("_routing")]
 		public string Routing { get; internal set; }
 
-		[JsonProperty("_timestamp")]
-		public long? Timestamp { get; internal set; }
-
-		[JsonProperty("_ttl")]
-		public long? Ttl { get; internal set; }
-
 		[JsonProperty("_source")]
 		public ILazyDocument Source { get; internal set; }
 

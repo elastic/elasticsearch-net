@@ -62,7 +62,8 @@ namespace Tests.Search.Request
 								@params = new {
 									factor = 1.1
 								},
-								inline = "doc['numberOfCommits'].value * factor"
+								inline = "doc['numberOfCommits'].value * factor",
+								lang = "groovy"
 							}
 						}
 					}
@@ -97,6 +98,7 @@ namespace Tests.Search.Request
 					.Ascending()
 					.Script(script => script
 						.Inline("doc['numberOfCommits'].value * factor")
+						.Lang("groovy")
 						.Params(p => p.Add("factor", 1.1))
 					)
 				)
@@ -136,6 +138,7 @@ namespace Tests.Search.Request
 						Order = SortOrder.Ascending,
 						Script =  new InlineScript("doc['numberOfCommits'].value * factor")
 						{
+							Lang = "groovy",
 							Params = new Dictionary<string, object>
 							{
 								{ "factor", 1.1 }

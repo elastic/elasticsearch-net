@@ -167,7 +167,7 @@ namespace Tests.Document.Single.Attachment
 
 			searchResponse = Client.Search<Document>(s => s
 				.Index(CallIsolatedValue)
-				.Fields(f => f.Field(d => d.Attachment.ContentType))
+				.StoredFields(f => f.Field(d => d.Attachment.ContentType))
 				.Query(q => q
 					.MatchAll()
 				)
@@ -342,7 +342,7 @@ namespace Tests.Document.Single.Attachment
 
 			// search on language (document is detected as French)
 			var searchResponse = Client.Search<Document>(s => s
-				.Fields(f => f
+				.StoredFields(f => f
 					.Field(d => d.Attachment.Name)
 					.Field(d => d.Attachment.Author)
 					.Field(d => d.Attachment.Content)
