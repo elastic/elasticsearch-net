@@ -1,5 +1,5 @@
 {
-  "version": "5.0.0-ci20160819124606",
+  "version": "5.0.0-beta1",
   "buildOptions": {
     "warningsAsErrors": false
   },
