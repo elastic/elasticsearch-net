@@ -30,11 +30,14 @@ namespace Tests.Ingest
 		{
 			response.Pipelines.Should().NotBeNull().And.HaveCount(1);
 
-			var pipeline = response.Pipelines.First();
-			pipeline.Config.Should().NotBeNull();
-			pipeline.Id.Should().NotBeNullOrEmpty();
+			var kv = response.Pipelines.First();
+			kv.Should().NotBeNull();
+			kv.Key.Should().NotBeNullOrWhiteSpace();
 
-			var processors = pipeline.Config.Processors;
+			var pipeline = kv.Value;
+			pipeline.Description.Should().NotBeNull();
+
+			var processors = pipeline.Processors;
 			processors.Should().NotBeNull().And.HaveCount(2);
 
 			var uppercase = processors.Where(p => p.Name == "uppercase").FirstOrDefault() as UppercaseProcessor;
@@ -140,11 +143,14 @@ namespace Tests.Ingest
 		{
 			response.Pipelines.Should().NotBeNull().And.HaveCount(1);
 
-			var pipeline = response.Pipelines.First();
-			pipeline.Config.Should().NotBeNull();
-			pipeline.Id.Should().NotBeNullOrEmpty();
+			var kv = response.Pipelines.First();
+			kv.Should().NotBeNull();
+			kv.Key.Should().NotBeNullOrWhiteSpace();
 
-			var processors = pipeline.Config.Processors;
+			var pipeline = kv.Value;
+			pipeline.Should().NotBeNull();
+
+			var processors = pipeline.Processors;
 			processors.Should().NotBeNull().And.HaveCount(3);
 
 			var uppercase = processors.Where(p => p.Name == "uppercase").FirstOrDefault() as UppercaseProcessor;
