@@ -55,6 +55,7 @@ namespace Tests.Framework.Integration
 				$"{es}path.repo={this.FileSystem.RepositoryPath}",
 				$"{es}path.data={Path.Combine(this.FileSystem.DataPath, this.FileSystem.ClusterName)}",
 				$"{es}script.inline=true",
+				$"{es}script.max_compilations_per_minute=10000",
 				$"{es}script.{indexedOrStored}=true",
 				$"{es}node.{attr}testingcluster=true"
 			};
