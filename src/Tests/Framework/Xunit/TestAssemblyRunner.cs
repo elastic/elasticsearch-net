@@ -66,7 +66,7 @@ namespace Xunit
 			var clusterTotals = new Dictionary<string, Stopwatch>();
 			foreach (var group in grouped)
 			{
-				if (group.Key?.GetType() != typeof(WritableCluster)) continue;
+				//if (group.Key?.GetType() != typeof(XPackCluster)) continue;
 				var type = group.Key?.GetType();
 				var clusterName = type?.Name.Replace("Cluster", "") ?? "UNKNOWN";
 				var dop = group.Key != null && group.Key.MaxConcurrency > 0

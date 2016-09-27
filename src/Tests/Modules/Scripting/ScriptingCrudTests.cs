@@ -7,9 +7,9 @@ using Xunit;
 namespace Tests.Modules.Scripting
 {
 	public class ScriptingCrudTests
-		: CrudTestBase<IPutScriptResponse, IGetScriptResponse, IPutScriptResponse, IDeleteScriptResponse>
+		: CrudTestBase<IntrusiveOperationCluster, IPutScriptResponse, IGetScriptResponse, IPutScriptResponse, IDeleteScriptResponse>
 	{
-		public ScriptingCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public ScriptingCrudTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses Create() => Calls<PutScriptDescriptor, PutScriptRequest, IPutScriptRequest, IPutScriptResponse>(
 			CreateInitializer,

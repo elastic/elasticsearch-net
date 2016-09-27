@@ -44,10 +44,10 @@ namespace Tests.Document.Multiple.Reindex
 			// create a thousand commits and associate with the projects
 			var commits = CommitActivity.CommitActivities;
 			var bb = new BulkDescriptor();
-			for (int index = 0; index < commits.Count; index++)
+			for (int i = 0; i < commits.Count; i++)
 			{
-				var commit = commits[index];
-				var project = index % 2 == 0
+				var commit = commits[i];
+				var project = i % 2 == 0
 					? projects[0].Name
 					: projects[1].Name;
 

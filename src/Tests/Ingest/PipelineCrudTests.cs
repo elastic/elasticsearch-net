@@ -13,9 +13,10 @@ using Xunit;
 namespace Tests.Ingest
 {
 	public class PipelineCrudTests
-		: CrudTestBase<IPutPipelineResponse, IGetPipelineResponse, IPutPipelineResponse, IDeletePipelineResponse>
+		: CrudTestBase<IntrusiveOperationCluster, IPutPipelineResponse, IGetPipelineResponse, IPutPipelineResponse, IDeletePipelineResponse>
 	{
-		public PipelineCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		//These calls have low priority and often cause `process_cluster_event_timeout_exception`'s
+		public PipelineCrudTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses Create() => Calls<PutPipelineDescriptor, PutPipelineRequest, IPutPipelineRequest, IPutPipelineResponse>(
 			CreateInitializer,
