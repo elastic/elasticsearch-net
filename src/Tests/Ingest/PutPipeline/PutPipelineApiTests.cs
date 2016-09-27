@@ -73,14 +73,11 @@ namespace Tests.Ingest.PutPipeline
 					@foreach = new
 					{
 						field = "tags",
-						processors = new object[]
+						processors = new
 						{
-							new
+							uppercase = new
 							{
-								uppercase = new
-								{
-									field = "_value.name"
-								}
+								field = "_value.name"
 							}
 						}
 					}
@@ -195,7 +192,7 @@ namespace Tests.Ingest.PutPipeline
 				)
 				.Foreach<Project>(fe => fe
 					.Field(p => p.Tags)
-					.Processors(pps => pps
+					.Processor(pps => pps
 						.Uppercase<Tag>(uc => uc
 							.Field("_value.name")
 						)
@@ -274,12 +271,9 @@ namespace Tests.Ingest.PutPipeline
 				new ForeachProcessor
 				{
 					Field = Infer.Field<Project>(p => p.Tags),
-					Processors = new IProcessor[]
+					Processor = new UppercaseProcessor
 					{
-						new UppercaseProcessor
-						{
-							Field = "_value.name"
-						}
+						Field = "_value.name"
 					}
 				},
 				new GrokProcessor
