@@ -185,7 +185,7 @@ namespace Tests.Framework.Integration
 			this.WaitForClusterBootstrap(client, handle, alreadyRunningInstance: true);
 
 			this.ValidateLicense(client, handle);
-			return null;
+			return Observable.Empty<ElasticsearchConsoleOut>();
 		}
 
 		private bool ValidateRunningVersion(IElasticClient client, XplatManualResetEvent handle)
