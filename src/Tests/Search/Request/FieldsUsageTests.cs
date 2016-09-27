@@ -28,7 +28,7 @@ namespace Tests.Search.Request
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Fields(fs => fs
+			.StoredFields(fs => fs
 				.Field(p => p.Name)
 				.Field(p => p.StartedOn)
 				.Field(p => p.NumberOfCommits)
@@ -38,7 +38,7 @@ namespace Tests.Search.Request
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Fields = Fields<Project>(
+				StoredFields = Fields<Project>(
 					p => p.Name,
 					p => p.StartedOn,
 					p => p.NumberOfCommits,

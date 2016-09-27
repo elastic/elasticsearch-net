@@ -110,9 +110,9 @@ namespace Nest
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public MultiGetOperationDescriptor<T> StoredFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public MultiGetOperationDescriptor<T> StoredFields(Fields fields) => Assign(a => a.Fields = fields);
+		public MultiGetOperationDescriptor<T> StoredFields(Fields fields) => Assign(a => a.StoredFields = fields);
 
 	}
 }

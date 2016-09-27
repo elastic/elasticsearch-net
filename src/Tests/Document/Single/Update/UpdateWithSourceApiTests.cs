@@ -47,14 +47,14 @@ namespace Tests.Document.Single.Update
 
 		protected override Func<UpdateDescriptor<Project,Project>, IUpdateRequest<Project, Project>> Fluent => d=>d
 			.Doc(Project.Instance)
-			.Fields(Field<Project>(p=>p.Name).And("_source"))
+			.StoredFields(Field<Project>(p=>p.Name).And("_source"))
 			.DocAsUpsert();
 
 		protected override UpdateRequest<Project, Project> Initializer => new UpdateRequest<Project, Project>(CallIsolatedValue)
 		{
 			Doc = Project.Instance,
 			DocAsUpsert = true,
-			Fields = Field<Project>(p=>p.Name).And("_source")
+			StoredFields = Field<Project>(p=>p.Name).And("_source")
 		};
 
 		[I] public Task ReturnsSourceAndFields() => this.AssertOnAllResponses(r =>

@@ -54,10 +54,10 @@ namespace Nest
 		public TPartialDocument Doc { get; set; }
 		public bool? DetectNoop { get; set; }
 
-		public Fields Fields
+		public Fields StoredFields
 		{
-			get { return Self.RequestParameters.GetQueryStringValue<Fields>("fields"); }
-			set { Self.RequestParameters.AddQueryString("fields", value); }
+			get { return Self.RequestParameters.GetQueryStringValue<Fields>("stored_fields"); }
+			set { Self.RequestParameters.AddQueryString("stored_fields", value); }
 		}
 	}
 

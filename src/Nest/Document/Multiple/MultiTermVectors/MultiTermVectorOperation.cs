@@ -70,7 +70,7 @@ namespace Nest
 		public MultiTermVectorOperationDescriptor<T> StoredFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public MultiTermVectorOperationDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
+		public MultiTermVectorOperationDescriptor<T> StoredFields(Fields fields) => Assign(a => a.StoredFields = fields);
 
 		public MultiTermVectorOperationDescriptor<T> Id(Id id) => Assign(a=>a.Id = id);
 

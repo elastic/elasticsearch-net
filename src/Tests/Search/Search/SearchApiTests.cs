@@ -151,7 +151,7 @@ namespace Tests.Search.Search
 		.PostFilter(f => f
 			.Term(p => p.State, StateOfBeing.Stable)
 		)
-		.Fields(fs => fs
+		.StoredFields(fs => fs
 			.Field(p => p.Name)
 			.Field(p => p.NumberOfCommits)
 		);
@@ -170,7 +170,7 @@ namespace Tests.Search.Search
 				Field = "state",
 				Value = "Stable"
 			}),
-			Fields = Infer.Fields<Project>(p => p.Name, p => p.NumberOfCommits)
+			StoredFields = Infer.Fields<Project>(p => p.Name, p => p.NumberOfCommits)
 		};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
