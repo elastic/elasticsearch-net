@@ -54,7 +54,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "rescore")]
 		IList<IRescore> Rescore { get; set; }
 
-		[JsonProperty(PropertyName = "fields")]
+		[JsonProperty(PropertyName = "stored_fields")]
 		Fields StoredFields { get; set; }
 
 		[JsonProperty(PropertyName = "fielddata_fields")]
