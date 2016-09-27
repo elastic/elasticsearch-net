@@ -54,10 +54,10 @@ namespace Nest
 		public TPartialDocument Doc { get; set; }
 		public bool? DetectNoop { get; set; }
 
-		public Fields StoredFields
+		public Fields Fields
 		{
-			get { return Self.RequestParameters.GetQueryStringValue<Fields>("stored_fields"); }
-			set { Self.RequestParameters.AddQueryString("stored_fields", value); }
+			get { return Self.RequestParameters.GetQueryStringValue<Fields>("fields"); }
+			set { Self.RequestParameters.AddQueryString("fields", value); }
 		}
 	}
 
@@ -106,14 +106,14 @@ namespace Nest
 
 		public UpdateDescriptor<TDocument, TPartialDocument> DetectNoop(bool detectNoop = true) => Assign(a => a.DetectNoop = detectNoop);
 
-		public UpdateDescriptor<TDocument, TPartialDocument> StoredFields(Fields fields) =>
-			Assign(a => a.RequestParameters.AddQueryString("stored_fields", fields));
+		public UpdateDescriptor<TDocument, TPartialDocument> Fields(Fields fields) =>
+			Assign(a => a.RequestParameters.AddQueryString("fields", fields));
 
-		public UpdateDescriptor<TDocument, TPartialDocument> StoredFields(params Expression<Func<TPartialDocument, object>>[] typedPathLookups) =>
-			Assign(a => a.RequestParameters.AddQueryString("stored_fields", typedPathLookups));
+		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params Expression<Func<TPartialDocument, object>>[] typedPathLookups) =>
+			Assign(a => a.RequestParameters.AddQueryString("fields", typedPathLookups));
 
-		public UpdateDescriptor<TDocument, TPartialDocument> StoredFields(params string[] fields) =>
-			Assign(a => a.RequestParameters.AddQueryString("stored_fields", fields));
+		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params string[] fields) =>
+			Assign(a => a.RequestParameters.AddQueryString("fields", fields));
 
 	}
 }
