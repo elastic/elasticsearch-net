@@ -41,7 +41,7 @@ namespace Tests.Aggregations.Metric.TopHits
 								},
 								_source = new
 								{
-									include = new [] { "name", "startedOn" }
+									includes = new [] { "name", "startedOn" }
 								},
 								size = 1,
 								version = true,

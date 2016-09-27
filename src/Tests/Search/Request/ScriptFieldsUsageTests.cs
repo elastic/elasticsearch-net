@@ -17,7 +17,8 @@ namespace Tests.Search.Request
 				{
 					script = new
 					{
-						inline = "doc['my_field_name'].value * 2"
+						inline = "doc['my_field_name'].value * 2",
+						lang = "groovy",
 					}
 				},
 				test2 = new

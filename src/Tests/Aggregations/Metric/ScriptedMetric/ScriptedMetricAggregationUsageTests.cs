@@ -22,18 +22,22 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 						init_script = new
 						{
 							inline = "_agg['commits'] = []",
+							lang = "groovy"
 						},
 						map_script = new
 						{
-							inline = "if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }"
+							inline = "if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }",
+							lang = "groovy"
 						},
 						combine_script = new
 						{
-							inline = "sum = 0; for (c in _agg.commits) { sum += c }; return sum"
+							inline = "sum = 0; for (c in _agg.commits) { sum += c }; return sum",
+							lang = "groovy"
 						},
 						reduce_script = new
 						{
-							inline = "sum = 0; for (a in _aggs) { sum += a }; return sum"
+							inline = "sum = 0; for (a in _aggs) { sum += a }; return sum",
+							lang = "groovy"
 						}
 					}
 				}

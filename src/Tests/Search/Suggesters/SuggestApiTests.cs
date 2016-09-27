@@ -52,7 +52,6 @@ namespace Tests.Search.Suggesters
 						  unicode_aware = false
 						},
 						size = 8,
-						payload = new [] { "numberOfCommits" }
 					  },
 					  prefix = Project.Instance.Name
 					} },

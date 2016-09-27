@@ -73,7 +73,7 @@ namespace Tests.Ingest.PutPipeline
 					@foreach = new
 					{
 						field = "tags",
-						processors = new
+						processor = new
 						{
 							uppercase = new
 							{

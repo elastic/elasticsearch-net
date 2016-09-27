@@ -25,8 +25,8 @@ namespace Tests.Search.Request
 			{
 				_source = new
 				{
-					include = new[] { "*" },
-					exclude = new[] { "description" }
+					includes = new[] { "*" },
+					excludes = new[] { "description" }
 				}
 			};
 
@@ -152,7 +152,7 @@ namespace Tests.Search.Request
 		[U]
 		public void CanDeserializeObject()
 		{
-			var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": { \"include\": [\"obj.*\"], \"exclude\": [\"foo.*\"] } }");
+			var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": { \"includes\": [\"obj.*\"], \"excludes\": [\"foo.*\"] } }");
 			o.Should().NotBeNull();
 			o.SourceFilter.Match(
 				b => Assert.True(false, "Expected ISourceFilter but found bool"),

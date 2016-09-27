@@ -134,7 +134,7 @@ namespace Tests.Search.Search
 
 				}
 			},
-			fields = new[] { "name", "numberOfCommits" }
+			stored_fields = new[] { "name", "numberOfCommits" }
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
