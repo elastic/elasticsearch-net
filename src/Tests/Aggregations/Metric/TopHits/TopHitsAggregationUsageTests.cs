@@ -61,7 +61,8 @@ namespace Tests.Aggregations.Metric.TopHits
 									{
 										script = new
 										{
-											inline = "doc['numberOfCommits'].value * 2"
+											inline = "doc['numberOfCommits'].value * 2",
+											lang = "groovy"
 										}
 									}
 								}
@@ -104,6 +105,7 @@ namespace Tests.Aggregations.Metric.TopHits
 							.ScriptFields(sfs => sfs
 								.ScriptField("commit_factor", sf => sf
 									.Inline("doc['numberOfCommits'].value * 2")
+									.Lang("groovy")
 								)
 							)
 						)
@@ -143,7 +145,9 @@ namespace Tests.Aggregations.Metric.TopHits
 						},
 						ScriptFields = new ScriptFields
 						{
-							{ "commit_factor", new ScriptField { Script = new InlineScript("doc['numberOfCommits'].value * 2") } }
+							{ "commit_factor", new ScriptField {
+								Script = new InlineScript("doc['numberOfCommits'].value * 2") { Lang = "groovy" }
+							} }
 						}
 					}
 				}
