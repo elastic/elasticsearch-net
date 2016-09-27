@@ -99,6 +99,7 @@ namespace Tests.Document.Multiple.Reindex
 				onError: (e) => { throw e; },
 				onCompleted: () => ReindexSingleTypeCompleted(handles)
 			);
+			this._reindexSingleTypeResult.Subscribe(singleTypeObserver);
 
 
 			WaitHandle.WaitAll(handles, TimeSpan.FromMinutes(3));
