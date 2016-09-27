@@ -94,34 +94,34 @@ namespace Tests.XPack.Security.Role.PutRole
 	}
 
 	//TODO this might be a bug in xpack but more likely a misunderstanding on our part ignore for now
-	//public class PutRoleRunAsApiTests : PutRoleApiTests
-	//{
-	//	public PutRoleRunAsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	public class PutRoleRunAsApiTests : PutRoleApiTests
+	{
+		public PutRoleRunAsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-	//	protected override bool ExpectIsValid => false;
-	//	protected override int ExpectStatusCode => 401;
+		protected override bool ExpectIsValid => false;
+		protected override int ExpectStatusCode => 403;
 
-	//	protected override PutRoleRequest Initializer
-	//	{
-	//		get
-	//		{
-	//			var request = base.Initializer;
-	//			request.RequestConfiguration = new RequestConfiguration
-	//			{
-	//				RunAs = ShieldInformation.User.Username
-	//			};
-	//			return request;
-	//		}
-	//	}
+		protected override PutRoleRequest Initializer
+		{
+			get
+			{
+				var request = base.Initializer;
+				request.RequestConfiguration = new RequestConfiguration
+				{
+					RunAs = ShieldInformation.User.Username
+				};
+				return request;
+			}
+		}
 
-	//	protected override Func<PutRoleDescriptor, IPutRoleRequest> Fluent => f => base.Fluent(f
-	//		.RequestConfiguration(c => c
-	//			.RunAs(ShieldInformation.User.Username)
-	//		));
+		protected override Func<PutRoleDescriptor, IPutRoleRequest> Fluent => f => base.Fluent(f
+			.RequestConfiguration(c => c
+				.RunAs(ShieldInformation.User.Username)
+			));
 
-	//	protected override void ExpectResponse(IPutRoleResponse response)
-	//	{
-	//	}
-	//}
+		protected override void ExpectResponse(IPutRoleResponse response)
+		{
+		}
+	}
 
 }
