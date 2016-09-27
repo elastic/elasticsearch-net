@@ -83,7 +83,7 @@ namespace Tests.Aggregations.Metric.TopHits
 								.Order(SortOrder.Descending)
 							)
 							.Source(src => src
-								.Include(fs => fs
+								.Includes(fs => fs
 									.Field(p => p.Name)
 									.Field(p => p.StartedOn)
 								)
@@ -127,7 +127,7 @@ namespace Tests.Aggregations.Metric.TopHits
 						},
 						Source = new SourceFilter
 						{
-							Include = new [] { "name", "startedOn" }
+							Includes = new [] { "name", "startedOn" }
 						},
 						Size = 1,
 						Version = true,

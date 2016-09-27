@@ -22,13 +22,13 @@ namespace Nest
 			switch (reader.TokenType)
 			{
 				case JsonToken.String:
-					filter.Include = new [] { (string)reader.Value };
+					filter.Includes = new [] { (string)reader.Value };
 					break;
 				case JsonToken.StartArray:
 					var include = new List<string>();
 					while (reader.Read() && reader.TokenType != JsonToken.EndArray)
 						include.Add((string)reader.Value);
-					filter.Include = include.ToArray();
+					filter.Includes = include.ToArray();
 					break;
 				default:
 					serializer.Populate(reader, filter);
