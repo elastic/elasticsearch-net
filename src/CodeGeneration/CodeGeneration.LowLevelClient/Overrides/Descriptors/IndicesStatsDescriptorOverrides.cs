@@ -2,9 +2,9 @@
 
 namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 {
-	public class IndicesStatsDescriptorOverrides : IDescriptorOverrides
+	public class IndicesStatsDescriptorOverrides : DescriptorOverridesBase
 	{
-		public IEnumerable<string> SkipQueryStringParams
+		public override IEnumerable<string> SkipQueryStringParams
 		{
 			get
 			{
@@ -14,6 +14,5 @@ namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 				};
 			}
 		}
-		public IDictionary<string, string> RenameQueryStringParams { get { return null; } }
 	}
 }

@@ -2934,9 +2934,9 @@ namespace Nest
 		
 		
 		///<summary>A comma-separated list of keys to clear when using the `filter_cache` parameter (default: all)</summary>
-		public bool FilterKeys 
+		public  string[] FilterCacheKeys 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("filter_keys"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("filter_keys"); } 
 			set { this.Request.RequestParameters.AddQueryString("filter_keys", value); }
 		}
 		

@@ -6,9 +6,9 @@ using System.Text;
 namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 {
 	//CodeGeneration.LowLevelClient.Overrides.Descriptors.MultiTermVectorsDescriptorOverrides
-	public class MultiTermVectorsDescriptorOverrides : IDescriptorOverrides
+	public class MultiTermVectorsDescriptorOverrides : DescriptorOverridesBase
 	{
-		public IEnumerable<string> SkipQueryStringParams
+		public override IEnumerable<string> SkipQueryStringParams
 		{
 			get
 			{
@@ -18,6 +18,5 @@ namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 				};
 			}
 		}
-		public IDictionary<string, string> RenameQueryStringParams { get { return null; } }
 	}
 }

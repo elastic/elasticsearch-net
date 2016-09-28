@@ -60,3 +60,5 @@ YamlCache
 
 *.DS_Store
 *.sln.ide
+
+packages

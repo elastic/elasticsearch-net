@@ -5,9 +5,9 @@ using System.Text;
 
 namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 {
-	public class NodesHotThreadsDescriptorOverrides : IDescriptorOverrides
+	public class NodesHotThreadsDescriptorOverrides : DescriptorOverridesBase
 	{
-		public IEnumerable<string> SkipQueryStringParams
+		public override IEnumerable<string> SkipQueryStringParams
 		{
 			get
 			{
@@ -17,7 +17,8 @@ namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 				};
 			}
 		}
-		public IDictionary<string, string> RenameQueryStringParams
+
+		public override IDictionary<string, string> RenameQueryStringParams
 		{
 			get
 			{

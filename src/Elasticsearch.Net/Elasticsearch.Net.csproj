@@ -63,6 +63,7 @@
     <Compile Include="Connection\RequestState\RequestTimings.cs" />
     <Compile Include="Connection\Security\BasicAuthorizationCredentials.cs" />
     <Compile Include="Domain\RequestParameters\BaseRequestParameters.cs" />
+    <Compile Include="Domain\RequestParameters\ClearCacheRequestParameters.cs" />
     <Compile Include="Domain\Response\CallMetrics.cs" />
     <Compile Include="Domain\Response\IElasticsearchResponse.cs" />
     <Compile Include="Domain\IHideObjectMembers.cs" />
