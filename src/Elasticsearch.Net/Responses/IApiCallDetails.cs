@@ -38,7 +38,7 @@ namespace Elasticsearch.Net
 		int? HttpStatusCode { get; }
 
 		/// <summary>
-		/// The raw byte response, only set when IncludeRawResponse() is set on Connection configuration
+		/// The raw byte response, only set when DisableDirectStreaming() is set on Connection configuration
 		/// </summary>
 		[DebuggerDisplay("{ResponseBodyInBytes != null ? System.Text.Encoding.UTF8.GetString(ResponseBodyInBytes) : null,nq}")]
 		byte[] ResponseBodyInBytes { get; }
