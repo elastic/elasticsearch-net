@@ -14,6 +14,7 @@ namespace Nest
 		TypeName Type { get; set; }
 
 		[JsonProperty("index_name")]
+		[Obsolete("Removed since Elasticsearch 2.x. Use copy_to instead.")]
 		string IndexName { get; set; }
 
 		[JsonProperty("store")]
