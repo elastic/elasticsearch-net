@@ -507,6 +507,7 @@ namespace Nest
 		public QueryContainer Exists(Func<ExistsQueryDescriptor<T>, IExistsQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Exists = query);
 
+		[Obsolete("Removed in 5.x. Use an exists query within a bool must_not clause instead.")]
 		public QueryContainer Missing(Func<MissingQueryDescriptor<T>, IMissingQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Missing = query);
 

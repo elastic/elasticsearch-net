@@ -6,6 +6,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<MissingQuery>))]
+	[Obsolete("Removed in 5.x. Use an exists query within a bool must_not clause instead.")]
 	public interface IMissingQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "field")]
@@ -18,6 +19,7 @@ namespace Nest
 		bool? NullValue { get; set; }
 	}
 
+	[Obsolete("Removed in 5.x. Use an exists query within a bool must_not clause instead.")]
 	public class MissingQuery : QueryBase, IMissingQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
@@ -28,7 +30,8 @@ namespace Nest
 		internal static bool IsConditionless(IMissingQuery q) => q.Field.IsConditionless();
 	}
 
-	public class MissingQueryDescriptor<T> 
+	[Obsolete("Removed in 5.x. Use an exists query within a bool must_not clause instead.")]
+	public class MissingQueryDescriptor<T>
 		: QueryDescriptorBase<MissingQueryDescriptor<T>, IMissingQuery>
 		, IMissingQuery where T : class
 	{
