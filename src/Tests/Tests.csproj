@@ -489,7 +489,6 @@
     <Compile Include=".\QueryDsl\TermLevel\Fuzzy\FuzzyNumericQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\TermLevel\Fuzzy\FuzzyQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\TermLevel\Ids\IdsQueryUsageTests.cs" />
-    <Compile Include=".\QueryDsl\TermLevel\Missing\MissingQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\TermLevel\Prefix\PrefixQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\TermLevel\Range\DateRangeQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\TermLevel\Range\NumericRangeQueryUsageTests.cs" />

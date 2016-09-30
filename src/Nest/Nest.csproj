@@ -1102,7 +1102,6 @@
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueryBase.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\TermLevel\Ids\IdsQuery.cs" />
-    <Compile Include="QueryDsl\TermLevel\Missing\MissingQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Prefix\PrefixQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Range\DateRangeQuery .cs" />
     <Compile Include="QueryDsl\TermLevel\Range\NumericRangeQuery.cs" />
