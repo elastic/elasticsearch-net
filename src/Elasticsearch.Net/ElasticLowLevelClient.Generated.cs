@@ -892,6 +892,60 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CatTasksAsync<T>(Func<CatTasksRequestParameters, CatTasksRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/tasks"), cancellationToken, null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
+		///<summary>Represents a GET on /_cat/templates
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html </para>
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> CatTemplates<T>(Func<CatTemplatesRequestParameters, CatTemplatesRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/templates"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
+		
+		///<summary>Represents a GET on /_cat/templates
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html </para>
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> CatTemplatesAsync<T>(Func<CatTemplatesRequestParameters, CatTemplatesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/templates"), cancellationToken, null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
+		
+		///<summary>Represents a GET on /_cat/templates/{name}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html </para>
+	    ///</summary>
+		///<param name="name">A pattern that returned template names must match</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> CatTemplates<T>(string name, Func<CatTemplatesRequestParameters, CatTemplatesRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/templates/{name.NotNull("name")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
+		
+		///<summary>Represents a GET on /_cat/templates/{name}
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html </para>
+	    ///</summary>
+		///<param name="name">A pattern that returned template names must match</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> CatTemplatesAsync<T>(string name, Func<CatTemplatesRequestParameters, CatTemplatesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/templates/{name.NotNull("name")}"), cancellationToken, null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
+		
 		///<summary>Represents a GET on /_cat/thread_pool
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5523,7 +5577,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> MsearchTemplateGet<T>(Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null)
@@ -5536,7 +5590,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MsearchTemplateGetAsync<T>(Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -5549,7 +5603,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html </para>
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -5563,7 +5617,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html </para>
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -5577,7 +5631,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html </para>
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
@@ -5592,7 +5646,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html </para>
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
@@ -5607,7 +5661,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html </para>
 	    ///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -5621,7 +5675,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html </para>
 	    ///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -5635,7 +5689,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html </para>
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
@@ -5650,7 +5704,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html </para>
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
@@ -5665,7 +5719,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html </para>
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
@@ -5681,7 +5735,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html </para>
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>

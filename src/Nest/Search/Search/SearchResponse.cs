@@ -13,7 +13,7 @@ namespace Nest
 		IDictionary<string, IAggregate> Aggregations { get; }
 		Profile Profile { get; }
 		AggregationsHelper Aggs { get; }
-		IDictionary<string, Suggest[]> Suggest { get; }
+		IDictionary<string, Suggest<T>[]> Suggest { get; }
 		int Took { get; }
 		bool TimedOut { get; }
 		bool TerminatedEarly { get; }
@@ -58,7 +58,7 @@ namespace Nest
 		public AggregationsHelper Aggs => _agg ?? (_agg = new AggregationsHelper(this.Aggregations));
 
 		[JsonProperty(PropertyName = "suggest")]
-		public IDictionary<string, Suggest[]> Suggest { get; internal set; }
+		public IDictionary<string, Suggest<T>[]> Suggest { get; internal set; }
 
 		[JsonProperty(PropertyName = "took")]
 		public int Took { get; internal set; }

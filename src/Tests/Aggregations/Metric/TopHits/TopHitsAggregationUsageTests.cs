@@ -41,7 +41,7 @@ namespace Tests.Aggregations.Metric.TopHits
 								},
 								_source = new
 								{
-									include = new [] { "name", "startedOn" }
+									includes = new [] { "name", "startedOn" }
 								},
 								size = 1,
 								version = true,
@@ -61,7 +61,8 @@ namespace Tests.Aggregations.Metric.TopHits
 									{
 										script = new
 										{
-											inline = "doc['numberOfCommits'].value * 2"
+											inline = "doc['numberOfCommits'].value * 2",
+											lang = "groovy"
 										}
 									}
 								}
@@ -83,7 +84,7 @@ namespace Tests.Aggregations.Metric.TopHits
 								.Order(SortOrder.Descending)
 							)
 							.Source(src => src
-								.Include(fs => fs
+								.Includes(fs => fs
 									.Field(p => p.Name)
 									.Field(p => p.StartedOn)
 								)
@@ -104,6 +105,7 @@ namespace Tests.Aggregations.Metric.TopHits
 							.ScriptFields(sfs => sfs
 								.ScriptField("commit_factor", sf => sf
 									.Inline("doc['numberOfCommits'].value * 2")
+									.Lang("groovy")
 								)
 							)
 						)
@@ -127,7 +129,7 @@ namespace Tests.Aggregations.Metric.TopHits
 						},
 						Source = new SourceFilter
 						{
-							Include = new [] { "name", "startedOn" }
+							Includes = new [] { "name", "startedOn" }
 						},
 						Size = 1,
 						Version = true,
@@ -143,7 +145,9 @@ namespace Tests.Aggregations.Metric.TopHits
 						},
 						ScriptFields = new ScriptFields
 						{
-							{ "commit_factor", new ScriptField { Script = new InlineScript("doc['numberOfCommits'].value * 2") } }
+							{ "commit_factor", new ScriptField {
+								Script = new InlineScript("doc['numberOfCommits'].value * 2") { Lang = "groovy" }
+							} }
 						}
 					}
 				}

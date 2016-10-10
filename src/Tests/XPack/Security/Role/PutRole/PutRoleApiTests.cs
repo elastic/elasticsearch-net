@@ -42,7 +42,7 @@ namespace Tests.XPack.Security.Role.PutRole
 				new {
 					names = new [] { "project" },
 					privileges = new [] { "all" },
-					fields = new [] { "name", "description" },
+					field_security = new { grant = new [] { "name", "description" } },
 					query = new { match_all = new {} }
 				}
 			}
@@ -56,7 +56,10 @@ namespace Tests.XPack.Security.Role.PutRole
 			{
 				new IndicesPrivileges
 				{
-					Fields = Fields<Project>(p=>p.Name).And<Project>(p=>p.Description),
+					FieldSecurity = new FieldSecurity
+					{
+						Grant = Fields<Project>(p=>p.Name).And<Project>(p=>p.Description)
+					},
 					Names = Indices<Project>(),
 					Privileges = new [] { "all" },
 					Query = new MatchAllQuery()
@@ -71,9 +74,11 @@ namespace Tests.XPack.Security.Role.PutRole
 			.Cluster("all")
 			.Indices(i => i
 				.Add<Project>(ii => ii
-					.Fields(f => f
-						.Field(p => p.Name)
-						.Field(p => p.Description)
+					.FieldSecurity(fs => fs
+						.Grant(f => f
+							.Field(p => p.Name)
+							.Field(p => p.Description)
+						)
 					)
 					.Names(Indices<Project>())
 					.Privileges("all")
@@ -88,6 +93,7 @@ namespace Tests.XPack.Security.Role.PutRole
 		}
 	}
 
+	//TODO this might be a bug in xpack but more likely a misunderstanding on our part ignore for now
 	public class PutRoleRunAsApiTests : PutRoleApiTests
 	{
 		public PutRoleRunAsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -109,7 +115,7 @@ namespace Tests.XPack.Security.Role.PutRole
 		}
 
 		protected override Func<PutRoleDescriptor, IPutRoleRequest> Fluent => f => base.Fluent(f
-			.RequestConfiguration(c=>c
+			.RequestConfiguration(c => c
 				.RunAs(ShieldInformation.User.Username)
 			));
 

@@ -66,7 +66,8 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 								},
 								script = new
 								{
-									inline = "stableCommits / totalCommits * 100"
+									inline = "stableCommits / totalCommits * 100",
+									lang  = "groovy"
 								}
 							}
 						}
@@ -100,7 +101,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 								.Add("totalCommits", "commits")
 								.Add("stableCommits", "stable_state>commits")
 							)
-							.Script("stableCommits / totalCommits * 100")
+							.Script(ss =>ss.Inline("stableCommits / totalCommits * 100").Lang("groovy"))
 						)
 					)
 				)
@@ -130,7 +131,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 							{ "stableCommits", "stable_state>commits" }
 						})
 					{
-						Script = (InlineScript)"stableCommits / totalCommits * 100"
+						Script = new InlineScript("stableCommits / totalCommits * 100") { Lang = "groovy" }
 					}
 			}
 		};

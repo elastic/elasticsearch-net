@@ -50,7 +50,6 @@ namespace Tests.Cluster.NodesInfo
 			node.Ip.Should().NotBeNullOrWhiteSpace();
 			node.Version.Should().NotBeNullOrWhiteSpace();
 			node.BuildHash.Should().NotBeNullOrWhiteSpace();
-			node.HttpAddress.Should().NotBeNullOrWhiteSpace();
 			node.Roles.Should().NotBeNullOrEmpty();
 		}
 

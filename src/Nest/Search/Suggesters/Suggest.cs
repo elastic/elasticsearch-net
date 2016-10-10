@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	public class Suggest
+	public class Suggest<T> where T : class
 	{
 		[JsonProperty("length")]
 		public int Length { get; internal set; }
@@ -13,6 +13,6 @@ namespace Nest
 		[JsonProperty("text")]
 		public string Text { get; internal set; }
 		[JsonProperty("options")]
-		public IEnumerable<SuggestOption> Options { get; internal set; }
+		public IEnumerable<SuggestOption<T>> Options { get; internal set; }
 	}
 }

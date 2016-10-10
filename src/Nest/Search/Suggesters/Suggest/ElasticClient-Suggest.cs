@@ -13,16 +13,18 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type used to strongly type parts of the suggest operation</typeparam>
 		/// <param name="selector">The suggesters to use this operation (can be multiple)</param>
-		ISuggestResponse Suggest<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector) where T : class;
+		ISuggestResponse<T> Suggest<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector) where T : class;
 
 		/// <inheritdoc/>
-		ISuggestResponse Suggest(ISuggestRequest request);
+		ISuggestResponse<T> Suggest<T>(ISuggestRequest request) where T : class;
 
 		/// <inheritdoc/>
-		Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ISuggestResponse<T>> SuggestAsync<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 
 		/// <inheritdoc/>
-		Task<ISuggestResponse> SuggestAsync(ISuggestRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<ISuggestResponse<T>> SuggestAsync<T>(ISuggestRequest request, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class;
+
 	}
 
 	//TODO limit scope of fluent to IndexName of T
@@ -30,26 +32,27 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public ISuggestResponse Suggest<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector) where T : class =>
-			this.Suggest(selector?.Invoke(new SuggestDescriptor<T>()));
+		public ISuggestResponse<T> Suggest<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector) where T : class =>
+			this.Suggest<T>(selector?.Invoke(new SuggestDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public ISuggestResponse Suggest(ISuggestRequest request) =>
-			this.Dispatcher.Dispatch<ISuggestRequest, SuggestRequestParameters, SuggestResponse>(
+		public ISuggestResponse<T> Suggest<T>(ISuggestRequest request) where T : class =>
+			this.Dispatcher.Dispatch<ISuggestRequest, SuggestRequestParameters, SuggestResponse<T>>(
 				request,
-				this.LowLevelDispatch.SuggestDispatch<SuggestResponse>
+				this.LowLevelDispatch.SuggestDispatch<SuggestResponse<T>>
 			);
 
 		/// <inheritdoc/>
-		public Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) where T : class =>
-			this.SuggestAsync(selector?.Invoke(new SuggestDescriptor<T>()), cancellationToken);
+		public Task<ISuggestResponse<T>> SuggestAsync<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) where T : class =>
+			this.SuggestAsync<T>(selector?.Invoke(new SuggestDescriptor<T>()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<ISuggestResponse> SuggestAsync(ISuggestRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<ISuggestRequest, SuggestRequestParameters, SuggestResponse, ISuggestResponse>(
+		public Task<ISuggestResponse<T>> SuggestAsync<T>(ISuggestRequest request, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class =>
+			this.Dispatcher.DispatchAsync<ISuggestRequest, SuggestRequestParameters, SuggestResponse<T>, ISuggestResponse<T>>(
 				request,
 				cancellationToken,
-				this.LowLevelDispatch.SuggestDispatchAsync<SuggestResponse>
+				this.LowLevelDispatch.SuggestDispatchAsync<SuggestResponse<T>>
 			);
 	}
 }

@@ -46,12 +46,29 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public BulkDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
-		///<summary>Default comma-separated list of fields to return in the response for updates</summary>
+		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
 		public BulkDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
 			
-		///<summary>Default comma-separated list of fields to return in the response for updates</summary>
+		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
 		public BulkDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._Fields(fields));
+
+		///<summary>True or false to return the _source field or not, or default list of fields to return, can be overridden on each sub-request</summary>
+		public BulkDescriptor SourceEnabled(params string[] source_enabled) => AssignParam(p=>p.SourceEnabled(source_enabled));
+
+		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
+		public BulkDescriptor SourceExclude(params string[] source_exclude) => AssignParam(p=>p.SourceExclude(source_exclude));
+			
+		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
+		public BulkDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			AssignParam(p=>p._SourceExclude(fields));
+
+		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
+		public BulkDescriptor SourceInclude(params string[] source_include) => AssignParam(p=>p.SourceInclude(source_include));
+			
+		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
+		public BulkDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			AssignParam(p=>p._SourceInclude(fields));
 
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public BulkDescriptor Pipeline(string pipeline) => AssignParam(p=>p.Pipeline(pipeline));
@@ -311,6 +328,9 @@ namespace Nest
 
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatIndicesDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
+
+		///<summary>A health status (&quot;green&quot;, &quot;yellow&quot;, or &quot;red&quot; to filter only indices matching the specified health status</summary>
+		public CatIndicesDescriptor Health(Health health) => AssignParam(p=>p.Health(health));
 
 		///<summary>Return help information</summary>
 		public CatIndicesDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
@@ -710,6 +730,47 @@ namespace Nest
 	
 	}
 	
+	///<summary>descriptor for CatTemplates <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
+	public partial class CatTemplatesDescriptor  : RequestDescriptorBase<CatTemplatesDescriptor,CatTemplatesRequestParameters, ICatTemplatesRequest>, ICatTemplatesRequest
+	{ 
+		Name ICatTemplatesRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_cat/templates</summary>
+		public CatTemplatesDescriptor() : base(){}
+		
+
+			///<summary>A pattern that returned template names must match</summary>
+		public CatTemplatesDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
+
+	
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatTemplatesDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public CatTemplatesDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public CatTemplatesDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatTemplatesDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
+
+		///<summary>Return help information</summary>
+		public CatTemplatesDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatTemplatesDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
+
+		///<summary>The URL-encoded request definition</summary>
+		public CatTemplatesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CatTemplatesDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	
+	}
+	
 	///<summary>descriptor for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
 	public partial class CatThreadPoolDescriptor  : RequestDescriptorBase<CatThreadPoolDescriptor,CatThreadPoolRequestParameters, ICatThreadPoolRequest>, ICatThreadPoolRequest
 	{ 
@@ -835,7 +896,7 @@ namespace Nest
 		public ClusterHealthDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
 		///<summary>Wait until the specified number of shards is active</summary>
-		public ClusterHealthDescriptor WaitForActiveShards(long wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
+		public ClusterHealthDescriptor WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
 
 		///<summary>Wait until the specified number of nodes is available</summary>
 		public ClusterHealthDescriptor WaitForNodes(string wait_for_nodes) => AssignParam(p=>p.WaitForNodes(wait_for_nodes));
@@ -843,8 +904,8 @@ namespace Nest
 		///<summary>Wait until all currently queued events with the given priorty are processed</summary>
 		public ClusterHealthDescriptor WaitForEvents(WaitForEvents wait_for_events) => AssignParam(p=>p.WaitForEvents(wait_for_events));
 
-		///<summary>Wait until the specified number of relocating shards is finished</summary>
-		public ClusterHealthDescriptor WaitForRelocatingShards(long wait_for_relocating_shards) => AssignParam(p=>p.WaitForRelocatingShards(wait_for_relocating_shards));
+		///<summary>Whether to wait until there are no relocating shards in the cluster</summary>
+		public ClusterHealthDescriptor WaitForNoRelocatingShards(bool wait_for_no_relocating_shards = true) => AssignParam(p=>p.WaitForNoRelocatingShards(wait_for_no_relocating_shards));
 
 		///<summary>Wait until cluster is in a specific state</summary>
 		public ClusterHealthDescriptor WaitForStatus(WaitForStatus wait_for_status) => AssignParam(p=>p.WaitForStatus(wait_for_status));
@@ -1252,19 +1313,19 @@ namespace Nest
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
 		public DeleteByQueryDescriptor<T> Explain(bool explain = true) => AssignParam(p=>p.Explain(explain));
 
-		///<summary>A comma-separated list of fields to return as part of a hit</summary>
-		public DeleteByQueryDescriptor<T> Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
+		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
+		public DeleteByQueryDescriptor<T> StoredFields(params string[] stored_fields) => AssignParam(p=>p.StoredFields(stored_fields));
 			
-		///<summary>A comma-separated list of fields to return as part of a hit</summary>
-		public DeleteByQueryDescriptor<T> Fields(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._Fields(fields));
+		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
+		public DeleteByQueryDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  =>
+			AssignParam(p=>p._StoredFields(fields));
 
-		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
-		public DeleteByQueryDescriptor<T> FielddataFields(params string[] fielddata_fields) => AssignParam(p=>p.FielddataFields(fielddata_fields));
+		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
+		public DeleteByQueryDescriptor<T> DocvalueFields(params string[] docvalue_fields) => AssignParam(p=>p.DocvalueFields(docvalue_fields));
 			
-		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
-		public DeleteByQueryDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._FielddataFields(fields));
+		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
+		public DeleteByQueryDescriptor<T> DocvalueFields(params Expression<Func<T, object>>[] fields)  =>
+			AssignParam(p=>p._DocvalueFields(fields));
 
 		///<summary>Starting offset (default: 0)</summary>
 		public DeleteByQueryDescriptor<T> From(long from) => AssignParam(p=>p.From(from));
@@ -1522,12 +1583,12 @@ namespace Nest
 		///<summary>The default field for query string query (default: _all)</summary>
 		public ExplainDescriptor<TDocument> Df(string df) => AssignParam(p=>p.Df(df));
 
-		///<summary>A comma-separated list of fields to return in the response</summary>
-		public ExplainDescriptor<TDocument> Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
+		public ExplainDescriptor<TDocument> StoredFields(params string[] stored_fields) => AssignParam(p=>p.StoredFields(stored_fields));
 			
-		///<summary>A comma-separated list of fields to return in the response</summary>
-		public ExplainDescriptor<TDocument> Fields(params Expression<Func<TDocument, object>>[] fields)  =>
-			AssignParam(p=>p._Fields(fields));
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
+		public ExplainDescriptor<TDocument> StoredFields(params Expression<Func<TDocument, object>>[] fields)  =>
+			AssignParam(p=>p._StoredFields(fields));
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public ExplainDescriptor<TDocument> Lenient(bool lenient = true) => AssignParam(p=>p.Lenient(lenient));
@@ -1642,12 +1703,12 @@ namespace Nest
 		public GetDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
 	
-		///<summary>A comma-separated list of fields to return in the response</summary>
-		public GetDescriptor<T> Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
+		public GetDescriptor<T> StoredFields(params string[] stored_fields) => AssignParam(p=>p.StoredFields(stored_fields));
 			
-		///<summary>A comma-separated list of fields to return in the response</summary>
-		public GetDescriptor<T> Fields(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._Fields(fields));
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
+		public GetDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  =>
+			AssignParam(p=>p._StoredFields(fields));
 
 		///<summary>The ID of the parent document</summary>
 		public GetDescriptor<T> Parent(string parent) => AssignParam(p=>p.Parent(parent));
@@ -1854,7 +1915,7 @@ namespace Nest
 		///<summary>ID of the parent document</summary>
 		public IndexDescriptor<TDocument> Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
-		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
+		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public IndexDescriptor<TDocument> Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
 		///<summary>Specific routing value</summary>
@@ -2321,7 +2382,7 @@ namespace Nest
 		///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
 		public FlushDescriptor Force(bool force = true) => AssignParam(p=>p.Force(force));
 
-		///<summary>If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default is false and will cause an exception to be thrown on the shard level if another flush operation is already running.</summary>
+		///<summary>If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default is true. If set to false the flush will be skipped iff if another flush operation is already running.</summary>
 		public FlushDescriptor WaitIfOngoing(bool wait_if_ongoing = true) => AssignParam(p=>p.WaitIfOngoing(wait_if_ongoing));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3491,12 +3552,12 @@ namespace Nest
 		public MultiGetDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 	
-		///<summary>A comma-separated list of fields to return in the response</summary>
-		public MultiGetDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
+		public MultiGetDescriptor StoredFields(params string[] stored_fields) => AssignParam(p=>p.StoredFields(stored_fields));
 			
-		///<summary>A comma-separated list of fields to return in the response</summary>
-		public MultiGetDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._Fields(fields));
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
+		public MultiGetDescriptor StoredFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			AssignParam(p=>p._StoredFields(fields));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public MultiGetDescriptor Preference(string preference) => AssignParam(p=>p.Preference(preference));
@@ -3613,7 +3674,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for MsearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
+	///<summary>descriptor for MsearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</pre></summary>
 	public partial class MultiSearchTemplateDescriptor  : RequestDescriptorBase<MultiSearchTemplateDescriptor,MultiSearchTemplateRequestParameters, IMultiSearchTemplateRequest>, IMultiSearchTemplateRequest
 	{ 
 		Indices IMultiSearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -4108,13 +4169,6 @@ namespace Nest
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public SearchDescriptor<T> Df(string df) => AssignParam(p=>p.Df(df));
 
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public SearchDescriptor<T> StoredFields(params string[] stored_fields) => AssignParam(p=>p.StoredFields(stored_fields));
-			
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public SearchDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._StoredFields(fields));
-
 		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
 		public SearchDescriptor<T> DocvalueFields(params string[] docvalue_fields) => AssignParam(p=>p.DocvalueFields(docvalue_fields));
 			
@@ -4278,6 +4332,12 @@ namespace Nest
 
 		///<summary>Search operation type</summary>
 		public SearchTemplateDescriptor<T> SearchType(SearchType search_type) => AssignParam(p=>p.SearchType(search_type));
+
+		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
+		public SearchTemplateDescriptor<T> Explain(bool explain = true) => AssignParam(p=>p.Explain(explain));
+
+		///<summary>Specify whether to profile the query execution</summary>
+		public SearchTemplateDescriptor<T> Profile(bool profile = true) => AssignParam(p=>p.Profile(profile));
 
 		///<summary>The URL-encoded request definition</summary>
 		public SearchTemplateDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
@@ -4765,6 +4825,9 @@ namespace Nest
 		///<summary>Sets the number of shard copies that must be active before proceeding with the update operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
 
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public UpdateDescriptor<TDocument, TPartialDocument> SourceEnabled(params string[] source_enabled) => AssignParam(p=>p.SourceEnabled(source_enabled));
+
 		///<summary>The script language (default: groovy)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Lang(string lang) => AssignParam(p=>p.Lang(lang));
 
@@ -4847,17 +4910,24 @@ namespace Nest
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
 		public UpdateByQueryDescriptor<T> Explain(bool explain = true) => AssignParam(p=>p.Explain(explain));
 
-		///<summary>A comma-separated list of fields to return as part of a hit</summary>
-		public UpdateByQueryDescriptor<T> Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
+		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
+		public UpdateByQueryDescriptor<T> StoredFields(params string[] stored_fields) => AssignParam(p=>p.StoredFields(stored_fields));
 			
-		///<summary>A comma-separated list of fields to return as part of a hit</summary>
-		public UpdateByQueryDescriptor<T> Fields(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._Fields(fields));
+		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
+		public UpdateByQueryDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  =>
+			AssignParam(p=>p._StoredFields(fields));
 
-		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
+		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
+		public UpdateByQueryDescriptor<T> DocvalueFields(params string[] docvalue_fields) => AssignParam(p=>p.DocvalueFields(docvalue_fields));
+			
+		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
+		public UpdateByQueryDescriptor<T> DocvalueFields(params Expression<Func<T, object>>[] fields)  =>
+			AssignParam(p=>p._DocvalueFields(fields));
+
+		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
 		public UpdateByQueryDescriptor<T> FielddataFields(params string[] fielddata_fields) => AssignParam(p=>p.FielddataFields(fielddata_fields));
 			
-		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
+		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
 		public UpdateByQueryDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._FielddataFields(fields));
 

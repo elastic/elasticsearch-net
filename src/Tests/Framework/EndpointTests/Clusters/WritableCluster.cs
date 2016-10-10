@@ -8,6 +8,9 @@ namespace Tests.Framework.Integration
 	[RequiresPlugin(ElasticsearchPlugin.MapperAttachments, ElasticsearchPlugin.IngestGeoIp, ElasticsearchPlugin.IngestAttachment)]
 	public class WritableCluster : ClusterBase
 	{
+		public override int MaxConcurrency => 4;
+
+
 		public override void Bootstrap()
 		{
 			var seeder = new Seeder(this.Node);

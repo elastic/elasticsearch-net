@@ -49,6 +49,17 @@ namespace Elasticsearch.Net
 	}
 	
 	
+	public enum Health 
+	{
+		[EnumMember(Value = "green")]
+		Green,
+		[EnumMember(Value = "yellow")]
+		Yellow,
+		[EnumMember(Value = "red")]
+		Red
+	}
+	
+	
 	public enum Size 
 	{
 		[EnumMember(Value = "")]
@@ -405,6 +416,17 @@ namespace Elasticsearch.Net
 					case Bytes.Tb: return "tb";
 					case Bytes.P: return "p";
 					case Bytes.Pb: return "pb";
+				}
+			
+			}
+			
+			if (e is Health)
+			{ 
+				switch((Health)e)
+				{
+					case Health.Green: return "green";
+					case Health.Yellow: return "yellow";
+					case Health.Red: return "red";
 				}
 			
 			}

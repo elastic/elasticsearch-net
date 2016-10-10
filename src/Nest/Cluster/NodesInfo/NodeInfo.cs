@@ -25,9 +25,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "build_hash")]
 		public string BuildHash { get; internal set; }
 
-		[JsonProperty(PropertyName = "http_address")]
-		public string HttpAddress { get; internal set; }
-
 		/// <summary>
 		/// All of the different roles that the node fulfills. An empty
 		/// collection means that the node is a coordinating only node.
