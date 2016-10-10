@@ -56,7 +56,6 @@
 		void Visit(ITermsQuery query);
 		void Visit(ITypeQuery query);
 		void Visit(IScriptQuery query);
-		void Visit(IMissingQuery query);
 		void Visit(IGeoPolygonQuery query);
 		void Visit(IGeoDistanceRangeQuery query);
 		void Visit(IGeoDistanceQuery query);
@@ -197,8 +196,6 @@
 		public virtual void Visit(ITypeQuery query) { }
 
 		public virtual void Visit(IScriptQuery query) { }
-
-		public virtual void Visit(IMissingQuery query) { }
 
 		public virtual void Visit(IGeoPolygonQuery query) { }
 

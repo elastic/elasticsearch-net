@@ -481,9 +481,6 @@ namespace Nest
 		public QueryContainer Exists(Func<ExistsQueryDescriptor<T>, IExistsQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Exists = query);
 
-		public QueryContainer Missing(Func<MissingQueryDescriptor<T>, IMissingQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.Missing = query);
-
 		public QueryContainer Type(Func<TypeQueryDescriptor, ITypeQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Type = query);
 
