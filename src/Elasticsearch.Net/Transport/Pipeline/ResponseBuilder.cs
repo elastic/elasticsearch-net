@@ -56,6 +56,8 @@ namespace Elasticsearch.Net
 			return response;
 		}
 
+		private static IDisposable EmptyDisposable = new MemoryStream();
+
 		private void SetBody(ElasticsearchResponse<TReturn> response, Stream stream)
 		{
 			byte[] bytes = null;
@@ -66,7 +68,8 @@ namespace Elasticsearch.Net
 				bytes = this.SwapStreams(ref stream, ref inMemoryStream);
 			}
 
-			using (stream)
+			var needsDispose = typeof(TReturn) != typeof(Stream);
+			using (needsDispose ? stream : EmptyDisposable)
 			{
 				if (response.Success)
 				{
@@ -97,7 +100,8 @@ namespace Elasticsearch.Net
 				bytes = this.SwapStreams(ref stream, ref inMemoryStream);
 			}
 
-			using (stream)
+			var needsDispose = typeof(TReturn) != typeof(Stream);
+			using (needsDispose ? stream : EmptyDisposable)
 			{
 				if (response.Success)
 				{
