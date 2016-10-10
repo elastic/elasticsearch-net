@@ -21,7 +21,7 @@ namespace Elasticsearch.Net
 		public AuditEvent OnFailureAuditEvent => this.MadeItToResponse ? AuditEvent.BadResponse : AuditEvent.BadRequest;
 		public PipelineFailure OnFailurePipelineFailure => this.MadeItToResponse ? PipelineFailure.BadResponse : PipelineFailure.BadRequest;
 
-		public Node Node { get; internal set; }
+		public Node Node { get; set; }
 		public TimeSpan RequestTimeout { get; }
 		public TimeSpan PingTimeout { get; }
 		public int KeepAliveTime { get; }
