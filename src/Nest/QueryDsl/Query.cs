@@ -102,9 +102,6 @@ namespace Nest
 		public static QueryContainer MatchPhrasePrefix(Func<MatchPhrasePrefixQueryDescriptor<T>, IMatchQuery> selector) =>
 			new QueryContainerDescriptor<T>().MatchPhrasePrefix(selector);
 
-		public static QueryContainer Missing(Func<MissingQueryDescriptor<T>, IMissingQuery> selector) =>
-			new QueryContainerDescriptor<T>().Missing(selector);
-
 		public static QueryContainer MoreLikeThis(Func<MoreLikeThisQueryDescriptor<T>, IMoreLikeThisQuery> selector) =>
 			new QueryContainerDescriptor<T>().MoreLikeThis(selector);
 

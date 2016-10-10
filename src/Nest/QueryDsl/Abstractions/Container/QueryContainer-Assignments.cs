@@ -52,7 +52,6 @@ namespace Nest
 		private IGeoHashCellQuery _geoHashCell;
 		private IScriptQuery _script;
 		private IExistsQuery _exists;
-		private IMissingQuery _missing;
 		private ITypeQuery _type;
 		private IRawQuery _raw;
 		private IPercolateQuery _percolate;
@@ -116,7 +115,6 @@ namespace Nest
 		IGeoHashCellQuery IQueryContainer.GeoHashCell { get { return _geoHashCell; } set { _geoHashCell = Set(value); } }
 		IScriptQuery IQueryContainer.Script { get { return _script; } set { _script = Set(value); } }
 		IExistsQuery IQueryContainer.Exists { get { return _exists; } set { _exists = Set(value); } }
-		IMissingQuery IQueryContainer.Missing { get { return _missing; } set { _missing = Set(value); } }
 		ITypeQuery IQueryContainer.Type { get { return _type; } set { _type = Set(value); } }
 		IPercolateQuery IQueryContainer.Percolate { get { return _percolate; } set { _percolate = Set(value); } }
 		IParentIdQuery IQueryContainer.ParentId { get { return _parentId; } set { _parentId = Set(value); } }

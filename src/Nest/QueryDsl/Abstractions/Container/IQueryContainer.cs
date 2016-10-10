@@ -155,9 +155,6 @@ namespace Nest
 		[JsonProperty("exists")]
 		IExistsQuery Exists { get; set; }
 
-		[JsonProperty("missing")]
-		IMissingQuery Missing { get; set; }
-
 		[JsonProperty("type")]
 		ITypeQuery Type { get; set; }
 
