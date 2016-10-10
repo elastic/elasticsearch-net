@@ -67,8 +67,11 @@ namespace Tests.Framework
 				.IndexName("queries")
 				.TypeName(PercolatorType)
 			)
+			//.EnableTcpKeepAlive(TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(2))
+			//.PrettyJson()
 			//TODO make this random
 			//.EnableHttpCompression()
+
 			.OnRequestDataCreated(data=> data.Headers.Add("TestMethod", ExpensiveTestNameForIntegrationTests()));
 
 		public static string PercolatorType => Configuration.ElasticsearchVersion <= new ElasticsearchVersion("5.0.0-alpha1") ? ".percolator" : "query";
