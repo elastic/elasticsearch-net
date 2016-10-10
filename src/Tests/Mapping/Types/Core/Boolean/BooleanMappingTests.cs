@@ -7,7 +7,6 @@ namespace Tests.Mapping.Types.Core.Boolean
 	{
 		[Boolean(
 			DocValues = false,
-			IndexName = "myindex",
 			Similarity = "BM25",
 			Index = false,
 			Store = true)]
@@ -27,7 +26,6 @@ namespace Tests.Mapping.Types.Core.Boolean
 				{
 					type = "boolean",
 					doc_values = false,
-					index_name = "myindex",
 					similarity = "BM25",
 					store = true,
 					index = false,
@@ -43,7 +41,6 @@ namespace Tests.Mapping.Types.Core.Boolean
 			.Boolean(s => s
 				.Name(o => o.Full)
 				.DocValues(false)
-				.IndexName("myindex")
 				.Similarity(SimilarityOption.BM25)
 				.Index(false)
 				.Store(true)
