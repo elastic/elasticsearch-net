@@ -11,9 +11,6 @@ namespace Nest
 
 		[JsonProperty("type")]
 		TypeName Type { get; set; }
-
-		[JsonProperty("index_name")]
-		string IndexName { get; set; }
 	}
 
 	public interface IPropertyWithClrOrigin
@@ -30,7 +27,6 @@ namespace Nest
 
 		public PropertyName Name { get; set; }
 		public virtual TypeName Type { get; set; }
-		public string IndexName { get; set; }
 		PropertyInfo IPropertyWithClrOrigin.ClrOrigin { get; set; }
 	}
 }
