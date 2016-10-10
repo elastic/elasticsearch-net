@@ -217,6 +217,7 @@
     <Compile Include="Cat\CatTasks\CatTasksUrlTests.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadpoolApiTests.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadPoolUrlTests.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\Dispose\ResponseBuilderDisposeTests.cs" />
     <Compile Include="Cluster\TaskManagement\GetTask\GetTaskApiTests.cs" />
     <Compile Include="Cluster\TaskManagement\GetTask\GetTaskUrlTests.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkInvalidVersionApiTests.cs" />

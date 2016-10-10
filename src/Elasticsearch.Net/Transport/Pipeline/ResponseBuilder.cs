@@ -56,6 +56,8 @@ namespace Elasticsearch.Net
 			return response;
 		}
 
+		private static IDisposable EmptyDisposable = new MemoryStream();
+
 		private void SetBody(ElasticsearchResponse<TReturn> response, Stream stream)
 		{
 			byte[] bytes = null;
@@ -66,21 +68,25 @@ namespace Elasticsearch.Net
 				bytes = this.SwapStreams(ref stream, ref inMemoryStream);
 			}
 
-			if (response.Success)
+			var needsDispose = typeof(TReturn) != typeof(Stream);
+			using (needsDispose ? stream : EmptyDisposable)
 			{
-				if (!SetSpecialTypes(stream, response, bytes))
+				if (response.Success)
 				{
-					if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
-					else response.Body = this._requestData.ConnectionSettings.Serializer.Deserialize<TReturn>(stream);
+					if (!SetSpecialTypes(stream, response, bytes))
+					{
+						if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
+						else response.Body = this._requestData.ConnectionSettings.Serializer.Deserialize<TReturn>(stream);
+					}
 				}
-			}
-			else if (response.HttpStatusCode != null)
-			{
-				ServerError serverError;
-				if (ServerError.TryCreate(stream, out serverError))
-					response.ServerError = serverError;
-				if (this._requestData.ConnectionSettings.DisableDirectStreaming)
-					response.ResponseBodyInBytes = bytes;
+				else if (response.HttpStatusCode != null)
+				{
+					ServerError serverError;
+					if (ServerError.TryCreate(stream, out serverError))
+						response.ServerError = serverError;
+					if (this._requestData.ConnectionSettings.DisableDirectStreaming)
+						response.ResponseBodyInBytes = bytes;
+				}
 			}
 		}
 
@@ -94,19 +100,23 @@ namespace Elasticsearch.Net
 				bytes = this.SwapStreams(ref stream, ref inMemoryStream);
 			}
 
-			if (response.Success)
+			var needsDispose = typeof(TReturn) != typeof(Stream);
+			using (needsDispose ? stream : EmptyDisposable)
 			{
-				if (!SetSpecialTypes(stream, response, bytes))
+				if (response.Success)
 				{
-					if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
-					else response.Body = await this._requestData.ConnectionSettings.Serializer.DeserializeAsync<TReturn>(stream, this._cancellationToken).ConfigureAwait(false);
+					if (!SetSpecialTypes(stream, response, bytes))
+					{
+						if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
+						else response.Body = await this._requestData.ConnectionSettings.Serializer.DeserializeAsync<TReturn>(stream, this._cancellationToken).ConfigureAwait(false);
+					}
 				}
-			}
-			else if (response.HttpStatusCode != null)
-			{
-				response.ServerError = await ServerError.TryCreateAsync(stream, this._cancellationToken).ConfigureAwait(false);
-				if (this._requestData.ConnectionSettings.DisableDirectStreaming)
-					response.ResponseBodyInBytes = bytes;
+				else if (response.HttpStatusCode != null)
+				{
+					response.ServerError = await ServerError.TryCreateAsync(stream, this._cancellationToken).ConfigureAwait(false);
+					if (this._requestData.ConnectionSettings.DisableDirectStreaming)
+						response.ResponseBodyInBytes = bytes;
+				}
 			}
 		}
 
@@ -137,15 +147,15 @@ namespace Elasticsearch.Net
 			var setSpecial = true;
 			if (this._requestData.ConnectionSettings.DisableDirectStreaming)
 				cs.ResponseBodyInBytes = bytes;
-		    var returnType = typeof (TReturn);
+			var returnType = typeof(TReturn);
 			if (returnType == typeof(string))
 				this.SetStringResult(cs as ElasticsearchResponse<string>, bytes);
 			else if (returnType == typeof(byte[]))
 				this.SetByteResult(cs as ElasticsearchResponse<byte[]>, bytes);
 			else if (returnType == typeof(VoidResponse))
 				this.SetVoidResult(cs as ElasticsearchResponse<VoidResponse>, responseStream);
-            else if (returnType == typeof(Stream))
-                this.SetStreamResult(cs as ElasticsearchResponse<Stream>, responseStream);
+			else if (returnType == typeof(Stream))
+				this.SetStreamResult(cs as ElasticsearchResponse<Stream>, responseStream);
 			else
 				setSpecial = false;
 			return setSpecial;
