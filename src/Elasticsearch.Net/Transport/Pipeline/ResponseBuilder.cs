@@ -63,6 +63,8 @@ namespace Elasticsearch.Net
 				bytes = this.SwapStreams(ref stream, ref inMemoryStream);
 			}
 
+			using (stream)
+			{
 			if (response.Success)
 			{
 				if (!SetSpecialTypes(stream, response, bytes))
@@ -80,6 +82,7 @@ namespace Elasticsearch.Net
 					response.ResponseBodyInBytes = bytes;
 			}
 		}
+		}
 
 		private async Task SetBodyAsync(ElasticsearchResponse<TReturn> response, Stream stream)
 		{
@@ -91,6 +94,8 @@ namespace Elasticsearch.Net
 				bytes = this.SwapStreams(ref stream, ref inMemoryStream);
 			}
 
+			using (stream)
+			{
 			if (response.Success)
 			{
 				if (!SetSpecialTypes(stream, response, bytes))
@@ -105,6 +110,7 @@ namespace Elasticsearch.Net
 				if (this._requestData.ConnectionSettings.DisableDirectStreaming)
 					response.ResponseBodyInBytes = bytes;
 			}
+		}
 		}
 
 		private void Finalize(ElasticsearchResponse<TReturn> response)

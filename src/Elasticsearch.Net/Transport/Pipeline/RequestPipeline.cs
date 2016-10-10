@@ -156,7 +156,7 @@ namespace Elasticsearch.Net
             var success = await semaphore.WaitAsync(this._settings.RequestTimeout, _cancellationToken).ConfigureAwait(false);
             if (!success)
             {
-                if (this.FirstPoolUsageNeedsSniffing)
+				if(this.FirstPoolUsageNeedsSniffing)
                     throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, null);
                 return;
             }
