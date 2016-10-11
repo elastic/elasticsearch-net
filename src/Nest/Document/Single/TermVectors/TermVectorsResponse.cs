@@ -10,7 +10,7 @@ namespace Nest
 		string Id { get; }
 		long Version { get; }
 		bool Found { get; }
-		int Took { get; }
+		long Took { get; }
 		IDictionary<string, TermVector> TermVectors { get; }
 	}
 
@@ -33,7 +33,7 @@ namespace Nest
 		public bool Found { get; internal set; }
 
 		[JsonProperty(PropertyName = "took")]
-		public int Took { get; internal set; }
+		public long Took { get; internal set; }
 
 		[JsonProperty("term_vectors")]
 		public IDictionary<string, TermVector> TermVectors { get; internal set; } =  new Dictionary<string, TermVector>();

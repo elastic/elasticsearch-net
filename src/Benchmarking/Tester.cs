@@ -75,7 +75,7 @@ namespace Benchmarking
 
 		protected ConnectionSettings CreateSettings()
 		{
-			var host = Process.GetProcessesByName("fiddler").Any() 
+			var host = Process.GetProcessesByName("fiddler").Any()
 				? "ipv4.fiddler"
 				: "localhost";
 
@@ -99,7 +99,7 @@ namespace Benchmarking
 		protected class IndexResults
 		{
 			public double Elapsed { get; set; }
-			public IEnumerable<int> EsTimings { get; set; }
+			public IEnumerable<long> EsTimings { get; set; }
 		}
 
 		protected IndexResults GenerateAndIndex(int numMessages, int bufferSize)
