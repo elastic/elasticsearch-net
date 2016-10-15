@@ -23,7 +23,7 @@ namespace Nest
 			}
 		}
 
-		public void Accept(TypeMapping mapping)
+		public void Accept(ITypeMapping mapping)
 		{
 			if (mapping == null) return;
 			this._visitor.Visit(mapping);
@@ -41,20 +41,20 @@ namespace Nest
 				switch (type.Name)
 				{
 					case "text":
-						var t = field as TextProperty;
+						var t = field as ITextProperty;
 						if (t == null) continue;
 						this._visitor.Visit(t);
 						this.Accept(t.Fields);
 						break;
 					case "keyword":
-						var k = field as KeywordProperty;
+						var k = field as IKeywordProperty;
 						if (k == null) continue;
 						this._visitor.Visit(k);
 						this.Accept(k.Fields);
 						break;
 					case "string":
 #pragma warning disable 618
-						var s = field as StringProperty;
+						var s = field as IStringProperty;
 #pragma warning restore 618
 						if (s == null) continue;
 						this._visitor.Visit(s);
@@ -66,31 +66,31 @@ namespace Nest
 					case "short":
 					case "integer":
 					case "long":
-						var nu = field as NumberProperty;
+						var nu = field as INumberProperty;
 						if (nu == null) continue;
 						this._visitor.Visit(nu);
 						this.Accept(nu.Fields);
 						break;
 					case "date":
-						var d = field as DateProperty;
+						var d = field as IDateProperty;
 						if (d == null) continue;
 						this._visitor.Visit(d);
 						this.Accept(d.Fields);
 						break;
 					case "boolean":
-						var bo = field as BooleanProperty;
+						var bo = field as IBooleanProperty;
 						if (bo == null) continue;
 						this._visitor.Visit(bo);
 						this.Accept(bo.Fields);
 						break;
 					case "binary":
-						var bi = field as BinaryProperty;
+						var bi = field as IBinaryProperty;
 						if (bi == null) continue;
 						this._visitor.Visit(bi);
 						this.Accept(bi.Fields);
 						break;
 					case "object":
-						var o = field as ObjectProperty;
+						var o = field as IObjectProperty;
 						if (o == null) continue;
 						this._visitor.Visit(o);
 						this._visitor.Depth += 1;
@@ -98,7 +98,7 @@ namespace Nest
 						this._visitor.Depth -= 1;
 						break;
 					case "nested":
-						var n = field as NestedProperty;
+						var n = field as INestedProperty;
 						if (n == null) continue;
 						this._visitor.Visit(n);
 						this._visitor.Depth += 1;
@@ -106,43 +106,43 @@ namespace Nest
 						this._visitor.Depth -= 1;
 						break;
 					case "ip":
-						var i = field as IpProperty;
+						var i = field as IIpProperty;
 						if (i == null) continue;
 						this._visitor.Visit(i);
 						this.Accept(i.Fields);
 						break;
 					case "geo_point":
-						var gp = field as GeoPointProperty;
+						var gp = field as IGeoPointProperty;
 						if (gp == null) continue;
 						this._visitor.Visit(gp);
 						this.Accept(gp.Fields);
 						break;
 					case "geo_shape":
-						var gs = field as GeoShapeProperty;
+						var gs = field as IGeoShapeProperty;
 						if (gs == null) continue;
 						this._visitor.Visit(gs);
 						this.Accept(gs.Fields);
 						break;
 					case "attachment":
-						var a = field as AttachmentProperty;
+						var a = field as IAttachmentProperty;
 						if (a == null) continue;
 						this._visitor.Visit(a);
 						this.Accept(a.Fields);
 						break;
 					case "completion":
-						var c = field as CompletionProperty;
+						var c = field as ICompletionProperty;
 						if (c == null) continue;
 						this._visitor.Visit(c);
 						this.Accept(c.Fields);
 						break;
 					case "murmur3":
-						var mm = field as Murmur3HashProperty;
+						var mm = field as IMurmur3HashProperty;
 						if (mm == null) continue;
 						this._visitor.Visit(mm);
 						this.Accept(mm.Fields);
 						break;
 					case "token_count":
-						var tc = field as TokenCountProperty;
+						var tc = field as ITokenCountProperty;
 						if (tc == null) continue;
 						this._visitor.Visit(tc);
 						this.Accept(tc.Fields);
