@@ -6,7 +6,7 @@ namespace Nest
 {
 	public interface IPercolateCountResponse : IResponse
 	{
-		int Took { get; }
+		long Took { get; }
 		long Total { get; }
 	}
 
@@ -19,14 +19,14 @@ namespace Nest
 	public class PercolateCountResponse : ResponseBase, IPercolateCountResponse
 	{
 		[JsonProperty(PropertyName = "took")]
-		public int Took { get; internal set; }
+		public long Took { get; internal set; }
 
 		[JsonProperty(PropertyName = "total")]
 		public long Total { get; internal set; }
-		
+
 		[JsonProperty(PropertyName = "_shards")]
 		public ShardsMetaData Shards { get; internal set; }
-		
+
 		/// <summary>
 		/// The individual error for separate requests on the _mpercolate API
 		/// </summary>
