@@ -19,6 +19,6 @@ namespace Nest
 
 		public TDescriptor Name(Expression<Func<T, object>> objectPath) => Assign(a => a.Name = objectPath);
 
-	    IDictionary<string, object>  IPropertyWithLocalMetadata.LocalMetadata { get; set; }
+		IDictionary<string, object>  IPropertyWithLocalMetadata.LocalMetadata { get; set; }
 	}
 }

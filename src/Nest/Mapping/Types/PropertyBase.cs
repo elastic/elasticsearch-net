@@ -12,19 +12,19 @@ namespace Nest
 
 		[JsonProperty("type")]
 		TypeName Type { get; set; }
-    }
+	}
 
-    public interface IPropertyWithClrOrigin
+	public interface IPropertyWithClrOrigin
 	{
 		PropertyInfo ClrOrigin { get; set; }
 	}
 
-    public interface IPropertyWithLocalMetadata {
-        [JsonIgnore]
-        IDictionary<string, object> LocalMetadata { get; set; }
-    }
+	public interface IPropertyWithLocalMetadata {
+		[JsonIgnore]
+		IDictionary<string, object> LocalMetadata { get; set; }
+	}
 
-    public abstract class PropertyBase : IProperty, IPropertyWithClrOrigin
+	public abstract class PropertyBase : IProperty, IPropertyWithClrOrigin
 	{
 		protected PropertyBase(TypeName typeName)
 		{
@@ -34,6 +34,6 @@ namespace Nest
 		public PropertyName Name { get; set; }
 		public virtual TypeName Type { get; set; }
 		PropertyInfo IPropertyWithClrOrigin.ClrOrigin { get; set; }
-        IDictionary<string, object> IPropertyWithLocalMetadata.LocalMetadata { get; set; }
-    }
+		IDictionary<string, object> IPropertyWithLocalMetadata.LocalMetadata { get; set; }
+	}
 }
