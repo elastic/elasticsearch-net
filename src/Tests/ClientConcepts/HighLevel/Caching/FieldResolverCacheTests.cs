@@ -147,11 +147,11 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				var suffix = "raw";
 				var resolver = new TestableFieldResolver(new ConnectionSettings());
 				var resolved = resolver.Resolve(Field<Project>(p => p.Name.Suffix(suffix)));
-				resolved.Should().EndWith("raw");
+				resolved.Should().Be("name.raw");
 				resolver.CachedFields.Should().Be(0);
 				suffix = "foo";
 				resolved = resolver.Resolve(Field<Project>(p => p.Name.Suffix(suffix)));
-				resolved.Should().EndWith("foo");
+				resolved.Should().Be("name.foo");
 				resolver.CachedFields.Should().Be(0);
 			}
 
@@ -169,15 +169,75 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				resolved.Should().Contain(key);
 			}
 
+			[U]
+			public void ExpressionWithDictionaryItemVariableExpressionAndVariableSuffix()
+			{
+				var resolver = new TestableFieldResolver(new ConnectionSettings());
+				var key = "key1";
+				var suffix = "x";
+				var resolved = resolver.Resolve(Field<Project>(p => p.Metadata[key].Suffix(suffix)));
+				resolver.CachedFields.Should().Be(0);
+				resolved.Should().Be($"metadata.{key}.x");
+				key = "key2";
+				suffix = "y";
+				resolved = resolver.Resolve(Field<Project>(p => p.Metadata[key].Suffix(suffix)));
+				resolver.CachedFields.Should().Be(0);
+				resolved.Should().Be($"metadata.{key}.y");
+			}
+
+			[U]
+			public void ExpressionWithDictionaryItemVariableExpressionAndEquivalentVariableSuffix()
+			{
+				var resolver = new TestableFieldResolver(new ConnectionSettings());
+				var key = "key1";
+				var suffix = "x";
+				var resolved = resolver.Resolve(Field<Project>(p => p.Metadata[key].Suffix(suffix)));
+				resolver.CachedFields.Should().Be(0);
+				resolved.Should().Be($"metadata.{key}.x");
+				key = "key2";
+				resolved = resolver.Resolve(Field<Project>(p => p.Metadata[key].Suffix(suffix)));
+				resolver.CachedFields.Should().Be(0);
+				resolved.Should().Be($"metadata.{key}.x");
+			}
+
+			[U]
+			public void ExpressionWithDictionaryItemVariableExpressionAndConstantSuffix()
+			{
+				var resolver = new TestableFieldResolver(new ConnectionSettings());
+				var key = "key1";
+				var resolved = resolver.Resolve(Field<Project>(p => p.Metadata[key].Suffix("x")));
+				resolver.CachedFields.Should().Be(0);
+				resolved.Should().Be($"metadata.{key}.x");
+				key = "key2";
+				resolved = resolver.Resolve(Field<Project>(p => p.Metadata[key].Suffix("y")));
+				resolver.CachedFields.Should().Be(0);
+				resolved.Should().Be($"metadata.{key}.y");
+			}
+
+			[U]
+			public void ExpressionWithDictionaryItemVariableExpressionAndEquivalentConstantSuffix()
+			{
+				var resolver = new TestableFieldResolver(new ConnectionSettings());
+				var key = "key1";
+				var resolved = resolver.Resolve(Field<Project>(p => p.Metadata[key].Suffix("x")));
+				resolver.CachedFields.Should().Be(0);
+				resolved.Should().Be($"metadata.{key}.x");
+				key = "key2";
+				resolved = resolver.Resolve(Field<Project>(p => p.Metadata[key].Suffix("x")));
+				resolver.CachedFields.Should().Be(0);
+				resolved.Should().Be($"metadata.{key}.x");
+			}
+
+
 			[U] public void ExpressionWithDictionaryItemConstantExpression()
 			{
 				var resolver = new TestableFieldResolver(new ConnectionSettings());
 				var resolved = resolver.Resolve(Field<Project>(p => p.Metadata["key1"]));
 				resolver.CachedFields.Should().Be(1);
-				resolved.Should().Contain("key1");
+				resolved.Should().Be("metadata.key1");
 				resolved = resolver.Resolve(Field<Project>(p => p.Metadata["key2"]));
 				resolver.CachedFields.Should().Be(2);
-				resolved.Should().Contain("key2");
+				resolved.Should().Be("metadata.key2");
 			}
 
 			[U] public void ExpressionWithDictionaryItemConstantExpressionAndVariableSuffix()
@@ -186,11 +246,23 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				var suffix = "x";
 				var resolved = resolver.Resolve(Field<Project>(p => p.Metadata["key1"].Suffix(suffix)));
 				resolver.CachedFields.Should().Be(0);
-				resolved.Should().Contain("key1").And.EndWith(".x");
+				resolved.Should().Be("metadata.key1.x");
 				suffix = "y";
 				resolved = resolver.Resolve(Field<Project>(p => p.Metadata["key2"].Suffix(suffix)));
 				resolver.CachedFields.Should().Be(0);
-				resolved.Should().Contain("key2").And.EndWith(".y");
+				resolved.Should().Be("metadata.key2.y");
+			}
+
+			[U]
+			public void ExpressionWithDictionaryItemConstantExpressionAndConstantSuffix()
+			{
+				var resolver = new TestableFieldResolver(new ConnectionSettings());
+				var resolved = resolver.Resolve(Field<Project>(p => p.Metadata["key1"].Suffix("x")));
+				resolver.CachedFields.Should().Be(1);
+				resolved.Should().Be("metadata.key1.x");
+				resolved = resolver.Resolve(Field<Project>(p => p.Metadata["key2"].Suffix("y")));
+				resolver.CachedFields.Should().Be(2);
+				resolved.Should().Be("metadata.key2.y");
 			}
 
 			[U]
