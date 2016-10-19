@@ -14,7 +14,7 @@ namespace Nest
 		Profile Profile { get; }
 		AggregationsHelper Aggs { get; }
 		IDictionary<string, Suggest<T>[]> Suggest { get; }
-		int Took { get; }
+		long Took { get; }
 		bool TimedOut { get; }
 		bool TerminatedEarly { get; }
 		string ScrollId { get; }
@@ -61,7 +61,7 @@ namespace Nest
 		public IDictionary<string, Suggest<T>[]> Suggest { get; internal set; }
 
 		[JsonProperty(PropertyName = "took")]
-		public int Took { get; internal set; }
+		public long Took { get; internal set; }
 
 		[JsonProperty("timed_out")]
 		public bool TimedOut { get; internal set; }

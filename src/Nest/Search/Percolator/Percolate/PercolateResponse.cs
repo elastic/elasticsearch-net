@@ -8,7 +8,7 @@ namespace Nest
 	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
 	public interface IPercolateCountResponse : IResponse
 	{
-		int Took { get; }
+		long Took { get; }
 		long Total { get; }
 	}
 
@@ -23,7 +23,7 @@ namespace Nest
 	public class PercolateCountResponse : ResponseBase, IPercolateCountResponse
 	{
 		[JsonProperty(PropertyName = "took")]
-		public int Took { get; internal set; }
+		public long Took { get; internal set; }
 
 		[JsonProperty(PropertyName = "total")]
 		public long Total { get; internal set; }
