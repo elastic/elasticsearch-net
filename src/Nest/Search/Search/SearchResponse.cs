@@ -14,7 +14,11 @@ namespace Nest
 		Profile Profile { get; }
 		AggregationsHelper Aggs { get; }
 		IDictionary<string, Suggest[]> Suggest { get; }
+
+		[Obsolete(@"Took field is an Int but the value in the response can exced the max value for Int.
+					If you use this field instead of TookAsLong the value can wrap around if it is too big.")]
 		int Took { get; }
+		long TookAsLong { get; }
 		bool TimedOut { get; }
 		bool TerminatedEarly { get; }
 		string ScrollId { get; }
@@ -64,8 +68,22 @@ namespace Nest
 		[JsonProperty(PropertyName = "suggest")]
 		public IDictionary<string, Suggest[]> Suggest { get; internal set; }
 
-		[JsonProperty(PropertyName = "took")]
-		public int Took { get; internal set; }
+		[JsonProperty("took")]
+		public long TookAsLong { get; internal set; }
+
+		[Obsolete(@"Took field is an Int but the value in the response can exced the max value for Int.
+					If you use this field instead of TookAsLong the value can wrap around if it is too big.")]
+		public int Took
+		{
+			get
+			{
+				return unchecked((int)TookAsLong);
+			}
+			internal set
+			{
+				TookAsLong = value;
+			}
+		}
 
 		[JsonProperty("timed_out")]
 		public bool TimedOut { get; internal set; }
