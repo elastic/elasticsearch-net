@@ -7,7 +7,7 @@ namespace Nest
 {
 	public interface IBulkResponse : IResponse
 	{
-		int Took { get; }
+		long Took { get; }
 		bool Errors { get; }
 		IEnumerable<BulkResponseItemBase> Items { get; }
 		IEnumerable<BulkResponseItemBase> ItemsWithErrors { get; }
@@ -26,7 +26,7 @@ namespace Nest
 		}
 
 		[JsonProperty("took")]
-		public int Took { get; internal set; }
+		public long Took { get; internal set; }
 
 		[JsonProperty("errors")]
 		public bool Errors { get; internal set; }
