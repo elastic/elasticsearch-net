@@ -35,7 +35,7 @@ namespace Nest
 			return new PropertyName
 			{
 				Expression = expression,
-				CacheableExpression = !new HasConstantExpressionVisitor(expression).Found,
+				CacheableExpression = !new HasVariableExpressionVisitor(expression).Found,
 				_comparisonValue = expression.ComparisonValueFromExpression(out type),
 				_type = type
 			};
