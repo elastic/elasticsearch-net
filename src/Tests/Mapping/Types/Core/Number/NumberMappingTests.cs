@@ -7,7 +7,6 @@ namespace Tests.Mapping.Types.Core.Number
 	{
 		[Number(
 			DocValues = true,
-			IndexName = "myindex",
 			Similarity = "classic",
 			Store = true,
 			Index = false,
@@ -58,7 +57,6 @@ namespace Tests.Mapping.Types.Core.Number
 				{
 					type = "float",
 					doc_values = true,
-					index_name = "myindex",
 					similarity = "classic",
 					store = true,
 					index = false,
@@ -128,7 +126,6 @@ namespace Tests.Mapping.Types.Core.Number
 			.Number(d => d
 				.Name(o => o.Full)
 				.DocValues()
-				.IndexName("myindex")
 				.Similarity(SimilarityOption.Classic)
 				.Store()
 				.Index(false)

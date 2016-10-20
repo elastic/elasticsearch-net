@@ -14,7 +14,7 @@ namespace Nest
 		[JsonProperty("doc")]
 		object Document { get; set; }
 		[JsonProperty("fields")]
-		Fields Fields { get; set; }
+		Fields StoredFields { get; set; }
 		[JsonProperty("offsets")]
 		bool? Offsets { get; set; }
 		[JsonProperty("payloads")]
@@ -43,7 +43,7 @@ namespace Nest
 		public TypeName Type { get; set; }
 		public Id Id { get; set; }
 		public object Document { get; set; }
-		public Fields Fields { get; set; }
+		public Fields StoredFields { get; set; }
 		public bool? Offsets { get; set; }
 		public bool? Payloads { get; set; }
 		public bool? Positions { get; set; }
@@ -59,7 +59,7 @@ namespace Nest
 		TypeName IMultiTermVectorOperation.Type { get; set; } = typeof (T);
 		Id IMultiTermVectorOperation.Id { get; set; }
 		object IMultiTermVectorOperation.Document { get; set; }
-		Fields IMultiTermVectorOperation.Fields { get; set; }
+		Fields IMultiTermVectorOperation.StoredFields { get; set; }
 		bool? IMultiTermVectorOperation.Offsets { get; set; }
 		bool? IMultiTermVectorOperation.Payloads { get; set; }
 		bool? IMultiTermVectorOperation.Positions { get; set; }
@@ -67,10 +67,10 @@ namespace Nest
 		bool? IMultiTermVectorOperation.FieldStatistics { get; set; }
 		ITermVectorFilter IMultiTermVectorOperation.Filter { get; set; }
 
-		public MultiTermVectorOperationDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+		public MultiTermVectorOperationDescriptor<T> StoredFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
+			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public MultiTermVectorOperationDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
+		public MultiTermVectorOperationDescriptor<T> StoredFields(Fields fields) => Assign(a => a.StoredFields = fields);
 
 		public MultiTermVectorOperationDescriptor<T> Id(Id id) => Assign(a=>a.Id = id);
 

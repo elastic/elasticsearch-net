@@ -61,7 +61,7 @@ namespace Nest
 				if (multiSearchTemplate == null)
 					throw new InvalidOperationException($"Request must be an instance of {nameof(IMultiSearchRequest)} or {nameof(IMultiSearchTemplateRequest)}");
 
-				withMeta = docsJarray.Zip(multiSearchTemplate.Operations, 
+				withMeta = docsJarray.Zip(multiSearchTemplate.Operations,
 					(doc, desc) => new SearchHitTuple { Hit = doc, Descriptor = new KeyValuePair<string, ICovariantSearchRequest>(desc.Key, desc.Value) });
 			}
 
@@ -92,11 +92,11 @@ namespace Nest
 						if (elasticSerializer != null)
 						{
 							cachedDelegate(m, elasticSerializer.Serializer, response.Responses);
-						    continue;
+							continue;
 						}
 					}
 				}
-			
+
 				cachedDelegate(m, serializer, response.Responses);
 			}
 

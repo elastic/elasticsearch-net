@@ -25,15 +25,15 @@ namespace Tests.Search.Request
 			{
 				_source = new
 				{
-					include = new[] { "*" },
-					exclude = new[] { "description" }
+					includes = new[] { "*" },
+					excludes = new[] { "description" }
 				}
 			};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Source(src => src
 				.IncludeAll()
-				.Exclude(e => e
+				.Excludes(e => e
 					.Fields(
 						p => p.Description
 					)
@@ -45,8 +45,8 @@ namespace Tests.Search.Request
 			{
 				Source = new SourceFilter
 				{
-					Include = "*",
-					Exclude = Fields<Project>(p => p.Description)
+					Includes = "*",
+					Excludes = Fields<Project>(p => p.Description)
 				}
 			};
 
@@ -128,7 +128,7 @@ namespace Tests.Search.Request
 				f =>
 				{
 					f.Should().NotBeNull();
-					f.Include.Should().Contain("obj.*");
+					f.Includes.Should().Contain("obj.*");
 				}
 			);
 
@@ -144,7 +144,7 @@ namespace Tests.Search.Request
 				f =>
 				{
 					f.Should().NotBeNull();
-					f.Include.Should().Contain("obj.*");
+					f.Includes.Should().Contain("obj.*");
 				}
 			);
 		}
@@ -152,15 +152,15 @@ namespace Tests.Search.Request
 		[U]
 		public void CanDeserializeObject()
 		{
-			var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": { \"include\": [\"obj.*\"], \"exclude\": [\"foo.*\"] } }");
+			var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": { \"includes\": [\"obj.*\"], \"excludes\": [\"foo.*\"] } }");
 			o.Should().NotBeNull();
 			o.SourceFilter.Match(
 				b => Assert.True(false, "Expected ISourceFilter but found bool"),
 				f =>
 				{
 					f.Should().NotBeNull();
-					f.Include.Should().Contain("obj.*");
-					f.Exclude.Should().Contain("foo.*");
+					f.Includes.Should().Contain("obj.*");
+					f.Excludes.Should().Contain("foo.*");
 				}
 			);
 ;

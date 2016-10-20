@@ -44,44 +44,5 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect("raw").WhenSerializing<PropertyName>(expression);
 		}
 
-		/**=== Naming conventions
-		 * Currently, the name of a field cannot contain a `.` in Elasticsearch due to the potential for ambiguity with
-		 * a field that is mapped as a multi field.
-		 *
-		 * In these cases, NEST allows the call to go to Elasticsearch, deferring the naming conventions to the server side and,
-		 * in the case of a `.` in a field name, a `400 Bad Response` is returned with a server error indicating the reason
-		 */
-		[I] public void PropertyNamesContainingDotsCausesElasticsearchServerError()
-		{
-			var createIndexResponse = this.Client.CreateIndex("random-" + Guid.NewGuid().ToString().ToLowerInvariant(), c => c
-				.Mappings(m => m
-					.Map("type-with-dot", mm => mm
-						.Properties(p => p
-							.Text(s => s
-								.Name("name-with.dot")
-							)
-						)
-					)
-				)
-			);
-
-			/** The response is not valid */
-			createIndexResponse.ShouldNotBeValid();
-
-			/** `DebugInformation` provides an audit trail of information to help diagnose the issue */
-			createIndexResponse.DebugInformation.Should().NotBeNullOrEmpty();
-
-			/** `ServerError` contains information about the response from Elasticsearch */
-			createIndexResponse.ServerError.Should().NotBeNull();
-			createIndexResponse.ServerError.Status.Should().Be(400);
-			createIndexResponse.ServerError.Error.Should().NotBeNull();
-			createIndexResponse.ServerError.Error.RootCause.Should().NotBeNullOrEmpty();
-
-			var rootCause = createIndexResponse.ServerError.Error.RootCause[0];
-
-			/** We can see that the underlying reason is a `.` in the field name "name-with.dot" */
-			rootCause.Reason.Should().Be("Field name [name-with.dot] cannot contain '.'");
-			rootCause.Type.Should().Be("mapper_parsing_exception");
-		}
 	}
 }

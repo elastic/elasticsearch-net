@@ -25,7 +25,7 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td><a href="http://elastic-dotnet.westeurope.cloudapp.azure.com/project.html?projectId=Nest1x&tab=projectOverview&guest=1"><img src="http://elastic-dotnet.westeurope.cloudapp.azure.com/app/rest/builds/buildType:(Nest1x_RunBuildBat)/statusIcon.svg"></a></td>
     	<td><a href="https://www.myget.org/gallery/elasticsearch-net-legacy"><img src="https://www.myget.org/BuildSource/Badge/elasticsearch-net-legacy?identifier=46420967-3fd2-4104-b600-fab20d2b0d62"></a></td>
     	<td>
-    	<a href="https://www.nuget.org/packages/NEST/1.8.2"><img src="https://img.shields.io/badge/nuget-v1.8.2-blue.svg?style=flat-square">
+    	<a href="https://www.nuget.org/packages/NEST/1.9.1"><img src="https://img.shields.io/badge/nuget-v1.9.1-blue.svg?style=flat-square">
     	</td>
     </tr>
     <tr>
@@ -43,7 +43,7 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td>:white_check_mark:</td>
     	<td><a href="http://elastic-dotnet.westeurope.cloudapp.azure.com/project.html?projectId=Nest5x&tab=projectOverview&guest=1"><img src="http://elastic-dotnet.westeurope.cloudapp.azure.com/app/rest/builds/buildType:(Nest5x_CanaryBuild_Fake)/statusIcon.svg"></a></td>
     	<td><a href="https://www.myget.org/gallery/elasticsearch-net-next"><img src="https://www.myget.org/Content/images/badges/pending.svg"></a></td>
-    	<td><a href="https://www.nuget.org/packages/NEST/5.0.0-alpha1"><img src="https://img.shields.io/nuget/vpre/NEST.svg"></a> </td>
+    	<td><a href="https://www.nuget.org/packages/NEST/5.0.0-beta1"><img src="https://img.shields.io/nuget/vpre/NEST.svg"></a> </td>
     </tr>
 </table>
 

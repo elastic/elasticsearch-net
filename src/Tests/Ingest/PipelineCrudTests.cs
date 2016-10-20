@@ -13,9 +13,10 @@ using Xunit;
 namespace Tests.Ingest
 {
 	public class PipelineCrudTests
-		: CrudTestBase<IPutPipelineResponse, IGetPipelineResponse, IPutPipelineResponse, IDeletePipelineResponse>
+		: CrudTestBase<IntrusiveOperationCluster, IPutPipelineResponse, IGetPipelineResponse, IPutPipelineResponse, IDeletePipelineResponse>
 	{
-		public PipelineCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		//These calls have low priority and often cause `process_cluster_event_timeout_exception`'s
+		public PipelineCrudTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses Create() => Calls<PutPipelineDescriptor, PutPipelineRequest, IPutPipelineRequest, IPutPipelineResponse>(
 			CreateInitializer,
@@ -30,11 +31,14 @@ namespace Tests.Ingest
 		{
 			response.Pipelines.Should().NotBeNull().And.HaveCount(1);
 
-			var pipeline = response.Pipelines.First();
-			pipeline.Config.Should().NotBeNull();
-			pipeline.Id.Should().NotBeNullOrEmpty();
+			var kv = response.Pipelines.First();
+			kv.Should().NotBeNull();
+			kv.Key.Should().NotBeNullOrWhiteSpace();
 
-			var processors = pipeline.Config.Processors;
+			var pipeline = kv.Value;
+			pipeline.Description.Should().NotBeNull();
+
+			var processors = pipeline.Processors;
 			processors.Should().NotBeNull().And.HaveCount(2);
 
 			var uppercase = processors.Where(p => p.Name == "uppercase").FirstOrDefault() as UppercaseProcessor;
@@ -140,11 +144,14 @@ namespace Tests.Ingest
 		{
 			response.Pipelines.Should().NotBeNull().And.HaveCount(1);
 
-			var pipeline = response.Pipelines.First();
-			pipeline.Config.Should().NotBeNull();
-			pipeline.Id.Should().NotBeNullOrEmpty();
+			var kv = response.Pipelines.First();
+			kv.Should().NotBeNull();
+			kv.Key.Should().NotBeNullOrWhiteSpace();
 
-			var processors = pipeline.Config.Processors;
+			var pipeline = kv.Value;
+			pipeline.Should().NotBeNull();
+
+			var processors = pipeline.Processors;
 			processors.Should().NotBeNull().And.HaveCount(3);
 
 			var uppercase = processors.Where(p => p.Name == "uppercase").FirstOrDefault() as UppercaseProcessor;

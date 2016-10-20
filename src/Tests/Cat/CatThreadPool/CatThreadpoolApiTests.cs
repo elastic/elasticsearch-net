@@ -46,7 +46,7 @@ namespace Tests.Cat.CatThreadPool
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => "/_cat/thread_pool?h=*";
+		protected override string UrlPath => "/_cat/thread_pool?h=%2A";
 
 		protected override void ExpectResponse(ICatResponse<CatThreadPoolRecord> response)
 		{

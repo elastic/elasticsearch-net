@@ -16,9 +16,7 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 {
 	public class ReindexRethrottleReindexApiTests : ReindexRethrottleApiTests
 	{
-		public ReindexRethrottleReindexApiTests(ReindexCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public ReindexRethrottleReindexApiTests(ReindexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
@@ -51,7 +49,7 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 			var reindex = client.UpdateByQuery<Project>(u => u
 				.Conflicts(Conflicts.Proceed)
 				.Query(q => q.MatchAll())
-				.Script(s => s.Inline("ctx._source.numberOfCommits+10"))
+				.Script(s => s.Inline("ctx._source.numberOfCommits+10").Lang("groovy"))
 				.Refresh()
 				.RequestsPerSecond(1)
 				.WaitForCompletion(false)

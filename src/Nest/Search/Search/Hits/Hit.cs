@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
@@ -16,7 +17,9 @@ namespace Nest
 		string Id { get; }
 		string Parent { get; }
 		string Routing { get; }
+		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
 		long? Timestamp { get; }
+		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
 		long? Ttl { get; }
 		IEnumerable<object> Sorts { get; }
 		HighlightFieldDictionary Highlights { get; }
@@ -62,9 +65,11 @@ namespace Nest
 		public string Routing { get; internal set; }
 
 		[JsonProperty(PropertyName = "_timestamp")]
+		[Obsolete("This property is no longer returned on indices created in Elasticsearch 5.x and up")]
 		public long? Timestamp { get; internal set; }
 
 		[JsonProperty(PropertyName = "_ttl")]
+		[Obsolete("This property is no longer returned on indices created in Elasticsearch 5.x and up")]
 		public long? Ttl { get; internal set; }
 
 		[JsonProperty(PropertyName = "sort")]

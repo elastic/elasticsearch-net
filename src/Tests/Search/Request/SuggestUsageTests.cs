@@ -40,7 +40,6 @@ namespace Tests.Search.Request
 						  unicode_aware = false
 						},
 						size = 8,
-						payload = new [] { "numberOfCommits" }
 					  },
 					  prefix = Project.Instance.Name
 					} },
@@ -117,7 +116,6 @@ namespace Tests.Search.Request
 					.Field(p => p.Suggest)
 					.Size(8)
 					.Prefix(Project.Instance.Name)
-					.Payload(fs => fs.Field(p => p.NumberOfCommits))
 				)
 				.Phrase("my-phrase-suggest", ph => ph
 					.Collate(c => c
@@ -181,7 +179,6 @@ namespace Tests.Search.Request
 							Analyzer = "simple",
 							Field = Field<Project>(p=>p.Suggest),
 							Size = 8,
-							Payload = Fields<Project>("numberOfCommits")
 						}
 					} },
 					{ "my-phrase-suggest", new SuggestBucket
@@ -216,15 +213,19 @@ namespace Tests.Search.Request
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			var myCompletionSuggest = response.Suggest["my-completion-suggest"];
+
 			myCompletionSuggest.Should().NotBeNull();
 			var suggest = myCompletionSuggest.First();
 			suggest.Text.Should().Be(Project.Instance.Name);
 			suggest.Length.Should().BeGreaterThan(0);
 			var option = suggest.Options.First();
 			option.Text.Should().NotBeNullOrEmpty();
+			option.Index.Should().Be("project");
+			option.Type.Should().Be("project");
+			option.Id.Should().NotBeNull();
+			option.Source.Should().NotBeNull();
+			option.Source.Name.Should().NotBeNullOrWhiteSpace();
 			option.Score.Should().BeGreaterThan(0);
-			option.Payload.Should().NotBeNull();
-			option.Payload.Value<int>("numberOfCommits").Should().BeGreaterThan(0);
 			option.Contexts.Should().NotBeNull().And.NotBeEmpty();
 			option.Contexts.Should().ContainKey("color");
 			var colorContexts = option.Contexts["color"];

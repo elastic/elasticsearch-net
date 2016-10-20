@@ -11,31 +11,41 @@ namespace Tests.Search.Request
 
 		protected override object ExpectJson => new
 		{
-			script_fields = new {
-			    test1 = new {
-			      script = new {
-			        inline = "doc['my_field_name'].value * 2"
-			      }
-			    },
-			    test2 = new {
-			      script = new {
-			        inline = "doc['my_field_name'].value * factor",
-			        @params = new {
-			          factor = 2.0
-			        }
-			      }
-			    }
-			  }
+			script_fields = new
+			{
+				test1 = new
+				{
+					script = new
+					{
+						inline = "doc['my_field_name'].value * 2",
+						lang = "groovy",
+					}
+				},
+				test2 = new
+				{
+					script = new
+					{
+						inline = "doc['my_field_name'].value * factor",
+						lang = "groovy",
+						@params = new
+						{
+							factor = 2.0
+						}
+					}
+				}
+			}
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.ScriptFields(sf=>sf
-				.ScriptField("test1", sc=>sc
+			.ScriptFields(sf => sf
+				.ScriptField("test1", sc => sc
 					.Inline("doc['my_field_name'].value * 2")
+					.Lang("groovy")
 				)
-				.ScriptField("test2", sc=>sc
+				.ScriptField("test2", sc => sc
 					.Inline("doc['my_field_name'].value * factor")
-					.Params(p=>p
+					.Lang("groovy")
+					.Params(p => p
 						.Add("factor", 2.0)
 					)
 				)
@@ -48,10 +58,11 @@ namespace Tests.Search.Request
 				{
 					{ "test1", new ScriptField
 					{
-						Script = new InlineScript("doc['my_field_name'].value * 2")
+						Script = new InlineScript("doc['my_field_name'].value * 2") { Lang = "groovy" }
 					} },
 					{ "test2", new InlineScript("doc['my_field_name'].value * factor")
 					{
+						Lang = "groovy",
 						Params = new FluentDictionary<string, object>
 						{
 							{ "factor", 2.0 }

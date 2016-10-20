@@ -467,6 +467,30 @@ namespace Nest
 			throw InvalidDispatch("CatTasks", p, new [] { GET }, "/_cat/tasks");
 		}
 		
+		internal ElasticsearchResponse<T> CatTemplatesDispatch<T>(IRequest<CatTemplatesRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.CatTemplates<T>(p.RouteValues.Name,u => p.RequestParameters);
+					return _lowLevel.CatTemplates<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("CatTemplates", p, new [] { GET }, "/_cat/templates", "/_cat/templates/{name}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> CatTemplatesDispatchAsync<T>(IRequest<CatTemplatesRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.CatTemplatesAsync<T>(p.RouteValues.Name,u => p.RequestParameters,cancellationToken);
+					return _lowLevel.CatTemplatesAsync<T>(u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("CatTemplates", p, new [] { GET }, "/_cat/templates", "/_cat/templates/{name}");
+		}
+		
 		internal ElasticsearchResponse<T> CatThreadPoolDispatch<T>(IRequest<CatThreadPoolRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)

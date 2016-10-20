@@ -179,8 +179,17 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		///<summary>Default comma-separated list of fields to return in the response for updates</summary>
+		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
 		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
+		
+		///<summary>True or false to return the _source field or not, or default list of fields to return, can be overridden on each sub-request</summary>
+		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		
+		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
+		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		
+		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
+		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
@@ -507,6 +516,9 @@ namespace Nest
 		
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		
+		///<summary>A health status (&quot;green&quot;, &quot;yellow&quot;, or &quot;red&quot; to filter only indices matching the specified health status</summary>
+		public Health Health { get { return Q<Health>("health"); } set { Q("health", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
@@ -943,6 +955,53 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ICatTemplatesRequest : IRequest<CatTemplatesRequestParameters> 
+	{
+		Name Name { get; }
+	 } 
+	///<summary>Request parameters for CatTemplates <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
+	public partial class CatTemplatesRequest  : PlainRequestBase<CatTemplatesRequestParameters>, ICatTemplatesRequest
+	{
+		protected ICatTemplatesRequest Self => this;
+		Name ICatTemplatesRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_cat/templates</summary>
+		public CatTemplatesRequest() : base(){}
+		
+
+		/// <summary>/_cat/templates/{name}</summary>
+///<param name="name">Optional, accepts null</param>
+		public CatTemplatesRequest(Name name) : base(r=>r.Optional("name", name)){}
+		
+
+			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>Comma-separated list of column names to display</summary>
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		
+		///<summary>Return help information</summary>
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
+		
+		///<summary>Verbose mode. Display column headers</summary>
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatThreadPoolRequest : IRequest<CatThreadPoolRequestParameters> 
 	{
 	 } 
@@ -1248,7 +1307,7 @@ namespace Nest
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Wait until the specified number of shards is active</summary>
-		public long WaitForActiveShards { get { return Q<long>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
+		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
 		///<summary>Wait until the specified number of nodes is available</summary>
 		public string WaitForNodes { get { return Q<string>("wait_for_nodes"); } set { Q("wait_for_nodes", value); } }
@@ -1256,8 +1315,8 @@ namespace Nest
 		///<summary>Wait until all currently queued events with the given priorty are processed</summary>
 		public WaitForEvents WaitForEvents { get { return Q<WaitForEvents>("wait_for_events"); } set { Q("wait_for_events", value); } }
 		
-		///<summary>Wait until the specified number of relocating shards is finished</summary>
-		public long WaitForRelocatingShards { get { return Q<long>("wait_for_relocating_shards"); } set { Q("wait_for_relocating_shards", value); } }
+		///<summary>Whether to wait until there are no relocating shards in the cluster</summary>
+		public bool WaitForNoRelocatingShards { get { return Q<bool>("wait_for_no_relocating_shards"); } set { Q("wait_for_no_relocating_shards", value); } }
 		
 		///<summary>Wait until cluster is in a specific state</summary>
 		public WaitForStatus WaitForStatus { get { return Q<WaitForStatus>("wait_for_status"); } set { Q("wait_for_status", value); } }
@@ -1722,11 +1781,11 @@ namespace Nest
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
 		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
 		
-		///<summary>A comma-separated list of fields to return as part of a hit</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
+		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
+		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
 		
-		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
-		public Fields FielddataFields { get { return Q<Fields>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
+		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
+		public Fields DocvalueFields { get { return Q<Fields>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
 		
 		///<summary>Starting offset (default: 0)</summary>
 		public long From { get { return Q<long>("from"); } set { Q("from", value); } }
@@ -1866,11 +1925,11 @@ namespace Nest
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
 		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
 		
-		///<summary>A comma-separated list of fields to return as part of a hit</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
+		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
+		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
 		
-		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
-		public Fields FielddataFields { get { return Q<Fields>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
+		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
+		public Fields DocvalueFields { get { return Q<Fields>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
 		
 		///<summary>Starting offset (default: 0)</summary>
 		public long From { get { return Q<long>("from"); } set { Q("from", value); } }
@@ -2516,8 +2575,8 @@ namespace Nest
 		///<summary>The default field for query string query (default: _all)</summary>
 		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
-		///<summary>A comma-separated list of fields to return in the response</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
+		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
@@ -2615,7 +2674,7 @@ namespace Nest
 			///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
 		public bool Force { get { return Q<bool>("force"); } set { Q("force", value); } }
 		
-		///<summary>If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default is false and will cause an exception to be thrown on the shard level if another flush operation is already running.</summary>
+		///<summary>If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default is true. If set to false the flush will be skipped iff if another flush operation is already running.</summary>
 		public bool WaitIfOngoing { get { return Q<bool>("wait_if_ongoing"); } set { Q("wait_if_ongoing", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3111,8 +3170,8 @@ namespace Nest
 		public GetRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
-			///<summary>A comma-separated list of fields to return in the response</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
+			///<summary>A comma-separated list of stored fields to return in the response</summary>
+		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
@@ -3165,8 +3224,8 @@ namespace Nest
 		public GetRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 		
 
-			///<summary>A comma-separated list of fields to return in the response</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
+			///<summary>A comma-separated list of stored fields to return in the response</summary>
+		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
@@ -3511,7 +3570,7 @@ namespace Nest
 		///<summary>ID of the parent document</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
-		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
+		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
@@ -3736,8 +3795,8 @@ namespace Nest
 		public MultiGetRequest(IndexName index, TypeName type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 		
 
-			///<summary>A comma-separated list of fields to return in the response</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
+			///<summary>A comma-separated list of stored fields to return in the response</summary>
+		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
@@ -3858,7 +3917,7 @@ namespace Nest
 		Indices Index { get; }
 		Types Type { get; }
 	 } 
-	///<summary>Request parameters for MsearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
+	///<summary>Request parameters for MsearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</pre></summary>
 	public partial class MultiSearchTemplateRequest  : PlainRequestBase<MultiSearchTemplateRequestParameters>, IMultiSearchTemplateRequest
 	{
 		protected IMultiSearchTemplateRequest Self => this;
@@ -4946,9 +5005,6 @@ namespace Nest
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
-		
 		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
 		public Fields DocvalueFields { get { return Q<Fields>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
 		
@@ -5035,9 +5091,6 @@ namespace Nest
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
-		
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
 		
 		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
 		public Fields DocvalueFields { get { return Q<Fields>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
@@ -5244,6 +5297,12 @@ namespace Nest
 		
 		///<summary>Search operation type</summary>
 		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
+		
+		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
+		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
+		
+		///<summary>Specify whether to profile the query execution</summary>
+		public bool Profile { get { return Q<bool>("profile"); } set { Q("profile", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -5783,10 +5842,13 @@ namespace Nest
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
 		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
 		
-		///<summary>A comma-separated list of fields to return as part of a hit</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
+		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
+		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
 		
-		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
+		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
+		public Fields DocvalueFields { get { return Q<Fields>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
+		
+		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
 		public Fields FielddataFields { get { return Q<Fields>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
 		
 		///<summary>Starting offset (default: 0)</summary>
@@ -5933,10 +5995,13 @@ namespace Nest
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
 		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
 		
-		///<summary>A comma-separated list of fields to return as part of a hit</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
+		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
+		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
 		
-		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
+		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
+		public Fields DocvalueFields { get { return Q<Fields>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
+		
+		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
 		public Fields FielddataFields { get { return Q<Fields>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
 		
 		///<summary>Starting offset (default: 0)</summary>
@@ -6126,6 +6191,9 @@ namespace Nest
 
 			///<summary>Sets the number of shard copies that must be active before proceeding with the update operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
+		
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>The script language (default: groovy)</summary>
 		public string Lang { get { return Q<string>("lang"); } set { Q("lang", value); } }

@@ -25,7 +25,7 @@ namespace Tests.Cat.CatHelp
 		protected override void ExpectResponse(ICatResponse<CatHelpRecord> response)
 		{
 			response.Records.Should().NotBeEmpty()
-				.And.Contain(a => a.Endpoint == "/_cat/shards")
+				.And.Contain(a => a.Endpoint == "/_cat/shards/{index}")
 				.And.NotContain(a=>a.Endpoint == "=^.^=");
 		}
 	}

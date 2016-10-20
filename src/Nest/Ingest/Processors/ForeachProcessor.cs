@@ -15,15 +15,15 @@ namespace Nest
 		[JsonProperty("field")]
 		Field Field { get; set; }
 
-		[JsonProperty("processors")]
-		IEnumerable<IProcessor> Processors { get; set; }
+		[JsonProperty("processor")]
+		IProcessor Processor { get; set; }
 	}
 
 	public class ForeachProcessor : ProcessorBase, IForeachProcessor
 	{
 		protected override string Name => "foreach";
 		public Field Field { get; set; }
-		public IEnumerable<IProcessor> Processors { get; set; }
+		public IProcessor Processor { get; set; }
 	}
 
 	public class ForeachProcessorDescriptor<T>
@@ -34,14 +34,14 @@ namespace Nest
 
 		Field IForeachProcessor.Field { get; set; }
 
-		IEnumerable<IProcessor> IForeachProcessor.Processors { get; set; }
+		IProcessor IForeachProcessor.Processor { get; set; }
 
 		public ForeachProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
 		public ForeachProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
 			Assign(a => a.Field = objectPath);
 
-		public ForeachProcessorDescriptor<T> Processors(Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> selector) =>
-			Assign(a => a.Processors = selector?.Invoke(new ProcessorsDescriptor())?.Value);
+		public ForeachProcessorDescriptor<T> Processor(Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> selector) =>
+			Assign(a => a.Processor = selector?.Invoke(new ProcessorsDescriptor())?.Value?.FirstOrDefault());
 	}
 }

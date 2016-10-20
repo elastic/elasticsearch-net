@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Text;
@@ -142,6 +143,9 @@ namespace Elasticsearch.Net
 				var response = (HttpWebResponse)request.GetResponse();
 				builder.StatusCode = (int)response.StatusCode;
 				builder.Stream = response.GetResponseStream();
+				// https://github.com/elastic/elasticsearch-net/issues/2311
+				// if stream is null call dispose on response instead.
+				if (builder.Stream == null || builder.Stream == Stream.Null) response.Dispose();
 			}
 			catch (WebException e)
 			{
@@ -179,6 +183,9 @@ namespace Elasticsearch.Net
 				var response = (HttpWebResponse)(await request.GetResponseAsync().ConfigureAwait(false));
 				builder.StatusCode = (int)response.StatusCode;
 				builder.Stream = response.GetResponseStream();
+				// https://github.com/elastic/elasticsearch-net/issues/2311
+				// if stream is null call dispose on response instead.
+				if (builder.Stream == null || builder.Stream == Stream.Null) response.Dispose();
 			}
 			catch (WebException e)
 			{
@@ -197,6 +204,9 @@ namespace Elasticsearch.Net
 			{
 				builder.StatusCode = (int)response.StatusCode;
 				builder.Stream = response.GetResponseStream();
+				// https://github.com/elastic/elasticsearch-net/issues/2311
+				// if stream is null call dispose on response instead.
+				if (builder.Stream == null || builder.Stream == Stream.Null) response.Dispose();
 			}
 		}
 

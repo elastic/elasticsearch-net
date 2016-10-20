@@ -36,9 +36,11 @@ namespace Nest
 		string Routing { get; }
 
 		[JsonProperty("_timestamp")]
+		[Obsolete("This property is no longer returned on indices created in Elasticsearch 5.x and up")]
 		long? Timestamp { get; }
 
 		[JsonProperty("_ttl")]
+		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
 		long? Ttl { get; }
 	}
 
@@ -54,7 +56,9 @@ namespace Nest
 		public FieldValues Fields { get; private set; }
 		public string Parent { get; private set; }
 		public string Routing { get; private set; }
+		[Obsolete("This property is no longer returned on indices created in Elasticsearch 5.x and up")]
 		public long? Timestamp { get; private set; }
+		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
 		public long? Ttl { get; private set; }
 	}
 }

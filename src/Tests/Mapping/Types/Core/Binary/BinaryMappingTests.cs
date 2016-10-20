@@ -7,7 +7,6 @@ namespace Tests.Mapping.Types.Core.Binary
 	{
 		[Binary(
 			DocValues = true,
-			IndexName = "myindex",
 			Similarity = "classic",
 			Store = true)]
 		public string Full { get; set; }
@@ -26,7 +25,6 @@ namespace Tests.Mapping.Types.Core.Binary
 				{
 					type = "binary",
 					doc_values = true,
-					index_name = "myindex",
 					similarity = "classic",
 					store = true
 				},
@@ -41,7 +39,6 @@ namespace Tests.Mapping.Types.Core.Binary
 			.Binary(s => s
 				.Name(o => o.Full)
 				.DocValues()
-				.IndexName("myindex")
 				.Similarity(SimilarityOption.Classic)
 				.Store()
 			)

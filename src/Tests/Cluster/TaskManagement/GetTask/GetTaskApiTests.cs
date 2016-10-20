@@ -10,9 +10,9 @@ using Xunit;
 
 namespace Tests.Cluster.TaskManagement.GetTask
 {
-	public class GetTaskApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetTaskResponse, IGetTaskRequest, GetTaskDescriptor, GetTaskRequest>
+	public class GetTaskApiTests : ApiIntegrationTestBase<WritableCluster, IGetTaskResponse, IGetTaskRequest, GetTaskDescriptor, GetTaskRequest>
 	{
-		public GetTaskApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetTaskApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.GetTask(_taskId, f),
 			fluentAsync: (client, f) => client.GetTaskAsync(_taskId, f),
@@ -48,17 +48,14 @@ namespace Tests.Cluster.TaskManagement.GetTask
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			var seeder = new Seeder(this.Cluster.Node);
-			seeder.SeedNode();
-
 			// get a suitable load of projects in order to get a decent task status out
-			var bulkResponse = client.IndexMany(Project.Generator.Generate(10000));
+			var bulkResponse = client.IndexMany(Project.Generator.Generate(10000), "project-origin");
 			if (!bulkResponse.IsValid)
 				throw new Exception("failure in setting up integration");
 
 			var response = client.ReindexOnServer(r => r
 				.Source(s => s
-					.Index(Infer.Index<Project>())
+					.Index("project-origin")
 					.Type(typeof(Project))
 				)
 				.Destination(d => d

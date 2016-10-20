@@ -8,7 +8,7 @@ namespace Nest
 		public HistogramBucket() { }
 		public HistogramBucket(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
 
-		public long Key { get; set; }
+		public double Key { get; set; }
 		public string KeyAsString { get; set; }
 		public long DocCount { get; set; }
 	}
