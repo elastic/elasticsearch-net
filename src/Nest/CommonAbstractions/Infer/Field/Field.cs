@@ -45,7 +45,7 @@ namespace Nest
 			Type type;
 			_comparisonValue = expression.ComparisonValueFromExpression(out type);
 			_type = type;
-			CachableExpression = !new HasConstantExpressionVisitor(expression).Found;
+			CachableExpression = !new HasVariableExpressionVisitor(expression).Found;
 		}
 
 		public Field(PropertyInfo property, double? boost = null)
