@@ -19,6 +19,9 @@ namespace Nest
 
 		public TDescriptor Name(Expression<Func<T, object>> objectPath) => Assign(a => a.Name = objectPath);
 
-	    IDictionary<string, object>  IPropertyWithLocalMetadata.LocalMetadata { get; set; }
+        /// <summary>
+        /// Local property metadata that will NOT be stored in Elasticsearch with the mappings
+        /// </summary>
+	    public IDictionary<string, object> LocalMetadata { get; set; }
 	}
 }

@@ -32,15 +32,15 @@ namespace Tests.Mapping.Metafields
         public static TDescriptor AddTestLocalMetadata<TDescriptor>(this TDescriptor descriptor)
                 where TDescriptor : IDescriptor
         {
-            var descriptorWithLocalMetadata = descriptor as IPropertyWithLocalMetadata;
+            var propertyDescriptor = descriptor as IProperty;
 
-            if (descriptorWithLocalMetadata == null)
+            if (propertyDescriptor == null)
                 return descriptor;
 
-            if (descriptorWithLocalMetadata.LocalMetadata == null)
-                descriptorWithLocalMetadata.LocalMetadata = new Dictionary<string, object>();
+            if (propertyDescriptor.LocalMetadata == null)
+                propertyDescriptor.LocalMetadata = new Dictionary<string, object>();
 
-            descriptorWithLocalMetadata.LocalMetadata.Add("Test", "TestValue");
+            propertyDescriptor.LocalMetadata.Add("Test", "TestValue");
 
             return descriptor;
         }
@@ -52,13 +52,12 @@ namespace Tests.Mapping.Metafields
 
         public override void Visit(ITextProperty property)
         {
-            var propertyWithLocalMetadata = property as IPropertyWithLocalMetadata;
-            propertyWithLocalMetadata.Should().NotBeNull();
-            propertyWithLocalMetadata.LocalMetadata.Should().NotBeNull();
+            property.Should().NotBeNull();
+            property.LocalMetadata.Should().NotBeNull();
 
-            MetadataCount += propertyWithLocalMetadata.LocalMetadata.Count;
+            MetadataCount += property.LocalMetadata.Count;
 
-            propertyWithLocalMetadata.LocalMetadata.Should().Contain("Test", "TestValue");
+            property.LocalMetadata.Should().Contain("Test", "TestValue");
         }
     }
 }
