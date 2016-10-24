@@ -92,10 +92,10 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			((IUrlParameter)manyTypedRequest.Index).GetString(client.ConnectionSettings).Should().Be("project,devs"); // <3> The index names here come from the Connection Settings passed to `TestClient`. See the documentation on <<index-name-inference, Index Name Inference>> for more details.
 
 			manyStringRequest = new SearchDescriptor<Project>().Index(new[] { "name1", "name2" });
-			((IUrlParameter)manyStringRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
+			((IUrlParameter)manyStringRequest.Index).GetString(client.ConnectionSettings).Should().Be("name1,name2");
 
 			manyStringRequest = new SearchDescriptor<Project>().Type(new[] { "name1", "name2" });
-			((IUrlParameter)manyStringRequest.Type).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
+			((IUrlParameter)manyStringRequest.Type).GetString(client.ConnectionSettings).Should().Be("name1,name2");
 		}
 
 		/**==== Specifying All Indices
