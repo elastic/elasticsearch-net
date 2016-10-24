@@ -104,6 +104,10 @@ namespace Nest
 		{
 			var originalIndexSettings = this._client.GetIndex(resolvedFrom);
 			var originalIndexState = originalIndexSettings.Indices[resolvedFrom];
+
+			// work around https://github.com/elastic/elasticsearch/issues/21096
+			originalIndexState.Settings.Remove("index.provided_name");
+
 			var createIndexRequest = this._reindexRequest.CreateIndexRequest ?? new CreateIndexRequest(resolvedTo, originalIndexState);
 			var createIndexResponse = this._client.CreateIndex(createIndexRequest);
 			if (!createIndexResponse.IsValid)
