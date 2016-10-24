@@ -4,13 +4,16 @@ using FluentAssertions;
 using Nest;
 using Tests.Mapping.Types.Core.Text;
 using Xunit;
+using Tests.Framework;
+using Tests.Framework.MockData;
+using Tests.Mapping.LocalMetadata.Extensions;
 
-namespace Tests.Mapping.Metafields
+namespace Tests.Mapping.LocalMetadata
 {
-    public class LocalMetadataTests
+	public class LocalMetadataVisitorTests
 	{
-		[Fact]
-		public void CanAssignAndAccessLocalMetadata()
+		[U]
+		public void CanAssignAndAccessLocalMetadataInitializer()
 		{
 			var descriptor = new TypeMappingDescriptor<TextTest>().Properties(p => p
 				.Text(t => t
@@ -25,8 +28,30 @@ namespace Tests.Mapping.Metafields
 
 			visitor.MetadataCount.Should().Be(1);
 		}
-	}
 
+		[U]
+		public void CanAssignAndAccessLocalMetadataFluent()
+		{
+			var descriptor = new TypeMappingDescriptor<TextTest>().Properties(p => p
+				.Text(t => t
+				.Name(o => o.Full)
+				.Norms()
+				.LocalMetadata(m => m
+					.Add("Test", "TestValue")
+				)
+			)) as ITypeMapping;
+
+			var visitor = new LocalMatadataVisitor();
+			var walker = new MappingWalker(visitor);
+			walker.Accept(descriptor.Properties);
+
+			visitor.MetadataCount.Should().Be(1);
+		}
+	}
+}
+
+namespace Tests.Mapping.LocalMetadata.Extensions
+{
 	public static class TestLocalMetadataMappingExtensions
 	{
 		public static TDescriptor AddTestLocalMetadata<TDescriptor>(this TDescriptor descriptor)
