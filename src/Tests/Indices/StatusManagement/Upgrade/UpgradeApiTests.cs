@@ -25,10 +25,6 @@ namespace Tests.Indices.StatusManagement.Upgrade
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/{CallIsolatedValue}/_upgrade?allow_no_indices=true";
-
-		protected override Func<UpgradeDescriptor, IUpgradeRequest> Fluent => d => d.AllowNoIndices();
-
-		protected override UpgradeRequest Initializer => new UpgradeRequest(CallIsolatedValue) { AllowNoIndices = true };
+		protected override string UrlPath => $"/{CallIsolatedValue}/_upgrade";
 	}
 }
