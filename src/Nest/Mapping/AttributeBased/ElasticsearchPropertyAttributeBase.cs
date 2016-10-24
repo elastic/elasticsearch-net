@@ -15,6 +15,7 @@ namespace Nest
 
 		PropertyName IProperty.Name { get; set; }
 		TypeName IProperty.Type { get; set; }
+		IDictionary<string, object> IProperty.LocalMetadata { get; set; }
 
 		public string Name { get; set; }
 		public bool Ignore { get; set; }
@@ -32,8 +33,6 @@ namespace Nest
 		public static ElasticsearchPropertyAttributeBase From(MemberInfo memberInfo)
 		{
 			return memberInfo.GetCustomAttribute<ElasticsearchPropertyAttributeBase>(true);
-	}
-
-		IDictionary<string, object> IPropertyWithLocalMetadata.LocalMetadata { get; set; }
+		}
 	}
 }
