@@ -28,7 +28,7 @@ a client can still be `new`'ed with no arguments
 var lowLevelClient = new ElasticLowLevelClient();
 ----
 
-Wich will default to a <<connection-pooling,`SingleNodeConnectionPool`>> talking to `http://localhost:9200`
+Which will default to a <<connection-pooling,`SingleNodeConnectionPool`>> talking to `http://localhost:9200`
 
 The next most common overload of the constructor is the one taking `ConnectionConfiguration`
 
