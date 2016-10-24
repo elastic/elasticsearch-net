@@ -427,10 +427,10 @@ namespace Nest
 			{
 				case GET:
 					if (AllSetNoFallback(p.RouteValues.Repository)) return _lowLevel.CatSnapshots<T>(p.RouteValues.Repository,u => p.RequestParameters);
-					break;
+					return _lowLevel.CatSnapshots<T>(u => p.RequestParameters);
 
 			}
-			throw InvalidDispatch("CatSnapshots", p, new [] { GET }, "/_cat/snapshots/{repository}");
+			throw InvalidDispatch("CatSnapshots", p, new [] { GET }, "/_cat/snapshots", "/_cat/snapshots/{repository}");
 		}
 		
 		internal Task<ElasticsearchResponse<T>> CatSnapshotsDispatchAsync<T>(IRequest<CatSnapshotsRequestParameters> p , CancellationToken cancellationToken) where T : class
@@ -439,10 +439,10 @@ namespace Nest
 			{
 				case GET:
 					if (AllSetNoFallback(p.RouteValues.Repository)) return _lowLevel.CatSnapshotsAsync<T>(p.RouteValues.Repository,u => p.RequestParameters,cancellationToken);
-					break;
+					return _lowLevel.CatSnapshotsAsync<T>(u => p.RequestParameters,cancellationToken);
 
 			}
-			throw InvalidDispatch("CatSnapshots", p, new [] { GET }, "/_cat/snapshots/{repository}");
+			throw InvalidDispatch("CatSnapshots", p, new [] { GET }, "/_cat/snapshots", "/_cat/snapshots/{repository}");
 		}
 		
 		internal ElasticsearchResponse<T> CatTasksDispatch<T>(IRequest<CatTasksRequestParameters> p ) where T : class
@@ -795,6 +795,38 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("CountPercolate", p, new [] { GET, POST }, "/{index}/{type}/_percolate/count", "/{index}/{type}/{id}/_percolate/count");
+		}
+		
+		internal ElasticsearchResponse<T> CreateDispatch<T>(IRequest<CreateRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.Create<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.CreatePost<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("Create", p, new [] { PUT, POST }, "/{index}/{type}/{id}/_create");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> CreateDispatchAsync<T>(IRequest<CreateRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.CreateAsync<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.CreatePostAsync<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("Create", p, new [] { PUT, POST }, "/{index}/{type}/{id}/_create");
 		}
 		
 		internal ElasticsearchResponse<T> DeleteDispatch<T>(IRequest<DeleteRequestParameters> p ) where T : class

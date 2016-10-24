@@ -99,6 +99,10 @@ namespace Elasticsearch.Net
 		public CatAliasesRequestParameters Help(bool help) => this.AddQueryString("help", help);
 		
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatAliasesRequestParameters S(params string[] s) => this.AddQueryString("s", s);
+		
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatAliasesRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
@@ -145,6 +149,10 @@ namespace Elasticsearch.Net
 		public CatAllocationRequestParameters Help(bool help) => this.AddQueryString("help", help);
 		
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatAllocationRequestParameters S(params string[] s) => this.AddQueryString("s", s);
+		
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatAllocationRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
@@ -185,6 +193,10 @@ namespace Elasticsearch.Net
 		
 		///<summary>Return help information</summary>
 		public CatCountRequestParameters Help(bool help) => this.AddQueryString("help", help);
+		
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatCountRequestParameters S(params string[] s) => this.AddQueryString("s", s);
 		
 		
 		///<summary>Verbose mode. Display column headers</summary>
@@ -233,6 +245,10 @@ namespace Elasticsearch.Net
 		public CatFielddataRequestParameters Help(bool help) => this.AddQueryString("help", help);
 		
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatFielddataRequestParameters S(params string[] s) => this.AddQueryString("s", s);
+		
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatFielddataRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
@@ -279,6 +295,10 @@ namespace Elasticsearch.Net
 		public CatHealthRequestParameters Help(bool help) => this.AddQueryString("help", help);
 		
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatHealthRequestParameters S(params string[] s) => this.AddQueryString("s", s);
+		
+		
 		///<summary>Set to false to disable timestamping</summary>
 		public CatHealthRequestParameters Ts(bool ts) => this.AddQueryString("ts", ts);
 		
@@ -307,6 +327,10 @@ namespace Elasticsearch.Net
 		
 		///<summary>Return help information</summary>
 		public CatHelpRequestParameters Help(bool help) => this.AddQueryString("help", help);
+		
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatHelpRequestParameters S(params string[] s) => this.AddQueryString("s", s);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -359,6 +383,10 @@ namespace Elasticsearch.Net
 		public CatIndicesRequestParameters Pri(bool pri) => this.AddQueryString("pri", pri);
 		
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatIndicesRequestParameters S(params string[] s) => this.AddQueryString("s", s);
+		
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatIndicesRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
@@ -399,6 +427,10 @@ namespace Elasticsearch.Net
 		
 		///<summary>Return help information</summary>
 		public CatMasterRequestParameters Help(bool help) => this.AddQueryString("help", help);
+		
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatMasterRequestParameters S(params string[] s) => this.AddQueryString("s", s);
 		
 		
 		///<summary>Verbose mode. Display column headers</summary>
@@ -443,6 +475,10 @@ namespace Elasticsearch.Net
 		public CatNodeAttributesRequestParameters Help(bool help) => this.AddQueryString("help", help);
 		
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatNodeAttributesRequestParameters S(params string[] s) => this.AddQueryString("s", s);
+		
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatNodeAttributesRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
@@ -483,6 +519,10 @@ namespace Elasticsearch.Net
 		
 		///<summary>Return help information</summary>
 		public CatNodesRequestParameters Help(bool help) => this.AddQueryString("help", help);
+		
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatNodesRequestParameters S(params string[] s) => this.AddQueryString("s", s);
 		
 		
 		///<summary>Verbose mode. Display column headers</summary>
@@ -527,6 +567,10 @@ namespace Elasticsearch.Net
 		public CatPendingTasksRequestParameters Help(bool help) => this.AddQueryString("help", help);
 		
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatPendingTasksRequestParameters S(params string[] s) => this.AddQueryString("s", s);
+		
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatPendingTasksRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
@@ -567,6 +611,10 @@ namespace Elasticsearch.Net
 		
 		///<summary>Return help information</summary>
 		public CatPluginsRequestParameters Help(bool help) => this.AddQueryString("help", help);
+		
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatPluginsRequestParameters S(params string[] s) => this.AddQueryString("s", s);
 		
 		
 		///<summary>Verbose mode. Display column headers</summary>
@@ -611,6 +659,10 @@ namespace Elasticsearch.Net
 		public CatRecoveryRequestParameters Help(bool help) => this.AddQueryString("help", help);
 		
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatRecoveryRequestParameters S(params string[] s) => this.AddQueryString("s", s);
+		
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatRecoveryRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
@@ -653,6 +705,10 @@ namespace Elasticsearch.Net
 		public CatRepositoriesRequestParameters Help(bool help) => this.AddQueryString("help", help);
 		
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatRepositoriesRequestParameters S(params string[] s) => this.AddQueryString("s", s);
+		
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatRepositoriesRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
@@ -685,6 +741,10 @@ namespace Elasticsearch.Net
 		
 		///<summary>Return help information</summary>
 		public CatSegmentsRequestParameters Help(bool help) => this.AddQueryString("help", help);
+		
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatSegmentsRequestParameters S(params string[] s) => this.AddQueryString("s", s);
 		
 		
 		///<summary>Verbose mode. Display column headers</summary>
@@ -729,6 +789,10 @@ namespace Elasticsearch.Net
 		public CatShardsRequestParameters Help(bool help) => this.AddQueryString("help", help);
 		
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatShardsRequestParameters S(params string[] s) => this.AddQueryString("s", s);
+		
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatShardsRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
@@ -769,6 +833,10 @@ namespace Elasticsearch.Net
 		
 		///<summary>Return help information</summary>
 		public CatSnapshotsRequestParameters Help(bool help) => this.AddQueryString("help", help);
+		
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatSnapshotsRequestParameters S(params string[] s) => this.AddQueryString("s", s);
 		
 		
 		///<summary>Verbose mode. Display column headers</summary>
@@ -825,6 +893,10 @@ namespace Elasticsearch.Net
 		public CatTasksRequestParameters Help(bool help) => this.AddQueryString("help", help);
 		
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatTasksRequestParameters S(params string[] s) => this.AddQueryString("s", s);
+		
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatTasksRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
@@ -865,6 +937,10 @@ namespace Elasticsearch.Net
 		
 		///<summary>Return help information</summary>
 		public CatTemplatesRequestParameters Help(bool help) => this.AddQueryString("help", help);
+		
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatTemplatesRequestParameters S(params string[] s) => this.AddQueryString("s", s);
 		
 		
 		///<summary>Verbose mode. Display column headers</summary>
@@ -911,6 +987,10 @@ namespace Elasticsearch.Net
 		
 		///<summary>Return help information</summary>
 		public CatThreadPoolRequestParameters Help(bool help) => this.AddQueryString("help", help);
+		
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatThreadPoolRequestParameters S(params string[] s) => this.AddQueryString("s", s);
 		
 		
 		///<summary>Verbose mode. Display column headers</summary>
@@ -1356,6 +1436,64 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for Create
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html
+	///</pre>
+	///</summary>
+	public class CreateRequestParameters : FluentRequestParameters<CreateRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		
+		///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+		public CreateRequestParameters WaitForActiveShards(string wait_for_active_shards) => this.AddQueryString("wait_for_active_shards", wait_for_active_shards);
+		
+		
+		///<summary>ID of the parent document</summary>
+		public CreateRequestParameters Parent(string parent) => this.AddQueryString("parent", parent);
+		
+		
+		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
+		public CreateRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
+		
+		
+		///<summary>Specific routing value</summary>
+		public CreateRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
+		
+		
+		///<summary>Explicit operation timeout</summary>
+		public CreateRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		
+		
+		///<summary>Explicit timestamp for the document</summary>
+		public CreateRequestParameters Timestamp(TimeSpan timestamp) => this.AddQueryString("timestamp", timestamp.ToTimeUnit());
+		
+		
+		///<summary>Expiration time for the document</summary>
+		public CreateRequestParameters Ttl(TimeSpan ttl) => this.AddQueryString("ttl", ttl.ToTimeUnit());
+		
+		
+		///<summary>Explicit version number for concurrency control</summary>
+		public CreateRequestParameters Version(long version) => this.AddQueryString("version", version);
+		
+		
+		///<summary>Specific version type</summary>
+		public CreateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
+		
+		
+		///<summary>The pipeline id to preprocess incoming documents with</summary>
+		public CreateRequestParameters Pipeline(string pipeline) => this.AddQueryString("pipeline", pipeline);
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public CreateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CreateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for Delete
 	///<pre>
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html
@@ -1425,18 +1563,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public DeleteByQueryRequestParameters Df(string df) => this.AddQueryString("df", df);
-		
-		
-		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public DeleteByQueryRequestParameters Explain(bool explain) => this.AddQueryString("explain", explain);
-		
-		
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public DeleteByQueryRequestParameters StoredFields(params string[] stored_fields) => this.AddQueryString("stored_fields", stored_fields);
-		
-		
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public DeleteByQueryRequestParameters DocvalueFields(params string[] docvalue_fields) => this.AddQueryString("docvalue_fields", docvalue_fields);
 		
 		
 		///<summary>Starting offset (default: 0)</summary>
@@ -1519,30 +1645,6 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters Stats(params string[] stats) => this.AddQueryString("stats", stats);
 		
 		
-		///<summary>Specify which field to use for suggestions</summary>
-		public DeleteByQueryRequestParameters SuggestField(string suggest_field) => this.AddQueryString("suggest_field", suggest_field);
-		
-		
-		///<summary>Specify suggest mode</summary>
-		public DeleteByQueryRequestParameters SuggestMode(SuggestMode suggest_mode) => this.AddQueryString("suggest_mode", suggest_mode);
-		
-		
-		///<summary>How many suggestions to return in response</summary>
-		public DeleteByQueryRequestParameters SuggestSize(long suggest_size) => this.AddQueryString("suggest_size", suggest_size);
-		
-		
-		///<summary>The source text for which the suggestions should be returned</summary>
-		public DeleteByQueryRequestParameters SuggestText(string suggest_text) => this.AddQueryString("suggest_text", suggest_text);
-		
-		
-		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public DeleteByQueryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
-		
-		
-		///<summary>Whether to calculate and return scores even if they are not used for sorting</summary>
-		public DeleteByQueryRequestParameters TrackScores(bool track_scores) => this.AddQueryString("track_scores", track_scores);
-		
-		
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public DeleteByQueryRequestParameters Version(bool version) => this.AddQueryString("version", version);
 		
@@ -1555,20 +1657,24 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
 		
 		
+		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
+		public DeleteByQueryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		
+		
 		///<summary>Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public DeleteByQueryRequestParameters WaitForActiveShards(string wait_for_active_shards) => this.AddQueryString("wait_for_active_shards", wait_for_active_shards);
 		
 		
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public DeleteByQueryRequestParameters ScrollSize(int scroll_size) => this.AddQueryString("scroll_size", scroll_size);
+		public DeleteByQueryRequestParameters ScrollSize(long scroll_size) => this.AddQueryString("scroll_size", scroll_size);
 		
 		
 		///<summary>Should the request should block until the delete-by-query is complete.</summary>
 		public DeleteByQueryRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
 		
 		
-		///<summary>The throttle for this request in sub-requests per second. -1 means set no throttle.</summary>
-		public DeleteByQueryRequestParameters RequestsPerSecond(float requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second);
+		///<summary>The throttle to set on this request in sub-requests per second. -1 means set no throttle as does &quot;unlimited&quot; which is the only non-float this accepts.</summary>
+		public DeleteByQueryRequestParameters RequestsPerSecond(long requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -3701,7 +3807,7 @@ namespace Elasticsearch.Net
 		public NodesStatsRequestParameters Human(bool human) => this.AddQueryString("human", human);
 		
 		
-		///<summary>Return indices stats aggregated at node, index or shard level</summary>
+		///<summary>Return indices stats aggregated at index, node or shard level</summary>
 		public NodesStatsRequestParameters Level(Level level) => this.AddQueryString("level", level);
 		
 		
@@ -3868,7 +3974,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means set no throttle as does &quot;unlimited&quot; which is the only non-float this accepts.</summary>
-		public ReindexOnServerRequestParameters RequestsPerSecond(float requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second);
+		public ReindexOnServerRequestParameters RequestsPerSecond(long requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
@@ -3886,7 +3992,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
-		public ReindexRethrottleRequestParameters RequestsPerSecond(float requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second);
+		public ReindexRethrottleRequestParameters RequestsPerSecond(long requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -4655,22 +4761,6 @@ namespace Elasticsearch.Net
 		public UpdateByQueryRequestParameters Df(string df) => this.AddQueryString("df", df);
 		
 		
-		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public UpdateByQueryRequestParameters Explain(bool explain) => this.AddQueryString("explain", explain);
-		
-		
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public UpdateByQueryRequestParameters StoredFields(params string[] stored_fields) => this.AddQueryString("stored_fields", stored_fields);
-		
-		
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public UpdateByQueryRequestParameters DocvalueFields(params string[] docvalue_fields) => this.AddQueryString("docvalue_fields", docvalue_fields);
-		
-		
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public UpdateByQueryRequestParameters FielddataFields(params string[] fielddata_fields) => this.AddQueryString("fielddata_fields", fielddata_fields);
-		
-		
 		///<summary>Starting offset (default: 0)</summary>
 		public UpdateByQueryRequestParameters From(long from) => this.AddQueryString("from", from);
 		
@@ -4683,7 +4773,7 @@ namespace Elasticsearch.Net
 		public UpdateByQueryRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
 		
 		
-		///<summary>What to do when the reindex hits version conflicts?</summary>
+		///<summary>What to do when the update by query hits version conflicts?</summary>
 		public UpdateByQueryRequestParameters Conflicts(Conflicts conflicts) => this.AddQueryString("conflicts", conflicts);
 		
 		
@@ -4755,30 +4845,6 @@ namespace Elasticsearch.Net
 		public UpdateByQueryRequestParameters Stats(params string[] stats) => this.AddQueryString("stats", stats);
 		
 		
-		///<summary>Specify which field to use for suggestions</summary>
-		public UpdateByQueryRequestParameters SuggestField(string suggest_field) => this.AddQueryString("suggest_field", suggest_field);
-		
-		
-		///<summary>Specify suggest mode</summary>
-		public UpdateByQueryRequestParameters SuggestMode(SuggestMode suggest_mode) => this.AddQueryString("suggest_mode", suggest_mode);
-		
-		
-		///<summary>How many suggestions to return in response</summary>
-		public UpdateByQueryRequestParameters SuggestSize(long suggest_size) => this.AddQueryString("suggest_size", suggest_size);
-		
-		
-		///<summary>The source text for which the suggestions should be returned</summary>
-		public UpdateByQueryRequestParameters SuggestText(string suggest_text) => this.AddQueryString("suggest_text", suggest_text);
-		
-		
-		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public UpdateByQueryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
-		
-		
-		///<summary>Whether to calculate and return scores even if they are not used for sorting</summary>
-		public UpdateByQueryRequestParameters TrackScores(bool track_scores) => this.AddQueryString("track_scores", track_scores);
-		
-		
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public UpdateByQueryRequestParameters Version(bool version) => this.AddQueryString("version", version);
 		
@@ -4795,20 +4861,24 @@ namespace Elasticsearch.Net
 		public UpdateByQueryRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
 		
 		
+		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
+		public UpdateByQueryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		
+		
 		///<summary>Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public UpdateByQueryRequestParameters WaitForActiveShards(string wait_for_active_shards) => this.AddQueryString("wait_for_active_shards", wait_for_active_shards);
 		
 		
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public UpdateByQueryRequestParameters ScrollSize(int scroll_size) => this.AddQueryString("scroll_size", scroll_size);
+		public UpdateByQueryRequestParameters ScrollSize(long scroll_size) => this.AddQueryString("scroll_size", scroll_size);
 		
 		
-		///<summary>Should the request should block until the reindex is complete.</summary>
+		///<summary>Should the request should block until the update by query operation is complete.</summary>
 		public UpdateByQueryRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
 		
 		
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means set no throttle as does &quot;unlimited&quot; which is the only non-float this accepts.</summary>
-		public UpdateByQueryRequestParameters RequestsPerSecond(float requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second);
+		public UpdateByQueryRequestParameters RequestsPerSecond(long requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second);
 		
 		
 		///<summary>The URL-encoded request definition</summary>

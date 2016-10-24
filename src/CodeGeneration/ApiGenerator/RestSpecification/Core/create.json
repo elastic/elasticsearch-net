@@ -1,13 +1,14 @@
 {
-  "index": {
+  "create": {
     "documentation": "http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html",
-    "methods": ["POST", "PUT"],
+    "methods": ["PUT","POST"],
     "url": {
-      "path": "/{index}/{type}",
-      "paths": ["/{index}/{type}", "/{index}/{type}/{id}"],
+      "path": "/{index}/{type}/{id}/_create",
+      "paths": ["/{index}/{type}/{id}/_create"],
       "parts": {
         "id": {
           "type" : "string",
+          "required" : true,
           "description" : "Document ID"
         },
         "index": {
@@ -25,12 +26,6 @@
         "wait_for_active_shards": {
           "type" : "string",
           "description" : "Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)"
-        },
-        "op_type": {
-          "type" : "enum",
-          "options" : ["index", "create"],
-          "default" : "index",
-          "description" : "Explicit operation type"
         },
         "parent": {
           "type" : "string",
