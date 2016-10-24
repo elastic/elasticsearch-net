@@ -117,87 +117,87 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		}
 
 #pragma warning disable 618
-		public void Visit(StringProperty mapping)
+		public void Visit(IStringProperty mapping)
 		{
 			Increment("string");
 		}
 #pragma warning restore 618
-		public void Visit(DateProperty mapping)
+		public void Visit(IDateProperty mapping)
 		{
 			Increment("date");
 		}
 
-		public void Visit(BinaryProperty mapping)
+		public void Visit(IBinaryProperty mapping)
 		{
 			Increment("binary");
 		}
 
-		public void Visit(NestedProperty mapping)
+		public void Visit(INestedProperty mapping)
 		{
 			Increment("nested");
 		}
 
-		public void Visit(GeoPointProperty mapping)
+		public void Visit(IGeoPointProperty mapping)
 		{
 			Increment("geo_point");
 		}
 
-		public void Visit(AttachmentProperty mapping)
+		public void Visit(IAttachmentProperty mapping)
 		{
 			Increment("attachment");
 		}
 
-		public void Visit(CompletionProperty mapping)
+		public void Visit(ICompletionProperty mapping)
 		{
 			Increment("completion");
 		}
 
-		public void Visit(TokenCountProperty mapping)
+		public void Visit(ITokenCountProperty mapping)
 		{
 			Increment("token_count");
 		}
 
-		public void Visit(Murmur3HashProperty mapping)
+		public void Visit(IMurmur3HashProperty mapping)
 		{
 			Increment("murmur3");
 		}
 
-		public void Visit(NumberProperty mapping)
+		public void Visit(INumberProperty mapping)
 		{
 			Increment("number");
 		}
 
-		public void Visit(GeoShapeProperty mapping)
+		public void Visit(IGeoShapeProperty mapping)
 		{
 			Increment("geo_shape");
 		}
 
-		public void Visit(IpProperty mapping)
+		public void Visit(IIpProperty mapping)
 		{
 			Increment("ip");
 		}
 
-		public void Visit(ObjectProperty mapping)
+		public void Visit(IObjectProperty mapping)
 		{
 			Increment("object");
 		}
 
-		public void Visit(BooleanProperty mapping)
+		public void Visit(IBooleanProperty mapping)
 		{
 			Increment("boolean");
 		}
 
-		public void Visit(TextProperty mapping)
+		public void Visit(ITextProperty mapping)
 		{
 			Increment("text");
 		}
 
-		public void Visit(KeywordProperty mapping)
+		public void Visit(IKeywordProperty mapping)
 		{
 			Increment("keyword");
 		}
 
-		public void Visit(TypeMapping mapping)
+		public void Visit(ITypeMapping mapping)
 		{
 			Increment("type");
 		}
