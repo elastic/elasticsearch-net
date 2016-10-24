@@ -104,6 +104,13 @@ namespace Nest
 		{
 			var originalIndexSettings = this._client.GetIndex(resolvedFrom);
 			var originalIndexState = originalIndexSettings.Indices[resolvedFrom];
+
+			// Black list internal settings that cannot be copied over
+			// See https://github.com/elastic/elasticsearch/issues/21096
+			originalIndexState.Settings.Remove("index.provided_name");
+			originalIndexState.Settings.Remove("index.creation_date");
+			originalIndexState.Settings.Remove("index.version.created");
+
 			var createIndexRequest = this._reindexRequest.CreateIndexRequest ?? new CreateIndexRequest(resolvedTo, originalIndexState);
 			var createIndexResponse = this._client.CreateIndex(createIndexRequest);
 			if (!createIndexResponse.IsValid)
