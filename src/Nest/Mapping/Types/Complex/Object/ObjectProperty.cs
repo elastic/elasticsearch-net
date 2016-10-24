@@ -8,16 +8,13 @@ namespace Nest
 	public interface IObjectProperty : ICoreProperty
 	{
 		[JsonProperty("dynamic")]
-		DynamicMapping? Dynamic { get; set; }
+		Union<bool, DynamicMapping> Dynamic { get; set; }
 
 		[JsonProperty("enabled")]
 		bool? Enabled { get; set; }
 
 		[JsonProperty("include_in_all")]
 		bool? IncludeInAll { get; set; }
-
-		[JsonProperty("path")]
-		string Path { get; set; }
 
 		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]
 		IProperties Properties { get; set; }
@@ -29,10 +26,9 @@ namespace Nest
 
 		protected ObjectProperty(string type) : base(type) { }
 
-		public DynamicMapping? Dynamic { get; set; }
+		public Union<bool, DynamicMapping> Dynamic { get; set; }
 		public bool? Enabled { get; set; }
 		public bool? IncludeInAll { get; set; }
-		public string Path { get; set; }
 		public IProperties Properties { get; set; }
 	}
 
@@ -52,10 +48,9 @@ namespace Nest
 	{
 		internal TypeName _TypeName { get; set; }
 
-		DynamicMapping? IObjectProperty.Dynamic { get; set; }
+		Union<bool, DynamicMapping> IObjectProperty.Dynamic { get; set; }
 		bool? IObjectProperty.Enabled { get; set; }
 		bool? IObjectProperty.IncludeInAll { get; set; }
-		string IObjectProperty.Path { get; set; }
 		IProperties IObjectProperty.Properties { get; set; }
 
 		protected ObjectPropertyDescriptorBase() : this("object") { }
@@ -65,20 +60,14 @@ namespace Nest
 			_TypeName = TypeName.Create<TChild>();
 		}
 
-		public TDescriptor Dynamic(DynamicMapping dynamic) =>
+		public TDescriptor Dynamic(Union<bool, DynamicMapping> dynamic) =>
 			Assign(a => a.Dynamic = dynamic);
-
-		public TDescriptor Dynamic(bool dynamic = true) =>
-			Dynamic(dynamic ? DynamicMapping.Allow : DynamicMapping.Ignore);
 
 		public TDescriptor Enabled(bool enabled = true) =>
 			Assign(a => a.Enabled = enabled);
 
 		public TDescriptor IncludeInAll(bool includeInAll = true) =>
 			Assign(a => a.IncludeInAll = includeInAll);
-
-		public TDescriptor Path(string path) =>
-			Assign(a => a.Path = path);
 
 		public TDescriptor Properties(Func<PropertiesDescriptor<TChild>, IPromise<IProperties>> selector) =>
 			Assign(a => a.Properties = selector?.Invoke(new PropertiesDescriptor<TChild>(a.Properties))?.Value);

@@ -8,9 +8,6 @@ namespace Nest
 		[JsonProperty("index")]
 		bool? Index { get; set; }
 
-		[JsonProperty("precision_step")]
-		int? PrecisionStep { get; set; }
-
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
 
@@ -29,7 +26,6 @@ namespace Nest
 		public bool? IncludeInAll { get; set; }
 		public bool? Index { get; set; }
 		public string NullValue { get; set; }
-		public int? PrecisionStep { get; set; }
 	}
 
 	public class IpPropertyDescriptor<T>
@@ -37,7 +33,6 @@ namespace Nest
 		where T : class
 	{
 		bool? IIpProperty.Index { get; set; }
-		int? IIpProperty.PrecisionStep { get; set; }
 		double? IIpProperty.Boost { get; set; }
 		string IIpProperty.NullValue { get; set; }
 		bool? IIpProperty.IncludeInAll { get; set; }
@@ -49,8 +44,6 @@ namespace Nest
 		public IpPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 
 		public IpPropertyDescriptor<T> NullValue(string nullValue) => Assign(a => a.NullValue = nullValue);
-
-		public IpPropertyDescriptor<T> PrecisionStep(int precisionStep) => Assign(a => a.PrecisionStep = precisionStep);
 
 		public IpPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 	}

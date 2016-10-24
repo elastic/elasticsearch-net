@@ -362,7 +362,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			[Text(Name = "office_hours")]
 			public TimeSpan? HeadOfficeHours { get; set; }
 
-			[Object(Path = "employees", Store = false)]
+			[Object(Store = false)]
 			public List<Employee> Employees { get; set; }
 		}
 
@@ -378,13 +378,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			[Number(DocValues = false, IgnoreMalformed = true, Coerce = true)]
 			public int Salary { get; set; }
 
-			[Date(Format = "MMddyyyy", NumericResolution = NumericResolutionUnit.Seconds)]
+			[Date(Format = "MMddyyyy")]
 			public DateTime Birthday { get; set; }
 
 			[Boolean(NullValue = false, Store = true)]
 			public bool IsManager { get; set; }
 
-			[Nested(Path = "employees")]
+			[Nested]
 			[JsonProperty("empl")]
 			public List<Employee> Employees { get; set; }
 		}
@@ -409,7 +409,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 						{
 							employees = new
 							{
-								path = "employees",
 								properties = new
 								{
 									birthday = new
@@ -478,12 +477,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							birthday = new
 							{
 								format = "MMddyyyy",
-								numeric_resolution = "seconds",
 								type = "date"
 							},
 							empl = new
 							{
-								path = "employees",
 								properties = new
 								{
 									birthday = new
@@ -643,7 +640,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							},
 							empl = new
 							{
-								path = "employees",
 								properties = new
 								{
 									birthday = new

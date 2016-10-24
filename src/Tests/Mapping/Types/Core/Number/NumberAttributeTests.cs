@@ -13,9 +13,9 @@ namespace Tests.Mapping.Types.Core.Number
 			Boost = 1.5,
 			NullValue = 0.0,
 			IncludeInAll = false,
-			PrecisionStep = 10,
 			IgnoreMalformed = true,
-			Coerce = true)]
+			Coerce = true,
+			ScalingFactor = 10)]
 		public double Full { get; set; }
 
 		[Number]
@@ -46,8 +46,8 @@ namespace Tests.Mapping.Types.Core.Number
 		public TimeSpan TimeSpan { get; set; }
 	}
 
-	public class NumberMappingTests
-		: TypeMappingTestBase<NumberTest>
+	public class NumberAttributeTests
+		: AttributeTestsBase<NumberTest>
 	{
 		protected override object ExpectJson => new
 		{
@@ -63,9 +63,9 @@ namespace Tests.Mapping.Types.Core.Number
 					boost = 1.5,
 					null_value = 0.0,
 					include_in_all = false,
-					precision_step = 10,
 					ignore_malformed = true,
-					coerce = true
+					coerce = true,
+					scaling_factor = 10.0
 				},
 				minimal = new
 				{
@@ -121,70 +121,5 @@ namespace Tests.Mapping.Types.Core.Number
 				}
 			}
 		};
-
-		protected override Func<PropertiesDescriptor<NumberTest>, IPromise<IProperties>> FluentProperties => m => m
-			.Number(d => d
-				.Name(o => o.Full)
-				.DocValues()
-				.Similarity(SimilarityOption.Classic)
-				.Store()
-				.Index(false)
-				.Boost(1.5)
-				.NullValue(0.0)
-				.IncludeInAll(false)
-				.PrecisionStep(10)
-				.IgnoreMalformed()
-				.Coerce()
-			)
-			.Number(d => d
-				.Name(o => o.Minimal)
-			)
-			.Number(d => d
-				.Name(o => o.Byte)
-				.Type(NumberType.Short)
-			)
-			.Number(d => d
-				.Name(o => o.Short)
-				.Type(NumberType.Short)
-			)
-			.Number(d => d
-				.Name(o => o.Integer)
-				.Type(NumberType.Integer)
-			)
-			.Number(d => d
-				.Name(o => o.Long)
-				.Type(NumberType.Long)
-			)
-			.Number(d => d
-				.Name(o => o.SignedByte)
-				.Type(NumberType.Byte)
-			)
-			.Number(d => d
-				.Name(o => o.UnsignedShort)
-				.Type(NumberType.Integer)
-			)
-			.Number(d => d
-				.Name(o => o.UnsignedInteger)
-				.Type(NumberType.Long)
-			)
-			.Number(d => d
-				.Name(o => o.UnsignedLong)
-				.Type(NumberType.Double)
-			)
-			.Number(d => d
-				.Name(o => o.Float)
-			)
-			.Number(d => d
-				.Name(o => o.Double)
-				.Type(NumberType.Double)
-			)
-			.Number(d => d
-				.Name(o => o.Decimal)
-				.Type(NumberType.Double)
-			)
-			.Number(d => d
-				.Name(o => o.TimeSpan)
-				.Type(NumberType.Long)
-			);
 	}
 }
