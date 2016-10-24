@@ -392,6 +392,7 @@
     <Compile Include="Ingest\PutPipeline\PutPipelineUrlTests.cs" />
     <Compile Include="Ingest\SimulatePipeline\SimulatePipelineApiTests.cs" />
     <Compile Include="Ingest\SimulatePipeline\SimulatePipelineUrlTests.cs" />
+    <Compile Include="Mapping\Metafields\LocalMetadataTests.cs" />
     <Compile Include="Mapping\Types\Core\Keyword\KeywordMappingTests.cs" />
     <Compile Include="Mapping\Types\Core\Percolator\PercolatorMappingTests.cs" />
     <Compile Include="Mapping\Types\Core\Text\TextMappingTests.cs" />

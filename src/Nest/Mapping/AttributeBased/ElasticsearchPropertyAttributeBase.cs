@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Elasticsearch.Net;
@@ -31,6 +32,8 @@ namespace Nest
 		public static ElasticsearchPropertyAttributeBase From(MemberInfo memberInfo)
 		{
 			return memberInfo.GetCustomAttribute<ElasticsearchPropertyAttributeBase>(true);
-		}
+	}
+
+		IDictionary<string, object> IPropertyWithLocalMetadata.LocalMetadata { get; set; }
 	}
 }
