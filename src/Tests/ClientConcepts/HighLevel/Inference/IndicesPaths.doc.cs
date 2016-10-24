@@ -21,6 +21,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		{
 			Nest.Indices singleIndexFromString = "name";
 			Nest.Indices multipleIndicesFromString = "name1, name2";
+			Nest.Indices multipleIndicesFromStringArray = new [] { "name1", "name2" };
 			Nest.Indices allFromString = "_all";
 			Nest.Indices allWithOthersFromString = "_all, name2";
 
@@ -42,6 +43,10 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			allWithOthersFromString.Match(
 				all => all.Should().NotBeNull(),
 				many => many.Indices.Should().BeNull()
+			);
+			multipleIndicesFromStringArray.Match(
+				all => all.Should().BeNull(),
+				many => many.Indices.Should().HaveCount(2).And.Contain("name2")
 			);
 		}
 
@@ -83,6 +88,12 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			((IUrlParameter)manyStringRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
 			((IUrlParameter)manyTypedRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("project,devs"); // <3> The index names here come from the Connection Settings passed to `TestClient`. See the documentation on <<index-name-inference, Index Name Inference>> for more details.
+
+			manyStringRequest = new SearchDescriptor<Project>().Index(new[] { "name1", "name2" });
+			((IUrlParameter)manyStringRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
+
+			manyStringRequest = new SearchDescriptor<Project>().Type(new[] { "name1", "name2" });
+			((IUrlParameter)manyStringRequest.Type).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
 		}
 
 		/**==== Specifying All Indices
