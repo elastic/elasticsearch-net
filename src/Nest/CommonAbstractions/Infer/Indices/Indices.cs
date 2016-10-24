@@ -16,7 +16,16 @@ namespace Nest
 		{
 			private readonly List<IndexName> _indices = new List<IndexName>();
 			public IReadOnlyList<IndexName> Indices => _indices;
-			internal ManyIndices(IEnumerable<IndexName> indices) { this._indices.AddRange(indices); }
+			internal ManyIndices(IEnumerable<IndexName> indices)
+			{
+				indices.ThrowIfEmpty(nameof(indices));
+				this._indices.AddRange(indices);
+			}
+			internal ManyIndices(IEnumerable<string> indices)
+			{
+				indices.ThrowIfEmpty(nameof(indices));
+				this._indices.AddRange(indices.Select(s=>(IndexName)s));
+			}
 
 			public ManyIndices And<T>()
 			{
@@ -34,6 +43,9 @@ namespace Nest
 		public static ManyIndices Index(IEnumerable<IndexName> indices) => new ManyIndices(indices);
 		public static ManyIndices Index(params IndexName[] indices) => new ManyIndices(indices);
 
+		public static ManyIndices Index(IEnumerable<string> indices) => new ManyIndices(indices);
+		public static ManyIndices Index(params string[] indices) => new ManyIndices(indices);
+
 		public static Indices Parse(string indicesString)
 		{
 			if (indicesString.IsNullOrEmpty()) throw new Exception("can not parse an empty string to Indices");
@@ -44,6 +56,7 @@ namespace Nest
 
 		public static implicit operator Indices(string indicesString) => Parse(indicesString);
 		public static implicit operator Indices(ManyIndices many) => new Indices(many);
+		public static implicit operator Indices(string[] many) => new ManyIndices(many);
 		public static implicit operator Indices(IndexName[] many) => new ManyIndices(many);
 		public static implicit operator Indices(IndexName index) => new ManyIndices(new[] { index });
 		public static implicit operator Indices(Type type) => new ManyIndices(new IndexName[] { type });
