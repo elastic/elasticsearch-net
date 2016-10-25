@@ -615,6 +615,7 @@
     <Compile Include="QueryDsl\NotConditionlessWhen.cs" />
     <Compile Include="QueryDsl\Specialized\Percolate\PercolateQueryUsageTests.cs" />
     <Compile Include="Reproduce\GithubIssue2152.cs" />
+    <Compile Include="Reproduce\GithubIssue2309.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchApiTests.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchInvalidApiTests.cs" />
     <Compile Include="Framework\Extensions\UriExtensions.cs" />

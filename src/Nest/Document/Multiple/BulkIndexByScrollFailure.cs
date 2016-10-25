@@ -41,5 +41,8 @@ namespace Nest
 
 		[JsonProperty("index")]
 		public string Index { get; internal set; }
+
+		[JsonProperty("caused_by")]
+		public CausedBy CausedBy { get; internal set; }
 	}
 }
