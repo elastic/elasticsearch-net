@@ -6275,10 +6275,7 @@ namespace Nest
 		public UpgradeRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
 
-			///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+			///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>

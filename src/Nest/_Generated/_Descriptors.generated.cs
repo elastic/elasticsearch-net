@@ -3421,9 +3421,6 @@ namespace Nest
 		public UpgradeDescriptor AllIndices() => this.Index(Indices.All);
 
 	
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpgradeDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
-
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public UpgradeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
