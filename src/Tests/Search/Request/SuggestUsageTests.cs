@@ -188,8 +188,9 @@ namespace Tests.Search.Request
 						{
 							Collate = new PhraseSuggestCollate
 							{
-								Query = new InlineScript("{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}")
+								Query = new TemplateQuery
 								{
+									Inline = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
 									Params = new Dictionary<string, object>
 									{
 										{ "field_name", "title" }
