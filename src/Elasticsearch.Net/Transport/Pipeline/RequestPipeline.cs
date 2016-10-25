@@ -301,7 +301,7 @@ namespace Elasticsearch.Net
 				throw new PipelineException(PipelineFailure.BadAuthentication, response.OriginalException) { Response = response };
 		}
 
-		public string SniffPath => "_nodes/_all/settings?flat_settings&timeout=" + this.PingTimeout.ToTimeUnit();
+		public string SniffPath => "_nodes/http,settings?flat_settings&timeout=" + this.PingTimeout.ToTimeUnit();
 
 		public IEnumerable<Node> SniffNodes => this._connectionPool
 			.CreateView((e, n)=> { using (new Auditable(e, this.AuditTrail, this._dateTimeProvider) { Node = n }) {} })

@@ -39,19 +39,28 @@ namespace Tests.Framework.MockResponses
 			{
 				name = name,
 				transport_address = $"127.0.0.1:{node.Uri.Port + 1000}]",
-				http_address = node.HttpEnabled ? $"{fqdn}127.0.0.1:{node.Uri.Port}" : null,
 				host = Guid.NewGuid().ToString("N").Substring(0, 8),
 				ip = "127.0.0.1",
 				version = TestClient.Configuration.ElasticsearchVersion.Version,
-				build = Guid.NewGuid().ToString("N").Substring(0, 8),
-				settings = new Dictionary<string, object> {
+				build_hash = Guid.NewGuid().ToString("N").Substring(0, 8),
+				roles = new List<string>(),
+				http = node.HttpEnabled ? new
+				{
+					bound_address = new []
+					{
+						$"{fqdn}127.0.0.1:{node.Uri.Port}"
+					}
+				} : null,
+				settings = new Dictionary<string, object>
+				{
 					{ "cluster.name", ClusterName },
-					{ "name", name },
+					{ "node.name", name }
 				}
 			};
-			if (!node.MasterEligible) nodeResponse.settings.Add("node.master", false);
-			if (!node.HoldsData) nodeResponse.settings.Add("node.data", false);
-			if (!node.HttpEnabled) nodeResponse.settings.Add("http.enabled", false);
+			if (node.MasterEligible) nodeResponse.roles.Add("master");
+			if (node.HoldsData) nodeResponse.roles.Add("data");
+			if (!node.HttpEnabled)
+				nodeResponse.settings.Add("http.enabled", false);
 			return nodeResponse;
 		}
 
