@@ -19,7 +19,7 @@ namespace Tests.Mapping.Types.Specialized.Completion
         public CompletionField Inferred { get; set; }
 	}
 
-	public class CompletionMappingTests : TypeMappingTestBase<CompletionTest>
+	public class CompletionAttributeTests : AttributeTestsBase<CompletionTest>
 	{
 		protected override object ExpectJson => new
 		{
@@ -44,21 +44,5 @@ namespace Tests.Mapping.Types.Specialized.Completion
                 }
             }
 		};
-
-	    protected override Func<PropertiesDescriptor<CompletionTest>, IPromise<IProperties>> FluentProperties => p => p
-	        .Completion(s => s
-	            .Name(o => o.Full)
-	            .Analyzer("myanalyzer")
-	            .SearchAnalyzer("mysearchanalyzer")
-	            .PreserveSeparators()
-	            .PreservePositionIncrements()
-	            .MaxInputLength(20)
-	        )
-	        .Completion(b => b
-	            .Name(o => o.Minimal)
-	        )
-	        .Completion(b => b
-	            .Name(o => o.Inferred)
-	        );
 	}
 }

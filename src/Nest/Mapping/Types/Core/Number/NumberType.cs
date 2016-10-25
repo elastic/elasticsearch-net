@@ -9,6 +9,10 @@ namespace Nest
 	{
 		[EnumMember(Value = "float")]
 		Float,
+		[EnumMember(Value = "half_float")]
+		HalfFloat,
+		[EnumMember(Value = "scaled_float")]
+		ScaledFloat,
 		[EnumMember(Value = "double")]
 		Double,
 		[EnumMember(Value = "integer")]

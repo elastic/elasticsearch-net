@@ -26,5 +26,7 @@ namespace Tests.Indices.StatusManagement.Upgrade
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"/{CallIsolatedValue}/_upgrade";
+
+		protected override UpgradeRequest Initializer => new UpgradeRequest(CallIsolatedValue);
 	}
 }

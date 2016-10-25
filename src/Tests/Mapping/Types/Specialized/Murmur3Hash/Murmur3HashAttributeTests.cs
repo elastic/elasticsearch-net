@@ -14,7 +14,7 @@ namespace Tests.Mapping.Types.Specialized.Murmur3Hash
 		public string Minimal { get; set; }
 	}
 
-	public class Murmur3HashMappingTests : TypeMappingTestBase<Murmur3HashTest>
+	public class Murmur3HashAttributeTests : AttributeTestsBase<Murmur3HashTest>
 	{
 		protected override object ExpectJson => new
 		{
@@ -30,13 +30,5 @@ namespace Tests.Mapping.Types.Specialized.Murmur3Hash
 				}
 			}
 		};
-
-		protected override Func<PropertiesDescriptor<Murmur3HashTest>, IPromise<IProperties>> FluentProperties => p => p
-			.Murmur3Hash(s => s
-				.Name(o => o.Full)
-			)
-			.Murmur3Hash(b => b
-				.Name(o => o.Minimal)
-			);
 	}
 }

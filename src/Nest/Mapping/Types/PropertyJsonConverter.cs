@@ -43,6 +43,8 @@ namespace Nest
 				case "short":
 				case "integer":
 				case "long":
+				case "scaled_float":
+				case "half_float":
 					return jObject.ToObject<NumberProperty>();
 				case "date":
 					return jObject.ToObject<DateProperty>();

@@ -18,9 +18,6 @@ namespace Nest
 		[JsonProperty("include_in_all")]
 		bool? IncludeInAll { get; set; }
 
-		[JsonProperty("precision_step")]
-		int? PrecisionStep { get; set; }
-
 		[JsonProperty("ignore_malformed")]
 		bool? IgnoreMalformed { get; set; }
 
@@ -29,6 +26,9 @@ namespace Nest
 
 		[JsonProperty("fielddata")]
 		INumericFielddata Fielddata { get; set; }
+
+		[JsonProperty("scaling_factor")]
+		double? ScalingFactor { get; set; }
 	}
 
 	public class NumberProperty : DocValuesPropertyBase, INumberProperty
@@ -41,10 +41,10 @@ namespace Nest
 		public double? Boost { get; set; }
 		public double? NullValue { get; set; }
 		public bool? IncludeInAll { get; set; }
-		public int? PrecisionStep { get; set; }
 		public bool? IgnoreMalformed { get; set; }
 		public bool? Coerce { get; set; }
 		public INumericFielddata Fielddata { get; set; }
+		public double? ScalingFactor { get; set; }
 	}
 
 	public abstract class NumberPropertyDescriptorBase<TDescriptor, TInterface, T>
@@ -61,10 +61,10 @@ namespace Nest
 		double? INumberProperty.Boost { get; set; }
 		double? INumberProperty.NullValue { get; set; }
 		bool? INumberProperty.IncludeInAll { get; set; }
-		int? INumberProperty.PrecisionStep { get; set; }
 		bool? INumberProperty.IgnoreMalformed { get; set; }
 		bool? INumberProperty.Coerce { get; set; }
 		INumericFielddata INumberProperty.Fielddata { get; set; }
+		double? INumberProperty.ScalingFactor { get; set; }
 
 		public TDescriptor Type(NumberType type) => Assign(a => a.Type = type.GetStringValue());
 
@@ -76,14 +76,14 @@ namespace Nest
 
 		public TDescriptor IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 
-		public TDescriptor PrecisionStep(int precisionStep) => Assign(a => a.PrecisionStep = precisionStep);
-
 		public TDescriptor IgnoreMalformed(bool ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
 
 		public TDescriptor Coerce(bool coerce = true) => Assign(a => a.Coerce = coerce);
 
 		public TDescriptor Fielddata(Func<NumericFielddataDescriptor, INumericFielddata> selector) =>
 			Assign(a => a.Fielddata = selector(new NumericFielddataDescriptor()));
+
+		public TDescriptor ScalingFactor(double scalingFactor) => Assign(a => a.ScalingFactor = scalingFactor);
 	}
 
 	public class NumberPropertyDescriptor<T>

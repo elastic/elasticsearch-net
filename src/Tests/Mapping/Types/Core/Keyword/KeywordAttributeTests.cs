@@ -13,7 +13,6 @@ namespace Tests.Mapping.Types.Core.Keyword
 			Index = false,
 			IndexOptions = IndexOptions.Offsets,
 			NullValue = "null",
-			SearchAnalyzer = "searchanalyzer",
 			Norms = false
 		)]
 		public string Full { get; set; }
@@ -26,10 +25,8 @@ namespace Tests.Mapping.Types.Core.Keyword
         public Guid Guid { get; set; }
 	}
 
-	public class KeywordMappingTest : TypeMappingTestBase<KeywordTest>
+	public class KeywordAttributeTests : AttributeTestsBase<KeywordTest>
 	{
-		protected override bool AutoMap => true;
-
 		protected override object ExpectJson => new
 		{
 			properties = new
@@ -44,7 +41,6 @@ namespace Tests.Mapping.Types.Core.Keyword
 					index = false,
 					index_options = "offsets",
 					null_value = "null",
-					search_analyzer = "searchanalyzer",
 					norms = false
 				},
 				minimal = new
@@ -61,39 +57,5 @@ namespace Tests.Mapping.Types.Core.Keyword
 				}
 			}
 		};
-
-		protected override Func<PropertiesDescriptor<KeywordTest>, IPromise<IProperties>> FluentProperties => p => p
-			.Keyword(t => t
-				.Name(o => o.Full)
-				.Boost(1.2)
-				.EagerGlobalOrdinals()
-				.IgnoreAbove(50)
-				.IncludeInAll(false)
-				.Index(false)
-				.IndexOptions(IndexOptions.Offsets)
-				.NullValue("null")
-				.SearchAnalyzer("searchanalyzer")
-				.Norms(false)
-			)
-			.Keyword(s => s
-				.Name(o => o.Minimal)
-			);
-
-		protected override object ExpectJsonFluentOnly => new
-		{
-			properties = new
-			{
-				full = new
-				{
-					type = "keyword",
-					norms = true
-				}
-			}
-		};
-		protected override Func<PropertiesDescriptor<KeywordTest>, IPromise<IProperties>> FluentOnlyProperties => p => p
-			.Keyword(s => s
-				.Name(o => o.Full)
-				.Norms()
-			);
 	}
 }

@@ -11,17 +11,15 @@ namespace Tests.Mapping.Types.Complex.Object
 		}
 
 		[Object(
-			Dynamic = DynamicMapping.Strict,
 			Enabled = true,
-			IncludeInAll = true,
-			Path = "mypath")]
+			IncludeInAll = true)]
 		public InnerObject Full { get; set; }
 
 		[Object]
 		public InnerObject Minimal { get; set; }
 	}
 
-	public class ObjectMappingTests : TypeMappingTestBase<ObjectTest>
+	public class ObjectAttributeTests : AttributeTestsBase<ObjectTest>
 	{
 		protected override object ExpectJson => new
 		{
@@ -30,10 +28,8 @@ namespace Tests.Mapping.Types.Complex.Object
 				full = new
 				{
 					type = "object",
-					dynamic = "strict",
 					enabled = true,
 					include_in_all = true,
-					path = "mypath",
 					properties = new
 					{
 						name = new
@@ -69,19 +65,5 @@ namespace Tests.Mapping.Types.Complex.Object
 				}
 			}
 		};
-
-		protected override Func<PropertiesDescriptor<ObjectTest>, IPromise<IProperties>> FluentProperties => p => p
-			.Object<ObjectTest.InnerObject>(s => s
-				.AutoMap()
-				.Name(o => o.Full)
-				.Dynamic(DynamicMapping.Strict)
-				.Enabled()
-				.IncludeInAll()
-				.Path("mypath")
-			)
-			.Object<ObjectTest.InnerObject>(b => b
-				.AutoMap()
-				.Name(o => o.Minimal)
-			);
 	}
 }

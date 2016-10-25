@@ -15,7 +15,7 @@ namespace Tests.Mapping.Types.Core.Binary
 		public string Minimal { get; set; }
 	}
 
-	public class BinaryMappingTests : TypeMappingTestBase<BinaryTest>
+	public class BinaryAttributeTests : AttributeTestsBase<BinaryTest>
 	{
 		protected override object ExpectJson => new
 		{
@@ -34,16 +34,5 @@ namespace Tests.Mapping.Types.Core.Binary
 				}
 			}
 		};
-
-		protected override Func<PropertiesDescriptor<BinaryTest>, IPromise<IProperties>> FluentProperties => p => p
-			.Binary(s => s
-				.Name(o => o.Full)
-				.DocValues()
-				.Similarity(SimilarityOption.Classic)
-				.Store()
-			)
-			.Binary(b => b
-				.Name(o => o.Minimal)
-			);
 	}
 }
