@@ -50,13 +50,12 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class ReindexOnServerResponse : ResponseBase, IReindexOnServerResponse
 	{
-
-		public override bool IsValid => !this.Failures.HasAny();
+		public override bool IsValid => base.IsValid && !this.Failures.HasAny();
 
 		public Time Took { get; internal set; }
 
 		/// <summary>
-		/// Only has a value if WaitForCompletion is set to false on the request
+		/// Only has a value if WaitForCompletion is set to <c>false</c> on the request
 		/// </summary>
 		public TaskId Task { get; internal set; }
 
