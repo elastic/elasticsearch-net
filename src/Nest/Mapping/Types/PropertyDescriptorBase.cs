@@ -14,7 +14,12 @@ namespace Nest
 		string IProperty.IndexName { get; set; }
 		bool? IProperty.Store { get; set; }
 		bool? IProperty.DocValues { get; set; }
-		SimilarityOption? IProperty.Similarity { get; set; }
+
+#pragma warning disable CS0618 // Type or member is obsolete
+		SimilarityOption? IProperty.Similarity { get { return Self.CustomSimilarity?.ToEnum<SimilarityOption>(); } set { Self.CustomSimilarity = value.GetStringValue(); } }
+#pragma warning restore CS0618 // Type or member is obsolete
+		string IProperty.CustomSimilarity { get; set; }
+
 		Fields IProperty.CopyTo { get; set; }
 		IProperties IProperty.Fields { get; set; }
 
@@ -33,6 +38,9 @@ namespace Nest
 		public TDescriptor Fields(Func<PropertiesDescriptor<T>, IPromise<IProperties>> selector) => Assign(a => a.Fields = selector?.Invoke(new PropertiesDescriptor<T>())?.Value);
 
 		public TDescriptor Similarity(SimilarityOption similarity) => Assign(a => a.Similarity = similarity);
+#pragma warning disable CS0618 // Type or member is obsolete
+		public TDescriptor Similarity(string similarity) => Assign(a => a.CustomSimilarity = similarity);
+#pragma warning restore CS0618 // Type or member is obsolete
 
 		public TDescriptor CopyTo(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) => Assign(a => a.CopyTo = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 	}

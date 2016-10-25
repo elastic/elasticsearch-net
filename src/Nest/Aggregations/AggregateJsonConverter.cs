@@ -374,15 +374,14 @@ namespace Nest
 			{
 				reader.Read();
 				var aggs = new Dictionary<string, IAggregate>();
-				do
+				while (reader.TokenType != JsonToken.EndObject)
 				{
 					var name = reader.Value.ToString();
 					reader.Read();
 					var innerAgg = this.ReadAggregate(reader, serializer);
 					aggs.Add(name, innerAgg);
 					reader.Read();
-				} while (reader.TokenType != JsonToken.EndObject);
-
+				}
 				reader.Read();
 				return new FiltersAggregate(aggs);
 			}

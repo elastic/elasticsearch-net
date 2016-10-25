@@ -30,6 +30,7 @@ namespace Tests.Framework
 
 		protected string CallIsolatedValue => _uniqueValues.Value;
 		protected T ExtendedValue<T>(string key) where T : class => this._uniqueValues.ExtendedValue<T>(key);
+		protected void ExtendedValue<T>(string key, T value) where T : class => this._uniqueValues.ExtendedValue(key, value);
 
 		protected virtual void IntegrationSetup(IElasticClient client, CallUniqueValues values) { }
 		protected virtual void OnBeforeCall(IElasticClient client) { }

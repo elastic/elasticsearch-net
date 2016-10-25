@@ -129,6 +129,10 @@ namespace Nest
 							reader.Read();
 							ef.Path = reader.Value as string;
 							break;
+						case "routing":
+							reader.Read();
+							ef.Routing = reader.Value as string;
+							break;
 					}
 				}
 				termsQuery.TermsLookup = ef;

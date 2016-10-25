@@ -2678,6 +2678,15 @@ class NoMatchQueryContainer
 -     prop: CacheKey
 -     prop: Filter
 -     prop: FilterName
+class NumericRangeQueryDescriptor`1
+-     method: Greater
++     method: GreaterThan
+-     method: GreaterOrEquals
++     method: GreaterThanOrEquals
+-     method: Lower
++     method: LessThan
+-     method: LowerOrEquals
++     method: LessThanOrEquals
 class OpenIndexRequest
 -     prop: Index
 class OptimizeDescriptor

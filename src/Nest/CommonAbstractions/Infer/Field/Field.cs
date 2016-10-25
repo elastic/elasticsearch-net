@@ -38,7 +38,7 @@ namespace Nest
 				var comparisonValue = value.ComparisonValueFromExpression(out type);
 				_type = type;
 				SetComparisonValue(comparisonValue);
-				CacheableExpression = !new HasConstantExpressionVisitor(value).Found;
+				CacheableExpression = !new HasVariableExpressionVisitor(value).Found;
 			}
 		}
 

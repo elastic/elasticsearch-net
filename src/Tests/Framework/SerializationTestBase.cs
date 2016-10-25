@@ -59,6 +59,15 @@ namespace Tests.Framework
 
 		protected DateTime FixedDate => new DateTime(2015, 06, 06, 12, 01, 02, 123);
 
+
+		protected void JsonEquals<T>(T toSerialize, object expectedObject)
+		{
+			var expected = this.Client.Serializer.SerializeToString(expectedObject);
+			var expectedJObject = JToken.Parse(expected);
+			string serialized;
+			ActualMatches(toSerialize, expectedJObject, expected, 0, out serialized);
+		}
+
 		protected void ShouldBeEquivalentTo(string serialized) =>
 			serialized.Should().BeEquivalentTo(_expectedJsonString);
 

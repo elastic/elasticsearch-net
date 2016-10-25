@@ -90,7 +90,7 @@ namespace Nest
 
 		public void Visit(INumericRangeQuery query) => Write("numeric_range");
 
-        public void Visit(ITermRangeQuery query) => Write("term_range");
+		public void Visit(ITermRangeQuery query) => Write("term_range");
 
 		public virtual void Visit(IFunctionScoreQuery query) => Write("function_core");
 
@@ -160,7 +160,7 @@ namespace Nest
 
 		public virtual void Visit(IGeoDistanceQuery filter) => Write("geo_distance");
 
-        public virtual void Visit(IGeoHashCellQuery filter) => Write("geohash_cell");
+		public virtual void Visit(IGeoHashCellQuery filter) => Write("geohash_cell");
 
 		public void Visit(ITemplateQuery query) => Write("template");
 

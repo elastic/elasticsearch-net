@@ -207,14 +207,17 @@ namespace Tests.Framework
 			if (rule?.ReturnResponse != null)
 				return rule.ReturnResponse;
 
+			if (DefaultResponseBytes != null) return DefaultResponseBytes;
 			var response = DefaultResponse;
 			using (var ms = new MemoryStream())
 			{
 				new ElasticsearchDefaultSerializer().Serialize(response, ms);
-				return ms.ToArray();
+				DefaultResponseBytes = ms.ToArray();
 			}
+			return DefaultResponseBytes;
 		}
 
+		private static byte[] DefaultResponseBytes;
 		private static object DefaultResponse
 		{
 			get

@@ -236,7 +236,9 @@
     <Compile Include=".\Framework\Extensions\WebClient-CoreFx.cs" />
     <Compile Include=".\Framework\Integration\Bootstrappers\Seeder.cs" />
     <Compile Include=".\Framework\Integration\Clusters\ClusterBase.cs" />
-    <Compile Include="ClientConcepts\Serializer\IsoDateTimeConverterTests.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\Dispose\ResponseBuilderDisposeTests.cs" />
+    <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleApiTests.cs" />
+    <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleUrlTests.cs" />
     <Compile Include="Framework\Extensions\ShouldExtensions.cs" />
     <Compile Include="Framework\Integration\Clusters\WritableCluster.cs" />
     <Compile Include="Framework\Integration\Clusters\IntrusiveOperationCluster.cs" />
@@ -568,6 +570,9 @@
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexOnServerApiTests.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryApiTests.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryUrlTests.cs" />
+    <Compile Include="Reproduce\GithubIssue2309.cs" />
+    <Compile Include="Search\MultiSearch\MultiSearchApiTests.cs" />
+    <Compile Include="Search\MultiSearch\MultiSearchInvalidApiTests.cs" />
     <Compile Include="Framework\Extensions\UriExtensions.cs" />
     <Compile Include="Framework\Integration\CallUniqueValues.cs" />
     <Compile Include="Framework\Integration\ClientMethod.cs" />
@@ -584,8 +589,13 @@
     <Compile Include="Indices\AliasManagement\GetIndicesPointingToAlias\GetIndicesPointingToAliasTests.cs" />
     <Compile Include="Indices\AliasManagement\GetAliasesPointingToIndex\GetAliasesPointingToIndexTests.cs" />
     <Compile Include="Properties\Xunit.cs" />
+    <Compile Include="QueryDsl\BoolDsl\Operators\AndAssignManyManualBoolsTests.cs" />
+    <Compile Include="QueryDsl\BoolDsl\Operators\OrOperatorOnManualBoolsTests.cs" />
+    <Compile Include="QueryDsl\BoolDsl\Operators\AndOperatorOnManualBoolsTests.cs" />
+    <Compile Include="QueryDsl\BoolDsl\Operators\OrAssignManyManualBoolsTests.cs" />
     <Compile Include="QueryDsl\Span\FieldMasking\SpanFieldMaskingUsageTests.cs" />
     <Compile Include="QueryDsl\Verbatim\VerbatimAndStrictQueryUsageTests.cs" />
+    <Compile Include="Reproduce\AggsDeserialization.cs" />
     <Compile Include="Reproduce\GithubIssue2101.cs" />
     <Compile Include="Reproduce\GithubIssue2152.cs" />
     <Compile Include="Reproduce\GithubIssue2052.cs" />

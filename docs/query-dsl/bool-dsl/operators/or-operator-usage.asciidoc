@@ -17,7 +17,7 @@ please modify the original csharp file found at the link and submit the PR with 
 
 [source,csharp]
 ----
-var lotsOfOrs = Enumerable.Range(0, 100).Aggregate(new QueryContainer(), (q, c) => q || Query, q => q);
+var lotsOfOrs = Enumerable.Range(0, Iterations).Aggregate(new QueryContainer(), (q, c) => q || Query, q => q);
 
 LotsOfOrs(lotsOfOrs);
 ----
@@ -93,7 +93,7 @@ ReturnsNull(
 
 [source,csharp]
 ----
-foreach(var i in Enumerable.Range(0, 100))
+foreach(var i in Enumerable.Range(0, Iterations))
     container |= Query;
 
 LotsOfOrs(container);
@@ -106,7 +106,7 @@ var container = new QueryContainer();
 
 [source,csharp]
 ----
-foreach(var i in Enumerable.Range(0, 100))
+foreach(var i in Enumerable.Range(0, Iterations))
     container |= Query;
 
 LotsOfOrs(container);
@@ -118,6 +118,6 @@ lotsOfOrs.Should().NotBeNull();
 
 lotsOfOrs.Bool.Should().NotBeNull();
 
-lotsOfOrs.Bool.Should.Should().NotBeEmpty().And.HaveCount(100);
+lotsOfOrs.Bool.Should.Should().NotBeEmpty().And.HaveCount(Iterations);
 ----
 

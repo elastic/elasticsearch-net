@@ -12,18 +12,24 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	internal class HasConstantExpressionVisitor : ExpressionVisitor
+	internal class HasVariableExpressionVisitor : ExpressionVisitor
 	{
-		public bool Found { get; private set; }
+		private bool _found;
+		public bool Found
+		{
+			get { return _found; }
+			// This is only set to true once to prevent clobbering from subsequent node visits
+			private set { if (!_found) _found = value; }
+		}
 
-		public HasConstantExpressionVisitor(Expression e)
+		public HasVariableExpressionVisitor(Expression e)
 		{
 			this.Visit(e);
 		}
 
 		public override Expression Visit(Expression node)
 		{
-			if (!Found)
+			if (!this.Found)
 				return base.Visit(node);
 			return node;
 		}
@@ -35,7 +41,6 @@ namespace Nest
 				var lastArg = node.Arguments.Last();
 				var constantExpression = lastArg as ConstantExpression;
 				this.Found = constantExpression == null;
-				return node;
 			}
 			else if (node.Method.Name == "get_Item" && node.Arguments.Any())
 			{
@@ -50,15 +55,8 @@ namespace Nest
 				var lastArg = node.Arguments.Last();
 				var constantExpression = lastArg as ConstantExpression;
 				this.Found = constantExpression == null;
-				return node;
 			}
 			return base.VisitMethodCall(node);
-		}
-
-		protected override Expression VisitConstant(ConstantExpression node)
-		{
-			this.Found = true;
-			return node;
 		}
 	}
 

@@ -1,6 +1,6 @@
 {
   "reindex": {
-    "documentation": "https://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-reindex.html",
+    "documentation": "https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html",
     "methods": ["POST"],
     "url": {
       "path": "/_reindex",
@@ -22,9 +22,14 @@
           "description" : "Explicit write consistency setting for the operation"
         },
         "wait_for_completion": {
-           "type" : "boolean",
-           "default": false,
-           "description" : "Should the request should block until the reindex is complete."
+          "type" : "boolean",
+          "default": false,
+          "description" : "Should the request should block until the reindex is complete."
+        },
+        "requests_per_second": {
+          "type": "number",
+          "default": 0,
+          "description": "The throttle for this request in sub-requests per second. 0 means set no throttle."
         }
       }
     },

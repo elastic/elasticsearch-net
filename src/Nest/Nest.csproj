@@ -534,6 +534,10 @@
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexDestination.cs" />
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexRouting.cs" />
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexSource.cs" />
+    <Compile Include="Document\Multiple\ReindexRethrottle\ElasticClient-ReindexRethrottle.cs" />
+    <Compile Include="Document\Multiple\ReindexRethrottle\ReindexNode.cs" />
+    <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleRequest.cs" />
+    <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleResponse.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryRequest.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryResponse.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\ElasticClient-UpdateByQuery.cs" />
@@ -939,6 +943,8 @@
     <Compile Include="QueryDsl\Abstractions\FieldName\FieldNameQueryDescriptorBase.cs" />
     <Compile Include="QueryDsl\Abstractions\FieldName\FieldNameQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\Abstractions\Query\BoolQueryExtensions.cs" />
+    <Compile Include="QueryDsl\Abstractions\Query\BoolQueryOrExtensions.cs" />
+    <Compile Include="QueryDsl\Abstractions\Query\BoolQueryAndExtensions.cs" />
     <Compile Include="QueryDsl\Abstractions\Query\QueryBase.cs" />
     <Compile Include="QueryDsl\Abstractions\Query\QueryDescriptorBase.cs" />
     <Compile Include="QueryDsl\Compound\And\AndQuery.cs" />
