@@ -30,7 +30,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IReindexOnServerResponse ReindexOnServer(IReindexOnServerRequest request) =>
 			this.Dispatcher.Dispatch<IReindexOnServerRequest, ReindexOnServerRequestParameters, ReindexOnServerResponse>(
-				request,
+				this.ForceConfiguration<IReindexOnServerRequest, ReindexOnServerRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
 				this.LowLevelDispatch.ReindexDispatch<ReindexOnServerResponse>
 			);
 
@@ -41,7 +41,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request) =>
 			this.Dispatcher.DispatchAsync<IReindexOnServerRequest, ReindexOnServerRequestParameters, ReindexOnServerResponse, IReindexOnServerResponse>(
-				request,
+				this.ForceConfiguration<IReindexOnServerRequest, ReindexOnServerRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
 				this.LowLevelDispatch.ReindexDispatchAsync<ReindexOnServerResponse>
 			);
 	}

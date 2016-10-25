@@ -68,8 +68,8 @@ namespace Elasticsearch.Net
 		public List<Audit> AuditTrail { get; internal set; }
 
 		/// <summary>
-		/// The response is succesful or has a response code between 400-599 the call should not be retried.
-		/// Only on 502 and 503 will this return false;
+		/// The response is successful or has a response code between 400-599, the call should not be retried.
+		/// Only on 502,503 and 504 will this return false;
 		/// </summary>
 		public bool SuccessOrKnownError =>
 			this.Success || (HttpStatusCode >= 400 && HttpStatusCode < 599

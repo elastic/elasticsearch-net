@@ -35,5 +35,8 @@ namespace Nest
 		public Throwable Reason { get; internal set; }
 
 
+
+		[JsonProperty("caused_by")]
+		public CausedBy CausedBy { get; internal set; }
 	}
 }
