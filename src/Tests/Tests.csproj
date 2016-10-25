@@ -570,15 +570,6 @@
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexOnServerApiTests.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryApiTests.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryUrlTests.cs" />
-    <Compile Include="Framework\EndpointTests\TestState\CallUniqueValues.cs" />
-    <Compile Include="Framework\EndpointTests\TestState\ClientMethod.cs" />
-    <Compile Include="Framework\ManagedElasticsearch\Process\ElasticsearchConsoleOut.cs" />
-    <Compile Include="QueryDsl\ConditionlessWhen.cs" />
-    <Compile Include="QueryDsl\Joining\ParentId\ParentIdUsageTests.cs" />
-    <Compile Include="QueryDsl\MatchNoneQueryUsageTests.cs" />
-    <Compile Include="QueryDsl\NotConditionlessWhen.cs" />
-    <Compile Include="QueryDsl\Specialized\Percolate\PercolateQueryUsageTests.cs" />
-    <Compile Include="Reproduce\GithubIssue2152.cs" />
     <Compile Include="Reproduce\GithubIssue2309.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchApiTests.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchInvalidApiTests.cs" />
