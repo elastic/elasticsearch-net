@@ -18,17 +18,11 @@ namespace Nest
 		[JsonProperty("include_in_all")]
 		bool? IncludeInAll { get; set; }
 
-		[JsonProperty("precision_step")]
-		int? PrecisionStep { get; set; }
-
 		[JsonProperty("ignore_malformed")]
 		bool? IgnoreMalformed { get; set; }
 
 		[JsonProperty("format")]
 		string Format { get; set; }
-
-		[JsonProperty("numeric_resolution")]
-        NumericResolutionUnit? NumericResolution { get; set; }
 
 		[JsonProperty("fielddata")]
 		INumericFielddata Fielddata { get; set; }
@@ -45,7 +39,6 @@ namespace Nest
 		public int? PrecisionStep { get; set; }
 		public bool? IgnoreMalformed { get; set; }
 		public string Format { get; set; }
-		public NumericResolutionUnit? NumericResolution { get; set; }
 		public INumericFielddata Fielddata { get; set; }
 	}
 
@@ -57,10 +50,8 @@ namespace Nest
 		double? IDateProperty.Boost { get; set; }
 		DateTime? IDateProperty.NullValue { get; set; }
 		bool? IDateProperty.IncludeInAll { get; set; }
-		int? IDateProperty.PrecisionStep { get; set; }
 		bool? IDateProperty.IgnoreMalformed { get; set; }
 		string IDateProperty.Format { get; set; }
-		NumericResolutionUnit? IDateProperty.NumericResolution { get; set; }
 		INumericFielddata IDateProperty.Fielddata { get; set; }
 
 		public DatePropertyDescriptor() : base("date") { }
@@ -69,10 +60,8 @@ namespace Nest
 		public DatePropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 		public DatePropertyDescriptor<T> NullValue(DateTime nullValue) => Assign(a => a.NullValue = nullValue);
 		public DatePropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
-		public DatePropertyDescriptor<T> PrecisionStep(int precisionStep) => Assign(a => a.PrecisionStep = precisionStep);
 		public DatePropertyDescriptor<T> IgnoreMalformed(bool ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
 		public DatePropertyDescriptor<T> Format(string format) => Assign(a => a.Format = format);
-		public DatePropertyDescriptor<T> NumericResolution(NumericResolutionUnit unit) => Assign(a => a.NumericResolution = unit);
 		public DatePropertyDescriptor<T> Fielddata(Func<NumericFielddataDescriptor, INumericFielddata> selector) =>
 			Assign(a => a.Fielddata = selector(new NumericFielddataDescriptor()));
 	}

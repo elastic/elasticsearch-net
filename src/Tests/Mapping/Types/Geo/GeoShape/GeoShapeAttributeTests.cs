@@ -18,7 +18,7 @@ namespace Tests.Mapping.Types.Geo.GeoShape
 		public object Minimal { get; set; }
 	}
 
-	public class GeoShapeMappingTests : TypeMappingTestBase<GeoShapeTest>
+	public class GeoShapeAttributeTests : AttributeTestsBase<GeoShapeTest>
 	{
 		protected override object ExpectJson => new
 		{
@@ -40,19 +40,5 @@ namespace Tests.Mapping.Types.Geo.GeoShape
 				}
 			}
 		};
-
-		protected override Func<PropertiesDescriptor<GeoShapeTest>, IPromise<IProperties>> FluentProperties => p => p
-			.GeoShape(s => s
-				.Name(o => o.Full)
-				.Tree(GeoTree.Quadtree)
-				.Orientation(GeoOrientation.ClockWise)
-				.Strategy(GeoStrategy.Recursive)
-				.TreeLevels(3)
-				.PointsOnly()
-				.DistanceErrorPercentage(1)
-			)
-			.GeoShape(b => b
-				.Name(o => o.Minimal)
-			);
 	}
 }

@@ -7,7 +7,6 @@ namespace Tests.Mapping.Types.Specialized.Ip
 	{
 		[Ip(
 			Index = false,
-			PrecisionStep = 4,
 			Boost = 1.3,
 			NullValue = "127.0.0.1",
 			IncludeInAll = true)]
@@ -17,7 +16,7 @@ namespace Tests.Mapping.Types.Specialized.Ip
 		public string Minimal { get; set; }
 	}
 
-	public class IpMappingTests : TypeMappingTestBase<IpTest>
+	public class IpAttributeTests : AttributeTestsBase<IpTest>
 	{
 		protected override object ExpectJson => new
 		{
@@ -27,7 +26,6 @@ namespace Tests.Mapping.Types.Specialized.Ip
 				{
 					type = "ip",
 					index = false,
-					precision_step = 4,
 					boost = 1.3,
 					null_value = "127.0.0.1",
 					include_in_all = true
@@ -38,18 +36,5 @@ namespace Tests.Mapping.Types.Specialized.Ip
 				}
 			}
 		};
-
-		protected override Func<PropertiesDescriptor<IpTest>, IPromise<IProperties>> FluentProperties => p => p
-			.Ip(s => s
-				.Name(o => o.Full)
-				.Index(false)
-				.PrecisionStep(4)
-				.Boost(1.3)
-				.NullValue("127.0.0.1")
-				.IncludeInAll()
-			)
-			.Ip(b => b
-				.Name(o => o.Minimal)
-			);
 	}
 }

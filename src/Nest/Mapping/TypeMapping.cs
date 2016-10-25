@@ -54,7 +54,7 @@ namespace Nest
 		IDynamicTemplateContainer DynamicTemplates { get; set; }
 
 		[JsonProperty("dynamic")]
-		DynamicMapping? Dynamic { get; set; }
+		Union<bool, DynamicMapping> Dynamic { get; set; }
 
 		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]
 		IProperties Properties { get; set; }
@@ -69,7 +69,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public bool? DateDetection { get; set; }
 		/// <inheritdoc/>
-		public DynamicMapping? Dynamic { get; set; }
+		public Union<bool, DynamicMapping> Dynamic { get; set; }
 		/// <inheritdoc/>
 		public IEnumerable<string> DynamicDateFormats { get; set; }
 		/// <inheritdoc/>
@@ -104,7 +104,7 @@ namespace Nest
 		IAllField ITypeMapping.AllField { get; set; }
 		string ITypeMapping.Analyzer { get; set; }
 		bool? ITypeMapping.DateDetection { get; set; }
-		DynamicMapping? ITypeMapping.Dynamic { get; set; }
+		Union<bool, DynamicMapping> ITypeMapping.Dynamic { get; set; }
 		IEnumerable<string> ITypeMapping.DynamicDateFormats { get; set; }
 		IDynamicTemplateContainer ITypeMapping.DynamicTemplates { get; set; }
 		IFieldNamesField ITypeMapping.FieldNamesField { get; set; }
@@ -131,10 +131,7 @@ namespace Nest
 		public TypeMappingDescriptor<T> AutoMap(int maxRecursion) => AutoMap(null, maxRecursion);
 
 		/// <inheritdoc/>
-		public TypeMappingDescriptor<T> Dynamic(DynamicMapping dynamic) => Assign(a => a.Dynamic = dynamic);
-
-		/// <inheritdoc/>
-		public TypeMappingDescriptor<T> Dynamic(bool dynamic = true) => this.Dynamic(dynamic ? DynamicMapping.Allow : DynamicMapping.Ignore);
+		public TypeMappingDescriptor<T> Dynamic(Union<bool, DynamicMapping> dynamic) => Assign(a => a.Dynamic = dynamic);
 
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> Parent(TypeName parentType) => Assign(a => a.ParentField = new ParentField { Type = parentType });

@@ -13,7 +13,7 @@ namespace Tests.Mapping.Types.Core.Percolator
 		public QueryContainer Query { get; set; }
 	}
 
-	public class PercolatorMappingTests : TypeMappingTestBase<PercolatorTest>
+	public class PercolatorAttributeTests : AttributeTestsBase<PercolatorTest>
 	{
 		protected override object ExpectJson => new
 		{
@@ -25,10 +25,5 @@ namespace Tests.Mapping.Types.Core.Percolator
 				}
 			}
 		};
-
-		protected override Func<PropertiesDescriptor<PercolatorTest>, IPromise<IProperties>> FluentProperties => p => p
-			.Percolator(s => s
-				.Name(o => o.Query)
-			);
 	}
 }

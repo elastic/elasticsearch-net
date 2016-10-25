@@ -854,7 +854,6 @@
     <Compile Include="Mapping\Types\Core\Boolean\BooleanProperty.cs" />
     <Compile Include="Mapping\Types\Core\Date\DateAttribute.cs" />
     <Compile Include="Mapping\Types\Core\Date\DateProperty.cs" />
-    <Compile Include="Mapping\Types\Core\Date\NumericResolutionUnit.cs" />
     <Compile Include="Mapping\Types\Core\Keyword\KeywordAttribute.cs" />
     <Compile Include="Mapping\Types\Core\Keyword\KeywordProperty.cs" />
     <Compile Include="Mapping\Types\Core\Number\NumberAttribute.cs" />

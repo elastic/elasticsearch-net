@@ -16,7 +16,7 @@ namespace Tests.Mapping.Types.Core.Boolean
 		public bool Minimal { get; set; }
 	}
 
-	public class BooleanMappingTests : TypeMappingTestBase<BooleanTest>
+	public class BooleanAttributeTests : AttributeTestsBase<BooleanTest>
 	{
 		protected override object ExpectJson => new
 		{
@@ -36,17 +36,5 @@ namespace Tests.Mapping.Types.Core.Boolean
 				}
 			}
 		};
-
-		protected override Func<PropertiesDescriptor<BooleanTest>, IPromise<IProperties>> FluentProperties => p => p
-			.Boolean(s => s
-				.Name(o => o.Full)
-				.DocValues(false)
-				.Similarity(SimilarityOption.BM25)
-				.Index(false)
-				.Store(true)
-			)
-			.Boolean(s => s
-				.Name(o => o.Minimal)
-			);
 	}
 }

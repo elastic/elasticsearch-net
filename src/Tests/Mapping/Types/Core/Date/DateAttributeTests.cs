@@ -12,10 +12,8 @@ namespace Tests.Mapping.Types.Core.Date
 			Index = false,
 			Boost = 1.2,
 			IncludeInAll = false,
-			PrecisionStep = 5,
 			IgnoreMalformed = true,
-			Format = "MM/dd/yyyy",
-			NumericResolution = NumericResolutionUnit.Milliseconds)]
+			Format = "MM/dd/yyyy")]
 		public DateTime Full { get; set; }
 
 		[Date]
@@ -26,7 +24,7 @@ namespace Tests.Mapping.Types.Core.Date
 		public DateTimeOffset InferredOffset { get; set; }
 	}
 
-	public class DateMappingTests : TypeMappingTestBase<DateTest>
+	public class DateAttributeTests : AttributeTestsBase<DateTest>
 	{
 		protected override object ExpectJson => new
 		{
@@ -41,10 +39,8 @@ namespace Tests.Mapping.Types.Core.Date
 					index = false,
 					boost = 1.2,
 					include_in_all = false,
-					precision_step = 5,
 					ignore_malformed = true,
-					format = "MM/dd/yyyy",
-					numeric_resolution = "milliseconds"
+					format = "MM/dd/yyyy"
 				},
 				minimal = new
 				{
@@ -60,29 +56,5 @@ namespace Tests.Mapping.Types.Core.Date
 				}
 			}
 		};
-
-		protected override Func<PropertiesDescriptor<DateTest>, IPromise<IProperties>> FluentProperties => m => m
-			.Date(d => d
-				.Name(o => o.Full)
-				.DocValues()
-				.Similarity(SimilarityOption.Classic)
-				.Store()
-				.Index(false)
-				.Boost(1.2)
-				.IncludeInAll(false)
-				.PrecisionStep(5)
-				.IgnoreMalformed()
-				.Format("MM/dd/yyyy")
-				.NumericResolution(NumericResolutionUnit.Milliseconds)
-			)
-			.Date(d => d
-				.Name(o => o.Minimal)
-			)
-			.Date(d => d
-				.Name(o => o.Inferred)
-			)
-			.Date(d => d
-				.Name(o => o.InferredOffset)
-			);
 	}
 }

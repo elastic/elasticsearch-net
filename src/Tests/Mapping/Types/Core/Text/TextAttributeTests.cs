@@ -27,10 +27,8 @@ namespace Tests.Mapping.Types.Core.Text
 		public string Inferred { get; set; }
 	}
 
-	public class TextMappingTests : TypeMappingTestBase<TextTest>
+	public class TextAttributeTests : AttributeTestsBase<TextTest>
 	{
-		protected override bool AutoMap => true;
-
 		protected override object ExpectJson => new
 		{
 			properties = new
@@ -69,43 +67,5 @@ namespace Tests.Mapping.Types.Core.Text
 				}
 			}
 		};
-
-		protected override Func<PropertiesDescriptor<TextTest>, IPromise<IProperties>> FluentProperties => p => p
-			.Text(t => t
-				.Name(o => o.Full)
-				.Analyzer("myanalyzer")
-				.Boost(1.2)
-				.EagerGlobalOrdinals()
-				.Fielddata()
-				.IncludeInAll(false)
-				.Index()
-				.IndexOptions(IndexOptions.Offsets)
-				.PositionIncrementGap(5)
-				.SearchAnalyzer("mysearchanalyzer")
-				.SearchQuoteAnalyzer("mysearchquoteanalyzer")
-				.Similarity(SimilarityOption.Classic)
-				.Store()
-				.Norms(false)
-			)
-			.Text(s => s
-				.Name(o => o.Minimal)
-			);
-
-		protected override object ExpectJsonFluentOnly => new
-		{
-			properties = new
-			{
-				full = new
-				{
-					type = "text",
-					norms = true
-				}
-			}
-		};
-		protected override Func<PropertiesDescriptor<TextTest>, IPromise<IProperties>> FluentOnlyProperties => p => p
-			.Text(s => s
-				.Name(o => o.Full)
-				.Norms()
-			);
 	}
 }

@@ -32,7 +32,7 @@ namespace Tests.Mapping.Types.Core.String
 		public Guid Guid { get; set; }
 	}
 
-	public class StringMappingTests : TypeMappingTestBase<StringTest>
+	public class StringAttributeTests : AttributeTestsBase<StringTest>
 	{
 		protected override object ExpectJson => new
 		{
@@ -80,58 +80,6 @@ namespace Tests.Mapping.Types.Core.String
 				}
 			}
 		};
-
-		protected override Func<PropertiesDescriptor<StringTest>, IPromise<IProperties>> FluentProperties => p => p
-			.String(s => s
-				.Name(o => o.Full)
-				.Analyzer("myanalyzer")
-				.Boost(1.2)
-				.DocValues()
-				.IgnoreAbove(50)
-				.IncludeInAll(false)
-				.Index(FieldIndexOption.NotAnalyzed)
-				.IndexOptions(IndexOptions.Offsets)
-				.NullValue("na")
-				.PositionIncrementGap(5)
-				.SearchAnalyzer("mysearchanalyzer")
-				.Similarity(SimilarityOption.BM25)
-				.Store(true)
-				.TermVector(TermVectorOption.WithPositionsOffsets)
-			)
-			.String(s => s
-				.Name(o => o.Minimal)
-			)
-			.Text(s => s
-				.Name(o => o.Inferred)
-				.Fields(f => f
-					.Keyword(k => k
-						.Name("keyword")
-					)
-				)
-			)
-			.Keyword(s => s
-				.Name(o => o.Char)
-			)
-			.Keyword(s => s
-				.Name(o => o.Guid)
-			);
-
-		protected override object ExpectJsonFluentOnly => new
-		{
-			properties = new
-			{
-				full = new
-				{
-					type = "string",
-					norms = true
-				}
-			}
-		};
-		protected override Func<PropertiesDescriptor<StringTest>, IPromise<IProperties>> FluentOnlyProperties => p => p
-			.String(s => s
-				.Name(o => o.Full)
-				.Norms()
-			);
 	}
 }
 #pragma warning restore 618

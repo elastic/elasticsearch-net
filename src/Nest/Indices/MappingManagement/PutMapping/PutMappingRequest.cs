@@ -25,7 +25,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IDynamicTemplateContainer DynamicTemplates { get; set; }
 		/// <inheritdoc/>
-		public DynamicMapping? Dynamic { get; set; }
+		public Union<bool, DynamicMapping> Dynamic { get; set; }
 		/// <inheritdoc/>
 		public string Analyzer { get; set; }
 		/// <inheritdoc/>
@@ -63,7 +63,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IDynamicTemplateContainer DynamicTemplates { get; set; }
 		/// <inheritdoc/>
-		public DynamicMapping? Dynamic { get; set; }
+		public Union<bool, DynamicMapping> Dynamic { get; set; }
 		/// <inheritdoc/>
 		public string Analyzer { get; set; }
 		/// <inheritdoc/>
@@ -102,7 +102,7 @@ namespace Nest
 		string ITypeMapping.Analyzer { get; set; }
 		string ITypeMapping.SearchAnalyzer { get; set; }
 		IDynamicTemplateContainer ITypeMapping.DynamicTemplates { get; set; }
-		DynamicMapping? ITypeMapping.Dynamic { get; set; }
+		Union<bool, DynamicMapping> ITypeMapping.Dynamic { get; set; }
 		IFieldNamesField ITypeMapping.FieldNamesField { get; set; }
 		IIndexField ITypeMapping.IndexField { get; set; }
 		FluentDictionary<string, object> ITypeMapping.Meta { get; set; }
@@ -126,10 +126,7 @@ namespace Nest
 		public PutMappingDescriptor<T> AutoMap(int maxRecursion) => AutoMap(null, maxRecursion);
 
 		/// <inheritdoc/>
-		public PutMappingDescriptor<T> Dynamic(DynamicMapping dynamic) => Assign(a => a.Dynamic = dynamic);
-
-		/// <inheritdoc/>
-		public PutMappingDescriptor<T> Dynamic(bool dynamic = true) => this.Dynamic(dynamic ? DynamicMapping.Allow : DynamicMapping.Ignore);
+		public PutMappingDescriptor<T> Dynamic(Union<bool, DynamicMapping> dynamic) => Assign(a => a.Dynamic = dynamic);
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> Parent(TypeName parentType) => Assign(a => a.ParentField = new ParentField { Type = parentType });
