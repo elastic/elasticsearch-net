@@ -250,7 +250,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			var sniffingPipeline = CreatePipeline(uris =>
 				new SniffingConnectionPool(uris, dateTimeProvider: dateTime), dateTimeProvider: dateTime) as RequestPipeline;
 
-			sniffingPipeline.SniffPath.Should().Be("_nodes/_all/settings?flat_settings&timeout=2s");
+			sniffingPipeline.SniffPath.Should().Be("_nodes/http,settings?flat_settings&timeout=2s");
 		}
 	}
 }

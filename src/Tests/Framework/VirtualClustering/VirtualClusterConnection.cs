@@ -36,7 +36,7 @@ namespace Tests.Framework
 			}
 		}
 
-		public bool IsSniffRequest(RequestData requestData) => requestData.Path.StartsWith("_nodes/_all/settings", StringComparison.Ordinal);
+		public bool IsSniffRequest(RequestData requestData) => requestData.Path.StartsWith("_nodes/http,settings", StringComparison.Ordinal);
 		public bool IsPingRequest(RequestData requestData) => requestData.Path == "/" && requestData.Method == HttpMethod.HEAD;
 
 		public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData)
