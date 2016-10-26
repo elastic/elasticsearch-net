@@ -49,7 +49,7 @@ namespace Tests.Framework
 
 		private static ConnectionSettings DefaultSettings(ConnectionSettings settings) => settings
 			.DefaultIndex("default-index")
-			//.PrettyJson()
+			.PrettyJson()
 			.InferMappingFor<Project>(map => map
 				.IndexName("project")
 				.IdProperty(p => p.Name)
