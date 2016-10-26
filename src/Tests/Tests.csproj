@@ -229,6 +229,7 @@
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleUrlTests.cs" />
     <Compile Include="Document\Single\Index\IndexIngestApiTests.cs" />
     <Compile Include="Document\Single\Index\IndexIngestAttachmentApiTests.cs" />
+    <Compile Include="Document\Single\Update\UpdateWithScriptApiTests.cs" />
     <Compile Include="Framework\EndpointTests\ApiIntegrationTestBase.cs" />
     <Compile Include="Framework\EndpointTests\ApiTestBase.cs" />
     <Compile Include="Framework\EndpointTests\TestState\AsyncLazy.cs" />
