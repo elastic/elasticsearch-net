@@ -45,6 +45,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "sort")]
 		IList<ISort> Sort { get; set; }
 
+		[JsonProperty(PropertyName = "search_after")]
+		IList<object> SearchAfter { get; set; }
+
 		[JsonProperty(PropertyName = "suggest")]
 		ISuggestContainer Suggest { get; set; }
 
@@ -108,6 +111,7 @@ namespace Nest
 		public IScriptFields ScriptFields { get; set; }
 		public Union<bool, ISourceFilter> Source { get; set; }
 		public IList<ISort> Sort { get; set; }
+		public IList<object> SearchAfter { get; set; }
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
 		public QueryContainer PostFilter { get; set; }
 		public QueryContainer Query { get; set; }
@@ -150,6 +154,7 @@ namespace Nest
 		public IScriptFields ScriptFields { get; set; }
 		public Union<bool, ISourceFilter> Source { get; set; }
 		public IList<ISort> Sort { get; set; }
+		public IList<object> SearchAfter { get; set; }
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
 		public QueryContainer PostFilter { get; set; }
 		public QueryContainer Query { get; set; }
@@ -203,6 +208,7 @@ namespace Nest
 
 		IDictionary<IndexName, double> ISearchRequest.IndicesBoost { get; set; }
 		IList<ISort> ISearchRequest.Sort { get; set; }
+		IList<object> ISearchRequest.SearchAfter { get; set; }
 		ISuggestContainer ISearchRequest.Suggest { get; set; }
 		IHighlight ISearchRequest.Highlight { get; set; }
 		IList<IRescore> ISearchRequest.Rescore { get; set; }
@@ -370,6 +376,16 @@ namespace Nest
 		///A comma-separated list of fields to return as the field data representation of a field for each hit
 		///</summary>
 		public SearchDescriptor<T> Sort(Func<SortDescriptor<T>, IPromise<IList<ISort>>> selector) => Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<T>())?.Value);
+
+		///<summary>
+		/// Sort values that can be used to start returning results "after" any document in the result list.
+		///</summary>
+		public SearchDescriptor<T> SearchAfter(IList<object> searchAfter) => Assign(a => a.SearchAfter = searchAfter);
+
+		///<summary>
+		/// Sort values that can be used to start returning results "after" any document in the result list.
+		///</summary>
+		public SearchDescriptor<T> SearchAfter(params object[] searchAfter) => Assign(a => a.SearchAfter = searchAfter);
 
 		///<summary>
 		/// The suggest feature suggests similar looking terms based on a provided text by using a suggester
