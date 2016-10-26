@@ -63,6 +63,9 @@ namespace Nest
 		public TDescriptor Dynamic(Union<bool, DynamicMapping> dynamic) =>
 			Assign(a => a.Dynamic = dynamic);
 
+		public TDescriptor Dynamic(bool dynamic = true) =>
+			Assign(a => a.Dynamic = dynamic);
+
 		public TDescriptor Enabled(bool enabled = true) =>
 			Assign(a => a.Enabled = enabled);
 

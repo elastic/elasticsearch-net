@@ -133,6 +133,11 @@ namespace Nest
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> Dynamic(Union<bool, DynamicMapping> dynamic) => Assign(a => a.Dynamic = dynamic);
 
+
+		/// <inheritdoc/>
+		public TypeMappingDescriptor<T> Dynamic(bool dynamic = true) => Assign(a => a.Dynamic = dynamic);
+
+
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> Parent(TypeName parentType) => Assign(a => a.ParentField = new ParentField { Type = parentType });
 
