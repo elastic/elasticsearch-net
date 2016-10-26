@@ -10,22 +10,8 @@ namespace Nest
 		where TDocument : class
 		where TPartialDocument : class
 	{
-		// TODO replace these with IScript?
 		[JsonProperty(PropertyName = "script")]
-		string Script { get; set; }
-
-		[JsonProperty(PropertyName = "script_id")]
-		string ScriptId { get; set; }
-
-		[JsonProperty(PropertyName = "script_file")]
-		string ScriptFile { get; set; }
-
-		[JsonProperty(PropertyName = "lang")]
-		string Language { get; set; }
-
-		[JsonProperty(PropertyName = "params")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		Dictionary<string, object> Params { get; set; }
+		IScript Script { get; set; }
 
 		[JsonProperty(PropertyName = "upsert")]
 		TDocument Upsert { get; set; }
@@ -44,11 +30,7 @@ namespace Nest
 		where TDocument : class
 		where TPartialDocument : class
 	{
-		public string Script { get; set; }
-		public string ScriptFile { get; set; }
-		public string ScriptId { get; set; }
-		public string Language { get; set; }
-		public Dictionary<string, object> Params { get; set; }
+		public IScript Script { get; set; }
 		public TDocument Upsert { get; set; }
 		public bool? DocAsUpsert { get; set; }
 		public TPartialDocument Doc { get; set; }
@@ -65,15 +47,7 @@ namespace Nest
 		where TDocument : class
 		where TPartialDocument : class
 	{
-		string IUpdateRequest<TDocument, TPartialDocument>.Script { get; set; }
-
-		string IUpdateRequest<TDocument, TPartialDocument>.ScriptId { get; set; }
-
-		string IUpdateRequest<TDocument, TPartialDocument>.ScriptFile { get; set; }
-
-		string IUpdateRequest<TDocument, TPartialDocument>.Language { get; set; }
-
-		Dictionary<string, object> IUpdateRequest<TDocument, TPartialDocument>.Params { get; set; }
+		IScript IUpdateRequest<TDocument, TPartialDocument>.Script { get; set; }
 
 		TDocument IUpdateRequest<TDocument, TPartialDocument>.Upsert { get; set; }
 
@@ -82,15 +56,6 @@ namespace Nest
 		TPartialDocument IUpdateRequest<TDocument, TPartialDocument>.Doc { get; set; }
 
 		bool? IUpdateRequest<TDocument, TPartialDocument>.DetectNoop { get; set; }
-
-		public UpdateDescriptor<TDocument, TPartialDocument> Script(string script) => Assign(a => a.Script = script);
-
-		public UpdateDescriptor<TDocument, TPartialDocument> ScriptFile(string scriptFile) => Assign(a => a.ScriptFile = scriptFile);
-
-		public UpdateDescriptor<TDocument, TPartialDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary) =>
-			Assign(a => a.Params = paramDictionary(new FluentDictionary<string, object>()));
-
-		public UpdateDescriptor<TDocument, TPartialDocument> Language(string language) => Assign(a => a.Language = language);
 
 		/// <summary>
 		/// The full document to be created if an existing document does not exist for a partial merge.
@@ -106,6 +71,9 @@ namespace Nest
 
 		public UpdateDescriptor<TDocument, TPartialDocument> DetectNoop(bool detectNoop = true) => Assign(a => a.DetectNoop = detectNoop);
 
+		public UpdateDescriptor<TDocument, TPartialDocument> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
+			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
+
 		public UpdateDescriptor<TDocument, TPartialDocument> Fields(Fields fields) =>
 			Assign(a => a.RequestParameters.AddQueryString("fields", fields));
 
@@ -114,6 +82,5 @@ namespace Nest
 
 		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params string[] fields) =>
 			Assign(a => a.RequestParameters.AddQueryString("fields", fields));
-
 	}
 }
