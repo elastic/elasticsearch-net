@@ -37,7 +37,8 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					{
 						keyword = new
 						{
-							type = "keyword"
+							type = "keyword",
+							ignore_above = 256
 						}
 					},
 					type = "text"
@@ -224,7 +225,11 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						{
 							Fields = new Properties
 							{
-								{ "keyword", new KeywordProperty() }
+								{ "keyword", new KeywordProperty
+									{
+										IgnoreAbove = 256
+									}
+								}
 							}
 						}
 				},
