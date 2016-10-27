@@ -43,7 +43,8 @@ namespace Tests.Mapping.Types.Complex.Nested
 							{
 								keyword = new
 								{
-									type = "keyword"
+									type = "keyword",
+									ignore_above = 256
 								}
 							}
 						}
@@ -61,7 +62,8 @@ namespace Tests.Mapping.Types.Complex.Nested
 							{
 								keyword = new
 								{
-									type = "keyword"
+									type = "keyword",
+									ignore_above = 256
 								}
 							}
 						}
