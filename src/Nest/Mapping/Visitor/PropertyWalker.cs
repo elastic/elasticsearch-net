@@ -91,7 +91,11 @@ namespace Nest
 				{
 					Fields = new Properties
 					{
-						{ "keyword", new KeywordProperty() }
+						{ "keyword", new KeywordProperty
+							{
+								IgnoreAbove = 256
+							}
+						}
 					}
 				};
 

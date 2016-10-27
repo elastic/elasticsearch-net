@@ -61,7 +61,8 @@ namespace Tests.Mapping.Types.Core.Text
 					{
 						keyword = new
 						{
-							type = "keyword"
+							type = "keyword",
+							ignore_above = 256
 						}
 					}
 				}

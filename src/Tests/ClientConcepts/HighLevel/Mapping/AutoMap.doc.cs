@@ -171,7 +171,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 										{
 											keyword = new
 											{
-												type = "keyword"
+												type = "keyword",
+												ignore_above = 256
 											}
 										},
 										type = "text"
@@ -190,7 +191,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 										{
 											keyword = new
 											{
-												type = "keyword"
+												type = "keyword",
+												ignore_above = 256
 											}
 										},
 										type = "text"
@@ -208,7 +210,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								{
 									keyword = new
 									{
-										type = "keyword"
+										type = "keyword",
+										ignore_above = 256
 									}
 								},
 								type = "text"
@@ -234,7 +237,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								{
 									keyword = new
 									{
-										type = "keyword"
+										type = "keyword",
+										ignore_above = 256
 									}
 								},
 								type = "text"
@@ -253,7 +257,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								{
 									keyword = new
 									{
-										type = "keyword"
+										type = "keyword",
+										ignore_above = 256
 									}
 								},
 								type = "text"
@@ -312,7 +317,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								{
 									keyword = new
 									{
-										type = "keyword"
+										type = "keyword",
+										ignore_above = 256
 									}
 								}
 							},
@@ -426,7 +432,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 										{
 											keyword = new
 											{
-												type = "keyword"
+												type = "keyword",
+												ignore_above = 256
 											}
 										},
 										type = "text"
@@ -445,7 +452,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 										{
 											keyword = new
 											{
-												type = "keyword"
+												type = "keyword",
+												ignore_above = 256
 											}
 										},
 										type = "text"
@@ -498,7 +506,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 										{
 											keyword = new
 											{
-												type = "keyword"
+												type = "keyword",
+												ignore_above = 256
 											}
 										},
 										type = "text"
@@ -517,7 +526,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 										{
 											keyword = new
 											{
-												type = "keyword"
+												type = "keyword",
+												ignore_above = 256
 											}
 										},
 										type = "text"
@@ -657,7 +667,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 										{
 											keyword = new
 											{
-												type = "keyword"
+												type = "keyword",
+												ignore_above = 256
 											}
 										},
 										type = "text"
@@ -676,7 +687,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 										{
 											keyword = new
 											{
-												type = "keyword"
+												type = "keyword",
+												ignore_above = 256
 											}
 										},
 										type = "text"
@@ -780,7 +792,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								{
 									keyword = new
 									{
-										type = "keyword"
+										type = "keyword",
+										ignore_above = 256
 									}
 								}
 							}

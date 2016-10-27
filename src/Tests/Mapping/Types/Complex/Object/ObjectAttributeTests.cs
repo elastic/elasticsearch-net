@@ -39,7 +39,8 @@ namespace Tests.Mapping.Types.Complex.Object
 							{
 								keyword = new
 								{
-									type = "keyword"
+									type = "keyword",
+									ignore_above = 256
 								}
 							}
 						}
@@ -57,7 +58,8 @@ namespace Tests.Mapping.Types.Complex.Object
 							{
 								keyword = new
 								{
-									type = "keyword"
+									type = "keyword",
+									ignore_above = 256
 								}
 							}
 						}
