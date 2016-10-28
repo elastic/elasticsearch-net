@@ -5,13 +5,17 @@ using System.Text.RegularExpressions;
 
 namespace Elasticsearch.Net
 {
-	internal class SniffResponse
+	public class SniffResponse
 	{
+		//internal ctor  - so that only Elasticsearch.Net can instantiate it
+		internal SniffResponse()
+		{
+		}
 
-		private static Regex AddressRe { get; } = new Regex(@"^((?<fqdn>[^/]+)/)?(?<ip>[^:]+):(?<port>\d+)$");
+		public static Regex AddressRegex { get; } = new Regex(@"^((?<fqdn>[^/]+)/)?(?<ip>[^:]+|\[[\da-fA-F:\.]+\]):(?<port>\d+)$");
 
 		public string cluster_name { get; set; }
-		public Dictionary<string, NodeInfo> nodes { get; set; }
+		internal Dictionary<string, NodeInfo> nodes { get; set; }
 
 		public IEnumerable<Node> ToNodes(bool forceHttp = false)
 		{
@@ -31,7 +35,7 @@ namespace Elasticsearch.Net
 		{
 			if (boundAddress.IsNullOrEmpty()) return null;
 			var suffix = forceHttp ? "s" : string.Empty;
-			var match = AddressRe.Match(boundAddress);
+			var match = AddressRegex.Match(boundAddress);
 			if (!match.Success) throw new Exception($"Can not parse bound_address: {boundAddress} to Uri");
 
 			var fqdn = match.Groups["fqdn"].Value?.Trim();
