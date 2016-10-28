@@ -7,8 +7,7 @@ namespace Elasticsearch.Net
 {
 	internal class SniffResponse
 	{
-
-		private static Regex AddressRe { get; } = new Regex(@"^((?<fqdn>[^/]+)/)?(?<ip>[^:]+):(?<port>\d+)$");
+		internal static Regex AddressRe { get; } = new Regex(@"^((?<fqdn>[^/]+)/)?(?<ip>[^:]+|\[[\da-fA-F:\.]+\]):(?<port>\d+)$");
 
 		public string cluster_name { get; set; }
 		public Dictionary<string, NodeInfo> nodes { get; set; }
@@ -71,5 +70,16 @@ namespace Elasticsearch.Net
 	internal class NodeInfoHttp
 	{
 		public IList<string> bound_address { get; set; }
+	}
+
+	/// <summary>
+	/// Exposes <see cref="SniffResponse.AddressRe"/> - for unit testing purposes only
+	/// </summary>
+	public static class SniffResponseTesting
+	{
+		public static Regex AddressRe
+		{
+			get { return SniffResponse.AddressRe; }
+		}
 	}
 }
