@@ -28,7 +28,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				var ip = testcases[i, 1];
 				var port = testcases[i, 2];
 
-				var match = Elasticsearch.Net.SniffResponseTesting.AddressRe.Match(address);
+				var match = Elasticsearch.Net.SniffResponse.AddressRegex.Match(address);
 
 				match.Success.Should().BeTrue();
 
