@@ -141,6 +141,10 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				{
 					type = "integer"
 				},
+				numberOfContributors = new
+				{
+					type = "integer"
+				},
 				startedOn = new
 				{
 					type = "date"
@@ -273,6 +277,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				{ p => p.Metadata, new ObjectProperty() },
 				{ p => p.Name, new TextProperty { Index = false }  },
 				{ p => p.NumberOfCommits, new NumberProperty(NumberType.Integer) },
+				{ p => p.NumberOfContributors, new NumberProperty(NumberType.Integer) },
 				{ p => p.StartedOn, new DateProperty() },
 				{ p => p.State, new NumberProperty(NumberType.Integer) },
 				{ p => p.Suggest, new CompletionProperty() },

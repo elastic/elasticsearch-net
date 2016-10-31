@@ -22,6 +22,7 @@ namespace Tests.Framework.MockData
 		public Dictionary<string, Metadata> Metadata { get; set; }
 		public SimpleGeoPoint Location { get; set; }
 		public int? NumberOfCommits { get; set; }
+		public int? NumberOfContributors { get; set; }
 		public CompletionField Suggest { get; set; }
 		public IEnumerable<string> Branches { get; set; }
 
@@ -38,6 +39,7 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.CuratedTags, f => Tag.Generator.Generate(Gimme.Random.Number(1, 5)).ToList())
 				.RuleFor(p => p.Location, f => SimpleGeoPoint.Generator.Generate())
 				.RuleFor(p => p.NumberOfCommits, f => Gimme.Random.Number(1, 1000))
+				.RuleFor(p => p.NumberOfContributors, f => Gimme.Random.Number(1, 200))
 				.RuleFor(p => p.Suggest, f => new CompletionField
 					{
 						Input = new[] { f.Person.Company.Name },
