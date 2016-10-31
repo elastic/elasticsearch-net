@@ -7,6 +7,11 @@ namespace Elasticsearch.Net
 {
 	public class SniffResponse
 	{
+		//internal ctor  - so that only Elasticsearch.Net can instantiate it
+		internal SniffResponse()
+		{
+		}
+
 		public static Regex AddressRegex { get; } = new Regex(@"^((?<fqdn>[^/]+)/)?(?<ip>[^:]+|\[[\da-fA-F:\.]+\]):(?<port>\d+)$");
 
 		public string cluster_name { get; set; }
