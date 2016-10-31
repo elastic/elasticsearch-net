@@ -5,12 +5,12 @@ using System.Text.RegularExpressions;
 
 namespace Elasticsearch.Net
 {
-	internal class SniffResponse
+	public class SniffResponse
 	{
-		internal static Regex AddressRe { get; } = new Regex(@"^((?<fqdn>[^/]+)/)?(?<ip>[^:]+|\[[\da-fA-F:\.]+\]):(?<port>\d+)$");
+		public static Regex AddressRegex { get; } = new Regex(@"^((?<fqdn>[^/]+)/)?(?<ip>[^:]+|\[[\da-fA-F:\.]+\]):(?<port>\d+)$");
 
 		public string cluster_name { get; set; }
-		public Dictionary<string, NodeInfo> nodes { get; set; }
+		internal Dictionary<string, NodeInfo> nodes { get; set; }
 
 		public IEnumerable<Node> ToNodes(bool forceHttp = false)
 		{
@@ -30,7 +30,7 @@ namespace Elasticsearch.Net
 		{
 			if (boundAddress.IsNullOrEmpty()) return null;
 			var suffix = forceHttp ? "s" : string.Empty;
-			var match = AddressRe.Match(boundAddress);
+			var match = AddressRegex.Match(boundAddress);
 			if (!match.Success) throw new Exception($"Can not parse bound_address: {boundAddress} to Uri");
 
 			var fqdn = match.Groups["fqdn"].Value?.Trim();
@@ -70,16 +70,5 @@ namespace Elasticsearch.Net
 	internal class NodeInfoHttp
 	{
 		public IList<string> bound_address { get; set; }
-	}
-
-	/// <summary>
-	/// Exposes <see cref="SniffResponse.AddressRe"/> - for unit testing purposes only
-	/// </summary>
-	public static class SniffResponseTesting
-	{
-		public static Regex AddressRe
-		{
-			get { return SniffResponse.AddressRe; }
-		}
 	}
 }
