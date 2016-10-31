@@ -242,7 +242,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 				p => p.Name,
 				p => p.Description,
 				p => p.CuratedTags.First().Name,
-				p => p.LeadDeveloper.FirstName
+				p => p.LeadDeveloper.FirstName,
+				p => p.Metadata["hardcoded"]
 			};
 
 			/** and we want to append the suffix "raw" to each */
@@ -253,6 +254,17 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect("description.raw").WhenSerializing(fieldExpressions[1]);
 			Expect("curatedTags.name.raw").WhenSerializing(fieldExpressions[2]);
 			Expect("leadDeveloper.firstName.raw").WhenSerializing(fieldExpressions[3]);
+			Expect("metadata.hardcoded.raw").WhenSerializing(fieldExpressions[4]);
+
+			/** or we might even want to chain multiple `.AppendSuffix()` calls */
+			var multiSuffixFieldExpressions =
+				expressions.Select<Expression<Func<Project, object>>, Field>(e => e.AppendSuffix("raw").AppendSuffix("evendeeper")).ToList();
+
+			Expect("name.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[0]);
+			Expect("description.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[1]);
+			Expect("curatedTags.name.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[2]);
+			Expect("leadDeveloper.firstName.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[3]);
+			Expect("metadata.hardcoded.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[4]);
 		}
 
 		/**=== Attribute based naming

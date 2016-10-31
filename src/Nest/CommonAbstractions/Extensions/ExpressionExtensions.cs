@@ -31,7 +31,7 @@ namespace Nest
 				this.suffix = suffix;
 			}
 
-			protected override Expression VisitMember(MemberExpression node)
+			public override Expression Visit(Expression node)
 			{
 				return Expression.Call(
 					typeof(SuffixExtensions),
