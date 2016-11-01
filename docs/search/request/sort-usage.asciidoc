@@ -50,6 +50,7 @@ s => s
         .Ascending()
         .Script(script => script
             .Inline("doc['numberOfCommits'].value * factor")
+            .Lang("groovy")
             .Params(p => p.Add("factor", 1.1))
         )
     )
@@ -93,6 +94,7 @@ new SearchRequest<Project>
             Order = SortOrder.Ascending,
             Script =  new InlineScript("doc['numberOfCommits'].value * factor")
             {
+                Lang = "groovy",
                 Params = new Dictionary<string, object>
                 {
                     { "factor", 1.1 }
@@ -166,7 +168,8 @@ new SearchRequest<Project>
           "params": {
             "factor": 1.1
           },
-          "inline": "doc['numberOfCommits'].value * factor"
+          "inline": "doc['numberOfCommits'].value * factor",
+          "lang": "groovy"
         }
       }
     }

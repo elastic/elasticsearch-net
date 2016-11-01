@@ -29,7 +29,7 @@ s => s
                 .Compression(200)
             )
         )
-        .Script("doc['numberOfCommits'].value * 1.2")
+        .Script(ss => ss.Inline("doc['numberOfCommits'].value * 1.2").Lang("groovy"))
         .Missing(0)
     )
 )
@@ -48,7 +48,7 @@ new SearchRequest<Project>
         {
             Compression = 200
         },
-        Script = (InlineScript)"doc['numberOfCommits'].value * 1.2",
+        Script = new InlineScript("doc['numberOfCommits'].value * 1.2") { Lang = "groovy" },
         Missing = 0
     }
 }
@@ -70,7 +70,8 @@ new SearchRequest<Project>
           "compression": 200.0
         },
         "script": {
-          "inline": "doc['numberOfCommits'].value * 1.2"
+          "inline": "doc['numberOfCommits'].value * 1.2",
+          "lang": "groovy"
         },
         "missing": 0.0
       }

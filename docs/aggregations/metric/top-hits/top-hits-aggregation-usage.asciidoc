@@ -30,7 +30,7 @@ s => s
                     .Order(SortOrder.Descending)
                 )
                 .Source(src => src
-                    .Include(fs => fs
+                    .Includes(fs => fs
                         .Field(p => p.Name)
                         .Field(p => p.StartedOn)
                     )
@@ -51,6 +51,7 @@ s => s
                 .ScriptFields(sfs => sfs
                     .ScriptField("commit_factor", sf => sf
                         .Inline("doc['numberOfCommits'].value * 2")
+                        .Lang("groovy")
                     )
                 )
             )
@@ -78,7 +79,7 @@ new SearchRequest<Project>
             },
             Source = new SourceFilter
             {
-                Include = new [] { "name", "startedOn" }
+                Includes = new [] { "name", "startedOn" }
             },
             Size = 1,
             Version = true,
@@ -94,7 +95,9 @@ new SearchRequest<Project>
             },
             ScriptFields = new ScriptFields
             {
-                { "commit_factor", new ScriptField { Script = new InlineScript("doc['numberOfCommits'].value * 2") } }
+                { "commit_factor", new ScriptField {
+                    Script = new InlineScript("doc['numberOfCommits'].value * 2") { Lang = "groovy" }
+                } }
             }
         }
     }
@@ -121,7 +124,7 @@ new SearchRequest<Project>
               }
             ],
             "_source": {
-              "include": [
+              "includes": [
                 "name",
                 "startedOn"
               ]
@@ -142,7 +145,8 @@ new SearchRequest<Project>
             "script_fields": {
               "commit_factor": {
                 "script": {
-                  "inline": "doc['numberOfCommits'].value * 2"
+                  "inline": "doc['numberOfCommits'].value * 2",
+                  "lang": "groovy"
                 }
               }
             }

@@ -1,0 +1,57 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Mapping/LocalMetadata/LocalMetadataUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[local-metadata-usage]]
+== Local Metadata Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+f => f
+.Properties(ps => ps
+    .Number(t => t
+        .Name(p => p.NumberOfCommits)
+        .LocalMetadata(m => m
+            .Add("foo", "bar")
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new TypeMapping
+{
+    Properties = new Properties
+    {
+        { "numberOfCommits", new NumberProperty { LocalMetadata = new Dictionary<string, object> { { "foo", "bar" } } } }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "properties": {
+    "numberOfCommits": {
+      "type": "float"
+    }
+  }
+}
+----
+

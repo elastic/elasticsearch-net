@@ -161,6 +161,7 @@ s => s
         .Filter(f => f
             .Script(b => b
                 .Inline(_ctxNumberofCommits)
+                .Lang("groovy")
             )
         )
     )
@@ -177,8 +178,9 @@ new SearchRequest<Project>
     {
         Filter = new ScriptQuery
         {
-            Inline = _ctxNumberofCommits
-        }
+            Inline = _ctxNumberofCommits,
+            Lang = "groovy"
+    }
     }
 }
 ----
@@ -192,7 +194,8 @@ new SearchRequest<Project>
       "filter": {
         "script": {
           "script": {
-            "inline": "_source.numberOfCommits > 0"
+            "inline": "_source.numberOfCommits > 0",
+            "lang": "groovy"
           }
         }
       }

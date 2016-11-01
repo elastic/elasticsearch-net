@@ -112,48 +112,48 @@ sniffingPipeline.FirstPoolUsageNeedsSniffing.Should().BeFalse();
 
 ==== Wait for first Sniff
 
-All threads wait for the sniff on startup to finish, waiting the request timeout period. A https://msdn.microsoft.com/en-us/library/system.threading.semaphoreslim(v=vs.110).aspx[`SemaphoreSlim`] 
+All threads wait for the sniff on startup to finish, waiting the request timeout period. A https://msdn.microsoft.com/en-us/library/system.threading.semaphoreslim(v=vs.110).aspx[`SemaphoreSlim`]
 is used to block threads until the sniff finishes and waiting threads release the `SemaphoreSlim` appropriately.
 
 [source,csharp]
 ----
 var response = new
+{
+    cluster_name = "elasticsearch",
+    nodes = new
+    {
+        node1 = new
+        {
+            name = "Node Name 1",
+            transport_address = "127.0.0.1:9300",
+            host = "127.0.0.1",
+            ip = "127.0.01",
+            version = "5.0.0-alpha3",
+            build = "e455fd0",
+            http_address = "127.0.0.1:9200",
+            settings = new JObject
             {
-     cluster_name = "elasticsearch",
-     nodes = new
-     {
-         node1 = new
-         {
-             name = "Node Name 1",
-             transport_address = "127.0.0.1:9300",
-             host = "127.0.0.1",
-             ip = "127.0.01",
-             version = "5.0.0-alpha3",
-             build = "e455fd0",
-             http_address = "127.0.0.1:9200",
-             settings = new JObject
-             {
-                 {"client.type", "node"},
-                 {"cluster.name", "elasticsearch"},
-                 {"config.ignore_system_properties", "true"},
-                 {"name", "Node Name 1"},
-                 {"path.home", "c:\\elasticsearch\\elasticsearch"},
-                 {"path.logs", "c:/ elasticsearch/logs"}
-             }
-         }
-     }
-            };
+                {"client.type", "node"},
+                {"cluster.name", "elasticsearch"},
+                {"config.ignore_system_properties", "true"},
+                {"name", "Node Name 1"},
+                {"path.home", "c:\\elasticsearch\\elasticsearch"},
+                {"path.logs", "c:/ elasticsearch/logs"}
+            }
+        }
+    }
+};
 
 var responseBody = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(response));
 
 var inMemoryConnection = new WaitingInMemoryConnection(
-                TimeSpan.FromSeconds(1), 
-                responseBody);
+    TimeSpan.FromSeconds(1),
+    responseBody);
 
 var sniffingPipeline = CreatePipeline(
-                uris => new SniffingConnectionPool(uris), 
-                connection: inMemoryConnection, 
-                settingsSelector: s => s.RequestTimeout(TimeSpan.FromSeconds(2)));
+    uris => new SniffingConnectionPool(uris),
+    connection: inMemoryConnection,
+    settingsSelector: s => s.RequestTimeout(TimeSpan.FromSeconds(2)));
 
 var semaphoreSlim = new SemaphoreSlim(1, 1);
 ----
@@ -319,6 +319,6 @@ var dateTime = new TestableDateTimeProvider();
 var sniffingPipeline = CreatePipeline(uris =>
     new SniffingConnectionPool(uris, dateTimeProvider: dateTime), dateTimeProvider: dateTime) as RequestPipeline;
 
-sniffingPipeline.SniffPath.Should().Be("_nodes/_all/settings?flat_settings&timeout=2s");
+sniffingPipeline.SniffPath.Should().Be("_nodes/http,settings?flat_settings&timeout=2s");
 ----
 

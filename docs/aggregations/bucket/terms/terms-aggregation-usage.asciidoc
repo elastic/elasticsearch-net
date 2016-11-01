@@ -28,7 +28,7 @@ s => s
         .ShardSize(100)
         .ExecutionHint(TermsAggregationExecutionHint.Map)
         .Missing("n/a")
-        .Script("'State of Being: '+_value")
+        .Script(ss => ss.Inline("'State of Being: '+_value").Lang("groovy"))
         .Order(TermsOrder.TermAscending)
         .Order(TermsOrder.CountDescending)
         .Meta(m => m
@@ -52,7 +52,7 @@ new SearchRequest<Project>
         ShardSize = 100,
         ExecutionHint = TermsAggregationExecutionHint.Map,
         Missing = "n/a",
-        Script = new InlineScript("'State of Being: '+_value"),
+        Script = new InlineScript("'State of Being: '+_value") { Lang = "groovy" },
         Order = new List<TermsOrder>
         {
             TermsOrder.TermAscending,
@@ -83,7 +83,8 @@ new SearchRequest<Project>
         "execution_hint": "map",
         "missing": "n/a",
         "script": {
-          "inline": "'State of Being: '+_value"
+          "inline": "'State of Being: '+_value",
+          "lang": "groovy"
         },
         "order": [
           {

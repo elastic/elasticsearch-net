@@ -86,27 +86,6 @@ new SearchRequest<Project>
 }
 ----
 
-[source,csharp]
-----
-var stats = aggregate.Fields.FirstOrDefault(f => f.Name == name);
-
-stats.Should().NotBeNull();
-
-stats.Count.Should().NotBe(0);
-
-stats.Mean.Should().NotBe(0);
-
-stats.Variance.Should().NotBe(0);
-
-stats.Skewness.Should().NotBe(0);
-
-stats.Kurtosis.Should().NotBe(0);
-
-stats.Covariance.Should().NotBeNull().And.HaveCount(2);
-
-stats.Correlation.Should().NotBeNull().And.HaveCount(2);
-----
-
 === Handling Responses
 
 [source,csharp]

@@ -28,7 +28,7 @@ See the Elasticsearch documentation on {ref_current}/search-request-stored-field
 [source,csharp]
 ----
 s => s
-.Fields(fs => fs
+.StoredFields(fs => fs
     .Field(p => p.Name)
     .Field(p => p.StartedOn)
     .Field(p => p.NumberOfCommits)
@@ -42,7 +42,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
-    Fields = Fields<Project>(
+    StoredFields = Fields<Project>(
         p => p.Name,
         p => p.StartedOn,
         p => p.NumberOfCommits,
@@ -54,7 +54,7 @@ new SearchRequest<Project>
 .Example json output
 ----
 {
-  "fields": [
+  "stored_fields": [
     "name",
     "startedOn",
     "numberOfCommits",

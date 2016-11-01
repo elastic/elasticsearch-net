@@ -26,6 +26,7 @@ Several types implicitly convert to `Indices`
 ----
 Nest.Indices singleIndexFromString = "name";
 Nest.Indices multipleIndicesFromString = "name1, name2";
+Nest.Indices multipleIndicesFromStringArray = new [] { "name1", "name2" };
 Nest.Indices allFromString = "_all";
 Nest.Indices allWithOthersFromString = "_all, name2";
 singleIndexFromString.Match(
@@ -43,6 +44,10 @@ allFromString.Match(
 allWithOthersFromString.Match(
     all => all.Should().NotBeNull(),
     many => many.Indices.Should().BeNull()
+);
+multipleIndicesFromStringArray.Match(
+    all => all.Should().BeNull(),
+    many => many.Indices.Should().HaveCount(2).And.Contain("name2")
 );
 ----
 
@@ -96,6 +101,14 @@ ISearchRequest manyTypedRequest = new SearchDescriptor<Project>().Index(manyType
 ((IUrlParameter)manyStringRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
 
 ((IUrlParameter)manyTypedRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("project,devs"); <3>
+
+manyStringRequest = new SearchDescriptor<Project>().Index(new[] { "name1", "name2" });
+
+((IUrlParameter)manyStringRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
+
+manyStringRequest = new SearchDescriptor<Project>().Type(new[] { "name1", "name2" });
+
+((IUrlParameter)manyStringRequest.Type).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
 ----
 <1> specifying multiple indices using strings
 <2> specifying multiple indices using types
