@@ -85,6 +85,7 @@ namespace Tests.Aggregations.Matrix.MatrixStats
 			AssertField(matrix, "numberOfContributors");
 		}
 
+		// hide
 		private void AssertField(MatrixStatsAggregate aggregate, string name)
 		{
 			var stats = aggregate.Fields.FirstOrDefault(f => f.Name == name);
