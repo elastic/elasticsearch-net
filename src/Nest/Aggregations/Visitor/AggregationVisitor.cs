@@ -33,7 +33,7 @@ namespace Nest
 		void Visit(IValueCountAggregation aggregation);
 		void Visit(IMaxAggregation aggregation);
 		void Visit(IMinAggregation aggregation);
-		void Visit(IStatsAggregator aggregation);
+		void Visit(IStatsAggregation aggregation);
 		void Visit(ISumAggregation aggregation);
 		void Visit(IExtendedStatsAggregation aggregation);
 		void Visit(IDateHistogramAggregation aggregation);
@@ -241,7 +241,7 @@ namespace Nest
 		{
 		}
 
-		public virtual void Visit(IStatsAggregator aggregation)
+		public virtual void Visit(IStatsAggregation aggregation)
 		{
 		}
 

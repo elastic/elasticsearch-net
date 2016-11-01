@@ -109,6 +109,11 @@
     <Compile Include="Aggregations\Bucket\Terms\TermsIncludeExclude.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsIncludeExcludeJsonConverter.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsOrder.cs" />
+    <Compile Include="Aggregations\Matrix\MatrixAggregate.cs" />
+    <Compile Include="Aggregations\Matrix\MatrixAggregation.cs" />
+    <Compile Include="Aggregations\Matrix\MatrixStats\MatrixStatsAggregate.cs" />
+    <Compile Include="Aggregations\Matrix\MatrixStats\MatrixStatsAggregation.cs" />
+    <Compile Include="Aggregations\Matrix\MatrixStats\MatrixStatsMode.cs" />
     <Compile Include="Aggregations\Metric\Average\AverageAggregation.cs" />
     <Compile Include="Aggregations\Metric\Cardinality\CardinalityAggregation.cs" />
     <Compile Include="Aggregations\Metric\ExtendedStats\ExtendedStatsAggregate.cs" />

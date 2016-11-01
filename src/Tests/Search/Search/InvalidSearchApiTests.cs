@@ -17,7 +17,7 @@ namespace Tests.Search.Search
 
 		protected override bool ExpectIsValid => false;
 
-		protected override int ExpectStatusCode => 500;
+		protected override int ExpectStatusCode => 400;
 
 		protected override object ExpectJson => new
 		{
@@ -60,16 +60,14 @@ namespace Tests.Search.Search
 			}
 		};
 
-		/// </summary>
-		/// <param name="response"></param>
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.IsValid.Should().BeFalse();
 			var serverError = response.ServerError;
 			serverError.Should().NotBeNull();
-			serverError.Status.Should().Be(500);
+			serverError.Status.Should().Be(400);
 			serverError.Error.Reason.Should().Be("all shards failed");
-			serverError.Error.RootCause.First().Reason.Should().Contain("[startDates]");
+			serverError.Error.RootCause.First().Reason.Should().Contain("[-1m]");
 
 		}
 	}

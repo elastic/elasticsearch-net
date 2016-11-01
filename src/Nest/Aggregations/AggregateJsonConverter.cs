@@ -77,6 +77,9 @@ namespace Nest
 				case "location":
 					aggregate = GetGeoCentroidAggregate(reader, serializer);
 					break;
+				case "fields":
+					aggregate = GetMatrixStatsAggregate(reader, serializer);
+					break;
 				default:
 					return null;
 			}
@@ -133,6 +136,15 @@ namespace Nest
 			}
 			reader.Read();
 			return meta;
+		}
+
+		private IAggregate GetMatrixStatsAggregate(JsonReader reader, JsonSerializer serializer)
+		{
+			reader.Read();
+			var matrixStats = new MatrixStatsAggregate();
+			var array = JArray.Load(reader);
+			matrixStats.Fields = array.ToObject<List<MatrixStatsField>>();
+			return matrixStats;
 		}
 
 		private IAggregate GetTopHitsAggregate(JsonReader reader, JsonSerializer serializer)

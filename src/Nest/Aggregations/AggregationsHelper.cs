@@ -161,6 +161,9 @@ namespace Nest
 
 		public MultiBucketAggregate<DateHistogramBucket> DateHistogram(string key) => GetBucket<DateHistogramBucket>(key);
 
+		public MatrixStatsAggregate MatrixStats(string key) => this.TryGet<MatrixStatsAggregate>(key);
+
+
 		private TAggregation TryGet<TAggregation>(string key)
 			where TAggregation : class, IAggregate
 		{
