@@ -79,10 +79,15 @@ namespace Tests.QueryDsl.TermLevel.Terms
 		{
 			response.IsValid.Should().BeFalse();
 
-			response.ServerError.Should().NotBeNull();
-			response.ServerError.Status.Should().Be(400);
-			response.ServerError.Error.Should().NotBeNull();
-			var rootCauses = response.ServerError.Error.RootCause;
+			var serverError = response.ServerError;
+
+			serverError.Should().NotBeNull();
+			serverError.Status.Should().Be(400);
+			serverError.Error.Should().NotBeNull();
+			serverError.Error.Line.Should().HaveValue();
+			serverError.Error.Col.Should().HaveValue();
+
+			var rootCauses = serverError.Error.RootCause;
 			rootCauses.Should().NotBeNullOrEmpty();
 			var rootCause = rootCauses.First();
 			rootCause.Type.Should().Be("parsing_exception");

@@ -68,7 +68,8 @@ namespace Tests.Search.Search
 			serverError.Status.Should().Be(400);
 			serverError.Error.Reason.Should().Be("all shards failed");
 			serverError.Error.RootCause.First().Reason.Should().Contain("[-1m]");
-
+			serverError.Error.Phase.Should().NotBeNullOrEmpty();
+			serverError.Error.Grouped.Should().BeTrue();
 		}
 	}
 }
