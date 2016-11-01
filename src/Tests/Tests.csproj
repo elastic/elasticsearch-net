@@ -571,8 +571,6 @@
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryApiTests.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryUrlTests.cs" />
     <Compile Include="Reproduce\GithubIssue2309.cs" />
-    <Compile Include="Search\MultiSearch\MultiSearchApiTests.cs" />
-    <Compile Include="Search\MultiSearch\MultiSearchInvalidApiTests.cs" />
     <Compile Include="Framework\Extensions\UriExtensions.cs" />
     <Compile Include="Framework\Integration\CallUniqueValues.cs" />
     <Compile Include="Framework\Integration\ClientMethod.cs" />

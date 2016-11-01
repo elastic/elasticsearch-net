@@ -29,17 +29,12 @@ namespace Tests.Reproduce
 				""total"": 1,
 				""updated"": 0,
 				""created"": 0,
-				""deleted"": 0,
 				""batches"": 1,
 				""version_conflicts"": 0,
 				""noops"": 0,
-				""retries"": {
-					""bulk"": 0,
-					""search"": 0
-				},
+				""retries"": 0,
 				""throttled_millis"": 0,
-				""requests_per_second"": -1.0,
-				""throttled_until_millis"": 0,
+				""requests_per_second"": ""unlimited"",
 				""failures"": [{
 					""index"": ""employees-v2"",
 					""type"": ""employee"",
