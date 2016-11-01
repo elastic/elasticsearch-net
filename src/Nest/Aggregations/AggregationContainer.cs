@@ -114,7 +114,7 @@ namespace Nest
 		IRangeAggregation Range { get; set; }
 
 		[JsonProperty("stats")]
-		IStatsAggregator Stats { get; set; }
+		IStatsAggregation Stats { get; set; }
 
 		[JsonProperty("sum")]
 		ISumAggregation Sum { get; set; }
@@ -185,6 +185,10 @@ namespace Nest
 		[JsonProperty("geo_centroid")]
 		IGeoCentroidAggregation GeoCentroid { get; set; }
 
+
+		[JsonProperty("matrix_stats")]
+		IMatrixStatsAggregation MatrixStats { get; set; }
+
 		[JsonProperty("aggs")]
 		AggregationDictionary Aggregations { get; set; }
 
@@ -198,7 +202,7 @@ namespace Nest
 		public IValueCountAggregation ValueCount { get; set; }
 		public IMaxAggregation Max { get; set; }
 		public IMinAggregation Min { get; set; }
-		public IStatsAggregator Stats { get; set; }
+		public IStatsAggregation Stats { get; set; }
 		public ISumAggregation Sum { get; set; }
 		public IExtendedStatsAggregation ExtendedStats { get; set; }
 		public IDateHistogramAggregation DateHistogram { get; set; }
@@ -275,6 +279,8 @@ namespace Nest
 
 		public IGeoCentroidAggregation GeoCentroid { get; set; }
 
+		public IMatrixStatsAggregation MatrixStats { get; set; }
+
 		public AggregationDictionary Aggregations { get; set; }
 
 		public static implicit operator AggregationContainer(AggregationBase aggregator)
@@ -342,7 +348,7 @@ namespace Nest
 
 		IRangeAggregation IAggregationContainer.Range { get; set; }
 
-		IStatsAggregator IAggregationContainer.Stats { get; set; }
+		IStatsAggregation IAggregationContainer.Stats { get; set; }
 
 		ISumAggregation IAggregationContainer.Sum { get; set; }
 
@@ -389,6 +395,8 @@ namespace Nest
 		ISamplerAggregation IAggregationContainer.Sampler { get; set; }
 
 		IGeoCentroidAggregation IAggregationContainer.GeoCentroid { get; set; }
+
+		IMatrixStatsAggregation IAggregationContainer.MatrixStats { get; set; }
 
 		public AggregationContainerDescriptor<T> Average(string name,
 			Func<AverageAggregationDescriptor<T>, IAverageAggregation> selector) =>
@@ -475,7 +483,7 @@ namespace Nest
 			_SetInnerAggregation(name, selector, (a, d) => a.Range = d);
 
 		public AggregationContainerDescriptor<T> Stats(string name,
-			Func<StatsAggregationDescriptor<T>, IStatsAggregator> selector) =>
+			Func<StatsAggregationDescriptor<T>, IStatsAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Stats = d);
 
 		public AggregationContainerDescriptor<T> Sum(string name,
@@ -565,6 +573,10 @@ namespace Nest
 		public AggregationContainerDescriptor<T> GeoCentroid(string name,
 			Func<GeoCentroidAggregationDescriptor<T>, IGeoCentroidAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.GeoCentroid = d);
+
+		public AggregationContainerDescriptor<T> MatrixStats(string name,
+			Func<MatrixStatsAggregationDescriptor<T>, IMatrixStatsAggregation> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.MatrixStats = d);
 
 		/// <summary>
 		/// Fluent methods do not assign to properties on `this` directly but on IAggregationContainers inside `this.Aggregations[string, IContainer]
