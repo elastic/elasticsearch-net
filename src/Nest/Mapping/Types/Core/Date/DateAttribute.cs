@@ -20,11 +20,13 @@ namespace Nest
 		public double Boost { get { return Self.Boost.GetValueOrDefault(); } set { Self.Boost = value; } }
 		public DateTime NullValue { get { return Self.NullValue.GetValueOrDefault(); } set { Self.NullValue = value; } }
 		public bool IncludeInAll { get { return Self.IncludeInAll.GetValueOrDefault(); } set { Self.IncludeInAll = value; } }
+		[Obsolete("Removed in 5.0.0")]
 		public int PrecisionStep { get { return Self.PrecisionStep.GetValueOrDefault(); } set { Self.PrecisionStep = value; } }
 		public bool IgnoreMalformed { get { return Self.IgnoreMalformed.GetValueOrDefault(); } set { Self.IgnoreMalformed = value; } }
 		public string Format { get { return Self.Format; } set { Self.Format = value; } }
+		[Obsolete("Removed in 5.0.0")]
 		public NumericResolutionUnit NumericResolution { get { return Self.NumericResolution.GetValueOrDefault(); } set { Self.NumericResolution = value; } }
 
 		public DateAttribute() : base("date") { }
-	}	
+	}
 }

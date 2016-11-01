@@ -55,7 +55,9 @@ namespace Nest
 		private IGeoHashCellQuery _geoHashCell;
 		private IScriptQuery _script;
 		private IExistsQuery _exists;
+#pragma warning disable 618
 		private IMissingQuery _missing;
+#pragma warning restore 618
 		private ITypeQuery _type;
 		private IRawQuery _rawQuery;
 		private IQueryContainer Self => this;
@@ -122,7 +124,9 @@ namespace Nest
 		IGeoHashCellQuery IQueryContainer.GeoHashCell { get { return _geoHashCell; } set { _geoHashCell = Set(value); } }
 		IScriptQuery IQueryContainer.Script { get { return _script; } set { _script = Set(value); } }
 		IExistsQuery IQueryContainer.Exists { get { return _exists; } set { _exists = Set(value); } }
+#pragma warning disable 618
 		IMissingQuery IQueryContainer.Missing { get { return _missing; } set { _missing = Set(value); } }
+#pragma warning restore 618
 		ITypeQuery IQueryContainer.Type { get { return _type; } set { _type = Set(value); } }
 	}
 }

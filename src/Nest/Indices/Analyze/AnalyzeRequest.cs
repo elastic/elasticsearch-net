@@ -14,7 +14,7 @@ namespace Nest
 		string Analyzer { get; set; }
 
 		///<summary>A collection of character filters to use for the analysis</summary>
-		[Obsolete("Deprecated in 2.4.0. Will be removed in 5.0. Use CharFilter instead")]
+		[Obsolete("Deprecated in 2.4.0. Removed in 5.0.0. Use CharFilter instead")]
 		[JsonIgnore]
 		string[] CharFilters { get; set; }
 
@@ -31,7 +31,7 @@ namespace Nest
 		Field Field { get; set; }
 
 		///<summary>A collection of filters to use for the analysis</summary>
-		[Obsolete("Deprecated in 2.4.0. Will be removed in 5.0. Use Filter instead")]
+		[Obsolete("Deprecated in 2.4.0. Removed in 5.0.0. Use Filter instead")]
 		[JsonIgnore]
 		string[] Filters { get; set; }
 
@@ -56,7 +56,7 @@ namespace Nest
 		public string Analyzer { get; set; }
 
 		///<summary>A collection of character filters to use for the analysis</summary>
-		[Obsolete("Will be removed in 5.0. Use CharFilter instead")]
+		[Obsolete("Deprecated in 2.4.0. Removed in 5.0.0. Use CharFilter instead")]
 		public string[] CharFilters { get { return CharFilter; } set { CharFilter = value; } }
 
 		///<summary>A collection of character filters to use for the analysis</summary>
@@ -69,7 +69,7 @@ namespace Nest
 		public Field Field { get; set; }
 
 		///<summary>A collection of filters to use for the analysis</summary>
-		[Obsolete("Will be removed in 5.0. Use Filter instead")]
+		[Obsolete("Deprecated in 2.4.0. Removed in 5.0.0. Use Filter instead")]
 		public string[] Filters { get { return Filter; } set { Filter = value; } }
 
 		///<summary>The text on which the analysis should be performed</summary>

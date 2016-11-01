@@ -148,7 +148,9 @@ namespace Nest
 		IExistsQuery Exists { get; set; }
 
 		[JsonProperty("missing")]
+#pragma warning disable 618
 		IMissingQuery Missing { get; set; }
+#pragma warning restore 618
 
 		[JsonProperty("type")]
 		ITypeQuery Type { get; set; }
@@ -168,7 +170,6 @@ namespace Nest
 
 		[JsonProperty("not")]
 		INotQuery Not { get; set; }
-
 #pragma warning restore 618
 
 		void Accept(IQueryVisitor visitor);

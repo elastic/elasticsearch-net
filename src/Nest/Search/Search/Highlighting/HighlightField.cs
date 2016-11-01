@@ -50,7 +50,7 @@ namespace Nest
 		HighlighterType? Type { get; set; }
 
 		[JsonProperty("type")]
-		[Obsolete("This is a temporary binary backwards compatible hack to make sure you can specify any custom highlightertype in 2.x, scheduled for removal in 5.0")]
+		[Obsolete("This is a temporary binary backwards compatible fix to make sure you can specify any custom highlighter type in 2.0.0. Removed in 5.0.0.")]
 		string CustomType { get; set; }
 
 		[JsonProperty("force_source")]

@@ -5,6 +5,7 @@ using Nest;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 
+
 namespace Tests.Framework.Integration
 {
 	public class Seeder
@@ -213,6 +214,7 @@ namespace Tests.Framework.Integration
 				)
 			);
 
+#pragma warning disable 618
 		private static PropertiesDescriptor<Developer> DeveloperProperties(PropertiesDescriptor<Developer> props) => props
 			.String(s => s.Name(p => p.OnlineHandle).NotAnalyzed())
 			.String(s => s.Name(p => p.Gender).NotAnalyzed())
@@ -220,5 +222,6 @@ namespace Tests.Framework.Integration
 			.Ip(s => s.Name(p => p.IPAddress))
 			.GeoPoint(g => g.Name(p => p.Location).LatLon())
 			;
+#pragma warning restore 618
 	}
 }

@@ -152,7 +152,9 @@ namespace Nest
 
 		public virtual void Visit(ITypeQuery filter) => Write("type");
 
+#pragma warning disable 618
 		public virtual void Visit(IMissingQuery filter) => Write("missing");
+#pragma warning restore 618
 
 		public virtual void Visit(IGeoPolygonQuery filter) => Write("geo_polygon");
 

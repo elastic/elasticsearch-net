@@ -1,6 +1,7 @@
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
+#pragma warning disable 618
 
 namespace Tests.QueryDsl.TermLevel.Missing
 {

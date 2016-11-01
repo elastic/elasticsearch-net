@@ -29,6 +29,7 @@ namespace Nest
 
 		public TDescriptor Name(Expression<Func<T, object>> objectPath) => Assign(a => a.Name = objectPath);
 
+		[Obsolete("Removed in 2.0.0. Use CopyTo instead.")]
 		public TDescriptor IndexName(string indexName) => Assign(a => a.IndexName = indexName);
 
 		public TDescriptor Store(bool store = true) => Assign(a => a.Store = store);

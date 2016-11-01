@@ -51,7 +51,7 @@ namespace Nest
 
 #pragma warning disable 618
 		/// <inheritdoc/>
-		[Obsolete("Deprecated in 2.0. Will be removed in the next major version release.")]
+		[Obsolete("Deprecated in 2.0.0 Removed in 5.0.0")]
 		public IList<IMappingTransform> Transform { get; set; }
 
 		/// <inheritdoc/>
@@ -59,7 +59,7 @@ namespace Nest
 		public ITimestampField TimestampField { get; set; }
 
 		/// <inheritdoc/>
-		[Obsolete("will be replaced with a different implementation in a future version of Elasticsearch")]
+		[Obsolete("Will be replaced with a different implementation in a future version of Elasticsearch")]
 		public ITtlField TtlField { get; set; }
 #pragma warning restore 618
 	}
@@ -102,7 +102,7 @@ namespace Nest
 		public ISourceField SourceField { get; set; }
 #pragma warning disable 618
 		/// <inheritdoc/>
-		[Obsolete("Deprecated in 2.0. Will be removed in the next major version release.")]
+		[Obsolete("Deprecated in 2.0.0. Removed in 5.0.0")]
 		public IList<IMappingTransform> Transform { get; set; }
 
 		/// <inheritdoc/>
@@ -110,7 +110,7 @@ namespace Nest
 		public ITimestampField TimestampField { get; set; }
 
 		/// <inheritdoc/>
-		[Obsolete("will be replaced with a different implementation in a future version of Elasticsearch")]
+		[Obsolete("Will be replaced with a different implementation in a future version of Elasticsearch")]
 		public ITtlField TtlField { get; set; }
 #pragma warning restore 618
 	}
@@ -141,7 +141,7 @@ namespace Nest
 		ISourceField ITypeMapping.SourceField { get; set; }
 
 #pragma warning disable 618
-		[Obsolete("Deprecated in 2.0. Will be removed in the next major version release.")]
+		[Obsolete("Deprecated in 2.0.0. Removed in 5.0.0")]
 		IList<IMappingTransform> ITypeMapping.Transform { get; set; }
 
 		[Obsolete("use a normal date field and set its value explicitly")]
@@ -216,11 +216,11 @@ namespace Nest
 
 #pragma warning disable 618
 		/// <inheritdoc/>
-		[Obsolete("Deprecated in 2.0. Will be removed in the next major version release.")]
+		[Obsolete("Deprecated in 2.0.0 Removed in 5.0.0")]
 		public PutMappingDescriptor<T> Transform(IEnumerable<IMappingTransform> transforms) => Assign(a => a.Transform = transforms.ToListOrNullIfEmpty());
 
 		/// <inheritdoc/>
-		[Obsolete("Deprecated in 2.0. Will be removed in the next major version release.")]
+		[Obsolete("Deprecated in 2.0.0 Removed in 5.0.0")]
 		public PutMappingDescriptor<T> Transform(Func<MappingTransformsDescriptor, IPromise<IList<IMappingTransform>>> selector) =>
 			Assign(a => a.Transform = selector?.Invoke(new MappingTransformsDescriptor())?.Value);
 
@@ -229,7 +229,7 @@ namespace Nest
 		public PutMappingDescriptor<T> TimestampField(Func<TimestampFieldDescriptor<T>, ITimestampField> timestampFieldSelector) => Assign(a => a.TimestampField = timestampFieldSelector?.Invoke(new TimestampFieldDescriptor<T>()));
 
 		/// <inheritdoc/>
-		[Obsolete("will be replaced with a different implementation in a future version of Elasticsearch")]
+		[Obsolete("Will be replaced with a different implementation in a future version of Elasticsearch")]
 		public PutMappingDescriptor<T> TtlField(Func<TtlFieldDescriptor, ITtlField> ttlFieldSelector) => Assign(a => a.TtlField = ttlFieldSelector?.Invoke(new TtlFieldDescriptor()));
 #pragma warning restore 618
 

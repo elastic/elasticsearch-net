@@ -1,5 +1,6 @@
 ﻿using System;
 using Nest;
+#pragma warning disable 618 // Usage of Path
 
 namespace Tests.Mapping.Types.Complex.Nested
 {

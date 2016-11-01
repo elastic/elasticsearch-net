@@ -14,7 +14,7 @@ namespace Nest
 		TypeName Type { get; set; }
 
 		[JsonProperty("index_name")]
-		[Obsolete("Removed since Elasticsearch 2.x. Use copy_to instead.")]
+		[Obsolete("Removed in 2.0.0. Use CopyTo instead.")]
 		string IndexName { get; set; }
 
 		[JsonProperty("store")]
@@ -29,7 +29,7 @@ namespace Nest
 		SimilarityOption? Similarity { get; set; }
 
 		[JsonProperty("similarity")]
-		[Obsolete("This is a temporary binary backwards compatible hack to make sure you can specify named similarities in 2.x, scheduled for removal in 5.0")]
+		[Obsolete("This is a temporary binary backwards compatible fix to allow named similarities in 2.0.0. Removed in 5.0.0")]
 		string CustomSimilarity { get; set; }
 
 		[JsonProperty("copy_to")]
@@ -55,7 +55,10 @@ namespace Nest
 		public bool? DocValues { get; set; }
 		public IProperties Fields { get; set; }
 		public string IndexName { get; set; }
+#pragma warning disable 618
 		public SimilarityOption? Similarity { get { return this.CustomSimilarity?.ToEnum<SimilarityOption>(); } set { this.CustomSimilarity = value.GetStringValue(); } }
+#pragma warning restore 618
+		[Obsolete("This is a temporary binary backwards compatible fix to allow named similarities in 2.0.0. Removed in 5.0.0")]
 		public string CustomSimilarity { get; set; }
 		public bool? Store { get; set; }
 		PropertyInfo IPropertyWithClrOrigin.ClrOrigin { get; set; }

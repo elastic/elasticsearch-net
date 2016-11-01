@@ -1,4 +1,6 @@
-﻿namespace Nest
+﻿using System;
+
+namespace Nest
 {
 	public class IpAttribute : ElasticsearchPropertyAttributeBase, IIpProperty
 	{
@@ -14,6 +16,7 @@
 		public bool IncludeInAll { get { return Self.IncludeInAll.GetValueOrDefault(); } set { Self.IncludeInAll = value; } }
 		public NonStringIndexOption Index { get { return Self.Index.GetValueOrDefault(); } set { Self.Index = value; } }
 		public string NullValue { get { return Self.NullValue; } set { Self.NullValue = value; } }
+		[Obsolete("Removed in 5.0.0")]
 		public int PrecisionStep { get { return Self.PrecisionStep.GetValueOrDefault(); } set { Self.PrecisionStep = value; } }
 
 		public IpAttribute() : base("ip") { }

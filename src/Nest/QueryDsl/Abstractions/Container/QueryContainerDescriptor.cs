@@ -10,10 +10,10 @@ namespace Nest
 	{
 		QueryContainerDescriptor<T> Assign(Action<IQueryContainer> assigner) => Fluent.Assign(this, assigner);
 
-		[Obsolete("Scheduled to be removed in 5.0.  Setting Strict() at the container level does is a noop and must be set on each individual query.")]
+		[Obsolete("Scheduled to be removed in 5.0.0.  Setting Strict() at the container level does is a noop and must be set on each individual query.")]
 		public QueryContainerDescriptor<T> Strict(bool strict = true) => this;
 
-		[Obsolete("Scheduled to be removed in 5.0.  Setting Verbatim() at the container level is a noop and must be set on each individual query.")]
+		[Obsolete("Scheduled to be removed in 5.0.0.  Setting Verbatim() at the container level is a noop and must be set on each individual query.")]
 		public QueryContainerDescriptor<T> Verbatim(bool verbatim = true) => this;
 
 		private static QueryContainer WrapInContainer<TQuery, TQueryInterface>(
@@ -507,7 +507,7 @@ namespace Nest
 		public QueryContainer Exists(Func<ExistsQueryDescriptor<T>, IExistsQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Exists = query);
 
-		[Obsolete("Removed in 5.x. Use an exists query within a bool must_not clause instead.")]
+		[Obsolete("Removed in 5.0.0. Use an exists query within a bool must_not clause instead.")]
 		public QueryContainer Missing(Func<MissingQueryDescriptor<T>, IMissingQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Missing = query);
 

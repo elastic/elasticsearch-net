@@ -19,6 +19,7 @@ namespace Nest
 		bool? IncludeInAll { get; set; }
 
 		[JsonProperty("precision_step")]
+		[Obsolete("Removed in 5.0.0")]
 		int? PrecisionStep { get; set; }
 
 		[JsonProperty("ignore_malformed")]
@@ -41,6 +42,7 @@ namespace Nest
 		public double? Boost { get; set; }
 		public double? NullValue { get; set; }
 		public bool? IncludeInAll { get; set; }
+		[Obsolete("Removed in 5.0.0")]
 		public int? PrecisionStep { get; set; }
 		public bool? IgnoreMalformed { get; set; }
 		public bool? Coerce { get; set; }
@@ -76,6 +78,7 @@ namespace Nest
 
 		public TDescriptor IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 
+		[Obsolete("Removed in 5.0.0")]
 		public TDescriptor PrecisionStep(int precisionStep) => Assign(a => a.PrecisionStep = precisionStep);
 
 		public TDescriptor IgnoreMalformed(bool ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);

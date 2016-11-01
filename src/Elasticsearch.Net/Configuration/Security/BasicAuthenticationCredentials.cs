@@ -5,7 +5,7 @@ namespace Elasticsearch.Net
 	public class BasicAuthenticationCredentials
 	{
 		public string Username { get; set; }
-		[Obsolete("Scheduled to be removed use Username instead, note the lowercase n")]
+		[Obsolete("Removed in 5.0.0. Use Username instead, note the lowercase n")]
 		[CLSCompliant(false)]
 		public string UserName { get { return Username; } set { Username = value; } }
 		public string Password { get; set; }

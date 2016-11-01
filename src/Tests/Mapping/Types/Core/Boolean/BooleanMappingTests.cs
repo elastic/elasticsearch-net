@@ -1,13 +1,14 @@
 ﻿using System;
 using Nest;
+#pragma warning disable 618 // Usage of IndexName
 
 namespace Tests.Mapping.Types.Core.Boolean
 {
 	public class BooleanTest
 	{
 		[Boolean(
-			DocValues = false, 
-			IndexName = "myindex", 
+			DocValues = false,
+			IndexName = "myindex",
 			Similarity = SimilarityOption.BM25,
 			Store = true)]
 		public bool Full { get; set; }

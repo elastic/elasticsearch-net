@@ -1,5 +1,6 @@
 ﻿using System;
 using Nest;
+#pragma warning disable 618
 
 namespace Tests.Mapping.Types.Core.Number
 {

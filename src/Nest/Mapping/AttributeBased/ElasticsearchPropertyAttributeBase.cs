@@ -28,11 +28,12 @@ namespace Nest
 		public string Name { get; set; }
 		public bool Ignore { get; set; }
 		public bool DocValues { get { return Self.DocValues.GetValueOrDefault(); } set { Self.DocValues = value; } }
+		[Obsolete("Removed in 2.0.0. Use CopyTo instead.")]
 		public string IndexName { get { return Self.IndexName; } set { Self.IndexName = value; } }
 		public SimilarityOption Similarity { get { return Self.Similarity.GetValueOrDefault(); } set { Self.Similarity = value; } }
 
 #pragma warning disable CS0618 // Type or member is obsolete
-		[Obsolete("This is a temporary binary backwards compatible hack to make sure you can specify named similarities in 2.x, scheduled for removal in 5.0")]
+		[Obsolete("This is a temporary binary backwards compatible fix to allow named similarities in 2.0.0. Removed in 5.0.0")]
 		public string CustomSimilarity { get { return Self.CustomSimilarity; } set { Self.CustomSimilarity = value; } }
 #pragma warning restore CS0618 // Type or member is obsolete
 		public bool Store { get { return Self.Store.GetValueOrDefault(); } set { Self.Store = value; } }
