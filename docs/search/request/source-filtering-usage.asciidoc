@@ -28,7 +28,7 @@ See the Elasticsearch documentation on {ref_current}/search-request-source-filte
 s => s
 .Source(src => src
     .IncludeAll()
-    .Exclude(e => e
+    .Excludes(e => e
         .Fields(
             p => p.Description
         )
@@ -44,8 +44,8 @@ new SearchRequest<Project>
 {
     Source = new SourceFilter
     {
-        Include = "*",
-        Exclude = Fields<Project>(p => p.Description)
+        Includes = "*",
+        Excludes = Fields<Project>(p => p.Description)
     }
 }
 ----
@@ -55,10 +55,10 @@ new SearchRequest<Project>
 ----
 {
   "_source": {
-    "include": [
+    "includes": [
       "*"
     ],
-    "exclude": [
+    "excludes": [
       "description"
     ]
   }

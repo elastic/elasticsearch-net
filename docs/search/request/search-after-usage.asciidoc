@@ -1,0 +1,74 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Search/Request/SearchAfterUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[search-after-usage]]
+== Search After Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Sort(srt => srt
+    .Descending(p => p.NumberOfCommits)
+    .Descending(p => p.Name)
+)
+.SearchAfter(
+    Project.Projects.FirstOrDefault().NumberOfCommits,
+    Project.Projects.FirstOrDefault().Name
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Sort = new List<ISort>
+    {
+        new SortField { Field = Field<Project>(p => p.NumberOfCommits), Order = SortOrder.Descending },
+        new SortField { Field = Field<Project>(p => p.Name), Order = SortOrder.Descending }
+    },
+    SearchAfter = new List<object>
+    {
+        Project.Projects.FirstOrDefault().NumberOfCommits,
+        Project.Projects.FirstOrDefault().Name,
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "sort": [
+    {
+      "numberOfCommits": {
+        "order": "desc"
+      }
+    },
+    {
+      "name": {
+        "order": "desc"
+      }
+    }
+  ],
+  "search_after": [
+    775,
+    "Dickinson - Beier"
+  ]
+}
+----
+
