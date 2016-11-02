@@ -41,11 +41,11 @@ namespace Tests.Ingest
 			var processors = pipeline.Processors;
 			processors.Should().NotBeNull().And.HaveCount(2);
 
-			var uppercase = processors.Where(p => p.Name == "uppercase").FirstOrDefault() as UppercaseProcessor;
+			var uppercase = processors.FirstOrDefault(p => p.Name == "uppercase") as UppercaseProcessor;
 			uppercase.Should().NotBeNull();
 			uppercase.Field.Should().NotBeNull();
 
-			var set = processors.Where(p => p.Name == "set").FirstOrDefault() as SetProcessor;
+			var set = processors.FirstOrDefault(p => p.Name == "set") as SetProcessor;
 			set.Should().NotBeNull();
 			set.Field.Should().NotBeNull();
 			set.Value.Should().NotBeNull();
@@ -154,16 +154,16 @@ namespace Tests.Ingest
 			var processors = pipeline.Processors;
 			processors.Should().NotBeNull().And.HaveCount(3);
 
-			var uppercase = processors.Where(p => p.Name == "uppercase").FirstOrDefault() as UppercaseProcessor;
+			var uppercase = processors.FirstOrDefault(p => p.Name == "uppercase") as UppercaseProcessor;
 			uppercase.Should().NotBeNull();
 			uppercase.Field.Should().NotBeNull();
 
-			var set = processors.Where(p => p.Name == "set").FirstOrDefault() as SetProcessor;
+			var set = processors.FirstOrDefault(p => p.Name == "set") as SetProcessor;
 			set.Should().NotBeNull();
 			set.Field.Should().NotBeNull();
 			set.Value.Should().NotBeNull();
 
-			var rename = processors.Where(p => p.Name == "rename").FirstOrDefault() as RenameProcessor;
+			var rename = processors.FirstOrDefault(p => p.Name == "rename") as RenameProcessor;
 			rename.Should().NotBeNull();
 			rename.Field.Should().NotBeNull();
 			rename.TargetField.Should().NotBeNull();

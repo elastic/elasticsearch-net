@@ -17,8 +17,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var root = JObject.Load(reader);
-			var pipeline = new Pipeline();
-			pipeline.Description = root["description"]?.ToString();
+			var pipeline = new Pipeline { Description = root["description"]?.ToString() };
 			if (root["processors"] != null)
 				pipeline.Processors = GetProcessors(root["processors"], serializer);
 			if (root["on_failure"] != null)
@@ -49,6 +48,9 @@ namespace Nest
 					case "date_index_name":
 						processors.Add(jsonProcessor.ToObject<DateIndexNameProcessor>(serializer));
 						break;
+					case "dot_expander":
+						processors.Add(jsonProcessor.ToObject<DotExpanderProcessor>(serializer));
+						break;
 					case "fail":
 						processors.Add(jsonProcessor.ToObject<FailProcessor>(serializer));
 						break;
@@ -75,6 +77,9 @@ namespace Nest
 						break;
 					case "rename":
 						processors.Add(jsonProcessor.ToObject<RenameProcessor>(serializer));
+						break;
+					case "script":
+						processors.Add(jsonProcessor.ToObject<ScriptProcessor>(serializer));
 						break;
 					case "set":
 						processors.Add(jsonProcessor.ToObject<SetProcessor>(serializer));

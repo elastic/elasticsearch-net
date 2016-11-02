@@ -5,6 +5,15 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// The GeoIP processor adds information about the geographical location of IP addresses,
+	/// based on data from the Maxmind databases.
+	/// This processor adds this information by default under the geoip field.
+	/// The geoip processor can resolve both IPv4 and IPv6 addresses.
+	/// </summary>
+	/// <remarks>
+	/// Requires the Ingest Geoip Processor Plugin to be installed on the cluster.
+	/// </remarks>
 	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<GeoIpProcessor>))]
 	public interface IGeoIpProcessor : IProcessor
@@ -22,6 +31,15 @@ namespace Nest
 		IEnumerable<string> Properties { get; set; }
 	}
 
+	/// <summary>
+	/// The GeoIP processor adds information about the geographical location of IP addresses,
+	/// based on data from the Maxmind databases.
+	/// This processor adds this information by default under the geoip field.
+	/// The geoip processor can resolve both IPv4 and IPv6 addresses.
+	/// </summary>
+	/// <remarks>
+	/// Requires the Ingest Geoip Processor Plugin to be installed on the cluster.
+	/// </remarks>
 	public class GeoIpProcessor : ProcessorBase, IGeoIpProcessor
 	{
 		protected override string Name => "geoip";
@@ -35,6 +53,15 @@ namespace Nest
 		public IEnumerable<string> Properties { get; set; }
 	}
 
+	/// <summary>
+	/// The GeoIP processor adds information about the geographical location of IP addresses,
+	/// based on data from the Maxmind databases.
+	/// This processor adds this information by default under the geoip field.
+	/// The geoip processor can resolve both IPv4 and IPv6 addresses.
+	/// </summary>
+	/// <remarks>
+	/// Requires the Ingest Geoip Processor Plugin to be installed on the cluster.
+	/// </remarks>
 	public class GeoIpProcessorDescriptor<T>
 	: ProcessorDescriptorBase<GeoIpProcessorDescriptor<T>, IGeoIpProcessor>, IGeoIpProcessor
 	where T : class
