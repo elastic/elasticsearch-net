@@ -5,6 +5,14 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// The ingest attachment plugin lets Elasticsearch extract file attachments in common formats
+	/// (such as PPT, XLS, and PDF) by using the Apache text extraction library Tika.
+	/// You can use the ingest attachment plugin as a replacement for the mapper attachment plugin.
+	/// </summary>
+	/// <remarks>
+	/// Requires the Ingest Attachment Processor Plugin to be installed on the cluster.
+	/// </remarks>
 	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<AttachmentProcessor>))]
 	public interface IAttachmentProcessor : IProcessor
@@ -36,22 +44,52 @@ namespace Nest
 		long? IndexedCharacters { get; set; }
 	}
 
+	/// <summary>
+	/// The ingest attachment plugin lets Elasticsearch extract file attachments in common formats
+	/// (such as PPT, XLS, and PDF) by using the Apache text extraction library Tika.
+	/// You can use the ingest attachment plugin as a replacement for the mapper attachment plugin.
+	/// </summary>
+	/// <remarks>
+	/// Requires the Ingest Attachment Processor Plugin to be installed on the cluster.
+	/// </remarks>
 	public class AttachmentProcessor : ProcessorBase, IAttachmentProcessor
 	{
 		protected override string Name => "attachment";
 
+		/// <summary>
+		/// The field to get the base64 encoded field from
+		/// </summary>
 		public Field Field { get; set; }
 
+		/// <summary>
+		/// The field that will hold the attachment information
+		/// </summary>
 		public Field TargetField { get; set; }
 
+		/// <summary>
+		/// Properties to select to be stored. Can be content, title, name, author,
+		/// keywords, date, content_type, content_length, language. Defaults to all
+		/// </summary>
 		public IEnumerable<string> Properties { get; set; }
 
+		/// <summary>
+		/// The number of chars being used for extraction to prevent huge fields. Use -1 for no limit.
+		/// Defaults to 100000.
+		/// </summary>
 		public long? IndexedCharacters { get; set; }
 	}
 
+	/// <summary>
+	/// The ingest attachment plugin lets Elasticsearch extract file attachments in common formats
+	/// (such as PPT, XLS, and PDF) by using the Apache text extraction library Tika.
+	/// You can use the ingest attachment plugin as a replacement for the mapper attachment plugin.
+	/// </summary>
+	/// <remarks>
+	/// Requires the Ingest Attachment Processor Plugin to be installed on the cluster.
+	/// </remarks>
 	public class AttachmentProcessorDescriptor<T>
-: ProcessorDescriptorBase<AttachmentProcessorDescriptor<T>, IAttachmentProcessor>, IAttachmentProcessor
-where T : class
+		: ProcessorDescriptorBase<AttachmentProcessorDescriptor<T>, IAttachmentProcessor>, IAttachmentProcessor
+		where T : class
 	{
 		protected override string Name => "attachment";
 
@@ -60,20 +98,44 @@ where T : class
 		IEnumerable<string> IAttachmentProcessor.Properties { get; set; }
 		long? IAttachmentProcessor.IndexedCharacters { get; set; }
 
+		/// <summary>
+		/// The field to get the base64 encoded field from
+		/// </summary>
 		public AttachmentProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
+		/// <summary>
+		/// The field to get the base64 encoded field from
+		/// </summary>
 		public AttachmentProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
 			Assign(a => a.Field = objectPath);
 
+		/// <summary>
+		/// The field that will hold the attachment information
+		/// </summary>
 		public AttachmentProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
 
+		/// <summary>
+		/// The field that will hold the attachment information
+		/// </summary>
 		public AttachmentProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
 			Assign(a => a.TargetField = objectPath);
 
+		/// <summary>
+		/// The number of chars being used for extraction to prevent huge fields. Use -1 for no limit.
+		/// Defaults to 100000.
+		/// </summary>
 		public AttachmentProcessorDescriptor<T> IndexedCharacters(long indexedCharacters) => Assign(a => a.IndexedCharacters = indexedCharacters);
 
+		/// <summary>
+		/// Properties to select to be stored. Can be content, title, name, author,
+		/// keywords, date, content_type, content_length, language. Defaults to all
+		/// </summary>
 		public AttachmentProcessorDescriptor<T> Properties(IEnumerable<string> properties) => Assign(a => a.Properties = properties);
 
+		/// <summary>
+		/// Properties to select to be stored. Can be content, title, name, author,
+		/// keywords, date, content_type, content_length, language. Defaults to all
+		/// </summary>
 		public AttachmentProcessorDescriptor<T> Properties(params string[] properties) => Assign(a => a.Properties = properties);
 	}
 }

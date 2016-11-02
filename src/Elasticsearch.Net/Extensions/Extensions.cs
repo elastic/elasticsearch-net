@@ -4,7 +4,9 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+#if DOTNETCORE
 using System.Reflection;
+#endif
 
 namespace Elasticsearch.Net
 {
