@@ -1,23 +1,25 @@
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(EnumMemberValueCasingJsonConverter<TimeUnit>))]
 	public enum TimeUnit
 	{
 		[EnumMember(Value = "ms")]
-		Millisecond, 
+		Millisecond,
 		[EnumMember(Value = "s")]
-		Second, 
+		Second,
 		[EnumMember(Value = "m")]
-		Minute, 
+		Minute,
 		[EnumMember(Value = "h")]
-		Hour, 
+		Hour,
 		[EnumMember(Value = "d")]
 		Day,
 		[EnumMember(Value = "w")]
-		Week, 
+		Week,
 		[EnumMember(Value = "M")]
-		Month, 
+		Month,
 		[EnumMember(Value = "y")]
 		Year
 	}

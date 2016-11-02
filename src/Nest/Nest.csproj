@@ -464,6 +464,7 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\ContractJsonConverterAttribute.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\ElasticContractResolver.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\CompositeJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\EnumMemberValueCasingJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\FromJson.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\JsonConverterBase.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\KeyValueJsonConverter.cs" />
@@ -788,9 +789,11 @@
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusRequest.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponse.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponseJsonConverter.cs" />
+    <Compile Include="Ingest\Processors\DotExpanderProcessor.cs" />
     <Compile Include="Ingest\Processors\GeoIpProcessor.cs" />
     <Compile Include="Ingest\Processors\AttachmentProcessor.cs" />
     <Compile Include="Ingest\Processors\DateIndexNameProcessor.cs" />
+    <Compile Include="Ingest\Processors\ScriptProcessor.cs" />
     <Compile Include="Ingest\Processors\SortProcessor.cs" />
     <Compile Include="Mapping\AttributeBased\ElasticsearchCorePropertyAttributeBase.cs" />
     <Compile Include="Ingest\DeletePipeline\DeletePipelineRequest.cs" />
