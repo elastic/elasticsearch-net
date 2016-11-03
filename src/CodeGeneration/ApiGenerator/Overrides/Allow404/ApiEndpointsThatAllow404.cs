@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ApiGenerator.Overrides.Allow404
 {
-	public static class ApiEndpointsThatAllow404 
+	public static class ApiEndpointsThatAllow404
 	{
 		public static readonly IEnumerable<string> Endpoints = new List<string>
 		{
@@ -15,8 +15,8 @@ namespace ApiGenerator.Overrides.Allow404
 			"IndexTemplateExists",
 			"TypeExists",
 			"Exists",
-			//"Get"
-			//"Delete",
+			"Get",
+			"Delete",
 		};
 	}
 }

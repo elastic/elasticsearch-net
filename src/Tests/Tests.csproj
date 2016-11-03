@@ -619,6 +619,7 @@
     <Compile Include="QueryDsl\Specialized\Percolate\PercolateQueryUsageTests.cs" />
     <Compile Include="Reproduce\DateSerialization.cs" />
     <Compile Include="Reproduce\GithubIssue2152.cs" />
+    <Compile Include="Reproduce\GithubIssue2306.cs" />
     <Compile Include="Reproduce\GithubIssue2309.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchApiTests.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchInvalidApiTests.cs" />
