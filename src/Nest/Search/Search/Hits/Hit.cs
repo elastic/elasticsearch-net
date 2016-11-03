@@ -13,7 +13,7 @@ namespace Nest
 		string Index { get; }
 		string Type { get; }
 		long? Version { get; }
-		double Score { get; }
+		double? Score { get; }
 		string Id { get; }
 		string Parent { get; }
 		string Routing { get; }
@@ -29,53 +29,51 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class Hit<T> : IHit<T>
-		where T : class
+	public class Hit<T> : IHit<T> where T : class
 	{
-		[JsonProperty(PropertyName = "fields")]
+		[JsonProperty("fields")]
 		public FieldValues Fields { get; internal set; }
 
-		[JsonProperty(PropertyName = "_source")]
+		[JsonProperty("_source")]
 		public T Source { get; internal set; }
 
-		[JsonProperty(PropertyName = "_index")]
+		[JsonProperty("_index")]
 		public string Index { get; internal set; }
 
-		[JsonProperty(PropertyName = "inner_hits")]
+		[JsonProperty("inner_hits")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		public IDictionary<string, InnerHitsResult> InnerHits { get; internal set; }
 
-		// TODO make this nullable for 5.0
-		[JsonProperty(PropertyName = "_score")]
-		public double Score { get; set; }
+		[JsonProperty("_score")]
+		public double? Score { get; set; }
 
-		[JsonProperty(PropertyName = "_type")]
+		[JsonProperty("_type")]
 		public string Type { get; internal set; }
 
-		[JsonProperty(PropertyName = "_version")]
+		[JsonProperty("_version")]
 		public long? Version { get; internal set; }
 
-		[JsonProperty(PropertyName = "_id")]
+		[JsonProperty("_id")]
 		public string Id { get; internal set; }
 
-		[JsonProperty(PropertyName = "_parent")]
+		[JsonProperty("_parent")]
 		public string Parent { get; internal set; }
 
-		[JsonProperty(PropertyName = "_routing")]
+		[JsonProperty("_routing")]
 		public string Routing { get; internal set; }
 
-		[JsonProperty(PropertyName = "_timestamp")]
-		[Obsolete("This property is no longer returned on indices created in Elasticsearch 5.x and up")]
+		[JsonProperty("_timestamp")]
+		[Obsolete("This property is no longer returned on indices created in Elasticsearch 5.0.0 and up")]
 		public long? Timestamp { get; internal set; }
 
-		[JsonProperty(PropertyName = "_ttl")]
-		[Obsolete("This property is no longer returned on indices created in Elasticsearch 5.x and up")]
+		[JsonProperty("_ttl")]
+		[Obsolete("This property is no longer returned on indices created in Elasticsearch 5.0.0 and up")]
 		public long? Ttl { get; internal set; }
 
-		[JsonProperty(PropertyName = "sort")]
+		[JsonProperty("sort")]
 		public IEnumerable<object> Sorts { get; internal set; }
 
-		[JsonProperty(PropertyName = "highlight")]
+		[JsonProperty("highlight")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		internal Dictionary<string, List<string>> _Highlight { get; set; }
 
@@ -97,10 +95,10 @@ namespace Nest
 			}
 		}
 
-		[JsonProperty(PropertyName = "_explanation")]
+		[JsonProperty("_explanation")]
 		public Explanation Explanation { get; internal set; }
 
-		[JsonProperty(PropertyName = "matched_queries")]
+		[JsonProperty("matched_queries")]
 		public IEnumerable<string> MatchedQueries { get; internal set; }
 	}
 }
