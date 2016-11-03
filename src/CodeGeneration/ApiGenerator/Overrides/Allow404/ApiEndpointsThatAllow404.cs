@@ -15,8 +15,8 @@ namespace ApiGenerator.Overrides.Allow404
 			"IndexTemplateExists",
 			"TypeExists",
 			"Exists",
-			//"Get"
-			//"Delete",
+			"Get",
+			"Delete",
 		};
 	}
 }
