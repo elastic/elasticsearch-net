@@ -53,7 +53,9 @@
 		void Visit(ITermsQuery query);
 		void Visit(ITypeQuery filter);
 		void Visit(IScriptQuery filter);
+#pragma warning disable 618
 		void Visit(IMissingQuery filter);
+#pragma warning restore 618
 		void Visit(IGeoPolygonQuery filter);
 		void Visit(IGeoDistanceRangeQuery filter);
 		void Visit(IGeoDistanceQuery filter);
@@ -210,7 +212,9 @@
 
 		public virtual void Visit(IScriptQuery query) { }
 
+#pragma warning disable 618
 		public virtual void Visit(IMissingQuery query) { }
+#pragma warning restore 618
 
 		public virtual void Visit(IGeoPolygonQuery query) { }
 

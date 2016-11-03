@@ -17,6 +17,7 @@ namespace Nest
 		bool? IncludeInAll { get; set; }
 
 		[JsonProperty("path")]
+		[Obsolete("Deprecated in 1.0.0 and Removed in 5.0.0. Use CopyTo instead.")]
 		string Path { get; set; }
 
 		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]
@@ -32,6 +33,8 @@ namespace Nest
 		public DynamicMapping? Dynamic { get; set; }
 		public bool? Enabled { get; set; }
 		public bool? IncludeInAll { get; set; }
+
+		[Obsolete("Deprecated in 1.0.0 and Removed in 5.0.0. Use CopyTo instead.")]
 		public string Path { get; set; }
 		public IProperties Properties { get; set; }
 	}
@@ -77,6 +80,7 @@ namespace Nest
 		public TDescriptor IncludeInAll(bool includeInAll = true) =>
 			Assign(a => a.IncludeInAll = includeInAll);
 
+		[Obsolete("Deprecated in 1.0.0 and Removed in 5.0.0. Use CopyTo instead.")]
 		public TDescriptor Path(string path) =>
 			Assign(a => a.Path = path);
 

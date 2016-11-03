@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<MappingTransform>))]
-	[Obsolete("Deprecated in 2.0. Will be removed in the next major version release.")]
+	[Obsolete("Deprecated in 2.0.0 Removed in 5.0.0")]
 	public interface IMappingTransform
 	{
 		[JsonProperty("script")]
@@ -21,7 +21,7 @@ namespace Nest
 		string Language { get; set; }
 	}
 
-	[Obsolete("Deprecated in 2.0. Will be removed in the next major version release.")]
+	[Obsolete("Deprecated in 2.0.0 Removed in 5.0.0")]
 	public class MappingTransform: IMappingTransform
 	{
 		public string Script { get; set; }
@@ -33,7 +33,7 @@ namespace Nest
 		public string Language { get; set; }
 	}
 
-	[Obsolete("Deprecated in 2.0. Will be removed in the next major version release.")]
+	[Obsolete("Deprecated in 2.0.0 Removed in 5.0.0")]
 	public class MappingTransformDescriptor : DescriptorBase<MappingTransformDescriptor, IMappingTransform>, IMappingTransform
 	{
 		string IMappingTransform.Script { get; set; }
@@ -56,7 +56,7 @@ namespace Nest
 
 	}
 
-	[Obsolete("Deprecated in 2.0. Will be removed in the next major version release.")]
+	[Obsolete("Deprecated in 2.0.0 Removed in 5.0.0")]
 	public class MappingTransformsDescriptor: DescriptorPromiseBase<MappingTransformsDescriptor, IList<IMappingTransform>>
 	{
 		public MappingTransformsDescriptor() : base(new List<IMappingTransform>()) { }

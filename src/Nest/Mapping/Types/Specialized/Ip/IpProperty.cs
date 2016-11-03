@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -9,6 +10,7 @@ namespace Nest
 		NonStringIndexOption? Index { get; set; }
 
 		[JsonProperty("precision_step")]
+		[Obsolete("Removed in 5.0.0")]
 		int? PrecisionStep { get; set; }
 
 		[JsonProperty("boost")]
@@ -29,6 +31,7 @@ namespace Nest
 		public bool? IncludeInAll { get; set; }
 		public NonStringIndexOption? Index { get; set; }
 		public string NullValue { get; set; }
+		[Obsolete("Removed in 5.0.0")]
 		public int? PrecisionStep { get; set; }
 	}
 
@@ -50,6 +53,7 @@ namespace Nest
 
 		public IpPropertyDescriptor<T> NullValue(string nullValue) => Assign(a => a.NullValue = nullValue);
 
+		[Obsolete("Removed in 5.0.0")]
 		public IpPropertyDescriptor<T> PrecisionStep(int precisionStep) => Assign(a => a.PrecisionStep = precisionStep);
 
 		public IpPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);

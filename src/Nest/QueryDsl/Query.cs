@@ -98,8 +98,10 @@ namespace Nest
 		public static QueryContainer MatchPhrasePrefix(Func<MatchPhrasePrefixQueryDescriptor<T>, IMatchQuery> selector) =>
 			new QueryContainerDescriptor<T>().MatchPhrasePrefix(selector);
 
+#pragma warning disable 618
 		public static QueryContainer Missing(Func<MissingQueryDescriptor<T>, IMissingQuery> selector) =>
 			new QueryContainerDescriptor<T>().Missing(selector);
+#pragma warning restore 618
 
 		public static QueryContainer MoreLikeThis(Func<MoreLikeThisQueryDescriptor<T>, IMoreLikeThisQuery> selector) =>
 			new QueryContainerDescriptor<T>().MoreLikeThis(selector);
@@ -162,7 +164,7 @@ namespace Nest
 			new QueryContainerDescriptor<T>().SpanFieldMasking(selector);
 
 #pragma warning disable 618
-		[Obsolete("Scheduled to be removed in 5.0.  Setting Strict() at the container level is a noop and must be set on each individual query.")]
+		[Obsolete("Scheduled to be removed in 5.0.0.  Setting Strict() at the container level is a noop and must be set on each individual query.")]
 		public static QueryContainerDescriptor<T> Strict(bool strict = true) =>
 			new QueryContainerDescriptor<T>().Strict(strict);
 #pragma warning restore 618

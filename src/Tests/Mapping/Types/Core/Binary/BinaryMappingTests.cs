@@ -1,14 +1,15 @@
 ﻿using System;
 using Nest;
+#pragma warning disable 618 // Usage of IndexName
 
 namespace Tests.Mapping.Types.Core.Binary
 {
 	public class BinaryTest
 	{
 		[Binary(
-			DocValues = true, 
-			IndexName = "myindex", 
-			Similarity = SimilarityOption.Default, 
+			DocValues = true,
+			IndexName = "myindex",
+			Similarity = SimilarityOption.Default,
 			Store = true)]
 		public string Full { get; set; }
 

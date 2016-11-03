@@ -44,7 +44,7 @@ namespace Elasticsearch.Net
 		public IConnectionConfigurationValues ConnectionSettings { get; }
 		public IMemoryStreamFactory MemoryStreamFactory { get; }
 
-		[Obsolete("this constructor is scheduled to be removed in the next major version")]
+		[Obsolete("Removed in 5.0.0")]
 		public RequestData(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IMemoryStreamFactory memoryStreamFactory)
 #pragma warning disable CS0618 // Type or member is obsolete
 			: this(method, path, data, global, (IRequestConfiguration)null, memoryStreamFactory)
@@ -60,7 +60,7 @@ namespace Elasticsearch.Net
 			this.Path = this.CreatePathWithQueryStrings(path, this.ConnectionSettings, local);
 		}
 
-		[Obsolete("this constructor is scheduled to become private in the next major version")]
+		[Obsolete("This constructor is scheduled to become private in 5.0.0")]
 		public RequestData(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IRequestConfiguration local, IMemoryStreamFactory memoryStreamFactory)
 		{
 			this.ConnectionSettings = global;

@@ -19,6 +19,7 @@ namespace Nest
 		bool? IncludeInAll { get; set; }
 
 		[JsonProperty("precision_step")]
+		[Obsolete("Removed in 5.0.0")]
 		int? PrecisionStep { get; set; }
 
 		[JsonProperty("ignore_malformed")]
@@ -28,7 +29,8 @@ namespace Nest
 		string Format { get; set; }
 
 		[JsonProperty("numeric_resolution")]
-        NumericResolutionUnit? NumericResolution { get; set; }
+		[Obsolete("Removed in 5.0.0")]
+		NumericResolutionUnit? NumericResolution { get; set; }
 
 		[JsonProperty("fielddata")]
 		INumericFielddata Fielddata { get; set; }
@@ -42,9 +44,11 @@ namespace Nest
 		public double? Boost { get; set; }
 		public DateTime? NullValue { get; set; }
 		public bool? IncludeInAll { get; set; }
+		[Obsolete("Removed in 5.0.0")]
 		public int? PrecisionStep { get; set; }
 		public bool? IgnoreMalformed { get; set; }
 		public string Format { get; set; }
+		[Obsolete("Removed in 5.0.0")]
 		public NumericResolutionUnit? NumericResolution { get; set; }
 		public INumericFielddata Fielddata { get; set; }
 	}
@@ -69,9 +73,11 @@ namespace Nest
 		public DatePropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 		public DatePropertyDescriptor<T> NullValue(DateTime nullValue) => Assign(a => a.NullValue = nullValue);
 		public DatePropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
+		[Obsolete("Removed in 5.0.0")]
 		public DatePropertyDescriptor<T> PrecisionStep(int precisionStep) => Assign(a => a.PrecisionStep = precisionStep);
 		public DatePropertyDescriptor<T> IgnoreMalformed(bool ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
 		public DatePropertyDescriptor<T> Format(string format) => Assign(a => a.Format = format);
+		[Obsolete("Removed in 5.0.0")]
 		public DatePropertyDescriptor<T> NumericResolution(NumericResolutionUnit unit) => Assign(a => a.NumericResolution = unit);
 		public DatePropertyDescriptor<T> Fielddata(Func<NumericFielddataDescriptor, INumericFielddata> selector) =>
 			Assign(a => a.Fielddata = selector(new NumericFielddataDescriptor()));

@@ -1,14 +1,15 @@
 ﻿using System;
 using Nest;
+#pragma warning disable 618
 
 namespace Tests.Mapping.Types.Core.Date
 {
 	public class DateTest
 	{
 		[Date(
-			DocValues = true, 
-			IndexName = "myindex", 
-			Similarity = SimilarityOption.Default, 
+			DocValues = true,
+			IndexName = "myindex",
+			Similarity = SimilarityOption.Default,
 			Store = true,
 			Index = NonStringIndexOption.No,
 			Boost = 1.2,

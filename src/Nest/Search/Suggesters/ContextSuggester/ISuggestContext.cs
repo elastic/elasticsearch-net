@@ -29,10 +29,10 @@ namespace Nest
 		string ISuggestContext.Type => this.Type;
 		Field ISuggestContext.Path { get; set; }
 
-		[Obsolete("Removed in 5.0. Use Path() instead.")]
+		[Obsolete("Removed in 5.0.0. Use Path() instead.")]
 		public TDescriptor Field(Field field) => Assign(a => a.Path = field);
 
-		[Obsolete("Removed in 5.0. Use Path() instead.")]
+		[Obsolete("Removed in 5.0.0. Use Path() instead.")]
 		public TDescriptor Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Path = objectPath);
 
 		public TDescriptor Path(Field path) => Assign(a => a.Path = path);

@@ -37,7 +37,7 @@ namespace Nest
 		int? IgnoreAbove { get; set; }
 
 		[JsonIgnore]
-		[Obsolete("Scheduled to be removed in 5.0. Use PositionIncrementGap instead.")]
+		[Obsolete("Scheduled to be removed in 5.0.0. Use PositionIncrementGap instead.")]
 		int? PositionOffsetGap { get; set; }
 
 		[JsonProperty("position_increment_gap")]
@@ -61,7 +61,7 @@ namespace Nest
 		public string SearchAnalyzer { get; set; }
 		public bool? IncludeInAll { get; set; }
 		public int? IgnoreAbove { get; set; }
-		[Obsolete("Scheduled to be removed in 5.0. Use PositionIncrementGap instead.")]
+		[Obsolete("Scheduled to be removed in 5.0.0. Use PositionIncrementGap instead.")]
 		public int? PositionOffsetGap { get { return PositionIncrementGap; } set { PositionIncrementGap = value; } }
 		public int? PositionIncrementGap { get; set; }
 		public IStringFielddata Fielddata { get; set; }
@@ -82,7 +82,7 @@ namespace Nest
 		string IStringProperty.SearchAnalyzer { get; set; }
 		bool? IStringProperty.IncludeInAll { get; set; }
 		int? IStringProperty.IgnoreAbove { get; set; }
-		[Obsolete("Scheduled to be removed in 5.0. Use PositionIncrementGap instead.")]
+		[Obsolete("Scheduled to be removed in 5.0.0. Use PositionIncrementGap instead.")]
 		int? IStringProperty.PositionOffsetGap { get { return Self.PositionIncrementGap; } set { Self.PositionIncrementGap = value; } }
 		int? IStringProperty.PositionIncrementGap { get; set; }
 		IStringFielddata IStringProperty.Fielddata { get; set; }
@@ -114,7 +114,7 @@ namespace Nest
 
 		public StringPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 
-		[Obsolete("Scheduled to be removed in 5.0. Use PositionIncrementGap() instead.")]
+		[Obsolete("Scheduled to be removed in 5.0.0. Use PositionIncrementGap() instead.")]
 		public StringPropertyDescriptor<T> PositionOffsetGap(int positionOffsetGap) => Assign(a => a.PositionIncrementGap = positionOffsetGap);
 
 		public StringPropertyDescriptor<T> PositionIncrementGap(int? positionIncrementGap) => Assign(a => a.PositionIncrementGap = positionIncrementGap);

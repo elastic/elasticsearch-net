@@ -544,7 +544,7 @@ namespace Mono.Options
         protected override string GetKeyForItem(Option item)
         {
             if (item == null)
-                throw new ArgumentNullException("option");
+                throw new ArgumentNullException(nameof(item));
             if (item.Names != null && item.Names.Length > 0)
                 return item.Names[0];
             // This should never happen, as it's invalid for Option to be
@@ -556,7 +556,7 @@ namespace Mono.Options
         protected Option GetOptionForName(string option)
         {
             if (option == null)
-                throw new ArgumentNullException("option");
+                throw new ArgumentNullException(nameof(option));
             try
             {
                 return base[option];

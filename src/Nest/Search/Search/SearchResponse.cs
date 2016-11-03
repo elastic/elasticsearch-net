@@ -105,7 +105,8 @@ namespace Nest
 
 
 		private HighlightDocumentDictionary _highlights = null;
-		[Obsolete("This highlights by document id dictionary is the wrong abstraction in cases search can yield the same ids, scheduled for removal in 5.0 see #2168")]
+		[Obsolete("This highlights by document id dictionary is the wrong abstraction in cases where a search can yield the same ids, " +
+		          "for example, different types in the same index or a search across multiple indices. Removed in 5.0.0.")]
 		/// <summary>
 		/// IDictionary of id -Highlight Collection for the document
 		/// </summary>
