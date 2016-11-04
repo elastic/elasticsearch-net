@@ -27,8 +27,6 @@ namespace Nest
 
 	}
 
-	//TODO limit scope of fluent to IndexName of T
-
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>

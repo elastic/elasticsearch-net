@@ -76,24 +76,25 @@ namespace ApiGenerator.Domain
 			var m = this.RequestType;
 			foreach (var url in this.Url.Paths)
 			{
-				var cp = this.Url.Parts
+				var urlRouteParameters = this.Url.Parts
 					.Where(p => !ApiUrl.BlackListRouteValues.Contains(p.Key))
 					.Where(p => url.Contains($"{{{p.Value.Name}}}"))
 					.OrderBy(kv => url.IndexOf($"{{{kv.Value.Name}}}", StringComparison.Ordinal));
-				var par = string.Join(", ", cp.Select(p => $"{ClrParamType(p.Value.ClrTypeName)} {p.Key}"));
+
+				var par = string.Join(", ", urlRouteParameters.Select(p => $"{ClrParamType(p.Value.ClrTypeName)} {p.Key}"));
 				var routing = string.Empty;
 
 				//Routes that take {indices}/{types} and both are optional
 				//we rather not generate a parameterless constructor and force folks to call Indices.All
-				if (!cp.Any() && IndicesAndTypes)
+				if (!urlRouteParameters.Any() && IndicesAndTypes)
 				{
 					ParameterlessIndicesTypesConstructor(ctors, m);
 					continue;
 				}
 
-				if (cp.Any())
+				if (urlRouteParameters.Any())
 				{
-					routing = "r=>r." + string.Join(".", cp
+					routing = "r=>r." + string.Join(".", urlRouteParameters
 						.Select(p => new
 						{
 							route = p.Key,
@@ -109,17 +110,24 @@ namespace ApiGenerator.Domain
 				}
 
 				var doc = $@"/// <summary>{url}</summary>";
-				if (cp.Any())
+				if (urlRouteParameters.Any())
 				{
-					doc += "\r\n" + string.Join("\t\t\r\n", cp.Select(p => $"///<param name=\"{p.Key}\">{(p.Value.Required ? "this parameter is required" : "Optional, accepts null")}</param>"));
+					doc += "\r\n" + string.Join("\t\t\r\n", urlRouteParameters.Select(p => $"///<param name=\"{p.Key}\">{(p.Value.Required ? "this parameter is required" : "Optional, accepts null")}</param>"));
 				}
 				var generated = $"public {m}({par}) : base({routing}){{}}";
 
 				// special case SearchRequest<T> to pass the type of T as the type, when only the index is specified.
-				if ((m == "SearchRequest") && cp.Count() == 1 && !string.IsNullOrEmpty(this.RequestTypeGeneric))
+				if ((m == "SearchRequest") && urlRouteParameters.Count() == 1 && !string.IsNullOrEmpty(this.RequestTypeGeneric))
 				{
 					var generic = this.RequestTypeGeneric.Replace("<", "").Replace(">", "");
-					generated = $"public {m}({par}) : this({cp.First().Key}, typeof({generic})){{}}";
+					generated = $"public {m}({par}) : this({urlRouteParameters.First().Key}, typeof({generic})){{}}";
+				}
+
+				if ((m == "SuggestRequest") && string.IsNullOrEmpty(par) && !string.IsNullOrEmpty(this.RequestTypeGeneric))
+				{
+					var generic = this.RequestTypeGeneric.Replace("<", "").Replace(">", "");
+					doc = AppendToSummary(doc, ". Will infer the index from the generic type");
+					generated = $"public {m}({par}) : this(typeof({generic})){{}}";
 				}
 
 				var c = new Constructor { Generated = generated, Description = doc };
@@ -159,21 +167,22 @@ namespace ApiGenerator.Domain
 			var m = this.DescriptorType;
 			foreach (var url in this.Url.Paths)
 			{
-				var cp = this.Url.Parts
+				var requiredUrlRouteParameters = this.Url.Parts
 					.Where(p => !ApiUrl.BlackListRouteValues.Contains(p.Key))
 					.Where(p => p.Value.Required)
 					.Where(p => url.Contains($"{{{p.Value.Name}}}"))
 					.OrderBy(kv => url.IndexOf($"{{{kv.Value.Name}}}", StringComparison.Ordinal));
-				var par = string.Join(", ", cp.Select(p => $"{ClrParamType(p.Value.ClrTypeName)} {p.Key}"));
+
+				var par = string.Join(", ", requiredUrlRouteParameters.Select(p => $"{ClrParamType(p.Value.ClrTypeName)} {p.Key}"));
 				var routing = string.Empty;
 				//Routes that take {indices}/{types} and both are optional
-				if (!cp.Any() && IndicesAndTypes)
+				if (!requiredUrlRouteParameters.Any() && IndicesAndTypes)
 				{
 					AddParameterlessIndicesTypesConstructor(ctors, m);
 					continue;
 				}
-				if (cp.Any())
-					routing = "r=>r." + string.Join(".", cp
+				if (requiredUrlRouteParameters.Any())
+					routing = "r=>r." + string.Join(".", requiredUrlRouteParameters
 						.Select(p => new
 						{
 							route = p.Key,
@@ -187,18 +196,26 @@ namespace ApiGenerator.Domain
 						.Select(p => $"{p.call}(\"{p.route}\", {p.v})")
 					);
 				var doc = $@"/// <summary>{url}</summary>";
-				if (cp.Any())
+				if (requiredUrlRouteParameters.Any())
 				{
-					doc += "\r\n" + string.Join("\t\t\r\n", cp.Select(p => $"///<param name=\"{p.Key}\"> this parameter is required</param>"));
+					doc += "\r\n" + string.Join("\t\t\r\n", requiredUrlRouteParameters.Select(p => $"///<param name=\"{p.Key}\"> this parameter is required</param>"));
 				}
 
 				var generated = $"public {m}({par}) : base({routing}){{}}";
 
 				// Add typeof(T) as the default type when only index specified
-				if ((m == "DeleteByQueryDescriptor" || m == "UpdateByQueryDescriptor") && cp.Count() == 1 && !string.IsNullOrEmpty(this.RequestTypeGeneric))
+				if ((m == "DeleteByQueryDescriptor" || m == "UpdateByQueryDescriptor") && requiredUrlRouteParameters.Count() == 1 && !string.IsNullOrEmpty(this.RequestTypeGeneric))
 				{
 					var generic = this.RequestTypeGeneric.Replace("<", "").Replace(">", "");
 					generated = $"public {m}({par}) : base({routing}.Required(\"type\", (Types)typeof({generic}))){{}}";
+				}
+
+				// Add typeof(T) as the default index to use for Suggest
+				if ((m == "SuggestDescriptor") && !string.IsNullOrEmpty(this.RequestTypeGeneric))
+				{
+					var generic = this.RequestTypeGeneric.Replace("<", "").Replace(">", "");
+					doc = AppendToSummary(doc, ". Will infer the index from the generic type");
+					generated = $"public {m}({par}) : base(r => r.Required(\"index\", (Indices)typeof({generic}))){{}}";
 				}
 
 				var c = new Constructor { Generated = generated, Description = doc };
@@ -288,6 +305,13 @@ namespace ApiGenerator.Domain
 			return setters;
 		}
 
+		private string AppendToSummary(string doc, string toAppend)
+		{
+			return Regex.Replace(
+						doc,
+						@"^(\/\/\/ <summary>)(.*?)(<\/summary>)(.*)",
+						"$1$2" + toAppend + "$3$4");
+		}
 
 		private bool IsPartless => this.Url.Parts == null || !this.Url.Parts.Any();
 		private bool IsScroll => this.Url.Parts.All(p => p.Key == "scroll_id");
