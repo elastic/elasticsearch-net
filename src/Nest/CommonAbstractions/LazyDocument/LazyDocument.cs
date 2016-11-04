@@ -7,7 +7,7 @@ namespace Nest
 	public interface ILazyDocument
 	{
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
@@ -21,7 +21,7 @@ namespace Nest
 		public T As<T>() where T : class
 		{
 			var jToken = this._Value;
-			return jToken != null ? jToken.ToObject<T>() : null;
+			return jToken?.ToObject<T>();
 		}
 	}
 }
