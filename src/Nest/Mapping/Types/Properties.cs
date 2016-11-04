@@ -33,7 +33,7 @@ namespace Nest
 		public void Add(Expression<Func<T, object>> name, IProperty property) => this.BackingDictionary.Add(name, property);
 	}
 
-	public interface IPropertiesDescriptor<T, out TReturnType>
+	public partial interface IPropertiesDescriptor<T, out TReturnType>
 		where T : class
 		where TReturnType : class
 	{
@@ -42,6 +42,10 @@ namespace Nest
 		TReturnType String(Func<StringPropertyDescriptor<T>, IStringProperty> selector);
 		TReturnType Text(Func<TextPropertyDescriptor<T>, ITextProperty> selector);
 		TReturnType Keyword(Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector);
+		/// <summary>
+		/// Number introduces a numeric mapping that defaults to `float` use .Type() to set the right type if needed or use
+		/// <see cref="Scalar"/> instead of <see cref="Number"/>
+		/// </summary>
 		TReturnType Number(Func<NumberPropertyDescriptor<T>, INumberProperty> selector);
 		TReturnType TokenCount(Func<TokenCountPropertyDescriptor<T>, ITokenCountProperty> selector);
 		TReturnType Date(Func<DatePropertyDescriptor<T>, IDateProperty> selector);
@@ -60,7 +64,7 @@ namespace Nest
 		TReturnType Percolator(Func<PercolatorPropertyDescriptor<T>, IPercolatorProperty> selector);
 	}
 
-	public class PropertiesDescriptor<T> : IsADictionaryDescriptorBase<PropertiesDescriptor<T>, IProperties, PropertyName, IProperty>, IPropertiesDescriptor<T, PropertiesDescriptor<T>>
+	public partial class PropertiesDescriptor<T> : IsADictionaryDescriptorBase<PropertiesDescriptor<T>, IProperties, PropertyName, IProperty>, IPropertiesDescriptor<T, PropertiesDescriptor<T>>
 		where T : class
 	{
 		public PropertiesDescriptor() : base(new Properties<T>()) { }
@@ -74,6 +78,10 @@ namespace Nest
 
 		public PropertiesDescriptor<T> Keyword(Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector) => SetProperty(selector);
 
+		/// <summary>
+		/// Number introduces a numeric mapping that defaults to `float` use .Type() to set the right type if needed or use
+		/// <see cref="Scalar"/> instead of <see cref="Number"/>
+		/// </summary>
 		public PropertiesDescriptor<T> Number(Func<NumberPropertyDescriptor<T>, INumberProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> TokenCount(Func<TokenCountPropertyDescriptor<T>, ITokenCountProperty> selector) => SetProperty(selector);

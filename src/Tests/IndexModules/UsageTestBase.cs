@@ -12,13 +12,17 @@ namespace Tests.Framework
 		protected abstract TInitializer Initializer { get; }
 		protected abstract Func<TDescriptor, TInterface> Fluent { get; }
 
+		protected virtual bool TestObjectInitializer => true;
+
 		protected UsageTestBase()
 		{
 			this.FluentInstance = this.Fluent(new TDescriptor());
 		}
 
-		[U] protected void SerializesInitializer() =>
-			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
+		[U] protected void SerializesInitializer()
+		{
+			if (this.TestObjectInitializer) this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
+		}
 
 		[U] protected void SerializesFluent() =>
 			this.AssertSerializesAndRoundTrips(this.FluentInstance);
