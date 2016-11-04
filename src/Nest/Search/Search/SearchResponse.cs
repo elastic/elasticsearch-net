@@ -20,11 +20,12 @@ namespace Nest
 		string ScrollId { get; }
 		long Total { get; }
 		double MaxScore { get; }
+
 		/// <summary>
 		/// Returns a view on the documents inside the hits that are returned.
-		/// <para>NOTE: if you use Fields() on the search descriptor .Documents will be empty use
-		/// .Fields instead or try the 'source filtering' feature introduced in Elasticsearch 1.0
-		/// using .Source() on the search descriptor to get Documents of type T with only certain parts selected
+		/// <para>NOTE: if you use Fields() on the search descriptor, .Documents will be empty. Use
+		/// .Fields instead or try Source Filtering using .Source() on the Search call
+		/// to get Documents with partial fields selected
 		/// </para>
 		/// </summary>
 		IEnumerable<T> Documents { get; }
@@ -96,6 +97,7 @@ namespace Nest
 		public IEnumerable<IHit<T>> Hits => this.HitsMetaData?.Hits ?? Enumerable.Empty<IHit<T>>();
 
 		private IList<FieldValues> _fields;
+
 		/// <inheritdoc/>
 		public IEnumerable<FieldValues> Fields =>
 				this._fields ?? (this._fields = this.Hits

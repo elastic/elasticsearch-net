@@ -24,7 +24,7 @@ namespace Tests.Reproduce
 		}
 
 		[I]
-		public void ConcreteTypeConverterThrowsExceptionOnNullScore()
+		public void ConcreteTypeConverterReturnsNullScores()
 		{
 			var client = _cluster.Client;
 			var response = client.Search<Project>(s => s
@@ -32,7 +32,7 @@ namespace Tests.Reproduce
 				.Sort(srt => srt.Ascending(p => p.StartedOn))
 			);
 			response.Hits.Count().Should().BeGreaterThan(0);
-			response.Hits.All(h => h.Score == 0).Should().BeTrue();
+			response.Hits.All(h => h.Score.HasValue).Should().BeFalse();
 		}
 	}
 }
