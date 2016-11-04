@@ -92,7 +92,7 @@ namespace Nest
 
 		private static JObject CreateIntermediateJObject(JsonReader reader)
 		{
-			JObject jObject = JObject.Load(reader);
+			var jObject = JObject.Load(reader);
 			return jObject;
 		}
 
@@ -109,29 +109,31 @@ namespace Nest
 			where T: class
 		{
 			var settings = serializer.GetConnectionSettings();
-			var baseType = realConcreteConverter._baseType;
 			var selector = realConcreteConverter._concreteTypeSelector;
 
-			//Hit<dynamic> hitDynamic = new Hit<dynamic>();
 			dynamic d = jObject;
 			var fields = jObject["fields"];
 			var fieldsDictionary = fields?.ToObject<IDictionary<string, object>>();
 			var fieldValues = new FieldValues(settings.Inferrer, fieldsDictionary);
-			var hitDynamic = new Hit<dynamic>();
-			//favor manual mapping over doing Populate twice.
-			hitDynamic.Fields = fieldValues;
-			hitDynamic.Source = d._source;
-			hitDynamic.Index = d._index;
-			hitDynamic.Score = d._score != null ? (double)d._score : 0;
-			hitDynamic.Type = d._type;
-			hitDynamic.Version = d._version;
-			hitDynamic.Id = d._id;
-			hitDynamic.Parent = d._parent;
-			hitDynamic.Routing = d._routing;
-			hitDynamic.Sorts = d.sort;
-			hitDynamic._Highlight = d.highlight is Dictionary<string, List<string>> ? d.highlight : null;
-			hitDynamic.Explanation = d._explanation is Explanation ? d._explanation : null;
-			object o = d._source ?? DynamicResponse.Create(fieldsDictionary) ?? new object {};
+
+			var hitDynamic = new Hit<dynamic>
+			{
+				//favor manual mapping over doing Populate twice.
+				Fields = fieldValues,
+				Source = d._source,
+				Index = d._index,
+				Score = d._score,
+				Type = d._type,
+				Version = d._version,
+				Id = d._id,
+				Parent = d._parent,
+				Routing = d._routing,
+				Sorts = d.sort,
+				_Highlight = d.highlight is Dictionary<string, List<string>> ? d.highlight : null,
+				Explanation = d._explanation is Explanation ? d._explanation : null
+			};
+
+			object o = d._source ?? DynamicResponse.Create(fieldsDictionary) ?? new object();
 			var concreteType = selector(o, hitDynamic);
 			return concreteType;
 		}
