@@ -5210,6 +5210,42 @@ namespace Nest
 		Indices Index { get; }
 	 } 
 	///<summary>Request parameters for Suggest <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html</pre></summary>
+	public partial class SuggestRequest<T>  : PlainRequestBase<SuggestRequestParameters>, ISuggestRequest
+	{
+		protected ISuggestRequest Self => this;
+		Indices ISuggestRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_suggest. Will infer the index from the generic type</summary>
+		public SuggestRequest() : this(typeof(T)){}
+		
+
+		/// <summary>/{index}/_suggest</summary>
+///<param name="index">Optional, accepts null</param>
+		public SuggestRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		
+
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
+		
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
+		
+		///<summary>Specific routing value</summary>
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	///<summary>Request parameters for Suggest <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html</pre></summary>
 	public partial class SuggestRequest  : PlainRequestBase<SuggestRequestParameters>, ISuggestRequest
 	{
 		protected ISuggestRequest Self => this;
