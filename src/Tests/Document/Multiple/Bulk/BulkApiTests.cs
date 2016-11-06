@@ -36,6 +36,15 @@ namespace Tests.Document.Multiple.Bulk
 			new Dictionary<string, object>{ { "create", new { _type="project", _id = Project.Instance.Name + "1" } } },
 			Project.InstanceAnonymous,
 			new Dictionary<string, object>{ { "delete", new { _type="project", _id = Project.Instance.Name + "1" } } },
+			new Dictionary<string, object>{ { "create", new { _type="project", _id = Project.Instance.Name + "2" } } },
+			Project.InstanceAnonymous,
+			new Dictionary<string, object>{ { "update", new { _type="project", _id = Project.Instance.Name + "2" } } },
+			new Dictionary<string, object>{ { "script", new
+			{
+				inline= "ctx._source.numberOfCommits = commits",
+				@params = new { commits = 30 },
+				lang = "groovy"
+			} } },
 		};
 
 		protected override Func<BulkDescriptor, IBulkRequest> Fluent => d => d
@@ -43,7 +52,14 @@ namespace Tests.Document.Multiple.Bulk
 			.Index<Project>(b => b.Document(Project.Instance))
 			.Update<Project, object>(b => b.Doc(new { leadDeveloper = new { firstName = "martijn" } }).Id(Project.Instance.Name))
 			.Create<Project>(b => b.Document(Project.Instance).Id(Project.Instance.Name + "1"))
-			.Delete<Project>(b=>b.Id(Project.Instance.Name + "1"));
+			.Delete<Project>(b=>b.Id(Project.Instance.Name + "1"))
+			.Create<Project>(b => b.Document(Project.Instance).Id(Project.Instance.Name + "2"))
+			.Update<Project>(b => b
+				.Id(Project.Instance.Name + "2")
+				.Script("ctx._source.numberOfCommits = commits")
+				.Params(p => p.Add("commits", 30))
+				.Lang("groovy")
+			);
 
 
 		protected override BulkRequest Initializer =>
@@ -61,6 +77,16 @@ namespace Tests.Document.Multiple.Bulk
 						Id = Project.Instance.Name + "1"
 					},
 					new BulkDeleteOperation<Project>(Project.Instance.Name + "1"),
+					new BulkCreateOperation<Project>(Project.Instance)
+					{
+						Id = Project.Instance.Name + "2",
+					},
+					new BulkUpdateOperation<Project, object>(Project.Instance.Name + "2")
+					{
+						Script = "ctx._source.numberOfCommits = commits",
+						Params = new Dictionary<string, object> { { "commits", 30 } },
+						Lang = "groovy"
+					}
 				}
 			};
 
@@ -83,8 +109,11 @@ namespace Tests.Document.Multiple.Bulk
 				item.Shards.Successful.Should().BeGreaterThan(0);
 			}
 
-			var p1 = this.Client.Source<Project>(Project.Instance.Name, p => p.Index(CallIsolatedValue));
-			p1.LeadDeveloper.FirstName.Should().Be("martijn");
+			var project1 = this.Client.Source<Project>(Project.Instance.Name, p => p.Index(CallIsolatedValue));
+			project1.LeadDeveloper.FirstName.Should().Be("martijn");
+
+			var project2 = this.Client.Source<Project>(Project.Instance.Name + "2", p => p.Index(CallIsolatedValue));
+			project2.NumberOfCommits.Should().Be(30);
 		}
 
 	}
