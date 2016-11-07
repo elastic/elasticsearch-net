@@ -53,6 +53,7 @@ namespace Tests.Search.Request
 					{ "leadDeveloper.firstName", new JObject
 						{
 							{ "type", "fvh" },
+							{ "boundary_max_scan", 50 },
 							{ "pre_tags", new JArray { "<name>" } },
 							{ "post_tags", new JArray { "</name>" } },
 							{ "highlight_query", new JObject
@@ -111,6 +112,7 @@ namespace Tests.Search.Request
 					fs => fs
 						.Field(p => p.LeadDeveloper.FirstName)
 						.Type(HighlighterType.Fvh)
+						.BoundaryMaxScan(50)
 						.PreTags("<name>")
 						.PostTags("</name>")
 						.HighlightQuery(q => q
@@ -162,6 +164,7 @@ namespace Tests.Search.Request
 						{ "leadDeveloper.firstName", new HighlightField
 							{
 								CustomType = "fvh",
+								BoundaryMaxScan = 50,
 								PreTags = new[] { "<name>"},
 								PostTags = new[] { "</name>"},
 								HighlightQuery = new MatchQuery
