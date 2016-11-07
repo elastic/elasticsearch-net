@@ -11,34 +11,34 @@ namespace Nest
 		string Operation { get; }
 		Type ClrType { get; }
 
-		[JsonProperty(PropertyName = "_index")]
+		[JsonProperty("_index")]
 		IndexName Index { get; set; }
 
-		[JsonProperty(PropertyName = "_type")]
+		[JsonProperty("_type")]
 		TypeName Type { get; set; }
 
-		[JsonProperty(PropertyName = "_id")]
+		[JsonProperty("_id")]
 		Id Id { get; set; }
 
-		[JsonProperty(PropertyName = "_version")]
+		[JsonProperty("_version")]
 		long? Version { get; set; }
 
-		[JsonProperty(PropertyName = "_version_type")]
+		[JsonProperty("_version_type")]
 		[JsonConverter(typeof(StringEnumConverter))]
 		VersionType? VersionType { get; set; }
 
-		[JsonProperty(PropertyName = "_routing")]
+		[JsonProperty("_routing")]
 		string Routing { get; set; }
 
-		[JsonProperty(PropertyName = "_parent")]
+		[JsonProperty("_parent")]
 		Id Parent { get; set; }
 
 		[JsonProperty("_timestamp")]
-		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
+		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.0.0 and up")]
 		long? Timestamp { get; set; }
 
 		[JsonProperty("_ttl")]
-		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
+		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.0.0 and up")]
 		Time Ttl { get; set; }
 
 		[JsonProperty("_retry_on_conflict")]
