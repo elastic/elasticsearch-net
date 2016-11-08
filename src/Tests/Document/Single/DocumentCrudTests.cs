@@ -81,5 +81,9 @@ namespace Tests.Document.Single
 		[I] protected async Task DocumentIsDeleted() => await this.AssertOnGetAfterDelete(r =>
 			r.Found.Should().BeFalse()
 		);
+
+		[I]protected override async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r =>
+			r.ShouldBeValid()
+		);
 	}
 }
