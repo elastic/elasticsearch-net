@@ -30,6 +30,9 @@ namespace Nest
 		public string Target => GetResolved("target");
 		public string NewIndex => GetResolved("new_index");
 		public string Alias => GetResolved("alias");
+		public string WatchId => GetResolved("watch_id");
+		public string ActionId => GetResolved("action_id");
+		public WatcherStatsMetric? WatcherStatsMetric => GetResolved("watcher_stats_metric").ToEnum<WatcherStatsMetric>();
 
 		private string GetResolved(string route)
 		{

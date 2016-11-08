@@ -15,11 +15,7 @@
       "params": {
         "master_timeout": {
           "type": "duration",
-          "description": "Specify timeout for watch write operation"
-        },
-        "force": {
-          "type": "boolean",
-          "description": "Specify if this request should be forced and ignore locks"
+          "description": "Explicit operation timeout for connection to master node"
         }
       }
     },

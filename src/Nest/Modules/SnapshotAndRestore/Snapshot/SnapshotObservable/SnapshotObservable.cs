@@ -109,7 +109,7 @@ namespace Nest
 		{
 			if (_disposed) return;
 
-			if (_timer != null) _timer.Dispose();
+			_timer?.Dispose();
 
 			if (_snapshotStatusHumbleObject != null)
 			{
@@ -132,7 +132,7 @@ namespace Nest
 
 	public class SnapshotNextEventArgs : EventArgs
 	{
-		public ISnapshotStatusResponse SnapshotStatusResponse { get; private set; }
+		public ISnapshotStatusResponse SnapshotStatusResponse { get; }
 
 		public SnapshotNextEventArgs(ISnapshotStatusResponse snapshotStatusResponse)
 		{
@@ -152,7 +152,7 @@ namespace Nest
 
 	public class SnapshotErrorEventArgs : EventArgs
 	{
-		public Exception Exception { get; private set; }
+		public Exception Exception { get; }
 
 		public SnapshotErrorEventArgs(Exception exception)
 		{

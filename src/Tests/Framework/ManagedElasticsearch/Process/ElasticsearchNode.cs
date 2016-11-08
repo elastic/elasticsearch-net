@@ -61,7 +61,7 @@ namespace Tests.Framework.Integration
 			};
 
 			if (!this.Version.IsSnapshot)
-				this.DefaultNodeSettings.Add($"{es}xpack.{shieldOrSecurity}.enabled={this._config.ShieldEnabled.ToString().ToLowerInvariant()}");
+				this.DefaultNodeSettings.Add($"{es}xpack.{shieldOrSecurity}.enabled={this._config.XPackEnabled.ToString().ToLowerInvariant()}");
 
 			if (this._config.RunIntegrationTests && !this._config.TestAgainstAlreadyRunningElasticsearch) return;
 			this.Port = 9200;
@@ -233,7 +233,7 @@ namespace Tests.Framework.Integration
 
 		private void ValidateLicense(IElasticClient client, XplatManualResetEvent handle)
 		{
-			if (!this._config.ShieldEnabled) return;
+			if (!this._config.XPackEnabled) return;
 			var license = client.GetLicense();
 			if (license.IsValid && license.License.Status == LicenseStatus.Active) return;
 
@@ -340,7 +340,7 @@ namespace Tests.Framework.Integration
 		private ConnectionSettings ComposeSettings(ConnectionSettings s) => AddBasicAuthentication(AppendClusterNameToHttpHeaders(s));
 
 		private ConnectionSettings AddBasicAuthentication(ConnectionSettings settings) =>
-			!this._config.ShieldEnabled ? settings : settings.BasicAuthentication("es_admin", "es_admin");
+			!this._config.XPackEnabled ? settings : settings.BasicAuthentication("es_admin", "es_admin");
 
 		private ConnectionSettings AppendClusterNameToHttpHeaders(ConnectionSettings settings)
 		{

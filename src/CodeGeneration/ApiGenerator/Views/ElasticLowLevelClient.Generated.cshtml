@@ -34,7 +34,6 @@ namespace Elasticsearch.Net
 		foreach (var method in methods)
 		{
 			var url = method.Path.Split(new[] {'/'}, 2).Last();
-			int i = -1;
 			var patchedUrl = url;
 			if (!url.Contains("{task_id}"))
 			{

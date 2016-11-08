@@ -92,7 +92,7 @@ namespace Tests.ClientConcepts.Serializer
 			var jsonResponse = $@"{{ ""_id"": ""1"", ""_source"": {{ ""dateString"": ""{expectedDateString}"" }}}}";
 			var client = this.CreateClient(jsonResponse, (jsonSettings, nestSettings) => jsonSettings.MaxDepth = 1);
 
-			Action act = () => client.Get<HasDateString>(1);
+			System.Action act = () => client.Get<HasDateString>(1);
 			act.ShouldThrow<UnexpectedElasticsearchClientException>()
 				.WithMessage("The reader's MaxDepth of 1 has been exceeded. Path '_source', line 1, position 26.");
 		}

@@ -19,7 +19,7 @@ namespace Nest
 		public string Host { get; internal set; }
 
 		[JsonProperty("ip")]
-		[JsonConverter(typeof(SingleOrEnumerableConverter<string>))]
+		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
 		public IEnumerable<string> Ip { get; internal set; }
 
 		/// <summary>

@@ -7,7 +7,7 @@ using System.Threading;
 namespace Nest
 {
 	/// <summary>
-	/// ElasticClient is NEST's strongly typed client which exposes fully mapped elasticsearch endpoints
+	/// ElasticClient is NEST's strongly typed client which exposes fully mapped Elasticsearch endpoints
 	/// </summary>
 	public partial class ElasticClient : IElasticClient, IHighLevelToLowLevelDispatcher
 	{
@@ -65,9 +65,9 @@ namespace Nest
 			) => this.Dispatcher.DispatchAsync<TRequest,TQueryString,TResponse,TResponseInterface>(descriptor, cancellationToken, null, dispatch);
 
 		async Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
-			TRequest request, 
+			TRequest request,
 			CancellationToken cancellationToken,
-			Func<IApiCallDetails, Stream, TResponse> responseGenerator, 
+			Func<IApiCallDetails, Stream, TResponse> responseGenerator,
 			Func<TRequest, PostData<object>, CancellationToken, Task<ElasticsearchResponse<TResponse>>> dispatch
 			)
 		{
