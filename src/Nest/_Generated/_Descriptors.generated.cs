@@ -4583,8 +4583,8 @@ namespace Nest
 	public partial class SuggestDescriptor<T>  : RequestDescriptorBase<SuggestDescriptor<T>,SuggestRequestParameters, ISuggestRequest>, ISuggestRequest
 	{ 
 		Indices ISuggestRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_suggest</summary>
-		public SuggestDescriptor() : base(){}
+			/// <summary>/_suggest. Will infer the index from the generic type</summary>
+		public SuggestDescriptor() : base(r => r.Required("index", (Indices)typeof(T))){}
 		
 
 			///<summary>A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</summary>

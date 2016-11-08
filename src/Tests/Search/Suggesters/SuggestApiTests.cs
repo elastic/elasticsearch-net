@@ -16,7 +16,7 @@ namespace Tests.Search.Suggesters
 
 	*/
 	public class SuggestApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ISuggestResponse<Project>, ISuggestRequest, SuggestDescriptor<Project>, SuggestRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISuggestResponse<Project>, ISuggestRequest, SuggestDescriptor<Project>, SuggestRequest<Project>>
 	{
 		public SuggestApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -30,7 +30,7 @@ namespace Tests.Search.Suggesters
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/_suggest";
+		protected override string UrlPath => "/project/_suggest";
 		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson =>
@@ -144,8 +144,8 @@ namespace Tests.Search.Suggesters
 					.RealWordErrorLikelihood(0.5)
 				);
 
-		protected override SuggestRequest Initializer =>
-			new SuggestRequest()
+		protected override SuggestRequest<Project> Initializer =>
+			new SuggestRequest<Project>
 			{
 				Suggest = new SuggestContainer
 				{

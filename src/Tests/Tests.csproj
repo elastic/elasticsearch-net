@@ -644,6 +644,7 @@
     <Compile Include="Search\Request\SearchAfterUsageTests.cs" />
     <Compile Include="Search\Search\Rescoring\RescoreUsageTests.cs" />
     <Compile Include="Search\Search\InvalidSearchApiTests.cs" />
+    <Compile Include="Search\Suggesters\SuggestUrlTests.cs" />
     <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsApiTests.cs" />
     <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsUrlTests.cs" />
     <Compile Include="XPack\Security\Role\ClearCachedRoles\ClearCachedRolesApiTests.cs" />
