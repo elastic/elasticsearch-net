@@ -17,6 +17,14 @@ namespace Nest
 		public ISuggestContainer Suggest { get; set; }
 	}
 
+	public partial interface ISuggestRequest<T> : ISearchRequest { }
+
+	public partial class SuggestRequest<T>
+	{
+		public string GlobalText { get; set; }
+		public ISuggestContainer Suggest { get; set; }
+	}
+
 	[DescriptorFor("Suggest")]
 	public partial class SuggestDescriptor<T> where T : class
 	{
