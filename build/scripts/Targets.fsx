@@ -6,7 +6,7 @@
 #load @"Documentation.fsx"
 #load @"Releasing.fsx"
 #load @"Profiling.fsx"
-#load @"InheritDoc.fsx"
+#load @"XmlDocPatcher.fsx"
 
 open System
 
@@ -63,15 +63,12 @@ Target "Canary" <| fun _ ->
   =?> ("Version", hasBuildParam "version")
   ==> "BuildApp"
   =?> ("Test", (not ((getBuildParam "skiptests") = "1")))
+  ==> "InheritDoc"
   ==> "Build"
 
 "Clean" 
   ==> "BuildApp"
   ==> "TestForever"
-
-"Clean" 
-  ==> "BuildApp"
-  ==> "InheritDoc"
 
 "Clean" 
   ==> "BuildApp"
