@@ -61,6 +61,13 @@ namespace Tests.Document.Multiple.Bulk
 			new Dictionary<string, object>{ { "delete", new { _type="project", _id = Project.Instance.Name + "1" } } },
 			new Dictionary<string, object>{ { "create", new { _type="project", _id = Project.Instance.Name + "2" } } },
 			Project.InstanceAnonymous,
+			new Dictionary<string, object>{ { "update", new { _type="project", _id = Project.Instance.Name + "2" } } },
+			new Dictionary<string, object>{ { "script", new
+			{
+				inline= "ctx._source.numberOfCommits = params.commits",
+				@params = new { commits = 30 },
+				lang = "painless"
+			} } },
 		};
 
 		protected override Func<BulkDescriptor, IBulkRequest> Fluent => d => d
@@ -70,8 +77,15 @@ namespace Tests.Document.Multiple.Bulk
 			.Update<Project, object>(b => b.Doc(new { leadDeveloper = new { firstName = "martijn" } }).Id(Project.Instance.Name))
 			.Create<Project>(b => b.Document(Project.Instance).Id(Project.Instance.Name + "1"))
 			.Delete<Project>(b=>b.Id(Project.Instance.Name + "1"))
-			.Create<Project>(b => b.Document(Project.Instance).Id(Project.Instance.Name + "2"));
-
+			.Create<Project>(b => b.Document(Project.Instance).Id(Project.Instance.Name + "2"))
+			.Update<Project>(b => b
+				.Id(Project.Instance.Name + "2")
+				.Script(s => s
+					.Inline("ctx._source.numberOfCommits = params.commits")
+					.Params(p => p.Add("commits", 30))
+					.Lang("painless")
+				)
+			);
 
 		protected override BulkRequest Initializer =>
 			new BulkRequest(CallIsolatedValue)
@@ -93,6 +107,14 @@ namespace Tests.Document.Multiple.Bulk
 					{
 						Id = Project.Instance.Name + "2",
 					},
+					new BulkUpdateOperation<Project, object>(Project.Instance.Name + "2")
+					{
+						Script = new InlineScript("ctx._source.numberOfCommits = params.commits")
+						{
+							Params = new Dictionary<string, object> { { "commits", 30 } },
+							Lang = "painless"
+						}
+					}
 				}
 			};
 
@@ -121,6 +143,7 @@ namespace Tests.Document.Multiple.Bulk
 
 			var project2 = this.Client.Source<Project>(Project.Instance.Name + "2", p => p.Index(CallIsolatedValue));
 			project2.Description.Should().Be("Default");
+			project2.NumberOfCommits.Should().Be(30);
 		}
 	}
 }
