@@ -599,6 +599,8 @@
     <Compile Include="Reproduce\GithubIssue2052.cs" />
     <Compile Include="Reproduce\GithubIssue2173.cs" />
     <Compile Include="Reproduce\DateSerialization.cs" />
+    <Compile Include="Reproduce\GithubIssue2323.cs" />
+    <Compile Include="Search\Hits\HitsSerializationTests.cs" />
     <Compile Include="Search\Search\Rescoring\RescoreUsageTests.cs" />
     <Compile Include="Search\Search\InvalidSearchApiTests.cs" />
     <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsApiTests.cs" />

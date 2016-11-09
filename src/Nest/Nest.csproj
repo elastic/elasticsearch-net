@@ -1143,6 +1143,7 @@
     <Compile Include="Search\Search\Hits\HitsMetaData.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsMetaData.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsResult.cs" />
+    <Compile Include="Search\Search\Hits\NestedIdentity.cs" />
     <Compile Include="Search\Search\InnerHits\GlobalInnerHit.cs" />
     <Compile Include="Search\Search\InnerHits\InnerHits.cs" />
     <Compile Include="Search\Search\InnerHits\InnerHitsContainer.cs" />
