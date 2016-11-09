@@ -13,6 +13,16 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
+	internal static class EmptyReadOnly<TElement>
+	{
+		public static readonly IReadOnlyCollection<TElement> Collection = new TElement[0];
+	}
+	internal static class EmptyReadOnly<TKey, TValue>
+	{
+		public static readonly IReadOnlyDictionary<TKey, TValue> Dictionary = new Dictionary<TKey, TValue>(0);
+	}
+
+
 	internal static class Extensions
 	{
 		internal static bool NotWritable(this QueryContainer q) => q == null || !q.IsWritable;

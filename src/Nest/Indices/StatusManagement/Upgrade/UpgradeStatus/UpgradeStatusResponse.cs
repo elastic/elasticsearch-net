@@ -7,19 +7,18 @@ namespace Nest
 	[JsonConverter(typeof(UpgradeStatusResponseJsonConverter))]
 	public interface IUpgradeStatusResponse : IResponse
 	{
-		long SizeInBytes { get; set; }
-		string SizeToUpgradeInBytes { get; set; }
-		string SizeToUpgradeAncientInBytes { get; set; }
-		Dictionary<string, UpgradeStatus> Upgrades { get; set; }
-
+		long SizeInBytes { get; }
+		string SizeToUpgradeInBytes { get; }
+		string SizeToUpgradeAncientInBytes { get; }
+		IReadOnlyDictionary<string, UpgradeStatus> Upgrades { get; }
 	}
 
 	public class UpgradeStatusResponse : ResponseBase, IUpgradeStatusResponse
 	{
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public Dictionary<string, UpgradeStatus> Upgrades { get; set; }
-		public long SizeInBytes { get; set; }
-		public string SizeToUpgradeInBytes { get; set; }
-		public string SizeToUpgradeAncientInBytes { get; set; }
+		public IReadOnlyDictionary<string, UpgradeStatus> Upgrades { get; internal set; } = EmptyReadOnly<string, UpgradeStatus>.Dictionary;
+		public long SizeInBytes { get; internal set; }
+		public string SizeToUpgradeInBytes { get; internal set; }
+		public string SizeToUpgradeAncientInBytes { get; internal set; }
 	}
 }

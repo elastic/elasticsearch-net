@@ -5,7 +5,7 @@ namespace Nest
 {
 	public interface IGetMappingResponse : IResponse
 	{
-		Dictionary<string, IDictionary<string, TypeMapping>> Mappings { get; }
+		IReadOnlyDictionary<string, IReadOnlyDictionary<string, TypeMapping>> Mappings { get; }
 
 		TypeMapping Mapping { get; }
 
@@ -27,11 +27,11 @@ namespace Nest
 				Dictionary<string, TypeMapping> mappings;
 				if (index.Value != null && index.Value.TryGetValue("mappings", out mappings))
 				{
-					this.Mappings.Add(index.Key, new Dictionary<string, TypeMapping>());
+					this._mappings.Add(index.Key, new Dictionary<string, TypeMapping>());
 					foreach (var mapping in mappings)
 					{
 						if (mapping.Value == null) continue;
-						this.Mappings[index.Key].Add(mapping.Key, mapping.Value);
+						this._mappings[index.Key].Add(mapping.Key, mapping.Value);
 					}
 				}
 			}
@@ -41,7 +41,9 @@ namespace Nest
 				.FirstOrDefault(t => t.Value != null).Value;
 		}
 
-		public Dictionary<string, IDictionary<string, TypeMapping>> Mappings { get; internal set; } = new Dictionary<string, IDictionary<string, TypeMapping>>();
+		private Dictionary<string, Dictionary<string, TypeMapping>> _mappings = new Dictionary<string, Dictionary<string, TypeMapping>>();
+		public IReadOnlyDictionary<string, IReadOnlyDictionary<string, TypeMapping>> Mappings => this._mappings
+			.ToDictionary(k=>k.Key, v=>(IReadOnlyDictionary<string, TypeMapping>)v.Value);
 
 		public TypeMapping Mapping { get; internal set; }
 

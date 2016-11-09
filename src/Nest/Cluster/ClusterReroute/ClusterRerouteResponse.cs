@@ -6,16 +6,17 @@ namespace Nest
 	public interface IClusterRerouteResponse : IResponse
 	{
 		[JsonProperty("state")]
-		ClusterRerouteState State { get; set; }
+		ClusterRerouteState State { get; }
 
 		[JsonProperty("explanations")]
-		IEnumerable<ClusterRerouteExplanation> Explanations { get; set; }
+		IReadOnlyCollection<ClusterRerouteExplanation> Explanations { get; }
 	}
 
 	public class ClusterRerouteResponse : ResponseBase, IClusterRerouteResponse
 	{
-		public int Version { get; set; }
-		public ClusterRerouteState State { get; set; }
-		public IEnumerable<ClusterRerouteExplanation> Explanations { get; set; }
+		//TODO why is this not on the interface?
+		public int Version { get; internal set; }
+		public ClusterRerouteState State { get; internal set; }
+		public IReadOnlyCollection<ClusterRerouteExplanation> Explanations { get; } = EmptyReadOnly<ClusterRerouteExplanation>.Collection;
 	}
 }

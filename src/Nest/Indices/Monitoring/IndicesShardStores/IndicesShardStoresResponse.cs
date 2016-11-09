@@ -8,62 +8,62 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "indices")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		Dictionary<string, IndicesShardStores> Indices { get; set; }
+		IReadOnlyDictionary<string, IndicesShardStores> Indices { get; }
 	}
 
 	[JsonObject]
 	public class IndicesShardStoresResponse : ResponseBase, IIndicesShardStoresResponse
 	{
-		public Dictionary<string, IndicesShardStores> Indices { get; set; }
+		public IReadOnlyDictionary<string, IndicesShardStores> Indices { get; internal set; } = EmptyReadOnly<string, IndicesShardStores>.Dictionary;
 	}
 
 	public class IndicesShardStores
 	{
 		[JsonProperty(PropertyName = "shards")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public Dictionary<string, ShardStoreWrapper> Shards { get; set; }
+		public IReadOnlyDictionary<string, ShardStoreWrapper> Shards { get; internal set; } = EmptyReadOnly<string, ShardStoreWrapper>.Dictionary;
 	}
 
 	public class ShardStoreWrapper
 	{
-		public IEnumerable<ShardStore> Stores { get; set; }
+		public IReadOnlyCollection<ShardStore> Stores { get; internal set; } = EmptyReadOnly<ShardStore>.Collection;
 	}
 
 	[JsonConverter(typeof(ShardStoreJsonConverter))]
 	public class ShardStore
 	{
 		[JsonProperty("id")]
-		public string Id { get; set; }
+		public string Id { get; internal set; }
 
 		[JsonProperty("name")]
-		public string Name { get; set; }
+		public string Name { get; internal set; }
 
 		[JsonProperty("transport_address")]
-		public string TransportAddress { get; set; }
+		public string TransportAddress { get; internal set; }
 
 		[JsonProperty("legacy_version")]
-		public long? LegacyVersion { get; set; }
+		public long? LegacyVersion { get; internal set; }
 
 		[JsonProperty("allocation_id")]
-		public string AllocationId { get; set; }
+		public string AllocationId { get; internal set; }
 
 		[JsonProperty("store_exception")]
-		public ShardStoreException StoreException { get; set; }
+		public ShardStoreException StoreException { get; internal set; }
 
 		[JsonProperty("allocation")]
-		public ShardStoreAllocation Allocation { get; set; }
+		public ShardStoreAllocation Allocation { get; internal set; }
 
 		[JsonProperty("attributes")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public Dictionary<string, object> Attributes { get; set; }
+		public IReadOnlyDictionary<string, object> Attributes { get; internal set; } = EmptyReadOnly<string, object>.Dictionary;
 	}
 
 	public class ShardStoreException
 	{
 		[JsonProperty("type")]
-		public string Type { get; set; }
+		public string Type { get; internal set; }
 		[JsonProperty("reason")]
-		public string Reason { get; set; }
+		public string Reason { get; internal set; }
 	}
 
 	public enum ShardStoreAllocation

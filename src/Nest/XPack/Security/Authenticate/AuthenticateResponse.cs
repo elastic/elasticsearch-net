@@ -20,7 +20,7 @@ namespace Nest
 		string Email { get; }
 
 		[JsonProperty("metadata")]
-		IDictionary<string, object> Metadata { get; }
+		IReadOnlyDictionary<string, object> Metadata { get; }
 
 	}
 
@@ -34,7 +34,7 @@ namespace Nest
 
 		public string Email { get; internal set;  }
 
-		public IDictionary<string, object> Metadata { get; internal set;  }
+		public IReadOnlyDictionary<string, object> Metadata { get; internal set; } = EmptyReadOnly<string, object>.Dictionary;
 
 	}
 }

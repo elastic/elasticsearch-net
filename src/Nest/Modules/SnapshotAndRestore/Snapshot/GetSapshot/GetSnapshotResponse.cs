@@ -6,7 +6,7 @@ namespace Nest
 	public interface IGetSnapshotResponse : IResponse
 	{
 		[JsonProperty("snapshots")]
-		IEnumerable<Snapshot> Snapshots { get; set; }
+		IReadOnlyCollection<Snapshot> Snapshots { get; }
 	}
 
 	[JsonObject]
@@ -14,7 +14,7 @@ namespace Nest
 	{
 
 		[JsonProperty("snapshots")]
-		public IEnumerable<Snapshot> Snapshots { get; set; }
+		public IReadOnlyCollection<Snapshot> Snapshots { get; internal set; } = EmptyReadOnly<Snapshot>.Collection;
 
 	}
 }

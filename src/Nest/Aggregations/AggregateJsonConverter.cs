@@ -342,7 +342,7 @@ namespace Nest
 			return extendedStatsMetric;
 		}
 
-		private IDictionary<string, IAggregate> GetSubAggregates(JsonReader reader, JsonSerializer serializer)
+		private IReadOnlyDictionary<string, IAggregate> GetSubAggregates(JsonReader reader, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.PropertyName)
 				return null;
@@ -405,7 +405,7 @@ namespace Nest
 			if (reader.TokenType == JsonToken.EndArray)
 			{
 				reader.Read();
-				bucket.Items = Enumerable.Empty<IBucket>();
+				bucket.Items = EmptyReadOnly<IBucket>.Collection;
 				return bucket;
 			}
 			do

@@ -7,7 +7,7 @@ namespace Nest
 {
 	public interface IGetRoleResponse : IResponse
 	{
-		IDictionary<string, Role> Roles { get; }
+		IReadOnlyDictionary<string, Role> Roles { get; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
@@ -15,6 +15,6 @@ namespace Nest
 	public class GetRoleResponse : DictionaryResponseBase<string, Role>, IGetRoleResponse
 	{
 		[JsonIgnore]
-		public IDictionary<string, Role> Roles => Self.BackingDictionary;
+		public IReadOnlyDictionary<string, Role> Roles => Self.BackingDictionary;
 	}
 }

@@ -23,7 +23,7 @@ namespace Nest
 		bool DryRun { get; }
 
 		[JsonProperty("conditions")]
-		Dictionary<string, bool> Conditions { get; }
+		IReadOnlyDictionary<string, bool> Conditions { get; }
 
 		[JsonProperty("shards_acknowledged")]
 		bool ShardsAcknowledged { get; }
@@ -39,7 +39,7 @@ namespace Nest
 
 		public bool RolledOver { get; internal set; }
 
-		public Dictionary<string, bool> Conditions { get; internal set; }
+		public IReadOnlyDictionary<string, bool> Conditions { get; internal set; } = EmptyReadOnly<string, bool>.Dictionary;
 
 		public bool ShardsAcknowledged { get; internal set; }
 	}

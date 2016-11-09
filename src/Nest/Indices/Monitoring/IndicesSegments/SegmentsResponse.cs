@@ -6,7 +6,7 @@ namespace Nest
 	public interface ISegmentsResponse : IResponse
 	{
 		ShardsMetaData Shards { get; }
-		Dictionary<string, IndexSegment> Indices { get; set; }
+		IReadOnlyDictionary<string, IndexSegment> Indices { get; }
 	}
 
 	[JsonObject]
@@ -18,8 +18,8 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "indices")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public Dictionary<string, IndexSegment> Indices { get; set; } 
+		public IReadOnlyDictionary<string, IndexSegment> Indices { get; internal set; } = EmptyReadOnly<string, IndexSegment>.Dictionary;
 
-		
+
 	}
 }

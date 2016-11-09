@@ -7,52 +7,52 @@ namespace Nest
 	public interface IFieldStatsResponse : IResponse
 	{
 		[JsonProperty("_shards")]
-		ShardsMetaData Shards { get; set; }
+		ShardsMetaData Shards { get; }
 
 		[JsonProperty("indices")]
-		Dictionary<string, FieldStats> Indices { get; set; }
+		Dictionary<string, FieldStats> Indices { get; }
 	}
 
 	public class FieldStatsResponse : ResponseBase, IFieldStatsResponse
 	{
-		public ShardsMetaData Shards { get; set; }
-		public Dictionary<string, FieldStats> Indices { get; set; }
+		public ShardsMetaData Shards { get; internal set; }
+		public Dictionary<string, FieldStats> Indices { get; internal set; }
 	}
 
 	[JsonObject]
 	public class FieldStats
 	{
 		[JsonProperty("fields")]
-		public Dictionary<string, FieldStatsField> Fields { get; set; }
+		public IReadOnlyDictionary<string, FieldStatsField> Fields { get; internal set; } = EmptyReadOnly<string, FieldStatsField>.Dictionary;
 	}
 
 	public class FieldStatsField
 	{
 		[JsonProperty("max_doc")]
-		public long MaxDoc { get; set; }
+		public long MaxDoc { get; internal set; }
 
 		[JsonProperty("doc_count")]
-		public long DocCount { get; set; }
+		public long DocCount { get; internal set; }
 
 		[JsonProperty("density")]
-		public long Density { get; set; }
+		public long Density { get; internal set; }
 
 		[JsonProperty("sum_doc_freq")]
-		public long SumDocumentFrequency { get; set; }
+		public long SumDocumentFrequency { get; internal set; }
 
 		[JsonProperty("sum_total_term_freq")]
-		public long SumTotalTermFrequency { get; set; }
+		public long SumTotalTermFrequency { get; internal set; }
 
 		[JsonProperty("searchable")]
-		public bool Searchable { get; set; }
+		public bool Searchable { get; internal set; }
 
 		[JsonProperty("aggregatable")]
-		public bool Aggregatable { get; set; }
+		public bool Aggregatable { get; internal set; }
 
 		[JsonProperty("min_value")]
-		public string MinValue { get; set; }
+		public string MinValue { get; internal set; }
 
 		[JsonProperty("max_value")]
-		public string MaxValue { get; set; }
+		public string MaxValue { get; internal set; }
 	}
 }

@@ -5,13 +5,13 @@ namespace Nest
 {
 	public interface IAnalyzeResponse : IResponse
 	{
-		IEnumerable<AnalyzeToken> Tokens { get; }
+		IReadOnlyCollection<AnalyzeToken> Tokens { get; }
 	}
 
 	[JsonObject]
 	public class AnalyzeResponse : ResponseBase, IAnalyzeResponse
 	{
 		[JsonProperty(PropertyName = "tokens")]
-		public IEnumerable<AnalyzeToken> Tokens { get; internal set; }
+		public IReadOnlyCollection<AnalyzeToken> Tokens { get; internal set; } = EmptyReadOnly<AnalyzeToken>.Collection;
 	}
 }

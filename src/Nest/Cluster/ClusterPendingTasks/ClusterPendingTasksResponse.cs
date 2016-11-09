@@ -5,32 +5,32 @@ namespace Nest
 {
 	public interface IClusterPendingTasksResponse : IResponse
 	{
-		IEnumerable<PendingTask> Tasks { get; set; }
+		IReadOnlyCollection<PendingTask> Tasks { get; }
 	}
 
 	[JsonObject]
 	public class ClusterPendingTasksResponse : ResponseBase, IClusterPendingTasksResponse
 	{
 		[JsonProperty("tasks")]
-		public IEnumerable<PendingTask> Tasks { get; set; }
+		public IReadOnlyCollection<PendingTask> Tasks { get; internal set; } = EmptyReadOnly<PendingTask>.Collection;
 	}
 
 	[JsonObject]
 	public class PendingTask
 	{
 		[JsonProperty("insert_order")]
-		public int InsertOrder { get; set; }
+		public int InsertOrder { get; internal set; }
 
 		[JsonProperty("priority")]
-		public string Priority { get; set; }
+		public string Priority { get; internal set; }
 
 		[JsonProperty("source")]
-		public string Source { get; set; }
+		public string Source { get; internal set; }
 
 		[JsonProperty("time_in_queue_millis")]
-		public int TimeInQueueMilliseconds { get; set; }
+		public int TimeInQueueMilliseconds { get; internal set; }
 
 		[JsonProperty("time_in_queue")]
-		public string TimeInQueue { get; set; }
+		public string TimeInQueue { get; internal set; }
 	}
 }

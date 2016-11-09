@@ -6,13 +6,19 @@ namespace Nest
 {
 	public class AggregationsHelper
 	{
-		public IDictionary<string, IAggregate> Aggregations { get; protected internal set; }
+		public IReadOnlyDictionary<string, IAggregate> Aggregations { get; protected internal set; } = EmptyReadOnly<string, IAggregate>.Dictionary;
 
 		public AggregationsHelper() { }
 
-		public AggregationsHelper(IDictionary<string, IAggregate> aggregations)
+		protected AggregationsHelper(IDictionary<string, IAggregate> aggregations)
 		{
-			this.Aggregations = aggregations;
+			this.Aggregations = aggregations != null ?
+				new Dictionary<string, IAggregate>(aggregations)
+				: EmptyReadOnly<string, IAggregate>.Dictionary;
+		}
+		public AggregationsHelper(IReadOnlyDictionary<string, IAggregate> aggregations)
+		{
+			this.Aggregations = aggregations ?? EmptyReadOnly<string, IAggregate>.Dictionary;
 		}
 
 		public ValueAggregate Min(string key) => this.TryGet<ValueAggregate>(key);

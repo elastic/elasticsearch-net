@@ -8,12 +8,12 @@ namespace Nest
 	[JsonConverter(typeof(GetAliasResponseConverter))]
 	public interface IGetAliasResponse : IResponse
 	{
-		IDictionary<string, IList<AliasDefinition>> Indices { get; }
+		IReadOnlyDictionary<string, IReadOnlyList<AliasDefinition>> Indices { get; }
 	}
 
 	public class GetAliasResponse : ResponseBase, IGetAliasResponse
 	{
-		public IDictionary<string, IList<AliasDefinition>> Indices { get; internal set; }
+		public IReadOnlyDictionary<string, IReadOnlyList<AliasDefinition>> Indices { get; internal set; } = EmptyReadOnly<string, IReadOnlyList<AliasDefinition>>.Dictionary;
 	}
 
 	internal class GetAliasResponseConverter : JsonConverter
@@ -28,7 +28,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var dict = serializer.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, AliasDefinition>>>>(reader);
-			var indices = new Dictionary<string, IList<AliasDefinition>>();
+			var indices = new Dictionary<string, IReadOnlyList<AliasDefinition>>();
 
 			foreach (var kv in dict)
 			{

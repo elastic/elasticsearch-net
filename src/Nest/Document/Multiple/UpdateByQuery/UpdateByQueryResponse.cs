@@ -36,7 +36,7 @@ namespace Nest
 		Retries Retries { get; }
 
 		[JsonProperty("failures")]
-		IEnumerable<BulkIndexByScrollFailure> Failures { get; }
+		IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; }
 
 		[JsonProperty("requests_per_second")]
 		float RequestsPerSecond { get; }
@@ -67,7 +67,7 @@ namespace Nest
 
 		public Retries Retries { get; internal set; }
 
-		public IEnumerable<BulkIndexByScrollFailure> Failures { get; internal set; }
+		public IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; internal set; } = EmptyReadOnly<BulkIndexByScrollFailure>.Collection;
 
 		public float RequestsPerSecond { get; internal set; }
 	}

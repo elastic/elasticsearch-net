@@ -11,19 +11,19 @@ namespace Nest
 	public interface ISimulatePipelineResponse : IResponse
 	{
 		[JsonProperty("docs")]
-		List<PipelineSimulation> Documents { get; set; }
+		IReadOnlyCollection<PipelineSimulation> Documents { get; }
 	}
 
 	public class SimulatePipelineResponse : ResponseBase, ISimulatePipelineResponse
 	{
-		public List<PipelineSimulation> Documents { get; set; }
+		public IReadOnlyCollection<PipelineSimulation> Documents { get; internal set; } = EmptyReadOnly<PipelineSimulation>.Collection;
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
 	public class PipelineSimulation
 	{
 		[JsonProperty("processor_results")]
-		public List<PipelineSimulation> ProcessorResults { get; internal set; }
+		public IReadOnlyCollection<PipelineSimulation> ProcessorResults { get; internal set; } = EmptyReadOnly<PipelineSimulation>.Collection;
 
 		[JsonProperty("tag")]
 		public string Tag { get; internal set; }

@@ -12,7 +12,11 @@ namespace Nest
 	[JsonConverter(typeof(FieldValuesJsonConverter))]
 	public class FieldValues : IsADictionaryBase<string, object>
 	{
+		public static readonly FieldValues Empty = new FieldValues();
+
 		private readonly Inferrer _inferrer;
+
+		protected FieldValues() : base() { }
 
 		public FieldValues(Inferrer inferrer, IDictionary<string, object> container)
 			: base(container)
@@ -39,6 +43,7 @@ namespace Nest
 
 		public K[] ValuesOf<K>(Field field)
 		{
+			if (this._inferrer == null) return new K[0];
 			var path = this._inferrer.Field(field);
 			return this.FieldArray<K[]>(path);
 		}
@@ -46,6 +51,7 @@ namespace Nest
 		public K[] Values<T, K>(Expression<Func<T, K>> objectPath)
 			where T : class
 		{
+			if (this._inferrer == null) return new K[0];
 			var field = this._inferrer.Field(objectPath);
 			return this.FieldArray<K[]>(field);
 		}

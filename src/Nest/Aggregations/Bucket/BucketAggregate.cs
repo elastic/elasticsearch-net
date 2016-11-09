@@ -31,7 +31,7 @@ namespace Nest
 	// Intermediate object used for deserialization
 	public class BucketAggregate : IAggregate
 	{
-		public IEnumerable<IBucket> Items { get; set; }
+		public IReadOnlyCollection<IBucket> Items { get; set; } = EmptyReadOnly<IBucket>.Collection;
 		public long? DocCountErrorUpperBound { get; set; }
 		public long? SumOtherDocCount { get; set; }
 		public IDictionary<string, object> Meta { get; set; }

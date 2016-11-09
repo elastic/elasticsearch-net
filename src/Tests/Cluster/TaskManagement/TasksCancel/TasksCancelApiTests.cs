@@ -71,7 +71,7 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 			response.NodeFailures.Should().BeNullOrEmpty();
 			response.Nodes.Should().NotBeEmpty();
 			var tasks = response.Nodes.First().Value.Tasks;
-			tasks.Should().NotBeEmpty().And.ContainKey(this.TaskId);
+			tasks.Should().NotBeEmpty().And.Contain(kv=> kv.Key == this.TaskId);
 		}
 	}
 }

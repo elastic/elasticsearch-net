@@ -12,13 +12,13 @@ namespace Nest
 		bool TimedOut { get; }
 
 		[JsonProperty("vertices")]
-		IEnumerable<GraphVertex> Vertices { get; }
+		IReadOnlyCollection<GraphVertex> Vertices { get; }
 
 		[JsonProperty("connections")]
-		IEnumerable<GraphConnection> Connections { get; }
+		IReadOnlyCollection<GraphConnection> Connections { get; }
 
 		[JsonProperty("failures")]
-		IEnumerable<ShardFailure> Failures { get; }
+		IReadOnlyCollection<ShardFailure> Failures { get; }
 	}
 
 	public class GraphExploreResponse : ResponseBase, IGraphExploreResponse
@@ -26,8 +26,8 @@ namespace Nest
 		public long Took { get; internal set; }
 
 		public bool TimedOut { get; internal set; }
-		public IEnumerable<GraphConnection> Connections { get; internal set; }
-		public IEnumerable<GraphVertex> Vertices { get; internal set; }
-		public IEnumerable<ShardFailure> Failures { get; internal set; }
+		public IReadOnlyCollection<GraphConnection> Connections { get; internal set; } = EmptyReadOnly<GraphConnection>.Collection;
+		public IReadOnlyCollection<GraphVertex> Vertices { get; internal set; } = EmptyReadOnly<GraphVertex>.Collection;
+		public IReadOnlyCollection<ShardFailure> Failures { get; internal set; } = EmptyReadOnly<ShardFailure>.Collection;
 	}
 }
