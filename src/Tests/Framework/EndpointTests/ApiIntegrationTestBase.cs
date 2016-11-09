@@ -44,10 +44,10 @@ namespace Tests.Framework
 
 			return base.AssertOnAllResponses((r) =>
 			{
-				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.CallDetails.OriginalException != null
-					&& IsNotRequestExceptionType(r.CallDetails.OriginalException.GetType()))
+				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
+					&& IsNotRequestExceptionType(r.ApiCall.OriginalException.GetType()))
 				{
-					ExceptionDispatchInfo.Capture(r.CallDetails.OriginalException).Throw();
+					ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException).Throw();
 					return;
 				}
 

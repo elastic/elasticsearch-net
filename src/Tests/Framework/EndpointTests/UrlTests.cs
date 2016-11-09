@@ -55,13 +55,13 @@ namespace Tests.Framework
 			where TResponse : IResponse
 		{
 			var callDetails = call(this.Client);
-			return Assert(typeOfCall, callDetails.CallDetails);
+			return Assert(typeOfCall, callDetails.ApiCall);
 		}
 
 		internal async Task<UrlTester> WhenCallingAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call, string typeOfCall)
 			where TResponse : IResponse
 		{
-			var callDetails = (await call(this.Client)).CallDetails;
+			var callDetails = (await call(this.Client)).ApiCall;
 			return Assert(typeOfCall, callDetails);
 		}
 

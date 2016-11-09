@@ -37,7 +37,7 @@ namespace Nest
 			foreach (var r in this.AllResponses)
 			{
 				IBodyWithApiCallDetails d = r;
-				d.CallDetails = this.ApiCall;
+				d.ApiCall = this.ApiCall;
 				yield return r;
 			}
 		}

@@ -62,10 +62,10 @@ namespace Tests.ClientConcepts.Exceptions
 			// HttpClient does not throw on "known error" status codes (i.e. 404) thus OriginalException should not be set
 			response.CallDetails.OriginalException.Should().BeNull();
 #else
-			response.CallDetails.OriginalException.Should().NotBeNull();
+			response.ApiCall.OriginalException.Should().NotBeNull();
 #endif
-			response.CallDetails.ServerError.Should().NotBeNull();
-			response.CallDetails.ServerError.Status.Should().BeGreaterThan(0);
+			response.ApiCall.ServerError.Should().NotBeNull();
+			response.ApiCall.ServerError.Status.Should().BeGreaterThan(0);
 		}
 
 		//[I]
@@ -78,9 +78,9 @@ namespace Tests.ClientConcepts.Exceptions
 			// HttpClient does not throw on "known error" status codes (i.e. 404) thus OriginalException should not be set
 			response.CallDetails.OriginalException.Should().BeNull();
 #else
-			response.CallDetails.OriginalException.Should().NotBeNull();
+			response.ApiCall.OriginalException.Should().NotBeNull();
 #endif
-			response.CallDetails.ServerError.Should().BeNull();
+			response.ApiCall.ServerError.Should().BeNull();
 		}
 
 		//TODO figure out a way to trigger this again
