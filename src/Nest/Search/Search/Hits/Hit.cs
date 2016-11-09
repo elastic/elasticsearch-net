@@ -56,6 +56,9 @@ namespace Nest
 		[JsonProperty("_id")]
 		public string Id { get; internal set; }
 
+		[JsonProperty("_nested")]
+		public NestedIdentity Nested { get; internal set; }
+
 		[JsonProperty("_parent")]
 		public string Parent { get; internal set; }
 
