@@ -12,6 +12,6 @@ namespace Nest
 		public string Description { get; internal set; }
 
 		[JsonProperty(PropertyName = "details")]
-		public IEnumerable<ExplanationDetail> Details { get; set; }
+		public IReadOnlyCollection<ExplanationDetail> Details { get; internal set; } = EmptyReadOnly<ExplanationDetail>.Collection;
 	}
 }

@@ -35,6 +35,8 @@ namespace Nest
 		public IReadOnlyCollection<BulkResponseItemBase> Items { get; internal set; } = EmptyReadOnly<BulkResponseItemBase>.Collection;
 
 		[JsonIgnore]
-		public IEnumerable<BulkResponseItemBase> ItemsWithErrors => !this.Items.HasAny() ? this.Items : this.Items.Where(i => !i.IsValid);
+		public IEnumerable<BulkResponseItemBase> ItemsWithErrors => !this.Items.HasAny()
+			? Enumerable.Empty<BulkResponseItemBase>()
+			: this.Items.Where(i => !i.IsValid);
 	}
 }

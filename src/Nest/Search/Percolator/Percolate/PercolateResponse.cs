@@ -52,7 +52,7 @@ namespace Nest
 	public class PercolatorMatch
 	{
 		[JsonProperty(PropertyName = "highlight")]
-		public Dictionary<string, IList<string>> Highlight { get; internal set; }
+		public IReadOnlyDictionary<string, IList<string>> Highlight { get; internal set; } = EmptyReadOnly<string, IList<string>>.Dictionary;
 
 		[JsonProperty(PropertyName = "_id")]
 		public string Id { get; internal set; }

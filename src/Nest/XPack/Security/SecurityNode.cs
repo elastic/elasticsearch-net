@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class ShieldNode
+	public class SecurityNode
 	{
 		[JsonProperty("name")]
 		public string Name { get; set; }

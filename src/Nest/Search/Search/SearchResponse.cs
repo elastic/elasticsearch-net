@@ -59,7 +59,8 @@ namespace Nest
 		public AggregationsHelper Aggs => _agg ?? (_agg = new AggregationsHelper(this.Aggregations));
 
 		[JsonProperty(PropertyName = "suggest")]
-		public IReadOnlyDictionary<string, Suggest<T>[]> Suggest { get; internal set; }
+		public IReadOnlyDictionary<string, Suggest<T>[]> Suggest { get; internal set; } =
+			EmptyReadOnly<string, Suggest<T>[]>.Dictionary;
 
 		[JsonProperty(PropertyName = "took")]
 		public long Took { get; internal set; }

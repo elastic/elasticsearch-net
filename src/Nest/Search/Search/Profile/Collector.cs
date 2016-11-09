@@ -15,7 +15,8 @@ namespace Nest
 		public Time Time { get; internal set; }
 
 		[JsonProperty("children")]
-		public IEnumerable<Collector> Children { get; internal set; }
+		public IReadOnlyCollection<Collector> Children { get; internal set; } =
+			EmptyReadOnly<Collector>.Collection;
 
 
 	}

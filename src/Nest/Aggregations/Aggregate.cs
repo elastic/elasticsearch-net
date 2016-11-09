@@ -11,6 +11,7 @@ namespace Nest
 	[ExactContractJsonConverter(typeof(AggregateJsonConverter))]
 	public interface IAggregate
 	{
-		IDictionary<string, object> Meta { get; set; }
+		//TODO this public set is problematic
+		IReadOnlyDictionary<string, object> Meta { get; set; }
 	}
 }

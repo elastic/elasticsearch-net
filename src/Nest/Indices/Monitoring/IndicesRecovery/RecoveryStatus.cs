@@ -6,6 +6,7 @@ namespace Nest
 	public class RecoveryStatus
 	{
 		[JsonProperty("shards")]
-		public IEnumerable<ShardRecovery> Shards { get; internal set; }
+		public IReadOnlyCollection<ShardRecovery> Shards { get; internal set; } =
+			EmptyReadOnly<ShardRecovery>.Collection;
 	}
 }

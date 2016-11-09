@@ -22,11 +22,13 @@ namespace Nest
 
 		[JsonProperty("attributes")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public Dictionary<string, string> Attributes { get; internal set; }
+		public IReadOnlyDictionary<string, string> Attributes { get; internal set; } =
+			EmptyReadOnly<string, string>.Dictionary;
 
 		[JsonProperty("tasks")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public Dictionary<TaskId, ReindexTask> Tasks { get; internal set; }
+		public IReadOnlyDictionary<TaskId, ReindexTask> Tasks { get; internal set; } =
+			EmptyReadOnly<TaskId, ReindexTask>.Dictionary;
 	}
 
 

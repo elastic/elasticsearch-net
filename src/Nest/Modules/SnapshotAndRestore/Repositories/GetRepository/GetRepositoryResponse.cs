@@ -19,7 +19,8 @@ namespace Nest
 	[JsonObject]
 	public class GetRepositoryResponse : ResponseBase, IGetRepositoryResponse
 	{
-		public IReadOnlyDictionary<string, ISnapshotRepository> Repositories { get; internal set; } = EmptyReadOnly<string, ISnapshotRepository>.Dictionary;
+		public IReadOnlyDictionary<string, ISnapshotRepository> Repositories { get; internal set; } =
+			EmptyReadOnly<string, ISnapshotRepository>.Dictionary;
 
 		public AzureRepository Azure(string name) => Get<AzureRepository>(name);
 		public FileSystemRepository FileSystem(string name) => Get<FileSystemRepository>(name);

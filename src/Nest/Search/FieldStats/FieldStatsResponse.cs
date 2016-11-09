@@ -10,13 +10,14 @@ namespace Nest
 		ShardsMetaData Shards { get; }
 
 		[JsonProperty("indices")]
-		Dictionary<string, FieldStats> Indices { get; }
+		IReadOnlyDictionary<string, FieldStats> Indices { get; }
 	}
 
 	public class FieldStatsResponse : ResponseBase, IFieldStatsResponse
 	{
 		public ShardsMetaData Shards { get; internal set; }
-		public Dictionary<string, FieldStats> Indices { get; internal set; }
+		public IReadOnlyDictionary<string, FieldStats> Indices { get; internal set; } =
+			EmptyReadOnly<string, FieldStats>.Dictionary;
 	}
 
 	[JsonObject]

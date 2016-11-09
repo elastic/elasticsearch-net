@@ -8,7 +8,7 @@ namespace Nest
 		protected BucketAggregateBase() { }
 		protected BucketAggregateBase(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
 
-		public IDictionary<string, object> Meta { get; set; }
+		public IReadOnlyDictionary<string, object> Meta { get; set; } = EmptyReadOnly<string, object>.Dictionary;
 	}
 
 	public class MultiBucketAggregate<TBucket> : BucketAggregateBase
@@ -34,7 +34,7 @@ namespace Nest
 		public IReadOnlyCollection<IBucket> Items { get; set; } = EmptyReadOnly<IBucket>.Collection;
 		public long? DocCountErrorUpperBound { get; set; }
 		public long? SumOtherDocCount { get; set; }
-		public IDictionary<string, object> Meta { get; set; }
+		public IReadOnlyDictionary<string, object> Meta { get; set; } = EmptyReadOnly<string, object>.Dictionary;
 		public long DocCount { get; set; }
 	}
 }
