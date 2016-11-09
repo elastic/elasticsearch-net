@@ -130,7 +130,8 @@ namespace Nest
 				Routing = d._routing,
 				Sorts = d.sort,
 				_Highlight = d.highlight is Dictionary<string, List<string>> ? d.highlight : null,
-				Explanation = d._explanation is Explanation ? d._explanation : null
+				Explanation = d._explanation is Explanation ? d._explanation : null,
+				Nested = d._nested
 			};
 
 			object o = d._source ?? DynamicResponse.Create(fieldsDictionary) ?? new object();

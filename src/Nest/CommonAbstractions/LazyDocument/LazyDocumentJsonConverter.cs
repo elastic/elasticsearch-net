@@ -9,7 +9,7 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var d = value as LazyDocument;
-			if (d == null || d._Value == null)
+			if (d?._Value == null)
 				return;
 			writer.WriteToken(d._Value.CreateReader());
 		}
