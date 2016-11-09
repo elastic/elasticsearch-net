@@ -44,6 +44,40 @@ namespace Tests.Document.Single.Get
 		}
 	}
 
+	public class GetNonExistentDocumentApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
+	{
+		protected string ProjectId => this.CallIsolatedValue;
+
+		protected string ProjectIdForUrl => Uri.EscapeDataString(this.ProjectId);
+
+		public GetNonExistentDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.Get<Project>(this.ProjectId, f),
+			fluentAsync: (client, f) => client.GetAsync<Project>(this.ProjectId, f),
+			request: (client, r) => client.Get<Project>(r),
+			requestAsync: (client, r) => client.GetAsync<Project>(r)
+		);
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 404;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override string UrlPath => $"/project/project/{ProjectIdForUrl}";
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => null;
+
+		protected override GetRequest<Project> Initializer => new GetRequest<Project>(this.ProjectId);
+
+		protected override void ExpectResponse(IGetResponse<Project> response)
+		{
+			response.Found.Should().BeFalse();
+			response.Index.Should().Be("project");
+			response.Type.Should().Be("project");
+			response.Id.Should().Be(this.CallIsolatedValue);
+		}
+	}
+
 	public class GetApiParentTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetResponse<CommitActivity>, IGetRequest, GetDescriptor<CommitActivity>, GetRequest<CommitActivity>>
 	{
 		protected CommitActivity CommitActivity => CommitActivity.CommitActivities.First();
