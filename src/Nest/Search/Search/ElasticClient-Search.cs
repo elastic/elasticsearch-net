@@ -11,7 +11,7 @@ namespace Nest
 		/// The search API allows to execute a search query and get back search hits that match the query.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-search.html
 		/// </summary>
-		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
+		/// <typeparam name="T">The type used to infer the index and type name as well describe the query strongly typed</typeparam>
 		/// <param name="selector">A descriptor that describes the parameters for the search operation</param>
 		ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> selector = null) where T : class;
 
@@ -29,7 +29,7 @@ namespace Nest
 			where TResult : class;
 
 		/// <inheritdoc/>
-		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
+		/// <typeparam name="T">The type used to infer the index and type name as well describe the query strongly typed</typeparam>
 		/// <param name="selector">A descriptor that describes the parameters for the search operation</param>
 		Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> selector = null) where T : class;
 
@@ -61,7 +61,7 @@ namespace Nest
 			this.Search<TResult>(selector.InvokeOrDefault(new SearchDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public ISearchResponse<T> Search<T>(ISearchRequest request) where T : class => 
+		public ISearchResponse<T> Search<T>(ISearchRequest request) where T : class =>
 			this.Search<T, T>(request);
 
 		/// <inheritdoc/>
@@ -77,7 +77,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> selector = null)
-			where T : class => 
+			where T : class =>
 			this.SearchAsync<T, T>(selector);
 
 		/// <inheritdoc/>
@@ -87,7 +87,7 @@ namespace Nest
 			this.SearchAsync<TResult>(selector.InvokeOrDefault(new SearchDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request) where T : class => 
+		public Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request) where T : class =>
 			this.SearchAsync<T, T>(request);
 
 		/// <inheritdoc/>

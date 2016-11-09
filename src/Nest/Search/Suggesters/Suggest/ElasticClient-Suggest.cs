@@ -7,7 +7,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// The suggest feature suggests similar looking terms based on a provided text by using a suggester. 
+		/// The suggest feature suggests similar looking terms based on a provided text by using a suggester.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters.html
 		/// </summary>
 		/// <typeparam name="T">The type used to strongly type parts of the suggest operation</typeparam>
@@ -24,8 +24,6 @@ namespace Nest
 		Task<ISuggestResponse> SuggestAsync(ISuggestRequest request);
 	}
 
-	//TODO limit scope of fluent to IndexName of T
-
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
@@ -33,18 +31,18 @@ namespace Nest
 			this.Suggest(selector?.Invoke(new SuggestDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public ISuggestResponse Suggest(ISuggestRequest request) => 
+		public ISuggestResponse Suggest(ISuggestRequest request) =>
 			this.Dispatcher.Dispatch<ISuggestRequest, SuggestRequestParameters, SuggestResponse>(
 				request,
 				this.LowLevelDispatch.SuggestDispatch<SuggestResponse>
 			);
 
 		/// <inheritdoc/>
-		public Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector) where T : class => 
+		public Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector) where T : class =>
 			this.SuggestAsync(selector?.Invoke(new SuggestDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public Task<ISuggestResponse> SuggestAsync(ISuggestRequest request) => 
+		public Task<ISuggestResponse> SuggestAsync(ISuggestRequest request) =>
 			this.Dispatcher.DispatchAsync<ISuggestRequest, SuggestRequestParameters, SuggestResponse, ISuggestResponse>(
 				request,
 				this.LowLevelDispatch.SuggestDispatchAsync<SuggestResponse>
