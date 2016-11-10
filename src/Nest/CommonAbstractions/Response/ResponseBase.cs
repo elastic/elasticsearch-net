@@ -22,14 +22,8 @@ namespace Nest
 		bool IsValid { get; }
 
 		/// <summary>
-		/// Returns the <see cref="IApiCallDetails"/> diagnostic information
-		/// </summary>
-		[JsonIgnore]
-		new IApiCallDetails ApiCall { get; }
-
-		/// <summary>
 		/// If the response results in an error on elasticsearch's side an <pre>error</pre> element will be returned, this is mapped to <see cref="ServerError"/> in NEST.
-		/// <para>This property is a shortcut to <see cref="ApiCall"/>'s <see cref="IApiCallDetails.ServerError"/> and is possibly set when <see cref="IsValid"/> is false depending on the cause of the error</para>
+		/// <para>This property is a shortcut to <see cref="IBodyWithApiCallDetails.ApiCall"/>'s <see cref="IApiCallDetails.ServerError"/> and is possibly set when <see cref="IsValid"/> is false depending on the cause of the error</para>
 		/// <para>You can also configure the client to always throw an <see cref="ElasticsearchClientException"/> using <see cref="IConnectionConfigurationValues.ThrowExceptions"/> if the response is not valid</para>
 		/// </summary>
 		[JsonIgnore]
@@ -37,7 +31,7 @@ namespace Nest
 
 		/// <summary>
 		/// If the request resulted in an exception on the client side this will hold the exception that was thrown.
-		/// <para>This property is a shortcut to <see cref="ApiCall"/>'s <see cref="IApiCallDetails.OriginalException"/> and is possibly set when <see cref="IsValid"/> is false depending on the cause of the error</para>
+		/// <para>This property is a shortcut to <see cref="IBodyWithApiCallDetails.ApiCall"/>'s <see cref="IApiCallDetails.OriginalException"/> and is possibly set when <see cref="IsValid"/> is false depending on the cause of the error</para>
 		/// <para>You can also configure the client to always throw an <see cref="ElasticsearchClientException"/> using <see cref="IConnectionConfigurationValues.ThrowExceptions"/> if the response is not valid</para>
 		/// </summary>
 		[JsonIgnore]
@@ -59,7 +53,7 @@ namespace Nest
 		IApiCallDetails IBodyWithApiCallDetails.ApiCall { get; set; }
 
 		/// <inheritdoc/>
-		public virtual IApiCallDetails ApiCall => ((IBodyWithApiCallDetails)this).ApiCall;
+		protected virtual IApiCallDetails ApiCall => ((IBodyWithApiCallDetails)this).ApiCall;
 
 		/// <inheritdoc/>
 		public virtual ServerError ServerError => this.ApiCall?.ServerError;
