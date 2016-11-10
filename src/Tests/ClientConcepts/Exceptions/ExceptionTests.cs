@@ -60,7 +60,7 @@ namespace Tests.ClientConcepts.Exceptions
 			var response = client.GetMapping<Project>(s => s.Index("doesntexist"));
 #if DOTNETCORE
 			// HttpClient does not throw on "known error" status codes (i.e. 404) thus OriginalException should not be set
-			response.CallDetails.OriginalException.Should().BeNull();
+			response.ApiCall.OriginalException.Should().BeNull();
 #else
 			response.ApiCall.OriginalException.Should().NotBeNull();
 #endif
@@ -76,7 +76,7 @@ namespace Tests.ClientConcepts.Exceptions
 			var response = client.RootNodeInfo();
 #if DOTNETCORE
 			// HttpClient does not throw on "known error" status codes (i.e. 404) thus OriginalException should not be set
-			response.CallDetails.OriginalException.Should().BeNull();
+			response.ApiCall.OriginalException.Should().BeNull();
 #else
 			response.ApiCall.OriginalException.Should().NotBeNull();
 #endif
