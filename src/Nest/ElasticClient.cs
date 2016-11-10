@@ -85,7 +85,7 @@ namespace Nest
 			where TResponse : ResponseBase
 		{
 			var r = typeof(TResponse).CreateInstance<TResponse>();
-			((IBodyWithApiCallDetails)r).CallDetails = response;
+			((IBodyWithApiCallDetails)r).ApiCall = response;
 			return r;
 		}
 

@@ -125,7 +125,7 @@ namespace Elasticsearch.Net
 			var passAlongConnectionStatus = response.Body as IBodyWithApiCallDetails;
 			if (passAlongConnectionStatus != null)
 			{
-				passAlongConnectionStatus.CallDetails = response;
+				passAlongConnectionStatus.ApiCall = response;
 			}
 		}
 

@@ -60,7 +60,7 @@ namespace Tests.Framework
 			await this.AssertOnAllResponses(r => this.AssertUrl(r.ApiCall.Uri));
 
 		[U] protected async Task UsesCorrectHttpMethod() =>
-			await this.AssertOnAllResponses(r => r.CallDetails.HttpMethod.Should().Be(this.HttpMethod));
+			await this.AssertOnAllResponses(r => r.ApiCall.HttpMethod.Should().Be(this.HttpMethod));
 
 		[U] protected void SerializesInitializer() =>
 			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);

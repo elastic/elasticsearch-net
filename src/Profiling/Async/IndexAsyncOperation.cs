@@ -21,7 +21,7 @@ namespace Profiling.Async
 					await client.IndexAsync(Developer.Generator.Generate(), d => d.Index<Developer>()).ConfigureAwait(false);
 
 				if (!indexResponse.IsValid)
-					output.WriteOrange($"error with id {indexResponse.Id}. message: {indexResponse.CallDetails.OriginalException}");
+					output.WriteOrange($"error with id {indexResponse.Id}. message: {indexResponse.ApiCall.OriginalException}");
 			}
 		}
 	}

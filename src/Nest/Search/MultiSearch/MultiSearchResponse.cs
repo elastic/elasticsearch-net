@@ -24,7 +24,7 @@ namespace Nest
 				sb.AppendLine($"  search[{i.i}]: {i.item}");
 		}
 
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]	
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		internal IDictionary<string, object> Responses { get; set; }
 
 		public int TotalResponses => this.Responses.HasAny() ? this.Responses.Count() : 0;
@@ -33,7 +33,7 @@ namespace Nest
 		{
 			foreach (var r in this.Responses.Values.OfType<T>())
 			{
-				r.CallDetails = this.ApiCall;
+				((IBodyWithApiCallDetails)r).ApiCall = this.ApiCall;
 				yield return r;
 			}
 		}
@@ -50,7 +50,7 @@ namespace Nest
 			this.Responses.TryGetValue(name, out response);
 			var r = response as IBodyWithApiCallDetails;
 			if (r != null)
-				r.CallDetails = this.ApiCall;
+				r.ApiCall = this.ApiCall;
 			return response as SearchResponse<T>;
 		}
 	}
