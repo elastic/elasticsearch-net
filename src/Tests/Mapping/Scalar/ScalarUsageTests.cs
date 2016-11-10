@@ -65,7 +65,6 @@ namespace Tests.Mapping.Scalar
 			public Guid? GuidNullable { get; set; }
 
 			public string String { get; set; }
-
 		}
 
 		protected override object ExpectJson => new

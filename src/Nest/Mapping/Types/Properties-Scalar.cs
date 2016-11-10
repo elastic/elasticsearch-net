@@ -10,6 +10,7 @@ namespace Nest
 		where T : class
 		where TReturnType : class
 	{
+#pragma warning disable CS3001 // Argument type is not CLS-compliant
 		TReturnType Scalar(Expression<Func<T, int>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector);
 
 		TReturnType Scalar(Expression<Func<T, int?>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector);
@@ -75,11 +76,13 @@ namespace Nest
 		TReturnType Scalar(Expression<Func<T, Guid?>> field, Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector);
 
 		TReturnType Scalar(Expression<Func<T, string>> field, Func<TextPropertyDescriptor<T>, ITextProperty> selector);
+#pragma warning restore CS3001 // Argument type is not CLS-compliant
 	}
 
 	public partial class PropertiesDescriptor<T> : IsADictionaryDescriptorBase<PropertiesDescriptor<T>, IProperties, PropertyName, IProperty>, IPropertiesDescriptor<T, PropertiesDescriptor<T>>
 		where T : class
 	{
+#pragma warning disable CS3001 // Argument type is not CLS-compliant
 		public PropertiesDescriptor<T> Scalar(Expression<Func<T, int>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
 			SetProperty(selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Integer)));
 
@@ -178,6 +181,7 @@ namespace Nest
 
 		public PropertiesDescriptor<T> Scalar(Expression<Func<T, string>> field, Func<TextPropertyDescriptor<T>, ITextProperty> selector) =>
 			SetProperty(selector?.InvokeOrDefault(new TextPropertyDescriptor<T>().Name(field)));
+#pragma warning restore CS3001 // Argument type is not CLS-compliant
 
 	}
 }

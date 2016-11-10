@@ -19,7 +19,7 @@ namespace Nest
 
 		/// <summary>
 		/// Number introduces a numeric mapping that defaults to `float` use .Type() to set the right type if needed or use
-		/// <see cref="Scalar"/> instead of <see cref="Number"/>
+		/// Scalar instead of <see cref="Number"/>
 		/// </summary>
 		public IProperty Number(Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
 			selector?.Invoke(new NumberPropertyDescriptor<T>());
@@ -68,6 +68,7 @@ namespace Nest
 
 
 
+#pragma warning disable CS3001 // Argument type is not CLS-compliant
 		public IProperty Scalar(Expression<Func<T, int>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
 			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Integer));
 
@@ -166,5 +167,6 @@ namespace Nest
 
 		public IProperty Scalar(Expression<Func<T, string>> field, Func<TextPropertyDescriptor<T>, ITextProperty> selector) =>
 			selector?.InvokeOrDefault(new TextPropertyDescriptor<T>().Name(field));
+#pragma warning restore CS3001 // Argument type is not CLS-compliant
 	}
 }

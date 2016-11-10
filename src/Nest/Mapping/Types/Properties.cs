@@ -44,7 +44,7 @@ namespace Nest
 		TReturnType Keyword(Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector);
 		/// <summary>
 		/// Number introduces a numeric mapping that defaults to `float` use .Type() to set the right type if needed or use
-		/// <see cref="Scalar"/> instead of <see cref="Number"/>
+		/// Scalar instead of <see cref="Number"/>
 		/// </summary>
 		TReturnType Number(Func<NumberPropertyDescriptor<T>, INumberProperty> selector);
 		TReturnType TokenCount(Func<TokenCountPropertyDescriptor<T>, ITokenCountProperty> selector);
@@ -80,7 +80,7 @@ namespace Nest
 
 		/// <summary>
 		/// Number introduces a numeric mapping that defaults to `float` use .Type() to set the right type if needed or use
-		/// <see cref="Scalar"/> instead of <see cref="Number"/>
+		/// Scalar instead of <see cref="Number"/>
 		/// </summary>
 		public PropertiesDescriptor<T> Number(Func<NumberPropertyDescriptor<T>, INumberProperty> selector) => SetProperty(selector);
 
