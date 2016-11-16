@@ -8,14 +8,13 @@ namespace Elasticsearch.Net
 	public class SniffResponse
 	{
 		//internal ctor  - so that only Elasticsearch.Net can instantiate it
-		internal SniffResponse()
-		{
-		}
+		internal SniffResponse() { }
 
 		public static Regex AddressRegex { get; } = new Regex(@"^((?<fqdn>[^/]+)/)?(?<ip>[^:]+|\[[\da-fA-F:\.]+\]):(?<port>\d+)$");
 
 		public string cluster_name { get; set; }
-		internal Dictionary<string, NodeInfo> nodes { get; set; }
+
+		public Dictionary<string, NodeInfo> nodes { get; set; }
 
 		public IEnumerable<Node> ToNodes(bool forceHttp = false)
 		{
@@ -27,6 +26,7 @@ namespace Elasticsearch.Net
 					Id = kv.Key,
 					MasterEligible = kv.Value.MasterEligible,
 					HoldsData = kv.Value.HoldsData,
+					HttpEnabled = kv.Value.HttpEnabled
 				};
 			}
 		}
@@ -47,7 +47,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	internal class NodeInfo
+	public class NodeInfo
 	{
 		public string name { get; set; }
 		public string transport_address { get; set; }
@@ -72,7 +72,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	internal class NodeInfoHttp
+	public class NodeInfoHttp
 	{
 		public IList<string> bound_address { get; set; }
 	}

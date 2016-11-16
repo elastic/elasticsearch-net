@@ -113,16 +113,16 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 						host = "127.0.0.1",
 						ip = "127.0.01",
 						version = "5.0.0-alpha3",
-						build = "e455fd0",
-						http_address = "127.0.0.1:9200",
-						settings = new JObject
+						build_hash = "e455fd0",
+						roles = new List<string>(),
+						http = new
 						{
-							{"client.type", "node"},
-							{"cluster.name", "elasticsearch"},
-							{"config.ignore_system_properties", "true"},
-							{"name", "Node Name 1"},
-							{"path.home", "c:\\elasticsearch\\elasticsearch"},
-							{"path.logs", "c:/ elasticsearch/logs"}
+							bound_address = new[] { "127.0.0.1:9200" }
+						},
+						settings = new Dictionary<string, object>
+						{
+							{ "cluster.name", "elasticsearch" },
+							{ "node.name", "Node Name 1" }
 						}
 					}
 				}
