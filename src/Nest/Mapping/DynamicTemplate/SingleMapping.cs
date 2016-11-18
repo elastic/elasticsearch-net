@@ -33,7 +33,7 @@ namespace Nest
 
 		public IProperty Binary(Func<BinaryPropertyDescriptor<T>, IBinaryProperty> selector) =>
 			selector?.Invoke(new BinaryPropertyDescriptor<T>());
-		/
+
 		public IProperty Attachment(Func<AttachmentPropertyDescriptor<T>, IAttachmentProperty> selector) =>
 			selector?.Invoke(new AttachmentPropertyDescriptor<T>());
 
