@@ -6,6 +6,7 @@
 #load @"Documentation.fsx"
 #load @"Releasing.fsx"
 #load @"Profiling.fsx"
+#load @"XmlDocPatcher.fsx"
 
 open System
 
@@ -17,6 +18,7 @@ open Signing
 open Versioning
 open Releasing
 open Profiling
+open XmlDocPatcher
 
 // Default target
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
@@ -26,6 +28,8 @@ Target "Clean" <| fun _ -> Build.Clean()
 Target "BuildApp" <| fun _ -> Build.Compile()
 
 Target "Test"  <| fun _ -> Tests.RunUnitTests()
+
+Target "InheritDoc"  <| fun _ -> InheritDoc.patchInheritDocs()
 
 Target "TestForever"  <| fun _ -> Tests.RunUnitTestsForever()
     
@@ -59,6 +63,7 @@ Target "Canary" <| fun _ ->
   =?> ("Version", hasBuildParam "version")
   ==> "BuildApp"
   =?> ("Test", (not ((getBuildParam "skiptests") = "1")))
+  ==> "InheritDoc"
   ==> "Build"
 
 "Clean" 

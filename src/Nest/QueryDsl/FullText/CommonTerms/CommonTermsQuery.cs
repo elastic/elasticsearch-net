@@ -46,9 +46,9 @@ namespace Nest
 		internal static bool IsConditionless(ICommonTermsQuery q) => q.Field.IsConditionless() || q.Query.IsNullOrEmpty();
 	}
 
-	public class CommonTermsQueryDescriptor<T> 
+	public class CommonTermsQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<CommonTermsQueryDescriptor<T>, ICommonTermsQuery, T>
-		, ICommonTermsQuery 
+		, ICommonTermsQuery
 		where T : class
 	{
 		string IQuery.Name { get; set; }
