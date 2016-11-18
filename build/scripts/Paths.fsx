@@ -29,6 +29,8 @@ module Projects =
 
     type PrivateProject =
         | Tests
+    
+
 
     type DotNetProject = 
         | Project of Project
@@ -58,6 +60,13 @@ module Projects =
             DotNetProject.All
             |> Seq.map(fun p -> p.Name)
             |> Seq.tryFind(fun p -> p.ToLowerInvariant() = name.ToLowerInvariant())
+
+    type DotNetFrameworkProject = { framework: DotNetFramework; project: DotNetProject }
+    let AllPublishableProjectsWithSupportedFrameworks = seq {
+        for framework in DotNetFramework.All do
+        for project in DotNetProject.AllPublishable do
+            yield { framework = framework; project= project}
+        }
 
 
 module Paths =
