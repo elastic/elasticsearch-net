@@ -350,6 +350,7 @@
     <Compile Include=".\Indices\StatusManagement\Upgrade\UpgradeApiTests.cs" />
     <Compile Include=".\Indices\StatusManagement\Upgrade\UpgradeUrlTests.cs" />
     <Compile Include=".\Mapping\Metafields\MetafieldsMappingApiTestsBase.cs" />
+    <Compile Include="Mapping\Scalar\ScalarUsageTests.cs" />
     <Compile Include="Ingest\ProcessorSerializationTests.cs" />
     <Compile Include="Mapping\Types\Complex\Nested\NestedAttributeTests.cs" />
     <Compile Include="Mapping\Types\Complex\Object\ObjectAttributeTests.cs" />
