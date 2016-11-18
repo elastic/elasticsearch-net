@@ -33,7 +33,7 @@ namespace Nest
 
 		public IProperty Binary(Func<BinaryPropertyDescriptor<T>, IBinaryProperty> selector) =>
 			selector?.Invoke(new BinaryPropertyDescriptor<T>());
-
+		/
 		public IProperty Attachment(Func<AttachmentPropertyDescriptor<T>, IAttachmentProperty> selector) =>
 			selector?.Invoke(new AttachmentPropertyDescriptor<T>());
 
@@ -69,154 +69,154 @@ namespace Nest
 
 #pragma warning disable CS3001 // Argument type is not CLS-compliant
 		public IProperty Scalar(Expression<Func<T, int>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Integer));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Integer));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<int>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-				selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Integer));
+				selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Integer));
 		public IProperty Scalar(Expression<Func<T, int?>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Integer));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Integer));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<int?>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Integer));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Integer));
 
 		public IProperty Scalar(Expression<Func<T, float>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Float));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Float));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<float>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Float));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Float));
 		public IProperty Scalar(Expression<Func<T, float?>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Float));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Float));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<float?>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Float));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Float));
 
 		public IProperty Scalar(Expression<Func<T, sbyte>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Byte));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Byte));
 		public IProperty Scalar(Expression<Func<T, sbyte?>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Byte));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Byte));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<sbyte>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Byte));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Byte));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<sbyte?>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Byte));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Byte));
 
 		public IProperty Scalar(Expression<Func<T, short>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Short));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Short));
 		public IProperty Scalar(Expression<Func<T, short?>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Short));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Short));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<short>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Short));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Short));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<short?>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Short));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Short));
 
 		public IProperty Scalar(Expression<Func<T, byte>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Short));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Short));
 		public IProperty Scalar(Expression<Func<T, byte?>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Short));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Short));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<byte>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Short));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Short));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<byte?>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Short));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Short));
 
 		public IProperty Scalar(Expression<Func<T, long>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
 		public IProperty Scalar(Expression<Func<T, long?>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<long>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<long?>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
 
 		public IProperty Scalar(Expression<Func<T, uint>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
 		public IProperty Scalar(Expression<Func<T, uint?>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<uint>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<uint?>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
 
 		public IProperty Scalar(Expression<Func<T, TimeSpan>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
 		public IProperty Scalar(Expression<Func<T, TimeSpan?>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<TimeSpan>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<TimeSpan?>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Long));
 
 		public IProperty Scalar(Expression<Func<T, decimal>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
 		public IProperty Scalar(Expression<Func<T, decimal?>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<decimal>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<decimal?>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
 
 		public IProperty Scalar(Expression<Func<T, ulong>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
 		public IProperty Scalar(Expression<Func<T, ulong?>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<ulong>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<ulong?>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
 
 		public IProperty Scalar(Expression<Func<T, double>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
 		public IProperty Scalar(Expression<Func<T, double?>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<double>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<double?>>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			selector?.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
+			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Double));
 
 		public IProperty Scalar(Expression<Func<T, DateTime>> field, Func<DatePropertyDescriptor<T>, IDateProperty> selector) =>
-			selector?.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, DateTime?>> field, Func<DatePropertyDescriptor<T>, IDateProperty> selector) =>
-			selector?.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<DateTime>>> field, Func<DatePropertyDescriptor<T>, IDateProperty> selector) =>
-			selector?.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<DateTime?>>> field, Func<DatePropertyDescriptor<T>, IDateProperty> selector) =>
-			selector?.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field));
 
 		public IProperty Scalar(Expression<Func<T, DateTimeOffset>> field, Func<DatePropertyDescriptor<T>, IDateProperty> selector) =>
-			selector?.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, DateTimeOffset?>> field, Func<DatePropertyDescriptor<T>, IDateProperty> selector) =>
-			selector?.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<DateTimeOffset>>> field, Func<DatePropertyDescriptor<T>, IDateProperty> selector) =>
-			selector?.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<DateTimeOffset?>>> field, Func<DatePropertyDescriptor<T>, IDateProperty> selector) =>
-			selector?.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new DatePropertyDescriptor<T>().Name(field));
 
 		public IProperty Scalar(Expression<Func<T, bool>> field, Func<BooleanPropertyDescriptor<T>, IBooleanProperty> selector) =>
-			selector?.InvokeOrDefault(new BooleanPropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new BooleanPropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, bool?>> field, Func<BooleanPropertyDescriptor<T>, IBooleanProperty> selector) =>
-			selector?.InvokeOrDefault(new BooleanPropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new BooleanPropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<bool>>> field, Func<BooleanPropertyDescriptor<T>, IBooleanProperty> selector) =>
-			selector?.InvokeOrDefault(new BooleanPropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new BooleanPropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<bool?>>> field, Func<BooleanPropertyDescriptor<T>, IBooleanProperty> selector) =>
-			selector?.InvokeOrDefault(new BooleanPropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new BooleanPropertyDescriptor<T>().Name(field));
 
 		public IProperty Scalar(Expression<Func<T, char>> field, Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector) =>
-			selector?.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, char?>> field, Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector) =>
-			selector?.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<char>>> field, Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector) =>
-			selector?.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<char?>>> field, Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector) =>
-			selector?.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field));
 
 		public IProperty Scalar(Expression<Func<T, Guid>> field, Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector) =>
-			selector?.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, Guid?>> field, Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector) =>
-			selector?.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<Guid>>> field, Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector) =>
-			selector?.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<Guid?>>> field, Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector) =>
-			selector?.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field));
 
 
 		public IProperty Scalar(Expression<Func<T, string>> field, Func<TextPropertyDescriptor<T>, ITextProperty> selector) =>
-			selector?.InvokeOrDefault(new TextPropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new TextPropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<string>>> field, Func<TextPropertyDescriptor<T>, ITextProperty> selector) =>
-			selector?.InvokeOrDefault(new TextPropertyDescriptor<T>().Name(field));
+			selector.InvokeOrDefault(new TextPropertyDescriptor<T>().Name(field));
 #pragma warning restore CS3001 // Argument type is not CLS-compliant
 	}
 }
