@@ -115,5 +115,5 @@ You may come across an exception similar to below when running the build script
 
 The `1.x` and `master` branches have diverged dramatically as a result of changes in preparation for 2.0. This includes changes to the build process such that switching between the `master` and `1.x` branches and back again can change the versions of packages used within the build processes. To rectify this issue, try deleting the `packages` folder within the root of the solution and run the build script again.
 
-If working on both 1.x and 2.0 versions of NEST, it is recommended to clone the git repository for each version into separate directories to avoid the need to switch between the divergent branches.
+If working on both 1.x and 2.x and 5.x versions of NEST, it is recommended to clone the git repository for each version into separate directories to avoid the need to switch between the divergent branches.
 
