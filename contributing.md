@@ -28,7 +28,8 @@ In those cases we tend to pull your bits locally and write tests ourselves but t
 
 - `1.x` for latest 1.x compatible client
 - `2.x` for 2.x compatible client
-- `master` for the latest client (currently _5.x alpha_)
+- `5.x` for 5.x compatible client
+- `master` for the latest client (currently _6.x alpha_)
 
 ## Git
 
@@ -36,7 +37,8 @@ We do not require rebased/squashed commits although we do very much appreciate i
 
 Please submit your [Pull Requests](https://help.github.com/articles/creating-a-pull-request/) to 
 
-- [`master`](https://github.com/elastic/elasticsearch-net/tree/master) branch for 5.x
+- [`master`](https://github.com/elastic/elasticsearch-net/tree/master) branch for master
+- [`5.x`](https://github.com/elastic/elasticsearch-net/tree/5.x) branch for 5.x
 - [`2.x`](https://github.com/elastic/elasticsearch-net/tree/2.x) branch for 2.x
 - [`1.x`](https://github.com/elastic/elasticsearch-net/tree/1.x) branch for 1.x
 
@@ -69,7 +71,7 @@ This will
 - Pull down all the paket dependencies for the build process as well as the solution
 - Run the default build target for the solution
 
-You can also compile the solution within Visual Studio if you prefer, but the build script is going to be faster.
+You can also compile the solution within Visual Studio if you prefer, but the build script is going to be _much_ faster.
 
 ##Tests
 
@@ -88,10 +90,17 @@ build.bat
 ```
 with no target will run the `Build` target, compiling the solution and running unit tests
 
+### Compile
+
+```bash
+build.bat skiptests
+```
+This compiles the solution and skips running tests
+
 ### Quick Compile and run integration tests
 
 ```bash
-build.bat Integrate [Elasticsearch Version Number e.g. 2.2.0]
+build.bat Integrate [Elasticsearch Version Number e.g. 5.0.0]
 ```
 will quick compile the solution and run integration tests against the target Elasticsearch version. The first time this is run for a version of Elasticsearch, it will download Elasticsearch and unzip Elasticsearch, install the plugins necessary to run the integration tests, and start the node. Because of this, the first run may take some time to start.
 
