@@ -17,7 +17,7 @@ namespace Nest
 		public MultiBucketAggregate() { }
 		public MultiBucketAggregate(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
 
-		public IList<TBucket> Buckets { get; set; }
+		public IReadOnlyCollection<TBucket> Buckets { get; set; } = EmptyReadOnly<TBucket>.Collection;
 	}
 
 	public class SingleBucketAggregate : BucketAggregateBase

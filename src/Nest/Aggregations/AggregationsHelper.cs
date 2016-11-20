@@ -170,11 +170,11 @@ namespace Nest
 		public MatrixStatsAggregate MatrixStats(string key) => this.TryGet<MatrixStatsAggregate>(key);
 
 
-		private TAggregation TryGet<TAggregation>(string key)
-			where TAggregation : class, IAggregate
+		private TAggregate TryGet<TAggregate>(string key)
+			where TAggregate : class, IAggregate
 		{
 			IAggregate agg;
-			return this.Aggregations.TryGetValue(key, out agg) ? agg as TAggregation : null;
+			return this.Aggregations.TryGetValue(key, out agg) ? agg as TAggregate : null;
 		}
 
 		private MultiBucketAggregate<TBucket> GetBucket<TBucket>(string key)

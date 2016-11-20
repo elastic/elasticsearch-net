@@ -61,7 +61,7 @@ namespace Nest
 				case "buckets":
 				case "doc_count_error_upper_bound":
 					aggregate = GetMultiBucketAggregate(reader, serializer);
-					break;;
+					break;
 				case "count":
 					aggregate = GetStatsAggregate(reader, serializer);
 					break;
@@ -553,7 +553,7 @@ namespace Nest
 			if (property == "from" || property == "to")
 				return GetRangeBucket(reader, serializer, key);
 
-			var keyItem = new KeyedBucket {Key = key};
+			var keyItem = new KeyedBucket { Key = key };
 
 			if (property == "key_as_string")
 			{
