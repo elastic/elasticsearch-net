@@ -13,7 +13,8 @@ namespace Tests.Framework
 		{
 			if (plugins == null)
 				throw new ArgumentNullException(nameof(plugins));
-			this.Plugins = plugins?.ToList();
+
+			this.Plugins = plugins.ToList();
 		}
 	}
 }

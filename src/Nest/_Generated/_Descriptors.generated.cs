@@ -5449,4 +5449,213 @@ namespace Nest
 		public PutUserDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
+	
+	///<summary>descriptor for XpackWatcherAckWatch <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-ack-watch.html</pre></summary>
+	public partial class AcknowledgeWatchDescriptor  : RequestDescriptorBase<AcknowledgeWatchDescriptor,AcknowledgeWatchRequestParameters, IAcknowledgeWatchRequest>, IAcknowledgeWatchRequest
+	{ 
+		Id IAcknowledgeWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
+		ActionIds IAcknowledgeWatchRequest.ActionId => Self.RouteValues.Get<ActionIds>("action_id");
+			/// <summary>/_xpack/watcher/watch/{watch_id}/_ack</summary>
+///<param name="watch_id"> this parameter is required</param>
+		public AcknowledgeWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
+		
+
+			///<summary>A comma-separated list of the action ids to be acked</summary>
+		public AcknowledgeWatchDescriptor ActionId(ActionIds actionId) => Assign(a=>a.RouteValues.Optional("action_id", actionId));
+
+	
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public AcknowledgeWatchDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+
+		///<summary>The URL-encoded request definition</summary>
+		public AcknowledgeWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public AcknowledgeWatchDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for XpackWatcherActivateWatch <pre>https://www.elastic.co/guide/en/watcher/current/api-rest.html#api-rest-activate-watch</pre></summary>
+	public partial class ActivateWatchDescriptor  : RequestDescriptorBase<ActivateWatchDescriptor,ActivateWatchRequestParameters, IActivateWatchRequest>, IActivateWatchRequest
+	{ 
+		Id IActivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
+			/// <summary>/_xpack/watcher/watch/{watch_id}/_activate</summary>
+///<param name="watch_id"> this parameter is required</param>
+		public ActivateWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
+		
+
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public ActivateWatchDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+
+		///<summary>The URL-encoded request definition</summary>
+		public ActivateWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ActivateWatchDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for XpackWatcherDeactivateWatch <pre>https://www.elastic.co/guide/en/watcher/current/api-rest.html#api-rest-deactivate-watch</pre></summary>
+	public partial class DeactivateWatchDescriptor  : RequestDescriptorBase<DeactivateWatchDescriptor,DeactivateWatchRequestParameters, IDeactivateWatchRequest>, IDeactivateWatchRequest
+	{ 
+		Id IDeactivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
+			/// <summary>/_xpack/watcher/watch/{watch_id}/_deactivate</summary>
+///<param name="watch_id"> this parameter is required</param>
+		public DeactivateWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
+		
+
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public DeactivateWatchDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+
+		///<summary>The URL-encoded request definition</summary>
+		public DeactivateWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeactivateWatchDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for XpackWatcherDeleteWatch <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-delete-watch.html</pre></summary>
+	public partial class DeleteWatchDescriptor  : RequestDescriptorBase<DeleteWatchDescriptor,DeleteWatchRequestParameters, IDeleteWatchRequest>, IDeleteWatchRequest
+	{ 
+		Id IDeleteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_xpack/watcher/watch/{id}</summary>
+///<param name="id"> this parameter is required</param>
+		public DeleteWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		
+
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public DeleteWatchDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteWatchDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for XpackWatcherExecuteWatch <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-execute-watch.html</pre></summary>
+	public partial class ExecuteWatchDescriptor  : RequestDescriptorBase<ExecuteWatchDescriptor,ExecuteWatchRequestParameters, IExecuteWatchRequest>, IExecuteWatchRequest
+	{ 
+		Id IExecuteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_xpack/watcher/watch/{id}/_execute</summary>
+		public ExecuteWatchDescriptor() : base(){}
+		
+
+			///<summary>Watch ID</summary>
+		public ExecuteWatchDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
+
+	
+		///<summary>indicates whether the watch should execute in debug mode</summary>
+		public ExecuteWatchDescriptor Debug(bool debug = true) => AssignParam(p=>p.Debug(debug));
+
+		///<summary>The URL-encoded request definition</summary>
+		public ExecuteWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ExecuteWatchDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for XpackWatcherGetWatch <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-get-watch.html</pre></summary>
+	public partial class GetWatchDescriptor  : RequestDescriptorBase<GetWatchDescriptor,GetWatchRequestParameters, IGetWatchRequest>, IGetWatchRequest
+	{ 
+		Id IGetWatchRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_xpack/watcher/watch/{id}</summary>
+///<param name="id"> this parameter is required</param>
+		public GetWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		
+
+		
+		///<summary>The URL-encoded request definition</summary>
+		public GetWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetWatchDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for XpackWatcherPutWatch <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-put-watch.html</pre></summary>
+	public partial class PutWatchDescriptor  : RequestDescriptorBase<PutWatchDescriptor,PutWatchRequestParameters, IPutWatchRequest>, IPutWatchRequest
+	{ 
+		Id IPutWatchRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_xpack/watcher/watch/{id}</summary>
+///<param name="id"> this parameter is required</param>
+		public PutWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		
+
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public PutWatchDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+
+		///<summary>Specify whether the watch is in/active by default</summary>
+		public PutWatchDescriptor Active(bool active = true) => AssignParam(p=>p.Active(active));
+
+		///<summary>The URL-encoded request definition</summary>
+		public PutWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public PutWatchDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for XpackWatcherRestart <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-service.html</pre></summary>
+	public partial class RestartWatcherDescriptor  : RequestDescriptorBase<RestartWatcherDescriptor,RestartWatcherRequestParameters, IRestartWatcherRequest>, IRestartWatcherRequest
+	{ 
+			
+		///<summary>The URL-encoded request definition</summary>
+		public RestartWatcherDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public RestartWatcherDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for XpackWatcherStart <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-service.html</pre></summary>
+	public partial class StartWatcherDescriptor  : RequestDescriptorBase<StartWatcherDescriptor,StartWatcherRequestParameters, IStartWatcherRequest>, IStartWatcherRequest
+	{ 
+			
+		///<summary>The URL-encoded request definition</summary>
+		public StartWatcherDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public StartWatcherDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for XpackWatcherStats <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-stats.html</pre></summary>
+	public partial class WatcherStatsDescriptor  : RequestDescriptorBase<WatcherStatsDescriptor,WatcherStatsRequestParameters, IWatcherStatsRequest>, IWatcherStatsRequest
+	{ 
+		Metrics IWatcherStatsRequest.WatcherStatsMetric => Self.RouteValues.Get<Metrics>("watcher_stats_metric");
+			/// <summary>/_xpack/watcher/stats</summary>
+		public WatcherStatsDescriptor() : base(){}
+		
+
+			///<summary>Controls what additional stat metrics should be include in the response</summary>
+		public WatcherStatsDescriptor WatcherStatsMetric(WatcherStatsMetric watcherStatsMetric) => Assign(a=>a.RouteValues.Optional("watcher_stats_metric", (Metrics)watcherStatsMetric));
+
+	
+		///<summary>The URL-encoded request definition</summary>
+		public WatcherStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public WatcherStatsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for XpackWatcherStop <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-service.html</pre></summary>
+	public partial class StopWatcherDescriptor  : RequestDescriptorBase<StopWatcherDescriptor,StopWatcherRequestParameters, IStopWatcherRequest>, IStopWatcherRequest
+	{ 
+			
+		///<summary>The URL-encoded request definition</summary>
+		public StopWatcherDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public StopWatcherDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
 }

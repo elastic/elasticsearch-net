@@ -3703,5 +3703,307 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityPutUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}");
 		}
 		
+		internal ElasticsearchResponse<T> XpackWatcherAckWatchDispatch<T>(IRequest<AcknowledgeWatchRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSet(p.RouteValues.WatchId, p.RouteValues.ActionId)) return _lowLevel.XpackWatcherAckWatch<T>(p.RouteValues.WatchId,p.RouteValues.ActionId,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherAckWatch<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSet(p.RouteValues.WatchId, p.RouteValues.ActionId)) return _lowLevel.XpackWatcherAckWatchPost<T>(p.RouteValues.WatchId,p.RouteValues.ActionId,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherAckWatchPost<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackWatcherAckWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{watch_id}/_ack", "/_xpack/watcher/watch/{watch_id}/_ack/{action_id}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackWatcherAckWatchDispatchAsync<T>(IRequest<AcknowledgeWatchRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSet(p.RouteValues.WatchId, p.RouteValues.ActionId)) return _lowLevel.XpackWatcherAckWatchAsync<T>(p.RouteValues.WatchId,p.RouteValues.ActionId,u => p.RequestParameters,cancellationToken);
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherAckWatchAsync<T>(p.RouteValues.WatchId,u => p.RequestParameters,cancellationToken);
+					break;
+
+				case POST:
+					if (AllSet(p.RouteValues.WatchId, p.RouteValues.ActionId)) return _lowLevel.XpackWatcherAckWatchPostAsync<T>(p.RouteValues.WatchId,p.RouteValues.ActionId,u => p.RequestParameters,cancellationToken);
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherAckWatchPostAsync<T>(p.RouteValues.WatchId,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackWatcherAckWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{watch_id}/_ack", "/_xpack/watcher/watch/{watch_id}/_ack/{action_id}");
+		}
+		
+		internal ElasticsearchResponse<T> XpackWatcherActivateWatchDispatch<T>(IRequest<ActivateWatchRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherActivateWatch<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherActivateWatchPost<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackWatcherActivateWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{watch_id}/_activate");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackWatcherActivateWatchDispatchAsync<T>(IRequest<ActivateWatchRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherActivateWatchAsync<T>(p.RouteValues.WatchId,u => p.RequestParameters,cancellationToken);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherActivateWatchPostAsync<T>(p.RouteValues.WatchId,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackWatcherActivateWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{watch_id}/_activate");
+		}
+		
+		internal ElasticsearchResponse<T> XpackWatcherDeactivateWatchDispatch<T>(IRequest<DeactivateWatchRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherDeactivateWatch<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherDeactivateWatchPost<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackWatcherDeactivateWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{watch_id}/_deactivate");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackWatcherDeactivateWatchDispatchAsync<T>(IRequest<DeactivateWatchRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherDeactivateWatchAsync<T>(p.RouteValues.WatchId,u => p.RequestParameters,cancellationToken);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.XpackWatcherDeactivateWatchPostAsync<T>(p.RouteValues.WatchId,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackWatcherDeactivateWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{watch_id}/_deactivate");
+		}
+		
+		internal ElasticsearchResponse<T> XpackWatcherDeleteWatchDispatch<T>(IRequest<DeleteWatchRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackWatcherDeleteWatch<T>(p.RouteValues.Id,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackWatcherDeleteWatch", p, new [] { DELETE }, "/_xpack/watcher/watch/{id}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackWatcherDeleteWatchDispatchAsync<T>(IRequest<DeleteWatchRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackWatcherDeleteWatchAsync<T>(p.RouteValues.Id,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackWatcherDeleteWatch", p, new [] { DELETE }, "/_xpack/watcher/watch/{id}");
+		}
+		
+		internal ElasticsearchResponse<T> XpackWatcherExecuteWatchDispatch<T>(IRequest<ExecuteWatchRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.XpackWatcherExecuteWatch<T>(p.RouteValues.Id,body,u => p.RequestParameters);
+					return _lowLevel.XpackWatcherExecuteWatch<T>(body,u => p.RequestParameters);
+
+				case POST:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.XpackWatcherExecuteWatchPost<T>(p.RouteValues.Id,body,u => p.RequestParameters);
+					return _lowLevel.XpackWatcherExecuteWatchPost<T>(body,u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackWatcherExecuteWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{id}/_execute", "/_xpack/watcher/watch/_execute");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackWatcherExecuteWatchDispatchAsync<T>(IRequest<ExecuteWatchRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.XpackWatcherExecuteWatchAsync<T>(p.RouteValues.Id,body,u => p.RequestParameters,cancellationToken);
+					return _lowLevel.XpackWatcherExecuteWatchAsync<T>(body,u => p.RequestParameters,cancellationToken);
+
+				case POST:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.XpackWatcherExecuteWatchPostAsync<T>(p.RouteValues.Id,body,u => p.RequestParameters,cancellationToken);
+					return _lowLevel.XpackWatcherExecuteWatchPostAsync<T>(body,u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackWatcherExecuteWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{id}/_execute", "/_xpack/watcher/watch/_execute");
+		}
+		
+		internal ElasticsearchResponse<T> XpackWatcherGetWatchDispatch<T>(IRequest<GetWatchRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackWatcherGetWatch<T>(p.RouteValues.Id,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackWatcherGetWatch", p, new [] { GET }, "/_xpack/watcher/watch/{id}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackWatcherGetWatchDispatchAsync<T>(IRequest<GetWatchRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackWatcherGetWatchAsync<T>(p.RouteValues.Id,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackWatcherGetWatch", p, new [] { GET }, "/_xpack/watcher/watch/{id}");
+		}
+		
+		internal ElasticsearchResponse<T> XpackWatcherPutWatchDispatch<T>(IRequest<PutWatchRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackWatcherPutWatch<T>(p.RouteValues.Id,body,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackWatcherPutWatchPost<T>(p.RouteValues.Id,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackWatcherPutWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{id}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackWatcherPutWatchDispatchAsync<T>(IRequest<PutWatchRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackWatcherPutWatchAsync<T>(p.RouteValues.Id,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackWatcherPutWatchPostAsync<T>(p.RouteValues.Id,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackWatcherPutWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{id}");
+		}
+		
+		internal ElasticsearchResponse<T> XpackWatcherRestartDispatch<T>(IRequest<RestartWatcherRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					return _lowLevel.XpackWatcherRestart<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackWatcherRestart", p, new [] { POST }, "/_xpack/watcher/_restart");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackWatcherRestartDispatchAsync<T>(IRequest<RestartWatcherRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					return _lowLevel.XpackWatcherRestartAsync<T>(u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackWatcherRestart", p, new [] { POST }, "/_xpack/watcher/_restart");
+		}
+		
+		internal ElasticsearchResponse<T> XpackWatcherStartDispatch<T>(IRequest<StartWatcherRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					return _lowLevel.XpackWatcherStart<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackWatcherStart", p, new [] { POST }, "/_xpack/watcher/_start");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackWatcherStartDispatchAsync<T>(IRequest<StartWatcherRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					return _lowLevel.XpackWatcherStartAsync<T>(u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackWatcherStart", p, new [] { POST }, "/_xpack/watcher/_start");
+		}
+		
+		internal ElasticsearchResponse<T> XpackWatcherStatsDispatch<T>(IRequest<WatcherStatsRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.WatcherStatsMetric)) return _lowLevel.XpackWatcherStats<T>(p.RouteValues.WatcherStatsMetric.Value,u => p.RequestParameters);
+					return _lowLevel.XpackWatcherStats<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackWatcherStats", p, new [] { GET }, "/_xpack/watcher/stats", "/_xpack/watcher/stats/{watcher_stats_metric}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackWatcherStatsDispatchAsync<T>(IRequest<WatcherStatsRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.WatcherStatsMetric)) return _lowLevel.XpackWatcherStatsAsync<T>(p.RouteValues.WatcherStatsMetric.Value,u => p.RequestParameters,cancellationToken);
+					return _lowLevel.XpackWatcherStatsAsync<T>(u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackWatcherStats", p, new [] { GET }, "/_xpack/watcher/stats", "/_xpack/watcher/stats/{watcher_stats_metric}");
+		}
+		
+		internal ElasticsearchResponse<T> XpackWatcherStopDispatch<T>(IRequest<StopWatcherRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					return _lowLevel.XpackWatcherStop<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackWatcherStop", p, new [] { POST }, "/_xpack/watcher/_stop");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackWatcherStopDispatchAsync<T>(IRequest<StopWatcherRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					return _lowLevel.XpackWatcherStopAsync<T>(u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackWatcherStop", p, new [] { POST }, "/_xpack/watcher/_stop");
+		}
+		
 	}
 }

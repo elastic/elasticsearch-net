@@ -7,6 +7,8 @@ namespace Nest
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum LogLevel
 	{
+		[EnumMember(Value = "error")]
+		Error,
 		[EnumMember(Value = "warn")]
 		Warn,
 		[EnumMember(Value = "info")]

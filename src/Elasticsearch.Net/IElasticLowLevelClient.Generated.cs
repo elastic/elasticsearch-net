@@ -8395,5 +8395,555 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityPutUserPostAsync<T>(string username, PostData<object> body, Func<PutUserRequestParameters, PutUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
+		///<summary>Represents a PUT on /_xpack/watcher/watch/{watch_id}/_ack
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-ack-watch.html </para>
+		///</summary>
+		///<param name="watch_id">Watch ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherAckWatch<T>(string watch_id, Func<AcknowledgeWatchRequestParameters, AcknowledgeWatchRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a PUT on /_xpack/watcher/watch/{watch_id}/_ack
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-ack-watch.html </para>
+		///</summary>
+		///<param name="watch_id">Watch ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherAckWatchAsync<T>(string watch_id, Func<AcknowledgeWatchRequestParameters, AcknowledgeWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a PUT on /_xpack/watcher/watch/{watch_id}/_ack/{action_id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-ack-watch.html </para>
+		///</summary>
+		///<param name="watch_id">Watch ID</param>
+		///<param name="action_id">A comma-separated list of the action ids to be acked</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherAckWatch<T>(string watch_id, string action_id, Func<AcknowledgeWatchRequestParameters, AcknowledgeWatchRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a PUT on /_xpack/watcher/watch/{watch_id}/_ack/{action_id}
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-ack-watch.html </para>
+		///</summary>
+		///<param name="watch_id">Watch ID</param>
+		///<param name="action_id">A comma-separated list of the action ids to be acked</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherAckWatchAsync<T>(string watch_id, string action_id, Func<AcknowledgeWatchRequestParameters, AcknowledgeWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/watch/{watch_id}/_ack
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-ack-watch.html </para>
+		///</summary>
+		///<param name="watch_id">Watch ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherAckWatchPost<T>(string watch_id, Func<AcknowledgeWatchRequestParameters, AcknowledgeWatchRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/watch/{watch_id}/_ack
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-ack-watch.html </para>
+		///</summary>
+		///<param name="watch_id">Watch ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherAckWatchPostAsync<T>(string watch_id, Func<AcknowledgeWatchRequestParameters, AcknowledgeWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/watch/{watch_id}/_ack/{action_id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-ack-watch.html </para>
+		///</summary>
+		///<param name="watch_id">Watch ID</param>
+		///<param name="action_id">A comma-separated list of the action ids to be acked</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherAckWatchPost<T>(string watch_id, string action_id, Func<AcknowledgeWatchRequestParameters, AcknowledgeWatchRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/watch/{watch_id}/_ack/{action_id}
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-ack-watch.html </para>
+		///</summary>
+		///<param name="watch_id">Watch ID</param>
+		///<param name="action_id">A comma-separated list of the action ids to be acked</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherAckWatchPostAsync<T>(string watch_id, string action_id, Func<AcknowledgeWatchRequestParameters, AcknowledgeWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a PUT on /_xpack/watcher/watch/{watch_id}/_activate
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: https://www.elastic.co/guide/en/watcher/current/api-rest.html#api-rest-activate-watch </para>
+		///</summary>
+		///<param name="watch_id">Watch ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherActivateWatch<T>(string watch_id, Func<ActivateWatchRequestParameters, ActivateWatchRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a PUT on /_xpack/watcher/watch/{watch_id}/_activate
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: https://www.elastic.co/guide/en/watcher/current/api-rest.html#api-rest-activate-watch </para>
+		///</summary>
+		///<param name="watch_id">Watch ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherActivateWatchAsync<T>(string watch_id, Func<ActivateWatchRequestParameters, ActivateWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/watch/{watch_id}/_activate
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: https://www.elastic.co/guide/en/watcher/current/api-rest.html#api-rest-activate-watch </para>
+		///</summary>
+		///<param name="watch_id">Watch ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherActivateWatchPost<T>(string watch_id, Func<ActivateWatchRequestParameters, ActivateWatchRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/watch/{watch_id}/_activate
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: https://www.elastic.co/guide/en/watcher/current/api-rest.html#api-rest-activate-watch </para>
+		///</summary>
+		///<param name="watch_id">Watch ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherActivateWatchPostAsync<T>(string watch_id, Func<ActivateWatchRequestParameters, ActivateWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a PUT on /_xpack/watcher/watch/{watch_id}/_deactivate
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: https://www.elastic.co/guide/en/watcher/current/api-rest.html#api-rest-deactivate-watch </para>
+		///</summary>
+		///<param name="watch_id">Watch ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherDeactivateWatch<T>(string watch_id, Func<DeactivateWatchRequestParameters, DeactivateWatchRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a PUT on /_xpack/watcher/watch/{watch_id}/_deactivate
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: https://www.elastic.co/guide/en/watcher/current/api-rest.html#api-rest-deactivate-watch </para>
+		///</summary>
+		///<param name="watch_id">Watch ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherDeactivateWatchAsync<T>(string watch_id, Func<DeactivateWatchRequestParameters, DeactivateWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/watch/{watch_id}/_deactivate
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: https://www.elastic.co/guide/en/watcher/current/api-rest.html#api-rest-deactivate-watch </para>
+		///</summary>
+		///<param name="watch_id">Watch ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherDeactivateWatchPost<T>(string watch_id, Func<DeactivateWatchRequestParameters, DeactivateWatchRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/watch/{watch_id}/_deactivate
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: https://www.elastic.co/guide/en/watcher/current/api-rest.html#api-rest-deactivate-watch </para>
+		///</summary>
+		///<param name="watch_id">Watch ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherDeactivateWatchPostAsync<T>(string watch_id, Func<DeactivateWatchRequestParameters, DeactivateWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a DELETE on /_xpack/watcher/watch/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-delete-watch.html </para>
+		///</summary>
+		///<param name="id">Watch ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherDeleteWatch<T>(string id, Func<DeleteWatchRequestParameters, DeleteWatchRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a DELETE on /_xpack/watcher/watch/{id}
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-delete-watch.html </para>
+		///</summary>
+		///<param name="id">Watch ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherDeleteWatchAsync<T>(string id, Func<DeleteWatchRequestParameters, DeleteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a PUT on /_xpack/watcher/watch/{id}/_execute
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-execute-watch.html </para>
+		///</summary>
+		///<param name="id">Watch ID</param>
+		///<param name="body">Execution control</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherExecuteWatch<T>(string id, PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a PUT on /_xpack/watcher/watch/{id}/_execute
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-execute-watch.html </para>
+		///</summary>
+		///<param name="id">Watch ID</param>
+		///<param name="body">Execution control</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherExecuteWatchAsync<T>(string id, PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a PUT on /_xpack/watcher/watch/_execute
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-execute-watch.html </para>
+		///</summary>
+		///<param name="body">Execution control</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherExecuteWatch<T>(PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a PUT on /_xpack/watcher/watch/_execute
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-execute-watch.html </para>
+		///</summary>
+		///<param name="body">Execution control</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherExecuteWatchAsync<T>(PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/watch/{id}/_execute
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-execute-watch.html </para>
+		///</summary>
+		///<param name="id">Watch ID</param>
+		///<param name="body">Execution control</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherExecuteWatchPost<T>(string id, PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/watch/{id}/_execute
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-execute-watch.html </para>
+		///</summary>
+		///<param name="id">Watch ID</param>
+		///<param name="body">Execution control</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherExecuteWatchPostAsync<T>(string id, PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/watch/_execute
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-execute-watch.html </para>
+		///</summary>
+		///<param name="body">Execution control</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherExecuteWatchPost<T>(PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/watch/_execute
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-execute-watch.html </para>
+		///</summary>
+		///<param name="body">Execution control</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherExecuteWatchPostAsync<T>(PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a GET on /_xpack/watcher/watch/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-get-watch.html </para>
+		///</summary>
+		///<param name="id">Watch ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherGetWatch<T>(string id, Func<GetWatchRequestParameters, GetWatchRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a GET on /_xpack/watcher/watch/{id}
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-get-watch.html </para>
+		///</summary>
+		///<param name="id">Watch ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherGetWatchAsync<T>(string id, Func<GetWatchRequestParameters, GetWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a PUT on /_xpack/watcher/watch/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-put-watch.html </para>
+		///</summary>
+		///<param name="id">Watch ID</param>
+		///<param name="body">The watch</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherPutWatch<T>(string id, PostData<object> body, Func<PutWatchRequestParameters, PutWatchRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a PUT on /_xpack/watcher/watch/{id}
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-put-watch.html </para>
+		///</summary>
+		///<param name="id">Watch ID</param>
+		///<param name="body">The watch</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherPutWatchAsync<T>(string id, PostData<object> body, Func<PutWatchRequestParameters, PutWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/watch/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-put-watch.html </para>
+		///</summary>
+		///<param name="id">Watch ID</param>
+		///<param name="body">The watch</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherPutWatchPost<T>(string id, PostData<object> body, Func<PutWatchRequestParameters, PutWatchRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/watch/{id}
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-put-watch.html </para>
+		///</summary>
+		///<param name="id">Watch ID</param>
+		///<param name="body">The watch</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherPutWatchPostAsync<T>(string id, PostData<object> body, Func<PutWatchRequestParameters, PutWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/_restart
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-service.html </para>
+		///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherRestart<T>(Func<RestartWatcherRequestParameters, RestartWatcherRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/_restart
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-service.html </para>
+		///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherRestartAsync<T>(Func<RestartWatcherRequestParameters, RestartWatcherRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/_start
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-service.html </para>
+		///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherStart<T>(Func<StartWatcherRequestParameters, StartWatcherRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/_start
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-service.html </para>
+		///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherStartAsync<T>(Func<StartWatcherRequestParameters, StartWatcherRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a GET on /_xpack/watcher/stats
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-stats.html </para>
+		///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherStats<T>(Func<WatcherStatsRequestParameters, WatcherStatsRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a GET on /_xpack/watcher/stats
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-stats.html </para>
+		///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherStatsAsync<T>(Func<WatcherStatsRequestParameters, WatcherStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a GET on /_xpack/watcher/stats/{watcher_stats_metric}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-stats.html </para>
+		///</summary>
+		///<param name="watcher_stats_metric">Controls what additional stat metrics should be include in the response</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherStats<T>(WatcherStatsMetric watcher_stats_metric, Func<WatcherStatsRequestParameters, WatcherStatsRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a GET on /_xpack/watcher/stats/{watcher_stats_metric}
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-stats.html </para>
+		///</summary>
+		///<param name="watcher_stats_metric">Controls what additional stat metrics should be include in the response</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherStatsAsync<T>(WatcherStatsMetric watcher_stats_metric, Func<WatcherStatsRequestParameters, WatcherStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/_stop
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-service.html </para>
+		///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackWatcherStop<T>(Func<StopWatcherRequestParameters, StopWatcherRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/watcher/_stop
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/watcher/current/appendix-api-service.html </para>
+		///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackWatcherStopAsync<T>(Func<StopWatcherRequestParameters, StopWatcherRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
 	}
 }

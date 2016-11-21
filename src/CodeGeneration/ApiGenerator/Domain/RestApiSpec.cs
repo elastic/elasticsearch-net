@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ApiGenerator.Domain
@@ -11,6 +12,8 @@ namespace ApiGenerator.Domain
 
 	public class RestApiSpec
 	{
+		private IEnumerable<EnumDescription> _enumDescriptions;
+
 		public string Commit { get; set; }
 		public IDictionary<string, ApiEndpoint> Endpoints { get; set; }
 
@@ -21,30 +24,35 @@ namespace ApiGenerator.Domain
 		{
 			get
 			{
-				var queryParamEnums = from m in this.CsharpMethodsWithQueryStringInfo.SelectMany(m => m.Url.Params)
-									  where m.Value.Type == "enum"
-									  select new EnumDescription
-									  {
-										  Name = m.Value.CsharpType(m.Key),
-										  Options = m.Value.Options
+				if (_enumDescriptions == null)
+				{
+					var queryParamEnums = from m in this.CsharpMethodsWithQueryStringInfo.SelectMany(m => m.Url.Params)
+						where m.Value.Type == "enum"
+						select new EnumDescription
+						{
+							Name = m.Value.CsharpType(m.Key),
+							Options = m.Value.Options
+						};
 
-									  };
+					var urlParamEnums = from data in this.Endpoints.Values
+							.SelectMany(v => v.CsharpMethods.Select(m => new { m, n = v.CsharpMethodName }))
+							.SelectMany(m => m.m.Parts.Select(part => new { m = m.n, p = part }))
+						let p = data.p
+						let m = data.m
+						where p.Options != null && p.Options.Any()
+						let name = p.Name.Contains("metric") && p.Name != "watcher_stats_metric"
+							? m + p.Name.ToPascalCase()
+							: p.Name.ToPascalCase()
+						select new EnumDescription
+						{
+							Name = name,
+							Options = p.Options
+						};
 
-				var urlParamEnums = from data in this.Endpoints.Values
-					.SelectMany(v => v.CsharpMethods.Select(m => new { m, n = v.CsharpMethodName }))
-					.SelectMany(m => m.m.Parts.Select(part => new { m = m.n, p = part }))
-									let p = data.p
-									let m = data.m
-									where p.Options != null && p.Options.Any()
-									let name = p.Name.Contains("metric") ? m + p.Name.ToPascalCase() : p.Name.ToPascalCase()
-									select new EnumDescription
-									{
-										Name = name,
-										Options = p.Options
-									};
+					_enumDescriptions = queryParamEnums.Concat(urlParamEnums).DistinctBy(e => e.Name);
+				}
 
-				return queryParamEnums.Concat(urlParamEnums).DistinctBy(e => e.Name);
-
+				return _enumDescriptions;
 			}
 
 		}

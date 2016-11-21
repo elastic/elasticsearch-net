@@ -16,6 +16,66 @@ namespace Nest
 
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IAcknowledgeWatchRequest : IRequest<AcknowledgeWatchRequestParameters> 
+	{
+		Id WatchId { get; }
+		ActionIds ActionId { get; }
+	 } 
+	///<summary>Request parameters for XpackWatcherAckWatch <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-ack-watch.html</pre></summary>
+	public partial class AcknowledgeWatchRequest  : PlainRequestBase<AcknowledgeWatchRequestParameters>, IAcknowledgeWatchRequest
+	{
+		protected IAcknowledgeWatchRequest Self => this;
+		Id IAcknowledgeWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
+		ActionIds IAcknowledgeWatchRequest.ActionId => Self.RouteValues.Get<ActionIds>("action_id");
+			/// <summary>/_xpack/watcher/watch/{watch_id}/_ack</summary>
+///<param name="watch_id">this parameter is required</param>
+		public AcknowledgeWatchRequest(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
+		
+
+		/// <summary>/_xpack/watcher/watch/{watch_id}/_ack/{action_id}</summary>
+///<param name="watch_id">this parameter is required</param>		
+///<param name="action_id">Optional, accepts null</param>
+		public AcknowledgeWatchRequest(Id watch_id, ActionIds action_id) : base(r=>r.Required("watch_id", watch_id).Optional("action_id", action_id)){}
+		
+
+			///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IActivateWatchRequest : IRequest<ActivateWatchRequestParameters> 
+	{
+		Id WatchId { get; }
+	 } 
+	///<summary>Request parameters for XpackWatcherActivateWatch <pre>https://www.elastic.co/guide/en/watcher/current/api-rest.html#api-rest-activate-watch</pre></summary>
+	public partial class ActivateWatchRequest  : PlainRequestBase<ActivateWatchRequestParameters>, IActivateWatchRequest
+	{
+		protected IActivateWatchRequest Self => this;
+		Id IActivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
+			/// <summary>/_xpack/watcher/watch/{watch_id}/_activate</summary>
+///<param name="watch_id">this parameter is required</param>
+		public ActivateWatchRequest(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
+		
+
+			///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IAliasExistsRequest : IRequest<AliasExistsRequestParameters> 
 	{
 		Indices Index { get; }
@@ -1780,6 +1840,32 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeactivateWatchRequest : IRequest<DeactivateWatchRequestParameters> 
+	{
+		Id WatchId { get; }
+	 } 
+	///<summary>Request parameters for XpackWatcherDeactivateWatch <pre>https://www.elastic.co/guide/en/watcher/current/api-rest.html#api-rest-deactivate-watch</pre></summary>
+	public partial class DeactivateWatchRequest  : PlainRequestBase<DeactivateWatchRequestParameters>, IDeactivateWatchRequest
+	{
+		protected IDeactivateWatchRequest Self => this;
+		Id IDeactivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
+			/// <summary>/_xpack/watcher/watch/{watch_id}/_deactivate</summary>
+///<param name="watch_id">this parameter is required</param>
+		public DeactivateWatchRequest(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
+		
+
+			///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteAliasRequest : IRequest<DeleteAliasRequestParameters> 
 	{
 		Indices Index { get; }
@@ -2467,6 +2553,32 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteWatchRequest : IRequest<DeleteWatchRequestParameters> 
+	{
+		Id Id { get; }
+	 } 
+	///<summary>Request parameters for XpackWatcherDeleteWatch <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-delete-watch.html</pre></summary>
+	public partial class DeleteWatchRequest  : PlainRequestBase<DeleteWatchRequestParameters>, IDeleteWatchRequest
+	{
+		protected IDeleteWatchRequest Self => this;
+		Id IDeleteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_xpack/watcher/watch/{id}</summary>
+///<param name="id">this parameter is required</param>
+		public DeleteWatchRequest(Id id) : base(r=>r.Required("id", id)){}
+		
+
+			///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDisableUserRequest : IRequest<DisableUserRequestParameters> 
 	{
 		Name Username { get; }
@@ -2595,6 +2707,36 @@ namespace Nest
 
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IExecuteWatchRequest : IRequest<ExecuteWatchRequestParameters> 
+	{
+		Id Id { get; }
+	 } 
+	///<summary>Request parameters for XpackWatcherExecuteWatch <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-execute-watch.html</pre></summary>
+	public partial class ExecuteWatchRequest  : PlainRequestBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
+	{
+		protected IExecuteWatchRequest Self => this;
+		Id IExecuteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_xpack/watcher/watch/{id}/_execute</summary>
+///<param name="id">Optional, accepts null</param>
+		public ExecuteWatchRequest(Id id) : base(r=>r.Optional("id", id)){}
+		
+
+		/// <summary>/_xpack/watcher/watch/_execute</summary>
+		public ExecuteWatchRequest() : base(){}
+		
+
+			///<summary>indicates whether the watch should execute in debug mode</summary>
+		public bool Debug { get { return Q<bool>("debug"); } set { Q("debug", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -3484,6 +3626,29 @@ namespace Nest
 
 		/// <summary>/_xpack/security/user</summary>
 		public GetUserRequest() : base(){}
+		
+
+			///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetWatchRequest : IRequest<GetWatchRequestParameters> 
+	{
+		Id Id { get; }
+	 } 
+	///<summary>Request parameters for XpackWatcherGetWatch <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-get-watch.html</pre></summary>
+	public partial class GetWatchRequest  : PlainRequestBase<GetWatchRequestParameters>, IGetWatchRequest
+	{
+		protected IGetWatchRequest Self => this;
+		Id IGetWatchRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_xpack/watcher/watch/{id}</summary>
+///<param name="id">this parameter is required</param>
+		public GetWatchRequest(Id id) : base(r=>r.Required("id", id)){}
 		
 
 			///<summary>The URL-encoded request definition</summary>
@@ -4770,6 +4935,35 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPutWatchRequest : IRequest<PutWatchRequestParameters> 
+	{
+		Id Id { get; }
+	 } 
+	///<summary>Request parameters for XpackWatcherPutWatch <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-put-watch.html</pre></summary>
+	public partial class PutWatchRequest  : PlainRequestBase<PutWatchRequestParameters>, IPutWatchRequest
+	{
+		protected IPutWatchRequest Self => this;
+		Id IPutWatchRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_xpack/watcher/watch/{id}</summary>
+///<param name="id">this parameter is required</param>
+		public PutWatchRequest(Id id) : base(r=>r.Required("id", id)){}
+		
+
+			///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>Specify whether the watch is in/active by default</summary>
+		public bool Active { get { return Q<bool>("active"); } set { Q("active", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters> 
 	{
 		Indices Index { get; }
@@ -4921,6 +5115,22 @@ namespace Nest
 		
 
 			///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IRestartWatcherRequest : IRequest<RestartWatcherRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for XpackWatcherRestart <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-service.html</pre></summary>
+	public partial class RestartWatcherRequest  : PlainRequestBase<RestartWatcherRequestParameters>, IRestartWatcherRequest
+	{
+		protected IRestartWatcherRequest Self => this;
+				///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
@@ -5666,6 +5876,38 @@ namespace Nest
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IStartWatcherRequest : IRequest<StartWatcherRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for XpackWatcherStart <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-service.html</pre></summary>
+	public partial class StartWatcherRequest  : PlainRequestBase<StartWatcherRequestParameters>, IStartWatcherRequest
+	{
+		protected IStartWatcherRequest Self => this;
+				///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IStopWatcherRequest : IRequest<StopWatcherRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for XpackWatcherStop <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-service.html</pre></summary>
+	public partial class StopWatcherRequest  : PlainRequestBase<StopWatcherRequestParameters>, IStopWatcherRequest
+	{
+		protected IStopWatcherRequest Self => this;
+				///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
@@ -6576,6 +6818,33 @@ namespace Nest
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IWatcherStatsRequest : IRequest<WatcherStatsRequestParameters> 
+	{
+		Metrics WatcherStatsMetric { get; }
+	 } 
+	///<summary>Request parameters for XpackWatcherStats <pre>http://www.elastic.co/guide/en/watcher/current/appendix-api-stats.html</pre></summary>
+	public partial class WatcherStatsRequest  : PlainRequestBase<WatcherStatsRequestParameters>, IWatcherStatsRequest
+	{
+		protected IWatcherStatsRequest Self => this;
+		Metrics IWatcherStatsRequest.WatcherStatsMetric => Self.RouteValues.Get<Metrics>("watcher_stats_metric");
+			/// <summary>/_xpack/watcher/stats</summary>
+		public WatcherStatsRequest() : base(){}
+		
+
+		/// <summary>/_xpack/watcher/stats/{watcher_stats_metric}</summary>
+///<param name="watcher_stats_metric">Optional, accepts null</param>
+		public WatcherStatsRequest(WatcherStatsMetric watcher_stats_metric) : base(r=>r.Optional("watcher_stats_metric", (Metrics)watcher_stats_metric)){}
+		
+
+			///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>

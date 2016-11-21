@@ -77,6 +77,7 @@
     <Compile Include="Overrides\Descriptors\SearchDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\ReindexOnServerDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\UpdateDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\WatcherStatsDescriptorOverrides.cs" />
     <Compile Include="Overrides\Global\GlobalQueryParameters.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
