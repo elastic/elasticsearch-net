@@ -15,7 +15,7 @@ namespace Nest
 	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
 	public interface IPercolateResponse : IPercolateCountResponse
 	{
-		IEnumerable<PercolatorMatch> Matches { get; }
+		IReadOnlyCollection<PercolatorMatch> Matches { get; }
 	}
 
 	[JsonObject]
@@ -44,24 +44,23 @@ namespace Nest
 	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
 	public class PercolateResponse : PercolateCountResponse, IPercolateResponse
 	{
-
 		[JsonProperty(PropertyName = "matches")]
-		public IEnumerable<PercolatorMatch> Matches { get; internal set; }
+		public IReadOnlyCollection<PercolatorMatch> Matches { get; internal set; } = EmptyReadOnly<PercolatorMatch>.Collection;
 	}
 
 	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
 	public class PercolatorMatch
 	{
 		[JsonProperty(PropertyName = "highlight")]
-		public Dictionary<string, IList<string>> Highlight { get; set; }
+		public IReadOnlyDictionary<string, IList<string>> Highlight { get; internal set; } = EmptyReadOnly<string, IList<string>>.Dictionary;
 
 		[JsonProperty(PropertyName = "_id")]
-		public string Id { get; set; }
+		public string Id { get; internal set; }
 
 		[JsonProperty(PropertyName = "_index")]
-		public string Index { get; set; }
+		public string Index { get; internal set; }
 
 		[JsonProperty(PropertyName = "_score")]
-		public double Score { get; set; }
+		public double Score { get; internal set; }
 	}
 }

@@ -57,7 +57,7 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 			r.Indices.Should().NotBeEmpty();
 			var indicesShardStore = r.Indices[IndexWithUnassignedShards];
 			indicesShardStore.Should().NotBeNull();
-			indicesShardStore.Shards.Should().NotBeEmpty().And.ContainKey("0");
+			indicesShardStore.Shards.Should().NotBeEmpty().And.Contain(kv=> kv.Key == "0");
 			var shardStoreWrapper = indicesShardStore.Shards["0"];
 			shardStoreWrapper.Stores.Should().NotBeNullOrEmpty();
 

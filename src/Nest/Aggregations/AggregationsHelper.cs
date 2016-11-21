@@ -6,13 +6,19 @@ namespace Nest
 {
 	public class AggregationsHelper
 	{
-		public IDictionary<string, IAggregate> Aggregations { get; protected internal set; }
+		public IReadOnlyDictionary<string, IAggregate> Aggregations { get; protected internal set; } = EmptyReadOnly<string, IAggregate>.Dictionary;
 
 		public AggregationsHelper() { }
 
-		public AggregationsHelper(IDictionary<string, IAggregate> aggregations)
+		protected AggregationsHelper(IDictionary<string, IAggregate> aggregations)
 		{
-			this.Aggregations = aggregations;
+			this.Aggregations = aggregations != null ?
+				new Dictionary<string, IAggregate>(aggregations)
+				: EmptyReadOnly<string, IAggregate>.Dictionary;
+		}
+		public AggregationsHelper(IReadOnlyDictionary<string, IAggregate> aggregations)
+		{
+			this.Aggregations = aggregations ?? EmptyReadOnly<string, IAggregate>.Dictionary;
 		}
 
 		public ValueAggregate Min(string key) => this.TryGet<ValueAggregate>(key);
@@ -164,11 +170,11 @@ namespace Nest
 		public MatrixStatsAggregate MatrixStats(string key) => this.TryGet<MatrixStatsAggregate>(key);
 
 
-		private TAggregation TryGet<TAggregation>(string key)
-			where TAggregation : class, IAggregate
+		private TAggregate TryGet<TAggregate>(string key)
+			where TAggregate : class, IAggregate
 		{
 			IAggregate agg;
-			return this.Aggregations.TryGetValue(key, out agg) ? agg as TAggregation : null;
+			return this.Aggregations.TryGetValue(key, out agg) ? agg as TAggregate : null;
 		}
 
 		private MultiBucketAggregate<TBucket> GetBucket<TBucket>(string key)

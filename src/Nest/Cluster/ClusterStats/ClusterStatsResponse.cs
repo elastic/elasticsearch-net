@@ -5,31 +5,31 @@ namespace Nest
 	public interface IClusterStatsResponse : IResponse
 	{
 		[JsonProperty("cluster_name")]
-		string ClusterName { get; set; }
+		string ClusterName { get; }
 
 		[JsonProperty("timestamp")]
-		long Timestamp { get; set; }
+		long Timestamp { get; }
 
 		[JsonProperty("status")]
-		ClusterStatus Status { get; set; }
+		ClusterStatus Status { get; }
 
 		[JsonProperty("indices")]
-		ClusterIndicesStats Indices { get; set; }
+		ClusterIndicesStats Indices { get; }
 
 		[JsonProperty("nodes")]
-		ClusterNodesStats Nodes { get; set; }
+		ClusterNodesStats Nodes { get; }
 	}
 
 	public class ClusterStatsResponse : ResponseBase, IClusterStatsResponse
 	{
-		public string ClusterName { get; set; }
+		public string ClusterName { get; internal set; }
 
-		public long Timestamp { get; set; }
+		public long Timestamp { get; internal set; }
 
-		public ClusterStatus Status { get; set; }
+		public ClusterStatus Status { get; internal set; }
 
-		public ClusterIndicesStats Indices { get; set; }
+		public ClusterIndicesStats Indices { get; internal set; }
 
-		public ClusterNodesStats Nodes { get; set; }
+		public ClusterNodesStats Nodes { get; internal set; }
 	}
 }

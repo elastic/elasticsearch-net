@@ -19,7 +19,7 @@ namespace Nest
 
 		[JsonProperty("nodes")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		Dictionary<string, NodeState> Nodes { get; }
+		IReadOnlyDictionary<string, NodeState> Nodes { get; }
 
 		[JsonProperty("metadata")]
 		MetadataState Metadata { get; }
@@ -44,7 +44,7 @@ namespace Nest
 
 		public long Version { get; internal set; }
 
-		public Dictionary<string, NodeState> Nodes { get; internal set; }
+		public IReadOnlyDictionary<string, NodeState> Nodes { get; internal set; } = EmptyReadOnly<string, NodeState>.Dictionary;
 
 		public MetadataState Metadata { get; internal set; }
 

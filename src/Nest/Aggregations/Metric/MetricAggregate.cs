@@ -5,6 +5,6 @@ namespace Nest
 {
 	public abstract class MetricAggregateBase : IAggregate
 	{
-		public IDictionary<string, object> Meta { get; set; }
+		public IReadOnlyDictionary<string, object> Meta { get;  set; } = EmptyReadOnly<string, object>.Dictionary;
 	}
 }

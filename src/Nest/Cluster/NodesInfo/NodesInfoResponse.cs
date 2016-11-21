@@ -6,7 +6,7 @@ namespace Nest
 	public interface INodesInfoResponse : IResponse
 	{
 		string ClusterName { get; }
-		Dictionary<string, NodeInfo> Nodes { get; }
+		IReadOnlyDictionary<string, NodeInfo> Nodes { get; }
 	}
 
 	[JsonObject]
@@ -17,6 +17,6 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "nodes")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public Dictionary<string, NodeInfo> Nodes { get; set; }
+		public IReadOnlyDictionary<string, NodeInfo> Nodes { get; internal set; } = EmptyReadOnly<string, NodeInfo>.Dictionary;
 	}
 }

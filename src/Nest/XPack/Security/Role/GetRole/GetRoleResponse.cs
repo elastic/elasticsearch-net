@@ -7,14 +7,14 @@ namespace Nest
 {
 	public interface IGetRoleResponse : IResponse
 	{
-		IDictionary<string, Role> Roles { get; }
+		IReadOnlyDictionary<string, XPackRole> Roles { get; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetRoleResponse, string, Role>))]
-	public class GetRoleResponse : DictionaryResponseBase<string, Role>, IGetRoleResponse
+	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetRoleResponse, string, XPackRole>))]
+	public class GetRoleResponse : DictionaryResponseBase<string, XPackRole>, IGetRoleResponse
 	{
 		[JsonIgnore]
-		public IDictionary<string, Role> Roles => Self.BackingDictionary;
+		public IReadOnlyDictionary<string, XPackRole> Roles => Self.BackingDictionary;
 	}
 }

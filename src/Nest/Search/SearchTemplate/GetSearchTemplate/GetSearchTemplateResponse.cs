@@ -4,13 +4,13 @@ namespace Nest
 {
 	public interface IGetSearchTemplateResponse : IResponse
 	{
-		string Template { get; set; }
+		string Template { get; }
 	}
 
 	[JsonObject]
 	public class GetSearchTemplateResponse : ResponseBase, IGetSearchTemplateResponse
 	{
 		[JsonProperty("template")]
-		public string Template { get; set; }
+		public string Template { get; internal set; }
 	}
 }

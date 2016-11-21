@@ -9,14 +9,14 @@ namespace Nest
 	public interface IGetPipelineResponse : IResponse
 	{
 		[JsonProperty("pipelines")]
-		IDictionary<string, IPipeline> Pipelines { get; }
+		IReadOnlyDictionary<string, IPipeline> Pipelines { get; }
 	}
 
 	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetPipelineResponse, string, IPipeline>))]
 	public class GetPipelineResponse : DictionaryResponseBase<string, IPipeline>, IGetPipelineResponse
 	{
 		[JsonIgnore]
-		public IDictionary<string, IPipeline> Pipelines => Self.BackingDictionary;
+		public IReadOnlyDictionary<string, IPipeline> Pipelines => Self.BackingDictionary;
 	}
 
 }

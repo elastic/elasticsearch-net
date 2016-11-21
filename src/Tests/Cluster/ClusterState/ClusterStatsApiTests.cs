@@ -38,9 +38,9 @@ namespace Tests.Cluster.ClusterState
 			Assert(response.RoutingNodes, response.MasterNode);
 		}
 
-		private void Assert(Dictionary<string, NodeState> nodes, string master)
+		private void Assert(IReadOnlyDictionary<string, NodeState> nodes, string master)
 		{
-			nodes.Should().NotBeEmpty().And.ContainKey(master);
+			nodes.Should().NotBeEmpty().And.Contain(kv=>kv.Key == master);
 			var node = nodes[master];
 			node.Name.Should().NotBeNullOrWhiteSpace();
 			node.TransportAddress.Should().NotBeNullOrWhiteSpace();

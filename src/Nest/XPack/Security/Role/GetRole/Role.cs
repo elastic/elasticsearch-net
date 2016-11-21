@@ -3,16 +3,17 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class Role
+	//only used by GetRoleResponse thus private setters and IReadOnlyCollection
+	public class XPackRole
 	{
 		[JsonProperty("cluster")]
-		public IEnumerable<string> Cluster { get; set; }
+		public IReadOnlyCollection<string> Cluster { get; private set; } = EmptyReadOnly<string>.Collection;
 
 		[JsonProperty("run_as")]
-		public IEnumerable<string> RunAs { get; set; }
+		public IReadOnlyCollection<string> RunAs { get; private set; }= EmptyReadOnly<string>.Collection;
 
 		[JsonProperty("indices")]
-		public IEnumerable<IIndicesPrivileges> Indices { get; set; }
+		public IReadOnlyCollection<IIndicesPrivileges> Indices { get; private set; } = EmptyReadOnly<IIndicesPrivileges>.Collection;
 
 	}
 }

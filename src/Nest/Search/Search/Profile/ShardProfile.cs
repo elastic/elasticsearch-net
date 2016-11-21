@@ -9,7 +9,8 @@ namespace Nest
 		public string Id { get; internal set; }
 
 		[JsonProperty("searches")]
-		public IEnumerable<SearchProfile> Searches { get; internal set; }
+		public IReadOnlyCollection<SearchProfile> Searches { get; internal set; } =
+			EmptyReadOnly<SearchProfile>.Collection;
 
 	}
 }

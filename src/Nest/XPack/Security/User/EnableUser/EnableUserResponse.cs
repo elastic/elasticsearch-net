@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Nest
+﻿namespace Nest
 {
-	public interface IEnableUserResponse : IResponse
-	{
-	}
+	public interface IEnableUserResponse : IResponse { }
 
-	public class EnableUserResponse : ResponseBase, IEnableUserResponse
-	{
-	}
+	public class EnableUserResponse : ResponseBase, IEnableUserResponse { }
 }

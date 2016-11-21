@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -13,6 +14,15 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
+	internal static class EmptyReadOnly<TElement>
+	{
+		public static readonly IReadOnlyCollection<TElement> Collection = new ReadOnlyCollection<TElement>(new List<TElement>());
+	}
+	internal static class EmptyReadOnly<TKey, TValue>
+	{
+		public static readonly IReadOnlyDictionary<TKey, TValue> Dictionary = new ReadOnlyDictionary<TKey, TValue>(new Dictionary<TKey, TValue>());
+	}
+
 	internal static class Extensions
 	{
 		internal static bool NotWritable(this QueryContainer q) => q == null || !q.IsWritable;

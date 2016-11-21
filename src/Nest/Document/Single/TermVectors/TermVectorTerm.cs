@@ -13,7 +13,8 @@ namespace Nest
 		public int TermFrequency { get; internal set; }
 
 		[JsonProperty("tokens")]
-		public IEnumerable<Token> Tokens { get; internal set; } = new List<Token>();
+		public IReadOnlyCollection<Token> Tokens { get; internal set; } =
+			EmptyReadOnly<Token>.Collection;
 
 		[JsonProperty("ttf")]
 		public int TotalTermFrequency { get; internal set; }

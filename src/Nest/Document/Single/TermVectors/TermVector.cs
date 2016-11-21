@@ -10,6 +10,7 @@ namespace Nest
 		public FieldStatistics FieldStatistics { get; internal set; }
 
 		[JsonProperty("terms")]
-		public IDictionary<string, TermVectorTerm> Terms { get; internal set; }= new Dictionary<string, TermVectorTerm>();
+		public IReadOnlyDictionary<string, TermVectorTerm> Terms { get; internal set; } =
+			EmptyReadOnly<string, TermVectorTerm>.Dictionary;
 	}
 }

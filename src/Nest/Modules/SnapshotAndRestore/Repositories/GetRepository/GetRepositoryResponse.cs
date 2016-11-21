@@ -7,24 +7,20 @@ namespace Nest
 	[JsonConverter(typeof(GetRepositoryResponseJsonConverter))]
 	public interface IGetRepositoryResponse : IResponse
 	{
-		IDictionary<string, ISnapshotRepository> Repositories { get; set; }
+		IReadOnlyDictionary<string, ISnapshotRepository> Repositories { get; }
 
 		AzureRepository Azure(string name);
 		FileSystemRepository FileSystem(string name);
-        HdfsRepository Hdfs(string name);
-        ReadOnlyUrlRepository ReadOnlyUrl(string name);
-        S3Repository S3(string name);
+		HdfsRepository Hdfs(string name);
+		ReadOnlyUrlRepository ReadOnlyUrl(string name);
+		S3Repository S3(string name);
 	}
 
 	[JsonObject]
 	public class GetRepositoryResponse : ResponseBase, IGetRepositoryResponse
 	{
-		public GetRepositoryResponse()
-		{
-			this.Repositories = new Dictionary<string, ISnapshotRepository>();
-		}
-
-		public IDictionary<string, ISnapshotRepository> Repositories { get; set; }
+		public IReadOnlyDictionary<string, ISnapshotRepository> Repositories { get; internal set; } =
+			EmptyReadOnly<string, ISnapshotRepository>.Dictionary;
 
 		public AzureRepository Azure(string name) => Get<AzureRepository>(name);
 		public FileSystemRepository FileSystem(string name) => Get<FileSystemRepository>(name);

@@ -28,7 +28,7 @@ namespace Nest
 		}
 
 		[JsonProperty("responses")]
-		internal IEnumerable<PercolateResponse> AllResponses { get; set; }
+		internal IReadOnlyCollection<PercolateResponse> AllResponses { get; set; } = EmptyReadOnly<PercolateResponse>.Collection;
 
 		IEnumerable<PercolateResponse> IMultiPercolateResponse.Responses => this.Responses;
 

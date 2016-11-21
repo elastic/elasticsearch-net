@@ -11,10 +11,10 @@ namespace Nest
 	public interface IListTasksResponse: IResponse
 	{
 		[JsonProperty("nodes")]
-		IDictionary<string, TaskExecutingNode> Nodes { get; }
+		IReadOnlyDictionary<string, TaskExecutingNode> Nodes { get; }
 
 		[JsonProperty("node_failures")]
-		IEnumerable<Throwable> NodeFailures { get; }
+		IReadOnlyCollection<Throwable> NodeFailures { get; }
 
 	}
 
@@ -22,8 +22,8 @@ namespace Nest
 	{
 		public override bool IsValid => base.IsValid && !this.NodeFailures.HasAny();
 
-		public IDictionary<string, TaskExecutingNode> Nodes { get; internal set; }
-		public IEnumerable<Throwable> NodeFailures { get; internal set; }
+		public IReadOnlyDictionary<string, TaskExecutingNode> Nodes { get; internal set; } = EmptyReadOnly<string, TaskExecutingNode>.Dictionary;
+		public IReadOnlyCollection<Throwable> NodeFailures { get; internal set; } = EmptyReadOnly<Throwable>.Collection;
 	}
 
 	public class TaskExecutingNode
@@ -41,7 +41,7 @@ namespace Nest
 		public string Ip { get; internal set; }
 
 		[JsonProperty("tasks")]
-		public IDictionary<TaskId, TaskState> Tasks { get; internal set; }
+		public IReadOnlyDictionary<TaskId, TaskState> Tasks { get; internal set; } = EmptyReadOnly<TaskId, TaskState>.Dictionary;
 	}
 
 	public class TaskState

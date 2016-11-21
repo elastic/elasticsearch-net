@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Nest
+﻿namespace Nest
 {
-	public interface IChangePasswordResponse : IResponse
-	{
-	}
+	public interface IChangePasswordResponse : IResponse { }
 
-	public class ChangePasswordResponse : ResponseBase, IChangePasswordResponse
-	{
-	}
+	public class ChangePasswordResponse : ResponseBase, IChangePasswordResponse { }
 }
