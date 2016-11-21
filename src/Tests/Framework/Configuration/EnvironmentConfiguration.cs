@@ -13,6 +13,7 @@ namespace Tests.Framework.Configuration
 		public override bool ForceReseed { get; protected set; } = true;
 		public override ElasticsearchVersion ElasticsearchVersion { get; protected set; } = new ElasticsearchVersion("5.0.0");
 		public override TestMode Mode { get; protected set; } = TestMode.Unit;
+		public override string ClusterFilter { get; protected set; }
 
 		public EnvironmentConfiguration()
 		{
@@ -22,6 +23,7 @@ namespace Tests.Framework.Configuration
 			if (!string.IsNullOrEmpty(version)) Mode = TestMode.Integration;
 
 			this.ElasticsearchVersion = new ElasticsearchVersion(string.IsNullOrWhiteSpace(version) ? "5.0.0" : version);
+			this.ClusterFilter = Environment.GetEnvironmentVariable("NEST_INTEGRATION_CLUSTER");
 		}
 	}
 }

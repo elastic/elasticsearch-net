@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Tests.Framework.Configuration;
 using Tests.Framework.Versions;
@@ -12,6 +13,7 @@ namespace Tests.Framework.Integration
 		public bool TestAgainstAlreadyRunningElasticsearch { get; }
 		public bool RunIntegrationTests { get; }
 		public bool RunUnitTests { get; }
+		public string ClusterFilter { get; }
 
 		public string TypeOfCluster { get; set; }
 		public ElasticsearchPlugin[] RequiredPlugins { get; set; } = { };
@@ -26,6 +28,7 @@ namespace Tests.Framework.Integration
 			this.TestAgainstAlreadyRunningElasticsearch = configuration.TestAgainstAlreadyRunningElasticsearch;
 			this.RunIntegrationTests = configuration.RunIntegrationTests;
 			this.RunUnitTests = configuration.RunUnitTests;
+			this.ClusterFilter = configuration.ClusterFilter;
 		}
 	}
 }

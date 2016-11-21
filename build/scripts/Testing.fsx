@@ -37,12 +37,13 @@ module Tests =
         testProjectJson "all"
 
 
-    let RunIntegrationTests() commaSeparatedEsVersions =
+    let RunIntegrationTests() commaSeparatedEsVersions clusterFilter =
         let esVersions = 
             match commaSeparatedEsVersions with
             | "" -> failwith "when running integrate you have to pass a comma separated list of elasticsearch versions to test"
             | _ -> commaSeparatedEsVersions.Split ',' |> Array.toList 
         
         for esVersion in esVersions do
+            setProcessEnvironVar "NEST_INTEGRATION_CLUSTER" clusterFilter
             setProcessEnvironVar "NEST_INTEGRATION_VERSION" esVersion
             testDesktopClr "all"

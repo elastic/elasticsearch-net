@@ -64,16 +64,18 @@ namespace Xunit
 
 			var summaries = new ConcurrentBag<RunSummary>();
 			var clusterTotals = new Dictionary<string, Stopwatch>();
+			var clusterFilter = TestClient.Configuration.ClusterFilter;
 			foreach (var group in grouped)
 			{
-				//if (group.Key?.GetType() != typeof(WritableCluster)) continue;
 				var type = group.Key?.GetType();
 				var clusterName = type?.Name.Replace("Cluster", "") ?? "UNKNOWN";
+
+				if (!string.IsNullOrWhiteSpace(clusterFilter) && !string.Equals(clusterName, clusterFilter, StringComparison.InvariantCultureIgnoreCase))
+					continue;
+
 				var dop = group.Key != null && group.Key.MaxConcurrency > 0
 					? group.Key.MaxConcurrency
 					: defaultMaxConcurrency;
-
-				//if (type != typeof(ReadOnlyCluster)) continue;
 
 				clusterTotals.Add(clusterName, Stopwatch.StartNew());
 

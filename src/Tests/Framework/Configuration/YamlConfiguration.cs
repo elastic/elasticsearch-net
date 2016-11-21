@@ -11,7 +11,7 @@ namespace Tests.Framework.Configuration
 		public override ElasticsearchVersion ElasticsearchVersion { get; protected set; }
 		public override bool ForceReseed { get; protected set; } = true;
 		public override TestMode Mode { get; protected set; } = TestMode.Unit;
-
+		public override string ClusterFilter { get; protected set; }
 
 		public YamlConfiguration(string configurationFile)
 		{
@@ -25,6 +25,7 @@ namespace Tests.Framework.Configuration
 			this.ElasticsearchVersion = new ElasticsearchVersion(config["elasticsearch_version"]);
 			this.ForceReseed = bool.Parse(config["force_reseed"]);
 			this.TestAgainstAlreadyRunningElasticsearch = bool.Parse(config["test_against_already_running_elasticsearch"]);
+			this.ClusterFilter = config["cluster_filter"];
 		}
 
 		private static string ConfigName(string configLine) => Parse(configLine, 0);
