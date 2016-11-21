@@ -24,6 +24,13 @@ namespace Nest
 	{
 		string IIndexedScript.Id { get; set; }
 
+		public IndexedScriptDescriptor() {}
+
+		public IndexedScriptDescriptor(string id)
+		{
+			Self.Id = id;
+		}
+
 		public IndexedScriptDescriptor Id(string id) => Assign(a => a.Id = id);
 	}
 }

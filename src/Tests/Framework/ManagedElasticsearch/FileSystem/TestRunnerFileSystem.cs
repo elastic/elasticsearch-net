@@ -80,6 +80,7 @@ namespace Tests.Framework.Integration
 				SetupStopwordsFile();
 
 				EnsureShieldAdmin();
+				EnsureWatcherActionConfigurations();
 			}
 		}
 
@@ -177,9 +178,70 @@ namespace Tests.Framework.Integration
 			File.WriteAllText(easyRunBat, $@"elasticsearch-{this.Version.Version}\bin\elasticsearch.bat {batSettings}");
 		}
 
+		private void EnsureWatcherActionConfigurations()
+		{
+			if (!this._config.XPackEnabled) return;
+
+			var rolesConfig = Path.Combine(this.ElasticsearchHome, "config", "elasticsearch.yml");
+			var lines = File.ReadAllLines(rolesConfig).ToList();
+			var saveFile = false;
+
+			// set up for Watcher HipChat action
+			if (!lines.Any(line => line.StartsWith("xpack.notification.hipchat:")))
+			{
+				lines.AddRange(new[]
+				{
+					string.Empty,
+					"xpack.notification.hipchat:",
+					"  account:",
+					"    notify-monitoring:",
+					"      profile: user",
+					"      user: watcher-user@example.com",
+					"      auth_token: hipchat_auth_token",
+					string.Empty
+				});
+
+				saveFile = true;
+			}
+
+			// set up for Watcher Slack action
+			if (!lines.Any(line => line.StartsWith("xpack.notification.slack:")))
+			{
+				lines.AddRange(new[]
+				{
+					string.Empty,
+					"xpack.notification.slack:",
+					"  account:",
+					"    monitoring:",
+					"      url: https://hooks.slack.com/services/foo/bar/baz",
+					string.Empty
+				});
+
+				saveFile = true;
+			}
+
+			// set up for Watcher PagerDuty action
+			if (!lines.Any(line => line.StartsWith("xpack.notification.pagerduty:")))
+			{
+				lines.AddRange(new[]
+				{
+					string.Empty,
+					"xpack.notification.pagerduty:",
+					"  account:",
+					"    my_pagerduty_account:",
+					"      service_api_key: pager_duty_service_api_key",
+					string.Empty
+				});
+
+				saveFile = true;
+			}
+
+			if (saveFile) File.WriteAllLines(rolesConfig, lines);
+		}
+
 		private void EnsureShieldAdmin()
 		{
-			if (!this._config.ShieldEnabled) return;
+			if (!this._config.XPackEnabled) return;
 
 			var folder = this.Version.Major >= 5 ? "x-pack" : "shield";
 			var plugin = this.Version.Major >= 5 ? "users" : "esusers";

@@ -99,7 +99,7 @@ namespace ApiGenerator.Domain
 						{
 							route = p.Key,
 							call = p.Value.Required ? "Required" : "Optional",
-							v = p.Key == "metric"
+							v = p.Key == "metric" || p.Key == "watcher_stats_metric"
 								? $"(Metrics){p.Key}"
 								: p.Key == "index_metric"
 									? $"(IndexMetrics){p.Key}"
@@ -269,7 +269,7 @@ namespace ApiGenerator.Domain
 				var routeValue = paramName;
 				var routeSetter = p.Required ? "Required" : "Optional";
 
-				if (paramName == "metric") routeValue = "(Metrics)metric";
+				if (paramName == "metric" || paramName == "watcherStatsMetric") routeValue = "(Metrics)" + paramName;
 				else if (paramName == "indexMetric") routeValue = "(IndexMetrics)indexMetric";
 
 				var code = $"public {returnType} {p.InterfaceName}({ClrParamType(p.ClrTypeName)} {paramName}) => Assign(a=>a.RouteValues.{routeSetter}(\"{p.Name}\", {routeValue}));";

@@ -86,7 +86,6 @@ namespace Tests.Framework
 					this._usage.CalledSetup = true;
 				}
 
-
 				var dict = new Dictionary<ClientMethod, IResponse>();
 				_uniqueValues.CurrentView = ClientMethod.Fluent;
 

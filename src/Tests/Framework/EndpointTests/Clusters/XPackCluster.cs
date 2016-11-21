@@ -7,4 +7,11 @@ namespace Tests.Framework.Integration
 	public class XPackCluster : ClusterBase
 	{
 	}
+
+	/// <summary>
+	/// Cluster that modifies the state of the Watcher Service
+	/// </summary>
+	public class WatcherStateCluster : XPackCluster
+	{
+	}
 }

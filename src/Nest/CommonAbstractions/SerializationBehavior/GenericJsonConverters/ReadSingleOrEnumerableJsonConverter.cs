@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	internal class SingleOrEnumerableConverter<T> : JsonConverter
+	internal class ReadSingleOrEnumerableJsonConverter<T> : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => true;
 
@@ -18,6 +18,7 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
+			throw new NotSupportedException();
 		}
 	}
 }

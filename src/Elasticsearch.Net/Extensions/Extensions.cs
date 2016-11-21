@@ -63,6 +63,12 @@ namespace Elasticsearch.Net
 			return @object;
 		}
 
+		internal static string NotNull(this Enum @object, string parameterName)
+		{
+			@object.ThrowIfNull(parameterName);
+			return @object.GetStringValue();
+		}
+
 		internal static void ThrowIfEmpty<T>(this IEnumerable<T> @object, string parameterName)
 		{
 			@object.ThrowIfNull(parameterName);

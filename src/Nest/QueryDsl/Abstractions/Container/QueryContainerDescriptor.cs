@@ -8,7 +8,7 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class QueryContainerDescriptor<T> : QueryContainer where T : class
 	{
-		QueryContainerDescriptor<T> Assign(Action<IQueryContainer> assigner) => Fluent.Assign(this, assigner);
+		private QueryContainerDescriptor<T> Assign(Action<IQueryContainer> assigner) => Fluent.Assign(this, assigner);
 
 		private static QueryContainer WrapInContainer<TQuery, TQueryInterface>(
 			Func<TQuery, TQueryInterface> create,
@@ -43,7 +43,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="rawJson"></param>
 		/// <returns></returns>
-		public QueryContainer Raw(string rawJson) => Assign(a => a.RawQuery = new RawQueryDescriptor().Raw(rawJson));
+		public QueryContainer Raw(string rawJson) => Assign(a => a.RawQuery = new RawQueryDescriptor(rawJson));
 
 		/// <summary>
 		/// A query that uses a query parser in order to parse its content.

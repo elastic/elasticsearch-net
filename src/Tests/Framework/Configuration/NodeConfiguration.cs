@@ -18,7 +18,7 @@ namespace Tests.Framework.Integration
 		public string TypeOfCluster { get; set; }
 		public ElasticsearchPlugin[] RequiredPlugins { get; set; } = { };
 
-		public bool ShieldEnabled => this.RequiredPlugins.Contains(ElasticsearchPlugin.XPack);
+		public bool XPackEnabled => this.RequiredPlugins.Contains(ElasticsearchPlugin.XPack);
 
 		public NodeConfiguration(ITestConfiguration configuration)
 		{

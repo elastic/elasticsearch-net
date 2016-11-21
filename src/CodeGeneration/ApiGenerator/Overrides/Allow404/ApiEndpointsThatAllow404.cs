@@ -17,6 +17,8 @@ namespace ApiGenerator.Overrides.Allow404
 			"Exists",
 			"Get",
 			"Delete",
+			"GetWatch",
+			"DeleteWatch",
 		};
 	}
 }

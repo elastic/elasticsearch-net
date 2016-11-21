@@ -69,12 +69,13 @@ namespace Nest
 
 		/// <summary>
 		/// Scripts are compiled and cached for faster execution.
-		/// If the same script can be used, just with different parameters provider,
+		/// If the same script can be used, just with different parameters provided,
 		/// it is preferable to use the ability to pass parameters to the script itself.
-		/// Ex:
-		///		Script: "doc['num1'].value > param1"
-		///		param: "param1" = 5
 		/// </summary>
+		/// <example>
+		///	    script: "doc['num1'].value > param1"
+		///		param: "param1" = 5
+		/// </example>
 		/// <param name="paramDictionary">param</param>
 		/// <returns>this</returns>
 		public ScriptQueryDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary) =>

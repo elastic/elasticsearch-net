@@ -9,7 +9,7 @@ namespace Nest
 		public ReindexObserver(
 			Action<IReindexResponse<T>> onNext = null,
 			Action<Exception> onError = null,
-			Action onCompleted = null,
+			System.Action onCompleted = null,
 			Action<IHit<T>, T, IBulkIndexOperation<T>> alter = null)
 			: base(onNext, onError, onCompleted)
 		{
