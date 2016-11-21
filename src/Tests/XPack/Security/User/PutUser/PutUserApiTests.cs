@@ -75,7 +75,6 @@ namespace Tests.XPack.Security.User.PutUser
 		}
 	}
 
-	//TODO disabled for now pending bug report
 	public class PutUserRunAsApiTests : PutUserApiTests
 	{
 		public PutUserRunAsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage)

@@ -93,7 +93,6 @@ namespace Tests.XPack.Security.Role.PutRole
 		}
 	}
 
-	//TODO this might be a bug in xpack but more likely a misunderstanding on our part ignore for now
 	public class PutRoleRunAsApiTests : PutRoleApiTests
 	{
 		public PutRoleRunAsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
