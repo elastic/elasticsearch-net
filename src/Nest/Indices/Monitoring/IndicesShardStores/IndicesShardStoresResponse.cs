@@ -26,6 +26,7 @@ namespace Nest
 
 	public class ShardStoreWrapper
 	{
+		[JsonProperty(PropertyName = "stores")]
 		public IReadOnlyCollection<ShardStore> Stores { get; internal set; } = EmptyReadOnly<ShardStore>.Collection;
 	}
 
