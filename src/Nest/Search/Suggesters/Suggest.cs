@@ -13,6 +13,6 @@ namespace Nest
 		[JsonProperty("text")]
 		public string Text { get; internal set; }
 		[JsonProperty("options")]
-		public IEnumerable<SuggestOption<T>> Options { get; internal set; }
+		public IReadOnlyCollection<SuggestOption<T>> Options { get; internal set; } = EmptyReadOnly<SuggestOption<T>>.Collection;
 	}
 }

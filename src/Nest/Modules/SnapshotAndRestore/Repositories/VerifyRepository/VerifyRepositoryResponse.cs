@@ -11,7 +11,7 @@ namespace Nest
 		/// </summary>
 		[JsonProperty(PropertyName = "nodes")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		Dictionary<string, CompactNodeInfo> Nodes { get; set; }
+		IReadOnlyDictionary<string, CompactNodeInfo> Nodes { get; }
 	}
 
 	[JsonObject]
@@ -21,6 +21,6 @@ namespace Nest
 		/// <summary>
 		///  A dictionary of nodeId => nodeinfo of nodes that verified the repository
 		/// </summary>
-		public Dictionary<string, CompactNodeInfo> Nodes { get; set; }
+		public IReadOnlyDictionary<string, CompactNodeInfo> Nodes { get; internal set; } = EmptyReadOnly<string, CompactNodeInfo>.Dictionary;
 	}
 }

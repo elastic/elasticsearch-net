@@ -61,7 +61,7 @@ namespace Nest
 				case "buckets":
 				case "doc_count_error_upper_bound":
 					aggregate = GetMultiBucketAggregate(reader, serializer);
-					break;;
+					break;
 				case "count":
 					aggregate = GetStatsAggregate(reader, serializer);
 					break;
@@ -342,7 +342,7 @@ namespace Nest
 			return extendedStatsMetric;
 		}
 
-		private IDictionary<string, IAggregate> GetSubAggregates(JsonReader reader, JsonSerializer serializer)
+		private IReadOnlyDictionary<string, IAggregate> GetSubAggregates(JsonReader reader, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.PropertyName)
 				return null;
@@ -405,7 +405,7 @@ namespace Nest
 			if (reader.TokenType == JsonToken.EndArray)
 			{
 				reader.Read();
-				bucket.Items = Enumerable.Empty<IBucket>();
+				bucket.Items = EmptyReadOnly<IBucket>.Collection;
 				return bucket;
 			}
 			do
@@ -553,7 +553,7 @@ namespace Nest
 			if (property == "from" || property == "to")
 				return GetRangeBucket(reader, serializer, key);
 
-			var keyItem = new KeyedBucket {Key = key};
+			var keyItem = new KeyedBucket { Key = key };
 
 			if (property == "key_as_string")
 			{

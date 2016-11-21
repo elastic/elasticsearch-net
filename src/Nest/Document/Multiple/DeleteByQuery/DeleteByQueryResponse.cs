@@ -45,7 +45,7 @@ namespace Nest
 		long Total { get; }
 
 		[JsonProperty("failures")]
-		IEnumerable<BulkIndexByScrollFailure> Failures { get; }
+		IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; }
 	}
 
 	public class DeleteByQueryResponse : ResponseBase, IDeleteByQueryResponse
@@ -76,6 +76,6 @@ namespace Nest
 
 		public long Total { get; internal set; }
 
-		public IEnumerable<BulkIndexByScrollFailure> Failures { get; internal set; }
+		public IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; internal set; } = EmptyReadOnly<BulkIndexByScrollFailure>.Collection;
 	}
 }

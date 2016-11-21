@@ -7,7 +7,7 @@ namespace Nest
 {
 	public interface IMultiGetResponse : IResponse
 	{
-		IEnumerable<IMultiGetHit<object>> Documents { get; }
+		IReadOnlyCollection<IMultiGetHit<object>> Documents { get; }
 		MultiGetHit<T> Get<T>(string id) where T : class;
 		MultiGetHit<T> Get<T>(long id) where T : class;
 		T Source<T>(string id) where T : class;
@@ -25,14 +25,9 @@ namespace Nest
 	[ContractJsonConverter(typeof(MultiGetHitJsonConverter))]
 	public class MultiGetResponse : ResponseBase, IMultiGetResponse
 	{
-		public MultiGetResponse()
-		{
-			this._Documents = new List<IMultiGetHit<object>>();
-		}
+		internal ICollection<IMultiGetHit<object>> _Documents { get; set; } = new List<IMultiGetHit<object>>();
 
-		internal ICollection<IMultiGetHit<object>> _Documents { get; set; }
-
-		public IEnumerable<IMultiGetHit<object>> Documents => this._Documents.ToList();
+		public IReadOnlyCollection<IMultiGetHit<object>> Documents => this._Documents.ToList().AsReadOnly();
 
 		public MultiGetHit<T> Get<T>(string id) where T : class
 		{
@@ -85,7 +80,7 @@ namespace Nest
 		public FieldValues GetFieldValues<T>(string id) where T : class
 		{
 			var multiHit = this.Get<T>(id);
-			return multiHit?.Fields;
+			return multiHit?.Fields ?? FieldValues.Empty;
 		}
 
 		public FieldValues GetFieldSelection<T>(long id) where T : class

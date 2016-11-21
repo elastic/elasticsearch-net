@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -7,7 +8,7 @@ namespace Nest
 	{
 		bool Valid { get; }
 		ShardsMetaData Shards { get; }
-		IList<ValidationExplanation> Explanations { get; set; }
+		IReadOnlyCollection<ValidationExplanation> Explanations { get; }
 	}
 
 	[JsonObject]
@@ -23,6 +24,6 @@ namespace Nest
 		/// Gets the explanations if Explain() was set.
 		/// </summary>
 		[JsonProperty(PropertyName = "explanations")]
-		public IList<ValidationExplanation> Explanations { get; set;}
+		public IReadOnlyCollection<ValidationExplanation> Explanations { get; internal set; } = EmptyReadOnly<ValidationExplanation>.Collection;
 	}
 }

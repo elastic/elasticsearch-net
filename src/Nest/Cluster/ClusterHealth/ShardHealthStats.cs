@@ -6,16 +6,16 @@ namespace Nest
 	public class ShardHealthStats
 	{
 		[JsonProperty(PropertyName = "status")]
-		public string Status { get; set; }
+		public string Status { get; internal set; }
 		[JsonProperty(PropertyName = "primary_active")]
-		public bool PrimaryActive { get; set; }
+		public bool PrimaryActive { get; internal set; }
 		[JsonProperty(PropertyName = "active_shards")]
-		public int ActiveShards { get; set; }
+		public int ActiveShards { get; internal set; }
 		[JsonProperty(PropertyName = "relocating_shards")]
-		public int RelocatingShards { get; set; }
+		public int RelocatingShards { get; internal set; }
 		[JsonProperty(PropertyName = "initializing_shards")]
-		public int InitializingShards { get; set; }
+		public int InitializingShards { get; internal set; }
 		[JsonProperty(PropertyName = "unassigned_shards")]
-		public int UnassignedShards { get; set; }
+		public int UnassignedShards { get; internal set; }
 	}
 }

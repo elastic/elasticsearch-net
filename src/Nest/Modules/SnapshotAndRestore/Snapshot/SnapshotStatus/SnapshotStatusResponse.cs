@@ -6,7 +6,7 @@ namespace Nest
 	public interface ISnapshotStatusResponse : IResponse
 	{
 		[JsonProperty("snapshots")]
-		IEnumerable<SnapshotStatus> Snapshots { get; set; }
+		IReadOnlyCollection<SnapshotStatus> Snapshots { get; }
 	}
 
 	[JsonObject]
@@ -14,7 +14,7 @@ namespace Nest
 	{
 
 		[JsonProperty("snapshots")]
-		public IEnumerable<SnapshotStatus> Snapshots { get; set; }
+		public IReadOnlyCollection<SnapshotStatus> Snapshots { get; internal set; } = EmptyReadOnly<SnapshotStatus>.Collection;
 
 	}
 
@@ -31,9 +31,9 @@ namespace Nest
 		[JsonProperty("stats")]
 		public SnapshotStats Stats { get; internal set; }
 		[JsonProperty("indices")]
-		public IDictionary<string, SnapshotIndexStats> Indices { get; internal set; } 
+		public IReadOnlyDictionary<string, SnapshotIndexStats> Indices { get; internal set; } = EmptyReadOnly<string, SnapshotIndexStats>.Dictionary;
 	}
-	
+
 	public class SnapshotIndexStats
 	{
 		[JsonProperty("shards_stats")]
@@ -41,7 +41,7 @@ namespace Nest
 		[JsonProperty("stats")]
 		public SnapshotStats Stats { get; internal set; }
 		[JsonProperty("shards")]
-		public IDictionary<string, SnapshotShardsStats> Shards { get; internal set; } 
+		public IReadOnlyDictionary<string, SnapshotShardsStats> Shards { get; internal set; } = EmptyReadOnly<string, SnapshotShardsStats>.Dictionary;
 	}
 
 	public class SnapshotIndexShardStats

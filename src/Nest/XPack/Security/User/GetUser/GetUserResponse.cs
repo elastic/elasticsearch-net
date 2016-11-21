@@ -7,32 +7,32 @@ namespace Nest
 {
 	public interface IGetUserResponse : IResponse
 	{
-		IDictionary<string, User> Users { get; }
+		IReadOnlyDictionary<string, XPackUser> Users { get; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetUserResponse, string, User>))]
-	public class GetUserResponse : DictionaryResponseBase<string, User>, IGetUserResponse
+	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetUserResponse, string, XPackUser>))]
+	public class GetUserResponse : DictionaryResponseBase<string, XPackUser>, IGetUserResponse
 	{
 		[JsonIgnore]
-		public IDictionary<string, User> Users => Self.BackingDictionary;
+		public IReadOnlyDictionary<string, XPackUser> Users => Self.BackingDictionary;
 	}
 
-	public class User
+	public class XPackUser
 	{
 		[JsonProperty("username")]
-		public string Username { get; set; }
+		public string Username { get; internal set; }
 
 		[JsonProperty("roles")]
-		public IEnumerable<string> Roles { get; set; }
+		public IReadOnlyCollection<string> Roles { get; internal set; } = EmptyReadOnly<string>.Collection;
 
 		[JsonProperty("full_name")]
-		public string FullName { get; set; }
+		public string FullName { get; internal set; }
 
 		[JsonProperty("email")]
-		public string Email { get; set; }
+		public string Email { get; internal set; }
 
 		[JsonProperty("metadata")]
-		public IDictionary<string, object> Metadata { get; set; }
+		public IReadOnlyDictionary<string, object> Metadata { get; internal set; } = EmptyReadOnly<string, object>.Dictionary;
 	}
 }

@@ -5,7 +5,7 @@ namespace Nest
 {
 	public interface IGetIndexTemplateResponse : IResponse
 	{
-		IDictionary<string, TemplateMapping> TemplateMappings { get; }
+		IReadOnlyDictionary<string, TemplateMapping> TemplateMappings { get; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
@@ -13,6 +13,6 @@ namespace Nest
 	public class GetIndexTemplateResponse : DictionaryResponseBase<string, TemplateMapping>, IGetIndexTemplateResponse
 	{
 		[JsonIgnore]
-		public IDictionary<string, TemplateMapping> TemplateMappings => Self.BackingDictionary;
+		public IReadOnlyDictionary<string, TemplateMapping> TemplateMappings => Self.BackingDictionary;
 	}
 }

@@ -12,24 +12,22 @@ namespace Nest
 	public class TypeFieldMappings
 	{
 		[JsonProperty("mappings")]
-		public Dictionary<string, FieldMappingProperties> Mappings { get; set; }
+		public IReadOnlyDictionary<string, FieldMappingProperties> Mappings { get; internal set; } = EmptyReadOnly<string, FieldMappingProperties>.Dictionary;
 	}
 
 	public class FieldMapping
 	{
 		[JsonProperty("full_name")]
-		public string FullName { get; set; }
+		public string FullName { get; internal set; }
 
 		[JsonProperty("mapping")]
 		[JsonConverter(typeof(FieldMappingJsonConverter))]
-		public Dictionary<string, IFieldMapping> Mapping { get; set; }
+		public IReadOnlyDictionary<string, IFieldMapping> Mapping { get; internal set; } = EmptyReadOnly<string, IFieldMapping>.Dictionary;
 	}
-
-	public class IndexFieldMappings : Dictionary<string, TypeFieldMappings> { }
 
 	public interface IGetFieldMappingResponse : IResponse
 	{
-		IndexFieldMappings Indices { get; set; }
+		IReadOnlyDictionary<string, TypeFieldMappings> Indices { get; }
 
 		IFieldMapping MappingFor(string indexName, string typeName, string fieldName);
 
@@ -49,21 +47,18 @@ namespace Nest
 	{
 		private Inferrer _inferrer { get; set; }
 
-		public GetFieldMappingResponse()
-		{
-			this.Indices = new IndexFieldMappings();
-		}
+		public GetFieldMappingResponse() { }
 
-		internal GetFieldMappingResponse(IApiCallDetails status, IndexFieldMappings dict, Inferrer inferrer)
+		internal GetFieldMappingResponse(IApiCallDetails status, IReadOnlyDictionary<string, TypeFieldMappings> dict, Inferrer inferrer)
 		{
-			this.Indices = dict ?? new IndexFieldMappings();
+			this.Indices = dict ?? EmptyReadOnly<string, TypeFieldMappings>.Dictionary;
 			this._inferrer = inferrer;
 			//TODO can dict truely ever be null, whats the response look like when field mapping is not found.
 			//does status.Success not already reflect this?
 			//this.IsValid = status.Success && dict != null && dict.Count > 0;
 		}
 
-		public IndexFieldMappings Indices { get; set; }
+		public IReadOnlyDictionary<string, TypeFieldMappings> Indices { get; internal set; } = EmptyReadOnly<string, TypeFieldMappings>.Dictionary;
 
 		public FieldMappingProperties MappingsFor(string indexName, string typeName)
 		{

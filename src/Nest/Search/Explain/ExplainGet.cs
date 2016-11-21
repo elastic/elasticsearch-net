@@ -13,7 +13,7 @@ namespace Nest
 		public T Source { get; internal set; }
 
 		[JsonProperty(PropertyName = "fields")]
-		public FieldValues Fields { get; set; }
+		public FieldValues Fields { get; internal set; }
 
 	}
 }

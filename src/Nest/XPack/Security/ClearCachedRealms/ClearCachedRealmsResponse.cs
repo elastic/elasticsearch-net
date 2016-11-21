@@ -11,12 +11,12 @@ namespace Nest
 		string ClusterName { get; }
 
 		[JsonProperty("nodes")]
-		IDictionary<string, ShieldNode>  Nodes { get; }
+		IReadOnlyDictionary<string, SecurityNode>  Nodes { get; }
 	}
 
 	public class ClearCachedRealmsResponse : ResponseBase, IClearCachedRealmsResponse
 	{
 		public string ClusterName { get; internal set; }
-		public IDictionary<string, ShieldNode>  Nodes { get; internal set; }
+		public IReadOnlyDictionary<string, SecurityNode> Nodes { get; internal set; } = EmptyReadOnly<string, SecurityNode>.Dictionary;
 	}
 }

@@ -6,15 +6,15 @@ namespace Nest
 	public interface IClusterGetSettingsResponse : IResponse
 	{
 		[JsonProperty(PropertyName = "persistent")]
-		IDictionary<string, object> Persistent { get; set; }
+		IReadOnlyDictionary<string, object> Persistent { get; }
 
 		[JsonProperty(PropertyName = "transient")]
-		IDictionary<string, object> Transient { get; set; }
+		IReadOnlyDictionary<string, object> Transient { get; }
 	}
 
 	public class ClusterGetSettingsResponse : ResponseBase, IClusterGetSettingsResponse
 	{
-		public IDictionary<string, object> Persistent { get; set; }
-		public IDictionary<string, object> Transient { get; set; }
+		public IReadOnlyDictionary<string, object> Persistent { get; internal set; } = EmptyReadOnly<string, object>.Dictionary;
+		public IReadOnlyDictionary<string, object> Transient { get; internal set; } = EmptyReadOnly<string, object>.Dictionary;
 	}
 }

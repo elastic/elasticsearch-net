@@ -9,9 +9,11 @@ namespace Nest
 		public long RewriteTime { get; internal set; }
 
 		[JsonProperty("query")]
-		public IEnumerable<QueryProfile> Query { get; internal set; }
+		public IReadOnlyCollection<QueryProfile> Query { get; internal set; } =
+			EmptyReadOnly<QueryProfile>.Collection;
 
 		[JsonProperty("collector")]
-		public IEnumerable<Collector> Collector { get; internal set; }
+		public IReadOnlyCollection<Collector> Collector { get; internal set; } =
+			EmptyReadOnly<Collector>.Collection;
 	}
 }

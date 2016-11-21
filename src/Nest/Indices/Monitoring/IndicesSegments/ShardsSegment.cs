@@ -20,7 +20,8 @@ namespace Nest
 
 		[JsonProperty]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public Dictionary<string, Segment> Segments { get; internal set; }
+		public IReadOnlyDictionary<string, Segment> Segments { get; internal set; } =
+			EmptyReadOnly<string, Segment>.Dictionary;
 
 		internal class Json : JsonConverterBase<ShardsSegment>
 		{

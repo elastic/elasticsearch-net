@@ -9,58 +9,58 @@ namespace Nest
 	public interface IClusterAllocationExplainResponse : IResponse
 	{
 		[JsonProperty("shard")]
-		ShardAllocationExplanation Shard { get; set; }
+		ShardAllocationExplanation Shard { get; }
 
 		[JsonProperty("assigned")]
-		bool Assigned { get; set; }
+		bool Assigned { get; }
 
 		[JsonProperty("assigned_node_id")]
-		string AssignedNodeId { get; set; }
+		string AssignedNodeId { get; }
 
 		[JsonProperty("shard_state_fetch_pending")]
-		bool ShardStateFetchPending { get; set; }
+		bool ShardStateFetchPending { get; }
 
 		[JsonProperty("unassigned_info")]
-		UnassignedInformation UnassignedInformation { get; set; }
+		UnassignedInformation UnassignedInformation { get; }
 
 		[JsonProperty("allocation_delay")]
-		string AllocationDelay { get; set; }
+		string AllocationDelay { get; }
 
 		[JsonProperty("allocation_delay_ms")]
-		long AllocationDelayInMilliseconds { get; set; }
+		long AllocationDelayInMilliseconds { get; }
 
 		[JsonProperty("remaining_delay")]
-		string RemainingDelay { get; set; }
+		string RemainingDelay { get; }
 
 		[JsonProperty("remaining_delay_ms")]
-		long RemainingDelayInMilliseconds { get; set; }
+		long RemainingDelayInMilliseconds { get; }
 
 		[JsonProperty("nodes")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		Dictionary<string, NodeAllocationExplanation> Nodes { get; set; }
+		IReadOnlyDictionary<string, NodeAllocationExplanation> Nodes { get; }
 	}
 
 	public class ClusterAllocationExplainResponse : ResponseBase, IClusterAllocationExplainResponse
 	{
-		public ShardAllocationExplanation Shard { get; set; }
+		public ShardAllocationExplanation Shard { get; internal set; }
 
-		public bool Assigned { get; set; }
+		public bool Assigned { get; internal set; }
 
-		public string AssignedNodeId { get; set; }
+		public string AssignedNodeId { get; internal set; }
 
-		public bool ShardStateFetchPending { get; set; }
+		public bool ShardStateFetchPending { get; internal set; }
 
-		public UnassignedInformation UnassignedInformation { get; set; }
+		public UnassignedInformation UnassignedInformation { get; internal set; }
 
-		public string AllocationDelay { get; set; }
+		public string AllocationDelay { get; internal set; }
 
-		public long AllocationDelayInMilliseconds { get; set; }
+		public long AllocationDelayInMilliseconds { get; internal set; }
 
-		public string RemainingDelay { get; set; }
+		public string RemainingDelay { get; internal set; }
 
-		public long RemainingDelayInMilliseconds { get; set; }
+		public long RemainingDelayInMilliseconds { get; internal set; }
 
-		public Dictionary<string, NodeAllocationExplanation> Nodes { get; set; }
+		public IReadOnlyDictionary<string, NodeAllocationExplanation> Nodes { get; internal set; } = EmptyReadOnly<string, NodeAllocationExplanation>.Dictionary;
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]
@@ -86,7 +86,7 @@ namespace Nest
 		public string NodeName { get; set; }
 
 		[JsonProperty("node_attributes")]
-		public Dictionary<string,string> NodeAttributes { get; set; }
+		public IReadOnlyDictionary<string, string> NodeAttributes { get; set; } = EmptyReadOnly<string, string>.Dictionary;
 
 		[JsonProperty("store")]
 		public AllocationStore Store { get; set; }
@@ -102,7 +102,7 @@ namespace Nest
 		public float Weight { get; set; }
 
 		[JsonProperty("decisions")]
-		public IEnumerable<AllocationDecision> Decisions { get; set; }
+		public IReadOnlyCollection<AllocationDecision> Decisions { get; set; } = EmptyReadOnly<AllocationDecision>.Collection;
 	}
 
 	[JsonObject]
@@ -160,68 +160,68 @@ namespace Nest
 		IndexCreated,
 
 		///<summary>
-        /// Unassigned as a result of a full cluster recovery.
-        ///</summary>
+		/// Unassigned as a result of a full cluster recovery.
+		///</summary>
 		[EnumMember(Value = "CLUSTER_RECOVERED")]
 		ClusterRecovered,
 
 		///<summary>
-        /// Unassigned as a result of opening a closed index.
-        ///</summary>
+		/// Unassigned as a result of opening a closed index.
+		///</summary>
 		[EnumMember(Value = "INDEX_REOPENED")]
 		IndexReopened,
 
 		///<summary>
-        /// Unassigned as a result of importing a dangling index.
-        ///</summary>
+		/// Unassigned as a result of importing a dangling index.
+		///</summary>
 		[EnumMember(Value = "DANGLING_INDEX_IMPORTED")]
 		DanglingIndexImported,
 
 		///<summary>
-        /// Unassigned as a result of restoring into a new index.
-        ///</summary>
+		/// Unassigned as a result of restoring into a new index.
+		///</summary>
 		[EnumMember(Value = "NEW_INDEX_RESTORED")]
 		NewIndexRestored,
 
 		///<summary>
-        /// Unassigned as a result of restoring into a closed index.
-        ///</summary>
+		/// Unassigned as a result of restoring into a closed index.
+		///</summary>
 		[EnumMember(Value = "EXISTING_INDEX_RESTORED")]
 		ExistingIndexRestored,
 
 		///<summary>
-        /// Unassigned as a result of explicit addition of a replica.
-        ///</summary>
+		/// Unassigned as a result of explicit addition of a replica.
+		///</summary>
 		[EnumMember(Value = "REPLICA_ADDED")]
 		ReplicaAdded,
 
 		///<summary>
-        /// Unassigned as a result of a failed allocation of the shard.
-        ///</summary>
+		/// Unassigned as a result of a failed allocation of the shard.
+		///</summary>
 		[EnumMember(Value = "ALLOCATION_FAILED")]
 		AllocationFailed,
 
 		///<summary>
-        /// Unassigned as a result of the node hosting it leaving the cluster.
-        ///</summary>
+		/// Unassigned as a result of the node hosting it leaving the cluster.
+		///</summary>
 		[EnumMember(Value = "NODE_LEFT")]
 		NodeLeft,
 
 		///<summary>
-        /// Unassigned as a result of explicit cancel reroute command.
-        ///</summary>
+		/// Unassigned as a result of explicit cancel reroute command.
+		///</summary>
 		[EnumMember(Value = "REROUTE_CANCELLED")]
 		RerouteCancelled,
 
 		///<summary>
-        /// When a shard moves from started back to initializing, for example, during shadow replica
-        ///</summary>
+		/// When a shard moves from started back to initializing, for example, during shadow replica
+		///</summary>
 		[EnumMember(Value = "REINITIALIZED")]
 		Reinitialized,
 
 		///<summary>
-        /// A better replica location is identified and causes the existing replica allocation to be cancelled.
-        ///</summary>
+		/// A better replica location is identified and causes the existing replica allocation to be cancelled.
+		///</summary>
 		[EnumMember(Value = "REALLOCATED_REPLICA")]
 		ReallocatedReplica
 	}

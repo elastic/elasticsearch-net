@@ -2,12 +2,8 @@
 
 namespace Nest
 {
-	public interface IClearScrollResponse : IResponse
-	{
-	}
+	public interface IClearScrollResponse : IResponse { }
 
 	[JsonObject]
-	public class ClearScrollResponse : ResponseBase, IClearScrollResponse
-	{
-	}
+	public class ClearScrollResponse : ResponseBase, IClearScrollResponse { }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -6,13 +7,13 @@ namespace Nest
 	public interface ICatResponse<out TCatRecord> : IResponse
 		where TCatRecord : ICatRecord
 	{
-		IEnumerable<TCatRecord> Records { get; }
+		IReadOnlyCollection<TCatRecord> Records { get; }
 	}
 
 	[JsonObject]
 	public class CatResponse<TCatRecord> : ResponseBase, ICatResponse<TCatRecord>
 		where TCatRecord : ICatRecord
 	{
-		public IEnumerable<TCatRecord> Records { get; internal set; }
+		public IReadOnlyCollection<TCatRecord> Records { get; internal set; } = EmptyReadOnly<TCatRecord>.Collection;
 	}
 }

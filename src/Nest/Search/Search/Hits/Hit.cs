@@ -21,11 +21,11 @@ namespace Nest
 		long? Timestamp { get; }
 		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
 		long? Ttl { get; }
-		IEnumerable<object> Sorts { get; }
+		IReadOnlyCollection<object> Sorts { get; }
 		HighlightFieldDictionary Highlights { get; }
 		Explanation Explanation { get; }
-		IEnumerable<string> MatchedQueries { get; }
-		IDictionary<string, InnerHitsResult> InnerHits { get; }
+		IReadOnlyCollection<string> MatchedQueries { get; }
+		IReadOnlyDictionary<string, InnerHitsResult> InnerHits { get; }
 	}
 
 	[JsonObject]
@@ -42,7 +42,8 @@ namespace Nest
 
 		[JsonProperty("inner_hits")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public IDictionary<string, InnerHitsResult> InnerHits { get; internal set; }
+		public IReadOnlyDictionary<string, InnerHitsResult> InnerHits { get; internal set; } =
+			EmptyReadOnly<string, InnerHitsResult>.Dictionary;
 
 		[JsonProperty("_score")]
 		public double? Score { get; set; }
@@ -74,7 +75,7 @@ namespace Nest
 		public long? Ttl { get; internal set; }
 
 		[JsonProperty("sort")]
-		public IEnumerable<object> Sorts { get; internal set; }
+		public IReadOnlyCollection<object> Sorts { get; internal set; } = EmptyReadOnly<object>.Collection;
 
 		[JsonProperty("highlight")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
@@ -102,6 +103,6 @@ namespace Nest
 		public Explanation Explanation { get; internal set; }
 
 		[JsonProperty("matched_queries")]
-		public IEnumerable<string> MatchedQueries { get; internal set; }
+		public IReadOnlyCollection<string> MatchedQueries { get; internal set; } = EmptyReadOnly<string>.Collection;
 	}
 }

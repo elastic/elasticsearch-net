@@ -7,6 +7,7 @@ namespace Nest
 	public class Profile
 	{
 		[JsonProperty("shards")]
-		public IEnumerable<ShardProfile> Shards { get; internal set; }
+		public IReadOnlyCollection<ShardProfile> Shards { get; internal set; } =
+			EmptyReadOnly<ShardProfile>.Collection;
 	}
 }

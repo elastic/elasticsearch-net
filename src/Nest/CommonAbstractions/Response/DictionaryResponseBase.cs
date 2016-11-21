@@ -6,13 +6,13 @@ namespace Nest
 {
 	public interface IDictionaryResponse<TKey, TValue> : IResponse
 	{
-		IDictionary<TKey, TValue> BackingDictionary { get; set; }
+		IReadOnlyDictionary<TKey, TValue> BackingDictionary { get; set; }
 	}
 
 	public abstract class DictionaryResponseBase<TKey, TValue> : ResponseBase, IDictionaryResponse<TKey, TValue>
 	{
 		protected IDictionaryResponse<TKey, TValue> Self => this;
-		IDictionary<TKey, TValue> IDictionaryResponse<TKey, TValue>.BackingDictionary { get; set; }
+		IReadOnlyDictionary<TKey, TValue> IDictionaryResponse<TKey, TValue>.BackingDictionary { get; set; }
 	}
 
 	internal class DictionaryResponseJsonConverter<TResponse, TKey, TValue> : JsonConverter

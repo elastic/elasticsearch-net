@@ -21,7 +21,7 @@ namespace Nest
 				.ToDictionary(p => p.Name, p => p.Value);
 			if (!repositories.HasAny())
 				return response;
-			response.Repositories = new Dictionary<string, ISnapshotRepository>();
+			var d = new Dictionary<string, ISnapshotRepository>();
 			foreach (var kv in repositories)
 			{
 				var repository = JObject.FromObject(kv.Value);
@@ -32,29 +32,30 @@ namespace Nest
 				if (typeName == "fs")
 				{
 					var fs = GetRepository<FileSystemRepository, FileSystemRepositorySettings>(settings);
-					response.Repositories.Add(kv.Key, fs);
+					d.Add(kv.Key, fs);
 				}
 				else if (typeName == "url")
 				{
 					var url = GetRepository<ReadOnlyUrlRepository, ReadOnlyUrlRepositorySettings>(settings);
-					response.Repositories.Add(kv.Key, url);
+					d.Add(kv.Key, url);
 				}
 				else if (typeName == "azure")
 				{
 					var azure = GetRepository<AzureRepository, AzureRepositorySettings>(settings);
-					response.Repositories.Add(kv.Key, azure);
+					d.Add(kv.Key, azure);
 				}
 				else if (typeName == "s3")
 				{
 					var s3 = GetRepository<S3Repository, S3RepositorySettings>(settings);
-					response.Repositories.Add(kv.Key, s3);
+					d.Add(kv.Key, s3);
 				}
 				else if (typeName == "hdfs")
 				{
 					var hdfs = GetRepository<HdfsRepository, HdfsRepositorySettings>(settings);
-					response.Repositories.Add(kv.Key, hdfs);
+					d.Add(kv.Key, hdfs);
 				}
 			}
+			response.Repositories = d;
 			return response;
 		}
 
