@@ -75,40 +75,38 @@ namespace Tests.XPack.Security.User.PutUser
 		}
 	}
 
-	//TODO disabled for now pending bug report
-	// https://github.com/elastic/x-plugins/issues/3617
-	//public class PutUserRunAsApiTests : PutUserApiTests
-	//{
-	//	public PutUserRunAsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage)
-	//	{
-	//		var x = this.Client.GetUser(new GetUserRequest(ShieldInformation.User.Username));
-	//		var y = this.Client.GetRole(new GetRoleRequest(ShieldInformation.User.Role));
-	//	}
+	public class PutUserRunAsApiTests : PutUserApiTests
+	{
+		public PutUserRunAsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+			var x = this.Client.GetUser(new GetUserRequest(ShieldInformation.User.Username));
+			var y = this.Client.GetRole(new GetRoleRequest(ShieldInformation.User.Role));
+		}
 
-	//	protected override bool ExpectIsValid => false;
-	//	protected override int ExpectStatusCode => 403;
+		protected override bool ExpectIsValid => false;
+		protected override int ExpectStatusCode => 403;
 
-	//	protected override PutUserRequest Initializer
-	//	{
-	//		get
-	//		{
-	//			var request = base.Initializer;
-	//			request.RequestConfiguration = new RequestConfiguration
-	//			{
-	//				RunAs = ShieldInformation.User.Username
-	//			};
-	//			return request;
-	//		}
-	//	}
+		protected override PutUserRequest Initializer
+		{
+			get
+			{
+				var request = base.Initializer;
+				request.RequestConfiguration = new RequestConfiguration
+				{
+					RunAs = ShieldInformation.User.Username
+				};
+				return request;
+			}
+		}
 
-	//	protected override Func<PutUserDescriptor, IPutUserRequest> Fluent => f => base.Fluent(f
-	//		.RequestConfiguration(c => c
-	//			.RunAs(ShieldInformation.User.Username)
-	//		));
+		protected override Func<PutUserDescriptor, IPutUserRequest> Fluent => f => base.Fluent(f
+			.RequestConfiguration(c => c
+				.RunAs(ShieldInformation.User.Username)
+			));
 
-	//	protected override void ExpectResponse(IPutUserResponse response)
-	//	{
-	//	}
-	//}
+		protected override void ExpectResponse(IPutUserResponse response)
+		{
+		}
+	}
 
 }

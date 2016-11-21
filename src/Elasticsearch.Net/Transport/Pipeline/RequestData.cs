@@ -11,6 +11,7 @@ namespace Elasticsearch.Net
 	public class RequestData
 	{
 		public const string MimeType = "application/json";
+		public const string RunAsSecurityHeader = "es-security-runas-user";
 
 		public Uri Uri => new Uri(this.Node.Uri, this.Path).Purify();
 

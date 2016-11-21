@@ -143,7 +143,7 @@ namespace Elasticsearch.Net
 			requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestData.Accept));
 
 			if (!requestData.RunAs.IsNullOrEmpty())
-				requestMessage.Headers.Add("es-shield-runas-user", requestData.RunAs);
+				requestMessage.Headers.Add(RequestData.RunAsSecurityHeader, requestData.RunAs);
 
 			var data = requestData.PostData;
 
