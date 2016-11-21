@@ -29,7 +29,7 @@ Target "Test"  <| fun _ -> Tests.RunUnitTests()
     
 Target "QuickTest"  <| fun _ -> Tests.RunUnitTests()
 
-Target "Integrate"  <| fun _ -> Tests.RunIntegrationTests() (getBuildParamOrDefault "esversions" "")
+Target "Integrate"  <| fun _ -> Tests.RunIntegrationTests() (getBuildParamOrDefault "esversions" "") (getBuildParamOrDefault "escluster" "")
 
 Target "Profile" <| fun _ -> Profiler.Run()
 

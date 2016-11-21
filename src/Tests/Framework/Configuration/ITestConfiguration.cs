@@ -10,6 +10,7 @@ namespace Tests.Framework.Configuration
 	{
 		TestMode Mode { get; }
 		string ElasticsearchVersion { get; }
+		string ClusterFilter { get; }
 		bool ForceReseed { get; } 
 		bool DoNotSpawnIfAlreadyRunning { get; }
 
