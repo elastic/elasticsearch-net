@@ -119,7 +119,7 @@ namespace Nest
 
 
 				return s;
-			});
+			}).ConfigureAwait(false);
 
 			this._compositeCancelToken.ThrowIfCancellationRequested();
 			if (!response.IsValid && backOffRetries < this._backOffRetries)
@@ -132,7 +132,7 @@ namespace Nest
 					.Select(x => x.d)
 					.ToList();
 
-				return await this.BulkAsync(retryDocuments, page, ++backOffRetries);
+				return await this.BulkAsync(retryDocuments, page, ++backOffRetries).ConfigureAwait(false);
 			}
 			else if (!response.IsValid)
 			{
@@ -198,10 +198,10 @@ namespace Nest
 				SemaphoreSlim semaphoreSlim,
 				long page)
 			{
-				if (semaphoreSlim != null) await semaphoreSlim.WaitAsync();
+				if (semaphoreSlim != null) await semaphoreSlim.WaitAsync().ConfigureAwait(false);
 				try
 				{
-					var result = await taskSelector(item, page);
+					var result = await taskSelector(item, page).ConfigureAwait(false);
 					resultProcessor(item, result);
 				}
 				catch
