@@ -17,7 +17,7 @@ namespace Nest
 		}
 
 		public string Inline { get; set; }
-		
+
 		public static implicit operator InlineScript(string script) => new InlineScript(script);
 	}
 
@@ -25,6 +25,13 @@ namespace Nest
 		: ScriptDescriptorBase<InlineScriptDescriptor, IInlineScript>, IInlineScript
 	{
 		string IInlineScript.Inline { get; set; }
+
+		public InlineScriptDescriptor() {}
+
+		public InlineScriptDescriptor(string script)
+		{
+			Self.Inline = script;
+		}
 
 		public InlineScriptDescriptor Inline(string script) => Assign(a => a.Inline = script);
 	}

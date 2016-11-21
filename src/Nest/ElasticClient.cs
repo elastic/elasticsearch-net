@@ -6,7 +6,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	/// <summary>
-	/// ElasticClient is NEST's strongly typed client which exposes fully mapped elasticsearch endpoints
+	/// ElasticClient is NEST's strongly typed client which exposes fully mapped Elasticsearch endpoints
 	/// </summary>
 	public partial class ElasticClient : IElasticClient, IHighLevelToLowLevelDispatcher
 	{

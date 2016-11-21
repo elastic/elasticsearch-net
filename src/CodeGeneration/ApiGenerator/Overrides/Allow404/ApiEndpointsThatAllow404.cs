@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace ApiGenerator.Overrides.Allow404
 {
-	public static class ApiEndpointsThatAllow404 
+	public static class ApiEndpointsThatAllow404
 	{
 		public static readonly IEnumerable<string> Endpoints = new List<string>
 		{
@@ -17,6 +15,8 @@ namespace ApiGenerator.Overrides.Allow404
 			"Exists",
 			"Get",
 			"Delete",
+			"GetWatch",
+			"DeleteWatch",
 		};
 	}
 }

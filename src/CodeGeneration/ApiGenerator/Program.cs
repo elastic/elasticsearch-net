@@ -36,8 +36,7 @@ namespace ApiGenerator
 			if (redownloadCoreSpecification)
 				RestSpecDownloader.Download(downloadBranch);
 
-			ApiGenerator.Generate(downloadBranch, "Core", "DeleteByQuery", "Graph", "License", "Shield");
-			//ApiGenerator.Generate("Core", "Graph", "License");
+			ApiGenerator.Generate(downloadBranch, "Core", "DeleteByQuery", "Graph", "License", "Shield", "Watcher");
 			//ApiGenerator.Generate(); //generates everything under ApiSpecification
 		}
 

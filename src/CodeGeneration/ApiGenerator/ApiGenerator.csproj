@@ -81,6 +81,7 @@
     <Compile Include="Overrides\Descriptors\SearchDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\ReindexOnServerDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\UpdateDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\WatcherStatsDescriptorOverrides.cs" />
     <Compile Include="Overrides\Global\GlobalQueryParameters.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -179,6 +180,7 @@
     <None Include="RestSpecification\Core\put_script.json" />
     <None Include="RestSpecification\Core\put_template.json" />
     <None Include="RestSpecification\Core\reindex.json" />
+    <None Include="RestSpecification\Core\reindex_rethrottle.json" />
     <None Include="RestSpecification\Core\render_search_template.json" />
     <None Include="RestSpecification\Core\scroll.json" />
     <None Include="RestSpecification\Core\search.json" />

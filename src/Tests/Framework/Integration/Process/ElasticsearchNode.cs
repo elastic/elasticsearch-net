@@ -31,11 +31,13 @@ namespace Tests.Framework.Integration
 			{ "license", _ => "license" },
 			{ "graph", _ => "graph" },
 			{ "shield", _ => "shield" },
+			{ "watcher", _ => "watcher" },
 		};
 		private string[] DefaultNodeSettings { get; }
 
 		private readonly bool _doNotSpawnIfAlreadyRunning;
 		private readonly bool _shieldEnabled;
+		private readonly bool _watcherEnabled;
 		private ObservableProcess _process;
 		private IDisposable _processListener;
 
@@ -107,11 +109,12 @@ namespace Tests.Framework.Integration
 			bool runningIntegrations,
 			bool doNotSpawnIfAlreadyRunning,
 			string name,
-			bool shieldEnabled
-			)
+			bool shieldEnabled,
+			bool watcherEnabled)
 		{
 			this._doNotSpawnIfAlreadyRunning = doNotSpawnIfAlreadyRunning;
 			this._shieldEnabled = shieldEnabled;
+			this._watcherEnabled = watcherEnabled;
 
 			this.TypeOfCluster = name;
 			var prefix = name.ToLowerInvariant();
@@ -365,6 +368,7 @@ namespace Tests.Framework.Integration
 				}
 				InstallPlugins();
 				EnsureShieldAdmin();
+				EnsureWatcherActionConfigurations();
 
 				//hunspell config
 				var hunspellFolder = Path.Combine(this.RoamingClusterFolder, "config", "hunspell", "en_US");
@@ -456,6 +460,67 @@ namespace Tests.Framework.Integration
 			}
 		}
 
+		private void EnsureWatcherActionConfigurations()
+		{
+			if (!this._watcherEnabled) return;
+
+			var elasticsearchConfig = Path.Combine(this.RoamingClusterFolder, "config", "elasticsearch.yml");
+			var lines = File.ReadAllLines(elasticsearchConfig).ToList();
+			var saveFile = false;
+
+			// set up for Watcher HipChat action
+			if (!lines.Any(line => line.StartsWith("watcher.actions.hipchat.service:")))
+			{
+				lines.AddRange(new[]
+				{
+					string.Empty,
+					"watcher.actions.hipchat.service:",
+					"  account:",
+					"    notify-monitoring:",
+					"      profile: user",
+					"      user: watcher-user@example.com",
+					"      auth_token: hipchat_auth_token",
+					string.Empty
+				});
+
+				saveFile = true;
+			}
+
+			// set up for Watcher Slack action
+			if (!lines.Any(line => line.StartsWith("watcher.actions.slack.service:")))
+			{
+				lines.AddRange(new[]
+				{
+					string.Empty,
+					"watcher.actions.slack.service:",
+					"  account:",
+					"    monitoring:",
+					"      url: https://hooks.slack.com/services/foo/bar/baz",
+					string.Empty
+				});
+
+				saveFile = true;
+			}
+
+			// set up for Watcher PagerDuty action
+			if (!lines.Any(line => line.StartsWith("watcher.actions.pagerduty.service:")))
+			{
+				lines.AddRange(new[]
+				{
+					string.Empty,
+					"watcher.actions.pagerduty.service:",
+					"  account:",
+					"    my_pagerduty_account:",
+					"      service_api_key: pager_duty_service_api_key",
+					string.Empty
+				});
+
+				saveFile = true;
+			}
+
+			if (saveFile) File.WriteAllLines(elasticsearchConfig, lines);
+		}
+
 		private string GetApplicationDataDirectory()
 		{
 #if DOTNETCORE
@@ -479,7 +544,7 @@ namespace Tests.Framework.Integration
 			return settings;
 		}
 
-		private object _stopLock = new object();
+		private readonly object _stopLock = new object();
 		public void Stop(bool disposing = false)
 		{
 			lock (_stopLock)
@@ -508,6 +573,7 @@ namespace Tests.Framework.Integration
 				}
 
 				if (!this.RunningIntegrations || !hasStarted) return;
+
 				Console.WriteLine($"Node had started on port: {this.Port} cleaning up log/data/repository files...");
 
 				if (this._doNotSpawnIfAlreadyRunning) return;
@@ -528,9 +594,7 @@ namespace Tests.Framework.Integration
 				{
 					Directory.Delete(this.RepositoryPath, true);
 				}
-
 			}
-
 		}
 
 		private bool _disposed;

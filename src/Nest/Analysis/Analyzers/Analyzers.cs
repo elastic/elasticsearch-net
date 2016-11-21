@@ -13,7 +13,7 @@ namespace Nest
 		public Analyzers() : base() { }
 		public Analyzers(IDictionary<string, IAnalyzer> container) : base(container) { }
 		public Analyzers(Dictionary<string, IAnalyzer> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
+			: base(container.ToDictionary(kv => kv.Key, kv => kv.Value))
 		{ }
 
 		public void Add(string name, IAnalyzer analyzer) => BackingDictionary.Add(name, analyzer);

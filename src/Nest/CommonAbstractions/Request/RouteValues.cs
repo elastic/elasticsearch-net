@@ -27,6 +27,9 @@ namespace Nest
 		public string TaskId => GetResolved("task_id");
 		public string Realms => GetResolved("realms");
 		public string Username => GetResolved("username");
+		public string WatchId => GetResolved("watch_id");
+		public string ActionId => GetResolved("action_id");
+		public WatcherStatsMetric? WatcherStatsMetric => GetResolved("watcher_stats_metric").ToEnum<WatcherStatsMetric>();
 
 		private string GetResolved(string route)
 		{

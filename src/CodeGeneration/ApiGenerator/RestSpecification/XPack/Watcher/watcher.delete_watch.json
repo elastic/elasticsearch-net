@@ -14,7 +14,7 @@
       },
       "params": {
         "master_timeout": {
-          "type": "duration",
+          "type": "time",
           "description": "Specify timeout for watch write operation"
         },
         "force": {

@@ -17,8 +17,8 @@ namespace Nest
 		private readonly int _backOffRetries;
 		private readonly int _bulkSize;
 		private readonly int _maxDegreeOfParallelism;
-		private Action _incrementFailed = () => { };
-		private Action _incrementRetries = () => { };
+		private System.Action _incrementFailed = () => { };
+		private System.Action _incrementRetries = () => { };
 
 		private readonly CancellationToken _cancelToken;
 		private readonly CancellationToken _compositeCancelToken;

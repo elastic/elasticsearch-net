@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Framework.MockData;
 
 namespace Tests.Framework
 {

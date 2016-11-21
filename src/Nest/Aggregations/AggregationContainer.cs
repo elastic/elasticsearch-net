@@ -12,7 +12,7 @@ namespace Nest
 		public AggregationDictionary() : base() { }
 		public AggregationDictionary(IDictionary<string, IAggregationContainer> container) : base(container) { }
 		public AggregationDictionary(Dictionary<string, AggregationContainer> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => (IAggregationContainer)kv.Value))
+			: base(container.ToDictionary(kv => kv.Key, kv => (IAggregationContainer)kv.Value))
 		{ }
 
 		public static implicit operator AggregationDictionary(Dictionary<string, IAggregationContainer> container) =>

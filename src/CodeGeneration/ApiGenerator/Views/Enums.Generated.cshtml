@@ -7,15 +7,15 @@
 	private string CreateEnum(string o, int? i)
 	{
 		return string.Format("[EnumMember(Value = \"{0}\")]\r\n\t\t{1}{2}", o, o.ToPascalCase(true), i.HasValue ? " = 1 << " + i.Value : null);
-	}	
+	}
 	private string CreateCase(string e, string o)
 	{
 		return string.Format("case {0}.{1}: return \"{2}\";", e, o.ToPascalCase(true), o);
 	}
 	private bool IsFlag(string name)
-    {
-        return name.EndsWith("Metric") || name.EndsWith("Feature");
-    }
+	{
+		return (name.EndsWith("Metric")) || name.EndsWith("Feature");
+	}
 }
 using System;
 using System.Collections.Generic;
