@@ -70,7 +70,7 @@ namespace Xunit
 				var type = group.Key?.GetType();
 				var clusterName = type?.Name.Replace("Cluster", "") ?? "UNKNOWN";
 
-				if (!string.IsNullOrWhiteSpace(clusterFilter) && !string.Equals(clusterName, clusterFilter, StringComparison.InvariantCultureIgnoreCase))
+				if (!string.IsNullOrWhiteSpace(clusterFilter) && !string.Equals(clusterName, clusterFilter, StringComparison.OrdinalIgnoreCase))
 					continue;
 
 				var dop = group.Key != null && group.Key.MaxConcurrency > 0
