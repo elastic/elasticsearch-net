@@ -85,12 +85,6 @@ namespace Nest
 			///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public bool PreferLocal { get { return Q<bool>("prefer_local"); } set { Q("prefer_local", value); } }
 		
-		///<summary>With `true`, outputs more advanced details. (default: false)</summary>
-		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
-		
-		///<summary>A comma-separated list of token attributes to output, this parameter works only with `explain=true`</summary>
-		public  string[] Attributes { get { return Q< string[]>("attributes"); } set { Q("attributes", value); } }
-		
 		///<summary>Format of the output</summary>
 		public Format Format { get { return Q<Format>("format"); } set { Q("format", value); } }
 		
@@ -275,6 +269,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
@@ -323,6 +320,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
@@ -367,6 +367,9 @@ namespace Nest
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -416,6 +419,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
@@ -450,6 +456,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		
 		///<summary>Set to false to disable timestamping</summary>
 		public bool Ts { get { return Q<bool>("ts"); } set { Q("ts", value); } }
 		
@@ -474,6 +483,9 @@ namespace Nest
 		protected ICatHelpRequest Self => this;
 				///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -526,6 +538,9 @@ namespace Nest
 		///<summary>Set to true to return stats only for primary shards</summary>
 		public bool Pri { get { return Q<bool>("pri"); } set { Q("pri", value); } }
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
@@ -559,6 +574,9 @@ namespace Nest
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -594,6 +612,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
@@ -616,6 +637,9 @@ namespace Nest
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
 		
+		///<summary>Return the full node ID instead of the shortened version (default: false)</summary>
+		public bool FullId { get { return Q<bool>("full_id"); } set { Q("full_id", value); } }
+		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
@@ -627,6 +651,9 @@ namespace Nest
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -662,6 +689,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
@@ -695,6 +725,9 @@ namespace Nest
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -741,6 +774,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
@@ -774,6 +810,9 @@ namespace Nest
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -813,6 +852,9 @@ namespace Nest
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -859,6 +901,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
@@ -880,7 +925,11 @@ namespace Nest
 	{
 		protected ICatSnapshotsRequest Self => this;
 		Names ICatSnapshotsRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
-			/// <summary>/_cat/snapshots/{repository}</summary>
+			/// <summary>/_cat/snapshots</summary>
+		public CatSnapshotsRequest() : base(){}
+		
+
+		/// <summary>/_cat/snapshots/{repository}</summary>
 ///<param name="repository">this parameter is required</param>
 		public CatSnapshotsRequest(Names repository) : base(r=>r.Required("repository", repository)){}
 		
@@ -899,6 +948,9 @@ namespace Nest
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -942,6 +994,9 @@ namespace Nest
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
+		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -988,6 +1043,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
@@ -1004,12 +1062,23 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatThreadPoolRequest : IRequest<CatThreadPoolRequestParameters> 
 	{
+		Names ThreadPoolPatterns { get; }
 	 } 
 	///<summary>Request parameters for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
 	public partial class CatThreadPoolRequest  : PlainRequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest
 	{
 		protected ICatThreadPoolRequest Self => this;
-				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		Names ICatThreadPoolRequest.ThreadPoolPatterns => Self.RouteValues.Get<Names>("thread_pool_patterns");
+			/// <summary>/_cat/thread_pool</summary>
+		public CatThreadPoolRequest() : base(){}
+		
+
+		/// <summary>/_cat/thread_pool/{thread_pool_patterns}</summary>
+///<param name="thread_pool_patterns">Optional, accepts null</param>
+		public CatThreadPoolRequest(Names thread_pool_patterns) : base(r=>r.Optional("thread_pool_patterns", thread_pool_patterns)){}
+		
+
+			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
 		
 		///<summary>The multiplier in which to display values</summary>
@@ -1027,11 +1096,11 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
-		
-		///<summary>A comma-separated list of regular-expressions to filter the thread pools in the output</summary>
-		public  string[] ThreadPoolPatterns { get { return Q< string[]>("thread_pool_patterns"); } set { Q("thread_pool_patterns", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1312,7 +1381,7 @@ namespace Nest
 		///<summary>Wait until the specified number of nodes is available</summary>
 		public string WaitForNodes { get { return Q<string>("wait_for_nodes"); } set { Q("wait_for_nodes", value); } }
 		
-		///<summary>Wait until all currently queued events with the given priorty are processed</summary>
+		///<summary>Wait until all currently queued events with the given priority are processed</summary>
 		public WaitForEvents WaitForEvents { get { return Q<WaitForEvents>("wait_for_events"); } set { Q("wait_for_events", value); } }
 		
 		///<summary>Whether to wait until there are no relocating shards in the cluster</summary>
@@ -1564,9 +1633,6 @@ namespace Nest
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
-		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
@@ -1632,9 +1698,6 @@ namespace Nest
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
-		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1712,6 +1775,67 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ICreateRequest : IRequest<CreateRequestParameters> 
+	{
+		Id Id { get; }
+		IndexName Index { get; }
+		TypeName Type { get; }
+	 } 
+	///<summary>Request parameters for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
+	public partial class CreateRequest  : PlainRequestBase<CreateRequestParameters>, ICreateRequest
+	{
+		protected ICreateRequest Self => this;
+		Id ICreateRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName ICreateRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ICreateRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			/// <summary>/{index}/{type}/{id}/_create</summary>
+///<param name="index">this parameter is required</param>		
+///<param name="type">this parameter is required</param>		
+///<param name="id">this parameter is required</param>
+		public CreateRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+		
+
+			///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
+		
+		///<summary>ID of the parent document</summary>
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
+		
+		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
+		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
+		
+		///<summary>Specific routing value</summary>
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>Explicit timestamp for the document</summary>
+		public Time Timestamp { get { return Q<Time>("timestamp"); } set { Q("timestamp", value.ToString()); } }
+		
+		///<summary>Expiration time for the document</summary>
+		public Time Ttl { get { return Q<Time>("ttl"); } set { Q("ttl", value.ToString()); } }
+		
+		///<summary>Explicit version number for concurrency control</summary>
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
+		
+		///<summary>Specific version type</summary>
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
+		
+		///<summary>The pipeline id to preprocess incoming documents with</summary>
+		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteAliasRequest : IRequest<DeleteAliasRequestParameters> 
 	{
 		Indices Index { get; }
@@ -1778,15 +1902,6 @@ namespace Nest
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
-		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
-		
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
-		
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public Fields DocvalueFields { get { return Q<Fields>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
-		
 		///<summary>Starting offset (default: 0)</summary>
 		public long From { get { return Q<long>("from"); } set { Q("from", value); } }
 		
@@ -1804,9 +1919,6 @@ namespace Nest
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
-		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
@@ -1847,24 +1959,6 @@ namespace Nest
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
 		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
 		
-		///<summary>Specify which field to use for suggestions</summary>
-		public Field SuggestField { get { return Q<Field>("suggest_field"); } set { Q("suggest_field", value); } }
-		
-		///<summary>Specify suggest mode</summary>
-		public SuggestMode SuggestMode { get { return Q<SuggestMode>("suggest_mode"); } set { Q("suggest_mode", value); } }
-		
-		///<summary>How many suggestions to return in response</summary>
-		public long SuggestSize { get { return Q<long>("suggest_size"); } set { Q("suggest_size", value); } }
-		
-		///<summary>The source text for which the suggestions should be returned</summary>
-		public string SuggestText { get { return Q<string>("suggest_text"); } set { Q("suggest_text", value); } }
-		
-		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
-		
-		///<summary>Whether to calculate and return scores even if they are not used for sorting</summary>
-		public bool TrackScores { get { return Q<bool>("track_scores"); } set { Q("track_scores", value); } }
-		
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public bool Version { get { return Q<bool>("version"); } set { Q("version", value); } }
 		
@@ -1874,17 +1968,23 @@ namespace Nest
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
+		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
 		///<summary>Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public int ScrollSize { get { return Q<int>("scroll_size"); } set { Q("scroll_size", value); } }
+		public long ScrollSize { get { return Q<long>("scroll_size"); } set { Q("scroll_size", value); } }
 		
 		///<summary>Should the request should block until the delete-by-query is complete.</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
-		///<summary>The throttle for this request in sub-requests per second. -1 means set no throttle.</summary>
-		public float RequestsPerSecond { get { return Q<float>("requests_per_second"); } set { Q("requests_per_second", value); } }
+		///<summary>The throttle for this request in sub-requests per second. -1 means no throttle.</summary>
+		public long RequestsPerSecond { get { return Q<long>("requests_per_second"); } set { Q("requests_per_second", value); } }
+		
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
+		public int Slices { get { return Q<int>("slices"); } set { Q("slices", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1922,15 +2022,6 @@ namespace Nest
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
-		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
-		
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
-		
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public Fields DocvalueFields { get { return Q<Fields>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
-		
 		///<summary>Starting offset (default: 0)</summary>
 		public long From { get { return Q<long>("from"); } set { Q("from", value); } }
 		
@@ -1948,9 +2039,6 @@ namespace Nest
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
-		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
@@ -1991,24 +2079,6 @@ namespace Nest
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
 		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
 		
-		///<summary>Specify which field to use for suggestions</summary>
-		public Field SuggestField { get { return Q<Field>("suggest_field"); } set { Q("suggest_field", value); } }
-		
-		///<summary>Specify suggest mode</summary>
-		public SuggestMode SuggestMode { get { return Q<SuggestMode>("suggest_mode"); } set { Q("suggest_mode", value); } }
-		
-		///<summary>How many suggestions to return in response</summary>
-		public long SuggestSize { get { return Q<long>("suggest_size"); } set { Q("suggest_size", value); } }
-		
-		///<summary>The source text for which the suggestions should be returned</summary>
-		public string SuggestText { get { return Q<string>("suggest_text"); } set { Q("suggest_text", value); } }
-		
-		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
-		
-		///<summary>Whether to calculate and return scores even if they are not used for sorting</summary>
-		public bool TrackScores { get { return Q<bool>("track_scores"); } set { Q("track_scores", value); } }
-		
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public bool Version { get { return Q<bool>("version"); } set { Q("version", value); } }
 		
@@ -2018,17 +2088,23 @@ namespace Nest
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
+		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
 		///<summary>Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public int ScrollSize { get { return Q<int>("scroll_size"); } set { Q("scroll_size", value); } }
+		public long ScrollSize { get { return Q<long>("scroll_size"); } set { Q("scroll_size", value); } }
 		
 		///<summary>Should the request should block until the delete-by-query is complete.</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
-		///<summary>The throttle for this request in sub-requests per second. -1 means set no throttle.</summary>
-		public float RequestsPerSecond { get { return Q<float>("requests_per_second"); } set { Q("requests_per_second", value); } }
+		///<summary>The throttle for this request in sub-requests per second. -1 means no throttle.</summary>
+		public long RequestsPerSecond { get { return Q<long>("requests_per_second"); } set { Q("requests_per_second", value); } }
+		
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
+		public int Slices { get { return Q<int>("slices"); } set { Q("slices", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -2580,9 +2656,6 @@ namespace Nest
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
-		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>The ID of the parent document</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
@@ -3508,13 +3581,7 @@ namespace Nest
 		public IndexExistsRequest(Indices index) : base(r=>r.Required("index", index)){}
 		
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+			///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -3806,6 +3873,9 @@ namespace Nest
 		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
+		
+		///<summary>Specific routing value</summary>
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
@@ -4178,7 +4248,7 @@ namespace Nest
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
-		///<summary>Return indices stats aggregated at node, index or shard level</summary>
+		///<summary>Return indices stats aggregated at index, node or shard level</summary>
 		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
 		
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
@@ -4799,8 +4869,11 @@ namespace Nest
 		///<summary>Should the request should block until the reindex is complete.</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
-		///<summary>The throttle to set on this request in sub-requests per second. -1 means set no throttle as does &quot;unlimited&quot; which is the only non-float this accepts.</summary>
-		public float RequestsPerSecond { get { return Q<float>("requests_per_second"); } set { Q("requests_per_second", value); } }
+		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
+		public long RequestsPerSecond { get { return Q<long>("requests_per_second"); } set { Q("requests_per_second", value); } }
+		
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
+		public int Slices { get { return Q<int>("slices"); } set { Q("slices", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
@@ -4823,7 +4896,7 @@ namespace Nest
 		
 
 			///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
-		public float RequestsPerSecond { get { return Q<float>("requests_per_second"); } set { Q("requests_per_second", value); } }
+		public long RequestsPerSecond { get { return Q<long>("requests_per_second"); } set { Q("requests_per_second", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -4917,6 +4990,9 @@ namespace Nest
 
 			///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
+		public bool DryRun { get { return Q<bool>("dry_run"); } set { Q("dry_run", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
@@ -5020,9 +5096,6 @@ namespace Nest
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
@@ -5106,9 +5179,6 @@ namespace Nest
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
-		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
@@ -5875,18 +5945,6 @@ namespace Nest
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
-		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
-		
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
-		
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public Fields DocvalueFields { get { return Q<Fields>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
-		
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public Fields FielddataFields { get { return Q<Fields>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
-		
 		///<summary>Starting offset (default: 0)</summary>
 		public long From { get { return Q<long>("from"); } set { Q("from", value); } }
 		
@@ -5896,7 +5954,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
-		///<summary>What to do when the reindex hits version conflicts?</summary>
+		///<summary>What to do when the update by query hits version conflicts?</summary>
 		public Conflicts Conflicts { get { return Q<Conflicts>("conflicts"); } set { Q("conflicts", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
@@ -5904,9 +5962,6 @@ namespace Nest
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
-		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
 		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
@@ -5950,24 +6005,6 @@ namespace Nest
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
 		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
 		
-		///<summary>Specify which field to use for suggestions</summary>
-		public Field SuggestField { get { return Q<Field>("suggest_field"); } set { Q("suggest_field", value); } }
-		
-		///<summary>Specify suggest mode</summary>
-		public SuggestMode SuggestMode { get { return Q<SuggestMode>("suggest_mode"); } set { Q("suggest_mode", value); } }
-		
-		///<summary>How many suggestions to return in response</summary>
-		public long SuggestSize { get { return Q<long>("suggest_size"); } set { Q("suggest_size", value); } }
-		
-		///<summary>The source text for which the suggestions should be returned</summary>
-		public string SuggestText { get { return Q<string>("suggest_text"); } set { Q("suggest_text", value); } }
-		
-		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
-		
-		///<summary>Whether to calculate and return scores even if they are not used for sorting</summary>
-		public bool TrackScores { get { return Q<bool>("track_scores"); } set { Q("track_scores", value); } }
-		
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public bool Version { get { return Q<bool>("version"); } set { Q("version", value); } }
 		
@@ -5980,17 +6017,23 @@ namespace Nest
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
+		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
 		///<summary>Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public int ScrollSize { get { return Q<int>("scroll_size"); } set { Q("scroll_size", value); } }
+		public long ScrollSize { get { return Q<long>("scroll_size"); } set { Q("scroll_size", value); } }
 		
-		///<summary>Should the request should block until the reindex is complete.</summary>
+		///<summary>Should the request should block until the update by query operation is complete.</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
-		///<summary>The throttle to set on this request in sub-requests per second. -1 means set no throttle as does &quot;unlimited&quot; which is the only non-float this accepts.</summary>
-		public float RequestsPerSecond { get { return Q<float>("requests_per_second"); } set { Q("requests_per_second", value); } }
+		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
+		public long RequestsPerSecond { get { return Q<long>("requests_per_second"); } set { Q("requests_per_second", value); } }
+		
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
+		public int Slices { get { return Q<int>("slices"); } set { Q("slices", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -6028,18 +6071,6 @@ namespace Nest
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
-		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
-		
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
-		
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public Fields DocvalueFields { get { return Q<Fields>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
-		
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public Fields FielddataFields { get { return Q<Fields>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
-		
 		///<summary>Starting offset (default: 0)</summary>
 		public long From { get { return Q<long>("from"); } set { Q("from", value); } }
 		
@@ -6049,7 +6080,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
-		///<summary>What to do when the reindex hits version conflicts?</summary>
+		///<summary>What to do when the update by query hits version conflicts?</summary>
 		public Conflicts Conflicts { get { return Q<Conflicts>("conflicts"); } set { Q("conflicts", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
@@ -6057,9 +6088,6 @@ namespace Nest
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
-		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
 		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
@@ -6103,24 +6131,6 @@ namespace Nest
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
 		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
 		
-		///<summary>Specify which field to use for suggestions</summary>
-		public Field SuggestField { get { return Q<Field>("suggest_field"); } set { Q("suggest_field", value); } }
-		
-		///<summary>Specify suggest mode</summary>
-		public SuggestMode SuggestMode { get { return Q<SuggestMode>("suggest_mode"); } set { Q("suggest_mode", value); } }
-		
-		///<summary>How many suggestions to return in response</summary>
-		public long SuggestSize { get { return Q<long>("suggest_size"); } set { Q("suggest_size", value); } }
-		
-		///<summary>The source text for which the suggestions should be returned</summary>
-		public string SuggestText { get { return Q<string>("suggest_text"); } set { Q("suggest_text", value); } }
-		
-		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
-		
-		///<summary>Whether to calculate and return scores even if they are not used for sorting</summary>
-		public bool TrackScores { get { return Q<bool>("track_scores"); } set { Q("track_scores", value); } }
-		
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public bool Version { get { return Q<bool>("version"); } set { Q("version", value); } }
 		
@@ -6133,17 +6143,23 @@ namespace Nest
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
+		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
 		///<summary>Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public int ScrollSize { get { return Q<int>("scroll_size"); } set { Q("scroll_size", value); } }
+		public long ScrollSize { get { return Q<long>("scroll_size"); } set { Q("scroll_size", value); } }
 		
-		///<summary>Should the request should block until the reindex is complete.</summary>
+		///<summary>Should the request should block until the update by query operation is complete.</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
-		///<summary>The throttle to set on this request in sub-requests per second. -1 means set no throttle as does &quot;unlimited&quot; which is the only non-float this accepts.</summary>
-		public float RequestsPerSecond { get { return Q<float>("requests_per_second"); } set { Q("requests_per_second", value); } }
+		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
+		public long RequestsPerSecond { get { return Q<long>("requests_per_second"); } set { Q("requests_per_second", value); } }
+		
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
+		public int Slices { get { return Q<int>("slices"); } set { Q("slices", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -6412,9 +6428,6 @@ namespace Nest
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
-		
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
 		public bool Rewrite { get { return Q<bool>("rewrite"); } set { Q("rewrite", value); } }
 		
@@ -6480,9 +6493,6 @@ namespace Nest
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
-		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
 		public bool Rewrite { get { return Q<bool>("rewrite"); } set { Q("rewrite", value); } }

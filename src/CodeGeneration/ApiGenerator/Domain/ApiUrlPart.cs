@@ -50,6 +50,7 @@ namespace ApiGenerator.Domain
 					case "usernames":
 					case "realm":
 					case "realms":
+					case "thread_pool_patterns":
 					case "alias":
 					case "name":
 						return this.Type == "string" ? "Name" : "Names";

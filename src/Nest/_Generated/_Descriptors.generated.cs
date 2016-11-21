@@ -108,6 +108,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatAliasesDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
 
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatAliasesDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
+
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatAliasesDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
@@ -148,6 +151,9 @@ namespace Nest
 
 		///<summary>Return help information</summary>
 		public CatAllocationDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatAllocationDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
 
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatAllocationDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
@@ -193,6 +199,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatCountDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
 
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatCountDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
+
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatCountDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
@@ -237,6 +246,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatFielddataDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
 
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatFielddataDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
+
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatFielddataDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
@@ -267,6 +279,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatHealthDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
 
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatHealthDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
+
 		///<summary>Set to false to disable timestamping</summary>
 		public CatHealthDescriptor Ts(bool ts = true) => AssignParam(p=>p.Ts(ts));
 
@@ -287,6 +302,9 @@ namespace Nest
 			
 		///<summary>Return help information</summary>
 		public CatHelpDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatHelpDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
 
 		///<summary>The URL-encoded request definition</summary>
 		public CatHelpDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -338,6 +356,9 @@ namespace Nest
 		///<summary>Set to true to return stats only for primary shards</summary>
 		public CatIndicesDescriptor Pri(bool pri = true) => AssignParam(p=>p.Pri(pri));
 
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatIndicesDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
+
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatIndicesDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
@@ -367,6 +388,9 @@ namespace Nest
 
 		///<summary>Return help information</summary>
 		public CatMasterDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatMasterDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
 
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatMasterDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
@@ -398,6 +422,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatNodeAttributesDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
 
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatNodeAttributesDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
+
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatNodeAttributesDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
@@ -416,6 +443,9 @@ namespace Nest
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatNodesDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
+		///<summary>Return the full node ID instead of the shortened version (default: false)</summary>
+		public CatNodesDescriptor FullId(bool full_id = true) => AssignParam(p=>p.FullId(full_id));
+
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatNodesDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -427,6 +457,9 @@ namespace Nest
 
 		///<summary>Return help information</summary>
 		public CatNodesDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatNodesDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
 
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatNodesDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
@@ -458,6 +491,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatPendingTasksDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
 
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatPendingTasksDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
+
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatPendingTasksDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
@@ -487,6 +523,9 @@ namespace Nest
 
 		///<summary>Return help information</summary>
 		public CatPluginsDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatPluginsDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
 
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatPluginsDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
@@ -532,6 +571,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatRecoveryDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
 
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatRecoveryDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
+
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatRecoveryDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
@@ -561,6 +603,9 @@ namespace Nest
 
 		///<summary>Return help information</summary>
 		public CatRepositoriesDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatRepositoriesDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
 
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatRepositoriesDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
@@ -599,6 +644,9 @@ namespace Nest
 
 		///<summary>Return help information</summary>
 		public CatSegmentsDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatSegmentsDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
 
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatSegmentsDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
@@ -644,6 +692,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatShardsDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
 
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatShardsDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
+
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatShardsDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
@@ -659,7 +710,11 @@ namespace Nest
 	public partial class CatSnapshotsDescriptor  : RequestDescriptorBase<CatSnapshotsDescriptor,CatSnapshotsRequestParameters, ICatSnapshotsRequest>, ICatSnapshotsRequest
 	{ 
 		Names ICatSnapshotsRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
-			/// <summary>/_cat/snapshots/{repository}</summary>
+			/// <summary>/_cat/snapshots</summary>
+		public CatSnapshotsDescriptor() : base(){}
+		
+
+		/// <summary>/_cat/snapshots/{repository}</summary>
 ///<param name="repository"> this parameter is required</param>
 		public CatSnapshotsDescriptor(Names repository) : base(r=>r.Required("repository", repository)){}
 		
@@ -679,6 +734,9 @@ namespace Nest
 
 		///<summary>Return help information</summary>
 		public CatSnapshotsDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
+
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatSnapshotsDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
 
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatSnapshotsDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
@@ -719,6 +777,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatTasksDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
 
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatTasksDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
+
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatTasksDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
@@ -757,6 +818,9 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatTemplatesDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
 
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatTemplatesDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
+
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatTemplatesDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
@@ -774,7 +838,15 @@ namespace Nest
 	///<summary>descriptor for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
 	public partial class CatThreadPoolDescriptor  : RequestDescriptorBase<CatThreadPoolDescriptor,CatThreadPoolRequestParameters, ICatThreadPoolRequest>, ICatThreadPoolRequest
 	{ 
-			
+		Names ICatThreadPoolRequest.ThreadPoolPatterns => Self.RouteValues.Get<Names>("thread_pool_patterns");
+			/// <summary>/_cat/thread_pool</summary>
+		public CatThreadPoolDescriptor() : base(){}
+		
+
+			///<summary>A comma-separated list of regular-expressions to filter the thread pools in the output</summary>
+		public CatThreadPoolDescriptor ThreadPoolPatterns(Names threadPoolPatterns) => Assign(a=>a.RouteValues.Optional("thread_pool_patterns", threadPoolPatterns));
+
+	
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatThreadPoolDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -793,11 +865,11 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatThreadPoolDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
 
+		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
+		public CatThreadPoolDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
+
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatThreadPoolDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
-
-		///<summary>A comma-separated list of regular-expressions to filter the thread pools in the output</summary>
-		public CatThreadPoolDescriptor ThreadPoolPatterns(params string[] thread_pool_patterns) => AssignParam(p=>p.ThreadPoolPatterns(thread_pool_patterns));
 
 		///<summary>The URL-encoded request definition</summary>
 		public CatThreadPoolDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -901,7 +973,7 @@ namespace Nest
 		///<summary>Wait until the specified number of nodes is available</summary>
 		public ClusterHealthDescriptor WaitForNodes(string wait_for_nodes) => AssignParam(p=>p.WaitForNodes(wait_for_nodes));
 
-		///<summary>Wait until all currently queued events with the given priorty are processed</summary>
+		///<summary>Wait until all currently queued events with the given priority are processed</summary>
 		public ClusterHealthDescriptor WaitForEvents(WaitForEvents wait_for_events) => AssignParam(p=>p.WaitForEvents(wait_for_events));
 
 		///<summary>Whether to wait until there are no relocating shards in the cluster</summary>
@@ -1128,9 +1200,6 @@ namespace Nest
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public CountDescriptor<T> Lenient(bool lenient = true) => AssignParam(p=>p.Lenient(lenient));
 
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public CountDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true) => AssignParam(p=>p.LowercaseExpandedTerms(lowercase_expanded_terms));
-
 		///<summary>The URL-encoded request definition</summary>
 		public CountDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
@@ -1205,6 +1274,73 @@ namespace Nest
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public PercolateCountDescriptor<TDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
+	public partial class CreateDescriptor  : RequestDescriptorBase<CreateDescriptor,CreateRequestParameters, ICreateRequest>, ICreateRequest
+	{ 
+		Id ICreateRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName ICreateRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ICreateRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			/// <summary>/{index}/{type}/{id}/_create</summary>
+///<param name="index"> this parameter is required</param>		
+///<param name="type"> this parameter is required</param>		
+///<param name="id"> this parameter is required</param>
+		public CreateDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+		
+
+			///<summary>The name of the index</summary>
+		public CreateDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public CreateDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		///<summary>The type of the document</summary>
+		public CreateDescriptor Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+
+		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
+		public CreateDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+
+	
+		///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+		public CreateDescriptor WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
+
+		///<summary>ID of the parent document</summary>
+		public CreateDescriptor Parent(string parent) => AssignParam(p=>p.Parent(parent));
+
+		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
+		public CreateDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
+
+		///<summary>Specific routing value</summary>
+		public CreateDescriptor Routing(string routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Explicit operation timeout</summary>
+		public CreateDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+
+		///<summary>Explicit timestamp for the document</summary>
+		public CreateDescriptor Timestamp(Time timestamp) => AssignParam(p=>p.Timestamp(timestamp.ToTimeSpan()));
+
+		///<summary>Expiration time for the document</summary>
+		public CreateDescriptor Ttl(Time ttl) => AssignParam(p=>p.Ttl(ttl.ToTimeSpan()));
+
+		///<summary>Explicit version number for concurrency control</summary>
+		public CreateDescriptor Version(long version) => AssignParam(p=>p.Version(version));
+
+		///<summary>Specific version type</summary>
+		public CreateDescriptor VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
+
+		///<summary>The pipeline id to preprocess incoming documents with</summary>
+		public CreateDescriptor Pipeline(string pipeline) => AssignParam(p=>p.Pipeline(pipeline));
+
+		///<summary>The URL-encoded request definition</summary>
+		public CreateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CreateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	
 	}
 	
@@ -1310,23 +1446,6 @@ namespace Nest
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public DeleteByQueryDescriptor<T> Df(string df) => AssignParam(p=>p.Df(df));
 
-		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public DeleteByQueryDescriptor<T> Explain(bool explain = true) => AssignParam(p=>p.Explain(explain));
-
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public DeleteByQueryDescriptor<T> StoredFields(params string[] stored_fields) => AssignParam(p=>p.StoredFields(stored_fields));
-			
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public DeleteByQueryDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._StoredFields(fields));
-
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public DeleteByQueryDescriptor<T> DocvalueFields(params string[] docvalue_fields) => AssignParam(p=>p.DocvalueFields(docvalue_fields));
-			
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public DeleteByQueryDescriptor<T> DocvalueFields(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._DocvalueFields(fields));
-
 		///<summary>Starting offset (default: 0)</summary>
 		public DeleteByQueryDescriptor<T> From(long from) => AssignParam(p=>p.From(from));
 
@@ -1344,9 +1463,6 @@ namespace Nest
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public DeleteByQueryDescriptor<T> Lenient(bool lenient = true) => AssignParam(p=>p.Lenient(lenient));
-
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public DeleteByQueryDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true) => AssignParam(p=>p.LowercaseExpandedTerms(lowercase_expanded_terms));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public DeleteByQueryDescriptor<T> Preference(string preference) => AssignParam(p=>p.Preference(preference));
@@ -1395,28 +1511,6 @@ namespace Nest
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
 		public DeleteByQueryDescriptor<T> Stats(params string[] stats) => AssignParam(p=>p.Stats(stats));
 
-		///<summary>Specify which field to use for suggestions</summary>
-		public DeleteByQueryDescriptor<T> SuggestField(string suggest_field) => AssignParam(p=>p.SuggestField(suggest_field));
-
-		///<summary>Specify which field to use for suggestions</summary>
-		public DeleteByQueryDescriptor<T> SuggestField(Expression<Func<T, object>> field)  =>
-			AssignParam(p=>p._SuggestField(field));
-
-		///<summary>Specify suggest mode</summary>
-		public DeleteByQueryDescriptor<T> SuggestMode(SuggestMode suggest_mode) => AssignParam(p=>p.SuggestMode(suggest_mode));
-
-		///<summary>How many suggestions to return in response</summary>
-		public DeleteByQueryDescriptor<T> SuggestSize(long suggest_size) => AssignParam(p=>p.SuggestSize(suggest_size));
-
-		///<summary>The source text for which the suggestions should be returned</summary>
-		public DeleteByQueryDescriptor<T> SuggestText(string suggest_text) => AssignParam(p=>p.SuggestText(suggest_text));
-
-		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public DeleteByQueryDescriptor<T> Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
-
-		///<summary>Whether to calculate and return scores even if they are not used for sorting</summary>
-		public DeleteByQueryDescriptor<T> TrackScores(bool track_scores = true) => AssignParam(p=>p.TrackScores(track_scores));
-
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public DeleteByQueryDescriptor<T> Version(bool version = true) => AssignParam(p=>p.Version(version));
 
@@ -1426,17 +1520,23 @@ namespace Nest
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public DeleteByQueryDescriptor<T> Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
 
+		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
+		public DeleteByQueryDescriptor<T> Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+
 		///<summary>Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public DeleteByQueryDescriptor<T> WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
 
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public DeleteByQueryDescriptor<T> ScrollSize(int scroll_size) => AssignParam(p=>p.ScrollSize(scroll_size));
+		public DeleteByQueryDescriptor<T> ScrollSize(long scroll_size) => AssignParam(p=>p.ScrollSize(scroll_size));
 
 		///<summary>Should the request should block until the delete-by-query is complete.</summary>
 		public DeleteByQueryDescriptor<T> WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
 
-		///<summary>The throttle for this request in sub-requests per second. -1 means set no throttle.</summary>
-		public DeleteByQueryDescriptor<T> RequestsPerSecond(float requests_per_second) => AssignParam(p=>p.RequestsPerSecond(requests_per_second));
+		///<summary>The throttle for this request in sub-requests per second. -1 means no throttle.</summary>
+		public DeleteByQueryDescriptor<T> RequestsPerSecond(long requests_per_second) => AssignParam(p=>p.RequestsPerSecond(requests_per_second));
+
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
+		public DeleteByQueryDescriptor<T> Slices(int slices) => AssignParam(p=>p.Slices(slices));
 
 		///<summary>The URL-encoded request definition</summary>
 		public DeleteByQueryDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
@@ -1592,9 +1692,6 @@ namespace Nest
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public ExplainDescriptor<TDocument> Lenient(bool lenient = true) => AssignParam(p=>p.Lenient(lenient));
-
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public ExplainDescriptor<TDocument> LowercaseExpandedTerms(bool lowercase_expanded_terms = true) => AssignParam(p=>p.LowercaseExpandedTerms(lowercase_expanded_terms));
 
 		///<summary>The ID of the parent document</summary>
 		public ExplainDescriptor<TDocument> Parent(string parent) => AssignParam(p=>p.Parent(parent));
@@ -1965,12 +2062,6 @@ namespace Nest
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public AnalyzeDescriptor PreferLocal(bool prefer_local = true) => AssignParam(p=>p.PreferLocal(prefer_local));
 
-		///<summary>With `true`, outputs more advanced details. (default: false)</summary>
-		public AnalyzeDescriptor Explain(bool explain = true) => AssignParam(p=>p.Explain(explain));
-
-		///<summary>A comma-separated list of token attributes to output, this parameter works only with `explain=true`</summary>
-		public AnalyzeDescriptor Attributes(params string[] attributes) => AssignParam(p=>p.Attributes(attributes));
-
 		///<summary>Format of the output</summary>
 		public AnalyzeDescriptor Format(Format format) => AssignParam(p=>p.Format(format));
 
@@ -2225,12 +2316,6 @@ namespace Nest
 		public IndexExistsDescriptor AllIndices() => this.Index(Indices.All);
 
 	
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndexExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
-
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndexExistsDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
-
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public IndexExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
@@ -3096,6 +3181,9 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public RolloverIndexDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
+		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
+		public RolloverIndexDescriptor DryRun(bool dry_run = true) => AssignParam(p=>p.DryRun(dry_run));
+
 		///<summary>Specify timeout for connection to master</summary>
 		public RolloverIndexDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -3410,9 +3498,6 @@ namespace Nest
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public ValidateQueryDescriptor<T> Lenient(bool lenient = true) => AssignParam(p=>p.Lenient(lenient));
 
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public ValidateQueryDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true) => AssignParam(p=>p.LowercaseExpandedTerms(lowercase_expanded_terms));
-
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
 		public ValidateQueryDescriptor<T> Rewrite(bool rewrite = true) => AssignParam(p=>p.Rewrite(rewrite));
 
@@ -3567,6 +3652,9 @@ namespace Nest
 
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public MultiGetDescriptor Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
+
+		///<summary>Specific routing value</summary>
+		public MultiGetDescriptor Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public MultiGetDescriptor SourceEnabled(params string[] source_enabled) => AssignParam(p=>p.SourceEnabled(source_enabled));
@@ -3901,7 +3989,7 @@ namespace Nest
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public NodesStatsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
 
-		///<summary>Return indices stats aggregated at node, index or shard level</summary>
+		///<summary>Return indices stats aggregated at index, node or shard level</summary>
 		public NodesStatsDescriptor Level(Level level) => AssignParam(p=>p.Level(level));
 
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
@@ -4062,8 +4150,11 @@ namespace Nest
 		///<summary>Should the request should block until the reindex is complete.</summary>
 		public ReindexOnServerDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
 
-		///<summary>The throttle to set on this request in sub-requests per second. -1 means set no throttle as does &quot;unlimited&quot; which is the only non-float this accepts.</summary>
-		public ReindexOnServerDescriptor RequestsPerSecond(float requests_per_second) => AssignParam(p=>p.RequestsPerSecond(requests_per_second));
+		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
+		public ReindexOnServerDescriptor RequestsPerSecond(long requests_per_second) => AssignParam(p=>p.RequestsPerSecond(requests_per_second));
+
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
+		public ReindexOnServerDescriptor Slices(int slices) => AssignParam(p=>p.Slices(slices));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public ReindexOnServerDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4083,7 +4174,7 @@ namespace Nest
 
 	
 		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
-		public ReindexRethrottleDescriptor RequestsPerSecond(float requests_per_second) => AssignParam(p=>p.RequestsPerSecond(requests_per_second));
+		public ReindexRethrottleDescriptor RequestsPerSecond(long requests_per_second) => AssignParam(p=>p.RequestsPerSecond(requests_per_second));
 
 		///<summary>The URL-encoded request definition</summary>
 		public ReindexRethrottleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -4187,9 +4278,6 @@ namespace Nest
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public SearchDescriptor<T> Lenient(bool lenient = true) => AssignParam(p=>p.Lenient(lenient));
-
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public SearchDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true) => AssignParam(p=>p.LowercaseExpandedTerms(lowercase_expanded_terms));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SearchDescriptor<T> Preference(string preference) => AssignParam(p=>p.Preference(preference));
@@ -4907,30 +4995,6 @@ namespace Nest
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public UpdateByQueryDescriptor<T> Df(string df) => AssignParam(p=>p.Df(df));
 
-		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public UpdateByQueryDescriptor<T> Explain(bool explain = true) => AssignParam(p=>p.Explain(explain));
-
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public UpdateByQueryDescriptor<T> StoredFields(params string[] stored_fields) => AssignParam(p=>p.StoredFields(stored_fields));
-			
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public UpdateByQueryDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._StoredFields(fields));
-
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public UpdateByQueryDescriptor<T> DocvalueFields(params string[] docvalue_fields) => AssignParam(p=>p.DocvalueFields(docvalue_fields));
-			
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public UpdateByQueryDescriptor<T> DocvalueFields(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._DocvalueFields(fields));
-
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public UpdateByQueryDescriptor<T> FielddataFields(params string[] fielddata_fields) => AssignParam(p=>p.FielddataFields(fielddata_fields));
-			
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public UpdateByQueryDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._FielddataFields(fields));
-
 		///<summary>Starting offset (default: 0)</summary>
 		public UpdateByQueryDescriptor<T> From(long from) => AssignParam(p=>p.From(from));
 
@@ -4940,7 +5004,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public UpdateByQueryDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
 
-		///<summary>What to do when the reindex hits version conflicts?</summary>
+		///<summary>What to do when the update by query hits version conflicts?</summary>
 		public UpdateByQueryDescriptor<T> Conflicts(Conflicts conflicts) => AssignParam(p=>p.Conflicts(conflicts));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
@@ -4948,9 +5012,6 @@ namespace Nest
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public UpdateByQueryDescriptor<T> Lenient(bool lenient = true) => AssignParam(p=>p.Lenient(lenient));
-
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public UpdateByQueryDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true) => AssignParam(p=>p.LowercaseExpandedTerms(lowercase_expanded_terms));
 
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
 		public UpdateByQueryDescriptor<T> Pipeline(string pipeline) => AssignParam(p=>p.Pipeline(pipeline));
@@ -5002,28 +5063,6 @@ namespace Nest
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
 		public UpdateByQueryDescriptor<T> Stats(params string[] stats) => AssignParam(p=>p.Stats(stats));
 
-		///<summary>Specify which field to use for suggestions</summary>
-		public UpdateByQueryDescriptor<T> SuggestField(string suggest_field) => AssignParam(p=>p.SuggestField(suggest_field));
-
-		///<summary>Specify which field to use for suggestions</summary>
-		public UpdateByQueryDescriptor<T> SuggestField(Expression<Func<T, object>> field)  =>
-			AssignParam(p=>p._SuggestField(field));
-
-		///<summary>Specify suggest mode</summary>
-		public UpdateByQueryDescriptor<T> SuggestMode(SuggestMode suggest_mode) => AssignParam(p=>p.SuggestMode(suggest_mode));
-
-		///<summary>How many suggestions to return in response</summary>
-		public UpdateByQueryDescriptor<T> SuggestSize(long suggest_size) => AssignParam(p=>p.SuggestSize(suggest_size));
-
-		///<summary>The source text for which the suggestions should be returned</summary>
-		public UpdateByQueryDescriptor<T> SuggestText(string suggest_text) => AssignParam(p=>p.SuggestText(suggest_text));
-
-		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public UpdateByQueryDescriptor<T> Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
-
-		///<summary>Whether to calculate and return scores even if they are not used for sorting</summary>
-		public UpdateByQueryDescriptor<T> TrackScores(bool track_scores = true) => AssignParam(p=>p.TrackScores(track_scores));
-
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public UpdateByQueryDescriptor<T> Version(bool version = true) => AssignParam(p=>p.Version(version));
 
@@ -5036,17 +5075,23 @@ namespace Nest
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public UpdateByQueryDescriptor<T> Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
 
+		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
+		public UpdateByQueryDescriptor<T> Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+
 		///<summary>Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public UpdateByQueryDescriptor<T> WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
 
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public UpdateByQueryDescriptor<T> ScrollSize(int scroll_size) => AssignParam(p=>p.ScrollSize(scroll_size));
+		public UpdateByQueryDescriptor<T> ScrollSize(long scroll_size) => AssignParam(p=>p.ScrollSize(scroll_size));
 
-		///<summary>Should the request should block until the reindex is complete.</summary>
+		///<summary>Should the request should block until the update by query operation is complete.</summary>
 		public UpdateByQueryDescriptor<T> WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
 
-		///<summary>The throttle to set on this request in sub-requests per second. -1 means set no throttle as does &quot;unlimited&quot; which is the only non-float this accepts.</summary>
-		public UpdateByQueryDescriptor<T> RequestsPerSecond(float requests_per_second) => AssignParam(p=>p.RequestsPerSecond(requests_per_second));
+		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
+		public UpdateByQueryDescriptor<T> RequestsPerSecond(long requests_per_second) => AssignParam(p=>p.RequestsPerSecond(requests_per_second));
+
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
+		public UpdateByQueryDescriptor<T> Slices(int slices) => AssignParam(p=>p.Slices(slices));
 
 		///<summary>The URL-encoded request definition</summary>
 		public UpdateByQueryDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));

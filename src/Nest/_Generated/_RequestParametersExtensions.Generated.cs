@@ -28,14 +28,6 @@ namespace Nest
 		internal static BulkRequestParameters _SourceInclude<T>(this BulkRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_include) where T : class =>
 			qs.AddQueryString("_source_include", source_include.Select(e=>(Field)e));
 		
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		internal static DeleteByQueryRequestParameters _StoredFields<T>(this DeleteByQueryRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  stored_fields) where T : class =>
-			qs.AddQueryString("stored_fields", stored_fields.Select(e=>(Field)e));
-		
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		internal static DeleteByQueryRequestParameters _DocvalueFields<T>(this DeleteByQueryRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  docvalue_fields) where T : class =>
-			qs.AddQueryString("docvalue_fields", docvalue_fields.Select(e=>(Field)e));
-		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		internal static DeleteByQueryRequestParameters _SourceExclude<T>(this DeleteByQueryRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_exclude) where T : class =>
 			qs.AddQueryString("_source_exclude", source_exclude.Select(e=>(Field)e));
@@ -43,10 +35,6 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		internal static DeleteByQueryRequestParameters _SourceInclude<T>(this DeleteByQueryRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_include) where T : class =>
 			qs.AddQueryString("_source_include", source_include.Select(e=>(Field)e));
-		
-		///<summary>Specify which field to use for suggestions</summary>
-		internal static DeleteByQueryRequestParameters _SuggestField<T>(this DeleteByQueryRequestParameters qs, Expression<Func<T, object>> suggest_field) where T : class =>
-			qs.AddQueryString("suggest_field", (Field)suggest_field);
 		
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		internal static ExplainRequestParameters _StoredFields<T>(this ExplainRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  stored_fields) where T : class =>
@@ -136,18 +124,6 @@ namespace Nest
 		internal static TermVectorsRequestParameters _Fields<T>(this TermVectorsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
 			qs.AddQueryString("fields", fields.Select(e=>(Field)e));
 		
-		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		internal static UpdateByQueryRequestParameters _StoredFields<T>(this UpdateByQueryRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  stored_fields) where T : class =>
-			qs.AddQueryString("stored_fields", stored_fields.Select(e=>(Field)e));
-		
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		internal static UpdateByQueryRequestParameters _DocvalueFields<T>(this UpdateByQueryRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  docvalue_fields) where T : class =>
-			qs.AddQueryString("docvalue_fields", docvalue_fields.Select(e=>(Field)e));
-		
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		internal static UpdateByQueryRequestParameters _FielddataFields<T>(this UpdateByQueryRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fielddata_fields) where T : class =>
-			qs.AddQueryString("fielddata_fields", fielddata_fields.Select(e=>(Field)e));
-		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		internal static UpdateByQueryRequestParameters _SourceExclude<T>(this UpdateByQueryRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_exclude) where T : class =>
 			qs.AddQueryString("_source_exclude", source_exclude.Select(e=>(Field)e));
@@ -155,10 +131,6 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		internal static UpdateByQueryRequestParameters _SourceInclude<T>(this UpdateByQueryRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_include) where T : class =>
 			qs.AddQueryString("_source_include", source_include.Select(e=>(Field)e));
-		
-		///<summary>Specify which field to use for suggestions</summary>
-		internal static UpdateByQueryRequestParameters _SuggestField<T>(this UpdateByQueryRequestParameters qs, Expression<Func<T, object>> suggest_field) where T : class =>
-			qs.AddQueryString("suggest_field", (Field)suggest_field);
 	}
 }
  

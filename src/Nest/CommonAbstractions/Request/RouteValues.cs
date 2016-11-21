@@ -30,6 +30,7 @@ namespace Nest
 		public string Target => GetResolved("target");
 		public string NewIndex => GetResolved("new_index");
 		public string Alias => GetResolved("alias");
+		public string ThreadPoolPatterns => GetResolved("thread_pool_patterns");
 
 		private string GetResolved(string route)
 		{

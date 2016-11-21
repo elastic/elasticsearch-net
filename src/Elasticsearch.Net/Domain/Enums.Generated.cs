@@ -169,17 +169,6 @@ namespace Elasticsearch.Net
 	}
 	
 	
-	public enum SuggestMode 
-	{
-		[EnumMember(Value = "missing")]
-		Missing,
-		[EnumMember(Value = "popular")]
-		Popular,
-		[EnumMember(Value = "always")]
-		Always
-	}
-	
-	
 	public enum OpType 
 	{
 		[EnumMember(Value = "index")]
@@ -213,6 +202,17 @@ namespace Elasticsearch.Net
 	{
 		[EnumMember(Value = "ids")]
 		Ids
+	}
+	
+	
+	public enum SuggestMode 
+	{
+		[EnumMember(Value = "missing")]
+		Missing,
+		[EnumMember(Value = "popular")]
+		Popular,
+		[EnumMember(Value = "always")]
+		Always
 	}
 	
 	
@@ -535,17 +535,6 @@ namespace Elasticsearch.Net
 			
 			}
 			
-			if (e is SuggestMode)
-			{ 
-				switch((SuggestMode)e)
-				{
-					case SuggestMode.Missing: return "missing";
-					case SuggestMode.Popular: return "popular";
-					case SuggestMode.Always: return "always";
-				}
-			
-			}
-			
 			if (e is OpType)
 			{ 
 				switch((OpType)e)
@@ -582,6 +571,17 @@ namespace Elasticsearch.Net
 				switch((PercolateFormat)e)
 				{
 					case PercolateFormat.Ids: return "ids";
+				}
+			
+			}
+			
+			if (e is SuggestMode)
+			{ 
+				switch((SuggestMode)e)
+				{
+					case SuggestMode.Missing: return "missing";
+					case SuggestMode.Popular: return "popular";
+					case SuggestMode.Always: return "always";
 				}
 			
 			}
