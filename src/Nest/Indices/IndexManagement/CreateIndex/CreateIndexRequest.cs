@@ -28,12 +28,13 @@ namespace Nest
 			"index.uuid",
 			"index.version.created",
 		};
+
 		internal static void RemoveReadOnlySettings (IIndexSettings settings)
 		{
 			if (settings == null) return;
 			foreach(var bad in ReadOnlySettings)
 			{
-				if (settings.Contains(bad))
+				if (settings.ContainsKey(bad))
 					settings.Remove(bad);
 			}
 		}

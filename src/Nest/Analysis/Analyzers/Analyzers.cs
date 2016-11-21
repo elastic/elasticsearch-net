@@ -10,7 +10,7 @@ namespace Nest
 
 	public class Analyzers : IsADictionaryBase<string, IAnalyzer>, IAnalyzers
 	{
-		public Analyzers() : base() { }
+		public Analyzers() {}
 		public Analyzers(IDictionary<string, IAnalyzer> container) : base(container) { }
 		public Analyzers(Dictionary<string, IAnalyzer> container)
 			: base(container.ToDictionary(kv => kv.Key, kv => kv.Value))

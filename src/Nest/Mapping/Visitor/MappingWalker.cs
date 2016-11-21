@@ -33,7 +33,7 @@ namespace Nest
 		public void Accept(IProperties properties)
 		{
 			if (properties == null) return;
-			foreach (var kv in (IEnumerable<KeyValuePair<PropertyName, IProperty>>)properties)
+			foreach (var kv in properties)
 			{
 				var prop = kv.Key;
 				var field = kv.Value;

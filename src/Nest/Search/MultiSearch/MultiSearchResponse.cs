@@ -24,7 +24,7 @@ namespace Nest
 				sb.AppendLine($"  search[{i.i}]: {i.item}");
 		}
 
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		internal IDictionary<string, object> Responses { get; set; }
 
 		public int TotalResponses => this.Responses.HasAny() ? this.Responses.Count() : 0;

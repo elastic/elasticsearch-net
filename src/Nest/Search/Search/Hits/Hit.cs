@@ -41,7 +41,7 @@ namespace Nest
 		public string Index { get; internal set; }
 
 		[JsonProperty("inner_hits")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, InnerHitsResult>))]
 		public IReadOnlyDictionary<string, InnerHitsResult> InnerHits { get; internal set; } =
 			EmptyReadOnly<string, InnerHitsResult>.Dictionary;
 
@@ -78,7 +78,7 @@ namespace Nest
 		public IReadOnlyCollection<object> Sorts { get; internal set; } = EmptyReadOnly<object>.Collection;
 
 		[JsonProperty("highlight")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, List<string>>))]
 		internal Dictionary<string, List<string>> _Highlight { get; set; }
 
 		public HighlightFieldDictionary Highlights

@@ -26,7 +26,7 @@ namespace Nest
 		public int UnassignedShards { get; internal set; }
 
 		[JsonProperty(PropertyName = "shards")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ShardHealthStats>))]
 		public IReadOnlyDictionary<string, ShardHealthStats> Shards { get; internal set; } =
 			EmptyReadOnly<string, ShardHealthStats>.Dictionary;
 	}

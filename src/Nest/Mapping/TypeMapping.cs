@@ -41,14 +41,12 @@ namespace Nest
 		[JsonProperty("_size")]
 		ISizeField SizeField { get; set; }
 
-
 		[JsonProperty("_field_names")]
 		IFieldNamesField FieldNamesField { get; set; }
 
-
 		[JsonProperty("_meta")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		FluentDictionary<string, object> Meta { get; set; }
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
+		IDictionary<string, object> Meta { get; set; }
 
 		[JsonProperty("dynamic_templates")]
 		IDynamicTemplateContainer DynamicTemplates { get; set; }
@@ -79,7 +77,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IIndexField IndexField { get; set; }
 		/// <inheritdoc/>
-		public FluentDictionary<string, object> Meta { get; set; }
+		public IDictionary<string, object> Meta { get; set; }
 		/// <inheritdoc/>
 		public bool? NumericDetection { get; set; }
 		/// <inheritdoc/>
@@ -109,7 +107,7 @@ namespace Nest
 		IDynamicTemplateContainer ITypeMapping.DynamicTemplates { get; set; }
 		IFieldNamesField ITypeMapping.FieldNamesField { get; set; }
 		IIndexField ITypeMapping.IndexField { get; set; }
-		FluentDictionary<string, object> ITypeMapping.Meta { get; set; }
+		IDictionary<string, object> ITypeMapping.Meta { get; set; }
 		bool? ITypeMapping.NumericDetection { get; set; }
 		IParentField ITypeMapping.ParentField { get; set; }
 		IProperties ITypeMapping.Properties { get; set; }
@@ -119,8 +117,8 @@ namespace Nest
 		ISourceField ITypeMapping.SourceField { get; set; }
 
 		/// <summary>
-		/// Convenience method to map as much as it can based on ElasticType attributes set on the type.
-		/// <pre>This method also automatically sets up mappings for known values types (int, long, double, datetime, etcetera)</pre>
+		/// Convenience method to map as much as it can based on <see cref="ElasticsearchTypeAttribute"/> attributes set on the type.
+		/// <pre>This method also automatically sets up mappings for known values types (int, long, double, datetime, etc)</pre>
 		/// <pre>Class types default to object and Enums to int</pre>
 		/// <pre>Later calls can override whatever is set is by this call.</pre>
 		/// </summary>
@@ -180,13 +178,15 @@ namespace Nest
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> RoutingField(Func<RoutingFieldDescriptor<T>, IRoutingField> routingFieldSelector) => Assign(a => a.RoutingField = routingFieldSelector?.Invoke(new RoutingFieldDescriptor<T>()));
 
-
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> FieldNamesField(Func<FieldNamesFieldDescriptor<T>, IFieldNamesField> fieldNamesFieldSelector) => Assign(a => a.FieldNamesField = fieldNamesFieldSelector.Invoke(new FieldNamesFieldDescriptor<T>()));
 
+		/// <inheritdoc/>
+		public TypeMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector) =>
+			Assign(a => a.Meta = metaSelector(new FluentDictionary<string, object>()));
 
 		/// <inheritdoc/>
-		public TypeMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector) => Assign(a => a.Meta = metaSelector(new FluentDictionary<string, object>()));
+		public TypeMappingDescriptor<T> Meta(Dictionary<string, object> metaDictionary) => Assign(a => a.Meta = metaDictionary);
 
 		public TypeMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, IPromise<IProperties>> propertiesSelector) =>
 			Assign(a => a.Properties = propertiesSelector?.Invoke(new PropertiesDescriptor<T>(Self.Properties))?.Value);

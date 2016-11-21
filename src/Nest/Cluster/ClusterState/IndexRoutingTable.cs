@@ -6,7 +6,7 @@ namespace Nest
 	public class IndexRoutingTable
 	{
 		[JsonProperty("shards")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, List<RoutingShard>>))]
 		public Dictionary<string, List<RoutingShard>> Shards { get; internal set; }
 	}
 }

@@ -14,13 +14,12 @@ namespace Nest
 		public Similarities(IDictionary<string, ISimilarity> container) : base(container) { }
 		public Similarities(Dictionary<string, ISimilarity> container)
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
-		{ }
+		{}
 
 		/// <summary>
 		/// Add any setting to the index
 		/// </summary>
 		public void Add(string type, ISimilarity mapping) => BackingDictionary.Add(type, mapping);
-
 	}
 
 	public class SimilaritiesDescriptor : IsADictionaryDescriptorBase<SimilaritiesDescriptor, ISimilarities, string, ISimilarity>

@@ -16,7 +16,7 @@ namespace Nest
 		public BlockState Blocks { get; internal set; }
 
 		[JsonProperty("nodes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeState>))]
 		public Dictionary<string, NodeState> Nodes { get; internal set; }
 
 		[JsonProperty("routing_table")]

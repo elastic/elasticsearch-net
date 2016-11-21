@@ -3,8 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, HighlightHit>))]
 	public class HighlightFieldDictionary : Dictionary<string, HighlightHit>
 	{
 		public HighlightFieldDictionary(IDictionary<string, HighlightHit> dictionary = null)

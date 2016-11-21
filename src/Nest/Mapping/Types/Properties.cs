@@ -11,7 +11,7 @@ namespace Nest
 
 	public class Properties : IsADictionaryBase<PropertyName, IProperty>, IProperties
 	{
-		public Properties() { }
+		public Properties() {}
 		public Properties(IDictionary<PropertyName, IProperty> container) : base(container) { }
 		public Properties(Dictionary<PropertyName, IProperty> container)
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
@@ -22,7 +22,7 @@ namespace Nest
 
 	public class Properties<T> : IsADictionaryBase<PropertyName, IProperty>, IProperties
 	{
-		public Properties() { }
+		public Properties() {}
 		public Properties(IDictionary<PropertyName, IProperty> container) : base(container) { }
 		public Properties(IProperties properties) : base(properties) { }
 		public Properties(Dictionary<PropertyName, IProperty> container)
@@ -79,8 +79,9 @@ namespace Nest
 		public PropertiesDescriptor<T> Keyword(Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector) => SetProperty(selector);
 
 		/// <summary>
-		/// Number introduces a numeric mapping that defaults to `float` use .Type() to set the right type if needed or use
-		/// Scalar instead of <see cref="Number"/>
+		/// Number introduces a numeric mapping that defaults to <c>float</c>. use
+		/// <see cref="IProperty.Type"/> to set the right type if needed, or use .Scalar()
+		/// instead of <see cref="Number"/>
 		/// </summary>
 		public PropertiesDescriptor<T> Number(Func<NumberPropertyDescriptor<T>, INumberProperty> selector) => SetProperty(selector);
 
@@ -141,13 +142,13 @@ namespace Nest
 		{
 			var properties = new Properties();
 			var autoProperties = new PropertyWalker(typeof(T), visitor, maxRecursion).GetProperties();
-			foreach (var autoProperty in (IEnumerable<KeyValuePair<PropertyName, IProperty>>)autoProperties)
+			foreach (var autoProperty in autoProperties)
 				properties[autoProperty.Key] = autoProperty.Value;
 
 			// Existing/manually mapped properties always take precedence
 			if (existingProperties != null)
 			{
-				foreach (var existing in (IEnumerable<KeyValuePair<PropertyName, IProperty>>)existingProperties)
+				foreach (var existing in existingProperties)
 					properties[existing.Key] = existing.Value;
 			}
 
