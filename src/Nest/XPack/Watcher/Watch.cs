@@ -23,7 +23,7 @@ namespace Nest
 
 		[JsonProperty("actions")]
 		[JsonConverter(typeof(ActionsJsonConverter))]
-		public IDictionary<string, IAction> Actions { get; internal set; }
+		public Actions Actions { get; internal set; }
 
 		[JsonProperty("status")]
 		public WatchStatus Status { get; internal set; }
