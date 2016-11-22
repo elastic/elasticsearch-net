@@ -7,6 +7,6 @@ namespace Nest
 	{
 		[JsonProperty("shards")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, List<RoutingShard>>))]
-		public Dictionary<string, List<RoutingShard>> Shards { get; internal set; }
+		public IReadOnlyDictionary<string, List<RoutingShard>> Shards { get; internal set; }
 	}
 }

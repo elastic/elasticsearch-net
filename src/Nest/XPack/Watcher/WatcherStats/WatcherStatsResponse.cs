@@ -19,10 +19,10 @@ namespace Nest
 		ExecutionThreadPool ExecutionThreadPool { get; }
 
 		[JsonProperty("current_watches")]
-		IEnumerable<WatchRecordStats> CurrentWatches { get; }
+		IReadOnlyCollection<WatchRecordStats> CurrentWatches { get; }
 
 		[JsonProperty("queued_watches")]
-		IEnumerable<WatchRecordQueuedStats> QueuedWatches { get; }
+		IReadOnlyCollection<WatchRecordQueuedStats> QueuedWatches { get; }
 
 		[JsonProperty("manually_stopped")]
 		bool ManuallyStopped { get; }
@@ -52,9 +52,9 @@ namespace Nest
 
 		public ExecutionThreadPool ExecutionThreadPool { get; internal set; }
 
-		public IEnumerable<WatchRecordStats> CurrentWatches { get; internal set; }
+		public IReadOnlyCollection<WatchRecordStats> CurrentWatches { get; internal set; }
 
-		public IEnumerable<WatchRecordQueuedStats> QueuedWatches { get; internal set; }
+		public IReadOnlyCollection<WatchRecordQueuedStats> QueuedWatches { get; internal set; }
 
 		public bool ManuallyStopped { get; internal set; }
 	}

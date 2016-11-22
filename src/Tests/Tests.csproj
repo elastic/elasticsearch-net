@@ -222,6 +222,7 @@
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\AddressParsing.doc.cs" />
     <Compile Include="Cluster\TaskManagement\GetTask\GetTaskApiTests.cs" />
     <Compile Include="Cluster\TaskManagement\GetTask\GetTaskUrlTests.cs" />
+    <Compile Include="CodeStandards\Responses.doc.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkInvalidVersionApiTests.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkResponseParsingTests.cs" />
     <Compile Include="Document\Multiple\MultiGet\GetManyApiTests.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="Framework\EndpointTests\TestState\AsyncLazy.cs" />
     <Compile Include="Framework\EndpointTests\Clusters\IntrusiveOperationCluster.cs" />
     <Compile Include="Framework\EndpointTests\Clusters\WritableCluster.cs" />
+    <Compile Include="Framework\Extensions\ReadOnlyDictionaryAssertions.cs" />
     <Compile Include="Framework\Extensions\ShouldExtensions.cs" />
     <Compile Include="Framework\ManagedElasticsearch\FileSystem\INodeFileSystem.cs" />
     <Compile Include="Framework\MockData\GeoIp.cs" />

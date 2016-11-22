@@ -49,7 +49,7 @@ namespace Nest
 		public Id WatchId { get; set; }
 
 		[JsonProperty("messages")]
-		public IEnumerable<string> Messages { get; set; }
+		public IReadOnlyCollection<string> Messages { get; set; }
 
 		[JsonProperty("state")]
 		public ActionExecutionState? State { get; set; }
@@ -64,7 +64,7 @@ namespace Nest
 		public InputContainer Input { get; set; }
 
 		[JsonProperty("metadata")]
-		public IDictionary<string, object> Metadata { get; set; }
+		public IReadOnlyDictionary<string, object> Metadata { get; set; }
 
 		[JsonProperty("result")]
 		public ExecutionResult Result { get; set; }
@@ -98,7 +98,7 @@ namespace Nest
 		public ExecutionResultCondition Condition { get; set; }
 
 		[JsonProperty("actions")]
-		public List<ExecutionResultAction> Actions { get; set; }
+		public IReadOnlyCollection<ExecutionResultAction> Actions { get; set; }
 	}
 
 	[JsonObject]
@@ -111,7 +111,7 @@ namespace Nest
 		public Status Status { get; set; }
 
 		[JsonProperty("payload")]
-		public Dictionary<string, object> Payload { get; set; }
+		public IReadOnlyDictionary<string, object> Payload { get; set; }
 	}
 
 	[JsonObject]
