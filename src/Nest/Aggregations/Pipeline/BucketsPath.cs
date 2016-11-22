@@ -10,7 +10,7 @@ namespace Nest
 
 	public class SingleBucketsPath : IBucketsPath
 	{
-		public string BucketsPath { get; private set; }
+		public string BucketsPath { get; }
 
 		public SingleBucketsPath(string bucketsPath)
 		{
@@ -24,7 +24,7 @@ namespace Nest
 
 	public class MultiBucketsPath : IsADictionaryBase<string, string>, IMultiBucketsPath
 	{
-		public MultiBucketsPath() : base() { }
+		public MultiBucketsPath() {}
 		public MultiBucketsPath(IDictionary<string, string> container) : base(container) { }
 		public MultiBucketsPath(Dictionary<string, string> container)
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))

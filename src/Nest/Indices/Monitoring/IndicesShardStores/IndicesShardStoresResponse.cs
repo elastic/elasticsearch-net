@@ -7,7 +7,7 @@ namespace Nest
 	public interface IIndicesShardStoresResponse : IResponse
 	{
 		[JsonProperty(PropertyName = "indices")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndicesShardStores>))]
 		IReadOnlyDictionary<string, IndicesShardStores> Indices { get; }
 	}
 
@@ -20,7 +20,7 @@ namespace Nest
 	public class IndicesShardStores
 	{
 		[JsonProperty(PropertyName = "shards")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ShardStoreWrapper>))]
 		public IReadOnlyDictionary<string, ShardStoreWrapper> Shards { get; internal set; } = EmptyReadOnly<string, ShardStoreWrapper>.Dictionary;
 	}
 
@@ -55,7 +55,7 @@ namespace Nest
 		public ShardStoreAllocation Allocation { get; internal set; }
 
 		[JsonProperty("attributes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		public IReadOnlyDictionary<string, object> Attributes { get; internal set; } = EmptyReadOnly<string, object>.Dictionary;
 	}
 

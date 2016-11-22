@@ -8,7 +8,7 @@ namespace Nest
 	public class RoutingTableState
 	{
 		[JsonProperty("indices")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndexRoutingTable>))]
 		public Dictionary<string, IndexRoutingTable> Indices { get; internal set; }
 	}
 }

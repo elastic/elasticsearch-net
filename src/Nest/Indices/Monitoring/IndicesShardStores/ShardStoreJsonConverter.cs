@@ -8,10 +8,6 @@ namespace Nest
 {
 	internal class ShardStoreJsonConverter : JsonConverter
 	{
-		private readonly VerbatimDictionaryKeysJsonConverter _dictionaryConverter =
-		new VerbatimDictionaryKeysJsonConverter();
-
-		public override bool CanRead => true;
 		public override bool CanWrite => false;
 		public override bool CanConvert(Type objectType) => true;
 

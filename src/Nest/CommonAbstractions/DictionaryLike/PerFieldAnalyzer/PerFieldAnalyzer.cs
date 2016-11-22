@@ -11,11 +11,11 @@ namespace Nest
 
 	public class PerFieldAnalyzer : IsADictionaryBase<Field, string>, IPerFieldAnalyzer
 	{
-		public PerFieldAnalyzer() : base() { }
+		public PerFieldAnalyzer() {}
 		public PerFieldAnalyzer(IDictionary<Field, string> container) : base(container) { }
 		public PerFieldAnalyzer(Dictionary<Field, string> container)
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
-		{ }
+		{}
 
 		public void Add(Field field, string analyzer) => BackingDictionary.Add(field, analyzer);
 	}

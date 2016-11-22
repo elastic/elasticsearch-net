@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	internal class IndexSettingsConverter : VerbatimDictionaryKeysJsonConverter
+	internal class IndexSettingsConverter : VerbatimDictionaryKeysJsonConverter<string, object>
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
@@ -18,7 +18,7 @@ namespace Nest
 			var ds = value as IDynamicIndexSettings ?? (value as IUpdateIndexSettingsRequest)?.IndexSettings;
 
 			if (ds == null) return;
-			IDictionary d = ds;
+			IDictionary<string,object> d = ds;
 
 			d[UpdatableIndexSettings.NumberOfReplicas] = ds.NumberOfReplicas;
 			d[UpdatableIndexSettings.AutoExpandReplicas] = ds.AutoExpandReplicas;
@@ -190,7 +190,7 @@ namespace Nest
 			var queriesCache = s.Queries.Cache = new QueriesCacheSettings();
 			Set<bool?>(s, settings, "index.queries.cache.enabled", v => queriesCache.Enabled = v);
 
-			IDictionary dict = s;
+			IDictionary<string,object> dict = s;
 			foreach (var kv in settings)
 			{
 				var setting = kv.Value;

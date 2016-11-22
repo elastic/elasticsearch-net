@@ -47,7 +47,7 @@ namespace Nest
 		[JsonProperty(PropertyName="number_of_pending_tasks")]
 		public int NumberOfPendingTasks { get; internal set; }
 		[JsonProperty(PropertyName = "indices")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndexHealthStats>))]
 		public IReadOnlyDictionary<string, IndexHealthStats> Indices { get; internal set; } = EmptyReadOnly<string, IndexHealthStats>.Dictionary;
 	}
 }

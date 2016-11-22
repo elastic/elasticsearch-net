@@ -45,11 +45,11 @@ namespace Nest
 		public NodeJvmStats Jvm { get; internal set; }
 
 		[JsonProperty("thread_pool")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ThreadCountStats>))]
 		public Dictionary<string, ThreadCountStats> ThreadPool { get; internal set; }
 
 		[JsonProperty("breakers")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, BreakerStats>))]
 		public Dictionary<string, BreakerStats> Breakers { get; internal set; }
 
 		[JsonProperty("fs")]
@@ -224,7 +224,7 @@ namespace Nest
 		public GarbageCollectionStats GarbageCollection { get; internal set; }
 
 		[JsonProperty("buffer_pools")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeBufferPool>))]
 		public Dictionary<string, NodeBufferPool> BufferPools { get; internal set; }
 
 		[JsonProperty("classes")]
@@ -267,7 +267,7 @@ namespace Nest
 			[JsonProperty("non_heap_committed_in_bytes")]
 			public long NonHeapCommittedInBytes { get; internal set; }
 			[JsonProperty("pools")]
-			[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+			[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, JVMPool>))]
 			public Dictionary<string, JVMPool> Pools { get; internal set; }
 
 			[JsonObject]
@@ -305,7 +305,7 @@ namespace Nest
 		public class GarbageCollectionStats
 		{
 			[JsonProperty("collectors")]
-			[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+			[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, GarbageCollectionGenerationStats>))]
 			public Dictionary<string, GarbageCollectionGenerationStats> Collectors { get; internal set; }
 		}
 

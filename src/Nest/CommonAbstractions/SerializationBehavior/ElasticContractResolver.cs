@@ -41,7 +41,19 @@ namespace Nest
 				var contract = base.CreateContract(o);
 
 				if (typeof(IDictionary).IsAssignableFrom(o) && !typeof(IIsADictionary).IsAssignableFrom(o))
-					contract.Converter = new VerbatimDictionaryKeysJsonConverter();
+				{
+					if (!o.IsGeneric())
+						contract.Converter = new VerbatimDictionaryKeysJsonConverter<object, object>();
+					else
+					{
+						var genericArguments = o.GetGenericArguments();
+						if (genericArguments.Length != 2)
+							contract.Converter = new VerbatimDictionaryKeysJsonConverter<object, object>();
+						else
+							contract.Converter =
+								(JsonConverter)typeof(VerbatimDictionaryKeysJsonConverter<,>).CreateGenericInstance(genericArguments);
+					}
+				}
 				if (typeof(IEnumerable<QueryContainer>).IsAssignableFrom(o))
 					contract.Converter = new QueryContainerCollectionJsonConverter();
 				else if (o == typeof(ServerError))
@@ -75,8 +87,7 @@ namespace Nest
 
 		private bool ApplyExactContractJsonAttribute(Type objectType, JsonContract contract)
 		{
-
-			var attribute = objectType.GetTypeInfo().GetCustomAttributes(typeof(ExactContractJsonConverterAttribute)).FirstOrDefault() as ExactContractJsonConverterAttribute;
+			var attribute = (ExactContractJsonConverterAttribute)objectType.GetTypeInfo().GetCustomAttributes(typeof(ExactContractJsonConverterAttribute)).FirstOrDefault();
 			if (attribute?.Converter == null) return false;
 			contract.Converter = attribute.Converter;
 			return true;
@@ -86,7 +97,7 @@ namespace Nest
 		{
 			foreach (var t in this.TypeWithInterfaces(objectType))
 			{
-				var attribute = t.GetTypeInfo().GetCustomAttributes(typeof(ContractJsonConverterAttribute), true).FirstOrDefault() as ContractJsonConverterAttribute;
+				var attribute = (ContractJsonConverterAttribute)t.GetTypeInfo().GetCustomAttributes(typeof(ContractJsonConverterAttribute), true).FirstOrDefault();
 				if (attribute?.Converter == null) continue;
 				contract.Converter = attribute.Converter;
 				return true;

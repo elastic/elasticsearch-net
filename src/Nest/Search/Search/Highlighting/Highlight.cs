@@ -37,7 +37,7 @@ namespace Nest
 		string Order { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Field, IHighlightField>))]
 		Dictionary<Field, IHighlightField> Fields { get; set; }
 
 		[JsonProperty("require_field_match")]

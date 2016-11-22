@@ -10,11 +10,11 @@ namespace Nest
 
 	public class SuggestContainer : IsADictionaryBase<string, ISuggestBucket>, ISuggestContainer
 	{
-		public SuggestContainer() : base() { }
+		public SuggestContainer() {}
 		public SuggestContainer(IDictionary<string, ISuggestBucket> container) : base(container) { }
 		public SuggestContainer(Dictionary<string, ISuggestBucket> container)
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
-		{ }
+		{}
 
 		public void Add(string name, ISuggestBucket script) => this.BackingDictionary.Add(name, script);
 	}

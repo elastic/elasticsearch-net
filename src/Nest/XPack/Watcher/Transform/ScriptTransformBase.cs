@@ -11,7 +11,7 @@ namespace Nest
 	public interface IScriptTransform : ITransform
 	{
 		[JsonProperty("params")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
 
 		[JsonProperty("lang")]

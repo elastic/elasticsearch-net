@@ -37,7 +37,7 @@ namespace Nest
 		/// Metadata that will be copied into the history entries
 		/// </summary>
 		[JsonProperty("metadata")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		IDictionary<string, object> Metadata { get; set; }
 
 		/// <summary>

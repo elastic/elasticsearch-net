@@ -19,7 +19,7 @@ namespace Nest
 		string File { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
 
 		[JsonProperty(PropertyName = "lang")]

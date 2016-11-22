@@ -5,10 +5,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IAggregationContainer>))]
 	public class AggregationDictionary : IsADictionaryBase<string, IAggregationContainer>
 	{
-		public AggregationDictionary() : base() { }
+		public AggregationDictionary() {}
 		public AggregationDictionary(IDictionary<string, IAggregationContainer> container) : base(container) { }
 		public AggregationDictionary(Dictionary<string, AggregationContainer> container)
 			: base(container.ToDictionary(kv => kv.Key, kv => (IAggregationContainer)kv.Value))
@@ -50,7 +50,7 @@ namespace Nest
 	public interface IAggregationContainer
 	{
 		[JsonProperty("meta")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		IDictionary<string, object> Meta { get; set; }
 
 		[JsonProperty("avg")]

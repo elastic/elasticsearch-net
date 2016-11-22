@@ -39,7 +39,7 @@ namespace Nest
 		long? TerminateAfter { get; set; }
 
 		[JsonProperty("indices_boost")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<IndexName, double>))]
 		IDictionary<IndexName, double> IndicesBoost { get; set; }
 
 		[JsonProperty("sort")]

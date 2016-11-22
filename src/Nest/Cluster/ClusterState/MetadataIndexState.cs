@@ -10,7 +10,7 @@ namespace Nest
 		public string State { get; internal set; }
 
 		[JsonProperty("settings")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		public DynamicResponse Settings { get; internal set; }
 
 		[JsonProperty("mappings")]

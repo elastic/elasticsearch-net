@@ -33,7 +33,7 @@ namespace Nest
 		public List<NodeRole> Roles { get; internal set; }
 
 		[JsonProperty(PropertyName = "settings")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		public DynamicResponse Settings { get; internal set; }
 
 		[JsonProperty(PropertyName = "os")]
@@ -46,7 +46,7 @@ namespace Nest
 		public NodeJvmInfo Jvm { get; internal set; }
 
 		[JsonProperty(PropertyName = "thread_pool")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeThreadPoolInfo>))]
 		public Dictionary<string, NodeThreadPoolInfo> ThreadPool { get; internal set; }
 
 		[JsonProperty(PropertyName = "network")]
