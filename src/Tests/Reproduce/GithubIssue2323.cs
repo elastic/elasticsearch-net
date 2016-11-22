@@ -42,7 +42,7 @@ namespace Tests.Reproduce
 			innerHits.Should().NotBeNullOrEmpty();
 
 			var innerHit = innerHits.First();
-			innerHit.Should().Contain(k => k.Key == "tags");
+			innerHit.Should().ContainKey("tags");
 			var hitMetadata = innerHit["tags"].Hits.Hits.First();
 
 			hitMetadata.Nested.Should().NotBeNull();

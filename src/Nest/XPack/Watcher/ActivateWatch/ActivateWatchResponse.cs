@@ -21,6 +21,6 @@ namespace Nest
 		public ActivationState State { get; internal set; }
 
 		[JsonProperty("actions")]
-		public Dictionary<string, ActionStatus> Actions { get; set; }
+		public IReadOnlyDictionary<string, ActionStatus> Actions { get; set; }
 	}
 }
