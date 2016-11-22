@@ -21,7 +21,7 @@ namespace Nest
 		public IndicesStats Stats { get; internal set; }
 
 		[JsonProperty(PropertyName = "indices")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndicesStats>))]
 		public IReadOnlyDictionary<string, IndicesStats> Indices { get; internal set; } = EmptyReadOnly<string, IndicesStats>.Dictionary;
 
 	}

@@ -14,7 +14,7 @@ namespace Nest
 		public string TransportAddress { get; internal set; }
 
 		[JsonProperty("attributes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, string>))]
 		public Dictionary<string, string> Attributes { get; internal set; }
 	}
 }

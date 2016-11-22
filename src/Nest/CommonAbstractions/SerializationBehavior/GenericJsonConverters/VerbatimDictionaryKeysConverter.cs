@@ -12,42 +12,48 @@ namespace Nest
 	/// JSON converter for IDictionary that ignores the contract resolver (e.g. CamelCaseFieldNamesContractResolver)
 	/// when converting dictionary keys to property names.
 	/// </summary>
-	internal class VerbatimDictionaryKeysJsonConverter : JsonConverter
+	internal class VerbatimDictionaryKeysJsonConverter<TKey, TValue> : JsonConverter
 	{
-		public override bool CanConvert(Type t) => typeof (IDictionary).IsAssignableFrom(t);
+		public override bool CanConvert(Type t) => typeof (IDictionary<TKey, TValue>).IsAssignableFrom(t);
 
 		public override bool CanRead => false;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			throw new InvalidOperationException();
+			throw new NotSupportedException();
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var dictionary = value as IDictionary;
+			var dictionary = value as IDictionary<TKey, TValue>;
 			if (dictionary == null) return;
 
 			var settings = serializer.GetConnectionSettings();
+			var seenEntries = new Dictionary<string, TValue>(dictionary.Count);
+			var keyIsString = typeof(TKey) == typeof(string);
+			var keyIsField = typeof(TKey) == typeof(Field);
+			var keyIsPropertyName = typeof(TKey) == typeof(PropertyName);
+			var keyIsIndexName = typeof(TKey) == typeof(IndexName);
+			var keyIsTypeName = typeof(TKey) == typeof(TypeName);
 
-			var seenEntries = new Dictionary<string, object>();
-
-			foreach (DictionaryEntry entry in dictionary)
+			foreach (var entry in dictionary)
 			{
 				if (entry.Value == null && serializer.NullValueHandling == NullValueHandling.Ignore)
 					continue;
 				string key;
-				var fieldName = entry.Key as Field;
-				var propertyName = entry.Key as PropertyName;
-				var indexName = entry.Key as IndexName;
-				var typeName = entry.Key as TypeName;
-				if (settings == null)
+				if (keyIsString)
+					key = entry.Key?.ToString();
+				else if (settings == null)
 					key = Convert.ToString(entry.Key, CultureInfo.InvariantCulture);
-				else if (fieldName != null)
-					key = settings.Inferrer.Field(fieldName);
-				else if (propertyName != null)
+				else if (keyIsField)
 				{
-					if (propertyName.Property != null)
+					var fieldName = entry.Key as Field;
+					key = settings.Inferrer.Field(fieldName);
+				}
+				else if (keyIsPropertyName)
+				{
+					var propertyName = entry.Key as PropertyName;
+					if (propertyName?.Property != null)
 					{
 						IPropertyMapping mapping;
 						if (settings.PropertyMappings.TryGetValue(propertyName.Property, out mapping) && mapping.Ignore)
@@ -58,14 +64,21 @@ namespace Nest
 
 					key = settings.Inferrer.PropertyName(propertyName);
 				}
-				else if (indexName != null)
+				else if (keyIsIndexName)
+				{
+					var indexName = entry.Key as IndexName;
 					key = settings.Inferrer.IndexName(indexName);
-				else if (typeName != null)
+				}
+				else if (keyIsTypeName)
+				{
+					var typeName = entry.Key as TypeName;
 					key = settings.Inferrer.TypeName(typeName);
+				}
 				else
 					key = Convert.ToString(entry.Key, CultureInfo.InvariantCulture);
 
-				seenEntries[key] = entry.Value;
+				if (key != null)
+					seenEntries[key] = entry.Value;
 			}
 
 			writer.WriteStartObject();
@@ -78,7 +91,7 @@ namespace Nest
 		}
 	}
 
-	internal class VerbatimDictionaryKeysJsonConverter<TIsADictionary, TKey, TValue> : VerbatimDictionaryKeysJsonConverter
+	internal class VerbatimDictionaryKeysJsonConverter<TIsADictionary, TKey, TValue> : VerbatimDictionaryKeysJsonConverter<TKey, TValue>
 		where TIsADictionary : IIsADictionary
 	{
 		public override bool CanConvert(Type t) => true;

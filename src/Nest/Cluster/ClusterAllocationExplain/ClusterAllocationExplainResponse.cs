@@ -36,7 +36,7 @@ namespace Nest
 		long RemainingDelayInMilliseconds { get; }
 
 		[JsonProperty("nodes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeAllocationExplanation>))]
 		IReadOnlyDictionary<string, NodeAllocationExplanation> Nodes { get; }
 	}
 

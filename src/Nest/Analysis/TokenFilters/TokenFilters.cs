@@ -10,11 +10,11 @@ namespace Nest
 
 	public class TokenFilters : IsADictionaryBase<string, ITokenFilter>, ITokenFilters
 	{
-		public TokenFilters() : base() { }
+		public TokenFilters() {}
 		public TokenFilters(IDictionary<string, ITokenFilter> container) : base(container) { }
 		public TokenFilters(Dictionary<string, ITokenFilter> container)
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
-		{ }
+		{}
 
 		public void Add(string name, ITokenFilter analyzer) => BackingDictionary.Add(name, analyzer);
 	}

@@ -32,14 +32,14 @@ namespace Nest
 		/// instead of executing its own input.
 		/// </summary>
 		[JsonProperty("alternative_input")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		IDictionary<string, object> AlternativeInput { get; set; }
 
 		/// <summary>
 		/// Determines how to handle the watch actions as part of the watch execution.
 		/// </summary>
 		[JsonProperty("action_modes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ActionExecutionMode>))]
 		IDictionary<string, ActionExecutionMode> ActionModes { get; set; }
 
 		/// <summary>

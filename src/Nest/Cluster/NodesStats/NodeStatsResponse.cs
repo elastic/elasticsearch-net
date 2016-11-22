@@ -9,7 +9,7 @@ namespace Nest
 		string ClusterName { get; }
 
 		[JsonProperty(PropertyName = "nodes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeStats>))]
 		IReadOnlyDictionary<string, NodeStats> Nodes { get; }
 	}
 

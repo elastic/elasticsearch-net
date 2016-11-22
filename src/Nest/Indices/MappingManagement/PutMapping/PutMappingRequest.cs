@@ -35,7 +35,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IIndexField IndexField { get; set; }
 		/// <inheritdoc/>
-		public FluentDictionary<string, object> Meta { get; set; }
+		public IDictionary<string, object> Meta { get; set; }
 		/// <inheritdoc/>
 		public bool? NumericDetection { get; set; }
 		/// <inheritdoc/>
@@ -73,7 +73,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IIndexField IndexField { get; set; }
 		/// <inheritdoc/>
-		public FluentDictionary<string, object> Meta { get; set; }
+		public IDictionary<string, object> Meta { get; set; }
 		/// <inheritdoc/>
 		public bool? NumericDetection { get; set; }
 		/// <inheritdoc/>
@@ -105,7 +105,7 @@ namespace Nest
 		Union<bool, DynamicMapping> ITypeMapping.Dynamic { get; set; }
 		IFieldNamesField ITypeMapping.FieldNamesField { get; set; }
 		IIndexField ITypeMapping.IndexField { get; set; }
-		FluentDictionary<string, object> ITypeMapping.Meta { get; set; }
+		IDictionary<string, object> ITypeMapping.Meta { get; set; }
 		bool? ITypeMapping.NumericDetection { get; set; }
 		IParentField ITypeMapping.ParentField { get; set; }
 		IProperties ITypeMapping.Properties { get; set; }
@@ -135,7 +135,7 @@ namespace Nest
 		public PutMappingDescriptor<T> Parent(TypeName parentType) => Assign(a => a.ParentField = new ParentField { Type = parentType });
 
 		/// <inheritdoc/>
-		public PutMappingDescriptor<T> Parent<K>() where K : class => Assign(a => a.ParentField = new ParentField { Type = typeof(K) });
+		public PutMappingDescriptor<T> Parent<TParent>() where TParent : class => Assign(a => a.ParentField = new ParentField { Type = typeof(TParent) });
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
@@ -173,13 +173,17 @@ namespace Nest
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> RoutingField(Func<RoutingFieldDescriptor<T>, IRoutingField> routingFieldSelector) => Assign(a => a.RoutingField = routingFieldSelector?.Invoke(new RoutingFieldDescriptor<T>()));
 
-
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> FieldNamesField(Func<FieldNamesFieldDescriptor<T>, IFieldNamesField> fieldNamesFieldSelector) => Assign(a => a.FieldNamesField = fieldNamesFieldSelector.Invoke(new FieldNamesFieldDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public PutMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector) => Assign(a => a.Meta = metaSelector(new FluentDictionary<string, object>()));
+		public PutMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector) =>
+			Assign(a => a.Meta = metaSelector(new FluentDictionary<string, object>()));
 
+		/// <inheritdoc/>
+		public PutMappingDescriptor<T> Meta(Dictionary<string, object> metaDictionary) => Assign(a => a.Meta = metaDictionary);
+
+		/// <inheritdoc/>
 		public PutMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, IPromise<IProperties>> propertiesSelector) =>
 			Assign(a => a.Properties = propertiesSelector?.Invoke(new PropertiesDescriptor<T>(a.Properties))?.Value);
 

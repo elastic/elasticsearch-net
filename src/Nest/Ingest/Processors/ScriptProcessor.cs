@@ -42,7 +42,7 @@ namespace Nest
 		/// Parameters for the script
 		/// </summary>
 		[JsonProperty("params")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
 	}
 

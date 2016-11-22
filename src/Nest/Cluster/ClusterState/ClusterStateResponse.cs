@@ -18,7 +18,7 @@ namespace Nest
 		long Version { get; }
 
 		[JsonProperty("nodes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeState>))]
 		IReadOnlyDictionary<string, NodeState> Nodes { get; }
 
 		[JsonProperty("metadata")]

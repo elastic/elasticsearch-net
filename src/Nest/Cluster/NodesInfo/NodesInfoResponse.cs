@@ -16,7 +16,7 @@ namespace Nest
 		public string ClusterName { get; internal set; }
 
 		[JsonProperty(PropertyName = "nodes")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeInfo>))]
 		public IReadOnlyDictionary<string, NodeInfo> Nodes { get; internal set; } = EmptyReadOnly<string, NodeInfo>.Dictionary;
 	}
 }

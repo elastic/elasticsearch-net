@@ -10,11 +10,11 @@ namespace Nest
 
 	public class Tokenizers : IsADictionaryBase<string, ITokenizer>, ITokenizers
 	{
-		public Tokenizers() : base() { }
+		public Tokenizers() {}
 		public Tokenizers(IDictionary<string, ITokenizer> container) : base(container) { }
 		public Tokenizers(Dictionary<string, ITokenizer> container)
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
-		{ }
+		{}
 
 		public void Add(string name, ITokenizer analyzer) => BackingDictionary.Add(name, analyzer);
 	}
@@ -24,7 +24,7 @@ namespace Nest
 		public TokenizersDescriptor() : base(new Tokenizers()) { }
 
 		public TokenizersDescriptor UserDefined(string name, ITokenizer analyzer) => Assign(name, analyzer);
-		
+
 		/// <summary>
 		/// A tokenizer of type edgeNGram.
 		/// </summary>

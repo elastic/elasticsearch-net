@@ -32,11 +32,11 @@ namespace Nest
 
 	public class ScriptFields : IsADictionaryBase<string, IScriptField>, IScriptFields
 	{
-		public ScriptFields() : base() { }
+		public ScriptFields() {}
 		public ScriptFields(IDictionary<string, IScriptField> container) : base(container) { }
 		public ScriptFields(Dictionary<string, IScriptField> container)
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
-		{ }
+		{}
 
 		public void Add(string name, IScriptField script) => this.BackingDictionary.Add(name, script);
 		public void Add(string name, IScript script) => this.BackingDictionary.Add(name, new ScriptField { Script = script });

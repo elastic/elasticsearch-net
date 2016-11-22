@@ -11,14 +11,15 @@ namespace Nest
 	{
 		public string Type { get { return this["type"] as string; } set { this.Add("type", value); } }
 
-		public CustomSimilarity(string type) : base()
+		public CustomSimilarity(string type)
 		{
 			if (!string.IsNullOrEmpty(type)) this.Type = type;
 		}
+
 		internal CustomSimilarity(IDictionary<string, object> container) : base(container) { }
 		internal CustomSimilarity(Dictionary<string, object> container)
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
-		{ }
+		{}
 
 		public void Add(string key, object value) => BackingDictionary.Add(key, value);
 	}

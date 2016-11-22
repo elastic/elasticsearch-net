@@ -10,7 +10,7 @@ namespace Nest
 
 	public class Mappings : IsADictionaryBase<TypeName, ITypeMapping>, IMappings
 	{
-		public Mappings() : base() { }
+		public Mappings() {}
 		public Mappings(IDictionary<TypeName, ITypeMapping> container) : base(container) { }
 		public Mappings(Dictionary<TypeName, ITypeMapping> container)
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
@@ -18,7 +18,7 @@ namespace Nest
 
 		public void Add(TypeName type, ITypeMapping mapping) => BackingDictionary.Add(type, mapping);
 	}
-	
+
 	public class MappingsDescriptor : IsADictionaryDescriptorBase<MappingsDescriptor,IMappings, TypeName, ITypeMapping>
 	{
 		public MappingsDescriptor() : base(new Mappings()) { }
