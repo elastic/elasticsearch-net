@@ -20,8 +20,23 @@ namespace Tests.Mapping.Types.Core.Text
 					type = "text",
 					analyzer = "standard",
 					boost = 1.2,
+					copy_to = new [] { "other_field" },
 					eager_global_ordinals = true,
 					fielddata = true,
+					fielddata_frequency_filter = new
+					{
+						min = 1.0,
+						max = 100.00,
+						min_segment_size = 2
+					},
+					fields = new
+					{
+						raw = new
+						{
+							type = "keyword",
+							ignore_above = 100
+						}
+					},
 					include_in_all = false,
 					index = true,
 					index_options = "offsets",
@@ -41,8 +56,22 @@ namespace Tests.Mapping.Types.Core.Text
 					.Name(p => p.Name)
 					.Analyzer("standard")
 					.Boost(1.2)
+					.CopyTo(c => c
+						.Field("other_field")
+					)
 					.EagerGlobalOrdinals()
 					.Fielddata()
+					.FielddataFrequencyFilter(ff => ff
+						.Min(1)
+						.Max(100)
+						.MinSegmentSize(2)
+					)
+					.Fields(fd => fd
+						.Keyword(k => k
+							.Name("raw")
+							.IgnoreAbove(100)
+						)
+					)
 					.IncludeInAll(false)
 					.Index(true)
 					.IndexOptions(IndexOptions.Offsets)
@@ -61,8 +90,23 @@ namespace Tests.Mapping.Types.Core.Text
 				{
 					Analyzer = "standard",
 					Boost = 1.2,
+					CopyTo = "other_field",
 					EagerGlobalOrdinals = true,
 					Fielddata = true,
+					FielddataFrequencyFilter = new FielddataFrequencyFilter
+					{
+						Min = 1,
+						Max = 100,
+						MinSegmentSize = 2
+					},
+					Fields = new Properties
+					{
+						{ "raw", new KeywordProperty
+							{
+								IgnoreAbove = 100
+							}
+						}
+					},
 					IncludeInAll = false,
 					Index = true,
 					IndexOptions = IndexOptions.Offsets,

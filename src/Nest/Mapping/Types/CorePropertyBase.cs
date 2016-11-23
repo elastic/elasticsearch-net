@@ -16,6 +16,7 @@ namespace Nest
 		Union<SimilarityOption, string> Similarity { get; set; }
 
 		[JsonProperty("copy_to")]
+		[JsonConverter(typeof(FieldsJsonConverter))]
 		Fields CopyTo { get; set; }
 	}
 
