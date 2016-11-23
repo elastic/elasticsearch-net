@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IBulkAllRequest<T>
+	public interface IBulkAllRequest<T> where T : class
 	{
 		/// <summary> In case of a 429 (too busy) how long should we wait before retrying</summary>
 		Time BackOffTime { get; set; }
@@ -53,24 +54,49 @@ namespace Nest
 		///<summary>The pipeline id to preprocess all the incoming documents with</summary>
 		string Pipeline { get; set; }
 
+		/// <summary>
+		/// By default the bulkall helper simply calls <see cref="BulkDescriptor.IndexMany"/> on the buffer.
+		/// There might be case where you'd like more control over this. By setting this callback you are in complete control
+		/// of describing how the buffer should be translated to a bulk operation. Maybe you want to enforce all documents are newly created using
+		/// <see cref="BulkDescriptor.CreateMany"/> or maybe a piece of metadata on <typeparamref name="T"/> controls where you need to call
+		/// <see cref="BulkDescriptor.Update{T, TPartialDocument}(Func{BulkUpdateDescriptor{T, TPartialDocument}, IBulkUpdateOperation{T, TPartialDocument}})"/>
+		/// or <see cref="BulkDescriptor.Index{T}(Func{BulkIndexDescriptor{T}, IBulkIndexOperation{T}})"/>
+		/// </summary>
+		Action<BulkDescriptor, IList<T>> BufferToBulk { get; set; }
 	}
 
-	public class BulkAllRequest<T> : IBulkAllRequest<T>
+	public class BulkAllRequest<T>  : IBulkAllRequest<T>
+		where T : class
 	{
+		/// <inheritdoc />
 		public Time BackOffTime { get; set; }
+		/// <inheritdoc />
 		public int? Size { get; set; }
+		/// <inheritdoc />
 		public int? MaxDegreeOfParallelism { get; set; }
+		/// <inheritdoc />
 		public int? BackOffRetries { get; set; }
+		/// <inheritdoc />
 		public IEnumerable<T> Documents { get; private set; }
 
+		/// <inheritdoc />
 		public IndexName Index { get; set; }
+		/// <inheritdoc />
 		public TypeName Type { get; set; }
+		/// <inheritdoc />
 		public int? WaitForActiveShards { get; set; }
+		/// <inheritdoc />
 		public Refresh? Refresh { get; set; }
+		/// <inheritdoc />
 		public bool RefreshOnCompleted { get; set; }
+		/// <inheritdoc />
 		public string Routing { get; set; }
+		/// <inheritdoc />
 		public Time Timeout { get; set; }
+		/// <inheritdoc />
 		public string Pipeline { get; set; }
+		/// <inheritdoc />
+		public Action<BulkDescriptor, IList<T>> BufferToBulk { get; set; }
 
 		public BulkAllRequest(IEnumerable<T> documents)
 		{
@@ -99,6 +125,7 @@ namespace Nest
 		string IBulkAllRequest<T>.Routing { get; set; }
 		Time IBulkAllRequest<T>.Timeout { get; set; }
 		string IBulkAllRequest<T>.Pipeline { get; set; }
+		Action<BulkDescriptor, IList<T>>  IBulkAllRequest<T>.BufferToBulk { get; set; }
 
 		public BulkAllDescriptor(IEnumerable<T> documents)
 		{
@@ -147,6 +174,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public BulkAllDescriptor<T> Pipeline(string pipeline) => Assign(p => p.Pipeline = pipeline);
+
+		/// <inheritdoc />
+		public BulkAllDescriptor<T> BufferToBulk(Action<BulkDescriptor, IList<T>> modifier) => Assign(p => p.BufferToBulk = modifier);
 
 	}
 }
