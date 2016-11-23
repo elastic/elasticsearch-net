@@ -35,10 +35,10 @@ namespace Benchmarking
 			}
 		}
 
-		public static decimal GetMedian(this IEnumerable<int> source)
+		public static decimal GetMedian(this IEnumerable<long> source)
 		{
 			// Create a copy of the input, and sort the copy
-			int[] temp = source.ToArray();
+			long[] temp = source.ToArray();
 			Array.Sort(temp);
 
 			int count = temp.Length;
@@ -50,11 +50,11 @@ namespace Benchmarking
 			if (count % 2 == 0)
 			{
 				// count is even, average two middle elements
-				int a = temp[count / 2 - 1];
-				int b = temp[count / 2];
+				long a = temp[count / 2 - 1];
+				long b = temp[count / 2];
 				return (a + b) / 2m;
 			}
-			
+
 			// count is odd, return the middle element
 			return temp[count / 2];
 		}

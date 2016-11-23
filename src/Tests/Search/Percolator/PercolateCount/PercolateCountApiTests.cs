@@ -47,8 +47,10 @@ namespace Tests.Search.Percolator.PercolateCount
 
 		protected override void ExpectResponse(IPercolateCountResponse response)
 		{
+#pragma warning disable 618
 			response.Took.Should().BeGreaterThan(0);
-			response.Took.Should().BeGreaterThan(0);
+#pragma warning restore 618
+			response.TookAsLong.Should().BeGreaterThan(0);
 		}
 
 		protected override Func<PercolateCountDescriptor<Project>, IPercolateCountRequest<Project>> Fluent => c => c

@@ -92,7 +92,10 @@ namespace Tests.Document.Multiple.Bulk
 
 		protected override void ExpectResponse(IBulkResponse response)
 		{
+#pragma warning disable 618
 			response.Took.Should().BeGreaterThan(0);
+#pragma warning restore 618
+			response.TookAsLong.Should().BeGreaterThan(0);
 			response.Errors.Should().BeFalse();
 			response.ItemsWithErrors.Should().NotBeNull().And.BeEmpty();
 			response.Items.Should().NotBeEmpty();

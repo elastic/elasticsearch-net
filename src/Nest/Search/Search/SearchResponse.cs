@@ -14,7 +14,18 @@ namespace Nest
 		Profile Profile { get; }
 		AggregationsHelper Aggs { get; }
 		IDictionary<string, Suggest[]> Suggest { get; }
+
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		[Obsolete(@"returned value may be larger than int. In this case, value will be int.MaxValue and TookAsLong field can be checked. Took is long in 5.0.0")]
 		int Took { get; }
+
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		long TookAsLong { get; }
+
 		bool TimedOut { get; }
 		bool TerminatedEarly { get; }
 		string ScrollId { get; }
@@ -64,8 +75,18 @@ namespace Nest
 		[JsonProperty(PropertyName = "suggest")]
 		public IDictionary<string, Suggest[]> Suggest { get; internal set; }
 
-		[JsonProperty(PropertyName = "took")]
-		public int Took { get; internal set; }
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		[JsonProperty("took")]
+		public long TookAsLong { get; internal set; }
+
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		[Obsolete(@"returned value may be larger than int. In this case, value will be int.MaxValue and TookAsLong field can be checked. Took is long in 5.0.0")]
+		[JsonIgnore]
+		public int Took => TookAsLong > int.MaxValue ? int.MaxValue : (int)TookAsLong;
 
 		[JsonProperty("timed_out")]
 		public bool TimedOut { get; internal set; }

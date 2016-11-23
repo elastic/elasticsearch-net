@@ -1,12 +1,23 @@
 ﻿using System.Collections.Generic;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
+using System;
 
 namespace Nest
 {
 	public interface IPercolateCountResponse : IResponse
 	{
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		[Obsolete(@"returned value may be larger than int. In this case, value will be int.MaxValue and TookAsLong field can be checked. Took is long in 5.0.0")]
 		int Took { get; }
+
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		long TookAsLong { get; }
+
 		long Total { get; }
 	}
 
@@ -18,19 +29,29 @@ namespace Nest
 	[JsonObject]
 	public class PercolateCountResponse : ResponseBase, IPercolateCountResponse
 	{
-		[JsonProperty(PropertyName = "took")]
-		public int Took { get; internal set; }
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		[JsonProperty("took")]
+		public long TookAsLong { get; internal set; }
 
-		[JsonProperty(PropertyName = "total")]
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		[Obsolete(@"returned value may be larger than int. In this case, value will be int.MaxValue and TookAsLong field can be checked. Took is long in 5.0.0")]
+		[JsonIgnore]
+		public int Took => TookAsLong > int.MaxValue? int.MaxValue : (int)TookAsLong;
+
+		[JsonProperty("total")]
 		public long Total { get; internal set; }
-		
-		[JsonProperty(PropertyName = "_shards")]
+
+		[JsonProperty("_shards")]
 		public ShardsMetaData Shards { get; internal set; }
-		
+
 		/// <summary>
 		/// The individual error for separate requests on the _mpercolate API
 		/// </summary>
-		[JsonProperty(PropertyName = "error")]
+		[JsonProperty("error")]
 		internal ServerError Error { get; set; }
 
 		public override ServerError ServerError => this.Error ?? base.ServerError;
@@ -39,23 +60,22 @@ namespace Nest
 	[JsonObject]
 	public class PercolateResponse : PercolateCountResponse, IPercolateResponse
 	{
-
-		[JsonProperty(PropertyName = "matches")]
+		[JsonProperty("matches")]
 		public IEnumerable<PercolatorMatch> Matches { get; internal set; }
 	}
 
 	public class PercolatorMatch
 	{
-		[JsonProperty(PropertyName = "highlight")]
+		[JsonProperty("highlight")]
 		public Dictionary<string, IList<string>> Highlight { get; set; }
 
-		[JsonProperty(PropertyName = "_id")]
+		[JsonProperty("_id")]
 		public string Id { get; set; }
 
-		[JsonProperty(PropertyName = "_index")]
+		[JsonProperty("_index")]
 		public string Index { get; set; }
 
-		[JsonProperty(PropertyName = "_score")]
+		[JsonProperty("_score")]
 		public double Score { get; set; }
 	}
 

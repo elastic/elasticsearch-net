@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using System;
 
 namespace Nest
 {
@@ -10,7 +11,18 @@ namespace Nest
 		string Id { get; }
 		long Version { get; }
 		bool Found { get; }
+
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		[Obsolete(@"returned value may be larger than int. In this case, value will be int.MaxValue and TookAsLong field can be checked. Took is long in 5.0.0")]
 		int Took { get; }
+
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		long TookAsLong { get; }
+
 		IDictionary<string, TermVector> TermVectors { get; }
 	}
 
@@ -32,8 +44,18 @@ namespace Nest
 		[JsonProperty("found")]
 		public bool Found { get; internal set; }
 
-		[JsonProperty(PropertyName = "took")]
-		public int Took { get; internal set; }
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		[JsonProperty("took")]
+		public long TookAsLong { get; internal set; }
+
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		[Obsolete(@"returned value may be larger than int. In this case, value will be int.MaxValue and TookAsLong field can be checked. Took is long in 5.0.0")]
+		[JsonIgnore]
+		public int Took => TookAsLong > int.MaxValue ? int.MaxValue : (int)TookAsLong;
 
 		[JsonProperty("term_vectors")]
 		public IDictionary<string, TermVector> TermVectors { get; internal set; } =  new Dictionary<string, TermVector>();
