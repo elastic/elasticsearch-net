@@ -33,7 +33,7 @@ namespace Nest
 		public DateTimeOffset? LastMetCondition { get; set; }
 
 		[JsonProperty("actions")]
-		public Dictionary<string, ActionStatus> Actions { get; set; }
+		public IReadOnlyDictionary<string, ActionStatus> Actions { get; set; }
 	}
 
 	public class ActionStatus
