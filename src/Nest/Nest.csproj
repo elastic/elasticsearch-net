@@ -467,6 +467,7 @@
     <Compile Include="CommonOptions\DateMath\DateMathExpression.cs" />
     <Compile Include="CommonOptions\DateMath\DateMathOperation.cs" />
     <Compile Include="CommonOptions\Failures\BulkError.cs" />
+    <Compile Include="Document\Multiple\BulkAll\BulkAllResponse.cs" />
     <Compile Include="Document\Multiple\BulkIndexByScrollFailure.cs" />
     <Compile Include="CommonOptions\Failures\ShardFailure.cs" />
     <Compile Include="CommonOptions\Failures\Throwable.cs" />
@@ -531,6 +532,10 @@
     <Compile Include="Document\Multiple\Bulk\ElasticClient-Bulk.cs" />
     <Compile Include="Document\Multiple\Bulk\ElasticClient-DeleteMany.cs" />
     <Compile Include="Document\Multiple\Bulk\ElasticClient-IndexMany.cs" />
+    <Compile Include="Document\Multiple\BulkAll\ElasticClient-BulkAll.cs" />
+    <Compile Include="Document\Multiple\BulkAll\BulkAllObservable.cs" />
+    <Compile Include="Document\Multiple\BulkAll\BulkAllRequest.cs" />
+    <Compile Include="Document\Multiple\BulkAll\BulkAllObserver.cs" />
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexDestination.cs" />
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexRouting.cs" />
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexSource.cs" />

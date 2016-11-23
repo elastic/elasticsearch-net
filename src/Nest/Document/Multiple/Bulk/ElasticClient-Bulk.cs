@@ -39,7 +39,7 @@ namespace Nest
 			// selector should not be nullable, but we can't change it for backwards compatibility reasons
 			if (selector == null)
 				throw new ArgumentNullException(nameof(selector));
-            return this.Bulk(selector.InvokeOrDefault(new BulkDescriptor()));
+			return this.Bulk(selector.InvokeOrDefault(new BulkDescriptor()));
 		}
 
 		/// <inheritdoc/>
