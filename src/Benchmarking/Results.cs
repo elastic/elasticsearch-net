@@ -15,7 +15,7 @@ namespace Benchmarking
 
 		public int IndexedDocuments { get; set; }
 
-		public IEnumerable<int> EsTimings { get; set; }
+		public IEnumerable<long> EsTimings { get; set; }
 
 		public Metrics Before { get; set; }
 

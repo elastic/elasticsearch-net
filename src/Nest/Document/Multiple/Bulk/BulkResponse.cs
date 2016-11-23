@@ -8,10 +8,17 @@ namespace Nest
 {
 	public interface IBulkResponse : IResponse
 	{
-		[Obsolete(@"Took field is an Int but the value in the response can exced the max value for Int.
-					If you use this field instead of TookAsLong the value can wrap around if it is too big.")]
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		[Obsolete(@"returned value may be larger than int. In this case, value will be int.MaxValue and TookAsLong field can be checked. Took is long in 5.0.0")]
 		int Took { get; }
+
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
 		long TookAsLong { get; }
+
 		bool Errors { get; }
 		IEnumerable<BulkResponseItemBase> Items { get; }
 		IEnumerable<BulkResponseItemBase> ItemsWithErrors { get; }
@@ -24,27 +31,23 @@ namespace Nest
 		protected override void DebugIsValid(StringBuilder sb)
 		{
 			if (this.Items == null) return;
-			sb.AppendLine($"# Invalid Bulk items:");
+			sb.AppendLine("# Invalid Bulk items:");
 			foreach(var i in Items.Select((item, i) => new { item, i}).Where(i=>!i.item.IsValid))
 				sb.AppendLine($"  operation[{i.i}]: {i.item}");
 		}
 
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
 		[JsonProperty("took")]
 		public long TookAsLong { get;  internal set;}
 
-		[Obsolete(@"Took field is an Int but the value in the response can exced the max value for Int.
-					If you use this field instead of TookAsLong the value can wrap around if it is too big.")]
-		public int Took
-		{
-			get
-			{
-				return unchecked((int)TookAsLong);
-			}
-			internal set
-			{
-				TookAsLong = value;
-			}
-		}
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		[Obsolete(@"returned value may be larger than int. In this case, value will be int.MaxValue and TookAsLong field can be checked. Took is long in 5.0.0")]
+		[JsonIgnore]
+		public int Took => TookAsLong > int.MaxValue ? int.MaxValue : (int)TookAsLong;
 
 		[JsonProperty("errors")]
 		public bool Errors { get; internal set; }
@@ -53,12 +56,7 @@ namespace Nest
 		public IEnumerable<BulkResponseItemBase> Items { get; internal set; }
 
 		[JsonIgnore]
-		public IEnumerable<BulkResponseItemBase> ItemsWithErrors
-		{
-			get
-			{
-				return !this.Items.HasAny() ? Enumerable.Empty<BulkResponseItemBase>() : this.Items.Where(i => !i.IsValid);
-			}
-		}
+		public IEnumerable<BulkResponseItemBase> ItemsWithErrors =>
+			!this.Items.HasAny() ? Enumerable.Empty<BulkResponseItemBase>() : this.Items.Where(i => !i.IsValid);
 	}
 }

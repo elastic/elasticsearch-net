@@ -64,7 +64,10 @@ namespace Tests.Search.Search
 			response.Hits.First().Should().NotBeNull();
 			response.Hits.First().Source.Should().NotBeNull();
 			response.Aggregations.Count.Should().BeGreaterThan(0);
+#pragma warning disable 618
 			response.Took.Should().BeGreaterThan(0);
+#pragma warning restore 618
+			response.TookAsLong.Should().BeGreaterThan(0);
 			var startDates = response.Aggs.Terms("startDates");
 			startDates.Should().NotBeNull();
 		}

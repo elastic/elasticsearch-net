@@ -11,10 +11,18 @@ namespace Nest
 		string Id { get; }
 		long Version { get; }
 		bool Found { get; }
-		[Obsolete(@"Took field is an Int but the value in the response can exced the max value for Int.
-					If you use this field instead of TookAsLong the value can wrap around if it is too big.")]
+
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		[Obsolete(@"returned value may be larger than int. In this case, value will be int.MaxValue and TookAsLong field can be checked. Took is long in 5.0.0")]
 		int Took { get; }
+
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
 		long TookAsLong { get; }
+
 		IDictionary<string, TermVector> TermVectors { get; }
 	}
 
@@ -36,22 +44,18 @@ namespace Nest
 		[JsonProperty("found")]
 		public bool Found { get; internal set; }
 
-		[JsonProperty(PropertyName = "took")]
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		[JsonProperty("took")]
 		public long TookAsLong { get; internal set; }
 
-		[Obsolete(@"Took field is an Int but the value in the response can exced the max value for Int.
-					If you use this field instead of TookAsLong the value can wrap around if it is too big.")]
-		public int Took
-		{
-			get
-			{
-				return unchecked((int)TookAsLong);
-			}
-			internal set
-			{
-				TookAsLong = value;
-			}
-		}
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		[Obsolete(@"returned value may be larger than int. In this case, value will be int.MaxValue and TookAsLong field can be checked. Took is long in 5.0.0")]
+		[JsonIgnore]
+		public int Took => TookAsLong > int.MaxValue ? int.MaxValue : (int)TookAsLong;
 
 		[JsonProperty("term_vectors")]
 		public IDictionary<string, TermVector> TermVectors { get; internal set; } =  new Dictionary<string, TermVector>();

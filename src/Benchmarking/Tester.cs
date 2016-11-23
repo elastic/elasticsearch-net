@@ -75,7 +75,7 @@ namespace Benchmarking
 
 		protected ConnectionSettings CreateSettings()
 		{
-			var host = Process.GetProcessesByName("fiddler").Any() 
+			var host = Process.GetProcessesByName("fiddler").Any()
 				? "ipv4.fiddler"
 				: "localhost";
 
@@ -99,7 +99,7 @@ namespace Benchmarking
 		protected class IndexResults
 		{
 			public double Elapsed { get; set; }
-			public IEnumerable<int> EsTimings { get; set; }
+			public IEnumerable<long> EsTimings { get; set; }
 		}
 
 		protected IndexResults GenerateAndIndex(int numMessages, int bufferSize)
@@ -132,7 +132,7 @@ namespace Benchmarking
 					{
 						Interlocked.Add(ref NumSent, bufferSize);
 						Console.Write("\r{2}: {0:0,0} msgs es-time: {1}      ",
-							NumSent, tt.Result.Took, this.Type);
+							NumSent, tt.Result.TookAsLong, this.Type);
 						return tt.Result;
 					})
 				).ToArray();
@@ -151,7 +151,7 @@ namespace Benchmarking
 			return new IndexResults
 			{
 				Elapsed = sw.ElapsedMilliseconds,
-				EsTimings = array.Select(a => a.Result.Took).ToList()
+				EsTimings = array.Select(a => a.Result.TookAsLong).ToList()
 			};
 		}
 
