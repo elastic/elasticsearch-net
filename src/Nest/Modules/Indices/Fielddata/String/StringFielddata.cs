@@ -3,6 +3,7 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<StringFielddata>))]
 	public interface IStringFielddata : IFielddata
 	{
 		[JsonProperty("format")]

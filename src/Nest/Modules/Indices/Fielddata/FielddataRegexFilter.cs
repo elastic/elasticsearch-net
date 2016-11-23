@@ -3,6 +3,7 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<FielddataRegexFilter>))]
 	public interface IFielddataRegexFilter
 	{
 		[JsonProperty("pattern")]
