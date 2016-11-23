@@ -33,7 +33,8 @@ namespace Tests.Document.Multiple.BulkAll
 			this._client = cluster.Client;
 		}
 
-		[I] public void ReturnsExpectedResponse()
+		[I]
+		public void ReturnsExpectedResponse()
 		{
 			var index = CreateIndexName();
 			var handle = new ManualResetEvent(false);
@@ -71,7 +72,8 @@ namespace Tests.Document.Multiple.BulkAll
 			bulkObserver.TotalNumberOfRetries.Should().Be(0);
 		}
 
-		[I] public void DisposingObservableCancelsBulkAll()
+		[I]
+		public void DisposingObservableCancelsBulkAll()
 		{
 			var index = CreateIndexName();
 			var handle = new ManualResetEvent(false);
@@ -113,7 +115,8 @@ namespace Tests.Document.Multiple.BulkAll
 			bulkObserver.TotalNumberOfRetries.Should().Be(0);
 		}
 
-		[I] public void CancelBulkAll()
+		[I]
+		public void CancelBulkAll()
 		{
 			var index = CreateIndexName();
 			var handle = new ManualResetEvent(false);
@@ -157,7 +160,8 @@ namespace Tests.Document.Multiple.BulkAll
 			bulkObserver.TotalNumberOfRetries.Should().Be(0);
 		}
 
-		[I] public async Task AwaitBulkAll()
+		[I]
+		public async Task AwaitBulkAll()
 		{
 			var index = CreateIndexName();
 			var handle = new ManualResetEvent(false);
@@ -176,11 +180,12 @@ namespace Tests.Document.Multiple.BulkAll
 				.Size(size)
 				.RefreshOnCompleted()
 				.Index(index)
+				.BufferToBulk((r, buffer) => r.IndexMany(buffer))
 			, tokenSource.Token);
 
 
 			await observableBulk
-				.ForEachAsync(x=> Interlocked.Increment(ref seenPages), tokenSource.Token);
+				.ForEachAsync(x => Interlocked.Increment(ref seenPages), tokenSource.Token);
 
 			seenPages.Should().Be(pages);
 			var count = this._client.Count<SmallObject>(f => f.Index(index));
