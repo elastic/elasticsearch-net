@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using System;
 
 namespace Nest
 {
@@ -10,7 +11,10 @@ namespace Nest
 		string Id { get; }
 		long Version { get; }
 		bool Found { get; }
+		[Obsolete(@"Took field is an Int but the value in the response can exced the max value for Int.
+					If you use this field instead of TookAsLong the value can wrap around if it is too big.")]
 		int Took { get; }
+		long TookAsLong { get; }
 		IDictionary<string, TermVector> TermVectors { get; }
 	}
 
@@ -33,7 +37,21 @@ namespace Nest
 		public bool Found { get; internal set; }
 
 		[JsonProperty(PropertyName = "took")]
-		public int Took { get; internal set; }
+		public long TookAsLong { get; internal set; }
+
+		[Obsolete(@"Took field is an Int but the value in the response can exced the max value for Int.
+					If you use this field instead of TookAsLong the value can wrap around if it is too big.")]
+		public int Took
+		{
+			get
+			{
+				return unchecked((int)TookAsLong);
+			}
+			internal set
+			{
+				TookAsLong = value;
+			}
+		}
 
 		[JsonProperty("term_vectors")]
 		public IDictionary<string, TermVector> TermVectors { get; internal set; } =  new Dictionary<string, TermVector>();

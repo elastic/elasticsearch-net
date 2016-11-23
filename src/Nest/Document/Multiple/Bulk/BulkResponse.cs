@@ -2,12 +2,16 @@
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using System;
 
 namespace Nest
 {
 	public interface IBulkResponse : IResponse
 	{
+		[Obsolete(@"Took field is an Int but the value in the response can exced the max value for Int.
+					If you use this field instead of TookAsLong the value can wrap around if it is too big.")]
 		int Took { get; }
+		long TookAsLong { get; }
 		bool Errors { get; }
 		IEnumerable<BulkResponseItemBase> Items { get; }
 		IEnumerable<BulkResponseItemBase> ItemsWithErrors { get; }
@@ -26,7 +30,21 @@ namespace Nest
 		}
 
 		[JsonProperty("took")]
-		public int Took { get; internal set; }
+		public long TookAsLong { get;  internal set;}
+
+		[Obsolete(@"Took field is an Int but the value in the response can exced the max value for Int.
+					If you use this field instead of TookAsLong the value can wrap around if it is too big.")]
+		public int Took
+		{
+			get
+			{
+				return unchecked((int)TookAsLong);
+			}
+			internal set
+			{
+				TookAsLong = value;
+			}
+		}
 
 		[JsonProperty("errors")]
 		public bool Errors { get; internal set; }
