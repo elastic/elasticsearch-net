@@ -44,6 +44,6 @@ namespace Nest
 
 		[JsonProperty("types")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndexingStats>))]
-		public Dictionary<string, IndexingStats> Types { get; set; }
+		public IReadOnlyDictionary<string, IndexingStats> Types { get; set; }
 	}
 }

@@ -62,7 +62,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 			termvectorDoc.Type.Should().NotBeNull();
 			termvectorDoc.Id.Should().NotBeNull();
 
-			termvectorDoc.TermVectors.Should().NotBeEmpty().And.Contain(kv=> kv.Key == "firstName");
+			termvectorDoc.TermVectors.Should().NotBeEmpty().And.ContainKey("firstName");
 			var vectors = termvectorDoc.TermVectors["firstName"];
 			vectors.Terms.Should().NotBeEmpty();
 			foreach (var vectorTerm in vectors.Terms)

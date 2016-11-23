@@ -72,7 +72,7 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 			var indexSettings = this.Client.GetIndexSettings(g => g.Index(CallIsolatedValue));
 
 			indexSettings.IsValid.Should().BeTrue();
-			indexSettings.Indices.Should().NotBeEmpty().And.Contain(kv=> kv.Key == CallIsolatedValue);
+			indexSettings.Indices.Should().NotBeEmpty().And.ContainKey(CallIsolatedValue);
 
 			var settings = indexSettings.Indices[CallIsolatedValue];
 

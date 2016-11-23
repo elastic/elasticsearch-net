@@ -9,6 +9,6 @@ namespace Nest
 	{
 		[JsonProperty("indices")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndexRoutingTable>))]
-		public Dictionary<string, IndexRoutingTable> Indices { get; internal set; }
+		public IReadOnlyDictionary<string, IndexRoutingTable> Indices { get; internal set; } = EmptyReadOnly<string, IndexRoutingTable>.Dictionary;
 	}
 }

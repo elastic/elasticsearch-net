@@ -40,7 +40,7 @@ namespace Tests.Cluster.ClusterState
 
 		private void Assert(IReadOnlyDictionary<string, NodeState> nodes, string master)
 		{
-			nodes.Should().NotBeEmpty().And.Contain(kv=>kv.Key == master);
+			nodes.Should().NotBeEmpty().And.ContainKey(master);
 			var node = nodes[master];
 			node.Name.Should().NotBeNullOrWhiteSpace();
 			node.TransportAddress.Should().NotBeNullOrWhiteSpace();

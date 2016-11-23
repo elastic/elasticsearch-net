@@ -82,7 +82,7 @@ namespace Elasticsearch.Net
 		public string ResourceId { get; set; }
 		public string ResourceType { get; set; }
 		public string Type { get; set; }
-		public List<RootCause> RootCause { get; set; }
+		public IReadOnlyCollection<RootCause> RootCause { get; set; }
 		public CausedBy CausedBy { get; set; }
 
 		internal static Error Create(IDictionary<string, object> dict, IJsonSerializerStrategy strategy)
@@ -99,7 +99,7 @@ namespace Elasticsearch.Net
 
 			var os = rootCause as object[];
 			if (os == null) return error;
-			error.RootCause = os.Select(o => (RootCause)strategy.DeserializeObject(o, typeof(RootCause))).ToList();
+			error.RootCause = os.Select(o => (RootCause)strategy.DeserializeObject(o, typeof(RootCause))).ToList().AsReadOnly();
 			return error;
 		}
 

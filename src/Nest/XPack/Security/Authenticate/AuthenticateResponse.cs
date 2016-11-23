@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -11,7 +9,7 @@ namespace Nest
 		string Username { get; }
 
 		[JsonProperty("roles")]
-		IEnumerable<string> Roles { get; }
+		IReadOnlyCollection<string> Roles { get; }
 
 		[JsonProperty("full_name")]
 		string FullName { get; }
@@ -28,13 +26,12 @@ namespace Nest
 	{
 		public string Username { get; internal set; }
 
-		public IEnumerable<string> Roles { get; internal set;  }
+		public IReadOnlyCollection<string> Roles { get; internal set; } = EmptyReadOnly<string>.Collection;
 
 		public string FullName { get; internal set;  }
 
 		public string Email { get; internal set;  }
 
 		public IReadOnlyDictionary<string, object> Metadata { get; internal set; } = EmptyReadOnly<string, object>.Dictionary;
-
 	}
 }

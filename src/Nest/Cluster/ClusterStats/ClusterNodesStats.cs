@@ -10,7 +10,7 @@ namespace Nest
 		public ClusterNodeCount Count { get; internal set; }
 
 		[JsonProperty("versions")]
-		public List<string> Versions { get; internal set; }
+		public IReadOnlyCollection<string> Versions { get; internal set; }
 
 		[JsonProperty("os")]
 		public ClusterOperatingSystemStats OperatingSystem { get; internal set; }
@@ -25,7 +25,7 @@ namespace Nest
 		public ClusterFileSystem FileSystem { get; internal set; }
 
 		[JsonProperty("plugins")]
-		public List<PluginStats> Plugins { get; internal set; }
+		public IReadOnlyCollection<PluginStats> Plugins { get; internal set; }
 	}
 
 	[JsonObject]
@@ -55,7 +55,7 @@ namespace Nest
 		public long MaxUptimeInMilliseconds { get; internal set; }
 
 		[JsonProperty("versions")]
-		public List<ClusterJvmVersion> Versions { get; internal set; }
+		public IReadOnlyCollection<ClusterJvmVersion> Versions { get; internal set; }
 
 		[JsonProperty("mem")]
 		public ClusterJvmMemory Memory { get; internal set; }
@@ -139,7 +139,7 @@ namespace Nest
 		public int AllocatedProcessors { get; internal set; }
 
 		[JsonProperty("names")]
-		public List<ClusterOperatingSystemName> Names { get; internal set; }
+		public IReadOnlyCollection<ClusterOperatingSystemName> Names { get; internal set; }
 	}
 
 	[JsonObject]
