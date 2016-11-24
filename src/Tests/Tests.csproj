@@ -242,6 +242,7 @@
     <Compile Include="Framework\Extensions\ShouldExtensions.cs" />
     <Compile Include="Framework\ManagedElasticsearch\FileSystem\INodeFileSystem.cs" />
     <Compile Include="Framework\MockData\GeoIp.cs" />
+    <Compile Include="Framework\SerializationTests\DictionarySerializationTests.cs" />
     <Compile Include="Framework\VirtualClustering\Audit\Auditor.cs" />
     <Compile Include="Framework\VirtualClustering\Audit\Audits.cs" />
     <Compile Include=".\Framework\Configuration\EnvironmentConfiguration.cs" />
