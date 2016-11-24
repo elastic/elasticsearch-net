@@ -18,9 +18,9 @@ namespace Nest
 		public static JsonSerializer Empty { get; } = new JsonSerializer();
 
 		/// <summary>
-		/// ConnectionSettings can be requested by JsonConverter's.
+		/// ConnectionSettings can be requested by JsonConverters.
 		/// </summary>
-		public IConnectionSettingsValues ConnectionSettings { get; private set; }
+		public IConnectionSettingsValues ConnectionSettings { get; }
 
 		/// <summary>
 		/// Signals to custom converter that it can get serialization state from one of the converters. Ugly but massive performance gain
@@ -40,21 +40,16 @@ namespace Nest
 			{
 				var contract = base.CreateContract(o);
 
-				if (typeof(IDictionary).IsAssignableFrom(o) && !typeof(IIsADictionary).IsAssignableFrom(o))
+				if ((typeof(IDictionary).IsAssignableFrom(o) || o.IsGenericDictionary()) && !typeof(IIsADictionary).IsAssignableFrom(o))
 				{
-					if (!o.IsGeneric())
-						contract.Converter = new VerbatimDictionaryKeysJsonConverter<object, object>();
+					Type[] genericArguments;
+					if (!o.TryGetGenericDictionaryArguments(out genericArguments))
+						contract.Converter = new VerbatimDictionaryKeysJsonConverter();
 					else
-					{
-						var genericArguments = o.GetGenericArguments();
-						if (genericArguments.Length != 2)
-							contract.Converter = new VerbatimDictionaryKeysJsonConverter<object, object>();
-						else
-							contract.Converter =
-								(JsonConverter)typeof(VerbatimDictionaryKeysJsonConverter<,>).CreateGenericInstance(genericArguments);
-					}
+						contract.Converter =
+							(JsonConverter)typeof(VerbatimDictionaryKeysJsonConverter<,>).CreateGenericInstance(genericArguments);
 				}
-				if (typeof(IEnumerable<QueryContainer>).IsAssignableFrom(o))
+				else if (typeof(IEnumerable<QueryContainer>).IsAssignableFrom(o))
 					contract.Converter = new QueryContainerCollectionJsonConverter();
 				else if (o == typeof(ServerError))
 					contract.Converter = new ServerErrorJsonConverter();

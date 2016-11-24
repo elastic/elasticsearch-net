@@ -13,8 +13,33 @@ namespace Nest
 #if DOTNETCORE
 			return type.GetTypeInfo().IsGenericType;
 #else
-		return type.IsGenericType;
+			return type.IsGenericType;
 #endif
+		}
+
+		internal static bool IsGenericDictionary(this Type type)
+		{
+			return type.GetInterfaces().Any(t =>
+				t.IsGeneric() && (
+				t.GetGenericTypeDefinition() == typeof(IDictionary<,>) ||
+				t.GetGenericTypeDefinition() == typeof(IReadOnlyDictionary<,>)));
+		}
+
+		internal static bool TryGetGenericDictionaryArguments(this Type type, out Type[] genericArguments)
+		{
+			var genericDictionary = type.GetInterfaces().FirstOrDefault(t =>
+				t.IsGeneric() && (
+				t.GetGenericTypeDefinition() == typeof(IDictionary<,>) ||
+				t.GetGenericTypeDefinition() == typeof(IReadOnlyDictionary<,>)));
+
+			if (genericDictionary == null)
+			{
+				genericArguments = new Type[0];
+				return false;
+			}
+
+			genericArguments = genericDictionary.GetGenericArguments();
+			return true;
 		}
 
 		internal static bool IsValue(this Type type)
