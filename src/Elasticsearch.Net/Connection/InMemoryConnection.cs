@@ -12,6 +12,10 @@ namespace Elasticsearch.Net
 		private readonly int _statusCode;
 		private readonly Exception _exception;
 
+		/// <summary>
+		/// Every request will succeed with this overload, note that it won't actually return mocked responses
+		/// so using this overload might fail if you are using it to test high level bits that need to deserialize the response.
+		/// </summary>
 		public InMemoryConnection()
 		{
 			_statusCode = 200;
