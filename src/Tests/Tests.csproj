@@ -571,6 +571,7 @@
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexOnServerApiTests.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryApiTests.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryUrlTests.cs" />
+    <Compile Include="Reproduce\ConnectionReuseAndBalancing.cs" />
     <Compile Include="Reproduce\GithubIssue2306.cs" />
     <Compile Include="Reproduce\GithubIssue2309.cs" />
     <Compile Include="Framework\Extensions\UriExtensions.cs" />
