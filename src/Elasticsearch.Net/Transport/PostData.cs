@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using Purify;
 using System.IO;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,6 +27,7 @@ namespace Elasticsearch.Net
 		private readonly IEnumerable<object> _enumerableOfObject;
 		private readonly T _serializable;
 
+		public bool? DisableDirectStreaming { get; set; }
 		public byte[] WrittenBytes { get; private set; }
 		public PostType Type { get; }
 
@@ -64,7 +63,8 @@ namespace Elasticsearch.Net
 		public void Write(Stream writableStream, IConnectionConfigurationValues settings)
 		{
 			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
-			MemoryStream ms = null; Stream stream = null;
+			MemoryStream ms = null;
+			Stream stream = null;
 			switch (Type)
 			{
 				case PostType.ByteArray:
@@ -79,7 +79,7 @@ namespace Elasticsearch.Net
 				case PostType.EnumerableOfObject:
 					if (!_enumerableOfObject.HasAny()) return;
 
-					if (settings.DisableDirectStreaming)
+					if (this.DisableDirectStreaming ?? settings.DisableDirectStreaming)
 					{
 						ms = new MemoryStream();
 						stream = ms;
@@ -93,7 +93,7 @@ namespace Elasticsearch.Net
 					break;
 				case PostType.Serializable:
 					stream = writableStream;
-					if (settings.DisableDirectStreaming)
+					if (this.DisableDirectStreaming ?? settings.DisableDirectStreaming)
 					{
 						ms = new MemoryStream();
 						stream = ms;
@@ -127,7 +127,7 @@ namespace Elasticsearch.Net
 					break;
 				case PostType.EnumerableOfObject:
 					if (!_enumerableOfObject.HasAny()) return;
-					if (settings.DisableDirectStreaming)
+					if (this.DisableDirectStreaming ?? settings.DisableDirectStreaming)
 					{
 						ms = new MemoryStream();
 						stream = ms;
@@ -141,7 +141,7 @@ namespace Elasticsearch.Net
 					break;
 				case PostType.Serializable:
 					stream = writableStream;
-					if (settings.DisableDirectStreaming)
+					if (this.DisableDirectStreaming ?? settings.DisableDirectStreaming)
 					{
 						ms = new MemoryStream();
 						stream = ms;

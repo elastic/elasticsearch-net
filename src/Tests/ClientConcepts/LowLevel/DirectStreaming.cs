@@ -1,11 +1,6 @@
-﻿using Elasticsearch.Net;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Nest;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tests.Framework;
 
 namespace Tests.ClientConcepts.LowLevel
@@ -77,6 +72,40 @@ namespace Tests.ClientConcepts.LowLevel
 			var response = client.Search<object>(s => s);
 			assert(response);
 			response = client.SearchAsync<object>(s => s).Result;
+			assert(response);
+		}
+
+		[U]
+		public void DisableDirectStreamingOnRequest()
+		{
+			Action<IResponse> assert = r =>
+			{
+				r.ApiCall.Should().NotBeNull();
+				r.ApiCall.RequestBodyInBytes.Should().NotBeNull();
+				r.ApiCall.ResponseBodyInBytes.Should().NotBeNull();
+			};
+
+			var client = TestClient.GetFixedReturnClient(new { });
+			var response = client.Search<object>(s => s.RequestConfiguration(r => r.DisableDirectStreaming()));
+			assert(response);
+			response = client.SearchAsync<object>(s => s.RequestConfiguration(r => r.DisableDirectStreaming())).Result;
+			assert(response);
+		}
+
+		[U]
+		public void EnableDirectStreamingOnRequest()
+		{
+			Action<IResponse> assert = r =>
+			{
+				r.ApiCall.Should().NotBeNull();
+				r.ApiCall.RequestBodyInBytes.Should().BeNull();
+				r.ApiCall.ResponseBodyInBytes.Should().BeNull();
+			};
+
+			var client = TestClient.GetFixedReturnClient(new { }, 200, c => c.DisableDirectStreaming());
+			var response = client.Search<object>(s => s.RequestConfiguration(r => r.DisableDirectStreaming(false)));
+			assert(response);
+			response = client.SearchAsync<object>(s => s.RequestConfiguration(r => r.DisableDirectStreaming(false))).Result;
 			assert(response);
 		}
 	}
