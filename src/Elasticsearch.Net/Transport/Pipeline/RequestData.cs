@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using Purify;
 
 namespace Elasticsearch.Net
@@ -39,6 +38,7 @@ namespace Elasticsearch.Net
 		public string ProxyUsername { get; }
 		public string ProxyPassword { get; }
 		public bool DisableAutomaticProxyDetection { get; }
+
 		public BasicAuthenticationCredentials BasicAuthorizationCredentials { get; }
 		public IEnumerable<int> AllowedStatusCodes { get; }
 		public Func<IApiCallDetails, Stream, object> CustomConverter { get; private set; }
@@ -46,9 +46,7 @@ namespace Elasticsearch.Net
 		public IMemoryStreamFactory MemoryStreamFactory { get; }
 
 		public RequestData(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IRequestParameters local, IMemoryStreamFactory memoryStreamFactory)
-#pragma warning disable CS0618 // Type or member is obsolete
-			: this(method, path, data, global, (IRequestConfiguration)local?.RequestConfiguration, memoryStreamFactory)
-#pragma warning restore CS0618 // Type or member is obsolete
+			: this(method, path, data, global, local?.RequestConfiguration, memoryStreamFactory)
 		{
 			this.CustomConverter = local?.DeserializationOverride;
 			this.Path = this.CreatePathWithQueryStrings(path, this.ConnectionSettings, local);
@@ -66,13 +64,17 @@ namespace Elasticsearch.Net
 			this.MemoryStreamFactory = memoryStreamFactory;
 			this.Method = method;
 			this.PostData = data;
+
+			if (data != null)
+				data.DisableDirectStreaming = local?.DisableDirectStreaming ?? global.DisableDirectStreaming;
+
 			this.Path = this.CreatePathWithQueryStrings(path, this.ConnectionSettings, null);
 
-			this.Pipelined = global.HttpPipeliningEnabled || (local?.EnableHttpPipelining).GetValueOrDefault(false);
+			this.Pipelined = local?.EnableHttpPipelining ?? global.HttpPipeliningEnabled;
 			this.HttpCompression = global.EnableHttpCompression;
 			this.ContentType = local?.ContentType ?? MimeType;
 			this.Accept = local?.Accept ?? MimeType;
-			this.Headers = new NameValueCollection(global.Headers ?? new NameValueCollection());
+			this.Headers = global.Headers != null ? new NameValueCollection(global.Headers) : new NameValueCollection();
 			this.RunAs = local?.RunAs;
 
 			this.RequestTimeout = local?.RequestTimeout ?? global.RequestTimeout;
