@@ -220,6 +220,7 @@
     <Compile Include="Cat\CatThreadPool\CatThreadPoolUrlTests.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Dispose\ResponseBuilderDisposeTests.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\AddressParsing.doc.cs" />
+    <Compile Include="ClientConcepts\Connection\CustomConnections.cs" />
     <Compile Include="Cluster\TaskManagement\GetTask\GetTaskApiTests.cs" />
     <Compile Include="Cluster\TaskManagement\GetTask\GetTaskUrlTests.cs" />
     <Compile Include="CodeStandards\Responses.doc.cs" />
@@ -238,9 +239,11 @@
     <Compile Include="Framework\EndpointTests\TestState\AsyncLazy.cs" />
     <Compile Include="Framework\EndpointTests\Clusters\IntrusiveOperationCluster.cs" />
     <Compile Include="Framework\EndpointTests\Clusters\WritableCluster.cs" />
+    <Compile Include="Framework\EndpointTests\TestState\ClientMethod.cs" />
     <Compile Include="Framework\Extensions\ReadOnlyDictionaryAssertions.cs" />
     <Compile Include="Framework\Extensions\ShouldExtensions.cs" />
     <Compile Include="Framework\ManagedElasticsearch\FileSystem\INodeFileSystem.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Process\ElasticsearchConsoleOut.cs" />
     <Compile Include="Framework\MockData\GeoIp.cs" />
     <Compile Include="Framework\SerializationTests\DictionarySerializationTests.cs" />
     <Compile Include="Framework\VirtualClustering\Audit\Auditor.cs" />
@@ -493,6 +496,7 @@
     <Compile Include=".\QueryDsl\Geo\Shape\MultiPoint\GeoMultiPointUsageTests.cs" />
     <Compile Include=".\QueryDsl\Geo\Shape\Point\GeoPointUsageTests.cs" />
     <Compile Include=".\QueryDsl\Geo\Shape\Polygon\GeoPolygonUsageTests.cs" />
+    <Compile Include="QueryDsl\ConditionlessWhen.cs" />
     <Compile Include="QueryDsl\Geo\Shape\GeoShapeQueryUsageTestsBase.cs" />
     <Compile Include=".\QueryDsl\Joining\HasChild\HasChildQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\Joining\HasParent\HasParentQueryUsageTests.cs" />
@@ -615,13 +619,11 @@
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryApiTests.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryUrlTests.cs" />
     <Compile Include="Framework\EndpointTests\TestState\CallUniqueValues.cs" />
-    <Compile Include="Framework\EndpointTests\TestState\ClientMethod.cs" />
-    <Compile Include="Framework\ManagedElasticsearch\Process\ElasticsearchConsoleOut.cs" />
-    <Compile Include="QueryDsl\ConditionlessWhen.cs" />
     <Compile Include="QueryDsl\Joining\ParentId\ParentIdUsageTests.cs" />
     <Compile Include="QueryDsl\MatchNoneQueryUsageTests.cs" />
     <Compile Include="QueryDsl\NotConditionlessWhen.cs" />
     <Compile Include="QueryDsl\Specialized\Percolate\PercolateQueryUsageTests.cs" />
+    <Compile Include="Reproduce\ConnectionReuseAndBalancing.cs" />
     <Compile Include="Reproduce\DateSerialization.cs" />
     <Compile Include="Reproduce\GithubIssue2152.cs" />
     <Compile Include="Reproduce\GithubIssue2306.cs" />
@@ -753,9 +755,7 @@
     <Content Include="ClientConcepts\LowLevel\pipeline.xml" />
     <Content Include="QueryDsl\BoolDsl\hadouken-indentation.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ClientConcepts\Connection\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\outputpath.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Choose>
