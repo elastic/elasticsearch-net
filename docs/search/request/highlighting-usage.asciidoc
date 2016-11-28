@@ -47,6 +47,7 @@ s => s
             .Type(HighlighterType.Fvh)
             .PreTags("<name>")
             .PostTags("</name>")
+            .BoundaryMaxScan(50)
             .HighlightQuery(q => q
                 .Match(m => m
                     .Field(p => p.LeadDeveloper.FirstName)
@@ -100,6 +101,7 @@ new SearchRequest<Project>
             { "leadDeveloper.firstName", new HighlightField
                 {
                     Type = "fvh",
+                    BoundaryMaxScan = 50,
                     PreTags = new[] { "<name>"},
                     PostTags = new[] { "</name>"},
                     HighlightQuery = new MatchQuery
@@ -154,6 +156,7 @@ new SearchRequest<Project>
       },
       "leadDeveloper.firstName": {
         "type": "fvh",
+        "boundary_max_scan": 50,
         "pre_tags": [
           "<name>"
         ],

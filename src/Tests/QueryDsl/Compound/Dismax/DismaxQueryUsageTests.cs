@@ -66,7 +66,7 @@ namespace Tests.QueryDsl.Compound.Dismax
 		[U]
 		public void NullQueryDoesNotCauseANullReferenceException()
 		{
-			System.Action query = () => this.Client.Search<Project>(s => s
+			Action query = () => this.Client.Search<Project>(s => s
 				.Query(q => q
 					.DisMax(dm => dm
 						.Queries(

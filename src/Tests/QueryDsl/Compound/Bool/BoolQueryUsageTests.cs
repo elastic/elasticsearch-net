@@ -8,6 +8,29 @@ using FluentAssertions;
 
 namespace Tests.QueryDsl.Compound.Bool
 {
+	/**
+	 * A query that matches documents matching boolean combinations of other queries.
+	 * It is built using one or more boolean clauses, each clause with a typed occurrence.
+	 *
+	 * The occurrence types are:
+	 *
+	 * `must`::
+	 * The clause (query) must appear in matching documents and will contribute to the score.
+	 *
+	 * `filter`::
+	 * The clause (query) must appear in matching documents. However unlike `must`, the score of the query will be ignored.
+	 *
+	 * `should`::
+	 * The clause (query) should appear in the matching document. In a boolean query with no `must` or `filter` clauses, one or more `should` clauses must match a document.
+	 * The minimum number of should clauses to match can be set using the `minimum_should_match` parameter.
+	 *
+	 * `must_not`::
+	 * The clause (query) must not appear in the matching documents.
+	 *
+	 * Check out the <<bool-queries,`bool` queries section>> for more details on `bool` queries with NEST.
+	 *
+	 * See the Elasticsearch documentation on {ref_current}/query-dsl-bool-query.html[bool query] for more details.
+	 */
 	public class BoolQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public BoolQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -38,7 +61,7 @@ namespace Tests.QueryDsl.Compound.Bool
 		};
 
 		protected override QueryContainer QueryInitializer =>
-			new BoolQuery()
+			new BoolQuery
 			{
 				MustNot = new QueryContainer[] { new MatchAllQuery() },
 				Should = new QueryContainer[] { new MatchAllQuery() },
@@ -57,6 +80,7 @@ namespace Tests.QueryDsl.Compound.Bool
 				.MinimumShouldMatch(1)
 				.Boost(2));
 
+		// hide
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IBoolQuery>(a => a.Bool)
 		{
 			q=> {
@@ -79,6 +103,7 @@ namespace Tests.QueryDsl.Compound.Bool
 			},
 		};
 
+		// hide
 		protected override NotConditionlessWhen NotConditionlessWhen => new NotConditionlessWhen<IBoolQuery>(a => a.Bool)
 		{
 			q => {
@@ -107,10 +132,11 @@ namespace Tests.QueryDsl.Compound.Bool
 			},
 		};
 
+		// hide
 		[U]
 		public void NullQueryDoesNotCauseANullReferenceException()
 		{
-			System.Action query = () => this.Client.Search<Project>(s => s
+			Action query = () => this.Client.Search<Project>(s => s
 					.Query(q => q
 						.Bool(b => b
 							.Filter(f => f
