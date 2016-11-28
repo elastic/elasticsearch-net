@@ -237,6 +237,7 @@
     <Compile Include=".\Framework\Integration\Bootstrappers\Seeder.cs" />
     <Compile Include=".\Framework\Integration\Clusters\ClusterBase.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Dispose\ResponseBuilderDisposeTests.cs" />
+    <Compile Include="ClientConcepts\Connection\CustomConnections.cs" />
     <Compile Include="Document\Multiple\BulkAll\BulkAllApiTests.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleApiTests.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleUrlTests.cs" />
@@ -680,9 +681,7 @@
     <Content Include="ClientConcepts\LowLevel\pipeline.xml" />
     <Content Include="QueryDsl\BoolDsl\hadouken-indentation.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ClientConcepts\Connection\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\outputpath.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Choose>
