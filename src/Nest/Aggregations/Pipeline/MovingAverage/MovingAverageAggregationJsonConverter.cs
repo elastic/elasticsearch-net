@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -34,7 +35,7 @@ namespace Nest
 			{
 				aggregation.BucketsPath = default(SingleBucketsPath);
 			}
-			
+
 #else
 			aggregation.BucketsPath = GetOrDefault<SingleBucketsPath>("buckets_path", ps);
 #endif

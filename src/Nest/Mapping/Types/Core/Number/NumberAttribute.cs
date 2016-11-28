@@ -1,4 +1,6 @@
-﻿namespace Nest
+﻿using Elasticsearch.Net;
+
+namespace Nest
 {
 	/// <summary>
 	/// Maps a property as a number type. If no type is specified,
