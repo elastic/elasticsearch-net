@@ -18,7 +18,7 @@ type Build() =
         |> Seq.iter(fun p -> 
             let path = Paths.ProjectJson p.Name
             let o = Paths.ProjectOutputFolder p DotNetFramework.NetStandard1_3
-            DotNet.Exec ["restore"; path; "--verbosity Warning"]
+            DotNet.Exec ["restore"; path]
             DotNet.Exec ["build"; path; "--configuration Release"; "-o"; o; "-f"; DotNetFramework.NetStandard1_3.Identifier.MSBuild]
         )
 

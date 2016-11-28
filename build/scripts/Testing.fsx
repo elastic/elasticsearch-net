@@ -14,11 +14,11 @@ module Tests =
         DotNetProject.All
         |> Seq.iter(fun p -> 
             let path = Paths.ProjectJson p.Name
-            DotNet.Exec ["restore"; path; "--verbosity Warning"]
+            DotNet.Exec ["restore"; path]
         )
 
         let testPath = Paths.Source "Tests/project.json"
-        DotNet.Exec ["restore"; testPath; "--verbosity Warning"]
+        DotNet.Exec ["restore"; testPath]
         DotNet.Exec ["build"; testPath; "--configuration Release"; "-f"; "netcoreapp1.0"]
         DotNet.Exec ["test"; testPath; "-parallel"; parallelization; "-xml"; Paths.Output("TestResults-Core-Clr.xml")]
 

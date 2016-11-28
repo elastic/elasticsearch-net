@@ -52,12 +52,12 @@ namespace Xunit
 
 			//If we are not running any integration tests we do not care about only keeping a single IClusterFixture
 			//active at a time, so let xunit do what it does best.
-			if (!TestClient.Configuration.RunIntegrationTests)
-			{
-				var result = await base.RunTestCollectionsAsync(messageBus, cancellationTokenSource);
-				foreach (var g in grouped) g.Key?.Dispose();
-				return result;
-			}
+			//if (!TestClient.Configuration.RunIntegrationTests)
+			//{
+			//	var result = await base.RunTestCollectionsAsync(messageBus, cancellationTokenSource);
+			//	foreach (var g in grouped) g.Key?.Dispose();
+			//	return result;
+			//}
 
 			//threading guess
 			var defaultMaxConcurrency = Environment.ProcessorCount * 4;

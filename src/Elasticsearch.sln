@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D55
 		..\build.sh = ..\build.sh
 		..\contributing.md = ..\contributing.md
 		..\build\Elasticsearch.Net.nuspec = ..\build\Elasticsearch.Net.nuspec
+		global.json = global.json
 		..\license.txt = ..\license.txt
 		..\build\NEST.nuspec = ..\build\NEST.nuspec
 		..\paket.bat = ..\paket.bat
