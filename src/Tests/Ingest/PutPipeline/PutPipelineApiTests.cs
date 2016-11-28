@@ -163,6 +163,20 @@ namespace Tests.Ingest.PutPipeline
 					{
 						field = "name"
 					}
+				},
+				new
+				{
+					dot_expander = new
+					{
+						field = "field.withDots"
+					}
+				},
+				new
+				{
+					script = new
+					{
+						inline = "ctx.numberOfCommits++"
+					}
 				}
 			}
 		};
@@ -238,6 +252,12 @@ namespace Tests.Ingest.PutPipeline
 				)
 				.Uppercase<Project>(u => u
 					.Field(p => p.Name)
+				)
+				.DotExpander<Project>(de => de
+					.Field("field.withDots")
+				)
+				.Script(s => s
+					.Inline("ctx.numberOfCommits++")
 				)
 			);
 
@@ -327,6 +347,14 @@ namespace Tests.Ingest.PutPipeline
 				new UppercaseProcessor
 				{
 					Field = "name"
+				},
+				new DotExpanderProcessor
+				{
+					Field = "field.withDots"
+				},
+				new ScriptProcessor
+				{
+					Inline = "ctx.numberOfCommits++"
 				}
 			}
 		};
