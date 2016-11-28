@@ -66,6 +66,6 @@ namespace Tests.ClientConcepts.Connection
 			}
 
 		}
-	}
 #endif
+	}
 }
