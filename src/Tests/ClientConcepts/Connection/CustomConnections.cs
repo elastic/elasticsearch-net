@@ -55,6 +55,7 @@ namespace Tests.ClientConcepts.Connection
 		 * Remember though that we reuse TCP connections so changing this to something really high should only be done with careful consideration.
 		 */
 
+#if !DOTNETCORE
 		public class MySpecialHttpConnection : HttpConnection
 		{
 			protected override void AlterServicePoint(ServicePoint requestServicePoint, RequestData requestData)
@@ -66,4 +67,5 @@ namespace Tests.ClientConcepts.Connection
 
 		}
 	}
+#endif
 }
