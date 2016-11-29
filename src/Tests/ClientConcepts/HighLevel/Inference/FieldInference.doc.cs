@@ -21,14 +21,14 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 	{
 		/**== Field Inference
 		 *
-		 * Several places in the Elasticsearch API expect the path to a field from your original source document as a string.
+		 * Several places in the Elasticsearch API expect the path to a field from your original source document, as a string value.
 		 * NEST allows you to use C# expressions to strongly type these field path strings.
 		 *
 		 * These expressions are assigned to a type called `Field` and there are several ways to create an instance of one
 		 */
 
 		/**=== Constructor
-		* Using the constructor directly is possible _but_ rather involved */
+		* Using the constructor directly is possible _but_ can get rather involved when resolving from a member access lambda expression */
 		[U]
 		public void UsingConstructors()
 		{
@@ -53,6 +53,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			*
 			* - determining `Field` equality
 			* - getting the hash code for a `Field` instance
+			*
+			* IMPORTANT: Boost values are not taken into account when determining equality.
 			*/
 			var fieldStringWithBoostTwo = new Field("name^2");
 			var fieldStringWithBoostThree = new Field("name^3");
@@ -70,28 +72,12 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			fieldStringWithBoostTwo.Should().Be(fieldStringWithBoostThree); //<1> <<field-name-with-boost,Fields can constructed with a name that contains a boost>>
 		}
 
-		/**=== Implicit Conversion
-		* As you can see from the previous examples, using the constructor is rather involved and cumbersome.
-		* Because of this, you can also implicitly convert strings and expressions to a `Field` */
-		[U]
-		public void ImplicitConversion()
-		{
-			Field fieldString = "name";
-
-			/** but for expressions this is _still_ rather involved */
-			Expression<Func<Project, object>> expression = p => p.Name;
-			Field fieldExpression = expression;
-
-			Expect("name")
-				.WhenSerializing(fieldExpression)
-				.WhenSerializing(fieldString);
-		}
-
 		/**[[field-name-with-boost]]
 		*=== Field Names with Boost
 		*
 		* When specifying a `Field` name, the name can include a boost value; NEST will split the name and boost
-		* value and set the `Boost` property
+		* value and set the `Boost` property; a boost value as part of the string takes precedence over a boost
+		* value that may also be passed as the second constructor argument
 		*/
 		[U]
 		public void NameCanSpecifyBoost()
@@ -108,6 +94,27 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			fieldStringCreate.Boost.Should().Be(2);
 		}
 
+		/**=== Implicit Conversion
+		* As well as using the constructor, you can also implicitly convert `string`, `PropertyInfo` and member access lambda expressions to a `Field`.
+		* For expressions however, this is _still_ rather involved as the expression first needs to be assigned to a variable that explicitly specifies
+		* the expression delegate type.
+		*/
+		[U]
+		public void ImplicitConversion()
+		{
+			Field fieldString = "name";
+
+			Field fieldProperty = typeof(Project).GetProperty(nameof(Project.Name));
+
+			Expression<Func<Project, object>> expression = p => p.Name;
+			Field fieldExpression = expression;
+
+			Expect("name")
+				.WhenSerializing(fieldString)
+				.WhenSerializing(fieldProperty)
+				.WhenSerializing(fieldExpression);
+		}
+
 		/**[[nest-infer]]
 		* === Using Nest.Infer
 		* To ease creating a `Field` instance from expressions, there is a static `Infer` class you can use
@@ -121,7 +128,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			var fieldExpression = Infer.Field<Project>(p => p.Name);
 
 			/** this can be even shortened even further using a https://msdn.microsoft.com/en-us/library/sf0df423.aspx#Anchor_0[static import in C# 6] i.e.
-				`using static Nest.Infer;`
+				`using static Nest.Infer;` using directive
 			*/
 			fieldExpression = Field<Project>(p => p.Name);
 			/** Now that is much terser then our first example using the constructor! */
@@ -143,7 +150,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 		/**[[camel-casing]]
 		* === Field name casing
-		* By default, NEST will camel-case **all** field names to better align with typical
+		* By default, NEST https://en.wikipedia.org/wiki/Camel_case[camelcases] **all** field names to better align with typical
 		* javascript/json conventions
 		*/
 		[U]

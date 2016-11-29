@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Nest
 {
@@ -29,20 +30,23 @@ namespace Nest
 		public static Fields Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			new Fields(fields.Select(f=>(Field)f));
 
-		public static Fields Fields<T>(params string[] fields) where T : class =>
-			new Fields(fields.Select(f=>(Field)f));
+		public static Fields Fields(params string[] fields) => new Fields(fields.Select(f=>(Field)f));
+
+		public static Fields Fields(params PropertyInfo[] properties) => new Fields(properties.Select(f=>(Field)f));
 
 		/// <summary>
 		/// Create a strongly typed string field name representation of the path to a property
-		/// <para>i.e p => p.Array.First().SubProperty.Field will return 'array.subProperty.field'</para>
+		/// <para>e.g. p => p.Array.First().SubProperty.Field will return 'array.subProperty.field'</para>
 		/// </summary>
 		/// <typeparam name="T">The type of the object</typeparam>
 		/// <param name="path">The path we want to specify</param>
 		/// <param name="boost">An optional ^boost postfix, only make sense with certain queries</param>
 		public static Field Field<T>(Expression<Func<T, object>> path, double? boost = null)
-			where T : class => new Nest.Field(path, boost);
+			where T : class => new Field(path, boost);
 
-		public static Field Field(string field, double? boost = null) => new Nest.Field(field, boost);
+		public static Field Field(string field, double? boost = null) => new Field(field, boost);
+
+		public static Field Field(PropertyInfo property, double? boost = null) => new Field(property, boost);
 
 		public static PropertyName Property(string property) => property;
 
