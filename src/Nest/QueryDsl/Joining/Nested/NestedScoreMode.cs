@@ -11,6 +11,8 @@ namespace Nest
 		Average,
 		[EnumMember(Value = "total")]
 		Total,
+		[EnumMember(Value = "min")]
+		Min,
 		[EnumMember(Value = "max")]
 		Max,
 		[EnumMember(Value = "none")]
