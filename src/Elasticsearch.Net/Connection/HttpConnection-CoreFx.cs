@@ -30,6 +30,7 @@ namespace Elasticsearch.Net
 	public class HttpConnection : IConnection
 	{
 		private readonly object _lock = new object();
+
 		private readonly ConcurrentDictionary<int, HttpClient> _clients = new ConcurrentDictionary<int, HttpClient>();
 
 		private string DefaultContentType => "application/json";
@@ -38,26 +39,27 @@ namespace Elasticsearch.Net
 
 		private HttpClient GetClient(RequestData requestData)
 		{
-			var hashCode = requestData.GetHashCode();
+			var key = GetClientKey(requestData);
 			HttpClient client;
-			if (this._clients.TryGetValue(hashCode, out client)) return client;
-			lock (_lock)
+			if (!this._clients.TryGetValue(key, out client))
 			{
-				if (this._clients.TryGetValue(hashCode, out client)) return client;
-
-				var handler = CreateHttpClientHandler(requestData);
-
-				client = new HttpClient(handler, false)
+				lock (_lock)
 				{
-					Timeout = requestData.RequestTimeout
-				};
+					client = this._clients.GetOrAdd(key, h =>
+					{
+						var handler = CreateHttpClientHandler(requestData);
+						var httpClient = new HttpClient(handler, false)
+						{
+							Timeout = requestData.RequestTimeout
+						};
 
-				client.DefaultRequestHeaders.ExpectContinue = false;
-
-				this._clients.TryAdd(hashCode, client);
-				return client;
+						httpClient.DefaultRequestHeaders.ExpectContinue = false;
+						return httpClient;
+					});
+				}
 			}
 
+			return client;
 		}
 
 		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class
@@ -192,7 +194,6 @@ namespace Elasticsearch.Net
 			}
 		}
 
-
 		private static System.Net.Http.HttpMethod ConvertHttpMethod(HttpMethod httpMethod)
 		{
 			switch (httpMethod)
@@ -204,6 +205,20 @@ namespace Elasticsearch.Net
 				case HttpMethod.HEAD: return System.Net.Http.HttpMethod.Head;
 				default:
 					throw new ArgumentException("Invalid value for HttpMethod", nameof(httpMethod));
+			}
+		}
+
+		private static int GetClientKey(RequestData requestData)
+		{
+			unchecked
+			{
+				var hashCode = requestData.RequestTimeout.GetHashCode();
+				hashCode = (hashCode * 397) ^ requestData.HttpCompression.GetHashCode();
+				hashCode = (hashCode * 397) ^ (requestData.ProxyAddress?.GetHashCode() ?? 0);
+				hashCode = (hashCode * 397) ^ (requestData.ProxyUsername?.GetHashCode() ?? 0);
+				hashCode = (hashCode * 397) ^ (requestData.ProxyPassword?.GetHashCode() ?? 0);
+				hashCode = (hashCode * 397) ^ requestData.DisableAutomaticProxyDetection.GetHashCode();
+				return hashCode;
 			}
 		}
 

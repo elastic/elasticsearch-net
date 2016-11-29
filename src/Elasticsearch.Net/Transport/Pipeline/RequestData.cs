@@ -111,55 +111,5 @@ namespace Elasticsearch.Net
 				path += "&" + queryString.Substring(1, queryString.Length - 1);
 			return path;
 		}
-
-
-		protected bool Equals(RequestData other) =>
-			RequestTimeout.Equals(other.RequestTimeout)
-			&& PingTimeout.Equals(other.PingTimeout)
-			&& KeepAliveTime == other.KeepAliveTime
-			&& KeepAliveInterval == other.KeepAliveInterval
-			&& Pipelined == other.Pipelined
-			&& HttpCompression == other.HttpCompression
-			&& Equals(Headers, other.Headers)
-			&& string.Equals(RunAs, other.RunAs)
-			&& string.Equals(ProxyAddress, other.ProxyAddress)
-			&& string.Equals(ProxyUsername, other.ProxyUsername)
-			&& string.Equals(ProxyPassword, other.ProxyPassword)
-			&& DisableAutomaticProxyDetection == other.DisableAutomaticProxyDetection
-			&& Equals(BasicAuthorizationCredentials, other.BasicAuthorizationCredentials)
-			&& Equals(ConnectionSettings, other.ConnectionSettings)
-			&& Equals(MemoryStreamFactory, other.MemoryStreamFactory);
-
-		public override bool Equals(object obj)
-		{
-			if (ReferenceEquals(null, obj)) return false;
-			if (ReferenceEquals(this, obj)) return true;
-			if (obj.GetType() != this.GetType()) return false;
-			return Equals((RequestData) obj);
-		}
-
-		public override int GetHashCode()
-		{
-			unchecked
-			{
-				var hashCode = RequestTimeout.GetHashCode();
-				hashCode = (hashCode*397) ^ PingTimeout.GetHashCode();
-				hashCode = (hashCode*397) ^ KeepAliveTime;
-				hashCode = (hashCode*397) ^ KeepAliveInterval;
-				hashCode = (hashCode*397) ^ (RunAs?.GetHashCode() ?? 0);
-				hashCode = (hashCode*397) ^ Pipelined.GetHashCode();
-				hashCode = (hashCode*397) ^ HttpCompression.GetHashCode();
-				hashCode = (hashCode*397) ^ (Headers?.GetHashCode() ?? 0);
-				hashCode = (hashCode*397) ^ (ProxyAddress?.GetHashCode() ?? 0);
-				hashCode = (hashCode*397) ^ (ProxyUsername?.GetHashCode() ?? 0);
-				hashCode = (hashCode*397) ^ (ProxyPassword?.GetHashCode() ?? 0);
-				hashCode = (hashCode*397) ^ DisableAutomaticProxyDetection.GetHashCode();
-				hashCode = (hashCode*397) ^ (BasicAuthorizationCredentials?.GetHashCode() ?? 0);
-				hashCode = (hashCode*397) ^ (ConnectionSettings?.GetHashCode() ?? 0);
-				hashCode = (hashCode*397) ^ (MemoryStreamFactory?.GetHashCode() ?? 0);
-				return hashCode;
-			}
-		}
-
 	}
 }
