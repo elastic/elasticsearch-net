@@ -29,7 +29,7 @@ namespace Tests.Search.FieldStats
 		protected override string UrlPath => "/project/_field_stats?level=indices";
 
 		protected override Func<FieldStatsDescriptor, IFieldStatsRequest> Fluent => d => d
-			.Fields(Fields<Project>("*"))
+			.Fields("*")
 			.Level(Level.Indices);
 			// TODO: These seem to never return stats...
 			//.IndexConstraints(cs => cs
@@ -47,7 +47,7 @@ namespace Tests.Search.FieldStats
 
 		protected override FieldStatsRequest Initializer => new FieldStatsRequest(typeof(Project))
 		{
-			Fields = Fields<Project>("*"),
+			Fields = Fields("*"),
 			Level = Level.Indices,
 			// TODO: These seem to never return stats...
 			//IndexConstraints = new IndexConstraints
