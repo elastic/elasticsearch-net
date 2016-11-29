@@ -7,7 +7,7 @@ namespace Nest
 	{
 		private readonly Enum _enumValue;
 
-		public string GetString(IConnectionConfigurationValues settings) => KnownEnums.Resolve(this._enumValue);
+		public string GetString(IConnectionConfigurationValues settings) => this._enumValue.GetStringValue();
 		internal Metrics(IndicesStatsMetric metric) { _enumValue = metric; }
 		internal Metrics(NodesStatsMetric metric){ _enumValue = metric; }
 		internal Metrics(NodesInfoMetric metric){ _enumValue = metric; }

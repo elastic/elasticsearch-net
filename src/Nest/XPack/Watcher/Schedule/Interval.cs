@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -25,7 +26,7 @@ namespace Nest
 
 		public SortDescriptor<T> Field(Field field, SortOrder order) => AddSort(new SortField { Field = field, Order = order });
 
-		public SortDescriptor<T> Field(Expression<Func<T, object>> field, SortOrder order) => 
+		public SortDescriptor<T> Field(Expression<Func<T, object>> field, SortOrder order) =>
 			AddSort(new SortField { Field = field, Order = order });
 
 		public SortDescriptor<T> GeoDistance(Func<SortGeoDistanceDescriptor<T>, IGeoDistanceSort> sortSelector) => AddSort(sortSelector?.Invoke(new SortGeoDistanceDescriptor<T>()));
