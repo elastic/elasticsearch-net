@@ -172,7 +172,7 @@ module Tooling =
 
     type BuildTooling(path) =
         member this.Path = path
-        member this.Exec arguments = execProcess this.Path arguments
+        member this.Exec arguments = execProcessWithTimeout this.Path arguments (TimeSpan.FromMinutes 30.)
 
     type ProfilerTooling(path) =
         let dotTraceCommandLineTools = "JetBrains.dotTrace.CommandLineTools.10.0.20151114.191633"
