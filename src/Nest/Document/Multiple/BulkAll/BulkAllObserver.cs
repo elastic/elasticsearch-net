@@ -17,7 +17,7 @@ namespace Nest
 		public BulkAllObserver(
 			Action<IBulkAllResponse> onNext = null,
 			Action<Exception> onError = null,
-			System.Action onCompleted = null
+			Action onCompleted = null
 			)
 			: base(onNext, onError, onCompleted)
 		{

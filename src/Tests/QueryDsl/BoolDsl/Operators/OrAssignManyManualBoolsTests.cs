@@ -89,7 +89,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 		private IQueryContainer OrAssignManyBoolQueries(QueryContainer q)
 		{
 			var container = new QueryContainer();
-			System.Action act = () =>
+			Action act = () =>
 			{
 				for (int i = 0; i < Iterations; i++) container |= q;
 			};

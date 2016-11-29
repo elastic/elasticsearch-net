@@ -9,7 +9,7 @@ namespace Nest
 		private readonly Action<Exception> _onError;
 		private readonly Action _completed;
 
-		protected CoordinatedRequestObserverBase(Action<T> onNext = null, Action<Exception> onError = null, System.Action completed = null)
+		protected CoordinatedRequestObserverBase(Action<T> onNext = null, Action<Exception> onError = null, Action completed = null)
 		{
 			_onNext = onNext;
 			_onError = onError;
