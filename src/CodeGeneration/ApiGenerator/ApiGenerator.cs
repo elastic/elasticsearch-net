@@ -82,9 +82,9 @@ namespace ApiGenerator
 			return endpoint;
 		}
 
-		private static string CreateMethodName(string apiEnpointKey)
+		private static string CreateMethodName(string apiEndpointKey)
 		{
-			return PascalCase(apiEnpointKey);
+			return PascalCase(apiEndpointKey);
 		}
 
 		private static void GenerateClientInterface(RestApiSpec model)

@@ -4,21 +4,21 @@
     "methods": [ "PUT", "POST" ],
     "url": {
       "path": "/_watcher/watch/{watch_id}/_ack",
-      "paths": [ "/_watcher/watch/{watch_id}/_ack", "/_watcher/watch/{watch_id}/{action_id}/_ack"],
+      "paths": [ "/_watcher/watch/{watch_id}/_ack", "/_watcher/watch/{watch_id}/{action_id}/_ack" ],
       "parts": {
         "watch_id": {
-          "type" : "string",
-          "description" : "Watch ID",
-          "required" : true
+          "type": "string",
+          "description": "Watch ID",
+          "required": true
         },
         "action_id": {
-          "type" : "list",
-          "description" : "A comma-separated list of the action ids to be acked"
+          "type": "list",
+          "description": "A comma-separated list of the action ids to be acked"
         }
       },
       "params": {
         "master_timeout": {
-          "type": "duration",
+          "type": "time",
           "description": "Specify timeout for watch write operation"
         }
       }

@@ -14,7 +14,6 @@ namespace Nest
 
 		[JsonProperty("lang")]
 		string Lang { get; set; }
-
 	}
 
 	public abstract class ScriptBase : IScript
@@ -43,10 +42,10 @@ namespace Nest
 
 	public class ScriptDescriptor : DescriptorBase<ScriptDescriptor, IDescriptor>
 	{
-		public FileScriptDescriptor File(string file) => new FileScriptDescriptor().File(file);
+		public FileScriptDescriptor File(string file) => new FileScriptDescriptor(file);
 
-		public IndexedScriptDescriptor Indexed(string id) => new IndexedScriptDescriptor().Id(id);
+		public IndexedScriptDescriptor Indexed(string id) => new IndexedScriptDescriptor(id);
 
-		public InlineScriptDescriptor Inline(string script) => new InlineScriptDescriptor().Inline(script);
+		public InlineScriptDescriptor Inline(string script) => new InlineScriptDescriptor(script);
 	}
 }

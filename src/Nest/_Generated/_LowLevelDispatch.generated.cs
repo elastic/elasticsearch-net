@@ -3494,5 +3494,329 @@ namespace Nest
 			throw InvalidDispatch("ShieldPutUser", p, new [] { PUT, POST }, "/_shield/user/{username}");
 		}
 		
+		internal ElasticsearchResponse<T> WatcherAckWatchDispatch<T>(IRequest<AcknowledgeWatchRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSet(p.RouteValues.WatchId, p.RouteValues.ActionId)) return _lowLevel.WatcherAckWatch<T>(p.RouteValues.WatchId,p.RouteValues.ActionId,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherAckWatch<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSet(p.RouteValues.WatchId, p.RouteValues.ActionId)) return _lowLevel.WatcherAckWatchPost<T>(p.RouteValues.WatchId,p.RouteValues.ActionId,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherAckWatchPost<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("WatcherAckWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_ack", "/_watcher/watch/{watch_id}/{action_id}/_ack");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> WatcherAckWatchDispatchAsync<T>(IRequest<AcknowledgeWatchRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSet(p.RouteValues.WatchId, p.RouteValues.ActionId)) return _lowLevel.WatcherAckWatchAsync<T>(p.RouteValues.WatchId,p.RouteValues.ActionId,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherAckWatchAsync<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSet(p.RouteValues.WatchId, p.RouteValues.ActionId)) return _lowLevel.WatcherAckWatchPostAsync<T>(p.RouteValues.WatchId,p.RouteValues.ActionId,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherAckWatchPostAsync<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("WatcherAckWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_ack", "/_watcher/watch/{watch_id}/{action_id}/_ack");
+		}
+		
+		internal ElasticsearchResponse<T> WatcherActivateWatchDispatch<T>(IRequest<ActivateWatchRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherActivateWatch<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherActivateWatchPost<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("WatcherActivateWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_activate");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> WatcherActivateWatchDispatchAsync<T>(IRequest<ActivateWatchRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherActivateWatchAsync<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherActivateWatchPostAsync<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("WatcherActivateWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_activate");
+		}
+		
+		internal ElasticsearchResponse<T> WatcherDeactivateWatchDispatch<T>(IRequest<DeactivateWatchRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherDeactivateWatch<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherDeactivateWatchPost<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("WatcherDeactivateWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_deactivate");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> WatcherDeactivateWatchDispatchAsync<T>(IRequest<DeactivateWatchRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherDeactivateWatchAsync<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.WatchId)) return _lowLevel.WatcherDeactivateWatchPostAsync<T>(p.RouteValues.WatchId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("WatcherDeactivateWatch", p, new [] { PUT, POST }, "/_watcher/watch/{watch_id}/_deactivate");
+		}
+		
+		internal ElasticsearchResponse<T> WatcherDeleteWatchDispatch<T>(IRequest<DeleteWatchRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.WatcherDeleteWatch<T>(p.RouteValues.Id,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("WatcherDeleteWatch", p, new [] { DELETE }, "/_watcher/watch/{id}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> WatcherDeleteWatchDispatchAsync<T>(IRequest<DeleteWatchRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.WatcherDeleteWatchAsync<T>(p.RouteValues.Id,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("WatcherDeleteWatch", p, new [] { DELETE }, "/_watcher/watch/{id}");
+		}
+		
+		internal ElasticsearchResponse<T> WatcherExecuteWatchDispatch<T>(IRequest<ExecuteWatchRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.WatcherExecuteWatch<T>(p.RouteValues.Id,body,u => p.RequestParameters);
+					return _lowLevel.WatcherExecuteWatch<T>(body,u => p.RequestParameters);
+
+				case POST:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.WatcherExecuteWatchPost<T>(p.RouteValues.Id,body,u => p.RequestParameters);
+					return _lowLevel.WatcherExecuteWatchPost<T>(body,u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("WatcherExecuteWatch", p, new [] { PUT, POST }, "/_watcher/watch/{id}/_execute", "/_watcher/watch/_execute");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> WatcherExecuteWatchDispatchAsync<T>(IRequest<ExecuteWatchRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.WatcherExecuteWatchAsync<T>(p.RouteValues.Id,body,u => p.RequestParameters);
+					return _lowLevel.WatcherExecuteWatchAsync<T>(body,u => p.RequestParameters);
+
+				case POST:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.WatcherExecuteWatchPostAsync<T>(p.RouteValues.Id,body,u => p.RequestParameters);
+					return _lowLevel.WatcherExecuteWatchPostAsync<T>(body,u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("WatcherExecuteWatch", p, new [] { PUT, POST }, "/_watcher/watch/{id}/_execute", "/_watcher/watch/_execute");
+		}
+		
+		internal ElasticsearchResponse<T> WatcherGetWatchDispatch<T>(IRequest<GetWatchRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.WatcherGetWatch<T>(p.RouteValues.Id,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("WatcherGetWatch", p, new [] { GET }, "/_watcher/watch/{id}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> WatcherGetWatchDispatchAsync<T>(IRequest<GetWatchRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.WatcherGetWatchAsync<T>(p.RouteValues.Id,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("WatcherGetWatch", p, new [] { GET }, "/_watcher/watch/{id}");
+		}
+		
+		internal ElasticsearchResponse<T> WatcherInfoDispatch<T>(IRequest<WatcherInfoRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.WatcherInfo<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("WatcherInfo", p, new [] { GET }, "/_watcher/");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> WatcherInfoDispatchAsync<T>(IRequest<WatcherInfoRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.WatcherInfoAsync<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("WatcherInfo", p, new [] { GET }, "/_watcher/");
+		}
+		
+		internal ElasticsearchResponse<T> WatcherPutWatchDispatch<T>(IRequest<PutWatchRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.WatcherPutWatch<T>(p.RouteValues.Id,body,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.WatcherPutWatchPost<T>(p.RouteValues.Id,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("WatcherPutWatch", p, new [] { PUT, POST }, "/_watcher/watch/{id}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> WatcherPutWatchDispatchAsync<T>(IRequest<PutWatchRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.WatcherPutWatchAsync<T>(p.RouteValues.Id,body,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.WatcherPutWatchPostAsync<T>(p.RouteValues.Id,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("WatcherPutWatch", p, new [] { PUT, POST }, "/_watcher/watch/{id}");
+		}
+		
+		internal ElasticsearchResponse<T> WatcherRestartDispatch<T>(IRequest<RestartWatcherRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					return _lowLevel.WatcherRestart<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("WatcherRestart", p, new [] { PUT }, "/_watcher/_restart");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> WatcherRestartDispatchAsync<T>(IRequest<RestartWatcherRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					return _lowLevel.WatcherRestartAsync<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("WatcherRestart", p, new [] { PUT }, "/_watcher/_restart");
+		}
+		
+		internal ElasticsearchResponse<T> WatcherStartDispatch<T>(IRequest<StartWatcherRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					return _lowLevel.WatcherStart<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("WatcherStart", p, new [] { PUT }, "/_watcher/_start");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> WatcherStartDispatchAsync<T>(IRequest<StartWatcherRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					return _lowLevel.WatcherStartAsync<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("WatcherStart", p, new [] { PUT }, "/_watcher/_start");
+		}
+		
+		internal ElasticsearchResponse<T> WatcherStatsDispatch<T>(IRequest<WatcherStatsRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.WatcherStatsMetric)) return _lowLevel.WatcherStats<T>(p.RouteValues.WatcherStatsMetric.Value,u => p.RequestParameters);
+					return _lowLevel.WatcherStats<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("WatcherStats", p, new [] { GET }, "/_watcher/stats", "/_watcher/stats/{watcher_stats_metric}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> WatcherStatsDispatchAsync<T>(IRequest<WatcherStatsRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.WatcherStatsMetric)) return _lowLevel.WatcherStatsAsync<T>(p.RouteValues.WatcherStatsMetric.Value,u => p.RequestParameters);
+					return _lowLevel.WatcherStatsAsync<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("WatcherStats", p, new [] { GET }, "/_watcher/stats", "/_watcher/stats/{watcher_stats_metric}");
+		}
+		
+		internal ElasticsearchResponse<T> WatcherStopDispatch<T>(IRequest<StopWatcherRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					return _lowLevel.WatcherStop<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("WatcherStop", p, new [] { PUT }, "/_watcher/_stop");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> WatcherStopDispatchAsync<T>(IRequest<StopWatcherRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					return _lowLevel.WatcherStopAsync<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("WatcherStop", p, new [] { PUT }, "/_watcher/_stop");
+		}
+		
 	}	
 }

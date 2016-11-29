@@ -8,7 +8,7 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class QueryContainerDescriptor<T> : QueryContainer where T : class
 	{
-		QueryContainerDescriptor<T> Assign(Action<IQueryContainer> assigner) => Fluent.Assign(this, assigner);
+		private QueryContainerDescriptor<T> Assign(Action<IQueryContainer> assigner) => Fluent.Assign(this, assigner);
 
 		[Obsolete("Scheduled to be removed in 5.0.0.  Setting Strict() at the container level does is a noop and must be set on each individual query.")]
 		public QueryContainerDescriptor<T> Strict(bool strict = true) => this;
@@ -49,7 +49,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="rawJson"></param>
 		/// <returns></returns>
-		public QueryContainer Raw(string rawJson) => Assign(a => a.RawQuery = new RawQueryDescriptor().Raw(rawJson));
+		public QueryContainer Raw(string rawJson) => Assign(a => a.RawQuery = new RawQueryDescriptor(rawJson));
 
 		/// <summary>
 		/// A query that uses a query parser in order to parse its content.

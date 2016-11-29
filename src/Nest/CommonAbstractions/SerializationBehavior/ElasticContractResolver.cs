@@ -159,8 +159,7 @@ namespace Nest
 			if (q == null) return false;
 			if (q.IsWritable) return true;
 			var nq = q as NoMatchQueryContainer;
-			if (nq != null && nq.Shortcut != null) return true;
-			return false;
+			return nq?.Shortcut != null;
 		}
 
 		protected static bool ShouldSerializeQueryContainers(object o, JsonProperty prop)
@@ -178,7 +177,7 @@ namespace Nest
 			else if (property.PropertyType == typeof(IEnumerable<QueryContainer>))
 				property.ShouldSerialize = o => ElasticContractResolver.ShouldSerializeQueryContainers(o, property);
 
-			// Skip serialization of empty collections that has DefaultValueHandling set to Ignore.
+			// Skip serialization of empty collections that have DefaultValueHandling set to Ignore.
 			else if (property.DefaultValueHandling.HasValue
 				&& property.DefaultValueHandling.Value == DefaultValueHandling.Ignore
 				&& !typeof(string).IsAssignableFrom(property.PropertyType)

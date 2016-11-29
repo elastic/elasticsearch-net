@@ -7,9 +7,9 @@
       "paths": [ "/_watcher/watch/{id}" ],
       "parts": {
         "id": {
-          "type" : "string",
-          "description" : "Watch ID",
-          "required" : true
+          "type": "string",
+          "description": "Watch ID",
+          "required": true
         }
       },
       "params": {

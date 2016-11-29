@@ -33,13 +33,12 @@ namespace Elasticsearch.Net
 		foreach (var method in methods)
 		{
 			var url = method.Path.Split(new[] {'/'}, 2).Last();
-			int i = -1;
 			var patchedUrl = Regex.Replace(url, @"{(\w+)}", "{$1.NotNull(\"$1\")}");
 			bool isAsync = method.ReturnType.StartsWith("Task<");
 			string requestMethod = isAsync ? "DoRequestAsync" : "DoRequest";
-		<text>///<summary>Represents a @method.HttpMethod on @method.Path 
-		///<para></para>Returns: @Raw(method.ReturnDescription) 
-	    ///<para>See also: @method.Documentation </para>	
+		<text>///<summary>Represents a @method.HttpMethod on @method.Path
+		///<para></para>Returns: @Raw(method.ReturnDescription)
+	    ///<para>See also: @method.Documentation </para>
 	    ///</summary></text>
 			foreach (var part in method.Parts)
 			{

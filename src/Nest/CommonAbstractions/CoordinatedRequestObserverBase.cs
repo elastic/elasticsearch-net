@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 namespace Nest
 {
 	public abstract class CoordinatedRequestObserverBase<T> : IObserver<T>

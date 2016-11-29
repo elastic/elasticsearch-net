@@ -9,11 +9,9 @@ namespace Nest
 {
 	internal class UnionJsonConverter : JsonConverter
 	{
-		private static ConcurrentDictionary<Type, UnionJsonConverterBase> KnownTypes = new ConcurrentDictionary<Type, UnionJsonConverterBase>();  
+		private static readonly ConcurrentDictionary<Type, UnionJsonConverterBase> KnownTypes = new ConcurrentDictionary<Type, UnionJsonConverterBase>();
 
 		public override bool CanConvert(Type objectType) => true;
-		public override bool CanRead => true;
-		public override bool CanWrite => true;
 
 		public static UnionJsonConverterBase CreateConverter(Type t)
 		{
@@ -38,16 +36,13 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object v, JsonSerializer serializer)
 		{
 			var converter = CreateConverter(v.GetType());
-			if (converter == null) return;
-			converter.WriteJson(writer, v, serializer);
+			converter?.WriteJson(writer, v, serializer);
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			
 			var converter = CreateConverter(objectType);
-			if (converter == null) return null;
-			return converter.ReadJson(reader, objectType, existingValue, serializer);
+			return converter?.ReadJson(reader, objectType, existingValue, serializer);
 		}
 	}
 
@@ -78,7 +73,7 @@ namespace Nest
 			{
 				writer.WriteNull();
 				return;
-			};
+			}
 
 			union.Match(
 				first => serializer.Serialize(writer, first),
@@ -88,14 +83,13 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			TFirst first;
-			TSecond second;
 			Union<TFirst, TSecond> u = null;
-
 			using (var r = JToken.Load(reader).CreateReader())
 			{
-				if (this.TryRead<TFirst>(r, serializer, out first)) u = first;
-				else if (this.TryRead<TSecond>(r, serializer, out second)) u = second;
+				TFirst first;
+				TSecond second;
+				if (this.TryRead(r, serializer, out first)) u = first;
+				else if (this.TryRead(r, serializer, out second)) u = second;
 			}
 			return u;
 		}

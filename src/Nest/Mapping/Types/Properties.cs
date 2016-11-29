@@ -11,7 +11,7 @@ namespace Nest
 
 	public class Properties : IsADictionaryBase<PropertyName, IProperty>, IProperties
 	{
-		public Properties() : base() { }
+		public Properties() { }
 		public Properties(IDictionary<PropertyName, IProperty> container) : base(container) { }
 		public Properties(Dictionary<PropertyName, IProperty> container)
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
@@ -22,7 +22,7 @@ namespace Nest
 
 	public class Properties<T> : IsADictionaryBase<PropertyName, IProperty>, IProperties
 	{
-		public Properties() : base() { }
+		public Properties() { }
 		public Properties(IDictionary<PropertyName, IProperty> container) : base(container) { }
 		public Properties(IProperties properties) : base(properties) { }
 		public Properties(Dictionary<PropertyName, IProperty> container)
@@ -99,8 +99,7 @@ namespace Nest
 		{
 			selector.ThrowIfNull(nameof(selector));
 			var type = selector(new TDescriptor());
-			SetProperty(type);
-			return this;
+			return SetProperty(type);
 		}
 
 		private PropertiesDescriptor<T> SetProperty(IProperty type)

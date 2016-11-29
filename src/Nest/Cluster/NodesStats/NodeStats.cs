@@ -19,7 +19,7 @@ namespace Nest
 		public string Host { get; internal set; } 
 
 		[JsonProperty("ip")]
-		public IEnumerable<string> Ip { get; internal set; } 
+		public IEnumerable<string> Ip { get; internal set; }
 
 		[JsonProperty("indices")]
 		public IndexStats Indices { get; internal set; }

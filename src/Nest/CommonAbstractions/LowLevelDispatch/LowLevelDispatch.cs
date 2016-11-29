@@ -17,7 +17,9 @@ namespace Nest
 
 		internal bool AllSetNoFallback(params string[] pathVariables) => pathVariables.All(p => !p.IsNullOrEmpty());
 
-		internal bool AllSet(params string[] pathVariables) => pathVariables.All(p => !p.IsNullOrEmpty()) && !pathVariables.All(p => p == "_all");
+		internal bool AllSet(params string[] pathVariables) => pathVariables.All(p => !p.IsNullOrEmpty()) && pathVariables.Any(p => p != "_all");
+
+		internal bool AllSet<T>(T? pathVariable) where T : struct => pathVariable.HasValue;
 
 		internal static Exception InvalidDispatch(string apiCall, IRequest provided, HttpMethod[] methods, params string[] endpoints)
 		{

@@ -32,7 +32,7 @@ namespace Nest
 	public partial class TermVectorsRequest<TDocument>
 		where TDocument : class
 	{
-		HttpMethod IRequest.HttpMethod => (this.Document != null || this.Filter != null) ? HttpMethod.POST : HttpMethod.GET;
+		Elasticsearch.Net.HttpMethod IRequest.HttpMethod => (this.Document != null || this.Filter != null) ? Elasticsearch.Net.HttpMethod.POST : Elasticsearch.Net.HttpMethod.GET;
 
 		/// <summary>
 		/// An optional document to get term vectors for instead of using an already indexed document

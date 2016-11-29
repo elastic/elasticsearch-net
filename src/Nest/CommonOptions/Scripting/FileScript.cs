@@ -22,6 +22,13 @@ namespace Nest
 	public class FileScriptDescriptor
 		: ScriptDescriptorBase<FileScriptDescriptor, IFileScript>, IFileScript
 	{
+		public FileScriptDescriptor() {}
+
+		public FileScriptDescriptor(string file)
+		{
+			Self.File = file;
+		}
+
 		string IFileScript.File { get; set; }
 
 		public FileScriptDescriptor File(string file) => Assign(a => a.File = file);

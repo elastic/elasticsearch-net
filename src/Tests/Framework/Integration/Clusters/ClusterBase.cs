@@ -16,6 +16,8 @@ namespace Tests.Framework.Integration
 
 		protected virtual bool EnableShield => false;
 
+		protected virtual bool EnableWatcher => false;
+
 		public virtual int MaxConcurrency => 0;
 
 		protected ClusterBase()
@@ -24,7 +26,10 @@ namespace Tests.Framework.Integration
 			this.Node = new ElasticsearchNode(
 				TestClient.Configuration.ElasticsearchVersion,
 				TestClient.Configuration.RunIntegrationTests,
-				DoNotSpawnIfAlreadyRunning, name, EnableShield);
+				DoNotSpawnIfAlreadyRunning, 
+				name, 
+				EnableShield, 
+				EnableWatcher);
 
 			this.Node.BootstrapWork.Subscribe(handle =>
 			{

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(IdJsonConverter))]
-	public class Id : IUrlParameter
+	public class Id : IEquatable<Id>, IUrlParameter
 	{
 		internal object Value { get; set; }
 		internal object Document { get; set; }
@@ -35,6 +35,38 @@ namespace Nest
 
 			var s = Value as string;
 			return s ?? this.Value?.ToString();
+		}
+
+		public bool Equals(Id other)
+		{
+			if (ReferenceEquals(null, other)) return false;
+			if (ReferenceEquals(this, other)) return true;
+			return Equals(Value, other.Value) && Equals(Document, other.Document);
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (ReferenceEquals(null, obj)) return false;
+			if (ReferenceEquals(this, obj)) return true;
+			return obj.GetType() == this.GetType() && Equals((Id)obj);
+		}
+
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				return ((Value?.GetHashCode() ?? 0) * 397) ^ (Document?.GetHashCode() ?? 0);
+			}
+		}
+
+		public static bool operator ==(Id left, Id right)
+		{
+			return Equals(left, right);
+		}
+
+		public static bool operator !=(Id left, Id right)
+		{
+			return !Equals(left, right);
 		}
 	}
 }

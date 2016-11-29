@@ -11,68 +11,68 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchRequest>))]
 	public partial interface ISearchRequest : ICovariantSearchRequest
 	{
-		[JsonProperty(PropertyName = "timeout")]
+		[JsonProperty("timeout")]
 		string Timeout { get; set; }
 
-		[JsonProperty(PropertyName = "from")]
+		[JsonProperty("from")]
 		int? From { get; set; }
 
-		[JsonProperty(PropertyName = "size")]
+		[JsonProperty("size")]
 		int? Size { get; set; }
 
-		[JsonProperty(PropertyName = "explain")]
+		[JsonProperty("explain")]
 		bool? Explain { get; set; }
 
-		[JsonProperty(PropertyName = "version")]
+		[JsonProperty("version")]
 		bool? Version { get; set; }
 
-		[JsonProperty(PropertyName = "track_scores")]
+		[JsonProperty("track_scores")]
 		bool? TrackScores { get; set; }
 
-		[JsonProperty(PropertyName = "profile")]
+		[JsonProperty("profile")]
 		bool? Profile { get; set; }
 
-		[JsonProperty(PropertyName = "min_score")]
+		[JsonProperty("min_score")]
 		double? MinScore { get; set; }
 
-		[JsonProperty(PropertyName = "terminate_after")]
+		[JsonProperty("terminate_after")]
 		long? TerminateAfter { get; set; }
 
-		[JsonProperty(PropertyName = "indices_boost")]
+		[JsonProperty("indices_boost")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		IDictionary<IndexName, double> IndicesBoost { get; set; }
 
-		[JsonProperty(PropertyName = "sort")]
+		[JsonProperty("sort")]
 		IList<ISort> Sort { get; set; }
 
-		[JsonProperty(PropertyName = "suggest")]
+		[JsonProperty("suggest")]
 		ISuggestContainer Suggest { get; set; }
 
-		[JsonProperty(PropertyName = "highlight")]
+		[JsonProperty("highlight")]
 		IHighlight Highlight { get; set; }
 
-		[JsonProperty(PropertyName = "rescore")]
+		[JsonProperty("rescore")]
 		IRescore Rescore { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
 		Fields Fields { get; set; }
 
-		[JsonProperty(PropertyName = "fielddata_fields")]
+		[JsonProperty("fielddata_fields")]
 		Fields FielddataFields { get; set; }
 
-		[JsonProperty(PropertyName = "script_fields")]
+		[JsonProperty("script_fields")]
 		IScriptFields ScriptFields { get; set; }
 
-		[JsonProperty(PropertyName = "_source")]
+		[JsonProperty("_source")]
 		ISourceFilter Source { get; set; }
 
-		[JsonProperty(PropertyName = "aggs")]
+		[JsonProperty("aggs")]
 		AggregationDictionary Aggregations { get; set; }
 
-		[JsonProperty(PropertyName = "query")]
+		[JsonProperty("query")]
 		QueryContainer Query { get; set; }
 
-		[JsonProperty(PropertyName = "post_filter")]
+		[JsonProperty("post_filter")]
 		QueryContainer PostFilter { get; set; }
 
 		[JsonProperty(PropertyName = "inner_hits")]
@@ -229,13 +229,12 @@ namespace Nest
 			Assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));
 
 		/// <summary>
-		/// The number of hits to return. Defaults to 10. When using scroll search type
-		/// size is actually multiplied by the number of shards!
+		/// The number of hits to return. Defaults to 10.
 		/// </summary>
 		public SearchDescriptor<T> Size(int size) => Assign(a => a.Size = size);
 
 		/// <summary>
-		/// The number of hits to return. Defaults to 10.
+		/// The number of hits to return. Alias for <see cref="Size"/>. Defaults to 10.
 		/// </summary>
 		public SearchDescriptor<T> Take(int take) => this.Size(take);
 
@@ -245,7 +244,7 @@ namespace Nest
 		public SearchDescriptor<T> From(int from) => Assign(a => a.From = from);
 
 		/// <summary>
-		/// The starting from index of the hits to return. Defaults to 0.
+		/// The starting from index of the hits to return. Alias for <see cref="From"/>. Defaults to 0.
 		/// </summary>
 		public SearchDescriptor<T> Skip(int skip) => this.From(skip);
 
@@ -401,7 +400,7 @@ namespace Nest
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
 		public SearchDescriptor<T> PostFilter(Func<QueryContainerDescriptor<T>, QueryContainer> filter) =>
-			Assign(a => a.PostFilter = filter.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(a => a.PostFilter = filter?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <summary>
 		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter.
