@@ -1,8 +1,9 @@
-
 using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 using System.Runtime.Serialization;
 
 ///This file contains all the typed enums that the client rest api spec exposes.
@@ -11,9 +12,9 @@ using System.Runtime.Serialization;
 namespace Elasticsearch.Net
 {
 	
-	public enum Refresh 
+	public enum Refresh
 	{
-		[EnumMember(Value = "true")]
+	[EnumMember(Value = "true")]
 		True,
 		[EnumMember(Value = "false")]
 		False,
@@ -21,10 +22,9 @@ namespace Elasticsearch.Net
 		WaitFor
 	}
 	
-	
-	public enum Bytes 
+	public enum Bytes
 	{
-		[EnumMember(Value = "b")]
+	[EnumMember(Value = "b")]
 		B,
 		[EnumMember(Value = "k")]
 		K,
@@ -48,10 +48,9 @@ namespace Elasticsearch.Net
 		Pb
 	}
 	
-	
-	public enum Health 
+	public enum Health
 	{
-		[EnumMember(Value = "green")]
+	[EnumMember(Value = "green")]
 		Green,
 		[EnumMember(Value = "yellow")]
 		Yellow,
@@ -59,10 +58,9 @@ namespace Elasticsearch.Net
 		Red
 	}
 	
-	
-	public enum Size 
+	public enum Size
 	{
-		[EnumMember(Value = "")]
+	[EnumMember(Value = "")]
 		Raw,
 		[EnumMember(Value = "k")]
 		K,
@@ -76,10 +74,9 @@ namespace Elasticsearch.Net
 		P
 	}
 	
-	
-	public enum Level 
+	public enum Level
 	{
-		[EnumMember(Value = "cluster")]
+	[EnumMember(Value = "cluster")]
 		Cluster,
 		[EnumMember(Value = "indices")]
 		Indices,
@@ -87,10 +84,9 @@ namespace Elasticsearch.Net
 		Shards
 	}
 	
-	
-	public enum WaitForEvents 
+	public enum WaitForEvents
 	{
-		[EnumMember(Value = "immediate")]
+	[EnumMember(Value = "immediate")]
 		Immediate,
 		[EnumMember(Value = "urgent")]
 		Urgent,
@@ -104,10 +100,9 @@ namespace Elasticsearch.Net
 		Languid
 	}
 	
-	
-	public enum WaitForStatus 
+	public enum WaitForStatus
 	{
-		[EnumMember(Value = "green")]
+	[EnumMember(Value = "green")]
 		Green,
 		[EnumMember(Value = "yellow")]
 		Yellow,
@@ -115,10 +110,9 @@ namespace Elasticsearch.Net
 		Red
 	}
 	
-	
-	public enum ExpandWildcards 
+	public enum ExpandWildcards
 	{
-		[EnumMember(Value = "open")]
+	[EnumMember(Value = "open")]
 		Open,
 		[EnumMember(Value = "closed")]
 		Closed,
@@ -128,19 +122,17 @@ namespace Elasticsearch.Net
 		All
 	}
 	
-	
-	public enum DefaultOperator 
+	public enum DefaultOperator
 	{
-		[EnumMember(Value = "AND")]
+	[EnumMember(Value = "AND")]
 		And,
 		[EnumMember(Value = "OR")]
 		Or
 	}
 	
-	
-	public enum VersionType 
+	public enum VersionType
 	{
-		[EnumMember(Value = "internal")]
+	[EnumMember(Value = "internal")]
 		Internal,
 		[EnumMember(Value = "external")]
 		External,
@@ -150,46 +142,41 @@ namespace Elasticsearch.Net
 		Force
 	}
 	
-	
-	public enum Conflicts 
+	public enum Conflicts
 	{
-		[EnumMember(Value = "abort")]
+	[EnumMember(Value = "abort")]
 		Abort,
 		[EnumMember(Value = "proceed")]
 		Proceed
 	}
 	
-	
-	public enum SearchType 
+	public enum SearchType
 	{
-		[EnumMember(Value = "query_then_fetch")]
+	[EnumMember(Value = "query_then_fetch")]
 		QueryThenFetch,
 		[EnumMember(Value = "dfs_query_then_fetch")]
 		DfsQueryThenFetch
 	}
 	
-	
-	public enum OpType 
+	public enum OpType
 	{
-		[EnumMember(Value = "index")]
+	[EnumMember(Value = "index")]
 		Index,
 		[EnumMember(Value = "create")]
 		Create
 	}
 	
-	
-	public enum Format 
+	public enum Format
 	{
-		[EnumMember(Value = "detailed")]
+	[EnumMember(Value = "detailed")]
 		Detailed,
 		[EnumMember(Value = "text")]
 		Text
 	}
 	
-	
-	public enum ThreadType 
+	public enum ThreadType
 	{
-		[EnumMember(Value = "cpu")]
+	[EnumMember(Value = "cpu")]
 		Cpu,
 		[EnumMember(Value = "wait")]
 		Wait,
@@ -197,17 +184,15 @@ namespace Elasticsearch.Net
 		Block
 	}
 	
-	
-	public enum PercolateFormat 
+	public enum PercolateFormat
 	{
-		[EnumMember(Value = "ids")]
+	[EnumMember(Value = "ids")]
 		Ids
 	}
 	
-	
-	public enum SuggestMode 
+	public enum SuggestMode
 	{
-		[EnumMember(Value = "missing")]
+	[EnumMember(Value = "missing")]
 		Missing,
 		[EnumMember(Value = "popular")]
 		Popular,
@@ -215,19 +200,17 @@ namespace Elasticsearch.Net
 		Always
 	}
 	
-	
-	public enum GroupBy 
+	public enum GroupBy
 	{
-		[EnumMember(Value = "nodes")]
+	[EnumMember(Value = "nodes")]
 		Nodes,
 		[EnumMember(Value = "parents")]
 		Parents
 	}
 	
-	
-	[Flags]public enum ClusterStateMetric 
+	[Flags]public enum ClusterStateMetric
 	{
-		[EnumMember(Value = "blocks")]
+	[EnumMember(Value = "blocks")]
 		Blocks = 1 << 0,
 		[EnumMember(Value = "metadata")]
 		Metadata = 1 << 1,
@@ -245,10 +228,9 @@ namespace Elasticsearch.Net
 		All = 1 << 7
 	}
 	
-	
-	[Flags]public enum Feature 
+	[Flags]public enum Feature
 	{
-		[EnumMember(Value = "_settings")]
+	[EnumMember(Value = "_settings")]
 		Settings = 1 << 0,
 		[EnumMember(Value = "_mappings")]
 		Mappings = 1 << 1,
@@ -256,10 +238,9 @@ namespace Elasticsearch.Net
 		Aliases = 1 << 2
 	}
 	
-	
-	[Flags]public enum IndicesStatsMetric 
+	[Flags]public enum IndicesStatsMetric
 	{
-		[EnumMember(Value = "completion")]
+	[EnumMember(Value = "completion")]
 		Completion = 1 << 0,
 		[EnumMember(Value = "docs")]
 		Docs = 1 << 1,
@@ -295,10 +276,9 @@ namespace Elasticsearch.Net
 		All = 1 << 16
 	}
 	
-	
-	[Flags]public enum NodesInfoMetric 
+	[Flags]public enum NodesInfoMetric
 	{
-		[EnumMember(Value = "settings")]
+	[EnumMember(Value = "settings")]
 		Settings = 1 << 0,
 		[EnumMember(Value = "os")]
 		Os = 1 << 1,
@@ -318,10 +298,9 @@ namespace Elasticsearch.Net
 		Ingest = 1 << 8
 	}
 	
-	
-	[Flags]public enum NodesStatsMetric 
+	[Flags]public enum NodesStatsMetric
 	{
-		[EnumMember(Value = "breaker")]
+	[EnumMember(Value = "breaker")]
 		Breaker = 1 << 0,
 		[EnumMember(Value = "fs")]
 		Fs = 1 << 1,
@@ -345,10 +324,9 @@ namespace Elasticsearch.Net
 		All = 1 << 10
 	}
 	
-	
-	[Flags]public enum NodesStatsIndexMetric 
+	[Flags]public enum NodesStatsIndexMetric
 	{
-		[EnumMember(Value = "completion")]
+	[EnumMember(Value = "completion")]
 		Completion = 1 << 0,
 		[EnumMember(Value = "docs")]
 		Docs = 1 << 1,
@@ -384,348 +362,445 @@ namespace Elasticsearch.Net
 		All = 1 << 16
 	}
 	
-	
-	[Flags]public enum WatcherStatsMetric 
+	[Flags]public enum WatcherStatsMetric
 	{
-		[EnumMember(Value = "queued_watches")]
+	[EnumMember(Value = "queued_watches")]
 		QueuedWatches = 1 << 0,
 		[EnumMember(Value = "pending_watches")]
 		PendingWatches = 1 << 1,
 		[EnumMember(Value = "_all")]
 		All = 1 << 2
 	}
-	
 
 	public static class KnownEnums
-	{
-		public static string UnknownEnum { get; } = "_UNKNOWN_ENUM_";
-		public static string Resolve(Enum e)
+    { 
+        private class EnumDictionary : Dictionary<Enum, string>
+		{	
+			public EnumDictionary(int capacity) : base(capacity) {}
+			public Func<Enum, string> Resolver { get; set; }
+		}	
+
+		
+		public static string GetStringValue(this Refresh enumValue)
 		{
-			if (e is Refresh)
-			{ 
-				switch((Refresh)e)
+		
+			switch (enumValue)
+			{
+				case Refresh.True: return "true";
+				case Refresh.False: return "false";
+				case Refresh.WaitFor: return "wait_for";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Refresh'");		
+		}
+		
+		public static string GetStringValue(this Bytes enumValue)
+		{
+		
+			switch (enumValue)
+			{
+				case Bytes.B: return "b";
+				case Bytes.K: return "k";
+				case Bytes.Kb: return "kb";
+				case Bytes.M: return "m";
+				case Bytes.Mb: return "mb";
+				case Bytes.G: return "g";
+				case Bytes.Gb: return "gb";
+				case Bytes.T: return "t";
+				case Bytes.Tb: return "tb";
+				case Bytes.P: return "p";
+				case Bytes.Pb: return "pb";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Bytes'");		
+		}
+		
+		public static string GetStringValue(this Health enumValue)
+		{
+		
+			switch (enumValue)
+			{
+				case Health.Green: return "green";
+				case Health.Yellow: return "yellow";
+				case Health.Red: return "red";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Health'");		
+		}
+		
+		public static string GetStringValue(this Size enumValue)
+		{
+		
+			switch (enumValue)
+			{
+				case Size.Raw: return "";
+				case Size.K: return "k";
+				case Size.M: return "m";
+				case Size.G: return "g";
+				case Size.T: return "t";
+				case Size.P: return "p";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Size'");		
+		}
+		
+		public static string GetStringValue(this Level enumValue)
+		{
+		
+			switch (enumValue)
+			{
+				case Level.Cluster: return "cluster";
+				case Level.Indices: return "indices";
+				case Level.Shards: return "shards";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Level'");		
+		}
+		
+		public static string GetStringValue(this WaitForEvents enumValue)
+		{
+		
+			switch (enumValue)
+			{
+				case WaitForEvents.Immediate: return "immediate";
+				case WaitForEvents.Urgent: return "urgent";
+				case WaitForEvents.High: return "high";
+				case WaitForEvents.Normal: return "normal";
+				case WaitForEvents.Low: return "low";
+				case WaitForEvents.Languid: return "languid";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'WaitForEvents'");		
+		}
+		
+		public static string GetStringValue(this WaitForStatus enumValue)
+		{
+		
+			switch (enumValue)
+			{
+				case WaitForStatus.Green: return "green";
+				case WaitForStatus.Yellow: return "yellow";
+				case WaitForStatus.Red: return "red";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'WaitForStatus'");		
+		}
+		
+		public static string GetStringValue(this ExpandWildcards enumValue)
+		{
+		
+			switch (enumValue)
+			{
+				case ExpandWildcards.Open: return "open";
+				case ExpandWildcards.Closed: return "closed";
+				case ExpandWildcards.None: return "none";
+				case ExpandWildcards.All: return "all";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'ExpandWildcards'");		
+		}
+		
+		public static string GetStringValue(this DefaultOperator enumValue)
+		{
+		
+			switch (enumValue)
+			{
+				case DefaultOperator.And: return "AND";
+				case DefaultOperator.Or: return "OR";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'DefaultOperator'");		
+		}
+		
+		public static string GetStringValue(this VersionType enumValue)
+		{
+		
+			switch (enumValue)
+			{
+				case VersionType.Internal: return "internal";
+				case VersionType.External: return "external";
+				case VersionType.ExternalGte: return "external_gte";
+				case VersionType.Force: return "force";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'VersionType'");		
+		}
+		
+		public static string GetStringValue(this Conflicts enumValue)
+		{
+		
+			switch (enumValue)
+			{
+				case Conflicts.Abort: return "abort";
+				case Conflicts.Proceed: return "proceed";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Conflicts'");		
+		}
+		
+		public static string GetStringValue(this SearchType enumValue)
+		{
+		
+			switch (enumValue)
+			{
+				case SearchType.QueryThenFetch: return "query_then_fetch";
+				case SearchType.DfsQueryThenFetch: return "dfs_query_then_fetch";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'SearchType'");		
+		}
+		
+		public static string GetStringValue(this OpType enumValue)
+		{
+		
+			switch (enumValue)
+			{
+				case OpType.Index: return "index";
+				case OpType.Create: return "create";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'OpType'");		
+		}
+		
+		public static string GetStringValue(this Format enumValue)
+		{
+		
+			switch (enumValue)
+			{
+				case Format.Detailed: return "detailed";
+				case Format.Text: return "text";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Format'");		
+		}
+		
+		public static string GetStringValue(this ThreadType enumValue)
+		{
+		
+			switch (enumValue)
+			{
+				case ThreadType.Cpu: return "cpu";
+				case ThreadType.Wait: return "wait";
+				case ThreadType.Block: return "block";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'ThreadType'");		
+		}
+		
+		public static string GetStringValue(this PercolateFormat enumValue)
+		{
+		
+			switch (enumValue)
+			{
+				case PercolateFormat.Ids: return "ids";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'PercolateFormat'");		
+		}
+		
+		public static string GetStringValue(this SuggestMode enumValue)
+		{
+		
+			switch (enumValue)
+			{
+				case SuggestMode.Missing: return "missing";
+				case SuggestMode.Popular: return "popular";
+				case SuggestMode.Always: return "always";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'SuggestMode'");		
+		}
+		
+		public static string GetStringValue(this GroupBy enumValue)
+		{
+		
+			switch (enumValue)
+			{
+				case GroupBy.Nodes: return "nodes";
+				case GroupBy.Parents: return "parents";
+			}
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'GroupBy'");		
+		}
+		
+		public static string GetStringValue(this ClusterStateMetric enumValue)
+		{
+		
+	        if ((enumValue & ClusterStateMetric.All) != 0) return "_all";
+			var list = new List<string>();
+			if ((enumValue & ClusterStateMetric.Blocks) != 0) list.Add("blocks");
+			if ((enumValue & ClusterStateMetric.Metadata) != 0) list.Add("metadata");
+			if ((enumValue & ClusterStateMetric.Nodes) != 0) list.Add("nodes");
+			if ((enumValue & ClusterStateMetric.RoutingTable) != 0) list.Add("routing_table");
+			if ((enumValue & ClusterStateMetric.RoutingNodes) != 0) list.Add("routing_nodes");
+			if ((enumValue & ClusterStateMetric.MasterNode) != 0) list.Add("master_node");
+			if ((enumValue & ClusterStateMetric.Version) != 0) list.Add("version");
+			return string.Join(",", list);
+		}
+		
+		public static string GetStringValue(this Feature enumValue)
+		{
+		
+			var list = new List<string>();
+			if ((enumValue & Feature.Settings) != 0) list.Add("_settings");
+			if ((enumValue & Feature.Mappings) != 0) list.Add("_mappings");
+			if ((enumValue & Feature.Aliases) != 0) list.Add("_aliases");
+			return string.Join(",", list);
+		}
+		
+		public static string GetStringValue(this IndicesStatsMetric enumValue)
+		{
+		
+	        if ((enumValue & IndicesStatsMetric.All) != 0) return "_all";
+			var list = new List<string>();
+			if ((enumValue & IndicesStatsMetric.Completion) != 0) list.Add("completion");
+			if ((enumValue & IndicesStatsMetric.Docs) != 0) list.Add("docs");
+			if ((enumValue & IndicesStatsMetric.Fielddata) != 0) list.Add("fielddata");
+			if ((enumValue & IndicesStatsMetric.QueryCache) != 0) list.Add("query_cache");
+			if ((enumValue & IndicesStatsMetric.Flush) != 0) list.Add("flush");
+			if ((enumValue & IndicesStatsMetric.Get) != 0) list.Add("get");
+			if ((enumValue & IndicesStatsMetric.Indexing) != 0) list.Add("indexing");
+			if ((enumValue & IndicesStatsMetric.Merge) != 0) list.Add("merge");
+			if ((enumValue & IndicesStatsMetric.Percolate) != 0) list.Add("percolate");
+			if ((enumValue & IndicesStatsMetric.RequestCache) != 0) list.Add("request_cache");
+			if ((enumValue & IndicesStatsMetric.Refresh) != 0) list.Add("refresh");
+			if ((enumValue & IndicesStatsMetric.Search) != 0) list.Add("search");
+			if ((enumValue & IndicesStatsMetric.Segments) != 0) list.Add("segments");
+			if ((enumValue & IndicesStatsMetric.Store) != 0) list.Add("store");
+			if ((enumValue & IndicesStatsMetric.Warmer) != 0) list.Add("warmer");
+			if ((enumValue & IndicesStatsMetric.Suggest) != 0) list.Add("suggest");
+			return string.Join(",", list);
+		}
+		
+		public static string GetStringValue(this NodesInfoMetric enumValue)
+		{
+		
+			var list = new List<string>();
+			if ((enumValue & NodesInfoMetric.Settings) != 0) list.Add("settings");
+			if ((enumValue & NodesInfoMetric.Os) != 0) list.Add("os");
+			if ((enumValue & NodesInfoMetric.Process) != 0) list.Add("process");
+			if ((enumValue & NodesInfoMetric.Jvm) != 0) list.Add("jvm");
+			if ((enumValue & NodesInfoMetric.ThreadPool) != 0) list.Add("thread_pool");
+			if ((enumValue & NodesInfoMetric.Transport) != 0) list.Add("transport");
+			if ((enumValue & NodesInfoMetric.Http) != 0) list.Add("http");
+			if ((enumValue & NodesInfoMetric.Plugins) != 0) list.Add("plugins");
+			if ((enumValue & NodesInfoMetric.Ingest) != 0) list.Add("ingest");
+			return string.Join(",", list);
+		}
+		
+		public static string GetStringValue(this NodesStatsMetric enumValue)
+		{
+		
+	        if ((enumValue & NodesStatsMetric.All) != 0) return "_all";
+			var list = new List<string>();
+			if ((enumValue & NodesStatsMetric.Breaker) != 0) list.Add("breaker");
+			if ((enumValue & NodesStatsMetric.Fs) != 0) list.Add("fs");
+			if ((enumValue & NodesStatsMetric.Http) != 0) list.Add("http");
+			if ((enumValue & NodesStatsMetric.Indices) != 0) list.Add("indices");
+			if ((enumValue & NodesStatsMetric.Jvm) != 0) list.Add("jvm");
+			if ((enumValue & NodesStatsMetric.Os) != 0) list.Add("os");
+			if ((enumValue & NodesStatsMetric.Process) != 0) list.Add("process");
+			if ((enumValue & NodesStatsMetric.ThreadPool) != 0) list.Add("thread_pool");
+			if ((enumValue & NodesStatsMetric.Transport) != 0) list.Add("transport");
+			if ((enumValue & NodesStatsMetric.Discovery) != 0) list.Add("discovery");
+			return string.Join(",", list);
+		}
+		
+		public static string GetStringValue(this NodesStatsIndexMetric enumValue)
+		{
+		
+	        if ((enumValue & NodesStatsIndexMetric.All) != 0) return "_all";
+			var list = new List<string>();
+			if ((enumValue & NodesStatsIndexMetric.Completion) != 0) list.Add("completion");
+			if ((enumValue & NodesStatsIndexMetric.Docs) != 0) list.Add("docs");
+			if ((enumValue & NodesStatsIndexMetric.Fielddata) != 0) list.Add("fielddata");
+			if ((enumValue & NodesStatsIndexMetric.QueryCache) != 0) list.Add("query_cache");
+			if ((enumValue & NodesStatsIndexMetric.Flush) != 0) list.Add("flush");
+			if ((enumValue & NodesStatsIndexMetric.Get) != 0) list.Add("get");
+			if ((enumValue & NodesStatsIndexMetric.Indexing) != 0) list.Add("indexing");
+			if ((enumValue & NodesStatsIndexMetric.Merge) != 0) list.Add("merge");
+			if ((enumValue & NodesStatsIndexMetric.Percolate) != 0) list.Add("percolate");
+			if ((enumValue & NodesStatsIndexMetric.RequestCache) != 0) list.Add("request_cache");
+			if ((enumValue & NodesStatsIndexMetric.Refresh) != 0) list.Add("refresh");
+			if ((enumValue & NodesStatsIndexMetric.Search) != 0) list.Add("search");
+			if ((enumValue & NodesStatsIndexMetric.Segments) != 0) list.Add("segments");
+			if ((enumValue & NodesStatsIndexMetric.Store) != 0) list.Add("store");
+			if ((enumValue & NodesStatsIndexMetric.Warmer) != 0) list.Add("warmer");
+			if ((enumValue & NodesStatsIndexMetric.Suggest) != 0) list.Add("suggest");
+			return string.Join(",", list);
+		}
+		
+		public static string GetStringValue(this WatcherStatsMetric enumValue)
+		{
+		
+	        if ((enumValue & WatcherStatsMetric.All) != 0) return "_all";
+			var list = new List<string>();
+			if ((enumValue & WatcherStatsMetric.QueuedWatches) != 0) list.Add("queued_watches");
+			if ((enumValue & WatcherStatsMetric.PendingWatches) != 0) list.Add("pending_watches");
+			return string.Join(",", list);
+		}
+
+		private static readonly ConcurrentDictionary<Type, Func<Enum, string>> EnumStringResolvers =
+			new ConcurrentDictionary<Type, Func<Enum, string>>();
+
+		static KnownEnums()
+		{
+			EnumStringResolvers.TryAdd(typeof(Refresh), (e) => GetStringValue((Refresh)e));
+			EnumStringResolvers.TryAdd(typeof(Bytes), (e) => GetStringValue((Bytes)e));
+			EnumStringResolvers.TryAdd(typeof(Health), (e) => GetStringValue((Health)e));
+			EnumStringResolvers.TryAdd(typeof(Size), (e) => GetStringValue((Size)e));
+			EnumStringResolvers.TryAdd(typeof(Level), (e) => GetStringValue((Level)e));
+			EnumStringResolvers.TryAdd(typeof(WaitForEvents), (e) => GetStringValue((WaitForEvents)e));
+			EnumStringResolvers.TryAdd(typeof(WaitForStatus), (e) => GetStringValue((WaitForStatus)e));
+			EnumStringResolvers.TryAdd(typeof(ExpandWildcards), (e) => GetStringValue((ExpandWildcards)e));
+			EnumStringResolvers.TryAdd(typeof(DefaultOperator), (e) => GetStringValue((DefaultOperator)e));
+			EnumStringResolvers.TryAdd(typeof(VersionType), (e) => GetStringValue((VersionType)e));
+			EnumStringResolvers.TryAdd(typeof(Conflicts), (e) => GetStringValue((Conflicts)e));
+			EnumStringResolvers.TryAdd(typeof(SearchType), (e) => GetStringValue((SearchType)e));
+			EnumStringResolvers.TryAdd(typeof(OpType), (e) => GetStringValue((OpType)e));
+			EnumStringResolvers.TryAdd(typeof(Format), (e) => GetStringValue((Format)e));
+			EnumStringResolvers.TryAdd(typeof(ThreadType), (e) => GetStringValue((ThreadType)e));
+			EnumStringResolvers.TryAdd(typeof(PercolateFormat), (e) => GetStringValue((PercolateFormat)e));
+			EnumStringResolvers.TryAdd(typeof(SuggestMode), (e) => GetStringValue((SuggestMode)e));
+			EnumStringResolvers.TryAdd(typeof(GroupBy), (e) => GetStringValue((GroupBy)e));
+			EnumStringResolvers.TryAdd(typeof(ClusterStateMetric), (e) => GetStringValue((ClusterStateMetric)e));
+			EnumStringResolvers.TryAdd(typeof(Feature), (e) => GetStringValue((Feature)e));
+			EnumStringResolvers.TryAdd(typeof(IndicesStatsMetric), (e) => GetStringValue((IndicesStatsMetric)e));
+			EnumStringResolvers.TryAdd(typeof(NodesInfoMetric), (e) => GetStringValue((NodesInfoMetric)e));
+			EnumStringResolvers.TryAdd(typeof(NodesStatsMetric), (e) => GetStringValue((NodesStatsMetric)e));
+			EnumStringResolvers.TryAdd(typeof(NodesStatsIndexMetric), (e) => GetStringValue((NodesStatsIndexMetric)e));
+			EnumStringResolvers.TryAdd(typeof(WatcherStatsMetric), (e) => GetStringValue((WatcherStatsMetric)e));
+		}
+
+		public static string GetStringValue(this Enum e)
+		{
+			var type = e.GetType();		
+			var resolver = EnumStringResolvers.GetOrAdd(type, GetEnumStringResolver);
+			return resolver(e);
+		}
+
+		private static Func<Enum, string> GetEnumStringResolver(Type type)
+		{
+			var values = Enum.GetValues(type);
+			var dictionary = new EnumDictionary(values.Length);
+
+			for (int index = 0; index < values.Length; index++)
+			{
+				var value = values.GetValue(index);
+#if DOTNETCORE
+				var info = type.GetTypeInfo().GetDeclaredField(value.ToString());
+#else
+				var info = type.GetField(value.ToString());
+#endif
+				var da = (EnumMemberAttribute[])info.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+				var stringValue = da.Length > 0 ? da[0].Value : Enum.GetName(type, value);
+				dictionary.Add((Enum)value, stringValue);
+			}
+
+#if DOTNETCORE
+			var isFlag = type.GetTypeInfo().GetCustomAttributes(typeof(FlagsAttribute), false).Any();
+#else
+			var isFlag = type.GetCustomAttributes(typeof(FlagsAttribute), false).Length > 0;
+#endif
+
+			return (e) => 
+			{
+				if (isFlag)
 				{
-					case Refresh.True: return "true";
-					case Refresh.False: return "false";
-					case Refresh.WaitFor: return "wait_for";
+					var list = new List<string>();
+					foreach(var kv in dictionary)
+					{
+						if (e.HasFlag(kv.Key)) list.Add(kv.Value);
+					}
+					return string.Join(",", list);
 				}
-			
-			}
-			
-			if (e is Bytes)
-			{ 
-				switch((Bytes)e)
+				else
 				{
-					case Bytes.B: return "b";
-					case Bytes.K: return "k";
-					case Bytes.Kb: return "kb";
-					case Bytes.M: return "m";
-					case Bytes.Mb: return "mb";
-					case Bytes.G: return "g";
-					case Bytes.Gb: return "gb";
-					case Bytes.T: return "t";
-					case Bytes.Tb: return "tb";
-					case Bytes.P: return "p";
-					case Bytes.Pb: return "pb";
+					return dictionary[e];
 				}
-			
-			}
-			
-			if (e is Health)
-			{ 
-				switch((Health)e)
-				{
-					case Health.Green: return "green";
-					case Health.Yellow: return "yellow";
-					case Health.Red: return "red";
-				}
-			
-			}
-			
-			if (e is Size)
-			{ 
-				switch((Size)e)
-				{
-					case Size.Raw: return "";
-					case Size.K: return "k";
-					case Size.M: return "m";
-					case Size.G: return "g";
-					case Size.T: return "t";
-					case Size.P: return "p";
-				}
-			
-			}
-			
-			if (e is Level)
-			{ 
-				switch((Level)e)
-				{
-					case Level.Cluster: return "cluster";
-					case Level.Indices: return "indices";
-					case Level.Shards: return "shards";
-				}
-			
-			}
-			
-			if (e is WaitForEvents)
-			{ 
-				switch((WaitForEvents)e)
-				{
-					case WaitForEvents.Immediate: return "immediate";
-					case WaitForEvents.Urgent: return "urgent";
-					case WaitForEvents.High: return "high";
-					case WaitForEvents.Normal: return "normal";
-					case WaitForEvents.Low: return "low";
-					case WaitForEvents.Languid: return "languid";
-				}
-			
-			}
-			
-			if (e is WaitForStatus)
-			{ 
-				switch((WaitForStatus)e)
-				{
-					case WaitForStatus.Green: return "green";
-					case WaitForStatus.Yellow: return "yellow";
-					case WaitForStatus.Red: return "red";
-				}
-			
-			}
-			
-			if (e is ExpandWildcards)
-			{ 
-				switch((ExpandWildcards)e)
-				{
-					case ExpandWildcards.Open: return "open";
-					case ExpandWildcards.Closed: return "closed";
-					case ExpandWildcards.None: return "none";
-					case ExpandWildcards.All: return "all";
-				}
-			
-			}
-			
-			if (e is DefaultOperator)
-			{ 
-				switch((DefaultOperator)e)
-				{
-					case DefaultOperator.And: return "AND";
-					case DefaultOperator.Or: return "OR";
-				}
-			
-			}
-			
-			if (e is VersionType)
-			{ 
-				switch((VersionType)e)
-				{
-					case VersionType.Internal: return "internal";
-					case VersionType.External: return "external";
-					case VersionType.ExternalGte: return "external_gte";
-					case VersionType.Force: return "force";
-				}
-			
-			}
-			
-			if (e is Conflicts)
-			{ 
-				switch((Conflicts)e)
-				{
-					case Conflicts.Abort: return "abort";
-					case Conflicts.Proceed: return "proceed";
-				}
-			
-			}
-			
-			if (e is SearchType)
-			{ 
-				switch((SearchType)e)
-				{
-					case SearchType.QueryThenFetch: return "query_then_fetch";
-					case SearchType.DfsQueryThenFetch: return "dfs_query_then_fetch";
-				}
-			
-			}
-			
-			if (e is OpType)
-			{ 
-				switch((OpType)e)
-				{
-					case OpType.Index: return "index";
-					case OpType.Create: return "create";
-				}
-			
-			}
-			
-			if (e is Format)
-			{ 
-				switch((Format)e)
-				{
-					case Format.Detailed: return "detailed";
-					case Format.Text: return "text";
-				}
-			
-			}
-			
-			if (e is ThreadType)
-			{ 
-				switch((ThreadType)e)
-				{
-					case ThreadType.Cpu: return "cpu";
-					case ThreadType.Wait: return "wait";
-					case ThreadType.Block: return "block";
-				}
-			
-			}
-			
-			if (e is PercolateFormat)
-			{ 
-				switch((PercolateFormat)e)
-				{
-					case PercolateFormat.Ids: return "ids";
-				}
-			
-			}
-			
-			if (e is SuggestMode)
-			{ 
-				switch((SuggestMode)e)
-				{
-					case SuggestMode.Missing: return "missing";
-					case SuggestMode.Popular: return "popular";
-					case SuggestMode.Always: return "always";
-				}
-			
-			}
-			
-			if (e is GroupBy)
-			{ 
-				switch((GroupBy)e)
-				{
-					case GroupBy.Nodes: return "nodes";
-					case GroupBy.Parents: return "parents";
-				}
-			
-			}
-			
-			if (e is ClusterStateMetric)
-			{ 
-				var list = new List<string>();
-				if (e.HasFlag(ClusterStateMetric.Blocks)) list.Add("blocks");
-				if (e.HasFlag(ClusterStateMetric.Metadata)) list.Add("metadata");
-				if (e.HasFlag(ClusterStateMetric.Nodes)) list.Add("nodes");
-				if (e.HasFlag(ClusterStateMetric.RoutingTable)) list.Add("routing_table");
-				if (e.HasFlag(ClusterStateMetric.RoutingNodes)) list.Add("routing_nodes");
-				if (e.HasFlag(ClusterStateMetric.MasterNode)) list.Add("master_node");
-				if (e.HasFlag(ClusterStateMetric.Version)) list.Add("version");
-				if (e.HasFlag(ClusterStateMetric.All)) return "_all";
-				return string.Join(",", list);
-			
-			}
-			
-			if (e is Feature)
-			{ 
-				var list = new List<string>();
-				if (e.HasFlag(Feature.Settings)) list.Add("_settings");
-				if (e.HasFlag(Feature.Mappings)) list.Add("_mappings");
-				if (e.HasFlag(Feature.Aliases)) list.Add("_aliases");
-				return string.Join(",", list);
-			
-			}
-			
-			if (e is IndicesStatsMetric)
-			{ 
-				var list = new List<string>();
-				if (e.HasFlag(IndicesStatsMetric.Completion)) list.Add("completion");
-				if (e.HasFlag(IndicesStatsMetric.Docs)) list.Add("docs");
-				if (e.HasFlag(IndicesStatsMetric.Fielddata)) list.Add("fielddata");
-				if (e.HasFlag(IndicesStatsMetric.QueryCache)) list.Add("query_cache");
-				if (e.HasFlag(IndicesStatsMetric.Flush)) list.Add("flush");
-				if (e.HasFlag(IndicesStatsMetric.Get)) list.Add("get");
-				if (e.HasFlag(IndicesStatsMetric.Indexing)) list.Add("indexing");
-				if (e.HasFlag(IndicesStatsMetric.Merge)) list.Add("merge");
-				if (e.HasFlag(IndicesStatsMetric.Percolate)) list.Add("percolate");
-				if (e.HasFlag(IndicesStatsMetric.RequestCache)) list.Add("request_cache");
-				if (e.HasFlag(IndicesStatsMetric.Refresh)) list.Add("refresh");
-				if (e.HasFlag(IndicesStatsMetric.Search)) list.Add("search");
-				if (e.HasFlag(IndicesStatsMetric.Segments)) list.Add("segments");
-				if (e.HasFlag(IndicesStatsMetric.Store)) list.Add("store");
-				if (e.HasFlag(IndicesStatsMetric.Warmer)) list.Add("warmer");
-				if (e.HasFlag(IndicesStatsMetric.Suggest)) list.Add("suggest");
-				if (e.HasFlag(IndicesStatsMetric.All)) return "_all";
-				return string.Join(",", list);
-			
-			}
-			
-			if (e is NodesInfoMetric)
-			{ 
-				var list = new List<string>();
-				if (e.HasFlag(NodesInfoMetric.Settings)) list.Add("settings");
-				if (e.HasFlag(NodesInfoMetric.Os)) list.Add("os");
-				if (e.HasFlag(NodesInfoMetric.Process)) list.Add("process");
-				if (e.HasFlag(NodesInfoMetric.Jvm)) list.Add("jvm");
-				if (e.HasFlag(NodesInfoMetric.ThreadPool)) list.Add("thread_pool");
-				if (e.HasFlag(NodesInfoMetric.Transport)) list.Add("transport");
-				if (e.HasFlag(NodesInfoMetric.Http)) list.Add("http");
-				if (e.HasFlag(NodesInfoMetric.Plugins)) list.Add("plugins");
-				if (e.HasFlag(NodesInfoMetric.Ingest)) list.Add("ingest");
-				return string.Join(",", list);
-			
-			}
-			
-			if (e is NodesStatsMetric)
-			{ 
-				var list = new List<string>();
-				if (e.HasFlag(NodesStatsMetric.Breaker)) list.Add("breaker");
-				if (e.HasFlag(NodesStatsMetric.Fs)) list.Add("fs");
-				if (e.HasFlag(NodesStatsMetric.Http)) list.Add("http");
-				if (e.HasFlag(NodesStatsMetric.Indices)) list.Add("indices");
-				if (e.HasFlag(NodesStatsMetric.Jvm)) list.Add("jvm");
-				if (e.HasFlag(NodesStatsMetric.Os)) list.Add("os");
-				if (e.HasFlag(NodesStatsMetric.Process)) list.Add("process");
-				if (e.HasFlag(NodesStatsMetric.ThreadPool)) list.Add("thread_pool");
-				if (e.HasFlag(NodesStatsMetric.Transport)) list.Add("transport");
-				if (e.HasFlag(NodesStatsMetric.Discovery)) list.Add("discovery");
-				if (e.HasFlag(NodesStatsMetric.All)) return "_all";
-				return string.Join(",", list);
-			
-			}
-			
-			if (e is NodesStatsIndexMetric)
-			{ 
-				var list = new List<string>();
-				if (e.HasFlag(NodesStatsIndexMetric.Completion)) list.Add("completion");
-				if (e.HasFlag(NodesStatsIndexMetric.Docs)) list.Add("docs");
-				if (e.HasFlag(NodesStatsIndexMetric.Fielddata)) list.Add("fielddata");
-				if (e.HasFlag(NodesStatsIndexMetric.QueryCache)) list.Add("query_cache");
-				if (e.HasFlag(NodesStatsIndexMetric.Flush)) list.Add("flush");
-				if (e.HasFlag(NodesStatsIndexMetric.Get)) list.Add("get");
-				if (e.HasFlag(NodesStatsIndexMetric.Indexing)) list.Add("indexing");
-				if (e.HasFlag(NodesStatsIndexMetric.Merge)) list.Add("merge");
-				if (e.HasFlag(NodesStatsIndexMetric.Percolate)) list.Add("percolate");
-				if (e.HasFlag(NodesStatsIndexMetric.RequestCache)) list.Add("request_cache");
-				if (e.HasFlag(NodesStatsIndexMetric.Refresh)) list.Add("refresh");
-				if (e.HasFlag(NodesStatsIndexMetric.Search)) list.Add("search");
-				if (e.HasFlag(NodesStatsIndexMetric.Segments)) list.Add("segments");
-				if (e.HasFlag(NodesStatsIndexMetric.Store)) list.Add("store");
-				if (e.HasFlag(NodesStatsIndexMetric.Warmer)) list.Add("warmer");
-				if (e.HasFlag(NodesStatsIndexMetric.Suggest)) list.Add("suggest");
-				if (e.HasFlag(NodesStatsIndexMetric.All)) return "_all";
-				return string.Join(",", list);
-			
-			}
-			
-			if (e is WatcherStatsMetric)
-			{ 
-				var list = new List<string>();
-				if (e.HasFlag(WatcherStatsMetric.QueuedWatches)) list.Add("queued_watches");
-				if (e.HasFlag(WatcherStatsMetric.PendingWatches)) list.Add("pending_watches");
-				if (e.HasFlag(WatcherStatsMetric.All)) return "_all";
-				return string.Join(",", list);
-			
-			}
-			
-			return UnknownEnum;
+			};
 		}
 	}
 }
- 
