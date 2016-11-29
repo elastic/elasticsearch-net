@@ -1,4 +1,6 @@
-﻿namespace Elasticsearch.Net
+﻿using System;
+
+namespace Elasticsearch.Net
 {
 	public class BasicAuthenticationCredentials
 	{
