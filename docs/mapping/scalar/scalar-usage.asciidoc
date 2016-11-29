@@ -1,0 +1,395 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Mapping/Scalar/ScalarUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[scalar-usage]]
+== Scalar Usage
+
+[source,csharp]
+----
+public class ScalarPoco
+{
+    public int Int { get; set; }
+    public IEnumerable<int> Ints { get; set; }
+    public int? IntNullable { get; set; }
+    public IEnumerable<int?> IntNullables { get; set; }
+
+    public float Float { get; set; }
+    public IEnumerable<float> Floats { get; set; }
+    public float? FloatNullable { get; set; }
+    public IEnumerable<float?> FloatNullables { get; set; }
+
+    public double Double { get; set; }
+    public IEnumerable<double> Doubles { get; set; }
+    public double? DoubleNullable { get; set; }
+    public IEnumerable<double?> DoubleNullables { get; set; }
+
+    public sbyte SByte { get; set; }
+    public IEnumerable<sbyte> SBytes { get; set; }
+    public sbyte? SByteNullable { get; set; }
+    public IEnumerable<sbyte?> SByteNullables { get; set; }
+
+    public short Short { get; set; }
+    public IEnumerable<short> Shorts { get; set; }
+    public short? ShortNullable { get; set; }
+    public IEnumerable<short?> ShortNullables { get; set; }
+
+    public byte Byte { get; set; }
+    public IEnumerable<byte> Bytes { get; set; }
+    public byte? ByteNullable { get; set; }
+    public IEnumerable<byte?> ByteNullables { get; set; }
+
+    public long Long { get; set; }
+    public IEnumerable<long> Longs { get; set; }
+    public long? LongNullable { get; set; }
+    public IEnumerable<long?> LongNullables { get; set; }
+
+    public uint Uint { get; set; }
+    public IEnumerable<uint> Uints { get; set; }
+    public uint? UintNullable { get; set; }
+    public IEnumerable<uint?> UintNullables { get; set; }
+
+    public TimeSpan TimeSpan { get; set; }
+    public IEnumerable<TimeSpan> TimeSpans { get; set; }
+    public TimeSpan? TimeSpanNullable { get; set; }
+    public IEnumerable<TimeSpan?> TimeSpanNullables { get; set; }
+
+    public decimal Decimal { get; set; }
+    public IEnumerable<decimal> Decimals {get;set; }
+    public decimal? DecimalNullable { get; set; }
+    public IEnumerable<decimal?> DecimalNullables { get; set; }
+
+    public ulong Ulong { get; set; }
+    public IEnumerable<ulong> Ulongs { get; set; }
+    public ulong? UlongNullable { get; set; }
+    public IEnumerable<ulong?> UlongNullables { get; set; }
+
+    public DateTime DateTime { get; set; }
+    public IEnumerable<DateTime> DateTimes { get; set; }
+    public DateTime? DateTimeNullable { get; set; }
+    public IEnumerable<DateTime?> DateTimeNullables { get; set; }
+
+    public DateTimeOffset DateTimeOffset { get; set; }
+    public IEnumerable<DateTimeOffset> DateTimeOffsets { get; set; }
+    public DateTimeOffset? DateTimeOffsetNullable { get; set; }
+    public IEnumerable<DateTimeOffset?> DateTimeOffsetNullables { get; set; }
+
+    public bool Bool { get; set; }
+    public IEnumerable<bool> Bools { get; set; }
+    public bool? BoolNullable { get; set; }
+    public IEnumerable<bool?> BoolNullables { get; set; }
+
+    public char Char { get; set; }
+    public IEnumerable<char> Chars { get; set; }
+    public char? CharNullable { get; set; }
+    public IEnumerable<char?> CharNullables { get; set; }
+
+    public Guid Guid { get; set; }
+    public IEnumerable<Guid> Guids { get; set; }
+    public Guid? GuidNullable { get; set; }
+    public IEnumerable<Guid?> GuidNullables { get; set; }
+
+    public string String { get; set; }
+    public IEnumerable<string> Strings { get; set; }
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+f => f
+.Properties(ps => ps
+    .Scalar(p => p.Int, m => m)
+    .Scalar(p => p.Ints, m => m)
+    .Scalar(p => p.IntNullable, m => m)
+    .Scalar(p => p.IntNullables, m => m)
+    .Scalar(p => p.Float, m => m)
+    .Scalar(p => p.Floats, m => m)
+    .Scalar(p => p.FloatNullable, m => m)
+    .Scalar(p => p.FloatNullables, m => m)
+    .Scalar(p => p.Double, m => m)
+    .Scalar(p => p.Doubles, m => m)
+    .Scalar(p => p.DoubleNullable, m => m)
+    .Scalar(p => p.DoubleNullables, m => m)
+    .Scalar(p => p.SByte, m => m)
+    .Scalar(p => p.SBytes, m => m)
+    .Scalar(p => p.SByteNullable, m => m)
+    .Scalar(p => p.SByteNullables, m => m)
+    .Scalar(p => p.Short, m => m)
+    .Scalar(p => p.Shorts, m => m)
+    .Scalar(p => p.ShortNullable, m => m)
+    .Scalar(p => p.ShortNullables, m => m)
+    .Scalar(p => p.Byte, m => m)
+    .Scalar(p => p.Bytes, m => m)
+    .Scalar(p => p.ByteNullable, m => m)
+    .Scalar(p => p.ByteNullables, m => m)
+    .Scalar(p => p.Long, m => m)
+    .Scalar(p => p.Longs, m => m)
+    .Scalar(p => p.LongNullable, m => m)
+    .Scalar(p => p.LongNullables, m => m)
+    .Scalar(p => p.Uint, m => m)
+    .Scalar(p => p.Uints, m => m)
+    .Scalar(p => p.UintNullable, m => m)
+    .Scalar(p => p.UintNullables, m => m)
+    .Scalar(p => p.TimeSpan, m => m)
+    .Scalar(p => p.TimeSpans, m => m)
+    .Scalar(p => p.TimeSpanNullable, m => m)
+    .Scalar(p => p.TimeSpanNullables, m => m)
+    .Scalar(p => p.Decimal, m => m)
+    .Scalar(p => p.Decimals, m => m)
+    .Scalar(p => p.DecimalNullable, m => m)
+    .Scalar(p => p.DecimalNullables, m => m)
+    .Scalar(p => p.Ulong, m => m)
+    .Scalar(p => p.Ulongs, m => m)
+    .Scalar(p => p.UlongNullable, m => m)
+    .Scalar(p => p.UlongNullables, m => m)
+    .Scalar(p => p.DateTime, m => m)
+    .Scalar(p => p.DateTimes, m => m)
+    .Scalar(p => p.DateTimeNullable, m => m)
+    .Scalar(p => p.DateTimeNullables, m => m)
+    .Scalar(p => p.DateTimeOffset, m => m)
+    .Scalar(p => p.DateTimeOffsets, m => m)
+    .Scalar(p => p.DateTimeOffsetNullable, m => m)
+    .Scalar(p => p.DateTimeOffsetNullables, m => m)
+    .Scalar(p => p.Bool, m => m)
+    .Scalar(p => p.Bools, m => m)
+    .Scalar(p => p.BoolNullable, m => m)
+    .Scalar(p => p.BoolNullables, m => m)
+    .Scalar(p => p.Char, m => m)
+    .Scalar(p => p.Chars, m => m)
+    .Scalar(p => p.CharNullable, m => m)
+    .Scalar(p => p.CharNullables, m => m)
+    .Scalar(p => p.Guid, m => m)
+    .Scalar(p => p.Guids, m => m)
+    .Scalar(p => p.GuidNullable, m => m)
+    .Scalar(p => p.GuidNullables, m => m)
+    .Scalar(p => p.String, m => m)
+    .Scalar(p => p.Strings, m => m)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+null
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "properties": {
+    "bool": {
+      "type": "boolean"
+    },
+    "bools": {
+      "type": "boolean"
+    },
+    "boolNullable": {
+      "type": "boolean"
+    },
+    "boolNullables": {
+      "type": "boolean"
+    },
+    "byte": {
+      "type": "short"
+    },
+    "bytes": {
+      "type": "short"
+    },
+    "byteNullable": {
+      "type": "short"
+    },
+    "byteNullables": {
+      "type": "short"
+    },
+    "char": {
+      "type": "keyword"
+    },
+    "chars": {
+      "type": "keyword"
+    },
+    "charNullable": {
+      "type": "keyword"
+    },
+    "charNullables": {
+      "type": "keyword"
+    },
+    "dateTime": {
+      "type": "date"
+    },
+    "dateTimes": {
+      "type": "date"
+    },
+    "dateTimeNullable": {
+      "type": "date"
+    },
+    "dateTimeNullables": {
+      "type": "date"
+    },
+    "dateTimeOffset": {
+      "type": "date"
+    },
+    "dateTimeOffsets": {
+      "type": "date"
+    },
+    "dateTimeOffsetNullable": {
+      "type": "date"
+    },
+    "dateTimeOffsetNullables": {
+      "type": "date"
+    },
+    "decimal": {
+      "type": "double"
+    },
+    "decimals": {
+      "type": "double"
+    },
+    "decimalNullable": {
+      "type": "double"
+    },
+    "decimalNullables": {
+      "type": "double"
+    },
+    "double": {
+      "type": "double"
+    },
+    "doubles": {
+      "type": "double"
+    },
+    "doubleNullable": {
+      "type": "double"
+    },
+    "doubleNullables": {
+      "type": "double"
+    },
+    "float": {
+      "type": "float"
+    },
+    "floats": {
+      "type": "float"
+    },
+    "floatNullable": {
+      "type": "float"
+    },
+    "floatNullables": {
+      "type": "float"
+    },
+    "guid": {
+      "type": "keyword"
+    },
+    "guids": {
+      "type": "keyword"
+    },
+    "guidNullable": {
+      "type": "keyword"
+    },
+    "guidNullables": {
+      "type": "keyword"
+    },
+    "int": {
+      "type": "integer"
+    },
+    "ints": {
+      "type": "integer"
+    },
+    "intNullable": {
+      "type": "integer"
+    },
+    "intNullables": {
+      "type": "integer"
+    },
+    "long": {
+      "type": "long"
+    },
+    "longs": {
+      "type": "long"
+    },
+    "longNullable": {
+      "type": "long"
+    },
+    "longNullables": {
+      "type": "long"
+    },
+    "sByte": {
+      "type": "byte"
+    },
+    "sBytes": {
+      "type": "byte"
+    },
+    "sByteNullable": {
+      "type": "byte"
+    },
+    "sByteNullables": {
+      "type": "byte"
+    },
+    "short": {
+      "type": "short"
+    },
+    "shorts": {
+      "type": "short"
+    },
+    "shortNullable": {
+      "type": "short"
+    },
+    "shortNullables": {
+      "type": "short"
+    },
+    "timeSpan": {
+      "type": "long"
+    },
+    "timeSpans": {
+      "type": "long"
+    },
+    "timeSpanNullable": {
+      "type": "long"
+    },
+    "timeSpanNullables": {
+      "type": "long"
+    },
+    "uint": {
+      "type": "long"
+    },
+    "uints": {
+      "type": "long"
+    },
+    "uintNullable": {
+      "type": "long"
+    },
+    "uintNullables": {
+      "type": "long"
+    },
+    "ulong": {
+      "type": "double"
+    },
+    "ulongs": {
+      "type": "double"
+    },
+    "ulongNullable": {
+      "type": "double"
+    },
+    "ulongNullables": {
+      "type": "double"
+    },
+    "string": {
+      "type": "text"
+    },
+    "strings": {
+      "type": "text"
+    }
+  }
+}
+----
+

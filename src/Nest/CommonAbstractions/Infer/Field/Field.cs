@@ -23,14 +23,18 @@ namespace Nest
 
 		public bool CachableExpression { get; }
 
-		public Fields And<T>(Expression<Func<T, object>> field) where T : class =>
-			new Fields(new [] { this, field });
+		public Fields And(Field field) => new Fields(new [] { this, field });
 
-		public Fields And(string field) => new Fields(new [] { this, field });
+		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null) where T : class =>
+			new Fields(new [] { this, new Field(field, boost) });
+
+		public Fields And(string field, double? boost = null) => new Fields(new [] { this, new Field(field, boost) });
+
+		public Fields And(PropertyInfo property, double? boost = null) => new Fields(new [] { this, new Field(property, boost) });
 
 		public Field(string name, double? boost = null)
 		{
-			if (name.IsNullOrEmpty()) return;
+			name.ThrowIfNullOrEmpty(nameof(name));
 			double? b;
 			Name = ParseFieldName(name, out b);
 			Boost = b ?? boost;
@@ -39,7 +43,7 @@ namespace Nest
 
 		public Field(Expression expression, double? boost = null)
 		{
-			if (expression == null) return;
+			if (expression == null) throw new ArgumentNullException(nameof(expression));
 			Expression = expression;
 			Boost = boost;
 			Type type;
@@ -50,7 +54,7 @@ namespace Nest
 
 		public Field(PropertyInfo property, double? boost = null)
 		{
-			if (property == null) return;
+			if (property == null) throw new ArgumentNullException(nameof(property));
 			Property = property;
 			Boost = boost;
 			_comparisonValue = property;

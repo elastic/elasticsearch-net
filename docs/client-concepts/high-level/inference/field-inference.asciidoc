@@ -15,14 +15,14 @@ please modify the original csharp file found at the link and submit the PR with 
 [[field-inference]]
 == Field Inference
 
-Several places in the Elasticsearch API expect the path to a field from your original source document as a string.
+Several places in the Elasticsearch API expect the path to a field from your original source document, as a string value.
 NEST allows you to use C# expressions to strongly type these field path strings.
 
 These expressions are assigned to a type called `Field` and there are several ways to create an instance of one
 
 === Constructor
 
-Using the constructor directly is possible _but_ rather involved 
+Using the constructor directly is possible _but_ can get rather involved when resolving from a member access lambda expression 
 
 [source,csharp]
 ----
@@ -41,6 +41,8 @@ When using the constructor and passing a value for `Name`, `Property` or `Expres
 * determining `Field` equality
 
 * getting the hash code for a `Field` instance
+
+IMPORTANT: Boost values are not taken into account when determining equality.
 
 [source,csharp]
 ----
@@ -66,34 +68,12 @@ fieldStringWithBoostTwo.Should().Be(fieldStringWithBoostThree); <1>
 ----
 <1> <<field-name-with-boost,Fields can constructed with a name that contains a boost>>
 
-=== Implicit Conversion
-
-As you can see from the previous examples, using the constructor is rather involved and cumbersome.
-Because of this, you can also implicitly convert strings and expressions to a `Field` 
-
-[source,csharp]
-----
-Field fieldString = "name";
-----
-
-but for expressions this is _still_ rather involved 
-
-[source,csharp]
-----
-Expression<Func<Project, object>> expression = p => p.Name;
-
-Field fieldExpression = expression;
-
-Expect("name")
-    .WhenSerializing(fieldExpression)
-    .WhenSerializing(fieldString);
-----
-
 [[field-name-with-boost]]
 === Field Names with Boost
 
 When specifying a `Field` name, the name can include a boost value; NEST will split the name and boost
-value and set the `Boost` property
+value and set the `Boost` property; a boost value as part of the string takes precedence over a boost
+value that may also be passed as the second constructor argument
 
 [source,csharp]
 ----
@@ -117,6 +97,28 @@ fieldStringCreate.Boost.Should().Be(2);
 ----
 <1> NEST will take the boost from the name
 
+=== Implicit Conversion
+
+As well as using the constructor, you can also implicitly convert `string`, `PropertyInfo` and member access lambda expressions to a `Field`.
+For expressions however, this is _still_ rather involved as the expression first needs to be assigned to a variable that explicitly specifies
+the expression delegate type.
+
+[source,csharp]
+----
+Field fieldString = "name";
+
+Field fieldProperty = typeof(Project).GetProperty(nameof(Project.Name));
+
+Expression<Func<Project, object>> expression = p => p.Name;
+
+Field fieldExpression = expression;
+
+Expect("name")
+    .WhenSerializing(fieldString)
+    .WhenSerializing(fieldProperty)
+    .WhenSerializing(fieldExpression);
+----
+
 [[nest-infer]]
 === Using Nest.Infer
 
@@ -135,7 +137,7 @@ var fieldExpression = Infer.Field<Project>(p => p.Name);
 ----
 
 this can be even shortened even further using a https://msdn.microsoft.com/en-us/library/sf0df423.aspx#Anchor_0[static import in C# 6] i.e.
-			 `using static Nest.Infer;`
+			 `using static Nest.Infer;` using directive
 
 [source,csharp]
 ----
@@ -174,7 +176,7 @@ Expect("name^2.1")
 [[camel-casing]]
 === Field name casing
 
-By default, NEST will camel-case **all** field names to better align with typical
+By default, NEST https://en.wikipedia.org/wiki/Camel_case[camelcases] **all** field names to better align with typical
 javascript/json conventions
 
 using `DefaultFieldNameInferrer()` on ConnectionSettings you can change this behavior 
