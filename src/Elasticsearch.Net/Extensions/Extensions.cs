@@ -1,32 +1,16 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-using System.Reflection;
 
 namespace Elasticsearch.Net
 {
 	internal static class Extensions
 	{
-		internal static string GetStringValue(this Enum enumValue)
-		{
-			var knownEnum = KnownEnums.Resolve(enumValue);
-			if (knownEnum != KnownEnums.UnknownEnum) return knownEnum;
-
-			//TODO measure performance and cache
-			var type = enumValue.GetType();
-#if DOTNETCORE
-			var info = type.GetTypeInfo().GetDeclaredField(enumValue.ToString());
-#else
-			var info = type.GetField(enumValue.ToString());
-#endif
-			var da = (EnumMemberAttribute[])(info.GetCustomAttributes(typeof(EnumMemberAttribute), false));
-
-			return da.Length > 0 ? da[0].Value : Enum.GetName(enumValue.GetType(), enumValue);
-		}
-
 #if !DOTNETCORE
 		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes);
 #else

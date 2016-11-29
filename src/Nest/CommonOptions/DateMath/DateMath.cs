@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest

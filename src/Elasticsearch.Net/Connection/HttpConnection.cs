@@ -65,7 +65,7 @@ namespace Elasticsearch.Net
 			//see: https://github.com/elasticsearch/elasticsearch-net/issues/562
 			var m = requestData.Method.GetStringValue();
 			request.Method = m;
-			if (m != "head" && m != "get" && (requestData.PostData == null))
+			if (m != "HEAD" && m != "GET" && (requestData.PostData == null))
 				request.ContentLength = 0;
 
 			return request;

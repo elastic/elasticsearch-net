@@ -27,18 +27,6 @@ namespace Nest
 			where T1 : class, TReturn where TReturn : class =>
 			func?.Invoke(@default, param2) ?? @default;
 
-		internal static string GetStringValue(this Enum enumValue)
-		{
-			var knownEnum = KnownEnums.Resolve(enumValue);
-			if (knownEnum != KnownEnums.UnknownEnum) return knownEnum;
-
-			var type = enumValue.GetType();
-			var info = type.GetField(enumValue.ToString());
-			var da = info.GetCustomAttribute<EnumMemberAttribute>();
-
-			return da != null ? da.Value : Enum.GetName(enumValue.GetType(), enumValue);
-		}
-
 		internal static readonly JsonConverter dateConverter = new IsoDateTimeConverter { Culture = CultureInfo.InvariantCulture };
 		internal static readonly JsonSerializer serializer = new JsonSerializer();
 		internal static string ToJsonNetString(this DateTime date)
