@@ -39,14 +39,14 @@ namespace Nest
 		private static void ValidateIndexName(string indexName)
 		{
 			if (string.IsNullOrWhiteSpace(indexName))
-				throw new ResolveException(
+				throw new ArgumentException(
 					"Index name is null for the given type and no default index is set. "
 					+ "Map an index name using ConnectionSettings.MapDefaultTypeIndices() "
 					+ "or set a default index using ConnectionSettings.DefaultIndex()."
 				);
 
 			if (indexName.HasAny(char.IsUpper))
-				throw new ResolveException($"Index names cannot contain uppercase characters: {indexName}.");
+				throw new ArgumentException($"Index names cannot contain uppercase characters: {indexName}.");
 		}
 	}
 }
