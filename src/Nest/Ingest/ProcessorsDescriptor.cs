@@ -84,8 +84,8 @@ namespace Nest
 		/// <summary>
 		/// Allows inline, stored, and file scripts to be executed within ingest pipelines.
 		/// </summary>
-		public ProcessorsDescriptor Script(Func<ScriptProcessor, IScriptProcessor> selector) =>
-			Assign(a => a.AddIfNotNull(selector?.Invoke(new ScriptProcessor())));
+		public ProcessorsDescriptor Script(Func<ScriptProcessorDescriptor, IScriptProcessor> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new ScriptProcessorDescriptor())));
 
 		public ProcessorsDescriptor Set<T>(Func<SetProcessorDescriptor<T>, ISetProcessor> selector) where T : class  =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new SetProcessorDescriptor<T>())));
