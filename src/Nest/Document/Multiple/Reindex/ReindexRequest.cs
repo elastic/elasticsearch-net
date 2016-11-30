@@ -39,7 +39,7 @@ namespace Nest
 	public class ReindexRequest : IReindexRequest
 	{
 		/// <inheritdoc/>
-		public bool OmitCreateIndex { get; set; }
+		public bool OmitIndexCreation { get; set; }
 		/// <inheritdoc/>
 		public IndexName To { get; set; }
 		/// <inheritdoc/>
