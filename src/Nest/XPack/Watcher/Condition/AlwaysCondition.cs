@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-
 	[JsonObject]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<AlwaysCondition>))]
 	public interface IAlwaysCondition : ICondition {}

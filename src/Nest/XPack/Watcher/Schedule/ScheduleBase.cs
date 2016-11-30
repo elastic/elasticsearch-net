@@ -5,7 +5,7 @@ namespace Nest
 	[JsonObject]
 	public interface ISchedule {}
 
-	public abstract class ScheduleBase
+	public abstract class ScheduleBase : ISchedule
 	{
 		internal abstract void WrapInContainer(IScheduleContainer container);
 	}

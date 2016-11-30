@@ -1381,13 +1381,13 @@
     <Compile Include="XPack\Watcher\Input\ConnectionScheme.cs" />
     <Compile Include="XPack\Watcher\Input\HttpInputProxy.cs" />
     <Compile Include="XPack\Watcher\Input\HttpMethod.cs" />
-    <Compile Include="XPack\Watcher\Input\IChainInput.cs" />
+    <Compile Include="XPack\Watcher\Input\ChainInput.cs" />
     <Compile Include="XPack\Watcher\Input\InputBase.cs" />
     <Compile Include="XPack\Watcher\Input\IndicesOptions.cs" />
     <Compile Include="XPack\Watcher\Input\InputType.cs" />
     <Compile Include="XPack\Watcher\Input\ResponseContentType.cs" />
     <Compile Include="XPack\Watcher\Input\SimpleInput.cs" />
-    <Compile Include="XPack\Watcher\PutWatch\Actions.cs" />
+    <Compile Include="XPack\Watcher\Action\Actions.cs" />
     <Compile Include="XPack\Watcher\RestartWatcher\ElasticClient-RestartWatcher.cs" />
     <Compile Include="XPack\Watcher\RestartWatcher\RestartWatcherResponse.cs" />
     <Compile Include="XPack\Watcher\Schedule\CronExpression.cs" />

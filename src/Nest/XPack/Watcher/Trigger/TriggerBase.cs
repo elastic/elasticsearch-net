@@ -1,6 +1,8 @@
 ﻿namespace Nest
 {
-	public abstract class TriggerBase
+	public interface ITrigger {}
+
+	public abstract class TriggerBase : ITrigger
 	{
 		public static implicit operator TriggerContainer(TriggerBase trigger) => trigger == null
 			? null
