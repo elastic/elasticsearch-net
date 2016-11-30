@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	public class DateHistogramBucket : HistogramBucket
+	public class DateHistogramBucket : KeyedBucket<double>
 	{
 		// Get a DateTime form of the returned key
 		public DateTime Date => DateTime.SpecifyKind(new DateTime(1970, 1, 1).AddMilliseconds(0 + this.Key), DateTimeKind.Utc);
