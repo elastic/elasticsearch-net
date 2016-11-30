@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Elasticsearch.Net;
 
@@ -10,6 +11,7 @@ namespace Nest
 		private readonly IReindexRequest _reindexRequest;
 		private readonly IConnectionSettingsValues _connectionSettings;
 		private readonly IElasticClient _client;
+		private static IList<ISort> DocOrderSort = new ReadOnlyCollection<ISort>(new List<ISort> { new SortField { Field = "_doc" } });
 
 		private Action<IHit<T>, T, IBulkIndexOperation<T>> Alter { get; set; }
 
@@ -19,6 +21,7 @@ namespace Nest
 			this._reindexRequest = reindexRequest;
 			this._client = client;
 		}
+
 		public IDisposable Subscribe(ReindexObserver<T> observer)
 		{
 			this.Alter = observer.Alter;
@@ -46,7 +49,8 @@ namespace Nest
 			var toIndex = this._reindexRequest.To.Resolve(this._connectionSettings);
 			toIndex.ThrowIfNullOrEmpty(nameof(toIndex));
 
-			this.CreateIndex(fromIndex, toIndex);
+			if (!this._reindexRequest.OmitCreateIndex)
+				this.CreateIndex(fromIndex, toIndex);
 
 			var scroll = this._reindexRequest.Scroll ?? TimeSpan.FromMinutes(2);
 
@@ -87,18 +91,18 @@ namespace Nest
 		private ISearchResponse<T> InitiateSearch(string fromIndex, string toIndex, Time scroll)
 		{
 			var size = this._reindexRequest.Size ?? 100;
-			var searchResult = this._client.Search<T>(new SearchRequest<T>(fromIndex, this._reindexRequest.Type)
+			var searchResult = this._client.Search<T>(new SearchRequest<T>(fromIndex, this._reindexRequest.Types)
 			{
 				From = 0,
 				Size = size,
 				Query = this._reindexRequest.Query,
-				Scroll = scroll
+				Scroll = scroll,
+				Sort = DocOrderSort
 			});
 			if (searchResult.Total <= 0)
 				throw Throw($"Source index {fromIndex} doesn't contain any documents.", searchResult.ApiCall);
 			return searchResult;
 		}
-
 
 		private void CreateIndex(string resolvedFrom, string resolvedTo)
 		{
