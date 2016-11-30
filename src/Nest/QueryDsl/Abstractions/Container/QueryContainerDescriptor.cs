@@ -8,17 +8,20 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class QueryContainerDescriptor<T> : QueryContainer where T : class
 	{
-		private QueryContainerDescriptor<T> Assign(Action<IQueryContainer> assigner) => Fluent.Assign(this, assigner);
 
-		private static QueryContainer WrapInContainer<TQuery, TQueryInterface>(
+		private QueryContainer WrapInContainer<TQuery, TQueryInterface>(
 			Func<TQuery, TQueryInterface> create,
 			Action<TQueryInterface, IQueryContainer> assign
 			)
 			where TQuery : class, TQueryInterface, IQuery, new()
 			where TQueryInterface : class, IQuery
 		{
+			var container = this.ContainedQuery == null
+				? this
+				: new QueryContainerDescriptor<T>();
+
 			var query = create.InvokeOrDefault(new TQuery());
-			var container = new QueryContainerDescriptor<T>();
+
 			IQueryContainer c = container;
 			c.IsVerbatim = query.IsVerbatim;
 			c.IsStrict = query.IsStrict;
@@ -41,9 +44,9 @@ namespace Nest
 		/// Insert raw query json at this position of the query
 		/// <para>Be sure to start your json with '{'</para>
 		/// </summary>
-		/// <param name="rawJson"></param>
-		/// <returns></returns>
-		public QueryContainer Raw(string rawJson) => Assign(a => a.RawQuery = new RawQueryDescriptor(rawJson));
+		/// <param name="rawJson">The query dsl json</param>
+		public QueryContainer Raw(string rawJson) =>
+			WrapInContainer((RawQueryDescriptor descriptor) => descriptor.Raw(rawJson), (query, container) => container.RawQuery = query);
 
 		/// <summary>
 		/// A query that uses a query parser in order to parse its content.
