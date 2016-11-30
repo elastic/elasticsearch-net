@@ -25,10 +25,10 @@ namespace Tests.ClientConcepts.Connection
 			    return base.Request<TReturn>(requestData);
 		    }
 
-		    public override Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken)
+		    public override Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData)
 		    {
 			    CallCount++;
-			    return base.RequestAsync<TReturn>(requestData, cancellationToken);
+			    return base.RequestAsync<TReturn>(requestData);
 		    }
 	    }
 
@@ -42,7 +42,7 @@ namespace Tests.ClientConcepts.Connection
 			connection.CallCount.Should().Be(1);
 		    connection.ClientCount.Should().Be(1);
 
-			await connection.RequestAsync<string>(requestData, CancellationToken.None).ConfigureAwait(false);
+			await connection.RequestAsync<string>(requestData).ConfigureAwait(false);
 
 			connection.CallCount.Should().Be(2);
 			connection.ClientCount.Should().Be(1);
@@ -82,7 +82,7 @@ namespace Tests.ClientConcepts.Connection
 		    connection.ClientCount.Should().Be(1);
 
 		    requestData = differentRequestData();
-		    await connection.RequestAsync<string>(requestData, CancellationToken.None).ConfigureAwait(false);
+		    await connection.RequestAsync<string>(requestData).ConfigureAwait(false);
 
 		    connection.CallCount.Should().Be(2);
 		    connection.ClientCount.Should().Be(2);
