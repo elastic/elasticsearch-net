@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Elasticsearch.Net;
 
 namespace Nest
@@ -43,12 +45,15 @@ namespace Nest
 			var resolvedTo = toIndex.Resolve(this._connectionSettings);
 			resolvedTo.ThrowIfNullOrEmpty(nameof(toIndex));
 
-			var indexSettings = this._client.GetIndex(fromIndex);
-			Func<CreateIndexDescriptor, ICreateIndexRequest> settings =  (ci) => this._reindexRequest.CreateIndexRequest ?? ci;
-			var createIndexResponse = this._client.CreateIndex(
-				toIndex, (c) => settings(c.InitializeUsing(indexSettings.Indices[resolvedFrom])));
-			if (!createIndexResponse.IsValid)
-				throw new ElasticsearchClientException(PipelineFailure.BadResponse, $"Failed to create destination index {toIndex}.", createIndexResponse.ApiCall);
+			if (!this._reindexRequest.OmitIndexCreation)
+			{
+				var indexSettings = this._client.GetIndex(fromIndex);
+				Func<CreateIndexDescriptor, ICreateIndexRequest> settings = (ci) => this._reindexRequest.CreateIndexRequest ?? ci;
+				var createIndexResponse = this._client.CreateIndex(
+					toIndex, (c) => settings(c.InitializeUsing(indexSettings.Indices[resolvedFrom])));
+				if (!createIndexResponse.IsValid)
+					throw new ElasticsearchClientException(PipelineFailure.BadResponse, $"Failed to create destination index {toIndex}.", createIndexResponse.ApiCall);
+			}
 
 			var page = 0;
 			var searchResult = this._client.Search<T>(
@@ -58,6 +63,7 @@ namespace Nest
 					.From(0)
 					.Size(size)
 					.Query(q=>this._reindexRequest.Query)
+					.Sort(sort=>sort.Field(f=>f.Field("_doc")))
 					.SearchType(SearchType.Scan)
 					.Scroll(scroll)
 				);

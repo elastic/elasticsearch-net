@@ -14,11 +14,18 @@ namespace Nest
 
 		ICreateIndexRequest CreateIndexRequest { get; set; }
 
+		/// <summary>
+		/// Do not send a create index call on <see cref="To"/>, assume the index has been created outside of the reindex.
+		/// </summary>
+		bool OmitIndexCreation { get; set; }
+
+		[Obsolete("Unused property that is removed in 5.0")]
 		IPutMappingRequest PutMappingRequest { get; set; } 
 	}
 
 	public class ReindexRequest : IReindexRequest
 	{
+		public bool OmitIndexCreation { get; set; }
 		public IndexName To { get; set; }
 		public IndexName From { get; set; }
 		public Types Type { get; set; }
@@ -37,6 +44,7 @@ namespace Nest
 
 	public class ReindexDescriptor<T> : DescriptorBase<ReindexDescriptor<T>, IReindexRequest>, IReindexRequest where T : class
 	{
+		bool IReindexRequest.OmitIndexCreation { get; set; }
 		IndexName IReindexRequest.To { get; set; }
 		IndexName IReindexRequest.From { get; set; }
 		Types IReindexRequest.Type { get; set; }
@@ -76,6 +84,9 @@ namespace Nest
 		/// </summary>
 		public ReindexDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
 			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+
+		/// <inheritdoc/>
+		public ReindexDescriptor<T> OmitIndexCreation(bool omit = true) => Assign(a => a.OmitIndexCreation = true);
 
 		/// <summary>
 		/// A query to optionally limit the documents to use for the reindex operation.  
