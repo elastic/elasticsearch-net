@@ -1175,6 +1175,7 @@
     <Compile Include="Search\Scroll\ClearScroll\ElasticClient-ClearScroll.cs" />
     <Compile Include="Search\Scroll\Scroll\ElasticClient-Scroll.cs" />
     <Compile Include="Search\Scroll\Scroll\ScrollRequest.cs" />
+    <Compile Include="Search\Scroll\Scroll\SlicedScroll.cs" />
     <Compile Include="Search\SearchShards\ElasticClient-SearchShards.cs" />
     <Compile Include="Search\SearchShards\SearchShardsRequest.cs" />
     <Compile Include="Search\SearchShards\SearchShardsResponse.cs" />

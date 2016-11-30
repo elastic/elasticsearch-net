@@ -654,7 +654,9 @@
     <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorUrlTests.cs" />
     <Compile Include="Reproduce\GithubIssue2052.cs" />
     <Compile Include="Reproduce\GithubIssue2173.cs" />
+    <Compile Include="Search\Request\SlicedScrollSearchUsageTests.cs" />
     <Compile Include="Search\Request\SearchAfterUsageTests.cs" />
+    <Compile Include="Search\Scroll\Scroll\SlicedScrollApiTests.cs" />
     <Compile Include="Search\Search\Rescoring\RescoreUsageTests.cs" />
     <Compile Include="Search\Search\InvalidSearchApiTests.cs" />
     <Compile Include="Search\Suggesters\SuggestUrlTests.cs" />

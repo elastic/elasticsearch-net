@@ -72,6 +72,9 @@ namespace Nest
 		[JsonProperty("aggs")]
 		AggregationDictionary Aggregations { get; set; }
 
+		[JsonProperty("slice")]
+		ISlicedScroll Slice { get; set; }
+
 		[JsonProperty("query")]
 		QueryContainer Query { get; set; }
 
@@ -114,6 +117,7 @@ namespace Nest
 		public IList<object> SearchAfter { get; set; }
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
 		public QueryContainer PostFilter { get; set; }
+		public ISlicedScroll Slice { get; set; }
 		public QueryContainer Query { get; set; }
 		public IList<IRescore> Rescore { get; set; }
 		public ISuggestContainer Suggest { get; set; }
@@ -157,6 +161,7 @@ namespace Nest
 		public IList<object> SearchAfter { get; set; }
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
 		public QueryContainer PostFilter { get; set; }
+		public ISlicedScroll Slice { get; set; }
 		public QueryContainer Query { get; set; }
 		public IList<IRescore> Rescore { get; set; }
 		public ISuggestContainer Suggest { get; set; }
@@ -212,6 +217,7 @@ namespace Nest
 		ISuggestContainer ISearchRequest.Suggest { get; set; }
 		IHighlight ISearchRequest.Highlight { get; set; }
 		IList<IRescore> ISearchRequest.Rescore { get; set; }
+		ISlicedScroll ISearchRequest.Slice { get; set; }
 		QueryContainer ISearchRequest.Query { get; set; }
 		QueryContainer ISearchRequest.PostFilter { get; set; }
 		Fields ISearchRequest.StoredFields { get; set; }
@@ -397,6 +403,12 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) =>
 			Assign(a => a.Query = query?.Invoke(new QueryContainerDescriptor<T>()));
+
+		/// <summary>
+		/// For scroll queries that return a lot of documents it is possible to split the scroll in multiple slices which can be consumed independently
+		/// </summary>
+		public SearchDescriptor<T> Slice(Func<SlicedScrollDescriptor<T>, ISlicedScroll> query) =>
+			Assign(a => a.Slice = query?.Invoke(new SlicedScrollDescriptor<T>()));
 
 		/// <summary>
 		/// Shortcut to default to a match all query
