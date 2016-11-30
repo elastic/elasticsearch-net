@@ -17,6 +17,9 @@ namespace Nest
 		[JsonProperty("numeric_detection")]
 		bool? NumericDetection { get; set; }
 
+		[JsonProperty("include_in_all")]
+		bool? IncludeInAll { get; set; }
+
 		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
 
@@ -67,6 +70,8 @@ namespace Nest
 		/// <inheritdoc/>
 		public bool? DateDetection { get; set; }
 		/// <inheritdoc/>
+		public bool? IncludeInAll { get; set; }
+		/// <inheritdoc/>
 		public Union<bool, DynamicMapping> Dynamic { get; set; }
 		/// <inheritdoc/>
 		public IEnumerable<string> DynamicDateFormats { get; set; }
@@ -102,6 +107,7 @@ namespace Nest
 		IAllField ITypeMapping.AllField { get; set; }
 		string ITypeMapping.Analyzer { get; set; }
 		bool? ITypeMapping.DateDetection { get; set; }
+		bool? ITypeMapping.IncludeInAll { get; set; }
 		Union<bool, DynamicMapping> ITypeMapping.Dynamic { get; set; }
 		IEnumerable<string> ITypeMapping.DynamicDateFormats { get; set; }
 		IDynamicTemplateContainer ITypeMapping.DynamicTemplates { get; set; }
@@ -131,10 +137,11 @@ namespace Nest
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> Dynamic(Union<bool, DynamicMapping> dynamic) => Assign(a => a.Dynamic = dynamic);
 
-
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> Dynamic(bool dynamic = true) => Assign(a => a.Dynamic = dynamic);
 
+		/// <inheritdoc/>
+		public TypeMappingDescriptor<T> IncludeInAll(bool include = true) => Assign(a => a.IncludeInAll = include);
 
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> Parent(TypeName parentType) => Assign(a => a.ParentField = new ParentField { Type = parentType });
