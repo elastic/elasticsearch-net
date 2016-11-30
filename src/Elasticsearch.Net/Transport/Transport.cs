@@ -84,10 +84,6 @@ namespace Elasticsearch.Net
 						pipeline.MarkDead(node);
 						seenExceptions.Add(pipelineException);
 					}
-					catch (ResolveException)
-					{
-						throw;
-					}
 					catch (Exception killerException)
 					{
 						throw new UnexpectedElasticsearchClientException(killerException, seenExceptions)
@@ -148,10 +144,6 @@ namespace Elasticsearch.Net
 					{
 						pipeline.MarkDead(node);
 						seenExceptions.Add(pipelineException);
-					}
-					catch (ResolveException)
-					{
-						throw;
 					}
 					catch (Exception killerException)
 					{

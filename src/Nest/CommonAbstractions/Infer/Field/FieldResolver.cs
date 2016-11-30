@@ -80,7 +80,7 @@ namespace Nest
 					: null;
 
 			if (name == null)
-				throw new ResolveException("Name resolved to null for the given Expression or MemberInfo.");
+				throw new ArgumentException("Name resolved to null for the given Expression or MemberInfo.");
 
 			return name;
 		}

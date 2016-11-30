@@ -131,12 +131,12 @@ namespace Tests.ClientConcepts.LowLevel
 			* root causing exception.
 			*
 			* `UnexpectedElasticsearchClientException`:: These are unknown exceptions, for instance a response from Elasticsearch not
-			* properly deserialized.  These are usually bugs and {github}/issues[should be reported]. This exception also inherits from `ElasticsearchClientException`
+			* properly deserialized.  These are sometimes bugs and {github}/issues[should be reported]. This exception also inherits from `ElasticsearchClientException`
 			* so an additional catch block isn't necessary, but can be helpful in distinguishing between the two.
 			*
 			* Development time exceptions:: These are CLR exceptions like `ArgumentException`, `ArgumentOutOfRangeException`, etc.
-			* that are thrown when an API in the client is misused.
-			* These should not be handled as you want to know about them during development.
+			* that are thrown when an API in the client is misused.  The `.ThrowExceptions()` setting has no bearing on these as
+			* they will always be thrown, and also should not be handled by a consumer.
 			*
 			*/
 		}
