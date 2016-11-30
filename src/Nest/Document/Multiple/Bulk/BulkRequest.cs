@@ -63,7 +63,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="ids">Enumerable of string ids to delete</param>
 		/// <param name="bulkDeleteSelector">A func called on each ids to describe the individual delete operation</param>
-		public BulkDescriptor DeleteMany<T>(IEnumerable<string> ids, Func<BulkDeleteDescriptor<T>, string, IBulkDeleteOperation<T>> bulkDeleteSelector = null) where T : class=>
+		public BulkDescriptor DeleteMany<T>(IEnumerable<string> ids, Func<BulkDeleteDescriptor<T>, string, IBulkDeleteOperation<T>> bulkDeleteSelector = null) where T : class =>
 			Assign(a => ids.ForEach(o => AddOperation(bulkDeleteSelector.InvokeOrDefault(new BulkDeleteDescriptor<T>().Id(o), o))));
 
 		/// <summary>
@@ -74,7 +74,25 @@ namespace Nest
 		public BulkDescriptor DeleteMany<T>(IEnumerable<long> ids, Func<BulkDeleteDescriptor<T>, long, IBulkDeleteOperation<T>> bulkDeleteSelector = null) where T : class =>
 			Assign(a => ids.ForEach(o => AddOperation(bulkDeleteSelector.InvokeOrDefault(new BulkDeleteDescriptor<T>().Id(o), o))));
 
-		public BulkDescriptor Update<T>(Func<BulkUpdateDescriptor<T, T>, IBulkUpdateOperation<T, T>> bulkUpdateSelector) where T : class => 
+		/// <summary>
+		/// Updatemany, convenience method to pass many objects at once to do multiple updates.
+		/// </summary>
+		/// <param name="objects">the objects to update</param>
+		/// <param name="bulkUpdateSelector">An func called on each object to describe the individual update operation</param>
+		public BulkDescriptor UpdateMany<T>(IEnumerable<T> @objects, Func<BulkUpdateDescriptor<T, T>, T, IBulkUpdateOperation<T, T>> bulkUpdateSelector) where T : class =>
+			Assign(a => @objects.ForEach(o => AddOperation(bulkUpdateSelector.InvokeOrDefault(new BulkUpdateDescriptor<T, T>().IdFrom(o), o))));
+
+		/// <summary>
+		/// Updatemany, convenience method to pass many objects at once to do multiple updates.
+		/// </summary>
+		/// <param name="objects">the objects to update</param>
+		/// <param name="bulkUpdateSelector">An func called on each object to describe the individual update operation</param>
+		public BulkDescriptor UpdateMany<T, TPartialDocument>(IEnumerable<T> @objects, Func<BulkUpdateDescriptor<T, TPartialDocument>, T, IBulkUpdateOperation<T, TPartialDocument>> bulkUpdateSelector)
+			where T : class
+			where TPartialDocument : class =>
+			Assign(a => @objects.ForEach(o => AddOperation(bulkUpdateSelector.InvokeOrDefault(new BulkUpdateDescriptor<T, TPartialDocument>().IdFrom(o), o))));
+
+		public BulkDescriptor Update<T>(Func<BulkUpdateDescriptor<T, T>, IBulkUpdateOperation<T, T>> bulkUpdateSelector) where T : class =>
 			this.Update<T, T>(bulkUpdateSelector);
 
 		public BulkDescriptor Update<T, TPartialDocument>(Func<BulkUpdateDescriptor<T, TPartialDocument>, IBulkUpdateOperation<T, TPartialDocument>> bulkUpdateSelector)

@@ -239,6 +239,7 @@
     <Compile Include="ClientConcepts\ConnectionPooling\Dispose\ResponseBuilderDisposeTests.cs" />
     <Compile Include="ClientConcepts\Connection\CustomConnections.cs" />
     <Compile Include="Document\Multiple\BulkAll\BulkAllApiTests.cs" />
+    <Compile Include="Document\Multiple\Bulk\BulkUpdateManyTests.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleApiTests.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleUrlTests.cs" />
     <Compile Include="Framework\Extensions\ShouldExtensions.cs" />
