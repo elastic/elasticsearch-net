@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
@@ -30,10 +31,10 @@ namespace Nest
 			this.MultiTermVectors(selector.InvokeOrDefault(new MultiTermVectorsDescriptor()));
 
 		///<inheritdoc/>
-		public IMultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request) => 
+		public IMultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request) =>
 			this.Dispatcher.Dispatch<IMultiTermVectorsRequest, MultiTermVectorsRequestParameters, MultiTermVectorsResponse>(
 				request,
-				this.LowLevelDispatch.MtermvectorsDispatch<MultiTermVectorsResponse>
+				(p, d) => this.LowLevelDispatch.MtermvectorsDispatch<MultiTermVectorsResponse>(SetCallDetailsOnTermVectors(p), d)
 			);
 
 		///<inheritdoc/>
@@ -41,10 +42,26 @@ namespace Nest
 			this.MultiTermVectorsAsync(selector.InvokeOrDefault(new MultiTermVectorsDescriptor()));
 
 		///<inheritdoc/>
-		public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request) => 
+		public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request) =>
 			this.Dispatcher.DispatchAsync<IMultiTermVectorsRequest, MultiTermVectorsRequestParameters, MultiTermVectorsResponse, IMultiTermVectorsResponse>(
 				request,
-				this.LowLevelDispatch.MtermvectorsDispatchAsync<MultiTermVectorsResponse>
+				(p, d) => this.LowLevelDispatch.MtermvectorsDispatchAsync<MultiTermVectorsResponse>(SetCallDetailsOnTermVectors(p), d)
 			);
+
+		private IMultiTermVectorsRequest SetCallDetailsOnTermVectors(IMultiTermVectorsRequest request)
+		{
+			request.RequestParameters.DeserializationOverride((details, stream) =>
+			{
+				var response = this.Serializer.Deserialize<MultiTermVectorsResponse>(stream);
+
+				// This is not needed in 5.0 as MultiTermVectorsResponse does not use
+				// TermVectors response as the collection type
+				foreach (IResponse termVectorsResponse in response.Documents)
+					termVectorsResponse.CallDetails = details;
+
+				return response;
+			});
+			return request;
+		}
 	}
 }
