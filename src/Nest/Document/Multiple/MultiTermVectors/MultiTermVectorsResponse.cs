@@ -5,13 +5,14 @@ namespace Nest
 {
 	public interface IMultiTermVectorsResponse : IResponse
 	{
-		IReadOnlyCollection<TermVectorsResponse> Documents { get; }
+		IReadOnlyCollection<ITermVectors> Documents { get; }
 	}
 
 	[JsonObject]
 	public class MultiTermVectorsResponse : ResponseBase, IMultiTermVectorsResponse
 	{
 		[JsonProperty("docs")]
-		public IReadOnlyCollection<TermVectorsResponse> Documents { get; internal set; } = EmptyReadOnly<TermVectorsResponse>.Collection;
+		[JsonConverter(typeof(ReadOnlyCollectionJsonConverter<TermVectorsResult, ITermVectors>))]
+		public IReadOnlyCollection<ITermVectors> Documents { get; internal set; } = EmptyReadOnly<ITermVectors>.Collection;
 	}
 }

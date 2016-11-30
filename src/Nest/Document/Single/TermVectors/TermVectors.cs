@@ -3,12 +3,18 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface ITermVectorsResponse : IResponse, ITermVectors
+	public interface ITermVectors
 	{
+		string Index { get; }
+		string Type { get; }
+		string Id { get; }
+		long Version { get; }
+		bool Found { get; }
+		long Took { get; }
+		IReadOnlyDictionary<string, TermVector> TermVectors { get; }
 	}
 
-	[JsonObject]
-	public class TermVectorsResponse : ResponseBase, ITermVectorsResponse
+	public class TermVectorsResult : ITermVectors
 	{
 		[JsonProperty("_index")]
 		public string Index { get; internal set; }

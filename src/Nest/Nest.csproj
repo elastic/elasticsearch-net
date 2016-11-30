@@ -471,6 +471,7 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\JsonConverterBase.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\KeyValueJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReadAsTypeJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReadOnlyCollectionJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReserializeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ServerErrorJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReadSingleOrEnumerableJsonConverter.cs" />
@@ -610,6 +611,7 @@
     <Compile Include="Document\Single\Source\SourceRequest.cs" />
     <Compile Include="Document\Single\TermVectors\ElasticClient-TermVectors.cs" />
     <Compile Include="Document\Single\TermVectors\FieldStatistics.cs" />
+    <Compile Include="Document\Single\TermVectors\TermVectors.cs" />
     <Compile Include="Document\Single\TermVectors\TermVector.cs" />
     <Compile Include="Document\Single\TermVectors\TermVectorFilter.cs" />
     <Compile Include="Document\Single\TermVectors\TermVectorsRequest.cs" />
