@@ -155,6 +155,16 @@ namespace Elasticsearch.Net
 			return builder.ToResponse();
 		}
 
+
+		private static void RegisterApmTaskTimeout(IAsyncResult result, WebRequest request, RequestData requestData) =>
+			ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, TimeoutCallback, request, requestData.RequestTimeout, true);
+
+		private static void TimeoutCallback(object state, bool timedOut)
+		{
+			if (!timedOut) return;
+			(state as WebRequest)?.Abort();
+		}
+
 		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken) where TReturn : class
 		{
 			var builder = new ResponseBuilder<TReturn>(requestData, cancellationToken);
@@ -165,7 +175,10 @@ namespace Elasticsearch.Net
 
 				if (data != null)
 				{
-					using (var stream = await request.GetRequestStreamAsync().ConfigureAwait(false))
+					var apmGetRequestStreamTask = Task.Factory.FromAsync(request.BeginGetRequestStream, request.EndGetRequestStream, null);
+					RegisterApmTaskTimeout(apmGetRequestStreamTask, request, requestData);
+
+					using (var stream = await apmGetRequestStreamTask.ConfigureAwait(false))
 					{
 						if (requestData.HttpCompression)
 							using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
@@ -180,7 +193,10 @@ namespace Elasticsearch.Net
 				//Either the stream or the response object needs to be closed but not both although it won't
 				//throw any errors if both are closed atleast one of them has to be Closed.
 				//Since we expose the stream we let closing the stream determining when to close the connection
-				var response = (HttpWebResponse)(await request.GetResponseAsync().ConfigureAwait(false));
+
+				var apmGetResponseTask = Task.Factory.FromAsync(request.BeginGetResponse, request.EndGetResponse, null);
+				RegisterApmTaskTimeout(apmGetResponseTask, request, requestData);
+				var response = (HttpWebResponse)(await apmGetResponseTask.ConfigureAwait(false));
 				builder.StatusCode = (int)response.StatusCode;
 				builder.Stream = response.GetResponseStream();
 				// https://github.com/elastic/elasticsearch-net/issues/2311
