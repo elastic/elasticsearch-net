@@ -11,8 +11,8 @@ namespace Nest
 		[JsonProperty("scroll_id")]
 		string ScrollId { get; set; }
 	}
-	
-	public partial class ScrollRequest 
+
+	public partial class ScrollRequest
 	{
 		private Type _clrType { get; set; }
 		Type ICovariantSearchRequest.ClrType => this._clrType;
@@ -48,7 +48,7 @@ namespace Nest
 
 		public ScrollDescriptor<T> ScrollId(string scrollId) => Assign(a => a.ScrollId = scrollId);
 
-		public ScrollDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector) => 
+		public ScrollDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector) =>
 			Assign(a => a.TypeSelector = typeSelector);
 
 		public ScrollDescriptor<T> CovariantTypes(Types covariantTypes) => Assign(a=> this._covariantTypes = covariantTypes);
