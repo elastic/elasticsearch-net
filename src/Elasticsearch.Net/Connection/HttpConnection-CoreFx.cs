@@ -32,17 +32,17 @@ namespace Elasticsearch.Net
 	{
 		private readonly object _lock = new object();
 
-		private readonly ConcurrentDictionary<int, HttpClient> _clients = new ConcurrentDictionary<int, HttpClient>();
+		protected readonly ConcurrentDictionary<int, HttpClient> Clients = new ConcurrentDictionary<int, HttpClient>();
 
 		private HttpClient GetClient(RequestData requestData)
 		{
 			var key = GetClientKey(requestData);
 			HttpClient client;
-			if (!this._clients.TryGetValue(key, out client))
+			if (!this.Clients.TryGetValue(key, out client))
 			{
 				lock (_lock)
 				{
-					client = this._clients.GetOrAdd(key, h =>
+					client = this.Clients.GetOrAdd(key, h =>
 					{
 						var handler = CreateHttpClientHandler(requestData);
 						var httpClient = new HttpClient(handler, false)
@@ -223,7 +223,7 @@ namespace Elasticsearch.Net
 
 		protected virtual void DisposeManagedResources()
 		{
-			foreach (var c in _clients)
+			foreach (var c in Clients)
 				c.Value.Dispose();
 		}
 	}
