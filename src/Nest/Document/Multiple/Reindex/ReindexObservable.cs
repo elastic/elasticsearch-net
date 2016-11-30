@@ -49,7 +49,7 @@ namespace Nest
 			var toIndex = this._reindexRequest.To.Resolve(this._connectionSettings);
 			toIndex.ThrowIfNullOrEmpty(nameof(toIndex));
 
-			if (!this._reindexRequest.OmitCreateIndex)
+			if (!this._reindexRequest.OmitIndexCreation)
 				this.CreateIndex(fromIndex, toIndex);
 
 			var scroll = this._reindexRequest.Scroll ?? TimeSpan.FromMinutes(2);
