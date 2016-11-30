@@ -100,7 +100,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		}
 
 		//hide
-		[U] public void UppercaseCharacterThrowsResolveException()
+		[U] public void UppercaseCharacterThrowsArgumentException()
 		{
 			var settings = new ConnectionSettings()
 				.DefaultIndex("Default")
@@ -110,28 +110,30 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			var resolver = new IndexNameResolver(settings);
 
-			var e = Assert.Throws<ResolveException>(() => resolver.Resolve<Project>());
+			var e = Assert.Throws<ArgumentException>(() => resolver.Resolve<Project>());
 			e.Message.Should().Be($"Index names cannot contain uppercase characters: myProjects.");
-			e = Assert.Throws<ResolveException>(() => resolver.Resolve<Tag>());
+
+			e = Assert.Throws<ArgumentException>(() => resolver.Resolve<Tag>());
 			e.Message.Should().Be($"Index names cannot contain uppercase characters: Default.");
-			e = Assert.Throws<ResolveException>(() => resolver.Resolve("Foo"));
+
+			e = Assert.Throws<ArgumentException>(() => resolver.Resolve("Foo"));
 			e.Message.Should().Be($"Index names cannot contain uppercase characters: Foo.");
 		}
 
 		//hide
-		[U] public void NoIndexThrowsResolveException()
+		[U] public void NoIndexThrowsArgumentException()
 		{
 			var settings = new ConnectionSettings();
 			var resolver = new IndexNameResolver(settings);
-			var e = Assert.Throws<ResolveException>(() => resolver.Resolve<Project>());
+			var e = Assert.Throws<ArgumentException>(() => resolver.Resolve<Project>());
 			e.Message.Should().Contain("Index name is null");
 		}
 
 		//hide
-		[U] public void ResolveExceptionBubblesOut()
+		[U] public void ArgumentExceptionBubblesOut()
 		{
 			var client = TestClient.GetClient(s => new ConnectionSettings());
-			var e = Assert.Throws<ResolveException>(() => client.Search<Project>());
+			var e = Assert.Throws<ArgumentException>(() => client.Search<Project>());
 		}
 	}
 }
