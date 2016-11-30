@@ -55,6 +55,8 @@ namespace Tests.Document.Multiple.MultiTermVectors
 		{
 			response.ShouldBeValid();
 			response.Documents.Should().NotBeEmpty().And.HaveCount(2).And.OnlyContain(d => d.Found);
+			response.Documents.All(r => r.IsValid).Should().BeTrue();
+
 			var termvectorDoc = response.Documents.FirstOrDefault(d => d.TermVectors.Count > 0);
 
 			termvectorDoc.Should().NotBeNull();
