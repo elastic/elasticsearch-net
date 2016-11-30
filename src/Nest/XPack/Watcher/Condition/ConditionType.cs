@@ -14,6 +14,8 @@ namespace Nest
 		[EnumMember(Value="script")]
 		Script,
 		[EnumMember(Value = "compare")]
-		Compare
+		Compare,
+		[EnumMember(Value = "array_compare")]
+		ArrayCompare
 	}
 }

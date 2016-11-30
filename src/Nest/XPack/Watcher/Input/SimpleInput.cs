@@ -37,10 +37,6 @@ namespace Nest
 			_payload?.Remove(key);
 		}
 
-		public static implicit operator InputContainer(SimpleInput input) => input == null
-			? null
-			: new InputContainer(input);
-
 		internal override void WrapInContainer(IInputContainer container) => container.Simple = this;
 
 		public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
@@ -50,7 +46,7 @@ namespace Nest
 
 		IEnumerator IEnumerable.GetEnumerator()
 		{
-			return ((IEnumerable)_payload).GetEnumerator();
+			return this.GetEnumerator();
 		}
 	}
 

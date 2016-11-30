@@ -34,13 +34,9 @@ namespace Nest
 			return reducedActions;
 		}
 
-		public Actions()
-		{
-		}
+		public Actions() {}
 
-		public Actions(IDictionary<string, IAction> actions) : base(ReduceCombinators(actions))
-		{
-		}
+		public Actions(IDictionary<string, IAction> actions) : base(ReduceCombinators(actions)) {}
 
 		public static implicit operator Actions(ActionBase action)
 		{
@@ -70,9 +66,7 @@ namespace Nest
 
 	public class ActionsDescriptor : IsADictionaryDescriptorBase<ActionsDescriptor, Actions, string, IAction>
 	{
-		public ActionsDescriptor() : base(new Actions())
-		{
-		}
+		public ActionsDescriptor() : base(new Actions()) {}
 
 		public ActionsDescriptor Email(string name, Func<EmailActionDescriptor, IEmailAction> selector) =>
 			Assign(name, selector.InvokeOrDefault(new EmailActionDescriptor(name)));
