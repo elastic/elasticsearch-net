@@ -62,6 +62,9 @@ namespace Nest
 
 		public EmailPriority? Priority { get; set; }
 
+		/// <summary>
+		/// Attach an attachment to the email, only available since watcher 2.3 and up.
+		/// </summary>
 		public IEmailAttachments Attachments { get; set; }
 	}
 
@@ -109,6 +112,9 @@ namespace Nest
 
 		public EmailActionDescriptor Priority(EmailPriority priority) => Assign(a => a.Priority = priority);
 
+		/// <summary>
+		/// Attach an attachment to the email, only available since watcher 2.3 and up.
+		/// </summary>
 		public EmailActionDescriptor Attachments(Func<EmailAttachmentsDescriptor, IPromise<IEmailAttachments>> selector) =>
 			Assign(a => a.Attachments = selector?.Invoke(new EmailAttachmentsDescriptor())?.Value);
 	}
