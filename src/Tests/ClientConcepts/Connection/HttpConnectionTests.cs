@@ -11,36 +11,36 @@ using Tests.Framework;
 
 namespace Tests.ClientConcepts.Connection
 {
-    public class HttpConnectionTests
-    {
-	    public class TestableHttpConnection : HttpConnection
-	    {
-		    public int ClientCount => this.Clients.Count;
+	public class HttpConnectionTests
+	{
+		public class TestableHttpConnection : HttpConnection
+		{
+			public int ClientCount => this.Clients.Count;
 
-		    public int CallCount { get; private set; }
+			public int CallCount { get; private set; }
 
-		    public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData)
-		    {
-			    CallCount++;
-			    return base.Request<TReturn>(requestData);
-		    }
+			public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData)
+			{
+				CallCount++;
+				return base.Request<TReturn>(requestData);
+			}
 
-		    public override Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData)
-		    {
-			    CallCount++;
-			    return base.RequestAsync<TReturn>(requestData);
-		    }
-	    }
+			public override Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData)
+			{
+				CallCount++;
+				return base.RequestAsync<TReturn>(requestData);
+			}
+		}
 
-	    [U]
-	    public async Task SingleInstanceOfHttpClient()
-	    {
+		[U]
+		public async Task SingleInstanceOfHttpClient()
+		{
 			var connection = new TestableHttpConnection();
-		    var requestData = CreateRequestData(TimeSpan.FromMinutes(1));
+			var requestData = CreateRequestData(TimeSpan.FromMinutes(1));
 			connection.Request<string>(requestData);
 
 			connection.CallCount.Should().Be(1);
-		    connection.ClientCount.Should().Be(1);
+			connection.ClientCount.Should().Be(1);
 
 			await connection.RequestAsync<string>(requestData).ConfigureAwait(false);
 
@@ -48,7 +48,7 @@ namespace Tests.ClientConcepts.Connection
 			connection.ClientCount.Should().Be(1);
 		}
 
-	    [U]
+		[U]
 		public async Task MultipleInstancesOfHttpClientWhenRequestTimeoutChanges()
 		{
 			await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(TimeSpan.FromSeconds(30)));
@@ -72,23 +72,23 @@ namespace Tests.ClientConcepts.Connection
 			await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(httpCompression: true));
 		}
 
-	    private static async Task MultipleInstancesOfHttpClientWhen(Func<RequestData> differentRequestData)
-	    {
-		    var connection = new TestableHttpConnection();
-		    var requestData = CreateRequestData();
-		    connection.Request<string>(requestData);
+		private static async Task MultipleInstancesOfHttpClientWhen(Func<RequestData> differentRequestData)
+		{
+			var connection = new TestableHttpConnection();
+			var requestData = CreateRequestData();
+			connection.Request<string>(requestData);
 
-		    connection.CallCount.Should().Be(1);
-		    connection.ClientCount.Should().Be(1);
+			connection.CallCount.Should().Be(1);
+			connection.ClientCount.Should().Be(1);
 
-		    requestData = differentRequestData();
-		    await connection.RequestAsync<string>(requestData).ConfigureAwait(false);
+			requestData = differentRequestData();
+			await connection.RequestAsync<string>(requestData).ConfigureAwait(false);
 
-		    connection.CallCount.Should().Be(2);
-		    connection.ClientCount.Should().Be(2);
-	    }
+			connection.CallCount.Should().Be(2);
+			connection.ClientCount.Should().Be(2);
+		}
 
-	    private static RequestData CreateRequestData(
+		private static RequestData CreateRequestData(
 			TimeSpan requestTimeout = default(TimeSpan),
 			Uri proxyAddress = null,
 			bool disableAutomaticProxyDetection = false,
@@ -106,12 +106,12 @@ namespace Tests.ClientConcepts.Connection
 				connectionSettings.Proxy(proxyAddress, null, null);
 
 			var requestData = new RequestData(HttpMethod.GET, "/", null, connectionSettings, new PingRequestParameters(),
-			    new MemoryStreamFactory())
-		    {
-			    Node = new Node(new Uri("http://localhost:9200"))
-		    };
-		    return requestData;
-	    }
-    }
+				new MemoryStreamFactory())
+			{
+				Node = new Node(new Uri("http://localhost:9200"))
+			};
+			return requestData;
+		}
+	}
 }
 #endif
