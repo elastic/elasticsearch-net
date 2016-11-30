@@ -407,7 +407,7 @@ namespace Nest
 		/// <summary>
 		/// For scroll queries that return a lot of documents it is possible to split the scroll in multiple slices which can be consumed independently
 		/// </summary>
-		public SearchDescriptor<T> Slice(Func<SlicedScrollDescriptor<T>, ISlicedScroll> query) =>
+		public SearchDescriptor<T> Slice(Func<SlicedScrollDescriptor<T>, ISlicedScroll> selector) =>
 			Assign(a => a.Slice = query?.Invoke(new SlicedScrollDescriptor<T>()));
 
 		/// <summary>
