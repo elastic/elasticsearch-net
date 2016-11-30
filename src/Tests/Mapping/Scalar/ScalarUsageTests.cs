@@ -14,6 +14,8 @@ namespace Tests.Mapping.Scalar
 		protected override bool SupportsDeserialization => false;
 		protected override bool TestObjectInitializer => false;
 
+		public enum ScalarEnum { X }
+
 		public class ScalarPoco
 		{
 			public int Int { get; set; }
@@ -98,6 +100,8 @@ namespace Tests.Mapping.Scalar
 
 			public string String { get; set; }
 			public IEnumerable<string> Strings { get; set; }
+
+			public ScalarEnum Enum { get; set; }
 		}
 
 		protected override object ExpectJson => new
@@ -169,7 +173,8 @@ namespace Tests.Mapping.Scalar
 				ulongNullable = new { type = "double" },
 				ulongNullables = new { type = "double" },
 				@string = new { type = "text" },
-				strings = new { type = "text" }
+				strings = new { type = "text" },
+				@enum = new { type = "integer" }
 			}
 		};
 
@@ -241,6 +246,7 @@ namespace Tests.Mapping.Scalar
 				.Scalar(p => p.GuidNullables, m => m)
 				.Scalar(p => p.String, m => m)
 				.Scalar(p => p.Strings, m => m)
+				.Scalar(p => p.Enum, m => m)
 			);
 
 		protected override TypeMapping Initializer => null;
