@@ -1265,6 +1265,7 @@
     <Compile Include="XPack\Watcher\Action\ActionBase.cs" />
     <Compile Include="XPack\Watcher\Action\ActionsDescriptorBase.cs" />
     <Compile Include="XPack\Watcher\Action\ActionType.cs" />
+    <Compile Include="XPack\Watcher\Action\Email\AttachData.cs" />
     <Compile Include="XPack\Watcher\Action\Email\DataAttachment.cs" />
     <Compile Include="XPack\Watcher\Action\Email\EmailAction.cs" />
     <Compile Include="XPack\Watcher\Action\Email\EmailAttachments.cs" />

@@ -74,6 +74,10 @@ namespace Nest
 		{
 		}
 
+		/// <summary>
+		/// A watch action that sends email notifications.
+		/// To use the email action, you must configure at least one email account.
+		/// </summary>
 		public ActionsDescriptor Email(string name, Func<EmailActionDescriptor, IEmailAction> selector) =>
 			Assign(name, selector.InvokeOrDefault(new EmailActionDescriptor(name)));
 
@@ -86,6 +90,13 @@ namespace Nest
 		public ActionsDescriptor Logging(string name, Func<LoggingActionDescriptor, ILoggingAction> selector) =>
 			Assign(name, selector.InvokeOrDefault(new LoggingActionDescriptor(name)));
 
+		/// <summary>
+		/// A watch action that creates events in PagerDuty.
+		/// To use the PagerDuty action, you need to configure at least one PagerDuty account in Watcher.
+		/// </summary>
+		/// <remarks>
+		/// Only available in Watcher 2.3 and up
+		/// </remarks>
 		public ActionsDescriptor PagerDuty(string name, Func<PagerDutyActionDescriptor, IPagerDutyAction> selector) =>
 			Assign(name, selector.InvokeOrDefault(new PagerDutyActionDescriptor(name)));
 
