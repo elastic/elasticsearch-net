@@ -128,6 +128,8 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			dateHistogram.Should().NotBeNull();
 			dateHistogram.Buckets.Should().NotBeNull();
 			dateHistogram.Buckets.Count.Should().BeGreaterThan(10);
+			dateHistogram.Buckets.Should().NotBeNull();
+			dateHistogram.Buckets.Count.Should().BeGreaterThan(0);
 			foreach (var item in dateHistogram.Buckets)
 			{
 				item.Date.Should().NotBe(default(DateTime));

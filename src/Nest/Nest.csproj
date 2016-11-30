@@ -82,7 +82,6 @@
     <Compile Include="Aggregations\Bucket\Global\GlobalAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Histogram\ExtendedBounds.cs" />
     <Compile Include="Aggregations\Bucket\Histogram\HistogramAggregation.cs" />
-    <Compile Include="Aggregations\Bucket\Histogram\HistogramBucket.cs" />
     <Compile Include="Aggregations\Bucket\Histogram\HistogramOrder.cs" />
     <Compile Include="Aggregations\Bucket\IpRange\IpRange.cs" />
     <Compile Include="Aggregations\Bucket\IpRange\IpRangeAggregation.cs" />
