@@ -1,5 +1,6 @@
 ﻿using System;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -70,5 +71,24 @@ namespace Tests.Document.Single.TermVectors
 				MaximumWordLength = 200
 			}
 		};
+
+		protected override void ExpectResponse(ITermVectorsResponse response)
+		{
+			response.ShouldBeValid();
+
+			response.TermVectors.Should().NotBeEmpty();
+			response.Found.Should().BeTrue();
+			response.Version.Should().Be(1);
+			response.Id.Should().NotBeNullOrEmpty();
+			response.Index.Should().NotBeNullOrEmpty();
+			response.Type.Should().NotBeNullOrEmpty();
+
+			foreach (var termVector in response.TermVectors)
+			{
+				termVector.Key.Should().NotBeNullOrEmpty();
+				termVector.Value.FieldStatistics.Should().NotBeNull();
+				termVector.Value.Terms.Should().NotBeEmpty();
+			}
+		}
 	}
 }
