@@ -1342,7 +1342,7 @@
     <Compile Include="XPack\Watcher\Input\SearchInput.cs" />
     <Compile Include="XPack\Watcher\Input\SearchInputRequest.cs" />
     <Compile Include="XPack\Watcher\Input\SimpleInput.cs" />
-    <Compile Include="XPack\Watcher\PutWatch\Actions.cs" />
+    <Compile Include="XPack\Watcher\Action\Actions.cs" />
     <Compile Include="XPack\Watcher\PutWatch\ElasticClient-PutWatch.cs" />
     <Compile Include="XPack\Watcher\PutWatch\PutWatchRequest.cs" />
     <Compile Include="XPack\Watcher\PutWatch\PutWatchResponse.cs" />
