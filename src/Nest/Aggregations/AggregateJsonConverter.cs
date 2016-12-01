@@ -547,38 +547,35 @@ namespace Nest
 
 		private IBucket GetKeyedBucket(JsonReader reader, JsonSerializer serializer)
 		{
-			var key = reader.ReadAsString();
+			reader.Read();
+			var key = reader.Value;
 			reader.Read();
 			var property = reader.Value as string;
 			if (property == "from" || property == "to")
-				return GetRangeBucket(reader, serializer, key);
+				return GetRangeBucket(reader, serializer, key as string);
 
-			var keyItem = new KeyedBucket { Key = key };
+			var bucket = new KeyedBucket<object> { Key = key };
 
 			if (property == "key_as_string")
 			{
-				keyItem.KeyAsString = reader.ReadAsString();
+				bucket.KeyAsString = reader.ReadAsString();
 				reader.Read();
 			}
 
 			reader.Read(); //doc_count;
 			var docCount = reader.Value as long?;
-			keyItem.DocCount = docCount.GetValueOrDefault(0);
+			bucket.DocCount = docCount.GetValueOrDefault(0);
 			reader.Read();
 
 			var nextProperty = reader.Value as string;
 			if (nextProperty == "score")
-			{
-				return GetSignificantTermsBucket(reader, serializer, keyItem);
-			}
+				return GetSignificantTermsBucket(reader, serializer, bucket);
 
-
-			keyItem.Aggregations = this.GetSubAggregates(reader, serializer);
-			return keyItem;
-
+			bucket.Aggregations = this.GetSubAggregates(reader, serializer);
+			return bucket;
 		}
 
-		private IBucket GetSignificantTermsBucket(JsonReader reader, JsonSerializer serializer, KeyedBucket keyItem)
+		private IBucket GetSignificantTermsBucket(JsonReader reader, JsonSerializer serializer, KeyedBucket<object> keyItem)
 		{
 			reader.Read();
 			var score = reader.Value as double?;
@@ -587,7 +584,7 @@ namespace Nest
 			var bgCount = reader.Value as long?;
 			var significantTermItem = new SignificantTermsBucket()
 			{
-				Key = keyItem.Key,
+				Key = keyItem.Key as string,
 				DocCount = keyItem.DocCount.GetValueOrDefault(0),
 				BgCount = bgCount.GetValueOrDefault(0),
 				Score = score.GetValueOrDefault(0)
