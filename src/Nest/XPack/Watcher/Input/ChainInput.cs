@@ -7,6 +7,9 @@ namespace Nest
 	/// <summary>
 	///  input to load data from multiple sources into the watch execution context when the watch is triggered.
 	/// </summary>
+	/// <remarks>
+	/// Only available in Watcher 2.1 onwards
+	/// </remarks>
 	[JsonObject]
 	[JsonConverter(typeof(ChainInputJsonConverter))]
 	public interface IChainInput : IInput
@@ -17,7 +20,12 @@ namespace Nest
 		IDictionary<string, InputContainer> Inputs { get; set; }
 	}
 
-	/// <inheritdoc />
+	/// <summary>
+	///  input to load data from multiple sources into the watch execution context when the watch is triggered.
+	/// </summary>
+	/// <remarks>
+	/// Only available in Watcher 2.1 onwards
+	/// </remarks>
 	public class ChainInput : InputBase, IChainInput
 	{
 		public ChainInput() {}
@@ -33,7 +41,12 @@ namespace Nest
 		internal override void WrapInContainer(IInputContainer container) => container.Chain = this;
 	}
 
-	/// <inheritdoc />
+	/// <summary>
+	///  input to load data from multiple sources into the watch execution context when the watch is triggered.
+	/// </summary>
+	/// <remarks>
+	/// Only available in Watcher 2.1 onwards
+	/// </remarks>
 	public class ChainInputDescriptor : DescriptorBase<ChainInputDescriptor, IChainInput>, IChainInput
 	{
 		public ChainInputDescriptor() {}

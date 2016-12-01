@@ -6,11 +6,25 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
+	/// <summary>
+	/// A watch action that creates events in PagerDuty.
+	/// To use the PagerDuty action, you need to configure at least one PagerDuty account in Watcher.
+	/// </summary>
+	/// <remarks>
+	/// Only available in Watcher 2.3 and up
+	/// </remarks>
 	[JsonObject]
 	public interface IPagerDutyAction : IAction, IPagerDutyEvent
 	{
 	}
 
+	/// <summary>
+	/// A watch action that creates events in PagerDuty.
+	/// To use the PagerDuty action, you need to configure at least one PagerDuty account in Watcher.
+	/// </summary>
+	/// <remarks>
+	/// Only available in Watcher 2.3 and up
+	/// </remarks>
 	public class PagerDutyAction : ActionBase, IPagerDutyAction
 	{
 		public override ActionType ActionType => ActionType.PagerDuty;
@@ -36,6 +50,13 @@ namespace Nest
 		}
 	}
 
+	/// <summary>
+	/// A watch action that creates events in PagerDuty.
+	/// To use the PagerDuty action, you need to configure at least one PagerDuty account in Watcher.
+	/// </summary>
+	/// <remarks>
+	/// Only available in Watcher 2.3 and up
+	/// </remarks>
 	public class PagerDutyActionDescriptor : ActionsDescriptorBase<PagerDutyActionDescriptor, IPagerDutyAction>, IPagerDutyAction
 	{
 		protected override ActionType ActionType => ActionType.PagerDuty;

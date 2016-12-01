@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Tests.XPack.Watcher.ExecuteWatch
 {
+	[SkipVersion("<2.3.0", "Email action has no attachments and pagerduty action does not exist in these versions")]
 	public class ExecuteWatchApiTests : ApiIntegrationTestBase<XPackCluster, IExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
 	{
 		private readonly DateTimeOffset _triggeredDateTime = new DateTimeOffset(2016, 11, 17, 13, 00, 00, TimeSpan.Zero);

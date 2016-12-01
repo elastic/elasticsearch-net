@@ -16,6 +16,12 @@ namespace Nest
 		[JsonProperty("simple")]
 		ISimpleInput Simple { get; set; }
 
+		/// <summary>
+		///  input to load data from multiple sources into the watch execution context when the watch is triggered.
+		/// </summary>
+		/// <remarks>
+		/// Only available in Watcher 2.1 onwards
+		/// </remarks>
 		[JsonProperty("chain")]
 		IChainInput Chain { get; set; }
 	}
@@ -54,6 +60,12 @@ namespace Nest
 		public InputDescriptor Simple(Func<SimpleInputDescriptor, ISimpleInput> selector) =>
 			Assign(a => a.Simple = selector.Invoke(new SimpleInputDescriptor()));
 
+		/// <summary>
+		///  input to load data from multiple sources into the watch execution context when the watch is triggered.
+		/// </summary>
+		/// <remarks>
+		/// Only available in Watcher 2.1 onwards
+		/// </remarks>
 		public InputDescriptor Chain(Func<ChainInputDescriptor, IChainInput> selector) =>
 			Assign(a => a.Chain = selector.Invoke(new ChainInputDescriptor()));
 	}

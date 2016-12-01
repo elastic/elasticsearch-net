@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace Nest
 {
+	/// <summary>
+	/// A watch action that sends email notifications.
+	/// To use the email action, you must configure at least one email account.
+	/// </summary>
 	[JsonObject]
 	public interface IEmailAction : IAction
 	{
@@ -36,8 +40,16 @@ namespace Nest
 
 		[JsonProperty("attachments")]
 		IEmailAttachments Attachments { get; set; }
+
+		[JsonProperty("attach_data")]
+		[Obsolete("Deprecated in Watcher 2.3. Use Attachments to set Attachment data")]
+		Union<bool?, AttachData> AttachData { get; set; }
 	}
 
+	/// <summary>
+	/// A watch action that sends email notifications.
+	/// To use the email action, you must configure at least one email account.
+	/// </summary>
 	public class EmailAction : ActionBase, IEmailAction
 	{
 		public override ActionType ActionType => ActionType.Email;
@@ -62,9 +74,28 @@ namespace Nest
 
 		public EmailPriority? Priority { get; set; }
 
+		/// <summary>
+		/// Attaches an attachment to the email
+		/// </summary>
+		/// <remarks>
+		/// Only available in Watcher 2.3 and up
+		/// </remarks>
 		public IEmailAttachments Attachments { get; set; }
+
+		/// <summary>
+		/// Indicates whether the watch execution data should be attached to the email.
+		/// If set to <c>true</c>, the data is attached as a YAML file called data.yml.
+		/// If it’s set to <c>false</c>, no data is attached.
+		/// To attach data and control the format of the attached data, assign <see cref="AttachData"/>
+		/// </summary>
+		[Obsolete("Deprecated in Watcher 2.3. Use Attachments to set Attachment data")]
+		public Union<bool?, AttachData> AttachData { get; set; }
 	}
 
+	/// <summary>
+	/// A watch action that sends email notifications.
+	/// To use the email action, you must configure at least one email account.
+	/// </summary>
 	public class EmailActionDescriptor : ActionsDescriptorBase<EmailActionDescriptor, IEmailAction>, IEmailAction
 	{
 		public EmailActionDescriptor(string name) : base(name) {}
@@ -81,6 +112,7 @@ namespace Nest
 		IEmailBody IEmailAction.Body { get; set; }
 		EmailPriority? IEmailAction.Priority { get; set; }
 		IEmailAttachments IEmailAction.Attachments { get; set; }
+		Union<bool?, AttachData> IEmailAction.AttachData { get; set; }
 
 		public EmailActionDescriptor Account(string account) => Assign(a => a.Account = account);
 
@@ -109,7 +141,27 @@ namespace Nest
 
 		public EmailActionDescriptor Priority(EmailPriority priority) => Assign(a => a.Priority = priority);
 
+		/// <summary>
+		/// Attach an attachment to the email, only available since watcher 2.3 and up.
+		/// </summary>
 		public EmailActionDescriptor Attachments(Func<EmailAttachmentsDescriptor, IPromise<IEmailAttachments>> selector) =>
 			Assign(a => a.Attachments = selector?.Invoke(new EmailAttachmentsDescriptor())?.Value);
+
+		/// <summary>
+		/// Indicates whether the watch execution data should be attached to the email.
+		/// If set to <c>true</c>, the data is attached as a YAML file called data.yml.
+		/// If it’s set to <c>false</c>, no data is attached.
+		/// To attach data and control the format of the attached data, use <see cref="AttachData(DataAttachmentFormat)"/>
+		/// </summary>
+		[Obsolete("Deprecated in Watcher 2.3. Use Attachments to set Attachment data")]
+		public EmailActionDescriptor AttachData(bool attach = true) =>
+			Assign(a => a.AttachData = attach);
+
+		/// <summary>
+		/// Indicates to attach the watch execution data attached to the email and the format.
+		/// </summary>
+		[Obsolete("Deprecated in Watcher 2.3. Use Attachments to set Attachment data")]
+		public EmailActionDescriptor AttachData(DataAttachmentFormat format) =>
+			Assign(a => a.AttachData = new AttachData { Format = format });
 	}
 }
