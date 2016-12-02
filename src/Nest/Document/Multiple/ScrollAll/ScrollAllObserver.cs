@@ -1,4 +1,5 @@
 ﻿using System;
+using Nest.CommonAbstractions.Reactive;
 
 namespace Nest
 {
@@ -7,7 +8,7 @@ namespace Nest
 		public ScrollAllObserver(
 			Action<IScrollAllResponse<T>> onNext = null,
 			Action<Exception> onError = null,
-			System.Action onCompleted = null)
+			Action onCompleted = null)
 			: base(onNext, onError, onCompleted) { }
 
 	}

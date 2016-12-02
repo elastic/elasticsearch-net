@@ -7,10 +7,9 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Helper method you can pass an IEnumerable that we will be partionened and send as multiple bulks in parallel
+		/// BulkAll is a generic helper that will partition any lazy stream of documents and send them to elasticsearch as bulks concurrently
 		/// </summary>
-		/// <param name="selector">the descriptor to describe the reindex operation</param>
-		/// <returns>An IObservable&lt;IBulkAllResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
+		/// <param name="documents">The lazy stream of documents</param>
 		BulkAllObservable<T> BulkAll<T>(
 			IEnumerable<T> documents,
 			Func<BulkAllDescriptor<T>, IBulkAllRequest<T>> selector,
@@ -19,10 +18,8 @@ namespace Nest
 			where T : class;
 
 		/// <summary>
-		/// Helper method that allows you to reindex from one index into another using SCAN and SCROLL.
+		/// BulkAll is a generic helper that will partition any lazy stream of documents and send them to elasticsearch as bulks concurrently
 		/// </summary>
-		/// <param name="request">a request object to describe the reindex operation</param>
-		/// <returns>An IObservable&lt;IBulkAllResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
 		BulkAllObservable<T> BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 	}
 
@@ -40,6 +37,6 @@ namespace Nest
 		///<inheritdoc />
 		public BulkAllObservable<T>  BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class =>
-			new BulkAllObservable<T>(this, ConnectionSettings, request, cancellationToken);
+			new BulkAllObservable<T>(this, request, cancellationToken);
 	}
 }

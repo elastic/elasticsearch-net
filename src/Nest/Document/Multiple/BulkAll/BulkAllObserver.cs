@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Nest.CommonAbstractions.Reactive;
 
 namespace Nest
 {
@@ -17,7 +18,7 @@ namespace Nest
 		public BulkAllObserver(
 			Action<IBulkAllResponse> onNext = null,
 			Action<Exception> onError = null,
-			System.Action onCompleted = null
+			Action onCompleted = null
 			)
 			: base(onNext, onError, onCompleted)
 		{
