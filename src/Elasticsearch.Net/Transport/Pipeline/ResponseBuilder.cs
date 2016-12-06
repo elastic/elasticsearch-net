@@ -10,13 +10,13 @@ namespace Elasticsearch.Net
 	public class ResponseBuilder<TReturn>
 		where TReturn : class
 	{
-		public const int BufferSize = 8096;
+		private const int BufferSize = 81920;
 
 		public Exception Exception { get; set; }
 		public int? StatusCode { get; set; }
 		public Stream Stream { get; set; }
 
-		private RequestData _requestData;
+		private readonly RequestData _requestData;
 
 		public ResponseBuilder(RequestData requestData)
 		{

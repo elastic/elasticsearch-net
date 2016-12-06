@@ -8,8 +8,10 @@ namespace Elasticsearch.Net
 {
 	public class ElasticsearchDefaultSerializer : IElasticsearchSerializer
 	{
-		public static readonly ElasticsearchDefaultSerializer Instance = new ElasticsearchDefaultSerializer();
 		private static readonly ElasticsearchNetJsonStrategy Strategy = new ElasticsearchNetJsonStrategy();
+		private const int BufferSize = 81920;
+
+		public static readonly ElasticsearchDefaultSerializer Instance = new ElasticsearchDefaultSerializer();
 
 		public T Deserialize<T>(Stream stream)
 		{
@@ -34,7 +36,7 @@ namespace Elasticsearch.Net
 			using (var ms = new MemoryStream())
 			using (stream)
 			{
-				await stream.CopyToAsync(ms, 8096, cancellationToken).ConfigureAwait(false);
+				await stream.CopyToAsync(ms, BufferSize, cancellationToken).ConfigureAwait(false);
 				var buffer = ms.ToArray();
 				if (buffer.Length <= 1)
 					return default(T);
