@@ -11,21 +11,37 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// A JSON serializer that uses Json.NET for serialization
+	/// </summary>
 	public class JsonNetSerializer : IElasticsearchSerializer
 	{
 		private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
+		private JsonSerializer _defaultSerializer;
+		private JsonSerializer _indentedSerializer;
 
 
 		protected IConnectionSettingsValues Settings { get; }
+
+		/// <summary>
+		/// Resolves JsonContracts for types
+		/// </summary>
 		protected ElasticContractResolver ContractResolver { get; }
 
-		//todo this internal smells
+		//TODO this internal smells
 		internal JsonSerializer Serializer => _defaultSerializer;
 
-		private Dictionary<SerializationFormatting, JsonSerializer> _defaultSerializers;
-		private JsonSerializer _defaultSerializer;
+		/// <summary>
+		/// The size of the buffer to use when writing the serialized request
+		/// to the request stream
+		/// </summary>
+		// Performance tests as part of https://github.com/elastic/elasticsearch-net/issues/1899 indicate this 
+		// to be a good compromise buffer size for performance throughput and bytes allocated.
+		protected virtual int BufferSize => 1024;
 
 		protected virtual IList<Func<Type, JsonConverter>> ContractConverters => null;
+
+		protected readonly ConcurrentDictionary<string, IPropertyMapping> Properties = new ConcurrentDictionary<string, IPropertyMapping>();
 
 		public JsonNetSerializer(IConnectionSettingsValues settings, Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier) : this(settings, null, settingsModifier) { }
 
@@ -49,10 +65,10 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// If you subclass JsonNetSerializer and want to apply state passed in the constructor call this to
-		/// overwrite the DefaultSerializers's JsonSerializerSettings and/or connectionsettings.
+		/// If you subclass JsonNetSerializer and want to apply state passed in the constructor, call this to
+		/// overwrite the DefaultSerializers's JsonSerializerSettings and/or connectionSettings.
 		/// </summary>
-		/// <param name="settingsModifier"></param>
+		/// <param name="settingsModifier">a delegate used to modify json serializer and connection settings</param>
 		protected void OverwriteDefaultSerializers(Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier)
 		{
 			settingsModifier.ThrowIfNull(nameof(settingsModifier));
@@ -62,20 +78,16 @@ namespace Nest
 			settingsModifier(indented, this.Settings);
 
 			this._defaultSerializer = JsonSerializer.Create(collapsed);
-			var indentedSerializer = JsonSerializer.Create(indented);
-			this._defaultSerializers = new Dictionary<SerializationFormatting, JsonSerializer>
-			{
-				{ SerializationFormatting.None, this._defaultSerializer },
-				{ SerializationFormatting.Indented, indentedSerializer }
-			};
-
+			this._indentedSerializer = JsonSerializer.Create(indented);
 		}
-
 
 		public virtual void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
 		{
-			var serializer = _defaultSerializers[formatting];
-			using (var writer = new StreamWriter(writableStream, ExpectedEncoding, 8096, leaveOpen: true))
+			var serializer = formatting == SerializationFormatting.Indented
+				? _indentedSerializer
+				: _defaultSerializer;
+
+			using (var writer = new StreamWriter(writableStream, ExpectedEncoding, BufferSize, leaveOpen: true))
 			using (var jsonWriter = new JsonTextWriter(writer))
 			{
 				serializer.Serialize(jsonWriter, data);
@@ -84,20 +96,18 @@ namespace Nest
 			}
 		}
 
-		protected readonly ConcurrentDictionary<string, IPropertyMapping> Properties = new ConcurrentDictionary<string, IPropertyMapping>();
-
 		public virtual IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
 		{
 			IPropertyMapping mapping;
 			var memberInfoString = $"{memberInfo.DeclaringType?.FullName}.{memberInfo.Name}";
 			if (Properties.TryGetValue(memberInfoString, out mapping))
 				return mapping;
-			mapping =  PropertyMappingFromAtrributes(memberInfo);
+			mapping =  PropertyMappingFromAttributes(memberInfo);
 			this.Properties.TryAdd(memberInfoString, mapping);
 			return mapping;
 		}
 
-		private static IPropertyMapping PropertyMappingFromAtrributes(MemberInfo memberInfo)
+		private static IPropertyMapping PropertyMappingFromAttributes(MemberInfo memberInfo)
 		{
 			var jsonProperty = memberInfo.GetCustomAttribute<JsonPropertyAttribute>(true);
 			var ignoreProperty = memberInfo.GetCustomAttribute<JsonIgnoreAttribute>(true);
