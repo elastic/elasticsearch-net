@@ -172,17 +172,18 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			this._cluster = cluster;
 		}
 
-		// TODO: https://github.com/elastic/elasticsearch/issues/18794
-		//[I] public async Task SniffPicksUpRoles()
-		//{
-		//	var node = SniffAndReturnNode();
-		//	node.MasterEligible.Should().BeTrue();
-		//	node.HoldsData.Should().BeFalse();
+		[I]
+		[SkipVersion("5.0.0-alpha3", "Broken in this version. See https://github.com/elastic/elasticsearch/issues/18794")]
+		public async Task SniffPicksUpRoles()
+		{
+			var node = SniffAndReturnNode();
+			node.MasterEligible.Should().BeTrue();
+			node.HoldsData.Should().BeFalse();
 
-		//	node = await SniffAndReturnNodeAsync();
-		//	node.MasterEligible.Should().BeTrue();
-		//	node.HoldsData.Should().BeFalse();
-		//}
+			node = await SniffAndReturnNodeAsync();
+			node.MasterEligible.Should().BeTrue();
+			node.HoldsData.Should().BeFalse();
+		}
 
 		private Node SniffAndReturnNode()
 		{

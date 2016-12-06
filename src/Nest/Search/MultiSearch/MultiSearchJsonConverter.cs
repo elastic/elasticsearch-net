@@ -12,7 +12,7 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var request = value as IMultiSearchRequest;
+			var request = (IMultiSearchRequest)value;
 			if (request == null) return;
 			var settings = serializer.GetConnectionSettings();
 			var elasticsearchSerializer = settings.Serializer;
@@ -22,11 +22,11 @@ namespace Nest
 
 			foreach (var operation in request.Operations.Values)
 			{
-				var indices = request.Index == null || !request.Index.Equals(operation.Index)
+				IUrlParameter indices = request.Index == null || !request.Index.Equals(operation.Index)
 					? operation.Index
 					: null;
 
-				var types = request.Type == null || !request.Type.Equals(operation.Type)
+				IUrlParameter types = request.Type == null || !request.Type.Equals(operation.Type)
 					? operation.Type
 					: null;
 
@@ -36,8 +36,8 @@ namespace Nest
 
 				var header = new
 				{
-					index = (indices as IUrlParameter)?.GetString(settings),
-					type = (types as IUrlParameter)?.GetString(settings),
+					index = indices?.GetString(settings),
+					type = types?.GetString(settings),
 					search_type = searchType,
 					preference = operation.Preference,
 					routing = operation.Routing,
