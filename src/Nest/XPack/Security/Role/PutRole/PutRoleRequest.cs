@@ -14,10 +14,6 @@ namespace Nest
 
 		[JsonProperty("indices")]
 		IEnumerable<IIndicesPrivileges> Indices { get; set; }
-
-		[JsonProperty("metadata")]
-		IDictionary<string, object> Metadata { get; set; }
-
 	}
 
 	public partial class PutRoleRequest
@@ -27,8 +23,6 @@ namespace Nest
 		public IEnumerable<string> RunAs { get; set; }
 
 		public IEnumerable<IIndicesPrivileges> Indices { get; set; }
-
-		public IDictionary<string, object> Metadata { get; set; }
 	}
 
 	[DescriptorFor("ShieldPutRole")]
@@ -37,7 +31,6 @@ namespace Nest
 		IEnumerable<string> IPutRoleRequest.Cluster { get; set; }
 		IEnumerable<string> IPutRoleRequest.RunAs { get; set; }
 		IEnumerable<IIndicesPrivileges> IPutRoleRequest.Indices { get; set; }
-		IDictionary<string, object> IPutRoleRequest.Metadata { get; set; }
 
 		public PutRoleDescriptor Cluster(IEnumerable<string> clusters) => Assign(a => a.Cluster = clusters);
 		public PutRoleDescriptor Cluster(params string[] clusters) => Assign(a => a.Cluster = clusters);
@@ -50,11 +43,5 @@ namespace Nest
 		/// <inheritdoc/>
 		public PutRoleDescriptor Indices(Func<IndicesPrivilegesDescriptor, IPromise<IList<IIndicesPrivileges>>> selector) =>
 			Assign(a => a.Indices = selector?.Invoke(new IndicesPrivilegesDescriptor())?.Value);
-
-
-		public PutRoleDescriptor Metadata(IDictionary<string, object> metadata) => Assign(a => a.Metadata = metadata);
-		public PutRoleDescriptor Metadata(Func<FluentDictionary<string, object>, IDictionary<string, object>> selector) =>
-			Assign(a => a.Metadata = selector?.Invoke(new FluentDictionary<string, object>()));
-
 	}
 }

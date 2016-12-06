@@ -45,13 +45,6 @@ namespace Tests.XPack.Security.Role.PutRole
 					fields = new [] { "name", "description" },
 					query = new { match_all = new {} }
 				}
-			},
-			metadata = new []
-			{
-				new
-				{
-					_internal = true
-				}
 			}
 		};
 
@@ -68,10 +61,6 @@ namespace Tests.XPack.Security.Role.PutRole
 					Privileges = new [] { "all" },
 					Query = new MatchAllQuery()
 				}
-			},
-			Metadata = new Dictionary<string, object>()
-			{
-				{ "_internal", true }
 			}
 		};
 
@@ -90,8 +79,7 @@ namespace Tests.XPack.Security.Role.PutRole
 					.Privileges("all")
 					.Query(q => q.MatchAll())
 				)
-			)
-			.Metadata( m => m.Add("_internal", true));
+			);
 
 		protected override void ExpectResponse(IPutRoleResponse response)
 		{

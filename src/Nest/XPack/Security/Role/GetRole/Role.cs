@@ -15,6 +15,6 @@ namespace Nest
 		public IEnumerable<IIndicesPrivileges> Indices { get; set; }
 
 		[JsonProperty("metadata")]
-		public IReadOnlyDictionary<string, object> Metadata { get; internal set; } = EmptyReadOnly<string, object>.Dictionary;
+		public IDictionary<string, object> Metadata { get; internal set; }
 	}
 }
