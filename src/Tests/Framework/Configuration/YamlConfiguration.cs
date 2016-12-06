@@ -30,7 +30,14 @@ namespace Tests.Framework.Configuration
 
 		private static string ConfigName(string configLine) => Parse(configLine, 0);
 		private static string ConfigValue(string configLine) => Parse(configLine, 1);
-		private static string Parse(string configLine, int index) => configLine.Split(':')[index].Trim(' ');
+		private static string Parse(string configLine, int index)
+		{
+			var configParts = configLine.Split(':');
+
+			return configParts.Length - 1 >= index
+				? configParts[index].Trim(' ')
+				: string.Empty;
+		}
 
 		private static TestMode GetTestMode(string mode)
 		{
