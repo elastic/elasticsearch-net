@@ -15,5 +15,7 @@ namespace Nest
 		[JsonProperty("indices")]
 		public IReadOnlyCollection<IIndicesPrivileges> Indices { get; private set; } = EmptyReadOnly<IIndicesPrivileges>.Collection;
 
+		[JsonProperty("metadata")]
+		public IReadOnlyDictionary<string, object> Metadata { get; internal set; } = EmptyReadOnly<string, object>.Dictionary;
 	}
 }
