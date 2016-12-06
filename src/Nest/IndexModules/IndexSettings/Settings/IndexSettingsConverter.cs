@@ -115,7 +115,7 @@ namespace Nest
 			var settings = Flatten(JObject.Load(reader)).Properties().ToDictionary(kv => kv.Name);
 
 			Set<int?>(s, settings, UpdatableIndexSettings.NumberOfReplicas, v => s.NumberOfReplicas = v);
-			Set<string>(s, settings, UpdatableIndexSettings.AutoExpandReplicas, v => s.AutoExpandReplicas = v);
+			Set<AutoExpandReplicas>(s, settings, UpdatableIndexSettings.AutoExpandReplicas, v => s.AutoExpandReplicas = v);
 			Set<Time>(s, settings, UpdatableIndexSettings.RefreshInterval, v => s.RefreshInterval = v);
 			Set<bool?>(s, settings, UpdatableIndexSettings.BlocksReadOnly, v => s.BlocksReadOnly = v);
 			Set<bool?>(s, settings, UpdatableIndexSettings.BlocksRead, v => s.BlocksRead = v);
