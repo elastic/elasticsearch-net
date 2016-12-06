@@ -152,6 +152,9 @@ namespace Tests.Framework.Integration
 		private void CreatePercolatorIndex()
 		{
 			var createPercolatedIndex = this.Client.CreateIndex(typeof(PercolatedQuery), c => c
+				.Settings(s => s
+					.AutoExpandReplicas("0-all")
+				)
 				.Mappings(map => map
 					.Map<PercolatedQuery>(m => m
 						.AutoMap()
@@ -254,7 +257,6 @@ namespace Tests.Framework.Integration
 			)
 			.GeoPoint(g => g
 				.Name(p => p.Location)
-				//.LatLon()
 			)
 			.Object<GeoIp>(o => o
 				.Name(p => p.GeoIp)

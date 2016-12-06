@@ -24,14 +24,14 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/_settings/index.%2A?local=true";
+		protected override string UrlPath => $"/queries/_settings/index.%2A?local=true";
 
 		protected override Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> Fluent => d => d
-			.Index<Project>()
+			.Index<PercolatedQuery>()
 			.Name("index.*")
 			.Local();
 
-		protected override GetIndexSettingsRequest Initializer => new GetIndexSettingsRequest(Infer.Index<Project>(), "index.*")
+		protected override GetIndexSettingsRequest Initializer => new GetIndexSettingsRequest(Infer.Index<PercolatedQuery>(), "index.*")
 		{
 			Local = true
 		};
@@ -43,6 +43,12 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 			index.Should().NotBeNull();
 			index.Settings.NumberOfShards.Should().HaveValue().And.BeGreaterThan(0);
 			index.Settings.NumberOfReplicas.Should().HaveValue();
+			index.Settings.AutoExpandReplicas.Should().NotBeNull();
+			index.Settings.AutoExpandReplicas.MinReplicas.Should().Be(0);
+			index.Settings.AutoExpandReplicas.MaxReplicas.Match(
+				i => { Assert.True(false, "expecting a string"); },
+				s => s.Should().Be("all"));
+			index.Settings.AutoExpandReplicas.ToString().Should().Be("0-all");
 		}
 	}
 }
