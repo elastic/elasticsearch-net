@@ -8,7 +8,7 @@ namespace Elasticsearch.Net
 	public class ResponseBuilder<TReturn>
 		where TReturn : class
 	{
-		public const int BufferSize = 8096;
+		private const int BufferSize = 81920;
 		private static readonly VoidResponse Void = new VoidResponse();
 		private static readonly IDisposable EmptyDisposable = new MemoryStream();
 
