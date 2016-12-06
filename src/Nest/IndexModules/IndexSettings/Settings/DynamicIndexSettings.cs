@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -16,8 +17,7 @@ namespace Nest
 		///Auto-expand the number of replicas based on the number of available nodes.
 		/// Set to a dash delimited lower and upper bound (e.g. 0-5) or use all for the upper bound (e.g. 0-all). Defaults to false (i.e. disabled).
 		/// </summary>
-		//TODO SPECIAL TYPE FOR THIS INSTEAD OF JUST STRING
-		string AutoExpandReplicas { get; set; }
+		AutoExpandReplicas AutoExpandReplicas { get; set; }
 
 		/// <summary>
 		/// How often to perform a refresh operation, which makes recent changes to the index visible to search.
@@ -103,7 +103,7 @@ namespace Nest
 		public int? NumberOfReplicas { get; set; }
 
 		/// <inheritdoc/>
-		public string AutoExpandReplicas { get; set; }
+		public AutoExpandReplicas AutoExpandReplicas { get; set; }
 
 		/// <inheritdoc/>
 		public bool? BlocksMetadata { get; set; }
@@ -179,7 +179,7 @@ namespace Nest
 		public TDescriptor NumberOfReplicas(int? numberOfReplicas) => Assign(a => a.NumberOfReplicas = numberOfReplicas);
 
 		/// <inheritdoc/>
-		public TDescriptor AutoExpandReplicas(string autoExpandReplicas) => Assign(a => a.AutoExpandReplicas = autoExpandReplicas);
+		public TDescriptor AutoExpandReplicas(AutoExpandReplicas autoExpandReplicas) => Assign(a => a.AutoExpandReplicas = autoExpandReplicas);
 
 		/// <inheritdoc/>
 		public TDescriptor BlocksMetadata(bool? blocksMetadata = true) => Assign(a => a.BlocksMetadata = blocksMetadata);
