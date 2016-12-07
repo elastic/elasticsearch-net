@@ -51,10 +51,11 @@ namespace Nest
 		public PutRoleDescriptor Indices(Func<IndicesPrivilegesDescriptor, IPromise<IList<IIndicesPrivileges>>> selector) =>
 			Assign(a => a.Indices = selector?.Invoke(new IndicesPrivilegesDescriptor())?.Value);
 
-
+		/// <inheritdoc/>
 		public PutRoleDescriptor Metadata(IDictionary<string, object> metadata) => Assign(a => a.Metadata = metadata);
-		public PutRoleDescriptor Metadata(Func<FluentDictionary<string, object>, IDictionary<string, object>> selector) =>
-			Assign(a => a.Metadata = selector?.Invoke(new FluentDictionary<string, object>()));
 
+		/// <inheritdoc/>
+		public PutRoleDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
+			Assign(a => a.Metadata = selector?.Invoke(new FluentDictionary<string, object>()));
 	}
 }
