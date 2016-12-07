@@ -10,9 +10,6 @@ namespace Nest
 	/// </summary>
 	public static class DeleteManyExtensions
 	{
-
-		//TODO nullable IndexName and IndexType?
-
 		/// <summary>
 		/// Shortcut into the Bulk call that deletes the specified objects
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
@@ -22,7 +19,7 @@ namespace Nest
 		/// <param name="objects">List of objects to delete</param>
 		/// <param name="index">Override the inferred indexname for T</param>
 		/// <param name="type">Override the inferred typename for T</param>
-		public static IBulkResponse DeleteMany<T>(this IElasticClient client, IEnumerable<T> @objects, string index = null, string type = null) where T : class
+		public static IBulkResponse DeleteMany<T>(this IElasticClient client, IEnumerable<T> @objects, IndexName index = null, TypeName type = null) where T : class
 		{
 			var bulkRequest = CreateDeleteBulkRequest(objects, index, type);
 			return client.Bulk(bulkRequest);
@@ -38,14 +35,14 @@ namespace Nest
 		/// <param name="objects">List of objects to delete</param>
 		/// <param name="index">Override the inferred indexname for T</param>
 		/// <param name="type">Override the inferred typename for T</param>
-		public static Task<IBulkResponse> DeleteManyAsync<T>(this IElasticClient client, IEnumerable<T> objects, string index = null, string type = null, CancellationToken cancellationToken = default(CancellationToken))
+		public static Task<IBulkResponse> DeleteManyAsync<T>(this IElasticClient client, IEnumerable<T> objects, IndexName index = null, TypeName type = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class
 		{
 			var bulkRequest = CreateDeleteBulkRequest(objects, index, type);
 			return client.BulkAsync(bulkRequest, cancellationToken);
 		}
 
-		private static BulkRequest CreateDeleteBulkRequest<T>(IEnumerable<T> objects, string index, string type) where T : class
+		private static BulkRequest CreateDeleteBulkRequest<T>(IEnumerable<T> objects, IndexName index, TypeName type) where T : class
 		{
 			@objects.ThrowIfEmpty(nameof(objects));
 			var bulkRequest = new BulkRequest(index, type);
