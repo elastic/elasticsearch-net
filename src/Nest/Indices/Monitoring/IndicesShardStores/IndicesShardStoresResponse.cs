@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
@@ -63,6 +64,7 @@ namespace Nest
 		public string Reason { get; set; }
 	}
 
+	[JsonConverter(typeof(StringEnumConverter))]
 	public enum ShardStoreAllocation
 	{
 		[EnumMember(Value = "primary")]
