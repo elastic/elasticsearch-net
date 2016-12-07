@@ -16,12 +16,12 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			throw new NotImplementedException();
+			throw new NotSupportedException();
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var request = value as IMultiSearchTemplateRequest;
+			var request = (IMultiSearchTemplateRequest)value;
 			if (request == null) return;
 			var settings = serializer.GetConnectionSettings();
 			var elasticsearchSerializer = settings.Serializer;
