@@ -11,7 +11,6 @@ namespace Nest
 		private readonly ConcurrentQueue<TSource> _queue;
 		private TSource _current;
 		private Exception _error;
-		private bool _done;
 		private bool _disposed;
 
 		private readonly SemaphoreSlim _gate;
@@ -49,7 +48,6 @@ namespace Nest
 
 		public void OnCompleted()
 		{
-			_done = true;
 			_subscription.Dispose();
 			_gate.Release();
 		}

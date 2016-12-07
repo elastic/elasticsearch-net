@@ -32,7 +32,7 @@ namespace Nest
 		/// <summary>
 		/// Describes the scroll operation where we need to fetch the documents from.
 		/// <para>
-		/// Note that <see cref="IScrollAllRequest{T}.BackPressure"/> can be overriden by our own.
+		/// Note that <see cref="IScrollAllRequest.BackPressure"/> can be overriden by our own.
 		/// </para>
 		/// </summary>
 		IScrollAllRequest ScrollAll{ get; set; }
@@ -48,7 +48,8 @@ namespace Nest
 		Func<IEnumerable<IHit<T>>, IBulkAllRequest<IHit<T>>> BulkAll { get; set; }
 
 		/// <summary>
-		/// Do not send a create index call on <see cref="To"/>, assume the index has been created outside of the reindex.
+		/// Do not send a create index call on the target index, assume the index has been created outside of the reindex.
+		/// Reindex will never create the index if it already exists however this will also omit the IndexExists call.
 		/// </summary>
 		bool OmitIndexCreation { get; set; }
 

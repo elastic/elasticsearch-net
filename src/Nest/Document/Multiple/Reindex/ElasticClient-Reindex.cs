@@ -15,16 +15,16 @@ namespace Nest
 		) where T : class;
 
 		/// <summary>
-		/// Simplified form for reindex which will cover 80% of its usecases. Allows you to index all documents of type T from <see cref="fromIndex" /> to <see cref="toIndex" />
-		/// optionally limitting the documents found in <see cref="fromIndex" /> by using <see cref="query"/>.
+		/// Simplified form for reindex which will cover 80% of its usecases. Allows you to index all documents of type T from <paramref name="fromIndex" /> to <paramref name="toIndex" />
+		/// optionally limitting the documents found in <paramref name="fromIndex" /> by using <paramref name="selector"/>.
 		/// </summary>
 		/// <param name="fromIndex">The source index, from which all types will be returned</param>
-		/// <param name="toIndex">The target index, if it does not exist already will be created using the same settings of <see cref="fromIndex"/></param>
-		/// <param name="query">an optional query limitting the documents found in <see cref="fromIndex"/></param>
+		/// <param name="toIndex">The target index, if it does not exist already will be created using the same settings of <paramref name="fromIndex"/></param>
+		/// <param name="selector">an optional query limitting the documents found in <paramref name="fromIndex"/></param>
 		IObservable<IBulkAllResponse> Reindex<T>(
 			IndexName fromIndex,
 			IndexName toIndex,
-			Func<QueryContainerDescriptor<T>, QueryContainer> query = null,
+			Func<QueryContainerDescriptor<T>, QueryContainer> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
 		) where T : class;
 
@@ -52,11 +52,11 @@ namespace Nest
 		public IObservable<IBulkAllResponse> Reindex<T>(
 			IndexName fromIndex,
 			IndexName toIndex,
-			Func<QueryContainerDescriptor<T>, QueryContainer> query = null,
+			Func<QueryContainerDescriptor<T>, QueryContainer> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
 		) where T : class =>
 			this.Reindex<T>(r => r
-					.ScrollAll("1m", -1, search => search.Search(ss => ss.Index(fromIndex).Query(query)))
+					.ScrollAll("1m", -1, search => search.Search(ss => ss.Index(fromIndex).Query(selector)))
 					.BulkAll(b => b.Index(toIndex))
 			, cancellationToken);
 

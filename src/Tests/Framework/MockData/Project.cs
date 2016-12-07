@@ -27,7 +27,7 @@ namespace Tests.Framework.MockData
 		public IEnumerable<string> Branches { get; set; }
 
 		public static Faker<Project> Generator { get; } =
-			new Faker<Project>()
+			Gimme.Lock(() => new Faker<Project>()
 				.RuleFor(p => p.Name, f => f.Person.Company.Name)
 				.RuleFor(p => p.Description, f => f.Lorem.Paragraphs(3))
 				.RuleFor(p => p.State, f => f.PickRandom<StateOfBeing>())
@@ -49,10 +49,9 @@ namespace Tests.Framework.MockData
 						}
 				}
 				)
-			;
+			);
 
-		public static IList<Project> Projects { get; } =
-			Project.Generator.Generate(100).ToList();
+		public static IList<Project> Projects { get; } = Gimme.Lock(()=> Project.Generator.Generate(100).ToList());
 
 		public static Project Instance = new Project
 		{

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading;
 using Elasticsearch.Net;
-using Nest.CommonAbstractions.Reactive;
 
 namespace Nest
 {
