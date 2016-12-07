@@ -8,7 +8,6 @@ namespace Nest
 		[JsonProperty("snapshot")]
 		public string Name { get; internal set;  }
 
-		//TODO Indices with array converter?
 		[JsonProperty("indices")]
 		public IReadOnlyCollection<IndexName> Indices { get; internal set; } =
 			EmptyReadOnly<IndexName>.Collection;

@@ -42,8 +42,6 @@ Target "Benchmark" <| fun _ -> Benchmarker.Run()
 
 Target "Documentation" <| fun _ -> Documentation.Generate()
 
-Target "QuickCompile"  <| fun _ -> Build.QuickCompile()
-
 Target "Version" <| fun _ -> 
     Versioning.PatchAssemblyInfos()
     Versioning.PatchProjectJsons()
