@@ -11,6 +11,8 @@ using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace Nest
 {
@@ -203,5 +205,45 @@ namespace Nest
 		}
 
 		internal static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> xs) => xs ?? new T[0];
+
+		internal static Task ForEachAsync<TSource, TResult>(
+			this IEnumerable<TSource> lazyList,
+			Func<TSource, long, Task<TResult>> taskSelector,
+			Action<TSource, TResult> resultProcessor,
+			Action<Task> done,
+			int maxDegreeOfParallelism
+		)
+		{
+			var semaphore = new SemaphoreSlim(initialCount: maxDegreeOfParallelism, maxCount: maxDegreeOfParallelism);
+			long page = 0;
+
+			return Task.WhenAll(
+					from item in lazyList
+					select ProcessAsync<TSource, TResult>(item, taskSelector, resultProcessor, semaphore, page++)
+				).ContinueWith(done);
+		}
+
+		private static async Task ProcessAsync<TSource, TResult>(
+			TSource item,
+			Func<TSource, long, Task<TResult>> taskSelector,
+			Action<TSource, TResult> resultProcessor,
+			SemaphoreSlim semaphoreSlim,
+			long page)
+		{
+			if (semaphoreSlim != null) await semaphoreSlim.WaitAsync().ConfigureAwait(false);
+			try
+			{
+				var result = await taskSelector(item, page).ConfigureAwait(false);
+				resultProcessor(item, result);
+			}
+			catch
+			{
+				throw;
+			}
+			finally
+			{
+				semaphoreSlim?.Release();
+			}
+		}
 	}
 }

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace Elasticsearch.Net
@@ -122,5 +119,6 @@ namespace Elasticsearch.Net
 
 			return factor.ToString("0.##", CultureInfo.InvariantCulture) + interval;
 		}
+
 	}
 }

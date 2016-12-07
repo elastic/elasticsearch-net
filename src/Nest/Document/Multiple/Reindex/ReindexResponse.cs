@@ -20,7 +20,7 @@ namespace Nest
 		/// <summary>
 		/// The no of scroll this result represents
 		/// </summary>
-		int Scroll { get; }
+		long Scroll { get; }
 
 		/// <summary>
 		/// Whether both the scroll and reindex result are valid
@@ -37,7 +37,7 @@ namespace Nest
 		public IBulkResponse BulkResponse { get; internal set; }
 		public ISearchResponse<T> SearchResponse { get; internal set; }
 
-		public int Scroll { get; internal set; }
+		public long Scroll { get; internal set; }
 
 		public bool IsValid =>
 			this.BulkResponse != null && this.BulkResponse.IsValid

@@ -23,7 +23,6 @@ namespace Nest
 
 	}
 
-
 	public class SlicedScrollDescriptor<T> : DescriptorBase<SlicedScrollDescriptor<T>, ISlicedScroll>, ISlicedScroll
 		where T : class
 	{

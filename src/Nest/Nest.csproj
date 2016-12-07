@@ -565,6 +565,11 @@
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexNode.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleResponse.cs" />
     <Compile Include="Document\Multiple\Retries.cs" />
+    <Compile Include="Document\Multiple\ScrollAll\ElasticClient-ScrollAll.cs" />
+    <Compile Include="Document\Multiple\ScrollAll\ScrollAllObservable.cs" />
+    <Compile Include="Document\Multiple\ScrollAll\ScrollAllObserver.cs" />
+    <Compile Include="Document\Multiple\ScrollAll\ScrollAllRequest.cs" />
+    <Compile Include="Document\Multiple\ScrollAll\ScrollAllResponse.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryRequest.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryResponse.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\ElasticClient-UpdateByQuery.cs" />

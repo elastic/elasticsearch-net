@@ -9,9 +9,9 @@ using Xunit;
 
 namespace Tests.Search.Scroll.Scroll
 {
-	public class SlicedScrollApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, IScrollRequest, ScrollDescriptor<Project>, ScrollRequest>
+	public class SlicedScrollSearchApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, IScrollRequest, ScrollDescriptor<Project>, ScrollRequest>
 	{
-		public SlicedScrollApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public SlicedScrollSearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private string _scrollId = "default-for-unit-tests";
 
