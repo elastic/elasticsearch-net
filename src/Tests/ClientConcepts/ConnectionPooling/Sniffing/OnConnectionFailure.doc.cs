@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
@@ -148,5 +149,37 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			);
 		}
 
+		[U] public async Task UsesPublishAdress()
+		{
+			var audit = new Auditor(() => Framework.Cluster
+					.Nodes(2)
+					.MasterEligible(9200)
+					.Ping(r => r.OnPort(9200).Fails(Once))
+					.Sniff(p => p.SucceedAlways(Framework.Cluster
+							.Nodes(10)
+							.MasterEligible(9200, 9202, 9201)
+							.PublishAddress("10.0.12.1")
+					))
+					.SniffingConnectionPool()
+					.Settings(s => s.SniffOnStartup(false))
+			);
+			Action<Audit, string, int> hostAssert = (a, host, expectedPort) =>
+			{
+				a.Node.Uri.Host.Should().Be(host);
+				a.Node.Uri.Port.Should().Be(expectedPort);
+			};
+
+			audit = await audit.TraceCalls(
+				new ClientCall {
+					{ PingFailure, a => hostAssert(a, "localhost", 9200)},
+					{ SniffOnFail },
+					{ SniffSuccess, a => hostAssert(a, "localhost", 9200)},
+					{ PingSuccess, a => hostAssert(a, "10.0.12.1", 9200)},
+					{ HealthyResponse,  a => hostAssert(a, "10.0.12.1", 9200)},
+					/** Our pool should now have three nodes */
+					{ pool =>  pool.Nodes.Count.Should().Be(10) }
+				}
+			);
+		}
 	}
 }

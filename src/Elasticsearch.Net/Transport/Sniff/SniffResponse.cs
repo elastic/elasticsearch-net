@@ -5,35 +5,12 @@ using System.Text.RegularExpressions;
 
 namespace Elasticsearch.Net
 {
-	public class SniffResponse
+	public static class SniffParser
 	{
-		//internal ctor  - so that only Elasticsearch.Net can instantiate it
-		internal SniffResponse() { }
-
 		public static Regex AddressRegex { get; } = new Regex(@"^((?<fqdn>[^/]+)/)?(?<ip>[^:]+|\[[\da-fA-F:\.]+\]):(?<port>\d+)$");
-
-		public string cluster_name { get; set; }
-
-		public Dictionary<string, NodeInfo> nodes { get; set; }
-
-		public IEnumerable<Node> ToNodes(bool forceHttp = false)
+		public static Uri ParseToUri(string boundAddress, bool forceHttp)
 		{
-			foreach (var kv in nodes.Where(n => n.Value.HttpEnabled))
-			{
-				yield return new Node(this.ParseToUri(kv.Value.http?.bound_address.FirstOrDefault(), forceHttp))
-				{
-					Name = kv.Value.name,
-					Id = kv.Key,
-					MasterEligible = kv.Value.MasterEligible,
-					HoldsData = kv.Value.HoldsData,
-					HttpEnabled = kv.Value.HttpEnabled
-				};
-			}
-		}
-
-		private Uri ParseToUri(string boundAddress, bool forceHttp)
-		{
-			if (boundAddress.IsNullOrEmpty()) return null;
+			if (boundAddress == null) throw new ArgumentNullException(nameof(boundAddress));
 			var suffix = forceHttp ? "s" : string.Empty;
 			var match = AddressRegex.Match(boundAddress);
 			if (!match.Success) throw new Exception($"Can not parse bound_address: {boundAddress} to Uri");
@@ -46,8 +23,42 @@ namespace Elasticsearch.Net
 			return new Uri($"http{suffix}://{host}:{port}");
 		}
 	}
+	internal class SniffResponse
+	{
 
-	public class NodeInfo
+		// ReSharper disable InconsistentNaming
+		// this uses simplejsons bindings
+		public string cluster_name { get; set; }
+
+		public Dictionary<string, NodeInfo> nodes { get; set; }
+
+		public IEnumerable<Node> ToNodes(bool forceHttp = false)
+		{
+			foreach (var kv in nodes.Where(n => n.Value.HttpEnabled))
+			{
+				var info = kv.Value;
+				var httpEndpoint = info.http?.publish_address;
+				if (string.IsNullOrWhiteSpace(httpEndpoint))
+					httpEndpoint = kv.Value.http?.bound_address.FirstOrDefault();
+				if (string.IsNullOrWhiteSpace(httpEndpoint))
+					continue;
+
+				var uri = SniffParser.ParseToUri(httpEndpoint, forceHttp);
+				var node = new Node(uri)
+				{
+					Name = kv.Value.name,
+					Id = kv.Key,
+					MasterEligible = kv.Value.MasterEligible,
+					HoldsData = kv.Value.HoldsData,
+					HttpEnabled = kv.Value.HttpEnabled
+				};
+				//TODO selector
+				yield return node;
+			}
+		}
+	}
+
+	internal class NodeInfo
 	{
 		public string name { get; set; }
 		public string transport_address { get; set; }
@@ -72,8 +83,9 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public class NodeInfoHttp
+	internal class NodeInfoHttp
 	{
 		public IList<string> bound_address { get; set; }
+		public string publish_address { get; set; }
 	}
 }

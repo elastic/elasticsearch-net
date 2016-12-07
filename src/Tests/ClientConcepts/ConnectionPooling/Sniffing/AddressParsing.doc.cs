@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using Elasticsearch.Net;
+using FluentAssertions;
 using Tests.Framework;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
@@ -28,7 +29,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				var ip = testcases[i, 1];
 				var port = testcases[i, 2];
 
-				var match = Elasticsearch.Net.SniffResponse.AddressRegex.Match(address);
+				var match = SniffParser.AddressRegex.Match(address);
 
 				match.Success.Should().BeTrue();
 

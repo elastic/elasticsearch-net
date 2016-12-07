@@ -15,7 +15,10 @@ namespace Tests.Framework
 		public TestableDateTimeProvider DateTimeProvider { get; } = new TestableDateTimeProvider();
 
 		private bool _sniffReturnsFqdn = false;
-		public bool SniffShouldReturnFqnd => _sniffReturnsFqdn;
+		internal bool SniffShouldReturnFqnd => _sniffReturnsFqdn;
+
+		private string _publishAddress;
+		internal string PublishAddressOverride => _publishAddress;
 
 		public IReadOnlyList<Node> Nodes => _nodes;
 
@@ -27,6 +30,12 @@ namespace Tests.Framework
 		public VirtualCluster SniffShouldReturnFqdn()
 		{
 			_sniffReturnsFqdn = true;
+			return this;
+		}
+
+		public VirtualCluster PublishAddress(string publishHost)
+		{
+			_publishAddress = publishHost;
 			return this;
 		}
 
