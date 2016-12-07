@@ -15,8 +15,11 @@ namespace Tests.Framework
 		protected override bool SkipMethod(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo factAttribute)
 		{
 			var classOfMethod = Type.GetType(testMethod.TestClass.Class.Name, true, true);
+			var method = classOfMethod.GetMethod(testMethod.Method.Name);
 			var collectionType = testMethod.TestClass?.TestCollection?.CollectionDefinition?.Name;
-			return TypeSkipVersionAttributeSatisfies(classOfMethod) || RequiresPluginButRunningAgainstSnapshot(classOfMethod, collectionType);
+			return TypeSkipVersionAttributeSatisfies(classOfMethod) ||
+				   MethodSkipVersionAttributeSatisfies(method) ||
+				   RequiresPluginButRunningAgainstSnapshot(classOfMethod, collectionType);
 		}
 
 
@@ -26,6 +29,22 @@ namespace Tests.Framework
 			var attributes = Attribute.GetCustomAttributes(classOfMethod, typeof(SkipVersionAttribute), true);
 #else
 			var attributes =  classOfMethod.GetTypeInfo().GetCustomAttributes(typeof(SkipVersionAttribute), true);
+#endif
+			if (!attributes.Any()) return false;
+
+			var elasticsearchVersion = TestClient.Configuration.ElasticsearchVersion;
+			return attributes
+				.Cast<SkipVersionAttribute>()
+				.SelectMany(a => a.Ranges)
+				.Any(range => range.IsSatisfied(elasticsearchVersion));
+		}
+
+		private static bool MethodSkipVersionAttributeSatisfies(MethodInfo methodInfo)
+		{
+#if !DOTNETCORE
+			var attributes = Attribute.GetCustomAttributes(methodInfo, typeof(SkipVersionAttribute), true);
+#else
+			var attributes =  methodInfo.GetCustomAttributes(typeof(SkipVersionAttribute), true);
 #endif
 			if (!attributes.Any()) return false;
 
