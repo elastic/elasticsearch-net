@@ -1,44 +1,39 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Nest.CommonAbstractions.Reactive;
 
 namespace Nest
 {
 	public class BulkAllObservable<T> : IDisposable, IObservable<IBulkAllResponse> where T : class
 	{
 		private readonly IBulkAllRequest<T> _partionedBulkRequest;
-		private readonly IConnectionSettingsValues _connectionSettings;
 		private readonly IElasticClient _client;
 		private readonly TimeSpan _backOffTime;
 		private readonly int _backOffRetries;
 		private readonly int _bulkSize;
 		private readonly int _maxDegreeOfParallelism;
-		private System.Action _incrementFailed = () => { };
-		private System.Action _incrementRetries = () => { };
+		private Action _incrementFailed = () => { };
+		private Action _incrementRetries = () => { };
 
 		private readonly CancellationToken _compositeCancelToken;
 		private readonly CancellationTokenSource _compositeCancelTokenSource;
 
-		private Func<IBulkResponse, bool> HandleErrors { get; set; }
-
 		public BulkAllObservable(
 			IElasticClient client,
-			IConnectionSettingsValues connectionSettings,
 			IBulkAllRequest<T> partionedBulkRequest,
 			CancellationToken cancellationToken = default(CancellationToken)
 			)
 		{
 			this._client = client;
-			this._connectionSettings = connectionSettings;
 			this._partionedBulkRequest = partionedBulkRequest;
-			this._backOffRetries = this._partionedBulkRequest.BackOffRetries.GetValueOrDefault(0);
-			this._backOffTime = (this._partionedBulkRequest?.BackOffTime?.ToTimeSpan() ?? TimeSpan.FromMinutes(1));
-			this._bulkSize = this._partionedBulkRequest.Size ?? 1000;
-			this._maxDegreeOfParallelism = _partionedBulkRequest.MaxDegreeOfParallelism ?? 20;
+			this._backOffRetries = this._partionedBulkRequest.BackOffRetries.GetValueOrDefault(CoordinatedRequestDefaults.BulkAllBackOffRetriesDefault);
+			this._backOffTime = (this._partionedBulkRequest?.BackOffTime?.ToTimeSpan() ??  CoordinatedRequestDefaults.BulkAllBackOffTimeDefault);
+			this._bulkSize = this._partionedBulkRequest.Size ?? CoordinatedRequestDefaults.BulkAllSizeDefault;
+			this._maxDegreeOfParallelism = _partionedBulkRequest.MaxDegreeOfParallelism ?? CoordinatedRequestDefaults.BulkAllMaxDegreeOfParallelismDefault;
 
 			this._compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 			this._compositeCancelToken = this._compositeCancelTokenSource.Token;
@@ -65,13 +60,13 @@ namespace Nest
 			return this;
 		}
 
-		private ElasticsearchClientException Throw(string message, IApiCallDetails details) =>
+		private static ElasticsearchClientException Throw(string message, IApiCallDetails details) =>
 			new ElasticsearchClientException(PipelineFailure.BadResponse, message, details);
 
 		private void BulkAll(IObserver<IBulkAllResponse> observer)
 		{
 			var documents = this._partionedBulkRequest.Documents;
-			var partioned = new PartitionHelper<T>(documents, this._bulkSize, this._maxDegreeOfParallelism);
+			var partioned = new PartitionHelper<T>(documents, this._bulkSize);
 			partioned.ForEachAsync(
 				(buffer, page) => this.BulkAsync(buffer, page, 0),
 				(buffer, response) => observer.OnNext(response),
@@ -98,6 +93,8 @@ namespace Nest
 				case System.Threading.Tasks.TaskStatus.Canceled:
 					observer.OnError(new TaskCanceledException(task));
 					break;
+				default:
+					throw new ArgumentOutOfRangeException();
 			}
 		}
 
@@ -115,7 +112,6 @@ namespace Nest
 				if (r.Refresh.HasValue) s.Refresh(r.Refresh.Value);
 				if (!string.IsNullOrEmpty(r.Routing)) s.Routing(r.Routing);
 				if (r.WaitForActiveShards.HasValue) s.WaitForActiveShards(r.WaitForActiveShards.ToString());
-
 
 				return s;
 			}, this._compositeCancelToken).ConfigureAwait(false);
@@ -136,45 +132,11 @@ namespace Nest
 			else if (!response.IsValid)
 			{
 				this._incrementFailed();
+				this._partionedBulkRequest.BackPressure?.Release();
 				throw Throw($"Bulk indexing failed and after retrying {backOffRetries} times", response.ApiCall);
 			}
+			this._partionedBulkRequest.BackPressure?.Release();
 			return new BulkAllResponse { Retries = backOffRetries, Page = page };
-		}
-
-		private sealed class PartitionHelper<TDocument> : IEnumerable<IList<TDocument>>
-		{
-			readonly IEnumerable<TDocument> _items;
-			readonly int _partitionSize;
-			readonly int _semaphoreSize;
-			bool _hasMoreItems;
-
-			internal PartitionHelper(IEnumerable<TDocument> i, int ps, int semaphoreSize)
-			{
-				_items = i;
-				_semaphoreSize = semaphoreSize;
-				_partitionSize = ps;
-			}
-
-			IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
-			public IEnumerator<IList<TDocument>> GetEnumerator()
-			{
-				using (var enumerator = _items.GetEnumerator())
-				{
-					_hasMoreItems = enumerator.MoveNext();
-					while (_hasMoreItems)
-						yield return GetNextBatch(enumerator).ToList();
-				}
-			}
-
-			private IEnumerable<TDocument> GetNextBatch(IEnumerator<TDocument> enumerator)
-			{
-				for (int i = 0; i < _partitionSize; ++i)
-				{
-					yield return enumerator.Current;
-					_hasMoreItems = enumerator.MoveNext();
-					if (!_hasMoreItems) yield break;
-				}
-			}
 		}
 
 		public bool IsDisposed { get; private set; }

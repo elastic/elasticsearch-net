@@ -1,8 +1,15 @@
 ﻿using System;
 
-
 namespace Nest
 {
+	internal static class CoordinatedRequestDefaults
+	{
+		public static int BulkAllMaxDegreeOfParallelismDefault = 20;
+		public static TimeSpan BulkAllBackOffTimeDefault = TimeSpan.FromMinutes(1);
+		public static int BulkAllBackOffRetriesDefault = 0;
+		public static int BulkAllSizeDefault = 1000;
+	}
+
 	public abstract class CoordinatedRequestObserverBase<T> : IObserver<T>
 	{
 		private readonly Action<T> _onNext;

@@ -20,7 +20,7 @@ namespace Nest
 	{
 		IList<IBulkOperation> IBulkRequest.Operations { get; set; } = new SynchronizedCollection<IBulkOperation>();
 
-		private BulkDescriptor AddOperation(IBulkOperation operation) => Assign(a => a.Operations.AddIfNotNull(operation));
+		public BulkDescriptor AddOperation(IBulkOperation operation) => Assign(a => a.Operations.AddIfNotNull(operation));
 
 		public BulkDescriptor Create<T>(Func<BulkCreateDescriptor<T>, IBulkCreateOperation<T>> bulkCreateSelector) where T : class =>
 			Assign(a => AddOperation(bulkCreateSelector?.Invoke(new BulkCreateDescriptor<T>())));

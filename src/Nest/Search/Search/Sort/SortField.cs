@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 
@@ -16,6 +18,7 @@ namespace Nest
 
 	public class SortField : SortBase, IFieldSort
 	{
+		public static readonly IList<ISort> ByDocumentOrder = new ReadOnlyCollection<ISort>(new List<ISort> { new SortField { Field = "_doc" } });
 		protected override Field SortKey => this.Field;
 		public FieldType? UnmappedType { get; set; }
 		public bool? IgnoreUnmappedFields { get; set; }

@@ -1,4 +1,5 @@
 using System;
+using Nest.CommonAbstractions.Reactive;
 
 namespace Nest
 {

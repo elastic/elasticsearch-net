@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -10,6 +11,7 @@ namespace Nest
 {
 	public class Inferrer
 	{
+		private readonly IConnectionSettingsValues _connectionSettings;
 		private IdResolver IdResolver { get; }
 		private IndexNameResolver IndexNameResolver { get; }
 		private TypeNameResolver TypeNameResolver { get; }
@@ -23,6 +25,7 @@ namespace Nest
 		public Inferrer(IConnectionSettingsValues connectionSettings)
 		{
 			connectionSettings.ThrowIfNull(nameof(connectionSettings));
+			this._connectionSettings = connectionSettings;
 			this.IdResolver = new IdResolver(connectionSettings);
 			this.IndexNameResolver = new IndexNameResolver(connectionSettings);
 			this.TypeNameResolver = new TypeNameResolver(connectionSettings);
@@ -31,6 +34,7 @@ namespace Nest
 			this.CreateMultiHitDelegates = new ConcurrentDictionary<Type, Action<MultiGetHitJsonConverter.MultiHitTuple, JsonSerializer, ICollection<IMultiGetHit<object>>>>();
 			this.CreateSearchResponseDelegates = new ConcurrentDictionary<Type, Action<MultiSearchResponseJsonConverter.SearchHitTuple, JsonSerializer, IDictionary<string, object>>>();
 		}
+		public string Resolve(IUrlParameter urlParameter) => urlParameter.GetString(this._connectionSettings);
 
 		public string Field(Field field) => this.FieldResolver.Resolve(field);
 

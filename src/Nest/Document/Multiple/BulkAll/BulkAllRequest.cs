@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Elasticsearch.Net;
+using Nest.CommonAbstractions.Reactive;
 
 namespace Nest
 {
@@ -63,6 +65,13 @@ namespace Nest
 		/// or <see cref="BulkDescriptor.Index{T}(Func{BulkIndexDescriptor{T}, IBulkIndexOperation{T}})"/>
 		/// </summary>
 		Action<BulkDescriptor, IList<T>> BufferToBulk { get; set; }
+
+		/// <summary>
+		/// Simple back pressure implementation that makes sure the minimum max concurrency between producer and consumer
+		/// is not amplified by the greedier of the two by more then a given back pressure factor
+		/// When set each bulk request will call <see cref="ProducerConsumerBackPressure.Release"/>
+		/// </summary>
+		ProducerConsumerBackPressure BackPressure { get; set; }
 	}
 
 	public class BulkAllRequest<T>  : IBulkAllRequest<T>
@@ -77,8 +86,7 @@ namespace Nest
 		/// <inheritdoc />
 		public int? BackOffRetries { get; set; }
 		/// <inheritdoc />
-		public IEnumerable<T> Documents { get; private set; }
-
+		public IEnumerable<T> Documents { get; }
 		/// <inheritdoc />
 		public IndexName Index { get; set; }
 		/// <inheritdoc />
@@ -97,6 +105,8 @@ namespace Nest
 		public string Pipeline { get; set; }
 		/// <inheritdoc />
 		public Action<BulkDescriptor, IList<T>> BufferToBulk { get; set; }
+		/// <inheritdoc />
+		public ProducerConsumerBackPressure BackPressure { get; set; }
 
 		public BulkAllRequest(IEnumerable<T> documents)
 		{
@@ -116,7 +126,6 @@ namespace Nest
 		int? IBulkAllRequest<T>.BackOffRetries { get; set; }
 		int? IBulkAllRequest<T>.MaxDegreeOfParallelism { get; set; }
 		IEnumerable<T> IBulkAllRequest<T>.Documents => this._documents;
-
 		IndexName IBulkAllRequest<T>.Index { get; set; }
 		TypeName IBulkAllRequest<T>.Type { get; set; }
 		int? IBulkAllRequest<T>.WaitForActiveShards { get; set; }
@@ -126,6 +135,7 @@ namespace Nest
 		Time IBulkAllRequest<T>.Timeout { get; set; }
 		string IBulkAllRequest<T>.Pipeline { get; set; }
 		Action<BulkDescriptor, IList<T>>  IBulkAllRequest<T>.BufferToBulk { get; set; }
+		ProducerConsumerBackPressure IBulkAllRequest<T>.BackPressure { get; set; }
 
 		public BulkAllDescriptor(IEnumerable<T> documents)
 		{
@@ -177,6 +187,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		public BulkAllDescriptor<T> BufferToBulk(Action<BulkDescriptor, IList<T>> modifier) => Assign(p => p.BufferToBulk = modifier);
+
+		/// <summary>
+		/// Simple back pressure implementation that makes sure the minimum max concurrency between producer and consumer
+		/// is not amplified by the greedier of the two by more then a given back pressure factor
+		/// When set each scroll request will additionally wait on <see cref="ProducerConsumerBackPressure.WaitAsync"/> as well as
+		/// <see cref="MaxDegreeOfParallelism"/> if set. Not that the consumer has to call <see cref="ProducerConsumerBackPressure.Release"/>
+		/// on the same instance every time it is done.
+		/// <param name="maxConcurrency">The minimum maximum concurrency which would be the bottleneck of the producer consumer pipeline</param>
+		/// <param name="backPressureFactor">The maximum amplification back pressure of the greedier part of the producer consumer pipeline</param>
+		public BulkAllDescriptor<T> BackPressure(int maxConcurrency, int? backPressureFactor = null) =>
+			Assign(a => a.BackPressure = new ProducerConsumerBackPressure(backPressureFactor, maxConcurrency));
 
 	}
 }

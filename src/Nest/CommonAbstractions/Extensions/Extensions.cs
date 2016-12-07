@@ -211,7 +211,8 @@ namespace Nest
 			Func<TSource, long, Task<TResult>> taskSelector,
 			Action<TSource, TResult> resultProcessor,
 			Action<Task> done,
-			int maxDegreeOfParallelism
+			int maxDegreeOfParallelism,
+			SemaphoreSlim additionalRateLimitter = null
 		)
 		{
 			var semaphore = new SemaphoreSlim(initialCount: maxDegreeOfParallelism, maxCount: maxDegreeOfParallelism);
@@ -219,7 +220,7 @@ namespace Nest
 
 			return Task.WhenAll(
 					from item in lazyList
-					select ProcessAsync<TSource, TResult>(item, taskSelector, resultProcessor, semaphore, page++)
+					select ProcessAsync<TSource, TResult>(item, taskSelector, resultProcessor, semaphore, additionalRateLimitter, page++)
 				).ContinueWith(done);
 		}
 
@@ -227,10 +228,12 @@ namespace Nest
 			TSource item,
 			Func<TSource, long, Task<TResult>> taskSelector,
 			Action<TSource, TResult> resultProcessor,
-			SemaphoreSlim semaphoreSlim,
+			SemaphoreSlim localRateLimiter,
+			SemaphoreSlim additionalRateLimiter,
 			long page)
 		{
-			if (semaphoreSlim != null) await semaphoreSlim.WaitAsync().ConfigureAwait(false);
+			if (localRateLimiter != null) await localRateLimiter.WaitAsync().ConfigureAwait(false);
+			if (additionalRateLimiter != null) await additionalRateLimiter.WaitAsync().ConfigureAwait(false);
 			try
 			{
 				var result = await taskSelector(item, page).ConfigureAwait(false);
@@ -242,7 +245,8 @@ namespace Nest
 			}
 			finally
 			{
-				semaphoreSlim?.Release();
+				localRateLimiter?.Release();
+				additionalRateLimiter?.Release();
 			}
 		}
 	}
