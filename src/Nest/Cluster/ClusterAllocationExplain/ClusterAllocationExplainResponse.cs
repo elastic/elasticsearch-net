@@ -91,9 +91,8 @@ namespace Nest
 		[JsonProperty("store")]
 		public AllocationStore Store { get; set; }
 
-		// TODO: Are there enum values for this?
 		[JsonProperty("final_decision")]
-		public string FinalDecision { get; set; }
+		public FinalDecision FinalDecision { get; set; }
 
 		[JsonProperty("final_explanation")]
 		public string FinalExplanation { get; set; }
@@ -105,11 +104,46 @@ namespace Nest
 		public IReadOnlyCollection<AllocationDecision> Decisions { get; set; } = EmptyReadOnly<AllocationDecision>.Collection;
 	}
 
+	[JsonConverter(typeof(StringEnumConverter))]
+	public enum FinalDecision
+	{
+		[EnumMember(Value = "YES")]
+		Yes,
+
+		[EnumMember(Value = "NO")]
+		No,
+
+		[EnumMember(Value = "ALREADY_ASSIGNED")]
+		AlreadyAssigned
+	}
+
+	[JsonConverter(typeof(StringEnumConverter))]
+	public enum StoreCopy
+	{
+		[EnumMember(Value = "NONE")]
+		None,
+
+		[EnumMember(Value = "AVAILABLE")]
+		Available,
+
+		[EnumMember(Value = "CORRUPT")]
+		Corrupt,
+
+		[EnumMember(Value = "IO_ERROR")]
+		IOError,
+
+		[EnumMember(Value = "STALE")]
+		Stale,
+
+		[EnumMember(Value = "UNKNOWN")]
+		Unknown
+	}
+
 	[JsonObject]
 	public class AllocationStore
 	{
 		[JsonProperty("shard_copy")]
-		public string ShardCopy { get; set; }
+		public StoreCopy ShardCopy { get; set; }
 	}
 
 	[JsonObject]

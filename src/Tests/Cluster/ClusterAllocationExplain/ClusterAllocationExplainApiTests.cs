@@ -60,13 +60,11 @@ namespace Tests.Cluster.ClusterAllocationExplain
 			{
 				var explanation = node.Value;
 
-
 				explanation.NodeName.Should().NotBeNullOrEmpty();
 				explanation.Weight.Should().BeGreaterOrEqualTo(0);
 				explanation.NodeAttributes.Should().NotBeEmpty();
 				explanation.Store.Should().NotBeNull();
-				explanation.Store.ShardCopy.Should().NotBeNullOrEmpty();
-				explanation.FinalDecision.Should().NotBeNullOrEmpty();
+				explanation.Store.ShardCopy.Should().Be(StoreCopy.Available);
 				explanation.FinalExplanation.Should().NotBeNullOrEmpty();
 				explanation.Decisions.Should().NotBeNullOrEmpty();
 			}
