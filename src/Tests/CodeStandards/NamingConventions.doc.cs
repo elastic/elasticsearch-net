@@ -93,8 +93,8 @@ namespace Tests.CodeStandards
 		* There are a few exceptions to this rule, most notably the `Cat` prefixed requests and
 		* the `Exists` requests.
 		*/
-		//[U]
-		// TODO unignore when new APIs are mapped
+		[U]
+		// TODO remove CreateRequest from exceptions when mapped
 		public void ParityBetweenRequestsAndResponses()
 		{
 			var exceptions = new[] // <1> _Exceptions to the rule_
@@ -114,11 +114,9 @@ namespace Tests.CodeStandards
 				typeof(GetAliasRequest),
 				typeof(IndicesShardStoresRequest),
 				typeof(RenderSearchTemplateRequest),
+				typeof(MultiSearchTemplateRequest),
 				//UNMAPPED
-				typeof(ClusterAllocationExplainRequest),
-				typeof(ReindexRethrottleRequest),
-				//typeof(ReindexRequest),
-				typeof(UpdateByQueryRequest)
+				typeof(CreateRequest)
 			};
 
 			var types = typeof(IRequest).Assembly().GetTypes();
