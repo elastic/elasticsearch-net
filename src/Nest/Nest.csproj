@@ -389,7 +389,6 @@
     <Compile Include="CommonAbstractions\ConnectionSettings\IConnectionSettingsValues.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\Inflector.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\MemberInfoResolver.cs" />
-    <Compile Include="CommonAbstractions\CoordinatedRequestObserverBase.cs" />
     <Compile Include="CommonAbstractions\DictionaryLike\IsADictionaryBase.cs" />
     <Compile Include="CommonAbstractions\DictionaryLike\IsADictionaryDescriptorBase.cs" />
     <Compile Include="CommonAbstractions\DictionaryLike\PerFieldAnalyzer\PerFieldAnalyzer.cs" />
@@ -427,6 +426,7 @@
     <Compile Include="CommonAbstractions\Infer\IndexName\IndexNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\IndexName\IndexNameJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\IndexName\IndexNameResolver.cs" />
+    <Compile Include="CommonAbstractions\Infer\Indices\IndicesExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\Indices\Indices.cs" />
     <Compile Include="CommonAbstractions\Infer\Indices\IndicesJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\Indices\IndicesMultiSyntaxJsonConverter.cs" />
@@ -452,6 +452,10 @@
     <Compile Include="CommonAbstractions\LowLevelDispatch\IHighLevelToLowLevelDispatcher.cs" />
     <Compile Include="CommonAbstractions\LowLevelDispatch\LowLevelDispatch.cs" />
     <Compile Include="CommonAbstractions\RawJson\RawJson.cs" />
+    <Compile Include="CommonAbstractions\Reactive\CoordinatedRequestObserverBase.cs" />
+    <Compile Include="CommonAbstractions\Reactive\GetEnumerator.cs" />
+    <Compile Include="CommonAbstractions\Reactive\PartitionHelper.cs" />
+    <Compile Include="CommonAbstractions\Reactive\ProducerConsumerBackPressure.cs" />
     <Compile Include="CommonAbstractions\Request\RequestBase.cs" />
     <Compile Include="CommonAbstractions\Request\RouteValues.cs" />
     <Compile Include="CommonAbstractions\Response\AcknowledgedResponseBase.cs" />
@@ -597,7 +601,6 @@
     <Compile Include="Document\Multiple\Reindex\ReindexObservable.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexObserver.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexRequest.cs" />
-    <Compile Include="Document\Multiple\Reindex\ReindexResponse.cs" />
     <Compile Include="Document\Result.cs" />
     <Compile Include="Document\Single\Delete\DeleteRequest.cs" />
     <Compile Include="Document\Single\Delete\DeleteResponse.cs" />
@@ -1486,7 +1489,12 @@
   <ItemGroup>
     <None Include="paket.references" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="CommonAbstractions" />
+    <Folder Include="Document\Multiple\BulkAll" />
+    <Folder Include="Document\Multiple\Reindex" />
+    <Folder Include="Document\Multiple\ScrollAll" />
+  </ItemGroup>
   <Import Project="..\outputpath.props" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\.paket\paket.targets" />

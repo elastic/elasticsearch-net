@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Threading;
 using FluentAssertions;
 using Nest;
@@ -20,10 +21,20 @@ namespace Tests.Document.Multiple.Reindex
 		}
 	}
 
-	public class ReindexApiTests : SerializationTestBase, IClusterFixture<ReindexCluster>
+	public class ManualReindexCluster : ClusterBase
 	{
-		private readonly IObservable<IReindexResponse<ILazyDocument>> _reindexManyTypesResult;
-		private readonly IObservable<IReindexResponse<Project>> _reindexSingleTypeResult;
+		public override void Bootstrap()
+		{
+			var seeder = new Seeder(this.Node);
+			seeder.DeleteIndicesAndTemplates();
+			seeder.CreateIndices();
+		}
+	}
+
+	public class ReindexApiTests : SerializationTestBase, IClusterFixture<ManualReindexCluster>
+	{
+		private readonly IObservable<IBulkAllResponse> _reindexManyTypesResult;
+		private readonly IObservable<IBulkAllResponse> _reindexSingleTypeResult;
 		private readonly IElasticClient _client;
 
 		private static string NewManyTypesIndexName { get; } = $"project-copy-{Guid.NewGuid().ToString("N").Substring(8)}";
@@ -32,7 +43,7 @@ namespace Tests.Document.Multiple.Reindex
 
 		private static string IndexName { get; } = "project";
 
-		public ReindexApiTests(ReindexCluster cluster, EndpointUsage usage)
+		public ReindexApiTests(ManualReindexCluster cluster, EndpointUsage usage)
 		{
 			this._client = cluster.Client;
 
@@ -42,7 +53,7 @@ namespace Tests.Document.Multiple.Reindex
 			this._client.Refresh(IndexName);
 
 			// create a thousand commits and associate with the projects
-			var commits = CommitActivity.CommitActivities;
+			var commits = CommitActivity.Generator.Generate(5000).ToList();
 			var bb = new BulkDescriptor();
 			for (int i = 0; i < commits.Count; i++)
 			{
@@ -65,42 +76,35 @@ namespace Tests.Document.Multiple.Reindex
 
 			this._client.Refresh(IndexName);
 
-			this._reindexManyTypesResult = this._client.Reindex<ILazyDocument>(IndexName, NewManyTypesIndexName, r => r.AllTypes());
+			this._reindexManyTypesResult = this._client.Reindex<ILazyDocument>(r => r
+				.BackPressureFactor(10)
+				.ScrollAll("1m", 2, s=>s.Search(ss=>ss.Index(IndexName).AllTypes()).MaxDegreeOfParallelism(4))
+				.BulkAll(b=>b.Index(NewManyTypesIndexName).Size(100).MaxDegreeOfParallelism(2).RefreshOnCompleted())
+			);
 			this._reindexSingleTypeResult = this._client.Reindex<Project>(IndexName, NewSingleTypeIndexName);
 		}
 
 		[I]
 		public void ReturnsExpectedResponse()
 		{
-			var handles = new[]
+			var handles = new []
 			{
 				new ManualResetEvent(false),
 				new ManualResetEvent(false)
 			};
 
 			var manyTypesObserver = new ReindexObserver<ILazyDocument>(
-				onError: (e) => { throw e; },
-				onCompleted: () => ReindexManyTypesCompleted(handles),
-				alter: (h, d, i) =>
-				{
-					//This would be a great place to alter the
-					// BulkIndexOperation i (use pipeline perhaps)
-					// Source Document d
-					// h is the whole hit including the documents metadata
-					//
-					// on a per document basis
-					i.RetriesOnConflict = 2;
-				}
+				onError: (e) => { handles[0].Set(); throw e; },
+				onCompleted: () => ReindexManyTypesCompleted(handles)
 			);
 
 			this._reindexManyTypesResult.Subscribe(manyTypesObserver);
 
 			var singleTypeObserver = new ReindexObserver<Project>(
-				onError: (e) => { throw e; },
+				onError: (e) => { handles[1].Set(); throw e; },
 				onCompleted: () => ReindexSingleTypeCompleted(handles)
 			);
 			this._reindexSingleTypeResult.Subscribe(singleTypeObserver);
-
 
 			WaitHandle.WaitAll(handles, TimeSpan.FromMinutes(3));
 		}

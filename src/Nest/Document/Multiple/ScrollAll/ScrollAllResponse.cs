@@ -25,10 +25,13 @@ namespace Nest
 	[JsonObject]
 	public class ScrollAllResponse<T> : IScrollAllResponse<T> where T : class
 	{
+		/// <inheritdoc />
 		public ISearchResponse<T> SearchResponse { get; internal set; }
+		/// <inheritdoc />
 		public long Scroll { get; internal set; }
+		/// <inheritdoc />
 		public int Slice { get; internal set; }
-
+		/// <inheritdoc />
 		public bool IsValid => this.SearchResponse != null && this.SearchResponse.IsValid;
 	}
 }

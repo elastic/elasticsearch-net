@@ -67,7 +67,7 @@ namespace Tests.Document.Multiple.BulkAll
 
 			//since we call allTypes search should be bounded to index.
 			var scrollObserver = new ScrollAllObserver<SmallObject>(
-				onError: (e) => { throw e; },
+				onError: (e) => { handle.Set(); throw e; },
 				onCompleted: () => handle.Set(),
 				onNext: (b) =>
 				{
@@ -99,7 +99,7 @@ namespace Tests.Document.Multiple.BulkAll
 			);
 			//we set up an observer
 			var bulkObserver = new BulkAllObserver(
-				onError: (e) => { throw e; },
+				onError: (e) => { handle.Set(); throw e; },
 				onCompleted: () => handle.Set(),
 				onNext: (b) => Interlocked.Increment(ref seenPages)
 			);

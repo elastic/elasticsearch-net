@@ -2,7 +2,6 @@
 {
 	public static class IndexNameExtensions
 	{
-		
 		public static string Resolve(this IndexName marker, IConnectionSettingsValues connectionSettings)
 		{
 			if (marker == null)

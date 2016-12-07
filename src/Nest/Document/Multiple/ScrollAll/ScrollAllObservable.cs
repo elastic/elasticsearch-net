@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Elasticsearch.Net;
 using System.Threading.Tasks;
 using System.Threading;
+using Nest.CommonAbstractions.Reactive;
 
 namespace Nest
 {
@@ -12,21 +11,23 @@ namespace Nest
 	{
 		private readonly IScrollAllRequest _scrollAllRequest;
 		private readonly ISearchRequest _searchRequest;
-		private readonly IConnectionSettingsValues _connectionSettings;
 		private readonly IElasticClient _client;
-		private static IList<ISort> DocOrderSort = new ReadOnlyCollection<ISort>(new List<ISort> { new SortField { Field = "_doc" } });
 
 		private readonly CancellationToken _compositeCancelToken;
 		private readonly CancellationTokenSource _compositeCancelTokenSource;
 
+		//since we modify the passed searchrequest during the setup phase we use a simple
+		//semaphore async await to make sure we do not mutate over multiple request during the initial
+		//sliced scroll setup
+		private readonly SemaphoreSlim _scrollInitiationLock = new SemaphoreSlim(1, 1);
+		private readonly ProducerConsumerBackPressure _backPressure;
+
 		public ScrollAllObservable(
 			IElasticClient client, 
-			IConnectionSettingsValues connectionSettings, 
 			IScrollAllRequest scrollAllRequest,
 			CancellationToken cancellationToken = default(CancellationToken)
 			)
 		{
-			this._connectionSettings = connectionSettings;
 			this._scrollAllRequest = scrollAllRequest;
 			this._searchRequest = scrollAllRequest?.Search ?? new SearchRequest<T>();
 			if (this._searchRequest.Sort == null)
@@ -35,6 +36,7 @@ namespace Nest
 			this._client = client;
 			this._compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 			this._compositeCancelToken = this._compositeCancelTokenSource.Token;
+			this._backPressure = this._scrollAllRequest.BackPressure;
 		}
 
 		public IDisposable Subscribe(IObserver<IScrollAllResponse<T>> observer)
@@ -71,7 +73,7 @@ namespace Nest
 			return true;
 		}
 
-		private ElasticsearchClientException Throw(string message, IApiCallDetails details) =>
+		private static ElasticsearchClientException Throw(string message, IApiCallDetails details) =>
 			new ElasticsearchClientException(PipelineFailure.BadResponse, message, details);
 
 		private void ThrowOnBadSearchResult(ISearchResponse<T> result, int slice, int page)
@@ -91,6 +93,9 @@ namespace Nest
 			var scroll = this._scrollAllRequest.ScrollTime;
 			while (searchResult.IsValid && searchResult.Documents.HasAny())
 			{
+				if (this._backPressure != null)
+					await this._backPressure.WaitAsync(_compositeCancelToken);
+
 				observer.OnNext(new ScrollAllResponse<T>()
 				{
 					Slice = slice,
@@ -104,12 +109,11 @@ namespace Nest
 			}
 		}
 
-		private readonly SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
 		private async Task<ISearchResponse<T>> InitiateSearchAsync(int slice)
 		{
 			//since we are mutating the searchRequests .Slice it can not be shared across threads for the initial searches
-			//so these happen serially
-			await _lock.WaitAsync(_compositeCancelToken).ConfigureAwait(false);
+			//so these need to happen in a serial fashion
+			await _scrollInitiationLock.WaitAsync(_compositeCancelToken).ConfigureAwait(false);
 			try
 			{
 				this._searchRequest.Slice = new SlicedScroll
@@ -123,7 +127,7 @@ namespace Nest
 					throw Throw($"ScrollAll query against {response.ApiCall.Uri.PathAndQuery} doesn't contain any documents.", response.ApiCall);
 				return response;
 			}
-			finally { _lock.Release(); }
+			finally { _scrollInitiationLock.Release(); }
 		}
 
 		private static void OnCompleted(Task task, IObserver<IScrollAllResponse<T>> observer)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Nest.CommonAbstractions.Reactive;
 
 namespace Nest
 {
@@ -23,6 +24,16 @@ namespace Nest
 		/// The maximum degree of parallelism we should drain the sliced scroll, defaults to the value of <see cref="Slices"/>
 		/// </summary>
 		int? MaxDegreeOfParallelism { get; set; }
+
+		/// <summary>
+		/// Simple back pressure implementation that makes sure the minimum max concurrency between producer and consumer
+		/// is not amplified by the greedier of the two by more then a given back pressure factor
+		/// When set each scroll request will additionally wait on <see cref="ProducerConsumerBackPressure.WaitAsync"/> as well as
+		/// <see cref="MaxDegreeOfParallelism"/> if set. Not that the consumer has to call <see cref="ProducerConsumerBackPressure.Release"/>
+		/// on the same instance every time it is done.
+		/// </summary>
+		ProducerConsumerBackPressure BackPressure { get; set; }
+
 		/// <summary>
 		/// Set a different routing field, has to have doc_values enabled
 		/// </summary>
@@ -36,11 +47,12 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public ISearchRequest Search { get; set; }
-
 		/// <inheritdoc/>
 		public Field RoutingField { get; set; }
 		/// <inheritdoc/>
 		public int? MaxDegreeOfParallelism { get; set; }
+		/// <inheritdoc/>
+		public ProducerConsumerBackPressure BackPressure { get; set; }
 
 		public ScrollAllRequest(Time scrollTime, int numberOfSlices)
 		{
@@ -61,6 +73,7 @@ namespace Nest
 		Field IScrollAllRequest.RoutingField { get; set; }
 		Time IScrollAllRequest.ScrollTime { get; set; }
 		int? IScrollAllRequest.MaxDegreeOfParallelism { get; set; }
+		ProducerConsumerBackPressure IScrollAllRequest.BackPressure { get; set; }
 
 		public ScrollAllDescriptor(Time scrollTime, int numberOfSlices)
 		{
@@ -86,5 +99,14 @@ namespace Nest
 		public ScrollAllDescriptor<T> Search(Func<SearchDescriptor<T>, ISearchRequest> selector) =>
 			Assign(a => a.Search = selector?.Invoke(new SearchDescriptor<T>()));
 
+		/// <summary>
+		/// Simple back pressure implementation that makes sure the minimum max concurrency between producer and consumer
+		/// is not amplified by the greedier of the two by more then a given back pressure factor
+		/// When set each bulk request will call <see cref="ProducerConsumerBackPressure.Release"/>
+		/// </summary>
+		/// <param name="maxConcurrency">The minimum maximum concurrency which would be the bottleneck of the producer consumer pipeline</param>
+		/// <param name="backPressureFactor">The maximum amplification back pressure of the greedier part of the producer consumer pipeline</param>
+		public ScrollAllDescriptor<T> BackPressure(int maxConsumers, int? backPressureFactor = null) =>
+			Assign(a => a.BackPressure = new ProducerConsumerBackPressure(backPressureFactor, maxConsumers));
 	}
 }
