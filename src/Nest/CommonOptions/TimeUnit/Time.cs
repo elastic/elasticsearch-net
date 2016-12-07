@@ -9,21 +9,20 @@ namespace Nest
 	[JsonConverter(typeof(TimeJsonConverter))]
 	public class Time : IComparable<Time>, IEquatable<Time>
 	{
-		private static readonly Regex _expressionRegex = new Regex(@"^(?<factor>[-+]?\d+(?:\.\d+)?)(?<interval>(?:y|M|w|d|h|m|s|ms))?$", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
+		private const double MillisecondsInAYearApproximate = MillisecondsInADay * 365;
+		private const double MillisecondsInAMonthApproximate = MillisecondsInADay * 30;
+		private const double MillisecondsInAWeek = MillisecondsInADay * 7;
+		private const double MillisecondsInADay = MillisecondsInAnHour * 24;
+		private const double MillisecondsInAnHour = MillisecondsInAMinute * 60;
+		private const double MillisecondsInAMinute = MillisecondsInASecond * 60;
+		private const double MillisecondsInASecond = 1000;
 
-		private static readonly double _yearApproximate = TimeSpan.FromDays(365).TotalMilliseconds;
-		private static readonly double _monthApproximate = TimeSpan.FromDays(30).TotalMilliseconds;
-		private static readonly double _week = TimeSpan.FromDays(7).TotalMilliseconds;
-		private static readonly double _day = TimeSpan.FromDays(1).TotalMilliseconds;
-		private static readonly double _hour = TimeSpan.FromHours(1).TotalMilliseconds;
-		private static readonly double _minute = TimeSpan.FromMinutes(1).TotalMilliseconds;
-		private static readonly double _second = TimeSpan.FromSeconds(1).TotalMilliseconds;
+		private static readonly Regex _expressionRegex = new Regex(@"^(?<factor>[-+]?\d+(?:\.\d+)?)(?<interval>(?:y|M|w|d|h|m|s|ms))?$", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
 		public double? Factor { get; private set; }
 		public TimeUnit? Interval { get; private set; }
 
-		// TODO make nullable in 3.0
-		public double Milliseconds { get; private set; }
+		public double? Milliseconds { get; private set; }
 		private double ApproximateMilliseconds { get; set; }
 
 		public static implicit operator Time(TimeSpan span) => new Time(span);
@@ -76,38 +75,38 @@ namespace Nest
 		public static Time ToFirstUnitYieldingInteger(Time fractionalTime)
 		{
 			var fraction = fractionalTime.Factor.GetValueOrDefault(double.Epsilon);
-			if (IsIntegerGreaterThen0(fraction)) return fractionalTime;
+			if (IsIntegerGreaterThanZero(fraction)) return fractionalTime;
 
-			var ms = fractionalTime.Milliseconds;
-			if (ms > _week)
+			var ms = fractionalTime.ApproximateMilliseconds;
+			if (ms > MillisecondsInAWeek)
 			{
-				fraction = ms / _week;
-				if (IsIntegerGreaterThen0(fraction)) return new Time(fraction, TimeUnit.Week);
+				fraction = ms / MillisecondsInAWeek;
+				if (IsIntegerGreaterThanZero(fraction)) return new Time(fraction, TimeUnit.Week);
 			}
-			if (ms > _day)
+			if (ms > MillisecondsInADay)
 			{
-				fraction = ms / _day;
-				if (IsIntegerGreaterThen0(fraction)) return new Time(fraction, TimeUnit.Day);
+				fraction = ms / MillisecondsInADay;
+				if (IsIntegerGreaterThanZero(fraction)) return new Time(fraction, TimeUnit.Day);
 			}
-			if (ms > _hour)
+			if (ms > MillisecondsInAnHour)
 			{
-				fraction = ms / _hour;
-				if (IsIntegerGreaterThen0(fraction)) return new Time(fraction, TimeUnit.Hour);
+				fraction = ms / MillisecondsInAnHour;
+				if (IsIntegerGreaterThanZero(fraction)) return new Time(fraction, TimeUnit.Hour);
 			}
-			if (ms > _minute)
+			if (ms > MillisecondsInAMinute)
 			{
-				fraction = ms / _minute;
-				if (IsIntegerGreaterThen0(fraction)) return new Time(fraction, TimeUnit.Minute);
+				fraction = ms / MillisecondsInAMinute;
+				if (IsIntegerGreaterThanZero(fraction)) return new Time(fraction, TimeUnit.Minute);
 			}
-			if (ms > _second)
+			if (ms > MillisecondsInASecond)
 			{
-				fraction = ms / _second;
-				if (IsIntegerGreaterThen0(fraction)) return new Time(fraction, TimeUnit.Second);
+				fraction = ms / MillisecondsInASecond;
+				if (IsIntegerGreaterThanZero(fraction)) return new Time(fraction, TimeUnit.Second);
 			}
 			return new Time(ms, TimeUnit.Millisecond);
 		}
 
-		private static bool IsIntegerGreaterThen0(double d) => Math.Abs(d % 1) < double.Epsilon;
+		private static bool IsIntegerGreaterThanZero(double d) => Math.Abs(d % 1) < double.Epsilon;
 
 
 		public static bool operator <(Time left, Time right) => left.CompareTo(right) < 0;
@@ -121,7 +120,7 @@ namespace Nest
 
 		public static bool operator !=(Time left, Time right) => !(left == right);
 
-		public TimeSpan ToTimeSpan() => TimeSpan.FromMilliseconds(this.Milliseconds);
+		public TimeSpan ToTimeSpan() => TimeSpan.FromMilliseconds(this.ApproximateMilliseconds);
 
 		public override string ToString()
 		{
@@ -156,17 +155,16 @@ namespace Nest
 		{
 			switch (interval)
 			{
-
 				case TimeUnit.Week:
-					return factor * _week;
+					return factor * MillisecondsInAWeek;
 				case TimeUnit.Day:
-					return factor * _day;
+					return factor * MillisecondsInADay;
 				case TimeUnit.Hour:
-					return factor * _hour;
+					return factor * MillisecondsInAnHour;
 				case TimeUnit.Minute:
-					return factor * _minute;
+					return factor * MillisecondsInAMinute;
 				case TimeUnit.Second:
-					return factor * _second;
+					return factor * MillisecondsInASecond;
 				case TimeUnit.Year:
 				case TimeUnit.Month:
 					// Cannot calculate exact milliseconds for non-fixed intervals
@@ -181,9 +179,9 @@ namespace Nest
 			switch (interval)
 			{
 				case TimeUnit.Year:
-					return factor * _yearApproximate;
+					return factor * MillisecondsInAYearApproximate;
 				case TimeUnit.Month:
-					return factor * _monthApproximate;
+					return factor * MillisecondsInAMonthApproximate;
 				default:
 					return GetExactMilliseconds(interval, factor);
 			}
@@ -194,29 +192,29 @@ namespace Nest
 			this.Milliseconds = ms;
 			this.ApproximateMilliseconds = ms;
 
-			if (ms >= _week)
+			if (ms >= MillisecondsInAWeek)
 			{
-				Factor = ms / _week;
+				Factor = ms / MillisecondsInAWeek;
 				Interval = TimeUnit.Week;
 			}
-			else if (ms >= _day)
+			else if (ms >= MillisecondsInADay)
 			{
-				Factor = ms / _day;
+				Factor = ms / MillisecondsInADay;
 				Interval = TimeUnit.Day;
 			}
-			else if (ms >= _hour)
+			else if (ms >= MillisecondsInAnHour)
 			{
-				Factor = ms / _hour;
+				Factor = ms / MillisecondsInAnHour;
 				Interval = TimeUnit.Hour;
 			}
-			else if (ms >= _minute)
+			else if (ms >= MillisecondsInAMinute)
 			{
-				Factor = ms / _minute;
+				Factor = ms / MillisecondsInAMinute;
 				Interval = TimeUnit.Minute;
 			}
-			else if (ms >= _second)
+			else if (ms >= MillisecondsInASecond)
 			{
-				Factor = ms / _second;
+				Factor = ms / MillisecondsInASecond;
 				Interval = TimeUnit.Second;
 			}
 			else
