@@ -50,7 +50,7 @@ namespace Nest
 		}
 		public ScrollAllRequest(Time scrollTime, int numberOfSlices, Field routingField) : this(scrollTime, numberOfSlices)
 		{
-			((IScrollAllRequest)this).RoutingField = routingField;
+			this.RoutingField = routingField;
 		}
 	}
 
