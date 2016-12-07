@@ -10,9 +10,9 @@ namespace Tests.Framework.MockData
 		public string Name { get; set; }
 
 		public static Faker<Tag> Generator { get; } =
-			new Faker<Tag>()
+			Gimme.Lock(()=>new Faker<Tag>()
 				.RuleFor(p => p.Name, p => p.Lorem.Words(1).First())
 				.RuleFor(p => p.Added, p => p.Date.Recent())
-			;
+			);
 	}
 }

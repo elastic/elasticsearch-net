@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Nest.CommonAbstractions.Reactive;
 
 namespace Nest
 {

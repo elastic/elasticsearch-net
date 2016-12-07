@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Nest.CommonAbstractions.Reactive;
 
 namespace Nest
 {

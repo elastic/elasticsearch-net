@@ -16,7 +16,7 @@ namespace Tests.Framework.MockData
 		public GeoIp GeoIp { get; set; }
 
 		public new static Faker<Developer> Generator { get; } =
-			new Faker<Developer>()
+			Gimme.Lock(()=>new Faker<Developer>()
 				.RuleFor(p => p.Id, p => IdState++)
 				.RuleFor(p => p.FirstName, p => p.Name.FirstName())
 				.RuleFor(p => p.LastName, p => p.Name.LastName())
@@ -26,8 +26,9 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.Gender, p => p.PickRandom<Gender>())
 				.RuleFor(p => p.PrivateValue, p => "THIS SHOULD NEVER BE INDEXED")
 				.RuleFor(p => p.IPAddress, p => p.Internet.Ip())
-			;
+			);
 
-		public static IList<Developer> Developers { get; } = Developer.Generator.Generate(1000).ToList();
+		public static IList<Developer> Developers { get; } =
+			Gimme.Lock(()=>Developer.Generator.Generate(1000).ToList());
 	}
 }

@@ -3,7 +3,6 @@ using System.Linq;
 using Elasticsearch.Net;
 using System.Threading.Tasks;
 using System.Threading;
-using Nest.CommonAbstractions.Reactive;
 
 namespace Nest
 {
@@ -31,7 +30,7 @@ namespace Nest
 			this._scrollAllRequest = scrollAllRequest;
 			this._searchRequest = scrollAllRequest?.Search ?? new SearchRequest<T>();
 			if (this._searchRequest.Sort == null)
-				this._searchRequest.Sort = DocOrderSort;
+				this._searchRequest.Sort = SortField.ByDocumentOrder;
 			this._searchRequest.RequestParameters.Scroll(this._scrollAllRequest.ScrollTime.ToTimeSpan());
 			this._client = client;
 			this._compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);

@@ -42,6 +42,7 @@ namespace Tests.Framework
 			Serializer.Deserialize<TObject>(new MemoryStream(Encoding.UTF8.GetBytes(json)));
 
 		protected string Serialize<TObject>(TObject o)
+
 		{
 			var bytes = Serializer.SerializeToBytes(o);
 			return Encoding.UTF8.GetString(bytes);
