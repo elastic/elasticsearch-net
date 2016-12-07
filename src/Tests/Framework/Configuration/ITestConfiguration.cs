@@ -12,6 +12,7 @@ namespace Tests.Framework.Configuration
 		TestMode Mode { get; }
 		ElasticsearchVersion ElasticsearchVersion { get; }
 		string ClusterFilter { get; }
+		string TestFilter { get; }
 		bool ForceReseed { get; }
 		bool TestAgainstAlreadyRunningElasticsearch { get; }
 
