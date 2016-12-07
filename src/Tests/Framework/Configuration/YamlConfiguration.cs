@@ -25,7 +25,7 @@ namespace Tests.Framework.Configuration
 			this.ElasticsearchVersion = new ElasticsearchVersion(config["elasticsearch_version"]);
 			this.ForceReseed = bool.Parse(config["force_reseed"]);
 			this.TestAgainstAlreadyRunningElasticsearch = bool.Parse(config["test_against_already_running_elasticsearch"]);
-			this.ClusterFilter = config["cluster_filter"];
+			this.ClusterFilter = config.ContainsKey("cluster_filter") ? config["cluster_filter"] : null;
 		}
 
 		private static string ConfigName(string configLine) => Parse(configLine, 0);

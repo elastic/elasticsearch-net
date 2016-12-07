@@ -657,7 +657,7 @@
     <Compile Include="Reproduce\GithubIssue2173.cs" />
     <Compile Include="Search\Request\SlicedScrollSearchUsageTests.cs" />
     <Compile Include="Search\Request\SearchAfterUsageTests.cs" />
-    <Compile Include="Search\Scroll\Scroll\SlicedScrollApiTests.cs" />
+    <Compile Include="Search\Scroll\Scroll\SlicedScrollSearchApiTests.cs" />
     <Compile Include="Search\Search\Rescoring\RescoreUsageTests.cs" />
     <Compile Include="Search\Search\InvalidSearchApiTests.cs" />
     <Compile Include="Search\Suggesters\SuggestUrlTests.cs" />
@@ -759,7 +759,9 @@
     <Content Include="ClientConcepts\LowLevel\pipeline.xml" />
     <Content Include="QueryDsl\BoolDsl\hadouken-indentation.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Document\Multiple" />
+  </ItemGroup>
   <Import Project="..\outputpath.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Choose>

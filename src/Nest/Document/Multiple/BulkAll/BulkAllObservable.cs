@@ -20,7 +20,6 @@ namespace Nest
 		private System.Action _incrementFailed = () => { };
 		private System.Action _incrementRetries = () => { };
 
-		private readonly CancellationToken _cancelToken;
 		private readonly CancellationToken _compositeCancelToken;
 		private readonly CancellationTokenSource _compositeCancelTokenSource;
 
@@ -40,8 +39,8 @@ namespace Nest
 			this._backOffTime = (this._partionedBulkRequest?.BackOffTime?.ToTimeSpan() ?? TimeSpan.FromMinutes(1));
 			this._bulkSize = this._partionedBulkRequest.Size ?? 1000;
 			this._maxDegreeOfParallelism = _partionedBulkRequest.MaxDegreeOfParallelism ?? 20;
-			this._cancelToken = cancellationToken;
-			this._compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(this._cancelToken);
+
+			this._compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 			this._compositeCancelToken = this._compositeCancelTokenSource.Token;
 		}
 
@@ -76,7 +75,8 @@ namespace Nest
 			partioned.ForEachAsync(
 				(buffer, page) => this.BulkAsync(buffer, page, 0),
 				(buffer, response) => observer.OnNext(response),
-				t => OnCompleted(t, observer)
+				t => OnCompleted(t, observer),
+				this._maxDegreeOfParallelism
 			);
 		}
 
@@ -173,43 +173,6 @@ namespace Nest
 					yield return enumerator.Current;
 					_hasMoreItems = enumerator.MoveNext();
 					if (!_hasMoreItems) yield break;
-				}
-			}
-
-			public Task ForEachAsync<TResult>(
-				Func<IList<TDocument>, long, Task<TResult>> taskSelector,
-				Action<IList<TDocument>, TResult> resultProcessor,
-				Action<Task> done
-			)
-			{
-				var semaphore = new SemaphoreSlim(initialCount: _semaphoreSize, maxCount: _semaphoreSize);
-				long page = 0;
-				return Task.WhenAll(
-						from item in this
-						select ProcessAsync(item, taskSelector, resultProcessor, semaphore, page++)
-					).ContinueWith(done);
-			}
-
-			private async Task ProcessAsync<TSource, TResult>(
-				TSource item,
-				Func<TSource, long, Task<TResult>> taskSelector,
-				Action<TSource, TResult> resultProcessor,
-				SemaphoreSlim semaphoreSlim,
-				long page)
-			{
-				if (semaphoreSlim != null) await semaphoreSlim.WaitAsync().ConfigureAwait(false);
-				try
-				{
-					var result = await taskSelector(item, page).ConfigureAwait(false);
-					resultProcessor(item, result);
-				}
-				catch
-				{
-					throw;
-				}
-				finally
-				{
-					semaphoreSlim?.Release();
 				}
 			}
 		}
