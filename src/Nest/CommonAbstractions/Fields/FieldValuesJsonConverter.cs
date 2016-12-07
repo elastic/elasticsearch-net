@@ -14,7 +14,7 @@ namespace Nest
 
 		public override bool CanConvert(Type objectType)
 		{
-			throw new NotImplementedException();
+			throw new NotSupportedException();
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
