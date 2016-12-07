@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nest.CommonAbstractions.Reactive
+namespace Nest
 {
 	internal static class CoordinatedRequestDefaults
 	{

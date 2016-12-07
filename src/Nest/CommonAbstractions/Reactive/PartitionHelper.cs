@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Nest.CommonAbstractions.Reactive
+namespace Nest
 {
-	internal sealed class PartitionHelper<TDocument> : IEnumerable<IList<TDocument>>
+	internal class PartitionHelper<TDocument> : IEnumerable<IList<TDocument>>
 	{
 		private readonly IEnumerable<TDocument> _items;
 		private readonly int _partitionSize;

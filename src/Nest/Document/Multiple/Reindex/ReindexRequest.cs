@@ -25,6 +25,7 @@ namespace Nest
 		/// requests. What this property allows you to express is that for each bucket in the max concurrency of the minimum max concurrency between
 		/// producer and consumer amply the maximum overal pending of the other side by this factor. Typically the concurrency of the consumer (bulkall) will
 		/// be lower and with this factor we can dampen the overall pending scroll requests while we are still processing bulk requests.
+		/// <para>defaults to 4 if not provided</para>
 		/// </summary>
 		int? BackPressureFactor { get; set; }
 
