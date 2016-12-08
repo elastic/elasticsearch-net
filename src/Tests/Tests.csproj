@@ -238,6 +238,7 @@
     <Compile Include=".\Framework\Integration\Clusters\ClusterBase.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Dispose\ResponseBuilderDisposeTests.cs" />
     <Compile Include="ClientConcepts\Connection\CustomConnections.cs" />
+    <Compile Include="CodeStandards\Serialization\Enums.cs" />
     <Compile Include="Document\Multiple\BulkAll\BulkAllApiTests.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkUpdateManyTests.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleApiTests.cs" />
