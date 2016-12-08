@@ -448,6 +448,7 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\ElasticContractResolver.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\CompositeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\EpochSecondsDateTimeJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\EnumMemberValueCasingJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\FromJson.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\JsonConverterBase.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\KeyValueJsonConverter.cs" />
