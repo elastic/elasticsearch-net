@@ -14,6 +14,7 @@ namespace Tests.Framework.Integration
 		public bool RunIntegrationTests { get; }
 		public bool RunUnitTests { get; }
 		public string ClusterFilter { get; }
+		public string TestFilter { get; }
 
 		public string TypeOfCluster { get; set; }
 		public ElasticsearchPlugin[] RequiredPlugins { get; set; } = { };
@@ -29,6 +30,7 @@ namespace Tests.Framework.Integration
 			this.RunIntegrationTests = configuration.RunIntegrationTests;
 			this.RunUnitTests = configuration.RunUnitTests;
 			this.ClusterFilter = configuration.ClusterFilter;
+			this.TestFilter = configuration.TestFilter;
 		}
 	}
 }

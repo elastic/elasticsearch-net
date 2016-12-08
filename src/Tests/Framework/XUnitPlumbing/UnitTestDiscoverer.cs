@@ -1,4 +1,5 @@
 using System;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace Tests.Framework
@@ -11,9 +12,9 @@ namespace Tests.Framework
 		protected override bool SkipMethod(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo factAttribute)
 		{
 			var classOfMethod = Type.GetType(testMethod.TestClass.Class.Name, true, true);
-			var collectionType = testMethod.TestClass?.TestCollection?.CollectionDefinition?.Name;
 			//in mixed mode we do not want to run any api tests for plugins when running against a snapshot
 			//because the client is "hot"
+			var collectionType = TestAssemblyRunner.GetClusterForCollection(testMethod.TestClass?.TestCollection);
 			return TestClient.Configuration.RunIntegrationTests && RequiresPluginButRunningAgainstSnapshot(classOfMethod, collectionType);
 		}
 	}
