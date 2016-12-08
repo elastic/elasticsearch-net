@@ -11,13 +11,14 @@ namespace Tests.Framework.Configuration
 		public override bool ForceReseed { get; protected set; } = true;
 		public override TestMode Mode { get; protected set; } = TestMode.Unit;
 		public override string ClusterFilter { get; protected set; }
+		public override string TestFilter { get; protected set; }
 
 		public YamlConfiguration(string configurationFile)
 		{
 			if (!File.Exists(configurationFile)) return;
 
 			var config = File.ReadAllLines(configurationFile)
-				.Where(l=>!l.Trim().StartsWith("#"))
+				.Where(l=>!l.Trim().StartsWith("#") && !string.IsNullOrWhiteSpace(l))
 				.ToDictionary(ConfigName, ConfigValue);
 
 			this.Mode = GetTestMode(config["mode"]);
@@ -25,6 +26,7 @@ namespace Tests.Framework.Configuration
 			this.ForceReseed = bool.Parse(config["force_reseed"]);
 			this.DoNotSpawnIfAlreadyRunning = bool.Parse(config["do_not_spawn"]);
 			this.ClusterFilter = config["cluster_filter"];
+			this.TestFilter = config.ContainsKey("test_filter") ? config["test_filter"] : null;
 		}
 
 		private static string ConfigName(string configLine) => Parse(configLine, 0);

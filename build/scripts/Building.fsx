@@ -49,15 +49,12 @@ type Build() =
             link DotNetFramework.NetStandard1_3
         )
         
-    static let compile target = 
-        compileDesktop target
+    static member Compile() = 
+        //let target = if runningRelease then "Rebuild" else "Build"
+        compileDesktop "Rebuild"
         //we only need this output when doing a release otherwise depend on test to validate the build
         if runningRelease then compileCore()
         if not isMono && runningRelease then gitLink()
-
-    static member QuickCompile() = compile "Build"
-
-    static member Compile() = compile "Rebuild"
 
     static member Clean() =
         CleanDir Paths.BuildOutput

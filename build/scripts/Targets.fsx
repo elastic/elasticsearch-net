@@ -27,15 +27,11 @@ Target "BuildApp" <| fun _ -> Build.Compile()
 
 Target "Test"  <| fun _ -> Tests.RunUnitTests()
     
-Target "QuickTest"  <| fun _ -> Tests.RunUnitTests()
-
-Target "Integrate"  <| fun _ -> Tests.RunIntegrationTests() (getBuildParamOrDefault "esversions" "") (getBuildParamOrDefault "escluster" "")
+Target "Integrate"  <| fun _ -> Tests.RunIntegrationTests (getBuildParamOrDefault "esversions" "") (getBuildParamOrDefault "escluster" "") (getBuildParamOrDefault "testfilter" "")
 
 Target "Profile" <| fun _ -> Profiler.Run()
 
 Target "Benchmark" <| fun _ -> Benchmarker.Run()
-
-Target "QuickCompile"  <| fun _ -> Build.QuickCompile()
 
 Target "Version" <| fun _ -> 
     Versioning.PatchAssemblyInfos()
@@ -70,9 +66,6 @@ Target "Canary" <| fun _ ->
 "Version"
   ==> "Release"
   ==> "Canary"
-
-"QuickCompile"
-  ==> "QuickTest"
 
 "BuildApp"
   ==> "Integrate"

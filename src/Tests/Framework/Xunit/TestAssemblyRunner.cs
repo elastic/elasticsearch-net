@@ -15,7 +15,6 @@ namespace Xunit
 {
 	class TestAssemblyRunner : XunitTestAssemblyRunner
 	{
-
 		readonly Dictionary<Type, object> assemblyFixtureMappings = new Dictionary<Type, object>();
 
 		public TestAssemblyRunner(ITestAssembly testAssembly,
@@ -27,9 +26,11 @@ namespace Xunit
 		{
 		}
 
-		protected override Task<RunSummary> RunTestCollectionAsync(IMessageBus bus, ITestCollection col, IEnumerable<IXunitTestCase> testCases, CancellationTokenSource cts) =>
+		protected override Task<RunSummary> RunTestCollectionAsync(IMessageBus bus, ITestCollection col,
+				IEnumerable<IXunitTestCase> testCases, CancellationTokenSource cts) =>
 			new TestCollectionRunner(
-				assemblyFixtureMappings, col, testCases, DiagnosticMessageSink, bus, TestCaseOrderer, new ExceptionAggregator(Aggregator), cts
+				assemblyFixtureMappings, col, testCases, DiagnosticMessageSink, bus, TestCaseOrderer,
+				new ExceptionAggregator(Aggregator), cts
 			).RunAsync();
 
 		private class GroupedByCluster
@@ -39,16 +40,17 @@ namespace Xunit
 			public List<IXunitTestCase> TestCases { get; set; }
 		}
 
-		protected override async Task<RunSummary> RunTestCollectionsAsync(IMessageBus messageBus, CancellationTokenSource cancellationTokenSource)
+		protected override async Task<RunSummary> RunTestCollectionsAsync(IMessageBus messageBus,
+			CancellationTokenSource cancellationTokenSource)
 		{
-
 			//bit side effecty, sets up assemblyFixtureMapping before possibly letting xunit do its regular concurrency thing
 			var grouped = (from c in OrderTestCollections()
-						   let cluster = ClusterFixture(c.Item1)
-						   let testcase = new GroupedByCluster { Collection = c.Item1, TestCases = c.Item2, Cluster = cluster }
-						   group testcase by testcase.Cluster into g
-						   orderby g.Count() descending
-						   select g).ToList();
+				let cluster = ClusterFixture(c.Item1)
+				let testcase = new GroupedByCluster {Collection = c.Item1, TestCases = c.Item2, Cluster = cluster}
+				group testcase by testcase.Cluster
+				into g
+				orderby g.Count() descending
+				select g).ToList();
 
 			//If we are not running any integration tests we do not care about only keeping a single IClusterFixture
 			//active at a time, so let xunit do what it does best.
@@ -65,12 +67,14 @@ namespace Xunit
 			var summaries = new ConcurrentBag<RunSummary>();
 			var clusterTotals = new Dictionary<string, Stopwatch>();
 			var clusterFilter = TestClient.Configuration.ClusterFilter;
+			var testFilter = TestClient.Configuration.TestFilter;
 			foreach (var group in grouped)
 			{
 				var type = group.Key?.GetType();
 				var clusterName = type?.Name.Replace("Cluster", "") ?? "UNKNOWN";
 
-				if (!string.IsNullOrWhiteSpace(clusterFilter) && !string.Equals(clusterName, clusterFilter, StringComparison.OrdinalIgnoreCase))
+				if (!string.IsNullOrWhiteSpace(clusterFilter) &&
+				    !string.Equals(clusterName, clusterFilter, StringComparison.OrdinalIgnoreCase))
 					continue;
 
 				var dop = group.Key != null && group.Key.MaxConcurrency > 0
@@ -86,20 +90,31 @@ namespace Xunit
 					group.Key?.Start();
 					await group.ForEachAsync(dop, async g =>
 					{
+						var test = g.Collection.DisplayName.Replace("Test collection for", "");
+						if (!string.IsNullOrWhiteSpace(testFilter) &&
+						    test.IndexOf(testFilter, StringComparison.OrdinalIgnoreCase) < 0)
+							return;
+
+						//display tests we execute when we filter so we get confirmation on the command line we run the tests we expect
+						if (!string.IsNullOrWhiteSpace(testFilter))
+							Console.WriteLine(" -> " + test);
+
 						try
 						{
 							var summary = await RunTestCollectionAsync(messageBus, g.Collection, g.TestCases, cancellationTokenSource);
 							summaries.Add(summary);
 						}
-						catch (TaskCanceledException) { }
-					});
+						catch (TaskCanceledException)
+						{
+						}
+				});
 				}
 				clusterTotals[clusterName].Stop();
 			}
 
 			Console.WriteLine("--------");
 			Console.WriteLine("Individual cluster running times");
-			foreach(var kv in clusterTotals)
+			foreach (var kv in clusterTotals)
 				Console.WriteLine($"- {kv.Key}: {kv.Value.Elapsed.ToString()}");
 			Console.WriteLine("--------");
 
@@ -114,12 +129,7 @@ namespace Xunit
 
 		protected ClusterBase ClusterFixture(ITestCollection testCollection)
 		{
-			var collectionTypeName = testCollection.DisplayName.Split(' ').Last();
-			var collectionType = Type.GetType(collectionTypeName);
-			var clusterType = collectionType.GetTypeInfo().ImplementedInterfaces
-						.Where(i => i.GetTypeInfo().IsGenericType && i.GetGenericTypeDefinition() == typeof(IClusterFixture<>))
-						.Select(i => i.GetTypeInfo().GenericTypeArguments.Single())
-						.FirstOrDefault();
+			var clusterType = GetClusterForCollection(testCollection);
 
 			ClusterBase cluster = null;
 			if (clusterType == null) return null;
@@ -132,6 +142,17 @@ namespace Xunit
 				cluster = o as ClusterBase;
 			});
 			return cluster;
+		}
+
+		public static Type GetClusterForCollection(ITestCollection testCollection)
+		{
+			var collectionTypeName = testCollection.DisplayName.Split(' ').Last();
+			var collectionType = Type.GetType(collectionTypeName);
+			var clusterType = collectionType.GetTypeInfo().ImplementedInterfaces
+				.Where(i => i.GetTypeInfo().IsGenericType && i.GetGenericTypeDefinition() == typeof(IClusterFixture<>))
+				.Select(i => i.GetTypeInfo().GenericTypeArguments.Single())
+				.FirstOrDefault();
+			return clusterType;
 		}
 	}
 }
