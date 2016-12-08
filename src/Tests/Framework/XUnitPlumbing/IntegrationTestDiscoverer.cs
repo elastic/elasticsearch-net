@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace Tests.Framework
@@ -15,8 +16,11 @@ namespace Tests.Framework
 		protected override bool SkipMethod(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo factAttribute)
 		{
 			var classOfMethod = Type.GetType(testMethod.TestClass.Class.Name, true, true);
-			var method = classOfMethod.GetMethod(testMethod.Method.Name);
-			var collectionType = testMethod.TestClass?.TestCollection?.CollectionDefinition?.Name;
+			var method = classOfMethod.GetMethod(testMethod.Method.Name, BindingFlags.FlattenHierarchy | BindingFlags.NonPublic | BindingFlags.Public)
+				?? testMethod.Method.ToRuntimeMethod();
+
+			var collectionType = TestAssemblyRunner.GetClusterForCollection(testMethod.TestClass?.TestCollection);
+
 			return TypeSkipVersionAttributeSatisfies(classOfMethod) ||
 				   MethodSkipVersionAttributeSatisfies(method) ||
 				   RequiresPluginButRunningAgainstSnapshot(classOfMethod, collectionType);

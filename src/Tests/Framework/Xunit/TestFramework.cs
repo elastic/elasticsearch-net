@@ -22,7 +22,11 @@ namespace Xunit
 			Console.WriteLine($" - {nameof(config.ForceReseed)}: {config.ForceReseed}");
 			Console.WriteLine($" - {nameof(config.Mode)}: {config.Mode.ToString()}");
 			if (config.Mode == TestMode.Integration)
+			{
 				Console.WriteLine($" - {nameof(config.ClusterFilter)}: {config.ClusterFilter}");
+				Console.WriteLine($" - {nameof(config.TestFilter)}: {config.TestFilter}");
+
+			}
 			Console.WriteLine($" - {nameof(config.RunIntegrationTests)}: {config.RunIntegrationTests}");
 			Console.WriteLine($" - {nameof(config.RunUnitTests)}: {config.RunUnitTests}");
 

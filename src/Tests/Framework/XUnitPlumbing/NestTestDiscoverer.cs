@@ -25,7 +25,7 @@ namespace Tests.Framework
 				? Enumerable.Empty<IXunitTestCase>()
 				: new[] { new XunitTestCase(DiagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), testMethod) };
 
-		protected static bool RequiresPluginButRunningAgainstSnapshot(Type classOfMethod, string collectionClass)
+		protected static bool RequiresPluginButRunningAgainstSnapshot(Type classOfMethod, Type collectionType)
 		{
 			Attribute[] classAttributes, collectionAttributes = { };
 #if !DOTNETCORE
@@ -33,13 +33,12 @@ namespace Tests.Framework
 #else
 			classAttributes =  classOfMethod.GetTypeInfo().GetCustomAttributes(typeof(RequiresPluginAttribute), true).ToArray();
 #endif
-			if (collectionClass != null)
+			if (collectionType != null)
 			{
-				var classOfCollection = Type.GetType(collectionClass, true, true);
 #if !DOTNETCORE
-				collectionAttributes = Attribute.GetCustomAttributes(classOfCollection, typeof(RequiresPluginAttribute), true);
+				collectionAttributes = Attribute.GetCustomAttributes(collectionType, typeof(RequiresPluginAttribute), true);
 #else
-				collectionAttributes =  classOfCollection.GetTypeInfo().GetCustomAttributes(typeof(RequiresPluginAttribute), true).ToArray();
+				collectionAttributes =  collectionType.GetTypeInfo().GetCustomAttributes(typeof(RequiresPluginAttribute), true).ToArray();
 #endif
 			}
 			if (!classAttributes.Concat(collectionAttributes).Any()) return false;
