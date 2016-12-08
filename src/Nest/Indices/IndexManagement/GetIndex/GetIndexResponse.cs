@@ -8,9 +8,9 @@ namespace Nest
 		IReadOnlyDictionary<string, IndexState> Indices { get; }
 	}
 
-	[JsonObject]
-	public class GetIndexResponse : ResponseBase, IGetIndexResponse
+	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetIndexResponse, string, IndexState>))]
+	public class GetIndexResponse : DictionaryResponseBase<string, IndexState>, IGetIndexResponse
 	{
-		public IReadOnlyDictionary<string, IndexState> Indices { get; internal set; } = EmptyReadOnly<string, IndexState>.Dictionary;
+	    public IReadOnlyDictionary<string, IndexState> Indices => Self.BackingDictionary;
 	}
 }
