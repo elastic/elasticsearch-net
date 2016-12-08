@@ -39,9 +39,15 @@ namespace DocGenerator
 				file.SaveToDocumentationFolder();
 			}
 
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine("Documentation generated.");
+			Console.ResetColor();
+
 			if (Debugger.IsAttached)
+			{
 				Console.WriteLine("Press any key to continue...");
 				Console.ReadKey();
+			}
 		}
 	}
 }
