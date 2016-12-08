@@ -126,6 +126,14 @@ namespace Tests.Document.Multiple.BulkAll
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
 		}
+
+		private static void OnError(ref Exception ex, Exception e, EventWaitHandle handle)
+		{
+			ex = e;
+			handle.Set();
+			throw e;
+		}
+
 		[I]
 		public void DisposingObservableCancelsBulkAll()
 		{
@@ -148,8 +156,9 @@ namespace Tests.Document.Multiple.BulkAll
 				.Index(index)
 			);
 			//we set up an observer
+			Exception ex = null;
 			var bulkObserver = new BulkAllObserver(
-				onError: (e) => { throw e; },
+				onError: (e) => OnError(ref ex, e, handle),
 				onCompleted: () => handle.Set(),
 				onNext: (b) => Interlocked.Increment(ref seenPages)
 			);
@@ -161,6 +170,7 @@ namespace Tests.Document.Multiple.BulkAll
 			observableBulk.Dispose();
 			//we wait N seconds to give in flight request a chance to cancel
 			handle.WaitOne(TimeSpan.FromSeconds(3));
+			if (ex != null && !(ex is TaskCanceledException)) throw ex;
 
 			seenPages.Should().BeLessThan(pages).And.BeGreaterThan(0);
 			var count = this._client.Count<SmallObject>(f => f.Index(index));
@@ -192,9 +202,9 @@ namespace Tests.Document.Multiple.BulkAll
 			, tokenSource.Token);
 
 			//we set up an observer
+			Exception ex = null;
 			var bulkObserver = new BulkAllObserver(
-				onError: (e) => { throw e; },
-				onCompleted: () => handle.Set(),
+				onError: (e) => OnError(ref ex, e, handle),
 				onNext: (b) => Interlocked.Increment(ref seenPages)
 			);
 			//when we subscribe the observable becomes hot
@@ -205,6 +215,7 @@ namespace Tests.Document.Multiple.BulkAll
 			tokenSource.Cancel();
 			//we wait Nseconds to give in flight request a chance to cancel
 			handle.WaitOne(TimeSpan.FromSeconds(3));
+			if (ex != null && !(ex is TaskCanceledException)) throw ex;
 
 			seenPages.Should().BeLessThan(pages).And.BeGreaterThan(0);
 			var count = this._client.Count<SmallObject>(f => f.Index(index));
@@ -217,7 +228,6 @@ namespace Tests.Document.Multiple.BulkAll
 		public async Task AwaitBulkAll()
 		{
 			var index = CreateIndexName();
-			var handle = new ManualResetEvent(false);
 
 			var size = 1000;
 			var pages = 10;

@@ -87,29 +87,27 @@ namespace Tests.Document.Multiple.Reindex
 		[I]
 		public void ReturnsExpectedResponse()
 		{
-			var handles = new []
-			{
-				new ManualResetEvent(false),
-				new ManualResetEvent(false)
-			};
+			var observableWait = new CountdownEvent(2);
 
+			Exception ex = null;
 			var manyTypesObserver = new ReindexObserver<ILazyDocument>(
-				onError: (e) => { handles[0].Set(); throw e; },
-				onCompleted: () => ReindexManyTypesCompleted(handles)
+				onError: (e) => { ex = e; observableWait.Signal(); throw e; },
+				onCompleted: () => ReindexManyTypesCompleted(observableWait)
 			);
 
 			this._reindexManyTypesResult.Subscribe(manyTypesObserver);
 
 			var singleTypeObserver = new ReindexObserver<Project>(
-				onError: (e) => { handles[1].Set(); throw e; },
-				onCompleted: () => ReindexSingleTypeCompleted(handles)
+				onError: (e) => { ex = e; observableWait.Signal(); throw e; },
+				onCompleted: () => ReindexSingleTypeCompleted(observableWait)
 			);
 			this._reindexSingleTypeResult.Subscribe(singleTypeObserver);
 
-			WaitHandle.WaitAll(handles, TimeSpan.FromMinutes(3));
+			observableWait.Wait(TimeSpan.FromMinutes(3));
+			if (ex != null) throw ex;
 		}
 
-		private void ReindexSingleTypeCompleted(ManualResetEvent[] handles)
+		private void ReindexSingleTypeCompleted(CountdownEvent handle)
 		{
 			var refresh = this._client.Refresh(NewSingleTypeIndexName);
 			var originalIndexCount = this._client.Count<Project>(c => c.Index(IndexName));
@@ -119,10 +117,10 @@ namespace Tests.Document.Multiple.Reindex
 
 			originalIndexCount.Count.Should().BeGreaterThan(0).And.Be(newIndexCount.Count);
 
-			handles[1].Set();
+			handle.Signal();
 		}
 
-		private void ReindexManyTypesCompleted(ManualResetEvent[] handles)
+		private void ReindexManyTypesCompleted(CountdownEvent handle)
 		{
 			var refresh = this._client.Refresh(NewManyTypesIndexName);
 			var originalIndexCount = this._client.Count<CommitActivity>(c => c.Index(IndexName));
@@ -150,7 +148,7 @@ namespace Tests.Document.Multiple.Reindex
 					hit.Routing.Should().NotBeNullOrEmpty();
 				}
 			} while (searchResult.IsValid && searchResult.Documents.Any());
-			handles[0].Set();
+			handle.Signal();
 		}
 	}
 }
