@@ -121,11 +121,13 @@ namespace Tests.Document.Single.Index
 
 			var attachment = getResponse.Source.Attachment;
 
-			attachment.Date.Should().Be(new DateTime(2016, 02, 21, 5, 47, 36, DateTimeKind.Utc));
+			attachment.Title.Should().Be("Attachment Test Document");
+			attachment.Keywords.Should().Be("nest,test,document");
+			attachment.Date.Should().Be(new DateTime(2016, 12, 08, 3, 5, 13, DateTimeKind.Utc));
 			attachment.ContentType.Should().Be("application/pdf");
 			attachment.Author.Should().Be("Russ Cam");
 			attachment.Language.Should().Be("fr");
-			attachment.ContentLength.Should().Be(93);
+			attachment.ContentLength.Should().Be(96);
 			attachment.Content.Should().Contain("mapper-attachment support");
 		}
 	}

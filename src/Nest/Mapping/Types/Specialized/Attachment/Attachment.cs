@@ -187,11 +187,13 @@ namespace Nest
 							case "_content_type":
 							case "content_type":
 							case "contenttype":
+							case "contentType":
 								attachment.ContentType = reader.ReadAsString();
 								break;
 							case "_content_length":
 							case "content_length":
 							case "contentlength":
+							case "contentLength":
 								reader.Read();
 								switch (reader.TokenType)
 								{
@@ -230,6 +232,9 @@ namespace Nest
 										break;
 
 								}
+								break;
+							case "title":
+								attachment.Title = reader.ReadAsString();
 								break;
 						}
 					}
