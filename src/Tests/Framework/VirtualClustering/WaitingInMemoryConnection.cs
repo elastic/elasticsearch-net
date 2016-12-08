@@ -23,7 +23,7 @@ namespace Tests.Framework
 
         public override async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken)
         {
-            await Task.Delay(_waitTime);
+            await Task.Delay(_waitTime, cancellationToken);
             return await base.RequestAsync<TReturn>(requestData, cancellationToken);
         }
     }
