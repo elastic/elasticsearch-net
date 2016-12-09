@@ -52,7 +52,7 @@ namespace Tests.Reproduce
 			this.AssertHttpStats(nodeStats);
 			for (var i = 0; i < 10; i++)
 			{
-				Parallel.For(0, 1000, async (c) => await client.SearchAsync<Project>(s => s));
+				Parallel.For(0, 1000, c => client.Search<Project>(s => s));
 
 				nodeStats = await client.NodesStatsAsync(statsRequest);
 				this.AssertHttpStats(nodeStats);
