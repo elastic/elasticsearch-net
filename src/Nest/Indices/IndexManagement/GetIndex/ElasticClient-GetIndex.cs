@@ -35,7 +35,6 @@ namespace Nest
 		public IGetIndexResponse GetIndex(IGetIndexRequest request) =>
 			this.Dispatcher.Dispatch<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse>(
 				request,
-				new GetIndexResponseConverter(this.DeserializeGetIndexResponse),
 				(p, d) => this.LowLevelDispatch.IndicesGetDispatch<GetIndexResponse>(p)
 			);
 
@@ -48,18 +47,8 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse, IGetIndexResponse>(
 				request,
 				cancellationToken,
-				new GetIndexResponseConverter(this.DeserializeGetIndexResponse),
 				(p, d, c) => this.LowLevelDispatch.IndicesGetDispatchAsync<GetIndexResponse>(p, c)
 			);
-
-		//TODO DictionaryResponse
-		private GetIndexResponse DeserializeGetIndexResponse(IApiCallDetails response, Stream stream)
-		{
-			return new GetIndexResponse
-			{
-				Indices = this.Serializer.Deserialize<Dictionary<string, IndexState>>(stream)
-			};
-		}
 
 	}
 }
