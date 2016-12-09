@@ -113,6 +113,21 @@ await audit.TraceStartup();
 
 [source,csharp]
 ----
+var node = SniffAndReturnNode();
+
+node.MasterEligible.Should().BeTrue();
+
+node.HoldsData.Should().BeFalse();
+
+node = await SniffAndReturnNodeAsync();
+
+node.MasterEligible.Should().BeTrue();
+
+node.HoldsData.Should().BeFalse();
+----
+
+[source,csharp]
+----
 var pipeline = CreatePipeline();
 
 pipeline.Sniff();

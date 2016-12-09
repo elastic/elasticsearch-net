@@ -1,0 +1,48 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Search/Request/SlicedScrollSearchUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[sliced-scroll-search-usage]]
+== Sliced Scroll Search Usage
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>()
+{
+    Scroll = "1m",
+    Slice = new SlicedScroll {  Id = 0, Max = 5 }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "slice": {
+    "id": 0,
+    "max": 5
+  }
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Scroll("1m")
+.Slice(ss=>ss.Id(0).Max(5))
+----
+
