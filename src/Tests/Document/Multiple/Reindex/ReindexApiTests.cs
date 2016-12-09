@@ -78,8 +78,19 @@ namespace Tests.Document.Multiple.Reindex
 
 			this._reindexManyTypesResult = this._client.Reindex<ILazyDocument>(r => r
 				.BackPressureFactor(10)
-				.ScrollAll("1m", 2, s=>s.Search(ss=>ss.Index(IndexName).AllTypes()).MaxDegreeOfParallelism(4))
-				.BulkAll(b=>b.Index(NewManyTypesIndexName).Size(100).MaxDegreeOfParallelism(2).RefreshOnCompleted())
+				.ScrollAll("1m", 2, s => s
+					.Search(ss => ss
+						.Index(IndexName)
+						.AllTypes()
+					)
+					.MaxDegreeOfParallelism(4)
+				)
+				.BulkAll(b => b
+					.Index(NewManyTypesIndexName)
+					.Size(100)
+					.MaxDegreeOfParallelism(2)
+					.RefreshOnCompleted()
+				)
 			);
 			this._reindexSingleTypeResult = this._client.Reindex<Project>(IndexName, NewSingleTypeIndexName);
 		}

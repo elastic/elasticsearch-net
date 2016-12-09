@@ -94,7 +94,6 @@ namespace Tests.CodeStandards
 		* the `Exists` requests.
 		*/
 		[U]
-		// TODO remove CreateRequest from exceptions when mapped
 		public void ParityBetweenRequestsAndResponses()
 		{
 			var exceptions = new[] // <1> _Exceptions to the rule_
@@ -115,8 +114,7 @@ namespace Tests.CodeStandards
 				typeof(IndicesShardStoresRequest),
 				typeof(RenderSearchTemplateRequest),
 				typeof(MultiSearchTemplateRequest),
-				//UNMAPPED
-				typeof(CreateRequest)
+				typeof(CreateRequest<>)
 			};
 
 			var types = typeof(IRequest).Assembly().GetTypes();

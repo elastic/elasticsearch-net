@@ -1160,7 +1160,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/_percolate/count</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public PercolateCountDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
@@ -1216,11 +1216,11 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
-	public partial class CreateDescriptor  : RequestDescriptorBase<CreateDescriptor,CreateRequestParameters, ICreateRequest>, ICreateRequest
+	public partial class CreateDescriptor<TDocument>  : RequestDescriptorBase<CreateDescriptor<TDocument>,CreateRequestParameters, ICreateRequest<TDocument>>, ICreateRequest<TDocument>
 	{ 
-		Id ICreateRequest.Id => Self.RouteValues.Get<Id>("id");
-		IndexName ICreateRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName ICreateRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id ICreateRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
+		IndexName ICreateRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ICreateRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}/{id}/_create</summary>
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>		
@@ -1228,57 +1228,60 @@ namespace Nest
 		public CreateDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 		
 
+		/// <summary>/{index}/{type}/{id}/_create</summary>
+		
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
+		public CreateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		partial void DocumentFromPath(TDocument document);
+
 			///<summary>The name of the index</summary>
-		public CreateDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public CreateDescriptor<TDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public CreateDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public CreateDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document</summary>
-		public CreateDescriptor Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public CreateDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public CreateDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public CreateDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
 	
 		///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public CreateDescriptor WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
+		public CreateDescriptor<TDocument> WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
 
 		///<summary>ID of the parent document</summary>
-		public CreateDescriptor Parent(string parent) => AssignParam(p=>p.Parent(parent));
+		public CreateDescriptor<TDocument> Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
 		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
-		public CreateDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
+		public CreateDescriptor<TDocument> Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
 		///<summary>Specific routing value</summary>
-		public CreateDescriptor Routing(string routing) => AssignParam(p=>p.Routing(routing));
+		public CreateDescriptor<TDocument> Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>Explicit operation timeout</summary>
-		public CreateDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+		public CreateDescriptor<TDocument> Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
 		///<summary>Explicit timestamp for the document</summary>
-		public CreateDescriptor Timestamp(Time timestamp) => AssignParam(p=>p.Timestamp(timestamp.ToTimeSpan()));
+		public CreateDescriptor<TDocument> Timestamp(Time timestamp) => AssignParam(p=>p.Timestamp(timestamp.ToTimeSpan()));
 
 		///<summary>Expiration time for the document</summary>
-		public CreateDescriptor Ttl(Time ttl) => AssignParam(p=>p.Ttl(ttl.ToTimeSpan()));
+		public CreateDescriptor<TDocument> Ttl(Time ttl) => AssignParam(p=>p.Ttl(ttl.ToTimeSpan()));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public CreateDescriptor Version(long version) => AssignParam(p=>p.Version(version));
+		public CreateDescriptor<TDocument> Version(long version) => AssignParam(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public CreateDescriptor VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
+		public CreateDescriptor<TDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
-		public CreateDescriptor Pipeline(string pipeline) => AssignParam(p=>p.Pipeline(pipeline));
+		public CreateDescriptor<TDocument> Pipeline(string pipeline) => AssignParam(p=>p.Pipeline(pipeline));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CreateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CreateDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CreateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public CreateDescriptor<TDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1297,7 +1300,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/{id}</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public DeleteDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
@@ -1573,7 +1576,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/{id}</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public DocumentExistsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
@@ -1628,7 +1631,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/{id}/_explain</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public ExplainDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
@@ -1760,7 +1763,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/{id}</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public GetDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
@@ -1865,7 +1868,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/{id}/_source</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public SourceDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
@@ -1960,7 +1963,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public IndexDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
@@ -4003,7 +4006,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/_percolate</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public PercolateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
@@ -4787,7 +4790,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/_termvectors</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public TermVectorsDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
@@ -4870,7 +4873,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/{id}/_update</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public UpdateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 

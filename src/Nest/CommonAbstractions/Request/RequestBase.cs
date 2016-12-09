@@ -11,17 +11,26 @@ namespace Nest
 		HttpMethod HttpMethod { get; }
 
 		RouteValues RouteValues { get; }
-
 	}
 
 	public interface IRequest<TParameters> : IRequest
 		where TParameters : IRequestParameters, new()
 	{
 		/// <summary>
-		/// Used to describe request parameters not part of the body. e.q query string or
-		/// connection configuration overrides
+		/// Used to describe request parameters that are not part of the body. e.g. query string, connection configuration overrides, etc.
 		/// </summary>
 		TParameters RequestParameters { get; set; }
+	}
+
+	/// <summary>
+	/// A request that has an untyped document property
+	/// </summary>
+	public interface IUntypedDocumentRequest : IRequest
+	{
+		/// <summary>
+		/// The untyped document
+		/// </summary>
+		object UntypedDocument { get; }
 	}
 
 	public abstract class RequestBase<TParameters> : IRequest<TParameters>

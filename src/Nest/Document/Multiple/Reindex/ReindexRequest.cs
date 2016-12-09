@@ -21,7 +21,7 @@ namespace Nest
 	public interface IReindexRequest<T> where T : class
 	{
 		/// <summary>
-		/// The scroll typically outperforms the bulk operations by a long shot. If we'd leave things unbounded you'd quickly have way t0o many pending scroll
+		/// The scroll typically outperforms the bulk operations by a long shot. If we'd leave things unbounded you'd quickly have way too many pending scroll
 		/// requests. What this property allows you to express is that for each bucket in the max concurrency of the minimum max concurrency between
 		/// producer and consumer amply the maximum overal pending of the other side by this factor. Typically the concurrency of the consumer (bulkall) will
 		/// be lower and with this factor we can dampen the overall pending scroll requests while we are still processing bulk requests.

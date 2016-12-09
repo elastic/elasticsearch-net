@@ -602,6 +602,11 @@
     <Compile Include="Document\Multiple\Reindex\ReindexObserver.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexRequest.cs" />
     <Compile Include="Document\Result.cs" />
+    <Compile Include="Document\Single\Create\CreateJsonConverter.cs" />
+    <Compile Include="Document\Single\Create\CreateRequest.cs" />
+    <Compile Include="Document\Single\Create\CreateResponse.cs" />
+    <Compile Include="Document\Single\Create\ElasticClient-Create.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\DocumentJsonConverterBase.cs" />
     <Compile Include="Document\Single\Delete\DeleteRequest.cs" />
     <Compile Include="Document\Single\Delete\DeleteResponse.cs" />
     <Compile Include="Document\Single\Delete\ElasticClient-Delete.cs" />
@@ -611,8 +616,8 @@
     <Compile Include="Document\Single\Get\GetRequest.cs" />
     <Compile Include="Document\Single\Get\GetResponse.cs" />
     <Compile Include="Document\Single\Index\ElasticClient-Index.cs" />
+    <Compile Include="Document\Single\Index\IndexJsonConverter.cs" />
     <Compile Include="Document\Single\Index\IndexRequest.cs" />
-    <Compile Include="Document\Single\Index\IndexRequestJsonConverter.cs" />
     <Compile Include="Document\Single\Index\IndexResponse.cs" />
     <Compile Include="Document\Single\Source\ElasticClient-Source.cs" />
     <Compile Include="Document\Single\Source\SourceRequest.cs" />
@@ -1489,12 +1494,7 @@
   <ItemGroup>
     <None Include="paket.references" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CommonAbstractions" />
-    <Folder Include="Document\Multiple\BulkAll" />
-    <Folder Include="Document\Multiple\Reindex" />
-    <Folder Include="Document\Multiple\ScrollAll" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\outputpath.props" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\.paket\paket.targets" />

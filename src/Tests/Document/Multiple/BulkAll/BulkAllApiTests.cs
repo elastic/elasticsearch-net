@@ -166,7 +166,7 @@ namespace Tests.Document.Multiple.BulkAll
 			observableBulk.Subscribe(bulkObserver);
 
 			//we wait N seconds to see some bulks
-			handle.WaitOne(TimeSpan.FromSeconds(3));
+			handle.WaitOne(TimeSpan.FromSeconds(1));
 			observableBulk.Dispose();
 			//we wait N seconds to give in flight request a chance to cancel
 			handle.WaitOne(TimeSpan.FromSeconds(3));
@@ -211,7 +211,7 @@ namespace Tests.Document.Multiple.BulkAll
 			observableBulk.Subscribe(bulkObserver);
 
 			//we wait Nseconds to see some bulks
-			handle.WaitOne(TimeSpan.FromSeconds(3));
+			handle.WaitOne(TimeSpan.FromSeconds(1));
 			tokenSource.Cancel();
 			//we wait Nseconds to give in flight request a chance to cancel
 			handle.WaitOne(TimeSpan.FromSeconds(3));
