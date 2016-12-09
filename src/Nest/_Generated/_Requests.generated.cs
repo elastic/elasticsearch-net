@@ -1640,9 +1640,7 @@ namespace Nest
 		protected ICountRequest Self => this;
 		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ICountRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_count</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+			///<summary>/_count<para><typeparamref name="T"/> describes an elasticsearch document type from which the index, type and id can be inferred</para></summary>
 		public CountRequest() : this(typeof(T), typeof(T)) {}
 		
 
@@ -1707,8 +1705,6 @@ namespace Nest
 		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ICountRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_count</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
 		public CountRequest() {}
 		
 
@@ -1835,25 +1831,31 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICreateRequest : IRequest<CreateRequestParameters> 
+	public partial interface ICreateRequest<TDocument> : IRequest<CreateRequestParameters> 
 	{
 		Id Id { get; }
 		IndexName Index { get; }
 		TypeName Type { get; }
 	 } 
 	///<summary>Request parameters for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
-	public partial class CreateRequest  : PlainRequestBase<CreateRequestParameters>, ICreateRequest
+	public partial class CreateRequest<TDocument>  : PlainRequestBase<CreateRequestParameters>, ICreateRequest<TDocument>
 	{
-		protected ICreateRequest Self => this;
-		Id ICreateRequest.Id => Self.RouteValues.Get<Id>("id");
-		IndexName ICreateRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName ICreateRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		protected ICreateRequest<TDocument> Self => this;
+		Id ICreateRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
+		IndexName ICreateRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ICreateRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}/{id}/_create</summary>
 ///<param name="index">this parameter is required</param>		
 ///<param name="type">this parameter is required</param>		
 ///<param name="id">this parameter is required</param>
 		public CreateRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 		
+
+		/// <summary>/{index}/{type}/{id}/_create</summary>
+		
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
+		public CreateRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		partial void DocumentFromPath(TDocument document);
 
 			///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
@@ -1891,9 +1893,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeactivateWatchRequest : IRequest<DeactivateWatchRequestParameters> 
@@ -2355,7 +2355,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/{id}</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public DeleteRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
@@ -2635,7 +2635,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/{id}</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public DocumentExistsRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
@@ -2777,7 +2777,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/{id}/_explain</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public ExplainRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
@@ -3254,8 +3254,6 @@ namespace Nest
 		Indices IGetMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetMappingRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_mapping</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
 		public GetMappingRequest() {}
 		
 
@@ -3381,7 +3379,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/{id}</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public GetRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
@@ -3789,7 +3787,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public IndexRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
@@ -4116,8 +4114,6 @@ namespace Nest
 		Indices IMultiSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IMultiSearchRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_msearch</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
 		public MultiSearchRequest() {}
 		
 
@@ -4159,8 +4155,6 @@ namespace Nest
 		Indices IMultiSearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IMultiSearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_msearch/template</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
 		public MultiSearchTemplateRequest() {}
 		
 
@@ -4497,7 +4491,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/_percolate/count</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public PercolateCountRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
@@ -4565,7 +4559,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/_percolate</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public PercolateRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
@@ -5262,9 +5256,7 @@ namespace Nest
 		protected ISearchRequest Self => this;
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_search</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+			///<summary>/_search<para><typeparamref name="T"/> describes an elasticsearch document type from which the index, type and id can be inferred</para></summary>
 		public SearchRequest() : this(typeof(T), typeof(T)) {}
 		
 
@@ -5347,8 +5339,6 @@ namespace Nest
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_search</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
 		public SearchRequest() {}
 		
 
@@ -5437,9 +5427,7 @@ namespace Nest
 		protected ISearchShardsRequest Self => this;
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchShardsRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/{type}/_search_shards</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+			///<summary>/{index}/{type}/_search_shards<para><typeparamref name="T"/> describes an elasticsearch document type from which the index, type and id can be inferred</para></summary>
 		public SearchShardsRequest() : this(typeof(T), typeof(T)) {}
 		
 
@@ -5486,8 +5474,6 @@ namespace Nest
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchShardsRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/{index}/{type}/_search_shards</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
 		public SearchShardsRequest() {}
 		
 
@@ -5541,8 +5527,6 @@ namespace Nest
 		Indices ISearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_search/template</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
 		public SearchTemplateRequest() {}
 		
 
@@ -5798,7 +5782,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/{id}/_source</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public SourceRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
@@ -6066,7 +6050,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/_termvectors</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public TermVectorsRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
@@ -6479,7 +6463,7 @@ namespace Nest
 
 		/// <summary>/{index}/{type}/{id}/_update</summary>
 		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public UpdateRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
@@ -6620,9 +6604,7 @@ namespace Nest
 		protected IValidateQueryRequest Self => this;
 		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IValidateQueryRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_validate/query</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+			///<summary>/_validate/query<para><typeparamref name="T"/> describes an elasticsearch document type from which the index, type and id can be inferred</para></summary>
 		public ValidateQueryRequest() : this(typeof(T), typeof(T)) {}
 		
 
@@ -6687,8 +6669,6 @@ namespace Nest
 		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IValidateQueryRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_validate/query</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
 		public ValidateQueryRequest() {}
 		
 
