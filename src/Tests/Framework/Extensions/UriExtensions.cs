@@ -40,7 +40,7 @@ namespace Tests
 				.Where(k => !string.IsNullOrWhiteSpace(k[0]))
 				.ToDictionary(k => k[0], v => v.Last());
 
-			clientKeyValues.Count().Should().Be(expectedKeyValues.Count());
+			clientKeyValues.Count.Should().Be(expectedKeyValues.Count);
 			clientKeyValues.Should().ContainKeys(expectedKeyValues.Keys.ToArray());
 			clientKeyValues.Should().Equal(expectedKeyValues);
 		}
