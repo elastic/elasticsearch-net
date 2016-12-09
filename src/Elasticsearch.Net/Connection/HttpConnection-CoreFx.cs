@@ -107,7 +107,9 @@ namespace Elasticsearch.Net
 		{
 			var handler = new HttpClientHandler
 			{
-				AutomaticDecompression = requestData.HttpCompression ? GZip | Deflate : None
+				AutomaticDecompression = requestData.HttpCompression ? GZip | Deflate : None,
+				// same limit as desktop clr
+				MaxConnectionsPerServer = requestData.ConnectionSettings.ConnectionLimit
 			};
 
 			if (!requestData.ProxyAddress.IsNullOrEmpty())
