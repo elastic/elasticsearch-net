@@ -251,6 +251,9 @@
     <Compile Include="Cat\CatHelp\CatHelpRecord.cs" />
     <Compile Include="Cat\CatHelp\CatHelpRequest.cs" />
     <Compile Include="Cat\CatHelp\ElasticClient-CatHelp.cs" />
+    <Compile Include="Cat\CatTemplates\CatTemplatesRecord.cs" />
+    <Compile Include="Cat\CatTemplates\CatTemplatesRequest.cs" />
+    <Compile Include="Cat\CatTemplates\ElasticClient-CatTemplates.cs" />
     <Compile Include="Cat\CatRepositories\CatRepositoriesRecord.cs" />
     <Compile Include="Cat\CatRepositories\CatRepositoriesRequest.cs" />
     <Compile Include="Cat\CatRepositories\ElasticClient-CatRepositories.cs" />

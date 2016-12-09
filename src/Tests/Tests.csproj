@@ -210,6 +210,8 @@
     <Compile Include="Cat\CatFielddata\CatFielddataUrlTests.cs" />
     <Compile Include="Cat\CatHealth\CatHealthApiTests.cs" />
     <Compile Include="Cat\CatHealth\CatHealthUrlTests.cs" />
+    <Compile Include="Cat\CatTemplates\CatTemplatesApiTests.cs" />
+    <Compile Include="Cat\CatTemplates\CatTemplatesUrlTests.cs" />
     <Compile Include="Cat\CatSegments\CatSegmentsApiTests.cs" />
     <Compile Include="Cat\CatSegments\CatSegmentsUrlTests.cs" />
     <Compile Include="Cat\CatShards\CatShardsApiTests.cs" />
