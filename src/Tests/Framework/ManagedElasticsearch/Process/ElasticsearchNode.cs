@@ -239,9 +239,7 @@ namespace Tests.Framework.Integration
 
 			var exceptionMessageStart = "Server has license plugin installed, ";
 #if DOTNETCORE
-			//TODO Why is this here hardcoded ?
-			var licensePath = @"C:\license.json";
-			var licenseFile = File.Exists(licensePath) ? licensePath : string.Empty;
+			var licenseFile = Environment.GetEnvironmentVariable("ES_LICENSE_FILE");
 #else
 			var licenseFile = Environment.GetEnvironmentVariable("ES_LICENSE_FILE", EnvironmentVariableTarget.Machine);
 #endif

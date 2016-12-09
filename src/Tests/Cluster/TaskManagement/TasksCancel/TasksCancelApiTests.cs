@@ -41,6 +41,7 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 				);
 
 				var taskId = reindex.Task;
+
 				//TODO change this to GetTasks when it's implemented
 				var taskInfo = client.ListTasks(new ListTasksRequest());
 				taskInfo.IsValid.Should().BeTrue();
