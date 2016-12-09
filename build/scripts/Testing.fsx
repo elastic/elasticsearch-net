@@ -20,8 +20,10 @@ module Tests =
         let testDll = Path.Combine(folder, "Tests.dll")
         Tooling.XUnit.Exec [testDll; "-parallel"; parallelization; "-xml"; Paths.Output("TestResults-Desktop-Clr.xml")] 
         |> ignore
-        
 
+    let RunUnitTestsForever() = 
+        while true do testDesktopClr "all"
+        
     let RunUnitTests() = 
         testDesktopClr "all"
         testProjectJson "all"
