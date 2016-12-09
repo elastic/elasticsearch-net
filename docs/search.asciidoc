@@ -39,6 +39,8 @@ NEST exposes all of the search request parameters available in Elasticsearch
 
 * <<search-after-usage,Search After Usage>>
 
+* <<sliced-scroll-search-usage,Sliced Scroll Search Usage>>
+
 * <<sort-usage,Sort Usage>>
 
 * <<source-filtering-usage,Source Filtering Usage>>

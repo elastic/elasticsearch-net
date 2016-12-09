@@ -109,6 +109,8 @@ var states = response.Aggs.Terms("states");
 states.Should().NotBeNull();
 states.DocCountErrorUpperBound.Should().HaveValue();
 states.SumOtherDocCount.Should().HaveValue();
+states.Buckets.Should().NotBeNull();
+states.Buckets.Count.Should().BeGreaterThan(0);
 
 foreach (var item in states.Buckets)
 {
@@ -118,5 +120,63 @@ foreach (var item in states.Buckets)
 
 states.Meta.Should().NotBeNull().And.HaveCount(1);
 states.Meta["foo"].Should().Be("bar");
+----
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .Terms("commits", st => st
+        .Field(p => p.NumberOfCommits)
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new TermsAggregation("commits")
+    {
+        Field = Field<Project>(p => p.NumberOfCommits),
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "commits": {
+      "terms": {
+        "field": "numberOfCommits"
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var commits = response.Aggs.Terms<int>("commits");
+commits.Should().NotBeNull();
+commits.DocCountErrorUpperBound.Should().HaveValue();
+commits.SumOtherDocCount.Should().HaveValue();
+commits.Buckets.Should().NotBeNull();
+commits.Buckets.Count.Should().BeGreaterThan(0);
+
+foreach (var item in commits.Buckets)
+{
+    item.Key.Should().BeGreaterThan(0);
+    item.DocCount.Should().BeGreaterOrEqualTo(1);
+}
 ----
 

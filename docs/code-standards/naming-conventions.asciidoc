@@ -108,11 +108,8 @@ var exceptions = new[] <1>
     typeof(GetAliasRequest),
     typeof(IndicesShardStoresRequest),
     typeof(RenderSearchTemplateRequest),
-    //UNMAPPED
-    typeof(ClusterAllocationExplainRequest),
-    typeof(ReindexRethrottleRequest),
-    //typeof(ReindexRequest),
-    typeof(UpdateByQueryRequest)
+    typeof(MultiSearchTemplateRequest),
+    typeof(CreateRequest<>)
 };
 
 var types = typeof(IRequest).Assembly().GetTypes();

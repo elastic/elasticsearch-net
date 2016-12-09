@@ -32,7 +32,7 @@ var testcases = new[,]
 var address = testcases[i, 0];
 var ip = testcases[i, 1];
 var port = testcases[i, 2];
-var match = Elasticsearch.Net.SniffResponse.AddressRegex.Match(address);
+var match = SniffParser.AddressRegex.Match(address);
 match.Success.Should().BeTrue();
 match.Groups["ip"].Value.ShouldBeEquivalentTo(ip);
 match.Groups["port"].Value.ShouldBeEquivalentTo(port);

@@ -34,6 +34,8 @@ include::search/request/script-fields-usage.asciidoc[]
 
 include::search/request/search-after-usage.asciidoc[]
 
+include::search/request/sliced-scroll-search-usage.asciidoc[]
+
 include::search/request/sort-usage.asciidoc[]
 
 include::search/request/source-filtering-usage.asciidoc[]
