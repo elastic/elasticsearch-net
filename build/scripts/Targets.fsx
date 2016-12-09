@@ -19,6 +19,7 @@ open Versioning
 open Releasing
 open Profiling
 open XmlDocPatcher
+open Documentation
 
 // Default target
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
@@ -32,12 +33,16 @@ Target "Test"  <| fun _ -> Tests.RunUnitTests()
 Target "InheritDoc"  <| fun _ -> InheritDoc.patchInheritDocs()
 
 Target "TestForever"  <| fun _ -> Tests.RunUnitTestsForever()
-
+    
 Target "Integrate"  <| fun _ -> Tests.RunIntegrationTests (getBuildParamOrDefault "esversions" "") (getBuildParamOrDefault "escluster" "") (getBuildParamOrDefault "testfilter" "")
 
 Target "Profile" <| fun _ -> Profiler.Run()
 
 Target "Benchmark" <| fun _ -> Benchmarker.Run()
+
+Target "Documentation" <| fun _ -> Documentation.Generate()
+
+Target "QuickCompile"  <| fun _ -> Build.QuickCompile()
 
 Target "Version" <| fun _ -> 
     Versioning.PatchAssemblyInfos()
@@ -60,6 +65,7 @@ Target "Canary" <| fun _ ->
   ==> "BuildApp"
   =?> ("Test", (not ((getBuildParam "skiptests") = "1")))
   ==> "InheritDoc"
+  ==> "Documentation"
   ==> "Build"
 
 "Clean" 
