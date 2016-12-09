@@ -6,8 +6,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
 	public class AddressParsing
 	{
-		[U]
-		public void IsMatched()
+		[U] public void IsMatched()
 		{
 			//based on examples from http://www.ietf.org/rfc/rfc2732.txt
 			var testcases = new[,]
@@ -33,6 +32,32 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 
 				match.Success.Should().BeTrue();
 
+				match.Groups["ip"].Value.ShouldBeEquivalentTo(ip);
+				match.Groups["port"].Value.ShouldBeEquivalentTo(port);
+			}
+		}
+
+		[U] public void FqdnIsReadCorrectly()
+		{
+			//based on examples from http://www.ietf.org/rfc/rfc2732.txt
+			var testcases = new[,]
+			{
+				{"helloworld/[::1]:9200", "helloworld", "[::1]", "9200"},
+				{"elastic.co/192.168.2.1:231", "elastic.co", "192.168.2.1", "231"}
+			};
+
+			for (var i = 0; i < testcases.GetLength(0); i++)
+			{
+				var address = testcases[i, 0];
+				var fqdn = testcases[i, 1];
+				var ip = testcases[i, 2];
+				var port = testcases[i, 3];
+
+				var match = SniffParser.AddressRegex.Match(address);
+
+				match.Success.Should().BeTrue();
+
+				match.Groups["fqdn"].Value.ShouldBeEquivalentTo(fqdn);
 				match.Groups["ip"].Value.ShouldBeEquivalentTo(ip);
 				match.Groups["port"].Value.ShouldBeEquivalentTo(port);
 			}
