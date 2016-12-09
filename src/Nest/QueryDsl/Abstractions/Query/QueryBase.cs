@@ -82,14 +82,8 @@ namespace Nest
 			return anyEmpty;
 		}
 
-		public static implicit operator QueryContainer(QueryBase query)
-		{
-			if (query == null)
-				return null;
-			return new QueryContainer(query);
-
-
-		}
+		public static implicit operator QueryContainer(QueryBase query) =>
+			query == null ? null : new QueryContainer(query);
 
 		internal void WrapInContainer(IQueryContainer container)
 		{
