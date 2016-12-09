@@ -25,6 +25,6 @@ namespace Nest
 			this.HotThreads = threadInfo;
 		}
 
-		public IReadOnlyCollection<HotThreadInformation> HotThreads { get; } = EmptyReadOnly<HotThreadInformation>.Collection;
+		public IReadOnlyCollection<HotThreadInformation> HotThreads { get; internal set; } = EmptyReadOnly<HotThreadInformation>.Collection;
 	}
 }
