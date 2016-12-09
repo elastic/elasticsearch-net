@@ -14,9 +14,7 @@ namespace Nest
 
 	public class ClusterRerouteResponse : ResponseBase, IClusterRerouteResponse
 	{
-		//TODO why is this not on the interface?
-		public int Version { get; internal set; }
 		public ClusterRerouteState State { get; internal set; }
-		public IReadOnlyCollection<ClusterRerouteExplanation> Explanations { get; } = EmptyReadOnly<ClusterRerouteExplanation>.Collection;
+		public IReadOnlyCollection<ClusterRerouteExplanation> Explanations { get; internal set; } = EmptyReadOnly<ClusterRerouteExplanation>.Collection;
 	}
 }

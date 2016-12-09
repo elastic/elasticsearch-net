@@ -26,7 +26,7 @@ namespace Nest
 		/// <summary>
 		/// Resolves JsonContracts for types
 		/// </summary>
-		protected ElasticContractResolver ContractResolver { get; }
+		private ElasticContractResolver ContractResolver { get; }
 
 		//TODO this internal smells
 		internal JsonSerializer Serializer => _defaultSerializer;

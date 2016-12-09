@@ -49,13 +49,13 @@ namespace Nest
 
 		public GetFieldMappingResponse() { }
 
+		//if you call get mapping on an existing type and index but no fields match you still get back a 200.
+		public override bool IsValid => base.IsValid && this.Indices.HasAny();
+
 		internal GetFieldMappingResponse(IApiCallDetails status, IReadOnlyDictionary<string, TypeFieldMappings> dict, Inferrer inferrer)
 		{
 			this.Indices = dict ?? EmptyReadOnly<string, TypeFieldMappings>.Dictionary;
 			this._inferrer = inferrer;
-			//TODO can dict truely ever be null, whats the response look like when field mapping is not found.
-			//does status.Success not already reflect this?
-			//this.IsValid = status.Success && dict != null && dict.Count > 0;
 		}
 
 		public IReadOnlyDictionary<string, TypeFieldMappings> Indices { get; internal set; } = EmptyReadOnly<string, TypeFieldMappings>.Dictionary;
@@ -66,9 +66,7 @@ namespace Nest
 			FieldMappingProperties type;
 
 			if (!this.Indices.TryGetValue(indexName, out index) || index.Mappings == null) return null;
-			if (!index.Mappings.TryGetValue(typeName, out type)) return null;
-
-			return type;
+			return !index.Mappings.TryGetValue(typeName, out type) ? null : type;
 		}
 
 		public IFieldMapping MappingFor(string indexName, string typeName, string fieldName)
