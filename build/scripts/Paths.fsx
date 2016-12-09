@@ -29,7 +29,7 @@ module Projects =
 
     type PrivateProject =
         | Tests
-    
+        | DocGenerator
 
 
     type DotNetProject = 
@@ -55,6 +55,7 @@ module Projects =
             | PrivateProject p ->
                 match p with
                 | Tests -> "Tests"
+                | DocGenerator -> "DocGenerator"
        
         static member TryFindName (name: string) =
             DotNetProject.All
