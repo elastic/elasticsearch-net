@@ -6,7 +6,7 @@ namespace Nest
 	public class IndexActionResult
 	{
 		[JsonProperty("id")]
-		public Id Id { get; set; }
+		public string Id { get; set; }
 
 		[JsonProperty("response")]
 		public IndexActionResultIndexResponse Response { get; set; }

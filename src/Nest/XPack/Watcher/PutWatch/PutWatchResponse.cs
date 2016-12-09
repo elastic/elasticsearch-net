@@ -7,7 +7,7 @@ namespace Nest
 	public interface IPutWatchResponse : IResponse
 	{
 		[JsonProperty("_id")]
-		Id Id { get; }
+		string Id { get; }
 
 		[JsonProperty("_version")]
 		int Version { get; }
@@ -18,7 +18,7 @@ namespace Nest
 
 	public class PutWatchResponse : ResponseBase, IPutWatchResponse
 	{
-		public Id Id { get; internal set; }
+		public string Id { get; internal set; }
 
 		public int Version { get; internal set; }
 

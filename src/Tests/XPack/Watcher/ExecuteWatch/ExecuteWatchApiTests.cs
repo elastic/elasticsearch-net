@@ -202,7 +202,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 		{
 			response.IsValid.Should().BeTrue();
 			response.WatchRecord.Should().NotBeNull();
-			response.WatchRecord.WatchId.Should().Be(new Id(CallIsolatedValue));
+			response.WatchRecord.WatchId.Should().Be(CallIsolatedValue);
 			response.WatchRecord.State.Should().NotBeNull().And.Be(ActionExecutionState.Executed);
 			response.WatchRecord.TriggerEvent.Should().NotBeNull();
 			response.WatchRecord.TriggerEvent.Type.Should().Be("manual");

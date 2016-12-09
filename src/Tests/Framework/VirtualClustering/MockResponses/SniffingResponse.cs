@@ -49,6 +49,7 @@ namespace Tests.Framework.MockResponses
 				http = node.HttpEnabled ? new
 				{
 					bound_address = new []
+
 					{
 						$"{fqdn}127.0.0.1:{node.Uri.Port}"
 					},

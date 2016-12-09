@@ -15,9 +15,9 @@ namespace Elasticsearch.Net
 			var match = AddressRegex.Match(boundAddress);
 			if (!match.Success) throw new Exception($"Can not parse bound_address: {boundAddress} to Uri");
 
-			var fqdn = match.Groups["fqdn"].Value?.Trim();
-			var ip = match.Groups["ip"].Value?.Trim();
-			var port = match.Groups["port"].Value?.Trim();
+			var fqdn = match.Groups["fqdn"].Value.Trim();
+			var ip = match.Groups["ip"].Value.Trim();
+			var port = match.Groups["port"].Value.Trim();
 			var host = !fqdn.IsNullOrEmpty() ? fqdn : ip;
 
 			return new Uri($"http{suffix}://{host}:{port}");

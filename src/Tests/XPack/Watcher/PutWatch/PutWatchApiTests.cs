@@ -691,7 +691,7 @@ namespace Tests.XPack.Watcher.PutWatch
 		{
 			response.Created.Should().BeTrue();
 			response.Version.Should().Be(1);
-			response.Id.Should().Be(new Id(CallIsolatedValue));
+			response.Id.Should().Be(CallIsolatedValue);
 		}
 	}
 }

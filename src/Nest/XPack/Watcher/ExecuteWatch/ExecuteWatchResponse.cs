@@ -10,7 +10,7 @@ namespace Nest
 	public interface IExecuteWatchResponse : IResponse
 	{
 		[JsonProperty("_id")]
-		Id Id { get; set; }
+		string Id { get; set; }
 
 		[JsonProperty("watch_record")]
 		WatchRecord WatchRecord { get; set; }
@@ -18,7 +18,7 @@ namespace Nest
 
 	public class ExecuteWatchResponse : ResponseBase, IExecuteWatchResponse
 	{
-		public Id Id { get; set; }
+		public string Id { get; set; }
 
 		public WatchRecord WatchRecord { get; set; }
 	}
@@ -46,7 +46,7 @@ namespace Nest
 	public class WatchRecord
 	{
 		[JsonProperty("watch_id")]
-		public Id WatchId { get; set; }
+		public string WatchId { get; set; }
 
 		[JsonProperty("messages")]
 		public IReadOnlyCollection<string> Messages { get; set; }

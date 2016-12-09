@@ -62,10 +62,10 @@ namespace Nest
 	public class WatchRecordQueuedStats
 	{
 		[JsonProperty("watch_id")]
-		public Id WatchId { get; internal set; }
+		public string WatchId { get; internal set; }
 
 		[JsonProperty("watch_record_id")]
-		public Id WatchRecordId { get; internal set; }
+		public string WatchRecordId { get; internal set; }
 
 		[JsonProperty("triggered_time")]
 		public DateTimeOffset? TriggeredTime { get; internal set; }

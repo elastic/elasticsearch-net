@@ -7,9 +7,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject]
-	public interface IPagerDutyAction : IAction, IPagerDutyEvent
-	{
-	}
+	public interface IPagerDutyAction : IAction, IPagerDutyEvent { }
 
 	public class PagerDutyAction : ActionBase, IPagerDutyAction
 	{
@@ -31,9 +29,7 @@ namespace Nest
 
 		public IEnumerable<IPagerDutyContext> Context { get; set; }
 
-		public PagerDutyAction(string name) : base(name)
-		{
-		}
+		public PagerDutyAction(string name) : base(name) {}
 	}
 
 	public class PagerDutyActionDescriptor : ActionsDescriptorBase<PagerDutyActionDescriptor, IPagerDutyAction>, IPagerDutyAction
