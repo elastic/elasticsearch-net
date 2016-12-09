@@ -21,6 +21,6 @@ namespace Nest
 		public Result Result { get; set; }
 
 		[JsonProperty("id")]
-		public Id Id { get; set; }
+		public string Id { get; set; }
 	}
 }

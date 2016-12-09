@@ -9,7 +9,7 @@ namespace Nest
 		bool Found { get; }
 
 		[JsonProperty("_id")]
-		Id Id { get; }
+		string Id { get; }
 
 		[JsonProperty("_status")]
 		WatchStatus Status { get; }
@@ -21,7 +21,7 @@ namespace Nest
 	public class GetWatchResponse : ResponseBase, IGetWatchResponse
 	{
 		public bool Found { get; internal set; }
-		public Id Id { get; internal set; }
+		public string Id { get; internal set; }
 		public WatchStatus Status { get; internal set; }
 		public Watch Watch { get; internal set; }
 	}

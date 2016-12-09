@@ -101,7 +101,7 @@ namespace Tests.XPack.Watcher.GetWatch
 		protected override void ExpectResponse(IGetWatchResponse response)
 		{
 			response.Found.Should().BeTrue();
-			response.Id.Should().Be(new Id(CallIsolatedValue));
+			response.Id.Should().Be(CallIsolatedValue);
 
 			var watchStatus = response.Status;
 			watchStatus.Should().NotBeNull();
@@ -174,7 +174,7 @@ namespace Tests.XPack.Watcher.GetWatch
 		protected override void ExpectResponse(IGetWatchResponse response)
 		{
 			response.Found.Should().BeFalse();
-			response.Id.Should().Be(new Id(CallIsolatedValue));
+			response.Id.Should().Be(CallIsolatedValue);
 			response.Status.Should().BeNull();
 			response.Watch.Should().BeNull();
 		}
