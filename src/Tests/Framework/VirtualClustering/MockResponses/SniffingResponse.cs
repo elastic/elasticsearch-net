@@ -53,7 +53,7 @@ namespace Tests.Framework.MockResponses
 					{
 						$"{fqdn}127.0.0.1:{node.Uri.Port}"
 					},
-					publish_address = publishAddress
+					publish_address = $"{fqdn}${publishAddress}"
 				} : null,
 				settings = new Dictionary<string, object>
 				{
