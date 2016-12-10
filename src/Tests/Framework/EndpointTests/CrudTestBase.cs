@@ -39,14 +39,14 @@ namespace Tests.Framework
 			where TUpdateResponse : class, IResponse
 			where TDeleteResponse : class, IResponse
 	{
-		private LazyResponses _createResponse;
-		private LazyResponses _createGetResponse;
-		private LazyResponses _updateResponse;
-		private LazyResponses _updateGetResponse;
-		private LazyResponses _deleteResponse;
-		private LazyResponses _deleteGetResponse;
+		private readonly LazyResponses _createResponse;
+		private readonly LazyResponses _createGetResponse;
+		private readonly LazyResponses _updateResponse;
+		private readonly LazyResponses _updateGetResponse;
+		private readonly LazyResponses _deleteResponse;
+		private readonly LazyResponses _deleteGetResponse;
 
-		readonly ClusterBase _cluster;
+		private readonly ClusterBase _cluster;
 
 		[SuppressMessage("Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor", Justification = "Expected behaviour")]
 		protected CrudTestBase(ClusterBase cluster, EndpointUsage usage)
@@ -65,10 +65,10 @@ namespace Tests.Framework
 		protected abstract LazyResponses Update();
 		protected virtual LazyResponses Delete() => LazyResponses.Empty;
 
-		protected static string RandomFluent { get; } = RandomString();
-		protected static string RandomFluentAsync { get; } = RandomString();
-		protected static string RandomInitializer { get; } = RandomString();
-		protected static string RandomInitializerAsync { get; } = RandomString();
+		private static string RandomFluent { get; } = RandomString();
+		private static string RandomFluentAsync { get; } = RandomString();
+		private static string RandomInitializer { get; } = RandomString();
+		private static string RandomInitializerAsync { get; } = RandomString();
 
 		protected virtual bool SupportsDeletes => true;
 
@@ -89,14 +89,25 @@ namespace Tests.Framework
 			return new LazyResponses(async () =>
 			{
 				var dict = new Dictionary<ClientMethod, IResponse>();
-				dict.Add(Integration.ClientMethod.Fluent, fluent(RandomFluent, client, f => fluentBody(RandomFluent, f)));
-				dict.Add(Integration.ClientMethod.FluentAsync, await fluentAsync(RandomFluentAsync, client, f => fluentBody(RandomFluentAsync, f)));
-				dict.Add(Integration.ClientMethod.Initializer, request(RandomInitializer, client, initializerBody(RandomInitializer)));
-				dict.Add(Integration.ClientMethod.InitializerAsync, await requestAsync(RandomInitializerAsync, client, initializerBody(RandomInitializerAsync)));
+
+				var sf = Sanitize(RandomFluent);
+				dict.Add(Integration.ClientMethod.Fluent, fluent(sf, client, f => fluentBody(sf, f)));
+
+				var sfa = Sanitize(RandomFluentAsync);
+				dict.Add(Integration.ClientMethod.FluentAsync, await fluentAsync(sfa, client, f => fluentBody(sfa, f)));
+
+				var si = Sanitize(RandomInitializer);
+				dict.Add(Integration.ClientMethod.Initializer, request(si, client, initializerBody(si)));
+
+				var sia = Sanitize(RandomInitializerAsync);
+				dict.Add(Integration.ClientMethod.InitializerAsync, await requestAsync(sia, client, initializerBody(sia)));
 				return dict;
 			});
 		}
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
+
+		protected virtual string Sanitize(string randomString) => randomString;
+
 		protected int IntegrationPort { get; set; } = 9200;
 		protected virtual IElasticClient Client => this._cluster.Client;
 
