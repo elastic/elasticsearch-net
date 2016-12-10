@@ -33,14 +33,14 @@ namespace Tests.Framework.MockResponses
 		private static Random Random = new Random(1337);
 		private static object CreateNodeResponse(Node node, string name, string publishAddressOverride, bool randomFqdn)
 		{
-			var fqdn = randomFqdn ? $"fqdn{node.Uri.Port}/" : "";
-			var publishAddress = !string.IsNullOrWhiteSpace(publishAddressOverride) ? publishAddressOverride : "127.0.0.1";
-			publishAddress += ":" + node.Uri.Port;
+			var port = node.Uri.Port;
+			var fqdn = randomFqdn ? $"fqdn{port}/" : "";
+			var host = !string.IsNullOrWhiteSpace(publishAddressOverride) ? publishAddressOverride : "127.0.0.1";
 
 			var nodeResponse = new
 			{
 				name = name,
-				transport_address = $"127.0.0.1:{node.Uri.Port + 1000}]",
+				transport_address = $"127.0.0.1:{port + 1000}]",
 				host = Guid.NewGuid().ToString("N").Substring(0, 8),
 				ip = "127.0.0.1",
 				version = TestClient.Configuration.ElasticsearchVersion.Version,
@@ -49,11 +49,11 @@ namespace Tests.Framework.MockResponses
 				http = node.HttpEnabled ? new
 				{
 					bound_address = new []
-
 					{
-						$"{fqdn}127.0.0.1:{node.Uri.Port}"
+						$"{fqdn}127.0.0.1:{port}"
 					},
-					publish_address = $"{fqdn}${publishAddress}"
+					//publish_address = $"{fqdn}${publishAddress}"
+					publish_address = $"{fqdn}{host}:{port}"
 				} : null,
 				settings = new Dictionary<string, object>
 				{
