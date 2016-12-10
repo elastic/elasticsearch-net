@@ -122,8 +122,7 @@ namespace Nest
 					Field = this._scrollAllRequest.RoutingField
 				};
 				var response = await this._client.SearchAsync<T>(this._searchRequest, this._compositeCancelToken).ConfigureAwait(false);
-				if (response.Total <= 0)
-					throw Throw($"ScrollAll query against {response.ApiCall.Uri.PathAndQuery} doesn't contain any documents.", response.ApiCall);
+				//response gets passed to ScrollToCompletionAsync which does validation already
 				return response;
 			}
 			finally { _scrollInitiationLock.Release(); }
