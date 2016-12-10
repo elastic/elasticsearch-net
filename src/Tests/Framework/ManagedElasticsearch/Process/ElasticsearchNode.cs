@@ -131,6 +131,8 @@ namespace Tests.Framework.Integration
 		private Exception Exception { get; set; }
 		private void Fatal(XplatManualResetEvent handle, Exception exception = null)
 		{
+			Console.WriteLine("FATAL called: " + exception?.Message);
+
 			if (exception != null) this.Exception = exception;
 			handle?.Set();
 			this.Stop();

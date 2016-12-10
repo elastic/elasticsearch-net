@@ -73,8 +73,7 @@ namespace Xunit
 				var type = group.Key?.GetType();
 				var clusterName = type?.Name.Replace("Cluster", "") ?? "UNKNOWN";
 
-				if (!string.IsNullOrWhiteSpace(clusterFilter) &&
-				    !string.Equals(clusterName, clusterFilter, StringComparison.OrdinalIgnoreCase))
+				if (!string.IsNullOrWhiteSpace(clusterFilter) && clusterName.IndexOf(clusterFilter, StringComparison.OrdinalIgnoreCase) < 0)
 					continue;
 
 				var dop = group.Key != null && group.Key.MaxConcurrency > 0
@@ -91,8 +90,7 @@ namespace Xunit
 					await group.ForEachAsync(dop, async g =>
 					{
 						var test = g.Collection.DisplayName.Replace("Test collection for", "");
-						if (!string.IsNullOrWhiteSpace(testFilter) &&
-						    test.IndexOf(testFilter, StringComparison.OrdinalIgnoreCase) < 0)
+						if (!string.IsNullOrWhiteSpace(testFilter) && test.IndexOf(testFilter, StringComparison.OrdinalIgnoreCase) < 0)
 							return;
 
 						//display tests we execute when we filter so we get confirmation on the command line we run the tests we expect
