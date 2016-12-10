@@ -44,12 +44,20 @@ IF /I "%1"=="release" (
 	IF NOT [%2]==[] (set VERSION="%2")
 	IF /I "%3"=="skiptests" (set SKIPTESTS=1)
 	IF /I "%2"=="skiptests" (set SKIPTESTS=1)
+	IF /I "%JAVA_HOME%"=="" (
+	   ECHO JAVA_HOME not set exiting release early!
+	   EXIT /B 1
+	)
 )
 
 IF /I "%1%"=="integrate" (
 	IF NOT [%2]==[] (set ESVERSIONS="%2")
 	IF NOT [%3]==[] (set NEST_INTEGRATION_CLUSTER="%3")
 	IF NOT [%4]==[] (set NEST_TEST_FILTER="%4")
+	IF /I "%JAVA_HOME%"=="" (
+	   ECHO JAVA_HOME not set exiting integration tests early!
+	   EXIT /B 1
+	)
 )
 
 IF /I "%1%"=="canary" (

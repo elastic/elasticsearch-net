@@ -63,6 +63,7 @@ namespace Tests.Framework.Integration
 				if (!Directory.Exists(this.RoamingFolder))
 					Directory.CreateDirectory(this.RoamingFolder);
 
+				EnsureJavaHome();
 				DownloadDistributionZip();
 				UnzipDistribution();
 				CreateHelperBatFile();
@@ -239,29 +240,57 @@ namespace Tests.Framework.Integration
 			if (saveFile) File.WriteAllLines(rolesConfig, lines);
 		}
 
+		private void EnsureJavaHome()
+		{
+#if DOTNETCORE
+			var javaHome = Environment.GetEnvironmentVariable("JAVA_HOME");
+#else
+			var javaHome = Environment.GetEnvironmentVariable("JAVA_HOME", EnvironmentVariableTarget.Machine)
+				?? Environment.GetEnvironmentVariable("JAVA_HOME", EnvironmentVariableTarget.User);
+#endif
+			if (string.IsNullOrWhiteSpace(javaHome))
+				throw new Exception("The elasticsearch bat files are resillient to JAVA_HOME not being set, however the shield tooling is not");
+		}
+
 		private void EnsureShieldAdmin()
 		{
 			if (!this._config.XPackEnabled) return;
+
 
 			var folder = this.Version.Major >= 5 ? "x-pack" : "shield";
 			var plugin = this.Version.Major >= 5 ? "users" : "esusers";
 
 			EnsureRoles(folder);
+			var timeout = TimeSpan.FromMinutes(1);
+
 			var pluginBat = Path.Combine(this.ElasticsearchHome, "bin", folder, plugin) + ".bat";
 			foreach (var cred in ShieldInformation.AllUsers)
 			{
-				var processInfo = new ProcessStartInfo
+				var handle = new ManualResetEvent(false);
+				Task.Run(() =>
 				{
-					FileName = pluginBat,
-					Arguments = $"useradd {cred.Username} -p {cred.Password} -r {cred.Role}",
-					CreateNoWindow = true,
-					UseShellExecute = false,
-					RedirectStandardOutput = false,
-					RedirectStandardError = false,
-					RedirectStandardInput = false
-				};
-				var p = Process.Start(processInfo);
-				p.WaitForExit();
+					using (var p = new ObservableProcess(pluginBat, $"useradd {cred.Username} -p {cred.Password} -r {cred.Role}"))
+					{
+						var o = p.Start();
+						Console.WriteLine($"Calling: {pluginBat} useradd {cred.Username}");
+						o.Subscribe(
+							//c=>Console.WriteLine(c.Data),
+							c => { },
+							(e) =>
+							{
+								handle.Set();
+								throw e;
+							},
+							() =>
+							{
+								handle.Set();
+							});
+						if (!handle.WaitOne(timeout, true))
+							throw new Exception($"Could not add user {cred.Username} within {timeout}");
+					}
+				});
+				if (!handle.WaitOne(timeout, true))
+					throw new Exception($"Could not add user {cred.Username} within {timeout}");
 			}
 		}
 

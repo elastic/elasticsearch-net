@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Tests.Cat.CatTemplates
 {
+	[SkipVersion("<5.1.0", "CatTemplates is an API introduced in 5.1")]
 	public class CatTemplatesApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatTemplatesRecord>, ICatTemplatesRequest, CatTemplatesDescriptor, CatTemplatesRequest>
 	{
 		public CatTemplatesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
