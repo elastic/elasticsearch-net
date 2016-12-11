@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace Nest
 {
-	public class ReindexObserver<T> : BulkAllObserver where T : class
+	public class ReindexObserver : BulkAllObserver
 	{
 		private long _seenScrollDocuments = 0;
 		private long _seenScrollOperations = 0;

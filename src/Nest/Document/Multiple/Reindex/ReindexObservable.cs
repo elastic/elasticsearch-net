@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading;
 using Elasticsearch.Net;
@@ -8,9 +9,20 @@ using static Nest.Infer;
 
 namespace Nest
 {
-	public class ReindexObservable<T> : IDisposable, IObservable<IBulkAllResponse> where T : class
+	public class ReindexObservable<TSource> : ReindexObservable<TSource, TSource>
+		where TSource : class
 	{
-		private readonly IReindexRequest<T> _reindexRequest;
+		public ReindexObservable(IElasticClient client, IConnectionSettingsValues connectionSettings, IReindexRequest<TSource, TSource> reindexRequest, CancellationToken cancellationToken)
+			: base(client, connectionSettings, reindexRequest, cancellationToken)
+		{
+		}
+	}
+
+	public class ReindexObservable<TSource, TTarget> : IDisposable, IObservable<IBulkAllResponse>
+		where TSource : class
+		where TTarget : class
+	{
+		private readonly IReindexRequest<TSource, TTarget> _reindexRequest;
 		private readonly IConnectionSettingsValues _connectionSettings;
 		private readonly IElasticClient _client;
 
@@ -19,7 +31,11 @@ namespace Nest
 		private readonly CancellationTokenSource _compositeCancelTokenSource;
 		private readonly CancellationToken _compositeCancelToken;
 
-		public ReindexObservable(IElasticClient client, IConnectionSettingsValues connectionSettings, IReindexRequest<T> reindexRequest, CancellationToken cancellationToken)
+		public ReindexObservable(
+			IElasticClient client,
+			IConnectionSettingsValues connectionSettings,
+			IReindexRequest<TSource, TTarget> reindexRequest,
+			CancellationToken cancellationToken)
 		{
 			this._connectionSettings = connectionSettings;
 			this._reindexRequest = reindexRequest;
@@ -28,7 +44,7 @@ namespace Nest
 			this._compositeCancelToken = this._compositeCancelTokenSource.Token;
 		}
 
-		public IDisposable Subscribe(ReindexObserver<T> observer)
+		public IDisposable Subscribe(ReindexObserver observer)
 		{
 			this._incrementSeenDocuments = observer.IncrementSeenScrollDocuments;
 			this._incrementSeenScrollOperations = observer.IncrementSeenScrollOperations;
@@ -51,7 +67,7 @@ namespace Nest
 
 		private void Reindex(IObserver<IBulkAllResponse> observer)
 		{
-			var bulkMeta = this._reindexRequest.BulkAll?.Invoke(Enumerable.Empty<IHit<T>>());
+			var bulkMeta = this._reindexRequest.BulkAll?.Invoke(Enumerable.Empty<IHitMetadata<TTarget>>());
 			var scrollAll = this._reindexRequest.ScrollAll;
 			var toIndex = bulkMeta?.Index.Resolve(this._connectionSettings);
 
@@ -60,7 +76,9 @@ namespace Nest
 			var backPressure = this.CreateBackPressure(bulkMeta, scrollAll, slices);
 
 			var scrollDocuments = this.ScrollAll(slices, backPressure)
-				.SelectMany(r => r.SearchResponse.Hits);
+				.SelectMany(r => r.SearchResponse.Hits)
+				.Select(r=> r.Copy(this._reindexRequest.Map));
+
 
 			var observableBulk = this.BulkAll(scrollDocuments, backPressure, toIndex);
 
@@ -71,7 +89,7 @@ namespace Nest
 			else observableBulk.Subscribe(observer);
 		}
 
-		private BulkAllObservable<IHit<T>> BulkAll(IEnumerable<IHit<T>> scrollDocuments, ProducerConsumerBackPressure backPressure, string toIndex)
+		private BulkAllObservable<IHitMetadata<TTarget>> BulkAll(IEnumerable<IHitMetadata<TTarget>> scrollDocuments, ProducerConsumerBackPressure backPressure, string toIndex)
 		{
 			var bulkAllRequest = this._reindexRequest.BulkAll?.Invoke(scrollDocuments);
 			if (bulkAllRequest == null)
@@ -82,7 +100,7 @@ namespace Nest
 			{
 				foreach (var hit in hits)
 				{
-					var item = new BulkIndexOperation<T>(hit.Source)
+					var item = new BulkIndexOperation<TTarget>(hit.Source)
 					{
 						Type = hit.Type,
 						Index = toIndex,
@@ -98,9 +116,9 @@ namespace Nest
 			return observableBulk;
 		}
 
-		private ProducerConsumerBackPressure CreateBackPressure(IBulkAllRequest<IHit<T>> bulkMeta, IScrollAllRequest scrollAll, int slices)
+		private ProducerConsumerBackPressure CreateBackPressure(IBulkAllRequest<IHitMetadata<TTarget>> bulkMeta, IScrollAllRequest scrollAll, int slices)
 		{
-			var backPressureFactor = this._reindexRequest.BackPressureFactor;
+			var backPressureFactor = this._reindexRequest.BackPressureFactor ?? CoordinatedRequestDefaults.ReindexBackPressureFactor;
 			var maxConcurrentConsumers = bulkMeta?.MaxDegreeOfParallelism ?? CoordinatedRequestDefaults.BulkAllMaxDegreeOfParallelismDefault;
 			var maxConcurrentProducers = scrollAll?.MaxDegreeOfParallelism ?? slices;
 			var maxConcurrency = Math.Min(maxConcurrentConsumers, maxConcurrentProducers);
@@ -120,7 +138,7 @@ namespace Nest
 			return backPressure;
 		}
 
-		private IEnumerable<IScrollAllResponse<T>> ScrollAll(int slices, ProducerConsumerBackPressure backPressure)
+		private IEnumerable<IScrollAllResponse<TSource>> ScrollAll(int slices, ProducerConsumerBackPressure backPressure)
 		{
 			var scrollAll = this._reindexRequest.ScrollAll;
 			var scroll = this._reindexRequest.ScrollAll?.ScrollTime ?? TimeSpan.FromMinutes(2);
@@ -133,13 +151,13 @@ namespace Nest
 				BackPressure = backPressure
 			};
 
-			var scrollObservable = this._client.ScrollAll<T>(scrollAllRequest, this._compositeCancelToken);
-			return new GetEnumerator<IScrollAllResponse<T>>()
+			var scrollObservable = this._client.ScrollAll<TSource>(scrollAllRequest, this._compositeCancelToken);
+			return new GetEnumerator<IScrollAllResponse<TSource>>()
 				.ToEnumerable(scrollObservable)
 				.Select(ObserveScrollAllResponse);
 		}
 
-		private IScrollAllResponse<T> ObserveScrollAllResponse(IScrollAllResponse<T> response)
+		private IScrollAllResponse<TSource> ObserveScrollAllResponse(IScrollAllResponse<TSource> response)
 		{
 			this._incrementSeenScrollOperations();
 			this._incrementSeenDocuments(response.SearchResponse.Hits.Count);
@@ -151,7 +169,7 @@ namespace Nest
 
 		private int CreateIndex(string toIndex, IScrollAllRequest scrollAll)
 		{
-			var fromIndices = this._reindexRequest.ScrollAll?.Search?.Index ?? Indices<T>();
+			var fromIndices = this._reindexRequest.ScrollAll?.Search?.Index ?? Indices<TSource>();
 
 			if (string.IsNullOrEmpty(toIndex))
 				throw new Exception($"Can not resolve the target index name to reindex to make sure the bulk all operation describes one");
