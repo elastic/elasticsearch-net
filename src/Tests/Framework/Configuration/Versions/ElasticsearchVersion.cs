@@ -3,10 +3,11 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml.Linq;
+using Version = SemVer.Version;
 
 namespace Tests.Framework.Versions
 {
-	public class ElasticsearchVersion : SemanticVersion
+	public class ElasticsearchVersion : Version
 	{
 		private static readonly Lazy<string> LatestVersion = new Lazy<string>(ResolveLatestVersion, LazyThreadSafetyMode.ExecutionAndPublication);
 		private static readonly Lazy<string> LatestSnapshot = new Lazy<string>(ResolveLatestSnapshot, LazyThreadSafetyMode.ExecutionAndPublication);
@@ -31,7 +32,7 @@ namespace Tests.Framework.Versions
 		{
 			var versions = XElement.Load($"{SonaTypeUrl}/maven-metadata.xml")
 				.Descendants("version")
-				.Select(n => new SemanticVersion(n.Value))
+				.Select(n => new Version(n.Value))
 				.OrderByDescending(n => n);
 			return versions.First().ToString();
 		}
