@@ -1,8 +1,8 @@
 #Breaking Changes
 
+This lists all the **binary** breaking changes in Elasticsearch.Net. 
 
-
-# Enums
+## Enums
 
 **public enum Elasticsearch.Net.Consistency** *Removed (Breaking)* 
 
@@ -125,7 +125,7 @@ public enum SearchType
 }
 ```
 
-# Refresh no longer just a bool
+## Refresh no longer just a bool
 
 Now an enum that can also send `wait_for` 
 
@@ -181,7 +181,7 @@ private  .ctor(HttpMethod method, string path, PostData<object> data, IConnectio
 
 
 
-# Rename of API related methods
+## Rename of API related methods
 
 Impact low, these have been renamed to match their Methid name equivalents
 
@@ -252,7 +252,7 @@ These are breaking changes due to the elasticsearch 5.0 rest spec changing
 5.x: `public UpdateByQueryRequestParameters RequestsPerSecond(long requests_per_second)`  
 
 
-# Removed in 5.x after obsolete period
+## Removed in 5.x after obsolete period
 
 These are types/properties/methods obsoleted in NEST 2.x that have now been removed.
 
@@ -328,9 +328,8 @@ public string UserName { get; set; }
 public  .ctor(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IMemoryStreamFactory memoryStreamFactory)
 ```
 
-#ReadOnlyTypeChange
+# Now IReadOnlyCollection
 
-##Now IReadOnlyCollection
 **public property Elasticsearch.Net.Error.RootCause**  
 
 # CancellationToken

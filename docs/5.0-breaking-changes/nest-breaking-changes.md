@@ -497,7 +497,8 @@ These properties had public setters which made no sense (readonly), impact low.
 **public property Nest.UpgradeStatusResponse.SizeToUpgradeInBytes** *Visibility changed (Breaking)*  
 
 
-//getter only TODO (explicit internal set)
+## Setters on interfaces
+
 **public property Nest.IClusterRerouteResponse.State** *Declaration changed (Breaking)*  
 **public property Nest.IClusterStatsResponse.ClusterName** *Declaration changed (Breaking)*  
 **public property Nest.IClusterStatsResponse.Indices** *Declaration changed (Breaking)*  

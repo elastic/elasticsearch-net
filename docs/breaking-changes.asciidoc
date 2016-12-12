@@ -1,4 +1,4 @@
-[[breaking-changes]]
+[[5x-breaking-changes]]
 = Breaking Changes
 
 ////
