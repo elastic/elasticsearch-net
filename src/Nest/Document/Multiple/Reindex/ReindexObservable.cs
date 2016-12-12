@@ -1,7 +1,5 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading;
 using Elasticsearch.Net;
@@ -93,7 +91,7 @@ namespace Nest
 		{
 			var bulkAllRequest = this._reindexRequest.BulkAll?.Invoke(scrollDocuments);
 			if (bulkAllRequest == null)
-				throw new Exception("Reindex can not commence BulkAll was not defined, we have no way of knowing how to index the documents now.");
+				throw new Exception("BulkAll must set on ReindexRequest in order to get the target of a Reindex operation");
 
 			bulkAllRequest.BackPressure = backPressure;
 			bulkAllRequest.BufferToBulk = (bulk, hits) =>
@@ -128,10 +126,9 @@ namespace Nest
 			var producerBandwidth = searchSize * maxConcurrency * backPressureFactor;
 			var funnelTooSmall =  producerBandwidth < bulkSize;
 			if (funnelTooSmall)
-				throw new Exception("The back pressure settings are squeezing too hard "
+				throw new Exception("The back pressure settings are too conservative in providing enough documents for a single bulk operation. "
 					+ $"searchSize:{searchSize} * maxConcurrency:{maxConcurrency} * backPressureFactor:{backPressureFactor} = {producerBandwidth}"
-					+ $" which is smaller then the bulkSize:{bulkSize}. Meaning the producers won't have the chance to produce enough documents "
-					+ "for a single bulk operation"
+					+ $" which is smaller then the bulkSize:{bulkSize}."
 				);
 
 			var backPressure = new ProducerConsumerBackPressure(backPressureFactor, maxConcurrency);
@@ -172,7 +169,7 @@ namespace Nest
 			var fromIndices = this._reindexRequest.ScrollAll?.Search?.Index ?? Indices<TSource>();
 
 			if (string.IsNullOrEmpty(toIndex))
-				throw new Exception($"Can not resolve the target index name to reindex to make sure the bulk all operation describes one");
+				throw new Exception($"Could not resolve the target index name to reindex to make sure the bulk all operation describes one");
 
 			var numberOfShards = this.CreateIndexIfNeeded(fromIndices, toIndex);
 
@@ -182,8 +179,8 @@ namespace Nest
 			else if (scrollAll?.Slices < 0)
 				throw new Exception("Slices is a negative number and no sane default could be inferred from the origin index's number_of_shards");
 			if (!slices.HasValue)
-				throw new Exception("Reindex can not commence because slices is not specified and we could not get a number of "
-				                    + "shards hint from the source, usually this could happen if the scroll all points to multiple indices and no slices have been set");
+				throw new Exception("Slices is not specified and could not be inferred from the number of "
+				                    + "shards hint from the source. This could happen if the scroll all points to multiple indices and no slices have been set");
 			return slices.Value;
 		}
 
@@ -226,7 +223,7 @@ namespace Nest
 			var createIndexResponse = this._client.CreateIndex(createIndexRequest);
 			this._compositeCancelToken.ThrowIfCancellationRequested();
 			if (!createIndexResponse.IsValid)
-				throw Throw($"Failed to create destination index {resolvedTo}.", createIndexResponse.ApiCall);
+				throw Throw($"Could not create destination index {resolvedTo}.", createIndexResponse.ApiCall);
 
 			return createIndexRequest.Settings?.NumberOfShards;
 		}

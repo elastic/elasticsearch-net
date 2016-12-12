@@ -52,11 +52,11 @@ namespace Nest
 
 		/// <summary>
 		/// Simplified form for reindex which will cover 80% of its usecases. Allows you to index all documents of type T from <paramref name="fromIndex" /> to <paramref name="toIndex" />
-		/// optionally limitting the documents found in <paramref name="fromIndex" /> by using <paramref name="selector"/>.
+		/// optionally limiting the documents found in <paramref name="fromIndex" /> by using <paramref name="selector"/>.
 		/// </summary>
 		/// <param name="fromIndex">The source index, from which all types will be returned</param>
 		/// <param name="toIndex">The target index, if it does not exist already will be created using the same settings of <paramref name="fromIndex"/></param>
-		/// <param name="selector">an optional query limitting the documents found in <paramref name="fromIndex"/></param>
+		/// <param name="selector">an optional query limiting the documents found in <paramref name="fromIndex"/></param>
 		IObservable<IBulkAllResponse> Reindex<TSource,TTarget>(
 			IndexName fromIndex,
 			IndexName toIndex,
@@ -68,12 +68,12 @@ namespace Nest
 			where TTarget : class;
 
 		/// <summary>
-		/// Simplified form for reindex which will cover 80% of its usecases. Allows you to index all documents of type T from <paramref name="fromIndex" /> to <paramref name="toIndex" />
-		/// optionally limitting the documents found in <paramref name="fromIndex" /> by using <paramref name="selector"/>.
+		/// Simplified form for reindex which will cover 80% of its use cases. Allows you to index all documents of type T from <paramref name="fromIndex" /> to <paramref name="toIndex" />
+		/// optionally limiting the documents found in <paramref name="fromIndex" /> by using <paramref name="selector"/>.
 		/// </summary>
 		/// <param name="fromIndex">The source index, from which all types will be returned</param>
 		/// <param name="toIndex">The target index, if it does not exist already will be created using the same settings of <paramref name="fromIndex"/></param>
-		/// <param name="selector">an optional query limitting the documents found in <paramref name="fromIndex"/></param>
+		/// <param name="selector">an optional query limiting the documents found in <paramref name="fromIndex"/></param>
 		IObservable<IBulkAllResponse> Reindex<TSource>(
 			IndexName fromIndex,
 			IndexName toIndex,
@@ -92,7 +92,7 @@ namespace Nest
 			CancellationToken cancellationToken = default(CancellationToken)
 		)
 			where TSource : class =>
-			this.Reindex<TSource,TSource>(selector.InvokeOrDefault(new ReindexDescriptor<TSource,TSource>(s=>s)));
+			this.Reindex(selector.InvokeOrDefault(new ReindexDescriptor<TSource,TSource>(s=>s)));
 
 		/// <inheritdoc />
 		public IObservable<IBulkAllResponse> Reindex<TSource,TTarget>(
@@ -102,7 +102,7 @@ namespace Nest
 		)
 			where TTarget : class
 			where TSource : class =>
-			this.Reindex<TSource,TTarget>(selector.InvokeOrDefault(new ReindexDescriptor<TSource,TTarget>(mapper)));
+			this.Reindex(selector.InvokeOrDefault(new ReindexDescriptor<TSource,TTarget>(mapper)));
 
 		/// <inheritdoc />
 		public IObservable<IBulkAllResponse> Reindex<TSource>(
@@ -140,7 +140,7 @@ namespace Nest
 		)
 			where TTarget : class
 			where TSource : class =>
-			this.Reindex<TSource,TTarget>(
+			this.Reindex(
 				mapper,
 				SimplifiedReindexer<TSource, TTarget>(fromIndex, toIndex, selector)
 			, cancellationToken);
@@ -153,7 +153,7 @@ namespace Nest
 			CancellationToken cancellationToken = default(CancellationToken)
 		)
 			where TSource : class =>
-			this.Reindex<TSource,TSource>(
+			this.Reindex(
 				s=>s,
 				SimplifiedReindexer<TSource, TSource>(fromIndex, toIndex, selector)
 			, cancellationToken);

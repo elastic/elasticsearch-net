@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Nest
 {
@@ -9,7 +8,7 @@ namespace Nest
 	/// and <see cref="IElasticClient.BulkAll{T}(IBulkAllRequest{T}, System.Threading.CancellationToken)"/> to compose a reindex pipeline.
 	///
 	/// <para> This differs from <see cref="IElasticClient.ReindexOnServer(System.Func{Nest.ReindexOnServerDescriptor,Nest.IReindexOnServerRequest})"/> in
-	/// that documents are fetched over the wire before being send back.
+	/// that documents are fetched from Elasticsearch, transformed on the client side, then sent back to Elasticsearch.
 	/// </para>
 	///
 	/// <para> This will create the target index if it doesn't exist already. If <see cref="CreateIndexRequest" /> is not specified
@@ -87,12 +86,13 @@ namespace Nest
 
 		/// <inheritdoc/>
 		/// <param name="scrollSource">The scroll operation yielding the source documents for the reindex operation</param>
+		/// <param name="map">A function that converts from a source document to a target document</param>
 		/// <param name="bulkAllTarget">A factory that instantiates the bulk all operation over the lazy stream of search result hits</param>
 		public ReindexRequest(IScrollAllRequest scrollSource, Func<TSource, TTarget> map, Func<IEnumerable<IHitMetadata<TTarget>>, IBulkAllRequest<IHitMetadata<TTarget>>> bulkAllTarget)
 		{
-			scrollSource.ThrowIfNull(nameof(scrollSource), "without a scroll all request we don't know where to read from!");
-			bulkAllTarget.ThrowIfNull(nameof(bulkAllTarget), "without a bulk all request we don't know where to send documents!");
-			map.ThrowIfNull(nameof(map), "Reindex needs a map function to know how to take TSource and transform it into TTarget!");
+			scrollSource.ThrowIfNull(nameof(scrollSource), "scrollSource must be set in order to get the source of a Reindex operation");
+			bulkAllTarget.ThrowIfNull(nameof(bulkAllTarget), "bulkAllTarget must set in order to get the target of a Reindex operation");
+			map.ThrowIfNull(nameof(map), "map must be set to know how to take TSource and transform it into TTarget");
 
 			var i = (IReindexRequest<TSource, TTarget>) this;
 			i.ScrollAll = scrollSource;
@@ -125,8 +125,8 @@ namespace Nest
 
 		public ReindexDescriptor(Func<TSource, TTarget> mapper)
 		{
-			var i = ((IReindexRequest<TSource, TTarget>) this);
-			i.BulkAll = (d) => this._createBulkAll.InvokeOrDefault(new BulkAllDescriptor<IHitMetadata<TTarget>>(d));
+			var i = (IReindexRequest<TSource, TTarget>) this;
+			i.BulkAll = d => this._createBulkAll.InvokeOrDefault(new BulkAllDescriptor<IHitMetadata<TTarget>>(d));
 			i.Map = mapper;
 		}
 
