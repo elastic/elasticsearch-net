@@ -1,7 +1,7 @@
 # Breaking Changes
 
 Oh my goodness, this looks like a lot of breaking changes! This is true but please take note that this list is very very extensive 
-It includes every single *binary* breaking change. In alot of cases these will not necessarily equate to compiler errors. 
+It includes every single *binary* breaking change. In a lot of cases these will not necessarily equate to compiler errors. 
 
 ## StatsAggregator renamed to StatsAggregation
 
@@ -156,7 +156,7 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking_50_scri
 **public property Nest.IBulkUpdateOperation&lt;TDocument, TPartialDocument&gt;.Script** *Declaration changed (Breaking)*  
 **public property Nest.UpdateRequest&lt;TDocument, TPartialDocument&gt;.Script** *Declaration changed (Breaking)*  
 
-In some cases the we abused IScript to send template queries this is now fixed
+In some cases we abused IScript to send template queries this is now fixed
 
 **public property Nest.PhraseSuggestCollate.Query** *Declaration changed (Breaking)*
 
@@ -283,7 +283,7 @@ Binary break only, still implicitly converts from string
 
 The visitors should be passed interfaces not concrete types see: https://github.com/elastic/elasticsearch-net/pull/2320
 
-## Deprecated queryies are now removed
+## Deprecated queries are now removed
 
 See also: https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking_50_search_changes.html#_deprecated_queries_removed
 
@@ -408,7 +408,7 @@ In some cases we exposed `FluentDictionary` as property which is not useful
 
 ## Visibility changes
 
-Impact low, these are types/methods/constructors that were never suppose to be public.
+Impact low, these are types/methods/constructors that were never supposed to be public.
 
 **public class Nest.BucketsPathJsonConverter** *Visibility was changed from public to internal (Breaking)*  
 **public class Nest.DictionaryResponseJsonConverter&lt;TResponse, TKey, TValue&gt;** *Visibility was changed from public to internal (Breaking)*  
@@ -656,7 +656,7 @@ also the hacks from 2.x have been removed
 
 ## Allow source filter to send false
 
-In NEST 2.x we would always send Source.Exlcude as `_source: { exclude: [""] }` in 5.x the we use a union of `bool`
+In NEST 2.x we would always send Source.Exclude as `_source: { exclude: [""] }` in 5.x the we use a union of `bool`
 `ISourceFiler` so NEST can send and recieve `_source: false`. Which should short circuit some routines on the server
 
 See also: https://github.com/elastic/elasticsearch-net/pull/2200
@@ -673,7 +673,7 @@ See also: https://github.com/elastic/elasticsearch-net/pull/2200
 **public property Nest.SearchRequest&lt;T&gt;.Source** *Declaration changed (Breaking)*  
 **public property Nest.TopHitsAggregation.Source** *Declaration changed (Breaking)*  
 
-`Exclude` and `Include` are now plural on `ISourceFilter`
+`Exclude` and `Include` are now plural on `ISourceFilter` in line with the change in Elasticsearch 5.0
 
 **public property Nest.SourceFilter.Disable** *Removed (Breaking)*  
 **public property Nest.SourceFilter.Exclude** *Removed (Breaking)*  
@@ -727,7 +727,7 @@ GetAlias API now returns `GetAlias*` named types not `GetAliases*`
 **public method Nest.IElasticClient.GetAlias** *Declaration changed (Breaking)*  
 **public method Nest.IElasticClient.GetAlias** *Declaration changed (Breaking)*  
 
-## Sugest is bound over T
+## Suggest is bound over T
 
 See: https://github.com/elastic/elasticsearch-net/pull/2370
 
@@ -1200,7 +1200,7 @@ public Actions Actions { get; internal set; }
 
 # Read only data types on responses.
 
-Responses now favor `IReadOnlyDictionary` and `IReadOnlyCollection` which are initialized as empty.
+Responses now favor `IReadOnlyDictionary<TKey, TValue>` and `IReadOnlyCollection<T>` which are initialized as empty.
 
 ##Now IReadOnlyDictionary
 **public property Nest.ActivationStatus.Actions**  
@@ -1387,8 +1387,7 @@ Responses now favor `IReadOnlyDictionary` and `IReadOnlyCollection` which are in
 
 #CancellationToken
 
-With NEST 2.x you had to pass cancellation tokens as part of the `RequestConfiguration` we now bumped these to the methods themselves
-on `IElasticClient` so its more discoverable and follows the usual C# patterns. This was omitted in `1.x` and `2.x` to try and keep backwards compatibility but in the long run this is a change for the better.
+With NEST 2.x async methods, a cancellation tokens could be passed as part of the RequestConfiguration. This was not very discoverable and so each async method can now accept an optional cancellation token as an argument, making the API more async idiomatic.
 
 **Nest.BulkAllObservable&lt;T&gt;..ctor**  
 **Nest.DeleteManyExtensions.DeleteManyAsync&lt;T&gt;**  

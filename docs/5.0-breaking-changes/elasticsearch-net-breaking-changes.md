@@ -149,7 +149,7 @@ So you can send `all`
 
 ## Visibility changes
 
-These were types/methods/properties/constructors that were public but had nbno business being so.
+These were types/methods/properties/constructors that were public but had no business being so.
 
 **public method Elasticsearch.Net.RequestData..ctor** *Visibility was changed from public to private (Breaking)*
 
@@ -183,7 +183,7 @@ private  .ctor(HttpMethod method, string path, PostData<object> data, IConnectio
 
 ## Rename of API related methods
 
-Impact low, these have been renamed to match their Methid name equivalents
+Impact low, these have been renamed to match their Method name equivalents
 
 
 **public method Elasticsearch.Net.ElasticLowLevelClient.CatNodeattrs&lt;T&gt;** *Declaration changed (Breaking)*
@@ -229,7 +229,7 @@ Impact low, these have been renamed to match their Methid name equivalents
 
 ## Rest spec updates
 
-These are breaking changes due to the elasticsearch 5.0 rest spec changing
+These are breaking changes due to the Elasticsearch 5.0 rest spec changing
 
 **public method Elasticsearch.Net.DeleteByQueryRequestParameters.Routing** *Declaration changed (Breaking)*
 
@@ -254,7 +254,7 @@ These are breaking changes due to the elasticsearch 5.0 rest spec changing
 
 ## Removed in 5.x after obsolete period
 
-These are types/properties/methods obsoleted in NEST 2.x that have now been removed.
+These are types/properties/methods marked obsolete in NEST 2.x that have now been removed.
 
 
 **public method Elasticsearch.Net.AnalyzeRequestParameters.Analyzer** *Removed (Breaking)*
