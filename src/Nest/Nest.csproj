@@ -136,8 +136,8 @@
     <Compile Include="Aggregations\Metric\Sum\SumAggregation.cs" />
     <Compile Include="Aggregations\Metric\TopHits\TopHitsAggregate.cs" />
     <Compile Include="Aggregations\Metric\TopHits\TopHitsAggregation.cs" />
+    <Compile Include="Aggregations\Metric\ValueAggregate.cs" />
     <Compile Include="Aggregations\Metric\ValueCount\ValueCountAggregation.cs" />
-    <Compile Include="Aggregations\Metric\ValueMetricAggregate.cs" />
     <Compile Include="Aggregations\Pipeline\AverageBucket\AverageBucketAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\BucketScript\BucketScriptAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\BucketSelector\BucketSelectorAggregation.cs" />

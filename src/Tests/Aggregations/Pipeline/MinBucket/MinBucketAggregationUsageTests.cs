@@ -5,7 +5,7 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
-namespace Tests.Aggregations.Pipeline.MaxBucket
+namespace Tests.Aggregations.Pipeline.MinBucket
 {
 	public class MinBucketAggregationUsageTests : AggregationUsageTestBase
 	{

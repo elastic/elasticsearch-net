@@ -24,7 +24,7 @@ namespace Nest
 
 		internal TopHitsAggregate(IEnumerable<JObject> hits, JsonSerializer serializer)
 		{
-			_hits = hits;
+			_hits = hits ?? Enumerable.Empty<JObject>();
 			_defaultSerializer = serializer;
 		}
 

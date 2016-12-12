@@ -37,7 +37,7 @@ s => s
     .Fields(
         fs => fs
             .Field(p => p.Name.Suffix("standard"))
-            .Type(HighlighterType.Plain)
+            .Type("plain")
             .ForceSource()
             .FragmentSize(150)
             .NumberOfFragments(3)
@@ -45,6 +45,7 @@ s => s
         fs => fs
             .Field(p => p.LeadDeveloper.FirstName)
             .Type(HighlighterType.Fvh)
+            .BoundaryMaxScan(50)
             .PreTags("<name>")
             .PostTags("</name>")
             .HighlightQuery(q => q
@@ -99,7 +100,8 @@ new SearchRequest<Project>
             },
             { "leadDeveloper.firstName", new HighlightField
                 {
-                    Type = HighlighterType.Fvh,
+                    CustomType = "fvh",
+                    BoundaryMaxScan = 50,
                     PreTags = new[] { "<name>"},
                     PostTags = new[] { "</name>"},
                     HighlightQuery = new MatchQuery
@@ -154,6 +156,7 @@ new SearchRequest<Project>
       },
       "leadDeveloper.firstName": {
         "type": "fvh",
+        "boundary_max_scan": 50,
         "pre_tags": [
           "<name>"
         ],

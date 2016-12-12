@@ -24,7 +24,11 @@ q
     .Name("named_query")
     .Boost(1.1)
     .Field(p => p.Description)
-    .TermsLookup<Developer>(e=>e.Path(p=>p.LastName).Id(12))
+    .TermsLookup<Developer>(e => e
+        .Path(p => p.LastName)
+        .Id(12)
+        .Routing("myroutingvalue")
+    )
 )
 ----
 
@@ -42,7 +46,8 @@ new TermsQuery
         Id = 12,
         Index = Index<Developer>(),
         Type = Type<Developer>(),
-        Path = Field<Developer>(p=>p.LastName)
+        Path = Field<Developer>(p=>p.LastName),
+        Routing = "myroutingvalue"
     }
 }
 ----
@@ -58,7 +63,8 @@ new TermsQuery
       "id": 12,
       "index": "devs",
       "path": "lastName",
-      "type": "developer"
+      "type": "developer",
+      "routing": "myroutingvalue"
     }
   }
 }
