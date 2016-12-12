@@ -8,6 +8,8 @@ namespace Nest
 		public static TimeSpan BulkAllBackOffTimeDefault = TimeSpan.FromMinutes(1);
 		public static int BulkAllBackOffRetriesDefault = 0;
 		public static int BulkAllSizeDefault = 1000;
+		public static int ReindexBackPressureFactor = 4;
+		public static int ReindexScrollSize = 500;
 	}
 
 	public abstract class CoordinatedRequestObserverBase<T> : IObserver<T>

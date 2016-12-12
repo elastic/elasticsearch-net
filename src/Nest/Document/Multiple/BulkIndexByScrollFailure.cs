@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	// ReindexOnServer and UpdateByQuery aggregate failures under a single failures property
+	// TODO: ReindexOnServer and UpdateByQuery aggregate failures under a single failures property
 	// So the shape is a bit odd
 	// https://github.com/elastic/elasticsearch/issues/17539
 	// We could come up with abstractions and normalization here but we should fix this at the root for 5.0

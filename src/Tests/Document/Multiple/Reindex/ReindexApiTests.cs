@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
@@ -35,11 +36,14 @@ namespace Tests.Document.Multiple.Reindex
 	{
 		private readonly IObservable<IBulkAllResponse> _reindexManyTypesResult;
 		private readonly IObservable<IBulkAllResponse> _reindexSingleTypeResult;
+		private readonly IObservable<IBulkAllResponse> _reindexProjectionResult;
 		private readonly IElasticClient _client;
 
-		private static string NewManyTypesIndexName { get; } = $"project-copy-{Guid.NewGuid().ToString("N").Substring(8)}";
+		private static string NewManyTypesIndexName { get; } = $"project-many-{Guid.NewGuid().ToString("N").Substring(8)}";
 
-		private static string NewSingleTypeIndexName { get; } = $"project-copy-{Guid.NewGuid().ToString("N").Substring(8)}";
+		private static string NewSingleTypeIndexName { get; } = $"project-single-{Guid.NewGuid().ToString("N").Substring(8)}";
+
+		private static string NewProjectionIndex { get; } = $"project-projection-{Guid.NewGuid().ToString("N").Substring(8)}";
 
 		private static string IndexName { get; } = "project";
 
@@ -93,29 +97,64 @@ namespace Tests.Document.Multiple.Reindex
 				)
 			);
 			this._reindexSingleTypeResult = this._client.Reindex<Project>(IndexName, NewSingleTypeIndexName);
+			this._reindexProjectionResult = this._client.Reindex<CommitActivity, CommitActivityVersion2>(IndexName, NewProjectionIndex, p =>  new CommitActivityVersion2(p));
 		}
 
-		[I]
-		public void ReturnsExpectedResponse()
+		public class CommitActivityVersion2
 		{
-			var observableWait = new CountdownEvent(2);
+			public string Id { get; }
+			public string ProjectName { get; }
+			public Developer Committer { get; }
+
+			public CommitActivityVersion2(CommitActivity commit)
+			{
+				this.ProjectName = commit.ProjectName + "-projected";
+				this.Id = commit.Id + "-projected";
+				this.Committer = commit.Committer;
+			}
+		}
+
+		[I] public void ReturnsExpectedResponse()
+		{
+			var observableWait = new CountdownEvent(3);
 
 			Exception ex = null;
-			var manyTypesObserver = new ReindexObserver<ILazyDocument>(
+			var manyTypesObserver = new ReindexObserver(
 				onError: (e) => { ex = e; observableWait.Signal(); throw e; },
 				onCompleted: () => ReindexManyTypesCompleted(observableWait)
 			);
 
 			this._reindexManyTypesResult.Subscribe(manyTypesObserver);
 
-			var singleTypeObserver = new ReindexObserver<Project>(
+			var singleTypeObserver = new ReindexObserver(
 				onError: (e) => { ex = e; observableWait.Signal(); throw e; },
 				onCompleted: () => ReindexSingleTypeCompleted(observableWait)
 			);
 			this._reindexSingleTypeResult.Subscribe(singleTypeObserver);
 
+			var projectionObserver = new ReindexObserver(
+				onError: (e) => { ex = e; observableWait.Signal(); throw e; },
+				onCompleted: () => ProjectionCompleted(observableWait)
+			);
+			this._reindexProjectionResult.Subscribe(projectionObserver);
+
 			observableWait.Wait(TimeSpan.FromMinutes(3));
 			if (ex != null) throw ex;
+		}
+
+		private void ProjectionCompleted(CountdownEvent handle)
+		{
+			var refresh = this._client.Refresh(NewProjectionIndex);
+			var originalIndexCount = this._client.Count<CommitActivity>(c => c.Index(IndexName));
+
+			// new index should only contain project document types
+			var newIndexSearch = this._client.Search<CommitActivity>(c => c.Index(NewProjectionIndex));
+
+			originalIndexCount.Count.Should().BeGreaterThan(0).And.Be(newIndexSearch.Total);
+
+			newIndexSearch.Documents.Should().OnlyContain(c => c.Id.EndsWith("-projected"));
+
+			handle.Signal();
 		}
 
 		private void ReindexSingleTypeCompleted(CountdownEvent handle)

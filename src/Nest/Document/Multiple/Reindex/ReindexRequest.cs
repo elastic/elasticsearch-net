@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Nest
 {
@@ -9,7 +8,7 @@ namespace Nest
 	/// and <see cref="IElasticClient.BulkAll{T}(IBulkAllRequest{T}, System.Threading.CancellationToken)"/> to compose a reindex pipeline.
 	///
 	/// <para> This differs from <see cref="IElasticClient.ReindexOnServer(System.Func{Nest.ReindexOnServerDescriptor,Nest.IReindexOnServerRequest})"/> in
-	/// that documents are fetched over the wire before being send back.
+	/// that documents are fetched from Elasticsearch, transformed on the client side, then sent back to Elasticsearch.
 	/// </para>
 	///
 	/// <para> This will create the target index if it doesn't exist already. If <see cref="CreateIndexRequest" /> is not specified
@@ -18,7 +17,9 @@ namespace Nest
 	/// </para>
 	///
 	/// </summary>
-	public interface IReindexRequest<T> where T : class
+	public interface IReindexRequest<TSource, TTarget>
+		where TSource : class
+		where TTarget : class
 	{
 		/// <summary>
 		/// The scroll typically outperforms the bulk operations by a long shot. If we'd leave things unbounded you'd quickly have way too many pending scroll
@@ -45,7 +46,9 @@ namespace Nest
 		/// <see cref="IBulkAllRequest{T}.BackPressure"/>
 		/// </para>
 		/// </summary>
-		Func<IEnumerable<IHit<T>>, IBulkAllRequest<IHit<T>>> BulkAll { get; set; }
+		Func<IEnumerable<IHitMetadata<TTarget>>, IBulkAllRequest<IHitMetadata<TTarget>>> BulkAll { get; set; }
+
+		Func<TSource, TTarget> Map { get; set; }
 
 		/// <summary>
 		/// Do not send a create index call on the target index, assume the index has been created outside of the reindex.
@@ -60,12 +63,19 @@ namespace Nest
 	}
 
 	/// <inheritdoc/>
-	public class ReindexRequest<T> : IReindexRequest<T> where T : class
+	public interface IReindexRequest<TSource> : IReindexRequest<TSource, TSource> where TSource : class { }
+
+	/// <inheritdoc/>
+	public class ReindexRequest<TSource, TTarget> : IReindexRequest<TSource, TTarget>
+		where TSource : class
+		where TTarget : class
 	{
 		/// <inheritdoc/>
-		IScrollAllRequest IReindexRequest<T>.ScrollAll { get; set; }
+		IScrollAllRequest IReindexRequest<TSource, TTarget>.ScrollAll { get; set; }
 		/// <inheritdoc/>
-		Func<IEnumerable<IHit<T>>,IBulkAllRequest<IHit<T>>> IReindexRequest<T>.BulkAll { get; set; }
+		Func<IEnumerable<IHitMetadata<TTarget>>,IBulkAllRequest<IHitMetadata<TTarget>>> IReindexRequest<TSource, TTarget>.BulkAll { get; set; }
+		/// <inheritdoc/>
+		Func<TSource, TTarget> IReindexRequest<TSource, TTarget>.Map { get; set; }
 
 		/// <inheritdoc/>
 		public bool OmitIndexCreation { get; set; }
@@ -76,50 +86,67 @@ namespace Nest
 
 		/// <inheritdoc/>
 		/// <param name="scrollSource">The scroll operation yielding the source documents for the reindex operation</param>
+		/// <param name="map">A function that converts from a source document to a target document</param>
 		/// <param name="bulkAllTarget">A factory that instantiates the bulk all operation over the lazy stream of search result hits</param>
-		public ReindexRequest(IScrollAllRequest scrollSource, Func<IEnumerable<IHit<T>>, IBulkAllRequest<IHit<T>>> bulkAllTarget)
+		public ReindexRequest(IScrollAllRequest scrollSource, Func<TSource, TTarget> map, Func<IEnumerable<IHitMetadata<TTarget>>, IBulkAllRequest<IHitMetadata<TTarget>>> bulkAllTarget)
 		{
-			scrollSource.ThrowIfNull(nameof(scrollSource), "without a scroll all request we don't know where to read from!");
-			bulkAllTarget.ThrowIfNull(nameof(bulkAllTarget), "without a bulk all request we don't know where to send documents!");
+			scrollSource.ThrowIfNull(nameof(scrollSource), "scrollSource must be set in order to get the source of a Reindex operation");
+			bulkAllTarget.ThrowIfNull(nameof(bulkAllTarget), "bulkAllTarget must set in order to get the target of a Reindex operation");
+			map.ThrowIfNull(nameof(map), "map must be set to know how to take TSource and transform it into TTarget");
 
-			var i = (IReindexRequest<T>) this;
+			var i = (IReindexRequest<TSource, TTarget>) this;
 			i.ScrollAll = scrollSource;
 			i.BulkAll = bulkAllTarget;
+			i.Map = map;
 		}
 	}
 
-	public class ReindexDescriptor<T> : DescriptorBase<ReindexDescriptor<T>, IReindexRequest<T>>, IReindexRequest<T> where T : class
+	public class ReindexRequest<TSource> : ReindexRequest<TSource, TSource>
+		where TSource : class
 	{
-		IScrollAllRequest IReindexRequest<T>.ScrollAll{ get; set; }
-
-		private Func<BulkAllDescriptor<IHit<T>>, IBulkAllRequest<IHit<T>>> _createBulkAll;
-		Func<IEnumerable<IHit<T>>, IBulkAllRequest<IHit<T>>> IReindexRequest<T>.BulkAll { get; set; }
-		bool IReindexRequest<T>.OmitIndexCreation { get; set; }
-		ICreateIndexRequest IReindexRequest<T>.CreateIndexRequest { get; set; }
-		int? IReindexRequest<T>.BackPressureFactor { get; set; }
-
-		public ReindexDescriptor()
+		public ReindexRequest(IScrollAllRequest scrollSource, Func<IEnumerable<IHitMetadata<TSource>>, IBulkAllRequest<IHitMetadata<TSource>>> bulkAllTarget)
+			: base(scrollSource, s=>s, bulkAllTarget)
 		{
-			((IReindexRequest<T>) this).BulkAll = (d) => this._createBulkAll.InvokeOrDefault(new BulkAllDescriptor<IHit<T>>(d));
+		}
+	}
+
+	public class ReindexDescriptor<TSource, TTarget> : DescriptorBase<ReindexDescriptor<TSource, TTarget>, IReindexRequest<TSource, TTarget>>, IReindexRequest<TSource, TTarget>
+		where TSource : class
+		where TTarget : class
+	{
+		IScrollAllRequest IReindexRequest<TSource, TTarget>.ScrollAll{ get; set; }
+
+		private Func<BulkAllDescriptor<IHitMetadata<TTarget>>, IBulkAllRequest<IHitMetadata<TTarget>>> _createBulkAll;
+		Func<IEnumerable<IHitMetadata<TTarget>>, IBulkAllRequest<IHitMetadata<TTarget>>> IReindexRequest<TSource, TTarget>.BulkAll { get; set; }
+		bool IReindexRequest<TSource, TTarget>.OmitIndexCreation { get; set; }
+		ICreateIndexRequest IReindexRequest<TSource, TTarget>.CreateIndexRequest { get; set; }
+		int? IReindexRequest<TSource, TTarget>.BackPressureFactor { get; set; }
+		Func<TSource, TTarget> IReindexRequest<TSource, TTarget>.Map { get; set; }
+
+		public ReindexDescriptor(Func<TSource, TTarget> mapper)
+		{
+			var i = (IReindexRequest<TSource, TTarget>) this;
+			i.BulkAll = d => this._createBulkAll.InvokeOrDefault(new BulkAllDescriptor<IHitMetadata<TTarget>>(d));
+			i.Map = mapper;
 		}
 
 		/// <inheritdoc/>
-		public ReindexDescriptor<T> ScrollAll(Time scrollTime, int slices, Func<ScrollAllDescriptor<T>,IScrollAllRequest> selector = null) =>
-			Assign(a => a.ScrollAll = selector.InvokeOrDefault(new ScrollAllDescriptor<T>(scrollTime, slices)));
+		public ReindexDescriptor<TSource, TTarget> ScrollAll(Time scrollTime, int slices, Func<ScrollAllDescriptor<TSource>,IScrollAllRequest> selector = null) =>
+			Assign(a => a.ScrollAll = selector.InvokeOrDefault(new ScrollAllDescriptor<TSource>(scrollTime, slices)));
 
 		/// <inheritdoc/>
-		public ReindexDescriptor<T> BackPressureFactor(int? maximum) =>
+		public ReindexDescriptor<TSource, TTarget> BackPressureFactor(int? maximum) =>
 			Assign(a => a.BackPressureFactor = maximum);
 
 		/// <inheritdoc/>
-		public ReindexDescriptor<T> BulkAll(Func<BulkAllDescriptor<IHit<T>>, IBulkAllRequest<IHit<T>>> selector) =>
+		public ReindexDescriptor<TSource, TTarget> BulkAll(Func<BulkAllDescriptor<IHitMetadata<TTarget>>, IBulkAllRequest<IHitMetadata<TTarget>>> selector) =>
 			Assign(a => this._createBulkAll = selector);
 
 		/// <inheritdoc/>
-		public ReindexDescriptor<T> OmitIndexCreation(bool omit = true) => Assign(a => a.OmitIndexCreation = true);
+		public ReindexDescriptor<TSource, TTarget> OmitIndexCreation(bool omit = true) => Assign(a => a.OmitIndexCreation = true);
 
 		/// <inheritdoc/>
-		public ReindexDescriptor<T> CreateIndex(Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector) =>
+		public ReindexDescriptor<TSource, TTarget> CreateIndex(Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector) =>
 			Assign(a => a.CreateIndexRequest = createIndexSelector.InvokeOrDefault(new CreateIndexDescriptor("ignored")));
 	}
 }
