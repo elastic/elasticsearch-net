@@ -134,10 +134,10 @@ namespace ApiGenerator.Domain
 			}
 			if (IsDocumentPath && !string.IsNullOrEmpty(this.RequestTypeGeneric))
 			{
-				var doc = $@"/// <summary>{this.Url.Path}</summary>";
-				doc += "\r\n\t\t\r\n" + "///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
-				var documentRoute = "r=>r.Required(\"index\", index ?? document.Self.Index).Required(\"type\", type ?? document.Self.Type).Required(\"id\", id ?? document.Self.Id)";
 				var documentPathGeneric = Regex.Replace(this.DescriptorTypeGeneric, @"^<?([^\s,>]+).*$", "$1");
+				var doc = $@"/// <summary>{this.Url.Path}</summary>";
+				doc += "\r\n\t\t\r\n" + $"///<param name=\"document\"> describes an elasticsearch document of type <typeparamref name=\"{documentPathGeneric}\"/> from which the index, type and id can be inferred</param>";
+				var documentRoute = "r=>r.Required(\"index\", index ?? document.Self.Index).Required(\"type\", type ?? document.Self.Type).Required(\"id\", id ?? document.Self.Id)";
 				var documentFromPath = $"partial void DocumentFromPath({documentPathGeneric} document);";
 
 				var constructor = $"DocumentPath<{documentPathGeneric}> document, IndexName index = null, TypeName type = null, Id id = null";
@@ -151,11 +151,18 @@ namespace ApiGenerator.Domain
 		private void ParameterlessIndicesTypesConstructor(List<Constructor> ctors, string m)
 		{
 			var generic = this.RequestTypeGeneric?.Replace("<", "").Replace(">", "");
-			var doc = $@"/// <summary>{this.Url.Path}</summary>";
-			doc += "\r\n\t\t\r\n" + "///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
-			var c = new Constructor { Generated = $"public {m}() {{}}", Description = doc, };
-			if (!string.IsNullOrEmpty(generic))
+			string doc;
+			Constructor c;
+			if (string.IsNullOrEmpty(generic))
+			{
+				doc = $@"/// <summary>{this.Url.Path}</summary>";
+				c = new Constructor { Generated = $"public {m}() {{}}", Description = doc };
+			}
+			else
+			{
+				doc = $"///<summary>{this.Url.Path}<para><typeparamref name=\"{generic}\"/> describes an elasticsearch document type from which the index, type and id can be inferred</para></summary>";
 				c = new Constructor { Generated = $"public {m}() : this(typeof({generic}), typeof({generic})) {{}}", Description = doc, };
+			}
 			ctors.Add(c);
 		}
 
@@ -221,10 +228,10 @@ namespace ApiGenerator.Domain
 			}
 			if (IsDocumentPath && !string.IsNullOrEmpty(this.DescriptorTypeGeneric))
 			{
-				var doc = $@"/// <summary>{this.Url.Path}</summary>";
-				doc += "\r\n\t\t\r\n" + "///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
-				var documentRoute = "r=>r.Required(\"index\", document.Self.Index).Required(\"type\", document.Self.Type).Required(\"id\", document.Self.Id)";
 				var documentPathGeneric = Regex.Replace(this.DescriptorTypeGeneric, @"^<?([^\s,>]+).*$", "$1");
+				var doc = $@"/// <summary>{this.Url.Path}</summary>";
+				doc += "\r\n\t\t\r\n" + $"///<param name=\"document\"> describes an elasticsearch document of type <typeparamref name=\"{documentPathGeneric}\"/> from which the index, type and id can be inferred</param>";
+				var documentRoute = "r=>r.Required(\"index\", document.Self.Index).Required(\"type\", document.Self.Type).Required(\"id\", document.Self.Id)";
 				var documentFromPath = $"partial void DocumentFromPath({documentPathGeneric} document);";
 				var c = new Constructor { AdditionalCode = documentFromPath, Generated = $"public {m}(DocumentPath<{documentPathGeneric}> document) : base({documentRoute}){{ this.DocumentFromPath(document.Document); }}", Description = doc };
 				ctors.Add(c);

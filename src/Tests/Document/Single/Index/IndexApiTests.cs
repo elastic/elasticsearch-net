@@ -43,7 +43,7 @@ namespace Tests.Document.Single.Index
 		protected override string UrlPath
 			=> $"/project/project/{CallIsolatedValue}?consistency=quorum&op_type=index&refresh=true&routing=route";
 
-		protected override bool SupportsDeserialization => false;
+		protected override bool SupportsDeserialization => true;
 
 		protected override object ExpectJson =>
 			new

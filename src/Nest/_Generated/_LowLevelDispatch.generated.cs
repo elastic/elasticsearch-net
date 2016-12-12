@@ -722,6 +722,38 @@ namespace Nest
 			throw InvalidDispatch("CountPercolate", p, new [] { GET, POST }, "/{index}/{type}/_percolate/count", "/{index}/{type}/{id}/_percolate/count");
 		}
 		
+		internal ElasticsearchResponse<T> CreateDispatch<T>(IRequest<CreateRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.Create<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.CreatePost<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("Create", p, new [] { PUT, POST }, "/{index}/{type}/{id}/_create");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> CreateDispatchAsync<T>(IRequest<CreateRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.CreateAsync<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.CreatePostAsync<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("Create", p, new [] { PUT, POST }, "/{index}/{type}/{id}/_create");
+		}
+		
 		internal ElasticsearchResponse<T> DeleteDispatch<T>(IRequest<DeleteRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)

@@ -243,6 +243,8 @@
     <Compile Include="Document\Multiple\Bulk\BulkUpdateManyTests.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleApiTests.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleUrlTests.cs" />
+    <Compile Include="Document\Single\Create\CreateApiTests.cs" />
+    <Compile Include="Document\Single\Create\CreateUrlTests.cs" />
     <Compile Include="Framework\Extensions\ShouldExtensions.cs" />
     <Compile Include="Framework\Integration\Clusters\WritableCluster.cs" />
     <Compile Include="Framework\Integration\Clusters\IntrusiveOperationCluster.cs" />
