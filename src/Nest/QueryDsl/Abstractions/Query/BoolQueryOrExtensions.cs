@@ -56,7 +56,8 @@ namespace Nest
 			boolQuery != null && boolQuery.IsWritable && !boolQuery.Locked && boolQuery.HasOnlyShouldClauses();
 
 		private static QueryContainer CreateShouldContainer(List<QueryContainer> shouldClauses) =>
-			new BoolQuery(createdByBoolDsl: true)
+			//new BoolQuery(createdByBoolDsl: true)
+			new BoolQuery()
 			{
 				Should = shouldClauses.ToListOrNullIfEmpty()
 			};

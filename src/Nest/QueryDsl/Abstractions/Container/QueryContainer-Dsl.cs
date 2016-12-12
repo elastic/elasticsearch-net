@@ -68,7 +68,7 @@ namespace Nest
 			if (!leftWritable && !rightWritable) return true;
 
 			queryContainer = leftWritable ? leftContainer : rightContainer;
-			return !leftWritable || !rightWritable;
+			return true;
 		}
 
 		public static QueryContainer operator !(QueryContainer queryContainer) => queryContainer == null || (!queryContainer.IsWritable)

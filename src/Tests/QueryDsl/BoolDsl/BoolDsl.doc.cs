@@ -336,6 +336,33 @@ namespace Tests.QueryDsl.BoolDsl
 			nestedBool.Bool.Name.Should().Be(firstName);
 		}
 
+		//hide
+		[U] public void AndShouldNotBeViralAnyWayYouComposeIt()
+		{
+			QueryContainer andAssign = new TermQuery { Field = "a", Value = "a" };
+			andAssign &= new TermQuery { Field = "b", Value = "b" };
+
+			AssertAndIsNotViral(andAssign, "&=");
+
+			QueryContainer andOperator =
+				new TermQuery { Field = "a", Value = "a" } && new TermQuery { Field = "b", Value = "b" };
+
+			AssertAndIsNotViral(andOperator, "&&");
+		}
+
+		//hide
+		private static void AssertAndIsNotViral(QueryContainer query, string origin)
+		{
+			IQueryContainer original = query;
+			original.Bool.Must.Should().HaveCount(2, $"query composed using {origin} should have 2 must clauses before");
+			IQueryContainer result = query && new TermQuery { Field = "c", Value = "c" };
+			result.Bool.Must.Should().HaveCount(3, $"query composed using {origin} combined with && should have 3 must clauses");
+			original.Bool.Must.Should().HaveCount(2, $"query composed using {origin} should still have 2 must clauses after composition");
+		}
+
+
+
+
 		/** === Perfomance considerations
 		*
 		* If you have a requirement of combining many many queries using the bool dsl please take the following into account.
@@ -349,8 +376,10 @@ namespace Tests.QueryDsl.BoolDsl
 			var c = new QueryContainer();
 			var q = new TermQuery { Field = "x", Value = "x" };
 
-			for (var i=0;i<1000;i++)
+			for (var i = 0; i < 1000; i++)
+			{
 				c &= q;
+			}
 		}
 		/**
 		 *....

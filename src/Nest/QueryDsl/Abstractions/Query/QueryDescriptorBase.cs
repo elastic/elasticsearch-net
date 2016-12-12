@@ -23,6 +23,6 @@ namespace Nest
 
 		public TDescriptor Strict(bool strict = true) => Assign(a => a.IsStrict = strict);
 
-		bool IQuery.IsWritable { get { return Self.IsVerbatim || !Self.Conditionless; } }
+		bool IQuery.IsWritable => Self.IsVerbatim || !Self.Conditionless;
 	}
 }

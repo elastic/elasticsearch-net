@@ -51,15 +51,12 @@ namespace Nest
 		bool? DisableCoord { get; set; }
 
 		bool Locked { get; }
-		bool CreatedByBoolDsl { get; }
 	}
 
 	public class BoolQuery : QueryBase, IBoolQuery
 	{
 		internal static bool Locked(IBoolQuery q) => !q.Name.IsNullOrEmpty() || q.Boost.HasValue || q.DisableCoord.HasValue || q.MinimumShouldMatch != null;
 		bool IBoolQuery.Locked => BoolQuery.Locked(this);
-		private readonly bool _createdByBoolDsl;
-		bool IBoolQuery.CreatedByBoolDsl => _createdByBoolDsl;
 
 		private IList<QueryContainer> _must;
 		private IList<QueryContainer> _mustNot;
@@ -67,16 +64,6 @@ namespace Nest
 		private IList<QueryContainer> _filter;
 
 		public BoolQuery() { }
-
-		/// <summary>
-		/// Internal constructor which we use internally in the bool dsl so we know its safe to reuse a boolean query instance
-		/// </summary>
-		/// <param name="createdByBoolDsl">ignored</param>
-		internal BoolQuery(bool createdByBoolDsl)
-		{
-			this._createdByBoolDsl = true;
-		}
-
 
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
@@ -136,7 +123,6 @@ namespace Nest
 		, IBoolQuery where T : class
 	{
 		bool IBoolQuery.Locked => BoolQuery.Locked(this);
-		bool IBoolQuery.CreatedByBoolDsl { get; } = false;
 
 		protected override bool Conditionless => BoolQuery.IsConditionless(this);
 		private IList<QueryContainer> _must;
