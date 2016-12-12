@@ -1,5 +1,8 @@
 # Breaking Changes
 
+Oh my goodness, this looks like a lot of breaking changes! This is true but please take note that this list is very very extensive 
+It includes every single *binary* breaking change. In alot of cases these will not necessarily equate to compiler errors. 
+
 ## StatsAggregator renamed to StatsAggregation
 
 `IStatsAggregator` not named correctly all aggregation requests objects need to end with `Aggregation`
@@ -274,7 +277,7 @@ Binary break only, still implicitly converts from string
 2.x: `public TDescriptor AutoExpandReplicas(string AutoExpandReplicas)`  
 5.x: `public TDescriptor AutoExpandReplicas(AutoExpandReplicas autoExpandReplicas)`  
 
-## DslPrerttyPrints methods are now virtual
+## DslPrettyPrintVisitor methods are now virtual
 
 ## Nest visitors should be bound to interface
 
@@ -681,7 +684,7 @@ See also: https://github.com/elastic/elasticsearch-net/pull/2200
 **public property Nest.ISourceFilter.Exclude** *Removed (Breaking)*  
 **public property Nest.ISourceFilter.Include** *Removed (Breaking)*    
 
-### Bulk index failure now returns its metadata
+## Bulk index failure now returns its metadata
 
 **public property Nest.BulkIndexByScrollFailure.Cause** *Declaration changed (Breaking)*
 
@@ -697,7 +700,7 @@ public Throwable Cause { get; internal set; }
 public BulkIndexFailureCause Cause { get; set; }
 ```
 
-### GetAliases API removed 
+## GetAliases API removed 
 
 GetAlias API now returns `GetAlias*` named types not `GetAliases*`
 
@@ -819,7 +822,7 @@ public static Task<IEnumerable<string>> GetIndicesPointingToAliasAsync(IElasticC
 2.x: `public IDeleteByQueryResponse DeleteByQuery<T>(Indices indices, Types types, Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector)`  
 5.x: `public IDeleteByQueryResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector)`  
 
-### Enum Changes
+## Enum Changes
 
 Impact low
 
@@ -1009,8 +1012,10 @@ public enum StringFielddataFormat
 
 
 
-### Uncategorized
+## Uncategorized
 
+Misc. changes that are yet to be categorized. Please open an issue if you are bit by these and feel it
+warrants an explanation.
 
 **public method Nest.DeleteByQueryDescriptor&lt;T&gt;.Routing** *Declaration changed (Breaking)*
 
@@ -2978,10 +2983,10 @@ public TypeMappingDescriptor<T> Transform(IEnumerable<IMappingTransform> transfo
 public TypeMappingDescriptor<T> TtlField(Func<TtlFieldDescriptor, ITtlField> ttlFieldSelector)
 ```
 
-#RemovedIn5x
+# Removed in 5.x
 
-The public methods/properties/types have been removed and are not yet documented in this document for what reason. 
-This could have happened because of a rename.
+This is the complete list of removed types, properties, methods. We will retro actively mark them as obsolete
+in an upcomming `2.x` release and update this documentation. 
 
 **public class Nest.AllocateClusterRerouteCommand** *Removed (Breaking)*  
 **public class Nest.AllocateClusterRerouteCommandDescriptor** *Removed (Breaking)*  
