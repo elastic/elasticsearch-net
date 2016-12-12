@@ -7491,2422 +7491,744 @@ public TypeMappingDescriptor<T> TtlField(Func<TtlFieldDescriptor, ITtlField> ttl
 ```
 
 #ReadOnlyTypeChange
-**public property Nest.ActivationStatus.Actions** *Declaration changed (Breaking)*
 
-2.x
-```csharp
-[JsonPropertyAttribute("actions")]
-public Dictionary<string, ActionStatus> Actions { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("actions")]
-public IReadOnlyDictionary<string, ActionStatus> Actions { get; set; }
-```
-
-**public property Nest.AggregationsHelper.Aggregations** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public IDictionary<string, IAggregate> Aggregations
-{
-     get; protected internal set; 
-}
-```
-
-5.x
-```csharp
-public IReadOnlyDictionary<string, IAggregate> Aggregations
-{
-     get; protected internal set; 
-}
-```
-
-**public property Nest.AnalyzeResponse.Tokens** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-public IEnumerable<AnalyzeToken> Tokens { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-public IReadOnlyCollection<AnalyzeToken> Tokens { get; internal set; }
-```
-
-**public property Nest.AuthenticateResponse.Metadata** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, object> Metadata { get; internal set; }`  
-5.x: `public IReadOnlyDictionary<string, object> Metadata { get; internal set; }`  
-
-**public property Nest.AuthenticateResponse.Roles** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<string> Roles { get; internal set; }`  
-5.x: `public IReadOnlyCollection<string> Roles { get; internal set; }`  
-
-**public property Nest.BucketAggregate.Items** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<IBucket> Items { get; set; }`  
-5.x: `public IReadOnlyCollection<IBucket> Items { get; set; }`  
-
-**public property Nest.BucketAggregate.Meta** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, object> Meta { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, object> Meta { get; set; }`  
-
-**public property Nest.BucketAggregateBase.Meta** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, object> Meta { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, object> Meta { get; set; }`  
-
-**public property Nest.BulkResponse.Items** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("items")]
-public IEnumerable<BulkResponseItemBase> Items { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("items")]
-public IReadOnlyCollection<BulkResponseItemBase> Items { get; internal set; }
-```
-
-**public property Nest.CatResponse&lt;TCatRecord&gt;.Records** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<TCatRecord> Records { get; internal set; }`  
-5.x: `public IReadOnlyCollection<TCatRecord> Records { get; internal set; }`  
-
-**public property Nest.ClearCachedRealmsResponse.Nodes** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, ShieldNode> Nodes { get; internal set; }`  
-5.x: `public IReadOnlyDictionary<string, SecurityNode> Nodes { get; internal set; }`  
-
-**public property Nest.ClearCachedRolesResponse.Nodes** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, ShieldNode> Nodes { get; internal set; }`  
-5.x: `public IReadOnlyDictionary<string, SecurityNode> Nodes { get; internal set; }`  
-
-**public property Nest.ClusterGetSettingsResponse.Persistent** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, object> Persistent { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, object> Persistent { get; internal set; }`  
-
-**public property Nest.ClusterGetSettingsResponse.Transient** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, object> Transient { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, object> Transient { get; internal set; }`  
-
-**public property Nest.ClusterHealthResponse.Indices** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, IndexHealthStats> Indices { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.IndexHealthStats])]
-public IReadOnlyDictionary<string, IndexHealthStats> Indices { get; internal set; }
-```
-
-**public property Nest.ClusterJvm.Versions** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("versions")]
-public List<ClusterJvmVersion> Versions { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("versions")]
-public IReadOnlyCollection<ClusterJvmVersion> Versions { get; internal set; }
-```
-
-**public property Nest.ClusterNodesStats.Plugins** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("plugins")]
-public List<PluginStats> Plugins { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("plugins")]
-public IReadOnlyCollection<PluginStats> Plugins { get; internal set; }
-```
-
-**public property Nest.ClusterNodesStats.Versions** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("versions")]
-public List<string> Versions { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("versions")]
-public IReadOnlyCollection<string> Versions { get; internal set; }
-```
-
-**public property Nest.ClusterOperatingSystemStats.Names** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("names")]
-public List<ClusterOperatingSystemName> Names { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("names")]
-public IReadOnlyCollection<ClusterOperatingSystemName> Names { get; internal set; }
-```
-
-**public property Nest.ClusterPendingTasksResponse.Tasks** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("tasks")]
-public IEnumerable<PendingTask> Tasks { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("tasks")]
-public IReadOnlyCollection<PendingTask> Tasks { get; internal set; }
-```
-
-**public property Nest.ClusterPutSettingsResponse.Persistent** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, object> Persistent { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, object> Persistent { get; internal set; }`  
-
-**public property Nest.ClusterPutSettingsResponse.Transient** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, object> Transient { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, object> Transient { get; internal set; }`  
-
-**public property Nest.ClusterRerouteResponse.Explanations** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<ClusterRerouteExplanation> Explanations { get; set; }`  
-5.x: `public IReadOnlyCollection<ClusterRerouteExplanation> Explanations { get; internal set; }`  
-
-**public property Nest.ClusterRerouteState.Nodes** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("nodes")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, NodeState> Nodes { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("nodes")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.NodeState])]
-public IReadOnlyDictionary<string, NodeState> Nodes { get; internal set; }
-```
-
-**public property Nest.ClusterStateResponse.Nodes** *Declaration changed (Breaking)*
-
-2.x: `public Dictionary<string, NodeState> Nodes { get; internal set; }`  
-5.x: `public IReadOnlyDictionary<string, NodeState> Nodes { get; internal set; }`  
-
-**public property Nest.Collector.Children** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("children")]
-public IEnumerable<Collector> Children { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("children")]
-public IReadOnlyCollection<Collector> Children { get; internal set; }
-```
-
-**public property Nest.ExecutionResult.Actions** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("actions")]
-public List<ExecutionResultAction> Actions { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("actions")]
-public IReadOnlyCollection<ExecutionResultAction> Actions { get; set; }
-```
-
-**public property Nest.ExecutionResultInput.Payload** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("payload")]
-public Dictionary<string, object> Payload { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("payload")]
-public IReadOnlyDictionary<string, object> Payload { get; set; }
-```
-
-**public property Nest.Explanation.Details** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-public IEnumerable<ExplanationDetail> Details { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-public IReadOnlyCollection<ExplanationDetail> Details { get; internal set; }
-```
-
-**public property Nest.ExplanationDetail.Details** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-public IEnumerable<ExplanationDetail> Details { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-public IReadOnlyCollection<ExplanationDetail> Details { get; internal set; }
-```
-
-**public property Nest.FieldMapping.Mapping** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("mapping")]
-[JsonConverterAttribute(Nest.FieldMappingJsonConverter)]
-public Dictionary<string, IFieldMapping> Mapping { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("mapping")]
-[JsonConverterAttribute(Nest.FieldMappingJsonConverter)]
-public IReadOnlyDictionary<string, IFieldMapping> Mapping { get; internal set; }
-```
-
-**public property Nest.FieldStats.Fields** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("fields")]
-public Dictionary<string, FieldStatsField> Fields { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("fields")]
-public IReadOnlyDictionary<string, FieldStatsField> Fields { get; internal set; }
-```
-
-**public property Nest.FieldStatsResponse.Indices** *Declaration changed (Breaking)*
-
-2.x: `public Dictionary<string, FieldStats> Indices { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, FieldStats> Indices { get; internal set; }`  
-
-**public property Nest.GetFieldMappingResponse.Indices** *Declaration changed (Breaking)*
-
-2.x: `public IndexFieldMappings Indices { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, TypeFieldMappings> Indices { get; internal set; }`  
-
-**public property Nest.GetIndexResponse.Indices** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, IndexState> Indices { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, IndexState> Indices { get; }`  
-
-**public property Nest.GetIndexSettingsResponse.Indices** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonIgnoreAttribute]
-public IDictionary<string, IIndexState> Indices { get; }
-```
-
-5.x
-```csharp
-[JsonIgnoreAttribute]
-public IReadOnlyDictionary<string, IndexState> Indices { get; }
-```
-
-**public property Nest.GetIndexTemplateResponse.TemplateMappings** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonIgnoreAttribute]
-public IDictionary<string, TemplateMapping> TemplateMappings { get; }
-```
-
-5.x
-```csharp
-[JsonIgnoreAttribute]
-public IReadOnlyDictionary<string, TemplateMapping> TemplateMappings { get; }
-```
-
-**public property Nest.GetMappingResponse.Mappings** *Declaration changed (Breaking)*
-
-2.x: `public Dictionary<string, IList<TypeMapping>> Mappings { get; internal set; }`  
-5.x: `public IReadOnlyDictionary<string, IReadOnlyDictionary<string, TypeMapping>> Mappings { get; }`  
-
-**public property Nest.GetRepositoryResponse.Repositories** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, ISnapshotRepository> Repositories { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, ISnapshotRepository> Repositories { get; internal set; }`  
-
-**public property Nest.GetRoleResponse.Roles** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonIgnoreAttribute]
-public IDictionary<string, Role> Roles { get; }
-```
-
-5.x
-```csharp
-[JsonIgnoreAttribute]
-public IReadOnlyDictionary<string, XPackRole> Roles { get; }
-```
-
-**public property Nest.GetSnapshotResponse.Snapshots** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("snapshots")]
-public IEnumerable<Snapshot> Snapshots { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("snapshots")]
-public IReadOnlyCollection<Snapshot> Snapshots { get; internal set; }
-```
-
-**public property Nest.GetUserResponse.Users** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonIgnoreAttribute]
-public IDictionary<string, User> Users { get; }
-```
-
-5.x
-```csharp
-[JsonIgnoreAttribute]
-public IReadOnlyDictionary<string, XPackUser> Users { get; }
-```
-
-**public property Nest.GraphExploreResponse.Connections** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<GraphConnection> Connections { get; internal set; }`  
-5.x: `public IReadOnlyCollection<GraphConnection> Connections { get; internal set; }`  
-
-**public property Nest.GraphExploreResponse.Failures** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<ShardFailure> Failures { get; internal set; }`  
-5.x: `public IReadOnlyCollection<ShardFailure> Failures { get; internal set; }`  
-
-**public property Nest.GraphExploreResponse.Vertices** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<GraphVertex> Vertices { get; internal set; }`  
-5.x: `public IReadOnlyCollection<GraphVertex> Vertices { get; internal set; }`  
-
-**public property Nest.HighlightHit.Highlights** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<string> Highlights { get; set; }`  
-5.x: `public IReadOnlyCollection<string> Highlights { get; internal set; }`  
-
-**public property Nest.Hit&lt;T&gt;.InnerHits** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("inner_hits")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public IDictionary<string, InnerHitsResult> InnerHits { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("inner_hits")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.InnerHitsResult])]
-public IReadOnlyDictionary<string, InnerHitsResult> InnerHits { get; internal set; }
-```
-
-**public property Nest.Hit&lt;T&gt;.MatchedQueries** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("matched_queries")]
-public IEnumerable<string> MatchedQueries { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("matched_queries")]
-public IReadOnlyCollection<string> MatchedQueries { get; internal set; }
-```
-
-**public property Nest.Hit&lt;T&gt;.Sorts** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("sort")]
-public IEnumerable<object> Sorts { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("sort")]
-public IReadOnlyCollection<object> Sorts { get; internal set; }
-```
-
-**public property Nest.HitsMetaData&lt;T&gt;.Hits** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("hits")]
-public List<IHit<T>> Hits { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("hits")]
-public IReadOnlyCollection<IHit<T>> Hits { get; internal set; }
-```
-
-**public property Nest.HotThreadInformation.Hosts** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<string> Hosts { get; set; }`  
-5.x: `public IReadOnlyCollection<string> Hosts { get; internal set; }`  
-
-**public property Nest.HotThreadInformation.Threads** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<string> Threads { get; set; }`  
-5.x: `public IReadOnlyCollection<string> Threads { get; internal set; }`  
-
-**public property Nest.IAggregate.Meta** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, object> Meta { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, object> Meta { get; set; }`  
-
-**public property Nest.IAnalyzeResponse.Tokens** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<AnalyzeToken> Tokens { get; }`  
-5.x: `public IReadOnlyCollection<AnalyzeToken> Tokens { get; }`  
-
-**public property Nest.IAuthenticateResponse.Metadata** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("metadata")]
-public IDictionary<string, object> Metadata { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("metadata")]
-public IReadOnlyDictionary<string, object> Metadata { get; }
-```
-
-**public property Nest.IAuthenticateResponse.Roles** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("roles")]
-public IEnumerable<string> Roles { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("roles")]
-public IReadOnlyCollection<string> Roles { get; }
-```
-
-**public property Nest.IBulkResponse.Items** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<BulkResponseItemBase> Items { get; }`  
-5.x: `public IReadOnlyCollection<BulkResponseItemBase> Items { get; }`  
-
-**public property Nest.ICatResponse&lt;TCatRecord&gt;.Records** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<TCatRecord> Records { get; }`  
-5.x: `public IReadOnlyCollection<TCatRecord> Records { get; }`  
-
-**public property Nest.IClearCachedRealmsResponse.Nodes** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("nodes")]
-public IDictionary<string, ShieldNode> Nodes { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("nodes")]
-public IReadOnlyDictionary<string, SecurityNode> Nodes { get; }
-```
-
-**public property Nest.IClearCachedRolesResponse.Nodes** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("nodes")]
-public IDictionary<string, ShieldNode> Nodes { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("nodes")]
-public IReadOnlyDictionary<string, SecurityNode> Nodes { get; }
-```
-
-**public property Nest.IClusterGetSettingsResponse.Persistent** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-public IDictionary<string, object> Persistent { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-public IReadOnlyDictionary<string, object> Persistent { get; }
-```
-
-**public property Nest.IClusterGetSettingsResponse.Transient** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-public IDictionary<string, object> Transient { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-public IReadOnlyDictionary<string, object> Transient { get; }
-```
-
-**public property Nest.IClusterHealthResponse.Indices** *Declaration changed (Breaking)*
-
-2.x: `public Dictionary<string, IndexHealthStats> Indices { get; }`  
-5.x: `public IReadOnlyDictionary<string, IndexHealthStats> Indices { get; }`  
-
-**public property Nest.IClusterPendingTasksResponse.Tasks** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<PendingTask> Tasks { get; set; }`  
-5.x: `public IReadOnlyCollection<PendingTask> Tasks { get; }`  
-
-**public property Nest.IClusterPutSettingsResponse.Persistent** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-public IDictionary<string, object> Persistent { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-public IReadOnlyDictionary<string, object> Persistent { get; }
-```
-
-**public property Nest.IClusterPutSettingsResponse.Transient** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-public IDictionary<string, object> Transient { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-public IReadOnlyDictionary<string, object> Transient { get; }
-```
-
-**public property Nest.IClusterRerouteResponse.Explanations** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("explanations")]
-public IEnumerable<ClusterRerouteExplanation> Explanations { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("explanations")]
-public IReadOnlyCollection<ClusterRerouteExplanation> Explanations { get; }
-```
-
-**public property Nest.IClusterStateResponse.Nodes** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("nodes")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, NodeState> Nodes { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("nodes")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.NodeState])]
-public IReadOnlyDictionary<string, NodeState> Nodes { get; }
-```
-
-**public property Nest.IDictionaryResponse&lt;TKey, TValue&gt;.BackingDictionary** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<TKey, TValue> BackingDictionary { get; set; }`  
-5.x: `public IReadOnlyDictionary<TKey, TValue> BackingDictionary { get; set; }`  
-
-**public property Nest.IFieldStatsResponse.Indices** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("indices")]
-public Dictionary<string, FieldStats> Indices { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("indices")]
-public IReadOnlyDictionary<string, FieldStats> Indices { get; }
-```
-
-**public property Nest.IGetFieldMappingResponse.Indices** *Declaration changed (Breaking)*
-
-2.x: `public IndexFieldMappings Indices { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, TypeFieldMappings> Indices { get; }`  
-
-**public property Nest.IGetIndexResponse.Indices** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, IndexState> Indices { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, IndexState> Indices { get; }`  
-
-**public property Nest.IGetIndexSettingsResponse.Indices** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, IIndexState> Indices { get; }`  
-5.x: `public IReadOnlyDictionary<string, IndexState> Indices { get; }`  
-
-**public property Nest.IGetIndexTemplateResponse.TemplateMappings** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, TemplateMapping> TemplateMappings { get; }`  
-5.x: `public IReadOnlyDictionary<string, TemplateMapping> TemplateMappings { get; }`  
-
-**public property Nest.IGetMappingResponse.Mappings** *Declaration changed (Breaking)*
-
-2.x: `public Dictionary<string, IList<TypeMapping>> Mappings { get; }`  
-5.x: `public IReadOnlyDictionary<string, IReadOnlyDictionary<string, TypeMapping>> Mappings { get; }`  
-
-**public property Nest.IGetRepositoryResponse.Repositories** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, ISnapshotRepository> Repositories { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, ISnapshotRepository> Repositories { get; }`  
-
-**public property Nest.IGetRoleResponse.Roles** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, Role> Roles { get; }`  
-5.x: `public IReadOnlyDictionary<string, XPackRole> Roles { get; }`  
-
-**public property Nest.IGetSnapshotResponse.Snapshots** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("snapshots")]
-public IEnumerable<Snapshot> Snapshots { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("snapshots")]
-public IReadOnlyCollection<Snapshot> Snapshots { get; }
-```
-
-**public property Nest.IGetUserResponse.Users** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, User> Users { get; }`  
-5.x: `public IReadOnlyDictionary<string, XPackUser> Users { get; }`  
-
-**public property Nest.IGraphExploreResponse.Connections** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("connections")]
-public IEnumerable<GraphConnection> Connections { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("connections")]
-public IReadOnlyCollection<GraphConnection> Connections { get; }
-```
-
-**public property Nest.IGraphExploreResponse.Failures** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("failures")]
-public IEnumerable<ShardFailure> Failures { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("failures")]
-public IReadOnlyCollection<ShardFailure> Failures { get; }
-```
-
-**public property Nest.IGraphExploreResponse.Vertices** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("vertices")]
-public IEnumerable<GraphVertex> Vertices { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("vertices")]
-public IReadOnlyCollection<GraphVertex> Vertices { get; }
-```
-
-**public property Nest.IHit&lt;T&gt;.InnerHits** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, InnerHitsResult> InnerHits { get; }`  
-5.x: `public IReadOnlyDictionary<string, InnerHitsResult> InnerHits { get; }`  
-
-**public property Nest.IHit&lt;T&gt;.MatchedQueries** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<string> MatchedQueries { get; }`  
-5.x: `public IReadOnlyCollection<string> MatchedQueries { get; }`  
-
-**public property Nest.IHit&lt;T&gt;.Sorts** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<object> Sorts { get; }`  
-5.x: `public IReadOnlyCollection<object> Sorts { get; }`  
-
-**public property Nest.IIndicesShardStoresResponse.Indices** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, IndicesShardStores> Indices { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.IndicesShardStores])]
-public IReadOnlyDictionary<string, IndicesShardStores> Indices { get; }
-```
-
-**public property Nest.IIndicesStatsResponse.Indices** *Declaration changed (Breaking)*
-
-2.x: `public Dictionary<string, IndicesStats> Indices { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, IndicesStats> Indices { get; }`  
-
-**public property Nest.IMultiGetResponse.Documents** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<IMultiGetHit<object>> Documents { get; }`  
-5.x: `public IReadOnlyCollection<IMultiGetHit<object>> Documents { get; }`  
-
-**public property Nest.IMultiTermVectorsResponse.Documents** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<TermVectorsResponse> Documents { get; }`  
-5.x: `public IReadOnlyCollection<ITermVectors> Documents { get; }`  
-
-**public property Nest.IndexHealthStats.Shards** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, ShardHealthStats> Shards { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.ShardHealthStats])]
-public IReadOnlyDictionary<string, ShardHealthStats> Shards { get; internal set; }
-```
-
-**public property Nest.IndexingStats.Types** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, IndexingStats> Types { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("types")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.IndexingStats])]
-public IReadOnlyDictionary<string, IndexingStats> Types { get; set; }
-```
-
-**public property Nest.IndexRoutingTable.Shards** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("shards")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, List<RoutingShard>> Shards { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("shards")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,System.Collections.Generic.List`1[Nest.RoutingShard]])]
-public IReadOnlyDictionary<string, List<RoutingShard>> Shards { get; internal set; }
-```
-
-**public property Nest.IndexSegment.Shards** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, ShardsSegment> Shards { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.ShardsSegment])]
-public IReadOnlyDictionary<string, ShardsSegment> Shards { get; internal set; }
-```
-
-**public property Nest.IndicesShardStores.Shards** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, ShardStoreWrapper> Shards { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.ShardStoreWrapper])]
-public IReadOnlyDictionary<string, ShardStoreWrapper> Shards { get; internal set; }
-```
-
-**public property Nest.IndicesShardStoresResponse.Indices** *Declaration changed (Breaking)*
-
-2.x: `public Dictionary<string, IndicesShardStores> Indices { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, IndicesShardStores> Indices { get; internal set; }`  
-
-**public property Nest.IndicesStatsResponse.Indices** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, IndicesStats> Indices { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.IndicesStats])]
-public IReadOnlyDictionary<string, IndicesStats> Indices { get; internal set; }
-```
-
-**public property Nest.INodesHotThreadsResponse.HotThreads** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<HotThreadInformation> HotThreads { get; }`  
-5.x: `public IReadOnlyCollection<HotThreadInformation> HotThreads { get; }`  
-
-**public property Nest.INodesInfoResponse.Nodes** *Declaration changed (Breaking)*
-
-2.x: `public Dictionary<string, NodeInfo> Nodes { get; }`  
-5.x: `public IReadOnlyDictionary<string, NodeInfo> Nodes { get; }`  
-
-**public property Nest.INodesStatsResponse.Nodes** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, NodeStats> Nodes { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.NodeStats])]
-public IReadOnlyDictionary<string, NodeStats> Nodes { get; }
-```
-
-**public property Nest.IPercolateResponse.Matches** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<PercolatorMatch> Matches { get; }`  
-5.x: `public IReadOnlyCollection<PercolatorMatch> Matches { get; }`  
-
-**public property Nest.IRecoveryStatusResponse.Indices** *Declaration changed (Breaking)*
-
-2.x: `public Dictionary<string, RecoveryStatus> Indices { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, RecoveryStatus> Indices { get; }`  
-
-**public property Nest.IReindexOnServerResponse.Failures** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("failures")]
-public IEnumerable<BulkIndexByScrollFailure> Failures { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("failures")]
-public IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; }
-```
-
-**public property Nest.IReindexRethrottleResponse.Nodes** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("nodes")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, ReindexNode> Nodes { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("nodes")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.ReindexNode])]
-public IReadOnlyDictionary<string, ReindexNode> Nodes { get; }
-```
-
-**public property Nest.ISearchResponse&lt;T&gt;.Aggregations** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, IAggregate> Aggregations { get; }`  
-5.x: `public IReadOnlyDictionary<string, IAggregate> Aggregations { get; }`  
-
-**public property Nest.ISearchResponse&lt;T&gt;.Documents** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<T> Documents { get; }`  
-5.x: `public IReadOnlyCollection<T> Documents { get; }`  
-
-**public property Nest.ISearchResponse&lt;T&gt;.Fields** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<FieldValues> Fields { get; }`  
-5.x: `public IReadOnlyCollection<FieldValues> Fields { get; }`  
-
-**public property Nest.ISearchResponse&lt;T&gt;.Hits** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<IHit<T>> Hits { get; }`  
-5.x: `public IReadOnlyCollection<IHit<T>> Hits { get; }`  
-
-**public property Nest.ISearchResponse&lt;T&gt;.Suggest** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, Suggest[]> Suggest { get; }`  
-5.x: `public IReadOnlyDictionary<string, Suggest`1[]> Suggest { get; }`  
-
-**public property Nest.ISearchShardsResponse.Nodes** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("nodes")]
-public IDictionary<string, SearchNode> Nodes { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("nodes")]
-public IReadOnlyDictionary<string, SearchNode> Nodes { get; }
-```
-
-**public property Nest.ISearchShardsResponse.Shards** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("shards")]
-public IEnumerable<IEnumerable<SearchShard>> Shards { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("shards")]
-public IReadOnlyCollection<IReadOnlyCollection<SearchShard>> Shards { get; }
-```
-
-**public property Nest.ISegmentsResponse.Indices** *Declaration changed (Breaking)*
-
-2.x: `public Dictionary<string, IndexSegment> Indices { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, IndexSegment> Indices { get; }`  
-
-**public property Nest.ISnapshotStatusResponse.Snapshots** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("snapshots")]
-public IEnumerable<SnapshotStatus> Snapshots { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("snapshots")]
-public IReadOnlyCollection<SnapshotStatus> Snapshots { get; }
-```
-
-**public property Nest.IUpdateByQueryResponse.Failures** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("failures")]
-public IEnumerable<BulkIndexByScrollFailure> Failures { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("failures")]
-public IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; }
-```
-
-**public property Nest.IUpgradeStatusResponse.Upgrades** *Declaration changed (Breaking)*
-
-2.x: `public Dictionary<string, UpgradeStatus> Upgrades { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, UpgradeStatus> Upgrades { get; }`  
-
-**public property Nest.IValidateQueryResponse.Explanations** *Declaration changed (Breaking)*
-
-2.x: `public IList<ValidationExplanation> Explanations { get; set; }`  
-5.x: `public IReadOnlyCollection<ValidationExplanation> Explanations { get; }`  
-
-**public property Nest.IVerifyRepositoryResponse.Nodes** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, CompactNodeInfo> Nodes { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.CompactNodeInfo])]
-public IReadOnlyDictionary<string, CompactNodeInfo> Nodes { get; }
-```
-
-**public property Nest.IWatcherStatsResponse.CurrentWatches** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("current_watches")]
-public IEnumerable<WatchRecordStats> CurrentWatches { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("current_watches")]
-public IReadOnlyCollection<WatchRecordStats> CurrentWatches { get; }
-```
-
-**public property Nest.IWatcherStatsResponse.QueuedWatches** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("queued_watches")]
-public IEnumerable<WatchRecordQueuedStats> QueuedWatches { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("queued_watches")]
-public IReadOnlyCollection<WatchRecordQueuedStats> QueuedWatches { get; }
-```
-
-**public property Nest.LicenseAcknowledgement.License** *Declaration changed (Breaking)*
-
-2.x: `public String[] License { get; set; }`  
-5.x: `public IReadOnlyCollection<string> License { get; set; }`  
-
-**public property Nest.MetadataState.Indices** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("indices")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, MetadataIndexState> Indices { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("indices")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.MetadataIndexState])]
-public IReadOnlyDictionary<string, MetadataIndexState> Indices { get; internal set; }
-```
-
-**public property Nest.MetadataState.Templates** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("templates")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public IDictionary<string, TemplateMapping> Templates { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("templates")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.TemplateMapping])]
-public IReadOnlyDictionary<string, TemplateMapping> Templates { get; internal set; }
-```
-
-**public property Nest.MetricAggregateBase.Meta** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, object> Meta { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, object> Meta { get; set; }`  
-
-**public property Nest.MultiBucketAggregate&lt;TBucket&gt;.Buckets** *Declaration changed (Breaking)*
-
-2.x: `public IList<TBucket> Buckets { get; set; }`  
-5.x: `public IReadOnlyCollection<TBucket> Buckets { get; set; }`  
-
-**public property Nest.MultiGetResponse.Documents** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<IMultiGetHit<object>> Documents { get; }`  
-5.x: `public IReadOnlyCollection<IMultiGetHit<object>> Documents { get; }`  
-
-**public property Nest.MultiTermVectorsResponse.Documents** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("docs")]
-public IEnumerable<TermVectorsResponse> Documents { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("docs")]
-[JsonConverterAttribute(Nest.ReadOnlyCollectionJsonConverter`2[Nest.TermVectorsResult,Nest.ITermVectors])]
-public IReadOnlyCollection<ITermVectors> Documents { get; internal set; }
-```
-
-**public property Nest.NodesHotThreadsResponse.HotThreads** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<HotThreadInformation> HotThreads { get; }`  
-5.x: `public IReadOnlyCollection<HotThreadInformation> HotThreads { get; internal set; }`  
-
-**public property Nest.NodesInfoResponse.Nodes** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, NodeInfo> Nodes { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.NodeInfo])]
-public IReadOnlyDictionary<string, NodeInfo> Nodes { get; internal set; }
-```
-
-**public property Nest.NodesStatsResponse.Nodes** *Declaration changed (Breaking)*
-
-2.x: `public Dictionary<string, NodeStats> Nodes { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, NodeStats> Nodes { get; internal set; }`  
-
-**public property Nest.PercolateResponse.Matches** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("matches")]
-public IEnumerable<PercolatorMatch> Matches { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-public IReadOnlyCollection<PercolatorMatch> Matches { get; internal set; }
-```
-
-**public property Nest.PercolatorMatch.Highlight** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("highlight")]
-public Dictionary<string, IList<string>> Highlight { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-public IReadOnlyDictionary<string, IList<string>> Highlight { get; internal set; }
-```
-
-**public property Nest.Profile.Shards** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("shards")]
-public IEnumerable<ShardProfile> Shards { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("shards")]
-public IReadOnlyCollection<ShardProfile> Shards { get; internal set; }
-```
-
-**public property Nest.RecoveryStatus.Shards** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("shards")]
-public IEnumerable<ShardRecovery> Shards { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("shards")]
-public IReadOnlyCollection<ShardRecovery> Shards { get; internal set; }
-```
-
-**public property Nest.RecoveryStatusResponse.Indices** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, RecoveryStatus> Indices { get; set; }
-```
-
-5.x
-```csharp
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.RecoveryStatus])]
-public IReadOnlyDictionary<string, RecoveryStatus> Indices { get; internal set; }
-```
-
-**public property Nest.ReindexNode.Attributes** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("attributes")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, string> Attributes { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("attributes")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,System.String])]
-public IReadOnlyDictionary<string, string> Attributes { get; internal set; }
-```
-
-**public property Nest.ReindexNode.Tasks** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("tasks")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<TaskId, ReindexTask> Tasks { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("tasks")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[Nest.TaskId,Nest.ReindexTask])]
-public IReadOnlyDictionary<TaskId, ReindexTask> Tasks { get; internal set; }
-```
-
-**public property Nest.ReindexOnServerResponse.Failures** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<BulkIndexByScrollFailure> Failures { get; internal set; }`  
-5.x: `public IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; internal set; }`  
-
-**public property Nest.ReindexRethrottleResponse.Nodes** *Declaration changed (Breaking)*
-
-2.x: `public Dictionary<string, ReindexNode> Nodes { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, ReindexNode> Nodes { get; internal set; }`  
-
-**public property Nest.RoutingNodesState.Nodes** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("nodes")]
-public Dictionary<string, List<RoutingShard>> Nodes { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("nodes")]
-public IReadOnlyDictionary<string, List<RoutingShard>> Nodes { get; internal set; }
-```
-
-**public property Nest.RoutingNodesState.Unassigned** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("unassigned")]
-public List<RoutingShard> Unassigned { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("unassigned")]
-public IReadOnlyCollection<RoutingShard> Unassigned { get; internal set; }
-```
-
-**public property Nest.RoutingTableState.Indices** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("indices")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, IndexRoutingTable> Indices { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("indices")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.IndexRoutingTable])]
-public IReadOnlyDictionary<string, IndexRoutingTable> Indices { get; internal set; }
-```
-
-**public property Nest.SearchProfile.Collector** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("collector")]
-public IEnumerable<Collector> Collector { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("collector")]
-public IReadOnlyCollection<Collector> Collector { get; internal set; }
-```
-
-**public property Nest.SearchProfile.Query** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("query")]
-public IEnumerable<QueryProfile> Query { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("query")]
-public IReadOnlyCollection<QueryProfile> Query { get; internal set; }
-```
-
-**public property Nest.SearchResponse&lt;T&gt;.Aggregations** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public IDictionary<string, IAggregate> Aggregations { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.IAggregate])]
-public IReadOnlyDictionary<string, IAggregate> Aggregations { get; internal set; }
-```
-
-**public property Nest.SearchResponse&lt;T&gt;.Documents** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonIgnoreAttribute]
-public IEnumerable<T> Documents { get; }
-```
-
-5.x
-```csharp
-[JsonIgnoreAttribute]
-public IReadOnlyCollection<T> Documents { get; }
-```
-
-**public property Nest.SearchResponse&lt;T&gt;.Fields** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<FieldValues> Fields { get; }`  
-5.x: `public IReadOnlyCollection<FieldValues> Fields { get; }`  
-
-**public property Nest.SearchResponse&lt;T&gt;.Hits** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonIgnoreAttribute]
-public IEnumerable<IHit<T>> Hits { get; }
-```
-
-5.x
-```csharp
-[JsonIgnoreAttribute]
-public IReadOnlyCollection<IHit<T>> Hits { get; }
-```
-
-**public property Nest.SearchResponse&lt;T&gt;.Suggest** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-public IDictionary<string, Suggest[]> Suggest { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-public IReadOnlyDictionary<string, Suggest`1[]> Suggest { get; internal set; }
-```
-
-**public property Nest.SearchShardsResponse.Nodes** *Declaration changed (Breaking)*
-
-2.x: `public IDictionary<string, SearchNode> Nodes { get; internal set; }`  
-5.x: `public IReadOnlyDictionary<string, SearchNode> Nodes { get; internal set; }`  
-
-**public property Nest.SearchShardsResponse.Shards** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<IEnumerable<SearchShard>> Shards { get; internal set; }`  
-5.x: `public IReadOnlyCollection<IReadOnlyCollection<SearchShard>> Shards { get; internal set; }`  
-
-**public property Nest.SegmentsResponse.Indices** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, IndexSegment> Indices { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.IndexSegment])]
-public IReadOnlyDictionary<string, IndexSegment> Indices { get; internal set; }
-```
-
-**public property Nest.ShardProfile.Searches** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("searches")]
-public IEnumerable<SearchProfile> Searches { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("searches")]
-public IReadOnlyCollection<SearchProfile> Searches { get; internal set; }
-```
-
-**public property Nest.ShardsMetaData.Failures** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("failures")]
-public IEnumerable<ShardFailure> Failures { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("failures")]
-public IReadOnlyCollection<ShardFailure> Failures { get; internal set; }
-```
-
-**public property Nest.ShardsSegment.Segments** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, Segment> Segments { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.Segment])]
-public IReadOnlyDictionary<string, Segment> Segments { get; internal set; }
-```
-
-**public property Nest.ShardStore.Attributes** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("attributes")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, object> Attributes { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("attributes")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,System.Object])]
-public IReadOnlyDictionary<string, object> Attributes { get; internal set; }
-```
-
-**public property Nest.ShardStoreWrapper.Stores** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public IEnumerable<ShardStore> Stores { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-public IReadOnlyCollection<ShardStore> Stores { get; internal set; }
-```
-
-**public property Nest.Snapshot.Failures** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonIgnoreAttribute]
-public IEnumerable<string> Failures { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("failures")]
-public IReadOnlyCollection<SnapshotShardFailure> Failures { get; internal set; }
-```
-
-**public property Nest.Snapshot.Indices** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("indices")]
-public IEnumerable<IndexName> Indices { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("indices")]
-public IReadOnlyCollection<IndexName> Indices { get; internal set; }
-```
-
-**public property Nest.SnapshotIndexStats.Shards** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("shards")]
-public IDictionary<string, SnapshotShardsStats> Shards { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("shards")]
-public IReadOnlyDictionary<string, SnapshotShardsStats> Shards { get; internal set; }
-```
-
-**public property Nest.SnapshotRestore.Indices** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("indices")]
-public IEnumerable<IndexName> Indices { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("indices")]
-public IReadOnlyCollection<IndexName> Indices { get; internal set; }
-```
-
-**public property Nest.SnapshotStatus.Indices** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("indices")]
-public IDictionary<string, SnapshotIndexStats> Indices { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("indices")]
-public IReadOnlyDictionary<string, SnapshotIndexStats> Indices { get; internal set; }
-```
-
-**public property Nest.SnapshotStatusResponse.Snapshots** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("snapshots")]
-public IEnumerable<SnapshotStatus> Snapshots { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("snapshots")]
-public IReadOnlyCollection<SnapshotStatus> Snapshots { get; internal set; }
-```
-
-**public property Nest.TaskExecutingNode.Tasks** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("tasks")]
-public IDictionary<TaskId, TaskState> Tasks { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("tasks")]
-public IReadOnlyDictionary<TaskId, TaskState> Tasks { get; internal set; }
-```
-
-**public property Nest.TermVector.Terms** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("terms")]
-public IDictionary<string, TermVectorTerm> Terms { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("terms")]
-public IReadOnlyDictionary<string, TermVectorTerm> Terms { get; internal set; }
-```
-
-**public property Nest.TermVectorsResponse.TermVectors** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("term_vectors")]
-public IDictionary<string, TermVector> TermVectors { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("term_vectors")]
-public IReadOnlyDictionary<string, TermVector> TermVectors { get; internal set; }
-```
-
-**public property Nest.TermVectorTerm.Tokens** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("tokens")]
-public IEnumerable<Token> Tokens { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("tokens")]
-public IReadOnlyCollection<Token> Tokens { get; internal set; }
-```
-
-**public method Nest.TopHitsAggregate.Documents&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<T> Documents<T>(JsonSerializer serializer)`  
-5.x: `public IReadOnlyCollection<T> Documents<T>(JsonSerializer serializer)`  
-
-**public method Nest.TopHitsAggregate.Hits&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<Hit<T>> Hits<T>(JsonSerializer serializer)`  
-5.x: `public IReadOnlyCollection<Hit<T>> Hits<T>(JsonSerializer serializer)`  
-
-**public property Nest.TypeFieldMappings.Mappings** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("mappings")]
-public Dictionary<string, FieldMappingProperties> Mappings { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("mappings")]
-public IReadOnlyDictionary<string, FieldMappingProperties> Mappings { get; internal set; }
-```
-
-**public property Nest.UpdateByQueryResponse.Failures** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<BulkIndexByScrollFailure> Failures { get; internal set; }`  
-5.x: `public IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; internal set; }`  
-
-**public property Nest.UpgradeStatusResponse.Upgrades** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public Dictionary<string, UpgradeStatus> Upgrades { get; set; }
-```
-
-5.x
-```csharp
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,Nest.UpgradeStatus])]
-public IReadOnlyDictionary<string, UpgradeStatus> Upgrades { get; internal set; }
-```
-
-**public property Nest.ValidateQueryResponse.Explanations** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-public IList<ValidationExplanation> Explanations { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-public IReadOnlyCollection<ValidationExplanation> Explanations { get; internal set; }
-```
-
-**public property Nest.VerifyRepositoryResponse.Nodes** *Declaration changed (Breaking)*
-
-2.x: `public Dictionary<string, CompactNodeInfo> Nodes { get; set; }`  
-5.x: `public IReadOnlyDictionary<string, CompactNodeInfo> Nodes { get; internal set; }`  
-
-**public property Nest.Watch.Meta** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("meta")]
-public IDictionary<string, object> Meta { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("meta")]
-public IReadOnlyDictionary<string, object> Meta { get; internal set; }
-```
-
-**public property Nest.WatcherStatsResponse.CurrentWatches** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<WatchRecordStats> CurrentWatches { get; internal set; }`  
-5.x: `public IReadOnlyCollection<WatchRecordStats> CurrentWatches { get; internal set; }`  
-
-**public property Nest.WatcherStatsResponse.QueuedWatches** *Declaration changed (Breaking)*
-
-2.x: `public IEnumerable<WatchRecordQueuedStats> QueuedWatches { get; internal set; }`  
-5.x: `public IReadOnlyCollection<WatchRecordQueuedStats> QueuedWatches { get; internal set; }`  
-
-**public property Nest.WatchRecord.Messages** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("messages")]
-public IEnumerable<string> Messages { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("messages")]
-public IReadOnlyCollection<string> Messages { get; set; }
-```
-
-**public property Nest.WatchRecord.Metadata** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("metadata")]
-public IDictionary<string, object> Metadata { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("metadata")]
-public IReadOnlyDictionary<string, object> Metadata { get; set; }
-```
-
-**public property Nest.WatchStatus.Actions** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("actions")]
-public Dictionary<string, ActionStatus> Actions { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("actions")]
-public IReadOnlyDictionary<string, ActionStatus> Actions { get; set; }
-```
+##Now IReadOnlyDictionary
+**public property Nest.ActivationStatus.Actions**  
+**public property Nest.AggregationsHelper.Aggregations**  
+**public property Nest.AuthenticateResponse.Metadata**  
+**public property Nest.BucketAggregate.Meta**  
+**public property Nest.BucketAggregateBase.Meta**  
+**public property Nest.ClearCachedRealmsResponse.Nodes**  
+**public property Nest.ClearCachedRolesResponse.Nodes**  
+**public property Nest.ClusterGetSettingsResponse.Persistent**  
+**public property Nest.ClusterGetSettingsResponse.Transient**  
+**public property Nest.ClusterHealthResponse.Indices**  
+**public property Nest.ClusterPutSettingsResponse.Persistent**  
+**public property Nest.ClusterPutSettingsResponse.Transient**  
+**public property Nest.ClusterRerouteState.Nodes**  
+**public property Nest.ClusterStateResponse.Nodes**  
+**public property Nest.ExecutionResultInput.Payload**  
+**public property Nest.FieldMapping.Mapping**  
+**public property Nest.FieldStats.Fields**  
+**public property Nest.FieldStatsResponse.Indices**  
+**public property Nest.GetFieldMappingResponse.Indices**  
+**public property Nest.GetIndexResponse.Indices**  
+**public property Nest.GetIndexSettingsResponse.Indices**  
+**public property Nest.GetIndexTemplateResponse.TemplateMappings**  
+**public property Nest.GetMappingResponse.Mappings**  
+**public property Nest.GetRepositoryResponse.Repositories**  
+**public property Nest.GetRoleResponse.Roles**  
+**public property Nest.GetUserResponse.Users**  
+**public property Nest.Hit&lt;T&gt;.InnerHits**  
+**public property Nest.IAggregate.Meta**  
+**public property Nest.IAuthenticateResponse.Metadata**  
+**public property Nest.IClearCachedRealmsResponse.Nodes**  
+**public property Nest.IClearCachedRolesResponse.Nodes**  
+**public property Nest.IClusterGetSettingsResponse.Persistent**  
+**public property Nest.IClusterGetSettingsResponse.Transient**  
+**public property Nest.IClusterHealthResponse.Indices**  
+**public property Nest.IClusterPutSettingsResponse.Persistent**  
+**public property Nest.IClusterPutSettingsResponse.Transient**  
+**public property Nest.IClusterStateResponse.Nodes**  
+**public property Nest.IDictionaryResponse&lt;TKey, TValue&gt;.BackingDictionary**  
+**public property Nest.IFieldStatsResponse.Indices**  
+**public property Nest.IGetFieldMappingResponse.Indices**  
+**public property Nest.IGetIndexResponse.Indices**  
+**public property Nest.IGetIndexSettingsResponse.Indices**  
+**public property Nest.IGetIndexTemplateResponse.TemplateMappings**  
+**public property Nest.IGetMappingResponse.Mappings**  
+**public property Nest.IGetRepositoryResponse.Repositories**  
+**public property Nest.IGetRoleResponse.Roles**  
+**public property Nest.IGetUserResponse.Users**  
+**public property Nest.IHit&lt;T&gt;.InnerHits**  
+**public property Nest.IIndicesShardStoresResponse.Indices**  
+**public property Nest.IIndicesStatsResponse.Indices**  
+**public property Nest.IndexHealthStats.Shards**  
+**public property Nest.IndexingStats.Types**  
+**public property Nest.IndexRoutingTable.Shards**  
+**public property Nest.IndexSegment.Shards**  
+**public property Nest.IndicesShardStores.Shards**  
+**public property Nest.IndicesShardStoresResponse.Indices**  
+**public property Nest.IndicesStatsResponse.Indices**  
+**public property Nest.INodesInfoResponse.Nodes**  
+**public property Nest.INodesStatsResponse.Nodes**  
+**public property Nest.IRecoveryStatusResponse.Indices**  
+**public property Nest.IReindexRethrottleResponse.Nodes**  
+**public property Nest.ISearchResponse&lt;T&gt;.Aggregations**  
+**public property Nest.ISearchResponse&lt;T&gt;.Suggest**  
+**public property Nest.ISearchShardsResponse.Nodes**  
+**public property Nest.ISegmentsResponse.Indices**  
+**public property Nest.IUpgradeStatusResponse.Upgrades**  
+**public property Nest.IVerifyRepositoryResponse.Nodes**  
+**public property Nest.MetadataState.Indices**  
+**public property Nest.MetadataState.Templates**  
+**public property Nest.MetricAggregateBase.Meta**  
+**public property Nest.NodesInfoResponse.Nodes**  
+**public property Nest.NodesStatsResponse.Nodes**  
+**public property Nest.PercolatorMatch.Highlight**  
+**public property Nest.RecoveryStatusResponse.Indices**  
+**public property Nest.ReindexNode.Attributes**  
+**public property Nest.ReindexNode.Tasks**  
+**public property Nest.ReindexRethrottleResponse.Nodes**  
+**public property Nest.RoutingNodesState.Nodes**  
+**public property Nest.RoutingTableState.Indices**  
+**public property Nest.SearchResponse&lt;T&gt;.Aggregations**  
+**public property Nest.SearchResponse&lt;T&gt;.Suggest**  
+**public property Nest.SearchShardsResponse.Nodes**  
+**public property Nest.SegmentsResponse.Indices**  
+**public property Nest.ShardsSegment.Segments**  
+**public property Nest.ShardStore.Attributes**  
+**public property Nest.SnapshotIndexStats.Shards**  
+**public property Nest.SnapshotStatus.Indices**  
+**public property Nest.TaskExecutingNode.Tasks**  
+**public property Nest.TermVector.Terms**  
+**public property Nest.TermVectorsResponse.TermVectors**  
+**public property Nest.TypeFieldMappings.Mappings**  
+**public property Nest.UpgradeStatusResponse.Upgrades**  
+**public property Nest.VerifyRepositoryResponse.Nodes**  
+**public property Nest.Watch.Meta**  
+**public property Nest.WatchRecord.Metadata**  
+**public property Nest.WatchStatus.Actions**  
+
+
+##Now IReadOnlyCollection
+**public property Nest.AnalyzeResponse.Tokens**  
+**public property Nest.AuthenticateResponse.Roles**  
+**public property Nest.BucketAggregate.Items**  
+**public property Nest.BulkResponse.Items**  
+**public property Nest.CatResponse&lt;TCatRecord&gt;.Records**  
+**public property Nest.ClusterJvm.Versions**  
+**public property Nest.ClusterNodesStats.Plugins**  
+**public property Nest.ClusterNodesStats.Versions**  
+**public property Nest.ClusterOperatingSystemStats.Names**  
+**public property Nest.ClusterPendingTasksResponse.Tasks**  
+**public property Nest.ClusterRerouteResponse.Explanations**  
+**public property Nest.Collector.Children**  
+**public property Nest.ExecutionResult.Actions**  
+**public property Nest.Explanation.Details**  
+**public property Nest.ExplanationDetail.Details**  
+**public property Nest.GetSnapshotResponse.Snapshots**  
+**public property Nest.GraphExploreResponse.Connections**  
+**public property Nest.GraphExploreResponse.Failures**  
+**public property Nest.GraphExploreResponse.Vertices**  
+**public property Nest.HighlightHit.Highlights**  
+**public property Nest.Hit&lt;T&gt;.MatchedQueries**  
+**public property Nest.Hit&lt;T&gt;.Sorts**  
+**public property Nest.HitsMetaData&lt;T&gt;.Hits**  
+**public property Nest.HotThreadInformation.Hosts**  
+**public property Nest.HotThreadInformation.Threads**  
+**public property Nest.IAnalyzeResponse.Tokens**  
+**public property Nest.IAuthenticateResponse.Roles**  
+**public property Nest.IBulkResponse.Items**  
+**public property Nest.ICatResponse&lt;TCatRecord&gt;.Records**  
+**public property Nest.IClusterPendingTasksResponse.Tasks**  
+**public property Nest.IClusterRerouteResponse.Explanations**  
+**public property Nest.IGetSnapshotResponse.Snapshots**  
+**public property Nest.IGraphExploreResponse.Connections**  
+**public property Nest.IGraphExploreResponse.Failures**  
+**public property Nest.IGraphExploreResponse.Vertices**  
+**public property Nest.IHit&lt;T&gt;.MatchedQueries**  
+**public property Nest.IHit&lt;T&gt;.Sorts**  
+**public property Nest.IMultiGetResponse.Documents**  
+**public property Nest.IMultiTermVectorsResponse.Documents**  
+**public property Nest.INodesHotThreadsResponse.HotThreads**  
+**public property Nest.IPercolateResponse.Matches**  
+**public property Nest.IReindexOnServerResponse.Failures**  
+**public property Nest.ISearchResponse&lt;T&gt;.Documents**  
+**public property Nest.ISearchResponse&lt;T&gt;.Fields**  
+**public property Nest.ISearchResponse&lt;T&gt;.Hits**  
+**public property Nest.ISearchShardsResponse.Shards**  
+**public property Nest.ISnapshotStatusResponse.Snapshots**  
+**public property Nest.IUpdateByQueryResponse.Failures**  
+**public property Nest.IValidateQueryResponse.Explanations**  
+**public property Nest.IWatcherStatsResponse.CurrentWatches**  
+**public property Nest.IWatcherStatsResponse.QueuedWatches**  
+**public property Nest.LicenseAcknowledgement.License**  
+**public property Nest.MultiBucketAggregate&lt;TBucket&gt;.Buckets**  
+**public property Nest.MultiGetResponse.Documents**  
+**public property Nest.MultiTermVectorsResponse.Documents**  
+**public property Nest.NodesHotThreadsResponse.HotThreads**  
+**public property Nest.PercolateResponse.Matches**  
+**public property Nest.Profile.Shards**  
+**public property Nest.RecoveryStatus.Shards**  
+**public property Nest.ReindexOnServerResponse.Failures**  
+**public property Nest.RoutingNodesState.Unassigned**  
+**public property Nest.SearchProfile.Collector**  
+**public property Nest.SearchProfile.Query**  
+**public property Nest.SearchResponse&lt;T&gt;.Documents**  
+**public property Nest.SearchResponse&lt;T&gt;.Fields**  
+**public property Nest.SearchResponse&lt;T&gt;.Hits**  
+**public property Nest.SearchShardsResponse.Shards**  
+**public property Nest.ShardProfile.Searches**  
+**public property Nest.ShardsMetaData.Failures**  
+**public property Nest.ShardStoreWrapper.Stores**  
+**public property Nest.Snapshot.Failures**  
+**public property Nest.Snapshot.Indices**  
+**public property Nest.SnapshotRestore.Indices**  
+**public property Nest.SnapshotStatusResponse.Snapshots**  
+**public property Nest.TermVectorTerm.Tokens**  
+**public method Nest.TopHitsAggregate.Documents&lt;T&gt;**  
+**public method Nest.TopHitsAggregate.Hits&lt;T&gt;**  
+**public property Nest.UpdateByQueryResponse.Failures**  
+**public property Nest.ValidateQueryResponse.Explanations**  
+**public property Nest.WatcherStatsResponse.CurrentWatches**  
+**public property Nest.WatcherStatsResponse.QueuedWatches**  
+**public property Nest.WatchRecord.Messages**  
 
 #CancellationToken
-** Nest.BulkAllObservable&lt;T&gt;..ctor**  
-** Nest.DeleteManyExtensions.DeleteManyAsync&lt;T&gt;**  
-** Nest.ElasticClient.AcknowledgeWatchAsync**  
-** Nest.ElasticClient.AcknowledgeWatchAsync**  
-** Nest.ElasticClient.ActivateWatchAsync**  
-** Nest.ElasticClient.ActivateWatchAsync**  
-** Nest.ElasticClient.AliasAsync**  
-** Nest.ElasticClient.AliasAsync**  
-** Nest.ElasticClient.AliasExistsAsync**  
-** Nest.ElasticClient.AliasExistsAsync**  
-** Nest.ElasticClient.AnalyzeAsync**  
-** Nest.ElasticClient.AnalyzeAsync**  
-** Nest.ElasticClient.AuthenticateAsync**  
-** Nest.ElasticClient.AuthenticateAsync**  
-** Nest.ElasticClient.BulkAsync**  
-** Nest.ElasticClient.BulkAsync**  
-** Nest.ElasticClient.CatAliasesAsync**  
-** Nest.ElasticClient.CatAliasesAsync**  
-** Nest.ElasticClient.CatAllocationAsync**  
-** Nest.ElasticClient.CatAllocationAsync**  
-** Nest.ElasticClient.CatCountAsync**  
-** Nest.ElasticClient.CatCountAsync**  
-** Nest.ElasticClient.CatFielddataAsync**  
-** Nest.ElasticClient.CatFielddataAsync**  
-** Nest.ElasticClient.CatHealthAsync**  
-** Nest.ElasticClient.CatHealthAsync**  
-** Nest.ElasticClient.CatHelpAsync**  
-** Nest.ElasticClient.CatHelpAsync**  
-** Nest.ElasticClient.CatIndicesAsync**  
-** Nest.ElasticClient.CatIndicesAsync**  
-** Nest.ElasticClient.CatMasterAsync**  
-** Nest.ElasticClient.CatMasterAsync**  
-** Nest.ElasticClient.CatNodeAttributesAsync**  
-** Nest.ElasticClient.CatNodeAttributesAsync**  
-** Nest.ElasticClient.CatNodesAsync**  
-** Nest.ElasticClient.CatNodesAsync**  
-** Nest.ElasticClient.CatPendingTasksAsync**  
-** Nest.ElasticClient.CatPendingTasksAsync**  
-** Nest.ElasticClient.CatPluginsAsync**  
-** Nest.ElasticClient.CatPluginsAsync**  
-** Nest.ElasticClient.CatRecoveryAsync**  
-** Nest.ElasticClient.CatRecoveryAsync**  
-** Nest.ElasticClient.CatRepositoriesAsync**  
-** Nest.ElasticClient.CatRepositoriesAsync**  
-** Nest.ElasticClient.CatSegmentsAsync**  
-** Nest.ElasticClient.CatSegmentsAsync**  
-** Nest.ElasticClient.CatShardsAsync**  
-** Nest.ElasticClient.CatShardsAsync**  
-** Nest.ElasticClient.CatSnapshotsAsync**  
-** Nest.ElasticClient.CatSnapshotsAsync**  
-** Nest.ElasticClient.CatThreadPoolAsync**  
-** Nest.ElasticClient.CatThreadPoolAsync**  
-** Nest.ElasticClient.ClearCacheAsync**  
-** Nest.ElasticClient.ClearCacheAsync**  
-** Nest.ElasticClient.ClearCachedRealmsAsync**  
-** Nest.ElasticClient.ClearCachedRealmsAsync**  
-** Nest.ElasticClient.ClearCachedRolesAsync**  
-** Nest.ElasticClient.ClearCachedRolesAsync**  
-** Nest.ElasticClient.ClearScrollAsync**  
-** Nest.ElasticClient.ClearScrollAsync**  
-** Nest.ElasticClient.CloseIndexAsync**  
-** Nest.ElasticClient.CloseIndexAsync**  
-** Nest.ElasticClient.ClusterGetSettingsAsync**  
-** Nest.ElasticClient.ClusterGetSettingsAsync**  
-** Nest.ElasticClient.ClusterHealthAsync**  
-** Nest.ElasticClient.ClusterHealthAsync**  
-** Nest.ElasticClient.ClusterPendingTasksAsync**  
-** Nest.ElasticClient.ClusterPendingTasksAsync**  
-** Nest.ElasticClient.ClusterPutSettingsAsync**  
-** Nest.ElasticClient.ClusterPutSettingsAsync**  
-** Nest.ElasticClient.ClusterRerouteAsync**  
-** Nest.ElasticClient.ClusterRerouteAsync**  
-** Nest.ElasticClient.ClusterStateAsync**  
-** Nest.ElasticClient.ClusterStateAsync**  
-** Nest.ElasticClient.ClusterStatsAsync**  
-** Nest.ElasticClient.ClusterStatsAsync**  
-** Nest.ElasticClient.CountAsync&lt;T&gt;**  
-** Nest.ElasticClient.CountAsync&lt;T&gt;**  
-** Nest.ElasticClient.CreateIndexAsync**  
-** Nest.ElasticClient.CreateIndexAsync**  
-** Nest.ElasticClient.CreateRepositoryAsync**  
-** Nest.ElasticClient.CreateRepositoryAsync**  
-** Nest.ElasticClient.DeactivateWatchAsync**  
-** Nest.ElasticClient.DeactivateWatchAsync**  
-** Nest.ElasticClient.DeleteAliasAsync**  
-** Nest.ElasticClient.DeleteAliasAsync**  
-** Nest.ElasticClient.DeleteAsync**  
-** Nest.ElasticClient.DeleteAsync&lt;T&gt;**  
-** Nest.ElasticClient.DeleteByQueryAsync**  
-** Nest.ElasticClient.DeleteByQueryAsync&lt;T&gt;**  
-** Nest.ElasticClient.DeleteIndexAsync**  
-** Nest.ElasticClient.DeleteIndexAsync**  
-** Nest.ElasticClient.DeleteIndexTemplateAsync**  
-** Nest.ElasticClient.DeleteIndexTemplateAsync**  
-** Nest.ElasticClient.DeleteLicenseAsync**  
-** Nest.ElasticClient.DeleteLicenseAsync**  
-** Nest.ElasticClient.DeleteRepositoryAsync**  
-** Nest.ElasticClient.DeleteRepositoryAsync**  
-** Nest.ElasticClient.DeleteRoleAsync**  
-** Nest.ElasticClient.DeleteRoleAsync**  
-** Nest.ElasticClient.DeleteScriptAsync**  
-** Nest.ElasticClient.DeleteScriptAsync**  
-** Nest.ElasticClient.DeleteSearchTemplateAsync**  
-** Nest.ElasticClient.DeleteSearchTemplateAsync**  
-** Nest.ElasticClient.DeleteSnapshotAsync**  
-** Nest.ElasticClient.DeleteSnapshotAsync**  
-** Nest.ElasticClient.DeleteUserAsync**  
-** Nest.ElasticClient.DeleteUserAsync**  
-** Nest.ElasticClient.DeleteWatchAsync**  
-** Nest.ElasticClient.DeleteWatchAsync**  
-** Nest.ElasticClient.DocumentExistsAsync**  
-** Nest.ElasticClient.DocumentExistsAsync&lt;T&gt;**  
-** Nest.ElasticClient.ExecuteWatchAsync**  
-** Nest.ElasticClient.ExecuteWatchAsync**  
-** Nest.ElasticClient.ExplainAsync&lt;T&gt;**  
-** Nest.ElasticClient.ExplainAsync&lt;T&gt;**  
-** Nest.ElasticClient.FieldStatsAsync**  
-** Nest.ElasticClient.FieldStatsAsync**  
-** Nest.ElasticClient.FlushAsync**  
-** Nest.ElasticClient.FlushAsync**  
-** Nest.ElasticClient.ForceMergeAsync**  
-** Nest.ElasticClient.ForceMergeAsync**  
-** Nest.ElasticClient.GetAliasAsync**  
-** Nest.ElasticClient.GetAliasAsync**  
-** Nest.ElasticClient.GetAsync&lt;T&gt;**  
-** Nest.ElasticClient.GetAsync&lt;T&gt;**  
-** Nest.ElasticClient.GetFieldMappingAsync**  
-** Nest.ElasticClient.GetFieldMappingAsync&lt;T&gt;**  
-** Nest.ElasticClient.GetIndexAsync**  
-** Nest.ElasticClient.GetIndexAsync**  
-** Nest.ElasticClient.GetIndexSettingsAsync**  
-** Nest.ElasticClient.GetIndexSettingsAsync**  
-** Nest.ElasticClient.GetIndexTemplateAsync**  
-** Nest.ElasticClient.GetIndexTemplateAsync**  
-** Nest.ElasticClient.GetLicenseAsync**  
-** Nest.ElasticClient.GetLicenseAsync**  
-** Nest.ElasticClient.GetMappingAsync**  
-** Nest.ElasticClient.GetMappingAsync&lt;T&gt;**  
-** Nest.ElasticClient.GetRepositoryAsync**  
-** Nest.ElasticClient.GetRepositoryAsync**  
-** Nest.ElasticClient.GetRoleAsync**  
-** Nest.ElasticClient.GetRoleAsync**  
-** Nest.ElasticClient.GetScriptAsync**  
-** Nest.ElasticClient.GetScriptAsync**  
-** Nest.ElasticClient.GetSearchTemplateAsync**  
-** Nest.ElasticClient.GetSearchTemplateAsync**  
-** Nest.ElasticClient.GetSnapshotAsync**  
-** Nest.ElasticClient.GetSnapshotAsync**  
-** Nest.ElasticClient.GetUserAsync**  
-** Nest.ElasticClient.GetUserAsync**  
-** Nest.ElasticClient.GetWatchAsync**  
-** Nest.ElasticClient.GetWatchAsync**  
-** Nest.ElasticClient.GraphExploreAsync**  
-** Nest.ElasticClient.GraphExploreAsync&lt;T&gt;**  
-** Nest.ElasticClient.IndexAsync**  
-** Nest.ElasticClient.IndexAsync&lt;T&gt;**  
-** Nest.ElasticClient.IndexExistsAsync**  
-** Nest.ElasticClient.IndexExistsAsync**  
-** Nest.ElasticClient.IndexTemplateExistsAsync**  
-** Nest.ElasticClient.IndexTemplateExistsAsync**  
-** Nest.ElasticClient.IndicesShardStoresAsync**  
-** Nest.ElasticClient.IndicesShardStoresAsync**  
-** Nest.ElasticClient.IndicesStatsAsync**  
-** Nest.ElasticClient.IndicesStatsAsync**  
-** Nest.ElasticClient.MapAsync**  
-** Nest.ElasticClient.MapAsync&lt;T&gt;**  
-** Nest.ElasticClient.MultiGetAsync**  
-** Nest.ElasticClient.MultiGetAsync**  
-** Nest.ElasticClient.MultiPercolateAsync**  
-** Nest.ElasticClient.MultiPercolateAsync**  
-** Nest.ElasticClient.MultiSearchAsync**  
-** Nest.ElasticClient.MultiSearchAsync**  
-** Nest.ElasticClient.MultiTermVectorsAsync**  
-** Nest.ElasticClient.MultiTermVectorsAsync**  
-** Nest.ElasticClient.NodesHotThreadsAsync**  
-** Nest.ElasticClient.NodesHotThreadsAsync**  
-** Nest.ElasticClient.NodesInfoAsync**  
-** Nest.ElasticClient.NodesInfoAsync**  
-** Nest.ElasticClient.NodesStatsAsync**  
-** Nest.ElasticClient.NodesStatsAsync**  
-** Nest.ElasticClient.OpenIndexAsync**  
-** Nest.ElasticClient.OpenIndexAsync**  
-** Nest.ElasticClient.PercolateAsync&lt;T&gt;**  
-** Nest.ElasticClient.PercolateAsync&lt;T&gt;**  
-** Nest.ElasticClient.PercolateCountAsync&lt;T&gt;**  
-** Nest.ElasticClient.PercolateCountAsync&lt;T&gt;**  
-** Nest.ElasticClient.PingAsync**  
-** Nest.ElasticClient.PingAsync**  
-** Nest.ElasticClient.PostLicenseAsync**  
-** Nest.ElasticClient.PostLicenseAsync**  
-** Nest.ElasticClient.PutAliasAsync**  
-** Nest.ElasticClient.PutAliasAsync**  
-** Nest.ElasticClient.PutIndexTemplateAsync**  
-** Nest.ElasticClient.PutIndexTemplateAsync**  
-** Nest.ElasticClient.PutRoleAsync**  
-** Nest.ElasticClient.PutRoleAsync**  
-** Nest.ElasticClient.PutScriptAsync**  
-** Nest.ElasticClient.PutScriptAsync**  
-** Nest.ElasticClient.PutSearchTemplateAsync**  
-** Nest.ElasticClient.PutSearchTemplateAsync**  
-** Nest.ElasticClient.PutUserAsync**  
-** Nest.ElasticClient.PutUserAsync**  
-** Nest.ElasticClient.PutWatchAsync**  
-** Nest.ElasticClient.PutWatchAsync**  
-** Nest.ElasticClient.RecoveryStatusAsync**  
-** Nest.ElasticClient.RecoveryStatusAsync**  
-** Nest.ElasticClient.RefreshAsync**  
-** Nest.ElasticClient.RefreshAsync**  
-** Nest.ElasticClient.RegisterPercolatorAsync**  
-** Nest.ElasticClient.RegisterPercolatorAsync&lt;T&gt;**  
-** Nest.ElasticClient.Reindex&lt;T&gt;**  
-** Nest.ElasticClient.Reindex&lt;T&gt;**  
-** Nest.ElasticClient.ReindexOnServerAsync**  
-** Nest.ElasticClient.ReindexOnServerAsync**  
-** Nest.ElasticClient.RenderSearchTemplateAsync**  
-** Nest.ElasticClient.RenderSearchTemplateAsync**  
-** Nest.ElasticClient.RestartWatcherAsync**  
-** Nest.ElasticClient.RestartWatcherAsync**  
-** Nest.ElasticClient.RestoreAsync**  
-** Nest.ElasticClient.RestoreAsync**  
-** Nest.ElasticClient.RethrottleAsync**  
-** Nest.ElasticClient.RethrottleAsync**  
-** Nest.ElasticClient.RootNodeInfoAsync**  
-** Nest.ElasticClient.RootNodeInfoAsync**  
-** Nest.ElasticClient.ScrollAsync&lt;T&gt;**  
-** Nest.ElasticClient.ScrollAsync&lt;T&gt;**  
-** Nest.ElasticClient.SearchAsync&lt;T, TResult&gt;**  
-** Nest.ElasticClient.SearchAsync&lt;T, TResult&gt;**  
-** Nest.ElasticClient.SearchAsync&lt;T&gt;**  
-** Nest.ElasticClient.SearchAsync&lt;T&gt;**  
-** Nest.ElasticClient.SearchShardsAsync**  
-** Nest.ElasticClient.SearchShardsAsync&lt;T&gt;**  
-** Nest.ElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
-** Nest.ElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
-** Nest.ElasticClient.SearchTemplateAsync&lt;T&gt;**  
-** Nest.ElasticClient.SearchTemplateAsync&lt;T&gt;**  
-** Nest.ElasticClient.SegmentsAsync**  
-** Nest.ElasticClient.SegmentsAsync**  
-** Nest.ElasticClient.SnapshotAsync**  
-** Nest.ElasticClient.SnapshotAsync**  
-** Nest.ElasticClient.SnapshotStatusAsync**  
-** Nest.ElasticClient.SnapshotStatusAsync**  
-** Nest.ElasticClient.SourceAsync&lt;T&gt;**  
-** Nest.ElasticClient.SourceAsync&lt;T&gt;**  
-** Nest.ElasticClient.StartWatcherAsync**  
-** Nest.ElasticClient.StartWatcherAsync**  
-** Nest.ElasticClient.StopWatcherAsync**  
-** Nest.ElasticClient.StopWatcherAsync**  
-** Nest.ElasticClient.SuggestAsync&lt;T&gt;**  
-** Nest.ElasticClient.SyncedFlushAsync**  
-** Nest.ElasticClient.SyncedFlushAsync**  
-** Nest.ElasticClient.TermVectorsAsync&lt;T&gt;**  
-** Nest.ElasticClient.TermVectorsAsync&lt;T&gt;**  
-** Nest.ElasticClient.TypeExistsAsync**  
-** Nest.ElasticClient.TypeExistsAsync**  
-** Nest.ElasticClient.UnregisterPercolatorAsync**  
-** Nest.ElasticClient.UnregisterPercolatorAsync&lt;T&gt;**  
-** Nest.ElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
-** Nest.ElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
-** Nest.ElasticClient.UpdateAsync&lt;TDocument&gt;**  
-** Nest.ElasticClient.UpdateAsync&lt;TDocument&gt;**  
-** Nest.ElasticClient.UpdateByQueryAsync**  
-** Nest.ElasticClient.UpdateByQueryAsync&lt;T&gt;**  
-** Nest.ElasticClient.UpdateIndexSettingsAsync**  
-** Nest.ElasticClient.UpdateIndexSettingsAsync**  
-** Nest.ElasticClient.UpgradeAsync**  
-** Nest.ElasticClient.UpgradeAsync**  
-** Nest.ElasticClient.UpgradeStatusAsync**  
-** Nest.ElasticClient.UpgradeStatusAsync**  
-** Nest.ElasticClient.ValidateQueryAsync**  
-** Nest.ElasticClient.ValidateQueryAsync&lt;T&gt;**  
-** Nest.ElasticClient.VerifyRepositoryAsync**  
-** Nest.ElasticClient.VerifyRepositoryAsync**  
-** Nest.ElasticClient.WatcherStatsAsync**  
-** Nest.ElasticClient.WatcherStatsAsync**  
-** Nest.GetManyExtensions.GetManyAsync&lt;T&gt;**  
-** Nest.GetManyExtensions.GetManyAsync&lt;T&gt;**  
-** Nest.IElasticClient.AcknowledgeWatchAsync**  
-** Nest.IElasticClient.AcknowledgeWatchAsync**  
-** Nest.IElasticClient.ActivateWatchAsync**  
-** Nest.IElasticClient.ActivateWatchAsync**  
-** Nest.IElasticClient.AliasAsync**  
-** Nest.IElasticClient.AliasAsync**  
-** Nest.IElasticClient.AliasExistsAsync**  
-** Nest.IElasticClient.AliasExistsAsync**  
-** Nest.IElasticClient.AnalyzeAsync**  
-** Nest.IElasticClient.AnalyzeAsync**  
-** Nest.IElasticClient.AuthenticateAsync**  
-** Nest.IElasticClient.AuthenticateAsync**  
-** Nest.IElasticClient.BulkAsync**  
-** Nest.IElasticClient.BulkAsync**  
-** Nest.IElasticClient.CatAliasesAsync**  
-** Nest.IElasticClient.CatAliasesAsync**  
-** Nest.IElasticClient.CatAllocationAsync**  
-** Nest.IElasticClient.CatAllocationAsync**  
-** Nest.IElasticClient.CatCountAsync**  
-** Nest.IElasticClient.CatCountAsync**  
-** Nest.IElasticClient.CatFielddataAsync**  
-** Nest.IElasticClient.CatFielddataAsync**  
-** Nest.IElasticClient.CatHealthAsync**  
-** Nest.IElasticClient.CatHealthAsync**  
-** Nest.IElasticClient.CatHelpAsync**  
-** Nest.IElasticClient.CatHelpAsync**  
-** Nest.IElasticClient.CatIndicesAsync**  
-** Nest.IElasticClient.CatIndicesAsync**  
-** Nest.IElasticClient.CatMasterAsync**  
-** Nest.IElasticClient.CatMasterAsync**  
-** Nest.IElasticClient.CatNodeAttributesAsync**  
-** Nest.IElasticClient.CatNodeAttributesAsync**  
-** Nest.IElasticClient.CatNodesAsync**  
-** Nest.IElasticClient.CatNodesAsync**  
-** Nest.IElasticClient.CatPendingTasksAsync**  
-** Nest.IElasticClient.CatPendingTasksAsync**  
-** Nest.IElasticClient.CatPluginsAsync**  
-** Nest.IElasticClient.CatPluginsAsync**  
-** Nest.IElasticClient.CatRecoveryAsync**  
-** Nest.IElasticClient.CatRecoveryAsync**  
-** Nest.IElasticClient.CatRepositoriesAsync**  
-** Nest.IElasticClient.CatRepositoriesAsync**  
-** Nest.IElasticClient.CatSegmentsAsync**  
-** Nest.IElasticClient.CatSegmentsAsync**  
-** Nest.IElasticClient.CatShardsAsync**  
-** Nest.IElasticClient.CatShardsAsync**  
-** Nest.IElasticClient.CatSnapshotsAsync**  
-** Nest.IElasticClient.CatSnapshotsAsync**  
-** Nest.IElasticClient.CatThreadPoolAsync**  
-** Nest.IElasticClient.CatThreadPoolAsync**  
-** Nest.IElasticClient.ClearCacheAsync**  
-** Nest.IElasticClient.ClearCacheAsync**  
-** Nest.IElasticClient.ClearCachedRealmsAsync**  
-** Nest.IElasticClient.ClearCachedRealmsAsync**  
-** Nest.IElasticClient.ClearCachedRolesAsync**  
-** Nest.IElasticClient.ClearCachedRolesAsync**  
-** Nest.IElasticClient.ClearScrollAsync**  
-** Nest.IElasticClient.ClearScrollAsync**  
-** Nest.IElasticClient.CloseIndexAsync**  
-** Nest.IElasticClient.CloseIndexAsync**  
-** Nest.IElasticClient.ClusterGetSettingsAsync**  
-** Nest.IElasticClient.ClusterGetSettingsAsync**  
-** Nest.IElasticClient.ClusterHealthAsync**  
-** Nest.IElasticClient.ClusterHealthAsync**  
-** Nest.IElasticClient.ClusterPendingTasksAsync**  
-** Nest.IElasticClient.ClusterPendingTasksAsync**  
-** Nest.IElasticClient.ClusterPutSettingsAsync**  
-** Nest.IElasticClient.ClusterPutSettingsAsync**  
-** Nest.IElasticClient.ClusterRerouteAsync**  
-** Nest.IElasticClient.ClusterRerouteAsync**  
-** Nest.IElasticClient.ClusterStateAsync**  
-** Nest.IElasticClient.ClusterStateAsync**  
-** Nest.IElasticClient.ClusterStatsAsync**  
-** Nest.IElasticClient.ClusterStatsAsync**  
-** Nest.IElasticClient.CountAsync&lt;T&gt;**  
-** Nest.IElasticClient.CountAsync&lt;T&gt;**  
-** Nest.IElasticClient.CreateIndexAsync**  
-** Nest.IElasticClient.CreateIndexAsync**  
-** Nest.IElasticClient.CreateRepositoryAsync**  
-** Nest.IElasticClient.CreateRepositoryAsync**  
-** Nest.IElasticClient.DeactivateWatchAsync**  
-** Nest.IElasticClient.DeactivateWatchAsync**  
-** Nest.IElasticClient.DeleteAliasAsync**  
-** Nest.IElasticClient.DeleteAliasAsync**  
-** Nest.IElasticClient.DeleteAsync**  
-** Nest.IElasticClient.DeleteAsync&lt;T&gt;**  
-** Nest.IElasticClient.DeleteByQueryAsync**  
-** Nest.IElasticClient.DeleteByQueryAsync&lt;T&gt;**  
-** Nest.IElasticClient.DeleteIndexAsync**  
-** Nest.IElasticClient.DeleteIndexAsync**  
-** Nest.IElasticClient.DeleteIndexTemplateAsync**  
-** Nest.IElasticClient.DeleteIndexTemplateAsync**  
-** Nest.IElasticClient.DeleteLicenseAsync**  
-** Nest.IElasticClient.DeleteLicenseAsync**  
-** Nest.IElasticClient.DeleteRepositoryAsync**  
-** Nest.IElasticClient.DeleteRepositoryAsync**  
-** Nest.IElasticClient.DeleteRoleAsync**  
-** Nest.IElasticClient.DeleteRoleAsync**  
-** Nest.IElasticClient.DeleteScriptAsync**  
-** Nest.IElasticClient.DeleteScriptAsync**  
-** Nest.IElasticClient.DeleteSearchTemplateAsync**  
-** Nest.IElasticClient.DeleteSearchTemplateAsync**  
-** Nest.IElasticClient.DeleteSnapshotAsync**  
-** Nest.IElasticClient.DeleteSnapshotAsync**  
-** Nest.IElasticClient.DeleteUserAsync**  
-** Nest.IElasticClient.DeleteUserAsync**  
-** Nest.IElasticClient.DeleteWatchAsync**  
-** Nest.IElasticClient.DeleteWatchAsync**  
-** Nest.IElasticClient.DocumentExistsAsync**  
-** Nest.IElasticClient.DocumentExistsAsync&lt;T&gt;**  
-** Nest.IElasticClient.ExecuteWatchAsync**  
-** Nest.IElasticClient.ExecuteWatchAsync**  
-** Nest.IElasticClient.ExplainAsync&lt;T&gt;**  
-** Nest.IElasticClient.ExplainAsync&lt;T&gt;**  
-** Nest.IElasticClient.FieldStatsAsync**  
-** Nest.IElasticClient.FieldStatsAsync**  
-** Nest.IElasticClient.FlushAsync**  
-** Nest.IElasticClient.FlushAsync**  
-** Nest.IElasticClient.ForceMergeAsync**  
-** Nest.IElasticClient.ForceMergeAsync**  
-** Nest.IElasticClient.GetAliasAsync**  
-** Nest.IElasticClient.GetAliasAsync**  
-** Nest.IElasticClient.GetAsync&lt;T&gt;**  
-** Nest.IElasticClient.GetAsync&lt;T&gt;**  
-** Nest.IElasticClient.GetFieldMappingAsync**  
-** Nest.IElasticClient.GetFieldMappingAsync&lt;T&gt;**  
-** Nest.IElasticClient.GetIndexAsync**  
-** Nest.IElasticClient.GetIndexAsync**  
-** Nest.IElasticClient.GetIndexSettingsAsync**  
-** Nest.IElasticClient.GetIndexSettingsAsync**  
-** Nest.IElasticClient.GetIndexTemplateAsync**  
-** Nest.IElasticClient.GetIndexTemplateAsync**  
-** Nest.IElasticClient.GetLicenseAsync**  
-** Nest.IElasticClient.GetLicenseAsync**  
-** Nest.IElasticClient.GetMappingAsync**  
-** Nest.IElasticClient.GetMappingAsync&lt;T&gt;**  
-** Nest.IElasticClient.GetRepositoryAsync**  
-** Nest.IElasticClient.GetRepositoryAsync**  
-** Nest.IElasticClient.GetRoleAsync**  
-** Nest.IElasticClient.GetRoleAsync**  
-** Nest.IElasticClient.GetScriptAsync**  
-** Nest.IElasticClient.GetScriptAsync**  
-** Nest.IElasticClient.GetSearchTemplateAsync**  
-** Nest.IElasticClient.GetSearchTemplateAsync**  
-** Nest.IElasticClient.GetSnapshotAsync**  
-** Nest.IElasticClient.GetSnapshotAsync**  
-** Nest.IElasticClient.GetUserAsync**  
-** Nest.IElasticClient.GetUserAsync**  
-** Nest.IElasticClient.GetWatchAsync**  
-** Nest.IElasticClient.GetWatchAsync**  
-** Nest.IElasticClient.GraphExploreAsync**  
-** Nest.IElasticClient.GraphExploreAsync&lt;T&gt;**  
-** Nest.IElasticClient.IndexAsync**  
-** Nest.IElasticClient.IndexAsync&lt;T&gt;**  
-** Nest.IElasticClient.IndexExistsAsync**  
-** Nest.IElasticClient.IndexExistsAsync**  
-** Nest.IElasticClient.IndexTemplateExistsAsync**  
-** Nest.IElasticClient.IndexTemplateExistsAsync**  
-** Nest.IElasticClient.IndicesShardStoresAsync**  
-** Nest.IElasticClient.IndicesShardStoresAsync**  
-** Nest.IElasticClient.IndicesStatsAsync**  
-** Nest.IElasticClient.IndicesStatsAsync**  
-** Nest.IElasticClient.MapAsync**  
-** Nest.IElasticClient.MapAsync&lt;T&gt;**  
-** Nest.IElasticClient.MultiGetAsync**  
-** Nest.IElasticClient.MultiGetAsync**  
-** Nest.IElasticClient.MultiPercolateAsync**  
-** Nest.IElasticClient.MultiPercolateAsync**  
-** Nest.IElasticClient.MultiSearchAsync**  
-** Nest.IElasticClient.MultiSearchAsync**  
-** Nest.IElasticClient.MultiTermVectorsAsync**  
-** Nest.IElasticClient.MultiTermVectorsAsync**  
-** Nest.IElasticClient.NodesHotThreadsAsync**  
-** Nest.IElasticClient.NodesHotThreadsAsync**  
-** Nest.IElasticClient.NodesInfoAsync**  
-** Nest.IElasticClient.NodesInfoAsync**  
-** Nest.IElasticClient.NodesStatsAsync**  
-** Nest.IElasticClient.NodesStatsAsync**  
-** Nest.IElasticClient.OpenIndexAsync**  
-** Nest.IElasticClient.OpenIndexAsync**  
-** Nest.IElasticClient.PercolateAsync&lt;T&gt;**  
-** Nest.IElasticClient.PercolateAsync&lt;T&gt;**  
-** Nest.IElasticClient.PercolateCountAsync&lt;T&gt;**  
-** Nest.IElasticClient.PercolateCountAsync&lt;T&gt;**  
-** Nest.IElasticClient.PingAsync**  
-** Nest.IElasticClient.PingAsync**  
-** Nest.IElasticClient.PostLicenseAsync**  
-** Nest.IElasticClient.PostLicenseAsync**  
-** Nest.IElasticClient.PutAliasAsync**  
-** Nest.IElasticClient.PutAliasAsync**  
-** Nest.IElasticClient.PutIndexTemplateAsync**  
-** Nest.IElasticClient.PutIndexTemplateAsync**  
-** Nest.IElasticClient.PutRoleAsync**  
-** Nest.IElasticClient.PutRoleAsync**  
-** Nest.IElasticClient.PutScriptAsync**  
-** Nest.IElasticClient.PutScriptAsync**  
-** Nest.IElasticClient.PutSearchTemplateAsync**  
-** Nest.IElasticClient.PutSearchTemplateAsync**  
-** Nest.IElasticClient.PutUserAsync**  
-** Nest.IElasticClient.PutUserAsync**  
-** Nest.IElasticClient.PutWatchAsync**  
-** Nest.IElasticClient.PutWatchAsync**  
-** Nest.IElasticClient.RecoveryStatusAsync**  
-** Nest.IElasticClient.RecoveryStatusAsync**  
-** Nest.IElasticClient.RefreshAsync**  
-** Nest.IElasticClient.RefreshAsync**  
-** Nest.IElasticClient.RegisterPercolatorAsync**  
-** Nest.IElasticClient.RegisterPercolatorAsync&lt;T&gt;**  
-** Nest.IElasticClient.Reindex&lt;T&gt;**  
-** Nest.IElasticClient.Reindex&lt;T&gt;**  
-** Nest.IElasticClient.ReindexOnServerAsync**  
-** Nest.IElasticClient.ReindexOnServerAsync**  
-** Nest.IElasticClient.RenderSearchTemplateAsync**  
-** Nest.IElasticClient.RenderSearchTemplateAsync**  
-** Nest.IElasticClient.RestartWatcherAsync**  
-** Nest.IElasticClient.RestartWatcherAsync**  
-** Nest.IElasticClient.RestoreAsync**  
-** Nest.IElasticClient.RestoreAsync**  
-** Nest.IElasticClient.RethrottleAsync**  
-** Nest.IElasticClient.RethrottleAsync**  
-** Nest.IElasticClient.RootNodeInfoAsync**  
-** Nest.IElasticClient.RootNodeInfoAsync**  
-** Nest.IElasticClient.ScrollAsync&lt;T&gt;**  
-** Nest.IElasticClient.ScrollAsync&lt;T&gt;**  
-** Nest.IElasticClient.SearchAsync&lt;T, TResult&gt;**  
-** Nest.IElasticClient.SearchAsync&lt;T, TResult&gt;**  
-** Nest.IElasticClient.SearchAsync&lt;T&gt;**  
-** Nest.IElasticClient.SearchAsync&lt;T&gt;**  
-** Nest.IElasticClient.SearchShardsAsync**  
-** Nest.IElasticClient.SearchShardsAsync&lt;T&gt;**  
-** Nest.IElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
-** Nest.IElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
-** Nest.IElasticClient.SearchTemplateAsync&lt;T&gt;**  
-** Nest.IElasticClient.SearchTemplateAsync&lt;T&gt;**  
-** Nest.IElasticClient.SegmentsAsync**  
-** Nest.IElasticClient.SegmentsAsync**  
-** Nest.IElasticClient.SnapshotAsync**  
-** Nest.IElasticClient.SnapshotAsync**  
-** Nest.IElasticClient.SnapshotStatusAsync**  
-** Nest.IElasticClient.SnapshotStatusAsync**  
-** Nest.IElasticClient.SourceAsync&lt;T&gt;**  
-** Nest.IElasticClient.SourceAsync&lt;T&gt;**  
-** Nest.IElasticClient.StartWatcherAsync**  
-** Nest.IElasticClient.StartWatcherAsync**  
-** Nest.IElasticClient.StopWatcherAsync**  
-** Nest.IElasticClient.StopWatcherAsync**  
-** Nest.IElasticClient.SuggestAsync&lt;T&gt;**  
-** Nest.IElasticClient.SyncedFlushAsync**  
-** Nest.IElasticClient.SyncedFlushAsync**  
-** Nest.IElasticClient.TermVectorsAsync&lt;T&gt;**  
-** Nest.IElasticClient.TermVectorsAsync&lt;T&gt;**  
-** Nest.IElasticClient.TypeExistsAsync**  
-** Nest.IElasticClient.TypeExistsAsync**  
-** Nest.IElasticClient.UnregisterPercolatorAsync**  
-** Nest.IElasticClient.UnregisterPercolatorAsync&lt;T&gt;**  
-** Nest.IElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
-** Nest.IElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
-** Nest.IElasticClient.UpdateAsync&lt;TDocument&gt;**  
-** Nest.IElasticClient.UpdateAsync&lt;TDocument&gt;**  
-** Nest.IElasticClient.UpdateByQueryAsync**  
-** Nest.IElasticClient.UpdateByQueryAsync&lt;T&gt;**  
-** Nest.IElasticClient.UpdateIndexSettingsAsync**  
-** Nest.IElasticClient.UpdateIndexSettingsAsync**  
-** Nest.IElasticClient.UpgradeAsync**  
-** Nest.IElasticClient.UpgradeAsync**  
-** Nest.IElasticClient.UpgradeStatusAsync**  
-** Nest.IElasticClient.UpgradeStatusAsync**  
-** Nest.IElasticClient.ValidateQueryAsync**  
-** Nest.IElasticClient.ValidateQueryAsync&lt;T&gt;**  
-** Nest.IElasticClient.VerifyRepositoryAsync**  
-** Nest.IElasticClient.VerifyRepositoryAsync**  
-** Nest.IElasticClient.WatcherStatsAsync**  
-** Nest.IElasticClient.WatcherStatsAsync**  
-** Nest.IHighLevelToLowLevelDispatcher.DispatchAsync&lt;TRequest, TQueryString, TResponse, TResponseInterface&gt;**  
-** Nest.IHighLevelToLowLevelDispatcher.DispatchAsync&lt;TRequest, TQueryString, TResponse, TResponseInterface&gt;**  
-** Nest.IndexManyExtensions.IndexManyAsync&lt;T&gt;**  
-** Nest.ReindexObservable&lt;T&gt;..ctor**  
-** Nest.SourceManyExtensions.SourceManyAsync&lt;T&gt;**  
-** Nest.SourceManyExtensions.SourceManyAsync&lt;T&gt;**  
+**Nest.BulkAllObservable&lt;T&gt;..ctor**  
+**Nest.DeleteManyExtensions.DeleteManyAsync&lt;T&gt;**  
+**Nest.ElasticClient.AcknowledgeWatchAsync**  
+**Nest.ElasticClient.AcknowledgeWatchAsync**  
+**Nest.ElasticClient.ActivateWatchAsync**  
+**Nest.ElasticClient.ActivateWatchAsync**  
+**Nest.ElasticClient.AliasAsync**  
+**Nest.ElasticClient.AliasAsync**  
+**Nest.ElasticClient.AliasExistsAsync**  
+**Nest.ElasticClient.AliasExistsAsync**  
+**Nest.ElasticClient.AnalyzeAsync**  
+**Nest.ElasticClient.AnalyzeAsync**  
+**Nest.ElasticClient.AuthenticateAsync**  
+**Nest.ElasticClient.AuthenticateAsync**  
+**Nest.ElasticClient.BulkAsync**  
+**Nest.ElasticClient.BulkAsync**  
+**Nest.ElasticClient.CatAliasesAsync**  
+**Nest.ElasticClient.CatAliasesAsync**  
+**Nest.ElasticClient.CatAllocationAsync**  
+**Nest.ElasticClient.CatAllocationAsync**  
+**Nest.ElasticClient.CatCountAsync**  
+**Nest.ElasticClient.CatCountAsync**  
+**Nest.ElasticClient.CatFielddataAsync**  
+**Nest.ElasticClient.CatFielddataAsync**  
+**Nest.ElasticClient.CatHealthAsync**  
+**Nest.ElasticClient.CatHealthAsync**  
+**Nest.ElasticClient.CatHelpAsync**  
+**Nest.ElasticClient.CatHelpAsync**  
+**Nest.ElasticClient.CatIndicesAsync**  
+**Nest.ElasticClient.CatIndicesAsync**  
+**Nest.ElasticClient.CatMasterAsync**  
+**Nest.ElasticClient.CatMasterAsync**  
+**Nest.ElasticClient.CatNodeAttributesAsync**  
+**Nest.ElasticClient.CatNodeAttributesAsync**  
+**Nest.ElasticClient.CatNodesAsync**  
+**Nest.ElasticClient.CatNodesAsync**  
+**Nest.ElasticClient.CatPendingTasksAsync**  
+**Nest.ElasticClient.CatPendingTasksAsync**  
+**Nest.ElasticClient.CatPluginsAsync**  
+**Nest.ElasticClient.CatPluginsAsync**  
+**Nest.ElasticClient.CatRecoveryAsync**  
+**Nest.ElasticClient.CatRecoveryAsync**  
+**Nest.ElasticClient.CatRepositoriesAsync**  
+**Nest.ElasticClient.CatRepositoriesAsync**  
+**Nest.ElasticClient.CatSegmentsAsync**  
+**Nest.ElasticClient.CatSegmentsAsync**  
+**Nest.ElasticClient.CatShardsAsync**  
+**Nest.ElasticClient.CatShardsAsync**  
+**Nest.ElasticClient.CatSnapshotsAsync**  
+**Nest.ElasticClient.CatSnapshotsAsync**  
+**Nest.ElasticClient.CatThreadPoolAsync**  
+**Nest.ElasticClient.CatThreadPoolAsync**  
+**Nest.ElasticClient.ClearCacheAsync**  
+**Nest.ElasticClient.ClearCacheAsync**  
+**Nest.ElasticClient.ClearCachedRealmsAsync**  
+**Nest.ElasticClient.ClearCachedRealmsAsync**  
+**Nest.ElasticClient.ClearCachedRolesAsync**  
+**Nest.ElasticClient.ClearCachedRolesAsync**  
+**Nest.ElasticClient.ClearScrollAsync**  
+**Nest.ElasticClient.ClearScrollAsync**  
+**Nest.ElasticClient.CloseIndexAsync**  
+**Nest.ElasticClient.CloseIndexAsync**  
+**Nest.ElasticClient.ClusterGetSettingsAsync**  
+**Nest.ElasticClient.ClusterGetSettingsAsync**  
+**Nest.ElasticClient.ClusterHealthAsync**  
+**Nest.ElasticClient.ClusterHealthAsync**  
+**Nest.ElasticClient.ClusterPendingTasksAsync**  
+**Nest.ElasticClient.ClusterPendingTasksAsync**  
+**Nest.ElasticClient.ClusterPutSettingsAsync**  
+**Nest.ElasticClient.ClusterPutSettingsAsync**  
+**Nest.ElasticClient.ClusterRerouteAsync**  
+**Nest.ElasticClient.ClusterRerouteAsync**  
+**Nest.ElasticClient.ClusterStateAsync**  
+**Nest.ElasticClient.ClusterStateAsync**  
+**Nest.ElasticClient.ClusterStatsAsync**  
+**Nest.ElasticClient.ClusterStatsAsync**  
+**Nest.ElasticClient.CountAsync&lt;T&gt;**  
+**Nest.ElasticClient.CountAsync&lt;T&gt;**  
+**Nest.ElasticClient.CreateIndexAsync**  
+**Nest.ElasticClient.CreateIndexAsync**  
+**Nest.ElasticClient.CreateRepositoryAsync**  
+**Nest.ElasticClient.CreateRepositoryAsync**  
+**Nest.ElasticClient.DeactivateWatchAsync**  
+**Nest.ElasticClient.DeactivateWatchAsync**  
+**Nest.ElasticClient.DeleteAliasAsync**  
+**Nest.ElasticClient.DeleteAliasAsync**  
+**Nest.ElasticClient.DeleteAsync**  
+**Nest.ElasticClient.DeleteAsync&lt;T&gt;**  
+**Nest.ElasticClient.DeleteByQueryAsync**  
+**Nest.ElasticClient.DeleteByQueryAsync&lt;T&gt;**  
+**Nest.ElasticClient.DeleteIndexAsync**  
+**Nest.ElasticClient.DeleteIndexAsync**  
+**Nest.ElasticClient.DeleteIndexTemplateAsync**  
+**Nest.ElasticClient.DeleteIndexTemplateAsync**  
+**Nest.ElasticClient.DeleteLicenseAsync**  
+**Nest.ElasticClient.DeleteLicenseAsync**  
+**Nest.ElasticClient.DeleteRepositoryAsync**  
+**Nest.ElasticClient.DeleteRepositoryAsync**  
+**Nest.ElasticClient.DeleteRoleAsync**  
+**Nest.ElasticClient.DeleteRoleAsync**  
+**Nest.ElasticClient.DeleteScriptAsync**  
+**Nest.ElasticClient.DeleteScriptAsync**  
+**Nest.ElasticClient.DeleteSearchTemplateAsync**  
+**Nest.ElasticClient.DeleteSearchTemplateAsync**  
+**Nest.ElasticClient.DeleteSnapshotAsync**  
+**Nest.ElasticClient.DeleteSnapshotAsync**  
+**Nest.ElasticClient.DeleteUserAsync**  
+**Nest.ElasticClient.DeleteUserAsync**  
+**Nest.ElasticClient.DeleteWatchAsync**  
+**Nest.ElasticClient.DeleteWatchAsync**  
+**Nest.ElasticClient.DocumentExistsAsync**  
+**Nest.ElasticClient.DocumentExistsAsync&lt;T&gt;**  
+**Nest.ElasticClient.ExecuteWatchAsync**  
+**Nest.ElasticClient.ExecuteWatchAsync**  
+**Nest.ElasticClient.ExplainAsync&lt;T&gt;**  
+**Nest.ElasticClient.ExplainAsync&lt;T&gt;**  
+**Nest.ElasticClient.FieldStatsAsync**  
+**Nest.ElasticClient.FieldStatsAsync**  
+**Nest.ElasticClient.FlushAsync**  
+**Nest.ElasticClient.FlushAsync**  
+**Nest.ElasticClient.ForceMergeAsync**  
+**Nest.ElasticClient.ForceMergeAsync**  
+**Nest.ElasticClient.GetAliasAsync**  
+**Nest.ElasticClient.GetAliasAsync**  
+**Nest.ElasticClient.GetAsync&lt;T&gt;**  
+**Nest.ElasticClient.GetAsync&lt;T&gt;**  
+**Nest.ElasticClient.GetFieldMappingAsync**  
+**Nest.ElasticClient.GetFieldMappingAsync&lt;T&gt;**  
+**Nest.ElasticClient.GetIndexAsync**  
+**Nest.ElasticClient.GetIndexAsync**  
+**Nest.ElasticClient.GetIndexSettingsAsync**  
+**Nest.ElasticClient.GetIndexSettingsAsync**  
+**Nest.ElasticClient.GetIndexTemplateAsync**  
+**Nest.ElasticClient.GetIndexTemplateAsync**  
+**Nest.ElasticClient.GetLicenseAsync**  
+**Nest.ElasticClient.GetLicenseAsync**  
+**Nest.ElasticClient.GetMappingAsync**  
+**Nest.ElasticClient.GetMappingAsync&lt;T&gt;**  
+**Nest.ElasticClient.GetRepositoryAsync**  
+**Nest.ElasticClient.GetRepositoryAsync**  
+**Nest.ElasticClient.GetRoleAsync**  
+**Nest.ElasticClient.GetRoleAsync**  
+**Nest.ElasticClient.GetScriptAsync**  
+**Nest.ElasticClient.GetScriptAsync**  
+**Nest.ElasticClient.GetSearchTemplateAsync**  
+**Nest.ElasticClient.GetSearchTemplateAsync**  
+**Nest.ElasticClient.GetSnapshotAsync**  
+**Nest.ElasticClient.GetSnapshotAsync**  
+**Nest.ElasticClient.GetUserAsync**  
+**Nest.ElasticClient.GetUserAsync**  
+**Nest.ElasticClient.GetWatchAsync**  
+**Nest.ElasticClient.GetWatchAsync**  
+**Nest.ElasticClient.GraphExploreAsync**  
+**Nest.ElasticClient.GraphExploreAsync&lt;T&gt;**  
+**Nest.ElasticClient.IndexAsync**  
+**Nest.ElasticClient.IndexAsync&lt;T&gt;**  
+**Nest.ElasticClient.IndexExistsAsync**  
+**Nest.ElasticClient.IndexExistsAsync**  
+**Nest.ElasticClient.IndexTemplateExistsAsync**  
+**Nest.ElasticClient.IndexTemplateExistsAsync**  
+**Nest.ElasticClient.IndicesShardStoresAsync**  
+**Nest.ElasticClient.IndicesShardStoresAsync**  
+**Nest.ElasticClient.IndicesStatsAsync**  
+**Nest.ElasticClient.IndicesStatsAsync**  
+**Nest.ElasticClient.MapAsync**  
+**Nest.ElasticClient.MapAsync&lt;T&gt;**  
+**Nest.ElasticClient.MultiGetAsync**  
+**Nest.ElasticClient.MultiGetAsync**  
+**Nest.ElasticClient.MultiPercolateAsync**  
+**Nest.ElasticClient.MultiPercolateAsync**  
+**Nest.ElasticClient.MultiSearchAsync**  
+**Nest.ElasticClient.MultiSearchAsync**  
+**Nest.ElasticClient.MultiTermVectorsAsync**  
+**Nest.ElasticClient.MultiTermVectorsAsync**  
+**Nest.ElasticClient.NodesHotThreadsAsync**  
+**Nest.ElasticClient.NodesHotThreadsAsync**  
+**Nest.ElasticClient.NodesInfoAsync**  
+**Nest.ElasticClient.NodesInfoAsync**  
+**Nest.ElasticClient.NodesStatsAsync**  
+**Nest.ElasticClient.NodesStatsAsync**  
+**Nest.ElasticClient.OpenIndexAsync**  
+**Nest.ElasticClient.OpenIndexAsync**  
+**Nest.ElasticClient.PercolateAsync&lt;T&gt;**  
+**Nest.ElasticClient.PercolateAsync&lt;T&gt;**  
+**Nest.ElasticClient.PercolateCountAsync&lt;T&gt;**  
+**Nest.ElasticClient.PercolateCountAsync&lt;T&gt;**  
+**Nest.ElasticClient.PingAsync**  
+**Nest.ElasticClient.PingAsync**  
+**Nest.ElasticClient.PostLicenseAsync**  
+**Nest.ElasticClient.PostLicenseAsync**  
+**Nest.ElasticClient.PutAliasAsync**  
+**Nest.ElasticClient.PutAliasAsync**  
+**Nest.ElasticClient.PutIndexTemplateAsync**  
+**Nest.ElasticClient.PutIndexTemplateAsync**  
+**Nest.ElasticClient.PutRoleAsync**  
+**Nest.ElasticClient.PutRoleAsync**  
+**Nest.ElasticClient.PutScriptAsync**  
+**Nest.ElasticClient.PutScriptAsync**  
+**Nest.ElasticClient.PutSearchTemplateAsync**  
+**Nest.ElasticClient.PutSearchTemplateAsync**  
+**Nest.ElasticClient.PutUserAsync**  
+**Nest.ElasticClient.PutUserAsync**  
+**Nest.ElasticClient.PutWatchAsync**  
+**Nest.ElasticClient.PutWatchAsync**  
+**Nest.ElasticClient.RecoveryStatusAsync**  
+**Nest.ElasticClient.RecoveryStatusAsync**  
+**Nest.ElasticClient.RefreshAsync**  
+**Nest.ElasticClient.RefreshAsync**  
+**Nest.ElasticClient.RegisterPercolatorAsync**  
+**Nest.ElasticClient.RegisterPercolatorAsync&lt;T&gt;**  
+**Nest.ElasticClient.Reindex&lt;T&gt;**  
+**Nest.ElasticClient.Reindex&lt;T&gt;**  
+**Nest.ElasticClient.ReindexOnServerAsync**  
+**Nest.ElasticClient.ReindexOnServerAsync**  
+**Nest.ElasticClient.RenderSearchTemplateAsync**  
+**Nest.ElasticClient.RenderSearchTemplateAsync**  
+**Nest.ElasticClient.RestartWatcherAsync**  
+**Nest.ElasticClient.RestartWatcherAsync**  
+**Nest.ElasticClient.RestoreAsync**  
+**Nest.ElasticClient.RestoreAsync**  
+**Nest.ElasticClient.RethrottleAsync**  
+**Nest.ElasticClient.RethrottleAsync**  
+**Nest.ElasticClient.RootNodeInfoAsync**  
+**Nest.ElasticClient.RootNodeInfoAsync**  
+**Nest.ElasticClient.ScrollAsync&lt;T&gt;**  
+**Nest.ElasticClient.ScrollAsync&lt;T&gt;**  
+**Nest.ElasticClient.SearchAsync&lt;T, TResult&gt;**  
+**Nest.ElasticClient.SearchAsync&lt;T, TResult&gt;**  
+**Nest.ElasticClient.SearchAsync&lt;T&gt;**  
+**Nest.ElasticClient.SearchAsync&lt;T&gt;**  
+**Nest.ElasticClient.SearchShardsAsync**  
+**Nest.ElasticClient.SearchShardsAsync&lt;T&gt;**  
+**Nest.ElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
+**Nest.ElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
+**Nest.ElasticClient.SearchTemplateAsync&lt;T&gt;**  
+**Nest.ElasticClient.SearchTemplateAsync&lt;T&gt;**  
+**Nest.ElasticClient.SegmentsAsync**  
+**Nest.ElasticClient.SegmentsAsync**  
+**Nest.ElasticClient.SnapshotAsync**  
+**Nest.ElasticClient.SnapshotAsync**  
+**Nest.ElasticClient.SnapshotStatusAsync**  
+**Nest.ElasticClient.SnapshotStatusAsync**  
+**Nest.ElasticClient.SourceAsync&lt;T&gt;**  
+**Nest.ElasticClient.SourceAsync&lt;T&gt;**  
+**Nest.ElasticClient.StartWatcherAsync**  
+**Nest.ElasticClient.StartWatcherAsync**  
+**Nest.ElasticClient.StopWatcherAsync**  
+**Nest.ElasticClient.StopWatcherAsync**  
+**Nest.ElasticClient.SuggestAsync&lt;T&gt;**  
+**Nest.ElasticClient.SyncedFlushAsync**  
+**Nest.ElasticClient.SyncedFlushAsync**  
+**Nest.ElasticClient.TermVectorsAsync&lt;T&gt;**  
+**Nest.ElasticClient.TermVectorsAsync&lt;T&gt;**  
+**Nest.ElasticClient.TypeExistsAsync**  
+**Nest.ElasticClient.TypeExistsAsync**  
+**Nest.ElasticClient.UnregisterPercolatorAsync**  
+**Nest.ElasticClient.UnregisterPercolatorAsync&lt;T&gt;**  
+**Nest.ElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
+**Nest.ElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
+**Nest.ElasticClient.UpdateAsync&lt;TDocument&gt;**  
+**Nest.ElasticClient.UpdateAsync&lt;TDocument&gt;**  
+**Nest.ElasticClient.UpdateByQueryAsync**  
+**Nest.ElasticClient.UpdateByQueryAsync&lt;T&gt;**  
+**Nest.ElasticClient.UpdateIndexSettingsAsync**  
+**Nest.ElasticClient.UpdateIndexSettingsAsync**  
+**Nest.ElasticClient.UpgradeAsync**  
+**Nest.ElasticClient.UpgradeAsync**  
+**Nest.ElasticClient.UpgradeStatusAsync**  
+**Nest.ElasticClient.UpgradeStatusAsync**  
+**Nest.ElasticClient.ValidateQueryAsync**  
+**Nest.ElasticClient.ValidateQueryAsync&lt;T&gt;**  
+**Nest.ElasticClient.VerifyRepositoryAsync**  
+**Nest.ElasticClient.VerifyRepositoryAsync**  
+**Nest.ElasticClient.WatcherStatsAsync**  
+**Nest.ElasticClient.WatcherStatsAsync**  
+**Nest.GetManyExtensions.GetManyAsync&lt;T&gt;**  
+**Nest.GetManyExtensions.GetManyAsync&lt;T&gt;**  
+**Nest.IElasticClient.AcknowledgeWatchAsync**  
+**Nest.IElasticClient.AcknowledgeWatchAsync**  
+**Nest.IElasticClient.ActivateWatchAsync**  
+**Nest.IElasticClient.ActivateWatchAsync**  
+**Nest.IElasticClient.AliasAsync**  
+**Nest.IElasticClient.AliasAsync**  
+**Nest.IElasticClient.AliasExistsAsync**  
+**Nest.IElasticClient.AliasExistsAsync**  
+**Nest.IElasticClient.AnalyzeAsync**  
+**Nest.IElasticClient.AnalyzeAsync**  
+**Nest.IElasticClient.AuthenticateAsync**  
+**Nest.IElasticClient.AuthenticateAsync**  
+**Nest.IElasticClient.BulkAsync**  
+**Nest.IElasticClient.BulkAsync**  
+**Nest.IElasticClient.CatAliasesAsync**  
+**Nest.IElasticClient.CatAliasesAsync**  
+**Nest.IElasticClient.CatAllocationAsync**  
+**Nest.IElasticClient.CatAllocationAsync**  
+**Nest.IElasticClient.CatCountAsync**  
+**Nest.IElasticClient.CatCountAsync**  
+**Nest.IElasticClient.CatFielddataAsync**  
+**Nest.IElasticClient.CatFielddataAsync**  
+**Nest.IElasticClient.CatHealthAsync**  
+**Nest.IElasticClient.CatHealthAsync**  
+**Nest.IElasticClient.CatHelpAsync**  
+**Nest.IElasticClient.CatHelpAsync**  
+**Nest.IElasticClient.CatIndicesAsync**  
+**Nest.IElasticClient.CatIndicesAsync**  
+**Nest.IElasticClient.CatMasterAsync**  
+**Nest.IElasticClient.CatMasterAsync**  
+**Nest.IElasticClient.CatNodeAttributesAsync**  
+**Nest.IElasticClient.CatNodeAttributesAsync**  
+**Nest.IElasticClient.CatNodesAsync**  
+**Nest.IElasticClient.CatNodesAsync**  
+**Nest.IElasticClient.CatPendingTasksAsync**  
+**Nest.IElasticClient.CatPendingTasksAsync**  
+**Nest.IElasticClient.CatPluginsAsync**  
+**Nest.IElasticClient.CatPluginsAsync**  
+**Nest.IElasticClient.CatRecoveryAsync**  
+**Nest.IElasticClient.CatRecoveryAsync**  
+**Nest.IElasticClient.CatRepositoriesAsync**  
+**Nest.IElasticClient.CatRepositoriesAsync**  
+**Nest.IElasticClient.CatSegmentsAsync**  
+**Nest.IElasticClient.CatSegmentsAsync**  
+**Nest.IElasticClient.CatShardsAsync**  
+**Nest.IElasticClient.CatShardsAsync**  
+**Nest.IElasticClient.CatSnapshotsAsync**  
+**Nest.IElasticClient.CatSnapshotsAsync**  
+**Nest.IElasticClient.CatThreadPoolAsync**  
+**Nest.IElasticClient.CatThreadPoolAsync**  
+**Nest.IElasticClient.ClearCacheAsync**  
+**Nest.IElasticClient.ClearCacheAsync**  
+**Nest.IElasticClient.ClearCachedRealmsAsync**  
+**Nest.IElasticClient.ClearCachedRealmsAsync**  
+**Nest.IElasticClient.ClearCachedRolesAsync**  
+**Nest.IElasticClient.ClearCachedRolesAsync**  
+**Nest.IElasticClient.ClearScrollAsync**  
+**Nest.IElasticClient.ClearScrollAsync**  
+**Nest.IElasticClient.CloseIndexAsync**  
+**Nest.IElasticClient.CloseIndexAsync**  
+**Nest.IElasticClient.ClusterGetSettingsAsync**  
+**Nest.IElasticClient.ClusterGetSettingsAsync**  
+**Nest.IElasticClient.ClusterHealthAsync**  
+**Nest.IElasticClient.ClusterHealthAsync**  
+**Nest.IElasticClient.ClusterPendingTasksAsync**  
+**Nest.IElasticClient.ClusterPendingTasksAsync**  
+**Nest.IElasticClient.ClusterPutSettingsAsync**  
+**Nest.IElasticClient.ClusterPutSettingsAsync**  
+**Nest.IElasticClient.ClusterRerouteAsync**  
+**Nest.IElasticClient.ClusterRerouteAsync**  
+**Nest.IElasticClient.ClusterStateAsync**  
+**Nest.IElasticClient.ClusterStateAsync**  
+**Nest.IElasticClient.ClusterStatsAsync**  
+**Nest.IElasticClient.ClusterStatsAsync**  
+**Nest.IElasticClient.CountAsync&lt;T&gt;**  
+**Nest.IElasticClient.CountAsync&lt;T&gt;**  
+**Nest.IElasticClient.CreateIndexAsync**  
+**Nest.IElasticClient.CreateIndexAsync**  
+**Nest.IElasticClient.CreateRepositoryAsync**  
+**Nest.IElasticClient.CreateRepositoryAsync**  
+**Nest.IElasticClient.DeactivateWatchAsync**  
+**Nest.IElasticClient.DeactivateWatchAsync**  
+**Nest.IElasticClient.DeleteAliasAsync**  
+**Nest.IElasticClient.DeleteAliasAsync**  
+**Nest.IElasticClient.DeleteAsync**  
+**Nest.IElasticClient.DeleteAsync&lt;T&gt;**  
+**Nest.IElasticClient.DeleteByQueryAsync**  
+**Nest.IElasticClient.DeleteByQueryAsync&lt;T&gt;**  
+**Nest.IElasticClient.DeleteIndexAsync**  
+**Nest.IElasticClient.DeleteIndexAsync**  
+**Nest.IElasticClient.DeleteIndexTemplateAsync**  
+**Nest.IElasticClient.DeleteIndexTemplateAsync**  
+**Nest.IElasticClient.DeleteLicenseAsync**  
+**Nest.IElasticClient.DeleteLicenseAsync**  
+**Nest.IElasticClient.DeleteRepositoryAsync**  
+**Nest.IElasticClient.DeleteRepositoryAsync**  
+**Nest.IElasticClient.DeleteRoleAsync**  
+**Nest.IElasticClient.DeleteRoleAsync**  
+**Nest.IElasticClient.DeleteScriptAsync**  
+**Nest.IElasticClient.DeleteScriptAsync**  
+**Nest.IElasticClient.DeleteSearchTemplateAsync**  
+**Nest.IElasticClient.DeleteSearchTemplateAsync**  
+**Nest.IElasticClient.DeleteSnapshotAsync**  
+**Nest.IElasticClient.DeleteSnapshotAsync**  
+**Nest.IElasticClient.DeleteUserAsync**  
+**Nest.IElasticClient.DeleteUserAsync**  
+**Nest.IElasticClient.DeleteWatchAsync**  
+**Nest.IElasticClient.DeleteWatchAsync**  
+**Nest.IElasticClient.DocumentExistsAsync**  
+**Nest.IElasticClient.DocumentExistsAsync&lt;T&gt;**  
+**Nest.IElasticClient.ExecuteWatchAsync**  
+**Nest.IElasticClient.ExecuteWatchAsync**  
+**Nest.IElasticClient.ExplainAsync&lt;T&gt;**  
+**Nest.IElasticClient.ExplainAsync&lt;T&gt;**  
+**Nest.IElasticClient.FieldStatsAsync**  
+**Nest.IElasticClient.FieldStatsAsync**  
+**Nest.IElasticClient.FlushAsync**  
+**Nest.IElasticClient.FlushAsync**  
+**Nest.IElasticClient.ForceMergeAsync**  
+**Nest.IElasticClient.ForceMergeAsync**  
+**Nest.IElasticClient.GetAliasAsync**  
+**Nest.IElasticClient.GetAliasAsync**  
+**Nest.IElasticClient.GetAsync&lt;T&gt;**  
+**Nest.IElasticClient.GetAsync&lt;T&gt;**  
+**Nest.IElasticClient.GetFieldMappingAsync**  
+**Nest.IElasticClient.GetFieldMappingAsync&lt;T&gt;**  
+**Nest.IElasticClient.GetIndexAsync**  
+**Nest.IElasticClient.GetIndexAsync**  
+**Nest.IElasticClient.GetIndexSettingsAsync**  
+**Nest.IElasticClient.GetIndexSettingsAsync**  
+**Nest.IElasticClient.GetIndexTemplateAsync**  
+**Nest.IElasticClient.GetIndexTemplateAsync**  
+**Nest.IElasticClient.GetLicenseAsync**  
+**Nest.IElasticClient.GetLicenseAsync**  
+**Nest.IElasticClient.GetMappingAsync**  
+**Nest.IElasticClient.GetMappingAsync&lt;T&gt;**  
+**Nest.IElasticClient.GetRepositoryAsync**  
+**Nest.IElasticClient.GetRepositoryAsync**  
+**Nest.IElasticClient.GetRoleAsync**  
+**Nest.IElasticClient.GetRoleAsync**  
+**Nest.IElasticClient.GetScriptAsync**  
+**Nest.IElasticClient.GetScriptAsync**  
+**Nest.IElasticClient.GetSearchTemplateAsync**  
+**Nest.IElasticClient.GetSearchTemplateAsync**  
+**Nest.IElasticClient.GetSnapshotAsync**  
+**Nest.IElasticClient.GetSnapshotAsync**  
+**Nest.IElasticClient.GetUserAsync**  
+**Nest.IElasticClient.GetUserAsync**  
+**Nest.IElasticClient.GetWatchAsync**  
+**Nest.IElasticClient.GetWatchAsync**  
+**Nest.IElasticClient.GraphExploreAsync**  
+**Nest.IElasticClient.GraphExploreAsync&lt;T&gt;**  
+**Nest.IElasticClient.IndexAsync**  
+**Nest.IElasticClient.IndexAsync&lt;T&gt;**  
+**Nest.IElasticClient.IndexExistsAsync**  
+**Nest.IElasticClient.IndexExistsAsync**  
+**Nest.IElasticClient.IndexTemplateExistsAsync**  
+**Nest.IElasticClient.IndexTemplateExistsAsync**  
+**Nest.IElasticClient.IndicesShardStoresAsync**  
+**Nest.IElasticClient.IndicesShardStoresAsync**  
+**Nest.IElasticClient.IndicesStatsAsync**  
+**Nest.IElasticClient.IndicesStatsAsync**  
+**Nest.IElasticClient.MapAsync**  
+**Nest.IElasticClient.MapAsync&lt;T&gt;**  
+**Nest.IElasticClient.MultiGetAsync**  
+**Nest.IElasticClient.MultiGetAsync**  
+**Nest.IElasticClient.MultiPercolateAsync**  
+**Nest.IElasticClient.MultiPercolateAsync**  
+**Nest.IElasticClient.MultiSearchAsync**  
+**Nest.IElasticClient.MultiSearchAsync**  
+**Nest.IElasticClient.MultiTermVectorsAsync**  
+**Nest.IElasticClient.MultiTermVectorsAsync**  
+**Nest.IElasticClient.NodesHotThreadsAsync**  
+**Nest.IElasticClient.NodesHotThreadsAsync**  
+**Nest.IElasticClient.NodesInfoAsync**  
+**Nest.IElasticClient.NodesInfoAsync**  
+**Nest.IElasticClient.NodesStatsAsync**  
+**Nest.IElasticClient.NodesStatsAsync**  
+**Nest.IElasticClient.OpenIndexAsync**  
+**Nest.IElasticClient.OpenIndexAsync**  
+**Nest.IElasticClient.PercolateAsync&lt;T&gt;**  
+**Nest.IElasticClient.PercolateAsync&lt;T&gt;**  
+**Nest.IElasticClient.PercolateCountAsync&lt;T&gt;**  
+**Nest.IElasticClient.PercolateCountAsync&lt;T&gt;**  
+**Nest.IElasticClient.PingAsync**  
+**Nest.IElasticClient.PingAsync**  
+**Nest.IElasticClient.PostLicenseAsync**  
+**Nest.IElasticClient.PostLicenseAsync**  
+**Nest.IElasticClient.PutAliasAsync**  
+**Nest.IElasticClient.PutAliasAsync**  
+**Nest.IElasticClient.PutIndexTemplateAsync**  
+**Nest.IElasticClient.PutIndexTemplateAsync**  
+**Nest.IElasticClient.PutRoleAsync**  
+**Nest.IElasticClient.PutRoleAsync**  
+**Nest.IElasticClient.PutScriptAsync**  
+**Nest.IElasticClient.PutScriptAsync**  
+**Nest.IElasticClient.PutSearchTemplateAsync**  
+**Nest.IElasticClient.PutSearchTemplateAsync**  
+**Nest.IElasticClient.PutUserAsync**  
+**Nest.IElasticClient.PutUserAsync**  
+**Nest.IElasticClient.PutWatchAsync**  
+**Nest.IElasticClient.PutWatchAsync**  
+**Nest.IElasticClient.RecoveryStatusAsync**  
+**Nest.IElasticClient.RecoveryStatusAsync**  
+**Nest.IElasticClient.RefreshAsync**  
+**Nest.IElasticClient.RefreshAsync**  
+**Nest.IElasticClient.RegisterPercolatorAsync**  
+**Nest.IElasticClient.RegisterPercolatorAsync&lt;T&gt;**  
+**Nest.IElasticClient.Reindex&lt;T&gt;**  
+**Nest.IElasticClient.Reindex&lt;T&gt;**  
+**Nest.IElasticClient.ReindexOnServerAsync**  
+**Nest.IElasticClient.ReindexOnServerAsync**  
+**Nest.IElasticClient.RenderSearchTemplateAsync**  
+**Nest.IElasticClient.RenderSearchTemplateAsync**  
+**Nest.IElasticClient.RestartWatcherAsync**  
+**Nest.IElasticClient.RestartWatcherAsync**  
+**Nest.IElasticClient.RestoreAsync**  
+**Nest.IElasticClient.RestoreAsync**  
+**Nest.IElasticClient.RethrottleAsync**  
+**Nest.IElasticClient.RethrottleAsync**  
+**Nest.IElasticClient.RootNodeInfoAsync**  
+**Nest.IElasticClient.RootNodeInfoAsync**  
+**Nest.IElasticClient.ScrollAsync&lt;T&gt;**  
+**Nest.IElasticClient.ScrollAsync&lt;T&gt;**  
+**Nest.IElasticClient.SearchAsync&lt;T, TResult&gt;**  
+**Nest.IElasticClient.SearchAsync&lt;T, TResult&gt;**  
+**Nest.IElasticClient.SearchAsync&lt;T&gt;**  
+**Nest.IElasticClient.SearchAsync&lt;T&gt;**  
+**Nest.IElasticClient.SearchShardsAsync**  
+**Nest.IElasticClient.SearchShardsAsync&lt;T&gt;**  
+**Nest.IElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
+**Nest.IElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
+**Nest.IElasticClient.SearchTemplateAsync&lt;T&gt;**  
+**Nest.IElasticClient.SearchTemplateAsync&lt;T&gt;**  
+**Nest.IElasticClient.SegmentsAsync**  
+**Nest.IElasticClient.SegmentsAsync**  
+**Nest.IElasticClient.SnapshotAsync**  
+**Nest.IElasticClient.SnapshotAsync**  
+**Nest.IElasticClient.SnapshotStatusAsync**  
+**Nest.IElasticClient.SnapshotStatusAsync**  
+**Nest.IElasticClient.SourceAsync&lt;T&gt;**  
+**Nest.IElasticClient.SourceAsync&lt;T&gt;**  
+**Nest.IElasticClient.StartWatcherAsync**  
+**Nest.IElasticClient.StartWatcherAsync**  
+**Nest.IElasticClient.StopWatcherAsync**  
+**Nest.IElasticClient.StopWatcherAsync**  
+**Nest.IElasticClient.SuggestAsync&lt;T&gt;**  
+**Nest.IElasticClient.SyncedFlushAsync**  
+**Nest.IElasticClient.SyncedFlushAsync**  
+**Nest.IElasticClient.TermVectorsAsync&lt;T&gt;**  
+**Nest.IElasticClient.TermVectorsAsync&lt;T&gt;**  
+**Nest.IElasticClient.TypeExistsAsync**  
+**Nest.IElasticClient.TypeExistsAsync**  
+**Nest.IElasticClient.UnregisterPercolatorAsync**  
+**Nest.IElasticClient.UnregisterPercolatorAsync&lt;T&gt;**  
+**Nest.IElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
+**Nest.IElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
+**Nest.IElasticClient.UpdateAsync&lt;TDocument&gt;**  
+**Nest.IElasticClient.UpdateAsync&lt;TDocument&gt;**  
+**Nest.IElasticClient.UpdateByQueryAsync**  
+**Nest.IElasticClient.UpdateByQueryAsync&lt;T&gt;**  
+**Nest.IElasticClient.UpdateIndexSettingsAsync**  
+**Nest.IElasticClient.UpdateIndexSettingsAsync**  
+**Nest.IElasticClient.UpgradeAsync**  
+**Nest.IElasticClient.UpgradeAsync**  
+**Nest.IElasticClient.UpgradeStatusAsync**  
+**Nest.IElasticClient.UpgradeStatusAsync**  
+**Nest.IElasticClient.ValidateQueryAsync**  
+**Nest.IElasticClient.ValidateQueryAsync&lt;T&gt;**  
+**Nest.IElasticClient.VerifyRepositoryAsync**  
+**Nest.IElasticClient.VerifyRepositoryAsync**  
+**Nest.IElasticClient.WatcherStatsAsync**  
+**Nest.IElasticClient.WatcherStatsAsync**  
+**Nest.IHighLevelToLowLevelDispatcher.DispatchAsync&lt;TRequest, TQueryString, TResponse, TResponseInterface&gt;**  
+**Nest.IHighLevelToLowLevelDispatcher.DispatchAsync&lt;TRequest, TQueryString, TResponse, TResponseInterface&gt;**  
+**Nest.IndexManyExtensions.IndexManyAsync&lt;T&gt;**  
+**Nest.ReindexObservable&lt;T&gt;..ctor**  
+**Nest.SourceManyExtensions.SourceManyAsync&lt;T&gt;**  
+**Nest.SourceManyExtensions.SourceManyAsync&lt;T&gt;**  
