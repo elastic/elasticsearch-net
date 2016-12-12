@@ -123,10 +123,10 @@ namespace Nest
 		{
 			if (request.ScrollAll == null)
 				throw new ArgumentException(
-					"Reindex must have ScrollAll property set so we know how to get the source of the reindex operation");
+					"ScrollAll property must be set in order to get the source of a Reindex operation");
 			if (request.BulkAll == null)
 				throw new ArgumentException(
-					"Reindex must have BulkAll property set so we know how to get the target of the reindex operation");
+					"BulkAll property must set in order to get the target of a Reindex operation");
 			return new ReindexObservable<TSource,TTarget>(this, ConnectionSettings, request, cancellationToken);
 		}
 
