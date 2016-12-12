@@ -1943,2832 +1943,759 @@ public Id WatchRecordId { get; internal set; }
 public string WatchRecordId { get; internal set; }
 ```
 
-#RemovedIn5x
-**public class Nest.AllocateClusterRerouteCommand** *Removed (Breaking)*
+  
+
+#ReadOnlyTypeChange
+
+##Now IReadOnlyDictionary
+**public property Nest.ActivationStatus.Actions**  
+**public property Nest.AggregationsHelper.Aggregations**  
+**public property Nest.AuthenticateResponse.Metadata**  
+**public property Nest.BucketAggregate.Meta**  
+**public property Nest.BucketAggregateBase.Meta**  
+**public property Nest.ClearCachedRealmsResponse.Nodes**  
+**public property Nest.ClearCachedRolesResponse.Nodes**  
+**public property Nest.ClusterGetSettingsResponse.Persistent**  
+**public property Nest.ClusterGetSettingsResponse.Transient**  
+**public property Nest.ClusterHealthResponse.Indices**  
+**public property Nest.ClusterPutSettingsResponse.Persistent**  
+**public property Nest.ClusterPutSettingsResponse.Transient**  
+**public property Nest.ClusterRerouteState.Nodes**  
+**public property Nest.ClusterStateResponse.Nodes**  
+**public property Nest.ExecutionResultInput.Payload**  
+**public property Nest.FieldMapping.Mapping**  
+**public property Nest.FieldStats.Fields**  
+**public property Nest.FieldStatsResponse.Indices**  
+**public property Nest.GetFieldMappingResponse.Indices**  
+**public property Nest.GetIndexResponse.Indices**  
+**public property Nest.GetIndexSettingsResponse.Indices**  
+**public property Nest.GetIndexTemplateResponse.TemplateMappings**  
+**public property Nest.GetMappingResponse.Mappings**  
+**public property Nest.GetRepositoryResponse.Repositories**  
+**public property Nest.GetRoleResponse.Roles**  
+**public property Nest.GetUserResponse.Users**  
+**public property Nest.Hit&lt;T&gt;.InnerHits**  
+**public property Nest.IAggregate.Meta**  
+**public property Nest.IAuthenticateResponse.Metadata**  
+**public property Nest.IClearCachedRealmsResponse.Nodes**  
+**public property Nest.IClearCachedRolesResponse.Nodes**  
+**public property Nest.IClusterGetSettingsResponse.Persistent**  
+**public property Nest.IClusterGetSettingsResponse.Transient**  
+**public property Nest.IClusterHealthResponse.Indices**  
+**public property Nest.IClusterPutSettingsResponse.Persistent**  
+**public property Nest.IClusterPutSettingsResponse.Transient**  
+**public property Nest.IClusterStateResponse.Nodes**  
+**public property Nest.IDictionaryResponse&lt;TKey, TValue&gt;.BackingDictionary**  
+**public property Nest.IFieldStatsResponse.Indices**  
+**public property Nest.IGetFieldMappingResponse.Indices**  
+**public property Nest.IGetIndexResponse.Indices**  
+**public property Nest.IGetIndexSettingsResponse.Indices**  
+**public property Nest.IGetIndexTemplateResponse.TemplateMappings**  
+**public property Nest.IGetMappingResponse.Mappings**  
+**public property Nest.IGetRepositoryResponse.Repositories**  
+**public property Nest.IGetRoleResponse.Roles**  
+**public property Nest.IGetUserResponse.Users**  
+**public property Nest.IHit&lt;T&gt;.InnerHits**  
+**public property Nest.IIndicesShardStoresResponse.Indices**  
+**public property Nest.IIndicesStatsResponse.Indices**  
+**public property Nest.IndexHealthStats.Shards**  
+**public property Nest.IndexingStats.Types**  
+**public property Nest.IndexRoutingTable.Shards**  
+**public property Nest.IndexSegment.Shards**  
+**public property Nest.IndicesShardStores.Shards**  
+**public property Nest.IndicesShardStoresResponse.Indices**  
+**public property Nest.IndicesStatsResponse.Indices**  
+**public property Nest.INodesInfoResponse.Nodes**  
+**public property Nest.INodesStatsResponse.Nodes**  
+**public property Nest.IRecoveryStatusResponse.Indices**  
+**public property Nest.IReindexRethrottleResponse.Nodes**  
+**public property Nest.ISearchResponse&lt;T&gt;.Aggregations**  
+**public property Nest.ISearchResponse&lt;T&gt;.Suggest**  
+**public property Nest.ISearchShardsResponse.Nodes**  
+**public property Nest.ISegmentsResponse.Indices**  
+**public property Nest.IUpgradeStatusResponse.Upgrades**  
+**public property Nest.IVerifyRepositoryResponse.Nodes**  
+**public property Nest.MetadataState.Indices**  
+**public property Nest.MetadataState.Templates**  
+**public property Nest.MetricAggregateBase.Meta**  
+**public property Nest.NodesInfoResponse.Nodes**  
+**public property Nest.NodesStatsResponse.Nodes**  
+**public property Nest.PercolatorMatch.Highlight**  
+**public property Nest.RecoveryStatusResponse.Indices**  
+**public property Nest.ReindexNode.Attributes**  
+**public property Nest.ReindexNode.Tasks**  
+**public property Nest.ReindexRethrottleResponse.Nodes**  
+**public property Nest.RoutingNodesState.Nodes**  
+**public property Nest.RoutingTableState.Indices**  
+**public property Nest.SearchResponse&lt;T&gt;.Aggregations**  
+**public property Nest.SearchResponse&lt;T&gt;.Suggest**  
+**public property Nest.SearchShardsResponse.Nodes**  
+**public property Nest.SegmentsResponse.Indices**  
+**public property Nest.ShardsSegment.Segments**  
+**public property Nest.ShardStore.Attributes**  
+**public property Nest.SnapshotIndexStats.Shards**  
+**public property Nest.SnapshotStatus.Indices**  
+**public property Nest.TaskExecutingNode.Tasks**  
+**public property Nest.TermVector.Terms**  
+**public property Nest.TermVectorsResponse.TermVectors**  
+**public property Nest.TypeFieldMappings.Mappings**  
+**public property Nest.UpgradeStatusResponse.Upgrades**  
+**public property Nest.VerifyRepositoryResponse.Nodes**  
+**public property Nest.Watch.Meta**  
+**public property Nest.WatchRecord.Metadata**  
+**public property Nest.WatchStatus.Actions**  
+
+
+##Now IReadOnlyCollection
+**public property Nest.AnalyzeResponse.Tokens**  
+**public property Nest.AuthenticateResponse.Roles**  
+**public property Nest.BucketAggregate.Items**  
+**public property Nest.BulkResponse.Items**  
+**public property Nest.CatResponse&lt;TCatRecord&gt;.Records**  
+**public property Nest.ClusterJvm.Versions**  
+**public property Nest.ClusterNodesStats.Plugins**  
+**public property Nest.ClusterNodesStats.Versions**  
+**public property Nest.ClusterOperatingSystemStats.Names**  
+**public property Nest.ClusterPendingTasksResponse.Tasks**  
+**public property Nest.ClusterRerouteResponse.Explanations**  
+**public property Nest.Collector.Children**  
+**public property Nest.ExecutionResult.Actions**  
+**public property Nest.Explanation.Details**  
+**public property Nest.ExplanationDetail.Details**  
+**public property Nest.GetSnapshotResponse.Snapshots**  
+**public property Nest.GraphExploreResponse.Connections**  
+**public property Nest.GraphExploreResponse.Failures**  
+**public property Nest.GraphExploreResponse.Vertices**  
+**public property Nest.HighlightHit.Highlights**  
+**public property Nest.Hit&lt;T&gt;.MatchedQueries**  
+**public property Nest.Hit&lt;T&gt;.Sorts**  
+**public property Nest.HitsMetaData&lt;T&gt;.Hits**  
+**public property Nest.HotThreadInformation.Hosts**  
+**public property Nest.HotThreadInformation.Threads**  
+**public property Nest.IAnalyzeResponse.Tokens**  
+**public property Nest.IAuthenticateResponse.Roles**  
+**public property Nest.IBulkResponse.Items**  
+**public property Nest.ICatResponse&lt;TCatRecord&gt;.Records**  
+**public property Nest.IClusterPendingTasksResponse.Tasks**  
+**public property Nest.IClusterRerouteResponse.Explanations**  
+**public property Nest.IGetSnapshotResponse.Snapshots**  
+**public property Nest.IGraphExploreResponse.Connections**  
+**public property Nest.IGraphExploreResponse.Failures**  
+**public property Nest.IGraphExploreResponse.Vertices**  
+**public property Nest.IHit&lt;T&gt;.MatchedQueries**  
+**public property Nest.IHit&lt;T&gt;.Sorts**  
+**public property Nest.IMultiGetResponse.Documents**  
+**public property Nest.IMultiTermVectorsResponse.Documents**  
+**public property Nest.INodesHotThreadsResponse.HotThreads**  
+**public property Nest.IPercolateResponse.Matches**  
+**public property Nest.IReindexOnServerResponse.Failures**  
+**public property Nest.ISearchResponse&lt;T&gt;.Documents**  
+**public property Nest.ISearchResponse&lt;T&gt;.Fields**  
+**public property Nest.ISearchResponse&lt;T&gt;.Hits**  
+**public property Nest.ISearchShardsResponse.Shards**  
+**public property Nest.ISnapshotStatusResponse.Snapshots**  
+**public property Nest.IUpdateByQueryResponse.Failures**  
+**public property Nest.IValidateQueryResponse.Explanations**  
+**public property Nest.IWatcherStatsResponse.CurrentWatches**  
+**public property Nest.IWatcherStatsResponse.QueuedWatches**  
+**public property Nest.LicenseAcknowledgement.License**  
+**public property Nest.MultiBucketAggregate&lt;TBucket&gt;.Buckets**  
+**public property Nest.MultiGetResponse.Documents**  
+**public property Nest.MultiTermVectorsResponse.Documents**  
+**public property Nest.NodesHotThreadsResponse.HotThreads**  
+**public property Nest.PercolateResponse.Matches**  
+**public property Nest.Profile.Shards**  
+**public property Nest.RecoveryStatus.Shards**  
+**public property Nest.ReindexOnServerResponse.Failures**  
+**public property Nest.RoutingNodesState.Unassigned**  
+**public property Nest.SearchProfile.Collector**  
+**public property Nest.SearchProfile.Query**  
+**public property Nest.SearchResponse&lt;T&gt;.Documents**  
+**public property Nest.SearchResponse&lt;T&gt;.Fields**  
+**public property Nest.SearchResponse&lt;T&gt;.Hits**  
+**public property Nest.SearchShardsResponse.Shards**  
+**public property Nest.ShardProfile.Searches**  
+**public property Nest.ShardsMetaData.Failures**  
+**public property Nest.ShardStoreWrapper.Stores**  
+**public property Nest.Snapshot.Failures**  
+**public property Nest.Snapshot.Indices**  
+**public property Nest.SnapshotRestore.Indices**  
+**public property Nest.SnapshotStatusResponse.Snapshots**  
+**public property Nest.TermVectorTerm.Tokens**  
+**public method Nest.TopHitsAggregate.Documents&lt;T&gt;**  
+**public method Nest.TopHitsAggregate.Hits&lt;T&gt;**  
+**public property Nest.UpdateByQueryResponse.Failures**  
+**public property Nest.ValidateQueryResponse.Explanations**  
+**public property Nest.WatcherStatsResponse.CurrentWatches**  
+**public property Nest.WatcherStatsResponse.QueuedWatches**  
+**public property Nest.WatchRecord.Messages**  
+
+#CancellationToken
+**Nest.BulkAllObservable&lt;T&gt;..ctor**  
+**Nest.DeleteManyExtensions.DeleteManyAsync&lt;T&gt;**  
+**Nest.ElasticClient.AcknowledgeWatchAsync**  
+**Nest.ElasticClient.AcknowledgeWatchAsync**  
+**Nest.ElasticClient.ActivateWatchAsync**  
+**Nest.ElasticClient.ActivateWatchAsync**  
+**Nest.ElasticClient.AliasAsync**  
+**Nest.ElasticClient.AliasAsync**  
+**Nest.ElasticClient.AliasExistsAsync**  
+**Nest.ElasticClient.AliasExistsAsync**  
+**Nest.ElasticClient.AnalyzeAsync**  
+**Nest.ElasticClient.AnalyzeAsync**  
+**Nest.ElasticClient.AuthenticateAsync**  
+**Nest.ElasticClient.AuthenticateAsync**  
+**Nest.ElasticClient.BulkAsync**  
+**Nest.ElasticClient.BulkAsync**  
+**Nest.ElasticClient.CatAliasesAsync**  
+**Nest.ElasticClient.CatAliasesAsync**  
+**Nest.ElasticClient.CatAllocationAsync**  
+**Nest.ElasticClient.CatAllocationAsync**  
+**Nest.ElasticClient.CatCountAsync**  
+**Nest.ElasticClient.CatCountAsync**  
+**Nest.ElasticClient.CatFielddataAsync**  
+**Nest.ElasticClient.CatFielddataAsync**  
+**Nest.ElasticClient.CatHealthAsync**  
+**Nest.ElasticClient.CatHealthAsync**  
+**Nest.ElasticClient.CatHelpAsync**  
+**Nest.ElasticClient.CatHelpAsync**  
+**Nest.ElasticClient.CatIndicesAsync**  
+**Nest.ElasticClient.CatIndicesAsync**  
+**Nest.ElasticClient.CatMasterAsync**  
+**Nest.ElasticClient.CatMasterAsync**  
+**Nest.ElasticClient.CatNodeAttributesAsync**  
+**Nest.ElasticClient.CatNodeAttributesAsync**  
+**Nest.ElasticClient.CatNodesAsync**  
+**Nest.ElasticClient.CatNodesAsync**  
+**Nest.ElasticClient.CatPendingTasksAsync**  
+**Nest.ElasticClient.CatPendingTasksAsync**  
+**Nest.ElasticClient.CatPluginsAsync**  
+**Nest.ElasticClient.CatPluginsAsync**  
+**Nest.ElasticClient.CatRecoveryAsync**  
+**Nest.ElasticClient.CatRecoveryAsync**  
+**Nest.ElasticClient.CatRepositoriesAsync**  
+**Nest.ElasticClient.CatRepositoriesAsync**  
+**Nest.ElasticClient.CatSegmentsAsync**  
+**Nest.ElasticClient.CatSegmentsAsync**  
+**Nest.ElasticClient.CatShardsAsync**  
+**Nest.ElasticClient.CatShardsAsync**  
+**Nest.ElasticClient.CatSnapshotsAsync**  
+**Nest.ElasticClient.CatSnapshotsAsync**  
+**Nest.ElasticClient.CatThreadPoolAsync**  
+**Nest.ElasticClient.CatThreadPoolAsync**  
+**Nest.ElasticClient.ClearCacheAsync**  
+**Nest.ElasticClient.ClearCacheAsync**  
+**Nest.ElasticClient.ClearCachedRealmsAsync**  
+**Nest.ElasticClient.ClearCachedRealmsAsync**  
+**Nest.ElasticClient.ClearCachedRolesAsync**  
+**Nest.ElasticClient.ClearCachedRolesAsync**  
+**Nest.ElasticClient.ClearScrollAsync**  
+**Nest.ElasticClient.ClearScrollAsync**  
+**Nest.ElasticClient.CloseIndexAsync**  
+**Nest.ElasticClient.CloseIndexAsync**  
+**Nest.ElasticClient.ClusterGetSettingsAsync**  
+**Nest.ElasticClient.ClusterGetSettingsAsync**  
+**Nest.ElasticClient.ClusterHealthAsync**  
+**Nest.ElasticClient.ClusterHealthAsync**  
+**Nest.ElasticClient.ClusterPendingTasksAsync**  
+**Nest.ElasticClient.ClusterPendingTasksAsync**  
+**Nest.ElasticClient.ClusterPutSettingsAsync**  
+**Nest.ElasticClient.ClusterPutSettingsAsync**  
+**Nest.ElasticClient.ClusterRerouteAsync**  
+**Nest.ElasticClient.ClusterRerouteAsync**  
+**Nest.ElasticClient.ClusterStateAsync**  
+**Nest.ElasticClient.ClusterStateAsync**  
+**Nest.ElasticClient.ClusterStatsAsync**  
+**Nest.ElasticClient.ClusterStatsAsync**  
+**Nest.ElasticClient.CountAsync&lt;T&gt;**  
+**Nest.ElasticClient.CountAsync&lt;T&gt;**  
+**Nest.ElasticClient.CreateIndexAsync**  
+**Nest.ElasticClient.CreateIndexAsync**  
+**Nest.ElasticClient.CreateRepositoryAsync**  
+**Nest.ElasticClient.CreateRepositoryAsync**  
+**Nest.ElasticClient.DeactivateWatchAsync**  
+**Nest.ElasticClient.DeactivateWatchAsync**  
+**Nest.ElasticClient.DeleteAliasAsync**  
+**Nest.ElasticClient.DeleteAliasAsync**  
+**Nest.ElasticClient.DeleteAsync**  
+**Nest.ElasticClient.DeleteAsync&lt;T&gt;**  
+**Nest.ElasticClient.DeleteByQueryAsync**  
+**Nest.ElasticClient.DeleteByQueryAsync&lt;T&gt;**  
+**Nest.ElasticClient.DeleteIndexAsync**  
+**Nest.ElasticClient.DeleteIndexAsync**  
+**Nest.ElasticClient.DeleteIndexTemplateAsync**  
+**Nest.ElasticClient.DeleteIndexTemplateAsync**  
+**Nest.ElasticClient.DeleteLicenseAsync**  
+**Nest.ElasticClient.DeleteLicenseAsync**  
+**Nest.ElasticClient.DeleteRepositoryAsync**  
+**Nest.ElasticClient.DeleteRepositoryAsync**  
+**Nest.ElasticClient.DeleteRoleAsync**  
+**Nest.ElasticClient.DeleteRoleAsync**  
+**Nest.ElasticClient.DeleteScriptAsync**  
+**Nest.ElasticClient.DeleteScriptAsync**  
+**Nest.ElasticClient.DeleteSearchTemplateAsync**  
+**Nest.ElasticClient.DeleteSearchTemplateAsync**  
+**Nest.ElasticClient.DeleteSnapshotAsync**  
+**Nest.ElasticClient.DeleteSnapshotAsync**  
+**Nest.ElasticClient.DeleteUserAsync**  
+**Nest.ElasticClient.DeleteUserAsync**  
+**Nest.ElasticClient.DeleteWatchAsync**  
+**Nest.ElasticClient.DeleteWatchAsync**  
+**Nest.ElasticClient.DocumentExistsAsync**  
+**Nest.ElasticClient.DocumentExistsAsync&lt;T&gt;**  
+**Nest.ElasticClient.ExecuteWatchAsync**  
+**Nest.ElasticClient.ExecuteWatchAsync**  
+**Nest.ElasticClient.ExplainAsync&lt;T&gt;**  
+**Nest.ElasticClient.ExplainAsync&lt;T&gt;**  
+**Nest.ElasticClient.FieldStatsAsync**  
+**Nest.ElasticClient.FieldStatsAsync**  
+**Nest.ElasticClient.FlushAsync**  
+**Nest.ElasticClient.FlushAsync**  
+**Nest.ElasticClient.ForceMergeAsync**  
+**Nest.ElasticClient.ForceMergeAsync**  
+**Nest.ElasticClient.GetAliasAsync**  
+**Nest.ElasticClient.GetAliasAsync**  
+**Nest.ElasticClient.GetAsync&lt;T&gt;**  
+**Nest.ElasticClient.GetAsync&lt;T&gt;**  
+**Nest.ElasticClient.GetFieldMappingAsync**  
+**Nest.ElasticClient.GetFieldMappingAsync&lt;T&gt;**  
+**Nest.ElasticClient.GetIndexAsync**  
+**Nest.ElasticClient.GetIndexAsync**  
+**Nest.ElasticClient.GetIndexSettingsAsync**  
+**Nest.ElasticClient.GetIndexSettingsAsync**  
+**Nest.ElasticClient.GetIndexTemplateAsync**  
+**Nest.ElasticClient.GetIndexTemplateAsync**  
+**Nest.ElasticClient.GetLicenseAsync**  
+**Nest.ElasticClient.GetLicenseAsync**  
+**Nest.ElasticClient.GetMappingAsync**  
+**Nest.ElasticClient.GetMappingAsync&lt;T&gt;**  
+**Nest.ElasticClient.GetRepositoryAsync**  
+**Nest.ElasticClient.GetRepositoryAsync**  
+**Nest.ElasticClient.GetRoleAsync**  
+**Nest.ElasticClient.GetRoleAsync**  
+**Nest.ElasticClient.GetScriptAsync**  
+**Nest.ElasticClient.GetScriptAsync**  
+**Nest.ElasticClient.GetSearchTemplateAsync**  
+**Nest.ElasticClient.GetSearchTemplateAsync**  
+**Nest.ElasticClient.GetSnapshotAsync**  
+**Nest.ElasticClient.GetSnapshotAsync**  
+**Nest.ElasticClient.GetUserAsync**  
+**Nest.ElasticClient.GetUserAsync**  
+**Nest.ElasticClient.GetWatchAsync**  
+**Nest.ElasticClient.GetWatchAsync**  
+**Nest.ElasticClient.GraphExploreAsync**  
+**Nest.ElasticClient.GraphExploreAsync&lt;T&gt;**  
+**Nest.ElasticClient.IndexAsync**  
+**Nest.ElasticClient.IndexAsync&lt;T&gt;**  
+**Nest.ElasticClient.IndexExistsAsync**  
+**Nest.ElasticClient.IndexExistsAsync**  
+**Nest.ElasticClient.IndexTemplateExistsAsync**  
+**Nest.ElasticClient.IndexTemplateExistsAsync**  
+**Nest.ElasticClient.IndicesShardStoresAsync**  
+**Nest.ElasticClient.IndicesShardStoresAsync**  
+**Nest.ElasticClient.IndicesStatsAsync**  
+**Nest.ElasticClient.IndicesStatsAsync**  
+**Nest.ElasticClient.MapAsync**  
+**Nest.ElasticClient.MapAsync&lt;T&gt;**  
+**Nest.ElasticClient.MultiGetAsync**  
+**Nest.ElasticClient.MultiGetAsync**  
+**Nest.ElasticClient.MultiPercolateAsync**  
+**Nest.ElasticClient.MultiPercolateAsync**  
+**Nest.ElasticClient.MultiSearchAsync**  
+**Nest.ElasticClient.MultiSearchAsync**  
+**Nest.ElasticClient.MultiTermVectorsAsync**  
+**Nest.ElasticClient.MultiTermVectorsAsync**  
+**Nest.ElasticClient.NodesHotThreadsAsync**  
+**Nest.ElasticClient.NodesHotThreadsAsync**  
+**Nest.ElasticClient.NodesInfoAsync**  
+**Nest.ElasticClient.NodesInfoAsync**  
+**Nest.ElasticClient.NodesStatsAsync**  
+**Nest.ElasticClient.NodesStatsAsync**  
+**Nest.ElasticClient.OpenIndexAsync**  
+**Nest.ElasticClient.OpenIndexAsync**  
+**Nest.ElasticClient.PercolateAsync&lt;T&gt;**  
+**Nest.ElasticClient.PercolateAsync&lt;T&gt;**  
+**Nest.ElasticClient.PercolateCountAsync&lt;T&gt;**  
+**Nest.ElasticClient.PercolateCountAsync&lt;T&gt;**  
+**Nest.ElasticClient.PingAsync**  
+**Nest.ElasticClient.PingAsync**  
+**Nest.ElasticClient.PostLicenseAsync**  
+**Nest.ElasticClient.PostLicenseAsync**  
+**Nest.ElasticClient.PutAliasAsync**  
+**Nest.ElasticClient.PutAliasAsync**  
+**Nest.ElasticClient.PutIndexTemplateAsync**  
+**Nest.ElasticClient.PutIndexTemplateAsync**  
+**Nest.ElasticClient.PutRoleAsync**  
+**Nest.ElasticClient.PutRoleAsync**  
+**Nest.ElasticClient.PutScriptAsync**  
+**Nest.ElasticClient.PutScriptAsync**  
+**Nest.ElasticClient.PutSearchTemplateAsync**  
+**Nest.ElasticClient.PutSearchTemplateAsync**  
+**Nest.ElasticClient.PutUserAsync**  
+**Nest.ElasticClient.PutUserAsync**  
+**Nest.ElasticClient.PutWatchAsync**  
+**Nest.ElasticClient.PutWatchAsync**  
+**Nest.ElasticClient.RecoveryStatusAsync**  
+**Nest.ElasticClient.RecoveryStatusAsync**  
+**Nest.ElasticClient.RefreshAsync**  
+**Nest.ElasticClient.RefreshAsync**  
+**Nest.ElasticClient.RegisterPercolatorAsync**  
+**Nest.ElasticClient.RegisterPercolatorAsync&lt;T&gt;**  
+**Nest.ElasticClient.Reindex&lt;T&gt;**  
+**Nest.ElasticClient.Reindex&lt;T&gt;**  
+**Nest.ElasticClient.ReindexOnServerAsync**  
+**Nest.ElasticClient.ReindexOnServerAsync**  
+**Nest.ElasticClient.RenderSearchTemplateAsync**  
+**Nest.ElasticClient.RenderSearchTemplateAsync**  
+**Nest.ElasticClient.RestartWatcherAsync**  
+**Nest.ElasticClient.RestartWatcherAsync**  
+**Nest.ElasticClient.RestoreAsync**  
+**Nest.ElasticClient.RestoreAsync**  
+**Nest.ElasticClient.RethrottleAsync**  
+**Nest.ElasticClient.RethrottleAsync**  
+**Nest.ElasticClient.RootNodeInfoAsync**  
+**Nest.ElasticClient.RootNodeInfoAsync**  
+**Nest.ElasticClient.ScrollAsync&lt;T&gt;**  
+**Nest.ElasticClient.ScrollAsync&lt;T&gt;**  
+**Nest.ElasticClient.SearchAsync&lt;T, TResult&gt;**  
+**Nest.ElasticClient.SearchAsync&lt;T, TResult&gt;**  
+**Nest.ElasticClient.SearchAsync&lt;T&gt;**  
+**Nest.ElasticClient.SearchAsync&lt;T&gt;**  
+**Nest.ElasticClient.SearchShardsAsync**  
+**Nest.ElasticClient.SearchShardsAsync&lt;T&gt;**  
+**Nest.ElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
+**Nest.ElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
+**Nest.ElasticClient.SearchTemplateAsync&lt;T&gt;**  
+**Nest.ElasticClient.SearchTemplateAsync&lt;T&gt;**  
+**Nest.ElasticClient.SegmentsAsync**  
+**Nest.ElasticClient.SegmentsAsync**  
+**Nest.ElasticClient.SnapshotAsync**  
+**Nest.ElasticClient.SnapshotAsync**  
+**Nest.ElasticClient.SnapshotStatusAsync**  
+**Nest.ElasticClient.SnapshotStatusAsync**  
+**Nest.ElasticClient.SourceAsync&lt;T&gt;**  
+**Nest.ElasticClient.SourceAsync&lt;T&gt;**  
+**Nest.ElasticClient.StartWatcherAsync**  
+**Nest.ElasticClient.StartWatcherAsync**  
+**Nest.ElasticClient.StopWatcherAsync**  
+**Nest.ElasticClient.StopWatcherAsync**  
+**Nest.ElasticClient.SuggestAsync&lt;T&gt;**  
+**Nest.ElasticClient.SyncedFlushAsync**  
+**Nest.ElasticClient.SyncedFlushAsync**  
+**Nest.ElasticClient.TermVectorsAsync&lt;T&gt;**  
+**Nest.ElasticClient.TermVectorsAsync&lt;T&gt;**  
+**Nest.ElasticClient.TypeExistsAsync**  
+**Nest.ElasticClient.TypeExistsAsync**  
+**Nest.ElasticClient.UnregisterPercolatorAsync**  
+**Nest.ElasticClient.UnregisterPercolatorAsync&lt;T&gt;**  
+**Nest.ElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
+**Nest.ElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
+**Nest.ElasticClient.UpdateAsync&lt;TDocument&gt;**  
+**Nest.ElasticClient.UpdateAsync&lt;TDocument&gt;**  
+**Nest.ElasticClient.UpdateByQueryAsync**  
+**Nest.ElasticClient.UpdateByQueryAsync&lt;T&gt;**  
+**Nest.ElasticClient.UpdateIndexSettingsAsync**  
+**Nest.ElasticClient.UpdateIndexSettingsAsync**  
+**Nest.ElasticClient.UpgradeAsync**  
+**Nest.ElasticClient.UpgradeAsync**  
+**Nest.ElasticClient.UpgradeStatusAsync**  
+**Nest.ElasticClient.UpgradeStatusAsync**  
+**Nest.ElasticClient.ValidateQueryAsync**  
+**Nest.ElasticClient.ValidateQueryAsync&lt;T&gt;**  
+**Nest.ElasticClient.VerifyRepositoryAsync**  
+**Nest.ElasticClient.VerifyRepositoryAsync**  
+**Nest.ElasticClient.WatcherStatsAsync**  
+**Nest.ElasticClient.WatcherStatsAsync**  
+**Nest.GetManyExtensions.GetManyAsync&lt;T&gt;**  
+**Nest.GetManyExtensions.GetManyAsync&lt;T&gt;**  
+**Nest.IElasticClient.AcknowledgeWatchAsync**  
+**Nest.IElasticClient.AcknowledgeWatchAsync**  
+**Nest.IElasticClient.ActivateWatchAsync**  
+**Nest.IElasticClient.ActivateWatchAsync**  
+**Nest.IElasticClient.AliasAsync**  
+**Nest.IElasticClient.AliasAsync**  
+**Nest.IElasticClient.AliasExistsAsync**  
+**Nest.IElasticClient.AliasExistsAsync**  
+**Nest.IElasticClient.AnalyzeAsync**  
+**Nest.IElasticClient.AnalyzeAsync**  
+**Nest.IElasticClient.AuthenticateAsync**  
+**Nest.IElasticClient.AuthenticateAsync**  
+**Nest.IElasticClient.BulkAsync**  
+**Nest.IElasticClient.BulkAsync**  
+**Nest.IElasticClient.CatAliasesAsync**  
+**Nest.IElasticClient.CatAliasesAsync**  
+**Nest.IElasticClient.CatAllocationAsync**  
+**Nest.IElasticClient.CatAllocationAsync**  
+**Nest.IElasticClient.CatCountAsync**  
+**Nest.IElasticClient.CatCountAsync**  
+**Nest.IElasticClient.CatFielddataAsync**  
+**Nest.IElasticClient.CatFielddataAsync**  
+**Nest.IElasticClient.CatHealthAsync**  
+**Nest.IElasticClient.CatHealthAsync**  
+**Nest.IElasticClient.CatHelpAsync**  
+**Nest.IElasticClient.CatHelpAsync**  
+**Nest.IElasticClient.CatIndicesAsync**  
+**Nest.IElasticClient.CatIndicesAsync**  
+**Nest.IElasticClient.CatMasterAsync**  
+**Nest.IElasticClient.CatMasterAsync**  
+**Nest.IElasticClient.CatNodeAttributesAsync**  
+**Nest.IElasticClient.CatNodeAttributesAsync**  
+**Nest.IElasticClient.CatNodesAsync**  
+**Nest.IElasticClient.CatNodesAsync**  
+**Nest.IElasticClient.CatPendingTasksAsync**  
+**Nest.IElasticClient.CatPendingTasksAsync**  
+**Nest.IElasticClient.CatPluginsAsync**  
+**Nest.IElasticClient.CatPluginsAsync**  
+**Nest.IElasticClient.CatRecoveryAsync**  
+**Nest.IElasticClient.CatRecoveryAsync**  
+**Nest.IElasticClient.CatRepositoriesAsync**  
+**Nest.IElasticClient.CatRepositoriesAsync**  
+**Nest.IElasticClient.CatSegmentsAsync**  
+**Nest.IElasticClient.CatSegmentsAsync**  
+**Nest.IElasticClient.CatShardsAsync**  
+**Nest.IElasticClient.CatShardsAsync**  
+**Nest.IElasticClient.CatSnapshotsAsync**  
+**Nest.IElasticClient.CatSnapshotsAsync**  
+**Nest.IElasticClient.CatThreadPoolAsync**  
+**Nest.IElasticClient.CatThreadPoolAsync**  
+**Nest.IElasticClient.ClearCacheAsync**  
+**Nest.IElasticClient.ClearCacheAsync**  
+**Nest.IElasticClient.ClearCachedRealmsAsync**  
+**Nest.IElasticClient.ClearCachedRealmsAsync**  
+**Nest.IElasticClient.ClearCachedRolesAsync**  
+**Nest.IElasticClient.ClearCachedRolesAsync**  
+**Nest.IElasticClient.ClearScrollAsync**  
+**Nest.IElasticClient.ClearScrollAsync**  
+**Nest.IElasticClient.CloseIndexAsync**  
+**Nest.IElasticClient.CloseIndexAsync**  
+**Nest.IElasticClient.ClusterGetSettingsAsync**  
+**Nest.IElasticClient.ClusterGetSettingsAsync**  
+**Nest.IElasticClient.ClusterHealthAsync**  
+**Nest.IElasticClient.ClusterHealthAsync**  
+**Nest.IElasticClient.ClusterPendingTasksAsync**  
+**Nest.IElasticClient.ClusterPendingTasksAsync**  
+**Nest.IElasticClient.ClusterPutSettingsAsync**  
+**Nest.IElasticClient.ClusterPutSettingsAsync**  
+**Nest.IElasticClient.ClusterRerouteAsync**  
+**Nest.IElasticClient.ClusterRerouteAsync**  
+**Nest.IElasticClient.ClusterStateAsync**  
+**Nest.IElasticClient.ClusterStateAsync**  
+**Nest.IElasticClient.ClusterStatsAsync**  
+**Nest.IElasticClient.ClusterStatsAsync**  
+**Nest.IElasticClient.CountAsync&lt;T&gt;**  
+**Nest.IElasticClient.CountAsync&lt;T&gt;**  
+**Nest.IElasticClient.CreateIndexAsync**  
+**Nest.IElasticClient.CreateIndexAsync**  
+**Nest.IElasticClient.CreateRepositoryAsync**  
+**Nest.IElasticClient.CreateRepositoryAsync**  
+**Nest.IElasticClient.DeactivateWatchAsync**  
+**Nest.IElasticClient.DeactivateWatchAsync**  
+**Nest.IElasticClient.DeleteAliasAsync**  
+**Nest.IElasticClient.DeleteAliasAsync**  
+**Nest.IElasticClient.DeleteAsync**  
+**Nest.IElasticClient.DeleteAsync&lt;T&gt;**  
+**Nest.IElasticClient.DeleteByQueryAsync**  
+**Nest.IElasticClient.DeleteByQueryAsync&lt;T&gt;**  
+**Nest.IElasticClient.DeleteIndexAsync**  
+**Nest.IElasticClient.DeleteIndexAsync**  
+**Nest.IElasticClient.DeleteIndexTemplateAsync**  
+**Nest.IElasticClient.DeleteIndexTemplateAsync**  
+**Nest.IElasticClient.DeleteLicenseAsync**  
+**Nest.IElasticClient.DeleteLicenseAsync**  
+**Nest.IElasticClient.DeleteRepositoryAsync**  
+**Nest.IElasticClient.DeleteRepositoryAsync**  
+**Nest.IElasticClient.DeleteRoleAsync**  
+**Nest.IElasticClient.DeleteRoleAsync**  
+**Nest.IElasticClient.DeleteScriptAsync**  
+**Nest.IElasticClient.DeleteScriptAsync**  
+**Nest.IElasticClient.DeleteSearchTemplateAsync**  
+**Nest.IElasticClient.DeleteSearchTemplateAsync**  
+**Nest.IElasticClient.DeleteSnapshotAsync**  
+**Nest.IElasticClient.DeleteSnapshotAsync**  
+**Nest.IElasticClient.DeleteUserAsync**  
+**Nest.IElasticClient.DeleteUserAsync**  
+**Nest.IElasticClient.DeleteWatchAsync**  
+**Nest.IElasticClient.DeleteWatchAsync**  
+**Nest.IElasticClient.DocumentExistsAsync**  
+**Nest.IElasticClient.DocumentExistsAsync&lt;T&gt;**  
+**Nest.IElasticClient.ExecuteWatchAsync**  
+**Nest.IElasticClient.ExecuteWatchAsync**  
+**Nest.IElasticClient.ExplainAsync&lt;T&gt;**  
+**Nest.IElasticClient.ExplainAsync&lt;T&gt;**  
+**Nest.IElasticClient.FieldStatsAsync**  
+**Nest.IElasticClient.FieldStatsAsync**  
+**Nest.IElasticClient.FlushAsync**  
+**Nest.IElasticClient.FlushAsync**  
+**Nest.IElasticClient.ForceMergeAsync**  
+**Nest.IElasticClient.ForceMergeAsync**  
+**Nest.IElasticClient.GetAliasAsync**  
+**Nest.IElasticClient.GetAliasAsync**  
+**Nest.IElasticClient.GetAsync&lt;T&gt;**  
+**Nest.IElasticClient.GetAsync&lt;T&gt;**  
+**Nest.IElasticClient.GetFieldMappingAsync**  
+**Nest.IElasticClient.GetFieldMappingAsync&lt;T&gt;**  
+**Nest.IElasticClient.GetIndexAsync**  
+**Nest.IElasticClient.GetIndexAsync**  
+**Nest.IElasticClient.GetIndexSettingsAsync**  
+**Nest.IElasticClient.GetIndexSettingsAsync**  
+**Nest.IElasticClient.GetIndexTemplateAsync**  
+**Nest.IElasticClient.GetIndexTemplateAsync**  
+**Nest.IElasticClient.GetLicenseAsync**  
+**Nest.IElasticClient.GetLicenseAsync**  
+**Nest.IElasticClient.GetMappingAsync**  
+**Nest.IElasticClient.GetMappingAsync&lt;T&gt;**  
+**Nest.IElasticClient.GetRepositoryAsync**  
+**Nest.IElasticClient.GetRepositoryAsync**  
+**Nest.IElasticClient.GetRoleAsync**  
+**Nest.IElasticClient.GetRoleAsync**  
+**Nest.IElasticClient.GetScriptAsync**  
+**Nest.IElasticClient.GetScriptAsync**  
+**Nest.IElasticClient.GetSearchTemplateAsync**  
+**Nest.IElasticClient.GetSearchTemplateAsync**  
+**Nest.IElasticClient.GetSnapshotAsync**  
+**Nest.IElasticClient.GetSnapshotAsync**  
+**Nest.IElasticClient.GetUserAsync**  
+**Nest.IElasticClient.GetUserAsync**  
+**Nest.IElasticClient.GetWatchAsync**  
+**Nest.IElasticClient.GetWatchAsync**  
+**Nest.IElasticClient.GraphExploreAsync**  
+**Nest.IElasticClient.GraphExploreAsync&lt;T&gt;**  
+**Nest.IElasticClient.IndexAsync**  
+**Nest.IElasticClient.IndexAsync&lt;T&gt;**  
+**Nest.IElasticClient.IndexExistsAsync**  
+**Nest.IElasticClient.IndexExistsAsync**  
+**Nest.IElasticClient.IndexTemplateExistsAsync**  
+**Nest.IElasticClient.IndexTemplateExistsAsync**  
+**Nest.IElasticClient.IndicesShardStoresAsync**  
+**Nest.IElasticClient.IndicesShardStoresAsync**  
+**Nest.IElasticClient.IndicesStatsAsync**  
+**Nest.IElasticClient.IndicesStatsAsync**  
+**Nest.IElasticClient.MapAsync**  
+**Nest.IElasticClient.MapAsync&lt;T&gt;**  
+**Nest.IElasticClient.MultiGetAsync**  
+**Nest.IElasticClient.MultiGetAsync**  
+**Nest.IElasticClient.MultiPercolateAsync**  
+**Nest.IElasticClient.MultiPercolateAsync**  
+**Nest.IElasticClient.MultiSearchAsync**  
+**Nest.IElasticClient.MultiSearchAsync**  
+**Nest.IElasticClient.MultiTermVectorsAsync**  
+**Nest.IElasticClient.MultiTermVectorsAsync**  
+**Nest.IElasticClient.NodesHotThreadsAsync**  
+**Nest.IElasticClient.NodesHotThreadsAsync**  
+**Nest.IElasticClient.NodesInfoAsync**  
+**Nest.IElasticClient.NodesInfoAsync**  
+**Nest.IElasticClient.NodesStatsAsync**  
+**Nest.IElasticClient.NodesStatsAsync**  
+**Nest.IElasticClient.OpenIndexAsync**  
+**Nest.IElasticClient.OpenIndexAsync**  
+**Nest.IElasticClient.PercolateAsync&lt;T&gt;**  
+**Nest.IElasticClient.PercolateAsync&lt;T&gt;**  
+**Nest.IElasticClient.PercolateCountAsync&lt;T&gt;**  
+**Nest.IElasticClient.PercolateCountAsync&lt;T&gt;**  
+**Nest.IElasticClient.PingAsync**  
+**Nest.IElasticClient.PingAsync**  
+**Nest.IElasticClient.PostLicenseAsync**  
+**Nest.IElasticClient.PostLicenseAsync**  
+**Nest.IElasticClient.PutAliasAsync**  
+**Nest.IElasticClient.PutAliasAsync**  
+**Nest.IElasticClient.PutIndexTemplateAsync**  
+**Nest.IElasticClient.PutIndexTemplateAsync**  
+**Nest.IElasticClient.PutRoleAsync**  
+**Nest.IElasticClient.PutRoleAsync**  
+**Nest.IElasticClient.PutScriptAsync**  
+**Nest.IElasticClient.PutScriptAsync**  
+**Nest.IElasticClient.PutSearchTemplateAsync**  
+**Nest.IElasticClient.PutSearchTemplateAsync**  
+**Nest.IElasticClient.PutUserAsync**  
+**Nest.IElasticClient.PutUserAsync**  
+**Nest.IElasticClient.PutWatchAsync**  
+**Nest.IElasticClient.PutWatchAsync**  
+**Nest.IElasticClient.RecoveryStatusAsync**  
+**Nest.IElasticClient.RecoveryStatusAsync**  
+**Nest.IElasticClient.RefreshAsync**  
+**Nest.IElasticClient.RefreshAsync**  
+**Nest.IElasticClient.RegisterPercolatorAsync**  
+**Nest.IElasticClient.RegisterPercolatorAsync&lt;T&gt;**  
+**Nest.IElasticClient.Reindex&lt;T&gt;**  
+**Nest.IElasticClient.Reindex&lt;T&gt;**  
+**Nest.IElasticClient.ReindexOnServerAsync**  
+**Nest.IElasticClient.ReindexOnServerAsync**  
+**Nest.IElasticClient.RenderSearchTemplateAsync**  
+**Nest.IElasticClient.RenderSearchTemplateAsync**  
+**Nest.IElasticClient.RestartWatcherAsync**  
+**Nest.IElasticClient.RestartWatcherAsync**  
+**Nest.IElasticClient.RestoreAsync**  
+**Nest.IElasticClient.RestoreAsync**  
+**Nest.IElasticClient.RethrottleAsync**  
+**Nest.IElasticClient.RethrottleAsync**  
+**Nest.IElasticClient.RootNodeInfoAsync**  
+**Nest.IElasticClient.RootNodeInfoAsync**  
+**Nest.IElasticClient.ScrollAsync&lt;T&gt;**  
+**Nest.IElasticClient.ScrollAsync&lt;T&gt;**  
+**Nest.IElasticClient.SearchAsync&lt;T, TResult&gt;**  
+**Nest.IElasticClient.SearchAsync&lt;T, TResult&gt;**  
+**Nest.IElasticClient.SearchAsync&lt;T&gt;**  
+**Nest.IElasticClient.SearchAsync&lt;T&gt;**  
+**Nest.IElasticClient.SearchShardsAsync**  
+**Nest.IElasticClient.SearchShardsAsync&lt;T&gt;**  
+**Nest.IElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
+**Nest.IElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
+**Nest.IElasticClient.SearchTemplateAsync&lt;T&gt;**  
+**Nest.IElasticClient.SearchTemplateAsync&lt;T&gt;**  
+**Nest.IElasticClient.SegmentsAsync**  
+**Nest.IElasticClient.SegmentsAsync**  
+**Nest.IElasticClient.SnapshotAsync**  
+**Nest.IElasticClient.SnapshotAsync**  
+**Nest.IElasticClient.SnapshotStatusAsync**  
+**Nest.IElasticClient.SnapshotStatusAsync**  
+**Nest.IElasticClient.SourceAsync&lt;T&gt;**  
+**Nest.IElasticClient.SourceAsync&lt;T&gt;**  
+**Nest.IElasticClient.StartWatcherAsync**  
+**Nest.IElasticClient.StartWatcherAsync**  
+**Nest.IElasticClient.StopWatcherAsync**  
+**Nest.IElasticClient.StopWatcherAsync**  
+**Nest.IElasticClient.SuggestAsync&lt;T&gt;**  
+**Nest.IElasticClient.SyncedFlushAsync**  
+**Nest.IElasticClient.SyncedFlushAsync**  
+**Nest.IElasticClient.TermVectorsAsync&lt;T&gt;**  
+**Nest.IElasticClient.TermVectorsAsync&lt;T&gt;**  
+**Nest.IElasticClient.TypeExistsAsync**  
+**Nest.IElasticClient.TypeExistsAsync**  
+**Nest.IElasticClient.UnregisterPercolatorAsync**  
+**Nest.IElasticClient.UnregisterPercolatorAsync&lt;T&gt;**  
+**Nest.IElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
+**Nest.IElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
+**Nest.IElasticClient.UpdateAsync&lt;TDocument&gt;**  
+**Nest.IElasticClient.UpdateAsync&lt;TDocument&gt;**  
+**Nest.IElasticClient.UpdateByQueryAsync**  
+**Nest.IElasticClient.UpdateByQueryAsync&lt;T&gt;**  
+**Nest.IElasticClient.UpdateIndexSettingsAsync**  
+**Nest.IElasticClient.UpdateIndexSettingsAsync**  
+**Nest.IElasticClient.UpgradeAsync**  
+**Nest.IElasticClient.UpgradeAsync**  
+**Nest.IElasticClient.UpgradeStatusAsync**  
+**Nest.IElasticClient.UpgradeStatusAsync**  
+**Nest.IElasticClient.ValidateQueryAsync**  
+**Nest.IElasticClient.ValidateQueryAsync&lt;T&gt;**  
+**Nest.IElasticClient.VerifyRepositoryAsync**  
+**Nest.IElasticClient.VerifyRepositoryAsync**  
+**Nest.IElasticClient.WatcherStatsAsync**  
+**Nest.IElasticClient.WatcherStatsAsync**  
+**Nest.IHighLevelToLowLevelDispatcher.DispatchAsync&lt;TRequest, TQueryString, TResponse, TResponseInterface&gt;**  
+**Nest.IHighLevelToLowLevelDispatcher.DispatchAsync&lt;TRequest, TQueryString, TResponse, TResponseInterface&gt;**  
+**Nest.IndexManyExtensions.IndexManyAsync&lt;T&gt;**  
+**Nest.ReindexObservable&lt;T&gt;..ctor**  
+**Nest.SourceManyExtensions.SourceManyAsync&lt;T&gt;**  
+**Nest.SourceManyExtensions.SourceManyAsync&lt;T&gt;**  
+
+# Removed in 5.0 after being obsoleted in 2.0
+
+
+These are the things we removed from 5.0 that we gave an advanced warning for in the latest 2.x release of NEST. 
+
+We will make sure to another release of NEST 2.x that flags as many types/methods/properties that are going to be removed that we have not convered yet
 
-```csharp
-public class AllocateClusterRerouteCommand : IAllocateClusterRerouteCommand, IClusterRerouteCommand
-```
 
-**public class Nest.AllocateClusterRerouteCommandDescriptor** *Removed (Breaking)*
-
-```csharp
-public class AllocateClusterRerouteCommandDescriptor : DescriptorBase<AllocateClusterRerouteCommandDescriptor, IAllocateClusterRerouteCommand>, IDescriptor, IAllocateClusterRerouteCommand, IClusterRerouteCommand
-```
-
-**public class Nest.AttachData** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public class AttachData
-```
-
-**public property Nest.AttachmentProperty.FileField** *Removed (Breaking)*
-
-```csharp
-public IStringProperty FileField { get; set; }
-```
-
-**public method Nest.AttachmentPropertyDescriptor&lt;T&gt;.LanguageField** *Removed (Breaking)*
-
-```csharp
-public AttachmentPropertyDescriptor<T> LanguageField(Func<StringPropertyDescriptor<T>, IStringProperty> selector)
-```
-
-**public property Nest.BulkAllRequest&lt;T&gt;.Consistency** *Removed (Breaking)*
-
-```csharp
-public Nullable<Consistency> Consistency { get; set; }
-```
-
-**public method Nest.BulkDescriptor.Consistency** *Removed (Breaking)*
-
-```csharp
-public BulkDescriptor Consistency(Consistency consistency)
-```
-
-**public property Nest.BulkIndexByScrollFailure.CausedBy** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("caused_by")]
-public CausedBy CausedBy { get; internal set; }
-```
-
-**public property Nest.BulkIndexByScrollFailure.Node** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("node")]
-public string Node { get; internal set; }
-```
-
-**public property Nest.BulkIndexByScrollFailure.Reason** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("reason")]
-public Throwable Reason { get; internal set; }
-```
-
-**public property Nest.BulkIndexByScrollFailure.Shard** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("shard")]
-public int Shard { get; internal set; }
-```
-
-**public property Nest.BulkRequest.Consistency** *Removed (Breaking)*
-
-```csharp
-public Consistency Consistency { get; set; }
-```
-
-**public property Nest.BulkResponse.TookAsLong** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("took")]
-public long TookAsLong { get; internal set; }
-```
-
-**public method Nest.BulkUpdateDescriptor&lt;TDocument, TPartialDocument&gt;.Lang** *Removed (Breaking)*
-
-```csharp
-public BulkUpdateDescriptor<TDocument, TPartialDocument> Lang(string lang)
-```
-
-**public method Nest.BulkUpdateDescriptor&lt;TDocument, TPartialDocument&gt;.Params** *Removed (Breaking)*
-
-```csharp
-public BulkUpdateDescriptor<TDocument, TPartialDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
-```
-
-**public property Nest.BulkUpdateOperation&lt;TDocument, TPartialDocument&gt;.InferFrom** *Removed (Breaking)*
-
-```csharp
-public TDocument InferFrom { get; set; }
-```
-
-**public property Nest.CategorySuggestContext.Default** *Removed (Breaking)*
-
-```csharp
-public IEnumerable<string> Default { get; set; }
-```
-
-**public method Nest.CategorySuggestContextDescriptor&lt;T&gt;.Default** *Removed (Breaking)*
-
-```csharp
-public CategorySuggestContextDescriptor<T> Default(IEnumerable<string> defaults)
-```
-
-**public method Nest.CategorySuggestContextDescriptor&lt;T&gt;.Default** *Removed (Breaking)*
-
-```csharp
-public CategorySuggestContextDescriptor<T> Default(String[] defaults)
-```
-
-**public property Nest.CatFielddataRecord.FieldSizes** *Removed (Breaking)*
-
-```csharp
-public IDictionary<string, string> FieldSizes { get; set; }
-```
-
-**public property Nest.CatFielddataRecord.Total** *Removed (Breaking)*
-
-```csharp
-public string Total { get; set; }
-```
-
-**public property Nest.CatNodesRecord.Host** *Removed (Breaking)*
-
-```csharp
-public string Host { get; }
-```
-
-**public property Nest.CatNodesRecord.Load** *Removed (Breaking)*
-
-```csharp
-public string Load { get; }
-```
-
-**public property Nest.CatRecoveryRecord.TotalTranslog** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("total_translog")]
-public long? TotalTranslog { get; set; }
-```
-
-**public property Nest.CatRecoveryRecord.Translog** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("translog")]
-public long? Translog { get; set; }
-```
-
-**public property Nest.CatRecoveryRecord.TranslogPercent** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("translog_percent")]
-public string TranslogPercent { get; set; }
-```
-
-**public method Nest.ClusterHealthDescriptor.WaitForRelocatingShards** *Removed (Breaking)*
-
-```csharp
-public ClusterHealthDescriptor WaitForRelocatingShards(long wait_for_relocating_shards)
-```
-
-**public property Nest.ClusterHealthRequest.WaitForRelocatingShards** *Removed (Breaking)*
-
-```csharp
-public long WaitForRelocatingShards { get; set; }
-```
-
-**public property Nest.ClusterIndicesStats.Percolate** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("percolate")]
-public PercolateStats Percolate { get; internal set; }
-```
-
-**public property Nest.ClusterNodeCount.Client** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("client")]
-public int Client { get; internal set; }
-```
-
-**public property Nest.ClusterNodeCount.DataOnly** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("data_only")]
-public int DataOnly { get; internal set; }
-```
-
-**public property Nest.ClusterNodeCount.MasterData** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("master_data")]
-public int MasterData { get; internal set; }
-```
-
-**public property Nest.ClusterNodeCount.MasterOnly** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("master_only")]
-public int MasterOnly { get; internal set; }
-```
-
-**public class Nest.ClusterOperatingSystemMemory** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public class ClusterOperatingSystemMemory
-```
-
-**public property Nest.ClusterOperatingSystemStats.Memory** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("mem")]
-public ClusterOperatingSystemMemory Memory { get; internal set; }
-```
-
-**public method Nest.ClusterRerouteDescriptor.Allocate** *Removed (Breaking)*
-
-```csharp
-public ClusterRerouteDescriptor Allocate(Func<AllocateClusterRerouteCommandDescriptor, IAllocateClusterRerouteCommand> selector)
-```
-
-**public property Nest.ClusterRerouteResponse.Version** *Removed (Breaking)*
-
-```csharp
-public int Version { get; set; }
-```
-
-**public property Nest.CompletionAttribute.Payloads** *Removed (Breaking)*
-
-```csharp
-public bool Payloads { get; set; }
-```
-
-**public class Nest.CompletionField&lt;TPayload&gt;** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public class CompletionField<TPayload>
-```
-
-**public property Nest.CompletionProperty.Context** *Removed (Breaking)*
-
-```csharp
-public ISuggestContextMapping Context { get; set; }
-```
-
-**public property Nest.CompletionProperty.Payloads** *Removed (Breaking)*
-
-```csharp
-public bool? Payloads { get; set; }
-```
-
-**public method Nest.CompletionPropertyDescriptor&lt;T&gt;.Context** *Removed (Breaking)*
-
-```csharp
-public CompletionPropertyDescriptor<T> Context(Func<SuggestContextMappingDescriptor<T>, IPromise<ISuggestContextMapping>> selector)
-```
-
-**public method Nest.CompletionPropertyDescriptor&lt;T&gt;.Payloads** *Removed (Breaking)*
-
-```csharp
-public CompletionPropertyDescriptor<T> Payloads(bool payloads = True)
-```
-
-**public property Nest.CompletionSuggester.Context** *Removed (Breaking)*
-
-```csharp
-public IDictionary<string, object> Context { get; set; }
-```
-
-**public method Nest.CompletionSuggesterDescriptor&lt;T&gt;.Context** *Removed (Breaking)*
-
-```csharp
-public CompletionSuggesterDescriptor<T> Context(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-```
-
-**public method Nest.CreateIndexDescriptor.Warmers** *Removed (Breaking)*
-
-```csharp
-public CreateIndexDescriptor Warmers(Func<WarmersDescriptor, IPromise<IWarmers>> selector)
-```
-
-**public property Nest.CreateIndexRequest.Warmers** *Removed (Breaking)*
-
-```csharp
-public IWarmers Warmers { get; set; }
-```
-
-**public class Nest.DeleteByQueryIndicesResult** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public class DeleteByQueryIndicesResult
-```
-
-**public property Nest.DeleteByQueryResponse.Indices** *Removed (Breaking)*
-
-```csharp
-public IDictionary<string, DeleteByQueryIndicesResult> Indices { get; set; }
-```
-
-**public method Nest.DeleteDescriptor&lt;T&gt;.Consistency** *Removed (Breaking)*
-
-```csharp
-public DeleteDescriptor<T> Consistency(Consistency consistency)
-```
-
-**public property Nest.DeleteRequest.Consistency** *Removed (Breaking)*
-
-```csharp
-public Consistency Consistency { get; set; }
-```
-
-**public property Nest.DeleteRequest&lt;T&gt;.Consistency** *Removed (Breaking)*
-
-```csharp
-public Consistency Consistency { get; set; }
-```
-
-**public method Nest.DeleteScriptDescriptor.Version** *Removed (Breaking)*
-
-```csharp
-public DeleteScriptDescriptor Version(long version)
-```
-
-**public method Nest.DeleteScriptDescriptor.VersionType** *Removed (Breaking)*
-
-```csharp
-public DeleteScriptDescriptor VersionType(VersionType version_type)
-```
-
-**public property Nest.DeleteScriptRequest.Version** *Removed (Breaking)*
-
-```csharp
-public long Version { get; set; }
-```
-
-**public property Nest.DeleteScriptRequest.VersionType** *Removed (Breaking)*
-
-```csharp
-public VersionType VersionType { get; set; }
-```
-
-**public method Nest.DeleteSearchTemplateDescriptor.Version** *Removed (Breaking)*
-
-```csharp
-public DeleteSearchTemplateDescriptor Version(long version)
-```
-
-**public method Nest.DeleteSearchTemplateDescriptor.VersionType** *Removed (Breaking)*
-
-```csharp
-public DeleteSearchTemplateDescriptor VersionType(VersionType version_type)
-```
-
-**public property Nest.DeleteSearchTemplateRequest.Version** *Removed (Breaking)*
-
-```csharp
-public long Version { get; set; }
-```
-
-**public property Nest.DeleteSearchTemplateRequest.VersionType** *Removed (Breaking)*
-
-```csharp
-public VersionType VersionType { get; set; }
-```
-
-**public class Nest.DeleteWarmerDescriptor** *Removed (Breaking)*
-
-```csharp
-[DescriptorForAttribute("IndicesDeleteWarmer")]
-public class DeleteWarmerDescriptor : RequestDescriptorBase<DeleteWarmerDescriptor, DeleteWarmerRequestParameters, IDeleteWarmerRequest>, IRequest<DeleteWarmerRequestParameters>, IRequest, IDescriptor, IDeleteWarmerRequest
-```
-
-**public class Nest.DeleteWarmerRequest** *Removed (Breaking)*
-
-```csharp
-public class DeleteWarmerRequest : PlainRequestBase<DeleteWarmerRequestParameters>, IRequest<DeleteWarmerRequestParameters>, IRequest, IDeleteWarmerRequest
-```
-
-**public class Nest.DeleteWarmerResponse** *Removed (Breaking)*
-
-```csharp
-public class DeleteWarmerResponse : AcknowledgedResponseBase, IResponse, IBodyWithApiCallDetails, IAcknowledgedResponse, IDeleteWarmerResponse
-```
-
-**public method Nest.DeleteWatchDescriptor.Force** *Removed (Breaking)*
-
-```csharp
-public DeleteWatchDescriptor Force(bool force = True)
-```
-
-**public property Nest.DeleteWatchRequest.Force** *Removed (Breaking)*
-
-```csharp
-public bool Force { get; set; }
-```
-
-**public property Nest.DirectGenerator.MinWordLen** *Removed (Breaking)*
-
-```csharp
-public int? MinWordLen { get; set; }
-```
-
-**public property Nest.DirectGenerator.PrefixLen** *Removed (Breaking)*
-
-```csharp
-public int? PrefixLen { get; set; }
-```
-
-**public method Nest.DynamicIndexSettings..ctor** *Removed (Breaking)*
-
-```csharp
-public  .ctor(Dictionary<string, object> container)
-```
-
-**public property Nest.DynamicIndexSettings.RequestCacheEnabled** *Removed (Breaking)*
-
-```csharp
-public bool? RequestCacheEnabled { get; set; }
-```
-
-**public property Nest.DynamicIndexSettings.WarmersEnabled** *Removed (Breaking)*
-
-```csharp
-public bool? WarmersEnabled { get; set; }
-```
-
-**public method Nest.DynamicIndexSettingsDescriptorBase&lt;TDescriptor, TIndexSettings&gt;.RequestCacheEnabled** *Removed (Breaking)*
-
-```csharp
-public TDescriptor RequestCacheEnabled(bool enabled = True)
-```
-
-**public method Nest.DynamicIndexSettingsDescriptorBase&lt;TDescriptor, TIndexSettings&gt;.WarmersEnabled** *Removed (Breaking)*
-
-```csharp
-public TDescriptor WarmersEnabled(bool enabled = True)
-```
-
-**public method Nest.ElasticClient.DeleteWarmer** *Removed (Breaking)*
-
-```csharp
-public IDeleteWarmerResponse DeleteWarmer(IDeleteWarmerRequest request)
-```
-
-**public method Nest.ElasticClient.DeleteWarmer** *Removed (Breaking)*
-
-```csharp
-public IDeleteWarmerResponse DeleteWarmer(Indices indices, Names names, Func<DeleteWarmerDescriptor, IDeleteWarmerRequest> selector)
-```
-
-**public method Nest.ElasticClient.DeleteWarmerAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IDeleteWarmerResponse> DeleteWarmerAsync(IDeleteWarmerRequest request)
-```
-
-**public method Nest.ElasticClient.DeleteWarmerAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IDeleteWarmerResponse> DeleteWarmerAsync(Indices indices, Names names, Func<DeleteWarmerDescriptor, IDeleteWarmerRequest> selector)
-```
-
-**public method Nest.ElasticClient.GetWarmer** *Removed (Breaking)*
-
-```csharp
-public IGetWarmerResponse GetWarmer(IGetWarmerRequest request)
-```
-
-**public method Nest.ElasticClient.GetWarmer** *Removed (Breaking)*
-
-```csharp
-public IGetWarmerResponse GetWarmer(Func<GetWarmerDescriptor, IGetWarmerRequest> selector)
-```
-
-**public method Nest.ElasticClient.GetWarmerAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IGetWarmerResponse> GetWarmerAsync(IGetWarmerRequest request)
-```
-
-**public method Nest.ElasticClient.GetWarmerAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IGetWarmerResponse> GetWarmerAsync(Func<GetWarmerDescriptor, IGetWarmerRequest> selector)
-```
-
-**public method Nest.ElasticClient.Optimize** *Removed (Breaking)*
-
-```csharp
-public IOptimizeResponse Optimize(IOptimizeRequest request)
-```
-
-**public method Nest.ElasticClient.Optimize** *Removed (Breaking)*
-
-```csharp
-public IOptimizeResponse Optimize(Indices indices, Func<OptimizeDescriptor, IOptimizeRequest> selector)
-```
-
-**public method Nest.ElasticClient.OptimizeAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IOptimizeResponse> OptimizeAsync(IOptimizeRequest request)
-```
-
-**public method Nest.ElasticClient.OptimizeAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IOptimizeResponse> OptimizeAsync(Indices indices, Func<OptimizeDescriptor, IOptimizeRequest> selector)
-```
-
-**public method Nest.ElasticClient.PutWarmer** *Removed (Breaking)*
-
-```csharp
-public IPutWarmerResponse PutWarmer(IPutWarmerRequest request)
-```
-
-**public method Nest.ElasticClient.PutWarmer** *Removed (Breaking)*
-
-```csharp
-public IPutWarmerResponse PutWarmer(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector)
-```
-
-**public method Nest.ElasticClient.PutWarmerAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IPutWarmerResponse> PutWarmerAsync(IPutWarmerRequest request)
-```
-
-**public method Nest.ElasticClient.PutWarmerAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IPutWarmerResponse> PutWarmerAsync(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector)
-```
-
-**public method Nest.ElasticClient.SearchExists** *Removed (Breaking)*
-
-```csharp
-public IExistsResponse SearchExists(ISearchExistsRequest request)
-```
-
-**public method Nest.ElasticClient.SearchExists&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public IExistsResponse SearchExists<T>(Func<SearchExistsDescriptor<T>, ISearchExistsRequest> selector)
-```
-
-**public method Nest.ElasticClient.SearchExistsAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IExistsResponse> SearchExistsAsync(ISearchExistsRequest request)
-```
-
-**public method Nest.ElasticClient.SearchExistsAsync&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public Task<IExistsResponse> SearchExistsAsync<T>(Func<SearchExistsDescriptor<T>, ISearchExistsRequest> selector)
-```
-
-**public method Nest.ElasticClient.Suggest** *Removed (Breaking)*
-
-```csharp
-public ISuggestResponse Suggest(ISuggestRequest request)
-```
-
-**public method Nest.ElasticClient.SuggestAsync** *Removed (Breaking)*
-
-```csharp
-public Task<ISuggestResponse> SuggestAsync(ISuggestRequest request)
-```
-
-**public method Nest.ElasticClient.TasksCancel** *Removed (Breaking)*
-
-```csharp
-public ITasksCancelResponse TasksCancel(ITasksCancelRequest request)
-```
-
-**public method Nest.ElasticClient.TasksCancel** *Removed (Breaking)*
-
-```csharp
-public ITasksCancelResponse TasksCancel(Func<TasksCancelDescriptor, ITasksCancelRequest> selector)
-```
-
-**public method Nest.ElasticClient.TasksCancelAsync** *Removed (Breaking)*
-
-```csharp
-public Task<ITasksCancelResponse> TasksCancelAsync(ITasksCancelRequest request)
-```
-
-**public method Nest.ElasticClient.TasksCancelAsync** *Removed (Breaking)*
-
-```csharp
-public Task<ITasksCancelResponse> TasksCancelAsync(Func<TasksCancelDescriptor, ITasksCancelRequest> selector)
-```
-
-**public method Nest.ElasticClient.TasksList** *Removed (Breaking)*
-
-```csharp
-public ITasksListResponse TasksList(ITasksListRequest request)
-```
-
-**public method Nest.ElasticClient.TasksList** *Removed (Breaking)*
-
-```csharp
-public ITasksListResponse TasksList(Func<TasksListDescriptor, ITasksListRequest> selector)
-```
-
-**public method Nest.ElasticClient.TasksListAsync** *Removed (Breaking)*
-
-```csharp
-public Task<ITasksListResponse> TasksListAsync(ITasksListRequest request)
-```
-
-**public method Nest.ElasticClient.TasksListAsync** *Removed (Breaking)*
-
-```csharp
-public Task<ITasksListResponse> TasksListAsync(Func<TasksListDescriptor, ITasksListRequest> selector)
-```
-
-**public method Nest.ElasticClient.UpdateByQuery&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public IUpdateByQueryResponse UpdateByQuery<T>(Indices indices, Types types, Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector)
-```
-
-**public method Nest.ElasticClient.UpdateByQueryAsync&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public Task<IUpdateByQueryResponse> UpdateByQueryAsync<T>(Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector)
-```
-
-**public method Nest.ElasticClient.WatcherInfo** *Removed (Breaking)*
-
-```csharp
-public IWatcherInfoResponse WatcherInfo(IWatcherInfoRequest request)
-```
-
-**public method Nest.ElasticClient.WatcherInfo** *Removed (Breaking)*
-
-```csharp
-public IWatcherInfoResponse WatcherInfo(Func<WatcherInfoDescriptor, IWatcherInfoRequest> selector)
-```
-
-**public method Nest.ElasticClient.WatcherInfoAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IWatcherInfoResponse> WatcherInfoAsync(IWatcherInfoRequest request)
-```
-
-**public method Nest.ElasticClient.WatcherInfoAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IWatcherInfoResponse> WatcherInfoAsync(Func<WatcherInfoDescriptor, IWatcherInfoRequest> selector)
-```
-
-**public property Nest.ElasticsearchPropertyAttributeBase.DocValues** *Removed (Breaking)*
-
-```csharp
-public bool DocValues { get; set; }
-```
-
-**public property Nest.ElasticsearchPropertyAttributeBase.Similarity** *Removed (Breaking)*
-
-```csharp
-public SimilarityOption Similarity { get; set; }
-```
-
-**public property Nest.ElasticsearchPropertyAttributeBase.Store** *Removed (Breaking)*
-
-```csharp
-public bool Store { get; set; }
-```
-
-**public method Nest.ExplainDescriptor&lt;TDocument&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public ExplainDescriptor<TDocument> Fields(Expression`1[] fields)
-```
-
-**public method Nest.ExplainDescriptor&lt;TDocument&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public ExplainDescriptor<TDocument> Fields(String[] fields)
-```
-
-**public property Nest.ExplainRequest&lt;TDocument&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public Fields Fields { get; set; }
-```
-
-**public property Nest.Field.CacheableExpression** *Removed (Breaking)*
-
-```csharp
-public bool CacheableExpression { get; private set; }
-```
-
-**public method Nest.Field.Create** *Removed (Breaking)*
-
-```csharp
-public static Field Create(Expression expression, double? boost)
-```
-
-**public method Nest.Field.Create** *Removed (Breaking)*
-
-```csharp
-public static Field Create(string name, double? boost)
-```
-
-**public class Nest.GeoLocationSuggestContext** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public class GeoLocationSuggestContext : SuggestContextBase, ISuggestContext, IGeoLocationSuggestContext
-```
-
-**public class Nest.GeoLocationSuggestContextDescriptor&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public class GeoLocationSuggestContextDescriptor<T> : SuggestContextDescriptorBase<GeoLocationSuggestContextDescriptor<T>, IGeoLocationSuggestContext, T>, IDescriptor, ISuggestContext, IGeoLocationSuggestContext
-```
-
-**public class Nest.GetAliasesDescriptor** *Removed (Breaking)*
-
-```csharp
-[DescriptorForAttribute("IndicesGetAliases")]
-public class GetAliasesDescriptor : RequestDescriptorBase<GetAliasesDescriptor, GetAliasesRequestParameters, IGetAliasesRequest>, IRequest<GetAliasesRequestParameters>, IRequest, IDescriptor, IGetAliasesRequest
-```
-
-**public class Nest.GetAliasesRequest** *Removed (Breaking)*
-
-```csharp
-public class GetAliasesRequest : PlainRequestBase<GetAliasesRequestParameters>, IRequest<GetAliasesRequestParameters>, IRequest, IGetAliasesRequest
-```
-
-**public class Nest.GetAliasesResponse** *Removed (Breaking)*
-
-```csharp
-public class GetAliasesResponse : ResponseBase, IResponse, IBodyWithApiCallDetails, IGetAliasesResponse
-```
-
-**public method Nest.GetDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public GetDescriptor<T> Fields(Expression`1[] fields)
-```
-
-**public method Nest.GetDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public GetDescriptor<T> Fields(String[] fields)
-```
-
-**public property Nest.GetMappingResponse.IndexTypeMappings** *Removed (Breaking)*
-
-```csharp
-public Dictionary<IndexName, IDictionary<TypeName, TypeMapping>> IndexTypeMappings { get; internal set; }
-```
-
-**public property Nest.GetRequest.Fields** *Removed (Breaking)*
-
-```csharp
-public Fields Fields { get; set; }
-```
-
-**public property Nest.GetRequest&lt;T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public Fields Fields { get; set; }
-```
-
-**public method Nest.GetScriptDescriptor.Version** *Removed (Breaking)*
-
-```csharp
-public GetScriptDescriptor Version(long version)
-```
-
-**public method Nest.GetScriptDescriptor.VersionType** *Removed (Breaking)*
-
-```csharp
-public GetScriptDescriptor VersionType(VersionType version_type)
-```
-
-**public property Nest.GetScriptRequest.Version** *Removed (Breaking)*
-
-```csharp
-public long Version { get; set; }
-```
-
-**public property Nest.GetScriptRequest.VersionType** *Removed (Breaking)*
-
-```csharp
-public VersionType VersionType { get; set; }
-```
-
-**public method Nest.GetSearchTemplateDescriptor.Version** *Removed (Breaking)*
-
-```csharp
-public GetSearchTemplateDescriptor Version(long version)
-```
-
-**public method Nest.GetSearchTemplateDescriptor.VersionType** *Removed (Breaking)*
-
-```csharp
-public GetSearchTemplateDescriptor VersionType(VersionType version_type)
-```
-
-**public property Nest.GetSearchTemplateRequest.Version** *Removed (Breaking)*
-
-```csharp
-public long Version { get; set; }
-```
-
-**public property Nest.GetSearchTemplateRequest.VersionType** *Removed (Breaking)*
-
-```csharp
-public VersionType VersionType { get; set; }
-```
-
-**public class Nest.GetWarmerDescriptor** *Removed (Breaking)*
-
-```csharp
-[DescriptorForAttribute("IndicesGetWarmer")]
-public class GetWarmerDescriptor : RequestDescriptorBase<GetWarmerDescriptor, GetWarmerRequestParameters, IGetWarmerRequest>, IRequest<GetWarmerRequestParameters>, IRequest, IDescriptor, IGetWarmerRequest
-```
-
-**public class Nest.GetWarmerRequest** *Removed (Breaking)*
-
-```csharp
-public class GetWarmerRequest : PlainRequestBase<GetWarmerRequestParameters>, IRequest<GetWarmerRequestParameters>, IRequest, IGetWarmerRequest
-```
-
-**public class Nest.GetWarmerResponse** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public class GetWarmerResponse : ResponseBase, IResponse, IBodyWithApiCallDetails, IGetWarmerResponse
-```
-
-**public class Nest.GlobalInnerHit** *Removed (Breaking)*
-
-```csharp
-public class GlobalInnerHit : InnerHits, IInnerHits, IGlobalInnerHit
-```
-
-**public class Nest.GlobalInnerHitDescriptor&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public class GlobalInnerHitDescriptor<T> : DescriptorBase<GlobalInnerHitDescriptor<T>, IGlobalInnerHit>, IDescriptor, IGlobalInnerHit, IInnerHits
-```
-
-**public property Nest.HasParentQuery.ScoreMode** *Removed (Breaking)*
-
-```csharp
-public Nullable<ParentScoreMode> ScoreMode { get; set; }
-```
-
-**public method Nest.HasParentQueryDescriptor&lt;T&gt;.ScoreMode** *Removed (Breaking)*
-
-```csharp
-public HasParentQueryDescriptor<T> ScoreMode(Nullable<ParentScoreMode> scoreMode = 1)
-```
-
-**public class Nest.HighlightDocumentDictionary** *Removed (Breaking)*
-
-```csharp
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public class HighlightDocumentDictionary : Dictionary<string, HighlightFieldDictionary>, IDictionary<string, HighlightFieldDictionary>, ICollection<KeyValuePair<string, HighlightFieldDictionary>>, IEnumerable<KeyValuePair<string, HighlightFieldDictionary>>, IEnumerable, IDictionary, ICollection, IReadOnlyDictionary<string, HighlightFieldDictionary>, IReadOnlyCollection<KeyValuePair<string, HighlightFieldDictionary>>, ISerializable, IDeserializationCallback
-```
-
-**public property Nest.HighlightField.CustomType** *Removed (Breaking)*
-
-```csharp
-public string CustomType { get; set; }
-```
-
-**public method Nest.HighlightFieldDescriptor&lt;T&gt;.OnAll** *Removed (Breaking)*
-
-```csharp
-public HighlightFieldDescriptor<T> OnAll()
-```
-
-**public class Nest.HistogramBucket** *Removed (Breaking)*
-
-```csharp
-public class HistogramBucket : BucketBase, IBucket
-```
-
-**public property Nest.IAllocateClusterRerouteCommand.AllowPrimary** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("allow_primary")]
-public bool? AllowPrimary { get; set; }
-```
-
-**public property Nest.IAttachmentProperty.FileField** *Removed (Breaking)*
-
-```csharp
-public IStringProperty FileField { get; set; }
-```
-
-**public property Nest.IBoolQuery.CreatedByBoolDsl** *Removed (Breaking)*
-
-```csharp
-public bool CreatedByBoolDsl { get; }
-```
-
-**public property Nest.IBulkAllRequest&lt;T&gt;.Consistency** *Removed (Breaking)*
-
-```csharp
-public Nullable<Consistency> Consistency { get; set; }
-```
-
-**public property Nest.IBulkResponse.TookAsLong** *Removed (Breaking)*
-
-```csharp
-public long TookAsLong { get; }
-```
-
-**public property Nest.IBulkUpdateOperation&lt;TDocument, TPartialDocument&gt;.InferFrom** *Removed (Breaking)*
-
-```csharp
-public TDocument InferFrom { get; set; }
-```
-
-**public property Nest.ICategorySuggestContext.Default** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("default")]
-public IEnumerable<string> Default { get; set; }
-```
-
-**public property Nest.ICompletionProperty.Context** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("context")]
-public ISuggestContextMapping Context { get; set; }
-```
-
-**public property Nest.ICompletionProperty.Payloads** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("payloads")]
-public bool? Payloads { get; set; }
-```
-
-**public property Nest.ICompletionSuggester.Context** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("context")]
-public IDictionary<string, object> Context { get; set; }
-```
-
-**public property Nest.IDeleteByQueryResponse.Indices** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("_indices")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public IDictionary<string, DeleteByQueryIndicesResult> Indices { get; }
-```
-
-**public interface Nest.IDeleteWarmerRequest** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public interface IDeleteWarmerRequest : IRequest<DeleteWarmerRequestParameters>, IRequest
-```
-
-**public interface Nest.IDeleteWarmerResponse** *Removed (Breaking)*
-
-```csharp
-public interface IDeleteWarmerResponse : IAcknowledgedResponse, IResponse, IBodyWithApiCallDetails
-```
-
-**public property Nest.IDirectGenerator.MinWordLen** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public int? MinWordLen { get; set; }
-```
-
-**public property Nest.IDirectGenerator.PrefixLen** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public int? PrefixLen { get; set; }
-```
-
-**public property Nest.IDynamicIndexSettings.RequestCacheEnabled** *Removed (Breaking)*
-
-```csharp
-public bool? RequestCacheEnabled { get; set; }
-```
-
-**public property Nest.IDynamicIndexSettings.WarmersEnabled** *Removed (Breaking)*
-
-```csharp
-public bool? WarmersEnabled { get; set; }
-```
-
-**public method Nest.IElasticClient.DeleteWarmer** *Removed (Breaking)*
-
-```csharp
-public IDeleteWarmerResponse DeleteWarmer(IDeleteWarmerRequest request)
-```
-
-**public method Nest.IElasticClient.DeleteWarmer** *Removed (Breaking)*
-
-```csharp
-public IDeleteWarmerResponse DeleteWarmer(Indices indices, Names names, Func<DeleteWarmerDescriptor, IDeleteWarmerRequest> selector)
-```
-
-**public method Nest.IElasticClient.DeleteWarmerAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IDeleteWarmerResponse> DeleteWarmerAsync(IDeleteWarmerRequest request)
-```
-
-**public method Nest.IElasticClient.DeleteWarmerAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IDeleteWarmerResponse> DeleteWarmerAsync(Indices indices, Names names, Func<DeleteWarmerDescriptor, IDeleteWarmerRequest> selector)
-```
-
-**public method Nest.IElasticClient.GetWarmer** *Removed (Breaking)*
-
-```csharp
-public IGetWarmerResponse GetWarmer(IGetWarmerRequest request)
-```
-
-**public method Nest.IElasticClient.GetWarmer** *Removed (Breaking)*
-
-```csharp
-public IGetWarmerResponse GetWarmer(Func<GetWarmerDescriptor, IGetWarmerRequest> selector)
-```
-
-**public method Nest.IElasticClient.GetWarmerAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IGetWarmerResponse> GetWarmerAsync(IGetWarmerRequest request)
-```
-
-**public method Nest.IElasticClient.GetWarmerAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IGetWarmerResponse> GetWarmerAsync(Func<GetWarmerDescriptor, IGetWarmerRequest> selector)
-```
-
-**public method Nest.IElasticClient.Optimize** *Removed (Breaking)*
-
-```csharp
-public IOptimizeResponse Optimize(IOptimizeRequest request)
-```
-
-**public method Nest.IElasticClient.Optimize** *Removed (Breaking)*
-
-```csharp
-public IOptimizeResponse Optimize(Indices indices, Func<OptimizeDescriptor, IOptimizeRequest> selector)
-```
-
-**public method Nest.IElasticClient.OptimizeAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IOptimizeResponse> OptimizeAsync(IOptimizeRequest request)
-```
-
-**public method Nest.IElasticClient.OptimizeAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IOptimizeResponse> OptimizeAsync(Indices indices, Func<OptimizeDescriptor, IOptimizeRequest> selector)
-```
-
-**public method Nest.IElasticClient.PutWarmer** *Removed (Breaking)*
-
-```csharp
-public IPutWarmerResponse PutWarmer(IPutWarmerRequest request)
-```
-
-**public method Nest.IElasticClient.PutWarmer** *Removed (Breaking)*
-
-```csharp
-public IPutWarmerResponse PutWarmer(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector)
-```
-
-**public method Nest.IElasticClient.PutWarmerAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IPutWarmerResponse> PutWarmerAsync(IPutWarmerRequest request)
-```
-
-**public method Nest.IElasticClient.PutWarmerAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IPutWarmerResponse> PutWarmerAsync(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector)
-```
-
-**public method Nest.IElasticClient.SearchExists** *Removed (Breaking)*
-
-```csharp
-public IExistsResponse SearchExists(ISearchExistsRequest request)
-```
-
-**public method Nest.IElasticClient.SearchExists&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public IExistsResponse SearchExists<T>(Func<SearchExistsDescriptor<T>, ISearchExistsRequest> selector)
-```
-
-**public method Nest.IElasticClient.SearchExistsAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IExistsResponse> SearchExistsAsync(ISearchExistsRequest request)
-```
-
-**public method Nest.IElasticClient.SearchExistsAsync&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public Task<IExistsResponse> SearchExistsAsync<T>(Func<SearchExistsDescriptor<T>, ISearchExistsRequest> selector)
-```
-
-**public method Nest.IElasticClient.Suggest** *Removed (Breaking)*
-
-```csharp
-public ISuggestResponse Suggest(ISuggestRequest request)
-```
-
-**public method Nest.IElasticClient.SuggestAsync** *Removed (Breaking)*
-
-```csharp
-public Task<ISuggestResponse> SuggestAsync(ISuggestRequest request)
-```
-
-**public method Nest.IElasticClient.TasksCancel** *Removed (Breaking)*
-
-```csharp
-public ITasksCancelResponse TasksCancel(ITasksCancelRequest request)
-```
-
-**public method Nest.IElasticClient.TasksCancel** *Removed (Breaking)*
-
-```csharp
-public ITasksCancelResponse TasksCancel(Func<TasksCancelDescriptor, ITasksCancelRequest> selector)
-```
-
-**public method Nest.IElasticClient.TasksCancelAsync** *Removed (Breaking)*
-
-```csharp
-public Task<ITasksCancelResponse> TasksCancelAsync(ITasksCancelRequest request)
-```
-
-**public method Nest.IElasticClient.TasksCancelAsync** *Removed (Breaking)*
-
-```csharp
-public Task<ITasksCancelResponse> TasksCancelAsync(Func<TasksCancelDescriptor, ITasksCancelRequest> selector)
-```
-
-**public method Nest.IElasticClient.TasksList** *Removed (Breaking)*
-
-```csharp
-public ITasksListResponse TasksList(ITasksListRequest request)
-```
-
-**public method Nest.IElasticClient.TasksList** *Removed (Breaking)*
-
-```csharp
-public ITasksListResponse TasksList(Func<TasksListDescriptor, ITasksListRequest> selector)
-```
-
-**public method Nest.IElasticClient.TasksListAsync** *Removed (Breaking)*
-
-```csharp
-public Task<ITasksListResponse> TasksListAsync(ITasksListRequest request)
-```
-
-**public method Nest.IElasticClient.TasksListAsync** *Removed (Breaking)*
-
-```csharp
-public Task<ITasksListResponse> TasksListAsync(Func<TasksListDescriptor, ITasksListRequest> selector)
-```
-
-**public method Nest.IElasticClient.UpdateByQuery&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public IUpdateByQueryResponse UpdateByQuery<T>(Indices indices, Types types, Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector)
-```
-
-**public method Nest.IElasticClient.UpdateByQueryAsync&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public Task<IUpdateByQueryResponse> UpdateByQueryAsync<T>(Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector)
-```
-
-**public method Nest.IElasticClient.WatcherInfo** *Removed (Breaking)*
-
-```csharp
-public IWatcherInfoResponse WatcherInfo(IWatcherInfoRequest request)
-```
-
-**public method Nest.IElasticClient.WatcherInfo** *Removed (Breaking)*
-
-```csharp
-public IWatcherInfoResponse WatcherInfo(Func<WatcherInfoDescriptor, IWatcherInfoRequest> selector)
-```
-
-**public method Nest.IElasticClient.WatcherInfoAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IWatcherInfoResponse> WatcherInfoAsync(IWatcherInfoRequest request)
-```
-
-**public method Nest.IElasticClient.WatcherInfoAsync** *Removed (Breaking)*
-
-```csharp
-public Task<IWatcherInfoResponse> WatcherInfoAsync(Func<WatcherInfoDescriptor, IWatcherInfoRequest> selector)
-```
-
-**public interface Nest.IGeoLocationSuggestContext** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public interface IGeoLocationSuggestContext : ISuggestContext
-```
-
-**public interface Nest.IGetAliasesRequest** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public interface IGetAliasesRequest : IRequest<GetAliasesRequestParameters>, IRequest
-```
-
-**public interface Nest.IGetAliasesResponse** *Removed (Breaking)*
-
-```csharp
-[JsonConverterAttribute(Nest.GetAliasResponseConverter)]
-public interface IGetAliasesResponse : IResponse, IBodyWithApiCallDetails
-```
-
-**public property Nest.IGetMappingResponse.IndexTypeMappings** *Removed (Breaking)*
-
-```csharp
-public Dictionary<IndexName, IDictionary<TypeName, TypeMapping>> IndexTypeMappings { get; }
-```
-
-**public interface Nest.IGetWarmerRequest** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public interface IGetWarmerRequest : IRequest<GetWarmerRequestParameters>, IRequest
-```
-
-**public interface Nest.IGetWarmerResponse** *Removed (Breaking)*
-
-```csharp
-[JsonConverterAttribute(Nest.GetWarmerResponseConverter)]
-public interface IGetWarmerResponse : IResponse, IBodyWithApiCallDetails
-```
-
-**public interface Nest.IGlobalInnerHit** *Removed (Breaking)*
-
-```csharp
-[JsonConverterAttribute(Nest.ReadAsTypeJsonConverter`1[Nest.GlobalInnerHit])]
-public interface IGlobalInnerHit : IInnerHits
-```
-
-**public property Nest.IHasParentQuery.ScoreMode** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("score_mode")]
-public Nullable<ParentScoreMode> ScoreMode { get; set; }
-```
-
-
-**public property Nest.IIndexRequest.UntypedDocument** *Removed (Breaking)*
-
-```csharp
-public object UntypedDocument { get; }
-```
-
-**public property Nest.IIndexState.Warmers** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("warmers")]
-public IWarmers Warmers { get; set; }
-```
-
-**public property Nest.IIndicesPrivileges.Fields** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("fields")]
-public Fields Fields { get; set; }
-```
-
-**public interface Nest.IInnerHitsContainer** *Removed (Breaking)*
-
-```csharp
-[JsonConverterAttribute(Nest.ReadAsTypeJsonConverter`1[Nest.InnerHitsContainer])]
-public interface IInnerHitsContainer
-```
-
-**public property Nest.IMultiGetOperation.Fields** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public Fields Fields { get; set; }
-```
-
-**public property Nest.IMultiTermVectorOperation.Fields** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("fields")]
-public Fields Fields { get; set; }
-```
-
-**public interface Nest.INamedInnerHits** *Removed (Breaking)*
-
-```csharp
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`3[Nest.NamedInnerHits,System.String,Nest.IInnerHitsContainer])]
-public interface INamedInnerHits : IIsADictionary<string, IInnerHitsContainer>, IDictionary<string, IInnerHitsContainer>, ICollection<KeyValuePair<string, IInnerHitsContainer>>, IEnumerable<KeyValuePair<string, IInnerHitsContainer>>, IEnumerable, IDictionary, ICollection, IIsADictionary
-```
-
-**public method Nest.IndexDescriptor&lt;TDocument&gt;.Consistency** *Removed (Breaking)*
-
-```csharp
-public IndexDescriptor<TDocument> Consistency(Consistency consistency)
-```
-
-**public class Nest.IndexFieldMappings** *Removed (Breaking)*
-
-```csharp
-public class IndexFieldMappings : Dictionary<string, TypeFieldMappings>, IDictionary<string, TypeFieldMappings>, ICollection<KeyValuePair<string, TypeFieldMappings>>, IEnumerable<KeyValuePair<string, TypeFieldMappings>>, IEnumerable, IDictionary, ICollection, IReadOnlyDictionary<string, TypeFieldMappings>, IReadOnlyCollection<KeyValuePair<string, TypeFieldMappings>>, ISerializable, IDeserializationCallback
-```
-
-**public property Nest.IndexRequest&lt;TDocument&gt;.Consistency** *Removed (Breaking)*
-
-```csharp
-public Consistency Consistency { get; set; }
-```
-
-**public method Nest.IndexSettings..ctor** *Removed (Breaking)*
-
-```csharp
-public  .ctor(Dictionary<string, object> container)
-```
-
-**public property Nest.IndexState.Warmers** *Removed (Breaking)*
-
-```csharp
-public IWarmers Warmers { get; set; }
-```
-
-**public property Nest.IndexStats.Percolate** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public PercolateStats Percolate { get; set; }
-```
-
-**public property Nest.IndexStats.Suggest** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public SuggestStats Suggest { get; set; }
-```
-
-**public property Nest.IndicesPrivileges.Fields** *Removed (Breaking)*
-
-```csharp
-public Fields Fields { get; set; }
-```
-
-**public method Nest.IndicesPrivilegesDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public IndicesPrivilegesDescriptor<T> Fields(Fields fields)
-```
-
-**public method Nest.IndicesPrivilegesDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public IndicesPrivilegesDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields)
-```
-
-**public method Nest.Infer.Fields&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public static Fields Fields<T>(String[] fields)
-```
-
-**public class Nest.InnerHitsContainer** *Removed (Breaking)*
-
-```csharp
-public class InnerHitsContainer : IInnerHitsContainer
-```
-
-**public class Nest.InnerHitsContainerDescriptor&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public class InnerHitsContainerDescriptor<T> : DescriptorBase<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>, IDescriptor, IInnerHitsContainer
-```
-
-**public interface Nest.INorms** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute(1)]
-[JsonConverterAttribute(Nest.ReadAsTypeJsonConverter`1[Nest.Norms])]
-public interface INorms
-```
-
-**public interface Nest.IOptimizeRequest** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public interface IOptimizeRequest : IRequest<OptimizeRequestParameters>, IRequest
-```
-
-**public interface Nest.IOptimizeResponse** *Removed (Breaking)*
-
-```csharp
-public interface IOptimizeResponse : IShardsOperationResponse, IResponse, IBodyWithApiCallDetails
-```
-
-**public interface Nest.IPathInnerHit** *Removed (Breaking)*
-
-```csharp
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`3[Nest.PathInnerHit,Nest.Field,Nest.IGlobalInnerHit])]
-public interface IPathInnerHit : IIsADictionary<Field, IGlobalInnerHit>, IDictionary<Field, IGlobalInnerHit>, ICollection<KeyValuePair<Field, IGlobalInnerHit>>, IEnumerable<KeyValuePair<Field, IGlobalInnerHit>>, IEnumerable, IDictionary, ICollection, IIsADictionary
-```
-
-**public property Nest.IPercolateCountResponse.TookAsLong** *Removed (Breaking)*
-
-```csharp
-public long TookAsLong { get; }
-```
-
-**public property Nest.IProperty.CopyTo** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("copy_to")]
-public Fields CopyTo { get; set; }
-```
-
-**public property Nest.IProperty.DocValues** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("doc_values")]
-public bool? DocValues { get; set; }
-```
-
-**public property Nest.IProperty.Fields** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("fields")]
-public IProperties Fields { get; set; }
-```
-
-**public property Nest.IProperty.Similarity** *Removed (Breaking)*
-
-```csharp
-public Nullable<SimilarityOption> Similarity { get; set; }
-```
-
-**public property Nest.IProperty.Store** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("store")]
-public bool? Store { get; set; }
-```
-
-**public interface Nest.IPutWarmerRequest** *Removed (Breaking)*
-
-```csharp
-[JsonConverterAttribute(Nest.PutWarmerRequestJsonConverter)]
-[JsonObjectAttribute]
-public interface IPutWarmerRequest : IRequest<PutWarmerRequestParameters>, IRequest
-```
-
-**public interface Nest.IPutWarmerResponse** *Removed (Breaking)*
-
-```csharp
-public interface IPutWarmerResponse : IAcknowledgedResponse, IResponse, IBodyWithApiCallDetails
-```
-
-**public interface Nest.IReindexRequest** *Removed (Breaking)*
-
-```csharp
-public interface IReindexRequest
-```
-
-**public interface Nest.IReindexResponse&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public interface IReindexResponse<T>
-```
-
-**public property Nest.IResponse.ApiCall** *Removed (Breaking)*
-
-```csharp
-[JsonIgnoreAttribute]
-public IApiCallDetails ApiCall { get; }
-```
-
-**public property Nest.ISamplerAggregation.Field** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("field")]
-public Field Field { get; set; }
-```
-
-**public interface Nest.ISearchExistsRequest** *Removed (Breaking)*
-
-```csharp
-[JsonConverterAttribute(Nest.ReadAsTypeJsonConverter`1[Nest.SearchExistsRequest])]
-[JsonObjectAttribute]
-public interface ISearchExistsRequest : IRequest<SearchExistsRequestParameters>, IRequest
-```
-
-**public interface Nest.ISearchExistsRequest&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public interface ISearchExistsRequest<T> : ISearchExistsRequest, IRequest<SearchExistsRequestParameters>, IRequest
-```
-
-**public property Nest.ISearchRequest.Fields** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public Fields Fields { get; set; }
-```
-
-**public property Nest.ISearchRequest.InnerHits** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public INamedInnerHits InnerHits { get; set; }
-```
-
-**public property Nest.ISearchResponse&lt;T&gt;.Highlights** *Removed (Breaking)*
-
-```csharp
-public HighlightDocumentDictionary Highlights { get; }
-```
-
-**public property Nest.ISearchResponse&lt;T&gt;.TookAsLong** *Removed (Breaking)*
-
-```csharp
-public long TookAsLong { get; }
-```
-
-**public property Nest.ISearchTemplateRequest.Template** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public string Template { get; set; }
-```
-
-**public property Nest.ISourceFilter.Disable** *Removed (Breaking)*
-
-```csharp
-[JsonIgnoreAttribute]
-public bool Disable { get; set; }
-```
-
-**public property Nest.ISourceFilter.Exclude** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("exclude")]
-public Fields Exclude { get; set; }
-```
-
-**public property Nest.ISourceFilter.Include** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("include")]
-public Fields Include { get; set; }
-```
-
-
-**public interface Nest.ISuggestContextMapping** *Removed (Breaking)*
-
-```csharp
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`3[Nest.SuggestContextMapping,System.String,Nest.ISuggestContext])]
-public interface ISuggestContextMapping : IIsADictionary<string, ISuggestContext>, IDictionary<string, ISuggestContext>, ICollection<KeyValuePair<string, ISuggestContext>>, IEnumerable<KeyValuePair<string, ISuggestContext>>, IEnumerable, IDictionary, ICollection, IIsADictionary
-```
-
-**public property Nest.ISuggester.ShardSize** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public int? ShardSize { get; set; }
-```
-
-**public property Nest.ISuggester.Text** *Removed (Breaking)*
-
-```csharp
-public string Text { get; set; }
-```
-
-**public interface Nest.ISuggestResponse** *Removed (Breaking)*
-
-```csharp
-public interface ISuggestResponse : IResponse, IBodyWithApiCallDetails
-```
-
-**public interface Nest.ITasksCancelRequest** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public interface ITasksCancelRequest : IRequest<TasksCancelRequestParameters>, IRequest
-```
-
-**public interface Nest.ITasksCancelResponse** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute(1)]
-public interface ITasksCancelResponse : IResponse, IBodyWithApiCallDetails
-```
-
-**public interface Nest.ITasksListRequest** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public interface ITasksListRequest : IRequest<TasksListRequestParameters>, IRequest
-```
-
-**public interface Nest.ITasksListResponse** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute(1)]
-public interface ITasksListResponse : IResponse, IBodyWithApiCallDetails
-```
-
-**public property Nest.ITemplateMapping.Warmers** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("warmers")]
-public IWarmers Warmers { get; set; }
-```
-
-**public property Nest.ITermsAggregation.ShowTermDocumentCountError** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("show_term_doc_error_count")]
-public bool? ShowTermDocumentCountError { get; set; }
-```
-
-**public property Nest.ITermSuggester.MinWordLen** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public int? MinWordLen { get; set; }
-```
-
-**public property Nest.ITermSuggester.PrefixLen** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public int? PrefixLen { get; set; }
-```
-
-**public property Nest.ITermVectorsResponse.Found** *Removed (Breaking)*
-
-```csharp
-public bool Found { get; }
-```
-
-**public property Nest.ITermVectorsResponse.Id** *Removed (Breaking)*
-
-```csharp
-public string Id { get; }
-```
-
-**public property Nest.ITermVectorsResponse.Index** *Removed (Breaking)*
-
-```csharp
-public string Index { get; }
-```
-
-**public property Nest.ITermVectorsResponse.TermVectors** *Removed (Breaking)*
-
-```csharp
-public IDictionary<string, TermVector> TermVectors { get; }
-```
-
-**public property Nest.ITermVectorsResponse.TookAsLong** *Removed (Breaking)*
-
-```csharp
-public long TookAsLong { get; }
-```
-
-**public property Nest.ITermVectorsResponse.Type** *Removed (Breaking)*
-
-```csharp
-public string Type { get; }
-```
-
-**public property Nest.ITermVectorsResponse.Version** *Removed (Breaking)*
-
-```csharp
-public long Version { get; }
-```
-
-**public property Nest.ITranslogFlushSettings.ThresholdOps** *Removed (Breaking)*
-
-```csharp
-public int? ThresholdOps { get; set; }
-```
-
-**public property Nest.ITranslogSettings.FileSystemType** *Removed (Breaking)*
-
-```csharp
-public Nullable<TranslogWriteMode> FileSystemType { get; set; }
-```
-
-**public interface Nest.ITypeInnerHit** *Removed (Breaking)*
-
-```csharp
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`3[Nest.TypeInnerHit,Nest.TypeName,Nest.IGlobalInnerHit])]
-public interface ITypeInnerHit : IIsADictionary<TypeName, IGlobalInnerHit>, IDictionary<TypeName, IGlobalInnerHit>, ICollection<KeyValuePair<TypeName, IGlobalInnerHit>>, IEnumerable<KeyValuePair<TypeName, IGlobalInnerHit>>, IEnumerable, IDictionary, ICollection, IIsADictionary
-```
-
-**public interface Nest.IWarmer** *Removed (Breaking)*
-
-```csharp
-public interface IWarmer
-```
-
-**public interface Nest.IWarmers** *Removed (Breaking)*
-
-```csharp
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`3[Nest.Warmers,Nest.TypeName,Nest.IWarmer])]
-public interface IWarmers : IIsADictionary<TypeName, IWarmer>, IDictionary<TypeName, IWarmer>, ICollection<KeyValuePair<TypeName, IWarmer>>, IEnumerable<KeyValuePair<TypeName, IWarmer>>, IEnumerable, IDictionary, ICollection, IIsADictionary
-```
-
-**public interface Nest.IWatcherInfoRequest** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public interface IWatcherInfoRequest : IRequest<WatcherInfoRequestParameters>, IRequest
-```
-
-**public interface Nest.IWatcherInfoResponse** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public interface IWatcherInfoResponse : IResponse, IBodyWithApiCallDetails
-```
-
-
-**public method Nest.MultiGetDescriptor.Fields** *Removed (Breaking)*
-
-```csharp
-public MultiGetDescriptor Fields(String[] fields)
-```
-
-**public method Nest.MultiGetDescriptor.Fields&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public MultiGetDescriptor Fields<T>(Expression`1[] fields)
-```
-
-**public property Nest.MultiGetOperation&lt;T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public Fields Fields { get; set; }
-```
-
-**public method Nest.MultiGetOperationDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public MultiGetOperationDescriptor<T> Fields(Fields fields)
-```
-
-**public method Nest.MultiGetOperationDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public MultiGetOperationDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields)
-```
-
-**public property Nest.MultiGetRequest.Fields** *Removed (Breaking)*
-
-```csharp
-public Fields Fields { get; set; }
-```
-
-**public class Nest.MultiRescore** *Removed (Breaking)*
-
-```csharp
-public class MultiRescore : IRescore, IEnumerable<IRescore>, IEnumerable
-```
-
-**public property Nest.MultiTermVectorOperation&lt;T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public Fields Fields { get; set; }
-```
-
-**public method Nest.MultiTermVectorOperationDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public MultiTermVectorOperationDescriptor<T> Fields(Fields fields)
-```
-
-**public method Nest.MultiTermVectorOperationDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public MultiTermVectorOperationDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields)
-```
-
-**public class Nest.NamedInnerHits** *Removed (Breaking)*
-
-```csharp
-public class NamedInnerHits : IsADictionaryBase<string, IInnerHitsContainer>, IIsADictionary<string, IInnerHitsContainer>, IDictionary<string, IInnerHitsContainer>, ICollection<KeyValuePair<string, IInnerHitsContainer>>, IEnumerable<KeyValuePair<string, IInnerHitsContainer>>, IEnumerable, IDictionary, ICollection, IIsADictionary, INamedInnerHits
-```
-
-**public class Nest.NamedInnerHitsDescriptor&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public class NamedInnerHitsDescriptor<T> : IsADictionaryDescriptorBase<NamedInnerHitsDescriptor<T>, INamedInnerHits, string, IInnerHitsContainer>, IDescriptor, IPromise<INamedInnerHits>
-```
-
-**public property Nest.NodeInfo.Build** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public string Build { get; internal set; }
-```
-
-**public property Nest.NodeInfo.Hostname** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public string Hostname { get; internal set; }
-```
-
-**public property Nest.NodeInfo.HttpAddress** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public string HttpAddress { get; internal set; }
-```
-
-**public property Nest.NodeProcessInfo.RefreshInterval** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public string RefreshInterval { get; internal set; }
-```
-
-
-```csharp
-[JsonConverterAttribute(Newtonsoft.Json.Converters.StringEnumConverter)]
-public enum NonStringIndexOption
-{
-     NotAnalyzed = 0,
-     No = 1
-}
-```
-
-**public class Nest.Norms** *Removed (Breaking)*
-
-```csharp
-public class Norms : INorms
-```
-
-**public class Nest.NormsDescriptor** *Removed (Breaking)*
-
-```csharp
-public class NormsDescriptor : DescriptorBase<NormsDescriptor, INorms>, IDescriptor, INorms
-```
-
-**public enum Nest.NormsLoading** *Removed (Breaking)*
-
-```csharp
-[JsonConverterAttribute(Newtonsoft.Json.Converters.StringEnumConverter)]
-public enum NormsLoading
-{
-     Lazy = 0,
-     Eager = 1
-}
-```
-
-**public enum Nest.NumericResolutionUnit** *Removed (Breaking)*
-
-```csharp
-[JsonConverterAttribute(Newtonsoft.Json.Converters.StringEnumConverter)]
-public enum NumericResolutionUnit
-{
-     Milliseconds = 0,
-     Seconds = 1
-}
-```
-
-**public property Nest.ObjectAttribute.Dynamic** *Removed (Breaking)*
-
-```csharp
-public DynamicMapping Dynamic { get; set; }
-```
-
-**public property Nest.OperatingSystemStats.CpuPercent** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("cpu_percent")]
-public int CpuPercent { get; internal set; }
-```
-
-**public property Nest.OperatingSystemStats.LoadAverage** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("load_average")]
-public Single LoadAverage { get; internal set; }
-```
-
-**public class Nest.OptimizeDescriptor** *Removed (Breaking)*
-
-```csharp
-[DescriptorForAttribute("IndicesOptimize")]
-public class OptimizeDescriptor : RequestDescriptorBase<OptimizeDescriptor, OptimizeRequestParameters, IOptimizeRequest>, IRequest<OptimizeRequestParameters>, IRequest, IDescriptor, IOptimizeRequest
-```
-
-**public class Nest.OptimizeRequest** *Removed (Breaking)*
-
-```csharp
-public class OptimizeRequest : PlainRequestBase<OptimizeRequestParameters>, IRequest<OptimizeRequestParameters>, IRequest, IOptimizeRequest
-```
-
-**public class Nest.OptimizeResponse** *Removed (Breaking)*
-
-```csharp
-public class OptimizeResponse : ShardsOperationResponseBase, IResponse, IBodyWithApiCallDetails, IShardsOperationResponse, IOptimizeResponse
-```
-
-**public enum Nest.ParentScoreMode** *Removed (Breaking)*
-
-```csharp
-[JsonConverterAttribute(Newtonsoft.Json.Converters.StringEnumConverter)]
-public enum ParentScoreMode
-{
-     None = 0,
-     Score = 1
-}
-```
-
-**public class Nest.PathInnerHit** *Removed (Breaking)*
-
-```csharp
-public class PathInnerHit : IsADictionaryBase<Field, IGlobalInnerHit>, IIsADictionary<Field, IGlobalInnerHit>, IDictionary<Field, IGlobalInnerHit>, ICollection<KeyValuePair<Field, IGlobalInnerHit>>, IEnumerable<KeyValuePair<Field, IGlobalInnerHit>>, IEnumerable, IDictionary, ICollection, IIsADictionary, IPathInnerHit
-```
-
-**public class Nest.PathInnerHit&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public class PathInnerHit<T> : PathInnerHit, IIsADictionary<Field, IGlobalInnerHit>, IDictionary<Field, IGlobalInnerHit>, ICollection<KeyValuePair<Field, IGlobalInnerHit>>, IEnumerable<KeyValuePair<Field, IGlobalInnerHit>>, IEnumerable, IDictionary, ICollection, IIsADictionary, IPathInnerHit
-```
-
-**public class Nest.PathInnerHitDescriptor&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public class PathInnerHitDescriptor<T> : IsADictionaryDescriptorBase<PathInnerHitDescriptor<T>, IPathInnerHit, Field, IGlobalInnerHit>, IDescriptor, IPromise<IPathInnerHit>
-```
-
-**public property Nest.PercolateCountResponse.TookAsLong** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("took")]
-public long TookAsLong { get; internal set; }
-```
-
-**public class Nest.PercolateStats** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public class PercolateStats
-```
-
-**public property Nest.PropertyBase.CopyTo** *Removed (Breaking)*
-
-```csharp
-public Fields CopyTo { get; set; }
-```
-
-**public property Nest.PropertyBase.DocValues** *Removed (Breaking)*
-
-```csharp
-public bool? DocValues { get; set; }
-```
-
-**public property Nest.PropertyBase.Fields** *Removed (Breaking)*
-
-```csharp
-public IProperties Fields { get; set; }
-```
-
-**public property Nest.PropertyBase.IndexName** *Removed (Breaking)*
-
-```csharp
-public string IndexName { get; set; }
-```
-
-**public property Nest.PropertyBase.Similarity** *Removed (Breaking)*
-
-```csharp
-public Nullable<SimilarityOption> Similarity { get; set; }
-```
-
-**public property Nest.PropertyBase.Store** *Removed (Breaking)*
-
-```csharp
-public bool? Store { get; set; }
-```
-
-**public method Nest.PropertyDescriptorBase&lt;TDescriptor, TInterface, T&gt;.CopyTo** *Removed (Breaking)*
-
-```csharp
-public TDescriptor CopyTo(Func<FieldsDescriptor<T>, IPromise<Fields>> fields)
-```
-
-**public method Nest.PropertyDescriptorBase&lt;TDescriptor, TInterface, T&gt;.DocValues** *Removed (Breaking)*
-
-```csharp
-public TDescriptor DocValues(bool docValues = True)
-```
-
-**public method Nest.PropertyDescriptorBase&lt;TDescriptor, TInterface, T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public TDescriptor Fields(Func<PropertiesDescriptor<T>, IPromise<IProperties>> selector)
-```
-
-**public method Nest.PropertyDescriptorBase&lt;TDescriptor, TInterface, T&gt;.Similarity** *Removed (Breaking)*
-
-```csharp
-public TDescriptor Similarity(string similarity)
-```
-
-**public method Nest.PropertyDescriptorBase&lt;TDescriptor, TInterface, T&gt;.Similarity** *Removed (Breaking)*
-
-```csharp
-public TDescriptor Similarity(SimilarityOption similarity)
-```
-
-**public method Nest.PropertyDescriptorBase&lt;TDescriptor, TInterface, T&gt;.Store** *Removed (Breaking)*
-
-```csharp
-public TDescriptor Store(bool store = True)
-```
-
-**public method Nest.PutIndexTemplateDescriptor.Warmers** *Removed (Breaking)*
-
-```csharp
-public PutIndexTemplateDescriptor Warmers(Func<WarmersDescriptor, IPromise<IWarmers>> warmerSelector)
-```
-
-**public property Nest.PutIndexTemplateRequest.Warmers** *Removed (Breaking)*
-
-```csharp
-public IWarmers Warmers { get; set; }
-```
-
-**public method Nest.PutMappingDescriptor&lt;T&gt;.Parent&lt;K&gt;** *Removed (Breaking)*
-
-```csharp
-public PutMappingDescriptor<T> Parent<K>()
-```
-
-**public method Nest.PutScriptDescriptor.OpType** *Removed (Breaking)*
-
-```csharp
-public PutScriptDescriptor OpType(OpType op_type)
-```
-
-**public method Nest.PutScriptDescriptor.Version** *Removed (Breaking)*
-
-```csharp
-public PutScriptDescriptor Version(long version)
-```
-
-**public method Nest.PutScriptDescriptor.VersionType** *Removed (Breaking)*
-
-```csharp
-public PutScriptDescriptor VersionType(VersionType version_type)
-```
-
-**public property Nest.PutScriptRequest.OpType** *Removed (Breaking)*
-
-```csharp
-public OpType OpType { get; set; }
-```
-
-**public property Nest.PutScriptRequest.Version** *Removed (Breaking)*
-
-```csharp
-public long Version { get; set; }
-```
-
-**public property Nest.PutScriptRequest.VersionType** *Removed (Breaking)*
-
-```csharp
-public VersionType VersionType { get; set; }
-```
-
-**public method Nest.PutSearchTemplateDescriptor.OpType** *Removed (Breaking)*
-
-```csharp
-public PutSearchTemplateDescriptor OpType(OpType op_type)
-```
-
-**public method Nest.PutSearchTemplateDescriptor.Version** *Removed (Breaking)*
-
-```csharp
-public PutSearchTemplateDescriptor Version(long version)
-```
-
-**public method Nest.PutSearchTemplateDescriptor.VersionType** *Removed (Breaking)*
-
-```csharp
-public PutSearchTemplateDescriptor VersionType(VersionType version_type)
-```
-
-**public property Nest.PutSearchTemplateRequest.OpType** *Removed (Breaking)*
-
-```csharp
-public OpType OpType { get; set; }
-```
-
-**public property Nest.PutSearchTemplateRequest.Version** *Removed (Breaking)*
-
-```csharp
-public long Version { get; set; }
-```
-
-**public property Nest.PutSearchTemplateRequest.VersionType** *Removed (Breaking)*
-
-```csharp
-public VersionType VersionType { get; set; }
-```
-
-**public class Nest.PutWarmerDescriptor** *Removed (Breaking)*
-
-```csharp
-[DescriptorForAttribute("IndicesPutWarmer")]
-public class PutWarmerDescriptor : RequestDescriptorBase<PutWarmerDescriptor, PutWarmerRequestParameters, IPutWarmerRequest>, IRequest<PutWarmerRequestParameters>, IRequest, IDescriptor, IPutWarmerRequest
-```
-
-**public class Nest.PutWarmerRequest** *Removed (Breaking)*
-
-```csharp
-public class PutWarmerRequest : PlainRequestBase<PutWarmerRequestParameters>, IRequest<PutWarmerRequestParameters>, IRequest, IPutWarmerRequest
-```
-
-**public class Nest.PutWarmerResponse** *Removed (Breaking)*
-
-```csharp
-public class PutWarmerResponse : AcknowledgedResponseBase, IResponse, IBodyWithApiCallDetails, IAcknowledgedResponse, IPutWarmerResponse
-```
-
-**public property Nest.QueryProfile.Lucene** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("lucene")]
-public string Lucene { get; internal set; }
-```
-
-**public property Nest.QueryProfile.QueryType** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("query_type")]
-public string QueryType { get; internal set; }
-```
-
-**public method Nest.ReindexDescriptor&lt;T&gt;.AllTypes** *Removed (Breaking)*
-
-```csharp
-public ReindexDescriptor<T> AllTypes()
-```
-
-**public method Nest.ReindexDescriptor&lt;T&gt;.CreateIndex** *Removed (Breaking)*
-
-```csharp
-public ReindexDescriptor<T> CreateIndex(ICreateIndexRequest createIndexRequest)
-```
-
-**public method Nest.ReindexDescriptor&lt;T&gt;.Query** *Removed (Breaking)*
-
-```csharp
-public ReindexDescriptor<T> Query(QueryContainer query)
-```
-
-**public method Nest.ReindexDescriptor&lt;T&gt;.Query** *Removed (Breaking)*
-
-```csharp
-public ReindexDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-```
-
-**public method Nest.ReindexDescriptor&lt;T&gt;.Scroll** *Removed (Breaking)*
-
-```csharp
-public ReindexDescriptor<T> Scroll(Time scrollTime)
-```
-
-**public method Nest.ReindexDescriptor&lt;T&gt;.Size** *Removed (Breaking)*
-
-```csharp
-public ReindexDescriptor<T> Size(int? size)
-```
-
-**public method Nest.ReindexDescriptor&lt;T&gt;.Take** *Removed (Breaking)*
-
-```csharp
-public ReindexDescriptor<T> Take(int? take)
-```
-
-**public method Nest.ReindexDescriptor&lt;T&gt;.Type** *Removed (Breaking)*
-
-```csharp
-public ReindexDescriptor<T> Type(Types type)
-```
-
-**public method Nest.ReindexObservable&lt;T&gt;.IndexSearchResults** *Removed (Breaking)*
-
-```csharp
-public IBulkResponse IndexSearchResults(ISearchResponse<T> searchResult, IObserver<IReindexResponse<T>> observer, IndexName toIndex, int page)
-```
-
-**public method Nest.ReindexOnServerDescriptor.Consistency** *Removed (Breaking)*
-
-```csharp
-public ReindexOnServerDescriptor Consistency(Consistency consistency)
-```
-
-**public property Nest.ReindexOnServerRequest.Consistency** *Removed (Breaking)*
-
-```csharp
-public Consistency Consistency { get; set; }
-```
-
-**public class Nest.ReindexRequest** *Removed (Breaking)*
-
-```csharp
-public class ReindexRequest : IReindexRequest
-```
-
-**public class Nest.ReindexResponse&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public class ReindexResponse<T> : IReindexResponse<T>
-```
-
-**public class Nest.RescoreConverter** *Removed (Breaking)*
-
-```csharp
-public class RescoreConverter : JsonConverter
-```
-
-**public class Nest.Role** *Removed (Breaking)*
-
-```csharp
-public class Role
-```
-
-**public property Nest.RoutingShard.Version** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("version")]
-public long Version { get; internal set; }
-```
-
-**public property Nest.SamplerAggregation.Field** *Removed (Breaking)*
-
-```csharp
-public Field Field { get; set; }
-```
-
-**public method Nest.SamplerAggregationDescriptor&lt;T&gt;.Field** *Removed (Breaking)*
-
-```csharp
-public SamplerAggregationDescriptor<T> Field(Expression<Func<T, object>> field)
-```
-
-**public method Nest.SamplerAggregationDescriptor&lt;T&gt;.Field** *Removed (Breaking)*
-
-```csharp
-public SamplerAggregationDescriptor<T> Field(Field field)
-```
-
-**public method Nest.SearchDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public SearchDescriptor<T> Fields(Fields fields)
-```
-
-**public method Nest.SearchDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public SearchDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields)
-```
-
-**public method Nest.SearchDescriptor&lt;T&gt;.InnerHits** *Removed (Breaking)*
-
-```csharp
-public SearchDescriptor<T> InnerHits(Func<NamedInnerHitsDescriptor<T>, IPromise<INamedInnerHits>> selector)
-```
-
-**public class Nest.SearchExistsDescriptor&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-[DescriptorForAttribute("IndicesExists")]
-public class SearchExistsDescriptor<T> : RequestDescriptorBase<SearchExistsDescriptor<T>, SearchExistsRequestParameters, ISearchExistsRequest>, IRequest<SearchExistsRequestParameters>, IRequest, IDescriptor, ISearchExistsRequest
-```
-
-**public class Nest.SearchExistsRequest** *Removed (Breaking)*
-
-```csharp
-public class SearchExistsRequest : PlainRequestBase<SearchExistsRequestParameters>, IRequest<SearchExistsRequestParameters>, IRequest, ISearchExistsRequest
-```
-
-**public class Nest.SearchExistsRequest&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public class SearchExistsRequest<T> : PlainRequestBase<SearchExistsRequestParameters>, IRequest<SearchExistsRequestParameters>, IRequest, ISearchExistsRequest
-```
-
-**public property Nest.SearchRequest.Fields** *Removed (Breaking)*
-
-```csharp
-public Fields Fields { get; set; }
-```
-
-**public property Nest.SearchRequest.InnerHits** *Removed (Breaking)*
-
-```csharp
-public INamedInnerHits InnerHits { get; set; }
-```
-
-**public property Nest.SearchRequest&lt;T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public Fields Fields { get; set; }
-```
-
-**public property Nest.SearchRequest&lt;T&gt;.InnerHits** *Removed (Breaking)*
-
-```csharp
-public INamedInnerHits InnerHits { get; set; }
-```
-
-**public property Nest.SearchResponse&lt;T&gt;.TookAsLong** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("took")]
-public long TookAsLong { get; internal set; }
-```
-
-**public property Nest.SearchStats.FetchTime** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public string FetchTime { get; set; }
-```
-
-**public property Nest.SearchStats.QueryTime** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public string QueryTime { get; set; }
-```
-
-**public property Nest.SearchStats.ScrollTime** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute]
-public string ScrollTime { get; set; }
-```
-
-**public method Nest.SearchTemplateDescriptor&lt;T&gt;.Template** *Removed (Breaking)*
-
-```csharp
-public SearchTemplateDescriptor<T> Template(string template)
-```
-
-**public property Nest.SearchTemplateRequest.Template** *Removed (Breaking)*
-
-```csharp
-public string Template { get; set; }
-```
-
-**public property Nest.ShardStore.Version** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("version")]
-public long Version { get; set; }
-```
-
-**public class Nest.ShieldNode** *Removed (Breaking)*
-
-```csharp
-public class ShieldNode
-```
-
-**public class Nest.ShieldNodeStatus** *Removed (Breaking)*
-
-```csharp
-public class ShieldNodeStatus : Throwable
-```
-
-**public property Nest.Snapshot.ShardFailures** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("failures")]
-public IEnumerable<SnapshotShardFailure> ShardFailures { get; internal set; }
-```
-
-**public property Nest.SourceFilter.Disable** *Removed (Breaking)*
-
-```csharp
-public bool Disable { get; set; }
-```
-
-**public property Nest.SourceFilter.Exclude** *Removed (Breaking)*
-
-```csharp
-public Fields Exclude { get; set; }
-```
-
-**public property Nest.SourceFilter.Include** *Removed (Breaking)*
-
-```csharp
-public Fields Include { get; set; }
-```
-
-**public method Nest.SourceFilterDescriptor&lt;T&gt;.Disable** *Removed (Breaking)*
-
-```csharp
-public SourceFilterDescriptor<T> Disable(bool disable = True)
-```
-
-**public method Nest.SourceFilterDescriptor&lt;T&gt;.Exclude** *Removed (Breaking)*
-
-```csharp
-public SourceFilterDescriptor<T> Exclude(Func<FieldsDescriptor<T>, IPromise<Fields>> fields)
-```
-
-**public method Nest.SourceFilterDescriptor&lt;T&gt;.Include** *Removed (Breaking)*
-
-```csharp
-public SourceFilterDescriptor<T> Include(Func<FieldsDescriptor<T>, IPromise<Fields>> fields)
-```
-
-**public class Nest.Suggest** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public class Suggest
-```
-
-**public class Nest.SuggestContextMapping** *Removed (Breaking)*
-
-```csharp
-public class SuggestContextMapping : IsADictionaryBase<string, ISuggestContext>, IIsADictionary<string, ISuggestContext>, IDictionary<string, ISuggestContext>, ICollection<KeyValuePair<string, ISuggestContext>>, IEnumerable<KeyValuePair<string, ISuggestContext>>, IEnumerable, IDictionary, ICollection, IIsADictionary, ISuggestContextMapping
-```
-
-**public class Nest.SuggestContextMappingDescriptor&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public class SuggestContextMappingDescriptor<T> : IsADictionaryDescriptorBase<SuggestContextMappingDescriptor<T>, ISuggestContextMapping, string, ISuggestContext>, IDescriptor, IPromise<ISuggestContextMapping>
-```
-
-**public method Nest.SuggestDescriptorBase&lt;TDescriptor, TInterface, T&gt;.ShardSize** *Removed (Breaking)*
-
-```csharp
-public TDescriptor ShardSize(int? size)
-```
-
-**public method Nest.SuggestDescriptorBase&lt;TDescriptor, TInterface, T&gt;.Text** *Removed (Breaking)*
-
-```csharp
-public TDescriptor Text(string text)
-```
-
-**public property Nest.SuggesterBase.ShardSize** *Removed (Breaking)*
-
-```csharp
-public int? ShardSize { get; set; }
-```
-
-**public property Nest.SuggesterBase.Text** *Removed (Breaking)*
-
-```csharp
-public string Text { get; set; }
-```
-
-**public class Nest.SuggestOption** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-[JsonConverterAttribute(Nest.SuggestOptionJsonConverter)]
-public class SuggestOption
-```
-
-**public class Nest.SuggestOptionJsonConverter** *Removed (Breaking)*
-
-```csharp
-public class SuggestOptionJsonConverter : JsonConverter
-```
-
-**public class Nest.SuggestResponse** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-[JsonConverterAttribute(Nest.SuggestResponseJsonConverter)]
-public class SuggestResponse : ResponseBase, IResponse, IBodyWithApiCallDetails, ISuggestResponse
-```
-
-**public class Nest.SuggestStats** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public class SuggestStats
-```
-
-**public class Nest.TasksCancelDescriptor** *Removed (Breaking)*
-
-```csharp
-public class TasksCancelDescriptor : RequestDescriptorBase<TasksCancelDescriptor, TasksCancelRequestParameters, ITasksCancelRequest>, IRequest<TasksCancelRequestParameters>, IRequest, IDescriptor, ITasksCancelRequest
-```
-
-**public class Nest.TasksCancelRequest** *Removed (Breaking)*
-
-```csharp
-public class TasksCancelRequest : PlainRequestBase<TasksCancelRequestParameters>, IRequest<TasksCancelRequestParameters>, IRequest, ITasksCancelRequest
-```
-
-**public class Nest.TasksCancelResponse** *Removed (Breaking)*
-
-```csharp
-public class TasksCancelResponse : ResponseBase, IResponse, IBodyWithApiCallDetails, ITasksCancelResponse
-```
-
-**public class Nest.TasksListDescriptor** *Removed (Breaking)*
-
-```csharp
-public class TasksListDescriptor : RequestDescriptorBase<TasksListDescriptor, TasksListRequestParameters, ITasksListRequest>, IRequest<TasksListRequestParameters>, IRequest, IDescriptor, ITasksListRequest
-```
-
-**public class Nest.TasksListRequest** *Removed (Breaking)*
-
-```csharp
-public class TasksListRequest : PlainRequestBase<TasksListRequestParameters>, IRequest<TasksListRequestParameters>, IRequest, ITasksListRequest
-```
-
-**public class Nest.TasksListResponse** *Removed (Breaking)*
-
-```csharp
-public class TasksListResponse : ResponseBase, IResponse, IBodyWithApiCallDetails, ITasksListResponse
-```
-
-**public property Nest.TemplateMapping.Warmers** *Removed (Breaking)*
-
-```csharp
-public IWarmers Warmers { get; set; }
-```
-
-**public property Nest.TermsAggregation.ShowTermDocumentCountError** *Removed (Breaking)*
-
-```csharp
-public bool? ShowTermDocumentCountError { get; set; }
-```
-
-**public method Nest.TermsAggregationDescriptor&lt;T&gt;.ShowTermDocumentCountError** *Removed (Breaking)*
-
-```csharp
-public TermsAggregationDescriptor<T> ShowTermDocumentCountError(bool showTermDocCountError = True)
-```
-
-**public property Nest.TermSuggester.MinWordLen** *Removed (Breaking)*
-
-```csharp
-public int? MinWordLen { get; set; }
-```
-
-**public property Nest.TermSuggester.PrefixLen** *Removed (Breaking)*
-
-```csharp
-public int? PrefixLen { get; set; }
-```
-
-**public method Nest.TermVectorsDescriptor&lt;TDocument&gt;.Dfs** *Removed (Breaking)*
-
-```csharp
-public TermVectorsDescriptor<TDocument> Dfs(bool dfs = True)
-```
-
-**public property Nest.TermVectorsRequest&lt;TDocument&gt;.Dfs** *Removed (Breaking)*
-
-```csharp
-public bool Dfs { get; set; }
-```
-
-**public property Nest.TermVectorsResponse.TookAsLong** *Removed (Breaking)*
-
-```csharp
-[JsonPropertyAttribute("took")]
-public long TookAsLong { get; internal set; }
-```
-
-**public property Nest.TranslogFlushSettings.ThresholdOps** *Removed (Breaking)*
-
-```csharp
-public int? ThresholdOps { get; set; }
-```
-
-**public method Nest.TranslogFlushSettingsDescriptor.ThresholdOps** *Removed (Breaking)*
-
-```csharp
-public TranslogFlushSettingsDescriptor ThresholdOps(int? operations)
-```
-
-**public property Nest.TranslogSettings.FileSystemType** *Removed (Breaking)*
-
-```csharp
-public Nullable<TranslogWriteMode> FileSystemType { get; set; }
-```
-
-**public method Nest.TranslogSettingsDescriptor.FileSystemType** *Removed (Breaking)*
-
-```csharp
-public TranslogSettingsDescriptor FileSystemType(Nullable<TranslogWriteMode> writeMode)
-```
-
-**public enum Nest.TranslogWriteMode** *Removed (Breaking)*
-
-```csharp
-[JsonConverterAttribute(Newtonsoft.Json.Converters.StringEnumConverter)]
-public enum TranslogWriteMode
-{
-     Buffered = 0,
-     Simple = 1
-}
-```
-
-**public class Nest.TypeInnerHit** *Removed (Breaking)*
-
-```csharp
-public class TypeInnerHit : IsADictionaryBase<TypeName, IGlobalInnerHit>, IIsADictionary<TypeName, IGlobalInnerHit>, IDictionary<TypeName, IGlobalInnerHit>, ICollection<KeyValuePair<TypeName, IGlobalInnerHit>>, IEnumerable<KeyValuePair<TypeName, IGlobalInnerHit>>, IEnumerable, IDictionary, ICollection, IIsADictionary, ITypeInnerHit
-```
-
-**public class Nest.TypeInnerHit&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public class TypeInnerHit<T> : TypeInnerHit, IIsADictionary<TypeName, IGlobalInnerHit>, IDictionary<TypeName, IGlobalInnerHit>, ICollection<KeyValuePair<TypeName, IGlobalInnerHit>>, IEnumerable<KeyValuePair<TypeName, IGlobalInnerHit>>, IEnumerable, IDictionary, ICollection, IIsADictionary, ITypeInnerHit
-```
-
-**public class Nest.TypeInnerHitDescriptor&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public class TypeInnerHitDescriptor<T> : IsADictionaryDescriptorBase<TypeInnerHitDescriptor<T>, ITypeInnerHit, TypeName, IGlobalInnerHit>, IDescriptor, IPromise<ITypeInnerHit>
-```
-
-**public field Nest.UpdatableIndexSettings.RequestCacheEnable** *Removed (Breaking)*
-
-```csharp
-public const string RequestCacheEnable = "index.requests.cache.enable"
-```
-
-**public field Nest.UpdatableIndexSettings.TranslogFlushTreshHoldOps** *Removed (Breaking)*
-
-```csharp
-public const string TranslogFlushTreshHoldOps = "index.translog.flush_threshold_ops"
-```
-
-**public field Nest.UpdatableIndexSettings.TranslogFsType** *Removed (Breaking)*
-
-```csharp
-public const string TranslogFsType = "index.translog.fs.type"
-```
-
-**public field Nest.UpdatableIndexSettings.TranslogInterval** *Removed (Breaking)*
-
-```csharp
-public const string TranslogInterval = "index.translog.interval"
-```
-
-**public field Nest.UpdatableIndexSettings.WarmersEnabled** *Removed (Breaking)*
-
-```csharp
-public const string WarmersEnabled = "index.warmer.enabled"
-```
-
-**public method Nest.UpdateByQueryDescriptor&lt;T&gt;.Consistency** *Removed (Breaking)*
-
-```csharp
-public UpdateByQueryDescriptor<T> Consistency(Consistency consistency)
-```
-
-**public method Nest.UpdateByQueryDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public UpdateByQueryDescriptor<T> Fields(Expression`1[] fields)
-```
-
-**public method Nest.UpdateByQueryDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public UpdateByQueryDescriptor<T> Fields(String[] fields)
-```
-
-**public property Nest.UpdateByQueryRequest.Consistency** *Removed (Breaking)*
-
-```csharp
-public Consistency Consistency { get; set; }
-```
-
-**public property Nest.UpdateByQueryRequest.Fields** *Removed (Breaking)*
-
-```csharp
-public Fields Fields { get; set; }
-```
-
-**public property Nest.UpdateByQueryRequest&lt;T&gt;.Consistency** *Removed (Breaking)*
-
-```csharp
-public Consistency Consistency { get; set; }
-```
-
-**public property Nest.UpdateByQueryRequest&lt;T&gt;.Fields** *Removed (Breaking)*
-
-```csharp
-public Fields Fields { get; set; }
-```
-
-**public method Nest.UpdateDescriptor&lt;TDocument, TPartialDocument&gt;.Consistency** *Removed (Breaking)*
-
-```csharp
-public UpdateDescriptor<TDocument, TPartialDocument> Consistency(Consistency consistency)
-```
-
-
-**public property Nest.UpdateRequest&lt;TDocument, TPartialDocument&gt;.Consistency** *Removed (Breaking)*
-
-```csharp
-public Consistency Consistency { get; set; }
-```
-
-**public method Nest.UpgradeDescriptor.AllowNoIndices** *Removed (Breaking)*
-
-```csharp
-public UpgradeDescriptor AllowNoIndices(bool allow_no_indices = True)
-```
-
-**public property Nest.UpgradeRequest.AllowNoIndices** *Removed (Breaking)*
-
-```csharp
-public bool AllowNoIndices { get; set; }
-```
-
-**public class Nest.User** *Removed (Breaking)*
-
-```csharp
-public class User
-```
-
-**public class Nest.Warmer** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public class Warmer : IWarmer
-```
-
-**public class Nest.WarmerDescriptor&lt;T&gt;** *Removed (Breaking)*
-
-```csharp
-public class WarmerDescriptor<T> : DescriptorBase<WarmerDescriptor<T>, IWarmer>, IDescriptor, IWarmer
-```
-
-**public class Nest.Warmers** *Removed (Breaking)*
-
-```csharp
-public class Warmers : IsADictionaryBase<TypeName, IWarmer>, IIsADictionary<TypeName, IWarmer>, IDictionary<TypeName, IWarmer>, ICollection<KeyValuePair<TypeName, IWarmer>>, IEnumerable<KeyValuePair<TypeName, IWarmer>>, IEnumerable, IDictionary, ICollection, IIsADictionary, IWarmers
-```
-
-**public class Nest.WarmersDescriptor** *Removed (Breaking)*
-
-```csharp
-public class WarmersDescriptor : IsADictionaryDescriptorBase<WarmersDescriptor, IWarmers, TypeName, IWarmer>, IDescriptor, IPromise<IWarmers>
-```
-
-**public class Nest.WatcherInfoDescriptor** *Removed (Breaking)*
-
-```csharp
-[DescriptorForAttribute("WatcherInfo")]
-public class WatcherInfoDescriptor : RequestDescriptorBase<WatcherInfoDescriptor, WatcherInfoRequestParameters, IWatcherInfoRequest>, IRequest<WatcherInfoRequestParameters>, IRequest, IDescriptor, IWatcherInfoRequest
-```
-
-**public class Nest.WatcherInfoRequest** *Removed (Breaking)*
-
-```csharp
-public class WatcherInfoRequest : PlainRequestBase<WatcherInfoRequestParameters>, IRequest<WatcherInfoRequestParameters>, IRequest, IWatcherInfoRequest
-```
-
-**public class Nest.WatcherInfoResponse** *Removed (Breaking)*
-
-```csharp
-public class WatcherInfoResponse : ResponseBase, IResponse, IBodyWithApiCallDetails, IWatcherInfoResponse
-```
-
-**public class Nest.WatcherVersion** *Removed (Breaking)*
-
-```csharp
-[JsonObjectAttribute]
-public class WatcherVersion
-```
-
-#RemovedIn5xBecauseObsoleted
 **public property Nest.AnalyzeRequest.CharFilters** *Removed (Breaking)*
 
 ```csharp
@@ -5854,745 +3781,455 @@ public TypeMappingDescriptor<T> Transform(IEnumerable<IMappingTransform> transfo
 public TypeMappingDescriptor<T> TtlField(Func<TtlFieldDescriptor, ITtlField> ttlFieldSelector)
 ```
 
-#ReadOnlyTypeChange
+#RemovedIn5x
 
-##Now IReadOnlyDictionary
-**public property Nest.ActivationStatus.Actions**  
-**public property Nest.AggregationsHelper.Aggregations**  
-**public property Nest.AuthenticateResponse.Metadata**  
-**public property Nest.BucketAggregate.Meta**  
-**public property Nest.BucketAggregateBase.Meta**  
-**public property Nest.ClearCachedRealmsResponse.Nodes**  
-**public property Nest.ClearCachedRolesResponse.Nodes**  
-**public property Nest.ClusterGetSettingsResponse.Persistent**  
-**public property Nest.ClusterGetSettingsResponse.Transient**  
-**public property Nest.ClusterHealthResponse.Indices**  
-**public property Nest.ClusterPutSettingsResponse.Persistent**  
-**public property Nest.ClusterPutSettingsResponse.Transient**  
-**public property Nest.ClusterRerouteState.Nodes**  
-**public property Nest.ClusterStateResponse.Nodes**  
-**public property Nest.ExecutionResultInput.Payload**  
-**public property Nest.FieldMapping.Mapping**  
-**public property Nest.FieldStats.Fields**  
-**public property Nest.FieldStatsResponse.Indices**  
-**public property Nest.GetFieldMappingResponse.Indices**  
-**public property Nest.GetIndexResponse.Indices**  
-**public property Nest.GetIndexSettingsResponse.Indices**  
-**public property Nest.GetIndexTemplateResponse.TemplateMappings**  
-**public property Nest.GetMappingResponse.Mappings**  
-**public property Nest.GetRepositoryResponse.Repositories**  
-**public property Nest.GetRoleResponse.Roles**  
-**public property Nest.GetUserResponse.Users**  
-**public property Nest.Hit&lt;T&gt;.InnerHits**  
-**public property Nest.IAggregate.Meta**  
-**public property Nest.IAuthenticateResponse.Metadata**  
-**public property Nest.IClearCachedRealmsResponse.Nodes**  
-**public property Nest.IClearCachedRolesResponse.Nodes**  
-**public property Nest.IClusterGetSettingsResponse.Persistent**  
-**public property Nest.IClusterGetSettingsResponse.Transient**  
-**public property Nest.IClusterHealthResponse.Indices**  
-**public property Nest.IClusterPutSettingsResponse.Persistent**  
-**public property Nest.IClusterPutSettingsResponse.Transient**  
-**public property Nest.IClusterStateResponse.Nodes**  
-**public property Nest.IDictionaryResponse&lt;TKey, TValue&gt;.BackingDictionary**  
-**public property Nest.IFieldStatsResponse.Indices**  
-**public property Nest.IGetFieldMappingResponse.Indices**  
-**public property Nest.IGetIndexResponse.Indices**  
-**public property Nest.IGetIndexSettingsResponse.Indices**  
-**public property Nest.IGetIndexTemplateResponse.TemplateMappings**  
-**public property Nest.IGetMappingResponse.Mappings**  
-**public property Nest.IGetRepositoryResponse.Repositories**  
-**public property Nest.IGetRoleResponse.Roles**  
-**public property Nest.IGetUserResponse.Users**  
-**public property Nest.IHit&lt;T&gt;.InnerHits**  
-**public property Nest.IIndicesShardStoresResponse.Indices**  
-**public property Nest.IIndicesStatsResponse.Indices**  
-**public property Nest.IndexHealthStats.Shards**  
-**public property Nest.IndexingStats.Types**  
-**public property Nest.IndexRoutingTable.Shards**  
-**public property Nest.IndexSegment.Shards**  
-**public property Nest.IndicesShardStores.Shards**  
-**public property Nest.IndicesShardStoresResponse.Indices**  
-**public property Nest.IndicesStatsResponse.Indices**  
-**public property Nest.INodesInfoResponse.Nodes**  
-**public property Nest.INodesStatsResponse.Nodes**  
-**public property Nest.IRecoveryStatusResponse.Indices**  
-**public property Nest.IReindexRethrottleResponse.Nodes**  
-**public property Nest.ISearchResponse&lt;T&gt;.Aggregations**  
-**public property Nest.ISearchResponse&lt;T&gt;.Suggest**  
-**public property Nest.ISearchShardsResponse.Nodes**  
-**public property Nest.ISegmentsResponse.Indices**  
-**public property Nest.IUpgradeStatusResponse.Upgrades**  
-**public property Nest.IVerifyRepositoryResponse.Nodes**  
-**public property Nest.MetadataState.Indices**  
-**public property Nest.MetadataState.Templates**  
-**public property Nest.MetricAggregateBase.Meta**  
-**public property Nest.NodesInfoResponse.Nodes**  
-**public property Nest.NodesStatsResponse.Nodes**  
-**public property Nest.PercolatorMatch.Highlight**  
-**public property Nest.RecoveryStatusResponse.Indices**  
-**public property Nest.ReindexNode.Attributes**  
-**public property Nest.ReindexNode.Tasks**  
-**public property Nest.ReindexRethrottleResponse.Nodes**  
-**public property Nest.RoutingNodesState.Nodes**  
-**public property Nest.RoutingTableState.Indices**  
-**public property Nest.SearchResponse&lt;T&gt;.Aggregations**  
-**public property Nest.SearchResponse&lt;T&gt;.Suggest**  
-**public property Nest.SearchShardsResponse.Nodes**  
-**public property Nest.SegmentsResponse.Indices**  
-**public property Nest.ShardsSegment.Segments**  
-**public property Nest.ShardStore.Attributes**  
-**public property Nest.SnapshotIndexStats.Shards**  
-**public property Nest.SnapshotStatus.Indices**  
-**public property Nest.TaskExecutingNode.Tasks**  
-**public property Nest.TermVector.Terms**  
-**public property Nest.TermVectorsResponse.TermVectors**  
-**public property Nest.TypeFieldMappings.Mappings**  
-**public property Nest.UpgradeStatusResponse.Upgrades**  
-**public property Nest.VerifyRepositoryResponse.Nodes**  
-**public property Nest.Watch.Meta**  
-**public property Nest.WatchRecord.Metadata**  
-**public property Nest.WatchStatus.Actions**  
+The public methods/properties/types have been removed and are not yet documented in this document for what reason. 
+This could have happened because of a rename.
 
-
-##Now IReadOnlyCollection
-**public property Nest.AnalyzeResponse.Tokens**  
-**public property Nest.AuthenticateResponse.Roles**  
-**public property Nest.BucketAggregate.Items**  
-**public property Nest.BulkResponse.Items**  
-**public property Nest.CatResponse&lt;TCatRecord&gt;.Records**  
-**public property Nest.ClusterJvm.Versions**  
-**public property Nest.ClusterNodesStats.Plugins**  
-**public property Nest.ClusterNodesStats.Versions**  
-**public property Nest.ClusterOperatingSystemStats.Names**  
-**public property Nest.ClusterPendingTasksResponse.Tasks**  
-**public property Nest.ClusterRerouteResponse.Explanations**  
-**public property Nest.Collector.Children**  
-**public property Nest.ExecutionResult.Actions**  
-**public property Nest.Explanation.Details**  
-**public property Nest.ExplanationDetail.Details**  
-**public property Nest.GetSnapshotResponse.Snapshots**  
-**public property Nest.GraphExploreResponse.Connections**  
-**public property Nest.GraphExploreResponse.Failures**  
-**public property Nest.GraphExploreResponse.Vertices**  
-**public property Nest.HighlightHit.Highlights**  
-**public property Nest.Hit&lt;T&gt;.MatchedQueries**  
-**public property Nest.Hit&lt;T&gt;.Sorts**  
-**public property Nest.HitsMetaData&lt;T&gt;.Hits**  
-**public property Nest.HotThreadInformation.Hosts**  
-**public property Nest.HotThreadInformation.Threads**  
-**public property Nest.IAnalyzeResponse.Tokens**  
-**public property Nest.IAuthenticateResponse.Roles**  
-**public property Nest.IBulkResponse.Items**  
-**public property Nest.ICatResponse&lt;TCatRecord&gt;.Records**  
-**public property Nest.IClusterPendingTasksResponse.Tasks**  
-**public property Nest.IClusterRerouteResponse.Explanations**  
-**public property Nest.IGetSnapshotResponse.Snapshots**  
-**public property Nest.IGraphExploreResponse.Connections**  
-**public property Nest.IGraphExploreResponse.Failures**  
-**public property Nest.IGraphExploreResponse.Vertices**  
-**public property Nest.IHit&lt;T&gt;.MatchedQueries**  
-**public property Nest.IHit&lt;T&gt;.Sorts**  
-**public property Nest.IMultiGetResponse.Documents**  
-**public property Nest.IMultiTermVectorsResponse.Documents**  
-**public property Nest.INodesHotThreadsResponse.HotThreads**  
-**public property Nest.IPercolateResponse.Matches**  
-**public property Nest.IReindexOnServerResponse.Failures**  
-**public property Nest.ISearchResponse&lt;T&gt;.Documents**  
-**public property Nest.ISearchResponse&lt;T&gt;.Fields**  
-**public property Nest.ISearchResponse&lt;T&gt;.Hits**  
-**public property Nest.ISearchShardsResponse.Shards**  
-**public property Nest.ISnapshotStatusResponse.Snapshots**  
-**public property Nest.IUpdateByQueryResponse.Failures**  
-**public property Nest.IValidateQueryResponse.Explanations**  
-**public property Nest.IWatcherStatsResponse.CurrentWatches**  
-**public property Nest.IWatcherStatsResponse.QueuedWatches**  
-**public property Nest.LicenseAcknowledgement.License**  
-**public property Nest.MultiBucketAggregate&lt;TBucket&gt;.Buckets**  
-**public property Nest.MultiGetResponse.Documents**  
-**public property Nest.MultiTermVectorsResponse.Documents**  
-**public property Nest.NodesHotThreadsResponse.HotThreads**  
-**public property Nest.PercolateResponse.Matches**  
-**public property Nest.Profile.Shards**  
-**public property Nest.RecoveryStatus.Shards**  
-**public property Nest.ReindexOnServerResponse.Failures**  
-**public property Nest.RoutingNodesState.Unassigned**  
-**public property Nest.SearchProfile.Collector**  
-**public property Nest.SearchProfile.Query**  
-**public property Nest.SearchResponse&lt;T&gt;.Documents**  
-**public property Nest.SearchResponse&lt;T&gt;.Fields**  
-**public property Nest.SearchResponse&lt;T&gt;.Hits**  
-**public property Nest.SearchShardsResponse.Shards**  
-**public property Nest.ShardProfile.Searches**  
-**public property Nest.ShardsMetaData.Failures**  
-**public property Nest.ShardStoreWrapper.Stores**  
-**public property Nest.Snapshot.Failures**  
-**public property Nest.Snapshot.Indices**  
-**public property Nest.SnapshotRestore.Indices**  
-**public property Nest.SnapshotStatusResponse.Snapshots**  
-**public property Nest.TermVectorTerm.Tokens**  
-**public method Nest.TopHitsAggregate.Documents&lt;T&gt;**  
-**public method Nest.TopHitsAggregate.Hits&lt;T&gt;**  
-**public property Nest.UpdateByQueryResponse.Failures**  
-**public property Nest.ValidateQueryResponse.Explanations**  
-**public property Nest.WatcherStatsResponse.CurrentWatches**  
-**public property Nest.WatcherStatsResponse.QueuedWatches**  
-**public property Nest.WatchRecord.Messages**  
-
-#CancellationToken
-**Nest.BulkAllObservable&lt;T&gt;..ctor**  
-**Nest.DeleteManyExtensions.DeleteManyAsync&lt;T&gt;**  
-**Nest.ElasticClient.AcknowledgeWatchAsync**  
-**Nest.ElasticClient.AcknowledgeWatchAsync**  
-**Nest.ElasticClient.ActivateWatchAsync**  
-**Nest.ElasticClient.ActivateWatchAsync**  
-**Nest.ElasticClient.AliasAsync**  
-**Nest.ElasticClient.AliasAsync**  
-**Nest.ElasticClient.AliasExistsAsync**  
-**Nest.ElasticClient.AliasExistsAsync**  
-**Nest.ElasticClient.AnalyzeAsync**  
-**Nest.ElasticClient.AnalyzeAsync**  
-**Nest.ElasticClient.AuthenticateAsync**  
-**Nest.ElasticClient.AuthenticateAsync**  
-**Nest.ElasticClient.BulkAsync**  
-**Nest.ElasticClient.BulkAsync**  
-**Nest.ElasticClient.CatAliasesAsync**  
-**Nest.ElasticClient.CatAliasesAsync**  
-**Nest.ElasticClient.CatAllocationAsync**  
-**Nest.ElasticClient.CatAllocationAsync**  
-**Nest.ElasticClient.CatCountAsync**  
-**Nest.ElasticClient.CatCountAsync**  
-**Nest.ElasticClient.CatFielddataAsync**  
-**Nest.ElasticClient.CatFielddataAsync**  
-**Nest.ElasticClient.CatHealthAsync**  
-**Nest.ElasticClient.CatHealthAsync**  
-**Nest.ElasticClient.CatHelpAsync**  
-**Nest.ElasticClient.CatHelpAsync**  
-**Nest.ElasticClient.CatIndicesAsync**  
-**Nest.ElasticClient.CatIndicesAsync**  
-**Nest.ElasticClient.CatMasterAsync**  
-**Nest.ElasticClient.CatMasterAsync**  
-**Nest.ElasticClient.CatNodeAttributesAsync**  
-**Nest.ElasticClient.CatNodeAttributesAsync**  
-**Nest.ElasticClient.CatNodesAsync**  
-**Nest.ElasticClient.CatNodesAsync**  
-**Nest.ElasticClient.CatPendingTasksAsync**  
-**Nest.ElasticClient.CatPendingTasksAsync**  
-**Nest.ElasticClient.CatPluginsAsync**  
-**Nest.ElasticClient.CatPluginsAsync**  
-**Nest.ElasticClient.CatRecoveryAsync**  
-**Nest.ElasticClient.CatRecoveryAsync**  
-**Nest.ElasticClient.CatRepositoriesAsync**  
-**Nest.ElasticClient.CatRepositoriesAsync**  
-**Nest.ElasticClient.CatSegmentsAsync**  
-**Nest.ElasticClient.CatSegmentsAsync**  
-**Nest.ElasticClient.CatShardsAsync**  
-**Nest.ElasticClient.CatShardsAsync**  
-**Nest.ElasticClient.CatSnapshotsAsync**  
-**Nest.ElasticClient.CatSnapshotsAsync**  
-**Nest.ElasticClient.CatThreadPoolAsync**  
-**Nest.ElasticClient.CatThreadPoolAsync**  
-**Nest.ElasticClient.ClearCacheAsync**  
-**Nest.ElasticClient.ClearCacheAsync**  
-**Nest.ElasticClient.ClearCachedRealmsAsync**  
-**Nest.ElasticClient.ClearCachedRealmsAsync**  
-**Nest.ElasticClient.ClearCachedRolesAsync**  
-**Nest.ElasticClient.ClearCachedRolesAsync**  
-**Nest.ElasticClient.ClearScrollAsync**  
-**Nest.ElasticClient.ClearScrollAsync**  
-**Nest.ElasticClient.CloseIndexAsync**  
-**Nest.ElasticClient.CloseIndexAsync**  
-**Nest.ElasticClient.ClusterGetSettingsAsync**  
-**Nest.ElasticClient.ClusterGetSettingsAsync**  
-**Nest.ElasticClient.ClusterHealthAsync**  
-**Nest.ElasticClient.ClusterHealthAsync**  
-**Nest.ElasticClient.ClusterPendingTasksAsync**  
-**Nest.ElasticClient.ClusterPendingTasksAsync**  
-**Nest.ElasticClient.ClusterPutSettingsAsync**  
-**Nest.ElasticClient.ClusterPutSettingsAsync**  
-**Nest.ElasticClient.ClusterRerouteAsync**  
-**Nest.ElasticClient.ClusterRerouteAsync**  
-**Nest.ElasticClient.ClusterStateAsync**  
-**Nest.ElasticClient.ClusterStateAsync**  
-**Nest.ElasticClient.ClusterStatsAsync**  
-**Nest.ElasticClient.ClusterStatsAsync**  
-**Nest.ElasticClient.CountAsync&lt;T&gt;**  
-**Nest.ElasticClient.CountAsync&lt;T&gt;**  
-**Nest.ElasticClient.CreateIndexAsync**  
-**Nest.ElasticClient.CreateIndexAsync**  
-**Nest.ElasticClient.CreateRepositoryAsync**  
-**Nest.ElasticClient.CreateRepositoryAsync**  
-**Nest.ElasticClient.DeactivateWatchAsync**  
-**Nest.ElasticClient.DeactivateWatchAsync**  
-**Nest.ElasticClient.DeleteAliasAsync**  
-**Nest.ElasticClient.DeleteAliasAsync**  
-**Nest.ElasticClient.DeleteAsync**  
-**Nest.ElasticClient.DeleteAsync&lt;T&gt;**  
-**Nest.ElasticClient.DeleteByQueryAsync**  
-**Nest.ElasticClient.DeleteByQueryAsync&lt;T&gt;**  
-**Nest.ElasticClient.DeleteIndexAsync**  
-**Nest.ElasticClient.DeleteIndexAsync**  
-**Nest.ElasticClient.DeleteIndexTemplateAsync**  
-**Nest.ElasticClient.DeleteIndexTemplateAsync**  
-**Nest.ElasticClient.DeleteLicenseAsync**  
-**Nest.ElasticClient.DeleteLicenseAsync**  
-**Nest.ElasticClient.DeleteRepositoryAsync**  
-**Nest.ElasticClient.DeleteRepositoryAsync**  
-**Nest.ElasticClient.DeleteRoleAsync**  
-**Nest.ElasticClient.DeleteRoleAsync**  
-**Nest.ElasticClient.DeleteScriptAsync**  
-**Nest.ElasticClient.DeleteScriptAsync**  
-**Nest.ElasticClient.DeleteSearchTemplateAsync**  
-**Nest.ElasticClient.DeleteSearchTemplateAsync**  
-**Nest.ElasticClient.DeleteSnapshotAsync**  
-**Nest.ElasticClient.DeleteSnapshotAsync**  
-**Nest.ElasticClient.DeleteUserAsync**  
-**Nest.ElasticClient.DeleteUserAsync**  
-**Nest.ElasticClient.DeleteWatchAsync**  
-**Nest.ElasticClient.DeleteWatchAsync**  
-**Nest.ElasticClient.DocumentExistsAsync**  
-**Nest.ElasticClient.DocumentExistsAsync&lt;T&gt;**  
-**Nest.ElasticClient.ExecuteWatchAsync**  
-**Nest.ElasticClient.ExecuteWatchAsync**  
-**Nest.ElasticClient.ExplainAsync&lt;T&gt;**  
-**Nest.ElasticClient.ExplainAsync&lt;T&gt;**  
-**Nest.ElasticClient.FieldStatsAsync**  
-**Nest.ElasticClient.FieldStatsAsync**  
-**Nest.ElasticClient.FlushAsync**  
-**Nest.ElasticClient.FlushAsync**  
-**Nest.ElasticClient.ForceMergeAsync**  
-**Nest.ElasticClient.ForceMergeAsync**  
-**Nest.ElasticClient.GetAliasAsync**  
-**Nest.ElasticClient.GetAliasAsync**  
-**Nest.ElasticClient.GetAsync&lt;T&gt;**  
-**Nest.ElasticClient.GetAsync&lt;T&gt;**  
-**Nest.ElasticClient.GetFieldMappingAsync**  
-**Nest.ElasticClient.GetFieldMappingAsync&lt;T&gt;**  
-**Nest.ElasticClient.GetIndexAsync**  
-**Nest.ElasticClient.GetIndexAsync**  
-**Nest.ElasticClient.GetIndexSettingsAsync**  
-**Nest.ElasticClient.GetIndexSettingsAsync**  
-**Nest.ElasticClient.GetIndexTemplateAsync**  
-**Nest.ElasticClient.GetIndexTemplateAsync**  
-**Nest.ElasticClient.GetLicenseAsync**  
-**Nest.ElasticClient.GetLicenseAsync**  
-**Nest.ElasticClient.GetMappingAsync**  
-**Nest.ElasticClient.GetMappingAsync&lt;T&gt;**  
-**Nest.ElasticClient.GetRepositoryAsync**  
-**Nest.ElasticClient.GetRepositoryAsync**  
-**Nest.ElasticClient.GetRoleAsync**  
-**Nest.ElasticClient.GetRoleAsync**  
-**Nest.ElasticClient.GetScriptAsync**  
-**Nest.ElasticClient.GetScriptAsync**  
-**Nest.ElasticClient.GetSearchTemplateAsync**  
-**Nest.ElasticClient.GetSearchTemplateAsync**  
-**Nest.ElasticClient.GetSnapshotAsync**  
-**Nest.ElasticClient.GetSnapshotAsync**  
-**Nest.ElasticClient.GetUserAsync**  
-**Nest.ElasticClient.GetUserAsync**  
-**Nest.ElasticClient.GetWatchAsync**  
-**Nest.ElasticClient.GetWatchAsync**  
-**Nest.ElasticClient.GraphExploreAsync**  
-**Nest.ElasticClient.GraphExploreAsync&lt;T&gt;**  
-**Nest.ElasticClient.IndexAsync**  
-**Nest.ElasticClient.IndexAsync&lt;T&gt;**  
-**Nest.ElasticClient.IndexExistsAsync**  
-**Nest.ElasticClient.IndexExistsAsync**  
-**Nest.ElasticClient.IndexTemplateExistsAsync**  
-**Nest.ElasticClient.IndexTemplateExistsAsync**  
-**Nest.ElasticClient.IndicesShardStoresAsync**  
-**Nest.ElasticClient.IndicesShardStoresAsync**  
-**Nest.ElasticClient.IndicesStatsAsync**  
-**Nest.ElasticClient.IndicesStatsAsync**  
-**Nest.ElasticClient.MapAsync**  
-**Nest.ElasticClient.MapAsync&lt;T&gt;**  
-**Nest.ElasticClient.MultiGetAsync**  
-**Nest.ElasticClient.MultiGetAsync**  
-**Nest.ElasticClient.MultiPercolateAsync**  
-**Nest.ElasticClient.MultiPercolateAsync**  
-**Nest.ElasticClient.MultiSearchAsync**  
-**Nest.ElasticClient.MultiSearchAsync**  
-**Nest.ElasticClient.MultiTermVectorsAsync**  
-**Nest.ElasticClient.MultiTermVectorsAsync**  
-**Nest.ElasticClient.NodesHotThreadsAsync**  
-**Nest.ElasticClient.NodesHotThreadsAsync**  
-**Nest.ElasticClient.NodesInfoAsync**  
-**Nest.ElasticClient.NodesInfoAsync**  
-**Nest.ElasticClient.NodesStatsAsync**  
-**Nest.ElasticClient.NodesStatsAsync**  
-**Nest.ElasticClient.OpenIndexAsync**  
-**Nest.ElasticClient.OpenIndexAsync**  
-**Nest.ElasticClient.PercolateAsync&lt;T&gt;**  
-**Nest.ElasticClient.PercolateAsync&lt;T&gt;**  
-**Nest.ElasticClient.PercolateCountAsync&lt;T&gt;**  
-**Nest.ElasticClient.PercolateCountAsync&lt;T&gt;**  
-**Nest.ElasticClient.PingAsync**  
-**Nest.ElasticClient.PingAsync**  
-**Nest.ElasticClient.PostLicenseAsync**  
-**Nest.ElasticClient.PostLicenseAsync**  
-**Nest.ElasticClient.PutAliasAsync**  
-**Nest.ElasticClient.PutAliasAsync**  
-**Nest.ElasticClient.PutIndexTemplateAsync**  
-**Nest.ElasticClient.PutIndexTemplateAsync**  
-**Nest.ElasticClient.PutRoleAsync**  
-**Nest.ElasticClient.PutRoleAsync**  
-**Nest.ElasticClient.PutScriptAsync**  
-**Nest.ElasticClient.PutScriptAsync**  
-**Nest.ElasticClient.PutSearchTemplateAsync**  
-**Nest.ElasticClient.PutSearchTemplateAsync**  
-**Nest.ElasticClient.PutUserAsync**  
-**Nest.ElasticClient.PutUserAsync**  
-**Nest.ElasticClient.PutWatchAsync**  
-**Nest.ElasticClient.PutWatchAsync**  
-**Nest.ElasticClient.RecoveryStatusAsync**  
-**Nest.ElasticClient.RecoveryStatusAsync**  
-**Nest.ElasticClient.RefreshAsync**  
-**Nest.ElasticClient.RefreshAsync**  
-**Nest.ElasticClient.RegisterPercolatorAsync**  
-**Nest.ElasticClient.RegisterPercolatorAsync&lt;T&gt;**  
-**Nest.ElasticClient.Reindex&lt;T&gt;**  
-**Nest.ElasticClient.Reindex&lt;T&gt;**  
-**Nest.ElasticClient.ReindexOnServerAsync**  
-**Nest.ElasticClient.ReindexOnServerAsync**  
-**Nest.ElasticClient.RenderSearchTemplateAsync**  
-**Nest.ElasticClient.RenderSearchTemplateAsync**  
-**Nest.ElasticClient.RestartWatcherAsync**  
-**Nest.ElasticClient.RestartWatcherAsync**  
-**Nest.ElasticClient.RestoreAsync**  
-**Nest.ElasticClient.RestoreAsync**  
-**Nest.ElasticClient.RethrottleAsync**  
-**Nest.ElasticClient.RethrottleAsync**  
-**Nest.ElasticClient.RootNodeInfoAsync**  
-**Nest.ElasticClient.RootNodeInfoAsync**  
-**Nest.ElasticClient.ScrollAsync&lt;T&gt;**  
-**Nest.ElasticClient.ScrollAsync&lt;T&gt;**  
-**Nest.ElasticClient.SearchAsync&lt;T, TResult&gt;**  
-**Nest.ElasticClient.SearchAsync&lt;T, TResult&gt;**  
-**Nest.ElasticClient.SearchAsync&lt;T&gt;**  
-**Nest.ElasticClient.SearchAsync&lt;T&gt;**  
-**Nest.ElasticClient.SearchShardsAsync**  
-**Nest.ElasticClient.SearchShardsAsync&lt;T&gt;**  
-**Nest.ElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
-**Nest.ElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
-**Nest.ElasticClient.SearchTemplateAsync&lt;T&gt;**  
-**Nest.ElasticClient.SearchTemplateAsync&lt;T&gt;**  
-**Nest.ElasticClient.SegmentsAsync**  
-**Nest.ElasticClient.SegmentsAsync**  
-**Nest.ElasticClient.SnapshotAsync**  
-**Nest.ElasticClient.SnapshotAsync**  
-**Nest.ElasticClient.SnapshotStatusAsync**  
-**Nest.ElasticClient.SnapshotStatusAsync**  
-**Nest.ElasticClient.SourceAsync&lt;T&gt;**  
-**Nest.ElasticClient.SourceAsync&lt;T&gt;**  
-**Nest.ElasticClient.StartWatcherAsync**  
-**Nest.ElasticClient.StartWatcherAsync**  
-**Nest.ElasticClient.StopWatcherAsync**  
-**Nest.ElasticClient.StopWatcherAsync**  
-**Nest.ElasticClient.SuggestAsync&lt;T&gt;**  
-**Nest.ElasticClient.SyncedFlushAsync**  
-**Nest.ElasticClient.SyncedFlushAsync**  
-**Nest.ElasticClient.TermVectorsAsync&lt;T&gt;**  
-**Nest.ElasticClient.TermVectorsAsync&lt;T&gt;**  
-**Nest.ElasticClient.TypeExistsAsync**  
-**Nest.ElasticClient.TypeExistsAsync**  
-**Nest.ElasticClient.UnregisterPercolatorAsync**  
-**Nest.ElasticClient.UnregisterPercolatorAsync&lt;T&gt;**  
-**Nest.ElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
-**Nest.ElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
-**Nest.ElasticClient.UpdateAsync&lt;TDocument&gt;**  
-**Nest.ElasticClient.UpdateAsync&lt;TDocument&gt;**  
-**Nest.ElasticClient.UpdateByQueryAsync**  
-**Nest.ElasticClient.UpdateByQueryAsync&lt;T&gt;**  
-**Nest.ElasticClient.UpdateIndexSettingsAsync**  
-**Nest.ElasticClient.UpdateIndexSettingsAsync**  
-**Nest.ElasticClient.UpgradeAsync**  
-**Nest.ElasticClient.UpgradeAsync**  
-**Nest.ElasticClient.UpgradeStatusAsync**  
-**Nest.ElasticClient.UpgradeStatusAsync**  
-**Nest.ElasticClient.ValidateQueryAsync**  
-**Nest.ElasticClient.ValidateQueryAsync&lt;T&gt;**  
-**Nest.ElasticClient.VerifyRepositoryAsync**  
-**Nest.ElasticClient.VerifyRepositoryAsync**  
-**Nest.ElasticClient.WatcherStatsAsync**  
-**Nest.ElasticClient.WatcherStatsAsync**  
-**Nest.GetManyExtensions.GetManyAsync&lt;T&gt;**  
-**Nest.GetManyExtensions.GetManyAsync&lt;T&gt;**  
-**Nest.IElasticClient.AcknowledgeWatchAsync**  
-**Nest.IElasticClient.AcknowledgeWatchAsync**  
-**Nest.IElasticClient.ActivateWatchAsync**  
-**Nest.IElasticClient.ActivateWatchAsync**  
-**Nest.IElasticClient.AliasAsync**  
-**Nest.IElasticClient.AliasAsync**  
-**Nest.IElasticClient.AliasExistsAsync**  
-**Nest.IElasticClient.AliasExistsAsync**  
-**Nest.IElasticClient.AnalyzeAsync**  
-**Nest.IElasticClient.AnalyzeAsync**  
-**Nest.IElasticClient.AuthenticateAsync**  
-**Nest.IElasticClient.AuthenticateAsync**  
-**Nest.IElasticClient.BulkAsync**  
-**Nest.IElasticClient.BulkAsync**  
-**Nest.IElasticClient.CatAliasesAsync**  
-**Nest.IElasticClient.CatAliasesAsync**  
-**Nest.IElasticClient.CatAllocationAsync**  
-**Nest.IElasticClient.CatAllocationAsync**  
-**Nest.IElasticClient.CatCountAsync**  
-**Nest.IElasticClient.CatCountAsync**  
-**Nest.IElasticClient.CatFielddataAsync**  
-**Nest.IElasticClient.CatFielddataAsync**  
-**Nest.IElasticClient.CatHealthAsync**  
-**Nest.IElasticClient.CatHealthAsync**  
-**Nest.IElasticClient.CatHelpAsync**  
-**Nest.IElasticClient.CatHelpAsync**  
-**Nest.IElasticClient.CatIndicesAsync**  
-**Nest.IElasticClient.CatIndicesAsync**  
-**Nest.IElasticClient.CatMasterAsync**  
-**Nest.IElasticClient.CatMasterAsync**  
-**Nest.IElasticClient.CatNodeAttributesAsync**  
-**Nest.IElasticClient.CatNodeAttributesAsync**  
-**Nest.IElasticClient.CatNodesAsync**  
-**Nest.IElasticClient.CatNodesAsync**  
-**Nest.IElasticClient.CatPendingTasksAsync**  
-**Nest.IElasticClient.CatPendingTasksAsync**  
-**Nest.IElasticClient.CatPluginsAsync**  
-**Nest.IElasticClient.CatPluginsAsync**  
-**Nest.IElasticClient.CatRecoveryAsync**  
-**Nest.IElasticClient.CatRecoveryAsync**  
-**Nest.IElasticClient.CatRepositoriesAsync**  
-**Nest.IElasticClient.CatRepositoriesAsync**  
-**Nest.IElasticClient.CatSegmentsAsync**  
-**Nest.IElasticClient.CatSegmentsAsync**  
-**Nest.IElasticClient.CatShardsAsync**  
-**Nest.IElasticClient.CatShardsAsync**  
-**Nest.IElasticClient.CatSnapshotsAsync**  
-**Nest.IElasticClient.CatSnapshotsAsync**  
-**Nest.IElasticClient.CatThreadPoolAsync**  
-**Nest.IElasticClient.CatThreadPoolAsync**  
-**Nest.IElasticClient.ClearCacheAsync**  
-**Nest.IElasticClient.ClearCacheAsync**  
-**Nest.IElasticClient.ClearCachedRealmsAsync**  
-**Nest.IElasticClient.ClearCachedRealmsAsync**  
-**Nest.IElasticClient.ClearCachedRolesAsync**  
-**Nest.IElasticClient.ClearCachedRolesAsync**  
-**Nest.IElasticClient.ClearScrollAsync**  
-**Nest.IElasticClient.ClearScrollAsync**  
-**Nest.IElasticClient.CloseIndexAsync**  
-**Nest.IElasticClient.CloseIndexAsync**  
-**Nest.IElasticClient.ClusterGetSettingsAsync**  
-**Nest.IElasticClient.ClusterGetSettingsAsync**  
-**Nest.IElasticClient.ClusterHealthAsync**  
-**Nest.IElasticClient.ClusterHealthAsync**  
-**Nest.IElasticClient.ClusterPendingTasksAsync**  
-**Nest.IElasticClient.ClusterPendingTasksAsync**  
-**Nest.IElasticClient.ClusterPutSettingsAsync**  
-**Nest.IElasticClient.ClusterPutSettingsAsync**  
-**Nest.IElasticClient.ClusterRerouteAsync**  
-**Nest.IElasticClient.ClusterRerouteAsync**  
-**Nest.IElasticClient.ClusterStateAsync**  
-**Nest.IElasticClient.ClusterStateAsync**  
-**Nest.IElasticClient.ClusterStatsAsync**  
-**Nest.IElasticClient.ClusterStatsAsync**  
-**Nest.IElasticClient.CountAsync&lt;T&gt;**  
-**Nest.IElasticClient.CountAsync&lt;T&gt;**  
-**Nest.IElasticClient.CreateIndexAsync**  
-**Nest.IElasticClient.CreateIndexAsync**  
-**Nest.IElasticClient.CreateRepositoryAsync**  
-**Nest.IElasticClient.CreateRepositoryAsync**  
-**Nest.IElasticClient.DeactivateWatchAsync**  
-**Nest.IElasticClient.DeactivateWatchAsync**  
-**Nest.IElasticClient.DeleteAliasAsync**  
-**Nest.IElasticClient.DeleteAliasAsync**  
-**Nest.IElasticClient.DeleteAsync**  
-**Nest.IElasticClient.DeleteAsync&lt;T&gt;**  
-**Nest.IElasticClient.DeleteByQueryAsync**  
-**Nest.IElasticClient.DeleteByQueryAsync&lt;T&gt;**  
-**Nest.IElasticClient.DeleteIndexAsync**  
-**Nest.IElasticClient.DeleteIndexAsync**  
-**Nest.IElasticClient.DeleteIndexTemplateAsync**  
-**Nest.IElasticClient.DeleteIndexTemplateAsync**  
-**Nest.IElasticClient.DeleteLicenseAsync**  
-**Nest.IElasticClient.DeleteLicenseAsync**  
-**Nest.IElasticClient.DeleteRepositoryAsync**  
-**Nest.IElasticClient.DeleteRepositoryAsync**  
-**Nest.IElasticClient.DeleteRoleAsync**  
-**Nest.IElasticClient.DeleteRoleAsync**  
-**Nest.IElasticClient.DeleteScriptAsync**  
-**Nest.IElasticClient.DeleteScriptAsync**  
-**Nest.IElasticClient.DeleteSearchTemplateAsync**  
-**Nest.IElasticClient.DeleteSearchTemplateAsync**  
-**Nest.IElasticClient.DeleteSnapshotAsync**  
-**Nest.IElasticClient.DeleteSnapshotAsync**  
-**Nest.IElasticClient.DeleteUserAsync**  
-**Nest.IElasticClient.DeleteUserAsync**  
-**Nest.IElasticClient.DeleteWatchAsync**  
-**Nest.IElasticClient.DeleteWatchAsync**  
-**Nest.IElasticClient.DocumentExistsAsync**  
-**Nest.IElasticClient.DocumentExistsAsync&lt;T&gt;**  
-**Nest.IElasticClient.ExecuteWatchAsync**  
-**Nest.IElasticClient.ExecuteWatchAsync**  
-**Nest.IElasticClient.ExplainAsync&lt;T&gt;**  
-**Nest.IElasticClient.ExplainAsync&lt;T&gt;**  
-**Nest.IElasticClient.FieldStatsAsync**  
-**Nest.IElasticClient.FieldStatsAsync**  
-**Nest.IElasticClient.FlushAsync**  
-**Nest.IElasticClient.FlushAsync**  
-**Nest.IElasticClient.ForceMergeAsync**  
-**Nest.IElasticClient.ForceMergeAsync**  
-**Nest.IElasticClient.GetAliasAsync**  
-**Nest.IElasticClient.GetAliasAsync**  
-**Nest.IElasticClient.GetAsync&lt;T&gt;**  
-**Nest.IElasticClient.GetAsync&lt;T&gt;**  
-**Nest.IElasticClient.GetFieldMappingAsync**  
-**Nest.IElasticClient.GetFieldMappingAsync&lt;T&gt;**  
-**Nest.IElasticClient.GetIndexAsync**  
-**Nest.IElasticClient.GetIndexAsync**  
-**Nest.IElasticClient.GetIndexSettingsAsync**  
-**Nest.IElasticClient.GetIndexSettingsAsync**  
-**Nest.IElasticClient.GetIndexTemplateAsync**  
-**Nest.IElasticClient.GetIndexTemplateAsync**  
-**Nest.IElasticClient.GetLicenseAsync**  
-**Nest.IElasticClient.GetLicenseAsync**  
-**Nest.IElasticClient.GetMappingAsync**  
-**Nest.IElasticClient.GetMappingAsync&lt;T&gt;**  
-**Nest.IElasticClient.GetRepositoryAsync**  
-**Nest.IElasticClient.GetRepositoryAsync**  
-**Nest.IElasticClient.GetRoleAsync**  
-**Nest.IElasticClient.GetRoleAsync**  
-**Nest.IElasticClient.GetScriptAsync**  
-**Nest.IElasticClient.GetScriptAsync**  
-**Nest.IElasticClient.GetSearchTemplateAsync**  
-**Nest.IElasticClient.GetSearchTemplateAsync**  
-**Nest.IElasticClient.GetSnapshotAsync**  
-**Nest.IElasticClient.GetSnapshotAsync**  
-**Nest.IElasticClient.GetUserAsync**  
-**Nest.IElasticClient.GetUserAsync**  
-**Nest.IElasticClient.GetWatchAsync**  
-**Nest.IElasticClient.GetWatchAsync**  
-**Nest.IElasticClient.GraphExploreAsync**  
-**Nest.IElasticClient.GraphExploreAsync&lt;T&gt;**  
-**Nest.IElasticClient.IndexAsync**  
-**Nest.IElasticClient.IndexAsync&lt;T&gt;**  
-**Nest.IElasticClient.IndexExistsAsync**  
-**Nest.IElasticClient.IndexExistsAsync**  
-**Nest.IElasticClient.IndexTemplateExistsAsync**  
-**Nest.IElasticClient.IndexTemplateExistsAsync**  
-**Nest.IElasticClient.IndicesShardStoresAsync**  
-**Nest.IElasticClient.IndicesShardStoresAsync**  
-**Nest.IElasticClient.IndicesStatsAsync**  
-**Nest.IElasticClient.IndicesStatsAsync**  
-**Nest.IElasticClient.MapAsync**  
-**Nest.IElasticClient.MapAsync&lt;T&gt;**  
-**Nest.IElasticClient.MultiGetAsync**  
-**Nest.IElasticClient.MultiGetAsync**  
-**Nest.IElasticClient.MultiPercolateAsync**  
-**Nest.IElasticClient.MultiPercolateAsync**  
-**Nest.IElasticClient.MultiSearchAsync**  
-**Nest.IElasticClient.MultiSearchAsync**  
-**Nest.IElasticClient.MultiTermVectorsAsync**  
-**Nest.IElasticClient.MultiTermVectorsAsync**  
-**Nest.IElasticClient.NodesHotThreadsAsync**  
-**Nest.IElasticClient.NodesHotThreadsAsync**  
-**Nest.IElasticClient.NodesInfoAsync**  
-**Nest.IElasticClient.NodesInfoAsync**  
-**Nest.IElasticClient.NodesStatsAsync**  
-**Nest.IElasticClient.NodesStatsAsync**  
-**Nest.IElasticClient.OpenIndexAsync**  
-**Nest.IElasticClient.OpenIndexAsync**  
-**Nest.IElasticClient.PercolateAsync&lt;T&gt;**  
-**Nest.IElasticClient.PercolateAsync&lt;T&gt;**  
-**Nest.IElasticClient.PercolateCountAsync&lt;T&gt;**  
-**Nest.IElasticClient.PercolateCountAsync&lt;T&gt;**  
-**Nest.IElasticClient.PingAsync**  
-**Nest.IElasticClient.PingAsync**  
-**Nest.IElasticClient.PostLicenseAsync**  
-**Nest.IElasticClient.PostLicenseAsync**  
-**Nest.IElasticClient.PutAliasAsync**  
-**Nest.IElasticClient.PutAliasAsync**  
-**Nest.IElasticClient.PutIndexTemplateAsync**  
-**Nest.IElasticClient.PutIndexTemplateAsync**  
-**Nest.IElasticClient.PutRoleAsync**  
-**Nest.IElasticClient.PutRoleAsync**  
-**Nest.IElasticClient.PutScriptAsync**  
-**Nest.IElasticClient.PutScriptAsync**  
-**Nest.IElasticClient.PutSearchTemplateAsync**  
-**Nest.IElasticClient.PutSearchTemplateAsync**  
-**Nest.IElasticClient.PutUserAsync**  
-**Nest.IElasticClient.PutUserAsync**  
-**Nest.IElasticClient.PutWatchAsync**  
-**Nest.IElasticClient.PutWatchAsync**  
-**Nest.IElasticClient.RecoveryStatusAsync**  
-**Nest.IElasticClient.RecoveryStatusAsync**  
-**Nest.IElasticClient.RefreshAsync**  
-**Nest.IElasticClient.RefreshAsync**  
-**Nest.IElasticClient.RegisterPercolatorAsync**  
-**Nest.IElasticClient.RegisterPercolatorAsync&lt;T&gt;**  
-**Nest.IElasticClient.Reindex&lt;T&gt;**  
-**Nest.IElasticClient.Reindex&lt;T&gt;**  
-**Nest.IElasticClient.ReindexOnServerAsync**  
-**Nest.IElasticClient.ReindexOnServerAsync**  
-**Nest.IElasticClient.RenderSearchTemplateAsync**  
-**Nest.IElasticClient.RenderSearchTemplateAsync**  
-**Nest.IElasticClient.RestartWatcherAsync**  
-**Nest.IElasticClient.RestartWatcherAsync**  
-**Nest.IElasticClient.RestoreAsync**  
-**Nest.IElasticClient.RestoreAsync**  
-**Nest.IElasticClient.RethrottleAsync**  
-**Nest.IElasticClient.RethrottleAsync**  
-**Nest.IElasticClient.RootNodeInfoAsync**  
-**Nest.IElasticClient.RootNodeInfoAsync**  
-**Nest.IElasticClient.ScrollAsync&lt;T&gt;**  
-**Nest.IElasticClient.ScrollAsync&lt;T&gt;**  
-**Nest.IElasticClient.SearchAsync&lt;T, TResult&gt;**  
-**Nest.IElasticClient.SearchAsync&lt;T, TResult&gt;**  
-**Nest.IElasticClient.SearchAsync&lt;T&gt;**  
-**Nest.IElasticClient.SearchAsync&lt;T&gt;**  
-**Nest.IElasticClient.SearchShardsAsync**  
-**Nest.IElasticClient.SearchShardsAsync&lt;T&gt;**  
-**Nest.IElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
-**Nest.IElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
-**Nest.IElasticClient.SearchTemplateAsync&lt;T&gt;**  
-**Nest.IElasticClient.SearchTemplateAsync&lt;T&gt;**  
-**Nest.IElasticClient.SegmentsAsync**  
-**Nest.IElasticClient.SegmentsAsync**  
-**Nest.IElasticClient.SnapshotAsync**  
-**Nest.IElasticClient.SnapshotAsync**  
-**Nest.IElasticClient.SnapshotStatusAsync**  
-**Nest.IElasticClient.SnapshotStatusAsync**  
-**Nest.IElasticClient.SourceAsync&lt;T&gt;**  
-**Nest.IElasticClient.SourceAsync&lt;T&gt;**  
-**Nest.IElasticClient.StartWatcherAsync**  
-**Nest.IElasticClient.StartWatcherAsync**  
-**Nest.IElasticClient.StopWatcherAsync**  
-**Nest.IElasticClient.StopWatcherAsync**  
-**Nest.IElasticClient.SuggestAsync&lt;T&gt;**  
-**Nest.IElasticClient.SyncedFlushAsync**  
-**Nest.IElasticClient.SyncedFlushAsync**  
-**Nest.IElasticClient.TermVectorsAsync&lt;T&gt;**  
-**Nest.IElasticClient.TermVectorsAsync&lt;T&gt;**  
-**Nest.IElasticClient.TypeExistsAsync**  
-**Nest.IElasticClient.TypeExistsAsync**  
-**Nest.IElasticClient.UnregisterPercolatorAsync**  
-**Nest.IElasticClient.UnregisterPercolatorAsync&lt;T&gt;**  
-**Nest.IElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
-**Nest.IElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
-**Nest.IElasticClient.UpdateAsync&lt;TDocument&gt;**  
-**Nest.IElasticClient.UpdateAsync&lt;TDocument&gt;**  
-**Nest.IElasticClient.UpdateByQueryAsync**  
-**Nest.IElasticClient.UpdateByQueryAsync&lt;T&gt;**  
-**Nest.IElasticClient.UpdateIndexSettingsAsync**  
-**Nest.IElasticClient.UpdateIndexSettingsAsync**  
-**Nest.IElasticClient.UpgradeAsync**  
-**Nest.IElasticClient.UpgradeAsync**  
-**Nest.IElasticClient.UpgradeStatusAsync**  
-**Nest.IElasticClient.UpgradeStatusAsync**  
-**Nest.IElasticClient.ValidateQueryAsync**  
-**Nest.IElasticClient.ValidateQueryAsync&lt;T&gt;**  
-**Nest.IElasticClient.VerifyRepositoryAsync**  
-**Nest.IElasticClient.VerifyRepositoryAsync**  
-**Nest.IElasticClient.WatcherStatsAsync**  
-**Nest.IElasticClient.WatcherStatsAsync**  
-**Nest.IHighLevelToLowLevelDispatcher.DispatchAsync&lt;TRequest, TQueryString, TResponse, TResponseInterface&gt;**  
-**Nest.IHighLevelToLowLevelDispatcher.DispatchAsync&lt;TRequest, TQueryString, TResponse, TResponseInterface&gt;**  
-**Nest.IndexManyExtensions.IndexManyAsync&lt;T&gt;**  
-**Nest.ReindexObservable&lt;T&gt;..ctor**  
-**Nest.SourceManyExtensions.SourceManyAsync&lt;T&gt;**  
-**Nest.SourceManyExtensions.SourceManyAsync&lt;T&gt;**  
+**public class Nest.AllocateClusterRerouteCommand** *Removed (Breaking)*  
+**public class Nest.AllocateClusterRerouteCommandDescriptor** *Removed (Breaking)*  
+**public class Nest.AttachData** *Removed (Breaking)*  
+**public property Nest.AttachmentProperty.FileField** *Removed (Breaking)*  
+**public method Nest.AttachmentPropertyDescriptor&lt;T&gt;.LanguageField** *Removed (Breaking)*  
+**public property Nest.BulkAllRequest&lt;T&gt;.Consistency** *Removed (Breaking)*  
+**public method Nest.BulkDescriptor.Consistency** *Removed (Breaking)*  
+**public property Nest.BulkIndexByScrollFailure.CausedBy** *Removed (Breaking)*  
+**public property Nest.BulkIndexByScrollFailure.Node** *Removed (Breaking)*  
+**public property Nest.BulkIndexByScrollFailure.Reason** *Removed (Breaking)*  
+**public property Nest.BulkIndexByScrollFailure.Shard** *Removed (Breaking)*  
+**public property Nest.BulkRequest.Consistency** *Removed (Breaking)*  
+**public property Nest.BulkResponse.TookAsLong** *Removed (Breaking)*  
+**public method Nest.BulkUpdateDescriptor&lt;TDocument, TPartialDocument&gt;.Lang** *Removed (Breaking)*  
+**public method Nest.BulkUpdateDescriptor&lt;TDocument, TPartialDocument&gt;.Params** *Removed (Breaking)*  
+**public property Nest.BulkUpdateOperation&lt;TDocument, TPartialDocument&gt;.InferFrom** *Removed (Breaking)*  
+**public property Nest.CategorySuggestContext.Default** *Removed (Breaking)*  
+**public method Nest.CategorySuggestContextDescriptor&lt;T&gt;.Default** *Removed (Breaking)*  
+**public method Nest.CategorySuggestContextDescriptor&lt;T&gt;.Default** *Removed (Breaking)*  
+**public property Nest.CatFielddataRecord.FieldSizes** *Removed (Breaking)*  
+**public property Nest.CatFielddataRecord.Total** *Removed (Breaking)*  
+**public property Nest.CatNodesRecord.Host** *Removed (Breaking)*  
+**public property Nest.CatNodesRecord.Load** *Removed (Breaking)*  
+**public property Nest.CatRecoveryRecord.TotalTranslog** *Removed (Breaking)*  
+**public property Nest.CatRecoveryRecord.Translog** *Removed (Breaking)*  
+**public property Nest.CatRecoveryRecord.TranslogPercent** *Removed (Breaking)*  
+**public method Nest.ClusterHealthDescriptor.WaitForRelocatingShards** *Removed (Breaking)*  
+**public property Nest.ClusterHealthRequest.WaitForRelocatingShards** *Removed (Breaking)*  
+**public property Nest.ClusterIndicesStats.Percolate** *Removed (Breaking)*  
+**public property Nest.ClusterNodeCount.Client** *Removed (Breaking)*  
+**public property Nest.ClusterNodeCount.DataOnly** *Removed (Breaking)*  
+**public property Nest.ClusterNodeCount.MasterData** *Removed (Breaking)*  
+**public property Nest.ClusterNodeCount.MasterOnly** *Removed (Breaking)*  
+**public class Nest.ClusterOperatingSystemMemory** *Removed (Breaking)*  
+**public property Nest.ClusterOperatingSystemStats.Memory** *Removed (Breaking)*  
+**public method Nest.ClusterRerouteDescriptor.Allocate** *Removed (Breaking)*  
+**public property Nest.ClusterRerouteResponse.Version** *Removed (Breaking)*  
+**public property Nest.CompletionAttribute.Payloads** *Removed (Breaking)*  
+**public class Nest.CompletionField&lt;TPayload&gt;** *Removed (Breaking)*  
+**public property Nest.CompletionProperty.Context** *Removed (Breaking)*  
+**public property Nest.CompletionProperty.Payloads** *Removed (Breaking)*  
+**public method Nest.CompletionPropertyDescriptor&lt;T&gt;.Context** *Removed (Breaking)*  
+**public method Nest.CompletionPropertyDescriptor&lt;T&gt;.Payloads** *Removed (Breaking)*  
+**public property Nest.CompletionSuggester.Context** *Removed (Breaking)*  
+**public method Nest.CompletionSuggesterDescriptor&lt;T&gt;.Context** *Removed (Breaking)*  
+**public method Nest.CreateIndexDescriptor.Warmers** *Removed (Breaking)*  
+**public property Nest.CreateIndexRequest.Warmers** *Removed (Breaking)*  
+**public class Nest.DeleteByQueryIndicesResult** *Removed (Breaking)*  
+**public property Nest.DeleteByQueryResponse.Indices** *Removed (Breaking)*  
+**public method Nest.DeleteDescriptor&lt;T&gt;.Consistency** *Removed (Breaking)*  
+**public property Nest.DeleteRequest.Consistency** *Removed (Breaking)*  
+**public property Nest.DeleteRequest&lt;T&gt;.Consistency** *Removed (Breaking)*  
+**public method Nest.DeleteScriptDescriptor.Version** *Removed (Breaking)*  
+**public method Nest.DeleteScriptDescriptor.VersionType** *Removed (Breaking)*  
+**public property Nest.DeleteScriptRequest.Version** *Removed (Breaking)*  
+**public property Nest.DeleteScriptRequest.VersionType** *Removed (Breaking)*  
+**public method Nest.DeleteSearchTemplateDescriptor.Version** *Removed (Breaking)*  
+**public method Nest.DeleteSearchTemplateDescriptor.VersionType** *Removed (Breaking)*  
+**public property Nest.DeleteSearchTemplateRequest.Version** *Removed (Breaking)*  
+**public property Nest.DeleteSearchTemplateRequest.VersionType** *Removed (Breaking)*  
+**public class Nest.DeleteWarmerDescriptor** *Removed (Breaking)*  
+**public class Nest.DeleteWarmerRequest** *Removed (Breaking)*  
+**public class Nest.DeleteWarmerResponse** *Removed (Breaking)*  
+**public method Nest.DeleteWatchDescriptor.Force** *Removed (Breaking)*  
+**public property Nest.DeleteWatchRequest.Force** *Removed (Breaking)*  
+**public property Nest.DirectGenerator.MinWordLen** *Removed (Breaking)*  
+**public property Nest.DirectGenerator.PrefixLen** *Removed (Breaking)*    
+**public method Nest.DynamicIndexSettings..ctor** *Removed (Breaking)*  
+**public property Nest.DynamicIndexSettings.RequestCacheEnabled** *Removed (Breaking)*  
+**public property Nest.DynamicIndexSettings.WarmersEnabled** *Removed (Breaking)*  
+**public method Nest.DynamicIndexSettingsDescriptorBase&lt;TDescriptor, TIndexSettings&gt;.RequestCacheEnabled** *Removed (Breaking)*  
+**public method Nest.DynamicIndexSettingsDescriptorBase&lt;TDescriptor, TIndexSettings&gt;.WarmersEnabled** *Removed (Breaking)*  
+**public method Nest.ElasticClient.DeleteWarmer** *Removed (Breaking)*  
+**public method Nest.ElasticClient.DeleteWarmer** *Removed (Breaking)*  
+**public method Nest.ElasticClient.DeleteWarmerAsync** *Removed (Breaking)*  
+**public method Nest.ElasticClient.DeleteWarmerAsync** *Removed (Breaking)*  
+**public method Nest.ElasticClient.GetWarmer** *Removed (Breaking)*  
+**public method Nest.ElasticClient.GetWarmer** *Removed (Breaking)*  
+**public method Nest.ElasticClient.GetWarmerAsync** *Removed (Breaking)*    
+**public method Nest.ElasticClient.GetWarmerAsync** *Removed (Breaking)*  
+**public method Nest.ElasticClient.Optimize** *Removed (Breaking)*  
+**public method Nest.ElasticClient.Optimize** *Removed (Breaking)*  
+**public method Nest.ElasticClient.OptimizeAsync** *Removed (Breaking)*  
+**public method Nest.ElasticClient.OptimizeAsync** *Removed (Breaking)*  
+**public method Nest.ElasticClient.PutWarmer** *Removed (Breaking)*  
+**public method Nest.ElasticClient.PutWarmer** *Removed (Breaking)*  
+**public method Nest.ElasticClient.PutWarmerAsync** *Removed (Breaking)*  
+**public method Nest.ElasticClient.PutWarmerAsync** *Removed (Breaking)*  
+**public method Nest.ElasticClient.SearchExists** *Removed (Breaking)*  
+**public method Nest.ElasticClient.SearchExists&lt;T&gt;** *Removed (Breaking)*    
+**public method Nest.ElasticClient.SearchExistsAsync** *Removed (Breaking)*  
+**public method Nest.ElasticClient.SearchExistsAsync&lt;T&gt;** *Removed (Breaking)*  
+**public method Nest.ElasticClient.Suggest** *Removed (Breaking)*  
+**public method Nest.ElasticClient.SuggestAsync** *Removed (Breaking)*  
+**public method Nest.ElasticClient.TasksCancel** *Removed (Breaking)*  
+**public method Nest.ElasticClient.TasksCancel** *Removed (Breaking)*  
+**public method Nest.ElasticClient.TasksCancelAsync** *Removed (Breaking)*  
+**public method Nest.ElasticClient.TasksCancelAsync** *Removed (Breaking)*  
+**public method Nest.ElasticClient.TasksList** *Removed (Breaking)*  
+**public method Nest.ElasticClient.TasksList** *Removed (Breaking)*  
+**public method Nest.ElasticClient.TasksListAsync** *Removed (Breaking)*  
+**public method Nest.ElasticClient.TasksListAsync** *Removed (Breaking)*  
+**public method Nest.ElasticClient.UpdateByQuery&lt;T&gt;** *Removed (Breaking)*  
+**public method Nest.ElasticClient.UpdateByQueryAsync&lt;T&gt;** *Removed (Breaking)*  
+**public method Nest.ElasticClient.WatcherInfo** *Removed (Breaking)*  
+**public method Nest.ElasticClient.WatcherInfo** *Removed (Breaking)*    
+**public method Nest.ElasticClient.WatcherInfoAsync** *Removed (Breaking)*
+**public method Nest.ElasticClient.WatcherInfoAsync** *Removed (Breaking)*  
+**public property Nest.ElasticsearchPropertyAttributeBase.DocValues** *Removed (Breaking)*    
+**public property Nest.ElasticsearchPropertyAttributeBase.Similarity** *Removed (Breaking)*  
+**public property Nest.ElasticsearchPropertyAttributeBase.Store** *Removed (Breaking)*  
+**public method Nest.ExplainDescriptor&lt;TDocument&gt;.Fields** *Removed (Breaking)*  
+**public method Nest.ExplainDescriptor&lt;TDocument&gt;.Fields** *Removed (Breaking)*  
+**public property Nest.ExplainRequest&lt;TDocument&gt;.Fields** *Removed (Breaking)*  
+**public property Nest.Field.CacheableExpression** *Removed (Breaking)*    
+**public method Nest.Field.Create** *Removed (Breaking)*  
+**public method Nest.Field.Create** *Removed (Breaking)*  
+**public class Nest.GeoLocationSuggestContext** *Removed (Breaking)*  
+**public class Nest.GeoLocationSuggestContextDescriptor&lt;T&gt;** *Removed (Breaking)*  
+**public class Nest.GetAliasesDescriptor** *Removed (Breaking)*  
+**public class Nest.GetAliasesRequest** *Removed (Breaking)*  
+**public class Nest.GetAliasesResponse** *Removed (Breaking)*  
+**public method Nest.GetDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*  
+**public method Nest.GetDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*  
+**public property Nest.GetMappingResponse.IndexTypeMappings** *Removed (Breaking)*  
+**public property Nest.GetRequest.Fields** *Removed (Breaking)*  
+**public property Nest.GetRequest&lt;T&gt;.Fields** *Removed (Breaking)*  
+**public method Nest.GetScriptDescriptor.Version** *Removed (Breaking)*  
+**public method Nest.GetScriptDescriptor.VersionType** *Removed (Breaking)*  
+**public property Nest.GetScriptRequest.Version** *Removed (Breaking)*  
+**public property Nest.GetScriptRequest.VersionType** *Removed (Breaking)*  
+**public method Nest.GetSearchTemplateDescriptor.Version** *Removed (Breaking)*  
+**public method Nest.GetSearchTemplateDescriptor.VersionType** *Removed (Breaking)*  
+**public property Nest.GetSearchTemplateRequest.Version** *Removed (Breaking)*  
+**public property Nest.GetSearchTemplateRequest.VersionType** *Removed (Breaking)*  
+**public class Nest.GetWarmerDescriptor** *Removed (Breaking)*  
+**public class Nest.GetWarmerRequest** *Removed (Breaking)*  
+**public class Nest.GetWarmerResponse** *Removed (Breaking)*  
+**public class Nest.GlobalInnerHit** *Removed (Breaking)*  
+**public class Nest.GlobalInnerHitDescriptor&lt;T&gt;** *Removed (Breaking)*  
+**public property Nest.HasParentQuery.ScoreMode** *Removed (Breaking)*  
+**public method Nest.HasParentQueryDescriptor&lt;T&gt;.ScoreMode** *Removed (Breaking)*  
+**public class Nest.HighlightDocumentDictionary** *Removed (Breaking)*  
+**public property Nest.HighlightField.CustomType** *Removed (Breaking)*  
+**public method Nest.HighlightFieldDescriptor&lt;T&gt;.OnAll** *Removed (Breaking)*  
+**public class Nest.HistogramBucket** *Removed (Breaking)*  
+**public property Nest.IAllocateClusterRerouteCommand.AllowPrimary** *Removed (Breaking)*  
+**public property Nest.IAttachmentProperty.FileField** *Removed (Breaking)*  
+**public property Nest.IBoolQuery.CreatedByBoolDsl** *Removed (Breaking)*  
+**public property Nest.IBulkAllRequest&lt;T&gt;.Consistency** *Removed (Breaking)*  
+**public property Nest.IBulkResponse.TookAsLong** *Removed (Breaking)*  
+**public property Nest.IBulkUpdateOperation&lt;TDocument, TPartialDocument&gt;.InferFrom** *Removed (Breaking)*  
+**public property Nest.ICategorySuggestContext.Default** *Removed (Breaking)*  
+**public property Nest.ICompletionProperty.Context** *Removed (Breaking)*  
+**public property Nest.ICompletionProperty.Payloads** *Removed (Breaking)*  
+**public property Nest.ICompletionSuggester.Context** *Removed (Breaking)*  
+**public property Nest.IDeleteByQueryResponse.Indices** *Removed (Breaking)*  
+**public interface Nest.IDeleteWarmerRequest** *Removed (Breaking)*  
+**public interface Nest.IDeleteWarmerResponse** *Removed (Breaking)*  
+**public property Nest.IDirectGenerator.MinWordLen** *Removed (Breaking)*  
+**public property Nest.IDirectGenerator.PrefixLen** *Removed (Breaking)*  
+**public property Nest.IDynamicIndexSettings.RequestCacheEnabled** *Removed (Breaking)*  
+**public property Nest.IDynamicIndexSettings.WarmersEnabled** *Removed (Breaking)*  
+**public method Nest.IElasticClient.DeleteWarmer** *Removed (Breaking)*  
+**public method Nest.IElasticClient.DeleteWarmer** *Removed (Breaking)*  
+**public method Nest.IElasticClient.DeleteWarmerAsync** *Removed (Breaking)*  
+**public method Nest.IElasticClient.DeleteWarmerAsync** *Removed (Breaking)*  
+**public method Nest.IElasticClient.GetWarmer** *Removed (Breaking)*  
+**public method Nest.IElasticClient.GetWarmer** *Removed (Breaking)*  
+**public method Nest.IElasticClient.GetWarmerAsync** *Removed (Breaking)*  
+**public method Nest.IElasticClient.GetWarmerAsync** *Removed (Breaking)*  
+**public method Nest.IElasticClient.Optimize** *Removed (Breaking)*  
+**public method Nest.IElasticClient.Optimize** *Removed (Breaking)*  
+**public method Nest.IElasticClient.OptimizeAsync** *Removed (Breaking)*  
+**public method Nest.IElasticClient.OptimizeAsync** *Removed (Breaking)*  
+**public method Nest.IElasticClient.PutWarmer** *Removed (Breaking)*  
+**public method Nest.IElasticClient.PutWarmer** *Removed (Breaking)*  
+**public method Nest.IElasticClient.PutWarmerAsync** *Removed (Breaking)*  
+**public method Nest.IElasticClient.PutWarmerAsync** *Removed (Breaking)*  
+**public method Nest.IElasticClient.SearchExists** *Removed (Breaking)*  
+**public method Nest.IElasticClient.SearchExists&lt;T&gt;** *Removed (Breaking)*  
+**public method Nest.IElasticClient.SearchExistsAsync** *Removed (Breaking)*  
+**public method Nest.IElasticClient.SearchExistsAsync&lt;T&gt;** *Removed (Breaking)*  
+**public method Nest.IElasticClient.Suggest** *Removed (Breaking)*  
+**public method Nest.IElasticClient.SuggestAsync** *Removed (Breaking)*  
+**public method Nest.IElasticClient.TasksCancel** *Removed (Breaking)*  
+**public method Nest.IElasticClient.TasksCancel** *Removed (Breaking)*  
+**public method Nest.IElasticClient.TasksCancelAsync** *Removed (Breaking)*  
+**public method Nest.IElasticClient.TasksCancelAsync** *Removed (Breaking)*  
+**public method Nest.IElasticClient.TasksList** *Removed (Breaking)*  
+**public method Nest.IElasticClient.TasksList** *Removed (Breaking)*  
+**public method Nest.IElasticClient.TasksListAsync** *Removed (Breaking)*  
+**public method Nest.IElasticClient.TasksListAsync** *Removed (Breaking)*  
+**public method Nest.IElasticClient.UpdateByQuery&lt;T&gt;** *Removed (Breaking)*  
+**public method Nest.IElasticClient.UpdateByQueryAsync&lt;T&gt;** *Removed (Breaking)*  
+**public method Nest.IElasticClient.WatcherInfo** *Removed (Breaking)*  
+**public method Nest.IElasticClient.WatcherInfo** *Removed (Breaking)*  
+**public method Nest.IElasticClient.WatcherInfoAsync** *Removed (Breaking)*  
+**public method Nest.IElasticClient.WatcherInfoAsync** *Removed (Breaking)*  
+**public interface Nest.IGeoLocationSuggestContext** *Removed (Breaking)*  
+**public interface Nest.IGetAliasesRequest** *Removed (Breaking)*  
+**public interface Nest.IGetAliasesResponse** *Removed (Breaking)*  
+**public property Nest.IGetMappingResponse.IndexTypeMappings** *Removed (Breaking)*  
+**public interface Nest.IGetWarmerRequest** *Removed (Breaking)*  
+**public interface Nest.IGetWarmerResponse** *Removed (Breaking)*  
+**public interface Nest.IGlobalInnerHit** *Removed (Breaking)*  
+**public property Nest.IHasParentQuery.ScoreMode** *Removed (Breaking)*  
+**public property Nest.IIndexRequest.UntypedDocument** *Removed (Breaking)*  
+**public property Nest.IIndexState.Warmers** *Removed (Breaking)*  
+**public property Nest.IIndicesPrivileges.Fields** *Removed (Breaking)*  
+**public interface Nest.IInnerHitsContainer** *Removed (Breaking)*  
+**public property Nest.IMultiGetOperation.Fields** *Removed (Breaking)*  
+**public property Nest.IMultiTermVectorOperation.Fields** *Removed (Breaking)*  
+**public interface Nest.INamedInnerHits** *Removed (Breaking)*  
+**public method Nest.IndexDescriptor&lt;TDocument&gt;.Consistency** *Removed (Breaking)*  
+**public class Nest.IndexFieldMappings** *Removed (Breaking)*  
+**public property Nest.IndexRequest&lt;TDocument&gt;.Consistency** *Removed (Breaking)*  
+**public method Nest.IndexSettings..ctor** *Removed (Breaking)*  
+**public property Nest.IndexState.Warmers** *Removed (Breaking)*  
+**public property Nest.IndexStats.Percolate** *Removed (Breaking)*  
+**public property Nest.IndexStats.Suggest** *Removed (Breaking)*  
+**public property Nest.IndicesPrivileges.Fields** *Removed (Breaking)*  
+**public method Nest.IndicesPrivilegesDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*  
+**public method Nest.IndicesPrivilegesDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*  
+**public method Nest.Infer.Fields&lt;T&gt;** *Removed (Breaking)*  
+**public class Nest.InnerHitsContainer** *Removed (Breaking)*  
+**public class Nest.InnerHitsContainerDescriptor&lt;T&gt;** *Removed (Breaking)*  
+**public interface Nest.INorms** *Removed (Breaking)*  
+**public interface Nest.IOptimizeRequest** *Removed (Breaking)*  
+**public interface Nest.IOptimizeResponse** *Removed (Breaking)*  
+**public interface Nest.IPathInnerHit** *Removed (Breaking)*  
+**public property Nest.IPercolateCountResponse.TookAsLong** *Removed (Breaking)*  
+**public property Nest.IProperty.CopyTo** *Removed (Breaking)*    
+**public property Nest.IProperty.DocValues** *Removed (Breaking)*  
+**public property Nest.IProperty.Fields** *Removed (Breaking)*  
+**public property Nest.IProperty.Similarity** *Removed (Breaking)*  
+**public property Nest.IProperty.Store** *Removed (Breaking)*  
+**public interface Nest.IPutWarmerRequest** *Removed (Breaking)*  
+**public interface Nest.IPutWarmerResponse** *Removed (Breaking)*  
+**public interface Nest.IReindexRequest** *Removed (Breaking)*  
+**public interface Nest.IReindexResponse&lt;T&gt;** *Removed (Breaking)*  
+**public property Nest.IResponse.ApiCall** *Removed (Breaking)*  
+**public property Nest.ISamplerAggregation.Field** *Removed (Breaking)*  
+**public interface Nest.ISearchExistsRequest** *Removed (Breaking)*  
+**public interface Nest.ISearchExistsRequest&lt;T&gt;** *Removed (Breaking)*  
+**public property Nest.ISearchRequest.Fields** *Removed (Breaking)*    
+**public property Nest.ISearchRequest.InnerHits** *Removed (Breaking)*  
+**public property Nest.ISearchResponse&lt;T&gt;.Highlights** *Removed (Breaking)*  
+**public property Nest.ISearchResponse&lt;T&gt;.TookAsLong** *Removed (Breaking)*  
+**public property Nest.ISearchTemplateRequest.Template** *Removed (Breaking)*
+**public property Nest.ISourceFilter.Disable** *Removed (Breaking)*  
+**public property Nest.ISourceFilter.Exclude** *Removed (Breaking)*  
+**public property Nest.ISourceFilter.Include** *Removed (Breaking)*    
+**public interface Nest.ISuggestContextMapping** *Removed (Breaking)*  
+**public property Nest.ISuggester.ShardSize** *Removed (Breaking)*  
+**public property Nest.ISuggester.Text** *Removed (Breaking)*  
+**public interface Nest.ISuggestResponse** *Removed (Breaking)*  
+**public interface Nest.ITasksCancelRequest** *Removed (Breaking)*  
+**public interface Nest.ITasksCancelResponse** *Removed (Breaking)*  
+**public interface Nest.ITasksListRequest** *Removed (Breaking)*  
+**public interface Nest.ITasksListResponse** *Removed (Breaking)*  
+**public property Nest.ITemplateMapping.Warmers** *Removed (Breaking)*  
+**public property Nest.ITermsAggregation.ShowTermDocumentCountError** *Removed (Breaking)*  
+**public property Nest.ITermSuggester.MinWordLen** *Removed (Breaking)*  
+**public property Nest.ITermSuggester.PrefixLen** *Removed (Breaking)*  
+**public property Nest.ITermVectorsResponse.Found** *Removed (Breaking)*  
+**public property Nest.ITermVectorsResponse.Id** *Removed (Breaking)*    
+**public property Nest.ITermVectorsResponse.Index** *Removed (Breaking)*  
+**public property Nest.ITermVectorsResponse.TermVectors** *Removed (Breaking)*  
+**public property Nest.ITermVectorsResponse.TookAsLong** *Removed (Breaking)*  
+**public property Nest.ITermVectorsResponse.Type** *Removed (Breaking)*  
+**public property Nest.ITermVectorsResponse.Version** *Removed (Breaking)*  
+**public property Nest.ITranslogFlushSettings.ThresholdOps** *Removed (Breaking)*  
+**public property Nest.ITranslogSettings.FileSystemType** *Removed (Breaking)*    
+**public interface Nest.ITypeInnerHit** *Removed (Breaking)*  
+**public interface Nest.IWarmer** *Removed (Breaking)*    
+**public interface Nest.IWarmers** *Removed (Breaking)*  
+**public interface Nest.IWatcherInfoRequest** *Removed (Breaking)*  
+**public interface Nest.IWatcherInfoResponse** *Removed (Breaking)*  
+**public method Nest.MultiGetDescriptor.Fields** *Removed (Breaking)*  
+**public method Nest.MultiGetDescriptor.Fields&lt;T&gt;** *Removed (Breaking)*  
+**public property Nest.MultiGetOperation&lt;T&gt;.Fields** *Removed (Breaking)*  
+**public method Nest.MultiGetOperationDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*  
+**public method Nest.MultiGetOperationDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*  
+**public property Nest.MultiGetRequest.Fields** *Removed (Breaking)*  
+**public class Nest.MultiRescore** *Removed (Breaking)*  
+**public property Nest.MultiTermVectorOperation&lt;T&gt;.Fields** *Removed (Breaking)*  
+**public method Nest.MultiTermVectorOperationDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*  
+**public method Nest.MultiTermVectorOperationDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*  
+**public class Nest.NamedInnerHits** *Removed (Breaking)*  
+**public class Nest.NamedInnerHitsDescriptor&lt;T&gt;** *Removed (Breaking)*  
+**public property Nest.NodeInfo.Build** *Removed (Breaking)*  
+**public property Nest.NodeInfo.Hostname** *Removed (Breaking)*  
+**public property Nest.NodeInfo.HttpAddress** *Removed (Breaking)*  
+**public property Nest.NodeProcessInfo.RefreshInterval** *Removed (Breaking)*  
+**public class Nest.Norms** *Removed (Breaking)*  
+**public class Nest.NormsDescriptor** *Removed (Breaking)*  
+**public enum Nest.NormsLoading** *Removed (Breaking)*  
+**public enum Nest.NumericResolutionUnit** *Removed (Breaking)*  
+**public property Nest.ObjectAttribute.Dynamic** *Removed (Breaking)*  
+**public property Nest.OperatingSystemStats.CpuPercent** *Removed (Breaking)*  
+**public property Nest.OperatingSystemStats.LoadAverage** *Removed (Breaking)*    
+**public class Nest.OptimizeDescriptor** *Removed (Breaking)*  
+**public class Nest.OptimizeRequest** *Removed (Breaking)*  
+**public class Nest.OptimizeResponse** *Removed (Breaking)*  
+**public enum Nest.ParentScoreMode** *Removed (Breaking)*  
+**public class Nest.PathInnerHit** *Removed (Breaking)*  
+**public class Nest.PathInnerHit&lt;T&gt;** *Removed (Breaking)*  
+**public class Nest.PathInnerHitDescriptor&lt;T&gt;** *Removed (Breaking)*  
+**public property Nest.PercolateCountResponse.TookAsLong** *Removed (Breaking)*  
+**public class Nest.PercolateStats** *Removed (Breaking)*  
+**public property Nest.PropertyBase.CopyTo** *Removed (Breaking)*  
+**public property Nest.PropertyBase.DocValues** *Removed (Breaking)*  
+**public property Nest.PropertyBase.Fields** *Removed (Breaking)*  
+**public property Nest.PropertyBase.IndexName** *Removed (Breaking)*    
+**public property Nest.PropertyBase.Similarity** *Removed (Breaking)*  
+**public property Nest.PropertyBase.Store** *Removed (Breaking)*  
+**public method Nest.PropertyDescriptorBase&lt;TDescriptor, TInterface, T&gt;.CopyTo** *Removed (Breaking)*  
+**public method Nest.PropertyDescriptorBase&lt;TDescriptor, TInterface, T&gt;.DocValues** *Removed (Breaking)*  
+**public method Nest.PropertyDescriptorBase&lt;TDescriptor, TInterface, T&gt;.Fields** *Removed (Breaking)*  
+**public method Nest.PropertyDescriptorBase&lt;TDescriptor, TInterface, T&gt;.Similarity** *Removed (Breaking)*    
+**public method Nest.PropertyDescriptorBase&lt;TDescriptor, TInterface, T&gt;.Similarity** *Removed (Breaking)*  
+**public method Nest.PropertyDescriptorBase&lt;TDescriptor, TInterface, T&gt;.Store** *Removed (Breaking)*  
+**public method Nest.PutIndexTemplateDescriptor.Warmers** *Removed (Breaking)*    
+**public property Nest.PutIndexTemplateRequest.Warmers** *Removed (Breaking)*  
+**public method Nest.PutMappingDescriptor&lt;T&gt;.Parent&lt;K&gt;** *Removed (Breaking)*    
+**public method Nest.PutScriptDescriptor.OpType** *Removed (Breaking)*  
+**public method Nest.PutScriptDescriptor.Version** *Removed (Breaking)*  
+**public method Nest.PutScriptDescriptor.VersionType** *Removed (Breaking)*  
+**public property Nest.PutScriptRequest.OpType** *Removed (Breaking)*    
+**public property Nest.PutScriptRequest.Version** *Removed (Breaking)*  
+**public property Nest.PutScriptRequest.VersionType** *Removed (Breaking)*    
+**public method Nest.PutSearchTemplateDescriptor.OpType** *Removed (Breaking)*  
+**public method Nest.PutSearchTemplateDescriptor.Version** *Removed (Breaking)*    
+**public method Nest.PutSearchTemplateDescriptor.VersionType** *Removed (Breaking)*  
+**public property Nest.PutSearchTemplateRequest.OpType** *Removed (Breaking)*  
+**public property Nest.PutSearchTemplateRequest.Version** *Removed (Breaking)*    
+**public property Nest.PutSearchTemplateRequest.VersionType** *Removed (Breaking)*    
+**public class Nest.PutWarmerDescriptor** *Removed (Breaking)*  
+**public class Nest.PutWarmerRequest** *Removed (Breaking)*  
+**public class Nest.PutWarmerResponse** *Removed (Breaking)*  
+**public property Nest.QueryProfile.Lucene** *Removed (Breaking)*  
+**public property Nest.QueryProfile.QueryType** *Removed (Breaking)*  
+**public method Nest.ReindexDescriptor&lt;T&gt;.AllTypes** *Removed (Breaking)*  
+**public method Nest.ReindexDescriptor&lt;T&gt;.CreateIndex** *Removed (Breaking)*  
+**public method Nest.ReindexDescriptor&lt;T&gt;.Query** *Removed (Breaking)*  
+**public method Nest.ReindexDescriptor&lt;T&gt;.Query** *Removed (Breaking)*  
+**public method Nest.ReindexDescriptor&lt;T&gt;.Scroll** *Removed (Breaking)*  
+**public method Nest.ReindexDescriptor&lt;T&gt;.Size** *Removed (Breaking)*    
+**public method Nest.ReindexDescriptor&lt;T&gt;.Take** *Removed (Breaking)*  
+**public method Nest.ReindexDescriptor&lt;T&gt;.Type** *Removed (Breaking)*  
+**public method Nest.ReindexObservable&lt;T&gt;.IndexSearchResults** *Removed (Breaking)*  
+**public method Nest.ReindexOnServerDescriptor.Consistency** *Removed (Breaking)*  
+**public property Nest.ReindexOnServerRequest.Consistency** *Removed (Breaking)*  
+**public class Nest.ReindexRequest** *Removed (Breaking)*  
+**public class Nest.ReindexResponse&lt;T&gt;** *Removed (Breaking)*  
+**public class Nest.RescoreConverter** *Removed (Breaking)*  
+**public class Nest.Role** *Removed (Breaking)*  
+**public property Nest.RoutingShard.Version** *Removed (Breaking)*  
+**public property Nest.SamplerAggregation.Field** *Removed (Breaking)*  
+**public method Nest.SamplerAggregationDescriptor&lt;T&gt;.Field** *Removed (Breaking)*  
+**public method Nest.SamplerAggregationDescriptor&lt;T&gt;.Field** *Removed (Breaking)*    
+**public method Nest.SearchDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*
+**public method Nest.SearchDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*  
+**public method Nest.SearchDescriptor&lt;T&gt;.InnerHits** *Removed (Breaking)*  
+**public class Nest.SearchExistsDescriptor&lt;T&gt;** *Removed (Breaking)*  
+**public class Nest.SearchExistsRequest** *Removed (Breaking)*  
+**public class Nest.SearchExistsRequest&lt;T&gt;** *Removed (Breaking)*  
+**public property Nest.SearchRequest.Fields** *Removed (Breaking)*  
+**public property Nest.SearchRequest.InnerHits** *Removed (Breaking)*    
+**public property Nest.SearchRequest&lt;T&gt;.Fields** *Removed (Breaking)*  
+**public property Nest.SearchRequest&lt;T&gt;.InnerHits** *Removed (Breaking)*  
+**public property Nest.SearchResponse&lt;T&gt;.TookAsLong** *Removed (Breaking)*  
+**public property Nest.SearchStats.FetchTime** *Removed (Breaking)*  
+**public property Nest.SearchStats.QueryTime** *Removed (Breaking)*  
+**public property Nest.SearchStats.ScrollTime** *Removed (Breaking)*  
+**public method Nest.SearchTemplateDescriptor&lt;T&gt;.Template** *Removed (Breaking)*  
+**public property Nest.SearchTemplateRequest.Template** *Removed (Breaking)*  
+**public property Nest.ShardStore.Version** *Removed (Breaking)*  
+**public class Nest.ShieldNode** *Removed (Breaking)*  
+**public class Nest.ShieldNodeStatus** *Removed (Breaking)*  
+**public property Nest.Snapshot.ShardFailures** *Removed (Breaking)*  
+**public property Nest.SourceFilter.Disable** *Removed (Breaking)*  
+**public property Nest.SourceFilter.Exclude** *Removed (Breaking)*  
+**public property Nest.SourceFilter.Include** *Removed (Breaking)*  
+**public method Nest.SourceFilterDescriptor&lt;T&gt;.Disable** *Removed (Breaking)*  
+**public method Nest.SourceFilterDescriptor&lt;T&gt;.Exclude** *Removed (Breaking)*  
+**public method Nest.SourceFilterDescriptor&lt;T&gt;.Include** *Removed (Breaking)*  
+**public class Nest.Suggest** *Removed (Breaking)*  
+**public class Nest.SuggestContextMapping** *Removed (Breaking)*  
+**public class Nest.SuggestContextMappingDescriptor&lt;T&gt;** *Removed (Breaking)*  
+**public method Nest.SuggestDescriptorBase&lt;TDescriptor, TInterface, T&gt;.ShardSize** *Removed (Breaking)*  
+**public method Nest.SuggestDescriptorBase&lt;TDescriptor, TInterface, T&gt;.Text** *Removed (Breaking)*  
+**public property Nest.SuggesterBase.ShardSize** *Removed (Breaking)*  
+**public property Nest.SuggesterBase.Text** *Removed (Breaking)*  
+**public class Nest.SuggestOption** *Removed (Breaking)*  
+**public class Nest.SuggestOptionJsonConverter** *Removed (Breaking)*  
+**public class Nest.SuggestResponse** *Removed (Breaking)*  
+**public class Nest.SuggestStats** *Removed (Breaking)*  
+**public class Nest.TasksCancelDescriptor** *Removed (Breaking)*  
+**public class Nest.TasksCancelRequest** *Removed (Breaking)*  
+**public class Nest.TasksCancelResponse** *Removed (Breaking)*  
+**public class Nest.TasksListDescriptor** *Removed (Breaking)*  
+**public class Nest.TasksListRequest** *Removed (Breaking)*  
+**public class Nest.TasksListResponse** *Removed (Breaking)*    
+**public property Nest.TemplateMapping.Warmers** *Removed (Breaking)*  
+**public property Nest.TermsAggregation.ShowTermDocumentCountError** *Removed (Breaking)*  
+**public method Nest.TermsAggregationDescriptor&lt;T&gt;.ShowTermDocumentCountError** *Removed (Breaking)*  
+**public property Nest.TermSuggester.MinWordLen** *Removed (Breaking)*  
+**public property Nest.TermSuggester.PrefixLen** *Removed (Breaking)*  
+**public method Nest.TermVectorsDescriptor&lt;TDocument&gt;.Dfs** *Removed (Breaking)*  
+**public property Nest.TermVectorsRequest&lt;TDocument&gt;.Dfs** *Removed (Breaking)*  
+**public property Nest.TermVectorsResponse.TookAsLong** *Removed (Breaking)*  
+**public property Nest.TranslogFlushSettings.ThresholdOps** *Removed (Breaking)*    
+**public method Nest.TranslogFlushSettingsDescriptor.ThresholdOps** *Removed (Breaking)*
+**public property Nest.TranslogSettings.FileSystemType** *Removed (Breaking)*  
+**public method Nest.TranslogSettingsDescriptor.FileSystemType** *Removed (Breaking)*  
+**public enum Nest.TranslogWriteMode** *Removed (Breaking)*  
+**public class Nest.TypeInnerHit** *Removed (Breaking)*  
+**public class Nest.TypeInnerHit&lt;T&gt;** *Removed (Breaking)*  
+**public class Nest.TypeInnerHitDescriptor&lt;T&gt;** *Removed (Breaking)*  
+**public field Nest.UpdatableIndexSettings.RequestCacheEnable** *Removed (Breaking)*  
+**public field Nest.UpdatableIndexSettings.TranslogFlushTreshHoldOps** *Removed (Breaking)*    
+**public field Nest.UpdatableIndexSettings.TranslogFsType** *Removed (Breaking)*  
+**public field Nest.UpdatableIndexSettings.TranslogInterval** *Removed (Breaking)*  
+**public field Nest.UpdatableIndexSettings.WarmersEnabled** *Removed (Breaking)*  
+**public method Nest.UpdateByQueryDescriptor&lt;T&gt;.Consistency** *Removed (Breaking)*  
+**public method Nest.UpdateByQueryDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*  
+**public method Nest.UpdateByQueryDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*  
+**public property Nest.UpdateByQueryRequest.Consistency** *Removed (Breaking)*  
+**public property Nest.UpdateByQueryRequest.Fields** *Removed (Breaking)*  
+**public property Nest.UpdateByQueryRequest&lt;T&gt;.Consistency** *Removed (Breaking)*  
+**public property Nest.UpdateByQueryRequest&lt;T&gt;.Fields** *Removed (Breaking)*  
+**public method Nest.UpdateDescriptor&lt;TDocument, TPartialDocument&gt;.Consistency** *Removed (Breaking)*  
+**public property Nest.UpdateRequest&lt;TDocument, TPartialDocument&gt;.Consistency** *Removed (Breaking)*  
+**public method Nest.UpgradeDescriptor.AllowNoIndices** *Removed (Breaking)*  
+**public property Nest.UpgradeRequest.AllowNoIndices** *Removed (Breaking)*  
+**public class Nest.User** *Removed (Breaking)*  
+**public class Nest.Warmer** *Removed (Breaking)*  
+**public class Nest.WarmerDescriptor&lt;T&gt;** *Removed (Breaking)*  
+**public class Nest.Warmers** *Removed (Breaking)*  
+**public class Nest.WarmersDescriptor** *Removed (Breaking)*  
+**public class Nest.WatcherInfoDescriptor** *Removed (Breaking)*  
+**public class Nest.WatcherInfoRequest** *Removed (Breaking)*  
+**public class Nest.WatcherInfoResponse** *Removed (Breaking)*  
+**public class Nest.WatcherVersion** *Removed (Breaking)*  
+  
