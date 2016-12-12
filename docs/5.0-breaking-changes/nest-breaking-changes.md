@@ -1,6 +1,6 @@
 # Breaking Changes
 
-### StatsAggregator renamed to StatsAggregation
+## StatsAggregator renamed to StatsAggregation
 
 `IStatsAggregator` not named correctly all aggregation requests objects need to end with `Aggregation`
 
@@ -16,13 +16,8 @@
 
 **public interface Nest.IStatsAggregator** *Removed (Breaking)*
 
-```csharp
-[JsonObjectAttribute]
-[ContractJsonConverterAttribute(Nest.AggregationJsonConverter`1[Nest.StatsAggregation])]
-public interface IStatsAggregator : IMetricAggregation, IAggregation
-```
 
-### KeyedBucket is now generic
+## KeyedBucket is now generic
 
 No longer always reads the key as string https://github.com/elastic/elasticsearch-net/issues/2336
 
@@ -41,13 +36,7 @@ No longer always reads the key as string https://github.com/elastic/elasticsearc
 2.x: `public TermsAggregate Terms(string key)`  
 5.x: `public TermsAggregate<string> Terms(string key)`  
 
-
-**public method Nest.AggregationsHelper..ctor** *Visibility was changed from public to protected (Breaking)*
-
-2.x: `public  .ctor(IDictionary<string, IAggregate> aggregations)`  
-5.x: `protected  .ctor(IDictionary<string, IAggregate> aggregations)`  
-
-### String Property Mapping is obsolete
+## String Property Mapping is obsolete
 
 See also: https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking_50_mapping_changes.html#_literal_string_literal_fields_replaced_by_literal_text_literal_literal_keyword_literal_fields
 
@@ -58,105 +47,32 @@ This is also reflected in the attachment mappings
 2.x: `public IStringProperty AuthorField { get; set; }`  
 5.x: `public ITextProperty AuthorField { get; set; }`  
 
-**public property Nest.AttachmentProperty.ContentTypeField** *Declaration changed (Breaking)*
-
-2.x: `public IStringProperty ContentTypeField { get; set; }`  
-5.x: `public ITextProperty ContentTypeField { get; set; }`  
-
-**public property Nest.AttachmentProperty.KeywordsField** *Declaration changed (Breaking)*
-
-2.x: `public IStringProperty KeywordsField { get; set; }`  
-5.x: `public ITextProperty KeywordsField { get; set; }`  
-
-**public property Nest.AttachmentProperty.LanguageField** *Declaration changed (Breaking)*
-
-2.x: `public IStringProperty LanguageField { get; set; }`  
-5.x: `public ITextProperty LanguageField { get; set; }`  
-
-**public property Nest.AttachmentProperty.NameField** *Declaration changed (Breaking)*
-
-2.x: `public IStringProperty NameField { get; set; }`  
-5.x: `public ITextProperty NameField { get; set; }`  
-
-**public property Nest.AttachmentProperty.TitleField** *Declaration changed (Breaking)*
-
-2.x: `public IStringProperty TitleField { get; set; }`  
-5.x: `public ITextProperty TitleField { get; set; }`  
-
-**public method Nest.AttachmentPropertyDescriptor&lt;T&gt;.AuthorField** *Declaration changed (Breaking)*
-
-2.x: `public AttachmentPropertyDescriptor<T> AuthorField(Func<StringPropertyDescriptor<T>, IStringProperty> selector)`  
-5.x: `public AttachmentPropertyDescriptor<T> AuthorField(Func<TextPropertyDescriptor<T>, ITextProperty> selector)`  
+**public property Nest.AttachmentProperty.ContentTypeField** *Declaration changed (Breaking)*  
+**public property Nest.AttachmentProperty.KeywordsField** *Declaration changed (Breaking)*  
+**public property Nest.AttachmentProperty.LanguageField** *Declaration changed (Breaking)*  
+**public property Nest.AttachmentProperty.NameField** *Declaration changed (Breaking)*  
+**public property Nest.AttachmentProperty.TitleField** *Declaration changed (Breaking)*  
+**public property Nest.IAttachmentProperty.AuthorField** *Declaration changed (Breaking)*  
+**public property Nest.IAttachmentProperty.ContentTypeField** *Declaration changed (Breaking)*  
+**public property Nest.IAttachmentProperty.KeywordsField** *Declaration changed (Breaking)*  
+**public property Nest.IAttachmentProperty.LanguageField** *Declaration changed (Breaking)*  
+**public property Nest.IAttachmentProperty.NameField** *Declaration changed (Breaking)*  
+**public property Nest.IAttachmentProperty.TitleField** *Declaration changed (Breaking)*  
 
 **public method Nest.AttachmentPropertyDescriptor&lt;T&gt;.ContentTypeField** *Declaration changed (Breaking)*
 
 2.x: `public AttachmentPropertyDescriptor<T> ContentTypeField(Func<StringPropertyDescriptor<T>, IStringProperty> selector)`  
 5.x: `public AttachmentPropertyDescriptor<T> ContentTypeField(Func<TextPropertyDescriptor<T>, ITextProperty> selector)`  
 
-**public method Nest.AttachmentPropertyDescriptor&lt;T&gt;.FileField** *Declaration changed (Breaking)*
+**public method Nest.AttachmentPropertyDescriptor&lt;T&gt;.AuthorField** *Declaration changed (Breaking)*  
+**public method Nest.AttachmentPropertyDescriptor&lt;T&gt;.FileField** *Declaration changed (Breaking)*  
+**public method Nest.AttachmentPropertyDescriptor&lt;T&gt;.KeywordsField** *Declaration changed (Breaking)*  
+**public method Nest.AttachmentPropertyDescriptor&lt;T&gt;.LanguageField** *Declaration changed (Breaking)*  
+**public method Nest.AttachmentPropertyDescriptor&lt;T&gt;.NameField** *Declaration changed (Breaking)*  
+**public method Nest.AttachmentPropertyDescriptor&lt;T&gt;.TitleField** *Declaration changed (Breaking)*  
 
-2.x: `public AttachmentPropertyDescriptor<T> FileField(Func<StringPropertyDescriptor<T>, IStringProperty> selector)`  
-5.x: `public AttachmentPropertyDescriptor<T> FileField(Func<TextPropertyDescriptor<T>, ITextProperty> selector)`  
 
-**public method Nest.AttachmentPropertyDescriptor&lt;T&gt;.KeywordsField** *Declaration changed (Breaking)*
-
-2.x: `public AttachmentPropertyDescriptor<T> KeywordsField(Func<StringPropertyDescriptor<T>, IStringProperty> selector)`  
-5.x: `public AttachmentPropertyDescriptor<T> KeywordsField(Func<TextPropertyDescriptor<T>, ITextProperty> selector)`  
-
-**public method Nest.AttachmentPropertyDescriptor&lt;T&gt;.LanguageField** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[ObsoleteAttribute("Use LanguageField(Func<StringPropertyDescriptor<T>, IStringProperty> selector)")]
-public AttachmentPropertyDescriptor<T> LanguageField(Func<NumberPropertyDescriptor<T>, INumberProperty> selector)
-```
-
-5.x
-```csharp
-public AttachmentPropertyDescriptor<T> LanguageField(Func<TextPropertyDescriptor<T>, ITextProperty> selector)
-```
-
-**public method Nest.AttachmentPropertyDescriptor&lt;T&gt;.NameField** *Declaration changed (Breaking)*
-
-2.x: `public AttachmentPropertyDescriptor<T> NameField(Func<StringPropertyDescriptor<T>, IStringProperty> selector)`  
-5.x: `public AttachmentPropertyDescriptor<T> NameField(Func<TextPropertyDescriptor<T>, ITextProperty> selector)`  
-
-**public method Nest.AttachmentPropertyDescriptor&lt;T&gt;.TitleField** *Declaration changed (Breaking)*
-
-2.x: `public AttachmentPropertyDescriptor<T> TitleField(Func<StringPropertyDescriptor<T>, IStringProperty> selector)`  
-5.x: `public AttachmentPropertyDescriptor<T> TitleField(Func<TextPropertyDescriptor<T>, ITextProperty> selector)`  
-
-**public property Nest.IAttachmentProperty.AuthorField** *Declaration changed (Breaking)*
-
-2.x: `public IStringProperty AuthorField { get; set; }`  
-5.x: `public ITextProperty AuthorField { get; set; }`  
-
-**public property Nest.IAttachmentProperty.ContentTypeField** *Declaration changed (Breaking)*
-
-2.x: `public IStringProperty ContentTypeField { get; set; }`  
-5.x: `public ITextProperty ContentTypeField { get; set; }`  
-
-**public property Nest.IAttachmentProperty.KeywordsField** *Declaration changed (Breaking)*
-
-2.x: `public IStringProperty KeywordsField { get; set; }`  
-5.x: `public ITextProperty KeywordsField { get; set; }`  
-
-**public property Nest.IAttachmentProperty.LanguageField** *Declaration changed (Breaking)*
-
-2.x: `public IStringProperty LanguageField { get; set; }`  
-5.x: `public ITextProperty LanguageField { get; set; }`  
-
-**public property Nest.IAttachmentProperty.NameField** *Declaration changed (Breaking)*
-
-2.x: `public IStringProperty NameField { get; set; }`  
-5.x: `public ITextProperty NameField { get; set; }`  
-
-**public property Nest.IAttachmentProperty.TitleField** *Declaration changed (Breaking)*
-
-2.x: `public IStringProperty TitleField { get; set; }`  
-5.x: `public ITextProperty TitleField { get; set; }`  
-
-### NonStringIndexOption no longer valid
+## NonStringIndexOption no longer valid
 
 See also: https://www.elastic.co/guide/en/elasticsearch/reference/5.0/breaking_50_mapping_changes.html#_literal_index_literal_property
 
@@ -167,118 +83,28 @@ See also: https://www.elastic.co/guide/en/elasticsearch/reference/5.0/breaking_5
 2.x: `public NonStringIndexOption Index { get; set; }`  
 5.x: `public bool Index { get; set; }`  
 
-**public property Nest.BooleanProperty.Index** *Declaration changed (Breaking)*
-
-2.x: `public Nullable<NonStringIndexOption> Index { get; set; }`  
-5.x: `public bool? Index { get; set; }`  
+**public property Nest.BooleanProperty.Index** *Declaration changed (Breaking)*  
+**public property Nest.DateAttribute.Index** *Declaration changed (Breaking)*  
+**public property Nest.DateProperty.Index** *Declaration changed (Breaking)*  
+**public property Nest.IBooleanProperty.Index** *Declaration changed (Breaking)*  
+**public property Nest.IDateProperty.Index** *Declaration changed (Breaking)*  
+**public property Nest.IIpProperty.Index** *Declaration changed (Breaking)*  
+**public property Nest.INumberProperty.Index** *Declaration changed (Breaking)*  
+**public property Nest.IpAttribute.Index** *Declaration changed (Breaking)*  
+**public property Nest.IpProperty.Index** *Declaration changed (Breaking)*  
+**public property Nest.NumberAttribute.Index** *Declaration changed (Breaking)*  
+**public property Nest.NumberProperty.Index** *Declaration changed (Breaking)*  
 
 **public method Nest.BooleanPropertyDescriptor&lt;T&gt;.Index** *Declaration changed (Breaking)*
 
 2.x: `public BooleanPropertyDescriptor<T> Index(NonStringIndexOption index = 0)`  
 5.x: `public BooleanPropertyDescriptor<T> Index(bool index)`  
 
-**public property Nest.DateAttribute.Index** *Declaration changed (Breaking)*
+**public method Nest.DatePropertyDescriptor&lt;T&gt;.Index** *Declaration changed (Breaking)*  
+**public method Nest.IpPropertyDescriptor&lt;T&gt;.Index** *Declaration changed (Breaking)*  
+**public method Nest.NumberPropertyDescriptorBase&lt;TDescriptor, TInterface, T&gt;.Index** *Declaration changed (Breaking)*  
 
-2.x: `public NonStringIndexOption Index { get; set; }`  
-5.x: `public bool Index { get; set; }`  
-
-**public property Nest.DateProperty.Index** *Declaration changed (Breaking)*
-
-2.x: `public Nullable<NonStringIndexOption> Index { get; set; }`  
-5.x: `public bool? Index { get; set; }`  
-
-**public method Nest.DatePropertyDescriptor&lt;T&gt;.Index** *Declaration changed (Breaking)*
-
-2.x: `public DatePropertyDescriptor<T> Index(NonStringIndexOption index = 0)`  
-5.x: `public DatePropertyDescriptor<T> Index(bool index)`  
-
-**public property Nest.IBooleanProperty.Index** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("index")]
-public Nullable<NonStringIndexOption> Index { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("index")]
-public bool? Index { get; set; }
-```
-
-**public property Nest.IDateProperty.Index** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("index")]
-public Nullable<NonStringIndexOption> Index { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("index")]
-public bool? Index { get; set; }
-```
-
-**public property Nest.IIpProperty.Index** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("index")]
-public Nullable<NonStringIndexOption> Index { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("index")]
-public bool? Index { get; set; }
-```
-
-**public property Nest.INumberProperty.Index** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("index")]
-public Nullable<NonStringIndexOption> Index { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("index")]
-public bool? Index { get; set; }
-```
-
-**public property Nest.IpAttribute.Index** *Declaration changed (Breaking)*
-
-2.x: `public NonStringIndexOption Index { get; set; }`  
-5.x: `public bool Index { get; set; }`  
-
-**public property Nest.IpProperty.Index** *Declaration changed (Breaking)*
-
-2.x: `public Nullable<NonStringIndexOption> Index { get; set; }`  
-5.x: `public bool? Index { get; set; }`  
-
-**public method Nest.IpPropertyDescriptor&lt;T&gt;.Index** *Declaration changed (Breaking)*
-
-2.x: `public IpPropertyDescriptor<T> Index(Nullable<NonStringIndexOption> index = 0)`  
-5.x: `public IpPropertyDescriptor<T> Index(bool index)`  
-
-**public property Nest.NumberAttribute.Index** *Declaration changed (Breaking)*
-
-2.x: `public NonStringIndexOption Index { get; set; }`  
-5.x: `public bool Index { get; set; }`  
-
-**public property Nest.NumberProperty.Index** *Declaration changed (Breaking)*
-
-2.x: `public Nullable<NonStringIndexOption> Index { get; set; }`  
-5.x: `public bool? Index { get; set; }`  
-
-**public method Nest.NumberPropertyDescriptorBase&lt;TDescriptor, TInterface, T&gt;.Index** *Declaration changed (Breaking)*
-
-2.x: `public TDescriptor Index(NonStringIndexOption index = 0)`  
-5.x: `public TDescriptor Index(bool index)`  
-
-### Refresh no longer a simple boolean
+## Refresh no longer a simple boolean
 
 As it now also accepts a `wait_for` parameter
 
@@ -289,63 +115,24 @@ See also: https://www.elastic.co/guide/en/elasticsearch/reference/5.0/docs-refre
 2.x: `public BulkAllDescriptor<T> Refresh(bool refresh = True)`  
 5.x: `public BulkAllDescriptor<T> Refresh(Refresh refresh)`  
 
+**public method Nest.BulkDescriptor.Refresh** *Declaration changed (Breaking)*  
+**public method Nest.DeleteDescriptor&lt;T&gt;.Refresh** *Declaration changed (Breaking)*  
+**public method Nest.IndexDescriptor&lt;TDocument&gt;.Refresh** *Declaration changed (Breaking)*  
+**public method Nest.UpdateDescriptor&lt;TDocument, TPartialDocument&gt;.Refresh** *Declaration changed (Breaking)*  
+
 **public property Nest.BulkAllRequest&lt;T&gt;.Refresh** *Declaration changed (Breaking)*
 
 2.x: `public bool? Refresh { get; set; }`  
 5.x: `public Nullable<Refresh> Refresh { get; set; }`  
 
-**public method Nest.BulkDescriptor.Refresh** *Declaration changed (Breaking)*
+**public property Nest.BulkRequest.Refresh** *Declaration changed (Breaking)*  
+**public property Nest.DeleteRequest.Refresh** *Declaration changed (Breaking)*  
+**public property Nest.DeleteRequest&lt;T&gt;.Refresh** *Declaration changed (Breaking)*  
+**public property Nest.IBulkAllRequest&lt;T&gt;.Refresh** *Declaration changed (Breaking)*  
+**public property Nest.IndexRequest&lt;TDocument&gt;.Refresh** *Declaration changed (Breaking)*  
+**public property Nest.UpdateRequest&lt;TDocument, TPartialDocument&gt;.Refresh** *Declaration changed (Breaking)*  
 
-2.x: `public BulkDescriptor Refresh(bool refresh = True)`  
-5.x: `public BulkDescriptor Refresh(Refresh refresh)`  
-
-
-**public property Nest.BulkRequest.Refresh** *Declaration changed (Breaking)*
-
-2.x: `public bool Refresh { get; set; }`  
-5.x: `public Refresh Refresh { get; set; }`  
-
-**public method Nest.DeleteDescriptor&lt;T&gt;.Refresh** *Declaration changed (Breaking)*
-
-2.x: `public DeleteDescriptor<T> Refresh(bool refresh = True)`  
-5.x: `public DeleteDescriptor<T> Refresh(Refresh refresh)`  
-
-**public property Nest.DeleteRequest.Refresh** *Declaration changed (Breaking)*
-
-2.x: `public bool Refresh { get; set; }`  
-5.x: `public Refresh Refresh { get; set; }`  
-
-**public property Nest.DeleteRequest&lt;T&gt;.Refresh** *Declaration changed (Breaking)*
-
-2.x: `public bool Refresh { get; set; }`  
-5.x: `public Refresh Refresh { get; set; }`  
-
-**public property Nest.IBulkAllRequest&lt;T&gt;.Refresh** *Declaration changed (Breaking)*
-
-2.x: `public bool? Refresh { get; set; }`  
-5.x: `public Nullable<Refresh> Refresh { get; set; }`  
-
-**public method Nest.IndexDescriptor&lt;TDocument&gt;.Refresh** *Declaration changed (Breaking)*
-
-2.x: `public IndexDescriptor<TDocument> Refresh(bool refresh = True)`  
-5.x: `public IndexDescriptor<TDocument> Refresh(Refresh refresh)`  
-
-**public property Nest.IndexRequest&lt;TDocument&gt;.Refresh** *Declaration changed (Breaking)*
-
-2.x: `public bool Refresh { get; set; }`  
-5.x: `public Refresh Refresh { get; set; }`  
-
-**public method Nest.UpdateDescriptor&lt;TDocument, TPartialDocument&gt;.Refresh** *Declaration changed (Breaking)*
-
-2.x: `public UpdateDescriptor<TDocument, TPartialDocument> Refresh(bool refresh = True)`  
-5.x: `public UpdateDescriptor<TDocument, TPartialDocument> Refresh(Refresh refresh)`  
-
-**public property Nest.UpdateRequest&lt;TDocument, TPartialDocument&gt;.Refresh** *Declaration changed (Breaking)*
-
-2.x: `public bool Refresh { get; set; }`  
-5.x: `public Refresh Refresh { get; set; }`  
-
-### Script changes
+## Script changes
 
 The default language is now painless! Also we no longer support the `1.x` inline syntax for scripts.
 https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking_50_scripting.html#_removed_1_x_script_and_template_syntax
@@ -355,64 +142,34 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking_50_scri
 2.x: `public BulkUpdateDescriptor<TDocument, TPartialDocument> Script(string script)`  
 5.x: `public BulkUpdateDescriptor<TDocument, TPartialDocument> Script(Func<ScriptDescriptor, IScript> scriptSelector)`  
 
+**public method Nest.UpdateDescriptor&lt;TDocument, TPartialDocument&gt;.Script** *Declaration changed (Breaking)*
+
 **public property Nest.BulkUpdateOperation&lt;TDocument, TPartialDocument&gt;.Script** *Declaration changed (Breaking)*
 
 2.x: `public string Script { get; set; }`  
 5.x: `public IScript Script { get; set; }`  
 
-**public property Nest.IBulkUpdateOperation&lt;TDocument, TPartialDocument&gt;.Script** *Declaration changed (Breaking)*
+**public property Nest.IUpdateRequest&lt;TDocument, TPartialDocument&gt;.Script** *Declaration changed (Breaking)*  
+**public property Nest.IBulkUpdateOperation&lt;TDocument, TPartialDocument&gt;.Script** *Declaration changed (Breaking)*  
+**public property Nest.UpdateRequest&lt;TDocument, TPartialDocument&gt;.Script** *Declaration changed (Breaking)*  
 
-2.x: `public string Script { get; set; }`  
-5.x: `public IScript Script { get; set; }`  
-
-**public property Nest.IPhraseSuggestCollate.Query** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-public IScript Query { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-public ITemplateQuery Query { get; set; }
-```
-
-**public property Nest.IUpdateRequest&lt;TDocument, TPartialDocument&gt;.Script** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-public string Script { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-public IScript Script { get; set; }
-```
+In some cases the we abused IScript to send template queries this is now fixed
 
 **public property Nest.PhraseSuggestCollate.Query** *Declaration changed (Breaking)*
 
 2.x: `public IScript Query { get; set; }`  
 5.x: `public ITemplateQuery Query { get; set; }`  
 
-**public method Nest.PhraseSuggestCollateDescriptor&lt;T&gt;.Query** *Removed (Breaking)*
+**public property Nest.IPhraseSuggestCollate.Query** *Declaration changed (Breaking)*  
+**public method Nest.PhraseSuggestCollateDescriptor&lt;T&gt;.Query** *Removed (Breaking)*  
 
-```csharp
-public PhraseSuggestCollateDescriptor<T> Query(Func<ScriptDescriptor, IScript> scriptSelector)
-```
+**public method Nest.PhraseSuggestCollateDescriptor&lt;T&gt;.Query** *Declaration changed (Breaking)*
 
-**public method Nest.UpdateDescriptor&lt;TDocument, TPartialDocument&gt;.Script** *Declaration changed (Breaking)*
+2.x: `public PhraseSuggestCollateDescriptor<T> Query(string script)`  
+5.x: `public PhraseSuggestCollateDescriptor<T> Query(Func<TemplateQueryDescriptor<T>, ITemplateQuery> selector)`  
 
-2.x: `public UpdateDescriptor<TDocument, TPartialDocument> Script(string script)`  
-5.x: `public UpdateDescriptor<TDocument, TPartialDocument> Script(Func<ScriptDescriptor, IScript> scriptSelector)`  
 
-**public property Nest.UpdateRequest&lt;TDocument, TPartialDocument&gt;.Script** *Declaration changed (Breaking)*
-
-2.x: `public string Script { get; set; }`  
-5.x: `public IScript Script { get; set; }`  
+Properties supporting the obsoleted and removed syntax have been removed
 
 **public method Nest.BulkUpdateDescriptor&lt;TDocument, TPartialDocument&gt;.ScriptFile** *Removed (Breaking)*  
 **public method Nest.BulkUpdateDescriptor&lt;TDocument, TPartialDocument&gt;.ScriptId** *Removed (Breaking)*  
@@ -442,7 +199,7 @@ public PhraseSuggestCollateDescriptor<T> Query(Func<ScriptDescriptor, IScript> s
 **public property Nest.UpdateRequest&lt;TDocument, TPartialDocument&gt;.ScriptQueryString** *Removed (Breaking)*  
 
 
-### I*Operation on bulk is now IBulk*Operation
+## `I*Operation` on bulk is now `IBulk*Operation`
 
 Impact is low unless you have casting code in your application
 
@@ -459,7 +216,7 @@ Impact is low unless you have casting code in your application
 **public interface Nest.IIndexOperation&lt;T&gt;** *Renamed (Breaking)*
 
 
-### Cat Threadpool changes
+## Cat Threadpool changes
 
 Cat threadpool underwent a complete makeover in core: https://github.com/elastic/elasticsearch/pull/19721
 
@@ -488,7 +245,7 @@ Cat threadpool underwent a complete makeover in core: https://github.com/elastic
 **public property Nest.CatThreadPoolRecord.Warmer** *Removed (Breaking)*  
 **public property Nest.CatThreadPoolRequest.FullId** *Removed (Breaking)*  
 
-### WaitForActiveShards is now a string
+## WaitForActiveShards is now a string
 
 See also: https://github.com/elastic/elasticsearch/pull/20186
 
@@ -502,10 +259,11 @@ See also: https://github.com/elastic/elasticsearch/pull/20186
 2.x: `public long WaitForActiveShards { get; set; }`  
 5.x: `public string WaitForActiveShards { get; set; }`  
 
-### AutoExpandReplicas is now an actual type
+## AutoExpandReplicas is now an actual type
 
 Binary break only, still implicitly converts from string
 
+**public property Nest.IDynamicIndexSettings.AutoExpandReplicas** *Declaration changed (Breaking)*  
 **public property Nest.DynamicIndexSettings.AutoExpandReplicas** *Declaration changed (Breaking)*
 
 2.x: `public string AutoExpandReplicas { get; set; }`  
@@ -516,13 +274,13 @@ Binary break only, still implicitly converts from string
 2.x: `public TDescriptor AutoExpandReplicas(string AutoExpandReplicas)`  
 5.x: `public TDescriptor AutoExpandReplicas(AutoExpandReplicas autoExpandReplicas)`  
 
-### DslPrerttyPrints methods are now virtual
+## DslPrerttyPrints methods are now virtual
 
-### Nest visitors should be bound to interface
+## Nest visitors should be bound to interface
 
 The visitors should be passed interfaces not concrete types see: https://github.com/elastic/elasticsearch-net/pull/2320
 
-### Deprecated queryies are now removed
+## Deprecated queryies are now removed
 
 See also: https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking_50_search_changes.html#_deprecated_queries_removed
 
@@ -564,9 +322,9 @@ See also: https://www.elastic.co/guide/en/elasticsearch/reference/current/breaki
 **public class Nest.NotQueryDescriptor&lt;T&gt;** *Removed (Breaking)*  
 
 
-### Dynamic mapping now sends true/false
+## Dynamic mapping now sends true/false
 
-And is now a union of `bool` and `DynamicMapping`
+So is now a union of `bool` and `DynamicMapping`
 
 **public enum Nest.DynamicMapping** *Declaration changed (Breaking)*
 
@@ -590,7 +348,32 @@ public enum DynamicMapping
 }
 ```
 
-### CodeStandards changes
+**public property Nest.IObjectProperty.Dynamic** *Declaration changed (Breaking)*
+
+2.x
+```csharp
+[JsonPropertyAttribute("dynamic")]
+public Nullable<DynamicMapping> Dynamic { get; set; }
+```
+
+5.x
+```csharp
+[JsonPropertyAttribute("dynamic")]
+public Union<bool, DynamicMapping> Dynamic { get; set; }
+```
+**public property Nest.PutMappingRequest.Dynamic** *Declaration changed (Breaking)*  
+**public property Nest.PutMappingRequest&lt;T&gt;.Dynamic** *Declaration changed (Breaking)*  
+**public property Nest.TypeMapping.Dynamic** *Declaration changed (Breaking)*  
+**public property Nest.ObjectProperty.Dynamic** *Declaration changed (Breaking)*  
+**public method Nest.ObjectPropertyDescriptorBase&lt;TDescriptor, TInterface, TParent, TChild&gt;.Dynamic** *Declaration changed (Breaking)*
+
+2.x: `public TDescriptor Dynamic(DynamicMapping dynamic)`  
+5.x: `public TDescriptor Dynamic(Union<bool, DynamicMapping> dynamic)`  
+
+**public method Nest.PutMappingDescriptor&lt;T&gt;.Dynamic** *Declaration changed (Breaking)*  
+**public method Nest.TypeMappingDescriptor&lt;T&gt;.Dynamic** *Declaration changed (Breaking)*  
+
+## CodeStandards changes
 
 Impact low, various binary breaking changes of code that did not adhere to our coding conventions
 
@@ -599,78 +382,50 @@ Impact low, various binary breaking changes of code that did not adhere to our c
 2.x: `public BoolQueryDescriptor<T> DisableCoord()`  
 5.x: `public BoolQueryDescriptor<T> DisableCoord(bool? disableCoord = True)`  
 
-**public method Nest.DateHistogramAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*
+**public method Nest.ExtendedStatsBucketAggregationDescriptor.Sigma** *Declaration changed (Breaking)*
 
-2.x: `public DateHistogramAggregationDescriptor<T> Field(string field)`  
-5.x: `public DateHistogramAggregationDescriptor<T> Field(Field field)`  
+2.x: `public ExtendedStatsBucketAggregationDescriptor Sigma(double? sigma)`  
+5.x: `public ExtendedStatsBucketAggregationDescriptor Sigma(double sigma)`  
 
+**public method Nest.StringPropertyDescriptor&lt;T&gt;.PositionIncrementGap** *Declaration changed (Breaking)*
 
-**public method Nest.DateRangeAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*
+2.x: `public StringPropertyDescriptor<T> PositionIncrementGap(int? positionIncrementGap)`  
+5.x: `public StringPropertyDescriptor<T> PositionIncrementGap(int positionIncrementGap)`  
 
-2.x: `public DateRangeAggregationDescriptor<T> Field(string field)`  
-5.x: `public DateRangeAggregationDescriptor<T> Field(Field field)`  
+In some cases we exposed `FluentDictionary` as property which is not useful
 
-**public method Nest.DecayFunctionDescriptorBase&lt;TDescriptor, TOrigin, TScale, T&gt;.Field** *Declaration changed (Breaking)*
+**public property Nest.TypeMapping.Meta** *Declaration changed (Breaking)*   
+**public property Nest.PutMappingRequest&lt;T&gt;.Meta** *Declaration changed (Breaking)*
+**public property Nest.ITypeMapping.Meta** *Declaration changed (Breaking)*
+**public property Nest.PutMappingRequest.Meta** *Declaration changed (Breaking)*
 
-2.x: `public TDescriptor Field(string field)`  
-5.x: `public TDescriptor Field(Field field)`  
-
-**public method Nest.DeleteManyExtensions.DeleteMany&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[ExtensionAttribute]
-public static IBulkResponse DeleteMany<T>(IElasticClient client, IEnumerable<T> objects, string index, string type)
-```
-
-5.x
-```csharp
-[ExtensionAttribute]
-public static IBulkResponse DeleteMany<T>(IElasticClient client, IEnumerable<T> objects, IndexName index, TypeName type)
-```
-
-**public method Nest.GetManyExtensions.GetMany&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[ExtensionAttribute]
-public static IEnumerable<IMultiGetHit<T>> GetMany<T>(IElasticClient client, IEnumerable<long> ids, string index, string type)
-```
-
-5.x
-```csharp
-[ExtensionAttribute]
-public static IEnumerable<IMultiGetHit<T>> GetMany<T>(IElasticClient client, IEnumerable<long> ids, IndexName index, TypeName type)
-```
-
-**public method Nest.GetManyExtensions.GetMany&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[ExtensionAttribute]
-public static IEnumerable<IMultiGetHit<T>> GetMany<T>(IElasticClient client, IEnumerable<string> ids, string index, string type)
-```
-
-5.x
-```csharp
-[ExtensionAttribute]
-public static IEnumerable<IMultiGetHit<T>> GetMany<T>(IElasticClient client, IEnumerable<string> ids, IndexName index, TypeName type)
-```
+2.x: `public FluentDictionary<string, object> Meta { get; set; }`  
+5.x: `public IDictionary<string, object> Meta { get; set; }`  
 
 
-### Visibility changes
+## Visibility changes
 
-**public class Nest.BucketsPathJsonConverter** *Visibility was changed from public to internal (Breaking)*
+Impact low, these are types/methods/constructors that were never suppose to be public.
 
-2.x: `public class BucketsPathJsonConverter : JsonConverter`  
-5.x: `internal class BucketsPathJsonConverter : JsonConverter`  
+**public class Nest.BucketsPathJsonConverter** *Visibility was changed from public to internal (Breaking)*  
+**public class Nest.DictionaryResponseJsonConverter&lt;TResponse, TKey, TValue&gt;** *Visibility was changed from public to internal (Breaking)*  
+**public method Nest.CreateIndexRequest..ctor** *Visibility was changed from public to internal (Breaking)*  
+**public method Nest.NumberPropertyDescriptorBase&lt;TDescriptor, TInterface, T&gt;..ctor** *Visibility was changed from public to protected (Breaking)*  
+**public method Nest.ObjectPropertyDescriptorBase&lt;TDescriptor, TInterface, TParent, TChild&gt;..ctor** *Visibility was changed from public to protected (Breaking)*  
+**public class Nest.PercentileRanksAggregationJsonConverter** *Visibility was changed from public to internal (Breaking)*  
+**public class Nest.PercentilesAggregationJsonConverter** *Visibility was changed from public to internal (Breaking)*  
+**public class Nest.PropertyNameExtensions** *Visibility was changed from public to internal (Breaking)*  
+**public class Nest.ReindexRoutingJsonConverter** *Visibility was changed from public to internal (Breaking)*  
+**public property Nest.ResponseBase.ApiCall** *Visibility was changed from public to protected (Breaking)*  
+**public class Nest.ScoreFunctionJsonConverter** *Visibility was changed from public to internal (Breaking)*  
+**public class Nest.ScriptJsonConverter** *Visibility was changed from public to internal (Breaking)*  
+**public property Nest.SearchResponse&lt;T&gt;.ApiCall** *Visibility was changed from public to protected (Breaking)*  
+**public class Nest.SimpleQueryStringFlagsJsonConverter** *Visibility was changed from public to internal (Breaking)*  
+**public class Nest.SourceFilterJsonConverter** *Visibility was changed from public to internal (Breaking)*  
+**public class Nest.TypeNameExtensions** *Visibility was changed from public to internal (Breaking)*  
+**public method Nest.AggregationsHelper..ctor** *Visibility was changed from public to protected (Breaking)*  
 
-**public class Nest.DictionaryResponseJsonConverter&lt;TResponse, TKey, TValue&gt;** *Visibility was changed from public to internal (Breaking)*
-
-2.x: `public class DictionaryResponseJsonConverter<TResponse, TKey, TValue> : JsonConverter where TResponse : new(), IDictionaryResponse<TKey, TValue>`  
-5.x: `internal class DictionaryResponseJsonConverter<TResponse, TKey, TValue> : JsonConverter where TResponse : new(), IDictionaryResponse<TKey, TValue>`  
-
-### Response properties should not have setters
+## Response properties should not have setters
 
 These properties had public setters which made no sense (readonly), impact low.
 
@@ -751,23 +506,117 @@ These properties had public setters which made no sense (readonly), impact low.
 **public property Nest.IUpgradeStatusResponse.SizeInBytes** *Declaration changed (Breaking)*  
 **public property Nest.IUpgradeStatusResponse.SizeToUpgradeAncientInBytes** *Declaration changed (Breaking)*  
 **public property Nest.IUpgradeStatusResponse.SizeToUpgradeInBytes** *Declaration changed (Breaking)*  
+**public property Nest.IUpgradeResponse.Shards** *Declaration changed (Breaking)*  
+
+## No Id type on response
+
+Several response properties were of type `Id` which is not all that useful to consumers. Now `string`.
+
+**public property Nest.ExecuteWatchResponse.Id** *Declaration changed (Breaking)*  
+**public property Nest.GetWatchResponse.Id** *Declaration changed (Breaking)*  
+**public property Nest.IExecuteWatchResponse.Id** *Declaration changed (Breaking)*  
+**public property Nest.IGetWatchResponse.Id** *Declaration changed (Breaking)*  
+**public property Nest.IndexActionResult.Id** *Declaration changed (Breaking)*  
+**public property Nest.IndexActionResultIndexResponse.Id** *Declaration changed (Breaking)*  
+**public property Nest.IPutWatchResponse.Id** *Declaration changed (Breaking)*  
+**public property Nest.PutWatchResponse.Id** *Declaration changed (Breaking)*  
+**public property Nest.WatchRecord.WatchId** *Declaration changed (Breaking)*  
+**public property Nest.WatchRecordQueuedStats.WatchId** *Declaration changed (Breaking)*  
+**public property Nest.WatchRecordQueuedStats.WatchRecordId** *Declaration changed (Breaking)*  
+
+## Methods taking Field as string
+
+Some methods were taking a Field as string which should take `Field` instead. impact minimal since string still
+implicitly converts to `Field`
+
+**public method Nest.Field.And** *Declaration changed (Breaking)*  
+**public method Nest.GeoDistanceAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*  
+**public method Nest.GeoHashGridAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*  
+**public method Nest.HistogramAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*  
+**public method Nest.InnerHitsDescriptor&lt;T&gt;.FielddataFields** *Declaration changed (Breaking)*  
+**public method Nest.IpRangeAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*  
+**public method Nest.MetricAggregationDescriptorBase&lt;TMetricAggregation, TMetricAggregationInterface, T&gt;.Field** *Declaration changed (Breaking)*  
+**public method Nest.MissingAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*  
+**public method Nest.NestedAggregationDescriptor&lt;T&gt;.Path** *Declaration changed (Breaking)*  
+**public method Nest.DateHistogramAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*  
+**public method Nest.DateRangeAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*  
+**public method Nest.DecayFunctionDescriptorBase&lt;TDescriptor, TOrigin, TScale, T&gt;.Field** *Declaration changed (Breaking)*  
+**public method Nest.Query&lt;T&gt;.Prefix** *Declaration changed (Breaking)*  
+**public method Nest.Query&lt;T&gt;.Term** *Declaration changed (Breaking)*  
+**public method Nest.Query&lt;T&gt;.Wildcard** *Declaration changed (Breaking)*  
+**public method Nest.QueryContainerDescriptor&lt;T&gt;.Prefix** *Declaration changed (Breaking)*  
+**public method Nest.QueryContainerDescriptor&lt;T&gt;.Term** *Declaration changed (Breaking)*  
+**public method Nest.QueryContainerDescriptor&lt;T&gt;.Wildcard** *Declaration changed (Breaking)*  
+**public method Nest.RangeAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*  
+**public method Nest.SignificantTermsAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*  
+**public method Nest.TermsAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*  
+**public method Nest.ReverseNestedAggregationDescriptor&lt;T&gt;.Path** *Declaration changed (Breaking)*  
 
 
-### Uncategorized
+## Norms now takes a boolean instead of an object
 
-**public property Nest.BulkIndexByScrollFailure.Cause** *Declaration changed (Breaking)*
+See: https://github.com/elastic/elasticsearch-net/issues/2004
 
-2.x
-```csharp
-[JsonPropertyAttribute("cause")]
-public Throwable Cause { get; internal set; }
-```
+**public method Nest.GenericPropertyDescriptor&lt;T&gt;.Norms** *Declaration changed (Breaking)*
 
-5.x
-```csharp
-[JsonPropertyAttribute("cause")]
-public BulkIndexFailureCause Cause { get; set; }
-```
+2.x: `public GenericPropertyDescriptor<T> Norms(Func<NormsDescriptor, INorms> selector)`  
+5.x: `public GenericPropertyDescriptor<T> Norms(bool enabled = True)`  
+
+**public property Nest.GenericProperty.Norms** *Declaration changed (Breaking)*
+
+2.x: `public INorms Norms { get; set; }`  
+5.x: `public bool? Norms { get; set; }`  
+
+**public property Nest.IGenericProperty.Norms** *Declaration changed (Breaking)*  
+**public property Nest.IStringProperty.Norms** *Declaration changed (Breaking)*  
+**public property Nest.StringProperty.Norms** *Declaration changed (Breaking)*  
+**public method Nest.StringPropertyDescriptor&lt;T&gt;.Norms** *Declaration changed (Breaking)*  
+**public interface Nest.INorms** *Removed (Breaking)*    
+**public class Nest.Norms** *Removed (Breaking)*    
+**public class Nest.NormsDescriptor** *Removed (Breaking)*    
+**public enum Nest.NormsLoading** *Removed (Breaking)*    
+
+## Score is now nullable on hit
+
+See: https://github.com/elastic/elasticsearch-net/pull/2365
+
+**public property Nest.Hit&lt;T&gt;.Score** *Declaration changed (Breaking)*
+**public property Nest.IHit&lt;T&gt;.Score** *Declaration changed (Breaking)*
+
+## Can now take multiple rescores 
+
+2.x can as well but in 5.x we do it in a straightforward way without custom json converters.
+
+**public property Nest.SearchRequest&lt;T&gt;.Rescore** *Declaration changed (Breaking)*  
+**public property Nest.SearchRequest.Rescore** *Declaration changed (Breaking)*  
+**public property Nest.ISearchRequest.Rescore** *Declaration changed (Breaking)*  
+
+2.x: `public IRescore Rescore { get; set; }`  
+5.x: `public IList<IRescore> Rescore { get; set; }`  
+
+**public method Nest.SearchDescriptor&lt;T&gt;.Rescore** *Declaration changed (Breaking)*
+
+2.x: `public SearchDescriptor<T> Rescore(Func<RescoreDescriptor<T>, IRescore> rescoreSelector)`    
+5.x: `public SearchDescriptor<T> Rescore(Func<RescoringDescriptor<T>, IPromise<IList<IRescore>>> rescoreSelector)`    
+
+**public class Nest.MultiRescore** *Removed (Breaking)*  
+**public class Nest.RescoreConverter** *Removed (Breaking)*  
+
+## Retries on reindex task status now object
+
+Used to return only long, now tells you how bulk and search retries were necessary 
+
+**public property Nest.IReindexOnServerResponse.Retries** *Declaration changed (Breaking)*  
+**public property Nest.IUpdateByQueryResponse.Retries** *Declaration changed (Breaking)*  
+**public property Nest.ReindexOnServerResponse.Retries** *Declaration changed (Breaking)*  
+**public property Nest.ReindexStatus.Retries** *Declaration changed (Breaking)*  
+**public property Nest.UpdateByQueryResponse.Retries** *Declaration changed (Breaking)*  
+
+2.x: `public long Retries { get; internal set; }`  
+5.x: `public Retries Retries { get; internal set; }`  
+
+
+## Took should always be a long
 
 **public property Nest.BulkResponse.Took** *Declaration changed (Breaking)*
 
@@ -784,319 +633,160 @@ public int Took { get; }
 public long Took { get; internal set; }
 ```
 
-**public method Nest.CreateIndexRequest..ctor** *Visibility was changed from public to internal (Breaking)*
+**public property Nest.IBulkResponse.Took** *Declaration changed (Breaking)*  
+**public property Nest.IPercolateCountResponse.Took** *Declaration changed (Breaking)*  
+**public property Nest.ISearchResponse&lt;T&gt;.Took** *Declaration changed (Breaking)*  
+**public property Nest.TermVectorsResponse.Took** *Declaration changed (Breaking)*  
 
-2.x: `public  .ctor()`  
-5.x: `internal  .ctor()`  
+also the hacks from 2.x have been removed
 
-**public method Nest.DeleteByQueryDescriptor&lt;T&gt;.Routing** *Declaration changed (Breaking)*
+**public property Nest.BulkResponse.TookAsLong** *Removed (Breaking)*  
+**public property Nest.IBulkResponse.TookAsLong** *Removed (Breaking)*  
+**public property Nest.IPercolateCountResponse.TookAsLong** *Removed (Breaking)*  
+**public property Nest.ISearchResponse&lt;T&gt;.TookAsLong** *Removed (Breaking)*  
+**public property Nest.ITermVectorsResponse.TookAsLong** *Removed (Breaking)*  
+**public property Nest.PercolateCountResponse.TookAsLong** *Removed (Breaking)*  
+**public property Nest.SearchResponse&lt;T&gt;.TookAsLong** *Removed (Breaking)*  
+**public property Nest.TermVectorsResponse.TookAsLong** *Removed (Breaking)*  
 
-2.x: `public DeleteByQueryDescriptor<T> Routing(string routing)`  
-5.x: `public DeleteByQueryDescriptor<T> Routing(String[] routing)`  
 
-**public property Nest.DeleteByQueryRequest.Routing** *Declaration changed (Breaking)*
+## Allow source filter to send false
 
-2.x: `public string Routing { get; set; }`  
-5.x: `public String[] Routing { get; set; }`  
+In NEST 2.x we would always send Source.Exlcude as `_source: { exclude: [""] }` in 5.x the we use a union of `bool`
+`ISourceFiler` so NEST can send and recieve `_source: false`. Which should short circuit some routines on the server
 
-**public property Nest.DeleteByQueryRequest&lt;T&gt;.Routing** *Declaration changed (Breaking)*
+See also: https://github.com/elastic/elasticsearch-net/pull/2200
 
-2.x: `public string Routing { get; set; }`  
-5.x: `public String[] Routing { get; set; }`  
+**public property Nest.InnerHits.Source** *Declaration changed (Breaking)*
 
-**public method Nest.ElasticClient.DeleteByQuery&lt;T&gt;** *Declaration changed (Breaking)*
+2.x: `public ISourceFilter Source { get; set; }`  
+5.x: `public Union<bool, ISourceFilter> Source { get; set; }`  
 
-2.x: `public IDeleteByQueryResponse DeleteByQuery<T>(Indices indices, Types types, Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector)`  
-5.x: `public IDeleteByQueryResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector)`  
+**public property Nest.IInnerHits.Source** *Declaration changed (Breaking)*  
+**public property Nest.ISearchRequest.Source** *Declaration changed (Breaking)*  
+**public property Nest.ITopHitsAggregation.Source** *Declaration changed (Breaking)*  
+**public property Nest.SearchRequest.Source** *Declaration changed (Breaking)*  
+**public property Nest.SearchRequest&lt;T&gt;.Source** *Declaration changed (Breaking)*  
+**public property Nest.TopHitsAggregation.Source** *Declaration changed (Breaking)*  
+
+`Exclude` and `Include` are now plural on `ISourceFilter`
+
+**public property Nest.SourceFilter.Disable** *Removed (Breaking)*  
+**public property Nest.SourceFilter.Exclude** *Removed (Breaking)*  
+**public property Nest.SourceFilter.Include** *Removed (Breaking)*  
+**public method Nest.SourceFilterDescriptor&lt;T&gt;.Disable** *Removed (Breaking)*  
+**public method Nest.SourceFilterDescriptor&lt;T&gt;.Exclude** *Removed (Breaking)*  
+**public method Nest.SourceFilterDescriptor&lt;T&gt;.Include** *Removed (Breaking)*  
+**public property Nest.ISourceFilter.Disable** *Removed (Breaking)*  
+**public property Nest.ISourceFilter.Exclude** *Removed (Breaking)*  
+**public property Nest.ISourceFilter.Include** *Removed (Breaking)*    
+
+### Bulk index failure now returns its metadata
+
+**public property Nest.BulkIndexByScrollFailure.Cause** *Declaration changed (Breaking)*
+
+2.x
+```csharp
+[JsonPropertyAttribute("cause")]
+public Throwable Cause { get; internal set; }
+```
+
+5.x
+```csharp
+[JsonPropertyAttribute("cause")]
+public BulkIndexFailureCause Cause { get; set; }
+```
+
+### GetAliases API removed 
+
+GetAlias API now returns `GetAlias*` named types not `GetAliases*`
+
+**public class Nest.GetAliasesDescriptor** *Removed (Breaking)*  
+**public class Nest.GetAliasesRequest** *Removed (Breaking)*  
+**public class Nest.GetAliasesResponse** *Removed (Breaking)*  
+**public interface Nest.IGetAliasesRequest** *Removed (Breaking)*  
+**public interface Nest.IGetAliasesResponse** *Removed (Breaking)*  
+**public method Nest.ElasticClient.GetAliases** *Removed (Breaking)*  
+**public method Nest.ElasticClient.GetAliases** *Removed (Breaking)*  
+**public method Nest.ElasticClient.GetAliasesAsync** *Removed (Breaking)*  
+**public method Nest.ElasticClient.GetAliasesAsync** *Removed (Breaking)*  
+**public method Nest.IElasticClient.GetAliases** *Removed (Breaking)*  
+**public method Nest.IElasticClient.GetAliases** *Removed (Breaking)*  
+**public method Nest.IElasticClient.GetAliasesAsync** *Removed (Breaking)*  
 
 **public method Nest.ElasticClient.GetAlias** *Declaration changed (Breaking)*
 
 2.x: `public IGetAliasesResponse GetAlias(IGetAliasRequest request)`  
 5.x: `public IGetAliasResponse GetAlias(IGetAliasRequest request)`  
 
-**public method Nest.ElasticClient.GetAlias** *Declaration changed (Breaking)*
+**public method Nest.ElasticClient.GetAlias** *Declaration changed (Breaking)*  
+**public method Nest.IElasticClient.GetAlias** *Declaration changed (Breaking)*  
+**public method Nest.IElasticClient.GetAlias** *Declaration changed (Breaking)*  
 
-2.x: `public IGetAliasesResponse GetAlias(Func<GetAliasDescriptor, IGetAliasRequest> selector)`  
-5.x: `public IGetAliasResponse GetAlias(Func<GetAliasDescriptor, IGetAliasRequest> selector)`  
+## Sugest is bound over T
 
-**public method Nest.ElasticClient.Suggest&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public ISuggestResponse Suggest<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector)`  
-5.x: `public ISuggestResponse<T> Suggest<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector)`  
-
-**public property Nest.ExecuteWatchResponse.Id** *Declaration changed (Breaking)*
-
-2.x: `public Id Id { get; set; }`  
-5.x: `public string Id { get; set; }`  
-
-**public method Nest.ExtendedStatsBucketAggregationDescriptor.Sigma** *Declaration changed (Breaking)*
-
-2.x: `public ExtendedStatsBucketAggregationDescriptor Sigma(double? sigma)`  
-5.x: `public ExtendedStatsBucketAggregationDescriptor Sigma(double sigma)`  
-
-**public method Nest.Field..ctor** *Declaration changed (Breaking)*
-
-2.x: `public  .ctor()`  
-5.x: `public  .ctor(string name, double? boost)`  
-
-**public method Nest.Field.And** *Declaration changed (Breaking)*
-
-2.x: `public Fields And(string field)`  
-5.x: `public Fields And(Field field)`  
-
-**public method Nest.Field.And&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Fields And<T>(Expression<Func<T, object>> field)`  
-5.x: `public Fields And<T>(Expression<Func<T, object>> field, double? boost)`  
-
-**public property Nest.Field.Expression** *Declaration changed (Breaking)*
-
-2.x: `public Expression Expression { get; set; }`  
-5.x: `public Expression Expression { get; }`  
-
-**public property Nest.Field.Name** *Declaration changed (Breaking)*
-
-2.x: `public string Name { get; set; }`  
-5.x: `public string Name { get; }`  
-
-**public property Nest.Field.Property** *Declaration changed (Breaking)*
-
-2.x: `public PropertyInfo Property { get; set; }`  
-5.x: `public PropertyInfo Property { get; }`  
-
-**public property Nest.GenericProperty.Norms** *Declaration changed (Breaking)*
-
-2.x: `public INorms Norms { get; set; }`  
-5.x: `public bool? Norms { get; set; }`  
-
-**public method Nest.GenericPropertyDescriptor&lt;T&gt;.Norms** *Declaration changed (Breaking)*
-
-2.x: `public GenericPropertyDescriptor<T> Norms(Func<NormsDescriptor, INorms> selector)`  
-5.x: `public GenericPropertyDescriptor<T> Norms(bool enabled = True)`  
-
-**public method Nest.GeoDistanceAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*
-
-2.x: `public GeoDistanceAggregationDescriptor<T> Field(string field)`  
-5.x: `public GeoDistanceAggregationDescriptor<T> Field(Field field)`  
-
-**public method Nest.GeoHashGridAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*
-
-2.x: `public GeoHashGridAggregationDescriptor<T> Field(string field)`  
-5.x: `public GeoHashGridAggregationDescriptor<T> Field(Field field)`  
-
-**public class Nest.GeoShapeQueryDescriptorBase&lt;TDescriptor, TInterface, T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public abstract class GeoShapeQueryDescriptorBase<TDescriptor, TInterface, T> : FieldNameQueryDescriptorBase<TDescriptor, TInterface, T>, IDescriptor, IQuery, IFieldNameQuery, IGeoShapeQuery where TDescriptor : FieldNameQueryDescriptorBase<TDescriptor, TInterface, T>, TInterface where TInterface : class, IGeoShapeQuery`  
-5.x: `public abstract class GeoShapeQueryDescriptorBase<TDescriptor, TInterface, T> : FieldNameQueryDescriptorBase<TDescriptor, TInterface, T>, IDescriptor, IQuery, IFieldNameQuery, IGeoShapeQuery where TDescriptor : GeoShapeQueryDescriptorBase<TDescriptor, TInterface, T>, TInterface where TInterface : class, IGeoShapeQuery`  
-
-**public property Nest.GetWatchResponse.Id** *Declaration changed (Breaking)*
-
-2.x: `public Id Id { get; internal set; }`  
-5.x: `public string Id { get; internal set; }`  
-
-**public property Nest.HighlightField.Type** *Declaration changed (Breaking)*
-
-2.x: `public Nullable<HighlighterType> Type { get; set; }`  
-5.x: `public Union<HighlighterType, string> Type { get; set; }`  
-
-**public method Nest.HighlightFieldDescriptor&lt;T&gt;.PostTags** *Declaration changed (Breaking)*
-
-2.x: `public HighlightFieldDescriptor<T> PostTags(string postTags)`  
-5.x: `public HighlightFieldDescriptor<T> PostTags(String[] postTags)`  
-
-**public method Nest.HighlightFieldDescriptor&lt;T&gt;.PreTags** *Declaration changed (Breaking)*
-
-2.x: `public HighlightFieldDescriptor<T> PreTags(string preTags)`  
-5.x: `public HighlightFieldDescriptor<T> PreTags(String[] preTags)`  
-
-**public method Nest.HistogramAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*
-
-2.x: `public HistogramAggregationDescriptor<T> Field(string field)`  
-5.x: `public HistogramAggregationDescriptor<T> Field(Field field)`  
-
-**public property Nest.Hit&lt;T&gt;.Score** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("_score")]
-public double Score { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("_score")]
-public double? Score { get; set; }
-```
-
-
-
-**public property Nest.IBulkResponse.Took** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[ObsoleteAttribute("returned value may be larger than int. In this case, value will be int.MaxValue and TookAsLong field can be checked. Took is long in 5.0.0")]
-public int Took { get; }
-```
-
-5.x
-```csharp
-public long Took { get; }
-```
-
-**public property Nest.IDynamicIndexSettings.AutoExpandReplicas** *Declaration changed (Breaking)*
-
-2.x: `public string AutoExpandReplicas { get; set; }`  
-5.x: `public AutoExpandReplicas AutoExpandReplicas { get; set; }`  
-
-**public method Nest.IElasticClient.DeleteByQuery&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public IDeleteByQueryResponse DeleteByQuery<T>(Indices indices, Types types, Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector)`  
-5.x: `public IDeleteByQueryResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector)`  
-
-**public method Nest.IElasticClient.GetAlias** *Declaration changed (Breaking)*
-
-2.x: `public IGetAliasesResponse GetAlias(IGetAliasRequest request)`  
-5.x: `public IGetAliasResponse GetAlias(IGetAliasRequest request)`  
-
-**public method Nest.IElasticClient.GetAlias** *Declaration changed (Breaking)*
-
-2.x: `public IGetAliasesResponse GetAlias(Func<GetAliasDescriptor, IGetAliasRequest> selector)`  
-5.x: `public IGetAliasResponse GetAlias(Func<GetAliasDescriptor, IGetAliasRequest> selector)`  
+See: https://github.com/elastic/elasticsearch-net/pull/2370
 
 **public method Nest.IElasticClient.Suggest&lt;T&gt;** *Declaration changed (Breaking)*
 
 2.x: `public ISuggestResponse Suggest<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector)`  
 5.x: `public ISuggestResponse<T> Suggest<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector)`  
 
-**public property Nest.IExecuteWatchResponse.Id** *Declaration changed (Breaking)*
+## IElasticClient changes
+
+Make sure all methods favor types over strings
+
+**public method Nest.DeleteManyExtensions.DeleteMany&lt;T&gt;** *Declaration changed (Breaking)*
 
 2.x
 ```csharp
-[JsonPropertyAttribute("_id")]
-public Id Id { get; set; }
+public static IBulkResponse DeleteMany<T>(IElasticClient client, IEnumerable<T> objects, string index, string type)
 ```
 
 5.x
 ```csharp
-[JsonPropertyAttribute("_id")]
-public string Id { get; set; }
+public static IBulkResponse DeleteMany<T>(IElasticClient client, IEnumerable<T> objects, IndexName index, TypeName type)
 ```
 
-**public property Nest.IGenericProperty.Norms** *Declaration changed (Breaking)*
+**public method Nest.GetManyExtensions.GetMany&lt;T&gt;** *Declaration changed (Breaking)*
 
 2.x
 ```csharp
-[JsonPropertyAttribute("norms")]
-public INorms Norms { get; set; }
+public static IEnumerable<IMultiGetHit<T>> GetMany<T>(IElasticClient client, IEnumerable<long> ids, string index, string type)
 ```
 
 5.x
 ```csharp
-[JsonPropertyAttribute("norms")]
-public bool? Norms { get; set; }
+public static IEnumerable<IMultiGetHit<T>> GetMany<T>(IElasticClient client, IEnumerable<long> ids, IndexName index, TypeName type)
 ```
 
-**public property Nest.IGetWatchResponse.Id** *Declaration changed (Breaking)*
+**public method Nest.GetManyExtensions.GetMany&lt;T&gt;** *Declaration changed (Breaking)*
 
 2.x
 ```csharp
-[JsonPropertyAttribute("_id")]
-public Id Id { get; }
+public static IEnumerable<IMultiGetHit<T>> GetMany<T>(IElasticClient client, IEnumerable<string> ids, string index, string type)
 ```
 
 5.x
 ```csharp
-[JsonPropertyAttribute("_id")]
-public string Id { get; }
+public static IEnumerable<IMultiGetHit<T>> GetMany<T>(IElasticClient client, IEnumerable<string> ids, IndexName index, TypeName type)
 ```
 
-**public property Nest.IHighlightField.Type** *Declaration changed (Breaking)*
+**public method Nest.IElasticClient.DeleteByQuery&lt;T&gt;** *Declaration changed (Breaking)*
 
-2.x
-```csharp
-public Nullable<HighlighterType> Type { get; set; }
-```
+2.x: `public IDeleteByQueryResponse DeleteByQuery<T>(Indices indices, Types types, Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector)`  
+5.x: `public IDeleteByQueryResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector)`  
 
-5.x
-```csharp
-[JsonPropertyAttribute("type")]
-public Union<HighlighterType, string> Type { get; set; }
-```
-
-**public property Nest.IHit&lt;T&gt;.Score** *Declaration changed (Breaking)*
-
-2.x: `public double Score { get; }`  
-5.x: `public double? Score { get; }`  
-
-**public property Nest.IInnerHits.Source** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute]
-public ISourceFilter Source { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute]
-public Union<bool, ISourceFilter> Source { get; set; }
-```
-
-
-
-**public property Nest.IndexActionResult.Id** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("id")]
-public Id Id { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("id")]
-public string Id { get; set; }
-```
-
-**public property Nest.IndexActionResultIndexResponse.Id** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("id")]
-public Id Id { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("id")]
-public string Id { get; set; }
-```
-
-**public property Nest.IndexActionResultIndexResponse.Result** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("result")]
-public string Result { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("result")]
-public Result Result { get; set; }
-```
 
 **public method Nest.IndexManyExtensions.IndexMany&lt;T&gt;** *Declaration changed (Breaking)*
 
 2.x
 ```csharp
-[ExtensionAttribute]
 public static IBulkResponse IndexMany<T>(IElasticClient client, IEnumerable<T> objects, string index, string type)
 ```
 
 5.x
 ```csharp
-[ExtensionAttribute]
 public static IBulkResponse IndexMany<T>(IElasticClient client, IEnumerable<T> objects, IndexName index, TypeName type)
 ```
 
@@ -1104,13 +794,11 @@ public static IBulkResponse IndexMany<T>(IElasticClient client, IEnumerable<T> o
 
 2.x
 ```csharp
-[ExtensionAttribute]
 public static IList<string> GetIndicesPointingToAlias(IElasticClient client, string aliasName)
 ```
 
 5.x
 ```csharp
-[ExtensionAttribute]
 public static IEnumerable<string> GetIndicesPointingToAlias(IElasticClient client, Names alias)
 ```
 
@@ -1118,216 +806,22 @@ public static IEnumerable<string> GetIndicesPointingToAlias(IElasticClient clien
 
 2.x
 ```csharp
-[AsyncStateMachineAttribute(Nest.IndicesPointingToAliasExtensions+<GetIndicesPointingToAliasAsync>d__1)]
-[ExtensionAttribute]
 public static Task<IList<string>> GetIndicesPointingToAliasAsync(IElasticClient client, string aliasName)
 ```
 
 5.x
 ```csharp
-[AsyncStateMachineAttribute(Nest.IndicesPointingToAliasExtensions+<GetIndicesPointingToAliasAsync>d__1)]
-[ExtensionAttribute]
 public static Task<IEnumerable<string>> GetIndicesPointingToAliasAsync(IElasticClient client, Names alias)
 ```
 
-**public property Nest.InnerHits.Source** *Declaration changed (Breaking)*
+**public method Nest.ElasticClient.DeleteByQuery&lt;T&gt;** *Declaration changed (Breaking)*
 
-2.x: `public ISourceFilter Source { get; set; }`  
-5.x: `public Union<bool, ISourceFilter> Source { get; set; }`  
+2.x: `public IDeleteByQueryResponse DeleteByQuery<T>(Indices indices, Types types, Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector)`  
+5.x: `public IDeleteByQueryResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector)`  
 
-**public method Nest.InnerHitsDescriptor&lt;T&gt;.FielddataFields** *Declaration changed (Breaking)*
+### Enum Changes
 
-2.x: `public InnerHitsDescriptor<T> FielddataFields(String[] fielddataFields)`  
-5.x: `public InnerHitsDescriptor<T> FielddataFields(Field[] fielddataFields)`  
-
-
-**public property Nest.IObjectProperty.Dynamic** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("dynamic")]
-public Nullable<DynamicMapping> Dynamic { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("dynamic")]
-public Union<bool, DynamicMapping> Dynamic { get; set; }
-```
-
-**public property Nest.IPercolateCountResponse.Took** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[ObsoleteAttribute("returned value may be larger than int. In this case, value will be int.MaxValue and TookAsLong field can be checked. Took is long in 5.0.0")]
-public int Took { get; }
-```
-
-5.x
-```csharp
-public long Took { get; }
-```
-
-
-**public method Nest.IpRangeAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*
-
-2.x: `public IpRangeAggregationDescriptor<T> Field(string field)`  
-5.x: `public IpRangeAggregationDescriptor<T> Field(Field field)`  
-
-**public property Nest.IPutWatchResponse.Id** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("_id")]
-public Id Id { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("_id")]
-public string Id { get; }
-```
-
-**public property Nest.IReindexOnServerResponse.Retries** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("retries")]
-public long Retries { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("retries")]
-public Retries Retries { get; }
-```
-
-**public property Nest.ISearchRequest.Rescore** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("rescore")]
-public IRescore Rescore { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("rescore")]
-public IList<IRescore> Rescore { get; set; }
-```
-
-**public property Nest.ISearchRequest.Source** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("_source")]
-public ISourceFilter Source { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("_source")]
-public Union<bool, ISourceFilter> Source { get; set; }
-```
-
-**public property Nest.ISearchResponse&lt;T&gt;.Took** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[ObsoleteAttribute("returned value may be larger than int. In this case, value will be int.MaxValue and TookAsLong field can be checked. Took is long in 5.0.0")]
-public int Took { get; }
-```
-
-5.x
-```csharp
-public long Took { get; }
-```
-
-**public property Nest.IStringProperty.Norms** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("norms")]
-public INorms Norms { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("norms")]
-public bool? Norms { get; set; }
-```
-
-**public property Nest.ITopHitsAggregation.Source** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("_source")]
-public ISourceFilter Source { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("_source")]
-public Union<bool, ISourceFilter> Source { get; set; }
-```
-
-**public property Nest.ITypeMapping.Dynamic** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("dynamic")]
-public Nullable<DynamicMapping> Dynamic { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("dynamic")]
-public Union<bool, DynamicMapping> Dynamic { get; set; }
-```
-
-**public property Nest.ITypeMapping.Meta** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("_meta")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter)]
-public FluentDictionary<string, object> Meta { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("_meta")]
-[JsonConverterAttribute(Nest.VerbatimDictionaryKeysJsonConverter`2[System.String,System.Object])]
-public IDictionary<string, object> Meta { get; set; }
-```
-
-**public property Nest.IUpdateByQueryResponse.Retries** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("retries")]
-public long Retries { get; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("retries")]
-public Retries Retries { get; }
-```
-
-**public property Nest.IUpgradeResponse.Shards** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("_shards")]
-public ShardsMetaData Shards { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("_shards")]
-public ShardsMetaData Shards { get; }
-```
+Impact low
 
 **public enum Nest.LicenseStatus** *Declaration changed (Breaking)*
 
@@ -1353,26 +847,6 @@ public enum LicenseStatus
      Expired = 3
 }
 ```
-
-**public method Nest.MappingWalker.Accept** *Declaration changed (Breaking)*
-
-2.x: `public void Accept(TypeMapping mapping)`  
-5.x: `public void Accept(ITypeMapping mapping)`  
-
-**public method Nest.MetricAggregationDescriptorBase&lt;TMetricAggregation, TMetricAggregationInterface, T&gt;.Field** *Declaration changed (Breaking)*
-
-2.x: `public TMetricAggregation Field(string field)`  
-5.x: `public TMetricAggregation Field(Field field)`  
-
-**public method Nest.MissingAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*
-
-2.x: `public MissingAggregationDescriptor<T> Field(string field)`  
-5.x: `public MissingAggregationDescriptor<T> Field(Field field)`  
-
-**public method Nest.NestedAggregationDescriptor&lt;T&gt;.Path** *Declaration changed (Breaking)*
-
-2.x: `public NestedAggregationDescriptor<T> Path(string path)`  
-5.x: `public NestedAggregationDescriptor<T> Path(Field path)`  
 
 **public enum Nest.NestedScoreMode** *Declaration changed (Breaking)*
 
@@ -1401,11 +875,6 @@ public enum NestedScoreMode
      None = 4
 }
 ```
-
-**public method Nest.NumberPropertyDescriptorBase&lt;TDescriptor, TInterface, T&gt;..ctor** *Visibility was changed from public to protected (Breaking)*
-
-2.x: `public  .ctor()`  
-5.x: `protected  .ctor()`  
 
 **public enum Nest.NumberType** *Declaration changed (Breaking)*
 
@@ -1463,209 +932,6 @@ public enum NumericFielddataFormat
 }
 ```
 
-**public property Nest.ObjectProperty.Dynamic** *Declaration changed (Breaking)*
-
-2.x: `public Nullable<DynamicMapping> Dynamic { get; set; }`  
-5.x: `public Union<bool, DynamicMapping> Dynamic { get; set; }`  
-
-**public method Nest.ObjectPropertyDescriptorBase&lt;TDescriptor, TInterface, TParent, TChild&gt;..ctor** *Visibility was changed from public to protected (Breaking)*
-
-2.x: `public  .ctor()`  
-5.x: `protected  .ctor()`  
-
-**public method Nest.ObjectPropertyDescriptorBase&lt;TDescriptor, TInterface, TParent, TChild&gt;.Dynamic** *Declaration changed (Breaking)*
-
-2.x: `public TDescriptor Dynamic(DynamicMapping dynamic)`  
-5.x: `public TDescriptor Dynamic(Union<bool, DynamicMapping> dynamic)`  
-
-**public class Nest.PercentileRanksAggregationJsonConverter** *Visibility was changed from public to internal (Breaking)*
-
-2.x: `public class PercentileRanksAggregationJsonConverter : PercentilesAggregationJsonConverter`  
-5.x: `internal class PercentileRanksAggregationJsonConverter : PercentilesAggregationJsonConverter`  
-
-**public class Nest.PercentilesAggregationJsonConverter** *Visibility was changed from public to internal (Breaking)*
-
-2.x: `public class PercentilesAggregationJsonConverter : JsonConverter`  
-5.x: `internal class PercentilesAggregationJsonConverter : JsonConverter`  
-
-**public method Nest.PhraseSuggestCollateDescriptor&lt;T&gt;.Query** *Declaration changed (Breaking)*
-
-2.x: `public PhraseSuggestCollateDescriptor<T> Query(string script)`  
-5.x: `public PhraseSuggestCollateDescriptor<T> Query(Func<TemplateQueryDescriptor<T>, ITemplateQuery> selector)`  
-
-**public method Nest.PropertyName..ctor** *Declaration changed (Breaking)*
-
-2.x: `public  .ctor()`  
-5.x: `public  .ctor(string name)`  
-
-**public property Nest.PropertyName.Expression** *Declaration changed (Breaking)*
-
-2.x: `public Expression Expression { get; set; }`  
-5.x: `public Expression Expression { get; }`  
-
-**public property Nest.PropertyName.Name** *Declaration changed (Breaking)*
-
-2.x: `public string Name { get; set; }`  
-5.x: `public string Name { get; }`  
-
-**public property Nest.PropertyName.Property** *Declaration changed (Breaking)*
-
-2.x: `public PropertyInfo Property { get; set; }`  
-5.x: `public PropertyInfo Property { get; }`  
-
-**public class Nest.PropertyNameExtensions** *Visibility was changed from public to internal (Breaking)*
-
-2.x
-```csharp
-[ExtensionAttribute]
-public static class PropertyNameExtensions
-```
-
-5.x
-```csharp
-[ExtensionAttribute]
-internal static class PropertyNameExtensions
-```
-
-**public method Nest.PutMappingDescriptor&lt;T&gt;.Dynamic** *Declaration changed (Breaking)*
-
-2.x: `public PutMappingDescriptor<T> Dynamic(DynamicMapping dynamic)`  
-5.x: `public PutMappingDescriptor<T> Dynamic(Union<bool, DynamicMapping> dynamic)`  
-
-**public property Nest.PutMappingRequest.Dynamic** *Declaration changed (Breaking)*
-
-2.x: `public Nullable<DynamicMapping> Dynamic { get; set; }`  
-5.x: `public Union<bool, DynamicMapping> Dynamic { get; set; }`  
-
-**public property Nest.PutMappingRequest.Meta** *Declaration changed (Breaking)*
-
-2.x: `public FluentDictionary<string, object> Meta { get; set; }`  
-5.x: `public IDictionary<string, object> Meta { get; set; }`  
-
-**public property Nest.PutMappingRequest&lt;T&gt;.Dynamic** *Declaration changed (Breaking)*
-
-2.x: `public Nullable<DynamicMapping> Dynamic { get; set; }`  
-5.x: `public Union<bool, DynamicMapping> Dynamic { get; set; }`  
-
-**public property Nest.PutMappingRequest&lt;T&gt;.Meta** *Declaration changed (Breaking)*
-
-2.x: `public FluentDictionary<string, object> Meta { get; set; }`  
-5.x: `public IDictionary<string, object> Meta { get; set; }`  
-
-**public property Nest.PutWatchResponse.Id** *Declaration changed (Breaking)*
-
-2.x: `public Id Id { get; internal set; }`  
-5.x: `public string Id { get; internal set; }`  
-
-**public method Nest.Query&lt;T&gt;.Prefix** *Declaration changed (Breaking)*
-
-2.x: `public static QueryContainer Prefix(string field, string value, double? boost, Nullable<RewriteMultiTerm> rewrite, string name)`  
-5.x: `public static QueryContainer Prefix(Field field, string value, double? boost, Nullable<RewriteMultiTerm> rewrite, string name)`  
-
-**public method Nest.Query&lt;T&gt;.Term** *Declaration changed (Breaking)*
-
-2.x: `public static QueryContainer Term(string field, object value, double? boost, string name)`  
-5.x: `public static QueryContainer Term(Field field, object value, double? boost, string name)`  
-
-**public method Nest.Query&lt;T&gt;.Wildcard** *Declaration changed (Breaking)*
-
-2.x: `public static QueryContainer Wildcard(string field, string value, double? boost, Nullable<RewriteMultiTerm> rewrite, string name)`  
-5.x: `public static QueryContainer Wildcard(Field field, string value, double? boost, Nullable<RewriteMultiTerm> rewrite, string name)`  
-
-**public method Nest.QueryContainerDescriptor&lt;T&gt;.Prefix** *Declaration changed (Breaking)*
-
-2.x: `public QueryContainer Prefix(string field, string value, double? boost, Nullable<RewriteMultiTerm> rewrite, string name)`  
-5.x: `public QueryContainer Prefix(Field field, string value, double? boost, Nullable<RewriteMultiTerm> rewrite, string name)`  
-
-**public method Nest.QueryContainerDescriptor&lt;T&gt;.Term** *Declaration changed (Breaking)*
-
-2.x: `public QueryContainer Term(string field, object value, double? boost, string name)`  
-5.x: `public QueryContainer Term(Field field, object value, double? boost, string name)`  
-
-**public method Nest.QueryContainerDescriptor&lt;T&gt;.Wildcard** *Declaration changed (Breaking)*
-
-2.x: `public QueryContainer Wildcard(string field, string value, double? boost, Nullable<RewriteMultiTerm> rewrite, string name)`  
-5.x: `public QueryContainer Wildcard(Field field, string value, double? boost, Nullable<RewriteMultiTerm> rewrite, string name)`  
-
-**public method Nest.RangeAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*
-
-2.x: `public RangeAggregationDescriptor<T> Field(string field)`  
-5.x: `public RangeAggregationDescriptor<T> Field(Field field)`  
-
-**public method Nest.ReindexDescriptor&lt;T&gt;..ctor** *Declaration changed (Breaking)*
-
-2.x: `public  .ctor(IndexName from, IndexName to)`  
-5.x: `public  .ctor()`  
-
-**public method Nest.ReindexObservable&lt;T&gt;.Subscribe** *Declaration changed (Breaking)*
-
-2.x: `public IDisposable Subscribe(IObserver<IReindexResponse<T>> observer)`  
-5.x: `public IDisposable Subscribe(ReindexObserver<T> observer)`  
-
-**public method Nest.ReindexObserver&lt;T&gt;..ctor** *Declaration changed (Breaking)*
-
-2.x: `public  .ctor(Action<IReindexResponse<T>> onNext, Action<Exception> onError, Action completed)`  
-5.x: `public  .ctor(Action<IBulkAllResponse> onNext, Action<Exception> onError, Action onCompleted)`  
-
-**public method Nest.ReindexOnServerDescriptor.RequestsPerSecond** *Declaration changed (Breaking)*
-
-2.x: `public ReindexOnServerDescriptor RequestsPerSecond(Single requests_per_second)`  
-5.x: `public ReindexOnServerDescriptor RequestsPerSecond(long requests_per_second)`  
-
-**public property Nest.ReindexOnServerRequest.RequestsPerSecond** *Declaration changed (Breaking)*
-
-2.x: `public Single RequestsPerSecond { get; set; }`  
-5.x: `public long RequestsPerSecond { get; set; }`  
-
-**public property Nest.ReindexOnServerResponse.Retries** *Declaration changed (Breaking)*
-
-2.x: `public long Retries { get; internal set; }`  
-5.x: `public Retries Retries { get; internal set; }`  
-
-**public method Nest.ReindexRethrottleDescriptor.RequestsPerSecond** *Declaration changed (Breaking)*
-
-2.x: `public ReindexRethrottleDescriptor RequestsPerSecond(Single requests_per_second)`  
-5.x: `public ReindexRethrottleDescriptor RequestsPerSecond(long requests_per_second)`  
-
-**public property Nest.ReindexRethrottleRequest.RequestsPerSecond** *Declaration changed (Breaking)*
-
-2.x: `public Single RequestsPerSecond { get; set; }`  
-5.x: `public long RequestsPerSecond { get; set; }`  
-
-**public class Nest.ReindexRoutingJsonConverter** *Visibility was changed from public to internal (Breaking)*
-
-2.x: `public class ReindexRoutingJsonConverter : JsonConverter`  
-5.x: `internal class ReindexRoutingJsonConverter : JsonConverter`  
-
-**public property Nest.ReindexStatus.Retries** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("retries")]
-public long Retries { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("retries")]
-public Retries Retries { get; internal set; }
-```
-
-**public property Nest.ResponseBase.ApiCall** *Visibility was changed from public to protected (Breaking)*
-
-2.x: `public IApiCallDetails ApiCall { get; }`  
-5.x: `protected IApiCallDetails ApiCall { get; }`  
-
-**public method Nest.ReverseNestedAggregationDescriptor&lt;T&gt;.Path** *Declaration changed (Breaking)*
-
-2.x: `public ReverseNestedAggregationDescriptor<T> Path(string path)`  
-5.x: `public ReverseNestedAggregationDescriptor<T> Path(Field path)`  
-
-**public class Nest.ScoreFunctionJsonConverter** *Visibility was changed from public to internal (Breaking)*
-
-2.x: `public class ScoreFunctionJsonConverter : JsonConverter`  
-5.x: `internal class ScoreFunctionJsonConverter : JsonConverter`  
-
 **public enum Nest.ScoreMode** *Declaration changed (Breaking)*
 
 2.x
@@ -1696,46 +962,6 @@ public enum ScoreMode
 }
 ```
 
-**public class Nest.ScriptJsonConverter** *Visibility was changed from public to internal (Breaking)*
-
-2.x: `public class ScriptJsonConverter : JsonConverter`  
-5.x: `internal class ScriptJsonConverter : JsonConverter`  
-
-**public method Nest.SearchDescriptor&lt;T&gt;.Rescore** *Declaration changed (Breaking)*
-
-2.x: `public SearchDescriptor<T> Rescore(Func<RescoreDescriptor<T>, IRescore> rescoreSelector)`  
-5.x: `public SearchDescriptor<T> Rescore(Func<RescoringDescriptor<T>, IPromise<IList<IRescore>>> rescoreSelector)`  
-
-**public property Nest.SearchRequest.Rescore** *Declaration changed (Breaking)*
-
-2.x: `public IRescore Rescore { get; set; }`  
-5.x: `public IList<IRescore> Rescore { get; set; }`  
-
-**public property Nest.SearchRequest.Source** *Declaration changed (Breaking)*
-
-2.x: `public ISourceFilter Source { get; set; }`  
-5.x: `public Union<bool, ISourceFilter> Source { get; set; }`  
-
-**public property Nest.SearchRequest&lt;T&gt;.Rescore** *Declaration changed (Breaking)*
-
-2.x: `public IRescore Rescore { get; set; }`  
-5.x: `public IList<IRescore> Rescore { get; set; }`  
-
-**public property Nest.SearchRequest&lt;T&gt;.Source** *Declaration changed (Breaking)*
-
-2.x: `public ISourceFilter Source { get; set; }`  
-5.x: `public Union<bool, ISourceFilter> Source { get; set; }`  
-
-**public property Nest.SearchResponse&lt;T&gt;.ApiCall** *Visibility was changed from public to protected (Breaking)*
-
-2.x: `public IApiCallDetails ApiCall { get; }`  
-5.x: `protected IApiCallDetails ApiCall { get; }`  
-
-**public method Nest.SignificantTermsAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*
-
-2.x: `public SignificantTermsAggregationDescriptor<T> Field(string field)`  
-5.x: `public SignificantTermsAggregationDescriptor<T> Field(Field field)`  
-
 **public enum Nest.SimilarityOption** *Declaration changed (Breaking)*
 
 2.x
@@ -1757,16 +983,6 @@ public enum SimilarityOption
      BM25 = 1
 }
 ```
-
-**public class Nest.SimpleQueryStringFlagsJsonConverter** *Visibility was changed from public to internal (Breaking)*
-
-2.x: `public class SimpleQueryStringFlagsJsonConverter : JsonConverter`  
-5.x: `internal class SimpleQueryStringFlagsJsonConverter : JsonConverter`  
-
-**public class Nest.SourceFilterJsonConverter** *Visibility was changed from public to internal (Breaking)*
-
-2.x: `public class SourceFilterJsonConverter : JsonConverter`  
-5.x: `internal class SourceFilterJsonConverter : JsonConverter`  
 
 **public enum Nest.StringFielddataFormat** *Declaration changed (Breaking)*
 
@@ -1791,79 +1007,159 @@ public enum StringFielddataFormat
 }
 ```
 
-**public property Nest.StringProperty.Norms** *Declaration changed (Breaking)*
 
-2.x: `public INorms Norms { get; set; }`  
-5.x: `public bool? Norms { get; set; }`  
 
-**public method Nest.StringPropertyDescriptor&lt;T&gt;.Norms** *Declaration changed (Breaking)*
+### Uncategorized
 
-2.x: `public StringPropertyDescriptor<T> Norms(Func<NormsDescriptor, INorms> selector)`  
-5.x: `public StringPropertyDescriptor<T> Norms(bool enabled = True)`  
 
-**public method Nest.StringPropertyDescriptor&lt;T&gt;.PositionIncrementGap** *Declaration changed (Breaking)*
+**public method Nest.DeleteByQueryDescriptor&lt;T&gt;.Routing** *Declaration changed (Breaking)*
 
-2.x: `public StringPropertyDescriptor<T> PositionIncrementGap(int? positionIncrementGap)`  
-5.x: `public StringPropertyDescriptor<T> PositionIncrementGap(int positionIncrementGap)`  
+2.x: `public DeleteByQueryDescriptor<T> Routing(string routing)`  
+5.x: `public DeleteByQueryDescriptor<T> Routing(String[] routing)`  
 
-**public method Nest.TermsAggregationDescriptor&lt;T&gt;.Field** *Declaration changed (Breaking)*
+**public property Nest.DeleteByQueryRequest.Routing** *Declaration changed (Breaking)*
 
-2.x: `public TermsAggregationDescriptor<T> Field(string field)`  
-5.x: `public TermsAggregationDescriptor<T> Field(Field field)`  
+2.x: `public string Routing { get; set; }`  
+5.x: `public String[] Routing { get; set; }`  
 
-**public property Nest.TermVectorsResponse.Took** *Declaration changed (Breaking)*
+**public property Nest.DeleteByQueryRequest&lt;T&gt;.Routing** *Declaration changed (Breaking)*
+
+2.x: `public string Routing { get; set; }`  
+5.x: `public String[] Routing { get; set; }`  
+
+**public method Nest.Field..ctor** *Declaration changed (Breaking)*
+
+2.x: `public  .ctor()`  
+5.x: `public  .ctor(string name, double? boost)`  
+
+**public method Nest.Field.And&lt;T&gt;** *Declaration changed (Breaking)*
+
+2.x: `public Fields And<T>(Expression<Func<T, object>> field)`  
+5.x: `public Fields And<T>(Expression<Func<T, object>> field, double? boost)`  
+
+**public property Nest.Field.Expression** *Declaration changed (Breaking)*
+
+2.x: `public Expression Expression { get; set; }`  
+5.x: `public Expression Expression { get; }`  
+
+**public property Nest.Field.Name** *Declaration changed (Breaking)*
+
+2.x: `public string Name { get; set; }`  
+5.x: `public string Name { get; }`  
+
+**public property Nest.Field.Property** *Declaration changed (Breaking)*
+
+2.x: `public PropertyInfo Property { get; set; }`  
+5.x: `public PropertyInfo Property { get; }`  
+
+**public class Nest.GeoShapeQueryDescriptorBase&lt;TDescriptor, TInterface, T&gt;** *Declaration changed (Breaking)*
+
+2.x: `public abstract class GeoShapeQueryDescriptorBase<TDescriptor, TInterface, T> : FieldNameQueryDescriptorBase<TDescriptor, TInterface, T>, IDescriptor, IQuery, IFieldNameQuery, IGeoShapeQuery where TDescriptor : FieldNameQueryDescriptorBase<TDescriptor, TInterface, T>, TInterface where TInterface : class, IGeoShapeQuery`  
+5.x: `public abstract class GeoShapeQueryDescriptorBase<TDescriptor, TInterface, T> : FieldNameQueryDescriptorBase<TDescriptor, TInterface, T>, IDescriptor, IQuery, IFieldNameQuery, IGeoShapeQuery where TDescriptor : GeoShapeQueryDescriptorBase<TDescriptor, TInterface, T>, TInterface where TInterface : class, IGeoShapeQuery`  
+
+**public property Nest.HighlightField.Type** *Declaration changed (Breaking)*
+
+2.x: `public Nullable<HighlighterType> Type { get; set; }`  
+5.x: `public Union<HighlighterType, string> Type { get; set; }`  
+
+**public method Nest.HighlightFieldDescriptor&lt;T&gt;.PostTags** *Declaration changed (Breaking)*
+
+2.x: `public HighlightFieldDescriptor<T> PostTags(string postTags)`  
+5.x: `public HighlightFieldDescriptor<T> PostTags(String[] postTags)`  
+
+**public method Nest.HighlightFieldDescriptor&lt;T&gt;.PreTags** *Declaration changed (Breaking)*
+
+2.x: `public HighlightFieldDescriptor<T> PreTags(string preTags)`  
+5.x: `public HighlightFieldDescriptor<T> PreTags(String[] preTags)`  
+
+**public property Nest.IHighlightField.Type** *Declaration changed (Breaking)*
 
 2.x
 ```csharp
-[ObsoleteAttribute("returned value may be larger than int. In this case, value will be int.MaxValue and TookAsLong field can be checked. Took is long in 5.0.0")]
-[JsonIgnoreAttribute]
-public int Took { get; }
+public Nullable<HighlighterType> Type { get; set; }
 ```
 
 5.x
 ```csharp
-[JsonPropertyAttribute("took")]
-public long Took { get; internal set; }
+[JsonPropertyAttribute("type")]
+public Union<HighlighterType, string> Type { get; set; }
 ```
+
+**public property Nest.IndexActionResultIndexResponse.Result** *Declaration changed (Breaking)*
+
+2.x
+```csharp
+[JsonPropertyAttribute("result")]
+public string Result { get; set; }
+```
+
+5.x
+```csharp
+[JsonPropertyAttribute("result")]
+public Result Result { get; set; }
+```
+
+
+
+**public method Nest.PropertyName..ctor** *Declaration changed (Breaking)*
+
+2.x: `public  .ctor()`  
+5.x: `public  .ctor(string name)`  
+
+**public property Nest.PropertyName.Expression** *Declaration changed (Breaking)*
+
+2.x: `public Expression Expression { get; set; }`  
+5.x: `public Expression Expression { get; }`  
+
+**public property Nest.PropertyName.Name** *Declaration changed (Breaking)*
+
+2.x: `public string Name { get; set; }`  
+5.x: `public string Name { get; }`  
+
+**public property Nest.PropertyName.Property** *Declaration changed (Breaking)*
+
+2.x: `public PropertyInfo Property { get; set; }`  
+5.x: `public PropertyInfo Property { get; }`  
+
+**public method Nest.ReindexDescriptor&lt;T&gt;..ctor** *Declaration changed (Breaking)*
+
+2.x: `public  .ctor(IndexName from, IndexName to)`  
+5.x: `public  .ctor()`  
+
+**public method Nest.ReindexObservable&lt;T&gt;.Subscribe** *Declaration changed (Breaking)*
+
+2.x: `public IDisposable Subscribe(IObserver<IReindexResponse<T>> observer)`  
+5.x: `public IDisposable Subscribe(ReindexObserver<T> observer)`  
+
+**public method Nest.ReindexObserver&lt;T&gt;..ctor** *Declaration changed (Breaking)*
+
+2.x: `public  .ctor(Action<IReindexResponse<T>> onNext, Action<Exception> onError, Action completed)`  
+5.x: `public  .ctor(Action<IBulkAllResponse> onNext, Action<Exception> onError, Action onCompleted)`  
+
+**public method Nest.ReindexOnServerDescriptor.RequestsPerSecond** *Declaration changed (Breaking)*
+
+2.x: `public ReindexOnServerDescriptor RequestsPerSecond(Single requests_per_second)`  
+5.x: `public ReindexOnServerDescriptor RequestsPerSecond(long requests_per_second)`  
+
+**public property Nest.ReindexOnServerRequest.RequestsPerSecond** *Declaration changed (Breaking)*
+
+2.x: `public Single RequestsPerSecond { get; set; }`  
+5.x: `public long RequestsPerSecond { get; set; }`  
+
+**public method Nest.ReindexRethrottleDescriptor.RequestsPerSecond** *Declaration changed (Breaking)*
+
+2.x: `public ReindexRethrottleDescriptor RequestsPerSecond(Single requests_per_second)`  
+5.x: `public ReindexRethrottleDescriptor RequestsPerSecond(long requests_per_second)`  
+
+**public property Nest.ReindexRethrottleRequest.RequestsPerSecond** *Declaration changed (Breaking)*
+
+2.x: `public Single RequestsPerSecond { get; set; }`  
+5.x: `public long RequestsPerSecond { get; set; }`  
 
 **public property Nest.Time.Milliseconds** *Declaration changed (Breaking)*
 
 2.x: `public double Milliseconds { get; private set; }`  
 5.x: `public double? Milliseconds { get; private set; }`  
-
-**public property Nest.TopHitsAggregation.Source** *Declaration changed (Breaking)*
-
-2.x: `public ISourceFilter Source { get; set; }`  
-5.x: `public Union<bool, ISourceFilter> Source { get; set; }`  
-
-**public property Nest.TypeMapping.Dynamic** *Declaration changed (Breaking)*
-
-2.x: `public Nullable<DynamicMapping> Dynamic { get; set; }`  
-5.x: `public Union<bool, DynamicMapping> Dynamic { get; set; }`  
-
-**public property Nest.TypeMapping.Meta** *Declaration changed (Breaking)*
-
-2.x: `public FluentDictionary<string, object> Meta { get; set; }`  
-5.x: `public IDictionary<string, object> Meta { get; set; }`  
-
-**public method Nest.TypeMappingDescriptor&lt;T&gt;.Dynamic** *Declaration changed (Breaking)*
-
-2.x: `public TypeMappingDescriptor<T> Dynamic(DynamicMapping dynamic)`  
-5.x: `public TypeMappingDescriptor<T> Dynamic(Union<bool, DynamicMapping> dynamic)`  
-
-**public class Nest.TypeNameExtensions** *Visibility was changed from public to internal (Breaking)*
-
-2.x
-```csharp
-[ExtensionAttribute]
-public static class TypeNameExtensions
-```
-
-5.x
-```csharp
-[ExtensionAttribute]
-internal static class TypeNameExtensions
-```
 
 **public method Nest.UpdateByQueryDescriptor&lt;T&gt;.RequestsPerSecond** *Declaration changed (Breaking)*
 
@@ -1879,11 +1175,6 @@ internal static class TypeNameExtensions
 
 2.x: `public Single RequestsPerSecond { get; set; }`  
 5.x: `public long RequestsPerSecond { get; set; }`  
-
-**public property Nest.UpdateByQueryResponse.Retries** *Declaration changed (Breaking)*
-
-2.x: `public long Retries { get; internal set; }`  
-5.x: `public Retries Retries { get; internal set; }`  
 
 **public property Nest.Watch.Actions** *Declaration changed (Breaking)*
 
@@ -1901,51 +1192,9 @@ public IDictionary<string, IAction> Actions { get; internal set; }
 public Actions Actions { get; internal set; }
 ```
 
-**public property Nest.WatchRecord.WatchId** *Declaration changed (Breaking)*
+# Read only data types on responses.
 
-2.x
-```csharp
-[JsonPropertyAttribute("watch_id")]
-public Id WatchId { get; set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("watch_id")]
-public string WatchId { get; set; }
-```
-
-**public property Nest.WatchRecordQueuedStats.WatchId** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("watch_id")]
-public Id WatchId { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("watch_id")]
-public string WatchId { get; internal set; }
-```
-
-**public property Nest.WatchRecordQueuedStats.WatchRecordId** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[JsonPropertyAttribute("watch_record_id")]
-public Id WatchRecordId { get; internal set; }
-```
-
-5.x
-```csharp
-[JsonPropertyAttribute("watch_record_id")]
-public string WatchRecordId { get; internal set; }
-```
-
-  
-
-#ReadOnlyTypeChange
+Responses now favor `IReadOnlyDictionary` and `IReadOnlyCollection` which are initialized as empty.
 
 ##Now IReadOnlyDictionary
 **public property Nest.ActivationStatus.Actions**  
@@ -2131,6 +1380,10 @@ public string WatchRecordId { get; internal set; }
 **public property Nest.WatchRecord.Messages**  
 
 #CancellationToken
+
+With NEST 2.x you had to pass cancellation tokens as part of the `RequestConfiguration` we now bumped these to the methods themselves
+on `IElasticClient` so its more discoverable and follows the usual C# patterns. This was omitted in `1.x` and `2.x` to try and keep backwards compatibility but in the long run this is a change for the better.
+
 **Nest.BulkAllObservable&lt;T&gt;..ctor**  
 **Nest.DeleteManyExtensions.DeleteManyAsync&lt;T&gt;**  
 **Nest.ElasticClient.AcknowledgeWatchAsync**  
@@ -2780,34 +2033,6 @@ public DatePropertyDescriptor<T> NumericResolution(NumericResolutionUnit unit)
 public DatePropertyDescriptor<T> PrecisionStep(int precisionStep)
 ```
 
-**public method Nest.ElasticClient.GetAliases** *Removed (Breaking)*
-
-```csharp
-[ObsoleteAttribute("Deprecated since 1.0.0, will be removed in 5.0.0. Use GetAlias which accepts multiple aliases and indices")]
-public IGetAliasesResponse GetAliases(IGetAliasesRequest request)
-```
-
-**public method Nest.ElasticClient.GetAliases** *Removed (Breaking)*
-
-```csharp
-[ObsoleteAttribute("Deprecated since 1.0.0, will be removed in 5.0.0. Use GetAlias which accepts multiple aliases and indices")]
-public IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, IGetAliasesRequest> selector)
-```
-
-**public method Nest.ElasticClient.GetAliasesAsync** *Removed (Breaking)*
-
-```csharp
-[ObsoleteAttribute("Deprecated since 1.0.0, will be removed in 5.0.0. Use GetAlias which accepts multiple aliases and indices")]
-public Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest request)
-```
-
-**public method Nest.ElasticClient.GetAliasesAsync** *Removed (Breaking)*
-
-```csharp
-[ObsoleteAttribute("Deprecated since 1.0.0, will be removed in 5.0.0. Use GetAlias which accepts multiple aliases and indices")]
-public Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, IGetAliasesRequest> selector)
-```
-
 **public property Nest.ElasticsearchPropertyAttributeBase.CustomSimilarity** *Removed (Breaking)*
 
 ```csharp
@@ -3162,34 +2387,6 @@ public Nullable<NumericResolutionUnit> NumericResolution { get; set; }
 [JsonPropertyAttribute("precision_step")]
 [ObsoleteAttribute("Removed in 5.0.0")]
 public int? PrecisionStep { get; set; }
-```
-
-**public method Nest.IElasticClient.GetAliases** *Removed (Breaking)*
-
-```csharp
-[ObsoleteAttribute("Deprecated since 1.0.0, will be removed in 5.0.0. Use GetAlias which accepts multiple aliases and indices")]
-public IGetAliasesResponse GetAliases(IGetAliasesRequest request)
-```
-
-**public method Nest.IElasticClient.GetAliases** *Removed (Breaking)*
-
-```csharp
-[ObsoleteAttribute("Deprecated since 1.0.0, will be removed in 5.0.0. Use GetAlias which accepts multiple aliases and indices")]
-public IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, IGetAliasesRequest> selector)
-```
-
-**public method Nest.IElasticClient.GetAliasesAsync** *Removed (Breaking)*
-
-```csharp
-[ObsoleteAttribute("Deprecated since 1.0.0, will be removed in 5.0.0. Use GetAlias which accepts multiple aliases and indices")]
-public Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest request)
-```
-
-**public method Nest.IElasticClient.GetAliasesAsync** *Removed (Breaking)*
-
-```csharp
-[ObsoleteAttribute("Deprecated since 1.0.0, will be removed in 5.0.0. Use GetAlias which accepts multiple aliases and indices")]
-public Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, IGetAliasesRequest> selector)
 ```
 
 **public property Nest.IEmailAction.AttachData** *Removed (Breaking)*
@@ -3798,7 +2995,6 @@ This could have happened because of a rename.
 **public property Nest.BulkIndexByScrollFailure.Reason** *Removed (Breaking)*  
 **public property Nest.BulkIndexByScrollFailure.Shard** *Removed (Breaking)*  
 **public property Nest.BulkRequest.Consistency** *Removed (Breaking)*  
-**public property Nest.BulkResponse.TookAsLong** *Removed (Breaking)*  
 **public method Nest.BulkUpdateDescriptor&lt;TDocument, TPartialDocument&gt;.Lang** *Removed (Breaking)*  
 **public method Nest.BulkUpdateDescriptor&lt;TDocument, TPartialDocument&gt;.Params** *Removed (Breaking)*  
 **public property Nest.BulkUpdateOperation&lt;TDocument, TPartialDocument&gt;.InferFrom** *Removed (Breaking)*  
@@ -3905,9 +3101,6 @@ This could have happened because of a rename.
 **public method Nest.Field.Create** *Removed (Breaking)*  
 **public class Nest.GeoLocationSuggestContext** *Removed (Breaking)*  
 **public class Nest.GeoLocationSuggestContextDescriptor&lt;T&gt;** *Removed (Breaking)*  
-**public class Nest.GetAliasesDescriptor** *Removed (Breaking)*  
-**public class Nest.GetAliasesRequest** *Removed (Breaking)*  
-**public class Nest.GetAliasesResponse** *Removed (Breaking)*  
 **public method Nest.GetDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*  
 **public method Nest.GetDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*  
 **public property Nest.GetMappingResponse.IndexTypeMappings** *Removed (Breaking)*  
@@ -3936,7 +3129,6 @@ This could have happened because of a rename.
 **public property Nest.IAttachmentProperty.FileField** *Removed (Breaking)*  
 **public property Nest.IBoolQuery.CreatedByBoolDsl** *Removed (Breaking)*  
 **public property Nest.IBulkAllRequest&lt;T&gt;.Consistency** *Removed (Breaking)*  
-**public property Nest.IBulkResponse.TookAsLong** *Removed (Breaking)*  
 **public property Nest.IBulkUpdateOperation&lt;TDocument, TPartialDocument&gt;.InferFrom** *Removed (Breaking)*  
 **public property Nest.ICategorySuggestContext.Default** *Removed (Breaking)*  
 **public property Nest.ICompletionProperty.Context** *Removed (Breaking)*  
@@ -3986,8 +3178,6 @@ This could have happened because of a rename.
 **public method Nest.IElasticClient.WatcherInfoAsync** *Removed (Breaking)*  
 **public method Nest.IElasticClient.WatcherInfoAsync** *Removed (Breaking)*  
 **public interface Nest.IGeoLocationSuggestContext** *Removed (Breaking)*  
-**public interface Nest.IGetAliasesRequest** *Removed (Breaking)*  
-**public interface Nest.IGetAliasesResponse** *Removed (Breaking)*  
 **public property Nest.IGetMappingResponse.IndexTypeMappings** *Removed (Breaking)*  
 **public interface Nest.IGetWarmerRequest** *Removed (Breaking)*  
 **public interface Nest.IGetWarmerResponse** *Removed (Breaking)*  
@@ -4013,11 +3203,9 @@ This could have happened because of a rename.
 **public method Nest.Infer.Fields&lt;T&gt;** *Removed (Breaking)*  
 **public class Nest.InnerHitsContainer** *Removed (Breaking)*  
 **public class Nest.InnerHitsContainerDescriptor&lt;T&gt;** *Removed (Breaking)*  
-**public interface Nest.INorms** *Removed (Breaking)*  
 **public interface Nest.IOptimizeRequest** *Removed (Breaking)*  
 **public interface Nest.IOptimizeResponse** *Removed (Breaking)*  
 **public interface Nest.IPathInnerHit** *Removed (Breaking)*  
-**public property Nest.IPercolateCountResponse.TookAsLong** *Removed (Breaking)*  
 **public property Nest.IProperty.CopyTo** *Removed (Breaking)*    
 **public property Nest.IProperty.DocValues** *Removed (Breaking)*  
 **public property Nest.IProperty.Fields** *Removed (Breaking)*  
@@ -4034,11 +3222,7 @@ This could have happened because of a rename.
 **public property Nest.ISearchRequest.Fields** *Removed (Breaking)*    
 **public property Nest.ISearchRequest.InnerHits** *Removed (Breaking)*  
 **public property Nest.ISearchResponse&lt;T&gt;.Highlights** *Removed (Breaking)*  
-**public property Nest.ISearchResponse&lt;T&gt;.TookAsLong** *Removed (Breaking)*  
 **public property Nest.ISearchTemplateRequest.Template** *Removed (Breaking)*
-**public property Nest.ISourceFilter.Disable** *Removed (Breaking)*  
-**public property Nest.ISourceFilter.Exclude** *Removed (Breaking)*  
-**public property Nest.ISourceFilter.Include** *Removed (Breaking)*    
 **public interface Nest.ISuggestContextMapping** *Removed (Breaking)*  
 **public property Nest.ISuggester.ShardSize** *Removed (Breaking)*  
 **public property Nest.ISuggester.Text** *Removed (Breaking)*  
@@ -4055,7 +3239,6 @@ This could have happened because of a rename.
 **public property Nest.ITermVectorsResponse.Id** *Removed (Breaking)*    
 **public property Nest.ITermVectorsResponse.Index** *Removed (Breaking)*  
 **public property Nest.ITermVectorsResponse.TermVectors** *Removed (Breaking)*  
-**public property Nest.ITermVectorsResponse.TookAsLong** *Removed (Breaking)*  
 **public property Nest.ITermVectorsResponse.Type** *Removed (Breaking)*  
 **public property Nest.ITermVectorsResponse.Version** *Removed (Breaking)*  
 **public property Nest.ITranslogFlushSettings.ThresholdOps** *Removed (Breaking)*  
@@ -4071,7 +3254,6 @@ This could have happened because of a rename.
 **public method Nest.MultiGetOperationDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*  
 **public method Nest.MultiGetOperationDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*  
 **public property Nest.MultiGetRequest.Fields** *Removed (Breaking)*  
-**public class Nest.MultiRescore** *Removed (Breaking)*  
 **public property Nest.MultiTermVectorOperation&lt;T&gt;.Fields** *Removed (Breaking)*  
 **public method Nest.MultiTermVectorOperationDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*  
 **public method Nest.MultiTermVectorOperationDescriptor&lt;T&gt;.Fields** *Removed (Breaking)*  
@@ -4081,9 +3263,6 @@ This could have happened because of a rename.
 **public property Nest.NodeInfo.Hostname** *Removed (Breaking)*  
 **public property Nest.NodeInfo.HttpAddress** *Removed (Breaking)*  
 **public property Nest.NodeProcessInfo.RefreshInterval** *Removed (Breaking)*  
-**public class Nest.Norms** *Removed (Breaking)*  
-**public class Nest.NormsDescriptor** *Removed (Breaking)*  
-**public enum Nest.NormsLoading** *Removed (Breaking)*  
 **public enum Nest.NumericResolutionUnit** *Removed (Breaking)*  
 **public property Nest.ObjectAttribute.Dynamic** *Removed (Breaking)*  
 **public property Nest.OperatingSystemStats.CpuPercent** *Removed (Breaking)*  
@@ -4095,7 +3274,6 @@ This could have happened because of a rename.
 **public class Nest.PathInnerHit** *Removed (Breaking)*  
 **public class Nest.PathInnerHit&lt;T&gt;** *Removed (Breaking)*  
 **public class Nest.PathInnerHitDescriptor&lt;T&gt;** *Removed (Breaking)*  
-**public property Nest.PercolateCountResponse.TookAsLong** *Removed (Breaking)*  
 **public class Nest.PercolateStats** *Removed (Breaking)*  
 **public property Nest.PropertyBase.CopyTo** *Removed (Breaking)*  
 **public property Nest.PropertyBase.DocValues** *Removed (Breaking)*  
@@ -4142,7 +3320,6 @@ This could have happened because of a rename.
 **public property Nest.ReindexOnServerRequest.Consistency** *Removed (Breaking)*  
 **public class Nest.ReindexRequest** *Removed (Breaking)*  
 **public class Nest.ReindexResponse&lt;T&gt;** *Removed (Breaking)*  
-**public class Nest.RescoreConverter** *Removed (Breaking)*  
 **public class Nest.Role** *Removed (Breaking)*  
 **public property Nest.RoutingShard.Version** *Removed (Breaking)*  
 **public property Nest.SamplerAggregation.Field** *Removed (Breaking)*  
@@ -4158,7 +3335,6 @@ This could have happened because of a rename.
 **public property Nest.SearchRequest.InnerHits** *Removed (Breaking)*    
 **public property Nest.SearchRequest&lt;T&gt;.Fields** *Removed (Breaking)*  
 **public property Nest.SearchRequest&lt;T&gt;.InnerHits** *Removed (Breaking)*  
-**public property Nest.SearchResponse&lt;T&gt;.TookAsLong** *Removed (Breaking)*  
 **public property Nest.SearchStats.FetchTime** *Removed (Breaking)*  
 **public property Nest.SearchStats.QueryTime** *Removed (Breaking)*  
 **public property Nest.SearchStats.ScrollTime** *Removed (Breaking)*  
@@ -4168,12 +3344,6 @@ This could have happened because of a rename.
 **public class Nest.ShieldNode** *Removed (Breaking)*  
 **public class Nest.ShieldNodeStatus** *Removed (Breaking)*  
 **public property Nest.Snapshot.ShardFailures** *Removed (Breaking)*  
-**public property Nest.SourceFilter.Disable** *Removed (Breaking)*  
-**public property Nest.SourceFilter.Exclude** *Removed (Breaking)*  
-**public property Nest.SourceFilter.Include** *Removed (Breaking)*  
-**public method Nest.SourceFilterDescriptor&lt;T&gt;.Disable** *Removed (Breaking)*  
-**public method Nest.SourceFilterDescriptor&lt;T&gt;.Exclude** *Removed (Breaking)*  
-**public method Nest.SourceFilterDescriptor&lt;T&gt;.Include** *Removed (Breaking)*  
 **public class Nest.Suggest** *Removed (Breaking)*  
 **public class Nest.SuggestContextMapping** *Removed (Breaking)*  
 **public class Nest.SuggestContextMappingDescriptor&lt;T&gt;** *Removed (Breaking)*  
@@ -4198,7 +3368,6 @@ This could have happened because of a rename.
 **public property Nest.TermSuggester.PrefixLen** *Removed (Breaking)*  
 **public method Nest.TermVectorsDescriptor&lt;TDocument&gt;.Dfs** *Removed (Breaking)*  
 **public property Nest.TermVectorsRequest&lt;TDocument&gt;.Dfs** *Removed (Breaking)*  
-**public property Nest.TermVectorsResponse.TookAsLong** *Removed (Breaking)*  
 **public property Nest.TranslogFlushSettings.ThresholdOps** *Removed (Breaking)*    
 **public method Nest.TranslogFlushSettingsDescriptor.ThresholdOps** *Removed (Breaking)*
 **public property Nest.TranslogSettings.FileSystemType** *Removed (Breaking)*  
