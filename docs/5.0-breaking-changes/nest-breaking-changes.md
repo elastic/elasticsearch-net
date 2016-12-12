@@ -9354,3017 +9354,559 @@ public IReadOnlyDictionary<string, ActionStatus> Actions { get; set; }
 ```
 
 #CancellationToken
-**public method Nest.BulkAllObservable&lt;T&gt;..ctor** *Declaration changed (Breaking)*
-
-2.x: `public  .ctor(IElasticClient client, IConnectionSettingsValues connectionSettings, IBulkAllRequest<T> partionedBulkRequest, CancellationToken cancellationToken)`  
-5.x: `public  .ctor(IElasticClient client, IBulkAllRequest<T> partionedBulkRequest, CancellationToken cancellationToken)`  
-
-**public method Nest.DeleteManyExtensions.DeleteManyAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[ExtensionAttribute]
-public static Task<IBulkResponse> DeleteManyAsync<T>(IElasticClient client, IEnumerable<T> objects, string index, string type)
-```
-
-5.x
-```csharp
-[ExtensionAttribute]
-public static Task<IBulkResponse> DeleteManyAsync<T>(IElasticClient client, IEnumerable<T> objects, IndexName index, TypeName type, CancellationToken cancellationToken)
-```
-
-**public method Nest.ElasticClient.AcknowledgeWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(IAcknowledgeWatchRequest request)`  
-5.x: `public Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(Id id, Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.AcknowledgeWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(Id id, Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector)`  
-5.x: `public Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(IAcknowledgeWatchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ActivateWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IActivateWatchResponse> ActivateWatchAsync(IActivateWatchRequest request)`  
-5.x: `public Task<IActivateWatchResponse> ActivateWatchAsync(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ActivateWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IActivateWatchResponse> ActivateWatchAsync(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector)`  
-5.x: `public Task<IActivateWatchResponse> ActivateWatchAsync(IActivateWatchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.AliasAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IBulkAliasResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector)`  
-5.x: `public Task<IBulkAliasResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.AliasAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IBulkAliasResponse> AliasAsync(IBulkAliasRequest request)`  
-5.x: `public Task<IBulkAliasResponse> AliasAsync(IBulkAliasRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.AliasExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest request)`  
-5.x: `public Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.AliasExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> AliasExistsAsync(Func<AliasExistsDescriptor, IAliasExistsRequest> selector)`  
-5.x: `public Task<IExistsResponse> AliasExistsAsync(Func<AliasExistsDescriptor, IAliasExistsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.AnalyzeAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request)`  
-5.x: `public Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.AnalyzeAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, IAnalyzeRequest> selector)`  
-5.x: `public Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, IAnalyzeRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.AuthenticateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IAuthenticateResponse> AuthenticateAsync(IAuthenticateRequest request)`  
-5.x: `public Task<IAuthenticateResponse> AuthenticateAsync(IAuthenticateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.AuthenticateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IAuthenticateResponse> AuthenticateAsync(Func<AuthenticateDescriptor, IAuthenticateRequest> selector)`  
-5.x: `public Task<IAuthenticateResponse> AuthenticateAsync(Func<AuthenticateDescriptor, IAuthenticateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.BulkAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector)`  
-5.x: `public Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.BulkAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IBulkResponse> BulkAsync(IBulkRequest request)`  
-5.x: `public Task<IBulkResponse> BulkAsync(IBulkRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatAliasesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(ICatAliasesRequest request)`  
-5.x: `public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(ICatAliasesRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatAliasesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(Func<CatAliasesDescriptor, ICatAliasesRequest> selector)`  
-5.x: `public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(Func<CatAliasesDescriptor, ICatAliasesRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatAllocationAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(ICatAllocationRequest request)`  
-5.x: `public Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(ICatAllocationRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatAllocationAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(Func<CatAllocationDescriptor, ICatAllocationRequest> selector)`  
-5.x: `public Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(Func<CatAllocationDescriptor, ICatAllocationRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatCountAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatCountRecord>> CatCountAsync(ICatCountRequest request)`  
-5.x: `public Task<ICatResponse<CatCountRecord>> CatCountAsync(ICatCountRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatCountAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatCountRecord>> CatCountAsync(Func<CatCountDescriptor, ICatCountRequest> selector)`  
-5.x: `public Task<ICatResponse<CatCountRecord>> CatCountAsync(Func<CatCountDescriptor, ICatCountRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatFielddataAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(ICatFielddataRequest request)`  
-5.x: `public Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(ICatFielddataRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatFielddataAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(Func<CatFielddataDescriptor, ICatFielddataRequest> selector)`  
-5.x: `public Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(Func<CatFielddataDescriptor, ICatFielddataRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatHealthAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(ICatHealthRequest request)`  
-5.x: `public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(ICatHealthRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatHealthAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(Func<CatHealthDescriptor, ICatHealthRequest> selector)`  
-5.x: `public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(Func<CatHealthDescriptor, ICatHealthRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatHelpAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(ICatHelpRequest request)`  
-5.x: `public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(ICatHelpRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatHelpAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(Func<CatHelpDescriptor, ICatHelpRequest> selector)`  
-5.x: `public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(Func<CatHelpDescriptor, ICatHelpRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatIndicesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(ICatIndicesRequest request)`  
-5.x: `public Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(ICatIndicesRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatIndicesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(Func<CatIndicesDescriptor, ICatIndicesRequest> selector)`  
-5.x: `public Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(Func<CatIndicesDescriptor, ICatIndicesRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatMasterAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(ICatMasterRequest request)`  
-5.x: `public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(ICatMasterRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatMasterAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(Func<CatMasterDescriptor, ICatMasterRequest> selector)`  
-5.x: `public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(Func<CatMasterDescriptor, ICatMasterRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatNodeAttributesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(ICatNodeAttributesRequest request)`  
-5.x: `public Task<ICatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(ICatNodeAttributesRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatNodeAttributesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(Func<CatNodeAttributesDescriptor, ICatNodeAttributesRequest> selector)`  
-5.x: `public Task<ICatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(Func<CatNodeAttributesDescriptor, ICatNodeAttributesRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatNodesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatNodesRecord>> CatNodesAsync(ICatNodesRequest request)`  
-5.x: `public Task<ICatResponse<CatNodesRecord>> CatNodesAsync(ICatNodesRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatNodesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatNodesRecord>> CatNodesAsync(Func<CatNodesDescriptor, ICatNodesRequest> selector)`  
-5.x: `public Task<ICatResponse<CatNodesRecord>> CatNodesAsync(Func<CatNodesDescriptor, ICatNodesRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatPendingTasksAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(ICatPendingTasksRequest request)`  
-5.x: `public Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(ICatPendingTasksRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatPendingTasksAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector)`  
-5.x: `public Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatPluginsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(ICatPluginsRequest request)`  
-5.x: `public Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(ICatPluginsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatPluginsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(Func<CatPluginsDescriptor, ICatPluginsRequest> selector)`  
-5.x: `public Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(Func<CatPluginsDescriptor, ICatPluginsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatRecoveryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(ICatRecoveryRequest request)`  
-5.x: `public Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(ICatRecoveryRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatRecoveryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(Func<CatRecoveryDescriptor, ICatRecoveryRequest> selector)`  
-5.x: `public Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(Func<CatRecoveryDescriptor, ICatRecoveryRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatRepositoriesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(ICatRepositoriesRequest request)`  
-5.x: `public Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(ICatRepositoriesRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatRepositoriesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(Func<CatRepositoriesDescriptor, ICatRepositoriesRequest> selector)`  
-5.x: `public Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(Func<CatRepositoriesDescriptor, ICatRepositoriesRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatSegmentsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(ICatSegmentsRequest request)`  
-5.x: `public Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(ICatSegmentsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatSegmentsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(Func<CatSegmentsDescriptor, ICatSegmentsRequest> selector)`  
-5.x: `public Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(Func<CatSegmentsDescriptor, ICatSegmentsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatShardsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatShardsRecord>> CatShardsAsync(ICatShardsRequest request)`  
-5.x: `public Task<ICatResponse<CatShardsRecord>> CatShardsAsync(ICatShardsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatShardsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatShardsRecord>> CatShardsAsync(Func<CatShardsDescriptor, ICatShardsRequest> selector)`  
-5.x: `public Task<ICatResponse<CatShardsRecord>> CatShardsAsync(Func<CatShardsDescriptor, ICatShardsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatSnapshotsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(ICatSnapshotsRequest request)`  
-5.x: `public Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(Names repositories, Func<CatSnapshotsDescriptor, ICatSnapshotsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatSnapshotsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(Names repositories, Func<CatSnapshotsDescriptor, ICatSnapshotsRequest> selector)`  
-5.x: `public Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(ICatSnapshotsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatThreadPoolAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(ICatThreadPoolRequest request)`  
-5.x: `public Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(ICatThreadPoolRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CatThreadPoolAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(Func<CatThreadPoolDescriptor, ICatThreadPoolRequest> selector)`  
-5.x: `public Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(Func<CatThreadPoolDescriptor, ICatThreadPoolRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClearCacheAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClearCacheResponse> ClearCacheAsync(IClearCacheRequest request)`  
-5.x: `public Task<IClearCacheResponse> ClearCacheAsync(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClearCacheAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClearCacheResponse> ClearCacheAsync(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector)`  
-5.x: `public Task<IClearCacheResponse> ClearCacheAsync(IClearCacheRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClearCachedRealmsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClearCachedRealmsResponse> ClearCachedRealmsAsync(IClearCachedRealmsRequest request)`  
-5.x: `public Task<IClearCachedRealmsResponse> ClearCachedRealmsAsync(Names realms, Func<ClearCachedRealmsDescriptor, IClearCachedRealmsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClearCachedRealmsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClearCachedRealmsResponse> ClearCachedRealmsAsync(Names realms, Func<ClearCachedRealmsDescriptor, IClearCachedRealmsRequest> selector)`  
-5.x: `public Task<IClearCachedRealmsResponse> ClearCachedRealmsAsync(IClearCachedRealmsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClearCachedRolesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClearCachedRolesResponse> ClearCachedRolesAsync(IClearCachedRolesRequest request)`  
-5.x: `public Task<IClearCachedRolesResponse> ClearCachedRolesAsync(Names roles, Func<ClearCachedRolesDescriptor, IClearCachedRolesRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClearCachedRolesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClearCachedRolesResponse> ClearCachedRolesAsync(Names roles, Func<ClearCachedRolesDescriptor, IClearCachedRolesRequest> selector)`  
-5.x: `public Task<IClearCachedRolesResponse> ClearCachedRolesAsync(IClearCachedRolesRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClearScrollAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClearScrollResponse> ClearScrollAsync(IClearScrollRequest request)`  
-5.x: `public Task<IClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClearScrollAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClearScrollResponse> ClearScrollAsync(Func<ClearScrollDescriptor, IClearScrollRequest> selector)`  
-5.x: `public Task<IClearScrollResponse> ClearScrollAsync(Func<ClearScrollDescriptor, IClearScrollRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CloseIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request)`  
-5.x: `public Task<ICloseIndexResponse> CloseIndexAsync(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CloseIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICloseIndexResponse> CloseIndexAsync(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector)`  
-5.x: `public Task<ICloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClusterGetSettingsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest request)`  
-5.x: `public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClusterGetSettingsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector)`  
-5.x: `public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClusterHealthAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterHealthResponse> ClusterHealthAsync(IClusterHealthRequest request)`  
-5.x: `public Task<IClusterHealthResponse> ClusterHealthAsync(IClusterHealthRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClusterHealthAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, IClusterHealthRequest> selector)`  
-5.x: `public Task<IClusterHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, IClusterHealthRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClusterPendingTasksAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest request)`  
-5.x: `public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClusterPendingTasksAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(Func<ClusterPendingTasksDescriptor, IClusterPendingTasksRequest> selector)`  
-5.x: `public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(Func<ClusterPendingTasksDescriptor, IClusterPendingTasksRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClusterPutSettingsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(IClusterPutSettingsRequest request)`  
-5.x: `public Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(IClusterPutSettingsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClusterPutSettingsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector)`  
-5.x: `public Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClusterRerouteAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest request)`  
-5.x: `public Task<IClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClusterRerouteAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> selector)`  
-5.x: `public Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClusterStateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest request)`  
-5.x: `public Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClusterStateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, IClusterStateRequest> selector)`  
-5.x: `public Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, IClusterStateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClusterStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterStatsResponse> ClusterStatsAsync(IClusterStatsRequest request)`  
-5.x: `public Task<IClusterStatsResponse> ClusterStatsAsync(IClusterStatsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ClusterStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterStatsResponse> ClusterStatsAsync(Func<ClusterStatsDescriptor, IClusterStatsRequest> selector)`  
-5.x: `public Task<IClusterStatsResponse> ClusterStatsAsync(Func<ClusterStatsDescriptor, IClusterStatsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CountAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICountResponse> CountAsync<T>(ICountRequest request)`  
-5.x: `public Task<ICountResponse> CountAsync<T>(ICountRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CountAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICountResponse> CountAsync<T>(Func<CountDescriptor<T>, ICountRequest> selector)`  
-5.x: `public Task<ICountResponse> CountAsync<T>(Func<CountDescriptor<T>, ICountRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CreateIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request)`  
-5.x: `public Task<ICreateIndexResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CreateIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICreateIndexResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector)`  
-5.x: `public Task<ICreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CreateRepositoryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICreateRepositoryResponse> CreateRepositoryAsync(ICreateRepositoryRequest request)`  
-5.x: `public Task<ICreateRepositoryResponse> CreateRepositoryAsync(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.CreateRepositoryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICreateRepositoryResponse> CreateRepositoryAsync(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector)`  
-5.x: `public Task<ICreateRepositoryResponse> CreateRepositoryAsync(ICreateRepositoryRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeactivateWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeactivateWatchResponse> DeactivateWatchAsync(IDeactivateWatchRequest request)`  
-5.x: `public Task<IDeactivateWatchResponse> DeactivateWatchAsync(Id id, Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeactivateWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeactivateWatchResponse> DeactivateWatchAsync(Id id, Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector)`  
-5.x: `public Task<IDeactivateWatchResponse> DeactivateWatchAsync(IDeactivateWatchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteAliasAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteAliasResponse> DeleteAliasAsync(Indices indices, Names names, Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector)`  
-5.x: `public Task<IDeleteAliasResponse> DeleteAliasAsync(Indices indices, Names names, Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteAliasAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request)`  
-5.x: `public Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteResponse> DeleteAsync(IDeleteRequest request)`  
-5.x: `public Task<IDeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteResponse> DeleteAsync<T>(DocumentPath<T> document, Func<DeleteDescriptor<T>, IDeleteRequest> selector)`  
-5.x: `public Task<IDeleteResponse> DeleteAsync<T>(DocumentPath<T> document, Func<DeleteDescriptor<T>, IDeleteRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteByQueryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request)`  
-5.x: `public Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteByQueryAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Indices indices, Types types, Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector)`  
-5.x: `public Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteIndexResponse> DeleteIndexAsync(IDeleteIndexRequest request)`  
-5.x: `public Task<IDeleteIndexResponse> DeleteIndexAsync(Indices indices, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteIndexResponse> DeleteIndexAsync(Indices indices, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector)`  
-5.x: `public Task<IDeleteIndexResponse> DeleteIndexAsync(IDeleteIndexRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteIndexTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(IDeleteIndexTemplateRequest request)`  
-5.x: `public Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteIndexTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector)`  
-5.x: `public Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(IDeleteIndexTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteLicenseAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request)`  
-5.x: `public Task<IDeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteLicenseAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteLicenseResponse> DeleteLicenseAsync(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector)`  
-5.x: `public Task<IDeleteLicenseResponse> DeleteLicenseAsync(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteRepositoryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest request)`  
-5.x: `public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(Names repositories, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteRepositoryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(Names repositories, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector)`  
-5.x: `public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteRoleAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteRoleResponse> DeleteRoleAsync(IDeleteRoleRequest request)`  
-5.x: `public Task<IDeleteRoleResponse> DeleteRoleAsync(Name role, Func<DeleteRoleDescriptor, IDeleteRoleRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteRoleAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteRoleResponse> DeleteRoleAsync(Name role, Func<DeleteRoleDescriptor, IDeleteRoleRequest> selector)`  
-5.x: `public Task<IDeleteRoleResponse> DeleteRoleAsync(IDeleteRoleRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteScriptAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteScriptResponse> DeleteScriptAsync(IDeleteScriptRequest request)`  
-5.x: `public Task<IDeleteScriptResponse> DeleteScriptAsync(IDeleteScriptRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteScriptAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteScriptResponse> DeleteScriptAsync(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector)`  
-5.x: `public Task<IDeleteScriptResponse> DeleteScriptAsync(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteSearchTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(IDeleteSearchTemplateRequest request)`  
-5.x: `public Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(Id id, Func<DeleteSearchTemplateDescriptor, IDeleteSearchTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteSearchTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(Id id, Func<DeleteSearchTemplateDescriptor, IDeleteSearchTemplateRequest> selector)`  
-5.x: `public Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(IDeleteSearchTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteSnapshotAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteSnapshotResponse> DeleteSnapshotAsync(IDeleteSnapshotRequest request)`  
-5.x: `public Task<IDeleteSnapshotResponse> DeleteSnapshotAsync(IDeleteSnapshotRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteSnapshotAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteSnapshotResponse> DeleteSnapshotAsync(Name repository, Name snapshotName, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector)`  
-5.x: `public Task<IDeleteSnapshotResponse> DeleteSnapshotAsync(Name repository, Name snapshotName, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteUserAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request)`  
-5.x: `public Task<IDeleteUserResponse> DeleteUserAsync(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteUserAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteUserResponse> DeleteUserAsync(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector)`  
-5.x: `public Task<IDeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteWatchResponse> DeleteWatchAsync(IDeleteWatchRequest request)`  
-5.x: `public Task<IDeleteWatchResponse> DeleteWatchAsync(Id watchId, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DeleteWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteWatchResponse> DeleteWatchAsync(Id watchId, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector)`  
-5.x: `public Task<IDeleteWatchResponse> DeleteWatchAsync(IDeleteWatchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DocumentExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request)`  
-5.x: `public Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.DocumentExistsAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> DocumentExistsAsync<T>(DocumentPath<T> document, Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> selector)`  
-5.x: `public Task<IExistsResponse> DocumentExistsAsync<T>(DocumentPath<T> document, Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ExecuteWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExecuteWatchResponse> ExecuteWatchAsync(IExecuteWatchRequest request)`  
-5.x: `public Task<IExecuteWatchResponse> ExecuteWatchAsync(IExecuteWatchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ExecuteWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExecuteWatchResponse> ExecuteWatchAsync(Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector)`  
-5.x: `public Task<IExecuteWatchResponse> ExecuteWatchAsync(Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ExplainAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest<T> request)`  
-5.x: `public Task<IExplainResponse<T>> ExplainAsync<T>(DocumentPath<T> document, Func<ExplainDescriptor<T>, IExplainRequest<T>> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ExplainAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExplainResponse<T>> ExplainAsync<T>(DocumentPath<T> document, Func<ExplainDescriptor<T>, IExplainRequest<T>> selector)`  
-5.x: `public Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest<T> request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.FieldStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IFieldStatsResponse> FieldStatsAsync(IFieldStatsRequest request)`  
-5.x: `public Task<IFieldStatsResponse> FieldStatsAsync(Indices indices, Func<FieldStatsDescriptor, IFieldStatsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.FieldStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IFieldStatsResponse> FieldStatsAsync(Indices indices, Func<FieldStatsDescriptor, IFieldStatsRequest> selector)`  
-5.x: `public Task<IFieldStatsResponse> FieldStatsAsync(IFieldStatsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.FlushAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IFlushResponse> FlushAsync(IFlushRequest request)`  
-5.x: `public Task<IFlushResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.FlushAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IFlushResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector)`  
-5.x: `public Task<IFlushResponse> FlushAsync(IFlushRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ForceMergeAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IForceMergeResponse> ForceMergeAsync(IForceMergeRequest request)`  
-5.x: `public Task<IForceMergeResponse> ForceMergeAsync(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ForceMergeAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IForceMergeResponse> ForceMergeAsync(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector)`  
-5.x: `public Task<IForceMergeResponse> ForceMergeAsync(IForceMergeRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetAliasAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetAliasesResponse> GetAliasAsync(IGetAliasRequest request)`  
-5.x: `public Task<IGetAliasResponse> GetAliasAsync(IGetAliasRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetAliasAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetAliasesResponse> GetAliasAsync(Func<GetAliasDescriptor, IGetAliasRequest> selector)`  
-5.x: `public Task<IGetAliasResponse> GetAliasAsync(Func<GetAliasDescriptor, IGetAliasRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetResponse<T>> GetAsync<T>(IGetRequest request)`  
-5.x: `public Task<IGetResponse<T>> GetAsync<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetResponse<T>> GetAsync<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> selector)`  
-5.x: `public Task<IGetResponse<T>> GetAsync<T>(IGetRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetFieldMappingAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest request)`  
-5.x: `public Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetFieldMappingAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(Fields fields, Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector)`  
-5.x: `public Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(Fields fields, Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request)`  
-5.x: `public Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector)`  
-5.x: `public Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetIndexSettingsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest request)`  
-5.x: `public Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetIndexSettingsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector)`  
-5.x: `public Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetIndexTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(IGetIndexTemplateRequest request)`  
-5.x: `public Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(IGetIndexTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetIndexTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector)`  
-5.x: `public Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetLicenseAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetLicenseResponse> GetLicenseAsync(IGetLicenseRequest request)`  
-5.x: `public Task<IGetLicenseResponse> GetLicenseAsync(IGetLicenseRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetLicenseAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetLicenseResponse> GetLicenseAsync(Func<GetLicenseDescriptor, IGetLicenseRequest> selector)`  
-5.x: `public Task<IGetLicenseResponse> GetLicenseAsync(Func<GetLicenseDescriptor, IGetLicenseRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetMappingAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest request)`  
-5.x: `public Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetMappingAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, IGetMappingRequest> selector)`  
-5.x: `public Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, IGetMappingRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetRepositoryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request)`  
-5.x: `public Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetRepositoryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector)`  
-5.x: `public Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetRoleAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetRoleResponse> GetRoleAsync(IGetRoleRequest request)`  
-5.x: `public Task<IGetRoleResponse> GetRoleAsync(IGetRoleRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetRoleAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetRoleResponse> GetRoleAsync(Func<GetRoleDescriptor, IGetRoleRequest> selector)`  
-5.x: `public Task<IGetRoleResponse> GetRoleAsync(Func<GetRoleDescriptor, IGetRoleRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetScriptAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest request)`  
-5.x: `public Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetScriptAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetScriptResponse> GetScriptAsync(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector)`  
-5.x: `public Task<IGetScriptResponse> GetScriptAsync(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetSearchTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(IGetSearchTemplateRequest request)`  
-5.x: `public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(Id id, Func<GetSearchTemplateDescriptor, IGetSearchTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetSearchTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(Id id, Func<GetSearchTemplateDescriptor, IGetSearchTemplateRequest> selector)`  
-5.x: `public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(IGetSearchTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetSnapshotAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetSnapshotResponse> GetSnapshotAsync(IGetSnapshotRequest request)`  
-5.x: `public Task<IGetSnapshotResponse> GetSnapshotAsync(IGetSnapshotRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetSnapshotAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetSnapshotResponse> GetSnapshotAsync(Name repository, Names snapshots, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector)`  
-5.x: `public Task<IGetSnapshotResponse> GetSnapshotAsync(Name repository, Names snapshots, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetUserAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetUserResponse> GetUserAsync(IGetUserRequest request)`  
-5.x: `public Task<IGetUserResponse> GetUserAsync(IGetUserRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetUserAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetUserResponse> GetUserAsync(Func<GetUserDescriptor, IGetUserRequest> selector)`  
-5.x: `public Task<IGetUserResponse> GetUserAsync(Func<GetUserDescriptor, IGetUserRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetWatchResponse> GetWatchAsync(IGetWatchRequest request)`  
-5.x: `public Task<IGetWatchResponse> GetWatchAsync(Id watchId, Func<GetWatchDescriptor, IGetWatchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GetWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetWatchResponse> GetWatchAsync(Id watchId, Func<GetWatchDescriptor, IGetWatchRequest> selector)`  
-5.x: `public Task<IGetWatchResponse> GetWatchAsync(IGetWatchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GraphExploreAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGraphExploreResponse> GraphExploreAsync(IGraphExploreRequest request)`  
-5.x: `public Task<IGraphExploreResponse> GraphExploreAsync(IGraphExploreRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.GraphExploreAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGraphExploreResponse> GraphExploreAsync<T>(Func<GraphExploreDescriptor<T>, IGraphExploreRequest> selector)`  
-5.x: `public Task<IGraphExploreResponse> GraphExploreAsync<T>(Func<GraphExploreDescriptor<T>, IGraphExploreRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.IndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IIndexResponse> IndexAsync(IIndexRequest request)`  
-5.x: `public Task<IIndexResponse> IndexAsync(IIndexRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.IndexAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IIndexResponse> IndexAsync<T>(T object, Func<IndexDescriptor<T>, IIndexRequest> selector)`  
-5.x: `public Task<IIndexResponse> IndexAsync<T>(T document, Func<IndexDescriptor<T>, IIndexRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.IndexExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest request)`  
-5.x: `public Task<IExistsResponse> IndexExistsAsync(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.IndexExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> IndexExistsAsync(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector)`  
-5.x: `public Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.IndexTemplateExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> IndexTemplateExistsAsync(IIndexTemplateExistsRequest request)`  
-5.x: `public Task<IExistsResponse> IndexTemplateExistsAsync(Name template, Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.IndexTemplateExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> IndexTemplateExistsAsync(Name template, Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector)`  
-5.x: `public Task<IExistsResponse> IndexTemplateExistsAsync(IIndexTemplateExistsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.IndicesShardStoresAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(IIndicesShardStoresRequest request)`  
-5.x: `public Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(IIndicesShardStoresRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.IndicesShardStoresAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector)`  
-5.x: `public Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.IndicesStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IIndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest request)`  
-5.x: `public Task<IIndicesStatsResponse> IndicesStatsAsync(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.IndicesStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IIndicesStatsResponse> IndicesStatsAsync(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector)`  
-5.x: `public Task<IIndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.MapAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutMappingResponse> MapAsync(IPutMappingRequest request)`  
-5.x: `public Task<IPutMappingResponse> MapAsync(IPutMappingRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.MapAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutMappingResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector)`  
-5.x: `public Task<IPutMappingResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.MultiGetAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest request)`  
-5.x: `public Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.MultiGetAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector)`  
-5.x: `public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.MultiPercolateAsync** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest request)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Use a percolate query with multi search api")]
-public Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest request, CancellationToken cancellationToken)
-```
-
-**public method Nest.ElasticClient.MultiPercolateAsync** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, IMultiPercolateRequest> selector)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Use a percolate query with multi search api")]
-public Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, IMultiPercolateRequest> selector, CancellationToken cancellationToken)
-```
-
-**public method Nest.ElasticClient.MultiSearchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request)`  
-5.x: `public Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.MultiSearchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> selector)`  
-5.x: `public Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.MultiTermVectorsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request)`  
-5.x: `public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.MultiTermVectorsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector)`  
-5.x: `public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.NodesHotThreadsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request)`  
-5.x: `public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.NodesHotThreadsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector)`  
-5.x: `public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.NodesInfoAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<INodesInfoResponse> NodesInfoAsync(INodesInfoRequest request)`  
-5.x: `public Task<INodesInfoResponse> NodesInfoAsync(INodesInfoRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.NodesInfoAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<INodesInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, INodesInfoRequest> selector)`  
-5.x: `public Task<INodesInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, INodesInfoRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.NodesStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request)`  
-5.x: `public Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.NodesStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<INodesStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, INodesStatsRequest> selector)`  
-5.x: `public Task<INodesStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, INodesStatsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.OpenIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IOpenIndexResponse> OpenIndexAsync(IOpenIndexRequest request)`  
-5.x: `public Task<IOpenIndexResponse> OpenIndexAsync(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.OpenIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IOpenIndexResponse> OpenIndexAsync(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector)`  
-5.x: `public Task<IOpenIndexResponse> OpenIndexAsync(IOpenIndexRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PercolateAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> request)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
-public Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> request, CancellationToken cancellationToken)
-```
-
-**public method Nest.ElasticClient.PercolateAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IPercolateResponse> PercolateAsync<T>(Func<PercolateDescriptor<T>, IPercolateRequest<T>> selector)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
-public Task<IPercolateResponse> PercolateAsync<T>(Func<PercolateDescriptor<T>, IPercolateRequest<T>> selector, CancellationToken cancellationToken)
-```
-
-**public method Nest.ElasticClient.PercolateCountAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> request)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
-public Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> request, CancellationToken cancellationToken)
-```
-
-**public method Nest.ElasticClient.PercolateCountAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> selector)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
-public Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> selector, CancellationToken cancellationToken)
-```
-
-**public method Nest.ElasticClient.PingAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPingResponse> PingAsync(IPingRequest request)`  
-5.x: `public Task<IPingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PingAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector)`  
-5.x: `public Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PostLicenseAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPostLicenseResponse> PostLicenseAsync(IPostLicenseRequest request)`  
-5.x: `public Task<IPostLicenseResponse> PostLicenseAsync(IPostLicenseRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PostLicenseAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPostLicenseResponse> PostLicenseAsync(Func<PostLicenseDescriptor, IPostLicenseRequest> selector)`  
-5.x: `public Task<IPostLicenseResponse> PostLicenseAsync(Func<PostLicenseDescriptor, IPostLicenseRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PutAliasAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutAliasResponse> PutAliasAsync(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> selector)`  
-5.x: `public Task<IPutAliasResponse> PutAliasAsync(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PutAliasAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest request)`  
-5.x: `public Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PutIndexTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request)`  
-5.x: `public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PutIndexTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector)`  
-5.x: `public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PutRoleAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutRoleResponse> PutRoleAsync(IPutRoleRequest request)`  
-5.x: `public Task<IPutRoleResponse> PutRoleAsync(Name role, Func<PutRoleDescriptor, IPutRoleRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PutRoleAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutRoleResponse> PutRoleAsync(Name role, Func<PutRoleDescriptor, IPutRoleRequest> selector)`  
-5.x: `public Task<IPutRoleResponse> PutRoleAsync(IPutRoleRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PutScriptAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutScriptResponse> PutScriptAsync(IPutScriptRequest request)`  
-5.x: `public Task<IPutScriptResponse> PutScriptAsync(IPutScriptRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PutScriptAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutScriptResponse> PutScriptAsync(Name language, Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector)`  
-5.x: `public Task<IPutScriptResponse> PutScriptAsync(Name language, Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PutSearchTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request)`  
-5.x: `public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PutSearchTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector)`  
-5.x: `public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PutUserAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutUserResponse> PutUserAsync(IPutUserRequest request)`  
-5.x: `public Task<IPutUserResponse> PutUserAsync(Name username, Func<PutUserDescriptor, IPutUserRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PutUserAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutUserResponse> PutUserAsync(Name username, Func<PutUserDescriptor, IPutUserRequest> selector)`  
-5.x: `public Task<IPutUserResponse> PutUserAsync(IPutUserRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PutWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutWatchResponse> PutWatchAsync(IPutWatchRequest request)`  
-5.x: `public Task<IPutWatchResponse> PutWatchAsync(Id watchId, Func<PutWatchDescriptor, IPutWatchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.PutWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutWatchResponse> PutWatchAsync(Id watchId, Func<PutWatchDescriptor, IPutWatchRequest> selector)`  
-5.x: `public Task<IPutWatchResponse> PutWatchAsync(IPutWatchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.RecoveryStatusAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request)`  
-5.x: `public Task<IRecoveryStatusResponse> RecoveryStatusAsync(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.RecoveryStatusAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRecoveryStatusResponse> RecoveryStatusAsync(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector)`  
-5.x: `public Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.RefreshAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRefreshResponse> RefreshAsync(IRefreshRequest request)`  
-5.x: `public Task<IRefreshResponse> RefreshAsync(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.RefreshAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRefreshResponse> RefreshAsync(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector)`  
-5.x: `public Task<IRefreshResponse> RefreshAsync(IRefreshRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.RegisterPercolatorAsync** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IRegisterPercolatorResponse> RegisterPercolatorAsync(IRegisterPercolatorRequest request)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Index a document containing a field mapped with percolator type")]
-public Task<IRegisterPercolatorResponse> RegisterPercolatorAsync(IRegisterPercolatorRequest request, CancellationToken cancellationToken)
-```
-
-**public method Nest.ElasticClient.RegisterPercolatorAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IRegisterPercolatorResponse> RegisterPercolatorAsync<T>(Name name, Func<RegisterPercolatorDescriptor<T>, IRegisterPercolatorRequest> selector)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Index a document containing a field mapped with percolator type")]
-public Task<IRegisterPercolatorResponse> RegisterPercolatorAsync<T>(Name name, Func<RegisterPercolatorDescriptor<T>, IRegisterPercolatorRequest> selector, CancellationToken cancellationToken)
-```
-
-**public method Nest.ElasticClient.Reindex&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public IObservable<IReindexResponse<T>> Reindex<T>(IReindexRequest request)`  
-5.x: `public IObservable<IBulkAllResponse> Reindex<T>(IndexName fromIndex, IndexName toIndex, Func<QueryContainerDescriptor<T>, QueryContainer> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.Reindex&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public IObservable<IReindexResponse<T>> Reindex<T>(IndexName from, IndexName to, Func<ReindexDescriptor<T>, IReindexRequest> selector)`  
-5.x: `public IObservable<IBulkAllResponse> Reindex<T>(Func<ReindexDescriptor<T>, IReindexRequest<T>> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ReindexOnServerAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request)`  
-5.x: `public Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ReindexOnServerAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IReindexOnServerResponse> ReindexOnServerAsync(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector)`  
-5.x: `public Task<IReindexOnServerResponse> ReindexOnServerAsync(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.RenderSearchTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRenderSearchTemplateResponse> RenderSearchTemplateAsync(IRenderSearchTemplateRequest request)`  
-5.x: `public Task<IRenderSearchTemplateResponse> RenderSearchTemplateAsync(IRenderSearchTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.RenderSearchTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRenderSearchTemplateResponse> RenderSearchTemplateAsync(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector)`  
-5.x: `public Task<IRenderSearchTemplateResponse> RenderSearchTemplateAsync(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.RestartWatcherAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRestartWatcherResponse> RestartWatcherAsync(IRestartWatcherRequest request)`  
-5.x: `public Task<IRestartWatcherResponse> RestartWatcherAsync(IRestartWatcherRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.RestartWatcherAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRestartWatcherResponse> RestartWatcherAsync(Func<RestartWatcherDescriptor, IRestartWatcherRequest> selector)`  
-5.x: `public Task<IRestartWatcherResponse> RestartWatcherAsync(Func<RestartWatcherDescriptor, IRestartWatcherRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.RestoreAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRestoreResponse> RestoreAsync(Name repository, Name snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector)`  
-5.x: `public Task<IRestoreResponse> RestoreAsync(Name repository, Name snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.RestoreAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRestoreResponse> RestoreAsync(IRestoreRequest request)`  
-5.x: `public Task<IRestoreResponse> RestoreAsync(IRestoreRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.RethrottleAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IReindexRethrottleResponse> RethrottleAsync(IReindexRethrottleRequest request)`  
-5.x: `public Task<IReindexRethrottleResponse> RethrottleAsync(IReindexRethrottleRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.RethrottleAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IReindexRethrottleResponse> RethrottleAsync(Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector)`  
-5.x: `public Task<IReindexRethrottleResponse> RethrottleAsync(Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.RootNodeInfoAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request)`  
-5.x: `public Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.RootNodeInfoAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector)`  
-5.x: `public Task<IRootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ScrollAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector)`  
-5.x: `public Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ScrollAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request)`  
-5.x: `public Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SearchAsync&lt;T, TResult&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(ISearchRequest request)`  
-5.x: `public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(ISearchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SearchAsync&lt;T, TResult&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> selector)`  
-5.x: `public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SearchAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request)`  
-5.x: `public Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SearchAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> selector)`  
-5.x: `public Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SearchShardsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request)`  
-5.x: `public Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SearchShardsAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector)`  
-5.x: `public Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SearchTemplateAsync&lt;T, TResult&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request)`  
-5.x: `public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SearchTemplateAsync&lt;T, TResult&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)`  
-5.x: `public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SearchTemplateAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request)`  
-5.x: `public Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SearchTemplateAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)`  
-5.x: `public Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SegmentsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest request)`  
-5.x: `public Task<ISegmentsResponse> SegmentsAsync(Indices indices, Func<SegmentsDescriptor, ISegmentsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SegmentsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISegmentsResponse> SegmentsAsync(Indices indices, Func<SegmentsDescriptor, ISegmentsRequest> selector)`  
-5.x: `public Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SnapshotAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest request)`  
-5.x: `public Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SnapshotAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISnapshotResponse> SnapshotAsync(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector)`  
-5.x: `public Task<ISnapshotResponse> SnapshotAsync(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SnapshotStatusAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest request)`  
-5.x: `public Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SnapshotStatusAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISnapshotStatusResponse> SnapshotStatusAsync(Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> selector)`  
-5.x: `public Task<ISnapshotStatusResponse> SnapshotStatusAsync(Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SourceAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[AsyncStateMachineAttribute(Nest.ElasticClient+<SourceAsync>d__192`1[T])]
-public Task<T> SourceAsync<T>(ISourceRequest request)
-```
-
-5.x
-```csharp
-public Task<T> SourceAsync<T>(DocumentPath<T> document, Func<SourceDescriptor<T>, ISourceRequest> selector, CancellationToken cancellationToken)
-```
-
-**public method Nest.ElasticClient.SourceAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<T> SourceAsync<T>(DocumentPath<T> document, Func<SourceDescriptor<T>, ISourceRequest> selector)
-```
-
-5.x
-```csharp
-[AsyncStateMachineAttribute(Nest.ElasticClient+<SourceAsync>d__212`1[T])]
-public Task<T> SourceAsync<T>(ISourceRequest request, CancellationToken cancellationToken)
-```
-
-**public method Nest.ElasticClient.StartWatcherAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IStartWatcherResponse> StartWatcherAsync(IStartWatcherRequest request)`  
-5.x: `public Task<IStartWatcherResponse> StartWatcherAsync(IStartWatcherRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.StartWatcherAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IStartWatcherResponse> StartWatcherAsync(Func<StartWatcherDescriptor, IStartWatcherRequest> selector)`  
-5.x: `public Task<IStartWatcherResponse> StartWatcherAsync(Func<StartWatcherDescriptor, IStartWatcherRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.StopWatcherAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IStopWatcherResponse> StopWatcherAsync(IStopWatcherRequest request)`  
-5.x: `public Task<IStopWatcherResponse> StopWatcherAsync(IStopWatcherRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.StopWatcherAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IStopWatcherResponse> StopWatcherAsync(Func<StopWatcherDescriptor, IStopWatcherRequest> selector)`  
-5.x: `public Task<IStopWatcherResponse> StopWatcherAsync(Func<StopWatcherDescriptor, IStopWatcherRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SuggestAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector)`  
-5.x: `public Task<ISuggestResponse<T>> SuggestAsync<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SyncedFlushAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISyncedFlushResponse> SyncedFlushAsync(ISyncedFlushRequest request)`  
-5.x: `public Task<ISyncedFlushResponse> SyncedFlushAsync(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.SyncedFlushAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISyncedFlushResponse> SyncedFlushAsync(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector)`  
-5.x: `public Task<ISyncedFlushResponse> SyncedFlushAsync(ISyncedFlushRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.TermVectorsAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request)`  
-5.x: `public Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.TermVectorsAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ITermVectorsResponse> TermVectorsAsync<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector)`  
-5.x: `public Task<ITermVectorsResponse> TermVectorsAsync<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.TypeExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest request)`  
-5.x: `public Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.TypeExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> TypeExistsAsync(Indices indices, Types types, Func<TypeExistsDescriptor, ITypeExistsRequest> selector)`  
-5.x: `public Task<IExistsResponse> TypeExistsAsync(Indices indices, Types types, Func<TypeExistsDescriptor, ITypeExistsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.UnregisterPercolatorAsync** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IUnregisterPercolatorResponse> UnregisterPercolatorAsync(IUnregisterPercolatorRequest request)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Index a document containing a field mapped with percolator type")]
-public Task<IUnregisterPercolatorResponse> UnregisterPercolatorAsync(IUnregisterPercolatorRequest request, CancellationToken cancellationToken)
-```
-
-**public method Nest.ElasticClient.UnregisterPercolatorAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IUnregisterPercolatorResponse> UnregisterPercolatorAsync<T>(Name name, Func<UnregisterPercolatorDescriptor<T>, IUnregisterPercolatorRequest> selector)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Index a document containing a field mapped with percolator type")]
-public Task<IUnregisterPercolatorResponse> UnregisterPercolatorAsync<T>(Name name, Func<UnregisterPercolatorDescriptor<T>, IUnregisterPercolatorRequest> selector, CancellationToken cancellationToken)
-```
-
-**public method Nest.ElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)`  
-5.x: `public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector)`  
-5.x: `public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.UpdateAsync&lt;TDocument&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(IUpdateRequest<TDocument, TDocument> request)`  
-5.x: `public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.UpdateAsync&lt;TDocument&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector)`  
-5.x: `public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(IUpdateRequest<TDocument, TDocument> request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.UpdateByQueryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request)`  
-5.x: `public Task<IUpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.UpdateByQueryAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpdateByQueryResponse> UpdateByQueryAsync<T>(Indices indices, Types types, Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector)`  
-5.x: `public Task<IUpdateByQueryResponse> UpdateByQueryAsync<T>(Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.UpdateIndexSettingsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request)`  
-5.x: `public Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(Indices indices, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.UpdateIndexSettingsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(Indices indices, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector)`  
-5.x: `public Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.UpgradeAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest request)`  
-5.x: `public Task<IUpgradeResponse> UpgradeAsync(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.UpgradeAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpgradeResponse> UpgradeAsync(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector)`  
-5.x: `public Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.UpgradeStatusAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector)`  
-5.x: `public Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.UpgradeStatusAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest request)`  
-5.x: `public Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ValidateQueryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IValidateQueryResponse> ValidateQueryAsync(IValidateQueryRequest request)`  
-5.x: `public Task<IValidateQueryResponse> ValidateQueryAsync(IValidateQueryRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.ValidateQueryAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IValidateQueryResponse> ValidateQueryAsync<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector)`  
-5.x: `public Task<IValidateQueryResponse> ValidateQueryAsync<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.VerifyRepositoryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest request)`  
-5.x: `public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(Name repository, Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.VerifyRepositoryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(Name repository, Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector)`  
-5.x: `public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.WatcherStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IWatcherStatsResponse> WatcherStatsAsync(IWatcherStatsRequest request)`  
-5.x: `public Task<IWatcherStatsResponse> WatcherStatsAsync(IWatcherStatsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.ElasticClient.WatcherStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IWatcherStatsResponse> WatcherStatsAsync(Func<WatcherStatsDescriptor, IWatcherStatsRequest> selector)`  
-5.x: `public Task<IWatcherStatsResponse> WatcherStatsAsync(Func<WatcherStatsDescriptor, IWatcherStatsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.GetManyExtensions.GetManyAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[ExtensionAttribute]
-public static Task<IEnumerable<IMultiGetHit<T>>> GetManyAsync<T>(IElasticClient client, IEnumerable<long> ids, string index, string type)
-```
-
-5.x
-```csharp
-[ExtensionAttribute]
-public static Task<IEnumerable<IMultiGetHit<T>>> GetManyAsync<T>(IElasticClient client, IEnumerable<long> ids, IndexName index, TypeName type, CancellationToken cancellationToken)
-```
-
-**public method Nest.GetManyExtensions.GetManyAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[AsyncStateMachineAttribute(Nest.GetManyExtensions+<GetManyAsync>d__2`1[T])]
-[ExtensionAttribute]
-public static Task<IEnumerable<IMultiGetHit<T>>> GetManyAsync<T>(IElasticClient client, IEnumerable<string> ids, string index, string type)
-```
-
-5.x
-```csharp
-[AsyncStateMachineAttribute(Nest.GetManyExtensions+<GetManyAsync>d__2`1[T])]
-[ExtensionAttribute]
-public static Task<IEnumerable<IMultiGetHit<T>>> GetManyAsync<T>(IElasticClient client, IEnumerable<string> ids, IndexName index, TypeName type, CancellationToken cancellationToken)
-```
-
-**public method Nest.IElasticClient.AcknowledgeWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(IAcknowledgeWatchRequest request)`  
-5.x: `public Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(Id id, Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.AcknowledgeWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(Id id, Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> selector)`  
-5.x: `public Task<IAcknowledgeWatchResponse> AcknowledgeWatchAsync(IAcknowledgeWatchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ActivateWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IActivateWatchResponse> ActivateWatchAsync(IActivateWatchRequest request)`  
-5.x: `public Task<IActivateWatchResponse> ActivateWatchAsync(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ActivateWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IActivateWatchResponse> ActivateWatchAsync(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector)`  
-5.x: `public Task<IActivateWatchResponse> ActivateWatchAsync(IActivateWatchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.AliasAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IBulkAliasResponse> AliasAsync(IBulkAliasRequest request)`  
-5.x: `public Task<IBulkAliasResponse> AliasAsync(IBulkAliasRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.AliasAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IBulkAliasResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector)`  
-5.x: `public Task<IBulkAliasResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.AliasExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest request)`  
-5.x: `public Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.AliasExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> AliasExistsAsync(Func<AliasExistsDescriptor, IAliasExistsRequest> selector)`  
-5.x: `public Task<IExistsResponse> AliasExistsAsync(Func<AliasExistsDescriptor, IAliasExistsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.AnalyzeAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request)`  
-5.x: `public Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.AnalyzeAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, IAnalyzeRequest> selector)`  
-5.x: `public Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, IAnalyzeRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.AuthenticateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IAuthenticateResponse> AuthenticateAsync(IAuthenticateRequest request)`  
-5.x: `public Task<IAuthenticateResponse> AuthenticateAsync(IAuthenticateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.AuthenticateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IAuthenticateResponse> AuthenticateAsync(Func<AuthenticateDescriptor, IAuthenticateRequest> selector)`  
-5.x: `public Task<IAuthenticateResponse> AuthenticateAsync(Func<AuthenticateDescriptor, IAuthenticateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.BulkAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector)`  
-5.x: `public Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.BulkAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IBulkResponse> BulkAsync(IBulkRequest request)`  
-5.x: `public Task<IBulkResponse> BulkAsync(IBulkRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatAliasesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(ICatAliasesRequest request)`  
-5.x: `public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(ICatAliasesRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatAliasesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(Func<CatAliasesDescriptor, ICatAliasesRequest> selector)`  
-5.x: `public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(Func<CatAliasesDescriptor, ICatAliasesRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatAllocationAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(ICatAllocationRequest request)`  
-5.x: `public Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(ICatAllocationRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatAllocationAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(Func<CatAllocationDescriptor, ICatAllocationRequest> selector)`  
-5.x: `public Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(Func<CatAllocationDescriptor, ICatAllocationRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatCountAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatCountRecord>> CatCountAsync(ICatCountRequest request)`  
-5.x: `public Task<ICatResponse<CatCountRecord>> CatCountAsync(ICatCountRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatCountAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatCountRecord>> CatCountAsync(Func<CatCountDescriptor, ICatCountRequest> selector)`  
-5.x: `public Task<ICatResponse<CatCountRecord>> CatCountAsync(Func<CatCountDescriptor, ICatCountRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatFielddataAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(ICatFielddataRequest request)`  
-5.x: `public Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(ICatFielddataRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatFielddataAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(Func<CatFielddataDescriptor, ICatFielddataRequest> selector)`  
-5.x: `public Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(Func<CatFielddataDescriptor, ICatFielddataRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatHealthAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(ICatHealthRequest request)`  
-5.x: `public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(ICatHealthRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatHealthAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(Func<CatHealthDescriptor, ICatHealthRequest> selector)`  
-5.x: `public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(Func<CatHealthDescriptor, ICatHealthRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatHelpAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(ICatHelpRequest request)`  
-5.x: `public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(ICatHelpRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatHelpAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(Func<CatHelpDescriptor, ICatHelpRequest> selector)`  
-5.x: `public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(Func<CatHelpDescriptor, ICatHelpRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatIndicesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(ICatIndicesRequest request)`  
-5.x: `public Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(ICatIndicesRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatIndicesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(Func<CatIndicesDescriptor, ICatIndicesRequest> selector)`  
-5.x: `public Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(Func<CatIndicesDescriptor, ICatIndicesRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatMasterAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(ICatMasterRequest request)`  
-5.x: `public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(ICatMasterRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatMasterAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(Func<CatMasterDescriptor, ICatMasterRequest> selector)`  
-5.x: `public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(Func<CatMasterDescriptor, ICatMasterRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatNodeAttributesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(ICatNodeAttributesRequest request)`  
-5.x: `public Task<ICatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(ICatNodeAttributesRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatNodeAttributesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(Func<CatNodeAttributesDescriptor, ICatNodeAttributesRequest> selector)`  
-5.x: `public Task<ICatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(Func<CatNodeAttributesDescriptor, ICatNodeAttributesRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatNodesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatNodesRecord>> CatNodesAsync(ICatNodesRequest request)`  
-5.x: `public Task<ICatResponse<CatNodesRecord>> CatNodesAsync(ICatNodesRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatNodesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatNodesRecord>> CatNodesAsync(Func<CatNodesDescriptor, ICatNodesRequest> selector)`  
-5.x: `public Task<ICatResponse<CatNodesRecord>> CatNodesAsync(Func<CatNodesDescriptor, ICatNodesRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatPendingTasksAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(ICatPendingTasksRequest request)`  
-5.x: `public Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(ICatPendingTasksRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatPendingTasksAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector)`  
-5.x: `public Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatPluginsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(ICatPluginsRequest request)`  
-5.x: `public Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(ICatPluginsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatPluginsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(Func<CatPluginsDescriptor, ICatPluginsRequest> selector)`  
-5.x: `public Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(Func<CatPluginsDescriptor, ICatPluginsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatRecoveryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(ICatRecoveryRequest request)`  
-5.x: `public Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(ICatRecoveryRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatRecoveryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(Func<CatRecoveryDescriptor, ICatRecoveryRequest> selector)`  
-5.x: `public Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(Func<CatRecoveryDescriptor, ICatRecoveryRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatRepositoriesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(ICatRepositoriesRequest request)`  
-5.x: `public Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(ICatRepositoriesRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatRepositoriesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(Func<CatRepositoriesDescriptor, ICatRepositoriesRequest> selector)`  
-5.x: `public Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(Func<CatRepositoriesDescriptor, ICatRepositoriesRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatSegmentsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(ICatSegmentsRequest request)`  
-5.x: `public Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(ICatSegmentsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatSegmentsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(Func<CatSegmentsDescriptor, ICatSegmentsRequest> selector)`  
-5.x: `public Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(Func<CatSegmentsDescriptor, ICatSegmentsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatShardsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatShardsRecord>> CatShardsAsync(ICatShardsRequest request)`  
-5.x: `public Task<ICatResponse<CatShardsRecord>> CatShardsAsync(ICatShardsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatShardsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatShardsRecord>> CatShardsAsync(Func<CatShardsDescriptor, ICatShardsRequest> selector)`  
-5.x: `public Task<ICatResponse<CatShardsRecord>> CatShardsAsync(Func<CatShardsDescriptor, ICatShardsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatSnapshotsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(ICatSnapshotsRequest request)`  
-5.x: `public Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(Names repositories, Func<CatSnapshotsDescriptor, ICatSnapshotsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatSnapshotsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(Names repositories, Func<CatSnapshotsDescriptor, ICatSnapshotsRequest> selector)`  
-5.x: `public Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(ICatSnapshotsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatThreadPoolAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(ICatThreadPoolRequest request)`  
-5.x: `public Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(ICatThreadPoolRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CatThreadPoolAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(Func<CatThreadPoolDescriptor, ICatThreadPoolRequest> selector)`  
-5.x: `public Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(Func<CatThreadPoolDescriptor, ICatThreadPoolRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClearCacheAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClearCacheResponse> ClearCacheAsync(IClearCacheRequest request)`  
-5.x: `public Task<IClearCacheResponse> ClearCacheAsync(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClearCacheAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClearCacheResponse> ClearCacheAsync(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector)`  
-5.x: `public Task<IClearCacheResponse> ClearCacheAsync(IClearCacheRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClearCachedRealmsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClearCachedRealmsResponse> ClearCachedRealmsAsync(IClearCachedRealmsRequest request)`  
-5.x: `public Task<IClearCachedRealmsResponse> ClearCachedRealmsAsync(Names realms, Func<ClearCachedRealmsDescriptor, IClearCachedRealmsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClearCachedRealmsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClearCachedRealmsResponse> ClearCachedRealmsAsync(Names realms, Func<ClearCachedRealmsDescriptor, IClearCachedRealmsRequest> selector)`  
-5.x: `public Task<IClearCachedRealmsResponse> ClearCachedRealmsAsync(IClearCachedRealmsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClearCachedRolesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClearCachedRolesResponse> ClearCachedRolesAsync(IClearCachedRolesRequest request)`  
-5.x: `public Task<IClearCachedRolesResponse> ClearCachedRolesAsync(Names roles, Func<ClearCachedRolesDescriptor, IClearCachedRolesRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClearCachedRolesAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClearCachedRolesResponse> ClearCachedRolesAsync(Names roles, Func<ClearCachedRolesDescriptor, IClearCachedRolesRequest> selector)`  
-5.x: `public Task<IClearCachedRolesResponse> ClearCachedRolesAsync(IClearCachedRolesRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClearScrollAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClearScrollResponse> ClearScrollAsync(IClearScrollRequest request)`  
-5.x: `public Task<IClearScrollResponse> ClearScrollAsync(IClearScrollRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClearScrollAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClearScrollResponse> ClearScrollAsync(Func<ClearScrollDescriptor, IClearScrollRequest> selector)`  
-5.x: `public Task<IClearScrollResponse> ClearScrollAsync(Func<ClearScrollDescriptor, IClearScrollRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CloseIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request)`  
-5.x: `public Task<ICloseIndexResponse> CloseIndexAsync(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CloseIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICloseIndexResponse> CloseIndexAsync(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector)`  
-5.x: `public Task<ICloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClusterGetSettingsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest request)`  
-5.x: `public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClusterGetSettingsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector)`  
-5.x: `public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClusterHealthAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterHealthResponse> ClusterHealthAsync(IClusterHealthRequest request)`  
-5.x: `public Task<IClusterHealthResponse> ClusterHealthAsync(IClusterHealthRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClusterHealthAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, IClusterHealthRequest> selector)`  
-5.x: `public Task<IClusterHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, IClusterHealthRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClusterPendingTasksAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest request)`  
-5.x: `public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClusterPendingTasksAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(Func<ClusterPendingTasksDescriptor, IClusterPendingTasksRequest> selector)`  
-5.x: `public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(Func<ClusterPendingTasksDescriptor, IClusterPendingTasksRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClusterPutSettingsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(IClusterPutSettingsRequest request)`  
-5.x: `public Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(IClusterPutSettingsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClusterPutSettingsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector)`  
-5.x: `public Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClusterRerouteAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest request)`  
-5.x: `public Task<IClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClusterRerouteAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> selector)`  
-5.x: `public Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClusterStateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest request)`  
-5.x: `public Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClusterStateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, IClusterStateRequest> selector)`  
-5.x: `public Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, IClusterStateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClusterStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterStatsResponse> ClusterStatsAsync(IClusterStatsRequest request)`  
-5.x: `public Task<IClusterStatsResponse> ClusterStatsAsync(IClusterStatsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ClusterStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IClusterStatsResponse> ClusterStatsAsync(Func<ClusterStatsDescriptor, IClusterStatsRequest> selector)`  
-5.x: `public Task<IClusterStatsResponse> ClusterStatsAsync(Func<ClusterStatsDescriptor, IClusterStatsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CountAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICountResponse> CountAsync<T>(ICountRequest request)`  
-5.x: `public Task<ICountResponse> CountAsync<T>(ICountRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CountAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICountResponse> CountAsync<T>(Func<CountDescriptor<T>, ICountRequest> selector)`  
-5.x: `public Task<ICountResponse> CountAsync<T>(Func<CountDescriptor<T>, ICountRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CreateIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request)`  
-5.x: `public Task<ICreateIndexResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CreateIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICreateIndexResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector)`  
-5.x: `public Task<ICreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CreateRepositoryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICreateRepositoryResponse> CreateRepositoryAsync(ICreateRepositoryRequest request)`  
-5.x: `public Task<ICreateRepositoryResponse> CreateRepositoryAsync(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.CreateRepositoryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ICreateRepositoryResponse> CreateRepositoryAsync(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector)`  
-5.x: `public Task<ICreateRepositoryResponse> CreateRepositoryAsync(ICreateRepositoryRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeactivateWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeactivateWatchResponse> DeactivateWatchAsync(IDeactivateWatchRequest request)`  
-5.x: `public Task<IDeactivateWatchResponse> DeactivateWatchAsync(Id id, Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeactivateWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeactivateWatchResponse> DeactivateWatchAsync(Id id, Func<DeactivateWatchDescriptor, IDeactivateWatchRequest> selector)`  
-5.x: `public Task<IDeactivateWatchResponse> DeactivateWatchAsync(IDeactivateWatchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteAliasAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteAliasResponse> DeleteAliasAsync(Indices indices, Names names, Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector)`  
-5.x: `public Task<IDeleteAliasResponse> DeleteAliasAsync(Indices indices, Names names, Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteAliasAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request)`  
-5.x: `public Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteResponse> DeleteAsync(IDeleteRequest request)`  
-5.x: `public Task<IDeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteResponse> DeleteAsync<T>(DocumentPath<T> document, Func<DeleteDescriptor<T>, IDeleteRequest> selector)`  
-5.x: `public Task<IDeleteResponse> DeleteAsync<T>(DocumentPath<T> document, Func<DeleteDescriptor<T>, IDeleteRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteByQueryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request)`  
-5.x: `public Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteByQueryAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Indices indices, Types types, Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector)`  
-5.x: `public Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteIndexResponse> DeleteIndexAsync(IDeleteIndexRequest request)`  
-5.x: `public Task<IDeleteIndexResponse> DeleteIndexAsync(Indices indices, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteIndexResponse> DeleteIndexAsync(Indices indices, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector)`  
-5.x: `public Task<IDeleteIndexResponse> DeleteIndexAsync(IDeleteIndexRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteIndexTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(IDeleteIndexTemplateRequest request)`  
-5.x: `public Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteIndexTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector)`  
-5.x: `public Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(IDeleteIndexTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteLicenseAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request)`  
-5.x: `public Task<IDeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteLicenseAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteLicenseResponse> DeleteLicenseAsync(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector)`  
-5.x: `public Task<IDeleteLicenseResponse> DeleteLicenseAsync(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteRepositoryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest request)`  
-5.x: `public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(Names repositories, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteRepositoryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(Names repositories, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector)`  
-5.x: `public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteRoleAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteRoleResponse> DeleteRoleAsync(IDeleteRoleRequest request)`  
-5.x: `public Task<IDeleteRoleResponse> DeleteRoleAsync(Name role, Func<DeleteRoleDescriptor, IDeleteRoleRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteRoleAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteRoleResponse> DeleteRoleAsync(Name role, Func<DeleteRoleDescriptor, IDeleteRoleRequest> selector)`  
-5.x: `public Task<IDeleteRoleResponse> DeleteRoleAsync(IDeleteRoleRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteScriptAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteScriptResponse> DeleteScriptAsync(IDeleteScriptRequest request)`  
-5.x: `public Task<IDeleteScriptResponse> DeleteScriptAsync(IDeleteScriptRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteScriptAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteScriptResponse> DeleteScriptAsync(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector)`  
-5.x: `public Task<IDeleteScriptResponse> DeleteScriptAsync(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteSearchTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(IDeleteSearchTemplateRequest request)`  
-5.x: `public Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(Id id, Func<DeleteSearchTemplateDescriptor, IDeleteSearchTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteSearchTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(Id id, Func<DeleteSearchTemplateDescriptor, IDeleteSearchTemplateRequest> selector)`  
-5.x: `public Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(IDeleteSearchTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteSnapshotAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteSnapshotResponse> DeleteSnapshotAsync(IDeleteSnapshotRequest request)`  
-5.x: `public Task<IDeleteSnapshotResponse> DeleteSnapshotAsync(IDeleteSnapshotRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteSnapshotAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteSnapshotResponse> DeleteSnapshotAsync(Name repository, Name snapshotName, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector)`  
-5.x: `public Task<IDeleteSnapshotResponse> DeleteSnapshotAsync(Name repository, Name snapshotName, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteUserAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request)`  
-5.x: `public Task<IDeleteUserResponse> DeleteUserAsync(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteUserAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteUserResponse> DeleteUserAsync(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector)`  
-5.x: `public Task<IDeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteWatchResponse> DeleteWatchAsync(IDeleteWatchRequest request)`  
-5.x: `public Task<IDeleteWatchResponse> DeleteWatchAsync(Id watchId, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DeleteWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IDeleteWatchResponse> DeleteWatchAsync(Id watchId, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector)`  
-5.x: `public Task<IDeleteWatchResponse> DeleteWatchAsync(IDeleteWatchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DocumentExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request)`  
-5.x: `public Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.DocumentExistsAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> DocumentExistsAsync<T>(DocumentPath<T> document, Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> selector)`  
-5.x: `public Task<IExistsResponse> DocumentExistsAsync<T>(DocumentPath<T> document, Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ExecuteWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExecuteWatchResponse> ExecuteWatchAsync(IExecuteWatchRequest request)`  
-5.x: `public Task<IExecuteWatchResponse> ExecuteWatchAsync(IExecuteWatchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ExecuteWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExecuteWatchResponse> ExecuteWatchAsync(Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector)`  
-5.x: `public Task<IExecuteWatchResponse> ExecuteWatchAsync(Func<ExecuteWatchDescriptor, IExecuteWatchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ExplainAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest<T> request)`  
-5.x: `public Task<IExplainResponse<T>> ExplainAsync<T>(DocumentPath<T> document, Func<ExplainDescriptor<T>, IExplainRequest<T>> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ExplainAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExplainResponse<T>> ExplainAsync<T>(DocumentPath<T> document, Func<ExplainDescriptor<T>, IExplainRequest<T>> selector)`  
-5.x: `public Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest<T> request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.FieldStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IFieldStatsResponse> FieldStatsAsync(IFieldStatsRequest request)`  
-5.x: `public Task<IFieldStatsResponse> FieldStatsAsync(Indices indices, Func<FieldStatsDescriptor, IFieldStatsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.FieldStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IFieldStatsResponse> FieldStatsAsync(Indices indices, Func<FieldStatsDescriptor, IFieldStatsRequest> selector)`  
-5.x: `public Task<IFieldStatsResponse> FieldStatsAsync(IFieldStatsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.FlushAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IFlushResponse> FlushAsync(IFlushRequest request)`  
-5.x: `public Task<IFlushResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.FlushAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IFlushResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector)`  
-5.x: `public Task<IFlushResponse> FlushAsync(IFlushRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ForceMergeAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IForceMergeResponse> ForceMergeAsync(IForceMergeRequest request)`  
-5.x: `public Task<IForceMergeResponse> ForceMergeAsync(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ForceMergeAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IForceMergeResponse> ForceMergeAsync(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector)`  
-5.x: `public Task<IForceMergeResponse> ForceMergeAsync(IForceMergeRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetAliasAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetAliasesResponse> GetAliasAsync(IGetAliasRequest request)`  
-5.x: `public Task<IGetAliasResponse> GetAliasAsync(IGetAliasRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetAliasAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetAliasesResponse> GetAliasAsync(Func<GetAliasDescriptor, IGetAliasRequest> selector)`  
-5.x: `public Task<IGetAliasResponse> GetAliasAsync(Func<GetAliasDescriptor, IGetAliasRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetResponse<T>> GetAsync<T>(IGetRequest request)`  
-5.x: `public Task<IGetResponse<T>> GetAsync<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetResponse<T>> GetAsync<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> selector)`  
-5.x: `public Task<IGetResponse<T>> GetAsync<T>(IGetRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetFieldMappingAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest request)`  
-5.x: `public Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetFieldMappingAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(Fields fields, Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector)`  
-5.x: `public Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(Fields fields, Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request)`  
-5.x: `public Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector)`  
-5.x: `public Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetIndexSettingsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest request)`  
-5.x: `public Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetIndexSettingsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector)`  
-5.x: `public Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetIndexTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(IGetIndexTemplateRequest request)`  
-5.x: `public Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(IGetIndexTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetIndexTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector)`  
-5.x: `public Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetLicenseAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetLicenseResponse> GetLicenseAsync(IGetLicenseRequest request)`  
-5.x: `public Task<IGetLicenseResponse> GetLicenseAsync(IGetLicenseRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetLicenseAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetLicenseResponse> GetLicenseAsync(Func<GetLicenseDescriptor, IGetLicenseRequest> selector)`  
-5.x: `public Task<IGetLicenseResponse> GetLicenseAsync(Func<GetLicenseDescriptor, IGetLicenseRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetMappingAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest request)`  
-5.x: `public Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetMappingAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, IGetMappingRequest> selector)`  
-5.x: `public Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, IGetMappingRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetRepositoryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request)`  
-5.x: `public Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetRepositoryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector)`  
-5.x: `public Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetRoleAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetRoleResponse> GetRoleAsync(IGetRoleRequest request)`  
-5.x: `public Task<IGetRoleResponse> GetRoleAsync(IGetRoleRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetRoleAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetRoleResponse> GetRoleAsync(Func<GetRoleDescriptor, IGetRoleRequest> selector)`  
-5.x: `public Task<IGetRoleResponse> GetRoleAsync(Func<GetRoleDescriptor, IGetRoleRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetScriptAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest request)`  
-5.x: `public Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetScriptAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetScriptResponse> GetScriptAsync(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector)`  
-5.x: `public Task<IGetScriptResponse> GetScriptAsync(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetSearchTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(IGetSearchTemplateRequest request)`  
-5.x: `public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(Id id, Func<GetSearchTemplateDescriptor, IGetSearchTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetSearchTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(Id id, Func<GetSearchTemplateDescriptor, IGetSearchTemplateRequest> selector)`  
-5.x: `public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(IGetSearchTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetSnapshotAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetSnapshotResponse> GetSnapshotAsync(IGetSnapshotRequest request)`  
-5.x: `public Task<IGetSnapshotResponse> GetSnapshotAsync(IGetSnapshotRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetSnapshotAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetSnapshotResponse> GetSnapshotAsync(Name repository, Names snapshots, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector)`  
-5.x: `public Task<IGetSnapshotResponse> GetSnapshotAsync(Name repository, Names snapshots, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetUserAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetUserResponse> GetUserAsync(IGetUserRequest request)`  
-5.x: `public Task<IGetUserResponse> GetUserAsync(IGetUserRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetUserAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetUserResponse> GetUserAsync(Func<GetUserDescriptor, IGetUserRequest> selector)`  
-5.x: `public Task<IGetUserResponse> GetUserAsync(Func<GetUserDescriptor, IGetUserRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetWatchResponse> GetWatchAsync(IGetWatchRequest request)`  
-5.x: `public Task<IGetWatchResponse> GetWatchAsync(Id watchId, Func<GetWatchDescriptor, IGetWatchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GetWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGetWatchResponse> GetWatchAsync(Id watchId, Func<GetWatchDescriptor, IGetWatchRequest> selector)`  
-5.x: `public Task<IGetWatchResponse> GetWatchAsync(IGetWatchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GraphExploreAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGraphExploreResponse> GraphExploreAsync(IGraphExploreRequest request)`  
-5.x: `public Task<IGraphExploreResponse> GraphExploreAsync(IGraphExploreRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.GraphExploreAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IGraphExploreResponse> GraphExploreAsync<T>(Func<GraphExploreDescriptor<T>, IGraphExploreRequest> selector)`  
-5.x: `public Task<IGraphExploreResponse> GraphExploreAsync<T>(Func<GraphExploreDescriptor<T>, IGraphExploreRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.IndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IIndexResponse> IndexAsync(IIndexRequest request)`  
-5.x: `public Task<IIndexResponse> IndexAsync(IIndexRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.IndexAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IIndexResponse> IndexAsync<T>(T object, Func<IndexDescriptor<T>, IIndexRequest> selector)`  
-5.x: `public Task<IIndexResponse> IndexAsync<T>(T document, Func<IndexDescriptor<T>, IIndexRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.IndexExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest request)`  
-5.x: `public Task<IExistsResponse> IndexExistsAsync(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.IndexExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> IndexExistsAsync(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector)`  
-5.x: `public Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.IndexTemplateExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> IndexTemplateExistsAsync(IIndexTemplateExistsRequest request)`  
-5.x: `public Task<IExistsResponse> IndexTemplateExistsAsync(Name template, Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.IndexTemplateExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> IndexTemplateExistsAsync(Name template, Func<IndexTemplateExistsDescriptor, IIndexTemplateExistsRequest> selector)`  
-5.x: `public Task<IExistsResponse> IndexTemplateExistsAsync(IIndexTemplateExistsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.IndicesShardStoresAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(IIndicesShardStoresRequest request)`  
-5.x: `public Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(IIndicesShardStoresRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.IndicesShardStoresAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector)`  
-5.x: `public Task<IIndicesShardStoresResponse> IndicesShardStoresAsync(Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.IndicesStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IIndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest request)`  
-5.x: `public Task<IIndicesStatsResponse> IndicesStatsAsync(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.IndicesStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IIndicesStatsResponse> IndicesStatsAsync(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector)`  
-5.x: `public Task<IIndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.MapAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutMappingResponse> MapAsync(IPutMappingRequest request)`  
-5.x: `public Task<IPutMappingResponse> MapAsync(IPutMappingRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.MapAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutMappingResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector)`  
-5.x: `public Task<IPutMappingResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.MultiGetAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest request)`  
-5.x: `public Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.MultiGetAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector)`  
-5.x: `public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.MultiPercolateAsync** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest request)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Use a percolate query with multi search api")]
-public Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest request, CancellationToken cancellationToken)
-```
-
-**public method Nest.IElasticClient.MultiPercolateAsync** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, IMultiPercolateRequest> selector)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Use a percolate query with multi search api")]
-public Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, IMultiPercolateRequest> selector, CancellationToken cancellationToken)
-```
-
-**public method Nest.IElasticClient.MultiSearchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request)`  
-5.x: `public Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.MultiSearchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> selector)`  
-5.x: `public Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.MultiTermVectorsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request)`  
-5.x: `public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.MultiTermVectorsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector)`  
-5.x: `public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.NodesHotThreadsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request)`  
-5.x: `public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.NodesHotThreadsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector)`  
-5.x: `public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.NodesInfoAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<INodesInfoResponse> NodesInfoAsync(INodesInfoRequest request)`  
-5.x: `public Task<INodesInfoResponse> NodesInfoAsync(INodesInfoRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.NodesInfoAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<INodesInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, INodesInfoRequest> selector)`  
-5.x: `public Task<INodesInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, INodesInfoRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.NodesStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request)`  
-5.x: `public Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.NodesStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<INodesStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, INodesStatsRequest> selector)`  
-5.x: `public Task<INodesStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, INodesStatsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.OpenIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IOpenIndexResponse> OpenIndexAsync(IOpenIndexRequest request)`  
-5.x: `public Task<IOpenIndexResponse> OpenIndexAsync(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.OpenIndexAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IOpenIndexResponse> OpenIndexAsync(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector)`  
-5.x: `public Task<IOpenIndexResponse> OpenIndexAsync(IOpenIndexRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PercolateAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> request)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
-public Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> request, CancellationToken cancellationToken)
-```
-
-**public method Nest.IElasticClient.PercolateAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IPercolateResponse> PercolateAsync<T>(Func<PercolateDescriptor<T>, IPercolateRequest<T>> selector)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
-public Task<IPercolateResponse> PercolateAsync<T>(Func<PercolateDescriptor<T>, IPercolateRequest<T>> selector, CancellationToken cancellationToken)
-```
-
-**public method Nest.IElasticClient.PercolateCountAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> request)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
-public Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> request, CancellationToken cancellationToken)
-```
-
-**public method Nest.IElasticClient.PercolateCountAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> selector)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
-public Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> selector, CancellationToken cancellationToken)
-```
-
-**public method Nest.IElasticClient.PingAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPingResponse> PingAsync(IPingRequest request)`  
-5.x: `public Task<IPingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PingAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector)`  
-5.x: `public Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PostLicenseAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPostLicenseResponse> PostLicenseAsync(IPostLicenseRequest request)`  
-5.x: `public Task<IPostLicenseResponse> PostLicenseAsync(IPostLicenseRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PostLicenseAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPostLicenseResponse> PostLicenseAsync(Func<PostLicenseDescriptor, IPostLicenseRequest> selector)`  
-5.x: `public Task<IPostLicenseResponse> PostLicenseAsync(Func<PostLicenseDescriptor, IPostLicenseRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PutAliasAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest request)`  
-5.x: `public Task<IPutAliasResponse> PutAliasAsync(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PutAliasAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutAliasResponse> PutAliasAsync(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> selector)`  
-5.x: `public Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PutIndexTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request)`  
-5.x: `public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PutIndexTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector)`  
-5.x: `public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PutRoleAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutRoleResponse> PutRoleAsync(IPutRoleRequest request)`  
-5.x: `public Task<IPutRoleResponse> PutRoleAsync(Name role, Func<PutRoleDescriptor, IPutRoleRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PutRoleAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutRoleResponse> PutRoleAsync(Name role, Func<PutRoleDescriptor, IPutRoleRequest> selector)`  
-5.x: `public Task<IPutRoleResponse> PutRoleAsync(IPutRoleRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PutScriptAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutScriptResponse> PutScriptAsync(IPutScriptRequest request)`  
-5.x: `public Task<IPutScriptResponse> PutScriptAsync(IPutScriptRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PutScriptAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutScriptResponse> PutScriptAsync(Name language, Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector)`  
-5.x: `public Task<IPutScriptResponse> PutScriptAsync(Name language, Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PutSearchTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request)`  
-5.x: `public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PutSearchTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector)`  
-5.x: `public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PutUserAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutUserResponse> PutUserAsync(IPutUserRequest request)`  
-5.x: `public Task<IPutUserResponse> PutUserAsync(Name username, Func<PutUserDescriptor, IPutUserRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PutUserAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutUserResponse> PutUserAsync(Name username, Func<PutUserDescriptor, IPutUserRequest> selector)`  
-5.x: `public Task<IPutUserResponse> PutUserAsync(IPutUserRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PutWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutWatchResponse> PutWatchAsync(IPutWatchRequest request)`  
-5.x: `public Task<IPutWatchResponse> PutWatchAsync(Id watchId, Func<PutWatchDescriptor, IPutWatchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.PutWatchAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IPutWatchResponse> PutWatchAsync(Id watchId, Func<PutWatchDescriptor, IPutWatchRequest> selector)`  
-5.x: `public Task<IPutWatchResponse> PutWatchAsync(IPutWatchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.RecoveryStatusAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request)`  
-5.x: `public Task<IRecoveryStatusResponse> RecoveryStatusAsync(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.RecoveryStatusAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRecoveryStatusResponse> RecoveryStatusAsync(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector)`  
-5.x: `public Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.RefreshAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRefreshResponse> RefreshAsync(IRefreshRequest request)`  
-5.x: `public Task<IRefreshResponse> RefreshAsync(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.RefreshAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRefreshResponse> RefreshAsync(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector)`  
-5.x: `public Task<IRefreshResponse> RefreshAsync(IRefreshRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.RegisterPercolatorAsync** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IRegisterPercolatorResponse> RegisterPercolatorAsync(IRegisterPercolatorRequest request)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Index a document containing a field mapped with percolator type")]
-public Task<IRegisterPercolatorResponse> RegisterPercolatorAsync(IRegisterPercolatorRequest request, CancellationToken cancellationToken)
-```
-
-**public method Nest.IElasticClient.RegisterPercolatorAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IRegisterPercolatorResponse> RegisterPercolatorAsync<T>(Name name, Func<RegisterPercolatorDescriptor<T>, IRegisterPercolatorRequest> selector)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Index a document containing a field mapped with percolator type")]
-public Task<IRegisterPercolatorResponse> RegisterPercolatorAsync<T>(Name name, Func<RegisterPercolatorDescriptor<T>, IRegisterPercolatorRequest> selector, CancellationToken cancellationToken)
-```
-
-**public method Nest.IElasticClient.Reindex&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public IObservable<IReindexResponse<T>> Reindex<T>(IReindexRequest request)`  
-5.x: `public IObservable<IBulkAllResponse> Reindex<T>(IndexName fromIndex, IndexName toIndex, Func<QueryContainerDescriptor<T>, QueryContainer> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.Reindex&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public IObservable<IReindexResponse<T>> Reindex<T>(IndexName from, IndexName to, Func<ReindexDescriptor<T>, IReindexRequest> selector)`  
-5.x: `public IObservable<IBulkAllResponse> Reindex<T>(Func<ReindexDescriptor<T>, IReindexRequest<T>> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ReindexOnServerAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request)`  
-5.x: `public Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ReindexOnServerAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IReindexOnServerResponse> ReindexOnServerAsync(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector)`  
-5.x: `public Task<IReindexOnServerResponse> ReindexOnServerAsync(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.RenderSearchTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRenderSearchTemplateResponse> RenderSearchTemplateAsync(IRenderSearchTemplateRequest request)`  
-5.x: `public Task<IRenderSearchTemplateResponse> RenderSearchTemplateAsync(IRenderSearchTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.RenderSearchTemplateAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRenderSearchTemplateResponse> RenderSearchTemplateAsync(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector)`  
-5.x: `public Task<IRenderSearchTemplateResponse> RenderSearchTemplateAsync(Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.RestartWatcherAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRestartWatcherResponse> RestartWatcherAsync(IRestartWatcherRequest request)`  
-5.x: `public Task<IRestartWatcherResponse> RestartWatcherAsync(IRestartWatcherRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.RestartWatcherAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRestartWatcherResponse> RestartWatcherAsync(Func<RestartWatcherDescriptor, IRestartWatcherRequest> selector)`  
-5.x: `public Task<IRestartWatcherResponse> RestartWatcherAsync(Func<RestartWatcherDescriptor, IRestartWatcherRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.RestoreAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRestoreResponse> RestoreAsync(IRestoreRequest request)`  
-5.x: `public Task<IRestoreResponse> RestoreAsync(IRestoreRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.RestoreAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRestoreResponse> RestoreAsync(Name repository, Name snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector)`  
-5.x: `public Task<IRestoreResponse> RestoreAsync(Name repository, Name snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.RethrottleAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IReindexRethrottleResponse> RethrottleAsync(IReindexRethrottleRequest request)`  
-5.x: `public Task<IReindexRethrottleResponse> RethrottleAsync(IReindexRethrottleRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.RethrottleAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IReindexRethrottleResponse> RethrottleAsync(Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector)`  
-5.x: `public Task<IReindexRethrottleResponse> RethrottleAsync(Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.RootNodeInfoAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request)`  
-5.x: `public Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.RootNodeInfoAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IRootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector)`  
-5.x: `public Task<IRootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ScrollAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector)`  
-5.x: `public Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ScrollAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request)`  
-5.x: `public Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SearchAsync&lt;T, TResult&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(ISearchRequest request)`  
-5.x: `public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(ISearchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SearchAsync&lt;T, TResult&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> selector)`  
-5.x: `public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SearchAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request)`  
-5.x: `public Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SearchAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> selector)`  
-5.x: `public Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SearchShardsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request)`  
-5.x: `public Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SearchShardsAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector)`  
-5.x: `public Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SearchTemplateAsync&lt;T, TResult&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request)`  
-5.x: `public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SearchTemplateAsync&lt;T, TResult&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)`  
-5.x: `public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SearchTemplateAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request)`  
-5.x: `public Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SearchTemplateAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)`  
-5.x: `public Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SegmentsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest request)`  
-5.x: `public Task<ISegmentsResponse> SegmentsAsync(Indices indices, Func<SegmentsDescriptor, ISegmentsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SegmentsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISegmentsResponse> SegmentsAsync(Indices indices, Func<SegmentsDescriptor, ISegmentsRequest> selector)`  
-5.x: `public Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SnapshotAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest request)`  
-5.x: `public Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SnapshotAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISnapshotResponse> SnapshotAsync(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector)`  
-5.x: `public Task<ISnapshotResponse> SnapshotAsync(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SnapshotStatusAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest request)`  
-5.x: `public Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SnapshotStatusAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISnapshotStatusResponse> SnapshotStatusAsync(Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> selector)`  
-5.x: `public Task<ISnapshotStatusResponse> SnapshotStatusAsync(Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SourceAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<T> SourceAsync<T>(ISourceRequest request)`  
-5.x: `public Task<T> SourceAsync<T>(DocumentPath<T> document, Func<SourceDescriptor<T>, ISourceRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SourceAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<T> SourceAsync<T>(DocumentPath<T> document, Func<SourceDescriptor<T>, ISourceRequest> selector)`  
-5.x: `public Task<T> SourceAsync<T>(ISourceRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.StartWatcherAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IStartWatcherResponse> StartWatcherAsync(IStartWatcherRequest request)`  
-5.x: `public Task<IStartWatcherResponse> StartWatcherAsync(IStartWatcherRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.StartWatcherAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IStartWatcherResponse> StartWatcherAsync(Func<StartWatcherDescriptor, IStartWatcherRequest> selector)`  
-5.x: `public Task<IStartWatcherResponse> StartWatcherAsync(Func<StartWatcherDescriptor, IStartWatcherRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.StopWatcherAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IStopWatcherResponse> StopWatcherAsync(IStopWatcherRequest request)`  
-5.x: `public Task<IStopWatcherResponse> StopWatcherAsync(IStopWatcherRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.StopWatcherAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IStopWatcherResponse> StopWatcherAsync(Func<StopWatcherDescriptor, IStopWatcherRequest> selector)`  
-5.x: `public Task<IStopWatcherResponse> StopWatcherAsync(Func<StopWatcherDescriptor, IStopWatcherRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SuggestAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector)`  
-5.x: `public Task<ISuggestResponse<T>> SuggestAsync<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SyncedFlushAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISyncedFlushResponse> SyncedFlushAsync(ISyncedFlushRequest request)`  
-5.x: `public Task<ISyncedFlushResponse> SyncedFlushAsync(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.SyncedFlushAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<ISyncedFlushResponse> SyncedFlushAsync(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector)`  
-5.x: `public Task<ISyncedFlushResponse> SyncedFlushAsync(ISyncedFlushRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.TermVectorsAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request)`  
-5.x: `public Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.TermVectorsAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<ITermVectorsResponse> TermVectorsAsync<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector)`  
-5.x: `public Task<ITermVectorsResponse> TermVectorsAsync<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.TypeExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest request)`  
-5.x: `public Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.TypeExistsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IExistsResponse> TypeExistsAsync(Indices indices, Types types, Func<TypeExistsDescriptor, ITypeExistsRequest> selector)`  
-5.x: `public Task<IExistsResponse> TypeExistsAsync(Indices indices, Types types, Func<TypeExistsDescriptor, ITypeExistsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.UnregisterPercolatorAsync** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IUnregisterPercolatorResponse> UnregisterPercolatorAsync(IUnregisterPercolatorRequest request)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Index a document containing a field mapped with percolator type")]
-public Task<IUnregisterPercolatorResponse> UnregisterPercolatorAsync(IUnregisterPercolatorRequest request, CancellationToken cancellationToken)
-```
-
-**public method Nest.IElasticClient.UnregisterPercolatorAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-public Task<IUnregisterPercolatorResponse> UnregisterPercolatorAsync<T>(Name name, Func<UnregisterPercolatorDescriptor<T>, IUnregisterPercolatorRequest> selector)
-```
-
-5.x
-```csharp
-[ObsoleteAttribute("Deprecated. Will be removed in the next major release. Index a document containing a field mapped with percolator type")]
-public Task<IUnregisterPercolatorResponse> UnregisterPercolatorAsync<T>(Name name, Func<UnregisterPercolatorDescriptor<T>, IUnregisterPercolatorRequest> selector, CancellationToken cancellationToken)
-```
-
-**public method Nest.IElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)`  
-5.x: `public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector)`  
-5.x: `public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.UpdateAsync&lt;TDocument&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(IUpdateRequest<TDocument, TDocument> request)`  
-5.x: `public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.UpdateAsync&lt;TDocument&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector)`  
-5.x: `public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(IUpdateRequest<TDocument, TDocument> request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.UpdateByQueryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request)`  
-5.x: `public Task<IUpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.UpdateByQueryAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpdateByQueryResponse> UpdateByQueryAsync<T>(Indices indices, Types types, Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector)`  
-5.x: `public Task<IUpdateByQueryResponse> UpdateByQueryAsync<T>(Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.UpdateIndexSettingsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request)`  
-5.x: `public Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(Indices indices, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.UpdateIndexSettingsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(Indices indices, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector)`  
-5.x: `public Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.UpgradeAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest request)`  
-5.x: `public Task<IUpgradeResponse> UpgradeAsync(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.UpgradeAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpgradeResponse> UpgradeAsync(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector)`  
-5.x: `public Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.UpgradeStatusAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector)`  
-5.x: `public Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.UpgradeStatusAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest request)`  
-5.x: `public Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ValidateQueryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IValidateQueryResponse> ValidateQueryAsync(IValidateQueryRequest request)`  
-5.x: `public Task<IValidateQueryResponse> ValidateQueryAsync(IValidateQueryRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.ValidateQueryAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<IValidateQueryResponse> ValidateQueryAsync<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector)`  
-5.x: `public Task<IValidateQueryResponse> ValidateQueryAsync<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.VerifyRepositoryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest request)`  
-5.x: `public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(Name repository, Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.VerifyRepositoryAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(Name repository, Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector)`  
-5.x: `public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.WatcherStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IWatcherStatsResponse> WatcherStatsAsync(IWatcherStatsRequest request)`  
-5.x: `public Task<IWatcherStatsResponse> WatcherStatsAsync(IWatcherStatsRequest request, CancellationToken cancellationToken)`  
-
-**public method Nest.IElasticClient.WatcherStatsAsync** *Declaration changed (Breaking)*
-
-2.x: `public Task<IWatcherStatsResponse> WatcherStatsAsync(Func<WatcherStatsDescriptor, IWatcherStatsRequest> selector)`  
-5.x: `public Task<IWatcherStatsResponse> WatcherStatsAsync(Func<WatcherStatsDescriptor, IWatcherStatsRequest> selector, CancellationToken cancellationToken)`  
-
-**public method Nest.IHighLevelToLowLevelDispatcher.DispatchAsync&lt;TRequest, TQueryString, TResponse, TResponseInterface&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<TResponseInterface> DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(TRequest descriptor, Func<TRequest, PostData<object>, Task<ElasticsearchResponse<TResponse>>> dispatch) where TRequest : IRequest<TQueryString> where TQueryString : new(), FluentRequestParameters<TQueryString> where TResponse : ResponseBase, TResponseInterface where TResponseInterface : IResponse`  
-5.x: `public Task<TResponseInterface> DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(TRequest descriptor, CancellationToken cancellationToken, Func<IApiCallDetails, Stream, TResponse> responseGenerator, Func<TRequest, PostData<object>, CancellationToken, Task<ElasticsearchResponse<TResponse>>> dispatch) where TRequest : IRequest<TQueryString> where TQueryString : new(), FluentRequestParameters<TQueryString> where TResponse : ResponseBase, TResponseInterface where TResponseInterface : IResponse`  
-
-**public method Nest.IHighLevelToLowLevelDispatcher.DispatchAsync&lt;TRequest, TQueryString, TResponse, TResponseInterface&gt;** *Declaration changed (Breaking)*
-
-2.x: `public Task<TResponseInterface> DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(TRequest descriptor, Func<IApiCallDetails, Stream, TResponse> responseGenerator, Func<TRequest, PostData<object>, Task<ElasticsearchResponse<TResponse>>> dispatch) where TRequest : IRequest<TQueryString> where TQueryString : new(), FluentRequestParameters<TQueryString> where TResponse : ResponseBase, TResponseInterface where TResponseInterface : IResponse`  
-5.x: `public Task<TResponseInterface> DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(TRequest descriptor, CancellationToken cancellationToken, Func<TRequest, PostData<object>, CancellationToken, Task<ElasticsearchResponse<TResponse>>> dispatch) where TRequest : IRequest<TQueryString> where TQueryString : new(), FluentRequestParameters<TQueryString> where TResponse : ResponseBase, TResponseInterface where TResponseInterface : IResponse`  
-
-**public method Nest.IndexManyExtensions.IndexManyAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[ExtensionAttribute]
-public static Task<IBulkResponse> IndexManyAsync<T>(IElasticClient client, IEnumerable<T> objects, string index, string type)
-```
-
-5.x
-```csharp
-[ExtensionAttribute]
-public static Task<IBulkResponse> IndexManyAsync<T>(IElasticClient client, IEnumerable<T> objects, IndexName index, TypeName type, CancellationToken cancellationToken)
-```
-
-**public method Nest.ReindexObservable&lt;T&gt;..ctor** *Declaration changed (Breaking)*
-
-2.x: `public  .ctor(IElasticClient client, IConnectionSettingsValues connectionSettings, IReindexRequest reindexRequest)`  
-5.x: `public  .ctor(IElasticClient client, IConnectionSettingsValues connectionSettings, IReindexRequest<T> reindexRequest, CancellationToken cancellationToken)`  
-
-**public method Nest.SourceManyExtensions.SourceManyAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[ExtensionAttribute]
-public static Task<IEnumerable<T>> SourceManyAsync<T>(IElasticClient client, IEnumerable<long> ids, string index, string type)
-```
-
-5.x
-```csharp
-[ExtensionAttribute]
-public static Task<IEnumerable<T>> SourceManyAsync<T>(IElasticClient client, IEnumerable<long> ids, string index, string type, CancellationToken cancellationToken)
-```
-
-**public method Nest.SourceManyExtensions.SourceManyAsync&lt;T&gt;** *Declaration changed (Breaking)*
-
-2.x
-```csharp
-[AsyncStateMachineAttribute(Nest.SourceManyExtensions+<SourceManyAsync>d__2`1[T])]
-[ExtensionAttribute]
-public static Task<IEnumerable<T>> SourceManyAsync<T>(IElasticClient client, IEnumerable<string> ids, string index, string type)
-```
-
-5.x
-```csharp
-[AsyncStateMachineAttribute(Nest.SourceManyExtensions+<SourceManyAsync>d__2`1[T])]
-[ExtensionAttribute]
-public static Task<IEnumerable<T>> SourceManyAsync<T>(IElasticClient client, IEnumerable<string> ids, string index, string type, CancellationToken cancellationToken)
-```
-
+**public method Nest.BulkAllObservable&lt;T&gt;..ctor**
+**public method Nest.DeleteManyExtensions.DeleteManyAsync&lt;T&gt;**
+**public method Nest.ElasticClient.AcknowledgeWatchAsync**
+**public method Nest.ElasticClient.AcknowledgeWatchAsync**
+**public method Nest.ElasticClient.ActivateWatchAsync**
+**public method Nest.ElasticClient.ActivateWatchAsync**
+**public method Nest.ElasticClient.AliasAsync**
+**public method Nest.ElasticClient.AliasAsync**
+**public method Nest.ElasticClient.AliasExistsAsync**
+**public method Nest.ElasticClient.AliasExistsAsync**
+**public method Nest.ElasticClient.AnalyzeAsync**
+**public method Nest.ElasticClient.AnalyzeAsync**
+**public method Nest.ElasticClient.AuthenticateAsync**
+**public method Nest.ElasticClient.AuthenticateAsync**
+**public method Nest.ElasticClient.BulkAsync**
+**public method Nest.ElasticClient.BulkAsync**
+**public method Nest.ElasticClient.CatAliasesAsync**
+**public method Nest.ElasticClient.CatAliasesAsync**
+**public method Nest.ElasticClient.CatAllocationAsync**
+**public method Nest.ElasticClient.CatAllocationAsync**
+**public method Nest.ElasticClient.CatCountAsync**
+**public method Nest.ElasticClient.CatCountAsync**
+**public method Nest.ElasticClient.CatFielddataAsync**
+**public method Nest.ElasticClient.CatFielddataAsync**
+**public method Nest.ElasticClient.CatHealthAsync**
+**public method Nest.ElasticClient.CatHealthAsync**
+**public method Nest.ElasticClient.CatHelpAsync**
+**public method Nest.ElasticClient.CatHelpAsync**
+**public method Nest.ElasticClient.CatIndicesAsync**
+**public method Nest.ElasticClient.CatIndicesAsync**
+**public method Nest.ElasticClient.CatMasterAsync**
+**public method Nest.ElasticClient.CatMasterAsync**
+**public method Nest.ElasticClient.CatNodeAttributesAsync**
+**public method Nest.ElasticClient.CatNodeAttributesAsync**
+**public method Nest.ElasticClient.CatNodesAsync**
+**public method Nest.ElasticClient.CatNodesAsync**
+**public method Nest.ElasticClient.CatPendingTasksAsync**
+**public method Nest.ElasticClient.CatPendingTasksAsync**
+**public method Nest.ElasticClient.CatPluginsAsync**
+**public method Nest.ElasticClient.CatPluginsAsync**
+**public method Nest.ElasticClient.CatRecoveryAsync**
+**public method Nest.ElasticClient.CatRecoveryAsync**
+**public method Nest.ElasticClient.CatRepositoriesAsync**
+**public method Nest.ElasticClient.CatRepositoriesAsync**
+**public method Nest.ElasticClient.CatSegmentsAsync**
+**public method Nest.ElasticClient.CatSegmentsAsync**
+**public method Nest.ElasticClient.CatShardsAsync**
+**public method Nest.ElasticClient.CatShardsAsync**
+**public method Nest.ElasticClient.CatSnapshotsAsync**
+**public method Nest.ElasticClient.CatSnapshotsAsync**
+**public method Nest.ElasticClient.CatThreadPoolAsync**
+**public method Nest.ElasticClient.CatThreadPoolAsync**
+**public method Nest.ElasticClient.ClearCacheAsync**
+**public method Nest.ElasticClient.ClearCacheAsync**
+**public method Nest.ElasticClient.ClearCachedRealmsAsync**
+**public method Nest.ElasticClient.ClearCachedRealmsAsync**
+**public method Nest.ElasticClient.ClearCachedRolesAsync**
+**public method Nest.ElasticClient.ClearCachedRolesAsync**
+**public method Nest.ElasticClient.ClearScrollAsync**
+**public method Nest.ElasticClient.ClearScrollAsync**
+**public method Nest.ElasticClient.CloseIndexAsync**
+**public method Nest.ElasticClient.CloseIndexAsync**
+**public method Nest.ElasticClient.ClusterGetSettingsAsync**
+**public method Nest.ElasticClient.ClusterGetSettingsAsync**
+**public method Nest.ElasticClient.ClusterHealthAsync**
+**public method Nest.ElasticClient.ClusterHealthAsync**
+**public method Nest.ElasticClient.ClusterPendingTasksAsync**
+**public method Nest.ElasticClient.ClusterPendingTasksAsync**
+**public method Nest.ElasticClient.ClusterPutSettingsAsync**
+**public method Nest.ElasticClient.ClusterPutSettingsAsync**
+**public method Nest.ElasticClient.ClusterRerouteAsync**
+**public method Nest.ElasticClient.ClusterRerouteAsync**
+**public method Nest.ElasticClient.ClusterStateAsync**
+**public method Nest.ElasticClient.ClusterStateAsync**
+**public method Nest.ElasticClient.ClusterStatsAsync**
+**public method Nest.ElasticClient.ClusterStatsAsync**
+**public method Nest.ElasticClient.CountAsync&lt;T&gt;**
+**public method Nest.ElasticClient.CountAsync&lt;T&gt;**
+**public method Nest.ElasticClient.CreateIndexAsync**
+**public method Nest.ElasticClient.CreateIndexAsync**
+**public method Nest.ElasticClient.CreateRepositoryAsync**
+**public method Nest.ElasticClient.CreateRepositoryAsync**
+**public method Nest.ElasticClient.DeactivateWatchAsync**
+**public method Nest.ElasticClient.DeactivateWatchAsync**
+**public method Nest.ElasticClient.DeleteAliasAsync**
+**public method Nest.ElasticClient.DeleteAliasAsync**
+**public method Nest.ElasticClient.DeleteAsync**
+**public method Nest.ElasticClient.DeleteAsync&lt;T&gt;**
+**public method Nest.ElasticClient.DeleteByQueryAsync**
+**public method Nest.ElasticClient.DeleteByQueryAsync&lt;T&gt;**
+**public method Nest.ElasticClient.DeleteIndexAsync**
+**public method Nest.ElasticClient.DeleteIndexAsync**
+**public method Nest.ElasticClient.DeleteIndexTemplateAsync**
+**public method Nest.ElasticClient.DeleteIndexTemplateAsync**
+**public method Nest.ElasticClient.DeleteLicenseAsync**
+**public method Nest.ElasticClient.DeleteLicenseAsync**
+**public method Nest.ElasticClient.DeleteRepositoryAsync**
+**public method Nest.ElasticClient.DeleteRepositoryAsync**
+**public method Nest.ElasticClient.DeleteRoleAsync**
+**public method Nest.ElasticClient.DeleteRoleAsync**
+**public method Nest.ElasticClient.DeleteScriptAsync**
+**public method Nest.ElasticClient.DeleteScriptAsync**
+**public method Nest.ElasticClient.DeleteSearchTemplateAsync**
+**public method Nest.ElasticClient.DeleteSearchTemplateAsync**
+**public method Nest.ElasticClient.DeleteSnapshotAsync**
+**public method Nest.ElasticClient.DeleteSnapshotAsync**
+**public method Nest.ElasticClient.DeleteUserAsync**
+**public method Nest.ElasticClient.DeleteUserAsync**
+**public method Nest.ElasticClient.DeleteWatchAsync**
+**public method Nest.ElasticClient.DeleteWatchAsync**
+**public method Nest.ElasticClient.DocumentExistsAsync**
+**public method Nest.ElasticClient.DocumentExistsAsync&lt;T&gt;**
+**public method Nest.ElasticClient.ExecuteWatchAsync**
+**public method Nest.ElasticClient.ExecuteWatchAsync**
+**public method Nest.ElasticClient.ExplainAsync&lt;T&gt;**
+**public method Nest.ElasticClient.ExplainAsync&lt;T&gt;**
+**public method Nest.ElasticClient.FieldStatsAsync**
+**public method Nest.ElasticClient.FieldStatsAsync**
+**public method Nest.ElasticClient.FlushAsync**
+**public method Nest.ElasticClient.FlushAsync**
+**public method Nest.ElasticClient.ForceMergeAsync**
+**public method Nest.ElasticClient.ForceMergeAsync**
+**public method Nest.ElasticClient.GetAliasAsync**
+**public method Nest.ElasticClient.GetAliasAsync**
+**public method Nest.ElasticClient.GetAsync&lt;T&gt;**
+**public method Nest.ElasticClient.GetAsync&lt;T&gt;**
+**public method Nest.ElasticClient.GetFieldMappingAsync**
+**public method Nest.ElasticClient.GetFieldMappingAsync&lt;T&gt;**
+**public method Nest.ElasticClient.GetIndexAsync**
+**public method Nest.ElasticClient.GetIndexAsync**
+**public method Nest.ElasticClient.GetIndexSettingsAsync**
+**public method Nest.ElasticClient.GetIndexSettingsAsync**
+**public method Nest.ElasticClient.GetIndexTemplateAsync**
+**public method Nest.ElasticClient.GetIndexTemplateAsync**
+**public method Nest.ElasticClient.GetLicenseAsync**
+**public method Nest.ElasticClient.GetLicenseAsync**
+**public method Nest.ElasticClient.GetMappingAsync**
+**public method Nest.ElasticClient.GetMappingAsync&lt;T&gt;**
+**public method Nest.ElasticClient.GetRepositoryAsync**
+**public method Nest.ElasticClient.GetRepositoryAsync**
+**public method Nest.ElasticClient.GetRoleAsync**
+**public method Nest.ElasticClient.GetRoleAsync**
+**public method Nest.ElasticClient.GetScriptAsync**
+**public method Nest.ElasticClient.GetScriptAsync**
+**public method Nest.ElasticClient.GetSearchTemplateAsync**
+**public method Nest.ElasticClient.GetSearchTemplateAsync**
+**public method Nest.ElasticClient.GetSnapshotAsync**
+**public method Nest.ElasticClient.GetSnapshotAsync**
+**public method Nest.ElasticClient.GetUserAsync**
+**public method Nest.ElasticClient.GetUserAsync**
+**public method Nest.ElasticClient.GetWatchAsync**
+**public method Nest.ElasticClient.GetWatchAsync**
+**public method Nest.ElasticClient.GraphExploreAsync**
+**public method Nest.ElasticClient.GraphExploreAsync&lt;T&gt;**
+**public method Nest.ElasticClient.IndexAsync**
+**public method Nest.ElasticClient.IndexAsync&lt;T&gt;**
+**public method Nest.ElasticClient.IndexExistsAsync**
+**public method Nest.ElasticClient.IndexExistsAsync**
+**public method Nest.ElasticClient.IndexTemplateExistsAsync**
+**public method Nest.ElasticClient.IndexTemplateExistsAsync**
+**public method Nest.ElasticClient.IndicesShardStoresAsync**
+**public method Nest.ElasticClient.IndicesShardStoresAsync**
+**public method Nest.ElasticClient.IndicesStatsAsync**
+**public method Nest.ElasticClient.IndicesStatsAsync**
+**public method Nest.ElasticClient.MapAsync**
+**public method Nest.ElasticClient.MapAsync&lt;T&gt;**
+**public method Nest.ElasticClient.MultiGetAsync**
+**public method Nest.ElasticClient.MultiGetAsync**
+**public method Nest.ElasticClient.MultiPercolateAsync**
+**public method Nest.ElasticClient.MultiPercolateAsync**
+**public method Nest.ElasticClient.MultiSearchAsync**
+**public method Nest.ElasticClient.MultiSearchAsync**
+**public method Nest.ElasticClient.MultiTermVectorsAsync**
+**public method Nest.ElasticClient.MultiTermVectorsAsync**
+**public method Nest.ElasticClient.NodesHotThreadsAsync**
+**public method Nest.ElasticClient.NodesHotThreadsAsync**
+**public method Nest.ElasticClient.NodesInfoAsync**
+**public method Nest.ElasticClient.NodesInfoAsync**
+**public method Nest.ElasticClient.NodesStatsAsync**
+**public method Nest.ElasticClient.NodesStatsAsync**
+**public method Nest.ElasticClient.OpenIndexAsync**
+**public method Nest.ElasticClient.OpenIndexAsync**
+**public method Nest.ElasticClient.PercolateAsync&lt;T&gt;**
+**public method Nest.ElasticClient.PercolateAsync&lt;T&gt;**
+**public method Nest.ElasticClient.PercolateCountAsync&lt;T&gt;**
+**public method Nest.ElasticClient.PercolateCountAsync&lt;T&gt;**
+**public method Nest.ElasticClient.PingAsync**
+**public method Nest.ElasticClient.PingAsync**
+**public method Nest.ElasticClient.PostLicenseAsync**
+**public method Nest.ElasticClient.PostLicenseAsync**
+**public method Nest.ElasticClient.PutAliasAsync**
+**public method Nest.ElasticClient.PutAliasAsync**
+**public method Nest.ElasticClient.PutIndexTemplateAsync**
+**public method Nest.ElasticClient.PutIndexTemplateAsync**
+**public method Nest.ElasticClient.PutRoleAsync**
+**public method Nest.ElasticClient.PutRoleAsync**
+**public method Nest.ElasticClient.PutScriptAsync**
+**public method Nest.ElasticClient.PutScriptAsync**
+**public method Nest.ElasticClient.PutSearchTemplateAsync**
+**public method Nest.ElasticClient.PutSearchTemplateAsync**
+**public method Nest.ElasticClient.PutUserAsync**
+**public method Nest.ElasticClient.PutUserAsync**
+**public method Nest.ElasticClient.PutWatchAsync**
+**public method Nest.ElasticClient.PutWatchAsync**
+**public method Nest.ElasticClient.RecoveryStatusAsync**
+**public method Nest.ElasticClient.RecoveryStatusAsync**
+**public method Nest.ElasticClient.RefreshAsync**
+**public method Nest.ElasticClient.RefreshAsync**
+**public method Nest.ElasticClient.RegisterPercolatorAsync**
+**public method Nest.ElasticClient.RegisterPercolatorAsync&lt;T&gt;**
+**public method Nest.ElasticClient.Reindex&lt;T&gt;**
+**public method Nest.ElasticClient.Reindex&lt;T&gt;**
+**public method Nest.ElasticClient.ReindexOnServerAsync**
+**public method Nest.ElasticClient.ReindexOnServerAsync**
+**public method Nest.ElasticClient.RenderSearchTemplateAsync**
+**public method Nest.ElasticClient.RenderSearchTemplateAsync**
+**public method Nest.ElasticClient.RestartWatcherAsync**
+**public method Nest.ElasticClient.RestartWatcherAsync**
+**public method Nest.ElasticClient.RestoreAsync**
+**public method Nest.ElasticClient.RestoreAsync**
+**public method Nest.ElasticClient.RethrottleAsync**
+**public method Nest.ElasticClient.RethrottleAsync**
+**public method Nest.ElasticClient.RootNodeInfoAsync**
+**public method Nest.ElasticClient.RootNodeInfoAsync**
+**public method Nest.ElasticClient.ScrollAsync&lt;T&gt;**
+**public method Nest.ElasticClient.ScrollAsync&lt;T&gt;**
+**public method Nest.ElasticClient.SearchAsync&lt;T, TResult&gt;**
+**public method Nest.ElasticClient.SearchAsync&lt;T, TResult&gt;**
+**public method Nest.ElasticClient.SearchAsync&lt;T&gt;**
+**public method Nest.ElasticClient.SearchAsync&lt;T&gt;**
+**public method Nest.ElasticClient.SearchShardsAsync**
+**public method Nest.ElasticClient.SearchShardsAsync&lt;T&gt;**
+**public method Nest.ElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**
+**public method Nest.ElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**
+**public method Nest.ElasticClient.SearchTemplateAsync&lt;T&gt;**
+**public method Nest.ElasticClient.SearchTemplateAsync&lt;T&gt;**
+**public method Nest.ElasticClient.SegmentsAsync**
+**public method Nest.ElasticClient.SegmentsAsync**
+**public method Nest.ElasticClient.SnapshotAsync**
+**public method Nest.ElasticClient.SnapshotAsync**
+**public method Nest.ElasticClient.SnapshotStatusAsync**
+**public method Nest.ElasticClient.SnapshotStatusAsync**
+**public method Nest.ElasticClient.SourceAsync&lt;T&gt;**
+**public method Nest.ElasticClient.SourceAsync&lt;T&gt;**
+**public method Nest.ElasticClient.StartWatcherAsync**
+**public method Nest.ElasticClient.StartWatcherAsync**
+**public method Nest.ElasticClient.StopWatcherAsync**
+**public method Nest.ElasticClient.StopWatcherAsync**
+**public method Nest.ElasticClient.SuggestAsync&lt;T&gt;**
+**public method Nest.ElasticClient.SyncedFlushAsync**
+**public method Nest.ElasticClient.SyncedFlushAsync**
+**public method Nest.ElasticClient.TermVectorsAsync&lt;T&gt;**
+**public method Nest.ElasticClient.TermVectorsAsync&lt;T&gt;**
+**public method Nest.ElasticClient.TypeExistsAsync**
+**public method Nest.ElasticClient.TypeExistsAsync**
+**public method Nest.ElasticClient.UnregisterPercolatorAsync**
+**public method Nest.ElasticClient.UnregisterPercolatorAsync&lt;T&gt;**
+**public method Nest.ElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**
+**public method Nest.ElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**
+**public method Nest.ElasticClient.UpdateAsync&lt;TDocument&gt;**
+**public method Nest.ElasticClient.UpdateAsync&lt;TDocument&gt;**
+**public method Nest.ElasticClient.UpdateByQueryAsync**
+**public method Nest.ElasticClient.UpdateByQueryAsync&lt;T&gt;**
+**public method Nest.ElasticClient.UpdateIndexSettingsAsync**
+**public method Nest.ElasticClient.UpdateIndexSettingsAsync**
+**public method Nest.ElasticClient.UpgradeAsync**
+**public method Nest.ElasticClient.UpgradeAsync**
+**public method Nest.ElasticClient.UpgradeStatusAsync**
+**public method Nest.ElasticClient.UpgradeStatusAsync**
+**public method Nest.ElasticClient.ValidateQueryAsync**
+**public method Nest.ElasticClient.ValidateQueryAsync&lt;T&gt;**
+**public method Nest.ElasticClient.VerifyRepositoryAsync**
+**public method Nest.ElasticClient.VerifyRepositoryAsync**
+**public method Nest.ElasticClient.WatcherStatsAsync**
+**public method Nest.ElasticClient.WatcherStatsAsync**
+**public method Nest.GetManyExtensions.GetManyAsync&lt;T&gt;**
+**public method Nest.GetManyExtensions.GetManyAsync&lt;T&gt;**
+**public method Nest.IElasticClient.AcknowledgeWatchAsync**
+**public method Nest.IElasticClient.AcknowledgeWatchAsync**
+**public method Nest.IElasticClient.ActivateWatchAsync**
+**public method Nest.IElasticClient.ActivateWatchAsync**
+**public method Nest.IElasticClient.AliasAsync**
+**public method Nest.IElasticClient.AliasAsync**
+**public method Nest.IElasticClient.AliasExistsAsync**
+**public method Nest.IElasticClient.AliasExistsAsync**
+**public method Nest.IElasticClient.AnalyzeAsync**
+**public method Nest.IElasticClient.AnalyzeAsync**
+**public method Nest.IElasticClient.AuthenticateAsync**
+**public method Nest.IElasticClient.AuthenticateAsync**
+**public method Nest.IElasticClient.BulkAsync**
+**public method Nest.IElasticClient.BulkAsync**
+**public method Nest.IElasticClient.CatAliasesAsync**
+**public method Nest.IElasticClient.CatAliasesAsync**
+**public method Nest.IElasticClient.CatAllocationAsync**
+**public method Nest.IElasticClient.CatAllocationAsync**
+**public method Nest.IElasticClient.CatCountAsync**
+**public method Nest.IElasticClient.CatCountAsync**
+**public method Nest.IElasticClient.CatFielddataAsync**
+**public method Nest.IElasticClient.CatFielddataAsync**
+**public method Nest.IElasticClient.CatHealthAsync**
+**public method Nest.IElasticClient.CatHealthAsync**
+**public method Nest.IElasticClient.CatHelpAsync**
+**public method Nest.IElasticClient.CatHelpAsync**
+**public method Nest.IElasticClient.CatIndicesAsync**
+**public method Nest.IElasticClient.CatIndicesAsync**
+**public method Nest.IElasticClient.CatMasterAsync**
+**public method Nest.IElasticClient.CatMasterAsync**
+**public method Nest.IElasticClient.CatNodeAttributesAsync**
+**public method Nest.IElasticClient.CatNodeAttributesAsync**
+**public method Nest.IElasticClient.CatNodesAsync**
+**public method Nest.IElasticClient.CatNodesAsync**
+**public method Nest.IElasticClient.CatPendingTasksAsync**
+**public method Nest.IElasticClient.CatPendingTasksAsync**
+**public method Nest.IElasticClient.CatPluginsAsync**
+**public method Nest.IElasticClient.CatPluginsAsync**
+**public method Nest.IElasticClient.CatRecoveryAsync**
+**public method Nest.IElasticClient.CatRecoveryAsync**
+**public method Nest.IElasticClient.CatRepositoriesAsync**
+**public method Nest.IElasticClient.CatRepositoriesAsync**
+**public method Nest.IElasticClient.CatSegmentsAsync**
+**public method Nest.IElasticClient.CatSegmentsAsync**
+**public method Nest.IElasticClient.CatShardsAsync**
+**public method Nest.IElasticClient.CatShardsAsync**
+**public method Nest.IElasticClient.CatSnapshotsAsync**
+**public method Nest.IElasticClient.CatSnapshotsAsync**
+**public method Nest.IElasticClient.CatThreadPoolAsync**
+**public method Nest.IElasticClient.CatThreadPoolAsync**
+**public method Nest.IElasticClient.ClearCacheAsync**
+**public method Nest.IElasticClient.ClearCacheAsync**
+**public method Nest.IElasticClient.ClearCachedRealmsAsync**
+**public method Nest.IElasticClient.ClearCachedRealmsAsync**
+**public method Nest.IElasticClient.ClearCachedRolesAsync**
+**public method Nest.IElasticClient.ClearCachedRolesAsync**
+**public method Nest.IElasticClient.ClearScrollAsync**
+**public method Nest.IElasticClient.ClearScrollAsync**
+**public method Nest.IElasticClient.CloseIndexAsync**
+**public method Nest.IElasticClient.CloseIndexAsync**
+**public method Nest.IElasticClient.ClusterGetSettingsAsync**
+**public method Nest.IElasticClient.ClusterGetSettingsAsync**
+**public method Nest.IElasticClient.ClusterHealthAsync**
+**public method Nest.IElasticClient.ClusterHealthAsync**
+**public method Nest.IElasticClient.ClusterPendingTasksAsync**
+**public method Nest.IElasticClient.ClusterPendingTasksAsync**
+**public method Nest.IElasticClient.ClusterPutSettingsAsync**
+**public method Nest.IElasticClient.ClusterPutSettingsAsync**
+**public method Nest.IElasticClient.ClusterRerouteAsync**
+**public method Nest.IElasticClient.ClusterRerouteAsync**
+**public method Nest.IElasticClient.ClusterStateAsync**
+**public method Nest.IElasticClient.ClusterStateAsync**
+**public method Nest.IElasticClient.ClusterStatsAsync**
+**public method Nest.IElasticClient.ClusterStatsAsync**
+**public method Nest.IElasticClient.CountAsync&lt;T&gt;**
+**public method Nest.IElasticClient.CountAsync&lt;T&gt;**
+**public method Nest.IElasticClient.CreateIndexAsync**
+**public method Nest.IElasticClient.CreateIndexAsync**
+**public method Nest.IElasticClient.CreateRepositoryAsync**
+**public method Nest.IElasticClient.CreateRepositoryAsync**
+**public method Nest.IElasticClient.DeactivateWatchAsync**
+**public method Nest.IElasticClient.DeactivateWatchAsync**
+**public method Nest.IElasticClient.DeleteAliasAsync**
+**public method Nest.IElasticClient.DeleteAliasAsync**
+**public method Nest.IElasticClient.DeleteAsync**
+**public method Nest.IElasticClient.DeleteAsync&lt;T&gt;**
+**public method Nest.IElasticClient.DeleteByQueryAsync**
+**public method Nest.IElasticClient.DeleteByQueryAsync&lt;T&gt;**
+**public method Nest.IElasticClient.DeleteIndexAsync**
+**public method Nest.IElasticClient.DeleteIndexAsync**
+**public method Nest.IElasticClient.DeleteIndexTemplateAsync**
+**public method Nest.IElasticClient.DeleteIndexTemplateAsync**
+**public method Nest.IElasticClient.DeleteLicenseAsync**
+**public method Nest.IElasticClient.DeleteLicenseAsync**
+**public method Nest.IElasticClient.DeleteRepositoryAsync**
+**public method Nest.IElasticClient.DeleteRepositoryAsync**
+**public method Nest.IElasticClient.DeleteRoleAsync**
+**public method Nest.IElasticClient.DeleteRoleAsync**
+**public method Nest.IElasticClient.DeleteScriptAsync**
+**public method Nest.IElasticClient.DeleteScriptAsync**
+**public method Nest.IElasticClient.DeleteSearchTemplateAsync**
+**public method Nest.IElasticClient.DeleteSearchTemplateAsync**
+**public method Nest.IElasticClient.DeleteSnapshotAsync**
+**public method Nest.IElasticClient.DeleteSnapshotAsync**
+**public method Nest.IElasticClient.DeleteUserAsync**
+**public method Nest.IElasticClient.DeleteUserAsync**
+**public method Nest.IElasticClient.DeleteWatchAsync**
+**public method Nest.IElasticClient.DeleteWatchAsync**
+**public method Nest.IElasticClient.DocumentExistsAsync**
+**public method Nest.IElasticClient.DocumentExistsAsync&lt;T&gt;**
+**public method Nest.IElasticClient.ExecuteWatchAsync**
+**public method Nest.IElasticClient.ExecuteWatchAsync**
+**public method Nest.IElasticClient.ExplainAsync&lt;T&gt;**
+**public method Nest.IElasticClient.ExplainAsync&lt;T&gt;**
+**public method Nest.IElasticClient.FieldStatsAsync**
+**public method Nest.IElasticClient.FieldStatsAsync**
+**public method Nest.IElasticClient.FlushAsync**
+**public method Nest.IElasticClient.FlushAsync**
+**public method Nest.IElasticClient.ForceMergeAsync**
+**public method Nest.IElasticClient.ForceMergeAsync**
+**public method Nest.IElasticClient.GetAliasAsync**
+**public method Nest.IElasticClient.GetAliasAsync**
+**public method Nest.IElasticClient.GetAsync&lt;T&gt;**
+**public method Nest.IElasticClient.GetAsync&lt;T&gt;**
+**public method Nest.IElasticClient.GetFieldMappingAsync**
+**public method Nest.IElasticClient.GetFieldMappingAsync&lt;T&gt;**
+**public method Nest.IElasticClient.GetIndexAsync**
+**public method Nest.IElasticClient.GetIndexAsync**
+**public method Nest.IElasticClient.GetIndexSettingsAsync**
+**public method Nest.IElasticClient.GetIndexSettingsAsync**
+**public method Nest.IElasticClient.GetIndexTemplateAsync**
+**public method Nest.IElasticClient.GetIndexTemplateAsync**
+**public method Nest.IElasticClient.GetLicenseAsync**
+**public method Nest.IElasticClient.GetLicenseAsync**
+**public method Nest.IElasticClient.GetMappingAsync**
+**public method Nest.IElasticClient.GetMappingAsync&lt;T&gt;**
+**public method Nest.IElasticClient.GetRepositoryAsync**
+**public method Nest.IElasticClient.GetRepositoryAsync**
+**public method Nest.IElasticClient.GetRoleAsync**
+**public method Nest.IElasticClient.GetRoleAsync**
+**public method Nest.IElasticClient.GetScriptAsync**
+**public method Nest.IElasticClient.GetScriptAsync**
+**public method Nest.IElasticClient.GetSearchTemplateAsync**
+**public method Nest.IElasticClient.GetSearchTemplateAsync**
+**public method Nest.IElasticClient.GetSnapshotAsync**
+**public method Nest.IElasticClient.GetSnapshotAsync**
+**public method Nest.IElasticClient.GetUserAsync**
+**public method Nest.IElasticClient.GetUserAsync**
+**public method Nest.IElasticClient.GetWatchAsync**
+**public method Nest.IElasticClient.GetWatchAsync**
+**public method Nest.IElasticClient.GraphExploreAsync**
+**public method Nest.IElasticClient.GraphExploreAsync&lt;T&gt;**
+**public method Nest.IElasticClient.IndexAsync**
+**public method Nest.IElasticClient.IndexAsync&lt;T&gt;**
+**public method Nest.IElasticClient.IndexExistsAsync**
+**public method Nest.IElasticClient.IndexExistsAsync**
+**public method Nest.IElasticClient.IndexTemplateExistsAsync**
+**public method Nest.IElasticClient.IndexTemplateExistsAsync**
+**public method Nest.IElasticClient.IndicesShardStoresAsync**
+**public method Nest.IElasticClient.IndicesShardStoresAsync**
+**public method Nest.IElasticClient.IndicesStatsAsync**
+**public method Nest.IElasticClient.IndicesStatsAsync**
+**public method Nest.IElasticClient.MapAsync**
+**public method Nest.IElasticClient.MapAsync&lt;T&gt;**
+**public method Nest.IElasticClient.MultiGetAsync**
+**public method Nest.IElasticClient.MultiGetAsync**
+**public method Nest.IElasticClient.MultiPercolateAsync**
+**public method Nest.IElasticClient.MultiPercolateAsync**
+**public method Nest.IElasticClient.MultiSearchAsync**
+**public method Nest.IElasticClient.MultiSearchAsync**
+**public method Nest.IElasticClient.MultiTermVectorsAsync**
+**public method Nest.IElasticClient.MultiTermVectorsAsync**
+**public method Nest.IElasticClient.NodesHotThreadsAsync**
+**public method Nest.IElasticClient.NodesHotThreadsAsync**
+**public method Nest.IElasticClient.NodesInfoAsync**
+**public method Nest.IElasticClient.NodesInfoAsync**
+**public method Nest.IElasticClient.NodesStatsAsync**
+**public method Nest.IElasticClient.NodesStatsAsync**
+**public method Nest.IElasticClient.OpenIndexAsync**
+**public method Nest.IElasticClient.OpenIndexAsync**
+**public method Nest.IElasticClient.PercolateAsync&lt;T&gt;**
+**public method Nest.IElasticClient.PercolateAsync&lt;T&gt;**
+**public method Nest.IElasticClient.PercolateCountAsync&lt;T&gt;**
+**public method Nest.IElasticClient.PercolateCountAsync&lt;T&gt;**
+**public method Nest.IElasticClient.PingAsync**
+**public method Nest.IElasticClient.PingAsync**
+**public method Nest.IElasticClient.PostLicenseAsync**
+**public method Nest.IElasticClient.PostLicenseAsync**
+**public method Nest.IElasticClient.PutAliasAsync**
+**public method Nest.IElasticClient.PutAliasAsync**
+**public method Nest.IElasticClient.PutIndexTemplateAsync**
+**public method Nest.IElasticClient.PutIndexTemplateAsync**
+**public method Nest.IElasticClient.PutRoleAsync**
+**public method Nest.IElasticClient.PutRoleAsync**
+**public method Nest.IElasticClient.PutScriptAsync**
+**public method Nest.IElasticClient.PutScriptAsync**
+**public method Nest.IElasticClient.PutSearchTemplateAsync**
+**public method Nest.IElasticClient.PutSearchTemplateAsync**
+**public method Nest.IElasticClient.PutUserAsync**
+**public method Nest.IElasticClient.PutUserAsync**
+**public method Nest.IElasticClient.PutWatchAsync**
+**public method Nest.IElasticClient.PutWatchAsync**
+**public method Nest.IElasticClient.RecoveryStatusAsync**
+**public method Nest.IElasticClient.RecoveryStatusAsync**
+**public method Nest.IElasticClient.RefreshAsync**
+**public method Nest.IElasticClient.RefreshAsync**
+**public method Nest.IElasticClient.RegisterPercolatorAsync**
+**public method Nest.IElasticClient.RegisterPercolatorAsync&lt;T&gt;**
+**public method Nest.IElasticClient.Reindex&lt;T&gt;**
+**public method Nest.IElasticClient.Reindex&lt;T&gt;**
+**public method Nest.IElasticClient.ReindexOnServerAsync**
+**public method Nest.IElasticClient.ReindexOnServerAsync**
+**public method Nest.IElasticClient.RenderSearchTemplateAsync**
+**public method Nest.IElasticClient.RenderSearchTemplateAsync**
+**public method Nest.IElasticClient.RestartWatcherAsync**
+**public method Nest.IElasticClient.RestartWatcherAsync**
+**public method Nest.IElasticClient.RestoreAsync**
+**public method Nest.IElasticClient.RestoreAsync**
+**public method Nest.IElasticClient.RethrottleAsync**
+**public method Nest.IElasticClient.RethrottleAsync**
+**public method Nest.IElasticClient.RootNodeInfoAsync**
+**public method Nest.IElasticClient.RootNodeInfoAsync**
+**public method Nest.IElasticClient.ScrollAsync&lt;T&gt;**
+**public method Nest.IElasticClient.ScrollAsync&lt;T&gt;**
+**public method Nest.IElasticClient.SearchAsync&lt;T, TResult&gt;**
+**public method Nest.IElasticClient.SearchAsync&lt;T, TResult&gt;**
+**public method Nest.IElasticClient.SearchAsync&lt;T&gt;**
+**public method Nest.IElasticClient.SearchAsync&lt;T&gt;**
+**public method Nest.IElasticClient.SearchShardsAsync**
+**public method Nest.IElasticClient.SearchShardsAsync&lt;T&gt;**
+**public method Nest.IElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**
+**public method Nest.IElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**
+**public method Nest.IElasticClient.SearchTemplateAsync&lt;T&gt;**
+**public method Nest.IElasticClient.SearchTemplateAsync&lt;T&gt;**
+**public method Nest.IElasticClient.SegmentsAsync**
+**public method Nest.IElasticClient.SegmentsAsync**
+**public method Nest.IElasticClient.SnapshotAsync**
+**public method Nest.IElasticClient.SnapshotAsync**
+**public method Nest.IElasticClient.SnapshotStatusAsync**
+**public method Nest.IElasticClient.SnapshotStatusAsync**
+**public method Nest.IElasticClient.SourceAsync&lt;T&gt;**
+**public method Nest.IElasticClient.SourceAsync&lt;T&gt;**
+**public method Nest.IElasticClient.StartWatcherAsync**
+**public method Nest.IElasticClient.StartWatcherAsync**
+**public method Nest.IElasticClient.StopWatcherAsync**
+**public method Nest.IElasticClient.StopWatcherAsync**
+**public method Nest.IElasticClient.SuggestAsync&lt;T&gt;**
+**public method Nest.IElasticClient.SyncedFlushAsync**
+**public method Nest.IElasticClient.SyncedFlushAsync**
+**public method Nest.IElasticClient.TermVectorsAsync&lt;T&gt;**
+**public method Nest.IElasticClient.TermVectorsAsync&lt;T&gt;**
+**public method Nest.IElasticClient.TypeExistsAsync**
+**public method Nest.IElasticClient.TypeExistsAsync**
+**public method Nest.IElasticClient.UnregisterPercolatorAsync**
+**public method Nest.IElasticClient.UnregisterPercolatorAsync&lt;T&gt;**
+**public method Nest.IElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**
+**public method Nest.IElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**
+**public method Nest.IElasticClient.UpdateAsync&lt;TDocument&gt;**
+**public method Nest.IElasticClient.UpdateAsync&lt;TDocument&gt;**
+**public method Nest.IElasticClient.UpdateByQueryAsync**
+**public method Nest.IElasticClient.UpdateByQueryAsync&lt;T&gt;**
+**public method Nest.IElasticClient.UpdateIndexSettingsAsync**
+**public method Nest.IElasticClient.UpdateIndexSettingsAsync**
+**public method Nest.IElasticClient.UpgradeAsync**
+**public method Nest.IElasticClient.UpgradeAsync**
+**public method Nest.IElasticClient.UpgradeStatusAsync**
+**public method Nest.IElasticClient.UpgradeStatusAsync**
+**public method Nest.IElasticClient.ValidateQueryAsync**
+**public method Nest.IElasticClient.ValidateQueryAsync&lt;T&gt;**
+**public method Nest.IElasticClient.VerifyRepositoryAsync**
+**public method Nest.IElasticClient.VerifyRepositoryAsync**
+**public method Nest.IElasticClient.WatcherStatsAsync**
+**public method Nest.IElasticClient.WatcherStatsAsync**
+**public method Nest.IHighLevelToLowLevelDispatcher.DispatchAsync&lt;TRequest, TQueryString, TResponse, TResponseInterface&gt;**
+**public method Nest.IHighLevelToLowLevelDispatcher.DispatchAsync&lt;TRequest, TQueryString, TResponse, TResponseInterface&gt;**
+**public method Nest.IndexManyExtensions.IndexManyAsync&lt;T&gt;**
+**public method Nest.ReindexObservable&lt;T&gt;..ctor**
+**public method Nest.SourceManyExtensions.SourceManyAsync&lt;T&gt;**
+**public method Nest.SourceManyExtensions.SourceManyAsync&lt;T&gt;**
