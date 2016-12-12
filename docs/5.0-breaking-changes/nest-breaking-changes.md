@@ -9354,559 +9354,559 @@ public IReadOnlyDictionary<string, ActionStatus> Actions { get; set; }
 ```
 
 #CancellationToken
-**public method Nest.BulkAllObservable&lt;T&gt;..ctor**
-**public method Nest.DeleteManyExtensions.DeleteManyAsync&lt;T&gt;**
-**public method Nest.ElasticClient.AcknowledgeWatchAsync**
-**public method Nest.ElasticClient.AcknowledgeWatchAsync**
-**public method Nest.ElasticClient.ActivateWatchAsync**
-**public method Nest.ElasticClient.ActivateWatchAsync**
-**public method Nest.ElasticClient.AliasAsync**
-**public method Nest.ElasticClient.AliasAsync**
-**public method Nest.ElasticClient.AliasExistsAsync**
-**public method Nest.ElasticClient.AliasExistsAsync**
-**public method Nest.ElasticClient.AnalyzeAsync**
-**public method Nest.ElasticClient.AnalyzeAsync**
-**public method Nest.ElasticClient.AuthenticateAsync**
-**public method Nest.ElasticClient.AuthenticateAsync**
-**public method Nest.ElasticClient.BulkAsync**
-**public method Nest.ElasticClient.BulkAsync**
-**public method Nest.ElasticClient.CatAliasesAsync**
-**public method Nest.ElasticClient.CatAliasesAsync**
-**public method Nest.ElasticClient.CatAllocationAsync**
-**public method Nest.ElasticClient.CatAllocationAsync**
-**public method Nest.ElasticClient.CatCountAsync**
-**public method Nest.ElasticClient.CatCountAsync**
-**public method Nest.ElasticClient.CatFielddataAsync**
-**public method Nest.ElasticClient.CatFielddataAsync**
-**public method Nest.ElasticClient.CatHealthAsync**
-**public method Nest.ElasticClient.CatHealthAsync**
-**public method Nest.ElasticClient.CatHelpAsync**
-**public method Nest.ElasticClient.CatHelpAsync**
-**public method Nest.ElasticClient.CatIndicesAsync**
-**public method Nest.ElasticClient.CatIndicesAsync**
-**public method Nest.ElasticClient.CatMasterAsync**
-**public method Nest.ElasticClient.CatMasterAsync**
-**public method Nest.ElasticClient.CatNodeAttributesAsync**
-**public method Nest.ElasticClient.CatNodeAttributesAsync**
-**public method Nest.ElasticClient.CatNodesAsync**
-**public method Nest.ElasticClient.CatNodesAsync**
-**public method Nest.ElasticClient.CatPendingTasksAsync**
-**public method Nest.ElasticClient.CatPendingTasksAsync**
-**public method Nest.ElasticClient.CatPluginsAsync**
-**public method Nest.ElasticClient.CatPluginsAsync**
-**public method Nest.ElasticClient.CatRecoveryAsync**
-**public method Nest.ElasticClient.CatRecoveryAsync**
-**public method Nest.ElasticClient.CatRepositoriesAsync**
-**public method Nest.ElasticClient.CatRepositoriesAsync**
-**public method Nest.ElasticClient.CatSegmentsAsync**
-**public method Nest.ElasticClient.CatSegmentsAsync**
-**public method Nest.ElasticClient.CatShardsAsync**
-**public method Nest.ElasticClient.CatShardsAsync**
-**public method Nest.ElasticClient.CatSnapshotsAsync**
-**public method Nest.ElasticClient.CatSnapshotsAsync**
-**public method Nest.ElasticClient.CatThreadPoolAsync**
-**public method Nest.ElasticClient.CatThreadPoolAsync**
-**public method Nest.ElasticClient.ClearCacheAsync**
-**public method Nest.ElasticClient.ClearCacheAsync**
-**public method Nest.ElasticClient.ClearCachedRealmsAsync**
-**public method Nest.ElasticClient.ClearCachedRealmsAsync**
-**public method Nest.ElasticClient.ClearCachedRolesAsync**
-**public method Nest.ElasticClient.ClearCachedRolesAsync**
-**public method Nest.ElasticClient.ClearScrollAsync**
-**public method Nest.ElasticClient.ClearScrollAsync**
-**public method Nest.ElasticClient.CloseIndexAsync**
-**public method Nest.ElasticClient.CloseIndexAsync**
-**public method Nest.ElasticClient.ClusterGetSettingsAsync**
-**public method Nest.ElasticClient.ClusterGetSettingsAsync**
-**public method Nest.ElasticClient.ClusterHealthAsync**
-**public method Nest.ElasticClient.ClusterHealthAsync**
-**public method Nest.ElasticClient.ClusterPendingTasksAsync**
-**public method Nest.ElasticClient.ClusterPendingTasksAsync**
-**public method Nest.ElasticClient.ClusterPutSettingsAsync**
-**public method Nest.ElasticClient.ClusterPutSettingsAsync**
-**public method Nest.ElasticClient.ClusterRerouteAsync**
-**public method Nest.ElasticClient.ClusterRerouteAsync**
-**public method Nest.ElasticClient.ClusterStateAsync**
-**public method Nest.ElasticClient.ClusterStateAsync**
-**public method Nest.ElasticClient.ClusterStatsAsync**
-**public method Nest.ElasticClient.ClusterStatsAsync**
-**public method Nest.ElasticClient.CountAsync&lt;T&gt;**
-**public method Nest.ElasticClient.CountAsync&lt;T&gt;**
-**public method Nest.ElasticClient.CreateIndexAsync**
-**public method Nest.ElasticClient.CreateIndexAsync**
-**public method Nest.ElasticClient.CreateRepositoryAsync**
-**public method Nest.ElasticClient.CreateRepositoryAsync**
-**public method Nest.ElasticClient.DeactivateWatchAsync**
-**public method Nest.ElasticClient.DeactivateWatchAsync**
-**public method Nest.ElasticClient.DeleteAliasAsync**
-**public method Nest.ElasticClient.DeleteAliasAsync**
-**public method Nest.ElasticClient.DeleteAsync**
-**public method Nest.ElasticClient.DeleteAsync&lt;T&gt;**
-**public method Nest.ElasticClient.DeleteByQueryAsync**
-**public method Nest.ElasticClient.DeleteByQueryAsync&lt;T&gt;**
-**public method Nest.ElasticClient.DeleteIndexAsync**
-**public method Nest.ElasticClient.DeleteIndexAsync**
-**public method Nest.ElasticClient.DeleteIndexTemplateAsync**
-**public method Nest.ElasticClient.DeleteIndexTemplateAsync**
-**public method Nest.ElasticClient.DeleteLicenseAsync**
-**public method Nest.ElasticClient.DeleteLicenseAsync**
-**public method Nest.ElasticClient.DeleteRepositoryAsync**
-**public method Nest.ElasticClient.DeleteRepositoryAsync**
-**public method Nest.ElasticClient.DeleteRoleAsync**
-**public method Nest.ElasticClient.DeleteRoleAsync**
-**public method Nest.ElasticClient.DeleteScriptAsync**
-**public method Nest.ElasticClient.DeleteScriptAsync**
-**public method Nest.ElasticClient.DeleteSearchTemplateAsync**
-**public method Nest.ElasticClient.DeleteSearchTemplateAsync**
-**public method Nest.ElasticClient.DeleteSnapshotAsync**
-**public method Nest.ElasticClient.DeleteSnapshotAsync**
-**public method Nest.ElasticClient.DeleteUserAsync**
-**public method Nest.ElasticClient.DeleteUserAsync**
-**public method Nest.ElasticClient.DeleteWatchAsync**
-**public method Nest.ElasticClient.DeleteWatchAsync**
-**public method Nest.ElasticClient.DocumentExistsAsync**
-**public method Nest.ElasticClient.DocumentExistsAsync&lt;T&gt;**
-**public method Nest.ElasticClient.ExecuteWatchAsync**
-**public method Nest.ElasticClient.ExecuteWatchAsync**
-**public method Nest.ElasticClient.ExplainAsync&lt;T&gt;**
-**public method Nest.ElasticClient.ExplainAsync&lt;T&gt;**
-**public method Nest.ElasticClient.FieldStatsAsync**
-**public method Nest.ElasticClient.FieldStatsAsync**
-**public method Nest.ElasticClient.FlushAsync**
-**public method Nest.ElasticClient.FlushAsync**
-**public method Nest.ElasticClient.ForceMergeAsync**
-**public method Nest.ElasticClient.ForceMergeAsync**
-**public method Nest.ElasticClient.GetAliasAsync**
-**public method Nest.ElasticClient.GetAliasAsync**
-**public method Nest.ElasticClient.GetAsync&lt;T&gt;**
-**public method Nest.ElasticClient.GetAsync&lt;T&gt;**
-**public method Nest.ElasticClient.GetFieldMappingAsync**
-**public method Nest.ElasticClient.GetFieldMappingAsync&lt;T&gt;**
-**public method Nest.ElasticClient.GetIndexAsync**
-**public method Nest.ElasticClient.GetIndexAsync**
-**public method Nest.ElasticClient.GetIndexSettingsAsync**
-**public method Nest.ElasticClient.GetIndexSettingsAsync**
-**public method Nest.ElasticClient.GetIndexTemplateAsync**
-**public method Nest.ElasticClient.GetIndexTemplateAsync**
-**public method Nest.ElasticClient.GetLicenseAsync**
-**public method Nest.ElasticClient.GetLicenseAsync**
-**public method Nest.ElasticClient.GetMappingAsync**
-**public method Nest.ElasticClient.GetMappingAsync&lt;T&gt;**
-**public method Nest.ElasticClient.GetRepositoryAsync**
-**public method Nest.ElasticClient.GetRepositoryAsync**
-**public method Nest.ElasticClient.GetRoleAsync**
-**public method Nest.ElasticClient.GetRoleAsync**
-**public method Nest.ElasticClient.GetScriptAsync**
-**public method Nest.ElasticClient.GetScriptAsync**
-**public method Nest.ElasticClient.GetSearchTemplateAsync**
-**public method Nest.ElasticClient.GetSearchTemplateAsync**
-**public method Nest.ElasticClient.GetSnapshotAsync**
-**public method Nest.ElasticClient.GetSnapshotAsync**
-**public method Nest.ElasticClient.GetUserAsync**
-**public method Nest.ElasticClient.GetUserAsync**
-**public method Nest.ElasticClient.GetWatchAsync**
-**public method Nest.ElasticClient.GetWatchAsync**
-**public method Nest.ElasticClient.GraphExploreAsync**
-**public method Nest.ElasticClient.GraphExploreAsync&lt;T&gt;**
-**public method Nest.ElasticClient.IndexAsync**
-**public method Nest.ElasticClient.IndexAsync&lt;T&gt;**
-**public method Nest.ElasticClient.IndexExistsAsync**
-**public method Nest.ElasticClient.IndexExistsAsync**
-**public method Nest.ElasticClient.IndexTemplateExistsAsync**
-**public method Nest.ElasticClient.IndexTemplateExistsAsync**
-**public method Nest.ElasticClient.IndicesShardStoresAsync**
-**public method Nest.ElasticClient.IndicesShardStoresAsync**
-**public method Nest.ElasticClient.IndicesStatsAsync**
-**public method Nest.ElasticClient.IndicesStatsAsync**
-**public method Nest.ElasticClient.MapAsync**
-**public method Nest.ElasticClient.MapAsync&lt;T&gt;**
-**public method Nest.ElasticClient.MultiGetAsync**
-**public method Nest.ElasticClient.MultiGetAsync**
-**public method Nest.ElasticClient.MultiPercolateAsync**
-**public method Nest.ElasticClient.MultiPercolateAsync**
-**public method Nest.ElasticClient.MultiSearchAsync**
-**public method Nest.ElasticClient.MultiSearchAsync**
-**public method Nest.ElasticClient.MultiTermVectorsAsync**
-**public method Nest.ElasticClient.MultiTermVectorsAsync**
-**public method Nest.ElasticClient.NodesHotThreadsAsync**
-**public method Nest.ElasticClient.NodesHotThreadsAsync**
-**public method Nest.ElasticClient.NodesInfoAsync**
-**public method Nest.ElasticClient.NodesInfoAsync**
-**public method Nest.ElasticClient.NodesStatsAsync**
-**public method Nest.ElasticClient.NodesStatsAsync**
-**public method Nest.ElasticClient.OpenIndexAsync**
-**public method Nest.ElasticClient.OpenIndexAsync**
-**public method Nest.ElasticClient.PercolateAsync&lt;T&gt;**
-**public method Nest.ElasticClient.PercolateAsync&lt;T&gt;**
-**public method Nest.ElasticClient.PercolateCountAsync&lt;T&gt;**
-**public method Nest.ElasticClient.PercolateCountAsync&lt;T&gt;**
-**public method Nest.ElasticClient.PingAsync**
-**public method Nest.ElasticClient.PingAsync**
-**public method Nest.ElasticClient.PostLicenseAsync**
-**public method Nest.ElasticClient.PostLicenseAsync**
-**public method Nest.ElasticClient.PutAliasAsync**
-**public method Nest.ElasticClient.PutAliasAsync**
-**public method Nest.ElasticClient.PutIndexTemplateAsync**
-**public method Nest.ElasticClient.PutIndexTemplateAsync**
-**public method Nest.ElasticClient.PutRoleAsync**
-**public method Nest.ElasticClient.PutRoleAsync**
-**public method Nest.ElasticClient.PutScriptAsync**
-**public method Nest.ElasticClient.PutScriptAsync**
-**public method Nest.ElasticClient.PutSearchTemplateAsync**
-**public method Nest.ElasticClient.PutSearchTemplateAsync**
-**public method Nest.ElasticClient.PutUserAsync**
-**public method Nest.ElasticClient.PutUserAsync**
-**public method Nest.ElasticClient.PutWatchAsync**
-**public method Nest.ElasticClient.PutWatchAsync**
-**public method Nest.ElasticClient.RecoveryStatusAsync**
-**public method Nest.ElasticClient.RecoveryStatusAsync**
-**public method Nest.ElasticClient.RefreshAsync**
-**public method Nest.ElasticClient.RefreshAsync**
-**public method Nest.ElasticClient.RegisterPercolatorAsync**
-**public method Nest.ElasticClient.RegisterPercolatorAsync&lt;T&gt;**
-**public method Nest.ElasticClient.Reindex&lt;T&gt;**
-**public method Nest.ElasticClient.Reindex&lt;T&gt;**
-**public method Nest.ElasticClient.ReindexOnServerAsync**
-**public method Nest.ElasticClient.ReindexOnServerAsync**
-**public method Nest.ElasticClient.RenderSearchTemplateAsync**
-**public method Nest.ElasticClient.RenderSearchTemplateAsync**
-**public method Nest.ElasticClient.RestartWatcherAsync**
-**public method Nest.ElasticClient.RestartWatcherAsync**
-**public method Nest.ElasticClient.RestoreAsync**
-**public method Nest.ElasticClient.RestoreAsync**
-**public method Nest.ElasticClient.RethrottleAsync**
-**public method Nest.ElasticClient.RethrottleAsync**
-**public method Nest.ElasticClient.RootNodeInfoAsync**
-**public method Nest.ElasticClient.RootNodeInfoAsync**
-**public method Nest.ElasticClient.ScrollAsync&lt;T&gt;**
-**public method Nest.ElasticClient.ScrollAsync&lt;T&gt;**
-**public method Nest.ElasticClient.SearchAsync&lt;T, TResult&gt;**
-**public method Nest.ElasticClient.SearchAsync&lt;T, TResult&gt;**
-**public method Nest.ElasticClient.SearchAsync&lt;T&gt;**
-**public method Nest.ElasticClient.SearchAsync&lt;T&gt;**
-**public method Nest.ElasticClient.SearchShardsAsync**
-**public method Nest.ElasticClient.SearchShardsAsync&lt;T&gt;**
-**public method Nest.ElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**
-**public method Nest.ElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**
-**public method Nest.ElasticClient.SearchTemplateAsync&lt;T&gt;**
-**public method Nest.ElasticClient.SearchTemplateAsync&lt;T&gt;**
-**public method Nest.ElasticClient.SegmentsAsync**
-**public method Nest.ElasticClient.SegmentsAsync**
-**public method Nest.ElasticClient.SnapshotAsync**
-**public method Nest.ElasticClient.SnapshotAsync**
-**public method Nest.ElasticClient.SnapshotStatusAsync**
-**public method Nest.ElasticClient.SnapshotStatusAsync**
-**public method Nest.ElasticClient.SourceAsync&lt;T&gt;**
-**public method Nest.ElasticClient.SourceAsync&lt;T&gt;**
-**public method Nest.ElasticClient.StartWatcherAsync**
-**public method Nest.ElasticClient.StartWatcherAsync**
-**public method Nest.ElasticClient.StopWatcherAsync**
-**public method Nest.ElasticClient.StopWatcherAsync**
-**public method Nest.ElasticClient.SuggestAsync&lt;T&gt;**
-**public method Nest.ElasticClient.SyncedFlushAsync**
-**public method Nest.ElasticClient.SyncedFlushAsync**
-**public method Nest.ElasticClient.TermVectorsAsync&lt;T&gt;**
-**public method Nest.ElasticClient.TermVectorsAsync&lt;T&gt;**
-**public method Nest.ElasticClient.TypeExistsAsync**
-**public method Nest.ElasticClient.TypeExistsAsync**
-**public method Nest.ElasticClient.UnregisterPercolatorAsync**
-**public method Nest.ElasticClient.UnregisterPercolatorAsync&lt;T&gt;**
-**public method Nest.ElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**
-**public method Nest.ElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**
-**public method Nest.ElasticClient.UpdateAsync&lt;TDocument&gt;**
-**public method Nest.ElasticClient.UpdateAsync&lt;TDocument&gt;**
-**public method Nest.ElasticClient.UpdateByQueryAsync**
-**public method Nest.ElasticClient.UpdateByQueryAsync&lt;T&gt;**
-**public method Nest.ElasticClient.UpdateIndexSettingsAsync**
-**public method Nest.ElasticClient.UpdateIndexSettingsAsync**
-**public method Nest.ElasticClient.UpgradeAsync**
-**public method Nest.ElasticClient.UpgradeAsync**
-**public method Nest.ElasticClient.UpgradeStatusAsync**
-**public method Nest.ElasticClient.UpgradeStatusAsync**
-**public method Nest.ElasticClient.ValidateQueryAsync**
-**public method Nest.ElasticClient.ValidateQueryAsync&lt;T&gt;**
-**public method Nest.ElasticClient.VerifyRepositoryAsync**
-**public method Nest.ElasticClient.VerifyRepositoryAsync**
-**public method Nest.ElasticClient.WatcherStatsAsync**
-**public method Nest.ElasticClient.WatcherStatsAsync**
-**public method Nest.GetManyExtensions.GetManyAsync&lt;T&gt;**
-**public method Nest.GetManyExtensions.GetManyAsync&lt;T&gt;**
-**public method Nest.IElasticClient.AcknowledgeWatchAsync**
-**public method Nest.IElasticClient.AcknowledgeWatchAsync**
-**public method Nest.IElasticClient.ActivateWatchAsync**
-**public method Nest.IElasticClient.ActivateWatchAsync**
-**public method Nest.IElasticClient.AliasAsync**
-**public method Nest.IElasticClient.AliasAsync**
-**public method Nest.IElasticClient.AliasExistsAsync**
-**public method Nest.IElasticClient.AliasExistsAsync**
-**public method Nest.IElasticClient.AnalyzeAsync**
-**public method Nest.IElasticClient.AnalyzeAsync**
-**public method Nest.IElasticClient.AuthenticateAsync**
-**public method Nest.IElasticClient.AuthenticateAsync**
-**public method Nest.IElasticClient.BulkAsync**
-**public method Nest.IElasticClient.BulkAsync**
-**public method Nest.IElasticClient.CatAliasesAsync**
-**public method Nest.IElasticClient.CatAliasesAsync**
-**public method Nest.IElasticClient.CatAllocationAsync**
-**public method Nest.IElasticClient.CatAllocationAsync**
-**public method Nest.IElasticClient.CatCountAsync**
-**public method Nest.IElasticClient.CatCountAsync**
-**public method Nest.IElasticClient.CatFielddataAsync**
-**public method Nest.IElasticClient.CatFielddataAsync**
-**public method Nest.IElasticClient.CatHealthAsync**
-**public method Nest.IElasticClient.CatHealthAsync**
-**public method Nest.IElasticClient.CatHelpAsync**
-**public method Nest.IElasticClient.CatHelpAsync**
-**public method Nest.IElasticClient.CatIndicesAsync**
-**public method Nest.IElasticClient.CatIndicesAsync**
-**public method Nest.IElasticClient.CatMasterAsync**
-**public method Nest.IElasticClient.CatMasterAsync**
-**public method Nest.IElasticClient.CatNodeAttributesAsync**
-**public method Nest.IElasticClient.CatNodeAttributesAsync**
-**public method Nest.IElasticClient.CatNodesAsync**
-**public method Nest.IElasticClient.CatNodesAsync**
-**public method Nest.IElasticClient.CatPendingTasksAsync**
-**public method Nest.IElasticClient.CatPendingTasksAsync**
-**public method Nest.IElasticClient.CatPluginsAsync**
-**public method Nest.IElasticClient.CatPluginsAsync**
-**public method Nest.IElasticClient.CatRecoveryAsync**
-**public method Nest.IElasticClient.CatRecoveryAsync**
-**public method Nest.IElasticClient.CatRepositoriesAsync**
-**public method Nest.IElasticClient.CatRepositoriesAsync**
-**public method Nest.IElasticClient.CatSegmentsAsync**
-**public method Nest.IElasticClient.CatSegmentsAsync**
-**public method Nest.IElasticClient.CatShardsAsync**
-**public method Nest.IElasticClient.CatShardsAsync**
-**public method Nest.IElasticClient.CatSnapshotsAsync**
-**public method Nest.IElasticClient.CatSnapshotsAsync**
-**public method Nest.IElasticClient.CatThreadPoolAsync**
-**public method Nest.IElasticClient.CatThreadPoolAsync**
-**public method Nest.IElasticClient.ClearCacheAsync**
-**public method Nest.IElasticClient.ClearCacheAsync**
-**public method Nest.IElasticClient.ClearCachedRealmsAsync**
-**public method Nest.IElasticClient.ClearCachedRealmsAsync**
-**public method Nest.IElasticClient.ClearCachedRolesAsync**
-**public method Nest.IElasticClient.ClearCachedRolesAsync**
-**public method Nest.IElasticClient.ClearScrollAsync**
-**public method Nest.IElasticClient.ClearScrollAsync**
-**public method Nest.IElasticClient.CloseIndexAsync**
-**public method Nest.IElasticClient.CloseIndexAsync**
-**public method Nest.IElasticClient.ClusterGetSettingsAsync**
-**public method Nest.IElasticClient.ClusterGetSettingsAsync**
-**public method Nest.IElasticClient.ClusterHealthAsync**
-**public method Nest.IElasticClient.ClusterHealthAsync**
-**public method Nest.IElasticClient.ClusterPendingTasksAsync**
-**public method Nest.IElasticClient.ClusterPendingTasksAsync**
-**public method Nest.IElasticClient.ClusterPutSettingsAsync**
-**public method Nest.IElasticClient.ClusterPutSettingsAsync**
-**public method Nest.IElasticClient.ClusterRerouteAsync**
-**public method Nest.IElasticClient.ClusterRerouteAsync**
-**public method Nest.IElasticClient.ClusterStateAsync**
-**public method Nest.IElasticClient.ClusterStateAsync**
-**public method Nest.IElasticClient.ClusterStatsAsync**
-**public method Nest.IElasticClient.ClusterStatsAsync**
-**public method Nest.IElasticClient.CountAsync&lt;T&gt;**
-**public method Nest.IElasticClient.CountAsync&lt;T&gt;**
-**public method Nest.IElasticClient.CreateIndexAsync**
-**public method Nest.IElasticClient.CreateIndexAsync**
-**public method Nest.IElasticClient.CreateRepositoryAsync**
-**public method Nest.IElasticClient.CreateRepositoryAsync**
-**public method Nest.IElasticClient.DeactivateWatchAsync**
-**public method Nest.IElasticClient.DeactivateWatchAsync**
-**public method Nest.IElasticClient.DeleteAliasAsync**
-**public method Nest.IElasticClient.DeleteAliasAsync**
-**public method Nest.IElasticClient.DeleteAsync**
-**public method Nest.IElasticClient.DeleteAsync&lt;T&gt;**
-**public method Nest.IElasticClient.DeleteByQueryAsync**
-**public method Nest.IElasticClient.DeleteByQueryAsync&lt;T&gt;**
-**public method Nest.IElasticClient.DeleteIndexAsync**
-**public method Nest.IElasticClient.DeleteIndexAsync**
-**public method Nest.IElasticClient.DeleteIndexTemplateAsync**
-**public method Nest.IElasticClient.DeleteIndexTemplateAsync**
-**public method Nest.IElasticClient.DeleteLicenseAsync**
-**public method Nest.IElasticClient.DeleteLicenseAsync**
-**public method Nest.IElasticClient.DeleteRepositoryAsync**
-**public method Nest.IElasticClient.DeleteRepositoryAsync**
-**public method Nest.IElasticClient.DeleteRoleAsync**
-**public method Nest.IElasticClient.DeleteRoleAsync**
-**public method Nest.IElasticClient.DeleteScriptAsync**
-**public method Nest.IElasticClient.DeleteScriptAsync**
-**public method Nest.IElasticClient.DeleteSearchTemplateAsync**
-**public method Nest.IElasticClient.DeleteSearchTemplateAsync**
-**public method Nest.IElasticClient.DeleteSnapshotAsync**
-**public method Nest.IElasticClient.DeleteSnapshotAsync**
-**public method Nest.IElasticClient.DeleteUserAsync**
-**public method Nest.IElasticClient.DeleteUserAsync**
-**public method Nest.IElasticClient.DeleteWatchAsync**
-**public method Nest.IElasticClient.DeleteWatchAsync**
-**public method Nest.IElasticClient.DocumentExistsAsync**
-**public method Nest.IElasticClient.DocumentExistsAsync&lt;T&gt;**
-**public method Nest.IElasticClient.ExecuteWatchAsync**
-**public method Nest.IElasticClient.ExecuteWatchAsync**
-**public method Nest.IElasticClient.ExplainAsync&lt;T&gt;**
-**public method Nest.IElasticClient.ExplainAsync&lt;T&gt;**
-**public method Nest.IElasticClient.FieldStatsAsync**
-**public method Nest.IElasticClient.FieldStatsAsync**
-**public method Nest.IElasticClient.FlushAsync**
-**public method Nest.IElasticClient.FlushAsync**
-**public method Nest.IElasticClient.ForceMergeAsync**
-**public method Nest.IElasticClient.ForceMergeAsync**
-**public method Nest.IElasticClient.GetAliasAsync**
-**public method Nest.IElasticClient.GetAliasAsync**
-**public method Nest.IElasticClient.GetAsync&lt;T&gt;**
-**public method Nest.IElasticClient.GetAsync&lt;T&gt;**
-**public method Nest.IElasticClient.GetFieldMappingAsync**
-**public method Nest.IElasticClient.GetFieldMappingAsync&lt;T&gt;**
-**public method Nest.IElasticClient.GetIndexAsync**
-**public method Nest.IElasticClient.GetIndexAsync**
-**public method Nest.IElasticClient.GetIndexSettingsAsync**
-**public method Nest.IElasticClient.GetIndexSettingsAsync**
-**public method Nest.IElasticClient.GetIndexTemplateAsync**
-**public method Nest.IElasticClient.GetIndexTemplateAsync**
-**public method Nest.IElasticClient.GetLicenseAsync**
-**public method Nest.IElasticClient.GetLicenseAsync**
-**public method Nest.IElasticClient.GetMappingAsync**
-**public method Nest.IElasticClient.GetMappingAsync&lt;T&gt;**
-**public method Nest.IElasticClient.GetRepositoryAsync**
-**public method Nest.IElasticClient.GetRepositoryAsync**
-**public method Nest.IElasticClient.GetRoleAsync**
-**public method Nest.IElasticClient.GetRoleAsync**
-**public method Nest.IElasticClient.GetScriptAsync**
-**public method Nest.IElasticClient.GetScriptAsync**
-**public method Nest.IElasticClient.GetSearchTemplateAsync**
-**public method Nest.IElasticClient.GetSearchTemplateAsync**
-**public method Nest.IElasticClient.GetSnapshotAsync**
-**public method Nest.IElasticClient.GetSnapshotAsync**
-**public method Nest.IElasticClient.GetUserAsync**
-**public method Nest.IElasticClient.GetUserAsync**
-**public method Nest.IElasticClient.GetWatchAsync**
-**public method Nest.IElasticClient.GetWatchAsync**
-**public method Nest.IElasticClient.GraphExploreAsync**
-**public method Nest.IElasticClient.GraphExploreAsync&lt;T&gt;**
-**public method Nest.IElasticClient.IndexAsync**
-**public method Nest.IElasticClient.IndexAsync&lt;T&gt;**
-**public method Nest.IElasticClient.IndexExistsAsync**
-**public method Nest.IElasticClient.IndexExistsAsync**
-**public method Nest.IElasticClient.IndexTemplateExistsAsync**
-**public method Nest.IElasticClient.IndexTemplateExistsAsync**
-**public method Nest.IElasticClient.IndicesShardStoresAsync**
-**public method Nest.IElasticClient.IndicesShardStoresAsync**
-**public method Nest.IElasticClient.IndicesStatsAsync**
-**public method Nest.IElasticClient.IndicesStatsAsync**
-**public method Nest.IElasticClient.MapAsync**
-**public method Nest.IElasticClient.MapAsync&lt;T&gt;**
-**public method Nest.IElasticClient.MultiGetAsync**
-**public method Nest.IElasticClient.MultiGetAsync**
-**public method Nest.IElasticClient.MultiPercolateAsync**
-**public method Nest.IElasticClient.MultiPercolateAsync**
-**public method Nest.IElasticClient.MultiSearchAsync**
-**public method Nest.IElasticClient.MultiSearchAsync**
-**public method Nest.IElasticClient.MultiTermVectorsAsync**
-**public method Nest.IElasticClient.MultiTermVectorsAsync**
-**public method Nest.IElasticClient.NodesHotThreadsAsync**
-**public method Nest.IElasticClient.NodesHotThreadsAsync**
-**public method Nest.IElasticClient.NodesInfoAsync**
-**public method Nest.IElasticClient.NodesInfoAsync**
-**public method Nest.IElasticClient.NodesStatsAsync**
-**public method Nest.IElasticClient.NodesStatsAsync**
-**public method Nest.IElasticClient.OpenIndexAsync**
-**public method Nest.IElasticClient.OpenIndexAsync**
-**public method Nest.IElasticClient.PercolateAsync&lt;T&gt;**
-**public method Nest.IElasticClient.PercolateAsync&lt;T&gt;**
-**public method Nest.IElasticClient.PercolateCountAsync&lt;T&gt;**
-**public method Nest.IElasticClient.PercolateCountAsync&lt;T&gt;**
-**public method Nest.IElasticClient.PingAsync**
-**public method Nest.IElasticClient.PingAsync**
-**public method Nest.IElasticClient.PostLicenseAsync**
-**public method Nest.IElasticClient.PostLicenseAsync**
-**public method Nest.IElasticClient.PutAliasAsync**
-**public method Nest.IElasticClient.PutAliasAsync**
-**public method Nest.IElasticClient.PutIndexTemplateAsync**
-**public method Nest.IElasticClient.PutIndexTemplateAsync**
-**public method Nest.IElasticClient.PutRoleAsync**
-**public method Nest.IElasticClient.PutRoleAsync**
-**public method Nest.IElasticClient.PutScriptAsync**
-**public method Nest.IElasticClient.PutScriptAsync**
-**public method Nest.IElasticClient.PutSearchTemplateAsync**
-**public method Nest.IElasticClient.PutSearchTemplateAsync**
-**public method Nest.IElasticClient.PutUserAsync**
-**public method Nest.IElasticClient.PutUserAsync**
-**public method Nest.IElasticClient.PutWatchAsync**
-**public method Nest.IElasticClient.PutWatchAsync**
-**public method Nest.IElasticClient.RecoveryStatusAsync**
-**public method Nest.IElasticClient.RecoveryStatusAsync**
-**public method Nest.IElasticClient.RefreshAsync**
-**public method Nest.IElasticClient.RefreshAsync**
-**public method Nest.IElasticClient.RegisterPercolatorAsync**
-**public method Nest.IElasticClient.RegisterPercolatorAsync&lt;T&gt;**
-**public method Nest.IElasticClient.Reindex&lt;T&gt;**
-**public method Nest.IElasticClient.Reindex&lt;T&gt;**
-**public method Nest.IElasticClient.ReindexOnServerAsync**
-**public method Nest.IElasticClient.ReindexOnServerAsync**
-**public method Nest.IElasticClient.RenderSearchTemplateAsync**
-**public method Nest.IElasticClient.RenderSearchTemplateAsync**
-**public method Nest.IElasticClient.RestartWatcherAsync**
-**public method Nest.IElasticClient.RestartWatcherAsync**
-**public method Nest.IElasticClient.RestoreAsync**
-**public method Nest.IElasticClient.RestoreAsync**
-**public method Nest.IElasticClient.RethrottleAsync**
-**public method Nest.IElasticClient.RethrottleAsync**
-**public method Nest.IElasticClient.RootNodeInfoAsync**
-**public method Nest.IElasticClient.RootNodeInfoAsync**
-**public method Nest.IElasticClient.ScrollAsync&lt;T&gt;**
-**public method Nest.IElasticClient.ScrollAsync&lt;T&gt;**
-**public method Nest.IElasticClient.SearchAsync&lt;T, TResult&gt;**
-**public method Nest.IElasticClient.SearchAsync&lt;T, TResult&gt;**
-**public method Nest.IElasticClient.SearchAsync&lt;T&gt;**
-**public method Nest.IElasticClient.SearchAsync&lt;T&gt;**
-**public method Nest.IElasticClient.SearchShardsAsync**
-**public method Nest.IElasticClient.SearchShardsAsync&lt;T&gt;**
-**public method Nest.IElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**
-**public method Nest.IElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**
-**public method Nest.IElasticClient.SearchTemplateAsync&lt;T&gt;**
-**public method Nest.IElasticClient.SearchTemplateAsync&lt;T&gt;**
-**public method Nest.IElasticClient.SegmentsAsync**
-**public method Nest.IElasticClient.SegmentsAsync**
-**public method Nest.IElasticClient.SnapshotAsync**
-**public method Nest.IElasticClient.SnapshotAsync**
-**public method Nest.IElasticClient.SnapshotStatusAsync**
-**public method Nest.IElasticClient.SnapshotStatusAsync**
-**public method Nest.IElasticClient.SourceAsync&lt;T&gt;**
-**public method Nest.IElasticClient.SourceAsync&lt;T&gt;**
-**public method Nest.IElasticClient.StartWatcherAsync**
-**public method Nest.IElasticClient.StartWatcherAsync**
-**public method Nest.IElasticClient.StopWatcherAsync**
-**public method Nest.IElasticClient.StopWatcherAsync**
-**public method Nest.IElasticClient.SuggestAsync&lt;T&gt;**
-**public method Nest.IElasticClient.SyncedFlushAsync**
-**public method Nest.IElasticClient.SyncedFlushAsync**
-**public method Nest.IElasticClient.TermVectorsAsync&lt;T&gt;**
-**public method Nest.IElasticClient.TermVectorsAsync&lt;T&gt;**
-**public method Nest.IElasticClient.TypeExistsAsync**
-**public method Nest.IElasticClient.TypeExistsAsync**
-**public method Nest.IElasticClient.UnregisterPercolatorAsync**
-**public method Nest.IElasticClient.UnregisterPercolatorAsync&lt;T&gt;**
-**public method Nest.IElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**
-**public method Nest.IElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**
-**public method Nest.IElasticClient.UpdateAsync&lt;TDocument&gt;**
-**public method Nest.IElasticClient.UpdateAsync&lt;TDocument&gt;**
-**public method Nest.IElasticClient.UpdateByQueryAsync**
-**public method Nest.IElasticClient.UpdateByQueryAsync&lt;T&gt;**
-**public method Nest.IElasticClient.UpdateIndexSettingsAsync**
-**public method Nest.IElasticClient.UpdateIndexSettingsAsync**
-**public method Nest.IElasticClient.UpgradeAsync**
-**public method Nest.IElasticClient.UpgradeAsync**
-**public method Nest.IElasticClient.UpgradeStatusAsync**
-**public method Nest.IElasticClient.UpgradeStatusAsync**
-**public method Nest.IElasticClient.ValidateQueryAsync**
-**public method Nest.IElasticClient.ValidateQueryAsync&lt;T&gt;**
-**public method Nest.IElasticClient.VerifyRepositoryAsync**
-**public method Nest.IElasticClient.VerifyRepositoryAsync**
-**public method Nest.IElasticClient.WatcherStatsAsync**
-**public method Nest.IElasticClient.WatcherStatsAsync**
-**public method Nest.IHighLevelToLowLevelDispatcher.DispatchAsync&lt;TRequest, TQueryString, TResponse, TResponseInterface&gt;**
-**public method Nest.IHighLevelToLowLevelDispatcher.DispatchAsync&lt;TRequest, TQueryString, TResponse, TResponseInterface&gt;**
-**public method Nest.IndexManyExtensions.IndexManyAsync&lt;T&gt;**
-**public method Nest.ReindexObservable&lt;T&gt;..ctor**
-**public method Nest.SourceManyExtensions.SourceManyAsync&lt;T&gt;**
-**public method Nest.SourceManyExtensions.SourceManyAsync&lt;T&gt;**
+** Nest.BulkAllObservable&lt;T&gt;..ctor**  
+** Nest.DeleteManyExtensions.DeleteManyAsync&lt;T&gt;**  
+** Nest.ElasticClient.AcknowledgeWatchAsync**  
+** Nest.ElasticClient.AcknowledgeWatchAsync**  
+** Nest.ElasticClient.ActivateWatchAsync**  
+** Nest.ElasticClient.ActivateWatchAsync**  
+** Nest.ElasticClient.AliasAsync**  
+** Nest.ElasticClient.AliasAsync**  
+** Nest.ElasticClient.AliasExistsAsync**  
+** Nest.ElasticClient.AliasExistsAsync**  
+** Nest.ElasticClient.AnalyzeAsync**  
+** Nest.ElasticClient.AnalyzeAsync**  
+** Nest.ElasticClient.AuthenticateAsync**  
+** Nest.ElasticClient.AuthenticateAsync**  
+** Nest.ElasticClient.BulkAsync**  
+** Nest.ElasticClient.BulkAsync**  
+** Nest.ElasticClient.CatAliasesAsync**  
+** Nest.ElasticClient.CatAliasesAsync**  
+** Nest.ElasticClient.CatAllocationAsync**  
+** Nest.ElasticClient.CatAllocationAsync**  
+** Nest.ElasticClient.CatCountAsync**  
+** Nest.ElasticClient.CatCountAsync**  
+** Nest.ElasticClient.CatFielddataAsync**  
+** Nest.ElasticClient.CatFielddataAsync**  
+** Nest.ElasticClient.CatHealthAsync**  
+** Nest.ElasticClient.CatHealthAsync**  
+** Nest.ElasticClient.CatHelpAsync**  
+** Nest.ElasticClient.CatHelpAsync**  
+** Nest.ElasticClient.CatIndicesAsync**  
+** Nest.ElasticClient.CatIndicesAsync**  
+** Nest.ElasticClient.CatMasterAsync**  
+** Nest.ElasticClient.CatMasterAsync**  
+** Nest.ElasticClient.CatNodeAttributesAsync**  
+** Nest.ElasticClient.CatNodeAttributesAsync**  
+** Nest.ElasticClient.CatNodesAsync**  
+** Nest.ElasticClient.CatNodesAsync**  
+** Nest.ElasticClient.CatPendingTasksAsync**  
+** Nest.ElasticClient.CatPendingTasksAsync**  
+** Nest.ElasticClient.CatPluginsAsync**  
+** Nest.ElasticClient.CatPluginsAsync**  
+** Nest.ElasticClient.CatRecoveryAsync**  
+** Nest.ElasticClient.CatRecoveryAsync**  
+** Nest.ElasticClient.CatRepositoriesAsync**  
+** Nest.ElasticClient.CatRepositoriesAsync**  
+** Nest.ElasticClient.CatSegmentsAsync**  
+** Nest.ElasticClient.CatSegmentsAsync**  
+** Nest.ElasticClient.CatShardsAsync**  
+** Nest.ElasticClient.CatShardsAsync**  
+** Nest.ElasticClient.CatSnapshotsAsync**  
+** Nest.ElasticClient.CatSnapshotsAsync**  
+** Nest.ElasticClient.CatThreadPoolAsync**  
+** Nest.ElasticClient.CatThreadPoolAsync**  
+** Nest.ElasticClient.ClearCacheAsync**  
+** Nest.ElasticClient.ClearCacheAsync**  
+** Nest.ElasticClient.ClearCachedRealmsAsync**  
+** Nest.ElasticClient.ClearCachedRealmsAsync**  
+** Nest.ElasticClient.ClearCachedRolesAsync**  
+** Nest.ElasticClient.ClearCachedRolesAsync**  
+** Nest.ElasticClient.ClearScrollAsync**  
+** Nest.ElasticClient.ClearScrollAsync**  
+** Nest.ElasticClient.CloseIndexAsync**  
+** Nest.ElasticClient.CloseIndexAsync**  
+** Nest.ElasticClient.ClusterGetSettingsAsync**  
+** Nest.ElasticClient.ClusterGetSettingsAsync**  
+** Nest.ElasticClient.ClusterHealthAsync**  
+** Nest.ElasticClient.ClusterHealthAsync**  
+** Nest.ElasticClient.ClusterPendingTasksAsync**  
+** Nest.ElasticClient.ClusterPendingTasksAsync**  
+** Nest.ElasticClient.ClusterPutSettingsAsync**  
+** Nest.ElasticClient.ClusterPutSettingsAsync**  
+** Nest.ElasticClient.ClusterRerouteAsync**  
+** Nest.ElasticClient.ClusterRerouteAsync**  
+** Nest.ElasticClient.ClusterStateAsync**  
+** Nest.ElasticClient.ClusterStateAsync**  
+** Nest.ElasticClient.ClusterStatsAsync**  
+** Nest.ElasticClient.ClusterStatsAsync**  
+** Nest.ElasticClient.CountAsync&lt;T&gt;**  
+** Nest.ElasticClient.CountAsync&lt;T&gt;**  
+** Nest.ElasticClient.CreateIndexAsync**  
+** Nest.ElasticClient.CreateIndexAsync**  
+** Nest.ElasticClient.CreateRepositoryAsync**  
+** Nest.ElasticClient.CreateRepositoryAsync**  
+** Nest.ElasticClient.DeactivateWatchAsync**  
+** Nest.ElasticClient.DeactivateWatchAsync**  
+** Nest.ElasticClient.DeleteAliasAsync**  
+** Nest.ElasticClient.DeleteAliasAsync**  
+** Nest.ElasticClient.DeleteAsync**  
+** Nest.ElasticClient.DeleteAsync&lt;T&gt;**  
+** Nest.ElasticClient.DeleteByQueryAsync**  
+** Nest.ElasticClient.DeleteByQueryAsync&lt;T&gt;**  
+** Nest.ElasticClient.DeleteIndexAsync**  
+** Nest.ElasticClient.DeleteIndexAsync**  
+** Nest.ElasticClient.DeleteIndexTemplateAsync**  
+** Nest.ElasticClient.DeleteIndexTemplateAsync**  
+** Nest.ElasticClient.DeleteLicenseAsync**  
+** Nest.ElasticClient.DeleteLicenseAsync**  
+** Nest.ElasticClient.DeleteRepositoryAsync**  
+** Nest.ElasticClient.DeleteRepositoryAsync**  
+** Nest.ElasticClient.DeleteRoleAsync**  
+** Nest.ElasticClient.DeleteRoleAsync**  
+** Nest.ElasticClient.DeleteScriptAsync**  
+** Nest.ElasticClient.DeleteScriptAsync**  
+** Nest.ElasticClient.DeleteSearchTemplateAsync**  
+** Nest.ElasticClient.DeleteSearchTemplateAsync**  
+** Nest.ElasticClient.DeleteSnapshotAsync**  
+** Nest.ElasticClient.DeleteSnapshotAsync**  
+** Nest.ElasticClient.DeleteUserAsync**  
+** Nest.ElasticClient.DeleteUserAsync**  
+** Nest.ElasticClient.DeleteWatchAsync**  
+** Nest.ElasticClient.DeleteWatchAsync**  
+** Nest.ElasticClient.DocumentExistsAsync**  
+** Nest.ElasticClient.DocumentExistsAsync&lt;T&gt;**  
+** Nest.ElasticClient.ExecuteWatchAsync**  
+** Nest.ElasticClient.ExecuteWatchAsync**  
+** Nest.ElasticClient.ExplainAsync&lt;T&gt;**  
+** Nest.ElasticClient.ExplainAsync&lt;T&gt;**  
+** Nest.ElasticClient.FieldStatsAsync**  
+** Nest.ElasticClient.FieldStatsAsync**  
+** Nest.ElasticClient.FlushAsync**  
+** Nest.ElasticClient.FlushAsync**  
+** Nest.ElasticClient.ForceMergeAsync**  
+** Nest.ElasticClient.ForceMergeAsync**  
+** Nest.ElasticClient.GetAliasAsync**  
+** Nest.ElasticClient.GetAliasAsync**  
+** Nest.ElasticClient.GetAsync&lt;T&gt;**  
+** Nest.ElasticClient.GetAsync&lt;T&gt;**  
+** Nest.ElasticClient.GetFieldMappingAsync**  
+** Nest.ElasticClient.GetFieldMappingAsync&lt;T&gt;**  
+** Nest.ElasticClient.GetIndexAsync**  
+** Nest.ElasticClient.GetIndexAsync**  
+** Nest.ElasticClient.GetIndexSettingsAsync**  
+** Nest.ElasticClient.GetIndexSettingsAsync**  
+** Nest.ElasticClient.GetIndexTemplateAsync**  
+** Nest.ElasticClient.GetIndexTemplateAsync**  
+** Nest.ElasticClient.GetLicenseAsync**  
+** Nest.ElasticClient.GetLicenseAsync**  
+** Nest.ElasticClient.GetMappingAsync**  
+** Nest.ElasticClient.GetMappingAsync&lt;T&gt;**  
+** Nest.ElasticClient.GetRepositoryAsync**  
+** Nest.ElasticClient.GetRepositoryAsync**  
+** Nest.ElasticClient.GetRoleAsync**  
+** Nest.ElasticClient.GetRoleAsync**  
+** Nest.ElasticClient.GetScriptAsync**  
+** Nest.ElasticClient.GetScriptAsync**  
+** Nest.ElasticClient.GetSearchTemplateAsync**  
+** Nest.ElasticClient.GetSearchTemplateAsync**  
+** Nest.ElasticClient.GetSnapshotAsync**  
+** Nest.ElasticClient.GetSnapshotAsync**  
+** Nest.ElasticClient.GetUserAsync**  
+** Nest.ElasticClient.GetUserAsync**  
+** Nest.ElasticClient.GetWatchAsync**  
+** Nest.ElasticClient.GetWatchAsync**  
+** Nest.ElasticClient.GraphExploreAsync**  
+** Nest.ElasticClient.GraphExploreAsync&lt;T&gt;**  
+** Nest.ElasticClient.IndexAsync**  
+** Nest.ElasticClient.IndexAsync&lt;T&gt;**  
+** Nest.ElasticClient.IndexExistsAsync**  
+** Nest.ElasticClient.IndexExistsAsync**  
+** Nest.ElasticClient.IndexTemplateExistsAsync**  
+** Nest.ElasticClient.IndexTemplateExistsAsync**  
+** Nest.ElasticClient.IndicesShardStoresAsync**  
+** Nest.ElasticClient.IndicesShardStoresAsync**  
+** Nest.ElasticClient.IndicesStatsAsync**  
+** Nest.ElasticClient.IndicesStatsAsync**  
+** Nest.ElasticClient.MapAsync**  
+** Nest.ElasticClient.MapAsync&lt;T&gt;**  
+** Nest.ElasticClient.MultiGetAsync**  
+** Nest.ElasticClient.MultiGetAsync**  
+** Nest.ElasticClient.MultiPercolateAsync**  
+** Nest.ElasticClient.MultiPercolateAsync**  
+** Nest.ElasticClient.MultiSearchAsync**  
+** Nest.ElasticClient.MultiSearchAsync**  
+** Nest.ElasticClient.MultiTermVectorsAsync**  
+** Nest.ElasticClient.MultiTermVectorsAsync**  
+** Nest.ElasticClient.NodesHotThreadsAsync**  
+** Nest.ElasticClient.NodesHotThreadsAsync**  
+** Nest.ElasticClient.NodesInfoAsync**  
+** Nest.ElasticClient.NodesInfoAsync**  
+** Nest.ElasticClient.NodesStatsAsync**  
+** Nest.ElasticClient.NodesStatsAsync**  
+** Nest.ElasticClient.OpenIndexAsync**  
+** Nest.ElasticClient.OpenIndexAsync**  
+** Nest.ElasticClient.PercolateAsync&lt;T&gt;**  
+** Nest.ElasticClient.PercolateAsync&lt;T&gt;**  
+** Nest.ElasticClient.PercolateCountAsync&lt;T&gt;**  
+** Nest.ElasticClient.PercolateCountAsync&lt;T&gt;**  
+** Nest.ElasticClient.PingAsync**  
+** Nest.ElasticClient.PingAsync**  
+** Nest.ElasticClient.PostLicenseAsync**  
+** Nest.ElasticClient.PostLicenseAsync**  
+** Nest.ElasticClient.PutAliasAsync**  
+** Nest.ElasticClient.PutAliasAsync**  
+** Nest.ElasticClient.PutIndexTemplateAsync**  
+** Nest.ElasticClient.PutIndexTemplateAsync**  
+** Nest.ElasticClient.PutRoleAsync**  
+** Nest.ElasticClient.PutRoleAsync**  
+** Nest.ElasticClient.PutScriptAsync**  
+** Nest.ElasticClient.PutScriptAsync**  
+** Nest.ElasticClient.PutSearchTemplateAsync**  
+** Nest.ElasticClient.PutSearchTemplateAsync**  
+** Nest.ElasticClient.PutUserAsync**  
+** Nest.ElasticClient.PutUserAsync**  
+** Nest.ElasticClient.PutWatchAsync**  
+** Nest.ElasticClient.PutWatchAsync**  
+** Nest.ElasticClient.RecoveryStatusAsync**  
+** Nest.ElasticClient.RecoveryStatusAsync**  
+** Nest.ElasticClient.RefreshAsync**  
+** Nest.ElasticClient.RefreshAsync**  
+** Nest.ElasticClient.RegisterPercolatorAsync**  
+** Nest.ElasticClient.RegisterPercolatorAsync&lt;T&gt;**  
+** Nest.ElasticClient.Reindex&lt;T&gt;**  
+** Nest.ElasticClient.Reindex&lt;T&gt;**  
+** Nest.ElasticClient.ReindexOnServerAsync**  
+** Nest.ElasticClient.ReindexOnServerAsync**  
+** Nest.ElasticClient.RenderSearchTemplateAsync**  
+** Nest.ElasticClient.RenderSearchTemplateAsync**  
+** Nest.ElasticClient.RestartWatcherAsync**  
+** Nest.ElasticClient.RestartWatcherAsync**  
+** Nest.ElasticClient.RestoreAsync**  
+** Nest.ElasticClient.RestoreAsync**  
+** Nest.ElasticClient.RethrottleAsync**  
+** Nest.ElasticClient.RethrottleAsync**  
+** Nest.ElasticClient.RootNodeInfoAsync**  
+** Nest.ElasticClient.RootNodeInfoAsync**  
+** Nest.ElasticClient.ScrollAsync&lt;T&gt;**  
+** Nest.ElasticClient.ScrollAsync&lt;T&gt;**  
+** Nest.ElasticClient.SearchAsync&lt;T, TResult&gt;**  
+** Nest.ElasticClient.SearchAsync&lt;T, TResult&gt;**  
+** Nest.ElasticClient.SearchAsync&lt;T&gt;**  
+** Nest.ElasticClient.SearchAsync&lt;T&gt;**  
+** Nest.ElasticClient.SearchShardsAsync**  
+** Nest.ElasticClient.SearchShardsAsync&lt;T&gt;**  
+** Nest.ElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
+** Nest.ElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
+** Nest.ElasticClient.SearchTemplateAsync&lt;T&gt;**  
+** Nest.ElasticClient.SearchTemplateAsync&lt;T&gt;**  
+** Nest.ElasticClient.SegmentsAsync**  
+** Nest.ElasticClient.SegmentsAsync**  
+** Nest.ElasticClient.SnapshotAsync**  
+** Nest.ElasticClient.SnapshotAsync**  
+** Nest.ElasticClient.SnapshotStatusAsync**  
+** Nest.ElasticClient.SnapshotStatusAsync**  
+** Nest.ElasticClient.SourceAsync&lt;T&gt;**  
+** Nest.ElasticClient.SourceAsync&lt;T&gt;**  
+** Nest.ElasticClient.StartWatcherAsync**  
+** Nest.ElasticClient.StartWatcherAsync**  
+** Nest.ElasticClient.StopWatcherAsync**  
+** Nest.ElasticClient.StopWatcherAsync**  
+** Nest.ElasticClient.SuggestAsync&lt;T&gt;**  
+** Nest.ElasticClient.SyncedFlushAsync**  
+** Nest.ElasticClient.SyncedFlushAsync**  
+** Nest.ElasticClient.TermVectorsAsync&lt;T&gt;**  
+** Nest.ElasticClient.TermVectorsAsync&lt;T&gt;**  
+** Nest.ElasticClient.TypeExistsAsync**  
+** Nest.ElasticClient.TypeExistsAsync**  
+** Nest.ElasticClient.UnregisterPercolatorAsync**  
+** Nest.ElasticClient.UnregisterPercolatorAsync&lt;T&gt;**  
+** Nest.ElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
+** Nest.ElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
+** Nest.ElasticClient.UpdateAsync&lt;TDocument&gt;**  
+** Nest.ElasticClient.UpdateAsync&lt;TDocument&gt;**  
+** Nest.ElasticClient.UpdateByQueryAsync**  
+** Nest.ElasticClient.UpdateByQueryAsync&lt;T&gt;**  
+** Nest.ElasticClient.UpdateIndexSettingsAsync**  
+** Nest.ElasticClient.UpdateIndexSettingsAsync**  
+** Nest.ElasticClient.UpgradeAsync**  
+** Nest.ElasticClient.UpgradeAsync**  
+** Nest.ElasticClient.UpgradeStatusAsync**  
+** Nest.ElasticClient.UpgradeStatusAsync**  
+** Nest.ElasticClient.ValidateQueryAsync**  
+** Nest.ElasticClient.ValidateQueryAsync&lt;T&gt;**  
+** Nest.ElasticClient.VerifyRepositoryAsync**  
+** Nest.ElasticClient.VerifyRepositoryAsync**  
+** Nest.ElasticClient.WatcherStatsAsync**  
+** Nest.ElasticClient.WatcherStatsAsync**  
+** Nest.GetManyExtensions.GetManyAsync&lt;T&gt;**  
+** Nest.GetManyExtensions.GetManyAsync&lt;T&gt;**  
+** Nest.IElasticClient.AcknowledgeWatchAsync**  
+** Nest.IElasticClient.AcknowledgeWatchAsync**  
+** Nest.IElasticClient.ActivateWatchAsync**  
+** Nest.IElasticClient.ActivateWatchAsync**  
+** Nest.IElasticClient.AliasAsync**  
+** Nest.IElasticClient.AliasAsync**  
+** Nest.IElasticClient.AliasExistsAsync**  
+** Nest.IElasticClient.AliasExistsAsync**  
+** Nest.IElasticClient.AnalyzeAsync**  
+** Nest.IElasticClient.AnalyzeAsync**  
+** Nest.IElasticClient.AuthenticateAsync**  
+** Nest.IElasticClient.AuthenticateAsync**  
+** Nest.IElasticClient.BulkAsync**  
+** Nest.IElasticClient.BulkAsync**  
+** Nest.IElasticClient.CatAliasesAsync**  
+** Nest.IElasticClient.CatAliasesAsync**  
+** Nest.IElasticClient.CatAllocationAsync**  
+** Nest.IElasticClient.CatAllocationAsync**  
+** Nest.IElasticClient.CatCountAsync**  
+** Nest.IElasticClient.CatCountAsync**  
+** Nest.IElasticClient.CatFielddataAsync**  
+** Nest.IElasticClient.CatFielddataAsync**  
+** Nest.IElasticClient.CatHealthAsync**  
+** Nest.IElasticClient.CatHealthAsync**  
+** Nest.IElasticClient.CatHelpAsync**  
+** Nest.IElasticClient.CatHelpAsync**  
+** Nest.IElasticClient.CatIndicesAsync**  
+** Nest.IElasticClient.CatIndicesAsync**  
+** Nest.IElasticClient.CatMasterAsync**  
+** Nest.IElasticClient.CatMasterAsync**  
+** Nest.IElasticClient.CatNodeAttributesAsync**  
+** Nest.IElasticClient.CatNodeAttributesAsync**  
+** Nest.IElasticClient.CatNodesAsync**  
+** Nest.IElasticClient.CatNodesAsync**  
+** Nest.IElasticClient.CatPendingTasksAsync**  
+** Nest.IElasticClient.CatPendingTasksAsync**  
+** Nest.IElasticClient.CatPluginsAsync**  
+** Nest.IElasticClient.CatPluginsAsync**  
+** Nest.IElasticClient.CatRecoveryAsync**  
+** Nest.IElasticClient.CatRecoveryAsync**  
+** Nest.IElasticClient.CatRepositoriesAsync**  
+** Nest.IElasticClient.CatRepositoriesAsync**  
+** Nest.IElasticClient.CatSegmentsAsync**  
+** Nest.IElasticClient.CatSegmentsAsync**  
+** Nest.IElasticClient.CatShardsAsync**  
+** Nest.IElasticClient.CatShardsAsync**  
+** Nest.IElasticClient.CatSnapshotsAsync**  
+** Nest.IElasticClient.CatSnapshotsAsync**  
+** Nest.IElasticClient.CatThreadPoolAsync**  
+** Nest.IElasticClient.CatThreadPoolAsync**  
+** Nest.IElasticClient.ClearCacheAsync**  
+** Nest.IElasticClient.ClearCacheAsync**  
+** Nest.IElasticClient.ClearCachedRealmsAsync**  
+** Nest.IElasticClient.ClearCachedRealmsAsync**  
+** Nest.IElasticClient.ClearCachedRolesAsync**  
+** Nest.IElasticClient.ClearCachedRolesAsync**  
+** Nest.IElasticClient.ClearScrollAsync**  
+** Nest.IElasticClient.ClearScrollAsync**  
+** Nest.IElasticClient.CloseIndexAsync**  
+** Nest.IElasticClient.CloseIndexAsync**  
+** Nest.IElasticClient.ClusterGetSettingsAsync**  
+** Nest.IElasticClient.ClusterGetSettingsAsync**  
+** Nest.IElasticClient.ClusterHealthAsync**  
+** Nest.IElasticClient.ClusterHealthAsync**  
+** Nest.IElasticClient.ClusterPendingTasksAsync**  
+** Nest.IElasticClient.ClusterPendingTasksAsync**  
+** Nest.IElasticClient.ClusterPutSettingsAsync**  
+** Nest.IElasticClient.ClusterPutSettingsAsync**  
+** Nest.IElasticClient.ClusterRerouteAsync**  
+** Nest.IElasticClient.ClusterRerouteAsync**  
+** Nest.IElasticClient.ClusterStateAsync**  
+** Nest.IElasticClient.ClusterStateAsync**  
+** Nest.IElasticClient.ClusterStatsAsync**  
+** Nest.IElasticClient.ClusterStatsAsync**  
+** Nest.IElasticClient.CountAsync&lt;T&gt;**  
+** Nest.IElasticClient.CountAsync&lt;T&gt;**  
+** Nest.IElasticClient.CreateIndexAsync**  
+** Nest.IElasticClient.CreateIndexAsync**  
+** Nest.IElasticClient.CreateRepositoryAsync**  
+** Nest.IElasticClient.CreateRepositoryAsync**  
+** Nest.IElasticClient.DeactivateWatchAsync**  
+** Nest.IElasticClient.DeactivateWatchAsync**  
+** Nest.IElasticClient.DeleteAliasAsync**  
+** Nest.IElasticClient.DeleteAliasAsync**  
+** Nest.IElasticClient.DeleteAsync**  
+** Nest.IElasticClient.DeleteAsync&lt;T&gt;**  
+** Nest.IElasticClient.DeleteByQueryAsync**  
+** Nest.IElasticClient.DeleteByQueryAsync&lt;T&gt;**  
+** Nest.IElasticClient.DeleteIndexAsync**  
+** Nest.IElasticClient.DeleteIndexAsync**  
+** Nest.IElasticClient.DeleteIndexTemplateAsync**  
+** Nest.IElasticClient.DeleteIndexTemplateAsync**  
+** Nest.IElasticClient.DeleteLicenseAsync**  
+** Nest.IElasticClient.DeleteLicenseAsync**  
+** Nest.IElasticClient.DeleteRepositoryAsync**  
+** Nest.IElasticClient.DeleteRepositoryAsync**  
+** Nest.IElasticClient.DeleteRoleAsync**  
+** Nest.IElasticClient.DeleteRoleAsync**  
+** Nest.IElasticClient.DeleteScriptAsync**  
+** Nest.IElasticClient.DeleteScriptAsync**  
+** Nest.IElasticClient.DeleteSearchTemplateAsync**  
+** Nest.IElasticClient.DeleteSearchTemplateAsync**  
+** Nest.IElasticClient.DeleteSnapshotAsync**  
+** Nest.IElasticClient.DeleteSnapshotAsync**  
+** Nest.IElasticClient.DeleteUserAsync**  
+** Nest.IElasticClient.DeleteUserAsync**  
+** Nest.IElasticClient.DeleteWatchAsync**  
+** Nest.IElasticClient.DeleteWatchAsync**  
+** Nest.IElasticClient.DocumentExistsAsync**  
+** Nest.IElasticClient.DocumentExistsAsync&lt;T&gt;**  
+** Nest.IElasticClient.ExecuteWatchAsync**  
+** Nest.IElasticClient.ExecuteWatchAsync**  
+** Nest.IElasticClient.ExplainAsync&lt;T&gt;**  
+** Nest.IElasticClient.ExplainAsync&lt;T&gt;**  
+** Nest.IElasticClient.FieldStatsAsync**  
+** Nest.IElasticClient.FieldStatsAsync**  
+** Nest.IElasticClient.FlushAsync**  
+** Nest.IElasticClient.FlushAsync**  
+** Nest.IElasticClient.ForceMergeAsync**  
+** Nest.IElasticClient.ForceMergeAsync**  
+** Nest.IElasticClient.GetAliasAsync**  
+** Nest.IElasticClient.GetAliasAsync**  
+** Nest.IElasticClient.GetAsync&lt;T&gt;**  
+** Nest.IElasticClient.GetAsync&lt;T&gt;**  
+** Nest.IElasticClient.GetFieldMappingAsync**  
+** Nest.IElasticClient.GetFieldMappingAsync&lt;T&gt;**  
+** Nest.IElasticClient.GetIndexAsync**  
+** Nest.IElasticClient.GetIndexAsync**  
+** Nest.IElasticClient.GetIndexSettingsAsync**  
+** Nest.IElasticClient.GetIndexSettingsAsync**  
+** Nest.IElasticClient.GetIndexTemplateAsync**  
+** Nest.IElasticClient.GetIndexTemplateAsync**  
+** Nest.IElasticClient.GetLicenseAsync**  
+** Nest.IElasticClient.GetLicenseAsync**  
+** Nest.IElasticClient.GetMappingAsync**  
+** Nest.IElasticClient.GetMappingAsync&lt;T&gt;**  
+** Nest.IElasticClient.GetRepositoryAsync**  
+** Nest.IElasticClient.GetRepositoryAsync**  
+** Nest.IElasticClient.GetRoleAsync**  
+** Nest.IElasticClient.GetRoleAsync**  
+** Nest.IElasticClient.GetScriptAsync**  
+** Nest.IElasticClient.GetScriptAsync**  
+** Nest.IElasticClient.GetSearchTemplateAsync**  
+** Nest.IElasticClient.GetSearchTemplateAsync**  
+** Nest.IElasticClient.GetSnapshotAsync**  
+** Nest.IElasticClient.GetSnapshotAsync**  
+** Nest.IElasticClient.GetUserAsync**  
+** Nest.IElasticClient.GetUserAsync**  
+** Nest.IElasticClient.GetWatchAsync**  
+** Nest.IElasticClient.GetWatchAsync**  
+** Nest.IElasticClient.GraphExploreAsync**  
+** Nest.IElasticClient.GraphExploreAsync&lt;T&gt;**  
+** Nest.IElasticClient.IndexAsync**  
+** Nest.IElasticClient.IndexAsync&lt;T&gt;**  
+** Nest.IElasticClient.IndexExistsAsync**  
+** Nest.IElasticClient.IndexExistsAsync**  
+** Nest.IElasticClient.IndexTemplateExistsAsync**  
+** Nest.IElasticClient.IndexTemplateExistsAsync**  
+** Nest.IElasticClient.IndicesShardStoresAsync**  
+** Nest.IElasticClient.IndicesShardStoresAsync**  
+** Nest.IElasticClient.IndicesStatsAsync**  
+** Nest.IElasticClient.IndicesStatsAsync**  
+** Nest.IElasticClient.MapAsync**  
+** Nest.IElasticClient.MapAsync&lt;T&gt;**  
+** Nest.IElasticClient.MultiGetAsync**  
+** Nest.IElasticClient.MultiGetAsync**  
+** Nest.IElasticClient.MultiPercolateAsync**  
+** Nest.IElasticClient.MultiPercolateAsync**  
+** Nest.IElasticClient.MultiSearchAsync**  
+** Nest.IElasticClient.MultiSearchAsync**  
+** Nest.IElasticClient.MultiTermVectorsAsync**  
+** Nest.IElasticClient.MultiTermVectorsAsync**  
+** Nest.IElasticClient.NodesHotThreadsAsync**  
+** Nest.IElasticClient.NodesHotThreadsAsync**  
+** Nest.IElasticClient.NodesInfoAsync**  
+** Nest.IElasticClient.NodesInfoAsync**  
+** Nest.IElasticClient.NodesStatsAsync**  
+** Nest.IElasticClient.NodesStatsAsync**  
+** Nest.IElasticClient.OpenIndexAsync**  
+** Nest.IElasticClient.OpenIndexAsync**  
+** Nest.IElasticClient.PercolateAsync&lt;T&gt;**  
+** Nest.IElasticClient.PercolateAsync&lt;T&gt;**  
+** Nest.IElasticClient.PercolateCountAsync&lt;T&gt;**  
+** Nest.IElasticClient.PercolateCountAsync&lt;T&gt;**  
+** Nest.IElasticClient.PingAsync**  
+** Nest.IElasticClient.PingAsync**  
+** Nest.IElasticClient.PostLicenseAsync**  
+** Nest.IElasticClient.PostLicenseAsync**  
+** Nest.IElasticClient.PutAliasAsync**  
+** Nest.IElasticClient.PutAliasAsync**  
+** Nest.IElasticClient.PutIndexTemplateAsync**  
+** Nest.IElasticClient.PutIndexTemplateAsync**  
+** Nest.IElasticClient.PutRoleAsync**  
+** Nest.IElasticClient.PutRoleAsync**  
+** Nest.IElasticClient.PutScriptAsync**  
+** Nest.IElasticClient.PutScriptAsync**  
+** Nest.IElasticClient.PutSearchTemplateAsync**  
+** Nest.IElasticClient.PutSearchTemplateAsync**  
+** Nest.IElasticClient.PutUserAsync**  
+** Nest.IElasticClient.PutUserAsync**  
+** Nest.IElasticClient.PutWatchAsync**  
+** Nest.IElasticClient.PutWatchAsync**  
+** Nest.IElasticClient.RecoveryStatusAsync**  
+** Nest.IElasticClient.RecoveryStatusAsync**  
+** Nest.IElasticClient.RefreshAsync**  
+** Nest.IElasticClient.RefreshAsync**  
+** Nest.IElasticClient.RegisterPercolatorAsync**  
+** Nest.IElasticClient.RegisterPercolatorAsync&lt;T&gt;**  
+** Nest.IElasticClient.Reindex&lt;T&gt;**  
+** Nest.IElasticClient.Reindex&lt;T&gt;**  
+** Nest.IElasticClient.ReindexOnServerAsync**  
+** Nest.IElasticClient.ReindexOnServerAsync**  
+** Nest.IElasticClient.RenderSearchTemplateAsync**  
+** Nest.IElasticClient.RenderSearchTemplateAsync**  
+** Nest.IElasticClient.RestartWatcherAsync**  
+** Nest.IElasticClient.RestartWatcherAsync**  
+** Nest.IElasticClient.RestoreAsync**  
+** Nest.IElasticClient.RestoreAsync**  
+** Nest.IElasticClient.RethrottleAsync**  
+** Nest.IElasticClient.RethrottleAsync**  
+** Nest.IElasticClient.RootNodeInfoAsync**  
+** Nest.IElasticClient.RootNodeInfoAsync**  
+** Nest.IElasticClient.ScrollAsync&lt;T&gt;**  
+** Nest.IElasticClient.ScrollAsync&lt;T&gt;**  
+** Nest.IElasticClient.SearchAsync&lt;T, TResult&gt;**  
+** Nest.IElasticClient.SearchAsync&lt;T, TResult&gt;**  
+** Nest.IElasticClient.SearchAsync&lt;T&gt;**  
+** Nest.IElasticClient.SearchAsync&lt;T&gt;**  
+** Nest.IElasticClient.SearchShardsAsync**  
+** Nest.IElasticClient.SearchShardsAsync&lt;T&gt;**  
+** Nest.IElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
+** Nest.IElasticClient.SearchTemplateAsync&lt;T, TResult&gt;**  
+** Nest.IElasticClient.SearchTemplateAsync&lt;T&gt;**  
+** Nest.IElasticClient.SearchTemplateAsync&lt;T&gt;**  
+** Nest.IElasticClient.SegmentsAsync**  
+** Nest.IElasticClient.SegmentsAsync**  
+** Nest.IElasticClient.SnapshotAsync**  
+** Nest.IElasticClient.SnapshotAsync**  
+** Nest.IElasticClient.SnapshotStatusAsync**  
+** Nest.IElasticClient.SnapshotStatusAsync**  
+** Nest.IElasticClient.SourceAsync&lt;T&gt;**  
+** Nest.IElasticClient.SourceAsync&lt;T&gt;**  
+** Nest.IElasticClient.StartWatcherAsync**  
+** Nest.IElasticClient.StartWatcherAsync**  
+** Nest.IElasticClient.StopWatcherAsync**  
+** Nest.IElasticClient.StopWatcherAsync**  
+** Nest.IElasticClient.SuggestAsync&lt;T&gt;**  
+** Nest.IElasticClient.SyncedFlushAsync**  
+** Nest.IElasticClient.SyncedFlushAsync**  
+** Nest.IElasticClient.TermVectorsAsync&lt;T&gt;**  
+** Nest.IElasticClient.TermVectorsAsync&lt;T&gt;**  
+** Nest.IElasticClient.TypeExistsAsync**  
+** Nest.IElasticClient.TypeExistsAsync**  
+** Nest.IElasticClient.UnregisterPercolatorAsync**  
+** Nest.IElasticClient.UnregisterPercolatorAsync&lt;T&gt;**  
+** Nest.IElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
+** Nest.IElasticClient.UpdateAsync&lt;TDocument, TPartialDocument&gt;**  
+** Nest.IElasticClient.UpdateAsync&lt;TDocument&gt;**  
+** Nest.IElasticClient.UpdateAsync&lt;TDocument&gt;**  
+** Nest.IElasticClient.UpdateByQueryAsync**  
+** Nest.IElasticClient.UpdateByQueryAsync&lt;T&gt;**  
+** Nest.IElasticClient.UpdateIndexSettingsAsync**  
+** Nest.IElasticClient.UpdateIndexSettingsAsync**  
+** Nest.IElasticClient.UpgradeAsync**  
+** Nest.IElasticClient.UpgradeAsync**  
+** Nest.IElasticClient.UpgradeStatusAsync**  
+** Nest.IElasticClient.UpgradeStatusAsync**  
+** Nest.IElasticClient.ValidateQueryAsync**  
+** Nest.IElasticClient.ValidateQueryAsync&lt;T&gt;**  
+** Nest.IElasticClient.VerifyRepositoryAsync**  
+** Nest.IElasticClient.VerifyRepositoryAsync**  
+** Nest.IElasticClient.WatcherStatsAsync**  
+** Nest.IElasticClient.WatcherStatsAsync**  
+** Nest.IHighLevelToLowLevelDispatcher.DispatchAsync&lt;TRequest, TQueryString, TResponse, TResponseInterface&gt;**  
+** Nest.IHighLevelToLowLevelDispatcher.DispatchAsync&lt;TRequest, TQueryString, TResponse, TResponseInterface&gt;**  
+** Nest.IndexManyExtensions.IndexManyAsync&lt;T&gt;**  
+** Nest.ReindexObservable&lt;T&gt;..ctor**  
+** Nest.SourceManyExtensions.SourceManyAsync&lt;T&gt;**  
+** Nest.SourceManyExtensions.SourceManyAsync&lt;T&gt;**  
