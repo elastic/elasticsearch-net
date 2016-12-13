@@ -49,7 +49,7 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
 
 ## Upgrading
 
-Pleas consult the [current upgrading Elasticsearch guidelines](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html) to understand what you should consider when upgrading from an older version of Elasticsearch to a newer one.
+Please consult the [current upgrading Elasticsearch guidelines](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html) to understand what you should consider when upgrading from an older version of Elasticsearch to a newer one.
 
 ### Upgrading from 1.x to 2.x
 
