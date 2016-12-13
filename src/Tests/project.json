@@ -1,5 +1,5 @@
 {
-  "version": "5.0.0-rc4",
+  "version": "5.0.0",
   "buildOptions": {
     "warningsAsErrors": false,
     "embed": [
