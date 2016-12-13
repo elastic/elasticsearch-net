@@ -42,8 +42,8 @@ var fluentParametersNotNamedSelector =
     from m in typeof(IElasticClient).GetMethods()
     from p in m.GetParameters()
     where p.ParameterType.BaseType() == typeof(MulticastDelegate)
-    where !p.Name.Equals("selector")
-    select $"method '{nameof(IElasticClient)}.{m.Name}' should have parameter name of 'selector' but has a name of '{p.Name}'";
+    where !p.Name.Equals("selector") && !p.Name.Equals("mapper")
+    select $"method '{nameof(IElasticClient)}.{m.Name}' should have parameter name of 'selector' or 'mapper' but has a name of '{p.Name}'";
 fluentParametersNotNamedSelector.Should().BeEmpty();
 ----
 
