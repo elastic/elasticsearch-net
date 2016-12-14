@@ -1,13 +1,5 @@
 = Breaking Changes
 
-////
-IMPORTANT NOTE
-==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/5.x/src/Tests/breaking-changes.asciidoc. 
-If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
-please modify the original csharp file found at the link and submit the PR with that change. Thanks!
-////
-
 [partintro]
 --
 There are a number of breaking changes when going from 2.x to 5.x

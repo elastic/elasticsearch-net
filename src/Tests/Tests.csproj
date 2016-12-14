@@ -728,6 +728,7 @@
     <Compile Include="XPack\Watcher\RestartWatcher\RestartWatcherApiTests.cs" />
     <None Include="aggregations-usage.asciidoc" />
     <None Include="aggregations.asciidoc" />
+    <None Include="breaking-changes.asciidoc" />
     <None Include="client-concepts.asciidoc" />
     <None Include="common-options.asciidoc" />
     <None Include="connection-pooling.asciidoc" />
