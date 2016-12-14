@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Reflection.Emit;
 using System.Text.RegularExpressions;
-using DocGenerator;
 
 namespace DocGenerator.Documentation.Files
 {

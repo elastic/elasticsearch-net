@@ -11,7 +11,7 @@ namespace DocGenerator.Documentation.Files
 		{
 			var docFileName = this.CreateDocumentationLocation();
 
-			// copy for asciidoc to work (path is relative to file)
+			// copy for asciidoc to work when viewing a single asciidoc in the browser (path is relative to file)
 			this.FileLocation.CopyTo(docFileName.FullName, true);
 
 			// copy to the root as well, for the doc generation process (path is relative to root)
