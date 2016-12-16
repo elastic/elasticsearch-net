@@ -1,42 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-#if !DOTNETCORE
-using SemVer;
-#endif
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 using System.Reflection;
-
-#if DOTNETCORE
-namespace SemVer
-{
-	//TODO incredibly ugly but on .net core we always skip tests marked with SkipVersion
-	//We'll need to submit a PR to https://github.com/adamreeve/semver.net once .net core is
-	//in more stable waters
-
-	public class Range
-	{
-		private string _range;
-		public Range(string range)
-		{
-			this._range = range;
-		}
-		//if a test has a skip range skip alwyas on CoreCLR since we can not as of yet
-		//validate ranges
-		public bool IsSatisfied(SemVer.Version version) => this._range != null;
-	}
-	public class Version
-	{
-		public string Parsed { get; }
-		public Version(string version)
-		{
-			this.Parsed  = version;
-		}
-	}
-}
-#endif
+using Version = SemVer.Version;
 
 namespace Tests.Framework
 {
@@ -88,7 +57,7 @@ namespace Tests.Framework
 #endif
 			if (!attributes.Any()) return false;
 
-			var version = new SemVer.Version(TestClient.Configuration.ElasticsearchVersion);
+			var version = new Version(TestClient.Configuration.ElasticsearchVersion);
 			var ranges = attributes.Cast<SkipVersionAttribute>()
 				.SelectMany(a=>a.Ranges);
 
