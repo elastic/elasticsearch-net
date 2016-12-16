@@ -13,6 +13,7 @@ nuget System.Collections.Immutable
 nuget FluentAssertions 
 nuget Bogus
 nuget DiffPlex 
+nuget SemanticVersioning
 
 // profiling / benchmarking
 nuget JetBrains.Profiler.Kernel.Windows.Api

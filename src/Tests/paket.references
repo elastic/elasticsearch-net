@@ -5,3 +5,4 @@ xunit.abstractions
 System.Reactive
 Bogus
 DiffPlex
+SemanticVersioning
