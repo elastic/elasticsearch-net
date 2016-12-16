@@ -29,7 +29,8 @@ module Projects =
 
     type PrivateProject =
         | Tests
-
+        | DocGenerator
+    
     type DotNetProject = 
         | Project of Project
         | PrivateProject of PrivateProject
@@ -53,12 +54,19 @@ module Projects =
             | PrivateProject p ->
                 match p with
                 | Tests -> "Tests"
+                | DocGenerator -> "DocGenerator"
        
         static member TryFindName (name: string) =
             DotNetProject.All
             |> Seq.map(fun p -> p.Name)
             |> Seq.tryFind(fun p -> p.ToLowerInvariant() = name.ToLowerInvariant())
 
+    type DotNetFrameworkProject = { framework: DotNetFramework; project: DotNetProject }
+    let AllPublishableProjectsWithSupportedFrameworks = seq {
+        for framework in DotNetFramework.All do
+        for project in DotNetProject.AllPublishable do
+            yield { framework = framework; project= project}
+        }
 
 module Paths =
     open Projects
