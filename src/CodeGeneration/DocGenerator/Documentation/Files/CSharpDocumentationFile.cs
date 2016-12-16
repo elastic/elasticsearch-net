@@ -199,7 +199,6 @@ namespace DocGenerator.Documentation.Files
 			{
 				document.Accept(new AsciiDocVisitor(file));
 			}
-
 		}
 	}
 }

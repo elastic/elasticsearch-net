@@ -265,7 +265,7 @@ namespace DocGenerator.AsciiDoc
 				var builder = new StringBuilder();
 				using (var writer = new AsciiDocVisitor(new StringWriter(builder)))
 				{
-					writer.Visit(sectionTitle.Elements);
+					writer.Visit((InlineContainer)sectionTitle);
 				}
 
 				var title = builder.ToString().PascalToHyphen();
@@ -301,7 +301,7 @@ namespace DocGenerator.AsciiDoc
 				var builder = new StringBuilder();
 				using (var visitor = new AsciiDocVisitor(new StringWriter(builder)))
 				{
-					visitor.Visit(lastSectionTitle.Elements);
+					visitor.Visit((InlineContainer)lastSectionTitle);
 				}
 
 				return predicate(builder.ToString());
