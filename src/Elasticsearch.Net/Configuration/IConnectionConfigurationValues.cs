@@ -53,6 +53,13 @@ namespace Elasticsearch.Net
 		int? MaxRetries { get; }
 
 		/// <summary>
+		/// Limits the number of concurrent connections that can be opened to an endpoint. Defaults to 80 (see <see cref="ConnectionConfiguration.DefaultConnectionLimit"/>).
+		/// <para>For Desktop CLR, this setting applies to the DefaultConnectionLimit property on the  ServicePointManager object when creating ServicePoint objects, affecting the default <see cref="IConnection"/> implementation.</para>
+		/// <para>For Core CLR, this setting applies to the MaxConnectionsPerServer property on the HttpClientHandler instances used by the HttpClient inside the default <see cref="IConnection"/> implementation</para>
+		/// </summary>
+		int ConnectionLimit { get; }
+
+		/// <summary>
 		/// This signals that we do not want to send initial pings to unknown/previously dead nodes
 		/// and just send the call straightaway
 		/// </summary>
@@ -68,7 +75,15 @@ namespace Elasticsearch.Net
 		/// When set will force all connections through this proxy
 		/// </summary>
 		string ProxyAddress { get; }
+
+		/// <summary>
+		/// The username for the proxy, when configured
+		/// </summary>
 		string ProxyUsername { get; }
+
+		/// <summary>
+		/// The password for the proxy, when configured
+		/// </summary>
 		string ProxyPassword { get; }
 
 		/// <summary>
@@ -138,6 +153,10 @@ namespace Elasticsearch.Net
 		/// </summary>
 		BasicAuthenticationCredentials BasicAuthenticationCredentials { get; }
 
+		/// <summary>
+		/// An action to run when the <see cref="RequestData"/> for a request has been
+		/// created.
+		/// </summary>
 		Action<RequestData> OnRequestDataCreated { get; }
 
 		/// <summary>

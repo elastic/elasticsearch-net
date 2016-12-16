@@ -21,6 +21,7 @@ namespace Elasticsearch.Net
 		public static readonly TimeSpan DefaultTimeout = TimeSpan.FromMinutes(1);
 		public static readonly TimeSpan DefaultPingTimeout = TimeSpan.FromSeconds(2);
 		public static readonly TimeSpan DefaultPingTimeoutOnSSL = TimeSpan.FromSeconds(5);
+		public static readonly int DefaultConnectionLimit = 80;
 
 		/// <summary>
 		/// ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects
@@ -53,10 +54,10 @@ namespace Elasticsearch.Net
 
 		// ReSharper disable once MemberCanBePrivate.Global
 		// eventhough we use don't use this we very much would like to  expose this constructor
+
 		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, Func<ConnectionConfiguration, IElasticsearchSerializer> serializerFactory)
 			: base(connectionPool, connection, serializerFactory)
 		{ }
-
 	}
 
 	[Browsable(false)]
@@ -112,6 +113,9 @@ namespace Elasticsearch.Net
 		private int? _maxRetries;
 		int? IConnectionConfigurationValues.MaxRetries => _maxRetries;
 
+		private int _connectionLimit;
+		int IConnectionConfigurationValues.ConnectionLimit => _connectionLimit;
+
 		private bool _sniffOnStartup;
 		bool IConnectionConfigurationValues.SniffsOnStartup => _sniffOnStartup;
 
@@ -166,34 +170,59 @@ namespace Elasticsearch.Net
 			// ReSharper disable once VirtualMemberCallInContructor
 			this._serializer = serializerFactory?.Invoke((T)this) ?? this.DefaultSerializer((T)this);
 
+			this._connectionLimit = ConnectionConfiguration.DefaultConnectionLimit;
 			this._requestTimeout = ConnectionConfiguration.DefaultTimeout;
 			this._sniffOnConnectionFault = true;
 			this._sniffOnStartup = true;
 			this._sniffLifeSpan = TimeSpan.FromHours(1);
 		}
 
-		T Assign(Action<ConnectionConfiguration<T>> assigner) => Fluent.Assign((T)this, assigner);
+		private T Assign(Action<ConnectionConfiguration<T>> assigner) => Fluent.Assign((T)this, assigner);
 
+		/// <summary>
+		/// The default serializer used to serialize documents to and from JSON
+		/// </summary>
 		protected virtual IElasticsearchSerializer DefaultSerializer(T settings) => new ElasticsearchDefaultSerializer();
 
+		/// <summary>
+		/// Sets the keep-alive option on a TCP connection.
+		/// <para>For Desktop CLR, sets ServicePointManager.SetTcpKeepAlive</para>
+		/// </summary>
+		/// <param name="keepAliveTime">Specifies the timeout with no activity until the first keep-alive packet is sent.</param>
+		/// <param name="keepAliveInterval">Specifies the interval between when successive keep-alive packets are sent if no acknowledgement is received.</param>
 		public T EnableTcpKeepAlive(TimeSpan keepAliveTime, TimeSpan keepAliveInterval) =>
 			Assign(a => { this._keepAliveTime = keepAliveTime; this._keepAliveInterval = keepAliveInterval; });
 
+		/// <summary>
+		/// The maximum number of retries for a given request,
+		/// </summary>
 		public T MaximumRetries(int maxRetries) => Assign(a => a._maxRetries = maxRetries);
 
 		/// <summary>
-		/// On connection pools that support reseeding setting this to true (default) will resniff the cluster when a call fails
+		/// Limits the number of concurrent connections that can be opened to an endpoint. Defaults to 80.
+		/// <para>For Desktop CLR, this setting applies to the DefaultConnectionLimit property on the  ServicePointManager object when creating ServicePoint objects, affecting the default <see cref="IConnection"/> implementation.</para>
+		/// <para>For Core CLR, this setting applies to the MaxConnectionsPerServer property on the HttpClientHandler instances used by the HttpClient inside the default <see cref="IConnection"/> implementation</para>
+		/// </summary>
+		/// <param name="connectionLimit">The connection limit</param>
+		public T ConnectionLimit(int connectionLimit)
+		{
+			if (connectionLimit <= 0) throw new ArgumentException("must be greater than 0", nameof(connectionLimit));
+			return Assign(a => a._connectionLimit = connectionLimit);
+		}
+
+		/// <summary>
+		/// Enables resniffing of the cluster when a call fails, if the connection pool supports reseeding. Defaults to true
 		/// </summary>
 		public T SniffOnConnectionFault(bool sniffsOnConnectionFault = true) => Assign(a => a._sniffOnConnectionFault = sniffsOnConnectionFault);
 
 		/// <summary>
-		/// Enables sniffing on first usage of a connection pool if that pool supports reseeding, defaults to true
+		/// Enables sniffing on first usage of a connection pool if that pool supports reseeding. Defaults to true
 		/// </summary>
 		public T SniffOnStartup(bool sniffsOnStartup = true) => Assign(a => a._sniffOnStartup = sniffsOnStartup);
 
 		/// <summary>
 		/// Set the duration after which a cluster state is considered stale and a sniff should be performed again.
-		/// An IConnectionPool has to signal it supports reseeding otherwise sniffing will never happen.
+		/// An <see cref="IConnectionPool"/> has to signal it supports reseeding, otherwise sniffing will never happen.
 		/// Defaults to 1 hour.
 		/// Set to null to disable completely. Sniffing will only ever happen on ConnectionPools that return true for SupportsReseeding
 		/// </summary>
@@ -201,11 +230,15 @@ namespace Elasticsearch.Net
 		public T SniffLifeSpan(TimeSpan? sniffLifeSpan) => Assign(a => a._sniffLifeSpan = sniffLifeSpan);
 
 		/// <summary>
-		/// Enable gzip compressed requests and responses, do note that you need to configure elasticsearch to set this
+		/// Enables gzip compressed requests and responses.
+		/// <para>IMPORTANT: You need to configure http compression on Elasticsearch to be able to use this</para>
 		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html"</para>
 		/// </summary>
 		public T EnableHttpCompression(bool enabled = true) => Assign(a => a._enableHttpCompression = enabled);
 
+		/// <summary>
+		/// Disables the automatic detection of a proxy
+		/// </summary>
 		public T DisableAutomaticProxyDetection(bool disable = true) => Assign(a => a._disableAutomaticProxyDetection = disable);
 
 		/// <summary>
@@ -223,18 +256,18 @@ namespace Elasticsearch.Net
 		public T DisablePing(bool disable = true) => Assign(a => a._disablePings = disable);
 
 		/// <summary>
-		/// This NameValueCollection will be appended to every url NEST calls, great if you need to pass i.e an API key.
+		/// A collection of query string parameters that will be sent with every request. Useful in situations where you always need to pass a parameter e.g. an API key.
 		/// </summary>
 		public T GlobalQueryStringParameters(NameValueCollection queryStringParameters) => Assign(a => a._queryString.Add(queryStringParameters));
 
 		/// <summary>
-		/// a NameValueCollection that will be send as headers for each request
+		/// A collection of headers that will be sent with every request. Useful in situations where you always need to pass a header e.g. a custom auth header
 		/// </summary>
 		public T GlobalHeaders(NameValueCollection headers) => Assign(a => a._headers.Add(headers));
 
 		/// <summary>
 		/// Sets the default timeout in milliseconds for each request to Elasticsearch.
-		/// NOTE: You can set this to a high value here, and specify the timeout on Elasticsearch's side.
+		/// NOTE: You can set this to a high value here, and specify a timeout on Elasticsearch's side.
 		/// </summary>
 		/// <param name="timeout">time out in milliseconds</param>
 		public T RequestTimeout(TimeSpan timeout) => Assign(a => a._requestTimeout = timeout);
@@ -262,14 +295,14 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// Limits the total runtime including retries separately from <see cref="RequestTimeout"/>
-		/// <pre>
-		/// When not specified defaults to <see cref="RequestTimeout"/> which itself defaults to 60seconds
-		/// </pre>
+		/// <para>
+		/// When not specified defaults to <see cref="RequestTimeout"/>, which itself defaults to 60 seconds
+		/// </para>
 		/// </summary>
 		public T MaxRetryTimeout(TimeSpan maxRetryTimeout) => Assign(a => a._maxRetryTimeout = maxRetryTimeout);
 
 		/// <summary>
-		/// If your connection has to go through proxy use this method to specify the proxy url
+		/// If your connection has to go through proxy, use this method to specify the proxy url
 		/// </summary>
 		public T Proxy(Uri proxyAdress, string username, string password)
 		{
@@ -281,8 +314,8 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Forces all requests to have ?pretty=true, causing elasticsearch to return formatted json.
-		/// Also forces the client to send out formatted json. Defaults to false
+		/// Forces all requests to have ?pretty=true, causing Elasticsearch to return formatted json.
+		/// Also forces the client to send out formatted json. Defaults to <c>false</c>
 		/// </summary>
 		public T PrettyJson(bool b = true) => Assign(a =>
 		{
@@ -293,33 +326,36 @@ namespace Elasticsearch.Net
 		});
 
 		/// <summary>
-		/// Make sure the reponse bytes are always available on the ElasticsearchResponse object
-		/// <para>Note: that depending on the registered serializer this may cause the respond to be read in memory first</para>
+		/// Ensures the response bytes are always available on the <see cref="ElasticsearchResponse{T}"/>
+		/// <para>IMPORTANT: Depending on the registered serializer,
+		/// this may cause the respose to be buffered in memory first, potentially affecting performance.</para>
 		/// </summary>
 		public T DisableDirectStreaming(bool b = true) => Assign(a => a._disableDirectStreaming = b);
 
 		/// <summary>
-		/// Global callback for every response that NEST receives, useful for custom logging.
-		/// Calling this multiple times will register multiple listeners.
+		/// Registers an <see cref="Action{IApiCallDetails}"/> that is called when a response is received from Elasticsearch.
+		/// This can be useful for implementing custom logging.
+		/// Multiple callbacks can be registered by calling this multiple times
 		/// </summary>
 		public T OnRequestCompleted(Action<IApiCallDetails> handler) =>
 			Assign(a => a._completedRequestHandler += handler ?? DefaultCompletedRequestHandler);
 
+		/// <summary>
+		/// Registers an <see cref="Action{RequestData}"/> that is called when <see cref="RequestData"/> is created.
+		/// Multiple callbacks can be registered by calling this multiple times
+		/// </summary>
 		public T OnRequestDataCreated(Action<RequestData> handler) =>
 			Assign(a => a._onRequestDataCreated += handler ?? DefaultRequestDataCreated);
 
 		/// <summary>
-		/// Basic access authentication credentials to specify with all requests.
+		/// Basic Authentication credentials to specify with all requests.
 		/// </summary>
-		public T BasicAuthentication(string userName, string password)
-		{
-			this._basicAuthCredentials = new BasicAuthenticationCredentials
+		public T BasicAuthentication(string userName, string password) =>
+			Assign(a => a._basicAuthCredentials = new BasicAuthenticationCredentials
 			{
 				Username = userName,
 				Password = password
-			};
-			return (T)this;
-		}
+			});
 
 		/// <summary>
 		/// Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
