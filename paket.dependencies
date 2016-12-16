@@ -14,6 +14,7 @@ nuget System.Reflection.Metadata  1.2.0
 nuget FluentAssertions 
 nuget Bogus
 nuget DiffPlex 
+nuget SemanticVersioning
 
 // profiling / benchmarking
 nuget JetBrains.Profiler.Kernel.Windows.Api
