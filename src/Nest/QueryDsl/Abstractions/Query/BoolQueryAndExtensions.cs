@@ -26,8 +26,7 @@ namespace Nest
 			var filterClauses = OrphanFilters(leftContainer).EagerConcat(OrphanFilters(rightContainer));
 			var mustClauses = OrphanMusts(leftContainer).EagerConcat(OrphanMusts(rightContainer));
 
-			var reuseContainer = ContainerContainingBool(leftContainer, rightContainer);
-			var container = CreateMustContainer(mustClauses, mustNotClauses, filterClauses, reuseContainer);
+			var container = CreateMustContainer(mustClauses, mustNotClauses, filterClauses);
 			return container;
 		}
 
@@ -79,66 +78,41 @@ namespace Nest
 			c = null;
 			var leftHasOnlyShoulds = leftBool.HasOnlyShouldClauses();
 			var rightHasOnlyShoulds = rightBool.HasOnlyShouldClauses();
-			if (leftHasOnlyShoulds || rightHasOnlyShoulds)
+			if (!leftHasOnlyShoulds && !rightHasOnlyShoulds) return false;
+			if (leftContainer.HoldsOnlyShouldMusts && rightHasOnlyShoulds)
 			{
-				if (leftContainer.HoldsOnlyShouldMusts && rightHasOnlyShoulds)
-				{
-					leftBool.Must = leftBool.Must.AddIfNotNull(rightContainer);
-					c = leftContainer;
-				}
-				else if (rightContainer.HoldsOnlyShouldMusts && leftHasOnlyShoulds)
-				{
-					rightBool.Must = rightBool.Must.AddIfNotNull(leftContainer);
-					c = rightContainer;
-				}
-				else
-				{
-					//c = CreateMustContainer(leftContainer, rightContainer);
-					c = CreateMustContainer(new Containers { leftContainer, rightContainer }, null);
-					c.HoldsOnlyShouldMusts = rightHasOnlyShoulds && leftHasOnlyShoulds;
-				}
+				leftBool.Must = leftBool.Must.AddIfNotNull(rightContainer);
+				c = leftContainer;
 			}
-			return c != null;
+			else if (rightContainer.HoldsOnlyShouldMusts && leftHasOnlyShoulds)
+			{
+				rightBool.Must = rightBool.Must.AddIfNotNull(leftContainer);
+				c = rightContainer;
+			}
+			else
+			{
+				c = CreateMustContainer(new Containers { leftContainer, rightContainer }, null);
+				c.HoldsOnlyShouldMusts = rightHasOnlyShoulds && leftHasOnlyShoulds;
+			}
+			return true;
 		}
 
 		private static QueryContainer CreateMustContainer(QueryContainer left, QueryContainer right)
 		{
-			return CreateMustContainer(new Containers { left, right }, ContainerContainingBool(left, right));
-		}
-
-		private static QueryContainer ContainerContainingBool(QueryContainer left, QueryContainer right)
-		{
-			var l = (left?.Self().Bool?.CreatedByBoolDsl).GetValueOrDefault();
-			var r = (right?.Self().Bool?.CreatedByBoolDsl).GetValueOrDefault();
-			return l ? left : r ? right : null;
+			return CreateMustContainer(new Containers { left, right }, null);
 		}
 
 		private static QueryContainer CreateMustContainer(List<QueryContainer> mustClauses, QueryContainer reuse)
 		{
-			var existingBool = reuse?.Self().Bool;
-			if (existingBool != null && existingBool.CreatedByBoolDsl)
-			{
-				existingBool.Must = mustClauses.ToListOrNullIfEmpty();
-				return reuse;
-			}
-			return new QueryContainer(new BoolQuery(createdByBoolDsl: true) { Must = mustClauses.ToListOrNullIfEmpty() });
+			return new QueryContainer(new BoolQuery() { Must = mustClauses.ToListOrNullIfEmpty() });
 		}
 
 		private static QueryContainer CreateMustContainer(
 			List<QueryContainer> mustClauses,
 			List<QueryContainer> mustNotClauses,
-			List<QueryContainer> filters,
-			QueryContainer reuse
+			List<QueryContainer> filters
 			)
 		{
-			var existingBool = reuse?.Self().Bool;
-			if (existingBool != null && existingBool.CreatedByBoolDsl)
-			{
-				existingBool.Must = mustClauses.ToListOrNullIfEmpty();
-				existingBool.MustNot = mustNotClauses.ToListOrNullIfEmpty();
-				existingBool.Filter = filters.ToListOrNullIfEmpty();
-				return reuse;
-			}
 			return new QueryContainer(new BoolQuery
 			{
 				Must = mustClauses.ToListOrNullIfEmpty(),
@@ -148,10 +122,7 @@ namespace Nest
 		}
 
 		private static bool CanMergeAnd(this IBoolQuery boolQuery) =>
-			//boolQuery != null && boolQuery.IsWritable && !boolQuery.Locked && !boolQuery.Should.HasAny();
 			boolQuery != null && !boolQuery.Locked && !boolQuery.Should.HasAny();
-
-		private static bool CanMergeAnd(this IQueryContainer container) => container.Bool.CanMergeAnd();
 
 		private static IEnumerable<QueryContainer> OrphanMusts(QueryContainer container)
 		{
