@@ -15,6 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 --
 The low level client, `ElasticLowLevelClient`, is a low level, dependency free client that has no 
 opinions about how you build and represent your requests and responses. 
+
 It can be installed from the Package Manager Console inside Visual Studio using
 
 [source,shell]

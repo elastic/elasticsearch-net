@@ -290,6 +290,29 @@ var expected = new
 Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 ----
 
+[IMPORTANT]
+====
+Some .NET types do not have direct equivalent Elasticsearch types. For example, `System.Decimal` is a type
+commonly used to express currencies and other financial calculations that require large numbers of significant
+integral and fractional digits and no round-off errors. There is no equivalent type in Elasticsearch, and the
+nearest type is {ref_current}/number.html[``double``], a double-precision 64-bit IEEE 754 floating point.
+
+When a POCO has a `System.Decimal` property, it is automapped to the Elasticsearch `double` type. With the caveat
+of a potential loss of precision, this is generally acceptable for a lot of use cases, but it can however cause
+problems in _some_ edge cases.
+
+As the https://download.microsoft.com/download/3/8/8/388e7205-bc10-4226-b2a8-75351c669b09/csharp%20language%20specification.doc[C# Specification states],
+
+[quote, C# Specification section 6.2.1]
+For a conversion from `decimal` to `float` or `double`, the `decimal` value is rounded to the nearest `double` or `float` value.
+While this conversion may lose precision, it never causes an exception to be thrown.
+
+This conversion causes an exception to be thrown at deserialization time for `Decimal.MinValue` and `Decimal.MaxValue` because, at
+serialization time, the nearest `double` value that is converted to is outside of the bounds of `Decimal.MinValue` or `Decimal.MaxValue`,
+respectively. In these cases, it is advisable to use `double` as the POCO property type.
+
+====
+
 [[auto-mapping-with-overrides]]
 [float]
 == Auto mapping with overrides
