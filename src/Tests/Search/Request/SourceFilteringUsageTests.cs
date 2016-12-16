@@ -10,8 +10,8 @@ using static Nest.Infer;
 namespace Tests.Search.Request
 {
 	/** Allows to control how the `_source` field is returned with every hit.
-	 * By default operations return the contents of the `_source` field unless
-	 * you have used the fields parameter or if the `_source` field is disabled.
+	 * By default, operations return the contents of the `_source` field unless
+	 * you have used the fields parameter, or if the `_source` field is disabled.
 	 *
 	 * See the Elasticsearch documentation on {ref_current}/search-request-source-filtering.html[Source Filtering] for more detail.
 	 */
@@ -94,6 +94,34 @@ namespace Tests.Search.Request
 			response.ShouldBeValid();
 			foreach (var hit in response.Hits)
 				hit.Source.Should().BeNull();
+		}
+	}
+
+	//hide
+	public class SourceFilteringEnabledUsageTests : SearchUsageTestBase
+	{
+		public SourceFilteringEnabledUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson =>
+			new
+			{
+				_source = new {}
+			};
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Source();
+
+		protected override SearchRequest<Project> Initializer =>
+			new SearchRequest<Project>
+			{
+				Source = new SourceFilter()
+			};
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.ShouldBeValid();
+			foreach (var hit in response.Hits)
+				hit.Source.Should().NotBeNull();
 		}
 	}
 

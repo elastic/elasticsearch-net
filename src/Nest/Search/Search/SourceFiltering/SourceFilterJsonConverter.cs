@@ -19,9 +19,6 @@ namespace Nest
 				writer.WriteValue(false);
 			else
 			{
-				if (filter.Include == null && filter.Exclude == null)
-					return;
-
 				writer.WriteStartObject();
 				if (filter.Include != null)
 				{
