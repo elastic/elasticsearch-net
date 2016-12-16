@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	//TODO we used to to a complex infer on Id, if its empty first try on Doc otherwise on Upsert doc, is this still valid?
 	public partial interface IUpdateRequest<TDocument, TPartialDocument>
 		where TDocument : class
 		where TPartialDocument : class

@@ -43,7 +43,7 @@ namespace Elasticsearch.Net
 
 			this.Settings = configurationValues;
 			this.PipelineProvider = pipelineProvider ?? new RequestPipelineFactory();
-			this.DateTimeProvider = dateTimeProvider ?? Net.DateTimeProvider.Default;
+			this.DateTimeProvider = dateTimeProvider ?? Elasticsearch.Net.DateTimeProvider.Default;
 			this.MemoryStreamFactory = memoryStreamFactory ?? new MemoryStreamFactory();
 		}
 
@@ -93,11 +93,9 @@ namespace Elasticsearch.Net
 							AuditTrail = pipeline?.AuditTrail
 						};
 					}
-					if (response != null && response.SuccessOrKnownError)
-					{
-						pipeline.MarkAlive(node);
-						break;
-					}
+					if (response == null || !response.SuccessOrKnownError) continue;
+					pipeline.MarkAlive(node);
+					break;
 				}
 				if (response == null || !response.Success)
 					pipeline.BadResponse(ref response, requestData, seenExceptions);
@@ -154,11 +152,9 @@ namespace Elasticsearch.Net
 							AuditTrail = pipeline.AuditTrail
 						};
 					}
-					if (response != null && response.SuccessOrKnownError)
-					{
-						pipeline.MarkAlive(node);
-						break;
-					}
+					if (response == null || !response.SuccessOrKnownError) continue;
+					pipeline.MarkAlive(node);
+					break;
 				}
 				if (response == null || !response.Success)
 					pipeline.BadResponse(ref response, requestData, seenExceptions);

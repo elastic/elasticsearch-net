@@ -96,7 +96,6 @@ namespace Tests.Framework
 			Func<TRule, byte[]> successResponse
 			) where TReturn : class where TRule : IRule
 		{
-			//TODO Make this pluggable?
 			requestData.MadeItToResponse = true;
 
 			var state = this.Calls[requestData.Uri.Port];
