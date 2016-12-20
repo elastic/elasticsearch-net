@@ -13,7 +13,7 @@ namespace Tests.Framework.Configuration
 		string ClusterFilter { get; }
 		string TestFilter { get; }
 		bool ForceReseed { get; } 
-		bool DoNotSpawnIfAlreadyRunning { get; }
+		bool TestAgainstAlreadyRunningElasticsearch { get; }
 
 		bool RunIntegrationTests { get; }
 		bool RunUnitTests { get; }

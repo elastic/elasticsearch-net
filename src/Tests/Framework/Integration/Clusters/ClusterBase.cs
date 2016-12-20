@@ -8,7 +8,7 @@ namespace Tests.Framework.Integration
 {
 	public abstract class ClusterBase : IDisposable
 	{
-		protected virtual bool DoNotSpawnIfAlreadyRunning => TestClient.Configuration.DoNotSpawnIfAlreadyRunning;
+		protected virtual bool TestAgainstAlreadyRunningElasticsearch => TestClient.Configuration.TestAgainstAlreadyRunningElasticsearch;
 
 		public ElasticsearchNode Node { get; }
 
@@ -26,7 +26,7 @@ namespace Tests.Framework.Integration
 			this.Node = new ElasticsearchNode(
 				TestClient.Configuration.ElasticsearchVersion,
 				TestClient.Configuration.RunIntegrationTests,
-				DoNotSpawnIfAlreadyRunning, 
+				TestAgainstAlreadyRunningElasticsearch,
 				name, 
 				EnableShield, 
 				EnableWatcher);

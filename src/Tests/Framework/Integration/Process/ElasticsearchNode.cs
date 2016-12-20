@@ -35,7 +35,7 @@ namespace Tests.Framework.Integration
 		};
 		private string[] DefaultNodeSettings { get; }
 
-		private readonly bool _doNotSpawnIfAlreadyRunning;
+		private readonly bool _testAgainstAlreadyRunningElasticsearch;
 		private readonly bool _shieldEnabled;
 		private readonly bool _watcherEnabled;
 		private ObservableProcess _process;
@@ -107,12 +107,12 @@ namespace Tests.Framework.Integration
 		public ElasticsearchNode(
 			string elasticsearchVersion,
 			bool runningIntegrations,
-			bool doNotSpawnIfAlreadyRunning,
+			bool testAgainstAlreadyRunningElasticsearch,
 			string name,
 			bool shieldEnabled,
 			bool watcherEnabled)
 		{
-			this._doNotSpawnIfAlreadyRunning = doNotSpawnIfAlreadyRunning;
+			this._testAgainstAlreadyRunningElasticsearch = testAgainstAlreadyRunningElasticsearch;
 			this._shieldEnabled = shieldEnabled;
 			this._watcherEnabled = watcherEnabled;
 
@@ -238,7 +238,7 @@ namespace Tests.Framework.Integration
 		private IObservable<ElasticsearchMessage> UseAlreadyRunningInstance(ManualResetEvent handle)
 #endif
 		{
-			if (!_doNotSpawnIfAlreadyRunning) return null;
+			if (!_testAgainstAlreadyRunningElasticsearch) return null;
 
 			var client = TestClient.Default;
 			var alreadyUp = client.RootNodeInfo();
@@ -576,7 +576,7 @@ namespace Tests.Framework.Integration
 
 				Console.WriteLine($"Node had started on port: {this.Port} cleaning up log/data/repository files...");
 
-				if (this._doNotSpawnIfAlreadyRunning) return;
+				if (this._testAgainstAlreadyRunningElasticsearch) return;
 				var dataFolder = Path.Combine(this.RoamingClusterFolder, "data", this.ClusterName);
 				if (Directory.Exists(dataFolder))
 				{

@@ -8,7 +8,7 @@ namespace Tests.Framework.Configuration
 {
 	public abstract class TestConfigurationBase : ITestConfiguration
 	{
-		public abstract bool DoNotSpawnIfAlreadyRunning { get; protected set; }
+		public abstract bool TestAgainstAlreadyRunningElasticsearch { get; protected set; }
 		public abstract string ElasticsearchVersion { get; protected set; }
 		public abstract bool ForceReseed { get; protected set; } 
 		public abstract TestMode Mode { get; protected set; }

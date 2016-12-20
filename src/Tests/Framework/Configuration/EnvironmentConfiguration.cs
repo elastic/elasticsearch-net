@@ -8,7 +8,7 @@ namespace Tests.Framework.Configuration
 {
 	public class EnvironmentConfiguration : TestConfigurationBase
 	{
-		public override bool DoNotSpawnIfAlreadyRunning { get; protected set; } = false;
+		public override bool TestAgainstAlreadyRunningElasticsearch { get; protected set; } = false;
 		public override bool ForceReseed { get; protected set; } = true;
 		public override string ElasticsearchVersion { get; protected set; }
 		public override TestMode Mode { get; protected set; } = TestMode.Unit;

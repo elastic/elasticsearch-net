@@ -6,7 +6,7 @@ namespace Tests.Framework.Configuration
 {
 	public class YamlConfiguration : TestConfigurationBase
 	{
-		public override bool DoNotSpawnIfAlreadyRunning { get; protected set; } = true;
+		public override bool TestAgainstAlreadyRunningElasticsearch { get; protected set; } = true;
 		public override string ElasticsearchVersion { get; protected set; } = "2.0.0";
 		public override bool ForceReseed { get; protected set; } = true;
 		public override TestMode Mode { get; protected set; } = TestMode.Unit;
@@ -24,7 +24,7 @@ namespace Tests.Framework.Configuration
 			this.Mode = GetTestMode(config["mode"]);
 			this.ElasticsearchVersion = config["elasticsearch_version"];
 			this.ForceReseed = bool.Parse(config["force_reseed"]);
-			this.DoNotSpawnIfAlreadyRunning = bool.Parse(config["do_not_spawn"]);
+			this.TestAgainstAlreadyRunningElasticsearch = bool.Parse(config["test_against_already_running_elasticsearch"]);
 			this.ClusterFilter = config["cluster_filter"];
 			this.TestFilter = config.ContainsKey("test_filter") ? config["test_filter"] : null;
 		}

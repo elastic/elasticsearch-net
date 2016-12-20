@@ -24,7 +24,7 @@ namespace Benchmarking
 
 		public override bool ForceReseed { get; protected set; } = true;
 
-		public override bool DoNotSpawnIfAlreadyRunning { get; protected set; } = false;
+		public override bool TestAgainstAlreadyRunningElasticsearch { get; protected set; } = false;
 
 		public BenchmarkingTestConfiguration()
 			: base(YamlConfigurationPath)

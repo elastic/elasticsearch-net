@@ -707,6 +707,9 @@
     <Content Include="ClientConcepts\LowLevel\pipeline.xml" />
     <Content Include="QueryDsl\BoolDsl\hadouken-indentation.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Reproduce" />
+  </ItemGroup>
   <Import Project="..\outputpath.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Choose>
