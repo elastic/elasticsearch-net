@@ -7,11 +7,17 @@ using System.Reflection;
 [assembly: AssemblyCompanyAttribute("Elasticsearch")]
 [assembly: AssemblyConfigurationAttribute("Release")]
 [assembly: AssemblyVersionAttribute("2.0.0")]
-[assembly: AssemblyFileVersionAttribute("2.5.0")]
-[assembly: AssemblyInformationalVersionAttribute("2.5.0")]
+[assembly: AssemblyFileVersionAttribute("2.5.1")]
+[assembly: AssemblyInformationalVersionAttribute("2.5.1")]
 namespace System {
     internal static class AssemblyVersionInformation {
-        internal const string Version = "2.0.0";
-        internal const string InformationalVersion = "2.5.0";
+        internal const System.String AssemblyTitle = "Nest";
+        internal const System.String AssemblyCopyright = "Elasticsearch 2016";
+        internal const System.String AssemblyDescription = "NEST - official high level elasticsearch client";
+        internal const System.String AssemblyCompany = "Elasticsearch";
+        internal const System.String AssemblyConfiguration = "Release";
+        internal const System.String AssemblyVersion = "2.0.0";
+        internal const System.String AssemblyFileVersion = "2.5.1";
+        internal const System.String AssemblyInformationalVersion = "2.5.1";
     }
 }
