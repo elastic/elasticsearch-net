@@ -8,7 +8,9 @@ namespace Nest
 {
 	public class DateHistogramBucket : KeyedBucket<double>
 	{
+        private static readonly long _epochTicks = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero).Ticks;
+		
 		// Get a DateTime form of the returned key
-		public DateTime Date => DateTime.SpecifyKind(new DateTime(1970, 1, 1).AddMilliseconds(0 + this.Key), DateTimeKind.Utc);
+		public DateTime Date => new DateTime(_epochTicks + ((long)this.Key * TimeSpan.TicksPerMillisecond), DateTimeKind.Utc);
 	}
 }
