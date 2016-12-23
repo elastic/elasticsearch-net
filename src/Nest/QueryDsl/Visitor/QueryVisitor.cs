@@ -41,6 +41,8 @@
 		void Visit(IIndicesQuery query);
 #pragma warning restore 618
 		void Visit(IMatchQuery query);
+		void Visit(IMatchPhraseQuery query);
+		void Visit(IMatchPhrasePrefixQuery query);
 		void Visit(IMatchAllQuery query);
 		void Visit(IMatchNoneQuery query);
 		void Visit(IMoreLikeThisQuery query);
@@ -150,6 +152,10 @@
 #pragma warning restore 618
 
 		public virtual void Visit(IMatchQuery query) { }
+
+		public virtual void Visit(IMatchPhraseQuery query) { }
+
+		public virtual void Visit(IMatchPhrasePrefixQuery query) { }
 
 		public virtual void Visit(IMatchAllQuery query) { }
 
