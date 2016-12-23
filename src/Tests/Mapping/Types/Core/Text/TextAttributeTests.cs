@@ -18,7 +18,8 @@ namespace Tests.Mapping.Types.Core.Text
 			SearchQuoteAnalyzer = "mysearchquoteanalyzer",
 			Similarity = "classic",
 			Store = true,
-			Norms = false)]
+			Norms = false,
+			TermVector = TermVectorOption.WithPositionsOffsets)]
 		public string Full { get; set; }
 
 		[Text]
@@ -48,7 +49,8 @@ namespace Tests.Mapping.Types.Core.Text
 					search_quote_analyzer = "mysearchquoteanalyzer",
 					similarity = "classic",
 					store = true,
-					norms = false
+					norms = false,
+					term_vector = "with_positions_offsets"
 				},
 				minimal = new
 				{
