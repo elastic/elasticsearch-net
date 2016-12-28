@@ -35,6 +35,7 @@ namespace Nest
 		public string SearchAnalyzer { get { return Self.SearchAnalyzer; } set { Self.SearchAnalyzer = value; } }
 		public string SearchQuoteAnalyzer { get { return Self.SearchQuoteAnalyzer; } set { Self.SearchQuoteAnalyzer = value; } }
 		public bool Norms { get { return Self.Norms.GetValueOrDefault(true); } set { Self.Norms = value; } }
+		public TermVectorOption TermVector { get { return Self.TermVector.GetValueOrDefault();  } set { Self.TermVector = value; } }
 
 		public TextAttribute() : base("text") { }
 	}
