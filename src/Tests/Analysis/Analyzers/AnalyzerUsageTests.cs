@@ -82,7 +82,7 @@ namespace Tests.Analysis.Analyzers
 		public static Func<IndexSettingsDescriptor, IPromise<IndexSettings>> FluentExample => s => s
 			.Analysis(analysis => analysis
 				.Analyzers(analyzers => analyzers
-					.Default(new KeywordAnalyzer())
+					.Keyword("default")
 					.Custom("myCustom", a => a
 						.Filters("myAscii", "kstem")
 						.CharFilters("stripMe", "patterned")

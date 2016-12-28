@@ -26,11 +26,6 @@ namespace Nest
 		public AnalyzersDescriptor UserDefined(string name, IAnalyzer analyzer) => Assign(name, analyzer);
 
 		/// <summary>
-		/// Sets the specified analyzer as the default for the index.
-		/// </summary>
-		public AnalyzersDescriptor Default(IAnalyzer analyzer) => Assign("default", analyzer);
-
-		/// <summary>
 		/// An analyzer of type custom that allows to combine a Tokenizer with zero or more Token Filters,
 		/// and zero or more Char Filters.
 		/// <para>The custom analyzer accepts a logical/registered name of the tokenizer to use, and a list of
