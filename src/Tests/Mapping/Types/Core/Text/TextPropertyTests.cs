@@ -45,7 +45,8 @@ namespace Tests.Mapping.Types.Core.Text
 					search_quote_analyzer = "standard",
 					similarity = "classic",
 					store = true,
-					norms = false
+					norms = false,
+					term_vector = "with_positions_offsets"
 				}
 			}
 		};
@@ -81,6 +82,7 @@ namespace Tests.Mapping.Types.Core.Text
 					.Similarity(SimilarityOption.Classic)
 					.Store()
 					.Norms(false)
+					.TermVector(TermVectorOption.WithPositionsOffsets)
 				);
 
 
@@ -115,7 +117,8 @@ namespace Tests.Mapping.Types.Core.Text
 					SearchQuoteAnalyzer = "standard",
 					Similarity = SimilarityOption.Classic,
 					Store = true,
-					Norms = false
+					Norms = false,
+					TermVector = TermVectorOption.WithPositionsOffsets
 				}
 			}
 		};
