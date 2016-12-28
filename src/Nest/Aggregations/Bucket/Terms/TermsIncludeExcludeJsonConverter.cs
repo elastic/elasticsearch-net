@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -7,11 +8,42 @@ namespace Nest
 	{
 		public override bool CanConvert(Type objectType) => true;
 
-		public override bool CanRead => false;
-
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			throw new NotImplementedException();
+			if (reader.TokenType == JsonToken.Null) return null;
+
+			var termsInclude = new TermsIncludeExclude();
+
+			switch (reader.TokenType)
+			{
+				case JsonToken.StartArray:
+					termsInclude.Values = serializer.Deserialize<IEnumerable<string>>(reader);
+					break;
+				case JsonToken.StartObject:
+					while (reader.TokenType != JsonToken.EndObject)
+					{
+						reader.Read();
+
+						if (reader.TokenType == JsonToken.PropertyName)
+						{
+							var propertyName = (string)reader.Value;
+							switch (propertyName)
+							{
+								case "pattern":
+									termsInclude.Pattern = reader.ReadAsString();
+									break;
+								case "flags":
+									termsInclude.Flags = reader.ReadAsString();
+									break;
+							}
+						}
+					}
+					break;
+				default:
+					throw new JsonSerializationException($"Unexpected token {reader.TokenType} when deserializing {nameof(TermsIncludeExclude)}");
+			}
+
+			return termsInclude;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

@@ -606,6 +606,7 @@
     <Compile Include="Reproduce\GithubIssue2173.cs" />
     <Compile Include="Reproduce\DateSerialization.cs" />
     <Compile Include="Reproduce\GithubIssue2323.cs" />
+    <Compile Include="Reproduce\GithubIssue2503.cs" />
     <Compile Include="Search\Hits\HitsSerializationTests.cs" />
     <Compile Include="Search\Search\Rescoring\RescoreUsageTests.cs" />
     <Compile Include="Search\Search\InvalidSearchApiTests.cs" />
@@ -707,9 +708,7 @@
     <Content Include="ClientConcepts\LowLevel\pipeline.xml" />
     <Content Include="QueryDsl\BoolDsl\hadouken-indentation.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Reproduce" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\outputpath.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Choose>
