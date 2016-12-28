@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Tests.Framework
@@ -27,6 +30,24 @@ namespace Tests.Framework
 			this._expectedJsonJObject = JToken.Parse(this._expectedJsonString);
 			this._serializerFactory = _serializerFactory;
 		}
+
+		public virtual void DeserializesTo<T>(Action<string, T> assert)
+		{
+			var json = (this.ExpectJson is string) ? (string) ExpectJson : JsonConvert.SerializeObject(this.ExpectJson);
+
+			T sut;
+			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+				sut = this.Client.Serializer.Deserialize<T>(stream);
+			sut.Should().NotBeNull();
+			assert("first deserialization", sut);
+
+			var serialized = this.Client.Serializer.SerializeToString(sut);
+			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(serialized)))
+				sut = this.Client.Serializer.Deserialize<T>(stream);
+			sut.Should().NotBeNull();
+			assert("second deserialization", sut);
+		}
+
 
 		public virtual RoundTripper<T> WhenSerializing<T>(T actual)
 		{

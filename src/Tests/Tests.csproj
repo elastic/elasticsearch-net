@@ -661,6 +661,7 @@
     <Compile Include="Search\Request\SlicedScrollSearchUsageTests.cs" />
     <Compile Include="Search\Request\SearchAfterUsageTests.cs" />
     <Compile Include="Search\Scroll\Scroll\SlicedScrollSearchApiTests.cs" />
+    <Compile Include="Reproduce\GithubIssue2503.cs" />
     <Compile Include="Search\Search\Rescoring\RescoreUsageTests.cs" />
     <Compile Include="Search\Search\InvalidSearchApiTests.cs" />
     <Compile Include="Search\Suggesters\SuggestUrlTests.cs" />
