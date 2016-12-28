@@ -15,6 +15,10 @@ namespace Tests.Analysis.Analyzers
 			{
 				analyzer = new
 				{
+					@default = new
+					{
+						type = "keyword"
+					},
 					myCustom = new
 					{
 						type = "custom",
@@ -78,6 +82,7 @@ namespace Tests.Analysis.Analyzers
 		public static Func<IndexSettingsDescriptor, IPromise<IndexSettings>> FluentExample => s => s
 			.Analysis(analysis => analysis
 				.Analyzers(analyzers => analyzers
+					.Keyword("default")
 					.Custom("myCustom", a => a
 						.Filters("myAscii", "kstem")
 						.CharFilters("stripMe", "patterned")
@@ -111,6 +116,7 @@ namespace Tests.Analysis.Analyzers
 				{
 					Analyzers = new Nest.Analyzers
 					{
+						{ "default", new KeywordAnalyzer() },
 						{ "myCustom", new CustomAnalyzer
 						{
 							CharFilter = new [] { "stripMe", "patterned"},
