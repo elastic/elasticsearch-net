@@ -8,7 +8,7 @@ REM COMMANDS:
 REM
 REM * build  
 REM		default target if non provided. Performs a clean, rebuild and test of all target frameworks
-REM * quick [testfilter]  
+REM * quick [testfilter]
 REM		incremental build and unit test for .NET 4.5, [testfilter] allows you to do 
 REM		a contains match on the tests to be run.
 REM * build release <version> 
@@ -58,6 +58,9 @@ IF /I "%1"=="release" (
 )
 
 IF /I "%1%"=="quick" (
+	IF NOT [%2]==[] (set NEST_TEST_FILTER="%2")
+)
+IF /I "%1%"=="forever" (
 	IF NOT [%2]==[] (set NEST_TEST_FILTER="%2")
 )
 

@@ -35,7 +35,7 @@ Target "Test" Tests.RunTest
 
 Target "UnitTests" Tests.RunUnitTests
 
-Target "TestForever"  Tests.RunUnitTestsForever
+Target "Forever"  Tests.RunUnitTestsForever
     
 Target "Integrate"  Tests.RunIntegrationTests 
 
@@ -73,10 +73,6 @@ Target "Canary" <| fun _ ->
 
 "Clean" 
   ==> "BuildApp"
-  ==> "TestForever"
-
-"Clean" 
-  ==> "BuildApp"
   ==> "Profile"
 
 "Clean" 
@@ -93,6 +89,9 @@ Target "Canary" <| fun _ ->
 "BuildApp"
   =?> ("Test", (not ((getBuildParam "skiptests") = "1")))
   ==> "Quick"
+
+"BuildApp"
+  ==> "Forever"
 
 "Build"
   ==> "Release"

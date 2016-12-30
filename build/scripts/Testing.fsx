@@ -12,6 +12,8 @@ open Projects
 open Tooling
 
 module Tests = 
+    open System.Threading
+
     let private setLocalEnvVars() = 
         let clusterFilter =  getBuildParamOrDefault "escluster" ""
         let testFilter = getBuildParamOrDefault "testfilter" ""
@@ -36,15 +38,16 @@ module Tests =
         Tooling.XUnit.Exec [testDll; "-parallel"; "all"; "-xml"; Paths.Output("TestResults-Desktop-Clr.xml")] 
         |> ignore
         
-    let RunUnitTestsForever() = 
-        setLocalEnvVars()
-        while true do testDesktopClr()
-        
     let RunTest() = 
         setLocalEnvVars()
         let folder = Paths.IncrementalOutputFolder (PrivateProject PrivateProject.Tests) DotNetFramework.Net45
         let testDll = Path.Combine(folder, "Tests.dll")
         Tooling.XUnit.Exec [testDll; "-parallel"; "all"; "-xml"; Paths.Output("TestResults-Desktop-Clr.xml")] |> ignore
+
+    let RunUnitTestsForever() = 
+        while true do 
+            RunTest() 
+            Thread.Sleep(1000)
 
     let RunUnitTests() = 
         setLocalEnvVars()

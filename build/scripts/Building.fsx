@@ -17,7 +17,7 @@ open Tooling
 module Build =
 
     let private runningRelease = hasBuildParam "version" || hasBuildParam "apikey" || getBuildParam "target" = "canary" || getBuildParam "target" = "release"
-    let private quickBuild = getBuildParam "target" = "quick" 
+    let private quickBuild = getBuildParam "target" = "quick" || getBuildParam "target" = "forever" 
 
     type private GlobalJson = JsonProvider<"../../global.json">
     let private pinnedSdkVersion = GlobalJson.GetSample().Sdk.Version
