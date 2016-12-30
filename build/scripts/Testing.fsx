@@ -13,6 +13,7 @@ open Tooling
 
 module Tests = 
     open System.Threading
+    open System
 
     let private setLocalEnvVars() = 
         let clusterFilter =  getBuildParamOrDefault "escluster" ""
@@ -24,13 +25,43 @@ module Tests =
         DotNetProject.All
         |> Seq.iter(fun p -> 
             let path = Paths.ProjectJson p.Name
-            Tooling.DotNet.Exec ["restore"; path]
+            DotNetCli.Restore 
+              (fun p -> 
+                   { p with 
+                       Project = path
+                       TimeOut = TimeSpan.FromMinutes(2.)
+                    }
+              ) |> ignore
         )
 
         let testPath = Paths.Source "Tests/project.json"
-        Tooling.DotNet.Exec ["restore"; testPath]
-        Tooling.DotNet.Exec ["build"; testPath; "--configuration Release"; "-f"; "netcoreapp1.0"]
-        Tooling.DotNet.Exec ["test"; testPath; "-parallel"; "all"; "-xml"; Paths.Output("TestResults-Core-Clr.xml")]
+        DotNetCli.Restore 
+          (fun p -> 
+               { p with 
+                   Project = testPath
+                   TimeOut = TimeSpan.FromMinutes(2.)
+                }
+          ) |> ignore
+
+        DotNetCli.Build
+          (fun p -> 
+               { p with 
+                   Configuration = "Release" 
+                   Project = testPath
+                   Framework = "netcoreapp1.0"
+                   TimeOut = TimeSpan.FromMinutes(2.)
+                }
+          ) |> ignore
+        DotNetCli.Test
+          (fun p -> 
+               { p with 
+                   Configuration = "Release" 
+                   Project = testPath
+                   Framework = "netcoreapp1.0"
+                   TimeOut = TimeSpan.FromMinutes(10.)
+                   AdditionalArgs = ["-parallel"; "all"; "-xml"; Paths.Output("TestResults-Core-Clr.xml")]
+                }
+          ) |> ignore
 
     let private testDesktopClr() = 
         let folder = Paths.ProjectOutputFolder (PrivateProject PrivateProject.Tests) DotNetFramework.Net46
