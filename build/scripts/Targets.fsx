@@ -1,4 +1,6 @@
+#load @"Projects.fsx"
 #load @"Paths.fsx"
+#load @"Tooling.fsx"
 #load @"Versioning.fsx"
 #load @"Testing.fsx"
 #load @"Signing.fsx"
@@ -9,7 +11,6 @@
 #load @"XmlDocPatcher.fsx"
 
 open System
-
 open Fake 
 
 open Building
@@ -22,25 +23,29 @@ open XmlDocPatcher
 open Documentation
 
 // Default target
+
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
+Target "Quick" <| fun _ -> traceHeader "STARTING INCREMENTAL BUILD"
 
-Target "Clean" <| fun _ -> Build.Clean()
+Target "Clean" Build.Clean
 
-Target "BuildApp" <| fun _ -> Build.Compile()
+Target "BuildApp" Build.Compile
 
-Target "Test"  <| fun _ -> Tests.RunUnitTests()
+Target "Test" Tests.RunTest
 
-Target "InheritDoc"  <| fun _ -> InheritDoc.patchInheritDocs()
+Target "UnitTests" Tests.RunUnitTests
 
-Target "TestForever"  <| fun _ -> Tests.RunUnitTestsForever()
+Target "TestForever"  Tests.RunUnitTestsForever
     
-Target "Integrate"  <| fun _ -> Tests.RunIntegrationTests (getBuildParamOrDefault "esversions" "") (getBuildParamOrDefault "escluster" "") (getBuildParamOrDefault "testfilter" "")
+Target "Integrate"  Tests.RunIntegrationTests 
 
-Target "Profile" <| fun _ -> Profiler.Run()
+Target "Profile" Profiler.Run
 
-Target "Benchmark" <| fun _ -> Benchmarker.Run()
+Target "Benchmark" Benchmarker.Run
 
-Target "Documentation" <| fun _ -> Documentation.Generate()
+Target "InheritDoc"  InheritDoc.PatchInheritDocs
+
+Target "Documentation" Documentation.Generate
 
 Target "Version" <| fun _ -> 
     Versioning.PatchAssemblyInfos()
@@ -58,10 +63,10 @@ Target "Canary" <| fun _ ->
     if (not (String.IsNullOrWhiteSpace apiKey) || apiKey = "ignore") then Release.PublishCanaryBuild apiKey feed
 
 // Dependencies
-"Clean" 
+"Clean"
   =?> ("Version", hasBuildParam "version")
   ==> "BuildApp"
-  =?> ("Test", (not ((getBuildParam "skiptests") = "1")))
+  =?> ("UnitTests", (not ((getBuildParam "skiptests") = "1")))
   ==> "InheritDoc"
   ==> "Documentation"
   ==> "Build"
@@ -84,6 +89,10 @@ Target "Canary" <| fun _ ->
 
 "BuildApp"
   ==> "Integrate"
+
+"BuildApp"
+  =?> ("Test", (not ((getBuildParam "skiptests") = "1")))
+  ==> "Quick"
 
 "Build"
   ==> "Release"

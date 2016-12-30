@@ -1,21 +1,19 @@
 ﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
-
 #load @"Paths.fsx"
 
 open System
-
 open Fake 
-
+    
 open Paths
 open Projects
 
-type Sign() = 
-    static let sn = if isMono then "sn" else Paths.CheckedInTool("sn/sn.exe")
-    static let keyFile =  Paths.Keys("keypair.snk");
-    static let oficialToken = "96c599bbe3e70f5d"
+module Sign = 
+    let private sn = if isMono then "sn" else Paths.CheckedInTool("sn/sn.exe")
+    let private keyFile =  Paths.Keys("keypair.snk");
+    let private oficialToken = "96c599bbe3e70f5d"
 
-    static let validate dll name = 
+    let private validate dll name = 
         let out = (ExecProcessAndReturnMessages(fun p ->
                     p.FileName <- sn
                     p.Arguments <- sprintf @"-v %s" dll
@@ -40,25 +38,10 @@ type Sign() =
           trace (sprintf "%s was signed with official key token %s" name t) 
         | (_, t) -> traceFAKE "%s was not signed with the official token: %s but %s" name oficialToken t
         
-    static member CreateKeys () = 
-        ExecProcess(fun p ->
-          p.FileName <- sn
-          p.Arguments <- sprintf @"-k %s" keyFile
-        ) (TimeSpan.FromMinutes 5.0) |> ignore
-         
-        ExecProcess(fun p ->
-          p.FileName <- sn
-          p.Arguments <- sprintf @"-p %s %s" keyFile (Paths.Keys("public.snk"))
-        ) (TimeSpan.FromMinutes 5.0) |> ignore
-
-    static member ValidateNugetDllAreSignedCorrectly() = 
+    let ValidateNugetDllAreSignedCorrectly() = 
         for p in DotNetProject.AllPublishable do
             for f in DotNetFramework.All do 
                 let name = p.Name
                 let outputFolder = Paths.ProjectOutputFolder p f
                 let dll = sprintf "%s/%s.dll" outputFolder name
                 if fileExists dll then validate dll name
-
-    static member CreateKeysIfAbsent() =
-        if not (directoryExists Paths.KeysFolder) then CreateDir Paths.KeysFolder
-        if not (fileExists keyFile) then Sign.CreateKeys()
