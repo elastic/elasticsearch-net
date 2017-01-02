@@ -19,8 +19,8 @@ namespace Tests.QueryDsl.FullText.MatchPhrasePrefix
 					boost = 1.1,
 					query = "hello worl",
 					analyzer = "standard",
-					prefix_length = 2,
 					max_expansions = 2,
+					slop = 2
 				}
 			}
 
@@ -34,7 +34,7 @@ namespace Tests.QueryDsl.FullText.MatchPhrasePrefix
 			Name = "named_query",
 			Query = "hello worl",
 			MaxExpansions = 2,
-			PrefixLength = 2
+			Slop = 2
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -44,7 +44,7 @@ namespace Tests.QueryDsl.FullText.MatchPhrasePrefix
 				.Boost(1.1)
 				.Query("hello worl")
 				.MaxExpansions(2)
-				.PrefixLength(2)
+				.Slop(2)
 				.Name("named_query")
 			);
 

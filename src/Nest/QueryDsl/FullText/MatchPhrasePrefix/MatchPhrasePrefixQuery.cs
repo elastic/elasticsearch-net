@@ -13,11 +13,11 @@ namespace Nest
 		[JsonProperty(PropertyName = "analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty(PropertyName = "prefix_length")]
-		int? PrefixLength { get; set; }
-
 		[JsonProperty(PropertyName = "max_expansions")]
 		int? MaxExpansions { get; set; }
+
+		[JsonProperty(PropertyName = "slop")]
+		int? Slop { get; set; }
 	}
 
 	public class MatchPhrasePrefixQuery : FieldNameQueryBase, IMatchPhrasePrefixQuery
@@ -26,8 +26,8 @@ namespace Nest
 
 		public string Analyzer { get; set; }
 		public int? MaxExpansions { get; set; }
-		public int? PrefixLength { get; set; }
 		public string Query { get; set; }
+		public int? Slop { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.MatchPhrasePrefix = this;
 
@@ -42,15 +42,15 @@ namespace Nest
 
 		string IMatchPhrasePrefixQuery.Query { get; set; }
 		string IMatchPhrasePrefixQuery.Analyzer { get; set; }
-		int? IMatchPhrasePrefixQuery.PrefixLength { get; set; }
 		int? IMatchPhrasePrefixQuery.MaxExpansions { get; set; }
+		int? IMatchPhrasePrefixQuery.Slop { get; set; }
 
 		public MatchPhrasePrefixQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
 		public MatchPhrasePrefixQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
-		public MatchPhrasePrefixQueryDescriptor<T> PrefixLength(int? prefixLength) => Assign(a => a.PrefixLength = prefixLength);
-
 		public MatchPhrasePrefixQueryDescriptor<T> MaxExpansions(int? maxExpansions) => Assign(a => a.MaxExpansions = maxExpansions);
+
+		public MatchPhrasePrefixQueryDescriptor<T> Slop(int? slop) => Assign(a => a.Slop = slop);
 	}
 }
