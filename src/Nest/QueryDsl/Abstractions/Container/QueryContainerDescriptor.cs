@@ -83,24 +83,24 @@ namespace Nest
 			WrapInContainer(selector, (query, container) => container.Fuzzy = query);
 
 		/// <summary>
-		/// The default text query is of type boolean. It means that the text provided is analyzed and the analysis
+		/// The default match query is of type boolean. It means that the text provided is analyzed and the analysis
 		/// process constructs a boolean query from the provided text.
 		/// </summary>
 		public QueryContainer Match(Func<MatchQueryDescriptor<T>, IMatchQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Match = query);
 
 		/// <summary>
-		/// The text_phrase query analyzes the text and creates a phrase query out of the analyzed text.
+		/// The match_phrase query analyzes the match and creates a phrase query out of the analyzed text.
 		/// </summary>
-		public QueryContainer MatchPhrase(Func<MatchPhraseQueryDescriptor<T>, IMatchQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.Match = query);
+		public QueryContainer MatchPhrase(Func<MatchPhraseQueryDescriptor<T>, IMatchPhraseQuery> selector) =>
+			WrapInContainer(selector, (query, container) => container.MatchPhrase = query);
 
 		/// <summary>
-		/// The text_phrase_prefix is the same as text_phrase, expect it allows for prefix matches on the last term
+		/// The match_phrase_prefix is the same as match_phrase, expect it allows for prefix matches on the last term
 		/// in the text
 		/// </summary>
-		public QueryContainer MatchPhrasePrefix(Func<MatchPhrasePrefixQueryDescriptor<T>, IMatchQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.Match = query);
+		public QueryContainer MatchPhrasePrefix(Func<MatchPhrasePrefixQueryDescriptor<T>, IMatchPhrasePrefixQuery> selector) =>
+			WrapInContainer(selector, (query, container) => container.MatchPhrasePrefix = query);
 
 		/// <summary>
 		/// The multi_match query builds further on top of the match query by allowing multiple fields to be specified.

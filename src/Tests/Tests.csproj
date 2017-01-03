@@ -482,8 +482,8 @@
     <Compile Include="Mapping\Types\PropertyTestsBase.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotApiTests.cs" />
     <Compile Include="QueryDsl\Compound\FullText\CommonTerms\CommonTermsUsageTests.cs" />
-    <Compile Include="QueryDsl\Compound\FullText\Match\MatchPhrasePrefixUsageTests.cs" />
-    <Compile Include="QueryDsl\Compound\FullText\Match\MatchPhraseUsageTests.cs" />
+    <Compile Include="QueryDsl\Compound\FullText\MatchPhrasePrefix\MatchPhrasePrefixUsageTests.cs" />
+    <Compile Include="QueryDsl\Compound\FullText\MatchPhrase\MatchPhraseUsageTests.cs" />
     <Compile Include="QueryDsl\Compound\FullText\Match\MatchUsageTests.cs" />
     <Compile Include="QueryDsl\Compound\FullText\MultiMatch\MultiMatchUsageTests.cs" />
     <Compile Include="QueryDsl\Compound\FullText\QueryString\QueryStringUsageTests.cs" />
@@ -763,6 +763,7 @@
     <Content Include="ClientConcepts\LowLevel\pipeline.xml" />
     <Content Include="QueryDsl\BoolDsl\hadouken-indentation.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\outputpath.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Choose>

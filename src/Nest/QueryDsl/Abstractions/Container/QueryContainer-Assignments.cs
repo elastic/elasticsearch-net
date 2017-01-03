@@ -18,6 +18,8 @@ namespace Nest
 		private IDisMaxQuery _disMax;
 		private IMultiMatchQuery _multiMatch;
 		private IMatchQuery _match;
+		private IMatchPhraseQuery _matchPhrase;
+		private IMatchPhrasePrefixQuery _matchPhrasePrefix;
 		private IFuzzyQuery _fuzzy;
 		private IGeoShapeQuery _geoShape;
 		private ICommonTermsQuery _commonTerms;
@@ -82,6 +84,8 @@ namespace Nest
 		IDisMaxQuery IQueryContainer.DisMax { get { return _disMax; } set { _disMax = Set(value); } }
 		IMultiMatchQuery IQueryContainer.MultiMatch { get { return _multiMatch; } set { _multiMatch = Set(value); } }
 		IMatchQuery IQueryContainer.Match { get { return _match; } set { _match = Set(value); } }
+		IMatchPhraseQuery IQueryContainer.MatchPhrase { get { return _matchPhrase; } set { _matchPhrase = Set(value); } }
+		IMatchPhrasePrefixQuery IQueryContainer.MatchPhrasePrefix { get { return _matchPhrasePrefix; } set { _matchPhrasePrefix = Set(value); } }
 		IFuzzyQuery IQueryContainer.Fuzzy { get { return _fuzzy; } set { _fuzzy = Set(value); } }
 		IGeoShapeQuery IQueryContainer.GeoShape { get { return _geoShape; } set { _geoShape = Set(value); } }
 		ICommonTermsQuery IQueryContainer.CommonTerms { get { return _commonTerms; } set { _commonTerms = Set(value); } }

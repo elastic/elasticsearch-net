@@ -58,6 +58,12 @@ namespace Nest
 		[JsonProperty("match")]
 		IMatchQuery Match { get; set; }
 
+		[JsonProperty("match_phrase")]
+		IMatchPhraseQuery MatchPhrase { get; set; }
+
+		[JsonProperty("match_phrase_prefix")]
+		IMatchPhrasePrefixQuery MatchPhrasePrefix { get; set; }
+
 		[JsonProperty("fuzzy")]
 		IFuzzyQuery Fuzzy { get; set; }
 

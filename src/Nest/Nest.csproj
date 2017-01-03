@@ -1052,10 +1052,9 @@
     <Compile Include="QueryDsl\Compound\Indices\NoMatchQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\Compound\Indices\NoMatchShortcut.cs" />
     <Compile Include="QueryDsl\FullText\CommonTerms\CommonTermsQuery.cs" />
-    <Compile Include="QueryDsl\FullText\Match\MatchPhrasePrefixQuery.cs" />
-    <Compile Include="QueryDsl\FullText\Match\MatchPhraseQuery.cs" />
+    <Compile Include="QueryDsl\FullText\MatchPhrasePrefix\MatchPhrasePrefixQuery.cs" />
+    <Compile Include="QueryDsl\FullText\MatchPhrase\MatchPhraseQuery.cs" />
     <Compile Include="QueryDsl\FullText\Match\MatchQuery.cs" />
-    <Compile Include="QueryDsl\FullText\Match\MatchQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\FullText\MultiMatch\MultiMatchQuery.cs" />
     <Compile Include="QueryDsl\FullText\MultiMatch\TextQueryType.cs" />
     <Compile Include="QueryDsl\FullText\MultiMatch\ZeroTermsQuery.cs" />

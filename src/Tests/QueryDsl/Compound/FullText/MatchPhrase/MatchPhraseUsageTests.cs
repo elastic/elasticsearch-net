@@ -3,7 +3,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 
-namespace Tests.QueryDsl.FullText.Match
+namespace Tests.QueryDsl.FullText.MatchPhrase
 {
 	public class MatchPhraseUsageTests : QueryDslUsageTestsBase
 	{
@@ -11,7 +11,7 @@ namespace Tests.QueryDsl.FullText.Match
 
 		protected override object QueryJson => new
 		{
-			match = new
+			match_phrase = new
 			{
 				description = new
 				{
@@ -19,17 +19,7 @@ namespace Tests.QueryDsl.FullText.Match
 					boost = 1.1,
 					query = "hello world",
 					analyzer = "standard",
-					fuzzy_rewrite = "constant_score_boolean",
-					fuzziness = "AUTO",
-					fuzzy_transpositions = true,
-					cutoff_frequency = 0.001,
-					prefix_length = 2,
-					max_expansions = 2,
 					slop = 2,
-					lenient = true,
-					minimum_should_match = 2,
-			        @operator = "or",
-					type = "phrase"
 				}
 			}
 
@@ -41,17 +31,8 @@ namespace Tests.QueryDsl.FullText.Match
 			Analyzer = "standard",
 			Boost = 1.1,
 			Name = "named_query",
-			CutoffFrequency = 0.001,
 			Query = "hello world",
-			Fuzziness = Fuzziness.Auto,
-			FuzzyTranspositions = true,
-			MinimumShouldMatch = 2,
-			FuzzyRewrite = RewriteMultiTerm.ConstantScoreBoolean,
-			MaxExpansions = 2,
 			Slop = 2,
-			Lenient = true,
-			Operator = Operator.Or,
-			PrefixLength = 2
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -59,21 +40,12 @@ namespace Tests.QueryDsl.FullText.Match
 				.Field(p => p.Description)
 				.Analyzer("standard")
 				.Boost(1.1)
-				.CutoffFrequency(0.001)
 				.Query("hello world")
-				.Fuzziness(Fuzziness.Auto)
-				.Lenient()
-				.FuzzyTranspositions()
-				.MaxExpansions(2)
-				.MinimumShouldMatch(2)
-				.PrefixLength(2)
-				.Operator(Operator.Or)
-				.FuzzyRewrite(RewriteMultiTerm.ConstantScoreBoolean)
 				.Slop(2)
 				.Name("named_query")
 			);
 
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IMatchQuery>(a => a.Match)
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IMatchPhraseQuery>(a => a.MatchPhrase)
 		{
 			q => q.Query = null,
 			q => q.Query = string.Empty,

@@ -4,12 +4,9 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(MatchQueryJsonConverter))]
-	public interface IMatchQuery : IFieldNameQuery 
+	[JsonConverter(typeof(FieldNameQueryJsonConverter<MatchQuery>))]
+	public interface IMatchQuery : IFieldNameQuery
 	{
-		[JsonProperty(PropertyName = "type")]
-		string Type { get; }
-
 		[JsonProperty(PropertyName = "query")]
 		string Query { get; set; }
 
@@ -29,18 +26,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "cutoff_frequency")]
 		double? CutoffFrequency { get; set; }
 
-		[JsonProperty(PropertyName = "prefix_length")]
-		int? PrefixLength { get; set; }
-
-		[JsonProperty(PropertyName = "max_expansions")]
-		int? MaxExpansions { get; set; }
-
-		[JsonProperty(PropertyName = "slop")]
-		int? Slop { get; set; }
-
 		[JsonProperty(PropertyName = "lenient")]
 		bool? Lenient { get; set; }
-		
+
 		[JsonProperty("minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
@@ -50,12 +38,10 @@ namespace Nest
 		[JsonProperty(PropertyName = "zero_terms_query")]
 		ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
-	
+
 	public class MatchQuery : FieldNameQueryBase, IMatchQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
-		string IMatchQuery.Type => this.MatchQueryType;
-		protected virtual string MatchQueryType => null;
 
 		public string Query { get; set; }
 		public string Analyzer { get; set; }
@@ -63,9 +49,6 @@ namespace Nest
 		public IFuzziness Fuzziness { get; set; }
 		public bool? FuzzyTranspositions { get; set; }
 		public double? CutoffFrequency { get; set; }
-		public int? PrefixLength { get; set; }
-		public int? MaxExpansions { get; set; }
-		public int? Slop { get; set; }
 		public bool? Lenient { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public Operator? Operator { get; set; }
@@ -77,12 +60,11 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class MatchQueryDescriptor<T> 
-		: FieldNameQueryDescriptorBase<MatchQueryDescriptor<T>, IMatchQuery, T> 
+	public class MatchQueryDescriptor<T>
+		: FieldNameQueryDescriptorBase<MatchQueryDescriptor<T>, IMatchQuery, T>
 		, IMatchQuery where T : class
 	{
 		protected virtual string MatchQueryType => null;
-		string IMatchQuery.Type => this.MatchQueryType;
 		protected override bool Conditionless => MatchQuery.IsConditionless(this);
 		string IMatchQuery.Query { get; set; }
 		string IMatchQuery.Analyzer { get; set; }
@@ -91,9 +73,6 @@ namespace Nest
 		IFuzziness IMatchQuery.Fuzziness { get; set; }
 		bool? IMatchQuery.FuzzyTranspositions { get; set; }
 		double? IMatchQuery.CutoffFrequency { get; set; }
-		int? IMatchQuery.PrefixLength { get; set; }
-		int? IMatchQuery.MaxExpansions { get; set; }
-		int? IMatchQuery.Slop { get; set; }
 		bool? IMatchQuery.Lenient { get; set; }
 		Operator? IMatchQuery.Operator { get; set; }
 		ZeroTermsQuery? IMatchQuery.ZeroTermsQuery { get; set; }
@@ -112,14 +91,8 @@ namespace Nest
 
 		public MatchQueryDescriptor<T> FuzzyRewrite(RewriteMultiTerm? rewrite) => Assign(a => a.FuzzyRewrite = rewrite);
 
-		public MatchQueryDescriptor<T> PrefixLength(int? prefixLength) => Assign(a => a.PrefixLength = prefixLength);
-
-		public MatchQueryDescriptor<T> MaxExpansions(int? maxExpansions) => Assign(a => a.MaxExpansions = maxExpansions);
-		
-		public MatchQueryDescriptor<T> Slop(int? slop) => Assign(a => a.Slop = slop);
-		
 		public MatchQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch) => Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
-	
+
 		public MatchQueryDescriptor<T> Operator(Operator? op) => Assign(a => a.Operator = op);
 
 		public MatchQueryDescriptor<T> ZeroTermsQuery(ZeroTermsQuery? zeroTermsQuery) => Assign(a => a.ZeroTermsQuery = zeroTermsQuery);

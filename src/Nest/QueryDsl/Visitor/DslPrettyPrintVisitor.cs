@@ -105,6 +105,10 @@ namespace Nest
 
 		public virtual void Visit(IMatchQuery query) => Write("match", query.Field);
 
+		public virtual void Visit(IMatchPhraseQuery query) => Write("match_phrase", query.Field);
+
+		public virtual void Visit(IMatchPhrasePrefixQuery query) => Write("match_phrase_prefix", query.Field);
+
 		public virtual void Visit(IMatchAllQuery query) => Write("match_all");
 
 		public virtual void Visit(IMatchNoneQuery query) => Write("match_none");
