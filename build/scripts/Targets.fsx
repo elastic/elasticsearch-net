@@ -29,6 +29,8 @@ Target "Quick" <| fun _ -> traceHeader "STARTING INCREMENTAL BUILD"
 
 Target "Clean" Build.Clean
 
+Target "CleanAfter" Build.CleanAfter
+
 Target "BuildApp" Build.Compile
 
 Target "Test" Tests.RunTest
@@ -66,6 +68,7 @@ Target "Canary" <| fun _ ->
 "Clean"
   =?> ("Version", hasBuildParam "version")
   ==> "BuildApp"
+  ==> "CleanAfter"
   =?> ("UnitTests", (not ((getBuildParam "skiptests") = "1")))
   ==> "InheritDoc"
   ==> "Documentation"

@@ -34,37 +34,42 @@ IF /I "%1"=="skiptests" (
 	set SKIPTESTS="1"
 	SHIFT
 )
-IF NOT [%1]==[] (set TARGET="%1")
+IF NOT [%1]==[] (set TARGET=%1)
 
-SET SKIPPAKET=
-IF /I "%TARGET%" neq "quick" IF /I "%TARGET%" neq "forever" SET SKIPPAKET=1
+SET SKIPPAKET=0
+IF /I "%TARGET%"=="quick" SET SKIPPAKET=1
+IF /I "%TARGET%"=="forever" SET SKIPPAKET=1
 
 IF "%SKIPPAKET%" neq "1" (
 	.paket\paket.bootstrapper.exe
-	if %errorlevel% neq 0 exit /b %errorlevel%
 	.paket\paket.exe restore
-	if %errorlevel% neq 0 exit /b %errorlevel%
 )
 
-IF /I "%1"=="version" (
+REM if `build quick` is called on a fresh checkout force a restore anyway
+IF "%SKIPPAKET%"=="1" (
+	IF NOT EXIST .paket\paket.exe (
+		.paket\paket.bootstrapper.exe
+		.paket\paket.exe restore
+	)
+)
+
+IF /I "%TARGET%"=="version" (
 	IF NOT [%2]==[] (set VERSION="%2")
 )
-IF /I "%1"=="release" (
+IF /I "%TARGET%"=="release" (
 	IF NOT [%2]==[] (set VERSION="%2")
 	IF /I "%JAVA_HOME%"=="" (
 	   ECHO JAVA_HOME not set exiting release early!
 	   EXIT /B 1
 	)
 )
-
-IF /I "%1%"=="quick" (
+IF /I "%TARGET%"=="quick" (
 	IF NOT [%2]==[] (set NEST_TEST_FILTER="%2")
 )
-IF /I "%1%"=="forever" (
+IF /I "%TARGET%"=="forever" (
 	IF NOT [%2]==[] (set NEST_TEST_FILTER="%2")
 )
-
-IF /I "%1%"=="integrate" (
+IF /I "%TARGET%"=="integrate" (
 	IF NOT [%2]==[] (set ESVERSIONS="%2")
 	IF NOT [%3]==[] (set NEST_INTEGRATION_CLUSTER="%3")
 	IF NOT [%4]==[] (set NEST_TEST_FILTER="%4")
@@ -73,8 +78,7 @@ IF /I "%1%"=="integrate" (
 	   EXIT /B 1
 	)
 )
-
-IF /I "%1%"=="canary" (
+IF /I "%TARGET%"=="canary" (
 	IF NOT [%2]==[] (
 		set APIKEY="%2"
 		SET APIKEYPROVIDED="<redacted>"
@@ -82,5 +86,5 @@ IF /I "%1%"=="canary" (
 	IF NOT [%3]==[] set FEED="%3"
 )
 
-ECHO build.bat: target=%TARGET% version=%VERSION% esversions=%ESVERSIONS% skiptests=%SKIPTESTS% apiKey=%APIKEYPROVIDED% feed=%FEED% escluster=%NEST_INTEGRATION_CLUSTER% testfilter=%NEST_TEST_FILTER%
+ECHO build.bat: target=%TARGET% skippakket=%SKIPPAKET% version=%VERSION% esversions=%ESVERSIONS% skiptests=%SKIPTESTS% apiKey=%APIKEYPROVIDED% feed=%FEED% escluster=%NEST_INTEGRATION_CLUSTER% testfilter=%NEST_TEST_FILTER%
 "packages\build\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%" "esversions=%ESVERSIONS%" "skiptests=%SKIPTESTS%" "apiKey=%APIKEY%" "feed=%FEED%" "escluster=%NEST_INTEGRATION_CLUSTER%" "testfilter=%NEST_TEST_FILTER%"

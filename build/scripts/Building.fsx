@@ -81,4 +81,10 @@ module Build =
         | true -> ignore() 
         | false ->
             CleanDir Paths.BuildOutput
-            DotNetProject.All |> Seq.iter(fun p -> CleanDir(Paths.BinFolder p.Name)) 
+            DotNetProject.All |> Seq.iter(fun p -> CleanDir(Paths.BinFolder p.Name))
+
+    let CleanAfter() =
+        match quickBuild with
+        | true -> ignore()
+        | false ->
+            DotNetProject.All |> Seq.iter(fun p -> CleanDir(Paths.BinFolder p.Name))

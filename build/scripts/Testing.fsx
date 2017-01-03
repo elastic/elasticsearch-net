@@ -73,7 +73,7 @@ module Tests =
         setLocalEnvVars()
         let folder = Paths.IncrementalOutputFolder (PrivateProject PrivateProject.Tests) DotNetFramework.Net45
         let testDll = Path.Combine(folder, "Tests.dll")
-        Tooling.XUnit.Exec [testDll; "-parallel"; "all"; "-xml"; Paths.Output("TestResults-Desktop-Clr.xml")] |> ignore
+        Tooling.XUnit.Exec [testDll; "-parallel"; "all"] |> ignore
 
     let RunUnitTestsForever() = 
         while true do 
