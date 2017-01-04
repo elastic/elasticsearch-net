@@ -20,6 +20,13 @@ namespace Nest
 		[JsonProperty("caused_by")]
 		public CausedBy CausedBy { get; internal set; }
 
-		public override string ToString() => $"Type: {Type} Reason: \"{Reason}\" CausedBy: \"{CausedBy}\"";
+		public override string ToString()
+		{
+			var cause = (CausedBy != null) ?
+				$" CausedBy:\n{CausedBy}" :
+				string.Empty;
+
+			return $"Type: {Type} Reason: \"{Reason}\"{cause}";
+		}
 	}
 }
