@@ -46,5 +46,14 @@ namespace Nest
 
 		[JsonProperty("caused_by")]
 		public CausedBy InnerCausedBy { get; internal set; }
+
+		public override string ToString()
+		{
+			var innerCause = (InnerCausedBy != null) ?
+				$" CausedBy:\n{InnerCausedBy}" :
+				string.Empty;
+
+			return $"Type: {Type} Reason: \"{Reason}\"{innerCause}";
+		}
 	}
 }
