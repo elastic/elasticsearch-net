@@ -45,8 +45,6 @@ namespace Nest
 					+ "or set a default index using ConnectionSettings.DefaultIndex()."
 				);
 
-			if (indexName.HasAny(char.IsUpper))
-				throw new ArgumentException($"Index names cannot contain uppercase characters: {indexName}.");
 		}
 	}
 }
