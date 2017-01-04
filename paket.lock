@@ -563,7 +563,7 @@ NUGET
       System.Reactive.Windows.Threading (>= 3.1.1) - framework: >= net45, winv4.5.1, wpav8.1
       System.Reactive.WindowsRuntime (>= 3.1.1) - framework: winv4.5.1, wpav8.1
     System.Reactive.Core (3.1.1) - framework: >= net45, >= netstandard10, winv4.5.1, wpav8.1
-      System.Reactive.Interfaces (>= 3.1.1) - framework: >= net45, >= netstandard10, netcore10
+      System.Reactive.Interfaces (>= 3.1.1) - framework: >= net45, >= netstandard10
     System.Reactive.Interfaces (3.1.1) - framework: >= net45, >= netstandard10
     System.Reactive.Linq (3.1.1)
       System.Reactive.Core (>= 3.1.1) - framework: >= net45, >= netstandard10
@@ -909,7 +909,7 @@ NUGET
 GROUP build
 NUGET
   remote: https://www.nuget.org/api/v2
-    FAKE (4.46.1)
+    FAKE (4.47.2)
     FSharp.Data (2.3.2)
       Zlib.Portable (>= 1.11) - framework: >= netstandard11, portable-net45+sl5+win8, portable-net45+win8, portable-net45+win8+wp8+wpa81
     gitlink (2.4.0-unstable0064)

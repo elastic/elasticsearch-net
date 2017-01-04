@@ -35,6 +35,9 @@ InitializerExample
 {
   "analysis": {
     "analyzer": {
+      "default": {
+        "type": "keyword"
+      },
       "myCustom": {
         "type": "custom",
         "tokenizer": "ng",

@@ -1,10 +1,8 @@
 ﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 
+#load @"Projects.fsx"
 #load @"Paths.fsx"
-
-open Paths.Projects
-
 
 open System
 open System.Diagnostics
@@ -14,6 +12,8 @@ open System.Text.RegularExpressions
 open Fake 
 open AssemblyInfoFile
 open SemVerHelper
+open Paths
+open Projects
 
 type Versioning() = 
     

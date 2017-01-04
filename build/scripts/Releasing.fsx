@@ -1,17 +1,20 @@
 ﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 
+#load @"Projects.fsx"
 #load @"Paths.fsx"
+#load @"Tooling.fsx"
 #load @"Versioning.fsx"
 
 open Fake 
 
 open Paths
 open Projects
+open Tooling
 open Versioning
 
-type Release() = 
-    static member NugetPack() =
+module Release = 
+    let NugetPack() = 
         DotNetProject.AllPublishable
         |> Seq.iter(fun p ->
             CreateDir Paths.NugetOutput
@@ -25,7 +28,7 @@ type Release() =
             MoveFile Paths.NugetOutput nugetOutFile
         )
 
-    static member PublishCanaryBuild accessKey feed = 
+    let PublishCanaryBuild accessKey feed = 
         !! "build/output/_packages/*-ci*.nupkg"
         |> Seq.iter(fun f -> 
             let source = "https://www.myget.org/F/"+ feed + "/api/v2/package"
