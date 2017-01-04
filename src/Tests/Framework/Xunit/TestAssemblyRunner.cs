@@ -27,7 +27,7 @@ namespace Xunit
 		}
 
 		protected override Task<RunSummary> RunTestCollectionAsync(IMessageBus bus, ITestCollection col,
-				IEnumerable<IXunitTestCase> testCases, CancellationTokenSource cts) =>
+			IEnumerable<IXunitTestCase> testCases, CancellationTokenSource cts) =>
 			new TestCollectionRunner(
 				assemblyFixtureMappings, col, testCases, DiagnosticMessageSink, bus, TestCaseOrderer,
 				new ExceptionAggregator(Aggregator), cts
@@ -52,50 +52,105 @@ namespace Xunit
 				orderby g.Count() descending
 				select g).ToList();
 
-			//If we are not running any integration tests we do not care about only keeping a single IClusterFixture
-			//active at a time, so let xunit do what it does best.
-			if (!TestClient.Configuration.RunIntegrationTests)
-			{
-				var result = await base.RunTestCollectionsAsync(messageBus, cancellationTokenSource);
-				foreach (var g in grouped) g.Key?.Dispose();
-				return result;
-			}
-
 			//threading guess
 			var defaultMaxConcurrency = Environment.ProcessorCount * 4;
 
+			if (TestClient.Configuration.RunIntegrationTests)
+				return await IntegrationPipeline(defaultMaxConcurrency, grouped, messageBus, cancellationTokenSource);
+			return await UnitTestPipeline(defaultMaxConcurrency, grouped, messageBus, cancellationTokenSource);
+		}
+
+		private static readonly TimeSpan SlowTestThreshold = TimeSpan.FromSeconds(2.0);
+
+		private async Task<RunSummary> UnitTestPipeline(int defaultMaxConcurrency,
+			List<IGrouping<ClusterBase, GroupedByCluster>> grouped, IMessageBus messageBus,
+			CancellationTokenSource cancellationTokenSource)
+		{
+			foreach (var g in grouped) g.Key?.Start();
+
+			var summaries = new ConcurrentBag<RunSummary>();
+			var slowTestCollections = new ConcurrentDictionary<string, TimeSpan>();
+
+			var testFilter = TestClient.Configuration.TestFilter;
+			var sw = Stopwatch.StartNew();
+			await grouped.SelectMany(g => g)
+				.ForEachAsync(defaultMaxConcurrency, async g =>
+				{
+					var test = g.Collection.DisplayName.Replace("Test collection for", "");
+					if (!string.IsNullOrWhiteSpace(testFilter) && test.IndexOf(testFilter, StringComparison.OrdinalIgnoreCase) < 0)
+						return;
+
+					if (!string.IsNullOrWhiteSpace(testFilter)) Console.WriteLine(" -> " + test);
+
+					try
+					{
+						var s = Stopwatch.StartNew();
+						var summary = await RunTestCollectionAsync(messageBus, g.Collection, g.TestCases, cancellationTokenSource);
+						s.Stop();
+						if (s.Elapsed >= SlowTestThreshold)
+							slowTestCollections.TryAdd(test, s.Elapsed);
+						summaries.Add(summary);
+					}
+					catch (TaskCanceledException)
+					{
+					}
+				});
+			sw.Stop();
+			foreach (var g in grouped) g.Key?.Dispose();
+
+			Console.WriteLine("--------");
+			Console.WriteLine($"Unit test time {sw.Elapsed}");
+			Console.WriteLine("--------");
+			if (slowTestCollections.Count > 0)
+			{
+				Console.WriteLine($"Test collections slower then {SlowTestThreshold}");
+				foreach (var t in slowTestCollections.OrderByDescending(kv => kv.Value))
+					Console.WriteLine($"  ({t.Value}) - {t.Key}");
+			}
+
+			return new RunSummary()
+			{
+				Total = summaries.Sum(s => s.Total),
+				Failed = summaries.Sum(s => s.Failed),
+				Skipped = summaries.Sum(s => s.Skipped)
+			};
+		}
+
+		private async Task<RunSummary> IntegrationPipeline(int defaultMaxConcurrency,
+			List<IGrouping<ClusterBase, GroupedByCluster>> grouped, IMessageBus messageBus,
+			CancellationTokenSource cancellationTokenSource)
+		{
 			var summaries = new ConcurrentBag<RunSummary>();
 			var clusterTotals = new Dictionary<string, Stopwatch>();
 			var clusterFilter = TestClient.Configuration.ClusterFilter;
 			var testFilter = TestClient.Configuration.TestFilter;
 			foreach (var group in grouped)
 			{
-				var type = group.Key?.GetType();
+				var type = @group.Key?.GetType();
 				var clusterName = type?.Name.Replace("Cluster", "") ?? "UNKNOWN";
 
-				if (!string.IsNullOrWhiteSpace(clusterFilter) && clusterName.IndexOf(clusterFilter, StringComparison.OrdinalIgnoreCase) < 0)
+				if (!string.IsNullOrWhiteSpace(clusterFilter) &&
+				    clusterName.IndexOf(clusterFilter, StringComparison.OrdinalIgnoreCase) < 0)
 					continue;
 
-				var dop = group.Key != null && group.Key.MaxConcurrency > 0
-					? group.Key.MaxConcurrency
+				var dop = @group.Key != null && @group.Key.MaxConcurrency > 0
+					? @group.Key.MaxConcurrency
 					: defaultMaxConcurrency;
 
 				clusterTotals.Add(clusterName, Stopwatch.StartNew());
 
 				//We group over each cluster group and execute test classes pertaining to that cluster
 				//in parallel
-				using (group.Key ?? System.Reactive.Disposables.Disposable.Empty)
+				using (@group.Key ?? System.Reactive.Disposables.Disposable.Empty)
 				{
-					group.Key?.Start();
-					await group.ForEachAsync(dop, async g =>
+					@group.Key?.Start();
+					await @group.ForEachAsync(dop, async g =>
 					{
 						var test = g.Collection.DisplayName.Replace("Test collection for", "");
 						if (!string.IsNullOrWhiteSpace(testFilter) && test.IndexOf(testFilter, StringComparison.OrdinalIgnoreCase) < 0)
 							return;
 
-						//display tests we execute when we filter so we get confirmation on the command line we run the tests we expect
-						if (!string.IsNullOrWhiteSpace(testFilter))
-							Console.WriteLine(" -> " + test);
+						if (!string.IsNullOrWhiteSpace(testFilter)) Console.WriteLine(" -> " + test);
 
 						try
 						{
@@ -105,7 +160,7 @@ namespace Xunit
 						catch (TaskCanceledException)
 						{
 						}
-				});
+					});
 				}
 				clusterTotals[clusterName].Stop();
 			}
@@ -146,7 +201,8 @@ namespace Xunit
 		{
 			var collectionTypeName = testCollection.DisplayName.Split(' ').Last();
 			var collectionType = Type.GetType(collectionTypeName);
-			var clusterType = collectionType.GetTypeInfo().ImplementedInterfaces
+			var clusterType = collectionType.GetTypeInfo()
+				.ImplementedInterfaces
 				.Where(i => i.GetTypeInfo().IsGenericType && i.GetGenericTypeDefinition() == typeof(IClusterFixture<>))
 				.Select(i => i.GetTypeInfo().GenericTypeArguments.Single())
 				.FirstOrDefault();

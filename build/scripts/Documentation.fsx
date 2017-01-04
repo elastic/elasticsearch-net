@@ -12,7 +12,7 @@ open System.IO
 
 module Documentation = 
 
-    let Generate() =
+    let Generate() = 
         let generator = "build/output/v4.6/DocGenerator/DocGenerator.exe"
         ExecProcess (fun p ->
             p.WorkingDirectory <- "src/CodeGeneration/DocGenerator"
@@ -21,7 +21,7 @@ module Documentation =
           (TimeSpan.FromMinutes (1.0)) |> ignore
 
     // TODO: hook documentation validation into the process
-    let Validate() =
+    let Validate() = 
         let elasticDocsDir = "../elasticsearch-docs"
         if (directoryExists elasticDocsDir = false) then
             let fullPath = combinePaths currentDirectory elasticDocsDir |> Path.GetFullPath
