@@ -1,7 +1,9 @@
 ﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 
+#load @"Projects.fsx"
 #load @"Paths.fsx"
+#load @"Tooling.fsx"
 
 open System
 open System.IO
@@ -10,6 +12,7 @@ open System.Diagnostics
 open Fake
 
 open Paths
+open Tooling
 
 module Profiler =
     let private profiledApp = sprintf "%s/%s" (Paths.BinFolder("Profiling")) "Profiling.exe"

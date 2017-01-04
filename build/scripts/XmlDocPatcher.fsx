@@ -40,7 +40,7 @@ module InheritDoc =
         manualMapping
     ];
     
-    let private documentedApis = fun (file : string) ->
+    let private documentedApis (file:string) =
         use reader = XmlReader.Create file
         seq {
             while reader.ReadToFollowing("member") do
@@ -51,7 +51,7 @@ module InheritDoc =
                     yield (name, xdoc)
         } |> Map.ofSeq
 
-    let private patchInheritDoc = fun file ->
+    let private patchInheritDoc file = 
         traceFAKE "Rewriting xmldoc:  %s" file
 
         let mapOfDocumentedApis = documentedApis file
@@ -85,7 +85,7 @@ module InheritDoc =
         writer.Formatting <- Formatting.Indented;
         xml.Save(writer);
 
-    let patchInheritDocs = fun () ->
+    let PatchInheritDocs() = 
         AllPublishableProjectsWithSupportedFrameworks
         |> Seq.map (fun p -> 
             let folder = Paths.ProjectOutputFolder p.project p.framework
