@@ -124,6 +124,7 @@
     <Compile Include="Failover\FailoverSniffOnStartupTests.cs" />
     <Compile Include="Failover\FailoverPingTests.cs" />
     <Compile Include="Help\AliasTests.cs" />
+    <Compile Include="Index\IndexJObjectTests.cs" />
     <Compile Include="Index\ReindexTests.cs" />
     <Compile Include="Index\IndexUsingUrlIdTests.cs" />
     <Compile Include="Indices\Analysis\Analyzers\AnalyzerTest.cs" />

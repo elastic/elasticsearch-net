@@ -64,7 +64,11 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				return (string.Join("\n", ss) + "\n").Utf8Bytes();
 			}
 
-			if (typeof(IEnumerable<object>).IsAssignableFrom(dataType))
+			// JObject should not be treated as an IEnumerable<object> as doing so
+			// results in malformed json in the request. Allow it to be handled
+			// by the serializer similar to any other type.
+			if (typeof(IEnumerable<object>).IsAssignableFrom(dataType) && 
+				dataType.FullName != "Newtonsoft.Json.Linq.JObject")
 			{
 				var so = (IEnumerable<object>)data;
 				var joined = string.Join("\n", so
