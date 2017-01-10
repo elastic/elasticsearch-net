@@ -93,6 +93,47 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		[Ignore("script.inline: on must be set in elasticsearch.yml")]
+		public void ScriptMax()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.Max("value_agg", t => t.Script("doc['loc'].value"))
+				)
+			);
+			results.IsValid.Should().BeTrue();
+			var termBucket = results.Aggs.Max("value_agg");
+			termBucket.Should().NotBeNull();
+			termBucket.Value.Should().HaveValue();
+		}
+
+		[Test]
+		[Ignore("script.indexed: on must be set in elasticsearch.yml")]
+		public void ScriptIdMax()
+		{
+			var scriptResponse = this.Client.PutScript(p => p
+				.Script("doc['loc'].value")
+				.Lang(ScriptLang.Groovy)
+				.Id("loc-value")
+			);
+
+			scriptResponse.IsValid.Should().BeTrue();
+
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.Max("value_agg", t => t.ScriptId("loc-value"))
+				)
+			);
+
+			results.IsValid.Should().BeTrue();
+			var termBucket = results.Aggs.Max("value_agg");
+			termBucket.Should().NotBeNull();
+			termBucket.Value.Should().HaveValue();
+		}
+
+		[Test]
 		public void Sum()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s
