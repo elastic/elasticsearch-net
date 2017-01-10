@@ -26,7 +26,7 @@ namespace Nest
 		Finnish,
 		[EnumMember(Value="French")]
 		French,
-		[EnumMember(Value="Ferman")]
+		[EnumMember(Value="German")]
 		German,
 		[EnumMember(Value="German2")]
 		German2,
