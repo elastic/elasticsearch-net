@@ -74,6 +74,9 @@ namespace Nest
 		public static QueryContainer GeoShapePolygon(Func<GeoShapePolygonQueryDescriptor<T>, IGeoShapePolygonQuery> selector) =>
 			new QueryContainerDescriptor<T>().GeoShapePolygon(selector);
 
+		public static QueryContainer GeoShapeGeometryCollection(Func<GeoShapeGeometryCollectionQueryDescriptor<T>, IGeoShapeGeometryCollectionQuery> selector) =>
+			new QueryContainerDescriptor<T>().GeoShapeGeometryCollection(selector);
+
 		public static QueryContainer HasChild<TChild>(Func<HasChildQueryDescriptor<TChild>, IHasChildQuery> selector) where TChild : class =>
 			new QueryContainerDescriptor<T>().HasChild<TChild>(selector);
 
