@@ -52,7 +52,7 @@ namespace Nest
 		ISizeField SizeField { get; set; }
 
 		[JsonProperty("_timestamp")]
-		[Obsolete("Use a normal date field and set its value explicitly")]
+		[Obsolete("Deprecated. Use a normal date field and set its value explicitly")]
 		ITimestampField TimestampField { get; set; }
 
 		[JsonProperty("_field_names")]
@@ -105,17 +105,17 @@ namespace Nest
 		/// <inheritdoc/>
 		public IRoutingField RoutingField { get; set; }
 		/// <inheritdoc/>
-		[Obsolete("Scheduled to be removed in 6.0. Default analyzers can no longer be specified at the type level.  Use an index or field level analyzer instead.")]
+		[Obsolete("Scheduled to be removed in 6.0.0. Default analyzers can no longer be specified at the type level.  Use an index or field level analyzer instead.")]
 		public string Analyzer { get; set; }
 		/// <inheritdoc/>
-		[Obsolete("Scheduled to be removed in 6.0. Default analyzers can no longer be specified at the type level.  Use an index or field level analyzer instead.")]
+		[Obsolete("Scheduled to be removed in 6.0.0. Default analyzers can no longer be specified at the type level.  Use an index or field level analyzer instead.")]
 		public string SearchAnalyzer { get; set; }
 		/// <inheritdoc/>
 		public ISizeField SizeField { get; set; }
 		/// <inheritdoc/>
 		public ISourceField SourceField { get; set; }
 		/// <inheritdoc/>
-		[Obsolete("Use a normal date field and set its value explicitly")]
+		[Obsolete("Deprecated. Use a normal date field and set its value explicitly")]
 		public ITimestampField TimestampField { get; set; }
 		/// <inheritdoc/>
 		[Obsolete("Deprecated in 2.0.0 Removed in 5.0.0")]
@@ -148,7 +148,7 @@ namespace Nest
 		string ITypeMapping.SearchAnalyzer { get; set; }
 		ISizeField ITypeMapping.SizeField { get; set; }
 		ISourceField ITypeMapping.SourceField { get; set; }
-		[Obsolete("Use a normal date field and set its value explicitly")]
+		[Obsolete("Deprecated. Use a normal date field and set its value explicitly")]
 		ITimestampField ITypeMapping.TimestampField { get; set; }
 		[Obsolete("Deprecated in 2.0.0 Removed in 5.0.0")]
 		IList<IMappingTransform> ITypeMapping.Transform { get; set; }
@@ -223,9 +223,8 @@ namespace Nest
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> FieldNamesField(Func<FieldNamesFieldDescriptor<T>, IFieldNamesField> fieldNamesFieldSelector) => Assign(a => a.FieldNamesField = fieldNamesFieldSelector.Invoke(new FieldNamesFieldDescriptor<T>()));
 
-#pragma warning disable 618
 		/// <inheritdoc/>
-		[Obsolete("Use a normal date field and set its value explicitly")]
+		[Obsolete("Deprecated. Use a normal date field and set its value explicitly")]
 		public TypeMappingDescriptor<T> TimestampField(Func<TimestampFieldDescriptor<T>, ITimestampField> timestampFieldSelector) => Assign(a => a.TimestampField = timestampFieldSelector?.Invoke(new TimestampFieldDescriptor<T>()));
 
 		/// <inheritdoc/>
@@ -240,7 +239,6 @@ namespace Nest
 		/// <inheritdoc/>
 		[Obsolete("Will be replaced with a different implementation in a future version of Elasticsearch")]
 		public TypeMappingDescriptor<T> TtlField(Func<TtlFieldDescriptor, ITtlField> ttlFieldSelector) => Assign(a => a.TtlField = ttlFieldSelector?.Invoke(new TtlFieldDescriptor()));
-#pragma warning restore 618
 
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector) => Assign(a => a.Meta = metaSelector(new FluentDictionary<string, object>()));

@@ -6,7 +6,7 @@ using static Nest.Infer;
 
 namespace Tests.QueryDsl.Geo.Shape.Polygon
 {
-	public class GeoPolygonUsageTests : ShapeQueryUsageTestsBase
+	public class GeoPolygonUsageTests : GeoShapeQueryUsageTestsBase
 	{
 		public GeoPolygonUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

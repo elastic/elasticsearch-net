@@ -48,7 +48,7 @@ namespace Nest
 		{
 			properties = properties ?? new Dictionary<string, string>();
 			var props = string.Join(", ", properties.Select(kv => "{0}: {1}".F(kv.Key, kv.Value)));
-			var indent = new String('-',(Depth -1) * 2);
+			var indent = new string('-',(Depth -1) * 2);
 			var scope = this.Scope.GetStringValue().ToLowerInvariant();
 			_sb.AppendFormat("{0}{1}: {2} ({3}){4}", indent, scope, queryType, props, Environment.NewLine);
 		}
@@ -182,6 +182,8 @@ namespace Nest
 		public void Visit(IGeoShapeLineStringQuery query)=> Write("geo_shape_line");
 
 		public void Visit(IGeoShapeEnvelopeQuery query)=> Write("geo_shape_envelope");
+
+		public virtual void Visit(IGeoShapeGeometryCollectionQuery query)=> Write("geo_shape_geometrycollection");
 
 		public void Visit(ISpanSubQuery query)=> Write("span_sub");
 

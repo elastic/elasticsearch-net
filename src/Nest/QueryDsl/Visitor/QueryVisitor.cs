@@ -97,6 +97,7 @@
 		void Visit(IGeoShapeLineStringQuery query);
 		void Visit(IGeoShapeEnvelopeQuery query);
 		void Visit(IGeoShapeCircleQuery query);
+		void Visit(IGeoShapeGeometryCollectionQuery query);
 		void Visit(IRawQuery query);
 	}
 
@@ -241,6 +242,8 @@
 		public virtual void Visit(IGeoShapeEnvelopeQuery query) { }
 
 		public virtual void Visit(IGeoShapeCircleQuery query) { }
+
+		public virtual void Visit(IGeoShapeGeometryCollectionQuery query) { }
 
 		public virtual void Visit(ISpanQuery query) { }
 

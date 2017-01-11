@@ -39,9 +39,9 @@ namespace Nest
 			IGeoShapeQuery query = null;
 
 			if (jo.TryGetValue("shape", out shape))
-				query = ParseShape(shape, serializer);
+				query = ParseShapeQuery(shape, serializer);
 			else if (jo.TryGetValue("indexed_shape", out indexedShape))
-				query = ParseIndexedShape(indexedShape);
+				query = ParseIndexedShapeQuery(indexedShape);
 
 			if (query == null) return null;
 			var boost = jo["boost"]?.Value<double>();
@@ -54,10 +54,10 @@ namespace Nest
 			return query;
 		}
 
-		private IGeoShapeQuery ParseIndexedShape(JToken indexedShape) =>
+		private IGeoShapeQuery ParseIndexedShapeQuery(JToken indexedShape) =>
 			new GeoIndexedShapeQuery {IndexedShape = (indexedShape as JObject)?.ToObject<FieldLookup>()};
 
-		private IGeoShapeQuery ParseShape(JToken shape, JsonSerializer serializer)
+		private IGeoShapeQuery ParseShapeQuery(JToken shape, JsonSerializer serializer)
 		{
 			var type = shape["type"];
 			var typeName = type?.Value<string>();
@@ -67,56 +67,147 @@ namespace Nest
 					var radius = shape["radius"];
 					return new GeoShapeCircleQuery
 					{
-						Shape = new CircleGeoShape
-						{
-							Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer),
-							Radius = radius?.Value<string>()
-						}
+						Shape = ParseCircleGeoShape(shape, serializer, radius)
 					};
 				case "envelope":
 					return new GeoShapeEnvelopeQuery
 					{
-						Shape = new EnvelopeGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)}
+						Shape = ParseEnvelopeGeoShape(shape, serializer)
 					};
 				case "linestring":
 					return new GeoShapeLineStringQuery
 					{
-						Shape = new LineStringGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)}
+						Shape = ParseLineStringGeoShape(shape, serializer)
 					};
 				case "multilinestring":
 					return new GeoShapeMultiLineStringQuery
 					{
-						Shape = new MultiLineStringGeoShape
-						{
-							Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer)
-						}
+						Shape = ParseMultiLineStringGeoShape(shape, serializer)
 					};
 				case "point":
 					return new GeoShapePointQuery
 					{
-						Shape = new PointGeoShape {Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer)}
+						Shape = ParsePointGeoShape(shape, serializer)
 					};
 				case "multipoint":
 					return new GeoShapeMultiPointQuery
 					{
-						Shape = new MultiPointGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)}
+						Shape = ParseMultiPointGeoShape(shape, serializer)
 					};
 				case "polygon":
 					return new GeoShapePolygonQuery
 					{
-						Shape = new PolygonGeoShape {Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer)}
+						Shape = ParsePolygonGeoShape(shape, serializer)
 					};
 				case "multipolygon":
 					return new GeoShapeMultiPolygonQuery
 					{
-						Shape = new MultiPolygonGeoShape
-						{
-							Coordinates = GetCoordinates<IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>>>(shape, serializer)
-						}
+						Shape = ParseMultiPolygonGeoShape(shape, serializer)
+					};
+				case "geometrycollection":
+					return new GeoShapeGeometryCollectionQuery
+					{
+						Shape = ParseGeometryCollection(shape, serializer)
 					};
 				default:
 					return null;
 			}
+		}
+
+		private GeometryCollection ParseGeometryCollection(JToken shape, JsonSerializer serializer)
+		{
+			var geometries = shape["geometries"] as JArray;
+			if (geometries == null)
+				return new GeometryCollection { Geometries = Enumerable.Empty<IGeoShape>() };
+
+			var geoShapes = new List<IGeoShape>(geometries.Count);
+			foreach (var geometry in geometries)
+			{
+				var type = geometry["type"];
+				var typeName = type?.Value<string>();
+				switch (typeName)
+				{
+					case "circle":
+						var radius = geometry["radius"];
+						geoShapes.Add(ParseCircleGeoShape(geometry, serializer, radius));
+						break;
+					case "envelope":
+						geoShapes.Add(ParseEnvelopeGeoShape(geometry, serializer));
+						break;
+					case "linestring":
+						geoShapes.Add(ParseLineStringGeoShape(geometry, serializer));
+						break;
+					case "multilinestring":
+						geoShapes.Add(ParseMultiLineStringGeoShape(geometry, serializer));
+						break;
+					case "point":
+						geoShapes.Add(ParsePointGeoShape(geometry, serializer));
+						break;
+					case "multipoint":
+						geoShapes.Add(ParseMultiPointGeoShape(geometry, serializer));
+						break;
+					case "polygon":
+						geoShapes.Add(ParsePolygonGeoShape(geometry, serializer));
+						break;
+					case "multipolygon":
+						geoShapes.Add(ParseMultiPolygonGeoShape(geometry, serializer));
+						break;
+					default:
+						throw new ArgumentException($"cannot parse geo_shape. unknown type '{typeName}'");
+				}
+			}
+
+			return new GeometryCollection { Geometries = geoShapes };
+		}
+
+		private MultiPolygonGeoShape ParseMultiPolygonGeoShape(JToken shape, JsonSerializer serializer)
+		{
+			return new MultiPolygonGeoShape
+			{
+				Coordinates = GetCoordinates<IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>>>(shape, serializer)
+			};
+		}
+
+		private PolygonGeoShape ParsePolygonGeoShape(JToken shape, JsonSerializer serializer)
+		{
+			return new PolygonGeoShape {Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer)};
+		}
+
+		private MultiPointGeoShape ParseMultiPointGeoShape(JToken shape, JsonSerializer serializer)
+		{
+			return new MultiPointGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
+		}
+
+		private PointGeoShape ParsePointGeoShape(JToken shape, JsonSerializer serializer)
+		{
+			return new PointGeoShape {Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer)};
+		}
+
+		private MultiLineStringGeoShape ParseMultiLineStringGeoShape(JToken shape, JsonSerializer serializer)
+		{
+			return new MultiLineStringGeoShape
+			{
+				Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer)
+			};
+		}
+
+		private LineStringGeoShape ParseLineStringGeoShape(JToken shape, JsonSerializer serializer)
+		{
+			return new LineStringGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
+		}
+
+		private EnvelopeGeoShape ParseEnvelopeGeoShape(JToken shape, JsonSerializer serializer)
+		{
+			return new EnvelopeGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
+		}
+
+		private CircleGeoShape ParseCircleGeoShape(JToken shape, JsonSerializer serializer, JToken radius)
+		{
+			return new CircleGeoShape
+			{
+				Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer),
+				Radius = radius?.Value<string>()
+			};
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

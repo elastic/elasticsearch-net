@@ -5,7 +5,7 @@ using static Nest.Infer;
 
 namespace Tests.QueryDsl.Geo.Shape.Point
 {
-	public class GeoPointUsageTests : ShapeQueryUsageTestsBase
+	public class GeoPointUsageTests : GeoShapeQueryUsageTestsBase
 	{
 		public GeoPointUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

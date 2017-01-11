@@ -1011,6 +1011,8 @@
     <Compile Include="QueryDsl\Geo\Shape\Circle\GeoShapeCircleQuery.cs" />
     <Compile Include="QueryDsl\Geo\Shape\Envelope\EnvelopeGeoShape.cs" />
     <Compile Include="QueryDsl\Geo\Shape\Envelope\GeoShapeEnvelopeQuery.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\GeometryCollection\GeometryCollection.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\GeometryCollection\GeoShapeGeometryCollectionQuery.cs" />
     <Compile Include="QueryDsl\Geo\Shape\GeoShapeBase.cs" />
     <Compile Include="QueryDsl\Geo\Shape\GeoShapeQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\Geo\Shape\IGeoShapeQuery.cs" />

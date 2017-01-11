@@ -1,11 +1,10 @@
 ﻿using Tests.Framework.Integration;
-using Xunit;
 
-namespace Tests.QueryDsl
+namespace Tests.QueryDsl.Geo.Shape
 {
-	public abstract class ShapeQueryUsageTestsBase : QueryDslUsageTestsBase
+	public abstract class GeoShapeQueryUsageTestsBase : QueryDslUsageTestsBase
 	{
-		protected ShapeQueryUsageTestsBase(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		protected GeoShapeQueryUsageTestsBase(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object QueryJson => new
 		{

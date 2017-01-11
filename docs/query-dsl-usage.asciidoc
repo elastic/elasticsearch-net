@@ -62,6 +62,8 @@ include::query-dsl/geo/shape/circle/geo-shape-circle-usage.asciidoc[]
 
 include::query-dsl/geo/shape/envelope/geo-envelope-usage.asciidoc[]
 
+include::query-dsl/geo/shape/geometry-collection/geo-geometry-collection-usage.asciidoc[]
+
 include::query-dsl/geo/shape/indexed-shape/geo-indexed-shape-usage.asciidoc[]
 
 include::query-dsl/geo/shape/line-string/geo-line-string-usage.asciidoc[]
@@ -69,6 +71,8 @@ include::query-dsl/geo/shape/line-string/geo-line-string-usage.asciidoc[]
 include::query-dsl/geo/shape/multi-line-string/geo-multi-line-string-usage.asciidoc[]
 
 include::query-dsl/geo/shape/multi-point/geo-multi-point-usage.asciidoc[]
+
+include::query-dsl/geo/shape/multi-polygon/geo-multi-polygon-usage.asciidoc[]
 
 include::query-dsl/geo/shape/point/geo-point-usage.asciidoc[]
 

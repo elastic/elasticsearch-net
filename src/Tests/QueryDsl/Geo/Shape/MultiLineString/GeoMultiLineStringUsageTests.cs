@@ -6,7 +6,7 @@ using static Nest.Infer;
 
 namespace Tests.QueryDsl.Geo.Shape.MultiLineString
 {
-	public class GeoMultiLineStringUsageTests : ShapeQueryUsageTestsBase
+	public class GeoMultiLineStringUsageTests : GeoShapeQueryUsageTestsBase
 	{
 		public GeoMultiLineStringUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

@@ -5,7 +5,7 @@ using static Nest.Infer;
 
 namespace Tests.QueryDsl.Geo.Shape.Circle
 {
-	public class GeoShapeCircleUsageTests : ShapeQueryUsageTestsBase
+	public class GeoShapeCircleUsageTests : GeoShapeQueryUsageTestsBase
 	{
 		public GeoShapeCircleUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

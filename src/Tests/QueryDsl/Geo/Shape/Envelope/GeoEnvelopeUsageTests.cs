@@ -6,7 +6,7 @@ using static Nest.Infer;
 
 namespace Tests.QueryDsl.Geo.Shape.Envelope
 {
-	public class GeoEnvelopeUsageTests : ShapeQueryUsageTestsBase
+	public class GeoEnvelopeUsageTests : GeoShapeQueryUsageTestsBase
 	{
 		public GeoEnvelopeUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

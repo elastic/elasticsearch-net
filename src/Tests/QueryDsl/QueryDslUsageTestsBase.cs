@@ -66,7 +66,6 @@ namespace Tests.QueryDsl
 			pretty.Should().NotBeNullOrWhiteSpace();
 		}
 
-
 		[U] public void ConditionlessWhenExpectedToBe()
 		{
 			if (ConditionlessWhen == null) return;

@@ -443,7 +443,7 @@
     <Compile Include=".\QueryDsl\Geo\Shape\MultiPoint\GeoMultiPointUsageTests.cs" />
     <Compile Include=".\QueryDsl\Geo\Shape\Point\GeoPointUsageTests.cs" />
     <Compile Include=".\QueryDsl\Geo\Shape\Polygon\GeoPolygonUsageTests.cs" />
-    <Compile Include=".\QueryDsl\Geo\Shape\ShapeQueryUsageTestsBase.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\GeoShapeQueryUsageTestsBase.cs" />
     <Compile Include=".\QueryDsl\Joining\HasChild\HasChildQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\Joining\HasParent\HasParentQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\Joining\Nested\NestedQueryUsageTests.cs" />
@@ -574,6 +574,8 @@
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexOnServerApiTests.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryApiTests.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryUrlTests.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\GeometryCollection\GeoGeometryCollectionUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\MultiPolygon\GeoMultiPolygonUsageTests.cs" />
     <Compile Include="Reproduce\ConnectionReuseAndBalancing.cs" />
     <Compile Include="Reproduce\GithubIssue2306.cs" />
     <Compile Include="Reproduce\GithubIssue2309.cs" />
