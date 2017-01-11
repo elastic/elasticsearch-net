@@ -145,11 +145,13 @@ namespace Nest
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> Parent<TParent>() where TParent : class => Assign(a => a.ParentField = new ParentField { Type = typeof(TParent) });
 
+#pragma warning disable 618
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> SearchAnalyzer(string searchAnalyzer) => Assign(a => a.SearchAnalyzer = searchAnalyzer);
+#pragma warning restore 618
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> AllField(Func<AllFieldDescriptor, IAllField> allFieldSelector) => Assign(a => a.AllField = allFieldSelector?.Invoke(new AllFieldDescriptor()));
