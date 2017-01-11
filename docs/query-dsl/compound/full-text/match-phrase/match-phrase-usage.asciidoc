@@ -7,31 +7,25 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/QueryDsl/Compound/FullText/Match/MatchUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/QueryDsl/Compound/FullText/MatchPhrase/MatchPhraseUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
 
-[[match-usage]]
-== Match Usage
+[[match-phrase-usage]]
+== Match Phrase Usage
 
 === Fluent DSL Example
 
 [source,csharp]
 ----
 q
-.Match(c => c
+.MatchPhrase(c => c
     .Field(p => p.Description)
     .Analyzer("standard")
     .Boost(1.1)
-    .CutoffFrequency(0.001)
     .Query("hello world")
-    .Fuzziness(Fuzziness.Auto)
-    .Lenient()
-    .FuzzyTranspositions()
-    .MinimumShouldMatch(2)
-    .Operator(Operator.Or)
-    .FuzzyRewrite(RewriteMultiTerm.ConstantScoreBoolean)
+    .Slop(2)
     .Name("named_query")
 )
 ----
@@ -40,20 +34,14 @@ q
 
 [source,csharp]
 ----
-new MatchQuery
+new MatchPhraseQuery
 {
     Field = Field<Project>(p=>p.Description),
     Analyzer = "standard",
     Boost = 1.1,
     Name = "named_query",
-    CutoffFrequency = 0.001,
     Query = "hello world",
-    Fuzziness = Fuzziness.Auto,
-    FuzzyTranspositions = true,
-    MinimumShouldMatch = 2,
-    FuzzyRewrite = RewriteMultiTerm.ConstantScoreBoolean,
-    Lenient = true,
-    Operator = Operator.Or,
+    Slop = 2,
 }
 ----
 
@@ -61,19 +49,13 @@ new MatchQuery
 .Example json output
 ----
 {
-  "match": {
+  "match_phrase": {
     "description": {
       "_name": "named_query",
       "boost": 1.1,
       "query": "hello world",
       "analyzer": "standard",
-      "fuzzy_rewrite": "constant_score_boolean",
-      "fuzziness": "AUTO",
-      "fuzzy_transpositions": true,
-      "cutoff_frequency": 0.001,
-      "lenient": true,
-      "minimum_should_match": 2,
-      "operator": "or"
+      "slop": 2
     }
   }
 }

@@ -26,6 +26,10 @@ include::query-dsl/compound/full-text/match/match-phrase-usage.asciidoc[]
 
 include::query-dsl/compound/full-text/match/match-usage.asciidoc[]
 
+include::query-dsl/compound/full-text/match-phrase/match-phrase-usage.asciidoc[]
+
+include::query-dsl/compound/full-text/match-phrase-prefix/match-phrase-prefix-usage.asciidoc[]
+
 include::query-dsl/compound/full-text/multi-match/multi-match-usage.asciidoc[]
 
 include::query-dsl/compound/full-text/query-string/query-string-usage.asciidoc[]
