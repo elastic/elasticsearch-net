@@ -100,27 +100,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		}
 
 		//hide
-		[U] public void UppercaseCharacterThrowsArgumentException()
-		{
-			var settings = new ConnectionSettings()
-				.DefaultIndex("Default")
-				.MapDefaultTypeIndices(m => m
-					.Add(typeof(Project), "myProjects")
-				);
-
-			var resolver = new IndexNameResolver(settings);
-
-			var e = Assert.Throws<ArgumentException>(() => resolver.Resolve<Project>());
-			e.Message.Should().Be($"Index names cannot contain uppercase characters: myProjects.");
-
-			e = Assert.Throws<ArgumentException>(() => resolver.Resolve<Tag>());
-			e.Message.Should().Be($"Index names cannot contain uppercase characters: Default.");
-
-			e = Assert.Throws<ArgumentException>(() => resolver.Resolve("Foo"));
-			e.Message.Should().Be($"Index names cannot contain uppercase characters: Foo.");
-		}
-
-		//hide
 		[U] public void NoIndexThrowsArgumentException()
 		{
 			var settings = new ConnectionSettings();
