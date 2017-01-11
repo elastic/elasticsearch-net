@@ -8,7 +8,7 @@ namespace Nest
 		public override bool CanConvert(Type objectType) => true;
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var p = value as GeoCoordinate;
+			var p = (GeoCoordinate)value;
 			if (p == null)
 			{
 				writer.WriteNull();
@@ -27,6 +27,5 @@ namespace Nest
 			if (doubles.Length != 2) return null;
 			return new GeoCoordinate(doubles[1], doubles[0]);
 		}
-
 	}
 }

@@ -16,7 +16,7 @@ namespace Nest
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoShape = this;
 
-		internal static bool IsConditionless(IGeoShapeCircleQuery q) => q.Field.IsConditionless() || q.Shape == null || q.Shape.Coordinates == null;
+		internal static bool IsConditionless(IGeoShapeCircleQuery q) => q.Field.IsConditionless() || q.Shape?.Coordinates == null;
 	}
 
 	public class GeoShapeCircleQueryDescriptor<T>

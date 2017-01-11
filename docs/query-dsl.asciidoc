@@ -59,6 +59,8 @@ NEST exposes all of the query DSL endpoints available in Elasticsearch
 
 * <<geo-envelope-usage,Geo Envelope Usage>>
 
+* <<geo-geometry-collection-usage,Geo Geometry Collection Usage>>
+
 * <<geo-indexed-shape-usage,Geo Indexed Shape Usage>>
 
 * <<geo-line-string-usage,Geo Line String Usage>>
@@ -66,6 +68,8 @@ NEST exposes all of the query DSL endpoints available in Elasticsearch
 * <<geo-multi-line-string-usage,Geo Multi Line String Usage>>
 
 * <<geo-multi-point-usage,Geo Multi Point Usage>>
+
+* <<geo-multi-polygon-usage,Geo Multi Polygon Usage>>
 
 * <<geo-point-usage,Geo Point Usage>>
 

@@ -502,6 +502,7 @@
     <Compile Include=".\QueryDsl\Geo\Shape\Point\GeoPointUsageTests.cs" />
     <Compile Include=".\QueryDsl\Geo\Shape\Polygon\GeoPolygonUsageTests.cs" />
     <Compile Include="QueryDsl\ConditionlessWhen.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\GeometryCollection\GeoGeometryCollectionUsageTests.cs" />
     <Compile Include="QueryDsl\Geo\Shape\GeoShapeQueryUsageTestsBase.cs" />
     <Compile Include=".\QueryDsl\Joining\HasChild\HasChildQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\Joining\HasParent\HasParentQueryUsageTests.cs" />
@@ -624,6 +625,7 @@
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryApiTests.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryUrlTests.cs" />
     <Compile Include="Framework\EndpointTests\TestState\CallUniqueValues.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\MultiPolygon\GeoMultiPolygonUsageTests.cs" />
     <Compile Include="QueryDsl\Joining\ParentId\ParentIdUsageTests.cs" />
     <Compile Include="QueryDsl\MatchNoneQueryUsageTests.cs" />
     <Compile Include="QueryDsl\NotConditionlessWhen.cs" />
