@@ -25,16 +25,23 @@ namespace Tests.Framework.Integration
 			{"0.90", "elasticsearch/elasticsearch-mapper-attachments/1.9.0"}
 		};
 
-		public static string GetVersion(string elasticsearchVersion)
+		public static string GetVersion(ElasticsearchVersionInfo elasticsearchVersion)
 		{
 			string attachmentVersion;
-			if (!Versions.TryGetValue(elasticsearchVersion, out attachmentVersion))
+			if (!Versions.TryGetValue(elasticsearchVersion.Version, out attachmentVersion))
 			{
 				// assume latest version in elasticsearch repository
 				attachmentVersion = "mapper-attachments";
 			}
 
 			return attachmentVersion;
+		}
+
+		public static string GetDirectory(ElasticsearchVersionInfo elasticsearchVersion)
+		{
+			return elasticsearchVersion < new ElasticsearchVersionInfo("2.1.0")
+				? "elasticsearch-mapper-attachments"
+				: "mapper-attachments";
 		}
 	}
 }

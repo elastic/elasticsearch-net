@@ -21,18 +21,18 @@ namespace Tests.Framework.Integration
 	public class ElasticsearchNode : IDisposable
 	{
 		private static readonly object _lock = new object();
-		// <installpath> <> <plugin folder prefix>
-		private readonly Dictionary<string, Func<string, string>> SupportedPlugins = new Dictionary<string, Func<string, string>>
-		{
-			{ "delete-by-query", _ => "delete-by-query" },
-			{ "cloud-azure", _ => "cloud-azure" },
-			{ "mapper-attachments", MapperAttachmentPlugin.GetVersion },
-			{ "mapper-murmur3", _ => "mapper-murmur3" },
-			{ "license", _ => "license" },
-			{ "graph", _ => "graph" },
-			{ "shield", _ => "shield" },
-			{ "watcher", _ => "watcher" },
+
+		private readonly ElasticsearchPlugin[] SupportedPlugins = {
+			new ElasticsearchPlugin("delete-by-query"),
+			new ElasticsearchPlugin("cloud-azure"),
+			new ElasticsearchPlugin("mapper-attachments", _ => true, MapperAttachmentPlugin.GetDirectory, MapperAttachmentPlugin.GetVersion),
+			new ElasticsearchPlugin("mapper-murmur3"),
+			new ElasticsearchPlugin("license"),
+			new ElasticsearchPlugin("graph", v => v >= new ElasticsearchVersionInfo("2.3.0")),
+			new ElasticsearchPlugin("shield"),
+			new ElasticsearchPlugin("watcher")
 		};
+
 		private string[] DefaultNodeSettings { get; }
 
 		private readonly bool _testAgainstAlreadyRunningElasticsearch;
@@ -50,10 +50,10 @@ namespace Tests.Framework.Integration
 
 		public string TypeOfCluster { get; }
 		public bool Started { get; private set; }
-		public bool RunningIntegrations { get; private set; }
+		public bool RunningIntegrations { get; }
 		public string ClusterName { get; }
 		public string NodeName { get; }
-		public string RepositoryPath { get; private set; }
+		public string RepositoryPath { get; }
 		public ElasticsearchNodeInfo Info { get; private set; }
 		public int Port { get; private set; }
 
@@ -155,7 +155,7 @@ namespace Tests.Framework.Integration
 
 		}
 
-		private object _lockGetClient = new object { };
+		private readonly object _lockGetClient = new object();
 		private IElasticClient _client;
 		public IElasticClient Client
 		{
@@ -163,7 +163,6 @@ namespace Tests.Framework.Integration
 			{
 				if (!this.Started && TestClient.Configuration.RunIntegrationTests)
 				{
-
 					throw new Exception("can not request a client from an ElasticsearchNode if that node hasn't started yet");
 				}
 
@@ -174,6 +173,7 @@ namespace Tests.Framework.Integration
 					if (this._client != null) return this._client;
 
 					var port = this.Started ? this.Port : 9200;
+					// ReSharper disable once PossibleMultipleWriteAccessInDoubleCheckLocking
 					this._client = TestClient.GetClient(ComposeSettings, port);
 					return this.Client;
 				}
@@ -247,9 +247,14 @@ namespace Tests.Framework.Integration
 
 			var checkPlugins = client.CatPlugins();
 
-			var missingPlugins = SupportedPlugins.Keys.Except(checkPlugins.Records.Select(r => r.Component)).ToList();
+			var missingPlugins = SupportedPlugins
+				.Where(p => p.IsValid(this.VersionInfo))
+				.Select(p => p.Name)
+				.Except(checkPlugins.Records.Select(r => r.Component))
+				.ToList();
+
 			if (missingPlugins.Any())
-				throw new Exception($"Already running elasticsearch missed the following plugin(s): {string.Join(", ", missingPlugins)}.");
+				throw new Exception($"Already running elasticsearch missing the following plugin(s): {string.Join(", ", missingPlugins)}.");
 
 			this.Started = true;
 			this.Port = 9200;
@@ -397,10 +402,10 @@ namespace Tests.Framework.Integration
 			if (this.VersionInfo.ParsedVersion.Major >= 5) pluginCommand = "elasticsearch-plugin";
 
 			var pluginBat = Path.Combine(this.RoamingClusterFolder, "bin", pluginCommand) + ".bat";
-			foreach (var plugin in SupportedPlugins)
+			foreach (var plugin in SupportedPlugins.Where(p => p.IsValid(this.VersionInfo)))
 			{
-				var installPath = plugin.Key;
-				var command = plugin.Value(this.VersionInfo.Version);
+				var installPath = plugin.PluginDirectory(this.VersionInfo);
+				var command = plugin.PluginVersion(this.VersionInfo);
 				var pluginFolder = Path.Combine(this.RoamingClusterFolder, "plugins", installPath);
 
 				if (!Directory.Exists(this.RoamingClusterFolder)) continue;

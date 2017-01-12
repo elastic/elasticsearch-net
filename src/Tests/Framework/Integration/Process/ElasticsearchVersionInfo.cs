@@ -5,9 +5,9 @@ using System.Xml.Linq;
 
 namespace Tests.Framework.Integration
 {
-	public class ElasticsearchVersionInfo
+	public class ElasticsearchVersionInfo : SemVer.Version
 	{
-		public ElasticsearchVersionInfo(string version)
+		public ElasticsearchVersionInfo(string version) : base(version)
 		{
 			this.Version = version;
 
