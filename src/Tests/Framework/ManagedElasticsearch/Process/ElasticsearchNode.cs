@@ -264,8 +264,8 @@ namespace Tests.Framework.Integration
 			if (!license.IsValid)
 			{
 				exception = license.ApiCall.HttpStatusCode == 404
-					? new Exception($"{exceptionMessageStart} but the license was not found!")
-					: new Exception($"{exceptionMessageStart} but a {license.ApiCall.HttpStatusCode} was returned!");
+					? new Exception($"{exceptionMessageStart} but the license was not found! Details: {license.DebugInformation}")
+					: new Exception($"{exceptionMessageStart} but a {license.ApiCall.HttpStatusCode} was returned! Details: {license.DebugInformation}");
 			}
 			else if (license.License == null)
 				exception = new Exception($"{exceptionMessageStart}  but the license was deleted!");
