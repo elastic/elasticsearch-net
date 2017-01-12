@@ -1,5 +1,5 @@
 {
-  "version": "5.0.0",
+  "version": "5.0.1",
   "authors": [
     "Elastic and contributors"
   ],
@@ -25,7 +25,7 @@
       "type": "git",
       "url": "https://github.com/elastic/elasticsearch-net"
     },
-    "releaseNotes": "See https://github.com/elastic/elasticsearch-net/releases/tag/5.0.0"
+    "releaseNotes": "See https://github.com/elastic/elasticsearch-net/releases/tag/5.0.1"
   },
   "copyright": "2014-2016 Elasticsearch BV",
   "buildOptions": {
