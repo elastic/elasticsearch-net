@@ -69,7 +69,6 @@ namespace Nest
 		}
 	}
 
-
 	public abstract class RequestDescriptorBase<TDescriptor, TParameters, TInterface> : RequestBase<TParameters>, IDescriptor
 		where TDescriptor : RequestDescriptorBase<TDescriptor, TParameters, TInterface>, TInterface
 		where TParameters : FluentRequestParameters<TParameters>, new()

@@ -10,9 +10,6 @@ namespace Elasticsearch.Net
 		public string UserName { get { return Username; } set { Username = value; } }
 		public string Password { get; set; }
 
-		public override string ToString()
-		{
-			return this.Username + ":" + this.Password;
-		}
+		public override string ToString() => $"{this.Username}:{this.Password}";
 	}
 }

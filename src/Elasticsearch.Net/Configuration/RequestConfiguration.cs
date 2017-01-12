@@ -44,6 +44,11 @@ namespace Elasticsearch.Net
 		bool? DisablePing { get; set; }
 
 		/// <summary>
+		/// Whether to buffer the request and response bytes for the call
+		/// </summary>
+		bool? DisableDirectStreaming { get; set; }
+
+		/// <summary>
 		/// Treat the following statuses (on top of the 200 range) NOT as error.
 		/// </summary>
 		IEnumerable<int> AllowedStatusCodes { get; set; }
@@ -80,6 +85,7 @@ namespace Elasticsearch.Net
 		public Uri ForceNode { get; set; }
 		public bool? DisableSniff { get; set; }
 		public bool? DisablePing { get; set; }
+		public bool? DisableDirectStreaming { get; set; }
 		public IEnumerable<int> AllowedStatusCodes { get; set; }
 		public BasicAuthenticationCredentials BasicAuthenticationCredentials { get; set; }
 		public bool EnableHttpPipelining { get; set; } = true;
@@ -102,6 +108,7 @@ namespace Elasticsearch.Net
 		Uri IRequestConfiguration.ForceNode { get; set; }
 		bool? IRequestConfiguration.DisableSniff { get; set; }
 		bool? IRequestConfiguration.DisablePing { get; set; }
+		bool? IRequestConfiguration.DisableDirectStreaming { get; set; }
 		IEnumerable<int> IRequestConfiguration.AllowedStatusCodes { get; set; }
 		BasicAuthenticationCredentials IRequestConfiguration.BasicAuthenticationCredentials { get; set; }
 		bool IRequestConfiguration.EnableHttpPipelining { get; set; } = true;
@@ -117,6 +124,7 @@ namespace Elasticsearch.Net
 			Self.ForceNode = config?.ForceNode;
 			Self.DisableSniff = config?.DisableSniff;
 			Self.DisablePing = config?.DisablePing;
+			Self.DisableDirectStreaming = config?.DisableDirectStreaming;
 			Self.AllowedStatusCodes = config?.AllowedStatusCodes;
 			Self.BasicAuthenticationCredentials = config?.BasicAuthenticationCredentials;
 			Self.EnableHttpPipelining = config?.EnableHttpPipelining ?? true;
@@ -173,6 +181,12 @@ namespace Elasticsearch.Net
 		public RequestConfigurationDescriptor DisablePing(bool? disable = true)
 		{
 			Self.DisablePing = disable;
+			return this;
+		}
+
+		public RequestConfigurationDescriptor DisableDirectStreaming(bool? disable = true)
+		{
+			Self.DisableDirectStreaming = disable;
 			return this;
 		}
 
