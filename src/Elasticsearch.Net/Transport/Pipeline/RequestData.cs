@@ -53,7 +53,7 @@ namespace Elasticsearch.Net
 
 		public RequestData(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IRequestParameters local, IMemoryStreamFactory memoryStreamFactory)
 #pragma warning disable CS0618 // Type or member is obsolete
-			: this(method, path, data, global, (IRequestConfiguration)local?.RequestConfiguration, memoryStreamFactory)
+			: this(method, path, data, global, local?.RequestConfiguration, memoryStreamFactory)
 #pragma warning restore CS0618 // Type or member is obsolete
 		{
 			this.CustomConverter = local?.DeserializationOverride;
@@ -67,12 +67,16 @@ namespace Elasticsearch.Net
 			this.MemoryStreamFactory = memoryStreamFactory;
 			this.Method = method;
 			this.PostData = data;
+
+			if (data != null)
+				data.DisableDirectStreaming = local?.DisableDirectStreaming ?? global.DisableDirectStreaming;
+
 			this.Path = this.CreatePathWithQueryStrings(path, this.ConnectionSettings, null);
 
-			this.Pipelined = global.HttpPipeliningEnabled || (local?.EnableHttpPipelining).GetValueOrDefault(false);
+			this.Pipelined = local?.EnableHttpPipelining ?? global.HttpPipeliningEnabled;
 			this.HttpCompression = global.EnableHttpCompression;
 			this.ContentType = local?.ContentType ?? MimeType;
-			this.Headers = new NameValueCollection(global.Headers ?? new NameValueCollection());
+			this.Headers = global.Headers != null ? new NameValueCollection(global.Headers) : new NameValueCollection();
 			this.RunAs = local?.RunAs;
 
 			this.RequestTimeout = local?.RequestTimeout ?? global.RequestTimeout;

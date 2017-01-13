@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
@@ -11,16 +8,21 @@ namespace Elasticsearch.Net
 		where TReturn : class
 	{
 		private const int BufferSize = 81920;
+		private static readonly VoidResponse Void = new VoidResponse();
+		private static readonly IDisposable EmptyDisposable = new MemoryStream();
+
+		private readonly RequestData _requestData;
+		private readonly bool _disableDirectStreaming;
 
 		public Exception Exception { get; set; }
 		public int? StatusCode { get; set; }
 		public Stream Stream { get; set; }
 
-		private readonly RequestData _requestData;
-
 		public ResponseBuilder(RequestData requestData)
 		{
 			_requestData = requestData;
+			_disableDirectStreaming =
+				this._requestData.PostData?.DisableDirectStreaming ?? this._requestData.ConnectionSettings.DisableDirectStreaming;
 		}
 
 		public ElasticsearchResponse<TReturn> ToResponse()
@@ -53,8 +55,6 @@ namespace Elasticsearch.Net
 			return response;
 		}
 
-		private static IDisposable EmptyDisposable = new MemoryStream();
-
 		private void SetBody(ElasticsearchResponse<TReturn> response, Stream stream)
 		{
 			byte[] bytes = null;
@@ -81,7 +81,7 @@ namespace Elasticsearch.Net
 					ServerError serverError;
 					if (ServerError.TryCreate(stream, out serverError))
 						response.ServerError = serverError;
-					if (this._requestData.ConnectionSettings.DisableDirectStreaming)
+					if (_disableDirectStreaming)
 						response.ResponseBodyInBytes = bytes;
 				}
 			}
@@ -111,7 +111,7 @@ namespace Elasticsearch.Net
 				else if (response.HttpStatusCode != null)
 				{
 					response.ServerError = await ServerError.TryCreateAsync(stream, this._requestData.CancellationToken).ConfigureAwait(false);
-					if (this._requestData.ConnectionSettings.DisableDirectStreaming)
+					if (_disableDirectStreaming)
 						response.ResponseBodyInBytes = bytes;
 				}
 			}
@@ -127,7 +127,7 @@ namespace Elasticsearch.Net
 		}
 
 		private bool NeedsToEagerReadStream() =>
-			this._requestData.ConnectionSettings.DisableDirectStreaming || typeof(TReturn) == typeof(string) || typeof(TReturn) == typeof(byte[]);
+			_disableDirectStreaming || typeof(TReturn) == typeof(string) || typeof(TReturn) == typeof(byte[]);
 
 		private byte[] SwapStreams(ref Stream responseStream, ref MemoryStream ms)
 		{
@@ -142,9 +142,9 @@ namespace Elasticsearch.Net
 		private bool SetSpecialTypes(Stream responseStream, ElasticsearchResponse<TReturn> cs, byte[] bytes)
 		{
 			var setSpecial = true;
-			if (this._requestData.ConnectionSettings.DisableDirectStreaming)
+			if (_disableDirectStreaming)
 				cs.ResponseBodyInBytes = bytes;
-			var returnType = typeof (TReturn);
+			var returnType = typeof(TReturn);
 			if (returnType == typeof(string))
 				this.SetStringResult(cs as ElasticsearchResponse<string>, bytes);
 			else if (returnType == typeof(byte[]))
@@ -164,12 +164,10 @@ namespace Elasticsearch.Net
 
 		private void SetStreamResult(ElasticsearchResponse<Stream> result, Stream response) => result.Body = response;
 
-		private static VoidResponse _void = new VoidResponse();
-
 		private void SetVoidResult(ElasticsearchResponse<VoidResponse> result, Stream response)
 		{
 			response.Dispose();
-			result.Body = _void;
+			result.Body = Void;
 		}
 	}
 }
