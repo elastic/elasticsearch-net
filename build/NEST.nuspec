@@ -17,11 +17,11 @@
 		<tags>elasticsearch,elastic,search,lucene,nest</tags>
 		<dependencies>
 			<group targetFramework=".NETFramework4.5">
-				<dependency id="Elasticsearch.Net" version="$version$" />
+				<dependency id="Elasticsearch.Net" version="[$version$, 3.0.0)" />
 				<dependency id="Newtonsoft.Json" version="[9,10)" />
 			</group>
 			<group targetFramework=".NETFramework4.6">
-				<dependency id="Elasticsearch.Net" version="$version$" />
+				<dependency id="Elasticsearch.Net" version="[$version$, 3.0.0)" />
 				<dependency id="Newtonsoft.Json" version="[9,10)" />
 			</group>
 			<group targetFramework=".NETStandard1.3">
@@ -29,7 +29,7 @@
 				<dependency id="System.Collections.Specialized" version="[4.0.1, )" />
 				<dependency id="System.Reflection.TypeExtensions" version="[4.1.0, )" />
 				<dependency id="System.Linq.Queryable" version="[4.0.1, )" />
-				<dependency id="Elasticsearch.Net" version="$version$" />
+				<dependency id="Elasticsearch.Net" version="[$version$, 3.0.0)" />
 				<dependency id="Newtonsoft.Json" version="[9,10)" />
 			</group>
 		</dependencies>
