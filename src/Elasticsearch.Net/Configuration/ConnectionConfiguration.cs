@@ -363,6 +363,25 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T EnableHttpPipelining(bool enabled = true) => Assign(a => a._enableHttpPipelining = enabled);
 
+		/// <summary>
+		/// Turns on settings that aid in debugging like DisableDirectStreaming() and PrettyJson()
+		/// and writes debug information to the output window.
+		/// </summary>
+		public T EnableDebugMode(Action<IApiCallDetails> onRequestCompleted = null)
+		{
+			this._disableDirectStreaming = true;
+			this._prettyJson = true;
+
+			var originalCompletedRequestHandler = this._completedRequestHandler;
+			this._completedRequestHandler = d =>
+			{
+				originalCompletedRequestHandler?.Invoke(d);
+				onRequestCompleted?.Invoke(d);
+				System.Diagnostics.Debug.WriteLine(d.DebugInformation);
+			};
+			return (T)this;
+		}
+
 		void IDisposable.Dispose() => this.DisposeManagedResources();
 
 		protected virtual void DisposeManagedResources()
