@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 
@@ -365,19 +366,25 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// Turns on settings that aid in debugging like DisableDirectStreaming() and PrettyJson()
-		/// and writes debug information to the output window.
+		/// so that the original request and response JSON can be inspected.
 		/// </summary>
+		/// <param name="onRequestCompleted">
+		/// An optional callback to be performed when the request completes. This will
+		/// not overwrite the global OnRequestCompleted callback that is set directly on
+		/// ConnectionSettings. If no callback is passed, DebugInformation from the response
+		/// will be written to the debug output by default.
+		/// </param>
 		public T EnableDebugMode(Action<IApiCallDetails> onRequestCompleted = null)
 		{
 			this._disableDirectStreaming = true;
 			this._prettyJson = true;
 
 			var originalCompletedRequestHandler = this._completedRequestHandler;
+			var debugCompletedRequestHandler = onRequestCompleted ?? (d => Debug.WriteLine(d.DebugInformation));
 			this._completedRequestHandler = d =>
 			{
 				originalCompletedRequestHandler?.Invoke(d);
-				onRequestCompleted?.Invoke(d);
-				System.Diagnostics.Debug.WriteLine(d.DebugInformation);
+				debugCompletedRequestHandler?.Invoke(d);
 			};
 			return (T)this;
 		}
