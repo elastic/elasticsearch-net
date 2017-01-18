@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 
@@ -362,6 +363,31 @@ namespace Elasticsearch.Net
 		/// <para>Note: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
 		/// </summary>
 		public T EnableHttpPipelining(bool enabled = true) => Assign(a => a._enableHttpPipelining = enabled);
+
+		/// <summary>
+		/// Turns on settings that aid in debugging like DisableDirectStreaming() and PrettyJson()
+		/// so that the original request and response JSON can be inspected.
+		/// </summary>
+		/// <param name="onRequestCompleted">
+		/// An optional callback to be performed when the request completes. This will
+		/// not overwrite the global OnRequestCompleted callback that is set directly on
+		/// ConnectionSettings. If no callback is passed, DebugInformation from the response
+		/// will be written to the debug output by default.
+		/// </param>
+		public T EnableDebugMode(Action<IApiCallDetails> onRequestCompleted = null)
+		{
+			this._disableDirectStreaming = true;
+			this._prettyJson = true;
+
+			var originalCompletedRequestHandler = this._completedRequestHandler;
+			var debugCompletedRequestHandler = onRequestCompleted ?? (d => Debug.WriteLine(d.DebugInformation));
+			this._completedRequestHandler = d =>
+			{
+				originalCompletedRequestHandler?.Invoke(d);
+				debugCompletedRequestHandler?.Invoke(d);
+			};
+			return (T)this;
+		}
 
 		void IDisposable.Dispose() => this.DisposeManagedResources();
 
