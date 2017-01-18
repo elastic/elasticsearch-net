@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -22,6 +23,7 @@ namespace Nest
 		bool? IncludeInAll { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class TokenCountProperty : DocValuesPropertyBase, ITokenCountProperty
 	{
 		public TokenCountProperty() : base("token_count") { }
@@ -37,6 +39,7 @@ namespace Nest
 		public bool? IncludeInAll { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class TokenCountPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<TokenCountPropertyDescriptor<T>, ITokenCountProperty, T>, ITokenCountProperty
 		where T : class

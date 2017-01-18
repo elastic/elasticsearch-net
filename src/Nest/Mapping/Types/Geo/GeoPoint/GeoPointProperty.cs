@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -10,6 +11,7 @@ namespace Nest
 		bool? IgnoreMalformed { get; set;  }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class GeoPointProperty : DocValuesPropertyBase, IGeoPointProperty
 	{
 		public GeoPointProperty() : base("geo_point") { }
@@ -17,6 +19,7 @@ namespace Nest
 		public bool? IgnoreMalformed { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class GeoPointPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<GeoPointPropertyDescriptor<T>, IGeoPointProperty, T>, IGeoPointProperty
 		where T : class

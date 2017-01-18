@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Diagnostics;
 using Elasticsearch.Net;
 
 namespace Nest
 {
 	[ContractJsonConverter(typeof(TypeNameJsonConverter))]
+	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class TypeName : IEquatable<TypeName> , IUrlParameter
 	{
 		public string Name { get; set; }
 		public Type Type { get; set; }
+
+		internal string DebugDisplay => Type == null ? Name : $"{nameof(TypeName)} for typeof: {Type?.Name}";
 
 		public static TypeName Create(Type type)
 		{

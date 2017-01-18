@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -19,6 +20,7 @@ namespace Nest
 		INumericFielddata Fielddata { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class BooleanProperty : DocValuesPropertyBase, IBooleanProperty
 	{
 		public BooleanProperty() : base("boolean") { }
@@ -29,6 +31,7 @@ namespace Nest
 		public INumericFielddata Fielddata { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class BooleanPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<BooleanPropertyDescriptor<T>, IBooleanProperty, T>, IBooleanProperty
 		where T : class

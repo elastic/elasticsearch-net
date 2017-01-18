@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -9,6 +10,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[ContractJsonConverter(typeof(FieldsJsonConverter))]
+	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Fields : IUrlParameter, IEnumerable<Field>
 	{
 		internal readonly List<Field> ListOfFields;
@@ -16,12 +18,17 @@ namespace Nest
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings) =>
 			string.Join(",", ListOfFields.Select(f => ((IUrlParameter)f).GetString(settings)));
 
+		private string DebugDisplay =>
+			$"Count: {ListOfFields.Count} [" + string.Join(",", ListOfFields.Select((t, i) => $"({i + 1}: {t.DebugDisplay})")) + "]";
+
+
 		internal Fields() { this.ListOfFields = new List<Field>(); }
 		internal Fields(IEnumerable<Field> fieldNames) { this.ListOfFields = fieldNames.ToList(); }
 
 		public static implicit operator Fields(string[] fields) => new Fields(fields.Select(f => (Field)f));
 
-		public static implicit operator Fields(string field) => new Fields(new[] { (Field)field });
+		public static implicit operator Fields(string field) =>
+			new Fields(field.Split(new [] {','}, StringSplitOptions.RemoveEmptyEntries).Select(f=>(Field)f));
 
 		public static implicit operator Fields(Expression[] fields) => new Fields(fields.Select(f => (Field)f));
 

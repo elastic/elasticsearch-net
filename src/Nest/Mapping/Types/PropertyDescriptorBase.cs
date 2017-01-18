@@ -14,6 +14,8 @@ namespace Nest
 		TypeName IProperty.Type { get; set; }
 		IDictionary<string, object> IProperty.LocalMetadata { get; set; }
 
+		protected string DebugDisplay => $"Type: {Self.Type.DebugDisplay}, Name: {Self.Name.DebugDisplay} ";
+
 		protected PropertyDescriptorBase(string type) { Self.Type = type; }
 
 		public TDescriptor Name(PropertyName name) => Assign(a => a.Name = name);

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -32,6 +33,7 @@ namespace Nest
 		bool? PointsOnly { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class GeoShapeProperty : DocValuesPropertyBase, IGeoShapeProperty
 	{
 		public GeoShapeProperty() : base("geo_shape") { }
@@ -51,6 +53,7 @@ namespace Nest
 		public bool? PointsOnly { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class GeoShapePropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<GeoShapePropertyDescriptor<T>, IGeoShapeProperty, T>, IGeoShapeProperty
 		where T : class

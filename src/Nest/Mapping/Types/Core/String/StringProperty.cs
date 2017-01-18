@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -45,6 +46,7 @@ namespace Nest
 	}
 
 	[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use `text` or `keyword` instead.")]
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class StringProperty : DocValuesPropertyBase, IStringProperty
 	{
 		public StringProperty() : base("string") { }
@@ -64,6 +66,7 @@ namespace Nest
 	}
 
 	[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use `text` or `keyword` instead.")]
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class StringPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<StringPropertyDescriptor<T>, IStringProperty, T>, IStringProperty
 		where T : class

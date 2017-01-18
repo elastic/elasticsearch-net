@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
@@ -32,6 +33,7 @@ namespace Nest
 		double? ScalingFactor { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class NumberProperty : DocValuesPropertyBase, INumberProperty
 	{
 		public NumberProperty() : base(NumberType.Float.GetStringValue()) { }
@@ -48,6 +50,7 @@ namespace Nest
 		public double? ScalingFactor { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public abstract class NumberPropertyDescriptorBase<TDescriptor, TInterface, T>
 		: DocValuesPropertyDescriptorBase<TDescriptor, TInterface, T>, INumberProperty
 		where TDescriptor : NumberPropertyDescriptorBase<TDescriptor, TInterface, T>, TInterface

@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -28,6 +29,7 @@ namespace Nest
 		INumericFielddata Fielddata { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class DateProperty : DocValuesPropertyBase, IDateProperty
 	{
 		public DateProperty() : base("date") { }
@@ -42,6 +44,7 @@ namespace Nest
 		public INumericFielddata Fielddata { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class DatePropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<DatePropertyDescriptor<T>, IDateProperty, T>, IDateProperty
 		where T : class

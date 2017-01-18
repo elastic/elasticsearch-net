@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Nest
@@ -28,6 +29,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class CompletionProperty : DocValuesPropertyBase, ICompletionProperty
 	{
 		public CompletionProperty() : base("completion") { }
@@ -40,6 +42,7 @@ namespace Nest
 		public IList<ISuggestContext> Contexts { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class CompletionPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<CompletionPropertyDescriptor<T>, ICompletionProperty, T>, ICompletionProperty
 		where T : class

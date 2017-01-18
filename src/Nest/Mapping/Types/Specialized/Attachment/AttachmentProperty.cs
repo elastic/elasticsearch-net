@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -18,6 +19,7 @@ namespace Nest
 		ITextProperty LanguageField { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class AttachmentProperty : DocValuesPropertyBase, IAttachmentProperty
 	{
 		public AttachmentProperty() : base("attachment") { }
@@ -79,6 +81,7 @@ namespace Nest
 		}
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class AttachmentPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<AttachmentPropertyDescriptor<T>, IAttachmentProperty, T>, IAttachmentProperty
 		where T : class

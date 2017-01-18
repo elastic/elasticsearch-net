@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -20,6 +21,7 @@ namespace Nest
 		Fields CopyTo { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public abstract class CorePropertyBase : PropertyBase, ICoreProperty
 	{
 		protected CorePropertyBase(TypeName typeName) : base(typeName)

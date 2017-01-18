@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -20,6 +21,7 @@ namespace Nest
 		IProperties Properties { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class ObjectProperty : CorePropertyBase, IObjectProperty
 	{
 		public ObjectProperty() : base("object") { }
@@ -32,6 +34,7 @@ namespace Nest
 		public IProperties Properties { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class ObjectTypeDescriptor<TParent, TChild>
 		: ObjectPropertyDescriptorBase<ObjectTypeDescriptor<TParent, TChild>, IObjectProperty, TParent, TChild>, IObjectProperty
 		where TParent : class
@@ -39,6 +42,7 @@ namespace Nest
 	{
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public abstract class ObjectPropertyDescriptorBase<TDescriptor, TInterface, TParent, TChild>
 		: CorePropertyDescriptorBase<TDescriptor, TInterface, TParent>, IObjectProperty
 		where TDescriptor : ObjectPropertyDescriptorBase<TDescriptor, TInterface, TParent, TChild>, TInterface
