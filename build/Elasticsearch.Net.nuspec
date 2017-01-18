@@ -13,7 +13,7 @@
 		<description>Elasticsearch.Net</description>
 		<summary>Exposes all the elasticsearch API endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.</summary>
 		<releaseNotes>See https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
-		<copyright>2014-2016 Elasticsearch BV</copyright>
+		<copyright>2014-$year$ Elasticsearch BV</copyright>
 		<tags>elasticsearch,elastic,search,lucene,nest</tags>
 		<dependencies>
 			<group targetFramework=".NETFramework4.5" />
