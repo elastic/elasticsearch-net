@@ -2,6 +2,7 @@
 using Nest;
 using System;
 using Tests.Framework;
+using Tests.Framework.MockData;
 
 namespace Tests.ClientConcepts.LowLevel
 {
@@ -107,6 +108,30 @@ namespace Tests.ClientConcepts.LowLevel
 			assert(response);
 			response = client.SearchAsync<object>(s => s.RequestConfiguration(r => r.DisableDirectStreaming(false))).Result;
 			assert(response);
+		}
+
+		[U]
+		public void DebugModeRespectsOriginalOnRequestCompleted()
+		{
+			var global = 0;
+			var local = 0;
+			var client = TestClient.GetFixedReturnClient(new { }, 200, s => s
+				.EnableDebugMode(d => local++)
+				.OnRequestCompleted(d => global++)
+			);
+
+			var response = client.Search<Project>(s => s
+				.From(10)
+				.Size(20)
+				.Query(q => q
+					.Match(m => m
+						.Field(p => p.Name)
+						.Query("elastic")
+					)
+				)
+			);
+			global.Should().Be(1);
+			local.Should().Be(1);
 		}
 	}
 }
