@@ -45,8 +45,6 @@ namespace Nest
 
 		QueryContainer ICountRequest.Query { get; set; }
 
-		QueryContainer ICountRequest.Query { get; set; } = new MatchAllQuery();
-
 		public CountDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
 			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
