@@ -106,20 +106,17 @@ namespace Tests.CodeStandards
 				typeof(IndexExistsRequest),
 				typeof(TypeExistsRequest),
 				typeof(IndexTemplateExistsRequest),
-				typeof(SearchExistsRequest),
-				typeof(SearchExistsRequest<>),
 				typeof(SearchTemplateRequest),
 				typeof(SearchTemplateRequest<>),
+				typeof(SearchExistsRequest),
+				typeof(SearchExistsRequest<>),
 				typeof(ScrollRequest),
 				typeof(SourceRequest),
 				typeof(SourceRequest<>),
 				typeof(ValidateQueryRequest<>),
 				typeof(GetAliasRequest),
-#pragma warning disable 612, 618
-				typeof(CatNodeattrsRequest),
-#pragma warning restore 612, 618
 				typeof(IndicesShardStoresRequest),
-				typeof(RenderSearchTemplateRequest)
+				typeof(RenderSearchTemplateRequest),
 			};
 
 			var types = typeof(IRequest).Assembly().GetTypes();

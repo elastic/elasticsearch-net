@@ -22,7 +22,7 @@ namespace Nest
 
 			var attributes = type.GetTypeInfo().GetCustomAttributes(typeof(ElasticsearchTypeAttribute), true);
 			if (attributes.HasAny())
-				attr = ((ElasticsearchTypeAttribute)attributes.First());
+				attr = (ElasticsearchTypeAttribute)attributes.First();
 			CachedTypeLookups.TryAdd(type, attr);
 			return attr;
 		}

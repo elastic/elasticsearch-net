@@ -447,6 +447,7 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\ContractJsonConverterAttribute.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\ElasticContractResolver.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\CompositeJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\DocumentJsonConverterBase.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\EpochSecondsDateTimeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\EnumMemberValueCasingJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\FromJson.cs" />
@@ -575,6 +576,10 @@
     <Compile Include="Document\Multiple\Reindex\ReindexObserver.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexRequest.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexResponse.cs" />
+    <Compile Include="Document\Single\Create\CreateJsonConverter.cs" />
+    <Compile Include="Document\Single\Create\CreateRequest.cs" />
+    <Compile Include="Document\Single\Create\CreateResponse.cs" />
+    <Compile Include="Document\Single\Create\ElasticClient-Create.cs" />
     <Compile Include="Document\Single\Delete\DeleteRequest.cs" />
     <Compile Include="Document\Single\Delete\DeleteResponse.cs" />
     <Compile Include="Document\Single\Delete\ElasticClient-Delete.cs" />
@@ -584,8 +589,8 @@
     <Compile Include="Document\Single\Get\GetRequest.cs" />
     <Compile Include="Document\Single\Get\GetResponse.cs" />
     <Compile Include="Document\Single\Index\ElasticClient-Index.cs" />
+    <Compile Include="Document\Single\Index\IndexJsonConverter.cs" />
     <Compile Include="Document\Single\Index\IndexRequest.cs" />
-    <Compile Include="Document\Single\Index\IndexRequestJsonConverter.cs" />
     <Compile Include="Document\Single\Index\IndexResponse.cs" />
     <Compile Include="Document\Single\Source\ElasticClient-Source.cs" />
     <Compile Include="Document\Single\Source\SourceRequest.cs" />

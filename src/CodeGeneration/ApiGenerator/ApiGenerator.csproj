@@ -117,6 +117,7 @@
     <None Include="RestSpecification\Core\cluster.stats.json" />
     <None Include="RestSpecification\Core\count.json" />
     <None Include="RestSpecification\Core\count_percolate.json" />
+    <None Include="RestSpecification\Core\create.json" />
     <None Include="RestSpecification\Core\delete.json" />
     <None Include="RestSpecification\Core\delete_script.json" />
     <None Include="RestSpecification\Core\delete_template.json" />
