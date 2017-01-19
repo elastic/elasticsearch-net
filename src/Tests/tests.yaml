@@ -1,5 +1,5 @@
 ﻿# mode either u (unit test), i (integration test) or m (mixed mode)
-mode: m
+mode: u
 # the elasticsearch version that should be started
 elasticsearch_version: 2.4.2
 # cluster filter allows you to only run the integration tests of a particular cluster (cluster suffix not needed)
