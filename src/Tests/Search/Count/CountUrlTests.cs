@@ -11,7 +11,7 @@ namespace Tests.Search.Count
 		[U] public async Task Urls()
 		{
 			var hardcoded = "hardcoded";
-			await POST("/project/commits/_count")
+			await GET("/project/commits/_count")
 				.Fluent(c=>c.Count<CommitActivity>())
 				.Request(c=>c.Count<Project>(new CountRequest<CommitActivity>()))
 				.FluentAsync(c=>c.CountAsync<CommitActivity>())
@@ -24,14 +24,14 @@ namespace Tests.Search.Count
 				.FluentAsync(c=>c.CountAsync<CommitActivity>(s=>s.QueryOnQueryString("querystring")))
 				.RequestAsync(c=>c.CountAsync<Project>(new CountRequest<CommitActivity>() { QueryOnQueryString = "querystring" }))
 				;
-			await POST("/project/hardcoded/_count")
+			await GET("/project/hardcoded/_count")
 				.Fluent(c=>c.Count<CommitActivity>(s=>s.Type(hardcoded)))
 				.Request(c=>c.Count<Project>(new CountRequest<CommitActivity>(typeof(Project), hardcoded)))
 				.FluentAsync(c=>c.CountAsync<CommitActivity>(s=>s.Type(hardcoded)))
 				.RequestAsync(c=>c.CountAsync<Project>(new CountRequest<CommitActivity>(typeof(Project), hardcoded)))
 				;
 
-			await POST("/project/_count")
+			await GET("/project/_count")
 				.Fluent(c=>c.Count<Project>(s=>s.Type(Types.All)))
 				.Fluent(c=>c.Count<Project>(s=>s.AllTypes()))
 				.Request(c=>c.Count<Project>(new CountRequest("project")))
@@ -41,7 +41,7 @@ namespace Tests.Search.Count
 				.FluentAsync(c=>c.CountAsync<Project>(s=>s.AllTypes()))
 				;
 
-			await POST("/hardcoded/_count")
+			await GET("/hardcoded/_count")
 				.Fluent(c=>c.Count<Project>(s=>s.Index(hardcoded).Type(Types.All)))
 				.Fluent(c=>c.Count<Project>(s=>s.Index(hardcoded).AllTypes()))
 				.Request(c=>c.Count<Project>(new CountRequest(hardcoded)))
@@ -51,13 +51,22 @@ namespace Tests.Search.Count
 				.FluentAsync(c=>c.CountAsync<Project>(s=>s.Index(hardcoded).AllTypes()))
 				;
 
-			await POST("/_count")
+			await GET("/_count")
 				.Fluent(c=>c.Count<Project>(s=>s.AllTypes().AllIndices()))
 				.Request(c=>c.Count<Project>(new CountRequest()))
 				.Request(c=>c.Count<Project>(new CountRequest<Project>(Nest.Indices.All, Types.All)))
 				.FluentAsync(c=>c.CountAsync<Project>(s=>s.AllIndices().Type(Types.All)))
 				.RequestAsync(c=>c.CountAsync<Project>(new CountRequest<Project>(Nest.Indices.All, Types.All)))
 				.RequestAsync(c=>c.CountAsync<Project>(new CountRequest()))
+				;
+
+			await POST("/_count")
+				.Fluent(c=>c.Count<Project>(s=>s.AllTypes().AllIndices().Query(q=>q.MatchAll())))
+				.Request(c=>c.Count<Project>(new CountRequest() { Query = new MatchAllQuery() }))
+				.Request(c=>c.Count<Project>(new CountRequest<Project>(Nest.Indices.All, Types.All) { Query = new MatchAllQuery() }))
+				.FluentAsync(c=>c.CountAsync<Project>(s=>s.AllIndices().Type(Types.All).Query(q=>q.MatchAll())))
+				.RequestAsync(c=>c.CountAsync<Project>(new CountRequest<Project>(Nest.Indices.All, Types.All) { Query = new MatchAllQuery() }))
+				.RequestAsync(c=>c.CountAsync<Project>(new CountRequest() { Query = new MatchAllQuery() }))
 				;
 		}
 	}

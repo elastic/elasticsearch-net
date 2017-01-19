@@ -20,16 +20,18 @@ namespace Nest
 	{
 		private CountRequestParameters QueryString => ((IRequest<CountRequestParameters>)this).RequestParameters;
 		protected override HttpMethod HttpMethod =>
-			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") ? HttpMethod.GET : HttpMethod.POST;
+			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") || this.Query == null || this.Query.IsConditionless()
+				? HttpMethod.GET : HttpMethod.POST;
 
 		public QueryContainer Query { get; set; } = new MatchAllQuery();
+
 	}
 
 	public partial class CountRequest<T>
 	{
-		private CountRequestParameters QueryString => ((IRequest<CountRequestParameters>)this).RequestParameters;
 		protected override HttpMethod HttpMethod =>
-			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") ? HttpMethod.GET : HttpMethod.POST;
+			Self.RequestParameters.ContainsKey("_source") || Self.RequestParameters.ContainsKey("q") || Self.Query == null || Self.Query.IsConditionless()
+				? HttpMethod.GET : HttpMethod.POST;
 
 		public QueryContainer Query { get; set; } = new MatchAllQuery();
 	}
@@ -37,9 +39,11 @@ namespace Nest
 	[DescriptorFor("Count")]
 	public partial class CountDescriptor<T> where T : class
 	{
-		private CountRequestParameters QueryString => ((IRequest<CountRequestParameters>)this).RequestParameters;
 		protected override HttpMethod HttpMethod =>
-			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") ? HttpMethod.GET : HttpMethod.POST;
+			Self.RequestParameters.ContainsKey("_source") || Self.RequestParameters.ContainsKey("q") || Self.Query == null || Self.Query.IsConditionless()
+				? HttpMethod.GET : HttpMethod.POST;
+
+		QueryContainer ICountRequest.Query { get; set; }
 
 		QueryContainer ICountRequest.Query { get; set; } = new MatchAllQuery();
 

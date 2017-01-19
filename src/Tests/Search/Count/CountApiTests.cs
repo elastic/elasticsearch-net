@@ -25,8 +25,6 @@ namespace Tests.Search.Count
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => "/project/project/_count";
 
-		private Project _project = new Project { Name = "NEST" };
-
 		protected override object ExpectJson => new
 		{
 			query = new
