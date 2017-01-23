@@ -25,7 +25,6 @@ namespace Nest
 			var o = serializer.Deserialize(jsonObject.CreateReader(), genericType);
 			var suggestType = typeof(Suggest<>).MakeGenericType(genericType).MakeArrayType();
 
-
 			var dict = new Dictionary<string, object>();
 
 			foreach (var prop in jsonObject.Properties())
@@ -36,6 +35,5 @@ namespace Nest
 			var r = typeof(SuggestResponse<>).CreateGenericInstance(genericType, shards, dict);
 			return r;
 		}
-
 	}
 }

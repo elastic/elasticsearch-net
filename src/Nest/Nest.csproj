@@ -1261,6 +1261,11 @@
     <Compile Include="Search\Suggesters\PhraseSuggester\PhraseSuggestCollate.cs" />
     <Compile Include="Search\Suggesters\PhraseSuggester\PhraseSuggester.cs" />
     <Compile Include="Search\Suggesters\PhraseSuggester\PhraseSuggestHighlight.cs" />
+    <Compile Include="Search\Suggesters\PhraseSuggester\SmoothingModel\ LinearInterpolationSmoothingModel.cs" />
+    <Compile Include="Search\Suggesters\PhraseSuggester\SmoothingModel\LaplaceSmoothingModel.cs" />
+    <Compile Include="Search\Suggesters\PhraseSuggester\SmoothingModel\StupidBackoffSmoothingModel.cs" />
+    <Compile Include="Search\Suggesters\PhraseSuggester\SmoothingModel\SmoothingModelContainer.cs" />
+    <Compile Include="Search\Suggesters\PhraseSuggester\SmoothingModel\SmoothingModelBase.cs" />
     <Compile Include="Search\Suggesters\Suggest.cs" />
     <Compile Include="Search\Suggesters\SuggestBucket.cs" />
     <Compile Include="Search\Suggesters\SuggestContainer.cs" />
