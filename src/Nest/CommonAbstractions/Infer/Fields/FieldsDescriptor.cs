@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public class FieldsDescriptor<T> : DescriptorPromiseBase<FieldsDescriptor<T>, Fields> 
+	public class FieldsDescriptor<T> : DescriptorPromiseBase<FieldsDescriptor<T>, Fields>
 		where T : class
 	{
 		public FieldsDescriptor() : base(new Fields()) { }
@@ -15,5 +15,6 @@ namespace Nest
 
 		public FieldsDescriptor<T> Field(Expression<Func<T, object>> field, double? boost = null) => Assign(f => f.And(field, boost));
 		public FieldsDescriptor<T> Field(string field, double? boost = null) => Assign(f => f.And(field, boost));
+		public FieldsDescriptor<T> Field(Field field) => Assign(f => f.And(field));
 	}
 }
