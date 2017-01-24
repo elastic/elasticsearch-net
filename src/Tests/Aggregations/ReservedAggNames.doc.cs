@@ -25,8 +25,8 @@ namespace Tests.Aggregations
 
 		private TermsAggregation Terms(string name) => new TermsAggregation(name) {Field = "x"};
 
-		[U]
-		public void ReservedKeyWordsThrow()
+		//hide
+		[U] public void ReservedKeyWordsThrow()
 		{
 			foreach (var key in _reserved)
 			{
@@ -41,35 +41,40 @@ namespace Tests.Aggregations
 			}
 		}
 
+		//hide
 		[U] public void NonReservedKeywordsDoNotThrow()
 		{
-			foreach (var key in _reserved.Select(r=>r + "1"))
+			foreach (var key in _reserved.Select(r => r + "1"))
 			{
-                DoesNotThrowOn(key, this.SearchFluent, nameof(SearchFluent));
-                DoesNotThrowOn(key, this.SearchInitializer, nameof(SearchInitializer));
-                DoesNotThrowOn(key, this.DictionaryAddInitializer, nameof(DictionaryAddInitializer));
-                DoesNotThrowOn(key, this.DictionaryConstructor, nameof(DictionaryConstructor));
-                DoesNotThrowOn(key, this.DictionaryImplict, nameof(DictionaryImplict));
+				DoesNotThrowOn(key, this.SearchFluent, nameof(SearchFluent));
+				DoesNotThrowOn(key, this.SearchInitializer, nameof(SearchInitializer));
+				DoesNotThrowOn(key, this.DictionaryAddInitializer, nameof(DictionaryAddInitializer));
+				DoesNotThrowOn(key, this.DictionaryConstructor, nameof(DictionaryConstructor));
+				DoesNotThrowOn(key, this.DictionaryImplict, nameof(DictionaryImplict));
 
 				//Container themselves do not throw just their assignment to AggregationDictionary
-            	DoesNotThrowOn(key, this.ContainerImplicitConvert, nameof(ContainerImplicitConvert));
+				DoesNotThrowOn(key, this.ContainerImplicitConvert, nameof(ContainerImplicitConvert));
 			}
 		}
 
+		//hide
 		private void SearchFluent(string name) =>
 			this.Client.Search<Project>(s => s.Aggregations(aggs => aggs.Terms(name, t => t.Field("x"))));
 
+		//hide
 		private void SearchInitializer(string name) =>
 			this.Client.Search<Project>(new SearchRequest<Project>
 			{
 				Aggregations = Terms(name)
 			});
 
+		//hide
 		private void DictionaryAddInitializer(string name) => new AggregationDictionary()
-			{
-				{name, Terms(name)}
-			};
+		{
+			{name, Terms(name)}
+		};
 
+		//hide
 		private void DictionaryConstructor(string name)
 		{
 			var vanilla = new Dictionary<string, AggregationContainer>()
@@ -79,6 +84,7 @@ namespace Tests.Aggregations
 			var dictionary = new AggregationDictionary(vanilla);
 		}
 
+		//hide
 		private void DictionaryImplict(string name)
 		{
 			AggregationDictionary vanilla = new Dictionary<string, AggregationContainer>()
@@ -87,21 +93,24 @@ namespace Tests.Aggregations
 			};
 		}
 
+		//hide
 		private void ContainerImplicitConvert(string name)
 		{
 			AggregationContainer x = Terms(name);
 		}
 
-
+		//hide
 		private void DoesNotThrowOn(string name, Action<string> act, string origin) =>
 			act.Invoking(s => s(name)).ShouldNotThrow<ArgumentException>(origin);
 
+		//hide
 		private void ThrowsOn(string name, Action<string> act, string origin)
 		{
 			var e = act.Invoking(s => s(name)).ShouldThrow<ArgumentException>(origin).Subject.First();
 			AssertArgumentException(name, e);
 		}
 
+		//hide
 		private void AssertArgumentException(string name, ArgumentException e)
 		{
 			e.Should().NotBeNull();
