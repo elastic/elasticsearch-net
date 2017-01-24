@@ -1,0 +1,89 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Aggregations/ReservedAggNames.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[reserved-aggregation-names]]
+== Reserved Aggregation Names
+
+NEST uses a heuristics based parser to parse the aggregations back in to typed responses
+Therefor some of the key properties we use to make a decision on are not allowed as key names
+
+Elasticsearch 5.x will at some point get a flag that returns the aggregations in a parsable
+fashion at which point this limitation will be lifted
+
+[source,csharp]
+----
+foreach (var key in _reserved)
+{
+    ThrowsOn(key, this.SearchFluent, nameof(SearchFluent));
+    ThrowsOn(key, this.SearchInitializer, nameof(SearchInitializer));
+    ThrowsOn(key, this.DictionaryAddInitializer, nameof(DictionaryAddInitializer));
+    ThrowsOn(key, this.DictionaryConstructor, nameof(DictionaryConstructor));
+    ThrowsOn(key, this.DictionaryImplict, nameof(DictionaryImplict));
+
+    //Container themselves do not throw just their assignment to AggregationDictionary
+    DoesNotThrowOn(key, this.ContainerImplicitConvert, nameof(ContainerImplicitConvert));
+}
+----
+
+[source,csharp]
+----
+foreach (var key in _reserved.Select(r=>r + "1"))
+{
+    DoesNotThrowOn(key, this.SearchFluent, nameof(SearchFluent));
+    DoesNotThrowOn(key, this.SearchInitializer, nameof(SearchInitializer));
+    DoesNotThrowOn(key, this.DictionaryAddInitializer, nameof(DictionaryAddInitializer));
+    DoesNotThrowOn(key, this.DictionaryConstructor, nameof(DictionaryConstructor));
+    DoesNotThrowOn(key, this.DictionaryImplict, nameof(DictionaryImplict));
+
+    //Container themselves do not throw just their assignment to AggregationDictionary
+    DoesNotThrowOn(key, this.ContainerImplicitConvert, nameof(ContainerImplicitConvert));
+}
+----
+
+[source,csharp]
+----
+AggregationDictionary vanilla = new Dictionary<string, AggregationContainer>()
+{
+    {name, Terms(name)}
+};
+----
+
+[source,csharp]
+----
+AggregationContainer x = Terms(name);
+----
+
+[source,csharp]
+----
+var e = act.Invoking(s => s(name)).ShouldThrow<ArgumentException>(origin).Subject.First();
+
+AssertArgumentException(name, e);
+----
+
+[source,csharp]
+----
+e.Should().NotBeNull();
+
+e.Message.Should().StartWith($"'{name}' is one of the reserved");
+----
+
+[source,csharp]
+----
+var vanilla = new Dictionary<string, AggregationContainer>()
+{
+    {name, Terms(name)}
+};
+var dictionary = new AggregationDictionary(vanilla);
+----
+

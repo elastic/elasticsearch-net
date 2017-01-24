@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace Nest
 {
@@ -13,6 +14,9 @@ namespace Nest
 
 		protected IsADictionaryBase(IDictionary<TKey, TValue> backingDictionary)
 		{
+			if (backingDictionary != null)
+				foreach (var key in backingDictionary.Keys) ValidateKey(key);
+
 			this.BackingDictionary = backingDictionary != null
 				? new Dictionary<TKey, TValue>(backingDictionary)
 				: new Dictionary<TKey, TValue>();
@@ -29,27 +33,33 @@ namespace Nest
 		int ICollection<KeyValuePair<TKey, TValue>>.Count => this.BackingDictionary.Count;
 		bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly => Self.IsReadOnly;
 		bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item) => Self.Remove(item);
-		void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item)=> Self.Add(item);
+		void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item)
+		{
+			ValidateKey(item.Key);
+			Self.Add(item);
+		}
 
 		ICollection<TKey> IDictionary<TKey, TValue>.Keys => this.BackingDictionary.Keys;
 		ICollection<TValue> IDictionary<TKey, TValue>.Values => this.BackingDictionary.Values;
 
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		bool IDictionary<TKey, TValue>.ContainsKey(TKey key) => this.BackingDictionary.ContainsKey(key);
-		void IDictionary<TKey, TValue>.Add(TKey key, TValue value) => this.BackingDictionary.Add(key, value);
+		void IDictionary<TKey, TValue>.Add(TKey key, TValue value) => this.BackingDictionary.Add(ValidateKey(key), value);
 		bool IDictionary<TKey, TValue>.Remove(TKey key) => this.BackingDictionary.Remove(key);
 		bool IDictionary<TKey, TValue>.TryGetValue(TKey key, out TValue value) => this.BackingDictionary.TryGetValue(key, out value);
+
+		public virtual TKey ValidateKey(TKey key) => key;
 
 		TValue IDictionary<TKey, TValue>.this[TKey key]
 		{
 			get { return this.BackingDictionary[key]; }
-			set { this.BackingDictionary[key] = value; }
+			set { this.BackingDictionary[ValidateKey(key)] = value; }
 		}
 
 		public TValue this[TKey key]
 		{
 			get { return this.BackingDictionary[key]; }
-			set { this.BackingDictionary[key] = value; }
+			set { this.BackingDictionary[ValidateKey(key)] = value; }
 		}
 	}
 }

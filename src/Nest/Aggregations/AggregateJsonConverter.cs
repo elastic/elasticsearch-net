@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -21,6 +22,71 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			throw new NotSupportedException();
+		}
+
+		private static class Parser
+		{
+			public const string Values = "values";
+			public const string Value = "value";
+			public const string Buckets = "buckets";
+			public const string DocCountErrorUpperBound = "doc_count_error_upper_bound";
+			public const string Count = "count";
+			public const string DocCount = "doc_count";
+			public const string Bounds = "bounds";
+			public const string Hits = "hits";
+			public const string Location = "location";
+			public const string Fields = "fields";
+
+			public const string Key = "key";
+			public const string From = "from";
+			public const string To = "to";
+			public const string KeyAsString = "key_as_string";
+
+			public const string Total = "total";
+			public const string MaxScore = "max_score";
+
+			public const string TopLeft = "top_left";
+			public const string BottomRight = "bottom_right";
+
+			public const string AsStringSuffix = "_as_string";
+
+			public const string Upper = "upper";
+			public const string Lower = "lower";
+			public const string StdDeviationBoundsAsString = "std_deviation_bounds_as_string";
+
+			public const string SumOtherDocCount = "sum_other_doc_count";
+
+			public const string ValueAsString = "value_as_string";
+			public const string Keys = "keys";
+
+			public const string FromAsString = "from_as_string";
+			public const string ToAsString = "to_as_string";
+
+			public const string Score = "score";
+		}
+
+		public static string[] AllReservedAggregationNames { get; private set; }
+		public static string UsingReservedAggNameFormat { get; private set; }
+
+		static AggregateJsonConverter()
+		{
+			AllReservedAggregationNames = typeof(Parser)
+				.GetFields(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)
+				.Where(f=>f.IsLiteral && !f.IsInitOnly)
+#if DOTNETCORE
+				.Select(f => (string)f.GetValue(null))
+#else
+				.Select(f => (string)f.GetRawConstantValue())
+#endif
+				.ToArray();
+
+			var allKeys = string.Join(", ", AllReservedAggregationNames);
+			UsingReservedAggNameFormat =
+				"'{0}' is one of the reserved aggregation keywords"
+			    + " we use a heuristics based response parser and using these reserved keywords"
+			    + " could throw its heuritics of course. We are working on a solution in elasticsearch itself to make"
+			    + " the response parsable. For now these are all the reserved keywords: "
+				+ allKeys;
 		}
 
 		private IAggregate ReadAggregate(JsonReader reader, JsonSerializer serializer)
@@ -51,34 +117,34 @@ namespace Nest
 			propertyName = (string)reader.Value;
 			switch (propertyName)
 			{
-				case "values":
+				case Parser.Values:
 					reader.Read();
 					reader.Read();
 					aggregate = GetPercentilesAggregate(reader, serializer);
 					break;
-				case "value":
+				case Parser.Value:
 					aggregate = GetValueAggregate(reader, serializer);
 					break;
-				case "buckets":
-				case "doc_count_error_upper_bound":
+				case Parser.Buckets:
+				case Parser.DocCountErrorUpperBound:
 					aggregate = GetMultiBucketAggregate(reader, serializer);
 					break;
-				case "count":
+				case Parser.Count:
 					aggregate = GetStatsAggregate(reader, serializer);
 					break;
-				case "doc_count":
+				case Parser.DocCount:
 					aggregate = GetSingleBucketAggregate(reader, serializer);
 					break;
-				case "bounds":
+				case Parser.Bounds:
 					aggregate = GetGeoBoundsAggregate(reader, serializer);
 					break;
-				case "hits":
+				case Parser.Hits:
 					aggregate = GetTopHitsAggregate(reader, serializer);
 					break;
-				case "location":
+				case Parser.Location:
 					aggregate = GetGeoCentroidAggregate(reader, serializer);
 					break;
-				case "fields":
+				case Parser.Fields:
 					aggregate = GetMatrixStatsAggregate(reader, serializer);
 					break;
 				default:
@@ -101,17 +167,17 @@ namespace Nest
 			var property = (string)reader.Value;
 			switch (property)
 			{
-				case "key":
+				case Parser.Key:
 					item = GetKeyedBucket(reader, serializer);
 					break;
-				case "from":
-				case "to":
+				case Parser.From:
+				case Parser.To:
 					item = GetRangeBucket(reader, serializer);
 					break;
-				case "key_as_string":
+				case Parser.KeyAsString:
 					item = GetDateHistogramBucket(reader, serializer);
 					break;
-				case "doc_count":
+				case Parser.DocCount:
 					item = GetFiltersBucket(reader, serializer);
 					break;
 				default:
@@ -153,9 +219,9 @@ namespace Nest
 			if (o == null)
 				return null;
 
-			var total = o["total"].ToObject<long>();
-			var maxScore = o["max_score"].ToObject<double?>();
-			var hits = o["hits"].Children().OfType<JObject>();
+			var total = o[Parser.Total].ToObject<long>();
+			var maxScore = o[Parser.MaxScore].ToObject<double?>();
+			var hits = o[Parser.Hits].Children().OfType<JObject>();
 			reader.Read();
 			return new TopHitsAggregate(hits, serializer) { Total = total, MaxScore = maxScore };
 		}
@@ -176,7 +242,7 @@ namespace Nest
 				return null;
 			var geoBoundsMetric = new GeoBoundsAggregate();
 			JToken topLeftToken;
-			if (o.TryGetValue("top_left", out topLeftToken) && topLeftToken != null)
+			if (o.TryGetValue(Parser.TopLeft, out topLeftToken) && topLeftToken != null)
 			{
 				var topLeft = topLeftToken.ToObject<LatLon>();
 				if (topLeft != null)
@@ -184,7 +250,7 @@ namespace Nest
 			}
 
 			JToken bottomRightToken;
-			if (o.TryGetValue("bottom_right", out bottomRightToken) && bottomRightToken != null)
+			if (o.TryGetValue(Parser.BottomRight, out bottomRightToken) && bottomRightToken != null)
 			{
 				var bottomRight = bottomRightToken.ToObject<LatLon>();
 				if (bottomRight != null)
@@ -203,7 +269,7 @@ namespace Nest
 			while (reader.TokenType != JsonToken.EndObject)
 			{
 				var propertyName = (string)reader.Value;
-				if (propertyName.Contains("_as_string"))
+				if (propertyName.Contains(Parser.AsStringSuffix))
 				{
 					reader.Read();
 					reader.Read();
@@ -233,7 +299,7 @@ namespace Nest
 			var docCount = (reader.Value as long?).GetValueOrDefault(0);
 			var bucket = new SingleBucketAggregate { DocCount = docCount };
 			reader.Read();
-			if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "buckets")
+			if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == Parser.Buckets)
 			{
 				var b = this.GetMultiBucketAggregate(reader, serializer) as BucketAggregate;
 				return new BucketAggregate
@@ -276,7 +342,7 @@ namespace Nest
 				return statsMetric;
 
 			var propertyName = (string)reader.Value;
-			while (reader.TokenType != JsonToken.EndObject && propertyName.Contains("_as_string"))
+			while (reader.TokenType != JsonToken.EndObject && propertyName.Contains(Parser.AsStringSuffix))
 			{
 				reader.Read();
 				reader.Read();
@@ -317,7 +383,7 @@ namespace Nest
 				reader.Read();
 
 				propertyName = (string)reader.Value;
-				if (propertyName == "upper")
+				if (propertyName == Parser.Upper)
 				{
 					reader.Read();
 					bounds.Upper = reader.Value as double?;
@@ -325,7 +391,7 @@ namespace Nest
 				reader.Read();
 
 				propertyName = (string)reader.Value;
-				if (propertyName == "lower")
+				if (propertyName == Parser.Lower)
 				{
 					reader.Read();
 					bounds.Lower = reader.Value as double?;
@@ -336,10 +402,10 @@ namespace Nest
 			}
 
 			propertyName = (string)reader.Value;
-			while (reader.TokenType != JsonToken.EndObject && propertyName.Contains("_as_string"))
+			while (reader.TokenType != JsonToken.EndObject && propertyName.Contains(Parser.AsStringSuffix))
 			{
 				// std_deviation_bounds is an object, so we need to skip its properties
-				if (propertyName.Equals("std_deviation_bounds_as_string"))
+				if (propertyName.Equals(Parser.StdDeviationBoundsAsString))
 				{
 					reader.Read();
 					reader.Read();
@@ -376,14 +442,14 @@ namespace Nest
 		{
 			var bucket = new BucketAggregate();
 			var propertyName = (string)reader.Value;
-			if (propertyName == "doc_count_error_upper_bound")
+			if (propertyName == Parser.DocCountErrorUpperBound)
 			{
 				reader.Read();
 				bucket.DocCountErrorUpperBound = reader.Value as long?;
 				reader.Read();
 			}
 			propertyName = (string)reader.Value;
-			if (propertyName == "sum_other_doc_count")
+			if (propertyName == Parser.SumOtherDocCount)
 			{
 				reader.Read();
 				bucket.SumOtherDocCount = reader.Value as long?;
@@ -448,7 +514,7 @@ namespace Nest
 					{
 						var propertyName = (string)reader.Value;
 
-						if (propertyName == "value_as_string")
+						if (propertyName == Parser.ValueAsString)
 						{
 							valueMetric.ValueAsString = reader.ReadAsString();
 							reader.Read();
@@ -457,7 +523,7 @@ namespace Nest
 						if (reader.TokenType == JsonToken.PropertyName)
 						{
 							propertyName = (string)reader.Value;
-							if (propertyName == "keys")
+							if (propertyName == Parser.Keys)
 							{
 								var keyedValueMetric = new KeyedValueAggregate
 								{
@@ -506,31 +572,31 @@ namespace Nest
 			{
 				switch (reader.Value as string)
 				{
-					case "from":
+					case Parser.From:
 						reader.Read();
 						if (reader.ValueType == typeof(double))
 							fromDouble = (double)reader.Value;
 						reader.Read();
 						break;
-					case "to":
+					case Parser.To:
 						reader.Read();
 						if (reader.ValueType == typeof(double))
 							toDouble = (double)reader.Value;
 						reader.Read();
 						break;
-					case "key":
+					case Parser.Key:
 						key = reader.ReadAsString();
 						reader.Read();
 						break;
-					case "from_as_string":
+					case Parser.FromAsString:
 						fromAsString = reader.ReadAsString();
 						reader.Read();
 						break;
-					case "to_as_string":
+					case Parser.ToAsString:
 						toAsString = reader.ReadAsString();
 						reader.Read();
 						break;
-					case "doc_count":
+					case Parser.DocCount:
 						reader.Read();
 						docCount = (reader.Value as long?).GetValueOrDefault(0);
 						reader.Read();
@@ -584,12 +650,12 @@ namespace Nest
 			var key = reader.Value;
 			reader.Read();
 			var propertyName = (string)reader.Value;
-			if (propertyName == "from" || propertyName == "to")
+			if (propertyName == Parser.From || propertyName == Parser.To)
 				return GetRangeBucket(reader, serializer, key as string);
 
 			var bucket = new KeyedBucket<object> { Key = key };
 
-			if (propertyName == "key_as_string")
+			if (propertyName == Parser.KeyAsString)
 			{
 				bucket.KeyAsString = reader.ReadAsString();
 				reader.Read();
@@ -601,7 +667,7 @@ namespace Nest
 			reader.Read();
 
 			var nextProperty = (string)reader.Value;
-			if (nextProperty == "score")
+			if (nextProperty == Parser.Score)
 				return GetSignificantTermsBucket(reader, serializer, bucket);
 
 			bucket.Aggregations = this.GetSubAggregates(reader, serializer);

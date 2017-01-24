@@ -18,12 +18,11 @@ namespace Nest
 
 	public partial class CountRequest
 	{
-		private CountRequestParameters QueryString => ((IRequest<CountRequestParameters>)this).RequestParameters;
 		protected override HttpMethod HttpMethod =>
-			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") || this.Query == null || this.Query.IsConditionless()
+			Self.RequestParameters.ContainsKey("_source") || Self.RequestParameters.ContainsKey("q") || Self.Query == null || Self.Query.IsConditionless()
 				? HttpMethod.GET : HttpMethod.POST;
 
-		public QueryContainer Query { get; set; } = new MatchAllQuery();
+		public QueryContainer Query { get; set; }
 
 	}
 
@@ -33,7 +32,7 @@ namespace Nest
 			Self.RequestParameters.ContainsKey("_source") || Self.RequestParameters.ContainsKey("q") || Self.Query == null || Self.Query.IsConditionless()
 				? HttpMethod.GET : HttpMethod.POST;
 
-		public QueryContainer Query { get; set; } = new MatchAllQuery();
+		public QueryContainer Query { get; set; }
 	}
 
 	[DescriptorFor("Count")]
