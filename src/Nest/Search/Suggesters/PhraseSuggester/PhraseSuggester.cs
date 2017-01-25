@@ -38,6 +38,9 @@ namespace Nest
 
 		[JsonProperty("collate")]
 		IPhraseSuggestCollate Collate { get; set; }
+
+		[JsonProperty("smoothing")]
+		SmoothingModelContainer Smoothing { get; set; }
 	}
 
 	public class PhraseSuggester : SuggesterBase, IPhraseSuggester
@@ -52,6 +55,7 @@ namespace Nest
 		public IEnumerable<IDirectGenerator> DirectGenerator { get; set; }
 		public IPhraseSuggestHighlight Highlight { get; set; }
 		public IPhraseSuggestCollate Collate { get; set; }
+		public SmoothingModelContainer Smoothing { get; set; }
 	}
 
 	public class PhraseSuggesterDescriptor<T> : SuggestDescriptorBase<PhraseSuggesterDescriptor<T>, IPhraseSuggester, T>, IPhraseSuggester
@@ -67,6 +71,7 @@ namespace Nest
 		IEnumerable<IDirectGenerator> IPhraseSuggester.DirectGenerator { get; set; }
 		IPhraseSuggestHighlight IPhraseSuggester.Highlight { get; set; }
 		IPhraseSuggestCollate IPhraseSuggester.Collate { get; set; }
+		SmoothingModelContainer IPhraseSuggester.Smoothing { get; set; }
 
 		public PhraseSuggesterDescriptor<T> Text(string text) => Assign(a => a.Text = text);
 
@@ -91,5 +96,8 @@ namespace Nest
 
 		public PhraseSuggesterDescriptor<T> Collate(Func<PhraseSuggestCollateDescriptor<T>, IPhraseSuggestCollate> selector) =>
 			Assign(a => a.Collate = selector?.Invoke(new PhraseSuggestCollateDescriptor<T>()));
+
+		public PhraseSuggesterDescriptor<T> Smoothing(Func<SmoothingModelContainerDescriptor, SmoothingModelContainer> selector) =>
+			Assign(a => a.Smoothing = selector?.Invoke(new SmoothingModelContainerDescriptor()));
 	}
 }
