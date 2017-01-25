@@ -16,57 +16,99 @@ namespace Nest
 		private const double MillisecondsInAnHour = MillisecondsInAMinute * 60;
 		private const double MillisecondsInAMinute = MillisecondsInASecond * 60;
 		private const double MillisecondsInASecond = 1000;
+		private const double NanosecondsInAMillisecond = 100;
+		private const double MicrosecondsInAMillisecond = 10;
 
-		private static readonly Regex _expressionRegex = new Regex(@"^(?<factor>[-+]?\d+(?:\.\d+)?)(?<interval>(?:y|M|w|d|h|m|s|ms))?$", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
+		private static readonly Regex ExpressionRegex =
+			new Regex(@"^(?<factor>[-+]?\d+(?:\.\d+)?)\s*(?<interval>(?:y|w|d|h|m|s|ms|nanos|micros))?$",
+				RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase);
+
+		private int? StaticTimeValue { get; }
 
 		public double? Factor { get; private set; }
-		public TimeUnit? Interval { get; private set; }
 
 		public double? Milliseconds { get; private set; }
 		private double ApproximateMilliseconds { get; set; }
+
+		public TimeUnit? Interval { get; private set; }
 
 		public static implicit operator Time(TimeSpan span) => new Time(span);
 		public static implicit operator Time(double milliseconds) => new Time(milliseconds);
 		public static implicit operator Time(string expression) => new Time(expression);
 
-		public Time(TimeSpan timeSpan)
+		public static Time MinusOne { get; } = new Time(-1, true);
+		public static Time Zero { get; } = new Time(0, true);
+
+		protected Time(int specialFactor, bool specialValue)
 		{
-			Reduce(timeSpan.TotalMilliseconds);
+			if (!specialValue) throw new ArgumentException("this constructor is only for static TimeValues");
+			this.StaticTimeValue = specialFactor;
 		}
 
-		public Time(double milliseconds)
-		{
-			Reduce(milliseconds);
-		}
+		public Time(TimeSpan timeSpan) { Reduce(timeSpan.TotalMilliseconds); }
+
+		public Time(double milliseconds) { Reduce(milliseconds); }
 
 		public Time(double factor, TimeUnit interval)
 		{
 			this.Factor = factor;
 			this.Interval = interval;
-			SetMilliseconds(this.Interval, this.Factor.Value);
+			SetMilliseconds(this.Interval.Value, this.Factor.Value);
 		}
 
 		public Time(string timeUnit)
 		{
 			if (timeUnit.IsNullOrEmpty()) throw new ArgumentException("Time expression string is empty", nameof(timeUnit));
-			var match = _expressionRegex.Match(timeUnit);
+			if (timeUnit == "-1" || timeUnit == "0")
+			{
+				this.StaticTimeValue = int.Parse(timeUnit);
+				return;
+			}
+			ParseExpression(timeUnit);
+		}
+
+		private void ParseExpression(string timeUnit)
+		{
+			var match = ExpressionRegex.Match(timeUnit);
 			if (!match.Success) throw new ArgumentException($"Time expression '{timeUnit}' string is invalid", nameof(timeUnit));
 
 			this.Factor = double.Parse(match.Groups["factor"].Value, CultureInfo.InvariantCulture);
-
-			if (this.Factor > 0)
+			var interval = match.Groups["interval"].Success ? match.Groups["interval"].Value : null;
+			switch (interval)
 			{
-				this.Interval = match.Groups["interval"].Success
-					? match.Groups["interval"].Value.ToEnum<TimeUnit>(StringComparison.Ordinal)
-					: TimeUnit.Millisecond;
+				case null:
+					throw new ArgumentException($"Time expression '{timeUnit}' is missing an interval", nameof(timeUnit));
+				case "M":
+					this.Interval = TimeUnit.Month;
+					break;
+				case "m":
+					this.Interval = TimeUnit.Minute;
+					break;
+				default:
+					this.Interval = interval.ToEnum<TimeUnit>(StringComparison.OrdinalIgnoreCase);
+					break;
 			}
 
-			SetMilliseconds(this.Interval, this.Factor.Value);
+			if (!this.Interval.HasValue)
+				throw new ArgumentException($"Time expression '{timeUnit}' can not be parsed to an interval", nameof(timeUnit));
+
+			SetMilliseconds(this.Interval.Value, this.Factor.Value);
 		}
 
 		public int CompareTo(Time other)
 		{
 			if (other == null) return 1;
+			if (this.StaticTimeValue.HasValue && !other.StaticTimeValue.HasValue) return -1;
+			if (!this.StaticTimeValue.HasValue && other.StaticTimeValue.HasValue) return 1;
+			if (this.StaticTimeValue.HasValue && other.StaticTimeValue.HasValue)
+			{
+				// ReSharper disable PossibleInvalidOperationException
+				if (this.StaticTimeValue.Value == other.StaticTimeValue.Value) return 0;
+				if (this.StaticTimeValue.Value < other.StaticTimeValue.Value) return -1;
+				return 1;
+				// ReSharper enable PossibleInvalidOperationException
+			};
+
 			if (this.ApproximateMilliseconds == other.ApproximateMilliseconds) return 0;
 			if (this.ApproximateMilliseconds < other.ApproximateMilliseconds) return -1;
 			return 1;
@@ -108,7 +150,6 @@ namespace Nest
 
 		private static bool IsIntegerGreaterThanZero(double d) => Math.Abs(d % 1) < double.Epsilon;
 
-
 		public static bool operator <(Time left, Time right) => left.CompareTo(right) < 0;
 		public static bool operator <=(Time left, Time right) => left.CompareTo(right) < 0 || left.Equals(right);
 
@@ -120,10 +161,34 @@ namespace Nest
 
 		public static bool operator !=(Time left, Time right) => !(left == right);
 
-		public TimeSpan ToTimeSpan() => TimeSpan.FromMilliseconds(this.ApproximateMilliseconds);
+		public TimeSpan ToTimeSpan()
+		{
+			if (this.StaticTimeValue.HasValue) throw new Exception("Static time values like -1 or 0 have no logical TimeSpan representation");
+			//should not happen will throw in constructor
+			if (!this.Interval.HasValue) throw new Exception("TimeUnit has no interval so you can not call ToTimeStamp on it");
+
+			switch (this.Interval.Value)
+			{
+				case TimeUnit.Microseconds:
+					// ReSharper disable once PossibleInvalidOperationException
+					var microTicks	 = (long)this.Factor.Value * 10;
+					return new TimeSpan(microTicks)
+					;
+				case TimeUnit.Nanoseconds:
+					var nanoTicks = (long)this.Factor.Value / 100;
+					// ReSharper disable once PossibleInvalidOperationException
+					return new TimeSpan(nanoTicks);
+				default:
+					return TimeSpan.FromMilliseconds(this.ApproximateMilliseconds);
+			}
+		}
 
 		public override string ToString()
 		{
+			if (this.StaticTimeValue.HasValue)
+				return this.StaticTimeValue.Value.ToString();
+			if (!this.Factor.HasValue)
+				return "<bad Time object should not happen>";
 			var factor = this.Factor.Value.ToString("0.##", CultureInfo.InvariantCulture);
 			return (this.Interval.HasValue) ? factor + this.Interval.Value.GetStringValue() : factor;
 		}
@@ -132,7 +197,11 @@ namespace Nest
 		{
 			if (ReferenceEquals(null, other)) return false;
 			if (ReferenceEquals(this, other)) return true;
-			return this.ApproximateMilliseconds == other.ApproximateMilliseconds;
+			if (this.StaticTimeValue.HasValue && !other.StaticTimeValue.HasValue) return false;
+			if (!this.StaticTimeValue.HasValue && other.StaticTimeValue.HasValue) return false;
+			if (this.StaticTimeValue.HasValue && other.StaticTimeValue.HasValue)
+				return this.StaticTimeValue == other.StaticTimeValue;
+			return Math.Abs(this.ApproximateMilliseconds - other.ApproximateMilliseconds) < 0.00001;
 		}
 
 		public override bool Equals(object obj)
@@ -140,15 +209,19 @@ namespace Nest
 			if (ReferenceEquals(null, obj)) return false;
 			if (ReferenceEquals(this, obj)) return true;
 			if (obj.GetType() != this.GetType()) return false;
-			return Equals((Time)obj);
+			return Equals((Time) obj);
 		}
 
-		public override int GetHashCode() => this.ApproximateMilliseconds.GetHashCode();
-
-		private void SetMilliseconds(TimeUnit? interval, double factor)
+		public override int GetHashCode()
 		{
-			this.Milliseconds = interval.HasValue ? GetExactMilliseconds(interval.Value, factor) : factor;
-			this.ApproximateMilliseconds = interval.HasValue ? GetApproximateMilliseconds(interval.Value, factor) : factor;
+			if (this.StaticTimeValue.HasValue) return this.StaticTimeValue.Value;
+			return this.ApproximateMilliseconds.GetHashCode();
+		}
+
+		private void SetMilliseconds(TimeUnit interval, double factor)
+		{
+			this.Milliseconds = GetExactMilliseconds(interval, factor) ;
+			this.ApproximateMilliseconds = GetApproximateMilliseconds(interval, factor, this.Milliseconds.Value);
 		}
 
 		private double GetExactMilliseconds(TimeUnit interval, double factor)
@@ -165,6 +238,10 @@ namespace Nest
 					return factor * MillisecondsInAMinute;
 				case TimeUnit.Second:
 					return factor * MillisecondsInASecond;
+				case TimeUnit.Microseconds:
+					return factor / MicrosecondsInAMillisecond;
+				case TimeUnit.Nanoseconds:
+					return factor / NanosecondsInAMillisecond;
 				case TimeUnit.Year:
 				case TimeUnit.Month:
 					// Cannot calculate exact milliseconds for non-fixed intervals
@@ -174,7 +251,7 @@ namespace Nest
 			}
 		}
 
-		private double GetApproximateMilliseconds(TimeUnit interval, double factor)
+		private double GetApproximateMilliseconds(TimeUnit interval, double factor, double fallback)
 		{
 			switch (interval)
 			{
@@ -183,7 +260,7 @@ namespace Nest
 				case TimeUnit.Month:
 					return factor * MillisecondsInAMonthApproximate;
 				default:
-					return GetExactMilliseconds(interval, factor);
+					return fallback;
 			}
 		}
 
@@ -220,9 +297,7 @@ namespace Nest
 			else
 			{
 				Factor = ms;
-				// If milliseconds is <= 0 then don't set an interval.
-				// This is used when setting things like index.refresh_interval = -1 (the only case where a unit isn't required)
-				Interval = (ms > 0) ? (TimeUnit?)TimeUnit.Millisecond : null;
+				Interval = TimeUnit.Millisecond;
 			}
 		}
 	}

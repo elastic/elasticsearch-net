@@ -49,6 +49,7 @@ namespace Tests.CodeStandards
 				{ typeof(TransformDescriptor), typeof(TransformContainer) },
 				{ typeof(SmoothingModelContainerDescriptor), typeof(SmoothingModelContainer) },
 				{ typeof(InputDescriptor), typeof(InputContainer) },
+				{ typeof(SmoothingModelContainerDescriptor), typeof(SmoothingModelContainer) },
 				{ typeof(FluentDictionary<,>), typeof(FluentDictionary<,>) }
 			};
 

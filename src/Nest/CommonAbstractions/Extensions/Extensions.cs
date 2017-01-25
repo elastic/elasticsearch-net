@@ -77,7 +77,7 @@ namespace Nest
 
 				var enumFieldInfo = enumType.GetField(name);
 				var enumMemberAttribute = enumFieldInfo.GetCustomAttribute<EnumMemberAttribute>();
-				if (enumMemberAttribute?.Value == str)
+				if (enumMemberAttribute?.Value.Equals(str, comparison) ?? false)
 				{
 					var v = (T) Enum.Parse(enumType, name);
 					_enumCache.TryAdd(key, v);
@@ -85,7 +85,7 @@ namespace Nest
 				}
 
 				var alternativeEnumMemberAttribute = enumFieldInfo.GetCustomAttribute<AlternativeEnumMemberAttribute>();
-				if (alternativeEnumMemberAttribute?.Value == str)
+				if (alternativeEnumMemberAttribute?.Value.Equals(str, comparison) ?? false)
 				{
 					var v = (T) Enum.Parse(enumType, name);
 					_enumCache.TryAdd(key, v);
