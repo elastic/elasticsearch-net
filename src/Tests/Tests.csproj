@@ -206,6 +206,7 @@
     <Compile Include=".\Document\Single\Update\UpdateWithSourceApiTests.cs" />
     <Compile Include="Aggregations\Matrix\MatrixStats\MatrixStatsAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Metric\GeoCentroid\GeoCentroidAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\ReservedAggNames.doc.cs" />
     <Compile Include="Cat\CatFielddata\CatFielddataApiTests.cs" />
     <Compile Include="Cat\CatFielddata\CatFielddataUrlTests.cs" />
     <Compile Include="Cat\CatHealth\CatHealthApiTests.cs" />
