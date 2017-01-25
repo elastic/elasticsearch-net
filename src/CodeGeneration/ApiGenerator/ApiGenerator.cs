@@ -7,6 +7,7 @@ using ApiGenerator.Domain;
 using Newtonsoft.Json;
 using Xipton.Razor;
 using ShellProgressBar;
+using Newtonsoft.Json.Linq;
 
 namespace ApiGenerator
 {
@@ -53,9 +54,15 @@ namespace ApiGenerator
 				{
 					using (var fileProgress = pbar.Spawn(jsonFiles.Count, $"Listing {jsonFiles.Count} files", new ProgressBarOptions { ProgressCharacter = '─', BackgroundColor = ConsoleColor.DarkGray }))
 					{
-						foreach (var endpoint in jsonFiles.Select(CreateApiEndpoint))
+						foreach (var file in jsonFiles)
 						{
-							endpoints.Add(endpoint.Key, endpoint.Value);
+							if (file.EndsWith("_common.json"))
+								RestApiSpec.CommonApiQueryParameters = CreateCommonApiQueryParameters(file);
+							else
+							{
+								var endpoint = CreateApiEndpoint(file);
+								endpoints.Add(endpoint.Key, endpoint.Value);
+							}
 							fileProgress.Tick();
 						}
 					}
@@ -80,6 +87,14 @@ namespace ApiGenerator
 			var endpoint = JsonConvert.DeserializeObject<Dictionary<string, ApiEndpoint>>(json).First();
 			endpoint.Value.CsharpMethodName = CreateMethodName(endpoint.Key);
 			return endpoint;
+		}
+
+		private static Dictionary<string, ApiQueryParameters> CreateCommonApiQueryParameters(string jsonFile)
+		{
+			var json = File.ReadAllText(jsonFile);
+			var jobject = JObject.Parse(json);
+			var commonParameters = jobject.Property("params").Value.ToObject<Dictionary<string, ApiQueryParameters>>();
+			return commonParameters;
 		}
 
 		private static string CreateMethodName(string apiEndpointKey)
