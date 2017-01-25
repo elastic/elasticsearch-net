@@ -467,6 +467,7 @@
     <Compile Include="CommonAbstractions\Union\Union.cs" />
     <Compile Include="CommonAbstractions\Union\UnionJsonConverter.cs" />
     <Compile Include="CommonOptions\Attributes\AlternativeEnumMemberAttribute.cs" />
+    <Compile Include="CommonOptions\DateFormat\DateFormat.cs" />
     <Compile Include="CommonOptions\DateMath\DateMath.cs" />
     <Compile Include="CommonOptions\DateMath\DateMathExpression.cs" />
     <Compile Include="CommonOptions\DateMath\DateMathOperation.cs" />
