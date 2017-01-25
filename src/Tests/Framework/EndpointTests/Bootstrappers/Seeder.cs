@@ -84,23 +84,6 @@ namespace Tests.Framework.Integration
 					.NumberOfReplicas(0)
 					.NumberOfShards(2)
 				)
-				//.Mappings(pm => pm
-				//	.Map("_default_", m => m
-				//		.DynamicTemplates(dt => dt
-				//			.DynamicTemplate("raw_field", dtt => dtt
-				//				.Match("*") //matches all fields
-				//				.MatchMappingType("string") //that are a string
-				//				.Mapping(tm => tm
-				//					.Text(sm => sm //map as string
-				//						.Fields(f => f //with a multifield 'raw' that is not analyzed
-				//							.Keyword(ssm => ssm.Name("raw"))
-				//						)
-				//					)
-				//				)
-				//			)
-				//		)
-				//	)
-				//)
 			);
 			putTemplateResult.IsValid.Should().BeTrue();
 		}
@@ -121,6 +104,9 @@ namespace Tests.Framework.Integration
 		private void CreateProjectIndex()
 		{
 			var createProjectIndex = this.Client.CreateIndex(typeof(Project), c => c
+				.Settings(settings=>settings
+					.Analysis(ProjectAnalysisSettings)
+				)
 				.Aliases(a => a
 					.Alias("projects-alias")
 				)
@@ -148,6 +134,21 @@ namespace Tests.Framework.Integration
 				);
 			createProjectIndex.IsValid.Should().BeTrue();
 		}
+
+		private IAnalysis ProjectAnalysisSettings(AnalysisDescriptor analysis) => analysis
+			.TokenFilters(tokenFilters => tokenFilters
+				.Shingle("shingle", shingle=>shingle
+					.MinShingleSize(2)
+					.MaxShingleSize(4)
+				)
+			)
+			.Analyzers(analyzers=>analyzers
+				.Custom("shingle", shingle=>shingle
+					.Filters("standard", "shingle")
+					.Tokenizer("standard")
+				)
+			);
+
 
 		private void CreatePercolatorIndex()
 		{
@@ -183,6 +184,12 @@ namespace Tests.Framework.Integration
 				.Text(s=>s
 					.Name(p=>p.Description)
 					.Fielddata()
+					.Fields(f=>f
+						.Text(t=>t
+							.Name("shingle")
+							.Analyzer("shingle")
+						)
+					)
 				)
 				.Date(d => d
 					.Store()
