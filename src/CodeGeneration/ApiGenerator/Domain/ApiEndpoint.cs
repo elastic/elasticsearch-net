@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using ApiGenerator.Overrides.Allow404;
 using ApiGenerator.Overrides.Descriptors;
-using ApiGenerator.Overrides.Global;
 using CsQuery.ExtensionMethods.Internal;
 
 namespace ApiGenerator.Domain
@@ -316,7 +314,7 @@ namespace ApiGenerator.Domain
 			method.FullName =
 				Regex.Replace(method.FullName, m, a => a.Index != method.FullName.IndexOf(m, StringComparison.Ordinal) ? "" : m);
 
-			foreach (var param in GlobalQueryParameters.Parameters)
+			foreach (var param in RestApiSpec.CommonApiQueryParameters)
 			{
 				if (!method.Url.Params.ContainsKey(param.Key))
 					method.Url.Params.Add(param.Key, param.Value);

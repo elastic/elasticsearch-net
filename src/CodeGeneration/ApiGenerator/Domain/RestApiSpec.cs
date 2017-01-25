@@ -19,6 +19,7 @@ namespace ApiGenerator.Domain
 
 		public IList<ApiQueryParameters> ApiQueryParameters { get; set; }
 
+		public static Dictionary<string, ApiQueryParameters> CommonApiQueryParameters { get; set; }
 
 		public IEnumerable<EnumDescription> EnumsInTheSpec
 		{
