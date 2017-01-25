@@ -68,8 +68,8 @@ namespace Tests.Framework
 		private UrlTester Assert(string typeOfCall, IApiCallDetails callDetails)
 		{
 			var url = callDetails.Uri.PathAndQuery;
-			callDetails.Uri.PathEquals(this.ExpectedUrl);
-			callDetails.HttpMethod.Should().Be(this.ExpectedHttpMethod, typeOfCall);
+			callDetails.Uri.PathEquals(this.ExpectedUrl, typeOfCall);
+			callDetails.HttpMethod.Should().Be(this.ExpectedHttpMethod, $"{typeOfCall} to {url}");
 			return this;
 		}
 

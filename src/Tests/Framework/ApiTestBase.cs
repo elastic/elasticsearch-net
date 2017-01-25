@@ -60,7 +60,9 @@ namespace Tests.Framework
 			await this.AssertOnAllResponses(r => this.AssertUrl(r.ApiCall.Uri));
 
 		[U] protected async Task UsesCorrectHttpMethod() =>
-			await this.AssertOnAllResponses(r => r.CallDetails.HttpMethod.Should().Be(this.HttpMethod));
+			await this.AssertOnAllResponses(
+				r => r.ApiCall.HttpMethod.Should().Be(this.HttpMethod,
+					this._uniqueValues.CurrentView.GetStringValue()));
 
 		[U] protected void SerializesInitializer() =>
 			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
@@ -111,7 +113,7 @@ namespace Tests.Framework
 			});
 		}
 
-		private void AssertUrl(Uri u) => u.PathEquals(this.UrlPath);
+		private void AssertUrl(Uri u) => u.PathEquals(this.UrlPath, this._uniqueValues.CurrentView.GetStringValue());
 
 		protected virtual async Task AssertOnAllResponses(Action<TResponse> assert)
 		{

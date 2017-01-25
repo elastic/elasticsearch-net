@@ -27,7 +27,7 @@ namespace Nest
 			var combinator = aggregator as AggregationCombinator;
 			if (combinator != null)
 			{
-				var dict = new Dictionary<string, AggregationContainer>();
+				var dict = new AggregationDictionary();
 				foreach (var agg in combinator.Aggregations)
 				{
 					b = agg;
@@ -41,7 +41,17 @@ namespace Nest
 			b = aggregator;
 			if (b.Name.IsNullOrEmpty())
 				throw new ArgumentException($"{aggregator.GetType().Name} .Name is not set!");
-			return new Dictionary<string, AggregationContainer> { { b.Name, aggregator } };
+			return new AggregationDictionary { { b.Name, aggregator } };
+		}
+
+		public void Add(string key, AggregationContainer value) => this.BackingDictionary.Add(ValidateKey(key), value);
+
+		public override string ValidateKey(string key)
+		{
+			if (AggregateJsonConverter.AllReservedAggregationNames.Contains(key))
+				throw new ArgumentException(
+					string.Format(AggregateJsonConverter.UsingReservedAggNameFormat, key), nameof(key));
+			return key;
 		}
 	}
 

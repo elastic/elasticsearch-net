@@ -236,6 +236,7 @@
     <Compile Include=".\Framework\Extensions\WebClient-CoreFx.cs" />
     <Compile Include=".\Framework\Integration\Bootstrappers\Seeder.cs" />
     <Compile Include=".\Framework\Integration\Clusters\ClusterBase.cs" />
+    <Compile Include="Aggregations\ReservedAggNames.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Dispose\ResponseBuilderDisposeTests.cs" />
     <Compile Include="ClientConcepts\Connection\CustomConnections.cs" />
     <Compile Include="CodeStandards\Serialization\Enums.cs" />
