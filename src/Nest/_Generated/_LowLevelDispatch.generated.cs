@@ -2788,17 +2788,15 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchShardsGet<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchShardsGet<T>(p.RouteValues.Index,u => p.RequestParameters);
 					return _lowLevel.SearchShardsGet<T>(u => p.RequestParameters);
 
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchShards<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchShards<T>(p.RouteValues.Index,u => p.RequestParameters);
 					return _lowLevel.SearchShards<T>(u => p.RequestParameters);
 
 			}
-			throw InvalidDispatch("SearchShards", p, new [] { GET, POST }, "/_search_shards", "/{index}/_search_shards", "/{index}/{type}/_search_shards");
+			throw InvalidDispatch("SearchShards", p, new [] { GET, POST }, "/_search_shards", "/{index}/_search_shards");
 		}
 		
 		internal Task<ElasticsearchResponse<T>> SearchShardsDispatchAsync<T>(IRequest<SearchShardsRequestParameters> p , CancellationToken cancellationToken) where T : class
@@ -2806,17 +2804,15 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchShardsGetAsync<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters,cancellationToken);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchShardsGetAsync<T>(p.RouteValues.Index,u => p.RequestParameters,cancellationToken);
 					return _lowLevel.SearchShardsGetAsync<T>(u => p.RequestParameters,cancellationToken);
 
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchShardsAsync<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters,cancellationToken);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchShardsAsync<T>(p.RouteValues.Index,u => p.RequestParameters,cancellationToken);
 					return _lowLevel.SearchShardsAsync<T>(u => p.RequestParameters,cancellationToken);
 
 			}
-			throw InvalidDispatch("SearchShards", p, new [] { GET, POST }, "/_search_shards", "/{index}/_search_shards", "/{index}/{type}/_search_shards");
+			throw InvalidDispatch("SearchShards", p, new [] { GET, POST }, "/_search_shards", "/{index}/_search_shards");
 		}
 		
 		internal ElasticsearchResponse<T> SearchTemplateDispatch<T>(IRequest<SearchTemplateRequestParameters> p , PostData<object> body) where T : class
