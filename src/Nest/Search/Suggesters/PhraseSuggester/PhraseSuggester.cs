@@ -32,6 +32,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "collate")]
 		IPhraseSuggestCollate Collate { get; set; }
+
+		[JsonProperty("smoothing")]
+		SmoothingModelContainer Smoothing { get; set; }
 	}
 
 	public class PhraseSuggester : SuggesterBase, IPhraseSuggester
@@ -44,6 +47,7 @@ namespace Nest
 		public IEnumerable<IDirectGenerator> DirectGenerator { get; set; }
 		public IPhraseSuggestHighlight Highlight { get; set; }
 		public IPhraseSuggestCollate Collate { get; set; }
+		public SmoothingModelContainer Smoothing { get; set; }
 	}
 
 	public class PhraseSuggesterDescriptor<T> : SuggestDescriptorBase<PhraseSuggesterDescriptor<T>, IPhraseSuggester, T>, IPhraseSuggester
@@ -57,6 +61,7 @@ namespace Nest
 		IEnumerable<IDirectGenerator> IPhraseSuggester.DirectGenerator { get; set; }
 		IPhraseSuggestHighlight IPhraseSuggester.Highlight { get; set; }
 		IPhraseSuggestCollate IPhraseSuggester.Collate { get; set; }
+		SmoothingModelContainer IPhraseSuggester.Smoothing { get; set; }
 
 		public PhraseSuggesterDescriptor<T> GramSize(int? gramSize) => Assign(a => a.GramSize = gramSize);
 
@@ -69,7 +74,7 @@ namespace Nest
 		public PhraseSuggesterDescriptor<T> DirectGenerator(params Func<DirectGeneratorDescriptor<T>, IDirectGenerator>[] generators) =>
 			Assign(a=>a.DirectGenerator = generators.Select(g => g(new DirectGeneratorDescriptor<T>())).ToList());
 
-		public PhraseSuggesterDescriptor<T> RealWordErrorLikelihood(double? realWordErrorLikelihood) => 
+		public PhraseSuggesterDescriptor<T> RealWordErrorLikelihood(double? realWordErrorLikelihood) =>
 			Assign(a => a.RealWordErrorLikelihood = realWordErrorLikelihood);
 
 		public PhraseSuggesterDescriptor<T> Highlight(Func<PhraseSuggestHighlightDescriptor, IPhraseSuggestHighlight> selector) =>
@@ -77,5 +82,8 @@ namespace Nest
 
 		public PhraseSuggesterDescriptor<T> Collate(Func<PhraseSuggestCollateDescriptor<T>, IPhraseSuggestCollate> selector) =>
 			Assign(a => a.Collate = selector?.Invoke(new PhraseSuggestCollateDescriptor<T>()));
+
+		public PhraseSuggesterDescriptor<T> Smoothing(Func<SmoothingModelContainerDescriptor, SmoothingModelContainer> selector) =>
+			Assign(a => a.Smoothing = selector?.Invoke(new SmoothingModelContainerDescriptor()));
 	}
 }

@@ -45,6 +45,7 @@ namespace Tests.CodeStandards
 				{ typeof(TriggerDescriptor), typeof(TriggerContainer) },
 				{ typeof(TransformDescriptor), typeof(TransformContainer) },
 				{ typeof(InputDescriptor), typeof(InputContainer) },
+				{ typeof(SmoothingModelContainerDescriptor), typeof(SmoothingModelContainer) },
 				{ typeof(FluentDictionary<,>), typeof(FluentDictionary<,>) }
 			};
 
