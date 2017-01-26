@@ -239,5 +239,26 @@ namespace Nest
 		public TokenFiltersDescriptor Fingerprint(string name, Func<FingerprintTokenFilterDescriptor, IFingerprintTokenFilter> selector = null) =>
 			Assign(name, selector.InvokeOrDefault(new FingerprintTokenFilterDescriptor()));
 
+		/// <summary>
+		/// The kuromoji_stemmer token filter normalizes common katakana spelling variations ending in a
+		/// long sound character by removing this character (U+30FC). Only full-width katakana characters are supported.
+		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
+		/// </summary>
+		public TokenFiltersDescriptor KuromojiStemmer(string name, Func<KuromojiStemmerTokenFilterDescriptor, IKuromojiStemmerTokenFilter> selector = null) =>
+			Assign(name, selector.InvokeOrDefault(new KuromojiStemmerTokenFilterDescriptor()));
+
+		/// <summary>
+		/// The kuromoji_readingform token filter replaces the token with its reading form in either katakana or romaji.
+		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
+		/// </summary>
+		public TokenFiltersDescriptor KuromojiReadingForm(string name, Func<KuromojiReadingFormTokenFilterDescriptor, IKuromojiReadingFormTokenFilter> selector = null) =>
+			Assign(name, selector.InvokeOrDefault(new KuromojiReadingFormTokenFilterDescriptor()));
+
+		/// <summary>
+		/// The kuromoji_part_of_speech token filter removes tokens that match a set of part-of-speech tags.
+		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
+		/// </summary>
+		public TokenFiltersDescriptor KuromojiPartOfSpeech(string name, Func<KuromojiPartOfSpeechTokenFilterDescriptor, IKuromojiPartOfSpeechTokenFilter> selector = null) =>
+			Assign(name, selector.InvokeOrDefault(new KuromojiPartOfSpeechTokenFilterDescriptor()));
 	}
 }

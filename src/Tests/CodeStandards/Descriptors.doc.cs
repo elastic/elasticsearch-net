@@ -44,6 +44,7 @@ namespace Tests.CodeStandards
 				{ typeof(ConditionDescriptor), typeof(ConditionContainer) },
 				{ typeof(TriggerDescriptor), typeof(TriggerContainer) },
 				{ typeof(TransformDescriptor), typeof(TransformContainer) },
+				{ typeof(SmoothingModelContainerDescriptor), typeof(SmoothingModelContainer) },
 				{ typeof(InputDescriptor), typeof(InputContainer) },
 				{ typeof(FluentDictionary<,>), typeof(FluentDictionary<,>) }
 			};

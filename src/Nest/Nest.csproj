@@ -191,6 +191,15 @@
     <Compile Include="Analysis\CharFilters\PatternReplaceCharFilter.cs" />
     <Compile Include="Analysis\Languages\Language.cs" />
     <Compile Include="Analysis\Languages\SnowballLanguage.cs" />
+    <Compile Include="Analysis\Plugins\Kuromoji\KuromojiPartOfSpeechTokenFilter.cs" />
+    <Compile Include="Analysis\Plugins\Kuromoji\KuromojiAnalyzer.cs" />
+    <Compile Include="Analysis\Plugins\Kuromoji\KuromojiReadingFormTokenFilter.cs" />
+    <Compile Include="Analysis\Plugins\Kuromoji\KuromojiStemmerTokenFilter.cs" />
+    <Compile Include="Analysis\Plugins\Kuromoji\KuromojiTokenizationMode.cs" />
+    <Compile Include="Analysis\Plugins\Kuromoji\KuromojiIterationMarkCharFilter.cs" />
+    <Compile Include="Analysis\Plugins\Kuromoji\KuromojiTokenizer.cs" />
+    <Compile Include="Analysis\Plugins\Phonetic\PhoneticEncoder.cs" />
+    <Compile Include="Analysis\Plugins\Phonetic\PhoneticTokenFilter.cs" />
     <Compile Include="Analysis\StopWords.cs" />
     <Compile Include="Analysis\TokenFilters\AsciiFoldingTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\CommonGramsTokenFilter.cs" />
@@ -214,8 +223,6 @@
     <Compile Include="Analysis\TokenFilters\NgramTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\PatternCaptureTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\PatternReplaceTokenFilter.cs" />
-    <Compile Include="Analysis\TokenFilters\Phonetic\PhoneticEncoder.cs" />
-    <Compile Include="Analysis\TokenFilters\Phonetic\PhoneticTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\PorterStemTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\ReverseTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\Shingle\ShingleTokenFilter.cs" />
