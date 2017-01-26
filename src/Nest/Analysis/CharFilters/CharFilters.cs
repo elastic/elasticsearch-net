@@ -47,8 +47,8 @@ namespace Nest
 		/// The kuromoji_iteration_mark normalizes Japanese horizontal iteration marks (odoriji) to their expanded form.
 		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
 		/// </summary>
-		public CharFiltersDescriptor KuromojiIterationMark(string name, Func<KuromojiIteratationMarkCharFilterDescriptor, IKuromojiIteratationMarkCharFilter> selector = null) =>
-			Assign(name, selector?.InvokeOrDefault(new KuromojiIteratationMarkCharFilterDescriptor()));
+		public CharFiltersDescriptor KuromojiIterationMark(string name, Func<KuromojiIterationMarkCharFilterDescriptor, IKuromojiIterationMarkCharFilter> selector = null) =>
+			Assign(name, selector?.InvokeOrDefault(new KuromojiIterationMarkCharFilterDescriptor()));
 
 	}
 }

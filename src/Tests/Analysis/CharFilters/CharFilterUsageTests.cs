@@ -62,7 +62,7 @@ namespace Tests.Analysis.CharFilters
 							{ "stripMe", new HtmlStripCharFilter { } },
 							{ "patterned", new PatternReplaceCharFilter { Pattern = "x", Replacement = "y" } },
 							{ "mapped", new MappingCharFilter { Mappings = new [] { "a=>b"} } },
-							{ "kmark", new KuromojiIteratationMarkCharFilter()
+							{ "kmark", new KuromojiIterationMarkCharFilter()
 							{
 								NormalizeKana = true,
 								NormalizeKanji = true

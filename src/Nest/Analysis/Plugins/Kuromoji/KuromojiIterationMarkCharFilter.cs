@@ -7,7 +7,7 @@ namespace Nest
 	/// The kuromoji_iteration_mark normalizes Japanese horizontal iteration marks (odoriji) to their expanded form.
 	/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
 	/// </summary>
-	public interface IKuromojiIteratationMarkCharFilter : ICharFilter
+	public interface IKuromojiIterationMarkCharFilter : ICharFilter
 	{
 		[JsonProperty("normalize_kanji")]
 		bool? NormalizeKanji { get; set; }
@@ -16,9 +16,9 @@ namespace Nest
 		bool? NormalizeKana { get; set; }
 	}
 	/// <inheritdoc/>
-	public class KuromojiIteratationMarkCharFilter : CharFilterBase, IKuromojiIteratationMarkCharFilter
+	public class KuromojiIterationMarkCharFilter : CharFilterBase, IKuromojiIterationMarkCharFilter
 	{
-		public KuromojiIteratationMarkCharFilter() : base("kuromoji_iteration_mark") { }
+		public KuromojiIterationMarkCharFilter() : base("kuromoji_iteration_mark") { }
 
 		/// <inheritdoc/>
 		public bool? NormalizeKanji { get; set; }
@@ -28,19 +28,19 @@ namespace Nest
 	}
 
 	/// <inheritdoc/>
-	public class KuromojiIteratationMarkCharFilterDescriptor
-		: CharFilterDescriptorBase<KuromojiIteratationMarkCharFilterDescriptor, IKuromojiIteratationMarkCharFilter>, IKuromojiIteratationMarkCharFilter
+	public class KuromojiIterationMarkCharFilterDescriptor
+		: CharFilterDescriptorBase<KuromojiIterationMarkCharFilterDescriptor, IKuromojiIterationMarkCharFilter>, IKuromojiIterationMarkCharFilter
 	{
 		protected override string Type => "kuromoji_iteration_mark";
-		bool? IKuromojiIteratationMarkCharFilter.NormalizeKanji { get; set; }
-		bool? IKuromojiIteratationMarkCharFilter.NormalizeKana { get; set; }
+		bool? IKuromojiIterationMarkCharFilter.NormalizeKanji { get; set; }
+		bool? IKuromojiIterationMarkCharFilter.NormalizeKana { get; set; }
 
 		/// <inheritdoc/>
-		public KuromojiIteratationMarkCharFilterDescriptor NormalizeKanji(bool? normalize = true) =>
+		public KuromojiIterationMarkCharFilterDescriptor NormalizeKanji(bool? normalize = true) =>
 			Assign(a => a.NormalizeKanji = normalize);
 
 		/// <inheritdoc/>
-		public KuromojiIteratationMarkCharFilterDescriptor NormalizeKana(bool? normalize = true) =>
+		public KuromojiIterationMarkCharFilterDescriptor NormalizeKana(bool? normalize = true) =>
 			Assign(a => a.NormalizeKana = normalize);
 
 	}
