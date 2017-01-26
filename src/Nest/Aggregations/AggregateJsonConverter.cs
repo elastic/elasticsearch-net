@@ -63,6 +63,7 @@ namespace Nest
 			public const string ToAsString = "to_as_string";
 
 			public const string Score = "score";
+			public const string Meta = "meta";
 		}
 
 		public static string[] AllReservedAggregationNames { get; private set; }
@@ -104,7 +105,7 @@ namespace Nest
 			if (_numeric.IsMatch(propertyName))
 				aggregate = GetPercentilesAggregate(reader, serializer, oldFormat: true);
 
-			var meta = propertyName == "meta"
+			var meta = propertyName == Parser.Meta
 				? GetMetadata(reader)
 				: null;
 
