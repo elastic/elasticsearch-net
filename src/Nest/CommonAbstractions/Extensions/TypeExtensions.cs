@@ -24,6 +24,9 @@ namespace Nest
 		private static readonly ConcurrentDictionary<Type, IList<JsonProperty>> CachedTypeProperties =
 			new ConcurrentDictionary<Type, IList<JsonProperty>>();
 
+		private static readonly ConcurrentDictionary<Type, IList<PropertyInfo>> CachedTypePropertyInfos =
+			new ConcurrentDictionary<Type, IList<PropertyInfo>>();
+
 		//this contract is only used to resolve properties in class WE OWN.
 		//these are not subject to change depending on what the user passes as connectionsettings
 		private static readonly ElasticContractResolver JsonContract = new ElasticContractResolver(new ConnectionSettings(), null);
@@ -124,6 +127,29 @@ namespace Nest
 			propertyDictionary = JsonContract.PropertiesOfAll(t, memberSerialization);
 			CachedTypeProperties.TryAdd(t, propertyDictionary);
 			return propertyDictionary;
+		}
+
+		internal static IList<PropertyInfo> AllPropertiesCached(this Type t)
+		{
+			IList<PropertyInfo> propertyInfos;
+			if (CachedTypePropertyInfos.TryGetValue(t, out propertyInfos))
+				return propertyInfos;
+			propertyInfos = t.AllPropertiesNotCached().ToList();
+			CachedTypePropertyInfos.TryAdd(t, propertyInfos);
+			return propertyInfos;
+		}
+
+		/// <summary> Returns inherited properties with reflectedType set to base type</summary>
+		private static IEnumerable<PropertyInfo> AllPropertiesNotCached(this Type type)
+		{
+			do
+			{
+				foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+					yield return propertyInfo;
+
+				type = type.BaseType;
+			} while (type?.BaseType != null);
+
 		}
 	}
 }
