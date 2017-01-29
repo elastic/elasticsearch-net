@@ -832,9 +832,11 @@
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponse.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponseJsonConverter.cs" />
     <Compile Include="Ingest\Processors\DotExpanderProcessor.cs" />
-    <Compile Include="Ingest\Processors\GeoIpProcessor.cs" />
-    <Compile Include="Ingest\Processors\AttachmentProcessor.cs" />
     <Compile Include="Ingest\Processors\DateIndexNameProcessor.cs" />
+    <Compile Include="Ingest\Processors\Plugins\AttachmentProcessor.cs" />
+    <Compile Include="Ingest\Processors\Plugins\GeoIpProcessor.cs" />
+    <Compile Include="Ingest\Processors\Plugins\UserAgentProcessor.cs" />
+    <Compile Include="Ingest\Processors\Plugins\UserAgent\UserAgentProperty.cs" />
     <Compile Include="Ingest\Processors\ScriptProcessor.cs" />
     <Compile Include="Ingest\Processors\SortProcessor.cs" />
     <Compile Include="Mapping\AttributeBased\ElasticsearchCorePropertyAttributeBase.cs" />
