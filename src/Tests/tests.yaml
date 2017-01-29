@@ -10,4 +10,4 @@ test_filter:
 force_reseed: true
 # do not spawn nodes as part of the test setup if we find a node is already running
 # this is opt in during development in CI we never want to see our tests running against an already running node
-test_against_already_running_elasticsearch: true
+test_against_already_running_elasticsearch: false

@@ -6,7 +6,9 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<TokenFilters, string, ITokenFilter>))]
-	public interface ITokenFilters : IIsADictionary<string, ITokenFilter> { }
+	public interface ITokenFilters : IIsADictionary<string, ITokenFilter>
+	{
+	}
 
 	public class TokenFilters : IsADictionaryBase<string, ITokenFilter>, ITokenFilters
 	{
@@ -21,20 +23,24 @@ namespace Nest
 
 	public class TokenFiltersDescriptor : IsADictionaryDescriptorBase<TokenFiltersDescriptor, ITokenFilters, string, ITokenFilter>
 	{
-		public TokenFiltersDescriptor() : base(new TokenFilters()) { }
+		public TokenFiltersDescriptor() : base(new TokenFilters())
+		{
+		}
 
 		public TokenFiltersDescriptor UserDefined(string name, ITokenFilter analyzer) => Assign(name, analyzer);
 
 		/// <summary>
 		/// Token filters that allow to decompose compound words using a dictionary
 		/// </summary>
-		public TokenFiltersDescriptor DictionaryDecompounder(string name, Func<DictionaryDecompounderTokenFilterDescriptor, IDictionaryDecompounderTokenFilter> selector) =>
+		public TokenFiltersDescriptor DictionaryDecompounder(string name,
+			Func<DictionaryDecompounderTokenFilterDescriptor, IDictionaryDecompounderTokenFilter> selector) =>
 			Assign(name, selector?.Invoke(new DictionaryDecompounderTokenFilterDescriptor()));
 
 		/// <summary>
 		/// Token filters that allow to decompose compound words using FOP XML
 		/// </summary>
-		public TokenFiltersDescriptor HyphenationDecompounder(string name, Func<HyphenationDecompounderTokenFilterDescriptor, IHyphenationDecompounderTokenFilter> selector) =>
+		public TokenFiltersDescriptor HyphenationDecompounder(string name,
+			Func<HyphenationDecompounderTokenFilterDescriptor, IHyphenationDecompounderTokenFilter> selector) =>
 			Assign(name, selector?.Invoke(new HyphenationDecompounderTokenFilterDescriptor()));
 
 		/// <summary>
@@ -243,14 +249,44 @@ namespace Nest
 		/// The kuromoji_readingform token filter replaces the token with its reading form in either katakana or romaji.
 		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
 		/// </summary>
-		public TokenFiltersDescriptor KuromojiReadingForm(string name, Func<KuromojiReadingFormTokenFilterDescriptor, IKuromojiReadingFormTokenFilter> selector = null) =>
-			Assign(name, selector.InvokeOrDefault(new KuromojiReadingFormTokenFilterDescriptor()));
+		public TokenFiltersDescriptor KuromojiReadingForm(string name, Func<KuromojiReadingFormTokenFilterDescriptor, IKuromojiReadingFormTokenFilter> selector) =>
+			Assign(name, selector.Invoke(new KuromojiReadingFormTokenFilterDescriptor()));
 
 		/// <summary>
 		/// The kuromoji_part_of_speech token filter removes tokens that match a set of part-of-speech tags.
 		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
 		/// </summary>
-		public TokenFiltersDescriptor KuromojiPartOfSpeech(string name, Func<KuromojiPartOfSpeechTokenFilterDescriptor, IKuromojiPartOfSpeechTokenFilter> selector = null) =>
-			Assign(name, selector.InvokeOrDefault(new KuromojiPartOfSpeechTokenFilterDescriptor()));
+		public TokenFiltersDescriptor KuromojiPartOfSpeech(string name, Func<KuromojiPartOfSpeechTokenFilterDescriptor, IKuromojiPartOfSpeechTokenFilter> selector) =>
+			Assign(name, selector.Invoke(new KuromojiPartOfSpeechTokenFilterDescriptor()));
+
+
+		/// <summary>
+		/// Collations are used for sorting documents in a language-specific word order. The icu_collation token filter is available to all indices and defaults to using the DUCET collation, which is a best-effort attempt at language-neutral sorting.
+		/// Part of the `analysis-icu` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html
+		/// </summary>
+		public TokenFiltersDescriptor IcuCollation(string name, Func<IcuCollationTokenFilterDescriptor, IIcuCollationTokenFilter> selector) =>
+			Assign(name, selector.Invoke(new IcuCollationTokenFilterDescriptor()));
+
+		/// <summary>
+		/// Case folding of Unicode characters based on UTR#30, like the ASCII-folding token filter on steroids.
+		/// Part of the `analysis-icu` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html
+		/// </summary>
+		public TokenFiltersDescriptor IcuFolding(string name, Func<IcuFoldingTokenFilterDescriptor, IIcuFoldingTokenFilter> selector) =>
+			Assign(name, selector.Invoke(new IcuFoldingTokenFilterDescriptor()));
+
+		/// <summary>
+		/// Normalizes as defined here: http://userguide.icu-project.org/transforms/normalization
+		/// Part of the `analysis-icu` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html
+		/// </summary>
+		public TokenFiltersDescriptor IcuNormalization(string name, Func<IcuNormalizationTokenFilterDescriptor, IIcuNormalizationTokenFilter> selector) =>
+			Assign(name, selector.Invoke(new IcuNormalizationTokenFilterDescriptor()));
+
+		/// <summary>
+		/// Transforms are used to process Unicode text in many different ways, such as case mapping,
+		/// normalization, transliteration and bidirectional text handling.
+		/// Part of the `analysis-icu` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html
+		/// </summary>
+		public TokenFiltersDescriptor IcuTransform(string name, Func<IcuTransformTokenFilterDescriptor, IIcuTransformTokenFilter> selector) =>
+			Assign(name, selector.Invoke(new IcuTransformTokenFilterDescriptor()));
 	}
 }

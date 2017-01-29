@@ -50,5 +50,11 @@ namespace Nest
 		public CharFiltersDescriptor KuromojiIterationMark(string name, Func<KuromojiIterationMarkCharFilterDescriptor, IKuromojiIterationMarkCharFilter> selector = null) =>
 			Assign(name, selector?.InvokeOrDefault(new KuromojiIterationMarkCharFilterDescriptor()));
 
+		/// <summary>
+		/// Normalizes as defined here: http://userguide.icu-project.org/transforms/normalization
+		/// Part of the `analysis-icu` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html
+		/// </summary>
+		public CharFiltersDescriptor IcuNormalization(string name, Func<IcuNormalizationCharFilterDescriptor, IIcuNormalizationCharFilter> selector) =>
+			Assign(name, selector?.Invoke(new IcuNormalizationCharFilterDescriptor()));
 	}
 }

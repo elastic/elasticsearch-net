@@ -56,6 +56,10 @@ namespace Nest
 				case "kuromoji_readingform": return o.ToObject<KuromojiReadingFormTokenFilter>(ElasticContractResolver.Empty);
 				case "kuromoji_part_of_speech": return o.ToObject<KuromojiPartOfSpeechTokenFilter>(ElasticContractResolver.Empty);
 				case "kuromoji_stemmer": return o.ToObject<KuromojiStemmerTokenFilter>(ElasticContractResolver.Empty);
+				case "icu_collation": return o.ToObject<IcuCollationTokenFilter>(ElasticContractResolver.Empty);
+				case "icu_folding": return o.ToObject<IcuFoldingTokenFilter>(ElasticContractResolver.Empty);
+				case "icu_normalizer": return o.ToObject<IcuNormalizationTokenFilter>(ElasticContractResolver.Empty);
+				case "icu_transform": return o.ToObject<IcuTransformTokenFilter>(ElasticContractResolver.Empty);
 			}
 			return null;
 		}

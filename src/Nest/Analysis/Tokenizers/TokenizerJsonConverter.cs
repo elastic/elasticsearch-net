@@ -29,6 +29,7 @@ namespace Nest
 				case "uax_url_email": return o.ToObject<UaxEmailUrlTokenizer>(ElasticContractResolver.Empty);
 				case "whitespace": return o.ToObject<WhitespaceTokenizer>(ElasticContractResolver.Empty);
 				case "kuromoji_tokenizer": return o.ToObject<KuromojiTokenizer>(ElasticContractResolver.Empty);
+				case "icu_tokenizer": return o.ToObject<IcuTokenizer>(ElasticContractResolver.Empty);
 			}
 			return null;
 		}
