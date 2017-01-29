@@ -42,7 +42,10 @@ namespace Tests.Framework.Integration
 		IngestGeoIp,
 
 		[Moniker("ingest-attachment")]
-		IngestAttachment
+		IngestAttachment,
+
+		[Moniker("analysis-kuromoji")]
+		AnalysisKuromoji
 	}
 
 	public static class ElasticsearchPluginExtensions
@@ -71,6 +74,7 @@ namespace Tests.Framework.Integration
 					version => version >= new ElasticsearchVersion("5.0.0-alpha3")),
 				new ElasticsearchPluginConfiguration(IngestAttachment,
 					version => version >= new ElasticsearchVersion("5.0.0-alpha3")),
+				new ElasticsearchPluginConfiguration(AnalysisKuromoji),
 			};
 
 		protected override ElasticsearchPlugin GetKeyForItem(ElasticsearchPluginConfiguration item)

@@ -91,5 +91,11 @@ namespace Nest
 		public AnalyzersDescriptor Fingerprint(string name, Func<FingerprintAnalyzerDescriptor, IFingerprintAnalyzer> selector = null) =>
 			Assign(name, selector.InvokeOrDefault(new FingerprintAnalyzerDescriptor()));
 
+		/// <summary>
+		/// An analyzer tailored for japanese that is bootstrapped with defaults.
+		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
+		/// </summary>
+		public AnalyzersDescriptor Kuromoji(string name, Func<KuromojiAnalyzerDescriptor, IKuromojiAnalyzer> selector = null) =>
+			Assign(name, selector.InvokeOrDefault(new KuromojiAnalyzerDescriptor()));
 	}
 }

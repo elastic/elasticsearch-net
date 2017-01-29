@@ -89,6 +89,22 @@ namespace Tests.Analysis.TokenFilters
 						keywords = new[] { "a", "b" },
 						ignore_case = true
 					},
+					kfr = new {
+						type = "kuromoji_readingform",
+						use_romaji = true
+					},
+					kpos = new {
+						stoptags = new [] {
+							"#  verb-main:",
+							"動詞-自立"
+						},
+						type = "kuromoji_part_of_speech"
+					},
+					ks = new {
+						minimum_length = 4,
+						type = "kuromoji_stemmer"
+					},
+
 					kstem = new
 					{
 						type = "kstem"
@@ -218,7 +234,7 @@ namespace Tests.Analysis.TokenFilters
 		};
 
 		/**
-		 * 
+		 *
 		 */
 		protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => FluentExample;
 		public static Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> FluentExample => s => s
@@ -339,6 +355,15 @@ namespace Tests.Analysis.TokenFilters
 						.SplitOnNumerics()
 						.StemEnglishPossessive()
 					)
+					.KuromojiPartOfSpeech("kpos", t => t
+						.StopTags("#  verb-main:", "動詞-自立")
+					)
+					.KuromojiReadingForm("kfr", t => t
+						.UseRomaji()
+					)
+					.KuromojiStemmer("ks", t => t
+						.MinimumLength(4)
+					)
 				)
 			);
 
@@ -433,7 +458,10 @@ namespace Tests.Analysis.TokenFilters
 								SplitOnCaseChange = true,
 								SplitOnNumerics = true,
 								StemEnglishPossessive = true
-							} }
+							} },
+							{ "kpos", new KuromojiPartOfSpeechTokenFilter { StopTags = new [] {"#  verb-main:", "動詞-自立"}}},
+							{ "kfr", new KuromojiReadingFormTokenFilter { UseRomaji = true }},
+							{ "ks", new KuromojiStemmerTokenFilter { MinimumLength = 4 }},
 					}
 				}
 			};

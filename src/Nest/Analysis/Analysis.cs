@@ -21,7 +21,6 @@ namespace Nest
 		public ICharFilters CharFilters { get; set; }
 		public ITokenFilters TokenFilters { get; set; }
 		public ITokenizers Tokenizers { get; set; }
-
 	}
 
 	public class AnalysisDescriptor : DescriptorBase<AnalysisDescriptor, IAnalysis>, IAnalysis
