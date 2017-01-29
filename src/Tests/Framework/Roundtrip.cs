@@ -14,7 +14,6 @@ namespace Tests.Framework
 {
 	public class RoundTripper : SerializationTestBase
 	{
-
 		protected override object ExpectJson { get; }
 
 		internal RoundTripper(
@@ -98,7 +97,6 @@ namespace Tests.Framework
 			this._serializerFactory = serializerFactory;
 			return this;
 		}
-
 
 		public RoundTripper Expect(object expected) =>  new RoundTripper(expected, _connectionSettingsModifier, this._serializerFactory);
 	}
