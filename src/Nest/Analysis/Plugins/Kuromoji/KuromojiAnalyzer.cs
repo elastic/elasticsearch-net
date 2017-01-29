@@ -19,7 +19,7 @@ namespace Nest
 	/// <inheritdoc/>
 	public class KuromojiAnalyzer : AnalyzerBase, IKuromojiAnalyzer
 	{
-		public KuromojiAnalyzer() : base("kuromoji") {}
+		public KuromojiAnalyzer() { Type = "kuromoji"; }
 
 		public KuromojiTokenizationMode? Mode { get; set; }
 

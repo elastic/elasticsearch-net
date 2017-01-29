@@ -29,6 +29,7 @@ namespace Tests.Framework.Integration
 			new ElasticsearchPlugin("mapper-murmur3"),
 			new ElasticsearchPlugin("license"),
 			new ElasticsearchPlugin("graph", v => v >= new ElasticsearchVersionInfo("2.3.0")),
+			new ElasticsearchPlugin("analysis-kuromoji"),
 			new ElasticsearchPlugin("shield"),
 			new ElasticsearchPlugin("watcher")
 		};
