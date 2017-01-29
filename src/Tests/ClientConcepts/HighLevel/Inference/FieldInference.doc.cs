@@ -462,6 +462,38 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 				AskSerializer = "serializer fiddled with this one",
 				DefaultFieldNameInferrer = "shouting much?"
 			});
+		}
+
+		public class Parent
+		{
+			public int Id { get; set; }
+			public string Description { get; set; }
+			public string IgnoreMe { get; set; }
+		}
+
+		public class Child : Parent { }
+
+		[U]
+		public void CodeBasedConfigurationInherits()
+		{
+			/** Inherited properties can be ignored and renamed just as one would expect
+			*/
+			var usingSettings = WithConnectionSettings(s => s
+				.InferMappingFor<Child>(m => m
+					.Rename(p => p.Description, "desc")
+					.Ignore(p => p.IgnoreMe)
+				)
+			);
+			usingSettings.Expect(new []
+			{
+				"id",
+				"desc",
+			}).AsPropertiesOf(new Child
+			{
+				Id = 1,
+				Description = "using a nest attribute",
+				IgnoreMe = "the default serializer resolves json property attributes",
+			});
 
 		}
 	}
