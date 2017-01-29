@@ -833,6 +833,59 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			settings.Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 		}
 
+		public class Parent
+		{
+			public int Id { get; set; }
+			public string Description { get; set; }
+			public string IgnoreMe { get; set; }
+		}
+
+		public class Child : Parent { }
+		[U]
+		public void IgnoringInheritedProperties()
+		{
+			/** All of the properties except `Name` have been ignored in the mapping */
+			var descriptor = new CreateIndexDescriptor("myindex")
+				.Mappings(ms => ms
+					.Map<Child>(m => m
+						.AutoMap()
+					)
+				);
+
+			var expected = new
+			{
+				mappings = new
+				{
+					child = new
+					{
+						properties = new
+						{
+							desc = new {
+								fields = new {
+									keyword = new {
+										ignore_above = 256,
+										type = "keyword"
+									}
+								},
+								type = "text"
+							},
+							id = new {
+								type = "integer"
+							}
+						}
+					}
+				}
+			};
+
+			var settings = WithConnectionSettings(s => s
+				.InferMappingFor<Child>(m => m
+					.Rename(p => p.Description, "desc")
+					.Ignore(p => p.IgnoreMe)
+				)
+			);
+
+			settings.Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+		}
 		/**[float]
 		 * == Mapping Recursion
 		 * If you notice in our previous `Company` and `Employee` examples, the `Employee` type is recursive
