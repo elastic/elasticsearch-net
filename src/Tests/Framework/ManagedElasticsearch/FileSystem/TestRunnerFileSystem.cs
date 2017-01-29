@@ -141,11 +141,11 @@ namespace Tests.Framework.Integration
 				if (Directory.Exists(pluginFolder)) continue;
 
 				Console.WriteLine($"Installing elasticsearch plugin: {plugin.Moniker} ...");
-				var timeout = TimeSpan.FromSeconds(120);
+				var timeout = TimeSpan.FromSeconds(420);
 				var handle = new ManualResetEvent(false);
 				Task.Run(() =>
 				{
-					using (var p = new ObservableProcess(this.PluginBinary, "install", installParameter))
+					using (var p = new ObservableProcess(this.PluginBinary, "install --batch", installParameter))
 					{
 						var o = p.Start();
 						Console.WriteLine($"Calling: {this.PluginBinary} install {installParameter}");

@@ -3,7 +3,7 @@
 namespace Nest
 {
 	/// <summary>
-	/// A tokenizer of type pattern that can flexibly separate text into terms via a regular expression. 
+	/// A tokenizer of type pattern that can flexibly separate text into terms via a regular expression.
 	/// </summary>
 	public interface IPatternTokenizer : ITokenizer
 	{
@@ -18,7 +18,7 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("flags")]
 		string Flags { get; set; }
-		
+
 		/// <summary>
 		/// Which group to extract into tokens. Defaults to -1 (split).
 		/// </summary>
@@ -32,17 +32,17 @@ namespace Nest
     {
 		public PatternTokenizer() { Type = "pattern"; }
 
-		/// <summary/>
+		/// <inheritdoc/>
 		public string Pattern { get; set; }
 
-		/// <summary/>
+		/// <inheritdoc/>
 		public string Flags { get; set; }
-		
+
 		/// <summary/>
 		public int? Group { get; set; }
     }
 	/// <inheritdoc/>
-	public class PatternTokenizerDescriptor 
+	public class PatternTokenizerDescriptor
 		: TokenizerDescriptorBase<PatternTokenizerDescriptor, IPatternTokenizer>, IPatternTokenizer
 	{
 		protected override string Type => "pattern";
