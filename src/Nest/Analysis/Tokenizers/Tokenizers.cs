@@ -102,5 +102,15 @@ namespace Nest
 		/// </summary>
 		public TokenizersDescriptor Kuromoji(string name, Func<KuromojiTokenizerDescriptor, IKuromojiTokenizer> selector) =>
 			Assign(name, selector?.Invoke(new KuromojiTokenizerDescriptor()));
+
+		/// <summary>
+		/// Tokenizes text into words on word boundaries, as defined in UAX #29: Unicode Text Segmentation. It behaves much
+		/// like the standard tokenizer, but adds better support for some Asian languages by using a dictionary-based approach
+		/// to identify words in Thai, Lao, Chinese, Japanese, and Korean, and using custom rules to break Myanmar and Khmer
+		/// text into syllables.
+		/// Part of the `analysis-icu` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html
+		/// </summary>
+		public TokenizersDescriptor Icu(string name, Func<IcuTokenizerDescriptor, IIcuTokenizer> selector) =>
+			Assign(name, selector?.Invoke(new IcuTokenizerDescriptor()));
 	}
 }

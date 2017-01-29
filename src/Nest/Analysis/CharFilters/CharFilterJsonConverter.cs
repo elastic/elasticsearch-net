@@ -24,6 +24,7 @@ namespace Nest
 				case "mapping": return o.ToObject<MappingCharFilter>(ElasticContractResolver.Empty);
 				case "pattern_replace": return o.ToObject<PatternReplaceCharFilter>(ElasticContractResolver.Empty);
 				case "kuromoji_iteration_mark": return o.ToObject<KuromojiIterationMarkCharFilter>(ElasticContractResolver.Empty);
+				case "icu_normalizer": return o.ToObject<IcuNormalizationCharFilter>(ElasticContractResolver.Empty);
 			}
 			return null;
 		}

@@ -76,6 +76,7 @@ namespace Tests.Framework.Integration
 					Directory.CreateDirectory(this.AnalysisFolder);
 
 				SetupHunspellFiles();
+				SetupIcuFiles();
 				SetupCompoundTokenFilterFopFile();
 				SetupCustomStemming();
 				SetupStopwordsFile();
@@ -110,6 +111,15 @@ namespace Tests.Framework.Integration
 			Directory.CreateDirectory(hunspellFolder);
 			File.WriteAllText(hunspellPrefix + ".dic", "1\r\nabcdegf");
 			File.WriteAllText(hunspellPrefix + ".aff", "SET UTF8\r\nSFX P Y 1\r\nSFX P 0 s");
+		}
+
+		private void SetupIcuFiles()
+		{
+			var icuFolder = Path.Combine(this.ConfigPath, "icu-files");
+			if (!Directory.Exists(icuFolder)) Directory.CreateDirectory(icuFolder);
+
+			var icuFile = Path.Combine(icuFolder, "KeywordTokenizer") + ".rbbi";
+			if (!File.Exists(icuFile)) File.WriteAllText(icuFile, ".+ {200};");
 		}
 
 		private void UnzipDistribution()
