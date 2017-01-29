@@ -53,6 +53,9 @@ namespace Nest
 				case "unique": return o.ToObject<UniqueTokenFilter>(ElasticContractResolver.Empty);
 				case "uppercase": return o.ToObject<UppercaseTokenFilter>(ElasticContractResolver.Empty);
 				case "word_delimiter": return o.ToObject<WordDelimiterTokenFilter>(ElasticContractResolver.Empty);
+				case "kuromoji_readingform": return o.ToObject<KuromojiReadingFormTokenFilter>(ElasticContractResolver.Empty);
+				case "kuromoji_part_of_speech": return o.ToObject<KuromojiPartOfSpeechTokenFilter>(ElasticContractResolver.Empty);
+				case "kuromoji_stemmer": return o.ToObject<KuromojiStemmerTokenFilter>(ElasticContractResolver.Empty);
 			}
 			return null;
 		}

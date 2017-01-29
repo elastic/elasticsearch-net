@@ -24,9 +24,9 @@ namespace Nest
 		public CharFiltersDescriptor() : base(new CharFilters()) { }
 
 		public CharFiltersDescriptor UserDefined(string name, ICharFilter analyzer) => Assign(name, analyzer);
-		
+
 		/// <summary>
-		/// The pattern_replace char filter allows the use of a regex to manipulate the characters in a string before analysis. 
+		/// The pattern_replace char filter allows the use of a regex to manipulate the characters in a string before analysis.
 		/// </summary>
 		public CharFiltersDescriptor PatternReplace(string name, Func<PatternReplaceCharFilterDescriptor, IPatternReplaceCharFilter> selector) =>
 			Assign(name, selector?.Invoke(new PatternReplaceCharFilterDescriptor()));
@@ -42,6 +42,13 @@ namespace Nest
 		/// </summary>
 		public CharFiltersDescriptor Mapping(string name, Func<MappingCharFilterDescriptor, IMappingCharFilter> selector) =>
 			Assign(name, selector?.Invoke(new MappingCharFilterDescriptor()));
+
+		/// <summary>
+		/// The kuromoji_iteration_mark normalizes Japanese horizontal iteration marks (odoriji) to their expanded form.
+		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
+		/// </summary>
+		public CharFiltersDescriptor KuromojiIterationMark(string name, Func<KuromojiIterationMarkCharFilterDescriptor, IKuromojiIterationMarkCharFilter> selector = null) =>
+			Assign(name, selector?.InvokeOrDefault(new KuromojiIterationMarkCharFilterDescriptor()));
 
 	}
 }
