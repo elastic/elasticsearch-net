@@ -31,7 +31,7 @@ namespace Nest
 					continue;
 				}
 				// Check against connection settings mappings
-                IPropertyMapping propertyMapping;
+				IPropertyMapping propertyMapping;
 				if (settings.PropertyMappings.TryGetValue(propertyInfo, out propertyMapping))
 				{
 					if (propertyMapping.Ignore) continue;

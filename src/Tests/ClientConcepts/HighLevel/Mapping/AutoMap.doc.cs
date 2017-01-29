@@ -774,13 +774,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 						properties = new
 						{
 							desc = new {
-								fields = new {
-									keyword = new {
-										ignore_above = 256,
-										type = "keyword"
-									}
-								},
-								type = "text"
+								type = "string"
 							},
 							id = new {
 								type = "integer"
