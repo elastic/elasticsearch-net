@@ -13,6 +13,7 @@ namespace Nest
 		[JsonProperty("language")]
 		string Language { get; set; }
 
+		[JsonProperty("country")]
 		string Country { get; set; }
 
 		[JsonProperty("variant")]
