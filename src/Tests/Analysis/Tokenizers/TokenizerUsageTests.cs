@@ -22,6 +22,11 @@ namespace Tests.Analysis.Tokenizers
 						token_chars = new[] {"digit", "letter"},
 						type = "edge_ngram"
 					},
+					icu = new
+					{
+						rule_files = "Latn:icu-files/KeywordTokenizer.rbbi",
+						type = "icu_tokenizer"
+					},
 					kuromoji = new
 					{
 						discard_punctuation = true,
@@ -109,6 +114,7 @@ namespace Tests.Analysis.Tokenizers
 						.NBestExamples("/箱根山-箱根/成田空港-成田/")
 						.NBestCost(1000)
 					)
+					.Icu("icu", t => t.RuleFiles("Latn:icu-files/KeywordTokenizer.rbbi"))
 				)
 			);
 
@@ -159,6 +165,10 @@ namespace Tests.Analysis.Tokenizers
 						},
 						{"standard", new StandardTokenizer()},
 						{"uax", new UaxEmailUrlTokenizer {MaxTokenLength = 12}},
+						{"icu", new IcuTokenizer
+						{
+							RuleFiles = "Latn:icu-files/KeywordTokenizer.rbbi",
+						}},
 						{"whitespace", new WhitespaceTokenizer()},
 						{
 							"kuromoji", new KuromojiTokenizer

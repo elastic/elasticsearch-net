@@ -12,6 +12,11 @@ namespace Tests.Analysis.CharFilters
 			{
 				char_filter = new
 				{
+					icun = new {
+						mode = "compose",
+						name = "nfkc_cf",
+						type = "icu_normalizer"
+					},
 					stripMe = new { type = "html_strip" },
 					patterned = new
 					{
@@ -46,6 +51,10 @@ namespace Tests.Analysis.CharFilters
 					.PatternReplace("patterned", c => c.Pattern("x").Replacement("y"))
 					.Mapping("mapped", c => c.Mappings("a=>b"))
 					.KuromojiIterationMark("kmark", c => c.NormalizeKana().NormalizeKanji())
+					.IcuNormalization("icun", c => c
+						.Mode(IcuNormalizationMode.Compose)
+						.Name(IcuNormalizationType.CompatibilityCaseFold)
+					)
 				)
 			);
 
@@ -62,10 +71,15 @@ namespace Tests.Analysis.CharFilters
 							{ "stripMe", new HtmlStripCharFilter { } },
 							{ "patterned", new PatternReplaceCharFilter { Pattern = "x", Replacement = "y" } },
 							{ "mapped", new MappingCharFilter { Mappings = new [] { "a=>b"} } },
-							{ "kmark", new KuromojiIterationMarkCharFilter()
+							{ "kmark", new KuromojiIterationMarkCharFilter
 							{
 								NormalizeKana = true,
 								NormalizeKanji = true
+							} },
+							{ "icun", new IcuNormalizationCharFilter
+							{
+								Mode = IcuNormalizationMode.Compose,
+								Name = IcuNormalizationType.CompatibilityCaseFold
 							} }
 					}
 				}
