@@ -11,6 +11,7 @@ namespace Tests.Search.Suggesters
 		[U]
 		public async Task Urls()
 		{
+#pragma warning disable 618
 			await POST("/project/_suggest")
 					.Fluent(c => c.Suggest<Project>(s => s))
 					.Request(c => c.Suggest<Project>(new SuggestRequest<Project>()))
@@ -30,6 +31,7 @@ namespace Tests.Search.Suggesters
 					.Request(c => c.Suggest<Project>(new SuggestRequest()))
 					.RequestAsync(c => c.SuggestAsync<Project>(new SuggestRequest()))
 				;
+#pragma warning restore 618
 		}
 	}
 }
