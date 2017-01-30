@@ -22,7 +22,7 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class AttachmentProperty : DocValuesPropertyBase, IAttachmentProperty
 	{
-		public AttachmentProperty() : base("attachment") { }
+		public AttachmentProperty() : base(FieldType.Attachment) { }
 
 		private IDictionary<PropertyName, IProperty> Dictionary => this.Fields ?? (this.Fields = new Properties());
 
@@ -98,7 +98,7 @@ namespace Nest
 
 		private IDictionary<PropertyName, IProperty> Dictionary => Self.Fields ?? (Self.Fields = new Properties());
 
-		public AttachmentPropertyDescriptor() : base("attachment") { }
+		public AttachmentPropertyDescriptor() : base(FieldType.Attachment) { }
 
 		private AttachmentPropertyDescriptor<T> SetMetadataField<TDescriptor, TInterface>(Func<TDescriptor, TInterface> selector, string fieldName)
 			where TDescriptor : TInterface, new()

@@ -54,7 +54,7 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class TextProperty : CorePropertyBase, ITextProperty
 	{
-		public TextProperty() : base("text") { }
+		public TextProperty() : base(FieldType.Text) { }
 
 		public double? Boost { get; set; }
 		public bool? EagerGlobalOrdinals { get; set; }
@@ -90,7 +90,7 @@ namespace Nest
 		string ITextProperty.SearchQuoteAnalyzer { get; set; }
 		TermVectorOption? ITextProperty.TermVector { get; set; }
 
-		public TextPropertyDescriptor() : base("text") { }
+		public TextPropertyDescriptor() : base(FieldType.Text) { }
 
 		public TextPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 		public TextPropertyDescriptor<T> EagerGlobalOrdinals(bool eagerGlobalOrdinals = true) => Assign(a => a.EagerGlobalOrdinals = eagerGlobalOrdinals);

@@ -4,7 +4,9 @@ namespace Nest
 {
 	public class TokenCountAttribute : ElasticsearchDocValuesPropertyAttributeBase, ITokenCountProperty
 	{
-		ITokenCountProperty Self => this;
+		private ITokenCountProperty Self => this;
+
+		public TokenCountAttribute() : base(FieldType.TokenCount) { }
 
 		string ITokenCountProperty.Analyzer { get; set; }
 		bool? ITokenCountProperty.Index { get; set; }
@@ -18,6 +20,5 @@ namespace Nest
 		public double NullValue { get { return Self.NullValue.GetValueOrDefault(); } set { Self.NullValue = value; } }
 		public bool IncludeInAll { get { return Self.IncludeInAll.GetValueOrDefault(); } set { Self.IncludeInAll = value; } }
 
-		public TokenCountAttribute() : base("token_count") { }
 	}
 }

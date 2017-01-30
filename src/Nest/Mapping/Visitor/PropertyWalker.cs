@@ -63,10 +63,7 @@ namespace Nest
 			if (propertyInfo.GetGetMethod().IsStatic)
 				return null;
 
-			if (attribute != null)
-				property = attribute;
-			else
-				property = InferProperty(propertyInfo.PropertyType);
+			property = attribute ?? InferProperty(propertyInfo.PropertyType);
 
 			var objectProperty = property as IObjectProperty;
 			if (objectProperty != null)
@@ -144,6 +141,21 @@ namespace Nest
 
 			if (type == typeof(Attachment))
 				return new AttachmentProperty();
+
+			if (type == typeof(DateRange))
+				return new DateRangeProperty();
+
+			if (type == typeof(DoubleRange))
+				return new DoubleRangeProperty();
+
+			if (type == typeof(FloatRange))
+				return new FloatRangeProperty();
+
+			if (type == typeof(IntegerRange))
+				return new IntegerRangeProperty();
+
+			if (type == typeof(LongRange))
+				return new LongRangeProperty();
 
 			return new ObjectProperty();
 		}

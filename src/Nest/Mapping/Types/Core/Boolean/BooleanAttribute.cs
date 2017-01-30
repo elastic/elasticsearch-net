@@ -2,7 +2,9 @@
 {
 	public class BooleanAttribute : ElasticsearchDocValuesPropertyAttributeBase, IBooleanProperty
 	{
-		IBooleanProperty Self => this;
+		private IBooleanProperty Self => this;
+
+		public BooleanAttribute() : base(FieldType.Boolean) { }
 
 		bool? IBooleanProperty.Index { get; set; }
 		double? IBooleanProperty.Boost { get; set; }
@@ -13,6 +15,5 @@
 		public double Boost { get { return Self.Boost.GetValueOrDefault(); } set { Self.Boost = value; } }
 		public bool NullValue { get { return Self.NullValue.GetValueOrDefault(); } set { Self.NullValue = value; } }
 
-		public BooleanAttribute() : base("boolean") { }
 	}
 }

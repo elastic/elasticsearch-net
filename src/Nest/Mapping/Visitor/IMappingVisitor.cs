@@ -24,6 +24,12 @@ namespace Nest
 		void Visit(ICompletionProperty property);
 		void Visit(IMurmur3HashProperty property);
 		void Visit(ITokenCountProperty property);
+		void Visit(IPercolatorProperty property);
+		void Visit(IIntegerRangeProperty property);
+		void Visit(IFloatRangeProperty property);
+		void Visit(ILongRangeProperty property);
+		void Visit(IDoubleRangeProperty property);
+		void Visit(IDateRangeProperty property);
 	}
 
 	public class NoopMappingVisitor : IMappingVisitor
@@ -35,6 +41,7 @@ namespace Nest
 #pragma warning disable 618
 		public virtual void Visit(IStringProperty property ) { }
 #pragma warning restore 618
+
 		public virtual void Visit(ITextProperty property) { }
 
 		public virtual void Visit(IKeywordProperty property) { }
@@ -64,5 +71,17 @@ namespace Nest
 		public virtual void Visit(IMurmur3HashProperty property) { }
 
 		public virtual void Visit(ITokenCountProperty property) { }
+
+		public virtual void Visit(IPercolatorProperty property) { }
+
+		public virtual void Visit(IIntegerRangeProperty property) { }
+
+		public virtual void Visit(IFloatRangeProperty property) { }
+
+		public virtual void Visit(ILongRangeProperty property) { }
+
+		public virtual void Visit(IDoubleRangeProperty property) { }
+
+		public virtual void Visit(IDateRangeProperty property) { }
 	}
 }

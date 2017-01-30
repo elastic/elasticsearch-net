@@ -4,7 +4,13 @@ namespace Nest
 {
 	public class ObjectAttribute : ElasticsearchCorePropertyAttributeBase, IObjectProperty
 	{
-		IObjectProperty Self => this;
+		private IObjectProperty Self => this;
+
+		public ObjectAttribute() : base(FieldType.Object) { }
+#pragma warning disable 618
+		protected ObjectAttribute(string typeName) : base(typeName) { }
+		protected ObjectAttribute(Type type) : base(type) { }
+#pragma warning restore 618
 
 		Union<bool, DynamicMapping> IObjectProperty.Dynamic { get; set; }
 		bool? IObjectProperty.Enabled { get; set; }
@@ -14,8 +20,5 @@ namespace Nest
 		public bool Enabled { get { return Self.Enabled.GetValueOrDefault(); } set { Self.Enabled = value; } }
 		public bool IncludeInAll { get { return Self.IncludeInAll.GetValueOrDefault(); } set { Self.IncludeInAll = value; } }
 
-		public ObjectAttribute() : base("object") { }
-		protected ObjectAttribute(string typeName) : base(typeName) { }
-		protected ObjectAttribute(Type type) : base(type) { }
 	}
 }

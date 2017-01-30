@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Nest
@@ -30,122 +31,193 @@ namespace Nest
 			this.Accept(mapping.Properties);
 		}
 
+
+		private void Visit<TProperty>(IProperty prop, Action<TProperty> act)
+			where TProperty : class, IProperty
+		{
+			var t = prop as TProperty;
+			if (t == null) return;
+			act(t);
+		}
+
 		public void Accept(IProperties properties)
 		{
 			if (properties == null) return;
 			foreach (var kv in properties)
 			{
-				var prop = kv.Key;
 				var field = kv.Value;
 				var type = field.Type;
-				switch (type.Name)
+				var ft = type.Name.ToEnum<FieldType>();
+				switch (ft)
 				{
-					case "text":
-						var t = field as ITextProperty;
-						if (t == null) continue;
-						this._visitor.Visit(t);
-						this.Accept(t.Fields);
+					case FieldType.Text:
+						this.Visit<ITextProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
 						break;
-					case "keyword":
-						var k = field as IKeywordProperty;
-						if (k == null) continue;
-						this._visitor.Visit(k);
-						this.Accept(k.Fields);
+					case FieldType.Keyword:
+						this.Visit<IKeywordProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
 						break;
-					case "string":
+					case FieldType.String:
 #pragma warning disable 618
-						var s = field as IStringProperty;
+						this.Visit<IStringProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
 #pragma warning restore 618
-						if (s == null) continue;
-						this._visitor.Visit(s);
-						this.Accept(s.Fields);
 						break;
-					case "float":
-					case "double":
-					case "byte":
-					case "short":
-					case "integer":
-					case "long":
-						var nu = field as INumberProperty;
-						if (nu == null) continue;
-						this._visitor.Visit(nu);
-						this.Accept(nu.Fields);
+					//TODO implement type specific visitors too!
+					case FieldType.HalfFloat:
+					case FieldType.ScaledFloat:
+					case FieldType.Float:
+					case FieldType.Double:
+					case FieldType.Byte:
+					case FieldType.Short:
+					case FieldType.Integer:
+					case FieldType.Long:
+						this.Visit<INumberProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
 						break;
-					case "date":
-						var d = field as IDateProperty;
-						if (d == null) continue;
-						this._visitor.Visit(d);
-						this.Accept(d.Fields);
+					case FieldType.Date:
+						this.Visit<IDateProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
 						break;
-					case "boolean":
-						var bo = field as IBooleanProperty;
-						if (bo == null) continue;
-						this._visitor.Visit(bo);
-						this.Accept(bo.Fields);
+					case FieldType.Boolean:
+						this.Visit<IBooleanProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
 						break;
-					case "binary":
-						var bi = field as IBinaryProperty;
-						if (bi == null) continue;
-						this._visitor.Visit(bi);
-						this.Accept(bi.Fields);
+					case FieldType.Binary:
+						this.Visit<IBinaryProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
 						break;
-					case "object":
-						var o = field as IObjectProperty;
-						if (o == null) continue;
-						this._visitor.Visit(o);
-						this._visitor.Depth += 1;
-						this.Accept(o.Properties);
-						this._visitor.Depth -= 1;
+					case FieldType.Object:
+						this.Visit<IObjectProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this._visitor.Depth += 1;
+							this.Accept(t.Properties);
+							this._visitor.Depth -= 1;
+						});
 						break;
-					case "nested":
-						var n = field as INestedProperty;
-						if (n == null) continue;
-						this._visitor.Visit(n);
-						this._visitor.Depth += 1;
-						this.Accept(n.Properties);
-						this._visitor.Depth -= 1;
+					case FieldType.Nested:
+						this.Visit<INestedProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this._visitor.Depth += 1;
+							this.Accept(t.Properties);
+							this._visitor.Depth -= 1;
+						});
 						break;
-					case "ip":
-						var i = field as IIpProperty;
-						if (i == null) continue;
-						this._visitor.Visit(i);
-						this.Accept(i.Fields);
+					case FieldType.Ip:
+						this.Visit<IIpProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
 						break;
-					case "geo_point":
-						var gp = field as IGeoPointProperty;
-						if (gp == null) continue;
-						this._visitor.Visit(gp);
-						this.Accept(gp.Fields);
+					case FieldType.GeoPoint:
+						this.Visit<IGeoPointProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
 						break;
-					case "geo_shape":
-						var gs = field as IGeoShapeProperty;
-						if (gs == null) continue;
-						this._visitor.Visit(gs);
-						this.Accept(gs.Fields);
+					case FieldType.GeoShape:
+						this.Visit<IGeoShapeProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
 						break;
-					case "attachment":
-						var a = field as IAttachmentProperty;
-						if (a == null) continue;
-						this._visitor.Visit(a);
-						this.Accept(a.Fields);
+					case FieldType.Attachment:
+						this.Visit<IAttachmentProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
 						break;
-					case "completion":
-						var c = field as ICompletionProperty;
-						if (c == null) continue;
-						this._visitor.Visit(c);
-						this.Accept(c.Fields);
+					case FieldType.Completion:
+						this.Visit<ICompletionProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
 						break;
-					case "murmur3":
-						var mm = field as IMurmur3HashProperty;
-						if (mm == null) continue;
-						this._visitor.Visit(mm);
-						this.Accept(mm.Fields);
+					case FieldType.Murmur3Hash:
+						this.Visit<IMurmur3HashProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
 						break;
-					case "token_count":
-						var tc = field as ITokenCountProperty;
-						if (tc == null) continue;
-						this._visitor.Visit(tc);
-						this.Accept(tc.Fields);
+					case FieldType.TokenCount:
+						this.Visit<ITokenCountProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
+						break;
+					case FieldType.None:
+						continue;
+					case FieldType.Percolator:
+						this.Visit<IPercolatorProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+						});
+						break;
+					case FieldType.IntegerRange:
+						this.Visit<IIntegerRangeProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
+						break;
+					case FieldType.FloatRange:
+						this.Visit<IFloatRangeProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
+						break;
+					case FieldType.LongRange:
+						this.Visit<ILongRangeProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
+						break;
+					case FieldType.DoubleRange:
+						this.Visit<IDoubleRangeProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
+						break;
+					case FieldType.DateRange:
+						this.Visit<IDateRangeProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
 						break;
 				}
 			}

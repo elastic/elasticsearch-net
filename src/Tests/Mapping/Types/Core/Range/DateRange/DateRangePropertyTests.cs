@@ -1,0 +1,81 @@
+﻿using System;
+using Nest;
+using Tests.Framework.Integration;
+using Tests.Framework.MockData;
+
+namespace Tests.Mapping.Types.Core.Range.DateRange
+{
+	public class DateRangePropertyTests : PropertyTestsBase
+	{
+		private DateTime _nullValue = new DateTime(2000, 1, 1, 1, 1, 1, 1, DateTimeKind.Utc);
+
+		public DateRangePropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson => new
+		{
+			properties = new
+			{
+				ranges = new
+				{
+					type = "object",
+					properties = new
+					{
+						dates = new
+						{
+							type = "date_range",
+							store = true,
+							index = false,
+							include_in_all = false,
+							boost = 1.5,
+							null_value = _nullValue,
+							ignore_malformed = true,
+							coerce = true
+						}
+					}
+				}
+			}
+		};
+
+		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
+			.Object<Ranges>(m => m
+				.Name(p => p.Ranges)
+				.Properties(props => props
+					.DateRange(n => n
+						.Name(p => p.Dates)
+						.Store()
+						.Index(false)
+						.Boost(1.5)
+						.NullValue(this._nullValue)
+						.IncludeInAll(false)
+						.IgnoreMalformed()
+						.Coerce()
+					)
+				)
+			);
+
+
+		protected override IProperties InitializerProperties => new Properties
+		{
+			{
+				"ranges", new ObjectProperty
+				{
+					Properties = new Properties
+					{
+						{
+							"dates", new DateRangeProperty
+							{
+								Store = true,
+								Index = false,
+								Boost = 1.5,
+								NullValue = this._nullValue,
+								IncludeInAll = false,
+								IgnoreMalformed = true,
+								Coerce = true
+							}
+						}
+					}
+				}
+			}
+		};
+	}
+}

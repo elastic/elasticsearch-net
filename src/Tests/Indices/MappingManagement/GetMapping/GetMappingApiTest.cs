@@ -157,6 +157,36 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			Increment("token_count");
 		}
 
+		public void Visit(IPercolatorProperty property)
+		{
+			Increment("percolator");
+		}
+
+		public void Visit(IIntegerRangeProperty property)
+		{
+			Increment("integer_range");
+		}
+
+		public void Visit(IFloatRangeProperty property)
+		{
+			Increment("float_range");
+		}
+
+		public void Visit(ILongRangeProperty property)
+		{
+			Increment("long_range");
+		}
+
+		public void Visit(IDoubleRangeProperty property)
+		{
+			Increment("double_range");
+		}
+
+		public void Visit(IDateRangeProperty property)
+		{
+			Increment("date_range");
+		}
+
 		public void Visit(IMurmur3HashProperty mapping)
 		{
 			Increment("murmur3");

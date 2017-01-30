@@ -8,7 +8,13 @@ namespace Nest
 	/// </summary>
 	public class NumberAttribute : ElasticsearchDocValuesPropertyAttributeBase, INumberProperty
 	{
-		INumberProperty Self => this;
+		private INumberProperty Self => this;
+
+		public NumberAttribute() : base(FieldType.Float) { }
+		public NumberAttribute(NumberType type) : base(type.ToFieldType()) { }
+#pragma warning disable 618
+		protected NumberAttribute(string type) : base(type) { }
+#pragma warning restore 618
 
 		bool? INumberProperty.Index { get; set; }
 		double? INumberProperty.Boost { get; set; }
@@ -27,8 +33,5 @@ namespace Nest
 		public bool Coerce { get { return Self.Coerce.GetValueOrDefault(); } set { Self.Coerce = value; } }
 		public double ScalingFactor { get { return Self.ScalingFactor.GetValueOrDefault(); } set { Self.ScalingFactor = value; } }
 
-		public NumberAttribute(NumberType type) : base(type.GetStringValue()) { }
-		protected NumberAttribute(string type) : base(type) { }
-		public NumberAttribute() : base(NumberType.Float.GetStringValue()) { }
 	}
 }

@@ -14,13 +14,14 @@ namespace Nest
 
 		public bool DocValues { get { return Self.DocValues.GetValueOrDefault(true); } set { Self.DocValues = value; } }
 
-		protected ElasticsearchDocValuesPropertyAttributeBase(string typeName) : base(typeName)
-		{
-		}
 
-		protected ElasticsearchDocValuesPropertyAttributeBase(Type type) : base(type)
-		{
-		}
+		protected ElasticsearchDocValuesPropertyAttributeBase(FieldType type) : base(type) { }
+
+		[Obsolete("Please use overload taking FieldType")]
+		protected ElasticsearchDocValuesPropertyAttributeBase(string typeName) : base(typeName) { }
+
+		[Obsolete("Please use overload taking FieldType")]
+		protected ElasticsearchDocValuesPropertyAttributeBase(Type type) : base(type) { }
 
 		public new static ElasticsearchDocValuesPropertyAttributeBase From(MemberInfo memberInfo)
 		{
