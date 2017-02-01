@@ -2,6 +2,7 @@
 *.local.xml
 *.sln.docstates
 *.obj
+*.swp
 *.exe
 *.pdb
 *.user

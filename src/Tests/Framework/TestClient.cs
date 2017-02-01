@@ -11,6 +11,7 @@ using Nest;
 using Tests.Framework.Configuration;
 using Tests.Framework.MockData;
 using Tests.Framework.Versions;
+using System.Linq;
 
 namespace Tests.Framework
 {
@@ -42,7 +43,12 @@ namespace Tests.Framework
 										directoryInfo.Parent != null &&
 										directoryInfo.Parent.Name == "src"
 				? "tests.yaml"
-				: @"..\..\..\tests.yaml";
+				: @"../../../tests.yaml";
+
+			var fullPath = Path.GetFullPath(yamlConfigurationPath);
+
+			if (!File.Exists(fullPath))
+				throw new Exception($"Tried to load yaml from {fullPath} but it does not exist : pwd:{directoryInfo.FullName}");
 
 			return new YamlConfiguration(yamlConfigurationPath);
 		}

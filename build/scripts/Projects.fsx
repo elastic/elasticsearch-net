@@ -20,9 +20,9 @@ module Projects =
         static member All = [Net45; Net46; NetStandard1_3] 
         member this.Identifier = 
             match this with
-            | Net45 -> { MSBuild = "v4.5"; Nuget = "net45"; DefineConstants = "TRACE;NET45"; }
-            | Net46 -> { MSBuild = "v4.6"; Nuget = "net46"; DefineConstants = "TRACE;NET46"; }
-            | NetStandard1_3 -> { MSBuild = "netstandard1.3"; Nuget = "netstandard1.3"; DefineConstants = "TRACE;DOTNETCORE"; }
+            | Net45 -> { MSBuild = "v4.5"; Nuget = "net45"; DefineConstants = if not isMono then "TRACE;NET45" else "NET45"; }
+            | Net46 -> { MSBuild = "v4.6"; Nuget = "net46"; DefineConstants = if not isMono then "TRACE;NET46" else "NET45"; }
+            | NetStandard1_3 -> { MSBuild = "netstandard1.3"; Nuget = "netstandard1.3"; DefineConstants = if not isMono then "TRACE;DOTNETCORE" else "DOTNETCORE"; }
 
     type Project =
         | Nest
