@@ -58,10 +58,7 @@ namespace Nest
 		/// <summary>
 		/// By default the bulkall helper simply calls <see cref="BulkDescriptor.IndexMany"/> on the buffer.
 		/// There might be case where you'd like more control over this. By setting this callback you are in complete control
-		/// of describing how the buffer should be translated to a bulk operation. Maybe you want to enforce all documents are newly created using
-		/// <see cref="BulkDescriptor.CreateMany"/> or maybe a piece of metadata on <typeparamref name="T"/> controls where you need to call
-		/// <see cref="BulkDescriptor.Update{T, TPartialDocument}(Func{BulkUpdateDescriptor{T, TPartialDocument}, IBulkUpdateOperation{T, TPartialDocument}})"/>
-		/// or <see cref="BulkDescriptor.Index{T}(Func{BulkIndexDescriptor{T}, IBulkIndexOperation{T}})"/>
+		/// of describing how the buffer should be translated to a bulk operation.
 		/// </summary>
 		Action<BulkDescriptor, IList<T>> BufferToBulk { get; set; }
 

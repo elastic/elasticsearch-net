@@ -43,12 +43,13 @@ namespace Tests.Framework.Integration
 			this._config = config;
 			this._name = config.TypeOfCluster;
 
+
 			var prefix = this._name.ToLowerInvariant();
 			var suffix = Guid.NewGuid().ToString("N").Substring(0, 6);
 			this.ClusterName = $"{prefix}-cluster-{suffix}";
 			this.NodeName = $"{prefix}-node-{suffix}";
 
-			var appData = GetApplicationDataDirectory();
+			var appData = GetApplicationDataDirectory() ?? "/tmp/NEST";
 			this.RoamingFolder = Path.Combine(appData, "NEST", this.Version.FullyQualifiedVersion);
 			this.ElasticsearchHome = Path.Combine(this.RoamingFolder, this.Version.FolderInZip);
 
@@ -60,12 +61,17 @@ namespace Tests.Framework.Integration
 		{
 			lock (TestRunnerFileSystem.Lock)
 			{
+				Console.WriteLine($"Create ${this.RoamingFolder}");
 				if (!Directory.Exists(this.RoamingFolder))
 					Directory.CreateDirectory(this.RoamingFolder);
 
+				Console.WriteLine("EnsureJavaHome");
 				EnsureJavaHome();
+				Console.WriteLine("DownloadDistributionZip");
 				DownloadDistributionZip();
+				Console.WriteLine("UnzioDistribution");
 				UnzipDistribution();
+				Console.WriteLine("CreateHelperBatFile");
 				CreateHelperBatFile();
 
 				if (this.Version.IsSnapshot) return;
