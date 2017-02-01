@@ -417,12 +417,12 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.6.2' Or $(TargetFrameworkVersion) == 'v4.6.3')">
       <ItemGroup>
+        <Reference Include="mscorlib">
+          <Paket>True</Paket>
+        </Reference>
         <Reference Include="System.IO">
           <HintPath>..\..\..\packages\System.IO\lib\net462\System.IO.dll</HintPath>
           <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="mscorlib">
           <Paket>True</Paket>
         </Reference>
       </ItemGroup>

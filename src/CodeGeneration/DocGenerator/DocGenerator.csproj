@@ -249,24 +249,24 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2')">
       <ItemGroup>
+        <Reference Include="mscorlib">
+          <Paket>True</Paket>
+        </Reference>
         <Reference Include="System.AppContext">
           <HintPath>..\..\..\packages\System.AppContext\lib\net46\System.AppContext.dll</HintPath>
           <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="mscorlib">
           <Paket>True</Paket>
         </Reference>
       </ItemGroup>
     </When>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6.3'">
       <ItemGroup>
+        <Reference Include="mscorlib">
+          <Paket>True</Paket>
+        </Reference>
         <Reference Include="System.AppContext">
           <HintPath>..\..\..\packages\System.AppContext\lib\net463\System.AppContext.dll</HintPath>
           <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="mscorlib">
           <Paket>True</Paket>
         </Reference>
       </ItemGroup>

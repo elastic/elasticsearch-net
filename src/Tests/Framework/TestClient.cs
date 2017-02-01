@@ -10,6 +10,8 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.Configuration;
 using Tests.Framework.MockData;
+using Tests.Framework.Versions;
+using System.Linq;
 
 namespace Tests.Framework
 {
@@ -41,7 +43,12 @@ namespace Tests.Framework
 										directoryInfo.Parent != null &&
 										directoryInfo.Parent.Name == "src"
 				? "tests.yaml"
-				: @"..\..\..\tests.yaml";
+				: @"../../../tests.yaml";
+
+			var fullPath = Path.GetFullPath(yamlConfigurationPath);
+
+			if (!File.Exists(fullPath))
+				throw new Exception($"Tried to load yaml from {fullPath} but it does not exist : pwd:{directoryInfo.FullName}");
 
 			return new YamlConfiguration(yamlConfigurationPath);
 		}
@@ -62,14 +69,16 @@ namespace Tests.Framework
 				.Ignore(p => p.PrivateValue)
 				.Rename(p => p.OnlineHandle, "nickname")
 			)
+			.InferMappingFor<PercolatedQuery>(map => map
+				.IndexName("queries")
+				.TypeName(PercolatorType)
+			)
 			//.EnableTcpKeepAlive(TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(2))
 			//.PrettyJson()
 			//TODO make this random
 			//.EnableHttpCompression()
 
 			.OnRequestDataCreated(data=> data.Headers.Add("TestMethod", ExpensiveTestNameForIntegrationTests()));
-
-
 
 		public static ConnectionSettings CreateSettings(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
@@ -86,9 +95,6 @@ namespace Tests.Framework
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return settings;
 		}
-
-		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200) =>
-			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: true));
 
 		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings, Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory) =>
 			new ElasticClient(CreateSettings(modifySettings, forceInMemory: true, serializerFactory: serializerFactory));
@@ -122,7 +128,7 @@ namespace Tests.Framework
 			return new ElasticClient(settings);
 		}
 
-		public static string ExpensiveTestNameForIntegrationTests()
+		private static string ExpensiveTestNameForIntegrationTests()
 		{
 			if (!(RunningFiddler && Configuration.RunIntegrationTests)) return "ignore";
 
