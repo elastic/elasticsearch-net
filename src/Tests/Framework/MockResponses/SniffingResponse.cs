@@ -30,7 +30,6 @@ namespace Tests.Framework.MockResponses
 			select new { id, name, node })
 			.ToDictionary(kv => kv.id, kv => CreateNodeResponse(kv.node, kv.name, randomFqdn));
 
-		private static Random Random = new Random(1337);
 		private static object CreateNodeResponse(Node node, string name, bool randomFqdn)
 		{
 			var fqdn = randomFqdn ? $"fqdn{node.Uri.Port}/" : "";

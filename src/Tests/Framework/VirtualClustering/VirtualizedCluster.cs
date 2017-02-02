@@ -9,8 +9,6 @@ namespace Tests.Framework
 	public class VirtualizedCluster
 	{
 		private ElasticClient Client => this._fixedRequestPipeline?.Client;
-		private readonly VirtualCluster _cluster;
-		private readonly IConnectionPool _connectionPool;
 		private readonly TestableDateTimeProvider _dateTimeProvider;
 		private readonly ConnectionSettings _settings;
 		public FixedPipelineFactory _fixedRequestPipeline;
@@ -24,9 +22,6 @@ namespace Tests.Framework
 			this._dateTimeProvider = dateTimeProvider;
 			this._settings = settings;
 			this._fixedRequestPipeline = new FixedPipelineFactory(settings, this._dateTimeProvider);
-
-			this._cluster = cluster;
-			this._connectionPool = pool;
 
 			this._syncCall = (c, r) => c.Search<Project>(s => s.RequestConfiguration(r));
 			this._asyncCall = async (c, r) =>

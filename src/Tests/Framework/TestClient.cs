@@ -10,7 +10,6 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.Configuration;
 using Tests.Framework.MockData;
-using Tests.Framework.Versions;
 
 namespace Tests.Framework
 {
@@ -68,10 +67,6 @@ namespace Tests.Framework
 				.Ignore(p => p.PrivateValue)
 				.Rename(p => p.OnlineHandle, "nickname")
 			)
-			.InferMappingFor<PercolatedQuery>(map => map
-				.IndexName("queries")
-				.TypeName(PercolatorType)
-			)
 			//.EnableTcpKeepAlive(TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(2))
 			//.PrettyJson()
 			//TODO make this random
@@ -94,6 +89,9 @@ namespace Tests.Framework
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return settings;
 		}
+
+		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200) =>
+			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: true));
 
 		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings, Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory) =>
 			new ElasticClient(CreateSettings(modifySettings, forceInMemory: true, serializerFactory: serializerFactory));

@@ -19,9 +19,11 @@ namespace Tests.Mapping.Types.Core.String
 			PositionIncrementGap = 5,
 #pragma warning restore 618
 			SearchAnalyzer = "mysearchanalyzer",
+#pragma warning disable 618 // Type or member is obsolete
 #pragma warning disable CS0618 // Type or member is obsolete
 			CustomSimilarity = "my_custom_similarity",
 #pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning restore 618
 			Store = true,
 			TermVector = TermVectorOption.WithPositionsOffsets)]
 		public string Full { get; set; }

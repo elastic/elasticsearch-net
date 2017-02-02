@@ -140,7 +140,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		{
 			Field fieldString = "name^2";
 			Field fieldStringConstructor = new Field { Name = "name^2" };
-			Field fieldStringCreate = Field.Create("name^2", 3); //<1> NEST will take the boost from the name
+			Field fieldStringCreate = Infer.Field("name^2", 3); //<1> NEST will take the boost from the name
 
 			fieldString.Name.Should().Be("name");
 			fieldStringConstructor.Name.Should().Be("name");
