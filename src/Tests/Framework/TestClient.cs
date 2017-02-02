@@ -11,7 +11,6 @@ using Nest;
 using Tests.Framework.Configuration;
 using Tests.Framework.MockData;
 using Tests.Framework.Versions;
-using System.Linq;
 
 namespace Tests.Framework
 {
