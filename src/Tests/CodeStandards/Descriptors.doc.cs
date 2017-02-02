@@ -22,6 +22,9 @@ namespace Tests.CodeStandards
 							  where t.IsClass()
 								&& t.Name.Contains("Descriptor")
 								&& !notDescriptors.Contains(t.Name)
+#if __MonoCS__
+								&& !t.FullName.Contains("c__AnonStore") //compiler generated
+#endif
 								&& t.GetInterfaces().All(i => i != typeof(IDescriptor))
 							  select t.FullName;
 			descriptors.Should().BeEmpty();

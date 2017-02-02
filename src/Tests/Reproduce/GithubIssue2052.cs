@@ -107,7 +107,7 @@ namespace Tests.Reproduce
 					RemoteStackIndex = remoteStackIndex,
 					HResult = hresult,
 					HelpURL = helpUrl,
-#if !DOTNETCORE
+#if !DOTNETCORE && !__MonoCS__
 					ExceptionMethod = this.WriteStructuredExceptionMethod(exceptionMethod)
 #endif
 				};
