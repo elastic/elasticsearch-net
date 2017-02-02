@@ -35,6 +35,11 @@ InitializerExample
 {
   "analysis": {
     "char_filter": {
+      "icun": {
+        "mode": "compose",
+        "name": "nfkc_cf",
+        "type": "icu_normalizer"
+      },
       "stripMe": {
         "type": "html_strip"
       },
@@ -48,6 +53,11 @@ InitializerExample
           "a=>b"
         ],
         "type": "mapping"
+      },
+      "kmark": {
+        "normalize_kanji": true,
+        "normalize_kana": true,
+        "type": "kuromoji_iteration_mark"
       }
     }
   }

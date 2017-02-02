@@ -91,6 +91,10 @@ InitializerExample
           "he",
           "the"
         ]
+      },
+      "kuro": {
+        "type": "kuromoji",
+        "mode": "search"
       }
     }
   }
