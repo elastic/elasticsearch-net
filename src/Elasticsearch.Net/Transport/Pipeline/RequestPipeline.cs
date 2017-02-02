@@ -48,16 +48,18 @@ namespace Elasticsearch.Net
 			? 0
 			: Math.Min(this.RequestConfiguration?.MaxRetries ?? this._settings.MaxRetries.GetValueOrDefault(int.MaxValue), this._connectionPool.MaxRetries);
 
+		private bool RequestDisabledSniff => this.RequestConfiguration != null && (this.RequestConfiguration.DisableSniff ?? false);
+
 		public bool FirstPoolUsageNeedsSniffing =>
-			(!this.RequestConfiguration?.DisableSniff).GetValueOrDefault(true)
+			!this.RequestDisabledSniff
 				&& this._connectionPool.SupportsReseeding && this._settings.SniffsOnStartup && !this._connectionPool.SniffedOnStartup;
 
 		public bool SniffsOnConnectionFailure =>
-			(!this.RequestConfiguration?.DisableSniff).GetValueOrDefault(true)
+			!this.RequestDisabledSniff
 				&& this._connectionPool.SupportsReseeding && this._settings.SniffsOnConnectionFault;
 
 		public bool SniffsOnStaleCluster =>
-			(!this.RequestConfiguration?.DisableSniff).GetValueOrDefault(true)
+			!this.RequestDisabledSniff
 				&& this._connectionPool.SupportsReseeding && this._settings.SniffInformationLifeSpan.HasValue;
 
 		public bool StaleClusterState
