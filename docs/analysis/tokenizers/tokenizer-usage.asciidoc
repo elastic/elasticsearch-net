@@ -44,6 +44,17 @@ InitializerExample
         ],
         "type": "edge_ngram"
       },
+      "icu": {
+        "rule_files": "Latn:icu-files/KeywordTokenizer.rbbi",
+        "type": "icu_tokenizer"
+      },
+      "kuromoji": {
+        "discard_punctuation": true,
+        "mode": "extended",
+        "nbest_cost": 1000,
+        "nbest_examples": "/箱根山-箱根/成田空港-成田/",
+        "type": "kuromoji_tokenizer"
+      },
       "ng": {
         "min_gram": 1,
         "max_gram": 2,

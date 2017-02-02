@@ -107,6 +107,32 @@ InitializerExample
           "<SOMETHINGELSE>"
         ]
       },
+      "icuc": {
+        "alternate": "non-ignorable",
+        "caseFirst": "lower",
+        "caseLevel": true,
+        "country": "DE",
+        "decomposition": "no",
+        "hiraganaQuaternaryMode": true,
+        "language": "de",
+        "numeric": true,
+        "strength": "tertiary",
+        "type": "icu_collation",
+        "variant": "@collation=phonebook"
+      },
+      "icuf": {
+        "type": "icu_folding",
+        "unicodeSetFilter": "[^åäöÅÄÖ]"
+      },
+      "icun": {
+        "name": "nfc",
+        "type": "icu_normalizer"
+      },
+      "icut": {
+        "dir": "forward",
+        "id": "Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC",
+        "type": "icu_transform"
+      },
       "keepwords": {
         "type": "keep",
         "keep_words": [
@@ -123,6 +149,21 @@ InitializerExample
           "b"
         ],
         "ignore_case": true
+      },
+      "kfr": {
+        "type": "kuromoji_readingform",
+        "use_romaji": true
+      },
+      "kpos": {
+        "stoptags": [
+          "#  verb-main:",
+          "動詞-自立"
+        ],
+        "type": "kuromoji_part_of_speech"
+      },
+      "ks": {
+        "minimum_length": 4,
+        "type": "kuromoji_stemmer"
       },
       "kstem": {
         "type": "kstem"

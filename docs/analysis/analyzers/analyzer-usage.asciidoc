@@ -80,6 +80,10 @@ InitializerExample
       },
       "myWhiteSpace2": {
         "type": "whitespace"
+      },
+      "kuro": {
+        "type": "kuromoji",
+        "mode": "search"
       }
     }
   }

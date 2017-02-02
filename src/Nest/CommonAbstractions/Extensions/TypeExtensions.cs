@@ -185,8 +185,8 @@ namespace Nest
 				foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
 					yield return propertyInfo;
 #if DOTNETCORE
-				type = type.GetTypeInfo().BaseType;
-			} while (type.GetTypeInfo().BaseType != null);
+				type = type.GetTypeInfo()?.BaseType;
+			} while (type?.GetTypeInfo()?.BaseType != null);
 #else
 				type = type.BaseType;
 			} while (type?.BaseType != null);
