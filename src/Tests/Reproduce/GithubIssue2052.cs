@@ -18,11 +18,6 @@ namespace Tests.Reproduce
 		private static object _bulkHeader =
 			 new { index = new { _index = "myIndex", _type = "myDocumentType" } };
 		private readonly ElasticLowLevelClient _client;
-#if !DOTNETCORE
-		private AssemblyName _assemblyName = new AssemblyName(typeof(GithubIssue2052).Assembly.FullName);
-#else
-		private AssemblyName _assemblyName = new AssemblyName(typeof(GithubIssue2052).GetTypeInfo().Assembly.FullName);
-#endif
 
 		public GithubIssue2052()
 		{

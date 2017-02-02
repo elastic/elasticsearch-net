@@ -9,15 +9,8 @@ using Xunit;
 
 namespace Tests.Reproduce
 {
-	public class GithubIssue2309 : IClusterFixture<ReadOnlyCluster>
+	public class GithubIssue2309
 	{
-		private readonly ReadOnlyCluster _cluster;
-
-		public GithubIssue2309(ReadOnlyCluster cluster)
-		{
-			_cluster = cluster;
-		}
-
 		[U]
 		public void FailedReIndexResponseMarkedAsInvalidAndContainFailures()
 		{

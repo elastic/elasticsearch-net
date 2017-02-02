@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <ResolveNuGetPackages>false</ResolveNuGetPackages>
+    <NoWarn>0219</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

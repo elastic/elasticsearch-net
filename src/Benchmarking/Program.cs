@@ -26,7 +26,7 @@ namespace Benchmarking
 
 			using (var cluster = new BenchmarkingCluster())
 			{
-				var warmup = new HttpTester(cluster.Node.Port).RunTests(10);
+				new HttpTester(cluster.Node.Port).RunTests(10);
 				var times = arguments.Times;
 
 				if (arguments.Interactive)

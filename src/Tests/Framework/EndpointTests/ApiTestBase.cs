@@ -20,7 +20,6 @@ namespace Tests.Framework
 	{
 		private readonly EndpointUsage _usage;
 		private readonly LazyResponses _responses;
-		private readonly int _port;
 		private readonly CallUniqueValues _uniqueValues;
 
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
@@ -51,7 +50,6 @@ namespace Tests.Framework
 			this.Cluster = cluster;
 
 			this._responses = usage.CallOnce(this.ClientUsage);
-			this._port = cluster.Node.Port;
 			this._uniqueValues = usage.CallUniqueValues;
 			this.SetupSerialization();
 		}
@@ -129,9 +127,11 @@ namespace Tests.Framework
 #pragma warning disable 7095 //enable this if you expect a single overload to act up
 				catch (Exception ex) when (false)
 #pragma warning restore 7095
+#pragma warning disable 0162 //dead code while the previous exception filter is false
 				{
 					throw new Exception($"asserting over the response from: {kv.Key} failed: {ex.Message}", ex);
 				}
+#pragma warning restore 0162
 			}
 		}
 

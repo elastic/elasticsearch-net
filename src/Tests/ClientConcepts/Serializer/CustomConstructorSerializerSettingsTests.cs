@@ -33,6 +33,7 @@ namespace Tests.ClientConcepts.Serializer
 
 		private sealed class LocalJsonNetSerializer : JsonNetSerializer
 		{
+			//TODO this is unused so what exactly are we testing below?
 			private Action<JsonSerializerSettings, IConnectionSettingsValues> _settingsOverride;
 
 			public LocalJsonNetSerializer(
