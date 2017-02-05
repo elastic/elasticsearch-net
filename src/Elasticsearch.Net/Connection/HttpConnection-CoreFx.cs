@@ -69,6 +69,7 @@ namespace Elasticsearch.Net
 				var response = client.SendAsync(requestMessage).GetAwaiter().GetResult();
 				requestData.MadeItToResponse = true;
 				builder.StatusCode = (int)response.StatusCode;
+				builder.DeprecationWarnings = response.Headers.GetValues("Warning");
 
 				if (response.Content != null)
 					builder.Stream = response.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
@@ -91,6 +92,7 @@ namespace Elasticsearch.Net
 				var response = await client.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
 				requestData.MadeItToResponse = true;
 				builder.StatusCode = (int)response.StatusCode;
+				builder.DeprecationWarnings = response.Headers.GetValues("Warning");
 
 				if (response.Content != null)
 					builder.Stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);

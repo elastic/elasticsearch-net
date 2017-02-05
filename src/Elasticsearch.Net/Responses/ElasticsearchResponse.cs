@@ -11,6 +11,12 @@ namespace Elasticsearch.Net
 		private static readonly string RequestAlreadyCaptured = "<Request stream not captured or already read to completion by serializer. Set DisableDirectStreaming() on ConnectionSettings to force it to be set on the response.>";
 		public static string DebugInformationBuilder(IApiCallDetails r, StringBuilder sb)
 		{
+			if (r.DeprecationWarnings.HasAny())
+			{
+				sb.AppendLine($"# Server indicated deprecations:");
+				foreach(var deprecation in r.DeprecationWarnings)
+					sb.AppendLine($"- {deprecation}");
+			}
 			sb.AppendLine($"# Audit trail of this API call:");
 			var auditTrail = (r.AuditTrail ?? Enumerable.Empty<Audit>()).ToList();
 			DebugAuditTrail(auditTrail, sb);
@@ -67,6 +73,8 @@ namespace Elasticsearch.Net
 
 		public List<Audit> AuditTrail { get; internal set; }
 
+		public IEnumerable<string> DeprecationWarnings { get; internal set; } = Enumerable.Empty<string>();
+
 		/// <summary>
 		/// The response is successful or has a response code between 400-599, the call should not be retried.
 		/// Only on 502,503 and 504 will this return false;
@@ -104,6 +112,7 @@ namespace Elasticsearch.Net
 				return ResponseStatics.DebugInformationBuilder(this, sb);
 			}
 		}
+
 
 		public override string ToString() =>  $"{(Success ? "S" : "Uns")}uccessful low level call on {HttpMethod.GetStringValue()}: {Uri.PathAndQuery}";
 	}

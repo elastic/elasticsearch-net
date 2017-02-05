@@ -10,7 +10,7 @@ namespace Elasticsearch.Net
 		/// The response status code is in the 200 range or is in the allowed list of status codes set on the request.
 		/// </summary>
 		bool Success { get; }
-		
+
 		/// <summary>
 		/// If Success is false this will hold the original exception.
 		/// This will be the orginating CLR exception in most cases.
@@ -26,14 +26,14 @@ namespace Elasticsearch.Net
 		/// The HTTP method used by the request
 		/// </summary>
 		HttpMethod HttpMethod { get; }
-		
+
 		/// <summary>
-		/// The url as requested 
+		/// The url as requested
 		/// </summary>
 		Uri Uri { get; }
-		
+
 		/// <summary>
-		/// The HTTP status code as returned by Elasticsearch 
+		/// The HTTP status code as returned by Elasticsearch
 		/// </summary>
 		int? HttpStatusCode { get; }
 
@@ -49,5 +49,7 @@ namespace Elasticsearch.Net
 		List<Audit> AuditTrail { get; }
 
 		string DebugInformation { get; }
+
+		IEnumerable<string> DeprecationWarnings { get; }
 	}
 }

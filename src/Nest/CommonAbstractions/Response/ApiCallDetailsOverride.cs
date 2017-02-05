@@ -21,6 +21,7 @@ namespace Nest
 		public byte[] RequestBodyInBytes => this._original.RequestBodyInBytes;
 		public List<Audit> AuditTrail => this._original.AuditTrail;
 		public string DebugInformation => this._original.DebugInformation;
+		public IEnumerable<string> DeprecationWarnings => this._original.DeprecationWarnings;
 
 		public ApiCallDetailsOverride(IApiCallDetails original, bool isValid)
 		{
