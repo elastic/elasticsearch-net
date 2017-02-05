@@ -45,7 +45,10 @@ namespace Tests.Framework.Integration
 		IngestAttachment,
 
 		[Moniker("analysis-kuromoji")]
-		AnalysisKuromoji
+		AnalysisKuromoji,
+
+		[Moniker("analysis-icu")]
+		AnalysisIcu
 	}
 
 	public static class ElasticsearchPluginExtensions
@@ -75,6 +78,7 @@ namespace Tests.Framework.Integration
 				new ElasticsearchPluginConfiguration(IngestAttachment,
 					version => version >= new ElasticsearchVersion("5.0.0-alpha3")),
 				new ElasticsearchPluginConfiguration(AnalysisKuromoji),
+				new ElasticsearchPluginConfiguration(AnalysisIcu)
 			};
 
 		protected override ElasticsearchPlugin GetKeyForItem(ElasticsearchPluginConfiguration item)
