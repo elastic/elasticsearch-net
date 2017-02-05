@@ -135,7 +135,7 @@ namespace Tests.Framework.Integration
 			createProjectIndex.IsValid.Should().BeTrue();
 		}
 
-		private IAnalysis ProjectAnalysisSettings(AnalysisDescriptor analysis) => analysis
+		public static IAnalysis ProjectAnalysisSettings(AnalysisDescriptor analysis) => analysis
 			.TokenFilters(tokenFilters => tokenFilters
 				.Shingle("shingle", shingle=>shingle
 					.MinShingleSize(2)
