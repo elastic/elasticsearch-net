@@ -14,6 +14,7 @@ namespace Tests.Aggregations.Bucket.Terms
 
 		protected override object ExpectJson => new
 		{
+			size = 0,
 			aggs = new
 			{
 				states = new
@@ -46,6 +47,7 @@ namespace Tests.Aggregations.Bucket.Terms
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Size(0)
 			.Aggregations(a => a
 				.Terms("states", st => st
 					.Field(p => p.State)
@@ -66,6 +68,7 @@ namespace Tests.Aggregations.Bucket.Terms
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
+				Size = 0,
 				Aggregations = new TermsAggregation("states")
 				{
 					Field = Field<Project>(p => p.State),
@@ -103,58 +106,6 @@ namespace Tests.Aggregations.Bucket.Terms
 			}
 			states.Meta.Should().NotBeNull().And.HaveCount(1);
 			states.Meta["foo"].Should().Be("bar");
-		}
-	}
-
-	public class NumericTermsAggregationUsageTests : AggregationUsageTestBase
-	{
-		public NumericTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
-
-		protected override object ExpectJson => new
-		{
-			aggs = new
-			{
-				commits = new
-				{
-				
-					terms = new
-					{
-						field = "numberOfCommits"
-					}
-				}
-			}
-		};
-
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.Terms("commits", st => st
-					.Field(p => p.NumberOfCommits)
-				)
-			);
-
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
-			{
-				Aggregations = new TermsAggregation("commits")
-				{
-					Field = Field<Project>(p => p.NumberOfCommits),
-				}
-			};
-
-		protected override void ExpectResponse(ISearchResponse<Project> response)
-		{
-			response.IsValid.Should().BeTrue();
-			var commits = response.Aggs.Terms<int>("commits");
-			commits.Should().NotBeNull();
-			commits.DocCountErrorUpperBound.Should().HaveValue();
-			commits.SumOtherDocCount.Should().HaveValue();
-			commits.Buckets.Should().NotBeNull();
-			commits.Buckets.Count.Should().BeGreaterThan(0);
-			foreach (var item in commits.Buckets)
-			{
-				item.Key.Should().BeGreaterThan(0);
-				item.DocCount.Should().BeGreaterOrEqualTo(1);
-			}
 		}
 	}
 }
