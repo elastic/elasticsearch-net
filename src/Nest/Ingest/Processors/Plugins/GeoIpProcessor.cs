@@ -29,6 +29,12 @@ namespace Nest
 
 		[JsonProperty("properties")]
 		IEnumerable<string> Properties { get; set; }
+
+		/// <summary>
+		/// If `true` and `field` does not exist, the processor quietly exits without modifying the document
+		/// </summary>
+		[JsonProperty("ignore_missing")]
+		bool? IgnoreMissing { get; set; }
 	}
 
 	/// <summary>
@@ -51,6 +57,9 @@ namespace Nest
 		public string DatabaseFile { get; set; }
 
 		public IEnumerable<string> Properties { get; set; }
+
+		/// <inheritdoc/>
+		public bool? IgnoreMissing { get; set; }
 	}
 
 	/// <summary>
@@ -72,12 +81,16 @@ namespace Nest
 		Field IGeoIpProcessor.TargetField { get; set; }
 		string IGeoIpProcessor.DatabaseFile { get; set; }
 		IEnumerable<string> IGeoIpProcessor.Properties { get; set; }
+		bool? IGeoIpProcessor.IgnoreMissing { get; set; }
 
 
 		public GeoIpProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
 		public GeoIpProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
 			Assign(a => a.Field = objectPath);
+
+		/// <inheritdoc/>
+		public GeoIpProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
 
 		public GeoIpProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
 
