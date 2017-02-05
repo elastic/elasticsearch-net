@@ -9,6 +9,7 @@ namespace Tests.Framework.Integration
 		ElasticsearchPlugin.MapperAttachments,
 		ElasticsearchPlugin.IngestGeoIp,
 		ElasticsearchPlugin.AnalysisKuromoji,
+		ElasticsearchPlugin.AnalysisIcu,
 		ElasticsearchPlugin.IngestAttachment
 	)]
 	public class WritableCluster : ClusterBase

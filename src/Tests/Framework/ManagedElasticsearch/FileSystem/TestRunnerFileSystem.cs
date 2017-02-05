@@ -61,17 +61,12 @@ namespace Tests.Framework.Integration
 		{
 			lock (TestRunnerFileSystem.Lock)
 			{
-				Console.WriteLine($"Create ${this.RoamingFolder}");
 				if (!Directory.Exists(this.RoamingFolder))
 					Directory.CreateDirectory(this.RoamingFolder);
 
-				Console.WriteLine("EnsureJavaHome");
 				EnsureJavaHome();
-				Console.WriteLine("DownloadDistributionZip");
 				DownloadDistributionZip();
-				Console.WriteLine("UnzioDistribution");
 				UnzipDistribution();
-				Console.WriteLine("CreateHelperBatFile");
 				CreateHelperBatFile();
 
 				if (this.Version.IsSnapshot) return;
