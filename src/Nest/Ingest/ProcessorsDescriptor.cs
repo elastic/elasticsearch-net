@@ -106,6 +106,12 @@ namespace Nest
 		public ProcessorsDescriptor Uppercase<T>(Func<UppercaseProcessDescriptor<T>, IUppercaseProcessor> selector) where T : class  =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new UppercaseProcessDescriptor<T>())));
 
+		/// <summary>
+		/// Converts a JSON string into a structured JSON object.
+		/// </summary>
+		public ProcessorsDescriptor Json<T>(Func<JsonProcessorDescriptor<T>, IJsonProcessor> selector) where T : class  =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new JsonProcessorDescriptor<T>())));
+
         /// <summary>
         /// The user_agent processor extracts details from the user agent string a browser sends with its web requests.
         /// This processor adds this information by default under the user_agent field.
