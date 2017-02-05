@@ -18,6 +18,7 @@ namespace Nest
 		IndexOptions? IKeywordProperty.IndexOptions { get; set; }
 		bool? IKeywordProperty.Norms { get; set; }
 		string IKeywordProperty.NullValue { get; set; }
+		string IKeywordProperty.Normalizer { get; set; }
 
 		public double Boost { get { return Self.Boost.GetValueOrDefault(); } set { Self.Boost = value; } }
 		public bool EagerGlobalOrdinals { get { return Self.EagerGlobalOrdinals.GetValueOrDefault(); } set { Self.EagerGlobalOrdinals = value; } }
@@ -27,6 +28,7 @@ namespace Nest
 		public IndexOptions IndexOptions { get { return Self.IndexOptions.GetValueOrDefault(); } set { Self.IndexOptions = value; } }
 		public string NullValue { get { return Self.NullValue; } set { Self.NullValue = value; } }
 		public bool Norms { get { return Self.Norms.GetValueOrDefault(true); } set { Self.Norms = value; } }
+		public string Normalizer { get { return Self.Normalizer; } set { Self.Normalizer = value; } }
 
 		public KeywordAttribute() : base("keyword") { }
 	}

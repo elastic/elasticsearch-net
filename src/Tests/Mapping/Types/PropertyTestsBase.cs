@@ -34,6 +34,7 @@ namespace Tests.Mapping.Types
 			.Index(CallIsolatedValue)
 			.Properties(this.FluentProperties);
 
+
 		protected override PutMappingRequest<Project> Initializer => new PutMappingRequest<Project>(CallIsolatedValue, typeof(Project))
 		{
 			Properties = this.InitializerProperties
