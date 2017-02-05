@@ -27,8 +27,6 @@ namespace Tests.Mapping.Types.Core.Range.DateRange
 							index = false,
 							include_in_all = false,
 							boost = 1.5,
-							null_value = _nullValue,
-							ignore_malformed = true,
 							coerce = true
 						}
 					}
@@ -45,9 +43,7 @@ namespace Tests.Mapping.Types.Core.Range.DateRange
 						.Store()
 						.Index(false)
 						.Boost(1.5)
-						.NullValue(this._nullValue)
 						.IncludeInAll(false)
-						.IgnoreMalformed()
 						.Coerce()
 					)
 				)
@@ -67,9 +63,7 @@ namespace Tests.Mapping.Types.Core.Range.DateRange
 								Store = true,
 								Index = false,
 								Boost = 1.5,
-								NullValue = this._nullValue,
 								IncludeInAll = false,
-								IgnoreMalformed = true,
 								Coerce = true
 							}
 						}

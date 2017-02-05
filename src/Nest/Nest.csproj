@@ -1182,6 +1182,7 @@
     <Compile Include="QueryDsl\TermLevel\Range\NumericRangeQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Range\RangeQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Range\RangeQueryJsonConverter.cs" />
+    <Compile Include="QueryDsl\TermLevel\Range\RangeRelation.cs" />
     <Compile Include="QueryDsl\TermLevel\Range\TermRangeQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Regexp\RegexpQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Terms\TermsQuery.cs" />

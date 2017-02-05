@@ -12,6 +12,9 @@ namespace Tests.Framework.MockData
 		public IntegerRange Integers { get; set; }
 		public LongRange Longs { get; set; }
 
+		//for deserialization
+		public  Ranges() { }
+
 		private Ranges(Faker faker)
 		{
 			Func<bool> r = () => faker.Random.Bool();

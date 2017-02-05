@@ -158,6 +158,26 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				{
 					type = "completion"
 				},
+				ranges = new {
+					properties = new {
+						dates = new {
+							type = "date_range"
+						},
+						doubles = new {
+							type = "double_range"
+						},
+						floats = new {
+							type = "float_range"
+						},
+						integers = new {
+							type = "integer_range"
+						},
+						longs = new {
+							type = "long_range"
+						}
+					},
+					type = "object"
+				},
 				tags = new
 				{
 					properties = new
@@ -284,6 +304,18 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				{ p => p.StartedOn, new DateProperty() },
 				{ p => p.State, new NumberProperty(NumberType.Integer) },
 				{ p => p.Suggest, new CompletionProperty() },
+				{ p => p.Ranges, new ObjectProperty
+						{
+							Properties = new Properties<Ranges>
+							{
+								{ p => p.Dates, new DateRangeProperty() },
+								{ p => p.Doubles, new DoubleRangeProperty() },
+								{ p => p.Floats, new FloatRangeProperty() },
+								{ p => p.Integers, new IntegerRangeProperty() },
+								{ p => p.Longs, new LongRangeProperty() },
+							}
+						}
+				},
 				{ p => p.Tags, new ObjectProperty
 						{
 							Properties = new Properties<Tag>
