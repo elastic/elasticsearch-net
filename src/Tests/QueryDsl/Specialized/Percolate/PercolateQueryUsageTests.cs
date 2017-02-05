@@ -49,6 +49,9 @@ namespace Tests.QueryDsl.Specialized.Percolate
 			foreach (var index in values.Values)
 			{
 				this.Client.CreateIndex(index, c => c
+                    .Settings(settings=>settings
+                        .Analysis(Seeder.ProjectAnalysisSettings)
+                    )
 					.Mappings(m => m
 						.Map<Project>(mm => mm.AutoMap()
 							.Properties(Seeder.ProjectProperties)
@@ -166,6 +169,9 @@ namespace Tests.QueryDsl.Specialized.Percolate
 			foreach (var index in values.Values)
 			{
 				this.Client.CreateIndex(index, c => c
+                    .Settings(settings=>settings
+                        .Analysis(Seeder.ProjectAnalysisSettings)
+                    )
 					.Mappings(m => m
 						.Map<Project>(mm => mm.AutoMap()
 							.Properties(Seeder.ProjectProperties)
