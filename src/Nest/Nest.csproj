@@ -249,6 +249,7 @@
     <Compile Include="Analysis\TokenFilters\StemmerTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\Stop\StopTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\Synonym\SynonymFormat.cs" />
+    <Compile Include="Analysis\TokenFilters\Synonym\SynonymGraphTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\Synonym\SynonymTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\TokenFilterBase.cs" />
     <Compile Include="Analysis\TokenFilters\TokenFilterJsonConverter.cs" />

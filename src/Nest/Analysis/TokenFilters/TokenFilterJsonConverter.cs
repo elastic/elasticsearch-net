@@ -48,6 +48,7 @@ namespace Nest
 				case "stop": return o.ToObject<StopTokenFilter>(ElasticContractResolver.Empty);
 				case "standard": return o.ToObject<StandardTokenFilter>(ElasticContractResolver.Empty);
 				case "synonym": return o.ToObject<SynonymTokenFilter>(ElasticContractResolver.Empty);
+				case "synonym_graph": return o.ToObject<SynonymGraphTokenFilter>(ElasticContractResolver.Empty);
 				case "trim": return o.ToObject<TrimTokenFilter>(ElasticContractResolver.Empty);
 				case "truncate": return o.ToObject<TruncateTokenFilter>(ElasticContractResolver.Empty);
 				case "unique": return o.ToObject<UniqueTokenFilter>(ElasticContractResolver.Empty);
