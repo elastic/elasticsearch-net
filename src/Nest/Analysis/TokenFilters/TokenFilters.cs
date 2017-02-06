@@ -82,6 +82,13 @@ namespace Nest
 			Assign(name, selector?.Invoke(new SynonymTokenFilterDescriptor()));
 
 		/// <summary>
+		/// The synonym_graph token filter allows to easily handle synonyms,
+		/// including multi-word synonyms correctly during the analysis process.
+		/// </summary>
+		public TokenFiltersDescriptor SynonymGraph(string name, Func<SynonymGraphTokenFilterDescriptor, ISynonymGraphTokenFilter> selector) =>
+			Assign(name, selector?.Invoke(new SynonymGraphTokenFilterDescriptor()));
+
+		/// <summary>
 		/// A token filter of type asciifolding that converts alphabetic, numeric, and symbolic Unicode characters which are
 		/// <para> not in the first 127 ASCII characters (the “Basic Latin” Unicode block) into their ASCII equivalents, if one exists.</para>
 		/// </summary>
