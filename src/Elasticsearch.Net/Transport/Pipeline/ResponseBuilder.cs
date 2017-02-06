@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,6 +21,8 @@ namespace Elasticsearch.Net
 		public Exception Exception { get; set; }
 		public int? StatusCode { get; set; }
 		public Stream Stream { get; set; }
+
+		public IEnumerable<string> DeprecationWarnings { get; set; }
 
 		public ResponseBuilder(RequestData requestData, CancellationToken cancellationToken = default(CancellationToken))
 		{
@@ -55,6 +59,7 @@ namespace Elasticsearch.Net
 			response.Uri = this._requestData.Uri;
 			response.HttpMethod = this._requestData.Method;
 			response.OriginalException = exception;
+			response.DeprecationWarnings = this.DeprecationWarnings ?? Enumerable.Empty<string>();
 			return response;
 		}
 
