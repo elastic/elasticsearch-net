@@ -25,10 +25,12 @@ namespace Tests.Search.Suggesters
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
+#pragma warning disable 618
 			fluent: (c, f) => c.Suggest<Project>(f),
 			fluentAsync: (c, f) => c.SuggestAsync<Project>(f),
 			request: (c, r) => c.Suggest<Project>(r),
 			requestAsync: (c, r) => c.SuggestAsync<Project>(r)
+#pragma warning restore 618
 		);
 
 		protected override int ExpectStatusCode => 200;
