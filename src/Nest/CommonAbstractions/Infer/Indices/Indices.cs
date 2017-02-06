@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
@@ -7,6 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(IndicesMultiSyntaxJsonConverter))]
+	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUrlParameter
 	{
 		public class AllIndicesMarker { internal AllIndicesMarker() { } }
@@ -60,6 +62,11 @@ namespace Nest
 		public static implicit operator Indices(IndexName[] many) => new ManyIndices(many);
 		public static implicit operator Indices(IndexName index) => new ManyIndices(new[] { index });
 		public static implicit operator Indices(Type type) => new ManyIndices(new IndexName[] { type });
+
+		private string DebugDisplay => this.Match(
+			all => "_all",
+			types => $"Count: {types.Indices.Count} [" + string.Join(",", types.Indices.Select((t, i) => $"({i+1}: {t.DebugDisplay})")) + "]"
+		);
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{

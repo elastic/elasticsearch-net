@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,11 +13,13 @@ namespace Nest
 	{
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class PercolatorProperty : PropertyBase, IPercolatorProperty
 	{
 		public PercolatorProperty() : base("percolator") { }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class PercolatorPropertyDescriptor<T>
 	: PropertyDescriptorBase<PercolatorPropertyDescriptor<T>, IPercolatorProperty, T>, IPercolatorProperty
 	where T : class

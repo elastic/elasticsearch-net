@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -7,11 +8,13 @@ namespace Nest
 	{
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class BinaryProperty : DocValuesPropertyBase, IBinaryProperty
 	{
 		public BinaryProperty() : base("binary") { }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class BinaryPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<BinaryPropertyDescriptor<T>, IBinaryProperty, T>, IBinaryProperty
 		where T : class

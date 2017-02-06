@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class ActionIds : IUrlParameter
 	{
 		private readonly List<string> _actionIds;
@@ -25,6 +27,9 @@ namespace Nest
 						   .ToList();
 		}
 
+		private string DebugDisplay => this.GetString(null);
+
+		//TODO explicit implemtation
 		public string GetString(IConnectionConfigurationValues settings) => string.Join(",", this._actionIds);
 
 		public static implicit operator ActionIds(string actionIds) => new ActionIds(actionIds);

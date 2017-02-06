@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -12,6 +13,7 @@ namespace Nest
 		bool? IncludeInRoot { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class NestedProperty : ObjectProperty, INestedProperty
 	{
 		public NestedProperty() : base("nested") { }
@@ -20,6 +22,7 @@ namespace Nest
 		public bool? IncludeInRoot { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class NestedPropertyDescriptor<TParent, TChild>
 		: ObjectPropertyDescriptorBase<NestedPropertyDescriptor<TParent, TChild>, INestedProperty, TParent, TChild>
 		, INestedProperty

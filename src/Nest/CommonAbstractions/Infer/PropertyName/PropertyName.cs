@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
@@ -6,6 +7,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[ContractJsonConverter(typeof(PropertyNameJsonConverter))]
+	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class PropertyName : IEquatable<PropertyName>, IUrlParameter
 	{
 		public string Name { get; }
@@ -15,6 +17,11 @@ namespace Nest
 
 		private readonly object _comparisonValue;
 		private readonly Type _type;
+
+		internal string DebugDisplay =>
+			$"{Expression?.ToString() ?? PropertyDebug ?? Name}{(_type == null ? "" : " typeof: " + _type.Name)}";
+
+		private string PropertyDebug => Property == null ? null : $"PropertyInfo: {Property.Name}";
 
 		public PropertyName(string name)
 		{
@@ -35,6 +42,7 @@ namespace Nest
 		{
 			Property = property;
 			_comparisonValue = property;
+			_type = property.DeclaringType;
 		}
 
 		public static implicit operator PropertyName(string name)

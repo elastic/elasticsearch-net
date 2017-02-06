@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using Newtonsoft.Json;
 
@@ -25,12 +26,15 @@ namespace Nest
 		PropertyInfo ClrOrigin { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public abstract class PropertyBase : IProperty, IPropertyWithClrOrigin
 	{
 		protected PropertyBase(TypeName typeName)
 		{
 			Type = typeName;
 		}
+
+		protected string DebugDisplay => $"Type: {Type.DebugDisplay}, Name: {Name.DebugDisplay} ";
 
 		public PropertyName Name { get; set; }
 		public virtual TypeName Type { get; set; }

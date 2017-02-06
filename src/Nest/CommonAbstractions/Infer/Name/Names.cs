@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Elasticsearch.Net;
 
 namespace Nest
 {
+	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Names : IUrlParameter
 	{
 		private readonly IEnumerable<Name> _names;
-		
+
 		public Names(IEnumerable<string> names)
 		{
 			if (!names.HasAny()) throw new ArgumentException("can not create Names on an empty enumerable of string", nameof(names));
@@ -24,8 +26,11 @@ namespace Nest
 			return new Names(nameList);
 		}
 
+		//TODO to explicit private implemenation
 		public string GetString(IConnectionConfigurationValues settings) =>
 			string.Join(",", this._names.Select(n => n.GetString(settings)));
+
+		private string DebugDisplay => GetString(null);
 
 		public static implicit operator Names(Name name) => new Names(new[] { name });
 

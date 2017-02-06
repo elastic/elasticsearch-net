@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
@@ -8,6 +9,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[ContractJsonConverter(typeof(FieldJsonConverter))]
+	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Field : IEquatable<Field>, IUrlParameter
 	{
 		private readonly object _comparisonValue;
@@ -22,6 +24,11 @@ namespace Nest
 		public double? Boost { get; set; }
 
 		public bool CachableExpression { get; }
+
+		internal string DebugDisplay =>
+			$"{Expression?.ToString() ?? PropertyDebug ?? Name}{(Boost.HasValue ? "^" + Boost.Value: "")}{(_type == null ? "" : " typeof: " + _type.Name)}";
+
+		private string PropertyDebug => Property == null ? null : $"PropertyInfo: {Property.Name}";
 
 		public Fields And(Field field) => new Fields(new [] { this, field });
 
@@ -67,12 +74,10 @@ namespace Nest
 			if (name == null) return null;
 
 			var parts = name.Split(new [] { '^' }, StringSplitOptions.RemoveEmptyEntries);
-			if (parts.Length > 1)
-			{
-				name = parts[0];
-				boost = double.Parse(parts[1], CultureInfo.InvariantCulture);
-			}
-			return name;
+			if (parts.Length <= 1) return name.Trim();
+			name = parts[0];
+			boost = double.Parse(parts[1], CultureInfo.InvariantCulture);
+			return name.Trim();
 		}
 
 		public static implicit operator Field(string name)
@@ -133,5 +138,6 @@ namespace Nest
 
 			return nestSettings.Inferrer.Field(this);
 		}
+
 	}
 }

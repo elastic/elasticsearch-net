@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,7 @@ namespace Nest
 		string NullValue { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class KeywordProperty : DocValuesPropertyBase, IKeywordProperty
 	{
 		public KeywordProperty() : base("keyword") { }
@@ -49,6 +51,7 @@ namespace Nest
 		public string NullValue { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class KeywordPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<KeywordPropertyDescriptor<T>, IKeywordProperty, T>, IKeywordProperty
 		where T : class

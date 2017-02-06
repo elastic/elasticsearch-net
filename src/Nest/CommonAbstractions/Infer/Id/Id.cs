@@ -1,10 +1,13 @@
 ﻿using System;
+using System.CodeDom;
+using System.Diagnostics;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonConverter(typeof(IdJsonConverter))]
+	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Id : IEquatable<Id>, IUrlParameter
 	{
 		internal object Value { get; set; }
@@ -19,6 +22,8 @@ namespace Nest
 		public static implicit operator Id(Guid id) => new Id(id.ToString("D"));
 
 		public static Id From<T>(T document) where T : class => new Id(document);
+
+		private string DebugDisplay => Value?.ToString() ?? "Id from instance typeof: " + Document?.GetType().Name;
 
 		public string GetString(IConnectionConfigurationValues settings)
 		{

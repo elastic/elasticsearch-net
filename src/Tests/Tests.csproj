@@ -226,6 +226,7 @@
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\AddressParsing.doc.cs" />
     <Compile Include="ClientConcepts\Connection\CustomConnections.cs" />
     <Compile Include="ClientConcepts\DeprecationLogging.doc.cs" />
+    <Compile Include="ClientConcepts\DebuggerDisplayTests.cs" />
     <Compile Include="Cluster\TaskManagement\GetTask\GetTaskApiTests.cs" />
     <Compile Include="Cluster\TaskManagement\GetTask\GetTaskUrlTests.cs" />
     <Compile Include="CodeStandards\Responses.doc.cs" />
