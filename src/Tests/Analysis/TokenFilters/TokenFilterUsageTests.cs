@@ -226,6 +226,16 @@ namespace Tests.Analysis.TokenFilters
 						expand = true,
 						tokenizer = "whitespace"
 					},
+					syn_graph = new
+					{
+						type = "synonym_graph",
+						synonyms_path = "analysis/stopwords.txt",
+						format = "wordnet",
+						synonyms = new[] {"x=>y", "z=>s"},
+						ignore_case = true,
+						expand = true,
+						tokenizer = "whitespace"
+					},
 					trimmer = new
 					{
 						type = "trim"
@@ -369,6 +379,14 @@ namespace Tests.Analysis.TokenFilters
 						.Synonyms("x=>y", "z=>s")
 						.Tokenizer("whitespace")
 					)
+					.SynonymGraph("syn_graph", t => t
+						.Expand()
+						.Format(SynonymFormat.WordNet)
+						.IgnoreCase()
+						.SynonymsPath("analysis/stopwords.txt")
+						.Synonyms("x=>y", "z=>s")
+						.Tokenizer("whitespace")
+					)
 					.Trim("trimmer")
 					.Truncate("truncer", t => t.Length(100))
 					.Unique("uq", t => t.OnlyOnSamePosition())
@@ -492,6 +510,17 @@ namespace Tests.Analysis.TokenFilters
 						{"stop", new StopTokenFilter {IgnoreCase = true, RemoveTrailing = true, StopWords = new[] {"x", "y", "z"}}},
 						{
 							"syn", new SynonymTokenFilter
+							{
+								Expand = true,
+								Format = SynonymFormat.WordNet,
+								IgnoreCase = true,
+								SynonymsPath = "analysis/stopwords.txt",
+								Synonyms = new[] {"x=>y", "z=>s"},
+								Tokenizer = "whitespace"
+							}
+						},
+						{
+							"syn_graph", new SynonymGraphTokenFilter
 							{
 								Expand = true,
 								Format = SynonymFormat.WordNet,
