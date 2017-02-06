@@ -110,8 +110,7 @@ namespace Tests.CommonOptions.TimeUnit
 			(new Time("-1") == new Time(-1)).Should().BeTrue();
 		}
 
-		[U]
-		public void UsingInterval()
+		[U] public void UsingInterval()
 		{
 			/** === Units of Time
 			* Units of `Time` are specified as a union of either a `DateInterval` or `Time`,
@@ -131,8 +130,7 @@ namespace Tests.CommonOptions.TimeUnit
 		}
 
 		//hide
-		[U]
-		public void MillisecondsNeverSerializeToMonthsOrYears()
+		[U] public void MillisecondsNeverSerializeToMonthsOrYears()
 		{
 			double millisecondsInAMonth = 2592000000;
 			Expect("4.29w").WhenSerializing(new Time(millisecondsInAMonth));
@@ -142,8 +140,7 @@ namespace Tests.CommonOptions.TimeUnit
 		}
 
 		//hide
-		[U]
-		public void ExpectedValues()
+		[U] public void ExpectedValues()
 		{
 			Expect("-1").WhenSerializing(new Time(-1));
 			Expect("-1").WhenSerializing(new Time("-1"));

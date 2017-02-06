@@ -56,7 +56,7 @@ namespace Nest
 		string Pipeline { get; set; }
 
 		/// <summary>
-		/// By default the bulkall helper simply calls <see cref="BulkDescriptor.IndexMany"/> on the buffer.
+		/// By default the bulkall helper simply calls BulkDescriptor.IndexMany on the buffer.
 		/// There might be case where you'd like more control over this. By setting this callback you are in complete control
 		/// of describing how the buffer should be translated to a bulk operation.
 		/// </summary>

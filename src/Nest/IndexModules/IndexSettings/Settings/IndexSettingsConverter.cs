@@ -152,7 +152,7 @@ namespace Nest
 			Set<int?>(s, settings, UpdatableIndexSettings.MergeSchedulerMaxThreadCount, v => ms.MaxThreadCount = v);
 			Set<bool?>(s, settings, UpdatableIndexSettings.MergeSchedulerAutoThrottle, v => ms.AutoThrottle = v);
 
-			var slowlog = s.SlowLog = new SlowLog();
+			s.SlowLog = new SlowLog();
 			var search = s.SlowLog.Search = new SlowLogSearch();
 			Set<LogLevel?>(s, settings, UpdatableIndexSettings.SlowlogSearchLevel, v => search.LogLevel = v);
 			var query = s.SlowLog.Search.Query = new SlowLogSearchQuery();
