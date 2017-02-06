@@ -77,10 +77,12 @@ namespace Tests.Framework
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var index in values.Values) client.CreateIndex(index).ShouldBeValid();
+			foreach (var index in values.Values) client.CreateIndex(index, this.CreateIndexSettings).ShouldBeValid();
 			var indices = Infer.Indices(values.Values.Select(i => (IndexName)i));
 			client.ClusterHealth(f => f.WaitForStatus(WaitForStatus.Yellow).Index(indices))
 				.ShouldBeValid();
 		}
+
+		protected virtual ICreateIndexRequest CreateIndexSettings(CreateIndexDescriptor create) => create;
 	}
 }
