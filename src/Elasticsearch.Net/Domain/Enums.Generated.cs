@@ -256,24 +256,22 @@ namespace Elasticsearch.Net
 		Indexing = 1 << 6,
 		[EnumMember(Value = "merge")]
 		Merge = 1 << 7,
-		[EnumMember(Value = "percolate")]
-		Percolate = 1 << 8,
 		[EnumMember(Value = "request_cache")]
-		RequestCache = 1 << 9,
+		RequestCache = 1 << 8,
 		[EnumMember(Value = "refresh")]
-		Refresh = 1 << 10,
+		Refresh = 1 << 9,
 		[EnumMember(Value = "search")]
-		Search = 1 << 11,
+		Search = 1 << 10,
 		[EnumMember(Value = "segments")]
-		Segments = 1 << 12,
+		Segments = 1 << 11,
 		[EnumMember(Value = "store")]
-		Store = 1 << 13,
+		Store = 1 << 12,
 		[EnumMember(Value = "warmer")]
-		Warmer = 1 << 14,
+		Warmer = 1 << 13,
 		[EnumMember(Value = "suggest")]
-		Suggest = 1 << 15,
+		Suggest = 1 << 14,
 		[EnumMember(Value = "_all")]
-		All = 1 << 16
+		All = 1 << 15
 	}
 	
 	[Flags]public enum NodesInfoMetric
@@ -342,24 +340,22 @@ namespace Elasticsearch.Net
 		Indexing = 1 << 6,
 		[EnumMember(Value = "merge")]
 		Merge = 1 << 7,
-		[EnumMember(Value = "percolate")]
-		Percolate = 1 << 8,
 		[EnumMember(Value = "request_cache")]
-		RequestCache = 1 << 9,
+		RequestCache = 1 << 8,
 		[EnumMember(Value = "refresh")]
-		Refresh = 1 << 10,
+		Refresh = 1 << 9,
 		[EnumMember(Value = "search")]
-		Search = 1 << 11,
+		Search = 1 << 10,
 		[EnumMember(Value = "segments")]
-		Segments = 1 << 12,
+		Segments = 1 << 11,
 		[EnumMember(Value = "store")]
-		Store = 1 << 13,
+		Store = 1 << 12,
 		[EnumMember(Value = "warmer")]
-		Warmer = 1 << 14,
+		Warmer = 1 << 13,
 		[EnumMember(Value = "suggest")]
-		Suggest = 1 << 15,
+		Suggest = 1 << 14,
 		[EnumMember(Value = "_all")]
-		All = 1 << 16
+		All = 1 << 15
 	}
 	
 	[Flags]public enum WatcherStatsMetric
@@ -643,7 +639,6 @@ namespace Elasticsearch.Net
 			if ((enumValue & IndicesStatsMetric.Get) != 0) list.Add("get");
 			if ((enumValue & IndicesStatsMetric.Indexing) != 0) list.Add("indexing");
 			if ((enumValue & IndicesStatsMetric.Merge) != 0) list.Add("merge");
-			if ((enumValue & IndicesStatsMetric.Percolate) != 0) list.Add("percolate");
 			if ((enumValue & IndicesStatsMetric.RequestCache) != 0) list.Add("request_cache");
 			if ((enumValue & IndicesStatsMetric.Refresh) != 0) list.Add("refresh");
 			if ((enumValue & IndicesStatsMetric.Search) != 0) list.Add("search");
@@ -701,7 +696,6 @@ namespace Elasticsearch.Net
 			if ((enumValue & NodesStatsIndexMetric.Get) != 0) list.Add("get");
 			if ((enumValue & NodesStatsIndexMetric.Indexing) != 0) list.Add("indexing");
 			if ((enumValue & NodesStatsIndexMetric.Merge) != 0) list.Add("merge");
-			if ((enumValue & NodesStatsIndexMetric.Percolate) != 0) list.Add("percolate");
 			if ((enumValue & NodesStatsIndexMetric.RequestCache) != 0) list.Add("request_cache");
 			if ((enumValue & NodesStatsIndexMetric.Refresh) != 0) list.Add("refresh");
 			if ((enumValue & NodesStatsIndexMetric.Search) != 0) list.Add("search");
