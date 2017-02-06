@@ -29,6 +29,12 @@ namespace Nest
 							var propertyName = (string)reader.Value;
 							switch (propertyName)
 							{
+								case "partition":
+									termsInclude.Partition = Convert.ToInt64(reader.ReadAsDouble());
+									break;
+								case "num_partitions":
+									termsInclude.NumberOfPartitions = Convert.ToInt64(reader.ReadAsDouble());
+									break;
 								case "pattern":
 									termsInclude.Pattern = reader.ReadAsString();
 									break;
@@ -57,14 +63,25 @@ namespace Nest
 			else
 			{
 				writer.WriteStartObject();
-				writer.WritePropertyName("pattern");
-				writer.WriteValue(termsIncludeExclude.Pattern);
-				if (!termsIncludeExclude.Flags.IsNullOrEmpty())
+				if (termsIncludeExclude.Pattern.IsNullOrEmpty())
 				{
-					writer.WritePropertyName("flags");
-					writer.WriteValue(termsIncludeExclude.Flags);
+                    writer.WritePropertyName("partition");
+                    writer.WriteValue(termsIncludeExclude.Partition);
+                    writer.WritePropertyName("num_partitions");
+                    writer.WriteValue(termsIncludeExclude.NumberOfPartitions);
 				}
-				writer.WriteEndObject();
+				else
+				{
+                    writer.WritePropertyName("pattern");
+                    writer.WriteValue(termsIncludeExclude.Pattern);
+                    if (!termsIncludeExclude.Flags.IsNullOrEmpty())
+                    {
+                        writer.WritePropertyName("flags");
+                        writer.WriteValue(termsIncludeExclude.Flags);
+                    }
+                    writer.WriteEndObject();
+				}
+
 			}
 		}
 	}

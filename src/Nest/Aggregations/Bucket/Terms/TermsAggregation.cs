@@ -128,6 +128,9 @@ namespace Nest
 			a.Order.Add(new TermsOrder { Key = key, Order = SortOrder.Descending });
 		});
 
+		public TermsAggregationDescriptor<T> Include(long partion, long numberOfPartitions) =>
+			Assign(a => a.Include = new TermsIncludeExclude() {Partition = partion, NumberOfPartitions = numberOfPartitions});
+
 		public TermsAggregationDescriptor<T> Include(string includePattern, string regexFlags = null) =>
 			Assign(a => a.Include = new TermsIncludeExclude() { Pattern = includePattern, Flags = regexFlags });
 
