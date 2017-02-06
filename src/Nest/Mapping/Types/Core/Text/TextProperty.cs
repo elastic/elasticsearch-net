@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,6 +51,7 @@ namespace Nest
 		TermVectorOption? TermVector { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class TextProperty : CorePropertyBase, ITextProperty
 	{
 		public TextProperty() : base("text") { }
@@ -69,6 +71,7 @@ namespace Nest
 		public TermVectorOption? TermVector { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class TextPropertyDescriptor<T>
 		: CorePropertyDescriptorBase<TextPropertyDescriptor<T>, ITextProperty, T>, ITextProperty
 		where T : class

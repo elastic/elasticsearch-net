@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using Elasticsearch.Net;
 
 namespace Nest
 {
+	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class TaskId : IUrlParameter, IEquatable<TaskId>
 	{
 		public string NodeId { get; }
 		public long TaskNumber { get; }
 		public string FullyQualifiedId => $"{NodeId}:{TaskNumber.ToString(CultureInfo.InvariantCulture)}";
+
+		private string DebugDisplay => FullyQualifiedId;
 
 		/// <summary>
 		/// A task id exists in the form [node_id]:[task_id]

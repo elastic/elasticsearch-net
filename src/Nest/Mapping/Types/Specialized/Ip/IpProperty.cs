@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -18,6 +19,7 @@ namespace Nest
 		bool? IncludeInAll { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class IpProperty : DocValuesPropertyBase, IIpProperty
 	{
 		public IpProperty() : base("ip") { }
@@ -28,6 +30,7 @@ namespace Nest
 		public string NullValue { get; set; }
 	}
 
+	[DebuggerDisplay("{DebugDisplay}")]
 	public class IpPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<IpPropertyDescriptor<T>, IIpProperty, T>, IIpProperty
 		where T : class

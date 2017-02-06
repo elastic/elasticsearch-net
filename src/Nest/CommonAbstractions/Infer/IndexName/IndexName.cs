@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Diagnostics;
 using Elasticsearch.Net;
 
 namespace Nest
 {
 
 	[ContractJsonConverter(typeof(IndexNameJsonConverter))]
+	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class IndexName : IEquatable<IndexName>, IUrlParameter
 	{
 		public string Name { get; set; }
 		public Type Type { get; set; }
+
+		internal string DebugDisplay => Type == null ? Name : $"{nameof(IndexName)} for typeof: {Type?.Name}";
 
 		public static implicit operator IndexName(string typeName)
 		{

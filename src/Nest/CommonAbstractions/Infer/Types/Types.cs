@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
@@ -7,6 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(TypesJsonConverter))]
+	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Types : Union<Types.AllTypesMarker, Types.ManyTypes>, IUrlParameter
 	{
 		public class AllTypesMarker { internal AllTypesMarker() { } }
@@ -62,6 +64,11 @@ namespace Nest
 		public static implicit operator Types(string[] many) => new ManyTypes(many);
 		public static implicit operator Types(Type type) => new ManyTypes(new TypeName[] { type });
 
+		private string DebugDisplay => this.Match(
+			all => "_all",
+			types => $"Count: {types.Types.Count} [" + string.Join(",", types.Types.Select((t, i) => $"({i+1}: {t.DebugDisplay})")) + "]"
+		);
+
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{
 			return this.Match(
@@ -72,7 +79,7 @@ namespace Nest
 					if (nestSettings == null)
 						throw new Exception("Tried to pass field name on querystring but it could not be resolved because no nest settings are available");
 
-					var types = this.Item2.Types.Select(t => nestSettings.Inferrer.TypeName(t)).Distinct();
+					var types = many.Types.Select(t => nestSettings.Inferrer.TypeName(t)).Distinct();
 					return string.Join(",", types);
 				}
 			);
