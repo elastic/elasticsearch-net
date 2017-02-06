@@ -9,7 +9,7 @@ namespace Nest
 	/// char filters and token filters. Only the filters that work on a per-character basis are
 	/// allowed. For instance a lowercasing filter would be allowed, but not a stemming filter,
 	/// which needs to look at the keyword as a whole.
-	/// <para>Elasticsearch does not ship with built-in normalizers so far, so the only way to get</para>
+	/// <para>Elasticsearch does not ship with built-in normalizers so far, so the only way to create one is through composing a custom one</para>
 	/// </summary>
 	public interface ICustomNormalizer : INormalizer
 	{
@@ -26,6 +26,7 @@ namespace Nest
 		IEnumerable<string> Filter { get; set; }
 	}
 
+	/// <inheritdoc/>
 	public class CustomNormalizer : NormalizerBase, ICustomNormalizer
 	{
 		public CustomNormalizer() : base("custom") {}
@@ -37,6 +38,7 @@ namespace Nest
 		public IEnumerable<string> CharFilter { get; set; }
 	}
 
+	/// <inheritdoc/>
 	public class CustomNormalizerDescriptor
 		: NormalizerDescriptorBase<CustomNormalizerDescriptor, ICustomNormalizer>, ICustomNormalizer
 	{
