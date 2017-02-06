@@ -208,6 +208,8 @@
     <Compile Include="Aggregations\Matrix\MatrixStats\MatrixStatsAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Metric\GeoCentroid\GeoCentroidAggregationUsageTests.cs" />
     <Compile Include="Aggregations\ReservedAggNames.doc.cs" />
+    <Compile Include="Analysis\Normalizers\AnalysisWithNormalizerCrudTests.cs" />
+    <Compile Include="Analysis\Normalizers\NormalizerUsageTests.cs" />
     <Compile Include="Cat\CatFielddata\CatFielddataApiTests.cs" />
     <Compile Include="Cat\CatFielddata\CatFielddataUrlTests.cs" />
     <Compile Include="Cat\CatHealth\CatHealthApiTests.cs" />

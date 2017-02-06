@@ -4,12 +4,22 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using Tests.Framework.Integration;
+using static Tests.Framework.Promisify;
 
 namespace Tests.Mapping.Types.Core.Keyword
 {
 	public class KeywordPropertyTests : PropertyTestsBase
 	{
 		public KeywordPropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override ICreateIndexRequest CreateIndexSettings(CreateIndexDescriptor create) => create
+			.Settings(s => s
+				.Analysis(a => a
+					.CharFilters(t => Promise(Analysis.CharFilters.CharFilterUsageTests.FluentExample(s).Value.Analysis.CharFilters))
+					.TokenFilters(t => Promise(Analysis.TokenFilters.TokenFilterUsageTests.FluentExample(s).Value.Analysis.TokenFilters))
+					.Normalizers(t => Promise(Analysis.Normalizers.NormalizerUsageTests.FluentExample(s).Value.Analysis.Normalizers))
+				)
+			);
 
 		protected override object ExpectJson => new
 		{
@@ -37,6 +47,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 						}
 					},
 					store = true,
+					normalizer = "myCustom",
 				}
 			}
 		};
@@ -52,6 +63,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 				.Index(false)
 				.IndexOptions(IndexOptions.Freqs)
 				.NullValue("null")
+				.Normalizer("myCustom")
 				.Norms(false)
 				.Similarity(SimilarityOption.Classic)
 				.Store(true)
@@ -76,6 +88,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 					Index = false,
 					IndexOptions = IndexOptions.Freqs,
 					NullValue = "null",
+					Normalizer = "myCustom",
 					Norms = false,
 					Similarity = SimilarityOption.Classic,
 					Store = true,

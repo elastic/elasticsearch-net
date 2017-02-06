@@ -35,7 +35,7 @@ namespace Tests.Analysis
 			requestAsync: (s, c, r) => c.CreateIndexAsync(r)
 		);
 
-		protected CreateIndexRequest CreateInitializer(string indexName) => new CreateIndexRequest(indexName)
+		protected virtual CreateIndexRequest CreateInitializer(string indexName) => new CreateIndexRequest(indexName)
 		{
 			Settings = new IndexSettings
 			{
@@ -49,7 +49,7 @@ namespace Tests.Analysis
 			}
 		};
 
-		protected ICreateIndexRequest CreateFluent(string indexName, CreateIndexDescriptor c) =>
+		protected virtual ICreateIndexRequest CreateFluent(string indexName, CreateIndexDescriptor c) =>
 			c.Settings(s => s
 				.Analysis(a => a
 					.Analyzers(t => Promise(Analyzers.AnalyzerUsageTests.FluentExample(s).Value.Analysis.Analyzers))

@@ -135,19 +135,29 @@ namespace Tests.Framework.Integration
 			createProjectIndex.IsValid.Should().BeTrue();
 		}
 
-		public static IAnalysis ProjectAnalysisSettings(AnalysisDescriptor analysis) => analysis
-			.TokenFilters(tokenFilters => tokenFilters
-				.Shingle("shingle", shingle=>shingle
-					.MinShingleSize(2)
-					.MaxShingleSize(4)
-				)
-			)
-			.Analyzers(analyzers=>analyzers
-				.Custom("shingle", shingle=>shingle
-					.Filters("standard", "shingle")
-					.Tokenizer("standard")
-				)
-			);
+		public static IAnalysis ProjectAnalysisSettings(AnalysisDescriptor analysis)
+		{
+			analysis
+                .TokenFilters(tokenFilters => tokenFilters
+                    .Shingle("shingle", shingle=>shingle
+                        .MinShingleSize(2)
+                        .MaxShingleSize(4)
+                    )
+                )
+                .Analyzers(analyzers=>analyzers
+                    .Custom("shingle", shingle=>shingle
+                        .Filters("standard", "shingle")
+                        .Tokenizer("standard")
+                    )
+                );
+			if (new SemVer.Range(">=5.2.0").IsSatisfied(TestClient.Configuration.ElasticsearchVersion))
+				analysis.Normalizers(analyzers => analyzers
+					.Custom("my_normalizer", n => n
+						.Filters("lowercase", "asciifolding")
+					)
+				);
+			return analysis;
+		}
 
 
 		private void CreatePercolatorIndex()

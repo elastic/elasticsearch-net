@@ -191,6 +191,10 @@
     <Compile Include="Analysis\CharFilters\PatternReplaceCharFilter.cs" />
     <Compile Include="Analysis\Languages\Language.cs" />
     <Compile Include="Analysis\Languages\SnowballLanguage.cs" />
+    <Compile Include="Analysis\Normalizers\Normalizers.cs" />
+    <Compile Include="Analysis\Normalizers\NormalizerJsonConverter.cs" />
+    <Compile Include="Analysis\Normalizers\NormalizerBase.cs" />
+    <Compile Include="Analysis\Normalizers\CustomNormalizer.cs" />
     <Compile Include="Analysis\Plugins\Icu\Collation\IcuCollationAlternate.cs" />
     <Compile Include="Analysis\Plugins\Icu\Collation\IcuCollationCaseFirst.cs" />
     <Compile Include="Analysis\Plugins\Icu\Collation\IcuCollationDecomposition.cs" />
