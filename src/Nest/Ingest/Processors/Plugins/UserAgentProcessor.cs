@@ -29,6 +29,13 @@ namespace Nest
 
 		[JsonProperty("options")]
 		IEnumerable<UserAgentProperty> Properties { get; set; }
+
+		/// <summary>
+		/// If `true` and `field` does not exist, the processor quietly exits without modifying the document
+		/// </summary>
+		[JsonProperty("ignore_missing")]
+		bool? IgnoreMissing { get; set; }
+
 	}
 
 	/// <inheritdoc/>
@@ -47,6 +54,9 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public IEnumerable<UserAgentProperty> Properties { get; set; }
+
+		/// <inheritdoc/>
+		public bool? IgnoreMissing { get; set; }
 	}
 
 	/// <inheritdoc/>
@@ -59,6 +69,7 @@ namespace Nest
 		Field IUserAgentProcessor.Field { get; set; }
 		Field IUserAgentProcessor.TargetField { get; set; }
 		string IUserAgentProcessor.RegexFile { get; set; }
+		bool? IUserAgentProcessor.IgnoreMissing { get; set; }
 		IEnumerable<UserAgentProperty> IUserAgentProcessor.Properties { get; set; }
 
 		/// <inheritdoc/>
@@ -77,6 +88,9 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public UserAgentProcessorDescriptor<T> RegexFile(string file) => Assign(a => a.RegexFile = file);
+
+		/// <inheritdoc/>
+		public UserAgentProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
 
 		/// <inheritdoc/>
 		public UserAgentProcessorDescriptor<T> Properties(IEnumerable<UserAgentProperty> properties) => Assign(a => a.Properties = properties);

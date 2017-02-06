@@ -42,6 +42,12 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("indexed_chars")]
 		long? IndexedCharacters { get; set; }
+
+		/// <summary>
+		/// If `true` and `field` does not exist, the processor quietly exits without modifying the document
+		/// </summary>
+		[JsonProperty("ignore_missing")]
+		bool? IgnoreMissing { get; set; }
 	}
 
 	/// <summary>
@@ -77,6 +83,9 @@ namespace Nest
 		/// Defaults to 100000.
 		/// </summary>
 		public long? IndexedCharacters { get; set; }
+
+		/// <inheritdoc/>
+		public bool? IgnoreMissing { get; set; }
 	}
 
 	/// <summary>
@@ -97,6 +106,7 @@ namespace Nest
 		Field IAttachmentProcessor.TargetField { get; set; }
 		IEnumerable<string> IAttachmentProcessor.Properties { get; set; }
 		long? IAttachmentProcessor.IndexedCharacters { get; set; }
+		bool? IAttachmentProcessor.IgnoreMissing { get; set; }
 
 		/// <summary>
 		/// The field to get the base64 encoded field from
@@ -125,6 +135,9 @@ namespace Nest
 		/// Defaults to 100000.
 		/// </summary>
 		public AttachmentProcessorDescriptor<T> IndexedCharacters(long indexedCharacters) => Assign(a => a.IndexedCharacters = indexedCharacters);
+
+		/// <inheritdoc/>
+		public AttachmentProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
 
 		/// <summary>
 		/// Properties to select to be stored. Can be content, title, name, author,
