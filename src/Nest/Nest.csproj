@@ -838,6 +838,7 @@
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponseJsonConverter.cs" />
     <Compile Include="Ingest\Processors\DotExpanderProcessor.cs" />
     <Compile Include="Ingest\Processors\DateIndexNameProcessor.cs" />
+    <Compile Include="Ingest\Processors\KeyValueProcessor.cs" />
     <Compile Include="Ingest\Processors\Plugins\AttachmentProcessor.cs" />
     <Compile Include="Ingest\Processors\Plugins\GeoIpProcessor.cs" />
     <Compile Include="Ingest\Processors\Plugins\UserAgentProcessor.cs" />
