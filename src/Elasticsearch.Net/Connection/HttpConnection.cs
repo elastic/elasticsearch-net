@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
@@ -143,6 +144,8 @@ namespace Elasticsearch.Net
 				var response = (HttpWebResponse)request.GetResponse();
 				builder.StatusCode = (int)response.StatusCode;
 				builder.Stream = response.GetResponseStream();
+
+				builder.DeprecationWarnings = response.Headers.GetValues("Warning");
 				// https://github.com/elastic/elasticsearch-net/issues/2311
 				// if stream is null call dispose on response instead.
 				if (builder.Stream == null || builder.Stream == Stream.Null) response.Dispose();
@@ -199,6 +202,7 @@ namespace Elasticsearch.Net
 				var response = (HttpWebResponse)(await apmGetResponseTask.ConfigureAwait(false));
 				builder.StatusCode = (int)response.StatusCode;
 				builder.Stream = response.GetResponseStream();
+				builder.DeprecationWarnings = response.Headers.GetValues("Warning");
 				// https://github.com/elastic/elasticsearch-net/issues/2311
 				// if stream is null call dispose on response instead.
 				if (builder.Stream == null || builder.Stream == Stream.Null) response.Dispose();
