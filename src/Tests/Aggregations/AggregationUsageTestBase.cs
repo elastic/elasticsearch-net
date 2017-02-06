@@ -12,7 +12,7 @@ namespace Tests.Aggregations
 	{
 		protected AggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Search<Project>(f ),
+			fluent: (client, f) => client.Search<Project>(f),
 			fluentAsync: (client, f) => client.SearchAsync<Project>(f),
 			request: (client, r) => client.Search<Project>(r),
 			requestAsync: (client, r) => client.SearchAsync<Project>(r)
