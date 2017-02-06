@@ -23,6 +23,7 @@ namespace Nest
 		public Field Field { get; set; }
 	}
 
+	//TODO RENAME TO PROCESSOR AND WRITE A CODE STANDARDS TEST FOR THIS
 	public class UppercaseProcessDescriptor<T>
 		: ProcessorDescriptorBase<UppercaseProcessDescriptor<T>, IUppercaseProcessor>, IUppercaseProcessor
 		where T : class

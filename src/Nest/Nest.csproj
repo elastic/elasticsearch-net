@@ -845,6 +845,7 @@
     <Compile Include="Ingest\Processors\Plugins\UserAgent\UserAgentProperty.cs" />
     <Compile Include="Ingest\Processors\ScriptProcessor.cs" />
     <Compile Include="Ingest\Processors\SortProcessor.cs" />
+    <Compile Include="Ingest\Processors\JsonProcessor.cs" />
     <Compile Include="Mapping\AttributeBased\ElasticsearchCorePropertyAttributeBase.cs" />
     <Compile Include="Ingest\DeletePipeline\DeletePipelineRequest.cs" />
     <Compile Include="Ingest\DeletePipeline\DeletePipelineResponse.cs" />
