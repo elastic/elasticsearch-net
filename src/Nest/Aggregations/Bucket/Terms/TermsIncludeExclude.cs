@@ -15,6 +15,7 @@ namespace Nest
 		[JsonIgnore]
 		public IEnumerable<string> Values { get; set; }
 
+		//TODO Better types for this in 6.0
 		/// <summary>
 		/// Only valid on terms include, the current partition of terms we are interested in
 		/// </summary>
