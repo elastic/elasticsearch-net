@@ -121,8 +121,8 @@ namespace Nest
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
-				var t = this._defaultSerializer.Deserialize(jsonTextReader, typeof(T));
-				return (T)t;
+				var t = this._defaultSerializer.Deserialize<T>(jsonTextReader);
+				return t;
 			}
 		}
 
@@ -130,7 +130,7 @@ namespace Nest
 		{
 			//Json.NET does not support reading a stream asynchronously :(
 			var result = this.Deserialize<T>(stream);
-			return Task.FromResult<T>(result);
+			return Task.FromResult(result);
 		}
 
 		private JsonSerializerSettings CreateSettings(SerializationFormatting formatting)

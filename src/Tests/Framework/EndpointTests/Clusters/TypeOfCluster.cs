@@ -12,5 +12,6 @@ namespace Tests.Framework.Integration
 		public const string Bool = "Bool Cluster";
 
 		public const string Shield = "Shield Cluster";
+		public const string Benchmark = "Benchmark Cluster";
 	}
 }

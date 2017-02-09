@@ -13,18 +13,19 @@ nuget System.Collections.Immutable
 nuget FluentAssertions 
 nuget Bogus
 nuget DiffPlex 
-nuget SemanticVersioning
 
 // profiling / benchmarking
 nuget JetBrains.Profiler.Kernel.Windows.Api
-nuget Humanizer
-nuget NDesk.Options
+nuget BenchmarkDotNet 0.10.0
 
 nuget System.Reactive
+nuget SemanticVersioning
 
 source https://api.nuget.org/v3/index.json
 
 nuget AsciiDocNet
+
+source https://www.myget.org/F/aspnetvnext/api/v3/index.json
 
 source https://www.myget.org/F/xunit/
 nuget xunit 2.2.0-beta5-build3474
@@ -37,7 +38,7 @@ group build
     nuget FAKE
     nuget FSharp.Data
     nuget GitLink prerelease
-
+	nuget NEST
     source https://www.myget.org/F/xunit/
     nuget xunit.runner.console 2.2.0-beta5-build3474
 

@@ -59,7 +59,7 @@ namespace Tests.Framework.Integration
 			this.Client.Index(new PercolatedQuery
 			{
 				Id = "1",
-				Query = new QueryContainer(new MatchAllQuery())
+				Query = new MatchAllQuery()
 			});
 			this.Client.Bulk(b => b
 				.IndexMany(

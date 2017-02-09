@@ -1,0 +1,52 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/5.x/src/Tests/Analysis/Normalizers/NormalizerUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[normalizer-usage]]
+== Normalizer Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+FluentExample
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+InitializerExample
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "analysis": {
+    "normalizer": {
+      "myCustom": {
+        "type": "custom",
+        "filter": [
+          "lowercase",
+          "asciifolding"
+        ],
+        "char_filter": [
+          "mapped"
+        ]
+      }
+    }
+  }
+}
+----
+
