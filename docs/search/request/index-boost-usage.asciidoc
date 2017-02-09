@@ -21,8 +21,8 @@ please modify the original csharp file found at the link and submit the PR with 
 ----
 s => s
 .IndicesBoost(b => b
-    .Add("index1", 1.4)
-    .Add("index2", 1.3)
+    .Add("project", 1.4)
+    .Add("devs", 1.3)
 )
 ----
 
@@ -34,8 +34,8 @@ new SearchRequest<Project>
 {
     IndicesBoost = new Dictionary<IndexName, double>
     {
-            { "index1", 1.4 },
-            { "index2", 1.3 }
+        { "project", 1.4 },
+        { "devs", 1.3 }
     }
 }
 ----
@@ -45,8 +45,8 @@ new SearchRequest<Project>
 ----
 {
   "indices_boost": {
-    "index1": 1.4,
-    "index2": 1.3
+    "project": 1.4,
+    "devs": 1.3
   }
 }
 ----

@@ -102,5 +102,13 @@ namespace Tests.Framework
 #endif
 		}
 
+		internal static bool IsPublic(this Type t)
+		{
+#if DOTNETCORE
+			return t.GetTypeInfo().IsPublic;
+#else
+			return t.IsPublic;
+#endif
+		}
 	}
 }

@@ -116,8 +116,6 @@ include::query-dsl/term-level/fuzzy/fuzzy-query-usage.asciidoc[]
 
 include::query-dsl/term-level/ids/ids-query-usage.asciidoc[]
 
-include::query-dsl/term-level/missing/missing-query-usage.asciidoc[]
-
 include::query-dsl/term-level/prefix/prefix-query-usage.asciidoc[]
 
 include::query-dsl/term-level/range/date-range-query-usage.asciidoc[]

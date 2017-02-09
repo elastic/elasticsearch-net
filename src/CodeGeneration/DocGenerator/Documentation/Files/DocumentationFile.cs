@@ -40,7 +40,7 @@ namespace DocGenerator.Documentation.Files
 		{
 			var testFullPath = this.FileLocation.FullName;
 
-			var testInDocumentationFolder = 
+			var testInDocumentationFolder =
 				Regex.Replace(testFullPath, @"(^.+\\Tests\\|\" + this.Extension + "$)", "")
 				.TrimEnd(".doc")
 				.TrimEnd("Tests")
@@ -52,6 +52,6 @@ namespace DocGenerator.Documentation.Files
 				Directory.CreateDirectory(fileInfo.Directory.FullName);
 
 			return fileInfo;
-		}		
+		}
 	}
 }

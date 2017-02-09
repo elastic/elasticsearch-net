@@ -5,4 +5,7 @@ xunit.abstractions
 System.Reactive
 Bogus
 DiffPlex
+System.Buffers
 SemanticVersioning
+BenchmarkDotNet
+JetBrains.Profiler.Kernel.Windows.Api

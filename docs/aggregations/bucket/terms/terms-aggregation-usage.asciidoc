@@ -20,6 +20,7 @@ please modify the original csharp file found at the link and submit the PR with 
 [source,csharp]
 ----
 s => s
+.Size(0)
 .Aggregations(a => a
     .Terms("states", st => st
         .Field(p => p.State)
@@ -44,6 +45,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
+    Size = 0,
     Aggregations = new TermsAggregation("states")
     {
         Field = Field<Project>(p => p.State),
@@ -70,6 +72,7 @@ new SearchRequest<Project>
 .Example json output
 ----
 {
+  "size": 0,
   "aggs": {
     "states": {
       "meta": {
@@ -127,6 +130,7 @@ states.Meta["foo"].Should().Be("bar");
 [source,csharp]
 ----
 s => s
+.Size(0)
 .Aggregations(a => a
     .Terms("commits", st => st
         .Field(p => p.NumberOfCommits)
@@ -140,9 +144,10 @@ s => s
 ----
 new SearchRequest<Project>
 {
+    Size = 0,
     Aggregations = new TermsAggregation("commits")
     {
-        Field = Field<Project>(p => p.NumberOfCommits),
+        Field = Infer.Field<Project>(p => p.NumberOfCommits),
     }
 }
 ----
@@ -151,10 +156,85 @@ new SearchRequest<Project>
 .Example json output
 ----
 {
+  "size": 0,
   "aggs": {
     "commits": {
       "terms": {
         "field": "numberOfCommits"
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var commits = response.Aggs.Terms<int>("commits");
+commits.Should().NotBeNull();
+commits.DocCountErrorUpperBound.Should().HaveValue();
+commits.SumOtherDocCount.Should().HaveValue();
+commits.Buckets.Should().NotBeNull();
+commits.Buckets.Count.Should().BeGreaterThan(0);
+
+foreach (var item in commits.Buckets)
+{
+    item.Key.Should().BeGreaterThan(0);
+    item.DocCount.Should().BeGreaterOrEqualTo(1);
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Size(0)
+.Aggregations(a => a
+    .Terms("commits", st => st
+        .Field(p => p.NumberOfCommits)
+        .Include(partion: 0, numberOfPartitions: 50)
+        .Size(2)
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Size = 0,
+    Aggregations = new TermsAggregation("commits")
+    {
+        Field = Infer.Field<Project>(p => p.NumberOfCommits),
+        Include = new TermsIncludeExclude
+        {
+            Partition = 0,
+            NumberOfPartitions = 50
+        },
+        Size = 2
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "commits": {
+      "terms": {
+        "field": "numberOfCommits",
+        "size": 2,
+        "include": {
+          "partition": 0,
+          "num_partitions": 50
+        }
       }
     }
   }

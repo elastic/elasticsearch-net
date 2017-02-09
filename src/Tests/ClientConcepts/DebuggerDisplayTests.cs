@@ -1,5 +1,4 @@
 using System;
-using System.Net.WebSockets;
 using System.Reflection;
 using FluentAssertions;
 using Nest;

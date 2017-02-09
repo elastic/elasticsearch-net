@@ -1,6 +1,7 @@
 {
   "version": "5.0.0-ci20160819124606",
   "buildOptions": {
+    "emitEntryPoint": true,
     "warningsAsErrors": false,
     "embed": [
       "Document\\Single\\Attachment\\Attachment_Test_Document.pdf"
@@ -8,6 +9,8 @@
   },
   "dependencies": {
     "Bogus": "7.1.4",
+    "BenchmarkDotNet": "0.10.0",
+    "System.Buffers": "4.0.0",
     "DiffPlex": "2.0.0-alpha1",
     "Elasticsearch.Net": { "target": "project" },
     "FluentAssertions": "4.6.3",
@@ -51,6 +54,6 @@
         "dnxcore50",
         "portable-net45+win8"
       ]
-    }
+    }     
   }
 }

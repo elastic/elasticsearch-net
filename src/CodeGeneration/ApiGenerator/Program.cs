@@ -7,10 +7,12 @@ namespace ApiGenerator
 {
 	public static class Program
 	{
+		private static readonly string DownloadBranch = "master";
+
 		static void Main(string[] args)
 		{
 			bool redownloadCoreSpecification = false;
-			string downloadBranch = "master";
+			string downloadBranch = DownloadBranch;
 
 			var answer = "invalid";
 			while (answer != "y" && answer != "n" && answer != "")
@@ -33,6 +35,9 @@ namespace ApiGenerator
 					downloadBranch = File.ReadAllText(CodeConfiguration.LastDownloadedVersionFile);
 				}
 			}
+
+			if (string.IsNullOrEmpty(downloadBranch))
+				downloadBranch = DownloadBranch;
 
 			if (redownloadCoreSpecification)
 				RestSpecDownloader.Download(downloadBranch);

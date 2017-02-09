@@ -251,6 +251,18 @@ InitializerExample
         "expand": true,
         "tokenizer": "whitespace"
       },
+      "syn_graph": {
+        "type": "synonym_graph",
+        "synonyms_path": "analysis/stopwords.txt",
+        "format": "wordnet",
+        "synonyms": [
+          "x=>y",
+          "z=>s"
+        ],
+        "ignore_case": true,
+        "expand": true,
+        "tokenizer": "whitespace"
+      },
       "trimmer": {
         "type": "trim"
       },
