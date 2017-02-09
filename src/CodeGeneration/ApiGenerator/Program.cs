@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace ApiGenerator
 {
 	public static class Program
 	{
+		private static readonly string DownloadBranch = "v2.4.4";
+
 		static void Main(string[] args)
 		{
 			bool redownloadCoreSpecification = false;
-			string downloadBranch = "master";
+			string downloadBranch = DownloadBranch;
 
 			var answer = "invalid";
 			while (answer != "y" && answer != "n" && answer != "")
@@ -21,7 +21,7 @@ namespace ApiGenerator
 			}
 			if (redownloadCoreSpecification)
 			{
-				Console.Write("Branch to download specification from (default master): ");
+				Console.Write($"Branch to download specification from (default {DownloadBranch}): ");
 				downloadBranch = Console.ReadLine()?.Trim();
 			}
 			else
@@ -32,6 +32,9 @@ namespace ApiGenerator
 					downloadBranch = File.ReadAllText(CodeConfiguration.LastDownloadedVersionFile);
 				}
 			}
+
+			if (string.IsNullOrEmpty(downloadBranch))
+				downloadBranch = DownloadBranch;
 
 			if (redownloadCoreSpecification)
 				RestSpecDownloader.Download(downloadBranch);

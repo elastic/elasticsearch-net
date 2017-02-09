@@ -108,6 +108,8 @@ include::query-dsl/span/within/span-within-query-usage.asciidoc[]
 
 include::query-dsl/specialized/more-like-this/more-like-this-query-usage.asciidoc[]
 
+include::query-dsl/specialized/percolate/percolate-query-usage.asciidoc[]
+
 include::query-dsl/specialized/script/script-query-usage.asciidoc[]
 
 include::query-dsl/specialized/template/template-query-usage.asciidoc[]

@@ -8,19 +8,23 @@
 #load @"XmlDocPatcher.fsx"
 #load @"Documentation.fsx"
 #load @"Releasing.fsx"
+#load @"Benchmarking.fsx"
 #load @"Profiling.fsx"
 
 open System
 open Fake 
 
+open Paths
 open Building
 open Testing
 open Signing
 open Versioning
+open Documentation
 open Releasing
 open Profiling
-open Documentation
+open Benchmarking
 open XmlDocPatcher
+open Documentation
 
 // Default target
 
@@ -38,10 +42,13 @@ Target "Test" Tests.RunTest
 Target "UnitTests" Tests.RunUnitTests
 
 Target "Forever"  Tests.RunUnitTestsForever
+    
+Target "Profile" <| fun _ -> 
+    Profiler.Run()
+    let url = getBuildParam "elasticsearch"
+    Profiler.IndexResults url
 
 Target "Integrate"  Tests.RunIntegrationTests 
-
-Target "Profile" Profiler.Run
 
 Target "Benchmark" Benchmarker.Run
 

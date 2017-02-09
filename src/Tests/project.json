@@ -1,12 +1,15 @@
 {
   "version": "2.5.2",
   "buildOptions": {
+    "emitEntryPoint": true,
     "warningsAsErrors": false,
     "embed": [
       "Document\\Single\\Attachment\\Attachment_Test_Document.pdf"
     ]
   },
   "dependencies": {
+    "BenchmarkDotNet": "0.10.0",
+    "System.Buffers": "4.0.0",
     "Elasticsearch.Net": { "target": "project" },
     "Nest": { "target": "project" },
     "Bogus": "8.0.2",

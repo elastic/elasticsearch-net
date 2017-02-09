@@ -51,7 +51,7 @@
       </PropertyGroup>
     </Otherwise>
   </Choose>
-  <Import Project="$(FSharpTargetsPath)" Condition="Exists('$(FSharpTargetsPath)')"/>
+  <Import Project="$(FSharpTargetsPath)" Condition="Exists('$(FSharpTargetsPath)')" />
   <Import Project="..\..\.paket\paket.targets" />
   <ItemGroup>
     <None Include="Projects.fsx" />
@@ -60,6 +60,7 @@
     <None Include="Releasing.fsx" />
     <None Include="Versioning.fsx" />
     <None Include="Profiling.fsx" />
+    <None Include="Benchmarking.fsx" />
     <None Include="XmlDocPatcher.fsx" />
     <None Include="Building.fsx" />
     <None Include="Signing.fsx" />

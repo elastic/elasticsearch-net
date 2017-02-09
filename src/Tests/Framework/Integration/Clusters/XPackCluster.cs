@@ -24,7 +24,7 @@ namespace Tests.Framework.Integration
 			try
 			{
 				var watcherInfoResponse = this.Client.WatcherStats();
-				if (!watcherInfoResponse.IsValid || 
+				if (!watcherInfoResponse.IsValid ||
 					watcherInfoResponse.WatcherState != WatcherState.Started)
 				{
 					WaitForWatcherToStart();
