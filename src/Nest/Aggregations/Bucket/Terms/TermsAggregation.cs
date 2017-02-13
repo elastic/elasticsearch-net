@@ -40,7 +40,7 @@ namespace Nest
 		TermsAggregationCollectMode? CollectMode { get; set; }
 
 		[JsonProperty("missing")]
-		string Missing { get; set; }
+		object Missing { get; set; }
 	}
 
 	public class TermsAggregation : BucketAggregationBase, ITermsAggregation
@@ -55,7 +55,7 @@ namespace Nest
 		public TermsIncludeExclude Include { get; set; }
 		public TermsIncludeExclude Exclude { get; set; }
 		public TermsAggregationCollectMode? CollectMode { get; set; }
-		public string Missing { get; set; }
+		public object Missing { get; set; }
 
 		internal TermsAggregation() { }
 
@@ -89,7 +89,7 @@ namespace Nest
 
 		TermsAggregationCollectMode? ITermsAggregation.CollectMode { get; set; }
 
-		string ITermsAggregation.Missing { get; set; }
+		object ITermsAggregation.Missing { get; set; }
 
 		public TermsAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
@@ -146,6 +146,6 @@ namespace Nest
 		public TermsAggregationDescriptor<T> CollectMode(TermsAggregationCollectMode collectMode) =>
 			Assign(a => a.CollectMode = collectMode);
 
-		public TermsAggregationDescriptor<T> Missing(string missing) => Assign(a => a.Missing = missing);
+		public TermsAggregationDescriptor<T> Missing<TFieldType>(TFieldType missing) => Assign(a => a.Missing = missing);
 	}
 }
