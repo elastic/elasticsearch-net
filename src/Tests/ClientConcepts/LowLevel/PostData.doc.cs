@@ -112,7 +112,7 @@ namespace Tests.ClientConcepts.LowLevel
 			/** If you want to maintain a copy of the request that went out, use `DisableDirectStreaming` */
 			settings = new ConnectionSettings().DisableDirectStreaming();
 
-			/** by forcing `DisableDirectStreaming` on connection settings, serialization happens first in a private `MemoryStream`
+			/** by forcing `DisableDirectStreaming` on connection indexCreationSettings, serialization happens first in a private `MemoryStream`
 			* so we can get hold of the serialized bytes */
 			await Post(() => listOfObjects, writes: multiObjectJson, storesBytes: true, settings: settings);
 

@@ -262,6 +262,7 @@
     <Compile Include="Framework\Benchmarks\BenchmarkTest.cs" />
     <Compile Include="Framework\EndpointTests\ApiIntegrationTestBase.cs" />
     <Compile Include="Framework\EndpointTests\ApiTestBase.cs" />
+    <Compile Include="Framework\EndpointTests\Clusters\UnbalancedCluster.cs" />
     <Compile Include="Framework\EndpointTests\TestState\AsyncLazy.cs" />
     <Compile Include="Framework\EndpointTests\Clusters\IntrusiveOperationCluster.cs" />
     <Compile Include="Framework\EndpointTests\Clusters\WritableCluster.cs" />

@@ -339,6 +339,7 @@
     <Compile Include="Cat\ICatRecord.cs" />
     <Compile Include="Cluster\ClusterAllocationExplain\ClusterAllocationExplainRequest.cs" />
     <Compile Include="Cluster\ClusterAllocationExplain\ClusterAllocationExplainResponse.cs" />
+    <Compile Include="Cluster\ClusterAllocationExplain\ClusterAllocationExplainResponseJsonConverter.cs" />
     <Compile Include="Cluster\ClusterAllocationExplain\ElasticClient-ClusterAllocationExplain.cs" />
     <Compile Include="Cluster\ClusterHealth.cs" />
     <Compile Include="Cluster\ClusterHealth\ClusterHealthRequest.cs" />
