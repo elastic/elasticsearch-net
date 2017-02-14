@@ -98,12 +98,13 @@ namespace Nest
 		public ScrollAllDescriptor<T> Search(Func<SearchDescriptor<T>, ISearchRequest> selector) =>
 			Assign(a => a.Search = selector?.Invoke(new SearchDescriptor<T>()));
 
+		//TODO rename maxConsumers to maxConcurrency
 		/// <summary>
 		/// Simple back pressure implementation that makes sure the minimum max concurrency between producer and consumer
 		/// is not amplified by the greedier of the two by more then a given back pressure factor
 		/// When set each bulk request will call <see cref="ProducerConsumerBackPressure.Release"/>
 		/// </summary>
-		/// <param name="maxConcurrency">The minimum maximum concurrency which would be the bottleneck of the producer consumer pipeline</param>
+		/// <param name="maxConsumers">The minimum maximum concurrency which would be the bottleneck of the producer consumer pipeline</param>
 		/// <param name="backPressureFactor">The maximum amplification back pressure of the greedier part of the producer consumer pipeline</param>
 		public ScrollAllDescriptor<T> BackPressure(int maxConsumers, int? backPressureFactor = null) =>
 			Assign(a => a.BackPressure = new ProducerConsumerBackPressure(backPressureFactor, maxConsumers));

@@ -30,7 +30,8 @@
   "copyright": "2014-2016 Elasticsearch BV",
   "buildOptions": {
     "warningsAsErrors": false,
-    "xmlDoc" : true
+    "xmlDoc" : true,
+    "nowarn": ["CS1591", "1591", "1573"]
   },
   "configurations": {
     "Debug": {

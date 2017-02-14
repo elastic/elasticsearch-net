@@ -68,7 +68,6 @@ namespace Nest
 		/// See also: https://github.com/elasticsearch/elasticsearch/issues/3636
 		/// </pre>
 		/// </summary>
-		/// <param name="initializeEmpty"></param>
 		public MultiGetOperationDescriptor(bool allowExplicitIndex)
 			: this()
 		{

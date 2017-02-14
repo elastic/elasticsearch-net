@@ -47,7 +47,7 @@ namespace Nest
 	public class HdfsRepositorySettings : IHdfsRepositorySettings
 	{
 		internal HdfsRepositorySettings() { }
-		
+
 		public HdfsRepositorySettings(string path)
 		{
 			this.Path = path;
@@ -63,7 +63,7 @@ namespace Nest
 		public string Uri { get; set; }
 	}
 
-	public class HdfsRepositorySettingsDescriptor 
+	public class HdfsRepositorySettingsDescriptor
 		: DescriptorBase<HdfsRepositorySettingsDescriptor, IHdfsRepositorySettings>, IHdfsRepositorySettings
 	{
 		string IHdfsRepositorySettings.Uri { get; set; }
@@ -100,14 +100,12 @@ namespace Nest
 		/// <summary>
 		/// 'inlined' key=value added to the Hadoop configuration
 		/// </summary>
-		/// <param name="key"></param>
-		/// <param name="value"></param>
 		public HdfsRepositorySettingsDescriptor InlinedHadoopConfiguration(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> inlineConfig) => Assign(a =>
 			a.InlineHadoopConfiguration = inlineConfig(new FluentDictionary<string, object>())
 		);
 
 		/// <summary>
-		/// When set to true metadata files are stored in compressed format. This setting doesn't 
+		/// When set to true metadata files are stored in compressed format. This setting doesn't
 		/// affect index files that are already compressed by default. Defaults to false.
 		/// </summary>
 		/// <param name="compress"></param>
@@ -128,10 +126,10 @@ namespace Nest
 		public HdfsRepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(a => a.ChunkSize = chunkSize);
 	}
 
-	public class HdfsRepositoryDescriptor 
+	public class HdfsRepositoryDescriptor
 		: DescriptorBase<HdfsRepositoryDescriptor, IHdfsRepository>, IHdfsRepository
 	{
-		string ISnapshotRepository.Type { get { return "hdfs"; } } 
+		string ISnapshotRepository.Type { get { return "hdfs"; } }
 
 		IHdfsRepositorySettings IRepository<IHdfsRepositorySettings>.Settings { get; set; }
 

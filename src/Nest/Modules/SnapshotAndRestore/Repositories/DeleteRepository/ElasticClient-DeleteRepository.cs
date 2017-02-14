@@ -11,7 +11,7 @@ namespace Nest
 		/// Delete a repository, if you have ongoing restore operations be sure to delete the indices being restored into first.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_repositories
 		/// </summary>
-		/// <param name="repository">The name of the repository</param>
+		/// <param name="repositories">The names of the repositories</param>
 		/// <param name="selector">Optionaly provide the delete operation with more details</param>>
 		IDeleteRepositoryResponse DeleteRepository(Names repositories, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null);
 
