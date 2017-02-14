@@ -8,7 +8,9 @@ namespace Nest
 {
 	public class TextAttribute : ElasticsearchCorePropertyAttributeBase, ITextProperty
 	{
-		ITextProperty Self => this;
+		private ITextProperty Self => this;
+
+		public TextAttribute() : base(FieldType.Text) { }
 
 		string ITextProperty.Analyzer { get; set; }
 		double? ITextProperty.Boost { get; set; }
@@ -37,6 +39,5 @@ namespace Nest
 		public bool Norms { get { return Self.Norms.GetValueOrDefault(true); } set { Self.Norms = value; } }
 		public TermVectorOption TermVector { get { return Self.TermVector.GetValueOrDefault();  } set { Self.TermVector = value; } }
 
-		public TextAttribute() : base("text") { }
 	}
 }

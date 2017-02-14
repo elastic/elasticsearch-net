@@ -2,7 +2,9 @@
 {
 	public class GeoShapeAttribute : ElasticsearchDocValuesPropertyAttributeBase, IGeoShapeProperty
 	{
-		IGeoShapeProperty Self => this;
+		private IGeoShapeProperty Self => this;
+
+		public GeoShapeAttribute() : base(FieldType.GeoShape) { }
 
 		GeoTree? IGeoShapeProperty.Tree { get; set; }
 		Distance IGeoShapeProperty.Precision { get; set; }
@@ -19,6 +21,5 @@
 		public double DistanceErrorPercentage { get { return Self.DistanceErrorPercentage.GetValueOrDefault(); } set { Self.DistanceErrorPercentage = value; } }
 		public bool PointsOnly { get { return Self.PointsOnly.GetValueOrDefault(); } set { Self.PointsOnly = value; } }
 
-		public GeoShapeAttribute() : base("geo_shape") { }
 	}
 }

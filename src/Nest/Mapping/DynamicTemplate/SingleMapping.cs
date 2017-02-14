@@ -67,6 +67,21 @@ namespace Nest
 		public IProperty Percolator(Func<PercolatorPropertyDescriptor<T>, IPercolatorProperty> selector) =>
 			selector?.Invoke(new PercolatorPropertyDescriptor<T>());
 
+		public IProperty DateRange(Func<DateRangePropertyDescriptor<T>, IDateRangeProperty> selector) =>
+			selector?.Invoke(new DateRangePropertyDescriptor<T>());
+
+		public IProperty DoubleRange(Func<DoubleRangePropertyDescriptor<T>, IDoubleRangeProperty> selector) =>
+			selector?.Invoke(new DoubleRangePropertyDescriptor<T>());
+
+		public IProperty FloatRange(Func<FloatRangePropertyDescriptor<T>, IFloatRangeProperty> selector) =>
+			selector?.Invoke(new FloatRangePropertyDescriptor<T>());
+
+		public IProperty IntegerRange(Func<IntegerRangePropertyDescriptor<T>, IIntegerRangeProperty> selector) =>
+			selector?.Invoke(new IntegerRangePropertyDescriptor<T>());
+
+		public IProperty LongRange(Func<LongRangePropertyDescriptor<T>, ILongRangeProperty> selector) =>
+			selector?.Invoke(new LongRangePropertyDescriptor<T>());
+
 #pragma warning disable CS3001 // Argument type is not CLS-compliant
 		public IProperty Scalar(Expression<Func<T, int>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector = null) =>
 			selector.InvokeOrDefault(new NumberPropertyDescriptor<T>().Name(field).Type(NumberType.Integer));
@@ -215,11 +230,21 @@ namespace Nest
 		public IProperty Scalar(Expression<Func<T, IEnumerable<Guid?>>> field, Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector = null) =>
 			selector.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field));
 
-
 		public IProperty Scalar(Expression<Func<T, string>> field, Func<TextPropertyDescriptor<T>, ITextProperty> selector = null) =>
 			selector.InvokeOrDefault(new TextPropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, IEnumerable<string>>> field, Func<TextPropertyDescriptor<T>, ITextProperty> selector = null) =>
 			selector.InvokeOrDefault(new TextPropertyDescriptor<T>().Name(field));
+
+		public IProperty Scalar(Expression<Func<T, DateRange>> field, Func<DateRangePropertyDescriptor<T>, IDateRangeProperty> selector = null) =>
+			selector.InvokeOrDefault(new DateRangePropertyDescriptor<T>().Name(field));
+		public IProperty Scalar(Expression<Func<T, DoubleRange>> field, Func<DoubleRangePropertyDescriptor<T>, IDoubleRangeProperty> selector = null) =>
+			selector.InvokeOrDefault(new DoubleRangePropertyDescriptor<T>().Name(field));
+		public IProperty Scalar(Expression<Func<T, LongRange>> field, Func<LongRangePropertyDescriptor<T>, ILongRangeProperty> selector = null) =>
+			selector.InvokeOrDefault(new LongRangePropertyDescriptor<T>().Name(field));
+		public IProperty Scalar(Expression<Func<T, IntegerRange>> field, Func<IntegerRangePropertyDescriptor<T>, IIntegerRangeProperty> selector = null) =>
+			selector.InvokeOrDefault(new IntegerRangePropertyDescriptor<T>().Name(field));
+		public IProperty Scalar(Expression<Func<T, FloatRange>> field, Func<FloatRangePropertyDescriptor<T>, IFloatRangeProperty> selector = null) =>
+			selector.InvokeOrDefault(new FloatRangePropertyDescriptor<T>().Name(field));
 #pragma warning restore CS3001 // Argument type is not CLS-compliant
 	}
 }

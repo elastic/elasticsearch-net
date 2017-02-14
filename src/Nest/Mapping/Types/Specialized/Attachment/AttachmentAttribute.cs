@@ -2,6 +2,8 @@
 {
 	public class AttachmentAttribute : ElasticsearchDocValuesPropertyAttributeBase, IAttachmentProperty
 	{
+		public AttachmentAttribute() : base(FieldType.Attachment) { }
+
 		ITextProperty IAttachmentProperty.AuthorField { get; set; }
 		INumberProperty IAttachmentProperty.ContentLengthField { get; set; }
 		ITextProperty IAttachmentProperty.ContentTypeField { get; set; }
@@ -11,7 +13,5 @@
 		ITextProperty IAttachmentProperty.LanguageField { get; set; }
 		ITextProperty IAttachmentProperty.NameField { get; set; }
 		ITextProperty IAttachmentProperty.TitleField { get; set; }
-
-		public AttachmentAttribute() : base("attachment") { }
 	}
 }

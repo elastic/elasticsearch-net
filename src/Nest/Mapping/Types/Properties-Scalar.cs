@@ -95,6 +95,11 @@ namespace Nest
 
 		TReturnType Scalar(Expression<Func<T, string>> field, Func<TextPropertyDescriptor<T>, ITextProperty> selector = null);
 		TReturnType Scalar(Expression<Func<T, IEnumerable<string>>> field, Func<TextPropertyDescriptor<T>, ITextProperty> selector = null);
+		TReturnType Scalar(Expression<Func<T, DateRange>> field, Func<DateRangePropertyDescriptor<T>, IDateRangeProperty> selector = null);
+		TReturnType Scalar(Expression<Func<T, DoubleRange>> field, Func<DoubleRangePropertyDescriptor<T>, IDoubleRangeProperty> selector = null);
+		TReturnType Scalar(Expression<Func<T, LongRange>> field, Func<LongRangePropertyDescriptor<T>, ILongRangeProperty> selector = null);
+		TReturnType Scalar(Expression<Func<T, IntegerRange>> field, Func<IntegerRangePropertyDescriptor<T>, IIntegerRangeProperty> selector = null);
+		TReturnType Scalar(Expression<Func<T, FloatRange>> field, Func<FloatRangePropertyDescriptor<T>, IFloatRangeProperty> selector = null);
 #pragma warning restore CS3001 // Argument type is not CLS-compliant
 	}
 
@@ -249,13 +254,21 @@ namespace Nest
 		public PropertiesDescriptor<T> Scalar(Expression<Func<T, IEnumerable<Guid?>>> field, Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector = null) =>
 			SetProperty(selector.InvokeOrDefault(new KeywordPropertyDescriptor<T>().Name(field)));
 
-
 		public PropertiesDescriptor<T> Scalar(Expression<Func<T, string>> field, Func<TextPropertyDescriptor<T>, ITextProperty> selector = null) =>
 			SetProperty(selector.InvokeOrDefault(new TextPropertyDescriptor<T>().Name(field)));
 		public PropertiesDescriptor<T> Scalar(Expression<Func<T, IEnumerable<string>>> field, Func<TextPropertyDescriptor<T>, ITextProperty> selector = null) =>
 			SetProperty(selector.InvokeOrDefault(new TextPropertyDescriptor<T>().Name(field)));
 
-
+		public PropertiesDescriptor<T> Scalar(Expression<Func<T, DateRange>> field, Func<DateRangePropertyDescriptor<T>, IDateRangeProperty> selector = null) =>
+			SetProperty(selector.InvokeOrDefault(new DateRangePropertyDescriptor<T>().Name(field)));
+		public PropertiesDescriptor<T> Scalar(Expression<Func<T, DoubleRange>> field, Func<DoubleRangePropertyDescriptor<T>, IDoubleRangeProperty> selector = null) =>
+			SetProperty(selector.InvokeOrDefault(new DoubleRangePropertyDescriptor<T>().Name(field)));
+		public PropertiesDescriptor<T> Scalar(Expression<Func<T, LongRange>> field, Func<LongRangePropertyDescriptor<T>, ILongRangeProperty> selector = null) =>
+			SetProperty(selector.InvokeOrDefault(new LongRangePropertyDescriptor<T>().Name(field)));
+		public PropertiesDescriptor<T> Scalar(Expression<Func<T, IntegerRange>> field, Func<IntegerRangePropertyDescriptor<T>, IIntegerRangeProperty> selector = null) =>
+			SetProperty(selector.InvokeOrDefault(new IntegerRangePropertyDescriptor<T>().Name(field)));
+		public PropertiesDescriptor<T> Scalar(Expression<Func<T, FloatRange>> field, Func<FloatRangePropertyDescriptor<T>, IFloatRangeProperty> selector = null) =>
+			SetProperty(selector.InvokeOrDefault(new FloatRangePropertyDescriptor<T>().Name(field)));
 
 #pragma warning restore CS3001 // Argument type is not CLS-compliant
 	}
