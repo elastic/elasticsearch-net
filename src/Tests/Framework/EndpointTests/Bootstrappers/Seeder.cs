@@ -11,10 +11,21 @@ namespace Tests.Framework.Integration
 	{
 		private IElasticClient Client { get; }
 
-		public Seeder(ElasticsearchNode node)
+		private readonly IIndexSettings DefaultIndexSettings = new IndexSettings
+		{
+			NumberOfShards = 2,
+			NumberOfReplicas = 0
+		};
+
+		private IIndexSettings IndexSettings { get; }
+
+		public Seeder(ElasticsearchNode node, IIndexSettings indexSettings)
 		{
 			this.Client = node.Client;
+			this.IndexSettings = indexSettings ?? DefaultIndexSettings;
 		}
+
+		public Seeder(ElasticsearchNode node) : this(node, null) { }
 
 		public void SeedNode()
 		{
@@ -78,13 +89,11 @@ namespace Tests.Framework.Integration
 
 		private void CreateIndexTemplate()
 		{
-			var putTemplateResult = this.Client.PutIndexTemplate("nest_tests", p => p
-				.Template("*") //match on all created indices
-				.Settings(s => s
-					.NumberOfReplicas(0)
-					.NumberOfShards(2)
-				)
-			);
+			var putTemplateResult = this.Client.PutIndexTemplate(new PutIndexTemplateRequest("nest_test")
+			{
+				Template = "*",
+				Settings = this.IndexSettings
+			});
 			putTemplateResult.IsValid.Should().BeTrue();
 		}
 
