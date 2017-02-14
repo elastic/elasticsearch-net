@@ -15,7 +15,7 @@ nuget Bogus
 nuget DiffPlex 
 
 // profiling / benchmarking
-nuget JetBrains.Profiler.Kernel.Windows.Api
+nuget JetBrains.Profiler.Kernel.Windows.Api prerelease
 nuget BenchmarkDotNet 0.10.0
 
 nuget System.Reactive
@@ -38,7 +38,7 @@ group build
     nuget FAKE
     nuget FSharp.Data
     nuget GitLink prerelease
-	nuget NEST
+    nuget NEST
     source https://www.myget.org/F/xunit/
     nuget xunit.runner.console 2.2.0-beta5-build3474
 

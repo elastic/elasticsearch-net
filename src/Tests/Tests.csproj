@@ -461,7 +461,6 @@
     <Compile Include="Mapping\Types\Core\Keyword\KeywordPropertyTests.cs" />
     <Compile Include="Mapping\Types\Core\Number\NumberAttributeTests.cs" />
     <Compile Include="Mapping\Types\Core\Number\NumberPropertyTests.cs" />
-    <Compile Include="Mapping\Types\Core\Percolator\PercolatorAttributeTests.cs" />
     <Compile Include="Mapping\Types\Core\Percolator\PercolatorPropertyTests.cs" />
     <Compile Include="Mapping\Types\Core\Percolator\PercolatorAttributeTests.cs" />
     <Compile Include="Mapping\Types\Core\String\StringAttributeTests.cs" />
@@ -520,7 +519,6 @@
     <Compile Include=".\QueryDsl\Compound\FunctionScore\FunctionScoreQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\Compound\Indices\IndicesNoMatchQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\Compound\Indices\IndicesQueryUsageTests.cs" />
-    <Compile Include="Mapping\Types\Core\Text\TextPropertyTests.cs" />
     <Compile Include="Mapping\Types\Geo\GeoPoint\GeoPointAttributeTests.cs" />
     <Compile Include="Mapping\Types\Geo\GeoPoint\GeoPointPropertyTests.cs" />
     <Compile Include="Mapping\Types\Geo\GeoShape\GeoShapeAttributeTests.cs" />
@@ -822,7 +820,6 @@
     <Content Include="ClientConcepts\LowLevel\pipeline.xml" />
     <Content Include="QueryDsl\BoolDsl\hadouken-indentation.jpg" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="..\outputpath.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Choose>
