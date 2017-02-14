@@ -3,17 +3,18 @@
   "buildOptions": {
     "emitEntryPoint": true,
     "warningsAsErrors": false,
+    "nowarn": ["CS1591", "1591", "1573"],
     "embed": [
       "Document\\Single\\Attachment\\Attachment_Test_Document.pdf"
     ]
   },
   "dependencies": {
-    "Bogus": "7.1.4",
+    "Bogus": "9.0.2",
     "BenchmarkDotNet": "0.10.0",
     "System.Buffers": "4.0.0",
     "DiffPlex": "2.0.0-alpha1",
     "Elasticsearch.Net": { "target": "project" },
-    "FluentAssertions": "4.6.3",
+    "FluentAssertions": "4.19",
     "Nest": { "target": "project" },
     "Newtonsoft.Json": "9.0.1",
     "Rx-Main": "2.3.0-beta2",

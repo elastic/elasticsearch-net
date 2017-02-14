@@ -7,7 +7,7 @@ namespace Nest
 {
 	/// <summary>
 	/// Converts a JSON string into a structured JSON object.
-	/// </remarks>
+	/// </summary>
 	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<JsonProcessor>))]
 	public interface IJsonProcessor : IProcessor

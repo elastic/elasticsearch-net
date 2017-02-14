@@ -15,7 +15,7 @@ namespace Nest
 		Normalization? Normalization { get; set; }
 
 		/// <summary>
-		/// Normalization model that assumes a uniform distribution of the term frequency. 
+		/// Normalization model that assumes a uniform distribution of the term frequency.
 		/// </summary>
 		[JsonProperty("normalization.h1.c")]
 		double? NormalizationH1C { get; set; }
@@ -74,7 +74,7 @@ namespace Nest
 		public IBSimilarityDescriptor NoNormalization() => Assign(a => a.Normalization = Normalization.No);
 
 		/// <summary>
-		/// Normalization model that assumes a uniform distribution of the term frequency. 
+		/// Normalization model that assumes a uniform distribution of the term frequency.
 		/// </summary>
 		/// <param name="c">hyper-parameter that controls the term frequency normalization with respect to the document length.</param>
 		public IBSimilarityDescriptor NormalizationH1(double? c) => Assign(a =>
@@ -106,7 +106,7 @@ namespace Nest
 		/// <summary>
 		/// Pareto-Zipf Normalization
 		/// </summary>
-		/// <param name="mu">represents A/(A+1) where A measures the specificity of the language..</param>
+		/// <param name="z">represents A/(A+1) where A measures the specificity of the language..</param>
 		public IBSimilarityDescriptor NormalizationZ(double? z) => Assign(a =>
 		{
 			a.Normalization = Normalization.Z;
