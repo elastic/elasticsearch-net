@@ -9,7 +9,7 @@ namespace Nest
 	// TODO this custom converter is in place because the response changed from ES 5.0 to ES 5.2
 	// so we are supporting both formats. In 6.0 we should remove this entirely and only support
 	// the new format.
-	public class ClusterAllocationExplainResponseJsonConverter : JsonConverter
+	internal class ClusterAllocationExplainResponseJsonConverter : JsonConverter
 	{
 		public override bool CanRead { get; } = true;
 
