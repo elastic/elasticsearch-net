@@ -48,11 +48,18 @@ namespace Elasticsearch.Net
 				statusCode = Convert.ToInt32(status);
 
 			if (!dict.TryGetValue("error", out error)) return null;
+			Error err;
+			var s = error as string;
+			if (s != null)
+			{
+				err = new Error {Reason = s};
+			}
+			else err = (Error) strategy.DeserializeObject(error, typeof(Error));
 
 			return new ServerError
 			{
 				Status = statusCode,
-				Error = (Error)strategy.DeserializeObject(error, typeof(Error))
+				Error = err
 			};
 		}
 
@@ -155,6 +162,7 @@ namespace Elasticsearch.Net
 	{
 		public static void FillValues(this IRootCause rootCause, IDictionary<string, object> dict)
 		{
+			if (dict == null) return;
 			object index;
 			if (dict.TryGetValue("index", out index)) rootCause.Index = Convert.ToString(index);
 			object reason;
