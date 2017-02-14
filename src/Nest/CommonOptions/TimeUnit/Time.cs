@@ -214,7 +214,7 @@ namespace Nest
 
 		public override int GetHashCode()
 		{
-			if (this.StaticTimeValue.HasValue) return this.StaticTimeValue.Value;
+			if (this.StaticTimeValue.HasValue) return this.StaticTimeValue.Value.GetHashCode();
 			return this.ApproximateMilliseconds.GetHashCode();
 		}
 
