@@ -11,7 +11,7 @@ namespace Nest
 
 		[JsonProperty("lte")]
 		DateMath LessThanOrEqualTo { get; set; }
-		
+
 		[JsonProperty("gt")]
 		DateMath GreaterThan { get; set; }
 
@@ -23,6 +23,9 @@ namespace Nest
 
 		[JsonProperty("format")]
 		string Format { get; set; }
+
+		[JsonProperty("relation")]
+		RangeRelation? Relation { get; set; }
 	}
 
 	public class DateRangeQuery : FieldNameQueryBase, IDateRangeQuery
@@ -36,11 +39,11 @@ namespace Nest
 		public DateMath LessThan { get; set; }
 		public string TimeZone { get; set; }
 		public string Format { get; set; }
-
+		public RangeRelation? Relation { get; set; }
 
 		internal static bool IsConditionless(IDateRangeQuery q)
 		{
-			return q.Field.IsConditionless() 
+			return q.Field.IsConditionless()
 				|| (q.GreaterThanOrEqualTo == null
 				&& q.LessThanOrEqualTo == null
 				&& q.GreaterThan == null
@@ -49,7 +52,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class DateRangeQueryDescriptor<T> 
+	public class DateRangeQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<DateRangeQueryDescriptor<T>, IDateRangeQuery, T>
 		, IDateRangeQuery where T : class
 	{
@@ -60,6 +63,7 @@ namespace Nest
 		DateMath IDateRangeQuery.LessThan { get; set; }
 		string IDateRangeQuery.TimeZone { get; set; }
 		string IDateRangeQuery.Format { get; set; }
+		RangeRelation? IDateRangeQuery.Relation { get; set; }
 
 		public DateRangeQueryDescriptor<T> GreaterThan(DateMath from) => Assign(a => a.GreaterThan = from);
 
@@ -69,8 +73,10 @@ namespace Nest
 
 		public DateRangeQueryDescriptor<T> LessThanOrEquals(DateMath to) => Assign(a => a.LessThanOrEqualTo = to);
 
-		public DateRangeQueryDescriptor<T> TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone); 
+		public DateRangeQueryDescriptor<T> TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone);
 
 		public DateRangeQueryDescriptor<T> Format(string format) => Assign(a => a.Format = format);
+
+		public DateRangeQueryDescriptor<T> Relation(RangeRelation? relation) => Assign(a => a.Relation = relation);
 	}
 }

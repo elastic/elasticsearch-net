@@ -102,6 +102,12 @@ namespace Tests.Mapping.Scalar
 			public IEnumerable<string> Strings { get; set; }
 
 			public ScalarEnum Enum { get; set; }
+
+			public DateRange DateRange { get; set; }
+			public DoubleRange DoubleRange { get; set; }
+			public IntegerRange IntegerRange { get; set; }
+			public FloatRange FloatRange { get; set; }
+			public LongRange LongRange { get; set; }
 		}
 
 		protected override object ExpectJson => new
@@ -174,7 +180,12 @@ namespace Tests.Mapping.Scalar
 				ulongNullables = new { type = "double" },
 				@string = new { type = "text" },
 				strings = new { type = "text" },
-				@enum = new { type = "integer" }
+				@enum = new { type = "integer" },
+				dateRange = new { type = "date_range" },
+				integerRange = new { type = "integer_range" },
+				doubleRange = new { type = "double_range" },
+				longRange = new { type = "long_range" },
+				floatRange = new { type = "float_range" }
 			}
 		};
 
@@ -247,6 +258,11 @@ namespace Tests.Mapping.Scalar
 				.Scalar(p => p.String, m => m)
 				.Scalar(p => p.Strings, m => m)
 				.Scalar(p => p.Enum, m => m)
+				.Scalar(p => p.DateRange, m => m)
+				.Scalar(p => p.IntegerRange, m => m)
+				.Scalar(p => p.FloatRange, m => m)
+				.Scalar(p => p.LongRange, m => m)
+				.Scalar(p => p.DoubleRange, m => m)
 			);
 
 		protected override TypeMapping Initializer => null;

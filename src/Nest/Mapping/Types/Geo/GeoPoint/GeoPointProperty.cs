@@ -14,7 +14,7 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class GeoPointProperty : DocValuesPropertyBase, IGeoPointProperty
 	{
-		public GeoPointProperty() : base("geo_point") { }
+		public GeoPointProperty() : base(FieldType.GeoPoint) { }
 
 		public bool? IgnoreMalformed { get; set; }
 	}
@@ -26,7 +26,7 @@ namespace Nest
 	{
 		bool? IGeoPointProperty.IgnoreMalformed { get; set; }
 
-		public GeoPointPropertyDescriptor() : base("geo_point") { }
+		public GeoPointPropertyDescriptor() : base(FieldType.GeoPoint) { }
 
 		public GeoPointPropertyDescriptor<T> IgnoreMalformed(bool ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
 	}

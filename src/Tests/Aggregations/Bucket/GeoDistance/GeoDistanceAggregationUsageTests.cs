@@ -58,11 +58,11 @@ namespace Tests.Aggregations.Bucket.GeoDistance
 				{
 					Field = Field((Project p) => p.Location),
 					Origin = "52.376, 4.894",
-					Ranges = new List<Nest.Range>
+					Ranges = new List<AggregationRange>
 					{
-						new Nest.Range { To = 100 },
-						new Nest.Range { From = 100, To = 300 },
-						new Nest.Range { From = 300 }
+						new AggregationRange { To = 100 },
+						new AggregationRange { From = 100, To = 300 },
+						new AggregationRange { From = 300 }
 					}
 				}
 			};

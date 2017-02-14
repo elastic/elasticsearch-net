@@ -52,11 +52,11 @@ namespace Tests.Aggregations.Bucket.Range
 				Aggregations = new RangeAggregation("commit_ranges")
 				{
 					Field = Field<Project>(p => p.NumberOfCommits),
-					Ranges = new List<Nest.Range>
+					Ranges = new List<AggregationRange>
 					{
-						{ new Nest.Range { To = 100 } },
-						{ new Nest.Range { From = 100, To = 500 } },
-						{ new Nest.Range { From = 500 } }
+						{ new AggregationRange { To = 100 } },
+						{ new AggregationRange { From = 100, To = 500 } },
+						{ new AggregationRange { From = 500 } }
 					}
 				}
 			};

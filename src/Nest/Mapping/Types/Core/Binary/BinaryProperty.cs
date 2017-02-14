@@ -11,7 +11,7 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class BinaryProperty : DocValuesPropertyBase, IBinaryProperty
 	{
-		public BinaryProperty() : base("binary") { }
+		public BinaryProperty() : base(FieldType.Binary) { }
 	}
 
 	[DebuggerDisplay("{DebugDisplay}")]
@@ -19,6 +19,6 @@ namespace Nest
 		: DocValuesPropertyDescriptorBase<BinaryPropertyDescriptor<T>, IBinaryProperty, T>, IBinaryProperty
 		where T : class
 	{
-		public BinaryPropertyDescriptor() : base("binary") { }
+		public BinaryPropertyDescriptor() : base(FieldType.Binary) { }
 	}
 }

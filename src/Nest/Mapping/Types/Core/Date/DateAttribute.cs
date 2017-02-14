@@ -4,7 +4,9 @@ namespace Nest
 {
 	public class DateAttribute : ElasticsearchDocValuesPropertyAttributeBase, IDateProperty
 	{
-		IDateProperty Self => this;
+		private IDateProperty Self => this;
+
+		public DateAttribute() : base(FieldType.Date) { }
 
 		bool? IDateProperty.Index { get; set; }
 		double? IDateProperty.Boost { get; set; }
@@ -21,6 +23,5 @@ namespace Nest
 		public bool IgnoreMalformed { get { return Self.IgnoreMalformed.GetValueOrDefault(); } set { Self.IgnoreMalformed = value; } }
 		public string Format { get { return Self.Format; } set { Self.Format = value; } }
 
-		public DateAttribute() : base("date") { }
 	}
 }

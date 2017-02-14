@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Concurrent;
+using System.IO.Packaging;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -11,7 +13,10 @@ namespace Tests.Framework.Versions
 	{
 		private static readonly Lazy<string> LatestVersion = new Lazy<string>(ResolveLatestVersion, LazyThreadSafetyMode.ExecutionAndPublication);
 		private static readonly Lazy<string> LatestSnapshot = new Lazy<string>(ResolveLatestSnapshot, LazyThreadSafetyMode.ExecutionAndPublication);
+		private static readonly object _lock = new { };
+		private static readonly ConcurrentDictionary<string, string> SnapshotVersions = new ConcurrentDictionary<string, string>();
 		private static readonly string SonaTypeUrl = "https://oss.sonatype.org/content/repositories/snapshots/org/elasticsearch/distribution/zip/elasticsearch";
+
 		private string RootUrl => this.IsSnapshot
 			? SonaTypeUrl
 			: "https://artifacts.elastic.co/downloads/elasticsearch";
@@ -19,6 +24,11 @@ namespace Tests.Framework.Versions
 		private static string ResolveLatestSnapshot()
 		{
 			var version = LatestVersion.Value;
+			return ResolveLatestSnapshotFor(version);
+		}
+
+		private static string ResolveLatestSnapshotFor(string version)
+		{
 			var mavenMetadata = XElement.Load($"{SonaTypeUrl}/{version}/maven-metadata.xml");
 			var snapshot = mavenMetadata.Descendants("versioning").Descendants("snapshot").FirstOrDefault();
 			var snapshotTimestamp = snapshot.Descendants("timestamp").FirstOrDefault().Value;
@@ -42,10 +52,25 @@ namespace Tests.Framework.Versions
 		public ElasticsearchVersion(string version) : base(TranslateConfigVersion(version))
 		{
 			this.Version = version;
-			if (this.Version == "latest")
+			if (this.Version.Equals("latest", StringComparison.OrdinalIgnoreCase))
 				this.Version = LatestVersion.Value;
-			if (this.IsSnapshot)
+			else if (this.IsSnapshot && this.Version.Equals("snapshot", StringComparison.OrdinalIgnoreCase))
 				this.Zip = LatestSnapshot.Value;
+			else if (this.IsSnapshot)
+			{
+				lock (_lock)
+				{
+					string zipLocation;
+					if (SnapshotVersions.TryGetValue(version, out zipLocation))
+						this.Zip = zipLocation;
+					else
+					{
+						zipLocation = ResolveLatestSnapshotFor(version);
+						SnapshotVersions.TryAdd(version, zipLocation);
+						this.Zip = zipLocation;
+					}
+				}
+			}
 
 			this.Zip = this.Zip ?? $"elasticsearch-{this.Version}.zip";
 			if (this.IsSnapshot) this.DownloadUrl = $"{this.RootUrl}/{this.Version}/{this.Zip}";
@@ -71,6 +96,5 @@ namespace Tests.Framework.Versions
 		/// Whether this version is a snapshot or officicially released distribution
 		/// </summary>
 		public bool IsSnapshot => this.Version?.ToLower().Contains("snapshot") ?? false;
-
 	}
 }

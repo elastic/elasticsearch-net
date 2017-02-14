@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -12,9 +14,12 @@ namespace Nest
 
 	public abstract class DocValuesPropertyBase : CorePropertyBase, IDocValuesProperty
 	{
-		protected DocValuesPropertyBase(TypeName typeName) : base(typeName)
-		{
-		}
+		[Obsolete("Please use overload taking FieldType")]
+		protected DocValuesPropertyBase(TypeName typeName) : base(typeName) { }
+
+#pragma warning disable 618
+		protected DocValuesPropertyBase(FieldType type) : this(type.GetStringValue()) { }
+#pragma warning restore 618
 
 		public bool? DocValues { get; set; }
 	}

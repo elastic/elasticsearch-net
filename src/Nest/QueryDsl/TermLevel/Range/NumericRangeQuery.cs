@@ -9,12 +9,15 @@ namespace Nest
 
 		[JsonProperty("lte")]
 		double? LessThanOrEqualTo { get; set; }
-		
+
 		[JsonProperty("gt")]
 		double? GreaterThan { get; set; }
 
 		[JsonProperty("lt")]
 		double? LessThan { get; set; }
+
+		[JsonProperty("relation")]
+		RangeRelation? Relation { get; set; }
 	}
 
 	public class NumericRangeQuery : FieldNameQueryBase, INumericRangeQuery
@@ -25,11 +28,13 @@ namespace Nest
 		public double? GreaterThan { get; set; }
 		public double? LessThan { get; set; }
 
+		public RangeRelation? Relation { get; set; }
+
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Range = this;
 
 		internal static bool IsConditionless(INumericRangeQuery q)
 		{
-			return q.Field.IsConditionless() 
+			return q.Field.IsConditionless()
 				|| (q.GreaterThanOrEqualTo == null
 				&& q.LessThanOrEqualTo == null
 				&& q.GreaterThan == null
@@ -38,7 +43,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class NumericRangeQueryDescriptor<T> 
+	public class NumericRangeQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<NumericRangeQueryDescriptor<T>, INumericRangeQuery, T>
 		, INumericRangeQuery where T : class
 	{
@@ -47,6 +52,7 @@ namespace Nest
 		double? INumericRangeQuery.LessThanOrEqualTo { get; set; }
 		double? INumericRangeQuery.GreaterThan { get; set; }
 		double? INumericRangeQuery.LessThan { get; set; }
+		RangeRelation? INumericRangeQuery.Relation{ get; set; }
 
 		public NumericRangeQueryDescriptor<T> GreaterThan(double? from) => Assign(a => a.GreaterThan = from);
 
@@ -55,5 +61,7 @@ namespace Nest
 		public NumericRangeQueryDescriptor<T> LessThan(double? to) => Assign(a => a.LessThan = to);
 
 		public NumericRangeQueryDescriptor<T> LessThanOrEquals(double? to) => Assign(a => a.LessThanOrEqualTo = to);
+
+		public NumericRangeQueryDescriptor<T> Relation(RangeRelation? relation) => Assign(a => a.Relation = relation);
 	}
 }

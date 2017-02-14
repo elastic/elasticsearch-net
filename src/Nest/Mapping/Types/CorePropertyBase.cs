@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -24,9 +25,10 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay}")]
 	public abstract class CorePropertyBase : PropertyBase, ICoreProperty
 	{
-		protected CorePropertyBase(TypeName typeName) : base(typeName)
-		{
-		}
+		[Obsolete("Please use overload taking FieldType")]
+		protected CorePropertyBase(TypeName typeName) : base(typeName) { }
+		protected CorePropertyBase(FieldType type) : base(type) { }
+
 
 		public Fields CopyTo { get; set; }
 		public IProperties Fields { get; set; }

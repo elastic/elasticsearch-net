@@ -9,14 +9,12 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IPercolatorProperty : IProperty
-	{
-	}
+	public interface IPercolatorProperty : IProperty { }
 
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class PercolatorProperty : PropertyBase, IPercolatorProperty
 	{
-		public PercolatorProperty() : base("percolator") { }
+		public PercolatorProperty() : base(FieldType.Percolator) { }
 	}
 
 	[DebuggerDisplay("{DebugDisplay}")]
@@ -24,6 +22,6 @@ namespace Nest
 	: PropertyDescriptorBase<PercolatorPropertyDescriptor<T>, IPercolatorProperty, T>, IPercolatorProperty
 	where T : class
 	{
-		public PercolatorPropertyDescriptor() : base("percolator") { }
+		public PercolatorPropertyDescriptor() : base(FieldType.Percolator) { }
 	}
 }

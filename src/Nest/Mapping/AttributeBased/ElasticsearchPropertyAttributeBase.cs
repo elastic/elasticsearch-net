@@ -20,11 +20,18 @@ namespace Nest
 		public string Name { get; set; }
 		public bool Ignore { get; set; }
 
+		protected ElasticsearchPropertyAttributeBase(FieldType type)
+		{
+			Self.Type = type.GetStringValue();
+		}
+
+		[Obsolete("Please use overload taking FieldType")]
 		protected ElasticsearchPropertyAttributeBase(string typeName)
 		{
 			Self.Type = typeName;
 		}
 
+		[Obsolete("Please use overload taking FieldType")]
 		protected ElasticsearchPropertyAttributeBase(Type type)
 		{
 			Self.Type = type;

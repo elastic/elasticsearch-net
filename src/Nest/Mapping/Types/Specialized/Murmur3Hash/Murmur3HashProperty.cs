@@ -12,7 +12,7 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class Murmur3HashProperty : DocValuesPropertyBase, IMurmur3HashProperty
 	{
-		public Murmur3HashProperty() : base("murmur3") { }
+		public Murmur3HashProperty() : base(FieldType.Murmur3Hash) { }
 	}
 
 	[DebuggerDisplay("{DebugDisplay}")]
@@ -20,6 +20,6 @@ namespace Nest
 		: DocValuesPropertyDescriptorBase<Murmur3HashPropertyDescriptor<T>, IMurmur3HashProperty, T>, IMurmur3HashProperty
 		where T : class
 	{
-		public Murmur3HashPropertyDescriptor() : base("murmur3") { }
+		public Murmur3HashPropertyDescriptor() : base(FieldType.Murmur3Hash) { }
 	}
 }

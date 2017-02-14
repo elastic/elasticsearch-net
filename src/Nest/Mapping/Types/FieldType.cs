@@ -36,18 +36,10 @@ namespace Nest
 		Binary,
 		[EnumMember(Value = "string")]
 		String,
-		[EnumMember(Value = "integer")]
-		Integer,
-		[EnumMember(Value = "long")]
-		Long,
-		[EnumMember(Value = "short")]
-		Short,
-		[EnumMember(Value = "byte")]
-		Byte,
-		[EnumMember(Value = "float")]
-		Float,
-		[EnumMember(Value = "double")]
-		Double,
+		[EnumMember(Value = "keyword")]
+		Keyword,
+		[EnumMember(Value = "text")]
+		Text,
 		[EnumMember(Value = "date")]
 		Date,
 		[EnumMember(Value = "boolean")]
@@ -69,5 +61,35 @@ namespace Nest
 		Murmur3Hash,
 		[EnumMember(Value = "token_count")]
 		TokenCount,
+		[EnumMember(Value = "percolator")]
+		Percolator,
+
+		[EnumMember(Value = "integer")]
+		Integer,
+		[EnumMember(Value = "long")]
+		Long,
+		[EnumMember(Value = "short")]
+		Short,
+		[EnumMember(Value = "byte")]
+		Byte,
+		[EnumMember(Value = "float")]
+		Float,
+		[EnumMember(Value = "half_float")]
+		HalfFloat,
+		[EnumMember(Value = "scaled_float")]
+		ScaledFloat,
+		[EnumMember(Value = "double")]
+		Double,
+
+		[EnumMember(Value = "integer_range")]
+		IntegerRange,
+		[EnumMember(Value = "float_range")]
+		FloatRange,
+		[EnumMember(Value = "long_range")]
+		LongRange,
+		[EnumMember(Value = "double_range")]
+		DoubleRange,
+		[EnumMember(Value = "date_range")]
+		DateRange,
 	}
 }

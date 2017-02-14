@@ -522,6 +522,7 @@
     <Compile Include="CommonOptions\DateMath\DateMathExpression.cs" />
     <Compile Include="CommonOptions\DateMath\DateMathOperation.cs" />
     <Compile Include="CommonOptions\Failures\BulkError.cs" />
+    <Compile Include="CommonOptions\Range\Ranges.cs" />
     <Compile Include="Document\Multiple\BulkAll\BulkAllResponse.cs" />
     <Compile Include="Document\Multiple\BulkIndexByScrollFailure.cs" />
     <Compile Include="CommonOptions\Failures\ShardFailure.cs" />
@@ -536,7 +537,7 @@
     <Compile Include="CommonOptions\Geo\GeoShapeRelation.cs" />
     <Compile Include="CommonOptions\Hit\ShardsMetaData.cs" />
     <Compile Include="CommonOptions\MinimumShouldMatch\MinimumShouldMatch.cs" />
-    <Compile Include="CommonOptions\Range\Range.cs" />
+    <Compile Include="CommonOptions\Range\AggregationRange.cs" />
     <Compile Include="CommonOptions\Scripting\FileScript.cs" />
     <Compile Include="CommonOptions\Scripting\IndexedScript.cs" />
     <Compile Include="CommonOptions\Scripting\InlineScript.cs" />
@@ -920,6 +921,19 @@
     <Compile Include="Mapping\Types\Core\Number\NumberType.cs" />
     <Compile Include="Mapping\Types\Core\Percolator\PercolatorAttribute.cs" />
     <Compile Include="Mapping\Types\Core\Percolator\PercolatorProperty.cs" />
+    <Compile Include="Mapping\Types\Core\Range\DateRange\DateRangeProperty.cs" />
+    <Compile Include="Mapping\Types\Core\Range\DateRange\DateRangeAttribute.cs" />
+    <Compile Include="Mapping\Types\Core\Range\DoubleRange\DoubleRangeProperty.cs" />
+    <Compile Include="Mapping\Types\Core\Range\DoubleRange\DoubleRangeAttribute.cs" />
+    <Compile Include="Mapping\Types\Core\Range\FloatRange\FloatRangeProperty.cs" />
+    <Compile Include="Mapping\Types\Core\Range\FloatRange\FloatRangeAttribute.cs" />
+    <Compile Include="Mapping\Types\Core\Range\IntegerRange\IntegerRangeProperty.cs" />
+    <Compile Include="Mapping\Types\Core\Range\IntegerRange\IntegerRangeAttribute.cs" />
+    <Compile Include="Mapping\Types\Core\Range\RangePropertyAttributeBase.cs" />
+    <Compile Include="Mapping\Types\Core\Range\LongRange\LongRangeProperty.cs" />
+    <Compile Include="Mapping\Types\Core\Range\LongRange\LongRangeAttribute.cs" />
+    <Compile Include="Mapping\Types\Core\Range\RangeType.cs" />
+    <Compile Include="Mapping\Types\Core\Range\RangePropertyBase.cs" />
     <Compile Include="Mapping\Types\Core\String\StringAttribute.cs" />
     <Compile Include="Mapping\Types\Core\String\StringProperty.cs" />
     <Compile Include="Mapping\Types\Core\Text\IndexOptions.cs" />
@@ -1168,6 +1182,7 @@
     <Compile Include="QueryDsl\TermLevel\Range\NumericRangeQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Range\RangeQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Range\RangeQueryJsonConverter.cs" />
+    <Compile Include="QueryDsl\TermLevel\Range\RangeRelation.cs" />
     <Compile Include="QueryDsl\TermLevel\Range\TermRangeQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Regexp\RegexpQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Terms\TermsQuery.cs" />

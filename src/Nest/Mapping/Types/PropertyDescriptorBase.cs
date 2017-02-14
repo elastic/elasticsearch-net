@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -16,7 +17,12 @@ namespace Nest
 
 		protected string DebugDisplay => $"Type: {Self.Type.DebugDisplay}, Name: {Self.Name.DebugDisplay} ";
 
+		[Obsolete("Please use overload taking FieldType")]
 		protected PropertyDescriptorBase(string type) { Self.Type = type; }
+
+#pragma warning disable 618
+		protected PropertyDescriptorBase(FieldType type) : this(type.GetStringValue()){}
+#pragma warning restore 618
 
 		public TDescriptor Name(PropertyName name) => Assign(a => a.Name = name);
 

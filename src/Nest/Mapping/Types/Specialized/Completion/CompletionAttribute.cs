@@ -4,7 +4,9 @@ namespace Nest
 {
 	public class CompletionAttribute : ElasticsearchDocValuesPropertyAttributeBase, ICompletionProperty
 	{
-		ICompletionProperty Self => this;
+		private ICompletionProperty Self => this;
+
+		public CompletionAttribute() : base(FieldType.Completion) { }
 
 		string ICompletionProperty.SearchAnalyzer { get; set; }
 		string ICompletionProperty.Analyzer { get; set; }
@@ -19,6 +21,5 @@ namespace Nest
 		public bool PreservePositionIncrements { get { return Self.PreservePositionIncrements.GetValueOrDefault(); } set { Self.PreservePositionIncrements = value; } }
 		public int MaxInputLength { get { return Self.MaxInputLength.GetValueOrDefault(); } set { Self.MaxInputLength = value; } }
 
-		public CompletionAttribute() : base("completion") { }
 	}
 }
