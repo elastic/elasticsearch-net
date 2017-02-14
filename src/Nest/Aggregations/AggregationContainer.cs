@@ -503,8 +503,8 @@ namespace Nest
 			Func<TermsAggregationDescriptor<T, string>, ITermsAggregation<string>> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Terms = d);
 
-		public AggregationContainerDescriptor<T> Terms<TMissingType>(string name,
-			Func<TermsAggregationDescriptor<T, TMissingType>, ITermsAggregation<TMissingType>> selector) =>
+		public AggregationContainerDescriptor<T> Terms<TFieldType>(string name,
+			Func<TermsAggregationDescriptor<T, TFieldType>, ITermsAggregation<TFieldType>> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Terms = d);
 
 		public AggregationContainerDescriptor<T> SignificantTerms(string name,
