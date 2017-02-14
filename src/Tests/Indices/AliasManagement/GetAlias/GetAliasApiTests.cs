@@ -26,7 +26,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/_all/_alias/alias%2Cx%2Cy";
+		protected override string UrlPath => $"/_alias/alias%2Cx%2Cy";
 		protected override void ExpectResponse(IGetAliasResponse response)
 		{
 			response.Indices.Should().NotBeNull();
@@ -36,7 +36,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		protected override Func<GetAliasDescriptor, IGetAliasRequest> Fluent => d=>d
 			.Name(Names)
 		;
-		protected override GetAliasRequest Initializer => new GetAliasRequest(Infer.AllIndices, Names);
+		protected override GetAliasRequest Initializer => new GetAliasRequest(Names);
 	}
 
 	public class GetAliasNotFoundApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetAliasResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
@@ -55,7 +55,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/_all/_alias/alias%2Cx%2Cy";
+		protected override string UrlPath => $"/_alias/bad-alias";
 		protected override bool SupportsDeserialization => false;
 
 		protected override Func<GetAliasDescriptor, IGetAliasRequest> Fluent => d=>d
