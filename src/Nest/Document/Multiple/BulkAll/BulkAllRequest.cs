@@ -190,6 +190,7 @@ namespace Nest
 		/// When set each scroll request will additionally wait on <see cref="ProducerConsumerBackPressure.WaitAsync"/> as well as
 		/// <see cref="MaxDegreeOfParallelism"/> if set. Not that the consumer has to call <see cref="ProducerConsumerBackPressure.Release"/>
 		/// on the same instance every time it is done.
+		/// </summary>
 		/// <param name="maxConcurrency">The minimum maximum concurrency which would be the bottleneck of the producer consumer pipeline</param>
 		/// <param name="backPressureFactor">The maximum amplification back pressure of the greedier part of the producer consumer pipeline</param>
 		public BulkAllDescriptor<T> BackPressure(int maxConcurrency, int? backPressureFactor = null) =>

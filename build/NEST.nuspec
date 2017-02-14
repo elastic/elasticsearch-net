@@ -48,5 +48,6 @@
 		<file src="output\netstandard1.3\Nest\Nest.dll" target="lib\netstandard1.3"/>
 		<file src="output\netstandard1.3\Nest\Nest.pdb" target="lib\netstandard1.3"/>
 		<file src="output\netstandard1.3\Nest\Nest.pdb.srcsrv" target="lib\netstandard1.3"/>
+		<file src="output\netstandard1.3\Nest\Nest.xml" target="lib\netstandard1.3"/>
 	</files>
 </package>

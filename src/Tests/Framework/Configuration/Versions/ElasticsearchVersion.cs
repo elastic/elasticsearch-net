@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Concurrent;
-using System.IO.Packaging;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml.Linq;
 using Version = SemVer.Version;

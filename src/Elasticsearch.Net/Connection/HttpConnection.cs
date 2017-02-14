@@ -77,7 +77,8 @@ namespace Elasticsearch.Net
 		{
 			requestServicePoint.UseNagleAlgorithm = false;
 			requestServicePoint.Expect100Continue = false;
-			requestServicePoint.ConnectionLimit = requestData.ConnectionSettings.ConnectionLimit;
+			if (requestData.ConnectionSettings.ConnectionLimit > 0)
+				requestServicePoint.ConnectionLimit = requestData.ConnectionSettings.ConnectionLimit;
 			//looking at http://referencesource.microsoft.com/#System/net/System/Net/ServicePoint.cs
 			//this method only sets internal values and wont actually cause timers and such to be reset
 			//So it should be idempotent if called with the same parameters

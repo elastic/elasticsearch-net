@@ -28,6 +28,7 @@ q
     .GreaterThanOrEquals(1.1)
     .LessThan(2.1)
     .LessThanOrEquals(2.0)
+    .Relation(RangeRelation.Within)
 )
 ----
 
@@ -43,7 +44,8 @@ new NumericRangeQuery
     GreaterThan = 1.0,
     GreaterThanOrEqualTo = 1.1,
     LessThan = 2.1,
-    LessThanOrEqualTo = 2.0
+    LessThanOrEqualTo = 2.0,
+    Relation = RangeRelation.Within
 }
 ----
 
@@ -58,7 +60,8 @@ new NumericRangeQuery
       "gt": 1.0,
       "gte": 1.1,
       "lt": 2.1,
-      "lte": 2.0
+      "lte": 2.0,
+      "relation": "within"
     }
   }
 }

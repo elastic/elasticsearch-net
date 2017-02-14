@@ -11,9 +11,8 @@ namespace Nest
 
 		/// <summary>
 		/// Use ReindexRouting.Keep or ReindexRouting.Discard if you want to sent "keep" or "discard", this
-		/// constructor always sends <param name="newRoutingValue" /> prefixed with '='
+		/// constructor always sends newRoutingValue prefixed with '='
 		/// </summary>
-		/// <param name="newRoutingValue"></param>
 		public ReindexRouting(string newRoutingValue) : this(newRoutingValue, false) { }
 
 		private ReindexRouting(string newRoutingValue, bool noPrefix)
