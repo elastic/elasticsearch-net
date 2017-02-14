@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -100,14 +102,76 @@ namespace Tests.CommonOptions.TimeUnit
 			(twoDays <= new Time("2d")).Should().BeTrue();
 
 			/**
+			* Special Time values `0` and `-1` can be compared against eachother
+			* and other Time values although admittingly this is a tad nonsensical.
+			*/
+			Time.MinusOne.Should().BeLessThan(Time.Zero);
+			Time.Zero.Should().BeGreaterThan(Time.MinusOne);
+			Time.Zero.Should().BeLessThan(twoDays);
+			Time.MinusOne.Should().BeLessThan(twoDays);
+
+			/**
 			* And assert equality
 			*/
 			twoDays.Should().Be(new Time("2d"));
 			(twoDays == new Time("2d")).Should().BeTrue();
 			(twoDays != new Time("2.1d")).Should().BeTrue();
 			(new Time("2.1d") == new Time(TimeSpan.FromDays(2.1))).Should().BeTrue();
-			(new Time("1") == new Time(1)).Should().BeTrue();
-			(new Time("-1") == new Time(-1)).Should().BeTrue();
+			//the string "-1" is not the same as double -1 which is milliseconds
+			(new Time("-1") == new Time(-1)).Should().BeFalse();
+			(new Time("-1") == Time.MinusOne).Should().BeTrue();
+		}
+
+		private class StringParsingTestCases : List<Tuple<string, TimeSpan, string>>
+		{
+			public void Add(string original, TimeSpan expect, string toString) =>
+				this.Add(Tuple.Create(original, expect, toString));
+
+			public void Add(string bad, string argumentExceptionContains) =>
+				this.Add(Tuple.Create(bad, TimeSpan.FromDays(1), argumentExceptionContains));
+		}
+
+		[U]public void StringImplicitConversionParsing()
+		{
+			var testCases = new StringParsingTestCases
+			{
+				{ "1000 nanos", new TimeSpan(10) , "1000nanos"},
+				{ "1000nanos", new TimeSpan(10), "1000nanos"},
+				{ "1000 NANOS", new TimeSpan(10), "1000nanos" },
+				{ "1000NANOS", new TimeSpan(10), "1000nanos" },
+				{ "10micros", new TimeSpan(100), "10micros" },
+				{ "10   MS", new TimeSpan(0, 0, 0, 0, 10), "10ms" },
+				{ "10ms", new TimeSpan(0, 0, 0, 0, 10), "10ms" },
+				{ "10   ms", new TimeSpan(0, 0, 0, 0, 10), "10ms" },
+				{ "10s", new TimeSpan(0, 0, 10), "10s" },
+				{ "-10s", new TimeSpan(0, 0, -10), "-10s" },
+				{ "-10S", new TimeSpan(0, 0, -10), "-10s" },
+				{ "10m", new TimeSpan(0, 10, 0) , "10m"},
+				{ "10M", new TimeSpan(300, 0, 0, 0), "10M" }, // 300 days not minutes
+				{ "10h", new TimeSpan(10, 0, 0), "10h" },
+				{ "10H", new TimeSpan(10, 0, 0) , "10h"},
+				{ "10d", new TimeSpan(10, 0, 0, 0) , "10d"},
+			};
+			foreach (var testCase in testCases)
+			{
+				var time = new Time(testCase.Item1);
+				time.ToTimeSpan().Should().Be(testCase.Item2, "we passed in {0}", testCase.Item1);
+				time.ToString().Should().Be(testCase.Item3);
+			}
+		}
+		[U]public void StringParseExceptions()
+		{
+			var testCases = new StringParsingTestCases
+			{
+				{ "1000", "missing an interval"},
+				{ "1000x", "string is invalid"},
+			};
+			foreach (var testCase in testCases)
+			{
+				Action create = () => new Time(testCase.Item1);
+				var e = create.Invoking((a) => a()).ShouldThrow<ArgumentException>(testCase.Item1).Subject.First();
+				e.Message.Should().Contain(testCase.Item3);
+			}
 		}
 
 		[U]
@@ -145,8 +209,12 @@ namespace Tests.CommonOptions.TimeUnit
 		[U]
 		public void ExpectedValues()
 		{
-			Expect("-1").WhenSerializing(new Time(-1));
-			Expect("-1").WhenSerializing(new Time("-1"));
+			Expect("0ms").WhenSerializing(new Time(0));
+			Expect(0).WhenSerializing(new Time("0"));
+			Expect(0).WhenSerializing(Time.Zero);
+			Expect("-1ms").WhenSerializing(new Time(-1));
+			Expect(-1).WhenSerializing(new Time("-1"));
+			Expect(-1).WhenSerializing(Time.MinusOne);
 
 			Assert(
 				1, Nest.TimeUnit.Year, -1, "1y",
