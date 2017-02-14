@@ -65,10 +65,10 @@ namespace Tests.Framework
 		protected abstract LazyResponses Update();
 		protected virtual LazyResponses Delete() => LazyResponses.Empty;
 
-		private static string RandomFluent { get; } = RandomString();
-		private static string RandomFluentAsync { get; } = RandomString();
-		private static string RandomInitializer { get; } = RandomString();
-		private static string RandomInitializerAsync { get; } = RandomString();
+		private static string RandomFluent { get; } = $"fluent-{RandomString()}";
+		private static string RandomFluentAsync { get; } = $"fluentasync-{RandomString()}";
+		private static string RandomInitializer { get; } = $"ois-{RandomString()}";
+		private static string RandomInitializerAsync { get; } = $"oisasync-{RandomString()}";
 
 		protected virtual bool SupportsDeletes => true;
 
@@ -106,7 +106,7 @@ namespace Tests.Framework
 		}
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 
-		protected virtual string Sanitize(string randomString) => randomString;
+		protected virtual string Sanitize(string randomString) => randomString + "-" + this.GetType().Name.Replace("CrudTests", "").ToLowerInvariant();
 
 		protected int IntegrationPort { get; set; } = 9200;
 		protected virtual IElasticClient Client => this._cluster.Client;

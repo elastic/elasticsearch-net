@@ -37,7 +37,7 @@ namespace Tests.Framework.MockData
 		private void SetDoubles(Faker faker, Func<bool> r)
 		{
 			var low = faker.Random.Double(-121, 10000);
-			var high = faker.Random.Double(low, Math.Abs(low * 10));
+			var high = faker.Random.Double(low, Math.Abs(low * 10)) + 2;
 			var d = new DoubleRange();
 			SwapAssign(r(), low, v => d.GreaterThan = v, v => d.GreaterThanOrEqualTo = v);
 			SwapAssign(r(), high, v => d.LessThan = v, v => d.LessThanOrEqualTo = v);
@@ -46,7 +46,7 @@ namespace Tests.Framework.MockData
 		private void SetFloats(Faker faker, Func<bool> r)
 		{
 			var low = faker.Random.Float(-2000, 10000);
-			var high = faker.Random.Float(low, Math.Abs(low * 10));
+			var high = faker.Random.Float(low, Math.Abs(low * 10)) + 2;
 			var d = new FloatRange();
 			SwapAssign(r(), low, v => d.GreaterThan = v, v => d.GreaterThanOrEqualTo = v);
 			SwapAssign(r(), high, v => d.LessThan = v, v => d.LessThanOrEqualTo = v);
@@ -55,7 +55,7 @@ namespace Tests.Framework.MockData
 		private void SetIntegers(Faker faker, Func<bool> r)
 		{
 			var low = faker.Random.Int(-100, 10000);
-			var high = faker.Random.Int(low, Math.Abs(low * 10));
+			var high = faker.Random.Int(low, Math.Abs(low * 10)) + 2;
 			var d = new FloatRange();
 			SwapAssign(r(), low, v => d.GreaterThan = v, v => d.GreaterThanOrEqualTo = v);
 			SwapAssign(r(), high, v => d.LessThan = v, v => d.LessThanOrEqualTo = v);
@@ -64,7 +64,7 @@ namespace Tests.Framework.MockData
 		private void SetLongs(Faker faker, Func<bool> r)
 		{
 			var low = faker.Random.Long(-100, 10000);
-			var high = faker.Random.Long(low, Math.Abs(low * 10));
+			var high = faker.Random.Long(low, Math.Abs(low * 10)) + 2;
 			var d = new LongRange();
 			SwapAssign(r(), low, v => d.GreaterThan = v, v => d.GreaterThanOrEqualTo = v);
 			SwapAssign(r(), high, v => d.LessThan = v, v => d.LessThanOrEqualTo = v);
