@@ -105,14 +105,30 @@ namespace Elasticsearch.Net
 			return await builder.ToResponseAsync().ConfigureAwait(false);
 		}
 
+		private static string MissingConnectionLimitMethodError =
+			$"Your target platform does not support {nameof(ConnectionConfiguration.ConnectionLimit)}"
+			+ $" please set {nameof(ConnectionConfiguration.ConnectionLimit)} to -1 on your connection configuration."
+			+ $" this will cause the {nameof(HttpClientHandler.MaxConnectionsPerServer)} not to be set on {nameof(HttpClientHandler)}";
+
 		protected virtual HttpClientHandler CreateHttpClientHandler(RequestData requestData)
 		{
 			var handler = new HttpClientHandler
 			{
 				AutomaticDecompression = requestData.HttpCompression ? GZip | Deflate : None,
-				// same limit as desktop clr
-				MaxConnectionsPerServer = requestData.ConnectionSettings.ConnectionLimit
 			};
+
+			// same limit as desktop clr
+			if (requestData.ConnectionSettings.ConnectionLimit > 0)
+			{
+				try
+				{
+					handler.MaxConnectionsPerServer = requestData.ConnectionSettings.ConnectionLimit;
+				}
+				catch (MissingMethodException e)
+				{
+					throw new Exception(MissingConnectionLimitMethodError, e);
+				}
+			}
 
 			if (!requestData.ProxyAddress.IsNullOrEmpty())
 			{
