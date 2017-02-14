@@ -44,8 +44,8 @@ namespace Nest
 		/// <inheritdoc/>
 		public IEnumerable<string> StemExclusionList { get; set; }
 
-		[JsonIgnore]
 		/// <inheritdoc/>
+		[JsonIgnore]
 		public Language? Language {
 			get { return _type.ToEnum<Language>(); }
 			set { _type = value.GetStringValue().ToLowerInvariant(); }

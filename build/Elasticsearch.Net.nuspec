@@ -43,5 +43,6 @@
 		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net.dll" target="lib\netstandard1.3"/>
 		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net.pdb" target="lib\netstandard1.3"/>
 		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net.pdb.srcsrv" target="lib\netstandard1.3"/>
+		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net.xml" target="lib\netstandard1.3"/>
 	</files>
 </package>

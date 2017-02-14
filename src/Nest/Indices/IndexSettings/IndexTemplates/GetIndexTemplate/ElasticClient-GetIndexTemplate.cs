@@ -16,7 +16,6 @@ namespace Nest
 		/// Gets an index template
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html#getting
 		/// </summary>
-		/// <param name="name">The name of the template to get</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the get template operation</param>
 		IGetIndexTemplateResponse GetIndexTemplate(Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector = null);
 

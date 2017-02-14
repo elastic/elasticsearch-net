@@ -44,7 +44,7 @@ namespace Tests.Search.Suggesters
 				.MaxEdits(1)
 				.MaxInspections(20)
 				.MaxTermFrequency(300000)
-				.MinDocFrequency(2)
+				.MinDocFrequency(1)
 				.MinWordLength(2)
 				.PrefixLength(1)
 				.SuggestMode(SuggestMode.Always)
@@ -110,7 +110,7 @@ namespace Tests.Search.Suggesters
 								MaxEdits = 1,
 								MaxInspections = 20,
 								MaxTermFrequency = 300000,
-								MinDocFrequency = 2,
+								MinDocFrequency = 1,
 								MinWordLength = 2,
 								PrefixLength = 1,
 								SuggestMode = SuggestMode.Always,
@@ -192,7 +192,12 @@ namespace Tests.Search.Suggesters
 				}
 			};
 
-		private static string SuggestText { get; } = Project.Projects.First().Description.Split(' ').First(w => w.Length > 4);
+		private static string SuggestText { get; } = (
+			from word in Project.Projects.First().Description.Split(' ')
+			where word.Length > 4
+			select word.Remove(word.Length - 1)
+		).First();
+
 
 		private static string PhraseSuggest
 		{
@@ -242,7 +247,7 @@ namespace Tests.Search.Suggesters
 			myTermSuggest.Should().NotBeNull();
 
 			var suggest = myTermSuggest.First();
-			suggest.Text.Should().Be(SuggestText);
+			suggest.Text.Should().BeEquivalentTo(SuggestText);
 			suggest.Length.Should().BeGreaterThan(0);
 			suggest.Options.Should().NotBeNull().And.NotBeEmpty();
 
@@ -349,7 +354,7 @@ namespace Tests.Search.Suggesters
 						max_edits = 1,
 						max_inspections = 20,
 						max_term_freq = 300000.0,
-						min_doc_freq = 2.0,
+						min_doc_freq = 1.0,
 						min_word_length = 2,
 						prefix_length = 1,
 						shard_size = 7,

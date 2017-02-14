@@ -204,10 +204,9 @@ namespace Elasticsearch.Net
 		/// <para>For Desktop CLR, this setting applies to the DefaultConnectionLimit property on the  ServicePointManager object when creating ServicePoint objects, affecting the default <see cref="IConnection"/> implementation.</para>
 		/// <para>For Core CLR, this setting applies to the MaxConnectionsPerServer property on the HttpClientHandler instances used by the HttpClient inside the default <see cref="IConnection"/> implementation</para>
 		/// </summary>
-		/// <param name="connectionLimit">The connection limit</param>
+		/// <param name="connectionLimit">The connection limit, a value lower then 0 will cause the connection limit not to be set at all</param>
 		public T ConnectionLimit(int connectionLimit)
 		{
-			if (connectionLimit <= 0) throw new ArgumentException("must be greater than 0", nameof(connectionLimit));
 			return Assign(a => a._connectionLimit = connectionLimit);
 		}
 

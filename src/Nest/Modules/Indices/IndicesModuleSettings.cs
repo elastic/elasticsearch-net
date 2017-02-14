@@ -5,16 +5,16 @@ namespace Nest
 	/// <summary> Settings to control where, when, and how shards are allocated to nodes. </summary>
 	public interface IIndicesModuleSettings
 	{
-		/// <summary><summary>
+		/// <summary></summary>
 		string QeueriesCacheSize { get; set; }
 
-		/// <summary><summary>
+		/// <summary></summary>
 		ICircuitBreakerSettings CircuitBreakerSettings { get; set; }
 
-		/// <summary><summary>
+		/// <summary></summary>
 		FielddataSettings FielddataSettings { get; set; }
 
-		/// <summary><summary>
+		/// <summary></summary>
 		IIndicesRecoverySettings RecoverySettings { get; set; }
 
 	}
@@ -53,13 +53,13 @@ namespace Nest
 		IIndicesRecoverySettings IIndicesModuleSettings.RecoverySettings { get; set; }
 
 		///<inheritdoc/>
-		public IndicesModuleSettingsDescriptor CircuitBreaker(Func<CircuitBreakerSettingsDescriptor, ICircuitBreakerSettings> selector) => 
+		public IndicesModuleSettingsDescriptor CircuitBreaker(Func<CircuitBreakerSettingsDescriptor, ICircuitBreakerSettings> selector) =>
 			Assign(a => a.CircuitBreakerSettings = selector?.Invoke(new CircuitBreakerSettingsDescriptor()));
 
-		//fielddatasettings are static 
+		//fielddatasettings are static
 
 		///<inheritdoc/>
-		public IndicesModuleSettingsDescriptor IndicesRecovery(Func<IndicesRecoverySettingsDescriptor, IIndicesRecoverySettings> selector) => 
+		public IndicesModuleSettingsDescriptor IndicesRecovery(Func<IndicesRecoverySettingsDescriptor, IIndicesRecoverySettings> selector) =>
 			Assign(a => a.RecoverySettings = selector?.Invoke(new IndicesRecoverySettingsDescriptor()));
 
 	}

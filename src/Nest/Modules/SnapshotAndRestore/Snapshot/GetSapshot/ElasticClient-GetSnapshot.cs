@@ -12,7 +12,7 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
 		/// </summary>
 		/// <param name="repository">The repository name under which the snapshots live</param>
-		/// <param name="snapshotName">The names of the snapshots we want information from (can be _all or wildcards)</param>
+		/// <param name="snapshots">The names of the snapshots we want information from (can be _all or wildcards)</param>
 		/// <param name="selector">Optionally further describe the get snapshot operation</param>
 		IGetSnapshotResponse GetSnapshot(Name repository, Names snapshots, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null);
 
