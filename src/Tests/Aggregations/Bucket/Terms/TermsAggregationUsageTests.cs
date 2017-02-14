@@ -124,7 +124,8 @@ namespace Tests.Aggregations.Bucket.Terms
 
 					terms = new
 					{
-						field = "numberOfCommits"
+						field = "numberOfCommits",
+						missing = -1
 					}
 				}
 			}
@@ -133,8 +134,9 @@ namespace Tests.Aggregations.Bucket.Terms
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Size(0)
 			.Aggregations(a => a
-				.Terms("commits", st => st
+				.Terms<int>("commits", st => st
 					.Field(p => p.NumberOfCommits)
+					.Missing(-1)
 				)
 			);
 
@@ -142,9 +144,10 @@ namespace Tests.Aggregations.Bucket.Terms
 			new SearchRequest<Project>
 			{
 				Size = 0,
-				Aggregations = new TermsAggregation("commits")
+				Aggregations = new TermsAggregation<int>("commits")
 				{
 					Field = Infer.Field<Project>(p => p.NumberOfCommits),
+					Missing = -1
 				}
 			};
 

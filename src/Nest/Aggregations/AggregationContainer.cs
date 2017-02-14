@@ -500,7 +500,11 @@ namespace Nest
 			_SetInnerAggregation(name, selector, (a, d) => a.Sum = d);
 
 		public AggregationContainerDescriptor<T> Terms(string name,
-			Func<TermsAggregationDescriptor<T>, ITermsAggregation> selector) =>
+			Func<TermsAggregationDescriptor<T, string>, ITermsAggregation<string>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Terms = d);
+
+		public AggregationContainerDescriptor<T> Terms<TMissingType>(string name,
+			Func<TermsAggregationDescriptor<T, TMissingType>, ITermsAggregation<TMissingType>> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Terms = d);
 
 		public AggregationContainerDescriptor<T> SignificantTerms(string name,
