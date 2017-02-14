@@ -8,20 +8,24 @@ namespace Nest
 	[JsonConverter(typeof(EnumMemberValueCasingJsonConverter<TimeUnit>))]
 	public enum TimeUnit
 	{
+		[EnumMember(Value = "nanos")]
+		Nanoseconds,
+		[EnumMember(Value = "micros")]
+		Microseconds,
 		[EnumMember(Value = "ms")]
-		Millisecond, 
+		Millisecond,
 		[EnumMember(Value = "s")]
-		Second, 
+		Second,
 		[EnumMember(Value = "m")]
-		Minute, 
+		Minute,
 		[EnumMember(Value = "h")]
-		Hour, 
+		Hour,
 		[EnumMember(Value = "d")]
 		Day,
 		[EnumMember(Value = "w")]
-		Week, 
+		Week,
 		[EnumMember(Value = "M")]
-		Month, 
+		Month,
 		[EnumMember(Value = "y")]
 		Year
 	}
@@ -32,6 +36,10 @@ namespace Nest
 		{
 			switch (value)
 			{
+				case TimeUnit.Nanoseconds:
+					return "nanos";
+				case TimeUnit.Microseconds:
+					return "micros";
 				case TimeUnit.Millisecond:
 					return "ms";
 				case TimeUnit.Second:

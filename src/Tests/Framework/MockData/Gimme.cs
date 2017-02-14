@@ -12,18 +12,5 @@ namespace Tests.Framework.MockData
 
 		public static Randomizer Random = new Randomizer();
 
-		private static readonly object _lock = new object();
-
-		/// <summary>
-		/// Temporarily do our own locking around the generator until https://github.com/bchavez/Bogus/issues/46
-		/// is confirmed resolved
-		/// </summary>
-		public static T Lock<T>(Func<T> act)
-		{
-			lock (_lock)
-			{
-				return act();
-			}
-		}
 	}
 }
