@@ -23,6 +23,8 @@ namespace Nest
 			new Regex(@"^(?<factor>[-+]?\d+(?:\.\d+)?)\s*(?<interval>(?:y|w|d|h|m|s|ms|nanos|micros))?$",
 				RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase);
 
+		private static double FLOAT_TOLERANCE = 0.0000001;
+
 		private int? StaticTimeValue { get; }
 
 		public double? Factor { get; private set; }
@@ -33,7 +35,13 @@ namespace Nest
 		public TimeUnit? Interval { get; private set; }
 
 		public static implicit operator Time(TimeSpan span) => new Time(span);
-		public static implicit operator Time(double milliseconds) => new Time(milliseconds);
+
+		public static implicit operator Time(double milliseconds)
+		{
+			if (Math.Abs(milliseconds - (-1)) < FLOAT_TOLERANCE) return Time.MinusOne;
+			if (Math.Abs(milliseconds) < FLOAT_TOLERANCE) return Time.Zero;
+			return new Time(milliseconds);
+		}
 		public static implicit operator Time(string expression) => new Time(expression);
 
 		public static Time MinusOne { get; } = new Time(-1, true);
@@ -172,8 +180,7 @@ namespace Nest
 				case TimeUnit.Microseconds:
 					// ReSharper disable once PossibleInvalidOperationException
 					var microTicks	 = (long)this.Factor.Value * 10;
-					return new TimeSpan(microTicks)
-					;
+					return new TimeSpan(microTicks);
 				case TimeUnit.Nanoseconds:
 					var nanoTicks = (long)this.Factor.Value / 100;
 					// ReSharper disable once PossibleInvalidOperationException

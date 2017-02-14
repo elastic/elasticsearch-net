@@ -78,8 +78,8 @@ namespace Tests.Framework.MockData
 		}
 
 		public static Faker<Ranges> Generator { get; } =
-			Gimme.Lock(() => new Faker<Ranges>()
+			new Faker<Ranges>()
 				.CustomInstantiator((f) => new Ranges(f))
-			);
+			;
 	}
 }
