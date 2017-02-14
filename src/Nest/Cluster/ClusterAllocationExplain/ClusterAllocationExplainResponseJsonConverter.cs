@@ -17,6 +17,7 @@ namespace Nest
 
 		public override bool CanConvert(Type objectType) => true;
 
+#pragma warning disable 612, 618
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var o = JObject.Load(reader);
@@ -140,9 +141,9 @@ namespace Nest
 					}
 				}
 			}
-
 			return response;
 		}
+#pragma warning restore 612, 618
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
