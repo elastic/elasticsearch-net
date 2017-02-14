@@ -74,7 +74,7 @@ namespace Nest
 		/// it is preferable to use the ability to pass parameters to the script itself.
 		/// </summary>
 		/// <example>
-		///	    script: "doc['num1'].value > param1"
+		///	    script: "doc['num1'].value &gt; param1"
 		///		param: "param1" = 5
 		/// </example>
 		/// <param name="paramDictionary">param</param>

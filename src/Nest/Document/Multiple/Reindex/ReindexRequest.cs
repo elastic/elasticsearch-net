@@ -39,7 +39,7 @@ namespace Nest
 
 		/// <summary>
 		/// Provide a factory for the bulk all request, the first argument is the lazy collection of scroll results which is a mandatory
-		/// argument to create <see cref="BulkAllRequest{T}"> or <see cref="BulkAllDescriptor{T}"/>
+		/// argument to create <see cref="BulkAllRequest{T}" /> or <see cref="BulkAllDescriptor{T}"/>
 		/// <para>
 		/// Note that <see cref="IBulkAllRequest{T}.BufferToBulk"/> is always overriden as well as
 		/// <see cref="IBulkAllRequest{T}.BackPressure"/>
