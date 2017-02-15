@@ -89,7 +89,7 @@ namespace Tests.Framework.Integration
 
 		private void CreateIndexTemplate()
 		{
-			var putTemplateResult = this.Client.PutIndexTemplate(new PutIndexTemplateRequest("nest_test")
+			var putTemplateResult = this.Client.PutIndexTemplate(new PutIndexTemplateRequest("nest_tests")
 			{
 				Template = "*",
 				Settings = this.IndexSettings
