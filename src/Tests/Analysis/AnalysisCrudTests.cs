@@ -9,6 +9,7 @@ using static Tests.Framework.Promisify;
 namespace Tests.Analysis
 {
 
+	[SkipVersion("<5.2.0", "This tests contains analyzers/tokenfilters not found in previous versions, need a clean way to seperate these out")]
 	public class AnalysisCrudTests
 		: CrudWithNoDeleteTestBase<ICreateIndexResponse, IGetIndexSettingsResponse, IUpdateIndexSettingsResponse>
 	{
