@@ -204,7 +204,8 @@ namespace Elasticsearch.Net
 				var response = (HttpWebResponse)(await apmGetResponseTask.ConfigureAwait(false));
 				builder.StatusCode = (int)response.StatusCode;
 				builder.Stream = response.GetResponseStream();
-				builder.DeprecationWarnings = response.Headers.GetValues("Warning");
+				if (response.SupportsHeaders && response.Headers.HasKeys() && response.Headers.AllKeys.Contains("Warning"))
+					builder.DeprecationWarnings = response.Headers.GetValues("Warning");
 				// https://github.com/elastic/elasticsearch-net/issues/2311
 				// if stream is null call dispose on response instead.
 				if (builder.Stream == null || builder.Stream == Stream.Null) response.Dispose();
