@@ -70,7 +70,9 @@ namespace Elasticsearch.Net
 				var response = client.SendAsync(requestMessage).GetAwaiter().GetResult();
 				requestData.MadeItToResponse = true;
 				builder.StatusCode = (int)response.StatusCode;
-				builder.DeprecationWarnings = response.Headers.GetValues("Warning");
+				IEnumerable<string> warnings;
+				if (response.Headers.TryGetValues("Warning", out warnings))
+					builder.DeprecationWarnings = warnings;
 
 				if (response.Content != null)
 					builder.Stream = response.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
