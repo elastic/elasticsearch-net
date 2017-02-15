@@ -1,6 +1,7 @@
 ﻿#if DOTNETCORE
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
@@ -92,7 +93,9 @@ namespace Elasticsearch.Net
 				var response = await client.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
 				requestData.MadeItToResponse = true;
 				builder.StatusCode = (int)response.StatusCode;
-				builder.DeprecationWarnings = response.Headers.GetValues("Warning");
+				IEnumerable<string> warnings;
+				if (response.Headers.TryGetValues("Warning", out warnings))
+					builder.DeprecationWarnings = warnings;
 
 				if (response.Content != null)
 					builder.Stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
