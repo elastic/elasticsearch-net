@@ -24,7 +24,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/_alias/projects-alias%2Calias%2Cx%2Cy";
+		protected override string UrlPath => $"_all/_alias/projects-alias%2Calias%2Cx%2Cy";
 		protected override void ExpectResponse(IGetAliasesResponse response)
 		{
 			response.Indices.Should().NotBeNull().And.ContainKey("project");
@@ -35,9 +35,10 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		protected override bool SupportsDeserialization => false;
 
 		protected override Func<GetAliasDescriptor, IGetAliasRequest> Fluent => d=>d
+			.AllIndices()
 			.Name(Names)
 		;
-		protected override GetAliasRequest Initializer => new GetAliasRequest(Names);
+		protected override GetAliasRequest Initializer => new GetAliasRequest(Nest.Indices.All, Names);
 	}
 
 	public class GetAliasNotFoundApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetAliasesResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
@@ -54,7 +55,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		);
 
 		protected override bool ExpectIsValid => false;
-		protected override int ExpectStatusCode => 200;
+		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"/_alias/bad-alias";
 		protected override bool SupportsDeserialization => false;
@@ -68,7 +69,6 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		{
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Error.Reason.Should().Contain("missing");
-			response.Indices.Should().NotBeNull();
 		}
 
 	}
