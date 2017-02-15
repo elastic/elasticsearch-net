@@ -55,10 +55,7 @@ namespace Tests.Framework
 		private static ConnectionSettings DefaultSettings(ConnectionSettings settings) => settings
 			.DefaultIndex("default-index")
 			.PrettyJson()
-			.InferMappingFor<Project>(map => map
-				.IndexName("project")
-				.IdProperty(p => p.Name)
-			)
+			.InferMappingFor<Project>(ProjectMapping)
 			.InferMappingFor<CommitActivity>(map => map
 				.IndexName("project")
 				.TypeName("commits")
@@ -78,6 +75,18 @@ namespace Tests.Framework
 			//.EnableHttpCompression()
 
 			.OnRequestDataCreated(data=> data.Headers.Add("TestMethod", ExpensiveTestNameForIntegrationTests()));
+
+		private static IClrTypeMapping<Project> ProjectMapping(ClrTypeMappingDescriptor<Project> m)
+		{
+			m.IndexName("project").IdProperty(p => p.Name);
+			//*_range type only available since 5.2.0
+			if (VersionUnderTestSatisfiedBy("<5.2.0"))
+				m.Ignore(p => p.Ranges);
+			return m;
+		}
+
+		public static bool VersionUnderTestSatisfiedBy(string versionRange) =>
+			new SemVer.Range(versionRange).IsSatisfied(TestClient.Configuration.ElasticsearchVersion);
 
 		public static string PercolatorType => Configuration.ElasticsearchVersion <= new ElasticsearchVersion("5.0.0-alpha1") ? ".percolator" : "query";
 

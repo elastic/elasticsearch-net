@@ -1,10 +1,12 @@
 ﻿using System;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
 namespace Tests.Mapping.Types.Core.Range.IntegerRange
 {
+	[SkipVersion("<5.2.0", "dedicated range types is a new 5.2.0 feature")]
 	public class IntegerRangePropertyTests : PropertyTestsBase
 	{
 		public IntegerRangePropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

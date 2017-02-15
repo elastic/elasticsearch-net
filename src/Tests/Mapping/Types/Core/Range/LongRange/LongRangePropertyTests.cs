@@ -1,10 +1,12 @@
 ﻿using System;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
 namespace Tests.Mapping.Types.Core.Range.LongRange
 {
+	[SkipVersion("<5.2.0", "dedicated range types is a new 5.2.0 feature")]
 	public class LongRangePropertyTests : PropertyTestsBase
 	{
 		public LongRangePropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
