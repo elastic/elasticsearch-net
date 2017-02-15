@@ -1,10 +1,12 @@
 ﻿using System;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
 namespace Tests.Mapping.Types.Core.Range.FloatRange
 {
+	[SkipVersion("<5.2.0", "dedicated range types is a new 5.2.0 feature")]
 	public class FloatRangePropertyTests : PropertyTestsBase
 	{
 		public FloatRangePropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

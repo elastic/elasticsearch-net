@@ -11,7 +11,8 @@ using static Nest.Infer;
 
 namespace Tests.Indices.MappingManagement.GetMapping
 {
-	public class GetMappingApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetMappingResponse, IGetMappingRequest, GetMappingDescriptor<Project>, GetMappingRequest>
+	public class GetMappingApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetMappingResponse, IGetMappingRequest, GetMappingDescriptor<Project>,
+		GetMappingRequest>
 	{
 		public GetMappingApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -43,7 +44,9 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			response.Accept(visitor);
 
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
-			visitor.CountsShouldContainKeyAndCountBe("object", 5);
+			//ranges property is ignored on versions before 5.2.0
+			var supportsRanges = TestClient.VersionUnderTestSatisfiedBy(">=5.2.0");
+			visitor.CountsShouldContainKeyAndCountBe("object", supportsRanges ? 5 : 4);
 			visitor.CountsShouldContainKeyAndCountBe("date", 4);
 			visitor.CountsShouldContainKeyAndCountBe("text", 11);
 			visitor.CountsShouldContainKeyAndCountBe("keyword", 9);
@@ -52,19 +55,25 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			visitor.CountsShouldContainKeyAndCountBe("geo_point", 2);
 			visitor.CountsShouldContainKeyAndCountBe("completion", 2);
 			visitor.CountsShouldContainKeyAndCountBe("nested", 1);
-			visitor.CountsShouldContainKeyAndCountBe("date_range", 1);
-			visitor.CountsShouldContainKeyAndCountBe("float_range", 1);
-			visitor.CountsShouldContainKeyAndCountBe("integer_range", 1);
-			visitor.CountsShouldContainKeyAndCountBe("double_range", 1);
-			visitor.CountsShouldContainKeyAndCountBe("long_range", 1);
+			if (supportsRanges)
+			{
+				visitor.CountsShouldContainKeyAndCountBe("date_range", 1);
+				visitor.CountsShouldContainKeyAndCountBe("float_range", 1);
+				visitor.CountsShouldContainKeyAndCountBe("integer_range", 1);
+				visitor.CountsShouldContainKeyAndCountBe("double_range", 1);
+				visitor.CountsShouldContainKeyAndCountBe("long_range", 1);
+			}
 		}
 	}
 
-	public class GetMappingNonExistentIndexApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetMappingResponse, IGetMappingRequest, GetMappingDescriptor<Project>, GetMappingRequest>
+	public class GetMappingNonExistentIndexApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetMappingResponse, IGetMappingRequest,
+		GetMappingDescriptor<Project>, GetMappingRequest>
 	{
 		private string _nonExistentIndex = "non-existent-index";
 
-		public GetMappingNonExistentIndexApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetMappingNonExistentIndexApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+		}
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.GetMapping<Project>(f),
@@ -122,11 +131,14 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		}
 
 #pragma warning disable 618
+
 		public void Visit(IStringProperty mapping)
 		{
 			Increment("string");
 		}
+
 #pragma warning restore 618
+
 		public void Visit(IDateProperty mapping)
 		{
 			Increment("date");

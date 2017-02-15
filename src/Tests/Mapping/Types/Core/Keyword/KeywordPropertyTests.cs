@@ -8,6 +8,7 @@ using static Tests.Framework.Promisify;
 
 namespace Tests.Mapping.Types.Core.Keyword
 {
+	[SkipVersion("<5.2.0", "This uses the normalizer feature introduced in 5.2.0")]
 	public class KeywordPropertyTests : PropertyTestsBase
 	{
 		public KeywordPropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

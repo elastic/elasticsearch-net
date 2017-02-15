@@ -1,4 +1,5 @@
 ﻿using Nest;
+using Tests.Framework;
 
 namespace Tests.Mapping.Types.Core.Range.FloatRange
 {
@@ -8,6 +9,7 @@ namespace Tests.Mapping.Types.Core.Range.FloatRange
 		public Nest.FloatRange Range { get; set; }
 	}
 
+	[SkipVersion("<5.2.0", "dedicated range types is a new 5.2.0 feature")]
 	public class FloatRangeAttributeTests : AttributeTestsBase<FloatRangeTest>
 	{
 		protected override object ExpectJson => new

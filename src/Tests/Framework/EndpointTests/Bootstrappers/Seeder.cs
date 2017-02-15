@@ -159,7 +159,8 @@ namespace Tests.Framework.Integration
                         .Tokenizer("standard")
                     )
                 );
-			if (new SemVer.Range(">=5.2.0").IsSatisfied(TestClient.Configuration.ElasticsearchVersion))
+			//normalizers are a new feature since 5.2.0
+			if (TestClient.VersionUnderTestSatisfiedBy(">=5.2.0"))
 				analysis.Normalizers(analyzers => analyzers
 					.Custom("my_normalizer", n => n
 						.Filters("lowercase", "asciifolding")
