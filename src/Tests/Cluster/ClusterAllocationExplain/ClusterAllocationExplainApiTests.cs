@@ -5,13 +5,13 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using Xunit;
 
 namespace Tests.Cluster.ClusterAllocationExplain
 {
-	public class ClusterAllocationExplainApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IClusterAllocationExplainResponse, IClusterAllocationExplainRequest, ClusterAllocationExplainDescriptor, ClusterAllocationExplainRequest>
+	public class ClusterAllocationExplainApiTests : ApiIntegrationTestBase<UnbalancedCluster, IClusterAllocationExplainResponse, IClusterAllocationExplainRequest, ClusterAllocationExplainDescriptor, ClusterAllocationExplainRequest>
 	{
-		public ClusterAllocationExplainApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public ClusterAllocationExplainApiTests(UnbalancedCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ClusterAllocationExplain(f),
 			fluentAsync: (client, f) => client.ClusterAllocationExplainAsync(f),
@@ -49,25 +49,23 @@ namespace Tests.Cluster.ClusterAllocationExplain
 
 		protected override void ExpectResponse(IClusterAllocationExplainResponse response)
 		{
-			response.Shard.Primary.Should().BeTrue();
-			response.Shard.Id.Should().Be(0);
-			response.Shard.IndexUniqueId.Should().NotBeNullOrEmpty();
-			response.Assigned.Should().BeTrue();
-			response.AssignedNodeId.Should().NotBeNullOrWhiteSpace();
-			response.ShardStateFetchPending.Should().BeFalse();
+			response.Primary.Should().BeTrue();
+			response.Shard.Should().Be(0);
+			response.Index.Should().NotBeNullOrEmpty();
+			response.CurrentState.Should().NotBeNullOrEmpty();
+			response.CurrentNode.Should().NotBeNull();
+			response.CanRemainOnCurrentNode.Should().NotBeNull();
+			response.CanRebalanceCluster.Should().NotBeNull();
+			response.CanRebalanceClusterDecisions.Should().NotBeNullOrEmpty();
 
-			foreach (var node in response.Nodes)
+			foreach( var decision in response.CanRebalanceClusterDecisions)
 			{
-				var explanation = node.Value;
-
-				explanation.NodeName.Should().NotBeNullOrEmpty();
-				explanation.Weight.Should().BeGreaterOrEqualTo(0);
-				explanation.NodeAttributes.Should().NotBeEmpty();
-				explanation.Store.Should().NotBeNull();
-				explanation.Store.ShardCopy.Should().Be(StoreCopy.Available);
-				explanation.FinalExplanation.Should().NotBeNullOrEmpty();
-				explanation.Decisions.Should().NotBeNullOrEmpty();
+				decision.Decider.Should().NotBeNullOrEmpty();
+				decision.Explanation.Should().NotBeNullOrEmpty();
 			}
+
+			response.CanRebalanceToOtherNode.Should().NotBeNull();
+			response.RebalanceExplanation.Should().NotBeNullOrEmpty();
 		}
 	}
 }
