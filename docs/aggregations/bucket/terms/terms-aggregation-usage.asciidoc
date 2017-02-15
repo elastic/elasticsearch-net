@@ -132,9 +132,8 @@ states.Meta["foo"].Should().Be("bar");
 s => s
 .Size(0)
 .Aggregations(a => a
-    .Terms<int>("commits", st => st
+    .Terms("commits", st => st
         .Field(p => p.NumberOfCommits)
-        .Missing(-1)
     )
 )
 ----
@@ -146,10 +145,9 @@ s => s
 new SearchRequest<Project>
 {
     Size = 0,
-    Aggregations = new TermsAggregation<int>("commits")
+    Aggregations = new TermsAggregation("commits")
     {
         Field = Infer.Field<Project>(p => p.NumberOfCommits),
-        Missing = -1
     }
 }
 ----
@@ -162,8 +160,7 @@ new SearchRequest<Project>
   "aggs": {
     "commits": {
       "terms": {
-        "field": "numberOfCommits",
-        "missing": -1
+        "field": "numberOfCommits"
       }
     }
   }

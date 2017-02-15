@@ -39,7 +39,9 @@ namespace Nest
 		[EnumMember(Value = "failed")]
 		Failed,
 		[EnumMember(Value = "deleted_while_queued")]
-		DeletedWhileQueued
+		DeletedWhileQueued,
+		[EnumMember(Value = "not_executed_already_queued")]
+		NotExecutedAlreadyQueued
 	}
 
 	[JsonObject]
