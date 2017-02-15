@@ -79,8 +79,8 @@ namespace Tests.Framework
 		private static IClrTypeMapping<Project> ProjectMapping(ClrTypeMappingDescriptor<Project> m)
 		{
 			m.IndexName("project").IdProperty(p => p.Name);
-			//*_range type only available since 5.2.0
-			if (VersionUnderTestSatisfiedBy("<5.2.0"))
+			//*_range type only available since 5.2.0 so we ignore them when running integration tests
+			if (VersionUnderTestSatisfiedBy("<5.2.0") && Configuration.RunIntegrationTests)
 				m.Ignore(p => p.Ranges);
 			return m;
 		}
