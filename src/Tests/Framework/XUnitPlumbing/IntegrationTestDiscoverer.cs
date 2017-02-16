@@ -22,8 +22,7 @@ namespace Tests.Framework
 			var collectionType = TestAssemblyRunner.GetClusterForCollection(testMethod.TestClass?.TestCollection);
 
 			return TypeSkipVersionAttributeSatisfies(classOfMethod) ||
-				   MethodSkipVersionAttributeSatisfies(method) ||
-				   RequiresPluginButRunningAgainstSnapshot(classOfMethod, collectionType);
+				   MethodSkipVersionAttributeSatisfies(method);
 		}
 
 

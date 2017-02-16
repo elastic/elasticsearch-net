@@ -15,7 +15,7 @@ namespace Tests.Framework
 			//in mixed mode we do not want to run any api tests for plugins when running against a snapshot
 			//because the client is "hot"
 			var collectionType = TestAssemblyRunner.GetClusterForCollection(testMethod.TestClass?.TestCollection);
-			return TestClient.Configuration.RunIntegrationTests && RequiresPluginButRunningAgainstSnapshot(classOfMethod, collectionType);
+			return TestClient.Configuration.RunIntegrationTests;
 		}
 	}
 }

@@ -69,8 +69,6 @@ namespace Tests.Framework.Integration
 				UnzipDistribution();
 				CreateHelperBatFile();
 
-				if (this.Version.IsSnapshot) return;
-
 				InstallPlugins();
 
 				if (!Directory.Exists(this.AnalysisFolder))
@@ -138,12 +136,22 @@ namespace Tests.Framework.Integration
 			Console.WriteLine($"Downloaded elasticsearch: {this.Version.Version}");
 		}
 
+		private string DownloadPluginLocation(ElasticsearchPluginConfiguration plugin) => Path.Combine(this.RoamingFolder, plugin.SnapshotZip(this.Version));
+		private void DownloadPluginSnapshot(string downloadLocation, ElasticsearchPluginConfiguration plugin)
+		{
+			if (File.Exists(downloadLocation)) return;
+			var downloadUrl = plugin.SnapshotDownloadUrl(this.Version);
+			Console.WriteLine($"Download plugin snapshot {plugin.Moniker}: {downloadUrl}");
+			new WebClient().DownloadFile(downloadUrl, downloadLocation);
+			Console.WriteLine($"Download plugin snapshot {plugin.Moniker}");
+		}
+
 		private void InstallPlugins()
 		{
 			foreach (var plugin in ElasticsearchPluginCollection.Supported
 				.Where(plugin => plugin.IsValid(this.Version) && _config.RequiredPlugins.Contains(plugin.Plugin)))
 			{
-				var installParameter = plugin.InstallParamater(this.Version);
+				var installParameter = plugin.Moniker;
 				var folder = plugin.FolderName;
 				var pluginFolder = Path.Combine(this.ElasticsearchHome, "plugins", folder);
 
@@ -152,34 +160,47 @@ namespace Tests.Framework.Integration
 				// assume plugin already installed
 				if (Directory.Exists(pluginFolder)) continue;
 
-				Console.WriteLine($"Installing elasticsearch plugin: {plugin.Moniker} ...");
-				var timeout = TimeSpan.FromSeconds(420);
-				var handle = new ManualResetEvent(false);
-				Task.Run(() =>
+				if (this.Version.IsSnapshot)
 				{
-					using (var p = new ObservableProcess(this.PluginBinary, "install --batch", installParameter))
-					{
-						var o = p.Start();
-						Console.WriteLine($"Calling: {this.PluginBinary} install {installParameter}");
-						o.Subscribe(c=>Console.WriteLine(c.Data),
-							(e) =>
-							{
-								Console.WriteLine($"Failed installing elasticsearch plugin: {plugin.Moniker}");
-								handle.Set();
-								throw e;
-							},
-							() =>
-							{
-								Console.WriteLine($"Finished installing elasticsearch plugin: {plugin.Moniker} exit code: {p.ExitCode}");
-								handle.Set();
-							});
-						if (!handle.WaitOne(timeout, true))
-							throw new Exception($"Could not install {plugin.Moniker} within {timeout}");
-					}
-				});
-				if (!handle.WaitOne(timeout, true))
-					throw new Exception($"Could not install {plugin.Moniker} within {timeout}");
+					var downloadLocation = this.DownloadPluginLocation(plugin);
+					this.DownloadPluginSnapshot(downloadLocation, plugin);
+					//transform downloadLocation to file uri and use that to install from
+					installParameter = new Uri(downloadLocation).AbsoluteUri;
+
+				}
+				InstallPlugin(plugin, installParameter);
 			}
+		}
+
+		private void InstallPlugin(ElasticsearchPluginConfiguration plugin, string installParameter)
+		{
+			Console.WriteLine($"Installing elasticsearch plugin: {plugin.Moniker} using {installParameter} ...");
+			var timeout = TimeSpan.FromSeconds(420);
+			var handle = new ManualResetEvent(false);
+			Task.Run(() =>
+			{
+				using (var p = new ObservableProcess(this.PluginBinary, "install --batch", installParameter))
+				{
+					var o = p.Start();
+					Console.WriteLine($"Calling: {this.PluginBinary} install {installParameter}");
+					o.Subscribe(c => Console.WriteLine(c.Data),
+						(e) =>
+						{
+							Console.WriteLine($"Failed installing elasticsearch plugin: {plugin.Moniker}");
+							handle.Set();
+							throw e;
+						},
+						() =>
+						{
+							Console.WriteLine($"Finished installing elasticsearch plugin: {plugin.Moniker} exit code: {p.ExitCode}");
+							handle.Set();
+						});
+					if (!handle.WaitOne(timeout, true))
+						throw new Exception($"Could not install {plugin.Moniker} within {timeout}");
+				}
+			});
+			if (!handle.WaitOne(timeout, true))
+				throw new Exception($"Could not install {plugin.Moniker} within {timeout}");
 		}
 
 		public void BeforeStart(IEnumerable<string> settings)
