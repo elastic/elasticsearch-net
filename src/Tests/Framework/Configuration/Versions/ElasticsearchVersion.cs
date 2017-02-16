@@ -51,9 +51,10 @@ namespace Tests.Framework.Versions
 		{
 			this.Version = version;
 			if (this.Version.Equals("latest", StringComparison.OrdinalIgnoreCase))
+			{
 				this.Version = LatestVersion.Value;
-			else if (this.IsSnapshot && this.Version.Equals("snapshot", StringComparison.OrdinalIgnoreCase))
 				this.Zip = LatestSnapshot.Value;
+			}
 			else if (this.IsSnapshot)
 			{
 				lock (_lock)
