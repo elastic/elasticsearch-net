@@ -28,6 +28,7 @@ namespace Nest
         DateTime? NullValue { get; set; }
 
 		[JsonProperty("include_in_all")]
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? IncludeInAll { get; set; }
 
 		/// <summary>
@@ -60,6 +61,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public DateTime? NullValue { get; set; }
 		/// <inheritdoc/>
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public bool? IncludeInAll { get; set; }
 		/// <inheritdoc/>
 		public int? PrecisionStep { get; set; }
@@ -93,6 +95,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public DatePropertyDescriptor<T> NullValue(DateTime nullValue) => Assign(a => a.NullValue = nullValue);
 		/// <inheritdoc/>
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public DatePropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 		/// <inheritdoc/>
 		public DatePropertyDescriptor<T> IgnoreMalformed(bool ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);

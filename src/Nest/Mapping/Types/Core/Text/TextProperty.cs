@@ -33,6 +33,7 @@ namespace Nest
 		IFielddataFrequencyFilter FielddataFrequencyFilter { get; set; }
 
 		[JsonProperty("include_in_all")]
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? IncludeInAll { get; set; }
 
 		[JsonProperty("index")]
@@ -60,6 +61,7 @@ namespace Nest
 		public bool? EagerGlobalOrdinals { get; set; }
 		public bool? Fielddata { get; set; }
 		public IFielddataFrequencyFilter FielddataFrequencyFilter { get; set; }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public bool? IncludeInAll { get; set; }
 		public bool? Index { get; set; }
 		public IndexOptions? IndexOptions { get; set; }
@@ -97,6 +99,7 @@ namespace Nest
  		public TextPropertyDescriptor<T> Fielddata(bool fielddata = true) => Assign(a => a.Fielddata = fielddata);
 		public TextPropertyDescriptor<T> FielddataFrequencyFilter(Func<FielddataFrequencyFilterDescriptor, IFielddataFrequencyFilter> selector) =>
 			Assign(a => a.FielddataFrequencyFilter = selector?.Invoke(new FielddataFrequencyFilterDescriptor()));
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public TextPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 		public TextPropertyDescriptor<T> Index(bool index = true) => Assign(a => a.Index = index);
 		public TextPropertyDescriptor<T> IndexOptions(IndexOptions indexOptions) => Assign(a => a.IndexOptions = indexOptions);

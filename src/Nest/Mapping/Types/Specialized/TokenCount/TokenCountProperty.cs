@@ -20,6 +20,7 @@ namespace Nest
 		double? NullValue { get; set; }
 
 		[JsonProperty("include_in_all")]
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? IncludeInAll { get; set; }
 	}
 
@@ -36,6 +37,7 @@ namespace Nest
 
 		public double? NullValue { get; set; }
 
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public bool? IncludeInAll { get; set; }
 	}
 
@@ -54,6 +56,7 @@ namespace Nest
 
 		public TokenCountPropertyDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 		public TokenCountPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public TokenCountPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 		public TokenCountPropertyDescriptor<T> Index(bool index = true) => Assign(a => a.Index = index);
 		public TokenCountPropertyDescriptor<T> NullValue(double nullValue) => Assign(a => a.NullValue = nullValue);

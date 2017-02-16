@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using Newtonsoft.Json;
 
@@ -16,6 +17,7 @@ namespace Nest
 		string NullValue { get; set; }
 
 		[JsonProperty("include_in_all")]
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? IncludeInAll { get; set; }
 	}
 
@@ -25,6 +27,7 @@ namespace Nest
 		public IpProperty() : base(FieldType.Ip) { }
 
 		public double? Boost { get; set; }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public bool? IncludeInAll { get; set; }
 		public bool? Index { get; set; }
 		public string NullValue { get; set; }
@@ -38,6 +41,7 @@ namespace Nest
 		bool? IIpProperty.Index { get; set; }
 		double? IIpProperty.Boost { get; set; }
 		string IIpProperty.NullValue { get; set; }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? IIpProperty.IncludeInAll { get; set; }
 
 		public IpPropertyDescriptor() : base(FieldType.Ip) { }
