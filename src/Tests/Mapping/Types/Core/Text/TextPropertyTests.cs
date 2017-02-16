@@ -37,7 +37,6 @@ namespace Tests.Mapping.Types.Core.Text
 							ignore_above = 100
 						}
 					},
-					include_in_all = false,
 					index = true,
 					index_options = "offsets",
 					position_increment_gap = 5,
@@ -73,7 +72,6 @@ namespace Tests.Mapping.Types.Core.Text
 							.IgnoreAbove(100)
 						)
 					)
-					.IncludeInAll(false)
 					.Index(true)
 					.IndexOptions(IndexOptions.Offsets)
 					.PositionIncrementGap(5)
@@ -109,7 +107,6 @@ namespace Tests.Mapping.Types.Core.Text
 							}
 						}
 					},
-					IncludeInAll = false,
 					Index = true,
 					IndexOptions = IndexOptions.Offsets,
 					PositionIncrementGap = 5,

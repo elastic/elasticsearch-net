@@ -14,9 +14,6 @@ namespace Nest
 
 		[JsonProperty("null_value")]
 		string NullValue { get; set; }
-
-		[JsonProperty("include_in_all")]
-		bool? IncludeInAll { get; set; }
 	}
 
 	[DebuggerDisplay("{DebugDisplay}")]
@@ -25,7 +22,6 @@ namespace Nest
 		public IpProperty() : base(FieldType.Ip) { }
 
 		public double? Boost { get; set; }
-		public bool? IncludeInAll { get; set; }
 		public bool? Index { get; set; }
 		public string NullValue { get; set; }
 	}
@@ -38,7 +34,6 @@ namespace Nest
 		bool? IIpProperty.Index { get; set; }
 		double? IIpProperty.Boost { get; set; }
 		string IIpProperty.NullValue { get; set; }
-		bool? IIpProperty.IncludeInAll { get; set; }
 
 		public IpPropertyDescriptor() : base(FieldType.Ip) { }
 
@@ -47,7 +42,5 @@ namespace Nest
 		public IpPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 
 		public IpPropertyDescriptor<T> NullValue(string nullValue) => Assign(a => a.NullValue = nullValue);
-
-		public IpPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 	}
 }

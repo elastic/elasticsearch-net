@@ -24,7 +24,6 @@ namespace Tests.Mapping.Types.Core.Number
 					index = false,
 					boost = 1.5,
 					null_value = 0.0,
-					include_in_all = false,
 					ignore_malformed = true,
 					coerce = true
 				}
@@ -41,7 +40,6 @@ namespace Tests.Mapping.Types.Core.Number
 				.Index(false)
 				.Boost(1.5)
 				.NullValue(0.0)
-				.IncludeInAll(false)
 				.IgnoreMalformed()
 				.Coerce()
 			);
@@ -57,7 +55,6 @@ namespace Tests.Mapping.Types.Core.Number
 					Index = false,
 					Boost = 1.5,
 					NullValue = 0.0,
-					IncludeInAll = false,
 					IgnoreMalformed = true,
 					Coerce = true
 				}
@@ -83,7 +80,6 @@ namespace Tests.Mapping.Types.Core.Number
 					index = false,
 					boost = 1.5,
 					null_value = 0.0,
-					include_in_all = false,
 					ignore_malformed = true,
 					coerce = true
 				}
@@ -101,7 +97,6 @@ namespace Tests.Mapping.Types.Core.Number
 				.Index(false)
 				.Boost(1.5)
 				.NullValue(0.0)
-				.IncludeInAll(false)
 				.IgnoreMalformed()
 				.Coerce()
 			);
@@ -118,7 +113,6 @@ namespace Tests.Mapping.Types.Core.Number
 					Index = false,
 					Boost = 1.5,
 					NullValue = 0.0,
-					IncludeInAll = false,
 					IgnoreMalformed = true,
 					Coerce = true
 				}

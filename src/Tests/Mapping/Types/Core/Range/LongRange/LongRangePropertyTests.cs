@@ -26,7 +26,6 @@ namespace Tests.Mapping.Types.Core.Range.LongRange
 							store = true,
 							index = false,
 							boost = 1.5,
-							include_in_all = false,
 							coerce = true
 						}
 					}
@@ -43,7 +42,6 @@ namespace Tests.Mapping.Types.Core.Range.LongRange
 						.Store()
 						.Index(false)
 						.Boost(1.5)
-						.IncludeInAll(false)
 						.Coerce()
 					)
 				)
@@ -63,7 +61,6 @@ namespace Tests.Mapping.Types.Core.Range.LongRange
 								Store = true,
 								Index = false,
 								Boost = 1.5,
-								IncludeInAll = false,
 								Coerce = true
 							}
 						}

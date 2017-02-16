@@ -23,7 +23,6 @@ namespace Tests.Mapping.Types.Core.Date
 					store = true,
 					index = false,
 					boost = 1.2,
-					include_in_all = false,
 					ignore_malformed = true,
 					format = "MM/dd/yyyy",
 					null_value = DateTime.MinValue
@@ -39,7 +38,6 @@ namespace Tests.Mapping.Types.Core.Date
 				.Store()
 				.Index(false)
 				.Boost(1.2)
-				.IncludeInAll(false)
 				.IgnoreMalformed()
 				.Format("MM/dd/yyyy")
 				.NullValue(DateTime.MinValue)
@@ -54,7 +52,6 @@ namespace Tests.Mapping.Types.Core.Date
 					Store = true,
 					Index = false,
 					Boost = 1.2,
-					IncludeInAll = false,
 					IgnoreMalformed = true,
 					Format = "MM/dd/yyyy",
 					NullValue = DateTime.MinValue

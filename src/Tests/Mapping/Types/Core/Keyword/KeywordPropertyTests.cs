@@ -33,7 +33,6 @@ namespace Tests.Mapping.Types.Core.Keyword
 					boost = 1.2,
 					eager_global_ordinals = true,
 					ignore_above = 50,
-					include_in_all = true,
 					index = false,
 					index_options = "freqs",
 					null_value = "null",
@@ -60,7 +59,6 @@ namespace Tests.Mapping.Types.Core.Keyword
 				.Boost(1.2)
 				.EagerGlobalOrdinals()
 				.IgnoreAbove(50)
-				.IncludeInAll()
 				.Index(false)
 				.IndexOptions(IndexOptions.Freqs)
 				.NullValue("null")
@@ -85,7 +83,6 @@ namespace Tests.Mapping.Types.Core.Keyword
 					Boost = 1.2,
 					EagerGlobalOrdinals = true,
 					IgnoreAbove = 50,
-					IncludeInAll = true,
 					Index = false,
 					IndexOptions = IndexOptions.Freqs,
 					NullValue = "null",
