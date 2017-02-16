@@ -54,6 +54,9 @@ namespace Nest
 		[JsonProperty("highlight")]
 		IHighlight Highlight { get; set; }
 
+		[JsonProperty("collapse")]
+		IFieldCollapse Collapse { get; set; }
+
 		[JsonProperty("rescore")]
 		IList<IRescore> Rescore { get; set; }
 
@@ -122,6 +125,7 @@ namespace Nest
 		public IList<IRescore> Rescore { get; set; }
 		public ISuggestContainer Suggest { get; set; }
 		public IHighlight Highlight { get; set; }
+		public IFieldCollapse Collapse { get; set; }
 		public AggregationDictionary Aggregations { get; set; }
 
 		SearchType? ISearchRequest.SearchType => RequestState.RequestParameters?.GetQueryStringValue<SearchType?>("search_type");
@@ -166,6 +170,7 @@ namespace Nest
 		public IList<IRescore> Rescore { get; set; }
 		public ISuggestContainer Suggest { get; set; }
 		public IHighlight Highlight { get; set; }
+		public IFieldCollapse Collapse { get; set; }
 		public AggregationDictionary Aggregations { get; set; }
 
 		SearchType? ISearchRequest.SearchType => RequestState.RequestParameters?.GetQueryStringValue<SearchType?>("search_type");
@@ -216,6 +221,7 @@ namespace Nest
 		IList<object> ISearchRequest.SearchAfter { get; set; }
 		ISuggestContainer ISearchRequest.Suggest { get; set; }
 		IHighlight ISearchRequest.Highlight { get; set; }
+		IFieldCollapse ISearchRequest.Collapse { get; set; }
 		IList<IRescore> ISearchRequest.Rescore { get; set; }
 		ISlicedScroll ISearchRequest.Slice { get; set; }
 		QueryContainer ISearchRequest.Query { get; set; }
@@ -426,6 +432,17 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> highlightSelector) =>
 			Assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
+
+		/// <summary>
+		/// Allows to collapse search results based on field values.
+		/// The collapsing is done by selecting only the top sorted document per collapse key.
+		/// For instance the query below retrieves the best tweet for each user and sorts them by number of likes.
+		/// <para>
+		/// NOTE: The collapsing is applied to the top hits only and does not affect aggregations.
+		/// </para>
+		/// </summary>
+		public SearchDescriptor<T> Collapse(Func<FieldCollapseDescriptor<T>, IFieldCollapse> collapseSelector) =>
+			Assign(a => a.Collapse = collapseSelector?.Invoke(new FieldCollapseDescriptor<T>()));
 
 		/// <summary>
 		/// Allows you to specify one or more queries to use for rescoring
