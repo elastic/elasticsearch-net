@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
@@ -14,6 +15,16 @@ namespace Tests.Search.Search.Collapsing
 
 		protected override object ExpectJson => new
 		{
+			collapse = new
+			{
+				field = "state",
+				inner_hits = new
+				{
+					from = 1,
+					name = "stateofbeing",
+					size = 5
+				}
+			}
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
@@ -30,7 +41,7 @@ namespace Tests.Search.Search.Collapsing
 		{
 			Collapse = new FieldCollapse
 			{
-				Field = Field<Project>(p=>p.State),
+				Field = Field<Project>(p => p.State),
 				InnerHits = new InnerHits
 				{
 					Name = nameof(StateOfBeing).ToLowerInvariant(),
@@ -39,5 +50,19 @@ namespace Tests.Search.Search.Collapsing
 				}
 			}
 		};
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			var numberOfStates = Enum.GetValues(typeof(StateOfBeing)).Length;
+			response.HitsMetaData.Total.Should().BeGreaterThan(numberOfStates);
+			response.Hits.Count.Should().Be(numberOfStates);
+			foreach (var hit in response.Hits)
+			{
+				var name = nameof(StateOfBeing).ToLowerInvariant();
+				hit.InnerHits.Should().NotBeNull().And.ContainKey(name);
+				var innherHits = hit.InnerHits[name];
+				innherHits.Hits.Total.Should().BeGreaterThan(0);
+			}
+		}
 	}
 }

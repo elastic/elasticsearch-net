@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -11,16 +12,19 @@ namespace Nest
 	/// NOTE: The collapsing is applied to the top hits only and does not affect aggregations.
 	/// </para>
 	/// </summary>
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<FieldCollapse>))]
 	public interface IFieldCollapse
 	{
 		/// <summary>
 		/// The field used for collapsing must be a single valued keyword or number field with doc-values activated
 		/// </summary>
+		[JsonProperty("field")]
 		Field Field { get; set; }
 
 		/// <summary>
 		/// It is also possible to expand each collapsed top hits with the `inner_hits` option.
 		/// </summary>
+		[JsonProperty("inner_hits")]
 		IInnerHits InnerHits { get; set; }
 	}
 
