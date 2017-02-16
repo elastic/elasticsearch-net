@@ -97,6 +97,9 @@ namespace Elasticsearch.Net
 					pipeline.MarkAlive(node);
 					break;
 				}
+				if (requestData.Node == null) //foreach never ran
+					pipeline.ThrowNoNodesAttempted(requestData, seenExceptions);
+
 				if (response == null || !response.Success)
 					pipeline.BadResponse(ref response, requestData, seenExceptions);
 
@@ -156,6 +159,9 @@ namespace Elasticsearch.Net
 					pipeline.MarkAlive(node);
 					break;
 				}
+				if (requestData.Node == null) //foreach never ran
+					pipeline.ThrowNoNodesAttempted(requestData, seenExceptions);
+
 				if (response == null || !response.Success)
 					pipeline.BadResponse(ref response, requestData, seenExceptions);
 

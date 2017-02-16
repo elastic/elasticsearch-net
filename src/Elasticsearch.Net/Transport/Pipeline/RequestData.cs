@@ -12,7 +12,7 @@ namespace Elasticsearch.Net
 		public const string MimeType = "application/json";
 		public const string RunAsSecurityHeader = "es-security-runas-user";
 
-		public Uri Uri => new Uri(this.Node.Uri, this.Path).Purify();
+		public Uri Uri => this.Node != null ? new Uri(this.Node.Uri, this.Path).Purify() : null;
 
 		public HttpMethod Method { get; private set; }
 		public string Path { get; }

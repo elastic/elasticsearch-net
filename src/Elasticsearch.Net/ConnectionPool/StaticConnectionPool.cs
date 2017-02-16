@@ -13,19 +13,27 @@ namespace Elasticsearch.Net
 
 		protected List<Node> InternalNodes { get; set; }
 
+		/// <inheritdoc/>
 		public virtual IReadOnlyCollection<Node> Nodes => this.InternalNodes;
 
+		/// <inheritdoc/>
 		public int MaxRetries => this.InternalNodes.Count - 1;
 
+		/// <inheritdoc/>
 		public virtual bool SupportsReseeding => false;
+		/// <inheritdoc/>
 		public virtual bool SupportsPinging => true;
 
+		/// <inheritdoc/>
 		public virtual void Reseed(IEnumerable<Node> nodes) { } //ignored
 
+		/// <inheritdoc/>
 		public bool UsingSsl { get; }
 
+		/// <inheritdoc/>
 		public bool SniffedOnStartup { get; set; }
 
+		/// <inheritdoc/>
 		public DateTime LastUpdate { get; protected set; }
 
 		public StaticConnectionPool(IEnumerable<Uri> uris, bool randomize = true, IDateTimeProvider dateTimeProvider = null)

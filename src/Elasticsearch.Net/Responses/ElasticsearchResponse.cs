@@ -48,7 +48,7 @@ namespace Elasticsearch.Net
 				sb.Append($" - [{a.i + 1}] {audit.Event.GetStringValue()}:");
 				if (audit.Node?.Uri != null) sb.Append($" Node: {audit.Node.Uri}");
 				if (audit.Exception != null) sb.Append($" Exception: {audit.Exception.GetType().Name}");
-				sb.AppendLine($" Took: {(audit.Ended - audit.Started)}");
+				sb.AppendLine($" Took: {(audit.Ended - audit.Started).ToString()}");
 			}
 		}
 	}
