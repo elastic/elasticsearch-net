@@ -41,9 +41,6 @@ namespace Nest
 		public static QueryContainer GeoDistance(Func<GeoDistanceQueryDescriptor<T>, IGeoDistanceQuery> selector) =>
 			new QueryContainerDescriptor<T>().GeoDistance(selector);
 
-		public static QueryContainer GeoDistanceRange(Func<GeoDistanceRangeQueryDescriptor<T>, IGeoDistanceRangeQuery> selector) =>
-			new QueryContainerDescriptor<T>().GeoDistanceRange(selector);
-
 		public static QueryContainer GeoHashCell(Func<GeoHashCellQueryDescriptor<T>, IGeoHashCellQuery> selector) =>
 			new QueryContainerDescriptor<T>().GeoHashCell(selector);
 

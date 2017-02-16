@@ -149,9 +149,6 @@ namespace Nest
 		[JsonProperty("geo_polygon")]
 		IGeoPolygonQuery GeoPolygon { get; set; }
 
-		[JsonProperty("geo_distance_range")]
-		IGeoDistanceRangeQuery GeoDistanceRange { get; set; }
-
 		[JsonProperty("geohash_cell")]
 		IGeoHashCellQuery GeoHashCell { get; set; }
 

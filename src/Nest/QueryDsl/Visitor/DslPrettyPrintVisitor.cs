@@ -151,8 +151,6 @@ namespace Nest
 
 		public virtual void Visit(IGeoPolygonQuery query) => Write("geo_polygon");
 
-		public virtual void Visit(IGeoDistanceRangeQuery query) => Write("geo_distance_range");
-
 		public virtual void Visit(IGeoDistanceQuery query) => Write("geo_distance");
 
 		public virtual void Visit(IGeoHashCellQuery filter) => Write("geohash_cell");

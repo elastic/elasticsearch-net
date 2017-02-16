@@ -59,7 +59,6 @@
 		void Visit(ITypeQuery query);
 		void Visit(IScriptQuery query);
 		void Visit(IGeoPolygonQuery query);
-		void Visit(IGeoDistanceRangeQuery query);
 		void Visit(IGeoDistanceQuery query);
 		void Visit(IGeoBoundingBoxQuery query);
 		void Visit(IGeoHashCellQuery query);
@@ -205,8 +204,6 @@
 		public virtual void Visit(IScriptQuery query) { }
 
 		public virtual void Visit(IGeoPolygonQuery query) { }
-
-		public virtual void Visit(IGeoDistanceRangeQuery query) { }
 
 		public virtual void Visit(IGeoDistanceQuery query) { }
 
