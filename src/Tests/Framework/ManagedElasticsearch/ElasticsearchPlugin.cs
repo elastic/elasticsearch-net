@@ -68,15 +68,12 @@ namespace Tests.Framework.Integration
 		public static ElasticsearchPluginCollection Supported { get; } =
 			new ElasticsearchPluginCollection
 			{
-				new ElasticsearchPluginConfiguration(DeleteByQuery,
-					version => version < new ElasticsearchVersion("5.0.0-alpha3")),
+				new ElasticsearchPluginConfiguration(DeleteByQuery, version => version < new ElasticsearchVersion("5.0.0-alpha3")),
 				new ElasticsearchPluginConfiguration(MapperAttachments),
 				new ElasticsearchPluginConfiguration(MapperMurmer3),
 				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.XPack),
-				new ElasticsearchPluginConfiguration(IngestGeoIp,
-					version => version >= new ElasticsearchVersion("5.0.0-alpha3")),
-				new ElasticsearchPluginConfiguration(IngestAttachment,
-					version => version >= new ElasticsearchVersion("5.0.0-alpha3")),
+				new ElasticsearchPluginConfiguration(IngestGeoIp, version => version >= new ElasticsearchVersion("5.0.0-alpha3")),
+				new ElasticsearchPluginConfiguration(IngestAttachment, version => version >= new ElasticsearchVersion("5.0.0-alpha3")),
 				new ElasticsearchPluginConfiguration(AnalysisKuromoji),
 				new ElasticsearchPluginConfiguration(AnalysisIcu)
 			};
@@ -89,8 +86,9 @@ namespace Tests.Framework.Integration
 
 	public class ElasticsearchPluginConfiguration
 	{
+
+
 		private readonly Func<ElasticsearchVersion, bool> _isValid;
-		private readonly Func<ElasticsearchVersion, string> _installParameter;
 
 		public ElasticsearchPlugin Plugin { get; }
 
@@ -104,33 +102,23 @@ namespace Tests.Framework.Integration
 		/// </summary>
 		public string FolderName { get; internal set; }
 
-		public ElasticsearchPluginConfiguration(ElasticsearchPlugin plugin)
-			: this(plugin, null, null)
-		{
-		}
 
-		public ElasticsearchPluginConfiguration(
-			ElasticsearchPlugin plugin,
-			Func<ElasticsearchVersion, bool> isValid)
-			: this(plugin, isValid, null)
-		{
-		}
+		public ElasticsearchPluginConfiguration(ElasticsearchPlugin plugin) : this(plugin, null) { }
 
-		public ElasticsearchPluginConfiguration(
-			ElasticsearchPlugin plugin,
-			Func<ElasticsearchVersion, bool> isValid,
-			Func<ElasticsearchVersion, string> installParameter)
+		public ElasticsearchPluginConfiguration(ElasticsearchPlugin plugin, Func<ElasticsearchVersion, bool> isValid)
 		{
 			Plugin = plugin;
 			Moniker = plugin.Moniker();
 			FolderName = plugin.Moniker();
-			_installParameter = installParameter ?? (v => Moniker);
 			_isValid = isValid ?? (v => true);
 		}
 
-		public string InstallParamater(ElasticsearchVersion version) => _installParameter(version);
-
 		public bool IsValid(ElasticsearchVersion version) => _isValid(version);
+
+		public string SnapshotDownloadUrl(ElasticsearchVersion version)  =>
+			$"https://snapshots.elastic.co/downloads/elasticsearch-plugins/{Moniker}/{SnapshotZip(version)}";
+
+		public string SnapshotZip(ElasticsearchVersion version) => $"{Moniker}-{version.Version}.zip";
 	}
 }
 
