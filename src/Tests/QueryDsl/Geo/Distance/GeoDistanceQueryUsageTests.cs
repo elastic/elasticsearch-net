@@ -15,7 +15,6 @@ namespace Tests.QueryDsl.Geo.Distance
 				_name = "named_query",
 				boost = 1.1,
 				distance = "200.0m",
-				distance_type = "arc",
 				validation_method = "ignore_malformed",
 				location = new
 				{
@@ -30,7 +29,6 @@ namespace Tests.QueryDsl.Geo.Distance
 			Boost = 1.1,
 			Name = "named_query",
 			Field = Infer.Field<Project>(p => p.Location),
-			DistanceType = GeoDistanceType.Arc,
 			Location = new GeoLocation(34,-34),
 			Distance = "200.0m",
 			ValidationMethod = GeoValidationMethod.IgnoreMalformed
@@ -41,7 +39,6 @@ namespace Tests.QueryDsl.Geo.Distance
 				.Boost(1.1)
 				.Name("named_query")
 				.Field(p=>p.Location)
-				.DistanceType(GeoDistanceType.Arc)
 				.Location(34, -34)
 				.Distance("200.0m")
 				.ValidationMethod(GeoValidationMethod.IgnoreMalformed)

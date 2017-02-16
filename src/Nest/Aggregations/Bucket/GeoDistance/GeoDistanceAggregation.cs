@@ -19,9 +19,6 @@ namespace Nest
 		[JsonProperty("unit")]
 		DistanceUnit? Unit { get; set; }
 
-		[JsonProperty("distance_type")]
-		GeoDistanceType? DistanceType { get; set; }
-
 		[JsonProperty(PropertyName = "ranges")]
 #pragma warning disable 618
 		IEnumerable<IRange> Ranges { get; set; }
@@ -35,8 +32,6 @@ namespace Nest
 		public GeoLocation Origin { get; set; }
 
 		public DistanceUnit? Unit { get; set; }
-
-		public GeoDistanceType? DistanceType { get; set; }
 
 #pragma warning disable 618
 		public IEnumerable<IRange> Ranges { get; set; }
@@ -60,8 +55,6 @@ namespace Nest
 
 		DistanceUnit? IGeoDistanceAggregation.Unit { get; set; }
 
-		GeoDistanceType? IGeoDistanceAggregation.DistanceType { get; set; }
-
 #pragma warning disable 618
 		IEnumerable<IRange> IGeoDistanceAggregation.Ranges { get; set; }
 #pragma warning restore 618
@@ -75,8 +68,6 @@ namespace Nest
 		public GeoDistanceAggregationDescriptor<T> Origin(GeoLocation geoLocation) => Assign(a => a.Origin = geoLocation);
 
 		public GeoDistanceAggregationDescriptor<T> Unit(DistanceUnit unit) => Assign(a => a.Unit = unit);
-
-		public GeoDistanceAggregationDescriptor<T> DistanceType(GeoDistanceType? geoDistance) => Assign(a => a.DistanceType = geoDistance);
 
 #pragma warning disable 618
 		public GeoDistanceAggregationDescriptor<T> Ranges(params Func<RangeDescriptor, IRange>[] ranges) =>

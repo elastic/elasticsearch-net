@@ -534,7 +534,6 @@
     <Compile Include="CommonOptions\Geo\Distance.cs" />
     <Compile Include="CommonOptions\Geo\DistanceJsonConverter.cs" />
     <Compile Include="CommonOptions\Geo\DistanceUnit.cs" />
-    <Compile Include="CommonOptions\Geo\GeoDistanceType.cs" />
     <Compile Include="CommonOptions\Geo\GeoShapeRelation.cs" />
     <Compile Include="CommonOptions\Hit\ShardsMetaData.cs" />
     <Compile Include="CommonOptions\MinimumShouldMatch\MinimumShouldMatch.cs" />

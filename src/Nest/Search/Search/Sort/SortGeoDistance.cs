@@ -13,8 +13,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "unit")]
 		DistanceUnit? GeoUnit { get; set; }
 
-		[JsonProperty(PropertyName = "distance_type")]
-		GeoDistanceType? DistanceType { get; set; }
 	}
 
 	public class GeoDistanceSort : SortBase, IGeoDistanceSort
@@ -23,11 +21,10 @@ namespace Nest
 		public Field Field { get; set; }
 		public IEnumerable<GeoLocation> Points { get; set; }
 		public DistanceUnit? GeoUnit { get; set; }
-		public GeoDistanceType? DistanceType { get; set; }
 
 	}
 
-	public class SortGeoDistanceDescriptor<T> : SortDescriptorBase<SortGeoDistanceDescriptor<T>, IGeoDistanceSort, T>, IGeoDistanceSort 
+	public class SortGeoDistanceDescriptor<T> : SortDescriptorBase<SortGeoDistanceDescriptor<T>, IGeoDistanceSort, T>, IGeoDistanceSort
 		where T : class
 	{
 
@@ -36,14 +33,11 @@ namespace Nest
 		Field IGeoDistanceSort.Field { get; set; }
 		IEnumerable<GeoLocation> IGeoDistanceSort.Points { get; set; }
 		DistanceUnit? IGeoDistanceSort.GeoUnit { get; set; }
-		GeoDistanceType? IGeoDistanceSort.DistanceType { get; set; }
 
 		public SortGeoDistanceDescriptor<T> PinTo(params GeoLocation[] geoLocations) => Assign(a => a.Points = geoLocations);
 		public SortGeoDistanceDescriptor<T> PinTo(IEnumerable<GeoLocation> geoLocations) => Assign(a => a.Points = geoLocations);
 
 		public SortGeoDistanceDescriptor<T> Unit(DistanceUnit unit) => Assign(a => a.GeoUnit = unit);
-
-		public SortGeoDistanceDescriptor<T> DistanceType(GeoDistanceType distanceType) => Assign(a => a.DistanceType = distanceType);
 
 		public SortGeoDistanceDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 

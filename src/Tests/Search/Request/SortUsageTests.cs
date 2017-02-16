@@ -50,7 +50,6 @@ namespace Tests.Search.Request
 							},
 							order = "asc",
 							mode = "min",
-							distance_type = "arc",
 							unit = "cm"
 						}
 					},
@@ -87,7 +86,6 @@ namespace Tests.Search.Request
 				)
 				.GeoDistance(g => g
 					.Field(p => p.Location)
-					.DistanceType(GeoDistanceType.Arc)
 					.Order(SortOrder.Ascending)
 					.Unit(DistanceUnit.Centimeters)
 					.Mode(SortMode.Min)
@@ -127,7 +125,6 @@ namespace Tests.Search.Request
 					{
 						Field = "location",
 						Order = SortOrder.Ascending,
-						DistanceType = GeoDistanceType.Arc,
 						GeoUnit = DistanceUnit.Centimeters,
 						Mode = SortMode.Min,
 						Points = new [] {new GeoLocation(70, -70), new GeoLocation(-12, 12) }
