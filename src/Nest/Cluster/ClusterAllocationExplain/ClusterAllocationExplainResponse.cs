@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Security.Cryptography.X509Certificates;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -295,7 +294,26 @@ namespace Nest
 	public class AllocationStore
 	{
 		[JsonProperty("shard_copy")]
+		[Obsolete("Removed in Elasticsearch 5.2")]
 		public StoreCopy ShardCopy { get; set; }
+
+		[JsonProperty("found")]
+		public bool? Found { get; set; }
+
+		[JsonProperty("in_sync")]
+		public bool? InSync { get; set; }
+
+		[JsonProperty("allocation_id")]
+		public string AllocationId { get; set; }
+
+		[JsonProperty("matching_sync_id")]
+		public bool? MatchingSyncId { get; set; }
+
+		[JsonProperty("matching_size_in_bytes")]
+		public long? MatchingSizeInBytes { get; set; }
+
+		[JsonProperty("store_exception")]
+		public string StoreException { get; set; }
 	}
 
 	[JsonObject]
