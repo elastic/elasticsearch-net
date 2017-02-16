@@ -887,10 +887,11 @@ namespace Nest
 			{
 				case DELETE:
 					if (AllSetNoFallback(p.RouteValues.Lang, p.RouteValues.Id)) return _lowLevel.DeleteScript<T>(p.RouteValues.Lang,p.RouteValues.Id,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Lang)) return _lowLevel.DeleteScript<T>(p.RouteValues.Lang,u => p.RequestParameters);
 					break;
 
 			}
-			throw InvalidDispatch("DeleteScript", p, new [] { DELETE }, "/_scripts/{lang}/{id}");
+			throw InvalidDispatch("DeleteScript", p, new [] { DELETE }, "/_scripts/{lang}", "/_scripts/{lang}/{id}");
 		}
 		
 		internal Task<ElasticsearchResponse<T>> DeleteScriptDispatchAsync<T>(IRequest<DeleteScriptRequestParameters> p , CancellationToken cancellationToken) where T : class
@@ -899,10 +900,11 @@ namespace Nest
 			{
 				case DELETE:
 					if (AllSetNoFallback(p.RouteValues.Lang, p.RouteValues.Id)) return _lowLevel.DeleteScriptAsync<T>(p.RouteValues.Lang,p.RouteValues.Id,u => p.RequestParameters,cancellationToken);
+					if (AllSetNoFallback(p.RouteValues.Lang)) return _lowLevel.DeleteScriptAsync<T>(p.RouteValues.Lang,u => p.RequestParameters,cancellationToken);
 					break;
 
 			}
-			throw InvalidDispatch("DeleteScript", p, new [] { DELETE }, "/_scripts/{lang}/{id}");
+			throw InvalidDispatch("DeleteScript", p, new [] { DELETE }, "/_scripts/{lang}", "/_scripts/{lang}/{id}");
 		}
 		
 		internal ElasticsearchResponse<T> DeleteTemplateDispatch<T>(IRequest<DeleteSearchTemplateRequestParameters> p ) where T : class
@@ -1047,10 +1049,11 @@ namespace Nest
 			{
 				case GET:
 					if (AllSetNoFallback(p.RouteValues.Lang, p.RouteValues.Id)) return _lowLevel.GetScript<T>(p.RouteValues.Lang,p.RouteValues.Id,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Lang)) return _lowLevel.GetScript<T>(p.RouteValues.Lang,u => p.RequestParameters);
 					break;
 
 			}
-			throw InvalidDispatch("GetScript", p, new [] { GET }, "/_scripts/{lang}/{id}");
+			throw InvalidDispatch("GetScript", p, new [] { GET }, "/_scripts/{lang}", "/_scripts/{lang}/{id}");
 		}
 		
 		internal Task<ElasticsearchResponse<T>> GetScriptDispatchAsync<T>(IRequest<GetScriptRequestParameters> p , CancellationToken cancellationToken) where T : class
@@ -1059,10 +1062,11 @@ namespace Nest
 			{
 				case GET:
 					if (AllSetNoFallback(p.RouteValues.Lang, p.RouteValues.Id)) return _lowLevel.GetScriptAsync<T>(p.RouteValues.Lang,p.RouteValues.Id,u => p.RequestParameters,cancellationToken);
+					if (AllSetNoFallback(p.RouteValues.Lang)) return _lowLevel.GetScriptAsync<T>(p.RouteValues.Lang,u => p.RequestParameters,cancellationToken);
 					break;
 
 			}
-			throw InvalidDispatch("GetScript", p, new [] { GET }, "/_scripts/{lang}/{id}");
+			throw InvalidDispatch("GetScript", p, new [] { GET }, "/_scripts/{lang}", "/_scripts/{lang}/{id}");
 		}
 		
 		internal ElasticsearchResponse<T> GetSourceDispatch<T>(IRequest<SourceRequestParameters> p ) where T : class
@@ -2583,14 +2587,16 @@ namespace Nest
 			{
 				case PUT:
 					if (AllSetNoFallback(p.RouteValues.Lang, p.RouteValues.Id)) return _lowLevel.PutScript<T>(p.RouteValues.Lang,p.RouteValues.Id,body,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Lang)) return _lowLevel.PutScript<T>(p.RouteValues.Lang,body,u => p.RequestParameters);
 					break;
 
 				case POST:
 					if (AllSetNoFallback(p.RouteValues.Lang, p.RouteValues.Id)) return _lowLevel.PutScriptPost<T>(p.RouteValues.Lang,p.RouteValues.Id,body,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Lang)) return _lowLevel.PutScriptPost<T>(p.RouteValues.Lang,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw InvalidDispatch("PutScript", p, new [] { PUT, POST }, "/_scripts/{lang}/{id}");
+			throw InvalidDispatch("PutScript", p, new [] { PUT, POST }, "/_scripts/{lang}", "/_scripts/{lang}/{id}");
 		}
 		
 		internal Task<ElasticsearchResponse<T>> PutScriptDispatchAsync<T>(IRequest<PutScriptRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
@@ -2599,14 +2605,16 @@ namespace Nest
 			{
 				case PUT:
 					if (AllSetNoFallback(p.RouteValues.Lang, p.RouteValues.Id)) return _lowLevel.PutScriptAsync<T>(p.RouteValues.Lang,p.RouteValues.Id,body,u => p.RequestParameters,cancellationToken);
+					if (AllSetNoFallback(p.RouteValues.Lang)) return _lowLevel.PutScriptAsync<T>(p.RouteValues.Lang,body,u => p.RequestParameters,cancellationToken);
 					break;
 
 				case POST:
 					if (AllSetNoFallback(p.RouteValues.Lang, p.RouteValues.Id)) return _lowLevel.PutScriptPostAsync<T>(p.RouteValues.Lang,p.RouteValues.Id,body,u => p.RequestParameters,cancellationToken);
+					if (AllSetNoFallback(p.RouteValues.Lang)) return _lowLevel.PutScriptPostAsync<T>(p.RouteValues.Lang,body,u => p.RequestParameters,cancellationToken);
 					break;
 
 			}
-			throw InvalidDispatch("PutScript", p, new [] { PUT, POST }, "/_scripts/{lang}/{id}");
+			throw InvalidDispatch("PutScript", p, new [] { PUT, POST }, "/_scripts/{lang}", "/_scripts/{lang}/{id}");
 		}
 		
 		internal ElasticsearchResponse<T> PutTemplateDispatch<T>(IRequest<PutSearchTemplateRequestParameters> p , PostData<object> body) where T : class
@@ -2788,17 +2796,15 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchShardsGet<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchShardsGet<T>(p.RouteValues.Index,u => p.RequestParameters);
 					return _lowLevel.SearchShardsGet<T>(u => p.RequestParameters);
 
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchShards<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchShards<T>(p.RouteValues.Index,u => p.RequestParameters);
 					return _lowLevel.SearchShards<T>(u => p.RequestParameters);
 
 			}
-			throw InvalidDispatch("SearchShards", p, new [] { GET, POST }, "/_search_shards", "/{index}/_search_shards", "/{index}/{type}/_search_shards");
+			throw InvalidDispatch("SearchShards", p, new [] { GET, POST }, "/_search_shards", "/{index}/_search_shards");
 		}
 		
 		internal Task<ElasticsearchResponse<T>> SearchShardsDispatchAsync<T>(IRequest<SearchShardsRequestParameters> p , CancellationToken cancellationToken) where T : class
@@ -2806,17 +2812,15 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchShardsGetAsync<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters,cancellationToken);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchShardsGetAsync<T>(p.RouteValues.Index,u => p.RequestParameters,cancellationToken);
 					return _lowLevel.SearchShardsGetAsync<T>(u => p.RequestParameters,cancellationToken);
 
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchShardsAsync<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters,cancellationToken);
 					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchShardsAsync<T>(p.RouteValues.Index,u => p.RequestParameters,cancellationToken);
 					return _lowLevel.SearchShardsAsync<T>(u => p.RequestParameters,cancellationToken);
 
 			}
-			throw InvalidDispatch("SearchShards", p, new [] { GET, POST }, "/_search_shards", "/{index}/_search_shards", "/{index}/{type}/_search_shards");
+			throw InvalidDispatch("SearchShards", p, new [] { GET, POST }, "/_search_shards", "/{index}/_search_shards");
 		}
 		
 		internal ElasticsearchResponse<T> SearchTemplateDispatch<T>(IRequest<SearchTemplateRequestParameters> p , PostData<object> body) where T : class

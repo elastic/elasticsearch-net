@@ -61,12 +61,24 @@ namespace Elasticsearch.Net
 		public BulkRequestParameters Pipeline(string pipeline) => this.AddQueryString("pipeline", pipeline);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public BulkRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public BulkRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public BulkRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public BulkRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public BulkRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public BulkRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -107,12 +119,24 @@ namespace Elasticsearch.Net
 		public CatAliasesRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatAliasesRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatAliasesRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatAliasesRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatAliasesRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatAliasesRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatAliasesRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -157,12 +181,24 @@ namespace Elasticsearch.Net
 		public CatAllocationRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatAllocationRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatAllocationRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatAllocationRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatAllocationRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatAllocationRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatAllocationRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -203,12 +239,24 @@ namespace Elasticsearch.Net
 		public CatCountRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatCountRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatCountRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatCountRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatCountRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatCountRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatCountRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -257,12 +305,24 @@ namespace Elasticsearch.Net
 		public CatFielddataRequestParameters Fields(params string[] fields) => this.AddQueryString("fields", fields);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatFielddataRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatFielddataRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatFielddataRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatFielddataRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatFielddataRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatFielddataRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -307,12 +367,24 @@ namespace Elasticsearch.Net
 		public CatHealthRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatHealthRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatHealthRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatHealthRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatHealthRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatHealthRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatHealthRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -333,12 +405,24 @@ namespace Elasticsearch.Net
 		public CatHelpRequestParameters S(params string[] s) => this.AddQueryString("s", s);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatHelpRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatHelpRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatHelpRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatHelpRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatHelpRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatHelpRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -391,12 +475,24 @@ namespace Elasticsearch.Net
 		public CatIndicesRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatIndicesRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatIndicesRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatIndicesRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatIndicesRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatIndicesRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatIndicesRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -437,12 +533,24 @@ namespace Elasticsearch.Net
 		public CatMasterRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatMasterRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatMasterRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatMasterRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatMasterRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatMasterRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatMasterRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -483,12 +591,24 @@ namespace Elasticsearch.Net
 		public CatNodeAttributesRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatNodeAttributesRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatNodeAttributesRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatNodeAttributesRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatNodeAttributesRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatNodeAttributesRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatNodeAttributesRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -533,12 +653,24 @@ namespace Elasticsearch.Net
 		public CatNodesRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatNodesRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatNodesRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatNodesRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatNodesRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatNodesRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatNodesRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -579,12 +711,24 @@ namespace Elasticsearch.Net
 		public CatPendingTasksRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatPendingTasksRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatPendingTasksRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatPendingTasksRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatPendingTasksRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatPendingTasksRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatPendingTasksRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -625,12 +769,24 @@ namespace Elasticsearch.Net
 		public CatPluginsRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatPluginsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatPluginsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatPluginsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatPluginsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatPluginsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatPluginsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -671,12 +827,24 @@ namespace Elasticsearch.Net
 		public CatRecoveryRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatRecoveryRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatRecoveryRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatRecoveryRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatRecoveryRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatRecoveryRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatRecoveryRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -717,12 +885,24 @@ namespace Elasticsearch.Net
 		public CatRepositoriesRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatRepositoriesRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatRepositoriesRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatRepositoriesRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatRepositoriesRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatRepositoriesRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatRepositoriesRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -755,12 +935,24 @@ namespace Elasticsearch.Net
 		public CatSegmentsRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatSegmentsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatSegmentsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatSegmentsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatSegmentsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatSegmentsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatSegmentsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -801,12 +993,24 @@ namespace Elasticsearch.Net
 		public CatShardsRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatShardsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatShardsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatShardsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatShardsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatShardsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatShardsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -847,12 +1051,24 @@ namespace Elasticsearch.Net
 		public CatSnapshotsRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatSnapshotsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatSnapshotsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatSnapshotsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatSnapshotsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatSnapshotsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatSnapshotsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -905,12 +1121,24 @@ namespace Elasticsearch.Net
 		public CatTasksRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatTasksRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatTasksRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatTasksRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatTasksRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatTasksRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatTasksRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -951,12 +1179,24 @@ namespace Elasticsearch.Net
 		public CatTemplatesRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatTemplatesRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatTemplatesRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatTemplatesRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatTemplatesRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatTemplatesRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatTemplatesRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1001,12 +1241,24 @@ namespace Elasticsearch.Net
 		public CatThreadPoolRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatThreadPoolRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CatThreadPoolRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatThreadPoolRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatThreadPoolRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatThreadPoolRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatThreadPoolRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1019,12 +1271,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClearScrollRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ClearScrollRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClearScrollRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClearScrollRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClearScrollRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClearScrollRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1045,12 +1309,24 @@ namespace Elasticsearch.Net
 		public ClusterAllocationExplainRequestParameters IncludeDiskInfo(bool include_disk_info) => this.AddQueryString("include_disk_info", include_disk_info);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClusterAllocationExplainRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ClusterAllocationExplainRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClusterAllocationExplainRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClusterAllocationExplainRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterAllocationExplainRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClusterAllocationExplainRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1079,12 +1355,24 @@ namespace Elasticsearch.Net
 		public ClusterGetSettingsRequestParameters IncludeDefaults(bool include_defaults) => this.AddQueryString("include_defaults", include_defaults);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClusterGetSettingsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ClusterGetSettingsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClusterGetSettingsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClusterGetSettingsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterGetSettingsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClusterGetSettingsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1133,12 +1421,24 @@ namespace Elasticsearch.Net
 		public ClusterHealthRequestParameters WaitForStatus(WaitForStatus wait_for_status) => this.AddQueryString("wait_for_status", wait_for_status);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClusterHealthRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ClusterHealthRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClusterHealthRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClusterHealthRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterHealthRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClusterHealthRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1159,12 +1459,24 @@ namespace Elasticsearch.Net
 		public ClusterPendingTasksRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClusterPendingTasksRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ClusterPendingTasksRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClusterPendingTasksRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClusterPendingTasksRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterPendingTasksRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClusterPendingTasksRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1189,12 +1501,24 @@ namespace Elasticsearch.Net
 		public ClusterPutSettingsRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClusterPutSettingsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ClusterPutSettingsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClusterPutSettingsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClusterPutSettingsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterPutSettingsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClusterPutSettingsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1231,12 +1555,24 @@ namespace Elasticsearch.Net
 		public ClusterRerouteRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClusterRerouteRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ClusterRerouteRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClusterRerouteRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClusterRerouteRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterRerouteRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClusterRerouteRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1273,12 +1609,24 @@ namespace Elasticsearch.Net
 		public ClusterStateRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClusterStateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ClusterStateRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClusterStateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClusterStateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterStateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClusterStateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1295,20 +1643,28 @@ namespace Elasticsearch.Net
 		public ClusterStatsRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
 		
 		
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public ClusterStatsRequestParameters Human(bool human) => this.AddQueryString("human", human);
-		
-		
 		///<summary>Explicit operation timeout</summary>
 		public ClusterStatsRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClusterStatsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ClusterStatsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClusterStatsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClusterStatsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterStatsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClusterStatsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1369,12 +1725,24 @@ namespace Elasticsearch.Net
 		public CountRequestParameters Lenient(bool lenient) => this.AddQueryString("lenient", lenient);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CountRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CountRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CountRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CountRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CountRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CountRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1423,12 +1791,24 @@ namespace Elasticsearch.Net
 		public PercolateCountRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PercolateCountRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PercolateCountRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PercolateCountRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PercolateCountRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PercolateCountRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PercolateCountRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1481,12 +1861,24 @@ namespace Elasticsearch.Net
 		public CreateRequestParameters Pipeline(string pipeline) => this.AddQueryString("pipeline", pipeline);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CreateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CreateRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CreateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CreateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CreateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CreateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1527,12 +1919,24 @@ namespace Elasticsearch.Net
 		public DeleteRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1670,15 +2074,27 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
-		public DeleteByQueryRequestParameters Slices(int slices) => this.AddQueryString("slices", slices);
+		public DeleteByQueryRequestParameters Slices(long slices) => this.AddQueryString("slices", slices);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteByQueryRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteByQueryRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteByQueryRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteByQueryRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteByQueryRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteByQueryRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1691,12 +2107,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteScriptRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteScriptRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteScriptRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteScriptRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteScriptRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteScriptRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1709,12 +2137,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteSearchTemplateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteSearchTemplateRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteSearchTemplateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteSearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteSearchTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteSearchTemplateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1726,6 +2166,10 @@ namespace Elasticsearch.Net
 	public class DocumentExistsRequestParameters : FluentRequestParameters<DocumentExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
+		
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
+		public DocumentExistsRequestParameters StoredFields(params string[] stored_fields) => this.AddQueryString("stored_fields", stored_fields);
+		
 		
 		///<summary>The ID of the parent document</summary>
 		public DocumentExistsRequestParameters Parent(string parent) => this.AddQueryString("parent", parent);
@@ -1747,12 +2191,44 @@ namespace Elasticsearch.Net
 		public DocumentExistsRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public DocumentExistsRequestParameters SourceEnabled(params string[] source_enabled) => this.AddQueryString("_source", source_enabled);
+		
+		
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public DocumentExistsRequestParameters SourceExclude(params string[] source_exclude) => this.AddQueryString("_source_exclude", source_exclude);
+		
+		
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public DocumentExistsRequestParameters SourceInclude(params string[] source_include) => this.AddQueryString("_source_include", source_include);
+		
+		
+		///<summary>Explicit version number for concurrency control</summary>
+		public DocumentExistsRequestParameters Version(long version) => this.AddQueryString("version", version);
+		
+		
+		///<summary>Specific version type</summary>
+		public DocumentExistsRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DocumentExistsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DocumentExistsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DocumentExistsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DocumentExistsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DocumentExistsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DocumentExistsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1817,12 +2293,24 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters SourceInclude(params string[] source_include) => this.AddQueryString("_source_include", source_include);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ExplainRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ExplainRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ExplainRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ExplainRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ExplainRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ExplainRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1851,12 +2339,24 @@ namespace Elasticsearch.Net
 		public FieldStatsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public FieldStatsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public FieldStatsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public FieldStatsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public FieldStatsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public FieldStatsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public FieldStatsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1913,12 +2413,24 @@ namespace Elasticsearch.Net
 		public GetRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1931,12 +2443,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetScriptRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetScriptRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetScriptRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetScriptRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetScriptRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetScriptRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1989,12 +2513,24 @@ namespace Elasticsearch.Net
 		public SourceRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SourceRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public SourceRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SourceRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SourceRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SourceRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SourceRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2007,12 +2543,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetSearchTemplateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetSearchTemplateRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetSearchTemplateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetSearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetSearchTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetSearchTemplateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2069,12 +2617,24 @@ namespace Elasticsearch.Net
 		public IndexRequestParameters Pipeline(string pipeline) => this.AddQueryString("pipeline", pipeline);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public IndexRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public IndexRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public IndexRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public IndexRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndexRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public IndexRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2099,12 +2659,24 @@ namespace Elasticsearch.Net
 		public AnalyzeRequestParameters Format(Format format) => this.AddQueryString("format", format);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public AnalyzeRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public AnalyzeRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public AnalyzeRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public AnalyzeRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public AnalyzeRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public AnalyzeRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2153,12 +2725,24 @@ namespace Elasticsearch.Net
 		public ClearCacheRequestParameters Request(bool request) => this.AddQueryString("request", request);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClearCacheRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ClearCacheRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClearCacheRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClearCacheRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClearCacheRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClearCacheRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2191,12 +2775,24 @@ namespace Elasticsearch.Net
 		public CloseIndexRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CloseIndexRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CloseIndexRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CloseIndexRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CloseIndexRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CloseIndexRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CloseIndexRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2225,12 +2821,24 @@ namespace Elasticsearch.Net
 		public CreateIndexRequestParameters UpdateAllTypes(bool update_all_types) => this.AddQueryString("update_all_types", update_all_types);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CreateIndexRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CreateIndexRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CreateIndexRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CreateIndexRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CreateIndexRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CreateIndexRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2251,12 +2859,24 @@ namespace Elasticsearch.Net
 		public DeleteIndexRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteIndexRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteIndexRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteIndexRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteIndexRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteIndexRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteIndexRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2277,12 +2897,24 @@ namespace Elasticsearch.Net
 		public DeleteAliasRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteAliasRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteAliasRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteAliasRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteAliasRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteAliasRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteAliasRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2303,12 +2935,24 @@ namespace Elasticsearch.Net
 		public DeleteIndexTemplateRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteIndexTemplateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteIndexTemplateRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteIndexTemplateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteIndexTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteIndexTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteIndexTemplateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2329,12 +2973,24 @@ namespace Elasticsearch.Net
 		public IndexExistsRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public IndexExistsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public IndexExistsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public IndexExistsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public IndexExistsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndexExistsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public IndexExistsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2363,12 +3019,24 @@ namespace Elasticsearch.Net
 		public AliasExistsRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public AliasExistsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public AliasExistsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public AliasExistsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public AliasExistsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public AliasExistsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public AliasExistsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2389,12 +3057,24 @@ namespace Elasticsearch.Net
 		public IndexTemplateExistsRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public IndexTemplateExistsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public IndexTemplateExistsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public IndexTemplateExistsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public IndexTemplateExistsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndexTemplateExistsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public IndexTemplateExistsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2423,12 +3103,24 @@ namespace Elasticsearch.Net
 		public TypeExistsRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public TypeExistsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public TypeExistsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public TypeExistsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public TypeExistsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TypeExistsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public TypeExistsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2461,12 +3153,24 @@ namespace Elasticsearch.Net
 		public FlushRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public FlushRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public FlushRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public FlushRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public FlushRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public FlushRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public FlushRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2491,12 +3195,24 @@ namespace Elasticsearch.Net
 		public SyncedFlushRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SyncedFlushRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public SyncedFlushRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SyncedFlushRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SyncedFlushRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SyncedFlushRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SyncedFlushRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2541,12 +3257,24 @@ namespace Elasticsearch.Net
 		public ForceMergeRequestParameters WaitForMerge(bool wait_for_merge) => this.AddQueryString("wait_for_merge", wait_for_merge);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ForceMergeRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ForceMergeRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ForceMergeRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ForceMergeRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ForceMergeRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ForceMergeRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2579,20 +3307,28 @@ namespace Elasticsearch.Net
 		public GetIndexRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
 		
 		
-		///<summary>Whether to return version and creation date values in human-readable format.</summary>
-		public GetIndexRequestParameters Human(bool human) => this.AddQueryString("human", human);
-		
-		
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public GetIndexRequestParameters IncludeDefaults(bool include_defaults) => this.AddQueryString("include_defaults", include_defaults);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetIndexRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetIndexRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetIndexRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetIndexRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetIndexRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetIndexRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2621,12 +3357,24 @@ namespace Elasticsearch.Net
 		public GetAliasRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetAliasRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetAliasRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetAliasRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetAliasRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetAliasRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetAliasRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2659,12 +3407,24 @@ namespace Elasticsearch.Net
 		public GetFieldMappingRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetFieldMappingRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetFieldMappingRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetFieldMappingRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetFieldMappingRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetFieldMappingRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetFieldMappingRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2693,12 +3453,24 @@ namespace Elasticsearch.Net
 		public GetMappingRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetMappingRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetMappingRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetMappingRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetMappingRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetMappingRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetMappingRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2731,20 +3503,28 @@ namespace Elasticsearch.Net
 		public GetIndexSettingsRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
 		
-		///<summary>Whether to return version and creation date values in human-readable format.</summary>
-		public GetIndexSettingsRequestParameters Human(bool human) => this.AddQueryString("human", human);
-		
-		
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public GetIndexSettingsRequestParameters IncludeDefaults(bool include_defaults) => this.AddQueryString("include_defaults", include_defaults);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetIndexSettingsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetIndexSettingsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetIndexSettingsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetIndexSettingsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetIndexSettingsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetIndexSettingsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2769,12 +3549,24 @@ namespace Elasticsearch.Net
 		public GetIndexTemplateRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetIndexTemplateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetIndexTemplateRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetIndexTemplateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetIndexTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetIndexTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetIndexTemplateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2799,16 +3591,24 @@ namespace Elasticsearch.Net
 		public UpgradeStatusRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public UpgradeStatusRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
 		public UpgradeStatusRequestParameters Human(bool human) => this.AddQueryString("human", human);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Include the stack trace of returned errors.</summary>
+		public UpgradeStatusRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public UpgradeStatusRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpgradeStatusRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public UpgradeStatusRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2841,12 +3641,24 @@ namespace Elasticsearch.Net
 		public OpenIndexRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public OpenIndexRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public OpenIndexRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public OpenIndexRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public OpenIndexRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public OpenIndexRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public OpenIndexRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2867,12 +3679,24 @@ namespace Elasticsearch.Net
 		public PutAliasRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutAliasRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PutAliasRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutAliasRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutAliasRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutAliasRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutAliasRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2909,12 +3733,24 @@ namespace Elasticsearch.Net
 		public PutMappingRequestParameters UpdateAllTypes(bool update_all_types) => this.AddQueryString("update_all_types", update_all_types);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutMappingRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PutMappingRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutMappingRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutMappingRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutMappingRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutMappingRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2951,12 +3787,24 @@ namespace Elasticsearch.Net
 		public UpdateIndexSettingsRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public UpdateIndexSettingsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public UpdateIndexSettingsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public UpdateIndexSettingsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public UpdateIndexSettingsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpdateIndexSettingsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public UpdateIndexSettingsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2985,12 +3833,24 @@ namespace Elasticsearch.Net
 		public PutIndexTemplateRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutIndexTemplateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PutIndexTemplateRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutIndexTemplateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutIndexTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutIndexTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutIndexTemplateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3011,16 +3871,24 @@ namespace Elasticsearch.Net
 		public RecoveryStatusRequestParameters ActiveOnly(bool active_only) => this.AddQueryString("active_only", active_only);
 		
 		
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RecoveryStatusRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
 		public RecoveryStatusRequestParameters Human(bool human) => this.AddQueryString("human", human);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RecoveryStatusRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public RecoveryStatusRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public RecoveryStatusRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RecoveryStatusRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3053,12 +3921,24 @@ namespace Elasticsearch.Net
 		public RefreshRequestParameters OperationThreading(string operation_threading) => this.AddQueryString("operation_threading", operation_threading);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RefreshRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public RefreshRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RefreshRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public RefreshRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public RefreshRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RefreshRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3087,12 +3967,24 @@ namespace Elasticsearch.Net
 		public RolloverIndexRequestParameters WaitForActiveShards(string wait_for_active_shards) => this.AddQueryString("wait_for_active_shards", wait_for_active_shards);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RolloverIndexRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public RolloverIndexRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RolloverIndexRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public RolloverIndexRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public RolloverIndexRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RolloverIndexRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3117,10 +4009,6 @@ namespace Elasticsearch.Net
 		public SegmentsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public SegmentsRequestParameters Human(bool human) => this.AddQueryString("human", human);
-		
-		
 		///<summary>TODO: ?</summary>
 		public SegmentsRequestParameters OperationThreading(string operation_threading) => this.AddQueryString("operation_threading", operation_threading);
 		
@@ -3129,12 +4017,24 @@ namespace Elasticsearch.Net
 		public SegmentsRequestParameters Verbose(bool verbose) => this.AddQueryString("verbose", verbose);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SegmentsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public SegmentsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SegmentsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SegmentsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SegmentsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SegmentsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3167,12 +4067,24 @@ namespace Elasticsearch.Net
 		public IndicesShardStoresRequestParameters OperationThreading(string operation_threading) => this.AddQueryString("operation_threading", operation_threading);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public IndicesShardStoresRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public IndicesShardStoresRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public IndicesShardStoresRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public IndicesShardStoresRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndicesShardStoresRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public IndicesShardStoresRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3197,12 +4109,24 @@ namespace Elasticsearch.Net
 		public ShrinkIndexRequestParameters WaitForActiveShards(string wait_for_active_shards) => this.AddQueryString("wait_for_active_shards", wait_for_active_shards);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ShrinkIndexRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ShrinkIndexRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ShrinkIndexRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ShrinkIndexRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ShrinkIndexRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ShrinkIndexRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3231,20 +4155,32 @@ namespace Elasticsearch.Net
 		public IndicesStatsRequestParameters Groups(params string[] groups) => this.AddQueryString("groups", groups);
 		
 		
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public IndicesStatsRequestParameters Human(bool human) => this.AddQueryString("human", human);
-		
-		
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
 		public IndicesStatsRequestParameters Level(Level level) => this.AddQueryString("level", level);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
+		public IndicesStatsRequestParameters IncludeSegmentFileSizes(bool include_segment_file_sizes) => this.AddQueryString("include_segment_file_sizes", include_segment_file_sizes);
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public IndicesStatsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public IndicesStatsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public IndicesStatsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public IndicesStatsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndicesStatsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public IndicesStatsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3265,12 +4201,24 @@ namespace Elasticsearch.Net
 		public BulkAliasRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public BulkAliasRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public BulkAliasRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public BulkAliasRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public BulkAliasRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public BulkAliasRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public BulkAliasRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3303,12 +4251,24 @@ namespace Elasticsearch.Net
 		public UpgradeRequestParameters OnlyAncientSegments(bool only_ancient_segments) => this.AddQueryString("only_ancient_segments", only_ancient_segments);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public UpgradeRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public UpgradeRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public UpgradeRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public UpgradeRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpgradeRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public UpgradeRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3369,12 +4329,24 @@ namespace Elasticsearch.Net
 		public ValidateQueryRequestParameters Rewrite(bool rewrite) => this.AddQueryString("rewrite", rewrite);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ValidateQueryRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ValidateQueryRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ValidateQueryRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ValidateQueryRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ValidateQueryRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ValidateQueryRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3387,12 +4359,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RootNodeInfoRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public RootNodeInfoRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RootNodeInfoRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public RootNodeInfoRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public RootNodeInfoRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RootNodeInfoRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3413,12 +4397,24 @@ namespace Elasticsearch.Net
 		public DeletePipelineRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeletePipelineRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeletePipelineRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeletePipelineRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeletePipelineRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeletePipelineRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeletePipelineRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3435,12 +4431,24 @@ namespace Elasticsearch.Net
 		public GetPipelineRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetPipelineRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetPipelineRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetPipelineRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetPipelineRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetPipelineRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetPipelineRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3461,12 +4469,24 @@ namespace Elasticsearch.Net
 		public PutPipelineRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutPipelineRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PutPipelineRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutPipelineRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutPipelineRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutPipelineRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutPipelineRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3483,12 +4503,24 @@ namespace Elasticsearch.Net
 		public SimulatePipelineRequestParameters Verbose(bool verbose) => this.AddQueryString("verbose", verbose);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SimulatePipelineRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public SimulatePipelineRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SimulatePipelineRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SimulatePipelineRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SimulatePipelineRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SimulatePipelineRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3533,12 +4565,24 @@ namespace Elasticsearch.Net
 		public MultiGetRequestParameters SourceInclude(params string[] source_include) => this.AddQueryString("_source_include", source_include);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public MultiGetRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public MultiGetRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public MultiGetRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public MultiGetRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MultiGetRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public MultiGetRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3563,12 +4607,24 @@ namespace Elasticsearch.Net
 		public MultiPercolateRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public MultiPercolateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public MultiPercolateRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public MultiPercolateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public MultiPercolateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MultiPercolateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public MultiPercolateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3589,12 +4645,28 @@ namespace Elasticsearch.Net
 		public MultiSearchRequestParameters MaxConcurrentSearches(long max_concurrent_searches) => this.AddQueryString("max_concurrent_searches", max_concurrent_searches);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public MultiSearchRequestParameters TypedKeys(bool typed_keys) => this.AddQueryString("typed_keys", typed_keys);
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public MultiSearchRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public MultiSearchRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public MultiSearchRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public MultiSearchRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MultiSearchRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public MultiSearchRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3611,12 +4683,28 @@ namespace Elasticsearch.Net
 		public MultiSearchTemplateRequestParameters SearchType(SearchType search_type) => this.AddQueryString("search_type", search_type);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public MultiSearchTemplateRequestParameters TypedKeys(bool typed_keys) => this.AddQueryString("typed_keys", typed_keys);
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public MultiSearchTemplateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public MultiSearchTemplateRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public MultiSearchTemplateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public MultiSearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MultiSearchTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public MultiSearchTemplateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3677,12 +4765,24 @@ namespace Elasticsearch.Net
 		public MultiTermVectorsRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public MultiTermVectorsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public MultiTermVectorsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public MultiTermVectorsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public MultiTermVectorsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MultiTermVectorsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public MultiTermVectorsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3719,12 +4819,24 @@ namespace Elasticsearch.Net
 		public NodesHotThreadsRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public NodesHotThreadsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public NodesHotThreadsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public NodesHotThreadsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public NodesHotThreadsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public NodesHotThreadsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public NodesHotThreadsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3741,20 +4853,28 @@ namespace Elasticsearch.Net
 		public NodesInfoRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
 		
 		
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public NodesInfoRequestParameters Human(bool human) => this.AddQueryString("human", human);
-		
-		
 		///<summary>Explicit operation timeout</summary>
 		public NodesInfoRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public NodesInfoRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public NodesInfoRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public NodesInfoRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public NodesInfoRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public NodesInfoRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public NodesInfoRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3783,10 +4903,6 @@ namespace Elasticsearch.Net
 		public NodesStatsRequestParameters Groups(bool groups) => this.AddQueryString("groups", groups);
 		
 		
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public NodesStatsRequestParameters Human(bool human) => this.AddQueryString("human", human);
-		
-		
 		///<summary>Return indices stats aggregated at index, node or shard level</summary>
 		public NodesStatsRequestParameters Level(Level level) => this.AddQueryString("level", level);
 		
@@ -3799,12 +4915,28 @@ namespace Elasticsearch.Net
 		public NodesStatsRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
+		public NodesStatsRequestParameters IncludeSegmentFileSizes(bool include_segment_file_sizes) => this.AddQueryString("include_segment_file_sizes", include_segment_file_sizes);
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public NodesStatsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public NodesStatsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public NodesStatsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public NodesStatsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public NodesStatsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public NodesStatsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3865,12 +4997,24 @@ namespace Elasticsearch.Net
 		public PercolateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PercolateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PercolateRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PercolateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PercolateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PercolateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PercolateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3883,12 +5027,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PingRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PingRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PingRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PingRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PingRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PingRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3901,12 +5057,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutScriptRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PutScriptRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutScriptRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutScriptRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutScriptRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutScriptRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3919,12 +5087,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutSearchTemplateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PutSearchTemplateRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutSearchTemplateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutSearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutSearchTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutSearchTemplateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3958,11 +5138,23 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
-		public ReindexOnServerRequestParameters Slices(int slices) => this.AddQueryString("slices", slices);
+		public ReindexOnServerRequestParameters Slices(long slices) => this.AddQueryString("slices", slices);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ReindexOnServerRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ReindexOnServerRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ReindexOnServerRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ReindexOnServerRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ReindexOnServerRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3979,12 +5171,24 @@ namespace Elasticsearch.Net
 		public ReindexRethrottleRequestParameters RequestsPerSecond(long requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ReindexRethrottleRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ReindexRethrottleRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ReindexRethrottleRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ReindexRethrottleRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ReindexRethrottleRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ReindexRethrottleRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3997,12 +5201,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RenderSearchTemplateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public RenderSearchTemplateRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RenderSearchTemplateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public RenderSearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public RenderSearchTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RenderSearchTemplateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4015,12 +5231,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ScrollRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ScrollRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ScrollRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ScrollRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ScrollRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ScrollRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4105,12 +5333,28 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters SuggestText(string suggest_text) => this.AddQueryString("suggest_text", suggest_text);
 		
 		
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public SearchRequestParameters TypedKeys(bool typed_keys) => this.AddQueryString("typed_keys", typed_keys);
+		
+		
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public SearchRequestParameters RequestCache(bool request_cache) => this.AddQueryString("request_cache", request_cache);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SearchRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SearchRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public SearchRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SearchRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SearchRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4147,12 +5391,24 @@ namespace Elasticsearch.Net
 		public SearchShardsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SearchShardsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public SearchShardsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SearchShardsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SearchShardsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SearchShardsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SearchShardsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4201,12 +5457,28 @@ namespace Elasticsearch.Net
 		public SearchTemplateRequestParameters Profile(bool profile) => this.AddQueryString("profile", profile);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public SearchTemplateRequestParameters TypedKeys(bool typed_keys) => this.AddQueryString("typed_keys", typed_keys);
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SearchTemplateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public SearchTemplateRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SearchTemplateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SearchTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SearchTemplateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4227,12 +5499,24 @@ namespace Elasticsearch.Net
 		public SnapshotRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SnapshotRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public SnapshotRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SnapshotRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SnapshotRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SnapshotRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SnapshotRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4257,12 +5541,24 @@ namespace Elasticsearch.Net
 		public CreateRepositoryRequestParameters Verify(bool verify) => this.AddQueryString("verify", verify);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CreateRepositoryRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CreateRepositoryRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CreateRepositoryRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CreateRepositoryRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CreateRepositoryRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CreateRepositoryRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4279,12 +5575,24 @@ namespace Elasticsearch.Net
 		public DeleteSnapshotRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteSnapshotRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteSnapshotRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteSnapshotRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteSnapshotRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteSnapshotRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteSnapshotRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4305,12 +5613,24 @@ namespace Elasticsearch.Net
 		public DeleteRepositoryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteRepositoryRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteRepositoryRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteRepositoryRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteRepositoryRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteRepositoryRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteRepositoryRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4331,12 +5651,24 @@ namespace Elasticsearch.Net
 		public GetSnapshotRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetSnapshotRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetSnapshotRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetSnapshotRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetSnapshotRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetSnapshotRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetSnapshotRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4357,12 +5689,24 @@ namespace Elasticsearch.Net
 		public GetRepositoryRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetRepositoryRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetRepositoryRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetRepositoryRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetRepositoryRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetRepositoryRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetRepositoryRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4383,12 +5727,24 @@ namespace Elasticsearch.Net
 		public RestoreRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RestoreRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public RestoreRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RestoreRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public RestoreRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public RestoreRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RestoreRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4409,12 +5765,24 @@ namespace Elasticsearch.Net
 		public SnapshotStatusRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SnapshotStatusRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public SnapshotStatusRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SnapshotStatusRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SnapshotStatusRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SnapshotStatusRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SnapshotStatusRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4435,12 +5803,24 @@ namespace Elasticsearch.Net
 		public VerifyRepositoryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public VerifyRepositoryRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public VerifyRepositoryRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public VerifyRepositoryRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public VerifyRepositoryRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public VerifyRepositoryRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public VerifyRepositoryRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4473,12 +5853,24 @@ namespace Elasticsearch.Net
 		public SuggestRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SuggestRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public SuggestRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SuggestRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SuggestRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SuggestRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SuggestRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4507,12 +5899,24 @@ namespace Elasticsearch.Net
 		public CancelTasksRequestParameters ParentTask(string parent_task) => this.AddQueryString("parent_task", parent_task);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CancelTasksRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CancelTasksRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CancelTasksRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CancelTasksRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CancelTasksRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CancelTasksRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4529,12 +5933,24 @@ namespace Elasticsearch.Net
 		public GetTaskRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetTaskRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetTaskRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetTaskRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetTaskRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetTaskRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetTaskRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4575,12 +5991,24 @@ namespace Elasticsearch.Net
 		public ListTasksRequestParameters GroupBy(GroupBy group_by) => this.AddQueryString("group_by", group_by);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ListTasksRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ListTasksRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ListTasksRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ListTasksRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ListTasksRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ListTasksRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4641,12 +6069,24 @@ namespace Elasticsearch.Net
 		public TermVectorsRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public TermVectorsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public TermVectorsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public TermVectorsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public TermVectorsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TermVectorsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public TermVectorsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4667,7 +6107,7 @@ namespace Elasticsearch.Net
 		public UpdateRequestParameters SourceEnabled(params string[] source_enabled) => this.AddQueryString("_source", source_enabled);
 		
 		
-		///<summary>The script language (default: groovy)</summary>
+		///<summary>The script language (default: painless)</summary>
 		public UpdateRequestParameters Lang(string lang) => this.AddQueryString("lang", lang);
 		
 		
@@ -4707,12 +6147,24 @@ namespace Elasticsearch.Net
 		public UpdateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public UpdateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public UpdateRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public UpdateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public UpdateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpdateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public UpdateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4858,15 +6310,27 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
-		public UpdateByQueryRequestParameters Slices(int slices) => this.AddQueryString("slices", slices);
+		public UpdateByQueryRequestParameters Slices(long slices) => this.AddQueryString("slices", slices);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public UpdateByQueryRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public UpdateByQueryRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public UpdateByQueryRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public UpdateByQueryRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpdateByQueryRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public UpdateByQueryRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4887,12 +6351,24 @@ namespace Elasticsearch.Net
 		public GraphExploreRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GraphExploreRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GraphExploreRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GraphExploreRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GraphExploreRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GraphExploreRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GraphExploreRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4905,12 +6381,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteLicenseRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteLicenseRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteLicenseRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteLicenseRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteLicenseRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteLicenseRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4927,12 +6415,24 @@ namespace Elasticsearch.Net
 		public GetLicenseRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetLicenseRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetLicenseRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetLicenseRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetLicenseRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetLicenseRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetLicenseRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4949,12 +6449,24 @@ namespace Elasticsearch.Net
 		public PostLicenseRequestParameters Acknowledge(bool acknowledge) => this.AddQueryString("acknowledge", acknowledge);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PostLicenseRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PostLicenseRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PostLicenseRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PostLicenseRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PostLicenseRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PostLicenseRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4967,12 +6479,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public AuthenticateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public AuthenticateRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public AuthenticateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public AuthenticateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public AuthenticateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public AuthenticateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4989,12 +6513,24 @@ namespace Elasticsearch.Net
 		public ChangePasswordRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ChangePasswordRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ChangePasswordRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ChangePasswordRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ChangePasswordRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ChangePasswordRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ChangePasswordRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5011,12 +6547,24 @@ namespace Elasticsearch.Net
 		public ClearCachedRealmsRequestParameters Usernames(params string[] usernames) => this.AddQueryString("usernames", usernames);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClearCachedRealmsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ClearCachedRealmsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClearCachedRealmsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClearCachedRealmsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClearCachedRealmsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClearCachedRealmsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5029,12 +6577,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClearCachedRolesRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ClearCachedRolesRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClearCachedRolesRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClearCachedRolesRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClearCachedRolesRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClearCachedRolesRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5051,12 +6611,24 @@ namespace Elasticsearch.Net
 		public DeleteRoleRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteRoleRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteRoleRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteRoleRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteRoleRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteRoleRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteRoleRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5073,12 +6645,24 @@ namespace Elasticsearch.Net
 		public DeleteUserRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteUserRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteUserRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteUserRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteUserRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteUserRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteUserRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5095,12 +6679,24 @@ namespace Elasticsearch.Net
 		public DisableUserRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DisableUserRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DisableUserRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DisableUserRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DisableUserRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DisableUserRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DisableUserRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5117,12 +6713,24 @@ namespace Elasticsearch.Net
 		public EnableUserRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public EnableUserRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public EnableUserRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public EnableUserRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public EnableUserRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public EnableUserRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public EnableUserRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5135,12 +6743,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetRoleRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetRoleRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetRoleRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetRoleRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetRoleRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetRoleRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5153,12 +6773,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetUserRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetUserRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetUserRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetUserRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetUserRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetUserRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5175,12 +6807,24 @@ namespace Elasticsearch.Net
 		public PutRoleRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutRoleRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PutRoleRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutRoleRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutRoleRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutRoleRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutRoleRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5197,12 +6841,24 @@ namespace Elasticsearch.Net
 		public PutUserRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutUserRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PutUserRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutUserRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutUserRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutUserRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutUserRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5219,12 +6875,24 @@ namespace Elasticsearch.Net
 		public AcknowledgeWatchRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public AcknowledgeWatchRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public AcknowledgeWatchRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public AcknowledgeWatchRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public AcknowledgeWatchRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public AcknowledgeWatchRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public AcknowledgeWatchRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5241,12 +6909,24 @@ namespace Elasticsearch.Net
 		public ActivateWatchRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ActivateWatchRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ActivateWatchRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ActivateWatchRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ActivateWatchRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ActivateWatchRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ActivateWatchRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5263,12 +6943,24 @@ namespace Elasticsearch.Net
 		public DeactivateWatchRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeactivateWatchRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeactivateWatchRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeactivateWatchRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeactivateWatchRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeactivateWatchRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeactivateWatchRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5285,12 +6977,24 @@ namespace Elasticsearch.Net
 		public DeleteWatchRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteWatchRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteWatchRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteWatchRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteWatchRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteWatchRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteWatchRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5307,12 +7011,24 @@ namespace Elasticsearch.Net
 		public ExecuteWatchRequestParameters Debug(bool debug) => this.AddQueryString("debug", debug);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ExecuteWatchRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ExecuteWatchRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ExecuteWatchRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ExecuteWatchRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ExecuteWatchRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ExecuteWatchRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5325,12 +7041,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetWatchRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetWatchRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetWatchRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetWatchRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetWatchRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetWatchRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5351,12 +7079,24 @@ namespace Elasticsearch.Net
 		public PutWatchRequestParameters Active(bool active) => this.AddQueryString("active", active);
 		
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutWatchRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PutWatchRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutWatchRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutWatchRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutWatchRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutWatchRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5369,12 +7109,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RestartWatcherRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public RestartWatcherRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RestartWatcherRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public RestartWatcherRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public RestartWatcherRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RestartWatcherRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5387,12 +7139,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public StartWatcherRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public StartWatcherRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public StartWatcherRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public StartWatcherRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public StartWatcherRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public StartWatcherRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5405,12 +7169,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public WatcherStatsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public WatcherStatsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public WatcherStatsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public WatcherStatsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public WatcherStatsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public WatcherStatsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5423,12 +7199,24 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public StopWatcherRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public StopWatcherRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public StopWatcherRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public StopWatcherRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public StopWatcherRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public StopWatcherRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 }

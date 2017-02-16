@@ -73,11 +73,20 @@ namespace Nest
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public BulkDescriptor Pipeline(string pipeline) => AssignParam(p=>p.Pipeline(pipeline));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public BulkDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public BulkDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public BulkDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public BulkDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public BulkDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public BulkDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -114,11 +123,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatAliasesDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatAliasesDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatAliasesDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatAliasesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatAliasesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatAliasesDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatAliasesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -158,11 +176,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatAllocationDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatAllocationDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatAllocationDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatAllocationDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatAllocationDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatAllocationDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatAllocationDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -205,11 +232,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatCountDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatCountDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatCountDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatCountDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatCountDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatCountDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatCountDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -252,11 +288,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatFielddataDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatFielddataDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatFielddataDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatFielddataDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatFielddataDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatFielddataDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatFielddataDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -288,11 +333,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatHealthDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatHealthDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatHealthDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatHealthDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatHealthDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatHealthDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatHealthDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -306,11 +360,20 @@ namespace Nest
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public CatHelpDescriptor S(params string[] s) => AssignParam(p=>p.S(s));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatHelpDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatHelpDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatHelpDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatHelpDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatHelpDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatHelpDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -362,11 +425,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatIndicesDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatIndicesDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatIndicesDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatIndicesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatIndicesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatIndicesDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatIndicesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -395,11 +467,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatMasterDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatMasterDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatMasterDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatMasterDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatMasterDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatMasterDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatMasterDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -428,11 +509,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatNodeAttributesDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatNodeAttributesDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatNodeAttributesDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatNodeAttributesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatNodeAttributesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatNodeAttributesDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatNodeAttributesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -464,11 +554,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatNodesDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatNodesDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatNodesDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatNodesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatNodesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatNodesDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatNodesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -497,11 +596,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatPendingTasksDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatPendingTasksDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatPendingTasksDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatPendingTasksDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatPendingTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatPendingTasksDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatPendingTasksDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -530,11 +638,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatPluginsDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatPluginsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatPluginsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatPluginsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatPluginsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatPluginsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatPluginsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -577,11 +694,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatRecoveryDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatRecoveryDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatRecoveryDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatRecoveryDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatRecoveryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatRecoveryDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatRecoveryDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -610,11 +736,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatRepositoriesDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatRepositoriesDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatRepositoriesDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatRepositoriesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatRepositoriesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatRepositoriesDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatRepositoriesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -651,11 +786,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatSegmentsDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatSegmentsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatSegmentsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatSegmentsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatSegmentsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatSegmentsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatSegmentsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -698,11 +842,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatShardsDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatShardsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatShardsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatShardsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatShardsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatShardsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatShardsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -741,11 +894,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatSnapshotsDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatSnapshotsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatSnapshotsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatSnapshotsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatSnapshotsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatSnapshotsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatSnapshotsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -783,11 +945,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatTasksDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatTasksDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatTasksDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatTasksDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatTasksDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatTasksDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -824,11 +995,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatTemplatesDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatTemplatesDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatTemplatesDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatTemplatesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatTemplatesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatTemplatesDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatTemplatesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -868,11 +1048,20 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatThreadPoolDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CatThreadPoolDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CatThreadPoolDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CatThreadPoolDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CatThreadPoolDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatThreadPoolDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CatThreadPoolDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -884,11 +1073,20 @@ namespace Nest
 		
 
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClearScrollDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ClearScrollDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClearScrollDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClearScrollDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClearScrollDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClearScrollDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -902,11 +1100,20 @@ namespace Nest
 		///<summary>Return information about disk usage and shard sizes (default: false)</summary>
 		public ClusterAllocationExplainDescriptor IncludeDiskInfo(bool include_disk_info = true) => AssignParam(p=>p.IncludeDiskInfo(include_disk_info));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClusterAllocationExplainDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ClusterAllocationExplainDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClusterAllocationExplainDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClusterAllocationExplainDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterAllocationExplainDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClusterAllocationExplainDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -926,11 +1133,20 @@ namespace Nest
 		///<summary>Whether to return all default clusters setting.</summary>
 		public ClusterGetSettingsDescriptor IncludeDefaults(bool include_defaults = true) => AssignParam(p=>p.IncludeDefaults(include_defaults));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClusterGetSettingsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ClusterGetSettingsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClusterGetSettingsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClusterGetSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterGetSettingsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClusterGetSettingsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -979,11 +1195,20 @@ namespace Nest
 		///<summary>Wait until cluster is in a specific state</summary>
 		public ClusterHealthDescriptor WaitForStatus(WaitForStatus wait_for_status) => AssignParam(p=>p.WaitForStatus(wait_for_status));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClusterHealthDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ClusterHealthDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClusterHealthDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClusterHealthDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterHealthDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClusterHealthDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -997,11 +1222,20 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public ClusterPendingTasksDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClusterPendingTasksDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ClusterPendingTasksDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClusterPendingTasksDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClusterPendingTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterPendingTasksDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClusterPendingTasksDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1018,11 +1252,20 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public ClusterPutSettingsDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClusterPutSettingsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ClusterPutSettingsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClusterPutSettingsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClusterPutSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterPutSettingsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClusterPutSettingsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1048,11 +1291,20 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public ClusterRerouteDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClusterRerouteDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ClusterRerouteDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClusterRerouteDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClusterRerouteDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterRerouteDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClusterRerouteDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1096,11 +1348,20 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ClusterStateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClusterStateDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ClusterStateDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClusterStateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClusterStateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterStateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClusterStateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1119,17 +1380,23 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public ClusterStatsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public ClusterStatsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
-
 		///<summary>Explicit operation timeout</summary>
 		public ClusterStatsDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClusterStatsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ClusterStatsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClusterStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClusterStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterStatsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClusterStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1197,11 +1464,20 @@ namespace Nest
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public CountDescriptor<T> Lenient(bool lenient = true) => AssignParam(p=>p.Lenient(lenient));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CountDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CountDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CountDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CountDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CountDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CountDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1266,11 +1542,20 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public PercolateCountDescriptor<TDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PercolateCountDescriptor<TDocument> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public PercolateCountDescriptor<TDocument> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PercolateCountDescriptor<TDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PercolateCountDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PercolateCountDescriptor<TDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PercolateCountDescriptor<TDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1336,11 +1621,20 @@ namespace Nest
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public CreateDescriptor<TDocument> Pipeline(string pipeline) => AssignParam(p=>p.Pipeline(pipeline));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CreateDescriptor<TDocument> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CreateDescriptor<TDocument> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CreateDescriptor<TDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CreateDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CreateDescriptor<TDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CreateDescriptor<TDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1397,11 +1691,20 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public DeleteDescriptor<T> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1536,13 +1839,22 @@ namespace Nest
 		public DeleteByQueryDescriptor<T> RequestsPerSecond(long requests_per_second) => AssignParam(p=>p.RequestsPerSecond(requests_per_second));
 
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
-		public DeleteByQueryDescriptor<T> Slices(int slices) => AssignParam(p=>p.Slices(slices));
+		public DeleteByQueryDescriptor<T> Slices(long slices) => AssignParam(p=>p.Slices(slices));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteByQueryDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteByQueryDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteByQueryDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteByQueryDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteByQueryDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteByQueryDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1551,18 +1863,32 @@ namespace Nest
 	{ 
 		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 		Name IDeleteScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
-			/// <summary>/_scripts/{lang}/{id}</summary>
+			/// <summary>/_scripts/{lang}</summary>
+///<param name="lang"> this parameter is required</param>
+		public DeleteScriptDescriptor(Name lang) : base(r=>r.Required("lang", lang)){}
+		
+
+		/// <summary>/_scripts/{lang}/{id}</summary>
 ///<param name="lang"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
 		public DeleteScriptDescriptor(Name lang, Id id) : base(r=>r.Required("lang", lang).Required("id", id)){}
 		
 
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteScriptDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteScriptDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteScriptDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteScriptDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteScriptDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteScriptDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1576,11 +1902,20 @@ namespace Nest
 		
 
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteSearchTemplateDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteSearchTemplateDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteSearchTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteSearchTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteSearchTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteSearchTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1616,6 +1951,13 @@ namespace Nest
 		public DocumentExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
 	
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
+		public DocumentExistsDescriptor<T> StoredFields(params string[] stored_fields) => AssignParam(p=>p.StoredFields(stored_fields));
+			
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
+		public DocumentExistsDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  =>
+			AssignParam(p=>p._StoredFields(fields));
+
 		///<summary>The ID of the parent document</summary>
 		public DocumentExistsDescriptor<T> Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
@@ -1631,11 +1973,43 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public DocumentExistsDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public DocumentExistsDescriptor<T> SourceEnabled(params string[] source_enabled) => AssignParam(p=>p.SourceEnabled(source_enabled));
+
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public DocumentExistsDescriptor<T> SourceExclude(params string[] source_exclude) => AssignParam(p=>p.SourceExclude(source_exclude));
+			
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public DocumentExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
+			AssignParam(p=>p._SourceExclude(fields));
+
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public DocumentExistsDescriptor<T> SourceInclude(params string[] source_include) => AssignParam(p=>p.SourceInclude(source_include));
+			
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public DocumentExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
+			AssignParam(p=>p._SourceInclude(fields));
+
+		///<summary>Explicit version number for concurrency control</summary>
+		public DocumentExistsDescriptor<T> Version(long version) => AssignParam(p=>p.Version(version));
+
+		///<summary>Specific version type</summary>
+		public DocumentExistsDescriptor<T> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
+
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DocumentExistsDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DocumentExistsDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DocumentExistsDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DocumentExistsDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DocumentExistsDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DocumentExistsDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1722,11 +2096,20 @@ namespace Nest
 		public ExplainDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields)  =>
 			AssignParam(p=>p._SourceInclude(fields));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ExplainDescriptor<TDocument> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ExplainDescriptor<TDocument> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ExplainDescriptor<TDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ExplainDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ExplainDescriptor<TDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ExplainDescriptor<TDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1760,11 +2143,20 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public FieldStatsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public FieldStatsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public FieldStatsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public FieldStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public FieldStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public FieldStatsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public FieldStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1845,11 +2237,20 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public GetDescriptor<T> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GetDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1858,18 +2259,32 @@ namespace Nest
 	{ 
 		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 		Name IGetScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
-			/// <summary>/_scripts/{lang}/{id}</summary>
+			/// <summary>/_scripts/{lang}</summary>
+///<param name="lang"> this parameter is required</param>
+		public GetScriptDescriptor(Name lang) : base(r=>r.Required("lang", lang)){}
+		
+
+		/// <summary>/_scripts/{lang}/{id}</summary>
 ///<param name="lang"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
 		public GetScriptDescriptor(Name lang, Id id) : base(r=>r.Required("lang", lang).Required("id", id)){}
 		
 
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetScriptDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GetScriptDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetScriptDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetScriptDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetScriptDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetScriptDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1943,11 +2358,20 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public SourceDescriptor<T> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SourceDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public SourceDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SourceDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SourceDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SourceDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SourceDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1961,11 +2385,20 @@ namespace Nest
 		
 
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetSearchTemplateDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GetSearchTemplateDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetSearchTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetSearchTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetSearchTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetSearchTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2036,11 +2469,20 @@ namespace Nest
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public IndexDescriptor<TDocument> Pipeline(string pipeline) => AssignParam(p=>p.Pipeline(pipeline));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public IndexDescriptor<TDocument> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public IndexDescriptor<TDocument> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public IndexDescriptor<TDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public IndexDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndexDescriptor<TDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public IndexDescriptor<TDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2065,11 +2507,20 @@ namespace Nest
 		///<summary>Format of the output</summary>
 		public AnalyzeDescriptor Format(Format format) => AssignParam(p=>p.Format(format));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public AnalyzeDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public AnalyzeDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public AnalyzeDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public AnalyzeDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public AnalyzeDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public AnalyzeDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2119,11 +2570,20 @@ namespace Nest
 		///<summary>Clear request cache</summary>
 		public ClearCacheDescriptor Request(bool request = true) => AssignParam(p=>p.Request(request));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClearCacheDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ClearCacheDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClearCacheDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClearCacheDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClearCacheDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClearCacheDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2161,11 +2621,20 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public CloseIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CloseIndexDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CloseIndexDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CloseIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CloseIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CloseIndexDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CloseIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2197,11 +2666,20 @@ namespace Nest
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public CreateIndexDescriptor UpdateAllTypes(bool update_all_types = true) => AssignParam(p=>p.UpdateAllTypes(update_all_types));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CreateIndexDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CreateIndexDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CreateIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CreateIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CreateIndexDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CreateIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2230,11 +2708,20 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteIndexDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteIndexDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteIndexDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteIndexDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2265,11 +2752,20 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteAliasDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteAliasDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteAliasDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteAliasDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteAliasDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteAliasDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteAliasDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2289,11 +2785,20 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteIndexTemplateDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteIndexTemplateDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteIndexTemplateDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteIndexTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteIndexTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteIndexTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteIndexTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2322,11 +2827,20 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public IndexExistsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public IndexExistsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public IndexExistsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public IndexExistsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public IndexExistsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndexExistsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public IndexExistsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2364,11 +2878,20 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public AliasExistsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public AliasExistsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public AliasExistsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public AliasExistsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public AliasExistsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public AliasExistsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public AliasExistsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2388,11 +2911,20 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public IndexTemplateExistsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public IndexTemplateExistsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public IndexTemplateExistsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public IndexTemplateExistsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public IndexTemplateExistsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndexTemplateExistsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public IndexTemplateExistsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2438,11 +2970,20 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public TypeExistsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public TypeExistsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public TypeExistsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public TypeExistsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public TypeExistsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TypeExistsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public TypeExistsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2479,11 +3020,20 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public FlushDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public FlushDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public FlushDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public FlushDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public FlushDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public FlushDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public FlushDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2514,11 +3064,20 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public SyncedFlushDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SyncedFlushDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public SyncedFlushDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SyncedFlushDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SyncedFlushDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SyncedFlushDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SyncedFlushDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2564,11 +3123,20 @@ namespace Nest
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
 		public ForceMergeDescriptor WaitForMerge(bool wait_for_merge = true) => AssignParam(p=>p.WaitForMerge(wait_for_merge));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ForceMergeDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ForceMergeDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ForceMergeDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ForceMergeDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ForceMergeDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ForceMergeDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2610,17 +3178,23 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public GetIndexDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
-		///<summary>Whether to return version and creation date values in human-readable format.</summary>
-		public GetIndexDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
-
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public GetIndexDescriptor IncludeDefaults(bool include_defaults = true) => AssignParam(p=>p.IncludeDefaults(include_defaults));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetIndexDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GetIndexDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetIndexDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2658,11 +3232,20 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetAliasDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetAliasDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GetAliasDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetAliasDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetAliasDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetAliasDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetAliasDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2711,11 +3294,20 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetFieldMappingDescriptor<T> Local(bool local = true) => AssignParam(p=>p.Local(local));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetFieldMappingDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GetFieldMappingDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetFieldMappingDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetFieldMappingDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetFieldMappingDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetFieldMappingDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2759,11 +3351,20 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetMappingDescriptor<T> Local(bool local = true) => AssignParam(p=>p.Local(local));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetMappingDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GetMappingDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetMappingDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetMappingDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetMappingDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetMappingDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2804,17 +3405,23 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexSettingsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
-		///<summary>Whether to return version and creation date values in human-readable format.</summary>
-		public GetIndexSettingsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
-
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public GetIndexSettingsDescriptor IncludeDefaults(bool include_defaults = true) => AssignParam(p=>p.IncludeDefaults(include_defaults));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetIndexSettingsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GetIndexSettingsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetIndexSettingsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetIndexSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetIndexSettingsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetIndexSettingsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2839,11 +3446,20 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexTemplateDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetIndexTemplateDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GetIndexTemplateDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetIndexTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetIndexTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetIndexTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetIndexTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2874,14 +3490,20 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public UpgradeStatusDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public UpgradeStatusDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
 		public UpgradeStatusDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Include the stack trace of returned errors.</summary>
+		public UpgradeStatusDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public UpgradeStatusDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpgradeStatusDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public UpgradeStatusDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2919,11 +3541,20 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public OpenIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public OpenIndexDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public OpenIndexDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public OpenIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public OpenIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public OpenIndexDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public OpenIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2954,11 +3585,20 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public PutAliasDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutAliasDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public PutAliasDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutAliasDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutAliasDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutAliasDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutAliasDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3006,11 +3646,20 @@ namespace Nest
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public PutMappingDescriptor<T> UpdateAllTypes(bool update_all_types = true) => AssignParam(p=>p.UpdateAllTypes(update_all_types));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutMappingDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public PutMappingDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutMappingDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutMappingDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutMappingDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutMappingDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3050,11 +3699,20 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public UpdateIndexSettingsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public UpdateIndexSettingsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public UpdateIndexSettingsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public UpdateIndexSettingsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public UpdateIndexSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpdateIndexSettingsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public UpdateIndexSettingsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3080,11 +3738,20 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public PutIndexTemplateDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutIndexTemplateDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public PutIndexTemplateDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutIndexTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutIndexTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutIndexTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutIndexTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3112,14 +3779,20 @@ namespace Nest
 		///<summary>Display only those recoveries that are currently on-going</summary>
 		public RecoveryStatusDescriptor ActiveOnly(bool active_only = true) => AssignParam(p=>p.ActiveOnly(active_only));
 
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RecoveryStatusDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
 		public RecoveryStatusDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RecoveryStatusDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public RecoveryStatusDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public RecoveryStatusDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RecoveryStatusDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3156,11 +3829,20 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public RefreshDescriptor OperationThreading(string operation_threading) => AssignParam(p=>p.OperationThreading(operation_threading));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RefreshDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public RefreshDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RefreshDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public RefreshDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public RefreshDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RefreshDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3190,11 +3872,20 @@ namespace Nest
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
 		public RolloverIndexDescriptor WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RolloverIndexDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public RolloverIndexDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RolloverIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public RolloverIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public RolloverIndexDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RolloverIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3225,20 +3916,26 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public SegmentsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public SegmentsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
-
 		///<summary>TODO: ?</summary>
 		public SegmentsDescriptor OperationThreading(string operation_threading) => AssignParam(p=>p.OperationThreading(operation_threading));
 
 		///<summary>Includes detailed memory usage by Lucene.</summary>
 		public SegmentsDescriptor Verbose(bool verbose = true) => AssignParam(p=>p.Verbose(verbose));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SegmentsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public SegmentsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SegmentsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SegmentsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SegmentsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SegmentsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3275,11 +3972,20 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public IndicesShardStoresDescriptor OperationThreading(string operation_threading) => AssignParam(p=>p.OperationThreading(operation_threading));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public IndicesShardStoresDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public IndicesShardStoresDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public IndicesShardStoresDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public IndicesShardStoresDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndicesShardStoresDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public IndicesShardStoresDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3310,11 +4016,20 @@ namespace Nest
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public ShrinkIndexDescriptor WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ShrinkIndexDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ShrinkIndexDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ShrinkIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ShrinkIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ShrinkIndexDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ShrinkIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3364,17 +4079,26 @@ namespace Nest
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public IndicesStatsDescriptor Groups(params string[] groups) => AssignParam(p=>p.Groups(groups));
 
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public IndicesStatsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
-
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
 		public IndicesStatsDescriptor Level(Level level) => AssignParam(p=>p.Level(level));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
+		public IndicesStatsDescriptor IncludeSegmentFileSizes(bool include_segment_file_sizes = true) => AssignParam(p=>p.IncludeSegmentFileSizes(include_segment_file_sizes));
+
+		///<summary>Pretty format the returned JSON response.</summary>
+		public IndicesStatsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public IndicesStatsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public IndicesStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public IndicesStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndicesStatsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public IndicesStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3388,11 +4112,20 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public BulkAliasDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public BulkAliasDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public BulkAliasDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public BulkAliasDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public BulkAliasDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public BulkAliasDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public BulkAliasDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3429,11 +4162,20 @@ namespace Nest
 		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
 		public UpgradeDescriptor OnlyAncientSegments(bool only_ancient_segments = true) => AssignParam(p=>p.OnlyAncientSegments(only_ancient_segments));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public UpgradeDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public UpgradeDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public UpgradeDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public UpgradeDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpgradeDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public UpgradeDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3501,11 +4243,20 @@ namespace Nest
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
 		public ValidateQueryDescriptor<T> Rewrite(bool rewrite = true) => AssignParam(p=>p.Rewrite(rewrite));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ValidateQueryDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ValidateQueryDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ValidateQueryDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ValidateQueryDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ValidateQueryDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ValidateQueryDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3513,11 +4264,20 @@ namespace Nest
 	public partial class RootNodeInfoDescriptor  : RequestDescriptorBase<RootNodeInfoDescriptor,RootNodeInfoRequestParameters, IRootNodeInfoRequest>, IRootNodeInfoRequest
 	{ 
 			
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RootNodeInfoDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public RootNodeInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RootNodeInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public RootNodeInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public RootNodeInfoDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RootNodeInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3537,11 +4297,20 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public DeletePipelineDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeletePipelineDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DeletePipelineDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeletePipelineDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeletePipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeletePipelineDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeletePipelineDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3560,11 +4329,20 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public GetPipelineDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetPipelineDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GetPipelineDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetPipelineDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetPipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetPipelineDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetPipelineDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3584,11 +4362,20 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public PutPipelineDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutPipelineDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public PutPipelineDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutPipelineDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutPipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutPipelineDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutPipelineDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3607,11 +4394,20 @@ namespace Nest
 		///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
 		public SimulatePipelineDescriptor Verbose(bool verbose = true) => AssignParam(p=>p.Verbose(verbose));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SimulatePipelineDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public SimulatePipelineDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SimulatePipelineDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SimulatePipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SimulatePipelineDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SimulatePipelineDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3673,11 +4469,20 @@ namespace Nest
 		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._SourceInclude(fields));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public MultiGetDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public MultiGetDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public MultiGetDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public MultiGetDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MultiGetDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public MultiGetDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3712,11 +4517,20 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public MultiPercolateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public MultiPercolateDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public MultiPercolateDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public MultiPercolateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public MultiPercolateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MultiPercolateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public MultiPercolateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3754,11 +4568,23 @@ namespace Nest
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public MultiSearchDescriptor MaxConcurrentSearches(long max_concurrent_searches) => AssignParam(p=>p.MaxConcurrentSearches(max_concurrent_searches));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public MultiSearchDescriptor TypedKeys(bool typed_keys = true) => AssignParam(p=>p.TypedKeys(typed_keys));
+
+		///<summary>Pretty format the returned JSON response.</summary>
+		public MultiSearchDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public MultiSearchDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public MultiSearchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public MultiSearchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MultiSearchDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public MultiSearchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3793,11 +4619,23 @@ namespace Nest
 		///<summary>Search operation type</summary>
 		public MultiSearchTemplateDescriptor SearchType(SearchType search_type) => AssignParam(p=>p.SearchType(search_type));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public MultiSearchTemplateDescriptor TypedKeys(bool typed_keys = true) => AssignParam(p=>p.TypedKeys(typed_keys));
+
+		///<summary>Pretty format the returned JSON response.</summary>
+		public MultiSearchTemplateDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public MultiSearchTemplateDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public MultiSearchTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public MultiSearchTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MultiSearchTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public MultiSearchTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3863,11 +4701,20 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public MultiTermVectorsDescriptor VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public MultiTermVectorsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public MultiTermVectorsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public MultiTermVectorsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public MultiTermVectorsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MultiTermVectorsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public MultiTermVectorsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3901,11 +4748,20 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public NodesHotThreadsDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public NodesHotThreadsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public NodesHotThreadsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public NodesHotThreadsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public NodesHotThreadsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public NodesHotThreadsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public NodesHotThreadsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3928,17 +4784,23 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public NodesInfoDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public NodesInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
-
 		///<summary>Explicit operation timeout</summary>
 		public NodesInfoDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public NodesInfoDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public NodesInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public NodesInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public NodesInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public NodesInfoDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public NodesInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3986,9 +4848,6 @@ namespace Nest
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public NodesStatsDescriptor Groups(bool groups = true) => AssignParam(p=>p.Groups(groups));
 
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public NodesStatsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
-
 		///<summary>Return indices stats aggregated at index, node or shard level</summary>
 		public NodesStatsDescriptor Level(Level level) => AssignParam(p=>p.Level(level));
 
@@ -3998,11 +4857,23 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public NodesStatsDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
+		public NodesStatsDescriptor IncludeSegmentFileSizes(bool include_segment_file_sizes = true) => AssignParam(p=>p.IncludeSegmentFileSizes(include_segment_file_sizes));
+
+		///<summary>Pretty format the returned JSON response.</summary>
+		public NodesStatsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public NodesStatsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public NodesStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public NodesStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public NodesStatsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public NodesStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4076,11 +4947,20 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public PercolateDescriptor<TDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PercolateDescriptor<TDocument> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public PercolateDescriptor<TDocument> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PercolateDescriptor<TDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PercolateDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PercolateDescriptor<TDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PercolateDescriptor<TDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4088,11 +4968,20 @@ namespace Nest
 	public partial class PingDescriptor  : RequestDescriptorBase<PingDescriptor,PingRequestParameters, IPingRequest>, IPingRequest
 	{ 
 			
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PingDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public PingDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PingDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PingDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PingDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PingDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4101,18 +4990,32 @@ namespace Nest
 	{ 
 		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 		Name IPutScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
-			/// <summary>/_scripts/{lang}/{id}</summary>
+			/// <summary>/_scripts/{lang}</summary>
+///<param name="lang"> this parameter is required</param>
+		public PutScriptDescriptor(Name lang) : base(r=>r.Required("lang", lang)){}
+		
+
+		/// <summary>/_scripts/{lang}/{id}</summary>
 ///<param name="lang"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
 		public PutScriptDescriptor(Name lang, Id id) : base(r=>r.Required("lang", lang).Required("id", id)){}
 		
 
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutScriptDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public PutScriptDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutScriptDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutScriptDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutScriptDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutScriptDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4126,11 +5029,20 @@ namespace Nest
 		
 
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutSearchTemplateDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public PutSearchTemplateDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutSearchTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutSearchTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutSearchTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutSearchTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4154,10 +5066,19 @@ namespace Nest
 		public ReindexOnServerDescriptor RequestsPerSecond(long requests_per_second) => AssignParam(p=>p.RequestsPerSecond(requests_per_second));
 
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
-		public ReindexOnServerDescriptor Slices(int slices) => AssignParam(p=>p.Slices(slices));
+		public ReindexOnServerDescriptor Slices(long slices) => AssignParam(p=>p.Slices(slices));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ReindexOnServerDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ReindexOnServerDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ReindexOnServerDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ReindexOnServerDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ReindexOnServerDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4176,11 +5097,20 @@ namespace Nest
 		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
 		public ReindexRethrottleDescriptor RequestsPerSecond(long requests_per_second) => AssignParam(p=>p.RequestsPerSecond(requests_per_second));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ReindexRethrottleDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ReindexRethrottleDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ReindexRethrottleDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ReindexRethrottleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ReindexRethrottleDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ReindexRethrottleDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4196,11 +5126,20 @@ namespace Nest
 		public RenderSearchTemplateDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
 	
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RenderSearchTemplateDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public RenderSearchTemplateDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RenderSearchTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public RenderSearchTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public RenderSearchTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RenderSearchTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4212,11 +5151,20 @@ namespace Nest
 		
 
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ScrollDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ScrollDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ScrollDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ScrollDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ScrollDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ScrollDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4310,11 +5258,23 @@ namespace Nest
 		///<summary>The source text for which the suggestions should be returned</summary>
 		public SearchDescriptor<T> SuggestText(string suggest_text) => AssignParam(p=>p.SuggestText(suggest_text));
 
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public SearchDescriptor<T> TypedKeys(bool typed_keys = true) => AssignParam(p=>p.TypedKeys(typed_keys));
+
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public SearchDescriptor<T> RequestCache(bool request_cache = true) => AssignParam(p=>p.RequestCache(request_cache));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SearchDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SearchDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public SearchDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SearchDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SearchDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4322,9 +5282,8 @@ namespace Nest
 	public partial class SearchShardsDescriptor<T>  : RequestDescriptorBase<SearchShardsDescriptor<T>,SearchShardsRequestParameters, ISearchShardsRequest>, ISearchShardsRequest
 	{ 
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types ISearchShardsRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/{type}/_search_shards</summary>
-		public SearchShardsDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
+			/// <summary>/_search_shards</summary>
+		public SearchShardsDescriptor() : base(){}
 		
 
 			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -4335,15 +5294,6 @@ namespace Nest
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public SearchShardsDescriptor<T> AllIndices() => this.Index(Indices.All);
-
-		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
-		public SearchShardsDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
-
-		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public SearchShardsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
-
-		///<summary>a shortcut into calling Type(Types.All)</summary>
-		public SearchShardsDescriptor<T> AllTypes() => this.Type(Types.All);
 
 	
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -4364,11 +5314,20 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public SearchShardsDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SearchShardsDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public SearchShardsDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SearchShardsDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SearchShardsDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SearchShardsDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SearchShardsDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4427,11 +5386,23 @@ namespace Nest
 		///<summary>Specify whether to profile the query execution</summary>
 		public SearchTemplateDescriptor<T> Profile(bool profile = true) => AssignParam(p=>p.Profile(profile));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
+		public SearchTemplateDescriptor<T> TypedKeys(bool typed_keys = true) => AssignParam(p=>p.TypedKeys(typed_keys));
+
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SearchTemplateDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public SearchTemplateDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SearchTemplateDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SearchTemplateDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SearchTemplateDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SearchTemplateDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4453,11 +5424,20 @@ namespace Nest
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public SnapshotDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SnapshotDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public SnapshotDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SnapshotDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SnapshotDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SnapshotDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SnapshotDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4480,11 +5460,20 @@ namespace Nest
 		///<summary>Whether to verify the repository after creation</summary>
 		public CreateRepositoryDescriptor Verify(bool verify = true) => AssignParam(p=>p.Verify(verify));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CreateRepositoryDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CreateRepositoryDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CreateRepositoryDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CreateRepositoryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CreateRepositoryDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CreateRepositoryDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4503,11 +5492,20 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeleteSnapshotDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteSnapshotDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteSnapshotDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteSnapshotDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteSnapshotDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteSnapshotDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteSnapshotDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4527,11 +5525,20 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public DeleteRepositoryDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteRepositoryDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteRepositoryDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteRepositoryDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteRepositoryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteRepositoryDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteRepositoryDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4553,11 +5560,20 @@ namespace Nest
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public GetSnapshotDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetSnapshotDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GetSnapshotDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetSnapshotDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetSnapshotDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetSnapshotDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetSnapshotDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4579,11 +5595,20 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetRepositoryDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetRepositoryDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GetRepositoryDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetRepositoryDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetRepositoryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetRepositoryDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetRepositoryDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4605,11 +5630,20 @@ namespace Nest
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public RestoreDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RestoreDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public RestoreDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RestoreDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public RestoreDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public RestoreDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RestoreDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4635,11 +5669,20 @@ namespace Nest
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public SnapshotStatusDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SnapshotStatusDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public SnapshotStatusDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SnapshotStatusDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SnapshotStatusDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SnapshotStatusDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SnapshotStatusDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4659,11 +5702,20 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public VerifyRepositoryDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public VerifyRepositoryDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public VerifyRepositoryDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public VerifyRepositoryDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public VerifyRepositoryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public VerifyRepositoryDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public VerifyRepositoryDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4700,11 +5752,20 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public SuggestDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public SuggestDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public SuggestDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public SuggestDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public SuggestDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SuggestDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public SuggestDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4732,11 +5793,20 @@ namespace Nest
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
 		public CancelTasksDescriptor ParentTask(string parent_task) => AssignParam(p=>p.ParentTask(parent_task));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CancelTasksDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public CancelTasksDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CancelTasksDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public CancelTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CancelTasksDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CancelTasksDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4755,11 +5825,20 @@ namespace Nest
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public GetTaskDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetTaskDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GetTaskDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetTaskDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetTaskDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetTaskDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetTaskDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4788,11 +5867,20 @@ namespace Nest
 		///<summary>Group tasks by nodes or parent/child relationships</summary>
 		public ListTasksDescriptor GroupBy(GroupBy group_by) => AssignParam(p=>p.GroupBy(group_by));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ListTasksDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ListTasksDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ListTasksDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ListTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ListTasksDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ListTasksDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4870,11 +5958,20 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public TermVectorsDescriptor<TDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public TermVectorsDescriptor<TDocument> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public TermVectorsDescriptor<TDocument> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public TermVectorsDescriptor<TDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public TermVectorsDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TermVectorsDescriptor<TDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public TermVectorsDescriptor<TDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4916,7 +6013,7 @@ namespace Nest
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> SourceEnabled(params string[] source_enabled) => AssignParam(p=>p.SourceEnabled(source_enabled));
 
-		///<summary>The script language (default: groovy)</summary>
+		///<summary>The script language (default: painless)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Lang(string lang) => AssignParam(p=>p.Lang(lang));
 
 		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
@@ -4946,11 +6043,20 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public UpdateDescriptor<TDocument, TPartialDocument> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public UpdateDescriptor<TDocument, TPartialDocument> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public UpdateDescriptor<TDocument, TPartialDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public UpdateDescriptor<TDocument, TPartialDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5091,13 +6197,22 @@ namespace Nest
 		public UpdateByQueryDescriptor<T> RequestsPerSecond(long requests_per_second) => AssignParam(p=>p.RequestsPerSecond(requests_per_second));
 
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
-		public UpdateByQueryDescriptor<T> Slices(int slices) => AssignParam(p=>p.Slices(slices));
+		public UpdateByQueryDescriptor<T> Slices(long slices) => AssignParam(p=>p.Slices(slices));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public UpdateByQueryDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public UpdateByQueryDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public UpdateByQueryDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public UpdateByQueryDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpdateByQueryDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public UpdateByQueryDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5136,11 +6251,20 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public GraphExploreDescriptor<T> Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GraphExploreDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GraphExploreDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GraphExploreDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GraphExploreDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GraphExploreDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GraphExploreDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5148,11 +6272,20 @@ namespace Nest
 	public partial class DeleteLicenseDescriptor  : RequestDescriptorBase<DeleteLicenseDescriptor,DeleteLicenseRequestParameters, IDeleteLicenseRequest>, IDeleteLicenseRequest
 	{ 
 			
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteLicenseDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteLicenseDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteLicenseDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteLicenseDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteLicenseDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteLicenseDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5163,11 +6296,20 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetLicenseDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetLicenseDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GetLicenseDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetLicenseDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetLicenseDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetLicenseDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetLicenseDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5178,11 +6320,20 @@ namespace Nest
 		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public PostLicenseDescriptor Acknowledge(bool acknowledge = true) => AssignParam(p=>p.Acknowledge(acknowledge));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PostLicenseDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public PostLicenseDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PostLicenseDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PostLicenseDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PostLicenseDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PostLicenseDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5190,11 +6341,20 @@ namespace Nest
 	public partial class AuthenticateDescriptor  : RequestDescriptorBase<AuthenticateDescriptor,AuthenticateRequestParameters, IAuthenticateRequest>, IAuthenticateRequest
 	{ 
 			
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public AuthenticateDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public AuthenticateDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public AuthenticateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public AuthenticateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public AuthenticateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public AuthenticateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5213,11 +6373,20 @@ namespace Nest
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public ChangePasswordDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ChangePasswordDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ChangePasswordDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ChangePasswordDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ChangePasswordDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ChangePasswordDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ChangePasswordDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5234,11 +6403,20 @@ namespace Nest
 		///<summary>Comma-separated list of usernames to clear from the cache</summary>
 		public ClearCachedRealmsDescriptor Usernames(params string[] usernames) => AssignParam(p=>p.Usernames(usernames));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClearCachedRealmsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ClearCachedRealmsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClearCachedRealmsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClearCachedRealmsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClearCachedRealmsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClearCachedRealmsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5252,11 +6430,20 @@ namespace Nest
 		
 
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ClearCachedRolesDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ClearCachedRolesDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ClearCachedRolesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ClearCachedRolesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClearCachedRolesDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ClearCachedRolesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5273,11 +6460,20 @@ namespace Nest
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DeleteRoleDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteRoleDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteRoleDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteRoleDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteRoleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteRoleDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteRoleDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5294,11 +6490,20 @@ namespace Nest
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DeleteUserDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteUserDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteUserDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteUserDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteUserDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteUserDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5317,11 +6522,20 @@ namespace Nest
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DisableUserDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DisableUserDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DisableUserDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DisableUserDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DisableUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DisableUserDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DisableUserDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5340,11 +6554,20 @@ namespace Nest
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public EnableUserDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public EnableUserDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public EnableUserDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public EnableUserDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public EnableUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public EnableUserDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public EnableUserDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5360,11 +6583,20 @@ namespace Nest
 		public GetRoleDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
 
 	
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetRoleDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GetRoleDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetRoleDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetRoleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetRoleDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetRoleDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5380,11 +6612,20 @@ namespace Nest
 		public GetUserDescriptor Username(Names username) => Assign(a=>a.RouteValues.Optional("username", username));
 
 	
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetUserDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GetUserDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetUserDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetUserDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetUserDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5401,11 +6642,20 @@ namespace Nest
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public PutRoleDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutRoleDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public PutRoleDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutRoleDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutRoleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutRoleDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutRoleDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5422,11 +6672,20 @@ namespace Nest
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public PutUserDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutUserDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public PutUserDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutUserDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutUserDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutUserDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5447,11 +6706,20 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public AcknowledgeWatchDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public AcknowledgeWatchDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public AcknowledgeWatchDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public AcknowledgeWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public AcknowledgeWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public AcknowledgeWatchDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public AcknowledgeWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5468,11 +6736,20 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public ActivateWatchDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ActivateWatchDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ActivateWatchDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ActivateWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ActivateWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ActivateWatchDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ActivateWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5489,11 +6766,20 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeactivateWatchDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeactivateWatchDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DeactivateWatchDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeactivateWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeactivateWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeactivateWatchDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeactivateWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5510,11 +6796,20 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeleteWatchDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteWatchDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteWatchDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public DeleteWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteWatchDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5533,11 +6828,20 @@ namespace Nest
 		///<summary>indicates whether the watch should execute in debug mode</summary>
 		public ExecuteWatchDescriptor Debug(bool debug = true) => AssignParam(p=>p.Debug(debug));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ExecuteWatchDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ExecuteWatchDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ExecuteWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public ExecuteWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ExecuteWatchDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ExecuteWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5551,11 +6855,20 @@ namespace Nest
 		
 
 		
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetWatchDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GetWatchDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public GetWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetWatchDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5575,11 +6888,20 @@ namespace Nest
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public PutWatchDescriptor Active(bool active = true) => AssignParam(p=>p.Active(active));
 
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutWatchDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public PutWatchDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public PutWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutWatchDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5587,11 +6909,20 @@ namespace Nest
 	public partial class RestartWatcherDescriptor  : RequestDescriptorBase<RestartWatcherDescriptor,RestartWatcherRequestParameters, IRestartWatcherRequest>, IRestartWatcherRequest
 	{ 
 			
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RestartWatcherDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public RestartWatcherDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RestartWatcherDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public RestartWatcherDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public RestartWatcherDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RestartWatcherDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5599,11 +6930,20 @@ namespace Nest
 	public partial class StartWatcherDescriptor  : RequestDescriptorBase<StartWatcherDescriptor,StartWatcherRequestParameters, IStartWatcherRequest>, IStartWatcherRequest
 	{ 
 			
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public StartWatcherDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public StartWatcherDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public StartWatcherDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public StartWatcherDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public StartWatcherDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public StartWatcherDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5619,11 +6959,20 @@ namespace Nest
 		public WatcherStatsDescriptor WatcherStatsMetric(WatcherStatsMetric watcherStatsMetric) => Assign(a=>a.RouteValues.Optional("watcher_stats_metric", (Metrics)watcherStatsMetric));
 
 	
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public WatcherStatsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public WatcherStatsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public WatcherStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public WatcherStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public WatcherStatsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public WatcherStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5631,11 +6980,20 @@ namespace Nest
 	public partial class StopWatcherDescriptor  : RequestDescriptorBase<StopWatcherDescriptor,StopWatcherRequestParameters, IStopWatcherRequest>, IStopWatcherRequest
 	{ 
 			
-		///<summary>The URL-encoded request definition</summary>
+		///<summary>Pretty format the returned JSON response.</summary>
+		public StopWatcherDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public StopWatcherDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public StopWatcherDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
 		public StopWatcherDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public StopWatcherDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public StopWatcherDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 }
