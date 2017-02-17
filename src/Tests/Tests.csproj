@@ -419,6 +419,7 @@
     <Compile Include="Framework\MockData\Tag.cs" />
     <Compile Include="Framework\VirtualClustering\MockResponses\SniffingResponse.cs" />
     <Compile Include="Framework\XUnitPlumbing\UnitTestDiscoverer.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\RoutingPartitionSizeIndexSettings.cs" />
     <Compile Include="Indices\AliasManagement\GetAliasesPointingToIndex\GetAliasesPointingToIndexTests.cs" />
     <Compile Include="Indices\AliasManagement\GetIndicesPointingToAlias\GetIndicesPointingToAliasTests.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexApiTests.cs" />

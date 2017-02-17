@@ -74,6 +74,7 @@ namespace Nest
 			d[UpdatableIndexSettings.SlowlogIndexingLevel] = indexing?.LogLevel;
 			d[UpdatableIndexSettings.SlowlogIndexingSource] = indexing?.Source;
 
+<<<<<<< HEAD
 			var indexSettings = value as IIndexSettings;
 			if (indexSettings != null)
 			{
@@ -82,7 +83,15 @@ namespace Nest
 			}
 			d["index.queries.cache.enabled"] = indexSettings?.Queries?.Cache?.Enabled;
 
+=======
+>>>>>>> d3cd40c... fix #2602 typed routing partition size on index settings (#2623)
 			d[UpdatableIndexSettings.Analysis] = ds.Analysis;
+
+			var indexSettings = value as IIndexSettings;
+            d[FixedIndexSettings.NumberOfShards] = indexSettings?.NumberOfShards;
+            d[FixedIndexSettings.RoutingPartitionSize] = indexSettings?.RoutingPartitionSize;
+            d[UpdatableIndexSettings.StoreType] = indexSettings?.FileSystemStorageImplementation;
+            d[UpdatableIndexSettings.QueriesCacheEnabled] = indexSettings?.Queries?.Cache?.Enabled;
 
 			base.WriteJson(writer, d, serializer);
 		}
@@ -182,13 +191,13 @@ namespace Nest
 				v => indexing.ThresholdTrace = v);
 			Set<LogLevel?>(s, settings, UpdatableIndexSettings.SlowlogIndexingLevel, v => indexing.LogLevel = v);
 			Set<int?>(s, settings, UpdatableIndexSettings.SlowlogIndexingSource, v => indexing.Source = v);
-			Set<int?>(s, settings, "index.number_of_shards", v => s.NumberOfShards = v);
-			Set<FileSystemStorageImplementation?>(s, settings, UpdatableIndexSettings.StoreType, v => s.FileSystemStorageImplementation = v,
-				serializer);
+			Set<int?>(s, settings, FixedIndexSettings.NumberOfShards, v => s.NumberOfShards = v);
+			Set<int?>(s, settings, FixedIndexSettings.RoutingPartitionSize, v => s.RoutingPartitionSize = v);
+			Set<FileSystemStorageImplementation?>(s, settings, UpdatableIndexSettings.StoreType, v => s.FileSystemStorageImplementation = v, serializer);
 
 			var queries = s.Queries = new QueriesSettings();
 			var queriesCache = s.Queries.Cache = new QueriesCacheSettings();
-			Set<bool?>(s, settings, "index.queries.cache.enabled", v => queriesCache.Enabled = v);
+			Set<bool?>(s, settings, UpdatableIndexSettings.QueriesCacheEnabled, v => queriesCache.Enabled = v);
 
 			IDictionary<string,object> dict = s;
 			foreach (var kv in settings)
