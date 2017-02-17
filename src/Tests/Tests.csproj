@@ -722,6 +722,7 @@
     <Compile Include="Search\Scroll\Scroll\SlicedScrollSearchApiTests.cs" />
     <Compile Include="Search\Search\InvalidSearchApiTests.cs" />
     <Compile Include="Search\Search\Rescoring\RescoreUsageTests.cs" />
+    <Compile Include="Search\Search\SearchProfileApiTests.cs" />
     <Compile Include="Search\Search\SearchProfileTests.cs" />
     <Compile Include="Search\Suggesters\SuggestUrlTests.cs" />
     <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsApiTests.cs" />

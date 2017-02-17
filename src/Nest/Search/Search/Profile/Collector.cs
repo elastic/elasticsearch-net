@@ -14,7 +14,10 @@ namespace Nest
 		[JsonProperty("time")]
 		public Time Time { get; internal set; }
 
-		[JsonProperty("children")]
+		[JsonProperty("time_in_nanos")]
+		public long TimeInNanoseconds { get; internal set; }
+
+	[JsonProperty("children")]
 		public IReadOnlyCollection<Collector> Children { get; internal set; } =
 			EmptyReadOnly<Collector>.Collection;
 
