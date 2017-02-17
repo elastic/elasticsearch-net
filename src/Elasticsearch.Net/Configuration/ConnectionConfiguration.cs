@@ -143,6 +143,15 @@ namespace Elasticsearch.Net
 		private Action<RequestData> _onRequestDataCreated = DefaultRequestDataCreated;
 		Action<RequestData> IConnectionConfigurationValues.OnRequestDataCreated => _onRequestDataCreated;
 
+		/// <summary>
+		/// The default predicate for <see cref="IConnectionPool"/> implementations that return true for <see cref="IConnectionPool.SupportsReseeding"/>
+		/// in which case master only nodes are excluded from API calls.
+		/// </summary>
+		private static bool DefaultReseedableNodePredicate(Node node) => !node.MasterOnlyNode;
+		private static bool DefaultNodePredicate(Node node) => true;
+		private Func<Node, bool> _nodePredicate = DefaultNodePredicate;
+		Func<Node, bool> IConnectionConfigurationValues.NodePredicate => _nodePredicate;
+
 		private readonly NameValueCollection _queryString = new NameValueCollection();
 		NameValueCollection IConnectionConfigurationValues.QueryStringParameters => _queryString;
 
@@ -176,6 +185,8 @@ namespace Elasticsearch.Net
 			this._sniffOnConnectionFault = true;
 			this._sniffOnStartup = true;
 			this._sniffLifeSpan = TimeSpan.FromHours(1);
+			if (this._connectionPool.SupportsReseeding)
+				this._nodePredicate = DefaultReseedableNodePredicate;
 		}
 
 		private T Assign(Action<ConnectionConfiguration<T>> assigner) => Fluent.Assign((T)this, assigner);
@@ -362,6 +373,19 @@ namespace Elasticsearch.Net
 		/// <para>Note: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
 		/// </summary>
 		public T EnableHttpPipelining(bool enabled = true) => Assign(a => a._enableHttpPipelining = enabled);
+
+		/// <summary>
+		/// Register a predicate to select which nodes that you want to execute API calls on. Note that sniffing requests omit this predicate and always execute on all nodes.
+		/// When using an <see cref="IConnectionPool"/> implementation that supports reseeding of nodes, this will default to omitting master only node from regular API calls.
+		/// When using static or single node connection pooling it is assumed the list of node you instantiate the client with should be taken verbatim.
+		/// </summary>
+		/// <param name="predicate">Return true if you want the node to be used for API calls</param>
+		public T NodePredicate(Func<Node, bool> predicate)
+		{
+			if (predicate == null) return (T) this;
+			this._nodePredicate = predicate;
+			return (T)this;
+		}
 
 		/// <summary>
 		/// Turns on settings that aid in debugging like DisableDirectStreaming() and PrettyJson()

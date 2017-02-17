@@ -5,21 +5,31 @@ namespace Elasticsearch.Net
 {
 	public class SingleNodeConnectionPool : IConnectionPool
 	{
+		/// <inheritdoc/>
 		public int MaxRetries => 0;
 
+		/// <inheritdoc/>
 		public bool SupportsReseeding => false;
+
+		/// <inheritdoc/>
 		public bool SupportsPinging => false;
 
+		/// <inheritdoc/>
 		public void Reseed(IEnumerable<Node> nodes) { } //ignored
-		
+
+		/// <inheritdoc/>
 		public bool UsingSsl { get; }
 
+		/// <inheritdoc/>
 		public bool SniffedOnStartup { get { return true; } set {  } }
 
+		/// <inheritdoc/>
 		public IReadOnlyCollection<Node> Nodes { get; }
 
+		/// <inheritdoc/>
 		public DateTime LastUpdate { get; }
 
+		/// <inheritdoc/>
 		public SingleNodeConnectionPool(Uri uri, IDateTimeProvider dateTimeProvider = null)
 		{
 			var node = new Node(uri);
@@ -28,6 +38,7 @@ namespace Elasticsearch.Net
 			this.LastUpdate = (dateTimeProvider ?? DateTimeProvider.Default).Now();
 		}
 
+		/// <inheritdoc/>
 		public IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null) => this.Nodes;
 
 		void IDisposable.Dispose() => this.DisposeManagedResources();

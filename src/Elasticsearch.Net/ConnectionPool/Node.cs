@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Purify;
 
 namespace Elasticsearch.Net
@@ -32,11 +34,21 @@ namespace Elasticsearch.Net
 		/// <summary>Indicates whether this node is master eligible, defaults to true when unknown/unspecified</summary>
 		public bool MasterEligible { get; set; }
 
+		/// <summary>Indicates whether this node is allowed to run ingest pipelines, defaults to true when unknown/unspecified</summary>
+		public bool IngestEnabled { get; set; }
+
+		public bool MasterOnlyNode => this.MasterEligible && !this.HoldsData;
+
+		public bool ClientNode => !this.MasterEligible && !this.HoldsData;
+
 		/// <summary>The id of the node, defaults to null when unknown/unspecified</summary>
 		public string Id { get; set; }
 
 		/// <summary>The name of the node, defaults to null when unknown/unspecified</summary>
 		public string Name { get; set; }
+
+		private static readonly IReadOnlyDictionary<string, string> EmptySettings = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>());
+		public IReadOnlyDictionary<string, string> Settings { get; set; } = EmptySettings;
 
 		/// <summary> The number of failed attempts trying to use this node, resets when a node is marked alive</summary>
 		public int FailedAttempts { get; private set; }
@@ -74,15 +86,17 @@ namespace Elasticsearch.Net
 				MasterEligible = this.MasterEligible,
 				FailedAttempts = this.FailedAttempts,
 				DeadUntil = this.DeadUntil,
-				IsAlive = this.IsAlive
+				IsAlive = this.IsAlive,
+				Settings = this.Settings,
+				IngestEnabled = this.IngestEnabled,
+				HttpEnabled = this.HttpEnabled
 			};
 
 
-		// ReSharper disable once PossibleNullReferenceException
-		public static bool operator ==(Node left, Node right) => left.Equals(right);
+		public static bool operator ==(Node left, Node right) =>
+			ReferenceEquals(left, null) ? ReferenceEquals(right, null) : left.Equals(right);
 
-		// ReSharper disable once PossibleNullReferenceException
-		public static bool operator !=(Node left, Node right) => !left.Equals(right);
+		public static bool operator !=(Node left, Node right) => !(left == right);
 
 		public static implicit operator Node(Uri uri) => new Node(uri);
 

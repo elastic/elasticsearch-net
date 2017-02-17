@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -46,13 +47,14 @@ namespace Elasticsearch.Net
 				var uri = SniffParser.ParseToUri(httpEndpoint, forceHttp);
 				var node = new Node(uri)
 				{
-					Name = kv.Value.name,
+					Name = info.name,
 					Id = kv.Key,
-					MasterEligible = kv.Value.MasterEligible,
-					HoldsData = kv.Value.HoldsData,
-					HttpEnabled = kv.Value.HttpEnabled
+					MasterEligible = info.MasterEligible,
+					HoldsData = info.HoldsData,
+					IngestEnabled = info.IngestEnabled,
+					HttpEnabled = info.HttpEnabled,
+					Settings = new ReadOnlyDictionary<string, string>(info.settings)
 				};
-				//TODO selector
 				yield return node;
 			}
 		}
@@ -72,6 +74,7 @@ namespace Elasticsearch.Net
 
 		internal bool MasterEligible => this.roles?.Contains("master") ?? false;
 		internal bool HoldsData => this.roles?.Contains("data") ?? false;
+		internal bool IngestEnabled => this.roles?.Contains("ingest") ?? false;
 		internal bool HttpEnabled
 		{
 			get

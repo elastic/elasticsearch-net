@@ -171,5 +171,12 @@ namespace Elasticsearch.Net
 		/// received.
 		/// </summary>
 		TimeSpan? KeepAliveInterval { get; }
+
+		/// <summary>
+		/// Register a predicate to select which nodes that you want to execute API calls on. Note that sniffing requests omit this predicate and always execute on all nodes.
+		/// When using an <see cref="IConnectionPool"/> implementation that supports reseeding of nodes, this will default to omitting master only node from regular API calls.
+		/// When using static or single node connection pooling it is assumed the list of node you instantiate the client with should be taken verbatim.
+		/// </summary>
+		Func<Node, bool> NodePredicate { get; }
 	}
 }
