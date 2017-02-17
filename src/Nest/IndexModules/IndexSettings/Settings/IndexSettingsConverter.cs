@@ -74,17 +74,6 @@ namespace Nest
 			d[UpdatableIndexSettings.SlowlogIndexingLevel] = indexing?.LogLevel;
 			d[UpdatableIndexSettings.SlowlogIndexingSource] = indexing?.Source;
 
-<<<<<<< HEAD
-			var indexSettings = value as IIndexSettings;
-			if (indexSettings != null)
-			{
-				d["index.number_of_shards"] = indexSettings?.NumberOfShards;
-				d[UpdatableIndexSettings.StoreType] = indexSettings?.FileSystemStorageImplementation;
-			}
-			d["index.queries.cache.enabled"] = indexSettings?.Queries?.Cache?.Enabled;
-
-=======
->>>>>>> d3cd40c... fix #2602 typed routing partition size on index settings (#2623)
 			d[UpdatableIndexSettings.Analysis] = ds.Analysis;
 
 			var indexSettings = value as IIndexSettings;
