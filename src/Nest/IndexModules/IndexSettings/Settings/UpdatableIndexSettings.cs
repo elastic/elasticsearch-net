@@ -1,5 +1,8 @@
 namespace Nest
 {
+	/// <summary>
+	/// const string collection of Elasticsearch index settings that can be updated on the fly
+	/// </summary>
 	public static class UpdatableIndexSettings
 	{
 		public const string NumberOfReplicas = "index.number_of_replicas";
@@ -22,9 +25,9 @@ namespace Nest
 		public const string RoutingAllocationExclude = "index.routing.allocation.exclude";
 		public const string RoutingAllocationRequire = "index.routing.allocation.require";
 		public const string RoutingAllocationEnable = "index.routing.allocation.enable";
-		public const string RoutingAllocationDisableAllication = "index.routing.allocation.disable_allocation";//
-		public const string RoutingAllocationDisableNewAllocation = "index.routing.allocation.disable_new_allocation";//
-		public const string RoutingAllocationDisableReplicaAllocation = "index.routing.allocation.disable_replica_allocation";//
+		public const string RoutingAllocationDisableAllication = "index.routing.allocation.disable_allocation";
+		public const string RoutingAllocationDisableNewAllocation = "index.routing.allocation.disable_new_allocation";
+		public const string RoutingAllocationDisableReplicaAllocation = "index.routing.allocation.disable_replica_allocation";
 		public const string RoutingAllocationTotalShardsPerNode = "index.routing.allocation.total_shards_per_node";
 
 		public const string RecoveryInitialShards = "index.recovery.initial_shards";
@@ -68,5 +71,7 @@ namespace Nest
 		public const string SlowlogIndexingSource = "index.indexing.slowlog.source";
 
 		public const string StoreType = "index.store.type";
+
+		public const string QueriesCacheEnabled = "index.queries.cache.enabled";
 	}
 }
