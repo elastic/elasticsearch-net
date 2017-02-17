@@ -10,6 +10,7 @@
 		MaxTimeoutReached,
 		MaxRetriesReached,
 		Unexpected,
-		BadRequest
+		BadRequest,
+		NoNodesAttempted
 	}
 }

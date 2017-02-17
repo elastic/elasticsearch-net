@@ -44,8 +44,9 @@ namespace Elasticsearch.Net
 				{
 					failureReason = "Unrecoverable/Unexpected " + this.AuditTrail.Last().Event.GetStringValue();
 				}
+				var path = Request.Uri != null ? Request.Uri.ToString() : Request.Path + " on an empty node, likely a node predicate on ConnectionSettings not matching ANY nodes";
 
-				sb.AppendLine($"# FailureReason: {failureReason} while attempting {Request.Method.GetStringValue()} {Request.Uri}");
+				sb.AppendLine($"# FailureReason: {failureReason} while attempting {Request.Method.GetStringValue()} on {path}");
 				if (this.Response != null)
 					ResponseStatics.DebugInformationBuilder(this.Response, sb);
 				else
