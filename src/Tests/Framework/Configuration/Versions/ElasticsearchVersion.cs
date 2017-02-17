@@ -95,5 +95,7 @@ namespace Tests.Framework.Versions
 		/// Whether this version is a snapshot or officicially released distribution
 		/// </summary>
 		public bool IsSnapshot => this.Version?.ToLower().Contains("snapshot") ?? false;
+
+		public override string ToString() => this.Version;
 	}
 }

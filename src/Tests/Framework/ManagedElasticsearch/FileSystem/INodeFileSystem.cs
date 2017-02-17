@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Tests.Framework.Integration
 {
-	public interface INodeFileSystem : IDisposable
+	public interface INodeFileSystem
 	{
 		/// <summary>
 		/// The path to elasticsearch.bat
@@ -26,10 +26,9 @@ namespace Tests.Framework.Integration
 		string LogsPath { get; }
 		string RepositoryPath { get; }
 
-		/// <summary>
-		/// Called by ElasticsearchNode just before a node is started
-		/// </summary>
-		/// <param name="settings">The settings the node wants to start with</param>
-		void BeforeStart(IEnumerable<string> settings);
+		string RoamingFolder { get; }
+		string DownloadZipLocation { get; }
+		string AnalysisFolder { get; }
+
 	}
 }

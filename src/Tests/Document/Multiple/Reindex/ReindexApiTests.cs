@@ -14,7 +14,7 @@ namespace Tests.Document.Multiple.Reindex
 {
 	public class ReindexCluster : ClusterBase
 	{
-		public override void Bootstrap()
+		protected override void AfterNodeStarts()
 		{
 			var seeder = new Seeder(this.Node);
 			seeder.DeleteIndicesAndTemplates();
@@ -24,7 +24,7 @@ namespace Tests.Document.Multiple.Reindex
 
 	public class ManualReindexCluster : ClusterBase
 	{
-		public override void Bootstrap()
+		protected override void AfterNodeStarts()
 		{
 			var seeder = new Seeder(this.Node);
 			seeder.DeleteIndicesAndTemplates();

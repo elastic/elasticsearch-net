@@ -2,7 +2,5 @@
 
 namespace Tests.Framework.EndpointTests.Clusters
 {
-	public class BenchmarkCluster : ClusterBase
-	{
-	}
+	public class BenchmarkCluster : ClusterBase { }
 }

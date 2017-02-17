@@ -38,7 +38,7 @@ namespace Tests.QueryDsl.BoolDsl
 			public static IList<A> Documents => Enumerable.Range(0, 20).Select(i => new A { Id = i + 1, Option = Options[i % 2] }).ToList();
 		}
 
-		public override void Bootstrap()
+		protected override void AfterNodeStarts()
 		{
 			var client = this.Node.Client;
 			var index = client.CreateIndex(Index<A>(), i => i

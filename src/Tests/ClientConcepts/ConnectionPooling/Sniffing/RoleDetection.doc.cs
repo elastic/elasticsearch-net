@@ -299,7 +299,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 
 	public class SniffRoleDetectionCluster : ClusterBase
 	{
-		protected override string[] ServerSettings
+		protected override string[] AdditionalServerSettings
 		{
 			get
 			{

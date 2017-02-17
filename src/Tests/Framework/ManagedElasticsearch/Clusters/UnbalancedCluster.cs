@@ -5,7 +5,7 @@ namespace Tests.Framework.Integration
 {
 	public class UnbalancedCluster : ReadOnlyCluster
 	{
-		public override void Bootstrap() =>
+		protected override void AfterNodeStarts() =>
 			new Seeder(this.Node, new IndexSettings { NumberOfShards = 3, NumberOfReplicas = 2 }).SeedNode();
 	}
 }

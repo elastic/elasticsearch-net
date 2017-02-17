@@ -4,7 +4,7 @@ namespace Tests.Framework.Profiling
 {
 	public class ProfilingCluster : ClusterBase
 	{
-		public override void Bootstrap()
+		protected override void AfterNodeStarts()
 		{
 			var seeder = new Seeder(this.Node);
 			seeder.DeleteIndicesAndTemplates();

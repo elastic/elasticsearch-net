@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using FluentAssertions;
 using Nest;
+using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 

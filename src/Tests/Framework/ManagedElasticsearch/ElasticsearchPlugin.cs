@@ -23,32 +23,15 @@ namespace Tests.Framework.Integration
 
 	public enum ElasticsearchPlugin
 	{
-		[Moniker("delete-by-query")]
-		DeleteByQuery,
-
-		[Moniker("cloud-azure")]
-		CloudAzure,
-
-		[Moniker("mapper-attachments")]
-		MapperAttachments,
-
-		[Moniker("mapper-murmur3")]
-		MapperMurmer3,
-
-		[Moniker("x-pack")]
-		XPack,
-
-		[Moniker("ingest-geoip")]
-		IngestGeoIp,
-
-		[Moniker("ingest-attachment")]
-		IngestAttachment,
-
-		[Moniker("analysis-kuromoji")]
-		AnalysisKuromoji,
-
-		[Moniker("analysis-icu")]
-		AnalysisIcu
+		[Moniker("delete-by-query")] DeleteByQuery,
+		[Moniker("cloud-azure")] CloudAzure,
+		[Moniker("mapper-attachments")] MapperAttachments,
+		[Moniker("mapper-murmur3")] MapperMurmer3,
+		[Moniker("x-pack")] XPack,
+		[Moniker("ingest-geoip")] IngestGeoIp,
+		[Moniker("ingest-attachment")] IngestAttachment,
+		[Moniker("analysis-kuromoji")] AnalysisKuromoji,
+		[Moniker("analysis-icu")] AnalysisIcu
 	}
 
 	public static class ElasticsearchPluginExtensions
@@ -86,8 +69,6 @@ namespace Tests.Framework.Integration
 
 	public class ElasticsearchPluginConfiguration
 	{
-
-
 		private readonly Func<ElasticsearchVersion, bool> _isValid;
 
 		public ElasticsearchPlugin Plugin { get; }
@@ -101,7 +82,6 @@ namespace Tests.Framework.Integration
 		/// The folder name under /plugins, defaults to moniker
 		/// </summary>
 		public string FolderName { get; internal set; }
-
 
 		public ElasticsearchPluginConfiguration(ElasticsearchPlugin plugin) : this(plugin, null) { }
 

@@ -16,7 +16,7 @@ namespace Tests.Framework.Integration
 	{
 		public override int MaxConcurrency => 4;
 
-		public override void Bootstrap()
+		protected override void AfterNodeStarts()
 		{
 			var seeder = new Seeder(this.Node);
 			seeder.SeedNode();
