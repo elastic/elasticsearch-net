@@ -129,6 +129,7 @@ namespace Xunit
 #else
 				typeof(ClusterBase).Assembly
 #endif
+#endif
 				.GetTypes()
 				.Where(t => typeof(ClusterBase).IsAssignableFrom(t) && t != typeof(ClusterBase))
 				.Select(c => c.Name.Replace("Cluster", "").ToLowerInvariant());

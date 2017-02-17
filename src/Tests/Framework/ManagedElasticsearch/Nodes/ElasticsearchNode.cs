@@ -57,7 +57,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 					if (this._client != null) return this._client;
 
 					var port = this.Started ? this.Port : 9200;
-					this._client = TestClient.GetClient(ComposeSettings, port);
+					this._client = TestClient.GetClient(ComposeSettings, port, forceSsl: this._config.EnableSsl);
 					return this.Client;
 				}
 			}
@@ -133,21 +133,22 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 		}
 
 		private ConnectionSettings ClusterSettings(ConnectionSettings s, Func<ConnectionSettings, ConnectionSettings> settings) =>
-			AddBasicAuthentication(AppendClusterNameToHttpHeaders(settings(s)));
+			AddClusterSpecificConnectionSettings(AppendClusterNameToHttpHeaders(settings(s)));
 
 		private IElasticClient GetPrivateClient(Func<ConnectionSettings, ConnectionSettings> settings, bool forceInMemory, int port)
 		{
 			settings = settings ?? (s => s);
 			var client = forceInMemory
 				? TestClient.GetInMemoryClient(s => ClusterSettings(s, settings), port)
-				: TestClient.GetClient(s => ClusterSettings(s, settings), port);
+				: TestClient.GetClient(s => ClusterSettings(s, settings), port, forceSsl: this._config.EnableSsl);
 			return client;
 		}
 
-		private ConnectionSettings ComposeSettings(ConnectionSettings s) => AddBasicAuthentication(AppendClusterNameToHttpHeaders(s));
+		private ConnectionSettings ComposeSettings(ConnectionSettings s) =>
+			AddClusterSpecificConnectionSettings(AppendClusterNameToHttpHeaders(s));
 
-		private ConnectionSettings AddBasicAuthentication(ConnectionSettings settings) =>
-			!this._config.XPackEnabled ? settings : settings.BasicAuthentication("es_admin", "es_admin");
+		private ConnectionSettings AddClusterSpecificConnectionSettings(ConnectionSettings settings) =>
+			this._config.ClusterConnectionSettings(settings);
 
 		private ConnectionSettings AppendClusterNameToHttpHeaders(ConnectionSettings settings)
 		{

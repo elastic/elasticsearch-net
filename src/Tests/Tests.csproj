@@ -231,6 +231,8 @@
     <Compile Include="Cat\CatTemplates\CatTemplatesUrlTests.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadpoolApiTests.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadPoolUrlTests.cs" />
+    <Compile Include="ClientConcepts\Certificates\SslAndKpiXPackCluster.cs" />
+    <Compile Include="ClientConcepts\Certificates\WorkingWithCertificates.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Dispose\ResponseBuilderDisposeTests.cs" />
     <Compile Include="ClientConcepts\Connection\CustomConnections.cs" />
     <Compile Include="ClientConcepts\Connection\HttpConnectionTests.cs" />
@@ -261,8 +263,11 @@
     <Compile Include="Document\Single\Update\UpdateWithScriptApiTests.cs" />
     <Compile Include="Framework\Benchmarks\BenchmarkConfig.cs" />
     <Compile Include="Framework\Benchmarks\BenchmarkTest.cs" />
+    <Compile Include="Framework\EndpointTests\ApiIntegrationAgainstNewIndexTestBase.cs" />
     <Compile Include="Framework\EndpointTests\ApiIntegrationTestBase.cs" />
     <Compile Include="Framework\EndpointTests\ApiTestBase.cs" />
+    <Compile Include="Framework\EndpointTests\CanConnectTestBase.cs" />
+    <Compile Include="Framework\EndpointTests\ConnectionErrorTestBase.cs" />
     <Compile Include="Framework\EndpointTests\TestState\AsyncLazy.cs" />
     <Compile Include="Framework\Extensions\EnumerableExtensions.cs" />
     <Compile Include="Framework\Extensions\ReadOnlyDictionaryAssertions.cs" />
@@ -290,6 +295,7 @@
     <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\CreateNestApplicationDirectory.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\DownloadCurrentElasticsearchDistribution.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\EnsureJavaHomeEnvironmentVariableIsSet.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\EnsureSecurityRealms.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\EnsureSecurityRolesFileExists.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\EnsureSecurityUsersInDefaultRealmAreAdded.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\EnsureWatcherActionConfigurationInElasticsearchYaml.cs" />
@@ -842,6 +848,7 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App.config" />
     <Content Include="ClientConcepts\ConnectionPooling\BuildingBlocks\timeoutplot.png" />
     <Content Include="ClientConcepts\LowLevel\class.png" />
     <Content Include="ClientConcepts\LowLevel\pipeline.png" />

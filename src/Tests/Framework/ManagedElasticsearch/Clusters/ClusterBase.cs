@@ -25,15 +25,26 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 		public virtual int MaxConcurrency => 0;
 		protected virtual string[] AdditionalServerSettings { get; } = { };
 		protected virtual InstallationTaskBase[] AdditionalInstallationTasks { get; } = { };
+
+		public virtual bool EnableSsl { get; }
+		public virtual bool SkipValidation { get; }
+
+		public virtual int DesiredPort { get; } = 9200;
+
+		public virtual ConnectionSettings ClusterConnectionSettings(ConnectionSettings s) => s;
+
 		protected virtual void SeedNode() { }
 
 		public void Start()
 		{
-			this.TaskRunner.Install();
+			this.TaskRunner.Install(this.AdditionalInstallationTasks);
 			var nodeSettings = this.NodeConfiguration.CreateSettings(this.AdditionalServerSettings);
 			this.TaskRunner.OnBeforeStart(nodeSettings);
 			this.Node.Start(nodeSettings);
-			this.TaskRunner.ValidateAfterStart(this.Node.Client);
+			if (!this.SkipValidation)
+				this.TaskRunner.ValidateAfterStart(this.Node.Client);
+			if (this.Node.Port != this.DesiredPort)
+				throw new Exception($"The cluster that was started runs on {this.Node.Port} but this cluster wants {this.DesiredPort}");
 			this.SeedNode();
 		}
 

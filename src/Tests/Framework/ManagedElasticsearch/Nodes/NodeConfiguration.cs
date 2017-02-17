@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Nest;
 using Tests.Framework.Configuration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.ManagedElasticsearch.Plugins;
@@ -20,10 +21,13 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 		public string ClusterFilter { get; }
 		public string TestFilter { get; }
 		public NodeFileSystem FileSystem { get; }
+		public int DesiredPort { get; }
 
 		public ElasticsearchPlugin[] RequiredPlugins { get; } = { };
 
 		public bool XPackEnabled => this.RequiredPlugins.Contains(ElasticsearchPlugin.XPack);
+		public bool EnableSsl { get; }
+		public ConnectionSettings ClusterConnectionSettings(ConnectionSettings s) => _cluster.ClusterConnectionSettings(s);
 
 		private readonly string _uniqueSuffix = Guid.NewGuid().ToString("N").Substring(0, 6);
 		public string ClusterMoniker => this._cluster.GetType().Name.Replace("Cluster", "").ToLowerInvariant();
@@ -35,6 +39,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 		public NodeConfiguration(ITestConfiguration configuration, ClusterBase cluster)
 		{
 			this._cluster = cluster;
+			this.EnableSsl = cluster.SkipValidation;
 
 			this.RequiredPlugins = ClusterRequiredPlugins(cluster);
 			this.Mode = configuration.Mode;
@@ -48,23 +53,28 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 			this.ClusterFilter = configuration.ClusterFilter;
 			this.TestFilter = configuration.TestFilter;
 			this.FileSystem = new NodeFileSystem(configuration.ElasticsearchVersion, this.ClusterName, this.NodeName);
+			this.DesiredPort = cluster.DesiredPort;
 
 			var attr = v.Major >= 5 ? "attr." : "";
 			var indexedOrStored = v > new ElasticsearchVersion("5.0.0-alpha1") ? "stored" : "indexed";
 			var shieldOrSecurity = v > new ElasticsearchVersion("5.0.0-alpha1") ? "xpack.security" : "shield";
 			var es = v > new ElasticsearchVersion("5.0.0-alpha2") ? "" : "es.";
 			var b = this.XPackEnabled.ToString().ToLowerInvariant();
+			var sslEnabled = this.EnableSsl.ToString().ToLowerInvariant();
 			this.DefaultNodeSettings = new List<string>
 			{
 				$"{es}cluster.name={this.ClusterName}",
 				$"{es}node.name={this.NodeName}",
 				$"{es}path.repo={this.FileSystem.RepositoryPath}",
 				$"{es}path.data={this.FileSystem.DataPath}",
+				$"{es}http.port={this.DesiredPort}",
 				$"{es}script.inline=true",
 				$"{es}script.max_compilations_per_minute=10000",
 				$"{es}script.{indexedOrStored}=true",
 				$"{es}node.{attr}testingcluster=true",
-				$"{es}{shieldOrSecurity}.enabled={b}"
+				$"{es}{shieldOrSecurity}.enabled={b}",
+				$"{es}{shieldOrSecurity}.http.ssl.enabled={sslEnabled}",
+				$"{es}{shieldOrSecurity}.authc.realms.pki1.enabled={sslEnabled}",
 			};
 		}
 
