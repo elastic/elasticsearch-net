@@ -1110,11 +1110,9 @@
     <Compile Include="QueryDsl\Geo\BoundingBox\BoundingBox.cs" />
     <Compile Include="QueryDsl\Geo\BoundingBox\GeoBoundingBoxQuery.cs" />
     <Compile Include="QueryDsl\Geo\BoundingBox\GeoExecution.cs" />
-    <Compile Include="QueryDsl\Geo\DistanceRange\GeoDistanceRangeQuery.cs" />
     <Compile Include="QueryDsl\Geo\Distance\GeoDistanceQuery.cs" />
     <Compile Include="QueryDsl\Geo\GeoCoordinateJsonConverter.cs" />
     <Compile Include="QueryDsl\Geo\GeoLocation.cs" />
-    <Compile Include="QueryDsl\Geo\GeoOptimizeBBox.cs" />
     <Compile Include="QueryDsl\Geo\GeoValidationMethod.cs" />
     <Compile Include="QueryDsl\Geo\HashCell\GeoHashCellQuery.cs" />
     <Compile Include="QueryDsl\Geo\LatLon.cs" />
