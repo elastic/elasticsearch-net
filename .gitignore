@@ -64,6 +64,7 @@ doc/Help
 *.ncrunchproject
 Cache
 YamlCache
+tests.yaml
 
 *.DS_Store
 *.sln.ide
