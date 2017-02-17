@@ -11,11 +11,16 @@ namespace Tests.Framework
 	public class Auditor
 	{
 		public Func<VirtualizedCluster> Cluster { get; set; }
+		public Action<IConnectionPool> AssertPoolBeforeStartup { get; set; }
+		public Action<IConnectionPool> AssertPoolAfterStartup { get; set; }
+
 		public Action<IConnectionPool> AssertPoolBeforeCall { get; set; }
 		public Action<IConnectionPool> AssertPoolAfterCall { get; set; }
 
 		private VirtualizedCluster _cluster;
 		private VirtualizedCluster _clusterAsync;
+
+		private bool StartedUp { get; }
 
 		public Auditor(Func<VirtualizedCluster> setup) {
 			this.Cluster = setup;
@@ -24,6 +29,7 @@ namespace Tests.Framework
 		{
 			_cluster = cluster;
 			_clusterAsync = clusterAsync;
+			this.StartedUp = true;
 		}
 
 		public IResponse Response { get; internal set; }
@@ -31,6 +37,7 @@ namespace Tests.Framework
 
 		public List<Audit> AsyncAuditTrail { get; set; }
 		public List<Audit> AuditTrail { get; set; }
+
 
 		public void ChangeTime(Func<DateTime, DateTime> selector)
 		{
@@ -44,32 +51,38 @@ namespace Tests.Framework
 		public async Task<Auditor> TraceStartup(ClientCall callTrace = null)
 		{
 			this._cluster  = _cluster ?? this.Cluster();
+			if (!this.StartedUp) this.AssertPoolBeforeStartup?.Invoke(this._cluster.ConnectionPool);
 			this.AssertPoolBeforeCall?.Invoke(this._cluster.ConnectionPool);
 			this.Response = this._cluster.ClientCall(callTrace?.RequestOverrides);
 			this.AuditTrail = this.Response.ApiCall.AuditTrail;
+			if (!this.StartedUp) this.AssertPoolAfterStartup?.Invoke(this._cluster.ConnectionPool);
 			this.AssertPoolAfterCall?.Invoke(this._cluster.ConnectionPool);
 
 			this._clusterAsync = _clusterAsync ?? this.Cluster();
+			if (!this.StartedUp) this.AssertPoolBeforeStartup?.Invoke(this._clusterAsync.ConnectionPool);
+			this.AssertPoolBeforeCall?.Invoke(this._clusterAsync.ConnectionPool);
 			this.ResponseAsync = await this._clusterAsync.ClientCallAsync(callTrace?.RequestOverrides);
 			this.AsyncAuditTrail = this.ResponseAsync.ApiCall.AuditTrail;
+			if (!this.StartedUp) this.AssertPoolAfterStartup?.Invoke(this._clusterAsync.ConnectionPool);
 			this.AssertPoolAfterCall?.Invoke(this._clusterAsync.ConnectionPool);
 			return new Auditor(_cluster, _clusterAsync);
 		}
 
 		public async Task<Auditor> TraceCall(ClientCall callTrace, int nthCall = 0)
 		{
-			await this.TraceStartup(callTrace);
+			 await this.TraceStartup(callTrace);
 			return AssertAuditTrails(callTrace, nthCall);
 		}
 
-		public async Task<Auditor> TraceElasticsearchException(ClientCall callTrace, Action<ElasticsearchClientException> assert)
+		private async Task TraceException<TException>(ClientCall callTrace, Action<TException> assert)
+			where TException : ElasticsearchClientException
 		{
 			this._cluster  = _cluster ?? this.Cluster();
 			this._cluster.ClientThrows(true);
 			this.AssertPoolBeforeCall?.Invoke(this._cluster.ConnectionPool);
 
 			Action call = () => this._cluster.ClientCall(callTrace?.RequestOverrides);
-			var exception = call.ShouldThrowExactly<ElasticsearchClientException>()
+			var exception = call.ShouldThrowExactly<TException>()
 				.Subject.First();
 			assert(exception);
 
@@ -79,14 +92,24 @@ namespace Tests.Framework
 			this._clusterAsync = _clusterAsync ?? this.Cluster();
 			this._clusterAsync.ClientThrows(true);
 			Func<Task> callAsync = async () => await this._clusterAsync.ClientCallAsync(callTrace?.RequestOverrides);
-			exception = callAsync.ShouldThrowExactly<ElasticsearchClientException>()
+			exception = callAsync.ShouldThrowExactly<TException>()
 				.Subject.First();
 			assert(exception);
 
 			this.AsyncAuditTrail = exception.AuditTrail;
 			this.AssertPoolAfterCall?.Invoke(this._clusterAsync.ConnectionPool);
+		}
+		public async Task<Auditor> TraceElasticsearchException(ClientCall callTrace, Action<ElasticsearchClientException> assert)
+		{
+			await this.TraceException(callTrace, assert);
 			var audit  = new Auditor(_cluster, _clusterAsync);
 			return await audit.TraceElasticsearchExceptionOnResponse(callTrace, assert);
+		}
+
+		public async Task<Auditor> TraceUnexpectedElasticsearchException(ClientCall callTrace, Action<UnexpectedElasticsearchClientException> assert)
+		{
+			await this.TraceException(callTrace, assert);
+			return new Auditor(_cluster, _clusterAsync);
 		}
 
 #pragma warning disable 1998

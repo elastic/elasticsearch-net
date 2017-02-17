@@ -111,6 +111,18 @@ namespace Elasticsearch.Net
 
 		private Auditable Audit(AuditEvent type) => new Auditable(type, this.AuditTrail, this._dateTimeProvider);
 
+		private static string NoNodesAttemptedMessage = "No nodes were attempted, this can happen when a node predicate does not match any nodes";
+		public void ThrowNoNodesAttempted(RequestData requestData, List<PipelineException> seenExceptions)
+		{
+			var clientException = new ElasticsearchClientException(PipelineFailure.NoNodesAttempted, NoNodesAttemptedMessage, (Exception) null);
+			using(this.Audit(NoNodesAttempted))
+				throw new UnexpectedElasticsearchClientException(clientException, seenExceptions)
+				{
+					Request  = requestData,
+					AuditTrail = this.AuditTrail
+				};
+		}
+
 		public void MarkDead(Node node)
 		{
 			var deadUntil = this._dateTimeProvider.DeadTime(node.FailedAttempts, this._settings.DeadTimeout, this._settings.MaxDeadTimeout);
@@ -216,9 +228,10 @@ namespace Elasticsearch.Net
 			{
 				if (this.DepleededRetries) yield break;
 				foreach (var node in this._connectionPool
-					.CreateView((e, n)=> { using (new Auditable(e, this.AuditTrail, this._dateTimeProvider) { Node = n }) {} })
+					.CreateView(LazyAuditable)
 					.TakeWhile(node => !this.DepleededRetries))
 				{
+					if (!this._settings.NodePredicate(node)) continue;
 					yield return node;
 					if (!this.Refresh) continue;
 					this.Refresh = false;
@@ -306,9 +319,14 @@ namespace Elasticsearch.Net
 		public string SniffPath => "_nodes/http,settings?flat_settings&timeout=" + this.PingTimeout.ToTimeUnit();
 
 		public IEnumerable<Node> SniffNodes => this._connectionPool
-			.CreateView((e, n)=> { using (new Auditable(e, this.AuditTrail, this._dateTimeProvider) { Node = n }) {} })
+			.CreateView(LazyAuditable)
 			.ToList()
 			.OrderBy(n => n.MasterEligible ? n.Uri.Port : int.MaxValue);
+
+		private void LazyAuditable(AuditEvent e, Node n)
+		{
+			using (new Auditable(e, this.AuditTrail, this._dateTimeProvider) { Node = n }) {};
+		}
 
 		public void SniffOnConnectionFailure()
 		{

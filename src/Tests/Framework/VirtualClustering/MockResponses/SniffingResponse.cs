@@ -36,6 +36,13 @@ namespace Tests.Framework.MockResponses
 			var fqdn = randomFqdn ? $"fqdn{port}/" : "";
 			var host = !string.IsNullOrWhiteSpace(publishAddressOverride) ? publishAddressOverride : "127.0.0.1";
 
+			var settings = new Dictionary<string, object>
+			{
+				{"cluster.name", ClusterName},
+				{"node.name", name}
+			};
+			foreach (var kv in node.Settings) settings[kv.Key] = kv.Value;
+
 			var nodeResponse = new
 			{
 				name = name,
@@ -54,14 +61,11 @@ namespace Tests.Framework.MockResponses
 					//publish_address = $"{fqdn}${publishAddress}"
 					publish_address = $"{fqdn}{host}:{port}"
 				} : null,
-				settings = new Dictionary<string, object>
-				{
-					{ "cluster.name", ClusterName },
-					{ "node.name", name }
-				}
+				settings = settings
 			};
 			if (node.MasterEligible) nodeResponse.roles.Add("master");
 			if (node.HoldsData) nodeResponse.roles.Add("data");
+			if (node.IngestEnabled) nodeResponse.roles.Add("ingest");
 			if (!node.HttpEnabled)
 				nodeResponse.settings.Add("http.enabled", false);
 			return nodeResponse;
