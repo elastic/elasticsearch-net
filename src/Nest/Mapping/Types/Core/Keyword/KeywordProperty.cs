@@ -21,6 +21,7 @@ namespace Nest
 		int? IgnoreAbove { get; set; }
 
 		[JsonProperty("include_in_all")]
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? IncludeInAll { get; set; }
 
 		[JsonProperty("index")]
@@ -47,6 +48,7 @@ namespace Nest
 		public double? Boost { get; set; }
 		public bool? EagerGlobalOrdinals { get; set; }
 		public int? IgnoreAbove { get; set; }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public bool? IncludeInAll { get; set; }
 		public bool? Index { get; set; }
 		public IndexOptions? IndexOptions { get; set; }
@@ -75,6 +77,7 @@ namespace Nest
 		public KeywordPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 		public KeywordPropertyDescriptor<T> EagerGlobalOrdinals(bool eagerGlobalOrdinals = true) => Assign(a => a.EagerGlobalOrdinals = eagerGlobalOrdinals);
 		public KeywordPropertyDescriptor<T> IgnoreAbove(int ignoreAbove) => Assign(a => a.IgnoreAbove = ignoreAbove);
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public KeywordPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 		public KeywordPropertyDescriptor<T> Index(bool index = true) => Assign(a => a.Index = index);
 		public KeywordPropertyDescriptor<T> IndexOptions(IndexOptions indexOptions) => Assign(a => a.IndexOptions = indexOptions);
