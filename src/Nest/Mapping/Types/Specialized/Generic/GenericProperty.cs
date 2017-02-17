@@ -36,6 +36,7 @@ namespace Nest
 		string SearchAnalyzer { get; set; }
 
 		[JsonProperty("include_in_all")]
+		[Obsolete("Scheduled to be removed in Elasticsearch 6.0")]
 		bool? IncludeInAll { get; set; }
 
 		[JsonProperty("ignore_above")]
@@ -62,6 +63,7 @@ namespace Nest
 		public TermVectorOption? TermVector { get; set; }
 		public double? Boost { get; set; }
 		public string SearchAnalyzer { get; set; }
+		[Obsolete("Scheduled to be removed in Elasticsearch 6.0")]
 		public bool? IncludeInAll { get; set; }
 		public int? IgnoreAbove { get; set; }
 		public int? PositionIncrementGap { get; set; }

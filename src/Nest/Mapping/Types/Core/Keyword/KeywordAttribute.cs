@@ -15,6 +15,7 @@ namespace Nest
 		double? IKeywordProperty.Boost { get; set; }
 		bool? IKeywordProperty.EagerGlobalOrdinals { get; set; }
 		int? IKeywordProperty.IgnoreAbove { get; set; }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? IKeywordProperty.IncludeInAll { get; set; }
 		bool? IKeywordProperty.Index { get; set; }
 		IndexOptions? IKeywordProperty.IndexOptions { get; set; }
@@ -25,6 +26,7 @@ namespace Nest
 		public double Boost { get { return Self.Boost.GetValueOrDefault(); } set { Self.Boost = value; } }
 		public bool EagerGlobalOrdinals { get { return Self.EagerGlobalOrdinals.GetValueOrDefault(); } set { Self.EagerGlobalOrdinals = value; } }
 		public int IgnoreAbove { get { return Self.IgnoreAbove.GetValueOrDefault(); } set { Self.IgnoreAbove = value; } }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public bool IncludeInAll { get { return Self.IncludeInAll.GetValueOrDefault(); } set { Self.IncludeInAll = value; } }
 		public bool Index { get { return Self.Index.GetValueOrDefault(); } set { Self.Index = value; } }
 		public IndexOptions IndexOptions { get { return Self.IndexOptions.GetValueOrDefault(); } set { Self.IndexOptions = value; } }

@@ -18,6 +18,7 @@ namespace Nest
 		double? NullValue { get; set; }
 
 		[JsonProperty("include_in_all")]
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? IncludeInAll { get; set; }
 
 		[JsonProperty("ignore_malformed")]
@@ -44,6 +45,7 @@ namespace Nest
 		public bool? Index { get; set; }
 		public double? Boost { get; set; }
 		public double? NullValue { get; set; }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public bool? IncludeInAll { get; set; }
 		public bool? IgnoreMalformed { get; set; }
 		public bool? Coerce { get; set; }
@@ -80,6 +82,7 @@ namespace Nest
 
 		public TDescriptor NullValue(double nullValue) => Assign(a => a.NullValue = nullValue);
 
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public TDescriptor IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 
 		public TDescriptor IgnoreMalformed(bool ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
