@@ -12,5 +12,8 @@ namespace Nest
 		public IReadOnlyCollection<SearchProfile> Searches { get; internal set; } =
 			EmptyReadOnly<SearchProfile>.Collection;
 
+		[JsonProperty("aggregations")]
+		public IReadOnlyCollection<AggregationProfile> Aggregations { get; internal set; } =
+			EmptyReadOnly<AggregationProfile>.Collection;
 	}
 }

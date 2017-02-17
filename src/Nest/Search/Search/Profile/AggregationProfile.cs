@@ -3,28 +3,28 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class QueryProfile
+	public class AggregationProfile
 	{
 		/// <summary>
-		/// The lucene class name for the type of query
+		/// The Elasticsearch aggregation type
 		/// </summary>
 		[JsonProperty("type")]
 		public string Type { get; internal set; }
 
 		/// <summary>
-		/// The lucene explanation text for the query
+		/// The user defined name of the aggregation
 		/// </summary>
 		[JsonProperty("description")]
 		public string Description { get; internal set; }
 
 		/// <summary>
-		/// The time that this query took, inclusive of all children
+		/// The time this aggregation took
 		/// </summary>
 		[JsonProperty("time")]
 		public Time Time { get; internal set; }
 
 		/// <summary>
-		/// The time that this query took in nanoseconds
+		/// The time this aggregation took, in nanoseconds
 		/// </summary>
 		[JsonProperty("time_in_nanos")]
 		public long TimeInNanoseconds { get; internal set; }
@@ -33,12 +33,6 @@ namespace Nest
 		/// Detailed stats about how the time was spent
 		/// </summary>
 		[JsonProperty("breakdown")]
-		public QueryBreakdown Breakdown { get; internal set; }
-
-		/// <summary>
-		/// Sub-queries of this query
-		/// </summary>
-		[JsonProperty("children")]
-		public IEnumerable<QueryProfile> Children { get; internal set; }
+		public AggregationBreakdown Breakdown { get; internal set; }
 	}
 }
