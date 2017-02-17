@@ -25,7 +25,6 @@ namespace Tests.Mapping.Types.Core.Range.FloatRange
 							type = "float_range",
 							store = true,
 							index = false,
-							include_in_all = false,
 							boost = 1.5,
 							coerce = true
 						}
@@ -43,7 +42,6 @@ namespace Tests.Mapping.Types.Core.Range.FloatRange
 						.Store()
 						.Index(false)
 						.Boost(1.5)
-						.IncludeInAll(false)
 						.Coerce()
 					)
 				)
@@ -63,7 +61,6 @@ namespace Tests.Mapping.Types.Core.Range.FloatRange
 								Store = true,
 								Index = false,
 								Boost = 1.5,
-								IncludeInAll = false,
 								Coerce = true
 							}
 						}

@@ -11,7 +11,6 @@ namespace Tests.Mapping.Types.Core.Date
 			Store = true,
 			Index = false,
 			Boost = 1.2,
-			IncludeInAll = false,
 			IgnoreMalformed = true,
 			Format = "MM/dd/yyyy")]
 		public DateTime Full { get; set; }
@@ -38,7 +37,6 @@ namespace Tests.Mapping.Types.Core.Date
 					store = true,
 					index = false,
 					boost = 1.2,
-					include_in_all = false,
 					ignore_malformed = true,
 					format = "MM/dd/yyyy"
 				},

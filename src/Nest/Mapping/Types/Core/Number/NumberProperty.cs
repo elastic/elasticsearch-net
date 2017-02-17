@@ -17,9 +17,6 @@ namespace Nest
 		[JsonProperty("null_value")]
 		double? NullValue { get; set; }
 
-		[JsonProperty("include_in_all")]
-		bool? IncludeInAll { get; set; }
-
 		[JsonProperty("ignore_malformed")]
 		bool? IgnoreMalformed { get; set; }
 
@@ -38,13 +35,10 @@ namespace Nest
 	{
 		public NumberProperty() : base(FieldType.Float) { }
 		public NumberProperty(NumberType type) : base(type.ToFieldType()) { }
-		[Obsolete("Please use overload taking NumberType")]
-		protected NumberProperty(string type) : base(type) { }
 
 		public bool? Index { get; set; }
 		public double? Boost { get; set; }
 		public double? NullValue { get; set; }
-		public bool? IncludeInAll { get; set; }
 		public bool? IgnoreMalformed { get; set; }
 		public bool? Coerce { get; set; }
 		public INumericFielddata Fielddata { get; set; }
@@ -66,7 +60,6 @@ namespace Nest
 		bool? INumberProperty.Index { get; set; }
 		double? INumberProperty.Boost { get; set; }
 		double? INumberProperty.NullValue { get; set; }
-		bool? INumberProperty.IncludeInAll { get; set; }
 		bool? INumberProperty.IgnoreMalformed { get; set; }
 		bool? INumberProperty.Coerce { get; set; }
 		INumericFielddata INumberProperty.Fielddata { get; set; }
@@ -79,8 +72,6 @@ namespace Nest
 		public TDescriptor Boost(double boost) => Assign(a => a.Boost = boost);
 
 		public TDescriptor NullValue(double nullValue) => Assign(a => a.NullValue = nullValue);
-
-		public TDescriptor IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 
 		public TDescriptor IgnoreMalformed(bool ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
 

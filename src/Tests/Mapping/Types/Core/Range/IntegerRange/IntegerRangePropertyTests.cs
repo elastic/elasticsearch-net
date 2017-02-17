@@ -26,7 +26,6 @@ namespace Tests.Mapping.Types.Core.Range.IntegerRange
 							store = true,
 							index = false,
 							boost = 1.5,
-							include_in_all = false,
 							coerce = true
 						}
 					}
@@ -43,7 +42,6 @@ namespace Tests.Mapping.Types.Core.Range.IntegerRange
 						.Store()
 						.Index(false)
 						.Boost(1.5)
-						.IncludeInAll(false)
 						.Coerce()
 					)
 				)
@@ -63,7 +61,6 @@ namespace Tests.Mapping.Types.Core.Range.IntegerRange
 								Store = true,
 								Index = false,
 								Boost = 1.5,
-								IncludeInAll = false,
 								Coerce = true
 							}
 						}

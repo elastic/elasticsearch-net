@@ -18,9 +18,6 @@ namespace Nest
 
 		[JsonProperty("null_value")]
 		double? NullValue { get; set; }
-
-		[JsonProperty("include_in_all")]
-		bool? IncludeInAll { get; set; }
 	}
 
 	[DebuggerDisplay("{DebugDisplay}")]
@@ -36,7 +33,6 @@ namespace Nest
 
 		public double? NullValue { get; set; }
 
-		public bool? IncludeInAll { get; set; }
 	}
 
 	[DebuggerDisplay("{DebugDisplay}")]
@@ -48,13 +44,11 @@ namespace Nest
 
 		string ITokenCountProperty.Analyzer { get; set; }
 		double? ITokenCountProperty.Boost { get; set; }
-		bool? ITokenCountProperty.IncludeInAll { get; set; }
 		bool? ITokenCountProperty.Index { get; set; }
 		double? ITokenCountProperty.NullValue { get; set; }
 
 		public TokenCountPropertyDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 		public TokenCountPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
-		public TokenCountPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 		public TokenCountPropertyDescriptor<T> Index(bool index = true) => Assign(a => a.Index = index);
 		public TokenCountPropertyDescriptor<T> NullValue(double nullValue) => Assign(a => a.NullValue = nullValue);
 	}

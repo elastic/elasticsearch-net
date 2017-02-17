@@ -25,8 +25,6 @@ namespace Nest
 		/// to false if index is set to false, or if a parent object field sets include_in_all to false.
 		/// Otherwise defaults to true.
 		/// </summary>
-		[JsonProperty("include_in_all")]
-		bool? IncludeInAll { get; set; }
 
 		/// <summary>
 		/// Should the field be searchable? Accepts true (default) and false.
@@ -57,7 +55,6 @@ namespace Nest
 	{
 		bool? IRangeProperty.Coerce { get; set; }
 		double? IRangeProperty.Boost { get; set; }
-		bool? IRangeProperty.IncludeInAll { get; set; }
 		bool? IRangeProperty.Index { get; set; }
 
 		protected RangePropertyDescriptorBase(RangeType type) : base(type.ToFieldType()) { }
@@ -66,8 +63,6 @@ namespace Nest
 		public TDescriptor Coerce(bool coerce = true) => Assign(a => a.Coerce = coerce);
 		/// <inheritdoc/>
 		public TDescriptor Boost(double boost) => Assign(a => a.Boost = boost);
-		/// <inheritdoc/>
-		public TDescriptor IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 		/// <inheritdoc/>
 		public TDescriptor Index(bool index = true) => Assign(a => a.Index = index);
 	}
