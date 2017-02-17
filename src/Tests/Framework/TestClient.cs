@@ -38,9 +38,9 @@ namespace Tests.Framework
 
 			// If running the classic .NET solution, tests run from bin/{config} directory,
 			// but when running DNX solution, tests run from the test project root
-			var yamlConfigurationPath = directoryInfo.Name == "Tests" &&
-			                            directoryInfo.Parent != null &&
-			                            directoryInfo.Parent.Name == "src"
+			var yamlConfigurationPath = (directoryInfo.Name == "Tests"
+				&& directoryInfo.Parent != null
+				&& directoryInfo.Parent.Name == "src")
 				? "."
 				: @"../../../";
 
@@ -94,7 +94,6 @@ namespace Tests.Framework
 			? ".percolator"
 			: "query";
 
-
 		public static ConnectionSettings CreateSettings(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
 			int port = 9200,
@@ -112,8 +111,7 @@ namespace Tests.Framework
 			return settings;
 		}
 
-		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
-			int port = 9200) =>
+		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200) =>
 			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: true));
 
 		public static IElasticClient GetInMemoryClientWithSerializerFactory(
