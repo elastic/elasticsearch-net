@@ -71,7 +71,7 @@ namespace Nest
 
 		/// <summary>
 		/// A fuzzy based query that uses similarity based on Levenshtein (edit distance) algorithm.
-		/// Warning: this query is not very scalable with its default prefix length of 0 – in this case,
+		/// Warning: this query is not very scalable with its default prefix length of 0 ï¿½ in this case,
 		/// every term will be enumerated and cause an edit score calculation or max_expansions is not set.
 		/// </summary>
 		public QueryContainer Fuzzy(Func<FuzzyQueryDescriptor<T>, IFuzzyQuery> selector) =>
@@ -157,7 +157,7 @@ namespace Nest
 			WrapInContainer(selector, (query, container) => container.Range = query);
 
 		/// <summary>
-		/// More like this query find documents that are “like” provided text by running it against one or more fields.
+		/// More like this query find documents that are ï¿½likeï¿½ provided text by running it against one or more fields.
 		/// </summary>
 		public QueryContainer MoreLikeThis(Func<MoreLikeThisQueryDescriptor<T>, IMoreLikeThisQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.MoreLikeThis = query);
@@ -240,13 +240,6 @@ namespace Nest
 
 		public QueryContainer GeoHashCell(Func<GeoHashCellQueryDescriptor<T>, IGeoHashCellQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.GeoHashCell = query);
-
-		/// <summary>
-		/// Matches documents with a geo_point type field to include only those
-		/// that exist within a specific distance range from a given geo_point
-		/// </summary>
-		public QueryContainer GeoDistanceRange(Func<GeoDistanceRangeQueryDescriptor<T>, IGeoDistanceRangeQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.GeoDistanceRange = query);
 
 		/// <summary>
 		/// Matches documents with a geo_point type field to include only those
@@ -449,14 +442,14 @@ namespace Nest
 			WrapInContainer(selector, (query, container) => container.SpanMultiTerm = query);
 
 		/// <summary>
-		/// Returns matches which enclose another span query. 
+		/// Returns matches which enclose another span query.
 		/// The span containing query maps to Lucene SpanContainingQuery
 		/// </summary>
 		public QueryContainer SpanContaining(Func<SpanContainingQueryDescriptor<T>, ISpanContainingQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.SpanContaining = query);
 
 		/// <summary>
-		/// Returns Matches which are enclosed inside another span query. 
+		/// Returns Matches which are enclosed inside another span query.
 		/// The span within query maps to Lucene SpanWithinQuery
 		/// </summary>
 		public QueryContainer SpanWithin(Func<SpanWithinQueryDescriptor<T>, ISpanWithinQuery> selector) =>
@@ -472,8 +465,8 @@ namespace Nest
 			WrapInContainer(selector, (query, container) => container.SpanFieldMasking = query);
 
 		/// <summary>
-		/// Allows you to use regular expression term queries. 
-		/// "term queries" means that Elasticsearch will apply the regexp to the terms produced 
+		/// Allows you to use regular expression term queries.
+		/// "term queries" means that Elasticsearch will apply the regexp to the terms produced
 		/// by the tokenizer for that field, and not to the original text of the field.
 		/// </summary>
 		public QueryContainer Regexp(Func<RegexpQueryDescriptor<T>, IRegexpQuery> selector) =>

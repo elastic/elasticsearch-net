@@ -13,19 +13,8 @@ namespace Nest
 		[JsonProperty("distance")]
 		Distance Distance { get; set; }
 
-		[JsonProperty("optimize_bbox")]
-		GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
-
 		[JsonProperty("distance_type")]
 		GeoDistanceType? DistanceType { get; set; }
-
-		[Obsolete("Deprecated. Use ValidationMethod")]
-		[JsonProperty("coerce")]
-		bool? Coerce { get; set; }
-
-		[Obsolete("Deprecated. Use ValidationMethod")]
-		[JsonProperty("ignore_malformed")]
-		bool? IgnoreMalformed { get; set; }
 
 		[JsonProperty("validation_method")]
 		GeoValidationMethod? ValidationMethod { get; set; }
@@ -37,15 +26,7 @@ namespace Nest
 		protected override bool Conditionless => IsConditionless(this);
 		public GeoLocation Location { get; set; }
 		public Distance Distance { get; set; }
-		public GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
 		public GeoDistanceType? DistanceType { get; set; }
-
-		[Obsolete("Deprecated. Use ValidationMethod")]
-		public bool? Coerce { get; set; }
-
-		[Obsolete("Deprecated. Use ValidationMethod")]
-		public bool? IgnoreMalformed { get; set; }
-
 		public GeoValidationMethod? ValidationMethod { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoDistance = this;
@@ -62,9 +43,6 @@ namespace Nest
 		GeoLocation IGeoDistanceQuery.Location { get; set; }
 		Distance IGeoDistanceQuery.Distance { get; set; }
 		GeoDistanceType? IGeoDistanceQuery.DistanceType { get; set; }
-		GeoOptimizeBBox? IGeoDistanceQuery.OptimizeBoundingBox { get; set; }
-		bool? IGeoDistanceQuery.Coerce { get; set; }
-		bool? IGeoDistanceQuery.IgnoreMalformed { get; set; }
 		GeoValidationMethod? IGeoDistanceQuery.ValidationMethod { get; set; }
 
 		public GeoDistanceQueryDescriptor<T> Location(GeoLocation location) => Assign(a => a.Location = location);
@@ -75,15 +53,7 @@ namespace Nest
 
 		public GeoDistanceQueryDescriptor<T> Distance(double distance, DistanceUnit unit) => Assign(a => a.Distance = new Distance(distance, unit));
 
-		public GeoDistanceQueryDescriptor<T> Optimize(GeoOptimizeBBox optimize) => Assign(a => a.OptimizeBoundingBox = optimize);
-
 		public GeoDistanceQueryDescriptor<T> DistanceType(GeoDistanceType type) => Assign(a => a.DistanceType = type);
-
-		[Obsolete("Deprecated. Use ValidationMethod(GeoValidationMethod? validation)")]
-		public GeoDistanceQueryDescriptor<T> Coerce(bool? coerce = true) => Assign(a => a.Coerce = coerce);
-
-		[Obsolete("Deprecated. Use ValidationMethod(GeoValidationMethod? validation)")]
-		public GeoDistanceQueryDescriptor<T> IgnoreMalformed(bool? ignore = true) => Assign(a => a.IgnoreMalformed = ignore);
 
 		public GeoDistanceQueryDescriptor<T> ValidationMethod(GeoValidationMethod? validation) => Assign(a => a.ValidationMethod = validation);
 	}
