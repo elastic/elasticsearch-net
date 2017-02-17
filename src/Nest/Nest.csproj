@@ -1271,6 +1271,8 @@
     <Compile Include="Search\Search\Hits\InnerHitsResult.cs" />
     <Compile Include="Search\Search\Hits\NestedIdentity.cs" />
     <Compile Include="Search\Search\InnerHits\InnerHits.cs" />
+    <Compile Include="Search\Search\Profile\AggregationBreakdown.cs" />
+    <Compile Include="Search\Search\Profile\AggregationProfile.cs" />
     <Compile Include="Search\Search\Profile\Collector.cs" />
     <Compile Include="Search\Search\Profile\Profile.cs" />
     <Compile Include="Search\Search\Profile\QueryBreakdown.cs" />
