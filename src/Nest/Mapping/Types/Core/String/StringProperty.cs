@@ -32,9 +32,6 @@ namespace Nest
 		[JsonProperty("search_analyzer")]
 		string SearchAnalyzer { get; set; }
 
-		[JsonProperty("include_in_all")]
-		bool? IncludeInAll { get; set; }
-
 		[JsonProperty("ignore_above")]
 		int? IgnoreAbove { get; set; }
 
@@ -59,7 +56,6 @@ namespace Nest
 		public IndexOptions? IndexOptions { get; set; }
 		public string Analyzer { get; set; }
 		public string SearchAnalyzer { get; set; }
-		public bool? IncludeInAll { get; set; }
 		public int? IgnoreAbove { get; set; }
 		public int? PositionIncrementGap { get; set; }
 		public IStringFielddata Fielddata { get; set; }
@@ -79,7 +75,6 @@ namespace Nest
 		IndexOptions? IStringProperty.IndexOptions { get; set; }
 		string IStringProperty.Analyzer { get; set; }
 		string IStringProperty.SearchAnalyzer { get; set; }
-		bool? IStringProperty.IncludeInAll { get; set; }
 		int? IStringProperty.IgnoreAbove { get; set; }
 		int? IStringProperty.PositionIncrementGap { get; set; }
 		IStringFielddata IStringProperty.Fielddata { get; set; }
@@ -108,8 +103,6 @@ namespace Nest
 		public StringPropertyDescriptor<T> Norms(bool enabled = true) => Assign(a => a.Norms = enabled);
 
 		public StringPropertyDescriptor<T> IgnoreAbove(int ignoreAbove) => Assign(a => a.IgnoreAbove = ignoreAbove);
-
-		public StringPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 
 		public StringPropertyDescriptor<T> PositionIncrementGap(int positionIncrementGap) => Assign(a => a.PositionIncrementGap = positionIncrementGap);
 

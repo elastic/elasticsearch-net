@@ -27,9 +27,6 @@ namespace Nest
 		[JsonProperty("null_value")]
         DateTime? NullValue { get; set; }
 
-		[JsonProperty("include_in_all")]
-		bool? IncludeInAll { get; set; }
-
 		/// <summary>
 		/// If true, malformed numbers are ignored. If false (default), malformed numbers throw an exception
 		/// and reject the whole document.
@@ -60,8 +57,6 @@ namespace Nest
 		/// <inheritdoc/>
 		public DateTime? NullValue { get; set; }
 		/// <inheritdoc/>
-		public bool? IncludeInAll { get; set; }
-		/// <inheritdoc/>
 		public int? PrecisionStep { get; set; }
 		/// <inheritdoc/>
 		public bool? IgnoreMalformed { get; set; }
@@ -79,7 +74,6 @@ namespace Nest
 		bool? IDateProperty.Index { get; set; }
 		double? IDateProperty.Boost { get; set; }
 		DateTime? IDateProperty.NullValue { get; set; }
-		bool? IDateProperty.IncludeInAll { get; set; }
 		bool? IDateProperty.IgnoreMalformed { get; set; }
 		string IDateProperty.Format { get; set; }
 		INumericFielddata IDateProperty.Fielddata { get; set; }
@@ -92,8 +86,6 @@ namespace Nest
 		public DatePropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 		/// <inheritdoc/>
 		public DatePropertyDescriptor<T> NullValue(DateTime nullValue) => Assign(a => a.NullValue = nullValue);
-		/// <inheritdoc/>
-		public DatePropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 		/// <inheritdoc/>
 		public DatePropertyDescriptor<T> IgnoreMalformed(bool ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
 		/// <inheritdoc/>
