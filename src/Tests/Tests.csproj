@@ -802,7 +802,6 @@
     <None Include="query-dsl.asciidoc" />
     <None Include="search-usage.asciidoc" />
     <None Include="search.asciidoc" />
-    <None Include="tests.yaml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Elasticsearch.Net\Elasticsearch.Net.csproj">
@@ -823,6 +822,7 @@
     <Content Include="ClientConcepts\LowLevel\pipeline.png" />
     <Content Include="ClientConcepts\LowLevel\pipeline.xml" />
     <Content Include="QueryDsl\BoolDsl\hadouken-indentation.jpg" />
+    <Content Include="tests.default.yaml" />
   </ItemGroup>
   <Import Project="..\outputpath.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
