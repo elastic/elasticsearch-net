@@ -45,7 +45,7 @@ namespace Tests.Framework
 
 			var localYamlFile = Path.GetFullPath(Path.Combine(yamlConfigurationPath, "tests.yaml"));
 			if (File.Exists(localYamlFile))
-				return YamlConfiguration(localYamlFile);
+				return new YamlConfiguration(localYamlFile);
 
 			var defaultYamlFile = Path.GetFullPath(Path.Combine(yamlConfigurationPath, "tests.default.yaml"));
 			if (File.Exists(localYamlFile))
