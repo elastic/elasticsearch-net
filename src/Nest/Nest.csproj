@@ -62,6 +62,7 @@
     <Compile Include="Aggregations\AggregationContainer.cs" />
     <Compile Include="Aggregations\AggregationJsonConverter.cs" />
     <Compile Include="Aggregations\AggregationsHelper.cs" />
+    <Compile Include="Aggregations\Bucket\AdjacencyMatrix\AdjacencyMatrixAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Bucket.cs" />
     <Compile Include="Aggregations\Bucket\BucketAggregate.cs" />
     <Compile Include="Aggregations\Bucket\BucketAggregation.cs" />
