@@ -5,6 +5,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.MockData;
 using Xunit;
 
@@ -75,7 +77,7 @@ namespace Tests.Cluster.TaskManagement.TasksList
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			var seeder = new Seeder(this.Cluster.Node);
+			var seeder = new DefaultSeeder(this.Cluster.Node);
 			seeder.SeedNode();
 
 			// get a suitable load of projects in order to get a decent task status out

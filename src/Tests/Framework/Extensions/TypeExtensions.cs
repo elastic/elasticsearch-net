@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Reflection;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Tests.Framework
 {
@@ -109,6 +110,17 @@ namespace Tests.Framework
 #else
 			return t.IsPublic;
 #endif
+		}
+
+		internal static IEnumerable<TAttribute> GetAttributes<TAttribute>(this Type t)
+			where TAttribute : Attribute
+		{
+#if !DOTNETCORE
+			var attributes = Attribute.GetCustomAttributes(t, typeof(TAttribute), true);
+#else
+			var attributes =  t.GetTypeInfo().GetCustomAttributes(typeof(TAttribute), true);
+#endif
+			return attributes.Cast<TAttribute>();
 		}
 	}
 }

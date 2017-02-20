@@ -27,22 +27,39 @@ namespace Tests.Framework.Versions
 
 		private static string ResolveLatestSnapshotFor(string version)
 		{
-			var mavenMetadata = XElement.Load($"{SonaTypeUrl}/{version}/maven-metadata.xml");
-			var snapshot = mavenMetadata.Descendants("versioning").Descendants("snapshot").FirstOrDefault();
-			var snapshotTimestamp = snapshot.Descendants("timestamp").FirstOrDefault().Value;
-			var snapshotBuildNumber = snapshot.Descendants("buildNumber").FirstOrDefault().Value;
-			var identifier = $"{snapshotTimestamp}-{snapshotBuildNumber}";
-			var zip = $"elasticsearch-{version.Replace("SNAPSHOT", "")}{identifier}.zip";
-			return zip;
+			var url = $"{SonaTypeUrl}/{version}/maven-metadata.xml";
+			try
+			{
+				var mavenMetadata = XElement.Load(url);
+				var snapshot = mavenMetadata.Descendants("versioning").Descendants("snapshot").FirstOrDefault();
+				var snapshotTimestamp = snapshot.Descendants("timestamp").FirstOrDefault().Value;
+				var snapshotBuildNumber = snapshot.Descendants("buildNumber").FirstOrDefault().Value;
+				var identifier = $"{snapshotTimestamp}-{snapshotBuildNumber}";
+				var zip = $"elasticsearch-{version.Replace("SNAPSHOT", "")}{identifier}.zip";
+				return zip;
+
+			}
+			catch (Exception e)
+			{
+				throw new Exception($"Can not download maven data from {url}", e);
+			}
 		}
 
 		private static string ResolveLatestVersion()
 		{
-			var versions = XElement.Load($"{SonaTypeUrl}/maven-metadata.xml")
-				.Descendants("version")
-				.Select(n => new Version(n.Value))
-				.OrderByDescending(n => n);
-			return versions.First().ToString();
+			var url = $"{SonaTypeUrl}/maven-metadata.xml";
+			try
+			{
+                var versions = XElement.Load(url)
+                    .Descendants("version")
+                    .Select(n => new Version(n.Value))
+                    .OrderByDescending(n => n);
+                return versions.First().ToString();
+			}
+			catch (Exception e)
+			{
+				throw new Exception($"Can not download maven data from {url}", e);
+			}
 		}
 
 		private static string TranslateConfigVersion(string configMoniker) => configMoniker == "latest" ? LatestVersion.Value : configMoniker;
@@ -95,5 +112,7 @@ namespace Tests.Framework.Versions
 		/// Whether this version is a snapshot or officicially released distribution
 		/// </summary>
 		public bool IsSnapshot => this.Version?.ToLower().Contains("snapshot") ?? false;
+
+		public override string ToString() => this.Version;
 	}
 }

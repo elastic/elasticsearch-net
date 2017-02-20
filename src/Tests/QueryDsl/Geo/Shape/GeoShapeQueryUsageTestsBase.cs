@@ -1,4 +1,5 @@
 ﻿using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 
 namespace Tests.QueryDsl

@@ -13,6 +13,8 @@ using Tests.Framework.Versions;
 using Xunit;
 using static Tests.Framework.TimesHelper;
 using static Elasticsearch.Net.AuditEvent;
+using Tests.Framework.ManagedElasticsearch;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
@@ -299,7 +301,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 
 	public class SniffRoleDetectionCluster : ClusterBase
 	{
-		protected override string[] ServerSettings
+		protected override string[] AdditionalServerSettings
 		{
 			get
 			{
