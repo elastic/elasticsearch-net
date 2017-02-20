@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace Tests.Framework.Integration
+namespace Tests.Framework.ManagedElasticsearch.Process
 {
 	public class ElasticsearchConsoleOut : ConsoleOut
 	{

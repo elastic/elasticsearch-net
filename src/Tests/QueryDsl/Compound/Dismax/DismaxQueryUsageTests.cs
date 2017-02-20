@@ -5,6 +5,7 @@ using Tests.Framework.MockData;
 using Tests.Framework;
 using System;
 using FluentAssertions;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 #pragma warning disable 618 //Testing an obsolete method
 

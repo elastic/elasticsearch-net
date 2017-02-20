@@ -10,6 +10,7 @@ using static Nest.Infer;
 using System.Threading.Tasks;
 using FluentAssertions;
 using System.Linq;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Document.Single.Update
 {

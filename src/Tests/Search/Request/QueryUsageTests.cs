@@ -1,6 +1,7 @@
 ﻿using System;
 using Nest;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
 
 namespace Tests.Search.Request

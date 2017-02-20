@@ -3,6 +3,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Xunit;
 
 namespace Tests.Cat.CatAliases
@@ -24,7 +26,7 @@ namespace Tests.Cat.CatAliases
 
 		protected override void ExpectResponse(ICatResponse<CatAliasesRecord> response)
 		{
-			response.Records.Should().NotBeEmpty().And.Contain(a => a.Alias == "projects-alias");
+			response.Records.Should().NotBeEmpty().And.Contain(a => a.Alias == DefaultSeeder.ProjectsAliasName);
 		}
 	}
 }

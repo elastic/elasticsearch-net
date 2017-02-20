@@ -1,6 +1,8 @@
 ﻿using System;
 using Nest;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework
 {

@@ -7,6 +7,8 @@ using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework
 {
