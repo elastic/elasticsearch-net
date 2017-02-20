@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework.Profiling
 {

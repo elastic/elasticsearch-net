@@ -54,7 +54,7 @@ namespace Tests.CodeStandards
 
 			Func<Type, Type, bool> exclude = (first, second) =>
 			{
-				var key = first.IsGeneric()
+				var key = first.IsGenericType()
 					? first.GetGenericTypeDefinition()
 					: first;
 
@@ -62,7 +62,7 @@ namespace Tests.CodeStandards
 				if (!exclusions.TryGetValue(key, out value))
 					return false;
 
-				return second.IsGeneric()
+				return second.IsGenericType()
 					? second.GetGenericTypeDefinition() == value
 					: value.IsAssignableFrom(second);
 			};
@@ -73,7 +73,7 @@ namespace Tests.CodeStandards
 				let parameters = m.GetParameters()
 				from p in parameters
 				let type = p.ParameterType
-				let isGeneric = type.IsGeneric()
+				let isGeneric = type.IsGenericType()
 				where isGeneric
 				let isFunc = type.GetGenericTypeDefinition() == typeof(Func<,>)
 				where isFunc

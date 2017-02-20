@@ -10,6 +10,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 using A = Tests.QueryDsl.BoolDsl.BoolCluster.A;
 using E = Tests.QueryDsl.BoolDsl.BoolCluster.E;
@@ -39,7 +41,7 @@ namespace Tests.QueryDsl.BoolDsl
 			public static IList<A> Documents => Enumerable.Range(0, 20).Select(i => new A { Id = i + 1, Option = Options[i % 2] }).ToList();
 		}
 
-		public override void Bootstrap()
+		protected override void SeedNode()
 		{
 			var client = this.Node.Client;
 			var index = client.CreateIndex(Index<A>(), i => i

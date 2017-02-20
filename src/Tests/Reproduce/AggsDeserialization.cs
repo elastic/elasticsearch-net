@@ -11,6 +11,7 @@ using Xunit;
 using Elasticsearch.Net;
 using Nest;
 using FluentAssertions;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Reproduce
 {

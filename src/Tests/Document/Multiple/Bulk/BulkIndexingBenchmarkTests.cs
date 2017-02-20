@@ -5,7 +5,7 @@ using BenchmarkDotNet.Attributes;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Benchmarks;
-using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
 using Tests.Framework.Profiling;
 using Tests.Framework.Profiling.Memory;

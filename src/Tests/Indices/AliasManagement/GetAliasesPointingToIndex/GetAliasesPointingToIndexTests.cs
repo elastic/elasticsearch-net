@@ -7,11 +7,12 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 
 namespace Tests.Indices.AliasManagement.GetAliasesPointingToIndex
 {
-	public class GetAliasesPointingToIndexTests : SimpleIntegration, IClusterFixture<WritableCluster>
+	public class GetAliasesPointingToIndexTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{
 		private readonly WritableCluster _cluster;
 		private readonly IElasticClient _client;

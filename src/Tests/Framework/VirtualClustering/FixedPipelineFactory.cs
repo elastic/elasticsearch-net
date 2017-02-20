@@ -25,7 +25,7 @@ namespace Tests.Framework
 			this.Pipeline = this.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, new SearchRequestParameters());
 		}
 
-		public IRequestPipeline Create(IConnectionConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider, IMemoryStreamFactory memorystreamFactory, IRequestParameters requestParameters) => 
+		public IRequestPipeline Create(IConnectionConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider, IMemoryStreamFactory memorystreamFactory, IRequestParameters requestParameters) =>
 			new RequestPipeline(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters ?? new SearchRequestParameters());
 	}
 }

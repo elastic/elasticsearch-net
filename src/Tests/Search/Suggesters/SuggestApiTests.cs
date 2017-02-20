@@ -8,6 +8,7 @@ using static Nest.Infer;
 using FluentAssertions;
 using System.Linq;
 using Tests.Framework;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 
 namespace Tests.Search.Suggesters

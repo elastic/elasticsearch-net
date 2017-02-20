@@ -16,7 +16,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task ASniffOnStartupHappens()
 		{
-			/** We can demonstrate this by creating a _virtual_ Elasticsearch cluster with NEST's Test Framework. 
+			/** We can demonstrate this by creating a _virtual_ Elasticsearch cluster with NEST's Test Framework.
 			* Here we create a 10 node cluster that uses a <<sniffing-connection-pool,SniffingConnectionPool>>, setting
 			* sniff to fail on all nodes *_except_* 9202
 			*/

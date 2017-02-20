@@ -1,20 +1,16 @@
-﻿using System;
-using Nest;
+﻿using Nest;
 using Tests.Framework;
-using static Tests.Framework.RoundTripper;
 using Tests.Framework.MockData;
 using Tests.Framework.Integration;
-using System.Collections.Generic;
 using Elasticsearch.Net;
-using static Nest.Infer;
-using Xunit;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Mapping.Metafields
 {
 	public abstract class MetafieldsMappingApiTestsBase
 		: ApiTestBase<ReadOnlyCluster, IPutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
 	{
-		public MetafieldsMappingApiTestsBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected MetafieldsMappingApiTestsBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Map(f),

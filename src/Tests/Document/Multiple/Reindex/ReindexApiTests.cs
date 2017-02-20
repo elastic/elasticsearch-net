@@ -6,6 +6,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Infer;
@@ -14,9 +16,9 @@ namespace Tests.Document.Multiple.Reindex
 {
 	public class ReindexCluster : ClusterBase
 	{
-		public override void Bootstrap()
+		protected override void SeedNode()
 		{
-			var seeder = new Seeder(this.Node);
+			var seeder = new DefaultSeeder(this.Node);
 			seeder.DeleteIndicesAndTemplates();
 			seeder.CreateIndices();
 		}

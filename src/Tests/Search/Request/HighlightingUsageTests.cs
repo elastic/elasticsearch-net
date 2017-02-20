@@ -9,6 +9,7 @@ using FluentAssertions;
 using Newtonsoft.Json.Linq;
 using Xunit;
 using Tests.Framework;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Search.Request
 {

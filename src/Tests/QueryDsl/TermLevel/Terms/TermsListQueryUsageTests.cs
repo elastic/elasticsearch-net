@@ -5,6 +5,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
 
 #pragma warning disable 618 // DisableCoord and MinimumShouldMatch

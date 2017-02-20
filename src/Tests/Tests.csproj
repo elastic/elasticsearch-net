@@ -14,7 +14,7 @@
     <TargetFrameworkProfile />
     <ResolveNuGetPackages>false</ResolveNuGetPackages>
     <NoWarn>0219</NoWarn>
-	<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -223,25 +223,17 @@
     <Compile Include=".\Document\Single\Update\UpdateApiTests.cs" />
     <Compile Include=".\Document\Single\Update\UpdateUrlTests.cs" />
     <Compile Include=".\Document\Single\Update\UpdateWithSourceApiTests.cs" />
-    <Compile Include=".\Framework\ApiIntegrationTestBase.cs" />
-    <Compile Include=".\Framework\ApiTestBase.cs" />
-    <Compile Include=".\Framework\AsyncLazy.cs" />
-    <Compile Include=".\Framework\Audit\Auditor.cs" />
-    <Compile Include=".\Framework\Audit\Audits.cs" />
     <Compile Include=".\Framework\Configuration\EnvironmentConfiguration.cs" />
     <Compile Include=".\Framework\Configuration\ITestConfiguration.cs" />
     <Compile Include=".\Framework\Configuration\TestConfigurationBase.cs" />
     <Compile Include=".\Framework\Configuration\TestMode.cs" />
     <Compile Include=".\Framework\Configuration\YamlConfiguration.cs" />
-    <Compile Include=".\Framework\CrudTestBase.cs" />
     <Compile Include=".\Framework\Extensions\DiffExtensions.cs" />
     <Compile Include=".\Framework\Extensions\Numeric.cs" />
     <Compile Include=".\Framework\Extensions\Promisify.cs" />
     <Compile Include=".\Framework\Extensions\TypeExtensions.cs" />
     <Compile Include=".\Framework\Extensions\WaitHandleExtensions.cs" />
     <Compile Include=".\Framework\Extensions\WebClient-CoreFx.cs" />
-    <Compile Include=".\Framework\Integration\Bootstrappers\Seeder.cs" />
-    <Compile Include=".\Framework\Integration\Clusters\ClusterBase.cs" />
     <Compile Include="Aggregations\ReservedAggNames.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Dispose\ResponseBuilderDisposeTests.cs" />
     <Compile Include="ClientConcepts\Connection\CustomConnections.cs" />
@@ -256,17 +248,18 @@
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleUrlTests.cs" />
     <Compile Include="Framework\Benchmarks\BenchmarkConfig.cs" />
     <Compile Include="Framework\Benchmarks\BenchmarkTest.cs" />
+    <Compile Include="Framework\Configuration\Versions\ElasticsearchVersion.cs" />
+    <Compile Include="Framework\DocumentationTests\IntegrationDocumentationTestBase.cs" />
+    <Compile Include="Framework\EndpointTests\ApiIntegrationTestBase.cs" />
+    <Compile Include="Framework\EndpointTests\ApiTestBase.cs" />
+    <Compile Include="Framework\EndpointTests\CrudTestBase.cs" />
+    <Compile Include="Framework\EndpointTests\TestState\AsyncLazy.cs" />
+    <Compile Include="Framework\EndpointTests\TestState\CallUniqueValues.cs" />
+    <Compile Include="Framework\EndpointTests\TestState\ClientMethod.cs" />
+    <Compile Include="Framework\EndpointTests\TestState\EndpointUsage.cs" />
+    <Compile Include="Framework\EndpointTests\UrlTests.cs" />
     <Compile Include="Framework\Extensions\EnumerableExtensions.cs" />
     <Compile Include="Framework\Extensions\ShouldExtensions.cs" />
-    <Compile Include="Framework\Integration\Clusters\BenchmarkCluster.cs" />
-    <Compile Include="Framework\Integration\Clusters\WritableCluster.cs" />
-    <Compile Include="Framework\Integration\Clusters\IntrusiveOperationCluster.cs" />
-    <Compile Include=".\Framework\Integration\Clusters\ReadOnlyCluster.cs" />
-    <Compile Include=".\Framework\Integration\EndpointUsage.cs" />
-    <Compile Include=".\Framework\Integration\IntegrationContext.cs" />
-    <Compile Include=".\Framework\Integration\Process\ElasticsearchNode.cs" />
-    <Compile Include=".\Framework\Integration\Process\MapperAttachmentPlugin.cs" />
-    <Compile Include=".\Framework\Integration\Process\ObservableProcess.cs" />
     <Compile Include=".\Framework\MockData\CommitActivity.cs" />
     <Compile Include=".\Framework\MockData\Developer.cs" />
     <Compile Include=".\Framework\MockData\Gender.cs" />
@@ -274,14 +267,7 @@
     <Compile Include=".\Framework\MockData\Person.cs" />
     <Compile Include=".\Framework\MockData\Project.cs" />
     <Compile Include=".\Framework\MockData\Tag.cs" />
-    <Compile Include=".\Framework\MockResponses\SniffingResponse.cs" />
-    <Compile Include=".\Framework\Providers\TestableDateTimeProvider.cs" />
-    <Compile Include=".\Framework\Roundtrip.cs" />
-    <Compile Include=".\Framework\SerializationTestBase.cs" />
-    <Compile Include=".\Framework\SimpleIntegration.cs" />
-    <Compile Include=".\Framework\TestAttributes.cs" />
     <Compile Include=".\Framework\TestClient.cs" />
-    <Compile Include=".\Framework\UrlTests.cs" />
     <Compile Include=".\Framework\VirtualClustering\Cluster.cs" />
     <Compile Include=".\Framework\VirtualClustering\FixedPipelineFactory.cs" />
     <Compile Include=".\Framework\VirtualClustering\Rules\ClientCallRule.cs" />
@@ -458,7 +444,46 @@
     <Compile Include=".\QueryDsl\Geo\Shape\MultiPoint\GeoMultiPointUsageTests.cs" />
     <Compile Include=".\QueryDsl\Geo\Shape\Point\GeoPointUsageTests.cs" />
     <Compile Include=".\QueryDsl\Geo\Shape\Polygon\GeoPolygonUsageTests.cs" />
-    <Compile Include="Framework\Integration\Process\ElasticsearchPlugin.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Clusters\BenchmarkCluster.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Clusters\ClusterBase.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Clusters\IntrusiveOperationCluster.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Clusters\ReadOnlyCluster.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Clusters\UnbalancedCluster.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Clusters\WatcherStateCluster.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Clusters\WritableCluster.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Clusters\XPackCluster.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\NodeSeeders\DefaultSeeder.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Nodes\ElasticsearchNode.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Nodes\NodeConfiguration.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Nodes\NodeFileSystem.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Plugins\ElasticsearchPlugin.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Plugins\ElasticsearchPluginCollection.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Plugins\ElasticsearchPluginConfiguration.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Plugins\MonikerAttribute.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Process\ElasticsearchConsoleOut.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Process\ObservableProcess.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Process\XplatManualResetEvent.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\AfterNodeStoppedTasks\AfterNodeStoppedTaskBase.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\AfterNodeStoppedTasks\CleanUpDirectoriesAfterNodeStopped.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\BeforeStartNodeTasks\BeforeStartNodeTaskBase.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\BeforeStartNodeTasks\CreateEasyRunClusterBatFile.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\CreateEasyRunBatFile.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\CreateNestApplicationDirectory.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\DownloadCurrentElasticsearchDistribution.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\EnsureJavaHomeEnvironmentVariableIsSet.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\EnsureSecurityRolesFileExists.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\EnsureSecurityUsersInDefaultRealmAreAdded.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\EnsureWatcherActionConfigurationInElasticsearchYaml.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\InstallationTaskBase.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\InstallPlugins.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\UnzipCurrentElasticsearchDistribution.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\WriteAnalysisFiles.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\NodeTaskRunner.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\ValidationTasks\NodeValidationTaskBase.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\ValidationTasks\ValidateClusterStateTask.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\ValidationTasks\ValidateLicenseTask.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\ValidationTasks\ValidatePluginsTask.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\ValidationTasks\ValidateRunningVersion.cs" />
     <Compile Include="Framework\MockData\Message.cs" />
     <Compile Include="Framework\Profiling\ColoredConsoleWriter.cs" />
     <Compile Include="Framework\Profiling\IColoredWriter.cs" />
@@ -480,6 +505,19 @@
     <Compile Include="Framework\Profiling\Timeline\TimelineAttribute.cs" />
     <Compile Include="Framework\Profiling\Timeline\TimelineProfile.cs" />
     <Compile Include="Framework\Profiling\Timeline\TimelineProfileFactory.cs" />
+    <Compile Include="Framework\SerializationTests\DictionarySerializationTests.cs" />
+    <Compile Include="Framework\SerializationTests\Roundtrip.cs" />
+    <Compile Include="Framework\SerializationTests\SerializationTestBase.cs" />
+    <Compile Include="Framework\VirtualClustering\Audit\Auditor.cs" />
+    <Compile Include="Framework\VirtualClustering\Audit\Audits.cs" />
+    <Compile Include="Framework\VirtualClustering\MockResponses\SniffingResponse.cs" />
+    <Compile Include="Framework\VirtualClustering\Providers\TestableDateTimeProvider.cs" />
+    <Compile Include="Framework\XUnitPlumbing\IntegrationTestDiscoverer.cs" />
+    <Compile Include="Framework\XUnitPlumbing\NestTestDiscoverer.cs" />
+    <Compile Include="Framework\XUnitPlumbing\RequiresPluginAttribute.cs" />
+    <Compile Include="Framework\XUnitPlumbing\SkipVersionAttribute.cs" />
+    <Compile Include="Framework\XUnitPlumbing\TestAttributes.cs" />
+    <Compile Include="Framework\XUnitPlumbing\UnitTestDiscoverer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="QueryDsl\Geo\Shape\GeoShapeQueryUsageTestsBase.cs" />
     <Compile Include=".\QueryDsl\Joining\HasChild\HasChildQueryUsageTests.cs" />
@@ -618,11 +656,6 @@
     <Compile Include="Reproduce\GithubIssue2306.cs" />
     <Compile Include="Reproduce\GithubIssue2309.cs" />
     <Compile Include="Framework\Extensions\UriExtensions.cs" />
-    <Compile Include="Framework\Integration\CallUniqueValues.cs" />
-    <Compile Include="Framework\Integration\ClientMethod.cs" />
-    <Compile Include="Framework\Integration\Process\ElasticsearchMessage.cs" />
-    <Compile Include="Framework\Integration\Process\ElasticsearchNodeInfo.cs" />
-    <Compile Include="Framework\Integration\Process\ElasticsearchVersionInfo.cs" />
     <Compile Include="Framework\VirtualClustering\WaitingInMemoryConnection.cs" />
     <Compile Include="Framework\Xunit\ForEachAsyncExtensions.cs" />
     <Compile Include="Framework\Xunit\IClusterFixture.cs" />
@@ -677,7 +710,6 @@
     <Compile Include="XPack\License\PostLicense\PostLicenseApiTests.cs" />
     <Compile Include="XPack\Security\Authenticate\AuthenticateApiTests.cs" />
     <Compile Include="XPack\Security\Authenticate\AuthenticateUrlTests.cs" />
-    <Compile Include="Framework\Integration\Clusters\XPackCluster.cs" />
     <Compile Include="XPack\Security\Role\DeleteRole\DeleteRoleUrlTests.cs" />
     <Compile Include="XPack\Security\Role\GetRole\GetRoleUrlTests.cs" />
     <Compile Include="XPack\Security\Role\PutRole\PutRoleApiTests.cs" />

@@ -6,6 +6,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot
@@ -18,7 +19,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 		public SnapshotCrudTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 			//TODO move to own cluster collection with its own bootstrap
-			_repositoryLocation = Path.Combine(cluster.Node.RepositoryPath, RandomString());
+			this._repositoryLocation = Path.Combine(cluster.Node.FileSystem.RepositoryPath, RandomString());
 
 			var create = this.Client.CreateRepository(_repositoryName, cr => cr
 				.FileSystem(fs => fs

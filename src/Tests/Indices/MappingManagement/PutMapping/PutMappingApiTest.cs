@@ -3,6 +3,7 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Infer;
@@ -32,6 +33,10 @@ namespace Tests.Indices.MappingManagement.PutMapping
 			include_in_all = true,
 			properties = new
 			{
+				branches = new
+				{
+					type = "string"
+				},
 				curatedTags = new
 				{
 					properties = new
@@ -127,6 +132,10 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					type = "integer",
 					index = "not_analyzed"
 				},
+				numberOfContributors = new
+				{
+					type = "integer",
+				},
 				startedOn = new
 				{
 					type = "date",
@@ -187,6 +196,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 			IncludeInAll = true,
 			Properties = new Properties<Project>
 			{
+				{ p => p.Branches, new StringProperty() },
 				{ p => p.CuratedTags, new ObjectProperty
 						{
 							Properties = new Properties<Tag>
@@ -225,6 +235,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				{ p => p.Metadata, new ObjectProperty() },
 				{ p => p.Name, new StringProperty { Index = FieldIndexOption.NotAnalyzed }  },
 				{ p => p.NumberOfCommits, new NumberProperty(NumberType.Integer) { Index = NonStringIndexOption.NotAnalyzed } },
+				{ p => p.NumberOfContributors, new NumberProperty(NumberType.Integer) {  } },
 				{ p => p.StartedOn, new DateProperty { Index = NonStringIndexOption.No } },
 				{ p => p.DateString, new StringProperty { } },
 				{ p => p.State, new NumberProperty(NumberType.Integer) },

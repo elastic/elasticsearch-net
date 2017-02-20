@@ -5,6 +5,7 @@ using Xunit;
 using Nest;
 using Elasticsearch.Net;
 using FluentAssertions;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Search.Validate
 {

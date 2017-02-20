@@ -69,5 +69,16 @@ namespace Elasticsearch.Net
 				return TypeCode.Object;
 #endif
 		}
+
+		internal static IEnumerable<TAttribute> GetAttributes<TAttribute>(this Type t)
+			where TAttribute : Attribute
+		{
+#if !DOTNETCORE
+			var attributes = Attribute.GetCustomAttributes(t, typeof(TAttribute), true);
+#else
+			var attributes =  t.GetTypeInfo().GetCustomAttributes(typeof(TAttribute), true);
+#endif
+			return attributes.Cast<TAttribute>();
+		}
 	}
 }
