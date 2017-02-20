@@ -53,6 +53,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 			var indexedOrStored = v > new ElasticsearchVersion("5.0.0-alpha1") ? "stored" : "indexed";
 			var shieldOrSecurity = v > new ElasticsearchVersion("5.0.0-alpha1") ? "security" : "shield";
 			var es = v > new ElasticsearchVersion("5.0.0-alpha2") ? "" : "es.";
+			var b = this.XPackEnabled.ToString().ToLowerInvariant();
 			this.DefaultNodeSettings = new List<string>
 			{
 				$"{es}cluster.name={this.ClusterName}",
@@ -62,15 +63,9 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 				$"{es}script.inline=true",
 				$"{es}script.max_compilations_per_minute=10000",
 				$"{es}script.{indexedOrStored}=true",
-				$"{es}node.{attr}testingcluster=true"
+				$"{es}node.{attr}testingcluster=true",
+				$"{es}xpack.{shieldOrSecurity}.enabled={b}"
 			};
-
-			if (!this.ElasticsearchVersion.IsSnapshot)
-			{
-				var b = this.XPackEnabled.ToString().ToLowerInvariant();
-				this.DefaultNodeSettings.Add($"{es}xpack.{shieldOrSecurity}.enabled={b}");
-			}
-
 		}
 
 		public string[] CreateSettings(string[] additionalSettings)
