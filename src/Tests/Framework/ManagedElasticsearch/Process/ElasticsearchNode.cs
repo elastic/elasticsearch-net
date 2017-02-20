@@ -57,11 +57,9 @@ namespace Tests.Framework.Integration
 				$"{es}script.inline=true",
 				$"{es}script.max_compilations_per_minute=10000",
 				$"{es}script.{indexedOrStored}=true",
-				$"{es}node.{attr}testingcluster=true"
+				$"{es}node.{attr}testingcluster=true",
+				$"{es}xpack.{shieldOrSecurity}.enabled={this._config.XPackEnabled.ToString().ToLowerInvariant()}"
 			};
-
-			if (!this.Version.IsSnapshot)
-				this.DefaultNodeSettings.Add($"{es}xpack.{shieldOrSecurity}.enabled={this._config.XPackEnabled.ToString().ToLowerInvariant()}");
 
 			if (this._config.RunIntegrationTests && !this._config.TestAgainstAlreadyRunningElasticsearch) return;
 			this.Port = 9200;
