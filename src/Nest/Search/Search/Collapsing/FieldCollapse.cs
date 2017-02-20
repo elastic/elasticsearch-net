@@ -26,6 +26,9 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("inner_hits")]
 		IInnerHits InnerHits { get; set; }
+
+		[JsonProperty("max_concurrent_group_searches")]
+		int? MaxConcurrentGroupSearches { get; set; }
 	}
 
 	/// <inheritdoc/>
@@ -35,6 +38,8 @@ namespace Nest
 		public Field Field { get; set; }
 
 		public IInnerHits InnerHits { get; set; }
+
+		public int? MaxConcurrentGroupSearches { get; set; }
 	}
 
 	/// <inheritdoc/>
@@ -44,6 +49,10 @@ namespace Nest
 		/// <inheritdoc/>
 		Field IFieldCollapse.Field { get; set; }
 		IInnerHits IFieldCollapse.InnerHits { get; set; }
+		int? IFieldCollapse.MaxConcurrentGroupSearches { get; set; }
+
+		public FieldCollapseDescriptor<T> MaxConcurrentGroupSearches(int? maxConcurrentGroupSearches) =>
+			Assign(a => a.MaxConcurrentGroupSearches = maxConcurrentGroupSearches);
 
 		public FieldCollapseDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
