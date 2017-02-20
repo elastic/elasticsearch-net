@@ -18,18 +18,21 @@ namespace Tests.Search.Search.Collapsing
 			collapse = new
 			{
 				field = "state",
+				max_concurrent_group_searches = 1000,
 				inner_hits = new
 				{
 					from = 1,
 					name = "stateofbeing",
 					size = 5
 				}
+
 			}
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Collapse(c => c
 				.Field(f => f.State)
+				.MaxConcurrentGroupSearches(1000)
 				.InnerHits(i => i
 					.Name(nameof(StateOfBeing).ToLowerInvariant())
 					.Size(5)
@@ -42,6 +45,7 @@ namespace Tests.Search.Search.Collapsing
 			Collapse = new FieldCollapse
 			{
 				Field = Field<Project>(p => p.State),
+				MaxConcurrentGroupSearches = 1000,
 				InnerHits = new InnerHits
 				{
 					Name = nameof(StateOfBeing).ToLowerInvariant(),
