@@ -8,6 +8,7 @@ using Tests.Search.Request;
 
 namespace Tests.Aggregations.Bucket.AdjacencyMatrix
 {
+	[SkipVersion("<=5.3.0", "new feature")]
 	public class AdjacencyMatrixUsageTests : AggregationUsageTestBase
 	{
 		public AdjacencyMatrixUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage)

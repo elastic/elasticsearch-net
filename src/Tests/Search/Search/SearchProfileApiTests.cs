@@ -13,9 +13,7 @@ namespace Tests.Search.Search
 	public class SearchProfileApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest,
 		SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		public SearchProfileApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public SearchProfileApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (c, f) => c.Search(f),
@@ -50,6 +48,8 @@ namespace Tests.Search.Search
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
+			//this asserts some 5.2.0 and over only properties
+			if (TestClient.VersionUnderTestSatisfiedBy("<=5.2.0")) return;
 			response.Hits.Count().Should().BeGreaterThan(0);
 			var profile = response.Profile;
 			profile.Should().NotBeNull();

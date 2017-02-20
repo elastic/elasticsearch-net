@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
@@ -9,6 +10,7 @@ namespace Tests.Search.Search.Collapsing
 {
 	/**
 	 */
+	[SkipVersion("<=5.3.0", "new feature")]
 	public class FieldCollapseUsageTests : SearchUsageTestBase
 	{
 		public FieldCollapseUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
