@@ -4,6 +4,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Tests.Framework.Promisify;
 
 namespace Tests.Mapping.Types.Core.Keyword

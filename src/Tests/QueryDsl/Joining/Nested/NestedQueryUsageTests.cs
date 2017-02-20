@@ -2,6 +2,7 @@
 using Nest;
 using Newtonsoft.Json.Linq;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 

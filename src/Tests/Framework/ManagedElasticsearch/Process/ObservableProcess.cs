@@ -4,7 +4,7 @@ using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 
-namespace Tests.Framework.Integration
+namespace Tests.Framework.ManagedElasticsearch.Process
 {
 	public class ObservableProcess : IDisposable
 	{
@@ -12,7 +12,7 @@ namespace Tests.Framework.Integration
 		{
 			this.Binary = bin;
 			this.Arguments = string.Join(" ", args);
-			this.Process = new Process
+			this.Process = new System.Diagnostics.Process
 			{
 				EnableRaisingEvents = true,
 				StartInfo =
@@ -34,7 +34,7 @@ namespace Tests.Framework.Integration
 
 		public string Binary { get; private set; }
 
-		public Process Process { get; private set; }
+		public System.Diagnostics.Process Process { get; private set; }
 
 		public string Arguments { get; private set; }
 
@@ -63,7 +63,7 @@ namespace Tests.Framework.Integration
 			});
 		}
 
-		private IDisposable CreateProcessExitSubscription(Process process, IObservable<EventPattern<object>> processExited, IObserver<ConsoleOut> observer)
+		private IDisposable CreateProcessExitSubscription(System.Diagnostics.Process process, IObservable<EventPattern<object>> processExited, IObserver<ConsoleOut> observer)
 		{
 			return processExited.Subscribe(args =>
 			{
@@ -121,7 +121,7 @@ namespace Tests.Framework.Integration
 
 	public static class RxProcessUtilities
 	{
-		public static IObservable<ConsoleOut> CreateStandardErrorObservable(this Process process)
+		public static IObservable<ConsoleOut> CreateStandardErrorObservable(this System.Diagnostics.Process process)
 		{
 			var receivedStdErr =
 				Observable.FromEventPattern<DataReceivedEventHandler, DataReceivedEventArgs>
@@ -135,7 +135,7 @@ namespace Tests.Framework.Integration
 			});
 		}
 
-		public static IObservable<ConsoleOut> CreateStandardOutputObservable(this Process process)
+		public static IObservable<ConsoleOut> CreateStandardOutputObservable(this System.Diagnostics.Process process)
 		{
 			var receivedStdOut =
 				Observable.FromEventPattern<DataReceivedEventHandler, DataReceivedEventArgs>

@@ -1,18 +1,20 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
+using Tests.Framework.Configuration;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Nodes;
+using Tests.Framework.ManagedElasticsearch.Process;
 #if !DOTNETCORE
 using XplatManualResetEvent = System.Threading.ManualResetEvent;
 #endif
 
-namespace Tests.Framework.ManagedElasticsearch.InstallationTasks
+namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 {
 	public abstract class InstallationTaskBase
 	{
-		public abstract void Run(NodeConfiguration config, INodeFileSystem fileSystem);
+		public abstract void Run(NodeConfiguration config, NodeFileSystem fileSystem);
 
 		protected void DownloadFile(string from, string to)
 		{

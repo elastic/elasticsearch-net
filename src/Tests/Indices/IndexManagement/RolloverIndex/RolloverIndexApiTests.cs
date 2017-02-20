@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Indices.IndexManagement.RolloverIndex
 {

@@ -1,12 +1,14 @@
 using System.IO;
 using System.Linq;
+using Tests.Framework.Configuration;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Nodes;
 
-namespace Tests.Framework.ManagedElasticsearch.InstallationTasks
+namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 {
 	public class EnsureSecurityRolesFileExists : InstallationTaskBase
 	{
-		public override void Run(NodeConfiguration config, INodeFileSystem fileSystem)
+		public override void Run(NodeConfiguration config, NodeFileSystem fileSystem)
 		{
 			if (!config.XPackEnabled) return;
 			var folder = config.ElasticsearchVersion.Major >= 5 ? "x-pack" : "shield";

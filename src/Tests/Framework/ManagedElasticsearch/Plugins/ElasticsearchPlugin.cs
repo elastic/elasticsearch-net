@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reflection;
 using Tests.Framework.Versions;
-using static Tests.Framework.Integration.ElasticsearchPlugin;
 
-namespace Tests.Framework.Integration
+namespace Tests.Framework.ManagedElasticsearch.Plugins
 {
 	[AttributeUsage(AttributeTargets.Field)]
 	public class MonikerAttribute : Attribute
@@ -51,14 +48,14 @@ namespace Tests.Framework.Integration
 		public static ElasticsearchPluginCollection Supported { get; } =
 			new ElasticsearchPluginCollection
 			{
-				new ElasticsearchPluginConfiguration(DeleteByQuery, version => version < new ElasticsearchVersion("5.0.0-alpha3")),
-				new ElasticsearchPluginConfiguration(MapperAttachments),
-				new ElasticsearchPluginConfiguration(MapperMurmer3),
+				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.DeleteByQuery, version => version < new ElasticsearchVersion("5.0.0-alpha3")),
+				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.MapperAttachments),
+				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.MapperMurmer3),
 				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.XPack),
-				new ElasticsearchPluginConfiguration(IngestGeoIp, version => version >= new ElasticsearchVersion("5.0.0-alpha3")),
-				new ElasticsearchPluginConfiguration(IngestAttachment, version => version >= new ElasticsearchVersion("5.0.0-alpha3")),
-				new ElasticsearchPluginConfiguration(AnalysisKuromoji),
-				new ElasticsearchPluginConfiguration(AnalysisIcu)
+				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.IngestGeoIp, version => version >= new ElasticsearchVersion("5.0.0-alpha3")),
+				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.IngestAttachment, version => version >= new ElasticsearchVersion("5.0.0-alpha3")),
+				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.AnalysisKuromoji),
+				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.AnalysisIcu)
 			};
 
 		protected override ElasticsearchPlugin GetKeyForItem(ElasticsearchPluginConfiguration item)

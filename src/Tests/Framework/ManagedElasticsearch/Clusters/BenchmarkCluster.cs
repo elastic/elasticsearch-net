@@ -1,6 +1,6 @@
 ﻿using Tests.Framework.Integration;
 
-namespace Tests.Framework.EndpointTests.Clusters
+namespace Tests.Framework.ManagedElasticsearch.Clusters
 {
 	public class BenchmarkCluster : ClusterBase { }
 }

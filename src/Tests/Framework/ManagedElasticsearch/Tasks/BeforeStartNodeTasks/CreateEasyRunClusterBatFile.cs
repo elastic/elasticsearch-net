@@ -1,16 +1,18 @@
 using System.IO;
 using System.Linq;
+using Tests.Framework.Configuration;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Nodes;
 
-namespace Tests.Framework.ManagedElasticsearch.InstallationTasks
+namespace Tests.Framework.ManagedElasticsearch.Tasks.BeforeStartNodeTasks
 {
 	public class CreateEasyRunClusterBatFile : BeforeStartNodeTaskBase
 	{
-		public override void Run(NodeConfiguration config, INodeFileSystem fs, string[] serverSettings)
+		public override void Run(NodeConfiguration config, NodeFileSystem fs, string[] serverSettings)
 		{
-			var cluster = config.TypeOfCluster;
+			var clusterMoniker = config.ClusterMoniker;
 			var v = config.ElasticsearchVersion;
-			var easyRunBat = Path.Combine(fs.RoamingFolder, $"run-{cluster}.bat");
+			var easyRunBat = Path.Combine(fs.RoamingFolder, $"run-{clusterMoniker}.bat");
 			if (File.Exists(easyRunBat)) return;
 			var badSettings = new[] {"node.name", "cluster.name"};
 			var batSettings = string.Join(" ", serverSettings.Where(s => !badSettings.Any(s.Contains)));

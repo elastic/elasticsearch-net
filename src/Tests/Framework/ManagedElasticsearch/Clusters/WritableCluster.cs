@@ -1,6 +1,8 @@
-﻿using Xunit;
+﻿using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
+using Tests.Framework.ManagedElasticsearch.Plugins;
 
-namespace Tests.Framework.Integration
+namespace Tests.Framework.ManagedElasticsearch.Clusters
 {
 	/// <summary>
 	/// Use this cluster for api's that do writes. If they are however intrusive or long running consider IntrusiveOperationCluster instead.
@@ -16,9 +18,9 @@ namespace Tests.Framework.Integration
 	{
 		public override int MaxConcurrency => 4;
 
-		protected override void AfterNodeStarts()
+		protected override void SeedNode()
 		{
-			var seeder = new Seeder(this.Node);
+			var seeder = new DefaultSeeder(this.Node);
 			seeder.SeedNode();
 		}
 	}

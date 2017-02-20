@@ -1,12 +1,14 @@
 using System;
 using System.IO;
+using Tests.Framework.Configuration;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Nodes;
 
-namespace Tests.Framework.ManagedElasticsearch.InstallationTasks
+namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 {
 	public class DownloadCurrentElasticsearchDistribution : InstallationTaskBase
 	{
-		public override void Run(NodeConfiguration config, INodeFileSystem fileSystem)
+		public override void Run(NodeConfiguration config, NodeFileSystem fileSystem)
 		{
 			var v = config.ElasticsearchVersion;
 			var from = v.DownloadUrl;

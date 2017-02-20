@@ -1,14 +1,17 @@
 using System;
 using System.IO;
 using System.Linq;
+using Tests.Framework.Configuration;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Nodes;
+using Tests.Framework.ManagedElasticsearch.Plugins;
 using Tests.Framework.Versions;
 
-namespace Tests.Framework.ManagedElasticsearch.InstallationTasks
+namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 {
 	public class InstallPlugins : InstallationTaskBase
 	{
-		public override void Run(NodeConfiguration config, INodeFileSystem fileSystem)
+		public override void Run(NodeConfiguration config, NodeFileSystem fileSystem)
 		{
 			var v = config.ElasticsearchVersion;
 			var plugins =
@@ -26,7 +29,7 @@ namespace Tests.Framework.ManagedElasticsearch.InstallationTasks
 			}
 		}
 
-		private static bool AlreadyInstalled(ElasticsearchPluginConfiguration plugin, INodeFileSystem fileSystem)
+		private static bool AlreadyInstalled(ElasticsearchPluginConfiguration plugin, NodeFileSystem fileSystem)
 		{
 			var folder = plugin.FolderName;
 			var pluginFolder = Path.Combine(fileSystem.ElasticsearchHome, "plugins", folder);
@@ -35,7 +38,7 @@ namespace Tests.Framework.ManagedElasticsearch.InstallationTasks
 			return Directory.Exists(pluginFolder);
 		}
 
-		private string DownloadSnapshotIfNeeded(INodeFileSystem fileSystem, ElasticsearchPluginConfiguration plugin, ElasticsearchVersion v)
+		private string DownloadSnapshotIfNeeded(NodeFileSystem fileSystem, ElasticsearchPluginConfiguration plugin, ElasticsearchVersion v)
 		{
 			var downloadLocation = Path.Combine(fileSystem.RoamingFolder, plugin.SnapshotZip(v));
 			this.DownloadPluginSnapshot(downloadLocation, plugin, v);

@@ -1,12 +1,14 @@
 using System;
 using System.IO;
+using Tests.Framework.Configuration;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Nodes;
 
-namespace Tests.Framework.ManagedElasticsearch.InstallationTasks
+namespace Tests.Framework.ManagedElasticsearch.Tasks.AfterNodeStoppedTasks
 {
 	public class CleanUpDirectoriesAfterNodeStopped : AfterNodeStoppedTaskBase
 	{
-		public override void Run(NodeConfiguration config, INodeFileSystem fs)
+		public override void Run(NodeConfiguration config, NodeFileSystem fs)
 		{
 			if (Directory.Exists(fs.DataPath))
 			{
@@ -16,7 +18,7 @@ namespace Tests.Framework.ManagedElasticsearch.InstallationTasks
 
 			if (Directory.Exists(fs.LogsPath))
 			{
-				var files = Directory.GetFiles(fs.LogsPath, fs.ClusterName + "*.log");
+				var files = Directory.GetFiles(fs.LogsPath, config.ClusterName + "*.log");
 				foreach (var f in files)
 				{
 					Console.WriteLine($"attempting to delete log file: {f}");

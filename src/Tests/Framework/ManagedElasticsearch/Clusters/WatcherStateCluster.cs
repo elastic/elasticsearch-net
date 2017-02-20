@@ -1,4 +1,4 @@
-﻿namespace Tests.Framework.Integration
+﻿namespace Tests.Framework.ManagedElasticsearch.Clusters
 {
 	/// <summary>
 	/// Cluster that modifies the state of the Watcher Service

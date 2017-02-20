@@ -13,6 +13,8 @@ using Tests.Framework.Versions;
 using Xunit;
 using static Tests.Framework.TimesHelper;
 using static Elasticsearch.Net.AuditEvent;
+using Tests.Framework.ManagedElasticsearch;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {

@@ -1,12 +1,14 @@
 ﻿using System.IO;
+using Tests.Framework.Configuration;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Nodes;
 using Tests.XPack.Security;
 
-namespace Tests.Framework.ManagedElasticsearch.InstallationTasks
+namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 {
 	public class EnsureSecurityUsersInDefaultRealmAreAdded : InstallationTaskBase
 	{
-		public override void Run(NodeConfiguration config, INodeFileSystem fileSystem)
+		public override void Run(NodeConfiguration config, NodeFileSystem fileSystem)
 		{
 			if (!config.XPackEnabled) return;
 

@@ -1,11 +1,12 @@
-﻿using System;
-using Nest;
+﻿using Nest;
+using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 
-namespace Tests.Framework.Integration
+namespace Tests.Framework.ManagedElasticsearch.Clusters
 {
 	public class UnbalancedCluster : ReadOnlyCluster
 	{
-		protected override void AfterNodeStarts() =>
-			new Seeder(this.Node, new IndexSettings { NumberOfShards = 3, NumberOfReplicas = 2 }).SeedNode();
+		protected override void SeedNode() =>
+			new DefaultSeeder(this.Node, new IndexSettings { NumberOfShards = 3, NumberOfReplicas = 2 }).SeedNode();
 	}
 }
