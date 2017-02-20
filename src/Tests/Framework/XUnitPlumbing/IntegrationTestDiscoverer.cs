@@ -9,17 +9,13 @@ namespace Tests.Framework
 	public class IntegrationTestDiscoverer : NestTestDiscoverer
 	{
 		public IntegrationTestDiscoverer(IMessageSink diagnosticMessageSink)
-			: base(diagnosticMessageSink, TestClient.Configuration.RunIntegrationTests)
-		{
-		}
+			: base(diagnosticMessageSink, TestClient.Configuration.RunIntegrationTests) { }
 
 		protected override bool SkipMethod(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo factAttribute)
 		{
 			var classOfMethod = Type.GetType(testMethod.TestClass.Class.Name, true, true);
 			var method = classOfMethod.GetMethod(testMethod.Method.Name, BindingFlags.FlattenHierarchy | BindingFlags.NonPublic | BindingFlags.Public)
 				?? testMethod.Method.ToRuntimeMethod();
-
-			var collectionType = TestAssemblyRunner.GetClusterForCollection(testMethod.TestClass?.TestCollection);
 
 			return TypeSkipVersionAttributeSatisfies(classOfMethod) ||
 				   MethodSkipVersionAttributeSatisfies(method);

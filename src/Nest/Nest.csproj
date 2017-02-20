@@ -1258,6 +1258,7 @@
     <Compile Include="Search\SearchTemplate\PutSearchTemplate\PutSearchTemplateRequest.cs" />
     <Compile Include="Search\SearchTemplate\PutSearchTemplate\PutSearchTemplateResponse.cs" />
     <Compile Include="Search\SearchTemplate\SearchTemplateRequest.cs" />
+    <Compile Include="Search\Search\Collapsing\FieldCollapse.cs" />
     <Compile Include="Search\Search\ElasticClient-ResponseCovariance.cs" />
     <Compile Include="Search\Search\ElasticClient-Search.cs" />
     <Compile Include="Search\Search\Highlighting\Highlight.cs" />
