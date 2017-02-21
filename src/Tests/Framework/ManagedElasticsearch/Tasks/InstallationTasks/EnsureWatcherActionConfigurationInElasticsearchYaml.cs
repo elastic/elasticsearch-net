@@ -10,11 +10,12 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 	{
 		public override void Run(NodeConfiguration config, NodeFileSystem fileSystem)
 		{
-			if (!config.XPackEnabled) return;
-
 			var rolesConfig = Path.Combine(fileSystem.ElasticsearchHome, "config", "elasticsearch.yml");
 			var lines = File.ReadAllLines(rolesConfig).ToList();
 			var saveFile = false;
+
+			var prefix = config.ElasticsearchVersion.Major >= 5 ? "xpack.notification" : "watcher.actions";
+			var postfix = config.ElasticsearchVersion.Major >= 5 ? string.Empty : ".service";
 
 			// set up for Watcher HipChat action
 			if (!lines.Any(line => line.StartsWith("xpack.notification.hipchat:")))
@@ -22,7 +23,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 				lines.AddRange(new[]
 				{
 					string.Empty,
-					"xpack.notification.hipchat:",
+					$"{prefix}.hipchat{postfix}:",
 					"  account:",
 					"    notify-monitoring:",
 					"      profile: user",
@@ -40,7 +41,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 				lines.AddRange(new[]
 				{
 					string.Empty,
-					"xpack.notification.slack:",
+					$"{prefix}.slack{postfix}:",
 					"  account:",
 					"    monitoring:",
 					"      url: https://hooks.slack.com/services/foo/bar/baz",
@@ -56,7 +57,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 				lines.AddRange(new[]
 				{
 					string.Empty,
-					"xpack.notification.pagerduty:",
+					$"{prefix}.pagerduty{postfix}:",
 					"  account:",
 					"    my_pagerduty_account:",
 					"      service_api_key: pager_duty_service_api_key",

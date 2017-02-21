@@ -61,16 +61,15 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks
 			Itterate(NodeStoppedTasks, (t, n,  fs) => t.Run(n, fs));
 
 		public void OnBeforeStart(string [] serverSettings) =>
-			Itterate(BeforeStart, (t, n,  fs) => t.Run(n, fs, serverSettings));
+			Itterate(BeforeStart, (t, n,  fs) => t.Run(n, fs, serverSettings), log: false);
 
 		public void ValidateAfterStart(IElasticClient client) =>
-			Itterate(ValidationTasks, (t, n,  fs) => t.Validate(client, n));
+			Itterate(ValidationTasks, (t, n,  fs) => t.Validate(client, n), log: false);
 
 		private IList<string> GetCurrentRunnerLog()
 		{
 			var log = this.NodeConfiguration.FileSystem.TaskRunnerFile;
-			if (!File.Exists(log)) File.Create(log);
-			return File.ReadAllLines(log).ToList();
+			return !File.Exists(log) ? new List<string>() : File.ReadAllLines(log).ToList();
 		}
 		private void LogTasks(IList<string> logs)
 		{
@@ -78,7 +77,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks
 			File.WriteAllText(log, string.Join(Environment.NewLine, logs));
 		}
 
-		private void Itterate<T>(IEnumerable<T> collection, Action<T, NodeConfiguration, NodeFileSystem> act)
+		private void Itterate<T>(IEnumerable<T> collection, Action<T, NodeConfiguration, NodeFileSystem> act, bool log = true)
 		{
 			if (!this.NodeConfiguration.RunIntegrationTests) return;
 			lock (NodeTaskRunner.Lock)
@@ -87,11 +86,11 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks
 				foreach (var task in collection)
 				{
 					var name = task.GetType().Name;
-					if (!taskLog.Contains(name))
-						act(task,this.NodeConfiguration, this.NodeConfiguration.FileSystem);
-					taskLog.Add(name);
+					if (log && taskLog.Contains(name)) continue;
+					act(task,this.NodeConfiguration, this.NodeConfiguration.FileSystem);
+					if (log) taskLog.Add(name);
 				}
-				this.LogTasks(taskLog);
+				if (log) this.LogTasks(taskLog);
 			}
 		}
 

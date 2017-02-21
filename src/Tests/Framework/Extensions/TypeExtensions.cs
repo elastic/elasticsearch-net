@@ -122,5 +122,15 @@ namespace Tests.Framework
 #endif
 			return attributes.Cast<TAttribute>();
 		}
+		internal static IEnumerable<TAttribute> GetAttributes<TAttribute>(this MethodInfo m)
+			where TAttribute : Attribute
+		{
+#if !DOTNETCORE
+			var attributes = Attribute.GetCustomAttributes(m, typeof(TAttribute), true);
+#else
+			var attributes =  m.GetCustomAttributes(typeof(TAttribute), true);
+#endif
+			return attributes.Cast<TAttribute>();
+		}
 	}
 }
