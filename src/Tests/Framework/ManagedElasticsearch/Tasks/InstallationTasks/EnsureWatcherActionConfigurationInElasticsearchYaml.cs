@@ -18,7 +18,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 			var postfix = config.ElasticsearchVersion.Major >= 5 ? string.Empty : ".service";
 
 			// set up for Watcher HipChat action
-			if (!lines.Any(line => line.StartsWith("xpack.notification.hipchat:")))
+			if (!lines.Any(line => line.StartsWith($"{prefix}.hipchat{postfix}:")))
 			{
 				lines.AddRange(new[]
 				{
@@ -36,7 +36,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 			}
 
 			// set up for Watcher Slack action
-			if (!lines.Any(line => line.StartsWith("xpack.notification.slack:")))
+			if (!lines.Any(line => line.StartsWith($"{prefix}.slack{postfix}:")))
 			{
 				lines.AddRange(new[]
 				{
@@ -52,7 +52,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 			}
 
 			// set up for Watcher PagerDuty action
-			if (!lines.Any(line => line.StartsWith("xpack.notification.pagerduty:")))
+			if (!lines.Any(line => line.StartsWith($"{prefix}.pagerduty{postfix}:")))
 			{
 				lines.AddRange(new[]
 				{
