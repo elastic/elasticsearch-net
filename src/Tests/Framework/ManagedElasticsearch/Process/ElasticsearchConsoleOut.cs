@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using Tests.Framework.Versions;
 
 namespace Tests.Framework.ManagedElasticsearch.Process
 {
@@ -40,13 +41,16 @@ namespace Tests.Framework.ManagedElasticsearch.Process
 		private static readonly Regex ConsoleLineParser =
 			new Regex(@"\[(?<date>.*?)\]\[(?<level>.*?)\]\[(?<section>.*?)\] \[(?<node>.*?)\] (?<message>.+)");
 
-		public ElasticsearchConsoleOut(bool error, string consoleLine) : base(error, consoleLine)
+		public ElasticsearchConsoleOut(ElasticsearchVersion version, bool error, string consoleLine) : base(error, consoleLine)
 		{
 			if (string.IsNullOrEmpty(consoleLine)) return;
 			var match = ConsoleLineParser.Match(consoleLine);
 			if (!match.Success) return;
 			var dateString = match.Groups["date"].Value.Trim();
-			Date = DateTime.ParseExact(dateString, "yyyy-MM-ddTHH:mm:ss,fff", CultureInfo.CurrentCulture);
+			if (version.Major >= 5)
+				Date = DateTime.ParseExact(dateString, "yyyy-MM-ddTHH:mm:ss,fff", CultureInfo.CurrentCulture);
+			else
+				Date = DateTime.ParseExact(dateString, "yyyy-MM-dd HH:mm:ss,fff", CultureInfo.CurrentCulture);
 			Level = match.Groups["level"].Value.Trim();
 			Section = match.Groups["section"].Value.Trim().Replace("org.elasticsearch.", "");
 			Node = match.Groups["node"].Value.Trim();

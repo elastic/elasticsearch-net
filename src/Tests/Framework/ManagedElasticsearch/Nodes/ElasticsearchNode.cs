@@ -83,7 +83,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 				try
 				{
 					var subscription = Observable.Using(() => process, p => p.Start())
-						.Select(c => new ElasticsearchConsoleOut(c.Error, c.Data))
+						.Select(c => new ElasticsearchConsoleOut(this._config.ElasticsearchVersion, c.Error, c.Data))
 						.Subscribe(s => this.HandleConsoleMessage(s, handle), e => { throw e; }, () => handle.Set());
 					this._composite.Add(subscription);
 

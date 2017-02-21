@@ -279,6 +279,9 @@
     <Compile Include="Framework\ManagedElasticsearch\Nodes\ElasticsearchNode.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Nodes\NodeConfiguration.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Plugins\ElasticsearchPlugin.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Plugins\ElasticsearchPluginCollection.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Plugins\ElasticsearchPluginConfiguration.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Plugins\MonikerAttribute.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Tasks\AfterNodeStoppedTasks\AfterNodeStoppedTaskBase.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Tasks\AfterNodeStoppedTasks\CleanUpDirectoriesAfterNodeStopped.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Tasks\BeforeStartNodeTasks\BeforeStartNodeTaskBase.cs" />
