@@ -5,6 +5,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Infer;
@@ -76,7 +78,7 @@ namespace Tests.Cluster.ClusterState
 			meta.Indices.Should().NotBeEmpty().And.ContainKey(i);
 
 			var index = meta.Indices[i];
-			index.Aliases.Should().NotBeEmpty().And.Contain("projects-alias");
+			index.Aliases.Should().NotBeEmpty().And.Contain(DefaultSeeder.ProjectsAliasName);
 			index.Mappings.Should().NotBeEmpty().And.ContainKey(t);
 
 			var commitsMapping = index.Mappings[t];

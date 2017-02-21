@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Elasticsearch.Net;
 
@@ -15,7 +16,10 @@ namespace Tests.Framework
 		public TestableDateTimeProvider DateTimeProvider { get; } = new TestableDateTimeProvider();
 
 		private bool _sniffReturnsFqdn = false;
-		public bool SniffShouldReturnFqnd => _sniffReturnsFqdn;
+		internal bool SniffShouldReturnFqnd => _sniffReturnsFqdn;
+
+		private string _publishAddress;
+		internal string PublishAddressOverride => _publishAddress;
 
 		public IReadOnlyList<Node> Nodes => _nodes;
 
@@ -30,6 +34,12 @@ namespace Tests.Framework
 			return this;
 		}
 
+		public VirtualCluster PublishAddress(string publishHost)
+		{
+			_publishAddress = publishHost;
+			return this;
+		}
+
 		public VirtualCluster MasterEligible(params int[] ports)
 		{
 			foreach (var node in this._nodes.Where(n => !ports.Contains(n.Uri.Port)))
@@ -41,6 +51,12 @@ namespace Tests.Framework
 		{
 			foreach (var node in this._nodes.Where(n => ports.Contains(n.Uri.Port)))
 				node.HoldsData = false;
+			return this;
+		}
+		public VirtualCluster HasSetting(string key, string value, params int[] ports)
+		{
+			foreach (var node in this._nodes.Where(n => ports.Contains(n.Uri.Port)))
+				node.Settings = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>{{key, value}});
 			return this;
 		}
 		public VirtualCluster HttpDisabled(params int[] ports)

@@ -17,7 +17,7 @@ please modify the original csharp file found at the link and submit the PR with 
 
 <<connection-pooling, Connection pools>> that return true for `SupportsReseeding` will sniff on startup by default.
 
-We can demonstrate this by creating a _virtual_ Elasticsearch cluster with NEST's Test Framework. 
+We can demonstrate this by creating a _virtual_ Elasticsearch cluster with NEST's Test Framework.
 Here we create a 10 node cluster that uses a <<sniffing-connection-pool,SniffingConnectionPool>>, setting
 sniff to fail on all nodes *_except_* 9202
 

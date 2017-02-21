@@ -5,6 +5,7 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Restore
@@ -17,7 +18,7 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 
 			var createRepository = this.Client.CreateRepository(RepositoryName, r => r
 				.FileSystem(fs => fs
-					.Settings(Path.Combine(cluster.Node.RepositoryPath, RepositoryName))
+					.Settings(Path.Combine(cluster.Node.FileSystem.RepositoryPath, RepositoryName))
 				)
 			);
 			if (!createRepository.IsValid)

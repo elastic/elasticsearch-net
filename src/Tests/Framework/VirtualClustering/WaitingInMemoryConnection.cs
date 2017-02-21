@@ -3,14 +3,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
-namespace Tests.Framework.VirtualClustering
+namespace Tests.Framework
 {
     public class WaitingInMemoryConnection : InMemoryConnection
     {
         private readonly TimeSpan _waitTime;
 
         public WaitingInMemoryConnection(TimeSpan waitTime, byte[] responseBody, int statusCode = 200, Exception exception = null)
-            : base(responseBody, statusCode, exception)
+            : base (responseBody, statusCode, exception)
         {
             this._waitTime = waitTime;
         }
@@ -23,7 +23,7 @@ namespace Tests.Framework.VirtualClustering
 
         public override async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData)
         {
-            await Task.Delay(_waitTime);
+            await Task.Delay(_waitTime, requestData.CancellationToken);
             return await base.RequestAsync<TReturn>(requestData);
         }
     }

@@ -6,6 +6,7 @@ using Tests.Framework.MockData;
 using static Nest.Infer;
 using System.Collections.Generic;
 using Tests.Framework;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Aggregations.Metric.Average
 {

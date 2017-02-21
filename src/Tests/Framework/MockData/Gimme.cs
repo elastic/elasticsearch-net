@@ -11,5 +11,6 @@ namespace Tests.Framework.MockData
 		}
 
 		public static Randomizer Random = new Randomizer();
+
 	}
 }

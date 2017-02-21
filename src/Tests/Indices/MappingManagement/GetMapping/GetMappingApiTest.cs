@@ -5,6 +5,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Infer;
@@ -41,11 +42,11 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			response.Accept(visitor);
 
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
-			visitor.CountsShouldContainKeyAndCountBe("object", 2);
-			visitor.CountsShouldContainKeyAndCountBe("date", 5);
-			visitor.CountsShouldContainKeyAndCountBe("string", 17);
+			visitor.CountsShouldContainKeyAndCountBe("object", 3);
+			visitor.CountsShouldContainKeyAndCountBe("date", 4);
+			visitor.CountsShouldContainKeyAndCountBe("string", 16);
 			visitor.CountsShouldContainKeyAndCountBe("ip", 1);
-			visitor.CountsShouldContainKeyAndCountBe("number", 2);
+			visitor.CountsShouldContainKeyAndCountBe("number", 3);
 			visitor.CountsShouldContainKeyAndCountBe("geo_point", 2);
 			visitor.CountsShouldContainKeyAndCountBe("completion", 2);
 			visitor.CountsShouldContainKeyAndCountBe("nested", 1);
@@ -111,7 +112,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		public void CountsShouldContainKeyAndCountBe(string key, int count)
 		{
 			this.Counts.ContainsKey(key).Should().BeTrue();
-			this.Counts[key].Should().Be(count);
+			this.Counts[key].Should().Be(count, key);
 		}
 
 		public void Visit(DateProperty mapping)

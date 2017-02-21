@@ -5,6 +5,7 @@ using Tests.Framework.MockData;
 using System;
 using Tests.Framework;
 using FluentAssertions;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Compound.Bool
 {

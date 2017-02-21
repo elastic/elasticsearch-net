@@ -7,6 +7,8 @@ using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.Profiling;
 using Tests.Framework.Profiling.Memory;
 using Tests.Framework.Profiling.Performance;

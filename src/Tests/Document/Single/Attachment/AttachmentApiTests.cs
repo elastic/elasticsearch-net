@@ -7,6 +7,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Document.Single.Attachment
 {
@@ -29,6 +30,7 @@ namespace Tests.Document.Single.Attachment
 		public Nest.Attachment Attachment { get; set; }
 	}
 
+	[SkipVersion("<2.4.0", "This is now in maintainence mode we only test it against the latest stable because previous versions needed complex version parity lookups to install")]
 	public abstract class AttachmentApiTestsBase :
 		ApiIntegrationTestBase<WritableCluster, IIndexResponse, IIndexRequest<Document>, IndexDescriptor<Document>, IndexRequest<Document>>
 	{

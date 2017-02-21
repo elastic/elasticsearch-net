@@ -7,6 +7,7 @@ using Tests.Framework.MockData;
 using static Tests.Framework.RoundTripper;
 using Xunit;
 using FluentAssertions;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.ClientConcepts.HighLevel.Inference
 {

@@ -6,6 +6,8 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.MockData;
 using Xunit;
 
@@ -21,7 +23,7 @@ namespace Tests.Search.Percolator.MultiPercolate
 		{
 			var createIndex = this.Client.CreateIndex(this.Index, c=>c
 				.Mappings(mm=>mm
-					.Map<Project>(Seeder.MapProject)
+					.Map<Project>(m=>m.Properties(DefaultSeeder.ProjectProperties))
 				)
 			);
 			this.Client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow).Index(this.Index));

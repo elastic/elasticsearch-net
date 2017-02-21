@@ -1,5 +1,7 @@
 ﻿using System;
 using Nest;
+using Tests.Framework;
+using Tests.Framework.ManagedElasticsearch.Plugins;
 
 namespace Tests.Mapping.Types.Specialized.Murmur3Hash
 {
@@ -12,6 +14,7 @@ namespace Tests.Mapping.Types.Specialized.Murmur3Hash
 		public string Minimal { get; set; }
 	}
 
+	[RequiresPlugin(ElasticsearchPlugin.MapperMurmer3)]
 	public class Murmur3HashMappingTests : TypeMappingTestBase<Murmur3HashTest>
 	{
 		protected override object ExpectJson => new

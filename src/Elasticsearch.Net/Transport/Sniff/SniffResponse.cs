@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -7,7 +8,6 @@ namespace Elasticsearch.Net
 {
 	internal class SniffResponse
 	{
-
 		private static Regex AddressRe { get; } = new Regex(@"^((?<fqdn>[^/]+)/)?(?<ip>[^:]+):(?<port>\d+)$");
 
 		public string cluster_name { get; set; }
@@ -15,6 +15,7 @@ namespace Elasticsearch.Net
 
 		public IEnumerable<Node> ToNodes(bool forceHttp = false)
 		{
+			if (nodes == null) throw new Exception("Response contains no nodes!");
 			foreach (var kv in nodes.Where(n=>n.Value.HttpEnabled))
 			{
 				yield return new Node(this.ParseToUri(kv.Value.http_address, forceHttp))
@@ -24,6 +25,9 @@ namespace Elasticsearch.Net
 					MasterEligible = kv.Value.MasterEligible,
 					HoldsData = kv.Value.HoldsData,
 					HttpEnabled = kv.Value.HttpEnabled,
+					Settings = kv.Value.settings != null
+						? new ReadOnlyDictionary<string, string>(kv.Value.settings)
+						: null
 				};
 			}
 		}
@@ -63,9 +67,9 @@ namespace Elasticsearch.Net
 		{
 			get
 			{
-				if (this.settings == null) return true;
-				if (!this.settings.ContainsKey("http.enabled")) return true;
-				return Convert.ToBoolean(this.settings["http.enabled"]) ;
+				if (this.settings != null && this.settings.ContainsKey("http.enabled"))
+					return Convert.ToBoolean(this.settings["http.enabled"]);
+				return true;
 			}
 		}
 	}

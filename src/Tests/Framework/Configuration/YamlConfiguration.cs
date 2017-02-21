@@ -1,13 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using Tests.Framework.Versions;
 
 namespace Tests.Framework.Configuration
 {
 	public class YamlConfiguration : TestConfigurationBase
 	{
 		public override bool TestAgainstAlreadyRunningElasticsearch { get; protected set; } = true;
-		public override string ElasticsearchVersion { get; protected set; } = "2.0.0";
+		public override ElasticsearchVersion ElasticsearchVersion { get; protected set; }
 		public override bool ForceReseed { get; protected set; } = true;
 		public override TestMode Mode { get; protected set; } = TestMode.Unit;
 		public override string ClusterFilter { get; protected set; }
@@ -22,16 +23,23 @@ namespace Tests.Framework.Configuration
 				.ToDictionary(ConfigName, ConfigValue);
 
 			this.Mode = GetTestMode(config["mode"]);
-			this.ElasticsearchVersion = config["elasticsearch_version"];
+			this.ElasticsearchVersion = new ElasticsearchVersion(config["elasticsearch_version"]);
 			this.ForceReseed = bool.Parse(config["force_reseed"]);
 			this.TestAgainstAlreadyRunningElasticsearch = bool.Parse(config["test_against_already_running_elasticsearch"]);
-			this.ClusterFilter = config["cluster_filter"];
+			this.ClusterFilter = config.ContainsKey("cluster_filter") ? config["cluster_filter"] : null;
 			this.TestFilter = config.ContainsKey("test_filter") ? config["test_filter"] : null;
 		}
 
 		private static string ConfigName(string configLine) => Parse(configLine, 0);
 		private static string ConfigValue(string configLine) => Parse(configLine, 1);
-		private static string Parse(string configLine, int index) => configLine.Split(':')[index].Trim(' ');
+		private static string Parse(string configLine, int index)
+		{
+			var configParts = configLine.Split(':');
+
+			return configParts.Length - 1 >= index
+				? configParts[index].Trim(' ')
+				: string.Empty;
+		}
 
 		private static TestMode GetTestMode(string mode)
 		{

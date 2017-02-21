@@ -4,6 +4,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Repositories
@@ -13,7 +14,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 	{
 		public RepositoryCrudTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
-			_rootRepositoryPath = cluster.Node.RepositoryPath;
+			_rootRepositoryPath = cluster.Node.FileSystem.RepositoryPath;
 		}
 
 		protected override LazyResponses Create() => Calls<CreateRepositoryDescriptor, CreateRepositoryRequest, ICreateRepositoryRequest, ICreateRepositoryResponse>(

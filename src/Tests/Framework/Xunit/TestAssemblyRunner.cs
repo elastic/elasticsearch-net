@@ -10,6 +10,8 @@ using Tests.Framework;
 using System.Collections.Concurrent;
 using Tests.Framework.Integration;
 using System.Diagnostics;
+using Tests.Framework.ManagedElasticsearch;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Xunit
 {

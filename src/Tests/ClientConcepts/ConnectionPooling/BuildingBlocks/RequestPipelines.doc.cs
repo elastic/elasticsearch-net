@@ -10,7 +10,6 @@ using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Tests.Framework;
-using Tests.Framework.VirtualClustering;
 using Xunit;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks

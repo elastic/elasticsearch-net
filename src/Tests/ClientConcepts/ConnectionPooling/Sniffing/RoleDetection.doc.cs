@@ -10,6 +10,8 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
 using static Tests.Framework.TimesHelper;
+using Tests.Framework.ManagedElasticsearch;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
@@ -145,7 +147,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 
 	public class SniffRoleDetectionCluster : ClusterBase
 	{
-		protected override string[] ServerSettings => new[]
+		protected override string[] AdditionalServerSettings => new []
 		{
 			"es.node.data=false",
 			"es.node.master=true",
