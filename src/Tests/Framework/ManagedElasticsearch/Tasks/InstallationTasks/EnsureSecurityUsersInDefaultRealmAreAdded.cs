@@ -10,8 +10,6 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 	{
 		public override void Run(NodeConfiguration config, NodeFileSystem fileSystem)
 		{
-			if (!config.XPackEnabled) return;
-
 			var v = config.ElasticsearchVersion;
 			var folder = v.Major >= 5 ? "x-pack" : "shield";
 			var plugin = v.Major >= 5 ? "users" : "esusers";

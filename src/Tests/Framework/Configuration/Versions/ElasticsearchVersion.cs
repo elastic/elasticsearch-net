@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
 using System.Xml.Linq;
+using Nest;
 using Version = SemVer.Version;
 
 namespace Tests.Framework.Versions
@@ -17,7 +18,9 @@ namespace Tests.Framework.Versions
 
 		private string RootUrl => this.IsSnapshot
 			? SonaTypeUrl
-			: "https://artifacts.elastic.co/downloads/elasticsearch";
+			: TestClient.VersionUnderTestSatisfiedBy("<5.0.0")
+				? "https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch"
+				: "https://artifacts.elastic.co/downloads/elasticsearch";
 
 		private static string ResolveLatestSnapshot()
 		{
@@ -89,11 +92,21 @@ namespace Tests.Framework.Versions
 			}
 
 			this.Zip = this.Zip ?? $"elasticsearch-{this.Version}.zip";
-			if (this.IsSnapshot) this.DownloadUrl = $"{this.RootUrl}/{this.Version}/{this.Zip}";
-			else this.DownloadUrl = $"{this.RootUrl}/{this.Zip}";
 		}
 
-		public string DownloadUrl { get; }
+		private string _downloadUrl;
+		public string DownloadUrl
+		{
+			get
+			{
+				if (!string.IsNullOrWhiteSpace(this._downloadUrl)) return this._downloadUrl;
+                this._downloadUrl = this.IsSnapshot
+	                ? $"{this.RootUrl}/{this.Version}/{this.Zip}"
+	                : $"{this.RootUrl}/{this.Zip}";
+				return this._downloadUrl;
+
+			}
+		}
 		public string Zip { get; }
 		public string Version { get; }
 

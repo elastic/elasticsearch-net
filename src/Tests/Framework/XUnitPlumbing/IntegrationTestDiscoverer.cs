@@ -24,34 +24,22 @@ namespace Tests.Framework
 
 		private static bool TypeSkipVersionAttributeSatisfies(Type classOfMethod)
 		{
-#if !DOTNETCORE
-			var attributes = Attribute.GetCustomAttributes(classOfMethod, typeof(SkipVersionAttribute), true);
-#else
-			var attributes =  classOfMethod.GetTypeInfo().GetCustomAttributes(typeof(SkipVersionAttribute), true);
-#endif
+			var attributes = classOfMethod.GetAttributes<SkipVersionAttribute>();
 			if (!attributes.Any()) return false;
 
-			var elasticsearchVersion = TestClient.Configuration.ElasticsearchVersion;
 			return attributes
-				.Cast<SkipVersionAttribute>()
 				.SelectMany(a => a.Ranges)
-				.Any(range => range.IsSatisfied(elasticsearchVersion));
+				.Any(range => TestClient.VersionUnderTestSatisfiedBy(range.ToString()));
 		}
 
 		private static bool MethodSkipVersionAttributeSatisfies(MethodInfo methodInfo)
 		{
-#if !DOTNETCORE
-			var attributes = Attribute.GetCustomAttributes(methodInfo, typeof(SkipVersionAttribute), true);
-#else
-			var attributes =  methodInfo.GetCustomAttributes(typeof(SkipVersionAttribute), true);
-#endif
+			var attributes = methodInfo.GetAttributes<SkipVersionAttribute>();
 			if (!attributes.Any()) return false;
 
-			var elasticsearchVersion = TestClient.Configuration.ElasticsearchVersion;
 			return attributes
-				.Cast<SkipVersionAttribute>()
 				.SelectMany(a => a.Ranges)
-				.Any(range => range.IsSatisfied(elasticsearchVersion));
+				.Any(range => TestClient.VersionUnderTestSatisfiedBy(range.ToString()));
 		}
 	}
 }

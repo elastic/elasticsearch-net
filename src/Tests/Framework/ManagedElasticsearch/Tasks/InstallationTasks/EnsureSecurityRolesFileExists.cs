@@ -10,7 +10,8 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 	{
 		public override void Run(NodeConfiguration config, NodeFileSystem fileSystem)
 		{
-			if (!config.XPackEnabled) return;
+			//2.x tests only use prebaked roles
+			if (config.ElasticsearchVersion.Major < 5) return;
 			var folder = config.ElasticsearchVersion.Major >= 5 ? "x-pack" : "shield";
 			var rolesConfig = Path.Combine(fileSystem.ElasticsearchHome, "config", folder, "roles.yml");
 			var lines = File.ReadAllLines(rolesConfig).ToList();

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.Configuration;
@@ -86,13 +87,24 @@ namespace Tests.Framework
 				m.Ignore(p => p.Ranges);
 			return m;
 		}
-
-		public static bool VersionUnderTestSatisfiedBy(string versionRange) =>
-			new SemVer.Range(versionRange).IsSatisfied(TestClient.Configuration.ElasticsearchVersion);
-
 		public static string PercolatorType => Configuration.ElasticsearchVersion <= new ElasticsearchVersion("5.0.0-alpha1")
 			? ".percolator"
 			: "query";
+
+		public static bool VersionSatisfiedBy(string range, ElasticsearchVersion version)
+		{
+			var versionRange = new SemVer.Range(range);
+			var satisfied = versionRange.IsSatisfied(version.Version);
+			if (!version.IsSnapshot || satisfied) return satisfied;
+			//Semver can only match snapshot version with ranges on the same major and minor
+			//anything else fails but we want to know e.g 2.4.5-SNAPSHOT satisfied by <5.0.0;
+			var wholeVersion = $"{version.Major}.{version.Minor}.{version.Patch}";
+			return versionRange.IsSatisfied(wholeVersion);
+
+		}
+
+		public static bool VersionUnderTestSatisfiedBy(string range) =>
+			VersionSatisfiedBy(range, TestClient.Configuration.ElasticsearchVersion);
 
 		public static ConnectionSettings CreateSettings(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,

@@ -14,12 +14,13 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 		public override void Run(NodeConfiguration config, NodeFileSystem fileSystem)
 		{
 			var v = config.ElasticsearchVersion;
+			//on 2.x we so not support tests requiring plugins for 2.x since we can not reliably install them
+			if (v.IsSnapshot && v.Major == 2) return;
 			var plugins =
 				from plugin in ElasticsearchPluginCollection.Supported
 				let validForCurrentVersion = plugin.IsValid(v)
-				let requiredByNode = config.RequiredPlugins.Contains(plugin.Plugin)
 				let alreadyInstalled = AlreadyInstalled(plugin, fileSystem)
-				where !alreadyInstalled && validForCurrentVersion && requiredByNode
+				where !alreadyInstalled && validForCurrentVersion
 				select plugin;
 
 			foreach (var plugin in plugins)
