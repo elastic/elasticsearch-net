@@ -23,8 +23,6 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 				where !alreadyInstalled && validForCurrentVersion
 				select plugin;
 
-			var x = plugins.ToList();
-
 			foreach (var plugin in plugins)
 			{
 				var installParameter = !v.IsSnapshot ? plugin.Moniker : this.DownloadSnapshotIfNeeded(fileSystem, plugin, v);
