@@ -14,23 +14,16 @@ namespace Tests.Framework
 
 	}
 
-	public abstract class SimpleIntegration
+	public abstract class IntegrationDocumentationTestBase
 	{
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 
 		readonly ClusterBase _cluster;
 		protected IElasticClient Client => this._cluster.Client;
 
-		protected SimpleIntegration(ClusterBase cluster)
+		protected IntegrationDocumentationTestBase(ClusterBase cluster)
 		{
 			this._cluster = cluster;
-		}
-	}
-
-	public abstract class IntegrationDocumentationTestBase : SimpleIntegration
-	{
-		protected IntegrationDocumentationTestBase(ClusterBase cluster) : base(cluster)
-		{
 		}
 	}
 }

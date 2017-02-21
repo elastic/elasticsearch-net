@@ -14,7 +14,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 	/**[[property-inference]]
 	* == Property Name Inference
 	*/
-	public class PropertyNames : SimpleIntegration, IClusterFixture<WritableCluster>
+	public class PropertyNames : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{
 		private IElasticClient _client;
 

@@ -75,7 +75,7 @@ namespace Tests.Document.Single.Index
 
 	}
 
-	public class IndexIntegrationTests : SimpleIntegration, IClusterFixture<WritableCluster>
+	public class IndexIntegrationTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{
 		public IndexIntegrationTests(WritableCluster cluster) : base(cluster)
 		{
@@ -130,7 +130,7 @@ namespace Tests.Document.Single.Index
 		}
 	}
 
-	public class IndexJObjectIntegrationTests : SimpleIntegration, IClusterFixture<WritableCluster>
+	public class IndexJObjectIntegrationTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{
 		public IndexJObjectIntegrationTests(WritableCluster cluster) : base(cluster)
 		{
@@ -186,7 +186,7 @@ namespace Tests.Document.Single.Index
 		}
 	}
 
-	public class IndexAnonymousTypesIntegrationTests : SimpleIntegration, IClusterFixture<WritableCluster>
+	public class IndexAnonymousTypesIntegrationTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{
 		public IndexAnonymousTypesIntegrationTests(WritableCluster cluster) : base(cluster) { }
 

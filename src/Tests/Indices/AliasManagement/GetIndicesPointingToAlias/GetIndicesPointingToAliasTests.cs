@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Tests.Indices.AliasManagement.GetIndicesPointingToAlias
 {
-	public class GetIndicesPointingToAliasTests : SimpleIntegration, IClusterFixture<WritableCluster>
+	public class GetIndicesPointingToAliasTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{
 		private readonly WritableCluster _cluster;
 		private readonly IElasticClient _client;
