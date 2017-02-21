@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Nest;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
 
 namespace Tests.QueryDsl.Geo.Shape.GeometryCollection
@@ -88,12 +89,12 @@ namespace Tests.QueryDsl.Geo.Shape.GeometryCollection
 				{
 					type ="multilinestring",
 					coordinates = this._multiLineStringCoordinates
-				},				
+				},
 				new
 				{
 					type ="polygon",
 					coordinates = this._polygonCoordinates
-				},				
+				},
 				new
 				{
 					type ="multipolygon",
@@ -111,12 +112,12 @@ namespace Tests.QueryDsl.Geo.Shape.GeometryCollection
 			{
 				Geometries = new IGeoShape[]
 				{
-					new PointGeoShape(this._pointCoordinates), 
-					new MultiPointGeoShape(this._multiPointCoordinates), 
+					new PointGeoShape(this._pointCoordinates),
+					new MultiPointGeoShape(this._multiPointCoordinates),
 					new LineStringGeoShape(this._lineStringCoordinates),
-					new MultiLineStringGeoShape(_multiLineStringCoordinates), 
-					new PolygonGeoShape(this._polygonCoordinates), 
-					new MultiPolygonGeoShape(this._multiPolygonCoordinates), 
+					new MultiLineStringGeoShape(_multiLineStringCoordinates),
+					new PolygonGeoShape(this._polygonCoordinates),
+					new MultiPolygonGeoShape(this._multiPolygonCoordinates),
 				}
 			},
 			Relation = GeoShapeRelation.Intersects,
