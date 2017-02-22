@@ -55,9 +55,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 					.Map<Company>(m => m
 						.Properties(ps => ps
 							.Text(s => s
-								.Name(c => c.Name) //<1> map `Name` as a `string` type
+									.Name(c => c.Name) //<1> map `Name` as a `string` type
 							)
-							.Object<Employee>(o => o  //<2> map `Employees` as an `object` type, mapping each of the properties of `Employee`
+							.Object<Employee>(o => o //<2> map `Employees` as an `object` type, mapping each of the properties of `Employee`
 								.Name(c => c.Employees)
 								.Properties(eps => eps
 									.Text(s => s
@@ -117,7 +117,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
 		[U]
@@ -273,7 +273,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 
 
-			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 		/**[IMPORTANT]
 		 * ====
@@ -353,7 +353,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 
 			/**
 			 * `.AutoMap()` is idempotent; calling it before or after manually
@@ -371,7 +371,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 					)
 				);
 
-			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
 		/**[[attribute-mapping]]
@@ -758,7 +758,58 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+		}
+
+		public class ParentWithStringId : Parent
+		{
+			public new string Id { get; set; }
+		}
+
+		[U]
+		public void OverridingInheritedProperties()
+		{
+			var descriptor = new CreateIndexDescriptor("myindex")
+				.Mappings(ms => ms
+					.Map<ParentWithStringId>(m => m
+						.AutoMap()
+					)
+				);
+
+			var expected = new
+			{
+				mappings = new
+				{
+					parent = new
+					{
+						properties = new
+						{
+							id = new
+							{
+								type = "text",
+								fields = new
+								{
+									keyword = new
+									{
+										ignore_above = 256,
+										type = "keyword"
+									}
+								}
+							}
+						}
+					}
+				}
+			};
+
+			var settings = WithConnectionSettings(s => s
+				.InferMappingFor<ParentWithStringId>(m => m
+					.TypeName("parent")
+					.Ignore(p => p.Description)
+					.Ignore(p => p.IgnoreMe)
+				)
+			);
+
+			settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
 		/**[float]
@@ -830,7 +881,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				)
 			);
 
-			settings.Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+			settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
 		public class Parent
@@ -840,7 +891,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			public string IgnoreMe { get; set; }
 		}
 
-		public class Child : Parent { }
+		public class Child : Parent
+		{
+		}
+
 		[U]
 		public void IgnoringInheritedProperties()
 		{
@@ -860,16 +914,20 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 					{
 						properties = new
 						{
-							desc = new {
-								fields = new {
-									keyword = new {
+							desc = new
+							{
+								fields = new
+								{
+									keyword = new
+									{
 										ignore_above = 256,
 										type = "keyword"
 									}
 								},
 								type = "text"
 							},
-							id = new {
+							id = new
+							{
 								type = "integer"
 							}
 						}
@@ -884,8 +942,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				)
 			);
 
-			settings.Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+			settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
+
 		/**[float]
 		 * == Mapping Recursion
 		 * If you notice in our previous `Company` and `Employee` examples, the `Employee` type is recursive
@@ -933,7 +992,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 
 			/** Now let's specify a maxRecursion of 3 */
 			var withMaxRecursionDescriptor = new CreateIndexDescriptor("myindex")
@@ -981,7 +1040,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expectedWithMaxRecursion).WhenSerializing((ICreateIndexRequest)withMaxRecursionDescriptor);
+			Expect(expectedWithMaxRecursion).WhenSerializing((ICreateIndexRequest) withMaxRecursionDescriptor);
 		}
 
 		[U]
@@ -1002,7 +1061,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing((IPutMappingRequest)descriptor);
+			Expect(expected).WhenSerializing((IPutMappingRequest) descriptor);
 
 			var withMaxRecursionDescriptor = new PutMappingDescriptor<A>().AutoMap(3);
 
@@ -1039,7 +1098,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expectedWithMaxRecursion).WhenSerializing((IPutMappingRequest)withMaxRecursionDescriptor);
+			Expect(expectedWithMaxRecursion).WhenSerializing((IPutMappingRequest) withMaxRecursionDescriptor);
 		}
 		//endhide
 
@@ -1058,7 +1117,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			public override void Visit(
 				INumberProperty type,
 				PropertyInfo propertyInfo,
-				ElasticsearchPropertyAttributeBase attribute) //<1> Override the `Visit` method on `INumberProperty` and set `DocValues = false`
+				ElasticsearchPropertyAttributeBase
+					attribute) //<1> Override the `Visit` method on `INumberProperty` and set `DocValues = false`
 			{
 				type.DocValues = false;
 			}
@@ -1066,7 +1126,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			public override void Visit(
 				IBooleanProperty type,
 				PropertyInfo propertyInfo,
-				ElasticsearchPropertyAttributeBase attribute) //<2> Similarily, override the `Visit` method on `IBooleanProperty` and set `DocValues = false`
+				ElasticsearchPropertyAttributeBase
+					attribute) //<2> Similarily, override the `Visit` method on `IBooleanProperty` and set `DocValues = false`
 			{
 				type.DocValues = false;
 			}
@@ -1133,7 +1194,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		 */
 		public class EverythingIsAStringPropertyVisitor : NoopPropertyVisitor
 		{
-			public override IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => new TextProperty();
+			public override IProperty Visit(PropertyInfo propertyInfo,
+				ElasticsearchPropertyAttributeBase attribute) => new TextProperty();
 		}
 
 		[U]

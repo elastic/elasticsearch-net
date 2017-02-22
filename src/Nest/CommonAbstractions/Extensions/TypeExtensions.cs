@@ -29,7 +29,8 @@ namespace Nest
 
 		//this contract is only used to resolve properties in class WE OWN.
 		//these are not subject to change depending on what the user passes as connectionsettings
-		private static readonly ElasticContractResolver JsonContract = new ElasticContractResolver(new ConnectionSettings(), null);
+		private static readonly ElasticContractResolver JsonContract =
+			new ElasticContractResolver(new ConnectionSettings(), null);
 
 		public delegate T ObjectActivator<out T>(params object[] args);
 
@@ -40,7 +41,8 @@ namespace Nest
 
 		internal static object CreateGenericInstance(this Type t, Type[] closeOver, params object[] args)
 		{
-			var argKey = closeOver.Aggregate(new StringBuilder(), (sb, gt) => sb.Append("--" + gt.FullName), sb => sb.ToString());
+			var argKey = closeOver.Aggregate(new StringBuilder(), (sb, gt) => sb.Append("--" + gt.FullName),
+				sb => sb.ToString());
 			var key = t.FullName + argKey;
 			Type closedType;
 			if (!CachedGenericClosedTypes.TryGetValue(key, out closedType))
@@ -51,7 +53,7 @@ namespace Nest
 			return closedType.CreateInstance(args);
 		}
 
-		internal static T CreateInstance<T>(this Type t, params object[] args) => (T)t.CreateInstance(args);
+		internal static T CreateInstance<T>(this Type t, params object[] args) => (T) t.CreateInstance(args);
 
 		internal static object CreateInstance(this Type t, params object[] args)
 		{
@@ -63,15 +65,16 @@ namespace Nest
 
 			var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
 			var constructors = from c in t.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-							   let p = c.GetParameters()
-							   let k = string.Join(",", p.Select(a => a.ParameterType.Name))
-							   where p.Length == args.Length
-							   select c;
+				let p = c.GetParameters()
+				let k = string.Join(",", p.Select(a => a.ParameterType.Name))
+				where p.Length == args.Length
+				select c;
 
 			var ctor = constructors.FirstOrDefault();
 			if (ctor == null)
-				throw new Exception($"Cannot create an instance of {t.FullName} because it has no constructor taking {args.Length} arguments");
-			activator = (ObjectActivator<object>)generic.Invoke(null, new[] { ctor });
+				throw new Exception(
+					$"Cannot create an instance of {t.FullName} because it has no constructor taking {args.Length} arguments");
+			activator = (ObjectActivator<object>) generic.Invoke(null, new[] {ctor});
 			CachedActivators.TryAdd(key, activator);
 			return activator(args);
 		}
@@ -115,11 +118,12 @@ namespace Nest
 				Expression.Lambda(typeof(ObjectActivator<T>), newExp, param);
 
 			//compile it
-			ObjectActivator<T> compiled = (ObjectActivator<T>)lambda.Compile();
+			ObjectActivator<T> compiled = (ObjectActivator<T>) lambda.Compile();
 			return compiled;
 		}
 
-		internal static IList<JsonProperty> GetCachedObjectProperties(this Type t, MemberSerialization memberSerialization = MemberSerialization.OptIn)
+		internal static IList<JsonProperty> GetCachedObjectProperties(this Type t,
+			MemberSerialization memberSerialization = MemberSerialization.OptIn)
 		{
 			IList<JsonProperty> propertyDictionary;
 			if (CachedTypeProperties.TryGetValue(t, out propertyDictionary))
@@ -139,13 +143,28 @@ namespace Nest
 			return propertyInfos;
 		}
 
-		/// <summary> Returns inherited properties with reflectedType set to base type</summary>
+		/// <summary>
+		/// Returns inherited properties with reflectedType set to base type
+		/// </summary>
 		private static IEnumerable<PropertyInfo> AllPropertiesNotCached(this Type type)
 		{
+			var propertiesByName = new Dictionary<string, PropertyInfo>();
 			do
 			{
 				foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
-					yield return propertyInfo;
+				{
+					if (propertiesByName.ContainsKey(propertyInfo.Name))
+					{
+						if (IsHidingMember(propertyInfo))
+						{
+							propertiesByName[propertyInfo.Name] = propertyInfo;
+						}
+					}
+					else
+					{
+						propertiesByName.Add(propertyInfo.Name, propertyInfo);
+					}
+				}
 #if DOTNETCORE
 				type = type.GetTypeInfo()?.BaseType;
 			} while (type?.GetTypeInfo()?.BaseType != null);
@@ -153,7 +172,24 @@ namespace Nest
 				type = type.BaseType;
 			} while (type?.BaseType != null);
 #endif
+			return propertiesByName.Values;
+		}
 
+		/// <summary>
+		/// Determines if a property is overriding an inherited property of its base class
+		/// </summary>
+		private static bool IsHidingMember(PropertyInfo propertyInfo)
+		{
+	#if DOTNETCORE
+			var baseType = propertyInfo.DeclaringType?.GetTypeInfo()?.BaseType;
+    #else
+			var baseType = propertyInfo.DeclaringType?.BaseType;
+	#endif
+			var baseProperty = baseType?.GetProperty(propertyInfo.Name);
+			if (baseProperty == null) return false;
+			var derivedGetMethod = propertyInfo.GetGetMethod().GetBaseDefinition();
+			return derivedGetMethod?.ReturnType != propertyInfo.PropertyType;
 		}
 	}
 }
+
