@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using static Elasticsearch.Net.AuditEvent;
+using static Elasticsearch.Net_5_2_0.AuditEvent;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net_5_2_0
 {
 
 	public class RequestPipeline : IRequestPipeline

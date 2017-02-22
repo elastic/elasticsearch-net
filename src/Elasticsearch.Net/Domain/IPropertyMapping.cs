@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net_5_2_0
 {
 	/// <summary> This class allows a serializer to report back on a properties behavior </summary>
 	public interface IPropertyMapping

@@ -5,7 +5,7 @@ using static Tests.Framework.RoundTripper;
 using Tests.Framework.MockData;
 using Tests.Framework.Integration;
 using System.Collections.Generic;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using static Nest_5_2_0.Infer;
 using Xunit;
 

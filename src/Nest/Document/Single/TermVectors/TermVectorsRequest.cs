@@ -1,5 +1,5 @@
 ﻿using System;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 
@@ -32,7 +32,7 @@ namespace Nest_5_2_0
 	public partial class TermVectorsRequest<TDocument>
 		where TDocument : class
 	{
-		Elasticsearch.Net.HttpMethod IRequest.HttpMethod => (this.Document != null || this.Filter != null) ? Elasticsearch.Net.HttpMethod.POST : Elasticsearch.Net.HttpMethod.GET;
+		Elasticsearch.Net_5_2_0.HttpMethod IRequest.HttpMethod => (this.Document != null || this.Filter != null) ? Elasticsearch.Net_5_2_0.HttpMethod.POST : Elasticsearch.Net_5_2_0.HttpMethod.GET;
 
 		/// <summary>
 		/// An optional document to get term vectors for instead of using an already indexed document

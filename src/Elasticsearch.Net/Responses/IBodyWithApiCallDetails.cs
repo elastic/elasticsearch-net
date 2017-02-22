@@ -1,4 +1,4 @@
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net_5_2_0
 {
 	/// <summary>
 	/// Implementing this interface on your response objects will cause the low level client to

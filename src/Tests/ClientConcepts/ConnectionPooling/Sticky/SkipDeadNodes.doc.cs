@@ -2,11 +2,11 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using FluentAssertions;
 using Tests.Framework;
 using static Tests.Framework.TimesHelper;
-using static Elasticsearch.Net.AuditEvent;
+using static Elasticsearch.Net_5_2_0.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 {

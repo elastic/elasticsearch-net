@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using BenchmarkDotNet.Attributes;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using Nest_5_2_0;
 using Newtonsoft.Json;
 using Tests.Framework;

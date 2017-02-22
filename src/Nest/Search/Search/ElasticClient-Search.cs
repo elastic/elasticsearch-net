@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using System.Threading;
 
 namespace Nest_5_2_0

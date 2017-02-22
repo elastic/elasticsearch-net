@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 

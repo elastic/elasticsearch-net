@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using Tests.Framework;
-using static Elasticsearch.Net.AuditEvent;
+using static Elasticsearch.Net_5_2_0.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 {

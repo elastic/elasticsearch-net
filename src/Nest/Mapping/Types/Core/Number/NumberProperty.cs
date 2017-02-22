@@ -1,6 +1,6 @@
 using System;
 using System.Diagnostics;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using Newtonsoft.Json;
 
 namespace Nest_5_2_0

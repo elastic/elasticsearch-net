@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using System.Diagnostics;
 using Newtonsoft.Json;
 

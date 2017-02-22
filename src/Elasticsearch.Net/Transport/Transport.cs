@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net_5_2_0
 {
 	public class Transport<TConnectionSettings> : ITransport<TConnectionSettings>
 		where TConnectionSettings : IConnectionConfigurationValues
@@ -43,7 +43,7 @@ namespace Elasticsearch.Net
 
 			this.Settings = configurationValues;
 			this.PipelineProvider = pipelineProvider ?? new RequestPipelineFactory();
-			this.DateTimeProvider = dateTimeProvider ?? Elasticsearch.Net.DateTimeProvider.Default;
+			this.DateTimeProvider = dateTimeProvider ?? Elasticsearch.Net_5_2_0.DateTimeProvider.Default;
 			this.MemoryStreamFactory = memoryStreamFactory ?? new MemoryStreamFactory();
 		}
 

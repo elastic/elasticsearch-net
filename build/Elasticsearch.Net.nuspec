@@ -30,19 +30,19 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="output\v4.5\Elasticsearch.Net\Elasticsearch.Net.dll" target="lib\net45"/>
-		<file src="output\v4.5\Elasticsearch.Net\Elasticsearch.Net.pdb" target="lib\net45"/>
-		<file src="output\v4.5\Elasticsearch.Net\Elasticsearch.Net.pdb.srcsrv" target="lib\net45"/>
-		<file src="output\v4.5\Elasticsearch.Net\Elasticsearch.Net.XML" target="lib\net45"/>
+		<file src="output\v4.5\Elasticsearch.Net\Elasticsearch.Net_5_2_0.dll" target="lib\net45"/>
+		<file src="output\v4.5\Elasticsearch.Net\Elasticsearch.Net_5_2_0.pdb" target="lib\net45"/>
+		<file src="output\v4.5\Elasticsearch.Net\Elasticsearch.Net_5_2_0.pdb.srcsrv" target="lib\net45"/>
+		<file src="output\v4.5\Elasticsearch.Net\Elasticsearch.Net_5_2_0.XML" target="lib\net45"/>
 
-		<file src="output\v4.6\Elasticsearch.Net\Elasticsearch.Net.dll" target="lib\net46"/>
-		<file src="output\v4.6\Elasticsearch.Net\Elasticsearch.Net.pdb" target="lib\net46"/>
-		<file src="output\v4.6\Elasticsearch.Net\Elasticsearch.Net.pdb.srcsrv" target="lib\net46"/>
-		<file src="output\v4.6\Elasticsearch.Net\Elasticsearch.Net.XML" target="lib\net46"/>
+		<file src="output\v4.6\Elasticsearch.Net\Elasticsearch.Net_5_2_0.dll" target="lib\net46"/>
+		<file src="output\v4.6\Elasticsearch.Net\Elasticsearch.Net_5_2_0.pdb" target="lib\net46"/>
+		<file src="output\v4.6\Elasticsearch.Net\Elasticsearch.Net_5_2_0.pdb.srcsrv" target="lib\net46"/>
+		<file src="output\v4.6\Elasticsearch.Net\Elasticsearch.Net_5_2_0.XML" target="lib\net46"/>
 
-		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net.dll" target="lib\netstandard1.3"/>
-		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net.pdb" target="lib\netstandard1.3"/>
-		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net.pdb.srcsrv" target="lib\netstandard1.3"/>
-		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net.xml" target="lib\netstandard1.3"/>
+		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net_5_2_0.dll" target="lib\netstandard1.3"/>
+		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net_5_2_0.pdb" target="lib\netstandard1.3"/>
+		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net_5_2_0.pdb.srcsrv" target="lib\netstandard1.3"/>
+		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net_5_2_0.xml" target="lib\netstandard1.3"/>
 	</files>
 </package>

@@ -1,11 +1,11 @@
 ﻿using System;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using FluentAssertions;
 using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
-using static Elasticsearch.Net.HttpMethod;
+using static Elasticsearch.Net_5_2_0.HttpMethod;
 
 namespace Tests.XPack.License.GetLicense
 {

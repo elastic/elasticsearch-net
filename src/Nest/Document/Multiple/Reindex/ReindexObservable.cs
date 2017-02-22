@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using static Nest_5_2_0.Infer;
 
 namespace Nest_5_2_0

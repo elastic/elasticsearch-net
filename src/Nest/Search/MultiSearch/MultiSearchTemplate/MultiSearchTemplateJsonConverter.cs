@@ -1,4 +1,4 @@
-﻿using Elasticsearch.Net;
+﻿using Elasticsearch.Net_5_2_0;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

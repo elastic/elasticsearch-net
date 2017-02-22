@@ -1,7 +1,7 @@
 ﻿#I @"../../packages/build/FAKE/tools"
 #r "../../packages/build/FSharp.Data/lib/net40/FSharp.Data.dll"
 #r "../../packages/build/NEST/lib/net45/Nest_5_2_0.dll"
-#r "../../packages/build/Elasticsearch.Net/lib/net45/Elasticsearch.Net.dll"
+#r "../../packages/build/Elasticsearch.Net/lib/net45/Elasticsearch.Net_5_2_0.dll"
 #r "../../packages/build/Newtonsoft.Json/lib/net45/Newtonsoft.Json.dll"
 #r @"FakeLib.dll"
 #r @"System.Xml.Linq.dll"

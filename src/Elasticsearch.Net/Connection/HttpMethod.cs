@@ -2,7 +2,7 @@
 
 // ReSharper disable InconsistentNaming
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net_5_2_0
 {
 	public enum HttpMethod
 	{
