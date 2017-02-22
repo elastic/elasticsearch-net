@@ -1,7 +1,7 @@
 ﻿using System;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;

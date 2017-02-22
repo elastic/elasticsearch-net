@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	//TODO WRITE CODESTANDARDS TEST THAT THESE ARE ALL REFLECTED IN FieldTpe
 	[JsonConverter(typeof(StringEnumConverter))]

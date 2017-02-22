@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
@@ -18,7 +18,7 @@ namespace Tests.Analysis
 		{
 			Settings = new IndexSettings
 			{
-				Analysis = new Nest.Analysis
+				Analysis = new Nest_5_2_0.Analysis
 				{
 					Analyzers = Analyzers.AnalyzerUsageTests.InitializerExample.Analysis.Analyzers,
 					CharFilters = CharFilters.CharFilterUsageTests.InitializerExample.Analysis.CharFilters,

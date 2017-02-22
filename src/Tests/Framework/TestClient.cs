@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using Elasticsearch.Net;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework.Configuration;
 using Tests.Framework.MockData;
 using Tests.Framework.Versions;

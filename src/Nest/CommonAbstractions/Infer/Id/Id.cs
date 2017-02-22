@@ -4,7 +4,7 @@ using System.Diagnostics;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	[JsonConverter(typeof(IdJsonConverter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]

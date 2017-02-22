@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 
@@ -24,7 +24,7 @@ namespace Tests.Document.Single.Attachment
 			}
 		}
 
-		public Nest.Attachment Attachment { get; set; }
+		public Nest_5_2_0.Attachment Attachment { get; set; }
 
 		// Base 64 encoded version of Attachment_Test_Document.pdf
 		public static string TestPdfDocument { get; }
@@ -33,7 +33,7 @@ namespace Tests.Document.Single.Attachment
 	public abstract class AttachmentApiTestsBase :
 		ApiIntegrationTestBase<WritableCluster, IIndexResponse, IIndexRequest<Document>, IndexDescriptor<Document>, IndexRequest<Document>>
 	{
-		protected virtual Document Document => new Document { Attachment = new Nest.Attachment { Content = Attachment.Document.TestPdfDocument } };
+		protected virtual Document Document => new Document { Attachment = new Nest_5_2_0.Attachment { Content = Attachment.Document.TestPdfDocument } };
 
 		protected AttachmentApiTestsBase(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
@@ -201,7 +201,7 @@ namespace Tests.Document.Single.Attachment
 		protected override Document Document =>
 			new Document
 			{
-				Attachment = new Nest.Attachment
+				Attachment = new Nest_5_2_0.Attachment
 				{
 					ContentType = "application/pdf",
 					Content = Document.TestPdfDocument,
@@ -281,7 +281,7 @@ namespace Tests.Document.Single.Attachment
 		protected override Document Document =>
 			new Document
 			{
-				Attachment = new Nest.Attachment
+				Attachment = new Nest_5_2_0.Attachment
 				{
 					Content = Document.TestPdfDocument,
 					DetectLanguage = true
@@ -327,7 +327,7 @@ namespace Tests.Document.Single.Attachment
 		protected override Document Document =>
 			new Document
 			{
-				Attachment = new Nest.Attachment
+				Attachment = new Nest_5_2_0.Attachment
 				{
 					Content = Document.TestPdfDocument,
 					DetectLanguage = true
@@ -375,7 +375,7 @@ namespace Tests.Document.Single.Attachment
 			// try to set all the metadata
 			foreach (var hit in searchResponse.Hits)
 			{
-				var document = new Document { Attachment = new Nest.Attachment() };
+				var document = new Document { Attachment = new Nest_5_2_0.Attachment() };
 				document.Attachment.Name = hit.Fields.ValueOf<Document, string>(d => d.Attachment.Name);
 				document.Attachment.Author = hit.Fields.ValueOf<Document, string>(d => d.Attachment.Author);
 				document.Attachment.Content = hit.Fields.ValueOf<Document, string>(d => d.Attachment.Content);

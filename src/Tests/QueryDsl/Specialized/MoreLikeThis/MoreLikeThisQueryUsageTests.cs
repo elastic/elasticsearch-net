@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Infer;
+using static Nest_5_2_0.Infer;
 
 namespace Tests.QueryDsl.Specialized.MoreLikeThis
 {

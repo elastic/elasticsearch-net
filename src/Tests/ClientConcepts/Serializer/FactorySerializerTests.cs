@@ -7,7 +7,7 @@ using Tests.Framework;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Xunit;
-using Nest;
+using Nest_5_2_0;
 using Newtonsoft.Json;
 using System.Text;
 

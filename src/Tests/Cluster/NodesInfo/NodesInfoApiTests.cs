@@ -2,7 +2,7 @@
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
@@ -41,7 +41,7 @@ namespace Tests.Cluster.NodesInfo
 			Assert(node.Http);
 		}
 
-		protected void Assert(Nest.NodeInfo node)
+		protected void Assert(Nest_5_2_0.NodeInfo node)
 		{
 			node.Should().NotBeNull();
 			node.Name.Should().NotBeNullOrWhiteSpace();
@@ -117,7 +117,7 @@ namespace Tests.Cluster.NodesInfo
 			transport.PublishAddress.Should().NotBeNullOrWhiteSpace();
 		}
 
-		protected void Assert(Nest.NodeInfoHttp http)
+		protected void Assert(Nest_5_2_0.NodeInfoHttp http)
 		{
 			http.Should().NotBeNull();
 			http.BoundAddress.Should().NotBeEmpty();

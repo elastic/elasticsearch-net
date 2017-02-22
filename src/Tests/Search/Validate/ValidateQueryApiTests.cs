@@ -2,7 +2,7 @@
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
-using Nest;
+using Nest_5_2_0;
 using Elasticsearch.Net;
 using FluentAssertions;
 

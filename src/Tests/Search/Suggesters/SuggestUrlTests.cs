@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
@@ -21,9 +21,9 @@ namespace Tests.Search.Suggesters
 
 			await POST("/_suggest")
 					.Fluent(c => c.Suggest<Project>(s => s.AllIndices()))
-					.Request(c => c.Suggest<Project>(new SuggestRequest<Project>(Nest.Indices.All)))
+					.Request(c => c.Suggest<Project>(new SuggestRequest<Project>(Nest_5_2_0.Indices.All)))
 					.FluentAsync(c => c.SuggestAsync<Project>(s => s.AllIndices()))
-					.RequestAsync(c => c.SuggestAsync<Project>(new SuggestRequest<Project>(Nest.Indices.All)))
+					.RequestAsync(c => c.SuggestAsync<Project>(new SuggestRequest<Project>(Nest_5_2_0.Indices.All)))
 				;
 
 			// Non-generic Object Initializer syntax

@@ -4,7 +4,7 @@ using Elasticsearch.Net;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	public class ScrollAllObservable<T> : IDisposable, IObservable<IScrollAllResponse<T>> where T : class
 	{

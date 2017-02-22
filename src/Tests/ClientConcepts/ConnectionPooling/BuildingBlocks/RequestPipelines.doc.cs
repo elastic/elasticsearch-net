@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Tests.Framework;

@@ -1,7 +1,7 @@
 ﻿using Elasticsearch.Net;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	[JsonConverter(typeof(IndexJsonConverter))]
 	public partial interface IIndexRequest : IRequest<IndexRequestParameters>, IUntypedDocumentRequest { }

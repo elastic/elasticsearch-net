@@ -2,7 +2,7 @@ using System;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// A range of double-precision 64-bit IEEE 754 floating point values.

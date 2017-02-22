@@ -4,12 +4,12 @@ using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using FluentAssertions.Common;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
-using static Nest.Infer;
+using static Nest_5_2_0.Infer;
 
 #pragma warning disable 618 // testing deprecated percolate APIs
 

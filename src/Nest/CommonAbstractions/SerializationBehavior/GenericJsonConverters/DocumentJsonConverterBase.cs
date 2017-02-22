@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	internal abstract class DocumentJsonConverterBase<TRequest> : JsonConverter where TRequest : IUntypedDocumentRequest
 	{

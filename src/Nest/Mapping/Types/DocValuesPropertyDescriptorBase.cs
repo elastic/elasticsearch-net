@@ -1,7 +1,7 @@
 ﻿using System;
 using Elasticsearch.Net;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	public abstract class DocValuesPropertyDescriptorBase<TDescriptor, TInterface, T>
 	: CorePropertyDescriptorBase<TDescriptor, TInterface, T>, IDocValuesProperty

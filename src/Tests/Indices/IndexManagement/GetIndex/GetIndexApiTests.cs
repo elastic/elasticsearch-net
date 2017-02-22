@@ -1,11 +1,11 @@
 ﻿using Elasticsearch.Net;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
-using static Nest.Infer;
+using static Nest_5_2_0.Infer;
 
 namespace Tests.Indices.IndexManagement.GetIndex
 {

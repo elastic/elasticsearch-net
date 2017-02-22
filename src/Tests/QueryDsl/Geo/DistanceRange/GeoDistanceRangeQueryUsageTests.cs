@@ -1,4 +1,4 @@
-﻿using Nest;
+﻿using Nest_5_2_0;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
@@ -35,12 +35,12 @@ namespace Tests.QueryDsl.Geo.DistanceRange
 			Name = "named_query",
 			Field = Infer.Field<Project>(p=>p.Location),
 			DistanceType = GeoDistanceType.Arc,
-			GreaterThanOrEqualTo = Nest.Distance.Kilometers(200),
-			GreaterThan = Nest.Distance.Kilometers(200),
-			LessThan = Nest.Distance.Miles(400),
+			GreaterThanOrEqualTo = Nest_5_2_0.Distance.Kilometers(200),
+			GreaterThan = Nest_5_2_0.Distance.Kilometers(200),
+			LessThan = Nest_5_2_0.Distance.Miles(400),
 			Location = new GeoLocation(40, -70),
 			OptimizeBoundingBox = GeoOptimizeBBox.Indexed,
-			LessThanOrEqualTo = Nest.Distance.Miles(400),
+			LessThanOrEqualTo = Nest_5_2_0.Distance.Miles(400),
 			ValidationMethod = GeoValidationMethod.Strict
 		};
 
@@ -54,8 +54,8 @@ namespace Tests.QueryDsl.Geo.DistanceRange
 				.GreaterThan(200, DistanceUnit.Kilometers)
 				.Location(new GeoLocation(40, -70))
 				.Optimize(GeoOptimizeBBox.Indexed)
-				.LessThanOrEqualTo(Nest.Distance.Miles(400))
-				.LessThan(Nest.Distance.Miles(400))
+				.LessThanOrEqualTo(Nest_5_2_0.Distance.Miles(400))
+				.LessThan(Nest_5_2_0.Distance.Miles(400))
 				.ValidationMethod(GeoValidationMethod.Strict)
 			);
 

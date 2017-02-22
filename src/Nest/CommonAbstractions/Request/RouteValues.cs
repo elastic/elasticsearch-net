@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Elasticsearch.Net;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	//TODO INTERNAL ?
 	public class RouteValues

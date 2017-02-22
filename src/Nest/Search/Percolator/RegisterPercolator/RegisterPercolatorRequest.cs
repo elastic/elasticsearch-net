@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	// This does not represent a dedicated API in elasticsearch, its syntactic sugar for indexing percolate documents
 

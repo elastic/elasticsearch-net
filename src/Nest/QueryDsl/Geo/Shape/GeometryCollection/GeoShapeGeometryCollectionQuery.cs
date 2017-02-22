@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	public interface IGeoShapeGeometryCollectionQuery : IGeoShapeQuery
 	{

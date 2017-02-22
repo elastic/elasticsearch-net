@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	public static class AliasPointingToIndexExtensions
 	{

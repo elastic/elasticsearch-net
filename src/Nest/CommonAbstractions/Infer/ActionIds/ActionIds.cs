@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class ActionIds : IUrlParameter

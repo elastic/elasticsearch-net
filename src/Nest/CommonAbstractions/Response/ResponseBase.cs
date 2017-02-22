@@ -5,7 +5,7 @@ using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// Shared interface by all elasticsearch responses
@@ -22,7 +22,7 @@ namespace Nest
 		bool IsValid { get; }
 
 		/// <summary>
-		/// If the response results in an error on elasticsearch's side an <pre>error</pre> element will be returned, this is mapped to <see cref="ServerError"/> in NEST.
+		/// If the response results in an error on elasticsearch's side an <pre>error</pre> element will be returned, this is mapped to <see cref="ServerError"/> in Nest_5_2_0.
 		/// <para>This property is a shortcut to <see cref="IBodyWithApiCallDetails.ApiCall"/>'s <see cref="IApiCallDetails.ServerError"/> and is possibly set when <see cref="IsValid"/> is false depending on the cause of the error</para>
 		/// <para>You can also configure the client to always throw an <see cref="ElasticsearchClientException"/> using <see cref="IConnectionConfigurationValues.ThrowExceptions"/> if the response is not valid</para>
 		/// </summary>

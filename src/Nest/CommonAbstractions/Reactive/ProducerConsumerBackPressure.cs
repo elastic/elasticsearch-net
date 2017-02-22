@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// Simple back pressure implementation that makes sure the minimum max concurrency between producer and consumer

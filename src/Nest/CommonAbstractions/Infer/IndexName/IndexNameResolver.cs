@@ -1,7 +1,7 @@
 ﻿using Elasticsearch.Net;
 using System;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	public class IndexNameResolver
 	{

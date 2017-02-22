@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	[JsonConverter(typeof(MultiPercolateJsonConverter))]
 	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with multi search api")]

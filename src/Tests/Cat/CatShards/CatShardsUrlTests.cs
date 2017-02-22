@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
@@ -19,9 +19,9 @@ namespace Tests.Cat.CatShards
 
 			await GET("/_cat/shards/project")
 				.Fluent(c => c.CatShards(r => r.Index<Project>()))
-				.Request(c => c.CatShards(new CatShardsRequest(Nest.Indices.Index<Project>())))
+				.Request(c => c.CatShards(new CatShardsRequest(Nest_5_2_0.Indices.Index<Project>())))
 				.FluentAsync(c => c.CatShardsAsync(r => r.Index<Project>()))
-				.RequestAsync(c => c.CatShardsAsync(new CatShardsRequest(Nest.Indices.Index<Project>())));
+				.RequestAsync(c => c.CatShardsAsync(new CatShardsRequest(Nest_5_2_0.Indices.Index<Project>())));
 		}
 	}
 }

@@ -1,6 +1,6 @@
 ﻿using Elasticsearch.Net;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	public partial interface IUpgradeRequest : IRequest<UpgradeRequestParameters> { }
 

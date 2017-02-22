@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
@@ -50,9 +50,9 @@ namespace Tests.Search.Validate
 			await POST("/_validate/query")
 				.Fluent(c=>c.ValidateQuery<Project>(s=>s.AllTypes().AllIndices()))
 				.Request(c=>c.ValidateQuery(new ValidateQueryRequest()))
-				.Request(c=>c.ValidateQuery(new ValidateQueryRequest<Project>(Nest.Indices.All, Types.All)))
+				.Request(c=>c.ValidateQuery(new ValidateQueryRequest<Project>(Nest_5_2_0.Indices.All, Types.All)))
 				.FluentAsync(c=>c.ValidateQueryAsync<Project>(s=>s.AllIndices().Type(Types.All)))
-				.RequestAsync(c=>c.ValidateQueryAsync(new ValidateQueryRequest<Project>(Nest.Indices.All, Types.All)))
+				.RequestAsync(c=>c.ValidateQueryAsync(new ValidateQueryRequest<Project>(Nest_5_2_0.Indices.All, Types.All)))
 				.RequestAsync(c=>c.ValidateQueryAsync(new ValidateQueryRequest()))
 				;
 		}

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Bogus;
-using Nest;
+using Nest_5_2_0;
 
 namespace Tests.Framework.MockData
 {

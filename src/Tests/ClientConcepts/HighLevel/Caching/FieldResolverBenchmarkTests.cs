@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using BenchmarkDotNet.Attributes;
 using Elasticsearch.Net;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework.Benchmarks;
 using Tests.Framework.MockData;
 

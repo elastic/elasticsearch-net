@@ -3,7 +3,7 @@ using System.Diagnostics;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface INumberProperty : IDocValuesProperty

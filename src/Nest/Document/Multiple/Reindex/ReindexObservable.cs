@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Elasticsearch.Net;
-using static Nest.Infer;
+using static Nest_5_2_0.Infer;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	public class ReindexObservable<TSource> : ReindexObservable<TSource, TSource>
 		where TSource : class

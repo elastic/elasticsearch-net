@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
@@ -84,7 +84,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 			Order = 1,
 			Template = "nestx-*",
 			Create = false,
-			Settings = new Nest.IndexSettings
+			Settings = new Nest_5_2_0.IndexSettings
 			{
 				NumberOfShards = 1
 			},

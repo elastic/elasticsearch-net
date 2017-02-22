@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using System;
@@ -27,7 +27,7 @@ namespace Tests.QueryDsl.Compound.Bool
 	 * `must_not`::
 	 * The clause (query) must not appear in the matching documents.
 	 *
-	 * Check out the <<bool-queries,`bool` queries section>> for more details on `bool` queries with NEST.
+	 * Check out the <<bool-queries,`bool` queries section>> for more details on `bool` queries with Nest_5_2_0.
 	 *
 	 * See the Elasticsearch documentation on {ref_current}/query-dsl-bool-query.html[bool query] for more details.
 	 */

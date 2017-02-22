@@ -2,7 +2,7 @@ using System;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// A range of signed 32-bit integers with a minimum value of -231 and maximum of 231-1.

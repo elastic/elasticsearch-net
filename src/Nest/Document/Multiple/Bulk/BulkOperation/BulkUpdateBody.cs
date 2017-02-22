@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	internal class BulkUpdateBody<TDocument, TPartialUpdate>
 		where TDocument : class

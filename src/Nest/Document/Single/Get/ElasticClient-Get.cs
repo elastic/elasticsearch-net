@@ -4,7 +4,7 @@ using Elasticsearch.Net;
 using System.IO;
 using System.Threading;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	public partial interface IElasticClient
 	{

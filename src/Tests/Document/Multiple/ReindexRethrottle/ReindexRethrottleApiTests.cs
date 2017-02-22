@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Document.Multiple.Reindex;
 using Tests.Document.Multiple.ReindexOnServer;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
-using static Nest.Infer;
+using static Nest_5_2_0.Infer;
 
 namespace Tests.Document.Multiple.ReindexRethrottle
 {

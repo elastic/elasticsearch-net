@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// The truncate token filter can be used to truncate tokens into a specific length. This can come in handy with keyword (single token) 

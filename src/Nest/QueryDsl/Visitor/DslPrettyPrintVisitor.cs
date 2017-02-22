@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	public class DslPrettyPrintVisitor : IQueryVisitor
 	{

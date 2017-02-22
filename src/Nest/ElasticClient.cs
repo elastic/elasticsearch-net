@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using System.Threading;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// ElasticClient is NEST's strongly typed client which exposes fully mapped Elasticsearch endpoints

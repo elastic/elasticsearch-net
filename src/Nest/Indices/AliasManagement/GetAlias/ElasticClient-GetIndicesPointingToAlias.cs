@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Nest;
+using Nest_5_2_0;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// Implements several handy alias extensions.

@@ -14,7 +14,7 @@ using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	internal static class EmptyReadOnly<TElement>
 	{

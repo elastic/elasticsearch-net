@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
@@ -49,17 +49,17 @@ namespace Tests.Search.Search
 			await POST("/_search")
 				.Fluent(c=>c.Search<Project>(s=>s.AllTypes().AllIndices()))
 				.Request(c=>c.Search<Project>(new SearchRequest()))
-				.Request(c=>c.Search<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All)))
+				.Request(c=>c.Search<Project>(new SearchRequest<Project>(Nest_5_2_0.Indices.All, Types.All)))
 				.FluentAsync(c=>c.SearchAsync<Project>(s=>s.AllIndices().Type(Types.All)))
-				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All)))
+				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<Project>(Nest_5_2_0.Indices.All, Types.All)))
 				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest()))
 				;
 
 			await POST("/_search?scroll=1m")
 				.Fluent(c=>c.Search<Project>(s=>s.AllTypes().AllIndices().Scroll(60000)))
-				.Request(c=>c.Search<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All) { Scroll = TimeSpan.FromMinutes(1) }))
+				.Request(c=>c.Search<Project>(new SearchRequest<Project>(Nest_5_2_0.Indices.All, Types.All) { Scroll = TimeSpan.FromMinutes(1) }))
 				.FluentAsync(c=>c.SearchAsync<Project>(s=>s.AllIndices().Type(Types.All).Scroll("1m")))
-				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All) { Scroll = 60000 } ))
+				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<Project>(Nest_5_2_0.Indices.All, Types.All) { Scroll = 60000 } ))
 				;
 		}
 	}

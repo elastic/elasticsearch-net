@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Infer;
+using static Nest_5_2_0.Infer;
 
 namespace Tests.Aggregations.Metric.TopHits
 {
@@ -137,7 +137,7 @@ namespace Tests.Aggregations.Metric.TopHits
 						FielddataFields = new [] { "state", "numberOfCommits" },
 						Highlight = new Highlight
 						{
-							Fields = new Dictionary<Nest.Field, IHighlightField>
+							Fields = new Dictionary<Nest_5_2_0.Field, IHighlightField>
 							{
 								{ Field<Project>(p => p.Tags), new HighlightField() },
 								{ Field<Project>(p => p.Description), new HighlightField() }

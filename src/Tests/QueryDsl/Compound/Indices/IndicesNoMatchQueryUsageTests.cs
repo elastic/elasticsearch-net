@@ -1,4 +1,4 @@
-﻿using Nest;
+﻿using Nest_5_2_0;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
@@ -29,7 +29,7 @@ namespace Tests.QueryDsl.Compound.Indices
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Indices = Nest.Indices.All,
+			Indices = Nest_5_2_0.Indices.All,
 			Query = new MatchAllQuery(),
 			NoMatchQuery = new NoMatchQueryContainer { Shortcut = NoMatchShortcut.All }
 		};
@@ -38,7 +38,7 @@ namespace Tests.QueryDsl.Compound.Indices
 			.Indices(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Indices(Nest.Indices.All)
+				.Indices(Nest_5_2_0.Indices.All)
 				.Query(qq => qq.MatchAll())
 				.NoMatchQuery(NoMatchShortcut.All)
 			);

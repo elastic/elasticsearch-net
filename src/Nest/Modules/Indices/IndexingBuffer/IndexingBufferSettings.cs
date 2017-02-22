@@ -1,4 +1,4 @@
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// The indexing buffer is used to store newly indexed documents. When it fills up, the documents in the buffer are written to a segment on disk. It is divided between all shards on the node.

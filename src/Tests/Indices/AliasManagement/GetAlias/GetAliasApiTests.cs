@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
@@ -37,7 +37,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 			.AllIndices()
 			.Name(Names)
 		;
-		protected override GetAliasRequest Initializer => new GetAliasRequest(Nest.Indices.All, Names);
+		protected override GetAliasRequest Initializer => new GetAliasRequest(Nest_5_2_0.Indices.All, Names);
 	}
 
 	public class GetAliasNotFoundApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetAliasResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>

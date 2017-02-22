@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use Text or Keyword attribute instead.")]
 	public class StringAttribute : ElasticsearchDocValuesPropertyAttributeBase, IStringProperty

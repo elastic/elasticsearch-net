@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Newtonsoft.Json.Linq;
 using Tests.Framework;
 using Tests.Framework.Integration;

@@ -8,7 +8,7 @@ using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	//TODO rethink IHIT<T> deserialization where T is covariant
 	internal class DefaultHitJsonConverter : JsonConverter
