@@ -40,6 +40,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CSG.StatHub.DocStorageCore">
+      <HintPath>..\..\dependencies\DocStorageCore\lib\net45\CSG.StatHub.DocStorageCore.dll</HintPath>
+    </Reference>
     <Reference Include="JetBrains.Profiler.Windows.SelfApi">
       <HintPath>..\..\build\profiling\JetBrains.Profiler.Windows.SelfApi.dll</HintPath>
     </Reference>

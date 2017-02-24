@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CSG.StatHub.DocStorageCore;
 using Newtonsoft.Json;
 
 namespace Nest_5_2_0
@@ -16,7 +17,7 @@ namespace Nest_5_2_0
 		public IList<IBulkOperation> Operations { get; set; }
 	}
 
-	public partial class BulkDescriptor
+	public partial class BulkDescriptor : IDocStorageBulkDescriptor
 	{
 		IList<IBulkOperation> IBulkRequest.Operations { get; set; } = new SynchronizedCollection<IBulkOperation>();
 

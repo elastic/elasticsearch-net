@@ -48,6 +48,10 @@
     <AssemblyOriginatorKeyFile>..\..\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CSG.StatHub.DocStorageCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e7ab1d859f54b223, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\DocStorageCore\lib\net45\CSG.StatHub.DocStorageCore.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
