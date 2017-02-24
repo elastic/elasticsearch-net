@@ -71,7 +71,8 @@ namespace Tests.Search.Search
 						query.Type.Should().NotBeNullOrEmpty();
 						query.Description.Should().NotBeNullOrEmpty();
 						query.Time.Should().NotBeNull();
-						query.TimeInNanoseconds.Should().BeGreaterThan(0);
+						if (TestClient.VersionUnderTestSatisfiedBy(">=5.3.0"))
+							query.TimeInNanoseconds.Should().BeGreaterThan(0);
 						query.Breakdown.Should().NotBeNull();
 					}
 					search.RewriteTime.Should().BeGreaterThan(0);
@@ -81,7 +82,8 @@ namespace Tests.Search.Search
 						collector.Name.Should().NotBeNullOrEmpty();
 						collector.Reason.Should().NotBeNullOrEmpty();
 						collector.Time.Should().NotBeNull();
-						collector.TimeInNanoseconds.Should().BeGreaterThan(0);
+						if (TestClient.VersionUnderTestSatisfiedBy(">=5.3.0"))
+							collector.TimeInNanoseconds.Should().BeGreaterThan(0);
 						var children = collector.Children;
 						children.Should().NotBeNull();
 						foreach (var child in children)
@@ -90,7 +92,8 @@ namespace Tests.Search.Search
 							child.Name.Should().NotBeNullOrEmpty();
 							child.Reason.Should().NotBeNullOrEmpty();
 							child.Time.Should().NotBeNull();
-							child.TimeInNanoseconds.Should().BeGreaterThan(0);
+							if (TestClient.VersionUnderTestSatisfiedBy(">=5.3.0"))
+								child.TimeInNanoseconds.Should().BeGreaterThan(0);
 							var grandchildren = child.Children;
 							grandchildren.Should().NotBeNull();
 							foreach (var grandchild in grandchildren)
@@ -98,7 +101,8 @@ namespace Tests.Search.Search
 								grandchild.Name.Should().NotBeNullOrEmpty();
 								grandchild.Reason.Should().NotBeNullOrEmpty();
 								grandchild.Time.Should().NotBeNull();
-								grandchild.TimeInNanoseconds.Should().BeGreaterThan(0);
+								if (TestClient.VersionUnderTestSatisfiedBy(">=5.3.0"))
+									grandchild.TimeInNanoseconds.Should().BeGreaterThan(0);
 							}
 						}
 					}
@@ -111,7 +115,8 @@ namespace Tests.Search.Search
 					aggregation.Type.Should().NotBeNullOrEmpty();
 					aggregation.Description.Should().NotBeNullOrEmpty();
 					aggregation.Time.Should().NotBeNull();
-					aggregation.TimeInNanoseconds.Should().BeGreaterThan(0);
+					if (TestClient.VersionUnderTestSatisfiedBy(">=5.3.0"))
+						aggregation.TimeInNanoseconds.Should().BeGreaterThan(0);
 					aggregation.Breakdown.Should().NotBeNull();
 				}
 			}
