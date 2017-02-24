@@ -72,7 +72,7 @@ IF /I "%TARGET%"=="forever" (
 )
 IF /I "%TARGET%"=="integrate" (
 	IF NOT [%2]==[] (set ESVERSIONS="%2")
-	IF NOT [%3]==[] (set NEST_INTEGRATION_CLUSTER="%3")
+	IF NOT [%3]==[] (set NEST_INTEGRATION_CLUSTER="%~3")
 	IF NOT [%4]==[] (set NEST_TEST_FILTER="%4")
 	IF /I "%JAVA_HOME%"=="" (
 	   ECHO JAVA_HOME not set exiting release early!

@@ -10,6 +10,8 @@ using Tests.Framework;
 using System.Collections.Concurrent;
 using Tests.Framework.Integration;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection.Metadata.Ecma335;
 using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
@@ -118,21 +120,34 @@ namespace Xunit
 			};
 		}
 
+		private IEnumerable<string> ParseExcludedClusters(string clusterFilter)
+		{
+			var clusters = typeof(ClusterBase).Assembly
+				.GetTypes()
+				.Where(t => typeof(ClusterBase).IsAssignableFrom(t) && t != typeof(ClusterBase))
+				.Select(c => c.Name.Replace("Cluster", "").ToLowerInvariant());
+			var filters = clusterFilter.Split(',').Select(c => c.Trim().ToLowerInvariant());
+			var include = filters.Where(f => !f.StartsWith("-")).Select(f => f.ToLowerInvariant());
+			if (include.Any()) return clusters.Where(c => !include.Contains(c));
+			var exclude = filters.Where(f => f.StartsWith("-")).Select(f => f.TrimStart('-').ToLowerInvariant());
+			if (exclude.Any()) return exclude;
+			return new List<string>();
+		}
+
 		private async Task<RunSummary> IntegrationPipeline(int defaultMaxConcurrency,
 			List<IGrouping<ClusterBase, GroupedByCluster>> grouped, IMessageBus messageBus,
 			CancellationTokenSource cancellationTokenSource)
 		{
 			var summaries = new ConcurrentBag<RunSummary>();
 			var clusterTotals = new Dictionary<string, Stopwatch>();
-			var clusterFilter = TestClient.Configuration.ClusterFilter;
+			var excludedClusters = ParseExcludedClusters(TestClient.Configuration.ClusterFilter);
 			var testFilter = TestClient.Configuration.TestFilter;
 			foreach (var group in grouped)
 			{
 				var type = @group.Key?.GetType();
 				var clusterName = type?.Name.Replace("Cluster", "") ?? "UNKNOWN";
 
-				if (!string.IsNullOrWhiteSpace(clusterFilter) &&
-				    clusterName.IndexOf(clusterFilter, StringComparison.OrdinalIgnoreCase) < 0)
+				if (excludedClusters.Contains(clusterName, StringComparer.OrdinalIgnoreCase))
 					continue;
 
 				var dop = @group.Key != null && @group.Key.MaxConcurrency > 0
