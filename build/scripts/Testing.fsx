@@ -83,7 +83,8 @@ module Tests =
     let RunUnitTests() = 
         setLocalEnvVars()
         testDesktopClr()
-        testProjectJson()
+// **CSG** Removing dotnet core from the run unit tests
+//        testProjectJson()
 
     let RunIntegrationTests() =
         setLocalEnvVars()

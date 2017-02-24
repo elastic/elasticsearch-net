@@ -73,7 +73,8 @@ module Build =
         | true ->  Tooling.MsBuild.Build DotNetFramework.Net45.Identifier
         | false ->  
             compileDesktop()
-            compileCore()
+// **CSG** Removing dotnet core from the compile
+//            compileCore()
             if not isMono && runningRelease then gitLink()
 
     let Clean() =
