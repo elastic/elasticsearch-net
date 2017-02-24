@@ -1,6 +1,6 @@
 using System;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net_5_2_0
 {
 	internal static class Fluent
 	{

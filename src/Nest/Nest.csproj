@@ -7,8 +7,8 @@
     <ProjectGuid>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nest</RootNamespace>
-    <AssemblyName>Nest</AssemblyName>
+    <RootNamespace>Nest_5_2_0</RootNamespace>
+    <AssemblyName>Nest_5_2_0</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -24,7 +24,7 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>BasicCorrectnessRules.ruleset</CodeAnalysisRuleSet>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>bin\Debug\net45\Nest.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\net45\Nest_5_2_0.xml</DocumentationFile>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
@@ -37,7 +37,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\Release\net45\Nest.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\net45\Nest_5_2_0.xml</DocumentationFile>
     <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>

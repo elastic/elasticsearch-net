@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// The user_agent processor extracts details from the user agent string a browser sends with its web requests.

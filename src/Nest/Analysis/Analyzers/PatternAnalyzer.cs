@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// An analyzer of type pattern that can flexibly separate text into terms via a regular expression.

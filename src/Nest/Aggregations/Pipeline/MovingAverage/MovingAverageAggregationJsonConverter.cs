@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	internal class MovingAverageAggregationJsonConverter : JsonConverter
 	{

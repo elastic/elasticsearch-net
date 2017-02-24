@@ -1,4 +1,4 @@
-﻿using Nest;
+﻿using Nest_5_2_0;
 using Tests.Framework;
 
 namespace Tests.Mapping.Types.Core.Range.FloatRange
@@ -6,7 +6,7 @@ namespace Tests.Mapping.Types.Core.Range.FloatRange
 	public class FloatRangeTest
 	{
 		[FloatRange]
-		public Nest.FloatRange Range { get; set; }
+		public Nest_5_2_0.FloatRange Range { get; set; }
 	}
 
 	[SkipVersion("<5.2.0", "dedicated range types is a new 5.2.0 feature")]

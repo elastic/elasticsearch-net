@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
-using Nest;
+using Elasticsearch.Net_5_2_0;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;

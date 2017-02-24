@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 
 namespace Tests.CodeStandards
@@ -154,7 +154,7 @@ namespace Tests.CodeStandards
 			var types = nestAssembly.GetTypes();
 			var typesNotInNestNamespace = types
 				.Where(t => !exceptions.Contains(t))
-				.Where(t => t.Namespace != "Nest")
+				.Where(t => t.Namespace != "Nest_5_2_0")
 				.Where(t => !t.Name.StartsWith("<"))
 				.Where(t => IsValidTypeNameOrIdentifier(t.Name, true))
 				.ToList();
@@ -186,7 +186,7 @@ namespace Tests.CodeStandards
 			var types = elasticsearchNetAssembly.GetTypes();
 			var typesNotIElasticsearchNetNamespace = types
 				.Where(t => !exceptions.Contains(t))
-				.Where(t => t.Namespace != "Elasticsearch.Net")
+				.Where(t => t.Namespace != "Elasticsearch.Net_5_2_0")
 				.Where(t => !t.Name.StartsWith("<"))
 				.Where(t => IsValidTypeNameOrIdentifier(t.Name, true))
 				.ToList();

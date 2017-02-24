@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Specialized;
 using System.Linq;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using System.Reflection;
-using Nest;
+using Nest_5_2_0;
 
 namespace Tests.Framework.Integration
 {

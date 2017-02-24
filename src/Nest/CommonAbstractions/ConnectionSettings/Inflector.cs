@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// Pluralizes or singularizes words.

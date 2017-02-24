@@ -1,6 +1,6 @@
 using System;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	public interface IDocumentPath
 	{
@@ -18,7 +18,7 @@ namespace Nest
 		TypeName IDocumentPath.Type { get; set; }
 
 
-		public DocumentPath(T document) : this(Nest.Id.From(document)) { this.Document = document; }
+		public DocumentPath(T document) : this(Nest_5_2_0.Id.From(document)) { this.Document = document; }
 		public DocumentPath(Id id)
 		{
 			Self.Id = id;

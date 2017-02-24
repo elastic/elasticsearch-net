@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
-using static Nest.Infer;
+using static Nest_5_2_0.Infer;
 
 namespace Tests.Document.Multiple.DeleteByQuery
 {
@@ -36,7 +36,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		protected override void OnAfterCall(IElasticClient client) => client.Refresh(CallIsolatedValue);
 
 		private string SecondIndex => $"{CallIsolatedValue}-clone";
-		private Nest.Indices Indices => Index(CallIsolatedValue).And(SecondIndex);
+		private Nest_5_2_0.Indices Indices => Index(CallIsolatedValue).And(SecondIndex);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;

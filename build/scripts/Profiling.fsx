@@ -1,7 +1,12 @@
 ﻿#I @"../../packages/build/FAKE/tools"
 #r "../../packages/build/FSharp.Data/lib/net40/FSharp.Data.dll"
+ // ** CSG ** 
+ // The Profiling build target uses nuget to reference the .dll instead of a project reference, 
+ // so the namespace change to use Nest_5_2_0.dll is not used here
+ // we do not intend on using the profiling build target, so leaving Nest.dll and Elasticsearch.Net.dll keeps the build passing
 #r "../../packages/build/NEST/lib/net45/Nest.dll"
 #r "../../packages/build/Elasticsearch.Net/lib/net45/Elasticsearch.Net.dll"
+ // ** CSG ** 
 #r "../../packages/build/Newtonsoft.Json/lib/net45/Newtonsoft.Json.dll"
 #r @"FakeLib.dll"
 #r @"System.Xml.Linq.dll"

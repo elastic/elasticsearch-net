@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// Protects words from being modified by stemmers. Must be placed before any stemming filters.

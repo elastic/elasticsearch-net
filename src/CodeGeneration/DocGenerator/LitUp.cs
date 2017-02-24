@@ -9,7 +9,7 @@ namespace DocGenerator
 {
 	public static class LitUp
 	{
-		private static readonly string[] SkipFolders = { "Nest.Tests.Literate", "Debug", "Release" };
+		private static readonly string[] SkipFolders = { "Nest_5_2_0.Tests.Literate", "Debug", "Release" };
 
 		public static IEnumerable<DocumentationFile> InputFiles(string path) =>
 			from f in Directory.GetFiles(Program.InputDirPath, $"{path}", SearchOption.AllDirectories)

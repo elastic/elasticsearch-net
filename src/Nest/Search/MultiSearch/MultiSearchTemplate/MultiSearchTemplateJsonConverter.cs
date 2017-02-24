@@ -1,4 +1,4 @@
-﻿using Elasticsearch.Net;
+﻿using Elasticsearch.Net_5_2_0;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	internal class MultiSearchTemplateJsonConverter : JsonConverter
 	{

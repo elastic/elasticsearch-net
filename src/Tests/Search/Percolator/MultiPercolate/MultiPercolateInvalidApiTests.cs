@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;

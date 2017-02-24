@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	[Obsolete("Deprecated. Will be removed in the next major release. Index a document with a percolator type")]
 	internal class RegisterPercolatorJsonConverter : JsonConverter

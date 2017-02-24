@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
@@ -49,7 +49,7 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 
 		protected override CreateIndexRequest Initializer => new CreateIndexRequest(CallIsolatedValue)
 		{
-			Settings = new Nest.IndexSettings
+			Settings = new Nest_5_2_0.IndexSettings
 			{
 				NumberOfReplicas = 1,
 				NumberOfShards = 1,

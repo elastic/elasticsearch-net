@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net_5_2_0
 {
 	public class StickyConnectionPool : IConnectionPool
 	{
@@ -32,7 +32,7 @@ namespace Elasticsearch.Net
 		{
 			nodes.ThrowIfEmpty(nameof(nodes));
 
-			this.DateTimeProvider = dateTimeProvider ?? Elasticsearch.Net.DateTimeProvider.Default;
+			this.DateTimeProvider = dateTimeProvider ?? Elasticsearch.Net_5_2_0.DateTimeProvider.Default;
 
 			var nn = nodes.ToList();
 			var uris = nn.Select(n => n.Uri).ToList();

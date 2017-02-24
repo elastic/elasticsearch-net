@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// The GeoIP processor adds information about the geographical location of IP addresses,

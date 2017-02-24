@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 
 namespace Tests.QueryDsl
 {

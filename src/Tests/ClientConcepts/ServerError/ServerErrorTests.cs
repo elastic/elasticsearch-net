@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Tests.Framework;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using FluentAssertions;
 using Xunit;
 
@@ -33,7 +33,7 @@ namespace Tests.ClientConcepts.ServerError
 			   ""status"": 400
 			}";
 
-			var serverError = this.Deserialize<Elasticsearch.Net.ServerError>(serverErrorJson);
+			var serverError = this.Deserialize<Elasticsearch.Net_5_2_0.ServerError>(serverErrorJson);
 
 			serverError.Should().NotBeNull();
 			serverError.Status.Should().Be(400);

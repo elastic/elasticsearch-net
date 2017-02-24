@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface ICompletionProperty : IDocValuesProperty

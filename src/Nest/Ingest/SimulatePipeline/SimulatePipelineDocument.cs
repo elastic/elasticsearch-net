@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface ISimulatePipelineDocument
@@ -61,7 +61,7 @@ namespace Nest
 			a.Source = source;
 			a.Index = a.Index ?? source.GetType();
 			a.Type = a.Type ?? source.GetType();
-			a.Id = a.Id ?? Nest.Id.From(source);
+			a.Id = a.Id ?? Nest_5_2_0.Id.From(source);
 		});
 	}
 

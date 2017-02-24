@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// The purpose of this processor is to point documents to the right time

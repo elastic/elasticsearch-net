@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework.MockData;
-using static Nest.Infer;
+using static Nest_5_2_0.Infer;
 
 namespace Tests.Framework.Integration
 {
@@ -78,7 +78,7 @@ namespace Tests.Framework.Integration
 					(d, c) => d.Document(c).Parent(c.ProjectName)
 				)
 			);
-			this.Client.Refresh(Nest.Indices.Index(typeof(Project), typeof(Developer), typeof(PercolatedQuery)));
+			this.Client.Refresh(Nest_5_2_0.Indices.Index(typeof(Project), typeof(Developer), typeof(PercolatedQuery)));
 		}
 
 		private void CreateIndicesAndSeedIndexData()

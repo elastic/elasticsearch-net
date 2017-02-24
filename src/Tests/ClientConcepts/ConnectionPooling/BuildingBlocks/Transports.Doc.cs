@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
-using Nest;
+using Elasticsearch.Net_5_2_0;
+using Nest_5_2_0;
 using Tests.Framework.MockData;
 using System.Threading;
 

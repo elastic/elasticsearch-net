@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
-using Nest;
+using Elasticsearch.Net_5_2_0;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
@@ -39,7 +39,7 @@ namespace Tests.XPack.License.PostLicense
 			}
 		};
 
-		private Nest.License FakeLicense { get; } = new Nest.License
+		private Nest_5_2_0.License FakeLicense { get; } = new Nest_5_2_0.License
 		{
 			UID = "uuid",
 			ExpiryDateInMilliseconds = 1,

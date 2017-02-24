@@ -6,8 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using Elasticsearch.Net;
-using Nest;
+using Elasticsearch.Net_5_2_0;
+using Nest_5_2_0;
 using Tests.Framework.Versions;
 #if !DOTNETCORE
 using XplatManualResetEvent = System.Threading.ManualResetEvent;

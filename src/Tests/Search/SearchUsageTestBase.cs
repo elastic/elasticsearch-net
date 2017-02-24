@@ -1,5 +1,5 @@
-﻿using Elasticsearch.Net;
-using Nest;
+﻿using Elasticsearch.Net_5_2_0;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
@@ -19,7 +19,7 @@ namespace Tests.Search
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-		protected override Elasticsearch.Net.HttpMethod HttpMethod => Elasticsearch.Net.HttpMethod.POST;
+		protected override Elasticsearch.Net_5_2_0.HttpMethod HttpMethod => Elasticsearch.Net_5_2_0.HttpMethod.POST;
 		protected override string UrlPath => "/project/project/_search";
 
 	}

@@ -1,4 +1,4 @@
-﻿namespace Nest
+﻿namespace Nest_5_2_0
 {
 	/// <summary>
 	/// An analyzer of type whitespace that is built using a Whitespace Tokenizer.

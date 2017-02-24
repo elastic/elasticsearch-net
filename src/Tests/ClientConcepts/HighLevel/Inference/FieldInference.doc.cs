@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Newtonsoft.Json;
 using Tests.ClientConcepts.LowLevel;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.RoundTripper;
-using static Nest.Infer;
-using Field = Nest.Field;
+using static Nest_5_2_0.Infer;
+using Field = Nest_5_2_0.Field;
 using Xunit;
 
 namespace Tests.ClientConcepts.HighLevel.Inference
@@ -116,7 +116,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		}
 
 		/**[[nest-infer]]
-		* === Using Nest.Infer
+		* === Using Nest_5_2_0.Infer
 		* To ease creating a `Field` instance from expressions, there is a static `Infer` class you can use
 		*/
 		[U]
@@ -128,7 +128,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			var fieldExpression = Infer.Field<Project>(p => p.Name);
 
 			/** this can be even shortened even further using a https://msdn.microsoft.com/en-us/library/sf0df423.aspx#Anchor_0[static import in C# 6] i.e.
-				`using static Nest.Infer;` using directive
+				`using static Nest_5_2_0.Infer;` using directive
 			*/
 			fieldExpression = Field<Project>(p => p.Name);
 			/** Now that is much terser then our first example using the constructor! */
@@ -141,7 +141,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			fieldString = "name^2.1";
 			fieldString.Boost.Should().Be(2.1);
 
-			/** As well as using `Nest.Infer.Field` */
+			/** As well as using `Nest_5_2_0.Infer.Field` */
 			fieldExpression = Field<Project>(p => p.Name, 2.1);
 			Expect("name^2.1")
 				.WhenSerializing(fieldString)

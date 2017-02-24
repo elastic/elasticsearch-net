@@ -1,4 +1,4 @@
-﻿namespace Nest
+﻿namespace Nest_5_2_0
 {
 	/// <summary>
 	/// A token filter of type porterStem that transforms the token stream as per the Porter stemming algorithm.

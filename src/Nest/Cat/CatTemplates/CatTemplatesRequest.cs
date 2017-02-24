@@ -1,7 +1,7 @@
 ﻿using System;
 #pragma warning disable 612, 618
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	public partial interface ICatTemplatesRequest { }
 

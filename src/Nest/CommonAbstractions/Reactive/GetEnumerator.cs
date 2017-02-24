@@ -4,7 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	internal class GetEnumerator<TSource> : IEnumerator<TSource>, IObserver<TSource>
 	{

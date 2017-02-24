@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
-using Elasticsearch.Net;
-using Nest;
+using Elasticsearch.Net_5_2_0;
+using Nest_5_2_0;
 
 namespace Tests.Framework
 {

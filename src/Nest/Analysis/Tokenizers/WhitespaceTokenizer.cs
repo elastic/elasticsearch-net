@@ -1,4 +1,4 @@
-﻿namespace Nest
+﻿namespace Nest_5_2_0
 {
 	/// <summary>
 	/// A tokenizer of type whitespace that divides text at whitespace.

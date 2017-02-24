@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// Collations are used for sorting documents in a language-specific word order. The icu_collation token filter is available to all indices and defaults to using the DUCET collation, which is a best-effort attempt at language-neutral sorting.

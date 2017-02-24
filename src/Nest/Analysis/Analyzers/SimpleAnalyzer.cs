@@ -1,4 +1,4 @@
-﻿namespace Nest
+﻿namespace Nest_5_2_0
 {
 	/// <summary>
 	/// An analyzer of type simple that is built using a Lower Case Tokenizer.

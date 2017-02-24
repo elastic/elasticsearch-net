@@ -1,5 +1,5 @@
 ﻿using System;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 
 namespace Tests.Analysis.Tokenizers
@@ -125,9 +125,9 @@ namespace Tests.Analysis.Tokenizers
 		public static IndexSettings InitializerExample =>
 			new IndexSettings
 			{
-				Analysis = new Nest.Analysis
+				Analysis = new Nest_5_2_0.Analysis
 				{
-					Tokenizers = new Nest.Tokenizers
+					Tokenizers = new Nest_5_2_0.Tokenizers
 					{
 						{
 							"endgen", new EdgeNGramTokenizer

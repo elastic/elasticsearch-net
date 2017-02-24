@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	[JsonConverter(typeof(FieldValuesJsonConverter))]
 	public class FieldValues : IsADictionaryBase<string, object>

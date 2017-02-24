@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 
 namespace Tests.IndexModules.IndexSettings.Settings
@@ -10,7 +10,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 		/**
 		 */
 
-		public class Usage : PromiseUsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest.IndexSettings>
+		public class Usage : PromiseUsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest_5_2_0.IndexSettings>
 		{
 			protected override object ExpectJson => new Dictionary<string, object>
 			{
@@ -61,8 +61,8 @@ namespace Tests.IndexModules.IndexSettings.Settings
 
 			/**
 			 */
-			protected override Nest.IndexSettings Initializer =>
-				new Nest.IndexSettings(new Dictionary<string, object>
+			protected override Nest_5_2_0.IndexSettings Initializer =>
+				new Nest_5_2_0.IndexSettings(new Dictionary<string, object>
 				{
 					{ "any.setting", "can be set" },
 					{ "doubles", 1.1 },

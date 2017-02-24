@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	public class ElasticContractResolver : DefaultContractResolver
 	{
@@ -72,7 +72,7 @@ namespace Nest
 					}
 				}
 
-				if (!o.FullName.StartsWith("Nest.", StringComparison.OrdinalIgnoreCase)) return contract;
+				if (!o.FullName.StartsWith("Nest_5_2_0.", StringComparison.OrdinalIgnoreCase)) return contract;
 				if (ApplyExactContractJsonAttribute(o, contract)) return contract;
 				if (ApplyContractJsonAttribute(o, contract)) return contract;
 

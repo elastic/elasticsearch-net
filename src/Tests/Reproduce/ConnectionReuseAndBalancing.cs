@@ -8,12 +8,12 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
 
-using Elasticsearch.Net;
-using Nest;
+using Elasticsearch.Net_5_2_0;
+using Nest_5_2_0;
 using FluentAssertions;
 using System.Threading;
 using System.Reactive.Linq;
-using static Nest.Infer;
+using static Nest_5_2_0.Infer;
 
 namespace Tests.Reproduce
 {

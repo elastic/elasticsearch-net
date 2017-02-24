@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Names : IUrlParameter

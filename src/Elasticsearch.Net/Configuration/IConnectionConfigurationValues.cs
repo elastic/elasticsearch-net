@@ -2,7 +2,7 @@
 using System.Collections.Specialized;
 using System.Threading;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net_5_2_0
 {
 	public interface IConnectionConfigurationValues : IDisposable
 	{

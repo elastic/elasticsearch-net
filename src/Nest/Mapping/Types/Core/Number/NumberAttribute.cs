@@ -1,6 +1,6 @@
-﻿using Elasticsearch.Net;
+﻿using Elasticsearch.Net_5_2_0;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// Maps a property as a number type. If no type is specified,

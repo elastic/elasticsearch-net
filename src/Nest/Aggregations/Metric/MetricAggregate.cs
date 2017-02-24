@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	public abstract class MetricAggregateBase : IAggregate
 	{

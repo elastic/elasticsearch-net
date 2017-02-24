@@ -3,10 +3,10 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// JSON converter for IDictionary that ignores the contract resolver (e.g. CamelCaseFieldNamesContractResolver)

@@ -10,7 +10,7 @@ namespace Tests.CommonOptions.DateMath
 		public void ImplicitConversionFromNullString()
 		{
 			string nullString = null;
-			Nest.DateMath dateMath = nullString;
+			Nest_5_2_0.DateMath dateMath = nullString;
 			dateMath.Should().BeNull();
 		}
 
@@ -18,7 +18,7 @@ namespace Tests.CommonOptions.DateMath
 		public void ImplicitConversionFromNullNullableDateTime()
 		{
 			DateTime? nullableDateTime = null;
-			Nest.DateMath dateMath = nullableDateTime;
+			Nest_5_2_0.DateMath dateMath = nullableDateTime;
 			dateMath.Should().BeNull();
 		}
 
@@ -26,7 +26,7 @@ namespace Tests.CommonOptions.DateMath
 		public void ImplicitConversionFromDateMathString()
 		{
 			string nullString = "now+3d";
-			Nest.DateMath dateMath = nullString;
+			Nest_5_2_0.DateMath dateMath = nullString;
 			dateMath.Should().NotBeNull();
 		}
 
@@ -34,7 +34,7 @@ namespace Tests.CommonOptions.DateMath
 		public void ImplicitConversionFromNullableDateTimeWithValue()
 		{
 			DateTime? nullableDateTime = DateTime.Now;
-			Nest.DateMath dateMath = nullableDateTime;
+			Nest_5_2_0.DateMath dateMath = nullableDateTime;
 			dateMath.Should().NotBeNull();
 		}
 	}

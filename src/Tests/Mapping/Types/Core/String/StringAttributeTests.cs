@@ -1,5 +1,5 @@
 ﻿using System;
-using Nest;
+using Nest_5_2_0;
 
 #pragma warning disable 618
 namespace Tests.Mapping.Types.Core.String

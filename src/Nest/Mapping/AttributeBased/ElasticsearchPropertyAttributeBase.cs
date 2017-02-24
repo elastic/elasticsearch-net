@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	[AttributeUsage(AttributeTargets.Property)]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]

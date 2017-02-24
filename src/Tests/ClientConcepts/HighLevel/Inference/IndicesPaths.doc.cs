@@ -1,9 +1,9 @@
-﻿using Elasticsearch.Net;
+﻿using Elasticsearch.Net_5_2_0;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.MockData;
-using static Nest.Indices;
+using static Nest_5_2_0.Indices;
 
 namespace Tests.ClientConcepts.HighLevel.Inference
 {
@@ -19,11 +19,11 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		*/
 		[U] public void ImplicitConversionFromString()
 		{
-			Nest.Indices singleIndexFromString = "name";
-			Nest.Indices multipleIndicesFromString = "name1, name2";
-			Nest.Indices multipleIndicesFromStringArray = new [] { "name1", "name2" };
-			Nest.Indices allFromString = "_all";
-			Nest.Indices allWithOthersFromString = "_all, name2";
+			Nest_5_2_0.Indices singleIndexFromString = "name";
+			Nest_5_2_0.Indices multipleIndicesFromString = "name1, name2";
+			Nest_5_2_0.Indices multipleIndicesFromStringArray = new [] { "name1", "name2" };
+			Nest_5_2_0.Indices allFromString = "_all";
+			Nest_5_2_0.Indices allWithOthersFromString = "_all, name2";
 
 			singleIndexFromString.Match(
 				all => all.Should().BeNull(),
@@ -51,8 +51,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		}
 
 		/**[[nest-indices]]
-		*=== Using Nest.Indices
-		* To ease creating `IndexName` or `Indices` from expressions, there is a static `Nest.Indices` class you can use
+		*=== Using Nest_5_2_0.Indices
+		* To ease creating `IndexName` or `Indices` from expressions, there is a static `Nest_5_2_0.Indices` class you can use
 		*
 		*==== Specifying a single index
 		* A single index can be specified using a CLR type or a string
@@ -100,7 +100,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		* Elasticsearch allows searching across multiple indices using the special `_all` marker.
 		*
 		* NEST exposes `_all` with `Indices.All` and `Indices.AllIndices`. Why expose it in two ways, you ask?
-		* Well, you may be using both `Nest.Indices` and `Nest.Types` in the same file and you may also be using C#6
+		* Well, you may be using both `Nest_5_2_0.Indices` and `Nest_5_2_0.Types` in the same file and you may also be using C#6
 		* static imports too; in this scenario, `All` becomes ambiguous between `Indices.All` and `Types.All`, so the
 		* `_all` marker is exposed as `Indices.AllIndices` to alleviate this ambiguity
 		*/

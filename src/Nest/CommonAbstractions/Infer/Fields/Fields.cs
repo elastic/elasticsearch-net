@@ -5,9 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	[ContractJsonConverter(typeof(FieldsJsonConverter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]

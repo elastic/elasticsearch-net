@@ -1,4 +1,4 @@
-﻿namespace Nest
+﻿namespace Nest_5_2_0
 {
 	/// <summary>
 	/// A tokenizer of type lowercase that performs the function of Letter Tokenizer and Lower Case Token Filter together. 

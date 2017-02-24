@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 using System.Diagnostics;
-using Nest;
+using Nest_5_2_0;
 
 namespace System.Collections.Generic
 {

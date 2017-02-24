@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	// TODO: ReindexOnServer and UpdateByQuery aggregate failures under a single failures property
 	// So the shape is a bit odd

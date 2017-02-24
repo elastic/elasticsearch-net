@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Tests.Framework;
@@ -13,7 +13,7 @@ using Tests.Framework.Integration;
 using Xunit;
 using A = Tests.QueryDsl.BoolDsl.BoolCluster.A;
 using E = Tests.QueryDsl.BoolDsl.BoolCluster.E;
-using static Nest.Infer;
+using static Nest_5_2_0.Infer;
 
 
 namespace Tests.QueryDsl.BoolDsl

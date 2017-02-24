@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using System.Reflection;
 #endif
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	/// <summary>
 	/// A Json converter that can serialize enums to strings where the string values

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
@@ -20,7 +20,7 @@ namespace Tests.Document.Single.Index
 		{
 			public int Id { get; set; }
 			public string Content { get; set; }
-			public Nest.Attachment Attachment { get; set; }
+			public Nest_5_2_0.Attachment Attachment { get; set; }
 		}
 
 		private static string Content => Tests.Document.Single.Attachment.Document.TestPdfDocument;
@@ -42,7 +42,7 @@ namespace Tests.Document.Single.Index
 								.Text(s => s
 									.Name(f => f.Content)
 								)
-								.Object<Nest.Attachment>(o => o
+								.Object<Nest_5_2_0.Attachment>(o => o
 									.Name(f => f.Attachment)
 								)
 							)

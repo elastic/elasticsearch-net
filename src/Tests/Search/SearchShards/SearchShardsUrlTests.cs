@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
@@ -50,9 +50,9 @@ namespace Tests.Search.SearchShards
 			await POST("/_search_shards")
 				.Fluent(c=>c.SearchShards<Project>(s=>s.AllTypes().AllIndices()))
 				.Request(c=>c.SearchShards(new SearchShardsRequest()))
-				.Request(c=>c.SearchShards(new SearchShardsRequest<Project>(Nest.Indices.All, Types.All)))
+				.Request(c=>c.SearchShards(new SearchShardsRequest<Project>(Nest_5_2_0.Indices.All, Types.All)))
 				.FluentAsync(c=>c.SearchShardsAsync<Project>(s=>s.AllIndices().Type(Types.All)))
-				.RequestAsync(c=>c.SearchShardsAsync(new SearchShardsRequest<Project>(Nest.Indices.All, Types.All)))
+				.RequestAsync(c=>c.SearchShardsAsync(new SearchShardsRequest<Project>(Nest_5_2_0.Indices.All, Types.All)))
 				.RequestAsync(c=>c.SearchShardsAsync(new SearchShardsRequest()))
 				;
 		}

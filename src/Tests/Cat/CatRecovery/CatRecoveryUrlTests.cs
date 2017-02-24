@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
@@ -19,9 +19,9 @@ namespace Tests.Cat.CatRecovery
 
 			await GET("/_cat/recovery/project")
 				.Fluent(c => c.CatRecovery(r => r.Index<Project>()))
-				.Request(c => c.CatRecovery(new CatRecoveryRequest(Nest.Indices.Index<Project>())))
+				.Request(c => c.CatRecovery(new CatRecoveryRequest(Nest_5_2_0.Indices.Index<Project>())))
 				.FluentAsync(c => c.CatRecoveryAsync(r => r.Index<Project>()))
-				.RequestAsync(c => c.CatRecoveryAsync(new CatRecoveryRequest(Nest.Indices.Index<Project>())));
+				.RequestAsync(c => c.CatRecoveryAsync(new CatRecoveryRequest(Nest_5_2_0.Indices.Index<Project>())));
 		}
 	}
 }

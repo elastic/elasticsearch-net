@@ -1,7 +1,7 @@
-﻿using Nest;
+﻿using Nest_5_2_0;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Infer;
+using static Nest_5_2_0.Infer;
 
 #pragma warning disable 618 // Deprecated in 5.0.0-alpha2 - see https://github.com/elastic/elasticsearch/issues/12017
 

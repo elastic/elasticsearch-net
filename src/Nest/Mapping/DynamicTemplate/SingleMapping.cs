@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	public class SingleMappingDescriptor<T> :
 		DescriptorBase<SingleMappingDescriptor<T>, IPropertiesDescriptor<T, IProperty>>, IPropertiesDescriptor<T, IProperty>

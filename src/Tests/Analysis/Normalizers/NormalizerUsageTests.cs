@@ -1,5 +1,5 @@
 ﻿using System;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 
 namespace Tests.Analysis.Normalizers
@@ -48,9 +48,9 @@ namespace Tests.Analysis.Normalizers
 		public static IndexSettings InitializerExample =>
 			new IndexSettings
 			{
-				Analysis = new Nest.Analysis
+				Analysis = new Nest_5_2_0.Analysis
 				{
-					Normalizers = new Nest.Normalizers
+					Normalizers = new Nest_5_2_0.Normalizers
 					{
 						{
 							"myCustom", new CustomNormalizer

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
-using Nest;
+using Elasticsearch.Net_5_2_0;
+using Nest_5_2_0;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Infer;
+using static Nest_5_2_0.Infer;
 using FluentAssertions;
 using System.Linq;
 using Tests.Framework;
@@ -35,7 +35,7 @@ namespace Tests.Search.Suggesters
 
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
-		protected override Elasticsearch.Net.HttpMethod HttpMethod => Elasticsearch.Net.HttpMethod.POST;
+		protected override Elasticsearch.Net_5_2_0.HttpMethod HttpMethod => Elasticsearch.Net_5_2_0.HttpMethod.POST;
 		protected override string UrlPath => "/project/_suggest";
 		protected override bool SupportsDeserialization => false;
 

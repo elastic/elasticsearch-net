@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Attributes;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Benchmarks;
 using Tests.Framework.EndpointTests.Clusters;

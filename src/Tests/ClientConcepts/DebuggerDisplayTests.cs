@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.MockData;
 
@@ -29,8 +29,8 @@ namespace Tests.ClientConcepts
 		}
         [U] public void FieldsDebug()
         {
-	        Nest.Fields fromString = "field1, field2";
-	        Nest.Fields multiple = Infer.Field("somefield").And<Project>(p=>p.Description, 12);
+	        Nest_5_2_0.Fields fromString = "field1, field2";
+	        Nest_5_2_0.Fields multiple = Infer.Field("somefield").And<Project>(p=>p.Description, 12);
 
 			DebugFor(fromString).Should().Be($"Count: 2 [(1: field1),(2: field2)]");
 			DebugFor(multiple).Should().Be($"Count: 2 [(1: somefield),(2: p => p.Description^12 typeof: {nameof(Project)})]");
@@ -102,10 +102,10 @@ namespace Tests.ClientConcepts
 
         [U] public void IndicesDebug()
         {
-	        Nest.Indices all = Nest.Indices.All;
-	        Nest.Indices fromTypeName = Infer.Index<Project>();
-	        Nest.Indices fromType = typeof(CommitActivity);
-	        Nest.Indices multiple = Infer.Index("someindex").And<Project>();
+	        Nest_5_2_0.Indices all = Nest_5_2_0.Indices.All;
+	        Nest_5_2_0.Indices fromTypeName = Infer.Index<Project>();
+	        Nest_5_2_0.Indices fromType = typeof(CommitActivity);
+	        Nest_5_2_0.Indices multiple = Infer.Index("someindex").And<Project>();
 
 			DebugFor(all).Should().Be("_all");
 			DebugFor(fromTypeName).Should().Be($"Count: 1 [(1: IndexName for typeof: {nameof(Project)})]");

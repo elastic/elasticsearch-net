@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
@@ -193,7 +193,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 				}, d => d.Index(index));
 
 				this.Client.Index(Project.Instance);
-				this.Client.Refresh(Nest.Indices.Index(index).And<Project>());
+				this.Client.Refresh(Nest_5_2_0.Indices.Index(index).And<Project>());
 			}
 		}
 

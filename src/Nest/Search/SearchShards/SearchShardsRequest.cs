@@ -1,4 +1,4 @@
-﻿namespace Nest
+﻿namespace Nest_5_2_0
 {
 	public partial interface ISearchShardsRequest { }
 	public partial interface ISearchShardsRequest<T> : ISearchShardsRequest { }

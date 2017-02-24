@@ -1,6 +1,6 @@
 ﻿using System;
-using Nest;
-using Elasticsearch.Net;
+using Nest_5_2_0;
+using Elasticsearch.Net_5_2_0;
 using Tests.Framework;
 using static Tests.Framework.RoundTripper;
 using Tests.Framework.Integration;

@@ -1,5 +1,5 @@
 using System;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 

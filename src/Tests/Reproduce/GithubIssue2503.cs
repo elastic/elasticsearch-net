@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using static Tests.Framework.RoundTripper;
 

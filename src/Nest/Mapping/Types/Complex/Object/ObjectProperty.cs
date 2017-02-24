@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using System.Diagnostics;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface IObjectProperty : ICoreProperty

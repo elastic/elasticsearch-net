@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	// TODO this custom converter is in place because the response changed from ES 5.0 to ES 5.2
 	// so we are supporting both formats. In 6.0 we should remove this entirely and only support

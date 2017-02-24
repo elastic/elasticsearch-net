@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
@@ -11,7 +11,7 @@ namespace Tests.Search.FieldStats
 		[U] public async Task Urls()
 		{
 			await POST("/project/_field_stats")
-				.Fluent(c => c.FieldStats(Nest.Indices.Index<Project>()))
+				.Fluent(c => c.FieldStats(Nest_5_2_0.Indices.Index<Project>()))
 				.Request(c => c.FieldStats(new FieldStatsRequest("project") {}))
 				.FluentAsync(c => c.FieldStatsAsync(typeof(Project)))
 				.RequestAsync(c => c.FieldStatsAsync(new FieldStatsRequest("project")))

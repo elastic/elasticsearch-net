@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
@@ -59,7 +59,7 @@ namespace Tests.Indices.IndexManagement.ShrinkIndex
 
 		protected override ShrinkIndexRequest Initializer => new ShrinkIndexRequest(CallIsolatedValue, CallIsolatedValue + "-target")
 		{
-			Settings = new Nest.IndexSettings
+			Settings = new Nest_5_2_0.IndexSettings
 			{
 				NumberOfShards = 4
 			}

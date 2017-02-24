@@ -9,8 +9,8 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using BenchmarkDotNet.Attributes;
-using Elasticsearch.Net;
-using Nest;
+using Elasticsearch.Net_5_2_0;
+using Nest_5_2_0;
 using Tests.Framework.Benchmarks;
 using Tests.Framework.MockData;
 

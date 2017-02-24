@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	public static class Infer
 	{
@@ -14,18 +14,18 @@ namespace Nest
 		public static Indices Indices<T>() => typeof(T);
 		public static Indices Indices(params IndexName[] indices) => indices;
 		public static Indices Indices(IEnumerable<IndexName> indices) => indices.ToArray();
-		public static Indices AllIndices = Nest.Indices.All;
+		public static Indices AllIndices = Nest_5_2_0.Indices.All;
 
 		public static TypeName Type(TypeName type) => type;
 		public static TypeName Type<T>() => typeof(T);
 		public static Types Type(IEnumerable<TypeName> types) => new Types.ManyTypes(types);
 		public static Types Type(params TypeName[] types) => new Types.ManyTypes(types);
-		public static Types AllTypes = Nest.Types.All;
+		public static Types AllTypes = Nest_5_2_0.Types.All;
 
 		public static Names Names(params string[] names) => string.Join(",", names);
 		public static Names Names(IEnumerable<string> names) => string.Join(",", names);
 
-		public static Id Id<T>(T document) where T : class => Nest.Id.From(document);
+		public static Id Id<T>(T document) where T : class => Nest_5_2_0.Id.From(document);
 
 		public static Fields Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			new Fields(fields.Select(f=>(Field)f));

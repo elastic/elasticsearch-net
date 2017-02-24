@@ -1,4 +1,4 @@
-﻿using Nest;
+﻿using Nest_5_2_0;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
@@ -37,7 +37,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 			Boost = 1.1,
 			Name = "named_query",
 			Field = Infer.Field<Project>(p => p.Location),
-			BoundingBox = new Nest.BoundingBox
+			BoundingBox = new Nest_5_2_0.BoundingBox
 			{
 				TopLeft = new GeoLocation(34,-34),
 				BottomRight = new GeoLocation(-34,34),
@@ -62,7 +62,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoBoundingBoxQuery>(a => a.GeoBoundingBox)
 		{
 			q => q.BoundingBox = null,
-			q => q.BoundingBox = new Nest.BoundingBox { } ,
+			q => q.BoundingBox = new Nest_5_2_0.BoundingBox { } ,
 			q =>  q.Field = null
 		};
 	}

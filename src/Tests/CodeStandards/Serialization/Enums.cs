@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Nest;
+using Nest_5_2_0;
 using Newtonsoft.Json;
 using Tests.Framework;
 

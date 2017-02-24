@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	internal class SimilarityJsonConverter : JsonConverter
 	{
@@ -20,7 +20,7 @@ namespace Nest
 			if (typeProperty == null) return null;
 
 			var typePropertyValue = typeProperty.Value.ToString();
-			var itemType = Type.GetType("Nest." + typePropertyValue + "Similarity", false, true);
+			var itemType = Type.GetType("Nest_5_2_0." + typePropertyValue + "Similarity", false, true);
 			if (itemType != null) return o.ToObject(itemType, ElasticContractResolver.Empty);
 
 			var dict = o.ToObject<Dictionary<string, object>>();

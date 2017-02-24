@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 
 namespace Tests.Mapping.Types.Core.Range.DateRange
@@ -7,7 +7,7 @@ namespace Tests.Mapping.Types.Core.Range.DateRange
 	public class DateRangeTest
 	{
 		[DateRange(Boost=1.2, Coerce = false, Format = "yyyy-MM")]
-		public Nest.DateRange Range { get; set; }
+		public Nest_5_2_0.DateRange Range { get; set; }
 	}
 
 	[SkipVersion("<5.2.0", "dedicated range types is a new 5.2.0 feature")]

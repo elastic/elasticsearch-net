@@ -1,9 +1,9 @@
 ﻿using System;
-using Elasticsearch.Net;
+using Elasticsearch.Net_5_2_0;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Nest
+namespace Nest_5_2_0
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IBulkOperation

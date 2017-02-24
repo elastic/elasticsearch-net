@@ -1,12 +1,12 @@
 ﻿using System;
-using Nest;
+using Nest_5_2_0;
 using Tests.Framework;
 using static Tests.Framework.RoundTripper;
 using Tests.Framework.MockData;
 using Tests.Framework.Integration;
 using System.Collections.Generic;
-using Elasticsearch.Net;
-using static Nest.Infer;
+using Elasticsearch.Net_5_2_0;
+using static Nest_5_2_0.Infer;
 using Xunit;
 
 namespace Tests.Mapping.Metafields
