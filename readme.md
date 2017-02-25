@@ -71,6 +71,8 @@ NEST is the official high-level .NET client of [Elasticsearch](https://github.co
 
 ## Getting Started
 
+For a comprehensive, walkthrough-styled tutorial, check out the [NuSearch example repository](https://github.com/elastic/elasticsearch-net-example).
+
 ### Installing
 
 From the package manager console:
