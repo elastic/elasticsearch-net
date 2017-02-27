@@ -58,7 +58,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 
 					var port = this.Started ? this.Port : 9200;
 					this._client = TestClient.GetClient(ComposeSettings, port);
-					return this.Client;
+					return this._client;
 				}
 			}
 		}

@@ -70,7 +70,7 @@ namespace Tests.Framework
 
 		public async Task<Auditor> TraceCall(ClientCall callTrace, int nthCall = 0)
 		{
-			 await this.TraceStartup(callTrace);
+			await this.TraceStartup(callTrace);
 			return AssertAuditTrails(callTrace, nthCall);
 		}
 
@@ -99,6 +99,7 @@ namespace Tests.Framework
 			this.AsyncAuditTrail = exception.AuditTrail;
 			this.AssertPoolAfterCall?.Invoke(this._clusterAsync.ConnectionPool);
 		}
+
 		public async Task<Auditor> TraceElasticsearchException(ClientCall callTrace, Action<ElasticsearchClientException> assert)
 		{
 			await this.TraceException(callTrace, assert);
