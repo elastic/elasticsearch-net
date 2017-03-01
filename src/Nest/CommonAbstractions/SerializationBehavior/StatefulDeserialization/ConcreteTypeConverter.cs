@@ -94,7 +94,10 @@ namespace Nest
 
 		private static JObject CreateIntermediateJObject(JsonReader reader)
 		{
+			var original = reader.DateParseHandling;
+			reader.DateParseHandling = DateParseHandling.None;
 			var jObject = JObject.Load(reader);
+			reader.DateParseHandling = original;
 			return jObject;
 		}
 
