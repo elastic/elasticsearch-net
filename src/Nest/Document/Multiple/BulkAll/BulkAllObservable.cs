@@ -69,31 +69,25 @@ namespace Nest
 			partioned.ForEachAsync(
 				(buffer, page) => this.BulkAsync(buffer, page, 0),
 				(buffer, response) => observer.OnNext(response),
-				t => OnCompleted(t, observer),
+				ex => OnCompleted(ex, observer),
 				this._maxDegreeOfParallelism
 			);
 		}
 
-		private void OnCompleted(Task task, IObserver<IBulkAllResponse> observer)
+		private void OnCompleted(Exception exception, IObserver<IBulkAllResponse> observer)
 		{
-			switch (task.Status)
+			if (exception != null)
 			{
-				case System.Threading.Tasks.TaskStatus.RanToCompletion:
-					if (this._partionedBulkRequest.RefreshOnCompleted)
-					{
-						var refresh = this._client.Refresh(this._partionedBulkRequest.Index);
-						if (!refresh.IsValid) throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);
-					}
-					observer.OnCompleted();
-					break;
-				case System.Threading.Tasks.TaskStatus.Faulted:
-					observer.OnError(task.Exception.InnerException);
-					break;
-				case System.Threading.Tasks.TaskStatus.Canceled:
-					observer.OnError(new TaskCanceledException(task));
-					break;
-				default:
-					throw new ArgumentOutOfRangeException();
+				observer.OnError(exception);
+			}
+			else
+			{
+				if (this._partionedBulkRequest.RefreshOnCompleted)
+				{
+					var refresh = this._client.Refresh(this._partionedBulkRequest.Index);
+					if (!refresh.IsValid) throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);
+				}
+				observer.OnCompleted();
 			}
 		}
 
