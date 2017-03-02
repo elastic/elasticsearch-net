@@ -94,7 +94,16 @@ namespace Nest
 
 		private static JObject CreateIntermediateJObject(JsonReader reader)
 		{
+			var original = reader.DateParseHandling;
+			// Temporarily turn off DateTime parsing since we deserialize
+			// to a dynamic object and the date could be stored as a string
+			// in the users POCO and we need to preserve its format. This is
+			// side-effect free since we read the reader to completion using
+			// JObject.Load before handing off a new one to the deserialized
+			// hit object.
+			reader.DateParseHandling = DateParseHandling.None;
 			var jObject = JObject.Load(reader);
+			reader.DateParseHandling = original;
 			return jObject;
 		}
 
