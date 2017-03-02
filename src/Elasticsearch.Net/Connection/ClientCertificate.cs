@@ -36,15 +36,14 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Elasticsearch.Net
 {
-//.NET core does not allow to set PrivateKey, you'll have to manually convert to pfx/p12 or add the key to the machine store
+//.NET removed the setter for PrivateKey for X509Certificate, you'll have to manually convert to pfx/p12 or add the key to the machine store
 #if !DOTNETCORE
 
 	public class ClientCertificate
 	{
 		//https://tls.mbed.org/kb/cryptography/asn1-key-structures-in-der-and-pem
-		public static RSACryptoServiceProvider DecodeRsaPrivateKey(byte[] privkey)
+		private static RSACryptoServiceProvider DecodeRsaPrivateKey(byte[] privkey)
 		{
-			// ---------  Set up stream to decode the asn.1 encoded RSA private key  ------
 			using (var mem = new MemoryStream(privkey))
 			using (var binr = new BinaryReader(mem))
 			{
