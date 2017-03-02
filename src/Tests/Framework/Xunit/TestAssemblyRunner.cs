@@ -120,10 +120,18 @@ namespace Xunit
 			};
 		}
 
-		private IEnumerable<string> ParseExcludedClusters(List<string> clusters, string clusterFilter)
+		private IEnumerable<string> ParseExcludedClusters(string clusterFilter)
 		{
 			if (string.IsNullOrWhiteSpace(clusterFilter)) return Enumerable.Empty<string>();
-			clusters = clusters.Select(c => c.ToLowerInvariant()).ToList();
+			var clusters =
+#if DOTNETCORE
+				typeof(ClusterBase).Assembly()
+#else
+				typeof(ClusterBase).Assembly
+#endif
+				.GetTypes()
+				.Where(t => typeof(ClusterBase).IsAssignableFrom(t) && t != typeof(ClusterBase))
+				.Select(c => c.Name.Replace("Cluster", "").ToLowerInvariant());
 			var filters = clusterFilter.Split(',').Select(c => c.Trim().ToLowerInvariant());
 			var include = filters.Where(f => !f.StartsWith("-")).Select(f => f.ToLowerInvariant());
 			if (include.Any()) return clusters.Where(c => !include.Contains(c));
@@ -139,8 +147,7 @@ namespace Xunit
 			Console.WriteLine("Starting integration tests");
 			var summaries = new ConcurrentBag<RunSummary>();
 			var clusterTotals = new Dictionary<string, Stopwatch>();
-			var clusters = grouped.Select(g => g.Key.GetType().Name.Replace("Cluster", "")).ToList();
-			var excludedClusters = ParseExcludedClusters(clusters, TestClient.Configuration.ClusterFilter);
+			var excludedClusters = ParseExcludedClusters(TestClient.Configuration.ClusterFilter);
 			var testFilter = TestClient.Configuration.TestFilter;
 			foreach (var group in grouped)
 			{
