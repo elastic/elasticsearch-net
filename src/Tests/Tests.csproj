@@ -710,6 +710,7 @@
     <Compile Include="QueryDsl\NotConditionlessWhen.cs" />
     <Compile Include="QueryDsl\Specialized\Percolate\PercolateQueryUsageTests.cs" />
     <Compile Include="Reproduce\ConnectionReuseAndBalancing.cs" />
+    <Compile Include="Reproduce\CovariantSearchDateParsing.cs" />
     <Compile Include="Reproduce\DateSerialization.cs" />
     <Compile Include="Reproduce\GithubIssue2152.cs" />
     <Compile Include="Reproduce\GithubIssue2306.cs" />
