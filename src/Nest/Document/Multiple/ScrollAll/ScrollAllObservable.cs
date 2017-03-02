@@ -128,19 +128,15 @@ namespace Nest
 			finally { _scrollInitiationLock.Release(); }
 		}
 
-		private static void OnCompleted(Task task, IObserver<IScrollAllResponse<T>> observer)
+		private static void OnCompleted(Exception exception, IObserver<IScrollAllResponse<T>> observer)
 		{
-			switch (task.Status)
+			if (exception == null)
 			{
-				case System.Threading.Tasks.TaskStatus.RanToCompletion:
-					observer.OnCompleted();
-					break;
-				case System.Threading.Tasks.TaskStatus.Faulted:
-					observer.OnError(task.Exception.InnerException);
-					break;
-				case System.Threading.Tasks.TaskStatus.Canceled:
-					observer.OnError(new TaskCanceledException(task));
-					break;
+				observer.OnCompleted();
+			}
+			else
+			{
+				observer.OnError(exception);
 			}
 		}
 
