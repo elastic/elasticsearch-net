@@ -223,7 +223,7 @@ namespace Nest
 				var tasks = new List<Task>();
 				foreach (var item in lazyList)
 				{
-					tasks.Add(ProcessAsync<TSource, TResult>(item, taskSelector, resultProcessor, semaphore, additionalRateLimitter, page++));
+					tasks.Add(ProcessAsync(item, taskSelector, resultProcessor, semaphore, additionalRateLimitter, page++));
 					if (tasks.Count <= maxDegreeOfParallelism)
 						continue;
 
@@ -255,10 +255,6 @@ namespace Nest
 			{
 				var result = await taskSelector(item, page).ConfigureAwait(false);
 				resultProcessor(item, result);
-			}
-			catch
-			{
-				throw;
 			}
 			finally
 			{
