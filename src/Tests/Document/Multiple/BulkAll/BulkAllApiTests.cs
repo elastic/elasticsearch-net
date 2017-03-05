@@ -270,5 +270,62 @@ namespace Tests.Document.Multiple.BulkAll
 				e.Message.Should().Be("boom");
 			}
 		}
+
+		[I]
+		public void ForEachAsyncReleasesProcessedItemsInMemory()
+		{
+			WeakReference<SmallObject> deallocReference = null;
+			SmallObject obj = null;
+
+			var stopUntilAssertsDone = new AutoResetEvent(false);
+			var lazyCollection = GetLazyCollection(
+				weakRef => deallocReference = weakRef,
+				delegate { },//...
+				delegate { },//Making sure that all of the objects have gone through pipeline
+				delegate { },//so that the first one can be deallocated
+				delegate { },//Various GC roots prevent several of previous (2 or 3)
+				delegate { },//items in the lazy Enumerable from deallocation during forced GC
+				delegate { },//...
+				delegate {
+					GC.Collect(2, GCCollectionMode.Forced, true);
+					deallocReference.TryGetTarget(out obj);
+				}
+			);
+
+			var index = CreateIndexName();
+			var observableBulk = this._client.BulkAll(lazyCollection, f => f
+				.MaxDegreeOfParallelism(1)
+				.Size(1)
+				.Index(index)
+				.BufferToBulk((r, buffer) => r.IndexMany(buffer)));
+
+			Exception exception = null;
+			observableBulk.Subscribe(new BulkAllObserver(
+				onCompleted: () => stopUntilAssertsDone.Set(),
+				onError: e =>
+				{
+					stopUntilAssertsDone.Set();
+					exception = e ?? new Exception("Failed to pass through error");
+				}
+			));
+
+			stopUntilAssertsDone.WaitOne();
+			if (exception != null)
+				throw exception;
+
+			deallocReference.Should().NotBeNull();
+			obj.Should().BeNull();
+		}
+
+		private IEnumerable<SmallObject> GetLazyCollection(params Action<WeakReference<SmallObject>>[] getFirstObjectCallBack)
+		{
+			var counter = 0;
+			foreach (var callback in getFirstObjectCallBack)
+			{
+				var obj = new SmallObject { Id = ++counter };
+				callback(new WeakReference<SmallObject>(obj));
+				yield return obj;
+			}
+		}
 	}
 }
