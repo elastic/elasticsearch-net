@@ -277,7 +277,6 @@ namespace Tests.Document.Multiple.BulkAll
 			WeakReference<SmallObject> deallocReference = null;
 			SmallObject obj = null;
 
-			var stopUntilAssertsDone = new AutoResetEvent(false);
 			var lazyCollection = GetLazyCollection(
 				weakRef => deallocReference = weakRef,
 				delegate { },//...
@@ -299,19 +298,7 @@ namespace Tests.Document.Multiple.BulkAll
 				.Index(index)
 				.BufferToBulk((r, buffer) => r.IndexMany(buffer)));
 
-			Exception exception = null;
-			observableBulk.Subscribe(new BulkAllObserver(
-				onCompleted: () => stopUntilAssertsDone.Set(),
-				onError: e =>
-				{
-					stopUntilAssertsDone.Set();
-					exception = e ?? new Exception("Failed to pass through error");
-				}
-			));
-
-			stopUntilAssertsDone.WaitOne();
-			if (exception != null)
-				throw exception;
+			observableBulk.Wait(TimeSpan.FromSeconds(30), delegate { });
 
 			deallocReference.Should().NotBeNull();
 			obj.Should().BeNull();
