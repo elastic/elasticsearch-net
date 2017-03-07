@@ -47,7 +47,8 @@ namespace Tests.Aggregations.Metric.TopHits
 								size = 1,
 								version = true,
 								explain = true,
-								fielddata_fields = new [] { "state", "numberOfCommits" },
+                                fields = new[] { "lastActivity" },
+                                fielddata_fields = new [] { "state", "numberOfCommits" },
 								highlight = new
 								{
 									fields = new
@@ -92,11 +93,14 @@ namespace Tests.Aggregations.Metric.TopHits
 							.Size(1)
 							.Version()
 							.Explain()
-							.FielddataFields(fd => fd
-								.Field(p => p.State)
-								.Field(p => p.NumberOfCommits)
-							)
-							.Highlight(h => h
+                            .FielddataFields(fd => fd
+                                .Field(p => p.State)
+                                .Field(p => p.NumberOfCommits)
+                            )
+                            .Fields(fd => fd
+                                .Field(p => p.LastActivity)
+                            )
+                            .Highlight(h => h
 								.Fields(
 									hf => hf.Field(p => p.Tags),
 									hf => hf.Field(p => p.Description)
@@ -133,8 +137,9 @@ namespace Tests.Aggregations.Metric.TopHits
 						Size = 1,
 						Version = true,
 						Explain = true,
-						FielddataFields = new [] { "state", "numberOfCommits" },
-						Highlight = new Highlight
+						Fields = new [] { "lastActivity" },
+                        FielddataFields = new [] { "state", "numberOfCommits" },
+                        Highlight = new Highlight
 						{
 							Fields = new Dictionary<Nest.Field, IHighlightField>
 							{
@@ -167,9 +172,10 @@ namespace Tests.Aggregations.Metric.TopHits
 				hits.Should().NotBeNullOrEmpty();
 				hits.All(h => h.Explanation != null).Should().BeTrue();
 				hits.All(h => h.Version.HasValue).Should().BeTrue();
-				//hits.All(h => h.Highlights.Count() > 0).Should().BeTrue();
-				hits.All(h => h.Fields.ValuesOf<StateOfBeing>("state").Any()).Should().BeTrue();
-				hits.All(h => h.Fields.ValuesOf<int>("numberOfCommits").Any()).Should().BeTrue();
+                //hits.All(h => h.Highlights.Count() > 0).Should().BeTrue();
+                hits.All(h => h.Fields.ValuesOf<DateTime>("lastActivity").Any()).Should().BeTrue();
+                hits.All(h => h.Fields.ValuesOf<StateOfBeing>("state").Any()).Should().BeTrue();
+                hits.All(h => h.Fields.ValuesOf<int>("numberOfCommits").Any()).Should().BeTrue();
 				hits.All(h => h.Fields.ValuesOf<int>("commit_factor").Any()).Should().BeTrue();
 				topStateHits.Documents<Project>().Should().NotBeEmpty();
 			}
