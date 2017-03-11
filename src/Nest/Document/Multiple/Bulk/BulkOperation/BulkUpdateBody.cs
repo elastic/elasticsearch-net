@@ -18,5 +18,8 @@ namespace Nest
 
 		[JsonProperty("script")]
 		internal IScript _Script { get; set; }
+
+		[JsonProperty("scripted_upsert")]
+		public bool? _ScriptedUpsert { get; set; }
 	}
 }
