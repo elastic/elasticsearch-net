@@ -19,7 +19,8 @@ please modify the original csharp file found at the link and submit the PR with 
 
 Allows to return the field data representation of a field for each hit.
 
-=== Fluent DSL Example
+[float]
+=== Fluent DSL example
 
 [source,csharp]
 ----
@@ -31,7 +32,8 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+[float]
+=== Object Initializer syntax example
 
 [source,csharp]
 ----

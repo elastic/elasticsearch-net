@@ -158,9 +158,16 @@ module Tooling =
     let DotNet = new DotNetTooling("dotnet.exe")
 
     type MsBuildTooling() =
+        // Exclude DocGenerator from .NET 4.5 build as it depends on a Roslyn library
+        // that is built against .NET 4.5.2
+        let solutionForFramework framework =
+            match framework with
+            | Net45 -> Paths.Source "Elasticsearch.Net45.sln"
+            | _ -> Paths.Source "Elasticsearch.sln"  
 
-        member this.Build (framework:Projects.DotNetFrameworkIdentifier) =
-            let solution = Paths.Source "Elasticsearch.sln";
+        member this.Build (framework:Projects.DotNetFramework) =            
+            let solution = solutionForFramework framework 
+            let identifier = framework.Identifier
             let setParams defaults =
                 { defaults with
                     Verbosity = Some(Quiet)
@@ -169,14 +176,15 @@ module Tooling =
                         [
                             "Optimize", "True"
                             "Configuration", "Release"
-                            "TargetFrameworkVersion", framework.MSBuild
-                            "DefineConstants", framework.DefineConstants
+                            "TargetFrameworkVersion", identifier.MSBuild
+                            "DefineConstants", identifier.DefineConstants
                         ]
                  }
             build setParams solution 
 
-        member this.Rebuild (framework:Projects.DotNetFrameworkIdentifier) =
-            let solution = Paths.Source "Elasticsearch.sln";
+        member this.Rebuild (framework:Projects.DotNetFramework) = 
+            let solution = solutionForFramework framework              
+            let identifier = framework.Identifier               
             let setParams defaults =
                 { defaults with
                     Verbosity = Some(Quiet)
@@ -186,8 +194,8 @@ module Tooling =
                             "OutputPathBaseDir", Path.GetFullPath "build\\output"
                             "Optimize", "True"
                             "Configuration", "Release"
-                            "TargetFrameworkVersion", framework.MSBuild
-                            "DefineConstants", framework.DefineConstants
+                            "TargetFrameworkVersion", identifier.MSBuild
+                            "DefineConstants", identifier.DefineConstants
                         ]
                  }
         

@@ -30,7 +30,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// The upper bound or replicas. Can be an integer value or a string value of "all"
+		/// The upper bound of replicas. Can be an integer value or a string value of "all"
 		/// </summary>
 		public Union<int?, string> MaxReplicas
 		{

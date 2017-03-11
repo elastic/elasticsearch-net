@@ -15,11 +15,15 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[verbatim-and-strict-query-usage]]
-== Verbatim And Strict Query Usage
+=== Verbatim and Strict Query Usage
 
-`IsVerbatim` should be set on individual queries to take effect 
+[float]
+=== Verbatim Query Usage
 
-=== Fluent DSL Example
+An individual query can be marked as verbatim in order take effect; a verbatim query will be serialized and
+sent in the request to Elasticsearch, bypassing NEST's conditionless checks.
+
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -39,7 +43,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -81,9 +85,9 @@ new TermQuery
 }
 ----
 
-Setting `IsVerbatim` on a compound query is still supported though 
+A compound query can also be marked as verbatim, demonstrated here with a `bool` query. 
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -93,7 +97,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -111,7 +115,9 @@ new BoolQuery
 }
 ----
 
-=== Fluent DSL Example
+A single verbatim query will be serialized as-is 
+
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -123,7 +129,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -147,7 +153,9 @@ new TermQuery
 }
 ----
 
-=== Fluent DSL Example
+Leaf queries within a compound query marked as verbatim will also be serialized as-is
+
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -166,7 +174,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -218,35 +226,10 @@ new BoolQuery
 }
 ----
 
-[source,csharp]
-----
-var e = Assert.Throws<ArgumentException>(() =>
-    new SearchRequest<Project>
-    {
-        Query = new TermQuery
-        {
-            IsStrict = true,
-            Field = "myfield",
-            Value = ""
-        }
-    }
-);
+[float]
+=== Strict Query Usage
 
-e.Message.Should().Be("Query is conditionless but strict is turned on");
-----
-
-[source,csharp]
-----
-var e = Assert.Throws<ArgumentException>(() =>
-    new SearchDescriptor<Project>()
-        .Query(q => q
-            .Term(t => t
-                .Strict()
-                .Field("myfield")
-                .Value("")
-            )
-        )
-);
-e.Message.Should().Be("Query is conditionless but strict is turned on");
-----
+A query can be marked as strict meaning that _if_ it is determined to be _conditionless_, it will throw an
+exception. The following example demonstrates this by trying to send an empty string as the value for
+a `term` query marked as strict
 

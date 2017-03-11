@@ -9,21 +9,40 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 {
 	public class IndicesPaths : DocumentationTestBase
 	{
-		/**== Indices paths
+		/**[[indices-paths]]
+		* === Indices paths
 		*
-		* Some APIs in Elasticsearch take one or many index name or a special `_all` marker to send the request to all the indices
-		* In NEST, this is encoded using `Indices`.
+		* Some APIs in Elasticsearch take an index name, a collection of index names,
+		* or the special `_all` marker (used to specify all indices), in the URI path of the request, to specify the indices that
+		* the request should execute against.
 		*
-		*=== Implicit Conversion
-		* Several types implicitly convert to `Indices`
+		* In NEST, these index names can be specified using the `Indices` type.
+		*
+		* ==== Implicit Conversion
+		*
+		* To make working with `Indices` easier, several types implicitly convert to it:
+		*
+		* - `string`
+		* - comma separated `string`
+		* - `string` array
+		* - a CLR type, <<index-name-inference, where a default index name or index name for the type has been specified on `ConnectionSettings`>>
+		* - `IndexName`
+		* - `IndexName` array
+		*
+		* Here are some examples of how implicit conversions can be used to specify index names
 		*/
-		[U] public void ImplicitConversionFromString()
+		[U] public void ImplicitConversions()
 		{
 			Nest.Indices singleIndexFromString = "name";
 			Nest.Indices multipleIndicesFromString = "name1, name2";
 			Nest.Indices multipleIndicesFromStringArray = new [] { "name1", "name2" };
 			Nest.Indices allFromString = "_all";
-			Nest.Indices allWithOthersFromString = "_all, name2";
+
+			Nest.Indices allWithOthersFromString = "_all, name2"; //<1> `_all` will override any specific index names here
+
+			Nest.Indices singleIndexFromType = typeof(Project); //<2> The `Project` type has been mapped to a specific index name using <<index-name-type-mapping,`.InferMappingFor<Project>`>>
+
+			Nest.Indices singleIndexFromIndexName = IndexName.From<Project>();
 
 			singleIndexFromString.Match(
 				all => all.Should().BeNull(),
@@ -44,18 +63,38 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 				all => all.Should().NotBeNull(),
 				many => many.Indices.Should().BeNull()
 			);
+
 			multipleIndicesFromStringArray.Match(
 				all => all.Should().BeNull(),
 				many => many.Indices.Should().HaveCount(2).And.Contain("name2")
 			);
+
+			singleIndexFromType.Match(
+				all => all.Should().BeNull(),
+				many => many.Indices.Should().HaveCount(1).And.Contain(typeof(Project))
+			);
+
+			singleIndexFromIndexName.Match(
+				all => all.Should().BeNull(),
+				many => many.Indices.Should().HaveCount(1).And.Contain(typeof(Project))
+			);
 		}
 
-		/**[[nest-indices]]
-		*=== Using Nest.Indices
-		* To ease creating `IndexName` or `Indices` from expressions, there is a static `Nest.Indices` class you can use
+		/**
+		* [[nest-indices]]
+		*==== Using Nest.Indices methods
+		* To make creating `IndexName` or `Indices` instances easier, `Nest.Indices` also contains several static methods
+		* that can be used to construct them.
 		*
-		*==== Specifying a single index
-		* A single index can be specified using a CLR type or a string
+		*===== Single index
+		*
+		* A single index can be specified using a CLR type or a string, and the `.Index()` method.
+		*
+		* [TIP]
+		* ====
+		* This example uses the static import `using static Nest.Indices;` in the using directives to shorthand `Nest.Indices.Index()`
+		* to simply `Index()`. Be sure to include this static import if copying any of these examples.
+		* ====
 		*/
 		[U] public void UsingStaticPropertyField()
 		{
@@ -74,8 +113,9 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			var invalidSingleString = Index("name1, name2"); //<3> an **invalid** single index name
 		}
 
-		/**==== Specifying multiple indices
-		* Similarly to a single index, multiple indices can be specified using multiple CLR types and multiple strings
+		/**===== Multiple indices
+		*
+		* Similarly to a single index, multiple indices can be specified using multiple CLR types or multiple strings
 		*/
 		[U] public void MultipleIndices()
 		{
@@ -96,20 +136,20 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			((IUrlParameter)manyStringRequest.Type).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
 		}
 
-		/**==== Specifying All Indices
+		/**===== All Indices
+		*
 		* Elasticsearch allows searching across multiple indices using the special `_all` marker.
 		*
-		* NEST exposes `_all` with `Indices.All` and `Indices.AllIndices`. Why expose it in two ways, you ask?
+		* NEST exposes the `_all` marker with `Indices.All` and `Indices.AllIndices`. Why expose it in two ways, you ask?
 		* Well, you may be using both `Nest.Indices` and `Nest.Types` in the same file and you may also be using C#6
-		* static imports too; in this scenario, `All` becomes ambiguous between `Indices.All` and `Types.All`, so the
-		* `_all` marker is exposed as `Indices.AllIndices` to alleviate this ambiguity
+		* static imports too; in this scenario, the `All` property becomes ambiguous between `Indices.All` and `Types.All`, so the
+		* `_all` marker for indices is exposed as `Indices.AllIndices`, to alleviate this ambiguity
 		*/
 		[U]
 		public void IndicesAllAndAllIndicesSpecifiedWhenUsingStaticUsingDirective()
 		{
 			var indicesAll = All;
 			var allIndices = AllIndices;
-			var client = TestClient.Default;
 
 			ISearchRequest indicesAllRequest = new SearchDescriptor<Project>().Index(indicesAll);
 			ISearchRequest allIndicesRequest = new SearchDescriptor<Project>().Index(allIndices);

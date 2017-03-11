@@ -20,7 +20,8 @@ please modify the original csharp file found at the link and submit the PR with 
 Allows to add one or more sort on specific fields. Each sort can be reversed as well.
 The sort is defined on a per field level, with special field name for `_score` to sort by score.
 
-=== Fluent DSL Example
+[float]
+=== Fluent DSL example
 
 [source,csharp]
 ----
@@ -59,7 +60,8 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+[float]
+=== Object Initializer syntax example
 
 [source,csharp]
 ----

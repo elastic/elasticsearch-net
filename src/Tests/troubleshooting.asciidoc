@@ -1,0 +1,46 @@
+﻿[[troubleshooting]]
+= Troubleshooting
+
+[partintro]
+--
+The client can provide rich details about what occurred in the request pipeline during the process
+of making a request, as well as be configured to provide the raw request and response JSON
+
+- <<logging, Logging>>
+- <<debugging, Debugging>>
+
+--
+
+[[logging]]
+== Logging
+
+Whilst developing with Elasticsearch using NEST, it can be extremely valuable to see the requests that
+NEST generates and sends to Elasticsearch, as well as the responses returned.
+
+There are a couple of popular ways of capturing this information
+
+- <<logging-with-on-request-completed, Using `OnRequestCompleted`>>
+- <<logging-with-fiddler, Using Fiddler, a web debugging proxy>>
+
+In addition to logging requests and responses, Elasticsearch 5.0+ also 
+<<deprecation-logging, sends back warning headers>> in the response,
+to notify you if you are using a feature that is marked as deprecated.
+
+include::client-concepts/troubleshooting/logging-with-on-request-completed.asciidoc[]
+include::client-concepts/troubleshooting/logging-with-fiddler.asciidoc[]
+include::client-concepts/troubleshooting/deprecation-logging.asciidoc[]
+
+[[debugging]]
+== Debugging
+
+When things are going awry, you want to be provided with as much information as possible, to resolve
+the issue!
+
+Elasticsearch.Net and NEST provide an <<audit-trail, audit trail>> and <<debug-information, debug information>> to 
+help get you back on the happy path.
+
+include::client-concepts/troubleshooting/audit-trail.asciidoc[]
+include::client-concepts/troubleshooting/debug-information.asciidoc[]
+
+
+

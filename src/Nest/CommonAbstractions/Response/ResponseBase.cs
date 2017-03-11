@@ -14,7 +14,7 @@ namespace Nest
 	{
 		/// <summary>
 		/// This property can be used to check if a response is functionally valid or not.
-		/// This is a NEST abstraction to have a single point to check whether something wrong happend with the request.
+		/// This is a NEST abstraction to have a single point to check whether something wrong happened with the request.
 		/// <para>For instance an elasticsearch bulk response always returns 200 and individual bulk items may fail, <see cref="IsValid"/> will be false in that case</para>
 		/// <para>You can also configure the client to always throw an <see cref="ElasticsearchClientException"/> using <see cref="IConnectionConfigurationValues.ThrowExceptions"/> if the response is not valid</para>
 		/// </summary>
@@ -23,7 +23,7 @@ namespace Nest
 
 		/// <summary>
 		/// If the response results in an error on elasticsearch's side an <pre>error</pre> element will be returned, this is mapped to <see cref="ServerError"/> in NEST.
-		/// <para>This property is a shortcut to <see cref="IBodyWithApiCallDetails.ApiCall"/>'s <see cref="IApiCallDetails.ServerError"/> and is possibly set when <see cref="IsValid"/> is false depending on the cause of the error</para>
+		/// <para>This property is a shortcut to <see cref="IBodyWithApiCallDetails.ApiCall"/>'s <see cref="IApiCallDetails.ServerError"/> and is possibly set when <see cref="IsValid"/> is false, depending on the cause of the error</para>
 		/// <para>You can also configure the client to always throw an <see cref="ElasticsearchClientException"/> using <see cref="IConnectionConfigurationValues.ThrowExceptions"/> if the response is not valid</para>
 		/// </summary>
 		[JsonIgnore]
@@ -37,12 +37,12 @@ namespace Nest
 		[JsonIgnore]
 		Exception OriginalException { get; }
 
-		/// <summary>
-		/// A lazy human readable string representation of what happened during this request for both succesful and failed requests, very useful while developing or to log when you get <see cref="IsValid"/> = false responses.
-		/// </summary>
-		[JsonIgnore]
+        /// <summary>
+        /// A lazy human readable string representation of what happened during this request for both successful and 
+        /// failed requests, very useful while developing or to log when <see cref="IsValid"/> is false on responses.
+        /// </summary>
+        [JsonIgnore]
 		string DebugInformation { get; }
-
 	}
 
 	public abstract class ResponseBase : IResponse
@@ -77,6 +77,5 @@ namespace Nest
 		protected virtual void DebugIsValid(StringBuilder sb) { }
 
 		public override string ToString() =>  $"{(!this.IsValid ? "Inv" : "V")}alid NEST response built from a {this.ApiCall?.ToString().ToCamelCase()}";
-
 	}
 }

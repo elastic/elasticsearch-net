@@ -15,9 +15,9 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[moving-average-ewma-aggregation-usage]]
-== Moving Average Ewma Aggregation Usage
+=== Moving Average Ewma Aggregation Usage
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -44,7 +44,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -100,16 +100,18 @@ new SearchRequest<Project>()
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
 response.ShouldBeValid();
+
 var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
 projectsPerMonth.Should().NotBeNull();
 projectsPerMonth.Buckets.Should().NotBeNull();
 projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
+// average not calculated for the first bucket
 foreach(var item in projectsPerMonth.Buckets.Skip(1))
 {
     var movingAvg = item.MovingAverage("commits_moving_avg");

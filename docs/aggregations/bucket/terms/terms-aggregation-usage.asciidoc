@@ -15,13 +15,13 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[terms-aggregation-usage]]
-== Terms Aggregation Usage
+=== Terms Aggregation Usage
 
 A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
 
 See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-terms-aggregation.html[terms aggregation] for more detail.
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -45,7 +45,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -109,7 +109,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -120,13 +120,11 @@ states.DocCountErrorUpperBound.Should().HaveValue();
 states.SumOtherDocCount.Should().HaveValue();
 states.Buckets.Should().NotBeNull();
 states.Buckets.Count.Should().BeGreaterThan(0);
-
 foreach (var item in states.Buckets)
 {
     item.Key.Should().NotBeNullOrEmpty();
     item.DocCount.Should().BeGreaterOrEqualTo(1);
 }
-
 states.Meta.Should().NotBeNull().And.HaveCount(1);
 states.Meta["foo"].Should().Be("bar");
 ----
@@ -137,7 +135,7 @@ states.Meta["foo"].Should().Be("bar");
 
 Using terms aggregation with filtering to include values using a regular expression pattern
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -161,7 +159,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -222,7 +220,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -233,13 +231,11 @@ states.DocCountErrorUpperBound.Should().HaveValue();
 states.SumOtherDocCount.Should().HaveValue();
 states.Buckets.Should().NotBeNull();
 states.Buckets.Count.Should().BeGreaterThan(0);
-
 foreach (var item in states.Buckets)
 {
     item.Key.Should().NotBeNullOrEmpty();
     item.DocCount.Should().BeGreaterOrEqualTo(1);
 }
-
 states.Meta.Should().NotBeNull().And.HaveCount(1);
 states.Meta["foo"].Should().Be("bar");
 ----
@@ -250,7 +246,7 @@ states.Meta["foo"].Should().Be("bar");
 
 Using terms aggregation with filtering to include only specific values
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -274,7 +270,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -338,7 +334,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -349,18 +345,15 @@ states.DocCountErrorUpperBound.Should().HaveValue();
 states.SumOtherDocCount.Should().HaveValue();
 states.Buckets.Should().NotBeNull();
 states.Buckets.Count.Should().BeGreaterThan(0);
-
 foreach (var item in states.Buckets)
 {
     item.Key.Should().NotBeNullOrEmpty();
     item.DocCount.Should().BeGreaterOrEqualTo(1);
 }
-
 states.Meta.Should().NotBeNull().And.HaveCount(1);
 states.Meta["foo"].Should().Be("bar");
 ----
 
-[[filtering-with-partitions]]
 [float]
 == Filtering with partitions
 
@@ -373,7 +366,7 @@ Partitioning is available only in Elasticsearch 5.2.0+
 
 --
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -388,7 +381,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -428,7 +421,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -439,7 +432,6 @@ commits.DocCountErrorUpperBound.Should().HaveValue();
 commits.SumOtherDocCount.Should().HaveValue();
 commits.Buckets.Should().NotBeNull();
 commits.Buckets.Count.Should().BeGreaterThan(0);
-
 foreach (var item in commits.Buckets)
 {
     item.Key.Should().BeGreaterThan(0);
@@ -447,13 +439,12 @@ foreach (var item in commits.Buckets)
 }
 ----
 
-[[numeric-fields]]
 [float]
 == Numeric fields
 
 A terms aggregation on a numeric field
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -466,7 +457,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -495,7 +486,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -506,7 +497,6 @@ commits.DocCountErrorUpperBound.Should().HaveValue();
 commits.SumOtherDocCount.Should().HaveValue();
 commits.Buckets.Should().NotBeNull();
 commits.Buckets.Count.Should().BeGreaterThan(0);
-
 foreach (var item in commits.Buckets)
 {
     item.Key.Should().BeGreaterThan(0);

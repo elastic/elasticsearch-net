@@ -1,0 +1,42 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.3
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/5.3
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/5.x/src/Tests/ClientConcepts/Connection/ConfiguringSSL.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[configuring-ssl]]
+=== Configuring SSL
+
+SSL can be configured via the `ServerCertificateValidationCallback` property on 
+
+* `ServerPointManager` for Desktop CLR
+
+* `HttpClientHandler` for Core CLR
+
+On the Desktop CLR, this must be done outside of the client using .NET's built-in http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager] class:
+
+The bare minimum to make .NET accept self-signed SSL certs that are not in the  https://technet.microsoft.com/en-us/library/cc754841(v=ws.11).aspx[Trusted Root Certificate Authorities store]
+is to have the `ServerCertificateValidationCallback` callback simply return `true`
+
+[source,csharp]
+----
+ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true;
+----
+
+[WARNING]
+--
+This will accept **all** requests from the AppDomain to untrusted SSL sites,
+therefore **we recommend doing some minimal introspection on the passed in certificate.**
+
+--
+

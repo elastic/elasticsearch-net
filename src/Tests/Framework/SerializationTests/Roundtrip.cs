@@ -75,6 +75,11 @@ namespace Tests.Framework
 			return this;
 		}
 
+	    public RoundTripper NoRoundTrip()
+	    {
+	        this.SupportsDeserialization = false;
+	        return this;
+	    }
 
 		public static IntermediateChangedSettings WithConnectionSettings(Func<ConnectionSettings, ConnectionSettings> settings) =>  new IntermediateChangedSettings(settings);
 

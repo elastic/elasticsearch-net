@@ -15,16 +15,16 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[tokenizer-usage]]
-== Tokenizer Usage
+=== Tokenizer Usage
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
 FluentExample
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----

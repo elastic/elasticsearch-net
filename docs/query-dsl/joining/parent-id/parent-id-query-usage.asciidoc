@@ -1,0 +1,59 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.3
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/5.3
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/5.x/src/Tests/QueryDsl/Joining/ParentId/ParentIdQueryUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[parent-id-query-usage]]
+=== Parent Id Query Usage
+
+The `parent_id` query can be used to find child documents which belong to a particular parent.
+
+See the Elasticsearch documentation on {ref_current}/query-dsl-parent-id-query.html[parent_id query] for more details.
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.ParentId(p => p
+    .Name("named_query")
+    .Type<Developer>()
+    .Id(Project.First.Name)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new ParentIdQuery
+{
+    Name = "named_query",
+    Type = Infer.Type<Developer>(),
+    Id = Project.First.Name
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "parent_id": {
+    "_name": "named_query",
+    "type": "developer",
+    "id": "Lesch Group"
+  }
+}
+----
+

@@ -5,14 +5,16 @@ include::intro.asciidoc[]
 
 include::breaking-changes.asciidoc[]
 
-include::client-concepts.asciidoc[]
+include::conventions.asciidoc[]
 
-include::common-options.asciidoc[]
+include::low-level.asciidoc[]
+
+include::high-level.asciidoc[]
+
+include::troubleshooting.asciidoc[]
 
 include::search.asciidoc[]
 
 include::query-dsl.asciidoc[]
 
 include::aggregations.asciidoc[]
-
-

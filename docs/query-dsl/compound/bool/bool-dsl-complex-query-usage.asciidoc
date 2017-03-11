@@ -15,9 +15,9 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[bool-dsl-complex-query-usage]]
-== Bool Dsl Complex Query Usage
+=== Bool Dsl Complex Query Usage
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -34,7 +34,7 @@ q.Query() && q.Query()
     && (base.QueryFluent(q)))
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----

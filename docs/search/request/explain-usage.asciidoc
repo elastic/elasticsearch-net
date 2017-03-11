@@ -21,7 +21,8 @@ Enables explanation for each hit on how its score was computed.
 
 See the Elasticsearch documentation on {ref_current}/search-explain.html[Explain] for more detail.
 
-=== Fluent DSL Example
+[float]
+=== Fluent DSL example
 
 [source,csharp]
 ----
@@ -29,7 +30,8 @@ s => s
 .Explain()
 ----
 
-=== Object Initializer Syntax Example
+[float]
+=== Object Initializer syntax example
 
 [source,csharp]
 ----

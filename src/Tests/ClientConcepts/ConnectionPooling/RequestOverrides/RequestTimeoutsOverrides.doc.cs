@@ -7,7 +7,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 {
 	public class RequestTimeoutsOverrides
 	{
-		/**== Request Timeouts
+		/**[[request-timeout]]
+        * === Request timeouts
 		*
 		* While you can specify Request time out globally you can override this per request too
 		*/
@@ -52,15 +53,20 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 
 		}
 
-		/** == Connect Timeouts
-		* Connect timeouts can be overridden on a per request basis. Whilst the underlying `WebRequest` (in the case of full CLR)
-		* and `HttpClient` (in the case of Core CLR) cannot distinguish between connect and retry timeouts,
-		* we use a separate configuration value for ping requests.
+		/**[float] 
+        * === Connect timeouts
+        * 
+		* Connect timeouts can be overridden on a per request basis. 
+        * 
+        * Whilst the underlying `WebRequest` in the case of Desktop CLR
+		* and `HttpClient` in the case of Core CLR cannot distinguish between connect and retry timeouts,
+		* we use a separate configuration value for ping requests to allow ping to be configured
+        * independently.
 		*/
 		[U]
 		public async Task RespectsConnectTimeoutOverride()
 		{
-			/** we set up a 10 node cluster with a global time out of 20 seconds.
+			/** We set up a 10 node cluster with a global time out of 20 seconds.
 			* Each call on a node takes 10 seconds. So we can only try this call on 2 nodes
 			* before the max request time out kills the client call.
 			*/

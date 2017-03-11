@@ -15,16 +15,16 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[normalizer-usage]]
-== Normalizer Usage
+=== Normalizer Usage
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
 FluentExample
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----

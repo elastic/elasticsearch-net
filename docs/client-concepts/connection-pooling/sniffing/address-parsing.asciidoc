@@ -15,34 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[address-parsing]]
-== Address Parsing
-
-[source,csharp]
-----
-var testcases = new[,]
-{
-    {"helloworld/[::1]:9200", "helloworld", "[::1]", "9200"},
-    {"elastic.co/192.168.2.1:231", "elastic.co", "192.168.2.1", "231"}
-};
-
-var address = testcases[i, 0];
-
-var fqdn = testcases[i, 1];
-
-var ip = testcases[i, 2];
-
-var port = testcases[i, 3];
-
-var match = SniffParser.AddressRegex.Match(address);
-
-match.Success.Should().BeTrue();
-
-match.Groups["fqdn"].Value.ShouldBeEquivalentTo(fqdn);
-
-match.Groups["ip"].Value.ShouldBeEquivalentTo(ip);
-
-match.Groups["port"].Value.ShouldBeEquivalentTo(port);
-----
+=== Address Parsing
 
 [source,csharp]
 ----
@@ -58,12 +31,41 @@ var testcases = new[,]
     {"[::FFFF:129.144.52.38]:80", "[::FFFF:129.144.52.38]", "80"},
     {"[2010:836B:4179::836B:4179]:34533", "[2010:836B:4179::836B:4179]", "34533"}
 };
-var address = testcases[i, 0];
-var ip = testcases[i, 1];
-var port = testcases[i, 2];
-var match = SniffParser.AddressRegex.Match(address);
-match.Success.Should().BeTrue();
-match.Groups["ip"].Value.ShouldBeEquivalentTo(ip);
-match.Groups["port"].Value.ShouldBeEquivalentTo(port);
+
+for (var i = 0; i < testcases.GetLength(0); i++)
+{
+    var address = testcases[i, 0];
+    var ip = testcases[i, 1];
+    var port = testcases[i, 2];
+
+    var match = SniffParser.AddressRegex.Match(address);
+
+    match.Success.Should().BeTrue();
+
+    match.Groups["ip"].Value.ShouldBeEquivalentTo(ip);
+    match.Groups["port"].Value.ShouldBeEquivalentTo(port);
+}
+
+var testcases = new[,]
+{
+    {"helloworld/[::1]:9200", "helloworld", "[::1]", "9200"},
+    {"elastic.co/192.168.2.1:231", "elastic.co", "192.168.2.1", "231"}
+};
+
+for (var i = 0; i < testcases.GetLength(0); i++)
+{
+    var address = testcases[i, 0];
+    var fqdn = testcases[i, 1];
+    var ip = testcases[i, 2];
+    var port = testcases[i, 3];
+
+    var match = SniffParser.AddressRegex.Match(address);
+
+    match.Success.Should().BeTrue();
+
+    match.Groups["fqdn"].Value.ShouldBeEquivalentTo(fqdn);
+    match.Groups["ip"].Value.ShouldBeEquivalentTo(ip);
+    match.Groups["port"].Value.ShouldBeEquivalentTo(port);
+}
 ----
 

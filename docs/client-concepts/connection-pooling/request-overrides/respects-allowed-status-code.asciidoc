@@ -15,7 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[allowed-status-codes]]
-== Allowed status codes
+=== Allowed status codes
 
 [source,csharp]
 ----
@@ -25,8 +25,9 @@ var audit = new Auditor(() => Framework.Cluster
     .StaticConnectionPool()
     .Settings(s => s.DisablePing().MaximumRetries(0))
 );
+
 audit = await audit.TraceCalls(
-    new ClientCall() {
+    new ClientCall {
         { BadResponse, 9200 }
     },
     new ClientCall(r => r.AllowedStatusCodes(400)) {

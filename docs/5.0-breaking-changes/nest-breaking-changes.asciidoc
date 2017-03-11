@@ -2,9 +2,9 @@
 == NEST Breaking Changes
 
 Oh my goodness, this looks like a lot of breaking changes! This is true
-but please take note that this list is very very extensive It includes
-every single _binary_ breaking change. In a lot of cases these will not
-necessarily equate to compiler errors.
+but please take note that this list is very extensive and includes
+*every* single _binary_ breaking change. In a lot of cases, these will not
+necessarily equate to compiler errors nor changes in your codebase.
 
 [float]
 [[statsaggregator-renamed-to-statsaggregation]]
@@ -429,6 +429,8 @@ TIndexSettings>.AutoExpandReplicas* _Declaration changed (Breaking)_
 [float]
 [[dslprettyprintvisitor-methods-are-now-virtual]]
 === DslPrettyPrintVisitor methods are now virtual
+
+This change means that you only need to override the methods that you wish to change the implementation for.
 
 [float]
 [[nest-visitors-should-be-bound-to-interface]]
@@ -1032,8 +1034,8 @@ also the hacks from 2.x have been removed
 === Allow source filter to send false
 
 In NEST 2.x we would always send Source.Exclude as
-`_source: { exclude: [""] }` in 5.x the we use a union of `bool`
-`ISourceFiler` so NEST can send and recieve `_source: false`. Which
+`_source: { exclude: [""] }`. in 5.x, we now use a union of `bool` and
+`ISourceFiler`, so NEST can send and receive `_source: false`. Which
 should short circuit some routines on the server
 
 See also: https://github.com/elastic/elasticsearch-net/pull/2200[github PR 2200]
@@ -1493,8 +1495,8 @@ public enum StringFielddataFormat
 [[uncategorized]]
 === Uncategorized
 
-Misc. changes that are yet to be categorized. Please open an issue if
-you are bit by these and feel it warrants an explanation.
+Miscellaneous changes that are yet to be categorized. Please open an issue if
+you are bitten by any of these and feel it warrants an explanation.
 
 *public method Nest.DeleteByQueryDescriptor<T>.Routing* _Declaration
 changed (Breaking)_
@@ -1920,12 +1922,11 @@ TValue>.BackingDictionary* +
 
 [float]
 [[nest-cancellationtoken]]
-CancellationToken
------------------
+=== CancellationToken
 
-With NEST 2.x async methods, a cancellation tokens could be passed as
-part of the RequestConfiguration. This was not very discoverable and so
-each async method can now accept an optional cancellation token as an
+With NEST 2.x async methods, a cancellation token could be passed as
+part of the `RequestConfiguration` on the request. This was not very discoverable and so
+each async method now accepts an optional `CancellationToken` as an
 argument, making the API more async idiomatic.
 
 *Nest.BulkAllObservable<T>..ctor* +
