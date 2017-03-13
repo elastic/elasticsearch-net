@@ -482,6 +482,7 @@
     <Compile Include="CommonAbstractions\LowLevelDispatch\IHighLevelToLowLevelDispatcher.cs" />
     <Compile Include="CommonAbstractions\LowLevelDispatch\LowLevelDispatch.cs" />
     <Compile Include="CommonAbstractions\RawJson\RawJson.cs" />
+    <Compile Include="CommonAbstractions\Reactive\BlockingSubscribeExtensions.cs" />
     <Compile Include="CommonAbstractions\Reactive\CoordinatedRequestObserverBase.cs" />
     <Compile Include="CommonAbstractions\Reactive\GetEnumerator.cs" />
     <Compile Include="CommonAbstractions\Reactive\PartitionHelper.cs" />

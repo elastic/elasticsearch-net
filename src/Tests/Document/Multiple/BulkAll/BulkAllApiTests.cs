@@ -52,33 +52,21 @@ namespace Tests.Document.Multiple.BulkAll
 
 		private void ScrollAll(string index, int numberOfShards, int numberOfDocuments)
 		{
-			var handle = new ManualResetEvent(false);
-			var scrollObservable = this._client.ScrollAll<SmallObject>("1m", numberOfShards, s => s
+			var seenDocuments = 0;
+			var seenSlices = new ConcurrentBag<int>();
+			var scrollObserver = this._client.ScrollAll<SmallObject>("1m", numberOfShards, s => s
 				.MaxDegreeOfParallelism(numberOfShards / 2)
 				.Search(search => search
 					.Index(index)
 					.AllTypes()
 					.MatchAll()
 				)
-			);
+			).Wait(TimeSpan.FromMinutes(5), r =>
+			{
+				seenSlices.Add(r.Slice);
+				Interlocked.Add(ref seenDocuments, r.SearchResponse.Hits.Count);
+			});
 
-			//we set up an observer
-			var seenDocuments = 0;
-			var seenSlices = new ConcurrentBag<int>();
-
-			//since we call allTypes search should be bounded to index.
-			var scrollObserver = new ScrollAllObserver<SmallObject>(
-				onError: (e) => { handle.Set(); throw e; },
-				onCompleted: () => handle.Set(),
-				onNext: (b) =>
-				{
-					seenSlices.Add(b.Slice);
-					Interlocked.Add(ref seenDocuments, b.SearchResponse.Hits.Count);
-				}
-			);
-			//when we subscribe the observable becomes hot
-			scrollObservable.Subscribe(scrollObserver);
-			handle.WaitOne(TimeSpan.FromMinutes(5));
 			seenDocuments.Should().Be(numberOfDocuments);
 			var groups = seenSlices.GroupBy(s => s).ToList();
 			groups.Count().Should().Be(numberOfShards);
@@ -87,7 +75,6 @@ namespace Tests.Document.Multiple.BulkAll
 
 		private void BulkAll(string index, IEnumerable<SmallObject> documents, int size,  int pages, int numberOfDocuments)
 		{
-			var handle = new ManualResetEvent(false);
 			var seenPages = 0;
 			//first we setup our cold observable
 			var observableBulk = this._client.BulkAll(documents, f => f
@@ -99,15 +86,7 @@ namespace Tests.Document.Multiple.BulkAll
 					.Index(index)
 			);
 			//we set up an observer
-			var bulkObserver = new BulkAllObserver(
-				onError: (e) => { handle.Set(); throw e; },
-				onCompleted: () => handle.Set(),
-				onNext: (b) => Interlocked.Increment(ref seenPages)
-			);
-			//when we subscribe the observable becomes hot
-			observableBulk.Subscribe(bulkObserver);
-
-			handle.WaitOne(TimeSpan.FromMinutes(5));
+			var bulkObserver = observableBulk.Wait(TimeSpan.FromMinutes(5), b => Interlocked.Increment(ref seenPages));
 
 			seenPages.Should().Be(pages);
 			var count = this._client.Count<SmallObject>(f => f.Index(index));
@@ -117,7 +96,6 @@ namespace Tests.Document.Multiple.BulkAll
 
 		private async Task CreateIndexAsync(string indexName, int numberOfShards)
 		{
-			var handle = new ManualResetEvent(false);
 			var result = await this._client.CreateIndexAsync(indexName, s => s
 					.Settings(settings => settings
 							.NumberOfShards(numberOfShards)
@@ -163,6 +141,7 @@ namespace Tests.Document.Multiple.BulkAll
 				onCompleted: () => handle.Set(),
 				onNext: (b) => Interlocked.Increment(ref seenPages)
 			);
+
 			//when we subscribe the observable becomes hot
 			observableBulk.Subscribe(bulkObserver);
 
@@ -171,7 +150,7 @@ namespace Tests.Document.Multiple.BulkAll
 			observableBulk.Dispose();
 			//we wait N seconds to give in flight request a chance to cancel
 			handle.WaitOne(TimeSpan.FromSeconds(3));
-			if (ex != null && !(ex is TaskCanceledException)) throw ex;
+			if (ex != null && !(ex is TaskCanceledException) && !(ex is OperationCanceledException)) throw ex;
 
 			seenPages.Should().BeLessThan(pages).And.BeGreaterThan(0);
 			var count = this._client.Count<SmallObject>(f => f.Index(index));
@@ -216,7 +195,7 @@ namespace Tests.Document.Multiple.BulkAll
 			tokenSource.Cancel();
 			//we wait Nseconds to give in flight request a chance to cancel
 			handle.WaitOne(TimeSpan.FromSeconds(3));
-			if (ex != null && !(ex is TaskCanceledException)) throw ex;
+			if (ex != null && !(ex is TaskCanceledException) && !(ex is OperationCanceledException)) throw ex;
 
 			seenPages.Should().BeLessThan(pages).And.BeGreaterThan(0);
 			var count = this._client.Count<SmallObject>(f => f.Index(index));
@@ -225,8 +204,7 @@ namespace Tests.Document.Multiple.BulkAll
 			bulkObserver.TotalNumberOfRetries.Should().Be(0);
 		}
 
-		[I]
-		public async Task AwaitBulkAll()
+		[I] public async Task AwaitBulkAll()
 		{
 			var index = CreateIndexName();
 
@@ -254,6 +232,43 @@ namespace Tests.Document.Multiple.BulkAll
 			seenPages.Should().Be(pages);
 			var count = this._client.Count<SmallObject>(f => f.Index(index));
 			count.Count.Should().Be(numberOfDocuments);
+		}
+
+		[I] public void WaitBulkAllThrowsAndIsCaught()
+		{
+			var index = CreateIndexName();
+
+			var size = 1000;
+			var pages = 10;
+			var seenPages = 0;
+			var numberOfDocuments = size * pages;
+			var documents = this.CreateLazyStreamOfDocuments(numberOfDocuments);
+
+			var tokenSource = new CancellationTokenSource();
+			var observableBulk = this._client.BulkAll(documents, f => f
+				.MaxDegreeOfParallelism(4)
+				.BackOffTime(TimeSpan.FromSeconds(10))
+				.BackOffRetries(2)
+				.Size(size)
+				.RefreshOnCompleted()
+				.Index(index)
+				.BufferToBulk((r, buffer) => r.IndexMany(buffer))
+			, tokenSource.Token);
+
+			try
+			{
+				observableBulk.Wait(TimeSpan.FromSeconds(30), b =>
+				{
+					if (seenPages == 8) throw new Exception("boom");
+					Interlocked.Increment(ref seenPages);
+
+				});
+			}
+			catch (Exception e)
+			{
+				seenPages.Should().Be(8);
+				e.Message.Should().Be("boom");
+			}
 		}
 	}
 }

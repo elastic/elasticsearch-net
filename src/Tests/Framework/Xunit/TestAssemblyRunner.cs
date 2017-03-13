@@ -122,6 +122,7 @@ namespace Xunit
 
 		private IEnumerable<string> ParseExcludedClusters(string clusterFilter)
 		{
+			if (string.IsNullOrWhiteSpace(clusterFilter)) return Enumerable.Empty<string>();
 			var clusters =
 #if DOTNETCORE
 				typeof(ClusterBase).Assembly()

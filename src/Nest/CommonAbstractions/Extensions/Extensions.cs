@@ -206,11 +206,11 @@ namespace Nest
 
 		internal static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> xs) => xs ?? new T[0];
 
-		internal static Task ForEachAsync<TSource, TResult>(
+		internal static async Task ForEachAsync<TSource, TResult>(
 			this IEnumerable<TSource> lazyList,
 			Func<TSource, long, Task<TResult>> taskSelector,
 			Action<TSource, TResult> resultProcessor,
-			Action<Task> done,
+			Action<Exception> done,
 			int maxDegreeOfParallelism,
 			SemaphoreSlim additionalRateLimitter = null
 		)
@@ -218,10 +218,27 @@ namespace Nest
 			var semaphore = new SemaphoreSlim(initialCount: maxDegreeOfParallelism, maxCount: maxDegreeOfParallelism);
 			long page = 0;
 
-			return Task.WhenAll(
-					from item in lazyList
-					select ProcessAsync<TSource, TResult>(item, taskSelector, resultProcessor, semaphore, additionalRateLimitter, page++)
-				).ContinueWith(done);
+			try
+			{
+				var tasks = new List<Task>();
+				foreach (var item in lazyList)
+				{
+					tasks.Add(ProcessAsync(item, taskSelector, resultProcessor, semaphore, additionalRateLimitter, page++));
+					if (tasks.Count <= maxDegreeOfParallelism)
+						continue;
+
+					var task = await Task.WhenAny(tasks);
+					tasks.Remove(task);
+				}
+
+				await Task.WhenAll(tasks);
+				done(null);
+			}
+			catch (Exception e)
+			{
+				done(e);
+				throw;
+			}
 		}
 
 		private static async Task ProcessAsync<TSource, TResult>(
@@ -238,10 +255,6 @@ namespace Nest
 			{
 				var result = await taskSelector(item, page).ConfigureAwait(false);
 				resultProcessor(item, result);
-			}
-			catch
-			{
-				throw;
 			}
 			finally
 			{
