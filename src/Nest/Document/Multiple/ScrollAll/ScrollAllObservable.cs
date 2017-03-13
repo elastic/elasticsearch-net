@@ -22,7 +22,7 @@ namespace Nest
 		private readonly ProducerConsumerBackPressure _backPressure;
 
 		public ScrollAllObservable(
-			IElasticClient client, 
+			IElasticClient client,
 			IScrollAllRequest scrollAllRequest,
 			CancellationToken cancellationToken = default(CancellationToken)
 			)
@@ -41,14 +41,7 @@ namespace Nest
 		public IDisposable Subscribe(IObserver<IScrollAllResponse<T>> observer)
 		{
 			observer.ThrowIfNull(nameof(observer));
-			try
-			{
-				this.ScrollAll(observer);
-			}
-			catch (Exception e)
-			{
-				observer.OnError(e);
-			}
+			this.ScrollAll(observer);
 			return this;
 		}
 
@@ -57,7 +50,9 @@ namespace Nest
 			var slices = this._scrollAllRequest.Slices;
 			var maxSlicesAtOnce = this._scrollAllRequest.MaxDegreeOfParallelism ?? this._scrollAllRequest.Slices;
 
-			Enumerable.Range(0, slices).ForEachAsync<int, bool>(
+#pragma warning disable 4014
+			Enumerable.Range(0, slices).ForEachAsync(
+#pragma warning restore 4014
 				(slice, l) => this.ScrollSliceAsync(observer, slice),
 				(slice, r) => { },
 				t => OnCompleted(t, observer),
@@ -128,20 +123,12 @@ namespace Nest
 			finally { _scrollInitiationLock.Release(); }
 		}
 
-		private static void OnCompleted(Task task, IObserver<IScrollAllResponse<T>> observer)
+		private static void OnCompleted(Exception exception, IObserver<IScrollAllResponse<T>> observer)
 		{
-			switch (task.Status)
-			{
-				case System.Threading.Tasks.TaskStatus.RanToCompletion:
-					observer.OnCompleted();
-					break;
-				case System.Threading.Tasks.TaskStatus.Faulted:
-					observer.OnError(task.Exception.InnerException);
-					break;
-				case System.Threading.Tasks.TaskStatus.Canceled:
-					observer.OnError(new TaskCanceledException(task));
-					break;
-			}
+			if (exception == null)
+				observer.OnCompleted();
+			else
+				observer.OnError(exception);
 		}
 
 		public bool IsDisposed { get; private set; }

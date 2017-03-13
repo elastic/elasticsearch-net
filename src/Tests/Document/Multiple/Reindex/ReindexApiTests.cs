@@ -123,20 +123,22 @@ namespace Tests.Document.Multiple.Reindex
 
 			Exception ex = null;
 			var manyTypesObserver = new ReindexObserver(
-				onError: (e) => { ex = e; observableWait.Signal(); throw e; },
+				onError: (e) => { ex = e; observableWait.Signal(); },
 				onCompleted: () => ReindexManyTypesCompleted(observableWait)
 			);
 
 			this._reindexManyTypesResult.Subscribe(manyTypesObserver);
+			this._reindexManyTypesResult.Wait(TimeSpan.FromMinutes(5), r => { });
+
 
 			var singleTypeObserver = new ReindexObserver(
-				onError: (e) => { ex = e; observableWait.Signal(); throw e; },
+				onError: (e) => { ex = e; observableWait.Signal(); },
 				onCompleted: () => ReindexSingleTypeCompleted(observableWait)
 			);
 			this._reindexSingleTypeResult.Subscribe(singleTypeObserver);
 
 			var projectionObserver = new ReindexObserver(
-				onError: (e) => { ex = e; observableWait.Signal(); throw e; },
+				onError: (e) => { ex = e; observableWait.Signal(); },
 				onCompleted: () => ProjectionCompleted(observableWait)
 			);
 			this._reindexProjectionResult.Subscribe(projectionObserver);
