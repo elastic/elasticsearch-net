@@ -40,6 +40,7 @@ namespace Tests.ClientConcepts.Certificates
 			.ServerCertificateValidationCallback(CertificateValidations.DenyAll);
 	}
 	//hide
+	[IntegrationOnly]
 	public class DenyAllSslCertificatesApiTests : ConnectionErrorTestBase<DenyAllCertificatesCluster>
 	{
 		public DenyAllSslCertificatesApiTests(DenyAllCertificatesCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -58,6 +59,7 @@ namespace Tests.ClientConcepts.Certificates
 			.ServerCertificateValidationCallback(CertificateValidations.AllowAll);
 	}
 	//hide
+	[IntegrationOnly]
 	public class AllowAllSllCertificatesApiTests : CanConnectTestBase<AllowAllCertificatesCluster>
 	{
 		public AllowAllSllCertificatesApiTests(AllowAllCertificatesCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -81,6 +83,7 @@ namespace Tests.ClientConcepts.Certificates
 	}
 
 	//hide
+	[IntegrationOnly]
 	public class CertgenCaApiTests : CanConnectTestBase<CertgenCaCluster>
 	{
 		public CertgenCaApiTests(CertgenCaCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -99,6 +102,7 @@ namespace Tests.ClientConcepts.Certificates
 	}
 
 	//hide
+	[IntegrationOnly]
 	public class BadCertgenCaApiTests : ConnectionErrorTestBase<BadCertgenCaCluster>
 	{
 		public BadCertgenCaApiTests(BadCertgenCaCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -149,6 +153,7 @@ namespace Tests.ClientConcepts.Certificates
 		}).ToArray();
 	}
 	//hide
+	[IntegrationOnly]
 	public class PkiApiTests : CanConnectTestBase<PkiCluster>
 	{
 		public PkiApiTests(PkiCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -159,6 +164,7 @@ namespace Tests.ClientConcepts.Certificates
 	 * Or per request on `RequestConfiguration` which will take precedence over the ones defined on `ConnectionConfiguration`
 	 */
 	public class BadPkiCluster : PkiCluster {}
+	[IntegrationOnly]
 	public class BadCustomCertificatePerRequestWinsApiTests : ConnectionErrorTestBase<BadPkiCluster>
 	{
 		public BadCustomCertificatePerRequestWinsApiTests(BadPkiCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

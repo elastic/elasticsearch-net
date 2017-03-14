@@ -19,5 +19,4 @@ namespace Tests.Framework
 			this.Plugins = plugins.ToList();
 		}
 	}
-
 }

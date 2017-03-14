@@ -360,6 +360,7 @@
     <Compile Include="Framework\SerializationTests\SerializationTestBase.cs" />
     <Compile Include="Framework\DocumentationTests\IntegrationDocumentationTestBase.cs" />
     <Compile Include="Framework\VirtualClustering\WaitingInMemoryConnection.cs" />
+    <Compile Include="Framework\XUnitPlumbing\IntegrationOnly.cs" />
     <Compile Include="Framework\XUnitPlumbing\IntegrationTestDiscoverer.cs" />
     <Compile Include="Framework\XUnitPlumbing\NestTestDiscoverer.cs" />
     <Compile Include="Framework\XUnitPlumbing\RequiresPluginAttribute.cs" />

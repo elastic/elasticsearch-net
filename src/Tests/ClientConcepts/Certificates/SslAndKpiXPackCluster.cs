@@ -10,7 +10,7 @@ using Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks;
 
 namespace Tests.ClientConcepts.Certificates
 {
-	[RequiresPlugin(ElasticsearchPlugin.XPack)]
+	[IntegrationOnly, RequiresPlugin(ElasticsearchPlugin.XPack)]
 	public abstract class SslAndKpiXPackCluster : XPackCluster
 	{
 		public override bool EnableSsl { get; } = true;
