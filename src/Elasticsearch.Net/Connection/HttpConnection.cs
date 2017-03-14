@@ -14,14 +14,13 @@ namespace Elasticsearch.Net
 {
 	public class HttpConnection : IConnection
 	{
+		internal static bool IsMono { get; } = Type.GetType("Mono.Runtime") != null;
+
 		static HttpConnection()
 		{
 			//Not available under mono
-			if (Type.GetType("Mono.Runtime") == null)
+			if (!IsMono)
 				HttpWebRequest.DefaultMaximumErrorResponseLength = -1;
-
-			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls |
-				SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 		}
 
 		protected virtual HttpWebRequest CreateHttpWebRequest(RequestData requestData)
@@ -41,13 +40,16 @@ namespace Elasticsearch.Net
 				request.ClientCertificates.AddRange(requestData.ClientCertificates);
 		}
 
-
 		protected virtual void SetServerCertificateValidationCallBackIfNeeded(HttpWebRequest request, RequestData requestData)
 		{
+			#if !__MonoCS__
 			//Only assign if one is defined on connection settings and a subclass has not already set one
 			var callback = requestData?.ConnectionSettings?.ServerCertificateValidationCallback;
 			if (callback != null && request.ServerCertificateValidationCallback == null)
 				request.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(callback);
+			#else
+				throw new Exception("Mono misses ServerCertificateValidationCallback on HttpWebRequest");
+			#endif
 		}
 
 		protected virtual HttpWebRequest CreateWebRequest(RequestData requestData)
