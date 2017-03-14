@@ -48,7 +48,8 @@ namespace Elasticsearch.Net
 			if (callback != null && request.ServerCertificateValidationCallback == null)
 				request.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(callback);
 			#else
-				throw new Exception("Mono misses ServerCertificateValidationCallback on HttpWebRequest");
+				if (callback != null)
+					throw new Exception("Mono misses ServerCertificateValidationCallback on HttpWebRequest");
 			#endif
 		}
 
