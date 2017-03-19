@@ -57,14 +57,7 @@ namespace Nest
 		public IDisposable Subscribe(IObserver<IBulkAllResponse> observer)
 		{
 			observer.ThrowIfNull(nameof(observer));
-			try
-			{
-				this.BulkAll(observer);
-			}
-			catch (Exception e)
-			{
-				observer.OnError(e);
-			}
+			this.BulkAll(observer);
 			return this;
 		}
 
@@ -75,32 +68,38 @@ namespace Nest
 		{
 			var documents = this._partionedBulkRequest.Documents;
 			var partioned = new PartitionHelper<T>(documents, this._bulkSize, this._maxDegreeOfParallelism);
+#pragma warning disable 4014
 			partioned.ForEachAsync(
+#pragma warning restore 4014
 				(buffer, page) => this.BulkAsync(buffer, page, 0),
 				(buffer, response) => observer.OnNext(response),
-				t => OnCompleted(t, observer)
+				ex => OnCompleted(ex, observer)
 			);
 		}
 
-		private void OnCompleted(Task task, IObserver<IBulkAllResponse> observer)
+		private void OnCompleted(Exception exception, IObserver<IBulkAllResponse> observer)
 		{
-			switch (task.Status)
+			if (exception != null)
+				observer.OnError(exception);
+			else
 			{
-				case System.Threading.Tasks.TaskStatus.RanToCompletion:
-					if (this._partionedBulkRequest.RefreshOnCompleted)
-					{
-						var refresh = this._client.Refresh(this._partionedBulkRequest.Index);
-						if (!refresh.IsValid) throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);
-					}
+				try
+				{
+					RefreshOnCompleted();
 					observer.OnCompleted();
-					break;
-				case System.Threading.Tasks.TaskStatus.Faulted:
-					observer.OnError(task.Exception.InnerException);
-					break;
-				case System.Threading.Tasks.TaskStatus.Canceled:
-					observer.OnError(new TaskCanceledException(task));
-					break;
+				}
+				catch (Exception e)
+				{
+					observer.OnError(e);
+				}
 			}
+		}
+
+		private void RefreshOnCompleted()
+		{
+			if (!this._partionedBulkRequest.RefreshOnCompleted) return;
+			var refresh = this._client.Refresh(this._partionedBulkRequest.Index);
+			if (!refresh.IsValid) throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);
 		}
 
 		private async Task<IBulkAllResponse> BulkAsync(IList<T> buffer, long page, int backOffRetries)
@@ -177,18 +176,37 @@ namespace Nest
 				}
 			}
 
-			public Task ForEachAsync<TResult>(
+
+			public async Task ForEachAsync<TResult>(
 				Func<IList<TDocument>, long, Task<TResult>> taskSelector,
 				Action<IList<TDocument>, TResult> resultProcessor,
-				Action<Task> done
+				Action<Exception> done
 			)
 			{
 				var semaphore = new SemaphoreSlim(initialCount: _semaphoreSize, maxCount: _semaphoreSize);
 				long page = 0;
-				return Task.WhenAll(
-						from item in this
-						select ProcessAsync(item, taskSelector, resultProcessor, semaphore, page++)
-					).ContinueWith(done);
+
+				try
+				{
+					var tasks = new List<Task>();
+					foreach (var item in this)
+					{
+						tasks.Add(ProcessAsync(item, taskSelector, resultProcessor, semaphore, page++));
+						if (tasks.Count <= _semaphoreSize)
+							continue;
+
+						var task = await Task.WhenAny(tasks);
+						tasks.Remove(task);
+					}
+
+					await Task.WhenAll(tasks);
+					done(null);
+				}
+				catch (Exception e)
+				{
+					done(e);
+					throw;
+				}
 			}
 
 			private async Task ProcessAsync<TSource, TResult>(
@@ -203,10 +221,6 @@ namespace Nest
 				{
 					var result = await taskSelector(item, page).ConfigureAwait(false);
 					resultProcessor(item, result);
-				}
-				catch
-				{
-					throw;
 				}
 				finally { if (semaphoreSlim != null) semaphoreSlim.Release(); }
 			}
