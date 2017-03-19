@@ -17,6 +17,8 @@ namespace Nest
 		
 		bool? DocAsUpsert { get; set; }
 		
+		bool? ScriptedUpsert { get; set; }
+
 		string Lang { get; set; }
 		
 		string Script { get; set; }
@@ -92,6 +94,7 @@ namespace Nest
 		public TDocument Upsert { get; set; }
 		public TPartialDocument Doc { get; set; }
 		public bool? DocAsUpsert { get; set; }
+		public bool? ScriptedUpsert { get; set; }
 		public string Lang { get; set; }
 		public string Script { get; set; }
 		public string ScriptId { get; set; }
@@ -116,6 +119,8 @@ namespace Nest
 
 		bool? IBulkUpdateOperation<TDocument, TPartialDocument>.DocAsUpsert { get; set; }
 
+		bool? IBulkUpdateOperation<TDocument, TPartialDocument>.ScriptedUpsert { get; set; }
+
 		string IBulkUpdateOperation<TDocument, TPartialDocument>.Lang { get; set; }
 
 		string IBulkUpdateOperation<TDocument, TPartialDocument>.Script { get; set; }
@@ -137,7 +142,8 @@ namespace Nest
 				_Lang = Self.Lang,
 				_Params = Self.Params,
 				_Upsert = Self.Upsert,
-				_DocAsUpsert = Self.DocAsUpsert
+				_DocAsUpsert = Self.DocAsUpsert,
+				_ScriptedUpsert = Self.ScriptedUpsert
 			};
 		}
 
@@ -226,6 +232,12 @@ namespace Nest
 			return this;
 		}
 		
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool scriptedUpsert = true)
+		{
+			Self.ScriptedUpsert = scriptedUpsert;
+			return this;
+		}
+
 		public BulkUpdateDescriptor<TDocument, TPartialDocument> Lang(string lang)
 		{
 			Self.Lang = lang;

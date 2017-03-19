@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	internal class BulkUpdateBody<TDocument, TPartialUpdate> 
+	internal class BulkUpdateBody<TDocument, TPartialUpdate>
 		where TDocument : class
 		where TPartialUpdate : class
 	{
@@ -16,6 +16,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "doc_as_upsert")]
 		public bool? _DocAsUpsert { get; set; }
 
+		[JsonProperty(PropertyName = "scripted_upsert")]
+		public bool? _ScriptedUpsert { get; set; }
+
 		[JsonProperty(PropertyName = "script")]
 		internal string _Script { get; set; }
 
@@ -24,12 +27,13 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "script_file")]
 		internal string _ScriptFile { get; set; }
-		
+
 		[JsonProperty(PropertyName = "params")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> _Params { get; set; }
-		
+
 		[JsonProperty(PropertyName = "lang")]
 		public string _Lang { get; set; }
+
 	}
 }
