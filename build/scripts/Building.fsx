@@ -8,7 +8,7 @@ open Paths
 open Projects
 
 let gitLink = fun f ->
-    let exe = Paths.Tool("gitlink/lib/net45/GitLink.exe")
+    let exe = Paths.Tool("gitlink/build/GitLink.exe")
     ExecProcess(fun p ->
       p.FileName <- exe
       p.Arguments <- sprintf @". -u %s -b develop" Paths.Repository
