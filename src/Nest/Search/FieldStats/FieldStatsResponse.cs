@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -50,10 +51,55 @@ namespace Nest
 		[JsonProperty("aggregatable")]
 		public bool Aggregatable { get; internal set; }
 
+		/// <summary>
+		/// Returns the min value of a field. In NEST 5.x this is always
+		/// returned as a string which does not work for geo_point and geo_shape
+		/// typed fields which return an object here since Elasticsearch 5.3
+		/// so in 5.x this is always null for geo_point and geo_shape. Please use <see cref="MinValueAsString"/>
+		/// </summary>
 		[JsonProperty("min_value")]
+		[JsonConverter(typeof(FieldMinMaxValueJsonConverter))]
 		public string MinValue { get; internal set; }
 
+		[JsonProperty("min_value_as_string")]
+		public string MinValueAsString { get; internal set; }
+
+		/// <summary>
+		/// Returns the max value of a field. In NEST 5.x this is always
+		/// returned as a string which does not work for geo_point and geo_shape
+		/// typed fields which return an object here since Elasticsearch 5.3
+		/// so in 5.x this is always null for geo_point and geo_shape. Please use <see cref="MaxValueAsString"/>
+		/// </summary>
 		[JsonProperty("max_value")]
+		[JsonConverter(typeof(FieldMinMaxValueJsonConverter))]
 		public string MaxValue { get; internal set; }
+
+		[JsonProperty("max_value_as_string")]
+		public string MaxValueAsString { get; internal set; }
+
+	}
+
+
+	public class FieldMinMaxValueJsonConverter : JsonConverter
+	{
+		public override bool CanConvert(Type objectType) => true;
+		public override bool CanWrite => false;
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
+
+		public override bool CanRead => true;
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			if (reader.TokenType == JsonToken.StartObject || reader.TokenType == JsonToken.StartArray)
+			{
+				var depth = reader.Depth;
+				do
+				{
+					reader.Read();
+				} while (reader.Depth >= depth && reader.TokenType != JsonToken.EndObject);
+				return null;
+			}
+			return reader.Value.ToString();
+		}
+
 	}
 }
