@@ -23,6 +23,8 @@ namespace Tests.Search.Request
 	{
 		public HighlightingUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		public string LastNameSearch { get; } = Project.Projects.First().LeadDeveloper.LastName;
+
 		protected override object ExpectJson => new
 		{
 			query = new
@@ -64,6 +66,26 @@ namespace Tests.Search.Request
 											{ "leadDeveloper.firstName", new JObject
 												{
 													{ "query", "Kurt Edgardo Naomi Dariana Justice Felton" }
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					{ "leadDeveloper.lastName", new JObject
+						{
+							{ "type", "unified" },
+							{ "pre_tags", new JArray { "<name>" } },
+							{ "post_tags", new JArray { "</name>" } },
+							{ "highlight_query", new JObject
+								{
+									{ "match", new JObject
+										{
+											{ "leadDeveloper.lastName", new JObject
+												{
+													{ "query", LastNameSearch }
 												}
 											}
 										}
@@ -123,6 +145,17 @@ namespace Tests.Search.Request
 							)
 						),
 					fs => fs
+						.Field(p => p.LeadDeveloper.LastName)
+						.Type(HighlighterType.Unified)
+						.PreTags("<name>")
+						.PostTags("</name>")
+						.HighlightQuery(q => q
+							.Match(m => m
+								.Field(p => p.LeadDeveloper.LastName)
+								.Query(LastNameSearch)
+							)
+						),
+					fs => fs
 						.Field(p => p.State.Suffix("offsets"))
 						.Type(HighlighterType.Postings)
 						.PreTags("<state>")
@@ -175,6 +208,18 @@ namespace Tests.Search.Request
 								}
 							}
 						},
+						{ "leadDeveloper.lastName", new HighlightField
+							{
+								Type = HighlighterType.Unified,
+								PreTags = new[] { "<name>"},
+								PostTags = new[] { "</name>"},
+								HighlightQuery = new MatchQuery
+								{
+									Field = "leadDeveloper.lastName",
+									Query = LastNameSearch
+								}
+							}
+						},
 						{ "state.offsets", new HighlightField
 							{
 								Type = HighlighterType.Postings,
@@ -208,6 +253,14 @@ namespace Tests.Search.Request
 						}
 					}
 					else if (highlightField.Key == "leadDeveloper.firstName")
+					{
+						foreach (var highlight in highlightField.Value.Highlights)
+						{
+							highlight.Should().Contain("<name>");
+							highlight.Should().Contain("</name>");
+						}
+					}
+					else if (highlightField.Key == "leadDeveloper.lastName	")
 					{
 						foreach (var highlight in highlightField.Value.Highlights)
 						{
