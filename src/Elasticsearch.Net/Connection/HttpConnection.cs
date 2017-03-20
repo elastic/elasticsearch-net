@@ -63,7 +63,7 @@ namespace Elasticsearch.Net
 			request.ReadWriteTimeout = timeout;
 
 			//WebRequest won't send Content-Length: 0 for empty bodies
-			//which goes against RFC's and might break i.e IIS when used as a proxy.
+			//which goes against RFC's and might break i.e IIS hen used as a proxy.
 			//see: https://github.com/elasticsearch/elasticsearch-net/issues/562
 			var m = requestData.Method.GetStringValue();
 			request.Method = m;
