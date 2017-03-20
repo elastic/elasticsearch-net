@@ -2,7 +2,7 @@
 == Building Requests
 
 `Elasticsearch.Net` maps **all** the Elasticsearch API endpoints to methods. The reason it can do this is because all these methods are generated from 
-https://github.com/elasticsearch/elasticsearch/tree/master/rest-api-spec/api[the official client REST specification]. 
+https://github.com/elasticsearch/elasticsearch/tree/master/rest-api-spec[the official client REST specification]. 
 This specification documents all the URL's (paths and querystrings) but does not map any of the API request and response bodies.
 
 [source,csharp]
