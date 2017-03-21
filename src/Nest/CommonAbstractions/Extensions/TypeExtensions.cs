@@ -41,8 +41,7 @@ namespace Nest
 
 		internal static object CreateGenericInstance(this Type t, Type[] closeOver, params object[] args)
 		{
-			var argKey = closeOver.Aggregate(new StringBuilder(), (sb, gt) => sb.Append("--" + gt.FullName),
-				sb => sb.ToString());
+			var argKey = closeOver.Aggregate(new StringBuilder(), (sb, gt) => sb.Append("--" + gt.FullName), sb => sb.ToString());
 			var key = t.FullName + argKey;
 			Type closedType;
 			if (!CachedGenericClosedTypes.TryGetValue(key, out closedType))
@@ -65,15 +64,14 @@ namespace Nest
 
 			var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
 			var constructors = from c in t.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-				let p = c.GetParameters()
-				let k = string.Join(",", p.Select(a => a.ParameterType.Name))
-				where p.Length == args.Length
-				select c;
+							   let p = c.GetParameters()
+							   let k = string.Join(",", p.Select(a => a.ParameterType.Name))
+							   where p.Length == args.Length
+							   select c;
 
 			var ctor = constructors.FirstOrDefault();
 			if (ctor == null)
-				throw new Exception(
-					$"Cannot create an instance of {t.FullName} because it has no constructor taking {args.Length} arguments");
+				throw new Exception($"Cannot create an instance of {t.FullName} because it has no constructor taking {args.Length} arguments");
 			activator = (ObjectActivator<object>) generic.Invoke(null, new[] {ctor});
 			CachedActivators.TryAdd(key, activator);
 			return activator(args);
@@ -180,11 +178,11 @@ namespace Nest
 		/// </summary>
 		private static bool IsHidingMember(PropertyInfo propertyInfo)
 		{
-	#if DOTNETCORE
+#if DOTNETCORE
 			var baseType = propertyInfo.DeclaringType?.GetTypeInfo()?.BaseType;
-    #else
+#else
 			var baseType = propertyInfo.DeclaringType?.BaseType;
-	#endif
+#endif
 			var baseProperty = baseType?.GetProperty(propertyInfo.Name);
 			if (baseProperty == null) return false;
 			var derivedGetMethod = propertyInfo.GetGetMethod().GetBaseDefinition();
