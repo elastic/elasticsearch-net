@@ -35,6 +35,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks
 			new EnsureSecurityRolesFileExists(),
 			new EnsureWatcherActionConfigurationInElasticsearchYaml(),
 			new EnsureSecurityRolesFileExists(),
+			new EnsureSecurityRealms(),
 			new EnsureSecurityUsersInDefaultRealmAreAdded(),
 		};
 		private static IEnumerable<BeforeStartNodeTaskBase> BeforeStart { get; } = new List<BeforeStartNodeTaskBase>
@@ -54,8 +55,11 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks
 			new ValidateClusterStateTask()
 		};
 
-		public void Install()=>
-			Itterate(InstallationTasks, (t, n,  fs) => t.Run(n, fs));
+		public void Install(InstallationTaskBase[] additionalInstallationTasks)=>
+			Itterate(
+				InstallationTasks.Concat(additionalInstallationTasks ?? Enumerable.Empty<InstallationTaskBase>()),
+				(t, n,  fs) => t.Run(n, fs)
+			);
 
 		public void Dispose() =>
 			Itterate(NodeStoppedTasks, (t, n,  fs) => t.Run(n, fs));

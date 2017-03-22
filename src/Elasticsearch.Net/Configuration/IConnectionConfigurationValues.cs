@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
 namespace Elasticsearch.Net
@@ -173,10 +175,21 @@ namespace Elasticsearch.Net
 		TimeSpan? KeepAliveInterval { get; }
 
 		/// <summary>
+		/// Register a ServerCertificateValidationCallback per request
+		/// </summary>
+		Func<object, X509Certificate,X509Chain,SslPolicyErrors, bool>  ServerCertificateValidationCallback { get; }
+
+		/// <summary>
 		/// Register a predicate to select which nodes that you want to execute API calls on. Note that sniffing requests omit this predicate and always execute on all nodes.
 		/// When using an <see cref="IConnectionPool"/> implementation that supports reseeding of nodes, this will default to omitting master only node from regular API calls.
 		/// When using static or single node connection pooling it is assumed the list of node you instantiate the client with should be taken verbatim.
 		/// </summary>
 		Func<Node, bool> NodePredicate { get; }
+
+		/// <summary>
+		/// Use the following certificates to authenticate all HTTP requests. You can also set them on individual
+		/// request using <see cref="RequestConfiguration.ClientCertificates"/>
+		/// </summary>
+		X509CertificateCollection ClientCertificates { get; }
 	}
 }

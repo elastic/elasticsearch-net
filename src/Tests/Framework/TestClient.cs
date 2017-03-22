@@ -24,7 +24,8 @@ namespace Tests.Framework
 		public static IElasticClient Default = new ElasticClient(GlobalDefaultSettings);
 		public static IElasticClient DefaultInMemoryClient = GetInMemoryClient();
 
-		public static Uri CreateUri(int port = 9200) => new UriBuilder("http", Host, port).Uri;
+		public static Uri CreateUri(int port = 9200, bool forceSsl = false) =>
+			new UriBuilder(forceSsl ? "https" : "http", Host, port).Uri;
 
 		public static string Host => (RunningFiddler) ? "ipv4.fiddler" : "localhost";
 
@@ -110,13 +111,14 @@ namespace Tests.Framework
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
 			int port = 9200,
 			bool forceInMemory = false,
+			bool forceSsl = false,
 			Func<Uri, IConnectionPool> createPool = null,
 			Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory = null
 		)
 		{
 			createPool = createPool ?? (u => new SingleNodeConnectionPool(u));
 #pragma warning disable CS0618 // Type or member is obsolete
-			var defaultSettings = DefaultSettings(new ConnectionSettings(createPool(CreateUri(port)),
+			var defaultSettings = DefaultSettings(new ConnectionSettings(createPool(CreateUri(port, forceSsl)),
 				CreateConnection(forceInMemory: forceInMemory), serializerFactory));
 #pragma warning restore CS0618 // Type or member is obsolete
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
@@ -131,8 +133,16 @@ namespace Tests.Framework
 			Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory) =>
 			new ElasticClient(CreateSettings(modifySettings, forceInMemory: true, serializerFactory: serializerFactory));
 
-		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
-			int port = 9200, Func<Uri, IConnectionPool> createPool = null) =>
+		public static IElasticClient GetClient(
+			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
+			int port = 9200,
+			bool forceSsl = false) =>
+			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: false, forceSsl: forceSsl));
+
+		public static IElasticClient GetClient(
+			Func<Uri, IConnectionPool> createPool,
+			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
+			int port = 9200) =>
 			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: false, createPool: createPool));
 
 		public static IConnection CreateConnection(ConnectionSettings settings = null, bool forceInMemory = false) =>
