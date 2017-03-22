@@ -33,7 +33,8 @@ namespace ApiGenerator.Domain
 				var allPartsAreRequired = parts.Any() && parts.All(p => p.Required);
 				var call = allPartsAreRequired ? "AllSetNoFallback" : "AllSet";
 				var assignments = parts
-					.Select(p => $"p.RouteValues.{p.Name.ToPascalCase()}").ToList();
+					.Select(p => $"p.RouteValues.{p.Name.ToPascalCase()}")
+					.ToList();
 
 				return $"{call}({string.Join(", ", assignments)})";
 			}
@@ -47,8 +48,11 @@ namespace ApiGenerator.Domain
 		public string CsharpMethodName { get; set; }
 		public string Documentation { get; set; }
 		public IEnumerable<string> Methods { get; set; }
+		public IDictionary<string, string> RemovedMethods { get; set; } = new Dictionary<string, string>();
 		public ApiUrl Url { get; set; }
 		public ApiBody Body { get; set; }
+		public IDictionary<string, ApiQueryParameters> ObsoleteQueryParameters { get; set; }
+
 		public string PascalCase(string s)
 		{
 			return ApiGenerator.PascalCase(s);
@@ -59,9 +63,9 @@ namespace ApiGenerator.Domain
 			//we distinct by here to catch aliased endpoints like:
 			//  /_cluster/nodes/hotthreads and /_nodes/hotthreads
 			return this.CsharpMethods.ToList()
-				.Where(m=>m.CallTypeGeneric != "DynamicDictionary" && m.CallTypeGeneric != "string")
+				.Where(m => m.CallTypeGeneric != "DynamicDictionary" && m.CallTypeGeneric != "string")
 				.DistinctBy(m => m.ReturnType + "--" + m.FullName + "--" + m.Arguments
-			);
+				);
 		}
 
 		public IDictionary<string, IEnumerable<RawDispatchInfo>> RawDispatches
@@ -87,7 +91,7 @@ namespace ApiGenerator.Domain
 		{
 			if (availableMethods.Count() == 1)
 				return string.Empty;
-			if (availableMethods.Count() == 2  && availableMethods.Contains("GET"))
+			if (availableMethods.Count() == 2 && availableMethods.Contains("GET"))
 			{
 				//if on operation has two endpoints and one of them is GET always favor the other as default
 				return currentHttpMethod == "GET" ? "Get" : string.Empty;
@@ -112,9 +116,13 @@ namespace ApiGenerator.Domain
 
 				this.PatchEndpoint();
 
-				foreach (var method in this.Methods)
+				var methods = new Dictionary<string, string>(this.RemovedMethods);
+				foreach (var method in this.Methods) methods.Add(method, null);
+				foreach (var kv in methods)
 				{
-					var methodName = this.CsharpMethodName + this.OptionallyAppendHttpMethod(this.Methods, method);
+					var method = kv.Key;
+					var obsoleteVersion = kv.Value;
+					var methodName = this.CsharpMethodName + this.OptionallyAppendHttpMethod(methods.Keys, method);
 					//the distinctby here catches aliases routes i.e
 					//  /_cluster/nodes/{node_id}/hotthreads vs  /_cluster/nodes/{node_id}/hot_threads
 					foreach (var path in this.Url.Paths.DistinctBy(p => p.Replace("_", "")))
@@ -149,11 +157,11 @@ namespace ApiGenerator.Domain
 						queryStringParamName = this.CsharpMethodName + "RequestParameters";
 						var paraIndent = "\r\n\t\t///";
 						var explanationOfT =
-							paraIndent + "<para> - T, an object you own that the elasticsearch response will be deserialized to </para>"
-							+ paraIndent + "<para> - byte[], no deserialization, but the response stream will be closed </para>"
-							+ paraIndent + "<para> - Stream, no deserialization, response stream is your responsibility </para>"
-							+ paraIndent + "<para> - VoidResponse, no deserialization, response stream never read and closed </para>"
-							+ paraIndent + "<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>"
+								paraIndent + "<para> - T, an object you own that the elasticsearch response will be deserialized to </para>"
+								+ paraIndent + "<para> - byte[], no deserialization, but the response stream will be closed </para>"
+								+ paraIndent + "<para> - Stream, no deserialization, response stream is your responsibility </para>"
+								+ paraIndent + "<para> - VoidResponse, no deserialization, response stream never read and closed </para>"
+								+ paraIndent + "<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>"
 							;
 						var apiMethod = new CsharpMethod
 						{
@@ -167,6 +175,7 @@ namespace ApiGenerator.Domain
 							FullName = methodName,
 							HttpMethod = method,
 							Documentation = this.Documentation,
+							ObsoleteMethodVersion = obsoleteVersion,
 							Path = path,
 							Parts = parts,
 							Url = this.Url
@@ -174,17 +183,19 @@ namespace ApiGenerator.Domain
 						PatchMethod(apiMethod);
 
 						args = args.Concat(new[]
-						{
-							"Func<"+apiMethod.QueryStringParamName+", " + apiMethod.QueryStringParamName + "> requestParameters = null"
-						}).ToList();
+							{
+								"Func<" + apiMethod.QueryStringParamName + ", " + apiMethod.QueryStringParamName + "> requestParameters = null"
+							})
+							.ToList();
 						apiMethod.Arguments = string.Join(", ", args);
 						_csharpMethods.Add(apiMethod);
 						yield return apiMethod;
 
 						args = args.Concat(new[]
-						{
-							"CancellationToken cancellationToken = default(CancellationToken)"
-						}).ToList();
+							{
+								"CancellationToken cancellationToken = default(CancellationToken)"
+							})
+							.ToList();
 						apiMethod = new CsharpMethod
 						{
 							QueryStringParamName = queryStringParamName,
@@ -197,6 +208,7 @@ namespace ApiGenerator.Domain
 							FullName = methodName + "Async",
 							HttpMethod = method,
 							Documentation = this.Documentation,
+							ObsoleteMethodVersion = obsoleteVersion,
 							Arguments = string.Join(", ", args),
 							Path = path,
 							Parts = parts,
@@ -210,11 +222,11 @@ namespace ApiGenerator.Domain
 
 						var explanationOfDynamic =
 							paraIndent +
-								"<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely </para>"
+							"<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely </para>"
 							+ paraIndent +
-								"<para> - i.e result.Response.hits.hits[0].property.nested[\"nested_deeper\"] </para>"
+							"<para> - i.e result.Response.hits.hits[0].property.nested[\"nested_deeper\"] </para>"
 							+ paraIndent +
-								"<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist </para>";
+							"<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist </para>";
 
 						var defaultBoundGeneric = Url.Path.Contains("_cat") ? "string" : "DynamicDictionary";
 
@@ -231,6 +243,7 @@ namespace ApiGenerator.Domain
 							FullName = methodName,
 							HttpMethod = method,
 							Documentation = this.Documentation,
+							ObsoleteMethodVersion = obsoleteVersion,
 							Arguments = string.Join(", ", args),
 							Path = path,
 							Parts = parts,
@@ -241,9 +254,10 @@ namespace ApiGenerator.Domain
 						yield return apiMethod;
 
 						args = args.Concat(new[]
-						{
-							"CancellationToken cancellationToken = default(CancellationToken)"
-						}).ToList();
+							{
+								"CancellationToken cancellationToken = default(CancellationToken)"
+							})
+							.ToList();
 						apiMethod = new CsharpMethod
 						{
 							QueryStringParamName = queryStringParamName,
@@ -257,6 +271,7 @@ namespace ApiGenerator.Domain
 							FullName = methodName + "Async",
 							HttpMethod = method,
 							Documentation = this.Documentation,
+							ObsoleteMethodVersion = obsoleteVersion,
 							Arguments = string.Join(", ", args),
 							Path = path,
 							Parts = parts,
@@ -298,7 +313,7 @@ namespace ApiGenerator.Domain
 
 		//Patches a method name for the exceptions (IndicesStats needs better unique names for all the url endpoints)
 		//or to get rid of double verbs in an method name i,e ClusterGetSettingsGet > ClusterGetSettings
-		public static void PatchMethod(CsharpMethod method)
+		public void PatchMethod(CsharpMethod method)
 		{
 			Func<string, bool> ms = s => method.FullName.StartsWith(s);
 			Func<string, bool> pc = s => method.Path.Contains(s);
@@ -318,6 +333,14 @@ namespace ApiGenerator.Domain
 			{
 				if (!method.Url.Params.ContainsKey(param.Key))
 					method.Url.Params.Add(param.Key, param.Value);
+			}
+			if (this.ObsoleteQueryParameters != null)
+			{
+				foreach (var param in this.ObsoleteQueryParameters)
+				{
+					if (!method.Url.Params.ContainsKey(param.Key))
+						method.Url.Params.Add(param.Key, param.Value);
+				}
 			}
 
 			string manualOverride;
@@ -393,8 +416,6 @@ namespace ApiGenerator.Domain
 			catch
 			{
 			}
-
 		}
-
 	}
 }

@@ -1481,84 +1481,6 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CountPercolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
-	public partial class PercolateCountDescriptor<TDocument>  : RequestDescriptorBase<PercolateCountDescriptor<TDocument>,PercolateCountRequestParameters, IPercolateCountRequest<TDocument>>, IPercolateCountRequest<TDocument>
-	{ 
-		IndexName IPercolateCountRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IPercolateCountRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
-		Id IPercolateCountRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/{index}/{type}/_percolate/count</summary>
-///<param name="index"> this parameter is required</param>		
-///<param name="type"> this parameter is required</param>
-		public PercolateCountDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)){}
-		
-
-		/// <summary>/{index}/{type}/_percolate/count</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public PercolateCountDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
-		partial void DocumentFromPath(TDocument document);
-
-			///<summary>The index of the document being count percolated.</summary>
-		public PercolateCountDescriptor<TDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public PercolateCountDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
-
-		///<summary>The type of the document being count percolated.</summary>
-		public PercolateCountDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
-
-		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public PercolateCountDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
-
-		///<summary>Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</summary>
-		public PercolateCountDescriptor<TDocument> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
-
-	
-		///<summary>A comma-separated list of specific routing values</summary>
-		public PercolateCountDescriptor<TDocument> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
-
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public PercolateCountDescriptor<TDocument> Preference(string preference) => AssignParam(p=>p.Preference(preference));
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PercolateCountDescriptor<TDocument> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
-
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PercolateCountDescriptor<TDocument> AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateCountDescriptor<TDocument> ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
-
-		///<summary>The index to count percolate the document into. Defaults to index.</summary>
-		public PercolateCountDescriptor<TDocument> PercolateIndex(string percolate_index) => AssignParam(p=>p.PercolateIndex(percolate_index));
-
-		///<summary>The type to count percolate document into. Defaults to type.</summary>
-		public PercolateCountDescriptor<TDocument> PercolateType(string percolate_type) => AssignParam(p=>p.PercolateType(percolate_type));
-
-		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateCountDescriptor<TDocument> Version(long version) => AssignParam(p=>p.Version(version));
-
-		///<summary>Specific version type</summary>
-		public PercolateCountDescriptor<TDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
-
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PercolateCountDescriptor<TDocument> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
-
-		///<summary>Return human readable values for statistics.</summary>
-		public PercolateCountDescriptor<TDocument> Human(bool human = true) => AssignParam(p=>p.Human(human));
-
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PercolateCountDescriptor<TDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
-
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PercolateCountDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PercolateCountDescriptor<TDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
 	///<summary>descriptor for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public partial class CreateDescriptor<TDocument>  : RequestDescriptorBase<CreateDescriptor<TDocument>,CreateRequestParameters, ICreateRequest<TDocument>>, ICreateRequest<TDocument>
 	{ 
@@ -2010,6 +1932,90 @@ namespace Nest
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DocumentExistsDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
+	public partial class ExistsSourceDescriptor  : RequestDescriptorBase<ExistsSourceDescriptor,ExistsSourceRequestParameters, IExistsSourceRequest>, IExistsSourceRequest
+	{ 
+		Id IExistsSourceRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IExistsSourceRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IExistsSourceRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			/// <summary>/{index}/{type}/{id}/_source</summary>
+///<param name="index"> this parameter is required</param>		
+///<param name="type"> this parameter is required</param>		
+///<param name="id"> this parameter is required</param>
+		public ExistsSourceDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+		
+
+			///<summary>The name of the index</summary>
+		public ExistsSourceDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public ExistsSourceDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		///<summary>The type of the document; use `_all` to fetch the first document matching the ID across all types</summary>
+		public ExistsSourceDescriptor Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+
+		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
+		public ExistsSourceDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+
+	
+		///<summary>The ID of the parent document</summary>
+		public ExistsSourceDescriptor Parent(string parent) => AssignParam(p=>p.Parent(parent));
+
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public ExistsSourceDescriptor Preference(string preference) => AssignParam(p=>p.Preference(preference));
+
+		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
+		public ExistsSourceDescriptor Realtime(bool realtime = true) => AssignParam(p=>p.Realtime(realtime));
+
+		///<summary>Refresh the shard containing the document before performing the operation</summary>
+		public ExistsSourceDescriptor Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
+
+		///<summary>Specific routing value</summary>
+		public ExistsSourceDescriptor Routing(string routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public ExistsSourceDescriptor SourceEnabled(params string[] source_enabled) => AssignParam(p=>p.SourceEnabled(source_enabled));
+
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public ExistsSourceDescriptor SourceExclude(params string[] source_exclude) => AssignParam(p=>p.SourceExclude(source_exclude));
+			
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public ExistsSourceDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			AssignParam(p=>p._SourceExclude(fields));
+
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public ExistsSourceDescriptor SourceInclude(params string[] source_include) => AssignParam(p=>p.SourceInclude(source_include));
+			
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public ExistsSourceDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			AssignParam(p=>p._SourceInclude(fields));
+
+		///<summary>Explicit version number for concurrency control</summary>
+		public ExistsSourceDescriptor Version(long version) => AssignParam(p=>p.Version(version));
+
+		///<summary>Specific version type</summary>
+		public ExistsSourceDescriptor VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
+
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ExistsSourceDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public ExistsSourceDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ExistsSourceDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public ExistsSourceDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ExistsSourceDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	
 	}
 	
@@ -2568,6 +2574,9 @@ namespace Nest
 		public ClearCacheDescriptor Recycler(bool recycler = true) => AssignParam(p=>p.Recycler(recycler));
 
 		///<summary>Clear request cache</summary>
+		public ClearCacheDescriptor RequestCache(bool request_cache = true) => AssignParam(p=>p.RequestCache(request_cache));
+
+		///<summary>Clear request cache</summary>
 		public ClearCacheDescriptor Request(bool request = true) => AssignParam(p=>p.Request(request));
 
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -2811,7 +2820,7 @@ namespace Nest
 		public IndexExistsDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 		
 
-			///<summary>A comma-separated list of indices to check</summary>
+			///<summary>A comma-separated list of index names</summary>
 		public IndexExistsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
@@ -2821,11 +2830,23 @@ namespace Nest
 		public IndexExistsDescriptor AllIndices() => this.Index(Indices.All);
 
 	
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndexExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
-
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public IndexExistsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
+
+		///<summary>Ignore unavailable indexes (default: false)</summary>
+		public IndexExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
+
+		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
+		public IndexExistsDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
+
+		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
+		public IndexExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
+
+		///<summary>Return settings in flat format (default: false)</summary>
+		public IndexExistsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
+
+		///<summary>Whether to return all default setting for each of the indices.</summary>
+		public IndexExistsDescriptor IncludeDefaults(bool include_defaults = true) => AssignParam(p=>p.IncludeDefaults(include_defaults));
 
 		///<summary>Pretty format the returned JSON response.</summary>
 		public IndexExistsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
@@ -2898,13 +2919,16 @@ namespace Nest
 	///<summary>descriptor for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class IndexTemplateExistsDescriptor  : RequestDescriptorBase<IndexTemplateExistsDescriptor,IndexTemplateExistsRequestParameters, IIndexTemplateExistsRequest>, IIndexTemplateExistsRequest
 	{ 
-		Name IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Name>("name");
+		Names IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_template/{name}</summary>
 ///<param name="name"> this parameter is required</param>
-		public IndexTemplateExistsDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		public IndexTemplateExistsDescriptor(Names name) : base(r=>r.Required("name", name)){}
 		
 
 		
+		///<summary>Return settings in flat format (default: false)</summary>
+		public IndexTemplateExistsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
+
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public IndexTemplateExistsDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -4486,54 +4510,6 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Mpercolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
-	public partial class MultiPercolateDescriptor  : RequestDescriptorBase<MultiPercolateDescriptor,MultiPercolateRequestParameters, IMultiPercolateRequest>, IMultiPercolateRequest
-	{ 
-		IndexName IMultiPercolateRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IMultiPercolateRequest.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/_mpercolate</summary>
-		public MultiPercolateDescriptor() : base(){}
-		
-
-			///<summary>The index of the document being count percolated to use as default</summary>
-		public MultiPercolateDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
-
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public MultiPercolateDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
-
-		///<summary>The type of the document being percolated to use as default.</summary>
-		public MultiPercolateDescriptor Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
-
-		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public MultiPercolateDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
-
-	
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public MultiPercolateDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
-
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public MultiPercolateDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public MultiPercolateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
-
-		///<summary>Pretty format the returned JSON response.</summary>
-		public MultiPercolateDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
-
-		///<summary>Return human readable values for statistics.</summary>
-		public MultiPercolateDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
-
-		///<summary>Include the stack trace of returned errors.</summary>
-		public MultiPercolateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
-
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiPercolateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public MultiPercolateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
 	///<summary>descriptor for Msearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
 	public partial class MultiSearchDescriptor  : RequestDescriptorBase<MultiSearchDescriptor,MultiSearchRequestParameters, IMultiSearchRequest>, IMultiSearchRequest
 	{ 
@@ -4877,93 +4853,6 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Percolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
-	public partial class PercolateDescriptor<TDocument>  : RequestDescriptorBase<PercolateDescriptor<TDocument>,PercolateRequestParameters, IPercolateRequest<TDocument>>, IPercolateRequest<TDocument>
-	{ 
-		IndexName IPercolateRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IPercolateRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
-		Id IPercolateRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/{index}/{type}/_percolate</summary>
-///<param name="index"> this parameter is required</param>		
-///<param name="type"> this parameter is required</param>
-		public PercolateDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)){}
-		
-
-		/// <summary>/{index}/{type}/_percolate</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public PercolateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
-		partial void DocumentFromPath(TDocument document);
-
-			///<summary>The index of the document being percolated.</summary>
-		public PercolateDescriptor<TDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public PercolateDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
-
-		///<summary>The type of the document being percolated.</summary>
-		public PercolateDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
-
-		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public PercolateDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
-
-		///<summary>Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</summary>
-		public PercolateDescriptor<TDocument> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
-
-	
-		///<summary>A comma-separated list of specific routing values</summary>
-		public PercolateDescriptor<TDocument> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
-
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public PercolateDescriptor<TDocument> Preference(string preference) => AssignParam(p=>p.Preference(preference));
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PercolateDescriptor<TDocument> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
-
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PercolateDescriptor<TDocument> AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateDescriptor<TDocument> ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
-
-		///<summary>The index to percolate the document into. Defaults to index.</summary>
-		public PercolateDescriptor<TDocument> PercolateIndex(string percolate_index) => AssignParam(p=>p.PercolateIndex(percolate_index));
-
-		///<summary>The type to percolate document into. Defaults to type.</summary>
-		public PercolateDescriptor<TDocument> PercolateType(string percolate_type) => AssignParam(p=>p.PercolateType(percolate_type));
-
-		///<summary>The routing value to use when percolating the existing document.</summary>
-		public PercolateDescriptor<TDocument> PercolateRouting(string percolate_routing) => AssignParam(p=>p.PercolateRouting(percolate_routing));
-
-		///<summary>Which shard to prefer when executing the percolate request.</summary>
-		public PercolateDescriptor<TDocument> PercolatePreference(string percolate_preference) => AssignParam(p=>p.PercolatePreference(percolate_preference));
-
-		///<summary>Return an array of matching query IDs instead of objects</summary>
-		public PercolateDescriptor<TDocument> PercolateFormat(PercolateFormat percolate_format) => AssignParam(p=>p.PercolateFormat(percolate_format));
-
-		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateDescriptor<TDocument> Version(long version) => AssignParam(p=>p.Version(version));
-
-		///<summary>Specific version type</summary>
-		public PercolateDescriptor<TDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
-
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PercolateDescriptor<TDocument> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
-
-		///<summary>Return human readable values for statistics.</summary>
-		public PercolateDescriptor<TDocument> Human(bool human = true) => AssignParam(p=>p.Human(human));
-
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PercolateDescriptor<TDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
-
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PercolateDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PercolateDescriptor<TDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
 	///<summary>descriptor for Ping <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class PingDescriptor  : RequestDescriptorBase<PingDescriptor,PingRequestParameters, IPingRequest>, IPingRequest
 	{ 
@@ -5263,6 +5152,9 @@ namespace Nest
 
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public SearchDescriptor<T> RequestCache(bool request_cache = true) => AssignParam(p=>p.RequestCache(request_cache));
+
+		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
+		public SearchDescriptor<T> BatchedReduceSize(long batched_reduce_size) => AssignParam(p=>p.BatchedReduceSize(batched_reduce_size));
 
 		///<summary>Pretty format the returned JSON response.</summary>
 		public SearchDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
@@ -5716,56 +5608,6 @@ namespace Nest
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public VerifyRepositoryDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
-	///<summary>descriptor for Suggest <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html</pre></summary>
-	public partial class SuggestDescriptor<T>  : RequestDescriptorBase<SuggestDescriptor<T>,SuggestRequestParameters, ISuggestRequest>, ISuggestRequest
-	{ 
-		Indices ISuggestRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_suggest. Will infer the index from the generic type</summary>
-		public SuggestDescriptor() : base(r => r.Required("index", (Indices)typeof(T))){}
-		
-
-			///<summary>A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public SuggestDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public SuggestDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
-		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public SuggestDescriptor<T> AllIndices() => this.Index(Indices.All);
-
-	
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SuggestDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
-
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SuggestDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SuggestDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
-
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SuggestDescriptor<T> Preference(string preference) => AssignParam(p=>p.Preference(preference));
-
-		///<summary>Specific routing value</summary>
-		public SuggestDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
-
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SuggestDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
-
-		///<summary>Return human readable values for statistics.</summary>
-		public SuggestDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
-
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SuggestDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
-
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SuggestDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SuggestDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

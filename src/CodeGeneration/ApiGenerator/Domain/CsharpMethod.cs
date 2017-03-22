@@ -16,6 +16,7 @@ namespace ApiGenerator.Domain
 		public string DescriptorType { get; set; }
 		public string DescriptorTypeGeneric { get; set; }
 		public string RequestType { get; set; }
+		public string ObsoleteMethodVersion { get; set; }
 
 		public string InterfaceType => "I" + (this.RequestTypeGeneric == "" || this.RequestTypeGeneric == "<T>" ? this.RequestType : this.RequestType + this.RequestTypeGeneric);
 

@@ -1475,126 +1475,6 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CountGetAsync<T>(string index, string type, Func<CountRequestParameters, CountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
-		///<summary>Represents a GET on /{index}/{type}/_percolate/count
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being count percolated.</param>
-		///<param name="type">The type of the document being count percolated.</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/{type}/_percolate/count
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being count percolated.</param>
-		///<param name="type">The type of the document being count percolated.</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
-		///<summary>Represents a GET on /{index}/{type}/{id}/_percolate/count
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being count percolated.</param>
-		///<param name="type">The type of the document being count percolated.</param>
-		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, string id, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/{type}/{id}/_percolate/count
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being count percolated.</param>
-		///<param name="type">The type of the document being count percolated.</param>
-		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, string id, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
-		///<summary>Represents a POST on /{index}/{type}/_percolate/count
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being count percolated.</param>
-		///<param name="type">The type of the document being count percolated.</param>
-		///<param name="body">The count percolator request definition using the percolate DSL</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> CountPercolate<T>(string index, string type, PostData<object> body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/{type}/_percolate/count
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being count percolated.</param>
-		///<param name="type">The type of the document being count percolated.</param>
-		///<param name="body">The count percolator request definition using the percolate DSL</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, PostData<object> body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
-		///<summary>Represents a POST on /{index}/{type}/{id}/_percolate/count
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being count percolated.</param>
-		///<param name="type">The type of the document being count percolated.</param>
-		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
-		///<param name="body">The count percolator request definition using the percolate DSL</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> CountPercolate<T>(string index, string type, string id, PostData<object> body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/{type}/{id}/_percolate/count
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being count percolated.</param>
-		///<param name="type">The type of the document being count percolated.</param>
-		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
-		///<param name="body">The count percolator request definition using the percolate DSL</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, string id, PostData<object> body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
 		///<summary>Represents a PUT on /{index}/{type}/{id}/_create
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1856,6 +1736,36 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ExistsAsync<T>(string index, string type, string id, Func<DocumentExistsRequestParameters, DocumentExistsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a HEAD on /{index}/{type}/{id}/_source
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html </para>
+		///</summary>
+		///<param name="index">The name of the index</param>
+		///<param name="type">The type of the document; use `_all` to fetch the first document matching the ID across all types</param>
+		///<param name="id">The document ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> ExistsSource<T>(string index, string type, string id, Func<ExistsSourceRequestParameters, ExistsSourceRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a HEAD on /{index}/{type}/{id}/_source
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html </para>
+		///</summary>
+		///<param name="index">The name of the index</param>
+		///<param name="type">The type of the document; use `_all` to fetch the first document matching the ID across all types</param>
+		///<param name="id">The document ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> ExistsSourceAsync<T>(string index, string type, string id, Func<ExistsSourceRequestParameters, ExistsSourceRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_explain
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2634,7 +2544,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html </para>
 		///</summary>
-		///<param name="index">A comma-separated list of indices to check</param>
+		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesExists<T>(string index, Func<IndexExistsRequestParameters, IndexExistsRequestParameters> requestParameters = null) where T : class;
 		
@@ -2647,7 +2557,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html </para>
 		///</summary>
-		///<param name="index">A comma-separated list of indices to check</param>
+		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesExistsAsync<T>(string index, Func<IndexExistsRequestParameters, IndexExistsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
@@ -2705,32 +2615,6 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesExistsAliasAsync<T>(string index, string name, Func<AliasExistsRequestParameters, AliasExistsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
-		///<summary>Represents a HEAD on /{index}/_alias
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html </para>
-		///</summary>
-		///<param name="index">A comma-separated list of index names to filter aliases</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesExistsAlias<T>(string index, Func<AliasExistsRequestParameters, AliasExistsRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a HEAD on /{index}/_alias
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html </para>
-		///</summary>
-		///<param name="index">A comma-separated list of index names to filter aliases</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesExistsAliasAsync<T>(string index, Func<AliasExistsRequestParameters, AliasExistsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
 		///<summary>Represents a HEAD on /_template/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2740,7 +2624,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html </para>
 		///</summary>
-		///<param name="name">The name of the template</param>
+		///<param name="name">The comma separated names of the index templates</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesExistsTemplateForAll<T>(string name, Func<IndexTemplateExistsRequestParameters, IndexTemplateExistsRequestParameters> requestParameters = null) where T : class;
 		
@@ -2753,7 +2637,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html </para>
 		///</summary>
-		///<param name="name">The name of the template</param>
+		///<param name="name">The comma separated names of the index templates</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesExistsTemplateForAllAsync<T>(string name, Func<IndexTemplateExistsRequestParameters, IndexTemplateExistsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
@@ -5029,168 +4913,6 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MgetAsync<T>(string index, string type, PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
-		///<summary>Represents a GET on /_mpercolate
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> MpercolateGet<T>(Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /_mpercolate
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
-		///<summary>Represents a GET on /{index}/_mpercolate
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being count percolated to use as default</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> MpercolateGet<T>(string index, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/_mpercolate
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being count percolated to use as default</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(string index, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
-		///<summary>Represents a GET on /{index}/{type}/_mpercolate
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being count percolated to use as default</param>
-		///<param name="type">The type of the document being percolated to use as default.</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> MpercolateGet<T>(string index, string type, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/{type}/_mpercolate
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being count percolated to use as default</param>
-		///<param name="type">The type of the document being percolated to use as default.</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(string index, string type, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
-		///<summary>Represents a POST on /_mpercolate
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> Mpercolate<T>(PostData<object> body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /_mpercolate
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> MpercolateAsync<T>(PostData<object> body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
-		///<summary>Represents a POST on /{index}/_mpercolate
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being count percolated to use as default</param>
-		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> Mpercolate<T>(string index, PostData<object> body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/_mpercolate
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being count percolated to use as default</param>
-		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> MpercolateAsync<T>(string index, PostData<object> body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
-		///<summary>Represents a POST on /{index}/{type}/_mpercolate
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being count percolated to use as default</param>
-		///<param name="type">The type of the document being percolated to use as default.</param>
-		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> Mpercolate<T>(string index, string type, PostData<object> body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/{type}/_mpercolate
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being count percolated to use as default</param>
-		///<param name="type">The type of the document being percolated to use as default.</param>
-		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> MpercolateAsync<T>(string index, string type, PostData<object> body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
 		///<summary>Represents a GET on /_msearch
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5992,126 +5714,6 @@ namespace Elasticsearch.Net
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> NodesStatsAsync<T>(string node_id, string metric, string index_metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
-		///<summary>Represents a GET on /{index}/{type}/_percolate
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being percolated.</param>
-		///<param name="type">The type of the document being percolated.</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> PercolateGet<T>(string index, string type, Func<PercolateRequestParameters, PercolateRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/{type}/_percolate
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being percolated.</param>
-		///<param name="type">The type of the document being percolated.</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> PercolateGetAsync<T>(string index, string type, Func<PercolateRequestParameters, PercolateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
-		///<summary>Represents a GET on /{index}/{type}/{id}/_percolate
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being percolated.</param>
-		///<param name="type">The type of the document being percolated.</param>
-		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> PercolateGet<T>(string index, string type, string id, Func<PercolateRequestParameters, PercolateRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/{type}/{id}/_percolate
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being percolated.</param>
-		///<param name="type">The type of the document being percolated.</param>
-		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> PercolateGetAsync<T>(string index, string type, string id, Func<PercolateRequestParameters, PercolateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
-		///<summary>Represents a POST on /{index}/{type}/_percolate
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being percolated.</param>
-		///<param name="type">The type of the document being percolated.</param>
-		///<param name="body">The percolator request definition using the percolate DSL</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> Percolate<T>(string index, string type, PostData<object> body, Func<PercolateRequestParameters, PercolateRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/{type}/_percolate
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being percolated.</param>
-		///<param name="type">The type of the document being percolated.</param>
-		///<param name="body">The percolator request definition using the percolate DSL</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> PercolateAsync<T>(string index, string type, PostData<object> body, Func<PercolateRequestParameters, PercolateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
-		///<summary>Represents a POST on /{index}/{type}/{id}/_percolate
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being percolated.</param>
-		///<param name="type">The type of the document being percolated.</param>
-		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
-		///<param name="body">The percolator request definition using the percolate DSL</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> Percolate<T>(string index, string type, string id, PostData<object> body, Func<PercolateRequestParameters, PercolateRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/{type}/{id}/_percolate
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html </para>
-		///</summary>
-		///<param name="index">The index of the document being percolated.</param>
-		///<param name="type">The type of the document being percolated.</param>
-		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
-		///<param name="body">The percolator request definition using the percolate DSL</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> PercolateAsync<T>(string index, string type, string id, PostData<object> body, Func<PercolateRequestParameters, PercolateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a HEAD on /
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7320,110 +6922,6 @@ namespace Elasticsearch.Net
 		///<param name="repository">A repository name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SnapshotVerifyRepositoryAsync<T>(string repository, Func<VerifyRepositoryRequestParameters, VerifyRepositoryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
-		///<summary>Represents a POST on /_suggest
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html </para>
-		///</summary>
-		///<param name="body">The request definition</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> Suggest<T>(PostData<object> body, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /_suggest
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html </para>
-		///</summary>
-		///<param name="body">The request definition</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> SuggestAsync<T>(PostData<object> body, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
-		///<summary>Represents a POST on /{index}/_suggest
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html </para>
-		///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
-		///<param name="body">The request definition</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> Suggest<T>(string index, PostData<object> body, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/_suggest
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html </para>
-		///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
-		///<param name="body">The request definition</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> SuggestAsync<T>(string index, PostData<object> body, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
-		///<summary>Represents a GET on /_suggest
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html </para>
-		///</summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> SuggestGet<T>(Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /_suggest
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html </para>
-		///</summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> SuggestGetAsync<T>(Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
-		///<summary>Represents a GET on /{index}/_suggest
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html </para>
-		///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> SuggestGet<T>(string index, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/_suggest
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html </para>
-		///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> SuggestGetAsync<T>(string index, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a POST on /_tasks/_cancel
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
