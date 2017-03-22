@@ -48,14 +48,6 @@ namespace Nest
 		internal static DeleteByQueryRequestParameters _SuggestField<T>(this DeleteByQueryRequestParameters qs, Expression<Func<T, object>> suggest_field) where T : class =>
 			qs.AddQueryString("suggest_field", (Field)suggest_field);
 		
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		internal static ExistsSourceRequestParameters _SourceExclude<T>(this ExistsSourceRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_exclude) where T : class =>
-			qs.AddQueryString("_source_exclude", source_exclude.Select(e=>(Field)e));
-		
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		internal static ExistsSourceRequestParameters _SourceInclude<T>(this ExistsSourceRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_include) where T : class =>
-			qs.AddQueryString("_source_include", source_include.Select(e=>(Field)e));
-		
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		internal static ExplainRequestParameters _StoredFields<T>(this ExplainRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  stored_fields) where T : class =>
 			qs.AddQueryString("stored_fields", stored_fields.Select(e=>(Field)e));

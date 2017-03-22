@@ -39,6 +39,7 @@
       <Paket>True</Paket>
     </Content>
     <Content Include="RestSpecification\Core\root.html" />
+    <Content Include="RestSpecification\Core\_common.json" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

@@ -955,30 +955,6 @@ namespace Nest
 			throw InvalidDispatch("Exists", p, new [] { HEAD }, "/{index}/{type}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> ExistsSourceDispatch<T>(IRequest<ExistsSourceRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case HEAD:
-					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.ExistsSource<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("ExistsSource", p, new [] { HEAD }, "/{index}/{type}/{id}/_source");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> ExistsSourceDispatchAsync<T>(IRequest<ExistsSourceRequestParameters> p , CancellationToken cancellationToken) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case HEAD:
-					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.ExistsSourceAsync<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,u => p.RequestParameters,cancellationToken);
-					break;
-
-			}
-			throw InvalidDispatch("ExistsSource", p, new [] { HEAD }, "/{index}/{type}/{id}/_source");
-		}
-		
 		internal ElasticsearchResponse<T> ExplainDispatch<T>(IRequest<ExplainRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
