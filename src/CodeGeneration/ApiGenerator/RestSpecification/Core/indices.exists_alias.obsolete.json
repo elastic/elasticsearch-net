@@ -1,0 +1,14 @@
+{
+  "indices.exists_alias": {
+    "_description_": "this file is NEST specific and lists removed parameters that should be obsoleted and not removed in the client in a minor release",
+    "url": {
+      "params": {
+        "source": {
+          "type": "string",
+          "description": "Specify source on the query string",
+          "obsolete": "source should not have been generated for this HEAD request"
+        }
+      }
+    }
+  }
+}

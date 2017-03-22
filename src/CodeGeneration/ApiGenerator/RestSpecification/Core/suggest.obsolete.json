@@ -1,0 +1,8 @@
+{
+  "suggest": {
+    "_description_": "this file is NEST specific and lists obseleted overrides",
+    "removedMethods": {
+      "GET" : "5.2"
+    }
+  }
+}

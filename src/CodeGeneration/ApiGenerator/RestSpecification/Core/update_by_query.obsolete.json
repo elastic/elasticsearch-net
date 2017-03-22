@@ -1,0 +1,56 @@
+{
+  "update_by_query": {
+    "_description_": "this file is NEST specific and lists removed parameters that should be obsoleted and not removed in the client in a minor release",
+    "url": {
+      "params": {
+        "explain": {
+          "type" : "boolean",
+          "description" : "Specify whether to return detailed information about score computation as part of a hit",
+          "obsolete" : "Bad client mapping, never available on this endpoint"
+        },
+        "stored_fields": {
+          "type" : "list",
+          "description" : "A comma-separated list of stored fields to return as part of a hit",
+          "obsolete" : "Bad client mapping, never available on this endpoint"
+        },
+        "docvalue_fields": {
+          "type" : "list",
+          "description" : "A comma-separated list of fields to return as the docvalue representation of a field for each hit",
+          "obsolete" : "Bad client mapping, never available on this endpoint"
+        },
+        "lowercase_expanded_terms": {
+          "type" : "boolean",
+          "description" : "Specify whether query terms should be lowercased",
+          "obsolete" : "removed in Elasticsearch 5.1.1"
+        },
+        "suggest_field": {
+          "type" : "string",
+          "description" : "Specify which field to use for suggestions",
+          "obsolete" : "Bad client mapping, never available on this endpoint"
+        },
+        "suggest_mode": {
+          "type" : "enum",
+          "options" : ["missing", "popular", "always"],
+          "default" : "missing",
+          "description" : "Specify suggest mode",
+          "obsolete" : "Bad client mapping, never available on this endpoint"
+        },
+        "suggest_size": {
+          "type" : "number",
+          "description" : "How many suggestions to return in response",
+          "obsolete" : "Bad client mapping, never available on this endpoint"
+        },
+        "suggest_text": {
+          "type" : "string",
+          "description" : "The source text for which the suggestions should be returned",
+          "obsolete" : "Bad client mapping, never available on this endpoint"
+        },
+        "track_scores": {
+          "type" : "boolean",
+          "description": "Whether to calculate and return scores even if they are not used for sorting",
+          "obsolete" : "Bad client mapping, never available on this endpoint"
+        }
+      }
+    }
+  }
+}

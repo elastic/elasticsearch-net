@@ -1,6 +1,6 @@
 {
   "cat.master": {
-    "documentation": "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html",
+    "documentation": "https://www.elastic.co/guide/en/elasticsearch/reference/5.x/cat-master.html",
     "methods": ["GET"],
     "url": {
       "path": "/_cat/master",
@@ -28,6 +28,10 @@
           "type": "boolean",
           "description": "Return help information",
           "default": false
+        },
+        "s": {
+          "type": "list",
+          "description" : "Comma-separated list of column names or column aliases to sort by"
         },
         "v": {
           "type": "boolean",

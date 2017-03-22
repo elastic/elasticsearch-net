@@ -1,6 +1,6 @@
 {
   "cat.health": {
-    "documentation": "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html",
+    "documentation": "https://www.elastic.co/guide/en/elasticsearch/reference/5.x/cat-health.html",
     "methods": ["GET"],
     "url": {
       "path": "/_cat/health",
@@ -28,6 +28,10 @@
           "type": "boolean",
           "description": "Return help information",
           "default": false
+        },
+        "s": {
+          "type": "list",
+          "description" : "Comma-separated list of column names or column aliases to sort by"
         },
         "ts": {
           "type": "boolean",

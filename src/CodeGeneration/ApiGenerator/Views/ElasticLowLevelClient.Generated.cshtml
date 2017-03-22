@@ -41,6 +41,8 @@ namespace Elasticsearch.Net
 			}
 			bool isAsync = method.ReturnType.StartsWith("Task<");
 			string requestMethod = isAsync ? "DoRequestAsync" : "DoRequest";
+			if (!string.IsNullOrEmpty(method.ObsoleteMethodVersion))
+			{<text>		[Obsolete("Scheduled to be removed in 6.0, @method.ObsoleteMethodVersion removed this method from the rest specification")]</text>}
 		<text>///<summary>Represents a @method.HttpMethod on @method.Path
 		///<para></para>Returns: @Raw(method.ReturnDescription)
 	    ///<para>See also: @method.Documentation </para>

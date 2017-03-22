@@ -1,0 +1,14 @@
+{
+  "cat.thread_pool": {
+    "_description_": "this file is NEST specific and lists removed parameters that should be obsoleted and not removed in the client in a minor release",
+    "url": {
+      "params": {
+        "thread_pool_patterns": {
+          "type": "list",
+          "description": "A comma-separated list of regular-expressions to filter the thread pools in the output",
+          "obsolete" : "Use the constructor taking thread_pool_patterns specifying this on the querystring never worked"
+        }
+      }
+    }
+  }
+}
