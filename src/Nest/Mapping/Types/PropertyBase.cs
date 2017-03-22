@@ -36,11 +36,12 @@ namespace Nest
 		{
 			Type = typeName;
 		}
+
 #pragma warning disable 618
 		protected PropertyBase(FieldType type) : this(type.GetStringValue()) { }
 #pragma warning restore 618
 
-		protected string DebugDisplay => $"Type: {Type.DebugDisplay}, Name: {Name.DebugDisplay} ";
+		protected string DebugDisplay => $"Type: {Type?.DebugDisplay}, Name: {Name?.DebugDisplay} ";
 
 		public PropertyName Name { get; set; }
 		public virtual TypeName Type { get; set; }
