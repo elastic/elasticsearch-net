@@ -1210,6 +1210,7 @@
     <Compile Include="Search\Explain\Explanation.cs" />
     <Compile Include="Search\Explain\ExplanationDetail.cs" />
     <Compile Include="Search\FieldStats\ElasticClient-FieldStats.cs" />
+    <Compile Include="Search\FieldStats\FieldMinMaxValueJsonConverter.cs" />
     <Compile Include="Search\FieldStats\FieldStatsRequest.cs" />
     <Compile Include="Search\FieldStats\FieldStatsResponse.cs" />
     <Compile Include="Search\FieldStats\IndexConstraint.cs" />

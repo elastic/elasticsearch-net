@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -76,30 +75,6 @@ namespace Nest
 
 		[JsonProperty("max_value_as_string")]
 		public string MaxValueAsString { get; internal set; }
-
-	}
-
-
-	public class FieldMinMaxValueJsonConverter : JsonConverter
-	{
-		public override bool CanConvert(Type objectType) => true;
-		public override bool CanWrite => false;
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
-
-		public override bool CanRead => true;
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType == JsonToken.StartObject || reader.TokenType == JsonToken.StartArray)
-			{
-				var depth = reader.Depth;
-				do
-				{
-					reader.Read();
-				} while (reader.Depth >= depth && reader.TokenType != JsonToken.EndObject);
-				return null;
-			}
-			return reader.Value.ToString();
-		}
 
 	}
 }
