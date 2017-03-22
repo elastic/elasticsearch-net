@@ -698,6 +698,51 @@ var expected = new
 Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 ----
 
+[source,csharp]
+----
+public class ParentWithStringId : Parent
+{
+    public new string Id { get; set; }
+}
+----
+
+[source,csharp]
+----
+var descriptor = new CreateIndexDescriptor("myindex")
+    .Mappings(ms => ms
+        .Map<ParentWithStringId>(m => m
+            .AutoMap()
+        )
+    );
+
+var expected = new
+{
+    mappings = new
+    {
+        parent = new
+        {
+            properties = new
+            {
+                id = new
+                {
+                    type = "string",
+                }
+            }
+        }
+    }
+};
+
+var settings = WithConnectionSettings(s => s
+    .InferMappingFor<ParentWithStringId>(m => m
+        .TypeName("parent")
+        .Ignore(p => p.Description)
+        .Ignore(p => p.IgnoreMe)
+    )
+);
+
+settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+----
+
 [[ignoring-properties]]
 [float]
 == Ignoring Properties

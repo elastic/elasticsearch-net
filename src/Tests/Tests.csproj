@@ -250,8 +250,11 @@
     <Compile Include="Framework\Benchmarks\BenchmarkTest.cs" />
     <Compile Include="Framework\Configuration\Versions\ElasticsearchVersion.cs" />
     <Compile Include="Framework\DocumentationTests\IntegrationDocumentationTestBase.cs" />
+    <Compile Include="Framework\EndpointTests\ApiIntegrationAgainstNewIndexTestBase.cs" />
     <Compile Include="Framework\EndpointTests\ApiIntegrationTestBase.cs" />
     <Compile Include="Framework\EndpointTests\ApiTestBase.cs" />
+    <Compile Include="Framework\EndpointTests\CanConnectTestBase.cs" />
+    <Compile Include="Framework\EndpointTests\ConnectionErrorTestBase.cs" />
     <Compile Include="Framework\EndpointTests\CrudTestBase.cs" />
     <Compile Include="Framework\EndpointTests\TestState\AsyncLazy.cs" />
     <Compile Include="Framework\EndpointTests\TestState\CallUniqueValues.cs" />
@@ -512,6 +515,7 @@
     <Compile Include="Framework\VirtualClustering\Audit\Audits.cs" />
     <Compile Include="Framework\VirtualClustering\MockResponses\SniffingResponse.cs" />
     <Compile Include="Framework\VirtualClustering\Providers\TestableDateTimeProvider.cs" />
+    <Compile Include="Framework\XUnitPlumbing\IntegrationOnly.cs" />
     <Compile Include="Framework\XUnitPlumbing\IntegrationTestDiscoverer.cs" />
     <Compile Include="Framework\XUnitPlumbing\NestTestDiscoverer.cs" />
     <Compile Include="Framework\XUnitPlumbing\RequiresPluginAttribute.cs" />
