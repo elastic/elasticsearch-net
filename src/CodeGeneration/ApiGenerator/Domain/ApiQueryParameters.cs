@@ -10,6 +10,7 @@ namespace ApiGenerator.Domain
 		public string DeprecatedInFavorOf { get; set; }
 		public string Type { get; set; }
 		public string Description { get; set; }
+		public string Obsolete { get; set; }
 		public IEnumerable<string> Options { get; set; }
 
 		public ApiQueryParameters()

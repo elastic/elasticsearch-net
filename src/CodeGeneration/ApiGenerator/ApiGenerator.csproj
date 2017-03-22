@@ -39,7 +39,6 @@
       <Paket>True</Paket>
     </Content>
     <Content Include="RestSpecification\Core\root.html" />
-    <Content Include="RestSpecification\DeleteByQuery\root.html" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -104,6 +103,7 @@
     <None Include="RestSpecification\Core\cat.tasks.json" />
     <None Include="RestSpecification\Core\cat.templates.json" />
     <None Include="RestSpecification\Core\cat.thread_pool.json" />
+    <None Include="RestSpecification\Core\cat.thread_pool.obsolete.json" />
     <None Include="RestSpecification\Core\clear_scroll.json" />
     <None Include="RestSpecification\Core\cluster.allocation_explain.json" />
     <None Include="RestSpecification\Core\cluster.get_settings.json" />
@@ -114,14 +114,17 @@
     <None Include="RestSpecification\Core\cluster.state.json" />
     <None Include="RestSpecification\Core\cluster.stats.json" />
     <None Include="RestSpecification\Core\count.json" />
+    <None Include="RestSpecification\Core\count.obsolete.json" />
     <None Include="RestSpecification\Core\count_percolate.json" />
     <None Include="RestSpecification\Core\create.json" />
     <None Include="RestSpecification\Core\delete.json" />
     <None Include="RestSpecification\Core\delete_by_query.json" />
+    <None Include="RestSpecification\Core\delete_by_query.obsolete.json" />
     <None Include="RestSpecification\Core\delete_script.json" />
     <None Include="RestSpecification\Core\delete_template.json" />
     <None Include="RestSpecification\Core\exists.json" />
     <None Include="RestSpecification\Core\explain.json" />
+    <None Include="RestSpecification\Core\explain.obsolete.json" />
     <None Include="RestSpecification\Core\field_stats.json" />
     <None Include="RestSpecification\Core\get.json" />
     <None Include="RestSpecification\Core\get_script.json" />
@@ -137,6 +140,7 @@
     <None Include="RestSpecification\Core\indices.delete_template.json" />
     <None Include="RestSpecification\Core\indices.exists.json" />
     <None Include="RestSpecification\Core\indices.exists_alias.json" />
+    <None Include="RestSpecification\Core\indices.exists_alias.obsolete.json" />
     <None Include="RestSpecification\Core\indices.exists_template.json" />
     <None Include="RestSpecification\Core\indices.exists_type.json" />
     <None Include="RestSpecification\Core\indices.flush.json" />
@@ -164,6 +168,7 @@
     <None Include="RestSpecification\Core\indices.update_aliases.json" />
     <None Include="RestSpecification\Core\indices.upgrade.json" />
     <None Include="RestSpecification\Core\indices.validate_query.json" />
+    <None Include="RestSpecification\Core\indices.validate_query.obsolete.json" />
     <None Include="RestSpecification\Core\info.json" />
     <None Include="RestSpecification\Core\ingest.delete_pipeline.json" />
     <None Include="RestSpecification\Core\ingest.get_pipeline.json" />
@@ -186,6 +191,7 @@
     <None Include="RestSpecification\Core\render_search_template.json" />
     <None Include="RestSpecification\Core\scroll.json" />
     <None Include="RestSpecification\Core\search.json" />
+    <None Include="RestSpecification\Core\search.obsolete.json" />
     <None Include="RestSpecification\Core\search_shards.json" />
     <None Include="RestSpecification\Core\search_template.json" />
     <None Include="RestSpecification\Core\snapshot.create.json" />
@@ -198,13 +204,14 @@
     <None Include="RestSpecification\Core\snapshot.status.json" />
     <None Include="RestSpecification\Core\snapshot.verify_repository.json" />
     <None Include="RestSpecification\Core\suggest.json" />
+    <None Include="RestSpecification\Core\suggest.obsolete.json" />
     <None Include="RestSpecification\Core\tasks.cancel.json" />
     <None Include="RestSpecification\Core\tasks.get.json" />
     <None Include="RestSpecification\Core\tasks.list.json" />
     <None Include="RestSpecification\Core\termvectors.json" />
     <None Include="RestSpecification\Core\update.json" />
     <None Include="RestSpecification\Core\update_by_query.json" />
-    <None Include="RestSpecification\DeleteByQuery\delete_by_query.json" />
+    <None Include="RestSpecification\Core\update_by_query.obsolete.json" />
     <None Include="RestSpecification\XPack\Graph\xpack.graph.explore.json" />
     <None Include="RestSpecification\XPack\License\xpack.license.delete.json" />
     <None Include="RestSpecification\XPack\License\xpack.license.get.json" />

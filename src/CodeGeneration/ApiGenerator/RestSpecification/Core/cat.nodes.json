@@ -1,6 +1,6 @@
 {
   "cat.nodes": {
-    "documentation": "http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html",
+    "documentation": "https://www.elastic.co/guide/en/elasticsearch/reference/5.x/cat-nodes.html",
     "methods": ["GET"],
     "url": {
       "path": "/_cat/nodes",
@@ -11,6 +11,10 @@
         "format": {
           "type" : "string",
           "description" : "a short version of the Accept header, e.g. json, yaml"
+        },
+        "full_id": {
+          "type" : "boolean",
+          "description" : "Return the full node ID instead of the shortened version (default: false)"
         },
         "local": {
           "type" : "boolean",
@@ -28,6 +32,10 @@
           "type": "boolean",
           "description": "Return help information",
           "default": false
+        },
+        "s": {
+          "type": "list",
+          "description" : "Comma-separated list of column names or column aliases to sort by"
         },
         "v": {
           "type": "boolean",

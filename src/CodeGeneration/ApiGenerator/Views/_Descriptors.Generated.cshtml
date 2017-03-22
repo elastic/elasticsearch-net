@@ -57,10 +57,8 @@ namespace Nest
 		var fieldMethod = (mml.Contains("fields") || mml.Contains("sourceinclude") || mml.Contains("sourceexclude") ) && t.Contains("string");
 		<text>
 		///<summary>@kv.Value.Description</summary>
-		@if (!string.IsNullOrWhiteSpace(kv.Value.DeprecatedInFavorOf))
-		{<text>
-		[Obsolete("Scheduled to be removed in 2.0, use @kv.Value.DeprecatedInFavorOf instead")]
-		</text>}
+		@if (!string.IsNullOrWhiteSpace(kv.Value.Obsolete))
+		{<text>		[Obsolete("Scheduled to be removed in 6.0, @kv.Value.Obsolete")]</text>}
 		public @Raw(type) @(mm)(@t @kv.Key@tSuffix) => AssignParam(p=>p.@(m)(@kv.Key@tMethod));</text>
 		if (fieldMethod)
 		{

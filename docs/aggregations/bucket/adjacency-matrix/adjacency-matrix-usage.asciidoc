@@ -1,0 +1,107 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/5.x/src/Tests/Aggregations/Bucket/AdjacencyMatrix/AdjacencyMatrixUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[adjacency-matrix-usage]]
+== Adjacency Matrix Usage
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Size =  0,
+    Aggregations = new AdjacencyMatrixAggregation("interactions")
+    {
+        Filters = new NamedFiltersContainer
+        {
+            { "grpA", new TermQuery { Field = "state", Value = StateOfBeing.BellyUp } },
+            { "grpB", new TermQuery { Field = "state", Value = StateOfBeing.Stable } },
+            { "grpC", new TermQuery { Field = "state", Value = StateOfBeing.VeryActive } },
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "interactions": {
+      "adjacency_matrix": {
+        "filters": {
+          "grpA": {
+            "term": {
+              "state": {
+                "value": "BellyUp"
+              }
+            }
+          },
+          "grpB": {
+            "term": {
+              "state": {
+                "value": "Stable"
+              }
+            }
+          },
+          "grpC": {
+            "term": {
+              "state": {
+                "value": "VeryActive"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Size(0)
+.Aggregations(aggs => aggs
+    .AdjacencyMatrix("interactions", am => am
+        .Filters(fs => fs
+            .Filter("grpA", f => f.Term(p => p.State, StateOfBeing.BellyUp))
+            .Filter("grpB", f => f.Term(p => p.State, StateOfBeing.Stable))
+            .Filter("grpC", f => f.Term(p => p.State, StateOfBeing.VeryActive))
+        )
+    )
+)
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+var interactions = response.Aggs.AdjacencyMatrix("interactions");
+interactions.Should().NotBeNull();
+var buckets = interactions.Buckets;
+buckets.Should().NotBeNullOrEmpty();
+
+foreach (var bucket in buckets)
+{
+    bucket.Key.Should().NotBeNullOrEmpty();
+    bucket.DocCount.Should().BeGreaterThan(0);
+}
+----
+
