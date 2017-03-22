@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using Purify;
 
 namespace Elasticsearch.Net
@@ -44,6 +46,8 @@ namespace Elasticsearch.Net
 		public Func<IApiCallDetails, Stream, object> CustomConverter { get; private set; }
 		public IConnectionConfigurationValues ConnectionSettings { get; }
 		public IMemoryStreamFactory MemoryStreamFactory { get; }
+
+		public X509CertificateCollection ClientCertificates { get; set; }
 
 		public RequestData(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IRequestParameters local, IMemoryStreamFactory memoryStreamFactory)
 			: this(method, path, data, global, local?.RequestConfiguration, memoryStreamFactory)
@@ -92,6 +96,7 @@ namespace Elasticsearch.Net
 			this.DisableAutomaticProxyDetection = global.DisableAutomaticProxyDetection;
 			this.BasicAuthorizationCredentials = local?.BasicAuthenticationCredentials ?? global.BasicAuthenticationCredentials;
 			this.AllowedStatusCodes = local?.AllowedStatusCodes ?? Enumerable.Empty<int>();
+			this.ClientCertificates = local?.ClientCertificates ?? global.ClientCertificates;
 		}
 
 		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request = null)

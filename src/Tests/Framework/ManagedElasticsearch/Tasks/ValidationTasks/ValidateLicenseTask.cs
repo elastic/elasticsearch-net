@@ -1,4 +1,5 @@
 using System;
+using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.Configuration;
 using Tests.Framework.Integration;
@@ -11,6 +12,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.ValidationTasks
 		public override void Validate(IElasticClient client, NodeConfiguration configuration)
 		{
 			if (!configuration.XPackEnabled) return;
+
 			var license = client.GetLicense();
 			if (license.IsValid && license.License.Status == LicenseStatus.Active) return;
 
@@ -22,7 +24,10 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.ValidationTasks
 #endif
 			if (!string.IsNullOrWhiteSpace(licenseFile))
 			{
-				var putLicense = client.PostLicense(new PostLicenseRequest {License = License.LoadFromDisk(licenseFile)});
+				var putLicense = client.PostLicense(new PostLicenseRequest
+				{
+					License = License.LoadFromDisk(licenseFile)
+				});
 				if (!putLicense.IsValid)
 					throw new Exception("Server has invalid license and the ES_LICENSE_FILE failed to register\r\n" + putLicense.DebugInformation);
 
