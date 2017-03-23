@@ -25,9 +25,6 @@ namespace Tests.CodeStandards
 				typeof(ITypeMapping).GetProperty(nameof(ITypeMapping.Meta)),
 				typeof(TypeMapping).GetProperty(nameof(TypeMapping.DynamicDateFormats)),
 				typeof(TypeMapping).GetProperty(nameof(TypeMapping.Meta)),
-#pragma warning disable 618
-				typeof(IMultiPercolateResponse).GetProperty(nameof(IMultiPercolateResponse.Responses)),
-#pragma warning restore 618
 				typeof(IBulkResponse).GetProperty(nameof(IBulkResponse.ItemsWithErrors)),
 				typeof(IMultiSearchResponse).GetProperty(nameof(IMultiSearchResponse.AllResponses)),
 			};

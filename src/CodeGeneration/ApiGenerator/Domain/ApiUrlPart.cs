@@ -54,9 +54,9 @@ namespace ApiGenerator.Domain
 					case "usernames":
 					case "realm":
 					case "realms":
-					case "thread_pool_patterns":
 					case "alias":
 					case "name":
+					case "thread_pool_patterns":
 						return this.Type == "string" ? "Name" : "Names";
 					case "task_id": return "TaskId";
 					default: return this.Type + "_";

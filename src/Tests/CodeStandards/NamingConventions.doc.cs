@@ -98,6 +98,9 @@ namespace Tests.CodeStandards
 		{
 			var exceptions = new[] // <1> _Exceptions to the rule_
 			{
+				//TODO RENAME TO SourceExistsRequest
+				//ALSO add unit tests that we have no requests starting with Exists
+				typeof(ExistsSourceRequest),
 				typeof(DocumentExistsRequest),
 				typeof(DocumentExistsRequest<>),
 				typeof(AliasExistsRequest),

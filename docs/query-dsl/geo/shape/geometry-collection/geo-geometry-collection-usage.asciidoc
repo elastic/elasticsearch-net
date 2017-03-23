@@ -50,12 +50,12 @@ new GeoShapeGeometryCollectionQuery
     {
         Geometries = new IGeoShape[]
         {
-            new PointGeoShape(this._pointCoordinates), 
-            new MultiPointGeoShape(this._multiPointCoordinates), 
+            new PointGeoShape(this._pointCoordinates),
+            new MultiPointGeoShape(this._multiPointCoordinates),
             new LineStringGeoShape(this._lineStringCoordinates),
-            new MultiLineStringGeoShape(_multiLineStringCoordinates), 
-            new PolygonGeoShape(this._polygonCoordinates), 
-            new MultiPolygonGeoShape(this._multiPolygonCoordinates), 
+            new MultiLineStringGeoShape(_multiLineStringCoordinates),
+            new PolygonGeoShape(this._polygonCoordinates),
+            new MultiPolygonGeoShape(this._multiPolygonCoordinates),
         }
     },
     Relation = GeoShapeRelation.Intersects,

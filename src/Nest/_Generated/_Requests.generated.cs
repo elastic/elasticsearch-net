@@ -116,11 +116,6 @@ namespace Nest
 		public AliasExistsRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name)){}
 		
 
-		/// <summary>/{index}/_alias</summary>
-///<param name="index">Optional, accepts null</param>
-		public AliasExistsRequest(Indices index) : base(r=>r.Optional("index", index)){}
-		
-
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -1565,6 +1560,9 @@ namespace Nest
 		
 		///<summary>Clear the recycler cache</summary>
 		public bool Recycler { get { return Q<bool>("recycler"); } set { Q("recycler", value); } }
+		
+		///<summary>Clear request cache</summary>
+		public bool RequestCache { get { return Q<bool>("request_cache"); } set { Q("request_cache", value); } }
 		
 		///<summary>Clear request cache</summary>
 		public bool Request { get { return Q<bool>("request"); } set { Q("request", value); } }
@@ -3412,6 +3410,76 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IExistsSourceRequest : IRequest<ExistsSourceRequestParameters> 
+	{
+		Id Id { get; }
+		IndexName Index { get; }
+		TypeName Type { get; }
+	 } 
+	///<summary>Request parameters for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
+	public partial class ExistsSourceRequest  : PlainRequestBase<ExistsSourceRequestParameters>, IExistsSourceRequest
+	{
+		protected IExistsSourceRequest Self => this;
+		Id IExistsSourceRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IExistsSourceRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IExistsSourceRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			/// <summary>/{index}/{type}/{id}/_source</summary>
+///<param name="index">this parameter is required</param>		
+///<param name="type">this parameter is required</param>		
+///<param name="id">this parameter is required</param>
+		public ExistsSourceRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+		
+
+			///<summary>The ID of the parent document</summary>
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
+		
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
+		
+		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
+		
+		///<summary>Refresh the shard containing the document before performing the operation</summary>
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
+		
+		///<summary>Specific routing value</summary>
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q("_source_include", value); } }
+		
+		///<summary>Explicit version number for concurrency control</summary>
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
+		
+		///<summary>Specific version type</summary>
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IExplainRequest<TDocument> : IRequest<ExplainRequestParameters> 
 	{
 		Id Id { get; }
@@ -4616,11 +4684,23 @@ namespace Nest
 		public IndexExistsRequest(Indices index) : base(r=>r.Required("index", index)){}
 		
 
-			///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
+		
+		///<summary>Ignore unavailable indexes (default: false)</summary>
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
+		
+		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
+		
+		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
+		///<summary>Return settings in flat format (default: false)</summary>
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
+		
+		///<summary>Whether to return all default setting for each of the indices.</summary>
+		public bool IncludeDefaults { get { return Q<bool>("include_defaults"); } set { Q("include_defaults", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
@@ -4725,19 +4805,22 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndexTemplateExistsRequest : IRequest<IndexTemplateExistsRequestParameters> 
 	{
-		Name Name { get; }
+		Names Name { get; }
 	 } 
 	///<summary>Request parameters for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class IndexTemplateExistsRequest  : PlainRequestBase<IndexTemplateExistsRequestParameters>, IIndexTemplateExistsRequest
 	{
 		protected IIndexTemplateExistsRequest Self => this;
-		Name IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Name>("name");
+		Names IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_template/{name}</summary>
 ///<param name="name">this parameter is required</param>
-		public IndexTemplateExistsRequest(Name name) : base(r=>r.Required("name", name)){}
+		public IndexTemplateExistsRequest(Names name) : base(r=>r.Required("name", name)){}
 		
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+			///<summary>Return settings in flat format (default: false)</summary>
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -4974,59 +5057,6 @@ namespace Nest
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q("_source_include", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IMultiPercolateRequest : IRequest<MultiPercolateRequestParameters> 
-	{
-		IndexName Index { get; }
-		TypeName Type { get; }
-	 } 
-	///<summary>Request parameters for Mpercolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
-	public partial class MultiPercolateRequest  : PlainRequestBase<MultiPercolateRequestParameters>, IMultiPercolateRequest
-	{
-		protected IMultiPercolateRequest Self => this;
-		IndexName IMultiPercolateRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IMultiPercolateRequest.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/_mpercolate</summary>
-		public MultiPercolateRequest() : base(){}
-		
-
-		/// <summary>/{index}/_mpercolate</summary>
-///<param name="index">Optional, accepts null</param>
-		public MultiPercolateRequest(IndexName index) : base(r=>r.Optional("index", index)){}
-		
-
-		/// <summary>/{index}/{type}/_mpercolate</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>
-		public MultiPercolateRequest(IndexName index, TypeName type) : base(r=>r.Optional("index", index).Optional("type", type)){}
-		
-
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
@@ -5454,169 +5484,6 @@ namespace Nest
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPercolateCountRequest<TDocument> : IRequest<PercolateCountRequestParameters> 
-	{
-		IndexName Index { get; }
-		TypeName Type { get; }
-		Id Id { get; }
-	 } 
-	///<summary>Request parameters for CountPercolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
-	public partial class PercolateCountRequest<TDocument>  : PlainRequestBase<PercolateCountRequestParameters>, IPercolateCountRequest<TDocument>
-	{
-		protected IPercolateCountRequest<TDocument> Self => this;
-		IndexName IPercolateCountRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IPercolateCountRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
-		Id IPercolateCountRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/{index}/{type}/_percolate/count</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>
-		public PercolateCountRequest(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)){}
-		
-
-		/// <summary>/{index}/{type}/{id}/_percolate/count</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>		
-///<param name="id">Optional, accepts null</param>
-		public PercolateCountRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Optional("id", id)){}
-		
-
-		/// <summary>/{index}/{type}/_percolate/count</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public PercolateCountRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
-		partial void DocumentFromPath(TDocument document);
-
-			///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>The index to count percolate the document into. Defaults to index.</summary>
-		public string PercolateIndex { get { return Q<string>("percolate_index"); } set { Q("percolate_index", value); } }
-		
-		///<summary>The type to count percolate document into. Defaults to type.</summary>
-		public string PercolateType { get { return Q<string>("percolate_type"); } set { Q("percolate_type", value); } }
-		
-		///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
-		
-		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPercolateRequest<TDocument> : IRequest<PercolateRequestParameters> 
-	{
-		IndexName Index { get; }
-		TypeName Type { get; }
-		Id Id { get; }
-	 } 
-	///<summary>Request parameters for Percolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
-	public partial class PercolateRequest<TDocument>  : PlainRequestBase<PercolateRequestParameters>, IPercolateRequest<TDocument>
-	{
-		protected IPercolateRequest<TDocument> Self => this;
-		IndexName IPercolateRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IPercolateRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
-		Id IPercolateRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/{index}/{type}/_percolate</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>
-		public PercolateRequest(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)){}
-		
-
-		/// <summary>/{index}/{type}/{id}/_percolate</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>		
-///<param name="id">Optional, accepts null</param>
-		public PercolateRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Optional("id", id)){}
-		
-
-		/// <summary>/{index}/{type}/_percolate</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public PercolateRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
-		partial void DocumentFromPath(TDocument document);
-
-			///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>The index to percolate the document into. Defaults to index.</summary>
-		public string PercolateIndex { get { return Q<string>("percolate_index"); } set { Q("percolate_index", value); } }
-		
-		///<summary>The type to percolate document into. Defaults to type.</summary>
-		public string PercolateType { get { return Q<string>("percolate_type"); } set { Q("percolate_type", value); } }
-		
-		///<summary>The routing value to use when percolating the existing document.</summary>
-		public string PercolateRouting { get { return Q<string>("percolate_routing"); } set { Q("percolate_routing", value); } }
-		
-		///<summary>Which shard to prefer when executing the percolate request.</summary>
-		public string PercolatePreference { get { return Q<string>("percolate_preference"); } set { Q("percolate_preference", value); } }
-		
-		///<summary>Return an array of matching query IDs instead of objects</summary>
-		public PercolateFormat PercolateFormat { get { return Q<PercolateFormat>("percolate_format"); } set { Q("percolate_format", value); } }
-		
-		///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
-		
-		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
@@ -6559,6 +6426,9 @@ namespace Nest
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public bool RequestCache { get { return Q<bool>("request_cache"); } set { Q("request_cache", value); } }
 		
+		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
+		public long BatchedReduceSize { get { return Q<long>("batched_reduce_size"); } set { Q("batched_reduce_size", value); } }
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
@@ -6652,6 +6522,9 @@ namespace Nest
 		
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public bool RequestCache { get { return Q<bool>("request_cache"); } set { Q("request_cache", value); } }
+		
+		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
+		public long BatchedReduceSize { get { return Q<long>("batched_reduce_size"); } set { Q("batched_reduce_size", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
@@ -7236,102 +7109,6 @@ namespace Nest
 	{
 		protected IStopWatcherRequest Self => this;
 				///<summary>Pretty format the returned JSON response.</summary>
-		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISuggestRequest : IRequest<SuggestRequestParameters> 
-	{
-		Indices Index { get; }
-	 } 
-	///<summary>Request parameters for Suggest <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html</pre></summary>
-	public partial class SuggestRequest<T>  : PlainRequestBase<SuggestRequestParameters>, ISuggestRequest
-	{
-		protected ISuggestRequest Self => this;
-		Indices ISuggestRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_suggest. Will infer the index from the generic type</summary>
-		public SuggestRequest() : this(typeof(T)){}
-		
-
-		/// <summary>/{index}/_suggest</summary>
-///<param name="index">Optional, accepts null</param>
-		public SuggestRequest(Indices index) : base(r=>r.Optional("index", index)){}
-		
-
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	///<summary>Request parameters for Suggest <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html</pre></summary>
-	public partial class SuggestRequest  : PlainRequestBase<SuggestRequestParameters>, ISuggestRequest
-	{
-		protected ISuggestRequest Self => this;
-		Indices ISuggestRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_suggest</summary>
-		public SuggestRequest() : base(){}
-		
-
-		/// <summary>/{index}/_suggest</summary>
-///<param name="index">Optional, accepts null</param>
-		public SuggestRequest(Indices index) : base(r=>r.Optional("index", index)){}
-		
-
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
 		///<summary>Return human readable values for statistics.</summary>

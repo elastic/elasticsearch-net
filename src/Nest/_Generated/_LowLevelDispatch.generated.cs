@@ -763,42 +763,6 @@ namespace Nest
 			throw InvalidDispatch("Count", p, new [] { POST, GET }, "/_count", "/{index}/_count", "/{index}/{type}/_count");
 		}
 		
-		internal ElasticsearchResponse<T> CountPercolateDispatch<T>(IRequest<PercolateCountRequestParameters> p , PostData<object> body) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.CountPercolateGet<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,u => p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.CountPercolateGet<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters);
-					break;
-
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.CountPercolate<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,u => p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.CountPercolate<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("CountPercolate", p, new [] { GET, POST }, "/{index}/{type}/_percolate/count", "/{index}/{type}/{id}/_percolate/count");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> CountPercolateDispatchAsync<T>(IRequest<PercolateCountRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.CountPercolateGetAsync<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,u => p.RequestParameters,cancellationToken);
-					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.CountPercolateGetAsync<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters,cancellationToken);
-					break;
-
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.CountPercolateAsync<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,u => p.RequestParameters,cancellationToken);
-					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.CountPercolateAsync<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters,cancellationToken);
-					break;
-
-			}
-			throw InvalidDispatch("CountPercolate", p, new [] { GET, POST }, "/{index}/{type}/_percolate/count", "/{index}/{type}/{id}/_percolate/count");
-		}
-		
 		internal ElasticsearchResponse<T> CreateDispatch<T>(IRequest<CreateRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
@@ -953,6 +917,30 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("Exists", p, new [] { HEAD }, "/{index}/{type}/{id}");
+		}
+		
+		internal ElasticsearchResponse<T> ExistsSourceDispatch<T>(IRequest<ExistsSourceRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case HEAD:
+					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.ExistsSource<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("ExistsSource", p, new [] { HEAD }, "/{index}/{type}/{id}/_source");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> ExistsSourceDispatchAsync<T>(IRequest<ExistsSourceRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case HEAD:
+					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.ExistsSourceAsync<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("ExistsSource", p, new [] { HEAD }, "/{index}/{type}/{id}/_source");
 		}
 		
 		internal ElasticsearchResponse<T> ExplainDispatch<T>(IRequest<ExplainRequestParameters> p , PostData<object> body) where T : class
@@ -1368,11 +1356,10 @@ namespace Nest
 				case HEAD:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Name)) return _lowLevel.IndicesExistsAlias<T>(p.RouteValues.Index,p.RouteValues.Name,u => p.RequestParameters);
 					if (AllSet(p.RouteValues.Name)) return _lowLevel.IndicesExistsAliasForAll<T>(p.RouteValues.Name,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesExistsAlias<T>(p.RouteValues.Index,u => p.RequestParameters);
 					break;
 
 			}
-			throw InvalidDispatch("IndicesExistsAlias", p, new [] { HEAD }, "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias");
+			throw InvalidDispatch("IndicesExistsAlias", p, new [] { HEAD }, "/_alias/{name}", "/{index}/_alias/{name}");
 		}
 		
 		internal Task<ElasticsearchResponse<T>> IndicesExistsAliasDispatchAsync<T>(IRequest<AliasExistsRequestParameters> p , CancellationToken cancellationToken) where T : class
@@ -1382,11 +1369,10 @@ namespace Nest
 				case HEAD:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Name)) return _lowLevel.IndicesExistsAliasAsync<T>(p.RouteValues.Index,p.RouteValues.Name,u => p.RequestParameters,cancellationToken);
 					if (AllSet(p.RouteValues.Name)) return _lowLevel.IndicesExistsAliasForAllAsync<T>(p.RouteValues.Name,u => p.RequestParameters,cancellationToken);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesExistsAliasAsync<T>(p.RouteValues.Index,u => p.RequestParameters,cancellationToken);
 					break;
 
 			}
-			throw InvalidDispatch("IndicesExistsAlias", p, new [] { HEAD }, "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias");
+			throw InvalidDispatch("IndicesExistsAlias", p, new [] { HEAD }, "/_alias/{name}", "/{index}/_alias/{name}");
 		}
 		
 		internal ElasticsearchResponse<T> IndicesExistsTemplateDispatch<T>(IRequest<IndexTemplateExistsRequestParameters> p ) where T : class
@@ -2295,42 +2281,6 @@ namespace Nest
 			throw InvalidDispatch("Mget", p, new [] { GET, POST }, "/_mget", "/{index}/_mget", "/{index}/{type}/_mget");
 		}
 		
-		internal ElasticsearchResponse<T> MpercolateDispatch<T>(IRequest<MultiPercolateRequestParameters> p , PostData<object> body) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.MpercolateGet<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.MpercolateGet<T>(p.RouteValues.Index,u => p.RequestParameters);
-					return _lowLevel.MpercolateGet<T>(u => p.RequestParameters);
-
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.Mpercolate<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.Mpercolate<T>(p.RouteValues.Index,body,u => p.RequestParameters);
-					return _lowLevel.Mpercolate<T>(body,u => p.RequestParameters);
-
-			}
-			throw InvalidDispatch("Mpercolate", p, new [] { GET, POST }, "/_mpercolate", "/{index}/_mpercolate", "/{index}/{type}/_mpercolate");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> MpercolateDispatchAsync<T>(IRequest<MultiPercolateRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.MpercolateGetAsync<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters,cancellationToken);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.MpercolateGetAsync<T>(p.RouteValues.Index,u => p.RequestParameters,cancellationToken);
-					return _lowLevel.MpercolateGetAsync<T>(u => p.RequestParameters,cancellationToken);
-
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.MpercolateAsync<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters,cancellationToken);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.MpercolateAsync<T>(p.RouteValues.Index,body,u => p.RequestParameters,cancellationToken);
-					return _lowLevel.MpercolateAsync<T>(body,u => p.RequestParameters,cancellationToken);
-
-			}
-			throw InvalidDispatch("Mpercolate", p, new [] { GET, POST }, "/_mpercolate", "/{index}/_mpercolate", "/{index}/{type}/_mpercolate");
-		}
-		
 		internal ElasticsearchResponse<T> MsearchDispatch<T>(IRequest<MultiSearchRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
@@ -2521,42 +2471,6 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("NodesStats", p, new [] { GET }, "/_nodes/stats", "/_nodes/{node_id}/stats", "/_nodes/stats/{metric}", "/_nodes/{node_id}/stats/{metric}", "/_nodes/stats/{metric}/{index_metric}", "/_nodes/{node_id}/stats/{metric}/{index_metric}");
-		}
-		
-		internal ElasticsearchResponse<T> PercolateDispatch<T>(IRequest<PercolateRequestParameters> p , PostData<object> body) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.PercolateGet<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,u => p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.PercolateGet<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters);
-					break;
-
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.Percolate<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,u => p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.Percolate<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("Percolate", p, new [] { GET, POST }, "/{index}/{type}/_percolate", "/{index}/{type}/{id}/_percolate");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> PercolateDispatchAsync<T>(IRequest<PercolateRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.PercolateGetAsync<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,u => p.RequestParameters,cancellationToken);
-					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.PercolateGetAsync<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters,cancellationToken);
-					break;
-
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Id)) return _lowLevel.PercolateAsync<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Id,body,u => p.RequestParameters,cancellationToken);
-					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.PercolateAsync<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters,cancellationToken);
-					break;
-
-			}
-			throw InvalidDispatch("Percolate", p, new [] { GET, POST }, "/{index}/{type}/_percolate", "/{index}/{type}/{id}/_percolate");
 		}
 		
 		internal ElasticsearchResponse<T> PingDispatch<T>(IRequest<PingRequestParameters> p ) where T : class
@@ -3091,38 +3005,6 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("SnapshotVerifyRepository", p, new [] { POST }, "/_snapshot/{repository}/_verify");
-		}
-		
-		internal ElasticsearchResponse<T> SuggestDispatch<T>(IRequest<SuggestRequestParameters> p , PostData<object> body) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.Suggest<T>(p.RouteValues.Index,body,u => p.RequestParameters);
-					return _lowLevel.Suggest<T>(body,u => p.RequestParameters);
-
-				case GET:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.SuggestGet<T>(p.RouteValues.Index,u => p.RequestParameters);
-					return _lowLevel.SuggestGet<T>(u => p.RequestParameters);
-
-			}
-			throw InvalidDispatch("Suggest", p, new [] { POST, GET }, "/_suggest", "/{index}/_suggest");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> SuggestDispatchAsync<T>(IRequest<SuggestRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.SuggestAsync<T>(p.RouteValues.Index,body,u => p.RequestParameters,cancellationToken);
-					return _lowLevel.SuggestAsync<T>(body,u => p.RequestParameters,cancellationToken);
-
-				case GET:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.SuggestGetAsync<T>(p.RouteValues.Index,u => p.RequestParameters,cancellationToken);
-					return _lowLevel.SuggestGetAsync<T>(u => p.RequestParameters,cancellationToken);
-
-			}
-			throw InvalidDispatch("Suggest", p, new [] { POST, GET }, "/_suggest", "/{index}/_suggest");
 		}
 		
 		internal ElasticsearchResponse<T> TasksCancelDispatch<T>(IRequest<CancelTasksRequestParameters> p ) where T : class

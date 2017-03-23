@@ -58,9 +58,9 @@ var descriptor = new CreateIndexDescriptor("myindex")
         .Map<Company>(m => m
             .Properties(ps => ps
                 .Text(s => s
-                    .Name(c => c.Name) <1>
+                        .Name(c => c.Name) <1>
                 )
-                .Object<Employee>(o => o  <2>
+                .Object<Employee>(o => o <2>
                     .Name(c => c.Employees)
                     .Properties(eps => eps
                         .Text(s => s
@@ -125,7 +125,7 @@ var expected = new
     }
 };
 
-Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 ----
 
 === Simple Automapping
@@ -287,7 +287,7 @@ var expected = new
     }
 };
 
-Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 ----
 
 [IMPORTANT]
@@ -367,7 +367,7 @@ var expected = new
     }
 };
 
-Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 ----
 
 `.AutoMap()` is idempotent; calling it before or after manually
@@ -387,7 +387,7 @@ descriptor = new CreateIndexDescriptor("myindex")
         )
     );
 
-Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 ----
 
 [[attribute-mapping]]
@@ -775,7 +775,60 @@ var expected = new
     }
 };
 
-Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+----
+
+[source,csharp]
+----
+public class ParentWithStringId : Parent
+{
+    public new string Id { get; set; }
+}
+----
+
+[source,csharp]
+----
+var descriptor = new CreateIndexDescriptor("myindex")
+    .Mappings(ms => ms
+        .Map<ParentWithStringId>(m => m
+            .AutoMap()
+        )
+    );
+
+var expected = new
+{
+    mappings = new
+    {
+        parent = new
+        {
+            properties = new
+            {
+                id = new
+                {
+                    type = "text",
+                    fields = new
+                    {
+                        keyword = new
+                        {
+                            ignore_above = 256,
+                            type = "keyword"
+                        }
+                    }
+                }
+            }
+        }
+    }
+};
+
+var settings = WithConnectionSettings(s => s
+    .InferMappingFor<ParentWithStringId>(m => m
+        .TypeName("parent")
+        .Ignore(p => p.Description)
+        .Ignore(p => p.IgnoreMe)
+    )
+);
+
+settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 ----
 
 [[ignoring-properties]]
@@ -852,7 +905,7 @@ var settings = WithConnectionSettings(s => s
     )
 );
 
-settings.Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 ----
 
 [source,csharp]
@@ -864,7 +917,9 @@ public class Parent
     public string IgnoreMe { get; set; }
 }
 
-public class Child : Parent { }
+public class Child : Parent
+{
+}
 ----
 
 All of the properties except `Name` have been ignored in the mapping 
@@ -886,16 +941,20 @@ var expected = new
         {
             properties = new
             {
-                desc = new {
-                    fields = new {
-                        keyword = new {
+                desc = new
+                {
+                    fields = new
+                    {
+                        keyword = new
+                        {
                             ignore_above = 256,
                             type = "keyword"
                         }
                     },
                     type = "text"
                 },
-                id = new {
+                id = new
+                {
                     type = "integer"
                 }
             }
@@ -910,7 +969,7 @@ var settings = WithConnectionSettings(s => s
     )
 );
 
-settings.Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 ----
 
 [[mapping-recursion]]
@@ -969,7 +1028,7 @@ var expected = new
     }
 };
 
-Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 ----
 
 Now let's specify a maxRecursion of 3 
@@ -1025,7 +1084,7 @@ var expectedWithMaxRecursion = new
     }
 };
 
-Expect(expectedWithMaxRecursion).WhenSerializing((ICreateIndexRequest)withMaxRecursionDescriptor);
+Expect(expectedWithMaxRecursion).WhenSerializing((ICreateIndexRequest) withMaxRecursionDescriptor);
 ----
 
 [source,csharp]
@@ -1044,7 +1103,7 @@ var expected = new
     }
 };
 
-Expect(expected).WhenSerializing((IPutMappingRequest)descriptor);
+Expect(expected).WhenSerializing((IPutMappingRequest) descriptor);
 
 var withMaxRecursionDescriptor = new PutMappingDescriptor<A>().AutoMap(3);
 
@@ -1081,7 +1140,7 @@ var expectedWithMaxRecursion = new
     }
 };
 
-Expect(expectedWithMaxRecursion).WhenSerializing((IPutMappingRequest)withMaxRecursionDescriptor);
+Expect(expectedWithMaxRecursion).WhenSerializing((IPutMappingRequest) withMaxRecursionDescriptor);
 ----
 
 [[applying-conventions-through-the-visitor-pattern]]
@@ -1103,7 +1162,8 @@ public class DisableDocValuesPropertyVisitor : NoopPropertyVisitor
     public override void Visit(
         INumberProperty type,
         PropertyInfo propertyInfo,
-        ElasticsearchPropertyAttributeBase attribute) <1>
+        ElasticsearchPropertyAttributeBase
+            attribute) <1>
     {
         type.DocValues = false;
     }
@@ -1111,7 +1171,8 @@ public class DisableDocValuesPropertyVisitor : NoopPropertyVisitor
     public override void Visit(
         IBooleanProperty type,
         PropertyInfo propertyInfo,
-        ElasticsearchPropertyAttributeBase attribute) <2>
+        ElasticsearchPropertyAttributeBase
+            attribute) <2>
     {
         type.DocValues = false;
     }
@@ -1188,7 +1249,8 @@ to an Elasticsearch text datatype (ITextProperty).
 ----
 public class EverythingIsAStringPropertyVisitor : NoopPropertyVisitor
 {
-    public override IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => new TextProperty();
+    public override IProperty Visit(PropertyInfo propertyInfo,
+        ElasticsearchPropertyAttributeBase attribute) => new TextProperty();
 }
 ----
 

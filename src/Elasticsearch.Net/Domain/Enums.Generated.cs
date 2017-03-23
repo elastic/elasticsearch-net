@@ -184,12 +184,6 @@ namespace Elasticsearch.Net
 		Block
 	}
 	
-	public enum PercolateFormat
-	{
-	[EnumMember(Value = "ids")]
-		Ids
-	}
-	
 	public enum SuggestMode
 	{
 	[EnumMember(Value = "missing")]
@@ -568,16 +562,6 @@ namespace Elasticsearch.Net
 			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'ThreadType'");		
 		}
 		
-		public static string GetStringValue(this PercolateFormat enumValue)
-		{
-		
-			switch (enumValue)
-			{
-				case PercolateFormat.Ids: return "ids";
-			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'PercolateFormat'");		
-		}
-		
 		public static string GetStringValue(this SuggestMode enumValue)
 		{
 		
@@ -736,7 +720,6 @@ namespace Elasticsearch.Net
 			EnumStringResolvers.TryAdd(typeof(OpType), (e) => GetStringValue((OpType)e));
 			EnumStringResolvers.TryAdd(typeof(Format), (e) => GetStringValue((Format)e));
 			EnumStringResolvers.TryAdd(typeof(ThreadType), (e) => GetStringValue((ThreadType)e));
-			EnumStringResolvers.TryAdd(typeof(PercolateFormat), (e) => GetStringValue((PercolateFormat)e));
 			EnumStringResolvers.TryAdd(typeof(SuggestMode), (e) => GetStringValue((SuggestMode)e));
 			EnumStringResolvers.TryAdd(typeof(GroupBy), (e) => GetStringValue((GroupBy)e));
 			EnumStringResolvers.TryAdd(typeof(ClusterStateMetric), (e) => GetStringValue((ClusterStateMetric)e));

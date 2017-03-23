@@ -1746,72 +1746,6 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for CountPercolate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html
-	///</pre>
-	///</summary>
-	public class PercolateCountRequestParameters : FluentRequestParameters<PercolateCountRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		
-		///<summary>A comma-separated list of specific routing values</summary>
-		public PercolateCountRequestParameters Routing(params string[] routing) => this.AddQueryString("routing", routing);
-		
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public PercolateCountRequestParameters Preference(string preference) => this.AddQueryString("preference", preference);
-		
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PercolateCountRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
-		
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PercolateCountRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
-		
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateCountRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
-		
-		
-		///<summary>The index to count percolate the document into. Defaults to index.</summary>
-		public PercolateCountRequestParameters PercolateIndex(string percolate_index) => this.AddQueryString("percolate_index", percolate_index);
-		
-		
-		///<summary>The type to count percolate document into. Defaults to type.</summary>
-		public PercolateCountRequestParameters PercolateType(string percolate_type) => this.AddQueryString("percolate_type", percolate_type);
-		
-		
-		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateCountRequestParameters Version(long version) => this.AddQueryString("version", version);
-		
-		
-		///<summary>Specific version type</summary>
-		public PercolateCountRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
-		
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PercolateCountRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
-		
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public PercolateCountRequestParameters Human(bool human) => this.AddQueryString("human", human);
-		
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PercolateCountRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
-		
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PercolateCountRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PercolateCountRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
 	///<summary>Request parameters descriptor for Create
 	///<pre>
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html
@@ -2229,6 +2163,76 @@ namespace Elasticsearch.Net
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DocumentExistsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for ExistsSource
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html
+	///</pre>
+	///</summary>
+	public class ExistsSourceRequestParameters : FluentRequestParameters<ExistsSourceRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
+		
+		///<summary>The ID of the parent document</summary>
+		public ExistsSourceRequestParameters Parent(string parent) => this.AddQueryString("parent", parent);
+		
+		
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public ExistsSourceRequestParameters Preference(string preference) => this.AddQueryString("preference", preference);
+		
+		
+		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
+		public ExistsSourceRequestParameters Realtime(bool realtime) => this.AddQueryString("realtime", realtime);
+		
+		
+		///<summary>Refresh the shard containing the document before performing the operation</summary>
+		public ExistsSourceRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		
+		
+		///<summary>Specific routing value</summary>
+		public ExistsSourceRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
+		
+		
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public ExistsSourceRequestParameters SourceEnabled(params string[] source_enabled) => this.AddQueryString("_source", source_enabled);
+		
+		
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public ExistsSourceRequestParameters SourceExclude(params string[] source_exclude) => this.AddQueryString("_source_exclude", source_exclude);
+		
+		
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public ExistsSourceRequestParameters SourceInclude(params string[] source_include) => this.AddQueryString("_source_include", source_include);
+		
+		
+		///<summary>Explicit version number for concurrency control</summary>
+		public ExistsSourceRequestParameters Version(long version) => this.AddQueryString("version", version);
+		
+		
+		///<summary>Specific version type</summary>
+		public ExistsSourceRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ExistsSourceRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ExistsSourceRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ExistsSourceRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public ExistsSourceRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ExistsSourceRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2722,6 +2726,10 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Clear request cache</summary>
+		public ClearCacheRequestParameters RequestCache(bool request_cache) => this.AddQueryString("request_cache", request_cache);
+		
+		
+		///<summary>Clear request cache</summary>
 		public ClearCacheRequestParameters Request(bool request) => this.AddQueryString("request", request);
 		
 		
@@ -2965,12 +2973,28 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public IndexExistsRequestParameters Local(bool local) => this.AddQueryString("local", local);
+		
+		
+		///<summary>Ignore unavailable indexes (default: false)</summary>
+		public IndexExistsRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
+		
+		
+		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
+		public IndexExistsRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
+		
+		
+		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public IndexExistsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public IndexExistsRequestParameters Local(bool local) => this.AddQueryString("local", local);
+		///<summary>Return settings in flat format (default: false)</summary>
+		public IndexExistsRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
+		
+		
+		///<summary>Whether to return all default setting for each of the indices.</summary>
+		public IndexExistsRequestParameters IncludeDefaults(bool include_defaults) => this.AddQueryString("include_defaults", include_defaults);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -3048,6 +3072,10 @@ namespace Elasticsearch.Net
 	public class IndexTemplateExistsRequestParameters : FluentRequestParameters<IndexTemplateExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
+		
+		///<summary>Return settings in flat format (default: false)</summary>
+		public IndexTemplateExistsRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
+		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public IndexTemplateExistsRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
@@ -4586,48 +4614,6 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for Mpercolate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html
-	///</pre>
-	///</summary>
-	public class MultiPercolateRequestParameters : FluentRequestParameters<MultiPercolateRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public MultiPercolateRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
-		
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public MultiPercolateRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
-		
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public MultiPercolateRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
-		
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public MultiPercolateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
-		
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public MultiPercolateRequestParameters Human(bool human) => this.AddQueryString("human", human);
-		
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public MultiPercolateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
-		
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiPercolateRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public MultiPercolateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
 	///<summary>Request parameters descriptor for Msearch
 	///<pre>
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html
@@ -4937,84 +4923,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public NodesStatsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
-	///<summary>Request parameters descriptor for Percolate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html
-	///</pre>
-	///</summary>
-	public class PercolateRequestParameters : FluentRequestParameters<PercolateRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		
-		///<summary>A comma-separated list of specific routing values</summary>
-		public PercolateRequestParameters Routing(params string[] routing) => this.AddQueryString("routing", routing);
-		
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public PercolateRequestParameters Preference(string preference) => this.AddQueryString("preference", preference);
-		
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PercolateRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
-		
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PercolateRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
-		
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
-		
-		
-		///<summary>The index to percolate the document into. Defaults to index.</summary>
-		public PercolateRequestParameters PercolateIndex(string percolate_index) => this.AddQueryString("percolate_index", percolate_index);
-		
-		
-		///<summary>The type to percolate document into. Defaults to type.</summary>
-		public PercolateRequestParameters PercolateType(string percolate_type) => this.AddQueryString("percolate_type", percolate_type);
-		
-		
-		///<summary>The routing value to use when percolating the existing document.</summary>
-		public PercolateRequestParameters PercolateRouting(string percolate_routing) => this.AddQueryString("percolate_routing", percolate_routing);
-		
-		
-		///<summary>Which shard to prefer when executing the percolate request.</summary>
-		public PercolateRequestParameters PercolatePreference(string percolate_preference) => this.AddQueryString("percolate_preference", percolate_preference);
-		
-		
-		///<summary>Return an array of matching query IDs instead of objects</summary>
-		public PercolateRequestParameters PercolateFormat(PercolateFormat percolate_format) => this.AddQueryString("percolate_format", percolate_format);
-		
-		
-		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateRequestParameters Version(long version) => this.AddQueryString("version", version);
-		
-		
-		///<summary>Specific version type</summary>
-		public PercolateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
-		
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PercolateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
-		
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public PercolateRequestParameters Human(bool human) => this.AddQueryString("human", human);
-		
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PercolateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
-		
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PercolateRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PercolateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5339,6 +5247,10 @@ namespace Elasticsearch.Net
 		
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public SearchRequestParameters RequestCache(bool request_cache) => this.AddQueryString("request_cache", request_cache);
+		
+		
+		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
+		public SearchRequestParameters BatchedReduceSize(long batched_reduce_size) => this.AddQueryString("batched_reduce_size", batched_reduce_size);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -5821,56 +5733,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public VerifyRepositoryRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
-	///<summary>Request parameters descriptor for Suggest
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html
-	///</pre>
-	///</summary>
-	public class SuggestRequestParameters : FluentRequestParameters<SuggestRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SuggestRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
-		
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SuggestRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
-		
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SuggestRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
-		
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SuggestRequestParameters Preference(string preference) => this.AddQueryString("preference", preference);
-		
-		
-		///<summary>Specific routing value</summary>
-		public SuggestRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
-		
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SuggestRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
-		
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public SuggestRequestParameters Human(bool human) => this.AddQueryString("human", human);
-		
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SuggestRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
-		
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SuggestRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SuggestRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
