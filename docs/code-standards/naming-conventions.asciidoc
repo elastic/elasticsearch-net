@@ -93,6 +93,9 @@ the `Exists` requests.
 ----
 var exceptions = new[] <1>
 {
+    //TODO RENAME TO SourceExistsRequest
+    //ALSO add unit tests that we have no requests starting with Exists
+    typeof(ExistsSourceRequest),
     typeof(DocumentExistsRequest),
     typeof(DocumentExistsRequest<>),
     typeof(AliasExistsRequest),

@@ -32,14 +32,14 @@ foreach (var index in values.Values)
 {
     this.Client.CreateIndex(index, c => c
         .Settings(settings=>settings
-            .Analysis(Seeder.ProjectAnalysisSettings)
+            .Analysis(DefaultSeeder.ProjectAnalysisSettings)
         )
         .Mappings(m => m
             .Map<Project>(mm => mm.AutoMap()
-                .Properties(Seeder.ProjectProperties)
+                .Properties(DefaultSeeder.ProjectProperties)
             )
             .Map<PercolatedQuery>(mm => mm.AutoMap()
-                .Properties(Seeder.PercolatedQueryProperties)
+                .Properties(DefaultSeeder.PercolatedQueryProperties)
             )
         )
     );
