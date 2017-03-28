@@ -17,8 +17,12 @@ namespace Nest
 		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty("fuzzy_rewrite")]
+		[JsonIgnore]
+		[Obsolete("Use FuzzyMultiTermQueryRewrite")]
 		RewriteMultiTerm? FuzzyRewrite { get; set; }
+
+		[JsonProperty("fuzzy_rewrite")]
+		MultiTermQueryRewrite FuzzyMultiTermQueryRewrite { get; set; }
 
 		/// <summary>
 		/// Allows fuzzy matching based on the type of field being queried.
@@ -70,7 +74,13 @@ namespace Nest
 		public TextQueryType? Type { get; set; }
 		public string Query { get; set; }
 		public string Analyzer { get; set; }
-		public RewriteMultiTerm? FuzzyRewrite { get; set; }
+		[Obsolete("Use FuzzyMultiTermQueryRewrite")]
+		public RewriteMultiTerm? FuzzyRewrite
+		{
+			get { return FuzzyMultiTermQueryRewrite?.Rewrite; }
+			set { FuzzyMultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+		public MultiTermQueryRewrite FuzzyMultiTermQueryRewrite { get; set; }
 
 		/// <summary>
 		/// Allows fuzzy matching based on the type of field being queried.
@@ -106,7 +116,13 @@ namespace Nest
 		TextQueryType? IMultiMatchQuery.Type { get; set; }
 		string IMultiMatchQuery.Query { get; set; }
 		string IMultiMatchQuery.Analyzer { get; set; }
-		RewriteMultiTerm? IMultiMatchQuery.FuzzyRewrite { get; set; }
+		[Obsolete("Use FuzzyMultiTermQueryRewrite")]
+		RewriteMultiTerm? IMultiMatchQuery.FuzzyRewrite
+		{
+			get { return Self.FuzzyMultiTermQueryRewrite?.Rewrite; }
+			set { Self.FuzzyMultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+		MultiTermQueryRewrite IMultiMatchQuery.FuzzyMultiTermQueryRewrite { get; set; }
 		Fuzziness IMultiMatchQuery.Fuzziness { get; set; }
 		double? IMultiMatchQuery.CutoffFrequency { get; set; }
 		int? IMultiMatchQuery.PrefixLength { get; set; }
@@ -144,7 +160,16 @@ namespace Nest
 		public MultiMatchQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch)
 			=> Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
 
-		public MultiMatchQueryDescriptor<T> FuzzyRewrite(RewriteMultiTerm rewrite) => Assign(a => a.FuzzyRewrite = rewrite);
+		[Obsolete("Use FuzzyRewrite(MultiTermQueryRewrite rewrite)")]
+		public MultiMatchQueryDescriptor<T> FuzzyRewrite(RewriteMultiTerm? rewrite) =>
+			Assign(a =>
+			{
+				a.FuzzyMultiTermQueryRewrite = rewrite != null
+					? new MultiTermQueryRewrite(rewrite.Value)
+					: null;
+			});
+
+		public MultiMatchQueryDescriptor<T> FuzzyRewrite(MultiTermQueryRewrite rewrite) => Assign(a => Self.FuzzyMultiTermQueryRewrite = rewrite);
 
 		public MultiMatchQueryDescriptor<T> Lenient(bool? lenient = true) => Assign(a => a.Lenient = lenient);
 

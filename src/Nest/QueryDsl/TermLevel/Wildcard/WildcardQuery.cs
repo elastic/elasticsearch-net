@@ -9,9 +9,12 @@ namespace Nest
 	[JsonConverter(typeof (FieldNameQueryJsonConverter<WildcardQuery>))]
 	public interface IWildcardQuery : ITermQuery
 	{
-		[JsonProperty(PropertyName = "rewrite")]
-		[JsonConverter(typeof (StringEnumConverter))]
+		[JsonIgnore]
+		[Obsolete("Use MultiTermQueryRewrite")]
 		RewriteMultiTerm? Rewrite { get; set; }
+
+		[JsonProperty("rewrite")]
+		MultiTermQueryRewrite MultiTermQueryRewrite { get; set; }
 	}
 
 	public class WildcardQuery<T> : WildcardQuery
@@ -24,7 +27,15 @@ namespace Nest
 	{
 		protected override bool Conditionless => TermQuery.IsConditionless(this);
 		public object Value { get; set; }
-		public RewriteMultiTerm? Rewrite { get; set; }
+
+		[Obsolete("Use MultiTermQueryRewrite")]
+		public RewriteMultiTerm? Rewrite
+		{
+			get { return MultiTermQueryRewrite?.Rewrite; }
+			set { MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+
+		public MultiTermQueryRewrite MultiTermQueryRewrite { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Wildcard = this;
 	}
@@ -33,11 +44,28 @@ namespace Nest
 		IWildcardQuery
 		where T : class
 	{
-		RewriteMultiTerm? IWildcardQuery.Rewrite { get; set; }
+		protected new IWildcardQuery Self => this;
 
+		RewriteMultiTerm? IWildcardQuery.Rewrite
+		{
+			get { return Self.MultiTermQueryRewrite?.Rewrite; }
+			set { Self.MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+
+		MultiTermQueryRewrite IWildcardQuery.MultiTermQueryRewrite { get; set; }
+
+		[Obsolete("Use Rewrite(MultiTermQueryRewrite rewrite)")]
 		public WildcardQueryDescriptor<T> Rewrite(RewriteMultiTerm? rewrite)
 		{
-			((IWildcardQuery)this).Rewrite = rewrite;
+			Self.MultiTermQueryRewrite = rewrite != null
+				? new MultiTermQueryRewrite(rewrite.Value)
+				: null;
+			return this;
+		}
+
+		public WildcardQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite)
+		{
+			Self.MultiTermQueryRewrite = rewrite;
 			return this;
 		}
 	}
