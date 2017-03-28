@@ -16,6 +16,8 @@ please modify the original csharp file found at the link and submit the PR with 
 Aggregations are arguably one of the most powerful features of Elasticsearch and NEST
 exposes all of the available Aggregation types
 
+* <<adjacency-matrix-usage,Adjacency Matrix Usage>>
+
 * <<children-aggregation-usage,Children Aggregation Usage>>
 
 * <<date-histogram-aggregation-usage,Date Histogram Aggregation Usage>>

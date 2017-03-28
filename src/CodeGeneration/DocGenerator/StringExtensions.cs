@@ -131,6 +131,7 @@ namespace DocGenerator
 			{ "Project.Projects.First().Name", "\"Lesch Group\"" },
 			{ "Project.Projects.FirstOrDefault().NumberOfCommits", "775" },
 			{ "Project.Projects.FirstOrDefault().Name", "\"Dickinson - Beier\"" },
+			{ "LastNameSearch", "\"Stokes\"" }
 		};
 
 		public static bool TryGetJsonForAnonymousType(this string anonymousTypeString, out string json)
@@ -190,7 +191,7 @@ namespace DocGenerator
 						diagnostic.IsWarningAsError ||
 						diagnostic.Severity == DiagnosticSeverity.Error);
 
-					var builder = new StringBuilder($"Unable to serialize: {anonymousTypeString}");
+					var builder = new StringBuilder($"Unable to serialize the following C# anonymous type string to json: {anonymousTypeString}");
 					foreach (var diagnostic in failures)
 					{
 						builder.AppendLine($"{diagnostic.Id}: {diagnostic.GetMessage()}");

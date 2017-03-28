@@ -761,11 +761,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
+		// hide
 		public class ParentWithStringId : Parent
 		{
 			public new string Id { get; set; }
 		}
 
+		//hide
 		[U]
 		public void OverridingInheritedProperties()
 		{

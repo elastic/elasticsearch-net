@@ -31,6 +31,7 @@ namespace Nest
 		public string NewIndex => GetResolved("new_index");
 		public string Alias => GetResolved("alias");
 		public string WatchId => GetResolved("watch_id");
+		public string ThreadPoolPatterns => GetResolved("thread_pool_patterns");
 		public string ActionId => GetResolved("action_id");
 		public WatcherStatsMetric? WatcherStatsMetric => GetResolved("watcher_stats_metric").ToEnum<WatcherStatsMetric>();
 
