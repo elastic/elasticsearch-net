@@ -35,15 +35,12 @@ namespace Nest
 								case "num_partitions":
 									termsInclude.NumberOfPartitions = Convert.ToInt64(reader.ReadAsDouble());
 									break;
-								case "pattern":
-									termsInclude.Pattern = reader.ReadAsString();
-									break;
-								case "flags":
-									termsInclude.Flags = reader.ReadAsString();
-									break;
 							}
 						}
 					}
+					break;
+				case JsonToken.String:
+					termsInclude.Pattern = (string)reader.Value;
 					break;
 				default:
 					throw new JsonSerializationException($"Unexpected token {reader.TokenType} when deserializing {nameof(TermsIncludeExclude)}");
@@ -56,33 +53,21 @@ namespace Nest
 		{
 			var termsIncludeExclude = (TermsIncludeExclude)value;
 
-			if (termsIncludeExclude.Values != null)
-			{
+			if (termsIncludeExclude == null)
+				writer.WriteNull();
+			else if (termsIncludeExclude.Values != null)
 				serializer.Serialize(writer, termsIncludeExclude.Values);
-			}
-			else
+			else if (termsIncludeExclude.Partition.HasValue && termsIncludeExclude.NumberOfPartitions.HasValue)
 			{
 				writer.WriteStartObject();
-				if (termsIncludeExclude.Pattern.IsNullOrEmpty())
-				{
-                    writer.WritePropertyName("partition");
-                    writer.WriteValue(termsIncludeExclude.Partition);
-                    writer.WritePropertyName("num_partitions");
-                    writer.WriteValue(termsIncludeExclude.NumberOfPartitions);
-				}
-				else
-				{
-                    writer.WritePropertyName("pattern");
-                    writer.WriteValue(termsIncludeExclude.Pattern);
-                    if (!termsIncludeExclude.Flags.IsNullOrEmpty())
-                    {
-                        writer.WritePropertyName("flags");
-                        writer.WriteValue(termsIncludeExclude.Flags);
-                    }
-                    writer.WriteEndObject();
-				}
-
+				writer.WritePropertyName("partition");
+				writer.WriteValue(termsIncludeExclude.Partition);
+				writer.WritePropertyName("num_partitions");
+				writer.WriteValue(termsIncludeExclude.NumberOfPartitions);
+				writer.WriteEndObject();
 			}
+			else
+				writer.WriteValue(termsIncludeExclude.Pattern);
 		}
 	}
 }

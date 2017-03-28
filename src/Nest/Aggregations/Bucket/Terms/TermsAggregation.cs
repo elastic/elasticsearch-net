@@ -128,17 +128,29 @@ namespace Nest
 			a.Order.Add(new TermsOrder { Key = key, Order = SortOrder.Descending });
 		});
 
-		public TermsAggregationDescriptor<T> Include(long partion, long numberOfPartitions) =>
-			Assign(a => a.Include = new TermsIncludeExclude() {Partition = partion, NumberOfPartitions = numberOfPartitions});
+		public TermsAggregationDescriptor<T> Include(long partition, long numberOfPartitions) =>
+			Assign(a => a.Include = new TermsIncludeExclude() {Partition = partition, NumberOfPartitions = numberOfPartitions});
 
 		public TermsAggregationDescriptor<T> Include(string includePattern, string regexFlags = null) =>
-			Assign(a => a.Include = new TermsIncludeExclude() { Pattern = includePattern, Flags = regexFlags });
+			Assign(a => a.Include = new TermsIncludeExclude
+			{
+				Pattern = includePattern,
+#pragma warning disable 618
+				Flags = regexFlags
+#pragma warning restore 618
+			});
 
 		public TermsAggregationDescriptor<T> Include(IEnumerable<string> values) =>
 			Assign(a => a.Include = new TermsIncludeExclude { Values = values });
 
 		public TermsAggregationDescriptor<T> Exclude(string excludePattern, string regexFlags = null) =>
-			Assign(a => a.Exclude = new TermsIncludeExclude() { Pattern = excludePattern, Flags = regexFlags });
+			Assign(a => a.Exclude = new TermsIncludeExclude
+			{
+				Pattern = excludePattern,
+#pragma warning disable 618
+				Flags = regexFlags
+#pragma warning restore 618
+			});
 
 		public TermsAggregationDescriptor<T> Exclude(IEnumerable<string> values) =>
 			Assign(a => a.Exclude = new TermsIncludeExclude { Values = values });
