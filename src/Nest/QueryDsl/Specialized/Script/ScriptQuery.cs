@@ -60,7 +60,7 @@ namespace Nest
 
 		/// <summary>
 		/// Id of an indexed script to execute
-		/// </summary
+		/// </summary>
 		public ScriptQueryDescriptor<T> Id(string scriptId) => Assign(a => a.Id = scriptId);
 
 		/// <summary>

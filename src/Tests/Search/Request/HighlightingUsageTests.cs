@@ -260,7 +260,7 @@ namespace Tests.Search.Request
 							highlight.Should().Contain("</name>");
 						}
 					}
-					else if (highlightField.Key == "leadDeveloper.lastName	")
+					else if (highlightField.Key == "leadDeveloper.lastName")
 					{
 						foreach (var highlight in highlightField.Value.Highlights)
 						{

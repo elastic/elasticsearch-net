@@ -20,98 +20,6 @@ The implementation uses either the lucene `highlighter`, `fast-vector-highlighte
 
 See the Elasticsearch documentation on {ref_current}/search-request-highlighting.html[highlighting] for more detail.
 
-[source,csharp]
-----
-new
-{
-    query = new
-    {
-        match = new JObject
-        {
-            { "name.standard", new JObject
-                {
-                    { "query", "Upton Sons Shield Rice Rowe Roberts" }
-                }
-            }
-        }
-    },
-    highlight = new
-    {
-        pre_tags = new[] { "<tag1>" },
-        post_tags = new[] { "</tag1>" },
-        fields = new JObject
-        {
-            { "name.standard", new JObject
-                {
-                    { "type", "plain" },
-                    { "force_source", true},
-                    { "fragment_size", 150 },
-                    { "number_of_fragments", 3},
-                    { "no_match_size", 150 }
-                }
-            },
-            { "leadDeveloper.firstName", new JObject
-                {
-                    { "type", "fvh" },
-                    { "boundary_max_scan", 50 },
-                    { "pre_tags", new JArray { "<name>" } },
-                    { "post_tags", new JArray { "</name>" } },
-                    { "highlight_query", new JObject
-                        {
-                            { "match", new JObject
-                                {
-                                    { "leadDeveloper.firstName", new JObject
-                                        {
-                                            { "query", "Kurt Edgardo Naomi Dariana Justice Felton" }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            { "leadDeveloper.lastName", new JObject
-                {
-                    { "type", "unified" },
-                    { "pre_tags", new JArray { "<name>" } },
-                    { "post_tags", new JArray { "</name>" } },
-                    { "highlight_query", new JObject
-                        {
-                            { "match", new JObject
-                                {
-                                    { "leadDeveloper.lastName", new JObject
-                                        {
-                                            { "query", LastNameSearch }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            { "state.offsets", new JObject
-                {
-                    { "type", "postings" },
-                    { "pre_tags", new JArray { "<state>" } },
-                    { "post_tags", new JArray { "</state>" } },
-                    { "highlight_query", new JObject
-                        {
-                            { "terms", new JObject
-                                {
-                                    { "state.offsets", new JArray { "stable" , "bellyup" } }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp]
@@ -243,6 +151,87 @@ new SearchRequest<Project>
 }
 ----
 
+[source,javascript]
+.Example json output
+----
+{
+  "query": {
+    "match": {
+      "name.standard": {
+        "query": "Upton Sons Shield Rice Rowe Roberts"
+      }
+    }
+  },
+  "highlight": {
+    "pre_tags": [
+      "<tag1>"
+    ],
+    "post_tags": [
+      "</tag1>"
+    ],
+    "fields": {
+      "name.standard": {
+        "type": "plain",
+        "force_source": true,
+        "fragment_size": 150,
+        "number_of_fragments": 3,
+        "no_match_size": 150
+      },
+      "leadDeveloper.firstName": {
+        "type": "fvh",
+        "boundary_max_scan": 50,
+        "pre_tags": [
+          "<name>"
+        ],
+        "post_tags": [
+          "</name>"
+        ],
+        "highlight_query": {
+          "match": {
+            "leadDeveloper.firstName": {
+              "query": "Kurt Edgardo Naomi Dariana Justice Felton"
+            }
+          }
+        }
+      },
+      "leadDeveloper.lastName": {
+        "type": "unified",
+        "pre_tags": [
+          "<name>"
+        ],
+        "post_tags": [
+          "</name>"
+        ],
+        "highlight_query": {
+          "match": {
+            "leadDeveloper.lastName": {
+              "query": "Stokes"
+            }
+          }
+        }
+      },
+      "state.offsets": {
+        "type": "postings",
+        "pre_tags": [
+          "<state>"
+        ],
+        "post_tags": [
+          "</state>"
+        ],
+        "highlight_query": {
+          "terms": {
+            "state.offsets": [
+              "stable",
+              "bellyup"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+----
+
 === Handling Responses
 
 [source,csharp]
@@ -269,7 +258,7 @@ foreach (var highlightsInEachHit in response.Hits.Select(d=>d.Highlights))
                 highlight.Should().Contain("</name>");
             }
         }
-        else if (highlightField.Key == "leadDeveloper.lastName    ")
+        else if (highlightField.Key == "leadDeveloper.lastName")
         {
             foreach (var highlight in highlightField.Value.Highlights)
             {

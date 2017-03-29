@@ -188,10 +188,10 @@ namespace Nest
 		/// If you would like your script to run regardless of whether the document exists or not — i.e. the script handles
 		/// initializing the document instead of the upsert element — then set scripted_upsert to true
 		/// </summary>
-		/// <summary>
 		public BulkUpdateDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool scriptedUpsert = true) =>
 			Assign(a => a.ScriptedUpsert = scriptedUpsert);
 
+		/// <summary>
 		/// A script to specify the update.
 		/// </summary>
 		public BulkUpdateDescriptor<TDocument, TPartialDocument> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
