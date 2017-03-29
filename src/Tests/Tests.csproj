@@ -567,7 +567,6 @@
     <Compile Include=".\Search\FieldStats\FieldStatsApiTests.cs" />
     <Compile Include=".\Search\FieldStats\FieldStatsUrlTests.cs" />
     <Compile Include=".\Search\MultiSearch\MultiSearchApiTests.cs" />
-    <Compile Include=".\Search\MultiSearch\MultiSearchInvalidApiTests.cs" />
     <Compile Include=".\Search\MultiSearch\MultiSearchLowLevelPostDataTests.cs" />
     <Compile Include=".\Search\MultiSearch\MultiSearchUrlTests.cs" />
     <Compile Include=".\Search\Percolator\MultiPercolate\MultiPercolateApiTests.cs" />
@@ -664,7 +663,6 @@
     <Compile Include="Reproduce\GithubIssue2503.cs" />
     <Compile Include="Reproduce\GithubIssue2690.cs" />
     <Compile Include="Search\Hits\HitsSerializationTests.cs" />
-    <Compile Include="Search\MultiSearch\MultiSearchApiTests.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchInvalidApiTests.cs" />
     <Compile Include="Framework\Extensions\UriExtensions.cs" />
     <Compile Include="Framework\VirtualClustering\WaitingInMemoryConnection.cs" />

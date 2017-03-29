@@ -51,9 +51,11 @@ namespace Nest
 		[JsonProperty("found")]
 		public bool Found { get; internal set; }
 
+#pragma warning disable 809 // Obsolete member overrides non-obsolete member
 		[Obsolete(@"WARNING: IsValid behavior has changed to align with 1.x and 5.x onwards.
 		It now returns true for 404 responses (document not found), where previously it returned
 		false.  Please use .Found to check whether the document was actually found.")]
 		public override bool IsValid => base.IsValid;
+#pragma warning restore 809
 	}
 }
