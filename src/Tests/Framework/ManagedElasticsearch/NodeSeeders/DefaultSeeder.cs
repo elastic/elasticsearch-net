@@ -226,6 +226,9 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 						.Name("offsets")
 						.IndexOptions(IndexOptions.Offsets)
 					)
+					.Keyword(sk => sk
+						.Name("keyword")
+					)
 				)
 			)
 			.Nested<Tag>(mo => mo

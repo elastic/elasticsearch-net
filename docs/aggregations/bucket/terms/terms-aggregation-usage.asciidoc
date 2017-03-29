@@ -15,6 +15,10 @@ please modify the original csharp file found at the link and submit the PR with 
 [[terms-aggregation-usage]]
 == Terms Aggregation Usage
 
+A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
+
+See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-terms-aggregation.html[terms aggregation] for more detail.
+
 === Fluent DSL Example
 
 [source,csharp]
@@ -125,6 +129,12 @@ states.Meta.Should().NotBeNull().And.HaveCount(1);
 states.Meta["foo"].Should().Be("bar");
 ----
 
+[[terms-pattern-filter]]
+[float]
+== Filtering with a regular expression pattern
+
+Using terms aggregation with filtering to include values using a regular expression pattern
+
 === Fluent DSL Example
 
 [source,csharp]
@@ -132,8 +142,19 @@ states.Meta["foo"].Should().Be("bar");
 s => s
 .Size(0)
 .Aggregations(a => a
-    .Terms("commits", st => st
-        .Field(p => p.NumberOfCommits)
+    .Terms("states", st => st
+        .Field(p => p.State.Suffix("keyword"))
+        .MinimumDocumentCount(2)
+        .Size(5)
+        .ShardSize(100)
+        .ExecutionHint(TermsAggregationExecutionHint.Map)
+        .Missing("n/a")
+        .Include("(Stable|VeryActive)")
+        .Order(TermsOrder.TermAscending)
+        .Order(TermsOrder.CountDescending)
+        .Meta(m => m
+            .Add("foo", "bar")
+        )
     )
 )
 ----
@@ -145,9 +166,24 @@ s => s
 new SearchRequest<Project>
 {
     Size = 0,
-    Aggregations = new TermsAggregation("commits")
+    Aggregations = new TermsAggregation("states")
     {
-        Field = Infer.Field<Project>(p => p.NumberOfCommits),
+        Field = Field<Project>(p => p.State.Suffix("keyword")),
+        MinimumDocumentCount = 2,
+        Size = 5,
+        ShardSize = 100,
+        ExecutionHint = TermsAggregationExecutionHint.Map,
+        Missing = "n/a",
+        Include = new TermsIncludeExclude { Pattern = "(Stable|VeryActive)" },
+        Order = new List<TermsOrder>
+        {
+            TermsOrder.TermAscending,
+            TermsOrder.CountDescending
+        },
+        Meta = new Dictionary<string, object>
+        {
+            { "foo", "bar" }
+        }
     }
 }
 ----
@@ -158,9 +194,26 @@ new SearchRequest<Project>
 {
   "size": 0,
   "aggs": {
-    "commits": {
+    "states": {
+      "meta": {
+        "foo": "bar"
+      },
       "terms": {
-        "field": "numberOfCommits"
+        "field": "state.keyword",
+        "min_doc_count": 2,
+        "size": 5,
+        "shard_size": 100,
+        "execution_hint": "map",
+        "missing": "n/a",
+        "include": "(Stable|VeryActive)",
+        "order": [
+          {
+            "_term": "asc"
+          },
+          {
+            "_count": "desc"
+          }
+        ]
       }
     }
   }
@@ -172,19 +225,151 @@ new SearchRequest<Project>
 [source,csharp]
 ----
 response.IsValid.Should().BeTrue();
-var commits = response.Aggs.Terms<int>("commits");
-commits.Should().NotBeNull();
-commits.DocCountErrorUpperBound.Should().HaveValue();
-commits.SumOtherDocCount.Should().HaveValue();
-commits.Buckets.Should().NotBeNull();
-commits.Buckets.Count.Should().BeGreaterThan(0);
+var states = response.Aggs.Terms("states");
+states.Should().NotBeNull();
+states.DocCountErrorUpperBound.Should().HaveValue();
+states.SumOtherDocCount.Should().HaveValue();
+states.Buckets.Should().NotBeNull();
+states.Buckets.Count.Should().BeGreaterThan(0);
 
-foreach (var item in commits.Buckets)
+foreach (var item in states.Buckets)
 {
-    item.Key.Should().BeGreaterThan(0);
+    item.Key.Should().NotBeNullOrEmpty();
     item.DocCount.Should().BeGreaterOrEqualTo(1);
 }
+
+states.Meta.Should().NotBeNull().And.HaveCount(1);
+states.Meta["foo"].Should().Be("bar");
 ----
+
+[[terms-exact-value-filter]]
+[float]
+== Filtering with exact values
+
+Using terms aggregation with filtering to include only specific values
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Size(0)
+.Aggregations(a => a
+    .Terms("states", st => st
+        .Field(p => p.State.Suffix("keyword"))
+        .MinimumDocumentCount(2)
+        .Size(5)
+        .ShardSize(100)
+        .ExecutionHint(TermsAggregationExecutionHint.Map)
+        .Missing("n/a")
+        .Include(new [] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() })
+        .Order(TermsOrder.TermAscending)
+        .Order(TermsOrder.CountDescending)
+        .Meta(m => m
+            .Add("foo", "bar")
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Size = 0,
+    Aggregations = new TermsAggregation("states")
+    {
+        Field = Field<Project>(p => p.State.Suffix("keyword")),
+        MinimumDocumentCount = 2,
+        Size = 5,
+        ShardSize = 100,
+        ExecutionHint = TermsAggregationExecutionHint.Map,
+        Missing = "n/a",
+        Include = new TermsIncludeExclude { Values = new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() } },
+        Order = new List<TermsOrder>
+        {
+            TermsOrder.TermAscending,
+            TermsOrder.CountDescending
+        },
+        Meta = new Dictionary<string, object>
+        {
+            { "foo", "bar" }
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "states": {
+      "meta": {
+        "foo": "bar"
+      },
+      "terms": {
+        "field": "state.keyword",
+        "min_doc_count": 2,
+        "size": 5,
+        "shard_size": 100,
+        "execution_hint": "map",
+        "missing": "n/a",
+        "include": [
+          "Stable",
+          "VeryActive"
+        ],
+        "order": [
+          {
+            "_term": "asc"
+          },
+          {
+            "_count": "desc"
+          }
+        ]
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var states = response.Aggs.Terms("states");
+states.Should().NotBeNull();
+states.DocCountErrorUpperBound.Should().HaveValue();
+states.SumOtherDocCount.Should().HaveValue();
+states.Buckets.Should().NotBeNull();
+states.Buckets.Count.Should().BeGreaterThan(0);
+
+foreach (var item in states.Buckets)
+{
+    item.Key.Should().NotBeNullOrEmpty();
+    item.DocCount.Should().BeGreaterOrEqualTo(1);
+}
+
+states.Meta.Should().NotBeNull().And.HaveCount(1);
+states.Meta["foo"].Should().Be("bar");
+----
+
+[[filtering-with-partitions]]
+[float]
+== Filtering with partitions
+
+A terms aggregation that uses partitioning to filter the terms that are returned in the response. Further terms
+can be returned by issuing additional requests with an incrementing `partition` number.
+
+[NOTE]
+--
+Partitioning is available only in Elasticsearch 5.2.0+
+
+--
 
 === Fluent DSL Example
 
@@ -195,7 +380,7 @@ s => s
 .Aggregations(a => a
     .Terms("commits", st => st
         .Field(p => p.NumberOfCommits)
-        .Include(partion: 0, numberOfPartitions: 50)
+        .Include(partition: 0, numberOfPartitions: 50)
         .Size(2)
     )
 )
@@ -235,6 +420,73 @@ new SearchRequest<Project>
           "partition": 0,
           "num_partitions": 50
         }
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var commits = response.Aggs.Terms<int>("commits");
+commits.Should().NotBeNull();
+commits.DocCountErrorUpperBound.Should().HaveValue();
+commits.SumOtherDocCount.Should().HaveValue();
+commits.Buckets.Should().NotBeNull();
+commits.Buckets.Count.Should().BeGreaterThan(0);
+
+foreach (var item in commits.Buckets)
+{
+    item.Key.Should().BeGreaterThan(0);
+    item.DocCount.Should().BeGreaterOrEqualTo(1);
+}
+----
+
+[[numeric-fields]]
+[float]
+== Numeric fields
+
+A terms aggregation on a numeric field
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Size(0)
+.Aggregations(a => a
+    .Terms("commits", st => st
+        .Field(p => p.NumberOfCommits)
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Size = 0,
+    Aggregations = new TermsAggregation("commits")
+    {
+        Field = Infer.Field<Project>(p => p.NumberOfCommits),
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "commits": {
+      "terms": {
+        "field": "numberOfCommits"
       }
     }
   }

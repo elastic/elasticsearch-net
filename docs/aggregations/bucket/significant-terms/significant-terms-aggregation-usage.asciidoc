@@ -15,6 +15,18 @@ please modify the original csharp file found at the link and submit the PR with 
 [[significant-terms-aggregation-usage]]
 == Significant Terms Aggregation Usage
 
+An aggregation that returns interesting or unusual occurrences of terms in a set.
+
+[WARNING]
+--
+The significant_terms aggregation can be very heavy when run on large indices. Work is in progress 
+to provide more lightweight sampling techniques. 
+As a result, the API for this feature may change in non-backwards compatible ways
+
+--
+
+See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-significantterms-aggregation.html[significant terms aggregation] for more detail.
+
 === Fluent DSL Example
 
 [source,csharp]
@@ -64,6 +76,156 @@ new SearchRequest<Project>
           "background_is_superset": true,
           "include_negatives": true
         }
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+var sigNames = response.Aggs.SignificantTerms("significant_names");
+sigNames.Should().NotBeNull();
+sigNames.DocCount.Should().BeGreaterThan(0);
+----
+
+[[significant-terms-pattern-filter]]
+[float]
+== Filtering with a regular expression pattern
+
+Using significant terms aggregation with filtering to include values using a regular expression pattern
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .SignificantTerms("significant_names", st => st
+        .Field(p => p.Name)
+        .MinimumDocumentCount(10)
+        .MutualInformation(mi => mi
+            .BackgroundIsSuperSet()
+            .IncludeNegatives()
+        )
+        .Include("pi*")
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new SignificantTermsAggregation("significant_names")
+    {
+        Field = Field<Project>(p => p.Name),
+        MinimumDocumentCount = 10,
+        MutualInformation = new MutualInformationHeuristic
+        {
+            BackgroundIsSuperSet = true,
+            IncludeNegatives = true
+        },
+        IncludeTerms = new SignificantTermsIncludeExclude("pi*")
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "significant_names": {
+      "significant_terms": {
+        "field": "name",
+        "min_doc_count": 10,
+        "mutual_information": {
+          "background_is_superset": true,
+          "include_negatives": true
+        },
+        "include": "pi*"
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+var sigNames = response.Aggs.SignificantTerms("significant_names");
+sigNames.Should().NotBeNull();
+sigNames.DocCount.Should().BeGreaterThan(0);
+----
+
+[[significant-terms-exact-value-filter]]
+[float]
+== Filtering with exact values
+
+Using significant terms aggregation with filtering to exclude specific values
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .SignificantTerms("significant_names", st => st
+        .Field(p => p.Name)
+        .MinimumDocumentCount(10)
+        .MutualInformation(mi => mi
+            .BackgroundIsSuperSet()
+            .IncludeNegatives()
+        )
+        .Exclude(new [] { "pierce" })
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new SignificantTermsAggregation("significant_names")
+    {
+        Field = Field<Project>(p => p.Name),
+        MinimumDocumentCount = 10,
+        MutualInformation = new MutualInformationHeuristic
+        {
+            BackgroundIsSuperSet = true,
+            IncludeNegatives = true
+        },
+        ExcludeTerms = new SignificantTermsIncludeExclude(new[] { "pierce" })
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "significant_names": {
+      "significant_terms": {
+        "field": "name",
+        "min_doc_count": 10,
+        "mutual_information": {
+          "background_is_superset": true,
+          "include_negatives": true
+        },
+        "exclude": [
+          "pierce"
+        ]
       }
     }
   }
