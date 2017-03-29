@@ -20,7 +20,7 @@ namespace Tests.QueryDsl.FullText.Match
 					boost = 1.1,
 					query = "hello world",
 					analyzer = "standard",
-					fuzzy_rewrite = "constant_score_boolean",
+					fuzzy_rewrite = "top_terms_blended_freqs_10",
 					fuzziness = "AUTO",
 					fuzzy_transpositions = true,
 					cutoff_frequency = 0.001,
@@ -43,7 +43,7 @@ namespace Tests.QueryDsl.FullText.Match
 			Fuzziness = Fuzziness.Auto,
 			FuzzyTranspositions = true,
 			MinimumShouldMatch = 2,
-			FuzzyRewrite = RewriteMultiTerm.ConstantScoreBoolean,
+			FuzzyRewrite = MultiTermQueryRewrite.TopTermsBlendedFreqs(10),
 			Lenient = true,
 			Operator = Operator.Or,
 		};
@@ -60,7 +60,7 @@ namespace Tests.QueryDsl.FullText.Match
 				.FuzzyTranspositions()
 				.MinimumShouldMatch(2)
 				.Operator(Operator.Or)
-				.FuzzyRewrite(RewriteMultiTerm.ConstantScoreBoolean)
+				.FuzzyRewrite(MultiTermQueryRewrite.TopTermsBlendedFreqs(10))
 				.Name("named_query")
 			);
 

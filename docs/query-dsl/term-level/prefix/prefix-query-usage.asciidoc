@@ -25,7 +25,7 @@ q
     .Boost(1.1)
     .Field(p => p.Description)
     .Value("proj")
-    .Rewrite(RewriteMultiTerm.TopTermsBoostN)
+    .Rewrite(MultiTermQueryRewrite.TopTerms(10))
 )
 ----
 
@@ -39,7 +39,7 @@ new PrefixQuery
     Boost = 1.1,
     Field = "description",
     Value = "proj",
-    Rewrite = RewriteMultiTerm.TopTermsBoostN
+    Rewrite = MultiTermQueryRewrite.TopTerms(10)
 }
 ----
 
@@ -51,7 +51,7 @@ new PrefixQuery
     "description": {
       "_name": "named_query",
       "boost": 1.1,
-      "rewrite": "top_terms_boost_N",
+      "rewrite": "top_terms_10",
       "value": "proj"
     }
   }

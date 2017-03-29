@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
@@ -9,9 +8,8 @@ namespace Nest
 	[JsonConverter(typeof (FieldNameQueryJsonConverter<WildcardQuery>))]
 	public interface IWildcardQuery : ITermQuery
 	{
-		[JsonProperty(PropertyName = "rewrite")]
-		[JsonConverter(typeof (StringEnumConverter))]
-		RewriteMultiTerm? Rewrite { get; set; }
+		[JsonProperty("rewrite")]
+		MultiTermQueryRewrite Rewrite { get; set; }
 	}
 
 	public class WildcardQuery<T> : WildcardQuery
@@ -24,21 +22,18 @@ namespace Nest
 	{
 		protected override bool Conditionless => TermQuery.IsConditionless(this);
 		public object Value { get; set; }
-		public RewriteMultiTerm? Rewrite { get; set; }
+
+		public MultiTermQueryRewrite Rewrite { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Wildcard = this;
 	}
 
-	public class WildcardQueryDescriptor<T> : TermQueryDescriptorBase<WildcardQueryDescriptor<T>, T>,
+	public class WildcardQueryDescriptor<T> : TermQueryDescriptorBase<WildcardQueryDescriptor<T>, IWildcardQuery, T>,
 		IWildcardQuery
 		where T : class
 	{
-		RewriteMultiTerm? IWildcardQuery.Rewrite { get; set; }
+		MultiTermQueryRewrite IWildcardQuery.Rewrite { get; set; }
 
-		public WildcardQueryDescriptor<T> Rewrite(RewriteMultiTerm? rewrite)
-		{
-			((IWildcardQuery)this).Rewrite = rewrite;
-			return this;
-		}
+		public WildcardQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite) => Assign(a => a.Rewrite = rewrite);
 	}
 }

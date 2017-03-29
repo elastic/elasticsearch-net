@@ -28,7 +28,7 @@ q
     .Value(Project.Instance.StartedOn)
     .MaxExpansions(100)
     .PrefixLength(3)
-    .Rewrite(RewriteMultiTerm.ConstantScore)
+    .Rewrite(MultiTermQueryRewrite.ConstantScore)
     .Transpositions()
 )
 ----
@@ -46,7 +46,7 @@ new FuzzyDateQuery
     Value = Project.Instance.StartedOn,
     MaxExpansions = 100,
     PrefixLength = 3,
-    Rewrite = RewriteMultiTerm.ConstantScore,
+    Rewrite = MultiTermQueryRewrite.ConstantScore,
     Transpositions = true
 }
 ----

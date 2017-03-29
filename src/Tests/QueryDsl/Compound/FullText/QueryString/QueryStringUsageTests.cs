@@ -63,8 +63,8 @@ namespace Tests.QueryDsl.FullText.QueryString
 			UseDisMax = true,
 			FuzzyPrefixLength = 2,
 			FuzzyMaxExpansions = 3,
-			FuzzyRewrite = RewriteMultiTerm.ConstantScore,
-			Rewrite = RewriteMultiTerm.ConstantScore,
+			FuzzyRewrite = MultiTermQueryRewrite.ConstantScore,
+			Rewrite = MultiTermQueryRewrite.ConstantScore,
 			Fuzziness = Fuzziness.Auto,
 			TieBreaker = 1.2,
 			AnalyzeWildcard = true,
@@ -94,8 +94,8 @@ namespace Tests.QueryDsl.FullText.QueryString
 				.UseDisMax()
 				.FuzzyPrefixLength(2)
 				.FuzzyMaxExpansions(3)
-				.FuzzyRewrite(RewriteMultiTerm.ConstantScore)
-				.Rewrite(RewriteMultiTerm.ConstantScore)
+				.FuzzyRewrite(MultiTermQueryRewrite.ConstantScore)
+				.Rewrite(MultiTermQueryRewrite.ConstantScore)
 				.Fuzziness(Fuzziness.Auto)
 				.TieBreaker(1.2)
 				.AnalyzeWildcard()

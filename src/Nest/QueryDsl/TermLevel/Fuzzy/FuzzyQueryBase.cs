@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -6,42 +7,42 @@ namespace Nest
 	[JsonConverter(typeof(FuzzyQueryJsonConverter))]
 	public interface IFuzzyQuery : IFieldNameQuery
 	{
-		[JsonProperty(PropertyName = "prefix_length")]
+		[JsonProperty("prefix_length")]
 		int? PrefixLength { get; set; }
-		
-		[JsonProperty(PropertyName = "rewrite")]
-		RewriteMultiTerm? Rewrite { get; set; }
 
-		[JsonProperty(PropertyName = "max_expansions")]
+		[JsonProperty("rewrite")]
+		MultiTermQueryRewrite Rewrite { get; set; }
+
+		[JsonProperty("max_expansions")]
 		int? MaxExpansions { get; set; }
 
-		[JsonProperty(PropertyName = "transpositions")]
+		[JsonProperty("transpositions")]
 		bool? Transpositions { get; set; }
 	}
 	public interface IFuzzyQuery<TValue, TFuzziness> : IFuzzyQuery
 	{
-		[JsonProperty(PropertyName = "value")]
+		[JsonProperty("value")]
 		TValue Value { get; set; }
 
-		[JsonProperty(PropertyName = "fuzziness")]
+		[JsonProperty("fuzziness")]
 		TFuzziness Fuzziness { get; set; }
 	}
 
 	internal static class FuzzyQueryBase
 	{
-		internal static bool IsConditionless<TValue, TFuzziness>(IFuzzyQuery<TValue, TFuzziness> fuzzy) => 
+		internal static bool IsConditionless<TValue, TFuzziness>(IFuzzyQuery<TValue, TFuzziness> fuzzy) =>
 			fuzzy == null || fuzzy.Value == null || fuzzy.Field == null;
 	}
 
 	public abstract class FuzzyQueryBase<TValue, TFuzziness> : FieldNameQueryBase, IFuzzyQuery<TValue, TFuzziness>
 	{
 		public int? PrefixLength { get; set; }
-		
+
 		public TValue Value { get; set; }
 
 		public TFuzziness Fuzziness { get; set; }
 
-		public RewriteMultiTerm? Rewrite { get; set; }
+		public MultiTermQueryRewrite Rewrite { get; set; }
 
 		public int? MaxExpansions { get; set; }
 
@@ -53,7 +54,7 @@ namespace Nest
 
 	}
 
-	public abstract class FuzzyQueryDescriptorBase<TDescriptor, T, TValue, TFuzziness> 
+	public abstract class FuzzyQueryDescriptorBase<TDescriptor, T, TValue, TFuzziness>
 		: FieldNameQueryDescriptorBase<TDescriptor, IFuzzyQuery<TValue, TFuzziness>, T> , IFuzzyQuery<TValue, TFuzziness>
 		where T : class
 		where TDescriptor : FieldNameQueryDescriptorBase<TDescriptor, IFuzzyQuery<TValue, TFuzziness>, T>, IFuzzyQuery<TValue, TFuzziness>
@@ -62,7 +63,7 @@ namespace Nest
 		int? IFuzzyQuery.PrefixLength { get; set; }
 		int? IFuzzyQuery.MaxExpansions { get; set; }
 		bool? IFuzzyQuery.Transpositions { get; set; }
-		RewriteMultiTerm? IFuzzyQuery.Rewrite { get; set; }
+		MultiTermQueryRewrite IFuzzyQuery.Rewrite { get; set; }
 		TFuzziness IFuzzyQuery<TValue, TFuzziness>.Fuzziness { get; set; }
 		TValue IFuzzyQuery<TValue, TFuzziness>.Value { get; set; }
 
@@ -72,7 +73,6 @@ namespace Nest
 
 		public TDescriptor Transpositions(bool? enable = true) => Assign(a => a.Transpositions = enable);
 
-		public TDescriptor Rewrite(RewriteMultiTerm? rewrite) => Assign(a => a.Rewrite = rewrite);
-
+		public TDescriptor Rewrite(MultiTermQueryRewrite rewrite) => Assign(a => Self.Rewrite = rewrite);
 	}
 }

@@ -25,7 +25,7 @@ q
     .Boost(1.1)
     .Field(p => p.Description)
     .Value("p*oj")
-    .Rewrite(RewriteMultiTerm.TopTermsBoostN)
+    .Rewrite(MultiTermQueryRewrite.TopTermsBoost(10))
 )
 ----
 
@@ -39,7 +39,7 @@ new WildcardQuery
     Boost = 1.1,
     Field = "description",
     Value = "p*oj",
-    Rewrite = RewriteMultiTerm.TopTermsBoostN
+    Rewrite = MultiTermQueryRewrite.TopTermsBoost(10)
 }
 ----
 
@@ -51,7 +51,7 @@ new WildcardQuery
     "description": {
       "_name": "named_query",
       "boost": 1.1,
-      "rewrite": "top_terms_boost_N",
+      "rewrite": "top_terms_boost_10",
       "value": "p*oj"
     }
   }
