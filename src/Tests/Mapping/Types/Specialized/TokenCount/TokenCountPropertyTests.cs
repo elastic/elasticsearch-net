@@ -28,6 +28,7 @@ namespace Tests.Mapping.Types.Core.TokenCount
 			}
 		};
 
+#pragma warning disable 618 // Usage of IncludeInAll
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 				.TokenCount(s => s
 					.Name(p => p.Name)
@@ -37,7 +38,7 @@ namespace Tests.Mapping.Types.Core.TokenCount
 					.NullValue(0.0)
 					.IncludeInAll()
 				);
-
+#pragma warning restore 618
 
 		protected override IProperties InitializerProperties => new Properties
 		{
@@ -47,7 +48,9 @@ namespace Tests.Mapping.Types.Core.TokenCount
 					Analyzer = "standard",
 					Boost = 1.2,
 					NullValue = 0.0,
+#pragma warning disable 618
 					IncludeInAll = true
+#pragma warning restore 618
 				}
 			}
 		};

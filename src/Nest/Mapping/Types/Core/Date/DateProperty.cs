@@ -81,6 +81,7 @@ namespace Nest
 		bool? IDateProperty.Index { get; set; }
 		double? IDateProperty.Boost { get; set; }
 		DateTime? IDateProperty.NullValue { get; set; }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? IDateProperty.IncludeInAll { get; set; }
 		bool? IDateProperty.IgnoreMalformed { get; set; }
 		string IDateProperty.Format { get; set; }

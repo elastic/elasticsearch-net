@@ -55,17 +55,6 @@ s => s
                 )
             ),
         fs => fs
-            .Field(p => p.LeadDeveloper.LastName)
-            .Type(HighlighterType.Unified)
-            .PreTags("<name>")
-            .PostTags("</name>")
-            .HighlightQuery(q => q
-                .Match(m => m
-                    .Field(p => p.LeadDeveloper.LastName)
-                    .Query(LastNameSearch)
-                )
-            ),
-        fs => fs
             .Field(p => p.State.Suffix("offsets"))
             .Type(HighlighterType.Postings)
             .PreTags("<state>")
@@ -119,18 +108,6 @@ new SearchRequest<Project>
                     {
                         Field = "leadDeveloper.firstName",
                         Query = "Kurt Edgardo Naomi Dariana Justice Felton"
-                    }
-                }
-            },
-            { "leadDeveloper.lastName", new HighlightField
-                {
-                    Type = HighlighterType.Unified,
-                    PreTags = new[] { "<name>"},
-                    PostTags = new[] { "</name>"},
-                    HighlightQuery = new MatchQuery
-                    {
-                        Field = "leadDeveloper.lastName",
-                        Query = LastNameSearch
                     }
                 }
             },
@@ -194,22 +171,6 @@ new SearchRequest<Project>
           }
         }
       },
-      "leadDeveloper.lastName": {
-        "type": "unified",
-        "pre_tags": [
-          "<name>"
-        ],
-        "post_tags": [
-          "</name>"
-        ],
-        "highlight_query": {
-          "match": {
-            "leadDeveloper.lastName": {
-              "query": "Stokes"
-            }
-          }
-        }
-      },
       "state.offsets": {
         "type": "postings",
         "pre_tags": [
@@ -258,20 +219,154 @@ foreach (var highlightsInEachHit in response.Hits.Select(d=>d.Highlights))
                 highlight.Should().Contain("</name>");
             }
         }
-        else if (highlightField.Key == "leadDeveloper.lastName")
-        {
-            foreach (var highlight in highlightField.Value.Highlights)
-            {
-                highlight.Should().Contain("<name>");
-                highlight.Should().Contain("</name>");
-            }
-        }
         else if (highlightField.Key == "state.offsets")
         {
             foreach (var highlight in highlightField.Value.Highlights)
             {
                 highlight.Should().Contain("<state>");
                 highlight.Should().Contain("</state>");
+            }
+        }
+        else
+        {
+            Assert.True(false, $"highlights contains unexpected key {highlightField.Key}");
+        }
+    }
+}
+----
+
+[[unified-highlighter]]
+[float]
+== Unified highlighter
+
+The unified highlighter can extract offsets from either postings, term vectors, or via re-analyzing text.
+Under the hood it uses Lucene UnifiedHighlighter which picks its strategy depending on the
+field and the query to highlight.
+
+[NOTE]
+--
+Unified highlighter is available only in Elasticsearch 5.3.0+
+
+--
+
+[WARNING]
+--
+This functionality is experimental and may be changed or removed completely in a future release.
+Elastic will take a best effort approach to fix any issues, but experimental features
+are not subject to the support SLA of official GA features.
+
+--
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Query(q => q
+    .Match(m => m
+        .Field(f => f.Name.Suffix("standard"))
+        .Query("Upton Sons Shield Rice Rowe Roberts")
+    )
+)
+.Highlight(h => h
+    .Fields(
+        fs => fs
+            .Field(p => p.LeadDeveloper.LastName)
+            .Type(HighlighterType.Unified)
+            .PreTags("<name>")
+            .PostTags("</name>")
+            .HighlightQuery(q => q
+                .Match(m => m
+                    .Field(p => p.LeadDeveloper.LastName)
+                    .Query(LastNameSearch)
+                )
+            )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Query = new MatchQuery
+    {
+        Query = "Upton Sons Shield Rice Rowe Roberts",
+        Field = "name.standard"
+    },
+    Highlight = new Highlight
+    {
+        Fields = new Dictionary<Field, IHighlightField>
+        {
+            { "leadDeveloper.lastName", new HighlightField
+                {
+                    Type = HighlighterType.Unified,
+                    PreTags = new[] { "<name>"},
+                    PostTags = new[] { "</name>"},
+                    HighlightQuery = new MatchQuery
+                    {
+                        Field = "leadDeveloper.lastName",
+                        Query = LastNameSearch
+                    }
+                }
+            }
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "query": {
+    "match": {
+      "name.standard": {
+        "query": "Upton Sons Shield Rice Rowe Roberts"
+      }
+    }
+  },
+  "highlight": {
+    "fields": {
+      "leadDeveloper.lastName": {
+        "type": "unified",
+        "pre_tags": [
+          "<name>"
+        ],
+        "post_tags": [
+          "</name>"
+        ],
+        "highlight_query": {
+          "match": {
+            "leadDeveloper.lastName": {
+              "query": "Stokes"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+
+foreach (var highlightsInEachHit in response.Hits.Select(d => d.Highlights))
+{
+    foreach (var highlightField in highlightsInEachHit)
+    {
+        if (highlightField.Key == "leadDeveloper.lastName")
+        {
+            foreach (var highlight in highlightField.Value.Highlights)
+            {
+                highlight.Should().Contain("<name>");
+                highlight.Should().Contain("</name>");
             }
         }
         else

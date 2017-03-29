@@ -12,7 +12,9 @@ namespace Tests.Mapping.Types.Core.Number
 			Index = false,
 			Boost = 1.5,
 			NullValue = 0.0,
+#pragma warning disable 618
 			IncludeInAll = false,
+#pragma warning restore 618
 			IgnoreMalformed = true,
 			Coerce = true,
 			ScalingFactor = 10)]

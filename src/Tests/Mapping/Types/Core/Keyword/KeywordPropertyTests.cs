@@ -54,6 +54,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 			}
 		};
 
+#pragma warning disable 618 // Usage of IncludeInAll
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.Keyword(b => b
 				.Name(p => p.State)
@@ -76,7 +77,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 					)
 				)
 			);
-
+#pragma warning restore 618
 
 		protected override IProperties InitializerProperties => new Properties
 		{
@@ -86,7 +87,9 @@ namespace Tests.Mapping.Types.Core.Keyword
 					Boost = 1.2,
 					EagerGlobalOrdinals = true,
 					IgnoreAbove = 50,
+#pragma warning disable 618
 					IncludeInAll = true,
+#pragma warning restore 618
 					Index = false,
 					IndexOptions = IndexOptions.Freqs,
 					NullValue = "null",

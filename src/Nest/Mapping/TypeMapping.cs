@@ -101,7 +101,6 @@ namespace Nest
 		public ISizeField SizeField { get; set; }
 		/// <inheritdoc/>
 		public ISourceField SourceField { get; set; }
-		/// <inheritdoc/>
 	}
 
 
