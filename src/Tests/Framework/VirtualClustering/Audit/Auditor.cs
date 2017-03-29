@@ -74,7 +74,9 @@ namespace Tests.Framework
 			return AssertAuditTrails(callTrace, nthCall);
 		}
 
+#pragma warning disable 1998 // Async method lacks 'await' operators and will run synchronously
 		private async Task TraceException<TException>(ClientCall callTrace, Action<TException> assert)
+#pragma warning restore 1998 // Async method lacks 'await' operators and will run synchronously
 			where TException : ElasticsearchClientException
 		{
 			this._cluster  = _cluster ?? this.Cluster();
@@ -112,9 +114,9 @@ namespace Tests.Framework
 			return new Auditor(_cluster, _clusterAsync);
 		}
 
-#pragma warning disable 1998
+#pragma warning disable 1998 // Async method lacks 'await' operators and will run synchronously
 		public async Task<Auditor> TraceElasticsearchExceptionOnResponse(ClientCall callTrace, Action<ElasticsearchClientException> assert)
-#pragma warning restore 1998
+#pragma warning restore 1998 // Async method lacks 'await' operators and will run synchronously
 		{
 			this._cluster  = _cluster ?? this.Cluster();
 			this._cluster.ClientThrows(false);

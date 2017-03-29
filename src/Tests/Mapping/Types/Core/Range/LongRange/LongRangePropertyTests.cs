@@ -35,6 +35,7 @@ namespace Tests.Mapping.Types.Core.Range.LongRange
 			}
 		};
 
+#pragma warning disable 618 // Usage of IncludeInAll
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.Object<Ranges>(m => m
 				.Name(p => p.Ranges)
@@ -49,7 +50,7 @@ namespace Tests.Mapping.Types.Core.Range.LongRange
 					)
 				)
 			);
-
+#pragma warning restore 618
 
 		protected override IProperties InitializerProperties => new Properties
 		{
@@ -64,7 +65,9 @@ namespace Tests.Mapping.Types.Core.Range.LongRange
 								Store = true,
 								Index = false,
 								Boost = 1.5,
+#pragma warning disable 618
 								IncludeInAll = false,
+#pragma warning restore 618
 								Coerce = true
 							}
 						}

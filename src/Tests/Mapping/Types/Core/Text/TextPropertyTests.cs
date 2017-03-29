@@ -52,7 +52,7 @@ namespace Tests.Mapping.Types.Core.Text
 			}
 		};
 
-
+#pragma warning disable 618 // Usage of IncludeInAll
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 				.Text(s => s
 					.Name(p => p.Name)
@@ -85,7 +85,7 @@ namespace Tests.Mapping.Types.Core.Text
 					.Norms(false)
 					.TermVector(TermVectorOption.WithPositionsOffsets)
 				);
-
+#pragma warning restore 618
 
 		protected override IProperties InitializerProperties => new Properties
 		{
@@ -110,7 +110,9 @@ namespace Tests.Mapping.Types.Core.Text
 							}
 						}
 					},
+#pragma warning disable 618
 					IncludeInAll = false,
+#pragma warning restore 618
 					Index = true,
 					IndexOptions = IndexOptions.Offsets,
 					PositionIncrementGap = 5,

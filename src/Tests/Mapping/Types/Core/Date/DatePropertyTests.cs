@@ -32,6 +32,7 @@ namespace Tests.Mapping.Types.Core.Date
 			}
 		};
 
+#pragma warning disable 618 // usage of IncludeInAll
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.Date(b => b
 				.Name(p => p.LastActivity)
@@ -45,6 +46,7 @@ namespace Tests.Mapping.Types.Core.Date
 				.Format("MM/dd/yyyy")
 				.NullValue(DateTime.MinValue)
 			);
+#pragma warning restore 618
 
 		protected override IProperties InitializerProperties => new Properties
 		{
@@ -55,7 +57,9 @@ namespace Tests.Mapping.Types.Core.Date
 					Store = true,
 					Index = false,
 					Boost = 1.2,
+#pragma warning disable 618
 					IncludeInAll = false,
+#pragma warning restore 618
 					IgnoreMalformed = true,
 					Format = "MM/dd/yyyy",
 					NullValue = DateTime.MinValue

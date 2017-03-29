@@ -9,7 +9,9 @@ namespace Tests.Mapping.Types.Specialized.Ip
 			Index = false,
 			Boost = 1.3,
 			NullValue = "127.0.0.1",
+#pragma warning disable 618
 			IncludeInAll = true)]
+#pragma warning restore 618
 		public string Full { get; set; }
 
 		[Ip]

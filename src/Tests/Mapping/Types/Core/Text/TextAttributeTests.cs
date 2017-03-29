@@ -10,7 +10,9 @@ namespace Tests.Mapping.Types.Core.Text
 			Boost = 1.2,
 			EagerGlobalOrdinals = true,
 			Fielddata = true,
+#pragma warning disable 618
 			IncludeInAll = false,
+#pragma warning restore 618
 			Index = true,
 			IndexOptions = IndexOptions.Offsets,
 			PositionIncrementGap = 5,

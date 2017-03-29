@@ -1,7 +1,4 @@
-﻿using System;
-using Nest;
-using Tests.Framework;
-using Tests.Framework.Integration;
+﻿using Nest;
 
 namespace Tests.Mapping.Types.Specialized.Murmur3Hash
 {

@@ -50,6 +50,7 @@ namespace Nest
 
 		string ITokenCountProperty.Analyzer { get; set; }
 		double? ITokenCountProperty.Boost { get; set; }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? ITokenCountProperty.IncludeInAll { get; set; }
 		bool? ITokenCountProperty.Index { get; set; }
 		double? ITokenCountProperty.NullValue { get; set; }

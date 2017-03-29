@@ -32,6 +32,7 @@ namespace Tests.Mapping.Types.Core.Number
 			}
 		};
 
+#pragma warning disable 618 // Usage of IncludeInAll
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.Number(n => n
 				.Name(p => p.NumberOfCommits)
@@ -46,7 +47,7 @@ namespace Tests.Mapping.Types.Core.Number
 				.IgnoreMalformed()
 				.Coerce()
 			);
-
+#pragma warning restore 618
 
 		protected override IProperties InitializerProperties => new Properties
 		{
@@ -58,7 +59,9 @@ namespace Tests.Mapping.Types.Core.Number
 					Index = false,
 					Boost = 1.5,
 					NullValue = 0.0,
+#pragma warning disable 618
 					IncludeInAll = false,
+#pragma warning restore 618
 					IgnoreMalformed = true,
 					Coerce = true
 				}
@@ -91,6 +94,7 @@ namespace Tests.Mapping.Types.Core.Number
 			}
 		};
 
+#pragma warning disable 618 // Usage of IncludeInAll
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
 			.Number(n => n
 				.Name(p => p.NumberOfCommits)
@@ -106,6 +110,7 @@ namespace Tests.Mapping.Types.Core.Number
 				.IgnoreMalformed()
 				.Coerce()
 			);
+#pragma warning restore 618
 
 
 		protected override IProperties InitializerProperties => new Properties
@@ -119,7 +124,9 @@ namespace Tests.Mapping.Types.Core.Number
 					Index = false,
 					Boost = 1.5,
 					NullValue = 0.0,
+#pragma warning disable 618
 					IncludeInAll = false,
+#pragma warning restore 618
 					IgnoreMalformed = true,
 					Coerce = true
 				}

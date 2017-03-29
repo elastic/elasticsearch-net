@@ -9,7 +9,9 @@ namespace Tests.Mapping.Types.Core.Keyword
 			Boost = 1.2,
 			EagerGlobalOrdinals = true,
 			IgnoreAbove = 50,
+#pragma warning disable 618
 			IncludeInAll = false,
+#pragma warning restore 618
 			Index = false,
 			IndexOptions = IndexOptions.Offsets,
 			NullValue = "null",

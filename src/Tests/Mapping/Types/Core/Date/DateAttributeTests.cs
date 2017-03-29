@@ -11,7 +11,9 @@ namespace Tests.Mapping.Types.Core.Date
 			Store = true,
 			Index = false,
 			Boost = 1.2,
+#pragma warning disable 618
 			IncludeInAll = false,
+#pragma warning restore 618
 			IgnoreMalformed = true,
 			Format = "MM/dd/yyyy")]
 		public DateTime Full { get; set; }

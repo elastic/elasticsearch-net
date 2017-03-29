@@ -36,7 +36,7 @@ namespace Nest
 		string SearchAnalyzer { get; set; }
 
 		[JsonProperty("include_in_all")]
-		[Obsolete("Scheduled to be removed in Elasticsearch 6.0")]
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? IncludeInAll { get; set; }
 
 		[JsonProperty("ignore_above")]
@@ -63,7 +63,7 @@ namespace Nest
 		public TermVectorOption? TermVector { get; set; }
 		public double? Boost { get; set; }
 		public string SearchAnalyzer { get; set; }
-		[Obsolete("Scheduled to be removed in Elasticsearch 6.0")]
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public bool? IncludeInAll { get; set; }
 		public int? IgnoreAbove { get; set; }
 		public int? PositionIncrementGap { get; set; }
@@ -93,6 +93,7 @@ namespace Nest
 		IndexOptions? IGenericProperty.IndexOptions { get; set; }
 		string IGenericProperty.Analyzer { get; set; }
 		string IGenericProperty.SearchAnalyzer { get; set; }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? IGenericProperty.IncludeInAll { get; set; }
 		int? IGenericProperty.IgnoreAbove { get; set; }
 		int? IGenericProperty.PositionIncrementGap { get; set; }
@@ -108,6 +109,7 @@ namespace Nest
 
 		public GenericPropertyDescriptor<T> NullValue(string nullValue) => Assign(a => a.NullValue = nullValue);
 
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public GenericPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 
 		public GenericPropertyDescriptor<T> NotAnalyzed() => Index(FieldIndexOption.NotAnalyzed);

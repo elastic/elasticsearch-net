@@ -52,6 +52,7 @@ namespace Nest
 
 		public IpPropertyDescriptor<T> NullValue(string nullValue) => Assign(a => a.NullValue = nullValue);
 
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public IpPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 	}
 }

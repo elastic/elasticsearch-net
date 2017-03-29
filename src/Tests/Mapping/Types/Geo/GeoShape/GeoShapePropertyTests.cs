@@ -1,12 +1,10 @@
 ﻿using System;
-using Elasticsearch.Net;
 using Nest;
-using Tests.Framework;
-using Tests.Framework.MockData;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.MockData;
 
-namespace Tests.Mapping.Types.Core.GeoShape
+namespace Tests.Mapping.Types.Geo.GeoShape
 {
 	public class GeoShapePropertyTests : PropertyTestsBase
 	{

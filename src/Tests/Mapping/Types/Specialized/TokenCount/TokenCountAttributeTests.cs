@@ -10,7 +10,9 @@ namespace Tests.Mapping.Types.Specialized.TokenCount
 			Analyzer = "standard",
 			Boost = 1.2,
 			NullValue = 0,
+#pragma warning disable 618
 			IncludeInAll = true)]
+#pragma warning restore 618
 		public int Full { get; set; }
 
 		[TokenCount]
