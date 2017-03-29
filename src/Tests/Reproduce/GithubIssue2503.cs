@@ -44,9 +44,7 @@ namespace Tests.Reproduce
 				  ""terms"": {
 					""field"": ""size"",
 					""size"": 20,
-					""include"": {
-					  ""pattern"" : ""\\d+""
-					}
+					""include"": ""\\d+""
 				  }
 				}
 			  }

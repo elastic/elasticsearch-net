@@ -102,6 +102,7 @@
     <Compile Include="Aggregations\Bucket\SignificantTerms\SignificantTermsAggregate.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\SignificantTermsAggregation.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\SignificantTermsBucket.cs" />
+    <Compile Include="Aggregations\Bucket\SignificantTerms\SignificantTermsIncludeExclude.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregate.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregationCollectMode.cs" />

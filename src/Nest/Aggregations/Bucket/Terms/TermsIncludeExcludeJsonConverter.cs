@@ -19,25 +19,8 @@ namespace Nest
 				case JsonToken.StartArray:
 					termsInclude.Values = serializer.Deserialize<IEnumerable<string>>(reader);
 					break;
-				case JsonToken.StartObject:
-					while (reader.TokenType != JsonToken.EndObject)
-					{
-						reader.Read();
-
-						if (reader.TokenType == JsonToken.PropertyName)
-						{
-							var propertyName = (string)reader.Value;
-							switch (propertyName)
-							{
-								case "pattern":
-									termsInclude.Pattern = reader.ReadAsString();
-									break;
-								case "flags":
-									termsInclude.Flags = reader.ReadAsString();
-									break;
-							}
-						}
-					}
+				case JsonToken.String:
+					termsInclude.Pattern = (string)reader.Value;
 					break;
 				default:
 					throw new JsonSerializationException($"Unexpected token {reader.TokenType} when deserializing {nameof(TermsIncludeExclude)}");
@@ -48,23 +31,15 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var termsIncludeExclude = value as TermsIncludeExclude;
+			var termsIncludeExclude = (TermsIncludeExclude)value;
 
-			if (termsIncludeExclude.Values != null)
-			{
+			if (termsIncludeExclude == null)
+				writer.WriteNull();
+			else if (termsIncludeExclude.Values != null)
 				serializer.Serialize(writer, termsIncludeExclude.Values);
-			}
 			else
 			{
-				writer.WriteStartObject();
-				writer.WritePropertyName("pattern");
 				writer.WriteValue(termsIncludeExclude.Pattern);
-				if (!termsIncludeExclude.Flags.IsNullOrEmpty())
-				{
-					writer.WritePropertyName("flags");
-					writer.WriteValue(termsIncludeExclude.Flags);
-				}
-				writer.WriteEndObject();
 			}
 		}
 	}

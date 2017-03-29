@@ -44,7 +44,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
 			visitor.CountsShouldContainKeyAndCountBe("object", 3);
 			visitor.CountsShouldContainKeyAndCountBe("date", 4);
-			visitor.CountsShouldContainKeyAndCountBe("string", 16);
+			visitor.CountsShouldContainKeyAndCountBe("string", 17);
 			visitor.CountsShouldContainKeyAndCountBe("ip", 1);
 			visitor.CountsShouldContainKeyAndCountBe("number", 3);
 			visitor.CountsShouldContainKeyAndCountBe("geo_point", 2);
