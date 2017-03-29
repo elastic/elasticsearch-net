@@ -1,56 +1,60 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(MatchQueryJsonConverter))]
-	public interface IMatchQuery : IFieldNameQuery 
+	public interface IMatchQuery : IFieldNameQuery
 	{
-		[JsonProperty(PropertyName = "type")]
+		[JsonProperty("type")]
 		string Type { get; }
 
-		[JsonProperty(PropertyName = "query")]
+		[JsonProperty("query")]
 		string Query { get; set; }
 
-		[JsonProperty(PropertyName = "analyzer")]
+		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty(PropertyName = "fuzzy_rewrite")]
-		[JsonConverter(typeof (StringEnumConverter))]
+		[JsonIgnore]
+		[Obsolete("Use FuzzyMultiTermQueryRewrite")]
 		RewriteMultiTerm? FuzzyRewrite { get; set; }
 
-		[JsonProperty(PropertyName = "fuzziness")]
+		[JsonProperty("fuzzy_rewrite")]
+		MultiTermQueryRewrite FuzzyMultiTermQueryRewrite { get; set; }
+
+		[JsonProperty("fuzziness")]
 		IFuzziness Fuzziness { get; set; }
 
-		[JsonProperty(PropertyName = "fuzzy_transpositions")]
+		[JsonProperty("fuzzy_transpositions")]
 		bool? FuzzyTranspositions { get; set; }
 
-		[JsonProperty(PropertyName = "cutoff_frequency")]
+		[JsonProperty("cutoff_frequency")]
 		double? CutoffFrequency { get; set; }
 
-		[JsonProperty(PropertyName = "prefix_length")]
+		[JsonProperty("prefix_length")]
 		int? PrefixLength { get; set; }
 
-		[JsonProperty(PropertyName = "max_expansions")]
+		[JsonProperty("max_expansions")]
 		int? MaxExpansions { get; set; }
 
-		[JsonProperty(PropertyName = "slop")]
+		[JsonProperty("slop")]
 		int? Slop { get; set; }
 
-		[JsonProperty(PropertyName = "lenient")]
+		[JsonProperty("lenient")]
 		bool? Lenient { get; set; }
-		
+
 		[JsonProperty("minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
-		[JsonProperty(PropertyName = "operator")]
+		[JsonProperty("operator")]
 		Operator? Operator { get; set; }
 
-		[JsonProperty(PropertyName = "zero_terms_query")]
+		[JsonProperty("zero_terms_query")]
 		ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
-	
+
 	public class MatchQuery : FieldNameQueryBase, IMatchQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
@@ -59,7 +63,13 @@ namespace Nest
 
 		public string Query { get; set; }
 		public string Analyzer { get; set; }
-		public RewriteMultiTerm? FuzzyRewrite { get; set; }
+		[Obsolete("Use FuzzyMultiTermQueryRewrite")]
+		public RewriteMultiTerm? FuzzyRewrite
+		{
+			get { return FuzzyMultiTermQueryRewrite?.Rewrite; }
+			set { FuzzyMultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+		public MultiTermQueryRewrite FuzzyMultiTermQueryRewrite { get; set; }
 		public IFuzziness Fuzziness { get; set; }
 		public bool? FuzzyTranspositions { get; set; }
 		public double? CutoffFrequency { get; set; }
@@ -77,8 +87,8 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class MatchQueryDescriptor<T> 
-		: FieldNameQueryDescriptorBase<MatchQueryDescriptor<T>, IMatchQuery, T> 
+	public class MatchQueryDescriptor<T>
+		: FieldNameQueryDescriptorBase<MatchQueryDescriptor<T>, IMatchQuery, T>
 		, IMatchQuery where T : class
 	{
 		protected virtual string MatchQueryType => null;
@@ -87,7 +97,12 @@ namespace Nest
 		string IMatchQuery.Query { get; set; }
 		string IMatchQuery.Analyzer { get; set; }
 		MinimumShouldMatch IMatchQuery.MinimumShouldMatch { get; set; }
-		RewriteMultiTerm? IMatchQuery.FuzzyRewrite { get; set; }
+		RewriteMultiTerm? IMatchQuery.FuzzyRewrite
+		{
+			get { return Self.FuzzyMultiTermQueryRewrite?.Rewrite; }
+			set { Self.FuzzyMultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+		MultiTermQueryRewrite IMatchQuery.FuzzyMultiTermQueryRewrite { get; set; }
 		IFuzziness IMatchQuery.Fuzziness { get; set; }
 		bool? IMatchQuery.FuzzyTranspositions { get; set; }
 		double? IMatchQuery.CutoffFrequency { get; set; }
@@ -110,16 +125,25 @@ namespace Nest
 
 		public MatchQueryDescriptor<T> CutoffFrequency(double? cutoffFrequency) => Assign(a => a.CutoffFrequency = cutoffFrequency);
 
-		public MatchQueryDescriptor<T> FuzzyRewrite(RewriteMultiTerm? rewrite) => Assign(a => a.FuzzyRewrite = rewrite);
+		[Obsolete("Use FuzzyRewrite(MultiTermQueryRewrite rewrite)")]
+		public MatchQueryDescriptor<T> FuzzyRewrite(RewriteMultiTerm? rewrite) =>
+			Assign(a =>
+			{
+				a.FuzzyMultiTermQueryRewrite = rewrite != null
+					? new MultiTermQueryRewrite(rewrite.Value)
+					: null;
+			});
+
+		public MatchQueryDescriptor<T> FuzzyRewrite(MultiTermQueryRewrite rewrite) => Assign(a => Self.FuzzyMultiTermQueryRewrite = rewrite);
 
 		public MatchQueryDescriptor<T> PrefixLength(int? prefixLength) => Assign(a => a.PrefixLength = prefixLength);
 
 		public MatchQueryDescriptor<T> MaxExpansions(int? maxExpansions) => Assign(a => a.MaxExpansions = maxExpansions);
-		
+
 		public MatchQueryDescriptor<T> Slop(int? slop) => Assign(a => a.Slop = slop);
-		
+
 		public MatchQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch) => Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
-	
+
 		public MatchQueryDescriptor<T> Operator(Operator? op) => Assign(a => a.Operator = op);
 
 		public MatchQueryDescriptor<T> ZeroTermsQuery(ZeroTermsQuery? zeroTermsQuery) => Assign(a => a.ZeroTermsQuery = zeroTermsQuery);
