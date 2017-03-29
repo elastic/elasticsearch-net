@@ -382,6 +382,10 @@ namespace Nest
 		public QueryContainer Term(Func<TermQueryDescriptor<T>, ITermQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Term = query);
 
+		[Obsolete("Use overload that accepts MultiTermQueryRewrite")]
+		public QueryContainer Wildcard(Expression<Func<T, object>> field, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
+			this.Wildcard(t => t.Field(field).Value(value).Rewrite(rewrite).Boost(boost).Name(name));
+
 		/// <summary>
 		/// Matches documents that have fields matching a wildcard expression (not analyzed).
 		/// Supported wildcards are *, which matches any character sequence (including the empty one), and ?,
@@ -389,9 +393,10 @@ namespace Nest
 		/// over many terms. In order to prevent extremely slow wildcard queries, a wildcard term should
 		/// not start with one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
-		public QueryContainer Wildcard(Expression<Func<T, object>> field, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
+		public QueryContainer Wildcard(Expression<Func<T, object>> field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
 			this.Wildcard(t => t.Field(field).Value(value).Rewrite(rewrite).Boost(boost).Name(name));
 
+		[Obsolete("Use overload that accepts MultiTermQueryRewrite")]
 		/// <summary>
 		/// Matches documents that have fields matching a wildcard expression (not analyzed).
 		/// Supported wildcards are *, which matches any character sequence (including the empty one), and ?,
@@ -409,13 +414,20 @@ namespace Nest
 		/// In order to prevent extremely slow wildcard queries, a wildcard term should not start with
 		/// one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
+		public QueryContainer Wildcard(Field field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
+			this.Wildcard(t => t.Field(field).Value(value).Rewrite(rewrite).Boost(boost).Name(name));
+
+		/// <summary>
+		/// Matches documents that have fields matching a wildcard expression (not analyzed).
+		/// Supported wildcards are *, which matches any character sequence (including the empty one), and ?,
+		/// which matches any single character. Note this query can be slow, as it needs to iterate over many terms.
+		/// In order to prevent extremely slow wildcard queries, a wildcard term should not start with
+		/// one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
+		/// </summary>
 		public QueryContainer Wildcard(Func<WildcardQueryDescriptor<T>, IWildcardQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Wildcard = query);
 
-		/// <summary>
-		/// Matches documents that have fields containing terms with a specified prefix (not analyzed).
-		/// The prefix query maps to Lucene PrefixQuery.
-		/// </summary>
+		[Obsolete("Use overload that accepts MultiTermQueryRewrite")]
 		public QueryContainer Prefix(Expression<Func<T, object>> field, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
 			this.Prefix(t => t.Field(field).Value(value).Boost(boost).Rewrite(rewrite).Name(name));
 
@@ -423,7 +435,22 @@ namespace Nest
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed).
 		/// The prefix query maps to Lucene PrefixQuery.
 		/// </summary>
+		public QueryContainer Prefix(Expression<Func<T, object>> field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
+			this.Prefix(t => t.Field(field).Value(value).Boost(boost).Rewrite(rewrite).Name(name));
+
+		[Obsolete("Use overload that accepts MultiTermQueryRewrite")]
+		/// <summary>
+		/// Matches documents that have fields containing terms with a specified prefix (not analyzed).
+		/// The prefix query maps to Lucene PrefixQuery.
+		/// </summary>
 		public QueryContainer Prefix(string field, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
+			this.Prefix(t => t.Field(field).Value(value).Boost(boost).Rewrite(rewrite).Name(name));
+
+		/// <summary>
+		/// Matches documents that have fields containing terms with a specified prefix (not analyzed).
+		/// The prefix query maps to Lucene PrefixQuery.
+		/// </summary>
+		public QueryContainer Prefix(Field field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
 			this.Prefix(t => t.Field(field).Value(value).Boost(boost).Rewrite(rewrite).Name(name));
 
 		/// <summary>
@@ -483,14 +510,14 @@ namespace Nest
 			WrapInContainer(selector, (query, container) => container.SpanMultiTerm = query);
 
 		/// <summary>
-		/// Returns matches which enclose another span query. 
+		/// Returns matches which enclose another span query.
 		/// The span containing query maps to Lucene SpanContainingQuery
 		/// </summary>
 		public QueryContainer SpanContaining(Func<SpanContainingQueryDescriptor<T>, ISpanContainingQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.SpanContaining = query);
 
 		/// <summary>
-		/// Returns Matches which are enclosed inside another span query. 
+		/// Returns Matches which are enclosed inside another span query.
 		/// The span within query maps to Lucene SpanWithinQuery
 		/// </summary>
 		public QueryContainer SpanWithin(Func<SpanWithinQueryDescriptor<T>, ISpanWithinQuery> selector) =>
@@ -506,8 +533,8 @@ namespace Nest
 			WrapInContainer(selector, (query, container) => container.SpanFieldMasking = query);
 
 		/// <summary>
-		/// Allows you to use regular expression term queries. 
-		/// "term queries" means that Elasticsearch will apply the regexp to the terms produced 
+		/// Allows you to use regular expression term queries.
+		/// "term queries" means that Elasticsearch will apply the regexp to the terms produced
 		/// by the tokenizer for that field, and not to the original text of the field.
 		/// </summary>
 		public QueryContainer Regexp(Func<RegexpQueryDescriptor<T>, IRegexpQuery> selector) =>

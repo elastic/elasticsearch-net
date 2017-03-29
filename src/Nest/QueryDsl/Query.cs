@@ -115,10 +115,18 @@ namespace Nest
 		public static QueryContainer Nested(Func<NestedQueryDescriptor<T>, INestedQuery> selector) =>
 			new QueryContainerDescriptor<T>().Nested(selector);
 
+		[Obsolete("Use overload that accepts MultiTermQueryRewrite as an argument")]
 		public static QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
 			new QueryContainerDescriptor<T>().Prefix(fieldDescriptor, value, boost, rewrite, name);
 
+		public static QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
+			new QueryContainerDescriptor<T>().Prefix(fieldDescriptor, value, boost, rewrite, name);
+
+		[Obsolete("Use overload that accepts MultiTermQueryRewrite as an argument")]
 		public static QueryContainer Prefix(string field, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
+			new QueryContainerDescriptor<T>().Prefix(field, value, boost, rewrite, name);
+
+		public static QueryContainer Prefix(Field field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
 			new QueryContainerDescriptor<T>().Prefix(field, value, boost, rewrite, name);
 
 		public static QueryContainer Prefix(Func<PrefixQueryDescriptor<T>, IPrefixQuery> selector) =>
@@ -195,11 +203,16 @@ namespace Nest
 
 		public static QueryContainer Type<TOther>() => Type(q => q.Value<TOther>());
 
+		[Obsolete("Use overload that accepts MultiTermQueryRewrite as an argument")]
 		public static QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
 			new QueryContainerDescriptor<T>().Wildcard(fieldDescriptor, value, boost, rewrite, name);
 
+		[Obsolete("Use overload that accepts MultiTermQueryRewrite as an argument")]
 		public static QueryContainer Wildcard(string field, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
 			new QueryContainerDescriptor<T>().Wildcard(field, value, boost, rewrite, name);
+
+		public static QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
+			new QueryContainerDescriptor<T>().Wildcard(fieldDescriptor, value, boost, rewrite, name);
 
 		public static QueryContainer Wildcard(Func<WildcardQueryDescriptor<T>, IWildcardQuery> selector) =>
 			new QueryContainerDescriptor<T>().Wildcard(selector);
@@ -212,6 +225,9 @@ namespace Nest
 		[Obsolete("Use the bool query instead with a should clause for the query")]
 		public static QueryContainer Or(Func<OrQueryDescriptor<T>, IOrQuery> selector) =>
 			new QueryContainerDescriptor<T>().Or(selector);
+
+		public static QueryContainer Wildcard(Field field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
+			new QueryContainerDescriptor<T>().Wildcard(field, value, boost, rewrite, name);
 
 		[Obsolete("Use the bool query with a must clause query instead. The bool query should not have other clauses to be semantically correct")]
 		public static QueryContainer And(Func<AndQueryDescriptor<T>, IAndQuery> selector) =>
