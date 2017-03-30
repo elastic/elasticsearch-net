@@ -301,6 +301,7 @@
     <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\EnsureWatcherActionConfigurationInElasticsearchYaml.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\InstallationTaskBase.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\InstallPlugins.cs" />
+    <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\SecurityRealms.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\UnzipCurrentElasticsearchDistribution.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Tasks\InstallationTasks\WriteAnalysisFiles.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Tasks\NodeTaskRunner.cs" />
