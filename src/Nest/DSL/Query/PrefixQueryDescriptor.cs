@@ -10,9 +10,12 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IPrefixQuery : ITermQuery
 	{
-		[JsonProperty(PropertyName = "rewrite")]
-		[JsonConverter(typeof (StringEnumConverter))]
+		[JsonIgnore]
+		[Obsolete("Use MultiTermQueryRewrite")]
 		RewriteMultiTerm? Rewrite { get; set; }
+
+		[JsonProperty("rewrite")]
+		MultiTermQueryRewrite MultiTermQueryRewrite { get; set; }
 	}
 
 	public class PrefixQuery : PlainQuery, IPrefixQuery
@@ -38,19 +41,39 @@ namespace Nest
 		public PropertyPathMarker Field { get; set; }
 		public object Value { get; set; }
 		public double? Boost { get; set; }
-		public RewriteMultiTerm? Rewrite { get; set; }
+		[Obsolete("Use MultiTermQueryRewrite")]
+		public RewriteMultiTerm? Rewrite
+		{
+			get { return MultiTermQueryRewrite?.Rewrite; }
+			set { MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+		public MultiTermQueryRewrite MultiTermQueryRewrite { get; set; }
 	}
 
 	public class PrefixQueryDescriptor<T> : TermQueryDescriptorBase<PrefixQueryDescriptor<T>, T>, 
 		IPrefixQuery where T : class
 	{
-		RewriteMultiTerm? IPrefixQuery.Rewrite { get; set; }
+		protected IPrefixQuery Self { get { return this; } }
 
+		[Obsolete("Use MultiTermQueryRewrite")]
+		RewriteMultiTerm? IPrefixQuery.Rewrite
+		{
+			get { return Self.MultiTermQueryRewrite?.Rewrite; }
+			set { Self.MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+		MultiTermQueryRewrite IPrefixQuery.MultiTermQueryRewrite { get; set; }
+
+		[Obsolete("Use overload that accepts MultiTermQueryRewrite")]
 		public PrefixQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
 		{
-			((IPrefixQuery)this).Rewrite = rewrite;
+			Self.MultiTermQueryRewrite = new MultiTermQueryRewrite(rewrite);
 			return this;
 		}
-		
+
+		public PrefixQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite)
+		{
+			Self.MultiTermQueryRewrite = rewrite;
+			return this;
+		}
 	}
 }

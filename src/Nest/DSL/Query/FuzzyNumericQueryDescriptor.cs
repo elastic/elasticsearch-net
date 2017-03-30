@@ -29,7 +29,14 @@ namespace Nest
 		public PropertyPathMarker Field { get; set; }
 		public double? Boost { get; set; }
 		public string Fuzziness { get; set; }
-		public RewriteMultiTerm? Rewrite { get; set; }
+		[Obsolete("Use MultiTermQueryRewrite")]
+		public RewriteMultiTerm? Rewrite
+		{
+			get { return MultiTermQueryRewrite?.Rewrite; }
+			set { MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+
+		public MultiTermQueryRewrite MultiTermQueryRewrite { get; set; }
 		public int? MaxExpansions { get; set; }
 		public bool? Transpositions { get; set; }
 		public bool? UnicodeAware { get; set; }
@@ -54,7 +61,14 @@ namespace Nest
 
 		bool? IFuzzyQuery.UnicodeAware { get; set; }
 
-		RewriteMultiTerm? IFuzzyQuery.Rewrite { get; set; }
+		[Obsolete("Use MultiTermQueryRewrite")]
+		RewriteMultiTerm? IFuzzyQuery.Rewrite
+		{
+			get { return Self.MultiTermQueryRewrite?.Rewrite; }
+			set { Self.MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+
+		MultiTermQueryRewrite IFuzzyQuery.MultiTermQueryRewrite { get; set; }
 
 		string IQuery.Name { get; set; }
 
@@ -123,9 +137,16 @@ namespace Nest
 			Self.UnicodeAware = enable;
 			return this;
 		}
+		[Obsolete("Use overload that accepts MultiTermQueryRewrite")]
 		public FuzzyNumericQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
 		{
-			Self.Rewrite = rewrite;
+			Self.MultiTermQueryRewrite = new MultiTermQueryRewrite(rewrite);
+			return this;
+		}
+
+		public FuzzyNumericQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite)
+		{
+			Self.MultiTermQueryRewrite = rewrite;
 			return this;
 		}
 		public FuzzyNumericQueryDescriptor<T> Value(int? value)

@@ -22,7 +22,7 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 			{
 				Field = "prefix_field", 
 				Value = "prefi", 
-				Rewrite = RewriteMultiTerm.ConstantScoreBoolean
+				MultiTermQueryRewrite = MultiTermQueryRewrite.ConstantScoreBoolean
 			};
 
 			var result = _client.Search<ElasticsearchProject>(new SearchRequest

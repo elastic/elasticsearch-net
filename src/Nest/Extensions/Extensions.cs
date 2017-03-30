@@ -24,6 +24,16 @@ namespace Nest
 				return string.Empty;
 		}
 
+		internal static string ToEnumValue<T>(this T enumValue) where T : struct
+		{
+			var enumType = typeof(T);
+			var name = Enum.GetName(enumType, enumValue);
+			var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).FirstOrDefault();
+
+			return enumMemberAttribute != null 
+				? enumMemberAttribute.Value 
+				: enumValue.ToString();
+		}
 
 		public static T? ToEnum<T>(this string str) where T : struct
 		{
@@ -36,6 +46,7 @@ namespace Nest
 			//throw exception or whatever handling you want or
 			return null;
 		}
+
 		internal static string Utf8String(this byte[] bytes)
 		{
 			return bytes == null ? null : Encoding.UTF8.GetString(bytes);

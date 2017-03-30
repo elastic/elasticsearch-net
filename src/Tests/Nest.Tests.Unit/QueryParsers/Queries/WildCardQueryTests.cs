@@ -15,7 +15,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 				f => f.Wildcard,
 				f => f.Wildcard(wq => wq
 					.Boost(1.1)
-					.Rewrite(RewriteMultiTerm.ConstantScoreBoolean)
+					.Rewrite(MultiTermQueryRewrite.ConstantScoreBoolean)
 					.OnField(p => p.Name)
 					.Value("wild*")
 					)
@@ -23,7 +23,10 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Boost.Should().Be(1.1);
 			q.Field.Should().Be("name");
 			q.Value.Should().Be("wild*");
+			q.MultiTermQueryRewrite.Should().Be(MultiTermQueryRewrite.ConstantScoreBoolean);
+#pragma warning disable 618
 			q.Rewrite.Should().Be(RewriteMultiTerm.ConstantScoreBoolean);
+#pragma warning restore 618
 		}
 
 		[Test]
@@ -33,7 +36,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			{
 				Field = "my_prefix_field",
 				Value = "value",
-				Rewrite = RewriteMultiTerm.ConstantScoreBoolean
+				MultiTermQueryRewrite = MultiTermQueryRewrite.ConstantScoreBoolean
 			};
 			var searchRequest = new SearchRequest()
 			{
@@ -54,7 +57,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 				new WildcardQuery<ElasticsearchProject>(p => p.Name)
 				{
 					Value = "value",
-					Rewrite = RewriteMultiTerm.ConstantScoreBoolean
+					MultiTermQueryRewrite = MultiTermQueryRewrite.ConstantScoreBoolean
 				}
 				&& new WildcardQuery
 				{

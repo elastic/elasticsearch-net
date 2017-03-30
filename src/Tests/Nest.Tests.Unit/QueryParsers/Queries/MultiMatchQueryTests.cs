@@ -22,7 +22,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.Operator(Operator.Or)
 					.PrefixLength(2)
 					.Query("querytext")
-					.Rewrite(RewriteMultiTerm.TopTermsN)
+					.Rewrite(MultiTermQueryRewrite.TopTerms(10))
 					.Slop(2)
 					.TieBreaker(2.0)
 					.Type(TextQueryType.BestFields)
@@ -38,7 +38,10 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Operator.Should().Be(Operator.Or);
 			q.PrefixLength.Should().Be(2);
 			q.Query.Should().Be("querytext");
+			q.MultiTermQueryRewrite.Should().Be(MultiTermQueryRewrite.TopTerms(10));
+#pragma warning disable 618
 			q.Rewrite.Should().Be(RewriteMultiTerm.TopTermsN);
+#pragma warning restore 618
 			q.Slop.Should().Be(2);
 			q.TieBreaker.Should().Be(2.0);
 			q.Type.Should().Be(TextQueryType.BestFields);

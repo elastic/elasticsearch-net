@@ -117,12 +117,16 @@ namespace Nest
 
 		public static QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null)
 		{
+#pragma warning disable 618
 			return new QueryDescriptor<T>().Prefix(fieldDescriptor, value, Boost);
+#pragma warning restore 618
 		}
 
 		public static QueryContainer Prefix(string field, string value, double? Boost = null)
 		{
+#pragma warning disable 618
 			return new QueryDescriptor<T>().Prefix(field, value, Boost);
+#pragma warning restore 618
 		}
 
 		public static QueryContainer SimpleQueryString(Action<SimpleQueryStringQueryDescriptor<T>> selector)
@@ -272,7 +276,9 @@ namespace Nest
 
 		public static QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null)
 		{
+#pragma warning disable 618
 			return new QueryDescriptor<T>().Wildcard(fieldDescriptor, value, Boost);
+#pragma warning restore 618
 		}
 
 		public static QueryContainer Wildcard(Action<WildcardQueryDescriptor<T>> selector)
@@ -282,7 +288,9 @@ namespace Nest
 
 		public static QueryContainer Wildcard(string field, string value, double? Boost = null)
 		{
+#pragma warning disable 618
 			return new QueryDescriptor<T>().Wildcard(field, value, Boost);
+#pragma warning restore 618
 		}
 
 	  public static QueryContainer FunctionScore(Action<FunctionScoreQueryDescriptor<T>> functionScoreQuery)

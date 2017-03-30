@@ -53,7 +53,7 @@ namespace Nest
 			fq.Transpositions = GetPropValue<bool?>(jo, "transpositions");
 			var rewriteString = GetPropValue<string>(jo, "rewrite");
 			if (!rewriteString.IsNullOrEmpty())
-				fq.Rewrite = rewriteString.ToEnum<RewriteMultiTerm>();
+				fq.MultiTermQueryRewrite = MultiTermQueryRewrite.Create(rewriteString);
 			
 			if (fq is IStringFuzzyQuery)
 			{
