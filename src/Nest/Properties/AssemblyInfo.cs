@@ -7,8 +7,8 @@ using System.Reflection;
 [assembly: AssemblyCompanyAttribute("Elasticsearch")]
 [assembly: AssemblyConfigurationAttribute("Release")]
 [assembly: AssemblyVersionAttribute("5.0.0")]
-[assembly: AssemblyFileVersionAttribute("5.2.0")]
-[assembly: AssemblyInformationalVersionAttribute("5.2.0")]
+[assembly: AssemblyFileVersionAttribute("5.3.0")]
+[assembly: AssemblyInformationalVersionAttribute("5.3.0")]
 namespace System {
     internal static class AssemblyVersionInformation {
         internal const System.String AssemblyTitle = "Nest";
@@ -17,7 +17,7 @@ namespace System {
         internal const System.String AssemblyCompany = "Elasticsearch";
         internal const System.String AssemblyConfiguration = "Release";
         internal const System.String AssemblyVersion = "5.0.0";
-        internal const System.String AssemblyFileVersion = "5.2.0";
-        internal const System.String AssemblyInformationalVersion = "5.2.0";
+        internal const System.String AssemblyFileVersion = "5.3.0";
+        internal const System.String AssemblyInformationalVersion = "5.3.0";
     }
 }
