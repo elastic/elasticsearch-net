@@ -803,7 +803,7 @@ NUGET
       System.Dynamic.Runtime (>= 4.0.11) - framework: >= netstandard13
       System.Reflection.TypeExtensions (>= 4.1) - framework: >= netstandard13
       System.Runtime.Serialization.Primitives (>= 4.1.1) - framework: >= netstandard13
-    FAKE (4.57.4)
+    FAKE (4.50)
     FSharp.Data (2.3.2)
       Zlib.Portable (>= 1.11) - framework: >= netstandard11, portable-net45+sl5+win8, portable-net45+win8, portable-net45+win8+wp8+wpa81
     gitlink (2.4.1)
