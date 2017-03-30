@@ -24,7 +24,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 					"  security:",
 					"    authc:",
 					"      realms:",
-					"        file1:",
+					$"        {SecurityRealms.FileRealm}:",
 					"          type: file",
 					"          order: 0",
 					string.Empty
@@ -42,7 +42,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 					"  security:",
 					"    authc:",
 					"      realms:",
-					"        pki1:",
+					$"        {SecurityRealms.PkiRealm}:",
 					"          type: pki",
 					"          order: 1",
 					string.Empty

@@ -6,6 +6,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks;
 using Xunit;
 
 namespace Tests.XPack.Security.ClearCachedRealms
@@ -26,12 +27,12 @@ namespace Tests.XPack.Security.ClearCachedRealms
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override string UrlPath => $"/_xpack/security/realm/{this.Realm}/_clear_cache";
+		protected override string UrlPath => $"/_xpack/security/realm/{UrlEncode(this.Realm)}/_clear_cache";
 
 		protected override bool SupportsDeserialization => false;
 
 		//callisolated value can sometimes start with a digit which is not allowed for rolenames
-		private string Realm => $"default_file";
+		private string Realm => SecurityRealms.FileRealm;
 
 		protected override ClearCachedRealmsRequest Initializer => new ClearCachedRealmsRequest(this.Realm);
 
