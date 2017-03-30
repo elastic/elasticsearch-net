@@ -1,4 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.3
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/5.3
 
 :github: https://github.com/elastic/elasticsearch-net
 

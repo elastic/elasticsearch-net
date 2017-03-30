@@ -1,4 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.3
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/5.3
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -380,8 +382,8 @@ s => s
 .Aggregations(a => a
     .Terms("commits", st => st
         .Field(p => p.NumberOfCommits)
-        .Include(partition: 0, numberOfPartitions: 50)
-        .Size(2)
+        .Include(partition: 0, numberOfPartitions: 10)
+        .Size(5)
     )
 )
 ----
@@ -399,9 +401,9 @@ new SearchRequest<Project>
         Include = new TermsIncludeExclude
         {
             Partition = 0,
-            NumberOfPartitions = 50
+            NumberOfPartitions = 10
         },
-        Size = 2
+        Size = 5
     }
 }
 ----
@@ -415,10 +417,10 @@ new SearchRequest<Project>
     "commits": {
       "terms": {
         "field": "numberOfCommits",
-        "size": 2,
+        "size": 5,
         "include": {
           "partition": 0,
-          "num_partitions": 50
+          "num_partitions": 10
         }
       }
     }

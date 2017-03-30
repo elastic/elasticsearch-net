@@ -57,7 +57,12 @@ namespace DocGenerator.AsciiDoc
 
 			if (document.Attributes.All(a => a.Name != "ref_current"))
 			{
-				_newDocument.Attributes.Add(new AttributeEntry("ref_current", "https://www.elastic.co/guide/en/elasticsearch/reference/5.0"));
+				_newDocument.Attributes.Add(new AttributeEntry("ref_current", "https://www.elastic.co/guide/en/elasticsearch/reference/5.3"));
+			}
+
+			if (document.Attributes.All(a => a.Name != "xpack_current"))
+			{
+				_newDocument.Attributes.Add(new AttributeEntry("xpack_current", "https://www.elastic.co/guide/en/x-pack/5.3"));
 			}
 
 			var github = "https://github.com/elastic/elasticsearch-net";
