@@ -54,7 +54,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 				ids = new
 				{
 					types = new[] { "project" },
-					values = new [] { Project.Projects.First().Name, "x" }
+					values = new [] { Project.First.Name, "x" }
 				}
 			}
 		};
@@ -67,7 +67,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			.Query(q=>q
 				.Ids(ids=>ids
 					.Types(typeof(Project))
-					.Values(Project.Projects.First().Name, "x")
+					.Values(Project.First.Name, "x")
 				)
 			);
 
@@ -77,7 +77,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			Query = new IdsQuery
 			{
 				Types = Types.Type<Project>(),
-				Values = new Id[] { Project.Projects.First().Name, "x" }
+				Values = new Id[] { Project.First.Name, "x" }
 			}
 		};
 

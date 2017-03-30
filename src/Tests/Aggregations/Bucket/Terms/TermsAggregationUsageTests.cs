@@ -353,11 +353,11 @@ namespace Tests.Aggregations.Bucket.Terms
 					terms = new
 					{
 						field = "numberOfCommits",
-						size = 2,
+						size = 5,
 						include = new
 						{
 							partition = 0,
-							num_partitions = 50
+							num_partitions = 10
 						}
 					}
 				}
@@ -369,8 +369,8 @@ namespace Tests.Aggregations.Bucket.Terms
 			.Aggregations(a => a
 				.Terms("commits", st => st
 					.Field(p => p.NumberOfCommits)
-					.Include(partition: 0, numberOfPartitions: 50)
-					.Size(2)
+					.Include(partition: 0, numberOfPartitions: 10)
+					.Size(5)
 				)
 			);
 
@@ -381,8 +381,8 @@ namespace Tests.Aggregations.Bucket.Terms
 				Aggregations = new TermsAggregation("commits")
 				{
 					Field = Infer.Field<Project>(p => p.NumberOfCommits),
-					Include = new TermsInclude(0, 50),
-					Size = 2
+					Include = new TermsInclude(0, 10),
+					Size = 5
 				}
 			};
 

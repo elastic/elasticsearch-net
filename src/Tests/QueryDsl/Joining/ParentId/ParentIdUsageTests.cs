@@ -21,7 +21,7 @@ namespace Tests.QueryDsl.Joining.ParentId
 			{
 				_name = "named_query",
 				type = "developer",
-				id = Project.Projects.First().Name
+				id = Project.First.Name
 			}
 		};
 
@@ -29,14 +29,14 @@ namespace Tests.QueryDsl.Joining.ParentId
 		{
 			Name = "named_query",
 			Type = Infer.Type<Developer>(),
-			Id = Project.Projects.First().Name
+			Id = Project.First.Name
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.ParentId(p => p
 				.Name("named_query")
 				.Type<Developer>()
-				.Id(Project.Projects.First().Name)
+				.Id(Project.First.Name)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IParentIdQuery>(a => a.ParentId)

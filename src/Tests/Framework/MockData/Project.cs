@@ -55,6 +55,8 @@ namespace Tests.Framework.MockData
 
 		public static IList<Project> Projects { get; } = Project.Generator.Generate(100).ToList();
 
+	    public static Project First { get; } = Projects.First();
+
 		public static Project Instance = new Project
 		{
 			Name = Projects.First().Name,
