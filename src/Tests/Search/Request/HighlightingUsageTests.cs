@@ -23,7 +23,7 @@ namespace Tests.Search.Request
 	{
 		public HighlightingUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		public string LastNameSearch { get; } = Project.Projects.First().LeadDeveloper.LastName;
+		public string LastNameSearch { get; } = Project.First.LeadDeveloper.LastName;
 
 		protected override object ExpectJson => new
 		{
@@ -259,7 +259,7 @@ namespace Tests.Search.Request
 	{
 		public UnifiedHighlightingUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		public string LastNameSearch { get; } = Project.Projects.First().LeadDeveloper.LastName;
+		public string LastNameSearch { get; } = Project.First.LeadDeveloper.LastName;
 
 		protected override object ExpectJson => new
 		{

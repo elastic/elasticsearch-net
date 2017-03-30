@@ -117,8 +117,8 @@ namespace DocGenerator
 		{
 			{ "FixedDate", "new DateTime(2015, 06, 06, 12, 01, 02, 123)" },
 			{ "FirstNameToFind", "\"pierce\"" },
-			{ "Project.Projects.First().Suggest.Context.Values.SelectMany(v => v).First()", "\"red\"" },
-			{ "Project.Projects.First().Suggest.Contexts.Values.SelectMany(v => v).First()", "\"red\"" },
+			{ "Project.First.Suggest.Context.Values.SelectMany(v => v).First()", "\"red\"" },
+			{ "Project.First.Suggest.Contexts.Values.SelectMany(v => v).First()", "\"red\"" },
 			{ "Project.Instance.Name", "\"Durgan LLC\"" },
 			{ "Project.InstanceAnonymous", "new {name = \"Koch, Collier and Mohr\", state = \"BellyUp\",startedOn = " +
 			                               "\"2015-01-01T00:00:00\",lastActivity = \"0001-01-01T00:00:00\",leadDeveloper = " +
@@ -128,9 +128,8 @@ namespace DocGenerator
 			{ "base.QueryJson", "new{ @bool = new { must = new[] { new { match_all = new { } } }, must_not = new[] { new { match_all = new { } } }, should = new[] { new { match_all = new { } } }, filter = new[] { new { match_all = new { } } }, minimum_should_match = 1, boost = 2.0, } }" },
 			{ "ExpectedTerms", "new [] { \"term1\", \"term2\" }" },
 			{ "_ctxNumberofCommits", "\"_source.numberOfCommits > 0\"" },
-			{ "Project.Projects.First().Name", "\"Lesch Group\"" },
-			{ "Project.Projects.FirstOrDefault().NumberOfCommits", "775" },
-			{ "Project.Projects.FirstOrDefault().Name", "\"Dickinson - Beier\"" },
+			{ "Project.First.Name", "\"Lesch Group\"" },
+			{ "Project.First.NumberOfCommits", "775" },
 			{ "LastNameSearch", "\"Stokes\"" }
 		};
 

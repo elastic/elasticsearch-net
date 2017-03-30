@@ -115,7 +115,7 @@ namespace Tests.Search.Percolator.Percolate
 		private readonly string _percolateId = Project.Instance.Name;
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"project/project/{Uri.EscapeDataString(_percolateId)}/_percolate";
+		protected override string UrlPath => $"project/project/{UrlEncode(_percolateId)}/_percolate";
 
 		protected override bool SupportsDeserialization => false;
 

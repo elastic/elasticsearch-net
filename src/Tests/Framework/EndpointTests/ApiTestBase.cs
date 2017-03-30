@@ -26,8 +26,9 @@ namespace Tests.Framework
 
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 		protected bool RanIntegrationSetup => this._usage?.CalledSetup ?? false;
+	    protected string UrlEncode(string s) => Uri.EscapeDataString(s);
 
-		protected ClusterBase Cluster { get; }
+        protected ClusterBase Cluster { get; }
 
 		protected string CallIsolatedValue => _uniqueValues.Value;
 		protected T ExtendedValue<T>(string key) where T : class => this._uniqueValues.ExtendedValue<T>(key);

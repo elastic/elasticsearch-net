@@ -36,7 +36,7 @@ namespace Tests.Search.Suggesters
 
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
-		protected override Elasticsearch.Net.HttpMethod HttpMethod => Elasticsearch.Net.HttpMethod.POST;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => "/project/_suggest";
 		protected override bool SupportsDeserialization => false;
 
@@ -57,7 +57,7 @@ namespace Tests.Search.Suggesters
 			)
 			.Completion("my-completion-suggest", c => c
 				.Contexts(ctxs => ctxs
-					.Context("color", ctx => ctx.Context(Project.Projects.First().Suggest.Contexts.Values.SelectMany(v => v).First()))
+					.Context("color", ctx => ctx.Context(Project.First.Suggest.Contexts.Values.SelectMany(v => v).First()))
 				)
 				.Fuzzy(f => f
 					.Fuzziness(Fuzziness.Auto)
@@ -69,7 +69,7 @@ namespace Tests.Search.Suggesters
 				.Analyzer("simple")
 				.Field(p => p.Suggest)
 				.Size(8)
-				.Prefix(Project.Projects.First().Name)
+				.Prefix(Project.First.Name)
 			)
 			.Phrase("my-phrase-suggest", ph => ph
 				.Text(PhraseSuggest)
@@ -136,7 +136,7 @@ namespace Tests.Search.Suggesters
 										{
 											new SuggestContextQuery
 											{
-												Context = Project.Projects.First().Suggest.Contexts.Values.SelectMany(v => v).First()
+												Context = Project.First.Suggest.Contexts.Values.SelectMany(v => v).First()
 											}
 										}
 									}
@@ -194,7 +194,7 @@ namespace Tests.Search.Suggesters
 			};
 
 		private static string SuggestText { get; } = (
-			from word in Project.Projects.First().Description.Split(' ')
+			from word in Project.First.Description.Split(' ')
 			where word.Length > 4
 			select word.Remove(word.Length - 1)
 		).First();
@@ -204,7 +204,7 @@ namespace Tests.Search.Suggesters
 		{
 			get
 			{
-				var words = Project.Projects.First().Description.Split(' ');
+				var words = Project.First.Description.Split(' ');
 				var pairs = words.Zip(words.Skip(1), (x, y) => new[] {x, y});
 				var pair = pairs.First(t => t[0].Length > 4 && t[1].Length > 4);
 				return $"{(pair[0].Remove(pair[0].Length - 1))} {pair[1]}";
@@ -281,7 +281,7 @@ namespace Tests.Search.Suggesters
 			option.Contexts.Should().ContainKey("color");
 			var colorContexts = option.Contexts["color"];
 			colorContexts.Should().NotBeNull().And.HaveCount(1);
-			colorContexts.First().Category.Should().Be((Project.Projects.First().Suggest.Contexts.Values.SelectMany(v => v).First()));
+			colorContexts.First().Category.Should().Be((Project.First.Suggest.Contexts.Values.SelectMany(v => v).First()));
 		}
 
 		protected override object ExpectJson => new Dictionary<string, object>
@@ -296,7 +296,7 @@ namespace Tests.Search.Suggesters
 						{
 							color = new[]
 							{
-								new {context = Project.Projects.First().Suggest.Contexts.Values.SelectMany(v => v).First()}
+								new {context = Project.First.Suggest.Contexts.Values.SelectMany(v => v).First()}
 							}
 						},
 						field = "suggest",

@@ -13,11 +13,9 @@ namespace Tests.Document.Single.Get
 {
 	public class GetApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
 	{
-		protected string ProjectId => Project.Projects.First().Name;
+		protected string ProjectId => Project.First.Name;
 
-		protected string ProjectIdForUrl => Uri.EscapeDataString(this.ProjectId);
-
-		public GetApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	    public GetApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Get<Project>(this.ProjectId, f),
 			fluentAsync: (client, f) => client.GetAsync<Project>(this.ProjectId, f),
@@ -28,7 +26,7 @@ namespace Tests.Document.Single.Get
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/project/{ProjectIdForUrl}";
+		protected override string UrlPath => $"/project/project/{UrlEncode(this.ProjectId)}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -47,9 +45,7 @@ namespace Tests.Document.Single.Get
 	{
 		protected string ProjectId => this.CallIsolatedValue;
 
-		protected string ProjectIdForUrl => Uri.EscapeDataString(this.ProjectId);
-
-		public GetNonExistentDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	    public GetNonExistentDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Get<Project>(this.ProjectId, f),
 			fluentAsync: (client, f) => client.GetAsync<Project>(this.ProjectId, f),
@@ -60,7 +56,7 @@ namespace Tests.Document.Single.Get
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/project/{ProjectIdForUrl}";
+		protected override string UrlPath => $"/project/project/{UrlEncode(this.ProjectId)}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -83,11 +79,7 @@ namespace Tests.Document.Single.Get
 
 		protected string CommitActivityId => CommitActivity.Id;
 
-		protected string ParentIdForUrl => Uri.EscapeDataString(this.CommitActivity.ProjectName);
-
-		protected string CommitActivityIdForUrl => Uri.EscapeDataString(this.CommitActivityId);
-
-		public GetApiParentTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	    public GetApiParentTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Get<CommitActivity>(this.CommitActivityId, f),
 			fluentAsync: (client, f) => client.GetAsync<CommitActivity>(this.CommitActivityId, f),
@@ -98,7 +90,7 @@ namespace Tests.Document.Single.Get
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/commits/{CommitActivityIdForUrl}?parent={ParentIdForUrl}";
+		protected override string UrlPath => $"/project/commits/{UrlEncode(this.CommitActivityId)}?parent={UrlEncode(this.CommitActivity.ProjectName)}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -126,7 +118,7 @@ namespace Tests.Document.Single.Get
 	{
 		public GetApiFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override string UrlPath => $"/project/project/{ProjectIdForUrl}?stored_fields=name%2CnumberOfCommits";
+		protected override string UrlPath => $"/project/project/{UrlEncode(this.ProjectId)}?stored_fields=name%2CnumberOfCommits";
 
 		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g => g
 			.StoredFields(

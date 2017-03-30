@@ -95,7 +95,7 @@ namespace Tests.Search.Percolator.PercolateCount
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"project/project/{Uri.EscapeDataString(_percolateId)}/_percolate/count";
+		protected override string UrlPath => $"project/project/{UrlEncode(_percolateId)}/_percolate/count";
 
 		protected override bool SupportsDeserialization => false;
 

@@ -353,11 +353,11 @@ namespace Tests.Aggregations.Bucket.Terms
 					terms = new
 					{
 						field = "numberOfCommits",
-						size = 2,
+						size = 5,
 						include = new
 						{
 							partition = 0,
-							num_partitions = 50
+							num_partitions = 10
 						}
 					}
 				}
@@ -369,8 +369,8 @@ namespace Tests.Aggregations.Bucket.Terms
 			.Aggregations(a => a
 				.Terms("commits", st => st
 					.Field(p => p.NumberOfCommits)
-					.Include(partition: 0, numberOfPartitions: 50)
-					.Size(2)
+					.Include(partition: 0, numberOfPartitions: 10)
+					.Size(5)
 				)
 			);
 
@@ -384,9 +384,9 @@ namespace Tests.Aggregations.Bucket.Terms
 					Include = new TermsIncludeExclude
 					{
 						Partition = 0,
-						NumberOfPartitions = 50
+						NumberOfPartitions = 10
 					},
-					Size = 2
+					Size = 5
 				}
 			};
 

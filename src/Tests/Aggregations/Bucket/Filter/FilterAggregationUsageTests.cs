@@ -23,7 +23,7 @@ namespace Tests.Aggregations.Bucket.Filter
 		{
 		}
 
-		public static string FirstNameToFind = Project.Projects.First().LeadDeveloper.FirstName.ToLowerInvariant();
+		public static string FirstNameToFind = Project.First.LeadDeveloper.FirstName.ToLowerInvariant();
 
 		protected override object ExpectJson => new
 		{

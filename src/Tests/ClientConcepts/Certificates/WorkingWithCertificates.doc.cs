@@ -60,9 +60,9 @@ namespace Tests.ClientConcepts.Certificates
 	}
 	//hide
 	[IntegrationOnly]
-	public class AllowAllSllCertificatesApiTests : CanConnectTestBase<AllowAllCertificatesCluster>
+	public class AllowAllSslCertificatesApiTests : CanConnectTestBase<AllowAllCertificatesCluster>
 	{
-		public AllowAllSllCertificatesApiTests(AllowAllCertificatesCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public AllowAllSslCertificatesApiTests(AllowAllCertificatesCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		[I] public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
 	}
 
