@@ -25,11 +25,19 @@ namespace Nest
 		[JsonProperty("execution_hint")]
 		TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
-		[JsonProperty("include")]
+		[JsonIgnore]
+		[Obsolete("Use IncludeTerms")]
 		IDictionary<string, string> Include { get; set; }
 
-		[JsonProperty("exclude")]
+		[JsonProperty("include")]
+		TermsIncludeExclude IncludeTerms { get; set; }
+
+		[JsonIgnore]
+		[Obsolete("Use ExcludeTerms")]
 		IDictionary<string, string> Exclude { get; set; }
+
+		[JsonProperty("exclude")]
+		TermsIncludeExclude ExcludeTerms { get; set; }
 
 		[JsonProperty("mutual_information")]
 		MutualInformationHeuristic MutualInformation { get; set; }
@@ -59,8 +67,12 @@ namespace Nest
 		public int? ShardSize { get; set; }
 		public int? MinimumDocumentCount { get; set; }
 		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
+		[Obsolete("Use IncludeTerms")]
 		public IDictionary<string, string> Include { get; set; }
+		public TermsIncludeExclude IncludeTerms { get; set; }
+		[Obsolete("Use ExcludeTerms")]
 		public IDictionary<string, string> Exclude { get; set; }
+		public TermsIncludeExclude ExcludeTerms { get; set; }
 		public MutualInformationHeuristic MutualInformation { get; set; }
 		public ChiSquareHeuristic ChiSquare { get; set; }
 		public GoogleNormalizedDistanceHeuristic GoogleNormalizedDistance { get; set; }
@@ -83,9 +95,15 @@ namespace Nest
 
 		TermsAggregationExecutionHint? ISignificantTermsAggregator.ExecutionHint { get; set; }
 
+		[Obsolete("Use IncludeTerms")]
 		IDictionary<string, string> ISignificantTermsAggregator.Include { get; set; }
 
+		TermsIncludeExclude ISignificantTermsAggregator.IncludeTerms { get; set; }
+
+		[Obsolete("Use ExcludeTerms")]
 		IDictionary<string, string> ISignificantTermsAggregator.Exclude { get; set; }
+
+		TermsIncludeExclude ISignificantTermsAggregator.ExcludeTerms { get; set; }
 
 		MutualInformationHeuristic ISignificantTermsAggregator.MutualInformation { get; set; }
 
@@ -137,17 +155,33 @@ namespace Nest
 
 		public SignificantTermsAggregationDescriptor<T> Include(string includePattern, string regexFlags = null)
 		{
-			Self.Include = new Dictionary<string, string> { {"pattern", includePattern}};
-			if (!regexFlags.IsNullOrEmpty())
-				Self.Include.Add("pattern", regexFlags);
+			Self.IncludeTerms = includePattern == null 
+				? null 
+				: new TermsIncludeExclude { Pattern = includePattern, Flags = regexFlags }; 
+			return this;
+		}
+
+		public SignificantTermsAggregationDescriptor<T> Include(IEnumerable<string> values)
+		{
+			Self.IncludeTerms = values == null 
+				? null 
+				: new TermsIncludeExclude { Values = values }; 
 			return this;
 		}
 		
 		public SignificantTermsAggregationDescriptor<T> Exclude(string excludePattern, string regexFlags = null)
 		{
-			Self.Exclude = new Dictionary<string, string> { {"pattern", excludePattern}};
-			if (!regexFlags.IsNullOrEmpty())
-				Self.Exclude.Add("pattern", regexFlags);
+			Self.ExcludeTerms = excludePattern == null 
+				? null 
+				: new TermsIncludeExclude { Pattern = excludePattern, Flags = regexFlags };
+			return this;
+		}
+
+		public SignificantTermsAggregationDescriptor<T> Exclude(IEnumerable<string> values)
+		{
+			Self.ExcludeTerms = values == null 
+				? null 
+				: new TermsIncludeExclude { Values = values };
 			return this;
 		}
 

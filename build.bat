@@ -46,6 +46,11 @@ if not exist build\tools\node_modules\wintersmith\bin\wintersmith (
 SET TARGET="Build"
 SET VERSION=
 
+IF /I "%1"=="skiptests" (
+	set SKIPTESTS="1"
+	SHIFT
+)
+
 IF NOT [%1]==[] (set TARGET="%1")
 
 IF NOT [%2]==[] (set VERSION="%2")
