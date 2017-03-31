@@ -25,8 +25,8 @@ s => s
     .Descending(p => p.Name)
 )
 .SearchAfter(
-    Project.Projects.FirstOrDefault().NumberOfCommits,
-    Project.Projects.FirstOrDefault().Name
+    Project.First.NumberOfCommits,
+    Project.First.Name
 )
 ----
 
@@ -43,8 +43,8 @@ new SearchRequest<Project>
     },
     SearchAfter = new List<object>
     {
-        Project.Projects.FirstOrDefault().NumberOfCommits,
-        Project.Projects.FirstOrDefault().Name,
+        Project.First.NumberOfCommits,
+        Project.First.Name,
     }
 }
 ----
@@ -67,7 +67,7 @@ new SearchRequest<Project>
   ],
   "search_after": [
     775,
-    "Dickinson - Beier"
+    "Lesch Group"
   ]
 }
 ----

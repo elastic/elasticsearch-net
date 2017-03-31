@@ -27,7 +27,7 @@ q
 .ParentId(p => p
     .Name("named_query")
     .Type<Developer>()
-    .Id(Project.Projects.First().Name)
+    .Id(Project.First.Name)
 )
 ----
 
@@ -39,7 +39,7 @@ new ParentIdQuery
 {
     Name = "named_query",
     Type = Infer.Type<Developer>(),
-    Id = Project.Projects.First().Name
+    Id = Project.First.Name
 }
 ----
 

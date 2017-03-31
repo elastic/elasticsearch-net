@@ -42,7 +42,7 @@ s => s
     .Completion("my-completion-suggest", c => c
         .Contexts(ctxs => ctxs
             .Context("color",
-                ctx => ctx.Context(Project.Projects.First().Suggest.Contexts.Values.SelectMany(v => v).First())
+                ctx => ctx.Context(Project.First.Suggest.Contexts.Values.SelectMany(v => v).First())
             )
         )
         .Fuzzy(f => f
@@ -110,7 +110,7 @@ new SearchRequest<Project>
             {
                 Contexts = new Dictionary<string, IList<ISuggestContextQuery>>
                 {
-                    { "color", new List<ISuggestContextQuery> { new SuggestContextQuery { Context = Project.Projects.First().Suggest.Contexts.Values.SelectMany(v => v).First() } } }
+                    { "color", new List<ISuggestContextQuery> { new SuggestContextQuery { Context = Project.First.Suggest.Contexts.Values.SelectMany(v => v).First() } } }
                 },
                 Fuzzy = new FuzzySuggester
                 {
@@ -247,6 +247,6 @@ option.Contexts.Should().NotBeNull().And.NotBeEmpty();
 option.Contexts.Should().ContainKey("color");
 var colorContexts = option.Contexts["color"];
 colorContexts.Should().NotBeNull().And.HaveCount(1);
-colorContexts.First().Category.Should().Be((Project.Projects.First().Suggest.Contexts.Values.SelectMany(v => v).First()));
+colorContexts.First().Category.Should().Be((Project.First.Suggest.Contexts.Values.SelectMany(v => v).First()));
 ----
 
