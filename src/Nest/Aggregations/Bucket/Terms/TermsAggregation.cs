@@ -31,10 +31,10 @@ namespace Nest
 		IList<TermsOrder> Order { get; set; }
 
 		[JsonProperty("include")]
-		TermsIncludeExclude Include { get; set; }
+		TermsInclude Include { get; set; }
 
 		[JsonProperty("exclude")]
-		TermsIncludeExclude Exclude { get; set; }
+		TermsExclude Exclude { get; set; }
 
 		[JsonProperty("collect_mode")]
 		TermsAggregationCollectMode? CollectMode { get; set; }
@@ -55,8 +55,8 @@ namespace Nest
 		public int? MinimumDocumentCount { get; set; }
 		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
 		public IList<TermsOrder> Order { get; set; }
-		public TermsIncludeExclude Include { get; set; }
-		public TermsIncludeExclude Exclude { get; set; }
+		public TermsInclude Include { get; set; }
+		public TermsExclude Exclude { get; set; }
 		public TermsAggregationCollectMode? CollectMode { get; set; }
 		public TFieldType Missing { get; set; }
 
@@ -91,9 +91,9 @@ namespace Nest
 
 		IList<TermsOrder> ITermsAggregation.Order { get; set; }
 
-		TermsIncludeExclude ITermsAggregation.Include { get; set; }
+		TermsInclude ITermsAggregation.Include { get; set; }
 
-		TermsIncludeExclude ITermsAggregation.Exclude { get; set; }
+		TermsExclude ITermsAggregation.Exclude { get; set; }
 
 		TermsAggregationCollectMode? ITermsAggregation.CollectMode { get; set; }
 
@@ -136,20 +136,20 @@ namespace Nest
 			a.Order.Add(new TermsOrder { Key = key, Order = SortOrder.Descending });
 		});
 
-		public TermsAggregationDescriptor<T, TFieldType> Include(long partion, long numberOfPartitions) =>
-			Assign(a => a.Include = new TermsIncludeExclude() {Partition = partion, NumberOfPartitions = numberOfPartitions});
+		public TermsAggregationDescriptor<T, TFieldType> Include(long partition, long numberOfPartitions) =>
+			Assign(a => a.Include = new TermsInclude(partition, numberOfPartitions));
 
-		public TermsAggregationDescriptor<T, TFieldType> Include(string includePattern, string regexFlags = null) =>
-			Assign(a => a.Include = new TermsIncludeExclude() { Pattern = includePattern, Flags = regexFlags });
+		public TermsAggregationDescriptor<T, TFieldType> Include(string includePattern) =>
+			Assign(a => a.Include = new TermsInclude(includePattern));
 
 		public TermsAggregationDescriptor<T, TFieldType> Include(IEnumerable<string> values) =>
-			Assign(a => a.Include = new TermsIncludeExclude { Values = values });
+			Assign(a => a.Include = new TermsInclude(values));
 
-		public TermsAggregationDescriptor<T, TFieldType> Exclude(string excludePattern, string regexFlags = null) =>
-			Assign(a => a.Exclude = new TermsIncludeExclude() { Pattern = excludePattern, Flags = regexFlags });
+		public TermsAggregationDescriptor<T, TFieldType> Exclude(string excludePattern) =>
+			Assign(a => a.Exclude = new TermsExclude(excludePattern));
 
 		public TermsAggregationDescriptor<T, TFieldType> Exclude(IEnumerable<string> values) =>
-			Assign(a => a.Exclude = new TermsIncludeExclude { Values = values });
+			Assign(a => a.Exclude = new TermsExclude(values));
 
 		public TermsAggregationDescriptor<T, TFieldType> CollectMode(TermsAggregationCollectMode collectMode) =>
 			Assign(a => a.CollectMode = collectMode);

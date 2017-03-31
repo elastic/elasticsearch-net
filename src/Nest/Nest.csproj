@@ -102,12 +102,15 @@
     <Compile Include="Aggregations\Bucket\SignificantTerms\SignificantTermsAggregate.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\SignificantTermsAggregation.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\SignificantTermsBucket.cs" />
+    <Compile Include="Aggregations\Bucket\SignificantTerms\SignificantTermsIncludeExclude.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregate.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregationCollectMode.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregationExecutionHint.cs" />
-    <Compile Include="Aggregations\Bucket\Terms\TermsIncludeExclude.cs" />
-    <Compile Include="Aggregations\Bucket\Terms\TermsIncludeExcludeJsonConverter.cs" />
+    <Compile Include="Aggregations\Bucket\Terms\TermsExclude.cs" />
+    <Compile Include="Aggregations\Bucket\Terms\TermsExcludeJsonConverter.cs" />
+    <Compile Include="Aggregations\Bucket\Terms\TermsInclude.cs" />
+    <Compile Include="Aggregations\Bucket\Terms\TermsIncludeJsonConverter.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsOrder.cs" />
     <Compile Include="Aggregations\Matrix\MatrixAggregate.cs" />
     <Compile Include="Aggregations\Matrix\MatrixAggregation.cs" />
