@@ -18,7 +18,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 						.OnField(f=>f.Name)
 						.Query("this is a test")
 						.MinimumShouldMatch("2<80%")
-						.Rewrite(RewriteMultiTerm.ConstantScoreDefault)
+						.Rewrite(MultiTermQueryRewrite.ConstantScoreDefault)
 					)
 			);
 				
@@ -29,7 +29,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 						name : { 
 							_name: ""named_query"",
 							query : ""this is a test"",
-							rewrite: ""constant_score_default"",
+							rewrite: ""constant_score_auto"",
 							minimum_should_match: ""2<80%""
 						}
 					}
@@ -84,7 +84,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 						.Fuzziness(1.0)
 						.Analyzer("my_analyzer")
 						.CutoffFrequency(0.3)
-						.Rewrite(RewriteMultiTerm.ConstantScoreFilter)
+						.Rewrite(MultiTermQueryRewrite.ConstantScoreFilter)
 						.PrefixLength(2)
 					)
 			);
@@ -122,7 +122,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 						.FuzzyTranspositions()
 						.Analyzer("my_analyzer")
 						.CutoffFrequency(0.3)
-						.Rewrite(RewriteMultiTerm.ConstantScoreFilter)
+						.Rewrite(MultiTermQueryRewrite.ConstantScoreFilter)
 						.PrefixLength(2)
 					)
 			);

@@ -104,9 +104,7 @@ namespace Nest
 			return this.Values(values.ToArray());
 		}
 	}
-
 	
-	[Obsolete("Scheduled to be removed in 2.0")]
 	public class IdsQueryDescriptor : IIdsQuery
 	{
 		[JsonProperty(PropertyName = "_name")]

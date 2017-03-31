@@ -28,7 +28,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.OnFields(p=>p.Name, p=>p.Origin)
 					.PhraseSlop(2.1)
 					.Query("q")
-					.Rewrite(RewriteMultiTerm.ConstantScoreDefault)
+					.Rewrite(MultiTermQueryRewrite.ConstantScoreDefault)
 					.TieBreaker(4.1)
 					.UseDisMax()
 					)
@@ -49,7 +49,10 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Fields.Should().BeEquivalentTo(new []{"name", "origin"});
 			q.PhraseSlop.Should().Be(2.1);
 			q.Query.Should().Be("q");
+			q.MultiTermQueryRewrite.Should().Be(MultiTermQueryRewrite.ConstantScoreDefault);
+#pragma warning disable 618
 			q.Rewrite.Should().Be(RewriteMultiTerm.ConstantScoreDefault);
+#pragma warning restore 618
 			q.TieBreaker.Should().Be(4.1);
 			q.UseDisMax.Should().BeTrue();
 		}

@@ -23,7 +23,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.Operator(Operator.And)
 					.PrefixLength(2)
 					.Query("querytext")
-					.Rewrite(RewriteMultiTerm.ConstantScoreBoolean)
+					.Rewrite(MultiTermQueryRewrite.ConstantScoreBoolean)
 					.Slop(2)
 					)
 				);
@@ -40,7 +40,10 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Operator.Should().Be(Operator.And);
 			q.PrefixLength.Should().Be(2);
 			q.Query.Should().Be("querytext");
+			q.MultiTermQueryRewrite.Should().Be(MultiTermQueryRewrite.ConstantScoreBoolean);
+#pragma warning disable 618
 			q.Rewrite.Should().Be(RewriteMultiTerm.ConstantScoreBoolean);
+#pragma warning restore 618
 			q.Slop.Should().Be(2);
 		}
 
@@ -61,7 +64,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.Operator(Operator.And)
 					.PrefixLength(2)
 					.Query("querytext")
-					.Rewrite(RewriteMultiTerm.ConstantScoreBoolean)
+					.Rewrite(MultiTermQueryRewrite.ConstantScoreBoolean)
 					.Slop(2)
 					)
 				);
@@ -77,7 +80,10 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Operator.Should().Be(Operator.And);
 			q.PrefixLength.Should().Be(2);
 			q.Query.Should().Be("querytext");
+			q.MultiTermQueryRewrite.Should().Be(MultiTermQueryRewrite.ConstantScoreBoolean);
+#pragma warning disable 618
 			q.Rewrite.Should().Be(RewriteMultiTerm.ConstantScoreBoolean);
+#pragma warning restore 618
 			q.Slop.Should().Be(2);
 		}
 
@@ -98,7 +104,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.Operator(Operator.And)
 					.PrefixLength(2)
 					.Query("querytext")
-					.Rewrite(RewriteMultiTerm.ConstantScoreBoolean)
+					.Rewrite(MultiTermQueryRewrite.ConstantScoreBoolean)
 					.Slop(2)
 					)
 				);
@@ -114,7 +120,10 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Operator.Should().Be(Operator.And);
 			q.PrefixLength.Should().Be(2);
 			q.Query.Should().Be("querytext");
+			q.MultiTermQueryRewrite.Should().Be(MultiTermQueryRewrite.ConstantScoreBoolean);
+#pragma warning disable 618
 			q.Rewrite.Should().Be(RewriteMultiTerm.ConstantScoreBoolean);
+#pragma warning restore 618
 			q.Slop.Should().Be(2);
 		}
 

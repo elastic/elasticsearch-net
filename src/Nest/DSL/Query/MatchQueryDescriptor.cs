@@ -22,9 +22,12 @@ namespace Nest
 		[JsonProperty(PropertyName = "analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty(PropertyName = "rewrite")]
-		[JsonConverter(typeof (StringEnumConverter))]
+		[JsonIgnore]
+		[Obsolete("Use MultiTermQueryRewrite")]
 		RewriteMultiTerm? Rewrite { get; set; }
+
+		[JsonProperty("rewrite")]
+		MultiTermQueryRewrite MultiTermQueryRewrite { get; set; }
 
 		[JsonProperty(PropertyName = "fuzziness")]
 		double? Fuzziness { get; set; }
@@ -83,7 +86,13 @@ namespace Nest
 		public string Type { get; set; }
 		public string Query { get; set; }
 		public string Analyzer { get; set; }
-		public RewriteMultiTerm? Rewrite { get; set; }
+		[Obsolete("Use MultiTermQueryRewrite")]
+		public RewriteMultiTerm? Rewrite
+		{
+			get { return MultiTermQueryRewrite?.Rewrite; }
+			set { MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+		public MultiTermQueryRewrite MultiTermQueryRewrite { get; set; }
 		public double? Fuzziness { get; set; }
 		public bool? FuzzyTranspositions { get; set; }
 		public double? CutoffFrequency { get; set; }
@@ -113,7 +122,13 @@ namespace Nest
 
 		string IMatchQuery.MinimumShouldMatch { get; set; }
 
-		RewriteMultiTerm? IMatchQuery.Rewrite { get; set; }
+		[Obsolete("Use MultiTermQueryRewrite")]
+		RewriteMultiTerm? IMatchQuery.Rewrite
+		{
+			get { return Self.MultiTermQueryRewrite?.Rewrite; }
+			set { Self.MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+		MultiTermQueryRewrite IMatchQuery.MultiTermQueryRewrite { get; set; }
 
 		double? IMatchQuery.Fuzziness { get; set; }
 		bool? IMatchQuery.FuzzyTranspositions { get; set; }
@@ -205,9 +220,16 @@ namespace Nest
 			return this;
 		}
 
+		[Obsolete("Use overload that accepts MultiTermQueryRewrite")]
 		public MatchQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
 		{
-			Self.Rewrite = rewrite;
+			Self.MultiTermQueryRewrite = new MultiTermQueryRewrite(rewrite);
+			return this;
+		}
+
+		public MatchQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite)
+		{
+			Self.MultiTermQueryRewrite = rewrite;
 			return this;
 		}
 

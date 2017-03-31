@@ -656,7 +656,7 @@ namespace Nest
 			termSelector(termQuery);
 			return this.New(termQuery, q => q.Term = termQuery);
 		}
-		
+
 		/// <summary>
 		/// Matches documents that have fields matching a wildcard expression (not analyzed). 
 		/// Supported wildcards are *, which matches any character sequence (including the empty one), and ?, 
@@ -664,6 +664,7 @@ namespace Nest
 		/// over many terms. In order to prevent extremely slow wildcard queries, a wildcard term should 
 		/// not start with one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
+		[Obsolete("Use overload that accepts Action<WildcardQueryDescriptor<T>> wildcardSelector. MultiTermQueryRewrite should be used instead of RewriteMultiTerm")]
 		public QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
 		{
 			return this.Wildcard(t =>
@@ -673,7 +674,7 @@ namespace Nest
 				if (Rewrite.HasValue) t.Rewrite(Rewrite.Value);
 			});
 		}
-		
+
 		/// <summary>
 		/// Matches documents that have fields matching a wildcard expression (not analyzed). 
 		/// Supported wildcards are *, which matches any character sequence (including the empty one), and ?,
@@ -681,6 +682,7 @@ namespace Nest
 		/// In order to prevent extremely slow wildcard queries, a wildcard term should not start with 
 		/// one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
+		[Obsolete("Use overload that accepts Action<WildcardQueryDescriptor<T>> wildcardSelector. MultiTermQueryRewrite should be used instead of RewriteMultiTerm")]
 		public QueryContainer Wildcard(string field, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
 		{
 			return this.Wildcard(t =>
@@ -689,8 +691,8 @@ namespace Nest
 				if (Boost.HasValue) t.Boost(Boost.Value);
 				if (Rewrite.HasValue) t.Rewrite(Rewrite.Value);
 			});
-		}
-		
+		}		
+			
 		/// <summary>
 		/// Matches documents that have fields matching a wildcard expression (not analyzed). 
 		/// Supported wildcards are *, which matches any character sequence (including the empty one), and ?,
@@ -704,11 +706,12 @@ namespace Nest
 			wildcardSelector(wildcardQuery);
 			return this.New(wildcardQuery, q => q.Wildcard = wildcardQuery);
 		}
-		
+
 		/// <summary>
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed). 
 		/// The prefix query maps to Lucene PrefixQuery. 
 		/// </summary>
+		[Obsolete("Use overload that accepts Action<PrefixQueryDescriptor<T>> prefixSelector. MultiTermQueryRewrite should be used instead of RewriteMultiTerm")]
 		public QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
 		{
 			return this.Prefix(t =>
@@ -723,6 +726,7 @@ namespace Nest
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed). 
 		/// The prefix query maps to Lucene PrefixQuery. 
 		/// </summary>	
+		[Obsolete("Use overload that accepts Action<PrefixQueryDescriptor<T>> prefixSelector. MultiTermQueryRewrite should be used instead of RewriteMultiTerm")]
 		public QueryContainer Prefix(string field, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
 		{
 			return this.Prefix(t =>
@@ -732,7 +736,7 @@ namespace Nest
 				if (Rewrite.HasValue) t.Rewrite(Rewrite.Value);
 			});
 		}
-		
+
 		/// <summary>
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed). 
 		/// The prefix query maps to Lucene PrefixQuery. 
@@ -782,11 +786,13 @@ namespace Nest
 		/// Note, this filter does not require the _id field to be indexed since 
 		/// it works using the _uid field.
 		/// </summary>
+#pragma warning disable 618
 		public QueryContainer Ids(Func<IdsQueryProperDescriptor, IdsQueryProperDescriptor> selector)
 		{
 			var ids = selector(new IdsQueryProperDescriptor());
 			return this.New(ids, c => c.Ids = ids);
 		}
+#pragma warning restore 618
 
 		/// <summary>
 		/// Matches spans containing a term. The span term query maps to Lucene SpanTermQuery. 

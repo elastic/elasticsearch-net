@@ -101,6 +101,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void TestPrefixQuery()
 		{
+#pragma warning disable 618
 			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.From(0)
 				.Size(10)
@@ -110,6 +111,7 @@ namespace Nest.Tests.Integration.Search
 				.Query(q => q
 					.Prefix(f => f.Name.Suffix("sort"), "el")
 				)
+#pragma warning restore 618
 			);
 			Assert.NotNull(results);
 			Assert.True(results.IsValid);

@@ -54,7 +54,7 @@ namespace Nest
 			
 			var rewriteString = GetPropValue<string>(jo, "rewrite");
 			if (!rewriteString.IsNullOrEmpty())
-				fq.Rewrite = rewriteString.ToEnum<RewriteMultiTerm>();
+				fq.MultiTermQueryRewrite = MultiTermQueryRewrite.Create(rewriteString);
 			
 			var operatorString = GetPropValue<string>(jo, "operator");
 			if (!rewriteString.IsNullOrEmpty())

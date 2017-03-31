@@ -26,9 +26,11 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
+#pragma warning disable CS0618
 				.Query(q => q
 					.Prefix(f => f.Name, "el", Boost: 1.2)
 				);
+#pragma warning restore CS0618
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ prefix: { name : { value : ""el"", boost: 1.2 } }}}";
@@ -41,12 +43,14 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
+#pragma warning disable CS0618 // Type or member is obsolete
 				.Query(q => q
 					.Prefix(f => f.Name, "el", 1.2, RewriteMultiTerm.ConstantScoreDefault)
 				);
+#pragma warning restore CS0618 // Type or member is obsolete
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
-			{ prefix: { name : { value : ""el"", boost: 1.2, rewrite: ""constant_score_default"" } }}}";
+			{ prefix: { name : { value : ""el"", boost: 1.2, rewrite: ""constant_score_auto"" } }}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
 

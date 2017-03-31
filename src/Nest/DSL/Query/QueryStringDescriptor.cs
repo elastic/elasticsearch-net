@@ -73,9 +73,12 @@ namespace Nest
 		[JsonProperty(PropertyName = "max_determinized_states")]
 		int? MaximumDeterminizedStates { get; set; }
 
-		[JsonProperty(PropertyName = "rewrite")]
-		[JsonConverter(typeof (StringEnumConverter))]
+		[JsonIgnore]
+		[Obsolete("Use MultiTermQueryRewrite")]
 		RewriteMultiTerm? Rewrite { get; set; }
+
+		[JsonProperty("rewrite")]
+		MultiTermQueryRewrite MultiTermQueryRewrite { get; set; }
 	}
 
 	public class QueryStringQuery : PlainQuery, IQueryStringQuery
@@ -114,7 +117,13 @@ namespace Nest
 		public bool? UseDisMax { get; set; }
 		public double? TieBreaker { get; set; }
 		public int? MaximumDeterminizedStates { get; set; }
-		public RewriteMultiTerm? Rewrite { get; set; }
+		[Obsolete("Use MultiTermQueryRewrite")]
+		public RewriteMultiTerm? Rewrite
+		{
+			get { return MultiTermQueryRewrite?.Rewrite; }
+			set { MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+		public MultiTermQueryRewrite MultiTermQueryRewrite { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -161,8 +170,15 @@ namespace Nest
 		double? IQueryStringQuery.TieBreaker { get; set; }
 
 		int? IQueryStringQuery.MaximumDeterminizedStates { get; set; }
-		
-		RewriteMultiTerm? IQueryStringQuery.Rewrite { get; set; }
+
+		[Obsolete("Use MultiTermQueryRewrite")]
+		RewriteMultiTerm? IQueryStringQuery.Rewrite
+		{
+			get { return Self.MultiTermQueryRewrite?.Rewrite; }
+			set { Self.MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+
+		MultiTermQueryRewrite IQueryStringQuery.MultiTermQueryRewrite { get; set; }
 
 		bool IQuery.IsConditionless
 		{
@@ -274,9 +290,16 @@ namespace Nest
 			Self.Boost = boost;
 			return this;
 		}
-		public QueryStringQueryDescriptor<T> Rewrite(RewriteMultiTerm rewriteMultiTerm)
+		[Obsolete("Use overload that accepts MultiTermQueryRewrite")]
+		public QueryStringQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
 		{
-			Self.Rewrite = rewriteMultiTerm;
+			Self.MultiTermQueryRewrite = new MultiTermQueryRewrite(rewrite);
+			return this;
+		}
+
+		public QueryStringQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite)
+		{
+			Self.MultiTermQueryRewrite = rewrite;
 			return this;
 		}
 		public QueryStringQueryDescriptor<T> Lenient(bool lenient = true)

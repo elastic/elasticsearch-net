@@ -25,7 +25,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.Count
 			{
 				Field = "prefix_field", 
 				Value = "prefi", 
-				Rewrite = RewriteMultiTerm.ConstantScoreBoolean
+				MultiTermQueryRewrite = MultiTermQueryRewrite.ConstantScoreBoolean
 			};
 
 			var request = new CountRequest()
