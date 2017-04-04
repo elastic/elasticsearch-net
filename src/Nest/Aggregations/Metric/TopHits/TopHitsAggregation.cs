@@ -30,10 +30,13 @@ namespace Nest
 		[JsonConverter(typeof(ReadAsTypeJsonConverter<ScriptFields>))]
 		IScriptFields ScriptFields { get; set; }
 
-		[JsonProperty("fielddata_fields")]
-		Fields FielddataFields { get; set; }
+        [JsonProperty("fielddata_fields")]
+        Fields FielddataFields { get; set; }
 
-		[JsonProperty("version")]
+        [JsonProperty("fields")]
+        Fields Fields { get; set; }
+
+        [JsonProperty("version")]
 		bool? Version { get; set; }
 	}
 
@@ -46,8 +49,9 @@ namespace Nest
 		public IHighlight Highlight { get; set; }
 		public bool? Explain { get; set; }
 		public IScriptFields ScriptFields { get; set; }
-		public Fields FielddataFields { get; set; }
-		public bool? Version { get; set; }
+        public Fields FielddataFields { get; set; }
+        public Fields Fields { get; set; }
+        public bool? Version { get; set; }
 
 		internal TopHitsAggregation() { }
 
@@ -75,9 +79,11 @@ namespace Nest
 
 		IScriptFields ITopHitsAggregation.ScriptFields { get; set; }
 
-		Fields ITopHitsAggregation.FielddataFields { get; set; }
+        Fields ITopHitsAggregation.FielddataFields { get; set; }
 
-		bool? ITopHitsAggregation.Version { get; set; }
+        Fields ITopHitsAggregation.Fields { get; set; }
+
+        bool? ITopHitsAggregation.Version { get; set; }
 
 		public TopHitsAggregationDescriptor<T> From(int from) => Assign(a => a.From = from);
 
@@ -104,9 +110,12 @@ namespace Nest
 		public TopHitsAggregationDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> scriptFieldsSelector) =>
 			Assign(a => a.ScriptFields = scriptFieldsSelector?.Invoke(new ScriptFieldsDescriptor())?.Value);
 
-		public TopHitsAggregationDescriptor<T> FielddataFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.FielddataFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+        public TopHitsAggregationDescriptor<T> FielddataFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
+            Assign(a => a.FielddataFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public TopHitsAggregationDescriptor<T> Version(bool version = true) => Assign(a => a.Version = version);
+        public TopHitsAggregationDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
+            Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+
+        public TopHitsAggregationDescriptor<T> Version(bool version = true) => Assign(a => a.Version = version);
 	}
 }
