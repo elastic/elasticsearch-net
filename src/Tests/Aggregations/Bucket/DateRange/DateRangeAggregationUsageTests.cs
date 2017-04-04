@@ -37,7 +37,8 @@ namespace Tests.Aggregations.Bucket.DateRange
 							new { to = "now", from = "2015-06-06T12:01:02.123||+2d" },
 							new { to = "now+1d-30m/h" },
 							new { from = "2012-05-05||+1d-1m" },
-						}
+						},
+						time_zone = "CET"
 					},
 					aggs = new
 					{
@@ -56,6 +57,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 						r => r.To(DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour)),
 						r => r.From(DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m"))
 					)
+					.TimeZone("CET")
 					.Aggregations(childAggs => childAggs
 						.Terms("project_tags", avg => avg.Field(p => p.Tags))
 					)
@@ -74,6 +76,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 						new DateRangeExpression { To = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour) },
 						new DateRangeExpression { From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m") }
 					},
+					TimeZone = "CET",
 					Aggregations =
 						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.Tags) }
 				}
