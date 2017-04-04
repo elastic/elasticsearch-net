@@ -1,16 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <!-- TODO could be netcoreapp1.0 but we have 3 compiler issues, 
     since a huge refactoring is going on in a branch not attemping to fix these right now-->
+    <OutputType>Exe</OutputType>
     <TargetFramework>net46</TargetFramework>
     <VersionPrefix>6.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
-    <Authors></Authors>
-    <Company></Company>
-    <NeutralLanguage></NeutralLanguage>
-    <AssemblyTitle></AssemblyTitle>
-    <Description></Description>
-    <Copyright></Copyright>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Nest\Nest.csproj" />
@@ -23,4 +18,5 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <!--<Import Project="..\outputpath.props" />-->
+  <!--<Import Project="..\..\..\.paket\Paket.Restore.targets" />-->
 </Project>

@@ -1,14 +1,21 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net46</TargetFramework>
     <VersionPrefix>6.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
-    <Authors></Authors>
-    <Company></Company>
-    <NeutralLanguage></NeutralLanguage>
-    <AssemblyTitle></AssemblyTitle>
-    <Description></Description>
-    <Copyright></Copyright>
+    <Authors>
+    </Authors>
+    <Company>
+    </Company>
+    <NeutralLanguage>
+    </NeutralLanguage>
+    <AssemblyTitle>
+    </AssemblyTitle>
+    <Description>
+    </Description>
+    <Copyright>
+    </Copyright>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Nest\Nest.csproj" />
@@ -22,4 +29,5 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <!--<Import Project="..\outputpath.props" />-->
+  <!--<Import Project="..\..\..\.paket\Paket.Restore.targets" />-->
 </Project>

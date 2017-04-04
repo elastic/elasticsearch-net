@@ -1,55 +1,11 @@
 source https://www.nuget.org/api/v2
 
-nuget Newtonsoft.Json 
-
-//codegen
-nuget ShellProgressBar 
-nuget Microsoft.CodeAnalysis.CSharp 
-nuget Microsoft.CodeAnalysis.CSharp.Workspaces
-nuget CsQuery 
-nuget RazorMachine 2.6.1
-nuget System.Collections.Immutable
-
-//tests
-nuget FluentAssertions 
-nuget Bogus
-nuget DiffPlex 
-
-// profiling / benchmarking
-nuget JetBrains.Profiler.Kernel.Windows.Api prerelease
-nuget BenchmarkDotNet 0.10.0
-
-nuget System.Reactive
-nuget SemanticVersioning
-
-nuget System.Collections.Specialized = 4.0.1
-nuget System.Runtime.Serialization.Primitives 4.1.1
-nuget Microsoft.CSharp 4.0.1
-nuget System.Dynamic.Runtime 4.0.11
-nuget System.Reflection.TypeExtensions 4.1.0
-nuget System.ComponentModel.TypeConverter 4.1.0
-
-source https://api.nuget.org/v3/index.json
-
-nuget AsciiDocNet
-nuget NuDoq
-
-source https://www.myget.org/F/aspnetvnext/api/v3/index.json
-
-source https://www.myget.org/F/xunit/
-nuget xunit 2.2.0-beta5-build3474
-nuget xunit.abstractions 2.0.1-rc2
-
-
-
 group build
 
     source https://www.nuget.org/api/v2
 
     nuget FAKE
     nuget FSharp.Data
-    nuget GitLink prerelease
-    nuget NEST
-    source https://www.myget.org/F/xunit/
-    nuget xunit.runner.console 2.2.0-beta5-build3474
 
+    #Profiling.fsx uses this
+    nuget Nest framework: net45

@@ -21,69 +21,24 @@ module Tests =
         setProcessEnvironVar "NEST_INTEGRATION_CLUSTER" clusterFilter
         setProcessEnvironVar "NEST_TEST_FILTER" testFilter
 
-    let private testProjectJson() =
-        DotNetProject.All
-        |> Seq.iter(fun p -> 
-            let path = Paths.ProjectJson p.Name
-            DotNetCli.Restore 
-              (fun p -> 
-                   { p with 
-                       Project = path
-                       TimeOut = TimeSpan.FromMinutes(2.)
-                    }
-              ) |> ignore
-        )
+    let private dotnetTest() =
+        let folder = Paths.IncrementalOutputFolder (PrivateProject PrivateProject.Tests) DotNetFramework.NetCoreApp1_1
+        let testPath = sprintf "%s/Tests.dll" folder
+        DotNetCli.RunCommand (fun p -> { p with TimeOut = TimeSpan.FromMinutes(10.) }) (sprintf "%s -- Test" testPath) |> ignore
 
-        let testPath = Paths.Source "Tests/project.json"
-        DotNetCli.Restore 
-          (fun p -> 
-               { p with 
-                   Project = testPath
-                   TimeOut = TimeSpan.FromMinutes(2.)
-                }
-          ) |> ignore
-
-        DotNetCli.Build
-          (fun p -> 
-               { p with 
-                   Configuration = "Release" 
-                   Project = testPath
-                   Framework = "netcoreapp1.0"
-                   TimeOut = TimeSpan.FromMinutes(2.)
-                }
-          ) |> ignore
-        DotNetCli.Test
-          (fun p -> 
-               { p with 
-                   Configuration = "Release" 
-                   Project = testPath
-                   Framework = "netcoreapp1.0"
-                   TimeOut = TimeSpan.FromMinutes(10.)
-                   AdditionalArgs = ["-parallel"; "all"; "-xml"; Paths.Output("TestResults-Core-Clr.xml")]
-                }
-          ) |> ignore
-
-    let private testDesktopClr() = 
-        let folder = Paths.ProjectOutputFolder (PrivateProject PrivateProject.Tests) DotNetFramework.Net46
-        let testDll = Path.Combine(folder, "Tests.exe")
-        Tooling.XUnit.Exec [testDll; "-parallel"; "all"; "-xml"; Paths.Output("TestResults-Desktop-Clr.xml")] 
-        |> ignore
+    let private runTestExeOnDesktopCLR() = 
+        let folder = Paths.IncrementalOutputFolder (PrivateProject PrivateProject.Tests) DotNetFramework.Net46
+        let testRunner = Tooling.BuildTooling(folder @@ "Tests.exe")
+        testRunner.Exec ["Test"; "-parallel"; "-xml"; Paths.Output("TestResults-Desktop-Clr.xml")] |> ignore
         
-    let RunTest() = 
+    let IncrementalTest() = 
         setLocalEnvVars()
-        let folder = Paths.IncrementalOutputFolder (PrivateProject PrivateProject.Tests) DotNetFramework.Net45
-        let testDll = Path.Combine(folder, "Tests.exe")
-        Tooling.XUnit.Exec [testDll; "-parallel"; "all"] |> ignore
-
-    let RunUnitTestsForever() = 
-        while true do 
-            RunTest() 
-            Thread.Sleep(1000)
+        runTestExeOnDesktopCLR() 
 
     let RunUnitTests() = 
         setLocalEnvVars()
-        testDesktopClr()
-        testProjectJson()
+        dotnetTest()
+        runTestExeOnDesktopCLR()
 
     let RunIntegrationTests() =
         setLocalEnvVars()
@@ -95,4 +50,6 @@ module Tests =
         
         for esVersion in esVersions do
             setProcessEnvironVar "NEST_INTEGRATION_VERSION" esVersion
-            testDesktopClr()
+            runTestExeOnDesktopCLR()
+            //TODO enable integration testing on .net CORE
+            //dotnetTest()
