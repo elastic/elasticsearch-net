@@ -122,6 +122,7 @@ namespace Xunit
 
 		private IEnumerable<string> ParseExcludedClusters(string clusterFilter)
 		{
+			if (string.IsNullOrWhiteSpace(clusterFilter)) return Enumerable.Empty<string>();
 			var clusters =
 #if DOTNETCORE
 				typeof(ClusterBase).Assembly()
@@ -143,6 +144,7 @@ namespace Xunit
 			List<IGrouping<ClusterBase, GroupedByCluster>> grouped, IMessageBus messageBus,
 			CancellationTokenSource cancellationTokenSource)
 		{
+			Console.WriteLine("Starting integration tests");
 			var summaries = new ConcurrentBag<RunSummary>();
 			var clusterTotals = new Dictionary<string, Stopwatch>();
 			var excludedClusters = ParseExcludedClusters(TestClient.Configuration.ClusterFilter);
@@ -151,6 +153,7 @@ namespace Xunit
 			{
 				var type = @group.Key?.GetType();
 				var clusterName = type?.Name.Replace("Cluster", "") ?? "UNKNOWN";
+				Console.WriteLine($"Now executing {type}");
 
 				if (excludedClusters.Contains(clusterName, StringComparer.OrdinalIgnoreCase))
 					continue;

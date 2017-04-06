@@ -69,7 +69,7 @@ namespace Tests.Framework.ManagedElasticsearch.Process
 			version = null;
 			pid = null;
 			if (!this.InNodeSection) return false;
-
+			if (string.IsNullOrEmpty(this.Message)) return false;
 			var match = InfoParser.Match(this.Message.Replace(Environment.NewLine, ""));
 			if (!match.Success) return false;
 

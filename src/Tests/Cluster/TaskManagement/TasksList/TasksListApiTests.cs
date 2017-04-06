@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -80,11 +81,33 @@ namespace Tests.Cluster.TaskManagement.TasksList
 			var seeder = new DefaultSeeder(this.Cluster.Node);
 			seeder.SeedNode();
 
-			// get a suitable load of projects in order to get a decent task status out
-			var bulkResponse = client.IndexMany(Project.Generator.Generate(20000));
-			if (!bulkResponse.IsValid)
-				throw new Exception("failure in setting up integration");
+            var handle = new ManualResetEvent(false);
 
+            // get a suitable load of projects in order to get a decent task status out
+            var observableBulk = client.BulkAll(Project.Generator.Generate(25000), f => f
+                .MaxDegreeOfParallelism(8)
+                .BackOffTime(TimeSpan.FromSeconds(4))
+                .BackOffRetries(2)
+                .Size(500)
+                .RefreshOnCompleted()
+            );
+
+            var bulkObserver = new BulkAllObserver(
+                onError: (e) => { throw e; },
+                onCompleted: () => handle.Set()
+            );
+
+            observableBulk.Subscribe(bulkObserver);
+
+            try
+		    {
+                handle.WaitOne(TimeSpan.FromMinutes(1));
+            }
+		    catch (Exception e)
+		    {
+		        throw new Exception("failure in setting up integration", e);
+		    }
+            
 			var response = client.ReindexOnServer(r => r
 				.Source(s => s
 					.Index(Infer.Index<Project>())

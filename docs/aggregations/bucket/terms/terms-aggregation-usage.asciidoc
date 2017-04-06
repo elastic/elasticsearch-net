@@ -15,6 +15,10 @@ please modify the original csharp file found at the link and submit the PR with 
 [[terms-aggregation-usage]]
 == Terms Aggregation Usage
 
+A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
+
+See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-terms-aggregation.html[terms aggregation] for more detail.
+
 === Fluent DSL Example
 
 [source,csharp]
@@ -111,6 +115,235 @@ var states = response.Aggs.Terms("states");
 states.Should().NotBeNull();
 states.DocCountErrorUpperBound.Should().HaveValue();
 states.SumOtherDocCount.Should().HaveValue();
+
+foreach (var item in states.Buckets)
+{
+    item.Key.Should().NotBeNullOrEmpty();
+    item.DocCount.Should().BeGreaterOrEqualTo(1);
+}
+
+states.Meta.Should().NotBeNull().And.HaveCount(1);
+states.Meta["foo"].Should().Be("bar");
+----
+
+[[terms-exact-value-filter]]
+[float]
+== Filtering with exact values
+
+Using terms aggregation with filtering to include only specific values
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Size(0)
+.Aggregations(a => a
+    .Terms("states", st => st
+        .Field(p => p.State.Suffix("raw"))
+        .MinimumDocumentCount(2)
+        .Size(5)
+        .ShardSize(100)
+        .ExecutionHint(TermsAggregationExecutionHint.Map)
+        .Missing("n/a")
+        .Include(new [] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() })
+        .Order(TermsOrder.TermAscending)
+        .Order(TermsOrder.CountDescending)
+        .Meta(m => m
+            .Add("foo", "bar")
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Size = 0,
+    Aggregations = new TermsAggregation("states")
+    {
+        Field = Field<Project>(p => p.State.Suffix("raw")),
+        MinimumDocumentCount = 2,
+        Size = 5,
+        ShardSize = 100,
+        ExecutionHint = TermsAggregationExecutionHint.Map,
+        Missing = "n/a",
+        Include = new TermsIncludeExclude { Values = new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() } },
+        Order = new List<TermsOrder>
+        {
+            TermsOrder.TermAscending,
+            TermsOrder.CountDescending
+        },
+        Meta = new Dictionary<string, object>
+        {
+            { "foo", "bar" }
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "states": {
+      "meta": {
+        "foo": "bar"
+      },
+      "terms": {
+        "field": "state.raw",
+        "min_doc_count": 2,
+        "size": 5,
+        "shard_size": 100,
+        "execution_hint": "map",
+        "missing": "n/a",
+        "include": [
+          "Stable",
+          "VeryActive"
+        ],
+        "order": [
+          {
+            "_term": "asc"
+          },
+          {
+            "_count": "desc"
+          }
+        ]
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var states = response.Aggs.Terms("states");
+states.Should().NotBeNull();
+states.DocCountErrorUpperBound.Should().HaveValue();
+states.SumOtherDocCount.Should().HaveValue();
+states.Buckets.Should().NotBeNull();
+states.Buckets.Count.Should().BeGreaterThan(0);
+
+foreach (var item in states.Buckets)
+{
+    item.Key.Should().NotBeNullOrEmpty();
+    item.DocCount.Should().BeGreaterOrEqualTo(1);
+}
+
+states.Meta.Should().NotBeNull().And.HaveCount(1);
+states.Meta["foo"].Should().Be("bar");
+----
+
+[[terms-pattern-filter]]
+[float]
+== Filtering with a regular expression pattern
+
+Using terms aggregation with filtering to include values using a regular expression pattern
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Size(0)
+.Aggregations(a => a
+    .Terms("states", st => st
+        .Field(p => p.State.Suffix("raw"))
+        .MinimumDocumentCount(2)
+        .Size(5)
+        .ShardSize(100)
+        .ExecutionHint(TermsAggregationExecutionHint.Map)
+        .Missing("n/a")
+        .Include("(Stable|VeryActive)")
+        .Order(TermsOrder.TermAscending)
+        .Order(TermsOrder.CountDescending)
+        .Meta(m => m
+            .Add("foo", "bar")
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Size = 0,
+    Aggregations = new TermsAggregation("states")
+    {
+        Field = Field<Project>(p => p.State.Suffix("raw")),
+        MinimumDocumentCount = 2,
+        Size = 5,
+        ShardSize = 100,
+        ExecutionHint = TermsAggregationExecutionHint.Map,
+        Missing = "n/a",
+        Include = new TermsIncludeExclude { Pattern = "(Stable|VeryActive)" },
+        Order = new List<TermsOrder>
+        {
+            TermsOrder.TermAscending,
+            TermsOrder.CountDescending
+        },
+        Meta = new Dictionary<string, object>
+        {
+            { "foo", "bar" }
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "states": {
+      "meta": {
+        "foo": "bar"
+      },
+      "terms": {
+        "field": "state.raw",
+        "min_doc_count": 2,
+        "size": 5,
+        "shard_size": 100,
+        "execution_hint": "map",
+        "missing": "n/a",
+        "include": "(Stable|VeryActive)",
+        "order": [
+          {
+            "_term": "asc"
+          },
+          {
+            "_count": "desc"
+          }
+        ]
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var states = response.Aggs.Terms("states");
+states.Should().NotBeNull();
+states.DocCountErrorUpperBound.Should().HaveValue();
+states.SumOtherDocCount.Should().HaveValue();
+states.Buckets.Should().NotBeNull();
+states.Buckets.Count.Should().BeGreaterThan(0);
 
 foreach (var item in states.Buckets)
 {

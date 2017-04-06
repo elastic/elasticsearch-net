@@ -3,6 +3,8 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
 #if DOTNETCORE
@@ -143,6 +145,11 @@ namespace Elasticsearch.Net
 		private Action<RequestData> _onRequestDataCreated = DefaultRequestDataCreated;
 		Action<RequestData> IConnectionConfigurationValues.OnRequestDataCreated => _onRequestDataCreated;
 
+		private Func<object, X509Certificate,X509Chain,SslPolicyErrors, bool> _serverCertificateValidationCallback;
+		Func<object, X509Certificate, X509Chain, SslPolicyErrors, bool> IConnectionConfigurationValues.ServerCertificateValidationCallback => _serverCertificateValidationCallback;
+
+		private X509CertificateCollection _clientCertificates;
+		X509CertificateCollection IConnectionConfigurationValues.ClientCertificates => _clientCertificates;
 		private readonly NameValueCollection _queryString = new NameValueCollection();
 		NameValueCollection IConnectionConfigurationValues.QueryStringParameters => _queryString;
 
@@ -387,6 +394,35 @@ namespace Elasticsearch.Net
 			};
 			return (T)this;
 		}
+
+		/// <summary>
+		/// Register a ServerCertificateValidationCallback, this is called per endpoint until it returns true.
+		/// After this callback returns true that endpoint is validated for the lifetime of the ServiceEndpoint
+		/// for that host.
+		/// </summary>
+		public T ServerCertificateValidationCallback(Func<object, X509Certificate, X509Chain, SslPolicyErrors, bool> callback) =>
+			Assign(a => a._serverCertificateValidationCallback = callback);
+
+		/// <summary>
+		/// Use the following certificates to authenticate all HTTP requests. You can also set them on individual
+		/// request using <see cref="RequestConfiguration.ClientCertificates"/>
+		/// </summary>
+		public T ClientCertificates(X509CertificateCollection certificates) =>
+			Assign(a => a._clientCertificates = certificates);
+
+		/// <summary>
+		/// Use the following certificate to authenticate all HTTP requests. You can also set them on individual
+		/// request using <see cref="RequestConfiguration.ClientCertificates"/>
+		/// </summary>
+		public T ClientCertificate(X509Certificate certificate) =>
+			Assign(a => a._clientCertificates = new X509Certificate2Collection { certificate });
+
+		/// <summary>
+		/// Use the following certificate to authenticate all HTTP requests. You can also set them on individual
+		/// request using <see cref="RequestConfiguration.ClientCertificates"/>
+		/// </summary>
+		public T ClientCertificate(string certificatePath) =>
+			Assign(a => a._clientCertificates = new X509Certificate2Collection { new X509Certificate(certificatePath) });
 
 		void IDisposable.Dispose() => this.DisposeManagedResources();
 

@@ -135,13 +135,25 @@ namespace Nest
 		});
 
 		public TermsAggregationDescriptor<T> Include(string includePattern, string regexFlags = null) =>
-			Assign(a => a.Include = new TermsIncludeExclude() { Pattern = includePattern, Flags = regexFlags });
+			Assign(a => a.Include = new TermsIncludeExclude
+			{
+				Pattern = includePattern,
+#pragma warning disable 618
+				Flags = regexFlags
+#pragma warning restore 618
+			});
 
 		public TermsAggregationDescriptor<T> Include(IEnumerable<string> values) =>
 			Assign(a => a.Include = new TermsIncludeExclude { Values = values });
 
 		public TermsAggregationDescriptor<T> Exclude(string excludePattern, string regexFlags = null) =>
-			Assign(a => a.Exclude = new TermsIncludeExclude() { Pattern = excludePattern, Flags = regexFlags });
+			Assign(a => a.Exclude = new TermsIncludeExclude
+			{
+				Pattern = excludePattern,
+#pragma warning disable 618
+				Flags = regexFlags
+#pragma warning restore 618
+			});
 
 		public TermsAggregationDescriptor<T> Exclude(IEnumerable<string> values) =>
 			Assign(a => a.Exclude = new TermsIncludeExclude { Values = values });

@@ -250,8 +250,11 @@
     <Compile Include="Framework\Benchmarks\BenchmarkTest.cs" />
     <Compile Include="Framework\Configuration\Versions\ElasticsearchVersion.cs" />
     <Compile Include="Framework\DocumentationTests\IntegrationDocumentationTestBase.cs" />
+    <Compile Include="Framework\EndpointTests\ApiIntegrationAgainstNewIndexTestBase.cs" />
     <Compile Include="Framework\EndpointTests\ApiIntegrationTestBase.cs" />
     <Compile Include="Framework\EndpointTests\ApiTestBase.cs" />
+    <Compile Include="Framework\EndpointTests\CanConnectTestBase.cs" />
+    <Compile Include="Framework\EndpointTests\ConnectionErrorTestBase.cs" />
     <Compile Include="Framework\EndpointTests\CrudTestBase.cs" />
     <Compile Include="Framework\EndpointTests\TestState\AsyncLazy.cs" />
     <Compile Include="Framework\EndpointTests\TestState\CallUniqueValues.cs" />
@@ -512,6 +515,7 @@
     <Compile Include="Framework\VirtualClustering\Audit\Audits.cs" />
     <Compile Include="Framework\VirtualClustering\MockResponses\SniffingResponse.cs" />
     <Compile Include="Framework\VirtualClustering\Providers\TestableDateTimeProvider.cs" />
+    <Compile Include="Framework\XUnitPlumbing\IntegrationOnly.cs" />
     <Compile Include="Framework\XUnitPlumbing\IntegrationTestDiscoverer.cs" />
     <Compile Include="Framework\XUnitPlumbing\NestTestDiscoverer.cs" />
     <Compile Include="Framework\XUnitPlumbing\RequiresPluginAttribute.cs" />
@@ -563,7 +567,6 @@
     <Compile Include=".\Search\FieldStats\FieldStatsApiTests.cs" />
     <Compile Include=".\Search\FieldStats\FieldStatsUrlTests.cs" />
     <Compile Include=".\Search\MultiSearch\MultiSearchApiTests.cs" />
-    <Compile Include=".\Search\MultiSearch\MultiSearchInvalidApiTests.cs" />
     <Compile Include=".\Search\MultiSearch\MultiSearchLowLevelPostDataTests.cs" />
     <Compile Include=".\Search\MultiSearch\MultiSearchUrlTests.cs" />
     <Compile Include=".\Search\Percolator\MultiPercolate\MultiPercolateApiTests.cs" />
@@ -656,6 +659,11 @@
     <Compile Include="Reproduce\CovariantSearchDateParsing.cs" />
     <Compile Include="Reproduce\GithubIssue2306.cs" />
     <Compile Include="Reproduce\GithubIssue2309.cs" />
+    <Compile Include="Reproduce\GithubIssue2323.cs" />
+    <Compile Include="Reproduce\GithubIssue2503.cs" />
+    <Compile Include="Reproduce\GithubIssue2690.cs" />
+    <Compile Include="Search\Hits\HitsSerializationTests.cs" />
+    <Compile Include="Search\MultiSearch\MultiSearchInvalidApiTests.cs" />
     <Compile Include="Framework\Extensions\UriExtensions.cs" />
     <Compile Include="Framework\VirtualClustering\WaitingInMemoryConnection.cs" />
     <Compile Include="Framework\Xunit\ForEachAsyncExtensions.cs" />
@@ -679,9 +687,6 @@
     <Compile Include="Reproduce\GithubIssue2052.cs" />
     <Compile Include="Reproduce\GithubIssue2173.cs" />
     <Compile Include="Reproduce\DateSerialization.cs" />
-    <Compile Include="Reproduce\GithubIssue2323.cs" />
-    <Compile Include="Reproduce\GithubIssue2503.cs" />
-    <Compile Include="Search\Hits\HitsSerializationTests.cs" />
     <Compile Include="Search\Search\Rescoring\RescoreUsageTests.cs" />
     <Compile Include="Search\Search\InvalidSearchApiTests.cs" />
     <Compile Include="Search\Search\SearchProfileTests.cs" />

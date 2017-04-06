@@ -62,7 +62,7 @@ Target "Version" <| fun _ ->
 
 Target "Release" <| fun _ -> 
     Release.NugetPack()   
-    Sign.ValidateNugetDllAreSignedCorrectly()
+    Signing.Sign.ValidateNugetDllAreSignedCorrectly()
     Versioning.ValidateArtifacts()
 
 Target "Canary" <| fun _ -> 

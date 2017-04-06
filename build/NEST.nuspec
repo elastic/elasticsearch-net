@@ -13,15 +13,15 @@
 		<description>Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and responses. Uses and exposes Elasticsearch.Net</description>
         <summary>Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and responses. Uses and exposes Elasticsearch.Net</summary>
 		<releaseNotes>See https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
-		<copyright>2014-2016 Elasticsearch BV</copyright>
+		<copyright>2014-$year$ Elasticsearch BV</copyright>
 		<tags>elasticsearch,elastic,search,lucene,nest</tags>
 		<dependencies>
 			<group targetFramework=".NETFramework4.5">
-				<dependency id="Elasticsearch.Net" version="[$version$, 3.0.0)" />
+				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
 				<dependency id="Newtonsoft.Json" version="[9,10)" />
 			</group>
 			<group targetFramework=".NETFramework4.6">
-				<dependency id="Elasticsearch.Net" version="[$version$, 3.0.0)" />
+				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
 				<dependency id="Newtonsoft.Json" version="[9,10)" />
 			</group>
 			<group targetFramework=".NETStandard1.3">
@@ -29,7 +29,7 @@
 				<dependency id="System.Collections.Specialized" version="[4.0.1, )" />
 				<dependency id="System.Reflection.TypeExtensions" version="[4.1.0, )" />
 				<dependency id="System.Linq.Queryable" version="[4.0.1, )" />
-				<dependency id="Elasticsearch.Net" version="[$version$, 3.0.0)" />
+				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
 				<dependency id="Newtonsoft.Json" version="[9,10)" />
 			</group>
 		</dependencies>

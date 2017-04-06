@@ -682,6 +682,49 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 		}
 
+		public class ParentWithStringId : Parent
+		{
+			public new string Id { get; set; }
+		}
+
+		[U]
+		public void OverridingInheritedProperties()
+		{
+			var descriptor = new CreateIndexDescriptor("myindex")
+				.Mappings(ms => ms
+					.Map<ParentWithStringId>(m => m
+						.AutoMap()
+					)
+				);
+
+			var expected = new
+			{
+				mappings = new
+				{
+					parent = new
+					{
+						properties = new
+						{
+							id = new
+							{
+								type = "string",
+							}
+						}
+					}
+				}
+			};
+
+			var settings = WithConnectionSettings(s => s
+				.InferMappingFor<ParentWithStringId>(m => m
+					.TypeName("parent")
+					.Ignore(p => p.Description)
+					.Ignore(p => p.IgnoreMe)
+				)
+			);
+
+			settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+		}
+
 		/**[float]
 		* == Ignoring Properties
 		* Properties on a POCO can be ignored in a few ways:

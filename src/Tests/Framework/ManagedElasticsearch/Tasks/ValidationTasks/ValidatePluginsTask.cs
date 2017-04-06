@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.Configuration;
 using Tests.Framework.Integration;

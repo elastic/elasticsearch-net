@@ -8,85 +8,91 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<QueryStringQueryDescriptor<object>>))]
 	public interface IQueryStringQuery : IQuery
 	{
-		[JsonProperty(PropertyName = "query")]
+		[JsonProperty("query")]
 		string Query { get; set; }
 
-		[JsonProperty(PropertyName = "default_field")]
+		[JsonProperty("default_field")]
 		Field DefaultField { get; set; }
 
-		[JsonProperty(PropertyName = "default_operator")]
+		[JsonProperty("default_operator")]
 		Operator? DefaultOperator { get; set; }
 
-		[JsonProperty(PropertyName = "analyzer")]
+		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty(PropertyName = "quote_analyzer")]
+		[JsonProperty("quote_analyzer")]
 		string QuoteAnalyzer { get; set; }
 
-		[JsonProperty(PropertyName = "allow_leading_wildcard")]
+		[JsonProperty("allow_leading_wildcard")]
 		bool? AllowLeadingWildcard { get; set; }
 
-		[JsonProperty(PropertyName = "lowercase_expanded_terms")]
+		[JsonProperty("lowercase_expanded_terms")]
 		bool? LowercaseExpendedTerms { get; set; }
 
-		[JsonProperty(PropertyName = "enable_position_increments")]
+		[JsonProperty("enable_position_increments")]
 		bool? EnablePositionIncrements { get; set; }
 
-		[JsonProperty(PropertyName = "fuzzy_max_expansions")]
+		[JsonProperty("fuzzy_max_expansions")]
 		int? FuzzyMaxExpansions { get; set; }
 
-		[JsonProperty(PropertyName = "fuzziness")]
+		[JsonProperty("fuzziness")]
 		Fuzziness Fuzziness { get; set; }
 
-		[JsonProperty(PropertyName = "fuzzy_prefix_length")]
+		[JsonProperty("fuzzy_prefix_length")]
 		int? FuzzyPrefixLength { get; set; }
 
-		[JsonProperty(PropertyName = "phrase_slop")]
+		[JsonProperty("phrase_slop")]
 		double? PhraseSlop { get; set; }
 
-		[JsonProperty(PropertyName = "analyze_wildcard")]
+		[JsonProperty("analyze_wildcard")]
 		bool? AnalyzeWildcard { get; set; }
 
-		[JsonProperty(PropertyName = "auto_generate_phrase_queries")]
+		[JsonProperty("auto_generate_phrase_queries")]
 		bool? AutoGeneratePhraseQueries { get; set; }
 
-		[JsonProperty(PropertyName = "max_determinized_states")]
+		[JsonProperty("max_determinized_states")]
 		int? MaximumDeterminizedStates { get; set; }
 
-		[JsonProperty(PropertyName = "minimum_should_match")]
+		[JsonProperty("minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
-		[JsonProperty(PropertyName = "lenient")]
+		[JsonProperty("lenient")]
 		bool? Lenient { get; set; }
 
-		[JsonProperty(PropertyName = "locale")]
+		[JsonProperty("locale")]
 		string Locale { get; set; }
 
-		[JsonProperty(PropertyName = "time_zone")]
+		[JsonProperty("time_zone")]
 		string Timezone { get; set; }
 
-		[JsonProperty(PropertyName = "fields")]
+		[JsonProperty("fields")]
 		Fields Fields { get; set; }
 
-		[JsonProperty(PropertyName = "use_dis_max")]
+		[JsonProperty("use_dis_max")]
 		bool? UseDisMax { get; set; }
 
-		[JsonProperty(PropertyName = "tie_breaker")]
+		[JsonProperty("tie_breaker")]
 		double? TieBreaker { get; set; }
 
-		[JsonProperty(PropertyName = "rewrite")]
+		[JsonIgnore]
+		[Obsolete("Use MultiTermQueryRewrite")]
 		RewriteMultiTerm? Rewrite { get; set; }
 
-		[JsonProperty(PropertyName = "fuzzy_rewrite")]
+		[JsonProperty("rewrite")]
+		MultiTermQueryRewrite MultiTermQueryRewrite { get; set; }
+
+		[JsonIgnore]
+		[Obsolete("Use FuzzyMultiTermQueryRewrite")]
 		RewriteMultiTerm? FuzzyRewrite { get; set; }
 
-		[JsonProperty(PropertyName = "quote_field_suffix")]
+		[JsonProperty("fuzzy_rewrite")]
+		MultiTermQueryRewrite FuzzyMultiTermQueryRewrite { get; set; }
+
+		[JsonProperty("quote_field_suffix")]
 		string QuoteFieldSuffix { get; set; }
 
-		[JsonProperty(PropertyName = "escape")]
+		[JsonProperty("escape")]
 		bool? Escape { get; set; }
-
-
 	}
 
 	public class QueryStringQuery : QueryBase, IQueryStringQuery
@@ -96,8 +102,21 @@ namespace Nest
 		public Fuzziness Fuzziness { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public string Locale { get; set; }
-		public RewriteMultiTerm? Rewrite { get; set; }
-		public RewriteMultiTerm? FuzzyRewrite { get; set; }
+		[Obsolete("Use MultiTermQueryRewrite")]
+		public RewriteMultiTerm? Rewrite
+		{
+			get { return MultiTermQueryRewrite?.Rewrite; }
+			set { MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+		public MultiTermQueryRewrite MultiTermQueryRewrite { get; set; }
+
+		[Obsolete("Use FuzzyMultiTermQueryRewrite")]
+		public RewriteMultiTerm? FuzzyRewrite
+		{
+			get { return FuzzyMultiTermQueryRewrite?.Rewrite; }
+			set { FuzzyMultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+		public MultiTermQueryRewrite FuzzyMultiTermQueryRewrite { get; set; }
 		public string QuoteFieldSuffix { get; set; }
 		public bool? Escape { get; set; }
 		public string Query { get; set; }
@@ -152,8 +171,20 @@ namespace Nest
 		bool? IQueryStringQuery.UseDisMax { get; set; }
 		double? IQueryStringQuery.TieBreaker { get; set; }
 		int? IQueryStringQuery.MaximumDeterminizedStates { get; set; }
-		RewriteMultiTerm? IQueryStringQuery.FuzzyRewrite { get; set; }
-		RewriteMultiTerm? IQueryStringQuery.Rewrite { get; set; }
+		[Obsolete("Use FuzzyMultiTermQueryRewrite")]
+		RewriteMultiTerm? IQueryStringQuery.FuzzyRewrite
+		{
+			get { return Self.FuzzyMultiTermQueryRewrite?.Rewrite; }
+			set { Self.FuzzyMultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+		MultiTermQueryRewrite IQueryStringQuery.FuzzyMultiTermQueryRewrite { get; set; }
+		[Obsolete("Use MultiTermQueryRewrite")]
+		RewriteMultiTerm? IQueryStringQuery.Rewrite
+		{
+			get { return Self.MultiTermQueryRewrite?.Rewrite; }
+			set { Self.MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+		}
+		MultiTermQueryRewrite IQueryStringQuery.MultiTermQueryRewrite { get; set; }
 		string IQueryStringQuery.QuoteFieldSuffix { get; set; }
 		bool? IQueryStringQuery.Escape { get; set; }
 
@@ -212,9 +243,27 @@ namespace Nest
 
 		public QueryStringQueryDescriptor<T> MaximumDeterminizedStates(int? maxDeterminizedStates) => Assign(a => a.MaximumDeterminizedStates = maxDeterminizedStates);
 
-		public QueryStringQueryDescriptor<T> FuzzyRewrite(RewriteMultiTerm? rewriteMultiTerm) => Assign(a => a.FuzzyRewrite = rewriteMultiTerm);
+		[Obsolete("Use FuzzyRewrite(MultiTermQueryRewrite rewrite)")]
+		public QueryStringQueryDescriptor<T> FuzzyRewrite(RewriteMultiTerm? rewrite) =>
+			Assign(a =>
+			{
+				a.FuzzyMultiTermQueryRewrite = rewrite != null
+					? new MultiTermQueryRewrite(rewrite.Value)
+					: null;
+			});
 
-		public QueryStringQueryDescriptor<T> Rewrite(RewriteMultiTerm? rewriteMultiTerm) => Assign(a => a.Rewrite = rewriteMultiTerm);
+		public QueryStringQueryDescriptor<T> FuzzyRewrite(MultiTermQueryRewrite rewrite) => Assign(a => Self.FuzzyMultiTermQueryRewrite = rewrite);
+
+		[Obsolete("Use Rewrite(MultiTermQueryRewrite rewrite)")]
+		public QueryStringQueryDescriptor<T> Rewrite(RewriteMultiTerm? rewrite) =>
+			Assign(a =>
+			{
+				a.MultiTermQueryRewrite = rewrite != null
+					? new MultiTermQueryRewrite(rewrite.Value)
+					: null;
+			});
+
+		public QueryStringQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite) => Assign(a => Self.MultiTermQueryRewrite = rewrite);
 
 		public QueryStringQueryDescriptor<T> QuoteFieldSuffix(string quoteFieldSuffix) => Assign(a => a.QuoteFieldSuffix = quoteFieldSuffix);
 

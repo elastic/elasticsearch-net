@@ -178,12 +178,28 @@ namespace Nest
 		}
 
 		/// <summary> Returns inherited properties with reflectedType set to base type</summary>
+		/// <summary>
+		/// Returns inherited properties with reflectedType set to base type
+		/// </summary>
 		private static IEnumerable<PropertyInfo> AllPropertiesNotCached(this Type type)
 		{
+			var propertiesByName = new Dictionary<string, PropertyInfo>();
 			do
 			{
 				foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
-					yield return propertyInfo;
+				{
+					if (propertiesByName.ContainsKey(propertyInfo.Name))
+					{
+						if (IsHidingMember(propertyInfo))
+						{
+							propertiesByName[propertyInfo.Name] = propertyInfo;
+						}
+					}
+					else
+					{
+						propertiesByName.Add(propertyInfo.Name, propertyInfo);
+					}
+				}
 #if DOTNETCORE
 				type = type.GetTypeInfo()?.BaseType;
 			} while (type?.GetTypeInfo()?.BaseType != null);
@@ -191,7 +207,24 @@ namespace Nest
 				type = type.BaseType;
 			} while (type?.BaseType != null);
 #endif
+			return propertiesByName.Values;
+		}
 
+		/// <summary>
+		/// Determines if a property is overriding an inherited property of its base class
+		/// </summary>
+		private static bool IsHidingMember(PropertyInfo propertyInfo)
+		{
+#if DOTNETCORE
+			var baseType = propertyInfo.DeclaringType?.GetTypeInfo()?.BaseType;
+#else
+			var baseType = propertyInfo.DeclaringType?.BaseType;
+#endif
+			var baseProperty = baseType?.GetProperty(propertyInfo.Name);
+			if (baseProperty == null) return false;
+			var derivedGetMethod = propertyInfo.GetGetMethod().GetBaseDefinition();
+			return derivedGetMethod?.ReturnType != propertyInfo.PropertyType;
 		}
 	}
 }
+

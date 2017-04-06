@@ -80,6 +80,7 @@ var descriptor = new CreateIndexDescriptor("myindex")
     );
 ----
 <1> map `Name` as a `string` type
+
 <2> map `Employees` as an `object` type, mapping each of the properties of `Employee`
 
 This is all fine and dandy and useful for some use cases however in most cases
@@ -698,6 +699,51 @@ var expected = new
 Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 ----
 
+[source,csharp]
+----
+public class ParentWithStringId : Parent
+{
+    public new string Id { get; set; }
+}
+----
+
+[source,csharp]
+----
+var descriptor = new CreateIndexDescriptor("myindex")
+    .Mappings(ms => ms
+        .Map<ParentWithStringId>(m => m
+            .AutoMap()
+        )
+    );
+
+var expected = new
+{
+    mappings = new
+    {
+        parent = new
+        {
+            properties = new
+            {
+                id = new
+                {
+                    type = "string",
+                }
+            }
+        }
+    }
+};
+
+var settings = WithConnectionSettings(s => s
+    .InferMappingFor<ParentWithStringId>(m => m
+        .TypeName("parent")
+        .Ignore(p => p.Description)
+        .Ignore(p => p.IgnoreMe)
+    )
+);
+
+settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+----
+
 [[ignoring-properties]]
 [float]
 == Ignoring Properties
@@ -1024,6 +1070,7 @@ public class DisableDocValuesPropertyVisitor : NoopPropertyVisitor
 }
 ----
 <1> Override the `Visit` method on `INumberProperty` and set `DocValues = false`
+
 <2> Similarily, override the `Visit` method on `IBooleanProperty` and set `DocValues = false`
 
 Now we can pass an instance of our custom visitor to `.AutoMap()` 

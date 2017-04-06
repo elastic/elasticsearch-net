@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
 namespace Elasticsearch.Net
@@ -171,5 +173,17 @@ namespace Elasticsearch.Net
 		/// received.
 		/// </summary>
 		TimeSpan? KeepAliveInterval { get; }
+
+		/// <summary>
+		/// Register a ServerCertificateValidationCallback per request
+		/// </summary>
+		Func<object, X509Certificate,X509Chain,SslPolicyErrors, bool>  ServerCertificateValidationCallback { get; }
+
+
+		/// <summary>
+		/// Use the following certificates to authenticate all HTTP requests. You can also set them on individual
+		/// request using <see cref="RequestConfiguration.ClientCertificates"/>
+		/// </summary>
+		X509CertificateCollection ClientCertificates { get; }
 	}
 }

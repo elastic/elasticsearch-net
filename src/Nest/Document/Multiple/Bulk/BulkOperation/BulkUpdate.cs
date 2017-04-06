@@ -32,6 +32,12 @@ namespace Nest
 		bool? DocAsUpsert { get; set; }
 
 		/// <summary>
+		/// If you would like your script to run regardless of whether the document exists or not — i.e. the script handles
+		/// initializing the document instead of the upsert element — then set scripted_upsert to true
+		/// </summary>
+		bool? ScriptedUpsert { get; set; }
+
+		/// <summary>
 		/// The script language to use
 		/// </summary>
 		string Lang { get; set; }
@@ -130,6 +136,9 @@ namespace Nest
 		/// </summary>
 		public bool? DocAsUpsert { get; set; }
 
+		/// <inheritdoc/>
+		public bool? ScriptedUpsert { get; set; }
+
 		/// <summary>
 		/// The script language to use
 		/// </summary>
@@ -201,6 +210,7 @@ namespace Nest
 		TDocument IBulkUpdateOperation<TDocument, TPartialDocument>.Upsert { get; set; }
 		TPartialDocument IBulkUpdateOperation<TDocument, TPartialDocument>.Doc { get; set; }
 		bool? IBulkUpdateOperation<TDocument, TPartialDocument>.DocAsUpsert { get; set; }
+		bool? IBulkUpdateOperation<TDocument, TPartialDocument>.ScriptedUpsert { get; set; }
 		string IBulkUpdateOperation<TDocument, TPartialDocument>.Lang { get; set; }
 		string IBulkUpdateOperation<TDocument, TPartialDocument>.Script { get; set; }
 		string IBulkUpdateOperation<TDocument, TPartialDocument>.ScriptId { get; set; }
@@ -214,7 +224,8 @@ namespace Nest
 				_PartialUpdate = Self.Doc,
 				_Script = CreateScriptFromProperties(),
 				_Upsert = Self.Upsert,
-				_DocAsUpsert = Self.DocAsUpsert
+				_DocAsUpsert = Self.DocAsUpsert,
+				_ScriptedUpsert = Self.ScriptedUpsert
 			};
 
 		protected override Id GetIdForOperation(Inferrer inferrer) => Self.Id ?? new Id(new[] { Self.InferFrom, Self.Upsert }.FirstOrDefault(o=>o != null));
@@ -245,6 +256,9 @@ namespace Nest
 		/// use the contents of doc as the upsert value.
 		/// </summary>
 		public BulkUpdateDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool partialDocumentAsUpsert = true) => Assign(a => a.DocAsUpsert = partialDocumentAsUpsert);
+
+		/// <inheritdoc/>
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool scriptedUpdate = true) => Assign(a => a.ScriptedUpsert = scriptedUpdate);
 
 		/// <summary>
 		/// The script language to use
