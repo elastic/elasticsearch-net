@@ -3,6 +3,7 @@
 
 A special single bucket aggregation that enables aggregating nested documents.
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -24,6 +25,7 @@ var nestedAgg = result.Aggs.Nested("my_nested_agg");
 var avgAgg = nestedAgg.Average("my_ avg_agg");
 ----
 
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -61,3 +63,4 @@ var avgAgg = nestedAgg.Average("my_avg_agg");
 ----
 
 Refer to the {ref_current}/search-aggregations-bucket-nested-aggregation.html[original docs] for more information.
+

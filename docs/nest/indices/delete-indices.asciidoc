@@ -7,6 +7,7 @@ The delete index API can also be applied to more than one index, or on `_all` in
 All indices will also be deleted when no specific index is provided. 
 In order to disable allowing to delete all indices, set `action.disable_delete_all_indices` setting in the config to `true`.
 
+[float]
 === Examples
 
 Using the default index
@@ -22,3 +23,4 @@ or more explictly
 ----
 this.ConnectedClient.DeleteIndex("index")
 ----
+

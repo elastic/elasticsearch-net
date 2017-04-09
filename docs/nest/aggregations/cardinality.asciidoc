@@ -3,6 +3,7 @@
 
 A single-value metrics aggregation that calculates an approximate count of distinct values.
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -18,6 +19,7 @@ var result = client.Search<ElasticsearchProject>(s => s
 var agg = result.Aggs.Cardinality("my_cardinality_agg");
 ----
 
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -43,3 +45,4 @@ var agg = result.Aggs.Cardinality("my_cardinality_agg");
 ----
 
 Refer to the {ref_current}/search-aggregations-metrics-cardinality-aggregation.html[original docs] for more information.
+

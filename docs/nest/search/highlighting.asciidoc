@@ -28,3 +28,4 @@ var result = this._client.Search<ElasticSearchProject>(s => s
 
 Please take note that this won't alter the contents of the results `.Documents` but the results will have a separate bucket 
 that contains each highlight result(s) for each hit on `result.Highlights`. 
+

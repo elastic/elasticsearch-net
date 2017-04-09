@@ -3,6 +3,7 @@
 
 A single-value metrics aggregation that sums up numeric values that are extracted from the aggregated documents.
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -18,6 +19,7 @@ var result = client.Search<ElasticsearchProject>(s => s
 var agg = result.Aggs.Sum("my_sum_agg");
 ----
 
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -43,3 +45,4 @@ var agg = result.Aggs.Sum("my_sum_agg");
 ----
 
 Refer to the {ref_current}/search-aggregations-metrics-sum-aggregation.html[original docs] for more information.
+

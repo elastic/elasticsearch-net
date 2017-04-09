@@ -3,6 +3,7 @@
 
 A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -18,6 +19,7 @@ var result = _client.Search<ElasticsearchProject>(s => s
 var agg = result.Aggs.Terms("my_terms_agg");
 ----
 
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -43,3 +45,4 @@ var agg = result.Aggs.Terms("my_terms_agg");
 ----
 
 Refer to the {ref_current}/search-aggregations-bucket-terms-aggregation.html[original docs] for more information.
+

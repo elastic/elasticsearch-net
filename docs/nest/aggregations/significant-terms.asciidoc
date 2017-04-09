@@ -3,6 +3,7 @@
 
 An aggregation that returns interesting or unusual occurrences of terms in a set.
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -18,6 +19,7 @@ var result = client.Search<ElasticsearchProject>(s => s
 var agg = result.Aggs.SignificantTerms("my_sig_terms_agg");
 ----
 
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -43,3 +45,4 @@ var agg = result.Aggs.SignificantTerms("my_sig_terms_agg");
 ----
 
 Refer to the {ref_current}/search-aggregations-bucket-significantterms-aggregation.html[original docs] for more information.
+

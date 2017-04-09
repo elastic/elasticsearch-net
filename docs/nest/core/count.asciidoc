@@ -5,6 +5,7 @@ The count API allows to easily execute a query and get the number of matches for
 It can be executed across one or more indices and across one or more types. The query can either 
 be provided using a simple query string as a parameter, or using the Query DSL defined within the request body.
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -40,7 +41,7 @@ var result = client.Count(c => c
     .Types("elasticsearchproject", "foo", "bar")
 );
 ----
-    
+
 `result` is an `ICountResponse` which contains the document count found in the `Count` property, along with the shards 
 meta data (total, successful, failed) contained in the `Shards` property.
 

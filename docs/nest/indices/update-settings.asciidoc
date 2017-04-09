@@ -4,9 +4,10 @@
 This call allows you to update the index settings. 
 
 NEST whitelists which settings can be updated based on the allowed values mentioned 
-http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html[here in the Elasticsearch documentation] 
+ http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html[here in the Elasticsearch documentation] 
 this allows you to reuse an `IndexSettings` object.
 
+[float]
 === Example
 
 this example first creates an index and then uses the same IndexSettings to update the index.
@@ -33,5 +34,4 @@ var getResponse = this.ConnectedClient.GetIndexSettings(index);
 Assert.AreEqual(getResponse.Settings["refresh_interval"], "-1");
 Assert.AreEqual(getResponse.Settings["search.slowlog.threshold.fetch.warn"], "1s");
 ----
-
 

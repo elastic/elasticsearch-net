@@ -4,8 +4,10 @@
 Adding/removing and updating aliases are also easy to do in NEST. 
 For more information look at the http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html[Alias documentation]
 
+[float]
 === Add
 
+[float]
 ==== Fluent Syntax
 
 [source,csharp]
@@ -18,6 +20,7 @@ client.Alias(a => a
 );
 ----
 
+[float]
 ==== Object Initializer Syntax
 
 [source,csharp]
@@ -35,9 +38,11 @@ var request = new AliasRequest
 
 client.Alias(request);
 ----
-    
+
+[float]
 === Remove
 
+[float]
 ==== Fluent Syntax
 
 [source,csharp]
@@ -49,7 +54,8 @@ client.Alias(a => a
     )
 );
 ----
-    
+
+[float]
 ==== Object Initializer Syntax
 
 [source,csharp]
@@ -68,10 +74,12 @@ var request = new AliasRequest
 client.Alias(request);
 ----
 
+[float]
 === Rename
 
 To rename an alias, just do an Add and a Remove in the same operation. Elasticsearch will then atomically rename your alias:
 
+[float]
 ==== Fluent Syntax
 
 [source,csharp]
@@ -87,7 +95,8 @@ client.Alias(a => a
     )
 );
 ----
-    
+
+[float]
 ==== Object Initializer Syntax
 
 [source,csharp]
@@ -109,3 +118,4 @@ var request = new AliasRequest
 
 client.Alias(request);
 ----
+

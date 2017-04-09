@@ -3,6 +3,7 @@
 
 A multi-bucket values source based aggregation that can be applied on numeric values extracted from the documents.
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -19,6 +20,7 @@ var result = client.Search<ElasticsearchProject>(s => s
 var agg = result.Aggs.Histogram("my_histogram_agg");
 ----
 
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -45,3 +47,4 @@ var agg = result.Aggs.Histogram("my_histogram_agg");
 ----
 
 Refer to the {ref_current}/search-aggregations-bucket-histogram-aggregation.html[original docs] for more information.
+

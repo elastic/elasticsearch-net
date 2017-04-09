@@ -7,5 +7,4 @@ The get mapping API allows you to retrieve mapping definitions of the index or a
 ----
 var mapping = this.ConnectedClient.GetMapping<ElasticSearchProject>();
 ----
- 
 

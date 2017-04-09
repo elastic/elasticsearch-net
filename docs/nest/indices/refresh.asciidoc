@@ -5,6 +5,7 @@ The refresh API allows to explicitly refresh one or more index, making all opera
 since the last refresh available for search. The (near) real-time capabilities depends on the 
 index engine used. For example, the robin one requires refresh to be called, but by default a refresh is scheduled periodically.
 
+[float]
 === Refresh all
 
 [source,csharp]
@@ -12,6 +13,7 @@ index engine used. For example, the robin one requires refresh to be called, but
 var r = this.ConnectedClient.Refresh();
 ----
 
+[float]
 === Index / Indeces
 
 [source,csharp]
@@ -20,6 +22,7 @@ var r = this.ConnectedClient.Refresh("index");
 r = this.ConnectedClient.Refresh(new [] {"index4", "index2" });
 ----
 
+[float]
 === Typed (default index)
 
 [source,csharp]

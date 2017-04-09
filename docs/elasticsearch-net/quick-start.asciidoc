@@ -3,6 +3,7 @@
 
 `Elasticsearch.Net` is a low level client to talk to Elasticsearch.
 
+[float]
 === Installing
 
 From the package manager console inside visual studio 
@@ -11,12 +12,13 @@ From the package manager console inside visual studio
 ----
 PM> Install-Package Elasticsearch.Net
 ----
-    
+
 Or search in the Package Manager UI for `Elasticsearch.Net` and go from there
 
+[float]
 === Connecting
 
-Assumming Elasticsearch is already installed and running on your machine, go to http://localhost:9200 in your browser. You should see a similar response to this:
+Assumming Elasticsearch is already installed and running on your machine, go to http://localhost:9200[] in your browser. You should see a similar response to this:
 
 [source,javascript]
 ----
@@ -45,5 +47,4 @@ var indexResponse = client.Index("myindex","mytype","1", new { Hello = "World" }
 ----
 
 Please be sure to read the full documentation on <<elasticsearch-net-connecting, connecting with elasticsearch.net>> to see all the available options.
-
 

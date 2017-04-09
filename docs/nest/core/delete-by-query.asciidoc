@@ -9,7 +9,7 @@ client.DeleteByQuery<ElasticsearchProject>(q => q
     )
 );
 ----
-    
+
 Elasticsearch allows you to delete over multiple types and indexes, so does NEST.
 
 [source,csharp]
@@ -21,7 +21,7 @@ client.DeleteByQuery<ElasticSearchProject>(q => q
     )
 );
 ----
-    
+
 As always `*Async` variants are available too.
 
 You can also delete by query over all the indices and types:
@@ -49,6 +49,7 @@ client.DeleteByQuery<ElasticSearchProject>(q => q
 );
 ----
 
+[float]
 === Object Initializer Syntax
 
 The above can also be accomplished using the object initializer syntax:
@@ -72,4 +73,3 @@ var request = new DeleteByQueryRequest<ElasticsearchProject>
 client.DeleteByQuery(request);
 ----
 
-                    

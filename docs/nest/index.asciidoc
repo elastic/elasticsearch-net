@@ -3,12 +3,16 @@
 
 [partintro]
 --
-
 * <<nest-quick-start, Quickstart>>
+
 * <<nest-connecting, Connecting>>
+
 * <<index-type-inference, Index / Type Inference>>
+
 * <<nest-handling-responses, Handling Responses>>
+
 * <<writing-queries, Writing Queries>>
+
 * <<tips-tricks, Tips and Tricks>>
 
 --
@@ -34,3 +38,4 @@ include::cluster/index.asciidoc[]
 include::search/index.asciidoc[]
 
 include::aggregations/index.asciidoc[]
+

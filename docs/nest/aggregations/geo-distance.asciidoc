@@ -3,6 +3,7 @@
 
 A multi-bucket aggregation that works on geo_point fields and conceptually works very similar to the range aggregation. 
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -24,6 +25,7 @@ var result = client.Search<ElasticsearchProject>(s => s
 var agg = result.Aggs.GeoDistance("my_geo_distance_agg");
 ----
 
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -56,3 +58,4 @@ var agg = result.Aggs.GeoDistance("my_geo_distance_agg");
 ----
 
 Refer to the {ref_current}/search-aggregations-bucket-geodistance-aggregation.html[original docs] for more information.
+

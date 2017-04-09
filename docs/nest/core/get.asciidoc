@@ -3,6 +3,7 @@
 
 Gets a single document from Elasticsearch
 
+[float]
 === By Id
 
 [source,csharp]
@@ -17,6 +18,7 @@ Index and type are inferred but overloads still exists for full control:
 var response = client.Get<ElasticSearchProject>("myindex", "mytype", 1);
 ----
 
+[float]
 === Handling the Get response
 
 The `Get<T>()` call returns an `IGetResponse<T>` that holds the requested document as well as other meta data returned from Elasticsearch.
@@ -25,6 +27,7 @@ The `Get<T>()` call returns an `IGetResponse<T>` that holds the requested docume
 
 You can also use `Get<T>()` to query just some fields of a single document:
 
+[float]
 ==== Fluent DSL
 
 [source,csharp]
@@ -37,6 +40,7 @@ var response = client.Get<ElasticsearchProject>(g => g
 );
 ----
 
+[float]
 ==== Object Initializer Syntax
 
 [source,csharp]
@@ -60,7 +64,4 @@ var doubleValue = response.Fields.FieldValue<double>(p => p.DoubleValue);
 
 Remember `p => p.Name` can also be written as `"name"` and NEST does not force you to 
 write expressions everywhere (although it is much encouraged!).
-
-
- 
 

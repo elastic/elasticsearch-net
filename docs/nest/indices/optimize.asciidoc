@@ -6,6 +6,7 @@ The optimize process basically optimizes the index for faster search operations
 (and relates to the number of segments a Lucene index maintains within each shard). 
 The optimize operation allows you to specify the maximum number of segments to use during the optimization.
 
+[float]
 === Optimize all
 
 [source,csharp]
@@ -13,6 +14,7 @@ The optimize operation allows you to specify the maximum number of segments to u
 var r = this.ConnectedClient.Optimize();
 ----
 
+[float]
 === Optimize several indices with parameters
 
 [source,csharp]

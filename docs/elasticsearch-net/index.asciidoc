@@ -3,13 +3,18 @@
 
 [partintro]
 --
-
 * <<elasticsearch-net-quick-start, Quickstart>>
+
 * <<elasticsearch-net-connecting, Connecting>>
+
 * <<security, Security>>
+
 * <<cluster-failover, Connection Pooling and Cluster Failover>>
+
 * <<building-requests, Building Requests>>
+
 * <<handling-responses, Handling Responses>>
+
 * <<errors, Errors>>
 
 --
@@ -27,3 +32,4 @@ include::building-requests.asciidoc[]
 include::handling-responses.asciidoc[]
 
 include::errors.asciidoc[]
+

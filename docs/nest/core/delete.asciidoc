@@ -4,7 +4,7 @@
 The delete API allows to delete a typed JSON document from a specific index based on its id. 
 See also <<delete-by-query, deleting by query>> for other ways to delete data.
 
-
+[float]
 === By Id
 
 [source,csharp]
@@ -12,9 +12,11 @@ See also <<delete-by-query, deleting by query>> for other ways to delete data.
 client.Delete<ElasticSearchProject>(1);
 client.DeleteAsync<ElasticSearchProject>(1);
 ----
-    
+
+[float]
 === Delete with custom parameters
 
+[float]
 ==== Fluent Syntax
 
 [source,csharp]
@@ -24,7 +26,8 @@ client.Delete(1, d => d
     .Index("myindex")
 );
 ----
-    
+
+[float]
 ==== Object Initializer Syntax
 
 [source,csharp]
@@ -35,7 +38,8 @@ client.Delete(new DeleteRequest("myindex", "users", "1"));
 // Infer type and index from CLR type
 client.Delete(new DeleteRequest<ElasticsearchProject>("1"));
 ----
-    
+
+[float]
 === By object
 
 Id property is inferred (can be any value type (int, string, float ...))
@@ -46,6 +50,7 @@ client.Delete(searchProject);
 client.DeleteAsync(searchProject);
 ----
 
+[float]
 === By IEnumerable<T>
 
 [source,csharp]
@@ -54,14 +59,17 @@ client.DeleteMany(searchProjects);
 client.DeleteManyAsync(searchProjects);
 ----
 
+[float]
 === By Query
 
 See <<delete-by-query, deleting by query>>
 
+[float]
 === Indices and Mappings
 
 See <<delete-mapping, Delete Mapping>> and <<delete-indices, Delete Index>>
 
+[float]
 === Bulk delete
 
 See <<bulk,Bulk API>>

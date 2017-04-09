@@ -3,6 +3,7 @@
 
 Just like the dedicated date range aggregation, there is also a dedicated range aggregation for IPv4 typed fields.
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -19,6 +20,7 @@ var result = client.Search<ElasticsearchProject>(s => s
 var agg = result.Aggs.IpRange("my_iprange_agg");
 ----
 
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -49,5 +51,4 @@ var agg = result.Aggs.IpRange("my_iprange_agg");
 ----
 
 Refer to the {ref_current}/search-aggregations-bucket-iprange-aggregation.html[original docs] for more information.
-
 

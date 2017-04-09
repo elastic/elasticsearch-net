@@ -5,6 +5,7 @@ Defines a single bucket of all the documents within the search execution context
 This context is defined by the indices and the document types you’re searching on, 
 but is not influenced by the search query itself.
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -29,6 +30,7 @@ var agg = result.Aggs.Global("global_bucket");
 var bools = agg.Terms("bool_count");
 ----
 
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -68,3 +70,4 @@ var bools = agg.Terms("bool_count");
 ----
 
 Refer to the {ref_current}/search-aggregations-bucket-global-aggregation.html[original docs] for more information.
+

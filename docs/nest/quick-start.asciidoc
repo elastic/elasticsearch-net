@@ -4,6 +4,7 @@
 `NEST` is a high level `elasticsearch` client that still maps very closely to the original `elasticsearch` API. 
 Requests and Responses have been mapped to CLR objects and `NEST` also comes with a powerful strongly typed query dsl.
 
+[float]
 === Installing
 
 From the package manager console inside visual studio 
@@ -15,9 +16,10 @@ PM> Install-Package NEST
 
 Or search in the Package Manager UI for `NEST` and go from there
 
+[float]
 ==== Connecting
 
-Assumming Elasticsearch is already installed and running on your machine, go to http://localhost:9200 in your browser. 
+Assumming Elasticsearch is already installed and running on your machine, go to http://localhost:9200[] in your browser. 
 You should see a similar response to this:
 
 [source,javascript]
@@ -55,23 +57,22 @@ This can greatly reduce the places a magic string or constant has to be used.
 
 [TIP]
 --
-
 Specifying `defaultIndex` is optional but NEST might throw an exception later on if no index is specified. 
 
-In fact a simple `new ElasticClient()` is sufficient to chat with
-`http://localhost:9200` but explicitly specifying connection settings is recommended.
+In fact a simple `new ElasticClient()` is sufficient to chat with`http://localhost:9200` but explicitly specifying connection settings is recommended.
 
 --
 
 `node` here is a `Uri` but can also be an `IConnectionPool` see the 
 <<nest-connecting, section on connecting>>
 
+[float]
 === Indexing
 
 Now imagine we have a Person http://en.wikipedia.org/wiki/Plain_Old_CLR_Object[POCO]
-  
+
 [source,csharp]
-----  
+----
 public class Person
 {
     public string Id { get; set; }
@@ -101,8 +102,7 @@ Which property it will use for the Id can also be specified using the `ElasticTy
 
 The default index and type names are configurable per type. See the <<nest-connecting, nest section on connecting>>.
 
-Imagine you want to override all the defaults for this one call, you should be able to do this with `NEST` and yes you can. 
-`NEST` inferring is very powerful but if you want to pass explicit values you can **always** do so.
+Imagine you want to override all the defaults for this one call, you should be able to do this with `NEST` and yes you can. `NEST` inferring is very powerful but if you want to pass explicit values you can **always** do so.
 
 [source,csharp]
 ----
@@ -117,6 +117,7 @@ var index = client.Index(person, i=>i
 
 This will index the document using `/another-index/another-type/1-should-not-be-the-id?refresh=true&&ttl=1m` as the url. 
 
+[float]
 === Searching
 
 Now that we have indexed some documents we can begin to search for them. 
@@ -159,6 +160,7 @@ var searchResults = client.Search<Person>(s=>s
 );
 ----
 
+[float]
 ==== Object Initializer Syntax (OIS)
 
 As you can see from the previous examples, NEST provides a terse, fluent syntax for constructing API calls to Elasticsearch. 
@@ -204,5 +206,4 @@ var searchResults = Client.Search<Person>(searchRequest);
 ----
 
 Many of the examples throughout this documentation will be written in both forms.
-
 

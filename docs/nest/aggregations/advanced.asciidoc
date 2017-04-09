@@ -1,6 +1,7 @@
 [[aggregations-advanced-usage]]
 == Aggregations - Advanced usage
 
+[float]
 === Creating multiple aggregations from an IEnumerable
 
 You have an IEnumerable<TestObject> MyFilters, and you want to build a Filter 
@@ -14,7 +15,7 @@ class TestObject
     public string Term { get; set; }
 }
 ----
-    
+
 Then you could do something like this:
 
 [source,csharp]
@@ -39,3 +40,4 @@ var result = client.Search<MySearchType>(descriptor);
 ----
 
 And then you can access the aggregation results as normal.
+

@@ -4,6 +4,7 @@
 A multi-bucket aggregation that works on {ref_current}/mapping-geo-point-type.html[geo_point] fields and groups points 
 into buckets that represent cells in a grid.
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -20,6 +21,7 @@ var result = client.Search<ElasticsearchProject>(s => s
 var agg = result.Aggs.GeoHash("my_geohash_agg");
 ----
 
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -46,3 +48,4 @@ var agg = result.Aggs.GeoHash("my_geohash_agg");
 ----
 
 Refer to the {ref_current}/search-aggregations-bucket-geohashgrid-aggregation.html[original docs] for more information.
+

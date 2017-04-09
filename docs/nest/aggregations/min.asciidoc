@@ -3,6 +3,7 @@
 
 Returns the minimum value among numeric values extracted from the aggregated documents.
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -18,6 +19,7 @@ var result = client.Search<ElasticsearchProject>(s => s
 var agg = result.Aggs.Min("min_aggregation");
 ----
 
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -43,3 +45,4 @@ var agg = result.Aggs.Min("my_min_agg");
 ----
 
 Refer to the {ref_current}/search-aggregations-metrics-min-aggregation.html[original docs] for more information.
+

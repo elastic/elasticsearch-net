@@ -3,13 +3,15 @@
 
 The status API allows to get comprehensive status information on one or more indices.
 
+[float]
 === Status for all indices
 
 [source,csharp]
 ----
 var r = this.ConnectedClient.Status();
 ----
-    
+
+[float]
 === Index / Indeces
 
 [source,csharp]
@@ -17,7 +19,8 @@ var r = this.ConnectedClient.Status();
 var r = this.ConnectedClient.Status("index");
 r = this.ConnectedClient.Status(new [] {"index4", "index2" });
 ----
-    
+
+[float]
 === Typed (default index)
 
 [source,csharp]
@@ -27,6 +30,7 @@ var r = this.ConnectedClient.Status<ElasticSearchProject>();
 
 In order to see the recovery status of shards, or the snapshot status, pass a StatusParams object. There is an overload for each Status method.
 
+[float]
 === Index with params
 
 [source,csharp]

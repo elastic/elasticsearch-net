@@ -4,10 +4,11 @@
 The create index API allows to instantiate an index. Elasticsearch provides support 
 for multiple indices, including executing operations across several indices. 
 Each index created can have specific settings associated with it.
- 
-NOTE: When adding settings strip the `index.` prefix. This applies to settings found in the 
-http://www.elasticsearch.org/guide/reference/index-modules/[Index Module] documentation.
 
+NOTE: When adding settings strip the `index.` prefix. This applies to settings found in the
+ http://www.elasticsearch.org/guide/reference/index-modules/[Index Module] documentation.
+
+[float]
 === Simple example
 
 [source,csharp]
@@ -24,6 +25,7 @@ client.CreateIndex(c => c
 );
 ----
 
+[float]
 === Create index with settings and mappings in one go fluently
 
 [source,csharp]

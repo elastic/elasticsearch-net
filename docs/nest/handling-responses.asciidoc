@@ -4,7 +4,7 @@
 All the return objects from API calls in NEST implement:
 
 [source,csharp]
-----    
+----
 public interface IResponse
 {
     bool IsValid { get; }
@@ -21,3 +21,4 @@ It's highly recommended to read the Elasticsearch documentation for a call and c
 
 `ConnectionStatus` is the response as it was returned by `Elasticsearch.Net`. Its section on 
 <<handling-responses, handling responses>> applies here as well.
+

@@ -2,7 +2,7 @@
 == Building Requests
 
 `Elasticsearch.Net` maps **all** the Elasticsearch API endpoints to methods. The reason it can do this is because all these methods are generated from 
-https://github.com/elasticsearch/elasticsearch/tree/master/rest-api-spec[the official client REST specification]. 
+ https://github.com/elasticsearch/elasticsearch/tree/master/rest-api-spec[the official client REST specification]. 
 This specification documents all the URL's (paths and querystrings) but does not map any of the API request and response bodies.
 
 [source,csharp]
@@ -28,10 +28,12 @@ client.GetSource("myindex","mytype","1",qs=>qs
 
 The querystring parameter is always optional.
 
+[float]
 === Providing a Request Body
 
 Some endpoints need a request body which can be passed in a couple of ways
 
+[float]
 ==== String
 
 [source,csharp]
@@ -43,18 +45,22 @@ client.Index("myindex","mytype","1", myJson);
 
 This will call `POST` on `/myindex/mytype/1` with the provided string `myJson` passed verbatim as the request body
 
+[float]
 ==== (Anonymous) Object
 
 [source,csharp]
 ----
+
     var myJson = new { hello = "world" };
     client.Index("myindex","mytype","1", myJson);
+
 ----
 
 This will call `POST` on `/myindex/mytype/1` where `myJson` will be serialized by the registered `ISerializer`
 
 NOTE: if you need `PUT` semantics `IndexPut()` also exists. `Elasticsearch.Net` exposes all the endpoints with all the allowed HTTP methods.
 
+[float]
 ==== IEnumerable<object> 
 
 Some API endpoints in Elasticsearch follow a strict special json format. 
@@ -73,6 +79,7 @@ In `Elasticsearch.Net` you can call these with
 
 [source,csharp]
 ----
+
 var bulk = new object[]
 {
     new { index = new { _index = "test", _type="type", _id = "1"  }},
@@ -80,10 +87,10 @@ var bulk = new object[]
 };
 
 client.Bulk(bulk);
+
 ----
 
 `Elasticsearch.Net` will know not to serialize the passed object as `[]` but instead serialize each item seperately and join them up with `\n`. 
 No request in Elasticsearch expects an array as the root object for the request.
-
 
 
