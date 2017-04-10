@@ -1,5 +1,6 @@
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using AsciiDocNet;
 using DocGenerator.AsciiDoc;
 
@@ -9,7 +10,7 @@ namespace DocGenerator.Documentation.Files
 	{
 		public RawDocumentationFile(FileInfo fileLocation) : base(fileLocation) { }
 
-		public override void SaveToDocumentationFolder()
+		public override Task SaveToDocumentationFolderAsync()
 		{
 			//load the asciidoc file for processing
 			var docFileName = this.CreateDocumentationLocation();
@@ -24,6 +25,8 @@ namespace DocGenerator.Documentation.Files
 			{
 				document.Accept(visitor);
 			}
+
+		    return Task.FromResult(0);
 		}
 
 		protected override FileInfo CreateDocumentationLocation()

@@ -13,7 +13,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[date-range-aggregation-usage]]
-== Date Range Aggregation Usage
+=== Date Range Aggregation Usage
 
 A range aggregation that is dedicated for date values. The main difference between this aggregation and the normal range aggregation is that the `from`
 and `to` values can be expressed in `DateMath` expressions, and it is also possible to specify a date format by which the from and
@@ -23,7 +23,7 @@ IMPORTANT: this aggregation includes the `from` value and excludes the `to` valu
 
 Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-daterange-aggregation.html[Date Range Aggregation]
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -43,7 +43,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -102,6 +102,8 @@ new SearchRequest<Project>
 Using the `.Agg` aggregation helper we can fetch our aggregation results easily
 in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 
+==== Handling Responses
+
 [source,csharp]
 ----
 response.ShouldBeValid();
@@ -116,7 +118,6 @@ We specified three ranges so we expect to have three of them in the response
 [source,csharp]
 ----
 dateHistogram.Buckets.Count.Should().Be(3);
-
 foreach (var item in dateHistogram.Buckets)
 {
     item.DocCount.Should().BeGreaterThan(0);

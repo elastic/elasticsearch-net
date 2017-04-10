@@ -5,6 +5,7 @@ nuget Newtonsoft.Json
 //codegen
 nuget ShellProgressBar 
 nuget Microsoft.CodeAnalysis.CSharp 
+nuget Microsoft.CodeAnalysis.CSharp.Workspaces
 nuget CsQuery 
 nuget RazorMachine 2.6.1
 nuget System.Collections.Immutable
@@ -24,6 +25,7 @@ nuget SemanticVersioning
 source https://api.nuget.org/v3/index.json
 
 nuget AsciiDocNet
+nuget NuDoq
 
 source https://www.myget.org/F/aspnetvnext/api/v3/index.json
 

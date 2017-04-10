@@ -7,28 +7,29 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json;
-using Tests.ClientConcepts.LowLevel;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.RoundTripper;
 using static Nest.Infer;
 using Field = Nest.Field;
-using Xunit;
 
 namespace Tests.ClientConcepts.HighLevel.Inference
 {
 	public class FieldInference
 	{
-		/**== Field Inference
+		/**[[field-inference]]
+		 * === Field inference
 		 *
 		 * Several places in the Elasticsearch API expect the path to a field from your original source document, as a string value.
 		 * NEST allows you to use C# expressions to strongly type these field path strings.
 		 *
-		 * These expressions are assigned to a type called `Field` and there are several ways to create an instance of one
+		 * These expressions are assigned to a type called `Field`, and there are several ways to create an instance of one
 		 */
 
-		/**=== Constructor
-		* Using the constructor directly is possible _but_ can get rather involved when resolving from a member access lambda expression */
+		/**
+		* ==== Constructor
+		* Using the constructor directly is possible _but_ can get rather involved when resolving from a member access lambda expression
+		*/
 		[U]
 		public void UsingConstructors()
 		{
@@ -54,7 +55,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			* - determining `Field` equality
 			* - getting the hash code for a `Field` instance
 			*
-			* IMPORTANT: Boost values are not taken into account when determining equality.
+			* IMPORTANT: Boost values are **not** taken into account when determining equality.
 			*/
 			var fieldStringWithBoostTwo = new Field("name^2");
 			var fieldStringWithBoostThree = new Field("name^3");
@@ -72,8 +73,9 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			fieldStringWithBoostTwo.Should().Be(fieldStringWithBoostThree); //<1> <<field-name-with-boost,Fields can constructed with a name that contains a boost>>
 		}
 
-		/**[[field-name-with-boost]]
-		*=== Field Names with Boost
+		/**
+		* [[field-name-with-boost]]
+		*==== Field Names with Boost
 		*
 		* When specifying a `Field` name, the name can include a boost value; NEST will split the name and boost
 		* value and set the `Boost` property; a boost value as part of the string takes precedence over a boost
@@ -94,7 +96,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			fieldStringCreate.Boost.Should().Be(2);
 		}
 
-		/**=== Implicit Conversion
+		/**
+		* ==== Implicit Conversion
 		* As well as using the constructor, you can also implicitly convert `string`, `PropertyInfo` and member access lambda expressions to a `Field`.
 		* For expressions however, this is _still_ rather involved as the expression first needs to be assigned to a variable that explicitly specifies
 		* the expression delegate type.
@@ -115,9 +118,17 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 				.WhenSerializing(fieldExpression);
 		}
 
-		/**[[nest-infer]]
-		* === Using Nest.Infer
+		/**
+		* [[nest-infer]]
+		* ==== Using Nest.Infer methods
 		* To ease creating a `Field` instance from expressions, there is a static `Infer` class you can use
+		*
+		* [TIP]
+		* ====
+		* This example uses the https://msdn.microsoft.com/en-us/library/sf0df423.aspx#Anchor_0[static import] `using static Nest.Infer;` in the using directives to shorthand `Nest.Infer.Field<T>()`
+		* to simply `Field<T>()`. Be sure to include this static import if copying any of these examples.
+		* ====
+		*
 		*/
 		[U]
 		public void UsingStaticPropertyField()
@@ -127,31 +138,32 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			/** but for expressions this is still rather involved */
 			var fieldExpression = Infer.Field<Project>(p => p.Name);
 
-			/** this can be even shortened even further using a https://msdn.microsoft.com/en-us/library/sf0df423.aspx#Anchor_0[static import in C# 6] i.e.
-				`using static Nest.Infer;` using directive
+			/** this can be even shortened even further using a static import.
+			* Now that is much terser then our first example using the constructor!
 			*/
 			fieldExpression = Field<Project>(p => p.Name);
-			/** Now that is much terser then our first example using the constructor! */
 
 			Expect("name")
 				.WhenSerializing(fieldString)
 				.WhenSerializing(fieldExpression);
 
-			/** You can specify boosts in the field using a string */
+			/** You can specify boosts in the field using a string, as well as using `Nest.Infer.Field` */
 			fieldString = "name^2.1";
 			fieldString.Boost.Should().Be(2.1);
 
-			/** As well as using `Nest.Infer.Field` */
 			fieldExpression = Field<Project>(p => p.Name, 2.1);
+			fieldExpression.Boost.Should().Be(2.1);
+
 			Expect("name^2.1")
 				.WhenSerializing(fieldString)
 				.WhenSerializing(fieldExpression);
 		}
 
-		/**[[camel-casing]]
-		* === Field name casing
+		/**
+		 * [[camel-casing]]
+		* ==== Field name casing
 		* By default, NEST https://en.wikipedia.org/wiki/Camel_case[camelcases] **all** field names to better align with typical
-		* javascript/json conventions
+		* JavaScript and JSON conventions
 		*/
 		[U]
 		public void DefaultFieldNameInferrer()
@@ -164,14 +176,15 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			/** However `string` types are *always* passed along verbatim */
 			setup.Expect("NaMe").WhenSerializing<Field>("NaMe");
 
-			/** if you want the same behavior for expressions, simply pass a Func<string,string> to `DefaultFieldNameInferrer`
+			/** Of you want the same behavior for expressions, simply pass a Func<string,string> to `DefaultFieldNameInferrer`
 			* to make no changes to the name
 			*/
 			setup = WithConnectionSettings(s => s.DefaultFieldNameInferrer(p => p));
 			setup.Expect("Name").WhenSerializing(Field<Project>(p => p.Name));
 		}
 
-		/**=== Complex field name expressions */
+		/**
+		 * ==== Complex field name expressions */
 		[U]
 		public void ComplexFieldNameExpressions()
 		{
@@ -192,13 +205,13 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect("metadata.hardcoded").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"]));
 			Expect("metadata.hardcoded.created").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"].Created));
 
-			/** A cool feature here is that we'll evaluate variables passed to an indexer */
+			/** A cool feature here is that NEST will evaluate variables passed to an indexer */
 			var variable = "var";
 			Expect("metadata.var").WhenSerializing(Field<Project>(p => p.Metadata[variable]));
 			Expect("metadata.var.created").WhenSerializing(Field<Project>(p => p.Metadata[variable].Created));
 
 			/**
-			* If you are using Elasticearch's multi fields, which you really should as they allow
+			* If you are using Elasticearch's multi-fields, which you really should as they allow
 			* you to analyze a string in a number of different ways, these __"virtual"__ sub fields
 			* do not always map back on to your POCO. By calling `.Suffix()` on expressions, you describe the sub fields that
 			* should be mapped and <<auto-map, how they are mapped>>
@@ -274,7 +287,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect("metadata.hardcoded.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[4]);
 		}
 
-		/**=== Attribute based naming
+		/**
+		* ==== Attribute based naming
 		*
 		* Using NEST's property attributes you can specify a new name for the properties
 		*/
@@ -326,8 +340,9 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		}
 
 
-		/**[[field-inference-caching]]
-		*=== Field Inference Caching
+		/**
+		* [[field-inference-caching]]
+		*==== Field Inference Caching
 		*
 		* Resolution of field names is cached _per_ `ConnectionSettings` instance. To demonstrate,
 		* take the following simple POCOs
@@ -381,14 +396,15 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			fieldNameOnB.Should().Be("c.name");
 		}
 
-		/**[[field-inference-precedence]]
-		*=== Inference Precedence
+		/**
+		* [[field-inference-precedence]]
+		* ==== Inference Precedence
 		* To wrap up, the precedence in which field names are inferred is:
 		*
 		* . A hard rename of the property on connection settings using `.Rename()`
 		* . A NEST property mapping
 		* . Ask the serializer if the property has a verbatim value e.g it has an explicit JsonProperty attribute.
-		* . Pass the MemberInfo's Name to the DefaultFieldNameInferrer which by default camelCases
+		* . Pass the MemberInfo's Name to the DefaultFieldNameInferrer, which by default camelCases
 		*
 		* The following example class will demonstrate this precedence
 		*/
@@ -429,7 +445,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U]
 		public void PrecedenceIsAsExpected()
 		{
-			/** here we provide an explicit rename of a property on `ConnectionSettings` using `.Rename()`
+			/** Here we provide an explicit rename of a property on `ConnectionSettings` using `.Rename()`
 			* and all properties that are not mapped verbatim should be uppercased
 			*/
 			var usingSettings = WithConnectionSettings(s => s
@@ -476,8 +492,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U]
 		public void CodeBasedConfigurationInherits()
 		{
-			/** Inherited properties can be ignored and renamed just as one would expect
-			*/
+			/** Inherited properties can be ignored and renamed just as one would expect */
 			var usingSettings = WithConnectionSettings(s => s
 				.InferMappingFor<Child>(m => m
 					.Rename(p => p.Description, "desc")

@@ -53,8 +53,8 @@ module Build =
         )
 
     let private compileDesktop() =
-        Tooling.MsBuild.Rebuild DotNetFramework.Net45.Identifier
-        Tooling.MsBuild.Rebuild DotNetFramework.Net46.Identifier
+        Tooling.MsBuild.Rebuild DotNetFramework.Net45
+        Tooling.MsBuild.Rebuild DotNetFramework.Net46
 
     let private gitLink() =
         DotNetProject.AllPublishable
@@ -70,7 +70,7 @@ module Build =
         
     let Compile() = 
         match quickBuild with 
-        | true ->  Tooling.MsBuild.Build DotNetFramework.Net45.Identifier
+        | true ->  Tooling.MsBuild.Build DotNetFramework.Net45
         | false ->  
             compileDesktop()
             compileCore()

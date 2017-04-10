@@ -20,7 +20,8 @@ The implementation uses either the lucene `highlighter`, `fast-vector-highlighte
 
 See the Elasticsearch documentation on {ref_current}/search-request-highlighting.html[highlighting] for more detail.
 
-=== Fluent DSL Example
+[float]
+=== Fluent DSL example
 
 [source,csharp]
 ----
@@ -83,7 +84,8 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+[float]
+=== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -232,6 +234,7 @@ new SearchRequest<Project>
 }
 ----
 
+[float]
 === Handling Responses
 
 [source,csharp]

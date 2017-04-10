@@ -13,7 +13,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[scalar-usage]]
-== Scalar Usage
+=== Scalar Usage
 
 [source,csharp]
 ----
@@ -112,7 +112,7 @@ public class ScalarPoco
 }
 ----
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -193,7 +193,7 @@ f => f
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----

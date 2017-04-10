@@ -13,7 +13,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[date-histogram-aggregation-usage]]
-== Date Histogram Aggregation Usage
+=== Date Histogram Aggregation Usage
 
 A multi-bucket aggregation similar to the histogram except it can only be applied on date values.
 From a functionality perspective, this histogram supports the same features as the normal histogram.
@@ -25,7 +25,7 @@ as part of the `format` value.
 
 Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-datehistogram-aggregation.html[Date Histogram Aggregation].
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -52,7 +52,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -129,6 +129,8 @@ new SearchRequest<Project>
 Using the `.Aggs` aggregation helper on `ISearchResponse<T>`, we can fetch our aggregation results easily
 in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 
+==== Handling Responses
+
 [source,csharp]
 ----
 response.ShouldBeValid();
@@ -139,7 +141,6 @@ dateHistogram.Buckets.Should().NotBeNull();
 dateHistogram.Buckets.Count.Should().BeGreaterThan(10);
 dateHistogram.Buckets.Should().NotBeNull();
 dateHistogram.Buckets.Count.Should().BeGreaterThan(0);
-
 foreach (var item in dateHistogram.Buckets)
 {
     item.Date.Should().NotBe(default(DateTime));

@@ -6,13 +6,13 @@ namespace Tests.CommonOptions.DistanceUnit
 {
 	public class DistanceUnits
 	{
-		/**== Distance Units
+		/**[[distance-units]]
+		 * === Distance units
 		 * Whenever distances need to be specified, e.g. for a {ref_current}/query-dsl-geo-distance-query.html[geo distance query],
 		 * the distance unit can be specified as a double number representing distance in meters, as a new instance of
 		 * a `Distance`, or as a string of the form number and distance unit e.g. "`2.72km`"
 		 *
-		 * === Using Distance units in NEST
-		 * NEST uses `Distance` to strongly type distance units and there are several ways to construct one.
+		 * NEST uses a `Distance` type to strongly type distance units and there are several ways to construct one.
 		 *
 		 * ==== Constructor
 		 * The most straight forward way to construct a `Distance` is through its constructor

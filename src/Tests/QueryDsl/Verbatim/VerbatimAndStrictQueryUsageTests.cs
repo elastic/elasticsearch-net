@@ -13,7 +13,15 @@ using Xunit;
 
 namespace Tests.QueryDsl.Verbatim
 {
-	/** `IsVerbatim` should be set on individual queries to take effect */
+	/**[[verbatim-and-strict-query-usage]]
+	 * === Verbatim and Strict Query Usage
+	 *
+	 * [float]
+	 * === Verbatim Query Usage
+	 *
+	 * An individual query can be marked as verbatim in order take effect; a verbatim query will be serialized and
+	 * sent in the request to Elasticsearch, bypassing NEST's conditionless checks.
+	 */
 	public class CompoundVerbatimQueryUsageTests : QueryDslUsageTestsBase
 	{
 		protected override bool SupportsDeserialization => false;
@@ -79,7 +87,7 @@ namespace Tests.QueryDsl.Verbatim
 			);
 	}
 
-	/** Setting `IsVerbatim` on a compound query is still supported though */
+	/** A compound query can also be marked as verbatim, demonstrated here with a `bool` query. */
 	public class QueryContainerVerbatimSupportedUsageTests : QueryDslUsageTestsBase
 	{
 		protected override bool SupportsDeserialization => false;
@@ -104,7 +112,8 @@ namespace Tests.QueryDsl.Verbatim
 			);
 	}
 
-	public class SingleVerbatimQueryUsageTests : QueryDslUsageTestsBase
+    /** A single verbatim query will be serialized as-is */
+    public class SingleVerbatimQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public SingleVerbatimQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -138,6 +147,9 @@ namespace Tests.QueryDsl.Verbatim
 			);
 	}
 
+    /**
+     * Leaf queries within a compound query marked as verbatim will also be serialized as-is
+     */
 	public class CompoundVerbatimInnerQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public CompoundVerbatimInnerQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -217,6 +229,13 @@ namespace Tests.QueryDsl.Verbatim
 			);
 	}
 
+	/**[float]
+	 * === Strict Query Usage
+	 *
+	 * A query can be marked as strict meaning that _if_ it is determined to be _conditionless_, it will throw an
+	 * exception. The following example demonstrates this by trying to send an empty string as the value for
+	 * a `term` query marked as strict
+	 */
 	public class StrictQueryUsageTests
 	{
 		[U]

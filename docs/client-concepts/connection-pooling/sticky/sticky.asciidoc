@@ -13,7 +13,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[sticky]]
-== Sticky
+=== Sticky
 
 Sticky
 Each connection pool returns the first `live` node so that it is sticky between requests
@@ -28,8 +28,9 @@ var pool = new StickyConnectionPool(uris);
 Here we have setup a sticky connection pool seeded with 10 nodes.
 So what order we expect? Imagine the following:
 
-Thread A calls GetNext and gets returned the first live node
-Thread B calls GetNext() and gets returned the same node as it's still the first live.
+Thread A calls `.CreateView()` and gets returned the first live node
+Thread B calls `.CreateView()` and gets returned the same node, since the first
+node is still good
 
 [source,csharp]
 ----

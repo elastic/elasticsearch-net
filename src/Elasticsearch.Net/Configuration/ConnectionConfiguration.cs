@@ -218,26 +218,26 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T MaximumRetries(int maxRetries) => Assign(a => a._maxRetries = maxRetries);
 
-		/// <summary>
-		/// Limits the number of concurrent connections that can be opened to an endpoint. Defaults to 80.
-		/// <para>For Desktop CLR, this setting applies to the DefaultConnectionLimit property on the  ServicePointManager object when creating ServicePoint objects, affecting the default <see cref="IConnection"/> implementation.</para>
-		/// <para>For Core CLR, this setting applies to the MaxConnectionsPerServer property on the HttpClientHandler instances used by the HttpClient inside the default <see cref="IConnection"/> implementation</para>
-		/// </summary>
-		/// <param name="connectionLimit">The connection limit, a value lower then 0 will cause the connection limit not to be set at all</param>
-		public T ConnectionLimit(int connectionLimit)
+        /// <summary>
+        /// Limits the number of concurrent connections that can be opened to an endpoint. Defaults to <c>80</c>.
+        /// <para>For Desktop CLR, this setting applies to the DefaultConnectionLimit property on the  ServicePointManager object when creating ServicePoint objects, affecting the default <see cref="IConnection"/> implementation.</para>
+        /// <para>For Core CLR, this setting applies to the MaxConnectionsPerServer property on the HttpClientHandler instances used by the HttpClient inside the default <see cref="IConnection"/> implementation</para>
+        /// </summary>
+        /// <param name="connectionLimit">The connection limit, a value lower then 0 will cause the connection limit not to be set at all</param>
+        public T ConnectionLimit(int connectionLimit)
 		{
 			return Assign(a => a._connectionLimit = connectionLimit);
 		}
 
-		/// <summary>
-		/// Enables resniffing of the cluster when a call fails, if the connection pool supports reseeding. Defaults to true
-		/// </summary>
-		public T SniffOnConnectionFault(bool sniffsOnConnectionFault = true) => Assign(a => a._sniffOnConnectionFault = sniffsOnConnectionFault);
+        /// <summary>
+        /// Enables resniffing of the cluster when a call fails, if the connection pool supports reseeding. Defaults to <c>true</c>
+        /// </summary>
+        public T SniffOnConnectionFault(bool sniffsOnConnectionFault = true) => Assign(a => a._sniffOnConnectionFault = sniffsOnConnectionFault);
 
-		/// <summary>
-		/// Enables sniffing on first usage of a connection pool if that pool supports reseeding. Defaults to true
-		/// </summary>
-		public T SniffOnStartup(bool sniffsOnStartup = true) => Assign(a => a._sniffOnStartup = sniffsOnStartup);
+        /// <summary>
+        /// Enables sniffing on first usage of a connection pool if that pool supports reseeding. Defaults to <c>true</c>
+        /// </summary>
+        public T SniffOnStartup(bool sniffsOnStartup = true) => Assign(a => a._sniffOnStartup = sniffsOnStartup);
 
 		/// <summary>
 		/// Set the duration after which a cluster state is considered stale and a sniff should be performed again.
@@ -251,7 +251,7 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Enables gzip compressed requests and responses.
 		/// <para>IMPORTANT: You need to configure http compression on Elasticsearch to be able to use this</para>
-		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html"</para>
+		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html</para>
 		/// </summary>
 		public T EnableHttpCompression(bool enabled = true) => Assign(a => a._enableHttpCompression = enabled);
 
@@ -284,19 +284,19 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T GlobalHeaders(NameValueCollection headers) => Assign(a => a._headers.Add(headers));
 
-		/// <summary>
-		/// Sets the default timeout in milliseconds for each request to Elasticsearch.
-		/// NOTE: You can set this to a high value here, and specify a timeout on Elasticsearch's side.
-		/// </summary>
-		/// <param name="timeout">time out in milliseconds</param>
-		public T RequestTimeout(TimeSpan timeout) => Assign(a => a._requestTimeout = timeout);
+        /// <summary>
+        /// Sets the default timeout in milliseconds for each request to Elasticsearch. Defaults to <c>60</c> seconds.
+        /// <para>NOTE: You can set this to a high value here, and specify a timeout on Elasticsearch's side.</para>
+        /// </summary>
+        /// <param name="timeout">time out in milliseconds</param>
+        public T RequestTimeout(TimeSpan timeout) => Assign(a => a._requestTimeout = timeout);
 
-		/// <summary>
-		/// Sets the default ping timeout in milliseconds for ping requests, which are used
-		/// to determine whether a node is alive. Pings should fail as fast as possible.
-		/// </summary>
-		/// <param name="timeout">The ping timeout in milliseconds defaults to 1000, or 2000 is using SSL.</param>
-		public T PingTimeout(TimeSpan timeout) => Assign(a => a._pingTimeout = timeout);
+        /// <summary>
+        /// Sets the default ping timeout in milliseconds for ping requests, which are used
+        /// to determine whether a node is alive. Pings should fail as fast as possible.
+        /// </summary>
+        /// <param name="timeout">The ping timeout in milliseconds defaults to <c>1000</c>, or <c>2000</c> if using SSL.</param>
+        public T PingTimeout(TimeSpan timeout) => Assign(a => a._pingTimeout = timeout);
 
 		/// <summary>
 		/// Sets the default dead timeout factor when a node has been marked dead.
@@ -307,18 +307,18 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// Sets the maximum time a node can be marked dead.
-		/// Different implementations of IConnectionPool may choose a different default.
+		/// Different implementations of <see cref="IConnectionPool"/> may choose a different default.
 		/// </summary>
 		/// <param name="timeout">The timeout in milliseconds</param>
 		public T MaxDeadTimeout(TimeSpan timeout) => Assign(a => a._maxDeadTimeout = timeout);
 
-		/// <summary>
-		/// Limits the total runtime including retries separately from <see cref="RequestTimeout"/>
-		/// <para>
-		/// When not specified defaults to <see cref="RequestTimeout"/>, which itself defaults to 60 seconds
-		/// </para>
-		/// </summary>
-		public T MaxRetryTimeout(TimeSpan maxRetryTimeout) => Assign(a => a._maxRetryTimeout = maxRetryTimeout);
+        /// <summary>
+        /// Limits the total runtime, including retries, separately from <see cref="RequestTimeout"/>
+        /// <para>
+        /// When not specified, defaults to <see cref="RequestTimeout"/>, which itself defaults to <c>60</c> seconds
+        /// </para>
+        /// </summary>
+        public T MaxRetryTimeout(TimeSpan maxRetryTimeout) => Assign(a => a._maxRetryTimeout = maxRetryTimeout);
 
 		/// <summary>
 		/// If your connection has to go through proxy, use this method to specify the proxy url
@@ -333,8 +333,9 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Forces all requests to have ?pretty=true, causing Elasticsearch to return formatted json.
-		/// Also forces the client to send out formatted json. Defaults to <c>false</c>
+		/// Forces all requests to have ?pretty=true querystring parameter appended, 
+		/// causing Elasticsearch to return formatted JSON.
+		/// Also forces the client to send out formatted JSON. Defaults to <c>false</c>
 		/// </summary>
 		public T PrettyJson(bool b = true) => Assign(a =>
 		{
@@ -347,7 +348,7 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Ensures the response bytes are always available on the <see cref="ElasticsearchResponse{T}"/>
 		/// <para>IMPORTANT: Depending on the registered serializer,
-		/// this may cause the respose to be buffered in memory first, potentially affecting performance.</para>
+		/// this may cause the response to be buffered in memory first, potentially affecting performance.</para>
 		/// </summary>
 		public T DisableDirectStreaming(bool b = true) => Assign(a => a._disableDirectStreaming = b);
 
@@ -367,7 +368,7 @@ namespace Elasticsearch.Net
 			Assign(a => a._onRequestDataCreated += handler ?? DefaultRequestDataCreated);
 
 		/// <summary>
-		/// Basic Authentication credentials to specify with all requests.
+		/// Basic Authentication credentials to send with all requests to Elasticsearch
 		/// </summary>
 		public T BasicAuthentication(string userName, string password) =>
 			Assign(a => a._basicAuthCredentials = new BasicAuthenticationCredentials
@@ -378,7 +379,7 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
-		/// <para>Note: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
+		/// <para>NOTE: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
 		/// </summary>
 		public T EnableHttpPipelining(bool enabled = true) => Assign(a => a._enableHttpPipelining = enabled);
 

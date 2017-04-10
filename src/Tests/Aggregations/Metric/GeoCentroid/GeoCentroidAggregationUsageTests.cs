@@ -61,7 +61,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 	/**
 	 *[float]
 	 *[[geo-centroid-sub-aggregation]]
-	 *== Geo Centroid Sub Aggregation
+	 *=== Geo Centroid Sub Aggregation
 	 *
 	 * The `geo_centroid` aggregation is more interesting when combined as a sub-aggregation to other bucket aggregations
 	 */

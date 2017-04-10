@@ -13,23 +13,26 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[field-inference]]
-== Field Inference
+=== Field inference
 
 Several places in the Elasticsearch API expect the path to a field from your original source document, as a string value.
 NEST allows you to use C# expressions to strongly type these field path strings.
 
-These expressions are assigned to a type called `Field` and there are several ways to create an instance of one
+These expressions are assigned to a type called `Field`, and there are several ways to create an instance of one
 
-=== Constructor
+==== Constructor
 
-Using the constructor directly is possible _but_ can get rather involved when resolving from a member access lambda expression 
+Using the constructor directly is possible _but_ can get rather involved when resolving from a member access lambda expression
 
 [source,csharp]
 ----
 var fieldString = new Field("name");
+
 var fieldProperty = new Field(typeof(Project).GetProperty(nameof(Project.Name)));
+
 Expression<Func<Project, object>> expression = p => p.Name;
 var fieldExpression = new Field(expression);
+
 Expect("name")
     .WhenSerializing(fieldExpression)
     .WhenSerializing(fieldString)
@@ -42,26 +45,21 @@ When using the constructor and passing a value for `Name`, `Property` or `Expres
 
 * getting the hash code for a `Field` instance
 
-IMPORTANT: Boost values are not taken into account when determining equality.
+IMPORTANT: Boost values are **not** taken into account when determining equality.
 
 [source,csharp]
 ----
 var fieldStringWithBoostTwo = new Field("name^2");
-
 var fieldStringWithBoostThree = new Field("name^3");
 
 Expression<Func<Project, object>> expression = p => p.Name;
-
 var fieldExpression = new Field(expression);
 
 var fieldProperty = new Field(typeof(Project).GetProperty(nameof(Project.Name)));
 
 fieldStringWithBoostTwo.GetHashCode().Should().NotBe(0);
-
 fieldStringWithBoostThree.GetHashCode().Should().NotBe(0);
-
 fieldExpression.GetHashCode().Should().NotBe(0);
-
 fieldProperty.GetHashCode().Should().NotBe(0);
 
 fieldStringWithBoostTwo.Should().Be(fieldStringWithBoostThree); <1>
@@ -69,7 +67,7 @@ fieldStringWithBoostTwo.Should().Be(fieldStringWithBoostThree); <1>
 <1> <<field-name-with-boost,Fields can constructed with a name that contains a boost>>
 
 [[field-name-with-boost]]
-=== Field Names with Boost
+==== Field Names with Boost
 
 When specifying a `Field` name, the name can include a boost value; NEST will split the name and boost
 value and set the `Boost` property; a boost value as part of the string takes precedence over a boost
@@ -78,26 +76,19 @@ value that may also be passed as the second constructor argument
 [source,csharp]
 ----
 Field fieldString = "name^2";
-
 Field fieldStringConstructor = new Field("name^2");
-
 Field fieldStringCreate = new Field("name^2", 3); <1>
 
 fieldString.Name.Should().Be("name");
-
 fieldStringConstructor.Name.Should().Be("name");
-
 fieldStringCreate.Name.Should().Be("name");
-
 fieldString.Boost.Should().Be(2);
-
 fieldStringConstructor.Boost.Should().Be(2);
-
 fieldStringCreate.Boost.Should().Be(2);
 ----
 <1> NEST will take the boost from the name
 
-=== Implicit Conversion
+==== Implicit Conversion
 
 As well as using the constructor, you can also implicitly convert `string`, `PropertyInfo` and member access lambda expressions to a `Field`.
 For expressions however, this is _still_ rather involved as the expression first needs to be assigned to a variable that explicitly specifies
@@ -110,7 +101,6 @@ Field fieldString = "name";
 Field fieldProperty = typeof(Project).GetProperty(nameof(Project.Name));
 
 Expression<Func<Project, object>> expression = p => p.Name;
-
 Field fieldExpression = expression;
 
 Expect("name")
@@ -120,9 +110,13 @@ Expect("name")
 ----
 
 [[nest-infer]]
-=== Using Nest.Infer
+==== Using Nest.Infer methods
 
 To ease creating a `Field` instance from expressions, there is a static `Infer` class you can use
+
+[TIP]
+This example uses the https://msdn.microsoft.com/en-us/library/sf0df423.aspx#Anchor_0[static import] `using static Nest.Infer;` in the using directives to shorthand `Nest.Infer.Field<T>()`
+to simply `Field<T>()`. Be sure to include this static import if copying any of these examples.
 
 [source,csharp]
 ----
@@ -136,37 +130,27 @@ but for expressions this is still rather involved
 var fieldExpression = Infer.Field<Project>(p => p.Name);
 ----
 
-this can be even shortened even further using a https://msdn.microsoft.com/en-us/library/sf0df423.aspx#Anchor_0[static import in C# 6] i.e.
-			 `using static Nest.Infer;` using directive
+this can be even shortened even further using a static import.
+Now that is much terser then our first example using the constructor!
 
 [source,csharp]
 ----
 fieldExpression = Field<Project>(p => p.Name);
-----
 
-Now that is much terser then our first example using the constructor! 
-
-[source,csharp]
-----
 Expect("name")
     .WhenSerializing(fieldString)
     .WhenSerializing(fieldExpression);
 ----
 
-You can specify boosts in the field using a string 
+You can specify boosts in the field using a string, as well as using `Nest.Infer.Field` 
 
 [source,csharp]
 ----
 fieldString = "name^2.1";
-
 fieldString.Boost.Should().Be(2.1);
-----
 
-As well as using `Nest.Infer.Field` 
-
-[source,csharp]
-----
 fieldExpression = Field<Project>(p => p.Name, 2.1);
+fieldExpression.Boost.Should().Be(2.1);
 
 Expect("name^2.1")
     .WhenSerializing(fieldString)
@@ -174,10 +158,10 @@ Expect("name^2.1")
 ----
 
 [[camel-casing]]
-=== Field name casing
+==== Field name casing
 
 By default, NEST https://en.wikipedia.org/wiki/Camel_case[camelcases] **all** field names to better align with typical
-javascript/json conventions
+JavaScript and JSON conventions
 
 using `DefaultFieldNameInferrer()` on ConnectionSettings you can change this behavior 
 
@@ -195,17 +179,16 @@ However `string` types are *always* passed along verbatim
 setup.Expect("NaMe").WhenSerializing<Field>("NaMe");
 ----
 
-if you want the same behavior for expressions, simply pass a Func<string,string> to `DefaultFieldNameInferrer`
+Of you want the same behavior for expressions, simply pass a Func<string,string> to `DefaultFieldNameInferrer`
 to make no changes to the name
 
 [source,csharp]
 ----
 setup = WithConnectionSettings(s => s.DefaultFieldNameInferrer(p => p));
-
 setup.Expect("Name").WhenSerializing(Field<Project>(p => p.Name));
 ----
 
-=== Complex field name expressions 
+==== Complex field name expressions 
 
 You can follow your property expression to any depth. Here we are traversing to the `LeadDeveloper` `FirstName` 
 
@@ -226,9 +209,7 @@ Similarly, LINQ's `.First()` method also works
 [source,csharp]
 ----
 Expect("curatedTags").WhenSerializing(Field<Project>(p => p.CuratedTags.First()));
-
 Expect("curatedTags.added").WhenSerializing(Field<Project>(p => p.CuratedTags[0].Added));
-
 Expect("curatedTags.name").WhenSerializing(Field<Project>(p => p.CuratedTags.First().Name));
 ----
 
@@ -239,22 +220,19 @@ An indexer on a dictionary is assumed to describe a property name
 [source,csharp]
 ----
 Expect("metadata.hardcoded").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"]));
-
 Expect("metadata.hardcoded.created").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"].Created));
 ----
 
-A cool feature here is that we'll evaluate variables passed to an indexer 
+A cool feature here is that NEST will evaluate variables passed to an indexer 
 
 [source,csharp]
 ----
 var variable = "var";
-
 Expect("metadata.var").WhenSerializing(Field<Project>(p => p.Metadata[variable]));
-
 Expect("metadata.var.created").WhenSerializing(Field<Project>(p => p.Metadata[variable].Created));
 ----
 
-If you are using Elasticearch's multi fields, which you really should as they allow
+If you are using Elasticearch's multi-fields, which you really should as they allow
 you to analyze a string in a number of different ways, these __"virtual"__ sub fields
 do not always map back on to your POCO. By calling `.Suffix()` on expressions, you describe the sub fields that
 should be mapped and <<auto-map, how they are mapped>>
@@ -293,7 +271,6 @@ Variables passed to suffix will be evaluated as well
 [source,csharp]
 ----
 var suffix = "unanalyzed";
-
 Expect("metadata.var.unanalyzed").WhenSerializing(
     Field<Project>(p => p.Metadata[variable].Suffix(suffix)));
 
@@ -326,13 +303,9 @@ var fieldExpressions =
     expressions.Select<Expression<Func<Project, object>>, Field>(e => e.AppendSuffix("raw")).ToList();
 
 Expect("name.raw").WhenSerializing(fieldExpressions[0]);
-
 Expect("description.raw").WhenSerializing(fieldExpressions[1]);
-
 Expect("curatedTags.name.raw").WhenSerializing(fieldExpressions[2]);
-
 Expect("leadDeveloper.firstName.raw").WhenSerializing(fieldExpressions[3]);
-
 Expect("metadata.hardcoded.raw").WhenSerializing(fieldExpressions[4]);
 ----
 
@@ -344,17 +317,13 @@ var multiSuffixFieldExpressions =
     expressions.Select<Expression<Func<Project, object>>, Field>(e => e.AppendSuffix("raw").AppendSuffix("evendeeper")).ToList();
 
 Expect("name.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[0]);
-
 Expect("description.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[1]);
-
 Expect("curatedTags.name.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[2]);
-
 Expect("leadDeveloper.firstName.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[3]);
-
 Expect("metadata.hardcoded.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[4]);
 ----
 
-=== Attribute based naming
+==== Attribute based naming
 
 Using NEST's property attributes you can specify a new name for the properties
 
@@ -365,10 +334,7 @@ public class BuiltIn
     [Text(Name = "naam")]
     public string Name { get; set; }
 }
-----
 
-[source,csharp]
-----
 Expect("naam").WhenSerializing(Field<BuiltIn>(p => p.Name));
 ----
 
@@ -383,10 +349,7 @@ public class SerializerSpecific
     [JsonProperty("nameInJson")]
     public string Name { get; set; }
 }
-----
 
-[source,csharp]
-----
 Expect("nameInJson").WhenSerializing(Field<SerializerSpecific>(p => p.Name));
 ----
 
@@ -401,20 +364,16 @@ public class Both
     [JsonProperty("nameInJson")]
     public string Name { get; set; }
 }
-----
 
-[source,csharp]
-----
 Expect("naam").WhenSerializing(Field<Both>(p => p.Name));
-
 Expect(new
-{
-    naam = "Martijn Laarman"
-}).WhenSerializing(new Both { Name = "Martijn Laarman" });
+    {
+        naam = "Martijn Laarman"
+    }).WhenSerializing(new Both { Name = "Martijn Laarman" });
 ----
 
 [[field-inference-caching]]
-=== Field Inference Caching
+==== Field Inference Caching
 
 Resolution of field names is cached _per_ `ConnectionSettings` instance. To demonstrate,
 take the following simple POCOs
@@ -429,14 +388,10 @@ class C
 {
     public string Name { get; set; }
 }
-----
 
-[source,csharp]
-----
 var client = TestClient.Default;
 
 var fieldNameOnA = client.Infer.Field(Field<A>(p => p.C.Name));
-
 var fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
 ----
 
@@ -446,7 +401,6 @@ that will resolve to the same field name, as expected
 [source,csharp]
 ----
 fieldNameOnA.Should().Be("c.name");
-
 fieldNameOnB.Should().Be("c.name");
 ----
 
@@ -461,15 +415,12 @@ var newConnectionSettings = TestClient.CreateSettings(modifySettings: s => s
         .Rename(p => p.C, "d")
     )
 );
-
 var newClient = new ElasticClient(newConnectionSettings);
 
 fieldNameOnA = newClient.Infer.Field(Field<A>(p => p.C.Name));
-
 fieldNameOnB = newClient.Infer.Field(Field<B>(p => p.C.Name));
 
 fieldNameOnA.Should().Be("d.name");
-
 fieldNameOnB.Should().Be("c.name");
 ----
 
@@ -478,16 +429,14 @@ however we didn't break inference on the first client instance using its separat
 [source,csharp]
 ----
 fieldNameOnA = client.Infer.Field(Field<A>(p => p.C.Name));
-
 fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
 
 fieldNameOnA.Should().Be("c.name");
-
 fieldNameOnB.Should().Be("c.name");
 ----
 
 [[field-inference-precedence]]
-=== Inference Precedence
+==== Inference Precedence
 
 To wrap up, the precedence in which field names are inferred is:
 
@@ -497,7 +446,7 @@ To wrap up, the precedence in which field names are inferred is:
 
 . Ask the serializer if the property has a verbatim value e.g it has an explicit JsonProperty attribute.
 
-. Pass the MemberInfo's Name to the DefaultFieldNameInferrer which by default camelCases
+. Pass the MemberInfo's Name to the DefaultFieldNameInferrer, which by default camelCases
 
 The following example class will demonstrate this precedence
 
@@ -545,7 +494,7 @@ class CustomSerializer : JsonNetSerializer
 }
 ----
 
-here we provide an explicit rename of a property on `ConnectionSettings` using `.Rename()`
+Here we provide an explicit rename of a property on `ConnectionSettings` using `.Rename()`
 and all properties that are not mapped verbatim should be uppercased
 
 [source,csharp]
@@ -559,13 +508,9 @@ var usingSettings = WithConnectionSettings(s => s
 ).WithSerializer(s => new CustomSerializer(s));
 
 usingSettings.Expect("renamed").ForField(Field<Precedence>(p => p.RenamedOnConnectionSettings));
-
 usingSettings.Expect("nestAtt").ForField(Field<Precedence>(p => p.NestAttribute));
-
 usingSettings.Expect("jsonProp").ForField(Field<Precedence>(p => p.JsonProperty));
-
 usingSettings.Expect("ask").ForField(Field<Precedence>(p => p.AskSerializer));
-
 usingSettings.Expect("DEFAULTFIELDNAMEINFERRER").ForField(Field<Precedence>(p => p.DefaultFieldNameInferrer));
 ----
 
@@ -588,21 +533,18 @@ usingSettings.Expect(new []
     AskSerializer = "serializer fiddled with this one",
     DefaultFieldNameInferrer = "shouting much?"
 });
-----
 
-[source,csharp]
-----
 public class Parent
-{
-    public int Id { get; set; }
-    public string Description { get; set; }
-    public string IgnoreMe { get; set; }
-}
+        {
+public int Id { get; set; }
+public string Description { get; set; }
+public string IgnoreMe { get; set; }
+        }
 
 public class Child : Parent { }
 ----
 
-Inherited properties can be ignored and renamed just as one would expect
+Inherited properties can be ignored and renamed just as one would expect 
 
 [source,csharp]
 ----
@@ -612,7 +554,6 @@ var usingSettings = WithConnectionSettings(s => s
         .Ignore(p => p.IgnoreMe)
     )
 );
-
 usingSettings.Expect(new []
 {
     "id",

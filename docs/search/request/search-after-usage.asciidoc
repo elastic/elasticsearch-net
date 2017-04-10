@@ -15,7 +15,8 @@ please modify the original csharp file found at the link and submit the PR with 
 [[search-after-usage]]
 == Search After Usage
 
-=== Fluent DSL Example
+[float]
+=== Fluent DSL example
 
 [source,csharp]
 ----
@@ -30,7 +31,8 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+[float]
+=== Object Initializer syntax example
 
 [source,csharp]
 ----

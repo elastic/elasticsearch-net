@@ -8,9 +8,9 @@ using static Nest.Infer;
 
 namespace Tests.QueryDsl.Specialized.MoreLikeThis
 {
-	public class MoreLikeThisUsageTests : QueryDslUsageTestsBase
+	public class MoreLikeThisQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public MoreLikeThisUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public MoreLikeThisQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object QueryJson => new
 		{

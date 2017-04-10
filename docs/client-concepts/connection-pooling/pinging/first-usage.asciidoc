@@ -12,14 +12,15 @@ If you wish to submit a PR for any spelling mistakes, typos or grammatical error
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
 
-[[pinging-first-usage]]
-== Pinging - First Usage
+[[ping-on-first-usage]]
+=== Ping on first usage
 
-Pinging is enabled by default for the <<static-connection-pool, Static>>, <<sniffing-connection-pool, Sniffing>> and <<sticky-connection-pool, Sticky>> connection pools.
+Pinging is enabled by default for the <<static-connection-pool, Static>>, <<sniffing-connection-pool, Sniffing>>
+and <<sticky-connection-pool, Sticky>> connection pools.
 This means that the first time a node is used or resurrected, a ping is issued a with a small (configurable) timeout,
-allowing the client to fail and fallover to a healthy node much faster than attempting a request that may be heavier than a ping.
+allowing the client to fail and fallover to a healthy node much faster than attempting a request, that may be heavier than a ping.
 
-Here's an example with a cluster with 2 nodes where the second node fails on ping 
+Here's an example with a cluster with two nodes where the second node fails on ping 
 
 [source,csharp]
 ----
@@ -70,50 +71,49 @@ var audit = new Auditor(() => Framework.Cluster
     .StaticConnectionPool()
     .AllDefaults()
 );
-----
 
-The first call goes to 9200 which succeeds 
-
-The 2nd call does a ping on 9201 because its used for the first time.
-It fails and so we ping 9202 which also fails. We then ping 9203 because
-we haven't used it before and it succeeds 
-
-Finally we assert that the connectionpool has two nodes that are marked as dead 
-
-[source,csharp]
-----
 await audit.TraceCalls(
-new ClientCall {
-        { PingSuccess, 9200},
+    new ClientCall {
+        { PingSuccess, 9200}, <1>
         { HealthyResponse, 9200},
         { pool =>
-        {
-            pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(0);
-        } }
+            pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(0)
+        }
     },
-new ClientCall {
-        { PingFailure, 9201},
-        { PingFailure, 9202},
-        { PingSuccess, 9203},
+    new ClientCall {
+        { PingFailure, 9201}, <2>
+        { PingFailure, 9202}, <3>
+        { PingSuccess, 9203}, <4>
         { HealthyResponse, 9203},
-{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
+        { pool =>
+            pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) <5>
+        }
     }
 );
 ----
+<1> The first call goes to 9200, which succeeds
 
-A healthy cluster of 4 (min master nodes of 3 of course!) 
+<2> The 2nd call does a ping on 9201 because its used for the first time. This fails
+
+<3> So we ping 9202. This _also_ fails
+
+<4> We then ping 9203 because we haven't used it before and it succeeds
+
+<5> Finally, we assert that the connection pool has two nodes that are marked as dead
+
+All nodes are pinged on first use, provided they are healthy
 
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
     .Nodes(4)
-    .Ping(p => p.SucceedAlways())
+    .Ping(p => p.SucceedAlways()) <1>
     .StaticConnectionPool()
     .AllDefaults()
 );
 
 await audit.TraceCalls(
-    new ClientCall { { PingSuccess, 9200}, { HealthyResponse, 9200} },
+    new ClientCall { { PingSuccess, 9200}, { HealthyResponse, 9200} }, <2>
     new ClientCall { { PingSuccess, 9201}, { HealthyResponse, 9201} },
     new ClientCall { { PingSuccess, 9202}, { HealthyResponse, 9202} },
     new ClientCall { { PingSuccess, 9203}, { HealthyResponse, 9203} },
@@ -124,4 +124,7 @@ await audit.TraceCalls(
     new ClientCall { { HealthyResponse, 9200} }
 );
 ----
+<1> Pings on nodes always succeed
+
+<2> A successful ping on each node
 

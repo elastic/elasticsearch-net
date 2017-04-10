@@ -11,9 +11,15 @@ please modify the original csharp file found at the link and submit the PR with 
 
 include::intro.asciidoc[]
 
-include::client-concepts.asciidoc[]
+include::breaking-changes.asciidoc[]
 
-include::common-options.asciidoc[]
+include::conventions.asciidoc[]
+
+include::low-level.asciidoc[]
+
+include::high-level.asciidoc[]
+
+include::troubleshooting.asciidoc[]
 
 include::search.asciidoc[]
 

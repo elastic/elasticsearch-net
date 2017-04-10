@@ -13,9 +13,9 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[top-hits-aggregation-usage]]
-== Top Hits Aggregation Usage
+=== Top Hits Aggregation Usage
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -60,7 +60,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -73,9 +73,7 @@ new SearchRequest<Project>
         {
             Sort = new List<ISort>
             {
-                {
-                    new SortField { Field = Field<Project>(p => p.StartedOn), Order = SortOrder.Descending }
-                }
+                new SortField { Field = Field<Project>(p => p.StartedOn), Order = SortOrder.Descending }
             },
             Source = new SourceFilter
             {
@@ -158,7 +156,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -166,7 +164,6 @@ response.IsValid.Should().BeTrue();
 var states = response.Aggs.Terms("states");
 states.Should().NotBeNull();
 states.Buckets.Should().NotBeNullOrEmpty();
-
 foreach(var state in states.Buckets)
 {
     state.Key.Should().NotBeNullOrEmpty();
@@ -178,7 +175,6 @@ foreach(var state in states.Buckets)
     hits.Should().NotBeNullOrEmpty();
     hits.All(h => h.Explanation != null).Should().BeTrue();
     hits.All(h => h.Version.HasValue).Should().BeTrue();
-    //hits.All(h => h.Highlights.Count() > 0).Should().BeTrue();
     hits.All(h => h.Fields.ValuesOf<StateOfBeing>("state").Any()).Should().BeTrue();
     hits.All(h => h.Fields.ValuesOf<int>("numberOfCommits").Any()).Should().BeTrue();
     hits.All(h => h.Fields.ValuesOf<int>("commit_factor").Any()).Should().BeTrue();

@@ -19,7 +19,8 @@ The suggest feature suggests similar looking terms based on a provided text by u
 
 See the Elasticsearch documentation on {ref_current}/search-suggesters.html[Suggesters] for more detail.
 
-=== Fluent DSL Example
+[float]
+=== Fluent DSL example
 
 [source,csharp]
 ----
@@ -77,7 +78,8 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+[float]
+=== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -226,11 +228,13 @@ new SearchRequest<Project>
 }
 ----
 
+[float]
 === Handling Responses
 
 [source,csharp]
 ----
 var myCompletionSuggest = response.Suggest["my-completion-suggest"];
+
 myCompletionSuggest.Should().NotBeNull();
 var suggest = myCompletionSuggest.First();
 suggest.Text.Should().Be(Project.Instance.Name);

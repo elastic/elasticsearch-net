@@ -1,0 +1,63 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/QueryDsl/FullText/MatchPhrase/MatchPhraseUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[match-phrase-usage]]
+=== Match Phrase Usage
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.MatchPhrase(c => c
+    .Field(p => p.Description)
+    .Analyzer("standard")
+    .Boost(1.1)
+    .Query("hello world")
+    .Slop(2)
+    .Name("named_query")
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new MatchPhraseQuery
+{
+    Field = Field<Project>(p=>p.Description),
+    Analyzer = "standard",
+    Boost = 1.1,
+    Name = "named_query",
+    Query = "hello world",
+    Slop = 2,
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "match_phrase": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "query": "hello world",
+      "analyzer": "standard",
+      "slop": 2
+    }
+  }
+}
+----
+

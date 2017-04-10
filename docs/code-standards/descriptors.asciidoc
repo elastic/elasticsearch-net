@@ -13,13 +13,14 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[descriptors]]
-== Descriptors
+=== Descriptors
 
 Every descriptor should inherit from `DescriptorBase`, this hides object members from the fluent interface
 
 [source,csharp]
 ----
 var notDescriptors = new[] { typeof(ClusterProcessOpenFileDescriptors).Name, "DescriptorForAttribute" };
+
 var descriptors = from t in typeof(DescriptorBase<,>).Assembly().Types()
                   where t.IsClass()
                     && t.Name.Contains("Descriptor")
@@ -67,12 +68,6 @@ Func<Type, Type, bool> exclude = (first, second) =>
         : value.IsAssignableFrom(second);
 };
 
-var key = first.IsGenericType()
-        ? first.GetGenericTypeDefinition()
-        : first;
-
-Type value;
-
 var selectorMethods =
     from d in descriptors
     from m in d.GetMethods()
@@ -111,10 +106,7 @@ var descriptors =
     select t;
 
 var breakingDescriptors = new List<string>();
-----
 
-[source,csharp]
-----
 foreach (var query in queries)
 {
     var descriptor = descriptors.First(d => query.IsAssignableFrom(d));

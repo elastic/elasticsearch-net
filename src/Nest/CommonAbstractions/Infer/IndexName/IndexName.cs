@@ -4,7 +4,6 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-
 	[ContractJsonConverter(typeof(IndexNameJsonConverter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class IndexName : IEquatable<IndexName>, IUrlParameter
@@ -14,31 +13,22 @@ namespace Nest
 
 		internal string DebugDisplay => Type == null ? Name : $"{nameof(IndexName)} for typeof: {Type?.Name}";
 
-		public static implicit operator IndexName(string typeName)
-		{
-			if (typeName.IsNullOrEmpty())
-				return null;
-			return new IndexName { Name = typeName.Trim() };
-		}
-		public static implicit operator IndexName(Type type)
-		{
-			if (type == null)
-				return null;
-			return new IndexName { Type = type };
-		}
+		public static implicit operator IndexName(string typeName) => typeName.IsNullOrEmpty()
+			? null
+			: new IndexName { Name = typeName.Trim() };
 
-		bool IEquatable<IndexName>.Equals(IndexName other)
-		{
-			return Equals(other);
-		}
+		public static implicit operator IndexName(Type type) => type == null
+			? null
+			: new IndexName { Type = type };
+
+		bool IEquatable<IndexName>.Equals(IndexName other) => EqualsMarker(other);
 
 		public override bool Equals(object obj)
 		{
 			var s = obj as string;
 			if (!s.IsNullOrEmpty()) return this.EqualsString(s);
 			var pp = obj as IndexName;
-			if (pp != null) return this.EqualsMarker(pp);
-			return base.Equals(obj);
+			return EqualsMarker(pp);
 		}
 
 		public override int GetHashCode()

@@ -1,7 +1,5 @@
-:output-dir: client-concepts/low-level
-
 [[elasticsearch-net]]
-= Client Concepts - Elasticsearch.Net
+= Elasticsearch.Net - Low level client
 
 ////
 IMPORTANT NOTE
@@ -27,11 +25,14 @@ Or by searching for https://www.nuget.org/packages/Elasticsearch.Net[Elasticsear
 
 --
 
-include::{output-dir}/connecting.asciidoc[]
+include::client-concepts/low-level/getting-started.asciidoc[]
 
-include::{output-dir}/lifetimes.asciidoc[]
+[[elasticsearch-net-conventions]]
+== Conventions
 
-include::{output-dir}/post-data.asciidoc[]
+The low level client has only a few conventions
 
-include::connection-pooling.asciidoc[]
+* <<post-data, Sending data using Post data>>
+
+include::client-concepts/low-level/post-data.asciidoc[]
 
