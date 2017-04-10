@@ -1,21 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>netcoreapp1.1;net45;net46</TargetFrameworks>
     <VersionPrefix>6.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
-    <Authors>
-    </Authors>
-    <Company>
-    </Company>
-    <NeutralLanguage>
-    </NeutralLanguage>
-    <AssemblyTitle>
-    </AssemblyTitle>
-    <Description>
-    </Description>
-    <Copyright>
-    </Copyright>
     <DefineConstants Condition="'$(TargetFramework)'=='netcoreapp1.1'">$(DefineConstants);DOTNETCORE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
@@ -45,6 +33,4 @@
   <ItemGroup>
     <EmbeddedResource Include="Document\Single\Attachment\Attachment_Test_Document.pdf" />
   </ItemGroup>
-  <!--<Import Project="..\outputpath.props" />-->
-  <!--<Import Project="..\..\.paket\Paket.Restore.targets" />-->
 </Project>
