@@ -1,13 +1,10 @@
-:github: https://github.com/elastic/elasticsearch-net
-
-:stackoverflow: http://stackoverflow.com
-
 [[nest-breaking-changes]]
 == NEST breaking changes
 
 This document rudimentally documents the breaking changes from 1.x to 2.x; Our 2.0 refactor comprises 1000+ commits and nearly six months of work, so if we missed anything
 {github}/issues[feel free to give us a shout]!
 
+[float]
 === Dependency graph changes
 
 The first thing you might notice is that the dependency graph for the client has changed slightly
@@ -61,15 +58,16 @@ var client = new ElasticClient(pool);
 ----
 
 This is what we call internally if you use the previous `ElasticClient` constructor.
-Our implementation of <<transports,`ITransport`>> can be injected with a custom <<request-pipeline,`IRequestPipelineFactory`>>, <<date-time-providers,`IDateTimeProvider`>> and `IMemoryStreamFactory`.
+Our implementation of <<transports,`ITransport`>> can be injected with a custom <<request-pipelines,`IRequestPipelineFactory`>>, <<date-time-providers,`IDateTimeProvider`>> and `IMemoryStreamFactory`.
 
 <<transports,`Transport`>> is in control of managing our request pipelining, asking connection pools for other nodes to fall over to and marking nodes dead or alive.
 
 Each individual moving part is further explained in the index.html[documentation].
 
+[float]
 === Inferred types
 
-Many places that only took a string now take a more strongly typed object, <<`Id`,ids-inference>>, <<field-inference,`Field`>>, <<field-inference,`Fields`>>, <<index-name-inference,`Index`>>, <<indices-paths,`Indices`>>, `Type`, `Types`, <<document-paths,`DocumentPath<T>`>>. It's good to know that in most cases you can still implicitly convert to them from `string`, `long`, `Guid` where it makes sense.
+Many places that only took a string now take a more strongly typed object, <`Id`,ids-inference>>, <<field-inference,`Field`>>, <<field-inference,`Fields`>>, <<index-name-inference,`Index`>>, <<indices-paths,`Indices`>>, `Type`, `Types`, <<document-paths,`DocumentPath<T>`>>. It's good to know that in most cases you can still implicitly convert to them from `string`, `long`, `Guid` where it makes sense.
 
 If you are using `C# 6` you can also staticly import `using static Nest.Infer`. This will allow you to write 
 
@@ -96,11 +94,13 @@ for `Index` and so on and so forth.
 
 If you are using the fluent API, using these is not required (but still possible), as the fluent API is already expression based.
 
+[float]
 === Filters are **GONE**
 
 In `Elasticsearch 2.0` https://www.elastic.co/guide/en/elasticsearch/reference/2.3/breaking_20_query_dsl_changes.html#_queries_and_filters_merged[queries and filter constructs have merged into one concept called queries], `NEST 2.0` reflects this, so if you are looking for the `AndFilter` it is now
 called the `AndQuery` but beware that some of these filters have been obsoleted and chances are high https://www.elastic.co/blog/all-about-elasticsearch-filter-bitsets[you were using them wrong!].
 
+[float]
 === Isolated descriptors
 
 In `NEST 1.x` we took pride in being a 1 to 1 mapping with the Elasticsearch API, however in some cases we hid the real depth of parameters.
@@ -133,10 +133,12 @@ This encapsulates all of the sort options properly and adheres stricter to the 1
 
 This happens in more places e.g index settings and mappings.
 
+[float]
 === Aggregator
 
 If you are using the object initializer syntax `*Aggregator` is now `*Aggregation`
 
+[float]
 === Attribute-based mapping
 
 The single `ElasticPropertyAttribute` has been broken up into individual attributes per property type.
@@ -199,6 +201,7 @@ Aside from a simpler and cleaner API, this allows each attribute to only reflect
 
 `MapFromAttributes()` has also been renamed to `AutoMap()` to better reflect that it doesn't only depend on properties being marked with attributes.  It will also infer the type based on the CLR type if no attribute is present.
 
+[float]
 === `TimeSpan` automapped as `long` (ticks)
 
 `System.TimeSpan` is now automatically mapped as a `long` representing the number of ticks within the timeSpan, allowing for range  in addition to term queries. NEst 1.x automatically mapped `TimeSpan` as a string and whilst NEST 2.0 is able to deserialize strings into `TimeSpan` instances as before, it will not automatically serialize `TimeSpan` ***into*** strings when indexing. In order to achieve this, you will need to register a json converter, either by deriving from `JsonNetSerializer` and overriding `ContractConverters` or by attributing the property with `[JsonConverter(typeof(ConverterTypeName))]`. A example of a converter for serializing/deserializing string values for `TimeSpan` is
@@ -239,10 +242,10 @@ public class StringTimeSpanConverter : JsonConverter
 }
 ----
 
+[float]
 === Serialization settings
 
 Serialization settings are now configurable through `ConnectionSettings` constructor taking a factory function that returns an instance of `IElasticsearchSerializer`.
-
 
 [source,csharp]
 ----
@@ -278,6 +281,7 @@ public class MyJsonNetSerializer : JsonNetSerializer
 }
 ----
 
+[float]
 === Renamed Types
 
 [source,diff]
@@ -706,6 +710,7 @@ public class MyJsonNetSerializer : JsonNetSerializer
 + class ValueCountAggregation
 ----
 
+[float]
 ==== Removed Types
 
 [source,diff]
@@ -1399,6 +1404,7 @@ public class MyJsonNetSerializer : JsonNetSerializer
 - class YesNoBoolConverter
 ----
 
+[float]
 ==== Member Changes
 
 [source,diff]
@@ -3225,3 +3231,4 @@ class VerifyRepositoryResponse
 +     prop: ApiCall
 -     prop: Infer
 ----
+

@@ -1,4 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.4
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/2.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,7 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[verbatim-and-strict-query-usage]]
-== Verbatim and Strict Query Usage
+=== Verbatim and Strict Query Usage
 
 NEST has the concept of conditionless queries; if the input to a query is determined to be __empty__, for example,`null` or `""` for a string input, then the query will not be serialized and sent to Elasticsearch. If a conditionless
 query is part of a compound query then the query will not be part of the json query dsl sent to Elasticsearch.
@@ -30,13 +32,12 @@ Verbatim::
 Individual queries can be marked as verbatim meaning that the query should be sent to Elasticsearch **as is**,
 even if it is conditionless.
 
-[[verbatim-usage]]
 [float]
-== Verbatim Usage
+=== Verbatim query usage
 
 `IsVerbatim` should be set on individual queries to take effect
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -56,7 +57,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -98,13 +99,12 @@ new TermQuery
 }
 ----
 
-[[non-cascading-strict-outer-queries]]
 [float]
 == Non-Cascading Strict Outer Queries
 
 Setting `IsStrict` on the outer query container does not cascade
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -124,7 +124,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -144,6 +144,7 @@ IQueryContainer query = new QueryContainer(new BoolQuery
         }
     }
 });
+
 query.IsStrict = true;
 return (QueryContainer)query;
 ----
@@ -166,13 +167,12 @@ return (QueryContainer)query;
 }
 ----
 
-[[non-cascading-verbatim-outer-queries]]
 [float]
 == Non-Cascading Verbatim Outer Queries
 
 Setting `IsVerbatim` on the outer query container does not cascade
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -192,7 +192,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -212,6 +212,7 @@ IQueryContainer query = new QueryContainer(new BoolQuery
         }
     }
 });
+
 query.IsVerbatim = true;
 return (QueryContainer)query;
 ----
@@ -234,13 +235,9 @@ return (QueryContainer)query;
 }
 ----
 
-[[verbatim-single-queries]]
-[float]
-== Verbatim Single Queries
+A compound query can also be marked as verbatim, demonstrated here with a `bool` query. 
 
-Setting `IsVerbatim` on a single query is still supported though
-
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -250,7 +247,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -268,7 +265,9 @@ new BoolQuery
 }
 ----
 
-=== Fluent DSL Example
+A single verbatim query will be serialized as-is 
+
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -280,7 +279,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -304,14 +303,9 @@ new TermQuery
 }
 ----
 
-[[verbatim-compound-queries]]
-[float]
-== Verbatim Compound Queries
+Leaf queries within a compound query marked as verbatim will also be serialized as-is
 
-Similarly to verbatim single queries, setting `IsVerbatim` on a single query that is part
-of a compound query is also supported
-
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -330,7 +324,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -381,4 +375,11 @@ new BoolQuery
   }
 }
 ----
+
+[float]
+=== Strict Query Usage
+
+A query can be marked as strict meaning that _if_ it is determined to be _conditionless_, it will throw an
+exception. The following example demonstrates this by trying to send an empty string as the value for
+a `term` query marked as strict
 

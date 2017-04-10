@@ -6,9 +6,9 @@ using Tests.Framework.MockData;
 
 namespace Tests.QueryDsl.Specialized.Template
 {
-	public class TemplateUsageTests : QueryDslUsageTestsBase
+	public class TemplateQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public TemplateUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public TemplateQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		private static readonly string _templateString = "{ \"match\": { \"text\": \"{{query_string}}\" }}";
 

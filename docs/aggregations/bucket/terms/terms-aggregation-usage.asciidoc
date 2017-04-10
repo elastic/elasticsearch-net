@@ -1,4 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.4
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/2.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,13 +15,13 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[terms-aggregation-usage]]
-== Terms Aggregation Usage
+=== Terms Aggregation Usage
 
 A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
 
 See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-terms-aggregation.html[terms aggregation] for more detail.
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -43,7 +45,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -106,7 +108,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -115,13 +117,11 @@ var states = response.Aggs.Terms("states");
 states.Should().NotBeNull();
 states.DocCountErrorUpperBound.Should().HaveValue();
 states.SumOtherDocCount.Should().HaveValue();
-
 foreach (var item in states.Buckets)
 {
     item.Key.Should().NotBeNullOrEmpty();
     item.DocCount.Should().BeGreaterOrEqualTo(1);
 }
-
 states.Meta.Should().NotBeNull().And.HaveCount(1);
 states.Meta["foo"].Should().Be("bar");
 ----
@@ -132,7 +132,7 @@ states.Meta["foo"].Should().Be("bar");
 
 Using terms aggregation with filtering to include only specific values
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -156,7 +156,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -220,7 +220,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -231,13 +231,11 @@ states.DocCountErrorUpperBound.Should().HaveValue();
 states.SumOtherDocCount.Should().HaveValue();
 states.Buckets.Should().NotBeNull();
 states.Buckets.Count.Should().BeGreaterThan(0);
-
 foreach (var item in states.Buckets)
 {
     item.Key.Should().NotBeNullOrEmpty();
     item.DocCount.Should().BeGreaterOrEqualTo(1);
 }
-
 states.Meta.Should().NotBeNull().And.HaveCount(1);
 states.Meta["foo"].Should().Be("bar");
 ----
@@ -248,7 +246,7 @@ states.Meta["foo"].Should().Be("bar");
 
 Using terms aggregation with filtering to include values using a regular expression pattern
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -272,7 +270,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -333,7 +331,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -344,13 +342,11 @@ states.DocCountErrorUpperBound.Should().HaveValue();
 states.SumOtherDocCount.Should().HaveValue();
 states.Buckets.Should().NotBeNull();
 states.Buckets.Count.Should().BeGreaterThan(0);
-
 foreach (var item in states.Buckets)
 {
     item.Key.Should().NotBeNullOrEmpty();
     item.DocCount.Should().BeGreaterOrEqualTo(1);
 }
-
 states.Meta.Should().NotBeNull().And.HaveCount(1);
 states.Meta["foo"].Should().Be("bar");
 ----

@@ -1,4 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.4
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/2.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,13 +15,13 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[script-query-usage]]
-== Script Query Usage
+=== Script Query Usage
 
 A query allowing to define {ref_current}/modules-scripting.html[scripts] as queries.
 
 See the Elasticsearch documentation on {ref_current}/query-dsl-script-query.html[script query] for more details.
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -31,7 +33,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----

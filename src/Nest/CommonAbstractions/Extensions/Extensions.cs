@@ -174,13 +174,6 @@ namespace Nest
 			else if (value == null) throw new ArgumentNullException(name, "Argument can not be null when " + message);
 		}
 
-		internal static string F(this string format, params object[] args)
-		{
-			var c = CultureInfo.InvariantCulture;
-			format.ThrowIfNull(nameof(format));
-			return string.Format(c, format, args);
-		}
-
 		internal static bool IsNullOrEmpty(this string value)
 		{
 			return string.IsNullOrWhiteSpace(value);

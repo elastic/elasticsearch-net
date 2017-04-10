@@ -1,5 +1,6 @@
 Microsoft.CodeAnalysis.CSharp
+Microsoft.CodeAnalysis.CSharp.Workspaces
 AsciiDocNet
 Newtonsoft.Json
 System.Collections.Immutable
-System.Reflection.Metadata 
+NuDoq

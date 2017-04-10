@@ -1,4 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.4
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/2.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,7 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[writing-aggregations]]
-== Writing Aggregations
+=== Writing aggregations
 
 NEST allows you to write your aggregations using
 
@@ -23,13 +25,12 @@ NEST allows you to write your aggregations using
 
 * a more terse object initializer aggregation DSL
 
-Three different ways, yikes that's a lot to take in! Lets go over them one by one and explain when you might
+Three different ways, yikes that's a lot to take in! Let's go over them one at a time and explain when you might
 want to use each.
 
 This is the json output for each example
 
 [source,javascript]
-.Example json output
 ----
 {
   "aggs": {
@@ -59,10 +60,13 @@ This is the json output for each example
 }
 ----
 
+[float]
 === Fluent DSL
 
 The fluent lambda syntax is the most terse way to write aggregations.
 It benefits from types that are carried over to sub aggregations
+
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -78,33 +82,50 @@ s => s
 )
 ----
 
+[float]
 === Object Initializer syntax
 
 The object initializer syntax (OIS) is a one-to-one mapping with how aggregations
 have to be represented in the Elasticsearch API. While it has the benefit of being a one-to-one
-mapping, being dictionary based in C# means it can grow exponentially in complexity rather quickly.
+mapping, being dictionary based in C# means it can gow verbose rather quickly.
+
+Here's the same aggregations as expressed in the Fluent API above, with the dictionary-based
+object initializer syntax
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
 new SearchRequest<Project>
 {
-    Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
+    Aggregations = new AggregationDictionary
     {
-        Aggregations =
-            new AverageAggregation("average_per_child", "confidenceFactor")
-            && new MaxAggregation("max_per_child", "confidenceFactor")
-            && new MinAggregation("min_per_child", "confidenceFactor")
+        { "name_of_child_agg", new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
+            {
+                Aggregations = new AggregationDictionary
+                {
+                    { "average_per_child", new AverageAggregation("average_per_child", "confidenceFactor") },
+                    { "max_per_child", new MaxAggregation("max_per_child", "confidenceFactor") },
+                    { "min_per_child", new MinAggregation("min_per_child", "confidenceFactor") },
+                }
+            }
+        }
     }
 }
 ----
 
-=== Terse Object Initializer DSL
+This starts to get hard to read, wouldn't you agree? There is a better way however...
 
-For this reason the OIS syntax can be shortened dramatically by using `*Agg` related family,
-These allow you to forego introducing intermediary Dictionaries to represent the aggregation DSL.
-It also allows you to combine multiple aggregations using bitwise AND `&&`) operator.
+[float]
+=== Terse Object Initializer syntax
 
-Compare the following example with the previous vanilla OIS syntax
+The Object Initializer syntax can be shortened dramatically by using `*Aggregation` types directly,
+allowing you to forego the need to introduce intermediary dictionaries to represent the aggregation DSL.
+In using these, it is also possible to combine multiple aggregations using the bitwise `&&` operator.
+
+Compare the following example with the previous vanilla Object Initializer syntax
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -120,11 +141,17 @@ new SearchRequest<Project>
 }
 ----
 
+Now that's much cleaner! Assigning an `*Aggregation` type directly to the `Aggregation` property
+ on a search request works because there are implicit conversions within NEST to handle this for you.
+
+[float]
 === Aggregating over a collection of aggregations
 
 An advanced scenario may involve an existing collection of aggregation functions that should be set as aggregations
 on the request. Using LINQ's `.Aggregate()` method, each function can be applied to the aggregation descriptor
 `childAggs` below) in turn, returning the descriptor after each function application.
+
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -134,6 +161,7 @@ var aggregations = new List<Func<AggregationContainerDescriptor<CommitActivity>,
     a => a.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
     a => a.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
 };
+
 return s => s
     .Aggregations(aggs => aggs
         .Children<CommitActivity>("name_of_child_agg", child => child
@@ -144,29 +172,28 @@ return s => s
     );
 ----
 <1> a list of aggregation functions to apply
-
 <2> Using LINQ's `Aggregate()` function to accumulate/apply all of the aggregation functions
 
-Combining multipe `AggregationDescriptor`'s is also possible using the bitwise `&` operator
-
-=== Fluent DSL Example
+Combining multiple `AggregationDescriptor` is also possible using the bitwise `&&` operator
 
 [source,csharp]
 ----
 var aggregations = new AggregationContainerDescriptor<CommitActivity>()
-    .Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-    .Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-    && new AggregationContainerDescriptor<CommitActivity>()
-        .Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor));
+        .Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+        .Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+        && new AggregationContainerDescriptor<CommitActivity>()
+            .Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor));
+
 return s => s
-    .Aggregations(aggs => aggs
-        .Children<CommitActivity>("name_of_child_agg", child => child
-            .Aggregations(childAggs => aggregations)
-        )
-    );
+        .Aggregations(aggs => aggs
+            .Children<CommitActivity>("name_of_child_agg", child => child
+                .Aggregations(childAggs => aggregations)
+            )
+        );
 ----
 
 [[aggs-vs-aggregations]]
+[float]
 === Aggs vs. Aggregations
 
 The response exposes both `.Aggregations` and `.Aggs` properties for handling aggregations. Why two properties you ask?
@@ -174,9 +201,7 @@ Well, the former is a dictionary of aggregation names to `IAggregate` types, a c
 aggregation responses (termed __Aggregates__ in NEST), and the latter is a convenience helper to get the right type
 of aggregation response out of the dictionary based on a key name.
 
-This is better illustrated with an example
-
-Let's imagine we make the following request. 
+This is better illustrated with an example. Let's imagine we make the following request
 
 [source,csharp]
 ----
@@ -192,10 +217,10 @@ s => s
 )
 ----
 
-=== Aggs usage
-
 Now, using `.Aggs`, we can easily get the `Children` aggregation response out and from that,
 the `Average` and `Max` sub aggregations.
+
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -212,6 +237,5 @@ var maxPerChild = childAggregation.Max("max_per_child");
 maxPerChild.Should().NotBeNull(); <2>
 ----
 <1> Do something with the average per child. Here we just assert it's not null
-
 <2> Do something with the max per child. Here we just assert it's not null
 

@@ -1,4 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.4
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/2.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,7 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[skip-dead-nodes]]
-== Skip Dead Nodes
+=== Skip Dead Nodes
 
 Sticky - Skipping Dead Nodes
 When selecting nodes the connection pool will try and skip all the nodes that are marked dead.
@@ -21,30 +23,27 @@ When selecting nodes the connection pool will try and skip all the nodes that ar
 [source,csharp]
 ----
 var seeds = Enumerable.Range(9200, NumberOfNodes).Select(p => new Node(new Uri("http://localhost:" + p))).ToList();
-
-seeds.First().MarkDead(DateTime.Now.AddDays(1));
-
 var pool = new StickyConnectionPool(seeds);
+for (var i = 0; i < 20; i++)
+{
+    var node = pool.CreateView().First();
+    node.Uri.Port.Should().Be(9200);
+    node = pool.CreateView().First();
+    node.Uri.Port.Should().Be(9200);
+    node = pool.CreateView().First();
+    node.Uri.Port.Should().Be(9200);
+}
 
-var node = pool.CreateView().First();
-
-node.Uri.Port.Should().Be(9201);
-
-node = pool.CreateView().First();
-
-node.Uri.Port.Should().Be(9201);
-----
-
-[source,csharp]
-----
 var seeds = Enumerable.Range(9200, NumberOfNodes).Select(p => new Node(new Uri("http://localhost:" + p))).ToList();
+seeds.First().MarkDead(DateTime.Now.AddDays(1));
 var pool = new StickyConnectionPool(seeds);
-var node = pool.CreateView().First();
-node.Uri.Port.Should().Be(9200);
-node = pool.CreateView().First();
-node.Uri.Port.Should().Be(9200);
-node = pool.CreateView().First();
-node.Uri.Port.Should().Be(9200);
+for (var i = 0; i < 20; i++)
+{
+    var node = pool.CreateView().First();
+    node.Uri.Port.Should().Be(9201);
+    node = pool.CreateView().First();
+    node.Uri.Port.Should().Be(9201);
+}
 ----
 
 After we marke the first node alive again we expect it to be hit again
@@ -52,37 +51,27 @@ After we marke the first node alive again we expect it to be hit again
 [source,csharp]
 ----
 seeds.First().MarkAlive();
+for (var i = 0; i < 20; i++)
+{
+    var node = pool.CreateView().First();
+    node.Uri.Port.Should().Be(9200);
+    node = pool.CreateView().First();
+    node.Uri.Port.Should().Be(9200);
+    node = pool.CreateView().First();
+    node.Uri.Port.Should().Be(9200);
+}
 
-var node = pool.CreateView().First();
-
-node.Uri.Port.Should().Be(9200);
-
-node = pool.CreateView().First();
-
-node.Uri.Port.Should().Be(9200);
-
-node = pool.CreateView().First();
-
-node.Uri.Port.Should().Be(9200);
-----
-
-[source,csharp]
-----
 var dateTimeProvider = new TestableDateTimeProvider();
-
 var seeds = Enumerable.Range(9200, NumberOfNodes).Select(p => new Node(new Uri("http://localhost:" + p))).ToList();
-
 seeds.First().MarkDead(dateTimeProvider.Now().AddDays(1));
-
 var pool = new StickyConnectionPool(seeds, dateTimeProvider: dateTimeProvider);
-
-var node = pool.CreateView().First();
-
-node.Uri.Port.Should().Be(9201);
-
-node = pool.CreateView().First();
-
-node.Uri.Port.Should().Be(9201);
+for (var i = 0; i < 20; i++)
+{
+    var node = pool.CreateView().First();
+    node.Uri.Port.Should().Be(9201);
+    node = pool.CreateView().First();
+    node.Uri.Port.Should().Be(9201);
+}
 ----
 
 If we forward our clock 2 days the node that was marked dead until tomorrow (or yesterday!) should be resurrected 
@@ -90,19 +79,12 @@ If we forward our clock 2 days the node that was marked dead until tomorrow (or 
 [source,csharp]
 ----
 dateTimeProvider.ChangeTime(d => d.AddDays(2));
-
 var n = pool.CreateView().First();
-
 n.Uri.Port.Should().Be(9200);
-
 n = pool.CreateView().First();
-
 n.Uri.Port.Should().Be(9200);
-
 n = pool.CreateView().First();
-
 n.Uri.Port.Should().Be(9200);
-
 n.IsResurrected.Should().BeTrue();
 ----
 
@@ -118,27 +100,21 @@ var audit = new Auditor(() => Framework.Cluster
     .StickyConnectionPool()
     .Settings(p => p.DisablePing())
 );
-----
 
-The first call goes to 9200 which succeeds 
-
-The 2nd call does a ping on 9201 because its used for the first time.
-It fails so we wrap over to node 9202 
-
-Finally we assert that the connectionpool has one node that is marked as dead 
-
-[source,csharp]
-----
 await audit.TraceCalls(
-new ClientCall {
+    /** The first call goes to 9200 which succeeds */
+    new ClientCall {
         { BadResponse, 9200},
         { BadResponse, 9201},
         { HealthyResponse, 9202},
         { pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
     },
-new ClientCall {
+    /** The 2nd call does a ping on 9201 because its used for the first time.
+    * It fails so we wrap over to node 9202 */
+    new ClientCall {
         { HealthyResponse, 9202},
-{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
+        /** Finally we assert that the connectionpool has one node that is marked as dead */
+        { pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
     },
     new ClientCall {
         { HealthyResponse, 9202},
@@ -157,18 +133,10 @@ var audit = new Auditor(() => Framework.Cluster
     .StickyConnectionPool()
     .Settings(p => p.DisablePing())
 );
-----
 
-All the calls fail 
-
-After all our registered nodes are marked dead we want to sample a single dead node
-each time to quickly see if the cluster is back up. We do not want to retry all 4
-nodes
-
-[source,csharp]
-----
 await audit.TraceCalls(
-new ClientCall {
+    /** All the calls fail */
+    new ClientCall {
         { BadResponse, 9200},
         { BadResponse, 9201},
         { BadResponse, 9202},
@@ -176,7 +144,11 @@ new ClientCall {
         { MaxRetriesReached },
         { pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
     },
-new ClientCall {
+    /** After all our registered nodes are marked dead we want to sample a single dead node
+    * each time to quickly see if the cluster is back up. We do not want to retry all 4
+    * nodes
+    */
+    new ClientCall {
         { AllNodesDead },
         { Resurrection, 9200},
         { BadResponse, 9200},

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -9,12 +11,12 @@ namespace Tests.CommonOptions.TimeUnit
 {
 	public class TimeUnits
 	{
-		/** == Time units
+		/**[[time-units]]
+		 * === Time units
 		 * Whenever durations need to be specified, eg for a timeout parameter, the duration can be specified
 		 * as a whole number representing time in milliseconds, or as a time value like `2d` for 2 days.
 		 *
-		 * === Using Time units in NEST
-		 * NEST uses `Time` to strongly type this and there are several ways to construct one.
+		 * NEST uses a `Time` type to strongly type this and there are several ways to construct one.
 		 *
 		 * ==== Constructor
 		 * The most straight forward way to construct a `Time` is through its constructor
@@ -92,7 +94,7 @@ namespace Tests.CommonOptions.TimeUnit
 			(oneAndHalfYear > twoWeeks).Should().BeTrue();
 			(oneAndHalfYear >= twoWeeks).Should().BeTrue();
 
-            (twoDays != null).Should().BeTrue();
+		    (twoDays != null).Should().BeTrue();
             (twoDays >= new Time("2d")).Should().BeTrue();
 
 			twoDays.Should().BeLessThan(twoWeeks);
@@ -103,19 +105,64 @@ namespace Tests.CommonOptions.TimeUnit
 			/**
 			* And assert equality
 			*/
-			twoDays.Should().Be(new Time("2d"));        
-            (twoDays == new Time("2d")).Should().BeTrue();
+			twoDays.Should().Be(new Time("2d"));
+			(twoDays == new Time("2d")).Should().BeTrue();
 			(twoDays != new Time("2.1d")).Should().BeTrue();
-		    
+
 			(new Time("2.1d") == new Time(TimeSpan.FromDays(2.1))).Should().BeTrue();
 			(new Time("1") == new Time(1)).Should().BeTrue();
 			(new Time("-1") == new Time(-1)).Should().BeTrue();
 		}
 
-		[U]
-		public void UsingInterval()
+        // hide
+        private class StringParsingTestCases : List<Tuple<string, TimeSpan, string>>
 		{
-			/** === Units of Time
+			public void Add(string original, TimeSpan expect, string toString) =>
+				this.Add(Tuple.Create(original, expect, toString));
+
+			public void Add(string bad, string argumentExceptionContains) =>
+				this.Add(Tuple.Create(bad, TimeSpan.FromDays(1), argumentExceptionContains));
+		}
+
+        // hide
+		[U]public void StringImplicitConversionParsing()
+		{
+			var testCases = new StringParsingTestCases
+			{
+				{ "10ms", new TimeSpan(0, 0, 0, 0, 10), "10ms" },
+				{ "10s", new TimeSpan(0, 0, 10), "10s" },
+				{ "10m", new TimeSpan(0, 10, 0) , "10m"},
+				{ "10M", new TimeSpan(300, 0, 0, 0), "10M" }, // 300 days not minutes
+				{ "10h", new TimeSpan(10, 0, 0), "10h" },
+				{ "10d", new TimeSpan(10, 0, 0, 0) , "10d"},
+			};
+			foreach (var testCase in testCases)
+			{
+				var time = new Time(testCase.Item1);
+				time.ToTimeSpan().Should().Be(testCase.Item2, "we passed in {0}", testCase.Item1);
+				time.ToString().Should().Be(testCase.Item3);
+			}
+		}
+
+        // hide
+        [U]public void StringParseExceptions()
+		{
+			var testCases = new StringParsingTestCases
+			{
+				{ "1000x", "string is invalid"},
+			};
+			foreach (var testCase in testCases)
+			{
+				Action create = () => new Time(testCase.Item1);
+				var e = create.Invoking((a) => a()).ShouldThrow<ArgumentException>(testCase.Item3).Subject.First();
+				e.Message.Should().Contain(testCase.Item3);
+			}
+		}
+
+		[U] public void UsingInterval()
+		{
+			/**
+			* ==== Units of Time
 			* Units of `Time` are specified as a union of either a `DateInterval` or `Time`,
 			* both of which implicitly convert to the `Union` of these two.
 			*/

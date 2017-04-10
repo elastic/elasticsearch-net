@@ -15,6 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 
 You've reached the documentation page for `Elasticsearch.Net` and `NEST`, The two official .NET clients for Elasticsearch. 
 
+[float]
 === Why two clients?
 
 `Elasticsearch.Net` is a very low level, dependency free, client that has no opinions about how you build and represent your requests and responses. It has abstracted 
@@ -27,6 +28,7 @@ comes with a strongly typed query DSL that maps 1 to 1 with the Elasticsearch qu
 
 Please read the getting started guide for both <<elasticsearch-net,Elasticsearch.Net>> and <<nest,NEST>>.
 
+[float]
 === Questions, bugs, comments, requests
 
 All of these are more then welcome on the {github}/issues[github issues pages]! We try to at least reply within the same day.

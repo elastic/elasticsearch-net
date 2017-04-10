@@ -73,9 +73,9 @@ namespace Tests.Aggregations.Bucket.GeoDistance
 			response.IsValid.Should().BeTrue();
 			var ringsAroundAmsterdam = response.Aggs.GeoDistance("rings_around_amsterdam");
 			ringsAroundAmsterdam.Should().NotBeNull();
-			ringsAroundAmsterdam.Buckets.Where(r => r.Key == "*-100.0").FirstOrDefault().Should().NotBeNull();
-			ringsAroundAmsterdam.Buckets.Where(r => r.Key == "100.0-300.0").FirstOrDefault().Should().NotBeNull();
-			ringsAroundAmsterdam.Buckets.Where(r => r.Key == "300.0-*").FirstOrDefault().Should().NotBeNull();
+			ringsAroundAmsterdam.Buckets.FirstOrDefault(r => r.Key == "*-100.0").Should().NotBeNull();
+			ringsAroundAmsterdam.Buckets.FirstOrDefault(r => r.Key == "100.0-300.0").Should().NotBeNull();
+			ringsAroundAmsterdam.Buckets.FirstOrDefault(r => r.Key == "300.0-*").Should().NotBeNull();
 		}
 	}
 }

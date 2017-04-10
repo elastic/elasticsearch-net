@@ -1,4 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.4
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/2.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,7 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[significant-terms-aggregation-usage]]
-== Significant Terms Aggregation Usage
+=== Significant Terms Aggregation Usage
 
 An aggregation that returns interesting or unusual occurrences of terms in a set.
 
@@ -27,7 +29,7 @@ As a result, the API for this feature may change in non-backwards compatible way
 
 See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-significantterms-aggregation.html[significant terms aggregation] for more detail.
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -44,7 +46,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -82,7 +84,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -98,7 +100,7 @@ sigNames.DocCount.Should().BeGreaterThan(0);
 
 Using significant terms aggregation with filtering to include values using a regular expression pattern
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -116,7 +118,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -156,7 +158,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -172,7 +174,7 @@ sigNames.DocCount.Should().BeGreaterThan(0);
 
 Using significant terms aggregation with filtering to exclude specific values
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -190,7 +192,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -232,7 +234,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----

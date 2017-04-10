@@ -1,0 +1,123 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.4
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/2.4
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/2.x/src/Tests/ClientConcepts/HighLevel/Serialization/ModifyingDefaultSerializer.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[modifying-default-serializer]]
+=== Modifying the default serializer
+
+In <<changing-serializers, Changing serializers>>, you saw how it is possible to provide your own serializer
+implementation to NEST. A more common scenario is the desire to change the settings on the default JSON.Net
+serializer.
+
+There are a couple of ways in which this can be done, depending on what it is you need to change.
+
+==== Modifying settings using SerializerFactory
+
+The default implementation of `ISerializerFactory` allows a delegate to be passed that can change
+the settings for JSON.Net serializers created by the factory
+
+[source,csharp]
+----
+var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+var connection = new HttpConnection();
+var connectionSettings =
+    new ConnectionSettings(pool, connection, new SerializerFactory((settings, values) => <1>
+    {
+        settings.NullValueHandling = NullValueHandling.Include;
+        settings.TypeNameHandling = TypeNameHandling.Objects;
+    }));
+
+var client = new ElasticClient(connectionSettings);
+----
+<1> delegate will be passed `JsonSerializerSettings` and `IConnectionSettingsValues`
+
+Here, the JSON.Net serializer is configured to *always* serialize `null` values and
+include the .NET type name when serializing to a JSON object structure.
+
+==== Modifying settings using a custom ISerializerFactory
+
+If you need more control than passing a delegate to `SerializerFactory` provides, you can also
+implement your own `ISerializerFactory` and derive an `IElasticsearchSerializer` from the
+default `JsonNetSerializer`.
+
+Here's an example of doing so that effectively achieves the same configuration as in the previous example.
+First, the custom factory and serializer are implemented
+
+[source,csharp]
+----
+public class CustomJsonNetSerializerFactory : ISerializerFactory
+{
+    public IElasticsearchSerializer Create(IConnectionSettingsValues settings)
+    {
+        return new CustomJsonNetSerializer(settings);
+    }
+    public IElasticsearchSerializer CreateStateful(IConnectionSettingsValues settings, JsonConverter converter)
+    {
+        return new CustomJsonNetSerializer(settings, converter);
+    }
+}
+
+public class CustomJsonNetSerializer : JsonNetSerializer
+{
+    public CustomJsonNetSerializer(IConnectionSettingsValues settings) : base(settings)
+    {
+        base.OverwriteDefaultSerializers(ModifyJsonSerializerSettings);
+    }
+    public CustomJsonNetSerializer(IConnectionSettingsValues settings, JsonConverter statefulConverter) :
+        base(settings, statefulConverter)
+    {
+        base.OverwriteDefaultSerializers(ModifyJsonSerializerSettings);
+    }
+
+    private void ModifyJsonSerializerSettings(JsonSerializerSettings settings, IConnectionSettingsValues connectionSettings)
+    {
+        settings.NullValueHandling = NullValueHandling.Include;
+        settings.TypeNameHandling = TypeNameHandling.Objects;
+    }
+}
+----
+
+Then, create a new instance of the factory to `ConnectionSettings`
+
+[source,csharp]
+----
+var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+var connection = new HttpConnection();
+var connectionSettings =
+    new ConnectionSettings(pool, connection, new CustomJsonNetSerializerFactory());
+
+var client = new ElasticClient(connectionSettings);
+----
+
+[IMPORTANT]
+====
+Any custom serializer that derives from `JsonNetSerializer` wishing to change the settings for the JSON.Net
+serializer, must do so using the `OverwriteDefaultSerializers` method in the constructor of the derived
+serializer.
+
+NEST includes many custom changes to the http://www.newtonsoft.com/json/help/html/ContractResolver.htm[`IContractResolver`] that the JSON.Net serializer uses to resolve
+serialization contracts for types. Examples of such changes are:
+
+* Allowing contracts for concrete types to be _inherited_ from interfaces that they implement
+
+* Special handling of dictionaries to ensure dictionary keys are serialized verbatim
+
+* Explicitly implemented interface properties are serialized in requests
+
+It's important therefore that these changes to `IContractResolver` are not overwritten by a serializer derived
+from `JsonNetSerializer`.
+
+====
+
