@@ -15,9 +15,9 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[percentiles-aggregation-usage]]
-== Percentiles Aggregation Usage
+=== Percentiles Aggregation Usage
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -37,7 +37,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -83,7 +83,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -91,7 +91,6 @@ response.ShouldBeValid();
 var commitsOutlier = response.Aggs.Percentiles("commits_outlier");
 commitsOutlier.Should().NotBeNull();
 commitsOutlier.Items.Should().NotBeNullOrEmpty();
-
 foreach (var item in commitsOutlier.Items)
     item.Value.Should().BeGreaterThan(0);
 ----

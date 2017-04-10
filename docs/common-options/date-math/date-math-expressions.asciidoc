@@ -15,7 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[date-math-expressions]]
-== Date Math Expressions
+=== Date math expressions
 
 The date type supports using date math expression when using it in a query/filter
 Whenever durations need to be specified, eg for a timeout parameter, the duration can be specified
@@ -44,14 +44,13 @@ as a whole number representing time in milliseconds, or as a time value like `2d
 
 Be sure to read the Elasticsearch documentation on {datemath}[Date Math].
 
-=== Simple Expressions
+==== Simple expressions
 
 You can create simple expressions using any of the static methods on `DateMath`
 
 [source,csharp]
 ----
 Expect("now").WhenSerializing(Nest.DateMath.Now);
-
 Expect("2015-05-05T00:00:00").WhenSerializing(Nest.DateMath.Anchored(new DateTime(2015,05, 05)));
 ----
 
@@ -74,7 +73,7 @@ the resulting date math will assume the whole string is the anchor
 [source,csharp]
 ----
 Expect(nonsense).WhenSerializing<Nest.DateMath>(nonsense)
-.Result(dateMath => ((IDateMath)dateMath)
+    .Result(dateMath => ((IDateMath)dateMath)
         .Anchor.Match(
             d => d.Should().NotBe(default(DateTime)),
             s => s.Should().Be(nonsense)
@@ -82,27 +81,22 @@ Expect(nonsense).WhenSerializing<Nest.DateMath>(nonsense)
     );
 ----
 
-`DateTime` also implicitly convert to simple date math expressions 
+`DateTime` also implicitly convert to simple date math expressions; the resulting
+anchor will be an actual `DateTime`, even after a serialization/deserialization round trip
 
 [source,csharp]
 ----
 var date = new DateTime(2015, 05, 05);
-----
-
-the anchor will be an actual `DateTime`, even after a serialization/deserialization round trip 
-
-[source,csharp]
-----
 Expect("2015-05-05T00:00:00").WhenSerializing<Nest.DateMath>(date)
-.Result(dateMath => ((IDateMath)dateMath)
-    .    Anchor.Match(
+    .Result(dateMath => ((IDateMath)dateMath)
+        .Anchor.Match(
             d => d.Should().Be(date),
             s => s.Should().BeNull()
         )
     );
 ----
 
-=== Complex Expressions
+==== Complex expressions
 
 Ranges can be chained on to simple expressions
 
@@ -141,7 +135,7 @@ Expect("2015-05-05T00:00:00||+1d-1m").WhenSerializing(
         .Subtract(TimeSpan.FromMinutes(1)));
 ----
 
-=== Fractional times
+==== Fractional times
 
 DateMath expressions do not support fractional numbers so unlike `Time` DateMath will
 pick the biggest integer unit it can represent

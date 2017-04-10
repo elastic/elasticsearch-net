@@ -1,44 +1,31 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
+using System.Text;
 
 namespace DocGenerator.Documentation.Blocks
 {
-	public class CodeBlock : IDocumentationBlock
-	{
-		public CodeBlock(string lineOfCode, int lineNumber, Language language, string propertyOrMethodName)
-		{
-			Value = ExtractCallOutsFromText(lineOfCode);
-			LineNumber = lineNumber;
-			Language = language;
-			PropertyName = propertyOrMethodName?.ToLowerInvariant();
-		}
+    public abstract class CodeBlock : IDocumentationBlock
+    {
+        protected readonly IList<string> Lines = new List<string>();
 
-		public List<string> CallOuts { get; } = new List<string>();
+        public string Language { get; }
+        public int LineNumber { get; }
+        public int Depth { get; }
+        public string MemberName { get; }
 
-		public Language Language { get; set; }
+        public string Value => string.Join(string.Empty, Lines);
 
-		public int LineNumber { get; }
+        public void AddLine(string line) => Lines.Add(line);
 
-		public string PropertyName { get; set; }
+        protected CodeBlock(string text, int startingLine, int depth, string language, string memberName)
+        {
+            Lines.Add(text);
+            LineNumber = startingLine;
+            Depth = depth;
+            Language = language;
+            MemberName = memberName?.ToLowerInvariant() ?? string.Empty;
+        }
 
-		public string Value { get; }
-
-		private string ExtractCallOutsFromText(string lineOfCode)
-		{
-			var matches = Regex.Matches(lineOfCode, @"//[ \t]*(?<callout>\<\d+\>)[ \t]*(?<text>\S.*)");
-			foreach (Match match in matches)
-			{
-				CallOuts.Add($"{match.Groups["callout"].Value} {match.Groups["text"].Value}");
-			}
-
-			if (CallOuts.Any())
-			{
-				lineOfCode = Regex.Replace(lineOfCode, @"//[ \t]*\<(\d+)\>.*", "//<$1>");
-			}
-
-			return lineOfCode.Trim();
-		}
-	}
+        public abstract string ToAsciiDoc();
+    }
 }

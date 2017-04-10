@@ -1,205 +1,54 @@
-﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Microsoft.CodeAnalysis.CSharp;
-using DocGenerator.Documentation.Blocks;
-using DocGenerator.Walkers;
-using DocGenerator.AsciiDoc;
+using System.Threading.Tasks;
 using AsciiDocNet;
+using DocGenerator.AsciiDoc;
+using DocGenerator.Walkers;
+using Microsoft.CodeAnalysis;
+using Document = Microsoft.CodeAnalysis.Document;
 
 namespace DocGenerator.Documentation.Files
 {
-	public class CSharpDocumentationFile : DocumentationFile
-	{
-		internal CSharpDocumentationFile(FileInfo fileLocation) : base(fileLocation)
-		{
-		}
+    public class CSharpDocumentationFile : DocumentationFile
+    {
+        private readonly Document _document;
+        private readonly Dictionary<string, Project> _projects;
 
-		private string RenderBlocksToDocumentation(IEnumerable<IDocumentationBlock> blocks)
-		{
-			var builder = new StringBuilder();
-			var lastBlockWasCodeBlock = false;
-			var callouts = new List<string>();
-			Language? language = null;
-			string propertyOrMethodName = null;
+        public CSharpDocumentationFile(Document document, Dictionary<string, Project> projects) 
+            : base(new FileInfo(document.FilePath))
+        {
+            _document = document;
+            _projects = projects;
+        }
 
-			RenderBlocksToDocumentation(blocks, builder, ref lastBlockWasCodeBlock, ref callouts, ref language, ref propertyOrMethodName);
-			if (lastBlockWasCodeBlock)
-			{
-				builder.AppendLine("----");
-				foreach (var callout in callouts)
-				{
-					builder.AppendLine(callout);
-				}
-			}
-			return builder.ToString();
-		}
+        public override async Task SaveToDocumentationFolderAsync()
+        {
+            var converter = new DocConverter();
+            var blocks = await converter.ConvertAsync(_document).ConfigureAwait(false);
 
-		private void RenderBlocksToDocumentation(
-			IEnumerable<IDocumentationBlock> blocks,
-			StringBuilder builder,
-			ref bool lastBlockWasCodeBlock,
-			ref List<string> callouts,
-			ref Language? language,
-			ref string propertyOrMethodName)
-		{
-			foreach (var block in blocks)
-			{
-				if (block is TextBlock)
-				{
-					if (lastBlockWasCodeBlock)
-					{
-						lastBlockWasCodeBlock = false;
-						builder.AppendLine("----");
-						if (callouts.Any())
-						{
-							foreach (var callout in callouts)
-							{
-								builder.AppendLine(callout);
-							}
-							builder.AppendLine();
-							callouts = new List<string>();
-						}
-					}
+            if (!blocks.Any()) return;
 
-					builder.AppendLine(block.Value);
-				}
-				else if (block is CodeBlock)
-				{
-					var codeBlock = (CodeBlock)block;
+            var builder = new StringBuilder();
+            using (var writer = new StringWriter(builder))
+            {
+                foreach (var block in blocks)
+                    await writer.WriteLineAsync(block.ToAsciiDoc()).ConfigureAwait(false);
+            }
+         
+            var destination = this.CreateDocumentationLocation();
 
-					// don't write different language code blocks in the same delimited source block
-					if (lastBlockWasCodeBlock && (codeBlock.Language != language || codeBlock.PropertyName != propertyOrMethodName))
-					{
-						lastBlockWasCodeBlock = false;
-						builder.AppendLine("----");
-						if (callouts.Any())
-						{
-							foreach (var callout in callouts)
-							{
-								builder.AppendLine(callout);
-							}
-							builder.AppendLine();
-							callouts = new List<string>();
-						}
-					}
+            // Now add Asciidoc headers, rearrange sections, etc.
+            var document = AsciiDocNet.Document.Parse(builder.ToString());
+            var visitor = new GeneratedAsciidocVisitor(this.FileLocation, destination, _projects);
+            document = visitor.Convert(document);
 
-					if (!lastBlockWasCodeBlock)
-					{
-						builder.AppendLine($"[source,{codeBlock.Language.ToString().ToLowerInvariant()},method=\"{codeBlock.PropertyName ?? "unknown"}\"]");
-						builder.AppendLine("----");
-					}
-					else
-					{
-						builder.AppendLine();
-					}
-
-					builder.AppendLine(codeBlock.Value);
-
-					// add call outs here to write out when closing the block
-					callouts.AddRange(codeBlock.CallOuts);
-					lastBlockWasCodeBlock = true;
-					language = codeBlock.Language;
-					propertyOrMethodName = codeBlock.PropertyName;
-				}
-				else if (block is CombinedBlock)
-				{
-					var mergedBlocks = MergeAdjacentCodeBlocks(((CombinedBlock)block).Blocks);
-					RenderBlocksToDocumentation(mergedBlocks, builder, ref lastBlockWasCodeBlock, ref callouts, ref language, ref propertyOrMethodName);
-				}
-			}
-		}
-
-		private List<IDocumentationBlock> MergeAdjacentCodeBlocks(IEnumerable<IDocumentationBlock> unmergedBlocks)
-		{
-			var blocks = new List<IDocumentationBlock>();
-			List<string> collapseCodeBlocks = null;
-			List<string> collapseCallouts = null;
-			int lineNumber = 0;
-			Language? language = null;
-			string propertyOrMethodName = null;
-
-			foreach (var b in unmergedBlocks)
-			{
-				//if current block is not a code block and we've been collapsing code blocks
-				//at this point close that buffer and add a new codeblock
-				if (!(b is CodeBlock) && collapseCodeBlocks != null)
-				{
-					var block = new CodeBlock(string.Join(Environment.NewLine, collapseCodeBlocks), lineNumber, language.Value, propertyOrMethodName);
-					block.CallOuts.AddRange(collapseCallouts);
-					blocks.Add(block);
-					collapseCodeBlocks = null;
-					collapseCallouts = null;
-				}
-
-				//if not a codeblock simply add it to the final list
-				if (!(b is CodeBlock))
-				{
-					blocks.Add(b);
-					continue;
-				}
-
-				//wait with adding codeblocks
-				if (collapseCodeBlocks == null) collapseCodeBlocks = new List<string>();
-				if (collapseCallouts == null) collapseCallouts = new List<string>();
-
-				var codeBlock = (CodeBlock)b;
-
-				if ((language != null && codeBlock.Language != language) ||
-					(propertyOrMethodName != null && codeBlock.PropertyName != propertyOrMethodName))
-				{
-					blocks.Add(codeBlock);
-					continue;
-				}
-
-				language = codeBlock.Language;
-				propertyOrMethodName = codeBlock.PropertyName;
-				collapseCodeBlocks.Add(codeBlock.Value);
-				collapseCallouts.AddRange(codeBlock.CallOuts);
-
-				lineNumber = codeBlock.LineNumber;
-			}
-			//make sure we flush our code buffer
-			if (collapseCodeBlocks != null)
-			{
-				var joinedCodeBlock = new CodeBlock(string.Join(Environment.NewLine, collapseCodeBlocks), lineNumber, language.Value, propertyOrMethodName);
-				joinedCodeBlock.CallOuts.AddRange(collapseCallouts);
-				blocks.Add(joinedCodeBlock);
-			}
-			return blocks;
-		}
-
-		public override void SaveToDocumentationFolder()
-		{
-			var code = File.ReadAllText(this.FileLocation.FullName);
-			var ast = CSharpSyntaxTree.ParseText(code);
-
-			var walker = new DocumentationFileWalker();
-			walker.Visit(ast.GetRoot());
-			var blocks = walker.Blocks.OrderBy(b => b.LineNumber).ToList();
-			if (blocks.Count <= 0) return;
-
-			var mergedBlocks = MergeAdjacentCodeBlocks(blocks);
-			var body = this.RenderBlocksToDocumentation(mergedBlocks);
-			var docFile = this.CreateDocumentationLocation();
-
-			CleanDocumentAndWriteToFile(body, docFile);
-		}
-
-		private void CleanDocumentAndWriteToFile(string body, FileInfo destination)
-		{
-			var document = Document.Parse(body);
-			var visitor = new GeneratedAsciidocVisitor(this.FileLocation, destination);
-			document = visitor.Convert(document);
-
-			// add attributes and write to destination
-			using (var file = new StreamWriter(destination.FullName))
-			{
-
-				document.Accept(new AsciiDocVisitor(file));
-			}
-		}
-	}
+            // Write out document to file
+            using (var writer = new StreamWriter(destination.FullName))
+            {
+                document.Accept(new AsciiDocVisitor(writer));
+            }
+        }
+    }
 }

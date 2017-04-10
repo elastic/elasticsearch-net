@@ -15,43 +15,64 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[post-data]]
-== Post data
+=== Post data
 
 The low level client allows you to post a `string` or `byte[]` array directly. On top of this,
 if you pass a collection of `string` or `object` they will be serialized
 using Elasticsearch's special bulk/multi format.
 
+[float]
 === Implicit Conversion
 
 Even though the argument for PostData on the low level client takes a `PostData<object>`,
 You can rely on implicit conversion to abstract the notion of PostData completely.
 You can implicitly convert from the following types
 
-* `string`
+* A `string`
 
-* `byte[]`
+* A collection of `string`
 
-* collection of `string`
+* An `object`
 
-* collection of `object`
+* A collection of `object`
 
-* `object`
+* A `byte[]` array
 
-[source,csharp]
-----
-var fromString = ImplicitlyConvertsFrom(@string);
-
-var fromByteArray = ImplicitlyConvertsFrom(bytes);
-var fromListOfString = ImplicitlyConvertsFrom(listOfStrings);
-var fromListOfObject = ImplicitlyConvertsFrom(listOfObjects);
-var fromObject = ImplicitlyConvertsFrom(@object);
-----
-
-PostData bytes will always be set if it originated from `byte[]` 
+Let's demonstrate each with some assertive examples
 
 [source,csharp]
 ----
-fromByteArray.WrittenBytes.Should().BeSameAs(bytes);
+PostData<object> fromString = @string;
+PostData<object> fromByteArray = bytes;
+PostData<object> fromListOfString = collectionOfStrings;
+PostData<object> fromListOfObject = collectionOfObjects;
+PostData<object> fromObject = @object;
+
+fromByteArray.WrittenBytes.Should().BeSameAs(bytes); <1>
+----
+<1> `WrittenBytes` will always be set if it originated from `byte[]`
+
+The `Type` property is representative of the original type from which post data is constructed 
+
+[source,csharp]
+----
+fromString.Type.Should().Be(PostType.LiteralString);
+fromByteArray.Type.Should().Be(PostType.ByteArray);
+fromListOfString.Type.Should().Be(PostType.EnumerableOfString);
+fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
+fromObject.Type.Should().Be(PostType.Serializable);
+----
+
+and passing a `PostData<object>` instance to a method that accepts `PostData<object>`
+as an argument does not wrap it again
+
+[source,csharp]
+----
+fromString = MethodThatAcceptsPostData(fromString);
+fromByteArray = MethodThatAcceptsPostData(fromByteArray);
+fromListOfString = MethodThatAcceptsPostData(fromListOfString);
+fromListOfObject = MethodThatAcceptsPostData(fromListOfObject);
+fromObject = MethodThatAcceptsPostData(fromObject);
 
 fromString.Type.Should().Be(PostType.LiteralString);
 fromByteArray.Type.Should().Be(PostType.ByteArray);
@@ -60,20 +81,65 @@ fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
 fromObject.Type.Should().Be(PostType.Serializable);
 ----
 
-and passing a `PostData<object>` object to a method taking `PostData<object>` should not wrap 
+Each of the implicitly converted types behaves _slightly_ differently.
+
+For `string`, the UTF-8 bytes are sent in the request and the `WrittenBytes` property is assigned
+the bytes
 
 [source,csharp]
 ----
-fromString = ImplicitlyConvertsFrom(fromString);
+await Post(() => @string, writes: Utf8Bytes(@string), writtenBytesIsSet: true, settings: settings);
+----
 
-fromByteArray = ImplicitlyConvertsFrom(fromByteArray);
-fromListOfString = ImplicitlyConvertsFrom(fromListOfString);
-fromListOfObject = ImplicitlyConvertsFrom(fromListOfObject);
-fromObject = ImplicitlyConvertsFrom(fromObject);
-fromString.Type.Should().Be(PostType.LiteralString);
-fromByteArray.Type.Should().Be(PostType.ByteArray);
-fromListOfString.Type.Should().Be(PostType.EnumerableOfString);
-fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
-fromObject.Type.Should().Be(PostType.Serializable);
+Similarly, for `byte[]`, the bytes are sent verbatim and the `WrittenBytes` property is assigned
+the bytes
+
+[source,csharp]
+----
+await Post(() => bytes, writes: bytes, writtenBytesIsSet: true, settings: settings);
+----
+
+When passing a collection of `string`, the client assumes that it's a collection of valid serialized json,
+so joins each with newline feeds, ensuring there is a trailing linefeed. As with `string` and `byte[]`,
+the `WrittenBytes` property is assigned the UTF-8 bytes of the collection of strings
+
+[source,csharp]
+----
+await Post(() => collectionOfStrings, writes: utf8BytesOfListOfStrings, writtenBytesIsSet: true, settings: settings);
+----
+
+When passing a collection of `object`, the client assumes that it's a collection of objects
+that needs to be serialized individually to json and joined with newline feeds. As with the collection of strings, the client ensures that
+there is a trailing linefeed.
+
+[source,csharp]
+----
+await Post(() => collectionOfObjects, writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: false, settings: settings);
+----
+
+In all other cases, Post data is serialized as is and `WrittenBytes` is not assigned
+
+[source,csharp]
+----
+await Post(() => @object, writes: utf8ObjectBytes, writtenBytesIsSet: false, settings: settings);
+----
+
+==== Forcing WrittenBytes to be set
+
+If you want to maintain a copy of the request that went out, you can set `DisableDirectStreaming`  on `ConnectionConfiguration`.
+In doing so, the serialized bytes are first written to a private `MemoryStream` so that the client can get hold of the serialized bytes
+
+[source,csharp]
+----
+settings = new ConnectionConfiguration().DisableDirectStreaming();
+
+await Post(() => collectionOfObjects, writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: true, settings: settings);
+----
+
+This behavior can also be observed when serializing a simple object using `DisableDirectStreaming` enabled
+
+[source,csharp]
+----
+await Post(() => @object, writes: utf8ObjectBytes, writtenBytesIsSet: true, settings: settings);
 ----
 

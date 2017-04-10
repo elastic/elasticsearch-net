@@ -1,0 +1,49 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.3
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/5.3
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/5.x/src/Tests/QueryDsl/Geo/Shape/MultiPoint/GeoShapeMultiPointQueryUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[geo-shape-multi-point-query-usage]]
+=== Geo Shape Multi Point Query Usage
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.GeoShapeMultiPoint(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p=>p.Location)
+    .Coordinates(this._coordinates)
+    .Relation(GeoShapeRelation.Intersects)
+    .IgnoreUnmapped()
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new GeoShapeMultiPointQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Field<Project>(p=>p.Location),
+    Shape = new MultiPointGeoShape(this._coordinates),
+    Relation = GeoShapeRelation.Intersects,
+    IgnoreUnmapped = false
+}
+----
+

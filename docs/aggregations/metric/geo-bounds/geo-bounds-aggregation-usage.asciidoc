@@ -15,9 +15,9 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[geo-bounds-aggregation-usage]]
-== Geo Bounds Aggregation Usage
+=== Geo Bounds Aggregation Usage
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -30,7 +30,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -58,7 +58,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -66,12 +66,14 @@ response.ShouldBeValid();
 var viewport = response.Aggs.GeoBounds("viewport");
 viewport.Should().NotBeNull();
 viewport.Bounds.Should().NotBeNull();
+
 var bottomRight = viewport.Bounds.BottomRight;
 bottomRight.Should().NotBeNull();
 bottomRight.Lat.Should().HaveValue();
 GeoLocation.IsValidLatitude(bottomRight.Lat.Value).Should().BeTrue();
 bottomRight.Lon.Should().HaveValue();
 GeoLocation.IsValidLongitude(bottomRight.Lon.Value).Should().BeTrue();
+
 var topLeft = viewport.Bounds.TopLeft;
 topLeft.Should().NotBeNull();
 topLeft.Lat.Should().HaveValue();

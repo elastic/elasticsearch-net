@@ -1,7 +1,7 @@
 [[elasticsearch-net-breaking-changes]]
 == Elasticsearch.Net Breaking Changes
 
-This lists all the *binary* breaking changes in Elasticsearch.Net.
+This lists all the *binary* breaking changes in Elasticsearch.Net from 2.x to 5.x.
 
 [float]
 [[enums]]
@@ -164,6 +164,7 @@ _Declaration changed (Breaking)_ +
 _Declaration changed (Breaking)_ +
 *public method Elasticsearch.Net.UpdateRequestParameters.Refresh*
 _Declaration changed (Breaking)_
+
 
 [float]
 [[waitforactiveshards-now-takes-a-string]]
@@ -341,7 +342,7 @@ _Declaration changed (Breaking)_
 [[removed-in-5.x-after-obsolete-period]]
 === Removed in 5.x after obsolete period
 
-These are types/properties/methods marked obsolete in NEST 2.x that have
+These are types/properties/methods marked obsolete in Elasticsearch.Net 2.x that have
 now been removed.
 
 *public method Elasticsearch.Net.AnalyzeRequestParameters.Analyzer*

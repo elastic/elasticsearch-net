@@ -29,11 +29,13 @@ var exceptions = new[]
 {
     typeof(DateMath)
 };
+
 var abstractClassesNotEndingInBase = typeof(IRequest).Assembly().GetTypes()
     .Where(t => t.IsClass() && t.IsAbstract() && !t.IsSealed() && !exceptions.Contains(t))
     .Where(t => !t.Name.Split('`')[0].EndsWith("Base"))
     .Select(t => t.Name.Split('`')[0])
     .ToList();
+
 abstractClassesNotEndingInBase.Should().BeEmpty();
 ----
 
@@ -60,7 +62,6 @@ Request class names should end with `Request`
 [source,csharp]
 ----
 var types = typeof(IRequest).Assembly().GetTypes();
-
 var requestsNotEndingInRequest = types
     .Where(t => typeof(IRequest).IsAssignableFrom(t) && !t.IsAbstract())
     .Where(t => !typeof(IDescriptor).IsAssignableFrom(t))
@@ -76,7 +77,6 @@ Response class names should end with `Response`
 [source,csharp]
 ----
 var types = typeof(IRequest).Assembly().GetTypes();
-
 var responsesNotEndingInResponse = types
     .Where(t => typeof(IResponse).IsAssignableFrom(t) && !t.IsAbstract())
     .Where(t => !t.Name.Split('`')[0].EndsWith("Response"))
@@ -132,11 +132,7 @@ var responses = types
     .Select(t => t.Name.Split('`')[0].Replace("Response", ""));
 
 requests.Except(responses).Should().BeEmpty();
-----
-<1> _Exceptions to the rule_
 
-[source,csharp]
-----
 var nestAssembly = typeof(IElasticClient).Assembly();
 
 var exceptions = new List<Type>
@@ -149,7 +145,6 @@ var exceptions = new List<Type>
 };
 
 var types = nestAssembly.GetTypes();
-
 var typesNotInNestNamespace = types
     .Where(t => !exceptions.Contains(t))
     .Where(t => t.Namespace != "Nest")
@@ -158,10 +153,7 @@ var typesNotInNestNamespace = types
     .ToList();
 
 typesNotInNestNamespace.Should().BeEmpty();
-----
 
-[source,csharp]
-----
 var elasticsearchNetAssembly = typeof(IElasticLowLevelClient).Assembly();
 
 var exceptions = new List<Type>
@@ -181,7 +173,6 @@ var exceptions = new List<Type>
 };
 
 var types = elasticsearchNetAssembly.GetTypes();
-
 var typesNotIElasticsearchNetNamespace = types
     .Where(t => !exceptions.Contains(t))
     .Where(t => t.Namespace != "Elasticsearch.Net")
@@ -190,23 +181,73 @@ var typesNotIElasticsearchNetNamespace = types
     .ToList();
 
 typesNotIElasticsearchNetNamespace.Should().BeEmpty();
-----
 
-[source,csharp]
-----
 bool nextMustBeStartChar = true;
+if (value.Length == 0)
+    return false;
+for (int index = 0; index < value.Length; ++index)
+{
+    var character = value[index];
+#if DOTNETCORE
+    var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(character);
+#else
+    var unicodeCategory = char.GetUnicodeCategory(character);
+#endif
+    switch (unicodeCategory)
+    {
+        case UnicodeCategory.UppercaseLetter:
+        case UnicodeCategory.LowercaseLetter:
+        case UnicodeCategory.TitlecaseLetter:
+        case UnicodeCategory.ModifierLetter:
+        case UnicodeCategory.OtherLetter:
+        case UnicodeCategory.LetterNumber:
+            nextMustBeStartChar = false;
+            break;
+        case UnicodeCategory.NonSpacingMark:
+        case UnicodeCategory.SpacingCombiningMark:
+        case UnicodeCategory.DecimalDigitNumber:
+        case UnicodeCategory.ConnectorPunctuation:
+            if (nextMustBeStartChar && (int)character != 95)
+                return false;
+            nextMustBeStartChar = false;
+            break;
+        default:
+            if (!isTypeName || !IsSpecialTypeChar(character, ref nextMustBeStartChar))
+                return false;
+            break;
+    }
+}
+return true;
 
-var character = value[index];
-
-var unicodeCategory = char.GetUnicodeCategory(character);
-
-nextMustBeStartChar = false;
-
-nextMustBeStartChar = false;
-----
-
-[source,csharp]
-----
+if ((uint)ch <= 62U)
+{
+    switch (ch)
+    {
+        case '$':
+        case '&':
+        case '*':
+        case '+':
+        case ',':
+        case '-':
+        case '.':
+        case ':':
+        case '<':
+        case '>':
+            break;
+        default:
+            goto label_6;
+    }
+}
+else if ((int)ch != 91 && (int)ch != 93)
+{
+    if ((int)ch == 96)
+        return true;
+    goto label_6;
+}
 nextMustBeStartChar = true;
+return true;
+label_6:
+return false;
 ----
+<1> _Exceptions to the rule_
 

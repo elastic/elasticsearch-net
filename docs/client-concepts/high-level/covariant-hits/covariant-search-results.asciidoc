@@ -15,7 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[covariant-search-results]]
-== Covariant Search Results
+=== Covariant search results
 
 NEST directly supports returning covariant result sets.
 Meaning a result can be typed to an interface or base class
@@ -54,7 +54,7 @@ public class C : ISearchResult
 }
 ----
 
-=== Using Types
+==== Using types
 
 The most straightforward way to search over multiple types is to
 type the response to the parent interface or base class
@@ -72,13 +72,12 @@ NEST will translate this to a search over `/index/a,b,c/_search`;
 hits that have `"_type" : "a"` will be serialized to `A` and so forth
 
 Here we assume our response is valid and that we received the 100 documents
-we are expecting. Remember `result.Documents` is an `IEnumerable<ISearchResult>`
+we are expecting. Remember `result.Documents` is an `IReadOnlyCollection<ISearchResult>`
 
 [source,csharp]
 ----
 result.ShouldBeValid();
-
-result.Documents.Count().Should().Be(100);
+result.Documents.Count.Should().Be(100);
 ----
 
 To prove the returned result set is covariant we filter the documents based on their
@@ -87,9 +86,9 @@ actual type and assert the returned subsets are the expected sizes
 [source,csharp]
 ----
 var aDocuments = result.Documents.OfType<A>();
-
 var bDocuments = result.Documents.OfType<B>();
 var cDocuments = result.Documents.OfType<C>();
+
 aDocuments.Count().Should().Be(25);
 bDocuments.Count().Should().Be(25);
 cDocuments.Count().Should().Be(50);
@@ -100,12 +99,11 @@ and assume that properties that only exist on the subclass itself are properly f
 [source,csharp]
 ----
 aDocuments.Should().OnlyContain(a => a.PropertyOnA > 0);
-
 bDocuments.Should().OnlyContain(a => a.PropertyOnB > 0);
 cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);
 ----
 
-=== Using ConcreteTypeSelector
+==== Using ConcreteTypeSelector
 
 A more low level approach is to inspect the hit yourself and determine the CLR type to deserialize to
 
@@ -124,13 +122,12 @@ here for each hit we'll call the delegate passed to `ConcreteTypeSelector` where
 * a typed `h` which represents the encapsulating hit of the source i.e. `Hit<dynamic>`
 
 Here we assume our response is valid and that we received the 100 documents
-we are expecting. Remember `result.Documents` is an `IEnumerable<ISearchResult>`
+we are expecting. Remember `result.Documents` is an `IReadOnlyCollection<ISearchResult>`
 
 [source,csharp]
 ----
 result.ShouldBeValid();
-
-result.Documents.Count().Should().Be(100);
+result.Documents.Count.Should().Be(100);
 ----
 
 To prove the returned result set is covariant we filter the documents based on their
@@ -139,15 +136,11 @@ actual type and assert the returned subsets are the expected sizes
 [source,csharp]
 ----
 var aDocuments = result.Documents.OfType<A>();
-
 var bDocuments = result.Documents.OfType<B>();
-
 var cDocuments = result.Documents.OfType<C>();
 
 aDocuments.Count().Should().Be(25);
-
 bDocuments.Count().Should().Be(25);
-
 cDocuments.Count().Should().Be(50);
 ----
 
@@ -156,13 +149,11 @@ and assume that properties that only exist on the subclass itself are properly f
 [source,csharp]
 ----
 aDocuments.Should().OnlyContain(a => a.PropertyOnA > 0);
-
 bDocuments.Should().OnlyContain(a => a.PropertyOnB > 0);
-
 cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);
 ----
 
-=== Using CovariantTypes()
+==== Using CovariantTypes
 
 The Scroll API is a continuation of the previous Search example so Types() are lost.
 You can hint at the types using `.CovariantTypes()`
@@ -178,13 +169,12 @@ NEST will translate this to a search over `/index/a,b,c/_search`;
 hits that have `"_type" : "a"` will be serialized to `A` and so forth
 
 Here we assume our response is valid and that we received the 100 documents
-we are expecting. Remember `result.Documents` is an `IEnumerable<ISearchResult>`
+we are expecting. Remember `result.Documents` is an `IReadOnlyCollection<ISearchResult>`
 
 [source,csharp]
 ----
 result.ShouldBeValid();
-
-result.Documents.Count().Should().Be(100);
+result.Documents.Count.Should().Be(100);
 ----
 
 To prove the returned result set is covariant we filter the documents based on their
@@ -193,15 +183,11 @@ actual type and assert the returned subsets are the expected sizes
 [source,csharp]
 ----
 var aDocuments = result.Documents.OfType<A>();
-
 var bDocuments = result.Documents.OfType<B>();
-
 var cDocuments = result.Documents.OfType<C>();
 
 aDocuments.Count().Should().Be(25);
-
 bDocuments.Count().Should().Be(25);
-
 cDocuments.Count().Should().Be(50);
 ----
 
@@ -210,9 +196,7 @@ and assume that properties that only exist on the subclass itself are properly f
 [source,csharp]
 ----
 aDocuments.Should().OnlyContain(a => a.PropertyOnA > 0);
-
 bDocuments.Should().OnlyContain(a => a.PropertyOnB > 0);
-
 cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);
 ----
 
@@ -232,13 +216,12 @@ As before, within the delegate passed to `.ConcreteTypeSelector`
 * `h` is the encapsulating typed hit
 
 Here we assume our response is valid and that we received the 100 documents
-we are expecting. Remember `result.Documents` is an `IEnumerable<ISearchResult>`
+we are expecting. Remember `result.Documents` is an `IReadOnlyCollection<ISearchResult>`
 
 [source,csharp]
 ----
 result.ShouldBeValid();
-
-result.Documents.Count().Should().Be(100);
+result.Documents.Count.Should().Be(100);
 ----
 
 To prove the returned result set is covariant we filter the documents based on their
@@ -247,15 +230,11 @@ actual type and assert the returned subsets are the expected sizes
 [source,csharp]
 ----
 var aDocuments = result.Documents.OfType<A>();
-
 var bDocuments = result.Documents.OfType<B>();
-
 var cDocuments = result.Documents.OfType<C>();
 
 aDocuments.Count().Should().Be(25);
-
 bDocuments.Count().Should().Be(25);
-
 cDocuments.Count().Should().Be(50);
 ----
 
@@ -264,9 +243,7 @@ and assume that properties that only exist on the subclass itself are properly f
 [source,csharp]
 ----
 aDocuments.Should().OnlyContain(a => a.PropertyOnA > 0);
-
 bDocuments.Should().OnlyContain(a => a.PropertyOnB > 0);
-
 cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);
 ----
 

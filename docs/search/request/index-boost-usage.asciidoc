@@ -17,7 +17,8 @@ please modify the original csharp file found at the link and submit the PR with 
 [[index-boost-usage]]
 == Index Boost Usage
 
-=== Fluent DSL Example
+[float]
+=== Fluent DSL example
 
 [source,csharp]
 ----
@@ -28,7 +29,8 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+[float]
+=== Object Initializer syntax example
 
 [source,csharp]
 ----

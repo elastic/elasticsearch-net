@@ -124,9 +124,7 @@ namespace Tests.Aggregations.Metric.TopHits
 					{
 						Sort = new List<ISort>
 						{
-							{
-								new SortField { Field = Field<Project>(p => p.StartedOn), Order = SortOrder.Descending }
-							}
+							new SortField { Field = Field<Project>(p => p.StartedOn), Order = SortOrder.Descending }
 						},
 						Source = new SourceFilter
 						{
@@ -171,7 +169,6 @@ namespace Tests.Aggregations.Metric.TopHits
 				hits.Should().NotBeNullOrEmpty();
 				hits.All(h => h.Explanation != null).Should().BeTrue();
 				hits.All(h => h.Version.HasValue).Should().BeTrue();
-				//hits.All(h => h.Highlights.Count() > 0).Should().BeTrue();
 				hits.All(h => h.Fields.ValuesOf<StateOfBeing>("state").Any()).Should().BeTrue();
 				hits.All(h => h.Fields.ValuesOf<int>("numberOfCommits").Any()).Should().BeTrue();
 				hits.All(h => h.Fields.ValuesOf<int>("commit_factor").Any()).Should().BeTrue();
