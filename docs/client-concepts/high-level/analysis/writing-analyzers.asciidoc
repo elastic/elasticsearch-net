@@ -34,9 +34,6 @@ An analyzer is built of three components:
 
 image::analysis-chain.png[analysis chain]
 
-Check out the Elasticsearch documentation on the {ref_current}/analyzer-anatomy.html[Anatomy of an analyzer]
-to understand more.
-
 ==== Specifying an analyzer on a field mapping
 
 An analyzer can be specified on a `text` datatype field mapping when creating a new field on a type, usually

@@ -76,7 +76,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
                 );
 
             /**
-             * Here, the Name property of the `Company` type has been mapped as a {ref_current}/text.html[text datatype] and
+             * Here, the Name property of the `Company` type has been mapped as a {ref_current}/string.html[string datatype] and
              * the `Employees` property mapped as an {ref_current}/object.html[object datatype]. Within this object mapping,
              * only the `FirstName`, `LastName` and `Salary` properties of the `Employee` type have been mapped.
              *

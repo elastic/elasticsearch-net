@@ -230,8 +230,8 @@ namespace Tests.Search
          * trip many new users up when using a term level query against a field that is analyzed at index
          * time.
          *
-         * When a field is _only_ to be used for exact matching, you should consider indexing it as a
-         * {ref_current}/keyword.html[keyword] datatype. If a field is used for both exact matches and
+         * When a field is _only_ to be used for exact matching, you should consider indexing it as a `not_analyzed`
+         * {ref_current}/string.html[string] datatype. If a field is used for both exact matches and
          * full text search, you should consider indexing it with <<multi-fields, multi fields>>.
          * --
          *
@@ -291,7 +291,7 @@ namespace Tests.Search
          * index.
          *
          * You have full control over the analysis that is applied at both search time and index time, by applying
-         * <<writing-analyzers, analyzers>> to {ref_current}/text.html[text] datatype fields through
+         * <<writing-analyzers, analyzers>> to {ref_current}/string.html[string] datatype fields through
          * <<mapping, mapping>>.
          * --
          *

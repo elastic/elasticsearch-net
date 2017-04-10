@@ -25,8 +25,6 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
      *
 	 * image::analysis-chain.png[analysis chain]
      *
-     * Check out the Elasticsearch documentation on the {ref_current}/analyzer-anatomy.html[Anatomy of an analyzer]
-     * to understand more.
      */
     public class WritingAnalyzers
     {

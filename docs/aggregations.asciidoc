@@ -60,7 +60,7 @@ The values are typically extracted from the fields of the document (using the fi
 
 * <<value-count-aggregation-usage,Value Count Aggregation Usage>>
 
-See the Elasticsearch documentation on {ref_current}/search-aggregations-metric.html[Metric aggregations] for more details.
+See the Elasticsearch documentation on {ref_current}/search-aggregations-metrics.html[Metric aggregations] for more details.
 
 :includes-from-dirs: aggregations/metric
 

@@ -16,11 +16,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
     *
     * It is often useful to index the same field in Elasticsearch in different ways, to
     * serve different purposes, for example, mapping a POCO `string` property as a
-    * `text` datatype for full text search as well as mapping as a `keyword` datatype for
+    * `string` datatype for full text search as well as mapping as a `not_analyzed` `string` datatype for
     * structured search, sorting and aggregations. Another example is mapping a POCO `string`
     * property to use different analyzers, to serve different full text search needs.
-    *
-    *
     */
     public class MultiFields
     {

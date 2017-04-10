@@ -781,9 +781,7 @@
     <None Include="intro.asciidoc" />
     <None Include="low-level.asciidoc" />
     <None Include="paket.references" />
-    <None Include="query-dsl-usage.asciidoc" />
     <None Include="query-dsl.asciidoc" />
-    <None Include="search-usage.asciidoc" />
     <None Include="search.asciidoc" />
     <None Include="tests.yaml" />
     <None Include="troubleshooting.asciidoc" />

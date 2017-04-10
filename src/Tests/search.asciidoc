@@ -11,7 +11,3 @@ See the documentation on <<writing-queries, Writing queries>> for how to use the
 --
 
 :includes-from-dirs: search/request
-
-
-
-

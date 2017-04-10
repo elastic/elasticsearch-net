@@ -202,8 +202,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		 * - Salary is mapped as an `integer`
 		 * - Employees is mapped as an `object`
 		 *
-		 * and the remaining string properties as multi field `text` datatypes, each with a `keyword` datatype
-         * sub field.
+		 * and the remaining string properties as `string` datatypes.
          *
          * NEST has inferred mapping support for the following .NET types
          *
