@@ -104,7 +104,7 @@ namespace Nest
 
 			var keywordType = type as IKeywordProperty;
 			if (keywordType != null)
-				Visit(textType, propertyInfo, attribute);
+				Visit(keywordType, propertyInfo, attribute);
 
 			var attachmentType = type as IAttachmentProperty;
 			if (attachmentType != null)
