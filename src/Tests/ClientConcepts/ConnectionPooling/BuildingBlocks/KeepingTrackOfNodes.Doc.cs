@@ -8,11 +8,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 	public class KeepingTrackOfNodes
 	{
 
-		/**== Keeping track of nodes
+		/**=== Keeping track of nodes
 		 */
 		[U] public void Creating()
 		{
-			/** === Creating a Node
+			/** ==== Creating a Node
 			* A `Node` can be instantiated by passing it a `Uri`
 			*/
 			var node = new Node(new Uri("http://localhost:9200"));
@@ -32,7 +32,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		}
 		[U] public void BuildingPaths()
 		{
-			/** === Building a Node path
+			/** ==== Building a Node path
 			* passing a node with a path should be preserved.
 			* Sometimes an Elasticsearch node lives behind a proxy
 			*/
@@ -50,7 +50,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			combinedPath.AbsolutePath.Should().Be("/elasticsearch/index/type/_search");
 		}
 
-		/** === Marking Nodes */
+		/** ==== Marking Nodes */
 		[U] public void MarkNodes()
 		{
 			var node = new Node(new Uri("http://localhost:9200"));
@@ -77,7 +77,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 
 		[U] public void Equality()
 		{
-			/** === Node Equality
+			/** ==== Node Equality
 			* Nodes are considered equal if they have the same endpoint, no matter what other metadata is associated */
 			var node = new Node(new Uri("http://localhost:9200")) { MasterEligible = false };
 			var nodeAsMaster = new Node(new Uri("http://localhost:9200")) { MasterEligible = true };

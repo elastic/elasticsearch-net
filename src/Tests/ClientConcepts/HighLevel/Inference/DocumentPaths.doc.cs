@@ -7,14 +7,16 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 {
 	public class DocumentPaths
 	{
-		/**== Document Paths
+		/**[[document-paths]]
+		 * === Document paths
 		 *
-		 * Many API's in Elasticsearch describe a path to a document. In NEST, besides generating a constructor that takes
-		 * and Index, Type and Id separately, we also generate a constructor taking a `DocumentPath` that allows you to describe the path
-		 * to your document more succinctly
+		 * Many APIs in Elasticsearch describe a path to a document. In NEST, besides generating a constructor that takes
+		 * and Index, Type and Id separately, we also generate a constructor that allows you to describe the path
+		 * to your document more succinctly using a an instance of the `DocumentPath<T>` type.
 		 */
 
-		/** === Creating new instances */
+		/**
+		 * ==== Creating new instances */
 		[U] public void FromId()
 		{
 			/** here we create a new document path based on Project with the id 1 */
@@ -37,7 +39,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect(1).WhenSerializing(path.Id);
 		}
 
-		/** === Creating from a document type instance
+		/**
+		 * ==== Creating from a document type instance
 		 * if you have an instance of your document you can use it as well generate document paths
 		 */
 		[U] public void FromObject()
@@ -66,7 +69,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			DocumentPath<Project> p = project;
 		}
 
-		/** === An example with requests */
+		/**
+		 * ==== An example with requests */
 		[U] public void UsingWithRequests()
 		{
 			/* Given the following CLR type that describes a document */
@@ -77,12 +81,16 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			request = new IndexRequest<Project>(project) { };
 
 			/** when comparing with the full blown constructor and passing document manually,
-			* `DocumentPath<T>`'s benefits become apparent.
+			* `DocumentPath<T>`'s benefits become apparent. Compare the following request that doesn't
+			* use `DocumentPath<T>` with the former examples
 			*/
 			request = new IndexRequest<Project>(IndexName.From<Project>(), TypeName.From<Project>(), 2)
 			{
 				Document = project
 			};
+			/**
+			 * Much more verbose, wouldn't you agree?
+			 */
 		}
 	}
 }

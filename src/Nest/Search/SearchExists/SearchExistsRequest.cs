@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchExistsRequest>))]
-	public partial interface ISearchExistsRequest 
+	public partial interface ISearchExistsRequest
 	{
 		[JsonProperty(PropertyName = "query")]
 		QueryContainer Query { get; set; }
@@ -16,7 +16,7 @@ namespace Nest
 
 	public partial interface ISearchExistsRequest<T> : ISearchExistsRequest { }
 
-	public partial class SearchExistsRequest 
+	public partial class SearchExistsRequest
 	{
 		protected override HttpMethod HttpMethod => this.Query != null ? HttpMethod.POST : HttpMethod.GET;
 		public QueryContainer Query { get; set; }
@@ -24,7 +24,7 @@ namespace Nest
 		public string QueryString { get; set; }
 	}
 
-	public partial class SearchExistsRequest<T> 
+	public partial class SearchExistsRequest<T>
 	{
 		protected override HttpMethod HttpMethod => this.Query != null ? HttpMethod.POST : HttpMethod.GET;
 		public QueryContainer Query { get; set; }
@@ -42,9 +42,9 @@ namespace Nest
 		string ISearchExistsRequest.QueryString { get; set; }
 
 		internal bool _Strict { get; set; }
-		
+
 		/// <summary>
-		/// When strict is set, conditionless queries are treated as an exception. 
+		/// When strict is set, conditionless queries are treated as an exception.
 		/// </summary>
 		public SearchExistsDescriptor<T> Strict(bool strict = true)
 		{
@@ -73,7 +73,7 @@ namespace Nest
 				return this;
 
 			if (this._Strict && query.IsConditionless)
-				throw new ArgumentException("Query resulted in a conditionless query:\n{0}".F(JsonConvert.SerializeObject(query, Formatting.Indented)));
+				throw new ArgumentException($"Query resulted in a conditionless query:\n{JsonConvert.SerializeObject(query, Formatting.Indented)}");
 
 			else if (query.IsConditionless)
 				return this;

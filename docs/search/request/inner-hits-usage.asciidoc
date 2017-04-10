@@ -1,4 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.4
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/2.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -30,11 +32,11 @@ Inner hits can be used by defining an `inner_hits` definition on a `nested`, `ha
 
 See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.html[Inner hits] for more detail.
 
-[[global-inner-hits]]
 [float]
 == Global Inner Hits
 
-=== Fluent DSL Example
+[float]
+=== Fluent DSL example
 
 [source,csharp]
 ----
@@ -51,7 +53,8 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+[float]
+=== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -104,11 +107,8 @@ new SearchRequest<Duke>(Index, typeof(Duke))
 }
 ----
 
-[[query-inner-hits]]
 [float]
-== Query Inner Hits
-
-=== Fluent DSL Example
+=== Query Inner Hits
 
 [source,csharp]
 ----
@@ -126,7 +126,8 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+[float]
+=== Object Initializer syntax example
 
 [source,csharp]
 ----

@@ -15,7 +15,7 @@ namespace Tests.Framework
 	public abstract class SerializationTestBase
 	{
 		protected virtual object ExpectJson { get; }
-		protected virtual bool SupportsDeserialization => true;
+		protected virtual bool SupportsDeserialization { get; set; } = true;
 
 		protected DateTime FixedDate => new DateTime(2015, 06, 06, 12, 01, 02, 123);
 		protected string _expectedJsonString;
@@ -44,7 +44,6 @@ namespace Tests.Framework
 			Serializer.Deserialize<TObject>(new MemoryStream(Encoding.UTF8.GetBytes(json)));
 
 		protected string Serialize<TObject>(TObject o)
-
 		{
 			var bytes = Serializer.SerializeToBytes(o);
 			return Encoding.UTF8.GetString(bytes);
@@ -79,7 +78,7 @@ namespace Tests.Framework
 
 		private bool ActualMatches(object o, JToken expectedJson, string expectedString, int iteration, out string serialized)
 		{
-			serialized = this.Serialize(o);
+			serialized = o is string? (string)o : this.Serialize(o);
 			return TokenMatches(expectedJson, expectedString, iteration, serialized);
 		}
 

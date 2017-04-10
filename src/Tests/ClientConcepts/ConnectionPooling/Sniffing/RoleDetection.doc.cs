@@ -12,15 +12,17 @@ using Xunit;
 using static Tests.Framework.TimesHelper;
 using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
+using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
 	public class RoleDetection
 	{
-		/**== Sniffing role detection
+		/**=== Sniffing role detection
 		*
-		* When we sniff the cluster state, we detect the role of the node, whether it's master eligible and holds data.
-		* We use this information when selecting a node to perform an API call on.
+		* When we sniff the cluster state, we detect the role of each node, for example,
+        * whether it's master eligible, a node that holds data, etc.
+		* We can then use this information when selecting a node to perform an API call on.
 		*/
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task DetectsMasterNodes()
@@ -48,6 +50,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 					pool.Nodes.Where(n => n.MasterEligible).Should().HaveCount(3);
 				}
 			};
+
 			await audit.TraceStartup();
 		}
 
@@ -113,13 +116,17 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			await audit.TraceStartup();
 		}
 
+		// hide
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task DetectsFqdn()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.Sniff(s => s.SucceedAlways()
-					.Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202).SniffShouldReturnFqdn())
+					.Succeeds(Always, Framework.Cluster
+						.Nodes(8)
+						.StoresNoData(9200, 9201, 9202)
+						.SniffShouldReturnFqdn())
 				)
 				.SniffingConnectionPool()
 				.AllDefaults()
@@ -141,10 +148,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 					pool.Nodes.Should().OnlyContain(n => n.Uri.Host.StartsWith("fqdn") && !n.Uri.Host.Contains("/"));
 				}
 			};
+
 			await audit.TraceStartup();
 		}
 	}
 
+	// hide
 	public class SniffRoleDetectionCluster : ClusterBase
 	{
 		protected override string[] AdditionalServerSettings => new []
@@ -154,6 +163,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		};
 	}
 
+	//hide
 	public class RealWorldRoleDetection : IClusterFixture<SniffRoleDetectionCluster>
 	{
 		private readonly SniffRoleDetectionCluster _cluster;

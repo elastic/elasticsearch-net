@@ -68,9 +68,9 @@ namespace Tests.Aggregations.Bucket.Range
 			var commitRanges = response.Aggs.Range("commit_ranges");
 			commitRanges.Should().NotBeNull();
 			commitRanges.Buckets.Count.Should().Be(3);
-			commitRanges.Buckets.Where(r => r.Key == "*-100.0").FirstOrDefault().Should().NotBeNull();
-			commitRanges.Buckets.Where(r => r.Key == "100.0-500.0").FirstOrDefault().Should().NotBeNull();
-			commitRanges.Buckets.Where(r => r.Key == "500.0-*").FirstOrDefault().Should().NotBeNull();
+			commitRanges.Buckets.FirstOrDefault(r => r.Key == "*-100.0").Should().NotBeNull();
+			commitRanges.Buckets.FirstOrDefault(r => r.Key == "100.0-500.0").Should().NotBeNull();
+			commitRanges.Buckets.FirstOrDefault(r => r.Key == "500.0-*").Should().NotBeNull();
 		}
 	}
 }

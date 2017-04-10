@@ -20,7 +20,7 @@ namespace Tests.Aggregations.Bucket.Filters
 	*/
 
 	/**[float]
-	* == Named filters
+	* === Named filters
 	*/
 	public class FiltersAggregationUsageTests : AggregationUsageTestBase
 	{
@@ -87,7 +87,7 @@ namespace Tests.Aggregations.Bucket.Filters
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			/** === Handling Responses
+			/** ==== Handling Responses
 			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily
 			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 			*/
@@ -115,7 +115,7 @@ namespace Tests.Aggregations.Bucket.Filters
 	}
 
 	/**[float]
-	*== Anonymous filters
+	*=== Anonymous filters
 	*/
 	public class AnonymousUsage : AggregationUsageTestBase
 	{
@@ -181,7 +181,7 @@ namespace Tests.Aggregations.Bucket.Filters
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			/** === Handling Responses
+			/** ==== Handling Responses
 			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily
 			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 			*/
@@ -202,7 +202,7 @@ namespace Tests.Aggregations.Bucket.Filters
 	}
 
 	/**[float]
-	* == Empty Filters
+	* === Empty Filters
 	*/
 	public class EmptyFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
@@ -246,7 +246,7 @@ namespace Tests.Aggregations.Bucket.Filters
 	}
 
 	/**[float]
-	* == Conditionless Filters */
+	* === Conditionless Filters */
 	public class ConditionlessFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
 		public ConditionlessFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

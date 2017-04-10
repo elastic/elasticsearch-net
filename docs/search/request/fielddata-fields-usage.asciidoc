@@ -1,4 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.4
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/2.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -19,7 +21,8 @@ Allows to return the field data representation of a field for each hit.
 
 See the Elasticsearch documentation on {ref_current}/search-request-fielddata-fields.html[Field Data Fields] for more detail.
 
-=== Fluent DSL Example
+[float]
+=== Fluent DSL example
 
 [source,csharp]
 ----
@@ -31,7 +34,8 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+[float]
+=== Object Initializer syntax example
 
 [source,csharp]
 ----

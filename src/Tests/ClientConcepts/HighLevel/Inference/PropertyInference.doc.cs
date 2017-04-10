@@ -1,18 +1,17 @@
 using System;
 using System.Linq.Expressions;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
-using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Tests.Framework.RoundTripper;
 using Xunit;
-using FluentAssertions;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.ClientConcepts.HighLevel.Inference
 {
 	/**[[property-inference]]
-	* == Property Name Inference
+	* === Property name inference
 	*/
 	public class PropertyNames : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{
@@ -23,14 +22,15 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			_client = cluster.Client;
 		}
 
-		/**=== Appending suffixes to a Lambda expression body
-		 * Suffixes can be appended to the body of a lambda expression, useful in cases where
-		 * you have a POCO property mapped as a multi field
-		 * and want to use strongly typed access based on the property, yet append a suffix to the
-		 * generated field name in order to access a particular multi field.
+		/**
+		 * ==== Appending suffixes to a lambda expression body
+		 * Suffixes can be appended to the body of a lambda expression, which is useful in cases where
+		 * you have a POCO property mapped as a <<multi-fields, multi-field>>
+		 * and want to use strongly typed access with a lambda expression, yet append a suffix to the
+		 * generated field name, in order to access a particular sub field of the multi-field.
 		 *
 		 * The `.Suffix()` extension method can be used for this purpose and when serializing expressions suffixed
-		 * in this way, the serialized field name resolves to the last token
+		 * in this way, the serialized property name resolves to the last token
 		 */
 		[U] public void PropertyNamesAreResolvedToLastTokenUsingSuffix()
 		{
@@ -38,7 +38,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect("raw").WhenSerializing<PropertyName>(expression);
 		}
 
-		/**=== Appending suffixes to a Lambda expression
+		/**
+		 * ==== Appending suffixes to a Lambda expression
 		 * Alternatively, suffixes can be applied to a lambda expression directly using
 		 * the `.ApplySuffix()` extension method. Again, the serialized field name
 		 * resolves to the last token

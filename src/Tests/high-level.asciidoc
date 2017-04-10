@@ -1,7 +1,7 @@
 ﻿:output-dir: client-concepts/high-level
 
 [[nest]]
-= Client Concepts - NEST
+= NEST - High level client
 
 [partintro]
 --
@@ -28,33 +28,151 @@ There are a number of conventions that NEST uses for inference of
 - <<document-paths, Building a URI path to a document>>
 - <<features-inference, API features>>
 
-In addition to features such as
+As well as a number of types for working with
 
-- <<auto-map, Auto Mapping C# types>>
+- <<time-units, Time Units>>
+- <<distance-units, Distance Units>>
+- <<date-math-expressions, Date Math>>
+
+And features such as
+
+- <<mapping, Mapping CLR POCO types to JSON documents>>
 - <<covariant-search-results, Covariant Search Results>>
 
 --
 
-include::{output-dir}/inference/index-name-inference.asciidoc[]
+include::{output-dir}/getting-started.asciidoc[]
 
-include::{output-dir}/inference/indices-paths.asciidoc[]
+[[connecting]]
+== Connecting
 
-include::{output-dir}/inference/field-inference.asciidoc[]
+NEST uses sensible defaults for connecting to and interacting with an Elasticsearch cluster but provides numerous
+configuration options and components to change this behaviour
 
-include::{output-dir}/inference/property-inference.asciidoc[]
+- <<configuration-options, Configuration options>>
+- <<connection-pooling, Connection pools>>
+- <<modifying-default-connection, Modifying the default connection>>
+- <<working-with-certificates, Working with certificates>>
 
-include::{output-dir}/inference/ids-inference.asciidoc[]
+include::client-concepts/connection/configuration-options.asciidoc[]
+include::client-concepts/connection-pooling/building-blocks/connection-pooling.asciidoc[]
+include::client-concepts/connection/modifying-default-connection.asciidoc[]
+include::client-concepts/certificates/working-with-certificates.asciidoc[]
 
-include::{output-dir}/inference/document-paths.asciidoc[]
+[[serialization]]
+== Serialization
 
-include::{output-dir}/inference/features-inference.asciidoc[]
+NEST's default JSON serialization understands how to correctly serialize all request and response types, as well as
+correctly handle your POCOs. Sometimes however, you might want to change this behaviour, either by providing your
+own serializer, or by modifying how NEST's serializer behaves.
+
+:anchor-list: client-concepts/high-level/serialization
+
+:includes-from-dirs: client-concepts/high-level/serialization
+
+[[mapping]]
+== Mapping
+
+To interact with Elasticsearch using NEST, we need to be able to contol how POCO types in our solution
+map to JSON documents and fields stored within the inverted index in Elasticsearch. This section
+describes all of the different functionality available within NEST that makes working with POCOs and Elasticsearch
+a breeze. 
+
+Explicitly mapping documents in Elasticsearch is crucial in providing bespoke search solutions for a given problem 
+domain. Whilst Elasticsearch is able to _infer_ the mapping for a given type in an index based upon the _first_ document
+of that type that it encounters, the inferred mapping is sometimes not sufficient to building a great search experience.
+
+To explicitly control mapping, an explicit type mapping can be specified when creating an index, or added to an existing
+index _before_ indexing the first document of that type (because indexing a document without an explicit mapping
+will cause Elasticsearch to infer the mapping).
+
+There are several ways to control mapping in NEST
+
+- <<auto-map, Auto mapping (inferred from POCO property types)>>
+- <<attribute-mapping, Attribute mapping>>
+- <<fluent-mapping, Fluent mapping>>
+- <<visitor-pattern-mapping, through the Visitor Pattern>>
+
+and these can be combined to form an overall mapping approach. In addition, there are also ways to control
+
+- <<ignoring-properties, Ignoring properties>>
+- <<multi-fields, Multi fields>>
 
 include::{output-dir}/mapping/auto-map.asciidoc[]
+include::{output-dir}/mapping/attribute-mapping.asciidoc[]
+include::{output-dir}/mapping/fluent-mapping.asciidoc[]
+include::{output-dir}/mapping/visitor-pattern-mapping.asciidoc[]
+include::{output-dir}/mapping/ignoring-properties.asciidoc[]
+include::{output-dir}/mapping/multi-fields.asciidoc[]
 
+[[analysis]]
+== Analysis
+
+_Analysis_ is the process of converting text, like the body of any email, into _tokens_ or _terms_ which are added to 
+the inverted index for searching. Analysis is performed by an _analyzer_ which can be either a built-in 
+analyzer or a _custom_ analyzer defined per index.
+
+- <<writing-analyzers, Writing analyzers>>
+- <<testing-analyzers, Testing analyzers>>
+
+include::{output-dir}/analysis/writing-analyzers.asciidoc[]
+include::{output-dir}/analysis/testing-analyzers.asciidoc[]
+
+[[search]]
+== Search
+
+The {ref_current}/search-search.html[Search API] allows you to execute a search query and get 
+back search hits that match the query. The search capabilities of Elasticsearch is likely one
+of the reasons you're using it, and NEST exposes all of the different types of search available, along
+with some smarts to make working with Elasticsearch from a strongly typed language easier.
+
+- <<writing-queries, Writing queries>>
+- <<bool-queries, Writing bool queries>>
+- <<returned-fields, Returning only certain fields>>
+- <<covariant-search-results, Covariant search results>>
+
+include::search/writing-queries.asciidoc[]
+include::query-dsl/bool-dsl/bool-dsl.asciidoc[]
+include::search/returned-fields.asciidoc[]
 include::{output-dir}/covariant-hits/covariant-search-results.asciidoc[]
 
+[[aggregations]]
+== Aggregations
 
+The aggregations framework helps provide aggregated data based on a search query. 
+It is based on simple building blocks called aggregations, that can be composed in order to build 
+complex summaries of the data.
 
+- <<writing-aggregations, Writing aggregations>>
+- <<reserved-aggregation-names, Reserved aggregation names>>
 
+include::aggregations/writing-aggregations.asciidoc[]
+include::aggregations/reserved-aggregation-names.asciidoc[]
 
+[[nest-conventions]]
+== Conventions
 
+There are a number of conventions that NEST uses for inference of
+
+- <<document-paths, Document paths>>
+- <<features-inference, API features>>
+- <<field-inference, Fields>>
+- <<ids-inference, Ids>>
+- <<index-name-inference, Index names>>
+- <<indices-paths, Index paths>>
+- <<property-inference, Properties>>
+
+:includes-from-dirs: client-concepts/high-level/inference
+
+[[common-types]]
+== Common Types
+
+NEST has a number of types for working with Elasticsearch conventions for
+
+- <<time-units, Time units>>
+- <<distance-units, Distance units>>
+- <<date-math-expressions, Dat math expressions>>
+
+include::common-options/time-unit/time-units.asciidoc[]
+include::common-options/distance-unit/distance-units.asciidoc[]
+include::common-options/date-math/date-math-expressions.asciidoc[]

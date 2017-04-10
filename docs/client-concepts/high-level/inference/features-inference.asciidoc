@@ -1,4 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.4
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/2.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,14 +15,14 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[features-inference]]
-== Features Inference
+=== Features inference
 
 Some URIs in Elasticsearch take a `Feature` enum.
 Within NEST, route values on the URI are represented as classes that implement an interface, `IUrlParameter`.
 Since enums _cannot_ implement interfaces in C#, a route parameter that would be of type `Feature` is represented using the `Features` class that
 the `Feature` enum implicitly converts to.
 
-=== Constructor
+==== Constructor
 
 Using the `Features` constructor directly is possible but rather involved 
 

@@ -107,7 +107,10 @@ namespace Nest
 		protected override IElasticsearchSerializer DefaultSerializer(TConnectionSettings settings) => new JsonNetSerializer(settings);
 
 		/// <summary>
-		/// This calls SetDefaultTypenameInferrer with an implementation that will pluralize type names. This used to be the default prior to Nest 0.90
+		/// Pluralize type names when inferring from POCO type names.
+		/// <para></para>
+		/// This calls <see cref="DefaultTypeNameInferrer"/> with an implementation that will pluralize type names. 
+		/// This used to be the default prior to Nest 0.90
 		/// </summary>
 		public TConnectionSettings PluralizeTypeNames()
 		{
@@ -134,11 +137,10 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// By default NEST camelCases property name (EmailAddress => emailAddress) expressions
-		/// either via an ElasticProperty attribute or because they are part of Dictionary where the keys should be treated verbatim.
-		/// <pre>
-		/// Here you can register a function that transforms these expressions (default casing, pre- or suffixing)
-		/// </pre>
+		/// Specify how field names are inferred from POCO property names.
+		/// <para></para>
+		/// By default, NEST camel cases property names 
+		/// e.g. EmailAddress POCO property => "emailAddress" Elasticsearch document field name
 		/// </summary>
 		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer)
 		{
@@ -147,7 +149,9 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Allows you to override how type names should be represented, the default will call .ToLowerInvariant() on the type's name.
+		/// Specify how type names are inferred from POCO types. 
+		/// By default, type names are inferred by calling <see cref="string.ToLowerInvariant"/>
+		///  on the type's name.
 		/// </summary>
 		public TConnectionSettings DefaultTypeNameInferrer(Func<Type, string> typeNameInferrer)
 		{
@@ -156,17 +160,20 @@ namespace Nest
 			return (TConnectionSettings)this;
 		}
 
-		/// <summary>
-		/// Map types to a index names. Takes precedence over DefaultIndex().
-		/// </summary>
-		public TConnectionSettings MapDefaultTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
+        /// <summary>
+        /// Specify the default index names for a given POCO type. 
+        /// Takes precedence over the global <see cref="DefaultIndex"/>
+        /// </summary>
+        public TConnectionSettings MapDefaultTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
 			mappingSelector.ThrowIfNull(nameof(mappingSelector));
 			mappingSelector(this._defaultIndices);
 			return (TConnectionSettings)this;
 		}
+
 		/// <summary>
-		/// Allows you to override typenames, takes priority over the global DefaultTypeNameInferrer()
+		/// Specify the default type names for a given POCO type. 
+		/// Takes precedence over the global <see cref="DefaultTypeNameInferrer"/>
 		/// </summary>
 		public TConnectionSettings MapDefaultTypeNames(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
@@ -175,7 +182,14 @@ namespace Nest
 			return (TConnectionSettings)this;
 		}
 
-		public TConnectionSettings MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
+        /// <summary>
+        /// Specify which property on a given POCO should be used to infer the id of the document when 
+        /// indexed in Elasticsearch.
+        /// </summary>
+        /// <typeparam name="TDocument">The type of the document.</typeparam>
+        /// <param name="objectPath">The object path.</param>
+        /// <returns></returns>
+        public TConnectionSettings MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
 		{
 			objectPath.ThrowIfNull(nameof(objectPath));
 
@@ -187,8 +201,7 @@ namespace Nest
 				if (this._idProperties[typeof(TDocument)].Equals(fieldName))
 					return (TConnectionSettings)this;
 
-				throw new ArgumentException("Cannot map '{0}' as the id property for type '{1}': it already has '{2}' mapped."
-					.F(fieldName, typeof(TDocument).Name, this._idProperties[typeof(TDocument)]));
+				throw new ArgumentException($"Cannot map '{fieldName}' as the id property for type '{typeof(TDocument).Name}': it already has '{this._idProperties[typeof(TDocument)]}' mapped.");
 			}
 
 			this._idProperties.Add(typeof(TDocument), fieldName);
@@ -196,7 +209,13 @@ namespace Nest
 			return (TConnectionSettings)this;
 		}
 
-		public TConnectionSettings MapPropertiesFor<TDocument>(Action<PropertyMappingDescriptor<TDocument>> propertiesSelector)
+        /// <summary>
+        /// Specify how the properties are mapped for a given POCO type.
+        /// </summary>
+        /// <typeparam name="TDocument">The type of the document.</typeparam>
+        /// <param name="propertiesSelector">The properties selector.</param>
+        /// <returns></returns>
+        public TConnectionSettings MapPropertiesFor<TDocument>(Action<PropertyMappingDescriptor<TDocument>> propertiesSelector)
 			where TDocument : class
 		{
 			propertiesSelector.ThrowIfNull(nameof(propertiesSelector));
@@ -214,10 +233,10 @@ namespace Nest
 				var e = mapping.Property;
 				var memberInfoResolver = new MemberInfoResolver(e);
 				if (memberInfoResolver.Members.Count > 1)
-					throw new ArgumentException("MapFieldNameFor can only map direct properties");
+					throw new ArgumentException($"{nameof(ApplyPropertyMappings)} can only map direct properties");
 
 				if (memberInfoResolver.Members.Count < 1)
-					throw new ArgumentException("Expression {0} does contain any member access".F(e));
+					throw new ArgumentException($"Expression {e} does contain any member access");
 
 				var memberInfo = memberInfoResolver.Members.Last();
 				if (_propertyMappings.ContainsKey(memberInfo))
@@ -226,22 +245,25 @@ namespace Nest
 					var mappedAs = _propertyMappings[memberInfo].Name;
 					var typeName = typeof(TDocument).Name;
 					if (mappedAs.IsNullOrEmpty() && newName.IsNullOrEmpty())
-						throw new ArgumentException("Property mapping '{0}' on type is already ignored"
-							.F(e, newName, mappedAs, typeName));
+						throw new ArgumentException($"Property mapping '{e}' on type is already ignored");
 					if (mappedAs.IsNullOrEmpty())
-						throw new ArgumentException("Property mapping '{0}' on type {3} can not be mapped to '{1}' it already has an ignore mapping"
-							.F(e, newName, mappedAs, typeName));
+						throw new ArgumentException($"Property mapping '{e}' on type {typeName} can not be mapped to '{newName}' it already has an ignore mapping");
 					if (newName.IsNullOrEmpty())
-						throw new ArgumentException("Property mapping '{0}' on type {3} can not be ignored it already has a mapping to '{2}'"
-							.F(e, newName, mappedAs, typeName));
-					throw new ArgumentException("Property mapping '{0}' on type {3} can not be mapped to '{1}' already mapped as '{2}'"
-						.F(e, newName, mappedAs, typeName));
+						throw new ArgumentException($"Property mapping '{e}' on type {typeName} can not be ignored it already has a mapping to '{mappedAs}'");
+					throw new ArgumentException($"Property mapping '{e}' on type {typeName} can not be mapped to '{newName}' already mapped as '{mappedAs}'");
 				}
 				_propertyMappings.Add(memberInfo, mapping.ToPropertyMapping());
 			}
 		}
 
-		public TConnectionSettings InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
+        /// <summary>
+        /// Specify how the mapping is inferred for a given POCO type. 
+        /// Can be used to infer the index, type, id property and properties for the POCO.
+        /// </summary>
+        /// <typeparam name="TDocument">The type of the document.</typeparam>
+        /// <param name="selector">The selector.</param>
+        /// <returns></returns>
+        public TConnectionSettings InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
 			where TDocument : class
 		{
 			var inferMapping = selector(new ClrTypeMappingDescriptor<TDocument>());

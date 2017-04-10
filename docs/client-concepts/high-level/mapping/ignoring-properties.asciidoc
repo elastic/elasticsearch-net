@@ -1,0 +1,137 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.4
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/2.4
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/2.x/src/Tests/ClientConcepts/HighLevel/Mapping/IgnoringProperties.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[ignoring-properties]]
+=== Ignoring properties
+
+Properties on a POCO can be ignored for mapping purposes in a few ways:
+
+* Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to
+the property that should be ignored on the POCO
+
+* Using the `.InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>>
+selector)` on `ConnectionSettings`
+
+* Using an ignore attribute applied to the POCO property that is understood by
+the `IElasticsearchSerializer` used, and inspected inside of the `CreatePropertyMapping()` on
+the serializer. In the case of the default `JsonNetSerializer`, this is the Json.NET `JsonIgnoreAttribute`
+
+This example demonstrates all ways, using the `Ignore` property on the attribute to ignore the property`PropertyToIgnore`, the infer mapping to ignore the property `AnotherPropertyToIgnore` and the
+json serializer specific attribute  to ignore the property `JsonIgnoredProperty`
+
+[source,csharp]
+----
+[ElasticsearchType(Name = "company")]
+public class CompanyWithAttributesAndPropertiesToIgnore
+{
+    public string Name { get; set; }
+
+    [String(Ignore = true)]
+    public string PropertyToIgnore { get; set; }
+
+    public string AnotherPropertyToIgnore { get; set; }
+
+    [JsonIgnore]
+    public string JsonIgnoredProperty { get; set; }
+}
+----
+
+All of the properties except `Name` have been ignored in the mapping 
+
+[source,csharp]
+----
+var descriptor = new CreateIndexDescriptor("myindex")
+    .Mappings(ms => ms
+        .Map<CompanyWithAttributesAndPropertiesToIgnore>(m => m
+            .AutoMap()
+        )
+    );
+
+var settings = WithConnectionSettings(s => s
+    .InferMappingFor<CompanyWithAttributesAndPropertiesToIgnore>(i => i
+        .Ignore(p => p.AnotherPropertyToIgnore)
+    )
+);
+----
+
+The JSON output for the mapping does not contain the ignored properties
+
+[source,javascript]
+----
+{
+  "mappings": {
+    "company": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
+----
+
+==== Ignoring inherited properties
+
+By using the infer mapping configuration for a POCO on the `ConnectionSettings`, it is possible to
+ignore inherited properties too.
+
+[source,csharp]
+----
+public class Parent
+{
+    public int Id { get; set; }
+    public string Description { get; set; }
+    public string IgnoreMe { get; set; }
+}
+
+public class Child : Parent { }
+
+var descriptor = new CreateIndexDescriptor("myindex")
+        .Mappings(ms => ms
+            .Map<Child>(m => m
+                .AutoMap()
+            )
+        );
+
+var settings = WithConnectionSettings(s => s
+        .InferMappingFor<Child>(m => m
+            .Rename(p => p.Description, "desc")
+            .Ignore(p => p.IgnoreMe)
+        )
+    );
+----
+
+The property `IgnoreMe` has been ignored for the child mapping 
+
+[source,javascript]
+----
+{
+  "mappings": {
+    "child": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "desc": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
+----
+

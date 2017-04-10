@@ -1,4 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.4
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/2.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,7 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[allowed-status-codes]]
-== Allowed status codes
+=== Allowed status codes
 
 [source,csharp]
 ----
@@ -23,8 +25,9 @@ var audit = new Auditor(() => Framework.Cluster
     .StaticConnectionPool()
     .Settings(s => s.DisablePing().MaximumRetries(0))
 );
+
 audit = await audit.TraceCalls(
-    new ClientCall() {
+    new ClientCall {
         { BadResponse, 9200 }
     },
     new ClientCall(r => r.AllowedStatusCodes(400)) {

@@ -21,14 +21,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 			var uris = Enumerable.Range(9200, numberOfNodes).Select(p => new Uri("http://localhost:" + p));
 			var pool = new StickyConnectionPool(uris);
 
-			/**
+            /**
 			* Here we have setup a sticky connection pool seeded with 10 nodes.
 			* So what order we expect? Imagine the following:
 			*
-			* Thread A calls GetNext and gets returned the first live node
-			* Thread B calls GetNext() and gets returned the same node as it's still the first live.
+			* Thread A calls `.CreateView()` and gets returned the first live node
+			* Thread B calls `.CreateView()` and gets returned the same node, since the first
+            * node is still good
 			*/
-			var startingPositions = Enumerable.Range(0, numberOfNodes)
+            var startingPositions = Enumerable.Range(0, numberOfNodes)
 				.Select(i => pool.CreateView().First())
 				.Select(n => n.Uri.Port)
 				.ToList();

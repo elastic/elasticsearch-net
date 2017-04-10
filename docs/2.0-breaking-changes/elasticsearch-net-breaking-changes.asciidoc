@@ -1,5 +1,4 @@
 :github: https://github.com/elastic/elasticsearch-net
-
 :stackoverflow: http://stackoverflow.com
 
 [[elasticsearch-net-breaking-changes]]
@@ -8,6 +7,7 @@
 This document rudimentally documents the breaking changes from 1.x to 2.x; Our 2.0 refactor comprises 1000+ commits and nearly six months of work, so if we missed anything
 {github}/issues[feel free to give us a shout]!
 
+[float]
 === Dependency graph changes
 
 The first thing you might notice is that the dependency graph for the client has changed slightly.  It has also been renamed from `IElasticsearchClient` to `ILowLevelElasticClient`, to align better with the high level (NEST) client and better differentiate itself.
@@ -61,12 +61,13 @@ var client = new ElasticLowLevelClient(pool);
 ----
 
 This is what we call internally if you use the previous `ElasticLowLevelClient` constructor.
-Our implementation of <<transports,`ITransport`>> can be injected with a custom <<request-pipeline,`IRequestPipelineFactory`>>, <<date-time-providers,`IDateTimeProvider`>> and `IMemoryStreamFactory`.
+Our implementation of <<transports,`ITransport`>> can be injected with a custom <<request-pipelines,`IRequestPipelineFactory`>>, <<date-time-providers,`IDateTimeProvider`>> and `IMemoryStreamFactory`.
 
 <<transports,`Transport`>> is in control of managing our request pipelining, asking connection pools for other nodes to fall over to and marking nodes dead or alive.
 
 Each individual moving part is further explained in the index.html[documentation].
 
+[float]
 === ConnectionSettings Changes
 
 This lists the methods that have been renamed or removed on ConnectionConfiguration
@@ -140,6 +141,7 @@ interface IConnectionConfigurationValues
 +     prop: PrettyJson
 ----
 
+[float]
 ==== IConnectionPool
 
 The interface for `IConnectionPool` has been greatly simplified, its no longer in charge of mark nodes alive or dead
@@ -156,6 +158,7 @@ interface IConnectionPool
 +     method: Reseed
 ----
 
+[float]
 ==== IConnection
 
 The connection interface has been stripped to the bare minimum it now only has a `Request` and `RequestAsync` method
@@ -180,6 +183,7 @@ interface IConnection
 
 The methods take a `RequestData` a new state object that holds all the information to build the request.
 
+[float]
 ==== Renamed Types
 
 This lists the types that have been renamed
@@ -244,6 +248,7 @@ This lists the types that have been renamed
 + class IndexTemplateExistsRequestParameters
 ----
 
+[float]
 ==== Removed Types
 
 This lists the removed types
@@ -296,6 +301,7 @@ This lists the removed types
 - class UpdateSettingsRequestParameters
 ----
 
+[float]
 ==== Member Changes
 
 This lists changes of class members that might bite you during the upgrade
@@ -496,3 +502,4 @@ class UpdateRequestParameters
 class ValidateQueryRequestParameters
 -     method: Q
 ----
+
