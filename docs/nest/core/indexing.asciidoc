@@ -8,14 +8,14 @@ Indexing is as simple as:
 var post = new Post() { Id = 12, ... }
 var status = client.Index<Post>(post);
 ----
-    
+
 Of course C# is smart enough to infer `Post` so
 
 [source,csharp]
 ----
 var status = client.Index(post);
 ----
-    
+
 is sufficient. This will index `post` to `/[default index]/posts/12`. The type name `posts` is automatically inferred from the type.
 
 If you need more control, there are plenty of overloads, i.e:
@@ -43,6 +43,7 @@ var request = new IndexRequest<Post>
 client.Index<Post>(post);
 ----
 
+[float]
 === Asynchronous
 
 Indexing asynchronously is as easy as:
@@ -52,8 +53,8 @@ Indexing asynchronously is as easy as:
 var task = client.IndexAsync(post); // IndexAsync returns a Task<ConnectionStatus>
 ----
 
+[float]
 === Bulk Indexing
 
 See the section dedicated to using the <<bulk, bulk api>> for details on how to construct bulk indexing requests.
- 
 

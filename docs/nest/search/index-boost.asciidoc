@@ -13,5 +13,4 @@ var s = new SearchDescriptor<ElasticSearchProject>()
     .MinScore(0.4)
     .IndicesBoost(b => b.Add("index1", 1.4).Add("index2", 1.3));
 ----
-    
 

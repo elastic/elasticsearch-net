@@ -7,6 +7,7 @@ though it can be disabled and be controlled completely through this API.
 
 NOTEL this API only applies when using shared storage gateway implementation, and does not apply when using the (default) local gateway.
 
+[float]
 === All
 
 [source,csharp]
@@ -14,6 +15,7 @@ NOTEL this API only applies when using shared storage gateway implementation, an
 var r = this.ConnectedClient.Snapshot();
 ----
 
+[float]
 === Snapshot Index 
 
 [source,csharp]
@@ -21,9 +23,11 @@ var r = this.ConnectedClient.Snapshot();
 var r = this.ConnectedClient.Snapshot("index");
 ----
 
+[float]
 === Typed
 
 [source,csharp]
 ----
 var r = this.ConnectedClient.Snapshot<ElasticSearchProject>();
 ----
+

@@ -21,3 +21,4 @@ Assert.True(queryResults.IsValid);
 Assert.True(queryResults.Documents.Any());
 Assert.True(queryResults.Documents.All(d=>d.LocScriptField != 0));
 ----
+

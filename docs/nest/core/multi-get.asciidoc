@@ -38,6 +38,7 @@ var results = client.MultiGet(m => m
 );
 ----
 
+[float]
 === Handling the Multi Get Response
 
 `MultiGet` in NEST returns an `IMultiGetResonse` object which, similar to the request, also exposes a `Get<T>` and `GetMany<T>` 
@@ -65,6 +66,7 @@ collection containing specific fields if they were requested, and some additiona
 The `IMultiGetResponse` object also contains a `Documents` property of type `IEnumerable<IMultiGetHit<object>>` 
 which holds *all* of the retrieved documents regardless of type.
 
+[float]
 === Field Selection
 
 `MultiGet` also allows you to retrieve specific fields of a document:
@@ -97,3 +99,4 @@ var firstNames = fields.FieldValues<string[]>(p => p.Followers.First().FirstName
 
 Remember expressions like `p => p.Followers.First().FirstName` can be interchanged with `"followers.firstName"` 
 if you prefer or need to reference a non-mapped field.
+

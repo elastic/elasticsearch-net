@@ -5,6 +5,7 @@ Provide low level segments information that a Lucene index (shard level) is buil
 Allows to be used to provide more information on the state of a shard and an index, 
 possibly optimization information, data “wasted” on deletes, and so on.
 
+[float]
 === All indices segments information
 
 [source,csharp]

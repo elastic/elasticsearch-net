@@ -5,6 +5,7 @@ For a good overview of what aggregations are, refer the {ref_current}/search-agg
 
 Adding aggregations to a search request is as simple as:
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -20,6 +21,7 @@ var result = client.Search<ElasticsearchProject>(s => s
     );
 ----
 
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -44,6 +46,7 @@ var searchRequest = new SearchRequest
 var result = client.Search<ElasticsearchProject>(searchRequest);
 ----
 
+[float]
 === Getting to your aggregation
 
 The result of the aggregations are accessed from the `Aggs` property of the response using the key that was specified on the request, `my_agg`, in the above examples:
@@ -83,10 +86,10 @@ The `Aggs` helper property of the response will automatically convert to the res
 NEST of course also supports sub-aggregations.
 
 In the following example we are executing a <<terms-aggregation, terms aggregation>>, `names`, as a top-level aggregation, 
-and then within it a <<max-aggregation,max aggregation>>, 
-`max_age`, as a sub-aggregation.  This will produce a bucket per unique value of the `Name` field, and 
+and then within it a <<max-aggregation,max aggregation>>, `max_age`, as a sub-aggregation.  This will produce a bucket per unique value of the `Name` field, and 
 within each bucket find the max `Age` value for that particular name.
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -106,6 +109,7 @@ var result = client.Search<Person>(s => s
 );
 ----
 
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -158,3 +162,4 @@ foreach(var name in names.Items)
 ----
 
 That's aggregations in a nutshell.  Refer to the specific section on each aggregation type for more details.
+

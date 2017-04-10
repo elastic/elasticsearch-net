@@ -2,9 +2,9 @@
 == Connection Pooling and Cluster Failover
 
 One of the major benefits of Elasticsearch is that it can handle dying and respawning  nodes. 
-As long as enough nodes agree that the cluster is healthy, the cluster will continue to operate.
-`Elasticsearch.Net` comes with builtin support for handle falling over to a different node when the requested node failed.
+As long as enough nodes agree that the cluster is healthy, the cluster will continue to operate.`Elasticsearch.Net` comes with builtin support for handle falling over to a different node when the requested node failed.
 
+[float]
 === Configuring 
 
 Configuring how the registered `IConnectionPool` should behave happens on the `IConnectionConfigurationValues` passed to client 
@@ -37,6 +37,7 @@ Sets the timeout before a node is retried.
 The default `DateTimeProvider` will increment this timeout exponentially based on the number of attempts.
 
 SetMaxDeadTimeout::
+
 Sets the maximum time a node may be marked dead.
 
 DisablePing::
@@ -52,6 +53,7 @@ By default an `IConnectionPool` itself will decide how many times to retry (usua
 limit this you can explicitly tell the connection pool to never retry more than `retries`.
 
 [[sniffing-connection-pool]]
+[float]
 === SniffingConnectionPool
 
 This `IConnectionPool` implementation will `sniff` the cluster state on the passed seed nodes to find all the alive nodes in the cluster. It will round robin requests over all the alive nodes it knows about. 
@@ -62,15 +64,17 @@ var pool = new SniffingConnectionPool(seedUris);
 ----
 
 [[static-connection-pool]]
+[float]
 === StaticConnectionPool
 
 This `IConnectionPool` implementation will round robin over the provided nodes. When nodes are dead it will mark it dead with an incremental timeout before 
 retrying requests on that node. When all the known nodes are marked dead an operation will be tried once on a random node from the list. 
 
 The difference between this implementation and `SniffingConnectionPool` is that this implementation effectively treats the `Sniff()` call as a 
-http://en.wikipedia.org/wiki/Noop[NOOP]
+ http://en.wikipedia.org/wiki/Noop[NOOP]
 
 [source,csharp]
 ----
 var pool = new StaticConnectionPool(seedUris);
 ----
+

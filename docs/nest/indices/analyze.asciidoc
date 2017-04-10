@@ -3,8 +3,10 @@
 
 Performs the analysis process on the specified text and returns the token breakdown for the text.
 
+[float]
 === Examples
 
+[float]
 ==== Fluent Syntax
 
 [source,csharp]
@@ -15,7 +17,8 @@ var result = client.Analyze(a => a
     .Text("text to analyze")
 );
 ----
-    
+
+[float]
 ==== Object Initializer Syntax
 
 [source,csharp]
@@ -28,7 +31,9 @@ var request = new AnalyzeRequest("text to analyze")
 
 var result = client.Analyze(request);
 ----
-    
+
+[float]
 === Handling the Analyze response
 
 `result` above is an `IAnalyzeResponse` which contains a collection of tokens found in the `Tokens` property which is an `IEnumerable<AnalyzeToken>`.
+

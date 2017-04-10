@@ -17,11 +17,11 @@ var settings = new ConnectionConfiguration()
 ----
 
 [[exceptions]]
+[float]
 === Exceptions
 
 If a request has been retried the maximum amount of times a `MaxRetryException` is thrown. 
 Note that requests are only retried when Elasticsearch responds with a `503` or an unspecified connection exception (i.e timeout) has occured on a node. 
 
 `MaxRetryException` will hold the original exception as `.InnerException`.
-
 

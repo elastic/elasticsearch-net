@@ -1,10 +1,9 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/1.7
-
 [[more-like-this]]
 == More Like This
 
 The more like this (mlt) API allows to get documents that are "like" a specified document.
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -19,7 +18,8 @@ var result = client.MoreLikeThis<ElasticsearchProject>(mlt => mlt
     )
 );
 ----
-    
+
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -38,8 +38,10 @@ var request = new MoreLikeThisRequest<ElasticsearchProject>(1)
 var result = client.MoreLikeThis<ElasticsearchProject>(request);
 ----
 
+[float]
 === Handling the MLT response
 
 `.MoreLikeThis<T>` behaves just like `.Search<T>` in that it also returns an `ISearchResponse<T>`.
 
 See the {ref_current}/search-more-like-this.html[original docs] for more information.
+

@@ -3,6 +3,7 @@
 
 Search is _the_ call you'll probably use the most, as it exposes Elasticsearch's key functionality: **search!**
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -15,6 +16,7 @@ var result = client.Search<ElasticsearchProject>(s => s
 );
 ----
 
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -30,17 +32,14 @@ var searchRequest = new SearchRequest
 var result = client.Search<ElasticsearchProject>(searchRequest);
 ----
 
+[float]
 === Handling the Search response
 
 `.Search<T>` returns an `ISearchResponse<T>` which has a `Hits` property.
 
 `Hits` is an `IEnumerable<IHit<T>>`.  `IHit<T>` contains a `Source` property which 
-holds the original document (`T`), along with other meta deta from Elasticsearch such 
+holds the original document `T`), along with other meta deta from Elasticsearch such 
 as `Id`, `Score`, `Version`, `Index`, `Type`, `Sorts`, `Highlights` and `Explanation`.
 
 See <<nest-basics, Search Basics>> section for more information.
-
-
-
-
 

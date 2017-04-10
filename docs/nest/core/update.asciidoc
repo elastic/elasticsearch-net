@@ -6,10 +6,11 @@ The operation gets the document (collocated with the shard) from the index, runs
 (with optional script language and parameters), and index back the result (also allows to delete, or ignore the operation). 
 It uses versioning to make sure no updates have happened during the "get" and "reindex".
 
-NOTE: this operation still means a full re-index of the document, it just removes some network 
+NOTE: this operation still means a full re-index of the document, it just removes some network
 roundtrips and reduces chances of version conflicts between the get and index operations. 
 The `_source` field need to be enabled for this feature to work.
 
+[float]
 === By Script
 
 [source,csharp]
@@ -25,6 +26,7 @@ client.Update<ElasticsearchProject>(u => u
 );
 ----
 
+[float]
 === By Partial Document
 
 The update API also has a `.Update<T, K>` variant, where `T` is the document type to update, and `K` is the partial document to merge.
@@ -44,11 +46,12 @@ client.Update<ElasticsearchProject, PartialElasticsearchProject>(u => u
 );
 ----
 
+[float]
 === Anonymous objects as partial documents
 
 Notice in the example above we created a custom partial object `PartialElasticsearchProject`, 
 which only contains a `Country` property, to apply the partial update.  The reason for this is that 
-if we used the same types for both our document (`T`) and partial document (`K`) (i.e., `typeof(T) == typeof(K)`) then `K` 
+if we used the same types for both our document `T`) and partial document `K`) (i.e., `typeof(T) == typeof(K)`) then `K` 
 would have to be fully populated with all of its values, otherwise the existing document in the index will get overriden 
 by C# defaults for each property that wasn't populated.
 
@@ -64,6 +67,7 @@ client.Update<ElasticsearchProject, object>(u => u
 );
 ----
 
+[float]
 === Upserting
 
 You can insert the partial object passed to `Doc` into your index if it doesn't already exist by using the `DocAsUpsert` method:
@@ -88,6 +92,7 @@ client.Update<ElasticsearchProject, object>(u => u
 );
 ----
 
+[float]
 === Id inference
 
 In all of the above examples, we explicitly specified the id of the document in which we wanted to update.  
@@ -101,3 +106,4 @@ client.Update<ElasticsearchProject, object>(u => u
     .DocAsUpsert()
 );
 ----
+

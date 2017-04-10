@@ -3,15 +3,21 @@
 
 [partintro]
 --
-
 * <<health, Health>>
+
 * <<state, State>>
+
 * <<nodes-info, Nodes Info>>
+
 * <<nodes-stats, Nodes Stats>>
 
 --
 
 include::health.asciidoc[]
+
 include::state.asciidoc[]
+
 include::nodes-info.asciidoc[]
+
 include::nodes-stats.asciidoc[]
+

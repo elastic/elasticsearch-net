@@ -3,6 +3,7 @@
 
 A single-value metrics aggregation that computes the average of numeric values that are extracted from the aggregated documents.
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -17,7 +18,8 @@ var result = client.Search<ElasticsearchProject>(s => s
 
 var agg = result.Aggs.Avg("my_avg_agg");
 ----
-    
+
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -43,3 +45,4 @@ var agg = result.Aggs.Avg("my_avg_agg");
 ----
 
 Refer to the {ref_current}/search-aggregations-metrics-avg-aggregation.html[original docs] for more information.
+

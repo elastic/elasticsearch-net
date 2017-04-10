@@ -3,6 +3,7 @@
 
 Connecting to Elasticsearch with `Elasticsearch.Net` is quite easy but has a few toggles and options worth knowing.
 
+[float]
 === Choosing the right connection strategy
 
 If you simply new an `ElasticsearchClient`, it will be a non-failover connection to `http://localhost:9200`
@@ -11,7 +12,7 @@ If you simply new an `ElasticsearchClient`, it will be a non-failover connection
 ----
 var client = new ElasticsearchClient();
 ----
-    
+
 If your Elasticsearch node does not live at `http://localhost:9200` but i.e `http://mynode.example.com:8082/apiKey`, then 
 you will need to pass in some instance of `IConnectionConfigurationValues`.
 
@@ -41,6 +42,7 @@ to find out the rest of the available cluster nodes.
 
 Be sure to read more about <<cluster-failover, Connection Pooling and Cluster Failover here>>
 
+[float]
 === Options
 
 Besides either passing a `Uri` or `IConnectionPool` to `ConnectionConfiguration`, you can also fluently control many more options. For instance:
@@ -153,11 +155,12 @@ var config = new ConnectionConfiguration(uri);
 
 --
 
+[float]
 === Configuring SSL
 
 SSL must be configured outside of the client using .NET's http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager]
 class and setting the 
-http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager.servercertificatevalidationcallback.aspx[ServerCertificateValidationCallback] property.
+ http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager.servercertificatevalidationcallback.aspx[ServerCertificateValidationCallback] property.
 
 The bare minimum to make .NET accept self-signed SSL certs that are not in the Window's CA store would be to have the callback simply return `true`:
 
@@ -169,4 +172,3 @@ ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain,
 However, this will accept all requests from the AppDomain to untrusted SSL sites, 
 therefore **we recommend doing some minimal introspection on the passed in certificate**.
 
-            

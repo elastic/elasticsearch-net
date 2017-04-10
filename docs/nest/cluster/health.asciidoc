@@ -28,3 +28,4 @@ var r = this._client.Health(new HealthParams
     WaitForStatus = HealthStatus.Green
 });
 ----
+

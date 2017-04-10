@@ -35,11 +35,11 @@ RequestUrl::
 The URL the request was sent to.
 
 Request::
- 
+
 The `byte[]` request that was sent to Elasticsearch.
 
 ResponseRaw::
- 
+
 A `byte[]` representation of the response from Elasticsearch, only set when `ExposeRawResponses()` is set. 
 See the <<elasticsearch-net-connecting, Connecting section>>.
 
@@ -55,6 +55,7 @@ NumberOfRetries::
 
 The number of times the request was tried.
 
+[float]
 === Typed API Calls
 
 `Elasticsearch.Net` does not provide typed objects representing the responses. This is up to the developer to map. 
@@ -82,6 +83,7 @@ var stringResponse = result.Response;
 This can be handy if you want to inspect the json dynamically by passing it into `JSON.NET`'s `JObject`. However `Elasticsearch.Net` also 
 supports dynamic usecases out of the box.
 
+[float]
 === Dynamic API Calls
 
 If you do not provide an explicit `<T>` for your return type `Elasticsearch.Net` will deserialize into a `DynamicDictionary`
@@ -100,3 +102,4 @@ This is really great for exploratory programming but dynamic dispatch in C# is n
 responses to an explicit object instead.
 
 INFO: DynamicDictionary comes from the http://nancyfx.org/[Nancyfx] project but is slightly modified to support arbitrary call depths without null checks in between.
+

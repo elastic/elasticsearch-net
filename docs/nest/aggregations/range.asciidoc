@@ -3,6 +3,7 @@
 
 A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -23,6 +24,7 @@ var result = _client.Search<ElasticsearchProject>(s => s
 var rangeAgg = result.Aggs.Range("my_range_agg");
 ----
 
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -54,3 +56,4 @@ var agg = result.Aggs.Range("my_range_agg");
 ----
 
 Refer to the {ref_current}/search-aggregations-bucket-range-aggregation.html[original docs] for more information.
+

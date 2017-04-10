@@ -3,6 +3,7 @@
 
 This page lists some general tips and tricks provided by the community
 
+[float]
 === Posting Elasticsearch queries from JavaScript
 
 Consider a scenario where you are using client side libraries like https://github.com/fullscale/elastic.js[elasticjs]  
@@ -32,3 +33,4 @@ The fragments `[RoutePrefix("api/Search")]` and `[ActionName("_search")]` will l
 from `http://localhost:9200/_search` to `http://yourwebsite/api/Search/_search` and let things work as normal. 
 The fragment `[FromBody]SearchDescriptor<dynamic> query` will convert the JSON query into NEST SearchDescriptor. 
 The fragment `client.Search(q => query)` will execute the query. 
+

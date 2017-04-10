@@ -3,6 +3,7 @@
 
 A special single bucket aggregation that enables aggregating on parent docs from nested documents.
 
+[float]
 === Fluent DSL
 
 [source,csharp]
@@ -31,6 +32,7 @@ var response = client.Search<ElasticSearchProject>(s => s
 );
 ----
 
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -88,6 +90,4 @@ var request = new SearchRequest
 ----
 
 Refer to the {ref_current}/search-aggregations-bucket-reverse-nested-aggregation.html[original docs] fore more information.
-
-
 

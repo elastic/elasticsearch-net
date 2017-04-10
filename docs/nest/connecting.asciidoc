@@ -3,6 +3,7 @@
 
 This section describes how to instantiate a client and have it connect to the server.
 
+[float]
 === Choosing the right connection strategy
 
 `NEST` follows pretty much the same design as `Elasticsearch.Net` when it comes to choosing 
@@ -28,6 +29,7 @@ default index is optional but [very handy](/nest/type-index-inference).
 If you want a failover client, instead of passing a `Uri`, pass an `IConnectionPool`. 
 See the <<cluster-failover,Elasticsearch.Net documentation on cluster failover>>. All of its implementations can also be used with NEST.
 
+[float]
 === Changing the underlying connection 
 
 By default NEST will use HTTP to chat with Elasticsearch, alternative implementation of the transport layer can be 
@@ -43,6 +45,7 @@ and an In-Memory Connection `InMemoryConnection`, that nevers hits Elasticsearch
 
 You can also roll your own connection if desired by implementing the `IConnection` interface.
 
+[float]
 === Subclassing existing connection implementations
 
 In addition to implementing your own `IConnection`, the existing `HttpConnection` and `ThriftConnection` are 
@@ -73,10 +76,10 @@ public class SignedHttpConnection : HttpConnection
 }
 ----
 
+[float]
 === Settings
 
-The `NEST` client can be configured by passing in an `IConnectionSettingsValues` object, which is a sub-interface of 
-`Elasticsearch.Net`'s `IConnectionConfigurationValues`.  Therefore all of the settings that can be used to 
+The `NEST` client can be configured by passing in an `IConnectionSettingsValues` object, which is a sub-interface of `Elasticsearch.Net`'s `IConnectionConfigurationValues`.  Therefore all of the settings that can be used to 
 <<nest-connecting, configure Elasticsearch.Net>> also apply here, including the 
 <<cluster-failover,cluster failover settings>>.
 
@@ -90,7 +93,7 @@ var settings = new ConnectionSettings(
     )
     .PluralizeTypeNames();
 ----
-        
+
 `IConnectionSettingsValues` has the following options:
 
 AddContractJsonConverters::
@@ -140,3 +143,4 @@ SetJsonSerializerSettingsModifier::
 
 Allows you to update the internal Json.NET serializer settings to your liking.
 Do not use this to add custom JSON converters use `AddContractJsonConverters` instead.
+

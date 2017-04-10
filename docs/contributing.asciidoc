@@ -1,5 +1,3 @@
-:github: https://github.com/elastic/elasticsearch-net
-
 == Contributing
 
 Contributing back to `Elasticsearch.Net` and `NEST` is very much appreciated! 
@@ -8,6 +6,7 @@ Whether you {github}/pull/536[feel the need to change one character] or have a g
 
 We do however ask you sign the http://www.elasticsearch.org/contributor-agreement/[Elasticsearch CLA] before we can accept pull requests from you. 
 
+[float]
 === Coding Styleguide
 
 The source code uses tabs instead of spaces for indentation. 

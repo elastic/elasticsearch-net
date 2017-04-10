@@ -5,6 +5,7 @@ Allows you to delete a mapping (type) along with its data. The REST endpoint is 
 
 NOTE: Most times, it make more sense to reindex the data into a fresh index compared to deleting large chunks of it.
 
+[float]
 === Examples
 
 Using the default index and the inferred type name

@@ -2,6 +2,7 @@
 == Security
 
 [[authentication]]
+[float]
 === Authentication
 
 NEST and Elasticsearch.NET support basic auth out of the box by setting your credentials on `ConnectionSettings`
@@ -24,6 +25,7 @@ var response = client.RootNodeInfo(c => c
 ----
 
 [[ssl-support]]
+[float]
 === SSL support
 
 Nest supports SSL throughout out of the box just pass `https` `Uri`'s instead of `http`.
@@ -46,15 +48,16 @@ var client = new ElasticClient(settings);
 ----
 
 [[untrusted-certifcates]]
+[float]
 === Working with untrusted SSL certificates
 
 When working with SSL's chances are you end up with self signed certificates which are not trusted by your machine. 
 
 We recommend installing your custom CA's in the computer's trust store 
-http://blogs.technet.com/b/sbs/archive/2007/04/10/installing-a-self-signed-certificate-as-a-trusted-root-ca-in-windows-vista.aspx[as outline here for instance].
+ http://blogs.technet.com/b/sbs/archive/2007/04/10/installing-a-self-signed-certificate-as-a-trusted-root-ca-in-windows-vista.aspx[as outline here for instance].
 
 SSL can however be configured in code outside of the client using .NET's 
-http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager]
+ http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager]
 class and setting the http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager.servercertificatevalidationcallback.aspx[ServerCertificateValidationCallback] property.
 
 The bare minimum to make .NET accept self-signed SSL certs that are not in the Window's CA store would be to have the callback simply return `true`:
@@ -68,6 +71,7 @@ However, this will accept all requests from the AppDomain to untrusted SSL sites
 You can also write code to forcefully accept SSL's:
 
 [[trusting-certifcate-example]]
+[float]
 === Trusting CA in code example
 
 Given your application has access to your CA public key
@@ -138,3 +142,4 @@ ServicePointManager.ServerCertificateValidationCallback += (sender, certificate,
 
 };
 ----
+

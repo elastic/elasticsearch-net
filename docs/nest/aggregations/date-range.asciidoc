@@ -3,6 +3,7 @@
 
 A range aggregation that is dedicated for date values.
 
+[float]
 === Fluent Syntax
 
 [source,csharp]
@@ -23,6 +24,7 @@ var result = client.Search<ElasticsearchProject>(s => s
 var agg = result.Aggs.DateRange("my_date_range_agg");
 ----
 
+[float]
 === Object Initializer Syntax
 
 [source,csharp]
@@ -54,3 +56,4 @@ var agg = result.Aggs.DateRange("my_date_range_agg");
 ----
 
 Refer to the {ref_current}/search-aggregations-bucket-daterange-aggregation.html[original docs] for more information.
+

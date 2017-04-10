@@ -1,6 +1,7 @@
 [[flush]]
 == Flush
 
+[float]
 === Flush all
 
 [source,csharp]
@@ -8,6 +9,7 @@
 var r = this.ConnectedClient.Flush();
 ----
 
+[float]
 === Flush index
 
 [source,csharp]
@@ -15,6 +17,7 @@ var r = this.ConnectedClient.Flush();
 var r = this.ConnectedClient.Flush("index");
 ----
 
+[float]
 === Flush several indices
 
 [source,csharp]
@@ -22,6 +25,7 @@ var r = this.ConnectedClient.Flush("index");
 var r = this.ConnectedClient.Flush(new[] { "index", "index2" });
 ----
 
+[float]
 === Flush by type and wait for the refresh
 
 [source,csharp]
