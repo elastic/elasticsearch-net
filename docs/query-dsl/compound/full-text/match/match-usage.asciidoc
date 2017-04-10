@@ -31,7 +31,7 @@ q
     .FuzzyTranspositions()
     .MinimumShouldMatch(2)
     .Operator(Operator.Or)
-    .FuzzyRewrite(RewriteMultiTerm.ConstantScoreBoolean)
+    .FuzzyRewrite(MultiTermQueryRewrite.TopTermsBlendedFreqs(10))
     .Name("named_query")
 )
 ----
@@ -51,7 +51,7 @@ new MatchQuery
     Fuzziness = Fuzziness.Auto,
     FuzzyTranspositions = true,
     MinimumShouldMatch = 2,
-    FuzzyRewrite = RewriteMultiTerm.ConstantScoreBoolean,
+    FuzzyRewrite = MultiTermQueryRewrite.TopTermsBlendedFreqs(10),
     Lenient = true,
     Operator = Operator.Or,
 }
@@ -67,7 +67,7 @@ new MatchQuery
       "boost": 1.1,
       "query": "hello world",
       "analyzer": "standard",
-      "fuzzy_rewrite": "constant_score_boolean",
+      "fuzzy_rewrite": "top_terms_blended_freqs_10",
       "fuzziness": "AUTO",
       "fuzzy_transpositions": true,
       "cutoff_frequency": 0.001,

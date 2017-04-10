@@ -36,7 +36,7 @@ namespace Tests.QueryDsl.TermLevel.Fuzzy
 			Value = "ki",
 			MaxExpansions = 100,
 			PrefixLength = 3,
-			Rewrite = RewriteMultiTerm.ConstantScore,
+			Rewrite = MultiTermQueryRewrite.ConstantScore,
 			Transpositions = true
 		};
 
@@ -49,7 +49,7 @@ namespace Tests.QueryDsl.TermLevel.Fuzzy
 				.Value("ki")
 				.MaxExpansions(100)
 				.PrefixLength(3)
-				.Rewrite(RewriteMultiTerm.ConstantScore)
+				.Rewrite(MultiTermQueryRewrite.ConstantScore)
 				.Transpositions()
 			);
 

@@ -48,7 +48,7 @@ namespace Tests.QueryDsl.FullText.MultiMatch
 			MaxExpansions = 2,
 			Operator = Operator.Or,
 			MinimumShouldMatch = 2,
-			FuzzyRewrite = RewriteMultiTerm.ConstantScoreBoolean,
+			FuzzyRewrite = MultiTermQueryRewrite.ConstantScoreBoolean,
 			TieBreaker = 1.1,
 			CutoffFrequency = 0.001,
 			Lenient = true,
@@ -68,7 +68,7 @@ namespace Tests.QueryDsl.FullText.MultiMatch
 				.MaxExpansions(2)
 				.Operator(Operator.Or)
 				.MinimumShouldMatch(2)
-				.FuzzyRewrite(RewriteMultiTerm.ConstantScoreBoolean)
+				.FuzzyRewrite(MultiTermQueryRewrite.ConstantScoreBoolean)
 				.TieBreaker(1.1)
 				.CutoffFrequency(0.001)
 				.Lenient()

@@ -18,7 +18,7 @@ namespace Nest
 		string Analyzer { get; set; }
 
 		[JsonProperty("fuzzy_rewrite")]
-		RewriteMultiTerm? FuzzyRewrite { get; set; }
+		MultiTermQueryRewrite FuzzyRewrite { get; set; }
 
 		/// <summary>
 		/// Allows fuzzy matching based on the type of field being queried.
@@ -70,7 +70,7 @@ namespace Nest
 		public TextQueryType? Type { get; set; }
 		public string Query { get; set; }
 		public string Analyzer { get; set; }
-		public RewriteMultiTerm? FuzzyRewrite { get; set; }
+		public MultiTermQueryRewrite FuzzyRewrite { get; set; }
 
 		/// <summary>
 		/// Allows fuzzy matching based on the type of field being queried.
@@ -106,7 +106,7 @@ namespace Nest
 		TextQueryType? IMultiMatchQuery.Type { get; set; }
 		string IMultiMatchQuery.Query { get; set; }
 		string IMultiMatchQuery.Analyzer { get; set; }
-		RewriteMultiTerm? IMultiMatchQuery.FuzzyRewrite { get; set; }
+		MultiTermQueryRewrite IMultiMatchQuery.FuzzyRewrite { get; set; }
 		Fuzziness IMultiMatchQuery.Fuzziness { get; set; }
 		double? IMultiMatchQuery.CutoffFrequency { get; set; }
 		int? IMultiMatchQuery.PrefixLength { get; set; }
@@ -144,7 +144,7 @@ namespace Nest
 		public MultiMatchQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch)
 			=> Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
 
-		public MultiMatchQueryDescriptor<T> FuzzyRewrite(RewriteMultiTerm rewrite) => Assign(a => a.FuzzyRewrite = rewrite);
+		public MultiMatchQueryDescriptor<T> FuzzyRewrite(MultiTermQueryRewrite rewrite) => Assign(a => Self.FuzzyRewrite = rewrite);
 
 		public MultiMatchQueryDescriptor<T> Lenient(bool? lenient = true) => Assign(a => a.Lenient = lenient);
 

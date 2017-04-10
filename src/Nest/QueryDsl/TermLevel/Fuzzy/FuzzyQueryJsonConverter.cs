@@ -31,7 +31,7 @@ namespace Nest
 			IFuzzyQuery fq;
 			if (v.Type == JTokenType.String)
 			{
-				fq = new FuzzyQuery()
+				fq = new FuzzyQuery
 				{
 					Value = GetPropValue<string>(jo, "value"),
 					Fuzziness = GetPropObject<Fuzziness>(jo, "fuzziness")
@@ -39,7 +39,7 @@ namespace Nest
 			}
 			else if (v.Type == JTokenType.Date)
 			{
-				fq = new FuzzyDateQuery()
+				fq = new FuzzyDateQuery
 				{
 					Value = GetPropValue<DateTime?>(jo, "value"),
 					Fuzziness = GetPropObject<Time>(jo, "fuzziness")
@@ -47,7 +47,7 @@ namespace Nest
 			}
 			else if (v.Type == JTokenType.Integer || v.Type == JTokenType.Float)
 			{
-				fq = new FuzzyNumericQuery()
+				fq = new FuzzyNumericQuery
 				{
 					Value = GetPropValue<double?>(jo, "value"),
 					Fuzziness = GetPropValue<double?>(jo, "fuzziness")
@@ -60,7 +60,7 @@ namespace Nest
 			fq.Transpositions = GetPropValue<bool?>(jo, "transpositions");
 			var rewriteString = GetPropValue<string>(jo, "rewrite");
 			if (!rewriteString.IsNullOrEmpty())
-				fq.Rewrite = rewriteString.ToEnum<RewriteMultiTerm>();
+				fq.Rewrite = MultiTermQueryRewrite.Create(rewriteString);
 
 			fq.Name = GetPropValue<string>(jo, "_name");
 			fq.Boost = GetPropValue<double?>(jo, "boost");

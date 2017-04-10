@@ -20,9 +20,10 @@ namespace Nest
 		internal static bool IsConditionless(ITermQuery q) => q.Value == null || q.Value.ToString().IsNullOrEmpty() || q.Field.IsConditionless();
 	}
 
-	public abstract class TermQueryDescriptorBase<TDescriptor, T> : FieldNameQueryDescriptorBase<TDescriptor, ITermQuery, T>
+	public abstract class TermQueryDescriptorBase<TDescriptor, TInterface, T> : FieldNameQueryDescriptorBase<TDescriptor, TInterface, T>
 		, ITermQuery
-		where TDescriptor : TermQueryDescriptorBase<TDescriptor, T>
+		where TDescriptor : TermQueryDescriptorBase<TDescriptor, TInterface, T>, TInterface
+		where TInterface : class, ITermQuery
 		where T : class
 	{
 		protected override bool Conditionless => TermQuery.IsConditionless(this);
@@ -35,8 +36,8 @@ namespace Nest
 		}
 	}
 
-	public class TermQueryDescriptor<T> : TermQueryDescriptorBase<TermQueryDescriptor<T>, T>
+	public class TermQueryDescriptor<T> : TermQueryDescriptorBase<TermQueryDescriptor<T>, ITermQuery, T>
 		where T : class
-	{	
+	{
 	}
 }

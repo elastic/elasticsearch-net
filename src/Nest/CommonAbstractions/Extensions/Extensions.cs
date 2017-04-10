@@ -56,6 +56,23 @@ namespace Nest
 		}
 
 		internal static ConcurrentDictionary<string, object> _enumCache = new ConcurrentDictionary<string, object>();
+
+		internal static string ToEnumValue<T>(this T enumValue) where T : struct
+		{
+			var enumType = typeof(T);
+			var name = Enum.GetName(enumType, enumValue);
+			var enumMemberAttribute = enumType.GetField(name).GetCustomAttribute<EnumMemberAttribute>();
+
+			if (enumMemberAttribute != null)
+				return enumMemberAttribute.Value;
+
+			var alternativeEnumMemberAttribute = enumType.GetField(name).GetCustomAttribute<AlternativeEnumMemberAttribute>();
+
+			return alternativeEnumMemberAttribute != null
+				? alternativeEnumMemberAttribute.Value
+				: enumValue.ToString();
+		}
+
 		internal static T? ToEnum<T>(this string str, StringComparison comparison = StringComparison.OrdinalIgnoreCase) where T : struct
 		{
 			if (str == null) return null;
