@@ -13,13 +13,14 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[cumulative-sum-aggregation-usage]]
-== Cumulative Sum Aggregation Usage
+=== Cumulative Sum Aggregation Usage
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
 response.ShouldBeValid();
+
 var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
 projectsPerMonth.Should().NotBeNull();
 projectsPerMonth.Buckets.Should().NotBeNull();
@@ -33,7 +34,7 @@ foreach (var item in projectsPerMonth.Buckets)
 }
 ----
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -55,7 +56,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----

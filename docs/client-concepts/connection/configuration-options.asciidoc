@@ -1,0 +1,253 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/ClientConcepts/Connection/ConfigurationOptions.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[configuration-options]]
+=== Configuration options
+
+Connecting to Elasticsearch with <<elasticsearch-net-getting-started,Elasticsearch.Net>> and <<nest-getting-started,NEST>> is easy, but
+it's entirely possible that you'd like to change the default connection behaviour. There are a number of configuration options available
+on `ConnectionSettings` (and `ConnectionConfiguration` for Elasticsearch.Net) that can be used to control
+how the clients interact with Elasticsearch.
+
+==== Options on ConnectionConfiguration
+
+The following is a list of available connection configuration options on `ConnectionConfiguration`; since`ConnectionSettings` derives from `ConnectionConfiguration`, these options are available for both
+Elasticsearch.Net and NEST:
+
+`BasicAuthentication`::
+
+Basic Authentication credentials to send with all requests to Elasticsearch
+
+`ClientCertificate`::
+
+Use the following certificate to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`
+
+`ClientCertificates`::
+
+Use the following certificates to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`
+
+`ConnectionLimit`::
+
+Limits the number of concurrent connections that can be opened to an endpoint. Defaults to `80` .
++
+For Desktop CLR, this setting applies to the DefaultConnectionLimit property on the  ServicePointManager object when creating ServicePoint objects, affecting the default `IConnection` implementation.
++
+For Core CLR, this setting applies to the MaxConnectionsPerServer property on the HttpClientHandler instances used by the HttpClient inside the default `IConnection` implementation
+
+`DeadTimeout`::
+
+Sets the default dead timeout factor when a node has been marked dead. Some connection pools may use a flat timeout whilst others take this factor and increase it exponentially
+
+`DisableAutomaticProxyDetection`::
+
+Disables the automatic detection of a proxy
+
+`DisableDirectStreaming`::
+
+Ensures the response bytes are always available on the `ElasticsearchResponse<T>`
++
+IMPORTANT: Depending on the registered serializer,             this may cause the response to be buffered in memory first, potentially affecting performance.
+
+`DisablePing`::
+
+When a node is used for the very first time or when it's used for the first time after it has been marked dead a ping with a very low timeout is send to the node to make sure that when it's still dead it reports it as fast as possible. You can disable these pings globally here if you rather have it fail on the possible slower original request
+
+`EnableDebugMode`::
+
+Turns on settings that aid in debugging like DisableDirectStreaming() and PrettyJson() so that the original request and response JSON can be inspected.
+
+`EnableHttpCompression`::
+
+Enables gzip compressed requests and responses.
++
+IMPORTANT: You need to configure http compression on Elasticsearch to be able to use this
++
+http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html
+
+`EnableHttpPipelining`::
+
+Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
++
+NOTE: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.
+
+`EnableTcpKeepAlive`::
+
+Sets the keep-alive option on a TCP connection.
++
+For Desktop CLR, sets ServicePointManager.SetTcpKeepAlive
+
+`GlobalHeaders`::
+
+A collection of headers that will be sent with every request. Useful in situations where you always need to pass a header e.g. a custom auth header
+
+`GlobalQueryStringParameters`::
+
+A collection of query string parameters that will be sent with every request. Useful in situations where you always need to pass a parameter e.g. an API key.
+
+`MaxDeadTimeout`::
+
+Sets the maximum time a node can be marked dead. Different implementations of `IConnectionPool` may choose a different default.
+
+`MaximumRetries`::
+
+The maximum number of retries for a given request,
+
+`MaxRetryTimeout`::
+
+Limits the total runtime, including retries, separately from `RequestTimeout`
++
+When not specified, defaults to `RequestTimeout` , which itself defaults to `60` seconds
+
+`NodePredicate`::
+
+Register a predicate to select which nodes that you want to execute API calls on. Note that sniffing requests omit this predicate and always execute on all nodes. When using an `IConnectionPool` implementation that supports reseeding of nodes, this will default to omitting master only node from regular API calls.             When using static or single node connection pooling it is assumed the list of node you instantiate the client with should be taken verbatim.
+
+`OnRequestCompleted`::
+
+Registers an `Action<T>` that is called when a response is received from Elasticsearch.             This can be useful for implementing custom logging.             Multiple callbacks can be registered by calling this multiple times
+
+`OnRequestDataCreated`::
+
+Registers an `Action<T>` that is called when `RequestData` is created.             Multiple callbacks can be registered by calling this multiple times
+
+`PingTimeout`::
+
+Sets the default ping timeout in milliseconds for ping requests, which are used to determine whether a node is alive. Pings should fail as fast as possible.
+
+`PrettyJson`::
+
+Forces all requests to have ?pretty=true querystring parameter appended,  causing Elasticsearch to return formatted JSON. Also forces the client to send out formatted JSON. Defaults to `false`
+
+`Proxy`::
+
+If your connection has to go through proxy, use this method to specify the proxy url
+
+`RequestTimeout`::
+
+Sets the default timeout in milliseconds for each request to Elasticsearch. Defaults to `60` seconds.
++
+NOTE: You can set this to a high value here, and specify a timeout on Elasticsearch's side.
+
+`ServerCertificateValidationCallback`::
+
+Register a ServerCertificateValidationCallback, this is called per endpoint until it returns true. After this callback returns true that endpoint is validated for the lifetime of the ServiceEndpoint for that host.
+
+`SniffLifeSpan`::
+
+Set the duration after which a cluster state is considered stale and a sniff should be performed again. An `IConnectionPool` has to signal it supports reseeding, otherwise sniffing will never happen.             Defaults to 1 hour.             Set to null to disable completely. Sniffing will only ever happen on ConnectionPools that return true for SupportsReseeding
+
+`SniffOnConnectionFault`::
+
+Enables resniffing of the cluster when a call fails, if the connection pool supports reseeding. Defaults to `true`
+
+`SniffOnStartup`::
+
+Enables sniffing on first usage of a connection pool if that pool supports reseeding. Defaults to `true`
+
+`ThrowExceptions`::
+
+Instead of following a c/go like error checking on response.IsValid always throw an exception on the client when a call resulted in an exception on either the client or the Elasticsearch server.
++
+Reasons for such exceptions could be search parser errors, index missing exceptions, etc...
+
+:xml-docs: Elasticsearch.Net:ConnectionConfiguration`1
+
+==== Options on ConnectionSettings
+
+The following is a list of available connection configuration options on `ConnectionSettings`:
+
+`DefaultFieldNameInferrer`::
+
+Specify how field names are inferred from POCO property names.
++
+By default, NEST camel cases property names  e.g. EmailAddress POCO property => "emailAddress" Elasticsearch document field name
+
+`DefaultIndex`::
+
+The default index to use when no index is specified.
+
+`DefaultTypeNameInferrer`::
+
+Specify how type names are inferred from POCO types.  By default, type names are inferred by calling `ToLowerInvariant` on the type's name.
+
+`MapDefaultTypeIndices`::
+
+Specify the default index names for a given POCO type.  Takes precedence over the global `DefaultIndex`
+
+`MapDefaultTypeNames`::
+
+Specify the default type names for a given POCO type.  Takes precedence over the global `DefaultTypeNameInferrer`
+
+`MapIdPropertyFor`::
+
+Specify which property on a given POCO should be used to infer the id of the document when  indexed in Elasticsearch. The type of the document.
+
+`MapPropertiesFor`::
+
+Specify how the properties are mapped for a given POCO type. The type of the document.
+
+`PluralizeTypeNames`::
+
+Pluralize type names when inferring from POCO type names.
++
+This calls `DefaultTypeNameInferrer` with an implementation that will pluralize type names.              This used to be the default prior to Nest 0.90
+
+:xml-docs: Nest:ConnectionSettingsBase`1
+
+Here's an example to demonstrate setting several configuration options using the low level client
+
+[source,csharp]
+----
+var connectionConfiguration = new ConnectionConfiguration()
+    .DisableAutomaticProxyDetection()
+    .EnableHttpCompression()
+    .DisableDirectStreaming()
+    .PrettyJson()
+    .RequestTimeout(TimeSpan.FromMinutes(2));
+
+var lowLevelClient = new ElasticLowLevelClient(connectionConfiguration);
+----
+
+And with the high level client
+
+[source,csharp]
+----
+var connectionSettings = new ConnectionSettings()
+    .InferMappingFor<Project>(i => i
+        .IndexName("my-projects")
+        .TypeName("project")
+    )
+    .EnableDebugMode()
+    .PrettyJson()
+    .RequestTimeout(TimeSpan.FromMinutes(2));
+
+var client = new ElasticClient(connectionSettings);
+----
+
+[NOTE]
+====
+Basic Authentication credentials can alternatively be specified on the node URI directly
+
+[source,csharp]
+----
+var uri = new Uri("http://username:password@localhost:9200");
+var settings = new ConnectionConfiguration(uri);
+----
+
+but this can be awkward when using connection pooling with multiple nodes, especially when the connection pool
+used is one that is capable of reseeding iteslf. For this reason, we'd recommend specifying credentials
+on `ConnectionSettings`.
+
+====
+

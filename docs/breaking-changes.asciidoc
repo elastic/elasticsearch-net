@@ -1,4 +1,4 @@
-= Breaking Changes
+= Breaking changes
 
 ////
 IMPORTANT NOTE
@@ -12,9 +12,9 @@ please modify the original csharp file found at the link and submit the PR with 
 --
 There are a number of breaking changes when going from 2.x to 5.x
 
-* <<elasticsearch-net-breaking-changes, Elasticsearch.Net Breaking Changes>>
+* <<elasticsearch-net-breaking-changes, Elasticsearch.Net breaking changes>>
 
-* <<nest-breaking-changes, NEST Breaking Changes>>
+* <<nest-breaking-changes, NEST breaking changes>>
 
 --
 

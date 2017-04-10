@@ -1,0 +1,36 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Aggregations/ReservedAggregationNames.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[reserved-aggregation-names]]
+=== Reserved aggregation names
+
+NEST uses a heuristics based parser to parse the aggregations back in to typed responses.
+Because of this, some of the key properties we use to make decisions about parsing are not allowed as key names
+for aggregations in a request.
+
+Elasticsearch 5.x will at some point get a flag that returns the aggregations in a parsable
+fashion. when this happens, this limitation will be lifted but until that time, avoid the following names for
+aggregation keys:
+
+[source,csharp]
+----
+new []
+{
+    "score",
+    "value_as_string",
+    "keys",
+    "max_score"
+}
+----
+

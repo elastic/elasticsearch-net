@@ -5,6 +5,10 @@ using Tests.Framework.MockData;
 
 namespace Tests.QueryDsl.NestSpecific.Raw
 {
+	/**
+	 * NEST's <<raw-query-usage, raw query>> can be combined with other queries using a <<compound-queries, compound query>>
+	 * such as a `bool` query.
+	 */
 	public class RawCombineUsageTests : QueryDslUsageTestsBase
 	{
 		public RawCombineUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -16,7 +20,7 @@ namespace Tests.QueryDsl.NestSpecific.Raw
 		protected override object QueryJson => new
 		{
 			@bool = new {
-				must = new object[] 
+				must = new object[]
 				{
 					new { term = new { fieldname = "value" } },
 					new { term = new { x = new { value = "y" } } }
@@ -24,11 +28,11 @@ namespace Tests.QueryDsl.NestSpecific.Raw
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => 
+		protected override QueryContainer QueryInitializer =>
 			new RawQuery(RawTermQuery)
 			&& new TermQuery { Field = "x", Value = "y" };
 
-		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => 
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) =>
 			q.Raw(RawTermQuery) && q.Term("x", "y");
 
 	}

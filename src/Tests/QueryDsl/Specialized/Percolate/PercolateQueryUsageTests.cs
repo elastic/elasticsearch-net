@@ -88,9 +88,11 @@ namespace Tests.QueryDsl.Specialized.Percolate
 			}
 		};
 
+        //hide
 		protected override Func<SearchDescriptor<PercolatedQuery>, ISearchRequest> Fluent => f =>
 			f.Query(QueryFluent).Index(CallIsolatedValue).AllTypes();
 
+        //hide
 		protected override SearchRequest<PercolatedQuery> Initializer =>
 			new SearchRequest<PercolatedQuery>(CallIsolatedValue, Types.All)
 			{

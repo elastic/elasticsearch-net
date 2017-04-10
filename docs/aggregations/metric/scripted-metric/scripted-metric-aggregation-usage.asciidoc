@@ -13,9 +13,9 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[scripted-metric-aggregation-usage]]
-== Scripted Metric Aggregation Usage
+=== Scripted Metric Aggregation Usage
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -30,7 +30,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -75,7 +75,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----

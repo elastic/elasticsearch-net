@@ -13,13 +13,15 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[sniffing-on-startup]]
-== Sniffing on startup
+=== Sniffing on startup
 
-<<connection-pooling, Connection pools>> that return true for `SupportsReseeding` will sniff on startup by default.
+<<connection-pooling, Connection pools>> that return `true` for `SupportsReseeding`
+will sniff on startup by default.
 
-We can demonstrate this by creating a _virtual_ Elasticsearch cluster with NEST's Test Framework. 
-Here we create a 10 node cluster that uses a <<sniffing-connection-pool,SniffingConnectionPool>>, setting
-sniff to fail on all nodes *_except_* 9202
+We can demonstrate this by creating a _virtual_ Elasticsearch cluster using NEST's Test cluster framework.
+
+Here we create a 10 node cluster that uses a <<sniffing-connection-pool,Sniffing connection pool>>, setting
+sniff to fail on all nodes _*except*_ 9202
 
 [source,csharp]
 ----
@@ -32,114 +34,36 @@ var audit = new Auditor(() => Framework.Cluster
 );
 ----
 
-When the client call is made, we can see from the audit trail that the pool first tried to sniff on startup,
-with a sniff failure on 9200 and 9201, followed by a sniff success on 9202. A ping and healthy response are made on
+When the client call is made, from the audit trail we see that the pool first tried to sniff on startup,
+with a sniff failure on 9200 and 9201, followed by a sniff success on 9202. A ping and then healthy response are made on
 9200
 
 [source,csharp]
 ----
-await audit.TraceCall(new ClientCall
- {
-    { SniffOnStartup},
-    { SniffFailure, 9200},
-    { SniffFailure, 9201},
-    { SniffSuccess, 9202},
-    { PingSuccess , 9200},
-    { HealthyResponse, 9200}
-});
+await audit.TraceCall(
+     new ClientCall
+     {
+        { SniffOnStartup},
+        { SniffFailure, 9200},
+        { SniffFailure, 9201},
+        { SniffSuccess, 9202},
+        { PingSuccess , 9200},
+        { HealthyResponse, 9200}
+    }
+ );
 ----
 
-[source,csharp]
-----
-var audit = new Auditor(() => Framework.Cluster
-    .Nodes(10)
-    .Sniff(s => s.Fails(Always))
-    .Sniff(s => s.OnPort(9202).Succeeds(Always, Framework.Cluster.Nodes(8, startFrom: 9204)))
-    .SniffingConnectionPool()
-    .AllDefaults()
-);
+==== Occurs once
 
-await audit.TraceCall(new ClientCall {
-{ SniffOnStartup},
-{ SniffFailure, 9200},
-{ SniffFailure, 9201},
-{ SniffSuccess, 9202},
-{ PingSuccess, 9204},
-{ HealthyResponse, 9204}
-            });
-----
+**A sniff on startup only happens once**. That is,
 
-[source,csharp]
-----
-var audit = new Auditor(() => Framework.Cluster
-    .Nodes(10)
-    .Sniff(s => s.Fails(Always))
-    .Sniff(s => s.OnPort(9209).Succeeds(Always))
-    .SniffingConnectionPool()
-    .AllDefaults()
-);
+. a sniff is attempted on a node
 
-await audit.TraceCall(new ClientCall {
-{ SniffOnStartup},
-{ SniffFailure, 9200},
-{ SniffFailure, 9201},
-{ SniffFailure, 9202},
-{ SniffFailure, 9203},
-{ SniffFailure, 9204},
-{ SniffFailure, 9205},
-{ SniffFailure, 9206},
-{ SniffFailure, 9207},
-{ SniffFailure, 9208},
-{ SniffSuccess, 9209},
-{ PingSuccess, 9200},
-{ HealthyResponse, 9200}
-            });
-----
+. if that node fails, a sniff is attempted on the next node
 
-[source,csharp]
-----
-var audit = new Auditor(() => Framework.Cluster
-    .Nodes(new[] {
-        new Node(new Uri("http://localhost:9200")) { MasterEligible = false },
-        new Node(new Uri("http://localhost:9201")) { MasterEligible = false },
-        new Node(new Uri("http://localhost:9202")) { MasterEligible = true },
-    })
-    .Sniff(s => s.Succeeds(Always))
-    .SniffingConnectionPool()
-    .AllDefaults()
-);
+. this continues until a sniff succeeds
 
-await audit.TraceCall(new ClientCall {
-{ SniffOnStartup},
-{ SniffSuccess, 9202},
-{ PingSuccess, 9200},
-{ HealthyResponse, 9200}
-            });
-----
-
-[source,csharp]
-----
-var audit = new Auditor(() => Framework.Cluster
-    .Nodes(new[] {
-        new Node(new Uri("http://localhost:9200")) { MasterEligible = true },
-        new Node(new Uri("http://localhost:9201")) { MasterEligible = true },
-        new Node(new Uri("http://localhost:9202")) { MasterEligible = false },
-    })
-    .Sniff(s => s.Fails(Always))
-    .Sniff(s => s.OnPort(9202).Succeeds(Always))
-    .SniffingConnectionPool()
-    .AllDefaults()
-);
-
-await audit.TraceCall(new ClientCall {
-{ SniffOnStartup},
-{ SniffFailure, 9200},
-{ SniffFailure, 9201},
-{ SniffSuccess, 9202},
-{ PingSuccess, 9200},
-{ HealthyResponse, 9200}
-            });
-----
+. a sniff on startup does not occur again.
 
 [source,csharp]
 ----
@@ -150,6 +74,7 @@ var audit = new Auditor(() => Framework.Cluster
     .SniffingConnectionPool()
     .AllDefaults()
 );
+
 await audit.TraceCalls(
      new ClientCall
      {
@@ -166,5 +91,86 @@ await audit.TraceCalls(
         { HealthyResponse, 9201}
     }
 );
+----
+
+==== Uses cluster state
+
+**A sniff on startup will use the returned cluster state**.
+
+In this next example, the state of the cluster returned from the successful sniff
+is used for subsequent client requests
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(10)
+    .Sniff(s => s.Fails(Always))
+    .Sniff(s => s.OnPort(9202).Succeeds(Always, Framework.Cluster.Nodes(8, startFrom: 9204))) <1>
+    .SniffingConnectionPool()
+    .AllDefaults()
+);
+
+await audit.TraceCall(new ClientCall {
+    { SniffOnStartup},
+    { SniffFailure, 9200},
+    { SniffFailure, 9201},
+    { SniffSuccess, 9202},
+    { PingSuccess, 9204}, <2>
+    { HealthyResponse, 9204}
+});
+----
+<1> Sniffing returns 8 nodes, starting from 9204
+
+<2> After successfully sniffing, the ping now happens on 9204
+
+==== Prefers master eligible nodes
+
+Sniffing prefers to run on master eligible nodes
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(new[] {
+        new Node(new Uri("http://localhost:9200")) { MasterEligible = false },
+        new Node(new Uri("http://localhost:9201")) { MasterEligible = false },
+        new Node(new Uri("http://localhost:9202")) { MasterEligible = true },
+    })
+    .Sniff(s => s.Succeeds(Always))
+    .SniffingConnectionPool()
+    .AllDefaults()
+);
+
+await audit.TraceCall(new ClientCall {
+    { SniffOnStartup},
+    { SniffSuccess, 9202},
+    { PingSuccess, 9200},
+    { HealthyResponse, 9200}
+});
+----
+
+although it will fail over to non-master eligible nodes when sniffing fails on master eligible nodes
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(new[] {
+        new Node(new Uri("http://localhost:9200")) { MasterEligible = true },
+        new Node(new Uri("http://localhost:9201")) { MasterEligible = true },
+        new Node(new Uri("http://localhost:9202")) { MasterEligible = false },
+    })
+    .Sniff(s => s.Fails(Always))
+    .Sniff(s => s.OnPort(9202).Succeeds(Always))
+    .SniffingConnectionPool()
+    .AllDefaults()
+);
+
+await audit.TraceCall(new ClientCall {
+    { SniffOnStartup},
+    { SniffFailure, 9200},
+    { SniffFailure, 9201},
+    { SniffSuccess, 9202},
+    { PingSuccess, 9200},
+    { HealthyResponse, 9200}
+});
 ----
 

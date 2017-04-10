@@ -17,7 +17,8 @@ please modify the original csharp file found at the link and submit the PR with 
 
 The query element within the search request body allows to define a query using the <<query-dsl,Query DSL>>.
 
-=== Fluent DSL Example
+[float]
+=== Fluent DSL example
 
 [source,csharp]
 ----
@@ -27,7 +28,8 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+[float]
+=== Object Initializer syntax example
 
 [source,csharp]
 ----

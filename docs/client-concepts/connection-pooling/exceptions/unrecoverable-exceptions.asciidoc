@@ -13,28 +13,29 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[unrecoverable-exceptions]]
-== Unrecoverable exceptions 
+=== Unrecoverable exceptions
 
-Unrecoverable exceptions are _excepted_ exceptions that are grounds to exit the client pipeline immediately. 
-By default, the client won't throw on any `ElasticsearchClientException` but instead return an invalid response which
-can be detected by checking `.IsValid` on the response 
-You can configure the client to throw using `ThrowExceptions()` on `ConnectionSettings`. The following test
-both a client that throws and one that returns an invalid response with an `.OriginalException` exposed 
+Unrecoverable exceptions are _expected_ exceptions that are grounds to exit the client pipeline immediately.
 
-The following are recoverable exceptions 
+[NOTE]
+--
+What do we mean by _expected_ exceptions? Aren't all exceptions _exceptional_?
 
-[source,csharp]
-----
-var recoverablExceptions = new[]
-{
-    new PipelineException(PipelineFailure.BadResponse),
-    new PipelineException(PipelineFailure.PingFailure),
-};
+Well, there a some exceptions that can be thrown in the course of a request
+that _may_ be expected, some of which can be retried on another node in the cluster, and some that cannot.
+For example, an exception thrown when pinging a node throws an exception,
+but this is an exception that the client expects can happen,
+and can handle by trying a ping on another node. On the contrary, a bad authentication response from a node will throw an
+exception, and the client understands that an exception under these circumstances should be handled by not retrying,
+but by exiting the pipeline.
 
-recoverablExceptions.Should().OnlyContain(e => e.Recoverable);
-----
+--
 
-and the unrecoverable exceptions 
+By default, the client won't throw on any `ElasticsearchClientException` but instead return an invalid response
+that can be detected by checking the `.IsValid` property on the response. You can change this behaviour with
+by using `ThrowExceptions()` on <<configuration-options, `ConnectionSettings`>>.
+
+The following is a collection of unrecoverable exceptions 
 
 [source,csharp]
 ----
@@ -51,43 +52,56 @@ var unrecoverableExceptions = new[]
 unrecoverableExceptions.Should().OnlyContain(e => !e.Recoverable);
 ----
 
-As an example, let's set up a 10 node cluster that will always succeed when pinged but
-			will fail with a 401 response when making client calls
+As an example, let's use our Virtual cluster test framework to set up a 10 node cluster
+that always succeeds when pinged but fails with a 401 response when making client calls
 
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
     .Nodes(10)
-    .Ping(r => r.SucceedAlways())
-    .ClientCalls(r => r.FailAlways(401))
+    .Ping(r => r.SucceedAlways()) <1>
+    .ClientCalls(r => r.FailAlways(401)) <2>
     .StaticConnectionPool()
     .AllDefaults()
 );
 ----
+<1> Always succeed on ping
+<2> ...but always fail on calls with a 401 Bad Authentication response
 
-Here we make a client call and determine that the first audit event was a successful ping, 
-followed by a bad response as a result of a bad authentication response
+Now, let's make a client call. We'll see that the first audit event is a successful ping
+followed by a bad response as a result of the 401 bad authentication response
 
 [source,csharp]
 ----
 audit = await audit.TraceElasticsearchException(
     new ClientCall {
-        { AuditEvent.PingSuccess, 9200 },
-        { AuditEvent.BadResponse, 9200 },
+        { AuditEvent.PingSuccess, 9200 }, <1>
+        { AuditEvent.BadResponse, 9200 }, <2>
     },
-    (e) =>
+    exception =>
     {
-        e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+        exception.FailureReason
+            .Should().Be(PipelineFailure.BadAuthentication); <3>
     }
 );
 ----
+<1> First call results in a successful ping
+<2> Second call results in a bad response
+<3> The reason for the bad response is Bad Authentication
+
+When a bad authentication response occurs, the client does not attempt to deserialize the response body returned;
+The response may or may not have a body and even when it does, it may not even be JSON.
+
+In the following couple of examples, we set up a cluster that always returns a typical nginx HTML response body
+with 401 response to client calls. In this first example, we assert that the failure is because of a 401 Bad Authentication
+response but the response body is not captured on the response
 
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
     .Nodes(10)
     .Ping(r => r.SucceedAlways())
-    .ClientCalls(r => r.FailAlways(401).ReturnResponse(ResponseHtml))
+    .ClientCalls(r => r.FailAlways(401).ReturnResponse(HtmlNginx401Response)) <1>
     .StaticConnectionPool()
     .AllDefaults()
 );
@@ -101,25 +115,24 @@ audit = await audit.TraceElasticsearchException(
     {
         e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
         e.Response.HttpStatusCode.Should().Be(401);
-        e.Response.ResponseBodyInBytes.Should().BeNull();
+        e.Response.ResponseBodyInBytes.Should().BeNull(); <2>
     }
 );
-
-e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
-
-e.Response.HttpStatusCode.Should().Be(401);
-
-e.Response.ResponseBodyInBytes.Should().BeNull();
 ----
+<1> Always return a 401 bad response with a HTML response on client calls
+<2> Assert that the response body bytes are null
+
+Now in this example, by turning on `DisableDirectStreaming()` on `ConnectionSettings`, we see the same behaviour exhibited
+as before, but this time however, the response body bytes are captured in the response and can be inspected.
 
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
     .Nodes(10)
     .Ping(r => r.SucceedAlways())
-    .ClientCalls(r => r.FailAlways(401).ReturnResponse(ResponseHtml))
+    .ClientCalls(r => r.FailAlways(401).ReturnResponse(HtmlNginx401Response))
     .StaticConnectionPool()
-    .Settings(s=>s.DisableDirectStreaming())
+    .Settings(s => s.DisableDirectStreaming())
 );
 
 audit = await audit.TraceElasticsearchException(
@@ -131,66 +144,13 @@ audit = await audit.TraceElasticsearchException(
     {
         e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
         e.Response.HttpStatusCode.Should().Be(401);
-        e.Response.ResponseBodyInBytes.Should().NotBeNull();
+        e.Response.ResponseBodyInBytes.Should().NotBeNull(); <1>
         var responseString = Encoding.UTF8.GetString(e.Response.ResponseBodyInBytes);
-        responseString.Should().Contain("nginx/");
+        responseString.Should().Contain("nginx/"); <2>
         e.DebugInformation.Should().Contain("nginx/");
     }
 );
-
-e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
-
-e.Response.HttpStatusCode.Should().Be(401);
-
-e.Response.ResponseBodyInBytes.Should().NotBeNull();
-
-var responseString = Encoding.UTF8.GetString(e.Response.ResponseBodyInBytes);
-
-responseString.Should().Contain("nginx/");
-
-e.DebugInformation.Should().Contain("nginx/");
 ----
-
-[source,csharp]
-----
-var audit = new Auditor(() => Framework.Cluster
-    .Nodes(10)
-    .Ping(r => r.SucceedAlways())
-    .ClientCalls(r => r.FailAlways(401).ReturnResponse(ResponseHtml))
-    .StaticConnectionPool()
-    .Settings(s=>s.DisableDirectStreaming().DefaultIndex("default-index"))
-    .ClientProxiesTo(
-        (c, r) => c.Get<Project>("1", s=>s.RequestConfiguration(r)),
-        async (c, r) => await c.GetAsync<Project>("1", s=>s.RequestConfiguration(r)) as IResponse
-    )
-);
-
-audit = await audit.TraceElasticsearchException(
-    new ClientCall {
-        { AuditEvent.PingSuccess, 9200 },
-        { AuditEvent.BadResponse, 9200 },
-    },
-    (e) =>
-    {
-        e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
-        e.Response.HttpStatusCode.Should().Be(401);
-        e.Response.ResponseBodyInBytes.Should().NotBeNull();
-        var responseString = Encoding.UTF8.GetString(e.Response.ResponseBodyInBytes);
-        responseString.Should().Contain("nginx/");
-        e.DebugInformation.Should().Contain("nginx/");
-    }
-);
-
-e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
-
-e.Response.HttpStatusCode.Should().Be(401);
-
-e.Response.ResponseBodyInBytes.Should().NotBeNull();
-
-var responseString = Encoding.UTF8.GetString(e.Response.ResponseBodyInBytes);
-
-responseString.Should().Contain("nginx/");
-
-e.DebugInformation.Should().Contain("nginx/");
-----
+<1> Response bytes are set on the response
+<2> Assert that the response contains `"nginx/"`
 

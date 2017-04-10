@@ -13,9 +13,12 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[raw-query-usage]]
-== Raw Query Usage
+=== Raw Query Usage
 
-=== Fluent DSL Example
+Allows a query represented as a string of JSON to be passed to NEST's Fluent API or Object Initializer syntax.
+This can be useful when porting over a query expressed in the query DSL over to NEST.
+
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -23,7 +26,7 @@ q
 .Raw(RawTermQuery)
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----

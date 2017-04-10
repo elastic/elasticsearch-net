@@ -14,13 +14,7 @@ namespace DocGenerator.AsciiDoc
 	{
 		private readonly FileInfo _source;
 		private readonly FileInfo _destination;
-
-		private static readonly Dictionary<string, string> IncludeDirectories = new Dictionary<string, string>
-		{
-			{ "aggregations.asciidoc", "aggregations-usage.asciidoc" },
-			{ "query-dsl.asciidoc", "query-dsl-usage.asciidoc" },
-			{ "search.asciidoc", "search-usage.asciidoc" },
-		};
+		private Document _document;
 
 		public RawAsciidocVisitor(FileInfo source, FileInfo destination)
 		{
@@ -30,6 +24,8 @@ namespace DocGenerator.AsciiDoc
 
 		public override void Visit(Document document)
 		{
+			_document = document;
+
 			var directoryAttribute = document.Attributes.FirstOrDefault(a => a.Name == "docdir");
 			if (directoryAttribute != null)
 			{
@@ -46,13 +42,17 @@ namespace DocGenerator.AsciiDoc
 					   "please modify the original csharp file found at the link and submit the PR with that change. Thanks!"
 			});
 
-			// check if this document has generated includes to other files
-			var includeAttribute = document.Attributes.FirstOrDefault(a => a.Name == "includes-from-dirs");
+			base.Visit(document);
+		}
 
-			if (includeAttribute != null)
+		public override void Visit(AttributeEntry attributeEntry)
+		{
+			if (attributeEntry.Name == "includes-from-dirs")
 			{
 				var thisFileUri = new Uri(_destination.FullName);
-				var directories = includeAttribute.Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+				var directories = attributeEntry.Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+				var counter = 1;
 
 				foreach (var directory in directories)
 				{
@@ -63,49 +63,50 @@ namespace DocGenerator.AsciiDoc
 						var relativePath = thisFileUri.MakeRelativeUri(referencedFileUri);
 						var include = new Include(relativePath.OriginalString);
 
-						document.Add(include);
-					}
-				}
-			}
-
-			base.Visit(document);
-		}
-
-		public override void Visit(Open open)
-		{
-			// include links to all the query dsl usage and aggregation usage pages on the landing query dsl and aggregations pages, respectively.
-			string usageFilePath;
-			if (IncludeDirectories.TryGetValue(_destination.Name, out usageFilePath))
-			{
-				var usageDoc = Document.Load(Path.Combine(Program.OutputDirPath, usageFilePath));
-
-				var includeAttribute = usageDoc.Attributes.FirstOrDefault(a => a.Name == "includes-from-dirs");
-
-				if (includeAttribute != null)
-				{
-					var directories = includeAttribute.Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-					var list = new UnorderedList();
-
-					foreach (var directory in directories)
-					{
-						foreach (var file in Directory.EnumerateFiles(Path.Combine(Program.OutputDirPath, directory), "*usage.asciidoc", SearchOption.AllDirectories))
+						if (attributeEntry.Parent != null)
 						{
-							var fileInfo = new FileInfo(file);
-							var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileInfo.Name);
-
-							list.Items.Add(new UnorderedListItem
-							{
-								new Paragraph(new InternalAnchor(fileNameWithoutExtension, fileNameWithoutExtension.LowercaseHyphenToPascal()))
-							});
+							attributeEntry.Parent.Insert(attributeEntry.Parent.IndexOf(attributeEntry) + counter, include);
+							++counter;
+						}
+						else
+						{
+							_document.Add(include);
 						}
 					}
+				}
 
-					open.Add(list);
+			}
+			else if (attributeEntry.Name == "anchor-list")
+			{
+				var directories = attributeEntry.Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+				var list = new UnorderedList();
+
+				foreach (var directory in directories)
+				{
+					foreach (var file in Directory.EnumerateFiles(Path.Combine(Program.OutputDirPath, directory), "*.asciidoc", SearchOption.AllDirectories))
+					{
+						var fileInfo = new FileInfo(file);
+						var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileInfo.Name);
+
+						list.Items.Add(new UnorderedListItem
+						{
+							new Paragraph(new InternalAnchor(fileNameWithoutExtension, fileNameWithoutExtension.LowercaseHyphenToPascal()))
+						});
+					}
+				}
+
+				if (attributeEntry.Parent != null)
+				{
+					attributeEntry.Parent.Insert(attributeEntry.Parent.IndexOf(attributeEntry) + 1, list);
+				}
+				else
+				{
+					_document.Add(list);
 				}
 			}
 
-			base.Visit(open);
+			base.Visit(attributeEntry);
 		}
 	}
 }

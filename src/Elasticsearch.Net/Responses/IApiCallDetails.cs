@@ -12,7 +12,7 @@ namespace Elasticsearch.Net
 		bool Success { get; }
 
 		/// <summary>
-		/// If Success is false this will hold the original exception.
+		/// If <see cref="Success"/> is <c>false</c>, this will hold the original exception.
 		/// This will be the orginating CLR exception in most cases.
 		/// </summary>
 		Exception OriginalException { get; }
@@ -37,19 +37,35 @@ namespace Elasticsearch.Net
 		/// </summary>
 		int? HttpStatusCode { get; }
 
-		/// <summary>
-		/// The raw byte response, only set when DisableDirectStreaming() is set on Connection configuration
-		/// </summary>
-		[DebuggerDisplay("{ResponseBodyInBytes != null ? System.Text.Encoding.UTF8.GetString(ResponseBodyInBytes) : null,nq}")]
+        /// <summary>
+        /// The response body bytes.
+        /// <para>NOTE: Only set when disable direct streaming is set for the request</para> 
+        /// </summary>
+        [DebuggerDisplay("{ResponseBodyInBytes != null ? System.Text.Encoding.UTF8.GetString(ResponseBodyInBytes) : null,nq}")]
 		byte[] ResponseBodyInBytes { get; }
 
-		[DebuggerDisplay("{RequestBodyInBytes != null ? System.Text.Encoding.UTF8.GetString(RequestBodyInBytes) : null,nq}")]
+        /// <summary>
+        /// The request body bytes.
+        /// <para>NOTE: Only set when disable direct streaming is set for the request</para> 
+        /// </summary>
+        [DebuggerDisplay("{RequestBodyInBytes != null ? System.Text.Encoding.UTF8.GetString(RequestBodyInBytes) : null,nq}")]
 		byte[] RequestBodyInBytes { get; }
 
-		List<Audit> AuditTrail { get; }
+        /// <summary>
+        /// An audit trail of requests made to nodes within the cluster
+        /// </summary>
+        List<Audit> AuditTrail { get; }
 
-		string DebugInformation { get; }
+        /// <summary>
+        /// A lazy human readable string representation of what happened during this request for both successful and 
+        /// failed requests.
+        /// </summary>
+        string DebugInformation { get; }
 
-		IEnumerable<string> DeprecationWarnings { get; }
+        /// <summary>
+        ///A collection of deprecation warnings returned from Elasticsearch.
+        ///<para>Used to signal that the request uses an API feature that is marked as deprecated</para>
+        /// </summary>
+        IEnumerable<string> DeprecationWarnings { get; }
 	}
 }

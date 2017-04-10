@@ -13,7 +13,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[converters]]
-== Converters
+=== Converters
 
 [source,csharp]
 ----
@@ -21,13 +21,11 @@ var converters = typeof(IElasticClient).Assembly().GetTypes()
     .Where(t => typeof(JsonConverter).IsAssignableFrom(t))
     .ToList();
 var visible = new List<string>();
-
 foreach (var converter in converters)
 {
     if (converter.IsVisible())
         visible.Add(converter.Name);
 }
-
 visible.Should().BeEmpty();
 ----
 

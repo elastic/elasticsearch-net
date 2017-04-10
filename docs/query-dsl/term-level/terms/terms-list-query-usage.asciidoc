@@ -13,9 +13,9 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[terms-list-query-usage]]
-== Terms List Query Usage
+=== Terms List Query Usage
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -28,7 +28,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -56,7 +56,7 @@ new TermsQuery
 }
 ----
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -69,7 +69,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -99,11 +99,12 @@ new TermsQuery
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
 response.IsValid.Should().BeFalse();
+
 response.ServerError.Should().NotBeNull();
 response.ServerError.Status.Should().Be(400);
 response.ServerError.Error.Should().NotBeNull();
@@ -113,7 +114,7 @@ var rootCause = rootCauses.First();
 rootCause.Type.Should().Be("parsing_exception");
 ----
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -126,7 +127,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -156,7 +157,7 @@ new TermsQuery
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----

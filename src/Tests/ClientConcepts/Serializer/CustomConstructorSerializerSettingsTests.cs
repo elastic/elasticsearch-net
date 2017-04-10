@@ -17,7 +17,7 @@ namespace Tests.ClientConcepts.Serializer
 	/// <summary>
 	/// Here we get into a bind because our constructor runs too late
 	/// </summary>
-	public class CustomConstrcutorSerializerSettingsTests : SerializationTestBase
+	public class CustomConstructorSerializerSettingsTests : SerializationTestBase
 	{
 		public class MyCystomResolver : ElasticContractResolver
 		{

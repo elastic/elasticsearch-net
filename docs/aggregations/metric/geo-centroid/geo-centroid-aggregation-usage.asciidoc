@@ -13,14 +13,14 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[geo-centroid-aggregation-usage]]
-== Geo Centroid Aggregation Usage
+=== Geo Centroid Aggregation Usage
 
 A metric aggregation that computes the weighted centroid from all coordinate values
 for a Geo-point datatype field.
 
 Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-geocentroid-aggregation.html[Geo Centroid Aggregation]
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -32,7 +32,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -56,7 +56,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -64,17 +64,18 @@ response.ShouldBeValid();
 var centroid = response.Aggs.GeoCentroid("centroid");
 centroid.Should().NotBeNull();
 centroid.Location.Should().NotBeNull();
+
 centroid.Location.Latitude.Should().NotBe(0);
 centroid.Location.Longitude.Should().NotBe(0);
 ----
 
 [[geo-centroid-sub-aggregation]]
 [float]
-== Geo Centroid Sub Aggregation
+=== Geo Centroid Sub Aggregation
 
 The `geo_centroid` aggregation is more interesting when combined as a sub-aggregation to other bucket aggregations
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -91,7 +92,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -126,11 +127,12 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
 response.IsValid.Should().BeTrue();
+
 var projects = response.Aggs.Terms("projects");
 
 foreach (var bucket in projects.Buckets)

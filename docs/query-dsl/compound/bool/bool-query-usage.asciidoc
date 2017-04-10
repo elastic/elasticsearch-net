@@ -13,7 +13,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[bool-query-usage]]
-== Bool Query Usage
+=== Bool Query Usage
 
 A query that matches documents matching boolean combinations of other queries.
 It is built using one or more boolean clauses, each clause with a typed occurrence.
@@ -41,7 +41,7 @@ Check out the <<bool-queries,`bool` queries section>> for more details on `bool`
 
 See the Elasticsearch documentation on {ref_current}/query-dsl-bool-query.html[bool query] for more details.
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -55,7 +55,7 @@ q
     .Boost(2))
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----

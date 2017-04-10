@@ -1,0 +1,43 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/ClientConcepts/Troubleshooting/DeprecationLogging.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[deprecation-logging]]
+=== Deprecation logging
+
+Elasticsearch will send back `Warn` HTTP Headers when you are using an API feature that is
+deprecated and will be removed or rewritten in a future release.
+
+Elasticsearch.NET and NEST report these back to you so you can log and watch out for them.
+
+[source,csharp]
+----
+var response = this.Client.Search<Project>(s => s
+    .FielddataFields(fd => fd
+        .Field(p => p.State)
+        .Field(p => p.NumberOfCommits)
+    )
+    .ScriptFields(sfs => sfs
+        .ScriptField("commit_factor", sf => sf
+            .Inline("doc['numberOfCommits'].value * 2")
+            .Lang("groovy")
+        )
+    )
+);
+
+response.ApiCall.DeprecationWarnings.Should().NotBeNullOrEmpty();
+
+response.DebugInformation.Should().Contain("Server indicated deprecations:"); <1>
+----
+<1> `DebugInformation` also contains the deprecation warnings
+
