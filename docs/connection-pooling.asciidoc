@@ -14,8 +14,6 @@
 
 :request-overrides: {output-dir}/request-overrides
 
-:exceptions: {output-dir}/exceptions
-
 ////
 IMPORTANT NOTE
 ==============
@@ -23,8 +21,6 @@ This file has been generated from https://github.com/elastic/elasticsearch-net/t
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
-
-include::{building-blocks}/connection-pooling.asciidoc[]
 
 include::{building-blocks}/request-pipelines.asciidoc[]
 
@@ -65,8 +61,4 @@ include::{request-overrides}/respects-max-retry-overrides.asciidoc[]
 include::{request-overrides}/respects-allowed-status-code.asciidoc[]
 
 include::{request-overrides}/respects-force-node.asciidoc[]
-
-include::{exceptions}/unexpected-exceptions.asciidoc[]
-
-include::{exceptions}/unrecoverable-exceptions.asciidoc[]
 

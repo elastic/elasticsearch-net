@@ -15,9 +15,9 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[geo-distance-aggregation-usage]]
-== Geo Distance Aggregation Usage
+=== Geo Distance Aggregation Usage
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -35,7 +35,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -85,15 +85,15 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
 response.IsValid.Should().BeTrue();
 var ringsAroundAmsterdam = response.Aggs.GeoDistance("rings_around_amsterdam");
 ringsAroundAmsterdam.Should().NotBeNull();
-ringsAroundAmsterdam.Buckets.Where(r => r.Key == "*-100.0").FirstOrDefault().Should().NotBeNull();
-ringsAroundAmsterdam.Buckets.Where(r => r.Key == "100.0-300.0").FirstOrDefault().Should().NotBeNull();
-ringsAroundAmsterdam.Buckets.Where(r => r.Key == "300.0-*").FirstOrDefault().Should().NotBeNull();
+ringsAroundAmsterdam.Buckets.FirstOrDefault(r => r.Key == "*-100.0").Should().NotBeNull();
+ringsAroundAmsterdam.Buckets.FirstOrDefault(r => r.Key == "100.0-300.0").Should().NotBeNull();
+ringsAroundAmsterdam.Buckets.FirstOrDefault(r => r.Key == "300.0-*").Should().NotBeNull();
 ----
 

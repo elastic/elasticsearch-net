@@ -15,20 +15,20 @@ namespace Tests.ClientConcepts.LowLevel
 	{
 		/**== Lifetimes
 		*
-		* If you are using an IOC container its always useful to know the best practices around the lifetime of your objects
+		* If you are using an IOC/Dependency Injection container, it's always useful to know the best practices around
+        * the lifetime of your objects.
 		*
-		* In general we advise folks to register their ElasticClient instances as singletons. The client is thread safe
-		* so sharing an instance between threads is fine.
+		* In general, we advise folks to register an `ElasticClient` instance as a singleton; the client is thread safe,
+		* so sharing an instance across threads is fine.
 		*
-		* Zooming in however the actual moving part that benefits the most from being static for most of the duration of your
-		* application is `ConnectionSettings`; caches are __per__ `ConnectionSettings`.
+		* The actual moving part that benefits from being a singleton is `ConnectionSettings` because
+		* **caches are __per__ `ConnectionSettings`**.
 		*
-		* In some applications it could make perfect sense to have multiple singleton `ElasticClient`'s registered with different
-		* connection settings. e.g if you have 2 functionally isolated Elasticsearch clusters.
+		* In some applications ,it could make perfect sense to have multiple `ElasticClient` instances registered with different
+		* connection settings such as when your application connects to two different Elasticsearch clusters.
 		*
 		* IMPORTANT: Due to the semantic versioning of Elasticsearch.Net and NEST and their alignment to versions of Elasticsearch, all instances of `ElasticClient` and
-		* Elasticsearch clusters that are connected to must be on the **same major version** i.e. it is not possible to have both an `ElasticClient` to connect to
-		* Elasticsearch 1.x _and_ 2.x in the same application as the former would require NEST 1.x and the latter, NEST 2.x.
+		* Elasticsearch clusters that are connected to must be on the **same major version**
 		*
 		* Let's demonstrate which components are disposed by creating our own derived `ConnectionSettings`, `IConnectionPool` and `IConnection` types
 		*/
@@ -37,7 +37,9 @@ namespace Tests.ClientConcepts.LowLevel
 			public AConnectionSettings(IConnectionPool pool, IConnection connection)
 				: base(pool, connection)
 			{ }
+
 			public bool IsDisposed { get; private set; }
+
 			protected override void DisposeManagedResources()
 			{
 				this.IsDisposed = true;
@@ -50,6 +52,7 @@ namespace Tests.ClientConcepts.LowLevel
 			public AConnectionPool(Uri uri, IDateTimeProvider dateTimeProvider = null) : base(uri, dateTimeProvider) { }
 
 			public bool IsDisposed { get; private set; }
+
 			protected override void DisposeManagedResources()
 			{
 				this.IsDisposed = true;
@@ -60,6 +63,7 @@ namespace Tests.ClientConcepts.LowLevel
 		class AConnection : InMemoryConnection
 		{
 			public bool IsDisposed { get; private set; }
+
 			protected override void DisposeManagedResources()
 			{
 				this.IsDisposed = true;
@@ -81,14 +85,14 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		/**
-		* Disposing `ConnectionSettings` will also dispose the `IConnectionPool` and `IConnection` it uses
+		* Disposing an instance of `ConnectionSettings` will also dispose the `IConnectionPool` and `IConnection` it uses
 		*/
 		[U] public void DisposingSettingsDisposesMovingParts()
 		{
 			var connection = new AConnection();
 			var connectionPool = new AConnectionPool(new Uri("http://localhost:9200"));
 			var settings = new AConnectionSettings(connectionPool, connection);
-			using (settings) { }
+			using (settings) { } // <1> force the settings to be disposed
 			settings.IsDisposed.Should().BeTrue();
 			connectionPool.IsDisposed.Should().BeTrue();
 			connection.IsDisposed.Should().BeTrue();

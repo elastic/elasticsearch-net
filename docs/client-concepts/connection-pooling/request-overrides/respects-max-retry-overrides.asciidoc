@@ -14,8 +14,8 @@ If you wish to submit a PR for any spelling mistakes, typos or grammatical error
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
 
-[[maximum-retries]]
-== Maximum Retries
+[[maximum-retries-per-request]]
+=== Maximum retries per request
 
 By default retry as many times as we have nodes. However retries still respect the request timeout.
 Meaning if you have a 100 node cluster and a request timeout of 20 seconds we will retry as many times as we can
@@ -30,6 +30,7 @@ var audit = new Auditor(() => Framework.Cluster
     .StaticConnectionPool()
     .Settings(s => s.DisablePing())
 );
+
 audit = await audit.TraceCall(
     new ClientCall(r => r.MaxRetries(2)) {
         { BadResponse, 9200 },

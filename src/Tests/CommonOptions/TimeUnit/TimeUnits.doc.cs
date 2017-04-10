@@ -11,12 +11,12 @@ namespace Tests.CommonOptions.TimeUnit
 {
 	public class TimeUnits
 	{
-		/** == Time units
+		/**[[time-units]]
+		 * === Time units
 		 * Whenever durations need to be specified, eg for a timeout parameter, the duration can be specified
 		 * as a whole number representing time in milliseconds, or as a time value like `2d` for 2 days.
 		 *
-		 * === Using Time units in NEST
-		 * NEST uses `Time` to strongly type this and there are several ways to construct one.
+		 * NEST uses a `Time` type to strongly type this and there are several ways to construct one.
 		 *
 		 * ==== Constructor
 		 * The most straight forward way to construct a `Time` is through its constructor
@@ -102,8 +102,8 @@ namespace Tests.CommonOptions.TimeUnit
 			(twoDays <= new Time("2d")).Should().BeTrue();
 
 			/**
-			* Special Time values `0` and `-1` can be compared against eachother
-			* and other Time values although admittingly this is a tad nonsensical.
+			* Special Time values `0` and `-1` can be compared against each other
+			* and other Time values although admittingly this is a tad non-sensical.
 			*/
 			Time.MinusOne.Should().BeLessThan(Time.Zero);
 			Time.Zero.Should().BeGreaterThan(Time.MinusOne);
@@ -122,7 +122,8 @@ namespace Tests.CommonOptions.TimeUnit
 			(new Time("-1") == Time.MinusOne).Should().BeTrue();
 		}
 
-		private class StringParsingTestCases : List<Tuple<string, TimeSpan, string>>
+        // hide
+        private class StringParsingTestCases : List<Tuple<string, TimeSpan, string>>
 		{
 			public void Add(string original, TimeSpan expect, string toString) =>
 				this.Add(Tuple.Create(original, expect, toString));
@@ -131,6 +132,7 @@ namespace Tests.CommonOptions.TimeUnit
 				this.Add(Tuple.Create(bad, TimeSpan.FromDays(1), argumentExceptionContains));
 		}
 
+        // hide
 		[U]public void StringImplicitConversionParsing()
 		{
 			var testCases = new StringParsingTestCases
@@ -159,7 +161,9 @@ namespace Tests.CommonOptions.TimeUnit
 				time.ToString().Should().Be(testCase.Item3);
 			}
 		}
-		[U]public void StringParseExceptions()
+
+        // hide
+        [U]public void StringParseExceptions()
 		{
 			var testCases = new StringParsingTestCases
 			{
@@ -176,7 +180,8 @@ namespace Tests.CommonOptions.TimeUnit
 
 		[U] public void UsingInterval()
 		{
-			/** === Units of Time
+			/**
+			* ==== Units of Time
 			* Units of `Time` are specified as a union of either a `DateInterval` or `Time`,
 			* both of which implicitly convert to the `Union` of these two.
 			*/

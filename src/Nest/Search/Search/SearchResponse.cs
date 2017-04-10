@@ -8,34 +8,94 @@ namespace Nest
 {
 	public interface ISearchResponse<T> : IResponse where T : class
 	{
-		ShardsMetaData Shards { get; }
-		HitsMetaData<T> HitsMetaData { get; }
-		IReadOnlyDictionary<string, IAggregate> Aggregations { get; }
-		Profile Profile { get; }
-		AggregationsHelper Aggs { get; }
-		IReadOnlyDictionary<string, Suggest<T>[]> Suggest { get; }
-		long Took { get; }
-		bool TimedOut { get; }
-		bool TerminatedEarly { get; }
-		string ScrollId { get; }
-		long Total { get; }
-		double MaxScore { get; }
+        /// <summary>
+        /// Gets the meta data about the shards on which the search query was executed.
+        /// </summary>
+        ShardsMetaData Shards { get; }
 
-		/// <summary>
-		/// Returns a view on the documents inside the hits that are returned.
-		/// <para>NOTE: if you use Fields() on the search descriptor, .Documents will be empty. Use
-		/// .Fields instead or try Source Filtering using .Source() on the Search call
-		/// to get Documents with partial fields selected
-		/// </para>
-		/// </summary>
-		IReadOnlyCollection<T> Documents { get; }
-		IReadOnlyCollection<IHit<T>> Hits { get; }
+        /// <summary>
+        /// Gets the meta data about the hits that match the search query criteria.
+        /// </summary>
+        HitsMetaData<T> HitsMetaData { get; }
 
-		/// <summary>
-		/// Will return the field values inside the hits when the search descriptor specified .Fields.
-		/// Otherwise this will always be an empty collection.
-		/// </summary>
-		IReadOnlyCollection<FieldValues> Fields { get; }
+        /// <summary>
+        /// Gets the collection of aggregations
+        /// </summary>
+        IReadOnlyDictionary<string, IAggregate> Aggregations { get; }
+
+        /// <summary>
+        /// Gets the results of profiling the search query. Has a value only when
+        /// <see cref="ISearchRequest.Profile"/> is set to <c>true</c> on the search request.
+        /// </summary>
+        Profile Profile { get; }
+
+        /// <summary>
+        /// Gets the aggregations helper that can be used to more easily handle aggregation
+        /// results.
+        /// </summary>
+        AggregationsHelper Aggs { get; }
+
+        /// <summary>
+        /// Gets the suggester results.
+        /// </summary>
+        IReadOnlyDictionary<string, Suggest<T>[]> Suggest { get; }
+
+        /// <summary>
+        /// Time in milliseconds for Elasticsearch to execute the search
+        /// </summary>
+        long Took { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether the search timed out or not
+        /// </summary>
+        bool TimedOut { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether the search was terminated early
+        /// </summary>
+        bool TerminatedEarly { get; }
+
+        /// <summary>
+        /// Gets the scroll id which can be passed to the Scroll API in order to retrieve the next batch
+        /// of results. Has a value only when <see cref="SearchRequest{T}.Scroll"/> is specified on the 
+        /// search request
+        /// </summary>
+        string ScrollId { get; }
+
+        /// <summary>
+        /// Gets the total number of documents matching the search query criteria
+        /// </summary>
+        long Total { get; }
+
+        /// <summary>
+        /// Gets the maximum score for documents matching the search query criteria
+        /// </summary>
+        double MaxScore { get; }
+
+        /// <summary>
+        /// Gets the documents inside the hits, by deserializing <see cref="IHitMetadata{T}.Source"/> into T.
+        /// <para>NOTE: if you use <see cref="ISearchRequest.StoredFields"/> on the search request, 
+        /// <see cref="Documents"/> will be empty and you should use <see cref="Fields"/> 
+        /// instead to get the field values. As an alternative to
+        /// <see cref="Fields"/>, try source filtering using <see cref="ISearchRequest.Source"/> on the 
+        /// search request to return <see cref="Documents"/> with partial fields selected
+        /// </para>
+        /// </summary>
+        IReadOnlyCollection<T> Documents { get; }
+
+        /// <summary>
+        /// Gets the collection of hits that matched the query
+        /// </summary>
+        /// <value>
+        /// The hits.
+        /// </value>
+        IReadOnlyCollection<IHit<T>> Hits { get; }
+
+        /// <summary>
+        /// Gets the field values inside the hits, when the search request uses 
+        /// <see cref="SearchRequest{T}.StoredFields"/>.
+        /// </summary>
+        IReadOnlyCollection<FieldValues> Fields { get; }
 	}
 
 	[JsonObject]
@@ -54,7 +114,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "profile")]
 		public Profile Profile { get; internal set; }
 
-		private AggregationsHelper _agg = null;
+		private AggregationsHelper _agg;
 		[JsonIgnore]
 		public AggregationsHelper Aggs => _agg ?? (_agg = new AggregationsHelper(this.Aggregations));
 

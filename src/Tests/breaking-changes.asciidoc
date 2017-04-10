@@ -1,13 +1,12 @@
-﻿= Breaking Changes
+﻿= Breaking changes
 
 [partintro]
 --
 There are a number of breaking changes when going from 2.x to 5.x
 
-* <<elasticsearch-net-breaking-changes, Elasticsearch.Net Breaking Changes>>
+* <<elasticsearch-net-breaking-changes, Elasticsearch.Net breaking changes>>
 
-* <<nest-breaking-changes, NEST Breaking Changes>>
-
+* <<nest-breaking-changes, NEST breaking changes>>
 --
 
 include::5.0-breaking-changes/elasticsearch-net-breaking-changes.asciidoc[]

@@ -20,10 +20,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
 	public class RoleDetection
 	{
-		/**== Sniffing role detection
+		/**=== Sniffing role detection
 		*
-		* When we sniff the cluster state, we detect the role of the node, whether it's master eligible and holds data.
-		* We use this information when selecting a node to perform an API call on.
+		* When we sniff the cluster state, we detect the role of each node, for example,
+        * whether it's master eligible, a node that holds data, etc.
+		* We can then use this information when selecting a node to perform an API call on.
 		*/
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task DetectsMasterNodes()
@@ -51,6 +52,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 					pool.Nodes.Where(n => n.MasterEligible).Should().HaveCount(3);
 				}
 			};
+
 			await audit.TraceStartup();
 		}
 
@@ -119,42 +121,53 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SkipMasterOnlyNodes()
 		{
+			/**
+			 * In this example, We create a Virtual cluster with a Sniffing connection pool that seeds all the known master nodes.
+			 * When the client sniffs on startup, we see that the cluster is 20 nodes in total, with the master eligible nodes
+			 * storing no data.
+			 */
 			var masterNodes = new[] {9200, 9201, 9202};
 			var totalNodesInTheCluster = 20;
-			//We create a client with a sniffing node connectionpool that seeds all the known master nodes
+			//
 			var audit = new Auditor(() => Framework.Cluster
 				.MasterOnlyNodes(masterNodes.Length)
-				// When the client sniffs on startup we see the cluster is 20 nodes in total
 				.Sniff(s => s.SucceedAlways()
-					.Succeeds(Always, Framework.Cluster.Nodes(totalNodesInTheCluster).StoresNoData(masterNodes).MasterEligible(masterNodes))
+					.Succeeds(Always, Framework.Cluster
+						.Nodes(totalNodesInTheCluster)
+						.StoresNoData(masterNodes)
+						.MasterEligible(masterNodes))
 				)
 				.SniffingConnectionPool()
-				.Settings(s=>s.DisablePing()) //for testing simplicity we disable pings
+				.Settings(s=>s.DisablePing())
 			)
 			{
-				// before the sniff assert we only see three master only nodes
-				AssertPoolBeforeStartup = (pool) =>
+				AssertPoolBeforeStartup = pool => // <1> Before the sniff, assert we only see three master only nodes
 				{
 					pool.Should().NotBeNull();
 					pool.Nodes.Should().HaveCount(3, "we seeded 3 master only nodes at the start of the application");
 					pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(0, "none of which hold data");
 				},
-				// after sniff assert we now know about the existence of 20 nodes.
-				AssertPoolAfterStartup = (pool) =>
+				AssertPoolAfterStartup = (pool) => // <2> After the sniff, assert we now know about the existence of 20 nodes.
 				{
 					pool.Should().NotBeNull();
 					var nodes = pool.CreateView().ToList();
 					nodes.Count().Should().Be(20, "Master nodes are included in the registration of nodes since we still favor sniffing on them");
 				}
 			};
-			// assert that the sniff happened on 9200 before the first API call and that api call hit the first none master eligable node
+
+			/** After the sniff has happened on 9200 before the first API call, assert that the subsequent API
+			 * call hits the first non master eligible node
+			 */
 			audit = await audit.TraceStartup(new ClientCall
 			{
 				{ SniffSuccess, 9200},
-				{ HealthyResponse, 9203}
+				{ HealthyResponse, 9203} // <1> Healthy response from 9203, not a master eligible node
 			});
 
-			//now we do a 1000 different client calls and we assert on each that it was not send to any of the known master only nodes
+			/**
+			 * To verify that the client behaves as we expect when making requests to the virtual cluster, make 1000 different
+			 * client calls and assert that each is not sent to any of the known master only nodes
+			 */
 			var seenNodes = new HashSet<int>();
 			foreach (var _ in Enumerable.Range(0, 1000))
 			{
@@ -167,10 +180,20 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 					}}}
 				);
 			}
-			//seen nodes is a hash set of all the ports we hit, we assert that this is the known total nodes - the known master only nodes
-			seenNodes.Should().HaveCount(totalNodesInTheCluster - masterNodes.Length);
+
+			seenNodes.Should().HaveCount(totalNodesInTheCluster - masterNodes.Length); // <1> `seenNodes` is a hash set of all the ports we hit. assert that this is equal to `known total nodes - known master only nodes`
 		}
 
+		/**
+		* ==== Node predicates
+		*
+		* A predicate can be specified on `ConnectionSettings` that can be used to determine which nodes in the cluster API calls
+		* can be executed on.
+		*
+		* As an example, Let's create a Virtual cluster with a Sniffing connection pool that seeds all 20 nodes to begin. When the client
+		* sniffs on startup, we see the cluster is still 20 nodes in total, however we are now aware of the
+		* actual configured settings for the nodes from the cluster response.
+		*/
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task RespectsCustomPredicate()
 		{
@@ -179,38 +202,47 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			var value = "rack_one";
 			var nodesInRackOne = new[] {9204, 9210, 9213};
 
-			//We create a client with a sniffing node connectionpool that seeds all 20 nodes
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(totalNodesInTheCluster)
-				// When the client sniffs on startup we see the cluster is still 20 nodes in total
-				// However we are now aware of the actual configured settings on the nodes
+				//
 				.Sniff(s => s.SucceedAlways()
-					.Succeeds(Always, Framework.Cluster.Nodes(totalNodesInTheCluster).HasSetting(setting, value, nodesInRackOne))
+					.Succeeds(Always, Framework.Cluster
+						.Nodes(totalNodesInTheCluster)
+						.HasSetting(setting, value, nodesInRackOne))
 				)
 				.SniffingConnectionPool()
 				.Settings(s=>s
-					.DisablePing() //for testing simplicity we disable pings
-					//We only want to execute API calls to nodes in rack_one
-					.NodePredicate(node=>node.Settings.ContainsKey(setting) && node.Settings[setting] == value)
+					.DisablePing() // <1> for testing simplicity, disable pings
+					.NodePredicate(node => // <2> We only want to execute API calls to nodes in rack_one
+						node.Settings.ContainsKey(setting) &&
+						node.Settings[setting] == value
+					)
 				)
 			)
 			{
-				AssertPoolAfterStartup = (pool) =>
+				AssertPoolAfterStartup = pool => // <3> After sniffing on startup, assert that the pool of nodes that the client will execute API calls against only contains the three nodes that are in `rack_one`
 				{
 					pool.Should().NotBeNull();
 					var nodes = pool.CreateView().ToList();
 					nodes.Count(n => n.Settings.ContainsKey(setting)).Should().Be(3, "only three nodes are in rack_one");
 				}
 			};
-			// assert that the sniff happened on 9200 before the first API call and that api call hit the first node in rack_one
+
+			/**
+			 * With the cluster set up, assert that the sniff happens on 9200 before the first API call
+			 * and that API call hits the first node in `rack_one`
+			 */
 			audit = await audit.TraceStartup(new ClientCall
 			{
 				{ SniffSuccess, 9200},
 				{ HealthyResponse, 9204}
 			});
 
-			//now we do a 1000 different client calls and we assert on each that it was sent to a node in rack one only
-			//respecting our node predicate on connection settings
+			/**
+			 * To prove that the client is working as expected, do a 1000 different client calls and
+			 * assert that each is sent to a node in `rack_one` only,
+			 * respecting the node predicate on connection settings
+			 */
 			var seenNodes = new HashSet<int>();
 			foreach (var _ in Enumerable.Range(0, 1000))
 			{
@@ -223,16 +255,21 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 					}}}
 				);
 			}
-			//assert we hit all the nodes in rack one when we fired off a 1000 api calls.
+
 			seenNodes.Should().HaveCount(nodesInRackOne.Length);
 		}
 
+		/**
+		 * As another example of node predicates, let's set up a Virtual cluster with a _bad_ node predicate, i.e.
+		 * predicate that filters out *all* nodes from being the targets of API calls from the client
+		 *
+		 *
+		 */
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task CustomPredicateYieldingNothingThrows()
 		{
 			var totalNodesInTheCluster = 20;
 
-			//We create a client with a sniffing node connectionpool that seeds all 20 nodes and returns all 20 on sniff
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(totalNodesInTheCluster)
 				.Sniff(s => s.SucceedAlways()
@@ -241,45 +278,56 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				.SniffingConnectionPool()
 				.Settings(s => s
 					.DisablePing()
-					// evil predicate that declines ALL nodes
-					.NodePredicate(node => false)
+					.NodePredicate(node => false) // <1> A _bad_ predicate that declines *all* nodes
 				)
 			);
 
+			/**
+			 * Now when making the client calls, the audit trail indicates that a sniff on startup succeeds, but the subsequent
+			 * API call fails because the node predicate filters out all nodes as targets on which to execute API calls
+			 */
 			await audit.TraceUnexpectedElasticsearchException(new ClientCall
 			{
-				{ SniffOnStartup }, //audit logs we are sniffing for the very very first time one startup
-				{ SniffSuccess }, //this goes ok because we ignore predicate when sniffing
-				{ NoNodesAttempted } //when trying to do an actual API call the predicate prevents any nodes from being attempted
+				{ SniffOnStartup }, // <1> The audit trail indicates a sniff for the very first time on startup
+				{ SniffSuccess }, // <2> The sniff succeeds because the node predicate is ignored when sniffing
+				{ NoNodesAttempted } // <3> when trying to do an actual API call however, the predicate prevents any nodes from being attempted
 			}, e =>
 			{
 				e.FailureReason.Should().Be(PipelineFailure.Unexpected);
-				//generating the debug information should not throw
+
 				Func<string> debug = () => e.DebugInformation;
-				debug.Invoking(s =>s()).ShouldNotThrow();
-				/* EXAMPLE OF PREVIOUS
-# FailureReason: Unrecoverable/Unexpected NoNodesAttempted while attempting POST on default-index/project/_search on an empty node, likely a node predicate on ConnectionSettings not matching ANY nodes
- - [1] SniffOnStartup: Took: 00:00:00
- - [2] SniffSuccess: Node: http://localhost:9200/ Took: 00:00:00
- - [3] NoNodesAttempted: Took: 00:00:00
-# Inner Exception: No nodes were attempted, this can happen when a node predicate does not match any nodes
-				*/
+				debug.Invoking(s => s.Invoke()).ShouldNotThrow();
 			});
+			/**
+			 * An example of the debug information that the client response returns for the previous exception
+			 *
+			 * ....
+			 * # FailureReason: Unrecoverable/Unexpected NoNodesAttempted while attempting POST on default-index/project/_search on an empty node, likely a node predicate on ConnectionSettings not matching ANY nodes
+			 *  - [1] SniffOnStartup: Took: 00:00:00
+			 *  - [2] SniffSuccess: Node: http://localhost:9200/ Took: 00:00:00
+			 *  - [3] NoNodesAttempted: Took: 00:00:00
+			 * # Inner Exception: No nodes were attempted, this can happen when a node predicate does not match any nodes
+			 * ....
+			*/
 		}
 
+		// hide
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task DetectsFqdn()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.Sniff(s => s.SucceedAlways()
-					.Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202).SniffShouldReturnFqdn())
+					.Succeeds(Always, Framework.Cluster
+						.Nodes(8)
+						.StoresNoData(9200, 9201, 9202)
+						.SniffShouldReturnFqdn())
 				)
 				.SniffingConnectionPool()
 				.AllDefaults()
 			)
 			{
-				AssertPoolBeforeStartup = (pool) =>
+				AssertPoolBeforeStartup = pool =>
 				{
 					pool.Should().NotBeNull();
 					pool.Nodes.Should().HaveCount(10);
@@ -287,7 +335,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 					pool.Nodes.Should().OnlyContain(n => n.Uri.Host == "localhost");
 				},
 
-				AssertPoolAfterStartup = (pool) =>
+				AssertPoolAfterStartup = pool =>
 				{
 					pool.Should().NotBeNull();
 					pool.Nodes.Should().HaveCount(8);
@@ -295,10 +343,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 					pool.Nodes.Should().OnlyContain(n => n.Uri.Host.StartsWith("fqdn") && !n.Uri.Host.Contains("/"));
 				}
 			};
+
 			await audit.TraceStartup();
 		}
 	}
 
+	// hide
 	public class SniffRoleDetectionCluster : ClusterBase
 	{
 		protected override string[] AdditionalServerSettings
@@ -317,6 +367,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		}
 	}
 
+	//hide
 	public class RealWorldRoleDetection : IClusterFixture<SniffRoleDetectionCluster>
 	{
 		private readonly SniffRoleDetectionCluster _cluster;

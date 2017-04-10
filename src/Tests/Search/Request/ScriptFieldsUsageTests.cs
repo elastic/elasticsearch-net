@@ -6,7 +6,19 @@ using Tests.Framework.MockData;
 
 namespace Tests.Search.Request
 {
-	public class ScriptFieldsUsageTests : SearchUsageTestBase
+    /**
+     * Allows to return a script evaluation (based on different fields) for each hit.
+     * 
+     * Script fields can work on fields that are not stored, and allow to return custom values to 
+     * be returned (the evaluated value of the script).
+     * 
+     * Script fields can also access the actual `_source` document and extract specific elements to 
+     * be returned from it by using `params['_source']`.
+     * 
+     * See the Elasticsearch documentation on {ref_current}/search-request-script-fields.html[script fields] 
+     * for more detail.
+     */
+    public class ScriptFieldsUsageTests : SearchUsageTestBase
 	{
 		public ScriptFieldsUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

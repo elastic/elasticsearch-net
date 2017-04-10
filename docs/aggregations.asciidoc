@@ -1,6 +1,4 @@
-:output-dir: aggregations
-
-[[aggregations]]
+[[reference-aggregations]]
 = Aggregations
 
 ////
@@ -15,6 +13,96 @@ please modify the original csharp file found at the link and submit the PR with 
 --
 Aggregations are arguably one of the most powerful features of Elasticsearch and NEST
 exposes all of the available Aggregation types
+
+* <<metric-aggregations, Metric Aggregations>>
+
+* <<bucket-aggregations, Bucket Aggregations>>
+
+* <<pipeline-aggregations, Pipeline Aggregations>>
+
+* <<matrix-aggregations, Matrix Aggregations>>
+
+See the documentation on <<writing-aggregations, Writing aggregations>> for how to use them in NEST.
+
+--
+
+[[metric-aggregations]]
+== Metric Aggregations
+
+The aggregations in this family compute metrics based on values extracted in one way or another from the documents that are being aggregated. 
+The values are typically extracted from the fields of the document (using the field data), but can also be generated using scripts.
+
+:anchor-list: aggregations/metric
+
+* <<average-aggregation-usage,Average Aggregation Usage>>
+
+* <<cardinality-aggregation-usage,Cardinality Aggregation Usage>>
+
+* <<extended-stats-aggregation-usage,Extended Stats Aggregation Usage>>
+
+* <<geo-bounds-aggregation-usage,Geo Bounds Aggregation Usage>>
+
+* <<geo-centroid-aggregation-usage,Geo Centroid Aggregation Usage>>
+
+* <<max-aggregation-usage,Max Aggregation Usage>>
+
+* <<min-aggregation-usage,Min Aggregation Usage>>
+
+* <<percentile-ranks-aggregation-usage,Percentile Ranks Aggregation Usage>>
+
+* <<percentiles-aggregation-usage,Percentiles Aggregation Usage>>
+
+* <<scripted-metric-aggregation-usage,Scripted Metric Aggregation Usage>>
+
+* <<stats-aggregation-usage,Stats Aggregation Usage>>
+
+* <<sum-aggregation-usage,Sum Aggregation Usage>>
+
+* <<top-hits-aggregation-usage,Top Hits Aggregation Usage>>
+
+* <<value-count-aggregation-usage,Value Count Aggregation Usage>>
+
+See the Elasticsearch documentation on {ref_current}/search-aggregations-metrics.html[Metric aggregations] for more details.
+
+:includes-from-dirs: aggregations/metric
+
+include::aggregations/metric/average/average-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/cardinality/cardinality-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/extended-stats/extended-stats-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/geo-bounds/geo-bounds-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/geo-centroid/geo-centroid-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/max/max-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/min/min-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/percentile-ranks/percentile-ranks-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/percentiles/percentiles-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/scripted-metric/scripted-metric-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/stats/stats-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/sum/sum-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/top-hits/top-hits-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/value-count/value-count-aggregation-usage.asciidoc[]
+
+[[bucket-aggregations]]
+== Bucket Aggregations
+
+Bucket aggregations don’t calculate metrics over fields like the metrics aggregations do, but instead, they create buckets of documents. 
+Each bucket is associated with a criterion (depending on the aggregation type) which determines whether or not a document in the 
+current context "falls" into it. In other words, the buckets effectively define document sets. 
+In addition to the buckets themselves, the bucket aggregations also compute and return the number of documents that "fell into" each bucket.
+
+:anchor-list: aggregations/bucket
 
 * <<adjacency-matrix-usage,Adjacency Matrix Usage>>
 
@@ -52,33 +140,62 @@ exposes all of the available Aggregation types
 
 * <<terms-aggregation-usage,Terms Aggregation Usage>>
 
-* <<average-aggregation-usage,Average Aggregation Usage>>
+[NOTE]
+--
+Bucketing aggregations can have sub-aggregations (bucketing or metric). The sub-aggregations will be computed 
+for the buckets which their parent aggregation generates. There is no hard limit on the level/depth 
+of nested aggregations (one can nest an aggregation under a "parent" aggregation, which is itself a 
+sub-aggregation of another higher-level aggregation).
 
-* <<cardinality-aggregation-usage,Cardinality Aggregation Usage>>
+--
 
-* <<extended-stats-aggregation-usage,Extended Stats Aggregation Usage>>
+See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket.html[Bucket aggregations] for more details.
 
-* <<geo-bounds-aggregation-usage,Geo Bounds Aggregation Usage>>
+:includes-from-dirs: aggregations/bucket
 
-* <<geo-centroid-aggregation-usage,Geo Centroid Aggregation Usage>>
+include::aggregations/bucket/adjacency-matrix/adjacency-matrix-usage.asciidoc[]
 
-* <<max-aggregation-usage,Max Aggregation Usage>>
+include::aggregations/bucket/children/children-aggregation-usage.asciidoc[]
 
-* <<min-aggregation-usage,Min Aggregation Usage>>
+include::aggregations/bucket/date-histogram/date-histogram-aggregation-usage.asciidoc[]
 
-* <<percentile-ranks-aggregation-usage,Percentile Ranks Aggregation Usage>>
+include::aggregations/bucket/date-range/date-range-aggregation-usage.asciidoc[]
 
-* <<percentiles-aggregation-usage,Percentiles Aggregation Usage>>
+include::aggregations/bucket/filter/filter-aggregation-usage.asciidoc[]
 
-* <<scripted-metric-aggregation-usage,Scripted Metric Aggregation Usage>>
+include::aggregations/bucket/filters/filters-aggregation-usage.asciidoc[]
 
-* <<stats-aggregation-usage,Stats Aggregation Usage>>
+include::aggregations/bucket/geo-distance/geo-distance-aggregation-usage.asciidoc[]
 
-* <<sum-aggregation-usage,Sum Aggregation Usage>>
+include::aggregations/bucket/geo-hash-grid/geo-hash-grid-aggregation-usage.asciidoc[]
 
-* <<top-hits-aggregation-usage,Top Hits Aggregation Usage>>
+include::aggregations/bucket/global/global-aggregation-usage.asciidoc[]
 
-* <<value-count-aggregation-usage,Value Count Aggregation Usage>>
+include::aggregations/bucket/histogram/histogram-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/ip-range/ip-range-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/missing/missing-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/nested/nested-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/range/range-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/reverse-nested/reverse-nested-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/sampler/sampler-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/significant-terms/significant-terms-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/terms/terms-aggregation-usage.asciidoc[]
+
+[[pipeline-aggregations]]
+== Pipeline Aggregations
+
+Pipeline aggregations work on the outputs produced from other aggregations rather than from document sets, adding information to the output tree. 
+There are many different types of pipeline aggregation, each computing different information from other aggregations.
+
+:anchor-list: aggregations/pipeline
 
 * <<average-bucket-aggregation-usage,Average Bucket Aggregation Usage>>
 
@@ -114,9 +231,57 @@ exposes all of the available Aggregation types
 
 * <<sum-bucket-aggregation-usage,Sum Bucket Aggregation Usage>>
 
---
+See the Elasticsearch documentation on {ref_current}/search-aggregations-pipeline.html[Pipeline aggregations] for more details.
 
-include::{output-dir}/writing-aggregations.asciidoc[]
+:includes-from-dirs: aggregations/pipeline
 
-include::aggregations-usage.asciidoc[]
+include::aggregations/pipeline/average-bucket/average-bucket-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/bucket-script/bucket-script-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/bucket-selector/bucket-selector-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/cumulative-sum/cumulative-sum-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/derivative/derivative-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/extended-stats-bucket/extended-stats-bucket-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/max-bucket/max-bucket-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/min-bucket/min-bucket-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/moving-average/moving-average-ewma-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/moving-average/moving-average-holt-linear-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/moving-average/moving-average-holt-winters-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/moving-average/moving-average-linear-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/moving-average/moving-average-simple-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/percentiles-bucket/percentiles-bucket-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/serial-differencing/serial-differencing-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/stats-bucket/stats-bucket-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/sum-bucket/sum-bucket-aggregation-usage.asciidoc[]
+
+[[matrix-aggregations]]
+== Matrix Aggregations
+
+The aggregations in this family operate on multiple fields and produce a matrix result based on the values extracted from the requested document fields. 
+Unlike <<metric-aggregations, metric>> and <<bucket-aggregations, bucket>> aggregations, this aggregation family does not yet support scripting.
+
+:anchor-list: aggregations/matrix
+
+* <<matrix-stats-aggregation-usage,Matrix Stats Aggregation Usage>>
+
+See the Elasticsearch documentation on {ref_current}/search-aggregations-matrix.html[Matrix aggregations] for more details.
+
+:includes-from-dirs: aggregations/matrix
+
+include::aggregations/matrix/matrix-stats/matrix-stats-aggregation-usage.asciidoc[]
 

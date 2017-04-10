@@ -32,11 +32,11 @@ Inner hits can be used by defining an `inner_hits` definition on a `nested`, `ha
 
 See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.html[Inner hits] for more detail.
 
-[[query-inner-hits]]
 [float]
-== Query Inner Hits
+=== Query Inner Hits
 
-=== Fluent DSL Example
+[float]
+=== Fluent DSL example
 
 [source,csharp]
 ----
@@ -54,7 +54,8 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+[float]
+=== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -74,12 +75,45 @@ new SearchRequest<King>(Index, typeof(King))
 }
 ----
 
+[source,javascript]
+.Example json output
+----
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "has_child": {
+            "type": "prince",
+            "query": {
+              "match_all": {}
+            },
+            "inner_hits": {
+              "name": "princes"
+            }
+          }
+        },
+        {
+          "nested": {
+            "query": {
+              "match_all": {}
+            },
+            "path": "foes",
+            "inner_hits": {}
+          }
+        }
+      ]
+    }
+  }
+}
+----
+
+[float]
 === Handling Responses
 
 [source,csharp]
 ----
 response.Hits.Should().NotBeEmpty();
-
 foreach (var hit in response.Hits)
 {
     var princes = hit.InnerHits["princes"].Documents<Prince>();
@@ -87,6 +121,6 @@ foreach (var hit in response.Hits)
 
     var foes = hit.InnerHits["foes"].Documents<King>();
     foes.Should().NotBeEmpty();
-}
+};
 ----
 

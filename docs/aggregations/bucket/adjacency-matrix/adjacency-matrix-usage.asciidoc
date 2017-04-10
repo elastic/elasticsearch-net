@@ -15,9 +15,26 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[adjacency-matrix-usage]]
-== Adjacency Matrix Usage
+=== Adjacency Matrix Usage
 
-=== Object Initializer Syntax Example
+==== Fluent DSL example
+
+[source,csharp]
+----
+s => s
+.Size(0)
+.Aggregations(aggs => aggs
+    .AdjacencyMatrix("interactions", am => am
+        .Filters(fs => fs
+            .Filter("grpA", f => f.Term(p => p.State, StateOfBeing.BellyUp))
+            .Filter("grpB", f => f.Term(p => p.State, StateOfBeing.Stable))
+            .Filter("grpC", f => f.Term(p => p.State, StateOfBeing.VeryActive))
+        )
+    )
+)
+----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -73,24 +90,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Fluent DSL Example
-
-[source,csharp]
-----
-s => s
-.Size(0)
-.Aggregations(aggs => aggs
-    .AdjacencyMatrix("interactions", am => am
-        .Filters(fs => fs
-            .Filter("grpA", f => f.Term(p => p.State, StateOfBeing.BellyUp))
-            .Filter("grpB", f => f.Term(p => p.State, StateOfBeing.Stable))
-            .Filter("grpC", f => f.Term(p => p.State, StateOfBeing.VeryActive))
-        )
-    )
-)
-----
-
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -99,7 +99,6 @@ var interactions = response.Aggs.AdjacencyMatrix("interactions");
 interactions.Should().NotBeNull();
 var buckets = interactions.Buckets;
 buckets.Should().NotBeNullOrEmpty();
-
 foreach (var bucket in buckets)
 {
     bucket.Key.Should().NotBeNullOrEmpty();

@@ -17,7 +17,19 @@ please modify the original csharp file found at the link and submit the PR with 
 [[script-fields-usage]]
 == Script Fields Usage
 
-=== Fluent DSL Example
+Allows to return a script evaluation (based on different fields) for each hit.
+
+Script fields can work on fields that are not stored, and allow to return custom values to 
+be returned (the evaluated value of the script).
+
+Script fields can also access the actual `_source` document and extract specific elements to 
+be returned from it by using `params['_source']`.
+
+See the Elasticsearch documentation on {ref_current}/search-request-script-fields.html[script fields] 
+for more detail.
+
+[float]
+=== Fluent DSL example
 
 [source,csharp]
 ----
@@ -37,7 +49,8 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+[float]
+=== Object Initializer syntax example
 
 [source,csharp]
 ----

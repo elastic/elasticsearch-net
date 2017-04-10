@@ -25,7 +25,8 @@ Use <<source-filtering-usage,source filtering>> instead to select subsets of the
 
 See the Elasticsearch documentation on {ref_current}/search-request-stored-fields.html[Fields] for more detail.
 
-=== Fluent DSL Example
+[float]
+=== Fluent DSL example
 
 [source,csharp]
 ----
@@ -38,7 +39,8 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+[float]
+=== Object Initializer syntax example
 
 [source,csharp]
 ----

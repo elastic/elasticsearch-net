@@ -27,7 +27,18 @@ defines the offset from the first result you want to fetch.
 
 allows you to configure the maximum amount of hits to be returned.
 
-=== Object Initializer Syntax Example
+[float]
+=== Fluent DSL example
+
+[source,csharp]
+----
+s => s
+    .From(10)
+    .Size(12)
+----
+
+[float]
+=== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -45,14 +56,5 @@ new SearchRequest<Project>()
   "from": 10,
   "size": 12
 }
-----
-
-=== Fluent DSL Example
-
-[source,csharp]
-----
-s => s
-    .From(10)
-    .Size(12)
 ----
 

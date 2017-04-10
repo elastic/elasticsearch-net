@@ -47,7 +47,7 @@ namespace Nest
 		private void Write(string queryType, Dictionary<string, string> properties)
 		{
 			properties = properties ?? new Dictionary<string, string>();
-			var props = string.Join(", ", properties.Select(kv => "{0}: {1}".F(kv.Key, kv.Value)));
+			var props = string.Join(", ", properties.Select(kv => $"{kv.Key}: {kv.Value}"));
 			var indent = new string('-',(Depth -1) * 2);
 			var scope = this.Scope.GetStringValue().ToLowerInvariant();
 			_sb.AppendFormat("{0}{1}: {2} ({3}){4}", indent, scope, queryType, props, Environment.NewLine);

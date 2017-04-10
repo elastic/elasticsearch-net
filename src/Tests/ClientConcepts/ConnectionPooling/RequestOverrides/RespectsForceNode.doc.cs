@@ -8,7 +8,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 {
 	public class RespectsForceNode
 	{
-		/**== Forcing nodes
+		/**=== Forcing nodes
 		* Sometimes you might want to fire a single request to a specific node. You can do so using the `ForceNode`
 		* request configuration. This will ignore the pool and not retry.
 		*/

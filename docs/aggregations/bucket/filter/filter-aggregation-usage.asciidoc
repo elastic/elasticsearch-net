@@ -15,14 +15,14 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[filter-aggregation-usage]]
-== Filter Aggregation Usage
+=== Filter Aggregation Usage
 
 Defines a single bucket of all the documents in the current document set context that match a specified filter.
 Often this will be used to narrow down the current aggregation context to a specific set of documents.
 
 Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-filter-aggregation.html[Filter Aggregation]
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -37,7 +37,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -82,6 +82,8 @@ new SearchRequest<Project>
 Using the `.Aggs` aggregation helper we can fetch our aggregation results easily
 in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 
+==== Handling Responses
+
 [source,csharp]
 ----
 response.ShouldBeValid();
@@ -94,14 +96,13 @@ tags.Should().NotBeNull();
 tags.Buckets.Should().NotBeEmpty();
 ----
 
-[[empty-filter]]
 [float]
 == Empty Filter
 
 When the collection of filters is empty or all are conditionless, NEST will serialize them
 to an empty object.
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -117,7 +118,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -145,7 +146,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -153,7 +154,7 @@ response.ShouldBeValid();
 response.Aggs.Filter("empty_filter").DocCount.Should().BeGreaterThan(0);
 ----
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -170,7 +171,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -206,7 +207,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----

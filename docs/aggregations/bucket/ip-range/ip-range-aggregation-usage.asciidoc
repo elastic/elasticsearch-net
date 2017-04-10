@@ -15,9 +15,9 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[ip-range-aggregation-usage]]
-== Ip Range Aggregation Usage
+=== Ip Range Aggregation Usage
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -33,7 +33,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -73,7 +73,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -82,7 +82,6 @@ var ipRanges = response.Aggs.IpRange("ip_ranges");
 ipRanges.Should().NotBeNull();
 ipRanges.Buckets.Should().NotBeNull();
 ipRanges.Buckets.Count.Should().BeGreaterThan(0);
-
 foreach (var range in ipRanges.Buckets)
     range.DocCount.Should().BeGreaterThan(0);
 ----

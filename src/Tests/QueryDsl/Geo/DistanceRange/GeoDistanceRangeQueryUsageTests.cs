@@ -5,9 +5,9 @@ using Tests.Framework.MockData;
 
 namespace Tests.QueryDsl.Geo.DistanceRange
 {
-	public class GeoDistanceRangeUsageTests : QueryDslUsageTestsBase
+	public class GeoDistanceRangeQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public GeoDistanceRangeUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public GeoDistanceRangeQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object QueryJson => new
 		{
