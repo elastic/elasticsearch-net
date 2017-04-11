@@ -56,7 +56,7 @@
     "Elasticsearch.Net": {
       "target": "project"
     },
-    "Newtonsoft.Json": "9.0.1"
+    "Newtonsoft.Json": "10.0.1"
   },
   "frameworks": {
     "netstandard1.3": {
@@ -67,8 +67,8 @@
       },
       "dependencies": {
         "NETStandard.Library": "1.6.0",
-        "System.Collections.Specialized": "4.0.1",
-        "System.Reflection.TypeExtensions": "4.1.0",
+        "System.Collections.Specialized": "4.3.0",
+        "System.Reflection.TypeExtensions": "4.3.0",
         "System.Linq.Queryable": "4.0.1"
       }
     }
