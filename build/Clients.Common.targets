@@ -25,7 +25,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
-    <DefineConstants Condition="'$(TargetFramework)'=='netstandard1.3'">$(DefineConstants);DOTNETCORE</DefineConstants>
+    <DefineConstants Condition="'$(TargetFramework)'=='netstandard1.3' OR '$(DotNetCoreOnly)'=='1'">$(DefineConstants);DOTNETCORE</DefineConstants>
     <DebugType>embedded</DebugType>
     <SourceLink Condition="'$(DoSourceLink)'!=''">$(BaseIntermediateOutputPath)\sl-$(MsBuildProjectName)-$(TargetFramework).json</SourceLink>
     <RepoUri>https://raw.githubusercontent.com/elastic/elasticsearch-net</RepoUri>

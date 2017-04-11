@@ -90,13 +90,13 @@ Target "Canary" <| fun _ ->
   ==> "Benchmark"
 
 "Version"
-  ==> "Release"
-  ==> "Canary"
+  ==> "Release" ==> "Canary"
 
 "FullBuild"
   ==> "Integrate"
 
-"IncrementalBuild"
+"Restore"
+  ==> "IncrementalBuild"
   =?> ("IncrementalTest", (not ((getBuildParam "skiptests") = "1")))
   ==> "Inc"
 

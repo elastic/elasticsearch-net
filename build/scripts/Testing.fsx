@@ -15,6 +15,8 @@ module Tests =
     open System.Threading
     open System
 
+    let private buildingOnTravis = getEnvironmentVarAsBool "TRAVIS"
+
     let private setLocalEnvVars() = 
         let clusterFilter =  getBuildParamOrDefault "escluster" ""
         let testFilter = getBuildParamOrDefault "testfilter" ""
@@ -33,7 +35,9 @@ module Tests =
         
     let IncrementalTest() = 
         setLocalEnvVars()
-        runTestExeOnDesktopCLR() 
+        match buildingOnTravis with
+        | false -> runTestExeOnDesktopCLR() 
+        | true -> dotnetTest() 
 
     let RunUnitTests() = 
         setLocalEnvVars()

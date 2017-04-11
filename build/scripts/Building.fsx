@@ -24,6 +24,10 @@ module Build =
     type private GlobalJson = JsonProvider<"../../global.json">
     let private pinnedSdkVersion = GlobalJson.GetSample().Sdk.Version
 
+    let private buildingOnTravis = getEnvironmentVarAsBool "TRAVIS"
+
+    let private sln = sprintf "src/Elasticsearch%s.sln" (if buildingOnTravis then ".DotNetCoreOnly" else "")
+
     let private compileCore incremental =
         if not (DotNetCli.isInstalled()) then failwith  "You need to install the dotnet command line SDK to build for .NET Core"
         let runningSdkVersion = DotNetCli.getVersion()
@@ -36,16 +40,17 @@ module Build =
                 "CurrentAssemblyVersion", (Versioning.CurrentAssemblyVersion.ToString());
                 "CurrentAssemblyFileVersion", (Versioning.CurrentAssemblyFileVersion.ToString());
                 "DoSourceLink", sourceLink;
+                "DotNetCoreOnly", if buildingOnTravis then "1" else "";
             ] 
             |> List.map (fun (p,v) -> sprintf "%s=%s" p v)
             |> String.concat ";"
             |> sprintf "/property:%s"
-
+        
         DotNetCli.Build
             (fun p -> 
                 { p with 
                     Configuration = "Release" 
-                    Project = "src/Elasticsearch.sln"
+                    Project = sln
                     TimeOut = TimeSpan.FromMinutes(3.)
                     AdditionalArgs = if incremental then ["-f"; incrementalFramework.Identifier.Nuget; props] else [props]
                 }
@@ -55,7 +60,7 @@ module Build =
         DotNetCli.Restore
             (fun p -> 
                 { p with 
-                    Project = "src/Elasticsearch.sln"
+                    Project = sln
                     TimeOut = TimeSpan.FromMinutes(3.)
                 }
             ) |> ignore
