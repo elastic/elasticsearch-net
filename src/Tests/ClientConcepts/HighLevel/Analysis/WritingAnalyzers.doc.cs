@@ -31,7 +31,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
         /**
          * ==== Specifying an analyzer on a field mapping
          *
-         * An analyzer can be specified on a `text` datatype field mapping when creating a new field on a type, usually
+         * An analyzer can be specified on a `string` datatype field mapping when creating a new field on a type, usually
          * when creating the type mapping at index creation time, but also when adding a new field
          * using the Put Mapping API.
          *

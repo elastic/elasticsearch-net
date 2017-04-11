@@ -36,7 +36,7 @@ image::analysis-chain.png[analysis chain]
 
 ==== Specifying an analyzer on a field mapping
 
-An analyzer can be specified on a `text` datatype field mapping when creating a new field on a type, usually
+An analyzer can be specified on a `string` datatype field mapping when creating a new field on a type, usually
 when creating the type mapping at index creation time, but also when adding a new field
 using the Put Mapping API.
 
@@ -102,6 +102,7 @@ var createIndexResponse = client.CreateIndex("my-index", c => c
 );
 ----
 <1> Pre-defined list of English stopwords within Elasticsearch
+
 <2> Use the `standard_english` analyzer configured
 
 [source,javascript]
@@ -267,6 +268,7 @@ var createIndexResponse = client.CreateIndex("questions", c => c
 );
 ----
 <1> Use an analyzer at index time that strips HTML tags
+
 <2> Use an analyzer at search time that does not strip HTML tags
 
 With this in place, the text of a question body will be analyzed with the `index_question` analyzer
