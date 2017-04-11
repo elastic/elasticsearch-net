@@ -1054,7 +1054,7 @@
       </ItemGroup>
     </When>
   </Choose>
-  <Import Project="..\..\packages\JetBrains.Profiler.Kernel.Windows.Api\build\JetBrains.Profiler.Kernel.Windows.Api.Targets" Condition="Exists('..\..\packages\JetBrains.Profiler.Kernel.Windows.Api\build\JetBrains.Profiler.Kernel.Windows.Api.Targets')" Label="Paket" />
+  <Import Project="..\..\packages\JetBrains.Profiler.Kernel.Windows.Api\build\JetBrains.Profiler.Kernel.Windows.Api.targets" Condition="Exists('..\..\packages\JetBrains.Profiler.Kernel.Windows.Api\build\JetBrains.Profiler.Kernel.Windows.Api.targets')" Label="Paket" />
   <ItemGroup>
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll">
       <Paket>True</Paket>

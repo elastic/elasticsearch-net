@@ -25,8 +25,8 @@ NUGET
     FluentAssertions (4.19)
       NETStandard.Library (>= 1.6) - framework: >= netstandard13
       System.Reflection.TypeExtensions (>= 4.1) - framework: >= netstandard13
-    JetBrains.Profiler.Kernel.Windows.Api (108.0.20170209.151431-eap01)
-      Wave (8.0.0-eap01)
+    JetBrains.Profiler.Kernel.Windows.Api (108.0.20170407.123535)
+      Wave (8.0)
     Microsoft.CodeAnalysis.Analyzers (1.1) - framework: >= net45, >= netstandard11, portable-net45+win8
     Microsoft.CodeAnalysis.Common (1.3.2)
       Microsoft.CodeAnalysis.Analyzers (>= 1.1) - framework: >= net45, >= netstandard11, portable-net45+win8
@@ -72,6 +72,13 @@ NUGET
       System.Xml.XPath.XDocument (>= 4.0.1) - framework: >= net46, >= netstandard13
     Microsoft.CodeAnalysis.CSharp (1.3.2)
       Microsoft.CodeAnalysis.Common (1.3.2)
+    Microsoft.CodeAnalysis.CSharp.Workspaces (1.3.2)
+      Microsoft.CodeAnalysis.CSharp (1.3.2)
+      Microsoft.CodeAnalysis.Workspaces.Common (1.3.2)
+    Microsoft.CodeAnalysis.Workspaces.Common (1.3.2)
+      Microsoft.CodeAnalysis.Common (1.3.2)
+      Microsoft.Composition (>= 1.0.27)
+    Microsoft.Composition (1.0.30)
     Microsoft.CSharp (4.3) - framework: netstandard10, >= netstandard13
       System.Collections (>= 4.3) - framework: dnxcore50, >= netstandard13
       System.Diagnostics.Debug (>= 4.3) - framework: dnxcore50, >= netstandard13
@@ -342,7 +349,7 @@ NUGET
       System.Runtime (>= 4.3) - framework: dnxcore50, netstandard10, netstandard13, >= netstandard15
       System.Text.Encoding (>= 4.3) - framework: dnxcore50, netstandard10, netstandard13, >= netstandard15
       System.Threading.Tasks (>= 4.3) - framework: dnxcore50, netstandard10, netstandard13, >= netstandard15
-    System.IO.Compression (4.3) - framework: >= net45, >= netstandard11
+    System.IO.Compression (4.3) - framework: >= netstandard11
       Microsoft.NETCore.Platforms (>= 1.1) - framework: >= netstandard13
       runtime.native.System (>= 4.3) - framework: >= netstandard13
       runtime.native.System.IO.Compression (>= 4.3) - framework: dnxcore50, >= netstandard13
@@ -455,7 +462,7 @@ NUGET
       System.Reactive.Windows.Threading (>= 3.1.1) - framework: >= net45, winv4.5.1, wpav8.1
       System.Reactive.WindowsRuntime (>= 3.1.1) - framework: winv4.5.1, wpav8.1
     System.Reactive.Core (3.1.1) - framework: >= net45, >= netstandard10, winv4.5.1, wpav8.1
-      System.Reactive.Interfaces (>= 3.1.1) - framework: >= net45, >= netstandard10
+      System.Reactive.Interfaces (>= 3.1.1) - framework: >= net45, >= netstandard10, netcore10
     System.Reactive.Interfaces (3.1.1) - framework: >= net45, >= netstandard10
     System.Reactive.Linq (3.1.1)
       System.Reactive.Core (>= 3.1.1) - framework: >= net45, >= netstandard10
@@ -535,12 +542,12 @@ NUGET
       Microsoft.NETCore.Targets (>= 1.1) - framework: >= netstandard13
       System.Runtime (>= 4.3) - framework: >= netstandard13
     System.Runtime.InteropServices (4.3) - framework: net46, >= net46, >= netstandard11, netstandard13, netstandard14
-      Microsoft.NETCore.Platforms (>= 1.1) - framework: dnxcore50, netstandard11, netstandard12, netstandard13, >= netstandard15
-      Microsoft.NETCore.Targets (>= 1.1) - framework: dnxcore50, netstandard11, netstandard12, netstandard13, >= netstandard15
-      System.Reflection (>= 4.3) - framework: dnxcore50, netstandard11, netstandard12, netstandard13, >= netstandard15
-      System.Reflection.Primitives (>= 4.3) - framework: dnxcore50, netstandard11, netstandard12, netstandard13, >= netstandard15
-      System.Runtime (>= 4.3) - framework: net462, >= net463, dnxcore50, netstandard11, netstandard12, netstandard13, >= netstandard15
-      System.Runtime.Handles (>= 4.3) - framework: dnxcore50, netstandard13, >= netstandard15
+      Microsoft.NETCore.Platforms (>= 1.1) - framework: dnxcore50, netstandard11, netstandard12, netstandard13, >= netstandard15, netcore11
+      Microsoft.NETCore.Targets (>= 1.1) - framework: dnxcore50, netstandard11, netstandard12, netstandard13, >= netstandard15, netcore11
+      System.Reflection (>= 4.3) - framework: dnxcore50, netstandard11, netstandard12, netstandard13, >= netstandard15, netcore11
+      System.Reflection.Primitives (>= 4.3) - framework: dnxcore50, netstandard11, netstandard12, netstandard13, >= netstandard15, netcore11
+      System.Runtime (>= 4.3) - framework: net462, >= net463, dnxcore50, netstandard11, netstandard12, netstandard13, >= netstandard15, netcore11
+      System.Runtime.Handles (>= 4.3) - framework: dnxcore50, netstandard13, >= netstandard15, netcore11
     System.Runtime.InteropServices.RuntimeInformation (4.3) - framework: >= netstandard11
       runtime.native.System (>= 4.3) - framework: >= netstandard11
       System.Reflection (>= 4.3) - framework: dnxcore50, >= netstandard11
@@ -693,7 +700,7 @@ NUGET
       System.Collections (>= 4.3) - framework: dnxcore50, >= netstandard16
       System.Globalization (>= 4.3) - framework: dnxcore50, >= netstandard16
       System.Resources.ResourceManager (>= 4.3) - framework: dnxcore50, >= netstandard16
-      System.Runtime (>= 4.3) - framework: dnxcore50, netstandard10, netstandard13, >= netstandard16
+      System.Runtime (>= 4.3) - framework: dnxcore50, netstandard10, netstandard13, >= netstandard16, netcore11
       System.Runtime.Extensions (>= 4.3) - framework: dnxcore50, >= netstandard16
       System.Threading (>= 4.3) - framework: dnxcore50, >= netstandard16
     System.Threading (4.3) - framework: net46, >= net46, >= netstandard10, netstandard13, netstandard14
@@ -782,7 +789,7 @@ NUGET
       System.Xml.ReaderWriter (>= 4.3) - framework: >= netstandard13
       System.Xml.XDocument (>= 4.3) - framework: >= netstandard13
       System.Xml.XPath (>= 4.3) - framework: >= net46, >= netstandard13
-    Wave (7.0)
+    Wave (8.0)
     xunit (2.2.0-beta5-build3474)
       xunit.assert (2.2.0-beta5-build3474)
       xunit.core (2.2.0-beta5-build3474)
