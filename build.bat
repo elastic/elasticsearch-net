@@ -39,6 +39,7 @@ IF NOT [%1]==[] (set TARGET=%1)
 
 SET SKIPPAKET=0
 IF /I "%TARGET%"=="inc" SET SKIPPAKET=1
+IF /I "%TARGET%"=="canary" SET SKIPTESTS=1
 
 IF "%SKIPPAKET%" neq "1" (
 	.paket\paket.bootstrapper.exe

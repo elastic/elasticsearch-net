@@ -58,6 +58,7 @@ module Versioning =
             currentVersion
     
     let CurrentAssemblyVersion = parse (sprintf "%s.0.0" (CurrentVersion.Major.ToString()))
+    let CurrentAssemblyFileVersion = parse (sprintf "%s.%s.%s.0" (CurrentVersion.Major.ToString()) (CurrentVersion.Minor.ToString()) (CurrentVersion.Patch.ToString()))
 
     let ValidateArtifacts() =
         let fileVersion = CurrentVersion

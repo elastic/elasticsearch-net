@@ -30,15 +30,24 @@ module Build =
         if (runningSdkVersion <> pinnedSdkVersion) then failwithf "Attempting to run with dotnet.exe with %s but global.json mandates %s" runningSdkVersion pinnedSdkVersion
         let incrementalFramework = DotNetFramework.Net45
         let sourceLink = if not incremental && not isMono && runningRelease then "1" else ""
-        let properties = sprintf "/property:AVersion=%s;AFixedVersion=%s;DoSourceLink=%s" (Versioning.CurrentVersion.ToString()) (Versioning.CurrentAssemblyVersion.ToString()) sourceLink
-        
+        let props = 
+            [ 
+                "CurrentVersion", (Versioning.CurrentVersion.ToString());
+                "CurrentAssemblyVersion", (Versioning.CurrentAssemblyVersion.ToString());
+                "CurrentAssemblyFileVersion", (Versioning.CurrentAssemblyFileVersion.ToString());
+                "DoSourceLink", sourceLink;
+            ] 
+            |> List.map (fun (p,v) -> sprintf "%s=%s" p v)
+            |> String.concat ";"
+            |> sprintf "/property:%s"
+
         DotNetCli.Build
             (fun p -> 
                 { p with 
                     Configuration = "Release" 
                     Project = "src/Elasticsearch.sln"
                     TimeOut = TimeSpan.FromMinutes(3.)
-                    AdditionalArgs = if incremental then ["-f"; incrementalFramework.Identifier.Nuget; properties] else [properties]
+                    AdditionalArgs = if incremental then ["-f"; incrementalFramework.Identifier.Nuget; props] else [props]
                 }
             ) |> ignore
 
