@@ -26,8 +26,8 @@
 			</group>
 			<group targetFramework=".NETStandard1.3">
 				<dependency id="NETStandard.Library" version="[1.6.0, )" />
-				<dependency id="System.Collections.Specialized" version="[4.0.1, )" />
-				<dependency id="System.Reflection.TypeExtensions" version="[4.1.0, )" />
+				<dependency id="System.Collections.Specialized" version="[4.3.0, )" />
+				<dependency id="System.Reflection.TypeExtensions" version="[4.3.0, )" />
 				<dependency id="System.Linq.Queryable" version="[4.0.1, )" />
 				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
 				<dependency id="Newtonsoft.Json" version="[10,11)" />
