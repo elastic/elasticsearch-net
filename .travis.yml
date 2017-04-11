@@ -1,4 +1,4 @@
 language: csharp
 solution: src/Elasticsearch.sln
-script: ./build.sh quick
+script: ./build.sh inc
 mono: 4.6.2
