@@ -31,7 +31,7 @@ namespace Tests.Search
         /**==== Stored fields
          * 
          * When indexing a document, by default, Elasticsearch stores the originally sent JSON document in a special
-         * field called {ref_current}/mapping-source-field.html[_source]. The previous example demonstrated that the documents returned from
+         * field called {ref_current}/mapping-source-field.html[_source]. Documents returned from
          * a search query are materialized from the `_source` field returned from Elasticsearch for each hit.
          * 
          * It is also possible to store a field from the JSON document _separately_ within Elasticsearch
