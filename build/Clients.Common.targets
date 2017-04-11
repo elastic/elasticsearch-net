@@ -21,12 +21,12 @@
     <Description></Description>
     <Copyright></Copyright>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyOriginatorKeyFile Condition="'$(DotNetCoreOnly)'==''">..\..\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
+    <GenerateDocumentationFile Condition="'$(DotNetCoreOnly)'==''">true</GenerateDocumentationFile>
     <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
     <DefineConstants Condition="'$(TargetFramework)'=='netstandard1.3' OR '$(DotNetCoreOnly)'=='1'">$(DefineConstants);DOTNETCORE</DefineConstants>
-    <DebugType>embedded</DebugType>
+    <DebugType Condition="'$(DotNetCoreOnly)'==''">embedded</DebugType>
     <SourceLink Condition="'$(DoSourceLink)'!=''">$(BaseIntermediateOutputPath)\sl-$(MsBuildProjectName)-$(TargetFramework).json</SourceLink>
     <RepoUri>https://raw.githubusercontent.com/elastic/elasticsearch-net</RepoUri>
   </PropertyGroup>
