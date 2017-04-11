@@ -19,7 +19,7 @@ namespace Tests
 		static ManualResetEvent finished = new ManualResetEvent(false);
 
 		// Start out assuming success; we'll set this to 1 if we get a failed test
-		static int result = 0;
+		static int _result = 0;
 
 		private static readonly ConcurrentBag<TestFailedInfo> FailedTests = new ConcurrentBag<TestFailedInfo>();
 
@@ -29,7 +29,19 @@ namespace Tests
 			var testAssembly = typeof(TestRunner).Assembly();
 			var clrVersion = System.Diagnostics.FileVersionInfo.GetVersionInfo(typeof(int).Assembly().Location).ProductVersion;
 			Console.WriteLine($"Running tests from {testAssembly.Location} using CLR: {clrVersion}");
+			try
+			{
+				return RunTests(testAssembly);
+			}
+			catch (InvalidOperationException e) when (e.Message.Contains("runner when it's not idle"))
+			{
+				Console.WriteLine(e);
+			}
+			return _result;
+		}
 
+		private static int RunTests(Assembly testAssembly)
+		{
 #if DOTNETCORE
 			using (var runner = AssemblyRunner.WithoutAppDomain(testAssembly.Location))
 #else
@@ -46,8 +58,7 @@ namespace Tests
 
 				finished.WaitOne();
 				finished.Dispose();
-				
-				return result;
+				return _result;
 			}
 		}
 
@@ -96,7 +107,7 @@ namespace Tests
 				Console.ResetColor();
 			}
 
-			result = 1;
+			_result = 1;
 		}
 
 		static void OnTestSkipped(TestSkippedInfo info)
