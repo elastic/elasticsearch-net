@@ -8,8 +8,8 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
         <th><b>Supported<b></th>
         <th><b>Windows CI</b></th>
         <th><b>Linux CI</b></th>
-        <th><b>Nuget Feed<b></th>
-        <th><b>Myget Feed<b></th>
+        <th><b>Nuget<b></th>
+        <th><b>CI Feed<b></th>
     </tr>
     <tr>
     	<td><code>0.x</code></td>
@@ -54,8 +54,8 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td>:white_check_mark:</td>
         <td><a href="https://ci.appveyor.com/project/Mpdreamz/elasticsearch-net/branch/master"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=master&svg=true"></a></td>
         <td><a href="https://travis-ci.org/elastic/elasticsearch-net/branches"><img src="https://travis-ci.org/elastic/elasticsearch-net.svg?branch=master"></a></td>
-    	<td>:x:</td>
-    	<td>:x:</td>
+    	<td>:heavy_minus_sign:</td>
+    	<td>:heavy_minus_sign:</td>
     </tr>
 </table>
 
