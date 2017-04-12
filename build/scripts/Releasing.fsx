@@ -1,7 +1,5 @@
 ﻿#I @"../../packages/build/FAKE/tools"
-#I @"../../packages/SemanticVersioning/lib/net45"
 #r @"FakeLib.dll"
-#r @"SemVer.dll"
 
 #load @"Projects.fsx"
 #load @"Paths.fsx"
@@ -13,7 +11,6 @@ open System.Text
 open Microsoft.FSharp.Quotations
 open Microsoft.FSharp.Quotations.Patterns
 open Fake
-open SemVer
 
 open Paths
 open Projects
@@ -28,11 +25,10 @@ module Release =
 
             let name = p.Name;
             let nuspec = (sprintf @"build\%s.nuspec" name)
-            let nugetOutFile =  Paths.Output(sprintf "%s.%s.nupkg" name Versioning.FileVersion)
+            let nugetOutFile =  Paths.Output(sprintf "%s.%s.nupkg" name (Versioning.CurrentVersion.ToString()))
 
             let nextMajorVersion = 
-                let version = new Version(Versioning.FileVersion)
-                let nextMajor = version.Major + 1
+                let nextMajor = Versioning.CurrentVersion.Major + 1
                 sprintf "%i" nextMajor
 
             let year = sprintf "%i" DateTime.UtcNow.Year
@@ -53,7 +49,7 @@ module Release =
                 |> toText
             
             Tooling.Nuget.Exec [ "pack"; nuspec; 
-                                 "-version"; Versioning.FileVersion; 
+                                 "-version"; Versioning.CurrentVersion.ToString(); 
                                  "-outputdirectory"; Paths.BuildOutput; 
                                  "-properties"; properties; 
                                ] |> ignore

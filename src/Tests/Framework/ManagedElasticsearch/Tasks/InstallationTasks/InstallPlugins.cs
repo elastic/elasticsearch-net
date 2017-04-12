@@ -52,8 +52,15 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 			if (File.Exists(downloadLocation)) return;
 			var downloadUrl = plugin.SnapshotDownloadUrl(v);
 			Console.WriteLine($"Download plugin snapshot {plugin.Moniker}: {downloadUrl}");
-			this.DownloadFile(downloadUrl, downloadLocation);
-			Console.WriteLine($"Download plugin snapshot {plugin.Moniker}");
+			try
+			{
+				this.DownloadFile(downloadUrl, downloadLocation);
+				Console.WriteLine($"Downloaded plugin snapshot {plugin.Moniker}");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine($"Failed downloading plugin snapshot {plugin.Moniker}, {e.Message}");
+			}
 		}
 	}
 }

@@ -8,7 +8,7 @@ open Fake
 open Paths
 open Projects
 
-module Sign = 
+module StrongName = 
     let private sn = if isMono then "sn" else Paths.CheckedInTool("sn/sn.exe")
     let private keyFile =  Paths.Keys("keypair.snk");
     let private oficialToken = "96c599bbe3e70f5d"
@@ -38,10 +38,12 @@ module Sign =
           trace (sprintf "%s was signed with official key token %s" name t) 
         | (_, t) -> traceFAKE "%s was not signed with the official token: %s but %s" name oficialToken t
         
-    let ValidateNugetDllAreSignedCorrectly() = 
+    let ValidateDllsInNugetPackage () = 
         for p in DotNetProject.AllPublishable do
             for f in DotNetFramework.All do 
                 let name = p.Name
-                let outputFolder = Paths.ProjectOutputFolder p f
-                let dll = sprintf "%s/%s.dll" outputFolder name
-                if fileExists dll then validate dll name
+                let folder = Paths.IncrementalOutputFolder p f
+                let dll = sprintf "%s/%s.dll" folder name
+                match fileExists dll with
+                | true -> validate dll name 
+                | _ -> failwithf "Attemped to verify signature of %s but it was not found!" dll
