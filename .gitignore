@@ -52,6 +52,7 @@ build/tools/*
 !build/*.ps1
 !build/*.nuspec
 !build/*.png
+!build/*.targets
 !build/scripts
 
 

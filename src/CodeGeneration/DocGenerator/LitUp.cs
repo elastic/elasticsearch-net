@@ -45,7 +45,8 @@ namespace DocGenerator
 
 		public static async Task GoAsync(string[] args)
 		{
-            var workspace = MSBuildWorkspace.Create();
+
+			var workspace = MSBuildWorkspace.Create();
             var testProject = workspace.OpenProjectAsync(GetProjectFile("Tests"));
             var nestProject = workspace.OpenProjectAsync(GetProjectFile("Nest"));
             var elasticSearchNetProject = workspace.OpenProjectAsync(GetProjectFile("Elasticsearch.Net"));

@@ -28,16 +28,19 @@ namespace DocGenerator
 
 		public static string OutputDirPath { get; }
 
-		static void Main(string[] args)
+		static int Main(string[] args)
 		{
 		    try
 		    {
                 LitUp.GoAsync(args).Wait();
-            }
+			    return 0;
+		    }
 		    catch (AggregateException ae)
 		    {
-                throw ae.InnerException ?? ae;
-            }
+			    var ex = ae.InnerException ?? ae;
+                Console.WriteLine(ex.Message);
+			    return 1;
+		    }
 		}
 	}
 }
