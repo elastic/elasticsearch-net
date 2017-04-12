@@ -4,11 +4,12 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
 <table>
     <tr>
         <th><b>Elasticsearch<b></th>
-        <th><b>.NET clients<b></th>
+        <th><b>Clients<b></th>
         <th><b>Supported<b></th>
-        <th><b>Build Status</b></th>
-        <th><b>Myget Feed<b></th>
+        <th><b>Windows CI</b></th>
+        <th><b>Linux CI</b></th>
         <th><b>Nuget Feed<b></th>
+        <th><b>Myget Feed<b></th>
     </tr>
     <tr>
     	<td><code>0.x</code></td>
@@ -17,33 +18,44 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td>:heavy_minus_sign:</td>
     	<td>:heavy_minus_sign:</td>
     	<td>:heavy_minus_sign:</td>
+    	<td>:heavy_minus_sign:</td>
     </tr>
     <tr>
     	<td><code>1.x</code></td>
     	<td><code>1.x</code></td>
-    	<td>:white_check_mark:</td>
-    	<td><a href="http://elastic-dotnet.westeurope.cloudapp.azure.com/project.html?projectId=Nest1x&tab=projectOverview&guest=1"><img src="http://elastic-dotnet.westeurope.cloudapp.azure.com/app/rest/builds/buildType:(Nest1x_RunBuildBat)/statusIcon.svg"></a></td>
-    	<td><a href="https://www.myget.org/gallery/elasticsearch-net-legacy"><img src="https://www.myget.org/BuildSource/Badge/elasticsearch-net-legacy?identifier=46420967-3fd2-4104-b600-fab20d2b0d62"></a></td>
-    	<td>
-    	<a href="https://www.nuget.org/packages/NEST/1.9.2"><img src="https://img.shields.io/badge/nuget-v1.9.2-blue.svg?style=flat-square">
-    	</td>
+    	<td>:x:</td>
+    	<td>:heavy_minus_sign:</td>
+    	<td>:heavy_minus_sign:</td>
+    	<td><a href="https://www.nuget.org/packages/NEST/1.9.2"><img src="https://img.shields.io/badge/nuget-v1.9.2-blue.svg?style=flat-square"></td>
+    	<td><a href="https://www.myget.org/gallery/elasticsearch-net-legacy"><img src="https://img.shields.io/myget/elasticsearch-net-legacy/vpre/NEST.svg?style=flat-square&label=myget&colorB=339900"></a></td>
     </tr>
     <tr>
     	<td><code>2.x</code></td>
     	<td><code>2.x</code></td>
     	<td>:white_check_mark:</td>
-    	<td><a href="http://elastic-dotnet.westeurope.cloudapp.azure.com/project.html?projectId=Nest2x&tab=projectOverview&guest=1"><img src="http://elastic-dotnet.westeurope.cloudapp.azure.com/app/rest/builds/buildType:(Nest2x_CanaryBuild_Fake)/statusIcon.svg"></a></td>
-    	<td><a href="https://www.myget.org/gallery/elasticsearch-net"><img src="https://www.myget.org/Content/images/badges/pending.svg"></a></td>
-    	<td><a href="https://www.nuget.org/packages/NEST/2.5.2"><img src="https://img.shields.io/badge/nuget-v2.5.2-blue.svg?style=flat-square"></a>
+        <td><a href="https://ci.appveyor.com/project/Mpdreamz/elasticsearch-net/branch/2.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=2.x&svg=true"></a></td>
+        <td><a href="https://travis-ci.org/elastic/elasticsearch-net/branches"><img src="https://travis-ci.org/elastic/elasticsearch-net.svg?branch=2.x"></a></td>
+    	<td><a href="https://www.nuget.org/packages/NEST/2.5.2"><img src="https://img.shields.io/badge/nuget-v2.5.3-blue.svg?style=flat-square"></a>
+    	<td><a href="https://www.myget.org/gallery/elasticsearch-net"><img src="https://img.shields.io/myget/elasticsearch-net/vpre/NEST.svg?style=flat-square&label=myget&colorB=339900"></a></td>
     	</td>  
     </tr>
     <tr>
     	<td><code>5.x</code></td>
     	<td><code>5.x</code></td>
     	<td>:white_check_mark:</td>
-    	<td><a href="http://elastic-dotnet.westeurope.cloudapp.azure.com/project.html?projectId=Nest5x&tab=projectOverview&guest=1"><img src="http://elastic-dotnet.westeurope.cloudapp.azure.com/app/rest/builds/buildType:(Nest5x_CanaryBuild_Fake)/statusIcon.svg"></a></td>
-    	<td><a href="https://www.myget.org/gallery/elasticsearch-net-next"><img src="https://www.myget.org/Content/images/badges/pending.svg"></a></td>
+        <td><a href="https://ci.appveyor.com/project/Mpdreamz/elasticsearch-net/branch/5.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=5.x&svg=true"></a></td>
+        <td><a href="https://travis-ci.org/elastic/elasticsearch-net/branches"><img src="https://travis-ci.org/elastic/elasticsearch-net.svg?branch=5.x"></a></td>
     	<td><a href="https://www.nuget.org/packages/NEST"><img src="https://img.shields.io/nuget/vpre/NEST.svg"></a> </td>
+    	<td><a href="https://www.myget.org/gallery/elasticsearch-net-next"><img src="https://img.shields.io/myget/elasticsearch-net-next/vpre/NEST.svg?style=flat-square&label=myget&colorB=339900"></a></td>
+    </tr>
+    <tr>
+    	<td><code>master</code></td>
+    	<td><code>master</code></td>
+    	<td>:white_check_mark:</td>
+        <td><a href="https://ci.appveyor.com/project/Mpdreamz/elasticsearch-net/branch/master"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=master&svg=true"></a></td>
+        <td><a href="https://travis-ci.org/elastic/elasticsearch-net/branches"><img src="https://travis-ci.org/elastic/elasticsearch-net.svg?branch=master"></a></td>
+    	<td>:x:</td>
+    	<td>:x:</td>
     </tr>
 </table>
 
