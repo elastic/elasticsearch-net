@@ -17,7 +17,7 @@ if [[ "${1,,}" == "skiptests" ]]; then SKIPTESTS=1; shift; fi
 
 if [[ ! -z "$1" ]]; then TARGET=$1; fi
 
-if [[ "${TARGET,,}" == "quick" ]]; then SKIPPAKET=1; fi
+if [[ "${TARGET,,}" == "inc" ]]; then SKIPPAKET=1; fi
 if [[ "${TARGET,,}" == "forever" ]]; then SKIPPAKET=1; fi
 
 if [[ $SKIPPAKET -ne 1 ]]; then
@@ -28,7 +28,7 @@ if [[ $SKIPPAKET -eq 1 && ! -f .paket/paket.exe ]]; then
 	mono .paket/paket.bootstrapper.exe
 	mono .paket/paket.exe restore
 fi
-if [[ "${TARGET,,}" == "quick" ]] || [[ "${TARGET,,}" == "forever" ]]; then
+if [[ "${TARGET,,}" == "inc" ]] || [[ "${TARGET,,}" == "forever" ]]; then
 	if [[ ! -z "$2" ]]; then NEST_TEST_FILTER=$2; fi
 fi
 

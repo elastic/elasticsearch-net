@@ -30,19 +30,13 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="output\v4.5\Elasticsearch.Net\Elasticsearch.Net.dll" target="lib\net45"/>
-		<file src="output\v4.5\Elasticsearch.Net\Elasticsearch.Net.pdb" target="lib\net45"/>
-		<file src="output\v4.5\Elasticsearch.Net\Elasticsearch.Net.pdb.srcsrv" target="lib\net45"/>
-		<file src="output\v4.5\Elasticsearch.Net\Elasticsearch.Net.XML" target="lib\net45"/>
+		<file src="..\src\Elasticsearch.Net\bin\Release\net45\Elasticsearch.Net.dll" target="lib\net45"/>
+		<file src="..\src\Elasticsearch.Net\bin\Release\net45\Elasticsearch.Net.XML" target="lib\net45"/>
 
-		<file src="output\v4.6\Elasticsearch.Net\Elasticsearch.Net.dll" target="lib\net46"/>
-		<file src="output\v4.6\Elasticsearch.Net\Elasticsearch.Net.pdb" target="lib\net46"/>
-		<file src="output\v4.6\Elasticsearch.Net\Elasticsearch.Net.pdb.srcsrv" target="lib\net46"/>
-		<file src="output\v4.6\Elasticsearch.Net\Elasticsearch.Net.XML" target="lib\net46"/>
+		<file src="..\src\Elasticsearch.Net\bin\Release\net46\Elasticsearch.Net.dll" target="lib\net46"/>
+		<file src="..\src\Elasticsearch.Net\bin\Release\net46\Elasticsearch.Net.XML" target="lib\net46"/>
 
-		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net.dll" target="lib\netstandard1.3"/>
-		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net.pdb" target="lib\netstandard1.3"/>
-		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net.pdb.srcsrv" target="lib\netstandard1.3"/>
-		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net.xml" target="lib\netstandard1.3"/>
+		<file src="..\src\Elasticsearch.Net\bin\Release\netstandard1.3\Elasticsearch.Net.dll" target="lib\netstandard1.3"/>
+		<file src="..\src\Elasticsearch.Net\bin\Release\netstandard1.3\Elasticsearch.Net.xml" target="lib\netstandard1.3"/>
 	</files>
 </package>

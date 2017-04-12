@@ -27,14 +27,14 @@ module Benchmarker =
                 })
 
             DotNetCli.RunCommand(fun p ->
-                { p with               
+                { p with
                     WorkingDir = testsProjectDirectory
                 }) "run Benchmark"
         finally
-            let benchmarkOutputFiles = 
+            let benchmarkOutputFiles =
                 let output = combinePaths testsProjectDirectory "BenchmarkDotNet.Artifacts"
-                Directory.EnumerateFiles(output, "*.*", SearchOption.AllDirectories) 
+                Directory.EnumerateFiles(output, "*.*", SearchOption.AllDirectories)
                 |> Seq.toList
-            
+
             for file in benchmarkOutputFiles do copyToOutput file
             DeleteFiles benchmarkOutputFiles
