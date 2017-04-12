@@ -26,6 +26,9 @@ module Paths =
     let IncrementalOutputFolder (project:DotNetProject) (framework:DotNetFramework) = 
         sprintf "src/%s/bin/Release/%s" project.Name framework.Identifier.Nuget
             
+    let IncrementalOutputFolderWithPrefix prefix (project:DotNetProject) (framework:DotNetFramework) = 
+        sprintf "src/%s/%s/bin/Release/%s" prefix project.Name framework.Identifier.Nuget
+
     let Tool tool = sprintf "packages/build/%s" tool
     let CheckedInToolsFolder = "build/Tools"
     let KeysFolder = sprintf "%s/keys" BuildFolder

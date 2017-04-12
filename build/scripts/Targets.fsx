@@ -17,7 +17,6 @@ open Fake
 open Paths
 open Building
 open Testing
-open Signing
 open Versioning
 open Documentation
 open Releasing
@@ -25,23 +24,25 @@ open Profiling
 open Benchmarking
 open XmlDocPatcher
 open Documentation
+open Signing
 
 // Default target
 
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
-Target "Quick" <| fun _ -> traceHeader "STARTING INCREMENTAL BUILD"
+
+Target "Inc" <| fun _ -> traceHeader "STARTING INCREMENTAL BUILD"
+
+Target "IncrementalTest" Tests.IncrementalTest
 
 Target "Clean" Build.Clean
 
-Target "CleanAfter" Build.CleanAfter
+Target "Restore" Build.Restore
 
-Target "BuildApp" Build.Compile
+Target "IncrementalBuild" <| fun _ -> Build.Compile false
 
-Target "Test" Tests.RunTest
+Target "FullBuild" <| fun _ -> Build.Compile false
     
 Target "UnitTests" Tests.RunUnitTests
-
-Target "Forever"  Tests.RunUnitTestsForever
 
 Target "Profile" <| fun _ -> 
     Profiler.Run()
@@ -57,13 +58,12 @@ Target "InheritDoc"  InheritDoc.PatchInheritDocs
 Target "Documentation" Documentation.Generate
 
 Target "Version" <| fun _ -> 
-    Versioning.PatchAssemblyInfos()
-    Versioning.PatchProjectJsons()
+    tracefn "Current Version: %s" (Versioning.CurrentVersion.ToString())
 
 Target "Release" <| fun _ -> 
     Release.NugetPack()   
-    Sign.ValidateNugetDllAreSignedCorrectly()
     Versioning.ValidateArtifacts()
+    StrongName.ValidateDllsInNugetPackage()
 
 Target "Canary" <| fun _ -> 
     trace "Running canary build" 
@@ -74,34 +74,31 @@ Target "Canary" <| fun _ ->
 // Dependencies
 "Clean" 
   =?> ("Version", hasBuildParam "version")
-  ==> "BuildApp"
-  ==> "CleanAfter"
+  ==> "Restore"
+  ==> "FullBuild"
   =?> ("UnitTests", (not ((getBuildParam "skiptests") = "1")))
   ==> "InheritDoc"
   ==> "Documentation"
   ==> "Build"
 
 "Clean"
-  ==> "BuildApp" 
+  ==> "FullBuild" 
   ==> "Profile"
 
 "Clean" 
-  ==> "BuildApp"
+  ==> "FullBuild"
   ==> "Benchmark"
 
 "Version"
-  ==> "Release"
-  ==> "Canary"
+  ==> "Release" ==> "Canary"
 
-"BuildApp"
+"FullBuild"
   ==> "Integrate"
 
-"BuildApp"
-  =?> ("Test", (not ((getBuildParam "skiptests") = "1")))
-  ==> "Quick"
-
-"BuildApp"
-  ==> "Forever"
+"Restore"
+  ==> "IncrementalBuild"
+  =?> ("IncrementalTest", (not ((getBuildParam "skiptests") = "1")))
+  ==> "Inc"
 
 "Build"
   ==> "Release"

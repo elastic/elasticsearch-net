@@ -114,8 +114,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 
 				var name = info.Name;
 
-				IPropertyMapping propertyMapping = null;
-				if (this._settings.PropertyMappings.TryGetValue(info, out propertyMapping))
+				if (this._settings.PropertyMappings.TryGetValue(info, out IPropertyMapping propertyMapping))
 					return propertyMapping.Name;
 
 				var att = ElasticsearchPropertyAttributeBase.From(info);
