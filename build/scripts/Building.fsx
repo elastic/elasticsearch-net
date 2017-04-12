@@ -19,6 +19,7 @@ type Build() =
     static let msbuildProperties = [
       ("Configuration","Release"); 
       ("PreBuildEvent","echo");
+      ("Optimize", "True");
     ]
 
     static let moveToBuildOutput (f: DotNetFramework) =

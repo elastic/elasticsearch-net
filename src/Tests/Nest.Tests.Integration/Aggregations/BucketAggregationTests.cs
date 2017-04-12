@@ -86,6 +86,42 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.4.9", "Filtering by exact terms added in ES 1.5")]
+		public void SignificantTermsWithValues()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.SignificantTerms("sig_terms", st => st
+						.Field(p => p.Content)
+						.Include(new [] { "pastrami", "bacon", "turkey" })
+					)
+				)
+			);
+			results.IsValid.Should().BeTrue();
+			var bucket = results.Aggs.SignificantTerms("sig_terms");
+			bucket.Items.Should().NotBeEmpty();
+		}
+
+		[Test]
+		[SkipVersion("0 - 1.1.9", "Filtering by terms pattern added in ES 1.2")]
+		public void SignificantTermsWithPattern()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.SignificantTerms("sig_terms", st => st
+						.Field(p => p.Content)
+						.Include("pa.*", "CANON_EQ|CASE_INSENSITIVE")
+					)
+				)
+			);
+			results.IsValid.Should().BeTrue();
+			var bucket = results.Aggs.SignificantTerms("sig_terms");
+			bucket.Items.Should().NotBeEmpty();
+		}
+
+		[Test]
 		public void Histogram()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s
