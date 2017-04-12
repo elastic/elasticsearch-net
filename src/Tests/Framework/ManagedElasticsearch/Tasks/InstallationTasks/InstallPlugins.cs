@@ -26,8 +26,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 			foreach (var plugin in plugins)
 			{
 				var installParameter = !v.IsSnapshot ? plugin.Moniker : this.DownloadSnapshotIfNeeded(fileSystem, plugin, v);
-			    var installCommand = v.Major >= 5 ? "install --batch" : "install";
-                this.ExecuteBinary(fileSystem.PluginBinary, $"install elasticsearch plugin: {plugin.Moniker}", installCommand, installParameter);
+				this.ExecuteBinary(fileSystem.PluginBinary, $"install elasticsearch plugin: {plugin.Moniker}", "install --batch", installParameter);
 			}
 		}
 
@@ -53,8 +52,15 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 			if (File.Exists(downloadLocation)) return;
 			var downloadUrl = plugin.SnapshotDownloadUrl(v);
 			Console.WriteLine($"Download plugin snapshot {plugin.Moniker}: {downloadUrl}");
-			this.DownloadFile(downloadUrl, downloadLocation);
-			Console.WriteLine($"Download plugin snapshot {plugin.Moniker}");
+			try
+			{
+				this.DownloadFile(downloadUrl, downloadLocation);
+				Console.WriteLine($"Downloaded plugin snapshot {plugin.Moniker}");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine($"Failed downloading plugin snapshot {plugin.Moniker}, {e.Message}");
+			}
 		}
 	}
 }

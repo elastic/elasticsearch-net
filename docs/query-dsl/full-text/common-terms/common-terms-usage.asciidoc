@@ -1,4 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.4
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/2.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,9 +15,9 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[common-terms-usage]]
-== Common Terms Usage
+=== Common Terms Usage
 
-=== Fluent DSL Example
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -34,7 +36,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer syntax example
 
 [source,csharp]
 ----

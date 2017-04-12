@@ -16,6 +16,7 @@ namespace Nest
 		public int StartOffset { get; internal set; }
 
         [Obsolete("Use EndOffset")]
+		[JsonIgnore]
 	    public int EndPostion => EndOffset;
 
 		[JsonProperty("end_offset")]

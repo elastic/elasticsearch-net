@@ -1,4 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.4
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/2.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -21,7 +23,8 @@ you have used the fields parameter, or if the `_source` field is disabled.
 
 See the Elasticsearch documentation on {ref_current}/search-request-source-filtering.html[Source Filtering] for more detail.
 
-=== Fluent DSL Example
+[float]
+=== Fluent DSL example
 
 [source,csharp]
 ----
@@ -36,7 +39,8 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+[float]
+=== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -65,6 +69,7 @@ new SearchRequest<Project>
 }
 ----
 
+[float]
 === Handling Responses
 
 [source,csharp]
@@ -79,13 +84,13 @@ foreach (var document in response.Documents)
 }
 ----
 
-[[disable-source-retrieval]]
 [float]
 == Disable Source Retrieval
 
 Source filtering can be disabled by setting disable to `true`.
 
-=== Fluent DSL Example
+[float]
+=== Fluent DSL example
 
 [source,csharp]
 ----
@@ -93,7 +98,8 @@ s => s
 .Source(src => src.Disable())
 ----
 
-=== Object Initializer Syntax Example
+[float]
+=== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -114,12 +120,12 @@ new SearchRequest<Project>
 }
 ----
 
+[float]
 === Handling Responses
 
 [source,csharp]
 ----
 response.ShouldBeValid();
-
 foreach (var hit in response.Hits)
     hit.Source.Should().BeNull();
 ----

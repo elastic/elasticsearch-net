@@ -84,6 +84,9 @@ namespace Tests.QueryDsl.FullText.MultiMatch
 		};
 	}
 
+    /**[float]
+     * === Multi match with boost usage
+     */
 	public class MultiMatchWithBoostUsageTests : QueryDslUsageTestsBase
 	{
 		public MultiMatchWithBoostUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

@@ -8,7 +8,7 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 {
 	public class CovariantSearchResults
 	{
-		/**== Covariant Search Results
+		/**=== Covariant search results
 		 *
 		 * NEST directly supports returning covariant result sets.
 		 * Meaning a result can be typed to an interface or base class
@@ -48,7 +48,8 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 
 		[U] public void UsingTypes()
 		{
-			/** === Using Types
+			/**
+			* ==== Using types
 			* The most straightforward way to search over multiple types is to
 			* type the response to the parent interface or base class
 			* and pass the actual types we want to search over using `.Type()`
@@ -64,7 +65,7 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 
 			/**
 			* Here we assume our response is valid and that we received the 100 documents
-			* we are expecting. Remember `result.Documents` is an `IEnumerable&lt;ISearchResult&gt;`
+			* we are expecting. Remember `result.Documents` is an `IReadOnlyCollection<ISearchResult>`
 			*/
 			result.ShouldBeValid();
 			result.Documents.Count().Should().Be(100);
@@ -91,7 +92,8 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 
 		[U] public void UsingConcreteTypeSelector()
 		{
-			/** === Using ConcreteTypeSelector
+			/**
+			* ==== Using ConcreteTypeSelector
 			* A more low level approach is to inspect the hit yourself and determine the CLR type to deserialize to
 			*/
 			var result = this._client.Search<ISearchResult>(s => s
@@ -99,17 +101,17 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 				.Size(100)
 			);
 
-			/**
+            /**
 			* here for each hit we'll call the delegate passed to `ConcreteTypeSelector` where
 			* - `d` is a representation of the `_source` exposed as a `dynamic` type
 			* - a typed `h` which represents the encapsulating hit of the source i.e. `Hit<dynamic>`
 			*/
 
-			/**
+            /**
 			* Here we assume our response is valid and that we received the 100 documents
-			* we are expecting. Remember `result.Documents` is an `IEnumerable&lt;ISearchResult&gt;`
+			* we are expecting. Remember `result.Documents` is an `IReadOnlyCollection<ISearchResult>`
 			*/
-			result.ShouldBeValid();
+            result.ShouldBeValid();
 			result.Documents.Count().Should().Be(100);
 
 			/**
@@ -132,7 +134,8 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);
 		}
 
-		/** === Using CovariantTypes()
+		/**
+		* ==== Using CovariantTypes
 		*/
 		[U] public void UsingCovariantTypesOnScroll()
 		{
@@ -143,16 +146,16 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			var result = this._client.Scroll<ISearchResult>(TimeSpan.FromMinutes(60), "scrollId", s => s
 				.CovariantTypes(Types.Type(typeof(A), typeof(B), typeof(C)))
 			);
-			/**
+            /**
 			* NEST will translate this to a search over `/index/a,b,c/_search`;
 			* hits that have `"_type" : "a"` will be serialized to `A` and so forth
 			*/
 
-			/**
+            /**
 			* Here we assume our response is valid and that we received the 100 documents
-			* we are expecting. Remember `result.Documents` is an `IEnumerable&lt;ISearchResult&gt;`
+			* we are expecting. Remember `result.Documents` is an `IReadOnlyCollection<ISearchResult>`
 			*/
-			result.ShouldBeValid();
+            result.ShouldBeValid();
 			result.Documents.Count().Should().Be(100);
 
 			/**
@@ -192,7 +195,7 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 
 			/**
 			* Here we assume our response is valid and that we received the 100 documents
-			* we are expecting. Remember `result.Documents` is an `IEnumerable&lt;ISearchResult&gt;`
+			* we are expecting. Remember `result.Documents` is an `IReadOnlyCollection<ISearchResult>`
 			*/
 			result.ShouldBeValid();
 			result.Documents.Count().Should().Be(100);

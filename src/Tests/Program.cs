@@ -59,16 +59,11 @@ namespace Tests
 		public static void Main(string[] args)
 		{
 			if (args.Length == 0)
-				Console.WriteLine("Must specify at least one argument: Profile or Benchmark");
+				Console.WriteLine("Must specify at least one argument: TestAssemblyPath, Profile or Benchmark ");
 
 			var arguments = args.Skip(1).ToArray();
 
-			if (args[0].Equals("Benchmark", StringComparison.OrdinalIgnoreCase))
-			{
-				var benchmarkSwitcher = new BenchmarkSwitcher(GetBenchmarkTypes());
-				benchmarkSwitcher.Run(arguments);
-			}
-			else
+			if (args[0].Equals("Profile", StringComparison.OrdinalIgnoreCase))
 			{
 #if DOTNETCORE
 				Console.Error.WriteLine("DotTrace Profiling is not currently supported on .NET Core");
@@ -89,6 +84,15 @@ namespace Tests
 					}
 				}
 #endif
+			}
+			else if (args[0].Equals("Benchmark", StringComparison.OrdinalIgnoreCase))
+			{
+				var benchmarkSwitcher = new BenchmarkSwitcher(GetBenchmarkTypes());
+				benchmarkSwitcher.Run(arguments);
+			}
+			else
+			{
+				TestRunner.Run(arguments);
 			}
 		}
 

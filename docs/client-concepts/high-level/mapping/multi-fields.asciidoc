@@ -1,0 +1,180 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.4
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/2.4
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/2.x/src/Tests/ClientConcepts/HighLevel/Mapping/MultiFields.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[multi-fields]]
+=== Multi fields
+
+It is often useful to index the same field in Elasticsearch in different ways, to
+serve different purposes, for example, mapping a POCO `string` property as a`string` datatype for full text search as well as mapping as a `not_analyzed` `string` datatype for
+structured search, sorting and aggregations. Another example is mapping a POCO `string`
+property to use different analyzers, to serve different full text search needs.
+
+[source,csharp]
+----
+public class Person
+{
+    public string Name { get; set; }
+}
+----
+
+==== Creating Multi fields
+
+Let's look at an example, using the following simple POCO
+
+Multi fields can be created on a mapping using the `.Fields()` method within a field mapping
+
+[source,csharp]
+----
+var descriptor = new CreateIndexDescriptor("myindex")
+    .Mappings(ms => ms
+        .Map<Person>(m => m
+            .Properties(p => p
+                .String(t => t
+                    .Name(n => n.Name)
+                    .Fields(ff => ff
+                        .String(tt => tt
+                            .Name("stop") <1>
+                            .Analyzer("stop")
+                        )
+                        .String(tt => tt
+                            .Name("shingles")
+                            .Analyzer("name_shingles") <2>
+                        )
+                        .String(k => k
+                            .Name("keyword") <3>
+                            .IgnoreAbove(256)
+                            .NotAnalyzed()
+                        )
+                    )
+                )
+            )
+        )
+    );
+----
+<1> Use the stop analyzer on this sub field
+<2> Use a custom analyzer named "named_shingles" that is configured in the index
+<3> Index as not analyzed
+
+[source,javascript]
+----
+{
+  "mappings": {
+    "person": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "fields": {
+            "stop": {
+              "type": "string",
+              "analyzer": "stop"
+            },
+            "shingles": {
+              "type": "string",
+              "analyzer": "name_shingles"
+            },
+            "keyword": {
+              "type": "string",
+              "ignore_above": 256,
+              "index": "not_analyzed"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+[NOTE]
+--
+Multi fields do not change the original `_source` field in Elasticsearch; they affect only how
+a field is indexed.
+
+New multi fields can be added to existing fields using the Put Mapping API.
+
+--
+
+This is useful because the property can be used for both full text search
+as well as for structured search, sorting and aggregations
+
+[source,csharp]
+----
+var searchResponse = client.Search<Person>(s => s
+    .Query(q => q
+        .Match(m => m
+            .Field(f => f.Name)
+            .Query("Russ Cam")
+        ) && q
+        .Match(m => m
+            .Field(f => f.Name.Suffix("shingles")) <1>
+            .Query("Russ Cam")
+            .Boost(1.2)
+        )
+    )
+    .Sort(ss => ss
+        .Descending(f => f.Name.Suffix("keyword")) <2>
+    )
+    .Aggregations(a => a
+        .Terms("peoples_names", t => t
+            .Field(f => f.Name.Suffix("keyword"))
+        )
+    )
+);
+----
+<1> Use the shingles subfield on `Name`
+<2> Use the keyword subfield on `Name`
+
+[source,javascript]
+----
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "name": {
+              "query": "Russ Cam"
+            }
+          }
+        },
+        {
+          "match": {
+            "name.shingles": {
+              "query": "Russ Cam",
+              "boost": 1.2
+            }
+          }
+        }
+      ]
+    }
+  },
+  "sort": [
+    {
+      "name.keyword": {
+        "order": "desc"
+      }
+    }
+  ],
+  "aggs": {
+    "peoples_names": {
+      "terms": {
+        "field": "name.keyword"
+      }
+    }
+  }
+}
+----
+

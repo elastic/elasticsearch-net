@@ -11,17 +11,18 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 {
 	public class FirstUsage
 	{
-		/**== Pinging - First Usage
+		/**=== Ping on first usage
 		*
-		* Pinging is enabled by default for the <<static-connection-pool, Static>>, <<sniffing-connection-pool, Sniffing>> and <<sticky-connection-pool, Sticky>> connection pools.
+		* Pinging is enabled by default for the <<static-connection-pool, Static>>, <<sniffing-connection-pool, Sniffing>>
+		* and <<sticky-connection-pool, Sticky>> connection pools.
 		* This means that the first time a node is used or resurrected, a ping is issued a with a small (configurable) timeout,
-		* allowing the client to fail and fallover to a healthy node much faster than attempting a request that may be heavier than a ping.
+		* allowing the client to fail and fallover to a healthy node much faster than attempting a request, that may be heavier than a ping.
 		*/
 
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task PingFailsFallsOverToHealthyNodeWithoutPing()
 		{
-			/** Here's an example with a cluster with 2 nodes where the second node fails on ping */
+			/** Here's an example with a cluster with two nodes where the second node fails on ping */
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(2)
 				.Ping(p => p.Succeeds(Always))
@@ -67,41 +68,40 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 			);
 
 			await audit.TraceCalls(
-				/** The first call goes to 9200 which succeeds */
 				new ClientCall {
-					{ PingSuccess, 9200},
+					{ PingSuccess, 9200}, // <1> The first call goes to 9200, which succeeds
 					{ HealthyResponse, 9200},
 					{ pool =>
-					{
-						pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(0);
-					} }
+						pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(0)
+					}
 				},
-				/** The 2nd call does a ping on 9201 because its used for the first time.
-				* It fails and so we ping 9202 which also fails. We then ping 9203 because
-				* we haven't used it before and it succeeds */
 				new ClientCall {
-					{ PingFailure, 9201},
-					{ PingFailure, 9202},
-					{ PingSuccess, 9203},
+					{ PingFailure, 9201}, // <2> The 2nd call does a ping on 9201 because its used for the first time. This fails
+					{ PingFailure, 9202}, // <3> So we ping 9202. This _also_ fails
+					{ PingSuccess, 9203}, // <4> We then ping 9203 because we haven't used it before and it succeeds
 					{ HealthyResponse, 9203},
-					/** Finally we assert that the connectionpool has two nodes that are marked as dead */
-					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
+					{ pool =>
+						pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) // <5> Finally, we assert that the connection pool has two nodes that are marked as dead
+					}
 				}
 			);
 		}
+
+		/**
+		 * All nodes are pinged on first use, provided they are healthy
+		 */
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task AllNodesArePingedOnlyOnFirstUseProvidedTheyAreHealthy()
 		{
-			/**A healthy cluster of 4 (min master nodes of 3 of course!) */
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(4)
-				.Ping(p => p.SucceedAlways())
+				.Ping(p => p.SucceedAlways()) // <1> Pings on nodes always succeed
 				.StaticConnectionPool()
 				.AllDefaults()
 			);
 
 			await audit.TraceCalls(
-				new ClientCall { { PingSuccess, 9200}, { HealthyResponse, 9200} },
+				new ClientCall { { PingSuccess, 9200}, { HealthyResponse, 9200} }, // <2> A successful ping on each node
 				new ClientCall { { PingSuccess, 9201}, { HealthyResponse, 9201} },
 				new ClientCall { { PingSuccess, 9202}, { HealthyResponse, 9202} },
 				new ClientCall { { PingSuccess, 9203}, { HealthyResponse, 9203} },

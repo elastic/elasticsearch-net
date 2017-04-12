@@ -38,20 +38,22 @@ IF /I "%1"=="skiptests" (
 IF NOT [%1]==[] (set TARGET=%1)
 
 SET SKIPPAKET=0
-IF /I "%TARGET%"=="quick" SET SKIPPAKET=1
-IF /I "%TARGET%"=="forever" SET SKIPPAKET=1
+IF /I "%TARGET%"=="inc" SET SKIPPAKET=1
+IF /I "%TARGET%"=="canary" SET SKIPTESTS=1
 
 IF "%SKIPPAKET%" neq "1" (
 	.paket\paket.bootstrapper.exe
-	.paket\paket.exe restore
+	IF EXIST paket.lock (.paket\paket.exe restore)
+	IF NOT EXIST paket.lock (.paket\paket.exe install)
 )
 
 REM if `build quick` is called on a fresh checkout force a restore anyway
 IF "%SKIPPAKET%"=="1" (
 	IF NOT EXIST .paket\paket.exe (
 		.paket\paket.bootstrapper.exe
-		.paket\paket.exe restore
 	)
+	IF EXIST paket.lock (.paket\paket.exe restore)
+	IF NOT EXIST paket.lock (.paket\paket.exe install)
 )
 
 IF /I "%TARGET%"=="version" (
@@ -64,10 +66,7 @@ IF /I "%TARGET%"=="release" (
 	   EXIT /B 1
 	)
 )
-IF /I "%TARGET%"=="quick" (
-	IF NOT [%2]==[] (set NEST_TEST_FILTER="%2")
-)
-IF /I "%TARGET%"=="forever" (
+IF /I "%TARGET%"=="inc" (
 	IF NOT [%2]==[] (set NEST_TEST_FILTER="%2")
 )
 IF /I "%TARGET%"=="integrate" (

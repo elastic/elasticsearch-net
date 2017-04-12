@@ -13,65 +13,72 @@ namespace Tests.ClientConcepts.LowLevel
 {
 	public class PostingData
 	{
-		/**== Post data
+		/**[[post-data]]
+         * === Post data
 		 * The low level client allows you to post a `string` or `byte[]` array directly. On top of this,
 		 * if you pass a collection of `string` or `object` they will be serialized
 		 * using Elasticsearch's special bulk/multi format.
 		 */
 		private readonly string @string = "fromString";
 		private readonly byte[] bytes = Utf8Bytes("fromByteArray");
-		private List<string> listOfStrings = Enumerable.Range(0, 5).Select(i => i.ToString()).ToList();
-		private List<object> listOfObjects;
+		private List<string> collectionOfStrings = Enumerable.Range(0, 5).Select(i => i.ToString()).ToList();
+		private List<object> collectionOfObjects;
 		private object @object;
 
-		private byte[] multiStringJson;
-		private byte[] multiObjectJson;
-		private byte[] objectJson;
+		private byte[] utf8BytesOfListOfStrings;
+		private byte[] utf8BytesOfCollectionOfObjects;
+		private byte[] utf8ObjectBytes;
 
 		public PostingData()
 		{
 			this.@object = new { my_object = "value" };
-			this.listOfObjects = Enumerable.Range(0, 5).Select(i => @object).Cast<object>().ToList();
+			this.collectionOfObjects = Enumerable.Range(0, 5).Select(i => @object).Cast<object>().ToList();
 			var json = "{\"my_object\":\"value\"}";
-			this.objectJson = Utf8Bytes(json);
-			this.multiStringJson = Utf8Bytes(string.Join("\n", listOfStrings) + "\n");
-			this.multiObjectJson = Utf8Bytes(string.Join("\n", listOfObjects.Select(o=> json)) + "\n");
+			this.utf8ObjectBytes = Utf8Bytes(json);
+			this.utf8BytesOfListOfStrings = Utf8Bytes(string.Join("\n", collectionOfStrings) + "\n");
+			this.utf8BytesOfCollectionOfObjects = Utf8Bytes(string.Join("\n", collectionOfObjects.Select(o=> json)) + "\n");
 		}
 
 		[U] public void ImplicitConversions()
 		{
-			/**=== Implicit Conversion
+			/**[float]
+			* === Implicit Conversion
 			* Even though the argument for PostData on the low level client takes a `PostData<object>`,
 			* You can rely on implicit conversion to abstract the notion of PostData completely.
 			* You can implicitly convert from the following types
-			* - `string`
-			* - `byte[]`
-			* - collection of `string`
-			* - collection of `object`
-			* - `object`
+			*
+			* - A `string`
+			* - A collection of `string`
+			* - An `object`
+			* - A collection of `object`
+			* - A `byte[]` array
+			*
+			* Let's demonstrate each with some assertive examples
 			*/
 
-			var fromString = ImplicitlyConvertsFrom(@string);
-			var fromByteArray = ImplicitlyConvertsFrom(bytes);
-			var fromListOfString = ImplicitlyConvertsFrom(listOfStrings);
-			var fromListOfObject = ImplicitlyConvertsFrom(listOfObjects);
-			var fromObject = ImplicitlyConvertsFrom(@object);
+			PostData<object> fromString = @string;
+			PostData<object> fromByteArray = bytes;
+			PostData<object> fromListOfString = collectionOfStrings;
+			PostData<object> fromListOfObject = collectionOfObjects;
+			PostData<object> fromObject = @object;
 
-			/** PostData bytes will always be set if it originated from `byte[]` */
-			fromByteArray.WrittenBytes.Should().BeSameAs(bytes);
+			fromByteArray.WrittenBytes.Should().BeSameAs(bytes); // <1> `WrittenBytes` will always be set if it originated from `byte[]`
 
+			/** The `Type` property is representative of the original type from which post data is constructed */
 			fromString.Type.Should().Be(PostType.LiteralString);
 			fromByteArray.Type.Should().Be(PostType.ByteArray);
 			fromListOfString.Type.Should().Be(PostType.EnumerableOfString);
 			fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
 			fromObject.Type.Should().Be(PostType.Serializable);
 
-			/** and passing a `PostData<object>` object to a method taking `PostData<object>` should not wrap */
-			fromString = ImplicitlyConvertsFrom(fromString);
-			fromByteArray = ImplicitlyConvertsFrom(fromByteArray);
-			fromListOfString = ImplicitlyConvertsFrom(fromListOfString);
-			fromListOfObject = ImplicitlyConvertsFrom(fromListOfObject);
-			fromObject = ImplicitlyConvertsFrom(fromObject);
+			/** and passing a `PostData<object>` instance to a method that accepts `PostData<object>`
+			 * as an argument does not wrap it again
+			 */
+			fromString = MethodThatAcceptsPostData(fromString);
+			fromByteArray = MethodThatAcceptsPostData(fromByteArray);
+			fromListOfString = MethodThatAcceptsPostData(fromListOfString);
+			fromListOfObject = MethodThatAcceptsPostData(fromListOfObject);
+			fromObject = MethodThatAcceptsPostData(fromObject);
 
 			fromString.Type.Should().Be(PostType.LiteralString);
 			fromByteArray.Type.Should().Be(PostType.ByteArray);
@@ -87,43 +94,61 @@ namespace Tests.ClientConcepts.LowLevel
 			await this.AssertOn(new ConnectionConfiguration());
 		}
 
-		//hide
 		private async Task AssertOn(IConnectionConfigurationValues settings)
 		{
-			/** Although each implicitly types behaves slightly differently */
-			await Post(() => @string, writes: Utf8Bytes(@string), storesBytes: true, settings: settings);
-
-			await Post(() => bytes, writes: bytes, storesBytes: true, settings: settings);
-
-			/** When passing a list of strings we assume its a list of valid serialized json that we
-			* join with newline feeds making sure there is a trailing linefeed */
-			await Post(() => listOfStrings, writes: multiStringJson, storesBytes: true, settings: settings);
+			/**
+			 * Each of the implicitly converted types behaves _slightly_ differently.
+			 *
+			 * For `string`, the UTF-8 bytes are sent in the request and the `WrittenBytes` property is assigned
+			 * the bytes
+			 */
+			await Post(() => @string, writes: Utf8Bytes(@string), writtenBytesIsSet: true, settings: settings);
 
 			/**
-			* When passing a list of object we assume its a list of objects we need to serialize
-			* individually to json and join with newline feeds making sure there is a trailing linefeed
+			 * Similarly, for `byte[]`, the bytes are sent verbatim and the `WrittenBytes` property is assigned
+			 * the bytes
+			 */
+			await Post(() => bytes, writes: bytes, writtenBytesIsSet: true, settings: settings);
+
+			/**
+			 * When passing a collection of `string`, the client assumes that it's a collection of valid serialized json,
+			 * so joins each with newline feeds, ensuring there is a trailing linefeed. As with `string` and `byte[]`,
+			 * the `WrittenBytes` property is assigned the UTF-8 bytes of the collection of strings
+			 */
+			await Post(() => collectionOfStrings, writes: utf8BytesOfListOfStrings, writtenBytesIsSet: true, settings: settings);
+
+			/**
+			* When passing a collection of `object`, the client assumes that it's a collection of objects
+			* that needs to be serialized individually to json and joined with newline feeds. As with the collection of strings, the client ensures that
+			* there is a trailing linefeed.
 			*/
-			await Post(() => listOfObjects, writes: multiObjectJson, storesBytes: false, settings: settings);
+			await Post(() => collectionOfObjects, writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: false, settings: settings);
 
-			/** In all other cases postdata is serialized as is. */
-			await Post(() => @object, writes: objectJson, storesBytes: false, settings: settings);
+			/**
+			 * In all other cases, Post data is serialized as is and `WrittenBytes` is not assigned
+			 */
+			await Post(() => @object, writes: utf8ObjectBytes, writtenBytesIsSet: false, settings: settings);
 
-			/** If you want to maintain a copy of the request that went out, use `DisableDirectStreaming` */
-			settings = new ConnectionSettings().DisableDirectStreaming();
+			/**
+			* ==== Forcing WrittenBytes to be set
+			*
+			* If you want to maintain a copy of the request that went out, you can set `DisableDirectStreaming`  on `ConnectionConfiguration`.
+			* In doing so, the serialized bytes are first written to a private `MemoryStream` so that the client can get hold of the serialized bytes
+			*/
+			settings = new ConnectionConfiguration().DisableDirectStreaming();
 
-			/** by forcing `DisableDirectStreaming` on connection settings, serialization happens first in a private `MemoryStream`
-			* so we can get hold of the serialized bytes */
-			await Post(() => listOfObjects, writes: multiObjectJson, storesBytes: true, settings: settings);
+			await Post(() => collectionOfObjects, writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: true, settings: settings);
 
-			/** this behavior can also be observed when serializing a simple object using `DisableDirectStreaming` */
-			await Post(() => @object, writes: objectJson, storesBytes: true, settings: settings);
+			/** This behavior can also be observed when serializing a simple object using `DisableDirectStreaming` enabled
+			 */
+			await Post(() => @object, writes: utf8ObjectBytes, writtenBytesIsSet: true, settings: settings);
 		}
 
 		//hide
-		private static async Task Post(Func<PostData<object>> postData, byte[] writes, bool storesBytes, IConnectionConfigurationValues settings)
+		private static async Task Post(Func<PostData<object>> postData, byte[] writes, bool writtenBytesIsSet, IConnectionConfigurationValues settings)
 		{
-			PostAssert(postData(), writes, storesBytes, settings);
-			await PostAssertAsync(postData(), writes, storesBytes, settings);
+			PostAssert(postData(), writes, writtenBytesIsSet, settings);
+			await PostAssertAsync(postData(), writes, writtenBytesIsSet, settings);
 		}
 
 		//hide
@@ -163,7 +188,7 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		//hide
-		private PostData<object> ImplicitlyConvertsFrom(PostData<object> postData) => postData;
+		private PostData<object> MethodThatAcceptsPostData(PostData<object> postData) => postData;
 
 	}
 }

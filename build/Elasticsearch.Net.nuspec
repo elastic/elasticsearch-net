@@ -20,28 +20,23 @@
 			<group targetFramework=".NETFramework4.6" />
 			<group targetFramework=".NETStandard1.3">
 				<dependency id="NETStandard.Library" version="[1.6.0, )" />
-				<dependency id="System.Collections.Specialized" version="[4.0.1, )" />
-				<dependency id="System.Runtime.Serialization.Primitives" version="[4.1.1, )" />
-				<dependency id="Microsoft.CSharp" version="[4.0.1, )" />
-				<dependency id="System.Dynamic.Runtime" version="[4.0.11, )" />
-				<dependency id="System.Reflection.TypeExtensions" version="[4.1.0, )" />
-				<dependency id="System.ComponentModel.TypeConverter" version="[4.1.0, )" />
+				<dependency id="System.Collections.Specialized" version="[4.3.0, )" />
+				<dependency id="System.Runtime.Serialization.Primitives" version="[4.3.0, )" />
+				<dependency id="Microsoft.CSharp" version="[4.3.0, )" />
+				<dependency id="System.Dynamic.Runtime" version="[4.3.0, )" />
+				<dependency id="System.Reflection.TypeExtensions" version="[4.3.0, )" />
+				<dependency id="System.ComponentModel.TypeConverter" version="[4.3.0, )" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="output\v4.5\Elasticsearch.Net\Elasticsearch.Net.dll" target="lib\net45"/>
-		<file src="output\v4.5\Elasticsearch.Net\Elasticsearch.Net.pdb" target="lib\net45"/>
-		<file src="output\v4.5\Elasticsearch.Net\Elasticsearch.Net.pdb.srcsrv" target="lib\net45"/>
-		<file src="output\v4.5\Elasticsearch.Net\Elasticsearch.Net.XML" target="lib\net45"/>
+		<file src="..\src\Elasticsearch.Net\bin\Release\net45\Elasticsearch.Net.dll" target="lib\net45"/>
+		<file src="..\src\Elasticsearch.Net\bin\Release\net45\Elasticsearch.Net.XML" target="lib\net45"/>
 
-		<file src="output\v4.6\Elasticsearch.Net\Elasticsearch.Net.dll" target="lib\net46"/>
-		<file src="output\v4.6\Elasticsearch.Net\Elasticsearch.Net.pdb" target="lib\net46"/>
-		<file src="output\v4.6\Elasticsearch.Net\Elasticsearch.Net.pdb.srcsrv" target="lib\net46"/>
-		<file src="output\v4.6\Elasticsearch.Net\Elasticsearch.Net.XML" target="lib\net46"/>
+		<file src="..\src\Elasticsearch.Net\bin\Release\net46\Elasticsearch.Net.dll" target="lib\net46"/>
+		<file src="..\src\Elasticsearch.Net\bin\Release\net46\Elasticsearch.Net.XML" target="lib\net46"/>
 
-		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net.dll" target="lib\netstandard1.3"/>
-		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net.pdb" target="lib\netstandard1.3"/>
-		<file src="output\netstandard1.3\Elasticsearch.Net\Elasticsearch.Net.pdb.srcsrv" target="lib\netstandard1.3"/>
+		<file src="..\src\Elasticsearch.Net\bin\Release\netstandard1.3\Elasticsearch.Net.dll" target="lib\netstandard1.3"/>
+		<file src="..\src\Elasticsearch.Net\bin\Release\netstandard1.3\Elasticsearch.Net.xml" target="lib\netstandard1.3"/>
 	</files>
 </package>

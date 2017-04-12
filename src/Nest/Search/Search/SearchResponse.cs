@@ -8,11 +8,36 @@ namespace Nest
 {
 	public interface ISearchResponse<T> : IResponse where T : class
 	{
-		ShardsMetaData Shards { get; }
-		HitsMetaData<T> HitsMetaData { get; }
-		IDictionary<string, IAggregate> Aggregations { get; }
-		Profile Profile { get; }
-		AggregationsHelper Aggs { get; }
+        /// <summary>
+        /// Gets the meta data about the shards on which the search query was executed.
+        /// </summary>
+        ShardsMetaData Shards { get; }
+
+        /// <summary>
+        /// Gets the meta data about the hits that match the search query criteria.
+        /// </summary>
+        HitsMetaData<T> HitsMetaData { get; }
+
+        /// <summary>
+        /// Gets the collection of aggregations
+        /// </summary>
+        IDictionary<string, IAggregate> Aggregations { get; }
+
+        /// <summary>
+        /// Gets the results of profiling the search query. Has a value only when
+        /// <see cref="ISearchRequest.Profile"/> is set to <c>true</c> on the search request.
+        /// </summary>
+        Profile Profile { get; }
+
+        /// <summary>
+        /// Gets the aggregations helper that can be used to more easily handle aggregation
+        /// results.
+        /// </summary>
+        AggregationsHelper Aggs { get; }
+
+        /// <summary>
+        /// Gets the suggester results.
+        /// </summary>
 		IDictionary<string, Suggest[]> Suggest { get; }
 
 		/// <summary>
@@ -26,26 +51,61 @@ namespace Nest
 		/// </summary>
 		long TookAsLong { get; }
 
-		bool TimedOut { get; }
-		bool TerminatedEarly { get; }
-		string ScrollId { get; }
-		long Total { get; }
-		double MaxScore { get; }
+        /// <summary>
+        /// Gets a value indicating whether the search timed out or not
+        /// </summary>
+        bool TimedOut { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether the search was terminated early
+        /// </summary>
+        bool TerminatedEarly { get; }
+
+        /// <summary>
+        /// Gets the scroll id which can be passed to the Scroll API in order to retrieve the next batch
+        /// of results. Has a value only when <see cref="SearchRequest{T}.Scroll"/> is specified on the
+        /// search request
+        /// </summary>
+        string ScrollId { get; }
+
+        /// <summary>
+        /// Gets the total number of documents matching the search query criteria
+        /// </summary>
+        long Total { get; }
+
+        /// <summary>
+        /// Gets the maximum score for documents matching the search query criteria
+        /// </summary>
+        double MaxScore { get; }
+
 		/// <summary>
-		/// Returns a view on the documents inside the hits that are returned.
-		/// <para>NOTE: if you use Fields() on the search descriptor .Documents will be empty use
-		/// .Fields instead or try the 'source filtering' feature introduced in Elasticsearch 1.0
-		/// using .Source() on the search descriptor to get Documents of type T with only certain parts selected
+		/// Gets the documents inside the hits, by deserializing each <see cref="IHit{T}.Source"/> in <see cref="Hits"/> into T.
+		/// <para>NOTE: if you use <see cref="ISearchRequest.Fields"/> on the search request,
+		/// <see cref="Documents"/> will be empty and you should use <see cref="Fields"/>
+		/// instead to get the field values. As an alternative to
+		/// <see cref="Fields"/>, try source filtering using <see cref="ISearchRequest.Source"/> on the
+		/// search request to return <see cref="Documents"/> with partial fields selected
 		/// </para>
 		/// </summary>
 		IEnumerable<T> Documents { get; }
+
+        /// <summary>
+        /// Gets the collection of hits that matched the query
+        /// </summary>
+        /// <value>
+        /// The hits.
+        /// </value>
 		IEnumerable<IHit<T>> Hits { get; }
 
 		/// <summary>
-		/// Will return the field values inside the hits when the search descriptor specified .Fields.
-		/// Otherwise this will always be an empty collection.
+        /// Gets the field values inside the hits, when the search request uses
+        /// <see cref="SearchRequest{T}.Fields"/>.
 		/// </summary>
 		IEnumerable<FieldValues> Fields { get; }
+
+		/// <summary>
+		/// Gets the highlights for each document, keyed by id
+		/// </summary>
 		HighlightDocumentDictionary Highlights { get; }
 	}
 
@@ -68,7 +128,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "profile")]
 		public Profile Profile { get; internal set; }
 
-		private AggregationsHelper _agg = null;
+		private AggregationsHelper _agg;
 		[JsonIgnore]
 		public AggregationsHelper Aggs => _agg ?? (_agg = new AggregationsHelper(this.Aggregations));
 

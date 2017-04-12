@@ -4,16 +4,19 @@
 #load @"Paths.fsx"
 
 open System
+open System.IO
 
 open Fake 
 
 open Paths
-open System.IO
+open Projects
 
 module Documentation = 
 
     let Generate() = 
-        let generator = "build/output/v4.6/DocGenerator/DocGenerator.exe"
+        let prefix = "CodeGeneration"
+        let generatorFolder = Paths.IncrementalOutputFolderWithPrefix prefix (PrivateProject PrivateProject.DocGenerator) DotNetFramework.Net46
+        let generator = generatorFolder @@ "DocGenerator.exe"
         ExecProcess (fun p ->
             p.WorkingDirectory <- "src/CodeGeneration/DocGenerator"
             p.FileName <- generator

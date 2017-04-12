@@ -7,9 +7,9 @@ using static Nest.Infer;
 
 namespace Tests.QueryDsl.FullText.GeoPolygon
 {
-	public class GeoPolygonUsageTests : QueryDslUsageTestsBase
+	public class GeoPolygonQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public GeoPolygonUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public GeoPolygonQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object QueryJson => new
 		{

@@ -12,12 +12,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 {
 	public class SkippingDeadNodes
 	{
-		/** == Round Robin - Skipping Dead Nodes
+		/**=== Skipping dead nodes
 		*
-		* When selecting nodes the connection pool will try and skip all the nodes that are marked dead.
+		* When selecting nodes, the connection pool will try and skip all nodes that are marked as dead.
 		*
-		* === GetNext
-		* GetNext is implemented in a lock free thread safe fashion, meaning each callee gets returned its own cursor to advance
+		* ==== CreateView
+        *
+		* CreateView is implemented in a lock free thread safe fashion, meaning each callee gets returned its own cursor to advance
 		* over the internal list of nodes. This to guarantee each request that needs to fall over tries all the nodes without
 		* suffering from noisy neighbours advancing a global cursor.
 		*/
@@ -75,7 +76,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 				node = pool.CreateView().First();
 				node.Uri.Port.Should().Be(9202);
 			}
-			/** If we roll the clock forward two days, the node that was marked dead until tomorrow (or yesterday!) should be resurrected */
+
+			/** If we roll the clock forward two days, the node that was marked
+			 * dead until tomorrow (or yesterday!) should be resurrected
+			 */
 			dateTimeProvider.ChangeTime(d => d.AddDays(2));
 			var n = pool.CreateView().First();
 			n.Uri.Port.Should().Be(9201);
@@ -101,22 +105,18 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 			);
 
 			await audit.TraceCalls(
-				/** The first call goes to 9200 which succeeds */
 				new ClientCall {
-					{ HealthyResponse, 9200},
+					{ HealthyResponse, 9200}, // <1> The first call goes to 9200 which succeeds
 					{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(0) }
 				},
-				/** The 2nd call does a ping on 9201 because its used for the first time.
-				* It fails so we wrap over to node 9202 */
 				new ClientCall {
-					{ BadResponse, 9201},
+					{ BadResponse, 9201}, // <2> The 2nd call does a ping on 9201 because its used for the first time. It fails so we wrap over to node 9202
 					{ HealthyResponse, 9202},
 					/** Finally we assert that the connectionpool has one node that is marked as dead */
 					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(1) }
 				},
-				/** The next call goes to 9203 which fails so we should wrap over */
 				new ClientCall {
-					{ BadResponse, 9203},
+					{ BadResponse, 9203}, // <3> The next call goes to 9203 which fails so we should wrap over
 					{ HealthyResponse, 9200},
 					{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
 				},
@@ -151,21 +151,16 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 			);
 
 			await audit.TraceCalls(
-				/** All the calls fail */
 				new ClientCall {
-					{ BadResponse, 9200},
+					{ BadResponse, 9200}, // <1> All the calls fail
 					{ BadResponse, 9201},
 					{ BadResponse, 9202},
 					{ BadResponse, 9203},
 					{ MaxRetriesReached },
 					{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
 				},
-				/** After all our registered nodes are marked dead we want to sample a single dead node
-				* each time to quickly see if the cluster is back up. We do not want to retry all 4
-				* nodes
-				*/
 				new ClientCall {
-					{ AllNodesDead },
+					{ AllNodesDead }, // <2> After all our registered nodes are marked dead we want to sample a single dead node each time to quickly see if the cluster is back up. We do not want to retry all 4 nodes
 					{ Resurrection, 9201},
 					{ BadResponse, 9201},
 					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }

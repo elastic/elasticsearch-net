@@ -1,0 +1,152 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.4
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/2.4
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/2.x/src/Tests/ClientConcepts/Certificates/WorkingWithCertificates.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[working-with-certificates]]
+=== Working with certificates
+
+If you've enabled SSL on Elasticsearch with https://www.elastic.co/products/shield[Shield] or through a
+proxy in front of Elasticsearch, and the Certificate Authority (CA)
+that generated the certificate is trusted by the machine running the client code, there should be nothing you'll have to do to talk
+to the cluster over HTTPS with the client.
+
+If you are using your own CA which is not trusted however, .NET won't allow you to make HTTPS calls to that endpoint by default. With .NET,
+you can pre-empt this though a custom validation callback on the global static`ServicePointManager.ServerCertificateValidationCallback`. Most examples you will find doing this this will simply return `true` from the
+validation callback and merrily whistle off into the sunset. **This is not advisable** as it allows *any* HTTPS traffic through in the
+current `AppDomain` *without* any validation. Here's a concrete example:
+
+Imagine you deploy a web application that talks to Elasticsearch over HTTPS through NEST, and also uses some third party SOAP/WSDL endpoint;
+by setting
+
+[source,csharp]
+----
+ServicePointManager.ServerCertificateValidationCallback +=
+    (sender, cert, chain, errors) => true;
+----
+
+validation will not be performed for HTTPS connections to *both* Elasticsearch *and* that external web service.
+
+==== Validation configuration
+
+It's possible to also set a callback per service endpoint with .NET, and both Elasticsearch.NET and NEST expose this through
+connection settings `ConnectionConfiguration` with Elasticsearch.Net and `ConnectionSettings` with NEST). You can do
+your own validation in that handler or use one of the baked in handlers that we ship with out of the box, on the static class`CertificateValidations`.
+
+The two most basic ones are `AllowAll` and `DenyAll`, which accept or deny all SSL traffic to our nodes, respectively. Here's
+a couple of examples.
+
+===== Denying all certificate validation
+
+Here we set up `ConnectionSettings` with a validation callback that denies all certificate validation
+
+[source,csharp]
+----
+public class DenyAllCertificatesCluster : ClusterBase
+{
+    public override ConnectionSettings ClusterConnectionSettings(ConnectionSettings s) => s
+        .ServerCertificateValidationCallback((o, certificate, chain, errors) => false)
+        .ServerCertificateValidationCallback(CertificateValidations.DenyAll); <1>
+}
+----
+<1> synonymous with the previous lambda expression
+
+===== Allowing all certificate validation
+
+Here we set up `ConnectionSettings` with a validation callback that allows all certificate validation
+
+[source,csharp]
+----
+public class AllowAllCertificatesCluster : ClusterBase
+{
+    public override ConnectionSettings ClusterConnectionSettings(ConnectionSettings s) => s
+        .ServerCertificateValidationCallback((o, certificate, chain, errors) => true)
+        .ServerCertificateValidationCallback(CertificateValidations.AllowAll); <1>
+}
+----
+<1> synonymous with the previous lambda expression
+
+**This is not recommended in production.**
+
+===== Allowing certificates from a Certificate Authority
+
+If your client application has access to the public CA certificate locally, Elasticsearch.NET and NEST ship with some handy helpers
+that can assert that a certificate the server presents is one that came from the local CA.
+
+Some certificates do not include the CA in the certificate chain, in order to cut down on SSL handshake size. In those case you can use`CertificateValidations.AuthorityIsRoot` and pass it your local copy of the CA public key to assert that
+the certificate the server presented was generated using it
+
+[source,csharp]
+----
+public class CertgenCaCluster : ClusterBase
+{
+    public override ConnectionSettings ClusterConnectionSettings(ConnectionSettings s) => s
+        .ServerCertificateValidationCallback(
+            CertificateValidations.AuthorityIsRoot(new X509Certificate(this.Node.FileSystem.CaCertificate))
+        );
+}
+----
+
+If your local copy does not match the server's CA, the client will fail to connect
+
+[source,csharp]
+----
+public class BadCertgenCaCluster : ClusterBase
+{
+    public override ConnectionSettings ClusterConnectionSettings(ConnectionSettings s) => s
+        .ServerCertificateValidationCallback(
+            CertificateValidations.AuthorityPartOfChain(new X509Certificate(this.Node.FileSystem.UnusedCaCertificate))
+        );
+}
+----
+
+If you go for a vendor generated SSL certificate, it's common practice for the certificate to include the CA _and_ any intermediary CAs
+in the certificate chain. When using such a certificate, use `CertificateValidations.AuthorityPartOfChain` which validates that
+the local CA certificate is part of the chain that was used to generate the servers key.
+
+==== Client Certificates
+
+Shield also allows you to configure a PKI realm to enable user authentication
+through client certificates.
+
+To authenticate with client certificates, you need to present both a public certificate `.cer`) and a private key `.key`
+as one certificate. The easiest way to do this is to generate a `pfx` or `p12` file from the `.cer` and `.key`
+and attach these to requests using `new X509Certificate(pathToPfx)`.
+
+If you do not have a way to run `openssl` or `Pvk2Pfx` to do this as part of your deployments, the clients ship with a handy helper to generate one
+on the fly by passing the paths to the `.cer`  and `.key` files. Sadly, this functonality is not available on .NET Core because
+the `PublicKey` property cannot be set on the crypto service provider that is used to generate the `pfx` file at runtime.
+
+You can set Client Certificates to use on all connections on `ConnectionSettings`
+
+[source,csharp]
+----
+public class PkiCluster : CertgenCaCluster
+{
+    public override ConnectionSettings ClusterConnectionSettings(ConnectionSettings s) => s <1>
+        .ClientCertificate(
+            ClientCertificate.LoadWithPrivateKey(
+                this.Node.FileSystem.ClientCertificate, <2>
+                this.Node.FileSystem.ClientPrivateKey, <3>
+                "") <4>
+        );
+}
+----
+<1> Set the client certificate on `ConnectionSettings`
+<2> The path to the `.cer` file
+<3> The path to the `.key` file
+<4> The password for the private key
+
+Or per request on `RequestConfiguration` which will take precedence over the ones defined on `ConnectionConfiguration`
+

@@ -121,7 +121,7 @@ namespace Nest
 
 		public static bool operator !=(Time left, Time right) => !(left == right);
 
-		public TimeSpan ToTimeSpan() => TimeSpan.FromMilliseconds(this.Milliseconds);
+		public TimeSpan ToTimeSpan() => TimeSpan.FromMilliseconds(this.ApproximateMilliseconds);
 
 		public override string ToString()
 		{

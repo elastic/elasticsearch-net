@@ -1,0 +1,400 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.4
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/2.4
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/2.x/src/Tests/ClientConcepts/HighLevel/Analysis/TestingAnalyzers.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[testing-analyzers]]
+=== Testing analyzers
+
+When <<writing-analyzers, building your own analyzers>>, it's useful to test that the analyzer
+does what we expect it to. This is where the {ref_current}/indices-analyze.html[Analyze API] comes in.
+
+==== Testing in-built analyzers
+
+To get started with the Analyze API, we can test to see how a built-in analyzer will analyze
+a piece of text
+
+[source,csharp]
+----
+var analyzeResponse = client.Analyze(a => a
+    .Analyzer("standard") <1>
+    .Text("F# is THE SUPERIOR language :)")
+);
+----
+<1> Use the `standard` analyzer
+
+This returns the following response from Elasticsearch
+
+[source,javascript]
+----
+{
+  "tokens": [
+    {
+      "token": "f",
+      "start_offset": 0,
+      "end_offset": 1,
+      "type": "<ALPHANUM>",
+      "position": 0
+    },
+    {
+      "token": "is",
+      "start_offset": 3,
+      "end_offset": 5,
+      "type": "<ALPHANUM>",
+      "position": 1
+    },
+    {
+      "token": "the",
+      "start_offset": 6,
+      "end_offset": 9,
+      "type": "<ALPHANUM>",
+      "position": 2
+    },
+    {
+      "token": "superior",
+      "start_offset": 10,
+      "end_offset": 18,
+      "type": "<ALPHANUM>",
+      "position": 3
+    },
+    {
+      "token": "language",
+      "start_offset": 19,
+      "end_offset": 27,
+      "type": "<ALPHANUM>",
+      "position": 4
+    }
+  ]
+}
+----
+
+which is deserialized to an instance of `IAnalyzeResponse` by NEST
+that we can work with
+
+[source,csharp]
+----
+foreach (var analyzeToken in analyzeResponse.Tokens)
+{
+    Console.WriteLine($"{analyzeToken.Token}");
+}
+----
+
+In testing the `standard` analyzer on our text, we've noticed that
+
+* `F#` is tokenized as `"f"`
+
+* stop word tokens `"is"` and `"the"` are included
+
+* `"superior"` is included but we'd also like to tokenize `"great"` as a synonym for superior
+
+We'll look at how we can test a combination of built-in analysis components next to
+build an analyzer to fit our needs.
+
+==== Testing built-in analysis components
+
+A _transient_ analyzer can be composed from built-in analysis components to test
+an analysis configuration
+
+[source,csharp]
+----
+var analyzeResponse = client.Analyze(a => a
+    .Tokenizer("standard")
+    .Filter("lowercase", "stop")
+    .Text("F# is THE SUPERIOR language :)")
+);
+----
+
+[source,javascript]
+----
+{
+  "tokens": [
+    {
+      "token": "f",
+      "start_offset": 0,
+      "end_offset": 1,
+      "type": "<ALPHANUM>",
+      "position": 0
+    },
+    {
+      "token": "superior",
+      "start_offset": 10,
+      "end_offset": 18,
+      "type": "<ALPHANUM>",
+      "position": 3
+    },
+    {
+      "token": "language",
+      "start_offset": 19,
+      "end_offset": 27,
+      "type": "<ALPHANUM>",
+      "position": 4
+    }
+  ]
+}
+----
+
+Great! This has removed stop words, but we still have `F#` tokenized as `"f"`
+and no `"great"` synonym for `"superior"`.
+
+IMPORTANT: Character and Token filters are **applied in the order** in which they are specified.
+
+Let's build a custom analyzer with additional components to solve this.
+
+==== Testing a custom analyzer in an index
+
+A custom analyzer can be created within an index, either when creating the index or by
+updating the settings on an existing index.
+
+IMPORTANT: When adding to an existing index, it needs to be closed first.
+
+In this example, we'll add a custom analyzer to an existing index. First,
+we need to close the index
+
+[source,csharp]
+----
+client.CloseIndex("analysis-index");
+----
+
+Now, we can update the settings to add the analyzer
+
+[source,csharp]
+----
+client.UpdateIndexSettings("analysis-index", i => i
+    .IndexSettings(s => s
+        .Analysis(a => a
+            .CharFilters(cf => cf
+                .Mapping("my_char_filter", m => m
+                    .Mappings("F# => FSharp")
+                )
+            )
+            .TokenFilters(tf => tf
+                .Synonym("my_synonym", sf => sf
+                    .Synonyms("superior, great")
+
+                )
+            )
+            .Analyzers(an => an
+                .Custom("my_analyzer", ca => ca
+                    .Tokenizer("standard")
+                    .CharFilters("my_char_filter")
+                    .Filters("lowercase", "stop", "my_synonym")
+                )
+            )
+
+        )
+    )
+);
+----
+
+And open the index again. Here, we also wait up to five seconds for the
+status of the index to become green
+
+[source,csharp]
+----
+client.OpenIndex("analysis-index");
+client.ClusterHealth(h => h
+    .WaitForStatus(WaitForStatus.Green)
+    .Index("analysis-index")
+    .Timeout(TimeSpan.FromSeconds(5))
+);
+----
+
+With the index open and ready, let's test the analyzer
+
+[source,csharp]
+----
+var analyzeResponse = client.Analyze(a => a
+    .Index("analysis-index") <1>
+    .Analyzer("my_analyzer")
+    .Text("F# is THE SUPERIOR language :)")
+);
+----
+<1> Since we added the custom analyzer to the "analysis-index" index, we need to target this index to test it
+
+The output now looks like
+
+[source,javascript]
+----
+{
+  "tokens": [
+    {
+      "token": "fsharp",
+      "start_offset": 0,
+      "end_offset": 2,
+      "type": "<ALPHANUM>",
+      "position": 0
+    },
+    {
+      "token": "superior",
+      "start_offset": 10,
+      "end_offset": 18,
+      "type": "<ALPHANUM>",
+      "position": 3
+    },
+    {
+      "token": "great",
+      "start_offset": 10,
+      "end_offset": 18,
+      "type": "SYNONYM",
+      "position": 3
+    },
+    {
+      "token": "language",
+      "start_offset": 19,
+      "end_offset": 27,
+      "type": "<ALPHANUM>",
+      "position": 4
+    }
+  ]
+}
+----
+
+Exactly what we were after!
+
+==== Testing an analyzer on a field
+
+It's also possible to test the analyzer for a given field type mapping.
+Given an index created with the following settings and mappings
+
+[source,csharp]
+----
+client.CreateIndex("project-index", i => i
+    .Settings(s => s
+        .Analysis(a => a
+            .CharFilters(cf => cf
+                .Mapping("my_char_filter", m => m
+                    .Mappings("F# => FSharp")
+                )
+            )
+            .TokenFilters(tf => tf
+                .Synonym("my_synonym", sf => sf
+                    .Synonyms("superior, great")
+
+                )
+            )
+            .Analyzers(an => an
+                .Custom("my_analyzer", ca => ca
+                    .Tokenizer("standard")
+                    .CharFilters("my_char_filter")
+                    .Filters("lowercase", "stop", "my_synonym")
+                )
+            )
+
+        )
+    )
+    .Mappings(m => m
+        .Map<Project>(mm => mm
+            .Properties(p => p
+                .String(t => t
+                    .Name(n => n.Name)
+                    .Analyzer("my_analyzer")
+                )
+            )
+        )
+    )
+);
+----
+
+The analyzer on the `name` field can be tested with
+
+[source,csharp]
+----
+var analyzeResponse = client.Analyze(a => a
+    .Index("project-index")
+    .Field<Project>(f => f.Name)
+    .Text("F# is THE SUPERIOR language :)")
+);
+----
+
+==== Advanced details with Explain
+
+It's possible to get more advanced details about analysis by setting `Explain()` on
+the request.
+
+For this example, we'll use Object Initializer syntax instead of the Fluent API; choose
+whichever one you're most comfortable with!
+
+[source,csharp]
+----
+var analyzeRequest = new AnalyzeRequest
+{
+    Analyzer = "standard",
+    Text = new [] { "F# is THE SUPERIOR language :)" },
+    Explain = true
+};
+
+var analyzeResponse = client.Analyze(analyzeRequest);
+----
+
+We now get further details back in the response
+
+[source,javascript]
+----
+{
+  "detail": {
+    "custom_analyzer": false,
+    "analyzer": {
+      "name": "standard",
+      "tokens": [
+        {
+          "token": "f",
+          "start_offset": 0,
+          "end_offset": 1,
+          "type": "<ALPHANUM>",
+          "position": 0,
+          "bytes": "[66]",
+          "positionLength": 1
+        },
+        {
+          "token": "is",
+          "start_offset": 3,
+          "end_offset": 5,
+          "type": "<ALPHANUM>",
+          "position": 1,
+          "bytes": "[69 73]",
+          "positionLength": 1
+        },
+        {
+          "token": "the",
+          "start_offset": 6,
+          "end_offset": 9,
+          "type": "<ALPHANUM>",
+          "position": 2,
+          "bytes": "[74 68 65]",
+          "positionLength": 1
+        },
+        {
+          "token": "superior",
+          "start_offset": 10,
+          "end_offset": 18,
+          "type": "<ALPHANUM>",
+          "position": 3,
+          "bytes": "[73 75 70 65 72 69 6f 72]",
+          "positionLength": 1
+        },
+        {
+          "token": "language",
+          "start_offset": 19,
+          "end_offset": 27,
+          "type": "<ALPHANUM>",
+          "position": 4,
+          "bytes": "[6c 61 6e 67 75 61 67 65]",
+          "positionLength": 1
+        }
+      ]
+    }
+  }
+}
+----
+

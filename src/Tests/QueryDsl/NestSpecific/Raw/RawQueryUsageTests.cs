@@ -7,6 +7,10 @@ using Tests.Framework.MockData;
 
 namespace Tests.QueryDsl.NestSpecific.Raw
 {
+	/**
+	 * Allows a query represented as a string of JSON to be passed to NEST's Fluent API or Object Initializer syntax.
+	 * This can be useful when porting over a query expressed in the query DSL over to NEST.
+	 */
 	public class RawUsageTests : QueryDslUsageTestsBase
 	{
 		public RawUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

@@ -14,9 +14,6 @@ namespace Tests.Aggregations.Metric.Average
 	{
 		public AverageAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		/// <summary>
-		///
-		/// </summary>
 		protected override object ExpectJson => new
 		{
 			aggs = new

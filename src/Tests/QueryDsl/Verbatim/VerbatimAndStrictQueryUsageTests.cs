@@ -14,7 +14,7 @@ using Xunit;
 namespace Tests.QueryDsl.Verbatim
 {
 	/**[[verbatim-and-strict-query-usage]]
-	 * == Verbatim and Strict Query Usage
+	 * === Verbatim and Strict Query Usage
 	 * NEST has the concept of conditionless queries; if the input to a query is determined to be __empty__, for example,
 	 * `null` or `""` for a string input, then the query will not be serialized and sent to Elasticsearch. If a conditionless
 	 * query is part of a compound query then the query will not be part of the json query dsl sent to Elasticsearch.
@@ -28,7 +28,7 @@ namespace Tests.QueryDsl.Verbatim
 	 * even if it is conditionless.
 	 *
 	 * [float]
-	 * == Verbatim Usage
+	 * === Verbatim query usage
 	 *
 	 * `IsVerbatim` should be set on individual queries to take effect
 	 */
@@ -245,10 +245,7 @@ namespace Tests.QueryDsl.Verbatim
 #pragma warning restore 618
 	}
 
-	/**[float]
-	 * == Verbatim Single Queries
-	 * Setting `IsVerbatim` on a single query is still supported though
-	 */
+	/** A compound query can also be marked as verbatim, demonstrated here with a `bool` query. */
 	public class QueryContainerVerbatimSupportedUsageTests : QueryDslUsageTestsBase
 	{
 		protected override bool SupportsDeserialization => false;
@@ -273,7 +270,8 @@ namespace Tests.QueryDsl.Verbatim
 			);
 	}
 
-	public class SingleVerbatimQueryUsageTests : QueryDslUsageTestsBase
+    /** A single verbatim query will be serialized as-is */
+    public class SingleVerbatimQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public SingleVerbatimQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -307,11 +305,9 @@ namespace Tests.QueryDsl.Verbatim
 			);
 	}
 
-	/**[float]
-	 * == Verbatim Compound Queries
-	 * Similarly to verbatim single queries, setting `IsVerbatim` on a single query that is part
-	 * of a compound query is also supported
-	 */
+    /**
+     * Leaf queries within a compound query marked as verbatim will also be serialized as-is
+     */
 	public class CompoundVerbatimInnerQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public CompoundVerbatimInnerQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -391,6 +387,13 @@ namespace Tests.QueryDsl.Verbatim
 			);
 	}
 
+	/**[float]
+	 * === Strict Query Usage
+	 *
+	 * A query can be marked as strict meaning that _if_ it is determined to be _conditionless_, it will throw an
+	 * exception. The following example demonstrates this by trying to send an empty string as the value for
+	 * a `term` query marked as strict
+	 */
 	public class StrictQueryUsageTests
 	{
 		[U]

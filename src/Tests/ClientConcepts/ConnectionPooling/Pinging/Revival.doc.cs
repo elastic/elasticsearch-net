@@ -11,11 +11,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 {
 	public class Revival
 	{
-		/**== Pinging - Revival
+		/**=== Ping on revival
 		*
-		* When a node is marked dead it will only be put in the dog house for a certain amount of time. Once it comes out of the dog house, or revived, we schedule a ping
-		* before the actual call to make sure its up and running. If its still down we put it _back in the dog house_ a little longer.
-		* Take a look at the <<request-timeout, Connecting documentation>> for an explanation on these timeouts.
+		* When a node is marked dead it will only be __put in the dog house__ for a certain amount of time.
+        * Once it __comes out of the dog house__, or revived, a ping is scheduled before an actual API call, to ensure
+        * that it's up and running. If it's still down, it's put _back in the dog house_ a little longer.
+		*
+		* Take a look at the <<request-timeout, Request timeouts>> for an explanation on what each timeout is.
 		*/
 		[U]
 		public async Task PingAfterRevival()
