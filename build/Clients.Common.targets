@@ -14,12 +14,8 @@
     <!-- File version reflects actual version number without prelease since that not allowed in its struct -->
     <FileVersion>$(CurrentAssemblyFileVersion)</FileVersion>
 
-    <Authors></Authors>
-    <Company></Company>
-    <NeutralLanguage></NeutralLanguage>
-    <AssemblyTitle></AssemblyTitle>
-    <Description></Description>
-    <Copyright></Copyright>
+    <DotNetCoreOnly></DotNetCoreOnly>
+    <DoSourceLink></DoSourceLink>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile Condition="'$(DotNetCoreOnly)'==''">..\..\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
     <GenerateDocumentationFile Condition="'$(DotNetCoreOnly)'==''">true</GenerateDocumentationFile>
