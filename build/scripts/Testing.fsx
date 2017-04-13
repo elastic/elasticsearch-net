@@ -23,26 +23,26 @@ module Tests =
         setProcessEnvironVar "NEST_INTEGRATION_CLUSTER" clusterFilter
         setProcessEnvironVar "NEST_TEST_FILTER" testFilter
 
-    let private dotnetTest() =
-        let folder = Paths.IncrementalOutputFolder (PrivateProject PrivateProject.Tests) DotNetFramework.NetCoreApp1_1
-        let testPath = sprintf "%s/Tests.dll" folder
-        DotNetCli.RunCommand (fun p -> { p with TimeOut = TimeSpan.FromMinutes(10.) }) (sprintf "%s -- Test" testPath) |> ignore
+    type MultiTarget = All | One  
+    let private dotnetTest target =
+        CreateDir Paths.BuildOutput
+        let command = 
+            let p = ["xunit"; "-parallel"; "all"; "-xml"; "../.." @@ Paths.Output("TestResults-Desktop-Clr.xml")] 
+            match (target, buildingOnTravis) with 
+            | (_, true) 
+            | (One, _) -> ["-framework"; "netcoreapp1.1"] |> List.append p 
+            | _  -> p
 
-    let private runTestExeOnDesktopCLR() = 
-        let folder = Paths.IncrementalOutputFolder (PrivateProject PrivateProject.Tests) DotNetFramework.Net46
-        let testRunner = Tooling.BuildTooling(folder @@ "Tests.exe")
-        testRunner.Exec ["Test"; "-parallel"; "-xml"; Paths.Output("TestResults-Desktop-Clr.xml")] |> ignore
-        
+        let dotnet = Tooling.BuildTooling("dotnet")
+        dotnet.ExecIn "src/Tests" command |> ignore
+
     let IncrementalTest() = 
         setLocalEnvVars()
-        match buildingOnTravis with
-        | false -> runTestExeOnDesktopCLR() 
-        | true -> dotnetTest() 
+        dotnetTest One 
 
     let RunUnitTests() = 
         setLocalEnvVars()
-        dotnetTest()
-        runTestExeOnDesktopCLR()
+        dotnetTest All
 
     let RunIntegrationTests() =
         setLocalEnvVars()
@@ -54,6 +54,4 @@ module Tests =
         
         for esVersion in esVersions do
             setProcessEnvironVar "NEST_INTEGRATION_VERSION" esVersion
-            runTestExeOnDesktopCLR()
-            //TODO enable integration testing on .net CORE
-            //dotnetTest()
+            dotnetTest One |> ignore
