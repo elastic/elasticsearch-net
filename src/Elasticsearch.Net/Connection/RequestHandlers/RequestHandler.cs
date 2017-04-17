@@ -203,7 +203,8 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				return this.HandleAuthenticationException(requestState, e);
 			}
 
-			this.ThrowMaxRetryExceptionWhenNeeded(requestState, maxRetries);
+			var exception = this.GetMaxRetryExceptionWhenNeeded(requestState, maxRetries);
+			if (exception != null) throw exception;
 
 			return this.DoRequest<T>(requestState);
 		}

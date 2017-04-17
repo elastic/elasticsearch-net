@@ -257,6 +257,13 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			return tcs.Task;
 		}
 
+		private Task<T> ThrowExceptionAsTask<T>(Exception exception)
+		{
+			var tcs = new TaskCompletionSource<T>();
+			tcs.SetException(exception);
+			return tcs.Task;
+		}
+
 		private Task<ElasticsearchResponse<T>> RetryRequestAsync<T>(TransportRequestState<T> requestState)
 		{
 			var maxRetries = this._delegator.GetMaximumRetries(requestState.RequestConfiguration);
@@ -265,9 +272,11 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 			this._delegator.SniffOnConnectionFailure(requestState);
 
-			this.ThrowMaxRetryExceptionWhenNeeded(requestState, maxRetries);
+			var exception = GetMaxRetryExceptionWhenNeeded(requestState, maxRetries);
 
-			return this.DoRequestAsync<T>(requestState);
+			return exception == null
+				? this.DoRequestAsync<T>(requestState)
+				: ThrowExceptionAsTask<ElasticsearchResponse<T>>(exception);
 		}
 
 		private Task<ElasticsearchResponse<Stream>> CallIntoConnectionAsync<T>(TransportRequestState<T> requestState)
@@ -294,9 +303,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			}
 			catch (Exception e)
 			{
-				var tcs = new TaskCompletionSource<ElasticsearchResponse<Stream>>();
-				tcs.SetException(e);
-				return tcs.Task;
+				return ThrowExceptionAsTask<ElasticsearchResponse<Stream>>(e);
 			}
 		}
 
