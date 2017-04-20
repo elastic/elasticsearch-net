@@ -19,7 +19,9 @@ namespace Tests.Mapping.Types.Core.String
 			SearchAnalyzer = "mysearchanalyzer",
 			Similarity = "BM25",
 			Store = true,
-			TermVector = TermVectorOption.WithPositionsOffsets)]
+			TermVector = TermVectorOption.WithPositionsOffsets,
+			Fielddata = false,
+			EagerGlobalOrdinals = true)]
 		public string Full { get; set; }
 
 		[String]
@@ -53,7 +55,9 @@ namespace Tests.Mapping.Types.Core.String
 					search_analyzer = "mysearchanalyzer",
 					similarity = "BM25",
 					store = true,
-					term_vector = "with_positions_offsets"
+					term_vector = "with_positions_offsets",
+					fielddata = false,
+					eager_global_ordinals = true
 				},
 				minimal = new
 				{

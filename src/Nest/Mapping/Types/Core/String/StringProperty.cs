@@ -42,8 +42,18 @@ namespace Nest
 		[JsonProperty("position_increment_gap")]
 		int? PositionIncrementGap { get; set; }
 
+		[JsonIgnore]
+		[Obsolete("Use FielddataUpgrade")]
+		IStringFielddata Fielddata{ get; set; }
+
 		[JsonProperty("fielddata")]
-		IStringFielddata Fielddata { get; set; }
+		bool? FielddataUpgrade { get; set; }
+
+		[JsonProperty("fielddata_frequency_filter")]
+		IFielddataFrequencyFilter FielddataFrequencyFilter { get; set; }
+
+		[JsonProperty("eager_global_ordinals")]
+		bool? EagerGlobalOrdinals { get; set; }
 	}
 
 	[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use `text` or `keyword` instead.")]
@@ -64,7 +74,11 @@ namespace Nest
 		public bool? IncludeInAll { get; set; }
 		public int? IgnoreAbove { get; set; }
 		public int? PositionIncrementGap { get; set; }
+		[Obsolete("Use FielddataUpgrade")]
 		public IStringFielddata Fielddata { get; set; }
+		public bool? FielddataUpgrade { get; set; }
+		public IFielddataFrequencyFilter FielddataFrequencyFilter { get; set; }
+		public bool? EagerGlobalOrdinals { get; set; }
 	}
 
 	[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use `text` or `keyword` instead.")]
@@ -84,7 +98,11 @@ namespace Nest
 		bool? IStringProperty.IncludeInAll { get; set; }
 		int? IStringProperty.IgnoreAbove { get; set; }
 		int? IStringProperty.PositionIncrementGap { get; set; }
+		[Obsolete("Use FielddataUpgrade")]
 		IStringFielddata IStringProperty.Fielddata { get; set; }
+		bool? IStringProperty.FielddataUpgrade { get; set; }
+		IFielddataFrequencyFilter IStringProperty.FielddataFrequencyFilter { get; set; }
+		bool? IStringProperty.EagerGlobalOrdinals { get; set; }
 
 		public StringPropertyDescriptor() : base("string") { }
 
@@ -116,7 +134,15 @@ namespace Nest
 
 		public StringPropertyDescriptor<T> PositionIncrementGap(int positionIncrementGap) => Assign(a => a.PositionIncrementGap = positionIncrementGap);
 
+		[Obsolete("Use Fielddata that takes a bool argument")]
 		public StringPropertyDescriptor<T> Fielddata(Func<StringFielddataDescriptor, IStringFielddata> selector) =>
 			Assign(a => a.Fielddata = selector?.Invoke(new StringFielddataDescriptor()));
+
+		public StringPropertyDescriptor<T> EagerGlobalOrdinals(bool eagerGlobalOrdinals = true) => Assign(a => a.EagerGlobalOrdinals = eagerGlobalOrdinals);
+
+		public StringPropertyDescriptor<T> Fielddata(bool fielddata = true) => Assign(a => a.FielddataUpgrade = fielddata);
+
+		public StringPropertyDescriptor<T> FielddataFrequencyFilter(Func<FielddataFrequencyFilterDescriptor, IFielddataFrequencyFilter> selector) =>
+			Assign(a => a.FielddataFrequencyFilter = selector?.Invoke(new FielddataFrequencyFilterDescriptor()));
 	}
 }
