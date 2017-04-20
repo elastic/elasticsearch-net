@@ -18,7 +18,11 @@ namespace Nest
 		bool? IStringProperty.IncludeInAll { get; set; }
 		int? IStringProperty.IgnoreAbove { get; set; }
 		int? IStringProperty.PositionIncrementGap { get; set; }
+		[Obsolete("Use FielddataUpgrade")]
 		IStringFielddata IStringProperty.Fielddata { get; set; }
+		bool? IStringProperty.FielddataUpgrade { get; set; }
+		IFielddataFrequencyFilter IStringProperty.FielddataFrequencyFilter { get; set; }
+		bool? IStringProperty.EagerGlobalOrdinals { get; set; }
 
 		public string Analyzer { get { return Self.Analyzer; } set { Self.Analyzer = value; } }
 		public double Boost { get { return Self.Boost.GetValueOrDefault(); } set { Self.Boost = value; } }
@@ -31,6 +35,8 @@ namespace Nest
 		public string SearchAnalyzer { get { return Self.SearchAnalyzer; } set { Self.SearchAnalyzer = value; } }
 		public TermVectorOption TermVector { get { return Self.TermVector.GetValueOrDefault(); } set { Self.TermVector = value; } }
 		public bool Norms { get { return Self.Norms.GetValueOrDefault(true); } set { Self.Norms = value; } }
+		public bool Fielddata { get { return Self.FielddataUpgrade.GetValueOrDefault(true); } set { Self.FielddataUpgrade = value; } }
+		public bool EagerGlobalOrdinals { get { return Self.EagerGlobalOrdinals.GetValueOrDefault(true); } set { Self.EagerGlobalOrdinals = value; } }
 
 		[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use Text or Keyword attribute instead.")]
 		public StringAttribute() : base("string") { }
