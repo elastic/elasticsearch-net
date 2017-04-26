@@ -4,7 +4,7 @@
     <DotNetCoreOnly Condition="'$(TRAVIS)'==''"></DotNetCoreOnly>
     <OutputType>Exe</OutputType>
     <TargetFrameworks Condition="'$(DotNetCoreOnly)'==''">netcoreapp1.1;net45;net46</TargetFrameworks>
-	<TargetFramework Condition="'$(DotNetCoreOnly)'=='1'">netcoreapp1.1</TargetFramework>
+    <TargetFrameworks Condition="'$(DotNetCoreOnly)'=='1'">netcoreapp1.1</TargetFrameworks>
     <VersionPrefix>6.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
     <DefineConstants Condition="'$(TargetFramework)'=='netcoreapp1.1' OR '$(DotNetCoreOnly)'=='1'">$(DefineConstants);DOTNETCORE</DefineConstants>
