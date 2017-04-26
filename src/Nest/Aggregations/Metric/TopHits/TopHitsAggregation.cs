@@ -33,9 +33,6 @@ namespace Nest
 		[JsonProperty("fielddata_fields")]
 		Fields FielddataFields { get; set; }
 
-		[JsonProperty("fields")]
-		Fields Fields { get; set; }
-
 		[JsonProperty("version")]
 		bool? Version { get; set; }
 	}
@@ -50,7 +47,6 @@ namespace Nest
 		public bool? Explain { get; set; }
 		public IScriptFields ScriptFields { get; set; }
 		public Fields FielddataFields { get; set; }
-		public Fields Fields { get; set; }
 		public bool? Version { get; set; }
 
 		internal TopHitsAggregation() { }
@@ -81,8 +77,6 @@ namespace Nest
 
 		Fields ITopHitsAggregation.FielddataFields { get; set; }
 
-		Fields ITopHitsAggregation.Fields { get; set; }
-
 		bool? ITopHitsAggregation.Version { get; set; }
 
 		public TopHitsAggregationDescriptor<T> From(int from) => Assign(a => a.From = from);
@@ -112,9 +106,6 @@ namespace Nest
 
 		public TopHitsAggregationDescriptor<T> FielddataFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.FielddataFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
-
-		public TopHitsAggregationDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public TopHitsAggregationDescriptor<T> Version(bool version = true) => Assign(a => a.Version = version);
 	}

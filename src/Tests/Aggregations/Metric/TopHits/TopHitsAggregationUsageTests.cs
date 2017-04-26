@@ -48,7 +48,6 @@ namespace Tests.Aggregations.Metric.TopHits
 								version = true,
 								explain = true,
 								fielddata_fields = new [] { "state", "numberOfCommits" },
-								fields = new [] { "lastActivity" },
 								highlight = new
 								{
 									fields = new
@@ -98,9 +97,6 @@ namespace Tests.Aggregations.Metric.TopHits
 								.Field(p => p.State)
 								.Field(p => p.NumberOfCommits)
 							)
-							.Fields(f => f
-								.Field(p => p.LastActivity)
-							)
 							.Highlight(h => h
 								.Fields(
 									hf => hf.Field(p => p.Tags),
@@ -138,7 +134,6 @@ namespace Tests.Aggregations.Metric.TopHits
 						Version = true,
 						Explain = true,
 						FielddataFields = new [] { "state", "numberOfCommits" },
-						Fields = new[] { "lastActivity" },
 						Highlight = new Highlight
 						{
 							Fields = new Dictionary<Nest.Field, IHighlightField>
@@ -177,7 +172,6 @@ namespace Tests.Aggregations.Metric.TopHits
 				hits.All(h => h.Fields.ValuesOf<StateOfBeing>("state").Any()).Should().BeTrue();
 				hits.All(h => h.Fields.ValuesOf<int>("numberOfCommits").Any()).Should().BeTrue();
 				hits.All(h => h.Fields.ValuesOf<int>("commit_factor").Any()).Should().BeTrue();
-				hits.All(h => h.Fields.ValuesOf<DateTime>("lastActivity").Any()).Should().BeTrue();
 				topStateHits.Documents<Project>().Should().NotBeEmpty();
 			}
 		}
