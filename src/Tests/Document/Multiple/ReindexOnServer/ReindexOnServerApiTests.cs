@@ -48,7 +48,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 
 		protected override bool SupportsDeserialization => false;
 
-		private static string _script = "if (ctx._source.flag == 'bar') {ctx._source.remove('flag')}";
+		protected virtual string PainlessScript { get; } = "if (ctx._source.flag == 'bar') {ctx._source.remove('flag')}";
 
 		protected override Func<ReindexOnServerDescriptor, IReindexOnServerRequest> Fluent => d => d
 			.Source(s => s
@@ -72,7 +72,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				.VersionType(VersionType.Internal)
 				.Routing(ReindexRouting.Discard)
 			)
-			.Script(ss => ss.Inline(_script).Lang("groovy"))
+			.Script(ss => ss.Inline(PainlessScript).Lang("groovy"))
 			.Conflicts(Conflicts.Proceed)
 			.Refresh();
 
@@ -95,7 +95,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				VersionType = VersionType.Internal,
 				Routing = ReindexRouting.Discard
 			},
-			Script = new InlineScript(_script) { Lang = "groovy" },
+			Script = new InlineScript(PainlessScript) { Lang = "groovy" },
 			Conflicts = Conflicts.Proceed,
 			Refresh = true,
 		};
@@ -131,7 +131,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				},
 				script = new
 				{
-					inline = _script,
+					inline = this.PainlessScript,
 					lang = "groovy"
 				},
 				source = new

@@ -5,6 +5,8 @@
     <CurrentVersion>0.0.0-bad</CurrentVersion>
     <CurrentAssemblyVersion>0.0.0</CurrentAssemblyVersion>
     <CurrentAssemblyFileVersion>0.0.0.0</CurrentAssemblyFileVersion>
+    <DotNetCoreOnly></DotNetCoreOnly>
+    <DoSourceLink></DoSourceLink>
 
     <!-- Version and Informational reflect actual version -->
     <Version>$(CurrentVersion)</Version>
