@@ -290,7 +290,7 @@ Text within multi-line comments conforms to [asciidoc](http://asciidoc.org/), a 
 ```sh
 cd /cygdrive/c/source/elastic-docs
 
-./build_docs.pl --doc /cygdrive/c/source/elasticsearch-net-master/docs/index.asciidoc
+./build_docs.pl --doc /cygdrive/c/source/elasticsearch-net-master/docs/index.asciidoc --chunk=1 --open
 ```
 
 the result of running this for a successful build will be
@@ -300,6 +300,8 @@ Building HTML from /cygdrive/c/source/elasticsearch-net-master/docs/index.asciid
 Done
 See: /cygdrive/c/source/elasticsearch-docs/html_docs/index.html
 ```
+
+and a small HTTP server will be spun up locally on port 8000 through which you can view the documentation.
 
 [Pull Requests](https://github.com/elastic/elasticsearch-net/pulls) are most welcome for areas of documentation that need improving.
 
