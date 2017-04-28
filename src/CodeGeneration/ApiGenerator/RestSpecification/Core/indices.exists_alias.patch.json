@@ -1,0 +1,7 @@
+{
+  "indices.exists_alias": {
+    "url": {
+      "paths": ["/{index}/_alias"]
+    }
+  }
+}
