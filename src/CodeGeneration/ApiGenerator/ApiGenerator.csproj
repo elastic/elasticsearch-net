@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net46</TargetFramework>
@@ -6,7 +6,7 @@
     <VersionSuffix>alpha</VersionSuffix>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Nest\Nest.csproj" />
+    <!--<ProjectReference Include="..\..\Nest\Nest.csproj" />-->
     <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
     <PackageReference Include="RazorMachine" Version="2.6.1" />
     <!-- TODO the following packages prevent us to jump to netcoreapp1.0 -->
