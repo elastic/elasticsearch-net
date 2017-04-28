@@ -49,11 +49,8 @@ namespace Tests.Framework
 
 		protected ApiTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster)
 		{
-			if (cluster == null) throw new ArgumentNullException(nameof(cluster));
-			if (usage == null) throw new ArgumentNullException(nameof(usage));
-
-			this._usage = usage;
-			this.Cluster = cluster;
+			this._usage = usage ?? throw new ArgumentNullException(nameof(usage));
+			this.Cluster = cluster ?? throw new ArgumentNullException(nameof(cluster));
 
 			this._responses = usage.CallOnce(this.ClientUsage);
 			this._uniqueValues = usage.CallUniqueValues;

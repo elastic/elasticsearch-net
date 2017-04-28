@@ -42,13 +42,13 @@ namespace Tests.Aggregations.Metric.TopHits
 								},
 								_source = new
 								{
-									includes = new [] { "name", "startedOn" }
+									includes = new [] { "name", "lastActivity" }
 								},
 								size = 1,
 								version = true,
 								explain = true,
 								fielddata_fields = new [] { "state", "numberOfCommits" },
-								fields = new [] { "lastActivity" },
+								stored_fields = new [] { "startedOn" },
 								highlight = new
 								{
 									fields = new
@@ -88,7 +88,7 @@ namespace Tests.Aggregations.Metric.TopHits
 							.Source(src => src
 								.Includes(fs => fs
 									.Field(p => p.Name)
-									.Field(p => p.StartedOn)
+									.Field(p => p.LastActivity)
 								)
 							)
 							.Size(1)
@@ -98,8 +98,8 @@ namespace Tests.Aggregations.Metric.TopHits
 								.Field(p => p.State)
 								.Field(p => p.NumberOfCommits)
 							)
-							.Fields(f => f
-								.Field(p => p.LastActivity)
+							.StoredFields(f => f
+								.Field(p => p.StartedOn)
 							)
 							.Highlight(h => h
 								.Fields(
@@ -132,13 +132,13 @@ namespace Tests.Aggregations.Metric.TopHits
 						},
 						Source = new SourceFilter
 						{
-							Includes = new [] { "name", "startedOn" }
+							Includes = new [] { "name", "lastActivity" }
 						},
 						Size = 1,
 						Version = true,
 						Explain = true,
 						FielddataFields = new [] { "state", "numberOfCommits" },
-						Fields = new[] { "lastActivity" },
+						StoredFields = new[] { "startedOn" },
 						Highlight = new Highlight
 						{
 							Fields = new Dictionary<Nest.Field, IHighlightField>
@@ -177,8 +177,11 @@ namespace Tests.Aggregations.Metric.TopHits
 				hits.All(h => h.Fields.ValuesOf<StateOfBeing>("state").Any()).Should().BeTrue();
 				hits.All(h => h.Fields.ValuesOf<int>("numberOfCommits").Any()).Should().BeTrue();
 				hits.All(h => h.Fields.ValuesOf<int>("commit_factor").Any()).Should().BeTrue();
-				hits.All(h => h.Fields.ValuesOf<DateTime>("lastActivity").Any()).Should().BeTrue();
-				topStateHits.Documents<Project>().Should().NotBeEmpty();
+				hits.All(h => h.Fields.ValuesOf<DateTime>("startedOn").Any()).Should().BeTrue();
+				var projects = topStateHits.Documents<Project>();
+				projects.Should().NotBeEmpty();
+				projects.Should().OnlyContain(p=>!string.IsNullOrWhiteSpace(p.Name), "source filter included name");
+				projects.Should().OnlyContain(p=>string.IsNullOrWhiteSpace(p.Description), "source filter does NOT include description");
 			}
 		}
 	}
