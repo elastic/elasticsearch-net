@@ -8629,5 +8629,65 @@ namespace Nest
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IXpackInfoRequest : IRequest<XpackInfoRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for XpackInfo <pre>Retrieve information about xpack, including build number/timestamp and license status</pre></summary>
+	public partial class XpackInfoRequest  : PlainRequestBase<XpackInfoRequestParameters>, IXpackInfoRequest
+	{
+		protected IXpackInfoRequest Self => this;
+				///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
+		public  string[] Categories { get { return Q< string[]>("categories"); } set { Q("categories", value); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IXpackUsageRequest : IRequest<XpackUsageRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for XpackUsage <pre>Retrieve information about xpack features usage</pre></summary>
+	public partial class XpackUsageRequest  : PlainRequestBase<XpackUsageRequestParameters>, IXpackUsageRequest
+	{
+		protected IXpackUsageRequest Self => this;
+				///<summary>Specify timeout for watch write operation</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
 }
  
