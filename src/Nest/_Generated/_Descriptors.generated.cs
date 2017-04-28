@@ -6561,56 +6561,50 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for XpackInfo <pre>Retrieve information about xpack, including build number/timestamp and license status</pre></summary>
-	public partial class XpackInfoDescriptor  : RequestDescriptorBase<XpackInfoDescriptor,XpackInfoRequestParameters, IXpackInfoRequest>, IXpackInfoRequest
+	public partial class XPackInfoDescriptor  : RequestDescriptorBase<XPackInfoDescriptor,XPackInfoRequestParameters, IXPackInfoRequest>, IXPackInfoRequest
 	{ 
 			
 		///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
-		public XpackInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+		public XPackInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
 
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
-		public XpackInfoDescriptor Categories(params string[] categories) => AssignParam(p=>p.Categories(categories));
+		public XPackInfoDescriptor Categories(params string[] categories) => AssignParam(p=>p.Categories(categories));
 
 		///<summary>Pretty format the returned JSON response.</summary>
-		public XpackInfoDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+		public XPackInfoDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
 		///<summary>Include the stack trace of returned errors.</summary>
-		public XpackInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+		public XPackInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XpackInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public XPackInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public XpackInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public XPackInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
 	///<summary>descriptor for XpackUsage <pre>Retrieve information about xpack features usage</pre></summary>
-	public partial class XpackUsageDescriptor  : RequestDescriptorBase<XpackUsageDescriptor,XpackUsageRequestParameters, IXpackUsageRequest>, IXpackUsageRequest
+	public partial class XPackUsageDescriptor  : RequestDescriptorBase<XPackUsageDescriptor,XPackUsageRequestParameters, IXPackUsageRequest>, IXPackUsageRequest
 	{ 
 			
 		///<summary>Specify timeout for watch write operation</summary>
-		public XpackUsageDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+		public XPackUsageDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
 		///<summary>Pretty format the returned JSON response.</summary>
-		public XpackUsageDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+		public XPackUsageDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
 		///<summary>Return human readable values for statistics.</summary>
-		public XpackUsageDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+		public XPackUsageDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
 
 		///<summary>Include the stack trace of returned errors.</summary>
-		public XpackUsageDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+		public XPackUsageDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XpackUsageDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public XPackUsageDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public XpackUsageDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public XPackUsageDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
