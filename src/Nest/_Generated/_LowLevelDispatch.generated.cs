@@ -3400,6 +3400,50 @@ namespace Nest
 			throw InvalidDispatch("XpackGraphExplore", p, new [] { GET, POST }, "/{index}/_xpack/_graph/_explore", "/{index}/{type}/_xpack/_graph/_explore");
 		}
 		
+		internal ElasticsearchResponse<T> XpackInfoDispatch<T>(IRequest<XpackInfoRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.XpackInfo<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackInfo", p, new [] { GET }, "/_xpack");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackInfoDispatchAsync<T>(IRequest<XpackInfoRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.XpackInfoAsync<T>(u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackInfo", p, new [] { GET }, "/_xpack");
+		}
+		
+		internal ElasticsearchResponse<T> XpackUsageDispatch<T>(IRequest<XpackUsageRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.XpackUsage<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackUsage", p, new [] { GET }, "/_xpack/usage");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackUsageDispatchAsync<T>(IRequest<XpackUsageRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.XpackUsageAsync<T>(u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackUsage", p, new [] { GET }, "/_xpack/usage");
+		}
+		
 		internal ElasticsearchResponse<T> XpackLicenseDeleteDispatch<T>(IRequest<DeleteLicenseRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
