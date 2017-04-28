@@ -8073,7 +8073,7 @@ namespace Elasticsearch.Net
 		///<para>See also: Retrieve information about xpack, including build number/timestamp and license status </para>
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> XpackInfo<T>(Func<XpackInfoRequestParameters, XpackInfoRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> XpackInfo<T>(Func<XPackInfoRequestParameters, XPackInfoRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_xpack
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -8085,7 +8085,7 @@ namespace Elasticsearch.Net
 		///<para>See also: Retrieve information about xpack, including build number/timestamp and license status </para>
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> XpackInfoAsync<T>(Func<XpackInfoRequestParameters, XpackInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> XpackInfoAsync<T>(Func<XPackInfoRequestParameters, XPackInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a GET on /_xpack/usage
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -8097,7 +8097,7 @@ namespace Elasticsearch.Net
 		///<para>See also: Retrieve information about xpack features usage </para>
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> XpackUsage<T>(Func<XpackUsageRequestParameters, XpackUsageRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> XpackUsage<T>(Func<XPackUsageRequestParameters, XPackUsageRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_xpack/usage
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -8109,7 +8109,7 @@ namespace Elasticsearch.Net
 		///<para>See also: Retrieve information about xpack features usage </para>
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> XpackUsageAsync<T>(Func<XpackUsageRequestParameters, XpackUsageRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> XpackUsageAsync<T>(Func<XPackUsageRequestParameters, XPackUsageRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a DELETE on /_xpack/license
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

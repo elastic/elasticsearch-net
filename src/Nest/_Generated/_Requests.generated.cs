@@ -8693,13 +8693,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IXpackInfoRequest : IRequest<XpackInfoRequestParameters> 
+	public partial interface IXPackInfoRequest : IRequest<XPackInfoRequestParameters> 
 	{
 	 } 
 	///<summary>Request parameters for XpackInfo <pre>Retrieve information about xpack, including build number/timestamp and license status</pre></summary>
-	public partial class XpackInfoRequest  : PlainRequestBase<XpackInfoRequestParameters>, IXpackInfoRequest
+	public partial class XPackInfoRequest  : PlainRequestBase<XPackInfoRequestParameters>, IXPackInfoRequest
 	{
-		protected IXpackInfoRequest Self => this;
+		protected IXPackInfoRequest Self => this;
 				///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
 		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
@@ -8718,18 +8718,16 @@ namespace Nest
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IXpackUsageRequest : IRequest<XpackUsageRequestParameters> 
+	public partial interface IXPackUsageRequest : IRequest<XPackUsageRequestParameters> 
 	{
 	 } 
 	///<summary>Request parameters for XpackUsage <pre>Retrieve information about xpack features usage</pre></summary>
-	public partial class XpackUsageRequest  : PlainRequestBase<XpackUsageRequestParameters>, IXpackUsageRequest
+	public partial class XPackUsageRequest  : PlainRequestBase<XPackUsageRequestParameters>, IXPackUsageRequest
 	{
-		protected IXpackUsageRequest Self => this;
+		protected IXPackUsageRequest Self => this;
 				///<summary>Specify timeout for watch write operation</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
@@ -8748,8 +8746,6 @@ namespace Nest
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
+		}
 }
  

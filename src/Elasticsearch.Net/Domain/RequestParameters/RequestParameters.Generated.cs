@@ -6678,32 +6678,32 @@ namespace Elasticsearch.Net
 	///Retrieve information about xpack, including build number/timestamp and license status
 	///</pre>
 	///</summary>
-	public class XpackInfoRequestParameters : FluentRequestParameters<XpackInfoRequestParameters> 
+	public class XPackInfoRequestParameters : FluentRequestParameters<XPackInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
 		///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
-		public XpackInfoRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		public XPackInfoRequestParameters Human(bool human) => this.AddQueryString("human", human);
 		
 		
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
-		public XpackInfoRequestParameters Categories(params string[] categories) => this.AddQueryString("categories", categories);
+		public XPackInfoRequestParameters Categories(params string[] categories) => this.AddQueryString("categories", categories);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
-		public XpackInfoRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		public XPackInfoRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
 		
 		
 		///<summary>Include the stack trace of returned errors.</summary>
-		public XpackInfoRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		public XPackInfoRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
 		
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XpackInfoRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public XPackInfoRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public XpackInfoRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		public XPackInfoRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -6712,32 +6712,32 @@ namespace Elasticsearch.Net
 	///Retrieve information about xpack features usage
 	///</pre>
 	///</summary>
-	public class XpackUsageRequestParameters : FluentRequestParameters<XpackUsageRequestParameters> 
+	public class XPackUsageRequestParameters : FluentRequestParameters<XPackUsageRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
 		///<summary>Specify timeout for watch write operation</summary>
-		public XpackUsageRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public XPackUsageRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
-		public XpackUsageRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		public XPackUsageRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
 		
 		
 		///<summary>Return human readable values for statistics.</summary>
-		public XpackUsageRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		public XPackUsageRequestParameters Human(bool human) => this.AddQueryString("human", human);
 		
 		
 		///<summary>Include the stack trace of returned errors.</summary>
-		public XpackUsageRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		public XPackUsageRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
 		
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XpackUsageRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public XPackUsageRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public XpackUsageRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		public XPackUsageRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
