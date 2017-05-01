@@ -2099,7 +2099,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> FieldCapsGet<T>(Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> FieldCapsGet<T>(Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"_field_caps"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_field_caps
@@ -2112,7 +2112,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> FieldCapsGetAsync<T>(Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> FieldCapsGetAsync<T>(Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_field_caps"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_field_caps
@@ -2126,7 +2126,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> FieldCapsGet<T>(string index, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> FieldCapsGet<T>(string index, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_field_caps"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_field_caps
@@ -2140,7 +2140,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> FieldCapsGetAsync<T>(string index, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> FieldCapsGetAsync<T>(string index, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_field_caps"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_field_caps
@@ -2154,7 +2154,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">Field json objects containing an array of field names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> FieldCaps<T>(PostData<object> body, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> FieldCaps<T>(PostData<object> body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_field_caps"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_field_caps
@@ -2168,7 +2168,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">Field json objects containing an array of field names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> FieldCapsAsync<T>(PostData<object> body, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> FieldCapsAsync<T>(PostData<object> body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_field_caps"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_field_caps
@@ -2183,7 +2183,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">Field json objects containing an array of field names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> FieldCaps<T>(string index, PostData<object> body, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> FieldCaps<T>(string index, PostData<object> body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_field_caps"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_field_caps
@@ -2198,7 +2198,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">Field json objects containing an array of field names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> FieldCapsAsync<T>(string index, PostData<object> body, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> FieldCapsAsync<T>(string index, PostData<object> body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_field_caps"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_field_stats

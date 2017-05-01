@@ -3658,22 +3658,22 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IFieldCapsRequest : IRequest<FieldCapsRequestParameters> 
+	public partial interface IFieldCapabilitiesRequest : IRequest<FieldCapabilitiesRequestParameters> 
 	{
 		Indices Index { get; }
 	 } 
 	///<summary>Request parameters for FieldCaps <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
-	public partial class FieldCapsRequest  : PlainRequestBase<FieldCapsRequestParameters>, IFieldCapsRequest
+	public partial class FieldCapabilitiesRequest  : PlainRequestBase<FieldCapabilitiesRequestParameters>, IFieldCapabilitiesRequest
 	{
-		protected IFieldCapsRequest Self => this;
-		Indices IFieldCapsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		protected IFieldCapabilitiesRequest Self => this;
+		Indices IFieldCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_field_caps</summary>
-		public FieldCapsRequest() : base(){}
+		public FieldCapabilitiesRequest() : base(){}
 		
 
 		/// <summary>/{index}/_field_caps</summary>
 ///<param name="index">Optional, accepts null</param>
-		public FieldCapsRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		public FieldCapabilitiesRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
 
 			///<summary>A comma-separated list of field names</summary>
@@ -3703,9 +3703,7 @@ namespace Nest
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IFieldStatsRequest : IRequest<FieldStatsRequestParameters> 
