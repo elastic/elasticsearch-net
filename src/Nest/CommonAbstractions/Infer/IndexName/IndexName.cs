@@ -8,18 +8,33 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class IndexName : IEquatable<IndexName>, IUrlParameter
 	{
+		private static readonly char[] ClusterSeparator = {':'};
+		internal string DebugDisplay => Type == null ? Name : $"{nameof(IndexName)} for typeof: {Type?.Name}";
+
+		//TODO 6.0 make setters private and use constructor
+		public string Cluster { get; set; }
 		public string Name { get; set; }
 		public Type Type { get; set; }
 
-		internal string DebugDisplay => Type == null ? Name : $"{nameof(IndexName)} for typeof: {Type?.Name}";
+		public static IndexName From<T>() => typeof(T);
+		public static IndexName From<T>(string clusterName) => From(typeof(T), clusterName);
+		private static IndexName From(Type t, string clusterName) => new IndexName { Type = t, Cluster = clusterName};
 
-		public static implicit operator IndexName(string typeName) => typeName.IsNullOrEmpty()
-			? null
-			: new IndexName { Name = typeName.Trim() };
+		public Indices And<T>() => new Indices(new[] { this, typeof(T) });
+		public Indices And<T>(string clusterName) => new Indices(new[] { this, From(typeof(T), clusterName) });
+		public Indices And(IndexName index) => new Indices(new[] { this, index });
 
-		public static implicit operator IndexName(Type type) => type == null
-			? null
-			: new IndexName { Type = type };
+		private static IndexName Parse(string indexName)
+		{
+			if (string.IsNullOrWhiteSpace(indexName)) return null;
+			var tokens = indexName.Split(ClusterSeparator, 2, StringSplitOptions.RemoveEmptyEntries);
+			return tokens.Length == 1
+				? new IndexName { Name = tokens[0].Trim() }
+				: new IndexName { Name = tokens[1].Trim(), Cluster = tokens[0].Trim() };
+		}
+
+		public static implicit operator IndexName(string indexName) => Parse(indexName);
+		public static implicit operator IndexName(Type type) => type == null ? null : new IndexName { Type = type };
 
 		bool IEquatable<IndexName>.Equals(IndexName other) => EqualsMarker(other);
 
@@ -33,31 +48,33 @@ namespace Nest
 
 		public override int GetHashCode()
 		{
-			if (this.Name != null)
-				return this.Name.GetHashCode();
-			if (this.Type != null)
-				return this.Type.GetHashCode();
-			return 0;
+			unchecked
+			{
+				var hashCode = this.Name?.GetHashCode() ?? this.Type?.GetHashCode() ?? 0;
+				hashCode = (hashCode * 397) ^ (this.Cluster?.GetHashCode() ?? 0);
+				return hashCode;
+			}
 		}
 
 		public override string ToString()
 		{
 			if (!this.Name.IsNullOrEmpty())
-				return this.Name;
-			if (this.Type != null)
-				return this.Type.Name;
-			return string.Empty;
+				return PrefixClusterName(this.Name);
+			return this.Type != null ? PrefixClusterName(this.Type.Name) : string.Empty;
 		}
+		private string PrefixClusterName(string name) => PrefixClusterName(this, name);
+		private static string PrefixClusterName(IndexName i, string name) => i.Cluster.IsNullOrEmpty() ? name : $"{i.Cluster}:{name}";
 
 		public bool EqualsString(string other)
 		{
-			return !other.IsNullOrEmpty() && other == this.Name;
+			return !other.IsNullOrEmpty() && other == PrefixClusterName(this.Name);
 		}
 
 		public bool EqualsMarker(IndexName other)
 		{
 			if (!this.Name.IsNullOrEmpty() && other != null && !other.Name.IsNullOrEmpty())
-				return EqualsString(other.Name);
+				return EqualsString(PrefixClusterName(other,other.Name));
+
 			if (this.Type != null && other != null && other.Type != null)
 				return this.GetHashCode() == other.GetHashCode();
 			return false;
@@ -72,9 +89,5 @@ namespace Nest
 			return nestSettings.Inferrer.IndexName(this);
 		}
 
-		public static IndexName From<T>() => typeof(T);
-
-		public Indices And<T>() => new Indices(new IndexName[] { this, typeof(T) });
-		public Indices And(IndexName index) => new Indices(new IndexName[] { this, index });
 	}
 }

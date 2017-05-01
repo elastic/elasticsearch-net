@@ -14,6 +14,9 @@
     <!-- File version reflects actual version number without prelease since that not allowed in its struct -->
     <FileVersion>$(CurrentAssemblyFileVersion)</FileVersion>
 
+    <DotNetCoreOnly Condition="'$(NCrunch)'=='1'">1</DotNetCoreOnly>
+    <DotNetCoreOnly Condition="'$(NCrunch)'==''"></DotNetCoreOnly>
+
     <Authors></Authors>
     <Company></Company>
     <NeutralLanguage></NeutralLanguage>
