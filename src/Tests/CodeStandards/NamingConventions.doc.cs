@@ -98,6 +98,8 @@ namespace Tests.CodeStandards
 		{
 			var exceptions = new[] // <1> _Exceptions to the rule_
 			{
+				typeof(SourceExistsRequest),
+				typeof(SourceExistsRequest<>),
 				typeof(DocumentExistsRequest),
 				typeof(DocumentExistsRequest<>),
 				typeof(AliasExistsRequest),

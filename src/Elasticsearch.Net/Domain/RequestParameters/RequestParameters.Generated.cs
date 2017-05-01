@@ -2292,68 +2292,68 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html
 	///</pre>
 	///</summary>
-	public class ExistsSourceRequestParameters : FluentRequestParameters<ExistsSourceRequestParameters> 
+	public class SourceExistsRequestParameters : FluentRequestParameters<SourceExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		
 		///<summary>The ID of the parent document</summary>
-		public ExistsSourceRequestParameters Parent(string parent) => this.AddQueryString("parent", parent);
+		public SourceExistsRequestParameters Parent(string parent) => this.AddQueryString("parent", parent);
 		
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public ExistsSourceRequestParameters Preference(string preference) => this.AddQueryString("preference", preference);
+		public SourceExistsRequestParameters Preference(string preference) => this.AddQueryString("preference", preference);
 		
 		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public ExistsSourceRequestParameters Realtime(bool realtime) => this.AddQueryString("realtime", realtime);
+		public SourceExistsRequestParameters Realtime(bool realtime) => this.AddQueryString("realtime", realtime);
 		
 		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public ExistsSourceRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		public SourceExistsRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
 		
 		
 		///<summary>Specific routing value</summary>
-		public ExistsSourceRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
+		public SourceExistsRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
 		
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public ExistsSourceRequestParameters SourceEnabled(params string[] source_enabled) => this.AddQueryString("_source", source_enabled);
+		public SourceExistsRequestParameters SourceEnabled(params string[] source_enabled) => this.AddQueryString("_source", source_enabled);
 		
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExistsSourceRequestParameters SourceExclude(params string[] source_exclude) => this.AddQueryString("_source_exclude", source_exclude);
+		public SourceExistsRequestParameters SourceExclude(params string[] source_exclude) => this.AddQueryString("_source_exclude", source_exclude);
 		
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExistsSourceRequestParameters SourceInclude(params string[] source_include) => this.AddQueryString("_source_include", source_include);
+		public SourceExistsRequestParameters SourceInclude(params string[] source_include) => this.AddQueryString("_source_include", source_include);
 		
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public ExistsSourceRequestParameters Version(long version) => this.AddQueryString("version", version);
+		public SourceExistsRequestParameters Version(long version) => this.AddQueryString("version", version);
 		
 		
 		///<summary>Specific version type</summary>
-		public ExistsSourceRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
+		public SourceExistsRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
-		public ExistsSourceRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		public SourceExistsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
 		
 		
 		///<summary>Return human readable values for statistics.</summary>
-		public ExistsSourceRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		public SourceExistsRequestParameters Human(bool human) => this.AddQueryString("human", human);
 		
 		
 		///<summary>Include the stack trace of returned errors.</summary>
-		public ExistsSourceRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		public SourceExistsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
 		
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ExistsSourceRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public SourceExistsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ExistsSourceRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		public SourceExistsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
