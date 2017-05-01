@@ -956,7 +956,7 @@ namespace Nest
 			throw InvalidDispatch("Exists", p, new [] { HEAD }, "/{index}/{type}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> ExistsSourceDispatch<T>(IRequest<ExistsSourceRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> ExistsSourceDispatch<T>(IRequest<SourceExistsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -968,7 +968,7 @@ namespace Nest
 			throw InvalidDispatch("ExistsSource", p, new [] { HEAD }, "/{index}/{type}/{id}/_source");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ExistsSourceDispatchAsync<T>(IRequest<ExistsSourceRequestParameters> p , CancellationToken cancellationToken) where T : class
+		internal Task<ElasticsearchResponse<T>> ExistsSourceDispatchAsync<T>(IRequest<SourceExistsRequestParameters> p , CancellationToken cancellationToken) where T : class
 		{
 			switch(p.HttpMethod)
 			{

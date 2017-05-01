@@ -1872,7 +1872,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document; use `_all` to fetch the first document matching the ID across all types</param>
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> ExistsSource<T>(string index, string type, string id, Func<ExistsSourceRequestParameters, ExistsSourceRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> ExistsSource<T>(string index, string type, string id, Func<SourceExistsRequestParameters, SourceExistsRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a HEAD on /{index}/{type}/{id}/_source
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1887,7 +1887,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document; use `_all` to fetch the first document matching the ID across all types</param>
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> ExistsSourceAsync<T>(string index, string type, string id, Func<ExistsSourceRequestParameters, ExistsSourceRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> ExistsSourceAsync<T>(string index, string type, string id, Func<SourceExistsRequestParameters, SourceExistsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_explain
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
