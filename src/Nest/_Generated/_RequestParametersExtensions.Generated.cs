@@ -81,7 +81,7 @@ namespace Nest
 			qs.AddQueryString("_source_include", source_include.Select(e=>(Field)e));
 		
 		///<summary>A comma-separated list of field names</summary>
-		internal static FieldCapsRequestParameters _Fields<T>(this FieldCapsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
+		internal static FieldCapabilitiesRequestParameters _Fields<T>(this FieldCapabilitiesRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
 			qs.AddQueryString("fields", fields.Select(e=>(Field)e));
 		
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
