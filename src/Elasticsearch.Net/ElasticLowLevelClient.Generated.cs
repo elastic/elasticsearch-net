@@ -2004,7 +2004,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document; use `_all` to fetch the first document matching the ID across all types</param>
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> ExistsSource<T>(string index, string type, string id, Func<ExistsSourceRequestParameters, ExistsSourceRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> ExistsSource<T>(string index, string type, string id, Func<SourceExistsRequestParameters, SourceExistsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(HEAD, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_source"), null, _params(requestParameters));
 		
 		///<summary>Represents a HEAD on /{index}/{type}/{id}/_source
@@ -2020,7 +2020,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document; use `_all` to fetch the first document matching the ID across all types</param>
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> ExistsSourceAsync<T>(string index, string type, string id, Func<ExistsSourceRequestParameters, ExistsSourceRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> ExistsSourceAsync<T>(string index, string type, string id, Func<SourceExistsRequestParameters, SourceExistsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(HEAD, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_source"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_explain
