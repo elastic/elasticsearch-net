@@ -14,6 +14,7 @@ using static Nest.Infer;
 
 namespace Tests.Document.Single.SourceExists
 {
+	[SkipVersion("<5.4.0", "API was documented from 5.4.0 and over")]
 	public class SourceExistsApiTests : ApiIntegrationTestBase<WritableCluster, IExistsResponse, ISourceExistsRequest, SourceExistsDescriptor<Project>, SourceExistsRequest<Project>>
 	{
 		public SourceExistsApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
