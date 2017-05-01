@@ -2120,56 +2120,53 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for FieldCaps <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
-	public partial class FieldCapsDescriptor  : RequestDescriptorBase<FieldCapsDescriptor,FieldCapsRequestParameters, IFieldCapsRequest>, IFieldCapsRequest
+	public partial class FieldCapabilitiesDescriptor  : RequestDescriptorBase<FieldCapabilitiesDescriptor,FieldCapabilitiesRequestParameters, IFieldCapabilitiesRequest>, IFieldCapabilitiesRequest
 	{ 
-		Indices IFieldCapsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Indices IFieldCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_field_caps</summary>
-		public FieldCapsDescriptor() : base(){}
+		public FieldCapabilitiesDescriptor() : base(){}
 		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public FieldCapsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public FieldCapabilitiesDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public FieldCapsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public FieldCapabilitiesDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public FieldCapsDescriptor AllIndices() => this.Index(Indices.All);
+		public FieldCapabilitiesDescriptor AllIndices() => this.Index(Indices.All);
 
 	
 		///<summary>A comma-separated list of field names</summary>
-		public FieldCapsDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
+		public FieldCapabilitiesDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of field names</summary>
-		public FieldCapsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+		public FieldCapabilitiesDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._Fields(fields));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public FieldCapsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
+		public FieldCapabilitiesDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public FieldCapsDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
+		public FieldCapabilitiesDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public FieldCapsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
+		public FieldCapabilitiesDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Pretty format the returned JSON response.</summary>
-		public FieldCapsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+		public FieldCapabilitiesDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
 		///<summary>Return human readable values for statistics.</summary>
-		public FieldCapsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+		public FieldCapabilitiesDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
 
 		///<summary>Include the stack trace of returned errors.</summary>
-		public FieldCapsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+		public FieldCapabilitiesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public FieldCapsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public FieldCapabilitiesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public FieldCapsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public FieldCapabilitiesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

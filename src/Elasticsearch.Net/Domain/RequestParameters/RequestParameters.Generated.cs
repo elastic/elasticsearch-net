@@ -2323,44 +2323,44 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html
 	///</pre>
 	///</summary>
-	public class FieldCapsRequestParameters : FluentRequestParameters<FieldCapsRequestParameters> 
+	public class FieldCapabilitiesRequestParameters : FluentRequestParameters<FieldCapabilitiesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>A comma-separated list of field names</summary>
-		public FieldCapsRequestParameters Fields(params string[] fields) => this.AddQueryString("fields", fields);
+		public FieldCapabilitiesRequestParameters Fields(params string[] fields) => this.AddQueryString("fields", fields);
 		
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public FieldCapsRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
+		public FieldCapabilitiesRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public FieldCapsRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
+		public FieldCapabilitiesRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public FieldCapsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
+		public FieldCapabilitiesRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
-		public FieldCapsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		public FieldCapabilitiesRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
 		
 		
 		///<summary>Return human readable values for statistics.</summary>
-		public FieldCapsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		public FieldCapabilitiesRequestParameters Human(bool human) => this.AddQueryString("human", human);
 		
 		
 		///<summary>Include the stack trace of returned errors.</summary>
-		public FieldCapsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		public FieldCapabilitiesRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
 		
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public FieldCapsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public FieldCapabilitiesRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public FieldCapsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		public FieldCapabilitiesRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	

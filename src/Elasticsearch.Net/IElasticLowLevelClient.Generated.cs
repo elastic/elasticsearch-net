@@ -1841,7 +1841,7 @@ namespace Elasticsearch.Net
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html </para>
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> FieldCapsGet<T>(Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> FieldCapsGet<T>(Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_field_caps
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1853,7 +1853,7 @@ namespace Elasticsearch.Net
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html </para>
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> FieldCapsGetAsync<T>(Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> FieldCapsGetAsync<T>(Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a GET on /{index}/_field_caps
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1866,7 +1866,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> FieldCapsGet<T>(string index, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> FieldCapsGet<T>(string index, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /{index}/_field_caps
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1879,7 +1879,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> FieldCapsGetAsync<T>(string index, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> FieldCapsGetAsync<T>(string index, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a POST on /_field_caps
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1892,7 +1892,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="body">Field json objects containing an array of field names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> FieldCaps<T>(PostData<object> body, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> FieldCaps<T>(PostData<object> body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /_field_caps
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1905,7 +1905,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="body">Field json objects containing an array of field names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> FieldCapsAsync<T>(PostData<object> body, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> FieldCapsAsync<T>(PostData<object> body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a POST on /{index}/_field_caps
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1919,7 +1919,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">Field json objects containing an array of field names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> FieldCaps<T>(string index, PostData<object> body, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> FieldCaps<T>(string index, PostData<object> body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /{index}/_field_caps
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1933,7 +1933,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">Field json objects containing an array of field names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> FieldCapsAsync<T>(string index, PostData<object> body, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> FieldCapsAsync<T>(string index, PostData<object> body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a GET on /_field_stats
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
