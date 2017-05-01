@@ -4,6 +4,8 @@ using System;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using Xunit;
+using static Tests.Framework.RoundTripper;
+using static Nest.Infer;
 
 namespace Tests.ClientConcepts.HighLevel.Inference
 {
@@ -136,6 +138,68 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		{
 			var client = TestClient.GetClient(s => new ConnectionSettings());
 			var e = Assert.Throws<ArgumentException>(() => client.Search<Project>());
+		}
+
+		//hide
+		[U] public void RoundTripSerializationPreservesCluster()
+		{
+			Expect("cluster_one:project").WhenSerializing(Index<Project>("cluster_one"));
+			Expect("cluster_one:project").WhenSerializing((IndexName)"cluster_one:project");
+
+			Expect("cluster_one:project,x").WhenSerializing(Index<Project>("cluster_one").And("x"));
+			Expect("cluster_one:project,x:devs").WhenSerializing(Index<Project>("cluster_one").And<Developer>("x"));
+		}
+
+		//hide
+		[U] public void ImplicitConversionReadsCluster()
+		{
+			var i = (IndexName)"cluster_one  :  project  ";
+			i.Cluster.Should().Be("cluster_one");
+			i.Name.Should().Be("project");
+
+			i = (IndexName)"cluster_one:project";
+			i.Cluster.Should().Be("cluster_one");
+			i.Name.Should().Be("project");
+
+			i = (IndexName)"    ";
+			i.Should().BeNull();
+		}
+
+		//hide
+		[U] public void EqualsValidation()
+		{
+			var clusterIndex = (IndexName)"cluster_one:p";
+			var index = (IndexName)"p";
+
+			clusterIndex.Should().NotBe(index);
+			clusterIndex.Should().Be("cluster_one:p");
+			clusterIndex.Should().Be((IndexName)"cluster_one:p");
+
+			Index<Project>().Should().Be(Index<Project>());
+			Index<Project>().Should().NotBe(Index<Project>("cluster_two"));
+			Index<Project>("cluster_one").Should().NotBe(Index<Project>("cluster_two"));
+			Index<Project>("cluster_one").Should().NotBe("cluster_one:project");
+			Index<Project>().Should().NotBe(Index<Developer>());
+			Index<Project>("cluster_one").Should().NotBe(Index<Developer>("cluster_one"));
+		}
+
+		//hide
+		[U] public void GetHashCodeValidation()
+		{
+			var clusterIndex = (IndexName)"cluster_one:p";
+			var index = (IndexName)"p";
+
+			clusterIndex.GetHashCode().Should().NotBe(index.GetHashCode()).And.NotBe(0);
+			clusterIndex.GetHashCode().Should().Be(((IndexName)"cluster_one:p").GetHashCode()).And.NotBe(0);
+			clusterIndex.GetHashCode().Should().Be(((IndexName)"cluster_one:p").GetHashCode()).And.NotBe(0);
+
+			Index<Project>().GetHashCode().Should().Be(Index<Project>().GetHashCode()).And.NotBe(0);
+			Index<Project>().GetHashCode().Should().NotBe(Index<Project>("cluster_two").GetHashCode()).And.NotBe(0);
+			Index<Project>("cluster_one").GetHashCode().Should().NotBe(Index<Project>("cluster_two").GetHashCode()).And.NotBe(0);
+			Index<Project>("cluster_one").Should().NotBe("cluster_one:project").And.NotBe(0);
+			Index<Project>().GetHashCode().Should().NotBe(Index<Developer>().GetHashCode()).And.NotBe(0);
+			Index<Project>("cluster_one").GetHashCode().Should().NotBe(Index<Developer>("cluster_one").GetHashCode()).And.NotBe(0);
+
 		}
 	}
 }
