@@ -1012,7 +1012,7 @@ namespace Nest
 			throw InvalidDispatch("Explain", p, new [] { GET, POST }, "/{index}/{type}/{id}/_explain");
 		}
 		
-		internal ElasticsearchResponse<T> FieldCapsDispatch<T>(IRequest<FieldCapsRequestParameters> p , PostData<object> body) where T : class
+		internal ElasticsearchResponse<T> FieldCapsDispatch<T>(IRequest<FieldCapabilitiesRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1028,7 +1028,7 @@ namespace Nest
 			throw InvalidDispatch("FieldCaps", p, new [] { GET, POST }, "/_field_caps", "/{index}/_field_caps");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> FieldCapsDispatchAsync<T>(IRequest<FieldCapsRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		internal Task<ElasticsearchResponse<T>> FieldCapsDispatchAsync<T>(IRequest<FieldCapabilitiesRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
 		{
 			switch(p.HttpMethod)
 			{
