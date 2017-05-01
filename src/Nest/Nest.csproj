@@ -17,9 +17,5 @@
     <PackageReference Include="System.Collections.Specialized" Version="4.3.0" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
     <PackageReference Include="System.Linq.Queryable" Version="4.0.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Search\FieldCaps" />
-  </ItemGroup>
-  <!--<Import Project="..\..\.paket\Paket.Restore.targets" />-->
+  </ItemGroup>  <!--<Import Project="..\..\.paket\Paket.Restore.targets" />-->
 </Project>

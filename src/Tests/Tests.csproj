@@ -39,4 +39,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Document\Single\Attachment\Attachment_Test_Document.pdf" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="XPack\Info\XPackInfo" />
+    <Folder Include="XPack\Info\XPackUsage" />
+  </ItemGroup>
 </Project>
