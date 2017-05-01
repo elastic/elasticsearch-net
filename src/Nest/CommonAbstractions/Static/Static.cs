@@ -10,6 +10,7 @@ namespace Nest
 	{
 		public static IndexName Index(IndexName index) => index;
 		public static IndexName Index<T>() => typeof(T);
+		public static IndexName Index<T>(string clusterName) => IndexName.From<T>(clusterName);
 
 		public static Indices Indices<T>() => typeof(T);
 		public static Indices Indices(params IndexName[] indices) => indices;
