@@ -73,6 +73,11 @@ namespace Nest
 		double MaxScore { get; }
 
 		/// <summary>
+		/// Number of times the server performed an incremental reduce phase
+		/// </summary>
+		long NumberOfReducePhases { get; }
+
+		/// <summary>
 		/// Gets the documents inside the hits, by deserializing <see cref="IHitMetadata{T}.Source"/> into T.
 		/// <para>NOTE: if you use <see cref="ISearchRequest.StoredFields"/> on the search request,
 		/// <see cref="Documents"/> will be empty and you should use <see cref="Fields"/>
@@ -140,6 +145,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "hits")]
 		public HitsMetaData<T> HitsMetaData { get; internal set; }
+
+		[JsonProperty(PropertyName = "num_reduce_phases")]
+		public long NumberOfReducePhases { get; internal set; }
 
 		[JsonIgnore]
 		public long Total => this.HitsMetaData?.Total ?? 0;
