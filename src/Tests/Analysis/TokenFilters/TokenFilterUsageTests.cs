@@ -267,6 +267,20 @@ namespace Tests.Analysis.TokenFilters
 						split_on_numerics = true,
 						stem_english_possessive = true,
 						protected_words = new[] {"x", "y", "z"}
+					},
+					wdg = new
+					{
+						type = "word_delimiter_graph",
+						generate_word_parts = true,
+						generate_number_parts = true,
+						catenate_words = true,
+						catenate_numbers = true,
+						catenate_all = true,
+						split_on_case_change = true,
+						preserve_original = true,
+						split_on_numerics = true,
+						stem_english_possessive = true,
+						protected_words = new[] {"x", "y", "z"}
 					}
 				}
 			}
@@ -392,6 +406,18 @@ namespace Tests.Analysis.TokenFilters
 					.Unique("uq", t => t.OnlyOnSamePosition())
 					.Uppercase("upper")
 					.WordDelimiter("wd", t => t
+						.CatenateAll()
+						.CatenateNumbers()
+						.CatenateWords()
+						.GenerateNumberParts()
+						.GenerateWordParts()
+						.PreserveOriginal()
+						.ProtectedWords("x", "y", "z")
+						.SplitOnCaseChange()
+						.SplitOnNumerics()
+						.StemEnglishPossessive()
+					)
+					.WordDelimiterGraph("wdg", t => t
 						.CatenateAll()
 						.CatenateNumbers()
 						.CatenateWords()
@@ -536,6 +562,21 @@ namespace Tests.Analysis.TokenFilters
 						{"upper", new UppercaseTokenFilter()},
 						{
 							"wd", new WordDelimiterTokenFilter
+							{
+								CatenateAll = true,
+								CatenateNumbers = true,
+								CatenateWords = true,
+								GenerateNumberParts = true,
+								GenerateWordParts = true,
+								PreserveOriginal = true,
+								ProtectedWords = new[] {"x", "y", "z"},
+								SplitOnCaseChange = true,
+								SplitOnNumerics = true,
+								StemEnglishPossessive = true
+							}
+						},
+						{
+							"wdg", new WordDelimiterGraphTokenFilter
 							{
 								CatenateAll = true,
 								CatenateNumbers = true,

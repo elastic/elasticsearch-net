@@ -99,6 +99,13 @@ namespace Nest
 		/// A token filter of type asciifolding that converts alphabetic, numeric, and symbolic Unicode characters which are
 		/// <para> not in the first 127 ASCII characters (the “Basic Latin” Unicode block) into their ASCII equivalents, if one exists.</para>
 		/// </summary>
+		public TokenFiltersDescriptor WordDelimiterGraph(string name, Func<WordDelimiterGraphTokenFilterDescriptor, IWordDelimiterGraphTokenFilter> selector) =>
+			Assign(name, selector?.Invoke(new WordDelimiterGraphTokenFilterDescriptor()));
+
+		/// <summary>
+		/// A token filter of type asciifolding that converts alphabetic, numeric, and symbolic Unicode characters which are
+		/// <para> not in the first 127 ASCII characters (the “Basic Latin” Unicode block) into their ASCII equivalents, if one exists.</para>
+		/// </summary>
 		public TokenFiltersDescriptor AsciiFolding(string name, Func<AsciiFoldingTokenFilterDescriptor, IAsciiFoldingTokenFilter> selector) =>
 			Assign(name, selector?.Invoke(new AsciiFoldingTokenFilterDescriptor()));
 
