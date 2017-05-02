@@ -72,16 +72,22 @@ namespace Nest
         /// </summary>
         double MaxScore { get; }
 
-        /// <summary>
-        /// Gets the documents inside the hits, by deserializing <see cref="IHitMetadata{T}.Source"/> into T.
-        /// <para>NOTE: if you use <see cref="ISearchRequest.StoredFields"/> on the search request, 
-        /// <see cref="Documents"/> will be empty and you should use <see cref="Fields"/> 
-        /// instead to get the field values. As an alternative to
-        /// <see cref="Fields"/>, try source filtering using <see cref="ISearchRequest.Source"/> on the 
-        /// search request to return <see cref="Documents"/> with partial fields selected
-        /// </para>
-        /// </summary>
-        IReadOnlyCollection<T> Documents { get; }
+		IReadOnlyCollection<T> Documents { get; }
+
+		/// Number of times the server performed an incremental reduce phase
+		/// </summary>
+		long NumberOfReducePhases { get; }
+
+		/// <summary>
+		/// Gets the documents inside the hits, by deserializing <see cref="IHitMetadata{T}.Source"/> into T.
+		/// <para>NOTE: if you use <see cref="ISearchRequest.StoredFields"/> on the search request,
+		/// <see cref="Documents"/> will be empty and you should use <see cref="Fields"/>
+		/// instead to get the field values. As an alternative to
+		/// <see cref="Fields"/>, try source filtering using <see cref="ISearchRequest.Source"/> on the
+		/// search request to return <see cref="Documents"/> with partial fields selected
+		/// </para>
+		/// </summary>
+		IReadOnlyCollection<T> Documents { get; }
 
         /// <summary>
         /// Gets the collection of hits that matched the query
@@ -139,6 +145,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "hits")]
 		public HitsMetaData<T> HitsMetaData { get; internal set; }
+
+		[JsonProperty(PropertyName = "num_reduce_phases")]
+		public long NumberOfReducePhases { get; internal set; }
 
 		[JsonIgnore]
 		public long Total => this.HitsMetaData?.Total ?? 0;
