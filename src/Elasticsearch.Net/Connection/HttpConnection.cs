@@ -195,6 +195,7 @@ namespace Elasticsearch.Net
 			try
 			{
 				var request = this.CreateHttpWebRequest(requestData);
+				cancellationToken.Register(()=>request.Abort());
 				var data = requestData.PostData;
 
 				if (data != null)
@@ -220,6 +221,7 @@ namespace Elasticsearch.Net
 
 				var apmGetResponseTask = Task.Factory.FromAsync(request.BeginGetResponse, request.EndGetResponse, null);
 				RegisterApmTaskTimeout(apmGetResponseTask, request, requestData);
+
 				var response = (HttpWebResponse)(await apmGetResponseTask.ConfigureAwait(false));
 				builder.StatusCode = (int)response.StatusCode;
 				builder.Stream = response.GetResponseStream();
