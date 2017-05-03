@@ -13,5 +13,7 @@ namespace Nest
 		public TKey Key { get; set; }
 		public string KeyAsString { get; set; }
 		public long? DocCount { get; set; }
+
+		public long? DocCountErrorUpperBound { get; set; }
 	}
 }

@@ -194,7 +194,8 @@ namespace Nest
 					Key = (TKey)Convert.ChangeType(bucket.Key, typeof(TKey)),
 					KeyAsString = bucket.KeyAsString,
 					Aggregations = bucket.Aggregations,
-					DocCount = bucket.DocCount
+					DocCount = bucket.DocCount,
+					DocCountErrorUpperBound = bucket.DocCountErrorUpperBound
 				};
 			}
 		}
