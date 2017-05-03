@@ -12,12 +12,14 @@ namespace Tests.Aggregations.Bucket.Terms
 {
 	/**
 	 * A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
-	 * 
+	 *
 	 * See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-terms-aggregation.html[terms aggregation] for more detail.
 	 */
 	public class TermsAggregationUsageTests : AggregationUsageTestBase
 	{
-		public TermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public TermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
+		{
+		}
 
 		protected override object ExpectJson => new
 		{
@@ -45,8 +47,8 @@ namespace Tests.Aggregations.Bucket.Terms
 						},
 						order = new object[]
 						{
-							new { _term = "asc" },
-							new { _count = "desc" }
+							new {_term = "asc"},
+							new {_count = "desc"}
 						}
 					}
 				}
@@ -84,7 +86,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					ShardSize = 100,
 					ExecutionHint = TermsAggregationExecutionHint.Map,
 					Missing = "n/a",
-					Script = new InlineScript("'State of Being: '+_value") { Lang = "groovy" },
+					Script = new InlineScript("'State of Being: '+_value") {Lang = "groovy"},
 					Order = new List<TermsOrder>
 					{
 						TermsOrder.TermAscending,
@@ -92,7 +94,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					},
 					Meta = new Dictionary<string, object>
 					{
-						{ "foo", "bar" }
+						{"foo", "bar"}
 					}
 				}
 			};
@@ -120,13 +122,15 @@ namespace Tests.Aggregations.Bucket.Terms
 	 * [float]
 	 * [[terms-pattern-filter]]
 	 * == Filtering with a regular expression pattern
-	 * 
+	 *
 	 * Using terms aggregation with filtering to include values using a regular expression pattern
-	 * 
+	 *
 	 */
 	public class TermsAggregationIncludePatternUsageTests : AggregationUsageTestBase
 	{
-		public TermsAggregationIncludePatternUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public TermsAggregationIncludePatternUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
+		{
+		}
 
 		protected override object ExpectJson => new
 		{
@@ -150,8 +154,8 @@ namespace Tests.Aggregations.Bucket.Terms
 						include = "(Stable|VeryActive)",
 						order = new object[]
 						{
-							new { _term = "asc" },
-							new { _count = "desc" }
+							new {_term = "asc"},
+							new {_count = "desc"}
 						}
 					}
 				}
@@ -189,7 +193,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					ShardSize = 100,
 					ExecutionHint = TermsAggregationExecutionHint.Map,
 					Missing = "n/a",
-					Include = new TermsIncludeExclude { Pattern = "(Stable|VeryActive)" },
+					Include = new TermsIncludeExclude {Pattern = "(Stable|VeryActive)"},
 					Order = new List<TermsOrder>
 					{
 						TermsOrder.TermAscending,
@@ -197,7 +201,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					},
 					Meta = new Dictionary<string, object>
 					{
-						{ "foo", "bar" }
+						{"foo", "bar"}
 					}
 				}
 			};
@@ -225,13 +229,15 @@ namespace Tests.Aggregations.Bucket.Terms
 	 * [[terms-exact-value-filter]]
 	 * [float]
 	 * == Filtering with exact values
-	 * 
+	 *
 	 * Using terms aggregation with filtering to include only specific values
-	 * 
+	 *
 	 */
 	public class TermsAggregationIncludeExactValuesUsageTests : AggregationUsageTestBase
 	{
-		public TermsAggregationIncludeExactValuesUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public TermsAggregationIncludeExactValuesUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
+		{
+		}
 
 		protected override object ExpectJson => new
 		{
@@ -252,11 +258,11 @@ namespace Tests.Aggregations.Bucket.Terms
 						shard_size = 100,
 						execution_hint = "map",
 						missing = "n/a",
-						include = new [] { "Stable", "VeryActive" },
+						include = new[] {"Stable", "VeryActive"},
 						order = new object[]
 						{
-							new { _term = "asc" },
-							new { _count = "desc" }
+							new {_term = "asc"},
+							new {_count = "desc"}
 						}
 					}
 				}
@@ -273,7 +279,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					.ShardSize(100)
 					.ExecutionHint(TermsAggregationExecutionHint.Map)
 					.Missing("n/a")
-					.Include(new [] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() })
+					.Include(new[] {StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString()})
 					.Order(TermsOrder.TermAscending)
 					.Order(TermsOrder.CountDescending)
 					.Meta(m => m
@@ -294,7 +300,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					ShardSize = 100,
 					ExecutionHint = TermsAggregationExecutionHint.Map,
 					Missing = "n/a",
-					Include = new TermsIncludeExclude { Values = new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() } },
+					Include = new TermsIncludeExclude {Values = new[] {StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString()}},
 					Order = new List<TermsOrder>
 					{
 						TermsOrder.TermAscending,
@@ -302,7 +308,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					},
 					Meta = new Dictionary<string, object>
 					{
-						{ "foo", "bar" }
+						{"foo", "bar"}
 					}
 				}
 			};
@@ -329,10 +335,10 @@ namespace Tests.Aggregations.Bucket.Terms
 	/**
 	 * [float]
 	 * == Filtering with partitions
-	 * 
+	 *
 	 * A terms aggregation that uses partitioning to filter the terms that are returned in the response. Further terms
 	 * can be returned by issuing additional requests with an incrementing `partition` number.
-	 * 
+	 *
 	 * [NOTE]
 	 * --
 	 * Partitioning is available only in Elasticsearch 5.2.0+
@@ -341,7 +347,9 @@ namespace Tests.Aggregations.Bucket.Terms
 	[SkipVersion("<5.2.0", "Partitioning term aggregations responses is a new feature in 5.2.0")]
 	public class PartitionTermsAggregationUsageTests : AggregationUsageTestBase
 	{
-		public PartitionTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public PartitionTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
+		{
+		}
 
 		protected override object ExpectJson => new
 		{
@@ -410,12 +418,14 @@ namespace Tests.Aggregations.Bucket.Terms
 	/**
 	 * [float]
 	 * == Numeric fields
-	 * 
+	 *
 	 * A terms aggregation on a numeric field
 	 */
 	public class NumericTermsAggregationUsageTests : AggregationUsageTestBase
 	{
-		public NumericTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public NumericTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
+		{
+		}
 
 		protected override object ExpectJson => new
 		{
@@ -426,7 +436,8 @@ namespace Tests.Aggregations.Bucket.Terms
 				{
 					terms = new
 					{
-						field = "numberOfCommits"
+						field = "numberOfCommits",
+						show_term_doc_count_error = true
 					}
 				}
 			}
@@ -437,6 +448,7 @@ namespace Tests.Aggregations.Bucket.Terms
 			.Aggregations(a => a
 				.Terms("commits", st => st
 					.Field(p => p.NumberOfCommits)
+					.ShowTermDocCountError()
 				)
 			);
 
@@ -446,7 +458,8 @@ namespace Tests.Aggregations.Bucket.Terms
 				Size = 0,
 				Aggregations = new TermsAggregation("commits")
 				{
-					Field = Infer.Field<Project>(p => p.NumberOfCommits),
+					Field = Field<Project>(p => p.NumberOfCommits),
+					ShowTermDocCountError = true
 				}
 			};
 
@@ -464,6 +477,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				item.Key.Should().BeGreaterThan(0);
 				item.DocCount.Should().BeGreaterOrEqualTo(1);
 			}
+			commits.Buckets.Should().Contain(b => b.DocCountErrorUpperBound.HasValue);
 		}
 	}
 }
