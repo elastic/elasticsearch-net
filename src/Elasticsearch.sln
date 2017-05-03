@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D55
 		..\readme.md = ..\readme.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Generation", "Code Generation", "{93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeGeneration", "CodeGeneration", "{93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGenerator", "CodeGeneration\ApiGenerator\ApiGenerator.csproj", "{56A87048-9065-459B-826D-3DF68B409845}"
 EndProject
