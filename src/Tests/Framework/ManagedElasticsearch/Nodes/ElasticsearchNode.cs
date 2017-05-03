@@ -72,7 +72,11 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 
 				this.FreeResources();
 
-				if (UseAlreadyRunningInstance()) return;
+				if (UseAlreadyRunningInstance())
+				{
+					this.Started = true;
+					return;
+				}
 
 				var timeout = TimeSpan.FromMinutes(1);
 				var handle = new XplatManualResetEvent(false);

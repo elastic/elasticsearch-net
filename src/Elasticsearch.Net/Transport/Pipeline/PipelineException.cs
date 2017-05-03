@@ -37,7 +37,7 @@ namespace Elasticsearch.Net
 			switch(failure)
 			{
 				case PipelineFailure.BadRequest:
-					return "An error occurred trying to write the request datato the specified node.";
+					return "An error occurred trying to write the request data to the specified node.";
 				case PipelineFailure.BadResponse:
 					return "An error occurred trying to read the response from the specified node.";
 				case PipelineFailure.BadAuthentication:
