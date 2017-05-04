@@ -27,8 +27,12 @@ namespace Nest
 		[JsonProperty("fragment_offset")]
 		int? FragmentOffset { get; set; }
 
+		[Obsolete("Bad mapping use BoundaryMaxScan instead")]
 		[JsonProperty("boundary_max_size")]
 		int? BoundaryMaxSize { get; set; }
+
+		[JsonProperty("boundary_max_scan")]
+		int? BoundaryMaxScan { get; set; }
 
 		[JsonProperty("encoder")]
 		string Encoder { get; set; }
@@ -80,7 +84,9 @@ namespace Nest
 		public string TagsSchema { get; set; }
 		public int? NumberOfFragments { get; set; }
 		public int? FragmentOffset { get; set; }
+		[Obsolete("Bad mapping use BoundaryMaxScan instead")]
 		public int? BoundaryMaxSize { get; set; }
+		public int? BoundaryMaxScan { get; set; }
 		public string Encoder { get; set; }
 		public string Order { get; set; }
 		public Dictionary<Field, IHighlightField> Fields { get; set; }
@@ -103,6 +109,7 @@ namespace Nest
 		int? IHighlight.NumberOfFragments { get; set; }
 		int? IHighlight.FragmentOffset { get; set; }
 		int? IHighlight.BoundaryMaxSize { get; set; }
+		int? IHighlight.BoundaryMaxScan { get; set; }
 		string IHighlight.Encoder { get; set; }
 		string IHighlight.Order { get; set; }
 		Dictionary<Field, IHighlightField> IHighlight.Fields { get; set; }
@@ -147,7 +154,9 @@ namespace Nest
 
 		public HighlightDescriptor<T> BoundaryCharacters(string boundaryCharacters) => Assign(a => a.BoundaryChars = boundaryCharacters);
 
+		[Obsolete("Bad mapping use BoundaryMaxScan instead")]
 		public HighlightDescriptor<T> BoundaryMaxSize(int boundaryMaxSize) => Assign(a => a.BoundaryMaxSize = boundaryMaxSize);
+		public HighlightDescriptor<T> BoundaryMaxScan(int boundaryMaxScan) => Assign(a => a.BoundaryMaxScan = boundaryMaxScan);
 
 		public HighlightDescriptor<T> MaxFragmentLength(int? maxFragmentLength) => Assign(a => a.MaxFragmentLength = maxFragmentLength);
 
