@@ -72,9 +72,11 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 				$"{es}script.max_compilations_per_minute=10000",
 				$"{es}script.{indexedOrStored}=true",
 				$"{es}node.{attr}testingcluster=true",
+				$"{es}node.{attr}gateway=true",
 				$"{es}{shieldOrSecurity}.enabled={b}",
 				$"{es}{shieldOrSecurity}.http.ssl.enabled={sslEnabled}",
 				$"{es}{shieldOrSecurity}.authc.realms.pki1.enabled={sslEnabled}",
+				$"{es}search.remote.connect=true"
 			};
 		}
 
