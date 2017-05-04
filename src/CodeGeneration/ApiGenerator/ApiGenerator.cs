@@ -56,8 +56,9 @@ namespace ApiGenerator
 					{
 						foreach (var file in jsonFiles)
 						{
-							if (file.EndsWith("_common.json"))
-								RestApiSpec.CommonApiQueryParameters = CreateCommonApiQueryParameters(file);
+							if (file.EndsWith("_common.json")) RestApiSpec.CommonApiQueryParameters = CreateCommonApiQueryParameters(file);
+							else if (file.EndsWith(".obsolete.json")) continue;
+							else if (file.EndsWith(".patch.json")) continue;
 							else
 							{
 								var endpoint = CreateApiEndpoint(file);
@@ -83,10 +84,38 @@ namespace ApiGenerator
 
 		private static KeyValuePair<string, ApiEndpoint> CreateApiEndpoint(string jsonFile)
 		{
-			var json = File.ReadAllText(jsonFile);
-			var endpoint = JsonConvert.DeserializeObject<Dictionary<string, ApiEndpoint>>(json).First();
+			var officialJsonSpec = JObject.Parse(File.ReadAllText(jsonFile));
+			PatchOfficialSpec(officialJsonSpec, jsonFile);
+			var endpoint = officialJsonSpec.ToObject<Dictionary<string, ApiEndpoint>>().First();
 			endpoint.Value.CsharpMethodName = CreateMethodName(endpoint.Key);
+			AddObsoletes(jsonFile, endpoint.Value);
 			return endpoint;
+		}
+
+		private static void PatchOfficialSpec(JObject original, string jsonFile)
+		{
+			var directory = Path.GetDirectoryName(jsonFile);
+			var patchFile = Path.Combine(directory, Path.GetFileNameWithoutExtension(jsonFile)) + ".patch.json";
+			if (!File.Exists(patchFile)) return;
+
+			var patchedJson = JObject.Parse(File.ReadAllText(patchFile));
+
+			original.Merge(patchedJson, new JsonMergeSettings
+			{
+				MergeArrayHandling = MergeArrayHandling.Union
+			});
+		}
+
+		private static void AddObsoletes(string jsonFile, ApiEndpoint endpoint)
+		{
+			var directory = Path.GetDirectoryName(jsonFile);
+			var obsoleteFile = Path.Combine(directory, Path.GetFileNameWithoutExtension(jsonFile)) + ".obsolete.json";
+			if (!File.Exists(obsoleteFile)) return;
+
+			var json = File.ReadAllText(obsoleteFile);
+			var endpointOverride = JsonConvert.DeserializeObject<Dictionary<string, ApiEndpoint>>(json).First();
+			endpoint.ObsoleteQueryParameters = endpointOverride.Value?.Url?.Params ?? new Dictionary<string, ApiQueryParameters>();
+			endpoint.RemovedMethods = endpointOverride.Value?.RemovedMethods ?? new Dictionary<string, string>();
 		}
 
 		private static Dictionary<string, ApiQueryParameters> CreateCommonApiQueryParameters(string jsonFile)

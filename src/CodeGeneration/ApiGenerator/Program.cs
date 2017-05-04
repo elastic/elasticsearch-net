@@ -43,7 +43,7 @@ namespace ApiGenerator
 			if (redownloadCoreSpecification)
 				RestSpecDownloader.Download(downloadBranch);
 
-			ApiGenerator.Generate(downloadBranch, "Core", "Graph", "License", "Security", "Watcher");
+			ApiGenerator.Generate(downloadBranch, "Core", "Graph", "License", "Security", "Watcher", "Info");
 
 			//ApiGenerator.Generate(); //generates everything under ApiSpecification
 		}

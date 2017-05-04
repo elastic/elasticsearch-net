@@ -45,6 +45,9 @@ namespace Elasticsearch.Net
           }
 		<text>
 		///<summary>@kv.Value.Description</summary>
+		@if (!string.IsNullOrWhiteSpace(kv.Value.Obsolete))
+		{<text>		[Obsolete("Scheduled to be removed in 7.0, @kv.Value.Obsolete")]
+</text>}
 		@Raw(kv.Value.FluentGenerator.Invoke(method.QueryStringParamName, mm, kv.Value.OriginalQueryStringParamName, setter))
 		</text>
 	  }
