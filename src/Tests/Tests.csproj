@@ -39,13 +39,4 @@
   <ItemGroup>
     <EmbeddedResource Include="Document\Single\Attachment\Attachment_Test_Document.pdf" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Cluster\RemoteInfo" />
-    <Folder Include="Document\Single\SourceExists" />
-    <Folder Include="Search\FieldCapabilities" />
-    <Folder Include="XPack\Info\XPackInfo" />
-    <Folder Include="XPack\Info\XPackInfo" />
-    <Folder Include="XPack\Info\XPackUsage" />
-    <Folder Include="XPack\Info\XPackUsage" />
-  </ItemGroup>
 </Project>
