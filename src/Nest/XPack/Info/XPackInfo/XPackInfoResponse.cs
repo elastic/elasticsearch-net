@@ -28,7 +28,7 @@ namespace Nest
 	public class XPackBuildInformation
 	{
 		[JsonProperty("date")]
-		public DateTime Date { get; internal set; }
+		public DateTimeOffset Date { get; internal set; }
 		[JsonProperty("hash")]
 		public string Hash { get; internal set; }
 	}
