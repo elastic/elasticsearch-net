@@ -3563,6 +3563,56 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IFieldCapsRequest : IRequest<FieldCapsRequestParameters> 
+	{
+		Indices Index { get; }
+	 } 
+	///<summary>Request parameters for FieldCaps <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
+	public partial class FieldCapsRequest  : PlainRequestBase<FieldCapsRequestParameters>, IFieldCapsRequest
+	{
+		protected IFieldCapsRequest Self => this;
+		Indices IFieldCapsRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_field_caps</summary>
+		public FieldCapsRequest() : base(){}
+		
+
+		/// <summary>/{index}/_field_caps</summary>
+///<param name="index">Optional, accepts null</param>
+		public FieldCapsRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		
+
+			///<summary>A comma-separated list of field names</summary>
+		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
+		
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IFieldStatsRequest : IRequest<FieldStatsRequestParameters> 
 	{
 		Indices Index { get; }
@@ -4813,8 +4863,8 @@ namespace Nest
 		protected IIndexTemplateExistsRequest Self => this;
 		Names IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_template/{name}</summary>
-///<param name="name">this parameter is required</param>
-		public IndexTemplateExistsRequest(Names name) : base(r=>r.Required("name", name)){}
+///<param name="name">Optional, accepts null</param>
+		public IndexTemplateExistsRequest(Names name) : base(r=>r.Optional("name", name)){}
 		
 
 			///<summary>Return settings in flat format (default: false)</summary>
@@ -6134,6 +6184,33 @@ namespace Nest
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IRemoteInfoRequest : IRequest<RemoteInfoRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for RemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/remote-info.html</pre></summary>
+	public partial class RemoteInfoRequest  : PlainRequestBase<RemoteInfoRequestParameters>, IRemoteInfoRequest
+	{
+		protected IRemoteInfoRequest Self => this;
+				///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRenderSearchTemplateRequest : IRequest<RenderSearchTemplateRequestParameters> 
@@ -7873,6 +7950,9 @@ namespace Nest
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
 		public bool Rewrite { get { return Q<bool>("rewrite"); } set { Q("rewrite", value); } }
 		
+		///<summary>Execute validation on all shards instead of one random shard per index</summary>
+		public bool AllShards { get { return Q<bool>("all_shards"); } set { Q("all_shards", value); } }
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
@@ -7945,6 +8025,9 @@ namespace Nest
 		
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
 		public bool Rewrite { get { return Q<bool>("rewrite"); } set { Q("rewrite", value); } }
+		
+		///<summary>Execute validation on all shards instead of one random shard per index</summary>
+		public bool AllShards { get { return Q<bool>("all_shards"); } set { Q("all_shards", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }

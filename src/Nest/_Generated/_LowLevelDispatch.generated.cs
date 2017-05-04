@@ -976,6 +976,38 @@ namespace Nest
 			throw InvalidDispatch("Explain", p, new [] { GET, POST }, "/{index}/{type}/{id}/_explain");
 		}
 		
+		internal ElasticsearchResponse<T> FieldCapsDispatch<T>(IRequest<FieldCapsRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.FieldCapsGet<T>(p.RouteValues.Index,u => p.RequestParameters);
+					return _lowLevel.FieldCapsGet<T>(u => p.RequestParameters);
+
+				case POST:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.FieldCaps<T>(p.RouteValues.Index,body,u => p.RequestParameters);
+					return _lowLevel.FieldCaps<T>(body,u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("FieldCaps", p, new [] { GET, POST }, "/_field_caps", "/{index}/_field_caps");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> FieldCapsDispatchAsync<T>(IRequest<FieldCapsRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.FieldCapsGetAsync<T>(p.RouteValues.Index,u => p.RequestParameters,cancellationToken);
+					return _lowLevel.FieldCapsGetAsync<T>(u => p.RequestParameters,cancellationToken);
+
+				case POST:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.FieldCapsAsync<T>(p.RouteValues.Index,body,u => p.RequestParameters,cancellationToken);
+					return _lowLevel.FieldCapsAsync<T>(body,u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("FieldCaps", p, new [] { GET, POST }, "/_field_caps", "/{index}/_field_caps");
+		}
+		
 		internal ElasticsearchResponse<T> FieldStatsDispatch<T>(IRequest<FieldStatsRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
@@ -1381,7 +1413,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case HEAD:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.IndicesExistsTemplateForAll<T>(p.RouteValues.Name,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.IndicesExistsTemplateForAll<T>(p.RouteValues.Name,u => p.RequestParameters);
 					break;
 
 			}
@@ -1393,7 +1425,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case HEAD:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.IndicesExistsTemplateForAllAsync<T>(p.RouteValues.Name,u => p.RequestParameters,cancellationToken);
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.IndicesExistsTemplateForAllAsync<T>(p.RouteValues.Name,u => p.RequestParameters,cancellationToken);
 					break;
 
 			}
@@ -2608,6 +2640,28 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("ReindexRethrottle", p, new [] { POST }, "/_reindex/{task_id}/_rethrottle", "/_update_by_query/{task_id}/_rethrottle", "/_delete_by_query/{task_id}/_rethrottle");
+		}
+		
+		internal ElasticsearchResponse<T> RemoteInfoDispatch<T>(IRequest<RemoteInfoRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.RemoteInfo<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("RemoteInfo", p, new [] { GET }, "/_remote/info");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> RemoteInfoDispatchAsync<T>(IRequest<RemoteInfoRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.RemoteInfoAsync<T>(u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("RemoteInfo", p, new [] { GET }, "/_remote/info");
 		}
 		
 		internal ElasticsearchResponse<T> RenderSearchTemplateDispatch<T>(IRequest<RenderSearchTemplateRequestParameters> p , PostData<object> body) where T : class

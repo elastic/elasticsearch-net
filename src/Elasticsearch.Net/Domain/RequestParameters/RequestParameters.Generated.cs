@@ -2318,6 +2318,52 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for FieldCaps
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html
+	///</pre>
+	///</summary>
+	public class FieldCapsRequestParameters : FluentRequestParameters<FieldCapsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>A comma-separated list of field names</summary>
+		public FieldCapsRequestParameters Fields(params string[] fields) => this.AddQueryString("fields", fields);
+		
+		
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public FieldCapsRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
+		
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public FieldCapsRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
+		
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public FieldCapsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public FieldCapsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public FieldCapsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public FieldCapsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public FieldCapsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public FieldCapsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for FieldStats
 	///<pre>
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html
@@ -4357,6 +4403,10 @@ namespace Elasticsearch.Net
 		public ValidateQueryRequestParameters Rewrite(bool rewrite) => this.AddQueryString("rewrite", rewrite);
 		
 		
+		///<summary>Execute validation on all shards instead of one random shard per index</summary>
+		public ValidateQueryRequestParameters AllShards(bool all_shards) => this.AddQueryString("all_shards", all_shards);
+		
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public ValidateQueryRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
 		
@@ -5097,6 +5147,36 @@ namespace Elasticsearch.Net
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ReindexRethrottleRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for RemoteInfo
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/remote-info.html
+	///</pre>
+	///</summary>
+	public class RemoteInfoRequestParameters : FluentRequestParameters<RemoteInfoRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RemoteInfoRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public RemoteInfoRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RemoteInfoRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public RemoteInfoRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RemoteInfoRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	

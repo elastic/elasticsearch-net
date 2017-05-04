@@ -68,6 +68,10 @@ namespace Nest
 		internal static ExplainRequestParameters _SourceInclude<T>(this ExplainRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_include) where T : class =>
 			qs.AddQueryString("_source_include", source_include.Select(e=>(Field)e));
 		
+		///<summary>A comma-separated list of field names</summary>
+		internal static FieldCapsRequestParameters _Fields<T>(this FieldCapsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
+			qs.AddQueryString("fields", fields.Select(e=>(Field)e));
+		
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		internal static GetRequestParameters _StoredFields<T>(this GetRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  stored_fields) where T : class =>
 			qs.AddQueryString("stored_fields", stored_fields.Select(e=>(Field)e));

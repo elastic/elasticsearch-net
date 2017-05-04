@@ -2119,6 +2119,60 @@ namespace Nest
 	
 	}
 	
+	///<summary>descriptor for FieldCaps <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
+	public partial class FieldCapsDescriptor  : RequestDescriptorBase<FieldCapsDescriptor,FieldCapsRequestParameters, IFieldCapsRequest>, IFieldCapsRequest
+	{ 
+		Indices IFieldCapsRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_field_caps</summary>
+		public FieldCapsDescriptor() : base(){}
+		
+
+			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		public FieldCapsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public FieldCapsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public FieldCapsDescriptor AllIndices() => this.Index(Indices.All);
+
+	
+		///<summary>A comma-separated list of field names</summary>
+		public FieldCapsDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
+			
+		///<summary>A comma-separated list of field names</summary>
+		public FieldCapsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			AssignParam(p=>p._Fields(fields));
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public FieldCapsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public FieldCapsDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public FieldCapsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
+
+		///<summary>Pretty format the returned JSON response.</summary>
+		public FieldCapsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public FieldCapsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public FieldCapsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public FieldCapsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public FieldCapsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	
+	}
+	
 	///<summary>descriptor for FieldStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</pre></summary>
 	public partial class FieldStatsDescriptor  : RequestDescriptorBase<FieldStatsDescriptor,FieldStatsRequestParameters, IFieldStatsRequest>, IFieldStatsRequest
 	{ 
@@ -2921,11 +2975,13 @@ namespace Nest
 	{ 
 		Names IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_template/{name}</summary>
-///<param name="name"> this parameter is required</param>
-		public IndexTemplateExistsDescriptor(Names name) : base(r=>r.Required("name", name)){}
+		public IndexTemplateExistsDescriptor() : base(){}
 		
 
-		
+			///<summary>The comma separated names of the index templates</summary>
+		public IndexTemplateExistsDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
+
+	
 		///<summary>Return settings in flat format (default: false)</summary>
 		public IndexTemplateExistsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
@@ -4267,6 +4323,9 @@ namespace Nest
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
 		public ValidateQueryDescriptor<T> Rewrite(bool rewrite = true) => AssignParam(p=>p.Rewrite(rewrite));
 
+		///<summary>Execute validation on all shards instead of one random shard per index</summary>
+		public ValidateQueryDescriptor<T> AllShards(bool all_shards = true) => AssignParam(p=>p.AllShards(all_shards));
+
 		///<summary>Pretty format the returned JSON response.</summary>
 		public ValidateQueryDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -5000,6 +5059,30 @@ namespace Nest
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ReindexRethrottleDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for RemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/remote-info.html</pre></summary>
+	public partial class RemoteInfoDescriptor  : RequestDescriptorBase<RemoteInfoDescriptor,RemoteInfoRequestParameters, IRemoteInfoRequest>, IRemoteInfoRequest
+	{ 
+			
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RemoteInfoDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public RemoteInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RemoteInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public RemoteInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RemoteInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	
 	}
 	

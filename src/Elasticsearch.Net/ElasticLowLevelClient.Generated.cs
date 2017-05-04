@@ -1962,6 +1962,118 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> ExplainAsync<T>(string index, string type, string id, PostData<object> body, Func<ExplainRequestParameters, ExplainRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_explain"), cancellationToken, body, _params(requestParameters));
 		
+		///<summary>Represents a GET on /_field_caps
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html </para>
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> FieldCapsGet<T>(Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"_field_caps"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_field_caps
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html </para>
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> FieldCapsGetAsync<T>(Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_field_caps"), cancellationToken, null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /{index}/_field_caps
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html </para>
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> FieldCapsGet<T>(string index, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_field_caps"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /{index}/_field_caps
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html </para>
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> FieldCapsGetAsync<T>(string index, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_field_caps"), cancellationToken, null, _params(requestParameters));
+		
+		///<summary>Represents a POST on /_field_caps
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html </para>
+	    ///</summary>
+		///<param name="body">Field json objects containing an array of field names</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> FieldCaps<T>(PostData<object> body, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(POST, Url($"_field_caps"), body, _params(requestParameters));
+		
+		///<summary>Represents a POST on /_field_caps
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html </para>
+	    ///</summary>
+		///<param name="body">Field json objects containing an array of field names</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> FieldCapsAsync<T>(PostData<object> body, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(POST, Url($"_field_caps"), cancellationToken, body, _params(requestParameters));
+		
+		///<summary>Represents a POST on /{index}/_field_caps
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html </para>
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name="body">Field json objects containing an array of field names</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> FieldCaps<T>(string index, PostData<object> body, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_field_caps"), body, _params(requestParameters));
+		
+		///<summary>Represents a POST on /{index}/_field_caps
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html </para>
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name="body">Field json objects containing an array of field names</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> FieldCapsAsync<T>(string index, PostData<object> body, Func<FieldCapsRequestParameters, FieldCapsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_field_caps"), cancellationToken, body, _params(requestParameters));
+		
 		///<summary>Represents a GET on /_field_stats
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6405,6 +6517,32 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ReindexRethrottleAsync<T>(string task_id, Func<ReindexRethrottleRequestParameters, ReindexRethrottleRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_reindex/{task_id}/_rethrottle"), cancellationToken, null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_remote/info
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/remote-info.html </para>
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> RemoteInfo<T>(Func<RemoteInfoRequestParameters, RemoteInfoRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"_remote/info"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_remote/info
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/remote-info.html </para>
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> RemoteInfoAsync<T>(Func<RemoteInfoRequestParameters, RemoteInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_remote/info"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_render/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
