@@ -22,7 +22,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 		protected override int ExpectStatusCode => 500;
 
 		//bad painless script
-		protected override string PainlessScript { get; } = "if ctx._source.flag == 'bar') {ctx._source.remove('flag')}";
+		protected override string GroovyScript { get; } = "if ctx._source.flag == 'bar') {ctx._source.remove('flag')}";
 
 		protected override void ExpectResponse(IReindexOnServerResponse response)
 		{

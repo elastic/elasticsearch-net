@@ -75,7 +75,7 @@ namespace Elasticsearch.Net
 						if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
 						else response.Body = this._requestData.ConnectionSettings.Serializer.Deserialize<TReturn>(stream);
 					}
-					if (response.AllowAllStatusCodes) 
+					if (response.AllowAllStatusCodes)
 						ReadServerError(response, new MemoryStream(bytes), bytes);
 				}
 				else if (response.HttpStatusCode != null)
@@ -122,7 +122,7 @@ namespace Elasticsearch.Net
 
 		private async Task ReadServerErrorAsync(ElasticsearchResponse<TReturn> response, Stream stream, byte[] bytes)
 		{
-			response.ServerError = await ServerError.TryCreateAsync(stream, this._cancellationToken).ConfigureAwait(false);
+			response.ServerError = await ServerError.TryCreateAsync(stream, this._requestData.CancellationToken).ConfigureAwait(false);
 			if (_disableDirectStreaming)
 				response.ResponseBodyInBytes = bytes;
 		}
