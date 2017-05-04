@@ -1,4 +1,4 @@
-﻿# mode either u (unit test), i (integration test) or m (mixed mode)
+# mode either u (unit test), i (integration test) or m (mixed mode)
 mode: i
 # the elasticsearch version that should be started
 elasticsearch_version: 2.4.4
@@ -7,7 +7,7 @@ cluster_filter:
 # test filter allows you to run a particular test
 test_filter:
 # whether we want to forcefully reseed on the node, if you are starting the tests with a node already running
-force_reseed: true
+force_reseed: false
 # do not spawn nodes as part of the test setup if we find a node is already running
 # this is opt in during development in CI we never want to see our tests running against an already running node
-test_against_already_running_elasticsearch: false
+test_against_already_running_elasticsearch: true

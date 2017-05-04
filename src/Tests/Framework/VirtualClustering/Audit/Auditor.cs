@@ -50,6 +50,7 @@ namespace Tests.Framework
 
 		public async Task<Auditor> TraceStartup(ClientCall callTrace = null)
 		{
+			//synchronous code path
 			this._cluster  = _cluster ?? this.Cluster();
 			if (!this.StartedUp) this.AssertPoolBeforeStartup?.Invoke(this._cluster.ConnectionPool);
 			this.AssertPoolBeforeCall?.Invoke(this._cluster.ConnectionPool);
@@ -58,6 +59,7 @@ namespace Tests.Framework
 			if (!this.StartedUp) this.AssertPoolAfterStartup?.Invoke(this._cluster.ConnectionPool);
 			this.AssertPoolAfterCall?.Invoke(this._cluster.ConnectionPool);
 
+			//async code path
 			this._clusterAsync = _clusterAsync ?? this.Cluster();
 			if (!this.StartedUp) this.AssertPoolBeforeStartup?.Invoke(this._clusterAsync.ConnectionPool);
 			this.AssertPoolBeforeCall?.Invoke(this._clusterAsync.ConnectionPool);

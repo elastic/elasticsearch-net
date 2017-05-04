@@ -30,6 +30,7 @@ SET FEED="elasticsearch-net"
 SET NEST_INTEGRATION_CLUSTER=
 SET NEST_TEST_FILTER=
 SET ELASTICSEARCH=
+SET INTEGRATE_CLR="one"
 
 IF /I "%1"=="skiptests" (
 	set SKIPTESTS="1"
@@ -69,6 +70,13 @@ IF /I "%TARGET%"=="release" (
 IF /I "%TARGET%"=="inc" (
 	IF NOT [%2]==[] (set NEST_TEST_FILTER="%2")
 )
+IF /I "%TARGET%"=="integrate-all" (
+	SET TARGET="integrate"
+	SET INTEGRATE_CLR="all"
+	IF NOT [%2]==[] (set ESVERSIONS="%2")
+	IF NOT [%3]==[] (set NEST_INTEGRATION_CLUSTER="%~3")
+	IF NOT [%4]==[] (set NEST_TEST_FILTER="%4")
+)
 IF /I "%TARGET%"=="integrate" (
 	IF NOT [%2]==[] (set ESVERSIONS="%2")
 	IF NOT [%3]==[] (set NEST_INTEGRATION_CLUSTER="%~3")
@@ -90,5 +98,5 @@ IF /I "%TARGET%"=="profile" (
 	IF NOT [%3]==[] (set NEST_TEST_FILTER="%3")
 )
 
-ECHO build.bat: target=%TARGET% skippakket=%SKIPPAKET% version=%VERSION% esversions=%ESVERSIONS% skiptests=%SKIPTESTS% apiKey=%APIKEYPROVIDED% feed=%FEED% escluster=%NEST_INTEGRATION_CLUSTER% testfilter=%NEST_TEST_FILTER% elasticsearch=%ELASTICSEARCH%
-"packages\build\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%" "esversions=%ESVERSIONS%" "skiptests=%SKIPTESTS%" "apiKey=%APIKEY%" "feed=%FEED%" "escluster=%NEST_INTEGRATION_CLUSTER%" "testfilter=%NEST_TEST_FILTER%" "elasticsearch=%ELASTICSEARCH%"
+ECHO build.bat: target=%TARGET% skippakket=%SKIPPAKET% version=%VERSION% esversions=%ESVERSIONS% skiptests=%SKIPTESTS% apiKey=%APIKEYPROVIDED% feed=%FEED% escluster=%NEST_INTEGRATION_CLUSTER% testfilter=%NEST_TEST_FILTER% elasticsearch=%ELASTICSEARCH% integrateclr=%INTEGRATE_CLR%
+"packages\build\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%" "esversions=%ESVERSIONS%" "skiptests=%SKIPTESTS%" "apiKey=%APIKEY%" "feed=%FEED%" "escluster=%NEST_INTEGRATION_CLUSTER%" "testfilter=%NEST_TEST_FILTER%" "elasticsearch=%ELASTICSEARCH%" "integrateclr=%INTEGRATE_CLR%"

@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <DotNetCoreOnly Condition="'$(TRAVIS)'=='true'">1</DotNetCoreOnly>
-    <DotNetCoreOnly Condition="'$(TRAVIS)'==''"></DotNetCoreOnly>
+    <DotNetCoreOnly Condition="'$(TRAVIS)'==''">
+    </DotNetCoreOnly>
     <OutputType>Exe</OutputType>
     <TargetFrameworks Condition="'$(DotNetCoreOnly)'=='1'">netcoreapp1.1</TargetFrameworks>
     <TargetFrameworks Condition="'$(DotNetCoreOnly)'==''">netcoreapp1.1;net45;net46</TargetFrameworks>

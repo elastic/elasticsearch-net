@@ -81,7 +81,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks
 
 		private void Itterate<T>(IEnumerable<T> collection, Action<T, NodeConfiguration, NodeFileSystem> act, bool log = true)
 		{
-			if (!this.NodeConfiguration.RunIntegrationTests) return;
+			if (!this.NodeConfiguration.RunIntegrationTests || this.NodeConfiguration.TestAgainstAlreadyRunningElasticsearch) return;
 			lock (NodeTaskRunner.Lock)
 			{
 				var taskLog = this.GetCurrentRunnerLog();

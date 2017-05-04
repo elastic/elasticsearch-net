@@ -44,7 +44,7 @@ module Tests =
         setLocalEnvVars()
         dotnetTest All
 
-    let RunIntegrationTests() =
+    let RunIntegrationTests target =
         setLocalEnvVars()
         let commaSeparatedEsVersions = getBuildParamOrDefault "esversions" "" 
         let esVersions = 
@@ -54,4 +54,4 @@ module Tests =
         
         for esVersion in esVersions do
             setProcessEnvironVar "NEST_INTEGRATION_VERSION" esVersion
-            dotnetTest One |> ignore
+            dotnetTest target |> ignore
