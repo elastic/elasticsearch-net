@@ -84,12 +84,10 @@ namespace Elasticsearch.Net
 				HttpEnabled = this.HttpEnabled
 			};
 
+		public static bool operator ==(Node left, Node right) =>
+			ReferenceEquals(left, null) ? ReferenceEquals(right, null) : left.Equals(right);
 
-		// ReSharper disable once PossibleNullReferenceException
-		public static bool operator ==(Node left, Node right) => left.Equals(right);
-
-		// ReSharper disable once PossibleNullReferenceException
-		public static bool operator !=(Node left, Node right) => !left.Equals(right);
+		public static bool operator !=(Node left, Node right) => !(left == right);
 
 		public static implicit operator Node(Uri uri) => new Node(uri);
 
@@ -110,5 +108,6 @@ namespace Elasticsearch.Net
 		}
 
 		public override int GetHashCode() => this.Uri.GetHashCode();
+
 	}
 }

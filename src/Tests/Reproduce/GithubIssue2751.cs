@@ -24,7 +24,7 @@ namespace Tests.Reproduce
 		* the response from /project/project/_search to 5 seconds. See this issue's accompanying PR.
 		*/
 
-		//[I]
+		[I]
 		public async Task TimeoutOfRequestReturnsResponse()
 		{
 			var client = TestClient.GetClient(modifySettings: c => c.RequestTimeout(TimeSpan.FromSeconds(2)));
@@ -52,7 +52,7 @@ namespace Tests.Reproduce
 			//cancelling an async request should behave differently
 			stopwatch.Restart();
 			var ctx = new CancellationTokenSource();
-			var task = client.SearchAsync<Project>(s=>s, ctx.Token);
+			var task = client.SearchAsync<Project>(s=>s.RequestConfiguration(r=>r.CancellationToken(ctx.Token)));
 			await Task.Delay(100);
 			ctx.Cancel();
 			response = await task;
@@ -67,7 +67,7 @@ namespace Tests.Reproduce
 			response.ApiCall.AuditTrail.Should().Contain(a=> a.Event == AuditEvent.CancellationRequested);
 		}
 
-		//[I]
+		[I]
 		public async Task UserCancellationDoesNotCauseFailOverToNextNode()
 		{
 			//this tests assumes only a single node is running under 9200 and fiddler is set up to artificially delay results
@@ -76,7 +76,7 @@ namespace Tests.Reproduce
 				modifySettings: c => c.RequestTimeout(TimeSpan.FromSeconds(2)));
 
 			var ctx = new CancellationTokenSource();
-			var task = client.SearchAsync<Project>(s=>s, ctx.Token);
+			var task = client.SearchAsync<Project>(s=>s.RequestConfiguration(r=>r.CancellationToken(ctx.Token)));
 			await Task.Delay(100);
 			ctx.Cancel();
 			var response = await task;

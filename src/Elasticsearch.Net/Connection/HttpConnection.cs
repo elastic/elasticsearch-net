@@ -191,7 +191,7 @@ namespace Elasticsearch.Net
 			try
 			{
 				var request = this.CreateHttpWebRequest(requestData);
-				cancellationToken.Register(()=>request.Abort());
+				requestData.CancellationToken.Register(()=>request.Abort());
 				var data = requestData.PostData;
 
 				if (data != null)

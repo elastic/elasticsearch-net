@@ -152,7 +152,7 @@ namespace Elasticsearch.Net
 							AuditTrail = pipeline.AuditTrail
 						};
 					}
-					if (cancellationToken.IsCancellationRequested)
+					if (requestData.CancellationToken.IsCancellationRequested)
 					{
 						pipeline.AuditCancellationRequested();
 						break;
