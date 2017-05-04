@@ -72,8 +72,7 @@ namespace Nest
 		/// </summary>
 		double MaxScore { get; }
 
-		IReadOnlyCollection<T> Documents { get; }
-
+		/// <summary>
 		/// Number of times the server performed an incremental reduce phase
 		/// </summary>
 		long NumberOfReducePhases { get; }

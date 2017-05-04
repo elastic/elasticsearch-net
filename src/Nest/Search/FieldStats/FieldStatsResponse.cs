@@ -51,9 +51,11 @@ namespace Nest
 		public bool Aggregatable { get; internal set; }
 
 		[JsonProperty("min_value")]
+		//TODO this can also be an object in the case of geo_point/shape
 		public string MinValue { get; internal set; }
 
 		[JsonProperty("max_value")]
+		//TODO this can also be an object in the case of geo_point/shape
 		public string MaxValue { get; internal set; }
 	}
 }
