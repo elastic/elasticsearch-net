@@ -8,10 +8,10 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// The cluster health API allows to get a very simple status on the health of the cluster.
-		/// <para> </para><a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-health.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-health.html</a>
+		/// The cluster remote info API allows to retrieve all of the configured remote cluster information.
+		/// <para> </para><a href="http://www.elastic.co/guide/en/elasticsearch/reference/master/remote-info.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/remote-info.html</a>
 		/// </summary>
-		/// <param name="selector">An optional descriptor to further describe the cluster health operation</param>
+		/// <param name="selector">An optional descriptor to further describe the remote info operation</param>
 		IRemoteInfoResponse RemoteInfo(Func<RemoteInfoDescriptor, IRemoteInfoRequest> selector = null);
 
 		/// <inheritdoc/>

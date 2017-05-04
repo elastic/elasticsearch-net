@@ -6,8 +6,6 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
-using Xunit;
-using M = System.Collections.Generic.Dictionary<string, object>;
 using static Nest.Infer;
 
 namespace Tests.Cluster.RemoteInfo
@@ -18,14 +16,14 @@ namespace Tests.Cluster.RemoteInfo
 		{
 			var enableRemoteClusters = client.ClusterPutSettings(new ClusterPutSettingsRequest
 			{
-				Transient = new M
+				Transient = new Dictionary<string, object>
 				{
-					{ "search", new M {
-						{ "remote", new M {
-							{ "cluster_one", new M {
+					{ "search", new Dictionary<string, object> {
+						{ "remote", new Dictionary<string, object> {
+							{ "cluster_one", new Dictionary<string, object> {
 								{"seeds", new[] {"127.0.0.1:9300", "127.0.0.1:9301"}}
 							}},
-							{ "cluster_two", new M {
+							{ "cluster_two", new Dictionary<string, object> {
 								{"seeds", new[] {"127.0.0.1:9300"}}
 							}}
 						}}
@@ -39,9 +37,7 @@ namespace Tests.Cluster.RemoteInfo
 			remoteSearch.IsValid.Should().BeTrue(remoteSearch.DebugInformation);
 		}
 
-		public RemoteInfoApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public RemoteInfoApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.RemoteInfo(),
