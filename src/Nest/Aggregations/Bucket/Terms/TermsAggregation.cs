@@ -38,16 +38,15 @@ namespace Nest
 
 		[JsonProperty("collect_mode")]
 		TermsAggregationCollectMode? CollectMode { get; set; }
+
+		[JsonProperty("show_term_doc_count_error")]
+		bool? ShowTermDocCountError { get; set; }
 	}
 
 	public interface ITermsAggregation<TFieldType> : ITermsAggregation
 	{
 		[JsonProperty("missing")]
 		TFieldType Missing { get; set; }
-
-		[JsonProperty("show_term_doc_count_error")]
-		bool? ShowTermDocCountError { get; set; }
-
 
 	}
 
@@ -107,7 +106,7 @@ namespace Nest
 
 		bool? ITermsAggregation.ShowTermDocCountError { get; set; }
 
-		public TermsAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public TermsAggregationDescriptor<T, TFieldType> Field(Field field) => Assign(a => a.Field = field);
 
 		public TermsAggregationDescriptor<T, TFieldType> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
@@ -164,6 +163,6 @@ namespace Nest
 
 		public TermsAggregationDescriptor<T, TFieldType> Missing(TFieldType missing) => Assign(a => a.Missing = missing);
 
-		public TermsAggregationDescriptor<T> ShowTermDocCountError(bool? showTermDocCountError = true) => Assign(a => a.ShowTermDocCountError = showTermDocCountError);
+		public TermsAggregationDescriptor<T, TFieldType> ShowTermDocCountError(bool? showTermDocCountError = true) => Assign(a => a.ShowTermDocCountError = showTermDocCountError);
 	}
 }

@@ -1936,86 +1936,89 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
-	public partial class ExistsSourceDescriptor  : RequestDescriptorBase<ExistsSourceDescriptor,ExistsSourceRequestParameters, IExistsSourceRequest>, IExistsSourceRequest
+	public partial class SourceExistsDescriptor<T>  : RequestDescriptorBase<SourceExistsDescriptor<T>,SourceExistsRequestParameters, ISourceExistsRequest>, ISourceExistsRequest
 	{ 
-		Id IExistsSourceRequest.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IExistsSourceRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IExistsSourceRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id ISourceExistsRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName ISourceExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ISourceExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}/{id}/_source</summary>
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
-		public ExistsSourceDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+		public SourceExistsDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 		
 
+		/// <summary>/{index}/{type}/{id}/_source</summary>
+		
+///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
+		public SourceExistsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		partial void DocumentFromPath(T document);
+
 			///<summary>The name of the index</summary>
-		public ExistsSourceDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public SourceExistsDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
 
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public ExistsSourceDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public SourceExistsDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document; use `_all` to fetch the first document matching the ID across all types</summary>
-		public ExistsSourceDescriptor Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+		public SourceExistsDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
 
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
-		public ExistsSourceDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+		public SourceExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
 	
 		///<summary>The ID of the parent document</summary>
-		public ExistsSourceDescriptor Parent(string parent) => AssignParam(p=>p.Parent(parent));
+		public SourceExistsDescriptor<T> Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public ExistsSourceDescriptor Preference(string preference) => AssignParam(p=>p.Preference(preference));
+		public SourceExistsDescriptor<T> Preference(string preference) => AssignParam(p=>p.Preference(preference));
 
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public ExistsSourceDescriptor Realtime(bool realtime = true) => AssignParam(p=>p.Realtime(realtime));
+		public SourceExistsDescriptor<T> Realtime(bool realtime = true) => AssignParam(p=>p.Realtime(realtime));
 
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public ExistsSourceDescriptor Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
+		public SourceExistsDescriptor<T> Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
 
 		///<summary>Specific routing value</summary>
-		public ExistsSourceDescriptor Routing(string routing) => AssignParam(p=>p.Routing(routing));
+		public SourceExistsDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public ExistsSourceDescriptor SourceEnabled(params string[] source_enabled) => AssignParam(p=>p.SourceEnabled(source_enabled));
+		public SourceExistsDescriptor<T> SourceEnabled(params string[] source_enabled) => AssignParam(p=>p.SourceEnabled(source_enabled));
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExistsSourceDescriptor SourceExclude(params string[] source_exclude) => AssignParam(p=>p.SourceExclude(source_exclude));
+		public SourceExistsDescriptor<T> SourceExclude(params string[] source_exclude) => AssignParam(p=>p.SourceExclude(source_exclude));
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExistsSourceDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+		public SourceExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceExclude(fields));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExistsSourceDescriptor SourceInclude(params string[] source_include) => AssignParam(p=>p.SourceInclude(source_include));
+		public SourceExistsDescriptor<T> SourceInclude(params string[] source_include) => AssignParam(p=>p.SourceInclude(source_include));
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExistsSourceDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+		public SourceExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceInclude(fields));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public ExistsSourceDescriptor Version(long version) => AssignParam(p=>p.Version(version));
+		public SourceExistsDescriptor<T> Version(long version) => AssignParam(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public ExistsSourceDescriptor VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
+		public SourceExistsDescriptor<T> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
 		///<summary>Pretty format the returned JSON response.</summary>
-		public ExistsSourceDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+		public SourceExistsDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
 		///<summary>Return human readable values for statistics.</summary>
-		public ExistsSourceDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+		public SourceExistsDescriptor<T> Human(bool human = true) => AssignParam(p=>p.Human(human));
 
 		///<summary>Include the stack trace of returned errors.</summary>
-		public ExistsSourceDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+		public SourceExistsDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ExistsSourceDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public SourceExistsDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ExistsSourceDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public SourceExistsDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5075,9 +5078,6 @@ namespace Nest
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RemoteInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
 	
 	}
 	
@@ -6189,56 +6189,50 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for XpackInfo <pre>Retrieve information about xpack, including build number/timestamp and license status</pre></summary>
-	public partial class XpackInfoDescriptor  : RequestDescriptorBase<XpackInfoDescriptor,XpackInfoRequestParameters, IXpackInfoRequest>, IXpackInfoRequest
+	public partial class XPackInfoDescriptor  : RequestDescriptorBase<XPackInfoDescriptor,XPackInfoRequestParameters, IXPackInfoRequest>, IXPackInfoRequest
 	{ 
 			
 		///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
-		public XpackInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+		public XPackInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
 
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
-		public XpackInfoDescriptor Categories(params string[] categories) => AssignParam(p=>p.Categories(categories));
+		public XPackInfoDescriptor Categories(params string[] categories) => AssignParam(p=>p.Categories(categories));
 
 		///<summary>Pretty format the returned JSON response.</summary>
-		public XpackInfoDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+		public XPackInfoDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
 		///<summary>Include the stack trace of returned errors.</summary>
-		public XpackInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+		public XPackInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XpackInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public XPackInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public XpackInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public XPackInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
 	///<summary>descriptor for XpackUsage <pre>Retrieve information about xpack features usage</pre></summary>
-	public partial class XpackUsageDescriptor  : RequestDescriptorBase<XpackUsageDescriptor,XpackUsageRequestParameters, IXpackUsageRequest>, IXpackUsageRequest
+	public partial class XPackUsageDescriptor  : RequestDescriptorBase<XPackUsageDescriptor,XPackUsageRequestParameters, IXPackUsageRequest>, IXPackUsageRequest
 	{ 
 			
 		///<summary>Specify timeout for watch write operation</summary>
-		public XpackUsageDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+		public XPackUsageDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
 		///<summary>Pretty format the returned JSON response.</summary>
-		public XpackUsageDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+		public XPackUsageDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
 		///<summary>Return human readable values for statistics.</summary>
-		public XpackUsageDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+		public XPackUsageDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
 
 		///<summary>Include the stack trace of returned errors.</summary>
-		public XpackUsageDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+		public XPackUsageDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XpackUsageDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public XPackUsageDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public XpackUsageDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public XPackUsageDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

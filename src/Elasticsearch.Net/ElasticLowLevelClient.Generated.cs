@@ -1877,7 +1877,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document; use `_all` to fetch the first document matching the ID across all types</param>
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> ExistsSource<T>(string index, string type, string id, Func<ExistsSourceRequestParameters, ExistsSourceRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> ExistsSource<T>(string index, string type, string id, Func<SourceExistsRequestParameters, SourceExistsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(HEAD, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_source"), null, _params(requestParameters));
 		
 		///<summary>Represents a HEAD on /{index}/{type}/{id}/_source
@@ -1893,7 +1893,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document; use `_all` to fetch the first document matching the ID across all types</param>
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> ExistsSourceAsync<T>(string index, string type, string id, Func<ExistsSourceRequestParameters, ExistsSourceRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> ExistsSourceAsync<T>(string index, string type, string id, Func<SourceExistsRequestParameters, SourceExistsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(HEAD, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_source"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_explain
@@ -8038,7 +8038,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: Retrieve information about xpack, including build number/timestamp and license status </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackInfo<T>(Func<XpackInfoRequestParameters, XpackInfoRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackInfo<T>(Func<XPackInfoRequestParameters, XPackInfoRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"_xpack"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack
@@ -8051,7 +8051,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: Retrieve information about xpack, including build number/timestamp and license status </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackInfoAsync<T>(Func<XpackInfoRequestParameters, XpackInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackInfoAsync<T>(Func<XPackInfoRequestParameters, XPackInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_xpack"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/usage
@@ -8064,7 +8064,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: Retrieve information about xpack features usage </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackUsage<T>(Func<XpackUsageRequestParameters, XpackUsageRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackUsage<T>(Func<XPackUsageRequestParameters, XPackUsageRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"_xpack/usage"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/usage
@@ -8077,7 +8077,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: Retrieve information about xpack features usage </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackUsageAsync<T>(Func<XpackUsageRequestParameters, XpackUsageRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackUsageAsync<T>(Func<XPackUsageRequestParameters, XPackUsageRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_xpack/usage"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_xpack/license

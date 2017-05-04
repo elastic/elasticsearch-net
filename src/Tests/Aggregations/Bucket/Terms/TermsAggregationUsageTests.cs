@@ -17,9 +17,7 @@ namespace Tests.Aggregations.Bucket.Terms
 	 */
 	public class TermsAggregationUsageTests : AggregationUsageTestBase
 	{
-		public TermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
-		{
-		}
+		public TermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{
@@ -434,7 +432,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					terms = new
 					{
 						field = "numberOfCommits",
-						missing = -1
+						missing = -1,
 						show_term_doc_count_error = true
 					}
 				}
@@ -458,7 +456,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				Aggregations = new TermsAggregation<int>("commits")
 				{
 					Field = Field<Project>(p => p.NumberOfCommits),
-					ShowTermDocCountError = true
+					ShowTermDocCountError = true,
 					Missing = -1
 				}
 			};

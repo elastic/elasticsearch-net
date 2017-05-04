@@ -98,9 +98,16 @@ namespace Tests.CodeStandards
 		{
 			var exceptions = new[] // <1> _Exceptions to the rule_
 			{
-				//TODO RENAME TO SourceExistsRequest
-				//ALSO add unit tests that we have no requests starting with Exists
-				typeof(ExistsSourceRequest),
+				//TODO These are new API's should be removed, also add test that no request or response starts with Xpack
+				//only XPack
+				typeof(XpackSecurityDeleteRoleMappingRequest),
+				typeof(XpackSecurityGetRoleMappingRequest),
+				typeof(XpackSecurityGetTokenRequest),
+				typeof(XpackSecurityInvalidateTokenRequest),
+				typeof(XpackSecurityPutRoleMappingRequest),
+				//TODO add unit tests that we have no requests starting with Exists
+				typeof(SourceExistsRequest),
+				typeof(SourceExistsRequest<>),
 				typeof(DocumentExistsRequest),
 				typeof(DocumentExistsRequest<>),
 				typeof(AliasExistsRequest),
@@ -118,6 +125,10 @@ namespace Tests.CodeStandards
 				typeof(RenderSearchTemplateRequest),
 				typeof(MultiSearchTemplateRequest),
 				typeof(CreateRequest<>)
+
+
+
+
 			};
 
 			var types = typeof(IRequest).Assembly().GetTypes();

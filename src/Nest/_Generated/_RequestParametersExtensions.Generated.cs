@@ -49,11 +49,11 @@ namespace Nest
 			qs.AddQueryString("_source_include", source_include.Select(e=>(Field)e));
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		internal static ExistsSourceRequestParameters _SourceExclude<T>(this ExistsSourceRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_exclude) where T : class =>
+		internal static SourceExistsRequestParameters _SourceExclude<T>(this SourceExistsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_exclude) where T : class =>
 			qs.AddQueryString("_source_exclude", source_exclude.Select(e=>(Field)e));
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		internal static ExistsSourceRequestParameters _SourceInclude<T>(this ExistsSourceRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_include) where T : class =>
+		internal static SourceExistsRequestParameters _SourceInclude<T>(this SourceExistsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_include) where T : class =>
 			qs.AddQueryString("_source_include", source_include.Select(e=>(Field)e));
 		
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
