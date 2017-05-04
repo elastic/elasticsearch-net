@@ -49,6 +49,7 @@ namespace Tests.Search.Request
 							{ "type", "plain" },
 							{ "force_source", true},
 							{ "fragment_size", 150 },
+							{ "fragmenter", "span" },
 							{ "number_of_fragments", 3},
 							{ "no_match_size", 150 }
 						}
@@ -130,6 +131,7 @@ namespace Tests.Search.Request
 						.Type("plain")
 						.ForceSource()
 						.FragmentSize(150)
+						.Fragmenter(HighlighterFragmenter.Span)
 						.NumberOfFragments(3)
 						.NoMatchSize(150),
 					fs => fs
@@ -191,6 +193,7 @@ namespace Tests.Search.Request
 								Type = HighlighterType.Plain,
 								ForceSource = true,
 								FragmentSize = 150,
+								Fragmenter = HighlighterFragmenter.Span,
 								NumberOfFragments = 3,
 								NoMatchSize = 150
 							}

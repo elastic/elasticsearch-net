@@ -5,53 +5,34 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	//TODO 6.0 completely revisit how we mapped highlighters
+	//this is used in tophits/percolator AND in search highligher as the root
+	//Not all of these properties might make sense/valid there
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<Highlight>))]
 	public interface IHighlight
 	{
+		/// <summary>
+		/// Controls the pre tag in which to wrap highights.
+		/// By default, the highlighting will wrap highlighted text in &lt;em&gt; and &lt;/em&gt;.
+		/// Using the fast vector highlighter, there can be more tags, and the importance is ordered.
+		/// </summary>
 		[JsonProperty("pre_tags")]
 		IEnumerable<string> PreTags { get; set; }
 
+		/// <summary>
+		/// Controls the post tag in which to wrap highights.
+		/// By default, the highlighting will wrap highlighted text in &lt;em&gt; and &lt;/em&gt;.
+		/// Using the fast vector highlighter, there can be more tags, and the importance is ordered.
+		/// </summary>
 		[JsonProperty("post_tags")]
 		IEnumerable<string> PostTags { get; set; }
 
+		/// <summary>
+		/// The size of the highlighted fragment, in characters. Defaults to 100
+		/// </summary>
 		[JsonProperty("fragment_size")]
 		int? FragmentSize { get; set; }
-
-		[JsonProperty("tags_schema")]
-		string TagsSchema { get; set; }
-
-		[JsonProperty("number_of_fragments")]
-		int? NumberOfFragments { get; set; }
-
-		[JsonProperty("fragment_offset")]
-		int? FragmentOffset { get; set; }
-
-		[Obsolete("Bad mapping use BoundaryMaxScan instead")]
-		[JsonProperty("boundary_max_size")]
-		int? BoundaryMaxSize { get; set; }
-
-		[JsonProperty("boundary_max_scan")]
-		int? BoundaryMaxScan { get; set; }
-
-		[JsonProperty("encoder")]
-		string Encoder { get; set; }
-
-		[JsonProperty("order")]
-		string Order { get; set; }
-
-		[JsonProperty(PropertyName = "fields")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Field, IHighlightField>))]
-		Dictionary<Field, IHighlightField> Fields { get; set; }
-
-		[JsonProperty("require_field_match")]
-		bool? RequireFieldMatch { get; set; }
-
-		[JsonProperty("boundary_chars")]
-		string BoundaryChars { get; set; }
-
-		[JsonProperty("max_fragment_length")]
-		int? MaxFragmentLength { get; set; }
 
 		/// <summary>
 		/// In the case where there is no matching fragment to highlight, the default is to not return anything. Instead, we can return a snippet of text from
@@ -61,6 +42,81 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("no_match_size")]
 		int? NoMatchSize { get; set; }
+
+		/// <summary>
+		/// The maximum number of fragments to return. Defaults to 5.
+		/// </summary>
+		[JsonProperty("number_of_fragments")]
+		int? NumberOfFragments { get; set; }
+
+		/// <summary>
+		/// Controls the margin to start highlighting from when using the fast vector highlighter
+		/// </summary>
+		[JsonProperty("fragment_offset")]
+		int? FragmentOffset { get; set; }
+
+		[Obsolete("Bad mapping use BoundaryMaxScan instead")]
+		[JsonProperty("boundary_max_size")]
+		int? BoundaryMaxSize { get; set; }
+
+		/// <summary>
+		/// Controls how far to look for boundary characters. Defaults to 20.
+		/// </summary>
+		[JsonProperty("boundary_max_scan")]
+		int? BoundaryMaxScan { get; set; }
+
+		/// <summary>
+		/// Define how highlighted text will be encoded.
+		/// It can be either default (no encoding) or html (will escape html, if you use html highlighting tags).
+		/// </summary>
+		[JsonProperty("encoder")]
+		string Encoder { get; set; }
+
+		/// <summary>
+		/// The order in which highlighted fragments are sorted
+		/// </summary>
+		[JsonProperty("order")]
+		string Order { get; set; }
+
+		/// <summary>
+		/// Use a specific "tag" schemas.
+		/// </summary>
+		/// <remarks>
+		/// Currently a single schema called "styled" with the following pre_tags:
+		/// &lt;em class="hlt1"&gt;, &lt;em class="hlt2"&gt;, &lt;em class="hlt3"&gt;,
+		/// &lt;em class="hlt4"&gt;, &lt;em class="hlt5"&gt;, &lt;em class="hlt6"&gt;,
+		/// &lt;em class="hlt7"&gt;, &lt;em class="hlt8"&gt;, &lt;em class="hlt9"&gt;,
+		/// &lt;em class="hlt10"&gt;
+		/// </remarks>
+		[JsonProperty("tags_schema")]
+		string TagsSchema { get; set; }
+
+		[JsonProperty(PropertyName = "fields")]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Field, IHighlightField>))]
+		Dictionary<Field, IHighlightField> Fields { get; set; }
+
+		/// <summary>
+		/// Use a specific "tag" schemas.
+		/// </summary>
+		/// <remarks>
+		/// Currently a single schema called "styled" with the following pre_tags:
+		/// &lt;em class="hlt1"&gt;, &lt;em class="hlt2"&gt;, &lt;em class="hlt3"&gt;,
+		/// &lt;em class="hlt4"&gt;, &lt;em class="hlt5"&gt;, &lt;em class="hlt6"&gt;,
+		/// &lt;em class="hlt7"&gt;, &lt;em class="hlt8"&gt;, &lt;em class="hlt9"&gt;,
+		/// &lt;em class="hlt10"&gt;
+		/// </remarks>
+		[JsonProperty("require_field_match")]
+		bool? RequireFieldMatch { get; set; }
+
+		/// <summary>
+		/// Defines what constitutes a boundary for highlighting when using the fast vector highlighter.
+		/// It's a single string with each boundary character defined in it. It defaults to .,!? \t\n.
+		/// </summary>
+		[JsonProperty("boundary_chars")]
+		string BoundaryChars { get; set; }
+
+		[JsonProperty("max_fragment_length")]
+		int? MaxFragmentLength { get; set; }
 
 		/// <summary>
 		/// When highlighting a field using the unified highlighter or the fast vector highlighter, you can specify how to break the highlighted
@@ -85,24 +141,43 @@ namespace Nest
 
 	public class Highlight : IHighlight
 	{
+		// <inheritdoc/>
 		public IEnumerable<string> PreTags { get; set; }
+		// <inheritdoc/>
 		public IEnumerable<string> PostTags { get; set; }
+		// <inheritdoc/>
 		public int? FragmentSize { get; set; }
+		// <inheritdoc/>
 		public string TagsSchema { get; set; }
+		// <inheritdoc/>
 		public int? NumberOfFragments { get; set; }
+		// <inheritdoc/>
 		public int? FragmentOffset { get; set; }
+		// <inheritdoc/>
 		[Obsolete("Bad mapping use BoundaryMaxScan instead")]
+		// <inheritdoc/>
 		public int? BoundaryMaxSize { get; set; }
+		// <inheritdoc/>
 		public int? BoundaryMaxScan { get; set; }
+		// <inheritdoc/>
 		public string Encoder { get; set; }
+		// <inheritdoc/>
 		public string Order { get; set; }
+		// <inheritdoc/>
 		public Dictionary<Field, IHighlightField> Fields { get; set; }
+		// <inheritdoc/>
 		public bool? RequireFieldMatch { get; set; }
+		// <inheritdoc/>
 		public string BoundaryChars { get; set; }
+		// <inheritdoc/>
 		public int? MaxFragmentLength { get; set; }
+		// <inheritdoc/>
 		public int? NoMatchSize { get; set; }
+		// <inheritdoc/>
 		public BoundaryScanner? BoundaryScanner { get; set; }
+		// <inheritdoc/>
 		public string BoundaryScannerLocale { get; set; }
+		// <inheritdoc/>
 		public HighlighterFragmenter? Fragmenter { get; set; }
 	}
 
@@ -129,6 +204,7 @@ namespace Nest
 		string IHighlight.BoundaryScannerLocale { get; set; }
 		HighlighterFragmenter? IHighlight.Fragmenter { get; set; }
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> Fields(params Func<HighlightFieldDescriptor<T>, IHighlightField>[] fieldHighlighters) =>
 			Assign(a => a.Fields = fieldHighlighters?
 				.Select(f =>
@@ -139,42 +215,60 @@ namespace Nest
 				.NullIfNoKeys()
 			);
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> TagsSchema(string schema = "styled") => Assign(a => a.TagsSchema = schema);
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> PreTags(string preTags) => this.PreTags(new[] {preTags});
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> PostTags(string postTags)=> this.PostTags(new[] {postTags});
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> PreTags(IEnumerable<string> preTags) => Assign(a => a.PreTags = preTags.ToListOrNullIfEmpty());
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> PostTags(IEnumerable<string> postTags) => Assign(a => a.PostTags = postTags.ToListOrNullIfEmpty());
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> FragmentSize(int fragmentSize) => Assign(a => a.FragmentSize = fragmentSize);
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> NumberOfFragments(int numberOfFragments) => Assign(a => a.NumberOfFragments = numberOfFragments);
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> FragmentOffset(int fragmentOffset) => Assign(a => a.FragmentOffset = fragmentOffset);
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> Encoder(string encoder) => Assign(a => a.Encoder = encoder);
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> Order(string order) => Assign(a => a.Order = order);
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> RequireFieldMatch(bool requireFieldMatch) => Assign(a => a.RequireFieldMatch = requireFieldMatch);
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> BoundaryCharacters(string boundaryCharacters) => Assign(a => a.BoundaryChars = boundaryCharacters);
 
 		[Obsolete("Bad mapping use BoundaryMaxScan instead")]
 		public HighlightDescriptor<T> BoundaryMaxSize(int boundaryMaxSize) => Assign(a => a.BoundaryMaxSize = boundaryMaxSize);
+		// <inheritdoc/>
 		public HighlightDescriptor<T> BoundaryMaxScan(int boundaryMaxScan) => Assign(a => a.BoundaryMaxScan = boundaryMaxScan);
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> MaxFragmentLength(int? maxFragmentLength) => Assign(a => a.MaxFragmentLength = maxFragmentLength);
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> NoMatchSize(int? noMatchSize) => Assign(a => a.NoMatchSize = noMatchSize);
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> BoundaryScanner(BoundaryScanner? boundaryScanner) => Assign(a => a.BoundaryScanner = boundaryScanner);
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> BoundaryScannerLocale(string locale) => Assign(a => a.BoundaryScannerLocale = locale);
 
+		// <inheritdoc/>
 		public HighlightDescriptor<T> Fragmenter(HighlighterFragmenter? fragmenter) => Assign(a => a.Fragmenter = fragmenter);
 	}
 }
