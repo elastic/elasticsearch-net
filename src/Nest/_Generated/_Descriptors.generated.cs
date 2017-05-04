@@ -2975,13 +2975,11 @@ namespace Nest
 	{ 
 		Names IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_template/{name}</summary>
-		public IndexTemplateExistsDescriptor() : base(){}
+///<param name="name"> this parameter is required</param>
+		public IndexTemplateExistsDescriptor(Names name) : base(r=>r.Required("name", name)){}
 		
 
-			///<summary>The comma separated names of the index templates</summary>
-		public IndexTemplateExistsDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
-
-	
+		
 		///<summary>Return settings in flat format (default: false)</summary>
 		public IndexTemplateExistsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
@@ -6193,6 +6191,60 @@ namespace Nest
 	
 	}
 	
+	///<summary>descriptor for XpackInfo <pre>Retrieve information about xpack, including build number/timestamp and license status</pre></summary>
+	public partial class XpackInfoDescriptor  : RequestDescriptorBase<XpackInfoDescriptor,XpackInfoRequestParameters, IXpackInfoRequest>, IXpackInfoRequest
+	{ 
+			
+		///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
+		public XpackInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
+		public XpackInfoDescriptor Categories(params string[] categories) => AssignParam(p=>p.Categories(categories));
+
+		///<summary>Pretty format the returned JSON response.</summary>
+		public XpackInfoDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public XpackInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public XpackInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public XpackInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	
+	}
+	
+	///<summary>descriptor for XpackUsage <pre>Retrieve information about xpack features usage</pre></summary>
+	public partial class XpackUsageDescriptor  : RequestDescriptorBase<XpackUsageDescriptor,XpackUsageRequestParameters, IXpackUsageRequest>, IXpackUsageRequest
+	{ 
+			
+		///<summary>Specify timeout for watch write operation</summary>
+		public XpackUsageDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+
+		///<summary>Pretty format the returned JSON response.</summary>
+		public XpackUsageDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public XpackUsageDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public XpackUsageDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public XpackUsageDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public XpackUsageDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	
+	}
+	
 	///<summary>descriptor for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
 	public partial class DeleteLicenseDescriptor  : RequestDescriptorBase<DeleteLicenseDescriptor,DeleteLicenseRequestParameters, IDeleteLicenseRequest>, IDeleteLicenseRequest
 	{ 
@@ -6402,6 +6454,39 @@ namespace Nest
 	
 	}
 	
+	///<summary>descriptor for XpackSecurityDeleteRoleMapping <pre>Deletes a native role mapping (Documentation WIP)</pre></summary>
+	public partial class XpackSecurityDeleteRoleMappingDescriptor  : RequestDescriptorBase<XpackSecurityDeleteRoleMappingDescriptor,XpackSecurityDeleteRoleMappingRequestParameters, IXpackSecurityDeleteRoleMappingRequest>, IXpackSecurityDeleteRoleMappingRequest
+	{ 
+		Name IXpackSecurityDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_xpack/security/role_mapping/{name}</summary>
+///<param name="name"> this parameter is required</param>
+		public XpackSecurityDeleteRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		
+
+		
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public XpackSecurityDeleteRoleMappingDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
+
+		///<summary>Pretty format the returned JSON response.</summary>
+		public XpackSecurityDeleteRoleMappingDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public XpackSecurityDeleteRoleMappingDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public XpackSecurityDeleteRoleMappingDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public XpackSecurityDeleteRoleMappingDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public XpackSecurityDeleteRoleMappingDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	
+	}
+	
 	///<summary>descriptor for XpackSecurityDeleteUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-delete-user</pre></summary>
 	public partial class DeleteUserDescriptor  : RequestDescriptorBase<DeleteUserDescriptor,DeleteUserRequestParameters, IDeleteUserRequest>, IDeleteUserRequest
 	{ 
@@ -6525,6 +6610,62 @@ namespace Nest
 	
 	}
 	
+	///<summary>descriptor for XpackSecurityGetRoleMapping <pre>Retrieves a native role mapping (Documentation WIP)</pre></summary>
+	public partial class XpackSecurityGetRoleMappingDescriptor  : RequestDescriptorBase<XpackSecurityGetRoleMappingDescriptor,XpackSecurityGetRoleMappingRequestParameters, IXpackSecurityGetRoleMappingRequest>, IXpackSecurityGetRoleMappingRequest
+	{ 
+		Name IXpackSecurityGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_xpack/security/role_mapping/{name}</summary>
+		public XpackSecurityGetRoleMappingDescriptor() : base(){}
+		
+
+			///<summary>Role-Mapping name</summary>
+		public XpackSecurityGetRoleMappingDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
+
+	
+		///<summary>Pretty format the returned JSON response.</summary>
+		public XpackSecurityGetRoleMappingDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public XpackSecurityGetRoleMappingDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public XpackSecurityGetRoleMappingDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public XpackSecurityGetRoleMappingDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public XpackSecurityGetRoleMappingDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	
+	}
+	
+	///<summary>descriptor for XpackSecurityGetToken <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-get-token</pre></summary>
+	public partial class XpackSecurityGetTokenDescriptor  : RequestDescriptorBase<XpackSecurityGetTokenDescriptor,XpackSecurityGetTokenRequestParameters, IXpackSecurityGetTokenRequest>, IXpackSecurityGetTokenRequest
+	{ 
+			
+		///<summary>Pretty format the returned JSON response.</summary>
+		public XpackSecurityGetTokenDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public XpackSecurityGetTokenDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public XpackSecurityGetTokenDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public XpackSecurityGetTokenDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public XpackSecurityGetTokenDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	
+	}
+	
 	///<summary>descriptor for XpackSecurityGetUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-get-user</pre></summary>
 	public partial class GetUserDescriptor  : RequestDescriptorBase<GetUserDescriptor,GetUserRequestParameters, IGetUserRequest>, IGetUserRequest
 	{ 
@@ -6551,6 +6692,30 @@ namespace Nest
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetUserDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for XpackSecurityInvalidateToken <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-invalidate-token</pre></summary>
+	public partial class XpackSecurityInvalidateTokenDescriptor  : RequestDescriptorBase<XpackSecurityInvalidateTokenDescriptor,XpackSecurityInvalidateTokenRequestParameters, IXpackSecurityInvalidateTokenRequest>, IXpackSecurityInvalidateTokenRequest
+	{ 
+			
+		///<summary>Pretty format the returned JSON response.</summary>
+		public XpackSecurityInvalidateTokenDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public XpackSecurityInvalidateTokenDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public XpackSecurityInvalidateTokenDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public XpackSecurityInvalidateTokenDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public XpackSecurityInvalidateTokenDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	
 	}
 	
@@ -6581,6 +6746,39 @@ namespace Nest
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutRoleDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for XpackSecurityPutRoleMapping <pre>Stores a native role mapping (Documentation WIP)</pre></summary>
+	public partial class XpackSecurityPutRoleMappingDescriptor  : RequestDescriptorBase<XpackSecurityPutRoleMappingDescriptor,XpackSecurityPutRoleMappingRequestParameters, IXpackSecurityPutRoleMappingRequest>, IXpackSecurityPutRoleMappingRequest
+	{ 
+		Name IXpackSecurityPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_xpack/security/role_mapping/{name}</summary>
+///<param name="name"> this parameter is required</param>
+		public XpackSecurityPutRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		
+
+		
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public XpackSecurityPutRoleMappingDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
+
+		///<summary>Pretty format the returned JSON response.</summary>
+		public XpackSecurityPutRoleMappingDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public XpackSecurityPutRoleMappingDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public XpackSecurityPutRoleMappingDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public XpackSecurityPutRoleMappingDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public XpackSecurityPutRoleMappingDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	
 	}
 	

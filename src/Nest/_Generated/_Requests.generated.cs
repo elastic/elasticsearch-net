@@ -4863,8 +4863,8 @@ namespace Nest
 		protected IIndexTemplateExistsRequest Self => this;
 		Names IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_template/{name}</summary>
-///<param name="name">Optional, accepts null</param>
-		public IndexTemplateExistsRequest(Names name) : base(r=>r.Optional("name", name)){}
+///<param name="name">this parameter is required</param>
+		public IndexTemplateExistsRequest(Names name) : base(r=>r.Required("name", name)){}
 		
 
 			///<summary>Return settings in flat format (default: false)</summary>
@@ -8119,5 +8119,231 @@ namespace Nest
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IXpackInfoRequest : IRequest<XpackInfoRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for XpackInfo <pre>Retrieve information about xpack, including build number/timestamp and license status</pre></summary>
+	public partial class XpackInfoRequest  : PlainRequestBase<XpackInfoRequestParameters>, IXpackInfoRequest
+	{
+		protected IXpackInfoRequest Self => this;
+				///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
+		public  string[] Categories { get { return Q< string[]>("categories"); } set { Q("categories", value); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IXpackSecurityDeleteRoleMappingRequest : IRequest<XpackSecurityDeleteRoleMappingRequestParameters> 
+	{
+		Name Name { get; }
+	 } 
+	///<summary>Request parameters for XpackSecurityDeleteRoleMapping <pre>Deletes a native role mapping (Documentation WIP)</pre></summary>
+	public partial class XpackSecurityDeleteRoleMappingRequest  : PlainRequestBase<XpackSecurityDeleteRoleMappingRequestParameters>, IXpackSecurityDeleteRoleMappingRequest
+	{
+		protected IXpackSecurityDeleteRoleMappingRequest Self => this;
+		Name IXpackSecurityDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_xpack/security/role_mapping/{name}</summary>
+///<param name="name">this parameter is required</param>
+		public XpackSecurityDeleteRoleMappingRequest(Name name) : base(r=>r.Required("name", name)){}
+		
+
+			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IXpackSecurityGetRoleMappingRequest : IRequest<XpackSecurityGetRoleMappingRequestParameters> 
+	{
+		Name Name { get; }
+	 } 
+	///<summary>Request parameters for XpackSecurityGetRoleMapping <pre>Retrieves a native role mapping (Documentation WIP)</pre></summary>
+	public partial class XpackSecurityGetRoleMappingRequest  : PlainRequestBase<XpackSecurityGetRoleMappingRequestParameters>, IXpackSecurityGetRoleMappingRequest
+	{
+		protected IXpackSecurityGetRoleMappingRequest Self => this;
+		Name IXpackSecurityGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_xpack/security/role_mapping/{name}</summary>
+///<param name="name">Optional, accepts null</param>
+		public XpackSecurityGetRoleMappingRequest(Name name) : base(r=>r.Optional("name", name)){}
+		
+
+		/// <summary>/_xpack/security/role_mapping</summary>
+		public XpackSecurityGetRoleMappingRequest() : base(){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IXpackSecurityGetTokenRequest : IRequest<XpackSecurityGetTokenRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for XpackSecurityGetToken <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-get-token</pre></summary>
+	public partial class XpackSecurityGetTokenRequest  : PlainRequestBase<XpackSecurityGetTokenRequestParameters>, IXpackSecurityGetTokenRequest
+	{
+		protected IXpackSecurityGetTokenRequest Self => this;
+				///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IXpackSecurityInvalidateTokenRequest : IRequest<XpackSecurityInvalidateTokenRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for XpackSecurityInvalidateToken <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-invalidate-token</pre></summary>
+	public partial class XpackSecurityInvalidateTokenRequest  : PlainRequestBase<XpackSecurityInvalidateTokenRequestParameters>, IXpackSecurityInvalidateTokenRequest
+	{
+		protected IXpackSecurityInvalidateTokenRequest Self => this;
+				///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IXpackSecurityPutRoleMappingRequest : IRequest<XpackSecurityPutRoleMappingRequestParameters> 
+	{
+		Name Name { get; }
+	 } 
+	///<summary>Request parameters for XpackSecurityPutRoleMapping <pre>Stores a native role mapping (Documentation WIP)</pre></summary>
+	public partial class XpackSecurityPutRoleMappingRequest  : PlainRequestBase<XpackSecurityPutRoleMappingRequestParameters>, IXpackSecurityPutRoleMappingRequest
+	{
+		protected IXpackSecurityPutRoleMappingRequest Self => this;
+		Name IXpackSecurityPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_xpack/security/role_mapping/{name}</summary>
+///<param name="name">this parameter is required</param>
+		public XpackSecurityPutRoleMappingRequest(Name name) : base(r=>r.Required("name", name)){}
+		
+
+			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IXpackUsageRequest : IRequest<XpackUsageRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for XpackUsage <pre>Retrieve information about xpack features usage</pre></summary>
+	public partial class XpackUsageRequest  : PlainRequestBase<XpackUsageRequestParameters>, IXpackUsageRequest
+	{
+		protected IXpackUsageRequest Self => this;
+				///<summary>Specify timeout for watch write operation</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
 }
  

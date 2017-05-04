@@ -6314,6 +6314,74 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for XpackInfo
+	///<pre>
+	///Retrieve information about xpack, including build number/timestamp and license status
+	///</pre>
+	///</summary>
+	public class XpackInfoRequestParameters : FluentRequestParameters<XpackInfoRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
+		public XpackInfoRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
+		public XpackInfoRequestParameters Categories(params string[] categories) => this.AddQueryString("categories", categories);
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public XpackInfoRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public XpackInfoRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public XpackInfoRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public XpackInfoRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackUsage
+	///<pre>
+	///Retrieve information about xpack features usage
+	///</pre>
+	///</summary>
+	public class XpackUsageRequestParameters : FluentRequestParameters<XpackUsageRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Specify timeout for watch write operation</summary>
+		public XpackUsageRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public XpackUsageRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public XpackUsageRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public XpackUsageRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public XpackUsageRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public XpackUsageRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for XpackLicenseDelete
 	///<pre>
 	///https://www.elastic.co/guide/en/shield/current/license-management.html
@@ -6574,6 +6642,40 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for XpackSecurityDeleteRoleMapping
+	///<pre>
+	///Deletes a native role mapping (Documentation WIP)
+	///</pre>
+	///</summary>
+	public class XpackSecurityDeleteRoleMappingRequestParameters : FluentRequestParameters<XpackSecurityDeleteRoleMappingRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public XpackSecurityDeleteRoleMappingRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public XpackSecurityDeleteRoleMappingRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public XpackSecurityDeleteRoleMappingRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public XpackSecurityDeleteRoleMappingRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public XpackSecurityDeleteRoleMappingRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public XpackSecurityDeleteRoleMappingRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for XpackSecurityDeleteUser
 	///<pre>
 	///https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-delete-user
@@ -6706,6 +6808,66 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for XpackSecurityGetRoleMapping
+	///<pre>
+	///Retrieves a native role mapping (Documentation WIP)
+	///</pre>
+	///</summary>
+	public class XpackSecurityGetRoleMappingRequestParameters : FluentRequestParameters<XpackSecurityGetRoleMappingRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public XpackSecurityGetRoleMappingRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public XpackSecurityGetRoleMappingRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public XpackSecurityGetRoleMappingRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public XpackSecurityGetRoleMappingRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public XpackSecurityGetRoleMappingRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackSecurityGetToken
+	///<pre>
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-get-token
+	///</pre>
+	///</summary>
+	public class XpackSecurityGetTokenRequestParameters : FluentRequestParameters<XpackSecurityGetTokenRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public XpackSecurityGetTokenRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public XpackSecurityGetTokenRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public XpackSecurityGetTokenRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public XpackSecurityGetTokenRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public XpackSecurityGetTokenRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for XpackSecurityGetUser
 	///<pre>
 	///https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-get-user
@@ -6733,6 +6895,36 @@ namespace Elasticsearch.Net
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetUserRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackSecurityInvalidateToken
+	///<pre>
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-invalidate-token
+	///</pre>
+	///</summary>
+	public class XpackSecurityInvalidateTokenRequestParameters : FluentRequestParameters<XpackSecurityInvalidateTokenRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public XpackSecurityInvalidateTokenRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public XpackSecurityInvalidateTokenRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public XpackSecurityInvalidateTokenRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public XpackSecurityInvalidateTokenRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public XpackSecurityInvalidateTokenRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -6767,6 +6959,40 @@ namespace Elasticsearch.Net
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutRoleRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackSecurityPutRoleMapping
+	///<pre>
+	///Stores a native role mapping (Documentation WIP)
+	///</pre>
+	///</summary>
+	public class XpackSecurityPutRoleMappingRequestParameters : FluentRequestParameters<XpackSecurityPutRoleMappingRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public XpackSecurityPutRoleMappingRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public XpackSecurityPutRoleMappingRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public XpackSecurityPutRoleMappingRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public XpackSecurityPutRoleMappingRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public XpackSecurityPutRoleMappingRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public XpackSecurityPutRoleMappingRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	

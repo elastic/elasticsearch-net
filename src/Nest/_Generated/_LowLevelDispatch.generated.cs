@@ -1413,7 +1413,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case HEAD:
-					if (AllSet(p.RouteValues.Name)) return _lowLevel.IndicesExistsTemplateForAll<T>(p.RouteValues.Name,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.IndicesExistsTemplateForAll<T>(p.RouteValues.Name,u => p.RequestParameters);
 					break;
 
 			}
@@ -1425,7 +1425,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case HEAD:
-					if (AllSet(p.RouteValues.Name)) return _lowLevel.IndicesExistsTemplateForAllAsync<T>(p.RouteValues.Name,u => p.RequestParameters,cancellationToken);
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.IndicesExistsTemplateForAllAsync<T>(p.RouteValues.Name,u => p.RequestParameters,cancellationToken);
 					break;
 
 			}
@@ -3254,6 +3254,50 @@ namespace Nest
 			throw InvalidDispatch("XpackGraphExplore", p, new [] { GET, POST }, "/{index}/_xpack/_graph/_explore", "/{index}/{type}/_xpack/_graph/_explore");
 		}
 		
+		internal ElasticsearchResponse<T> XpackInfoDispatch<T>(IRequest<XpackInfoRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.XpackInfo<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackInfo", p, new [] { GET }, "/_xpack");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackInfoDispatchAsync<T>(IRequest<XpackInfoRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.XpackInfoAsync<T>(u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackInfo", p, new [] { GET }, "/_xpack");
+		}
+		
+		internal ElasticsearchResponse<T> XpackUsageDispatch<T>(IRequest<XpackUsageRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.XpackUsage<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackUsage", p, new [] { GET }, "/_xpack/usage");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackUsageDispatchAsync<T>(IRequest<XpackUsageRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.XpackUsageAsync<T>(u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackUsage", p, new [] { GET }, "/_xpack/usage");
+		}
+		
 		internal ElasticsearchResponse<T> XpackLicenseDeleteDispatch<T>(IRequest<DeleteLicenseRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
@@ -3446,6 +3490,30 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityDeleteRole", p, new [] { DELETE }, "/_xpack/security/role/{name}");
 		}
 		
+		internal ElasticsearchResponse<T> XpackSecurityDeleteRoleMappingDispatch<T>(IRequest<XpackSecurityDeleteRoleMappingRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.XpackSecurityDeleteRoleMapping<T>(p.RouteValues.Name,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackSecurityDeleteRoleMapping", p, new [] { DELETE }, "/_xpack/security/role_mapping/{name}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackSecurityDeleteRoleMappingDispatchAsync<T>(IRequest<XpackSecurityDeleteRoleMappingRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.XpackSecurityDeleteRoleMappingAsync<T>(p.RouteValues.Name,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackSecurityDeleteRoleMapping", p, new [] { DELETE }, "/_xpack/security/role_mapping/{name}");
+		}
+		
 		internal ElasticsearchResponse<T> XpackSecurityDeleteUserDispatch<T>(IRequest<DeleteUserRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
@@ -3558,6 +3626,52 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityGetRole", p, new [] { GET }, "/_xpack/security/role/{name}", "/_xpack/security/role");
 		}
 		
+		internal ElasticsearchResponse<T> XpackSecurityGetRoleMappingDispatch<T>(IRequest<XpackSecurityGetRoleMappingRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.XpackSecurityGetRoleMapping<T>(p.RouteValues.Name,u => p.RequestParameters);
+					return _lowLevel.XpackSecurityGetRoleMapping<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackSecurityGetRoleMapping", p, new [] { GET }, "/_xpack/security/role_mapping/{name}", "/_xpack/security/role_mapping");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackSecurityGetRoleMappingDispatchAsync<T>(IRequest<XpackSecurityGetRoleMappingRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.XpackSecurityGetRoleMappingAsync<T>(p.RouteValues.Name,u => p.RequestParameters,cancellationToken);
+					return _lowLevel.XpackSecurityGetRoleMappingAsync<T>(u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackSecurityGetRoleMapping", p, new [] { GET }, "/_xpack/security/role_mapping/{name}", "/_xpack/security/role_mapping");
+		}
+		
+		internal ElasticsearchResponse<T> XpackSecurityGetTokenDispatch<T>(IRequest<XpackSecurityGetTokenRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					return _lowLevel.XpackSecurityGetToken<T>(body,u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackSecurityGetToken", p, new [] { POST }, "/_xpack/security/oauth2/token");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackSecurityGetTokenDispatchAsync<T>(IRequest<XpackSecurityGetTokenRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					return _lowLevel.XpackSecurityGetTokenAsync<T>(body,u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackSecurityGetToken", p, new [] { POST }, "/_xpack/security/oauth2/token");
+		}
+		
 		internal ElasticsearchResponse<T> XpackSecurityGetUserDispatch<T>(IRequest<GetUserRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
@@ -3580,6 +3694,28 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("XpackSecurityGetUser", p, new [] { GET }, "/_xpack/security/user/{username}", "/_xpack/security/user");
+		}
+		
+		internal ElasticsearchResponse<T> XpackSecurityInvalidateTokenDispatch<T>(IRequest<XpackSecurityInvalidateTokenRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					return _lowLevel.XpackSecurityInvalidateToken<T>(body,u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackSecurityInvalidateToken", p, new [] { DELETE }, "/_xpack/security/oauth2/token");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackSecurityInvalidateTokenDispatchAsync<T>(IRequest<XpackSecurityInvalidateTokenRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					return _lowLevel.XpackSecurityInvalidateTokenAsync<T>(body,u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackSecurityInvalidateToken", p, new [] { DELETE }, "/_xpack/security/oauth2/token");
 		}
 		
 		internal ElasticsearchResponse<T> XpackSecurityPutRoleDispatch<T>(IRequest<PutRoleRequestParameters> p , PostData<object> body) where T : class
@@ -3612,6 +3748,38 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("XpackSecurityPutRole", p, new [] { PUT, POST }, "/_xpack/security/role/{name}");
+		}
+		
+		internal ElasticsearchResponse<T> XpackSecurityPutRoleMappingDispatch<T>(IRequest<XpackSecurityPutRoleMappingRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.XpackSecurityPutRoleMapping<T>(p.RouteValues.Name,body,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.XpackSecurityPutRoleMappingPost<T>(p.RouteValues.Name,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackSecurityPutRoleMapping", p, new [] { PUT, POST }, "/_xpack/security/role_mapping/{name}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackSecurityPutRoleMappingDispatchAsync<T>(IRequest<XpackSecurityPutRoleMappingRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.XpackSecurityPutRoleMappingAsync<T>(p.RouteValues.Name,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.XpackSecurityPutRoleMappingPostAsync<T>(p.RouteValues.Name,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackSecurityPutRoleMapping", p, new [] { PUT, POST }, "/_xpack/security/role_mapping/{name}");
 		}
 		
 		internal ElasticsearchResponse<T> XpackSecurityPutUserDispatch<T>(IRequest<PutUserRequestParameters> p , PostData<object> body) where T : class

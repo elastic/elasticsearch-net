@@ -7475,6 +7475,54 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackGraphExploreAsync<T>(string index, string type, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
+		///<summary>Represents a GET on /_xpack
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: Retrieve information about xpack, including build number/timestamp and license status </para>
+		///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackInfo<T>(Func<XpackInfoRequestParameters, XpackInfoRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a GET on /_xpack
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: Retrieve information about xpack, including build number/timestamp and license status </para>
+		///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackInfoAsync<T>(Func<XpackInfoRequestParameters, XpackInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a GET on /_xpack/usage
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: Retrieve information about xpack features usage </para>
+		///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackUsage<T>(Func<XpackUsageRequestParameters, XpackUsageRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a GET on /_xpack/usage
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: Retrieve information about xpack features usage </para>
+		///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackUsageAsync<T>(Func<XpackUsageRequestParameters, XpackUsageRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
 		///<summary>Represents a DELETE on /_xpack/license
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7759,6 +7807,32 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityDeleteRoleAsync<T>(string name, Func<DeleteRoleRequestParameters, DeleteRoleRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
+		///<summary>Represents a DELETE on /_xpack/security/role_mapping/{name}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: Deletes a native role mapping (Documentation WIP) </para>
+		///</summary>
+		///<param name="name">Role-mapping name</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackSecurityDeleteRoleMapping<T>(string name, Func<XpackSecurityDeleteRoleMappingRequestParameters, XpackSecurityDeleteRoleMappingRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a DELETE on /_xpack/security/role_mapping/{name}
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: Deletes a native role mapping (Documentation WIP) </para>
+		///</summary>
+		///<param name="name">Role-mapping name</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackSecurityDeleteRoleMappingAsync<T>(string name, Func<XpackSecurityDeleteRoleMappingRequestParameters, XpackSecurityDeleteRoleMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
 		///<summary>Represents a DELETE on /_xpack/security/user/{username}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7939,6 +8013,82 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityGetRoleAsync<T>(Func<GetRoleRequestParameters, GetRoleRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
+		///<summary>Represents a GET on /_xpack/security/role_mapping/{name}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: Retrieves a native role mapping (Documentation WIP) </para>
+		///</summary>
+		///<param name="name">Role-Mapping name</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackSecurityGetRoleMapping<T>(string name, Func<XpackSecurityGetRoleMappingRequestParameters, XpackSecurityGetRoleMappingRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a GET on /_xpack/security/role_mapping/{name}
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: Retrieves a native role mapping (Documentation WIP) </para>
+		///</summary>
+		///<param name="name">Role-Mapping name</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackSecurityGetRoleMappingAsync<T>(string name, Func<XpackSecurityGetRoleMappingRequestParameters, XpackSecurityGetRoleMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a GET on /_xpack/security/role_mapping
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: Retrieves a native role mapping (Documentation WIP) </para>
+		///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackSecurityGetRoleMapping<T>(Func<XpackSecurityGetRoleMappingRequestParameters, XpackSecurityGetRoleMappingRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a GET on /_xpack/security/role_mapping
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: Retrieves a native role mapping (Documentation WIP) </para>
+		///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackSecurityGetRoleMappingAsync<T>(Func<XpackSecurityGetRoleMappingRequestParameters, XpackSecurityGetRoleMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/security/oauth2/token
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-get-token </para>
+		///</summary>
+		///<param name="body">The token request to get</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackSecurityGetToken<T>(PostData<object> body, Func<XpackSecurityGetTokenRequestParameters, XpackSecurityGetTokenRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/security/oauth2/token
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-get-token </para>
+		///</summary>
+		///<param name="body">The token request to get</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackSecurityGetTokenAsync<T>(PostData<object> body, Func<XpackSecurityGetTokenRequestParameters, XpackSecurityGetTokenRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
 		///<summary>Represents a GET on /_xpack/security/user/{username}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7988,6 +8138,32 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityGetUserAsync<T>(Func<GetUserRequestParameters, GetUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a DELETE on /_xpack/security/oauth2/token
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-invalidate-token </para>
+		///</summary>
+		///<param name="body">The token to invalidate</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackSecurityInvalidateToken<T>(PostData<object> body, Func<XpackSecurityInvalidateTokenRequestParameters, XpackSecurityInvalidateTokenRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a DELETE on /_xpack/security/oauth2/token
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-invalidate-token </para>
+		///</summary>
+		///<param name="body">The token to invalidate</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackSecurityInvalidateTokenAsync<T>(PostData<object> body, Func<XpackSecurityInvalidateTokenRequestParameters, XpackSecurityInvalidateTokenRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a PUT on /_xpack/security/role/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -8044,6 +8220,62 @@ namespace Elasticsearch.Net
 		///<param name="body">The role to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityPutRolePostAsync<T>(string name, PostData<object> body, Func<PutRoleRequestParameters, PutRoleRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a PUT on /_xpack/security/role_mapping/{name}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: Stores a native role mapping (Documentation WIP) </para>
+		///</summary>
+		///<param name="name">Role-mapping name</param>
+		///<param name="body">The role to add</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackSecurityPutRoleMapping<T>(string name, PostData<object> body, Func<XpackSecurityPutRoleMappingRequestParameters, XpackSecurityPutRoleMappingRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a PUT on /_xpack/security/role_mapping/{name}
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: Stores a native role mapping (Documentation WIP) </para>
+		///</summary>
+		///<param name="name">Role-mapping name</param>
+		///<param name="body">The role to add</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackSecurityPutRoleMappingAsync<T>(string name, PostData<object> body, Func<XpackSecurityPutRoleMappingRequestParameters, XpackSecurityPutRoleMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/security/role_mapping/{name}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: Stores a native role mapping (Documentation WIP) </para>
+		///</summary>
+		///<param name="name">Role-mapping name</param>
+		///<param name="body">The role to add</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> XpackSecurityPutRoleMappingPost<T>(string name, PostData<object> body, Func<XpackSecurityPutRoleMappingRequestParameters, XpackSecurityPutRoleMappingRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a POST on /_xpack/security/role_mapping/{name}
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: Stores a native role mapping (Documentation WIP) </para>
+		///</summary>
+		///<param name="name">Role-mapping name</param>
+		///<param name="body">The role to add</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> XpackSecurityPutRoleMappingPostAsync<T>(string name, PostData<object> body, Func<XpackSecurityPutRoleMappingRequestParameters, XpackSecurityPutRoleMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a PUT on /_xpack/security/user/{username}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
