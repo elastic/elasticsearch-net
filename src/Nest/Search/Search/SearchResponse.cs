@@ -8,69 +8,69 @@ namespace Nest
 {
 	public interface ISearchResponse<T> : IResponse where T : class
 	{
-        /// <summary>
-        /// Gets the meta data about the shards on which the search query was executed.
-        /// </summary>
-        ShardsMetaData Shards { get; }
+		/// <summary>
+		/// Gets the meta data about the shards on which the search query was executed.
+		/// </summary>
+		ShardsMetaData Shards { get; }
 
-        /// <summary>
-        /// Gets the meta data about the hits that match the search query criteria.
-        /// </summary>
-        HitsMetaData<T> HitsMetaData { get; }
+		/// <summary>
+		/// Gets the meta data about the hits that match the search query criteria.
+		/// </summary>
+		HitsMetaData<T> HitsMetaData { get; }
 
-        /// <summary>
-        /// Gets the collection of aggregations
-        /// </summary>
-        IReadOnlyDictionary<string, IAggregate> Aggregations { get; }
+		/// <summary>
+		/// Gets the collection of aggregations
+		/// </summary>
+		IReadOnlyDictionary<string, IAggregate> Aggregations { get; }
 
-        /// <summary>
-        /// Gets the results of profiling the search query. Has a value only when
-        /// <see cref="ISearchRequest.Profile"/> is set to <c>true</c> on the search request.
-        /// </summary>
-        Profile Profile { get; }
+		/// <summary>
+		/// Gets the results of profiling the search query. Has a value only when
+		/// <see cref="ISearchRequest.Profile"/> is set to <c>true</c> on the search request.
+		/// </summary>
+		Profile Profile { get; }
 
-        /// <summary>
-        /// Gets the aggregations helper that can be used to more easily handle aggregation
-        /// results.
-        /// </summary>
-        AggregationsHelper Aggs { get; }
+		/// <summary>
+		/// Gets the aggregations helper that can be used to more easily handle aggregation
+		/// results.
+		/// </summary>
+		AggregationsHelper Aggs { get; }
 
-        /// <summary>
-        /// Gets the suggester results.
-        /// </summary>
-        IReadOnlyDictionary<string, Suggest<T>[]> Suggest { get; }
+		/// <summary>
+		/// Gets the suggester results.
+		/// </summary>
+		IReadOnlyDictionary<string, Suggest<T>[]> Suggest { get; }
 
-        /// <summary>
-        /// Time in milliseconds for Elasticsearch to execute the search
-        /// </summary>
-        long Took { get; }
+		/// <summary>
+		/// Time in milliseconds for Elasticsearch to execute the search
+		/// </summary>
+		long Took { get; }
 
-        /// <summary>
-        /// Gets a value indicating whether the search timed out or not
-        /// </summary>
-        bool TimedOut { get; }
+		/// <summary>
+		/// Gets a value indicating whether the search timed out or not
+		/// </summary>
+		bool TimedOut { get; }
 
-        /// <summary>
-        /// Gets a value indicating whether the search was terminated early
-        /// </summary>
-        bool TerminatedEarly { get; }
+		/// <summary>
+		/// Gets a value indicating whether the search was terminated early
+		/// </summary>
+		bool TerminatedEarly { get; }
 
-        /// <summary>
-        /// Gets the scroll id which can be passed to the Scroll API in order to retrieve the next batch
-        /// of results. Has a value only when <see cref="SearchRequest{T}.Scroll"/> is specified on the 
-        /// search request
-        /// </summary>
-        string ScrollId { get; }
+		/// <summary>
+		/// Gets the scroll id which can be passed to the Scroll API in order to retrieve the next batch
+		/// of results. Has a value only when <see cref="SearchRequest{T}.Scroll"/> is specified on the
+		/// search request
+		/// </summary>
+		string ScrollId { get; }
 
-        /// <summary>
-        /// Gets the total number of documents matching the search query criteria
-        /// </summary>
-        long Total { get; }
+		/// <summary>
+		/// Gets the total number of documents matching the search query criteria
+		/// </summary>
+		long Total { get; }
 
-        /// <summary>
-        /// Gets the maximum score for documents matching the search query criteria
-        /// </summary>
-        double MaxScore { get; }
+		/// <summary>
+		/// Gets the maximum score for documents matching the search query criteria
+		/// </summary>
+		double MaxScore { get; }
 
 		IReadOnlyCollection<T> Documents { get; }
 
@@ -89,19 +89,19 @@ namespace Nest
 		/// </summary>
 		IReadOnlyCollection<T> Documents { get; }
 
-        /// <summary>
-        /// Gets the collection of hits that matched the query
-        /// </summary>
-        /// <value>
-        /// The hits.
-        /// </value>
-        IReadOnlyCollection<IHit<T>> Hits { get; }
+		/// <summary>
+		/// Gets the collection of hits that matched the query
+		/// </summary>
+		/// <value>
+		/// The hits.
+		/// </value>
+		IReadOnlyCollection<IHit<T>> Hits { get; }
 
-        /// <summary>
-        /// Gets the field values inside the hits, when the search request uses 
-        /// <see cref="SearchRequest{T}.StoredFields"/>.
-        /// </summary>
-        IReadOnlyCollection<FieldValues> Fields { get; }
+		/// <summary>
+		/// Gets the field values inside the hits, when the search request uses
+		/// <see cref="SearchRequest{T}.StoredFields"/>.
+		/// </summary>
+		IReadOnlyCollection<FieldValues> Fields { get; }
 	}
 
 	[JsonObject]
@@ -121,6 +121,7 @@ namespace Nest
 		public Profile Profile { get; internal set; }
 
 		private AggregationsHelper _agg;
+
 		[JsonIgnore]
 		public AggregationsHelper Aggs => _agg ?? (_agg = new AggregationsHelper(this.Aggregations));
 
@@ -156,6 +157,7 @@ namespace Nest
 		public double MaxScore => this.HitsMetaData?.MaxScore ?? 0;
 
 		private IReadOnlyCollection<T> _documents;
+
 		/// <inheritdoc/>
 		[JsonIgnore]
 		public IReadOnlyCollection<T> Documents =>
@@ -164,6 +166,7 @@ namespace Nest
 				.ToList());
 
 		private IReadOnlyCollection<IHit<T>> _hits;
+
 		[JsonIgnore]
 		public IReadOnlyCollection<IHit<T>> Hits =>
 			this._hits ?? (this._hits = this.HitsMetaData?.Hits ?? EmptyReadOnly<IHit<T>>.Collection);
@@ -172,9 +175,8 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public IReadOnlyCollection<FieldValues> Fields =>
-				this._fields ?? (this._fields = this.Hits
-					.Select(h => h.Fields)
-					.ToList());
-
+			this._fields ?? (this._fields = this.Hits
+				.Select(h => h.Fields)
+				.ToList());
 	}
 }
