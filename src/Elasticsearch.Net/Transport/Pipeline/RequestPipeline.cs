@@ -123,6 +123,8 @@ namespace Elasticsearch.Net
 				};
 		}
 
+		public void AuditCancellationRequested() => Audit(CancellationRequested).Dispose();
+
 		public void MarkDead(Node node)
 		{
 			var deadUntil = this._dateTimeProvider.DeadTime(node.FailedAttempts, this._settings.DeadTimeout, this._settings.MaxDeadTimeout);

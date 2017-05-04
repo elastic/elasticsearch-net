@@ -77,6 +77,10 @@ namespace Elasticsearch.Net
 				if (response.Content != null)
 					builder.Stream = response.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
 			}
+			catch (TaskCanceledException e)
+			{
+				builder.Exception = e;
+			}
 			catch (HttpRequestException e)
 			{
 				builder.Exception = e;
@@ -101,6 +105,10 @@ namespace Elasticsearch.Net
 
 				if (response.Content != null)
 					builder.Stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+			}
+			catch (TaskCanceledException e)
+			{
+				builder.Exception = e;
 			}
 			catch (HttpRequestException e)
 			{

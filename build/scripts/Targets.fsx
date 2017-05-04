@@ -49,7 +49,9 @@ Target "Profile" <| fun _ ->
     let url = getBuildParam "elasticsearch"
     Profiler.IndexResults url
 
-Target "Integrate"  Tests.RunIntegrationTests 
+Target "Integrate" <| fun _ ->
+    let target = if getBuildParam "integrateclr" = "one" then Tests.MultiTarget.One else Tests.MultiTarget.All
+    Tests.RunIntegrationTests target
 
 Target "Benchmark" Benchmarker.Run
 
