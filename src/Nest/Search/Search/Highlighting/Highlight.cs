@@ -74,6 +74,13 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("boundary_scanner_locale")]
 		string BoundaryScannerLocale { get; set; }
+
+		/// <summary>
+		/// Fragmenter can control how text should be broken up in highlight snippets. However, this option is
+		/// applicable only for the Plain Highlighter
+		/// </summary>
+		[JsonProperty("fragmenter")]
+		HighlighterFragmenter? Fragmenter { get; set; }
 	}
 
 	public class Highlight : IHighlight
@@ -96,6 +103,7 @@ namespace Nest
 		public int? NoMatchSize { get; set; }
 		public BoundaryScanner? BoundaryScanner { get; set; }
 		public string BoundaryScannerLocale { get; set; }
+		public HighlighterFragmenter? Fragmenter { get; set; }
 	}
 
 	public class HighlightDescriptor<T> : DescriptorBase<HighlightDescriptor<T> ,IHighlight>, IHighlight
@@ -119,6 +127,7 @@ namespace Nest
 		int? IHighlight.NoMatchSize { get; set; }
 		BoundaryScanner? IHighlight.BoundaryScanner { get; set; }
 		string IHighlight.BoundaryScannerLocale { get; set; }
+		HighlighterFragmenter? IHighlight.Fragmenter { get; set; }
 
 		public HighlightDescriptor<T> Fields(params Func<HighlightFieldDescriptor<T>, IHighlightField>[] fieldHighlighters) =>
 			Assign(a => a.Fields = fieldHighlighters?
@@ -165,5 +174,7 @@ namespace Nest
 		public HighlightDescriptor<T> BoundaryScanner(BoundaryScanner? boundaryScanner) => Assign(a => a.BoundaryScanner = boundaryScanner);
 
 		public HighlightDescriptor<T> BoundaryScannerLocale(string locale) => Assign(a => a.BoundaryScannerLocale = locale);
+
+		public HighlightDescriptor<T> Fragmenter(HighlighterFragmenter? fragmenter) => Assign(a => a.Fragmenter = fragmenter);
 	}
 }
