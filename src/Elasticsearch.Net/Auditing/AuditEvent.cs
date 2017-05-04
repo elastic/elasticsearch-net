@@ -20,5 +20,6 @@ namespace Elasticsearch.Net
 		MaxRetriesReached,
 		BadRequest,
 		NoNodesAttempted,
+		CancellationRequested,
 	}
 }
