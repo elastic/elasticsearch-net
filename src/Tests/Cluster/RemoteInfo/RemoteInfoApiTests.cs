@@ -10,6 +10,7 @@ using static Nest.Infer;
 
 namespace Tests.Cluster.RemoteInfo
 {
+	[SkipVersion("<5.4.0", "new API")]
 	public class RemoteInfoApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IRemoteInfoResponse, IRemoteInfoRequest, RemoteInfoDescriptor, RemoteInfoRequest>
 	{
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)

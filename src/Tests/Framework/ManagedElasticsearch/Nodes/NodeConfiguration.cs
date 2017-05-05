@@ -76,8 +76,10 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 				$"{es}{shieldOrSecurity}.enabled={b}",
 				$"{es}{shieldOrSecurity}.http.ssl.enabled={sslEnabled}",
 				$"{es}{shieldOrSecurity}.authc.realms.pki1.enabled={sslEnabled}",
-				$"{es}search.remote.connect=true"
+
 			};
+			if (v >= new ElasticsearchVersion("5.4.0"))
+				this.DefaultNodeSettings.Add($"{es}search.remote.connect=true");
 		}
 
 		public string[] CreateSettings(string[] additionalSettings)

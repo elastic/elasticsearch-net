@@ -121,8 +121,8 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 			//before the started notification to help debug failures to start
 			if (this.RunningOnCI && !this.Started)
 			{
-				if (consoleOut.Error) Console.Error.Write(consoleOut.Data);
-				else Console.Write(consoleOut.Data);
+				if (consoleOut.Error) Console.Error.WriteLine(consoleOut.Data);
+				else Console.WriteLine(consoleOut.Data);
 			}
 
 			if (consoleOut.Error && !this.Started) throw new Exception(consoleOut.Data);
