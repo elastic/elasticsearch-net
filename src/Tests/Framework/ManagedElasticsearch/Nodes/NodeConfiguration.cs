@@ -85,6 +85,11 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 			var settingMarker = this.ElasticsearchVersion.Major >= 5 ? "-E " : "-D";
 			return DefaultNodeSettings
 				.Concat(additionalSettings ?? Enumerable.Empty<string>())
+				//allow additional settings to take precedence over already DefaultNodeSettings
+				//without relying on elasticsearch to dedup, 5.4.0 no longer allows passing the same setting twice
+				//on the command with the latter taking precedence
+				.GroupBy(setting => setting.Split(new [] {'='}, 2, StringSplitOptions.RemoveEmptyEntries)[0])
+				.Select(g => g.Last())
 				.Select(s => $"{settingMarker}{s}")
 				.ToArray();
 		}

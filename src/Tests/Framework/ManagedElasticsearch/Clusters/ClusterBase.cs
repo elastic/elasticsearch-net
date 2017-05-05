@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Nest;
 using Tests.Framework.Configuration;
 using Tests.Framework.Integration;
