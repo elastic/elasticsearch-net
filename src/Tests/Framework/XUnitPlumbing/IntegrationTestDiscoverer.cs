@@ -25,9 +25,8 @@ namespace Tests.Framework
 				||  MethodSkipVersionAttributeSatisfies(method)
 				|| SkipWhenRunOnTeamCity(classOfMethod, method);
 		}
-		}
 
-		
+
 		private static bool SkipClassMarkedWithRequiresPluginFor2XSnapshotBuildTests(Type classOfMethod)
 		{
 			var v = TestClient.Configuration.ElasticsearchVersion;
