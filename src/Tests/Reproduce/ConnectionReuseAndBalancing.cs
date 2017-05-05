@@ -54,7 +54,13 @@ namespace Tests.Reproduce
 			this.AssertHttpStats(nodeStats);
 			for (var i = 0; i < 10; i++)
 			{
-				Parallel.For(0, 1000, c => client.Search<Project>(s => s));
+				var taskList = new Task[1000];
+				for (var t=0;t<1000;t++)
+				{
+					taskList[t] = client.SearchAsync<Project>();
+				}
+				//Parallel.For(0, 1000, c => client.Search<Project>(s => s));
+				Task.WaitAll(taskList);
 
 				nodeStats = await client.NodesStatsAsync(statsRequest);
 				this.AssertHttpStats(nodeStats);
