@@ -11,6 +11,7 @@ using static Nest.Infer;
 
 namespace Tests.Search.FieldCapabilities
 {
+	[SkipVersion("<5.4.0", "new API")]
 	public class FieldCapabilitiesApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, IFieldCapabilitiesResponse, IFieldCapabilitiesRequest, FieldCapabilitiesDescriptor, FieldCapabilitiesRequest>
 	{
