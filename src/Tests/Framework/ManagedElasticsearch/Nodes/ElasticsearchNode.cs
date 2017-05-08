@@ -32,10 +32,13 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 
 		public int Port { get; private set; } = 9200;
 
+		private bool RunningOnCI { get; }
+
 		public ElasticsearchNode(NodeConfiguration config)
 		{
 			this._config = config;
 			this.FileSystem = config.FileSystem;
+			this.RunningOnCI = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TEAMCITY_VERSION"));
 
 			if (this._config.RunIntegrationTests && !this._config.TestAgainstAlreadyRunningElasticsearch) return;
 		}
@@ -72,7 +75,11 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 
 				this.FreeResources();
 
-				if (UseAlreadyRunningInstance()) return;
+				if (UseAlreadyRunningInstance())
+				{
+					this.Started = true;
+					return;
+				}
 
 				var timeout = TimeSpan.FromMinutes(1);
 				var handle = new XplatManualResetEvent(false);
@@ -109,6 +116,14 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 		{
 			//no need to snoop for metadata if we already started
 			if (!this._config.RunIntegrationTests || this.Started) return;
+
+			//if we are running on CI and not started dump elasticsearch stdout/err
+			//before the started notification to help debug failures to start
+			if (this.RunningOnCI && !this.Started)
+			{
+				if (consoleOut.Error) Console.Error.WriteLine(consoleOut.Data);
+				else Console.WriteLine(consoleOut.Data);
+			}
 
 			if (consoleOut.Error && !this.Started) throw new Exception(consoleOut.Data);
 

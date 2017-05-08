@@ -75,6 +75,8 @@ namespace Elasticsearch.Net
 
 		public IEnumerable<string> DeprecationWarnings { get; internal set; } = Enumerable.Empty<string>();
 
+		internal bool AllowAllStatusCodes { get; }
+
 		/// <summary>
 		/// The response is successful or has a response code between 400-599, the call should not be retried.
 		/// Only on 502,503 and 504 will this return false;
@@ -99,7 +101,8 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse(int statusCode, IEnumerable<int> allowedStatusCodes)
 		{
 			var statusCodes = allowedStatusCodes as int[] ?? allowedStatusCodes.ToArray();
-			this.Success = statusCode >= 200 && statusCode < 300 || statusCodes.Contains(statusCode) || statusCodes.Contains(-1);
+			this.AllowAllStatusCodes = statusCodes.Contains(-1);
+			this.Success = statusCode >= 200 && statusCode < 300 || statusCodes.Contains(statusCode) || this.AllowAllStatusCodes;
 			this.HttpStatusCode = statusCode;
 		}
 

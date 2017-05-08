@@ -90,10 +90,6 @@ namespace Tests
 				var benchmarkSwitcher = new BenchmarkSwitcher(GetBenchmarkTypes());
 				benchmarkSwitcher.Run(arguments);
 			}
-			else
-			{
-				TestRunner.Run(arguments);
-			}
 		}
 
 #if !DOTNETCORE

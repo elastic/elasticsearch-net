@@ -169,6 +169,22 @@ namespace Tests.Framework
 			var settings = (modifySettings != null) ? modifySettings(defaultSettings) : defaultSettings;
 			return new ElasticClient(settings);
 		}
+		public static IElasticClient GetFixedStringResponseClient(
+			string response,
+			int statusCode = 200,
+			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
+			string contentType = "application/json",
+			Exception exception = null)
+		{
+			var fixedResult = Encoding.UTF8.GetBytes(response);
+
+			var connection = new InMemoryConnection(fixedResult, statusCode, exception);
+			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			var defaultSettings = new ConnectionSettings(connectionPool, connection)
+				.DefaultIndex("default-index");
+			var settings = (modifySettings != null) ? modifySettings(defaultSettings) : defaultSettings;
+			return new ElasticClient(settings);
+		}
 
 		private static string ExpensiveTestNameForIntegrationTests()
 		{

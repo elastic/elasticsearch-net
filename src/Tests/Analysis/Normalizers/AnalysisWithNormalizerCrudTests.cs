@@ -10,7 +10,7 @@ using static Tests.Framework.Promisify;
 namespace Tests.Analysis
 {
 
-	[SkipVersion("<5.2.0", "Normalizers are a new 5.2.0 feature")]
+	[SkipVersion("<5.4.0", "Normalizers are a new 5.2.0 feature, but this tests also tries to send new 5.4.0 token filters")]
 	public class AnalysisWithNormalizerCrudTests : AnalysisCrudTests
 	{
 		public AnalysisWithNormalizerCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

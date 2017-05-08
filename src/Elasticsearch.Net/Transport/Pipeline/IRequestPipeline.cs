@@ -47,5 +47,7 @@ namespace Elasticsearch.Net
 			where TReturn : class;
 
 		void ThrowNoNodesAttempted(RequestData requestData, List<PipelineException> seenExceptions);
+
+		void AuditCancellationRequested();
 	}
 }

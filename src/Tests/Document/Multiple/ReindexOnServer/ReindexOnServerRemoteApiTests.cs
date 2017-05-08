@@ -15,7 +15,7 @@ using static Nest.Infer;
 namespace Tests.Document.Multiple.ReindexOnServer
 {
 	[SkipVersion("<2.3.0", "")]
-	public class ReindexOnServerRemoteApiTests : ApiTestBase<ReadOnlyCluster, IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor, ReindexOnServerRequest>
+	public class ReindexOnServerRemoteApiTests : ApiTestBase<IntrusiveOperationCluster, IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor, ReindexOnServerRequest>
 	{
 		private readonly Uri _host = new Uri("http://myremoteserver.example:9200");
 		public ReindexOnServerRemoteApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

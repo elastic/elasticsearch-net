@@ -72,10 +72,14 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 				$"{es}script.max_compilations_per_minute=10000",
 				$"{es}script.{indexedOrStored}=true",
 				$"{es}node.{attr}testingcluster=true",
+				$"{es}node.{attr}gateway=true",
 				$"{es}{shieldOrSecurity}.enabled={b}",
 				$"{es}{shieldOrSecurity}.http.ssl.enabled={sslEnabled}",
 				$"{es}{shieldOrSecurity}.authc.realms.pki1.enabled={sslEnabled}",
+
 			};
+			if (v >= new ElasticsearchVersion("5.4.0"))
+				this.DefaultNodeSettings.Add($"{es}search.remote.connect=true");
 		}
 
 		public string[] CreateSettings(string[] additionalSettings)
@@ -83,6 +87,11 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 			var settingMarker = this.ElasticsearchVersion.Major >= 5 ? "-E " : "-D";
 			return DefaultNodeSettings
 				.Concat(additionalSettings ?? Enumerable.Empty<string>())
+				//allow additional settings to take precedence over already DefaultNodeSettings
+				//without relying on elasticsearch to dedup, 5.4.0 no longer allows passing the same setting twice
+				//on the command with the latter taking precedence
+				.GroupBy(setting => setting.Split(new [] {'='}, 2, StringSplitOptions.RemoveEmptyEntries)[0])
+				.Select(g => g.Last())
 				.Select(s => $"{settingMarker}{s}")
 				.ToArray();
 		}

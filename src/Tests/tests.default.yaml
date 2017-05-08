@@ -8,11 +8,11 @@
 mode: i
 # the elasticsearch version that should be started
 # Can be a snapshot version of sonatype or "latest" to get the latest snapshot of sonatype
-elasticsearch_version: 5.3.0
+elasticsearch_version: 5.4.0
 # cluster filter allows you to only run the integration tests of a particular cluster (cluster suffix not needed)
 # cluster_filter:
 # whether we want to forcefully reseed on the node, if you are starting the tests with a node already running
-force_reseed: true
+force_reseed: false
 # do not spawn nodes as part of the test setup if we find a node is already running
 # this is opt in during development in CI we never want to see our tests running against an already running node
-test_against_already_running_elasticsearch: false
+test_against_already_running_elasticsearch: true

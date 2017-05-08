@@ -37,13 +37,13 @@ namespace Tests.Framework.ManagedElasticsearch.Process
 		public string Node { get; }
 		public string Message { get; }
 
-
 		private static readonly Regex ConsoleLineParser =
 			new Regex(@"\[(?<date>.*?)\]\[(?<level>.*?)\]\[(?<section>.*?)\] \[(?<node>.*?)\] (?<message>.+)");
 
 		public ElasticsearchConsoleOut(ElasticsearchVersion version, bool error, string consoleLine) : base(error, consoleLine)
 		{
 			if (string.IsNullOrEmpty(consoleLine)) return;
+
 			var match = ConsoleLineParser.Match(consoleLine);
 			if (!match.Success) return;
 			var dateString = match.Groups["date"].Value.Trim();
