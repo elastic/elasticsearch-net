@@ -26,8 +26,8 @@ open Benchmarking
 open XmlDocPatcher
 open Documentation
 open Signing
-
 open Commandline
+
 Commandline.parse()
 
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
@@ -35,8 +35,6 @@ Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
 Target "Clean" Build.Clean
 
 Target "Restore" Build.Restore
-
-Target "IncrementalBuild" <| fun _ -> Build.Compile false
 
 Target "FullBuild" <| fun _ -> Build.Compile false
     
@@ -80,21 +78,23 @@ Target "Canary" <| fun _ ->
   ==> "Build"
 
 "Clean"
-  ==> "FullBuild" 
+  =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Profile"
 
 "Clean" 
-  ==> "FullBuild"
+  =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Benchmark"
 
 "Version"
-  ==> "Release" ==> "Canary"
+  ==> "Release"
+  ==> "Canary"
 
-"FullBuild"
+"Clean"
+  =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Integrate"
 
 "Build"
   ==> "Release"
 
-// start build
-RunTargetOrDefault Commandline.target
+RunTargetOrListTargets()
+
