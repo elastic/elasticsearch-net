@@ -561,10 +561,11 @@ namespace Nest
 
 			var scriptedMetric = serializer.Deserialize(reader);
 
+
+			reader.Read();
 			if (scriptedMetric != null)
 				return new ScriptedMetricAggregate {_Value = scriptedMetric};
 
-			reader.Read();
 			return valueMetric;
 		}
 

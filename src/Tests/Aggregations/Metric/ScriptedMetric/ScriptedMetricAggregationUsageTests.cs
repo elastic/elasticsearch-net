@@ -84,9 +84,50 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 	/// </summary>
 	public class ScriptedMetricMultiAggregationTests : AggregationUsageTestBase
 	{
-		public ScriptedMetricMultiAggregationTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
+		class Scripted
 		{
+			public string Language { get; set; }
+			public string Combine { get; set; }
+			public string Reduce { get; set; }
+			public string Map { get; set; }
+			public string Init { get; set; }
 		}
+
+		private Scripted First = new Scripted
+		{
+			Language = "painless",
+			Init = "params._agg.map = [:]",
+			Map =
+				"if (params._agg.map.containsKey(doc['state'].value))" +
+				"    params._agg.map[doc['state'].value] += 1;" +
+				"else" +
+				"    params._agg.map[doc['state'].value] = 1;",
+
+			Reduce =
+				"def reduce = [:];" +
+				"for (agg in params._aggs)" +
+				"{" +
+				"    for (entry in agg.map.entrySet())" +
+				"    {" +
+				"        if (reduce.containsKey(entry.getKey()))" +
+				"            reduce[entry.getKey()] += entry.getValue();" +
+				"        else" +
+				"            reduce[entry.getKey()] = entry.getValue();" +
+				"    }" +
+				"}" +
+				"return reduce;"
+		};
+
+		private Scripted Second = new Scripted
+		{
+			Language = "painless",
+			Combine = "def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum",
+			Reduce = "def sum = 0.0; for (a in params._aggs) { sum += a } return sum",
+			Map = "if (doc['state'].value == \"Stable\") { params._agg.commits.add(doc['numberOfCommits'].value) }",
+			Init = "params._agg.commits = []"
+		};
+
+		public ScriptedMetricMultiAggregationTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{
@@ -98,34 +139,18 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 					{
 						init_script = new
 						{
-							inline = "params._agg.map = [:]",
-							lang = "painless"
+							inline = First.Init,
+							lang = First.Language
 						},
 						map_script = new
 						{
-							inline =
-							"if (params._agg.map.containsKey(doc['state'].value))" +
-							"    params._agg.map[doc['state'].value] += 1;" +
-							"else" +
-							"    params._agg.map[doc['state'].value] = 1;",
-							lang = "painless"
+							inline = First.Map,
+							lang = First.Language
 						},
 						reduce_script = new
 						{
-							inline =
-							"def reduce = [:];" +
-							"for (agg in params._aggs)" +
-							"{" +
-							"    for (entry in agg.map.entrySet())" +
-							"    {" +
-							"        if (reduce.containsKey(entry.getKey()))" +
-							"            reduce[entry.getKey()] += entry.getValue();" +
-							"        else" +
-							"            reduce[entry.getKey()] = entry.getValue();" +
-							"    }" +
-							"}" +
-							"return reduce;",
-							lang = "painless"
+							inline = First.Reduce,
+							lang = First.Language
 						}
 					}
 				},
@@ -135,23 +160,23 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 					{
 						init_script = new
 						{
-							inline = "params._agg.commits = []",
-							lang = "painless"
+							inline = Second.Init,
+							lang = Second.Language
 						},
 						map_script = new
 						{
-							inline = "if (doc['state'].value == \"Stable\") { params._agg.commits.add(doc['numberOfCommits']) }",
-							lang = "painless"
+							inline = Second.Map,
+							lang = Second.Language
 						},
 						combine_script = new
 						{
-							inline = "sum = 0; for (c in params._agg.commits) { sum += c }; return sum",
-							lang = "painless"
+							inline = Second.Combine,
+							lang = Second.Language
 						},
 						reduce_script = new
 						{
-							inline = "sum = 0; for (a in params._aggs) { sum += a }; return sum",
-							lang = "painless"
+							inline = Second.Reduce,
+							lang = Second.Language
 						}
 					}
 				}
@@ -161,35 +186,15 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(a => a
 				.ScriptedMetric("by_state_total", sm => sm
-					.InitScript(ss => ss.Inline("params._agg.map = [:]").Lang("painless"))
-					.MapScript(ss => ss.Inline(
-							"if (params._agg.map.containsKey(doc['state'].value))" +
-							"    params._agg.map[doc['state'].value] += 1;" +
-							"else" +
-							"    params._agg.map[doc['state'].value] = 1;"
-						)
-						.Lang("painless"))
-					.ReduceScript(ss => ss.Inline(
-							"def reduce = [:];" +
-							"for (agg in params._aggs)" +
-							"{" +
-							"    for (entry in agg.map.entrySet())" +
-							"    {" +
-							"        if (reduce.containsKey(entry.getKey()))" +
-							"            reduce[entry.getKey()] += entry.getValue();" +
-							"        else" +
-							"            reduce[entry.getKey()] = entry.getValue();" +
-							"    }" +
-							"}" +
-							"return reduce;"
-						)
-						.Lang("painless"))
+					.InitScript(ss => ss.Inline(First.Init).Lang(First.Language))
+					.MapScript(ss => ss.Inline(First.Map).Lang(First.Language))
+					.ReduceScript(ss => ss.Inline(First.Reduce).Lang(First.Language))
 				)
 				.ScriptedMetric("total_commits", sm => sm
-					.InitScript(ss => ss.Inline("params._agg.commits = []").Lang("painless"))
-					.MapScript(ss => ss.Inline("if (doc['state'].value == \"Stable\") { params._agg.commits.add(doc['numberOfCommits']) }").Lang("painless"))
-					.CombineScript(ss => ss.Inline("sum = 0; for (c in params._agg.commits) { sum += c }; return sum").Lang("painless"))
-					.ReduceScript(ss => ss.Inline("sum = 0; for (a in params._aggs) { sum += a }; return sum").Lang("painless"))
+					.InitScript(ss => ss.Inline(Second.Init).Lang(Second.Language))
+					.MapScript(ss => ss.Inline(Second.Map).Lang(Second.Language))
+					.CombineScript(ss => ss.Inline(Second.Combine).Lang(Second.Language))
+					.ReduceScript(ss => ss.Inline(Second.Reduce).Lang(Second.Language))
 				)
 			);
 
@@ -199,34 +204,16 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 				Aggregations =
 					new ScriptedMetricAggregation("by_state_total")
 					{
-						InitScript = new InlineScript("params._agg.map = [:]") {Lang = "painless"},
-						MapScript = new InlineScript(
-								"if (params._agg.map.containsKey(doc['state'].value))" +
-								"    params._agg.map[doc['state'].value] += 1;" +
-								"else" +
-								"    params._agg.map[doc['state'].value] = 1;")
-							{Lang = "painless"},
-						ReduceScript = new InlineScript(
-								"def reduce = [:];" +
-								"for (agg in params._aggs)" +
-								"{" +
-								"    for (entry in agg.map.entrySet())" +
-								"    {" +
-								"        if (reduce.containsKey(entry.getKey()))" +
-								"            reduce[entry.getKey()] += entry.getValue();" +
-								"        else" +
-								"            reduce[entry.getKey()] = entry.getValue();" +
-								"    }" +
-								"}" +
-								"return reduce;")
-							{Lang = "painless"}
+						InitScript = new InlineScript(First.Init) {Lang = First.Language},
+						MapScript = new InlineScript(First.Map) {Lang = First.Language},
+						ReduceScript = new InlineScript(First.Reduce) {Lang = First.Language}
 					} &&
 					new ScriptedMetricAggregation("total_commits")
 					{
-						InitScript = new InlineScript("params._agg.commits = []") {Lang = "painless"},
-						MapScript = new InlineScript("if (doc['state'].value == \"Stable\") { params._agg.commits.add(doc['numberOfCommits']) }") {Lang = "painless"},
-						CombineScript = new InlineScript("sum = 0; for (c in params._agg.commits) { sum += c }; return sum") {Lang = "painless"},
-						ReduceScript = new InlineScript("sum = 0; for (a in params._aggs) { sum += a }; return sum") {Lang = "painless"}
+						InitScript = new InlineScript(Second.Init) {Lang = Second.Language},
+						MapScript = new InlineScript(Second.Map) {Lang = Second.Language},
+						CombineScript = new InlineScript(Second.Combine) {Lang = Second.Language},
+						ReduceScript = new InlineScript(Second.Reduce) {Lang = Second.Language}
 					}
 			};
 
