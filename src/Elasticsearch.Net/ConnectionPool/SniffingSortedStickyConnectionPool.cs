@@ -34,7 +34,7 @@ namespace Elasticsearch.Net
 				var globalCursor = Interlocked.Increment(ref this.GlobalCursor);
 
 				//could not find a suitable node retrying on first node off globalCursor
-				yield return this.RetryInternalNodes(globalCursor, audit); ;
+				yield return this.RetryInternalNodes(globalCursor, audit);
 				yield break;
 			}
 
