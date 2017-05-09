@@ -27,21 +27,14 @@ namespace Elasticsearch.Net
 		public override IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null)
 		{
 			var now = this.DateTimeProvider.Now();
-			var nodes = this.InternalNodes.Where(n => n.IsAlive || n.DeadUntil <= now)
-				.ToList();
-
-			var count = nodes.Count;
-			Node node;
-
-			if (count == 0)
+			var nodes = this.AliveNodes;
+			
+			if (nodes.Count == 0)
 			{
 				var globalCursor = Interlocked.Increment(ref this.GlobalCursor);
+
 				//could not find a suitable node retrying on first node off globalCursor
-				audit?.Invoke(AuditEvent.AllNodesDead, null);
-				node = this.InternalNodes[globalCursor % this.InternalNodes.Count];
-				node.IsResurrected = true;
-				audit?.Invoke(AuditEvent.Resurrection, node);
-				yield return node;
+				yield return this.RetryInternalNodes(globalCursor, audit); ;
 				yield break;
 			}
 
@@ -53,18 +46,9 @@ namespace Elasticsearch.Net
 			}
 
 			var localCursor = 0;
-
-			for (var attempts = 0; attempts < count; attempts++)
+			foreach (var aliveNode in this.SelectAliveNodes(localCursor, nodes, audit))
 			{
-				node = nodes[localCursor];
-				localCursor = (localCursor + 1) % count;
-				//if this node is not alive or no longer dead mark it as resurrected
-				if (!node.IsAlive)
-				{
-					audit?.Invoke(AuditEvent.Resurrection, node);
-					node.IsResurrected = true;
-				}
-				yield return node;
+				yield return aliveNode;
 			}
 		}
 
