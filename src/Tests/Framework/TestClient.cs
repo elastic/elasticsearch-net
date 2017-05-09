@@ -31,9 +31,9 @@ namespace Tests.Framework
 
 		private static ITestConfiguration LoadConfiguration()
 		{
-			// The build script sets a TARGET env variable, so if it exists then
+			// The build script sets a FAKEBUILD env variable, so if it exists then
 			// we must be running tests from the build script
-			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TARGET")))
+			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("FAKEBUILD")))
 				return new EnvironmentConfiguration();
 
 			var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
