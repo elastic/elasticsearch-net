@@ -1,6 +1,6 @@
 language: csharp
 solution: src/Elasticsearch.sln
-script: ./build.sh inc
+script: ./build.sh test
 dist: trusty
 mono: 4.6.2
 dotnet: 1.0.1
