@@ -87,6 +87,7 @@ module Commandline =
             setBuildParam "clusterfilter" clusterFilter
             setBuildParam "testfilter" testFilter
 
+        | ["canary"; ] -> ignore()
         | ["canary"; apiKey ] ->
             setBuildParam "apiKey" apiKey
             setBuildParam "feed" "elasticsearch-net"

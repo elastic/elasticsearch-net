@@ -26,8 +26,8 @@ open Benchmarking
 open XmlDocPatcher
 open Documentation
 open Signing
-
 open Commandline
+
 Commandline.parse()
 
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
