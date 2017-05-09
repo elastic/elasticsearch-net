@@ -36,7 +36,6 @@ module Versioning =
         tracefn "Written (%s) to global.json as the current version will use this version from now on as current in the build" (version.ToString()) 
 
     let CurrentVersion = 
-        tracefn "Version found in global.json %s" globalJson.Version
         let currentVersion = parse(globalJson.Version)
         let bv = getBuildParam "version"
         let buildVersion = if (isNullOrEmpty bv) then None else Some(parse(bv)) 

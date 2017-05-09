@@ -57,6 +57,7 @@
     <None Include="Signing.fsx" />
     <None Include="Testing.fsx" />
     <None Include="Documentation.fsx" />
+    <None Include="Commandline.fsx" />
     <None Include="Targets.fsx" />
   </ItemGroup>
   <PropertyGroup>
