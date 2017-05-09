@@ -36,8 +36,6 @@ Target "Clean" Build.Clean
 
 Target "Restore" Build.Restore
 
-Target "IncrementalBuild" <| fun _ -> Build.Compile false
-
 Target "FullBuild" <| fun _ -> Build.Compile false
     
 Target "Test" Tests.RunUnitTests
@@ -80,21 +78,23 @@ Target "Canary" <| fun _ ->
   ==> "Build"
 
 "Clean"
-  ==> "FullBuild" 
+  =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Profile"
 
 "Clean" 
-  ==> "FullBuild"
+  =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Benchmark"
 
 "Version"
-  ==> "Release" ==> "Canary"
+  ==> "Release"
+  ==> "Canary"
 
-"FullBuild"
+"Clean"
+  =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Integrate"
 
 "Build"
   ==> "Release"
 
-// start build
-RunTargetOrDefault Commandline.target
+RunTargetOrListTargets()
+

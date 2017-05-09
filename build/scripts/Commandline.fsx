@@ -51,6 +51,8 @@ module Commandline =
         | _ -> "build"
 
     let needsFullBuild =
+        printfn "%s, %A" target skipTests
+
         match (target, skipTests) with
         | (_, true) -> true
         //dotnet-xunit needs to a build of its own anyways
@@ -95,4 +97,5 @@ module Commandline =
             traceError usage
             exit 2
 
+        setBuildParam "target" target
         traceHeader target
