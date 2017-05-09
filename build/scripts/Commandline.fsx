@@ -51,6 +51,8 @@ module Commandline =
         | _ -> "build"
 
     let needsFullBuild =
+        printfn "%s, %A" target skipTests
+
         match (target, skipTests) with
         | (_, true) -> true
         //dotnet-xunit needs to a build of its own anyways
@@ -85,6 +87,7 @@ module Commandline =
             setBuildParam "clusterfilter" clusterFilter
             setBuildParam "testfilter" testFilter
 
+        | ["canary"; ] -> ignore()
         | ["canary"; apiKey ] ->
             setBuildParam "apiKey" apiKey
             setBuildParam "feed" "elasticsearch-net"
@@ -95,4 +98,5 @@ module Commandline =
             traceError usage
             exit 2
 
+        setBuildParam "target" target
         traceHeader target
