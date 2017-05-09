@@ -120,7 +120,7 @@ namespace Elasticsearch.Net
 
 		private static readonly string MissingConnectionLimitMethodError =
 			$"Your target platform does not support {nameof(ConnectionConfiguration.ConnectionLimit)}"
-			+ $" please set {nameof(ConnectionConfiguration.ConnectionLimit)} to -1 on your connection configuration."
+			+ $" please set {nameof(ConnectionConfiguration.ConnectionLimit)} to -1 on your connection configuration/settings."
 			+ $" this will cause the {nameof(HttpClientHandler.MaxConnectionsPerServer)} not to be set on {nameof(HttpClientHandler)}";
 
 		protected virtual HttpClientHandler CreateHttpClientHandler(RequestData requestData)
@@ -138,6 +138,10 @@ namespace Elasticsearch.Net
 					handler.MaxConnectionsPerServer = requestData.ConnectionSettings.ConnectionLimit;
 				}
 				catch (MissingMethodException e)
+				{
+					throw new Exception(MissingConnectionLimitMethodError, e);
+				}
+				catch (PlatformNotSupportedException e)
 				{
 					throw new Exception(MissingConnectionLimitMethodError, e);
 				}
