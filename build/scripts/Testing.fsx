@@ -19,7 +19,7 @@ module Tests =
     let private buildingOnTravis = getEnvironmentVarAsBool "TRAVIS"
 
     let private setLocalEnvVars() = 
-        let clusterFilter =  getBuildParamOrDefault "escluster" ""
+        let clusterFilter =  getBuildParamOrDefault "clusterfilter" ""
         let testFilter = getBuildParamOrDefault "testfilter" ""
         setProcessEnvironVar "NEST_INTEGRATION_CLUSTER" clusterFilter
         setProcessEnvironVar "NEST_TEST_FILTER" testFilter
