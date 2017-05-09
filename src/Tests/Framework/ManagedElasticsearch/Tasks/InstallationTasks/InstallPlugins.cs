@@ -26,7 +26,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 			foreach (var plugin in plugins)
 			{
 				var installParameter = !v.IsSnapshot ? plugin.Moniker : this.DownloadSnapshotIfNeeded(fileSystem, plugin, v);
-				this.ExecuteBinary(fileSystem.PluginBinary, $"install elasticsearch plugin: {plugin.Moniker}", "install --batch", installParameter);
+				this.ExecuteBinary(fileSystem.PluginBinary, $"install elasticsearch plugin: {plugin.Moniker}", "install", installParameter);
 			}
 		}
 
