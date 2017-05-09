@@ -6,6 +6,7 @@
 
 #load @"Projects.fsx"
 #load @"Paths.fsx"
+#load @"Commandline.fsx"
 
 open System
 open System.Diagnostics
@@ -20,6 +21,7 @@ open SemVerHelper
 open Paths
 open Projects
 open SemVerHelper
+open Commandline
 
 module Versioning = 
     // We used to rely on AssemblyInfo.cs from NEST to read and write the current version.
@@ -35,7 +37,8 @@ module Versioning =
         newGlobalJson.JsonValue.WriteTo(tw, JsonSaveOptions.None)
         tracefn "Written (%s) to global.json as the current version will use this version from now on as current in the build" (version.ToString()) 
 
-    let CurrentVersion = 
+    let CurrentVersion =
+        Commandline.parse()
         let currentVersion = parse(globalJson.Version)
         let bv = getBuildParam "version"
         let buildVersion = if (isNullOrEmpty bv) then None else Some(parse(bv)) 
