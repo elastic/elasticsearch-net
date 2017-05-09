@@ -95,36 +95,20 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 
 		private Scripted First = new Scripted
 		{
-			Language = "painless",
-			Init = "params._agg.map = [:]",
-			Map =
-				"if (params._agg.map.containsKey(doc['state'].value))" +
-				"    params._agg.map[doc['state'].value] += 1;" +
-				"else" +
-				"    params._agg.map[doc['state'].value] = 1;",
-
-			Reduce =
-				"def reduce = [:];" +
-				"for (agg in params._aggs)" +
-				"{" +
-				"    for (entry in agg.map.entrySet())" +
-				"    {" +
-				"        if (reduce.containsKey(entry.getKey()))" +
-				"            reduce[entry.getKey()] += entry.getValue();" +
-				"        else" +
-				"            reduce[entry.getKey()] = entry.getValue();" +
-				"    }" +
-				"}" +
-				"return reduce;"
+			Language = "groovy",
+			Combine = "sum = 0; for (c in _agg.commits) { sum += c }; return sum",
+			Reduce = "sum = 0; for (a in _aggs) { sum += a }; return sum",
+			Map = "if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }",
+			Init = "_agg['commits'] = []"
 		};
 
 		private Scripted Second = new Scripted
 		{
-			Language = "painless",
-			Combine = "def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum",
-			Reduce = "def sum = 0.0; for (a in params._aggs) { sum += a } return sum",
-			Map = "if (doc['state'].value == \"Stable\") { params._agg.commits.add(doc['numberOfCommits'].value) }",
-			Init = "params._agg.commits = []"
+			Language = "groovy",
+			Combine = "sum = 0; for (c in _agg.commits) { sum += c }; return sum",
+			Reduce = "sum = 0; for (a in _aggs) { sum += a }; return sum",
+			Map = "if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }",
+			Init = "_agg['commits'] = []"
 		};
 
 		public ScriptedMetricMultiAggregationTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -145,6 +129,11 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 						map_script = new
 						{
 							inline = First.Map,
+							lang = First.Language
+						},
+						combine_script = new
+						{
+							inline = First.Combine,
 							lang = First.Language
 						},
 						reduce_script = new
@@ -188,6 +177,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 				.ScriptedMetric("by_state_total", sm => sm
 					.InitScript(ss => ss.Inline(First.Init).Lang(First.Language))
 					.MapScript(ss => ss.Inline(First.Map).Lang(First.Language))
+					.CombineScript(ss => ss.Inline(First.Combine).Lang(First.Language))
 					.ReduceScript(ss => ss.Inline(First.Reduce).Lang(First.Language))
 				)
 				.ScriptedMetric("total_commits", sm => sm
@@ -206,6 +196,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 					{
 						InitScript = new InlineScript(First.Init) {Lang = First.Language},
 						MapScript = new InlineScript(First.Map) {Lang = First.Language},
+						CombineScript = new InlineScript(First.Combine) {Lang = First.Language},
 						ReduceScript = new InlineScript(First.Reduce) {Lang = First.Language}
 					} &&
 					new ScriptedMetricAggregation("total_commits")
@@ -226,7 +217,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 			by_state_total.Should().NotBeNull();
 			total_commits.Should().NotBeNull();
 
-			by_state_total.Value<IDictionary<string, int>>().Should().NotBeNull();
+			by_state_total.Value<double>().Should().BeGreaterThan(0);
 			total_commits.Value<int>().Should().BeGreaterThan(0);
 		}
 	}
