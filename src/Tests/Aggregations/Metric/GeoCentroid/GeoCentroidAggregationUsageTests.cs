@@ -51,6 +51,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 			response.ShouldBeValid();
 			var centroid = response.Aggs.GeoCentroid("centroid");
 			centroid.Should().NotBeNull();
+			centroid.Count.Should().BeGreaterThan(0);
 			centroid.Location.Should().NotBeNull();
 
 			centroid.Location.Latitude.Should().NotBe(0);
@@ -125,6 +126,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 			{
 				var centroid = bucket.GeoCentroid("centroid");
 				centroid.Should().NotBeNull();
+				centroid.Count.Should().BeGreaterThan(0);
 				centroid.Location.Should().NotBeNull();
 
 				centroid.Location.Latitude.Should().NotBe(0);

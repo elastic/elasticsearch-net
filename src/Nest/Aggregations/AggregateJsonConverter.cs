@@ -232,7 +232,10 @@ namespace Nest
 		{
 			reader.Read();
 			var geoCentroid = new GeoCentroidAggregate {Location = serializer.Deserialize<GeoLocation>(reader)};
+			reader.Read(); //count property
 			reader.Read();
+			geoCentroid.Count = (long)reader.Value;
+			reader.Read(); //trailing }
 			return geoCentroid;
 		}
 
