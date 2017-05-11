@@ -52,10 +52,17 @@ namespace Nest
 
 		[JsonProperty("min_value")]
 		//TODO this can also be an object in the case of geo_point/shape
-		public string MinValue { get; internal set; }
+		public object MinValue { get; internal set; }
+
+		[JsonProperty("min_value_as_string")]
+		public string MinValueAsString { get; internal set; }
 
 		[JsonProperty("max_value")]
 		//TODO this can also be an object in the case of geo_point/shape
-		public string MaxValue { get; internal set; }
+		public object MaxValue { get; internal set; }
+
+		[JsonProperty("max_value_as_string")]
+		public string MaxValueAsString { get; internal set; }
+
 	}
 }
