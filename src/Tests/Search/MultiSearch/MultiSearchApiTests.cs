@@ -129,8 +129,7 @@ namespace Tests.Search.MultiSearch
 			projects.Documents.Should().HaveCount(10);
 
 			var projectsCount = r.GetResponse<Project>("count_project");
-			projectsCount.ShouldBeValid();
-			projectsCount.Documents.Should().HaveCount(0);
+			projectsCount.Should().BeNull();
 
 			var developers = r.GetResponse<Developer>("5developers");
 			developers.ShouldBeValid();
