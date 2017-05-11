@@ -140,7 +140,7 @@ namespace Tests.Aggregations.Bucket.Filter
 	//reproduce of https://github.com/elastic/elasticsearch-net/issues/1931
 	public class InlineScriptFilterAggregationUsageTests : AggregationUsageTestBase
 	{
-		private string _ctxNumberofCommits = "_source.numberOfCommits > 0";
+		private string _ctxNumberofCommits = "doc['numberOfCommits'].value > 0";
 		private string _aggName = "script_filter";
 
 		public InlineScriptFilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -153,7 +153,6 @@ namespace Tests.Aggregations.Bucket.Filter
 						script = new {
 							script = new {
 								inline = _ctxNumberofCommits,
-								lang = "groovy"
 							}
 						}
 					}
@@ -167,7 +166,6 @@ namespace Tests.Aggregations.Bucket.Filter
 					.Filter(f => f
 						.Script(b => b
 							.Inline(_ctxNumberofCommits)
-							.Lang("groovy")
 						)
 					)
 				)
@@ -181,7 +179,6 @@ namespace Tests.Aggregations.Bucket.Filter
 					Filter = new ScriptQuery
 					{
 						Inline = _ctxNumberofCommits,
-						Lang = "groovy"
 				}
 				}
 			};
