@@ -99,7 +99,7 @@ namespace Tests.Aggregations.Bucket.Terms
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var states = response.Aggs.Terms("states");
 			states.Should().NotBeNull();
 			states.DocCountErrorUpperBound.Should().HaveValue();
@@ -206,7 +206,7 @@ namespace Tests.Aggregations.Bucket.Terms
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var states = response.Aggs.Terms("states");
 			states.Should().NotBeNull();
 			states.DocCountErrorUpperBound.Should().HaveValue();
@@ -313,7 +313,7 @@ namespace Tests.Aggregations.Bucket.Terms
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var states = response.Aggs.Terms("states");
 			states.Should().NotBeNull();
 			states.DocCountErrorUpperBound.Should().HaveValue();
@@ -394,7 +394,7 @@ namespace Tests.Aggregations.Bucket.Terms
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var commits = response.Aggs.Terms<int>("commits");
 			commits.Should().NotBeNull();
 			commits.DocCountErrorUpperBound.Should().HaveValue();
@@ -463,7 +463,7 @@ namespace Tests.Aggregations.Bucket.Terms
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var commits = response.Aggs.Terms<int>("commits");
 			commits.Should().NotBeNull();
 			commits.DocCountErrorUpperBound.Should().HaveValue();

@@ -58,7 +58,7 @@ namespace Tests.Document.Single.Update
 
 		protected override void ExpectResponse(IUpdateResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			response.Result.Should().Be(Result.Noop);
 		}
 	}

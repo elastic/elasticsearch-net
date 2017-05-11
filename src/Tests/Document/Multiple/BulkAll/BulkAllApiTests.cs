@@ -103,7 +103,7 @@ namespace Tests.Document.Multiple.BulkAll
 					)
 			);
 			result.Should().NotBeNull();
-			result.IsValid.Should().BeTrue();
+			result.ShouldBeValid();
 		}
 
 		private static void OnError(ref Exception ex, Exception e, EventWaitHandle handle)

@@ -40,7 +40,7 @@ namespace Tests.Document.Single.Delete
 
 		protected override void ExpectResponse(IDeleteResponse response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			response.Found.Should().BeTrue();
 			response.Result.Should().Be(Result.Deleted);
 		}

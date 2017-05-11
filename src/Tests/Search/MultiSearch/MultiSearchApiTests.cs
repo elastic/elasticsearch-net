@@ -141,11 +141,11 @@ namespace Tests.Search.MultiSearch
 			inferredTypeName.Documents.Should().HaveCount(5);
 
 			var percolateDocument = r.GetResponse<PercolatedQuery>("percolate_document");
-			percolateDocument.IsValid.Should().BeTrue();
+			percolateDocument.ShouldBeValid();
 			percolateDocument.Documents.Should().HaveCount(1);
 
 			var percolateExistingDocument = r.GetResponse<PercolatedQuery>("percolate_existing_document");
-			percolateExistingDocument.IsValid.Should().BeTrue();
+			percolateExistingDocument.ShouldBeValid();
 			percolateExistingDocument.Documents.Should().HaveCount(1);
 		});
 	}

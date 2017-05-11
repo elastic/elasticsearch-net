@@ -42,10 +42,10 @@ namespace Tests.Reproduce
 
 			var date = "2013-06-24T00:00:00.000";
 			var indexResult = client.Index(new SearchResult { DateAsString = date, Date = DateTime.Parse(date) }, i => i.Id(1).Index(index));
-			indexResult.IsValid.Should().BeTrue();
+			indexResult.ShouldBeValid();
 			client.Refresh(Nest.Indices.All);
 			var response = client.Search<ISearchResult>(new SearchRequest<ISearchResult>(index, typeof(SearchResult)));
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			response.Documents.Count.Should().Be(1);
 			var document = response.Documents.SingleOrDefault();
 			document.Should().NotBeNull();

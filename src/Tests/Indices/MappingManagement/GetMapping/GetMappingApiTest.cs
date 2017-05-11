@@ -39,7 +39,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 		protected override void ExpectResponse(IGetMappingResponse response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			var visitor = new TestVisitor();
 			response.Accept(visitor);

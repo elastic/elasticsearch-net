@@ -94,7 +94,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 				Template = "*",
 				Settings = this.IndexSettings
 			});
-			putTemplateResult.IsValid.Should().BeTrue();
+			putTemplateResult.ShouldBeValid();
 		}
 
 		private void CreateDeveloperIndex()
@@ -107,7 +107,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 					)
 				)
 			);
-			createDeveloperIndex.IsValid.Should().BeTrue();
+			createDeveloperIndex.ShouldBeValid();
 		}
 
 		private void CreateProjectIndex()
@@ -141,7 +141,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 					)
 				)
 			);
-			createProjectIndex.IsValid.Should().BeTrue();
+			createProjectIndex.ShouldBeValid();
 		}
 
 		public static IAnalysis ProjectAnalysisSettings(AnalysisDescriptor analysis)
@@ -184,7 +184,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 				)
 			);
 
-			createPercolatedIndex.IsValid.Should().BeTrue();
+			createPercolatedIndex.ShouldBeValid();
 		}
 
 		public static PropertiesDescriptor<Project> ProjectProperties(PropertiesDescriptor<Project> props) => props

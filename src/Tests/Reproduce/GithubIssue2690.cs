@@ -15,7 +15,7 @@ namespace Tests.Reproduce
 					)
 				)
 			);
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 		}
 	}
 }
