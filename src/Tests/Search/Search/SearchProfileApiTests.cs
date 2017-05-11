@@ -70,7 +70,6 @@ namespace Tests.Search.Search
 						query.Should().NotBeNull();
 						query.Type.Should().NotBeNullOrEmpty();
 						query.Description.Should().NotBeNullOrEmpty();
-						query.Time.Should().NotBeNull();
 						query.TimeInNanoseconds.Should().BeGreaterThan(0);
 						query.Breakdown.Should().NotBeNull();
 					}
@@ -80,7 +79,6 @@ namespace Tests.Search.Search
 					{
 						collector.Name.Should().NotBeNullOrEmpty();
 						collector.Reason.Should().NotBeNullOrEmpty();
-						collector.Time.Should().NotBeNull();
 						collector.TimeInNanoseconds.Should().BeGreaterThan(0);
 						var children = collector.Children;
 						children.Should().NotBeNull();
@@ -89,7 +87,6 @@ namespace Tests.Search.Search
 							child.Should().NotBeNull();
 							child.Name.Should().NotBeNullOrEmpty();
 							child.Reason.Should().NotBeNullOrEmpty();
-							child.Time.Should().NotBeNull();
 							child.TimeInNanoseconds.Should().BeGreaterThan(0);
 							var grandchildren = child.Children;
 							grandchildren.Should().NotBeNull();
@@ -97,7 +94,6 @@ namespace Tests.Search.Search
 							{
 								grandchild.Name.Should().NotBeNullOrEmpty();
 								grandchild.Reason.Should().NotBeNullOrEmpty();
-								grandchild.Time.Should().NotBeNull();
 								grandchild.TimeInNanoseconds.Should().BeGreaterThan(0);
 							}
 						}
@@ -110,7 +106,6 @@ namespace Tests.Search.Search
 					aggregation.Should().NotBeNull();
 					aggregation.Type.Should().NotBeNullOrEmpty();
 					aggregation.Description.Should().NotBeNullOrEmpty();
-					aggregation.Time.Should().NotBeNull();
 					aggregation.TimeInNanoseconds.Should().BeGreaterThan(0);
 					aggregation.Breakdown.Should().NotBeNull();
 				}

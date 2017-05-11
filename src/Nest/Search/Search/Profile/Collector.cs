@@ -11,9 +11,6 @@ namespace Nest
 		[JsonProperty("reason")]
 		public string Reason { get; internal set; }
 
-		[JsonProperty("time")]
-		public Time Time { get; internal set; }
-
 		[JsonProperty("time_in_nanos")]
 		public long TimeInNanoseconds { get; internal set; }
 

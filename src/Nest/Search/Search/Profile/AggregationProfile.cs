@@ -18,12 +18,6 @@ namespace Nest
 		public string Description { get; internal set; }
 
 		/// <summary>
-		/// The time this aggregation took
-		/// </summary>
-		[JsonProperty("time")]
-		public Time Time { get; internal set; }
-
-		/// <summary>
 		/// The time this aggregation took, in nanoseconds
 		/// </summary>
 		[JsonProperty("time_in_nanos")]
