@@ -89,7 +89,7 @@ namespace Tests.Ingest.SimulatePipeline
 
 		protected override void ExpectResponse(ISimulatePipelineResponse response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			response.Documents.Should().NotBeNull().And.HaveCount(3);
 
 			var simulation = response.Documents.FirstOrDefault(d => d.Document.Id == Project.Instance.Name);
@@ -209,7 +209,7 @@ namespace Tests.Ingest.SimulatePipeline
 
 		protected override void ExpectResponse(ISimulatePipelineResponse response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			response.Documents.Count.Should().Be(3);
 			foreach (var doc in response.Documents)
 			{

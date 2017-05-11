@@ -25,7 +25,7 @@ namespace Tests.Reproduce
 
 			var mappingResponse = client.GetMapping<Events>();
 
-			mappingResponse.IsValid.Should().BeTrue();
+			mappingResponse.ShouldBeValid();
 
 			var mappingWalker = new MappingWalker(new CopyToVisitor());
 			mappingWalker.Accept(mappingResponse);

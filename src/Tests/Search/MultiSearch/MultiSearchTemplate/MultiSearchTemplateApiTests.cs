@@ -78,16 +78,16 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 		{
 			var inline = response.GetResponse<Project>("inline");
 			inline.Should().NotBeNull();
-			inline.IsValid.Should().BeTrue();
+			inline.ShouldBeValid();
 			inline.Hits.Count().Should().BeGreaterThan(0);
 
 			var id = response.GetResponse<Project>("id");
 			id.Should().NotBeNull();
-			id.IsValid.Should().BeFalse();
+			id.ShouldNotBeValid();
 
 			var file = response.GetResponse<Project>("file");
 			file.Should().NotBeNull();
-			file.IsValid.Should().BeFalse(); ;
+			file.ShouldNotBeValid();
 		}
 	}
 }

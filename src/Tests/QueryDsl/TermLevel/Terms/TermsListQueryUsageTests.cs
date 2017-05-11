@@ -78,7 +78,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeFalse();
+			response.ShouldNotBeValid();
 
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Status.Should().Be(400);

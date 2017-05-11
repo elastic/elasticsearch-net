@@ -176,10 +176,10 @@ namespace Tests.Document.Single.Index
 				)
 			);
 
-			foreach (var response in bulkResponse.Items)
+			foreach (var item in bulkResponse.Items)
 			{
-				response.IsValid.Should().BeTrue();
-				response.Status.Should().Be(201);
+				item.IsValid.Should().BeTrue();
+				item.Status.Should().Be(201);
 			}
 		}
 	}

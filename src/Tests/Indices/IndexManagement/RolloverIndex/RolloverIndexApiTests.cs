@@ -27,7 +27,7 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 					.Alias(CallIsolatedValue + "-alias")
 				)
 			);
-			create.IsValid.Should().BeTrue();
+			create.ShouldBeValid();
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -74,7 +74,7 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 
 		protected override void ExpectResponse(IRolloverIndexResponse response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			response.OldIndex.Should().NotBeNullOrEmpty();
 			response.NewIndex.Should().NotBeNullOrEmpty();
 			response.RolledOver.Should().BeFalse();

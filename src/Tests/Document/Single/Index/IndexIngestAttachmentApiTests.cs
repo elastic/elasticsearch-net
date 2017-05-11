@@ -111,11 +111,11 @@ namespace Tests.Document.Single.Index
 
 		protected override void ExpectResponse(IIndexResponse response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			var getResponse = this.Client.Get<IngestedAttachment>(response.Id, g => g.Index(CallIsolatedValue));
 
-			getResponse.IsValid.Should().BeTrue();
+			getResponse.ShouldBeValid();
 			getResponse.Source.Should().NotBeNull();
 
 			getResponse.Source.Attachment.Should().NotBeNull();

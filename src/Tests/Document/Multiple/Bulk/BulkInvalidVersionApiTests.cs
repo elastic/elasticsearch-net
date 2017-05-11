@@ -39,7 +39,7 @@ namespace Tests.Document.Multiple.Bulk
 
 		protected override void ExpectResponse(IBulkResponse response)
 		{
-			response.IsValid.Should().BeFalse();
+			response.ShouldNotBeValid();
 			response.ServerError.Should().NotBeNull();
 			response.ServerError.Status.Should().Be(400);
 			response.ServerError.Error.Type.Should().Be("action_request_validation_exception");

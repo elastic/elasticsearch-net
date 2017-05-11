@@ -201,7 +201,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 
 		protected override void ExpectResponse(IExecuteWatchResponse response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			response.WatchRecord.Should().NotBeNull();
 			response.WatchRecord.WatchId.Should().Be(CallIsolatedValue);
 			response.WatchRecord.State.Should().NotBeNull().And.Be(ActionExecutionState.Executed);
@@ -620,7 +620,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 
 		protected override void ExpectResponse(IExecuteWatchResponse response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			response.WatchRecord.TriggerEvent.Should().NotBeNull();
 			response.WatchRecord.TriggerEvent.TriggeredTime.Should().Be(_triggeredDateTime);
 			response.WatchRecord.TriggerEvent.Manual.Should().NotBeNull();

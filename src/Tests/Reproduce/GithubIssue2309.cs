@@ -64,7 +64,7 @@ namespace Tests.Reproduce
 					.Conflicts(Conflicts.Proceed)
 			);
 
-			reindexResponse.IsValid.Should().BeFalse();
+			reindexResponse.ShouldNotBeValid();
 			reindexResponse.Failures.Should().NotBeNull().And.HaveCount(1);
 		}
 	}

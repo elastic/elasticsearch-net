@@ -33,7 +33,7 @@ namespace Tests.Reproduce
 
 			var response = client.Search<Project>();
 			stopwatch.Stop();
-			response.IsValid.Should().BeFalse();
+			response.ShouldNotBeValid();
 			//fiddler delays for 5 seconds, but we expect our request timeout to kick in plenty sooner
 			stopwatch.Elapsed.Should().BeLessThan(TimeSpan.FromSeconds(3));
 			response.ApiCall.AuditTrail.Should().Contain(a=>a.Event == AuditEvent.MaxTimeoutReached);
@@ -43,7 +43,7 @@ namespace Tests.Reproduce
 			stopwatch.Restart();
 			response = await client.SearchAsync<Project>();
 			stopwatch.Stop();
-			response.IsValid.Should().BeFalse();
+			response.ShouldNotBeValid();
 			//fiddler delays for 5 seconds, but we expect our request timeout to kick in plenty sooner
 			stopwatch.Elapsed.Should().BeLessThan(TimeSpan.FromSeconds(3));
 			response.ApiCall.AuditTrail.Should().Contain(a=>a.Event == AuditEvent.MaxTimeoutReached);
@@ -58,7 +58,7 @@ namespace Tests.Reproduce
 			response = await task;
 			stopwatch.Stop();
 
-			response.IsValid.Should().BeFalse();
+			response.ShouldNotBeValid();
 			//fiddler delays for 5 seconds, but we cancel after 100ms so we expect less then a second to have passed
 			stopwatch.Elapsed.Should().BeLessThan(TimeSpan.FromSeconds(1));
 			//we cancelled this request it should not contain MaxTimeoutReached
@@ -81,7 +81,7 @@ namespace Tests.Reproduce
 			ctx.Cancel();
 			var response = await task;
 
-			response.IsValid.Should().BeFalse();
+			response.ShouldNotBeValid();
 			response.ApiCall.AuditTrail.Should().Contain(a=> a.Event == AuditEvent.CancellationRequested);
 			response.ApiCall.AuditTrail.Should().NotContain(a=> a.Event == AuditEvent.MaxTimeoutReached);
 

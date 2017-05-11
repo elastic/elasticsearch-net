@@ -103,7 +103,7 @@ namespace Tests.ClientConcepts.Connection
              * We can now assert that the `searchResponse` is valid and contains documents deserialized
              * from our fixed `InMemoryConnection` response
              */
-            searchResponse.IsValid.Should().BeTrue();
+            searchResponse.ShouldBeValid();
             searchResponse.Documents.Count.Should().Be(25);
         }
         /**
