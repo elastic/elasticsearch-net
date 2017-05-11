@@ -93,7 +93,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 		{
 			var putTemplateResult = this.Client.PutIndexTemplate(new PutIndexTemplateRequest(TestsIndexTemplateName)
 			{
-				Template = "*",
+				IndexPatterns = new[] { "*" },
 				Settings = this.IndexSettings
 			});
 			putTemplateResult.ShouldBeValid();

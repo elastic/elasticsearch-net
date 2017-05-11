@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Nest
 {
@@ -8,7 +10,7 @@ namespace Nest
 
 	public partial class PutIndexTemplateRequest
 	{
-		public string Template { get; set; }
+		public IReadOnlyCollection<string> IndexPatterns {get;set;}
 
 		public int? Order { get; set; }
 
@@ -22,8 +24,6 @@ namespace Nest
 	[DescriptorFor("IndicesPutTemplate")]
 	public partial class PutIndexTemplateDescriptor
 	{
-		string ITemplateMapping.Template { get; set; }
-
 		int? ITemplateMapping.Order { get; set; }
 
 		IIndexSettings ITemplateMapping.Settings { get; set; }
@@ -32,9 +32,12 @@ namespace Nest
 
 		IAliases ITemplateMapping.Aliases { get; set; }
 
+		IReadOnlyCollection<string> ITemplateMapping.IndexPatterns {get;set;}
+
 		public PutIndexTemplateDescriptor Order(int order) => Assign(a => a.Order = order);
 
-		public PutIndexTemplateDescriptor Template(string template)=> Assign(a => a.Template = template);
+		public PutIndexTemplateDescriptor IndexPatterns(params string[] patterns)=> Assign(a => a.IndexPatterns = patterns);
+		public PutIndexTemplateDescriptor IndexPatterns(IEnumerable<string> patterns)=> Assign(a => a.IndexPatterns = patterns?.ToArray());
 
 		public PutIndexTemplateDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> settingsSelector) =>
 			Assign(a => a.Settings = settingsSelector?.Invoke(new IndexSettingsDescriptor())?.Value);

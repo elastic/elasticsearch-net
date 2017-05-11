@@ -89,7 +89,7 @@ namespace Tests.Aggregations.Bucket.Filter
 	* When the collection of filters is empty or all are conditionless, NEST will serialize them
 	* to an empty object.
 	*/
-	[SkipVersion("5.0.0-alpha1", "https://github.com/elastic/elasticsearch/issues/17518")]
+	[SkipVersion("6.0.0-alpha1", "https://github.com/elastic/elasticsearch/issues/17518 && 6.0 https://github.com/elastic/elasticsearch/pull/17542#issuecomment-300796197")]
 	public class EmptyFilterAggregationUsageTests : AggregationUsageTestBase
 	{
 		public EmptyFilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)

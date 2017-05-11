@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -9,9 +10,8 @@ namespace Nest
 		[JsonProperty("name")]
 		public string Name { get; set; }
 
-		[JsonProperty("template")]
-		[Obsolete("will be renamed to IndexPatterns in elasticsearch 6.0")]
-		public string Template { get; set; }
+		[JsonProperty("index_patterns")]
+		public string IndexPatterns { get; set; }
 
 		[JsonProperty("order")]
 		public long Order { get; set; }

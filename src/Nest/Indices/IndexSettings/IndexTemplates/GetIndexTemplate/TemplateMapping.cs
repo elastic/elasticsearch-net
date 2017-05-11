@@ -1,11 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	public interface ITemplateMapping
 	{
-		[JsonProperty("template")]
-		string Template { get; set; }
+		[JsonProperty("index_patterns")]
+		IReadOnlyCollection<string> IndexPatterns { get; set; }
 
 		[JsonProperty("order")]
 		int? Order { get; set; }
@@ -22,7 +24,7 @@ namespace Nest
 
 	public class TemplateMapping : ITemplateMapping
 	{
-		public string Template { get; set; }
+		public IReadOnlyCollection<string> IndexPatterns {get;set;} = EmptyReadOnly<string>.Collection;
 
 		public int? Order { get; set; }
 

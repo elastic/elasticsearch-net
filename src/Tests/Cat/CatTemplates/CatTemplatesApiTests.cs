@@ -27,7 +27,7 @@ namespace Tests.Cat.CatTemplates
 		protected override void ExpectResponse(ICatResponse<CatTemplatesRecord> response)
 		{
 #pragma warning disable CS0618 // Type or member is obsolete
-			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Template));
+			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.IndexPatterns));
 #pragma warning restore CS0618 // Type or member is obsolete
 		}
 	}
