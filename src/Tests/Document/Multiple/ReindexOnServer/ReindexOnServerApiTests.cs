@@ -72,7 +72,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				.VersionType(VersionType.Internal)
 				.Routing(ReindexRouting.Discard)
 			)
-			.Script(ss => ss.Inline(PainlessScript).Lang("groovy"))
+			.Script(ss => ss.Inline(PainlessScript))
 			.Conflicts(Conflicts.Proceed)
 			.Refresh();
 
@@ -95,7 +95,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				VersionType = VersionType.Internal,
 				Routing = ReindexRouting.Discard
 			},
-			Script = new InlineScript(PainlessScript) { Lang = "groovy" },
+			Script = new InlineScript(PainlessScript),
 			Conflicts = Conflicts.Proceed,
 			Refresh = true,
 		};
@@ -132,7 +132,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				script = new
 				{
 					inline = this.PainlessScript,
-					lang = "groovy"
 				},
 				source = new
 				{

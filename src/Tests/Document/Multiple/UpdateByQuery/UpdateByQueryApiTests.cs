@@ -76,11 +76,13 @@ namespace Tests.Document.Multiple.UpdateByQuery
 
 		protected override Func<UpdateByQueryDescriptor<Test>, IUpdateByQueryRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
+			.Query(q=>q.MatchAll())
 			.Refresh()
 			.Conflicts(Conflicts.Proceed);
 
 		protected override UpdateByQueryRequest Initializer => new UpdateByQueryRequest(CallIsolatedValue, Type<Test>())
 		{
+			Query = new MatchAllQuery(),
 			Refresh = true,
 			Conflicts = Conflicts.Proceed
 		};
@@ -112,12 +114,14 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query?wait_for_completion=false&conflicts=proceed";
 
 		protected override Func<UpdateByQueryDescriptor<Test>, IUpdateByQueryRequest> Fluent => d => d
+			.Query(q=>q.MatchAll())
 			.Index(CallIsolatedValue)
 			.WaitForCompletion(false)
 			.Conflicts(Conflicts.Proceed);
 
 		protected override UpdateByQueryRequest Initializer => new UpdateByQueryRequest(CallIsolatedValue, Type<Test>())
 		{
+			Query = new MatchAllQuery(),
 			WaitForCompletion = false,
 			Conflicts = Conflicts.Proceed
 		};
@@ -159,13 +163,13 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			new
 			{
 				query = new { match = new { flag = new { query = "bar" } } },
-				script = new { inline = "ctx._source.text = 'x'", lang = "groovy" }
+				script = new { inline = "ctx._source.text = 'x'" }
 			};
 
 		protected override Func<UpdateByQueryDescriptor<Test>, IUpdateByQueryRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
 			.Query(q => q.Match(m => m.Field(p => p.Flag).Query("bar")))
-			.Script(ss => ss.Inline(_script).Lang("groovy"))
+			.Script(ss => ss.Inline(_script))
 			;
 
 		protected override UpdateByQueryRequest Initializer => new UpdateByQueryRequest(CallIsolatedValue, Type<Test>())
@@ -175,7 +179,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 				Field = Field<Test>(p => p.Flag),
 				Query = "bar"
 			},
-			Script = new InlineScript(_script) { Lang = "groovy" },
+			Script = new InlineScript(_script),
 		};
 
 		protected override void ExpectResponse(IUpdateByQueryResponse response)

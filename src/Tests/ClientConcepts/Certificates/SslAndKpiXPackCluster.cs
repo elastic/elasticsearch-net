@@ -7,6 +7,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.ManagedElasticsearch.Nodes;
 using Tests.Framework.ManagedElasticsearch.Plugins;
 using Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks;
+using Tests.Framework.Versions;
 
 namespace Tests.ClientConcepts.Certificates
 {
@@ -68,12 +69,12 @@ namespace Tests.ClientConcepts.Certificates
                     $"      filename : \"{fileSystem.ClientCertificateFilename}\"",
                 });
 
-			this.GenerateCertificates(fileSystem, silentModeConfigFile);
-			this.GenerateUnusedCertificates(fileSystem, silentModeConfigFile);
-			this.AddClientCertificateUser(fileSystem);
+			this.GenerateCertificates(fileSystem, silentModeConfigFile, config.ElasticsearchVersion);
+			this.GenerateUnusedCertificates(fileSystem, silentModeConfigFile, config.ElasticsearchVersion);
+			this.AddClientCertificateUser(fileSystem, config.ElasticsearchVersion);
 		}
 
-		private void AddClientCertificateUser(NodeFileSystem fileSystem)
+		private void AddClientCertificateUser(NodeFileSystem fileSystem, ElasticsearchVersion version)
 		{
 			var file = Path.Combine(fileSystem.ConfigPath, "x-pack", "role_mapping") + ".yml";
 			var name = fileSystem.ClientCertificateName;
@@ -83,28 +84,30 @@ namespace Tests.ClientConcepts.Certificates
                 $"    - \"{name}\""
             });
 		}
-		private void GenerateCertificates(NodeFileSystem fileSystem, string silentModeConfigFile)
+		private void GenerateCertificates(NodeFileSystem fileSystem, string silentModeConfigFile, ElasticsearchVersion version)
 		{
 			var name = fileSystem.CertificateFolderName;
+			var zipLocation = Path.Combine(fileSystem.ConfigPath, "x-pack", name) + ".zip";
+			var @out = version.Major < 6 ? $"{name}.zip" : zipLocation;
 			if (!File.Exists(fileSystem.CaCertificate))
 				this.ExecuteBinary(fileSystem.CertGenBinary, "generating ssl certificates for this session",
-					"-in", silentModeConfigFile, "-out", $"{name}.zip");
+					"-in", silentModeConfigFile, "-out", @out);
 
 			if (Directory.Exists(fileSystem.CertificatesPath)) return;
 			Directory.CreateDirectory(fileSystem.CertificatesPath);
-			var zipLocation = Path.Combine(fileSystem.ConfigPath, "x-pack", name) + ".zip";
 			ZipFile.ExtractToDirectory(zipLocation, fileSystem.CertificatesPath);
 		}
-		private void GenerateUnusedCertificates(NodeFileSystem fileSystem, string silentModeConfigFile)
+		private void GenerateUnusedCertificates(NodeFileSystem fileSystem, string silentModeConfigFile, ElasticsearchVersion version)
 		{
 			var name = fileSystem.UnusedCertificateFolderName;
+			var zipLocation = Path.Combine(fileSystem.ConfigPath, "x-pack", name) + ".zip";
+			var @out = version.Major < 6 ? $"{name}.zip" : zipLocation;
 			if (!File.Exists(fileSystem.UnusedCaCertificate))
 				this.ExecuteBinary(fileSystem.CertGenBinary, "generating ssl certificates for this session",
-					"-in", silentModeConfigFile, "-out", $"{name}.zip");
+					"-in", silentModeConfigFile, "-out", @out);
 
 			if (Directory.Exists(fileSystem.UnusedCertificatesPath)) return;
 			Directory.CreateDirectory(fileSystem.UnusedCertificatesPath);
-			var zipLocation = Path.Combine(fileSystem.ConfigPath, "x-pack", name) + ".zip";
 			ZipFile.ExtractToDirectory(zipLocation, fileSystem.UnusedCertificatesPath);
 		}
 	}
