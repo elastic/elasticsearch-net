@@ -13,10 +13,12 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 
 		private IElasticClient Client { get; }
 
-		private readonly IIndexSettings _defaultIndexSettings = new IndexSettings
+		private readonly IIndexSettings _defaultIndexSettings = new IndexSettings(new Dictionary<string, object> {
+			{ "mapping.single_type", "false" } //TODO this is temporarily while parent child mappings are reimagined in 6.0
+		})
 		{
 			NumberOfShards = 2,
-			NumberOfReplicas = 0
+			NumberOfReplicas = 0,
 		};
 
 		private IIndexSettings IndexSettings { get; }

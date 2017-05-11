@@ -27,21 +27,6 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 					$"        {SecurityRealms.FileRealm}:",
 					"          type: file",
 					"          order: 0",
-					string.Empty
-				});
-				saveFile = true;
-			}
-
-			// set up for Watcher HipChat action
-			if (!lines.Any(line => line.Contains("pki1")))
-			{
-				lines.AddRange(new[]
-				{
-					string.Empty,
-					"xpack:",
-					"  security:",
-					"    authc:",
-					"      realms:",
 					$"        {SecurityRealms.PkiRealm}:",
 					"          type: pki",
 					"          order: 1",

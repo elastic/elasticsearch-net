@@ -11,9 +11,24 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 {
 	public class ScriptedMetricAggregationUsageTests : AggregationUsageTestBase
 	{
-		public ScriptedMetricAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
+		class Scripted
 		{
+			public string Language { get; set; }
+			public string Combine { get; set; }
+			public string Reduce { get; set; }
+			public string Map { get; set; }
+			public string Init { get; set; }
 		}
+		public ScriptedMetricAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		private Scripted Script = new Scripted
+		{
+			Language = "painless",
+			Init = "params._agg.commits = []",
+			Map = "if (doc['state'].value == \"Stable\") { params._agg.commits.add(doc['numberOfCommits'].value) }",
+			Combine = "def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum",
+			Reduce = "def sum = 0.0; for (a in params._aggs) { sum += a } return sum",
+		};
 
 		protected override object ExpectJson => new
 		{
@@ -23,26 +38,10 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 				{
 					scripted_metric = new
 					{
-						init_script = new
-						{
-							inline = "_agg['commits'] = []",
-							lang = "groovy"
-						},
-						map_script = new
-						{
-							inline = "if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }",
-							lang = "groovy"
-						},
-						combine_script = new
-						{
-							inline = "sum = 0; for (c in _agg.commits) { sum += c }; return sum",
-							lang = "groovy"
-						},
-						reduce_script = new
-						{
-							inline = "sum = 0; for (a in _aggs) { sum += a }; return sum",
-							lang = "groovy"
-						}
+						init_script = new { inline = Script.Init },
+						map_script = new { inline = Script.Map },
+						combine_script = new { inline = Script.Combine },
+						reduce_script = new { inline = Script.Reduce }
 					}
 				}
 			}
@@ -51,10 +50,10 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(a => a
 				.ScriptedMetric("sum_the_hard_way", sm => sm
-					.InitScript(ss => ss.Inline("_agg['commits'] = []").Lang("groovy"))
-					.MapScript(ss => ss.Inline("if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }").Lang("groovy"))
-					.CombineScript(ss => ss.Inline("sum = 0; for (c in _agg.commits) { sum += c }; return sum").Lang("groovy"))
-					.ReduceScript(ss => ss.Inline("sum = 0; for (a in _aggs) { sum += a }; return sum").Lang("groovy"))
+					.InitScript(ss => ss.Inline(Script.Init))
+					.MapScript(ss => ss.Inline(Script.Map))
+					.CombineScript(ss => ss.Inline(Script.Combine))
+					.ReduceScript(ss => ss.Inline(Script.Reduce))
 				)
 			);
 
@@ -63,10 +62,10 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 			{
 				Aggregations = new ScriptedMetricAggregation("sum_the_hard_way")
 				{
-					InitScript = new InlineScript("_agg['commits'] = []") {Lang = "groovy"},
-					MapScript = new InlineScript("if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }") {Lang = "groovy"},
-					CombineScript = new InlineScript("sum = 0; for (c in _agg.commits) { sum += c }; return sum") {Lang = "groovy"},
-					ReduceScript = new InlineScript("sum = 0; for (a in _aggs) { sum += a }; return sum") {Lang = "groovy"}
+					InitScript = new InlineScript(Script.Init),
+					MapScript = new InlineScript(Script.Map),
+					CombineScript = new InlineScript(Script.Combine),
+					ReduceScript = new InlineScript(Script.Reduce)
 				}
 			};
 
