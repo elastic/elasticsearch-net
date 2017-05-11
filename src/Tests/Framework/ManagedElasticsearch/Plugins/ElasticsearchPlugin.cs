@@ -6,7 +6,6 @@ namespace Tests.Framework.ManagedElasticsearch.Plugins
 	{
 		[Moniker("delete-by-query")] DeleteByQuery,
 		[Moniker("cloud-azure")] CloudAzure,
-		[Moniker("mapper-attachments")] MapperAttachments,
 		[Moniker("mapper-murmur3")] MapperMurmer3,
 		[Moniker("x-pack")] XPack,
 		[Moniker("ingest-geoip")] IngestGeoIp,

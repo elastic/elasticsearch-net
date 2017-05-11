@@ -8,7 +8,6 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 	/// Use this cluster for api's that do writes. If they are however intrusive or long running consider IntrusiveOperationCluster instead.
 	/// </summary>
 	[RequiresPlugin(
-		ElasticsearchPlugin.MapperAttachments,
 		ElasticsearchPlugin.IngestGeoIp,
 		ElasticsearchPlugin.AnalysisKuromoji,
 		ElasticsearchPlugin.AnalysisIcu,

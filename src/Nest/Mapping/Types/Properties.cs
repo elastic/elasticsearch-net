@@ -51,7 +51,6 @@ namespace Nest
 		TReturnType Date(Func<DatePropertyDescriptor<T>, IDateProperty> selector);
 		TReturnType Boolean(Func<BooleanPropertyDescriptor<T>, IBooleanProperty> selector);
 		TReturnType Binary(Func<BinaryPropertyDescriptor<T>, IBinaryProperty> selector);
-		TReturnType Attachment(Func<AttachmentPropertyDescriptor<T>, IAttachmentProperty> selector);
 		TReturnType Object<TChild>(Func<ObjectTypeDescriptor<T, TChild>, IObjectProperty> selector)
 			where TChild : class;
 		TReturnType Nested<TChild>(Func<NestedPropertyDescriptor<T, TChild>, INestedProperty> selector)
@@ -97,8 +96,6 @@ namespace Nest
 		public PropertiesDescriptor<T> Boolean(Func<BooleanPropertyDescriptor<T>, IBooleanProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Binary(Func<BinaryPropertyDescriptor<T>, IBinaryProperty> selector) => SetProperty(selector);
-
-		public PropertiesDescriptor<T> Attachment(Func<AttachmentPropertyDescriptor<T>, IAttachmentProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Object<TChild>(Func<ObjectTypeDescriptor<T, TChild>, IObjectProperty> selector)
 			where TChild : class => SetProperty(selector);

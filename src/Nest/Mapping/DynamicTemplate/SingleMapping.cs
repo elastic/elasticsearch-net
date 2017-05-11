@@ -34,9 +34,6 @@ namespace Nest
 		public IProperty Binary(Func<BinaryPropertyDescriptor<T>, IBinaryProperty> selector) =>
 			selector?.Invoke(new BinaryPropertyDescriptor<T>());
 
-		public IProperty Attachment(Func<AttachmentPropertyDescriptor<T>, IAttachmentProperty> selector) =>
-			selector?.Invoke(new AttachmentPropertyDescriptor<T>());
-
 		public IProperty Object<TChild>(Func<ObjectTypeDescriptor<T, TChild>, IObjectProperty> selector)
 			where TChild : class => selector?.Invoke(new ObjectTypeDescriptor<T, TChild>());
 

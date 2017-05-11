@@ -20,11 +20,6 @@ namespace Nest
 		[EnumMember(Value = "geo_shape")]
 		GeoShape,
 		/// <summary>
-		/// The attachment type allows to index different “attachment” type field (encoded as base64), for example, microsoft office formats, open document formats, ePub, HTML...
-		/// </summary>
-		[EnumMember(Value = "attachment")]
-		Attachment,
-		/// <summary>
 		/// An ip mapping type allows to store ipv4 addresses in a numeric form allowing to easily sort, and range query it (using ip values).
 		/// </summary>
 		[EnumMember(Value = "ip")]

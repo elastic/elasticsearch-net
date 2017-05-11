@@ -19,7 +19,6 @@ namespace Nest
 		void Visit(IIpProperty property);
 		void Visit(IGeoPointProperty property);
 		void Visit(IGeoShapeProperty property);
-		void Visit(IAttachmentProperty property);
 		void Visit(INumberProperty property);
 		void Visit(ICompletionProperty property);
 		void Visit(IMurmur3HashProperty property);
@@ -63,8 +62,6 @@ namespace Nest
 		public virtual void Visit(IGeoPointProperty property) { }
 
 		public virtual void Visit(IGeoShapeProperty property) { }
-
-		public virtual void Visit(IAttachmentProperty property) { }
 
 		public virtual void Visit(ICompletionProperty property) { }
 

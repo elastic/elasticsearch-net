@@ -139,9 +139,6 @@ namespace Nest
 			if (type == typeof(CompletionField))
 				return new CompletionProperty();
 
-			if (type == typeof(Attachment))
-				return new AttachmentProperty();
-
 			if (type == typeof(DateRange))
 				return new DateRangeProperty();
 

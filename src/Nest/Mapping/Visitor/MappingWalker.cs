@@ -148,13 +148,6 @@ namespace Nest
 							this.Accept(t.Fields);
 						});
 						break;
-					case FieldType.Attachment:
-						this.Visit<IAttachmentProperty>(field, t =>
-						{
-							this._visitor.Visit(t);
-							this.Accept(t.Fields);
-						});
-						break;
 					case FieldType.Completion:
 						this.Visit<ICompletionProperty>(field, t =>
 						{

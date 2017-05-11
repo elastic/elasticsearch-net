@@ -36,10 +36,6 @@ namespace Nest
 		{
 		}
 
-		public virtual void Visit(IAttachmentProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
-		{
-		}
-
 		public virtual void Visit(IGeoPointProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
 		{
 		}
@@ -105,10 +101,6 @@ namespace Nest
 			var keywordType = type as IKeywordProperty;
 			if (keywordType != null)
 				Visit(keywordType, propertyInfo, attribute);
-
-			var attachmentType = type as IAttachmentProperty;
-			if (attachmentType != null)
-				Visit(attachmentType, propertyInfo, attribute);
 
 			var geoShapeType = type as IGeoShapeProperty;
 			if (geoShapeType != null)

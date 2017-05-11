@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -11,6 +12,23 @@ using Xunit;
 
 namespace Tests.Document.Single.Index
 {
+	public class TestDocument
+	{
+		static TestDocument()
+		{
+			using (var stream = typeof(TestDocument).Assembly().GetManifestResourceStream("Tests.Document.Single.Index.Attachment_Test_Document.pdf"))
+			{
+				using (var memoryStream = new MemoryStream())
+				{
+					stream.CopyTo(memoryStream);
+					TestPdfDocument = Convert.ToBase64String(memoryStream.ToArray());
+				}
+			}
+		}
+
+		// Base 64 encoded version of Attachment_Test_Document.pdf
+		public static string TestPdfDocument { get; }
+	}
 	public class IndexIngestAttachmentApiTests :
 		ApiIntegrationTestBase<IntrusiveOperationCluster, IIndexResponse,
 			IIndexRequest<IndexIngestAttachmentApiTests.IngestedAttachment>,
@@ -21,10 +39,10 @@ namespace Tests.Document.Single.Index
 		{
 			public int Id { get; set; }
 			public string Content { get; set; }
-			public Nest.Attachment Attachment { get; set; }
+			public Attachment Attachment { get; set; }
 		}
 
-		private static string Content => Tests.Document.Single.Attachment.Document.TestPdfDocument;
+		private static string Content => TestDocument.TestPdfDocument;
 
 		private static string PipelineId { get; } = "pipeline-" + Guid.NewGuid().ToString("N").Substring(0, 8);
 
@@ -43,7 +61,7 @@ namespace Tests.Document.Single.Index
 								.Text(s => s
 									.Name(f => f.Content)
 								)
-								.Object<Nest.Attachment>(o => o
+								.Object<Attachment>(o => o
 									.Name(f => f.Attachment)
 								)
 							)

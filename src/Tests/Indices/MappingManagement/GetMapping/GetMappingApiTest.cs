@@ -45,9 +45,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			response.Accept(visitor);
 
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
-			//ranges property is ignored on versions before 5.2.0
-			var supportsRanges = TestClient.VersionUnderTestSatisfiedBy(">=5.2.0");
-			visitor.CountsShouldContainKeyAndCountBe("object", supportsRanges ? 5 : 4);
+			visitor.CountsShouldContainKeyAndCountBe("object", 5);
 			visitor.CountsShouldContainKeyAndCountBe("date", 4);
 			visitor.CountsShouldContainKeyAndCountBe("text", 11);
 			visitor.CountsShouldContainKeyAndCountBe("keyword", 10);
@@ -56,14 +54,11 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			visitor.CountsShouldContainKeyAndCountBe("geo_point", 2);
 			visitor.CountsShouldContainKeyAndCountBe("completion", 2);
 			visitor.CountsShouldContainKeyAndCountBe("nested", 1);
-			if (supportsRanges)
-			{
-				visitor.CountsShouldContainKeyAndCountBe("date_range", 1);
-				visitor.CountsShouldContainKeyAndCountBe("float_range", 1);
-				visitor.CountsShouldContainKeyAndCountBe("integer_range", 1);
-				visitor.CountsShouldContainKeyAndCountBe("double_range", 1);
-				visitor.CountsShouldContainKeyAndCountBe("long_range", 1);
-			}
+			visitor.CountsShouldContainKeyAndCountBe("date_range", 1);
+			visitor.CountsShouldContainKeyAndCountBe("float_range", 1);
+			visitor.CountsShouldContainKeyAndCountBe("integer_range", 1);
+			visitor.CountsShouldContainKeyAndCountBe("double_range", 1);
+			visitor.CountsShouldContainKeyAndCountBe("long_range", 1);
 		}
 	}
 
@@ -158,11 +153,6 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		public void Visit(IGeoPointProperty mapping)
 		{
 			Increment("geo_point");
-		}
-
-		public void Visit(IAttachmentProperty mapping)
-		{
-			Increment("attachment");
 		}
 
 		public void Visit(ICompletionProperty mapping)

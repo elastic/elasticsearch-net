@@ -65,8 +65,6 @@ namespace Nest
 					return jObject.ToObject<GeoPointProperty>();
 				case FieldType.GeoShape:
 					return jObject.ToObject<GeoShapeProperty>();
-				case FieldType.Attachment:
-					return jObject.ToObject<AttachmentProperty>();
 				case FieldType.Completion:
 					return jObject.ToObject<CompletionProperty>();
 				case FieldType.TokenCount:

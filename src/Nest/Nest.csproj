@@ -22,6 +22,7 @@
     <Folder Include="Cluster\RemoteInfo" />
     <Folder Include="Cluster\RemoteInfo" />
     <Folder Include="Document\Single\SourceExists" />
+    <Folder Include="Mapping\Types\Specialized\Attachment" />
     <Folder Include="Search\FieldCapabilities" />
     <Folder Include="XPack\Info\XPackInfo" />
     <Folder Include="XPack\Info\XPackInfo" />
