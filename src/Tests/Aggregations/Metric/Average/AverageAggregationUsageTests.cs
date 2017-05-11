@@ -31,7 +31,6 @@ namespace Tests.Aggregations.Metric.Average
 						script = new
 						{
 							inline = "_value * 1.2",
-							lang = "groovy"
 						}
 					}
 				}
@@ -46,7 +45,7 @@ namespace Tests.Aggregations.Metric.Average
 					)
 					.Field(p => p.NumberOfCommits)
 					.Missing(10)
-					.Script(ss=>ss.Inline("_value * 1.2").Lang("groovy"))
+					.Script(ss=>ss.Inline("_value * 1.2"))
 				)
 			);
 
@@ -60,7 +59,7 @@ namespace Tests.Aggregations.Metric.Average
 						{ "foo", "bar" }
 					},
 					Missing = 10,
-					Script = new InlineScript("_value * 1.2") { Lang = "groovy" }
+					Script = new InlineScript("_value * 1.2")
 				}
 			};
 
