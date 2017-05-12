@@ -90,6 +90,7 @@ Target "Canary" <| fun _ ->
   ==> "Canary"
 
 "Clean"
+  ==> "Restore"
   =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Integrate"
 
