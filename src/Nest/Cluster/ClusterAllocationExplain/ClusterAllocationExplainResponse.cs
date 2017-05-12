@@ -48,7 +48,7 @@ namespace Nest
 		[JsonProperty("can_rebalance_cluster")]
 		Decision? CanRebalanceCluster { get; }
 
-		[JsonProperty("can_rebalance_to_other_nodes")]
+		[JsonProperty("can_rebalance_to_other_node")]
 		Decision? CanRebalanceToOtherNode { get; }
 
 		[JsonProperty("can_rebalance_cluster_decisions")]
