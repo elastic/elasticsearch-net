@@ -68,7 +68,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override object ExpectJson { get; } = new { };
+		protected override object ExpectJson { get; } = new { query = new { match_all = new { } } };
 
 		protected override UpdateByQueryDescriptor<Test> NewDescriptor() => new UpdateByQueryDescriptor<Test>(CallIsolatedValue).Type<Test>();
 

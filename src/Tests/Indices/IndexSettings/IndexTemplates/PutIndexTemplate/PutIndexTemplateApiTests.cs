@@ -32,7 +32,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 		protected override object ExpectJson { get; } = new
 		{
 			order = 1,
-			template = "nestx-*",
+			index_patterns = new [] {"nestx-*" },
 			settings = new Dictionary<string, object> { { "index.number_of_shards", 1 } },
 			mappings = new
 			{

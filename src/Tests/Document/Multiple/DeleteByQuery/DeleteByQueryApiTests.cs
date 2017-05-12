@@ -106,7 +106,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(this.CallIsolatedValue);
 
-		protected override object ExpectJson => new { };
+		protected override object ExpectJson => new { query = new { match_all = new { } } };
 
 		protected override Func<DeleteByQueryDescriptor<Project>, IDeleteByQueryRequest> Fluent => d => d
 			.Index(this.CallIsolatedValue)
