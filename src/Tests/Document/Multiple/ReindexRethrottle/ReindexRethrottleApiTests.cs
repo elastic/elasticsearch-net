@@ -49,7 +49,7 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 			var reindex = client.UpdateByQuery<Project>(u => u
 				.Conflicts(Conflicts.Proceed)
 				.Query(q => q.MatchAll())
-				.Script(s => s.Inline("ctx._source.numberOfCommits+10").Lang("groovy"))
+				.Script(s => s.Inline("ctx._source.numberOfCommits+10"))
 				.Refresh()
 				.RequestsPerSecond(1)
 				.WaitForCompletion(false)

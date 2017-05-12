@@ -21,7 +21,7 @@ namespace Tests.Modules.Scripting
 			requestAsync: (s, c, r) => c.PutScriptAsync(r)
 		);
 
-		private string _lang = "groovy";
+		private string _lang = "painless";
 
 		protected PutScriptRequest CreateInitializer(string id) => new PutScriptRequest(_lang, id) { Script = "1+1" };
 		protected IPutScriptRequest CreateFluent(string id, PutScriptDescriptor d) => d.Script("1+1");

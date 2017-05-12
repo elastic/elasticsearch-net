@@ -110,11 +110,13 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 		protected override Func<DeleteByQueryDescriptor<Project>, IDeleteByQueryRequest> Fluent => d => d
 			.Index(this.CallIsolatedValue)
+			.Query(q=>q.MatchAll())
 			.WaitForCompletion(false)
 			.Conflicts(Conflicts.Proceed);
 
 		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(this.CallIsolatedValue, Type<Project>())
 		{
+			Query = new MatchAllQuery(),
 			WaitForCompletion = false,
 			Conflicts = Conflicts.Proceed
 		};

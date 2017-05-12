@@ -56,6 +56,7 @@ namespace Tests.Search.Request
 				.Settings(s => s
 					.NumberOfReplicas(0)
 					.NumberOfShards(1)
+					.Setting("mapping.single_type", "false")
 				)
 				.Mappings(map => map
 					.Map<King>(m => m.AutoMap()

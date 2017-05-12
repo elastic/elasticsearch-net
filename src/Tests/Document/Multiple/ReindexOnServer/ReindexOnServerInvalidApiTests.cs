@@ -30,7 +30,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			response.ServerError.Status.Should().Be(500);
 			response.ServerError.Error.Should().NotBeNull();
 			response.ServerError.Error.RootCause.Should().NotBeNullOrEmpty();
-			response.ServerError.Error.RootCause.First().Reason.Should().Contain("Error compiling");
+			response.ServerError.Error.RootCause.First().Reason.Should().Contain("compil");
 			response.ServerError.Error.RootCause.First().Type.Should().Be("script_exception");
 		}
 
