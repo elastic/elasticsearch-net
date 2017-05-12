@@ -13,7 +13,9 @@ namespace Tests.XPack.Watcher.GetWatch
 	{
 		public GetWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => PutWatch(client, values);
+
+		public static void PutWatch(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var callUniqueValue in values)
 			{
@@ -53,8 +55,7 @@ namespace Tests.XPack.Watcher.GetWatch
 							)
 							.Transform(ctt => ctt
 								.Script(st => st
-									.Inline("return [ time : ctx.trigger.scheduled_time ]")
-									.Lang("groovy")
+									.Inline("return [ 'time' : ctx.trigger.scheduled_time ]")
 								)
 							)
 						)
@@ -71,7 +72,7 @@ namespace Tests.XPack.Watcher.GetWatch
 				);
 
 				if (!putWatchResponse.IsValid)
-					throw new Exception("Problem setting up integration test");
+					throw new Exception($"Problem setting up integration test: {putWatchResponse.DebugInformation}");
 			}
 		}
 
@@ -147,11 +148,15 @@ namespace Tests.XPack.Watcher.GetWatch
 
 	public class GetNonExistentWatchApiTests : ApiIntegrationTestBase<XPackCluster, IGetWatchResponse, IGetWatchRequest, GetWatchDescriptor, GetWatchRequest>
 	{
+
+		//TODO this setup should not be necessary but in 6.0.0-alpha1 if no `.watches` index exists the response is actually an error
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => GetWatchApiTests.PutWatch(client, values);
+
 		public GetNonExistentWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.GetWatch(CallIsolatedValue, f),
-			fluentAsync: (client, f) => client.GetWatchAsync(CallIsolatedValue, f),
+			fluent: (client, f) => client.GetWatch(CallIsolatedValue + "x", f),
+			fluentAsync: (client, f) => client.GetWatchAsync(CallIsolatedValue + "x", f),
 			request: (client, r) => client.GetWatch(r),
 			requestAsync: (client, r) => client.GetWatchAsync(r)
 		);
@@ -160,22 +165,22 @@ namespace Tests.XPack.Watcher.GetWatch
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}";
+		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue + "x"}";
 
 		protected override bool SupportsDeserialization => true;
 
-		protected override GetWatchDescriptor NewDescriptor() => new GetWatchDescriptor(CallIsolatedValue);
+		protected override GetWatchDescriptor NewDescriptor() => new GetWatchDescriptor(CallIsolatedValue + "x");
 
 		protected override object ExpectJson => null;
 
 		protected override Func<GetWatchDescriptor, IGetWatchRequest> Fluent => f => f;
 
-		protected override GetWatchRequest Initializer => new GetWatchRequest(CallIsolatedValue);
+		protected override GetWatchRequest Initializer => new GetWatchRequest(CallIsolatedValue + "x");
 
 		protected override void ExpectResponse(IGetWatchResponse response)
 		{
 			response.Found.Should().BeFalse();
-			response.Id.Should().Be(CallIsolatedValue);
+			response.Id.Should().Be(CallIsolatedValue + "x");
 			response.Status.Should().BeNull();
 			response.Watch.Should().BeNull();
 		}

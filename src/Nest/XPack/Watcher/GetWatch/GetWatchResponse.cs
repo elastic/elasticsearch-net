@@ -11,7 +11,7 @@ namespace Nest
 		[JsonProperty("_id")]
 		string Id { get; }
 
-		[JsonProperty("_status")]
+		[JsonProperty("status")]
 		WatchStatus Status { get; }
 
 		[JsonProperty("watch")]

@@ -37,7 +37,7 @@ namespace Tests.XPack.License.GetLicense
 			var l = response.License;
 			l.Should().NotBeNull();
 			l.ExpiryDate.Should().BeAfter(DateTime.UtcNow.AddYears(-2));
-			l.IssueDate.Should().BeAfter(DateTime.UtcNow.AddYears(-2));
+			l.IssueDate.Should().BeAfter(DateTime.UtcNow.AddYears(-30));
 			l.IssueDateInMilliseconds.Should().BeGreaterThan(0);
 			l.ExpiryDateInMilliseconds.Should().BeGreaterThan(0);
 			l.IssuedTo.Should().NotBeNullOrWhiteSpace();

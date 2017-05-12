@@ -9,23 +9,42 @@ namespace Nest
 	[JsonObject]
 	public interface IWatcherStatsResponse : IResponse
 	{
-		[JsonProperty("watcher_state")]
-		WatcherState WatcherState { get; }
-
-		[JsonProperty("watch_count")]
-		long WatchCount { get; }
-
-		[JsonProperty("execution_thread_pool")]
-		ExecutionThreadPool ExecutionThreadPool { get; }
-
-		[JsonProperty("current_watches")]
-		IReadOnlyCollection<WatchRecordStats> CurrentWatches { get; }
-
-		[JsonProperty("queued_watches")]
-		IReadOnlyCollection<WatchRecordQueuedStats> QueuedWatches { get; }
+		[JsonProperty("cluster_name")]
+		string ClusterName { get; }
 
 		[JsonProperty("manually_stopped")]
 		bool ManuallyStopped { get; }
+
+		[JsonProperty("stats")]
+		IReadOnlyCollection<WatcherNodeStats> Stats { get; }
+
+	}
+
+	public class WatcherStatsResponse : ResponseBase, IWatcherStatsResponse
+	{
+		public IReadOnlyCollection<WatcherNodeStats> Stats { get; internal set; } = EmptyReadOnly<WatcherNodeStats>.Collection;
+
+		public bool ManuallyStopped { get; internal set; }
+
+		public string ClusterName { get; internal set; }
+	}
+
+	public class WatcherNodeStats
+	{
+		[JsonProperty("watcher_state")]
+		public WatcherState WatcherState { get; internal set; }
+
+		[JsonProperty("watch_count")]
+		public long WatchCount { get; internal set; }
+
+		[JsonProperty("execution_thread_pool")]
+		public ExecutionThreadPool ExecutionThreadPool { get; internal set; }
+
+		[JsonProperty("current_watches")]
+		public IReadOnlyCollection<WatchRecordStats> CurrentWatches { get; internal set; } = EmptyReadOnly<WatchRecordStats>.Collection;
+
+		[JsonProperty("queued_watches")]
+		public IReadOnlyCollection<WatchRecordQueuedStats> QueuedWatches { get; internal set; } = EmptyReadOnly<WatchRecordQueuedStats>.Collection;
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]
@@ -42,21 +61,6 @@ namespace Nest
 
 		[EnumMember(Value = "stopping")]
 		Stopping,
-	}
-
-	public class WatcherStatsResponse : ResponseBase, IWatcherStatsResponse
-	{
-		public WatcherState WatcherState { get; internal set; }
-
-		public long WatchCount { get; internal set; }
-
-		public ExecutionThreadPool ExecutionThreadPool { get; internal set; }
-
-		public IReadOnlyCollection<WatchRecordStats> CurrentWatches { get; internal set; }
-
-		public IReadOnlyCollection<WatchRecordQueuedStats> QueuedWatches { get; internal set; }
-
-		public bool ManuallyStopped { get; internal set; }
 	}
 
 	public class WatchRecordQueuedStats

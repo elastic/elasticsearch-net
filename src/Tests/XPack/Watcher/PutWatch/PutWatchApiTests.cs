@@ -179,8 +179,7 @@ namespace Tests.XPack.Watcher.PutWatch
 						{
 							script = new
 							{
-								inline = "return [ time : ctx.trigger.scheduled_time ]",
-								lang = "groovy"
+								inline = "return [ 'time' : ctx.trigger.scheduled_time ]",
 							}
 						}
 					}
@@ -404,8 +403,7 @@ namespace Tests.XPack.Watcher.PutWatch
 					)
 					.Transform(ctt => ctt
 						.Script(st => st
-							.Inline("return [ time : ctx.trigger.scheduled_time ]")
-							.Lang("groovy")
+							.Inline("return [ 'time' : ctx.trigger.scheduled_time ]")
 						)
 					)
 				)
@@ -598,10 +596,7 @@ namespace Tests.XPack.Watcher.PutWatch
 							},
 							Timeout = "10s",
 						},
-						new InlineScriptTransform("return [ time : ctx.trigger.scheduled_time ]")
-						{
-							Lang = "groovy"
-						}
+						new InlineScriptTransform("return [ 'time' : ctx.trigger.scheduled_time ]")
 					}
 				},
 				Condition = new GreaterThanOrEqualArrayCondition("ctx.payload.search.aggregations.top_project_tags.buckets", "doc_count", 1),

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -84,14 +85,18 @@ namespace Tests.XPack.Watcher.WatcherStats
 
 		protected override void ExpectResponse(IWatcherStatsResponse response)
 		{
-			response.WatchCount.Should().BeGreaterThan(0);
-			response.WatcherState.Should().Be(WatcherState.Started);
+			response.ClusterName.Should().NotBeNullOrWhiteSpace();
+			response.Stats.Should().NotBeEmpty();
+			var nodeStats = response.Stats.First();
 
-			response.ExecutionThreadPool.Should().NotBeNull();
+			nodeStats.WatchCount.Should().BeGreaterThan(0);
+			nodeStats.WatcherState.Should().Be(WatcherState.Started);
+
+			nodeStats.ExecutionThreadPool.Should().NotBeNull();
 
 			// TODO: Would be good if we can test these too
-			response.CurrentWatches.Should().NotBeNull();
-			response.QueuedWatches.Should().NotBeNull();
+			nodeStats.CurrentWatches.Should().NotBeNull();
+			nodeStats.QueuedWatches.Should().NotBeNull();
 		}
 	}
 }

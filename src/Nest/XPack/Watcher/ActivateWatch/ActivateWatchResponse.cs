@@ -5,12 +5,13 @@ namespace Nest
 {
 	public interface IActivateWatchResponse : IResponse
 	{
+		[JsonProperty("status")]
 		ActivationStatus Status { get; }
 	}
 
 	public class ActivateWatchResponse : ResponseBase, IActivateWatchResponse
 	{
-		[JsonProperty("_status")]
+		[JsonProperty("status")]
 		public ActivationStatus Status { get; internal set; }
 	}
 
