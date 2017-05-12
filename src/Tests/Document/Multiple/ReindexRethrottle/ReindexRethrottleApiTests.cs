@@ -40,9 +40,7 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 
 	public class ReindexRethrottleUpdateByQueryTests : ReindexRethrottleApiTests
 	{
-		public ReindexRethrottleUpdateByQueryTests(ReindexCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public ReindexRethrottleUpdateByQueryTests(ReindexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
