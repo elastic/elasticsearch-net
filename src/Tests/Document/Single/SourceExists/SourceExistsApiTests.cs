@@ -58,7 +58,7 @@ namespace Tests.Document.Single.SourceExists
 					)
 				)
 			);
-			index.IsValid.Should().BeTrue(index.DebugInformation);
+			index.ShouldBeValid();
 
 			foreach (var id in values.Values)
 				this.Client.Index(Project.Instance, i=>i.Id(id).Index(IndexWithNoSource));

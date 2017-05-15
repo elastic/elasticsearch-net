@@ -30,7 +30,7 @@ namespace Tests.Reproduce
 
 			//warmup
 			var response = FixedSearch(client);
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			response.Took.Should().Be(147);
 
 			var iterations = 10000;
@@ -41,7 +41,7 @@ namespace Tests.Reproduce
 				sw.Restart();
 				response = FixedSearch(client);
 				elapsed.Add(sw.Elapsed);
-				response.IsValid.Should().BeTrue();
+				response.ShouldBeValid();
 				response.Took.Should().Be(147);
 			}
 

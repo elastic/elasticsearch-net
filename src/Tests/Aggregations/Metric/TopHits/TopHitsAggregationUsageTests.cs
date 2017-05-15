@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
@@ -159,7 +160,7 @@ namespace Tests.Aggregations.Metric.TopHits
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var states = response.Aggs.Terms("states");
 			states.Should().NotBeNull();
 			states.Buckets.Should().NotBeNullOrEmpty();

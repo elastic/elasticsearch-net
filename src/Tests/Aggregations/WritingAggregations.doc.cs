@@ -228,7 +228,7 @@ namespace Tests.Aggregations
 		*/
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			var childAggregation = response.Aggs.Children("name_of_child_agg");
 

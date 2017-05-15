@@ -34,7 +34,7 @@ namespace Tests.Cluster.TaskManagement.GetTask
 
 		protected override void ExpectResponse(IGetTaskResponse response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			response.Task.Should().NotBeNull();
 			var task = response.Task;
 			task.Node.Should().NotBeNullOrEmpty();

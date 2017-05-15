@@ -45,7 +45,7 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 
 				//TODO change this to GetTasks when it's implemented
 				var taskInfo = client.ListTasks(new ListTasksRequest());
-				taskInfo.IsValid.Should().BeTrue();
+				taskInfo.ShouldBeValid();
 				values.ExtendedValue("taskId", taskId);
 			}
 		}

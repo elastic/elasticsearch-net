@@ -32,10 +32,10 @@ namespace Tests.Cluster.RemoteInfo
 					}
 				}
 			});
-			enableRemoteClusters.IsValid.Should().BeTrue(enableRemoteClusters.DebugInformation);
+			enableRemoteClusters.ShouldBeValid();
 
 			var remoteSearch = client.Search<Project>(s => s.Index(Index<Project>("cluster_one").And<Project>("cluster_two")));
-			remoteSearch.IsValid.Should().BeTrue(remoteSearch.DebugInformation);
+			remoteSearch.ShouldBeValid();
 		}
 
 		public RemoteInfoApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

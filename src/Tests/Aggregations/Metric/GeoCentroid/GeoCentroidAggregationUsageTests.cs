@@ -117,7 +117,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 
 			var projects = response.Aggs.Terms("projects");
 

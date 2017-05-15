@@ -29,13 +29,13 @@ namespace Tests.Indices.IndexManagement.ShrinkIndex
 					.NumberOfReplicas(0)
 				)
 			);
-			create.IsValid.Should().BeTrue();
+			create.ShouldBeValid();
 			var update = client.UpdateIndexSettings(CallIsolatedValue, u => u
 				.IndexSettings(s => s
 					.BlocksWrite()
 				)
 			);
-			update.IsValid.Should().BeTrue();
+			update.ShouldBeValid();
 		}
 
 		protected override bool ExpectIsValid => true;
@@ -68,7 +68,7 @@ namespace Tests.Indices.IndexManagement.ShrinkIndex
 
 		protected override void ExpectResponse(IShrinkIndexResponse response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			response.Acknowledged.Should().BeTrue();
 			response.ShardsAcknowledged.Should().BeTrue();
 		}

@@ -63,7 +63,7 @@ namespace Tests.Search.Search
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeFalse();
+			response.ShouldNotBeValid();
 			var serverError = response.ServerError;
 			serverError.Should().NotBeNull();
 			serverError.Status.Should().Be(400);
