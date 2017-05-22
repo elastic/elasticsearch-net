@@ -1,4 +1,4 @@
-#Contributing
+# Contributing
 
 Contributing back to `Elasticsearch.Net` and `NEST` is very much appreciated. 
 Whether you [feel the need to change one character](https://github.com/elasticsearch/elasticsearch-net/pull/536) or have a go at 
@@ -40,15 +40,15 @@ Please submit your [Pull Requests](https://help.github.com/articles/creating-a-p
 - [`2.x`](https://github.com/elastic/elasticsearch-net/tree/2.x) branch for 2.x
 - [`1.x`](https://github.com/elastic/elasticsearch-net/tree/1.x) branch for 1.x
 
-#Building the solution
+# Building the solution
 
 The solution uses a number of awesome Open Source software tools to ease development:
 
-##Paket
+## Paket
 
 [Paket](https://fsprojects.github.io/Paket/) is the dependency manager of choice for handling dependencies of both the solution and the build automation system. It works for both .NET and Mono, with an ability to reference packages from Nuget and also files directly from github.
 
-##FAKE
+## FAKE
 
 [FAKE (F# MAKE)](http://fsharp.github.io/FAKE/) is used as the build automation system for the solution. To get started after cloning the solution, it's best to run the build script in the root
 
@@ -71,7 +71,7 @@ This will
 
 You can also compile the solution within Visual Studio if you prefer, but the build script is going to be faster.
 
-##Tests
+## Tests
 
 The `Tests` project contains both xunit unit and integration tests. A `tests.yaml` file within the root of the `Tests` project determines the test mode when running tests inside Visual Studio
 
@@ -95,9 +95,9 @@ build.bat Integrate [Elasticsearch Version Number e.g. 2.2.0]
 ```
 will quick compile the solution and run integration tests against the target Elasticsearch version. The first time this is run for a version of Elasticsearch, it will download Elasticsearch and unzip Elasticsearch, install the plugins necessary to run the integration tests, and start the node. Because of this, the first run may take some time to start.
 
-##Troubleshooting
+## Troubleshooting
 
-###Could not load file or assembly FSharp.Core
+### Could not load file or assembly FSharp.Core
 
 You may come across an exception similar to below when running the build script
 
@@ -108,3 +108,14 @@ The `1.x` and `master` branches have diverged dramatically as a result of change
 
 If working on both 1.x and 2.0 versions of NEST, it is recommended to clone the git repository for each version into separate directories to avoid the need to switch between the divergent branches.
 
+### System.Exception: Attempting to run with dotnet.exe with 1.0.x but global.json mandates 1.0.1
+
+When running the `build` script, you may encounter a mismatch with your version of the .NET Core runtime. Ensure your version of .NET Core exactly matches the version specified under `sdk` in the `global.json` file.
+
+```json
+{
+  "sdk": {
+    "version": "1.0.1"
+  }
+}
+```
