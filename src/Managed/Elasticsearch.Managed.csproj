@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nest\Nest.csproj" />
+    <PackageReference Include="SemanticVersioning" Version="0.7.6" />
+    <Folder Include="Versions\" />
+  </ItemGroup>
+
+</Project>
