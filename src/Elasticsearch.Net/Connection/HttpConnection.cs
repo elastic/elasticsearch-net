@@ -199,7 +199,7 @@ namespace Elasticsearch.Net
 				using (cancellationToken.Register(() => request.Abort()))
 				{
 					if (data != null)
-						await PostRequestAsync<TReturn>(requestData, cancellationToken, request, data);
+						await PostRequestAsync(requestData, cancellationToken, request, data);
 					requestData.MadeItToResponse = true;
 				}
 				await GetResponseAsync(requestData, request, builder);
@@ -234,8 +234,8 @@ namespace Elasticsearch.Net
 			getResponseCancellationHandle.Unregister(((IAsyncResult) apmGetResponseTask).AsyncWaitHandle);
 		}
 
-		private static async Task PostRequestAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken, HttpWebRequest request,
-			PostData<object> data) where TReturn : class
+		private static async Task PostRequestAsync(RequestData requestData, CancellationToken cancellationToken, HttpWebRequest request,
+			PostData<object> data)
 		{
 			var apmGetRequestStreamTask = Task.Factory.FromAsync(request.BeginGetRequestStream, request.EndGetRequestStream, null);
 			var getRequestStreamCancellationHandle = RegisterApmTaskTimeout(apmGetRequestStreamTask, request, requestData);
