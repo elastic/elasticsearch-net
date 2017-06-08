@@ -137,6 +137,8 @@ namespace Tests.CommonOptions.TimeUnit
 		{
 			var testCases = new StringParsingTestCases
 			{
+				{ "2.000000000e-06ms", TimeSpan.FromMilliseconds(2.000000000e-06), "0.000002ms"},
+				{ "3.1e-11ms", TimeSpan.FromMilliseconds(3.1e-11), "0.000000000031ms"},
 				{ "1000 nanos", new TimeSpan(10) , "1000nanos"},
 				{ "1000nanos", new TimeSpan(10), "1000nanos"},
 				{ "1000 NANOS", new TimeSpan(10), "1000nanos" },
