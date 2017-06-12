@@ -4,7 +4,7 @@ namespace Nest
 {
 	internal static class CoordinatedRequestDefaults
 	{
-		public static int BulkAllMaxDegreeOfParallelismDefault = 20;
+		public static int BulkAllMaxDegreeOfParallelismDefault = 4;
 		public static TimeSpan BulkAllBackOffTimeDefault = TimeSpan.FromMinutes(1);
 		public static int BulkAllBackOffRetriesDefault = 0;
 		public static int BulkAllSizeDefault = 1000;
