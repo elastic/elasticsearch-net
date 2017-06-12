@@ -201,7 +201,7 @@ namespace Nest
 			if (!this.Factor.HasValue)
 				return "<bad Time object should not happen>";
 
-			var mantissa = MantissaFormat(this.Factor.Value);
+			var mantissa = ExponentFormat(this.Factor.Value);
 			var factor = this.Factor.Value.ToString("0." + mantissa, CultureInfo.InvariantCulture);
 			return (this.Interval.HasValue) ? factor + this.Interval.Value.GetStringValue() : factor;
 		}
@@ -315,7 +315,7 @@ namespace Nest
 		}
 
 
-		private static string MantissaFormat(double d)
+		private static string ExponentFormat(double d)
 		{
 			// Translate the double into sign, exponent and mantissa.
 			var bits = BitConverter.DoubleToInt64Bits(d);
