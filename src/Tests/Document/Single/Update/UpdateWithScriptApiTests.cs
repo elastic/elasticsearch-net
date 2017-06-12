@@ -16,6 +16,8 @@ namespace Tests.Document.Single.Update
 {
 	public class UpdateWithScriptApiTests : ApiIntegrationTestBase<WritableCluster, IUpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>, UpdateRequest<Project, Project>>
 	{
+		protected override bool NoClientSerialize => true;
+
 		public UpdateWithScriptApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
@@ -46,7 +48,8 @@ namespace Tests.Document.Single.Update
 				inline = "ctx._source.name = \"params.name\"",
 				lang = "painless",
 				@params = new {
-					name = "foo"
+					name = "foo",
+					other = (object)null
 				}
 			}
 		};
@@ -60,6 +63,7 @@ namespace Tests.Document.Single.Update
 				.Lang("painless")
 				.Params(p => p
 					.Add("name", "foo")
+					.Add("other", null)
 				)
 			 );
 
@@ -71,7 +75,8 @@ namespace Tests.Document.Single.Update
 				Lang = "painless",
 				Params = new Dictionary<string, object>
 				{
-					{ "name", "foo" }
+					{ "name", "foo" },
+					{ "other", null }
 				}
 			}
 
