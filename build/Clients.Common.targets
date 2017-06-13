@@ -5,7 +5,12 @@
     <CurrentVersion>0.0.0-bad</CurrentVersion>
     <CurrentAssemblyVersion>0.0.0</CurrentAssemblyVersion>
     <CurrentAssemblyFileVersion>0.0.0.0</CurrentAssemblyFileVersion>
-    <DotNetCoreOnly></DotNetCoreOnly>
+    <!-- 'dotnet xunit' does a build but has no way to pass properties or prevent build so we snoop for TRAVIS here
+    Ideally we handle this in the FAKE script (which we do for 'dotnet build')
+    TODO too lazy to write and test a <CHOOSE>
+    -->
+    <DotNetCoreOnly Condition="'$(TRAVIS)'=='true'">1</DotNetCoreOnly>
+    <DotNetCoreOnly Condition="'$(TRAVIS)'==''"></DotNetCoreOnly>
     <DoSourceLink></DoSourceLink>
 
     <!-- Version and Informational reflect actual version -->
@@ -16,20 +21,13 @@
     <!-- File version reflects actual version number without prelease since that not allowed in its struct -->
     <FileVersion>$(CurrentAssemblyFileVersion)</FileVersion>
 
-    <!-- 'dotnet xunit' does a build but has no way to pass properties or prevent build so we snoop for TRAVIS here
-    Ideally we handle this in the FAKE script (which we do for 'dotnet build')
-    TODO too lazy to write and test a <CHOOSE>
-    -->
-    <DotNetCoreOnly Condition="'$(TRAVIS)'=='true'">1</DotNetCoreOnly>
-    <DotNetCoreOnly Condition="'$(TRAVIS)'==''"></DotNetCoreOnly>
-    <DoSourceLink></DoSourceLink>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly Condition="'$(DotNetCoreOnly)'==''">true</SignAssembly>
     <AssemblyOriginatorKeyFile Condition="'$(DotNetCoreOnly)'==''">..\..\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
     <GenerateDocumentationFile Condition="'$(DotNetCoreOnly)'==''">true</GenerateDocumentationFile>
     <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
     <DefineConstants Condition="'$(TargetFramework)'=='netstandard1.3' OR '$(DotNetCoreOnly)'=='1'">$(DefineConstants);DOTNETCORE</DefineConstants>
-    <DebugType>embedded</DebugType>
+    <DebugType Condition="'$(DotNetCoreOnly)'==''">embedded</DebugType>
     <SourceLink Condition="'$(DoSourceLink)'!=''">$(BaseIntermediateOutputPath)\sl-$(MsBuildProjectName)-$(TargetFramework).json</SourceLink>
     <RepoUri>https://raw.githubusercontent.com/elastic/elasticsearch-net</RepoUri>
   </PropertyGroup>
