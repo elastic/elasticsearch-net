@@ -13,9 +13,11 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 		private readonly string _clusterName;
 
 		public string ElasticsearchHome { get; }
-		public string Binary => Path.Combine(this.ElasticsearchHome, "bin", "elasticsearch") + ".bat";
+		private static bool IsMono { get; } = Type.GetType("Mono.Runtime") == null;
+		public string BinarySuffix => IsMono || Path.PathSeparator == '/' ? "" : ".bat";
+		public string Binary => Path.Combine(this.ElasticsearchHome, "bin", "elasticsearch") + BinarySuffix;
 		public string PluginBinary =>
-			Path.Combine(this.ElasticsearchHome, "bin", (this._version.Major >= 5 ? "elasticsearch-" : "" ) +"plugin") + ".bat";
+			Path.Combine(this.ElasticsearchHome, "bin", (this._version.Major >= 5 ? "elasticsearch-" : "" ) +"plugin") + BinarySuffix;
 		public string ConfigPath => Path.Combine(ElasticsearchHome, "config");
 		public string DataPath => Path.Combine(ElasticsearchHome, "data", this._clusterName);
 		public string LogsPath => Path.Combine(ElasticsearchHome, "logs");
@@ -28,7 +30,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 
 
 		//certificates
-		public string CertGenBinary => Path.Combine(this.ElasticsearchHome, "bin", "x-pack", "certgen") + ".bat";
+		public string CertGenBinary => Path.Combine(this.ElasticsearchHome, "bin", "x-pack", "certgen") + BinarySuffix;
 
 		public string CertificateFolderName => "node-certificates";
 		public string CertificateNodeName => "node01";

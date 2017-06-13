@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
-	public class ResponseBuilder<TReturn>
+	public class ResponseBuilder<TReturn> 
 		where TReturn : class
+		
 	{
 		private const int BufferSize = 81920;
 		private static readonly VoidResponse Void = new VoidResponse();

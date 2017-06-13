@@ -32,29 +32,31 @@ namespace Elasticsearch.Net
 	public class HttpConnection : IConnection
 	{
 		private readonly object _lock = new object();
-
+		
 		protected readonly ConcurrentDictionary<int, HttpClient> Clients = new ConcurrentDictionary<int, HttpClient>();
+
+		public static readonly string CanNotUseStreamResponsesWithCurlHandler =
+				"Using Stream as TReturn does not work as expected on .NET core linux, because we can no longer guarantee this works it will be removed from the client in our 6.0 release"
+			;
 
 		private HttpClient GetClient(RequestData requestData)
 		{
 			var key = GetClientKey(requestData);
 			HttpClient client;
-			if (!this.Clients.TryGetValue(key, out client))
+			if (this.Clients.TryGetValue(key, out client)) return client;
+			lock (_lock)
 			{
-				lock (_lock)
+				client = this.Clients.GetOrAdd(key, h =>
 				{
-					client = this.Clients.GetOrAdd(key, h =>
+					var handler = CreateHttpClientHandler(requestData);
+					var httpClient = new HttpClient(handler, false)
 					{
-						var handler = CreateHttpClientHandler(requestData);
-						var httpClient = new HttpClient(handler, false)
-						{
-							Timeout = requestData.RequestTimeout
-						};
+						Timeout = requestData.RequestTimeout
+					};
 
-						httpClient.DefaultRequestHeaders.ExpectContinue = false;
-						return httpClient;
-					});
-				}
+					httpClient.DefaultRequestHeaders.ExpectContinue = false;
+					return httpClient;
+				});
 			}
 
 			return client;
@@ -62,12 +64,18 @@ namespace Elasticsearch.Net
 
 		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class
 		{
+			//TODO remove Stream response support in 6.0, closing the stream is sufficient on desktop/mono
+			//but not on .NET core on linux HttpClient which proxies to curl. 
+            if (typeof(TReturn) == typeof(Stream) && ConnectionConfiguration.IsCurlHandler) 
+	            throw new Exception(CanNotUseStreamResponsesWithCurlHandler);
+			
 			var client = this.GetClient(requestData);
 			var builder = new ResponseBuilder<TReturn>(requestData);
+			HttpResponseMessage response = null;
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				var response = client.SendAsync(requestMessage).GetAwaiter().GetResult();
+				response = client.SendAsync(requestMessage).GetAwaiter().GetResult();
 				requestData.MadeItToResponse = true;
 				builder.StatusCode = (int)response.StatusCode;
 				IEnumerable<string> warnings;
@@ -76,6 +84,9 @@ namespace Elasticsearch.Net
 
 				if (response.Content != null)
 					builder.Stream = response.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
+				// https://github.com/elastic/elasticsearch-net/issues/2311
+				// if stream is null call dispose on response instead.
+				if (builder.Stream == null || builder.Stream == Stream.Null) response.Dispose();
 			}
 			catch (TaskCanceledException e)
 			{
@@ -85,19 +96,28 @@ namespace Elasticsearch.Net
 			{
 				builder.Exception = e;
 			}
-
-			return builder.ToResponse();
+            var r = builder.ToResponse();
+			//explicit dispose of response not needed (as documented on MSDN) on desktop CLR
+			//but we can not guarantee this is true for all HttpMessageHandler implementations
+            if (typeof(TReturn) != typeof(Stream)) response?.Dispose();
+            return r;
 		}
+
 
 		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken) where TReturn : class
 		{
+			//TODO remove Stream response support in 6.0, closing the stream is sufficient on desktop/mono
+			//but not on .NET core on linux HttpClient which proxies to curl. 
+            if (typeof(TReturn) == typeof(Stream) && ConnectionConfiguration.IsCurlHandler) 
+	            throw new Exception(CanNotUseStreamResponsesWithCurlHandler);
+			
 			var client = this.GetClient(requestData);
 			var builder = new ResponseBuilder<TReturn>(requestData, cancellationToken);
+			HttpResponseMessage response = null;
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				var response = await client.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
-				requestData.MadeItToResponse = true;
+				response = await client.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
 				builder.StatusCode = (int)response.StatusCode;
 				IEnumerable<string> warnings;
 				if (response.Headers.TryGetValues("Warning", out warnings))
@@ -105,6 +125,9 @@ namespace Elasticsearch.Net
 
 				if (response.Content != null)
 					builder.Stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+				// https://github.com/elastic/elasticsearch-net/issues/2311
+				// if stream is null call dispose on response instead.
+				if (builder.Stream == null || builder.Stream == Stream.Null) response.Dispose();
 			}
 			catch (TaskCanceledException e)
 			{
@@ -114,8 +137,11 @@ namespace Elasticsearch.Net
 			{
 				builder.Exception = e;
 			}
-
-			return await builder.ToResponseAsync().ConfigureAwait(false);
+            var r = await builder.ToResponseAsync().ConfigureAwait(false);
+			//explicit dispose of response not needed (as documented on MSDN) on desktop CLR
+			//but we can not guarantee this is true for all HttpMessageHandler implementations
+            if (typeof(TReturn) != typeof(Stream)) response?.Dispose();
+            return r;
 		}
 
 		private static readonly string MissingConnectionLimitMethodError =
@@ -151,8 +177,11 @@ namespace Elasticsearch.Net
 			{
 				var uri = new Uri(requestData.ProxyAddress);
 				var proxy = new WebProxy(uri);
-				var credentials = new NetworkCredential(requestData.ProxyUsername, requestData.ProxyPassword);
-				proxy.Credentials = credentials;
+				if (!string.IsNullOrEmpty(requestData.ProxyUsername))
+				{
+                    var credentials = new NetworkCredential(requestData.ProxyUsername, requestData.ProxyPassword);
+                    proxy.Credentials = credentials;
+				}
 				handler.Proxy = proxy;
 			}
 
@@ -189,6 +218,10 @@ namespace Elasticsearch.Net
 			{
 				requestMessage.Headers.TryAddWithoutValidation(key, requestData.Headers.GetValues(key));
 			}
+			requestMessage.Headers.Connection.Clear();
+			requestMessage.Headers.ConnectionClose = false;
+			requestMessage.Headers.Connection.Add("Keep-Alive");
+			//requestMessage.Headers.Connection;
 
 			requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestData.Accept));
 

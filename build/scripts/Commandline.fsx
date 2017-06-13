@@ -51,8 +51,6 @@ module Commandline =
         | _ -> "build"
 
     let needsFullBuild =
-        printfn "%s, %A" target skipTests
-
         match (target, skipTests) with
         | (_, true) -> true
         //dotnet-xunit needs to a build of its own anyways
@@ -67,6 +65,7 @@ module Commandline =
 
     let parse () =
         setEnvironVar "FAKEBUILD" "1"
+        printfn "%A" arguments
         match arguments with
         | [] | ["build"] | ["test"] | ["clean"] -> ignore()
         | ["release"; version] -> setBuildParam "version" version

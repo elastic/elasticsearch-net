@@ -25,6 +25,15 @@ namespace Elasticsearch.Net
 			return type.IsAssignableFrom(from);
 #endif
 		}
+		
+		internal static Assembly Assembly(this Type type)
+		{
+#if DOTNETCORE
+			return type.GetTypeInfo().Assembly;
+#else
+			return type.Assembly;
+#endif
+		}
 
 		internal static bool IsValue(this Type type)
 		{

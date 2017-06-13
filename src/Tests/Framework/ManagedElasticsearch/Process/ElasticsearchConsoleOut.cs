@@ -61,8 +61,8 @@ namespace Tests.Framework.ManagedElasticsearch.Process
 		private static readonly Regex InfoParser =
 			new Regex(@"version\[(?<version>.*)\], pid\[(?<pid>.*)\], build\[(?<build>.+)\]");
 
-		public bool InNodeSection => this.Section != "o.e.n.Node" || this.Section != "node";
-		public bool InHttpSection => this.Section != "o.e.h.HttpServer" || this.Section != "http";
+		public bool InNodeSection => this.Section == "o.e.n.Node" || this.Section == "node";
+		public bool InHttpSection => this.Section == "o.e.h.HttpServer" || this.Section == "http";
 
 		public bool TryParseNodeInfo(out string version, out int? pid)
 		{
@@ -81,7 +81,7 @@ namespace Tests.Framework.ManagedElasticsearch.Process
 		public bool TryGetStartedConfirmation()
 		{
 			if (!this.InNodeSection) return false;
-			return this.Message == "started";
+			return this.Message.Trim() == "started";
 		}
 
 		private static readonly Regex PortParser =

@@ -27,7 +27,8 @@ namespace Tests.Framework
 		public static Uri CreateUri(int port = 9200, bool forceSsl = false) =>
 			new UriBuilder(forceSsl ? "https" : "http", Host, port).Uri;
 
-		public static string Host => (RunningFiddler) ? "ipv4.fiddler" : "localhost";
+		public static string DefaultHost => "localhost";
+		public static string Host => (RunningFiddler) ? "ipv4.fiddler" : DefaultHost;
 
 		private static ITestConfiguration LoadConfiguration()
 		{
@@ -74,6 +75,8 @@ namespace Tests.Framework
 				.IndexName("queries")
 				.TypeName(PercolatorType)
 			)
+			//.ConnectionLimit(4)
+			//.Proxy(new Uri("http://127.0.0.1:8888"), "", "")
 			//.EnableTcpKeepAlive(TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(2))
 			//.PrettyJson()
 			//TODO make this random
