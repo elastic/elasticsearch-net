@@ -57,7 +57,12 @@ namespace Tests.Framework
 
 			throw new Exception($"Tried to load a yaml file from {yamlConfigurationPath} but it does not exist : pwd:{directoryInfo.FullName}");
 		}
-
+		
+		private static int ConnectionLimitDefault => 
+			int.TryParse(Environment.GetEnvironmentVariable("NEST_NUMBER_OF_CONNECTIONS"), out int x) 
+			? x
+			: ConnectionConfiguration.DefaultConnectionLimit;
+		
 		private static ConnectionSettings DefaultSettings(ConnectionSettings settings) => settings
 			.DefaultIndex("default-index")
 			.PrettyJson()
@@ -75,7 +80,7 @@ namespace Tests.Framework
 				.IndexName("queries")
 				.TypeName(PercolatorType)
 			)
-			//.ConnectionLimit(4)
+			.ConnectionLimit(ConnectionLimitDefault)
 			//.Proxy(new Uri("http://127.0.0.1:8888"), "", "")
 			//.EnableTcpKeepAlive(TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(2))
 			//.PrettyJson()

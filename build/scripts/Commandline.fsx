@@ -86,6 +86,14 @@ module Commandline =
             setBuildParam "clusterfilter" clusterFilter
             setBuildParam "testfilter" testFilter
 
+        | ["connectionreuse"; esVersions] ->
+            setBuildParam "esversions" esVersions
+            setBuildParam "clusterfilter" "ConnectionReuse"
+        | ["connectionreuse"; esVersions; numberOfConnections] ->
+            setBuildParam "esversions" esVersions
+            setBuildParam "clusterfilter" "ConnectionReuse"
+            setBuildParam "numberOfConnections" numberOfConnections
+            
         | ["canary"; ] -> ignore()
         | ["canary"; apiKey ] ->
             setBuildParam "apiKey" apiKey
@@ -97,5 +105,5 @@ module Commandline =
             traceError usage
             exit 2
 
-        setBuildParam "target" target
+        setBuildParam "target" (if target = "connectionreuse" then "integrate" else target)
         traceHeader target
