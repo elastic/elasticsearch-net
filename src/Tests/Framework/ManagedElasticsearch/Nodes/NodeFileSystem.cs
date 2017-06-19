@@ -13,7 +13,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 		private readonly string _clusterName;
 
 		public string ElasticsearchHome { get; }
-		private static bool IsMono { get; } = Type.GetType("Mono.Runtime") == null;
+		private static bool IsMono { get; } = Type.GetType("Mono.Runtime") != null;
 		public string BinarySuffix => IsMono || Path.PathSeparator == '/' ? "" : ".bat";
 		public string Binary => Path.Combine(this.ElasticsearchHome, "bin", "elasticsearch") + BinarySuffix;
 		public string PluginBinary =>

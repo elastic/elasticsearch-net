@@ -16,7 +16,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 	{
 		public abstract void Run(NodeConfiguration config, NodeFileSystem fileSystem);
 		
-		private static bool IsMono { get; } = Type.GetType("Mono.Runtime") == null;
+		private static bool IsMono { get; } = Type.GetType("Mono.Runtime") != null;
 		protected string BinarySuffix => IsMono || Path.PathSeparator == '/' ? "" : ".bat";
 
 		protected void DownloadFile(string from, string to)
