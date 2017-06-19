@@ -5,6 +5,7 @@
 #r "../../packages/build/Newtonsoft.Json/lib/net45/Newtonsoft.Json.dll"
 #r @"FakeLib.dll"
 #r @"System.Xml.Linq.dll"
+#nowarn "0044" //TODO sort out FAKE 5
 
 #load @"Projects.fsx"
 #load @"Paths.fsx"

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <DotNetCoreOnly Condition="'$(TRAVIS)'=='true'">1</DotNetCoreOnly>
     <DotNetCoreOnly Condition="'$(TRAVIS)'==''">
@@ -39,4 +39,5 @@
   <ItemGroup>
     <EmbeddedResource Include="Document\Single\Index\Attachment_Test_Document.pdf" />
   </ItemGroup>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

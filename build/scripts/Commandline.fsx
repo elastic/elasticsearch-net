@@ -1,9 +1,9 @@
 #I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
+#nowarn "0044" //TODO sort out FAKE 5
 
 open System
 open Fake
-
 
 //this is ugly but a direct port of what used to be duplicated in our DOS and bash scripts
 

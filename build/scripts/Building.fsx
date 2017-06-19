@@ -2,6 +2,7 @@
 #I @"../../packages/build/FSharp.Data/lib/net40"
 #r @"FakeLib.dll"
 #r @"FSharp.Data.dll"
+#nowarn "0044" //TODO sort out FAKE 5
 
 #load @"Paths.fsx"
 #load @"Tooling.fsx"

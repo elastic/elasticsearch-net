@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\build\Clients.Common.targets" />
   <PropertyGroup>
     <TargetFrameworks Condition="'$(DotNetCoreOnly)'==''">net45;net46;netstandard1.3</TargetFrameworks>
@@ -29,4 +29,5 @@
     <Folder Include="XPack\Info\XPackUsage" />
   </ItemGroup>
   <!--<Import Project="..\..\.paket\Paket.Restore.targets" />-->
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

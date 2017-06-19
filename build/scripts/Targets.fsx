@@ -11,6 +11,7 @@
 #load @"Benchmarking.fsx"
 #load @"Profiling.fsx"
 #load @"XmlDocPatcher.fsx"
+#nowarn "0044" //TODO sort out FAKE 5
 
 open System
 open Fake

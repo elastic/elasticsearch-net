@@ -1,6 +1,8 @@
 ﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 #r @"System.IO.Compression.FileSystem.dll"
+#nowarn "0044" //TODO sort out FAKE 5
+
 
 open System
 open System.IO
