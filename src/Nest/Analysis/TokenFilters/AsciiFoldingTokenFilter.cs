@@ -7,6 +7,7 @@
 	/// </summary>
 	public interface IAsciiFoldingTokenFilter : ITokenFilter
 	{
+		[JsonProperty("preserve_original")] 
 		bool? PreserveOriginal { get; set; }
 	}
 
