@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net;
@@ -20,8 +21,15 @@ namespace Nest
 		private const double MicrosecondsInAMillisecond = 10;
 
 		private static readonly Regex ExpressionRegex =
-			new Regex(@"^(?<factor>[-+]?\d+(?:\.\d+)?)\s*(?<interval>(?:y|w|d|h|m|s|ms|nanos|micros))?$",
-				RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase);
+			new Regex(@"^
+				(?<factor>[+\-]? # open factor capture, allowing optional +- signs
+					(?:(?#numeric)(?:\d+(?:\.\d*)?)|(?:\.\d+)) #a numeric in the forms: (N, N., .N, N.N)
+					(?:(?#exponent)e[+\-]?\d+)? #an optional exponential scientific component, E also matches here (IgnoreCase)
+				) # numeric and exponent fall under the factor capture
+				\s{0,10} #optional spaces (sanity checked for max 10 repetitions)
+				(?<interval>(?:y|w|d|h|m|s|ms|nanos|micros))? #optional interval indicator
+				$",
+				RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
 
 		private static double FLOAT_TOLERANCE = 0.0000001;
 
@@ -47,7 +55,7 @@ namespace Nest
 		public static Time MinusOne { get; } = new Time(-1, true);
 		public static Time Zero { get; } = new Time(0, true);
 
-		protected Time(int specialFactor, bool specialValue)
+		private Time(int specialFactor, bool specialValue)
 		{
 			if (!specialValue) throw new ArgumentException("this constructor is only for static TimeValues");
 			this.StaticTimeValue = specialFactor;
@@ -79,8 +87,11 @@ namespace Nest
 		{
 			var match = ExpressionRegex.Match(timeUnit);
 			if (!match.Success) throw new ArgumentException($"Time expression '{timeUnit}' string is invalid", nameof(timeUnit));
+			var factor = match.Groups["factor"].Value;
+			if (!double.TryParse(factor, NumberStyles.Any ,CultureInfo.InvariantCulture, out double f))
+				throw new ArgumentException($"Time expression '{timeUnit}' contains invalid factor: {factor}", nameof(timeUnit));
 
-			this.Factor = double.Parse(match.Groups["factor"].Value, CultureInfo.InvariantCulture);
+			this.Factor = f;
 			var interval = match.Groups["interval"].Success ? match.Groups["interval"].Value : null;
 			switch (interval)
 			{
@@ -117,7 +128,7 @@ namespace Nest
 				// ReSharper enable PossibleInvalidOperationException
 			};
 
-			if (this.ApproximateMilliseconds == other.ApproximateMilliseconds) return 0;
+			if (Math.Abs(this.ApproximateMilliseconds - other.ApproximateMilliseconds) < FLOAT_TOLERANCE) return 0;
 			if (this.ApproximateMilliseconds < other.ApproximateMilliseconds) return -1;
 			return 1;
 		}
@@ -196,7 +207,9 @@ namespace Nest
 				return this.StaticTimeValue.Value.ToString();
 			if (!this.Factor.HasValue)
 				return "<bad Time object should not happen>";
-			var factor = this.Factor.Value.ToString("0.##", CultureInfo.InvariantCulture);
+
+			var mantissa = ExponentFormat(this.Factor.Value);
+			var factor = this.Factor.Value.ToString("0." + mantissa, CultureInfo.InvariantCulture);
 			return (this.Interval.HasValue) ? factor + this.Interval.Value.GetStringValue() : factor;
 		}
 
@@ -307,5 +320,15 @@ namespace Nest
 				Interval = TimeUnit.Millisecond;
 			}
 		}
+
+		private static string ExponentFormat(double d)
+		{
+			// Translate the double into sign, exponent and mantissa.
+			var bits = BitConverter.DoubleToInt64Bits(d);
+			// Note that the shift is sign-extended, hence the test against -1 not 1
+			var exponent = (int) ((bits >> 52) & 0x7ffL);
+			return new string('#', Math.Max(2, exponent));
+		}
+
 	}
 }
