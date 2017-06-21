@@ -133,7 +133,7 @@ namespace Nest
 
 			var funnelExact = producerBandwidth == bulkSize;
 			if (funnelExact)
-				throw new Exception("The back pressure settings are too conservative it provides enough documents for a single bulk but not enough room to advance "
+				throw new Exception("The back pressure settings are too conservative. They provide enough documents for a single bulk but not enough room to advance "
 					+ $"searchSize:{searchSize} * maxConcurrency:{maxConcurrency} * backPressureFactor:{backPressureFactor} = {producerBandwidth}"
 					+ $" which is exactly the bulkSize:{bulkSize}. Increase the BulkAll max concurrency or the backPressureFactor"
 				);
