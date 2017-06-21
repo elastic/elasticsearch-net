@@ -13,6 +13,8 @@ open System.Net
 
 open Fake
 
+Fake.ProcessHelper.redirectOutputToTrace <-true
+    
 module Tooling = 
     open Paths
     open Projects
