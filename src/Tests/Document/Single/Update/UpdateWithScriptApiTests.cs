@@ -40,6 +40,7 @@ namespace Tests.Document.Single.Update
 
 		protected override object ExpectJson { get; } = new
 		{
+			scripted_upsert = true,
 			script = new
 			{
 				inline = "ctx._source.name = \"params.name\"",
@@ -53,7 +54,8 @@ namespace Tests.Document.Single.Update
 		protected override UpdateDescriptor<Project, Project> NewDescriptor() => new UpdateDescriptor<Project, Project>(DocumentPath<Project>.Id(CallIsolatedValue));
 
 		protected override Func<UpdateDescriptor<Project, Project>, IUpdateRequest<Project, Project>> Fluent => d => d
-			 .Script(s => s
+			.ScriptedUpsert()
+			.Script(s => s
 				.Inline("ctx._source.name = \"params.name\"")
 				.Lang("painless")
 				.Params(p => p
@@ -63,6 +65,7 @@ namespace Tests.Document.Single.Update
 
 		protected override UpdateRequest<Project, Project> Initializer => new UpdateRequest<Project, Project>(CallIsolatedValue)
 		{
+			ScriptedUpsert = true,
 			Script = new InlineScript("ctx._source.name = \"params.name\"")
 			{
 				Lang = "painless",
