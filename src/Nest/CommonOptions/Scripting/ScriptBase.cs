@@ -9,7 +9,7 @@ namespace Nest
 	public interface IScript
 	{
 		[JsonProperty("params")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysPreservingNullJsonConverter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
 
 		[JsonProperty("lang")]
