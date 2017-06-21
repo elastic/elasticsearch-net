@@ -1,24 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace Elasticsearch.Net
 {
-	public class StickyConnectionPool : StaticConnectionPool
+	public class SniffingSortedStickyConnectionPool : SniffingConnectionPool
 	{
-		public StickyConnectionPool(IEnumerable<Uri> uris, IDateTimeProvider dateTimeProvider = null)
-			: base(uris, false, dateTimeProvider)
-		{ }
+		public override bool SupportsPinging => true;
+		public override bool SupportsReseeding => true;
 
-		public StickyConnectionPool(IEnumerable<Node> nodes, IDateTimeProvider dateTimeProvider = null)
+		private Func<Node, float> _nodeScorer;
+
+		public SniffingSortedStickyConnectionPool(IEnumerable<Uri> uris, Func<Node, float> nodeScorer, IDateTimeProvider dateTimeProvider = null)
+			: base(uris.Select(uri => new Node(uri)), false, dateTimeProvider)
+		{
+			this._nodeScorer = nodeScorer ?? DefaultNodeScore;
+		}
+
+		public SniffingSortedStickyConnectionPool(IEnumerable<Node> nodes, Func<Node, float> nodeScorer, IDateTimeProvider dateTimeProvider = null)
 			: base(nodes, false, dateTimeProvider)
-		{ }		
+		{
+			this._nodeScorer = nodeScorer ?? DefaultNodeScore;
+		}
 
 		public override IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null)
 		{
 			var now = this.DateTimeProvider.Now();
 			var nodes = this.AliveNodes;
-
+			
 			if (nodes.Count == 0)
 			{
 				var globalCursor = Interlocked.Increment(ref this.GlobalCursor);
@@ -42,6 +52,14 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public override void Reseed(IEnumerable<Node> nodes) { }
+		protected override IOrderedEnumerable<Node> SortNodes(IEnumerable<Node> nodes)
+		{
+			return nodes.OrderByDescending(_nodeScorer);
+		}
+
+		private static float DefaultNodeScore(Node node)
+		{
+			return 0f;
+		}
 	}
 }

@@ -56,8 +56,7 @@ namespace Elasticsearch.Net
 			try
 			{
 				this._readerWriter.EnterWriteLock();
-				var sortedNodes = nodes
-					.OrderBy(item => this.Randomize ? this.Random.Next() : 1)
+				var sortedNodes = this.SortNodes(nodes)
 					.DistinctBy(n => n.Uri)
 					.ToList();
 
@@ -83,6 +82,11 @@ namespace Elasticsearch.Net
 			{
 				this._readerWriter.ExitReadLock();
 			}
+		}
+
+		protected virtual IOrderedEnumerable<Node> SortNodes(IEnumerable<Node> nodes)
+		{
+			return nodes.OrderBy(item => this.Randomize ? this.Random.Next() : 1);
 		}
 
 		protected override void DisposeManagedResources()

@@ -13,6 +13,10 @@ namespace Elasticsearch.Net
 
 		protected List<Node> InternalNodes { get; set; }
 
+		protected virtual List<Node> AliveNodes => this.InternalNodes
+			.Where(n => n.IsAlive || n.DeadUntil <= DateTimeProvider.Now())
+			.ToList();
+
 		/// <inheritdoc/>
 		public virtual IReadOnlyCollection<Node> Nodes => this.InternalNodes;
 
@@ -69,40 +73,50 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public virtual IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null)
 		{
-			//var count = this.InternalNodes.Count;
-
 			var now = this.DateTimeProvider.Now();
-			var nodes = this.InternalNodes.Where(n => n.IsAlive || n.DeadUntil <= now)
-				.ToList();
-			var count = nodes.Count;
-			Node node;
-			var globalCursor = Interlocked.Increment(ref GlobalCursor);
+			var nodes = this.AliveNodes;
 
-			if (count == 0)
+			var globalCursor = Interlocked.Increment(ref GlobalCursor);
+			
+			if (nodes.Count == 0)
 			{
 				//could not find a suitable node retrying on first node off globalCursor
-				audit?.Invoke(AuditEvent.AllNodesDead, null);
-				node = this.InternalNodes[globalCursor % this.InternalNodes.Count];
-				node.IsResurrected = true;
-				audit?.Invoke(AuditEvent.Resurrection, node);
-				yield return node;
+				yield return this.RetryInternalNodes(globalCursor, audit);
 				yield break;
 			}
 
-			var localCursor = globalCursor % count;
-
-			for (var attempts = 0; attempts < count; attempts++)
+			var localCursor = globalCursor % nodes.Count;
+			foreach (var aliveNode in SelectAliveNodes(localCursor, nodes, audit))
 			{
-				node = nodes[localCursor];
-				localCursor = (localCursor + 1) % count;
+				yield return aliveNode;
+			}
+		}
+
+		protected virtual Node RetryInternalNodes(int globalCursor, Action<AuditEvent, Node> audit = null)
+		{
+			audit?.Invoke(AuditEvent.AllNodesDead, null);
+			var node = this.InternalNodes[globalCursor % this.InternalNodes.Count];
+			node.IsResurrected = true;
+			audit?.Invoke(AuditEvent.Resurrection, node);
+
+			return node;
+		}
+
+		protected virtual IEnumerable<Node> SelectAliveNodes(int cursor, List<Node> aliveNodes, Action<AuditEvent, Node> audit = null)
+		{
+			for (var attempts = 0; attempts < aliveNodes.Count; attempts++)
+			{
+				var node = aliveNodes[cursor];
+				cursor = (cursor + 1) % aliveNodes.Count;
 				//if this node is not alive or no longer dead mark it as resurrected
 				if (!node.IsAlive)
 				{
 					audit?.Invoke(AuditEvent.Resurrection, node);
 					node.IsResurrected = true;
 				}
+
 				yield return node;
-			}
+			}			
 		}
 
 		void IDisposable.Dispose() => this.DisposeManagedResources();
