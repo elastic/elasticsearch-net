@@ -31,6 +31,13 @@ namespace Nest
 		[JsonProperty(PropertyName = "doc_as_upsert")]
 		bool? DocAsUpsert { get; set; }
 
+		/// <summary>
+		/// If you would like your script to run regardless of whether the document exists or not — i.e. the script handles
+		/// initializing the document instead of the upsert element — then set scripted_upsert to true
+		/// </summary>
+		[JsonProperty(PropertyName = "scripted_upsert")]
+		bool? ScriptedUpsert { get; set; }
+
 		[JsonProperty(PropertyName = "doc")]
 		TPartialDocument Doc { get; set; }
 
@@ -46,11 +53,18 @@ namespace Nest
 		public string ScriptFile { get; set; }
 		public string Language { get; set; }
 		public Dictionary<string, object> Params { get; set; }
+		/// <inheritdoc/>
 		public TDocument Upsert { get; set; }
+		/// <inheritdoc/>
 		public bool? DocAsUpsert { get; set; }
+		/// <inheritdoc/>
 		public TPartialDocument Doc { get; set; }
+		/// <inheritdoc/>
 		public bool? DetectNoop { get; set; }
+		/// <inheritdoc/>
+		public bool? ScriptedUpsert { get; set; }
 
+		/// <inheritdoc/>
 		public Fields Fields
 		{
 			get { return Self.RequestParameters.GetQueryStringValue<Fields>("fields"); }
@@ -80,6 +94,8 @@ namespace Nest
 
 		bool? IUpdateRequest<TDocument, TPartialDocument>.DetectNoop { get; set; }
 
+		bool? IUpdateRequest<TDocument, TPartialDocument>.ScriptedUpsert { get; set; }
+
 		public UpdateDescriptor<TDocument, TPartialDocument> Script(string script) => Assign(a => a.Script = script);
 
 		public UpdateDescriptor<TDocument, TPartialDocument> ScriptFile(string scriptFile) => Assign(a => a.ScriptFile = scriptFile);
@@ -102,6 +118,8 @@ namespace Nest
 		public UpdateDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool docAsUpsert = true) => Assign(a => a.DocAsUpsert = docAsUpsert);
 
 		public UpdateDescriptor<TDocument, TPartialDocument> DetectNoop(bool detectNoop = true) => Assign(a => a.DetectNoop = detectNoop);
+
+		public UpdateDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool scriptedUpsert = true) => Assign(a => a.ScriptedUpsert = scriptedUpsert);
 
 		public UpdateDescriptor<TDocument, TPartialDocument> Fields(Fields fields) =>
 			Assign(a => a.RequestParameters.AddQueryString("fields", fields));
