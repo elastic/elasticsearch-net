@@ -133,7 +133,7 @@ namespace Nest
 
 			foreach (var entry in enumerable)
 			{
-				if (entry.Value == null && serializer.NullValueHandling == NullValueHandling.Ignore)
+				if (SkipValue(serializer, entry))
 					continue;
 				string key;
 				if (_keyIsString)
@@ -184,6 +184,11 @@ namespace Nest
 			}
 			writer.WriteEndObject();
 		}
+
+		protected virtual bool SkipValue(JsonSerializer serializer, KeyValuePair<TKey, TValue> entry)
+		{
+			return entry.Value == null && serializer.NullValueHandling == NullValueHandling.Ignore;
+		}
 	}
 
 	internal class VerbatimDictionaryKeysJsonConverter<TIsADictionary, TKey, TValue> : VerbatimDictionaryKeysJsonConverter<TKey, TValue>
@@ -199,4 +204,10 @@ namespace Nest
 			return typeof(TIsADictionary).CreateInstance<TIsADictionary>(dictionary);
 		}
 	}
+
+	internal class VerbatimDictionaryKeysPreservingNullJsonConverter<TKey, TValue> : VerbatimDictionaryKeysJsonConverter<TKey, TValue>
+	{
+		protected override bool SkipValue(JsonSerializer serializer, KeyValuePair<TKey, TValue> entry) => false;
+	}
+
 }
