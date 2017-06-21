@@ -66,8 +66,8 @@ namespace Elasticsearch.Net
 		{
 			//TODO remove Stream response support in 6.0, closing the stream is sufficient on desktop/mono
 			//but not on .NET core on linux HttpClient which proxies to curl.
-            if (typeof(TReturn) == typeof(Stream) && ConnectionConfiguration.IsCurlHandler)
-	            throw new Exception(CanNotUseStreamResponsesWithCurlHandler);
+			if (typeof(TReturn) == typeof(Stream) && ConnectionConfiguration.IsCurlHandler)
+				throw new Exception(CanNotUseStreamResponsesWithCurlHandler);
 
 			var client = this.GetClient(requestData);
 			var builder = new ResponseBuilder<TReturn>(requestData);
@@ -77,7 +77,7 @@ namespace Elasticsearch.Net
 				var requestMessage = CreateHttpRequestMessage(requestData);
 				responseMessage = client.SendAsync(requestMessage).GetAwaiter().GetResult();
 				requestData.MadeItToResponse = true;
-				builder.StatusCode = (int)responseMessage.StatusCode;
+				builder.StatusCode = (int) responseMessage.StatusCode;
 				IEnumerable<string> warnings;
 				if (responseMessage.Headers.TryGetValues("Warning", out warnings))
 					builder.DeprecationWarnings = warnings;
@@ -96,20 +96,21 @@ namespace Elasticsearch.Net
 			{
 				builder.Exception = e;
 			}
-            var response = builder.ToResponse();
+			var response = builder.ToResponse();
 			//explicit dispose of response not needed (as documented on MSDN) on desktop CLR
 			//but we can not guarantee this is true for all HttpMessageHandler implementations
-            if (typeof(TReturn) != typeof(Stream)) responseMessage?.Dispose();
-            return response;
+			if (typeof(TReturn) != typeof(Stream)) responseMessage?.Dispose();
+			return response;
 		}
 
 
-		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken) where TReturn : class
+		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData,
+			CancellationToken cancellationToken) where TReturn : class
 		{
 			//TODO remove Stream response support in 6.0, closing the stream is sufficient on desktop/mono
 			//but not on .NET core on linux HttpClient which proxies to curl.
-            if (typeof(TReturn) == typeof(Stream) && ConnectionConfiguration.IsCurlHandler)
-	            throw new Exception(CanNotUseStreamResponsesWithCurlHandler);
+			if (typeof(TReturn) == typeof(Stream) && ConnectionConfiguration.IsCurlHandler)
+				throw new Exception(CanNotUseStreamResponsesWithCurlHandler);
 
 			var client = this.GetClient(requestData);
 			var builder = new ResponseBuilder<TReturn>(requestData, cancellationToken);
@@ -118,7 +119,8 @@ namespace Elasticsearch.Net
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
 				responseMessage = await client.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
-				builder.StatusCode = (int)responseMessage.StatusCode;
+				requestData.MadeItToResponse = true;
+				builder.StatusCode = (int) responseMessage.StatusCode;
 				IEnumerable<string> warnings;
 				if (responseMessage.Headers.TryGetValues("Warning", out warnings))
 					builder.DeprecationWarnings = warnings;
@@ -137,11 +139,11 @@ namespace Elasticsearch.Net
 			{
 				builder.Exception = e;
 			}
-            var response = await builder.ToResponseAsync().ConfigureAwait(false);
+			var response = await builder.ToResponseAsync().ConfigureAwait(false);
 			//explicit dispose of response not needed (as documented on MSDN) on desktop CLR
 			//but we can not guarantee this is true for all HttpMessageHandler implementations
-            if (typeof(TReturn) != typeof(Stream)) responseMessage?.Dispose();
-            return response;
+			if (typeof(TReturn) != typeof(Stream)) responseMessage?.Dispose();
+			return response;
 		}
 
 		private static readonly string MissingConnectionLimitMethodError =
@@ -179,8 +181,8 @@ namespace Elasticsearch.Net
 				var proxy = new WebProxy(uri);
 				if (!string.IsNullOrEmpty(requestData.ProxyUsername))
 				{
-                    var credentials = new NetworkCredential(requestData.ProxyUsername, requestData.ProxyPassword);
-                    proxy.Credentials = credentials;
+					var credentials = new NetworkCredential(requestData.ProxyUsername, requestData.ProxyPassword);
+					proxy.Credentials = credentials;
 				}
 				handler.Proxy = proxy;
 			}
