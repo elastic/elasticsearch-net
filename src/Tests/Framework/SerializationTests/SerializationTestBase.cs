@@ -5,6 +5,7 @@ using System.Text;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch;
@@ -14,6 +15,7 @@ namespace Tests.Framework
 {
 	public abstract class SerializationTestBase
 	{
+		protected virtual bool NoClientSerialize { get; }
 		protected virtual object ExpectJson { get; }
 		protected virtual bool SupportsDeserialization { get; set; } = true;
 
@@ -23,6 +25,7 @@ namespace Tests.Framework
 
 		protected Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier = null;
 		protected Func<ConnectionSettings, IElasticsearchSerializer> _serializerFactory;
+		private static readonly JsonSerializerSettings NullValueSettings = new JsonSerializerSettings {NullValueHandling = NullValueHandling.Include};
 
 		protected IElasticsearchSerializer Serializer => Client.Serializer;
 
@@ -54,7 +57,9 @@ namespace Tests.Framework
 			var o = this.ExpectJson;
 			if (o == null) return;
 
-			this._expectedJsonString = this.Serialize(o);
+			this._expectedJsonString = this.NoClientSerialize
+				? JsonConvert.SerializeObject(o, Formatting.None, NullValueSettings)
+				: this.Serialize(o);
 			this._expectedJsonJObject = JToken.Parse(this._expectedJsonString);
 
 			if (string.IsNullOrEmpty(this._expectedJsonString))
