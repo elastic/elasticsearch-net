@@ -62,9 +62,9 @@ namespace Elasticsearch.Net
 
 		public override IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null)
 		{
+			this._readerWriter.EnterReadLock();
 			try
 			{
-				this._readerWriter.EnterReadLock();
 				return base.CreateView(audit);
 			}
 			finally
