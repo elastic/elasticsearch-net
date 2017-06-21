@@ -36,7 +36,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			 * We'll use a Sniffing connection pool here since it sniffs on startup and pings before
 			 * first usage, so we can get an audit trail with a few events out
 			 */
-			var pool = new SniffingConnectionPool(new []{ new Uri($"http://localhost:{_cluster.Node.Port}") });
+			var pool = new SniffingConnectionPool(new []{ new Uri($"http://{TestClient.DefaultHost}:9200") });
 		    var connectionSettings = new ConnectionSettings(pool)
 				.InferMappingFor<Project>(i => i
 					.IndexName("project")

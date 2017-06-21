@@ -125,7 +125,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 				else Console.WriteLine(consoleOut.Data);
 			}
 
-			if (consoleOut.Error && !this.Started) throw new Exception(consoleOut.Data);
+			if (consoleOut.Error && !this.Started && !string.IsNullOrWhiteSpace(consoleOut.Data)) throw new Exception(consoleOut.Data);
 
 			string version;
 			int? pid;
