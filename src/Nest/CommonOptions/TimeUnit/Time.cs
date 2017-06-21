@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net;
@@ -11,13 +12,16 @@ namespace Nest
 	{
 		private static readonly Regex _expressionRegex = new Regex(@"^(?<factor>[-+]?\d+(?:\.\d+)?)(?<interval>(?:y|M|w|d|h|m|s|ms))?$", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
-		private static readonly double _yearApproximate = TimeSpan.FromDays(365).TotalMilliseconds;
-		private static readonly double _monthApproximate = TimeSpan.FromDays(30).TotalMilliseconds;
-		private static readonly double _week = TimeSpan.FromDays(7).TotalMilliseconds;
-		private static readonly double _day = TimeSpan.FromDays(1).TotalMilliseconds;
-		private static readonly double _hour = TimeSpan.FromHours(1).TotalMilliseconds;
-		private static readonly double _minute = TimeSpan.FromMinutes(1).TotalMilliseconds;
-		private static readonly double _second = TimeSpan.FromSeconds(1).TotalMilliseconds;
+		private static readonly Regex ExpressionRegex =
+			new Regex(@"^
+				(?<factor>[+\-]? # open factor capture, allowing optional +- signs
+					(?:(?#numeric)(?:\d+(?:\.\d*)?)|(?:\.\d+)) #a numeric in the forms: (N, N., .N, N.N)
+					(?:(?#exponent)e[+\-]?\d+)? #an optional exponential scientific component, E also matches here (IgnoreCase)
+				) # numeric and exponent fall under the factor capture
+				\s{0,10} #optional spaces (sanity checked for max 10 repetitions)
+				(?<interval>(?:y|w|d|h|m|s|ms|nanos|micros))? #optional interval indicator
+				$",
+				RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
 
 		public double? Factor { get; private set; }
 		public TimeUnit? Interval { get; private set; }
@@ -35,7 +39,10 @@ namespace Nest
 			Reduce(timeSpan.TotalMilliseconds);
 		}
 
-		public Time(double milliseconds)
+		public static Time MinusOne { get; } = new Time(-1, true);
+		public static Time Zero { get; } = new Time(0, true);
+
+		private Time(int specialFactor, bool specialValue)
 		{
 			Reduce(milliseconds);
 		}
@@ -52,8 +59,11 @@ namespace Nest
 			if (timeUnit.IsNullOrEmpty()) throw new ArgumentException("Time expression string is empty", nameof(timeUnit));
 			var match = _expressionRegex.Match(timeUnit);
 			if (!match.Success) throw new ArgumentException($"Time expression '{timeUnit}' string is invalid", nameof(timeUnit));
+			var factor = match.Groups["factor"].Value;
+			if (!double.TryParse(factor, NumberStyles.Any ,CultureInfo.InvariantCulture, out double f))
+				throw new ArgumentException($"Time expression '{timeUnit}' contains invalid factor: {factor}", nameof(timeUnit));
 
-			this.Factor = double.Parse(match.Groups["factor"].Value, CultureInfo.InvariantCulture);
+			this.Factor = f;
 
 			if (this.Factor > 0)
 			{
@@ -68,7 +78,7 @@ namespace Nest
 		public int CompareTo(Time other)
 		{
 			if (other == null) return 1;
-			if (this.ApproximateMilliseconds == other.ApproximateMilliseconds) return 0;
+			if (Math.Abs(this.ApproximateMilliseconds - other.ApproximateMilliseconds) < FLOAT_TOLERANCE) return 0;
 			if (this.ApproximateMilliseconds < other.ApproximateMilliseconds) return -1;
 			return 1;
 		}
@@ -125,7 +135,9 @@ namespace Nest
 
 		public override string ToString()
 		{
-			var factor = this.Factor.Value.ToString("0.##", CultureInfo.InvariantCulture);
+
+			var mantissa = ExponentFormat(this.Factor.Value);
+			var factor = this.Factor.Value.ToString("0." + mantissa, CultureInfo.InvariantCulture);
 			return (this.Interval.HasValue) ? factor + this.Interval.Value.GetStringValue() : factor;
 		}
 
@@ -227,5 +239,15 @@ namespace Nest
 				Interval = (ms > 0) ? (TimeUnit?)TimeUnit.Millisecond : null;
 			}
 		}
+
+		private static string ExponentFormat(double d)
+		{
+			// Translate the double into sign, exponent and mantissa.
+			var bits = BitConverter.DoubleToInt64Bits(d);
+			// Note that the shift is sign-extended, hence the test against -1 not 1
+			var exponent = (int) ((bits >> 52) & 0x7ffL);
+			return new string('#', Math.Max(2, exponent));
+		}
+
 	}
 }
