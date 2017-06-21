@@ -43,11 +43,11 @@ namespace Elasticsearch.Net
 		protected virtual void SetServerCertificateValidationCallBackIfNeeded(HttpWebRequest request, RequestData requestData)
 		{
 			var callback = requestData?.ConnectionSettings?.ServerCertificateValidationCallback;
-			#if !__MonoCS__
+#if !__MonoCS__
 			//Only assign if one is defined on connection settings and a subclass has not already set one
 			if (callback != null && request.ServerCertificateValidationCallback == null)
 				request.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(callback);
-			#else
+#else
 				if (callback != null)
 					throw new Exception("Mono misses ServerCertificateValidationCallback on HttpWebRequest");
 			#endif
@@ -55,7 +55,7 @@ namespace Elasticsearch.Net
 
 		protected virtual HttpWebRequest CreateWebRequest(RequestData requestData)
 		{
-			var request = (HttpWebRequest)WebRequest.Create(requestData.Uri);
+			var request = (HttpWebRequest) WebRequest.Create(requestData.Uri);
 
 			request.Accept = requestData.Accept;
 			request.ContentType = requestData.ContentType;
@@ -76,7 +76,7 @@ namespace Elasticsearch.Net
 			if (requestData.Headers != null && requestData.Headers.HasKeys())
 				request.Headers.Add(requestData.Headers);
 
-			var timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
+			var timeout = (int) requestData.RequestTimeout.TotalMilliseconds;
 			request.Timeout = timeout;
 			request.ReadWriteTimeout = timeout;
 
@@ -101,7 +101,6 @@ namespace Elasticsearch.Net
 			//this method only sets internal values and wont actually cause timers and such to be reset
 			//So it should be idempotent if called with the same parameters
 			requestServicePoint.SetTcpKeepAlive(true, requestData.KeepAliveTime, requestData.KeepAliveInterval);
-
 		}
 
 		protected virtual void SetProxyIfNeeded(HttpWebRequest request, RequestData requestData)
@@ -161,8 +160,8 @@ namespace Elasticsearch.Net
 				//Either the stream or the response object needs to be closed but not both although it won't
 				//throw any errors if both are closed atleast one of them has to be Closed.
 				//Since we expose the stream we let closing the stream determining when to close the connection
-				var response = (HttpWebResponse)request.GetResponse();
-				builder.StatusCode = (int)response.StatusCode;
+				var response = (HttpWebResponse) request.GetResponse();
+				builder.StatusCode = (int) response.StatusCode;
 				builder.Stream = response.GetResponseStream();
 
 				if (response.SupportsHeaders && response.Headers.HasKeys() && response.Headers.AllKeys.Contains("Warning"))
@@ -180,8 +179,17 @@ namespace Elasticsearch.Net
 		}
 
 
-		private static RegisteredWaitHandle RegisterApmTaskTimeout(IAsyncResult result, WebRequest request, RequestData requestData) =>
-			ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, TimeoutCallback, request, requestData.RequestTimeout, true);
+		/// <summary>
+		/// Registers an APM async task cancellation on the threadpool
+		/// </summary>
+		/// <returns>An unregister action that can be used to remove the waithandle prematurely</returns>
+		private static Action RegisterApmTaskTimeout(IAsyncResult result, WebRequest request, RequestData requestData)
+		{
+			var waitHandle = result.AsyncWaitHandle;
+			var registeredWaitHandle =
+				ThreadPool.RegisterWaitForSingleObject(waitHandle, TimeoutCallback, request, requestData.RequestTimeout, true);
+			return () => registeredWaitHandle?.Unregister(waitHandle);
+		}
 
 		private static void TimeoutCallback(object state, bool timedOut)
 		{
@@ -193,8 +201,7 @@ namespace Elasticsearch.Net
 			CancellationToken cancellationToken) where TReturn : class
 		{
 			var builder = new ResponseBuilder<TReturn>(requestData, cancellationToken);
-			WaitHandle apmWaitHandle = null;
-			RegisteredWaitHandle apmTaskTimeout = null;
+			Action unregisterWaitHandle = null;
 			try
 			{
 				var data = requestData.PostData;
@@ -202,65 +209,57 @@ namespace Elasticsearch.Net
 				using (cancellationToken.Register(() => request.Abort()))
 				{
 					if (data != null)
-						await PostRequestAsync(requestData, cancellationToken, request, data);
+					{
+						var apmGetRequestStreamTask = Task.Factory.FromAsync(request.BeginGetRequestStream, request.EndGetRequestStream, null);
+						unregisterWaitHandle = RegisterApmTaskTimeout(apmGetRequestStreamTask, request, requestData);
+
+						using (var stream = await apmGetRequestStreamTask.ConfigureAwait(false))
+						{
+							if (requestData.HttpCompression)
+								using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
+									await data.WriteAsync(zipStream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
+							else
+								await data.WriteAsync(stream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
+						}
+						unregisterWaitHandle?.Invoke();
+					}
 					requestData.MadeItToResponse = true;
-                    //http://msdn.microsoft.com/en-us/library/system.net.httpwebresponse.getresponsestream.aspx
-                    //Either the stream or the response object needs to be closed but not both although it won't
-                    //throw any errors if both are closed atleast one of them has to be Closed.
-                    //Since we expose the stream we let closing the stream determining when to close the connection
+					//http://msdn.microsoft.com/en-us/library/system.net.httpwebresponse.getresponsestream.aspx
+					//Either the stream or the response object needs to be closed but not both although it won't
+					//throw any errors if both are closed atleast one of them has to be Closed.
+					//Since we expose the stream we let closing the stream determining when to close the connection
 
-                    var apmGetResponseTask = Task.Factory.FromAsync(request.BeginGetResponse, request.EndGetResponse, null);
-                    apmWaitHandle = ((IAsyncResult) apmGetResponseTask).AsyncWaitHandle;
-                    apmTaskTimeout = RegisterApmTaskTimeout(apmGetResponseTask, request, requestData);
+					var apmGetResponseTask = Task.Factory.FromAsync(request.BeginGetResponse, request.EndGetResponse, null);
+					unregisterWaitHandle = RegisterApmTaskTimeout(apmGetResponseTask, request, requestData);
 
-                    var response = (HttpWebResponse) (await apmGetResponseTask.ConfigureAwait(false));
-                    builder.StatusCode = (int) response.StatusCode;
-                    builder.Stream = response.GetResponseStream();
-                    if (response.SupportsHeaders && response.Headers.HasKeys() && response.Headers.AllKeys.Contains("Warning"))
-                        builder.DeprecationWarnings = response.Headers.GetValues("Warning");
-                    // https://github.com/elastic/elasticsearch-net/issues/2311
-                    // if stream is null call dispose on response instead.
-                    if (builder.Stream == null || builder.Stream == Stream.Null) response.Dispose();
-                    if (apmWaitHandle != null) apmTaskTimeout?.Unregister(apmWaitHandle);
+					var response = (HttpWebResponse) (await apmGetResponseTask.ConfigureAwait(false));
+					builder.StatusCode = (int) response.StatusCode;
+					builder.Stream = response.GetResponseStream();
+					if (response.SupportsHeaders && response.Headers.HasKeys() && response.Headers.AllKeys.Contains("Warning"))
+						builder.DeprecationWarnings = response.Headers.GetValues("Warning");
+					// https://github.com/elastic/elasticsearch-net/issues/2311
+					// if stream is null call dispose on response instead.
+					if (builder.Stream == null || builder.Stream == Stream.Null) response.Dispose();
 				}
 			}
 			catch (WebException e)
 			{
-				if (apmWaitHandle != null) apmTaskTimeout?.Unregister(apmWaitHandle);
 				HandleException(builder, e);
 			}
-			catch
+			finally
 			{
-				if (apmWaitHandle != null) apmTaskTimeout?.Unregister(apmWaitHandle);
-				throw;
+				unregisterWaitHandle?.Invoke();
 			}
 			return await builder.ToResponseAsync().ConfigureAwait(false);
 		}
 
-		private static async Task PostRequestAsync(RequestData requestData, CancellationToken cancellationToken, HttpWebRequest request,
-			PostData<object> data)
-		{
-			var apmGetRequestStreamTask = Task.Factory.FromAsync(request.BeginGetRequestStream, request.EndGetRequestStream, null);
-			var getRequestStreamCancellationHandle = RegisterApmTaskTimeout(apmGetRequestStreamTask, request, requestData);
-
-			using (var stream = await apmGetRequestStreamTask.ConfigureAwait(false))
-			{
-				if (requestData.HttpCompression)
-					using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
-						await data.WriteAsync(zipStream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
-				else
-					await data.WriteAsync(stream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
-			}
-			getRequestStreamCancellationHandle.Unregister(((IAsyncResult) apmGetRequestStreamTask).AsyncWaitHandle);
-		}
-
-		private void HandleException<TReturn>(ResponseBuilder<TReturn> builder, WebException exception)
+		private static void HandleException<TReturn>(ResponseBuilder<TReturn> builder, WebException exception)
 			where TReturn : class
 		{
 			builder.Exception = exception;
 			var response = exception.Response as HttpWebResponse;
 			if (response == null) return;
-			builder.StatusCode = (int)response.StatusCode;
+			builder.StatusCode = (int) response.StatusCode;
 			builder.Stream = response.GetResponseStream();
 			// https://github.com/elastic/elasticsearch-net/issues/2311
 			// if stream is null call dispose on response instead.
@@ -269,7 +268,9 @@ namespace Elasticsearch.Net
 
 		void IDisposable.Dispose() => this.DisposeManagedResources();
 
-		protected virtual void DisposeManagedResources() { }
+		protected virtual void DisposeManagedResources()
+		{
+		}
 	}
 }
 #endif
