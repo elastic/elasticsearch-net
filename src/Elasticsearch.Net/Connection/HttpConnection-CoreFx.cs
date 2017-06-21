@@ -32,10 +32,10 @@ namespace Elasticsearch.Net
 	public class HttpConnection : IConnection
 	{
 		private readonly object _lock = new object();
-		
+
 		protected readonly ConcurrentDictionary<int, HttpClient> Clients = new ConcurrentDictionary<int, HttpClient>();
 
-		public static readonly string CanNotUseStreamResponsesWithCurlHandler =
+		private static readonly string CanNotUseStreamResponsesWithCurlHandler =
 				"Using Stream as TReturn does not work as expected on .NET core linux, because we can no longer guarantee this works it will be removed from the client in our 6.0 release"
 			;
 
@@ -65,28 +65,28 @@ namespace Elasticsearch.Net
 		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class
 		{
 			//TODO remove Stream response support in 6.0, closing the stream is sufficient on desktop/mono
-			//but not on .NET core on linux HttpClient which proxies to curl. 
-            if (typeof(TReturn) == typeof(Stream) && ConnectionConfiguration.IsCurlHandler) 
+			//but not on .NET core on linux HttpClient which proxies to curl.
+            if (typeof(TReturn) == typeof(Stream) && ConnectionConfiguration.IsCurlHandler)
 	            throw new Exception(CanNotUseStreamResponsesWithCurlHandler);
-			
+
 			var client = this.GetClient(requestData);
 			var builder = new ResponseBuilder<TReturn>(requestData);
-			HttpResponseMessage response = null;
+			HttpResponseMessage responseMessage = null;
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				response = client.SendAsync(requestMessage).GetAwaiter().GetResult();
+				responseMessage = client.SendAsync(requestMessage).GetAwaiter().GetResult();
 				requestData.MadeItToResponse = true;
-				builder.StatusCode = (int)response.StatusCode;
+				builder.StatusCode = (int)responseMessage.StatusCode;
 				IEnumerable<string> warnings;
-				if (response.Headers.TryGetValues("Warning", out warnings))
+				if (responseMessage.Headers.TryGetValues("Warning", out warnings))
 					builder.DeprecationWarnings = warnings;
 
-				if (response.Content != null)
-					builder.Stream = response.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
+				if (responseMessage.Content != null)
+					builder.Stream = responseMessage.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
 				// https://github.com/elastic/elasticsearch-net/issues/2311
 				// if stream is null call dispose on response instead.
-				if (builder.Stream == null || builder.Stream == Stream.Null) response.Dispose();
+				if (builder.Stream == null || builder.Stream == Stream.Null) responseMessage.Dispose();
 			}
 			catch (TaskCanceledException e)
 			{
@@ -96,38 +96,38 @@ namespace Elasticsearch.Net
 			{
 				builder.Exception = e;
 			}
-            var r = builder.ToResponse();
+            var response = builder.ToResponse();
 			//explicit dispose of response not needed (as documented on MSDN) on desktop CLR
 			//but we can not guarantee this is true for all HttpMessageHandler implementations
-            if (typeof(TReturn) != typeof(Stream)) response?.Dispose();
-            return r;
+            if (typeof(TReturn) != typeof(Stream)) responseMessage?.Dispose();
+            return response;
 		}
 
 
 		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken) where TReturn : class
 		{
 			//TODO remove Stream response support in 6.0, closing the stream is sufficient on desktop/mono
-			//but not on .NET core on linux HttpClient which proxies to curl. 
-            if (typeof(TReturn) == typeof(Stream) && ConnectionConfiguration.IsCurlHandler) 
+			//but not on .NET core on linux HttpClient which proxies to curl.
+            if (typeof(TReturn) == typeof(Stream) && ConnectionConfiguration.IsCurlHandler)
 	            throw new Exception(CanNotUseStreamResponsesWithCurlHandler);
-			
+
 			var client = this.GetClient(requestData);
 			var builder = new ResponseBuilder<TReturn>(requestData, cancellationToken);
-			HttpResponseMessage response = null;
+			HttpResponseMessage responseMessage = null;
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				response = await client.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
-				builder.StatusCode = (int)response.StatusCode;
+				responseMessage = await client.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
+				builder.StatusCode = (int)responseMessage.StatusCode;
 				IEnumerable<string> warnings;
-				if (response.Headers.TryGetValues("Warning", out warnings))
+				if (responseMessage.Headers.TryGetValues("Warning", out warnings))
 					builder.DeprecationWarnings = warnings;
 
-				if (response.Content != null)
-					builder.Stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+				if (responseMessage.Content != null)
+					builder.Stream = await responseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false);
 				// https://github.com/elastic/elasticsearch-net/issues/2311
 				// if stream is null call dispose on response instead.
-				if (builder.Stream == null || builder.Stream == Stream.Null) response.Dispose();
+				if (builder.Stream == null || builder.Stream == Stream.Null) responseMessage.Dispose();
 			}
 			catch (TaskCanceledException e)
 			{
@@ -137,11 +137,11 @@ namespace Elasticsearch.Net
 			{
 				builder.Exception = e;
 			}
-            var r = await builder.ToResponseAsync().ConfigureAwait(false);
+            var response = await builder.ToResponseAsync().ConfigureAwait(false);
 			//explicit dispose of response not needed (as documented on MSDN) on desktop CLR
 			//but we can not guarantee this is true for all HttpMessageHandler implementations
-            if (typeof(TReturn) != typeof(Stream)) response?.Dispose();
-            return r;
+            if (typeof(TReturn) != typeof(Stream)) responseMessage?.Dispose();
+            return response;
 		}
 
 		private static readonly string MissingConnectionLimitMethodError =
