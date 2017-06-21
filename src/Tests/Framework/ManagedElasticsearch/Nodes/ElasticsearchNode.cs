@@ -111,10 +111,12 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 
 		private void HandleConsoleMessage(ElasticsearchConsoleOut consoleOut, XplatManualResetEvent handle)
 		{
+			Console.WriteLine(consoleOut.Data);
 			//no need to snoop for metadata if we already started
 			if (!this._config.RunIntegrationTests || this.Started) return;
 
-			if (consoleOut.Error && !this.Started) throw new Exception(consoleOut.Data);
+			if (consoleOut.Error && !this.Started && !string.IsNullOrWhiteSpace(consoleOut.Data)) 
+				throw new Exception("Error out:" + consoleOut.Data);
 
 			string version;
 			int? pid;

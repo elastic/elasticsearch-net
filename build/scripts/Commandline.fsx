@@ -51,8 +51,6 @@ module Commandline =
         | _ -> "build"
 
     let needsFullBuild =
-        printfn "%s, %A" target skipTests
-
         match (target, skipTests) with
         | (_, true) -> true
         //dotnet-xunit needs to a build of its own anyways
@@ -67,6 +65,7 @@ module Commandline =
 
     let parse () =
         setEnvironVar "FAKEBUILD" "1"
+        printfn "%A" arguments
         match arguments with
         | [] | ["build"] | ["test"] | ["clean"] -> ignore()
         | ["release"; version] -> setBuildParam "version" version
@@ -87,6 +86,14 @@ module Commandline =
             setBuildParam "clusterfilter" clusterFilter
             setBuildParam "testfilter" testFilter
 
+        | ["connectionreuse"; esVersions] ->
+            setBuildParam "esversions" esVersions
+            setBuildParam "clusterfilter" "ConnectionReuse"
+        | ["connectionreuse"; esVersions; numberOfConnections] ->
+            setBuildParam "esversions" esVersions
+            setBuildParam "clusterfilter" "ConnectionReuse"
+            setBuildParam "numberOfConnections" numberOfConnections
+            
         | ["canary"; ] -> ignore()
         | ["canary"; apiKey ] ->
             setBuildParam "apiKey" apiKey
@@ -98,5 +105,5 @@ module Commandline =
             traceError usage
             exit 2
 
-        setBuildParam "target" target
+        setBuildParam "target" (if target = "connectionreuse" then "integrate" else target)
         traceHeader target

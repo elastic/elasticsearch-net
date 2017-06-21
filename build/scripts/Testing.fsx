@@ -21,8 +21,10 @@ module Tests =
     let private setLocalEnvVars() = 
         let clusterFilter =  getBuildParamOrDefault "clusterfilter" ""
         let testFilter = getBuildParamOrDefault "testfilter" ""
+        let numberOfConnections = getBuildParamOrDefault "numberOfConnections" ""
         setProcessEnvironVar "NEST_INTEGRATION_CLUSTER" clusterFilter
         setProcessEnvironVar "NEST_TEST_FILTER" testFilter
+        setProcessEnvironVar "NEST_NUMBER_OF_CONNECTIONS" numberOfConnections
 
     let private dotnetTest (target: Commandline.MultiTarget) =
         CreateDir Paths.BuildOutput
