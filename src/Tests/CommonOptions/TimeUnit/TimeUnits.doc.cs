@@ -131,13 +131,8 @@ namespace Tests.CommonOptions.TimeUnit
 			{
 				{ "2.000000000e-06ms", TimeSpan.FromMilliseconds(2.000000000e-06), "0.000002ms"},
 				{ "3.1e-11ms", TimeSpan.FromMilliseconds(3.1e-11), "0.000000000031ms"},
-				{ "1000 nanos", new TimeSpan(10) , "1000nanos"},
-				{ "1000nanos", new TimeSpan(10), "1000nanos"},
-				{ "1000 NANOS", new TimeSpan(10), "1000nanos" },
-				{ "1000NANOS", new TimeSpan(10), "1000nanos" },
-				{ "10micros", new TimeSpan(100), "10micros" },
 				{ "10   MS", new TimeSpan(0, 0, 0, 0, 10), "10ms" },
-				{ "10ms", new TimeSpan(0, 0, 0, 0, 10), "10ms" },
+				{ "11ms", new TimeSpan(0, 0, 0, 0, 11), "11ms" },
 				{ "10s", new TimeSpan(0, 0, 10), "10s" },
 				{ "10m", new TimeSpan(0, 10, 0) , "10m"},
 				{ "10M", new TimeSpan(300, 0, 0, 0), "10M" }, // 300 days not minutes
