@@ -21,8 +21,15 @@ namespace Nest
 		private const double MicrosecondsInAMillisecond = 10;
 
 		private static readonly Regex ExpressionRegex =
-			new Regex(@"^(?<factor>[-+]?[\d\.e\-]+?)\s*(?<interval>(?:y|w|d|h|m|s|ms|nanos|micros))?$",
-				RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase);
+			new Regex(@"^
+				(?<factor>[+\-]? # open factor capture, allowing optional +- signs
+					(?:(?#numeric)(?:\d+(?:\.\d*)?)|(?:\.\d+)) #a numeric in the forms: (N, N., .N, N.N)
+					(?:(?#exponent)e[+\-]?\d+)? #an optional exponential scientific component, E also matches here (IgnoreCase)
+				) # numeric and exponent fall under the factor capture
+				\s{0,10} #optional spaces (sanity checked for max 10 repetitions)
+				(?<interval>(?:y|w|d|h|m|s|ms|nanos|micros))? #optional interval indicator
+				$",
+				RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
 
 		private static double FLOAT_TOLERANCE = 0.0000001;
 
@@ -48,7 +55,7 @@ namespace Nest
 		public static Time MinusOne { get; } = new Time(-1, true);
 		public static Time Zero { get; } = new Time(0, true);
 
-		protected Time(int specialFactor, bool specialValue)
+		private Time(int specialFactor, bool specialValue)
 		{
 			if (!specialValue) throw new ArgumentException("this constructor is only for static TimeValues");
 			this.StaticTimeValue = specialFactor;
@@ -313,7 +320,6 @@ namespace Nest
 				Interval = TimeUnit.Millisecond;
 			}
 		}
-
 
 		private static string ExponentFormat(double d)
 		{
