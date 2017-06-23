@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 
@@ -7,15 +8,23 @@ namespace Elasticsearch.Net
 {
 	public class StaticConnectionPool : IConnectionPool
 	{
+		private readonly Func<Node, float> _nodeScorer;
 		protected IDateTimeProvider DateTimeProvider { get; }
 		protected Random Random { get; } = new Random();
 		protected bool Randomize { get; }
 
 		protected List<Node> InternalNodes { get; set; }
 
-		protected virtual List<Node> AliveNodes => this.InternalNodes
-			.Where(n => n.IsAlive || n.DeadUntil <= DateTimeProvider.Now())
-			.ToList();
+		protected List<Node> AliveNodes
+		{
+			get
+			{
+				var now = DateTimeProvider.Now();
+                return this.InternalNodes
+                    .Where(n => n.IsAlive || n.DeadUntil <= now)
+                    .ToList();
+			}
+		}
 
 		/// <inheritdoc/>
 		public virtual IReadOnlyCollection<Node> Nodes => this.InternalNodes;
@@ -45,10 +54,16 @@ namespace Elasticsearch.Net
 		{ }
 
 		public StaticConnectionPool(IEnumerable<Node> nodes, bool randomize = true, IDateTimeProvider dateTimeProvider = null)
+			: this(nodes, null, dateTimeProvider)
+		{
+			this.Randomize = randomize;
+		}
+
+		//this constructor is protected because nodeScorer only makes sense on subclasses that support reseeding
+		//otherwise just manually sort `nodes` before instantiating.
+		protected StaticConnectionPool(IEnumerable<Node> nodes, Func<Node, float> nodeScorer, IDateTimeProvider dateTimeProvider = null)
 		{
 			nodes.ThrowIfEmpty(nameof(nodes));
-
-			this.Randomize = randomize;
 			this.DateTimeProvider = dateTimeProvider ?? Elasticsearch.Net.DateTimeProvider.Default;
 
 			var nn = nodes.ToList();
@@ -58,8 +73,8 @@ namespace Elasticsearch.Net
 
 			this.UsingSsl = uris.Any(uri => uri.Scheme == "https");
 
-			this.InternalNodes = nn
-				.OrderBy(item => randomize ? this.Random.Next() : 1)
+			this._nodeScorer = nodeScorer;
+			this.InternalNodes = this.SortNodes(nn)
 				.DistinctBy(n => n.Uri)
 				.ToList();
 			this.LastUpdate = this.DateTimeProvider.Now();
@@ -73,11 +88,10 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public virtual IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null)
 		{
-			var now = this.DateTimeProvider.Now();
 			var nodes = this.AliveNodes;
 
 			var globalCursor = Interlocked.Increment(ref GlobalCursor);
-			
+
 			if (nodes.Count == 0)
 			{
 				//could not find a suitable node retrying on first node off globalCursor
@@ -116,8 +130,14 @@ namespace Elasticsearch.Net
 				}
 
 				yield return node;
-			}			
+			}
 		}
+
+		protected IOrderedEnumerable<Node> SortNodes(IEnumerable<Node> nodes) =>
+			this._nodeScorer != null
+				? nodes.OrderByDescending(_nodeScorer)
+				: nodes.OrderBy(n => this.Randomize ? this.Random.Next() : 1);
+
 
 		void IDisposable.Dispose() => this.DisposeManagedResources();
 

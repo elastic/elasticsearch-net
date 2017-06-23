@@ -20,14 +20,19 @@ namespace Elasticsearch.Net
 		{ }
 
 		public SniffingConnectionPool(IEnumerable<Node> nodes, bool randomize = true, IDateTimeProvider dateTimeProvider = null)
-			: base(nodes, randomize, dateTimeProvider)
-		{ }
+			: base(nodes, randomize, dateTimeProvider) { }
 
+		public SniffingConnectionPool(IEnumerable<Node> nodes, Func<Node, float> nodeScorer, IDateTimeProvider dateTimeProvider = null)
+			: base(nodes, nodeScorer, dateTimeProvider) { }
+
+		/// <summary>
+		/// Obsolete overload
+		/// </summary>
+		/// <param name="predicate">UNUSED</param>
+		[Obsolete("this constructor has an unused parameter: predicate and will be removed in 6.0")]
 		public SniffingConnectionPool(IEnumerable<Node> nodes, Func<Node, bool> predicate, bool randomize = true, IDateTimeProvider dateTimeProvider = null)
 			: base(nodes, randomize, dateTimeProvider)
 		{ }
-
-		private static bool DefaultPredicate(Node node) => !node.MasterOnlyNode;
 
 		/// <inheritdoc/>
 		public override IReadOnlyCollection<Node> Nodes
@@ -82,11 +87,6 @@ namespace Elasticsearch.Net
 			{
 				this._readerWriter.ExitReadLock();
 			}
-		}
-
-		protected virtual IOrderedEnumerable<Node> SortNodes(IEnumerable<Node> nodes)
-		{
-			return nodes.OrderBy(item => this.Randomize ? this.Random.Next() : 1);
 		}
 
 		protected override void DisposeManagedResources()

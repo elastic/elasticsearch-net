@@ -12,11 +12,10 @@ namespace Elasticsearch.Net
 
 		public StickyConnectionPool(IEnumerable<Node> nodes, IDateTimeProvider dateTimeProvider = null)
 			: base(nodes, false, dateTimeProvider)
-		{ }		
+		{ }
 
 		public override IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null)
 		{
-			var now = this.DateTimeProvider.Now();
 			var nodes = this.AliveNodes;
 
 			if (nodes.Count == 0)
@@ -31,15 +30,11 @@ namespace Elasticsearch.Net
 			// If the cursor is greater than the default then it's been
 			// set already but we now have a live node so we should reset it
 			if (this.GlobalCursor > -1)
-			{
 				Interlocked.Exchange(ref this.GlobalCursor, -1);
-			}
 
 			var localCursor = 0;
 			foreach (var aliveNode in this.SelectAliveNodes(localCursor, nodes, audit))
-			{
 				yield return aliveNode;
-			}
 		}
 
 		public override void Reseed(IEnumerable<Node> nodes) { }

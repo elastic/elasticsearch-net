@@ -17,8 +17,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 		*/
 		protected int NumberOfNodes = 3;
 
-		[U]
-		public void EachViewDoesNotSkip()
+		[U] public void EachViewDoesNotSkip()
 		{
 			var seeds = Enumerable.Range(9200, NumberOfNodes).Select(p => new Node(new Uri("http://localhost:" + p))).ToList();
 			var pool = new StickyConnectionPool(seeds);
@@ -33,8 +32,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 			}
 		}
 
-		[U]
-		public void EachViewSeesNextButSkipsTheDeadNode()
+		[U] public void EachViewSeesNextButSkipsTheDeadNode()
 		{
 			var seeds = Enumerable.Range(9200, NumberOfNodes).Select(p => new Node(new Uri("http://localhost:" + p))).ToList();
 			seeds.First().MarkDead(DateTime.Now.AddDays(1));
@@ -59,8 +57,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 			}
 		}
 
-		[U]
-		public void ViewSeesResurrectedNodes()
+		[U] public void ViewSeesResurrectedNodes()
 		{
 			var dateTimeProvider = new TestableDateTimeProvider();
 			var seeds = Enumerable.Range(9200, NumberOfNodes).Select(p => new Node(new Uri("http://localhost:" + p))).ToList();
