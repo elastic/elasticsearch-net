@@ -17,6 +17,8 @@ namespace Tests.Framework
 		/// </summary>
 		Union<Exception, int> Return { get; set; }
 
+		Union<Exception, int> AfterSucceeds { get; set; }
+
 		byte[] ReturnResponse { get; set; }
 	}
 
@@ -29,6 +31,7 @@ namespace Tests.Framework
 		TimeSpan? IRule.Takes { get; set; }
 		Union<TimesHelper.AllTimes, int> IRule.Times { get; set; }
 		Union<Exception, int> IRule.Return { get; set; }
+		Union<Exception, int> IRule.AfterSucceeds { get; set; }
 		byte[] IRule.ReturnResponse { get; set; }
 
 		public TRule OnPort(int port)

@@ -32,6 +32,21 @@ namespace Tests.Framework
 			Self.Return = validResponseCode;
 			return this;
 		}
+		public ClientCallRule AfterSucceeds(Union<Exception, int> errorState = null)
+		{
+			Self.AfterSucceeds = errorState;
+			return this;
+		}
+		public ClientCallRule ThrowsAfterSucceeds()
+		{
+			Self.AfterSucceeds =
+                #if DOTNETCORE
+                    new System.Net.Http.HttpRequestException();
+                #else
+                    new WebException();
+                #endif
+			return this;
+		}
 
 		public ClientCallRule SucceedAlways(int? validResponseCode = 200) => this.Succeeds(TimesHelper.Always, validResponseCode);
 		public ClientCallRule FailAlways(Union<Exception, int> errorState = null) => this.Fails(TimesHelper.Always, errorState);

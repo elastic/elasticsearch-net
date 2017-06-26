@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 
@@ -7,11 +8,23 @@ namespace Elasticsearch.Net
 {
 	public class StaticConnectionPool : IConnectionPool
 	{
+		private readonly Func<Node, float> _nodeScorer;
 		protected IDateTimeProvider DateTimeProvider { get; }
 		protected Random Random { get; } = new Random();
 		protected bool Randomize { get; }
 
 		protected List<Node> InternalNodes { get; set; }
+
+		protected List<Node> AliveNodes
+		{
+			get
+			{
+				var now = DateTimeProvider.Now();
+                return this.InternalNodes
+                    .Where(n => n.IsAlive || n.DeadUntil <= now)
+                    .ToList();
+			}
+		}
 
 		public virtual IReadOnlyCollection<Node> Nodes => this.InternalNodes;
 
@@ -33,10 +46,16 @@ namespace Elasticsearch.Net
 		{ }
 
 		public StaticConnectionPool(IEnumerable<Node> nodes, bool randomize = true, IDateTimeProvider dateTimeProvider = null)
+			: this(nodes, null, dateTimeProvider)
+		{
+			this.Randomize = randomize;
+		}
+
+		//this constructor is protected because nodeScorer only makes sense on subclasses that support reseeding
+		//otherwise just manually sort `nodes` before instantiating.
+		protected StaticConnectionPool(IEnumerable<Node> nodes, Func<Node, float> nodeScorer, IDateTimeProvider dateTimeProvider = null)
 		{
 			nodes.ThrowIfEmpty(nameof(nodes));
-
-			this.Randomize = randomize;
 			this.DateTimeProvider = dateTimeProvider ?? Elasticsearch.Net.DateTimeProvider.Default;
 
 			var nn = nodes.ToList();
@@ -46,8 +65,8 @@ namespace Elasticsearch.Net
 
 			this.UsingSsl = uris.Any(uri => uri.Scheme == "https");
 
-			this.InternalNodes = nn
-				.OrderBy(item => randomize ? this.Random.Next() : 1)
+			this._nodeScorer = nodeScorer;
+			this.InternalNodes = this.SortNodes(nn)
 				.DistinctBy(n => n.Uri)
 				.ToList();
 			this.LastUpdate = this.DateTimeProvider.Now();
@@ -61,41 +80,56 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public virtual IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null)
 		{
-			//var count = this.InternalNodes.Count;
+			var nodes = this.AliveNodes;
 
-			var now = this.DateTimeProvider.Now();
-			var nodes = this.InternalNodes.Where(n => n.IsAlive || n.DeadUntil <= now)
-				.ToList();
-			var count = nodes.Count;
-			Node node;
 			var globalCursor = Interlocked.Increment(ref GlobalCursor);
 
-			if (count == 0)
+			if (nodes.Count == 0)
 			{
 				//could not find a suitable node retrying on first node off globalCursor
-				audit?.Invoke(AuditEvent.AllNodesDead, null);
-				node = this.InternalNodes[globalCursor % this.InternalNodes.Count];
-				node.IsResurrected = true;
-				audit?.Invoke(AuditEvent.Resurrection, node);
-				yield return node;
+				yield return this.RetryInternalNodes(globalCursor, audit);
 				yield break;
 			}
 
-			var localCursor = globalCursor % count;
-
-			for (var attempts = 0; attempts < count; attempts++)
+			var localCursor = globalCursor % nodes.Count;
+			foreach (var aliveNode in SelectAliveNodes(localCursor, nodes, audit))
 			{
-				node = nodes[localCursor];
-				localCursor = (localCursor + 1) % count;
+				yield return aliveNode;
+			}
+		}
+
+		protected virtual Node RetryInternalNodes(int globalCursor, Action<AuditEvent, Node> audit = null)
+		{
+			audit?.Invoke(AuditEvent.AllNodesDead, null);
+			var node = this.InternalNodes[globalCursor % this.InternalNodes.Count];
+			node.IsResurrected = true;
+			audit?.Invoke(AuditEvent.Resurrection, node);
+
+			return node;
+		}
+
+		protected virtual IEnumerable<Node> SelectAliveNodes(int cursor, List<Node> aliveNodes, Action<AuditEvent, Node> audit = null)
+		{
+			for (var attempts = 0; attempts < aliveNodes.Count; attempts++)
+			{
+				var node = aliveNodes[cursor];
+				cursor = (cursor + 1) % aliveNodes.Count;
 				//if this node is not alive or no longer dead mark it as resurrected
 				if (!node.IsAlive)
 				{
 					audit?.Invoke(AuditEvent.Resurrection, node);
 					node.IsResurrected = true;
 				}
+
 				yield return node;
 			}
 		}
+
+		protected IOrderedEnumerable<Node> SortNodes(IEnumerable<Node> nodes) =>
+			this._nodeScorer != null
+				? nodes.OrderByDescending(_nodeScorer)
+				: nodes.OrderBy(n => this.Randomize ? this.Random.Next() : 1);
+
 
 		void IDisposable.Dispose() => this.DisposeManagedResources();
 

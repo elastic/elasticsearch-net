@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
+using static Tests.Framework.TimesHelper;
+using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 {
 	public class Sticky
 	{
-		/** Sticky
+		/** Sticky Connection Pool
 		 * Each connection pool returns the first `live` node so that it is sticky between requests
 		*/
 		[U]
@@ -37,5 +41,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 			var expectedOrder = Enumerable.Repeat(9200, numberOfNodes);
 			startingPositions.Should().ContainInOrder(expectedOrder);
 		}
+
 	}
 }
