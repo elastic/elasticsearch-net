@@ -20,8 +20,10 @@ namespace Elasticsearch.Net
 		{ }
 
 		public SniffingConnectionPool(IEnumerable<Node> nodes, bool randomize = true, IDateTimeProvider dateTimeProvider = null)
-			: base(nodes, randomize, dateTimeProvider)
-		{ }
+			: base(nodes, randomize, dateTimeProvider) { }
+
+		public SniffingConnectionPool(IEnumerable<Node> nodes, Func<Node, float> nodeScorer, IDateTimeProvider dateTimeProvider = null)
+			: base(nodes, nodeScorer, dateTimeProvider) { }
 
 		/// <inheritdoc/>
 		public override IReadOnlyCollection<Node> Nodes
@@ -50,8 +52,7 @@ namespace Elasticsearch.Net
 			try
 			{
 				this._readerWriter.EnterWriteLock();
-				var sortedNodes = nodes
-					.OrderBy(item => this.Randomize ? this.Random.Next() : 1)
+				var sortedNodes = this.SortNodes(nodes)
 					.DistinctBy(n => n.Uri)
 					.ToList();
 

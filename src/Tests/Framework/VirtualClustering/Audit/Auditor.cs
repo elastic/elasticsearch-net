@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
+using FluentAssertions.Collections;
+using FluentAssertions.Execution;
 using Nest;
 
 namespace Tests.Framework
@@ -72,7 +75,7 @@ namespace Tests.Framework
 
 		public async Task<Auditor> TraceCall(ClientCall callTrace, int nthCall = 0)
 		{
-			 await this.TraceStartup(callTrace);
+			await this.TraceStartup(callTrace);
 			return AssertAuditTrails(callTrace, nthCall);
 		}
 
@@ -191,6 +194,24 @@ namespace Tests.Framework
 		}
 
 
+		public void VisualizeCalls(int numberOfCalls)
+		{
+			var cluster  = _cluster ?? this.Cluster();
+			var messages = new List<string>(numberOfCalls * 2);
+			for (var i = 0; i < numberOfCalls; i++)
+			{
+				var call = cluster.ClientCall();
+				var d = call.ApiCall;
+                var actualAuditTrail = d.AuditTrail.Aggregate(new StringBuilder(),
+                    (sb, a)=> sb.AppendLine($"-> {a}"),
+                    sb => sb.ToString());
+				messages.Add($"{d.HttpMethod.GetStringValue()} ({d.Uri.Port})");
+				messages.Add(actualAuditTrail);
+			}
+			throw new Exception(string.Join(Environment.NewLine, messages));
+		}
+
+
 		public async Task<Auditor> TraceCalls(params ClientCall[] audits)
 		{
 			var auditor = this;
@@ -206,7 +227,14 @@ namespace Tests.Framework
 			var typeOfTrail = (sync ? "synchronous" : "asynchronous") + " audit trail";
 			var nthClientCall = (nthCall + 1).ToOrdinal();
 
-			callTrace.Select(c=>c.Event).Should().ContainInOrder(auditTrail.Select(a=>a.Event), $"the {nthClientCall} client call's {typeOfTrail} should assert ALL audit trail items");
+			var actualAuditTrail = auditTrail.Aggregate(new StringBuilder(Environment.NewLine),
+				(sb, a)=> sb.AppendLine($"-> {a}"),
+				sb => sb.ToString());
+
+			callTrace.Select(c=>c.Event)
+				.Should().ContainInOrder(auditTrail.Select(a=>a.Event),
+					$"the {nthClientCall} client call's {typeOfTrail} should assert ALL audit trail items{actualAuditTrail}");
+
 			foreach (var t in auditTrail.Select((a, i) => new { a, i }))
 			{
 				var i = t.i;
@@ -220,7 +248,9 @@ namespace Tests.Framework
 				c.AssertWithBecause?.Invoke(string.Format(because, "custom assertion"), audit);
 			}
 
-			callTrace.Count.Should().Be(auditTrail.Count);
+			callTrace.Count.Should().Be(auditTrail.Count, $"actual auditTrail {actualAuditTrail}");
 		}
+
 	}
+
 }
