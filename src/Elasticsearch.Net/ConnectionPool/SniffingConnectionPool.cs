@@ -23,12 +23,6 @@ namespace Elasticsearch.Net
 			: base(nodes, randomize, dateTimeProvider)
 		{ }
 
-		public SniffingConnectionPool(IEnumerable<Node> nodes, Func<Node, bool> predicate, bool randomize = true, IDateTimeProvider dateTimeProvider = null)
-			: base(nodes, randomize, dateTimeProvider)
-		{ }
-
-		private static bool DefaultPredicate(Node node) => !node.MasterOnlyNode;
-
 		/// <inheritdoc/>
 		public override IReadOnlyCollection<Node> Nodes
 		{
