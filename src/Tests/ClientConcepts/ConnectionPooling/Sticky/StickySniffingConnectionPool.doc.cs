@@ -74,14 +74,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 				.Settings(p => p.DisablePing().SniffOnStartup(false))
 			);
 
+			/** Our first call happens on 9202 because we sorted that to the top as its on rack_2
+			* After two succesful calls our sticky node throws an exception and we sniff and failover.
+			* Sniffing happens on the next node in order (9200) and the sniffing response returns nodes
+			* 9210 to 9213. We should now be stick on 9211 as its on rack_11
+			*/
 			await audit.TraceCalls(
-				/** Our first call happens on 9202 because we sorted that to the top as its on rack_2 */
 				new ClientCall { { HealthyResponse, 9202} },
 				new ClientCall { { HealthyResponse, 9202} },
-				/** After two succesful calls our sticky node throws an exception and we sniff and failover.
-				* Sniffing happens on the next node in order (9200) and the sniffing response returns nodes
-				* 9210 to 9213. We should now be stick on 9211 as its on rack_11
-				*/
 				new ClientCall {
 					{ BadResponse, 9202 },
 					{ SniffOnFail },

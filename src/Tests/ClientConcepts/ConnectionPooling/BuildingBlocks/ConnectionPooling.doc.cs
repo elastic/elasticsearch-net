@@ -182,7 +182,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		}
 
 		/**[[sticky-sniffing-connection-pool]]
-		* ==== Sitcky Sniffing Connection Pool
+		* ==== Sticky Sniffing Connection Pool
 		*
 		* A type of connection pool that returns the first live node to issue a request against, such that the node is _sticky_ between requests.
 		* This implementation supports sniffing and sorting so that each instance of your application can favor a node in the same rack based
@@ -206,7 +206,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			pool.SupportsReseeding.Should().BeTrue();
 			pool.SupportsPinging.Should().BeTrue();
 
-			/** To create a client using the sticky connection pool pass
+			/** To create a client using the sticky sniffing connection pool pass
 			* the connection pool to the `ConnectionSettings` you pass to `ElasticClient`
 			*/
 			var client = new ElasticClient(new ConnectionSettings(pool));
