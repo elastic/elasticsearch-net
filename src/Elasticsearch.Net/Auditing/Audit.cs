@@ -26,6 +26,7 @@ namespace Elasticsearch.Net
         /// <summary>
         /// The path of the request
         /// </summary>
+        [Obsolete("Scheduled for removal in 6.0")]
         public string Path { get; internal set; }
         /// <summary>
         /// The exception for the audit, if there was one.

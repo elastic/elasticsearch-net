@@ -17,14 +17,12 @@ namespace Elasticsearch.Net
 		private readonly IDateTimeProvider _dateTimeProvider;
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
 
-		private IRequestParameters RequestParameters { get; }
 		private IRequestConfiguration RequestConfiguration { get; }
 
 		public DateTime StartedOn { get; }
 
 		public List<Audit> AuditTrail { get; } = new List<Audit>();
-		private int _retried = 0;
-		public int Retried => _retried;
+		public int Retried { get; private set; } = 0;
 
 		public RequestPipeline(
 			IConnectionConfigurationValues configurationValues,
@@ -38,7 +36,6 @@ namespace Elasticsearch.Net
 			this._dateTimeProvider = dateTimeProvider;
 			this._memoryStreamFactory = memoryStreamFactory;
 
-			this.RequestParameters = requestParameters;
 			this.RequestConfiguration = requestParameters?.RequestConfiguration;
 			this.StartedOn = dateTimeProvider.Now();
 		}
@@ -62,6 +59,11 @@ namespace Elasticsearch.Net
 			!this.RequestDisabledSniff
 				&& this._connectionPool.SupportsReseeding && this._settings.SniffInformationLifeSpan.HasValue;
 
+		//TODO Make private and rename to RefreshViewEnumerators
+		public bool Refresh { get; private set; }
+
+		public bool DepleededRetries => this.Retried >= this.MaxRetries + 1 || this.IsTakingTooLong;
+
 		public bool StaleClusterState
 		{
 			get
@@ -82,12 +84,12 @@ namespace Elasticsearch.Net
 			(this.RequestConfiguration?.DisablePing).GetValueOrDefault(false)
 				|| this._settings.DisablePings || !this._connectionPool.SupportsPinging || !node.IsResurrected;
 
-		TimeSpan PingTimeout =>
+		private TimeSpan PingTimeout =>
 			 this.RequestConfiguration?.PingTimeout
 			?? this._settings.PingTimeout
 			?? (this._connectionPool.UsingSsl ? ConnectionConfiguration.DefaultPingTimeoutOnSSL : ConnectionConfiguration.DefaultPingTimeout);
 
-		TimeSpan RequestTimeout => this.RequestConfiguration?.RequestTimeout ?? this._settings.RequestTimeout;
+		private TimeSpan RequestTimeout => this.RequestConfiguration?.RequestTimeout ?? this._settings.RequestTimeout;
 
 		public bool IsTakingTooLong
 		{
@@ -105,11 +107,8 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public bool Refresh { get; private set; }
-
-		public bool DepleededRetries => this.Retried >= this.MaxRetries + 1 || this.IsTakingTooLong;
-
-		private Auditable Audit(AuditEvent type) => new Auditable(type, this.AuditTrail, this._dateTimeProvider);
+		private Auditable Audit(AuditEvent type, Node node = null) =>
+			new Auditable(type, this.AuditTrail, this._dateTimeProvider) {Node = node};
 
 		private static string NoNodesAttemptedMessage = "No nodes were attempted, this can happen when a node predicate does not match any nodes";
 		public void ThrowNoNodesAttempted(RequestData requestData, List<PipelineException> seenExceptions)
@@ -129,7 +128,7 @@ namespace Elasticsearch.Net
 		{
 			var deadUntil = this._dateTimeProvider.DeadTime(node.FailedAttempts, this._settings.DeadTimeout, this._settings.MaxDeadTimeout);
 			node.MarkDead(deadUntil);
-			this._retried++;
+			this.Retried++;
 		}
 
 		public void MarkAlive(Node node) => node.MarkAlive();
@@ -246,10 +245,8 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		private RequestData CreatePingRequestData(Node node, Auditable audit)
+		private RequestData CreatePingRequestData(Node node)
 		{
-			audit.Node = node;
-
 			var requestOverrides = new RequestConfiguration
 			{
 				PingTimeout = this.PingTimeout,
@@ -258,7 +255,7 @@ namespace Elasticsearch.Net
 				EnableHttpPipelining = this.RequestConfiguration?.EnableHttpPipelining ?? this._settings.HttpPipeliningEnabled,
 				ForceNode = this.RequestConfiguration?.ForceNode
 			};
-			IRequestParameters requestParameters = new RootNodeInfoRequestParameters { };
+			IRequestParameters requestParameters = new RootNodeInfoRequestParameters {  };
 			requestParameters.RequestConfiguration = requestOverrides;
 
 			return new RequestData(HttpMethod.HEAD, "/", null, this._settings, requestParameters, this._memoryStreamFactory) { Node = node };
@@ -268,11 +265,11 @@ namespace Elasticsearch.Net
 		{
 			if (PingDisabled(node)) return;
 
-			using (var audit = this.Audit(PingSuccess))
+			using (var audit = this.Audit(PingSuccess, node))
 			{
 				try
 				{
-					var pingData = CreatePingRequestData(node, audit);
+					var pingData = CreatePingRequestData(node);
 					var response = this._connection.Request<VoidResponse>(pingData);
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					//ping should not silently accept bad but valid http responses
@@ -292,11 +289,11 @@ namespace Elasticsearch.Net
 		{
 			if (PingDisabled(node)) return;
 
-			using (var audit = this.Audit(PingSuccess))
+			using (var audit = this.Audit(PingSuccess, node))
 			{
 				try
 				{
-					var pingData = CreatePingRequestData(node, audit);
+					var pingData = CreatePingRequestData(node);
 					var response = await this._connection.RequestAsync<VoidResponse>(pingData, cancellationToken).ConfigureAwait(false);
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					//ping should not silently accept bad but valid http responses
@@ -322,7 +319,7 @@ namespace Elasticsearch.Net
 
 		public IEnumerable<Node> SniffNodes => this._connectionPool
 			.CreateView(LazyAuditable)
-			.ToList()
+			.ToList() //TODO investigate ToList() here, we might need this materialized view but should we safeguard with TOP N?
 			.OrderBy(n => n.MasterEligible ? n.Uri.Port : int.MaxValue);
 
 		private void LazyAuditable(AuditEvent e, Node n)
@@ -350,9 +347,8 @@ namespace Elasticsearch.Net
 			var exceptions = new List<Exception>();
 			foreach (var node in this.SniffNodes)
 			{
-				using (var audit = this.Audit(SniffSuccess))
+				using (var audit = this.Audit(SniffSuccess, node))
 				{
-					audit.Node = node;
 					try
 					{
 						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, (IRequestParameters)null, this._memoryStreamFactory) { Node = node };
@@ -383,9 +379,8 @@ namespace Elasticsearch.Net
 			var exceptions = new List<Exception>();
 			foreach (var node in this.SniffNodes)
 			{
-				using (var audit = this.Audit(SniffSuccess))
+				using (var audit = this.Audit(SniffSuccess, node))
 				{
-					audit.Node = node;
 					try
 					{
 						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, (IRequestParameters)null, this._memoryStreamFactory) { Node = node };
@@ -411,11 +406,8 @@ namespace Elasticsearch.Net
 
 		public ElasticsearchResponse<TReturn> CallElasticsearch<TReturn>(RequestData requestData) where TReturn : class
 		{
-			using (var audit = this.Audit(HealthyResponse))
+			using (var audit = this.Audit(HealthyResponse, requestData.Node))
 			{
-				audit.Node = requestData.Node;
-				audit.Path = requestData.Path;
-
 				ElasticsearchResponse<TReturn> response = null;
 				try
 				{
@@ -437,11 +429,8 @@ namespace Elasticsearch.Net
 
 		public async Task<ElasticsearchResponse<TReturn>> CallElasticsearchAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken) where TReturn : class
 		{
-			using (var audit = this.Audit(HealthyResponse))
+			using (var audit = this.Audit(HealthyResponse, requestData.Node))
 			{
-				audit.Node = requestData.Node;
-				audit.Path = requestData.Path;
-
 				ElasticsearchResponse<TReturn> response = null;
 				try
 				{
