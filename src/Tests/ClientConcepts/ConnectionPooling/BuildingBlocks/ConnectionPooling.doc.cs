@@ -180,5 +180,38 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			client.ConnectionSettings.ConnectionPool
 				.Should().BeOfType<StickyConnectionPool>();
 		}
+
+		/**[[sticky-sniffing-connection-pool]]
+		* ==== Sticky Sniffing Connection Pool
+		*
+		* A type of connection pool that returns the first live node to issue a request against, such that the node is _sticky_ between requests.
+		* This implementation supports sniffing and sorting so that each instance of your application can favor a node in the same rack based
+		* on node attributes for instance.
+		*/
+		[U] public void SniffingSortedSticky()
+		{
+			var uris = Enumerable.Range(9200, 5)
+				.Select(port => new Uri($"http://localhost:{port}"));
+
+			/** a sniffing sorted sticky pool takes a second parameter `Func` takes a Node and returns a weight.
+			* Nodes will be sorted descending by weight. In the following example we score nodes that are client nodes
+			* AND in rack_id `rack_one` the highest
+			*/
+
+			var pool = new StickySniffingConnectionPool(uris, n =>
+				(n.ClientNode ? 10 : 0)
+				+ (n.Settings.TryGetValue("node.attr.rack_id", out string rackId)
+				   		&& rackId == "rack_one" ? 10 : 0));
+
+			pool.SupportsReseeding.Should().BeTrue();
+			pool.SupportsPinging.Should().BeTrue();
+
+			/** To create a client using the sticky sniffing connection pool pass
+			* the connection pool to the `ConnectionSettings` you pass to `ElasticClient`
+			*/
+			var client = new ElasticClient(new ConnectionSettings(pool));
+			client.ConnectionSettings.ConnectionPool
+				.Should().BeOfType<StickySniffingConnectionPool>();
+		}
 	}
 }

@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace Elasticsearch.Net
 {
-	public class StickyConnectionPool : StaticConnectionPool
+	public class StickySniffingConnectionPool : SniffingConnectionPool
 	{
-		public StickyConnectionPool(IEnumerable<Uri> uris, IDateTimeProvider dateTimeProvider = null)
-			: base(uris, false, dateTimeProvider)
-		{ }
+		public override bool SupportsPinging => true;
+		public override bool SupportsReseeding => true;
 
-		public StickyConnectionPool(IEnumerable<Node> nodes, IDateTimeProvider dateTimeProvider = null)
-			: base(nodes, false, dateTimeProvider)
-		{ }
+		public StickySniffingConnectionPool(IEnumerable<Uri> uris, Func<Node, float> nodeScorer, IDateTimeProvider dateTimeProvider = null)
+			: base(uris.Select(uri => new Node(uri)), nodeScorer ?? DefaultNodeScore, dateTimeProvider) { }
+
+		public StickySniffingConnectionPool(IEnumerable<Node> nodes, Func<Node, float> nodeScorer, IDateTimeProvider dateTimeProvider = null)
+			: base(nodes, nodeScorer ?? DefaultNodeScore, dateTimeProvider) { }
 
 		public override IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null)
 		{
@@ -37,6 +39,6 @@ namespace Elasticsearch.Net
 				yield return aliveNode;
 		}
 
-		public override void Reseed(IEnumerable<Node> nodes) { }
+		private static float DefaultNodeScore(Node node) => 0f;
 	}
 }
