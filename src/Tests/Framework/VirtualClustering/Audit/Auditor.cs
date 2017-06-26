@@ -106,7 +106,6 @@ namespace Tests.Framework
 			this.AsyncAuditTrail = exception.AuditTrail;
 			this.AssertPoolAfterCall?.Invoke(this._clusterAsync.ConnectionPool);
 		}
-
 		public async Task<Auditor> TraceElasticsearchException(ClientCall callTrace, Action<ElasticsearchClientException> assert)
 		{
 			await this.TraceException(callTrace, assert);
@@ -120,9 +119,9 @@ namespace Tests.Framework
 			return new Auditor(_cluster, _clusterAsync);
 		}
 
-#pragma warning disable 1998
+#pragma warning disable 1998 // Async method lacks 'await' operators and will run synchronously
 		public async Task<Auditor> TraceElasticsearchExceptionOnResponse(ClientCall callTrace, Action<ElasticsearchClientException> assert)
-#pragma warning restore 1998
+#pragma warning restore 1998 // Async method lacks 'await' operators and will run synchronously
 		{
 			this._cluster  = _cluster ?? this.Cluster();
 			this._cluster.ClientThrows(false);

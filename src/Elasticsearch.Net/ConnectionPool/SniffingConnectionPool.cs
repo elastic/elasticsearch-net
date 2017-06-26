@@ -9,7 +9,10 @@ namespace Elasticsearch.Net
 	{
 		private readonly ReaderWriterLockSlim _readerWriter = new ReaderWriterLockSlim();
 
+		/// <inheritdoc/>
 		public override bool SupportsReseeding => true;
+
+		/// <inheritdoc/>
 		public override bool SupportsPinging => true;
 
 		public SniffingConnectionPool(IEnumerable<Uri> uris, bool randomize = true, IDateTimeProvider dateTimeProvider = null)
@@ -39,6 +42,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
+		/// <inheritdoc/>
 		public override void Reseed(IEnumerable<Node> nodes)
 		{
 			if (!nodes.HasAny()) return;
@@ -60,6 +64,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
+		/// <inheritdoc/>
 		public override IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null)
 		{
 			this._readerWriter.EnterReadLock();

@@ -194,12 +194,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 				.Select(port => new Uri($"http://localhost:{port}"));
 
 			/** a sniffing sorted sticky pool takes a second parameter `Func` takes a Node and returns a weight.
-			* Nodes will be sorted descending by weight. In the following example we score nodes that are client nodes
+			* Nodes will be sorted descending by weight. In the following example we score nodes that are data nodes
 			* AND in rack_id `rack_one` the highest
 			*/
 
 			var pool = new StickySniffingConnectionPool(uris, n =>
-				(n.ClientNode ? 10 : 0)
+				(n.HoldsData ? 10 : 0)
 				+ (n.Settings.TryGetValue("node.attr.rack_id", out string rackId)
 				   		&& rackId == "rack_one" ? 10 : 0));
 

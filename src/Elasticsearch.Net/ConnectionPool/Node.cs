@@ -34,6 +34,9 @@ namespace Elasticsearch.Net
 		/// <summary>Indicates whether this node is master eligible, defaults to true when unknown/unspecified</summary>
 		public bool MasterEligible { get; set; }
 
+		public bool MasterOnlyNode => this.MasterEligible && !this.HoldsData;
+
+		public bool ClientNode => !this.MasterEligible && !this.HoldsData;
 		/// <summary>The id of the node, defaults to null when unknown/unspecified</summary>
 		public string Id { get; set; }
 

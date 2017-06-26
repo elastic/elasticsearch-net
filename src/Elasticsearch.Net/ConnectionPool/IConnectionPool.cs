@@ -6,8 +6,8 @@ namespace Elasticsearch.Net
 	public interface IConnectionPool : IDisposable
 	{
 		/// <summary>
-		/// Returns a readonly constant view of all the nodes in the cluster, this might involve creating copies of the nodes e.g 
-		/// if you are using the sniffing connectionpool. If you do not need an isolated copy of the nodes please read `CreateView()` to completion
+		/// Returns a readonly constant view of all the nodes in the cluster, this might involve creating copies of the nodes e.g
+		/// if you are using the sniffing connectionpool. If you do not need an isolated copy of the nodes please read <see cref="CreateView"/> to completion
 		/// </summary>
 		IReadOnlyCollection<Node> Nodes { get; }
 
@@ -17,7 +17,7 @@ namespace Elasticsearch.Net
 		/// in the connection settings
 		/// </summary>
 		int MaxRetries { get; }
-		
+
 		/// <summary>
 		/// Signals that this implemenation can accept new nodes
 		/// </summary>
