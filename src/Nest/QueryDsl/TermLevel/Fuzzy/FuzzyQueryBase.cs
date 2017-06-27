@@ -49,8 +49,8 @@ namespace Nest
 		[Obsolete("Use MultiTermQueryRewrite")]
 		public RewriteMultiTerm? Rewrite
 		{
-			get { return MultiTermQueryRewrite?.Rewrite; }
-			set { MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+			get => MultiTermQueryRewrite?.Rewrite;
+			set => MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value);
 		}
 
 		public MultiTermQueryRewrite MultiTermQueryRewrite { get; set; }
@@ -78,8 +78,8 @@ namespace Nest
 		[Obsolete("Use MultiTermQueryRewrite")]
 		RewriteMultiTerm? IFuzzyQuery.Rewrite
 		{
-			get { return Self.MultiTermQueryRewrite?.Rewrite; }
-			set { Self.MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+			get => Self.MultiTermQueryRewrite?.Rewrite;
+			set => Self.MultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value);
 		}
 
 		MultiTermQueryRewrite IFuzzyQuery.MultiTermQueryRewrite { get; set; }
