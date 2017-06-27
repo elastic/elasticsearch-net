@@ -17,11 +17,12 @@ namespace Nest
 	public class LazyDocument : ILazyDocument
 	{
 		internal JToken _Value { get; set; }
+		internal JsonSerializer _Serializer { get; set; }
 
 		public T As<T>() where T : class
 		{
 			var jToken = this._Value;
-			return jToken?.ToObject<T>();
+			return jToken?.ToObject<T>(_Serializer);
 		}
 	}
 }
