@@ -4,6 +4,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 
+
 namespace Tests.QueryDsl.FullText.SimpleQueryString
 {
 	public class SimpleQueryStringUsageTests : QueryDslUsageTestsBase
@@ -38,14 +39,17 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 			Analyzer = "standard",
 			DefaultOperator = Operator.Or,
 			Flags = SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near,
+#pragma warning disable 618 // usage of lowercase_expanded_terms and locale
 			Locale = "en_US",
 			LowercaseExpendedTerms = true,
+#pragma warning restore 618
 			Lenient = true,
 			AnalyzeWildcard = true,
 			MinimumShouldMatch = "30%"
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
+#pragma warning disable 618 // usage of lowercase_expanded_terms and locale
 			.SimpleQueryString(c => c
 				.Name("named_query")
 				.Boost(1.1)
@@ -60,6 +64,7 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 				.AnalyzeWildcard()
 				.MinimumShouldMatch("30%")
 			);
+#pragma warning restore 618
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISimpleQueryStringQuery>(a => a.SimpleQueryString)
 		{

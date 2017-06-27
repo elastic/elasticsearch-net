@@ -57,7 +57,10 @@ namespace Tests.QueryDsl.FullText.QueryString
 			AllowLeadingWildcard = true,
 			AutoGeneratePhraseQueries = true,
 			MaximumDeterminizedStates = 2,
+#pragma warning disable 618 // usage of lowercase_expanded_terms and locale
 			LowercaseExpendedTerms = true,
+			Locale = "en_US",
+#pragma warning restore 618 // usage of lowercase_expanded_terms and locale
 			EnablePositionIncrements = true,
 			Escape = true,
 			UseDisMax = true,
@@ -70,12 +73,12 @@ namespace Tests.QueryDsl.FullText.QueryString
 			AnalyzeWildcard = true,
 			MinimumShouldMatch = 2,
 			QuoteFieldSuffix = "'",
-			Lenient = true,
-			Locale = "en_US",
+			Lenient = true,			
 			Timezone = "root"
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
+#pragma warning disable 618 // usage of lowercase_expanded_terms and locale
 			.QueryString(c => c
 				.Name("named_query")
 				.Boost(1.1)
@@ -105,6 +108,7 @@ namespace Tests.QueryDsl.FullText.QueryString
 				.Locale("en_US")
 				.Timezone("root")
 			);
+#pragma warning restore 618 // usage of lowercase_expanded_terms and locale
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IQueryStringQuery>(a => a.QueryString)
 		{
