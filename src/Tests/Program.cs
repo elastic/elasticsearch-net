@@ -56,7 +56,7 @@ namespace Tests
 		private static  string SdkPath { get; }
 		private static  string OutputPath { get; }
 
-		public static void Main(string[] args)
+		public static void TestMain(string[] args)
 		{
 			if (args.Length == 0)
 				Console.WriteLine("Must specify at least one argument: TestAssemblyPath, Profile or Benchmark ");
