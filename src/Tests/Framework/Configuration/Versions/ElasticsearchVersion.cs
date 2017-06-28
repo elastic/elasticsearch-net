@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Xml.Linq;
 using Nest;
@@ -15,6 +16,7 @@ namespace Tests.Framework.Versions
 		private static readonly object _lock = new { };
 		private static readonly ConcurrentDictionary<string, string> SnapshotVersions = new ConcurrentDictionary<string, string>();
 		private static readonly string SonaTypeUrl = "https://oss.sonatype.org/content/repositories/snapshots/org/elasticsearch/distribution/zip/elasticsearch";
+		private static readonly ConcurrentDictionary<string, ElasticsearchVersion> Versions = new ConcurrentDictionary<string, ElasticsearchVersion>();
 
 		private string RootUrl => this.IsSnapshot
 			? SonaTypeUrl
@@ -127,5 +129,8 @@ namespace Tests.Framework.Versions
 		public bool IsSnapshot => this.Version?.ToLower().Contains("snapshot") ?? false;
 
 		public override string ToString() => this.Version;
+
+		public static ElasticsearchVersion GetOrAdd(string version) =>
+			Versions.GetOrAdd(version, v => new ElasticsearchVersion(v));
 	}
 }

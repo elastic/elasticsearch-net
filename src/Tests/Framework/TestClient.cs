@@ -96,7 +96,7 @@ namespace Tests.Framework
 				m.Ignore(p => p.Ranges);
 			return m;
 		}
-		public static string PercolatorType => Configuration.ElasticsearchVersion <= new ElasticsearchVersion("5.0.0-alpha1")
+		public static string PercolatorType => Configuration.ElasticsearchVersion <= ElasticsearchVersion.GetOrAdd("5.0.0-alpha1")
 			? ".percolator"
 			: "query";
 

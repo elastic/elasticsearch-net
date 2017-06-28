@@ -355,7 +355,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		{
 			get
 			{
-				var es = this.Node.Version > new ElasticsearchVersion("5.0.0-alpha2") ? "" : "es.";
+				var es = this.Node.Version > ElasticsearchVersion.GetOrAdd("5.0.0-alpha2") ? "" : "es.";
 
 				return new[]
 				{

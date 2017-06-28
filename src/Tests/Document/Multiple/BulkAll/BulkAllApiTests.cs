@@ -120,7 +120,7 @@ namespace Tests.Document.Multiple.BulkAll
 			var handle = new ManualResetEvent(false);
 
 			var size = 1000;
-			var pages = 100;
+			var pages = 1000;
 			var seenPages = 0;
 			var numberOfDocuments = size * pages;
 			var documents = this.CreateLazyStreamOfDocuments(numberOfDocuments);
@@ -146,7 +146,7 @@ namespace Tests.Document.Multiple.BulkAll
 			observableBulk.Subscribe(bulkObserver);
 
 			//we wait N seconds to see some bulks
-			handle.WaitOne(TimeSpan.FromSeconds(1));
+			handle.WaitOne(TimeSpan.FromSeconds(3));
 			observableBulk.Dispose();
 			//we wait N seconds to give in flight request a chance to cancel
 			handle.WaitOne(TimeSpan.FromSeconds(3));
@@ -165,7 +165,7 @@ namespace Tests.Document.Multiple.BulkAll
 			var handle = new ManualResetEvent(false);
 
 			var size = 1000;
-			var pages = 100;
+			var pages = 1000;
 			var seenPages = 0;
 			var numberOfDocuments = size * pages;
 			var documents = this.CreateLazyStreamOfDocuments(numberOfDocuments);
@@ -191,7 +191,7 @@ namespace Tests.Document.Multiple.BulkAll
 			observableBulk.Subscribe(bulkObserver);
 
 			//we wait Nseconds to see some bulks
-			handle.WaitOne(TimeSpan.FromSeconds(1));
+			handle.WaitOne(TimeSpan.FromSeconds(3));
 			tokenSource.Cancel();
 			//we wait Nseconds to give in flight request a chance to cancel
 			handle.WaitOne(TimeSpan.FromSeconds(3));

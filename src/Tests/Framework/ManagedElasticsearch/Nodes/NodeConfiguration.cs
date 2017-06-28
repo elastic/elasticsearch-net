@@ -56,9 +56,9 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 			this.DesiredPort = cluster.DesiredPort;
 
 			var attr = v.Major >= 5 ? "attr." : "";
-			var indexedOrStored = v > new ElasticsearchVersion("5.0.0-alpha1") ? "stored" : "indexed";
-			var shieldOrSecurity = v > new ElasticsearchVersion("5.0.0-alpha1") ? "xpack.security" : "shield";
-			var es = v > new ElasticsearchVersion("5.0.0-alpha2") ? "" : "es.";
+			var indexedOrStored = v > ElasticsearchVersion.GetOrAdd("5.0.0-alpha1") ? "stored" : "indexed";
+			var shieldOrSecurity = v > ElasticsearchVersion.GetOrAdd("5.0.0-alpha1") ? "xpack.security" : "shield";
+			var es = v > ElasticsearchVersion.GetOrAdd("5.0.0-alpha2") ? "" : "es.";
 			var b = this.XPackEnabled.ToString().ToLowerInvariant();
 			var sslEnabled = this.EnableSsl.ToString().ToLowerInvariant();
 			this.DefaultNodeSettings = new List<string>
@@ -78,7 +78,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 				$"{es}{shieldOrSecurity}.authc.realms.pki1.enabled={sslEnabled}",
 
 			};
-			if (v >= new ElasticsearchVersion("5.4.0"))
+			if (v >= ElasticsearchVersion.GetOrAdd("5.4.0"))
 				this.DefaultNodeSettings.Add($"{es}search.remote.connect=true");
 		}
 
