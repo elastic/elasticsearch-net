@@ -61,6 +61,7 @@ namespace Elasticsearch.Net
 				var seenExceptions = new List<PipelineException>();
 				foreach (var node in pipeline.NextNode())
 				{
+					requestData.ResetTrace();
 					requestData.Node = node;
 					try
 					{
@@ -86,12 +87,13 @@ namespace Elasticsearch.Net
 					}
 					catch (Exception killerException)
 					{
-						throw new UnexpectedElasticsearchClientException(killerException, seenExceptions)
-						{
-							Request = requestData,
-							Response = response,
-							AuditTrail = pipeline?.AuditTrail
-						};
+						using(requestData.Trace(nameof(UnexpectedElasticsearchClientException)))
+                            throw new UnexpectedElasticsearchClientException(killerException, seenExceptions)
+                            {
+                                Request = requestData,
+                                Response = response,
+                                AuditTrail = pipeline?.AuditTrail
+                            };
 					}
 					if (response == null || !response.SuccessOrKnownError) continue;
 					pipeline.MarkAlive(node);
@@ -104,7 +106,6 @@ namespace Elasticsearch.Net
 					pipeline.BadResponse(ref response, requestData, seenExceptions);
 
 				this.Settings.OnRequestCompleted?.Invoke(response);
-
 				return response;
 			}
 		}
@@ -123,6 +124,7 @@ namespace Elasticsearch.Net
 				var seenExceptions = new List<PipelineException>();
 				foreach (var node in pipeline.NextNode())
 				{
+					requestData.ResetTrace();
 					requestData.Node = node;
 					try
 					{

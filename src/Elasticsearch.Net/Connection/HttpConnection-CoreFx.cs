@@ -7,8 +7,6 @@ using System.IO.Compression;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -69,21 +67,31 @@ namespace Elasticsearch.Net
 			if (typeof(TReturn) == typeof(Stream) && ConnectionConfiguration.IsCurlHandler)
 				throw new Exception(CanNotUseStreamResponsesWithCurlHandler);
 
-			var client = this.GetClient(requestData);
+			HttpClient client;
+			using(requestData.Trace(nameof(GetClient)))
+				client = this.GetClient(requestData);
+
 			var builder = new ResponseBuilder<TReturn>(requestData);
 			HttpResponseMessage responseMessage = null;
 			try
 			{
-				var requestMessage = CreateHttpRequestMessage(requestData);
-				responseMessage = client.SendAsync(requestMessage).GetAwaiter().GetResult();
+				HttpRequestMessage requestMessage;
+				using(requestData.Trace(nameof(CreateHttpRequestMessage)))
+					requestMessage = CreateHttpRequestMessage(requestData);
+
+				using(requestData.Trace($"{nameof(HttpClient.SendAsync)} blocking"))
+					responseMessage = client.SendAsync(requestMessage).GetAwaiter().GetResult();
 				requestData.MadeItToResponse = true;
+
 				builder.StatusCode = (int) responseMessage.StatusCode;
 				IEnumerable<string> warnings;
 				if (responseMessage.Headers.TryGetValues("Warning", out warnings))
 					builder.DeprecationWarnings = warnings;
 
 				if (responseMessage.Content != null)
-					builder.Stream = responseMessage.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
+					using(requestData.Trace($"{nameof(HttpContent.ReadAsStreamAsync)} blocking"))
+						builder.Stream = responseMessage.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
+
 				// https://github.com/elastic/elasticsearch-net/issues/2311
 				// if stream is null call dispose on response instead.
 				if (builder.Stream == null || builder.Stream == Stream.Null) responseMessage.Dispose();
@@ -112,21 +120,32 @@ namespace Elasticsearch.Net
 			if (typeof(TReturn) == typeof(Stream) && ConnectionConfiguration.IsCurlHandler)
 				throw new Exception(CanNotUseStreamResponsesWithCurlHandler);
 
-			var client = this.GetClient(requestData);
+			HttpClient client;
+			using(requestData.Trace(nameof(GetClient)))
+				client = this.GetClient(requestData);
+
 			var builder = new ResponseBuilder<TReturn>(requestData, cancellationToken);
 			HttpResponseMessage responseMessage = null;
 			try
 			{
-				var requestMessage = CreateHttpRequestMessage(requestData);
-				responseMessage = await client.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
+				HttpRequestMessage requestMessage;
+				using(requestData.Trace(nameof(CreateHttpRequestMessage)))
+					requestMessage = CreateHttpRequestMessage(requestData);
+
+				using(requestData.Trace(nameof(HttpClient.SendAsync)))
+					responseMessage = await client.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
+
 				requestData.MadeItToResponse = true;
+
 				builder.StatusCode = (int) responseMessage.StatusCode;
 				IEnumerable<string> warnings;
 				if (responseMessage.Headers.TryGetValues("Warning", out warnings))
 					builder.DeprecationWarnings = warnings;
 
 				if (responseMessage.Content != null)
-					builder.Stream = await responseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false);
+					using(requestData.Trace(nameof(HttpContent.ReadAsStreamAsync)))
+						builder.Stream = await responseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
 				// https://github.com/elastic/elasticsearch-net/issues/2311
 				// if stream is null call dispose on response instead.
 				if (builder.Stream == null || builder.Stream == Stream.Null) responseMessage.Dispose();
@@ -194,7 +213,6 @@ namespace Elasticsearch.Net
 			if (callback != null && handler.ServerCertificateCustomValidationCallback == null)
 				handler.ServerCertificateCustomValidationCallback = callback;
 
-
 			if (requestData.ClientCertificates != null)
 			{
 				handler.ClientCertificateOptions = ClientCertificateOption.Automatic;
@@ -220,11 +238,6 @@ namespace Elasticsearch.Net
 			{
 				requestMessage.Headers.TryAddWithoutValidation(key, requestData.Headers.GetValues(key));
 			}
-			requestMessage.Headers.Connection.Clear();
-			requestMessage.Headers.ConnectionClose = false;
-			requestMessage.Headers.Connection.Add("Keep-Alive");
-			//requestMessage.Headers.Connection;
-
 			requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestData.Accept));
 
 			if (!requestData.RunAs.IsNullOrEmpty())

@@ -28,6 +28,7 @@
     <Prefer32Bit>false</Prefer32Bit>
     <DefineConstants Condition="'$(TargetFramework)'=='netstandard1.3' OR '$(DotNetCoreOnly)'=='1'">$(DefineConstants);DOTNETCORE</DefineConstants>
     <DebugType Condition="'$(DotNetCoreOnly)'==''">embedded</DebugType>
+    <DebugType Condition="'$(Configuration)'=='Debug' AND '$(TargetFramework)'!='netstandard1.3' ">pdbonly</DebugType>
     <SourceLink Condition="'$(DoSourceLink)'!=''">$(BaseIntermediateOutputPath)\sl-$(MsBuildProjectName)-$(TargetFramework).json</SourceLink>
     <RepoUri>https://raw.githubusercontent.com/elastic/elasticsearch-net</RepoUri>
   </PropertyGroup>

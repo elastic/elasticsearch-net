@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -17,9 +18,9 @@ namespace Elasticsearch.Net
 				foreach(var deprecation in r.DeprecationWarnings)
 					sb.AppendLine($"- {deprecation}");
 			}
-			sb.AppendLine($"# Audit trail of this API call:");
 			var auditTrail = (r.AuditTrail ?? Enumerable.Empty<Audit>()).ToList();
 			DebugAuditTrail(auditTrail, sb);
+
 			if (r.ServerError != null) sb.AppendLine($"# ServerError: {r.ServerError}");
 			if (r.OriginalException != null) sb.AppendLine($"# OriginalException: {r.OriginalException}");
 			DebugAuditTrailExceptions(auditTrail, sb);
@@ -41,14 +42,18 @@ namespace Elasticsearch.Net
 
 		public static void DebugAuditTrail(List<Audit> auditTrail, StringBuilder sb)
 		{
-			if (auditTrail == null) return;
+			if (auditTrail == null || auditTrail.Count == 0) return;
+			var totalElapsed = auditTrail.Select(a => a.Elapsed).Aggregate(TimeSpan.FromTicks(0), (acc, t) => acc.Add(t), acc => acc.ToString());
+			sb.AppendLine($"# Audit trail of this API call (Total Elapsed: {totalElapsed}):");
 			foreach (var a in auditTrail.Select((a, i)=> new { a, i }))
 			{
 				var audit = a.a;
-				sb.Append($" - [{a.i + 1}] {audit.Event.GetStringValue()}:");
-				if (audit.Node?.Uri != null) sb.Append($" Node: {audit.Node.Uri}");
-				if (audit.Exception != null) sb.Append($" Exception: {audit.Exception.GetType().Name}");
-				sb.AppendLine($" Took: {(audit.Ended - audit.Started).ToString()}");
+				sb.AppendLine($" - [{a.i + 1}] {audit}");
+
+				if (audit.ProfileMeasurements == null || audit.ProfileMeasurements.Count == 0) continue;
+				foreach (var t in audit.ProfileMeasurements)
+					sb.AppendLine($" --| Trace: {t}");
+				sb.AppendLine();
 			}
 		}
 	}

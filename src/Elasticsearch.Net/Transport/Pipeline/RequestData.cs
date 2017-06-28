@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using Purify;
 
@@ -22,7 +24,16 @@ namespace Elasticsearch.Net
 		public AuditEvent OnFailureAuditEvent => this.MadeItToResponse ? AuditEvent.BadResponse : AuditEvent.BadRequest;
 		public PipelineFailure OnFailurePipelineFailure => this.MadeItToResponse ? PipelineFailure.BadResponse : PipelineFailure.BadRequest;
 
-		public Node Node { get; set; }
+		public Node Node
+		{
+			get => _node;
+			set
+			{
+				this._sw?.Restart();
+				_node = value;
+			}
+		}
+
 		public TimeSpan RequestTimeout { get; }
 		public TimeSpan PingTimeout { get; }
 		public int KeepAliveTime { get; }
@@ -46,7 +57,15 @@ namespace Elasticsearch.Net
 		public IConnectionConfigurationValues ConnectionSettings { get; }
 		public IMemoryStreamFactory MemoryStreamFactory { get; }
 
+		//TODO private setter
 		public X509CertificateCollection ClientCertificates { get; set; }
+
+		private readonly List<ClientProfileMeasurement> _profileMeasurements;
+		public IReadOnlyCollection<ClientProfileMeasurement> ProfileMeasurements =>
+			this.ConnectionSettings.ProfileRequests ? _profileMeasurements.AsReadOnly() : ClientProfileMeasurement.EmptyCollection;
+
+		private readonly Stopwatch _sw;
+		private Node _node;
 
 		public RequestData(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IRequestParameters local, IMemoryStreamFactory memoryStreamFactory)
 			: this(method, path, data, global, local?.RequestConfiguration, memoryStreamFactory)
@@ -64,6 +83,12 @@ namespace Elasticsearch.Net
 			IMemoryStreamFactory memoryStreamFactory)
 		{
 			this.ConnectionSettings = global;
+			if (this.ConnectionSettings.ProfileRequests)
+			{
+				this._profileMeasurements = new List<ClientProfileMeasurement>();
+				this._sw = new Stopwatch();
+			}
+
 			this.MemoryStreamFactory = memoryStreamFactory;
 			this.Method = method;
 			this.PostData = data;
@@ -97,6 +122,19 @@ namespace Elasticsearch.Net
 			this.AllowedStatusCodes = local?.AllowedStatusCodes ?? Enumerable.Empty<int>();
 			this.ClientCertificates = local?.ClientCertificates ?? global.ClientCertificates;
 		}
+
+		private long GetElapsedTicks() => this.ConnectionSettings.ProfileRequests ? this._sw.ElapsedTicks : -1;
+
+		public IDisposable Trace(string section)
+		{
+			if (!this.ConnectionSettings.ProfileRequests) return ResponseBuilderStatics.EmptyDisposable;
+
+			var p = new ClientProfileMeasurement(section, GetElapsedTicks);
+			this._profileMeasurements.Add(p);
+			return p;
+		}
+
+		public void ResetTrace() => this._sw?.Restart();
 
 		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request = null)
 		{

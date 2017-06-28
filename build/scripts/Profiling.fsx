@@ -47,8 +47,9 @@ module Profiler =
         member val Commit = commit with get, set
         member val Functions = functions with get, set
 
-    let private project = "Tests"
-    let private profiledApp = sprintf "%s/%s/%s.exe" (Paths.Output("v4.6")) project project
+    let private project = (PrivateProject PrivateProject.Tests)
+    let testsFolder = Paths.IncrementalOutputFolder project DotNetFramework.Net46
+    let private profiledApp = testsFolder @@ (sprintf "%s.exe" project.Name)
     let private snapShotOutput = Paths.Output("ProfilingSnapshot.dtp")
     let private snapShotStatsOutput = Paths.Output("ProfilingSnapshotStats.html")
     let private profileOutput = Paths.Output("ProfilingReport.xml")
@@ -62,6 +63,7 @@ module Profiler =
 
     let Run() = 
         let date = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffz")
+        tracefn "Profiling starting %s" profiledApp
         Tooling.execProcessWithTimeout profiledApp ["Profile";"Class";getBuildParam "testfilter"] (TimeSpan.FromMinutes 30.) |> ignore
         trace "Profiling finished."
 

@@ -113,6 +113,12 @@ namespace Elasticsearch.Net
 		private bool _prettyJson;
 		bool IConnectionConfigurationValues.PrettyJson => _prettyJson;
 
+		private bool _auditRequests = true;
+		bool IConnectionConfigurationValues.AuditRequests => _auditRequests;
+
+		private bool _profileRequests = true;
+		bool IConnectionConfigurationValues.ProfileRequests => _profileRequests;
+
 		private bool _disableDirectStreaming = false;
 		bool IConnectionConfigurationValues.DisableDirectStreaming => _disableDirectStreaming;
 
@@ -339,7 +345,7 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Forces all requests to have ?pretty=true querystring parameter appended, 
+		/// Forces all requests to have ?pretty=true querystring parameter appended,
 		/// causing Elasticsearch to return formatted JSON.
 		/// Also forces the client to send out formatted JSON. Defaults to <c>false</c>
 		/// </summary>
@@ -357,6 +363,20 @@ namespace Elasticsearch.Net
 		/// this may cause the response to be buffered in memory first, potentially affecting performance.</para>
 		/// </summary>
 		public T DisableDirectStreaming(bool b = true) => Assign(a => a._disableDirectStreaming = b);
+
+		/// <summary>
+		/// Defaults to true, when enabled includes a detailed audit trail on <see cref="IApiCallDetails.AuditTrail"/>
+		/// The audit trail is an immensely usefull tool to offer visibility why a call might have failed.
+		/// Only disable this if allocations is a huge concern for you.
+		/// </summary>
+		public T AuditRequests(bool b = true) => Assign(a => a._auditRequests = b);
+
+		/// <summary>
+		/// A quick way to get more detailed profiling information returned on <see cref="Audit.ProfileMeasurements"/>
+		/// These timings will surface when inspecting <see cref="IApiCallDetails.DebugInformation"/> whch
+		/// will unpack and pretty print <see cref="IApiCallDetails.AuditTrail"/> on demand.
+		/// </summary>
+		public T ProfileRequests(bool b = true) => Assign(a => a._profileRequests = b);
 
 		/// <summary>
 		/// Registers an <see cref="Action{IApiCallDetails}"/> that is called when a response is received from Elasticsearch.

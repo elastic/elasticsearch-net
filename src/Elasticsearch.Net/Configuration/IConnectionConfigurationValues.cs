@@ -101,6 +101,20 @@ namespace Elasticsearch.Net
 		bool DisableDirectStreaming { get; }
 
 		/// <summary>
+		/// A quick way to get more detailed profiling information returned on <see cref="Audit.ProfileMeasurements"/>
+		/// These timings will surface when inspecting <see cref="IApiCallDetails.DebugInformation"/> whch
+		/// will unpack and pretty print <see cref="IApiCallDetails.AuditTrail"/> on demand.
+		/// </summary>
+		bool ProfileRequests { get; }
+
+		/// <summary>
+		/// Defaults to true, when enabled includes a detailed audit trail on <see cref="IApiCallDetails.AuditTrail"/>
+		/// The audit trail is an immensely usefull tool to offer visibility why a call might have failed.
+		/// Only disable this if allocations is a huge concern for you.
+		/// </summary>
+		bool AuditRequests { get; }
+
+		/// <summary>
 		/// Disabled proxy detection on the webrequest, in some cases this may speed up the first connection
 		/// your appdomain makes, in other cases it will actually increase the time for the first connection.
 		/// No silver bullet! use with care!

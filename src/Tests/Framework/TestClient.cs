@@ -57,12 +57,12 @@ namespace Tests.Framework
 
 			throw new Exception($"Tried to load a yaml file from {yamlConfigurationPath} but it does not exist : pwd:{directoryInfo.FullName}");
 		}
-		
-		private static int ConnectionLimitDefault => 
-			int.TryParse(Environment.GetEnvironmentVariable("NEST_NUMBER_OF_CONNECTIONS"), out int x) 
+
+		private static int ConnectionLimitDefault =>
+			int.TryParse(Environment.GetEnvironmentVariable("NEST_NUMBER_OF_CONNECTIONS"), out int x)
 			? x
 			: ConnectionConfiguration.DefaultConnectionLimit;
-		
+
 		private static ConnectionSettings DefaultSettings(ConnectionSettings settings) => settings
 			.DefaultIndex("default-index")
 			.PrettyJson()

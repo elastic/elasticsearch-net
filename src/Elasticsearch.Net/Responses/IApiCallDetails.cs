@@ -39,14 +39,14 @@ namespace Elasticsearch.Net
 
         /// <summary>
         /// The response body bytes.
-        /// <para>NOTE: Only set when disable direct streaming is set for the request</para> 
+        /// <para>NOTE: Only set when disable direct streaming is set for the request</para>
         /// </summary>
         [DebuggerDisplay("{ResponseBodyInBytes != null ? System.Text.Encoding.UTF8.GetString(ResponseBodyInBytes) : null,nq}")]
 		byte[] ResponseBodyInBytes { get; }
 
         /// <summary>
         /// The request body bytes.
-        /// <para>NOTE: Only set when disable direct streaming is set for the request</para> 
+        /// <para>NOTE: Only set when disable direct streaming is set for the request</para>
         /// </summary>
         [DebuggerDisplay("{RequestBodyInBytes != null ? System.Text.Encoding.UTF8.GetString(RequestBodyInBytes) : null,nq}")]
 		byte[] RequestBodyInBytes { get; }
@@ -56,8 +56,9 @@ namespace Elasticsearch.Net
         /// </summary>
         List<Audit> AuditTrail { get; }
 
+
         /// <summary>
-        /// A lazy human readable string representation of what happened during this request for both successful and 
+        /// A lazy human readable string representation of what happened during this request for both successful and
         /// failed requests.
         /// </summary>
         string DebugInformation { get; }

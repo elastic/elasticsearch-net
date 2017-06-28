@@ -1,4 +1,5 @@
 #if !DOTNETCORE
+using System;
 using System.IO;
 using JetBrains.Profiler.Windows.Api;
 using JetBrains.Profiler.Windows.SelfApi;
@@ -10,6 +11,7 @@ namespace Tests.Framework.Profiling.Timeline
 	{
 		public TimelineProfile(string sdkPath, string resultsDirectory) : base(resultsDirectory)
 		{
+			Console.WriteLine(sdkPath);
 			var saveSnapshotProfilingConfig = new SaveSnapshotProfilingConfig
 			{
 				ProfilingControlKind = ProfilingControlKind.Api,

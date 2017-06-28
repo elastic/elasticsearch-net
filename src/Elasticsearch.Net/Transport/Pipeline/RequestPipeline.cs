@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -16,6 +17,7 @@ namespace Elasticsearch.Net
 		private readonly IConnectionPool _connectionPool;
 		private readonly IDateTimeProvider _dateTimeProvider;
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
+		private readonly Stopwatch _sw;
 
 		private IRequestConfiguration RequestConfiguration { get; }
 
@@ -31,6 +33,8 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParameters)
 		{
 			this._settings = configurationValues;
+			if (this._settings.ProfileRequests)
+				this._sw = Stopwatch.StartNew();
 			this._connectionPool = this._settings.ConnectionPool;
 			this._connection = this._settings.Connection;
 			this._dateTimeProvider = dateTimeProvider;
@@ -85,7 +89,7 @@ namespace Elasticsearch.Net
 				|| this._settings.DisablePings || !this._connectionPool.SupportsPinging || !node.IsResurrected;
 
 		private TimeSpan PingTimeout =>
-			 this.RequestConfiguration?.PingTimeout
+			this.RequestConfiguration?.PingTimeout
 			?? this._settings.PingTimeout
 			?? (this._connectionPool.UsingSsl ? ConnectionConfiguration.DefaultPingTimeoutOnSSL : ConnectionConfiguration.DefaultPingTimeout);
 
@@ -107,10 +111,23 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		private Auditable Audit(AuditEvent type, Node node = null) =>
-			new Auditable(type, this.AuditTrail, this._dateTimeProvider) {Node = node};
+		private long? GetElapsedTicks() => this._settings.ProfileRequests ? this._sw.ElapsedTicks : (long?)null;
 
-		private static string NoNodesAttemptedMessage = "No nodes were attempted, this can happen when a node predicate does not match any nodes";
+		private Auditable Audit(AuditEvent type, RequestData data = null, Node node = null)
+		{
+			if (!this._settings.AuditRequests) return Auditable.Noop;
+
+			var started = this._dateTimeProvider.Now();
+			var audit = new Audit(type, started, data?.ProfileMeasurements);
+			this.AuditTrail.Add(audit);
+			return new Auditable(audit, this._dateTimeProvider, GetElapsedTicks)
+			{
+				Node = node ?? data?.Node
+			};
+		}
+
+		private static readonly string NoNodesAttemptedMessage = "No nodes were attempted, this can happen when a node predicate does not match any nodes";
+
 		public void ThrowNoNodesAttempted(RequestData requestData, List<PipelineException> seenExceptions)
 		{
 			var clientException = new ElasticsearchClientException(PipelineFailure.NoNodesAttempted, NoNodesAttemptedMessage, (Exception) null);
@@ -265,11 +282,11 @@ namespace Elasticsearch.Net
 		{
 			if (PingDisabled(node)) return;
 
-			using (var audit = this.Audit(PingSuccess, node))
+			var pingData = CreatePingRequestData(node);
+			using (var audit = this.Audit(PingSuccess, pingData))
 			{
 				try
 				{
-					var pingData = CreatePingRequestData(node);
 					var response = this._connection.Request<VoidResponse>(pingData);
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					//ping should not silently accept bad but valid http responses
@@ -289,11 +306,11 @@ namespace Elasticsearch.Net
 		{
 			if (PingDisabled(node)) return;
 
-			using (var audit = this.Audit(PingSuccess, node))
+			var pingData = CreatePingRequestData(node);
+			using (var audit = this.Audit(PingSuccess, pingData))
 			{
 				try
 				{
-					var pingData = CreatePingRequestData(node);
 					var response = await this._connection.RequestAsync<VoidResponse>(pingData, cancellationToken).ConfigureAwait(false);
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					//ping should not silently accept bad but valid http responses
@@ -324,7 +341,7 @@ namespace Elasticsearch.Net
 
 		private void LazyAuditable(AuditEvent e, Node n)
 		{
-			using (new Auditable(e, this.AuditTrail, this._dateTimeProvider) { Node = n }) {};
+			using (this.Audit(e, node: n)) { }
 		}
 
 		public void SniffOnConnectionFailure()
@@ -347,11 +364,11 @@ namespace Elasticsearch.Net
 			var exceptions = new List<Exception>();
 			foreach (var node in this.SniffNodes)
 			{
-				using (var audit = this.Audit(SniffSuccess, node))
+				var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, (IRequestParameters)null, this._memoryStreamFactory) { Node = node };
+				using (var audit = this.Audit(SniffSuccess, requestData))
 				{
 					try
 					{
-						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, (IRequestParameters)null, this._memoryStreamFactory) { Node = node };
 						var response = this._connection.Request<SniffResponse>(requestData);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
@@ -379,11 +396,11 @@ namespace Elasticsearch.Net
 			var exceptions = new List<Exception>();
 			foreach (var node in this.SniffNodes)
 			{
-				using (var audit = this.Audit(SniffSuccess, node))
+				var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, (IRequestParameters)null, this._memoryStreamFactory) { Node = node };
+				using (var audit = this.Audit(SniffSuccess, requestData))
 				{
 					try
 					{
-						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, (IRequestParameters)null, this._memoryStreamFactory) { Node = node };
 						var response = await this._connection.RequestAsync<SniffResponse>(requestData, cancellationToken).ConfigureAwait(false);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
@@ -406,7 +423,7 @@ namespace Elasticsearch.Net
 
 		public ElasticsearchResponse<TReturn> CallElasticsearch<TReturn>(RequestData requestData) where TReturn : class
 		{
-			using (var audit = this.Audit(HealthyResponse, requestData.Node))
+			using (var audit = this.Audit(HealthyResponse, requestData))
 			{
 				ElasticsearchResponse<TReturn> response = null;
 				try
@@ -429,7 +446,7 @@ namespace Elasticsearch.Net
 
 		public async Task<ElasticsearchResponse<TReturn>> CallElasticsearchAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken) where TReturn : class
 		{
-			using (var audit = this.Audit(HealthyResponse, requestData.Node))
+			using (var audit = this.Audit(HealthyResponse, requestData))
 			{
 				ElasticsearchResponse<TReturn> response = null;
 				try
@@ -467,13 +484,13 @@ namespace Elasticsearch.Net
 			if (this.IsTakingTooLong)
 			{
 				pipelineFailure = PipelineFailure.MaxTimeoutReached;
-				this.Audit(MaxTimeoutReached);
+				this.Audit(MaxTimeoutReached).Dispose();
 				exceptionMessage = "Maximum timeout reached while retrying request";
 			}
 			else if (this.Retried >= this.MaxRetries && this.MaxRetries > 0)
 			{
 				pipelineFailure = PipelineFailure.MaxRetriesReached;
-				this.Audit(MaxRetriesReached);
+				this.Audit(MaxRetriesReached).Dispose();
 				exceptionMessage = "Maximum number of retries reached.";
 			}
 

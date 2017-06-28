@@ -42,27 +42,25 @@ namespace Tests.Framework.Profiling
 		{
 			get
 			{
-				if (_profiledClasses == null)
-				{
-					_profiledClasses = Assembly
-						.GetTypes()
-						.Where(t => t.IsPublic() && t.IsClass())
-						.Where(t => t.GetMethods(BindingFlags.Instance | BindingFlags.Public)
-							.Any(m => m.GetCustomAttribute<TAttribute>() != null))
-						.Select(t =>
-						{
-							var setup = t.GetMethods(BindingFlags.Instance | BindingFlags.Public)
-								.Where(m => m.GetCustomAttribute<ProfilingSetupAttribute>() != null)
-								.Select(m => new ProfiledMethod(m, m.GetCustomAttribute<ProfilingSetupAttribute>()))
-								.FirstOrDefault();
+				if (_profiledClasses != null) return _profiledClasses;
+				_profiledClasses = Assembly
+					.GetTypes()
+					.Where(t => t.IsPublic() && t.IsClass())
+					.Where(t => t.GetMethods(BindingFlags.Instance | BindingFlags.Public)
+						.Any(m => m.GetCustomAttribute<TAttribute>() != null))
+					.Select(t =>
+					{
+						var setup = t.GetMethods(BindingFlags.Instance | BindingFlags.Public)
+							.Where(m => m.GetCustomAttribute<ProfilingSetupAttribute>() != null)
+							.Select(m => new ProfiledMethod(m, m.GetCustomAttribute<ProfilingSetupAttribute>()))
+							.FirstOrDefault();
 
-							var methods = t.GetMethods(BindingFlags.Instance | BindingFlags.Public)
-								.Where(m => m.GetCustomAttribute<TAttribute>() != null)
-								.Select(m => new ProfiledMethod(m, m.GetCustomAttribute<TAttribute>()));
+						var methods = t.GetMethods(BindingFlags.Instance | BindingFlags.Public)
+							.Where(m => m.GetCustomAttribute<TAttribute>() != null)
+							.Select(m => new ProfiledMethod(m, m.GetCustomAttribute<TAttribute>()));
 
-							return new ProfiledClass(t, setup, methods);
-						});
-				}
+						return new ProfiledClass(t, setup, methods);
+					});
 
 				return _profiledClasses;
 			}
