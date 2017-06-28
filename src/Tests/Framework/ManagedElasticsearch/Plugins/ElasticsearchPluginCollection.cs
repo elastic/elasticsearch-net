@@ -8,12 +8,12 @@ namespace Tests.Framework.ManagedElasticsearch.Plugins
 		public static ElasticsearchPluginCollection Supported { get; } =
 			new ElasticsearchPluginCollection
 			{
-				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.DeleteByQuery, version => version < new ElasticsearchVersion("5.0.0-alpha3")),
+				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.DeleteByQuery, version => version < ElasticsearchVersion.GetOrAdd("5.0.0-alpha3")),
 				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.MapperAttachments),
 				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.MapperMurmer3),
 				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.XPack),
-				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.IngestGeoIp, version => version >= new ElasticsearchVersion("5.0.0-alpha3")),
-				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.IngestAttachment, version => version >= new ElasticsearchVersion("5.0.0-alpha3")),
+				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.IngestGeoIp, version => version >= ElasticsearchVersion.GetOrAdd("5.0.0-alpha3")),
+				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.IngestAttachment, version => version >= ElasticsearchVersion.GetOrAdd("5.0.0-alpha3")),
 				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.AnalysisKuromoji),
 				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.AnalysisIcu)
 			};
