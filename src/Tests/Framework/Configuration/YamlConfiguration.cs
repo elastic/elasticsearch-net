@@ -23,7 +23,7 @@ namespace Tests.Framework.Configuration
 				.ToDictionary(ConfigName, ConfigValue);
 
 			this.Mode = GetTestMode(config["mode"]);
-			this.ElasticsearchVersion = new ElasticsearchVersion(config["elasticsearch_version"]);
+			this.ElasticsearchVersion = ElasticsearchVersion.GetOrAdd(config["elasticsearch_version"]);
 			this.ForceReseed = bool.Parse(config["force_reseed"]);
 			this.TestAgainstAlreadyRunningElasticsearch = bool.Parse(config["test_against_already_running_elasticsearch"]);
 			this.ClusterFilter = config.ContainsKey("cluster_filter") ? config["cluster_filter"] : null;

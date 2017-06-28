@@ -26,17 +26,21 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 		private readonly NodeConfiguration _config;
 
 		public ElasticsearchVersion Version => _config.ElasticsearchVersion;
+
 		public NodeFileSystem FileSystem { get; }
 
 		public bool Started { get; private set; }
 
-		public int Port { get; private set; } = 9200;
+		public int Port { get; private set; }
+
+		private bool RunningOnCI { get; }
 
 		public ElasticsearchNode(NodeConfiguration config)
 		{
 			this._config = config;
 			this.FileSystem = config.FileSystem;
-
+			this.RunningOnCI = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TEAMCITY_VERSION"));
+			this.Port = config.DesiredPort;
 			if (this._config.RunIntegrationTests && !this._config.TestAgainstAlreadyRunningElasticsearch) return;
 		}
 
@@ -88,7 +92,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 				{
 					var subscription = Observable.Using(() => process, p => p.Start())
 						.Select(c => new ElasticsearchConsoleOut(this._config.ElasticsearchVersion, c.Error, c.Data))
-						.Subscribe(s => this.HandleConsoleMessage(s, handle), e => { throw e; }, () => handle.Set());
+						.Subscribe(s => this.HandleConsoleMessage(s, handle), e => throw e, () => handle.Set());
 					this._composite.Add(subscription);
 
 					if (!handle.WaitOne(timeout, true))
@@ -111,12 +115,17 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 
 		private void HandleConsoleMessage(ElasticsearchConsoleOut consoleOut, XplatManualResetEvent handle)
 		{
-			Console.WriteLine(consoleOut.Data);
 			//no need to snoop for metadata if we already started
 			if (!this._config.RunIntegrationTests || this.Started) return;
+			//if we are running on CI and not started dump elasticsearch stdout/err
+			//before the started notification to help debug failures to start
+			if (this.RunningOnCI && !this.Started)
+			{
+				if (consoleOut.Error) Console.Error.WriteLine(consoleOut.Data);
+				else Console.WriteLine(consoleOut.Data);
+			}
 
-			if (consoleOut.Error && !this.Started && !string.IsNullOrWhiteSpace(consoleOut.Data)) 
-				throw new Exception("Error out:" + consoleOut.Data);
+			if (consoleOut.Error && !this.Started && !string.IsNullOrWhiteSpace(consoleOut.Data)) throw new Exception(consoleOut.Data);
 
 			string version;
 			int? pid;
@@ -124,7 +133,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 
 			if (this.ProcessId == null && consoleOut.TryParseNodeInfo(out version, out pid))
 			{
-				var startedVersion = new ElasticsearchVersion(version);
+				var startedVersion = ElasticsearchVersion.GetOrAdd(version);
 				this.ProcessId = pid;
 				if (this.Version != startedVersion)
 					throw new Exception($"Booted elasticsearch is version {startedVersion} but the test config dictates {this.Version}");
