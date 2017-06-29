@@ -27,6 +27,7 @@ namespace Nest
 		bool? AllowLeadingWildcard { get; set; }
 
 		[JsonProperty("lowercase_expanded_terms")]
+		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
 		bool? LowercaseExpendedTerms { get; set; }
 
 		[JsonProperty("enable_position_increments")]
@@ -60,6 +61,7 @@ namespace Nest
 		bool? Lenient { get; set; }
 
 		[JsonProperty("locale")]
+		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
 		string Locale { get; set; }
 
 		[JsonProperty("time_zone")]
@@ -85,6 +87,12 @@ namespace Nest
 
 		[JsonProperty("escape")]
 		bool? Escape { get; set; }
+
+		[JsonProperty("all_fields")]
+		bool? AllFields { get; set; }
+
+		[JsonProperty("split_on_whitespace")]
+		bool? SplitOnWhitespace { get; set; }
 	}
 
 	public class QueryStringQuery : QueryBase, IQueryStringQuery
@@ -93,6 +101,7 @@ namespace Nest
 		public int? FuzzyMaxExpansions { get; set; }
 		public Fuzziness Fuzziness { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
+		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
 		public string Locale { get; set; }
 		public MultiTermQueryRewrite Rewrite { get; set; }
 		public MultiTermQueryRewrite FuzzyRewrite { get; set; }
@@ -106,6 +115,7 @@ namespace Nest
 		public string Analyzer { get; set; }
 		public string QuoteAnalyzer { get; set; }
 		public bool? AllowLeadingWildcard { get; set; }
+		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
 		public bool? LowercaseExpendedTerms { get; set; }
 		public bool? EnablePositionIncrements { get; set; }
 		public int? FuzzyPrefixLength { get; set; }
@@ -116,6 +126,8 @@ namespace Nest
 		public bool? UseDisMax { get; set; }
 		public double? TieBreaker { get; set; }
 		public int? MaximumDeterminizedStates { get; set; }
+		public bool? AllFields { get; set; }
+		public bool? SplitOnWhitespace { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.QueryString = this;
 		internal static bool IsConditionless(IQueryStringQuery q) => q.Query.IsNullOrEmpty();
@@ -129,6 +141,7 @@ namespace Nest
 		protected override bool Conditionless => QueryStringQuery.IsConditionless(this);
 
 		string IQueryStringQuery.Query { get; set; }
+		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
 		string IQueryStringQuery.Locale { get; set; }
 		string IQueryStringQuery.Timezone { get; set; }
 		Field IQueryStringQuery.DefaultField { get; set; }
@@ -137,6 +150,7 @@ namespace Nest
 		string IQueryStringQuery.Analyzer { get; set; }
 		string IQueryStringQuery.QuoteAnalyzer { get; set; }
 		bool? IQueryStringQuery.AllowLeadingWildcard { get; set; }
+		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
 		bool? IQueryStringQuery.LowercaseExpendedTerms { get; set; }
 		bool? IQueryStringQuery.EnablePositionIncrements { get; set; }
 		int? IQueryStringQuery.FuzzyMaxExpansions { get; set; }
@@ -154,6 +168,8 @@ namespace Nest
 		MultiTermQueryRewrite IQueryStringQuery.Rewrite { get; set; }
 		string IQueryStringQuery.QuoteFieldSuffix { get; set; }
 		bool? IQueryStringQuery.Escape { get; set; }
+		bool? IQueryStringQuery.AllFields { get; set; }
+		bool? IQueryStringQuery.SplitOnWhitespace { get; set; }
 
 		public QueryStringQueryDescriptor<T> DefaultField(Field field) => Assign(a => a.DefaultField = field);
 		public QueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> field) => Assign(a => a.DefaultField = field);
@@ -165,6 +181,7 @@ namespace Nest
 
 		public QueryStringQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
+		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
 		public QueryStringQueryDescriptor<T> Locale(string locale) => Assign(a => a.Locale = locale);
 
 		public QueryStringQueryDescriptor<T> Timezone(string timezone) => Assign(a => a.Timezone = timezone);
@@ -178,6 +195,7 @@ namespace Nest
 		public QueryStringQueryDescriptor<T> AllowLeadingWildcard(bool? allowLeadingWildcard = true) =>
 			Assign(a => a.AllowLeadingWildcard = allowLeadingWildcard);
 
+		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
 		public QueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool? lowercaseExpendedTerms = true) =>
 			Assign(a => a.LowercaseExpendedTerms = lowercaseExpendedTerms);
 
@@ -211,9 +229,14 @@ namespace Nest
 
 		public QueryStringQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite) => Assign(a => Self.Rewrite = rewrite);
 
-		public QueryStringQueryDescriptor<T> QuoteFieldSuffix(string quoteFieldSuffix) => Assign(a => a.QuoteFieldSuffix = quoteFieldSuffix);
+		public QueryStringQueryDescriptor<T> QuoteFieldSuffix(string quoteFieldSuffix) => 
+			Assign(a => a.QuoteFieldSuffix = quoteFieldSuffix);
 
 		public QueryStringQueryDescriptor<T> Escape(bool? escape = true) => Assign(a => a.Escape = escape);
 
+		public QueryStringQueryDescriptor<T> AllFields(bool? allFields = true) => Assign(a => a.AllFields = allFields);
+
+		public QueryStringQueryDescriptor<T> SplitOnWhitespace(bool? splitOnWhitespace = true) => 
+			Assign(a => a.SplitOnWhitespace = splitOnWhitespace);
 	}
 }

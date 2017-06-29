@@ -26,5 +26,5 @@ namespace Nest
 		MultiTermQueryRewrite IPrefixQuery.Rewrite { get; set; }
 
 		public PrefixQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite) => Assign(a => a.Rewrite = rewrite);
-	}
-}
+		}
+		}
