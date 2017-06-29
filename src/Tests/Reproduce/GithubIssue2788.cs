@@ -64,7 +64,7 @@ namespace Tests.Reproduce
 				}
 			}, index => index
 				.Index(indexName)
-				.Refresh(Refresh.WaitFor)
+				.Refresh(true)
 			);
 
 			var result = client.Search<Root>(search => search
