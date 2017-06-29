@@ -8,21 +8,26 @@ namespace Nest
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var d = value as LazyDocument;
+			var d = (LazyDocument)value;
 			if (d?._Value == null)
+			{
+				writer.WriteNull();
 				return;
+			}
+
 			writer.WriteToken(d._Value.CreateReader());
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var document = serializer.Deserialize(reader) as JToken;
-			return new LazyDocument { _Value = document };
+			return new LazyDocument
+			{
+				_Value = document,
+				_Serializer = serializer
+			};
 		}
 
-		public override bool CanConvert(Type objectType)
-		{
-			return true;
-		}
+		public override bool CanConvert(Type objectType) => true;
 	}
 }
