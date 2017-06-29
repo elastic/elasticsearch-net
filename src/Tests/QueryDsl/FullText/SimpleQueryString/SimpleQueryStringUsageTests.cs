@@ -41,7 +41,7 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 			Flags = SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near,
 #pragma warning disable 618 // usage of lowercase_expanded_terms and locale
 			Locale = "en_US",
-			LowercaseExpendedTerms = true,
+			LowercaseExpandedTerms = true,
 #pragma warning restore 618
 			Lenient = true,
 			AnalyzeWildcard = true,
@@ -59,7 +59,7 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 				.DefaultOperator(Operator.Or)
 				.Flags(SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near)
 				.Locale("en_US")
-				.LowercaseExpendedTerms()
+				.LowercaseExpandedTerms()
 				.Lenient()
 				.AnalyzeWildcard()
 				.MinimumShouldMatch("30%")

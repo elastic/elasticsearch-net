@@ -28,7 +28,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "lowercase_expanded_terms")]
 		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		bool? LowercaseExpendedTerms { get; set; }
+		bool? LowercaseExpandedTerms { get; set; }
 
 		[JsonProperty(PropertyName = "lenient")]
 		bool? Lenient { get; set; }
@@ -57,7 +57,7 @@ namespace Nest
 		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
 		public string Locale { get; set; }
 		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		public bool? LowercaseExpendedTerms { get; set; }
+		public bool? LowercaseExpandedTerms { get; set; }
 		public bool? Lenient { get; set; }
 		public bool? AnalyzeWildcard { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
@@ -81,7 +81,7 @@ namespace Nest
 		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
 		string ISimpleQueryStringQuery.Locale { get; set; }
 		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		bool? ISimpleQueryStringQuery.LowercaseExpendedTerms { get; set; }
+		bool? ISimpleQueryStringQuery.LowercaseExpandedTerms { get; set; }
 		bool? ISimpleQueryStringQuery.AnalyzeWildcard { get; set; }
 		bool? ISimpleQueryStringQuery.Lenient { get; set; }
 		MinimumShouldMatch ISimpleQueryStringQuery.MinimumShouldMatch { get; set; }
@@ -105,8 +105,8 @@ namespace Nest
 		public SimpleQueryStringQueryDescriptor<T> Locale(string locale) => Assign(a => a.Locale = locale);
 
 		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		public SimpleQueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool? lowercaseExpendedTerms = true) =>
-			Assign(a => a.LowercaseExpendedTerms = lowercaseExpendedTerms);
+		public SimpleQueryStringQueryDescriptor<T> LowercaseExpandedTerms(bool? lowercaseExpandedTerms = true) =>
+			Assign(a => a.LowercaseExpandedTerms = lowercaseExpandedTerms);
 
 		public SimpleQueryStringQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) =>
 			Assign(a => a.AnalyzeWildcard = analyzeWildcard);
@@ -116,10 +116,10 @@ namespace Nest
 		public SimpleQueryStringQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch) =>
 			Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
 
-		public SimpleQueryStringQueryDescriptor<T> QuoteFieldSuffix(string quoteFieldSuffix) => 
+		public SimpleQueryStringQueryDescriptor<T> QuoteFieldSuffix(string quoteFieldSuffix) =>
 			Assign(a => a.QuoteFieldSuffix = quoteFieldSuffix);
 
-		public SimpleQueryStringQueryDescriptor<T> AllFields(bool? allFields = true) => 
+		public SimpleQueryStringQueryDescriptor<T> AllFields(bool? allFields = true) =>
 			Assign(a => a.AllFields = allFields);
 	}
 }

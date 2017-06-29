@@ -58,7 +58,7 @@ namespace Tests.QueryDsl.FullText.QueryString
 			AutoGeneratePhraseQueries = true,
 			MaximumDeterminizedStates = 2,
 #pragma warning disable 618 // usage of lowercase_expanded_terms and locale
-			LowercaseExpendedTerms = true,
+			LowercaseExpandedTerms = true,
 			Locale = "en_US",
 #pragma warning restore 618 // usage of lowercase_expanded_terms and locale
 			EnablePositionIncrements = true,
@@ -91,7 +91,7 @@ namespace Tests.QueryDsl.FullText.QueryString
 				.AllowLeadingWildcard()
 				.AutoGeneratePhraseQueries()
 				.MaximumDeterminizedStates(2)
-				.LowercaseExpendedTerms()
+				.LowercaseExpandedTerms()
 				.EnablePositionIncrements()
 				.Escape()
 				.UseDisMax()

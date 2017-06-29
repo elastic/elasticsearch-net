@@ -28,7 +28,7 @@ namespace Nest
 
 		[JsonProperty("lowercase_expanded_terms")]
 		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		bool? LowercaseExpendedTerms { get; set; }
+		bool? LowercaseExpandedTerms { get; set; }
 
 		[JsonProperty("enable_position_increments")]
 		bool? EnablePositionIncrements { get; set; }
@@ -116,7 +116,7 @@ namespace Nest
 		public string QuoteAnalyzer { get; set; }
 		public bool? AllowLeadingWildcard { get; set; }
 		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		public bool? LowercaseExpendedTerms { get; set; }
+		public bool? LowercaseExpandedTerms { get; set; }
 		public bool? EnablePositionIncrements { get; set; }
 		public int? FuzzyPrefixLength { get; set; }
 		public double? PhraseSlop { get; set; }
@@ -151,7 +151,7 @@ namespace Nest
 		string IQueryStringQuery.QuoteAnalyzer { get; set; }
 		bool? IQueryStringQuery.AllowLeadingWildcard { get; set; }
 		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		bool? IQueryStringQuery.LowercaseExpendedTerms { get; set; }
+		bool? IQueryStringQuery.LowercaseExpandedTerms { get; set; }
 		bool? IQueryStringQuery.EnablePositionIncrements { get; set; }
 		int? IQueryStringQuery.FuzzyMaxExpansions { get; set; }
 		Fuzziness IQueryStringQuery.Fuzziness { get; set; }
@@ -196,8 +196,8 @@ namespace Nest
 			Assign(a => a.AllowLeadingWildcard = allowLeadingWildcard);
 
 		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		public QueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool? lowercaseExpendedTerms = true) =>
-			Assign(a => a.LowercaseExpendedTerms = lowercaseExpendedTerms);
+		public QueryStringQueryDescriptor<T> LowercaseExpandedTerms(bool? lowercaseExpandedTerms = true) =>
+			Assign(a => a.LowercaseExpandedTerms = lowercaseExpandedTerms);
 
 		public QueryStringQueryDescriptor<T> EnablePositionIncrements(bool? enablePositionIncrements = true) =>
 			Assign(a => a.EnablePositionIncrements = enablePositionIncrements);
@@ -229,14 +229,14 @@ namespace Nest
 
 		public QueryStringQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite) => Assign(a => Self.Rewrite = rewrite);
 
-		public QueryStringQueryDescriptor<T> QuoteFieldSuffix(string quoteFieldSuffix) => 
+		public QueryStringQueryDescriptor<T> QuoteFieldSuffix(string quoteFieldSuffix) =>
 			Assign(a => a.QuoteFieldSuffix = quoteFieldSuffix);
 
 		public QueryStringQueryDescriptor<T> Escape(bool? escape = true) => Assign(a => a.Escape = escape);
 
 		public QueryStringQueryDescriptor<T> AllFields(bool? allFields = true) => Assign(a => a.AllFields = allFields);
 
-		public QueryStringQueryDescriptor<T> SplitOnWhitespace(bool? splitOnWhitespace = true) => 
+		public QueryStringQueryDescriptor<T> SplitOnWhitespace(bool? splitOnWhitespace = true) =>
 			Assign(a => a.SplitOnWhitespace = splitOnWhitespace);
 	}
 }
