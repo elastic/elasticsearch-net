@@ -66,8 +66,8 @@ namespace Nest
 		[Obsolete("Use FuzzyMultiTermQueryRewrite")]
 		public RewriteMultiTerm? FuzzyRewrite
 		{
-			get { return FuzzyMultiTermQueryRewrite?.Rewrite; }
-			set { FuzzyMultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+			get => FuzzyMultiTermQueryRewrite?.Rewrite;
+			set => FuzzyMultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value);
 		}
 		public MultiTermQueryRewrite FuzzyMultiTermQueryRewrite { get; set; }
 		public IFuzziness Fuzziness { get; set; }
@@ -99,8 +99,8 @@ namespace Nest
 		MinimumShouldMatch IMatchQuery.MinimumShouldMatch { get; set; }
 		RewriteMultiTerm? IMatchQuery.FuzzyRewrite
 		{
-			get { return Self.FuzzyMultiTermQueryRewrite?.Rewrite; }
-			set { Self.FuzzyMultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value); }
+			get => Self.FuzzyMultiTermQueryRewrite?.Rewrite;
+			set => Self.FuzzyMultiTermQueryRewrite = value == null ? null : new MultiTermQueryRewrite(value.Value);
 		}
 		MultiTermQueryRewrite IMatchQuery.FuzzyMultiTermQueryRewrite { get; set; }
 		IFuzziness IMatchQuery.Fuzziness { get; set; }
