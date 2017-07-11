@@ -67,16 +67,17 @@ module Commandline =
         setEnvironVar "FAKEBUILD" "1"
         printfn "%A" arguments
         match arguments with
-        | [] | ["build"] | ["test"] | ["clean"] -> ignore()
+        | [] | ["build"] | ["test"] | ["clean"] | ["benchmark"] | ["profile"] -> ignore()
         | ["release"; version] -> setBuildParam "version" version
 
         | ["test"; testFilter] -> setBuildParam "testfilter" testFilter
 
-        | ["profile"; esVersions] -> setBuildParam "esversions" esVersions
+        | ["profile"; esVersions] -> 
+            setBuildParam "esversions" esVersions
         | ["profile"; esVersions; testFilter] ->
             setBuildParam "esversions" esVersions
-            setBuildParam "testfilter" testFilter
-
+            setBuildParam "testfilter" testFilter        
+          
         | ["integrate"; esVersions] -> setBuildParam "esversions" esVersions
         | ["integrate"; esVersions; clusterFilter] ->
             setBuildParam "esversions" esVersions

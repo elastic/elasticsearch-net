@@ -21,15 +21,10 @@ module Benchmarker =
         let projectJson = testsProjectDirectory @@ "project.json"
         // running benchmarks can timeout so clean up any generated benchmark files
         try
-            DotNetCli.Restore(fun p ->
-                { p with
-                    Project = projectJson
-                })
-
             DotNetCli.RunCommand(fun p ->
                 { p with
-                    WorkingDir = testsProjectDirectory
-                }) "run Benchmark"
+                    WorkingDir = testsProjectDirectory                
+                }) "run -f net46 -c Release Benchmark"
         finally
             let benchmarkOutputFiles =
                 let output = combinePaths testsProjectDirectory "BenchmarkDotNet.Artifacts"

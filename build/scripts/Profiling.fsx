@@ -48,8 +48,8 @@ module Profiler =
         member val Commit = commit with get, set
         member val Functions = functions with get, set
 
-    let private project = "Tests"
-    let private profiledApp = sprintf "%s/%s/%s.exe" (Paths.Output("v4.6")) project project
+    let private project = PrivateProject(Tests).Name
+    let private profiledApp = sprintf "%s/net46/%s.exe" (Paths.Output("Tests")) project
     let private snapShotOutput = Paths.Output("ProfilingSnapshot.dtp")
     let private snapShotStatsOutput = Paths.Output("ProfilingSnapshotStats.html")
     let private profileOutput = Paths.Output("ProfilingReport.xml")
@@ -63,7 +63,8 @@ module Profiler =
 
     let Run() = 
         let date = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffz")
-        Tooling.execProcessWithTimeout profiledApp ["Profile";"Class";getBuildParam "testfilter"] (TimeSpan.FromMinutes 30.) |> ignore
+        trace profiledApp
+        Tooling.execProcessWithTimeout profiledApp ["Profile";"Class";getBuildParam "testfilter"] (TimeSpan.FromMinutes 30.) "." |> ignore
         trace "Profiling finished."
 
         let performanceOutput = Paths.Output("profiling/performance") |> directoryInfo
