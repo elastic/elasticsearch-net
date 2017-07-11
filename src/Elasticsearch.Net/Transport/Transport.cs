@@ -152,6 +152,11 @@ namespace Elasticsearch.Net
 							AuditTrail = pipeline.AuditTrail
 						};
 					}
+					if (requestData.CancellationToken.IsCancellationRequested)
+					{
+						pipeline.AuditCancellationRequested();
+						break;
+					}
 					if (response == null || !response.SuccessOrKnownError) continue;
 					pipeline.MarkAlive(node);
 					break;

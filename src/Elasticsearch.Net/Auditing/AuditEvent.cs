@@ -18,6 +18,7 @@ namespace Elasticsearch.Net
 
 		MaxTimeoutReached,
 		MaxRetriesReached,
-		BadRequest
+		BadRequest,
+		CancellationRequested,
 	}
 }

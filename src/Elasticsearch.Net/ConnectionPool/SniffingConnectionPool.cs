@@ -9,7 +9,10 @@ namespace Elasticsearch.Net
 	{
 		private readonly ReaderWriterLockSlim _readerWriter = new ReaderWriterLockSlim();
 
+		/// <inheritdoc/>
 		public override bool SupportsReseeding => true;
+
+		/// <inheritdoc/>
 		public override bool SupportsPinging => true;
 
 		public SniffingConnectionPool(IEnumerable<Uri> uris, bool randomize = true, IDateTimeProvider dateTimeProvider = null)
@@ -17,9 +20,10 @@ namespace Elasticsearch.Net
 		{ }
 
 		public SniffingConnectionPool(IEnumerable<Node> nodes, bool randomize = true, IDateTimeProvider dateTimeProvider = null)
-			: base(nodes, randomize, dateTimeProvider)
-		{ }
+			: base(nodes, randomize, dateTimeProvider) { }
 
+		public SniffingConnectionPool(IEnumerable<Node> nodes, Func<Node, float> nodeScorer, IDateTimeProvider dateTimeProvider = null)
+			: base(nodes, nodeScorer, dateTimeProvider) { }
 		public override IReadOnlyCollection<Node> Nodes
 		{
 			get
@@ -38,6 +42,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
+		/// <inheritdoc/>
 		public override void Reseed(IEnumerable<Node> nodes)
 		{
 			if (!nodes.HasAny()) return;
@@ -45,8 +50,7 @@ namespace Elasticsearch.Net
 			try
 			{
 				this._readerWriter.EnterWriteLock();
-				var sortedNodes = nodes
-					.OrderBy(item => this.Randomize ? this.Random.Next() : 1)
+				var sortedNodes = this.SortNodes(nodes)
 					.DistinctBy(n => n.Uri)
 					.ToList();
 
@@ -60,11 +64,12 @@ namespace Elasticsearch.Net
 			}
 		}
 
+		/// <inheritdoc/>
 		public override IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null)
 		{
+			this._readerWriter.EnterReadLock();
 			try
 			{
-				this._readerWriter.EnterReadLock();
 				return base.CreateView(audit);
 			}
 			finally

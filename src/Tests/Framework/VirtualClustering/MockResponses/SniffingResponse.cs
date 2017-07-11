@@ -42,6 +42,7 @@ namespace Tests.Framework.MockResponses
 				{"node.name", name}
 			};
 			foreach (var kv in node.Settings) settings[kv.Key] = kv.Value;
+
 			var nodeResponse = new
 			{
 				name = name,
@@ -51,10 +52,7 @@ namespace Tests.Framework.MockResponses
 				ip = "127.0.0.1",
 				version = TestClient.Configuration.ElasticsearchVersion.Version,
 				build = Guid.NewGuid().ToString("N").Substring(0, 8),
-				settings = new Dictionary<string, object> {
-					{ "cluster.name", ClusterName },
-					{ "name", name },
-				}
+				settings = settings
 			};
 			if (!node.MasterEligible) nodeResponse.settings.Add("node.master", false);
 			if (!node.HoldsData) nodeResponse.settings.Add("node.data", false);

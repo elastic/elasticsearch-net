@@ -1,6 +1,7 @@
 ﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 
+#load @"Commandline.fsx"
 #load @"Projects.fsx"
 #load @"Paths.fsx"
 #load @"Tooling.fsx"
@@ -10,39 +11,36 @@ open Fake
 open Paths
 open Projects
 open Tooling
+open Commandline
 
-module Tests = 
-    open System.Threading
+module Tests =
     open System
 
     let private buildingOnTravis = getEnvironmentVarAsBool "TRAVIS"
 
     let private setLocalEnvVars() = 
-        let clusterFilter =  getBuildParamOrDefault "escluster" ""
+        let clusterFilter =  getBuildParamOrDefault "clusterfilter" ""
         let testFilter = getBuildParamOrDefault "testfilter" ""
+        let numberOfConnections = getBuildParamOrDefault "numberOfConnections" ""
         setProcessEnvironVar "NEST_INTEGRATION_CLUSTER" clusterFilter
         setProcessEnvironVar "NEST_TEST_FILTER" testFilter
+        setProcessEnvironVar "NEST_NUMBER_OF_CONNECTIONS" numberOfConnections
 
-    let private dotnetTest() =
-        let folder = Paths.IncrementalOutputFolder (PrivateProject PrivateProject.Tests) DotNetFramework.NetCoreApp1_1
-        let testPath = sprintf "%s/Tests.dll" folder
-        DotNetCli.RunCommand (fun p -> { p with TimeOut = TimeSpan.FromMinutes(10.) }) (sprintf "%s -- Test" testPath) |> ignore
+    let private dotnetTest (target: Commandline.MultiTarget) =
+        CreateDir Paths.BuildOutput
+        let command = 
+            let p = ["xunit"; "-parallel"; "all"; "-xml"; "../.." @@ Paths.Output("TestResults-Desktop-Clr.xml")] 
+            match (target, buildingOnTravis) with 
+            | (_, true) 
+            | (Commandline.MultiTarget.One, _) -> ["-framework"; "netcoreapp1.1"] |> List.append p
+            | _  -> p
 
-    let private runTestExeOnDesktopCLR() = 
-        let folder = Paths.IncrementalOutputFolder (PrivateProject PrivateProject.Tests) DotNetFramework.Net46
-        let testRunner = Tooling.BuildTooling(folder @@ "Tests.exe")
-        testRunner.Exec ["Test"; "-parallel"; "-xml"; Paths.Output("TestResults-Desktop-Clr.xml")] |> ignore
-        
-    let IncrementalTest() = 
+        let dotnet = Tooling.BuildTooling("dotnet")
+        dotnet.ExecIn "src/Tests" command |> ignore
+
+    let RunUnitTests() =
         setLocalEnvVars()
-        match buildingOnTravis with
-        | false -> runTestExeOnDesktopCLR() 
-        | true -> dotnetTest() 
-
-    let RunUnitTests() = 
-        setLocalEnvVars()
-        dotnetTest()
-        runTestExeOnDesktopCLR()
+        dotnetTest Commandline.multiTarget
 
     let RunIntegrationTests() =
         setLocalEnvVars()
@@ -54,6 +52,4 @@ module Tests =
         
         for esVersion in esVersions do
             setProcessEnvironVar "NEST_INTEGRATION_VERSION" esVersion
-            runTestExeOnDesktopCLR()
-            //TODO enable integration testing on .net CORE
-            //dotnetTest()
+            dotnetTest Commandline.multiTarget |> ignore

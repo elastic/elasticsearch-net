@@ -46,11 +46,16 @@ namespace Nest
 		public string ScriptFile { get; set; }
 		public string Language { get; set; }
 		public Dictionary<string, object> Params { get; set; }
+		/// <inheritdoc/>
 		public TDocument Upsert { get; set; }
+		/// <inheritdoc/>
 		public bool? DocAsUpsert { get; set; }
+		/// <inheritdoc/>
 		public TPartialDocument Doc { get; set; }
+		/// <inheritdoc/>
 		public bool? DetectNoop { get; set; }
 
+		/// <inheritdoc/>
 		public Fields Fields
 		{
 			get { return Self.RequestParameters.GetQueryStringValue<Fields>("fields"); }

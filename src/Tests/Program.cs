@@ -56,7 +56,10 @@ namespace Tests
 		private static  string SdkPath { get; }
 		private static  string OutputPath { get; }
 
-		public static void Main(string[] args)
+		// TODO: Renamed this from Main to TestMain because of a bug with Resharper and running unit tests
+		// in Visual Studio with .NET Core: https://youtrack.jetbrains.com/issue/RSRP-464233
+		// Once this is fixed, look at renaming back and removing additional packages. See https://github.com/elastic/elasticsearch-net/pull/2793
+		public static void TestMain(string[] args)
 		{
 			if (args.Length == 0)
 				Console.WriteLine("Must specify at least one argument: TestAssemblyPath, Profile or Benchmark ");
@@ -89,10 +92,6 @@ namespace Tests
 			{
 				var benchmarkSwitcher = new BenchmarkSwitcher(GetBenchmarkTypes());
 				benchmarkSwitcher.Run(arguments);
-			}
-			else
-			{
-				TestRunner.Run(arguments);
 			}
 		}
 

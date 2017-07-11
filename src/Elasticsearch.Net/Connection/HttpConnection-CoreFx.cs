@@ -1,6 +1,7 @@
 ﻿#if DOTNETCORE
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
@@ -9,6 +10,7 @@ using System.Net.Http.Headers;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using static System.Net.DecompressionMethods;
 
@@ -18,7 +20,10 @@ namespace Elasticsearch.Net
 	{
 		private readonly Uri _uri;
 
-		public WebProxy(Uri uri) { _uri = uri; }
+		public WebProxy(Uri uri)
+		{
+			_uri = uri;
+		}
 
 		public ICredentials Credentials { get; set; }
 
@@ -33,30 +38,28 @@ namespace Elasticsearch.Net
 
 		protected readonly ConcurrentDictionary<int, HttpClient> Clients = new ConcurrentDictionary<int, HttpClient>();
 
-		private string DefaultContentType => "application/json";
-
-		public HttpConnection() { }
+		private static readonly string CanNotUseStreamResponsesWithCurlHandler =
+				"Using Stream as TReturn does not work as expected on .NET core linux, because we can no longer guarantee this works it will be removed from the client in our 6.0 release"
+			;
 
 		private HttpClient GetClient(RequestData requestData)
 		{
 			var key = GetClientKey(requestData);
 			HttpClient client;
-			if (!this.Clients.TryGetValue(key, out client))
+			if (this.Clients.TryGetValue(key, out client)) return client;
+			lock (_lock)
 			{
-				lock (_lock)
+				client = this.Clients.GetOrAdd(key, h =>
 				{
-					client = this.Clients.GetOrAdd(key, h =>
+					var handler = CreateHttpClientHandler(requestData);
+					var httpClient = new HttpClient(handler, false)
 					{
-						var handler = CreateHttpClientHandler(requestData);
-						var httpClient = new HttpClient(handler, false)
-						{
-							Timeout = requestData.RequestTimeout
-						};
+						Timeout = requestData.RequestTimeout
+					};
 
-						httpClient.DefaultRequestHeaders.ExpectContinue = false;
-						return httpClient;
-					});
-				}
+					httpClient.DefaultRequestHeaders.ExpectContinue = false;
+					return httpClient;
+				});
 			}
 
 			return client;
@@ -64,51 +67,85 @@ namespace Elasticsearch.Net
 
 		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class
 		{
+			//TODO remove Stream response support in 6.0, closing the stream is sufficient on desktop/mono
+			//but not on .NET core on linux HttpClient which proxies to curl.
+			if (typeof(TReturn) == typeof(Stream) && ConnectionConfiguration.IsCurlHandler)
+				throw new Exception(CanNotUseStreamResponsesWithCurlHandler);
+
 			var client = this.GetClient(requestData);
 			var builder = new ResponseBuilder<TReturn>(requestData);
+			HttpResponseMessage responseMessage = null;
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				var response = client.SendAsync(requestMessage, requestData.CancellationToken).GetAwaiter().GetResult();
+				responseMessage = client.SendAsync(requestMessage).GetAwaiter().GetResult();
 				requestData.MadeItToResponse = true;
-				builder.StatusCode = (int)response.StatusCode;
+				builder.StatusCode = (int) responseMessage.StatusCode;
 
-				if (response.Content != null)
-					builder.Stream = response.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
+				if (responseMessage.Content != null)
+					builder.Stream = responseMessage.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
+				// https://github.com/elastic/elasticsearch-net/issues/2311
+				// if stream is null call dispose on response instead.
+				if (builder.Stream == null || builder.Stream == Stream.Null) responseMessage.Dispose();
+			}
+			catch (TaskCanceledException e)
+			{
+				builder.Exception = e;
 			}
 			catch (HttpRequestException e)
 			{
 				builder.Exception = e;
 			}
-
-			return builder.ToResponse();
+			var response = builder.ToResponse();
+			//explicit dispose of response not needed (as documented on MSDN) on desktop CLR
+			//but we can not guarantee this is true for all HttpMessageHandler implementations
+			if (typeof(TReturn) != typeof(Stream)) responseMessage?.Dispose();
+			return response;
 		}
+
 
 		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData) where TReturn : class
 		{
+			//TODO remove Stream response support in 6.0, closing the stream is sufficient on desktop/mono
+			//but not on .NET core on linux HttpClient which proxies to curl.
+			if (typeof(TReturn) == typeof(Stream) && ConnectionConfiguration.IsCurlHandler)
+				throw new Exception(CanNotUseStreamResponsesWithCurlHandler);
+
 			var client = this.GetClient(requestData);
 			var builder = new ResponseBuilder<TReturn>(requestData);
+			HttpResponseMessage responseMessage = null;
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				var response = await client.SendAsync(requestMessage, requestData.CancellationToken).ConfigureAwait(false);
+				responseMessage = await client.SendAsync(requestMessage, requestData.CancellationToken).ConfigureAwait(false);
 				requestData.MadeItToResponse = true;
-				builder.StatusCode = (int)response.StatusCode;
+				builder.StatusCode = (int) responseMessage.StatusCode;
 
-				if (response.Content != null)
-					builder.Stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
+				if (responseMessage.Content != null)
+					builder.Stream = await responseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false);
+				// https://github.com/elastic/elasticsearch-net/issues/2311
+				// if stream is null call dispose on response instead.
+				if (builder.Stream == null || builder.Stream == Stream.Null) responseMessage.Dispose();
+			}
+			catch (TaskCanceledException e)
+			{
+				builder.Exception = e;
 			}
 			catch (HttpRequestException e)
 			{
 				builder.Exception = e;
 			}
-
-			return await builder.ToResponseAsync().ConfigureAwait(false);
+			var response = await builder.ToResponseAsync().ConfigureAwait(false);
+			//explicit dispose of response not needed (as documented on MSDN) on desktop CLR
+			//but we can not guarantee this is true for all HttpMessageHandler implementations
+			if (typeof(TReturn) != typeof(Stream)) responseMessage?.Dispose();
+			return response;
 		}
 
 		private static readonly string MissingConnectionLimitMethodError =
 			$"Your target platform does not support {nameof(ConnectionConfiguration.ConnectionLimit)}"
-			+ $" please set {nameof(ConnectionConfiguration.ConnectionLimit)} to -1 on your connection configuration."
+			+ $" please set {nameof(ConnectionConfiguration.ConnectionLimit)} to -1 on your connection configuration/settings."
 			+ $" this will cause the {nameof(HttpClientHandler.MaxConnectionsPerServer)} not to be set on {nameof(HttpClientHandler)}";
 
 		protected virtual HttpClientHandler CreateHttpClientHandler(RequestData requestData)
@@ -129,14 +166,21 @@ namespace Elasticsearch.Net
 				{
 					throw new Exception(MissingConnectionLimitMethodError, e);
 				}
+				catch (PlatformNotSupportedException e)
+				{
+					throw new Exception(MissingConnectionLimitMethodError, e);
+				}
 			}
 
 			if (!requestData.ProxyAddress.IsNullOrEmpty())
 			{
 				var uri = new Uri(requestData.ProxyAddress);
 				var proxy = new WebProxy(uri);
-				var credentials = new NetworkCredential(requestData.ProxyUsername, requestData.ProxyPassword);
-				proxy.Credentials = credentials;
+				if (!string.IsNullOrEmpty(requestData.ProxyUsername))
+				{
+					var credentials = new NetworkCredential(requestData.ProxyUsername, requestData.ProxyPassword);
+					proxy.Credentials = credentials;
+				}
 				handler.Proxy = proxy;
 			}
 
@@ -173,6 +217,10 @@ namespace Elasticsearch.Net
 			{
 				requestMessage.Headers.TryAddWithoutValidation(key, requestData.Headers.GetValues(key));
 			}
+			requestMessage.Headers.Connection.Clear();
+			requestMessage.Headers.ConnectionClose = false;
+			requestMessage.Headers.Connection.Add("Keep-Alive");
+			//requestMessage.Headers.Connection;
 
 			requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestData.ContentType));
 

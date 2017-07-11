@@ -549,6 +549,9 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 						.Body("{}")
 					)
 				)
+			)
+			.RequestConfiguration(r => r
+				.RequestTimeout(TimeSpan.FromMinutes(2))
 			);
 
 		protected override ExecuteWatchRequest Initializer =>
@@ -616,6 +619,10 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 						Method = HttpInputMethod.Post,
 						Body = "{}"
 					}
+				},
+				RequestConfiguration = new RequestConfiguration
+				{
+					RequestTimeout = TimeSpan.FromMinutes(2)
 				}
 			};
 

@@ -113,6 +113,8 @@ namespace Elasticsearch.Net
 
 		private Auditable Audit(AuditEvent type) => new Auditable(type, this.AuditTrail, this._dateTimeProvider);
 
+		public void AuditCancellationRequested() => Audit(CancellationRequested).Dispose();
+
 		public void MarkDead(Node node)
 		{
 			var deadUntil = this._dateTimeProvider.DeadTime(node.FailedAttempts, this._settings.DeadTimeout, this._settings.MaxDeadTimeout);
@@ -462,7 +464,7 @@ namespace Elasticsearch.Net
 			{
 				pipelineFailure = PipelineFailure.MaxTimeoutReached;
 				this.Audit(MaxTimeoutReached);
-				exceptionMessage = "Maximum timout reached while retrying request";
+				exceptionMessage = "Maximum timeout reached while retrying request";
 			}
 			else if (this.Retried >= this.MaxRetries && this.MaxRetries > 0)
 			{

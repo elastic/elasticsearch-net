@@ -5,7 +5,7 @@
 	public static class DateFormat
 	{
 		///<summary>A formatter for the number of milliseconds since the epoch. Note, that this timestamp is subject to the limits of a Java Long.MIN_VALUE and Long.MAX_VALUE.</summary>
-		public const string epoch_millis = "epoch_mills";
+		public const string epoch_millis = "epoch_millis";
 		///<summary>A formatter for the number of seconds since the epoch. Note, that this timestamp is subject to the limits of a Java Long.MIN_VALUE and Long. MAX_VALUE divided by 1000 (the number of milliseconds in a second).</summary>
 		public const string epoch_second = "epoch_second";
 		///<summary>A basic formatter for a full date as four digit year, two digit month of year, and two digit day of month: yyyyMMdd.</summary>

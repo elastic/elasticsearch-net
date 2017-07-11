@@ -129,7 +129,10 @@ namespace Tests.CommonOptions.TimeUnit
 		{
 			var testCases = new StringParsingTestCases
 			{
-				{ "10ms", new TimeSpan(0, 0, 0, 0, 10), "10ms" },
+				{ "2.000000000e-06ms", TimeSpan.FromMilliseconds(2.000000000e-06), "0.000002ms"},
+				{ "3.1e-11ms", TimeSpan.FromMilliseconds(3.1e-11), "0.000000000031ms"},
+				{ "10   MS", new TimeSpan(0, 0, 0, 0, 10), "10ms" },
+				{ "11ms", new TimeSpan(0, 0, 0, 0, 11), "11ms" },
 				{ "10s", new TimeSpan(0, 0, 10), "10s" },
 				{ "10m", new TimeSpan(0, 10, 0) , "10m"},
 				{ "10M", new TimeSpan(300, 0, 0, 0), "10M" }, // 300 days not minutes
@@ -176,7 +179,7 @@ namespace Tests.CommonOptions.TimeUnit
 			Expect("year").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Year);
 
 			Expect("2d").WhenSerializing<Union<DateInterval, Time>>((Time)"2d");
-			Expect("1.16w").WhenSerializing<Union<DateInterval, Time>>((Time)TimeSpan.FromDays(8.1));
+			Expect("1.15714285714286w").WhenSerializing<Union<DateInterval, Time>>((Time)TimeSpan.FromDays(8.1));
 		}
 
 		//hide
@@ -184,10 +187,10 @@ namespace Tests.CommonOptions.TimeUnit
 		public void MillisecondsNeverSerializeToMonthsOrYears()
 		{
 			double millisecondsInAMonth = 2592000000;
-			Expect("4.29w").WhenSerializing(new Time(millisecondsInAMonth));
-			Expect("8.57w").WhenSerializing(new Time(millisecondsInAMonth * 2));
-			Expect("51.43w").WhenSerializing(new Time(millisecondsInAMonth * 12));
-			Expect("102.86w").WhenSerializing(new Time(millisecondsInAMonth * 24));
+			Expect("4.28571428571429w").WhenSerializing(new Time(millisecondsInAMonth));
+			Expect("8.57142857142857w").WhenSerializing(new Time(millisecondsInAMonth * 2));
+			Expect("51.4285714285714w").WhenSerializing(new Time(millisecondsInAMonth * 12));
+			Expect("102.857142857143w").WhenSerializing(new Time(millisecondsInAMonth * 24));
 		}
 
 		//hide

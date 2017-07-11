@@ -11,6 +11,8 @@ open System.Net
 
 open Fake
 
+Fake.ProcessHelper.redirectOutputToTrace <-true
+    
 module Tooling = 
     open Paths
     open Projects
@@ -49,11 +51,11 @@ module Tooling =
         ()
 
 
-    let execProcessWithTimeout proc arguments timeout = 
+    let execProcessWithTimeout proc arguments timeout workingDir = 
         let args = arguments |> String.concat " "
         ExecProcess (fun info ->
             info.FileName <- proc
-            info.WorkingDirectory <- "."
+            info.WorkingDirectory <- workingDir
             info.Arguments <- args
         ) timeout
 
@@ -69,11 +71,13 @@ module Tooling =
 
     let private defaultTimeout = TimeSpan.FromMinutes 15.0
 
-    let execProcess proc arguments =
-        let exitCode = execProcessWithTimeout proc arguments defaultTimeout
+    let execProcessInDirectory proc arguments workingDir =
+        let exitCode = execProcessWithTimeout proc arguments defaultTimeout workingDir
         match exitCode with
         | 0 -> exitCode
         | _ -> failwithf "Calling %s resulted in unexpected exitCode %i" proc exitCode 
+
+    let execProcess proc arguments = execProcessInDirectory proc arguments "."
 
 
     let execProcessAndReturnMessages proc arguments =
@@ -94,6 +98,7 @@ module Tooling =
     type BuildTooling(path) =
         member this.Path = path
         member this.Exec arguments = execProcess this.Path arguments
+        member this.ExecIn workingDirectory arguments = execProcessInDirectory this.Path arguments workingDirectory
 
     type DotTraceTool = {
         Name:string;
@@ -152,7 +157,7 @@ module Tooling =
             this.ExecWithTimeout arguments (TimeSpan.FromMinutes 30.)
 
         member this.ExecWithTimeout arguments timeout =
-            let result = execProcessWithTimeout exe arguments timeout
+            let result = execProcessWithTimeout exe arguments timeout "."
             if result <> 0 then failwith (sprintf "Failed to run dotnet tooling for %s args: %A" exe arguments)
 
     let DotNet = new DotNetTooling("dotnet.exe")

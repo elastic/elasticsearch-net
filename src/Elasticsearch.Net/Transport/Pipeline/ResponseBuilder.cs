@@ -4,8 +4,9 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
-	public class ResponseBuilder<TReturn>
+	public class ResponseBuilder<TReturn> 
 		where TReturn : class
+		
 	{
 		private const int BufferSize = 81920;
 		private static readonly VoidResponse Void = new VoidResponse();
@@ -58,7 +59,7 @@ namespace Elasticsearch.Net
 		private void SetBody(ElasticsearchResponse<TReturn> response, Stream stream)
 		{
 			byte[] bytes = null;
-			if (NeedsToEagerReadStream())
+			if (NeedsToEagerReadStream(response))
 			{
 				var inMemoryStream = this._requestData.MemoryStreamFactory.Create();
 				stream.CopyTo(inMemoryStream, BufferSize);
@@ -68,29 +69,25 @@ namespace Elasticsearch.Net
 			var needsDispose = typeof(TReturn) != typeof(Stream);
 			using (needsDispose ? stream : EmptyDisposable)
 			{
-				if (response.Success)
+				if (response.Success || response.AllowAllStatusCodes)
 				{
 					if (!SetSpecialTypes(stream, response, bytes))
 					{
 						if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
 						else response.Body = this._requestData.ConnectionSettings.Serializer.Deserialize<TReturn>(stream);
 					}
+					if (response.AllowAllStatusCodes)
+						ReadServerError(response, new MemoryStream(bytes), bytes);
 				}
 				else if (response.HttpStatusCode != null)
-				{
-					ServerError serverError;
-					if (ServerError.TryCreate(stream, out serverError))
-						response.ServerError = serverError;
-					if (_disableDirectStreaming)
-						response.ResponseBodyInBytes = bytes;
-				}
+					ReadServerError(response, stream, bytes);
 			}
 		}
 
 		private async Task SetBodyAsync(ElasticsearchResponse<TReturn> response, Stream stream)
 		{
 			byte[] bytes = null;
-			if (NeedsToEagerReadStream())
+			if (NeedsToEagerReadStream(response))
 			{
 				var inMemoryStream = this._requestData.MemoryStreamFactory.Create();
 				await stream.CopyToAsync(inMemoryStream, BufferSize, this._requestData.CancellationToken).ConfigureAwait(false);
@@ -100,21 +97,35 @@ namespace Elasticsearch.Net
 			var needsDispose = typeof(TReturn) != typeof(Stream);
 			using (needsDispose ? stream : EmptyDisposable)
 			{
-				if (response.Success)
+				if (response.Success || response.AllowAllStatusCodes)
 				{
 					if (!SetSpecialTypes(stream, response, bytes))
 					{
 						if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
 						else response.Body = await this._requestData.ConnectionSettings.Serializer.DeserializeAsync<TReturn>(stream, this._requestData.CancellationToken).ConfigureAwait(false);
 					}
+					if (response.AllowAllStatusCodes)
+						await ReadServerErrorAsync(response, new MemoryStream(bytes), bytes);
 				}
 				else if (response.HttpStatusCode != null)
-				{
-					response.ServerError = await ServerError.TryCreateAsync(stream, this._requestData.CancellationToken).ConfigureAwait(false);
-					if (_disableDirectStreaming)
-						response.ResponseBodyInBytes = bytes;
-				}
+					await ReadServerErrorAsync(response, stream, bytes);
 			}
+		}
+
+		private void ReadServerError(ElasticsearchResponse<TReturn> response, Stream stream, byte[] bytes)
+		{
+			ServerError serverError;
+			if (ServerError.TryCreate(stream, out serverError))
+				response.ServerError = serverError;
+			if (_disableDirectStreaming)
+				response.ResponseBodyInBytes = bytes;
+		}
+
+		private async Task ReadServerErrorAsync(ElasticsearchResponse<TReturn> response, Stream stream, byte[] bytes)
+		{
+			response.ServerError = await ServerError.TryCreateAsync(stream, this._requestData.CancellationToken).ConfigureAwait(false);
+			if (_disableDirectStreaming)
+				response.ResponseBodyInBytes = bytes;
 		}
 
 		private void Finalize(ElasticsearchResponse<TReturn> response)
@@ -126,8 +137,9 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		private bool NeedsToEagerReadStream() =>
-			_disableDirectStreaming || typeof(TReturn) == typeof(string) || typeof(TReturn) == typeof(byte[]);
+		private bool NeedsToEagerReadStream(ElasticsearchResponse<TReturn> response) =>
+			response.AllowAllStatusCodes //need to double read for error and TReturn
+			|| _disableDirectStreaming || typeof(TReturn) == typeof(string) || typeof(TReturn) == typeof(byte[]);
 
 		private byte[] SwapStreams(ref Stream responseStream, ref MemoryStream ms)
 		{

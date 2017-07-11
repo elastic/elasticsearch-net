@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
+using Nest;
 using Tests.Framework.MockResponses;
 
 namespace Tests.Framework
@@ -145,7 +146,8 @@ namespace Tests.Framework
 				: Fail<TReturn, TRule>(requestData, rule);
 		}
 
-		private ElasticsearchResponse<TReturn> Sometimes<TReturn, TRule>(RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse, State state, TRule rule, int times)
+		private ElasticsearchResponse<TReturn> Sometimes<TReturn, TRule>(
+			RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse, State state, TRule rule, int times)
 			where TReturn : class
 			where TRule : IRule
 		{
@@ -163,31 +165,35 @@ namespace Tests.Framework
 
 			if (rule.Succeeds && times >= state.Successes)
 				return Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
-			else if (rule.Succeeds) return Fail<TReturn, TRule>(requestData, rule);
+			else if (rule.Succeeds)
+			{
+				return Fail<TReturn, TRule>(requestData, rule);
+			}
 
 			if (!rule.Succeeds && times >= state.Failures)
 				return Fail<TReturn, TRule>(requestData, rule);
 			return Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
 		}
 
-		private ElasticsearchResponse<TReturn> Fail<TReturn, TRule>(RequestData requestData, TRule rule)
+		private ElasticsearchResponse<TReturn> Fail<TReturn, TRule>(RequestData requestData, TRule rule, Union<Exception, int> returnOverride = null)
 			where TReturn : class
 			where TRule : IRule
 		{
 			var state = this.Calls[requestData.Uri.Port];
 			var failed = Interlocked.Increment(ref state.Failures);
-			if (rule.Return == null)
+			var ret = returnOverride ?? rule.Return;
+
+			if (ret == null)
 #if DOTNETCORE
 				throw new System.Net.Http.HttpRequestException();
 #else
 				throw new WebException();
 #endif
-			return rule.Return.Match(
-				(e) =>
-				{
-					throw e;
-				},
-				(statusCode) => this.ReturnConnectionStatus<TReturn>(requestData, CallResponse(rule), statusCode)
+			return ret.Match(
+				(e) => throw e,
+				(statusCode) => this.ReturnConnectionStatus<TReturn>(requestData, CallResponse(rule),
+					//make sure we never return a valid status code in Fail responses because of a bad rule.
+					statusCode >= 200 && statusCode < 300 ? 502 : statusCode)
 			);
 		}
 

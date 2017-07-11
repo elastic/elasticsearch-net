@@ -27,13 +27,14 @@ namespace Tests.Framework
 		public static Uri CreateUri(int port = 9200, bool forceSsl = false) =>
 			new UriBuilder(forceSsl ? "https" : "http", Host, port).Uri;
 
-		public static string Host => (RunningFiddler) ? "ipv4.fiddler" : "localhost";
+		public static string DefaultHost => "localhost";
+		public static string Host => (RunningFiddler) ? "ipv4.fiddler" : DefaultHost;
 
 		private static ITestConfiguration LoadConfiguration()
 		{
-			// The build script sets a TARGET env variable, so if it exists then
+			// The build script sets a FAKEBUILD env variable, so if it exists then
 			// we must be running tests from the build script
-			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TARGET")))
+			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("FAKEBUILD")))
 				return new EnvironmentConfiguration();
 
 			var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
@@ -56,7 +57,12 @@ namespace Tests.Framework
 
 			throw new Exception($"Tried to load a yaml file from {yamlConfigurationPath} but it does not exist : pwd:{directoryInfo.FullName}");
 		}
-
+		
+		private static int ConnectionLimitDefault => 
+			int.TryParse(Environment.GetEnvironmentVariable("NEST_NUMBER_OF_CONNECTIONS"), out int x) 
+			? x
+			: ConnectionConfiguration.DefaultConnectionLimit;
+		
 		private static ConnectionSettings DefaultSettings(ConnectionSettings settings) => settings
 			.DefaultIndex("default-index")
 			.PrettyJson()
@@ -70,6 +76,8 @@ namespace Tests.Framework
 				.Ignore(p => p.PrivateValue)
 				.Rename(p => p.OnlineHandle, "nickname")
 			)
+			.ConnectionLimit(ConnectionLimitDefault)
+			//.Proxy(new Uri("http://127.0.0.1:8888"), "", "")
 			//.EnableTcpKeepAlive(TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(2))
 			//.PrettyJson()
 			//TODO make this random

@@ -1,3 +1,4 @@
+#load @"Commandline.fsx"
 #load @"Projects.fsx"
 #load @"Paths.fsx"
 #load @"Tooling.fsx"
@@ -12,7 +13,7 @@
 #load @"XmlDocPatcher.fsx"
 
 open System
-open Fake 
+open Fake
 
 open Paths
 open Building
@@ -25,31 +26,26 @@ open Benchmarking
 open XmlDocPatcher
 open Documentation
 open Signing
+open Commandline
 
-// Default target
+Commandline.parse()
 
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
-
-Target "Inc" <| fun _ -> traceHeader "STARTING INCREMENTAL BUILD"
-
-Target "IncrementalTest" Tests.IncrementalTest
 
 Target "Clean" Build.Clean
 
 Target "Restore" Build.Restore
 
-Target "IncrementalBuild" <| fun _ -> Build.Compile false
-
 Target "FullBuild" <| fun _ -> Build.Compile false
     
-Target "UnitTests" Tests.RunUnitTests
+Target "Test" Tests.RunUnitTests
 
 Target "Profile" <| fun _ -> 
     Profiler.Run()
     let url = getBuildParam "elasticsearch"
     Profiler.IndexResults url
 
-Target "Integrate"  Tests.RunIntegrationTests 
+Target "Integrate" <| Tests.RunIntegrationTests
 
 Target "Benchmark" Benchmarker.Run
 
@@ -75,33 +71,30 @@ Target "Canary" <| fun _ ->
 "Clean" 
   =?> ("Version", hasBuildParam "version")
   ==> "Restore"
-  ==> "FullBuild"
-  =?> ("UnitTests", (not ((getBuildParam "skiptests") = "1")))
+  =?> ("FullBuild", Commandline.needsFullBuild)
+  =?> ("Test", (not Commandline.skipTests))
   ==> "InheritDoc"
   ==> "Documentation"
   ==> "Build"
 
 "Clean"
-  ==> "FullBuild" 
+  =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Profile"
 
 "Clean" 
-  ==> "FullBuild"
+  =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Benchmark"
 
 "Version"
-  ==> "Release" ==> "Canary"
+  ==> "Release"
+  ==> "Canary"
 
-"FullBuild"
+"Clean"
+  =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Integrate"
-
-"Restore"
-  ==> "IncrementalBuild"
-  =?> ("IncrementalTest", (not ((getBuildParam "skiptests") = "1")))
-  ==> "Inc"
 
 "Build"
   ==> "Release"
 
-// start build
-RunTargetOrDefault "Build"
+RunTargetOrListTargets()
+

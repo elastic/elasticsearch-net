@@ -16,6 +16,7 @@ open Paths
 open Projects
 open Fake
 
+
 module InheritDoc =
     
     let private apiName n = Regex.Replace(n, @"^\w\:(.+?)(?:\(.+$|$)", "$1")

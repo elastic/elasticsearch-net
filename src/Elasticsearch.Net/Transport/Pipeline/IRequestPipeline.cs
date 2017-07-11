@@ -45,5 +45,7 @@ namespace Elasticsearch.Net
 
 		void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData requestData, List<PipelineException> seenExceptions)
 			where TReturn : class;
+
+		void AuditCancellationRequested();
 	}
 }

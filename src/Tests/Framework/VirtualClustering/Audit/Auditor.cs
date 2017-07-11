@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
+using FluentAssertions.Collections;
+using FluentAssertions.Execution;
 using Nest;
 
 namespace Tests.Framework
@@ -50,6 +53,7 @@ namespace Tests.Framework
 
 		public async Task<Auditor> TraceStartup(ClientCall callTrace = null)
 		{
+			//synchronous code path
 			this._cluster  = _cluster ?? this.Cluster();
 			if (!this.StartedUp) this.AssertPoolBeforeStartup?.Invoke(this._cluster.ConnectionPool);
 			this.AssertPoolBeforeCall?.Invoke(this._cluster.ConnectionPool);
@@ -58,6 +62,7 @@ namespace Tests.Framework
 			if (!this.StartedUp) this.AssertPoolAfterStartup?.Invoke(this._cluster.ConnectionPool);
 			this.AssertPoolAfterCall?.Invoke(this._cluster.ConnectionPool);
 
+			//async code path
 			this._clusterAsync = _clusterAsync ?? this.Cluster();
 			if (!this.StartedUp) this.AssertPoolBeforeStartup?.Invoke(this._clusterAsync.ConnectionPool);
 			this.AssertPoolBeforeCall?.Invoke(this._clusterAsync.ConnectionPool);
@@ -101,7 +106,6 @@ namespace Tests.Framework
 			this.AsyncAuditTrail = exception.AuditTrail;
 			this.AssertPoolAfterCall?.Invoke(this._clusterAsync.ConnectionPool);
 		}
-
 		public async Task<Auditor> TraceElasticsearchException(ClientCall callTrace, Action<ElasticsearchClientException> assert)
 		{
 			await this.TraceException(callTrace, assert);
@@ -115,9 +119,9 @@ namespace Tests.Framework
 			return new Auditor(_cluster, _clusterAsync);
 		}
 
-#pragma warning disable 1998
+#pragma warning disable 1998 // Async method lacks 'await' operators and will run synchronously
 		public async Task<Auditor> TraceElasticsearchExceptionOnResponse(ClientCall callTrace, Action<ElasticsearchClientException> assert)
-#pragma warning restore 1998
+#pragma warning restore 1998 // Async method lacks 'await' operators and will run synchronously
 		{
 			this._cluster  = _cluster ?? this.Cluster();
 			this._cluster.ClientThrows(false);
@@ -190,6 +194,24 @@ namespace Tests.Framework
 		}
 
 
+		public void VisualizeCalls(int numberOfCalls)
+		{
+			var cluster  = _cluster ?? this.Cluster();
+			var messages = new List<string>(numberOfCalls * 2);
+			for (var i = 0; i < numberOfCalls; i++)
+			{
+				var call = cluster.ClientCall();
+				var d = call.ApiCall;
+                var actualAuditTrail = d.AuditTrail.Aggregate(new StringBuilder(),
+                    (sb, a)=> sb.AppendLine($"-> {a}"),
+                    sb => sb.ToString());
+				messages.Add($"{d.HttpMethod.GetStringValue()} ({d.Uri.Port})");
+				messages.Add(actualAuditTrail);
+			}
+			throw new Exception(string.Join(Environment.NewLine, messages));
+		}
+
+
 		public async Task<Auditor> TraceCalls(params ClientCall[] audits)
 		{
 			var auditor = this;
@@ -205,7 +227,14 @@ namespace Tests.Framework
 			var typeOfTrail = (sync ? "synchronous" : "asynchronous") + " audit trail";
 			var nthClientCall = (nthCall + 1).ToOrdinal();
 
-			callTrace.Select(c=>c.Event).Should().ContainInOrder(auditTrail.Select(a=>a.Event), $"the {nthClientCall} client call's {typeOfTrail} should assert ALL audit trail items");
+			var actualAuditTrail = auditTrail.Aggregate(new StringBuilder(Environment.NewLine),
+				(sb, a)=> sb.AppendLine($"-> {a}"),
+				sb => sb.ToString());
+
+			callTrace.Select(c=>c.Event)
+				.Should().ContainInOrder(auditTrail.Select(a=>a.Event),
+					$"the {nthClientCall} client call's {typeOfTrail} should assert ALL audit trail items{actualAuditTrail}");
+
 			foreach (var t in auditTrail.Select((a, i) => new { a, i }))
 			{
 				var i = t.i;
@@ -219,7 +248,9 @@ namespace Tests.Framework
 				c.AssertWithBecause?.Invoke(string.Format(because, "custom assertion"), audit);
 			}
 
-			callTrace.Count.Should().Be(auditTrail.Count);
+			callTrace.Count.Should().Be(auditTrail.Count, $"actual auditTrail {actualAuditTrail}");
 		}
+
 	}
+
 }

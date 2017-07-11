@@ -23,8 +23,8 @@ module Build =
 
     type private GlobalJson = JsonProvider<"../../global.json">
     let private pinnedSdkVersion = GlobalJson.GetSample().Sdk.Version
-
-    let private buildingOnTravis = getEnvironmentVarAsBool "TRAVIS"
+    if isMono then setProcessEnvironVar "TRAVIS" "true"
+    let private buildingOnTravis = getEnvironmentVarAsBool "TRAVIS" 
 
     let private sln = sprintf "src/Elasticsearch%s.sln" (if buildingOnTravis then ".DotNetCoreOnly" else "")
 

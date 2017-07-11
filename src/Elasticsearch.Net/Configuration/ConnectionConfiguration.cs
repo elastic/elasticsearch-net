@@ -21,10 +21,16 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{
+		internal static bool IsCurlHandler { get; } =
+            #if DOTNETCORE
+                typeof(HttpClientHandler).Assembly().GetType("System.Net.Http.CurlHandler") != null;
+            #else
+                 false;
+            #endif
 		public static readonly TimeSpan DefaultTimeout = TimeSpan.FromMinutes(1);
 		public static readonly TimeSpan DefaultPingTimeout = TimeSpan.FromSeconds(2);
 		public static readonly TimeSpan DefaultPingTimeoutOnSSL = TimeSpan.FromSeconds(5);
-		public static readonly int DefaultConnectionLimit = 80;
+		public static readonly int DefaultConnectionLimit = IsCurlHandler ? Environment.ProcessorCount : 80;
 
 		/// <summary>
 		/// ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects

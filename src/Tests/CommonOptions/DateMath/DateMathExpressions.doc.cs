@@ -105,7 +105,7 @@ namespace Tests.CommonOptions.DateMath
 				Nest.DateMath.Now.Add(TimeSpan.FromHours(25)));
 
 			/** where as `Time` on its own serializes like this */
-			Expect("1.04d").WhenSerializing(new Time(TimeSpan.FromHours(25)));
+			Expect("1.04166666666667d").WhenSerializing(new Time(TimeSpan.FromHours(25)));
 
 			Expect("now+90001s").WhenSerializing(
 				Nest.DateMath.Now.Add(TimeSpan.FromHours(25).Add(TimeSpan.FromSeconds(1))));
