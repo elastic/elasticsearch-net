@@ -36,6 +36,7 @@ namespace Nest
 		ISourceFilter IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
 		IList<Field> IInnerHits.FielddataFields { get; set; }
+		IList<Field> IInnerHits.Fields { get; set; }
 		IScriptFields IInnerHits.ScriptFields { get; set; }
 
 		public GlobalInnerHitDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
@@ -51,10 +52,16 @@ namespace Nest
 		public GlobalInnerHitDescriptor<T> Name(string name) => Assign(a => a.Name = name);
 
 		public GlobalInnerHitDescriptor<T> FielddataFields(params string[] fielddataFields) =>
-			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field) f).ToListOrNullIfEmpty());
+			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field)f).ToListOrNullIfEmpty());
 
 		public GlobalInnerHitDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields) =>
-			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field) f).ToListOrNullIfEmpty());
+			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field)f).ToListOrNullIfEmpty());
+
+		public GlobalInnerHitDescriptor<T> Fields(params string[] fields) =>
+			Assign(a => a.Fields = fields?.Select(f => (Field)f).ToListOrNullIfEmpty());
+
+		public GlobalInnerHitDescriptor<T> Fields(params Expression<Func<T, object>>[] fields) =>
+			Assign(a => a.Fields = fields?.Select(f => (Field)f).ToListOrNullIfEmpty());
 
 		public GlobalInnerHitDescriptor<T> Explain(bool explain = true) => Assign(a => a.Explain = explain);
 
