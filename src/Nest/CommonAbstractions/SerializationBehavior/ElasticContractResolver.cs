@@ -38,10 +38,17 @@ namespace Nest
 			// cache contracts per connection settings
 			return this.ConnectionSettings.Inferrer.Contracts.GetOrAdd(objectType, o =>
 			{
+				var n = o.GetType().FullName;
 				var contract = base.CreateContract(o);
 
 				if ((typeof(IDictionary).IsAssignableFrom(o) || o.IsGenericDictionary()) && !typeof(IIsADictionary).IsAssignableFrom(o))
 				{
+					if (contract.Converter != null)
+					{
+
+					}
+
+
 					Type[] genericArguments;
 					if (!o.TryGetGenericDictionaryArguments(out genericArguments))
 						contract.Converter = new VerbatimDictionaryKeysJsonConverter();

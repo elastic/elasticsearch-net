@@ -207,6 +207,11 @@ namespace Nest
 			if (item == null) return;
 			list.Add(item);
 		}
+		internal static void AddRangeIfNotNull<T>(this List<T> list, IEnumerable<T> item) where T : class
+		{
+			if (item == null) return;
+			list.AddRange(item.Where(x=>x!=null));
+		}
 
 		internal static Dictionary<TKey, TValue> NullIfNoKeys<TKey, TValue>(this Dictionary<TKey, TValue> dictionary)
 		{

@@ -6675,7 +6675,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackInfo
 	///<pre>
-	///Retrieve information about xpack, including build number/timestamp and license status
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html
 	///</pre>
 	///</summary>
 	public class XPackInfoRequestParameters : FluentRequestParameters<XPackInfoRequestParameters> 
@@ -7001,6 +7001,40 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for XpackSecurityDeleteRoleMapping
+	///<pre>
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-delete-role-mapping
+	///</pre>
+	///</summary>
+	public class DeleteRoleMappingRequestParameters : FluentRequestParameters<DeleteRoleMappingRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public DeleteRoleMappingRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteRoleMappingRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteRoleMappingRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteRoleMappingRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public DeleteRoleMappingRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteRoleMappingRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for XpackSecurityDeleteUser
 	///<pre>
 	///https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-delete-user
@@ -7133,6 +7167,66 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for XpackSecurityGetRoleMapping
+	///<pre>
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-get-role-mapping
+	///</pre>
+	///</summary>
+	public class GetRoleMappingRequestParameters : FluentRequestParameters<GetRoleMappingRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetRoleMappingRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetRoleMappingRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetRoleMappingRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public GetRoleMappingRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetRoleMappingRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackSecurityGetToken
+	///<pre>
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-get-token
+	///</pre>
+	///</summary>
+	public class XpackSecurityGetTokenRequestParameters : FluentRequestParameters<XpackSecurityGetTokenRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public XpackSecurityGetTokenRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public XpackSecurityGetTokenRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public XpackSecurityGetTokenRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public XpackSecurityGetTokenRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public XpackSecurityGetTokenRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for XpackSecurityGetUser
 	///<pre>
 	///https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-get-user
@@ -7160,6 +7254,36 @@ namespace Elasticsearch.Net
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetUserRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackSecurityInvalidateToken
+	///<pre>
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-invalidate-token
+	///</pre>
+	///</summary>
+	public class XpackSecurityInvalidateTokenRequestParameters : FluentRequestParameters<XpackSecurityInvalidateTokenRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public XpackSecurityInvalidateTokenRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public XpackSecurityInvalidateTokenRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public XpackSecurityInvalidateTokenRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public XpackSecurityInvalidateTokenRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public XpackSecurityInvalidateTokenRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -7194,6 +7318,40 @@ namespace Elasticsearch.Net
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutRoleRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackSecurityPutRoleMapping
+	///<pre>
+	///https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-put-role-mapping
+	///</pre>
+	///</summary>
+	public class PutRoleMappingRequestParameters : FluentRequestParameters<PutRoleMappingRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		public PutRoleMappingRequestParameters Refresh(Refresh refresh) => this.AddQueryString("refresh", refresh);
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutRoleMappingRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PutRoleMappingRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutRoleMappingRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public PutRoleMappingRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutRoleMappingRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -7233,7 +7391,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackWatcherAckWatch
 	///<pre>
-	///http://www.elastic.co/guide/en/watcher/current/appendix-api-ack-watch.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html
 	///</pre>
 	///</summary>
 	public class AcknowledgeWatchRequestParameters : FluentRequestParameters<AcknowledgeWatchRequestParameters> 
@@ -7267,7 +7425,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackWatcherActivateWatch
 	///<pre>
-	///https://www.elastic.co/guide/en/watcher/current/api-rest.html#api-rest-activate-watch
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html
 	///</pre>
 	///</summary>
 	public class ActivateWatchRequestParameters : FluentRequestParameters<ActivateWatchRequestParameters> 
@@ -7301,7 +7459,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackWatcherDeactivateWatch
 	///<pre>
-	///https://www.elastic.co/guide/en/watcher/current/api-rest.html#api-rest-deactivate-watch
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html
 	///</pre>
 	///</summary>
 	public class DeactivateWatchRequestParameters : FluentRequestParameters<DeactivateWatchRequestParameters> 
@@ -7335,7 +7493,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackWatcherDeleteWatch
 	///<pre>
-	///http://www.elastic.co/guide/en/watcher/current/appendix-api-delete-watch.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html
 	///</pre>
 	///</summary>
 	public class DeleteWatchRequestParameters : FluentRequestParameters<DeleteWatchRequestParameters> 
@@ -7369,7 +7527,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackWatcherExecuteWatch
 	///<pre>
-	///http://www.elastic.co/guide/en/watcher/current/appendix-api-execute-watch.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html
 	///</pre>
 	///</summary>
 	public class ExecuteWatchRequestParameters : FluentRequestParameters<ExecuteWatchRequestParameters> 
@@ -7403,7 +7561,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackWatcherGetWatch
 	///<pre>
-	///http://www.elastic.co/guide/en/watcher/current/appendix-api-get-watch.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html
 	///</pre>
 	///</summary>
 	public class GetWatchRequestParameters : FluentRequestParameters<GetWatchRequestParameters> 
@@ -7433,7 +7591,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackWatcherPutWatch
 	///<pre>
-	///http://www.elastic.co/guide/en/watcher/current/appendix-api-put-watch.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html
 	///</pre>
 	///</summary>
 	public class PutWatchRequestParameters : FluentRequestParameters<PutWatchRequestParameters> 
@@ -7471,7 +7629,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackWatcherRestart
 	///<pre>
-	///http://www.elastic.co/guide/en/watcher/current/appendix-api-service.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-restart.html
 	///</pre>
 	///</summary>
 	public class RestartWatcherRequestParameters : FluentRequestParameters<RestartWatcherRequestParameters> 
@@ -7501,7 +7659,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackWatcherStart
 	///<pre>
-	///http://www.elastic.co/guide/en/watcher/current/appendix-api-service.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html
 	///</pre>
 	///</summary>
 	public class StartWatcherRequestParameters : FluentRequestParameters<StartWatcherRequestParameters> 
@@ -7531,7 +7689,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackWatcherStats
 	///<pre>
-	///http://www.elastic.co/guide/en/watcher/current/appendix-api-stats.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html
 	///</pre>
 	///</summary>
 	public class WatcherStatsRequestParameters : FluentRequestParameters<WatcherStatsRequestParameters> 
@@ -7561,7 +7719,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackWatcherStop
 	///<pre>
-	///http://www.elastic.co/guide/en/watcher/current/appendix-api-service.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html
 	///</pre>
 	///</summary>
 	public class StopWatcherRequestParameters : FluentRequestParameters<StopWatcherRequestParameters> 
