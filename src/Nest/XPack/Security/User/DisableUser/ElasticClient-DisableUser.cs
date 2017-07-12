@@ -24,7 +24,7 @@ namespace Nest
 	{
 		/// <inheritdoc/>
 		public IDisableUserResponse DisableUser(Name username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null) =>
-			this.DisableUser(selector.InvokeOrDefault(new DisableUserDescriptor()));
+			this.DisableUser(selector.InvokeOrDefault(new DisableUserDescriptor().Username(username)));
 
 		/// <inheritdoc/>
 		public IDisableUserResponse DisableUser(IDisableUserRequest request) =>
@@ -35,7 +35,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IDisableUserResponse> DisableUserAsync(Name username, Func<DisableUserDescriptor, IDisableUserRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.DisableUserAsync(selector.InvokeOrDefault(new DisableUserDescriptor()), cancellationToken);
+			this.DisableUserAsync(selector.InvokeOrDefault(new DisableUserDescriptor().Username(username)), cancellationToken);
 
 		/// <inheritdoc/>
 		public Task<IDisableUserResponse> DisableUserAsync(IDisableUserRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>

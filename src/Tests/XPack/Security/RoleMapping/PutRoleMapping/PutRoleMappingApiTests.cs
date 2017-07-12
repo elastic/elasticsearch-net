@@ -60,7 +60,7 @@ namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 							new { field = new Dictionary<string, object>(){ {"realm.name", "some_realm" } } }
 						}
 					},
-					new { field = new { metadata = new { a = "b" } } },
+					new { field = new Dictionary<string, object>(){ {"metadata.a", "b" } } },
 					new { except = new { field = new { groups = new [] { "group1", "group2" } } } }
 				}
             }

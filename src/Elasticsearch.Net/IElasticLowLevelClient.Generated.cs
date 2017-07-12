@@ -8662,7 +8662,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="body">The token request to get</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> XpackSecurityGetToken<T>(PostData<object> body, Func<XpackSecurityGetTokenRequestParameters, XpackSecurityGetTokenRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> XpackSecurityGetToken<T>(PostData<object> body, Func<GetUserAccessTokenRequestParameters, GetUserAccessTokenRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /_xpack/security/oauth2/token
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -8675,7 +8675,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="body">The token request to get</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> XpackSecurityGetTokenAsync<T>(PostData<object> body, Func<XpackSecurityGetTokenRequestParameters, XpackSecurityGetTokenRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> XpackSecurityGetTokenAsync<T>(PostData<object> body, Func<GetUserAccessTokenRequestParameters, GetUserAccessTokenRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a GET on /_xpack/security/user/{username}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -8738,7 +8738,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="body">The token to invalidate</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> XpackSecurityInvalidateToken<T>(PostData<object> body, Func<XpackSecurityInvalidateTokenRequestParameters, XpackSecurityInvalidateTokenRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> XpackSecurityInvalidateToken<T>(PostData<object> body, Func<InvalidateUserAccessTokenRequestParameters, InvalidateUserAccessTokenRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a DELETE on /_xpack/security/oauth2/token
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -8751,7 +8751,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="body">The token to invalidate</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> XpackSecurityInvalidateTokenAsync<T>(PostData<object> body, Func<XpackSecurityInvalidateTokenRequestParameters, XpackSecurityInvalidateTokenRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> XpackSecurityInvalidateTokenAsync<T>(PostData<object> body, Func<InvalidateUserAccessTokenRequestParameters, InvalidateUserAccessTokenRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a PUT on /_xpack/security/role/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

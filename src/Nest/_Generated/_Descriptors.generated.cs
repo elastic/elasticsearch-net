@@ -6997,26 +6997,23 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for XpackSecurityGetToken <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-get-token</pre></summary>
-	public partial class XpackSecurityGetTokenDescriptor  : RequestDescriptorBase<XpackSecurityGetTokenDescriptor,XpackSecurityGetTokenRequestParameters, IXpackSecurityGetTokenRequest>, IXpackSecurityGetTokenRequest
+	public partial class GetUserAccessTokenDescriptor  : RequestDescriptorBase<GetUserAccessTokenDescriptor,GetUserAccessTokenRequestParameters, IGetUserAccessTokenRequest>, IGetUserAccessTokenRequest
 	{ 
 			
 		///<summary>Pretty format the returned JSON response.</summary>
-		public XpackSecurityGetTokenDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+		public GetUserAccessTokenDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
 		///<summary>Return human readable values for statistics.</summary>
-		public XpackSecurityGetTokenDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+		public GetUserAccessTokenDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
 
 		///<summary>Include the stack trace of returned errors.</summary>
-		public XpackSecurityGetTokenDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+		public GetUserAccessTokenDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XpackSecurityGetTokenDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetUserAccessTokenDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public XpackSecurityGetTokenDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public GetUserAccessTokenDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -7050,26 +7047,23 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for XpackSecurityInvalidateToken <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-invalidate-token</pre></summary>
-	public partial class XpackSecurityInvalidateTokenDescriptor  : RequestDescriptorBase<XpackSecurityInvalidateTokenDescriptor,XpackSecurityInvalidateTokenRequestParameters, IXpackSecurityInvalidateTokenRequest>, IXpackSecurityInvalidateTokenRequest
+	public partial class InvalidateUserAccessTokenDescriptor  : RequestDescriptorBase<InvalidateUserAccessTokenDescriptor,InvalidateUserAccessTokenRequestParameters, IInvalidateUserAccessTokenRequest>, IInvalidateUserAccessTokenRequest
 	{ 
 			
 		///<summary>Pretty format the returned JSON response.</summary>
-		public XpackSecurityInvalidateTokenDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+		public InvalidateUserAccessTokenDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
 		///<summary>Return human readable values for statistics.</summary>
-		public XpackSecurityInvalidateTokenDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+		public InvalidateUserAccessTokenDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
 
 		///<summary>Include the stack trace of returned errors.</summary>
-		public XpackSecurityInvalidateTokenDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+		public InvalidateUserAccessTokenDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XpackSecurityInvalidateTokenDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public InvalidateUserAccessTokenDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public XpackSecurityInvalidateTokenDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public InvalidateUserAccessTokenDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

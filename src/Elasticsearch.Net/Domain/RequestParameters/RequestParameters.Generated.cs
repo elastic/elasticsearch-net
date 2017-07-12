@@ -7202,28 +7202,28 @@ namespace Elasticsearch.Net
 	///https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-get-token
 	///</pre>
 	///</summary>
-	public class XpackSecurityGetTokenRequestParameters : FluentRequestParameters<XpackSecurityGetTokenRequestParameters> 
+	public class GetUserAccessTokenRequestParameters : FluentRequestParameters<GetUserAccessTokenRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>Pretty format the returned JSON response.</summary>
-		public XpackSecurityGetTokenRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		public GetUserAccessTokenRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
 		
 		
 		///<summary>Return human readable values for statistics.</summary>
-		public XpackSecurityGetTokenRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		public GetUserAccessTokenRequestParameters Human(bool human) => this.AddQueryString("human", human);
 		
 		
 		///<summary>Include the stack trace of returned errors.</summary>
-		public XpackSecurityGetTokenRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		public GetUserAccessTokenRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
 		
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XpackSecurityGetTokenRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public GetUserAccessTokenRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public XpackSecurityGetTokenRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		public GetUserAccessTokenRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -7262,28 +7262,28 @@ namespace Elasticsearch.Net
 	///https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-invalidate-token
 	///</pre>
 	///</summary>
-	public class XpackSecurityInvalidateTokenRequestParameters : FluentRequestParameters<XpackSecurityInvalidateTokenRequestParameters> 
+	public class InvalidateUserAccessTokenRequestParameters : FluentRequestParameters<InvalidateUserAccessTokenRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
 		///<summary>Pretty format the returned JSON response.</summary>
-		public XpackSecurityInvalidateTokenRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		public InvalidateUserAccessTokenRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
 		
 		
 		///<summary>Return human readable values for statistics.</summary>
-		public XpackSecurityInvalidateTokenRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		public InvalidateUserAccessTokenRequestParameters Human(bool human) => this.AddQueryString("human", human);
 		
 		
 		///<summary>Include the stack trace of returned errors.</summary>
-		public XpackSecurityInvalidateTokenRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		public InvalidateUserAccessTokenRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
 		
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XpackSecurityInvalidateTokenRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public InvalidateUserAccessTokenRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public XpackSecurityInvalidateTokenRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		public InvalidateUserAccessTokenRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	

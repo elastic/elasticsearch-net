@@ -3796,7 +3796,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityGetRoleMapping", p, new [] { GET }, "/_xpack/security/role_mapping/{name}", "/_xpack/security/role_mapping");
 		}
 		
-		internal ElasticsearchResponse<T> XpackSecurityGetTokenDispatch<T>(IRequest<XpackSecurityGetTokenRequestParameters> p , PostData<object> body) where T : class
+		internal ElasticsearchResponse<T> XpackSecurityGetTokenDispatch<T>(IRequest<GetUserAccessTokenRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3807,7 +3807,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityGetToken", p, new [] { POST }, "/_xpack/security/oauth2/token");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> XpackSecurityGetTokenDispatchAsync<T>(IRequest<XpackSecurityGetTokenRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		internal Task<ElasticsearchResponse<T>> XpackSecurityGetTokenDispatchAsync<T>(IRequest<GetUserAccessTokenRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3842,7 +3842,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityGetUser", p, new [] { GET }, "/_xpack/security/user/{username}", "/_xpack/security/user");
 		}
 		
-		internal ElasticsearchResponse<T> XpackSecurityInvalidateTokenDispatch<T>(IRequest<XpackSecurityInvalidateTokenRequestParameters> p , PostData<object> body) where T : class
+		internal ElasticsearchResponse<T> XpackSecurityInvalidateTokenDispatch<T>(IRequest<InvalidateUserAccessTokenRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3853,7 +3853,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityInvalidateToken", p, new [] { DELETE }, "/_xpack/security/oauth2/token");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> XpackSecurityInvalidateTokenDispatchAsync<T>(IRequest<XpackSecurityInvalidateTokenRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		internal Task<ElasticsearchResponse<T>> XpackSecurityInvalidateTokenDispatchAsync<T>(IRequest<InvalidateUserAccessTokenRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
 		{
 			switch(p.HttpMethod)
 			{
