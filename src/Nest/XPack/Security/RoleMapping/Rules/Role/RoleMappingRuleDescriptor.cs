@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-	public class RoleMappingRuleDescriptor
+	public class RoleMappingRuleDescriptor : DescriptorBase<RoleMappingRuleDescriptor, IDescriptor>, IDescriptor
 	{
 		public RoleMappingRuleBase DistinguishedName(string name) => new DistinguishedNameRule(name);
 
@@ -25,5 +25,6 @@ namespace Nest
 
 		public RoleMappingRuleBase Except(Func<RoleMappingRuleDescriptor, RoleMappingRuleBase> selector) =>
 			new ExceptRoleMappingRole(selector?.Invoke(new RoleMappingRuleDescriptor()));
+
 	}
 }

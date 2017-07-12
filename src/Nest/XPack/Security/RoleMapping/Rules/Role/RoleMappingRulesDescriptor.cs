@@ -3,9 +3,12 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-	public class RoleMappingRulesDescriptor : IPromise<List<RoleMappingRuleBase>>
+	public class RoleMappingRulesDescriptor :
+		DescriptorPromiseBase<RoleMappingRulesDescriptor, List<RoleMappingRuleBase>>, IPromise<List<RoleMappingRuleBase>>
 	{
 		List<RoleMappingRuleBase> IPromise<List<RoleMappingRuleBase>>.Value { get; } = new List<RoleMappingRuleBase>();
+
+		public RoleMappingRulesDescriptor() : base(new List<RoleMappingRuleBase>()) { }
 
 		private IPromise<List<RoleMappingRuleBase>> Self => this;
 
