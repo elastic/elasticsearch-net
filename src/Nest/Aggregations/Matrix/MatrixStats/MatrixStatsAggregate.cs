@@ -40,6 +40,10 @@ namespace Nest
 	[JsonObject]
 	public class MatrixStatsAggregate : MatrixAggregateBase
 	{
+		//TODO non nullable in 6.0
+		[JsonProperty("fields")]
+		public long? DocCount { get; set; }
+
 		[JsonProperty("fields")]
 		public List<MatrixStatsField> Fields { get; set; }
 	}

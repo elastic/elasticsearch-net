@@ -206,10 +206,10 @@ namespace Nest
 			return meta;
 		}
 
-		private IAggregate GetMatrixStatsAggregate(JsonReader reader, JsonSerializer serializer)
+		private IAggregate GetMatrixStatsAggregate(JsonReader reader, JsonSerializer serializer, long? docCount = null)
 		{
 			reader.Read();
-			var matrixStats = new MatrixStatsAggregate();
+			var matrixStats = new MatrixStatsAggregate {DocCount = docCount};
 			var array = JArray.Load(reader);
 			matrixStats.Fields = array.ToObject<List<MatrixStatsField>>();
 			return matrixStats;
@@ -310,6 +310,9 @@ namespace Nest
 				reader.Read();
 
 			}
+			if ((string)reader.Value == Parser.Fields)
+				return GetMatrixStatsAggregate(reader, serializer, docCount);
+
 			if (reader.TokenType == JsonToken.PropertyName && (string) reader.Value == Parser.Buckets)
 			{
 				var b = this.GetMultiBucketAggregate(reader, serializer) as BucketAggregate;
