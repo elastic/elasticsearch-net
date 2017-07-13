@@ -69,6 +69,8 @@ namespace Tests.Aggregations.Bucket.Sampler
 			sample.Should().NotBeNull();
 			var sigTags = sample.SignificantTerms("significant_names");
 			sigTags.Should().NotBeNull();
+			sigTags.BgCount.Should().BeGreaterThan(0);
+			sigTags.DocCount.Should().BeGreaterThan(0);
 		}
 	}
 }

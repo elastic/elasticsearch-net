@@ -36,5 +36,6 @@ namespace Nest
 		public long? SumOtherDocCount { get; set; }
 		public IReadOnlyDictionary<string, object> Meta { get; set; } = EmptyReadOnly<string, object>.Dictionary;
 		public long DocCount { get; set; }
+		public long? BgCount { get; set; }
 	}
 }

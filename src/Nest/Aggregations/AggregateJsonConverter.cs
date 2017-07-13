@@ -33,6 +33,7 @@ namespace Nest
 			public const string DocCountErrorUpperBound = "doc_count_error_upper_bound";
 			public const string Count = "count";
 			public const string DocCount = "doc_count";
+			public const string BgCount = "bg_count";
 			public const string Bounds = "bounds";
 			public const string Hits = "hits";
 			public const string Location = "location";
@@ -301,11 +302,20 @@ namespace Nest
 			var docCount = (reader.Value as long?).GetValueOrDefault(0);
 			var bucket = new SingleBucketAggregate {DocCount = docCount};
 			reader.Read();
+			long? bgCount = null;
+			if ((string)reader.Value == Parser.BgCount)
+			{
+				reader.Read();
+				bgCount = (reader.Value as long?).GetValueOrDefault(0);
+				reader.Read();
+
+			}
 			if (reader.TokenType == JsonToken.PropertyName && (string) reader.Value == Parser.Buckets)
 			{
 				var b = this.GetMultiBucketAggregate(reader, serializer) as BucketAggregate;
 				return new BucketAggregate
 				{
+					BgCount = bgCount,
 					DocCount = docCount,
 					Items = b.Items
 				};
