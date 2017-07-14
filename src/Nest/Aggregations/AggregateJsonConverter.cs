@@ -234,6 +234,12 @@ namespace Nest
 			reader.Read();
 			var geoCentroid = new GeoCentroidAggregate {Location = serializer.Deserialize<GeoLocation>(reader)};
 			reader.Read();
+			if (reader.TokenType == JsonToken.PropertyName && (string) reader.Value == Parser.Count)
+			{
+				reader.Read();
+				geoCentroid.Count = (long) reader.Value;
+				reader.Read();
+			}
 			return geoCentroid;
 		}
 
