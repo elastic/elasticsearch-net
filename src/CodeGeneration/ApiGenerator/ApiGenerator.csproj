@@ -6,7 +6,6 @@
     <VersionSuffix>alpha</VersionSuffix>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Nest\Nest.csproj" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
     <PackageReference Include="RazorMachine" Version="2.6.1" />
     <!-- TODO the following packages prevent us to jump to netcoreapp1.0 -->
@@ -17,4 +16,5 @@
     <Folder Include="RestSpecification\XPack\Info" />
     <Folder Include="RestSpecification\XPack\MachineLearning" />
   </ItemGroup>
+  <Import Project="..\..\outputpath.props" />
 </Project>

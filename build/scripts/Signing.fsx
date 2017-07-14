@@ -42,7 +42,7 @@ module StrongName =
         for p in DotNetProject.AllPublishable do
             for f in DotNetFramework.All do 
                 let name = p.Name
-                let folder = Paths.IncrementalOutputFolder p f
+                let folder = Paths.ProjectOutputFolder p f
                 let dll = sprintf "%s/%s.dll" folder name
                 match fileExists dll with
                 | true -> validate dll name 
