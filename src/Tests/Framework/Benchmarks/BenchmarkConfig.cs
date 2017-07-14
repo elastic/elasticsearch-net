@@ -1,26 +1,24 @@
+using System;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Environments;
 using BenchmarkDotNet.Exporters;
+using BenchmarkDotNet.Exporters.Json;
 using BenchmarkDotNet.Jobs;
 
 namespace Tests.Framework.Benchmarks
 {
-	public class BenchmarkConfig : ManualConfig
+	public class BenchmarkConfigAttribute : Attribute, IConfigSource
 	{
-		public BenchmarkConfig()
-		{
-			Add(AsciiDocExporter.Default);
-		}
-	}
+		public IConfig Config { get; }
 
-	public class FastRunConfig : ManualConfig
-	{
-		public FastRunConfig()
+		public BenchmarkConfigAttribute(int runCount = 1)
 		{
-			Add(Job.Dry.With(Runtime.Core).With(Jit.RyuJit));
-			Add(Job.Dry.With(Runtime.Clr).With(Jit.RyuJit));
-			Add(Job.Dry.With(Runtime.Clr).With(Jit.LegacyJit));
-			Add(AsciiDocExporter.Default);
+			var jobs = new[] {
+				Job.Dry.With(Runtime.Core).With(Jit.RyuJit).WithTargetCount(runCount),
+				Job.Dry.With(Runtime.Clr).With(Jit.RyuJit).WithTargetCount(runCount),
+				Job.Dry.With(Runtime.Clr).With(Jit.LegacyJit).WithTargetCount(runCount)
+			};
+			Config = ManualConfig.CreateEmpty().With(jobs).With(JsonExporter.Brief);
 		}
 	}
 }

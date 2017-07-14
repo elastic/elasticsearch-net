@@ -144,7 +144,6 @@ module Profiler =
                     if createIndex.IsValid = false then
                         raise (Exception("Unable to create index into Elasticsearch"))
 
-
                 let indexRequest = new IndexRequest<Report>(indexName, typeName)
                 indexRequest.Document <- reportDoc
 

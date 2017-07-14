@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using BenchmarkDotNet.Attributes;
 using Nest;
 using Tests.Framework.Benchmarks;
@@ -6,8 +6,7 @@ using Tests.Framework.MockData;
 
 namespace Tests.ClientConcepts.HighLevel.Caching
 {
-	[BenchmarkConfig(100)]
-	public class FieldResolverBenchmarkTests
+	public class PropertyNameResolverBenchmarkTests
 	{
 		private FieldResolver _expressionResolver;
 		private FieldResolver _propertyResolver;
@@ -15,9 +14,9 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		private NoncachingFieldResolver _nonCachingExpressionResolver;
 		private NoncachingFieldResolver _nonCachingPropertyResolver;
 		private NoncachingFieldResolver _nonCachingStringResolver;
-		private static readonly Field StringField = "Name";
-		private static readonly Field PropertyField = typeof(Project).GetProperty(nameof(Project.Name));
-		private static readonly Field InferredField = Infer.Field<Project>(p => p.Name);
+		private static readonly PropertyName InferredPropertyName = Infer.Property<Project>(p => p.Name);
+		private static readonly PropertyName PropertyInfoPropertyName = typeof(Project).GetProperty(nameof(Project.Name));
+		private static readonly PropertyName StringPropertyName = "Name";
 
 		[Setup]
 		public void Setup()
@@ -31,39 +30,39 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		}
 
 		[Benchmark]
-		public string NonCachedFieldUsingExpression()
+		public string NonCachedPropertyUsingExpression()
 		{
-			return _nonCachingExpressionResolver.Resolve(InferredField);
+			return _nonCachingExpressionResolver.Resolve(InferredPropertyName);
 		}
 
 		[Benchmark]
-		public string CachedFieldUsingExpression()
+		public string CachedPropertyUsingExpression()
 		{
-			return _expressionResolver.Resolve(InferredField);
+			return _expressionResolver.Resolve(InferredPropertyName);
 		}
 
 		[Benchmark]
-		public string NonCachedFieldUsingPropertyInfo()
+		public string NonCachedPropertyUsingPropertyInfo()
 		{
-			return _nonCachingPropertyResolver.Resolve(PropertyField);
+			return _nonCachingPropertyResolver.Resolve(PropertyInfoPropertyName);
 		}
 
 		[Benchmark]
-		public string CachedFieldUsingPropertyInfo()
+		public string CachedPropertyUsingPropertyInfo()
 		{
-			return _propertyResolver.Resolve(PropertyField);
+			return _propertyResolver.Resolve(PropertyInfoPropertyName);
 		}
 
 		[Benchmark(Baseline = true)]
-		public string NonCachedFieldUsingString()
+		public string NonCachedPropertyUsingString()
 		{
-			return _nonCachingStringResolver.Resolve(StringField);
+			return _nonCachingStringResolver.Resolve(StringPropertyName);
 		}
 
 		[Benchmark]
-		public string CachedFieldUsingString()
+		public string CachedPropertyUsingString()
 		{
-			return _stringResolver.Resolve(StringField);
+			return _stringResolver.Resolve(StringPropertyName);
 		}
 	}
 }

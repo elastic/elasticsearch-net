@@ -62,6 +62,11 @@ module Commandline =
         match filteredArgs with
         | _ :: tail -> target :: tail
         | [] -> [target]
+    
+    let private (|IsUrl|_|) (candidate:string) =
+        match Uri.TryCreate(candidate, UriKind.RelativeOrAbsolute) with
+        | true, _ -> Some candidate
+        | _ -> None
 
     let parse () =
         setEnvironVar "FAKEBUILD" "1"
@@ -71,6 +76,9 @@ module Commandline =
         | ["release"; version] -> setBuildParam "version" version
 
         | ["test"; testFilter] -> setBuildParam "testfilter" testFilter
+
+        | ["benchmark"; IsUrl elasticsearch] ->
+            setBuildParam "elasticsearch" elasticsearch
 
         | ["profile"; esVersions] -> 
             setBuildParam "esversions" esVersions
