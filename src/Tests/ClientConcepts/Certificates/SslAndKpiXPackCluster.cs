@@ -31,22 +31,6 @@ namespace Tests.ClientConcepts.Certificates
 			"xpack.security.http.ssl.enabled=true",
 		};
 
-//		private static readonly object _lock = new object();
-//		private static int _port = 9200;
-//		private int? _desiredPort;
-//		public override int DesiredPort
-//		{
-//			get
-//			{
-//				lock (_lock)
-//				{
-//                    if (!this._desiredPort.HasValue)
-//                        this._desiredPort = ++_port;
-//                    return this._desiredPort.Value;
-//				}
-//			}
-//		}
-
 		public override ConnectionSettings ClusterConnectionSettings(ConnectionSettings s) =>
 			this.ConnectionSettings(Authenticate(s));
 
