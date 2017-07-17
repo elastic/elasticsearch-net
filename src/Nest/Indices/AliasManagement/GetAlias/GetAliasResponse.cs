@@ -13,8 +13,9 @@ namespace Nest
 	{
 		IReadOnlyDictionary<string, IReadOnlyList<AliasDefinition>> Indices { get; }
 		/// <summary>
-		/// Starting from elasticsearch 5.5 if only some indices are not found an additonal error message will be returned.
+		/// An additional error message if an error occurs.
 		/// </summary>
+		/// <remarks>Applies to Elasticsearch 5.5.0+</remarks>
 		string Error { get; }
 		int? StatusCode { get; }
 	}
@@ -24,7 +25,7 @@ namespace Nest
 		public IReadOnlyDictionary<string, IReadOnlyList<AliasDefinition>> Indices { get; internal set; } = EmptyReadOnly<string, IReadOnlyList<AliasDefinition>>.Dictionary;
 
 
-		public override bool IsValid => this.Indices.Count > 0 ? true : false;
+		public override bool IsValid => this.Indices.Count > 0;
 		public string Error { get; internal set; }
 		public int? StatusCode { get; internal set; }
 	}
