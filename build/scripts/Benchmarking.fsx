@@ -25,6 +25,10 @@ open Git.Branches
 
 module Benchmarker =
 
+    let pipelineName = "benchmark-pipeline"
+    let indexName = IndexName.op_Implicit("benchmark-reports")
+    let typeName = TypeName.op_Implicit("report")
+
     type ProcessorName(isValueCreated:bool, value:string) = 
         member val IsValueCreated=isValueCreated with get, set
         member val Value=value with get, set
@@ -123,7 +127,7 @@ module Benchmarker =
             DotNetCli.RunCommand(fun p ->
                 { p with
                     WorkingDir = testsProjectDirectory
-                }) "run -f net46 -c Release Benchmark"
+                }) "run -f net46 -c Release -- Benchmark --namespace Tests"
         finally
             let benchmarkOutputFiles =
                 let output = combinePaths testsProjectDirectory "BenchmarkDotNet.Artifacts"
@@ -135,13 +139,15 @@ module Benchmarker =
 
     let IndexResult (client:ElasticClient, file:string, date:DateTime, commit:string, indexName, typeName) =
 
+        trace ("Indexing report " + file + " into Elasticsearch")
+
         let document = JsonConvert.DeserializeObject<Report>(File.ReadAllText(file))
         document.Date <- date
         document.Commit <- commit
 
         let indexRequest = new IndexRequest<Report>(indexName, typeName)
         indexRequest.Document <- document
-        indexRequest.Pipeline <- "benchmark-pipeline"
+        indexRequest.Pipeline <- pipelineName
 
         let indexResponse = client.Index(indexRequest)
 
@@ -162,8 +168,6 @@ module Benchmarker =
             let uri = new Uri(url)
             let client = new ElasticClient(uri)
 
-            let indexName = IndexName.op_Implicit("reports")
-            let typeName = TypeName.op_Implicit("report")
             let indexExists = client.IndexExists(Indices.op_Implicit(indexName)).Exists
 
             if indexExists = false then
@@ -183,18 +187,15 @@ module Benchmarker =
                 if createIndex.IsValid = false then
                     raise (Exception("Unable to create index into Elasticsearch"))
 
-            //let pipelineExists = client.GetPipeline(new GetPipelineRequest(Id.op_Implicit("benchmark-pipeline")))
-
-            //if pipelineExists.IsValid = false then
-            let forEachProcessor = new ForeachProcessor()
             let processor = new GrokProcessor();
             processor.Field <- new Field("_ingest._value.displayInfo")
             processor.Patterns <- ["%{WORD:_ingest._value.class}.%{WORD:_ingest._value.method}: Job-%{WORD:_ingest._value.jobName}\\(Jit=%{WORD:_ingest._value.jit}, Runtime=%{WORD:_ingest._value.clr}, LaunchCount=%{NUMBER:_ingest._value.launchCount}, RunStrategy=%{WORD:_ingest._value.runStrategy}, TargetCount=%{NUMBER:_ingest._value.targetCount}, UnrollFactor=%{NUMBER:_ingest._value.unrollFactor}, WarmupCount=%{NUMBER:_ingest._value.warmupCount}\\)"]
-
+            
+            let forEachProcessor = new ForeachProcessor()
             forEachProcessor.Field <- new Field("benchmarks")
             forEachProcessor.Processor <- processor
 
-            let request = new PutPipelineRequest(Id.op_Implicit("benchmark-pipeline"))
+            let request = new PutPipelineRequest(Id.op_Implicit(pipelineName))
             request.Description <- "Grok benchmark settings"
             request.Processors <- [forEachProcessor]
 

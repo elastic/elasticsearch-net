@@ -80,8 +80,12 @@ module Commandline =
         | ["benchmark"; IsUrl elasticsearch] ->
             setBuildParam "elasticsearch" elasticsearch
 
+        | ["profile"; IsUrl elasticsearch] ->
+            setBuildParam "elasticsearch" elasticsearch
+
         | ["profile"; esVersions] -> 
             setBuildParam "esversions" esVersions
+
         | ["profile"; esVersions; testFilter] ->
             setBuildParam "esversions" esVersions
             setBuildParam "testfilter" testFilter        

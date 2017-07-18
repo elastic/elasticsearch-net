@@ -32,6 +32,9 @@ open Tooling
 
 module Profiler =
 
+    let indexName = IndexName.op_Implicit("profiling-reports")
+    let typeName = TypeName.op_Implicit("report")
+
     type Profile = XmlProvider<"../../build/profiling/profile-example.xml">
 
     type Function(id:string, fqn:string, totalTime:int, ownTime:int, calls:int, instances:int) =
@@ -123,8 +126,6 @@ module Profiler =
 
                 let reportDoc = new Report(report.Name, report.Date, report.Commit, functions)
 
-                let indexName = IndexName.op_Implicit("reports")
-                let typeName = TypeName.op_Implicit("report")
                 let indexExists = client.IndexExists(Indices.op_Implicit(indexName)).Exists
 
                 if indexExists = false then
