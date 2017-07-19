@@ -127,7 +127,7 @@ module Benchmarker =
             DotNetCli.RunCommand(fun p ->
                 { p with
                     WorkingDir = testsProjectDirectory
-                }) "run -f net46 -c Release -- Benchmark --namespace Tests"
+                }) "run -f net46 -c Release Benchmark non-interactive"
         finally
             let benchmarkOutputFiles =
                 let output = combinePaths testsProjectDirectory "BenchmarkDotNet.Artifacts"
@@ -189,7 +189,7 @@ module Benchmarker =
 
             let processor = new GrokProcessor();
             processor.Field <- new Field("_ingest._value.displayInfo")
-            processor.Patterns <- ["%{WORD:_ingest._value.class}.%{WORD:_ingest._value.method}: Job-%{WORD:_ingest._value.jobName}\\(Jit=%{WORD:_ingest._value.jit}, Runtime=%{WORD:_ingest._value.clr}, LaunchCount=%{NUMBER:_ingest._value.launchCount}, RunStrategy=%{WORD:_ingest._value.runStrategy}, TargetCount=%{NUMBER:_ingest._value.targetCount}, UnrollFactor=%{NUMBER:_ingest._value.unrollFactor}, WarmupCount=%{NUMBER:_ingest._value.warmupCount}\\)"]
+            processor.Patterns <- ["%{WORD:_ingest._value.class}.%{DATA:_ingest._value.method}: Job-%{WORD:_ingest._value.jobName}\\(Jit=%{WORD:_ingest._value.jit}, Runtime=%{WORD:_ingest._value.clr}, LaunchCount=%{NUMBER:_ingest._value.launchCount}, RunStrategy=%{WORD:_ingest._value.runStrategy}, TargetCount=%{NUMBER:_ingest._value.targetCount}, UnrollFactor=%{NUMBER:_ingest._value.unrollFactor}, WarmupCount=%{NUMBER:_ingest._value.warmupCount}\\)"]
             
             let forEachProcessor = new ForeachProcessor()
             forEachProcessor.Field <- new Field("benchmarks")

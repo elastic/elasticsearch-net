@@ -6,6 +6,7 @@ using Tests.Framework.MockData;
 
 namespace Tests.ClientConcepts.HighLevel.Caching
 {
+	[BenchmarkConfig(100)]
 	public class PropertyNameResolverBenchmarkTests
 	{
 		private FieldResolver _expressionResolver;

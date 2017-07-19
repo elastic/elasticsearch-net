@@ -90,6 +90,18 @@ namespace Tests
 			}
 			else if (args[0].Equals("Benchmark", StringComparison.OrdinalIgnoreCase))
 			{
+				Console.WriteLine("Running Benchmarking.");
+				if (args[1].Equals("non-interactive", StringComparison.OrdinalIgnoreCase))
+				{
+					Console.WriteLine("Running as Non-Interactive.");
+					foreach (var benchmarkType in GetBenchmarkTypes())
+					{
+						BenchmarkRunner.Run(benchmarkType);
+					}
+					return;
+				}
+
+				Console.WriteLine("Running interactive.");
 				var benchmarkSwitcher = new BenchmarkSwitcher(GetBenchmarkTypes());
 				benchmarkSwitcher.Run(arguments);
 			}

@@ -18,6 +18,7 @@ using System.Buffers;
 
 namespace Tests.Document.Multiple.Bulk
 {
+	[BenchmarkConfig]
 	public class BulkDeserializationBenchmarkTests
 	{
 		private static readonly IElasticClient Client = TestClient.GetInMemoryClient();
