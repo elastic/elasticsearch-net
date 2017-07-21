@@ -91,7 +91,7 @@ namespace Tests
 			else if (args[0].Equals("Benchmark", StringComparison.OrdinalIgnoreCase))
 			{
 				Console.WriteLine("Running Benchmarking.");
-				if (args[1].Equals("non-interactive", StringComparison.OrdinalIgnoreCase))
+				if (args.Count() > 1 && args[1].Equals("non-interactive", StringComparison.OrdinalIgnoreCase))
 				{
 					Console.WriteLine("Running as Non-Interactive.");
 					foreach (var benchmarkType in GetBenchmarkTypes())

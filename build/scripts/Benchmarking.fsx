@@ -28,15 +28,18 @@ module Benchmarker =
     let pipelineName = "benchmark-pipeline"
     let indexName = IndexName.op_Implicit("benchmark-reports")
     let typeName = TypeName.op_Implicit("report")
+    
+    type Memory(gen0Collections:int, gen1Collections: int, gen2Collections: int, totalOperations:int64, bytesAllocatedPerOperation:int64) =
+        member val Gen0Collections=gen0Collections with get, set
+        member val Gen1Collections=gen1Collections with get, set
+        member val Gen2Collections=gen2Collections with get, set
+        member val TotalOperations=totalOperations with get, set
+        member val BytesAllocatedPerOperation=bytesAllocatedPerOperation with get, set
 
-    type ProcessorName(isValueCreated:bool, value:string) = 
-        member val IsValueCreated=isValueCreated with get, set
-        member val Value=value with get, set
-
-    type ChronometerFrequency(hertz:int) =
+    type ChronometerFrequency(hertz:double) =
         member val Hertz=hertz with get, set
-
-    type HostEnvironmentInfo(benchmarkDotNetCaption:string, benchmarkDotNetVersion:string, osVersion: string, processorName:ProcessorName,
+   
+    type HostEnvironmentInfo(benchmarkDotNetCaption:string, benchmarkDotNetVersion:string, osVersion: string, processorName:string,
                              processorCount:int, runtimeVersion:string, architecture:string, hasAttachedDebugger:bool, hasRyuJit:bool,
                              configuration:string, jitModules:string, dotnetCliVersion:string, chronometerFrequency:ChronometerFrequency,
                              hardwareTimerKind:string) =
@@ -55,9 +58,10 @@ module Benchmarker =
         member val ChronometerFrequency=chronometerFrequency with get, set
         member val HardwareTimerKind=hardwareTimerKind with get, set
 
-    type ConfidenceInterval(mean: double, error:double, level:int, margin:double, lower:double, upper:double) =
+    type ConfidenceInterval(n:int, mean: double, standardError:double, level:int, margin:double, lower:double, upper:double) =
+        member val N=n with get, set
         member val Mean=mean with get, set
-        member val Error=error with get, set
+        member val StandardError=standardError with get, set
         member val Level=level with get, set
         member val Margin=margin with get, set
         member val Lower=lower with get, set
@@ -96,7 +100,8 @@ module Benchmarker =
         member val ConfidenceInterval=confidenceInterval with get, set
         member val Percentiles=percentiles with get, set
 
-    type Benchmark(displayInfo:string, namespyce:string, tipe:string, method:string, methodTitle:string, parameters:string, statistics:Statistics) = 
+    type Benchmark(displayInfo:string, namespyce:string, tipe:string, method:string, methodTitle:string, parameters:string,
+                   statistics:Statistics, memory:Memory) = 
         member val DisplayInfo=displayInfo with get, set
         member val Namespace=namespyce with get, set
         member val Type=tipe with get, set
@@ -104,9 +109,11 @@ module Benchmarker =
         member val MethodTitle=methodTitle with get, set
         member val Parameters=parameters with get, set
         member val Statistics=statistics with get, set
+        member val Memory=memory with get, set
 
-    type Report(title: string, date:DateTime, commit:string, host:HostEnvironmentInfo, benchmarks:Benchmark list) =
+    type Report(title: string, totalTime:TimeSpan, date:DateTime, commit:string, host:HostEnvironmentInfo, benchmarks:Benchmark list) =
         member val Title = title with get, set
+        member val TotalTime = totalTime with get, set
         member val Date = date with get, set
         member val Commit = commit with get, set
         member val HostEnvironmentInfo = host with get, set
@@ -162,7 +169,7 @@ module Benchmarker =
             let commit = getSHA1 "." "HEAD"
 
             let benchmarkJsonFiles =
-                Directory.EnumerateFiles(benchmarkOutput.FullName, "*-brief.json", SearchOption.AllDirectories)
+                Directory.EnumerateFiles(benchmarkOutput.FullName, "*-custom.json", SearchOption.AllDirectories)
                 |> Seq.toList
 
             let uri = new Uri(url)
