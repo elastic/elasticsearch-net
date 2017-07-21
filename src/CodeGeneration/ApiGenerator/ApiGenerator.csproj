@@ -14,6 +14,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="RestSpecification\XPack\Info" />
+    <Folder Include="RestSpecification\XPack\MachineLearning" />
   </ItemGroup>
   <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

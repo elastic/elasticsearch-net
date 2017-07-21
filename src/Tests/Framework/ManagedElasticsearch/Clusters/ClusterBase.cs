@@ -45,7 +45,7 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 			if (!this.SkipValidation)
 				this.TaskRunner.ValidateAfterStart(this.Node.Client);
 			if (this.NodeConfiguration.RunIntegrationTests && this.Node.Port != this.DesiredPort)
-				throw new Exception($"The cluster that was started runs on {this.Node.Port} but this cluster wants {this.DesiredPort}");
+				throw new Exception($"The cluster that was started of type {this.GetType().Name} runs on {this.Node.Port} but this cluster wants {this.DesiredPort}");
 			this.SeedNode();
 		}
 

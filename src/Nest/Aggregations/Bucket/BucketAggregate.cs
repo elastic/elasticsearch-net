@@ -36,5 +36,7 @@ namespace Nest
 		public long? SumOtherDocCount { get; set; }
 		public IReadOnlyDictionary<string, object> Meta { get; set; } = EmptyReadOnly<string, object>.Dictionary;
 		public long DocCount { get; set; }
+		//TODO non nullable in 6.0, introduced in 5.5
+		public long? BgCount { get; set; }
 	}
 }

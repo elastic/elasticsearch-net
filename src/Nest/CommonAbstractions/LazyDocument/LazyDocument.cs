@@ -18,7 +18,7 @@ namespace Nest
 		/// Creates an instance of <paramref name="objectType"/> from this
 		/// <see cref="ILazyDocument"/> instance
 		/// </summary>
-		/// <typeparam name="T">The type</typeparam>
+		/// <param name="objectType">The type</param>
 		object As(Type objectType);
 	}
 

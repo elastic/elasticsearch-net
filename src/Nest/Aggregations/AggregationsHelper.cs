@@ -112,6 +112,7 @@ namespace Nest
 				? null
 				: new SignificantTermsAggregate
 				{
+					BgCount = bucket.BgCount,
 					DocCount = bucket.DocCount,
 					Buckets = bucket.Items.OfType<SignificantTermsBucket>().ToList(),
 					Meta = bucket.Meta

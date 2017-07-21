@@ -33,6 +33,7 @@ namespace Nest
 			public const string DocCountErrorUpperBound = "doc_count_error_upper_bound";
 			public const string Count = "count";
 			public const string DocCount = "doc_count";
+			public const string BgCount = "bg_count";
 			public const string Bounds = "bounds";
 			public const string Hits = "hits";
 			public const string Location = "location";
@@ -205,10 +206,10 @@ namespace Nest
 			return meta;
 		}
 
-		private IAggregate GetMatrixStatsAggregate(JsonReader reader, JsonSerializer serializer)
+		private IAggregate GetMatrixStatsAggregate(JsonReader reader, JsonSerializer serializer, long? docCount = null)
 		{
 			reader.Read();
-			var matrixStats = new MatrixStatsAggregate();
+			var matrixStats = new MatrixStatsAggregate {DocCount = docCount};
 			var array = JArray.Load(reader);
 			matrixStats.Fields = array.ToObject<List<MatrixStatsField>>();
 			return matrixStats;
@@ -232,10 +233,13 @@ namespace Nest
 		{
 			reader.Read();
 			var geoCentroid = new GeoCentroidAggregate {Location = serializer.Deserialize<GeoLocation>(reader)};
-			reader.Read(); //count property
 			reader.Read();
-			geoCentroid.Count = (long)reader.Value;
-			reader.Read(); //trailing }
+			if (reader.TokenType == JsonToken.PropertyName && (string) reader.Value == Parser.Count)
+			{
+				reader.Read();
+				geoCentroid.Count = (long) reader.Value;
+				reader.Read();
+			}
 			return geoCentroid;
 		}
 
@@ -304,11 +308,23 @@ namespace Nest
 			var docCount = (reader.Value as long?).GetValueOrDefault(0);
 			var bucket = new SingleBucketAggregate {DocCount = docCount};
 			reader.Read();
+			long? bgCount = null;
+			if ((string)reader.Value == Parser.BgCount)
+			{
+				reader.Read();
+				bgCount = (reader.Value as long?).GetValueOrDefault(0);
+				reader.Read();
+
+			}
+			if ((string)reader.Value == Parser.Fields)
+				return GetMatrixStatsAggregate(reader, serializer, docCount);
+
 			if (reader.TokenType == JsonToken.PropertyName && (string) reader.Value == Parser.Buckets)
 			{
 				var b = this.GetMultiBucketAggregate(reader, serializer) as BucketAggregate;
 				return new BucketAggregate
 				{
+					BgCount = bgCount,
 					DocCount = docCount,
 					Items = b.Items
 				};
