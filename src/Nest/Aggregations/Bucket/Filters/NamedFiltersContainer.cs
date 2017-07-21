@@ -6,9 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<NamedFiltersContainer, string, IQueryContainer>))]
-	public interface INamedFiltersContainer : IIsADictionary<string, IQueryContainer>
-	{
-	}
+	public interface INamedFiltersContainer : IIsADictionary<string, IQueryContainer> { }
 
 	public class NamedFiltersContainer: IsADictionaryBase<string, IQueryContainer>, INamedFiltersContainer
 	{

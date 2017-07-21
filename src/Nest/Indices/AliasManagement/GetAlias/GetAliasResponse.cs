@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
@@ -9,11 +12,22 @@ namespace Nest
 	public interface IGetAliasResponse : IResponse
 	{
 		IReadOnlyDictionary<string, IReadOnlyList<AliasDefinition>> Indices { get; }
+		/// <summary>
+		/// An additional error message if an error occurs.
+		/// </summary>
+		/// <remarks>Applies to Elasticsearch 5.5.0+</remarks>
+		string Error { get; }
+		int? StatusCode { get; }
 	}
 
 	public class GetAliasResponse : ResponseBase, IGetAliasResponse
 	{
 		public IReadOnlyDictionary<string, IReadOnlyList<AliasDefinition>> Indices { get; internal set; } = EmptyReadOnly<string, IReadOnlyList<AliasDefinition>>.Dictionary;
+
+
+		public override bool IsValid => this.Indices.Count > 0;
+		public string Error { get; internal set; }
+		public int? StatusCode { get; internal set; }
 	}
 
 	internal class GetAliasResponseConverter : JsonConverter
@@ -27,7 +41,24 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var dict = serializer.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, AliasDefinition>>>>(reader);
+			var j = JObject.Load(reader);
+			var errorProperty =j.Property("error");
+			string error = null;
+			if (errorProperty?.Value?.Type == JTokenType.String)
+			{
+				error = errorProperty.Value.Value<string>();
+				errorProperty.Remove();
+			}
+			var statusProperty =j.Property("status");
+			int? statusCode = null;
+			if (statusProperty?.Value?.Type == JTokenType.Integer)
+			{
+				statusCode = statusProperty.Value.Value<int>();
+				statusProperty.Remove();
+			}
+
+			//Read the remaining properties as aliases
+			var dict = serializer.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, AliasDefinition>>>>(j.CreateReader());
 			var indices = new Dictionary<string, IReadOnlyList<AliasDefinition>>();
 
 			foreach (var kv in dict)
@@ -49,7 +80,7 @@ namespace Nest
 				indices.Add(indexDict, aliases);
 			}
 
-			return new GetAliasResponse { Indices = indices };
+			return new GetAliasResponse { Indices = indices, Error = error, StatusCode = statusCode};
 		}
 
 		public override bool CanConvert(Type objectType) => true;

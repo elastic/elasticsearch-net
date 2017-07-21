@@ -24,6 +24,7 @@ namespace Tests.ClientConcepts.Certificates
 	 * `ServicePointManager.ServerCertificateValidationCallback`. Most examples you will find doing this this will simply return `true` from the
 	 * validation callback and merrily whistle off into the sunset. **This is not advisable** as it allows *any* HTTPS traffic through in the
 	 * current `AppDomain` *without* any validation. Here's a concrete example:
+	 *
 	 */
 	public class WorkingWithCertificates
 	{
@@ -65,9 +66,7 @@ namespace Tests.ClientConcepts.Certificates
 		[IntegrationOnly]
 		public class DenyAllSslCertificatesApiTests : ConnectionErrorTestBase<DenyAllCertificatesCluster>
 		{
-			public DenyAllSslCertificatesApiTests(DenyAllCertificatesCluster cluster, EndpointUsage usage) : base(cluster, usage)
-			{
-			}
+			public DenyAllSslCertificatesApiTests(DenyAllCertificatesCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 			[I]
 			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));

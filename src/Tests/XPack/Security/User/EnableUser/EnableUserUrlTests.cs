@@ -9,11 +9,11 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Security.User.EnableUser
 {
-	class EnableUserUrlTests : IUrlTests
+	public class EnableUserUrlTests : IUrlTests
 	{
 		[U] public async Task Urls()
 		{
-			await PUT("/_xpack/security/user/ironman/_enable")
+			await PUT("/_xpack/security/user/ironman/_disable")
 				.Fluent(c => c.DisableUser("ironman"))
 				.Request(c => c.DisableUser(new DisableUserRequest("ironman")))
 				.FluentAsync(c => c.DisableUserAsync("ironman"))
