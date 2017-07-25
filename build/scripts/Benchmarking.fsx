@@ -27,7 +27,7 @@ module Benchmarker =
 
     let pipelineName = "benchmark-pipeline"
     let indexName = IndexName.op_Implicit("benchmark-reports")
-    let typeName = TypeName.op_Implicit("report")
+    let typeName = TypeName.op_Implicit("benchmarkreport")
     
     type Memory(gen0Collections:int, gen1Collections: int, gen2Collections: int, totalOperations:int64, bytesAllocatedPerOperation:int64) =
         member val Gen0Collections=gen0Collections with get, set
@@ -111,7 +111,7 @@ module Benchmarker =
         member val Statistics=statistics with get, set
         member val Memory=memory with get, set
 
-    type Report(title: string, totalTime:TimeSpan, date:DateTime, commit:string, host:HostEnvironmentInfo, benchmarks:Benchmark list) =
+    type BenchmarkReport(title: string, totalTime:TimeSpan, date:DateTime, commit:string, host:HostEnvironmentInfo, benchmarks:Benchmark list) =
         member val Title = title with get, set
         member val TotalTime = totalTime with get, set
         member val Date = date with get, set
@@ -152,13 +152,13 @@ module Benchmarker =
 
     let IndexResult (client:ElasticClient, file:string, date:DateTime, commit:string, indexName, typeName) =
 
-        trace ("Indexing report " + file + " into Elasticsearch")
+        trace (sprintf "Indexing report %s into Elasticsearch" file)
 
-        let document = JsonConvert.DeserializeObject<Report>(File.ReadAllText(file))
+        let document = JsonConvert.DeserializeObject<BenchmarkReport>(File.ReadAllText(file))
         document.Date <- date
         document.Commit <- commit
 
-        let indexRequest = new IndexRequest<Report>(indexName, typeName)
+        let indexRequest = new IndexRequest<BenchmarkReport>(indexName, typeName)
         indexRequest.Document <- document
         indexRequest.Pipeline <- pipelineName
 
@@ -169,7 +169,7 @@ module Benchmarker =
 
     let IndexResults (url, username, password) =
         if (String.IsNullOrEmpty url = false) then
-            trace "Indexing benchmark results into Elasticsearch"
+            trace "Indexing benchmark reports into Elasticsearch"
             
             let date = DateTime.UtcNow
             let commit = getSHA1 "." "HEAD"
@@ -185,26 +185,35 @@ module Benchmarker =
                 connectionSettings.BasicAuthentication(username, password) |> ignore
 
             let client = new ElasticClient(connectionSettings)
+            
+            let indexTemplateExists = client.IndexTemplateExists(Name.op_Implicit("benchmarks")).Exists
 
-            let indexExists = client.IndexExists(Indices.op_Implicit(indexName)).Exists
+            if indexTemplateExists |> not then
+                           
+                let typeMapping = new TypeMappingDescriptor<BenchmarkReport>()
+                typeMapping.AutoMap() |> ignore
+                typeMapping.Properties(fun p -> 
+                    p.Nested<Benchmark>(fun n ->
+                        n.AutoMap().Name(PropertyName.op_Implicit("benchmarks")) :> INestedProperty
+                    ) :> IPromise<IProperties>
+                ) |> ignore
 
-            if indexExists = false then
-                let createIndex = client.CreateIndex(indexName, fun c -> 
-                    c.Mappings(fun m -> 
-                            m.Map<Report>(fun mm ->
-                                mm.AutoMap()
-                                  .Properties(fun p -> 
-                                      p.Nested<Benchmark>(fun n ->
-                                          n.AutoMap().Name(PropertyName.op_Implicit("benchmarks")) :> INestedProperty
-                                      ) :> IPromise<IProperties>
-                                  ) :> ITypeMapping
-                            ) :> IPromise<IMappings>
-                        ) :> ICreateIndexRequest
-                    )
+                let mappings = new Mappings()
+                mappings.Add(typeName, typeMapping :> ITypeMapping)
+            
+                let indexSettings = new IndexSettings()
+                indexSettings.NumberOfShards <- Nullable 1
+                
+                let putIndexTemplateRequest = new PutIndexTemplateRequest(Name.op_Implicit("benchmarks"))
+                putIndexTemplateRequest.Template <- "benchmark-reports-*"
+                putIndexTemplateRequest.Mappings <- mappings
+                putIndexTemplateRequest.Settings <- indexSettings
 
-                if createIndex.IsValid = false then
-                    raise (Exception("Unable to create index into Elasticsearch"))
+                let putIndexTemplateResponse = client.PutIndexTemplate(putIndexTemplateRequest)
 
+                if putIndexTemplateResponse.IsValid = false then
+                    raise (Exception("Unable to create index template into Elasticsearch"))
+                    
             let processor = new GrokProcessor();
             processor.Field <- new Field("_ingest._value.displayInfo")
             processor.Patterns <- ["%{WORD:_ingest._value.class}.%{DATA:_ingest._value.method}: Job-%{WORD:_ingest._value.jobName}\\(Jit=%{WORD:_ingest._value.jit}, Runtime=%{WORD:_ingest._value.clr}, LaunchCount=%{NUMBER:_ingest._value.launchCount}, RunStrategy=%{WORD:_ingest._value.runStrategy}, TargetCount=%{NUMBER:_ingest._value.targetCount}, UnrollFactor=%{NUMBER:_ingest._value.unrollFactor}, WarmupCount=%{NUMBER:_ingest._value.warmupCount}\\)"]
@@ -213,15 +222,22 @@ module Benchmarker =
             forEachProcessor.Field <- new Field("benchmarks")
             forEachProcessor.Processor <- processor
 
+            let dateIndexProcessor = new DateIndexNameProcessor();
+            dateIndexProcessor.Field <- new Field("date")
+            dateIndexProcessor.IndexNamePrefix <- "benchmark-reports-"
+            dateIndexProcessor.DateRounding <- DateRounding.Month
+            dateIndexProcessor.DateFormats <- ["yyyy-MM-dd'T'HH:mm:ss.SSSSSSSZ"]
+
             let request = new PutPipelineRequest(Id.op_Implicit(pipelineName))
-            request.Description <- "Grok benchmark settings"
-            request.Processors <- [forEachProcessor]
+            request.Description <- "Benchmark settings pipeline"
+            request.Processors <- [dateIndexProcessor; forEachProcessor]
 
             let createPipeline = client.PutPipeline(request)
 
             if createPipeline.IsValid = false then
                 raise (Exception("Unable to create pipeline"))
                   
-            for file in benchmarkJsonFiles do IndexResult (client, file, date, commit, indexName, typeName)
+            for file in benchmarkJsonFiles
+                do IndexResult (client, file, date, commit, indexName, typeName)
 
-            trace "Indexed benchmark results into Elasticsearch"
+            trace "Indexed benchmark reports into Elasticsearch"
