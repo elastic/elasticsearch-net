@@ -79,6 +79,14 @@ module Commandline =
 
         | ["benchmark"; IsUrl elasticsearch] ->
             setBuildParam "elasticsearch" elasticsearch
+            setBuildParam "nonInteractive" "0"
+
+        | ["benchmark"; IsUrl elasticsearch; "non-interactive"] ->
+            setBuildParam "elasticsearch" elasticsearch
+            setBuildParam "nonInteractive" "1"
+            
+        | ["benchmark"; "non-interactive"] ->
+            setBuildParam "nonInteractive" "1"
 
         | ["profile"; IsUrl elasticsearch] ->
             setBuildParam "elasticsearch" elasticsearch

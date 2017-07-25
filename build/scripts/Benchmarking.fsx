@@ -123,7 +123,7 @@ module Benchmarker =
     let private benchmarkOutput = Path.GetFullPath(Paths.Output("benchmarks")) |> directoryInfo
     let private copyToOutput file = CopyFile benchmarkOutput.FullName file
 
-    let Run() =
+    let Run(runInteractive:bool) =
 
         ensureDirExists benchmarkOutput
 
@@ -131,10 +131,16 @@ module Benchmarker =
 
         // running benchmarks can timeout so clean up any generated benchmark files
         try
-            DotNetCli.RunCommand(fun p ->
-                { p with
-                    WorkingDir = testsProjectDirectory
-                }) "run -f net46 -c Release Benchmark non-interactive"
+            if runInteractive then
+                DotNetCli.RunCommand(fun p ->
+                    { p with
+                        WorkingDir = testsProjectDirectory
+                    }) "run -f net46 -c Release Benchmark"
+             else
+                DotNetCli.RunCommand(fun p ->
+                    { p with
+                        WorkingDir = testsProjectDirectory
+                    }) "run -f net46 -c Release Benchmark non-interactive"
         finally
             let benchmarkOutputFiles =
                 let output = combinePaths testsProjectDirectory "BenchmarkDotNet.Artifacts"

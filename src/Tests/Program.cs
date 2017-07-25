@@ -93,7 +93,7 @@ namespace Tests
 				Console.WriteLine("Running Benchmarking.");
 				if (args.Count() > 1 && args[1].Equals("non-interactive", StringComparison.OrdinalIgnoreCase))
 				{
-					Console.WriteLine("Running as Non-Interactive.");
+					Console.WriteLine("Running in Non-Interactive mode.");
 					foreach (var benchmarkType in GetBenchmarkTypes())
 					{
 						BenchmarkRunner.Run(benchmarkType);
@@ -101,7 +101,7 @@ namespace Tests
 					return;
 				}
 
-				Console.WriteLine("Running interactive.");
+				Console.WriteLine("Running in Interactive mode.");
 				var benchmarkSwitcher = new BenchmarkSwitcher(GetBenchmarkTypes());
 				benchmarkSwitcher.Run(arguments);
 			}
