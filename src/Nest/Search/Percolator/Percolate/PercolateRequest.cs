@@ -93,6 +93,9 @@ namespace Nest
 		public PercolateDescriptor<TDocument> Aggregations(Func<AggregationContainerDescriptor<TDocument>, IAggregationContainer> aggregationsSelector) =>
 			Assign(a => a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<TDocument>())?.Aggregations);
 
+		public PercolateDescriptor<TDocument> Aggregations(AggregationDictionary aggregations) =>
+			Assign(a => a.Aggregations = aggregations);
+
 		/// <summary>
 		/// Allow to highlight search results on one or more fields.
 		/// </summary>

@@ -95,13 +95,14 @@ namespace Tests.Aggregations
 			{
 				Aggregations = new AggregationDictionary
 				{
-					{ "name_of_child_agg", new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
+					{
+						"name_of_child_agg", new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
 						{
 							Aggregations = new AggregationDictionary
 							{
-								{ "average_per_child", new AverageAggregation("average_per_child", "confidenceFactor") },
-								{ "max_per_child", new MaxAggregation("max_per_child", "confidenceFactor") },
-								{ "min_per_child", new MinAggregation("min_per_child", "confidenceFactor") },
+								{"average_per_child", new AverageAggregation("average_per_child", "confidenceFactor")},
+								{"max_per_child", new MaxAggregation("max_per_child", "confidenceFactor")},
+								{"min_per_child", new MinAggregation("min_per_child", "confidenceFactor")},
 							}
 						}
 					}
@@ -140,6 +141,77 @@ namespace Tests.Aggregations
 		 */
 	}
 
+	public class AggregationDslMixedUsage : Usage
+	{
+		/**[float]
+		* === Mixed usage of object initializer and fluent
+		*
+		* Sometimes its useful to mix and match fluent and object initializer, the fluent Aggregations method therefor
+		* also accepts `AggregationDictionary` directly.
+		*/
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Aggregations(new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
+			{
+				Aggregations =
+					new AverageAggregation("average_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
+					&& new MaxAggregation("max_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
+					&& new MinAggregation("min_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
+			});
+	}
+
+	public class ReusingTheSameDescriptorWithBitwiseOperationsCombinatoryUsage : Usage
+	{
+		/**[float]
+		* === Binary operators off the same descriptor
+		*
+		* For dynamic aggregation building using the fluent syntax it can be useful to abstract to methods as much as possible.
+		* You can use the binary operator `&&` on the same descriptor to compose the graph. Each side of the
+		* binary operation can return null dynamically.
+		*/
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Aggregations(aggs => aggs
+				.Children<CommitActivity>("name_of_child_agg", child => child
+					.Aggregations(Combine)
+				)
+			);
+
+		protected IAggregationContainer Combine(AggregationContainerDescriptor<CommitActivity> aggs) => aggs
+			.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+			&& MaxPerChild(aggs)
+			&& MinPerChild(aggs)
+			&& null;
+
+		private static AggregationContainerDescriptor<CommitActivity> MinPerChild(AggregationContainerDescriptor<CommitActivity> aggs) =>
+			aggs.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor));
+
+		private static AggregationContainerDescriptor<CommitActivity> MaxPerChild(AggregationContainerDescriptor<CommitActivity> aggs) =>
+			aggs.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor));
+	}
+
+	public class OisInsideLambdaCombinatoryUsage : Usage
+	{
+		/**[float]
+		* === Returning a different AggregationContainer in fluent syntax
+		*
+		* All the fluent selector expects is an `IAggregationContainer` to be returned. You could abstract this to a
+		* method returning `AggregationContainer` which is free to use the object initializer syntax
+		* to compose that `AggregationContainer`.
+		*/
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Aggregations(aggs => aggs
+				.Children<CommitActivity>("name_of_child_agg", child => child
+					.Aggregations(childAggs => Combine())
+				)
+			);
+
+		protected AggregationContainer Combine() =>
+			new AverageAggregation("average_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
+			&& new MaxAggregation("max_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
+			&& new MinAggregation("min_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
+			&& null;
+
+	}
+
 	public class AdvancedAggregationDslUsage : Usage
 	{
 		/**[float]
@@ -153,18 +225,23 @@ namespace Tests.Aggregations
 		{
 			get
 			{
-				var aggregations = new List<Func<AggregationContainerDescriptor<CommitActivity>, IAggregationContainer>> //<1> a list of aggregation functions to apply
-				{
-					a => a.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
-					a => a.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
-					a => a.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-				};
+				var aggregations =
+					new List<Func<AggregationContainerDescriptor<CommitActivity>, IAggregationContainer>> //<1> a list of aggregation functions to apply
+					{
+						a => a.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
+						a => a.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
+						a => a.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+					};
 
 				return s => s
 					.Aggregations(aggs => aggs
 						.Children<CommitActivity>("name_of_child_agg", child => child
 							.Aggregations(childAggs =>
-								aggregations.Aggregate(childAggs, (acc, agg) => { agg(acc); return acc; }) // <2> Using LINQ's `Aggregate()` function to accumulate/apply all of the aggregation functions
+									aggregations.Aggregate(childAggs, (acc, agg) =>
+									{
+										agg(acc);
+										return acc;
+									}) // <2> Using LINQ's `Aggregate()` function to accumulate/apply all of the aggregation functions
 							)
 						)
 					);
@@ -172,30 +249,8 @@ namespace Tests.Aggregations
 		}
 	}
 
-	public class AndMultipleDescriptorsUsage : Usage
-	{
-		/**
-		* Combining multiple `AggregationDescriptor` is also possible using the bitwise `&&` operator
-		*/
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent
-		{
-			get
-			{
-				var aggregations = new AggregationContainerDescriptor<CommitActivity>()
-					.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-					.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-					&& new AggregationContainerDescriptor<CommitActivity>()
-						.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor));
 
-				return s => s
-					.Aggregations(aggs => aggs
-						.Children<CommitActivity>("name_of_child_agg", child => child
-							.Aggregations(childAggs => aggregations)
-						)
-					);
-			}
-		}
-	}
+	//todo own documentation file (aggregation responses?)
 	/**[float]
 	* [[aggs-vs-aggregations]]
 	*=== Aggs vs. Aggregations
@@ -209,7 +264,9 @@ namespace Tests.Aggregations
 	*/
 	public class AggsUsage : ChildrenAggregationUsageTests
 	{
-		public AggsUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public AggsUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
+		{
+		}
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(aggs => aggs
@@ -241,4 +298,5 @@ namespace Tests.Aggregations
 			maxPerChild.Should().NotBeNull(); //<2> Do something with the max per child. Here we just assert it's not null
 		}
 	}
+
 }

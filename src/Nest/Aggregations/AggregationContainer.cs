@@ -304,6 +304,16 @@ namespace Nest
 			aggregator.WrapInContainer(container);
 			var bucket = aggregator as BucketAggregationBase;
 			container.Aggregations = bucket?.Aggregations;
+
+			var combinator = aggregator as AggregationCombinator;
+			if (combinator?.Aggregations != null)
+			{
+				var dict = new AggregationDictionary();
+				foreach (var agg in combinator.Aggregations)
+					dict.Add(((IAggregation) agg).Name, agg);
+				container.Aggregations = dict;
+			}
+
 			container.Meta = aggregator.Meta;
 			return container;
 		}
@@ -649,6 +659,10 @@ namespace Nest
 
 		public static AggregationContainerDescriptor<T> operator &(AggregationContainerDescriptor<T> left, AggregationContainerDescriptor<T> right)
 		{
+			if (right == null) return left;
+			if (left == null) return right;
+			if (Equals(left, right)) return left;
+
 			var d = new AggregationContainerDescriptor<T>();
 			var leftAggs = (IDictionary<string, IAggregationContainer>)((IAggregationContainer)left).Aggregations;
 			var rightAggs = (IDictionary<string, IAggregationContainer>)((IAggregationContainer)right).Aggregations;

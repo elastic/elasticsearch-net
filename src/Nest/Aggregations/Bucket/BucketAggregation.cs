@@ -25,7 +25,7 @@ namespace Nest
 		where TBucketAggregationInterface : class, IBucketAggregation
 	{
 		AggregationDictionary IBucketAggregation.Aggregations { get; set; }
-		
+
 		protected TBucketAggregation Assign(Action<TBucketAggregationInterface> assigner) =>
 			Fluent.Assign(((TBucketAggregation)this), assigner);
 
@@ -37,6 +37,9 @@ namespace Nest
 
 		public TBucketAggregation Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> selector) =>
 			Assign(a => a.Aggregations = selector?.Invoke(new AggregationContainerDescriptor<T>())?.Aggregations);
+
+		public TBucketAggregation Aggregations(AggregationDictionary aggregations) =>
+			Assign(a => a.Aggregations = aggregations);
 
 		public TBucketAggregation Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
 			Assign(a => a.Meta = selector?.Invoke(new FluentDictionary<string, object>()));
