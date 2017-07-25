@@ -167,7 +167,7 @@ module Benchmarker =
         if indexResponse.IsValid = false then
                 raise (Exception("Unable to index report into Elasticsearch: " + indexResponse.ServerError.Error.ToString()))
 
-    let IndexResults url =
+    let IndexResults (url, username, password) =
         if (String.IsNullOrEmpty url = false) then
             trace "Indexing benchmark results into Elasticsearch"
             
@@ -179,7 +179,12 @@ module Benchmarker =
                 |> Seq.toList
 
             let uri = new Uri(url)
-            let client = new ElasticClient(uri)
+            let connectionSettings = new ConnectionSettings(uri);
+
+            if (String.IsNullOrEmpty username = false && String.IsNullOrEmpty password = false) then
+                connectionSettings.BasicAuthentication(username, password) |> ignore
+
+            let client = new ElasticClient(connectionSettings)
 
             let indexExists = client.IndexExists(Indices.op_Implicit(indexName)).Exists
 

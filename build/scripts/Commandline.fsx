@@ -77,6 +77,12 @@ module Commandline =
 
         | ["test"; testFilter] -> setBuildParam "testfilter" testFilter
 
+        | ["benchmark"; IsUrl elasticsearch; username; password] ->
+            setBuildParam "elasticsearch" elasticsearch
+            setBuildParam "nonInteractive" "0"
+            setBuildParam "username" username
+            setBuildParam "password" password
+
         | ["benchmark"; IsUrl elasticsearch] ->
             setBuildParam "elasticsearch" elasticsearch
             setBuildParam "nonInteractive" "0"

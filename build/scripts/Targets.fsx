@@ -52,7 +52,9 @@ Target "Benchmark" <| fun _ ->
     let runInteractive = ((getBuildParam "nonInteractive") <> "1")
     Benchmarker.Run(runInteractive)
     let url = getBuildParam "elasticsearch"
-    Benchmarker.IndexResults url
+    let username = getBuildParam "username"
+    let password = getBuildParam "password"
+    Benchmarker.IndexResults (url, username, password)
 
 Target "InheritDoc"  InheritDoc.PatchInheritDocs
 
