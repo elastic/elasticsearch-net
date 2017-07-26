@@ -14,14 +14,13 @@ open Projects
 module Documentation = 
 
     let Generate() = 
-        let prefix = "CodeGeneration"
-        let generatorFolder = Paths.IncrementalOutputFolderWithPrefix prefix (PrivateProject PrivateProject.DocGenerator) DotNetFramework.Net46
-        let generator = generatorFolder @@ "DocGenerator.exe"
+        let docGenerator = PrivateProject(DocGenerator)
+        let path = Paths.ProjectOutputFolder docGenerator DotNetFramework.Net46
+        let generator = sprintf "%s/%s.exe" path docGenerator.Name
         ExecProcess (fun p ->
-            p.WorkingDirectory <- "src/CodeGeneration/DocGenerator"
+            p.WorkingDirectory <- Paths.Source("CodeGeneration") @@ docGenerator.Name
             p.FileName <- generator
-          ) 
-          (TimeSpan.FromMinutes (1.0)) |> ignore
+        ) (TimeSpan.FromMinutes 1.) |> ignore
 
     // TODO: hook documentation validation into the process
     let Validate() = 

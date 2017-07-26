@@ -33,6 +33,11 @@ module Release =
 
             let year = sprintf "%i" DateTime.UtcNow.Year
 
+            let jsonDotNetVersion = 10
+
+            let jsonDotNetCurrentVersion = sprintf "%i" jsonDotNetVersion
+            let jsonDotNetNextVersion = sprintf "%i" (jsonDotNetVersion + 1)
+
             let properties =
                 let addKeyValue (e:Expr<string>) (builder:StringBuilder) =
                     // the binding for this tuple looks like key/value should 
@@ -46,6 +51,8 @@ module Release =
                 new StringBuilder()
                 |> addKeyValue <@nextMajorVersion@>
                 |> addKeyValue <@year@>
+                |> addKeyValue <@jsonDotNetCurrentVersion@>
+                |> addKeyValue <@jsonDotNetNextVersion@>
                 |> toText
             
             Tooling.Nuget.Exec [ "pack"; nuspec; 

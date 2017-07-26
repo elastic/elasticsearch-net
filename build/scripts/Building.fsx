@@ -8,6 +8,7 @@
 #load @"Versioning.fsx"
 
 open System 
+open System.IO
 open Fake 
 open FSharp.Data 
 
@@ -41,6 +42,7 @@ module Build =
                 "CurrentAssemblyFileVersion", (Versioning.CurrentAssemblyFileVersion.ToString());
                 "DoSourceLink", sourceLink;
                 "DotNetCoreOnly", if buildingOnTravis then "1" else "";
+                "OutputPathBaseDir", Path.GetFullPath Paths.BuildOutput;
             ] 
             |> List.map (fun (p,v) -> sprintf "%s=%s" p v)
             |> String.concat ";"
@@ -77,4 +79,4 @@ module Build =
             DotNetCli.RunCommand (fun p -> { p with TimeOut = TimeSpan.FromMinutes(3.) }) "clean src/Elasticsearch.sln -c Release" |> ignore
             DotNetProject.All |> Seq.iter(fun p -> CleanDir(Paths.BinFolder p.Name))
         | (_, _) -> 
-            tracefn "Skiping clean target only run when calling 'release', 'canary', 'clean' as targets directly"
+            tracefn "Skipping clean target only run when calling 'release', 'canary', 'clean' as targets directly"
