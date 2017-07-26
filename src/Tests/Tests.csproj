@@ -44,4 +44,5 @@
   <ItemGroup>
     <EmbeddedResource Include="Document\Single\Index\Attachment_Test_Document.pdf" />
   </ItemGroup>
+  <Import Project="..\outputpath.props" />
 </Project>

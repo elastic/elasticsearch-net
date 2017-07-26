@@ -18,18 +18,5 @@
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
     <PackageReference Include="System.Linq.Queryable" Version="4.0.1" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Cluster\RemoteInfo" />
-    <Folder Include="Cluster\RemoteInfo" />
-    <Folder Include="Document\Single\SourceExists" />
-    <Folder Include="Mapping\Types\Specialized\Attachment" />
-    <Folder Include="QueryDsl\FullText\MatchPhrase" />
-    <Folder Include="QueryDsl\FullText\MatchPhrasePrefix" />
-    <Folder Include="Search\FieldCapabilities" />
-    <Folder Include="XPack\Info\XPackInfo" />
-    <Folder Include="XPack\Info\XPackInfo" />
-    <Folder Include="XPack\Info\XPackUsage" />
-  </ItemGroup>
-  <!--<Import Project="..\..\.paket\Paket.Restore.targets" />-->
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+  <Import Project="..\outputpath.props" />
 </Project>

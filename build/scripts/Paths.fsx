@@ -21,14 +21,8 @@ module Paths =
     let BuildOutput = sprintf "%s/output" BuildFolder
 
     let ProjectOutputFolder (project:DotNetProject) (framework:DotNetFramework) = 
-        sprintf "%s/%s/%s" BuildOutput framework.Identifier.MSBuild project.Name
-
-    let IncrementalOutputFolder (project:DotNetProject) (framework:DotNetFramework) = 
-        sprintf "src/%s/bin/Release/%s" project.Name framework.Identifier.Nuget
-            
-    let IncrementalOutputFolderWithPrefix prefix (project:DotNetProject) (framework:DotNetFramework) = 
-        sprintf "src/%s/%s/bin/Release/%s" prefix project.Name framework.Identifier.Nuget
-
+        sprintf "%s/%s/%s" BuildOutput project.Name framework.Identifier.Nuget
+  
     let Tool tool = sprintf "packages/build/%s" tool
     let CheckedInToolsFolder = "build/Tools"
     let KeysFolder = sprintf "%s/keys" BuildFolder
@@ -44,6 +38,3 @@ module Paths =
     let BinFolder(folder) = 
         let f = replace @"\" "/" folder
         sprintf "%s/%s/bin/Release" SourceFolder f
-
-    let ProjectJson(projectName) =
-        Source(sprintf "%s/project.json" projectName)
