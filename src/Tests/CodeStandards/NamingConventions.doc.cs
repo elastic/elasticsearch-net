@@ -100,11 +100,7 @@ namespace Tests.CodeStandards
 			{
 				//TODO These are new API's should be removed, also add test that no request or response starts with Xpack
 				//only XPack
-				typeof(XpackSecurityDeleteRoleMappingRequest),
-				typeof(XpackSecurityGetRoleMappingRequest),
-				typeof(XpackSecurityGetTokenRequest),
-				typeof(XpackSecurityInvalidateTokenRequest),
-				typeof(XpackSecurityPutRoleMappingRequest),
+
 				//TODO add unit tests that we have no requests starting with Exists
 				typeof(SourceExistsRequest),
 				typeof(SourceExistsRequest<>),
