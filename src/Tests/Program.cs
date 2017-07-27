@@ -56,9 +56,9 @@ namespace Tests
 		private static  string SdkPath { get; }
 		private static  string OutputPath { get; }
 
-		// TODO: Renamed this from Main to TestMain because of a bug with Resharper and running unit tests
-		// in Visual Studio with .NET Core: https://youtrack.jetbrains.com/issue/RSRP-464233
-		// Once this is fixed, look at renaming back and removing additional packages. See https://github.com/elastic/elasticsearch-net/pull/2793
+		// Rename to TestMain (instead of Main) if you'd like to run these tests within Visual Studio
+		// (Relates to this issue: https://youtrack.jetbrains.com/issue/RSRP-464233)
+		// (See also https://github.com/elastic/elasticsearch-net/pull/2793)
 		public static void Main(string[] args)
 		{
 			if (args.Length == 0)
