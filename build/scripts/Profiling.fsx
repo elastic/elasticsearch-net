@@ -31,6 +31,9 @@ open Tooling
 
 module Profiler =
 
+    let indexName = IndexName.op_Implicit("profiling-reports")
+    let typeName = TypeName.op_Implicit("report")
+
     type Profile = XmlProvider<"../../build/profiling/profile-example.xml">
 
     type Function(id:string, fqn:string, totalTime:int, ownTime:int, calls:int, instances:int) =
@@ -47,8 +50,8 @@ module Profiler =
         member val Commit = commit with get, set
         member val Functions = functions with get, set
 
-    let private project = "Tests"
-    let private profiledApp = sprintf "%s/%s/%s.exe" (Paths.Output("v4.6")) project project
+    let private project = PrivateProject(Tests).Name
+    let private profiledApp = sprintf "%s/net46/%s.exe" (Paths.Output("Tests")) project
     let private snapShotOutput = Paths.Output("ProfilingSnapshot.dtp")
     let private snapShotStatsOutput = Paths.Output("ProfilingSnapshotStats.html")
     let private profileOutput = Paths.Output("ProfilingReport.xml")
@@ -62,7 +65,8 @@ module Profiler =
 
     let Run() = 
         let date = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffz")
-        Tooling.execProcessWithTimeout profiledApp ["Profile";"Class";getBuildParam "testfilter"] (TimeSpan.FromMinutes 30.) |> ignore
+        trace profiledApp
+        Tooling.execProcessWithTimeout profiledApp ["Profile";"Class";getBuildParam "testfilter"] (TimeSpan.FromMinutes 30.) "." |> ignore
         trace "Profiling finished."
 
         let performanceOutput = Paths.Output("profiling/performance") |> directoryInfo
@@ -121,8 +125,6 @@ module Profiler =
 
                 let reportDoc = new Report(report.Name, report.Date, report.Commit, functions)
 
-                let indexName = IndexName.op_Implicit("reports")
-                let typeName = TypeName.op_Implicit("report")
                 let indexExists = client.IndexExists(Indices.op_Implicit(indexName)).Exists
 
                 if indexExists = false then
@@ -141,7 +143,6 @@ module Profiler =
 
                     if createIndex.IsValid = false then
                         raise (Exception("Unable to create index into Elasticsearch"))
-
 
                 let indexRequest = new IndexRequest<Report>(indexName, typeName)
                 indexRequest.Document <- reportDoc
