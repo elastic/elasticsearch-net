@@ -71,12 +71,8 @@ module Build =
         compileCore incremental
 
     let Clean() =
-        match (quickBuild, getBuildParam "target" = "clean") with
-        | (false, _) 
-        | (_, true) -> 
-            tracefn "Cleaning known output folders"
-            CleanDir Paths.BuildOutput
-            DotNetCli.RunCommand (fun p -> { p with TimeOut = TimeSpan.FromMinutes(3.) }) "clean src/Elasticsearch.sln -c Release" |> ignore
-            DotNetProject.All |> Seq.iter(fun p -> CleanDir(Paths.BinFolder p.Name))
-        | (_, _) -> 
-            tracefn "Skipping clean target only run when calling 'release', 'canary', 'clean' as targets directly"
+        tracefn "Cleaning known output folders"
+        CleanDir Paths.BuildOutput
+        DotNetCli.RunCommand (fun p -> { p with TimeOut = TimeSpan.FromMinutes(3.) }) "clean src/Elasticsearch.sln -c Release" |> ignore
+        DotNetProject.All |> Seq.iter(fun p -> CleanDir(Paths.BinFolder p.Name))
+   

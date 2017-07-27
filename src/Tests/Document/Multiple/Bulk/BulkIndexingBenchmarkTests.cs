@@ -13,7 +13,7 @@ using Tests.Framework.Profiling.Performance;
 
 namespace Tests.Document.Multiple.Bulk
 {
-	[Config(typeof(FastRunConfig))]
+	[BenchmarkConfig]
 	public class BulkIndexingBenchmarkTests : IDisposable
 	{
 		private List<IEnumerable<Message>> _messages;

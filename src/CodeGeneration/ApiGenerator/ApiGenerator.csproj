@@ -12,9 +12,5 @@
     <PackageReference Include="CsQuery" Version="1.3.4" />
     <PackageReference Include="ShellProgressBar" Version="3.0.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="RestSpecification\XPack\Info" />
-    <Folder Include="RestSpecification\XPack\MachineLearning" />
-  </ItemGroup>
   <Import Project="..\..\outputpath.props" />
 </Project>
