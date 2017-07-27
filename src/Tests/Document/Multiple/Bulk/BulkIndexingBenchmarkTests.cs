@@ -42,7 +42,11 @@ namespace Tests.Document.Multiple.Bulk
 			);
 		}
 
+#if NET45
 		[Setup]
+#else
+		[GlobalSetup]
+#endif
 		[ProfilingSetup]
 		public void Setup()
 		{

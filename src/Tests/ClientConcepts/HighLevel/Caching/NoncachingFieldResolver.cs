@@ -43,7 +43,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		{
 			if (IsConditionless(field)) return null;
 			if (!string.IsNullOrEmpty(field.Name)) return field.Name;
-			if (field.Expression != null && !field.CachableExpression)
+			if (field.Expression != null && !field.CacheableExpression)
 			{
 				return this.Resolve(field.Expression, field.Property);
 			}
