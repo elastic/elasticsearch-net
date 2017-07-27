@@ -48,7 +48,13 @@ Target "Profile" <| fun _ ->
 
 Target "Integrate" <| Tests.RunIntegrationTests
 
-Target "Benchmark" Benchmarker.Run
+Target "Benchmark" <| fun _ ->
+    let runInteractive = ((getBuildParam "nonInteractive") <> "1")
+    Benchmarker.Run(runInteractive)
+    let url = getBuildParam "elasticsearch"
+    let username = getBuildParam "username"
+    let password = getBuildParam "password"
+    Benchmarker.IndexResults (url, username, password)
 
 Target "InheritDoc"  InheritDoc.PatchInheritDocs
 

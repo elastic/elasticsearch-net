@@ -6,13 +6,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions.Common;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using Xunit.Abstractions;
 using static Nest.Infer;
-using Xunit.Sdk;
 
 namespace Tests.ClientConcepts.HighLevel.Caching
 {

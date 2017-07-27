@@ -62,21 +62,48 @@ module Commandline =
         match filteredArgs with
         | _ :: tail -> target :: tail
         | [] -> [target]
+    
+    let private (|IsUrl|_|) (candidate:string) =
+        match Uri.TryCreate(candidate, UriKind.RelativeOrAbsolute) with
+        | true, _ -> Some candidate
+        | _ -> None
 
     let parse () =
         setEnvironVar "FAKEBUILD" "1"
         printfn "%A" arguments
         match arguments with
-        | [] | ["build"] | ["test"] | ["clean"] -> ignore()
+        | [] | ["build"] | ["test"] | ["clean"] | ["benchmark"] | ["profile"] -> ignore()
         | ["release"; version] -> setBuildParam "version" version
 
         | ["test"; testFilter] -> setBuildParam "testfilter" testFilter
 
-        | ["profile"; esVersions] -> setBuildParam "esversions" esVersions
+        | ["benchmark"; IsUrl elasticsearch; username; password] ->
+            setBuildParam "elasticsearch" elasticsearch
+            setBuildParam "nonInteractive" "0"
+            setBuildParam "username" username
+            setBuildParam "password" password
+
+        | ["benchmark"; IsUrl elasticsearch] ->
+            setBuildParam "elasticsearch" elasticsearch
+            setBuildParam "nonInteractive" "0"
+
+        | ["benchmark"; IsUrl elasticsearch; "non-interactive"] ->
+            setBuildParam "elasticsearch" elasticsearch
+            setBuildParam "nonInteractive" "1"
+            
+        | ["benchmark"; "non-interactive"] ->
+            setBuildParam "nonInteractive" "1"
+
+        | ["profile"; IsUrl elasticsearch] ->
+            setBuildParam "elasticsearch" elasticsearch
+
+        | ["profile"; esVersions] -> 
+            setBuildParam "esversions" esVersions
+
         | ["profile"; esVersions; testFilter] ->
             setBuildParam "esversions" esVersions
-            setBuildParam "testfilter" testFilter
-
+            setBuildParam "testfilter" testFilter        
+          
         | ["integrate"; esVersions] -> setBuildParam "esversions" esVersions
         | ["integrate"; esVersions; clusterFilter] ->
             setBuildParam "esversions" esVersions
