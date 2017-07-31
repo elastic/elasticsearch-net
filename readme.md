@@ -71,7 +71,7 @@ Take a look at the [blog post for details around the evolution of NEST 2.x](http
 
 Take a look at the [blog post for the release of NEST 5.x](https://www.elastic.co/blog/nest-5-0-released), in addition to the list of breaking changes for [NEST](https://github.com/elastic/elasticsearch-net/blob/master/docs/5.0-breaking-changes/nest-breaking-changes.md) and [Elasticsearch.Net](https://github.com/elastic/elasticsearch-net/blob/master/docs/5.0-breaking-changes/elasticsearch-net-breaking-changes.md).
 
-#[NEST](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Nest#nest-)
+# [NEST](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Nest#nest-)
 
 NEST is the official high-level .NET client of [Elasticsearch](https://github.com/elasticsearch/elasticsearch).  It aims to be a solid, strongly typed client with a very concise API.
 
@@ -202,7 +202,7 @@ var response = client.LowLevel.SearchPost("myindex","elasticsearchprojects", new
 
 #### [Read the full documentation here](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/index.html) 
 
-#[Elasticsearch.Net](src/Elasticsearch.Net)
+# [Elasticsearch.Net](src/Elasticsearch.Net)
 
 A low-level, dependency free, client that has no opinions how you build and represent your requests and responses.
 
