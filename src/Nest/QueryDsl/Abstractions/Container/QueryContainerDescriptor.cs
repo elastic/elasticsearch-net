@@ -71,7 +71,7 @@ namespace Nest
 
 		/// <summary>
 		/// A fuzzy based query that uses similarity based on Levenshtein (edit distance) algorithm.
-		/// Warning: this query is not very scalable with its default prefix length of 0 ñ in this case,
+		/// Warning: this query is not very scalable with its default prefix length of 0 ‚Äì in this case,
 		/// every term will be enumerated and cause an edit score calculation or max_expansions is not set.
 		/// </summary>
 		public QueryContainer Fuzzy(Func<FuzzyQueryDescriptor<T>, IFuzzyQuery> selector) =>
@@ -157,7 +157,7 @@ namespace Nest
 			WrapInContainer(selector, (query, container) => container.Range = query);
 
 		/// <summary>
-		/// More like this query find documents that are ìlikeî provided text by running it against one or more fields.
+		/// More like this query find documents that are ‚Äúlike‚Äù provided text by running it against one or more fields.
 		/// </summary>
 		public QueryContainer MoreLikeThis(Func<MoreLikeThisQueryDescriptor<T>, IMoreLikeThisQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.MoreLikeThis = query);

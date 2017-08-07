@@ -6849,6 +6849,870 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for XpackMlCloseJob
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html
+	///</pre>
+	///</summary>
+	public class CloseJobRequestParameters : FluentRequestParameters<CloseJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>True if the job should be forcefully closed</summary>
+		public CloseJobRequestParameters Force(bool force) => this.AddQueryString("force", force);
+		
+		
+		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
+		public CloseJobRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public CloseJobRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public CloseJobRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public CloseJobRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public CloseJobRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public CloseJobRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlDeleteDatafeed
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html
+	///</pre>
+	///</summary>
+	public class DeleteDatafeedRequestParameters : FluentRequestParameters<DeleteDatafeedRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		
+		///<summary>True if the datafeed should be forcefully deleted</summary>
+		public DeleteDatafeedRequestParameters Force(bool force) => this.AddQueryString("force", force);
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteDatafeedRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteDatafeedRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteDatafeedRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public DeleteDatafeedRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteDatafeedRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlDeleteExpiredData
+	///<pre>
+	///
+	///</pre>
+	///</summary>
+	public class DeleteExpiredDataRequestParameters : FluentRequestParameters<DeleteExpiredDataRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteExpiredDataRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteExpiredDataRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteExpiredDataRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public DeleteExpiredDataRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteExpiredDataRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlDeleteJob
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html
+	///</pre>
+	///</summary>
+	public class DeleteJobRequestParameters : FluentRequestParameters<DeleteJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		
+		///<summary>True if the job should be forcefully deleted</summary>
+		public DeleteJobRequestParameters Force(bool force) => this.AddQueryString("force", force);
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteJobRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteJobRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteJobRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public DeleteJobRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteJobRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlDeleteModelSnapshot
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html
+	///</pre>
+	///</summary>
+	public class DeleteModelSnapshotRequestParameters : FluentRequestParameters<DeleteModelSnapshotRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeleteModelSnapshotRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeleteModelSnapshotRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeleteModelSnapshotRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public DeleteModelSnapshotRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeleteModelSnapshotRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlFlushJob
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html
+	///</pre>
+	///</summary>
+	public class FlushJobRequestParameters : FluentRequestParameters<FlushJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public FlushJobRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public FlushJobRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public FlushJobRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public FlushJobRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public FlushJobRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlGetBuckets
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html
+	///</pre>
+	///</summary>
+	public class GetBucketsRequestParameters : FluentRequestParameters<GetBucketsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetBucketsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetBucketsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetBucketsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public GetBucketsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetBucketsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlGetCategories
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html
+	///</pre>
+	///</summary>
+	public class GetCategoriesRequestParameters : FluentRequestParameters<GetCategoriesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetCategoriesRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetCategoriesRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetCategoriesRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public GetCategoriesRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetCategoriesRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlGetDatafeeds
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html
+	///</pre>
+	///</summary>
+	public class GetDatafeedsRequestParameters : FluentRequestParameters<GetDatafeedsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetDatafeedsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetDatafeedsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetDatafeedsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public GetDatafeedsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetDatafeedsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlGetDatafeedStats
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html
+	///</pre>
+	///</summary>
+	public class GetDatafeedStatsRequestParameters : FluentRequestParameters<GetDatafeedStatsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetDatafeedStatsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetDatafeedStatsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetDatafeedStatsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public GetDatafeedStatsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetDatafeedStatsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlGetInfluencers
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html
+	///</pre>
+	///</summary>
+	public class GetInfluencersRequestParameters : FluentRequestParameters<GetInfluencersRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetInfluencersRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetInfluencersRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetInfluencersRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public GetInfluencersRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetInfluencersRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlGetJobs
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html
+	///</pre>
+	///</summary>
+	public class GetJobsRequestParameters : FluentRequestParameters<GetJobsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetJobsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetJobsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetJobsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public GetJobsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetJobsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlGetJobStats
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html
+	///</pre>
+	///</summary>
+	public class GetJobStatsRequestParameters : FluentRequestParameters<GetJobStatsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetJobStatsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetJobStatsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetJobStatsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public GetJobStatsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetJobStatsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlGetModelSnapshots
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html
+	///</pre>
+	///</summary>
+	public class GetModelSnapshotsRequestParameters : FluentRequestParameters<GetModelSnapshotsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetModelSnapshotsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetModelSnapshotsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetModelSnapshotsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public GetModelSnapshotsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetModelSnapshotsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlGetRecords
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html
+	///</pre>
+	///</summary>
+	public class GetAnomalyRecordsRequestParameters : FluentRequestParameters<GetAnomalyRecordsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GetAnomalyRecordsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GetAnomalyRecordsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GetAnomalyRecordsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public GetAnomalyRecordsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GetAnomalyRecordsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlOpenJob
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html
+	///</pre>
+	///</summary>
+	public class OpenJobRequestParameters : FluentRequestParameters<OpenJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public OpenJobRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public OpenJobRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public OpenJobRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public OpenJobRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public OpenJobRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlPostData
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html
+	///</pre>
+	///</summary>
+	public class PostJobDataRequestParameters : FluentRequestParameters<PostJobDataRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
+		public PostJobDataRequestParameters ResetStart(DateTimeOffset reset_start) => this.AddQueryString("reset_start", reset_start);
+		
+		
+		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
+		public PostJobDataRequestParameters ResetEnd(DateTimeOffset reset_end) => this.AddQueryString("reset_end", reset_end);
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PostJobDataRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PostJobDataRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PostJobDataRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public PostJobDataRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PostJobDataRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlPreviewDatafeed
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html
+	///</pre>
+	///</summary>
+	public class PreviewDatafeedRequestParameters : FluentRequestParameters<PreviewDatafeedRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PreviewDatafeedRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PreviewDatafeedRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PreviewDatafeedRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public PreviewDatafeedRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PreviewDatafeedRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlPutDatafeed
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html
+	///</pre>
+	///</summary>
+	public class PutDatafeedRequestParameters : FluentRequestParameters<PutDatafeedRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutDatafeedRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PutDatafeedRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutDatafeedRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public PutDatafeedRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutDatafeedRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlPutJob
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html
+	///</pre>
+	///</summary>
+	public class PutJobRequestParameters : FluentRequestParameters<PutJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public PutJobRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public PutJobRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public PutJobRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public PutJobRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public PutJobRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlRevertModelSnapshot
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html
+	///</pre>
+	///</summary>
+	public class RevertModelSnapshotRequestParameters : FluentRequestParameters<RevertModelSnapshotRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RevertModelSnapshotRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public RevertModelSnapshotRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RevertModelSnapshotRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public RevertModelSnapshotRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RevertModelSnapshotRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlStartDatafeed
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html
+	///</pre>
+	///</summary>
+	public class StartDatafeedRequestParameters : FluentRequestParameters<StartDatafeedRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public StartDatafeedRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public StartDatafeedRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public StartDatafeedRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public StartDatafeedRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public StartDatafeedRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlStopDatafeed
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html
+	///</pre>
+	///</summary>
+	public class StopDatafeedRequestParameters : FluentRequestParameters<StopDatafeedRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public StopDatafeedRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public StopDatafeedRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public StopDatafeedRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public StopDatafeedRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public StopDatafeedRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlUpdateDatafeed
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html
+	///</pre>
+	///</summary>
+	public class UpdateDatafeedRequestParameters : FluentRequestParameters<UpdateDatafeedRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public UpdateDatafeedRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public UpdateDatafeedRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public UpdateDatafeedRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public UpdateDatafeedRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public UpdateDatafeedRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlUpdateJob
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html
+	///</pre>
+	///</summary>
+	public class UpdateJobRequestParameters : FluentRequestParameters<UpdateJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public UpdateJobRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public UpdateJobRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public UpdateJobRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public UpdateJobRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public UpdateJobRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlUpdateModelSnapshot
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html
+	///</pre>
+	///</summary>
+	public class UpdateModelSnapshotRequestParameters : FluentRequestParameters<UpdateModelSnapshotRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public UpdateModelSnapshotRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public UpdateModelSnapshotRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public UpdateModelSnapshotRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public UpdateModelSnapshotRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public UpdateModelSnapshotRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlValidate
+	///<pre>
+	///
+	///</pre>
+	///</summary>
+	public class ValidateJobRequestParameters : FluentRequestParameters<ValidateJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ValidateJobRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ValidateJobRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ValidateJobRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public ValidateJobRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ValidateJobRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackMlValidateDetector
+	///<pre>
+	///
+	///</pre>
+	///</summary>
+	public class ValidateDetectorRequestParameters : FluentRequestParameters<ValidateDetectorRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public ValidateDetectorRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public ValidateDetectorRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public ValidateDetectorRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public ValidateDetectorRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public ValidateDetectorRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for XpackSecurityAuthenticate
 	///<pre>
 	///https://www.elastic.co/guide/en/x-pack/master/security-api-authenticate.html

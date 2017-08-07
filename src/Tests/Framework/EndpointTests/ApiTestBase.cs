@@ -35,6 +35,7 @@ namespace Tests.Framework
 		protected void ExtendedValue<T>(string key, T value) where T : class => this._uniqueValues.ExtendedValue(key, value);
 
 		protected virtual void IntegrationSetup(IElasticClient client, CallUniqueValues values) { }
+		protected virtual void IntegrationTeardown(IElasticClient client, CallUniqueValues values) { }
 		protected virtual void OnBeforeCall(IElasticClient client) { }
 		protected virtual void OnAfterCall(IElasticClient client) { }
 
@@ -110,6 +111,13 @@ namespace Tests.Framework
 				OnBeforeCall(client);
 				dict.Add(ClientMethod.InitializerAsync, await requestAsync(client, this.Initializer));
 				OnAfterCall(client);
+
+				if (TestClient.Configuration.RunIntegrationTests)
+				{
+					this.IntegrationTeardown(client, _uniqueValues);
+					this._usage.CalledTeardown = true;
+				}
+
 				return dict;
 			});
 		}

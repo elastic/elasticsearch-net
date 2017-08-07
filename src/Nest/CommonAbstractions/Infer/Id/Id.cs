@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom;
 using System.Diagnostics;
 using Elasticsearch.Net;
 using Newtonsoft.Json;

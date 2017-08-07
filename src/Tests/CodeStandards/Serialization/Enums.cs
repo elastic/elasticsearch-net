@@ -20,7 +20,17 @@ namespace Tests.CodeStandards.Serialization
 			{
 				typeof(GeoHashPrecision),
 				typeof(VisitorScope),
-				typeof(AggregationVisitorScope)
+				typeof(AggregationVisitorScope),
+				typeof(CountFunction),
+				typeof(NonZeroCountFunction),
+				typeof(DistinctCountFunction),
+				typeof(GeographicFunction),
+				typeof(InfoContentFunction),
+				typeof(MetricFunction),
+				typeof(RareFunction),
+				typeof(SumFunction),
+				typeof(NonNullSumFunction),
+				typeof(TimeFunction),
 			});
 
 			var enums =

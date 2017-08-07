@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
@@ -52,7 +53,11 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 			get
 			{
 				if (!this.Started && TestClient.Configuration.RunIntegrationTests)
-					throw new Exception("can not request a client from an ElasticsearchNode if that node hasn't started yet");
+				{
+					var logFile = Path.Combine(this.FileSystem.LogsPath, $"{this._config.NodeName}.log");
+					throw new Exception($"cannot request a client from an ElasticsearchNode that hasn't started yet. " +
+					                    $"Check the log at {logFile} to see if there was an issue starting");
+				}
 
 				if (this._client != null) return this._client;
 
@@ -67,7 +72,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 			}
 		}
 
-		public void Start(string[] settings)
+		public void Start(string[] settings, TimeSpan startTimeout)
 		{
 			if (!this._config.RunIntegrationTests || this.Started) return;
 			lock (_lock)
@@ -82,7 +87,6 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 					return;
 				}
 
-				var timeout = TimeSpan.FromMinutes(1);
 				var handle = new XplatManualResetEvent(false);
 				var booted = false;
 				var process = new ObservableProcess(this.FileSystem.Binary, settings);
@@ -95,8 +99,8 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 						.Subscribe(s => this.HandleConsoleMessage(s, handle), e => throw e, () => handle.Set());
 					this._composite.Add(subscription);
 
-					if (!handle.WaitOne(timeout, true))
-						throw new Exception($"Could not start elasticsearch within {timeout}");
+					if (!handle.WaitOne(startTimeout, true))
+						throw new Exception($"Could not start elasticsearch within {startTimeout}");
 
 					booted = true;
 				}

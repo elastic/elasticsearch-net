@@ -36,12 +36,14 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 
 		protected virtual void SeedNode() { }
 
+		public virtual TimeSpan StartTimeout => TimeSpan.FromMinutes(1);
+
 		public void Start()
 		{
 			this.TaskRunner.Install(this.AdditionalInstallationTasks);
 			var nodeSettings = this.NodeConfiguration.CreateSettings(this.AdditionalServerSettings);
 			this.TaskRunner.OnBeforeStart(nodeSettings);
-			this.Node.Start(nodeSettings);
+			this.Node.Start(nodeSettings, this.StartTimeout);
 			if (!this.SkipValidation)
 				this.TaskRunner.ValidateAfterStart(this.Node.Client);
 			if (this.NodeConfiguration.RunIntegrationTests && this.Node.Port != this.DesiredPort)
@@ -54,6 +56,5 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 			this.Node?.Dispose();
 			this.TaskRunner?.Dispose();
 		}
-
 	}
 }

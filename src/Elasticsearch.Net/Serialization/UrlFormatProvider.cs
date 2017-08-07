@@ -44,6 +44,9 @@ namespace Elasticsearch.Net
 			if (valueType is bool)
 				return ((bool)valueType) ? "true" : "false";
 
+			if (valueType is DateTimeOffset)
+				return ((DateTimeOffset)valueType).ToString("o");
+
 			return AttemptTheRightToString(valueType);
 		}
 
