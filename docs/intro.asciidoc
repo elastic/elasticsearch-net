@@ -1,6 +1,6 @@
 :github: https://github.com/elastic/elasticsearch-net
 
-:stackoverflow: http://stackoverflow.com
+:stackoverflow: https://stackoverflow.com
 
 ////
 IMPORTANT NOTE
@@ -33,6 +33,6 @@ Please read the getting started guide for both <<elasticsearch-net,Elasticsearch
 
 All of these are more then welcome on the {github}/issues[github issues pages]! We try to at least reply within the same day.
 
-We also monitor question tagged with {stackoverflow}/questions/tagged/nest['nest' on stackoverflow] or 
-{stackoverflow}/questions/tagged/elasticsearch-net['elasticsearch-net' on stackoverflow], as well as https://discuss.elastic.co[discussions on our discourse site]
+We also monitor question tagged with {stackoverflow}/questions/tagged/nest['nest' on Stack Overflow] or 
+{stackoverflow}/questions/tagged/elasticsearch-net['elasticsearch-net' on Stack Overflow], as well as https://discuss.elastic.co[discussions on our discourse site]
 
