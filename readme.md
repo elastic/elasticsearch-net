@@ -58,6 +58,8 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td><a href="https://www.myget.org/gallery/elasticsearch-net-next"><img src="https://img.shields.io/myget/elasticsearch-net-next/vpre/NEST.svg?style=flat-square&label=myget&colorB=339900"></a></td>
     </tr>
 </table>
+          
+### [Full documentation at https://www.elastic.co/guide/en/elasticsearch/client/net-api/current](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/index.html) 
 
 ## Upgrading
 
@@ -71,7 +73,7 @@ Take a look at the [blog post for details around the evolution of NEST 2.x](http
 
 Take a look at the [blog post for the release of NEST 5.x](https://www.elastic.co/blog/nest-5-0-released), in addition to the list of breaking changes for [NEST](https://github.com/elastic/elasticsearch-net/blob/master/docs/5.0-breaking-changes/nest-breaking-changes.md) and [Elasticsearch.Net](https://github.com/elastic/elasticsearch-net/blob/master/docs/5.0-breaking-changes/elasticsearch-net-breaking-changes.md).
 
-#[NEST](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Nest#nest-)
+# [NEST](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Nest)
 
 NEST is the official high-level .NET client of [Elasticsearch](https://github.com/elasticsearch/elasticsearch).  It aims to be a solid, strongly typed client with a very concise API.
 
@@ -200,9 +202,9 @@ var response = client.LowLevel.SearchPost("myindex","elasticsearchprojects", new
 });
 ```
 
-#### [Read the full documentation here](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/index.html) 
+#### [Full documentation at https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/nest.html](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/nest.html) 
 
-#[Elasticsearch.Net](src/Elasticsearch.Net)
+# [Elasticsearch.Net](src/Elasticsearch.Net)
 
 A low-level, dependency free, client that has no opinions how you build and represent your requests and responses.
 
@@ -276,6 +278,8 @@ client.Index("myindex","mytype","1", myJson);
 ```
 
 This will execute the same request, but this time `myJson` will be serialized by the registered `ISerializer`.
+
+#### [Full documentation at https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/elasticsearch-net.html](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/elasticsearch-net.html) 
 
 ## Contributing
 
