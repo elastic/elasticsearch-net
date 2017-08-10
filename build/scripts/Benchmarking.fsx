@@ -111,11 +111,12 @@ module Benchmarker =
         member val Statistics=statistics with get, set
         member val Memory=memory with get, set
 
-    type BenchmarkReport(title: string, totalTime:TimeSpan, date:DateTime, commit:string, host:HostEnvironmentInfo, benchmarks:Benchmark list) =
+    type BenchmarkReport(title: string, totalTime:TimeSpan, date:DateTime, commit:string, branchName:string, host:HostEnvironmentInfo, benchmarks:Benchmark list) =
         member val Title = title with get, set
         member val TotalTime = totalTime with get, set
         member val Date = date with get, set
         member val Commit = commit with get, set
+        member val BranchName = branchName with get, set
         member val HostEnvironmentInfo = host with get, set
         member val Benchmarks = benchmarks with get, set
 
@@ -150,13 +151,14 @@ module Benchmarker =
             for file in benchmarkOutputFiles do copyToOutput file
             DeleteFiles benchmarkOutputFiles
 
-    let IndexResult (client:ElasticClient, file:string, date:DateTime, commit:string, indexName, typeName) =
+    let IndexResult (client:ElasticClient, file:string, date:DateTime, commit:string, branchName:string, indexName, typeName) =
 
         trace (sprintf "Indexing report %s into Elasticsearch" file)
 
         let document = JsonConvert.DeserializeObject<BenchmarkReport>(File.ReadAllText(file))
         document.Date <- date
         document.Commit <- commit
+        document.BranchName <- branchName
 
         let indexRequest = new IndexRequest<BenchmarkReport>(indexName, typeName)
         indexRequest.Document <- document
@@ -173,6 +175,7 @@ module Benchmarker =
             
             let date = DateTime.UtcNow
             let commit = getSHA1 "." "HEAD"
+            let branchName = getBranchName "."
 
             let benchmarkJsonFiles =
                 Directory.EnumerateFiles(benchmarkOutput.FullName, "*-custom.json", SearchOption.AllDirectories)
@@ -238,6 +241,6 @@ module Benchmarker =
                 raise (Exception("Unable to create pipeline"))
                   
             for file in benchmarkJsonFiles
-                do IndexResult (client, file, date, commit, indexName, typeName)
+                do IndexResult (client, file, date, commit, branchName, indexName, typeName)
 
             trace "Indexed benchmark reports into Elasticsearch"
