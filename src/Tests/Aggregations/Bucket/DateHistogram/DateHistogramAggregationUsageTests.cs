@@ -99,7 +99,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					Interval = DateInterval.Month,
 					MinimumDocumentCount = 2,
 					Format = "yyyy-MM-dd'T'HH:mm:ss",
-					ExtendedBounds = new ExtendedBounds<DateTime>
+					ExtendedBounds = new ExtendedBounds<DateMath>
 					{
 						Minimum = FixedDate.AddYears(-1),
 						Maximum = FixedDate.AddYears(1),
