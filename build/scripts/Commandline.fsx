@@ -70,9 +70,13 @@ module Commandline =
 
     let parse () =
         setEnvironVar "FAKEBUILD" "1"
-        printfn "%A" arguments
         match arguments with
-        | [] | ["build"] | ["test"] | ["clean"] | ["benchmark"] | ["profile"] -> ignore()
+        | [] 
+        | ["build"] 
+        | ["test"] 
+        | ["clean"] 
+        | ["benchmark"] 
+        | ["profile"] -> ignore()
         | ["release"; version] -> setBuildParam "version" version
 
         | ["test"; testFilter] -> setBuildParam "testfilter" testFilter
