@@ -175,7 +175,7 @@ module Benchmarker =
             
             let date = DateTime.UtcNow
             let commit = getSHA1 "." "HEAD"
-			let branchName = getBranchName "."
+            let branchName = getBranchName "."
 
             let benchmarkJsonFiles =
                 Directory.EnumerateFiles(benchmarkOutput.FullName, "*-custom.json", SearchOption.AllDirectories)
