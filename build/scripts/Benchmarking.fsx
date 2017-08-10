@@ -22,6 +22,7 @@ open Nest
 open Elasticsearch.Net
 open Newtonsoft.Json
 open Git.Branches
+open Git.Information
 
 module Benchmarker =
 
