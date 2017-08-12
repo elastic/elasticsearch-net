@@ -42,9 +42,9 @@ namespace Nest
 
 		public IEnumerable<IResponse> GetInvalidResponses() => this._allResponses<IResponse>().Where(r => !r.IsValid);
 
-		public IEnumerable<SearchResponse<T>> GetResponses<T>() where T : class => this._allResponses<SearchResponse<T>>();
+		public IEnumerable<ISearchResponse<T>> GetResponses<T>() where T : class => this._allResponses<SearchResponse<T>>();
 
-		public SearchResponse<T> GetResponse<T>(string name) where T : class
+		public ISearchResponse<T> GetResponse<T>(string name) where T : class
 		{
 			object response;
 			this.Responses.TryGetValue(name, out response);
