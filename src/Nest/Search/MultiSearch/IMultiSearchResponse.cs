@@ -6,8 +6,8 @@ namespace Nest
 	{
 		IEnumerable<IResponse> AllResponses { get; }
 		IEnumerable<IResponse> GetInvalidResponses();
-		IEnumerable<SearchResponse<T>> GetResponses<T>() where T : class;
-		SearchResponse<T> GetResponse<T>(string name) where T : class;
+		IEnumerable<ISearchResponse<T>> GetResponses<T>() where T : class;
+		ISearchResponse<T> GetResponse<T>(string name) where T : class;
 		int TotalResponses { get; }
 	}
 }
