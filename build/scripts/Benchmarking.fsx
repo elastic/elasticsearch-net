@@ -112,7 +112,7 @@ module Benchmarker =
         member val Statistics=statistics with get, set
         member val Memory=memory with get, set
 
-    type BenchmarkReport(title: string, totalTime:TimeSpan, date:DateTime, commit:string, branchName:string, host:HostEnvironmentInfo, benchmarks:Benchmark list) =
+    type BenchmarkReports(title: string, totalTime:TimeSpan, date:DateTime, commit:string, branchName:string, host:HostEnvironmentInfo, benchmarks:Benchmark list) =
         member val Title = title with get, set
         member val TotalTime = totalTime with get, set
         member val Date = date with get, set
@@ -120,6 +120,15 @@ module Benchmarker =
         member val BranchName = branchName with get, set
         member val HostEnvironmentInfo = host with get, set
         member val Benchmarks = benchmarks with get, set
+
+    type BenchmarkReport(title: string, totalTime:TimeSpan, date:DateTime, commit:string, branchName:string, host:HostEnvironmentInfo, benchmark:Benchmark) =
+        member val Title = title with get, set
+        member val TotalTime = totalTime with get, set
+        member val Date = date with get, set
+        member val Commit = commit with get, set
+        member val BranchName = branchName with get, set
+        member val HostEnvironmentInfo = host with get, set
+        member val Benchmark = benchmark with get, set
 
     let private testsProjectDirectory = Path.GetFullPath(Paths.Source("Tests"))
     let private benchmarkOutput = Path.GetFullPath(Paths.Output("benchmarks")) |> directoryInfo
@@ -129,9 +138,6 @@ module Benchmarker =
 
         ensureDirExists benchmarkOutput
 
-        let projectJson = testsProjectDirectory @@ "project.json"
-
-        // running benchmarks can timeout so clean up any generated benchmark files
         try
             if runInteractive then
                 DotNetCli.RunCommand(fun p ->
@@ -144,6 +150,7 @@ module Benchmarker =
                         WorkingDir = testsProjectDirectory
                     }) "run -f net46 -c Release Benchmark non-interactive"
         finally
+            // running benchmarks can timeout so clean up any generated benchmark files
             let benchmarkOutputFiles =
                 let output = combinePaths testsProjectDirectory "BenchmarkDotNet.Artifacts"
                 Directory.EnumerateFiles(output, "*.*", SearchOption.AllDirectories)
@@ -154,25 +161,37 @@ module Benchmarker =
 
     let IndexResult (client:ElasticClient, file:string, date:DateTime, commit:string, branchName:string, indexName, typeName) =
 
-        trace (sprintf "Indexing report %s into Elasticsearch" file)
+        trace (sprintf "Indexing benchmark results (class) %s" file)
 
-        let document = JsonConvert.DeserializeObject<BenchmarkReport>(File.ReadAllText(file))
-        document.Date <- date
-        document.Commit <- commit
-        document.BranchName <- branchName
+        let benchmarkReports = JsonConvert.DeserializeObject<BenchmarkReports>(File.ReadAllText(file))
+        benchmarkReports.Date <- date
+        benchmarkReports.Commit <- commit
+        benchmarkReports.BranchName <- branchName
 
-        let indexRequest = new IndexRequest<BenchmarkReport>(indexName, typeName)
-        indexRequest.Document <- document
-        indexRequest.Pipeline <- pipelineName
+        for benchmarkReportSingle in benchmarkReports.Benchmarks do
 
-        let indexResponse = client.Index(indexRequest)
+            trace (sprintf "Indexing benchmark result (method) %s" benchmarkReportSingle.MethodTitle)
 
-        if indexResponse.IsValid = false then
-                raise (Exception("Unable to index report into Elasticsearch: " + indexResponse.ServerError.Error.ToString()))
+            let document = new BenchmarkReport(benchmarkReports.Title,
+                                               benchmarkReports.TotalTime,
+                                               benchmarkReports.Date,
+                                               benchmarkReports.Commit,
+                                               benchmarkReports.BranchName,
+                                               benchmarkReports.HostEnvironmentInfo,
+                                               benchmarkReportSingle)
+            
+            let indexRequest = new IndexRequest<BenchmarkReport>(indexName, typeName)
+            indexRequest.Document <- document
+            indexRequest.Pipeline <- pipelineName
+
+            let indexResponse = client.Index(indexRequest)
+
+            if indexResponse.IsValid = false then
+                    raise (Exception("Unable to index benchmark result (method): " + indexResponse.ServerError.Error.ToString()))
 
     let IndexResults (url, username, password) =
         if (String.IsNullOrEmpty url = false) then
-            trace "Indexing benchmark reports into Elasticsearch"
+            trace "Indexing benchmark reports"
             
             let date = DateTime.UtcNow
             let commit = getSHA1 "." "HEAD"
@@ -196,11 +215,6 @@ module Benchmarker =
                            
                 let typeMapping = new TypeMappingDescriptor<BenchmarkReport>()
                 typeMapping.AutoMap() |> ignore
-                typeMapping.Properties(fun p -> 
-                    p.Nested<Benchmark>(fun n ->
-                        n.AutoMap().Name(PropertyName.op_Implicit("benchmarks")) :> INestedProperty
-                    ) :> IPromise<IProperties>
-                ) |> ignore
 
                 let mappings = new Mappings()
                 mappings.Add(typeName, typeMapping :> ITypeMapping)
@@ -218,13 +232,9 @@ module Benchmarker =
                 if putIndexTemplateResponse.IsValid = false then
                     raise (Exception("Unable to create index template into Elasticsearch"))
                     
-            let processor = new GrokProcessor();
-            processor.Field <- new Field("_ingest._value.displayInfo")
-            processor.Patterns <- ["%{WORD:_ingest._value.class}.%{DATA:_ingest._value.method}: Job-%{WORD:_ingest._value.jobName}\\(Jit=%{WORD:_ingest._value.jit}, Runtime=%{WORD:_ingest._value.clr}, LaunchCount=%{NUMBER:_ingest._value.launchCount}, RunStrategy=%{WORD:_ingest._value.runStrategy}, TargetCount=%{NUMBER:_ingest._value.targetCount}, UnrollFactor=%{NUMBER:_ingest._value.unrollFactor}, WarmupCount=%{NUMBER:_ingest._value.warmupCount}\\)"]
-            
-            let forEachProcessor = new ForeachProcessor()
-            forEachProcessor.Field <- new Field("benchmarks")
-            forEachProcessor.Processor <- processor
+            let grokProcessor = new GrokProcessor();
+            grokProcessor.Field <- new Field("benchmark.displayInfo")
+            grokProcessor.Patterns <- ["%{WORD:class}.%{DATA:method}: Job-%{WORD:jobName}\\(Jit=%{WORD:jit}, Runtime=%{WORD:clr}, LaunchCount=%{NUMBER:launchCount}, RunStrategy=%{WORD:runStrategy}, TargetCount=%{NUMBER:targetCount}, UnrollFactor=%{NUMBER:unrollFactor}, WarmupCount=%{NUMBER:warmupCount}\\)"]
 
             let dateIndexProcessor = new DateIndexNameProcessor();
             dateIndexProcessor.Field <- new Field("date")
@@ -234,7 +244,7 @@ module Benchmarker =
 
             let request = new PutPipelineRequest(Id.op_Implicit(pipelineName))
             request.Description <- "Benchmark settings pipeline"
-            request.Processors <- [dateIndexProcessor; forEachProcessor]
+            request.Processors <- [dateIndexProcessor; grokProcessor]
 
             let createPipeline = client.PutPipeline(request)
 
@@ -244,4 +254,4 @@ module Benchmarker =
             for file in benchmarkJsonFiles
                 do IndexResult (client, file, date, commit, branchName, indexName, typeName)
 
-            trace "Indexed benchmark reports into Elasticsearch"
+            trace "Indexed benchmark reports"
