@@ -69,6 +69,7 @@ namespace Nest
 			VisitQuery(qd.Bool, visitor, (v, d) =>
 			{
 				v.Visit(d);
+				Accept(v, d.Filter, VisitorScope.Filter);
 				Accept(v, d.Must, VisitorScope.Must);
 				Accept(v, d.MustNot, VisitorScope.MustNot);
 				Accept(v, d.Should, VisitorScope.Should);
