@@ -70,12 +70,22 @@ module Commandline =
 
     let parse () =
         setEnvironVar "FAKEBUILD" "1"
-        printfn "%A" arguments
         match arguments with
-        | [] | ["build"] | ["test"] | ["clean"] | ["benchmark"] | ["profile"] -> ignore()
+        | [] 
+        | ["build"] 
+        | ["test"] 
+        | ["clean"] 
+        | ["benchmark"] 
+        | ["profile"] -> ignore()
         | ["release"; version] -> setBuildParam "version" version
 
         | ["test"; testFilter] -> setBuildParam "testfilter" testFilter
+
+        | ["benchmark"; IsUrl elasticsearch; username; password; "non-interactive"] ->
+            setBuildParam "elasticsearch" elasticsearch
+            setBuildParam "nonInteractive" "1"
+            setBuildParam "username" username
+            setBuildParam "password" password
 
         | ["benchmark"; IsUrl elasticsearch; username; password] ->
             setBuildParam "elasticsearch" elasticsearch
