@@ -26,6 +26,12 @@ namespace Nest
 		[JsonProperty("extended_bounds")]
 		ExtendedBounds<double> ExtendedBounds { get; set; }
 
+		[Obsolete("Removed in Elasticsearch 2.0. Will be removed in the next major version of NEST")]
+		long? PreOffset { get; set; }
+
+		[Obsolete("Removed in Elasticsearch 2.0. Will be removed in the next major version of NEST")]
+		long? PostOffset { get; set; }
+
 		[JsonProperty("offset")]
 		double? Offset { get; set; }
 
@@ -41,6 +47,8 @@ namespace Nest
 		public int? MinimumDocumentCount { get; set; }
 		public HistogramOrder Order { get; set; }
 		public ExtendedBounds<double> ExtendedBounds { get; set; }
+		public long? PreOffset { get; set; }
+		public long? PostOffset { get; set; }
 		public double? Offset { get; set; }
 		public double? Missing { get; set; }
 
@@ -67,6 +75,10 @@ namespace Nest
 
 		ExtendedBounds<double> IHistogramAggregation.ExtendedBounds { get; set; }
 
+		long? IHistogramAggregation.PreOffset { get; set; }
+		
+		long? IHistogramAggregation.PostOffset { get; set; }
+		
 		double? IHistogramAggregation.Offset { get; set; }
 
 		double? IHistogramAggregation.Missing { get; set; }
@@ -96,6 +108,12 @@ namespace Nest
 		public HistogramAggregationDescriptor<T> ExtendedBounds(double min, double max) =>
 			Assign(a => a.ExtendedBounds = new ExtendedBounds<double> { Minimum = min, Maximum = max });
 
+		[Obsolete("Removed in Elasticsearch 2.0. Will be removed in the next major version of NEST")]
+		public HistogramAggregationDescriptor<T> PreOffset(long preOffset) => this;
+
+		[Obsolete("Removed in Elasticsearch 2.0. Will be removed in the next major version of NEST")]
+		public HistogramAggregationDescriptor<T> PostOffset(long postOffset) => this;
+		
 		public HistogramAggregationDescriptor<T> Offset(double offset) => Assign(a => a.Offset = offset);
 
 		public HistogramAggregationDescriptor<T> Missing(double missing) => Assign(a => a.Missing = missing);
