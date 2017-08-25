@@ -68,9 +68,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 				$"{es}path.repo={this.FileSystem.RepositoryPath}",
 				$"{es}path.data={this.FileSystem.DataPath}",
 				$"{es}http.port={this.DesiredPort}",
-				$"{es}script.inline=true",
 				$"{es}script.max_compilations_per_minute=10000",
-				$"{es}script.{indexedOrStored}=true",
 				$"{es}node.{attr}testingcluster=true",
 				$"{es}node.{attr}gateway=true",
 				$"{es}{shieldOrSecurity}.enabled={b}",
@@ -78,6 +76,20 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 				$"{es}{shieldOrSecurity}.authc.realms.pki1.enabled={sslEnabled}",
 				$"{es}search.remote.connect=true"
 			};
+
+			if (v < ElasticsearchVersion.GetOrAdd("5.5.0"))
+			{
+				this.DefaultNodeSettings.AddRange(new [] {
+					$"{es}script.inline=true",
+					$"{es}script.{indexedOrStored}=true",
+				});
+			}
+			else
+			{
+				this.DefaultNodeSettings.AddRange(new [] {
+					$"script.allowed_types=inline,stored",
+				});
+			}
 		}
 
 		public string[] CreateSettings(string[] additionalSettings)
