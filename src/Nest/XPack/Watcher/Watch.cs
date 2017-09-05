@@ -6,7 +6,7 @@ namespace Nest
 	[JsonObject]
 	public class Watch
 	{
-		[JsonProperty("meta")]
+		[JsonProperty("metadata")]
 		public IDictionary<string, object> Meta { get; internal set; }
 
 		[JsonProperty("input")]
@@ -25,7 +25,7 @@ namespace Nest
 		[JsonConverter(typeof(ActionsJsonConverter))]
 		public IDictionary<string, IAction> Actions { get; internal set; }
 
-		[JsonProperty("status")]
+		[JsonProperty("_status")]
 		public WatchStatus Status { get; internal set; }
 
 		[JsonProperty("throttle_period")]
