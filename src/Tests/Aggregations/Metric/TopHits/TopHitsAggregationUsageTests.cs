@@ -47,6 +47,7 @@ namespace Tests.Aggregations.Metric.TopHits
 								},
 								size = 1,
 								version = true,
+								track_scores = true,
 								explain = true,
 								fielddata_fields = new [] { "state", "numberOfCommits" },
 								stored_fields = new [] { "startedOn" },
@@ -94,6 +95,7 @@ namespace Tests.Aggregations.Metric.TopHits
 							)
 							.Size(1)
 							.Version()
+							.TrackScores()
 							.Explain()
 							.FielddataFields(fd => fd
 								.Field(p => p.State)
@@ -137,6 +139,7 @@ namespace Tests.Aggregations.Metric.TopHits
 						},
 						Size = 1,
 						Version = true,
+						TrackScores = true,
 						Explain = true,
 						FielddataFields = new [] { "state", "numberOfCommits" },
 						StoredFields = new[] { "startedOn" },
