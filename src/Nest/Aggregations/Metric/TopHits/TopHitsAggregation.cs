@@ -38,6 +38,9 @@ namespace Nest
 
 		[JsonProperty("version")]
 		bool? Version { get; set; }
+
+		[JsonProperty("track_scores")]
+		bool? TrackScores { get; set; }
 	}
 
 	public class TopHitsAggregation : MetricAggregationBase, ITopHitsAggregation
@@ -52,6 +55,7 @@ namespace Nest
 		public Fields FielddataFields { get; set; }
 		public Fields StoredFields { get; set; }
 		public bool? Version { get; set; }
+		public bool? TrackScores { get; set; }
 
 		internal TopHitsAggregation() { }
 
@@ -85,6 +89,8 @@ namespace Nest
 
 		bool? ITopHitsAggregation.Version { get; set; }
 
+		bool? ITopHitsAggregation.TrackScores { get; set; }
+
 		public TopHitsAggregationDescriptor<T> From(int from) => Assign(a => a.From = from);
 
 		public TopHitsAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
@@ -117,5 +123,7 @@ namespace Nest
 			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public TopHitsAggregationDescriptor<T> Version(bool version = true) => Assign(a => a.Version = version);
+
+		public TopHitsAggregationDescriptor<T> TrackScores(bool trackScores = true) => Assign(a => a.TrackScores = trackScores);
 	}
 }
