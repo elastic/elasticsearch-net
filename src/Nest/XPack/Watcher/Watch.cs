@@ -25,7 +25,7 @@ namespace Nest
 		[JsonConverter(typeof(ActionsJsonConverter))]
 		public Actions Actions { get; internal set; }
 
-		[JsonProperty("status")]
+		[JsonProperty("_status")]
 		public WatchStatus Status { get; internal set; }
 
 		[JsonProperty("throttle_period")]
