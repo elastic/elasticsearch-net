@@ -6,7 +6,7 @@ namespace Nest
 	[JsonObject]
 	public class Watch
 	{
-		[JsonProperty("meta")]
+		[JsonProperty("metadata")]
 		public IReadOnlyDictionary<string, object> Meta { get; internal set; }
 
 		[JsonProperty("input")]
