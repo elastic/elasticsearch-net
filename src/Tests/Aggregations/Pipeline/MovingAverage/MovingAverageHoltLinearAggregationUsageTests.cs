@@ -24,7 +24,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 					date_histogram = new
 					{
 						field = "startedOn",
-						interval = "month",
+						interval = "month"
 					},
 					aggs = new
 					{
@@ -44,7 +44,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 								settings = new
 								{
 									alpha = 0.5,
-									beta = 0.5,
+									beta = 0.5
 								}
 							}
 						}
@@ -90,7 +90,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 						Model = new HoltLinearModel
 						{
 							Alpha = 0.5f,
-							Beta = 0.5f,
+							Beta = 0.5f
 						}
 					}
 			}

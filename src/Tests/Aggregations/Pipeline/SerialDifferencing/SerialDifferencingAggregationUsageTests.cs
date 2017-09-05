@@ -22,7 +22,7 @@ namespace Tests.Aggregations.Pipeline.SerialDifferencing
 					date_histogram = new
 					{
 						field = "startedOn",
-						interval = "month",
+						interval = "month"
 					},
 					aggs = new
 					{
@@ -33,12 +33,12 @@ namespace Tests.Aggregations.Pipeline.SerialDifferencing
 								field = "numberOfCommits"
 							}
 						},
-						thirtieth_difference = new
+						second_difference = new
 						{
 							serial_diff = new
 							{
 								buckets_path = "commits",
-								lag = 30
+								lag = 2
 							}
 						}
 					}
@@ -56,9 +56,9 @@ namespace Tests.Aggregations.Pipeline.SerialDifferencing
 						.Sum("commits", sm => sm
 							.Field(p => p.NumberOfCommits)
 						)
-						.SerialDifferencing("thirtieth_difference", d => d
+						.SerialDifferencing("second_difference", d => d
 							.BucketsPath("commits")
-							.Lag(30)
+							.Lag(2)
 						)
 					)
 				)
@@ -73,9 +73,9 @@ namespace Tests.Aggregations.Pipeline.SerialDifferencing
 				Interval = DateInterval.Month,
 				Aggregations =
 					new SumAggregation("commits", "numberOfCommits") &&
-					new SerialDifferencingAggregation("thirtieth_difference", "commits")
+					new SerialDifferencingAggregation("second_difference", "commits")
 					{
-						Lag = 30
+						Lag = 2
 					}
 			}
 		};
@@ -89,11 +89,28 @@ namespace Tests.Aggregations.Pipeline.SerialDifferencing
 			projectsPerMonth.Buckets.Should().NotBeNull();
 			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
+			var differenceCount = 0;
+
 			foreach (var item in projectsPerMonth.Buckets)
 			{
+				differenceCount++;
 				var commits = item.Sum("commits");
 				commits.Should().NotBeNull();
 				commits.Value.Should().NotBe(null);
+
+				var secondDifference = item.SerialDifferencing("second_difference");
+
+				// serial differencing specified a lag of 2, so
+				// only expect values from the 3rd bucket onwards
+				if (differenceCount <= 2)
+				{
+					secondDifference.Should().BeNull();
+				}
+				else
+				{
+					secondDifference.Should().NotBeNull();
+					secondDifference.Value.Should().NotBe(null);
+				}
 			}
 		}
 	}
