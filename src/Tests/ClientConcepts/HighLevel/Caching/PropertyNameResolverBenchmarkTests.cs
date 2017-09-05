@@ -19,7 +19,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		private static readonly PropertyName PropertyInfoPropertyName = typeof(Project).GetProperty(nameof(Project.Name));
 		private static readonly PropertyName StringPropertyName = "Name";
 
-		[Setup]
+		[GlobalSetup]
 		public void Setup()
 		{
 			_expressionResolver = new FieldResolver(new ConnectionSettings());
