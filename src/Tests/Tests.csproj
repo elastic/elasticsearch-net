@@ -39,7 +39,7 @@
     <PackageReference Include="BenchMarkDotNet" Version="0.10.8" />
   </ItemGroup>  
   <ItemGroup Condition="'$(TargetFramework)'=='net45'">
-    <PackageReference Include="BenchMarkDotNet" Version="0.10.0" />
+    <PackageReference Include="BenchMarkDotNet" Version="0.10.8" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Document\Single\Index\Attachment_Test_Document.pdf" />
