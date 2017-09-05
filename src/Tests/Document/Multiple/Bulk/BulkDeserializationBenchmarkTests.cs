@@ -28,7 +28,7 @@ namespace Tests.Document.Multiple.Bulk
 		private byte[] _hugeResponse;
 		private JsonSerializer _jsonSerializer;
 
-		[GlobalSetup]
+		[Setup]
 		public void Setup()
 		{
 			var serializer = Client.Serializer;

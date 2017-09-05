@@ -42,7 +42,7 @@ namespace Tests.Document.Multiple.Bulk
 			);
 		}
 
-		[GlobalSetup]
+		[Setup]
 		[ProfilingSetup]
 		public void Setup()
 		{
