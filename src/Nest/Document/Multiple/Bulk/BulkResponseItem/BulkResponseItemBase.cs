@@ -58,7 +58,7 @@ namespace Nest
 
 		[JsonProperty("_seq_no")]
 		long SequenceNumber { get; }
-		
+
 		[JsonProperty("_primary_term")]
 		long PrimaryTerm { get; }
 

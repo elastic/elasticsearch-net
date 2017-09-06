@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+
 	internal class IndicesMultiSyntaxJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => typeof(Indices) == objectType;
