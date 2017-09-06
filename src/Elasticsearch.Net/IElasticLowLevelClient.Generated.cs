@@ -39,7 +39,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Bulk<T>(PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_bulk
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -52,7 +52,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> BulkAsync<T>(PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_bulk
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -66,7 +66,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Bulk<T>(string index, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_bulk
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -80,7 +80,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> BulkAsync<T>(string index, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_bulk
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -95,7 +95,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Bulk<T>(string index, string type, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_bulk
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -110,7 +110,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> BulkAsync<T>(string index, string type, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_bulk
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -123,7 +123,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> BulkPut<T>(PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_bulk
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -136,7 +136,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> BulkPutAsync<T>(PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/_bulk
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -150,7 +150,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> BulkPut<T>(string index, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/_bulk
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -164,7 +164,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> BulkPutAsync<T>(string index, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/{type}/_bulk
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -179,7 +179,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> BulkPut<T>(string index, string type, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/{type}/_bulk
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -194,7 +194,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> BulkPutAsync<T>(string index, string type, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/aliases
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -206,7 +206,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatAliases<T>(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/aliases
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -218,7 +218,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatAliasesAsync<T>(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/aliases/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -231,7 +231,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatAliases<T>(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/aliases/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -244,7 +244,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatAliasesAsync<T>(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/allocation
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -256,7 +256,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatAllocation<T>(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/allocation
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -268,7 +268,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatAllocationAsync<T>(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/allocation/{node_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -281,7 +281,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatAllocation<T>(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/allocation/{node_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -294,7 +294,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatAllocationAsync<T>(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/count
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -306,7 +306,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatCount<T>(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/count
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -318,7 +318,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatCountAsync<T>(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/count/{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -331,7 +331,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatCount<T>(string index, Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/count/{index}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -344,7 +344,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatCountAsync<T>(string index, Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/fielddata
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -356,7 +356,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatFielddata<T>(Func<CatFielddataRequestParameters, CatFielddataRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/fielddata
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -368,7 +368,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatFielddataAsync<T>(Func<CatFielddataRequestParameters, CatFielddataRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/fielddata/{fields}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -381,7 +381,7 @@ namespace Elasticsearch.Net
 		///<param name="fields">A comma-separated list of fields to return the fielddata size</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatFielddata<T>(string fields, Func<CatFielddataRequestParameters, CatFielddataRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/fielddata/{fields}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -394,7 +394,7 @@ namespace Elasticsearch.Net
 		///<param name="fields">A comma-separated list of fields to return the fielddata size</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatFielddataAsync<T>(string fields, Func<CatFielddataRequestParameters, CatFielddataRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/health
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -406,7 +406,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatHealth<T>(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/health
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -418,7 +418,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatHealthAsync<T>(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -430,7 +430,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatHelp<T>(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -442,7 +442,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatHelpAsync<T>(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/indices
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -454,7 +454,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatIndices<T>(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/indices
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -466,7 +466,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatIndicesAsync<T>(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/indices/{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -479,7 +479,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatIndices<T>(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/indices/{index}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -492,7 +492,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatIndicesAsync<T>(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/master
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -504,7 +504,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatMaster<T>(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/master
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -516,7 +516,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatMasterAsync<T>(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/nodeattrs
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -528,7 +528,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatNodeattrs<T>(Func<CatNodeAttributesRequestParameters, CatNodeAttributesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/nodeattrs
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -540,7 +540,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatNodeattrsAsync<T>(Func<CatNodeAttributesRequestParameters, CatNodeAttributesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/nodes
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -552,7 +552,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatNodes<T>(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/nodes
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -564,7 +564,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatNodesAsync<T>(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/pending_tasks
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -576,7 +576,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatPendingTasks<T>(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/pending_tasks
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -588,7 +588,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatPendingTasksAsync<T>(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/plugins
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -600,7 +600,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatPlugins<T>(Func<CatPluginsRequestParameters, CatPluginsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/plugins
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -612,7 +612,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatPluginsAsync<T>(Func<CatPluginsRequestParameters, CatPluginsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/recovery
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -624,7 +624,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatRecovery<T>(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/recovery
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -636,7 +636,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatRecoveryAsync<T>(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/recovery/{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -649,7 +649,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatRecovery<T>(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/recovery/{index}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -662,7 +662,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatRecoveryAsync<T>(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/repositories
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -674,7 +674,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatRepositories<T>(Func<CatRepositoriesRequestParameters, CatRepositoriesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/repositories
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -686,7 +686,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatRepositoriesAsync<T>(Func<CatRepositoriesRequestParameters, CatRepositoriesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/segments
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -698,7 +698,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatSegments<T>(Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/segments
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -710,7 +710,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatSegmentsAsync<T>(Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/segments/{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -723,7 +723,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatSegments<T>(string index, Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/segments/{index}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -736,7 +736,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatSegmentsAsync<T>(string index, Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/shards
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -748,7 +748,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatShards<T>(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/shards
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -760,7 +760,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatShardsAsync<T>(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/shards/{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -773,7 +773,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatShards<T>(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/shards/{index}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -786,7 +786,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatShardsAsync<T>(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/snapshots
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -798,7 +798,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatSnapshots<T>(Func<CatSnapshotsRequestParameters, CatSnapshotsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/snapshots
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -810,7 +810,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatSnapshotsAsync<T>(Func<CatSnapshotsRequestParameters, CatSnapshotsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/snapshots/{repository}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -823,7 +823,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">Name of repository from which to fetch the snapshot information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatSnapshots<T>(string repository, Func<CatSnapshotsRequestParameters, CatSnapshotsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/snapshots/{repository}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -836,7 +836,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">Name of repository from which to fetch the snapshot information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatSnapshotsAsync<T>(string repository, Func<CatSnapshotsRequestParameters, CatSnapshotsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/tasks
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -848,7 +848,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatTasks<T>(Func<CatTasksRequestParameters, CatTasksRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/tasks
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -860,7 +860,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatTasksAsync<T>(Func<CatTasksRequestParameters, CatTasksRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/templates
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -872,7 +872,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatTemplates<T>(Func<CatTemplatesRequestParameters, CatTemplatesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/templates
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -884,7 +884,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatTemplatesAsync<T>(Func<CatTemplatesRequestParameters, CatTemplatesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/templates/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -897,7 +897,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A pattern that returned template names must match</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatTemplates<T>(string name, Func<CatTemplatesRequestParameters, CatTemplatesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/templates/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -910,7 +910,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A pattern that returned template names must match</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatTemplatesAsync<T>(string name, Func<CatTemplatesRequestParameters, CatTemplatesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/thread_pool
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -922,7 +922,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatThreadPool<T>(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/thread_pool
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -934,7 +934,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatThreadPoolAsync<T>(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/thread_pool/{thread_pool_patterns}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -947,7 +947,7 @@ namespace Elasticsearch.Net
 		///<param name="thread_pool_patterns">A comma-separated list of regular-expressions to filter the thread pools in the output</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CatThreadPool<T>(string thread_pool_patterns, Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cat/thread_pool/{thread_pool_patterns}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -960,7 +960,7 @@ namespace Elasticsearch.Net
 		///<param name="thread_pool_patterns">A comma-separated list of regular-expressions to filter the thread pools in the output</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatThreadPoolAsync<T>(string thread_pool_patterns, Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_search/scroll
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -973,7 +973,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ClearScroll<T>(PostData<object> body, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_search/scroll
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -986,7 +986,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ClearScrollAsync<T>(PostData<object> body, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/allocation/explain
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -998,7 +998,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ClusterAllocationExplainGet<T>(Func<ClusterAllocationExplainRequestParameters, ClusterAllocationExplainRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/allocation/explain
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1010,7 +1010,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ClusterAllocationExplainGetAsync<T>(Func<ClusterAllocationExplainRequestParameters, ClusterAllocationExplainRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_cluster/allocation/explain
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1023,7 +1023,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The index, shard, and primary flag to explain. Empty means &#39;explain the first unassigned shard&#39;</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ClusterAllocationExplain<T>(PostData<object> body, Func<ClusterAllocationExplainRequestParameters, ClusterAllocationExplainRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_cluster/allocation/explain
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1036,7 +1036,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The index, shard, and primary flag to explain. Empty means &#39;explain the first unassigned shard&#39;</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ClusterAllocationExplainAsync<T>(PostData<object> body, Func<ClusterAllocationExplainRequestParameters, ClusterAllocationExplainRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/settings
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1048,7 +1048,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ClusterGetSettings<T>(Func<ClusterGetSettingsRequestParameters, ClusterGetSettingsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/settings
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1060,7 +1060,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ClusterGetSettingsAsync<T>(Func<ClusterGetSettingsRequestParameters, ClusterGetSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/health
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1072,7 +1072,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ClusterHealth<T>(Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/health
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1084,7 +1084,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ClusterHealthAsync<T>(Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/health/{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1097,7 +1097,7 @@ namespace Elasticsearch.Net
 		///<param name="index">Limit the information returned to a specific index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ClusterHealth<T>(string index, Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/health/{index}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1110,7 +1110,7 @@ namespace Elasticsearch.Net
 		///<param name="index">Limit the information returned to a specific index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ClusterHealthAsync<T>(string index, Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/pending_tasks
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1122,7 +1122,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ClusterPendingTasks<T>(Func<ClusterPendingTasksRequestParameters, ClusterPendingTasksRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/pending_tasks
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1134,7 +1134,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ClusterPendingTasksAsync<T>(Func<ClusterPendingTasksRequestParameters, ClusterPendingTasksRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_cluster/settings
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1147,7 +1147,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ClusterPutSettings<T>(PostData<object> body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_cluster/settings
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1160,7 +1160,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ClusterPutSettingsAsync<T>(PostData<object> body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_cluster/reroute
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1173,7 +1173,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ClusterReroute<T>(PostData<object> body, Func<ClusterRerouteRequestParameters, ClusterRerouteRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_cluster/reroute
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1186,7 +1186,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ClusterRerouteAsync<T>(PostData<object> body, Func<ClusterRerouteRequestParameters, ClusterRerouteRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/state
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1198,7 +1198,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ClusterState<T>(Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/state
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1210,7 +1210,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ClusterStateAsync<T>(Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/state/{metric}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1223,7 +1223,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ClusterState<T>(string metric, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/state/{metric}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1236,7 +1236,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ClusterStateAsync<T>(string metric, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/state/{metric}/{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1250,7 +1250,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ClusterState<T>(string metric, string index, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/state/{metric}/{index}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1264,7 +1264,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ClusterStateAsync<T>(string metric, string index, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/stats
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1276,7 +1276,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ClusterStats<T>(Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/stats
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1288,7 +1288,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ClusterStatsAsync<T>(Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/stats/nodes/{node_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1301,7 +1301,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ClusterStats<T>(string node_id, Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/stats/nodes/{node_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1314,7 +1314,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ClusterStatsAsync<T>(string node_id, Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_count
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1327,7 +1327,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Count<T>(PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_count
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1340,7 +1340,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CountAsync<T>(PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_count
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1354,7 +1354,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Count<T>(string index, PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_count
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1368,7 +1368,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CountAsync<T>(string index, PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_count
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1383,7 +1383,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Count<T>(string index, string type, PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_count
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1398,7 +1398,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CountAsync<T>(string index, string type, PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_count
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1410,7 +1410,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CountGet<T>(Func<CountRequestParameters, CountRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_count
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1422,7 +1422,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CountGetAsync<T>(Func<CountRequestParameters, CountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_count
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1435,7 +1435,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CountGet<T>(string index, Func<CountRequestParameters, CountRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_count
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1448,7 +1448,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CountGetAsync<T>(string index, Func<CountRequestParameters, CountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_count
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1462,7 +1462,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of types to restrict the results</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CountGet<T>(string index, string type, Func<CountRequestParameters, CountRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_count
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1476,7 +1476,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of types to restrict the results</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CountGetAsync<T>(string index, string type, Func<CountRequestParameters, CountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/{type}/{id}/_create
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1492,7 +1492,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Create<T>(string index, string type, string id, PostData<object> body, Func<CreateRequestParameters, CreateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/{type}/{id}/_create
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1508,7 +1508,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CreateAsync<T>(string index, string type, string id, PostData<object> body, Func<CreateRequestParameters, CreateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/{id}/_create
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1524,7 +1524,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> CreatePost<T>(string index, string type, string id, PostData<object> body, Func<CreateRequestParameters, CreateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/{id}/_create
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1540,7 +1540,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CreatePostAsync<T>(string index, string type, string id, PostData<object> body, Func<CreateRequestParameters, CreateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /{index}/{type}/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1555,7 +1555,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Delete<T>(string index, string type, string id, Func<DeleteRequestParameters, DeleteRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /{index}/{type}/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1570,7 +1570,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> DeleteAsync<T>(string index, string type, string id, Func<DeleteRequestParameters, DeleteRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_delete_by_query
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1584,7 +1584,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> DeleteByQuery<T>(string index, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_delete_by_query
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1598,7 +1598,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> DeleteByQueryAsync<T>(string index, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_delete_by_query
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1613,7 +1613,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> DeleteByQuery<T>(string index, string type, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_delete_by_query
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1628,7 +1628,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> DeleteByQueryAsync<T>(string index, string type, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_scripts/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1641,7 +1641,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Script ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> DeleteScript<T>(string id, Func<DeleteScriptRequestParameters, DeleteScriptRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_scripts/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1654,7 +1654,6 @@ namespace Elasticsearch.Net
 		///<param name="id">Script ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> DeleteScriptAsync<T>(string id, Func<DeleteScriptRequestParameters, DeleteScriptRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
 		///<summary>Represents a HEAD on /{index}/{type}/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1669,7 +1668,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Exists<T>(string index, string type, string id, Func<DocumentExistsRequestParameters, DocumentExistsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a HEAD on /{index}/{type}/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1684,7 +1683,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ExistsAsync<T>(string index, string type, string id, Func<DocumentExistsRequestParameters, DocumentExistsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a HEAD on /{index}/{type}/{id}/_source
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1699,7 +1698,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ExistsSource<T>(string index, string type, string id, Func<SourceExistsRequestParameters, SourceExistsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a HEAD on /{index}/{type}/{id}/_source
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1714,7 +1713,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ExistsSourceAsync<T>(string index, string type, string id, Func<SourceExistsRequestParameters, SourceExistsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/{id}/_explain
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1729,7 +1728,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ExplainGet<T>(string index, string type, string id, Func<ExplainRequestParameters, ExplainRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/{id}/_explain
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1744,7 +1743,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ExplainGetAsync<T>(string index, string type, string id, Func<ExplainRequestParameters, ExplainRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/{id}/_explain
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1760,7 +1759,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The query definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Explain<T>(string index, string type, string id, PostData<object> body, Func<ExplainRequestParameters, ExplainRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/{id}/_explain
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1776,7 +1775,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The query definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ExplainAsync<T>(string index, string type, string id, PostData<object> body, Func<ExplainRequestParameters, ExplainRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_field_caps
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1788,7 +1787,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> FieldCapsGet<T>(Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_field_caps
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1800,7 +1799,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> FieldCapsGetAsync<T>(Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_field_caps
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1813,7 +1812,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> FieldCapsGet<T>(string index, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_field_caps
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1826,7 +1825,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> FieldCapsGetAsync<T>(string index, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_field_caps
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1839,7 +1838,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Field json objects containing an array of field names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> FieldCaps<T>(PostData<object> body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_field_caps
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1852,7 +1851,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Field json objects containing an array of field names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> FieldCapsAsync<T>(PostData<object> body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_field_caps
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1866,7 +1865,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Field json objects containing an array of field names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> FieldCaps<T>(string index, PostData<object> body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_field_caps
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1880,7 +1879,6 @@ namespace Elasticsearch.Net
 		///<param name="body">Field json objects containing an array of field names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> FieldCapsAsync<T>(string index, PostData<object> body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
 		///<summary>Represents a GET on /{index}/{type}/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1895,7 +1893,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Get<T>(string index, string type, string id, Func<GetRequestParameters, GetRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1910,7 +1908,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> GetAsync<T>(string index, string type, string id, Func<GetRequestParameters, GetRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_scripts/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1923,7 +1921,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Script ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> GetScript<T>(string id, Func<GetScriptRequestParameters, GetScriptRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_scripts/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1936,7 +1934,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Script ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> GetScriptAsync<T>(string id, Func<GetScriptRequestParameters, GetScriptRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/{id}/_source
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1951,7 +1949,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> GetSource<T>(string index, string type, string id, Func<SourceRequestParameters, SourceRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/{id}/_source
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1966,7 +1964,6 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> GetSourceAsync<T>(string index, string type, string id, Func<SourceRequestParameters, SourceRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
 		///<summary>Represents a POST on /{index}/{type}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1981,7 +1978,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Index<T>(string index, string type, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1996,7 +1993,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndexAsync<T>(string index, string type, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2012,7 +2009,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Index<T>(string index, string type, string id, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2028,7 +2025,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndexAsync<T>(string index, string type, string id, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/{type}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2043,7 +2040,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndexPut<T>(string index, string type, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/{type}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2058,7 +2055,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndexPutAsync<T>(string index, string type, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/{type}/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2074,7 +2071,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndexPut<T>(string index, string type, string id, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/{type}/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2090,7 +2087,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndexPutAsync<T>(string index, string type, string id, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_analyze
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2102,7 +2099,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesAnalyzeGetForAll<T>(Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_analyze
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2114,7 +2111,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesAnalyzeGetForAllAsync<T>(Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_analyze
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2127,7 +2124,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesAnalyzeGet<T>(string index, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_analyze
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2140,7 +2137,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesAnalyzeGetAsync<T>(string index, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_analyze
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2153,7 +2150,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define analyzer/tokenizer parameters and the text on which the analysis should be performed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesAnalyzeForAll<T>(PostData<object> body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_analyze
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2166,7 +2163,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define analyzer/tokenizer parameters and the text on which the analysis should be performed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesAnalyzeForAllAsync<T>(PostData<object> body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_analyze
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2180,7 +2177,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define analyzer/tokenizer parameters and the text on which the analysis should be performed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesAnalyze<T>(string index, PostData<object> body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_analyze
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2194,7 +2191,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define analyzer/tokenizer parameters and the text on which the analysis should be performed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesAnalyzeAsync<T>(string index, PostData<object> body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_cache/clear
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2206,7 +2203,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesClearCacheForAll<T>(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_cache/clear
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2218,7 +2215,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesClearCacheForAllAsync<T>(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_cache/clear
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2231,7 +2228,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesClearCache<T>(string index, Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_cache/clear
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2244,7 +2241,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesClearCacheAsync<T>(string index, Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cache/clear
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2256,7 +2253,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesClearCacheGetForAll<T>(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cache/clear
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2268,7 +2265,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesClearCacheGetForAllAsync<T>(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_cache/clear
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2281,7 +2278,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesClearCacheGet<T>(string index, Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_cache/clear
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2294,7 +2291,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesClearCacheGetAsync<T>(string index, Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_close
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2307,7 +2304,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma separated list of indices to close</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesClose<T>(string index, Func<CloseIndexRequestParameters, CloseIndexRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_close
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2320,7 +2317,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma separated list of indices to close</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesCloseAsync<T>(string index, Func<CloseIndexRequestParameters, CloseIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2334,7 +2331,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesCreate<T>(string index, PostData<object> body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2348,7 +2345,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesCreateAsync<T>(string index, PostData<object> body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2361,7 +2358,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesDelete<T>(string index, Func<DeleteIndexRequestParameters, DeleteIndexRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /{index}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2374,7 +2371,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesDeleteAsync<T>(string index, Func<DeleteIndexRequestParameters, DeleteIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /{index}/_alias/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2388,7 +2385,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of aliases to delete (supports wildcards); use `_all` to delete all aliases for the specified indices.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesDeleteAlias<T>(string index, string name, Func<DeleteAliasRequestParameters, DeleteAliasRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /{index}/_alias/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2402,7 +2399,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of aliases to delete (supports wildcards); use `_all` to delete all aliases for the specified indices.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesDeleteAliasAsync<T>(string index, string name, Func<DeleteAliasRequestParameters, DeleteAliasRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_template/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2415,7 +2412,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesDeleteTemplateForAll<T>(string name, Func<DeleteIndexTemplateRequestParameters, DeleteIndexTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_template/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2428,7 +2425,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesDeleteTemplateForAllAsync<T>(string name, Func<DeleteIndexTemplateRequestParameters, DeleteIndexTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a HEAD on /{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2441,7 +2438,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesExists<T>(string index, Func<IndexExistsRequestParameters, IndexExistsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a HEAD on /{index}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2454,7 +2451,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesExistsAsync<T>(string index, Func<IndexExistsRequestParameters, IndexExistsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a HEAD on /_alias/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2467,7 +2464,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesExistsAliasForAll<T>(string name, Func<AliasExistsRequestParameters, AliasExistsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a HEAD on /_alias/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2480,7 +2477,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesExistsAliasForAllAsync<T>(string name, Func<AliasExistsRequestParameters, AliasExistsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a HEAD on /{index}/_alias/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2494,7 +2491,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesExistsAlias<T>(string index, string name, Func<AliasExistsRequestParameters, AliasExistsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a HEAD on /{index}/_alias/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2508,7 +2505,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesExistsAliasAsync<T>(string index, string name, Func<AliasExistsRequestParameters, AliasExistsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a HEAD on /_template/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2521,7 +2518,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The comma separated names of the index templates</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesExistsTemplateForAll<T>(string name, Func<IndexTemplateExistsRequestParameters, IndexTemplateExistsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a HEAD on /_template/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2534,7 +2531,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The comma separated names of the index templates</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesExistsTemplateForAllAsync<T>(string name, Func<IndexTemplateExistsRequestParameters, IndexTemplateExistsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a HEAD on /{index}/_mapping/{type}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2548,7 +2545,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to check</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesExistsType<T>(string index, string type, Func<TypeExistsRequestParameters, TypeExistsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a HEAD on /{index}/_mapping/{type}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2562,7 +2559,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to check</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesExistsTypeAsync<T>(string index, string type, Func<TypeExistsRequestParameters, TypeExistsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_flush
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2574,7 +2571,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesFlushForAll<T>(Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_flush
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2586,7 +2583,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesFlushForAllAsync<T>(Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_flush
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2599,7 +2596,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesFlush<T>(string index, Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_flush
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2612,7 +2609,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesFlushAsync<T>(string index, Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_flush
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2624,7 +2621,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesFlushGetForAll<T>(Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_flush
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2636,7 +2633,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesFlushGetForAllAsync<T>(Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_flush
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2649,7 +2646,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesFlushGet<T>(string index, Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_flush
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2662,7 +2659,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesFlushGetAsync<T>(string index, Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_flush/synced
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2674,7 +2671,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesFlushSyncedForAll<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_flush/synced
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2686,7 +2683,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesFlushSyncedForAllAsync<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_flush/synced
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2699,7 +2696,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesFlushSynced<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_flush/synced
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2712,7 +2709,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesFlushSyncedAsync<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_flush/synced
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2724,7 +2721,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesFlushSyncedGetForAll<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_flush/synced
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2736,7 +2733,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesFlushSyncedGetForAllAsync<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_flush/synced
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2749,7 +2746,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesFlushSyncedGet<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_flush/synced
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2762,7 +2759,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesFlushSyncedGetAsync<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_forcemerge
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2774,7 +2771,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesForcemergeForAll<T>(Func<ForceMergeRequestParameters, ForceMergeRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_forcemerge
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2786,7 +2783,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesForcemergeForAllAsync<T>(Func<ForceMergeRequestParameters, ForceMergeRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_forcemerge
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2799,7 +2796,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesForcemerge<T>(string index, Func<ForceMergeRequestParameters, ForceMergeRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_forcemerge
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2812,7 +2809,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesForcemergeAsync<T>(string index, Func<ForceMergeRequestParameters, ForceMergeRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2825,7 +2822,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGet<T>(string index, Func<GetIndexRequestParameters, GetIndexRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2838,7 +2835,6 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetAsync<T>(string index, Func<GetIndexRequestParameters, GetIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
 		///<summary>Represents a GET on /_alias
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2850,7 +2846,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetAliasForAll<T>(Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_alias
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2862,7 +2858,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetAliasForAllAsync<T>(Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_alias/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2875,7 +2871,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetAliasForAll<T>(string name, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_alias/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2888,7 +2884,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetAliasForAllAsync<T>(string name, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_alias/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2902,7 +2898,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetAlias<T>(string index, string name, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_alias/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2916,7 +2912,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetAliasAsync<T>(string index, string name, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_alias
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2929,7 +2925,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetAlias<T>(string index, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_alias
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2942,7 +2938,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetAliasAsync<T>(string index, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_mapping/field/{fields}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2955,7 +2951,7 @@ namespace Elasticsearch.Net
 		///<param name="fields">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetFieldMappingForAll<T>(string fields, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_mapping/field/{fields}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2968,7 +2964,7 @@ namespace Elasticsearch.Net
 		///<param name="fields">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetFieldMappingForAllAsync<T>(string fields, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_mapping/field/{fields}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2982,7 +2978,7 @@ namespace Elasticsearch.Net
 		///<param name="fields">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetFieldMapping<T>(string index, string fields, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_mapping/field/{fields}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2996,7 +2992,7 @@ namespace Elasticsearch.Net
 		///<param name="fields">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetFieldMappingAsync<T>(string index, string fields, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_mapping/{type}/field/{fields}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3010,7 +3006,7 @@ namespace Elasticsearch.Net
 		///<param name="fields">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetFieldMappingForAll<T>(string type, string fields, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_mapping/{type}/field/{fields}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3024,7 +3020,7 @@ namespace Elasticsearch.Net
 		///<param name="fields">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetFieldMappingForAllAsync<T>(string type, string fields, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_mapping/{type}/field/{fields}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3039,7 +3035,7 @@ namespace Elasticsearch.Net
 		///<param name="fields">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetFieldMapping<T>(string index, string type, string fields, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_mapping/{type}/field/{fields}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3054,7 +3050,7 @@ namespace Elasticsearch.Net
 		///<param name="fields">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetFieldMappingAsync<T>(string index, string type, string fields, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_mapping
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3066,7 +3062,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetMappingForAll<T>(Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_mapping
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3078,7 +3074,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetMappingForAllAsync<T>(Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_mapping
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3091,7 +3087,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetMapping<T>(string index, Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_mapping
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3104,7 +3100,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetMappingAsync<T>(string index, Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_mapping/{type}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3117,7 +3113,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetMappingForAll<T>(string type, Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_mapping/{type}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3130,7 +3126,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetMappingForAllAsync<T>(string type, Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_mapping/{type}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3144,7 +3140,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetMapping<T>(string index, string type, Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_mapping/{type}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3158,7 +3154,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetMappingAsync<T>(string index, string type, Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_settings
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3170,7 +3166,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetSettingsForAll<T>(Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_settings
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3182,7 +3178,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetSettingsForAllAsync<T>(Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_settings
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3195,7 +3191,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetSettings<T>(string index, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_settings
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3208,7 +3204,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetSettingsAsync<T>(string index, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_settings/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3222,7 +3218,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the settings that should be included</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetSettings<T>(string index, string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_settings/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3236,7 +3232,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the settings that should be included</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetSettingsAsync<T>(string index, string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_settings/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3249,7 +3245,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the settings that should be included</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetSettingsForAll<T>(string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_settings/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3262,7 +3258,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the settings that should be included</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetSettingsForAllAsync<T>(string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3274,7 +3270,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(Func<GetIndexTemplateRequestParameters, GetIndexTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3286,7 +3282,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(Func<GetIndexTemplateRequestParameters, GetIndexTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_template/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3299,7 +3295,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The comma separated names of the index templates</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(string name, Func<GetIndexTemplateRequestParameters, GetIndexTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_template/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3312,7 +3308,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The comma separated names of the index templates</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(string name, Func<GetIndexTemplateRequestParameters, GetIndexTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_upgrade
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3324,7 +3320,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetUpgradeForAll<T>(Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_upgrade
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3336,7 +3332,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetUpgradeForAllAsync<T>(Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_upgrade
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3349,7 +3345,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetUpgrade<T>(string index, Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_upgrade
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3362,7 +3358,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetUpgradeAsync<T>(string index, Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_open
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3375,7 +3371,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma separated list of indices to open</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesOpen<T>(string index, Func<OpenIndexRequestParameters, OpenIndexRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_open
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3388,7 +3384,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma separated list of indices to open</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesOpenAsync<T>(string index, Func<OpenIndexRequestParameters, OpenIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/_alias/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3403,7 +3399,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesPutAlias<T>(string index, string name, PostData<object> body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/_alias/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3418,7 +3414,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesPutAliasAsync<T>(string index, string name, PostData<object> body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_alias/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3433,7 +3429,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesPutAliasPost<T>(string index, string name, PostData<object> body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_alias/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3448,7 +3444,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesPutAliasPostAsync<T>(string index, string name, PostData<object> body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/{type}/_mapping
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3463,7 +3459,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesPutMapping<T>(string index, string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/{type}/_mapping
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3478,7 +3474,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesPutMappingAsync<T>(string index, string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_mapping/{type}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3492,7 +3488,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesPutMappingForAll<T>(string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_mapping/{type}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3506,7 +3502,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesPutMappingForAllAsync<T>(string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_mapping
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3521,7 +3517,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesPutMappingPost<T>(string index, string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_mapping
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3536,7 +3532,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesPutMappingPostAsync<T>(string index, string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_mapping/{type}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3550,7 +3546,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesPutMappingPostForAll<T>(string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_mapping/{type}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3564,7 +3560,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesPutMappingPostForAllAsync<T>(string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_settings
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3577,7 +3573,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesPutSettingsForAll<T>(PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_settings
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3590,7 +3586,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesPutSettingsForAllAsync<T>(PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/_settings
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3604,7 +3600,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesPutSettings<T>(string index, PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/_settings
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3618,7 +3614,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesPutSettingsAsync<T>(string index, PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_template/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3632,7 +3628,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesPutTemplateForAll<T>(string name, PostData<object> body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_template/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3646,7 +3642,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesPutTemplateForAllAsync<T>(string name, PostData<object> body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_template/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3660,7 +3656,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesPutTemplatePostForAll<T>(string name, PostData<object> body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_template/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3674,7 +3670,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesPutTemplatePostForAllAsync<T>(string name, PostData<object> body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_recovery
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3686,7 +3682,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesRecoveryForAll<T>(Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_recovery
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3698,7 +3694,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesRecoveryForAllAsync<T>(Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_recovery
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3711,7 +3707,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesRecovery<T>(string index, Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_recovery
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3724,7 +3720,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesRecoveryAsync<T>(string index, Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_refresh
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3736,7 +3732,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesRefreshForAll<T>(Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_refresh
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3748,7 +3744,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesRefreshForAllAsync<T>(Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_refresh
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3761,7 +3757,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesRefresh<T>(string index, Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_refresh
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3774,7 +3770,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesRefreshAsync<T>(string index, Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_refresh
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3786,7 +3782,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesRefreshGetForAll<T>(Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_refresh
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3798,7 +3794,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesRefreshGetForAllAsync<T>(Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_refresh
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3811,7 +3807,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesRefreshGet<T>(string index, Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_refresh
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3824,7 +3820,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesRefreshGetAsync<T>(string index, Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{alias}/_rollover
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3838,7 +3834,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The conditions that needs to be met for executing rollover</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesRolloverForAll<T>(string alias, PostData<object> body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{alias}/_rollover
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3852,7 +3848,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The conditions that needs to be met for executing rollover</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesRolloverForAllAsync<T>(string alias, PostData<object> body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{alias}/_rollover/{new_index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3867,7 +3863,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The conditions that needs to be met for executing rollover</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesRolloverForAll<T>(string alias, string new_index, PostData<object> body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{alias}/_rollover/{new_index}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3882,7 +3878,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The conditions that needs to be met for executing rollover</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesRolloverForAllAsync<T>(string alias, string new_index, PostData<object> body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_segments
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3894,7 +3890,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesSegmentsForAll<T>(Func<SegmentsRequestParameters, SegmentsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_segments
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3906,7 +3902,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesSegmentsForAllAsync<T>(Func<SegmentsRequestParameters, SegmentsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_segments
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3919,7 +3915,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesSegments<T>(string index, Func<SegmentsRequestParameters, SegmentsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_segments
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3932,7 +3928,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesSegmentsAsync<T>(string index, Func<SegmentsRequestParameters, SegmentsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_shard_stores
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3944,7 +3940,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesShardStoresForAll<T>(Func<IndicesShardStoresRequestParameters, IndicesShardStoresRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_shard_stores
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3956,7 +3952,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesShardStoresForAllAsync<T>(Func<IndicesShardStoresRequestParameters, IndicesShardStoresRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_shard_stores
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3969,7 +3965,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesShardStores<T>(string index, Func<IndicesShardStoresRequestParameters, IndicesShardStoresRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_shard_stores
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3982,7 +3978,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesShardStoresAsync<T>(string index, Func<IndicesShardStoresRequestParameters, IndicesShardStoresRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/_shrink/{target}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3997,7 +3993,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesShrink<T>(string index, string target, PostData<object> body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /{index}/_shrink/{target}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4012,7 +4008,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesShrinkAsync<T>(string index, string target, PostData<object> body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_shrink/{target}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4027,7 +4023,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesShrinkPost<T>(string index, string target, PostData<object> body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_shrink/{target}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4042,7 +4038,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesShrinkPostAsync<T>(string index, string target, PostData<object> body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_stats
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4054,7 +4050,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesStatsForAll<T>(Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_stats
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4066,7 +4062,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesStatsForAllAsync<T>(Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_stats/{metric}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4079,7 +4075,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesStatsForAll<T>(string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_stats/{metric}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4092,7 +4088,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesStatsForAllAsync<T>(string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_stats
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4105,7 +4101,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesStats<T>(string index, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_stats
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4118,7 +4114,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesStatsAsync<T>(string index, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_stats/{metric}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4132,7 +4128,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesStats<T>(string index, string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_stats/{metric}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4146,7 +4142,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesStatsAsync<T>(string index, string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_aliases
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4159,7 +4155,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The definition of `actions` to perform</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesUpdateAliasesForAll<T>(PostData<object> body, Func<BulkAliasRequestParameters, BulkAliasRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_aliases
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4172,7 +4168,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The definition of `actions` to perform</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesUpdateAliasesForAllAsync<T>(PostData<object> body, Func<BulkAliasRequestParameters, BulkAliasRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_upgrade
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4184,7 +4180,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesUpgradeForAll<T>(Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_upgrade
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4196,7 +4192,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesUpgradeForAllAsync<T>(Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_upgrade
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4209,7 +4205,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesUpgrade<T>(string index, Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_upgrade
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4222,7 +4218,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesUpgradeAsync<T>(string index, Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_validate/query
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4234,7 +4230,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesValidateQueryGetForAll<T>(Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_validate/query
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4246,7 +4242,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesValidateQueryGetForAllAsync<T>(Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_validate/query
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4259,7 +4255,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesValidateQueryGet<T>(string index, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_validate/query
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4272,7 +4268,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesValidateQueryGetAsync<T>(string index, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_validate/query
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4286,7 +4282,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesValidateQueryGet<T>(string index, string type, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_validate/query
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4300,7 +4296,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesValidateQueryGetAsync<T>(string index, string type, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_validate/query
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4313,7 +4309,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesValidateQueryForAll<T>(PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_validate/query
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4326,7 +4322,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesValidateQueryForAllAsync<T>(PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_validate/query
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4340,7 +4336,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesValidateQuery<T>(string index, PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_validate/query
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4354,7 +4350,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesValidateQueryAsync<T>(string index, PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_validate/query
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4369,7 +4365,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesValidateQuery<T>(string index, string type, PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_validate/query
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4384,7 +4380,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesValidateQueryAsync<T>(string index, string type, PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4396,7 +4392,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Info<T>(Func<RootNodeInfoRequestParameters, RootNodeInfoRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4408,7 +4404,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> InfoAsync<T>(Func<RootNodeInfoRequestParameters, RootNodeInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_ingest/pipeline/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4421,7 +4417,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Pipeline ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IngestDeletePipeline<T>(string id, Func<DeletePipelineRequestParameters, DeletePipelineRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_ingest/pipeline/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4434,7 +4430,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Pipeline ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IngestDeletePipelineAsync<T>(string id, Func<DeletePipelineRequestParameters, DeletePipelineRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_ingest/pipeline
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4446,7 +4442,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IngestGetPipeline<T>(Func<GetPipelineRequestParameters, GetPipelineRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_ingest/pipeline
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4458,7 +4454,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IngestGetPipelineAsync<T>(Func<GetPipelineRequestParameters, GetPipelineRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_ingest/pipeline/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4471,7 +4467,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Comma separated list of pipeline ids. Wildcards supported</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IngestGetPipeline<T>(string id, Func<GetPipelineRequestParameters, GetPipelineRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_ingest/pipeline/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4484,7 +4480,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Comma separated list of pipeline ids. Wildcards supported</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IngestGetPipelineAsync<T>(string id, Func<GetPipelineRequestParameters, GetPipelineRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_ingest/processor/grok
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4496,7 +4492,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IngestProcessorGrok<T>(Func<IngestProcessorGrokRequestParameters, IngestProcessorGrokRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_ingest/processor/grok
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4508,7 +4504,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IngestProcessorGrokAsync<T>(Func<IngestProcessorGrokRequestParameters, IngestProcessorGrokRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_ingest/pipeline/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4522,7 +4518,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The ingest definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IngestPutPipeline<T>(string id, PostData<object> body, Func<PutPipelineRequestParameters, PutPipelineRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_ingest/pipeline/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4536,7 +4532,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The ingest definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IngestPutPipelineAsync<T>(string id, PostData<object> body, Func<PutPipelineRequestParameters, PutPipelineRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_ingest/pipeline/_simulate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4548,7 +4544,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IngestSimulateGet<T>(Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_ingest/pipeline/_simulate
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4560,7 +4556,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IngestSimulateGetAsync<T>(Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_ingest/pipeline/{id}/_simulate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4573,7 +4569,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Pipeline ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IngestSimulateGet<T>(string id, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_ingest/pipeline/{id}/_simulate
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4586,7 +4582,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Pipeline ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IngestSimulateGetAsync<T>(string id, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_ingest/pipeline/_simulate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4599,7 +4595,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The simulate definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IngestSimulate<T>(PostData<object> body, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_ingest/pipeline/_simulate
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4612,7 +4608,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The simulate definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IngestSimulateAsync<T>(PostData<object> body, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_ingest/pipeline/{id}/_simulate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4626,7 +4622,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The simulate definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IngestSimulate<T>(string id, PostData<object> body, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_ingest/pipeline/{id}/_simulate
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4640,7 +4636,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The simulate definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IngestSimulateAsync<T>(string id, PostData<object> body, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_mget
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4652,7 +4648,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> MgetGet<T>(Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_mget
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4664,7 +4660,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MgetGetAsync<T>(Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_mget
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4677,7 +4673,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> MgetGet<T>(string index, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_mget
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4690,7 +4686,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MgetGetAsync<T>(string index, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_mget
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4704,7 +4700,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> MgetGet<T>(string index, string type, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_mget
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4718,7 +4714,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MgetGetAsync<T>(string index, string type, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_mget
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4731,7 +4727,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Mget<T>(PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_mget
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4744,7 +4740,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MgetAsync<T>(PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_mget
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4758,7 +4754,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Mget<T>(string index, PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_mget
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4772,7 +4768,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MgetAsync<T>(string index, PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_mget
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4787,7 +4783,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Mget<T>(string index, string type, PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_mget
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4802,7 +4798,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MgetAsync<T>(string index, string type, PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_msearch
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4814,7 +4810,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> MsearchGet<T>(Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_msearch
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4826,7 +4822,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MsearchGetAsync<T>(Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_msearch
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4839,7 +4835,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> MsearchGet<T>(string index, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_msearch
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4852,7 +4848,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MsearchGetAsync<T>(string index, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_msearch
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4866,7 +4862,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> MsearchGet<T>(string index, string type, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_msearch
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4880,7 +4876,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MsearchGetAsync<T>(string index, string type, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_msearch
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4893,7 +4889,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Msearch<T>(PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_msearch
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4906,7 +4902,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MsearchAsync<T>(PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_msearch
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4920,7 +4916,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Msearch<T>(string index, PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_msearch
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4934,7 +4930,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MsearchAsync<T>(string index, PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_msearch
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4949,7 +4945,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Msearch<T>(string index, string type, PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_msearch
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4964,7 +4960,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MsearchAsync<T>(string index, string type, PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_msearch/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4976,7 +4972,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> MsearchTemplateGet<T>(Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_msearch/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -4988,7 +4984,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MsearchTemplateGetAsync<T>(Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_msearch/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5001,7 +4997,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> MsearchTemplateGet<T>(string index, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_msearch/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5014,7 +5010,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MsearchTemplateGetAsync<T>(string index, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_msearch/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5028,7 +5024,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> MsearchTemplateGet<T>(string index, string type, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_msearch/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5042,7 +5038,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MsearchTemplateGetAsync<T>(string index, string type, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_msearch/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5055,7 +5051,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> MsearchTemplate<T>(PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_msearch/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5068,7 +5064,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MsearchTemplateAsync<T>(PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_msearch/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5082,7 +5078,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> MsearchTemplate<T>(string index, PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_msearch/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5096,7 +5092,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MsearchTemplateAsync<T>(string index, PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_msearch/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5111,7 +5107,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> MsearchTemplate<T>(string index, string type, PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_msearch/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5126,7 +5122,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MsearchTemplateAsync<T>(string index, string type, PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_mtermvectors
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5138,7 +5134,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> MtermvectorsGet<T>(Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_mtermvectors
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5150,7 +5146,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_mtermvectors
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5163,7 +5159,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> MtermvectorsGet<T>(string index, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_mtermvectors
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5176,7 +5172,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(string index, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_mtermvectors
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5190,7 +5186,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> MtermvectorsGet<T>(string index, string type, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_mtermvectors
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5204,7 +5200,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(string index, string type, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_mtermvectors
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5217,7 +5213,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Mtermvectors<T>(PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_mtermvectors
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5230,7 +5226,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_mtermvectors
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5244,7 +5240,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Mtermvectors<T>(string index, PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_mtermvectors
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5258,7 +5254,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(string index, PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_mtermvectors
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5273,7 +5269,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Mtermvectors<T>(string index, string type, PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_mtermvectors
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5288,7 +5284,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(string index, string type, PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/nodes/hotthreads
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5300,7 +5296,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> NodesHotThreadsForAll<T>(Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/nodes/hotthreads
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5312,7 +5308,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> NodesHotThreadsForAllAsync<T>(Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/nodes/{node_id}/hotthreads
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5325,7 +5321,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> NodesHotThreads<T>(string node_id, Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_cluster/nodes/{node_id}/hotthreads
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5338,7 +5334,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> NodesHotThreadsAsync<T>(string node_id, Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5350,7 +5346,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> NodesInfoForAll<T>(Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5362,7 +5358,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> NodesInfoForAllAsync<T>(Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/{node_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5375,7 +5371,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> NodesInfo<T>(string node_id, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/{node_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5388,7 +5384,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> NodesInfoAsync<T>(string node_id, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/{metric}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5401,7 +5397,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> NodesInfoForAll<T>(string metric, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/{metric}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5414,7 +5410,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> NodesInfoForAllAsync<T>(string metric, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/{node_id}/{metric}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5428,7 +5424,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> NodesInfo<T>(string node_id, string metric, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/{node_id}/{metric}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5442,7 +5438,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> NodesInfoAsync<T>(string node_id, string metric, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/stats
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5454,7 +5450,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> NodesStatsForAll<T>(Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/stats
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5466,7 +5462,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> NodesStatsForAllAsync<T>(Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/{node_id}/stats
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5479,7 +5475,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> NodesStats<T>(string node_id, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/{node_id}/stats
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5492,7 +5488,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> NodesStatsAsync<T>(string node_id, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/stats/{metric}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5505,7 +5501,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> NodesStatsForAll<T>(string metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/stats/{metric}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5518,7 +5514,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> NodesStatsForAllAsync<T>(string metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/{node_id}/stats/{metric}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5532,7 +5528,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> NodesStats<T>(string node_id, string metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/{node_id}/stats/{metric}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5546,7 +5542,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> NodesStatsAsync<T>(string node_id, string metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/stats/{metric}/{index_metric}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5560,7 +5556,7 @@ namespace Elasticsearch.Net
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> NodesStatsForAll<T>(string metric, string index_metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/stats/{metric}/{index_metric}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5574,7 +5570,7 @@ namespace Elasticsearch.Net
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> NodesStatsForAllAsync<T>(string metric, string index_metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/{node_id}/stats/{metric}/{index_metric}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5589,7 +5585,7 @@ namespace Elasticsearch.Net
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> NodesStats<T>(string node_id, string metric, string index_metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/{node_id}/stats/{metric}/{index_metric}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5604,7 +5600,7 @@ namespace Elasticsearch.Net
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> NodesStatsAsync<T>(string node_id, string metric, string index_metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/usage
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5616,7 +5612,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> NodesUsageForAll<T>(Func<NodesUsageRequestParameters, NodesUsageRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/usage
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5628,7 +5624,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> NodesUsageForAllAsync<T>(Func<NodesUsageRequestParameters, NodesUsageRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/{node_id}/usage
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5641,7 +5637,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> NodesUsage<T>(string node_id, Func<NodesUsageRequestParameters, NodesUsageRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/{node_id}/usage
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5654,7 +5650,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> NodesUsageAsync<T>(string node_id, Func<NodesUsageRequestParameters, NodesUsageRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/usage/{metric}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5667,7 +5663,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> NodesUsageForAll<T>(string metric, Func<NodesUsageRequestParameters, NodesUsageRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/usage/{metric}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5680,7 +5676,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> NodesUsageForAllAsync<T>(string metric, Func<NodesUsageRequestParameters, NodesUsageRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/{node_id}/usage/{metric}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5694,7 +5690,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> NodesUsage<T>(string node_id, string metric, Func<NodesUsageRequestParameters, NodesUsageRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_nodes/{node_id}/usage/{metric}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5708,7 +5704,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> NodesUsageAsync<T>(string node_id, string metric, Func<NodesUsageRequestParameters, NodesUsageRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a HEAD on /
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5720,7 +5716,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Ping<T>(Func<PingRequestParameters, PingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a HEAD on /
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5732,7 +5728,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> PingAsync<T>(Func<PingRequestParameters, PingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_scripts/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5746,7 +5742,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> PutScript<T>(string id, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_scripts/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5760,7 +5756,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> PutScriptAsync<T>(string id, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_scripts/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5774,7 +5770,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> PutScriptPost<T>(string id, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_scripts/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5788,7 +5784,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> PutScriptPostAsync<T>(string id, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_reindex
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5801,7 +5797,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL and the prototype for the index request.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Reindex<T>(PostData<object> body, Func<ReindexOnServerRequestParameters, ReindexOnServerRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_reindex
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5814,7 +5810,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL and the prototype for the index request.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ReindexAsync<T>(PostData<object> body, Func<ReindexOnServerRequestParameters, ReindexOnServerRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_reindex/{task_id}/_rethrottle
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5827,7 +5823,7 @@ namespace Elasticsearch.Net
 		///<param name="task_id">The task id to rethrottle</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ReindexRethrottle<T>(string task_id, Func<ReindexRethrottleRequestParameters, ReindexRethrottleRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_reindex/{task_id}/_rethrottle
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5840,7 +5836,7 @@ namespace Elasticsearch.Net
 		///<param name="task_id">The task id to rethrottle</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ReindexRethrottleAsync<T>(string task_id, Func<ReindexRethrottleRequestParameters, ReindexRethrottleRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_remote/info
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5852,7 +5848,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> RemoteInfo<T>(Func<RemoteInfoRequestParameters, RemoteInfoRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_remote/info
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5864,7 +5860,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> RemoteInfoAsync<T>(Func<RemoteInfoRequestParameters, RemoteInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_render/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5876,7 +5872,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> RenderSearchTemplateGet<T>(Func<RenderSearchTemplateRequestParameters, RenderSearchTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_render/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5888,7 +5884,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> RenderSearchTemplateGetAsync<T>(Func<RenderSearchTemplateRequestParameters, RenderSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_render/template/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5901,7 +5897,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The id of the stored search template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> RenderSearchTemplateGet<T>(string id, Func<RenderSearchTemplateRequestParameters, RenderSearchTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_render/template/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5914,7 +5910,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The id of the stored search template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> RenderSearchTemplateGetAsync<T>(string id, Func<RenderSearchTemplateRequestParameters, RenderSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_render/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5927,7 +5923,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> RenderSearchTemplate<T>(PostData<object> body, Func<RenderSearchTemplateRequestParameters, RenderSearchTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_render/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5940,7 +5936,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> RenderSearchTemplateAsync<T>(PostData<object> body, Func<RenderSearchTemplateRequestParameters, RenderSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_render/template/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5954,7 +5950,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> RenderSearchTemplate<T>(string id, PostData<object> body, Func<RenderSearchTemplateRequestParameters, RenderSearchTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_render/template/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5968,7 +5964,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> RenderSearchTemplateAsync<T>(string id, PostData<object> body, Func<RenderSearchTemplateRequestParameters, RenderSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_search/scroll
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5980,7 +5976,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> ScrollGet<T>(Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_search/scroll
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -5992,7 +5988,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ScrollGetAsync<T>(Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_search/scroll
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6005,7 +6001,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Scroll<T>(PostData<object> body, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_search/scroll
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6018,7 +6014,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ScrollAsync<T>(PostData<object> body, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_search
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6030,7 +6026,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SearchGet<T>(Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_search
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6042,7 +6038,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SearchGetAsync<T>(Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_search
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6055,7 +6051,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SearchGet<T>(string index, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_search
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6068,7 +6064,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SearchGetAsync<T>(string index, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_search
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6082,7 +6078,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SearchGet<T>(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_search
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6096,7 +6092,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SearchGetAsync<T>(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_search
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6109,7 +6105,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Search<T>(PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_search
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6122,7 +6118,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SearchAsync<T>(PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_search
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6136,7 +6132,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Search<T>(string index, PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_search
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6150,7 +6146,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_search
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6165,7 +6161,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Search<T>(string index, string type, PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_search
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6180,7 +6176,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, string type, PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_search_shards
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6192,7 +6188,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SearchShardsGet<T>(Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_search_shards
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6204,7 +6200,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SearchShardsGetAsync<T>(Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_search_shards
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6217,7 +6213,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SearchShardsGet<T>(string index, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_search_shards
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6230,7 +6226,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SearchShardsGetAsync<T>(string index, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_search_shards
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6242,7 +6238,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SearchShards<T>(Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_search_shards
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6254,7 +6250,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SearchShardsAsync<T>(Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_search_shards
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6267,7 +6263,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SearchShards<T>(string index, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_search_shards
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6280,7 +6276,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SearchShardsAsync<T>(string index, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_search/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6292,7 +6288,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SearchTemplateGet<T>(Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_search/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6304,7 +6300,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SearchTemplateGetAsync<T>(Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_search/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6317,7 +6313,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SearchTemplateGet<T>(string index, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_search/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6330,7 +6326,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SearchTemplateGetAsync<T>(string index, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_search/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6344,7 +6340,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SearchTemplateGet<T>(string index, string type, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_search/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6358,7 +6354,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SearchTemplateGetAsync<T>(string index, string type, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_search/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6371,7 +6367,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SearchTemplate<T>(PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_search/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6384,7 +6380,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SearchTemplateAsync<T>(PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_search/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6398,7 +6394,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SearchTemplate<T>(string index, PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_search/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6412,7 +6408,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SearchTemplateAsync<T>(string index, PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_search/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6427,7 +6423,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SearchTemplate<T>(string index, string type, PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_search/template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6442,7 +6438,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SearchTemplateAsync<T>(string index, string type, PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6457,7 +6453,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The snapshot definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SnapshotCreate<T>(string repository, string snapshot, PostData<object> body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6472,7 +6468,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The snapshot definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SnapshotCreateAsync<T>(string repository, string snapshot, PostData<object> body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6487,7 +6483,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The snapshot definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SnapshotCreatePost<T>(string repository, string snapshot, PostData<object> body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6502,7 +6498,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The snapshot definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SnapshotCreatePostAsync<T>(string repository, string snapshot, PostData<object> body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_snapshot/{repository}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6516,7 +6512,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The repository definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SnapshotCreateRepository<T>(string repository, PostData<object> body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_snapshot/{repository}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6530,7 +6526,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The repository definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryAsync<T>(string repository, PostData<object> body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_snapshot/{repository}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6544,7 +6540,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The repository definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SnapshotCreateRepositoryPost<T>(string repository, PostData<object> body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_snapshot/{repository}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6558,7 +6554,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The repository definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryPostAsync<T>(string repository, PostData<object> body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6572,7 +6568,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A snapshot name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SnapshotDelete<T>(string repository, string snapshot, Func<DeleteSnapshotRequestParameters, DeleteSnapshotRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6586,7 +6582,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A snapshot name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SnapshotDeleteAsync<T>(string repository, string snapshot, Func<DeleteSnapshotRequestParameters, DeleteSnapshotRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_snapshot/{repository}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6599,7 +6595,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A comma-separated list of repository names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SnapshotDeleteRepository<T>(string repository, Func<DeleteRepositoryRequestParameters, DeleteRepositoryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_snapshot/{repository}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6612,7 +6608,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A comma-separated list of repository names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SnapshotDeleteRepositoryAsync<T>(string repository, Func<DeleteRepositoryRequestParameters, DeleteRepositoryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6626,7 +6622,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SnapshotGet<T>(string repository, string snapshot, Func<GetSnapshotRequestParameters, GetSnapshotRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6640,7 +6636,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SnapshotGetAsync<T>(string repository, string snapshot, Func<GetSnapshotRequestParameters, GetSnapshotRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_snapshot
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6652,7 +6648,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SnapshotGetRepository<T>(Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_snapshot
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6664,7 +6660,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SnapshotGetRepositoryAsync<T>(Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_snapshot/{repository}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6677,7 +6673,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A comma-separated list of repository names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SnapshotGetRepository<T>(string repository, Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_snapshot/{repository}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6690,7 +6686,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A comma-separated list of repository names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SnapshotGetRepositoryAsync<T>(string repository, Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot}/_restore
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6705,7 +6701,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Details of what to restore</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SnapshotRestore<T>(string repository, string snapshot, PostData<object> body, Func<RestoreRequestParameters, RestoreRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot}/_restore
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6720,7 +6716,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Details of what to restore</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SnapshotRestoreAsync<T>(string repository, string snapshot, PostData<object> body, Func<RestoreRequestParameters, RestoreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_snapshot/_status
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6732,7 +6728,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SnapshotStatus<T>(Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_snapshot/_status
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6744,7 +6740,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SnapshotStatusAsync<T>(Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_snapshot/{repository}/_status
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6757,7 +6753,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A repository name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SnapshotStatus<T>(string repository, Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_snapshot/{repository}/_status
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6770,7 +6766,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A repository name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SnapshotStatusAsync<T>(string repository, Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_snapshot/{repository}/{snapshot}/_status
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6784,7 +6780,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SnapshotStatus<T>(string repository, string snapshot, Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_snapshot/{repository}/{snapshot}/_status
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6798,7 +6794,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SnapshotStatusAsync<T>(string repository, string snapshot, Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_snapshot/{repository}/_verify
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6811,7 +6807,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A repository name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> SnapshotVerifyRepository<T>(string repository, Func<VerifyRepositoryRequestParameters, VerifyRepositoryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_snapshot/{repository}/_verify
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6824,7 +6820,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A repository name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SnapshotVerifyRepositoryAsync<T>(string repository, Func<VerifyRepositoryRequestParameters, VerifyRepositoryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_tasks/_cancel
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6836,7 +6832,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> TasksCancel<T>(Func<CancelTasksRequestParameters, CancelTasksRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_tasks/_cancel
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6848,7 +6844,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> TasksCancelAsync<T>(Func<CancelTasksRequestParameters, CancelTasksRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_tasks/{task_id}/_cancel
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6861,7 +6857,7 @@ namespace Elasticsearch.Net
 		///<param name="task_id">Cancel the task with specified task id (node_id:task_number)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> TasksCancel<T>(string task_id, Func<CancelTasksRequestParameters, CancelTasksRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_tasks/{task_id}/_cancel
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6874,7 +6870,7 @@ namespace Elasticsearch.Net
 		///<param name="task_id">Cancel the task with specified task id (node_id:task_number)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> TasksCancelAsync<T>(string task_id, Func<CancelTasksRequestParameters, CancelTasksRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_tasks/{task_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6887,7 +6883,7 @@ namespace Elasticsearch.Net
 		///<param name="task_id">Return the task with specified id (node_id:task_number)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> TasksGet<T>(string task_id, Func<GetTaskRequestParameters, GetTaskRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_tasks/{task_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6900,7 +6896,7 @@ namespace Elasticsearch.Net
 		///<param name="task_id">Return the task with specified id (node_id:task_number)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> TasksGetAsync<T>(string task_id, Func<GetTaskRequestParameters, GetTaskRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_tasks
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6912,7 +6908,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> TasksList<T>(Func<ListTasksRequestParameters, ListTasksRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_tasks
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6924,7 +6920,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> TasksListAsync<T>(Func<ListTasksRequestParameters, ListTasksRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_termvectors
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6938,7 +6934,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> TermvectorsGet<T>(string index, string type, Func<TermVectorsRequestParameters, TermVectorsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_termvectors
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6952,7 +6948,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> TermvectorsGetAsync<T>(string index, string type, Func<TermVectorsRequestParameters, TermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/{id}/_termvectors
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6967,7 +6963,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> TermvectorsGet<T>(string index, string type, string id, Func<TermVectorsRequestParameters, TermVectorsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/{id}/_termvectors
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6982,7 +6978,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> TermvectorsGetAsync<T>(string index, string type, string id, Func<TermVectorsRequestParameters, TermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_termvectors
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6997,7 +6993,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Termvectors<T>(string index, string type, PostData<object> body, Func<TermVectorsRequestParameters, TermVectorsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_termvectors
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7012,7 +7008,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> TermvectorsAsync<T>(string index, string type, PostData<object> body, Func<TermVectorsRequestParameters, TermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/{id}/_termvectors
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7028,7 +7024,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Termvectors<T>(string index, string type, string id, PostData<object> body, Func<TermVectorsRequestParameters, TermVectorsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/{id}/_termvectors
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7044,7 +7040,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> TermvectorsAsync<T>(string index, string type, string id, PostData<object> body, Func<TermVectorsRequestParameters, TermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/{id}/_update
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7060,7 +7056,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definition using either `script` or partial `doc`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> Update<T>(string index, string type, string id, PostData<object> body, Func<UpdateRequestParameters, UpdateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/{id}/_update
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7076,7 +7072,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definition using either `script` or partial `doc`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> UpdateAsync<T>(string index, string type, string id, PostData<object> body, Func<UpdateRequestParameters, UpdateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_update_by_query
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7090,7 +7086,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> UpdateByQuery<T>(string index, PostData<object> body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_update_by_query
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7104,7 +7100,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> UpdateByQueryAsync<T>(string index, PostData<object> body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_update_by_query
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7119,7 +7115,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> UpdateByQuery<T>(string index, string type, PostData<object> body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_update_by_query
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7134,7 +7130,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> UpdateByQueryAsync<T>(string index, string type, PostData<object> body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_xpack/graph/_explore
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7147,7 +7143,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackGraphExploreGet<T>(string index, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_xpack/graph/_explore
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7160,7 +7156,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackGraphExploreGetAsync<T>(string index, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_xpack/graph/_explore
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7174,7 +7170,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackGraphExploreGet<T>(string index, string type, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/{type}/_xpack/graph/_explore
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7188,7 +7184,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackGraphExploreGetAsync<T>(string index, string type, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_xpack/graph/_explore
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7202,7 +7198,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Graph Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackGraphExplore<T>(string index, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/_xpack/graph/_explore
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7216,7 +7212,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Graph Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackGraphExploreAsync<T>(string index, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_xpack/graph/_explore
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7231,7 +7227,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Graph Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackGraphExplore<T>(string index, string type, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /{index}/{type}/_xpack/graph/_explore
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7246,7 +7242,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Graph Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackGraphExploreAsync<T>(string index, string type, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/migration/deprecations
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7258,7 +7254,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackDeprecationInfo<T>(Func<XpackDeprecationInfoRequestParameters, XpackDeprecationInfoRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/migration/deprecations
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7270,7 +7266,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackDeprecationInfoAsync<T>(Func<XpackDeprecationInfoRequestParameters, XpackDeprecationInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_xpack/migration/deprecations
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7283,7 +7279,7 @@ namespace Elasticsearch.Net
 		///<param name="index">Index pattern</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackDeprecationInfo<T>(string index, Func<XpackDeprecationInfoRequestParameters, XpackDeprecationInfoRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /{index}/_xpack/migration/deprecations
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7296,7 +7292,7 @@ namespace Elasticsearch.Net
 		///<param name="index">Index pattern</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackDeprecationInfoAsync<T>(string index, Func<XpackDeprecationInfoRequestParameters, XpackDeprecationInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7308,7 +7304,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackInfo<T>(Func<XPackInfoRequestParameters, XPackInfoRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7320,7 +7316,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackInfoAsync<T>(Func<XPackInfoRequestParameters, XPackInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/usage
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7332,7 +7328,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackUsage<T>(Func<XPackUsageRequestParameters, XPackUsageRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/usage
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7344,7 +7340,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackUsageAsync<T>(Func<XPackUsageRequestParameters, XPackUsageRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/license
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7356,7 +7352,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackLicenseDelete<T>(Func<DeleteLicenseRequestParameters, DeleteLicenseRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/license
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7368,7 +7364,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackLicenseDeleteAsync<T>(Func<DeleteLicenseRequestParameters, DeleteLicenseRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/license
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7380,7 +7376,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackLicenseGet<T>(Func<GetLicenseRequestParameters, GetLicenseRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/license
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7392,7 +7388,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackLicenseGetAsync<T>(Func<GetLicenseRequestParameters, GetLicenseRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/license
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7405,7 +7401,7 @@ namespace Elasticsearch.Net
 		///<param name="body">licenses to be installed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackLicensePost<T>(PostData<object> body, Func<PostLicenseRequestParameters, PostLicenseRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/license
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7418,7 +7414,7 @@ namespace Elasticsearch.Net
 		///<param name="body">licenses to be installed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackLicensePostAsync<T>(PostData<object> body, Func<PostLicenseRequestParameters, PostLicenseRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/_close
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7431,7 +7427,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The name of the job to close</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlCloseJob<T>(string job_id, Func<CloseJobRequestParameters, CloseJobRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/_close
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7444,7 +7440,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The name of the job to close</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlCloseJobAsync<T>(string job_id, Func<CloseJobRequestParameters, CloseJobRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/ml/datafeeds/{datafeed_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7457,7 +7453,7 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeed to delete</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlDeleteDatafeed<T>(string datafeed_id, Func<DeleteDatafeedRequestParameters, DeleteDatafeedRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/ml/datafeeds/{datafeed_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7470,7 +7466,7 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeed to delete</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlDeleteDatafeedAsync<T>(string datafeed_id, Func<DeleteDatafeedRequestParameters, DeleteDatafeedRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/ml/_delete_expired_data
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7482,7 +7478,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlDeleteExpiredData<T>(Func<DeleteExpiredDataRequestParameters, DeleteExpiredDataRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/ml/_delete_expired_data
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7494,7 +7490,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlDeleteExpiredDataAsync<T>(Func<DeleteExpiredDataRequestParameters, DeleteExpiredDataRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/ml/anomaly_detectors/{job_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7507,7 +7503,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The ID of the job to delete</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlDeleteJob<T>(string job_id, Func<DeleteJobRequestParameters, DeleteJobRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/ml/anomaly_detectors/{job_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7520,7 +7516,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The ID of the job to delete</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlDeleteJobAsync<T>(string job_id, Func<DeleteJobRequestParameters, DeleteJobRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7534,7 +7530,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot_id">The ID of the snapshot to delete</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlDeleteModelSnapshot<T>(string job_id, string snapshot_id, Func<DeleteModelSnapshotRequestParameters, DeleteModelSnapshotRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7548,7 +7544,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot_id">The ID of the snapshot to delete</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlDeleteModelSnapshotAsync<T>(string job_id, string snapshot_id, Func<DeleteModelSnapshotRequestParameters, DeleteModelSnapshotRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/_flush
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7562,7 +7558,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Flush parameters</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlFlushJob<T>(string job_id, PostData<object> body, Func<FlushJobRequestParameters, FlushJobRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/_flush
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7576,7 +7572,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Flush parameters</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlFlushJobAsync<T>(string job_id, PostData<object> body, Func<FlushJobRequestParameters, FlushJobRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/results/buckets
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7589,7 +7585,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">ID of the job to get bucket results from</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetBuckets<T>(string job_id, Func<GetBucketsRequestParameters, GetBucketsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/results/buckets
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7602,7 +7598,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">ID of the job to get bucket results from</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetBucketsAsync<T>(string job_id, Func<GetBucketsRequestParameters, GetBucketsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/results/buckets
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7616,7 +7612,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Bucket selection details if not provided in URI</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetBuckets<T>(string job_id, PostData<object> body, Func<GetBucketsRequestParameters, GetBucketsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/results/buckets
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7630,7 +7626,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Bucket selection details if not provided in URI</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetBucketsAsync<T>(string job_id, PostData<object> body, Func<GetBucketsRequestParameters, GetBucketsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7644,7 +7640,7 @@ namespace Elasticsearch.Net
 		///<param name="category_id">The identifier of the category definition of interest</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetCategories<T>(string job_id, long category_id, Func<GetCategoriesRequestParameters, GetCategoriesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7658,7 +7654,7 @@ namespace Elasticsearch.Net
 		///<param name="category_id">The identifier of the category definition of interest</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetCategoriesAsync<T>(string job_id, long category_id, Func<GetCategoriesRequestParameters, GetCategoriesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/results/categories/
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7671,7 +7667,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The name of the job</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetCategories<T>(string job_id, Func<GetCategoriesRequestParameters, GetCategoriesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/results/categories/
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7684,7 +7680,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The name of the job</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetCategoriesAsync<T>(string job_id, Func<GetCategoriesRequestParameters, GetCategoriesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7699,7 +7695,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Category selection details if not provided in URI</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetCategories<T>(string job_id, long category_id, PostData<object> body, Func<GetCategoriesRequestParameters, GetCategoriesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7714,7 +7710,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Category selection details if not provided in URI</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetCategoriesAsync<T>(string job_id, long category_id, PostData<object> body, Func<GetCategoriesRequestParameters, GetCategoriesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/results/categories/
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7728,7 +7724,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Category selection details if not provided in URI</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetCategories<T>(string job_id, PostData<object> body, Func<GetCategoriesRequestParameters, GetCategoriesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/results/categories/
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7742,7 +7738,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Category selection details if not provided in URI</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetCategoriesAsync<T>(string job_id, PostData<object> body, Func<GetCategoriesRequestParameters, GetCategoriesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/datafeeds/{datafeed_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7755,7 +7751,7 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeeds to fetch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetDatafeeds<T>(string datafeed_id, Func<GetDatafeedsRequestParameters, GetDatafeedsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/datafeeds/{datafeed_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7768,7 +7764,7 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeeds to fetch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetDatafeedsAsync<T>(string datafeed_id, Func<GetDatafeedsRequestParameters, GetDatafeedsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/datafeeds
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7780,7 +7776,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetDatafeeds<T>(Func<GetDatafeedsRequestParameters, GetDatafeedsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/datafeeds
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7792,7 +7788,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetDatafeedsAsync<T>(Func<GetDatafeedsRequestParameters, GetDatafeedsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/datafeeds/{datafeed_id}/_stats
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7805,7 +7801,7 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeeds stats to fetch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetDatafeedStats<T>(string datafeed_id, Func<GetDatafeedStatsRequestParameters, GetDatafeedStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/datafeeds/{datafeed_id}/_stats
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7818,7 +7814,7 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeeds stats to fetch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetDatafeedStatsAsync<T>(string datafeed_id, Func<GetDatafeedStatsRequestParameters, GetDatafeedStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/datafeeds/_stats
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7830,7 +7826,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetDatafeedStats<T>(Func<GetDatafeedStatsRequestParameters, GetDatafeedStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/datafeeds/_stats
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7842,7 +7838,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetDatafeedStatsAsync<T>(Func<GetDatafeedStatsRequestParameters, GetDatafeedStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/results/influencers
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7855,7 +7851,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id"></param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetInfluencers<T>(string job_id, Func<GetInfluencersRequestParameters, GetInfluencersRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/results/influencers
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7868,7 +7864,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id"></param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetInfluencersAsync<T>(string job_id, Func<GetInfluencersRequestParameters, GetInfluencersRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/results/influencers
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7882,7 +7878,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Influencer selection criteria</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetInfluencers<T>(string job_id, PostData<object> body, Func<GetInfluencersRequestParameters, GetInfluencersRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/results/influencers
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7896,7 +7892,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Influencer selection criteria</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetInfluencersAsync<T>(string job_id, PostData<object> body, Func<GetInfluencersRequestParameters, GetInfluencersRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7909,7 +7905,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The ID of the jobs to fetch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetJobs<T>(string job_id, Func<GetJobsRequestParameters, GetJobsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7922,7 +7918,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The ID of the jobs to fetch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetJobsAsync<T>(string job_id, Func<GetJobsRequestParameters, GetJobsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7934,7 +7930,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetJobs<T>(Func<GetJobsRequestParameters, GetJobsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7946,7 +7942,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetJobsAsync<T>(Func<GetJobsRequestParameters, GetJobsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/_stats
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7958,7 +7954,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetJobStats<T>(Func<GetJobStatsRequestParameters, GetJobStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/_stats
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7970,7 +7966,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetJobStatsAsync<T>(Func<GetJobStatsRequestParameters, GetJobStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/_stats
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7983,7 +7979,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The ID of the jobs stats to fetch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetJobStats<T>(string job_id, Func<GetJobStatsRequestParameters, GetJobStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/_stats
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7996,7 +7992,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The ID of the jobs stats to fetch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetJobStatsAsync<T>(string job_id, Func<GetJobStatsRequestParameters, GetJobStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8010,7 +8006,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot_id">The ID of the snapshot to fetch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetModelSnapshots<T>(string job_id, string snapshot_id, Func<GetModelSnapshotsRequestParameters, GetModelSnapshotsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8024,7 +8020,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot_id">The ID of the snapshot to fetch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetModelSnapshotsAsync<T>(string job_id, string snapshot_id, Func<GetModelSnapshotsRequestParameters, GetModelSnapshotsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8037,7 +8033,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The ID of the job to fetch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetModelSnapshots<T>(string job_id, Func<GetModelSnapshotsRequestParameters, GetModelSnapshotsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8050,7 +8046,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The ID of the job to fetch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetModelSnapshotsAsync<T>(string job_id, Func<GetModelSnapshotsRequestParameters, GetModelSnapshotsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8065,7 +8061,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Model snapshot selection criteria</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetModelSnapshots<T>(string job_id, string snapshot_id, PostData<object> body, Func<GetModelSnapshotsRequestParameters, GetModelSnapshotsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8080,7 +8076,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Model snapshot selection criteria</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetModelSnapshotsAsync<T>(string job_id, string snapshot_id, PostData<object> body, Func<GetModelSnapshotsRequestParameters, GetModelSnapshotsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8094,7 +8090,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Model snapshot selection criteria</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetModelSnapshots<T>(string job_id, PostData<object> body, Func<GetModelSnapshotsRequestParameters, GetModelSnapshotsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8108,7 +8104,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Model snapshot selection criteria</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetModelSnapshotsAsync<T>(string job_id, PostData<object> body, Func<GetModelSnapshotsRequestParameters, GetModelSnapshotsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/results/records
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8121,7 +8117,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id"></param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetRecords<T>(string job_id, Func<GetAnomalyRecordsRequestParameters, GetAnomalyRecordsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/results/records
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8134,7 +8130,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id"></param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetRecordsAsync<T>(string job_id, Func<GetAnomalyRecordsRequestParameters, GetAnomalyRecordsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/results/records
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8148,7 +8144,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Record selection criteria</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlGetRecords<T>(string job_id, PostData<object> body, Func<GetAnomalyRecordsRequestParameters, GetAnomalyRecordsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/results/records
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8162,7 +8158,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Record selection criteria</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlGetRecordsAsync<T>(string job_id, PostData<object> body, Func<GetAnomalyRecordsRequestParameters, GetAnomalyRecordsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/_open
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8175,7 +8171,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The ID of the job to open</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlOpenJob<T>(string job_id, Func<OpenJobRequestParameters, OpenJobRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/_open
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8188,7 +8184,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The ID of the job to open</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlOpenJobAsync<T>(string job_id, Func<OpenJobRequestParameters, OpenJobRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/_data
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8202,7 +8198,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The data to process</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlPostData<T>(string job_id, PostData<object> body, Func<PostJobDataRequestParameters, PostJobDataRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/_data
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8216,7 +8212,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The data to process</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlPostDataAsync<T>(string job_id, PostData<object> body, Func<PostJobDataRequestParameters, PostJobDataRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/datafeeds/{datafeed_id}/_preview
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8229,7 +8225,7 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeed to preview</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlPreviewDatafeed<T>(string datafeed_id, Func<PreviewDatafeedRequestParameters, PreviewDatafeedRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/ml/datafeeds/{datafeed_id}/_preview
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8242,7 +8238,7 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeed to preview</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlPreviewDatafeedAsync<T>(string datafeed_id, Func<PreviewDatafeedRequestParameters, PreviewDatafeedRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/ml/datafeeds/{datafeed_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8256,7 +8252,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The datafeed config</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlPutDatafeed<T>(string datafeed_id, PostData<object> body, Func<PutDatafeedRequestParameters, PutDatafeedRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/ml/datafeeds/{datafeed_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8270,7 +8266,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The datafeed config</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlPutDatafeedAsync<T>(string datafeed_id, PostData<object> body, Func<PutDatafeedRequestParameters, PutDatafeedRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/ml/anomaly_detectors/{job_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8284,7 +8280,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The job</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlPutJob<T>(string job_id, PostData<object> body, Func<PutJobRequestParameters, PutJobRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/ml/anomaly_detectors/{job_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8298,7 +8294,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The job</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlPutJobAsync<T>(string job_id, PostData<object> body, Func<PutJobRequestParameters, PutJobRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8313,7 +8309,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Reversion options</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlRevertModelSnapshot<T>(string job_id, string snapshot_id, PostData<object> body, Func<RevertModelSnapshotRequestParameters, RevertModelSnapshotRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8328,7 +8324,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Reversion options</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlRevertModelSnapshotAsync<T>(string job_id, string snapshot_id, PostData<object> body, Func<RevertModelSnapshotRequestParameters, RevertModelSnapshotRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/datafeeds/{datafeed_id}/_start
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8342,7 +8338,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The start datafeed parameters</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlStartDatafeed<T>(string datafeed_id, PostData<object> body, Func<StartDatafeedRequestParameters, StartDatafeedRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/datafeeds/{datafeed_id}/_start
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8356,7 +8352,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The start datafeed parameters</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlStartDatafeedAsync<T>(string datafeed_id, PostData<object> body, Func<StartDatafeedRequestParameters, StartDatafeedRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/datafeeds/{datafeed_id}/_stop
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8369,7 +8365,7 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeed to stop</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlStopDatafeed<T>(string datafeed_id, Func<StopDatafeedRequestParameters, StopDatafeedRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/datafeeds/{datafeed_id}/_stop
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8382,7 +8378,7 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeed to stop</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlStopDatafeedAsync<T>(string datafeed_id, Func<StopDatafeedRequestParameters, StopDatafeedRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/datafeeds/{datafeed_id}/_update
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8396,7 +8392,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The datafeed update settings</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlUpdateDatafeed<T>(string datafeed_id, PostData<object> body, Func<UpdateDatafeedRequestParameters, UpdateDatafeedRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/datafeeds/{datafeed_id}/_update
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8410,7 +8406,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The datafeed update settings</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlUpdateDatafeedAsync<T>(string datafeed_id, PostData<object> body, Func<UpdateDatafeedRequestParameters, UpdateDatafeedRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/_update
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8424,7 +8420,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The job update settings</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlUpdateJob<T>(string job_id, PostData<object> body, Func<UpdateJobRequestParameters, UpdateJobRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/_update
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8438,7 +8434,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The job update settings</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlUpdateJobAsync<T>(string job_id, PostData<object> body, Func<UpdateJobRequestParameters, UpdateJobRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8453,7 +8449,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The model snapshot properties to update</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlUpdateModelSnapshot<T>(string job_id, string snapshot_id, PostData<object> body, Func<UpdateModelSnapshotRequestParameters, UpdateModelSnapshotRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8468,7 +8464,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The model snapshot properties to update</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlUpdateModelSnapshotAsync<T>(string job_id, string snapshot_id, PostData<object> body, Func<UpdateModelSnapshotRequestParameters, UpdateModelSnapshotRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/_validate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8481,7 +8477,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The job config</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlValidate<T>(PostData<object> body, Func<ValidateJobRequestParameters, ValidateJobRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/_validate
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8494,7 +8490,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The job config</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlValidateAsync<T>(PostData<object> body, Func<ValidateJobRequestParameters, ValidateJobRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/_validate/detector
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8507,7 +8503,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The detector</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackMlValidateDetector<T>(PostData<object> body, Func<ValidateDetectorRequestParameters, ValidateDetectorRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/_validate/detector
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8520,7 +8516,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The detector</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackMlValidateDetectorAsync<T>(PostData<object> body, Func<ValidateDetectorRequestParameters, ValidateDetectorRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/security/_authenticate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8532,7 +8528,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityAuthenticate<T>(Func<AuthenticateRequestParameters, AuthenticateRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/security/_authenticate
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8544,7 +8540,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityAuthenticateAsync<T>(Func<AuthenticateRequestParameters, AuthenticateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/security/user/{username}/_password
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8558,7 +8554,7 @@ namespace Elasticsearch.Net
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityChangePassword<T>(string username, PostData<object> body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/security/user/{username}/_password
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8572,7 +8568,7 @@ namespace Elasticsearch.Net
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityChangePasswordAsync<T>(string username, PostData<object> body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/security/user/_password
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8585,7 +8581,7 @@ namespace Elasticsearch.Net
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityChangePassword<T>(PostData<object> body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/security/user/_password
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8598,7 +8594,7 @@ namespace Elasticsearch.Net
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityChangePasswordAsync<T>(PostData<object> body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/user/{username}/_password
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8612,7 +8608,7 @@ namespace Elasticsearch.Net
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityChangePasswordPost<T>(string username, PostData<object> body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/user/{username}/_password
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8626,7 +8622,7 @@ namespace Elasticsearch.Net
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityChangePasswordPostAsync<T>(string username, PostData<object> body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/user/_password
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8639,7 +8635,7 @@ namespace Elasticsearch.Net
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityChangePasswordPost<T>(PostData<object> body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/user/_password
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8652,7 +8648,7 @@ namespace Elasticsearch.Net
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityChangePasswordPostAsync<T>(PostData<object> body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/realm/{realms}/_clear_cache
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8665,7 +8661,7 @@ namespace Elasticsearch.Net
 		///<param name="realms">Comma-separated list of realms to clear</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityClearCachedRealms<T>(string realms, Func<ClearCachedRealmsRequestParameters, ClearCachedRealmsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/realm/{realms}/_clear_cache
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8678,7 +8674,7 @@ namespace Elasticsearch.Net
 		///<param name="realms">Comma-separated list of realms to clear</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityClearCachedRealmsAsync<T>(string realms, Func<ClearCachedRealmsRequestParameters, ClearCachedRealmsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/role/{name}/_clear_cache
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8691,7 +8687,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityClearCachedRoles<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/role/{name}/_clear_cache
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8704,7 +8700,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityClearCachedRolesAsync<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/security/role/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8717,7 +8713,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityDeleteRole<T>(string name, Func<DeleteRoleRequestParameters, DeleteRoleRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/security/role/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8730,7 +8726,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityDeleteRoleAsync<T>(string name, Func<DeleteRoleRequestParameters, DeleteRoleRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/security/role_mapping/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8743,7 +8739,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role-mapping name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityDeleteRoleMapping<T>(string name, Func<DeleteRoleMappingRequestParameters, DeleteRoleMappingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/security/role_mapping/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8756,7 +8752,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role-mapping name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityDeleteRoleMappingAsync<T>(string name, Func<DeleteRoleMappingRequestParameters, DeleteRoleMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/security/user/{username}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8769,7 +8765,7 @@ namespace Elasticsearch.Net
 		///<param name="username">username</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityDeleteUser<T>(string username, Func<DeleteUserRequestParameters, DeleteUserRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/security/user/{username}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8782,7 +8778,7 @@ namespace Elasticsearch.Net
 		///<param name="username">username</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityDeleteUserAsync<T>(string username, Func<DeleteUserRequestParameters, DeleteUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/security/user/{username}/_disable
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8795,7 +8791,7 @@ namespace Elasticsearch.Net
 		///<param name="username">The username of the user to disable</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityDisableUser<T>(string username, Func<DisableUserRequestParameters, DisableUserRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/security/user/{username}/_disable
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8808,7 +8804,7 @@ namespace Elasticsearch.Net
 		///<param name="username">The username of the user to disable</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityDisableUserAsync<T>(string username, Func<DisableUserRequestParameters, DisableUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/user/{username}/_disable
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8821,7 +8817,7 @@ namespace Elasticsearch.Net
 		///<param name="username">The username of the user to disable</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityDisableUserPost<T>(string username, Func<DisableUserRequestParameters, DisableUserRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/user/{username}/_disable
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8834,7 +8830,7 @@ namespace Elasticsearch.Net
 		///<param name="username">The username of the user to disable</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityDisableUserPostAsync<T>(string username, Func<DisableUserRequestParameters, DisableUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/security/user/{username}/_enable
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8847,7 +8843,7 @@ namespace Elasticsearch.Net
 		///<param name="username">The username of the user to enable</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityEnableUser<T>(string username, Func<EnableUserRequestParameters, EnableUserRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/security/user/{username}/_enable
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8860,7 +8856,7 @@ namespace Elasticsearch.Net
 		///<param name="username">The username of the user to enable</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityEnableUserAsync<T>(string username, Func<EnableUserRequestParameters, EnableUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/user/{username}/_enable
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8873,7 +8869,7 @@ namespace Elasticsearch.Net
 		///<param name="username">The username of the user to enable</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityEnableUserPost<T>(string username, Func<EnableUserRequestParameters, EnableUserRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/user/{username}/_enable
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8886,7 +8882,7 @@ namespace Elasticsearch.Net
 		///<param name="username">The username of the user to enable</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityEnableUserPostAsync<T>(string username, Func<EnableUserRequestParameters, EnableUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/security/role/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8899,7 +8895,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityGetRole<T>(string name, Func<GetRoleRequestParameters, GetRoleRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/security/role/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8912,7 +8908,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityGetRoleAsync<T>(string name, Func<GetRoleRequestParameters, GetRoleRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/security/role
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8924,7 +8920,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityGetRole<T>(Func<GetRoleRequestParameters, GetRoleRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/security/role
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8936,7 +8932,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityGetRoleAsync<T>(Func<GetRoleRequestParameters, GetRoleRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/security/role_mapping/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8949,7 +8945,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role-Mapping name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityGetRoleMapping<T>(string name, Func<GetRoleMappingRequestParameters, GetRoleMappingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/security/role_mapping/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8962,7 +8958,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role-Mapping name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityGetRoleMappingAsync<T>(string name, Func<GetRoleMappingRequestParameters, GetRoleMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/security/role_mapping
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8974,7 +8970,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityGetRoleMapping<T>(Func<GetRoleMappingRequestParameters, GetRoleMappingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/security/role_mapping
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8986,7 +8982,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityGetRoleMappingAsync<T>(Func<GetRoleMappingRequestParameters, GetRoleMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/oauth2/token
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8999,7 +8995,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The token request to get</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityGetToken<T>(PostData<object> body, Func<GetUserAccessTokenRequestParameters, GetUserAccessTokenRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/oauth2/token
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9012,7 +9008,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The token request to get</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityGetTokenAsync<T>(PostData<object> body, Func<GetUserAccessTokenRequestParameters, GetUserAccessTokenRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/security/user/{username}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9025,7 +9021,7 @@ namespace Elasticsearch.Net
 		///<param name="username">A comma-separated list of usernames</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityGetUser<T>(string username, Func<GetUserRequestParameters, GetUserRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/security/user/{username}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9038,7 +9034,7 @@ namespace Elasticsearch.Net
 		///<param name="username">A comma-separated list of usernames</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityGetUserAsync<T>(string username, Func<GetUserRequestParameters, GetUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/security/user
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9050,7 +9046,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityGetUser<T>(Func<GetUserRequestParameters, GetUserRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/security/user
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9062,7 +9058,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityGetUserAsync<T>(Func<GetUserRequestParameters, GetUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/security/oauth2/token
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9075,7 +9071,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The token to invalidate</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityInvalidateToken<T>(PostData<object> body, Func<InvalidateUserAccessTokenRequestParameters, InvalidateUserAccessTokenRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/security/oauth2/token
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9088,7 +9084,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The token to invalidate</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityInvalidateTokenAsync<T>(PostData<object> body, Func<InvalidateUserAccessTokenRequestParameters, InvalidateUserAccessTokenRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/security/role/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9102,7 +9098,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The role to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityPutRole<T>(string name, PostData<object> body, Func<PutRoleRequestParameters, PutRoleRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/security/role/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9116,7 +9112,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The role to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityPutRoleAsync<T>(string name, PostData<object> body, Func<PutRoleRequestParameters, PutRoleRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/role/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9130,7 +9126,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The role to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityPutRolePost<T>(string name, PostData<object> body, Func<PutRoleRequestParameters, PutRoleRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/role/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9144,7 +9140,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The role to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityPutRolePostAsync<T>(string name, PostData<object> body, Func<PutRoleRequestParameters, PutRoleRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/security/role_mapping/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9158,7 +9154,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The role to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityPutRoleMapping<T>(string name, PostData<object> body, Func<PutRoleMappingRequestParameters, PutRoleMappingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/security/role_mapping/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9172,7 +9168,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The role to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityPutRoleMappingAsync<T>(string name, PostData<object> body, Func<PutRoleMappingRequestParameters, PutRoleMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/role_mapping/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9186,7 +9182,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The role to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityPutRoleMappingPost<T>(string name, PostData<object> body, Func<PutRoleMappingRequestParameters, PutRoleMappingRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/role_mapping/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9200,7 +9196,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The role to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityPutRoleMappingPostAsync<T>(string name, PostData<object> body, Func<PutRoleMappingRequestParameters, PutRoleMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/security/user/{username}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9214,7 +9210,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The user to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityPutUser<T>(string username, PostData<object> body, Func<PutUserRequestParameters, PutUserRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/security/user/{username}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9228,7 +9224,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The user to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityPutUserAsync<T>(string username, PostData<object> body, Func<PutUserRequestParameters, PutUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/user/{username}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9242,7 +9238,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The user to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityPutUserPost<T>(string username, PostData<object> body, Func<PutUserRequestParameters, PutUserRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/security/user/{username}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9256,7 +9252,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The user to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityPutUserPostAsync<T>(string username, PostData<object> body, Func<PutUserRequestParameters, PutUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/watcher/watch/{watch_id}/_ack
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9269,7 +9265,7 @@ namespace Elasticsearch.Net
 		///<param name="watch_id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherAckWatch<T>(string watch_id, Func<AcknowledgeWatchRequestParameters, AcknowledgeWatchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/watcher/watch/{watch_id}/_ack
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9282,7 +9278,7 @@ namespace Elasticsearch.Net
 		///<param name="watch_id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherAckWatchAsync<T>(string watch_id, Func<AcknowledgeWatchRequestParameters, AcknowledgeWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/watcher/watch/{watch_id}/_ack/{action_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9296,7 +9292,7 @@ namespace Elasticsearch.Net
 		///<param name="action_id">A comma-separated list of the action ids to be acked</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherAckWatch<T>(string watch_id, string action_id, Func<AcknowledgeWatchRequestParameters, AcknowledgeWatchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/watcher/watch/{watch_id}/_ack/{action_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9310,7 +9306,7 @@ namespace Elasticsearch.Net
 		///<param name="action_id">A comma-separated list of the action ids to be acked</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherAckWatchAsync<T>(string watch_id, string action_id, Func<AcknowledgeWatchRequestParameters, AcknowledgeWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/watch/{watch_id}/_ack
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9323,7 +9319,7 @@ namespace Elasticsearch.Net
 		///<param name="watch_id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherAckWatchPost<T>(string watch_id, Func<AcknowledgeWatchRequestParameters, AcknowledgeWatchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/watch/{watch_id}/_ack
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9336,7 +9332,7 @@ namespace Elasticsearch.Net
 		///<param name="watch_id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherAckWatchPostAsync<T>(string watch_id, Func<AcknowledgeWatchRequestParameters, AcknowledgeWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/watch/{watch_id}/_ack/{action_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9350,7 +9346,7 @@ namespace Elasticsearch.Net
 		///<param name="action_id">A comma-separated list of the action ids to be acked</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherAckWatchPost<T>(string watch_id, string action_id, Func<AcknowledgeWatchRequestParameters, AcknowledgeWatchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/watch/{watch_id}/_ack/{action_id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9364,7 +9360,7 @@ namespace Elasticsearch.Net
 		///<param name="action_id">A comma-separated list of the action ids to be acked</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherAckWatchPostAsync<T>(string watch_id, string action_id, Func<AcknowledgeWatchRequestParameters, AcknowledgeWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/watcher/watch/{watch_id}/_activate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9377,7 +9373,7 @@ namespace Elasticsearch.Net
 		///<param name="watch_id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherActivateWatch<T>(string watch_id, Func<ActivateWatchRequestParameters, ActivateWatchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/watcher/watch/{watch_id}/_activate
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9390,7 +9386,7 @@ namespace Elasticsearch.Net
 		///<param name="watch_id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherActivateWatchAsync<T>(string watch_id, Func<ActivateWatchRequestParameters, ActivateWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/watch/{watch_id}/_activate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9403,7 +9399,7 @@ namespace Elasticsearch.Net
 		///<param name="watch_id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherActivateWatchPost<T>(string watch_id, Func<ActivateWatchRequestParameters, ActivateWatchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/watch/{watch_id}/_activate
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9416,7 +9412,7 @@ namespace Elasticsearch.Net
 		///<param name="watch_id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherActivateWatchPostAsync<T>(string watch_id, Func<ActivateWatchRequestParameters, ActivateWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/watcher/watch/{watch_id}/_deactivate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9429,7 +9425,7 @@ namespace Elasticsearch.Net
 		///<param name="watch_id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherDeactivateWatch<T>(string watch_id, Func<DeactivateWatchRequestParameters, DeactivateWatchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/watcher/watch/{watch_id}/_deactivate
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9442,7 +9438,7 @@ namespace Elasticsearch.Net
 		///<param name="watch_id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherDeactivateWatchAsync<T>(string watch_id, Func<DeactivateWatchRequestParameters, DeactivateWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/watch/{watch_id}/_deactivate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9455,7 +9451,7 @@ namespace Elasticsearch.Net
 		///<param name="watch_id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherDeactivateWatchPost<T>(string watch_id, Func<DeactivateWatchRequestParameters, DeactivateWatchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/watch/{watch_id}/_deactivate
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9468,7 +9464,7 @@ namespace Elasticsearch.Net
 		///<param name="watch_id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherDeactivateWatchPostAsync<T>(string watch_id, Func<DeactivateWatchRequestParameters, DeactivateWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/watcher/watch/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9481,7 +9477,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherDeleteWatch<T>(string id, Func<DeleteWatchRequestParameters, DeleteWatchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a DELETE on /_xpack/watcher/watch/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9494,7 +9490,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherDeleteWatchAsync<T>(string id, Func<DeleteWatchRequestParameters, DeleteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/watcher/watch/{id}/_execute
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9508,7 +9504,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Execution control</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherExecuteWatch<T>(string id, PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/watcher/watch/{id}/_execute
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9522,7 +9518,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Execution control</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherExecuteWatchAsync<T>(string id, PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/watcher/watch/_execute
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9535,7 +9531,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Execution control</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherExecuteWatch<T>(PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/watcher/watch/_execute
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9548,7 +9544,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Execution control</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherExecuteWatchAsync<T>(PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/watch/{id}/_execute
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9562,7 +9558,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Execution control</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherExecuteWatchPost<T>(string id, PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/watch/{id}/_execute
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9576,7 +9572,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Execution control</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherExecuteWatchPostAsync<T>(string id, PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/watch/_execute
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9589,7 +9585,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Execution control</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherExecuteWatchPost<T>(PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/watch/_execute
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9602,7 +9598,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Execution control</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherExecuteWatchPostAsync<T>(PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/watcher/watch/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9615,7 +9611,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherGetWatch<T>(string id, Func<GetWatchRequestParameters, GetWatchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/watcher/watch/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9628,7 +9624,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherGetWatchAsync<T>(string id, Func<GetWatchRequestParameters, GetWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/watcher/watch/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9642,7 +9638,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The watch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherPutWatch<T>(string id, PostData<object> body, Func<PutWatchRequestParameters, PutWatchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a PUT on /_xpack/watcher/watch/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9656,7 +9652,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The watch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherPutWatchAsync<T>(string id, PostData<object> body, Func<PutWatchRequestParameters, PutWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/watch/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9670,7 +9666,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The watch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherPutWatchPost<T>(string id, PostData<object> body, Func<PutWatchRequestParameters, PutWatchRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/watch/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9684,7 +9680,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The watch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherPutWatchPostAsync<T>(string id, PostData<object> body, Func<PutWatchRequestParameters, PutWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/_restart
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9696,7 +9692,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherRestart<T>(Func<RestartWatcherRequestParameters, RestartWatcherRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/_restart
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9708,7 +9704,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherRestartAsync<T>(Func<RestartWatcherRequestParameters, RestartWatcherRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/_start
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9720,7 +9716,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherStart<T>(Func<StartWatcherRequestParameters, StartWatcherRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/_start
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9732,7 +9728,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherStartAsync<T>(Func<StartWatcherRequestParameters, StartWatcherRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/watcher/stats
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9744,7 +9740,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherStats<T>(Func<WatcherStatsRequestParameters, WatcherStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/watcher/stats
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9756,7 +9752,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherStatsAsync<T>(Func<WatcherStatsRequestParameters, WatcherStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/watcher/stats/{watcher_stats_metric}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9769,7 +9765,7 @@ namespace Elasticsearch.Net
 		///<param name="watcher_stats_metric">Controls what additional stat metrics should be include in the response</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherStats<T>(WatcherStatsMetric watcher_stats_metric, Func<WatcherStatsRequestParameters, WatcherStatsRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a GET on /_xpack/watcher/stats/{watcher_stats_metric}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9782,7 +9778,7 @@ namespace Elasticsearch.Net
 		///<param name="watcher_stats_metric">Controls what additional stat metrics should be include in the response</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherStatsAsync<T>(WatcherStatsMetric watcher_stats_metric, Func<WatcherStatsRequestParameters, WatcherStatsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/_stop
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9794,7 +9790,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackWatcherStop<T>(Func<StopWatcherRequestParameters, StopWatcherRequestParameters> requestParameters = null) where T : class;
-		
+
 		///<summary>Represents a POST on /_xpack/watcher/_stop
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -9806,6 +9802,6 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackWatcherStopAsync<T>(Func<StopWatcherRequestParameters, StopWatcherRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
-		
+
 	}
 }
