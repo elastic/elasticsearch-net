@@ -15,53 +15,53 @@ namespace Tests.Modules.Scripting
 		protected override LazyResponses Create() => Calls<PutScriptDescriptor, PutScriptRequest, IPutScriptRequest, IPutScriptResponse>(
 			CreateInitializer,
 			CreateFluent,
-			fluent: (s, c, f) => c.PutScript(_lang, s, f),
-			fluentAsync: (s, c, f) => c.PutScriptAsync(_lang, s, f),
+			fluent: (s, c, f) => c.PutScript(s, f),
+			fluentAsync: (s, c, f) => c.PutScriptAsync(s, f),
 			request: (s, c, r) => c.PutScript(r),
 			requestAsync: (s, c, r) => c.PutScriptAsync(r)
 		);
 
 		private string _lang = "painless";
 
-		protected PutScriptRequest CreateInitializer(string id) => new PutScriptRequest(_lang, id) { Script = "1+1" };
+		protected PutScriptRequest CreateInitializer(string id) => new PutScriptRequest(id) { Script = "1+1" };
 		protected IPutScriptRequest CreateFluent(string id, PutScriptDescriptor d) => d.Script("1+1");
 
 		protected override LazyResponses Read() => Calls<GetScriptDescriptor, GetScriptRequest, IGetScriptRequest, IGetScriptResponse>(
 			ReadInitializer,
 			ReadFluent,
-			fluent: (s, c, f) => c.GetScript(_lang, s, f),
-			fluentAsync: (s, c, f) => c.GetScriptAsync(_lang, s, f),
+			fluent: (s, c, f) => c.GetScript(s, f),
+			fluentAsync: (s, c, f) => c.GetScriptAsync(s, f),
 			request: (s, c, r) => c.GetScript(r),
 			requestAsync: (s, c, r) => c.GetScriptAsync(r)
 		);
 
-		protected GetScriptRequest ReadInitializer(string id) => new GetScriptRequest(_lang, id);
+		protected GetScriptRequest ReadInitializer(string id) => new GetScriptRequest(id);
 		protected IGetScriptRequest ReadFluent(string id, GetScriptDescriptor d) => d;
 
 		protected override LazyResponses Update() => Calls<PutScriptDescriptor, PutScriptRequest, IPutScriptRequest, IPutScriptResponse>(
 			UpdateInitializer,
 			UpdateFluent,
-			fluent: (s, c, f) => c.PutScript(_lang, s, f),
-			fluentAsync: (s, c, f) => c.PutScriptAsync(_lang, s, f),
+			fluent: (s, c, f) => c.PutScript(s, f),
+			fluentAsync: (s, c, f) => c.PutScriptAsync(s, f),
 			request: (s, c, r) => c.PutScript(r),
 			requestAsync: (s, c, r) => c.PutScriptAsync(r)
 		);
 
 		private string _updatedScript = "2+2";
 
-		protected PutScriptRequest UpdateInitializer(string id) => new PutScriptRequest(_lang, id) { Script = _updatedScript };
+		protected PutScriptRequest UpdateInitializer(string id) => new PutScriptRequest(id) { Script = _updatedScript };
 		protected IPutScriptRequest UpdateFluent(string id, PutScriptDescriptor d) => d.Script(_updatedScript);
 
 		protected override LazyResponses Delete() => Calls<DeleteScriptDescriptor, DeleteScriptRequest, IDeleteScriptRequest, IDeleteScriptResponse>(
 			DeleteInitializer,
 			DeleteFluent,
-			fluent: (s, c, f) => c.DeleteScript(_lang, s, f),
-			fluentAsync: (s, c, f) => c.DeleteScriptAsync(_lang, s, f),
+			fluent: (s, c, f) => c.DeleteScript(s, f),
+			fluentAsync: (s, c, f) => c.DeleteScriptAsync(s, f),
 			request: (s, c, r) => c.DeleteScript(r),
 			requestAsync: (s, c, r) => c.DeleteScriptAsync(r)
 		);
 
-		protected DeleteScriptRequest DeleteInitializer(string id) => new DeleteScriptRequest(_lang, id);
+		protected DeleteScriptRequest DeleteInitializer(string id) => new DeleteScriptRequest(id);
 		protected IDeleteScriptRequest DeleteFluent(string id, DeleteScriptDescriptor d) => d;
 
 		protected override void ExpectAfterUpdate(IGetScriptResponse response) => response.Script.Should().Be(_updatedScript);

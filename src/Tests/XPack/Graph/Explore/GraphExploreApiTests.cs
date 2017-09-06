@@ -30,7 +30,7 @@ namespace Tests.XPack.Graph.Explore
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override string UrlPath => $"/project/project/_xpack/_graph/_explore";
+		protected override string UrlPath => $"/project/project/_xpack/graph/_explore";
 
 		protected override bool SupportsDeserialization => false;
 

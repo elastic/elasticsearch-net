@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <DotNetCoreOnly Condition="'$(TRAVIS)'=='true'">1</DotNetCoreOnly>
     <DotNetCoreOnly Condition="'$(TRAVIS)'==''">
@@ -15,12 +15,12 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0-beta1-build3642" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
     <ProjectReference Include="..\Nest\Nest.csproj" />
     <PackageReference Include="Bogus" Version="11.0.5" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
     <PackageReference Include="FluentAssertions" Version="4.19.2" />
     <PackageReference Include="xunit" Version="2.3.0-beta1-build3642" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0-preview-20170810-02" />
     <PackageReference Include="SemanticVersioning" Version="0.7.6" />
     <PackageReference Include="DiffPlex" Version="1.4.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0-preview-20170810-02" />
