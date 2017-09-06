@@ -9,14 +9,13 @@ namespace Tests.Modules.Scripting.PutScript
 	{
 		[U] public async Task Urls()
 		{
-			var lang = "lang";
 			var id = "id";
 
-			await PUT($"/_scripts/{lang}/{id}")
-				.Fluent(c => c.PutScript(lang, id, s=>s.Script("")))
-				.Request(c => c.PutScript(new PutScriptRequest(lang, id)))
-				.FluentAsync(c => c.PutScriptAsync(lang, id, s=>s.Script("")))
-				.RequestAsync(c => c.PutScriptAsync(new PutScriptRequest(lang, id)))
+			await PUT($"/_scripts/{id}")
+				.Fluent(c => c.PutScript(id, s=>s.Script("")))
+				.Request(c => c.PutScript(new PutScriptRequest(id)))
+				.FluentAsync(c => c.PutScriptAsync(id, s=>s.Script("")))
+				.RequestAsync(c => c.PutScriptAsync(new PutScriptRequest(id)))
 				;
 		}
 	}
