@@ -9,14 +9,13 @@ namespace Tests.Modules.Scripting.DeleteScript
 	{
 		[U] public async Task Urls()
 		{
-			var lang = "lang";
 			var id = "id";
 
-			await DELETE($"/_scripts/{lang}/{id}")
-				.Fluent(c => c.DeleteScript(lang, id))
-				.Request(c => c.DeleteScript(new DeleteScriptRequest(lang, id)))
-				.FluentAsync(c => c.DeleteScriptAsync(lang, id))
-				.RequestAsync(c => c.DeleteScriptAsync(new DeleteScriptRequest(lang, id)))
+			await DELETE($"/_scripts/{id}")
+				.Fluent(c => c.DeleteScript(id))
+				.Request(c => c.DeleteScript(new DeleteScriptRequest(id)))
+				.FluentAsync(c => c.DeleteScriptAsync(id))
+				.RequestAsync(c => c.DeleteScriptAsync(new DeleteScriptRequest(id)))
 				;
 		}
 	}

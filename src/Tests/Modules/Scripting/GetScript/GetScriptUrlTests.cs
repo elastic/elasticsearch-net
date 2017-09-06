@@ -9,14 +9,13 @@ namespace Tests.Modules.Scripting.GetScript
 	{
 		[U] public async Task Urls()
 		{
-			var lang = "lang";
 			var id = "id";
 
-			await GET($"/_scripts/{lang}/{id}")
-				.Fluent(c => c.GetScript(lang, id))
-				.Request(c => c.GetScript(new GetScriptRequest(lang, id)))
-				.FluentAsync(c => c.GetScriptAsync(lang, id))
-				.RequestAsync(c => c.GetScriptAsync(new GetScriptRequest(lang, id)))
+			await GET($"/_scripts/{id}")
+				.Fluent(c => c.GetScript(id))
+				.Request(c => c.GetScript(new GetScriptRequest(id)))
+				.FluentAsync(c => c.GetScriptAsync(id))
+				.RequestAsync(c => c.GetScriptAsync(new GetScriptRequest(id)))
 				;
 		}
 	}

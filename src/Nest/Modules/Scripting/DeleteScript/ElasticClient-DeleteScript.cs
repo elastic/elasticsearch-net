@@ -8,13 +8,13 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IDeleteScriptResponse DeleteScript(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null);
+		IDeleteScriptResponse DeleteScript(Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null);
 
 		/// <inheritdoc/>
 		IDeleteScriptResponse DeleteScript(IDeleteScriptRequest request);
 
 		/// <inheritdoc/>
-		Task<IDeleteScriptResponse> DeleteScriptAsync(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IDeleteScriptResponse> DeleteScriptAsync(Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
 		Task<IDeleteScriptResponse> DeleteScriptAsync(IDeleteScriptRequest request, CancellationToken cancellationToken = default(CancellationToken));
@@ -30,12 +30,12 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public IDeleteScriptResponse DeleteScript(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null) =>
-			this.DeleteScript(selector.InvokeOrDefault(new DeleteScriptDescriptor(language, id)));
+		public IDeleteScriptResponse DeleteScript(Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null) =>
+			this.DeleteScript(selector.InvokeOrDefault(new DeleteScriptDescriptor(id)));
 
 		/// <inheritdoc/>
-		public Task<IDeleteScriptResponse> DeleteScriptAsync(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.DeleteScriptAsync(selector.InvokeOrDefault(new DeleteScriptDescriptor(language, id)), cancellationToken);
+		public Task<IDeleteScriptResponse> DeleteScriptAsync(Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.DeleteScriptAsync(selector.InvokeOrDefault(new DeleteScriptDescriptor(id)), cancellationToken);
 
 		/// <inheritdoc/>
 		public Task<IDeleteScriptResponse> DeleteScriptAsync(IDeleteScriptRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
