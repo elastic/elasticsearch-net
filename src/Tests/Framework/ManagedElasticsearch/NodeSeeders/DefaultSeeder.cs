@@ -13,9 +13,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 
 		private IElasticClient Client { get; }
 
-		private readonly IIndexSettings _defaultIndexSettings = new IndexSettings(new Dictionary<string, object> {
-			{ "mapping.single_type", "false" } //TODO this is temporarily while parent child mappings are reimagined in 6.0
-		})
+		private readonly IIndexSettings _defaultIndexSettings = new IndexSettings()
 		{
 			NumberOfShards = 2,
 			NumberOfReplicas = 0,
@@ -60,6 +58,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 		public void CreateIndices()
 		{
 			CreateIndexTemplate();
+			CreateCommitActivityIndex();
 			CreateProjectIndex();
 			CreateDeveloperIndex();
 			CreatePercolatorIndex();
@@ -112,9 +111,9 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 			createDeveloperIndex.ShouldBeValid();
 		}
 
-		private void CreateProjectIndex()
+		private void CreateCommitActivityIndex()
 		{
-			var createProjectIndex = this.Client.CreateIndex(typeof(Project), c => c
+			var createCommitIndex = this.Client.CreateIndex(typeof(CommitActivity), c => c
 				.Settings(settings => settings
 					.Analysis(ProjectAnalysisSettings)
 				)
@@ -122,10 +121,6 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 					.Alias(ProjectsAliasName)
 				)
 				.Mappings(map => map
-					.Map<Project>(m => m
-						.AutoMap()
-						.Properties(ProjectProperties)
-					)
 					.Map<CommitActivity>(m => m
 						.AutoMap()
 						.Parent<Project>()
@@ -140,6 +135,26 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 								.Index(false)
 							)
 						)
+					)
+				)
+			);
+			createCommitIndex.ShouldBeValid();
+
+		}
+
+		private void CreateProjectIndex()
+		{
+			var createProjectIndex = this.Client.CreateIndex(typeof(Project), c => c
+				.Settings(settings => settings
+					.Analysis(ProjectAnalysisSettings)
+				)
+				.Aliases(a => a
+					.Alias(ProjectsAliasName)
+				)
+				.Mappings(map => map
+					.Map<Project>(m => m
+						.AutoMap()
+						.Properties(ProjectProperties)
 					)
 				)
 			);
