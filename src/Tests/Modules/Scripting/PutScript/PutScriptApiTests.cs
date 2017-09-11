@@ -13,7 +13,6 @@ namespace Tests.Modules.Scripting.PutScript
 	{
 		public PutScriptApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		private static readonly string _language = "groovy";
 		private static readonly string _name = "scrpt1";
 
 
