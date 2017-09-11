@@ -68,7 +68,7 @@ namespace Tests.Framework
 			.PrettyJson()
 			.InferMappingFor<Project>(ProjectMapping)
 			.InferMappingFor<CommitActivity>(map => map
-				.IndexName("project")
+				.IndexName("commits")
 				.TypeName("commits")
 			)
 			.InferMappingFor<Developer>(map => map
