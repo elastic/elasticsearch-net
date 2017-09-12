@@ -119,7 +119,8 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
          * ====
          */
 
-         /** ==== Adding contract JsonConverters
+         /**
+         * ==== Adding contract JsonConverters
          *
          * If you want to register custom json converters without attributing your classes you can register
          * Functions that given a type return a JsonConverter. This is cached as part of the types json contract so once

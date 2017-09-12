@@ -45,8 +45,14 @@ namespace DocGenerator
 
 		public static async Task GoAsync(string[] args)
 		{
+			//.NET core csprojects are not supported all that well.
+			// https://github.com/dotnet/roslyn/issues/21660 :sadpanda:
 
 			var workspace = MSBuildWorkspace.Create();
+			workspace.WorkspaceFailed += (s, e) =>
+			{
+				Console.Error.WriteLine(e.Diagnostic.Message);
+			};
             var testProject = workspace.OpenProjectAsync(GetProjectFile("Tests"));
             var nestProject = workspace.OpenProjectAsync(GetProjectFile("Nest"));
             var elasticSearchNetProject = workspace.OpenProjectAsync(GetProjectFile("Elasticsearch.Net"));

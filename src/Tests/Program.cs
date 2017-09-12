@@ -16,9 +16,10 @@ using Tests.Framework.Profiling.Timeline;
 
 namespace Tests
 {
-	public class Program
+	public class Program { }
+	public class BenchmarkProgram
 	{
-		static Program()
+		static BenchmarkProgram()
 		{
 			var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
 			if ((currentDirectory.Name == "Debug" || currentDirectory.Name == "Release") && currentDirectory.Parent.Name == "bin")
