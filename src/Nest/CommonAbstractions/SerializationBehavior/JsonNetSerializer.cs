@@ -20,7 +20,6 @@ namespace Nest
 		private JsonSerializer _defaultSerializer;
 		private JsonSerializer _indentedSerializer;
 
-
 		protected IConnectionSettingsValues Settings { get; }
 
 		/// <summary>
@@ -35,7 +34,7 @@ namespace Nest
 		/// The size of the buffer to use when writing the serialized request
 		/// to the request stream
 		/// </summary>
-		// Performance tests as part of https://github.com/elastic/elasticsearch-net/issues/1899 indicate this 
+		// Performance tests as part of https://github.com/elastic/elasticsearch-net/issues/1899 indicate this
 		// to be a good compromise buffer size for performance throughput and bytes allocated.
 		protected virtual int BufferSize => 1024;
 
