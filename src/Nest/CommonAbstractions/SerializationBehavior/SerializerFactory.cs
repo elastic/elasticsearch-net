@@ -20,10 +20,7 @@ namespace Nest
 		private Func<IConnectionSettingsValues, IElasticsearchSerializer> _serializerFactoryFunc;
 		private Action<JsonSerializerSettings, IConnectionSettingsValues> _settingsModifier;
 
-		public SerializerFactory()
-		{
-
-		}
+		public SerializerFactory() { }
 		public SerializerFactory(Func<IConnectionSettingsValues, IElasticsearchSerializer> serializerFactoryFunc) : this(serializerFactoryFunc, null) { }
 
 		public SerializerFactory(Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier) : this(null, settingsModifier) { }

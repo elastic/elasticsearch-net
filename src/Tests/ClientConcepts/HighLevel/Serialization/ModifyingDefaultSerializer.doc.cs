@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Newtonsoft.Json;
+using Tests.Framework.MockData;
 
 namespace Tests.ClientConcepts.HighLevel.Serialization
 {
@@ -117,5 +118,34 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
          * from `JsonNetSerializer`.
          * ====
          */
+
+         /** ==== Adding contract JsonConverters
+         *
+         * If you want to register custom json converters without attributing your classes you can register
+         * Functions that given a type return a JsonConverter. This is cached as part of the types json contract so once
+         * Json.NET knows a type has a certain converter it won't ask anymore for the duration of the application.
+         *
+         * Override `ContractConverters` getter property and have it return a list of these functions
+         */
+        public class CustomContractsJsonNetSerializer : CustomJsonNetSerializer
+        {
+            public CustomContractsJsonNetSerializer(IConnectionSettingsValues settings) : base(settings) { }
+            public CustomContractsJsonNetSerializer(IConnectionSettingsValues settings, JsonConverter statefulConverter)
+	            : base(settings, statefulConverter) { }
+
+	        protected override IList<Func<Type, JsonConverter>> ContractConverters { get; } = new List<Func<Type, JsonConverter>>
+	        {
+		        ((t) => t == typeof(Project) ? new MyCustomJsonConverter() : null)
+	        };
+        }
+
+	    public class MyCustomJsonConverter : JsonConverter
+	    {
+		    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
+
+		    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) => null;
+
+		    public override bool CanConvert(Type objectType) => false;
+	    }
     }
 }
