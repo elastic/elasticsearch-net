@@ -225,31 +225,15 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 		[U] public void UsingSubClasses()
 		{
 			/**
-			* ==== Using types
-			* The most straightforward way to search over multiple types is to
-			* type the response to the parent interface or base class
-			* and pass the actual types we want to search over using `.Type()`
+			* Covariance also works over subclasses not just interfaces
 			*/
 			var result = this._client.Search<BaseX>(s => s
 				.Type(Types.Type(typeof(A), typeof(B), typeof(C)))
 				.Size(100)
 			);
-			/**
-			* NEST will translate this to a search over `/index/a,b,c/_search`;
-			* hits that have `"_type" : "a"` will be serialized to `A` and so forth
-			*/
-
-			/**
-			* Here we assume our response is valid and that we received the 100 documents
-			* we are expecting. Remember `result.Documents` is an `IReadOnlyCollection<ISearchResult>`
-			*/
 			result.ShouldBeValid();
 			result.Documents.Count.Should().Be(100);
 
-			/**
-			* To prove the returned result set is covariant we filter the documents based on their
-			* actual type and assert the returned subsets are the expected sizes
-			*/
 			var aDocuments = result.Documents.OfType<A>();
 			var bDocuments = result.Documents.OfType<B>();
 			var cDocuments = result.Documents.OfType<C>();
@@ -258,9 +242,6 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			bDocuments.Count().Should().Be(25);
 			cDocuments.Count().Should().Be(50);
 
-			/**
-			* and assume that properties that only exist on the subclass itself are properly filled
-			*/
 			aDocuments.Should().OnlyContain(a => a.PropertyOnA > 0);
 			bDocuments.Should().OnlyContain(a => a.PropertyOnB > 0);
 			cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);

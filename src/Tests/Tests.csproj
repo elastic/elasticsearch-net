@@ -9,6 +9,7 @@
     <VersionPrefix>6.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
     <DefineConstants Condition="'$(TargetFramework)'=='netcoreapp1.1' OR '$(DotNetCoreOnly)'=='1'">$(DefineConstants);DOTNETCORE</DefineConstants>
+    <StartupObject>Tests.BenchmarkProgram</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0-beta1-build3642" />
