@@ -34,10 +34,8 @@ module Release =
 
             let year = sprintf "%i" DateTime.UtcNow.Year
 
-            let jsonDotNetVersion = 10
-
-            let jsonDotNetCurrentVersion = sprintf "%i" jsonDotNetVersion
-            let jsonDotNetNextVersion = sprintf "%i" (jsonDotNetVersion + 1)
+            let jsonDotNetCurrentVersion = "10.0.1"
+            let jsonDotNetNextVersion = "11.0"
 
             let properties =
                 let addKeyValue (e:Expr<string>) (builder:StringBuilder) =
