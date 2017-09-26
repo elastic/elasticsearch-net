@@ -8,7 +8,10 @@
 #load @"Versioning.fsx"
 
 open System
+open System.IO
+open System.Linq
 open System.Text
+open System.Xml.Linq
 open Microsoft.FSharp.Quotations
 open Microsoft.FSharp.Quotations.Patterns
 open Fake
@@ -34,8 +37,22 @@ module Release =
 
             let year = sprintf "%i" DateTime.UtcNow.Year
 
-            let jsonDotNetCurrentVersion = "10.0.1"
-            let jsonDotNetNextVersion = "11.0"
+            let jsonDotNetCurrentVersion = 
+                let xName n = XName.op_Implicit n
+                use stream = File.OpenRead <| Paths.ProjFile p
+                let doc = XDocument.Load(stream)
+                let packageReference = 
+                    doc.Descendants(xName "PackageReference")
+                       .FirstOrDefault(fun e -> e.Attribute(xName "Include").Value = "Newtonsoft.Json")
+                if (packageReference <> null) then packageReference.Attribute(xName "Version").Value
+                else String.Empty
+                
+            let jsonDotNetNextVersion = 
+                match jsonDotNetCurrentVersion with
+                | "" -> String.Empty
+                | version -> 
+                    let semanticVersion = SemVerHelper.parse version
+                    sprintf "%i" (semanticVersion.Major + 1) 
 
             let properties =
                 let addKeyValue (e:Expr<string>) (builder:StringBuilder) =
@@ -46,7 +63,9 @@ module Release =
                         | PropertyGet (eo, pi, li) -> (pi.Name, (pi.GetValue(e) |> string))
                         | ValueWithName (obj,ty,nm) -> ((obj |> string), nm)
                         | _ -> failwith (sprintf "%A is not a let-bound value. %A" e (e.GetType()))
-                    builder.AppendFormat("{0}=\"{1}\";", key, value);
+                        
+                    if (isNotNullOrEmpty value) then builder.AppendFormat("{0}=\"{1}\";", key, value)
+                    else builder
                 new StringBuilder()
                 |> addKeyValue <@nextMajorVersion@>
                 |> addKeyValue <@year@>

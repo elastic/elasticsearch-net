@@ -34,6 +34,15 @@ module Paths =
     let Output(folder) = sprintf "%s/%s" BuildOutput folder
     let Source(folder) = sprintf "%s/%s" SourceFolder folder
     let Build(folder) = sprintf "%s/%s" BuildFolder folder
+    
+    let ProjFile(project:DotNetProject) =
+        match project with 
+        | Project p -> sprintf "%s/%s/%s.csproj" SourceFolder project.Name project.Name
+        | PrivateProject p ->
+            match p with
+            | Tests -> sprintf "%s/%s/%s.csproj" SourceFolder project.Name project.Name
+            | DocGenerator -> sprintf "%s/CodeGeneration/%s/%s.csproj" SourceFolder project.Name project.Name
+            
 
     let BinFolder(folder) = 
         let f = replace @"\" "/" folder
