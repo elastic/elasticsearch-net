@@ -11,7 +11,9 @@ using System.Collections.Concurrent;
 using Tests.Framework.Integration;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Reactive.Disposables;
 using System.Reflection.Metadata.Ecma335;
+using System.Text.RegularExpressions;
 using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
@@ -19,23 +21,13 @@ namespace Xunit
 {
 	class TestAssemblyRunner : XunitTestAssemblyRunner
 	{
-		readonly Dictionary<Type, object> assemblyFixtureMappings = new Dictionary<Type, object>();
+		private readonly Dictionary<Type, object> _assemblyFixtureMappings = new Dictionary<Type, object>();
+		private readonly List<IGrouping<ClusterBase, GroupedByCluster>> _grouped;
+		private static readonly object _lock = new object();
 
-		public TestAssemblyRunner(ITestAssembly testAssembly,
-			IEnumerable<IXunitTestCase> testCases,
-			IMessageSink diagnosticMessageSink,
-			IMessageSink executionMessageSink,
-			ITestFrameworkExecutionOptions executionOptions)
-			: base(testAssembly, testCases, diagnosticMessageSink, executionMessageSink, executionOptions)
-		{
-		}
-
-		protected override Task<RunSummary> RunTestCollectionAsync(IMessageBus bus, ITestCollection col,
-			IEnumerable<IXunitTestCase> testCases, CancellationTokenSource cts) =>
-			new TestCollectionRunner(
-				assemblyFixtureMappings, col, testCases, DiagnosticMessageSink, bus, TestCaseOrderer,
-				new ExceptionAggregator(Aggregator), cts
-			).RunAsync();
+		public ConcurrentBag<RunSummary> Summaries { get; } = new ConcurrentBag<RunSummary>();
+		public ConcurrentBag<Tuple<string, string>> FailedCollections { get; } = new ConcurrentBag<Tuple<string, string>>();
+		public Dictionary<string, Stopwatch> ClusterTotals { get; } = new Dictionary<string, Stopwatch>();
 
 		private class GroupedByCluster
 		{
@@ -44,115 +36,69 @@ namespace Xunit
 			public List<IXunitTestCase> TestCases { get; set; }
 		}
 
-		protected override async Task<RunSummary> RunTestCollectionsAsync(IMessageBus messageBus,
-			CancellationTokenSource cancellationTokenSource)
+		public TestAssemblyRunner(ITestAssembly testAssembly,
+			IEnumerable<IXunitTestCase> testCases,
+			IMessageSink diagnosticMessageSink,
+			IMessageSink executionMessageSink,
+			ITestFrameworkExecutionOptions executionOptions)
+			: base(testAssembly, testCases, diagnosticMessageSink, executionMessageSink, executionOptions)
 		{
-			//bit side effecty, sets up assemblyFixtureMapping before possibly letting xunit do its regular concurrency thing
-			var grouped = (from c in OrderTestCollections()
+			//bit side effecty, sets up _assemblyFixtureMappings before possibly letting xunit do its regular concurrency thing
+			this._grouped = (from c in OrderTestCollections()
 				let cluster = ClusterFixture(c.Item1)
 				let testcase = new GroupedByCluster {Collection = c.Item1, TestCases = c.Item2, Cluster = cluster}
 				group testcase by testcase.Cluster
 				into g
 				orderby g.Count() descending
-				select g).ToList();
+				select g)
+				.ToList();
+		}
 
+		protected override Task<RunSummary> RunTestCollectionAsync(
+			IMessageBus b, ITestCollection c, IEnumerable<IXunitTestCase> t, CancellationTokenSource s
+		)
+		{
+			var aggregator = new ExceptionAggregator(Aggregator);
+			return new TestCollectionRunner(
+				_assemblyFixtureMappings, c, t, DiagnosticMessageSink, b, TestCaseOrderer, aggregator, s
+			).RunAsync();
+		}
+
+		protected override async Task<RunSummary> RunTestCollectionsAsync(IMessageBus messageBus,
+			CancellationTokenSource cancellationTokenSource)
+		{
 			//threading guess
 			var defaultMaxConcurrency = Environment.ProcessorCount * 4;
 
 			if (TestClient.Configuration.RunIntegrationTests)
-				return await IntegrationPipeline(defaultMaxConcurrency, grouped, messageBus, cancellationTokenSource);
-			return await UnitTestPipeline(defaultMaxConcurrency, grouped, messageBus, cancellationTokenSource);
+				return await IntegrationPipeline(defaultMaxConcurrency, messageBus, cancellationTokenSource);
+			return await UnitTestPipeline(defaultMaxConcurrency, messageBus, cancellationTokenSource);
 		}
 
-		private static readonly TimeSpan SlowTestThreshold = TimeSpan.FromSeconds(2.0);
 
-		private async Task<RunSummary> UnitTestPipeline(int defaultMaxConcurrency,
-			List<IGrouping<ClusterBase, GroupedByCluster>> grouped, IMessageBus messageBus,
-			CancellationTokenSource cancellationTokenSource)
+		private async Task<RunSummary> UnitTestPipeline(int defaultMaxConcurrency, IMessageBus messageBus, CancellationTokenSource ctx)
 		{
-			foreach (var g in grouped) g.Key?.Start();
+			//make sure all clusters go in started state (won't actually start clusters in unit test mode)
+			foreach (var g in this._grouped) g.Key?.Start();
 
-			var summaries = new ConcurrentBag<RunSummary>();
-			var slowTestCollections = new ConcurrentDictionary<string, TimeSpan>();
-
-			var testFilter = TestClient.Configuration.TestFilter;
-			var sw = Stopwatch.StartNew();
-			await grouped.SelectMany(g => g)
-				.ForEachAsync(defaultMaxConcurrency, async g =>
-				{
-					var test = g.Collection.DisplayName.Replace("Test collection for", "");
-					if (!string.IsNullOrWhiteSpace(testFilter) && test.IndexOf(testFilter, StringComparison.OrdinalIgnoreCase) < 0)
-						return;
-
-					if (!string.IsNullOrWhiteSpace(testFilter)) Console.WriteLine(" -> " + test);
-
-					try
-					{
-						var s = Stopwatch.StartNew();
-						var summary = await RunTestCollectionAsync(messageBus, g.Collection, g.TestCases, cancellationTokenSource);
-						s.Stop();
-						if (s.Elapsed >= SlowTestThreshold)
-							slowTestCollections.TryAdd(test, s.Elapsed);
-						summaries.Add(summary);
-					}
-					catch (TaskCanceledException)
-					{
-					}
-				});
-			sw.Stop();
-			foreach (var g in grouped) g.Key?.Dispose();
-
-			Console.WriteLine("--------");
-			Console.WriteLine($"Unit test time {sw.Elapsed}");
-			Console.WriteLine("--------");
-			if (slowTestCollections.Count > 0)
-			{
-				Console.WriteLine($"Test collections slower then {SlowTestThreshold}");
-				foreach (var t in slowTestCollections.OrderByDescending(kv => kv.Value))
-					Console.WriteLine($"  ({t.Value}) - {t.Key}");
-			}
+			var testFilters = CreateTestFilters(TestClient.Configuration.TestFilter);
+			await this._grouped.SelectMany(g => g)
+				.ForEachAsync(defaultMaxConcurrency, async g => { await RunTestCollections(messageBus, ctx, g, testFilters); });
+			foreach (var g in this._grouped) g.Key?.Dispose();
 
 			return new RunSummary()
 			{
-				Total = summaries.Sum(s => s.Total),
-				Failed = summaries.Sum(s => s.Failed),
-				Skipped = summaries.Sum(s => s.Skipped)
+				Total = this.Summaries.Sum(s => s.Total),
+				Failed = this.Summaries.Sum(s => s.Failed),
+				Skipped = this.Summaries.Sum(s => s.Skipped)
 			};
 		}
 
-		private IEnumerable<string> ParseExcludedClusters(string clusterFilter)
+		private async Task<RunSummary> IntegrationPipeline(int defaultMaxConcurrency, IMessageBus messageBus, CancellationTokenSource ctx)
 		{
-			if (string.IsNullOrWhiteSpace(clusterFilter)) return Enumerable.Empty<string>();
-			var clusters =
-#if DOTNETCORE
-				typeof(ClusterBase).Assembly()
-#else
-				typeof(ClusterBase).Assembly
-#endif
-				.GetTypes()
-				.Where(t => typeof(ClusterBase).IsAssignableFrom(t) && t != typeof(ClusterBase))
-				.Select(c => c.Name.Replace("Cluster", "").ToLowerInvariant());
-
-			var filters = clusterFilter.Split(',').Select(c => c.Trim().ToLowerInvariant());
-
-			var include = filters.Where(f => !f.StartsWith("-")).Select(f => f.ToLowerInvariant());
-			if (include.Any()) return clusters.Where(c => !include.Contains(c));
-
-			var exclude = filters.Where(f => f.StartsWith("-")).Select(f => f.TrimStart('-').ToLowerInvariant());
-			if (exclude.Any()) return exclude;
-
-			return new List<string>();
-		}
-
-		private async Task<RunSummary> IntegrationPipeline(int defaultMaxConcurrency,
-			List<IGrouping<ClusterBase, GroupedByCluster>> grouped, IMessageBus messageBus,
-			CancellationTokenSource cancellationTokenSource)
-		{
-			var summaries = new ConcurrentBag<RunSummary>();
-			var clusterTotals = new Dictionary<string, Stopwatch>();
 			var excludedClusters = ParseExcludedClusters(TestClient.Configuration.ClusterFilter);
-			var testFilter = TestClient.Configuration.TestFilter;
-			foreach (var group in grouped)
+			var testFilters = CreateTestFilters(TestClient.Configuration.TestFilter);
+			foreach (var group in this._grouped)
 			{
 				var type = @group.Key?.GetType();
 				var clusterName = type?.Name.Replace("Cluster", "") ?? "UNKNOWN";
@@ -160,71 +106,75 @@ namespace Xunit
 				if (excludedClusters.Contains(clusterName, StringComparer.OrdinalIgnoreCase))
 					continue;
 
-				var dop = @group.Key != null && @group.Key.MaxConcurrency > 0
-					? @group.Key.MaxConcurrency
-					: defaultMaxConcurrency;
+				var dop = @group.Key != null && @group.Key.MaxConcurrency > 0 ? @group.Key.MaxConcurrency : defaultMaxConcurrency;
 
-				clusterTotals.Add(clusterName, Stopwatch.StartNew());
-
+				this.ClusterTotals.Add(clusterName, Stopwatch.StartNew());
 				//We group over each cluster group and execute test classes pertaining to that cluster
 				//in parallel
-				using (@group.Key ?? System.Reactive.Disposables.Disposable.Empty)
+				using (@group.Key ?? Disposable.Empty)
 				{
 					@group.Key?.Start();
-					await @group.ForEachAsync(dop, async g =>
-					{
-						var test = g.Collection.DisplayName.Replace("Test collection for", "");
-						if (!string.IsNullOrWhiteSpace(testFilter) && test.IndexOf(testFilter, StringComparison.OrdinalIgnoreCase) < 0)
-							return;
-
-						if (!string.IsNullOrWhiteSpace(testFilter)) Console.WriteLine(" -> " + test);
-
-						try
-						{
-							var summary = await RunTestCollectionAsync(messageBus, g.Collection, g.TestCases, cancellationTokenSource);
-							summaries.Add(summary);
-						}
-						catch (TaskCanceledException)
-						{
-						}
-					});
+					await @group.ForEachAsync(dop, async g => { await RunTestCollections(messageBus, ctx, g, testFilters); });
 				}
-				clusterTotals[clusterName].Stop();
+				this.ClusterTotals[clusterName].Stop();
 			}
-
-			Console.WriteLine("--------");
-			Console.WriteLine("Individual cluster running times");
-			foreach (var kv in clusterTotals)
-				Console.WriteLine($"- {kv.Key}: {kv.Value.Elapsed.ToString()}");
-			Console.WriteLine("--------");
-
 
 			return new RunSummary()
 			{
-				Total = summaries.Sum(s => s.Total),
-				Failed = summaries.Sum(s => s.Failed),
-				Skipped = summaries.Sum(s => s.Skipped)
+				Total = this.Summaries.Sum(s => s.Total),
+				Failed = this.Summaries.Sum(s => s.Failed),
+				Skipped = this.Summaries.Sum(s => s.Skipped)
 			};
 		}
 
-		protected ClusterBase ClusterFixture(ITestCollection testCollection)
+		private async Task RunTestCollections(IMessageBus messageBus, CancellationTokenSource ctx, GroupedByCluster g, string[] testFilters)
+		{
+			var test = g.Collection.DisplayName.Replace("Test collection for", "").Trim();
+			if (!MatchesATestFilter(test, testFilters)) return;
+			if (testFilters.Length > 0) Console.WriteLine(" -> " + test);
+
+			try
+			{
+				var summary = await RunTestCollectionAsync(messageBus, g.Collection, g.TestCases, ctx);
+				if (summary.Failed > 0)
+					this.FailedCollections.Add(Tuple.Create(g.Cluster.GetType().Name.Replace("Cluster", ""), test));
+				this.Summaries.Add(summary);
+			}
+			catch (TaskCanceledException)
+			{
+			}
+		}
+
+		private static string[] CreateTestFilters(string testFilters) =>
+			testFilters?.Split(',').Select(s => s.Trim()).Where(s=>!string.IsNullOrWhiteSpace(s)).ToArray()
+			?? new string[0] { };
+
+		private static bool MatchesATestFilter(string test, IReadOnlyCollection<string> testFilters)
+		{
+			if (testFilters.Count == 0 || string.IsNullOrWhiteSpace(test)) return true;
+			return testFilters
+				.Any(filter => test.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+		}
+
+
+		private ClusterBase ClusterFixture(ITestCollection testCollection)
 		{
 			var clusterType = GetClusterForCollection(testCollection);
 
 			ClusterBase cluster = null;
 			if (clusterType == null) return null;
-			if (assemblyFixtureMappings.ContainsKey(clusterType))
-				return assemblyFixtureMappings[clusterType] as ClusterBase;
+			if (_assemblyFixtureMappings.ContainsKey(clusterType))
+				return _assemblyFixtureMappings[clusterType] as ClusterBase;
 			Aggregator.Run(() =>
 			{
 				var o = Activator.CreateInstance(clusterType);
-				assemblyFixtureMappings.Add(clusterType, o);
+				_assemblyFixtureMappings.Add(clusterType, o);
 				cluster = o as ClusterBase;
 			});
 			return cluster;
 		}
 
-		public static Type GetClusterForCollection(ITestCollection testCollection)
+		private static Type GetClusterForCollection(ITestCollection testCollection)
 		{
 			var collectionTypeName = testCollection.DisplayName.Split(' ').Last();
 			var collectionType = Type.GetType(collectionTypeName);
@@ -234,6 +184,36 @@ namespace Xunit
 				.Select(i => i.GetTypeInfo().GenericTypeArguments.Single())
 				.FirstOrDefault();
 			return clusterType;
+		}
+
+		private IEnumerable<string> ParseExcludedClusters(string clusterFilter)
+		{
+			if (string.IsNullOrWhiteSpace(clusterFilter)) return Enumerable.Empty<string>();
+			var clusters = GetAllClustersFromAssembly();
+
+			var filters = clusterFilter.Split(',').Select(c => c.Trim().ToLowerInvariant()).ToArray();
+
+			var include = filters.Where(f => !f.StartsWith("-")).Select(f => f.ToLowerInvariant()).ToArray();
+			if (include.Any()) return clusters.Where(c => !include.Contains(c));
+
+			var exclude = filters.Where(f => f.StartsWith("-")).Select(f => f.TrimStart('-').ToLowerInvariant()).ToArray();
+			if (exclude.Any()) return exclude;
+
+			return new List<string>();
+		}
+
+		private static IEnumerable<string> GetAllClustersFromAssembly()
+		{
+			var clusters =
+#if DOTNETCORE
+				typeof(ClusterBase).Assembly()
+#else
+				typeof(ClusterBase).Assembly
+#endif
+					.GetTypes()
+					.Where(t => typeof(ClusterBase).IsAssignableFrom(t) && t != typeof(ClusterBase))
+					.Select(c => c.Name.Replace("Cluster", "").ToLowerInvariant());
+			return clusters;
 		}
 	}
 }
