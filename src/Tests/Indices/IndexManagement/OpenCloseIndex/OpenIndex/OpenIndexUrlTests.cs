@@ -12,7 +12,7 @@ namespace Tests.Indices.IndexManagement.OpenOpenIndex.OpenIndex
 		[U] public async Task Urls()
 		{
 			var indices = Index<Project>().And<CommitActivity>();
-			var index = "project";
+			var index = "project%2Ccommits";
 			await POST($"/{index}/_open")
 				.Fluent(c => c.OpenIndex(indices, s=>s))
 				.Request(c => c.OpenIndex(new OpenIndexRequest(indices)))

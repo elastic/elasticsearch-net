@@ -12,7 +12,7 @@ namespace Tests.Indices.IndexManagement.OpenCloseIndex.CloseIndex
 		[U] public async Task Urls()
 		{
 			var indices = Index<Project>().And<CommitActivity>();
-			var index = "project";
+			var index = "project%2Ccommits";
 			await POST($"/{index}/_close")
 				.Fluent(c => c.CloseIndex(indices, s=>s))
 				.Request(c => c.CloseIndex(new CloseIndexRequest(indices)))
