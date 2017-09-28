@@ -13,7 +13,7 @@ namespace Tests.Indices.IndexManagement.TypeExists
 		[U] public async Task Urls()
 		{
 			var indices = Index<Project>().And<CommitActivity>();
-			var index = "project";
+			var index = "project%2Ccommits";
 			var types = Type<Project>().And<CommitActivity>();
 			var type = "project%2Ccommits";
 			await HEAD($"/{index}/_mapping/{type}")
