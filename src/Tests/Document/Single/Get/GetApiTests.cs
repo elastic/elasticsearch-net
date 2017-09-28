@@ -90,7 +90,7 @@ namespace Tests.Document.Single.Get
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/commits/{UrlEncode(this.CommitActivityId)}?parent={UrlEncode(this.CommitActivity.ProjectName)}";
+		protected override string UrlPath => $"/commits/commits/{UrlEncode(this.CommitActivityId)}?parent={UrlEncode(this.CommitActivity.ProjectName)}";
 
 		protected override bool SupportsDeserialization => false;
 
