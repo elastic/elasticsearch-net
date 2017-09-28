@@ -39,7 +39,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 		public NodeConfiguration(ITestConfiguration configuration, ClusterBase cluster)
 		{
 			this._cluster = cluster;
-			this.EnableSsl = cluster.SkipValidation;
+			this.EnableSsl = cluster.EnableSsl;
 
 			this.RequiredPlugins = ClusterRequiredPlugins(cluster);
 			this.Mode = configuration.Mode;
@@ -68,7 +68,6 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 				$"{es}path.repo={this.FileSystem.RepositoryPath}",
 				$"{es}path.data={this.FileSystem.DataPath}",
 				$"{es}http.port={this.DesiredPort}",
-				$"{es}script.max_compilations_per_minute=10000",
 				$"{es}node.{attr}testingcluster=true",
 				$"{es}node.{attr}gateway=true",
 				$"{es}{shieldOrSecurity}.enabled={b}",
@@ -76,6 +75,11 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 				$"{es}{shieldOrSecurity}.authc.realms.pki1.enabled={sslEnabled}",
 				$"{es}search.remote.connect=true"
 			};
+			//script.max_compilations_rate
+			if (v < ElasticsearchVersion.GetOrAdd("6.0.0-rc1"))
+				this.DefaultNodeSettings.Add($"{es}script.max_compilations_per_minute=10000");
+			else
+				this.DefaultNodeSettings.Add($"{es}script.max_compilations_rate=10000/1m");
 
 			if (v < ElasticsearchVersion.GetOrAdd("5.5.0"))
 			{
