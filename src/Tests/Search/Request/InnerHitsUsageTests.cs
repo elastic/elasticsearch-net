@@ -52,11 +52,10 @@ namespace Tests.Search.Request
 
 		public void Seed()
 		{
-			var create = this._client.CreateIndex(this._index, c => c
+			var create = this._client.CreateIndex(IndexFor<King>(), c => c
 				.Settings(s => s
 					.NumberOfReplicas(0)
 					.NumberOfShards(1)
-					.Setting("mapping.single_type", "false")
 				)
 				.Mappings(map => map
 					.Map<King>(m => m.AutoMap()
@@ -65,12 +64,26 @@ namespace Tests.Search.Request
 							.Nested<King>(n => n.Name(p => p.Foes).AutoMap())
 						)
 					)
-					.Map<Prince>(m => m.AutoMap().Properties(RoyalProps).Parent<King>())
-					.Map<Duke>(m => m.AutoMap().Properties(RoyalProps).Parent<Prince>())
-					.Map<Earl>(m => m.AutoMap().Properties(RoyalProps).Parent<Duke>())
-					.Map<Baron>(m => m.AutoMap().Properties(RoyalProps).Parent<Earl>())
-				 )
+				)
 			);
+			void CreateIndex<TRoyal, TBoss>()
+				where TRoyal : class, IRoyal
+				where TBoss : class, IRoyal
+				=>
+				this._client.CreateIndex(IndexFor<TRoyal>(), c => c
+					.Settings(s => s
+						.NumberOfReplicas(0)
+						.NumberOfShards(1)
+					)
+					.Mappings(map => map
+						.Map<TRoyal>(m => m.AutoMap().Properties(RoyalProps).Parent<TBoss>())
+					)
+				);
+
+			CreateIndex<Prince, King>();
+			CreateIndex<Duke, Prince>();
+			CreateIndex<Earl, Duke>();
+			CreateIndex<Baron, Earl>();
 
 			var kings = King.Generator.Generate(2)
 				.Select(k =>
@@ -79,22 +92,25 @@ namespace Tests.Search.Request
 					return k;
 				});
 
-			var bulk = new BulkDescriptor();
-			IndexAll(bulk, () => kings, indexChildren: king =>
-				 IndexAll(bulk, () => Prince.Generator.Generate(2), king.Name, prince =>
-					 IndexAll(bulk, () => Duke.Generator.Generate(3), prince.Name, duke =>
-						 IndexAll(bulk, () => Earl.Generator.Generate(5), duke.Name, earl =>
-							 IndexAll(bulk, () => Baron.Generator.Generate(1), earl.Name)
-						 )
-					 )
-				 )
-			);
-			this._client.Bulk(bulk);
-			this._client.Refresh(this._index);
+//			var bulk = new BulkDescriptor();
+//			IndexAll(bulk, () => kings, indexChildren: king =>
+//				 IndexAll(bulk, () => Prince.Generator.Generate(2), king.Name, prince =>
+//					 IndexAll(bulk, () => Duke.Generator.Generate(3), prince.Name, duke =>
+//						 IndexAll(bulk, () => Earl.Generator.Generate(5), duke.Name, earl =>
+//							 IndexAll(bulk, () => Baron.Generator.Generate(1), earl.Name)
+//						 )
+//					 )
+//				 )
+//			);
+//			this._client.Bulk(bulk);
+//			this._client.Refresh(this._index);
 		}
 
 		private PropertiesDescriptor<TRoyal> RoyalProps<TRoyal>(PropertiesDescriptor<TRoyal> props) where TRoyal : class, IRoyal =>
 			props.Keyword(s => s.Name(p => p.Name));
+
+		private string IndexFor<TRoyal>() where TRoyal : class, IRoyal =>
+			$"{this._index}-{typeof(TRoyal).Name.ToLowerInvariant()}";
 
 		private void IndexAll<TRoyal>(BulkDescriptor bulk, Func<IEnumerable<TRoyal>> create, string parent = null, Action<TRoyal> indexChildren = null)
 			where TRoyal : class, IRoyal
@@ -105,7 +121,7 @@ namespace Tests.Search.Request
 			foreach (var royal in royals)
 			{
 				var royal1 = royal;
-				bulk.Index<TRoyal>(i => i.Document(royal1).Index(this._index).Parent(parent));
+				bulk.Index<TRoyal>(i => i.Document(royal1).Index(IndexFor<TRoyal>()).Parent(parent));
 			}
 			if (indexChildren == null) return;
 			foreach (var royal in royals)
