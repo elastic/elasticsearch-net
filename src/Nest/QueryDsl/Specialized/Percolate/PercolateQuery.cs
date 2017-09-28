@@ -28,6 +28,7 @@ namespace Nest
 		/// The source of the document to percolate.
 		/// </summary>
 		[JsonProperty("document")]
+		//[JsonConverter(typeof(CollapsedSourceConverter))]
 		object Document { get; set; }
 
 		/// <summary>
