@@ -23,7 +23,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 					date_histogram = new
 					{
 						field = "startedOn",
-						interval = "month",
+						interval = "month"
 					},
 					aggs = new
 					{
@@ -39,7 +39,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 							moving_avg = new
 							{
 								buckets_path = "commits",
-								window = 60,
+								window = 4,
 								model = "holt_winters",
 								settings = new
 								{
@@ -47,7 +47,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 									alpha = 0.5,
 									beta = 0.5,
 									gamma = 0.5,
-									period = 30,
+									period = 2,
 									pad = false
 								}
 							}
@@ -69,14 +69,14 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 						)
 						.MovingAverage("commits_moving_avg", mv => mv
 							.BucketsPath("commits")
-							.Window(60)
+							.Window(4)
 							.Model(m => m
 								.HoltWinters(hw => hw
 									.Type(HoltWintersType.Multiplicative)
 									.Alpha(0.5f)
 									.Beta(0.5f)
 									.Gamma(0.5f)
-									.Period(30)
+									.Period(2)
 									.Pad(false)
 								)
 							)
@@ -96,14 +96,14 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 					new SumAggregation("commits", "numberOfCommits") &&
 					new MovingAverageAggregation("commits_moving_avg", "commits")
 					{
-						Window = 60,
+						Window = 4,
 						Model = new HoltWintersModel
 						{
 							Type = HoltWintersType.Multiplicative,
 							Alpha = 0.5f,
 							Beta = 0.5f,
 							Gamma = 0.5f,
-							Period = 30,
+							Period = 2,
 							Pad = false
 						}
 					}
@@ -113,6 +113,35 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
+
+			var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
+			projectsPerMonth.Should().NotBeNull();
+			projectsPerMonth.Buckets.Should().NotBeNull();
+			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
+
+			int bucketCount = 0;
+			foreach (var item in projectsPerMonth.Buckets)
+			{
+				bucketCount++;
+
+				var commits = item.Sum("commits");
+				commits.Should().NotBeNull();
+				commits.Value.Should().BeGreaterThan(0);
+
+				var movingAverage = item.MovingAverage("commits_moving_avg");
+
+				// Moving Average specifies a window of 4 so
+				// moving average values should exist from 5th bucketr onwards
+				if (bucketCount <= 4)
+				{
+					movingAverage.Should().BeNull();
+				}
+				else
+				{
+					movingAverage.Should().NotBeNull();
+					movingAverage.Value.Should().BeGreaterThan(0);
+				}
+			}
 		}
 	}
 }

@@ -4,6 +4,7 @@
 	{
 		Unknown,
 		Query,
+		Filter,
 		Must,
 		MustNot,
 		Should,

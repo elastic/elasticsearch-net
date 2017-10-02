@@ -46,6 +46,8 @@ namespace Nest
 
 		public ValueAggregate BucketScript(string key) => this.TryGet<ValueAggregate>(key);
 
+		public ValueAggregate SerialDifferencing(string key) => this.TryGet<ValueAggregate>(key);
+
 		public KeyedValueAggregate MaxBucket(string key) => this.TryGet<KeyedValueAggregate>(key);
 
 		public KeyedValueAggregate MinBucket(string key) => this.TryGet<KeyedValueAggregate>(key);
@@ -152,7 +154,6 @@ namespace Nest
 		public MultiBucketAggregate<DateHistogramBucket> DateHistogram(string key) => GetMultiBucketAggregate<DateHistogramBucket>(key);
 
 		public MatrixStatsAggregate MatrixStats(string key) => this.TryGet<MatrixStatsAggregate>(key);
-
 
 		private TAggregate TryGet<TAggregate>(string key)
 			where TAggregate : class, IAggregate

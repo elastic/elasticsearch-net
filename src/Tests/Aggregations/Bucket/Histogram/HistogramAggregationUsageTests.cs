@@ -27,7 +27,8 @@ namespace Tests.Aggregations.Bucket.Histogram
 						order = new
 						{
 							_key = "desc"
-						}
+						},
+						offset = 1.1
 					}
 				}
 			}
@@ -40,6 +41,7 @@ namespace Tests.Aggregations.Bucket.Histogram
 					.Interval(100)
 					.Missing(0)
 					.Order(HistogramOrder.KeyDescending)
+					.Offset(1.1)
 				)
 			);
 
@@ -51,7 +53,8 @@ namespace Tests.Aggregations.Bucket.Histogram
 					Field = Field<Project>(p => p.NumberOfCommits),
 					Interval = 100,
 					Missing = 0,
-					Order = HistogramOrder.KeyDescending
+					Order = HistogramOrder.KeyDescending,
+					Offset = 1.1
 				}
 			};
 
