@@ -41,8 +41,12 @@ namespace Tests.Document.Single.Delete
 		protected override void ExpectResponse(IDeleteResponse response)
 		{
 			response.ShouldBeValid();
-			response.Found.Should().BeTrue();
 			response.Result.Should().Be(Result.Deleted);
+			response.Shards.Should().NotBeNull();
+			response.Shards.Total.Should().BeGreaterOrEqualTo(1);
+			response.Shards.Successful.Should().BeGreaterOrEqualTo(1);
+			response.PrimaryTerm.Should().BeGreaterThan(0);
+			response.SequenceNumber.Should().BeGreaterThan(0);
 		}
 	}
 
@@ -69,10 +73,15 @@ namespace Tests.Document.Single.Delete
 
 		protected override void ExpectResponse(IDeleteResponse response)
 		{
-			response.Found.Should().BeFalse();
+			response.ShouldBeValid();
+			response.Result.Should().Be(Result.NotFound);
 			response.Index.Should().Be("project");
 			response.Type.Should().Be("project");
 			response.Id.Should().Be(this.CallIsolatedValue);
+			response.Shards.Total.Should().BeGreaterOrEqualTo(1);
+			response.Shards.Successful.Should().BeGreaterOrEqualTo(1);
+			response.PrimaryTerm.Should().BeGreaterThan(0);
+			response.SequenceNumber.Should().BeGreaterThan(0);
 		}
 	}
 }

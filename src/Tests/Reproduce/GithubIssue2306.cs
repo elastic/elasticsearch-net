@@ -24,7 +24,6 @@ namespace Tests.Reproduce
 			var response = client.Delete<Project>("non-existent-id");
 
 			response.ShouldBeValid();
-			response.Found.Should().BeFalse();
 			response.Result.Should().Be(Result.NotFound);
 			response.Index.Should().Be("project");
 			response.Type.Should().Be("project");

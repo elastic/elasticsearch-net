@@ -76,7 +76,7 @@ namespace Tests.Framework
 				.Ignore(p => p.PrivateValue)
 				.Rename(p => p.OnlineHandle, "nickname")
 			)
-			.InferMappingFor<PercolatedQuery>(map => map
+			.InferMappingFor<ProjectPercolation>(map => map
 				.IndexName("queries")
 				.TypeName(PercolatorType)
 			)

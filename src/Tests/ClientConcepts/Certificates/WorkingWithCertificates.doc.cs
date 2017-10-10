@@ -192,7 +192,7 @@ namespace Tests.ClientConcepts.Certificates
 		 */
 		public class PkiCluster : CertgenCaCluster
 		{
-			public override ConnectionSettings Authenticate(ConnectionSettings s) => s // <1> Set the client certificate on `ConnectionSettings`
+			protected override ConnectionSettings Authenticate(ConnectionSettings s) => s // <1> Set the client certificate on `ConnectionSettings`
 				.ClientCertificate(
 					ClientCertificate.LoadWithPrivateKey(
 						this.Node.FileSystem.ClientCertificate, // <2> The path to the `.cer` file

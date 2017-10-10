@@ -8,8 +8,10 @@ namespace Nest
 		string Index { get; }
 		string Type { get; }
 		long Version { get; }
-		bool Created { get; }
 		Result Result { get; }
+		ShardsMetaData Shards { get; }
+		long SequenceNumber { get; }
+		long PrimaryTerm { get; }
 	}
 
 	[JsonObject]
@@ -27,11 +29,17 @@ namespace Nest
 		[JsonProperty("_version")]
 		public long Version { get; internal set; }
 
-		[JsonProperty("created")]
-		public bool Created { get; internal set; }
-
 		[JsonProperty("result")]
 		public Result Result { get; internal set; }
+
+		[JsonProperty("_shards")]
+		public ShardsMetaData Shards { get; internal set; }
+
+		[JsonProperty("_seq_no")]
+		public long SequenceNumber { get; internal set; }
+
+		[JsonProperty("_primary_term")]
+		public long PrimaryTerm { get; internal set; }
 
 	}
 }

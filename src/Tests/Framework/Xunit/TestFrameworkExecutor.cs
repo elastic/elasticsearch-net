@@ -39,17 +39,18 @@ namespace Xunit
                             var cluster = t.Item1;
                             Console.WriteLine($" - {cluster}: {t.Item2}");
                         }
+						Console.ForegroundColor = ConsoleColor.Yellow;
+						Console.WriteLine("--------");
+						var sb = new StringBuilder("build integrate ")
+							.Append(TestClient.Configuration.ElasticsearchVersion)
+							.Append(" \"");
+						var clusters = string.Join(",", runner.FailedCollections
+							.Select(c => c.Item1.ToLowerInvariant()).Distinct());
+						sb.Append(clusters);
+						sb.Append("\"");
 						if (runner.FailedCollections.Count < 30)
 						{
-							Console.ForegroundColor = ConsoleColor.Yellow;
-							Console.WriteLine("--------");
-							var sb = new StringBuilder("build integrate ");
-							sb.Append(TestClient.Configuration.ElasticsearchVersion);
 							sb.Append(" \"");
-							var clusters = string.Join(",", runner.FailedCollections
-								.Select(c => c.Item1.ToLowerInvariant()).Distinct());
-							sb.Append(clusters);
-							sb.Append("\" \"");
 							var tests = string.Join(",", runner.FailedCollections
 								.Select(c => c.Item2.ToLowerInvariant().Split('.').Last()
 									.Replace("apitests", "")
@@ -58,11 +59,10 @@ namespace Xunit
 								));
 							sb.Append(tests);
 							sb.Append("\"");
-							Console.WriteLine(sb.ToString());
 						}
-
+						Console.WriteLine(sb.ToString());
+						Console.WriteLine("--------");
 					}
-
 					Console.ResetColor();
 				}
 
