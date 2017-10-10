@@ -78,8 +78,8 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			requestAsync: (client, r) => client.GetMappingAsync(r)
 		);
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
+		protected override bool ExpectIsValid => false;
+		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"/{_nonExistentIndex}/_mapping?ignore_unavailable=true";
 
