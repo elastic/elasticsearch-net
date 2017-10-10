@@ -85,18 +85,22 @@ namespace Tests.Document.Single.Create
 			);
 			createResponse.ShouldBeValid();
 			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
-			createResponse.Created.Should().BeTrue();
 			createResponse.Result.Should().Be(Result.Created);
 			createResponse.Index.Should().Be(index);
 			createResponse.Type.Should().Be(this.Client.Infer.TypeName<Project>());
 			createResponse.Id.Should().Be(project.Name);
+
+			createResponse.Shards.Should().NotBeNull();
+			createResponse.Shards.Total.Should().BeGreaterThan(0);
+			createResponse.Shards.Successful.Should().BeGreaterThan(0);
+			createResponse.PrimaryTerm.Should().BeGreaterThan(0);
+			createResponse.SequenceNumber.Should().BeGreaterOrEqualTo(0);
 
 			createResponse = this.Client.Create(project, f => f
 				.Index(index)
 			);
 
 			createResponse.ShouldNotBeValid();
-			createResponse.Created.Should().BeFalse();
 			createResponse.ApiCall.HttpStatusCode.Should().Be(409);
 		}
 	}
@@ -135,7 +139,7 @@ namespace Tests.Document.Single.Create
 
 			createResponse.ShouldBeValid();
 			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
-			createResponse.Created.Should().BeTrue();
+			createResponse.Result.Should().Be(Result.Created);
 			createResponse.Index.Should().Be(index);
 			createResponse.Type.Should().Be("jobject");
 
@@ -182,7 +186,6 @@ namespace Tests.Document.Single.Create
 
 			createResponse.ShouldBeValid();
 			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
-			createResponse.Created.Should().BeTrue();
 			createResponse.Index.Should().Be(index);
 			createResponse.Result.Should().Be(Result.Created);
 			createResponse.Type.Should().StartWith("<>");

@@ -56,8 +56,8 @@ namespace Tests.Search.MultiSearch
 			.Search<Project>("dfs_projects", s => s.SearchType(SearchType.DfsQueryThenFetch))
 			.Search<Developer>("5developers", s => s.Query(q => q.MatchAll()).From(0).Size(5))
 			.Search<Developer>("infer_type_name", s => s.Index("devs").From(0).Size(5).MatchAll())
-			.Search<PercolatedQuery>("percolate_document", s => s
-				.Index<PercolatedQuery>()
+			.Search<ProjectPercolation>("percolate_document", s => s
+				.Index<ProjectPercolation>()
 				.Query(q => q
 					.Percolate(p => p
 						.DocumentType<Project>()
@@ -66,8 +66,8 @@ namespace Tests.Search.MultiSearch
 					)
 				)
 			)
-			.Search<PercolatedQuery>("percolate_existing_document", s => s
-				.Index<PercolatedQuery>()
+			.Search<ProjectPercolation>("percolate_existing_document", s => s
+				.Index<ProjectPercolation>()
 				.Query(q => q
 					.Percolate(p => p
 						.Index<Project>()
@@ -88,17 +88,17 @@ namespace Tests.Search.MultiSearch
 				{ "dfs_projects", new SearchRequest<Project> { SearchType = SearchType.DfsQueryThenFetch} },
 				{ "5developers", new SearchRequest<Developer> { From = 0, Size = 5, Query = new QueryContainer(new MatchAllQuery()) } },
 				{ "infer_type_name", new SearchRequest<Developer>("devs") { From = 0, Size = 5, Query = new QueryContainer(new MatchAllQuery()) } },
-				{ "percolate_document", new SearchRequest<PercolatedQuery>()
+				{ "percolate_document", new SearchRequest<ProjectPercolation>()
 					{
 						Query = new QueryContainer(new PercolateQuery
 						{
 							DocumentType = typeof(Project),
 							Document = Project.Instance,
-							Field = Infer.Field<PercolatedQuery>(f => f.Query)
+							Field = Infer.Field<ProjectPercolation>(f => f.Query)
 						})
 					}
 				},
-				{ "percolate_existing_document", new SearchRequest<PercolatedQuery>()
+				{ "percolate_existing_document", new SearchRequest<ProjectPercolation>()
 					{
 						Query = new QueryContainer(new PercolateQuery
 						{
@@ -107,7 +107,7 @@ namespace Tests.Search.MultiSearch
 							Id = Project.First.Name,
 							Version = 1,
 							DocumentType = typeof(Project),
-							Field = Infer.Field<PercolatedQuery>(f => f.Query)
+							Field = Infer.Field<ProjectPercolation>(f => f.Query)
 						})
 					}
 				},
@@ -139,11 +139,11 @@ namespace Tests.Search.MultiSearch
 			inferredTypeName.ShouldBeValid();
 			inferredTypeName.Documents.Should().HaveCount(5);
 
-			var percolateDocument = r.GetResponse<PercolatedQuery>("percolate_document");
+			var percolateDocument = r.GetResponse<ProjectPercolation>("percolate_document");
 			percolateDocument.ShouldBeValid();
 			percolateDocument.Documents.Should().HaveCount(1);
 
-			var percolateExistingDocument = r.GetResponse<PercolatedQuery>("percolate_existing_document");
+			var percolateExistingDocument = r.GetResponse<ProjectPercolation>("percolate_existing_document");
 			percolateExistingDocument.ShouldBeValid();
 			percolateExistingDocument.Documents.Should().HaveCount(1);
 		});

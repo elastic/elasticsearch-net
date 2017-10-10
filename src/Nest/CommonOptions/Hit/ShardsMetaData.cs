@@ -17,5 +17,6 @@ namespace Nest
 
 		[JsonProperty("failures")]
 		public IReadOnlyCollection<ShardFailure> Failures { get; internal set; } = EmptyReadOnly<ShardFailure>.Collection;
+
 	}
 }

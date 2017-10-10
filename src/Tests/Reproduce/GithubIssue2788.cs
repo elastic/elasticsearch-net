@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -81,6 +82,13 @@ namespace Tests.Reproduce
 			);
 
 			var child = result.Hits.First().InnerHits.Single().Value.Documents<Child>().Single();
+
+
+			IReadOnlyCollection<IHit<Root>> hits = result.Hits;
+
+			InnerHitsMetaData innerHitsMetaData = hits.First().InnerHits["children"].Hits;
+			innerHitsMetaData.
+
 
 			child.Should().NotBeNull();
 			child.StartTime.Should().Be(startTime);

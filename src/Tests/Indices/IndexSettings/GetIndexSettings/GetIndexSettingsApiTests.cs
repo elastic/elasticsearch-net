@@ -28,11 +28,11 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 		protected override string UrlPath => $"/queries/_settings/index.%2A?local=true";
 
 		protected override Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> Fluent => d => d
-			.Index<PercolatedQuery>()
+			.Index<ProjectPercolation>()
 			.Name("index.*")
 			.Local();
 
-		protected override GetIndexSettingsRequest Initializer => new GetIndexSettingsRequest(Infer.Index<PercolatedQuery>(), "index.*")
+		protected override GetIndexSettingsRequest Initializer => new GetIndexSettingsRequest(Infer.Index<ProjectPercolation>(), "index.*")
 		{
 			Local = true
 		};

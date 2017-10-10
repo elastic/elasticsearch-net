@@ -21,6 +21,7 @@ namespace Nest
 		/// The type / mapping of the document to percolate. This is a required parameter.
 		/// </summary>
 		[JsonProperty(PropertyName = "document_type")]
+		[Obsolete("Deprecated in 6.x, types are gone from indices created as of Elasticsearch 6.x")]
 		TypeName DocumentType { get; set; }
 
 		/// <summary>
@@ -83,15 +84,10 @@ namespace Nest
 
 		internal static bool IsConditionless(IPercolateQuery q)
 		{
-			var docFields = q.DocumentType.IsConditionless() || q.Document == null;
+			var docFields = q.Document == null;
+			if (!docFields) return false;
 
-			if (!docFields)
-			{
-				return false;
-			}
-
-			return q.DocumentType.IsConditionless() ||
-			       q.Type.IsConditionless() ||
+			return q.Type.IsConditionless() ||
 			       q.Index == null ||
 			       q.Id.IsConditionless() ||
 			       q.Field.IsConditionless();
@@ -105,6 +101,7 @@ namespace Nest
 		/// <summary>
 		/// The type / mapping of the document to percolate. This is a required parameter.
 		/// </summary>
+		[Obsolete("Deprecated in 6.x, types are gone from indices created as of Elasticsearch 6.x")]
 		public TypeName DocumentType { get; set; }
 
 		/// <summary>
@@ -186,11 +183,13 @@ namespace Nest
 		/// <summary>
 		/// The type / mapping of the document to percolate. This is a required parameter.
 		/// </summary>
+		[Obsolete("Deprecated in 6.x, types are gone from indices created as of Elasticsearch 6.x")]
 		public PercolateQueryDescriptor<T> DocumentType(TypeName type) => Assign(a => a.DocumentType = type);
 
 		/// <summary>
 		/// The type / mapping of the document to percolate. This is a required parameter.
 		/// </summary>
+		[Obsolete("Deprecated in 6.x, types are gone from indices created as of Elasticsearch 6.x")]
 		public PercolateQueryDescriptor<T> DocumentType<TDocument>() => Assign(a => a.DocumentType = typeof(TDocument));
 
 		/// <summary>
