@@ -37,10 +37,11 @@ namespace Tests.QueryDsl.Specialized.Percolate
 			requestAsync: (client, r) => client.SearchAsync<ProjectPercolation>(r)
 		);
 
-		protected override string UrlPath => $"{this.CallIsolatedValue}/_search";
+		protected override string UrlPath => $"{this.PercolationIndex}/_search";
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
@@ -102,11 +103,6 @@ namespace Tests.QueryDsl.Specialized.Percolate
 	[SkipVersion("5.0.0-alpha1", "percolate query changed property in query dsl from 'percolator' to 'percolate'")]
 	public class PercolateQueryUsageTests : PercolateQueryUsageTestsBase
 	{
-		protected override string UrlPath => $"{this.CallIsolatedValue}/_search";
-		protected override int ExpectStatusCode => 200;
-		protected override bool ExpectIsValid => true;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-
 		public PercolateQueryUsageTests(WritableCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected object QueryJson => new
