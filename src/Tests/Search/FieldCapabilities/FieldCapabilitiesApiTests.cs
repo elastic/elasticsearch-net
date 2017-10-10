@@ -42,13 +42,18 @@ namespace Tests.Search.FieldCapabilities
 
 			var uidFieldCaps = response.Fields.First(kv => kv.Value.Uid != null).Value.Uid;
 			uidFieldCaps.Aggregatable.Should().BeTrue();
-			uidFieldCaps.Searchable.Should().BeTrue();
+			uidFieldCaps.Searchable.Should().BeFalse();
 
 			uidFieldCaps = response.Fields["_uid"].Uid;
 			uidFieldCaps.Should().NotBeNull();
 
 			uidFieldCaps.Aggregatable.Should().BeTrue();
-			uidFieldCaps.Searchable.Should().BeTrue();
+			uidFieldCaps.Searchable.Should().BeFalse();
+
+			response.Fields.Should().ContainKey("state");
+			var stateCapabilities = response.Fields["state"].Keyword;
+			stateCapabilities.Aggregatable.Should().BeTrue();
+			stateCapabilities.Searchable.Should().BeTrue();
 		}
 	}
 }
