@@ -41,7 +41,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		
+
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
