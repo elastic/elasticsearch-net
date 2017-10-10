@@ -44,9 +44,9 @@ namespace Tests.Search.MultiSearch
 			new { index = "devs", type = "developer" },
 			new { from = 0, size = 5, query = new { match_all = new {} } },
 			new { index = "queries", type = TestClient.PercolatorType },
-			new { query = new { percolate = new { document_type = "project", document = Project.InstanceAnonymous, field = "query" } } },
+			new { query = new { percolate = new { document = Project.InstanceAnonymous, field = "query" } } },
 			new { index = "queries", type = TestClient.PercolatorType },
-			new { query = new { percolate = new { index = "project", type = "project", id = Project.First.Name, version = 1, document_type = "project", field = "query" } } },
+			new { query = new { percolate = new { index = "project", type = "project", id = Project.First.Name, version = 1, field = "query" } } },
 		};
 
 		protected override Func<MultiSearchDescriptor, IMultiSearchRequest> Fluent => ms => ms
@@ -60,7 +60,6 @@ namespace Tests.Search.MultiSearch
 				.Index<ProjectPercolation>()
 				.Query(q => q
 					.Percolate(p => p
-						.DocumentType<Project>()
 						.Document(Project.Instance)
 						.Field(f => f.Query)
 					)
@@ -74,7 +73,6 @@ namespace Tests.Search.MultiSearch
 						.Type<Project>()
 						.Id(Project.First.Name)
 						.Version(1)
-						.DocumentType<Project>()
 						.Field(f => f.Query)
 					)
 				)
@@ -92,7 +90,6 @@ namespace Tests.Search.MultiSearch
 					{
 						Query = new QueryContainer(new PercolateQuery
 						{
-							DocumentType = typeof(Project),
 							Document = Project.Instance,
 							Field = Infer.Field<ProjectPercolation>(f => f.Query)
 						})
@@ -106,7 +103,6 @@ namespace Tests.Search.MultiSearch
 							Type = typeof(Project),
 							Id = Project.First.Name,
 							Version = 1,
-							DocumentType = typeof(Project),
 							Field = Infer.Field<ProjectPercolation>(f => f.Query)
 						})
 					}
