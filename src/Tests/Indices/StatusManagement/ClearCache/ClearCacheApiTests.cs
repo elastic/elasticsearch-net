@@ -23,10 +23,10 @@ namespace Tests.Indices.StatusManagement.ClearCache
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/_cache/clear?recycler=true";
+		protected override string UrlPath => "/_cache/clear?request_cache=true";
 
-		protected override Func<ClearCacheDescriptor, IClearCacheRequest> Fluent => d => d.Recycler();
+		protected override Func<ClearCacheDescriptor, IClearCacheRequest> Fluent => d => d.RequestCache();
 
-		protected override ClearCacheRequest Initializer => new ClearCacheRequest(AllIndices) { Recycler = true };
+		protected override ClearCacheRequest Initializer => new ClearCacheRequest(AllIndices) { RequestCache = true };
 	}
 }
