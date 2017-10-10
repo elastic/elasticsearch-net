@@ -5,10 +5,10 @@
 # tracked by git).
 
 # mode either u (unit test), i (integration test) or m (mixed mode)
-mode: u
+mode: i
 # the elasticsearch version that should be started
 # Can be a snapshot version of sonatype or "latest" to get the latest snapshot of sonatype
-elasticsearch_version: 6.0.0-beta2
+elasticsearch_version: 6.0.0-rc1
 # cluster filter allows you to only run the integration tests of a particular cluster (cluster suffix not needed)
 # cluster_filter:
 # whether we want to forcefully reseed on the node, if you are starting the tests with a node already running

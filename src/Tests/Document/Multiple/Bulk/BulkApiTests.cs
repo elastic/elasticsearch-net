@@ -136,6 +136,8 @@ namespace Tests.Document.Multiple.Bulk
 				item.Shards.Should().NotBeNull();
 				item.Shards.Total.Should().BeGreaterThan(0);
 				item.Shards.Successful.Should().BeGreaterThan(0);
+				item.SequenceNumber.Should().BeGreaterOrEqualTo(0);
+				item.PrimaryTerm.Should().BeGreaterThan(0);
 			}
 
 			var project1 = this.Client.Source<Project>(Project.Instance.Name, p => p.Index(CallIsolatedValue));

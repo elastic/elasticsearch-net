@@ -53,8 +53,8 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 				this.Client.DeleteIndex(typeof(Project));
 			if (this.Client.IndexExists(Infer.Indices<Developer>()).Exists)
 				this.Client.DeleteIndex(typeof(Developer));
-			if (this.Client.IndexExists(Infer.Indices<PercolatedQuery>()).Exists)
-				this.Client.DeleteIndex(typeof(PercolatedQuery));
+			if (this.Client.IndexExists(Infer.Indices<ProjectPercolation>()).Exists)
+				this.Client.DeleteIndex(typeof(ProjectPercolation));
 		}
 
 		public void CreateIndices()
@@ -69,7 +69,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 		{
 			this.Client.IndexMany(Project.Projects);
 			this.Client.IndexMany(Developer.Developers);
-			this.Client.Index(new PercolatedQuery
+			this.Client.Index(new ProjectPercolation
 			{
 				Id = "1",
 				Query = new MatchAllQuery()
@@ -80,7 +80,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 					(d, c) => d.Document(c).Parent(c.ProjectName)
 				)
 			);
-			this.Client.Refresh(Nest.Indices.Index(typeof(Project), typeof(Developer), typeof(PercolatedQuery)));
+			this.Client.Refresh(Nest.Indices.Index(typeof(Project), typeof(Developer), typeof(ProjectPercolation)));
 		}
 
 		private void CreateIndicesAndSeedIndexData()
@@ -174,12 +174,13 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 
 		private void CreatePercolatorIndex()
 		{
-			var createPercolatedIndex = this.Client.CreateIndex(typeof(PercolatedQuery), c => c
+			var createPercolatedIndex = this.Client.CreateIndex(typeof(ProjectPercolation), c => c
 				.Settings(s => s
 					.AutoExpandReplicas("0-all")
+					.Analysis(DefaultSeeder.ProjectAnalysisSettings)
 				)
 				.Mappings(map => map
-					.Map<PercolatedQuery>(m => m
+					.Map<ProjectPercolation>(m => m
 						.AutoMap()
 						.Properties(PercolatedQueryProperties)
 					)
@@ -189,7 +190,8 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 			createPercolatedIndex.ShouldBeValid();
 		}
 
-		public static PropertiesDescriptor<Project> ProjectProperties(PropertiesDescriptor<Project> props) => props
+		public static PropertiesDescriptor<TProject> ProjectProperties<TProject>(PropertiesDescriptor<TProject> props)
+			where TProject : Project => props
 			.Keyword(s => s
 				.Name(p => p.Name)
 				.Store()
@@ -294,9 +296,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 				.Name(p => p.GeoIp)
 			);
 
-		public static PropertiesDescriptor<PercolatedQuery> PercolatedQueryProperties(PropertiesDescriptor<PercolatedQuery> props) => props
-			.Percolator(pp => pp
-				.Name(n => n.Query)
-			);
+		public static PropertiesDescriptor<ProjectPercolation> PercolatedQueryProperties(PropertiesDescriptor<ProjectPercolation> props) =>
+		 	ProjectProperties(props.Percolator(pp => pp.Name(n => n.Query)));
 	}
 }

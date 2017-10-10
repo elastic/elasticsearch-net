@@ -68,7 +68,8 @@ namespace Nest
 		TReturnType LongRange(Func<LongRangePropertyDescriptor<T>, ILongRangeProperty> selector);
 	}
 
-	public partial class PropertiesDescriptor<T> : IsADictionaryDescriptorBase<PropertiesDescriptor<T>, IProperties, PropertyName, IProperty>, IPropertiesDescriptor<T, PropertiesDescriptor<T>>
+	public partial class PropertiesDescriptor<T>
+		: IsADictionaryDescriptorBase<PropertiesDescriptor<T>, IProperties, PropertyName, IProperty>, IPropertiesDescriptor<T, PropertiesDescriptor<T>>
 		where T : class
 	{
 		public PropertiesDescriptor() : base(new Properties<T>()) { }
