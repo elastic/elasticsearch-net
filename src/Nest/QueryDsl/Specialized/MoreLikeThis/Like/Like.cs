@@ -31,7 +31,7 @@ namespace Nest
 		}
 
 	}
-	internal class LikeJsonConverter :JsonConverter 
+	internal class LikeJsonConverter :JsonConverter
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => true;

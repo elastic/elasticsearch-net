@@ -157,7 +157,7 @@ namespace Nest
 			return new ObjectProperty();
 		}
 
-		private Type GetUnderlyingType(Type type)
+		private static Type GetUnderlyingType(Type type)
 		{
 			if (type.IsArray)
 				return type.GetElementType();
