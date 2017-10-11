@@ -11,7 +11,7 @@ namespace Tests.Mapping.Types.Core.Join
 	public class JoinTest
 	{
 		[Join(typeof(Project), typeof(CommitActivity))]
-		public QueryContainer Query { get; set; }
+		public JoinField JoinField { get; set; }
 	}
 
 	public class JoinAttributeTests : AttributeTestsBase<JoinTest>
@@ -20,7 +20,7 @@ namespace Tests.Mapping.Types.Core.Join
 		{
 			properties = new
 			{
-				query = new
+				joinField = new
 				{
 					type = "join",
 					relations = new {
