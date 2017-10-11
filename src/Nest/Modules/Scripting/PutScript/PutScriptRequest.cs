@@ -1,23 +1,32 @@
+using System;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	public partial interface IPutScriptRequest 
+	public partial interface IPutScriptRequest
 	{
 		[JsonProperty("script")]
-		string Script { get; set; }
+		IStoredScript Script { get; set; }
 	}
 
-	public partial class PutScriptRequest 
+	public partial class PutScriptRequest
 	{
-		public string Script { get; set; }
+		public IStoredScript Script { get; set; }
 	}
 
 	[DescriptorFor("ScriptPut")]
-	public partial class PutScriptDescriptor 
+	public partial class PutScriptDescriptor
 	{
-		string IPutScriptRequest.Script { get; set; }
+		IStoredScript IPutScriptRequest.Script { get; set; }
 
-		public PutScriptDescriptor Script(string script) => Assign(a => a.Script = script);
+		public PutScriptDescriptor Script(Func<StoredScriptDescriptor, IStoredScript> selector) =>
+			Assign(a => a.Script = selector?.Invoke(new StoredScriptDescriptor()));
+
+		public PutScriptDescriptor Painless(string source) => Assign(a => a.Script = new PainlessScript(source));
+		public PutScriptDescriptor Groovy(string source) => Assign(a => a.Script = new GroovyScript(source));
+		public PutScriptDescriptor JavaScript(string source) => Assign(a => a.Script = new JavaScriptScript(source));
+		public PutScriptDescriptor Python(string source) => Assign(a => a.Script = new PythonScript(source));
+		public PutScriptDescriptor LuceneExpression(string source) => Assign(a => a.Script = new LuceneExpressionScript(source));
+		public PutScriptDescriptor Mustache(string source) => Assign(a => a.Script = new MustacheScript(source));
 	}
 }
