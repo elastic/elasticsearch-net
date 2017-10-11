@@ -136,6 +136,10 @@ namespace Nest
 		public TypeMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null, int maxRecursion = 0) =>
 			Assign(a => a.Properties = a.Properties.AutoMap<T>(visitor, maxRecursion));
 
+		public TypeMappingDescriptor<T> AutoMap<TDocument>(IPropertyVisitor visitor = null, int maxRecursion = 0)
+			where TDocument : class, T =>
+			Assign(a => a.Properties = a.Properties.AutoMap<TDocument>(visitor, maxRecursion));
+
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> AutoMap(int maxRecursion) => AutoMap(null, maxRecursion);
 
