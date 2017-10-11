@@ -41,6 +41,7 @@ namespace Nest
 	{
 		internal MultipleMappingsDescriptor(IMappings mappings) : base(mappings) { }
 
+#pragma warning disable 0809
 		[Obsolete("Mapping multiple types is no longer supported on indices created in Elasticsearch 6.x and up")]
 		public override MultipleMappingsDescriptor Map<T>(Func<TypeMappingDescriptor<T>, ITypeMapping> selector) =>
 			AssignMap(Assign(typeof(T), selector?.Invoke(new TypeMappingDescriptor<T>())));
