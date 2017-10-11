@@ -8,6 +8,7 @@ namespace Nest
 {
 	internal class IndicesJsonConverter : JsonConverter
 	{
+		//TODO why is this checking Types?
 		public override bool CanConvert(Type objectType) => typeof(Types) == objectType;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
