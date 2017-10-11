@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Nest;
-using Newtonsoft.Json;
 using Tests.Framework;
 using static Tests.Framework.RoundTripper;
 
@@ -18,21 +16,26 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	**/
 	public class AutoMap
 	{
-        /**
+		/**
 		* We'll look at the features of auto mapping with a number of examples. For this,
-        * we'll define two POCOs, `Company`, which has a name
+		* we'll define two POCOs, `Company`, which has a name
 		* and a collection of Employees, and `Employee` which has various properties of
 		* different types, and itself has a collection of `Employee` types.
 		*/
-        public class Company
+
+		public abstract class Document
+		{
+			public JoinField Join { get; set; }
+		}
+
+		public class Company : Document
 		{
 			public string Name { get; set; }
 			public List<Employee> Employees { get; set; }
 		}
 
-		public class Employee
+		public class Employee : Document
 		{
-			public string FirstName { get; set; }
 			public string LastName { get; set; }
 			public int Salary { get; set; }
 			public DateTime Birthday { get; set; }
@@ -46,55 +49,44 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		{
 			/**
             * Auto mapping can take the pain out of having to define a manual mapping for all properties
-            * on the POCO
+            * on the POCO. In this case we want to index two subclasses into a single index. We call Map
+            * for the base class and then call AutoMap foreach of the types we want it it the implement
 			*/
+
 			var descriptor = new CreateIndexDescriptor("myindex")
 				.Mappings(ms => ms
-					.Map<Company>(m => m.AutoMap()) // <1> Auto map `Company`
-					.Map<Employee>(m => m.AutoMap()) // <2> Auto map `Employee`
+					.Map<Document>(m => m
+						.AutoMap<Company>() // <1> Auto map `Company`
+						.AutoMap<Employee>() // <1> Auto map `Employee`
+					)
 				);
 
-            // json
+			// json
 			var expected = new
 			{
 				mappings = new
 				{
-					company = new
+					document = new
 					{
 						properties = new
 						{
+							birthday = new {type = "date"},
 							employees = new
 							{
 								properties = new
 								{
-									birthday = new
-									{
-										type = "date"
-									},
+									birthday = new {type = "date"},
 									employees = new
 									{
 										properties = new { },
 										type = "object"
 									},
-									firstName = new
+									hours = new {type = "long"},
+									isManager = new {type = "boolean"},
+									join = new
 									{
-										fields = new
-										{
-											keyword = new
-											{
-												type = "keyword",
-												ignore_above = 256
-											}
-										},
-										type = "text"
-									},
-									hours = new
-									{
-										type = "long"
-									},
-									isManager = new
-									{
-										type = "boolean"
+										properties = new { },
+										type = "object"
 									},
 									lastName = new
 									{
@@ -102,65 +94,22 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 										{
 											keyword = new
 											{
-												type = "keyword",
-												ignore_above = 256
+												ignore_above = 256,
+												type = "keyword"
 											}
 										},
 										type = "text"
 									},
-									salary = new
-									{
-										type = "integer"
-									}
+									salary = new {type = "integer"}
 								},
 								type = "object"
 							},
-							name = new
-							{
-								fields = new
-								{
-									keyword = new
-									{
-										type = "keyword",
-										ignore_above = 256
-									}
-								},
-								type = "text"
-							}
-						}
-					},
-					employee = new
-					{
-						properties = new
-						{
-							birthday = new
-							{
-								type = "date"
-							},
-							employees = new
+							hours = new {type = "long"},
+							isManager = new {type = "boolean"},
+							join = new
 							{
 								properties = new { },
 								type = "object"
-							},
-							firstName = new
-							{
-								fields = new
-								{
-									keyword = new
-									{
-										type = "keyword",
-										ignore_above = 256
-									}
-								},
-								type = "text"
-							},
-							hours = new
-							{
-								type = "long"
-							},
-							isManager = new
-							{
-								type = "boolean"
 							},
 							lastName = new
 							{
@@ -168,24 +117,33 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								{
 									keyword = new
 									{
-										type = "keyword",
-										ignore_above = 256
+										ignore_above = 256,
+										type = "keyword"
 									}
 								},
 								type = "text"
 							},
-							salary = new
+							name = new
 							{
-								type = "integer"
-							}
+								fields = new
+								{
+									keyword = new
+									{
+										ignore_above = 256,
+										type = "keyword"
+									}
+								},
+								type = "text"
+							},
+							salary = new {type = "integer"}
 						}
 					}
 				}
 			};
 
-            // hide
-			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
-        }
+			// hide
+			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+		}
 
 		public class ParentWithStringId : IgnoringProperties.Parent
 		{
@@ -336,7 +294,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				);
 
 			/** Thus we do not map properties on the second occurrence of our Child property */
-            //json
+			//json
 			var expected = new
 			{
 				mappings = new
@@ -355,8 +313,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-            //hide
-			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+			//hide
+			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 
 			/** Now let's specify a maxRecursion of `3` */
 			var withMaxRecursionDescriptor = new CreateIndexDescriptor("myindex")
@@ -365,7 +323,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				);
 
 			/** `.AutoMap()` has now mapped three levels of our Child property */
-            //json
+			//json
 			var expectedWithMaxRecursion = new
 			{
 				mappings = new
@@ -405,12 +363,12 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-            //hide
-			Expect(expectedWithMaxRecursion).WhenSerializing((ICreateIndexRequest)withMaxRecursionDescriptor);
+			//hide
+			Expect(expectedWithMaxRecursion).WhenSerializing((ICreateIndexRequest) withMaxRecursionDescriptor);
 		}
 
-        //hide
-        [U]
+		//hide
+		[U]
 		public void PutMappingAlsoAdheresToMaxRecursion()
 		{
 			var descriptor = new PutMappingDescriptor<A>().AutoMap();
@@ -427,7 +385,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing((IPutMappingRequest)descriptor);
+			Expect(expected).WhenSerializing((IPutMappingRequest) descriptor);
 
 			var withMaxRecursionDescriptor = new PutMappingDescriptor<A>().AutoMap(3);
 
@@ -464,7 +422,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expectedWithMaxRecursion).WhenSerializing((IPutMappingRequest)withMaxRecursionDescriptor);
+			Expect(expectedWithMaxRecursion).WhenSerializing((IPutMappingRequest) withMaxRecursionDescriptor);
 		}
 	}
 }
