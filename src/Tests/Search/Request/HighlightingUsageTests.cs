@@ -94,22 +94,6 @@ namespace Tests.Search.Request
 								}
 							}
 						}
-					},
-					{ "state.offsets", new JObject
-						{
-							{ "type", "postings" },
-							{ "pre_tags", new JArray { "<state>" } },
-							{ "post_tags", new JArray { "</state>" } },
-							{ "highlight_query", new JObject
-								{
-									{ "terms", new JObject
-										{
-											{ "state.offsets", new JArray { "stable" , "bellyup" } }
-										}
-									}
-								}
-							}
-						}
 					}
 				}
 			}
@@ -155,20 +139,6 @@ namespace Tests.Search.Request
 							.Match(m => m
 								.Field(p => p.LeadDeveloper.LastName)
 								.Query(LastNameSearch)
-							)
-						),
-					fs => fs
-						.Field(p => p.State.Suffix("offsets"))
-						.Type(HighlighterType.Postings)
-						.PreTags("<state>")
-						.PostTags("</state>")
-						.HighlightQuery(q => q
-							.Terms(t => t
-								.Field(f => f.State.Suffix("offsets"))
-								.Terms(
-									StateOfBeing.Stable.ToString().ToLowerInvariant(),
-									StateOfBeing.BellyUp.ToString().ToLowerInvariant()
-								)
 							)
 						)
 				)
@@ -222,18 +192,6 @@ namespace Tests.Search.Request
 									Query = LastNameSearch
 								}
 							}
-						},
-						{ "state.offsets", new HighlightField
-							{
-								Type = HighlighterType.Postings,
-								PreTags = new[] { "<state>"},
-								PostTags = new[] { "</state>"},
-								HighlightQuery = new TermsQuery
-								{
-									Field = "state.offsets",
-									Terms = new [] { "stable", "bellyup" }
-								}
-							}
 						}
 					}
 				}
@@ -269,14 +227,6 @@ namespace Tests.Search.Request
 						{
 							highlight.Should().Contain("<name>");
 							highlight.Should().Contain("</name>");
-						}
-					}
-					else if (highlightField.Key == "state.offsets")
-					{
-						foreach (var highlight in highlightField.Value.Highlights)
-						{
-							highlight.Should().Contain("<state>");
-							highlight.Should().Contain("</state>");
 						}
 					}
 					else
