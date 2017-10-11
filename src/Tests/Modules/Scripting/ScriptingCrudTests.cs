@@ -21,10 +21,8 @@ namespace Tests.Modules.Scripting
 			requestAsync: (s, c, r) => c.PutScriptAsync(r)
 		);
 
-		private string _lang = "painless";
-
-		protected PutScriptRequest CreateInitializer(string id) => new PutScriptRequest(id) { Script = "1+1" };
-		protected IPutScriptRequest CreateFluent(string id, PutScriptDescriptor d) => d.Script("1+1");
+		protected PutScriptRequest CreateInitializer(string id) => new PutScriptRequest(id) { Script = new PainlessScript("1+1") };
+		protected IPutScriptRequest CreateFluent(string id, PutScriptDescriptor d) => d.Painless("1+1");
 
 		protected override LazyResponses Read() => Calls<GetScriptDescriptor, GetScriptRequest, IGetScriptRequest, IGetScriptResponse>(
 			ReadInitializer,
@@ -49,8 +47,8 @@ namespace Tests.Modules.Scripting
 
 		private string _updatedScript = "2+2";
 
-		protected PutScriptRequest UpdateInitializer(string id) => new PutScriptRequest(id) { Script = _updatedScript };
-		protected IPutScriptRequest UpdateFluent(string id, PutScriptDescriptor d) => d.Script(_updatedScript);
+		protected PutScriptRequest UpdateInitializer(string id) => new PutScriptRequest(id) { Script = new PainlessScript(_updatedScript) };
+		protected IPutScriptRequest UpdateFluent(string id, PutScriptDescriptor d) => d.Painless(_updatedScript);
 
 		protected override LazyResponses Delete() => Calls<DeleteScriptDescriptor, DeleteScriptRequest, IDeleteScriptRequest, IDeleteScriptResponse>(
 			DeleteInitializer,
@@ -64,6 +62,6 @@ namespace Tests.Modules.Scripting
 		protected DeleteScriptRequest DeleteInitializer(string id) => new DeleteScriptRequest(id);
 		protected IDeleteScriptRequest DeleteFluent(string id, DeleteScriptDescriptor d) => d;
 
-		protected override void ExpectAfterUpdate(IGetScriptResponse response) => response.Script.Should().Be(_updatedScript);
+		protected override void ExpectAfterUpdate(IGetScriptResponse response) => response.Script.Source.Should().Be(_updatedScript);
 	}
 }
