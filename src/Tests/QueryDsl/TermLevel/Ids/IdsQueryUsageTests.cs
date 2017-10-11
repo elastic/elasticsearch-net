@@ -18,7 +18,7 @@ namespace Tests.QueryDsl.TermLevel.Ids
 			{
 				_name = "named_query",
 				boost = 1.1,
-				types = new[] { "project", "developer" },
+				type = new[] { "project", "developer" },
 				values = new[] { 1, 2, 3, 4 }
 			}
 
