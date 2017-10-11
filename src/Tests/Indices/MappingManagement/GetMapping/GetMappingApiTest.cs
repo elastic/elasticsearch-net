@@ -195,6 +195,11 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			Increment("date_range");
 		}
 
+		public void Visit(IJoinProperty property)
+		{
+			Increment("join");
+		}
+
 		public void Visit(IMurmur3HashProperty mapping)
 		{
 			Increment("murmur3");
