@@ -21,8 +21,8 @@ namespace Tests.Modules.Scripting
 			requestAsync: (s, c, r) => c.PutScriptAsync(r)
 		);
 
-		protected PutScriptRequest CreateInitializer(string id) => new PutScriptRequest(id) { Script = "1+1" };
-		protected IPutScriptRequest CreateFluent(string id, PutScriptDescriptor d) => d.Script("1+1");
+		protected PutScriptRequest CreateInitializer(string id) => new PutScriptRequest(id) { Script = new PainlessScript("1+1") };
+		protected IPutScriptRequest CreateFluent(string id, PutScriptDescriptor d) => d.Painless("1+1");
 
 		protected override LazyResponses Read() => Calls<GetScriptDescriptor, GetScriptRequest, IGetScriptRequest, IGetScriptResponse>(
 			ReadInitializer,
