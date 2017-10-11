@@ -40,7 +40,6 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 			new { index = "devs" },
 			new { id = "template-id"},
 			new { index = "devs"},
-			new { file = "template-file"}
 		};
 
 		protected override Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> Fluent => ms => ms
@@ -52,8 +51,7 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 					.Add("state", "Stable")
 				)
 			)
-			.Template<Project>("id", s => s.Index("devs").Id("template-id"))
-			.Template<Project>("file", s => s.Index("devs").File("template-file"));
+			.Template<Project>("id", s => s.Index("devs").Id("template-id"));
 
 		protected override MultiSearchTemplateRequest Initializer => new MultiSearchTemplateRequest(typeof(Project), typeof(Project))
 		{
@@ -69,8 +67,6 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 					}
 				},
 				{ "id", new SearchTemplateRequest<Project>("devs") { Id = "template-id" } },
-				{ "file", new SearchTemplateRequest<Project>("devs") { File = "template-file" } }
-
 			}
 		};
 
@@ -85,9 +81,6 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 			id.Should().NotBeNull();
 			id.ShouldNotBeValid();
 
-			var file = response.GetResponse<Project>("file");
-			file.Should().NotBeNull();
-			file.ShouldNotBeValid();
 		}
 	}
 }

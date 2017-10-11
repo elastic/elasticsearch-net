@@ -13,9 +13,6 @@ namespace Nest
 		[JsonProperty("inline")]
 		string Inline { get; set; }
 
-		[JsonProperty("file")]
-		string File { get; set; }
-
 		[JsonProperty("id")]
 		string Id { get; set; }
 
@@ -31,7 +28,6 @@ namespace Nest
 	public partial class SearchTemplateRequest
 	{
 		public string Inline { get; set; }
-		public string File { get; set; }
 		public string Id { get; set; }
 		public IDictionary<string, object> Params { get; set; }
 		protected Type ClrType { get; set; }
@@ -81,9 +77,6 @@ namespace Nest
 
 		string ISearchTemplateRequest.Inline { get; set; }
 		public SearchTemplateDescriptor<T> Inline(string template) => Assign(a => a.Inline = template);
-
-		string ISearchTemplateRequest.File { get; set; }
-		public SearchTemplateDescriptor<T> File(string file) => Assign(a => a.File = file);
 
 		string ISearchTemplateRequest.Id { get; set; }
 		public SearchTemplateDescriptor<T> Id(string id) => Assign(a => a.Id = id);
