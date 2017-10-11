@@ -53,7 +53,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			{
 				ids = new
 				{
-					types = new[] { "project" },
+					type = new[] { "project" },
 					values = new [] { Project.First.Name, "x" }
 				}
 			}
