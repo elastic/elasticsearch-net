@@ -4,13 +4,13 @@ namespace Nest
 {
 	public interface IGetScriptResponse : IResponse
 	{
-		string Script { get; }
+		IStoredScript Script { get; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
 	public class GetScriptResponse : ResponseBase, IGetScriptResponse
 	{
 		[JsonProperty("script")]
-		public string Script { get; set; }
+		public IStoredScript Script { get; set; }
 	}
 }

@@ -31,17 +31,17 @@ namespace Tests.Modules.Scripting.PutScript
 
 		protected override object ExpectJson { get; } = new
 		{
-			script = "1+1"
+			script = new { lang = "painless", source = "1+1" }
 		};
 
 		protected override PutScriptDescriptor NewDescriptor() => new PutScriptDescriptor(_name);
 
 		protected override Func<PutScriptDescriptor, IPutScriptRequest> Fluent => d => d
-			.Script("1+1");
+			.Painless("1+1");
 
 		protected override PutScriptRequest Initializer => new PutScriptRequest(_name)
 		{
-			Script = "1+1"
+			Script = new PainlessScript("1+1")
 		};
 	}
 }
