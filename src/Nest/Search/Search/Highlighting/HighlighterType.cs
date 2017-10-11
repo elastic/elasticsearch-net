@@ -20,21 +20,12 @@ namespace Nest
 		Plain,
 
 		/// <summary>
-		/// Postings Highlighter.
-		/// If index_options is set to offsets in the mapping the postings highlighter
-		/// will be used instead of the plain highlighter
-		/// </summary>
-		[EnumMember(Value = "postings")]
-		Postings,
-
-		/// <summary>
 		/// Fast Vector Highlighter.
 		/// If term_vector information is provided by setting term_vector to with_positions_offsets
 		/// in the mapping then the fast vector highlighter will be used instead of the plain highlighter
 		/// </summary>
 		[EnumMember(Value = "fvh")]
 		Fvh,
-
 
 		/// <summary>
 		/// Unified Highlighter.
