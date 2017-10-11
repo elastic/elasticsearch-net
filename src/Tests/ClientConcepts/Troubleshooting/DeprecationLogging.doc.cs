@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
@@ -20,18 +21,10 @@ namespace Tests.ClientConcepts.Troubleshooting
 
 		[I] public void RequestWithMultipleWarning()
 		{
-			var response = this.Client.Search<Project>(s => s
-				.FielddataFields(fd => fd
-					.Field(p => p.State)
-					.Field(p => p.NumberOfCommits)
-				)
-				.ScriptFields(sfs => sfs
-					.ScriptField("commit_factor", sf => sf
-						.Inline("doc['numberOfCommits'].value * 2")
-						.Lang("groovy")
-					)
-				)
-			);
+			//TODO come up with a new deprecation test since fielddata is gone
+			throw new NotImplementedException();
+
+			var response = this.Client.Search<Project>(s => s);
 
 			response.ApiCall.DeprecationWarnings.Should().NotBeNullOrEmpty();
 
