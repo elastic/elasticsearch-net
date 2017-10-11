@@ -33,9 +33,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "version")]
 		bool? Version { get; set; }
 
-		[JsonProperty(PropertyName = "fielddata_fields")]
-		IList<Field> FielddataFields { get; set; }
-
 		[JsonProperty(PropertyName = "script_fields")]
 		IScriptFields ScriptFields { get; set; }
 	}
@@ -58,8 +55,6 @@ namespace Nest
 
 		public bool? Version { get; set; }
 
-		public IList<Field> FielddataFields { get; set; }
-
 		public IScriptFields ScriptFields { get; set; }
 	}
 
@@ -74,7 +69,6 @@ namespace Nest
 		bool? IInnerHits.Explain { get; set; }
 		Union<bool, ISourceFilter> IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
-		IList<Field> IInnerHits.FielddataFields { get; set; }
 		IScriptFields IInnerHits.ScriptFields { get; set; }
 
 		public InnerHitsDescriptor<T> From(int? from) => Assign(a => a.From = from);
@@ -82,12 +76,6 @@ namespace Nest
 		public InnerHitsDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
 
 		public InnerHitsDescriptor<T> Name(string name) => Assign(a => a.Name = name);
-
-		public InnerHitsDescriptor<T> FielddataFields(params Field[] fielddataFields) =>
-			Assign(a => a.FielddataFields = fielddataFields?.ToListOrNullIfEmpty());
-
-		public InnerHitsDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields) =>
-			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field)f).ToListOrNullIfEmpty());
 
 		public InnerHitsDescriptor<T> Explain(bool? explain = true) => Assign(a => a.Explain = explain);
 
