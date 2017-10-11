@@ -63,9 +63,6 @@ namespace Nest
 		[JsonProperty("stored_fields")]
 		Fields StoredFields { get; set; }
 
-		[JsonProperty("fielddata_fields")]
-		Fields FielddataFields { get; set; }
-
 		[JsonProperty("script_fields")]
 		IScriptFields ScriptFields { get; set; }
 
@@ -113,7 +110,6 @@ namespace Nest
 		public double? MinScore { get; set; }
 		public long? TerminateAfter { get; set; }
 		public Fields StoredFields { get; set; }
-		public Fields FielddataFields { get; set; }
 		public IScriptFields ScriptFields { get; set; }
 		public Union<bool, ISourceFilter> Source { get; set; }
 		public IList<ISort> Sort { get; set; }
@@ -158,7 +154,6 @@ namespace Nest
 		public double? MinScore { get; set; }
 		public long? TerminateAfter { get; set; }
 		public Fields StoredFields { get; set; }
-		public Fields FielddataFields { get; set; }
 		public IScriptFields ScriptFields { get; set; }
 		public Union<bool, ISourceFilter> Source { get; set; }
 		public IList<ISort> Sort { get; set; }
@@ -227,7 +222,6 @@ namespace Nest
 		QueryContainer ISearchRequest.Query { get; set; }
 		QueryContainer ISearchRequest.PostFilter { get; set; }
 		Fields ISearchRequest.StoredFields { get; set; }
-		Fields ISearchRequest.FielddataFields { get; set; }
 		IScriptFields ISearchRequest.ScriptFields { get; set; }
 		Union<bool, ISourceFilter> ISearchRequest.Source { get; set; }
 		AggregationDictionary ISearchRequest.Aggregations { get; set; }
@@ -373,12 +367,6 @@ namespace Nest
 			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public SearchDescriptor<T> StoredFields(Fields fields) => Assign(a => a.StoredFields = fields);
-
-		///<summary>
-		///A comma-separated list of fields to return as the field data representation of a field for each hit
-		///</summary>
-		public SearchDescriptor<T> FielddataFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
-			Assign(a => a.FielddataFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public SearchDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) =>
 			Assign(a => a.ScriptFields = selector?.Invoke(new ScriptFieldsDescriptor())?.Value);
