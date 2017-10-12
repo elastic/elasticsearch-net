@@ -93,8 +93,8 @@ namespace Tests.Framework
 			var matches = JToken.DeepEquals(expectedJson, actualJson);
 			if (matches) return true;
 
-			Sort(actualJson as JObject);
-			Sort(expectedJson as JObject);
+			(actualJson as JObject)?.DeepSort();
+			(expectedJson as JObject)?.DeepSort();
 
 			var sortedExpected = expectedJson.ToString();
 			var sortedActual = actualJson.ToString();
@@ -107,25 +107,6 @@ namespace Tests.Framework
 
 			sortedExpected.Diff(sortedActual, message);
 			return false;
-		}
-
-		private static void Sort(JObject jObj)
-		{
-			if (jObj == null) return;
-
-			var props = jObj.Properties().ToList();
-			foreach (var prop in props)
-			{
-				prop.Remove();
-			}
-
-			foreach (var prop in props.OrderBy(p => p.Name))
-			{
-				jObj.Add(prop);
-				var o = prop.Value as JObject;
-				if (o != null)
-					Sort(o);
-			}
 		}
 
 		protected T AssertSerializesAndRoundTrips<T>(T o)
