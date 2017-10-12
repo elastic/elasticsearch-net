@@ -47,6 +47,18 @@ namespace Tests.Framework
 			assert("second deserialization", sut);
 		}
 
+		public void FromRequest(IResponse response) => ToSerializeTo(response.ApiCall.RequestBodyInBytes);
+		public void FromResponse(IResponse response) => ToSerializeTo(response.ApiCall.ResponseBodyInBytes);
+		public void ToSerializeTo(byte[] json) => ToSerializeTo(Encoding.UTF8.GetString(json));
+		public void ToSerializeTo(string json)
+		{
+			var expected = JObject.FromObject(this.ExpectJson);
+			var actual = JObject.Parse(json);
+			var sameJson = JToken.DeepEquals(expected, actual);
+			if (sameJson) return;
+			expected.ToString().Diff(actual.ToString(), "Expected serialization differs:");
+		}
+
 
 		public virtual RoundTripper<T> WhenSerializing<T>(T actual)
 		{
