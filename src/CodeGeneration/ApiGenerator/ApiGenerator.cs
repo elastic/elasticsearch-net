@@ -59,6 +59,7 @@ namespace ApiGenerator
 							if (file.EndsWith("_common.json")) RestApiSpec.CommonApiQueryParameters = CreateCommonApiQueryParameters(file);
 							else if (file.EndsWith(".obsolete.json")) continue;
 							else if (file.EndsWith(".patch.json")) continue;
+							else if (file.EndsWith(".replace.json")) continue;
 							else
 							{
 								var endpoint = CreateApiEndpoint(file);
@@ -74,8 +75,6 @@ namespace ApiGenerator
 			return new RestApiSpec { Endpoints = endpoints, Commit = downloadBranch };
 		}
 
-
-
 		public static string PascalCase(string s)
 		{
 			var textInfo = new CultureInfo("en-US").TextInfo;
@@ -84,6 +83,15 @@ namespace ApiGenerator
 
 		private static KeyValuePair<string, ApiEndpoint> CreateApiEndpoint(string jsonFile)
 		{
+			var replaceFile = Path.Combine(Path.GetDirectoryName(jsonFile), Path.GetFileNameWithoutExtension(jsonFile)) + ".replace.json";
+			if (File.Exists(replaceFile))
+			{
+				var replaceSpec = JObject.Parse(File.ReadAllText(replaceFile));
+				var endpointReplaced = replaceSpec.ToObject<Dictionary<string, ApiEndpoint>>().First();
+				endpointReplaced.Value.CsharpMethodName = CreateMethodName(endpointReplaced.Key);
+				return endpointReplaced;
+			}
+
 			var officialJsonSpec = JObject.Parse(File.ReadAllText(jsonFile));
 			PatchOfficialSpec(officialJsonSpec, jsonFile);
 			var endpoint = officialJsonSpec.ToObject<Dictionary<string, ApiEndpoint>>().First();

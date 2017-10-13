@@ -2,6 +2,7 @@
 using System.Linq;
 using Nest;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.ManagedElasticsearch.Plugins;
 
 namespace Tests.Framework.ManagedElasticsearch.Clusters

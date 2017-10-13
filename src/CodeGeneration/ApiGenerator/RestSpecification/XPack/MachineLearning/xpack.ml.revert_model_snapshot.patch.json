@@ -1,0 +1,11 @@
+{
+  "xpack.ml.revert_model_snapshot": {
+    "url": {
+      "parts": {
+        "snapshot_id": {
+          "required": true
+        }
+      }
+    }
+  }
+}

@@ -1657,6 +1657,44 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ICloseJobRequest : IRequest<CloseJobRequestParameters> 
+	{
+		Id JobId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlCloseJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
+	public partial class CloseJobRequest  : PlainRequestBase<CloseJobRequestParameters>, ICloseJobRequest
+	{
+		protected ICloseJobRequest Self => this;
+		Id ICloseJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_close</summary>
+///<param name="job_id">this parameter is required</param>
+		public CloseJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
+
+			///<summary>True if the job should be forcefully closed</summary>
+		public bool Force { get { return Q<bool>("force"); } set { Q("force", value); } }
+		
+		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterAllocationExplainRequest : IRequest<ClusterAllocationExplainRequestParameters> 
 	{
 	 } 
@@ -2653,6 +2691,66 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteDatafeedRequest : IRequest<DeleteDatafeedRequestParameters> 
+	{
+		Id DatafeedId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlDeleteDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
+	public partial class DeleteDatafeedRequest  : PlainRequestBase<DeleteDatafeedRequestParameters>, IDeleteDatafeedRequest
+	{
+		protected IDeleteDatafeedRequest Self => this;
+		Id IDeleteDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
+///<param name="datafeed_id">this parameter is required</param>
+		public DeleteDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		
+
+			///<summary>True if the datafeed should be forcefully deleted</summary>
+		public bool Force { get { return Q<bool>("force"); } set { Q("force", value); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteExpiredDataRequest : IRequest<DeleteExpiredDataRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for XpackMlDeleteExpiredData <pre></pre></summary>
+	public partial class DeleteExpiredDataRequest  : PlainRequestBase<DeleteExpiredDataRequestParameters>, IDeleteExpiredDataRequest
+	{
+		protected IDeleteExpiredDataRequest Self => this;
+				///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteIndexRequest : IRequest<DeleteIndexRequestParameters> 
 	{
 		Indices Index { get; }
@@ -2729,6 +2827,41 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteJobRequest : IRequest<DeleteJobRequestParameters> 
+	{
+		Id JobId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlDeleteJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
+	public partial class DeleteJobRequest  : PlainRequestBase<DeleteJobRequestParameters>, IDeleteJobRequest
+	{
+		protected IDeleteJobRequest Self => this;
+		Id IDeleteJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
+///<param name="job_id">this parameter is required</param>
+		public DeleteJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
+
+			///<summary>True if the job should be forcefully deleted</summary>
+		public bool Force { get { return Q<bool>("force"); } set { Q("force", value); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteLicenseRequest : IRequest<DeleteLicenseRequestParameters> 
 	{
 	 } 
@@ -2737,6 +2870,41 @@ namespace Nest
 	{
 		protected IDeleteLicenseRequest Self => this;
 				///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteModelSnapshotRequest : IRequest<DeleteModelSnapshotRequestParameters> 
+	{
+		Id JobId { get; }
+		Id SnapshotId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlDeleteModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
+	public partial class DeleteModelSnapshotRequest  : PlainRequestBase<DeleteModelSnapshotRequestParameters>, IDeleteModelSnapshotRequest
+	{
+		protected IDeleteModelSnapshotRequest Self => this;
+		Id IDeleteModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IDeleteModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
+			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
+///<param name="job_id">this parameter is required</param>		
+///<param name="snapshot_id">this parameter is required</param>
+		public DeleteModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
 		///<summary>Return human readable values for statistics.</summary>
@@ -3624,6 +3792,38 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IFlushJobRequest : IRequest<FlushJobRequestParameters> 
+	{
+		Id JobId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlFlushJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
+	public partial class FlushJobRequest  : PlainRequestBase<FlushJobRequestParameters>, IFlushJobRequest
+	{
+		protected IFlushJobRequest Self => this;
+		Id IFlushJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_flush</summary>
+///<param name="job_id">this parameter is required</param>
+		public FlushJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IFlushRequest : IRequest<FlushRequestParameters> 
 	{
 		Indices Index { get; }
@@ -3779,6 +3979,182 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetAnomalyRecordsRequest : IRequest<GetAnomalyRecordsRequestParameters> 
+	{
+		Id JobId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlGetRecords <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
+	public partial class GetAnomalyRecordsRequest  : PlainRequestBase<GetAnomalyRecordsRequestParameters>, IGetAnomalyRecordsRequest
+	{
+		protected IGetAnomalyRecordsRequest Self => this;
+		Id IGetAnomalyRecordsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/records</summary>
+///<param name="job_id">this parameter is required</param>
+		public GetAnomalyRecordsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetBucketsRequest : IRequest<GetBucketsRequestParameters> 
+	{
+		Id JobId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlGetBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
+	public partial class GetBucketsRequest  : PlainRequestBase<GetBucketsRequestParameters>, IGetBucketsRequest
+	{
+		protected IGetBucketsRequest Self => this;
+		Id IGetBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/buckets</summary>
+///<param name="job_id">this parameter is required</param>
+		public GetBucketsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetCategoriesRequest : IRequest<GetCategoriesRequestParameters> 
+	{
+		Id JobId { get; }
+		CategoryId CategoryId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
+	public partial class GetCategoriesRequest  : PlainRequestBase<GetCategoriesRequestParameters>, IGetCategoriesRequest
+	{
+		protected IGetCategoriesRequest Self => this;
+		Id IGetCategoriesRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		CategoryId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<CategoryId>("category_id");
+			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
+///<param name="job_id">this parameter is required</param>		
+///<param name="category_id">Optional, accepts null</param>
+		public GetCategoriesRequest(Id job_id, CategoryId category_id) : base(r=>r.Required("job_id", job_id).Optional("category_id", category_id)){}
+		
+
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/categories/</summary>
+///<param name="job_id">this parameter is required</param>
+		public GetCategoriesRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetDatafeedsRequest : IRequest<GetDatafeedsRequestParameters> 
+	{
+		Id DatafeedId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlGetDatafeeds <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
+	public partial class GetDatafeedsRequest  : PlainRequestBase<GetDatafeedsRequestParameters>, IGetDatafeedsRequest
+	{
+		protected IGetDatafeedsRequest Self => this;
+		Id IGetDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
+///<param name="datafeed_id">Optional, accepts null</param>
+		public GetDatafeedsRequest(Id datafeed_id) : base(r=>r.Optional("datafeed_id", datafeed_id)){}
+		
+
+		/// <summary>/_xpack/ml/datafeeds</summary>
+		public GetDatafeedsRequest() : base(){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetDatafeedStatsRequest : IRequest<GetDatafeedStatsRequestParameters> 
+	{
+		Id DatafeedId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlGetDatafeedStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
+	public partial class GetDatafeedStatsRequest  : PlainRequestBase<GetDatafeedStatsRequestParameters>, IGetDatafeedStatsRequest
+	{
+		protected IGetDatafeedStatsRequest Self => this;
+		Id IGetDatafeedStatsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_stats</summary>
+///<param name="datafeed_id">Optional, accepts null</param>
+		public GetDatafeedStatsRequest(Id datafeed_id) : base(r=>r.Optional("datafeed_id", datafeed_id)){}
+		
+
+		/// <summary>/_xpack/ml/datafeeds/_stats</summary>
+		public GetDatafeedStatsRequest() : base(){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
 		///<summary>Return human readable values for statistics.</summary>
@@ -4036,6 +4412,110 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetInfluencersRequest : IRequest<GetInfluencersRequestParameters> 
+	{
+		Id JobId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlGetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
+	public partial class GetInfluencersRequest  : PlainRequestBase<GetInfluencersRequestParameters>, IGetInfluencersRequest
+	{
+		protected IGetInfluencersRequest Self => this;
+		Id IGetInfluencersRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/influencers</summary>
+///<param name="job_id">this parameter is required</param>
+		public GetInfluencersRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetJobsRequest : IRequest<GetJobsRequestParameters> 
+	{
+		Id JobId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlGetJobs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
+	public partial class GetJobsRequest  : PlainRequestBase<GetJobsRequestParameters>, IGetJobsRequest
+	{
+		protected IGetJobsRequest Self => this;
+		Id IGetJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
+///<param name="job_id">Optional, accepts null</param>
+		public GetJobsRequest(Id job_id) : base(r=>r.Optional("job_id", job_id)){}
+		
+
+		/// <summary>/_xpack/ml/anomaly_detectors/</summary>
+		public GetJobsRequest() : base(){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetJobStatsRequest : IRequest<GetJobStatsRequestParameters> 
+	{
+		Id JobId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlGetJobStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
+	public partial class GetJobStatsRequest  : PlainRequestBase<GetJobStatsRequestParameters>, IGetJobStatsRequest
+	{
+		protected IGetJobStatsRequest Self => this;
+		Id IGetJobStatsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+			/// <summary>/_xpack/ml/anomaly_detectors/_stats</summary>
+		public GetJobStatsRequest() : base(){}
+		
+
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_stats</summary>
+///<param name="job_id">Optional, accepts null</param>
+		public GetJobStatsRequest(Id job_id) : base(r=>r.Optional("job_id", job_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetLicenseRequest : IRequest<GetLicenseRequestParameters> 
 	{
 	 } 
@@ -4108,6 +4588,46 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetModelSnapshotsRequest : IRequest<GetModelSnapshotsRequestParameters> 
+	{
+		Id JobId { get; }
+		Id SnapshotId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlGetModelSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
+	public partial class GetModelSnapshotsRequest  : PlainRequestBase<GetModelSnapshotsRequestParameters>, IGetModelSnapshotsRequest
+	{
+		protected IGetModelSnapshotsRequest Self => this;
+		Id IGetModelSnapshotsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IGetModelSnapshotsRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
+			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
+///<param name="job_id">this parameter is required</param>		
+///<param name="snapshot_id">Optional, accepts null</param>
+		public GetModelSnapshotsRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Optional("snapshot_id", snapshot_id)){}
+		
+
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots</summary>
+///<param name="job_id">this parameter is required</param>
+		public GetModelSnapshotsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
 		///<summary>Return human readable values for statistics.</summary>
@@ -5608,6 +6128,38 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IOpenJobRequest : IRequest<OpenJobRequestParameters> 
+	{
+		Id JobId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlOpenJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
+	public partial class OpenJobRequest  : PlainRequestBase<OpenJobRequestParameters>, IOpenJobRequest
+	{
+		protected IOpenJobRequest Self => this;
+		Id IOpenJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_open</summary>
+///<param name="job_id">this parameter is required</param>
+		public OpenJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPingRequest : IRequest<PingRequestParameters> 
 	{
 	 } 
@@ -5616,6 +6168,44 @@ namespace Nest
 	{
 		protected IPingRequest Self => this;
 				///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPostJobDataRequest : IRequest<PostJobDataRequestParameters> 
+	{
+		Id JobId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlPostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
+	public partial class PostJobDataRequest  : PlainRequestBase<PostJobDataRequestParameters>, IPostJobDataRequest
+	{
+		protected IPostJobDataRequest Self => this;
+		Id IPostJobDataRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_data</summary>
+///<param name="job_id">this parameter is required</param>
+		public PostJobDataRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
+
+			///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
+		public DateTimeOffset ResetStart { get { return Q<DateTimeOffset>("reset_start"); } set { Q("reset_start", value); } }
+		
+		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
+		public DateTimeOffset ResetEnd { get { return Q<DateTimeOffset>("reset_end"); } set { Q("reset_end", value); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
 		///<summary>Return human readable values for statistics.</summary>
@@ -5644,6 +6234,38 @@ namespace Nest
 		public bool Acknowledge { get { return Q<bool>("acknowledge"); } set { Q("acknowledge", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPreviewDatafeedRequest : IRequest<PreviewDatafeedRequestParameters> 
+	{
+		Id DatafeedId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlPreviewDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
+	public partial class PreviewDatafeedRequest  : PlainRequestBase<PreviewDatafeedRequestParameters>, IPreviewDatafeedRequest
+	{
+		protected IPreviewDatafeedRequest Self => this;
+		Id IPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_preview</summary>
+///<param name="datafeed_id">this parameter is required</param>
+		public PreviewDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
 		///<summary>Return human readable values for statistics.</summary>
@@ -5702,6 +6324,38 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPutDatafeedRequest : IRequest<PutDatafeedRequestParameters> 
+	{
+		Id DatafeedId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlPutDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
+	public partial class PutDatafeedRequest  : PlainRequestBase<PutDatafeedRequestParameters>, IPutDatafeedRequest
+	{
+		protected IPutDatafeedRequest Self => this;
+		Id IPutDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
+///<param name="datafeed_id">this parameter is required</param>
+		public PutDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutIndexTemplateRequest : IRequest<PutIndexTemplateRequestParameters> 
 	{
 		Name Name { get; }
@@ -5729,6 +6383,38 @@ namespace Nest
 		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPutJobRequest : IRequest<PutJobRequestParameters> 
+	{
+		Id JobId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlPutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
+	public partial class PutJobRequest  : PlainRequestBase<PutJobRequestParameters>, IPutJobRequest
+	{
+		protected IPutJobRequest Self => this;
+		Id IPutJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
+///<param name="job_id">this parameter is required</param>
+		public PutJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
 		///<summary>Return human readable values for statistics.</summary>
@@ -6192,12 +6878,6 @@ namespace Nest
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
-		///<summary></summary>
-		public bool Force { get { return Q<bool>("force"); } set { Q("force", value); } }
-		
-		///<summary></summary>
-		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6386,6 +7066,41 @@ namespace Nest
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IRevertModelSnapshotRequest : IRequest<RevertModelSnapshotRequestParameters> 
+	{
+		Id JobId { get; }
+		Id SnapshotId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlRevertModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
+	public partial class RevertModelSnapshotRequest  : PlainRequestBase<RevertModelSnapshotRequestParameters>, IRevertModelSnapshotRequest
+	{
+		protected IRevertModelSnapshotRequest Self => this;
+		Id IRevertModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IRevertModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
+			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert</summary>
+///<param name="job_id">this parameter is required</param>		
+///<param name="snapshot_id">this parameter is required</param>
+		public RevertModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
 		///<summary>Return human readable values for statistics.</summary>
@@ -7375,6 +8090,38 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IStartDatafeedRequest : IRequest<StartDatafeedRequestParameters> 
+	{
+		Id DatafeedId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlStartDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
+	public partial class StartDatafeedRequest  : PlainRequestBase<StartDatafeedRequestParameters>, IStartDatafeedRequest
+	{
+		protected IStartDatafeedRequest Self => this;
+		Id IStartDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_start</summary>
+///<param name="datafeed_id">this parameter is required</param>
+		public StartDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStartWatcherRequest : IRequest<StartWatcherRequestParameters> 
 	{
 	 } 
@@ -7383,6 +8130,38 @@ namespace Nest
 	{
 		protected IStartWatcherRequest Self => this;
 				///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IStopDatafeedRequest : IRequest<StopDatafeedRequestParameters> 
+	{
+		Id DatafeedId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlStopDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
+	public partial class StopDatafeedRequest  : PlainRequestBase<StopDatafeedRequestParameters>, IStopDatafeedRequest
+	{
+		protected IStopDatafeedRequest Self => this;
+		Id IStopDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_stop</summary>
+///<param name="datafeed_id">this parameter is required</param>
+		public StopDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
 		///<summary>Return human readable values for statistics.</summary>
@@ -7880,6 +8659,38 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IUpdateDatafeedRequest : IRequest<UpdateDatafeedRequestParameters> 
+	{
+		Id DatafeedId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlUpdateDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
+	public partial class UpdateDatafeedRequest  : PlainRequestBase<UpdateDatafeedRequestParameters>, IUpdateDatafeedRequest
+	{
+		protected IUpdateDatafeedRequest Self => this;
+		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_update</summary>
+///<param name="datafeed_id">this parameter is required</param>
+		public UpdateDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateIndexSettingsRequest : IRequest<UpdateIndexSettingsRequestParameters> 
 	{
 		Indices Index { get; }
@@ -7917,6 +8728,73 @@ namespace Nest
 		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IUpdateJobRequest : IRequest<UpdateJobRequestParameters> 
+	{
+		Id JobId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlUpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
+	public partial class UpdateJobRequest  : PlainRequestBase<UpdateJobRequestParameters>, IUpdateJobRequest
+	{
+		protected IUpdateJobRequest Self => this;
+		Id IUpdateJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_update</summary>
+///<param name="job_id">this parameter is required</param>
+		public UpdateJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IUpdateModelSnapshotRequest : IRequest<UpdateModelSnapshotRequestParameters> 
+	{
+		Id JobId { get; }
+		Id SnapshotId { get; }
+	 } 
+	///<summary>Request parameters for XpackMlUpdateModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
+	public partial class UpdateModelSnapshotRequest  : PlainRequestBase<UpdateModelSnapshotRequestParameters>, IUpdateModelSnapshotRequest
+	{
+		protected IUpdateModelSnapshotRequest Self => this;
+		Id IUpdateModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IUpdateModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
+			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update</summary>
+///<param name="job_id">this parameter is required</param>		
+///<param name="snapshot_id">this parameter is required</param>
+		public UpdateModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
 		///<summary>Return human readable values for statistics.</summary>
@@ -8093,6 +8971,56 @@ namespace Nest
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IValidateDetectorRequest : IRequest<ValidateDetectorRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for XpackMlValidateDetector <pre></pre></summary>
+	public partial class ValidateDetectorRequest  : PlainRequestBase<ValidateDetectorRequestParameters>, IValidateDetectorRequest
+	{
+		protected IValidateDetectorRequest Self => this;
+				///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IValidateJobRequest : IRequest<ValidateJobRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for XpackMlValidate <pre></pre></summary>
+	public partial class ValidateJobRequest  : PlainRequestBase<ValidateJobRequestParameters>, IValidateJobRequest
+	{
+		protected IValidateJobRequest Self => this;
+				///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
 		///<summary>Return human readable values for statistics.</summary>

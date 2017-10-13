@@ -14,6 +14,7 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0-beta1-build3642" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
     <ProjectReference Include="..\Nest\Nest.csproj" />
     <PackageReference Include="Bogus" Version="11.0.5" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
@@ -22,7 +23,6 @@
     <PackageReference Include="SemanticVersioning" Version="0.7.6" />
     <PackageReference Include="DiffPlex" Version="1.4.1" />
     <PackageReference Include="System.Reactive" Version="3.1.1" />
-    
     <!-- TODO only for Desktop CLR? -->
     <PackageReference Include="System.Buffers" Version="4.3.0" />
     <!-- TODO update -->
@@ -36,9 +36,12 @@
     <PackageReference Include="System.Diagnostics.FileVersionInfo" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'!='net45'">
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+    <PackageReference Include="SharpZipLib" Version="1.0.0-alpha2" />
     <PackageReference Include="BenchMarkDotNet" Version="0.10.8" />
-  </ItemGroup>  
+  </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net45'">
+    <PackageReference Include="SharpZipLib" Version="0.86.0" />
     <PackageReference Include="BenchMarkDotNet" Version="0.10.0" />
   </ItemGroup>
   <ItemGroup>
