@@ -11,6 +11,7 @@ namespace Tests.Framework.Integration
 		public CallUniqueValues CallUniqueValues { get; }
 
 		public bool CalledSetup { get; internal set; }
+		public bool CalledTeardown { get; internal set; }
 
 		public EndpointUsage()
 		{

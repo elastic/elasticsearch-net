@@ -10,7 +10,11 @@ namespace ApiGenerator.Domain
 
 
 		private string _description;
-		public string Description { get { return _description; } set { _description = CleanUpDescription(value); } }
+		public string Description
+		{
+			get => _description;
+			set => _description = CleanUpDescription(value);
+		}
 		public bool Required { get; set; }
 		public IEnumerable<string> Options { get; set; }
 
@@ -36,7 +40,12 @@ namespace ApiGenerator.Domain
 						return "IndexName";
 					case "type": return this.Type == "string" ? "TypeName" : "Types";
 					case "watch_id":
+					case "job_id":
+					case "datafeed_id":
+					case "snapshot_id":
+					case "filter_id":
 					case "id": return this.Type == "string" ? "Id" : "Ids";
+					case "category_id": return "CategoryId";
 					case "node_id": return this.Type == "string" ? "NodeId" : "NodeIds";
 					case "scroll_id": return this.Type == "string" ? "ScrollId" : "ScrollIds";
 					case "field":
@@ -59,6 +68,7 @@ namespace ApiGenerator.Domain
 					case "thread_pool_patterns":
 						return this.Type == "string" ? "Name" : "Names";
 					case "task_id": return "TaskId";
+					case "timestamp": return "Timestamp";
 					default: return this.Type + "_";
 				}
 			}

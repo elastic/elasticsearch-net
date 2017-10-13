@@ -3364,6 +3364,720 @@ namespace Nest
 			throw InvalidDispatch("XpackLicensePost", p, new [] { PUT }, "/_xpack/license");
 		}
 		
+		internal ElasticsearchResponse<T> XpackMlCloseJobDispatch<T>(IRequest<CloseJobRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlCloseJob<T>(p.RouteValues.JobId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlCloseJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_close");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlCloseJobDispatchAsync<T>(IRequest<CloseJobRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlCloseJobAsync<T>(p.RouteValues.JobId,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlCloseJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_close");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlDeleteDatafeedDispatch<T>(IRequest<DeleteDatafeedRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.XpackMlDeleteDatafeed<T>(p.RouteValues.DatafeedId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlDeleteDatafeed", p, new [] { DELETE }, "/_xpack/ml/datafeeds/{datafeed_id}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlDeleteDatafeedDispatchAsync<T>(IRequest<DeleteDatafeedRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.XpackMlDeleteDatafeedAsync<T>(p.RouteValues.DatafeedId,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlDeleteDatafeed", p, new [] { DELETE }, "/_xpack/ml/datafeeds/{datafeed_id}");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlDeleteExpiredDataDispatch<T>(IRequest<DeleteExpiredDataRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					return _lowLevel.XpackMlDeleteExpiredData<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackMlDeleteExpiredData", p, new [] { DELETE }, "/_xpack/ml/_delete_expired_data");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlDeleteExpiredDataDispatchAsync<T>(IRequest<DeleteExpiredDataRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					return _lowLevel.XpackMlDeleteExpiredDataAsync<T>(u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackMlDeleteExpiredData", p, new [] { DELETE }, "/_xpack/ml/_delete_expired_data");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlDeleteJobDispatch<T>(IRequest<DeleteJobRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlDeleteJob<T>(p.RouteValues.JobId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlDeleteJob", p, new [] { DELETE }, "/_xpack/ml/anomaly_detectors/{job_id}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlDeleteJobDispatchAsync<T>(IRequest<DeleteJobRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlDeleteJobAsync<T>(p.RouteValues.JobId,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlDeleteJob", p, new [] { DELETE }, "/_xpack/ml/anomaly_detectors/{job_id}");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlDeleteModelSnapshotDispatch<T>(IRequest<DeleteModelSnapshotRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.XpackMlDeleteModelSnapshot<T>(p.RouteValues.JobId,p.RouteValues.SnapshotId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlDeleteModelSnapshot", p, new [] { DELETE }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlDeleteModelSnapshotDispatchAsync<T>(IRequest<DeleteModelSnapshotRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.XpackMlDeleteModelSnapshotAsync<T>(p.RouteValues.JobId,p.RouteValues.SnapshotId,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlDeleteModelSnapshot", p, new [] { DELETE }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlFlushJobDispatch<T>(IRequest<FlushJobRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlFlushJob<T>(p.RouteValues.JobId,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlFlushJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_flush");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlFlushJobDispatchAsync<T>(IRequest<FlushJobRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlFlushJobAsync<T>(p.RouteValues.JobId,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlFlushJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_flush");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlGetBucketsDispatch<T>(IRequest<GetBucketsRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetBuckets<T>(p.RouteValues.JobId,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetBuckets<T>(p.RouteValues.JobId,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlGetBuckets", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/buckets");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlGetBucketsDispatchAsync<T>(IRequest<GetBucketsRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetBucketsAsync<T>(p.RouteValues.JobId,u => p.RequestParameters,cancellationToken);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetBucketsAsync<T>(p.RouteValues.JobId,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlGetBuckets", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/buckets");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlGetCategoriesDispatch<T>(IRequest<GetCategoriesRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.CategoryId)) return _lowLevel.XpackMlGetCategories<T>(p.RouteValues.JobId,long.Parse(p.RouteValues.CategoryId),u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetCategories<T>(p.RouteValues.JobId,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.CategoryId)) return _lowLevel.XpackMlGetCategories<T>(p.RouteValues.JobId,long.Parse(p.RouteValues.CategoryId),body,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetCategories<T>(p.RouteValues.JobId,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlGetCategories", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}", "/_xpack/ml/anomaly_detectors/{job_id}/results/categories/");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlGetCategoriesDispatchAsync<T>(IRequest<GetCategoriesRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.CategoryId)) return _lowLevel.XpackMlGetCategoriesAsync<T>(p.RouteValues.JobId,long.Parse(p.RouteValues.CategoryId),u => p.RequestParameters,cancellationToken);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetCategoriesAsync<T>(p.RouteValues.JobId,u => p.RequestParameters,cancellationToken);
+					break;
+
+				case POST:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.CategoryId)) return _lowLevel.XpackMlGetCategoriesAsync<T>(p.RouteValues.JobId,long.Parse(p.RouteValues.CategoryId),body,u => p.RequestParameters,cancellationToken);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetCategoriesAsync<T>(p.RouteValues.JobId,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlGetCategories", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}", "/_xpack/ml/anomaly_detectors/{job_id}/results/categories/");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlGetDatafeedsDispatch<T>(IRequest<GetDatafeedsRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.DatafeedId)) return _lowLevel.XpackMlGetDatafeeds<T>(p.RouteValues.DatafeedId,u => p.RequestParameters);
+					return _lowLevel.XpackMlGetDatafeeds<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackMlGetDatafeeds", p, new [] { GET }, "/_xpack/ml/datafeeds/{datafeed_id}", "/_xpack/ml/datafeeds");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlGetDatafeedsDispatchAsync<T>(IRequest<GetDatafeedsRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.DatafeedId)) return _lowLevel.XpackMlGetDatafeedsAsync<T>(p.RouteValues.DatafeedId,u => p.RequestParameters,cancellationToken);
+					return _lowLevel.XpackMlGetDatafeedsAsync<T>(u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackMlGetDatafeeds", p, new [] { GET }, "/_xpack/ml/datafeeds/{datafeed_id}", "/_xpack/ml/datafeeds");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlGetDatafeedStatsDispatch<T>(IRequest<GetDatafeedStatsRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.DatafeedId)) return _lowLevel.XpackMlGetDatafeedStats<T>(p.RouteValues.DatafeedId,u => p.RequestParameters);
+					return _lowLevel.XpackMlGetDatafeedStats<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackMlGetDatafeedStats", p, new [] { GET }, "/_xpack/ml/datafeeds/{datafeed_id}/_stats", "/_xpack/ml/datafeeds/_stats");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlGetDatafeedStatsDispatchAsync<T>(IRequest<GetDatafeedStatsRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.DatafeedId)) return _lowLevel.XpackMlGetDatafeedStatsAsync<T>(p.RouteValues.DatafeedId,u => p.RequestParameters,cancellationToken);
+					return _lowLevel.XpackMlGetDatafeedStatsAsync<T>(u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackMlGetDatafeedStats", p, new [] { GET }, "/_xpack/ml/datafeeds/{datafeed_id}/_stats", "/_xpack/ml/datafeeds/_stats");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlGetInfluencersDispatch<T>(IRequest<GetInfluencersRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetInfluencers<T>(p.RouteValues.JobId,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetInfluencers<T>(p.RouteValues.JobId,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlGetInfluencers", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/influencers");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlGetInfluencersDispatchAsync<T>(IRequest<GetInfluencersRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetInfluencersAsync<T>(p.RouteValues.JobId,u => p.RequestParameters,cancellationToken);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetInfluencersAsync<T>(p.RouteValues.JobId,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlGetInfluencers", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/influencers");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlGetJobsDispatch<T>(IRequest<GetJobsRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId)) return _lowLevel.XpackMlGetJobs<T>(p.RouteValues.JobId,u => p.RequestParameters);
+					return _lowLevel.XpackMlGetJobs<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackMlGetJobs", p, new [] { GET }, "/_xpack/ml/anomaly_detectors/{job_id}", "/_xpack/ml/anomaly_detectors/");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlGetJobsDispatchAsync<T>(IRequest<GetJobsRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId)) return _lowLevel.XpackMlGetJobsAsync<T>(p.RouteValues.JobId,u => p.RequestParameters,cancellationToken);
+					return _lowLevel.XpackMlGetJobsAsync<T>(u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackMlGetJobs", p, new [] { GET }, "/_xpack/ml/anomaly_detectors/{job_id}", "/_xpack/ml/anomaly_detectors/");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlGetJobStatsDispatch<T>(IRequest<GetJobStatsRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId)) return _lowLevel.XpackMlGetJobStats<T>(p.RouteValues.JobId,u => p.RequestParameters);
+					return _lowLevel.XpackMlGetJobStats<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackMlGetJobStats", p, new [] { GET }, "/_xpack/ml/anomaly_detectors/_stats", "/_xpack/ml/anomaly_detectors/{job_id}/_stats");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlGetJobStatsDispatchAsync<T>(IRequest<GetJobStatsRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId)) return _lowLevel.XpackMlGetJobStatsAsync<T>(p.RouteValues.JobId,u => p.RequestParameters,cancellationToken);
+					return _lowLevel.XpackMlGetJobStatsAsync<T>(u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackMlGetJobStats", p, new [] { GET }, "/_xpack/ml/anomaly_detectors/_stats", "/_xpack/ml/anomaly_detectors/{job_id}/_stats");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlGetModelSnapshotsDispatch<T>(IRequest<GetModelSnapshotsRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.XpackMlGetModelSnapshots<T>(p.RouteValues.JobId,p.RouteValues.SnapshotId,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetModelSnapshots<T>(p.RouteValues.JobId,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.XpackMlGetModelSnapshots<T>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetModelSnapshots<T>(p.RouteValues.JobId,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlGetModelSnapshots", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlGetModelSnapshotsDispatchAsync<T>(IRequest<GetModelSnapshotsRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.XpackMlGetModelSnapshotsAsync<T>(p.RouteValues.JobId,p.RouteValues.SnapshotId,u => p.RequestParameters,cancellationToken);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetModelSnapshotsAsync<T>(p.RouteValues.JobId,u => p.RequestParameters,cancellationToken);
+					break;
+
+				case POST:
+					if (AllSet(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.XpackMlGetModelSnapshotsAsync<T>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,u => p.RequestParameters,cancellationToken);
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetModelSnapshotsAsync<T>(p.RouteValues.JobId,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlGetModelSnapshots", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlGetRecordsDispatch<T>(IRequest<GetAnomalyRecordsRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetRecords<T>(p.RouteValues.JobId,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetRecords<T>(p.RouteValues.JobId,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlGetRecords", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/records");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlGetRecordsDispatchAsync<T>(IRequest<GetAnomalyRecordsRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetRecordsAsync<T>(p.RouteValues.JobId,u => p.RequestParameters,cancellationToken);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetRecordsAsync<T>(p.RouteValues.JobId,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlGetRecords", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/records");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlOpenJobDispatch<T>(IRequest<OpenJobRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlOpenJob<T>(p.RouteValues.JobId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlOpenJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_open");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlOpenJobDispatchAsync<T>(IRequest<OpenJobRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlOpenJobAsync<T>(p.RouteValues.JobId,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlOpenJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_open");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlPostDataDispatch<T>(IRequest<PostJobDataRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlPostData<T>(p.RouteValues.JobId,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlPostData", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_data");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlPostDataDispatchAsync<T>(IRequest<PostJobDataRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlPostDataAsync<T>(p.RouteValues.JobId,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlPostData", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_data");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlPreviewDatafeedDispatch<T>(IRequest<PreviewDatafeedRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.XpackMlPreviewDatafeed<T>(p.RouteValues.DatafeedId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlPreviewDatafeed", p, new [] { GET }, "/_xpack/ml/datafeeds/{datafeed_id}/_preview");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlPreviewDatafeedDispatchAsync<T>(IRequest<PreviewDatafeedRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.XpackMlPreviewDatafeedAsync<T>(p.RouteValues.DatafeedId,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlPreviewDatafeed", p, new [] { GET }, "/_xpack/ml/datafeeds/{datafeed_id}/_preview");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlPutDatafeedDispatch<T>(IRequest<PutDatafeedRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.XpackMlPutDatafeed<T>(p.RouteValues.DatafeedId,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlPutDatafeed", p, new [] { PUT }, "/_xpack/ml/datafeeds/{datafeed_id}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlPutDatafeedDispatchAsync<T>(IRequest<PutDatafeedRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.XpackMlPutDatafeedAsync<T>(p.RouteValues.DatafeedId,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlPutDatafeed", p, new [] { PUT }, "/_xpack/ml/datafeeds/{datafeed_id}");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlPutJobDispatch<T>(IRequest<PutJobRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlPutJob<T>(p.RouteValues.JobId,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlPutJob", p, new [] { PUT }, "/_xpack/ml/anomaly_detectors/{job_id}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlPutJobDispatchAsync<T>(IRequest<PutJobRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlPutJobAsync<T>(p.RouteValues.JobId,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlPutJob", p, new [] { PUT }, "/_xpack/ml/anomaly_detectors/{job_id}");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlRevertModelSnapshotDispatch<T>(IRequest<RevertModelSnapshotRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.XpackMlRevertModelSnapshot<T>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlRevertModelSnapshot", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlRevertModelSnapshotDispatchAsync<T>(IRequest<RevertModelSnapshotRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.XpackMlRevertModelSnapshotAsync<T>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlRevertModelSnapshot", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlStartDatafeedDispatch<T>(IRequest<StartDatafeedRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.XpackMlStartDatafeed<T>(p.RouteValues.DatafeedId,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlStartDatafeed", p, new [] { POST }, "/_xpack/ml/datafeeds/{datafeed_id}/_start");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlStartDatafeedDispatchAsync<T>(IRequest<StartDatafeedRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.XpackMlStartDatafeedAsync<T>(p.RouteValues.DatafeedId,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlStartDatafeed", p, new [] { POST }, "/_xpack/ml/datafeeds/{datafeed_id}/_start");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlStopDatafeedDispatch<T>(IRequest<StopDatafeedRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.XpackMlStopDatafeed<T>(p.RouteValues.DatafeedId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlStopDatafeed", p, new [] { POST }, "/_xpack/ml/datafeeds/{datafeed_id}/_stop");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlStopDatafeedDispatchAsync<T>(IRequest<StopDatafeedRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.XpackMlStopDatafeedAsync<T>(p.RouteValues.DatafeedId,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlStopDatafeed", p, new [] { POST }, "/_xpack/ml/datafeeds/{datafeed_id}/_stop");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlUpdateDatafeedDispatch<T>(IRequest<UpdateDatafeedRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.XpackMlUpdateDatafeed<T>(p.RouteValues.DatafeedId,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlUpdateDatafeed", p, new [] { POST }, "/_xpack/ml/datafeeds/{datafeed_id}/_update");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlUpdateDatafeedDispatchAsync<T>(IRequest<UpdateDatafeedRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.DatafeedId)) return _lowLevel.XpackMlUpdateDatafeedAsync<T>(p.RouteValues.DatafeedId,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlUpdateDatafeed", p, new [] { POST }, "/_xpack/ml/datafeeds/{datafeed_id}/_update");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlUpdateJobDispatch<T>(IRequest<UpdateJobRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlUpdateJob<T>(p.RouteValues.JobId,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlUpdateJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_update");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlUpdateJobDispatchAsync<T>(IRequest<UpdateJobRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlUpdateJobAsync<T>(p.RouteValues.JobId,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlUpdateJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_update");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlUpdateModelSnapshotDispatch<T>(IRequest<UpdateModelSnapshotRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.XpackMlUpdateModelSnapshot<T>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlUpdateModelSnapshot", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlUpdateModelSnapshotDispatchAsync<T>(IRequest<UpdateModelSnapshotRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId, p.RouteValues.SnapshotId)) return _lowLevel.XpackMlUpdateModelSnapshotAsync<T>(p.RouteValues.JobId,p.RouteValues.SnapshotId,body,u => p.RequestParameters,cancellationToken);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlUpdateModelSnapshot", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlValidateDispatch<T>(IRequest<ValidateJobRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					return _lowLevel.XpackMlValidate<T>(body,u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackMlValidate", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/_validate");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlValidateDispatchAsync<T>(IRequest<ValidateJobRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					return _lowLevel.XpackMlValidateAsync<T>(body,u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackMlValidate", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/_validate");
+		}
+		
+		internal ElasticsearchResponse<T> XpackMlValidateDetectorDispatch<T>(IRequest<ValidateDetectorRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					return _lowLevel.XpackMlValidateDetector<T>(body,u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackMlValidateDetector", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/_validate/detector");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> XpackMlValidateDetectorDispatchAsync<T>(IRequest<ValidateDetectorRequestParameters> p , PostData<object> body, CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					return _lowLevel.XpackMlValidateDetectorAsync<T>(body,u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("XpackMlValidateDetector", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/_validate/detector");
+		}
+		
 		internal ElasticsearchResponse<T> XpackSecurityAuthenticateDispatch<T>(IRequest<AuthenticateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)

@@ -18,11 +18,11 @@ namespace Nest
 {
 	internal static class EmptyReadOnly<TElement>
 	{
-		public static readonly IReadOnlyCollection<TElement> Collection = new ReadOnlyCollection<TElement>(new List<TElement>());
+		public static readonly IReadOnlyCollection<TElement> Collection = new ReadOnlyCollection<TElement>(new TElement[0]);
 	}
 	internal static class EmptyReadOnly<TKey, TValue>
 	{
-		public static readonly IReadOnlyDictionary<TKey, TValue> Dictionary = new ReadOnlyDictionary<TKey, TValue>(new Dictionary<TKey, TValue>());
+		public static readonly IReadOnlyDictionary<TKey, TValue> Dictionary = new ReadOnlyDictionary<TKey, TValue>(new Dictionary<TKey, TValue>(0));
 	}
 
 	internal static class Extensions

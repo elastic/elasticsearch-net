@@ -40,6 +40,8 @@ namespace ApiGenerator.Domain
 				case "":
 				case null:
 					return "string";
+				case "date":
+					return "DateTimeOffset";
 				case "enum":
 					return paramName.ToPascalCase();
 				default:

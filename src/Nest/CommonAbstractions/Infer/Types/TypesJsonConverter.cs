@@ -35,7 +35,7 @@ namespace Nest
 		{
 
 			if (reader.TokenType != JsonToken.StartArray) return null;
-			var types = new List<TypeName> { };
+			var types = new List<TypeName>();
 			while (reader.TokenType != JsonToken.EndArray)
 			{
 				var type = reader.ReadAsString();
