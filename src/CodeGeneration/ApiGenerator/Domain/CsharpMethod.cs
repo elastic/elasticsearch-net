@@ -226,6 +226,13 @@ namespace ApiGenerator.Domain
 					generated = $"public {m}({par}) : base(r => r.Required(\"index\", (Indices)typeof({generic}))){{}}";
 				}
 
+				// Use generic T to set the Indices and Types by default in the ctor
+				if (m == "PutDatafeedDescriptor" || m == "UpdateDatafeedDescriptor")
+				{
+					doc = AppendToSummary(doc, ". Will infer the index and type from the generic type");
+					generated = $"public {m}({par}) : base({routing}){{ Self.Indices = typeof({this.CallTypeGeneric}); Self.Types = typeof({this.CallTypeGeneric}); }}";
+				}
+
 				var c = new Constructor { Generated = generated, Description = doc };
 				ctors.Add(c);
 			}

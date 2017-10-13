@@ -33,6 +33,12 @@ namespace Nest
 		public string WatchId => GetResolved("watch_id");
 		public string ThreadPoolPatterns => GetResolved("thread_pool_patterns");
 		public string ActionId => GetResolved("action_id");
+		public string JobId => GetResolved("job_id");
+		public string DatafeedId => GetResolved("datafeed_id");
+		public string FilterId => GetResolved("filter_id");
+		public string SnapshotId => GetResolved("snapshot_id");
+		public string CategoryId => GetResolved("category_id");
+		public string Timestamp => GetResolved("timestamp");
 		public WatcherStatsMetric? WatcherStatsMetric => GetResolved("watcher_stats_metric").ToEnum<WatcherStatsMetric>();
 
 		private string GetResolved(string route)

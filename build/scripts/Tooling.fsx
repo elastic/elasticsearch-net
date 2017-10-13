@@ -69,7 +69,7 @@ module Tooling =
             ) timeout
         code
 
-    let private defaultTimeout = TimeSpan.FromMinutes 15.0
+    let private defaultTimeout = TimeSpan.FromMinutes 20.0
 
     let execProcessInDirectory proc arguments workingDir =
         let exitCode = execProcessWithTimeout proc arguments defaultTimeout workingDir
@@ -179,6 +179,7 @@ module Tooling =
                     Targets = ["Build"]
                     Properties =
                         [
+                            "OutputPathBaseDir", Path.GetFullPath "build\\output"
                             "Optimize", "True"
                             "Configuration", "Release"
                             "TargetFrameworkVersion", identifier.MSBuild

@@ -17,7 +17,20 @@ namespace ApiGenerator.Domain
 			get
 			{
 				var methodArgs = CsharpMethod.Parts
-					.Select(p => p.Name != "body" ? "p.RouteValues." + p.Name.ToPascalCase() + (p.Type == "enum" ? ".Value" : "") : "body")
+					.Select(p =>
+					{
+						if (p.Name == "body") return "body";
+
+						switch (p.Type)
+						{
+							case "enum":
+								return $"p.RouteValues.{p.Name.ToPascalCase()}.Value";
+							case "long":
+								return $"long.Parse(p.RouteValues.{p.Name.ToPascalCase()})";
+							default:
+								return $"p.RouteValues.{p.Name.ToPascalCase()}";
+						}
+					})
 					.Concat(new[] {"u => p.RequestParameters"});
 				return methodArgs;
 			}

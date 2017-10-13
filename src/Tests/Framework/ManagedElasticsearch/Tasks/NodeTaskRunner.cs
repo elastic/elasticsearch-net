@@ -34,7 +34,6 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks
 			new WriteAnalysisFiles(),
 			new EnsureSecurityRolesFileExists(),
 			new EnsureWatcherActionConfigurationInElasticsearchYaml(),
-			new EnsureSecurityRolesFileExists(),
 			new EnsureSecurityRealms(),
 			new EnsureSecurityUsersInDefaultRealmAreAdded(),
 		};
@@ -56,19 +55,19 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks
 		};
 
 		public void Install(InstallationTaskBase[] additionalInstallationTasks)=>
-			Itterate(
+			Iterate(
 				InstallationTasks.Concat(additionalInstallationTasks ?? Enumerable.Empty<InstallationTaskBase>()),
 				(t, n,  fs) => t.Run(n, fs)
 			);
 
 		public void Dispose() =>
-			Itterate(NodeStoppedTasks, (t, n,  fs) => t.Run(n, fs));
+			Iterate(NodeStoppedTasks, (t, n,  fs) => t.Run(n, fs));
 
 		public void OnBeforeStart(string [] serverSettings) =>
-			Itterate(BeforeStart, (t, n,  fs) => t.Run(n, fs, serverSettings), log: false);
+			Iterate(BeforeStart, (t, n,  fs) => t.Run(n, fs, serverSettings), log: false);
 
 		public void ValidateAfterStart(IElasticClient client) =>
-			Itterate(ValidationTasks, (t, n,  fs) => t.Validate(client, n), log: false);
+			Iterate(ValidationTasks, (t, n,  fs) => t.Validate(client, n), log: false);
 
 		private IList<string> GetCurrentRunnerLog()
 		{
@@ -81,10 +80,10 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks
 			File.WriteAllText(log, string.Join(Environment.NewLine, logs));
 		}
 
-		private void Itterate<T>(IEnumerable<T> collection, Action<T, NodeConfiguration, NodeFileSystem> act, bool log = true)
+		private void Iterate<T>(IEnumerable<T> collection, Action<T, NodeConfiguration, NodeFileSystem> act, bool log = true)
 		{
 			if (!this.NodeConfiguration.RunIntegrationTests || this.NodeConfiguration.TestAgainstAlreadyRunningElasticsearch) return;
-			lock (NodeTaskRunner.Lock)
+			lock (Lock)
 			{
 				var taskLog = this.GetCurrentRunnerLog();
 				foreach (var task in collection)
@@ -97,8 +96,5 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks
 				if (log) this.LogTasks(taskLog);
 			}
 		}
-
-
-
 	}
 }

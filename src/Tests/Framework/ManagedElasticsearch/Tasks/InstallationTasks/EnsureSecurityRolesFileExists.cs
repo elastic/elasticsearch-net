@@ -14,6 +14,13 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 			if (config.ElasticsearchVersion.Major < 5) return;
 			var folder = config.ElasticsearchVersion.Major >= 5 ? "x-pack" : "shield";
 			var rolesConfig = Path.Combine(fileSystem.ElasticsearchHome, "config", folder, "roles.yml");
+
+			if (!File.Exists(rolesConfig))
+			{
+				Directory.CreateDirectory(Path.Combine(fileSystem.ElasticsearchHome, "config", folder));
+				File.WriteAllText(rolesConfig, string.Empty);
+			}
+
 			var lines = File.ReadAllLines(rolesConfig).ToList();
 			var saveFile = false;
 
