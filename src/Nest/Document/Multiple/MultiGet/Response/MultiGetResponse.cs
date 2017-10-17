@@ -25,6 +25,8 @@ namespace Nest
 	[ContractJsonConverter(typeof(MultiGetHitJsonConverter))]
 	public class MultiGetResponse : ResponseBase, IMultiGetResponse
 	{
+		public override bool IsValid => base.IsValid && !this._Documents.HasAny(d => d.Error != null);
+		
 		public MultiGetResponse()
 		{
 			this._Documents = new List<IMultiGetHit<object>>();

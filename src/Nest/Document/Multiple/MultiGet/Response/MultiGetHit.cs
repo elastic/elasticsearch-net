@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Elasticsearch.Net;
+using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -19,6 +22,8 @@ namespace Nest
 		string Parent { get; }
 
 		string Routing { get; }
+
+		ServerError Error { get; }
 
 		long? Timestamp { get; }
 
@@ -54,6 +59,9 @@ namespace Nest
 
 		[JsonProperty("_routing")]
 		public string Routing { get; internal set; }
+
+		[JsonProperty("error")]
+		public ServerError Error { get; internal set; }
 
 		[JsonProperty("_timestamp")]
 		public long? Timestamp { get; internal set; }
