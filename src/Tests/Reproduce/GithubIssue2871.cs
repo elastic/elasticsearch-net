@@ -49,7 +49,7 @@ namespace Tests.Reproduce
 			client.Bulk(b => b
 				.IndexMany(projects, (bi, p) => bi.Index(index1).Document(p))
 				.IndexMany(projects, (bi, p) => bi.Index(index2).Document(p))
-				.Refresh(Refresh.WaitFor)
+				.Refresh()
 			);
 
 			client.Alias(a => a
