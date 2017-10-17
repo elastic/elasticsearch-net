@@ -25,6 +25,8 @@ namespace Nest
 	[ContractJsonConverter(typeof(MultiGetHitJsonConverter))]
 	public class MultiGetResponse : ResponseBase, IMultiGetResponse
 	{
+		public override bool IsValid => base.IsValid && !this._Documents.HasAny(d => d.Error != null);
+
 		internal ICollection<IMultiGetHit<object>> _Documents { get; set; } = new List<IMultiGetHit<object>>();
 
 		public IReadOnlyCollection<IMultiGetHit<object>> Documents => this._Documents.ToList().AsReadOnly();
