@@ -22,7 +22,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			/** here we create a new document path based on Project with the id 1 */
 			IDocumentPath path = new DocumentPath<Project>(1);
 			Expect("project").WhenSerializing(path.Index);
-			Expect("project").WhenSerializing(path.Type);
+			Expect("doc").WhenSerializing(path.Type);
 			Expect(1).WhenSerializing(path.Id);
 
 			/** You can still override the inferred index and type name*/
@@ -35,7 +35,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			/** and there is also a static way to describe such paths */
 			path = DocumentPath<Project>.Id(1);
 			Expect("project").WhenSerializing(path.Index);
-			Expect("project").WhenSerializing(path.Type);
+			Expect("doc").WhenSerializing(path.Type);
 			Expect(1).WhenSerializing(path.Id);
 		}
 
@@ -50,7 +50,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			/** here we create a new document path based on the instance of `Project`, project */
 			IDocumentPath path = new DocumentPath<Project>(project);
 			Expect("project").WhenSerializing(path.Index);
-			Expect("project").WhenSerializing(path.Type);
+			Expect("doc").WhenSerializing(path.Type);
 			Expect("hello-world").WhenSerializing(path.Id);
 
 			/** You can still override the inferred index and type name*/
@@ -63,7 +63,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			/** and again, there is also a static way to describe such paths */
 			path = DocumentPath<Project>.Id(project);
 			Expect("project").WhenSerializing(path.Index);
-			Expect("project").WhenSerializing(path.Type);
+			Expect("doc").WhenSerializing(path.Type);
 			Expect("hello-world").WhenSerializing(path.Id);
 
 			DocumentPath<Project> p = project;

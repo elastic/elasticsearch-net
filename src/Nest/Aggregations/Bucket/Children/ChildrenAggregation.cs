@@ -9,16 +9,16 @@ namespace Nest
 	public interface IChildrenAggregation : IBucketAggregation
 	{
 		[JsonProperty("type")]
-		TypeName Type { get; set; }
+		RelationName Type { get; set; }
 	}
 
 	public class ChildrenAggregation : BucketAggregationBase, IChildrenAggregation
 	{
-		public TypeName Type { get; set; }
+		public RelationName Type { get; set; }
 
 		internal ChildrenAggregation() { }
 
-		public ChildrenAggregation(string name, TypeName type) : base(name)
+		public ChildrenAggregation(string name, RelationName type) : base(name)
 		{
 			this.Type = type;
 		}
@@ -26,13 +26,13 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Children = this;
 	}
 
-	public class ChildrenAggregationDescriptor<T> 
+	public class ChildrenAggregationDescriptor<T>
 		: BucketAggregationDescriptorBase<ChildrenAggregationDescriptor<T>, IChildrenAggregation, T>, IChildrenAggregation
 		where T : class
 	{
-		TypeName IChildrenAggregation.Type { get; set; } = typeof(T);
+		RelationName IChildrenAggregation.Type { get; set; } = typeof(T);
 
-		public ChildrenAggregationDescriptor<T> Type(TypeName type) =>
+		public ChildrenAggregationDescriptor<T> Type(RelationName type) =>
 			Assign(a => a.Type = type);
 
 		public ChildrenAggregationDescriptor<T> Type<TChildType>() where TChildType : class =>

@@ -12,10 +12,10 @@ namespace Tests.Indices.IndexManagement.TypeExists
 	{
 		[U] public async Task Urls()
 		{
-			var indices = Index<Project>().And<CommitActivity>();
-			var index = "project";
-			var types = Type<Project>().And<CommitActivity>();
-			var type = "project%2Ccommits";
+			var indices = Index<Project>().And<Developer>();
+			var index = "project%2Cdevs";
+			var types = Type<Project>().And<Developer>();
+			var type = "doc%2Cdeveloper";
 			await HEAD($"/{index}/_mapping/{type}")
 				.Fluent(c => c.TypeExists(indices, types))
 				.Request(c => c.TypeExists(new TypeExistsRequest(indices, types)))

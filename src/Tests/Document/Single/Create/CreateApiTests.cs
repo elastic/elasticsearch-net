@@ -41,7 +41,7 @@ namespace Tests.Document.Single.Create
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
 		protected override string UrlPath
-			=> $"/project/project/{CallIsolatedValue}/_create?wait_for_active_shards=1&refresh=true&routing=route";
+			=> $"/project/doc/{CallIsolatedValue}/_create?wait_for_active_shards=1&refresh=true&routing=route";
 
 		protected override bool SupportsDeserialization => true;
 

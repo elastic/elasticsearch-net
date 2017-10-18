@@ -18,11 +18,11 @@ namespace Tests.Document.Multiple.UpdateByQuery
 				.RequestAsync(c => c.UpdateByQueryAsync(new UpdateByQueryRequest<Project>("project")))
 				;
 
-			await POST("/project/project/_update_by_query")
+			await POST("/project/doc/_update_by_query")
 				.Fluent(c => c.UpdateByQuery<Project>(d => d))
-				.Request(c => c.UpdateByQuery(new UpdateByQueryRequest<Project>("project", "project")))
+				.Request(c => c.UpdateByQuery(new UpdateByQueryRequest<Project>("project", "doc")))
 				.FluentAsync(c => c.UpdateByQueryAsync<Project>(d => d))
-				.RequestAsync(c => c.UpdateByQueryAsync(new UpdateByQueryRequest<Project>("project", "project")))
+				.RequestAsync(c => c.UpdateByQueryAsync(new UpdateByQueryRequest<Project>("project", "doc")))
 				;
 		}
 	}

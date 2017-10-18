@@ -39,6 +39,7 @@ namespace Nest
 			PropertyName propertyName;
 			IndexName indexName;
 			TypeName typeName;
+			RelationName relationName;
 
 			foreach (DictionaryEntry entry in dictionary)
 			{
@@ -71,6 +72,10 @@ namespace Nest
 				else if (AsType(entry.Key, out typeName))
 				{
 					key = settings.Inferrer.TypeName(typeName);
+				}
+				else if (AsType(entry.Key, out relationName))
+				{
+					key = settings.Inferrer.RelationName(relationName);
 				}
 				else
 					key = Convert.ToString(entry.Key, CultureInfo.InvariantCulture);
@@ -107,6 +112,7 @@ namespace Nest
 		private readonly bool _keyIsPropertyName = typeof(TKey) == typeof(PropertyName);
 		private readonly bool _keyIsIndexName = typeof(TKey) == typeof(IndexName);
 		private readonly bool _keyIsTypeName = typeof(TKey) == typeof(TypeName);
+		private readonly bool _keyIsRelationName = typeof(TKey) == typeof(RelationName);
 
 		public override bool CanConvert(Type t) =>
 			typeof(IDictionary<TKey, TValue>).IsAssignableFrom(t) ||
@@ -168,6 +174,11 @@ namespace Nest
 				{
 					var typeName = entry.Key as TypeName;
 					key = settings.Inferrer.TypeName(typeName);
+				}
+				else if (_keyIsRelationName)
+				{
+					var typeName = entry.Key as RelationName;
+					key = settings.Inferrer.RelationName(typeName);
 				}
 				else
 					key = Convert.ToString(entry.Key, CultureInfo.InvariantCulture);

@@ -21,7 +21,7 @@ namespace Tests.Search
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/project/_search";
+		protected override string UrlPath => "/project/doc/_search";
 
 	}
 }

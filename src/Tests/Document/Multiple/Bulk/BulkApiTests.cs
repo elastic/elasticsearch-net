@@ -53,16 +53,16 @@ namespace Tests.Document.Multiple.Bulk
 
 		protected override object ExpectJson => new object[]
 		{
-			new Dictionary<string, object>{ { "index", new {  _type = "project", _id = Project.Instance.Name, pipeline="pipeline" } } },
+			new Dictionary<string, object>{ { "index", new {  _type = "doc", _id = Project.Instance.Name, pipeline="pipeline" } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object>{ { "update", new { _type="project", _id = Project.Instance.Name } } },
+			new Dictionary<string, object>{ { "update", new { _type="doc", _id = Project.Instance.Name } } },
 			new { doc = new { leadDeveloper = new { firstName = "martijn" } } } ,
-			new Dictionary<string, object>{ { "create", new { _type="project", _id = Project.Instance.Name + "1" } } },
+			new Dictionary<string, object>{ { "create", new { _type="doc", _id = Project.Instance.Name + "1" } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object>{ { "delete", new { _type="project", _id = Project.Instance.Name + "1" } } },
-			new Dictionary<string, object>{ { "create", new { _type="project", _id = Project.Instance.Name + "2" } } },
+			new Dictionary<string, object>{ { "delete", new { _type="doc", _id = Project.Instance.Name + "1" } } },
+			new Dictionary<string, object>{ { "create", new { _type="doc", _id = Project.Instance.Name + "2" } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object>{ { "update", new { _type="project", _id = Project.Instance.Name + "2" } } },
+			new Dictionary<string, object>{ { "update", new { _type="doc", _id = Project.Instance.Name + "2" } } },
 			new Dictionary<string, object>{ { "script", new
 			{
 				inline= "ctx._source.numberOfCommits = params.commits",

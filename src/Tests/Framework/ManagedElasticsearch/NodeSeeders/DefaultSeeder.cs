@@ -9,7 +9,11 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 	public class DefaultSeeder
 	{
 		public const string TestsIndexTemplateName = "nest_tests";
+
+		public const string ProjectsIndex = "project";
 		public const string ProjectsAliasName = "projects-alias";
+		public const string ProjectsAliasFilter = "projects-only";
+		public const string CommitsAliasFilter = "commits-only";
 
 		private IElasticClient Client { get; }
 
@@ -27,7 +31,9 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 			this.IndexSettings = indexSettings ?? _defaultIndexSettings;
 		}
 
-		public DefaultSeeder(ElasticsearchNode node) : this(node, null) { }
+		public DefaultSeeder(ElasticsearchNode node) : this(node, null)
+		{
+		}
 
 		public void SeedNode()
 		{
@@ -58,7 +64,6 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 		public void CreateIndices()
 		{
 			CreateIndexTemplate();
-			CreateCommitActivityIndex();
 			CreateProjectIndex();
 			CreateDeveloperIndex();
 			CreatePercolatorIndex();
@@ -76,7 +81,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 			this.Client.Bulk(b => b
 				.IndexMany(
 					CommitActivity.CommitActivities,
-					(d, c) => d.Document(c).Parent(c.ProjectName)
+					(d, c) => d.Document(c).Routing(c.ProjectName)
 				)
 			);
 			this.Client.Refresh(Nest.Indices.Index(typeof(Project), typeof(Developer), typeof(ProjectPercolation)));
@@ -92,7 +97,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 		{
 			var putTemplateResult = this.Client.PutIndexTemplate(new PutIndexTemplateRequest(TestsIndexTemplateName)
 			{
-				IndexPatterns = new[] { "*" },
+				IndexPatterns = new[] {"*"},
 				Settings = this.IndexSettings
 			});
 			putTemplateResult.ShouldBeValid();
@@ -111,20 +116,34 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 			createDeveloperIndex.ShouldBeValid();
 		}
 
-		private void CreateCommitActivityIndex()
+		private void CreateProjectIndex()
 		{
-			var createCommitIndex = this.Client.CreateIndex(typeof(CommitActivity), c => c
+			var createProjectIndex = this.Client.CreateIndex(typeof(Project), c => c
 				.Settings(settings => settings
 					.Analysis(ProjectAnalysisSettings)
 				)
-				.Aliases(a => a
+				.Aliases(aliases => aliases
 					.Alias(ProjectsAliasName)
+					.Alias(ProjectsAliasFilter, a => a
+						.Filter<Project>(f => f.Term(p => p.Join, Infer.Relation<Project>()))
+					)
+					.Alias(CommitsAliasFilter, a => a
+						.Filter<CommitActivity>(f => f.Term(p => p.Join, Infer.Relation<CommitActivity>()))
+					)
 				)
 				.Mappings(map => map
-					.Map<CommitActivity>(m => m
+					.Map<Project>(m => m
 						.AutoMap()
-						.Parent<Project>()
-						.Properties(props => props
+						.Properties(p =>
+							ProjectProperties(p)
+								.Join(j => j
+									.Name(n => n.Join)
+									.Relations(r => r
+										.Join<Project, CommitActivity>()
+									)
+								)
+						)
+						.Properties<CommitActivity>(props => props
 							.Object<Developer>(o => o
 								.AutoMap()
 								.Name(p => p.Committer)
@@ -135,26 +154,6 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 								.Index(false)
 							)
 						)
-					)
-				)
-			);
-			createCommitIndex.ShouldBeValid();
-
-		}
-
-		private void CreateProjectIndex()
-		{
-			var createProjectIndex = this.Client.CreateIndex(typeof(Project), c => c
-				.Settings(settings => settings
-					.Analysis(ProjectAnalysisSettings)
-				)
-				.Aliases(a => a
-					.Alias(ProjectsAliasName)
-				)
-				.Mappings(map => map
-					.Map<Project>(m => m
-						.AutoMap()
-						.Properties(ProjectProperties)
 					)
 				)
 			);
@@ -312,6 +311,6 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 			);
 
 		public static PropertiesDescriptor<ProjectPercolation> PercolatedQueryProperties(PropertiesDescriptor<ProjectPercolation> props) =>
-		 	ProjectProperties(props.Percolator(pp => pp.Name(n => n.Query)));
+			ProjectProperties(props.Percolator(pp => pp.Name(n => n.Query)));
 	}
 }

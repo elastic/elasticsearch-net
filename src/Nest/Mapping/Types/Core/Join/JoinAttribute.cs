@@ -7,22 +7,22 @@ namespace Nest
 {
 	public class JoinAttribute : ElasticsearchPropertyAttributeBase, IJoinProperty
 	{
-		public JoinAttribute(TypeName parent, TypeName child, params TypeName[] moreChildren) : base(FieldType.Join)
+		public JoinAttribute(RelationName parent, RelationName child, params RelationName[] moreChildren) : base(FieldType.Join)
 		{
-			Self.Relations = new Relations {{ parent, child.And(moreChildren) }};
+			Self.Relations = new Relations {{ parent, new Children(child, moreChildren) }};
 		}
 
 		public JoinAttribute(Type parent, Type child, params Type[] moreChildren) : base(FieldType.Join)
 		{
 			var children = new Children { child };
-			children.AddRange(moreChildren.Select(c => (TypeName) c));
+			children.AddRange(moreChildren.Select(c => (RelationName) c));
 			Self.Relations = new Relations {{ parent, children}};
 		}
 
 		public JoinAttribute(string parent, string child, params string[] moreChildren) : base(FieldType.Join)
 		{
 			var children = new Children{ child };
-			children.AddRange(moreChildren.Select(c => (TypeName) c));
+			children.AddRange(moreChildren.Select(c => (RelationName) c));
 			Self.Relations = new Relations {{ parent, children}};
 		}
 

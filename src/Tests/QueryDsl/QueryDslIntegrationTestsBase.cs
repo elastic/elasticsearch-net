@@ -23,7 +23,7 @@ namespace Tests.QueryDsl
 		);
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/project/_search";
+		protected override string UrlPath => "/project/doc/_search";
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 

@@ -10,6 +10,7 @@ namespace Tests.Framework.MockData
 {
 	public class Project
 	{
+		public JoinField Join { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public StateOfBeing State { get; set; }
