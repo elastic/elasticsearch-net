@@ -9,8 +9,8 @@ namespace Tests.Indices.IndexManagement.OpenCloseIndex.OpenIndex
 	{
 		[U] public async Task Urls()
 		{
-			var indices = Nest.Indices.Index<Project>().And<CommitActivity>();
-			var index = "project";
+			var indices = Nest.Indices.Index<Project>().And<Developer>();
+			var index = "project%2Cdevs";
 			await UrlTester.POST($"/{index}/_open")
 				.Fluent(c => c.OpenIndex(indices, s=>s))
 				.Request(c => c.OpenIndex(new OpenIndexRequest(indices)))

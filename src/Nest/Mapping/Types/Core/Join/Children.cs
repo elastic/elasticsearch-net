@@ -8,27 +8,24 @@ using Newtonsoft.Json.Linq;
 namespace Nest
 {
 	[JsonConverter(typeof(ChildrenJsonConverter))]
-	public class Children : List<TypeName>
+	public class Children : List<RelationName>
 	{
-		public static implicit operator Children(TypeName[] types)
+		public Children() { }
+
+		public Children(RelationName child, params RelationName[] moreChildren)
 		{
-			if (types == null) return null;
-			var children = new Children();
-			children.AddRange(types);
+			if (child != null) this.Add(child);
+			if (moreChildren == null || moreChildren.Length == 0) return;
+			this.AddRange(moreChildren);
+		}
+
+		public static implicit operator Children(RelationName child)
+		{
+			if (child == null) return null;
+			var children = new Children{child};
 			return children;
 		}
 
-		public static implicit operator Children(Types types)
-		{
-			return types?.Match(a => null, m =>
-			{
-				var children = new Children();
-				children.AddRange(m.Types);
-				return children;
-			});
-		}
-
-		public static implicit operator Children(TypeName type) => type == null ? null : new Children { type };
 		public static implicit operator Children(Type type) => type == null ? null : new Children { type };
 		public static implicit operator Children(string type) => type == null ? null : new Children { type };
 	}

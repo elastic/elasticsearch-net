@@ -41,7 +41,7 @@ namespace Tests.Document.Single.Index
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
 		protected override string UrlPath
-			=> $"/project/project/{CallIsolatedValue}?wait_for_active_shards=1&op_type=index&refresh=true&routing=route";
+			=> $"/project/doc/{CallIsolatedValue}?wait_for_active_shards=1&op_type=index&refresh=true&routing=route";
 
 		protected override bool SupportsDeserialization => true;
 

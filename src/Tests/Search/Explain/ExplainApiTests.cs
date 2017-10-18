@@ -24,7 +24,7 @@ namespace Tests.Search.Explain
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/project/{UrlEncode(Project.Instance.Name)}/_explain";
+		protected override string UrlPath => $"/project/doc/{UrlEncode(Project.Instance.Name)}/_explain";
 
 		protected override bool SupportsDeserialization => false;
 

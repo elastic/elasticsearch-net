@@ -41,7 +41,7 @@ namespace Tests.Mapping.Types.Core.Join
 			{
 				Relations = new Relations
 				{
-					{Type<Project>(), Type<CommitActivity>()}
+					{Relation<Project>(), Relation<CommitActivity>()}
 				}
 			}}
 		};
@@ -81,7 +81,7 @@ namespace Tests.Mapping.Types.Core.Join
 			{
 				Relations = new Relations
 				{
-					{ Type<Project>(), Type<CommitActivity>() },
+					{ Relation<Project>(), typeof(CommitActivity) },
 					{ "parent2", "child2", "child3" }
 				}
 			} }

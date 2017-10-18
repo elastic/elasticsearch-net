@@ -27,7 +27,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => "/project/_mapping/project?ignore_unavailable=true";
+		protected override string UrlPath => "/project/_mapping/doc?ignore_unavailable=true";
 
 		protected override Func<GetMappingDescriptor<Project>, IGetMappingRequest> Fluent => d => d
 			.IgnoreUnavailable();

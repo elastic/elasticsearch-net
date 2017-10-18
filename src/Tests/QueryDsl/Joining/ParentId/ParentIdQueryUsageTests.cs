@@ -28,7 +28,7 @@ namespace Tests.QueryDsl.Joining.ParentId
 		protected override QueryContainer QueryInitializer => new ParentIdQuery
 		{
 			Name = "named_query",
-			Type = Infer.Type<Developer>(),
+			Type = Infer.Relation<Developer>(),
 			Id = Project.First.Name
 		};
 

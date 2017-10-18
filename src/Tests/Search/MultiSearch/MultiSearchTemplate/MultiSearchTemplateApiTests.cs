@@ -29,7 +29,7 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => false;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/project/_msearch/template";
+		protected override string UrlPath => "/project/doc/_msearch/template";
 
 		protected override bool SupportsDeserialization => false;
 

@@ -21,7 +21,7 @@ namespace Tests.Reproduce
 
 		/*
 		* These tests are ignored because they rely on a fiddler autoresponder rule that artificially delays
-		* the response from /project/project/_search to 5 seconds. See this issue's accompanying PR.
+		* the response from /project/doc/_search to 5 seconds. See this issue's accompanying PR.
 		*/
 
 		//[I]

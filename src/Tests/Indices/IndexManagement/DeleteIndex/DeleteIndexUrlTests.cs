@@ -11,8 +11,8 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 	{
 		[U] public async Task Urls()
 		{
-			var indices = Index<Project>().And<CommitActivity>();
-			var index = "project";
+			var indices = Index<Project>().And<Developer>();
+			var index = "project%2Cdevs";
 			await DELETE($"/{index}")
 				.Fluent(c => c.DeleteIndex(indices, s=>s))
 				.Request(c => c.DeleteIndex(new DeleteIndexRequest(indices)))
