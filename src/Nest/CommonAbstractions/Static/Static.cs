@@ -23,6 +23,10 @@ namespace Nest
 		public static Types Type(params TypeName[] types) => new Types.ManyTypes(types);
 		public static Types AllTypes = Nest.Types.All;
 
+		public static RelationName Relation(string type) => type;
+		public static RelationName Relation(Type type) => type;
+		public static RelationName Relation<T>() => typeof(T);
+
 		public static Names Names(params string[] names) => string.Join(",", names);
 		public static Names Names(IEnumerable<string> names) => string.Join(",", names);
 

@@ -41,8 +41,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U] public void ExplicitMappingIsInferredUsingMapDefaultTypeIndices()
 		{
 			var settings = new ConnectionSettings()
-				.MapDefaultTypeIndices(m => m
-					.Add(typeof(Project), "projects")
+				.InferMappingFor<Project>(m => m
+					.IndexName("projects")
 				);
 			var resolver = new IndexNameResolver(settings);
 			var index = resolver.Resolve<Project>();
@@ -73,8 +73,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		{
 			var settings = new ConnectionSettings()
 				.DefaultIndex("defaultindex")
-				.MapDefaultTypeIndices(m => m
-					.Add(typeof(Project), "projects")
+				.InferMappingFor<Project>(m => m
+					.IndexName("projects")
 				);
 			var resolver = new IndexNameResolver(settings);
 			var index = resolver.Resolve<Project>();
@@ -106,8 +106,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			var client = TestClient.GetInMemoryClient(s=>
 				new ConnectionSettings()
 					.DefaultIndex("defaultindex")
-					.MapDefaultTypeIndices(m => m
-						.Add(typeof(Project), "projects")
+					.InferMappingFor<Project>(m => m
+						.IndexName("projects")
 					)
 			);
 

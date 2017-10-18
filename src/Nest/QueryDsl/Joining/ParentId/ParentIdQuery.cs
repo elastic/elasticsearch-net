@@ -18,7 +18,7 @@ namespace Nest
 		/// The child type. This must be a type with _parent field.
 	    /// </summary>
 		[JsonProperty("type")]
-		TypeName Type { get; set; }
+		RelationName Type { get; set; }
 
 		/// <summary>
 		/// The id of the parent document to get children for.
@@ -42,7 +42,7 @@ namespace Nest
 
 		internal static bool IsConditionless(IParentIdQuery q) => q.Type.IsConditionless() || q.Id.IsConditionless();
 
-		public TypeName Type { get; set; }
+		public RelationName Type { get; set; }
 
 		public Id Id { get; set; }
 
@@ -56,13 +56,13 @@ namespace Nest
 	{
 		protected override bool Conditionless => ParentIdQuery.IsConditionless(this);
 
-		TypeName IParentIdQuery.Type { get; set; }
+		RelationName IParentIdQuery.Type { get; set; }
 		Id IParentIdQuery.Id { get; set; }
 		bool? IParentIdQuery.IgnoreUnmapped { get; set; }
 
 		public ParentIdQueryDescriptor<T> Id(Id id) => Assign(a => a.Id = id);
 
-		public ParentIdQueryDescriptor<T> Type(TypeName type) => Assign(a => a.Type = type);
+		public ParentIdQueryDescriptor<T> Type(RelationName type) => Assign(a => a.Type = type);
 
 		public ParentIdQueryDescriptor<T> Type<TChild>() => Assign(a => a.Type = typeof(TChild));
 

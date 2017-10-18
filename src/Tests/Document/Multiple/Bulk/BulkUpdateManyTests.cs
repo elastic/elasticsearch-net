@@ -33,7 +33,7 @@ namespace Tests.Document.Multiple.Bulk
 
 		private IEnumerable<object> ProjectToBulkJson(Project p)
 		{
-			yield return new Dictionary<string, object> { { "update", new { _type = "project", _id = p.Name } } };
+			yield return new Dictionary<string, object> { { "update", new { _type = "doc", _id = p.Name } } };
 			yield return new { script = new { inline = "_source.counter++" } };
 		}
 

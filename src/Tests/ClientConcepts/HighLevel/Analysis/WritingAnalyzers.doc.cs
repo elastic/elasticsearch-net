@@ -128,7 +128,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
                 },
                 mappings = new
                 {
-                    project = new
+                    doc = new // <3> our connection settings map `Project` to `doc`
                     {
                         properties = new
                         {

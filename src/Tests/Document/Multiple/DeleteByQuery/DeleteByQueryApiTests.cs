@@ -43,7 +43,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override string UrlPath => $"/{CallIsolatedValue}%2C{SecondIndex}/project/_delete_by_query?ignore_unavailable=true";
+		protected override string UrlPath => $"/{CallIsolatedValue}%2C{SecondIndex}/doc/_delete_by_query?ignore_unavailable=true";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -53,7 +53,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			{
 				ids = new
 				{
-					type = new[] { "project" },
+					type = new[] { "doc" },
 					values = new [] { Project.First.Name, "x" }
 				}
 			}
@@ -102,7 +102,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 	{
 		public DeleteByQueryWaitForCompletionApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/project/_delete_by_query?wait_for_completion=false&conflicts=proceed";
+		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_delete_by_query?wait_for_completion=false&conflicts=proceed";
 
 		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(this.CallIsolatedValue);
 
@@ -151,7 +151,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 409;
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/project/_delete_by_query";
+		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_delete_by_query";
 		protected override object ExpectJson =>
 			new
 			{

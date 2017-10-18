@@ -41,7 +41,7 @@ namespace Nest
 				return c;
 			}
 			if (reader.TokenType != JsonToken.StartArray) return null;
-			var types = new List<TypeName> { };
+			var types = new List<RelationName> { };
 			while (reader.TokenType != JsonToken.EndArray)
 			{
 				var type = reader.ReadAsString();

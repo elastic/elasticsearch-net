@@ -10,8 +10,20 @@ namespace Tests.Framework.MockData
 {
 	public class CommitActivity
 	{
+		private string _projectName;
+		public JoinField Join { get; set; }
 		public string Id { get; set; }
-		public string ProjectName { get; set; }
+
+		public string ProjectName
+		{
+			get => _projectName;
+			set
+			{
+				this.Join = JoinField.Link<CommitActivity>(value);
+				_projectName = value;
+			}
+		}
+
 		public string Message { get; set; }
 		public long SizeInBytes { get; set; }
 		public double ConfidenceFactor { get; set; }

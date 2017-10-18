@@ -1,6 +1,7 @@
 ﻿using System;
 using Elasticsearch.Net;
 using Nest;
+using Tests.ClientConcepts.HighLevel.Inference;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
@@ -27,7 +28,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => $"/{CallIsolatedValue}/project/_mapping";
+		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_mapping";
 
 		protected override object ExpectJson { get; } = new
 		{
@@ -68,6 +69,12 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				description = new
 				{
 					type = "text"
+				},
+				join = new {
+					relations = new {
+						project = "commits"
+					},
+					type = "join"
 				},
 				lastActivity = new
 				{
@@ -204,6 +211,12 @@ namespace Tests.Indices.MappingManagement.PutMapping
 			.IncludeInAll()
 			.AutoMap()
 			.Properties(prop => prop
+				.Join(join=>join
+					.Name(p => p.Join)
+					.Relations(relations => relations
+						.Join<Project, CommitActivity>()
+					)
+				)
 				.Object<Tag>(o => o
 					.Name(p => p.CuratedTags)
 					.AutoMap()
@@ -250,6 +263,14 @@ namespace Tests.Indices.MappingManagement.PutMapping
 			IncludeInAll = true,
 			Properties = new Properties<Project>
 			{
+				{ p => p.Join,  new JoinProperty
+					{
+						Relations = new Relations
+						{
+							{ typeof(Project), typeof(CommitActivity) }
+						}
+					}
+				},
 				{ p => p.Branches, new TextProperty
 						{
 							Fields = new Properties

@@ -66,7 +66,7 @@ namespace Tests.Ingest.SimulatePipeline
 				new
 				{
 					_index = "project",
-					_type = "project",
+					_type = "doc",
 					_id = Project.Instance.Name,
 					_source = Project.Instance
 				},

@@ -31,7 +31,7 @@ namespace Tests.Document.Single.Delete
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override string UrlPath => $"/project/project/{CallIsolatedValue}";
+		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -64,7 +64,7 @@ namespace Tests.Document.Single.Delete
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override string UrlPath => $"/project/project/{CallIsolatedValue}";
+		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}";
 
 		protected override bool SupportsDeserialization => false;
 

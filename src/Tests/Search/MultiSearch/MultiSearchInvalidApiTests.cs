@@ -27,7 +27,7 @@ namespace Tests.Search.MultiSearch
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => false; //2 out of the three searches are not valid
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/project/_msearch";
+		protected override string UrlPath => "/project/doc/_msearch";
 
 		protected override bool SupportsDeserialization => false;
 
