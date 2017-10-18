@@ -31,7 +31,7 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 				like = new object[] {
 					new {
 						_index = "project",
-						_type = "project",
+						_type = "doc",
 						_id = Project.Instance.Name
 					},
 					"some long text"

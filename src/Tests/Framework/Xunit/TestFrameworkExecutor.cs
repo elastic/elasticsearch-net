@@ -12,7 +12,9 @@ namespace Xunit
 {
 	class TestFrameworkExecutor : XunitTestFrameworkExecutor
 	{
-		public TestFrameworkExecutor(AssemblyName a, ISourceInformationProvider sip, IMessageSink d) : base(a, sip, d) { }
+		public TestFrameworkExecutor(AssemblyName a, ISourceInformationProvider sip, IMessageSink d) : base(a, sip, d)
+		{
+		}
 
 		protected override async void RunTestCases(
 			IEnumerable<IXunitTestCase> testCases, IMessageSink sink, ITestFrameworkExecutionOptions options
@@ -30,48 +32,61 @@ namespace Xunit
 						Console.WriteLine($"- {kv.Key}: {kv.Value.Elapsed}");
 					Console.WriteLine("--------");
 
-					if (TestClient.Configuration.RunIntegrationTests && runner.FailedCollections.Count > 0)
+					if (runner.FailedCollections.Count > 0)
 					{
 						Console.ForegroundColor = ConsoleColor.Red;
 						Console.WriteLine("Failed collections:");
-                        foreach (var t in runner.FailedCollections)
-                        {
-                            var cluster = t.Item1;
-                            Console.WriteLine($" - {cluster}: {t.Item2}");
-                        }
-						Console.ForegroundColor = ConsoleColor.Yellow;
-						Console.WriteLine("--------");
-						var sb = new StringBuilder("build integrate ")
-							.Append(TestClient.Configuration.ElasticsearchVersion)
-							.Append(" \"");
-						var clusters = string.Join(",", runner.FailedCollections
-							.Select(c => c.Item1.ToLowerInvariant()).Distinct());
-						sb.Append(clusters);
-						sb.Append("\"");
-						if (runner.FailedCollections.Count < 30)
+						foreach (var t in runner.FailedCollections.OrderBy(p => p.Item1).ThenBy(t => t.Item2))
 						{
-							sb.Append(" \"");
-							var tests = string.Join(",", runner.FailedCollections
-								.Select(c => c.Item2.ToLowerInvariant().Split('.').Last()
-									.Replace("apitests", "")
-									.Replace("usagetests", "")
-									.Replace("tests", "")
-								));
-							sb.Append(tests);
-							sb.Append("\"");
+							var cluster = t.Item1;
+							Console.WriteLine($" - {cluster}: {t.Item2}");
 						}
-						Console.WriteLine(sb.ToString());
-						Console.WriteLine("--------");
+						DumpReproduceFilters(runner);
 					}
 					Console.ResetColor();
 				}
-
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine(e);
 				throw;
 			}
+		}
+
+		private static void DumpReproduceFilters(TestAssemblyRunner runner)
+		{
+			var runningIntegrations = TestClient.Configuration.RunIntegrationTests;
+			Console.ForegroundColor = ConsoleColor.Yellow;
+			Console.WriteLine("--------");
+			var sb = new StringBuilder("build ");
+			if (runningIntegrations)
+				sb.Append("integrate")
+					.Append(TestClient.Configuration.ElasticsearchVersion)
+					.Append(" \"");
+			else sb.Append("test");
+
+			if (runningIntegrations)
+			{
+                var clusters = string.Join(",", runner.FailedCollections
+                    .Select(c => c.Item1.ToLowerInvariant()).Distinct());
+                sb.Append(clusters);
+                sb.Append("\"");
+			}
+			if (!runningIntegrations || (runner.FailedCollections.Count < 30))
+			{
+				sb.Append(" \"");
+				var tests = string.Join(",", runner.FailedCollections
+					.OrderBy(t => t.Item2)
+					.Select(c => c.Item2.ToLowerInvariant().Split('.').Last()
+						.Replace("apitests", "")
+						.Replace("usagetests", "")
+						.Replace("tests", "")
+					));
+				sb.Append(tests);
+				sb.Append("\"");
+			}
+			Console.WriteLine(sb.ToString());
+			Console.WriteLine("--------");
 		}
 	}
 }

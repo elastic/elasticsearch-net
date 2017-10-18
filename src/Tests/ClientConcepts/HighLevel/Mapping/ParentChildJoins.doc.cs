@@ -57,6 +57,12 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void SimpleParentChildMapping()
 		{
+
+			var connectionSettings = new ConnectionSettings()
+				.InferMappingFor<MyDocument>(m => m.IndexName("index").TypeName("doc"))
+				.InferMappingFor<MyChild>(m => m.IndexName("index").TypeName("doc"))
+				.InferMappingFor<MyParent>(m => m.IndexName("index").TypeName("doc").RelationName("parent"));
+
 			var descriptor = new CreateIndexDescriptor(Index<MyDocument>())
 				.Mappings(ms => ms
 					.Map<MyDocument>(m => m

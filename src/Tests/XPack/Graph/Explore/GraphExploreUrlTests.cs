@@ -11,7 +11,7 @@ namespace Tests.XPack.Graph.Explore
 	{
 		[U] public async Task Urls()
 		{
-			await POST("/project/project/_xpack/graph/_explore")
+			await POST("/project/doc/_xpack/graph/_explore")
 				.Fluent(c => c.GraphExplore<Project>(d => d))
 				.Request(c => c.GraphExplore(new GraphExploreRequest<Project>(typeof(Project), typeof(Project))))
 				.FluentAsync(c => c.GraphExploreAsync<Project>(d => d))
@@ -40,7 +40,7 @@ namespace Tests.XPack.Graph.Explore
 				.RequestAsync(c => c.GraphExploreAsync(new GraphExploreRequest<Project>(index, AllTypes)))
 				;
 
-			await POST($"/{index}/project/_xpack/graph/_explore")
+			await POST($"/{index}/doc/_xpack/graph/_explore")
 				.Fluent(c => c.GraphExplore<Project>(d=>d.Type<Project>().Index(index)))
 				.Request(c => c.GraphExplore(new GraphExploreRequest<Project>(index, Type<Project>())))
 				.FluentAsync(c => c.GraphExploreAsync<Project>(d=>d.Type<Project>().Index(index)))

@@ -32,6 +32,7 @@ open Commandline
 Commandline.parse()
 
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
+Target "Start" <| fun _ -> traceHeader "STARTING BUILD"
 
 Target "Clean" Build.Clean
 
@@ -75,7 +76,8 @@ Target "Canary" <| fun _ ->
     if (not (String.IsNullOrWhiteSpace apiKey) || apiKey = "ignore") then Release.PublishCanaryBuild apiKey feed
 
 // Dependencies
-"Clean" 
+"Start"
+  =?> ("Clean", Commandline.needsClean )
   =?> ("Version", hasBuildParam "version")
   ==> "Restore"
   =?> ("FullBuild", Commandline.needsFullBuild)
@@ -84,11 +86,13 @@ Target "Canary" <| fun _ ->
   ==> "Documentation"
   ==> "Build"
 
-"Clean"
+"Start"
+  =?> ("Clean", Commandline.needsClean )
   =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Profile"
 
-"Clean" 
+"Start"
+  =?> ("Clean", Commandline.needsClean )
   =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Benchmark"
 
@@ -96,7 +100,8 @@ Target "Canary" <| fun _ ->
   ==> "Release"
   ==> "Canary"
 
-"Clean"
+"Start"
+  =?> ("Clean", Commandline.needsClean )
   ==> "Restore"
   =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Integrate"

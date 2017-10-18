@@ -72,7 +72,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			 * readable fashion, similar to
 			 *
 			 * ....
-			 * Valid NEST response built from a successful low level call on POST: /project/project/_search
+			 * Valid NEST response built from a successful low level call on POST: /project/doc/_search
              * # Audit trail of this API call:
              *  - [1] SniffOnStartup: Took: 00:00:00.0360264
              *  - [2] SniffSuccess: Node: http://localhost:9200/ Took: 00:00:00.0310228

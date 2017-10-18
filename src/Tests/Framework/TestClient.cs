@@ -10,6 +10,7 @@ using System.Threading;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.Configuration;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.MockData;
 using Tests.Framework.Versions;
 
@@ -66,10 +67,16 @@ namespace Tests.Framework
 		private static ConnectionSettings DefaultSettings(ConnectionSettings settings) => settings
 			.DefaultIndex("default-index")
 			.PrettyJson()
-			.InferMappingFor<Project>(ProjectMapping)
+			.InferMappingFor<Project>(map=>map
+				.IndexName(DefaultSeeder.ProjectsIndex)
+				.IdProperty(p => p.Name)
+				.RelationName("project")
+				.TypeName("doc")
+			)
 			.InferMappingFor<CommitActivity>(map => map
-				.IndexName("commits")
-				.TypeName("commits")
+				.IndexName(DefaultSeeder.ProjectsIndex)
+				.RelationName("commits")
+				.TypeName("doc")
 			)
 			.InferMappingFor<Developer>(map => map
 				.IndexName("devs")
@@ -92,14 +99,6 @@ namespace Tests.Framework
 			//.EnableHttpCompression()
 			.OnRequestDataCreated(data => data.Headers.Add("TestMethod", ExpensiveTestNameForIntegrationTests()));
 
-		private static IClrTypeMapping<Project> ProjectMapping(ClrTypeMappingDescriptor<Project> m)
-		{
-			m.IndexName("project").IdProperty(p => p.Name);
-			//*_range type only available since 5.2.0 so we ignore them when running integration tests
-			if (VersionUnderTestSatisfiedBy("<5.2.0") && Configuration.RunIntegrationTests)
-				m.Ignore(p => p.Ranges);
-			return m;
-		}
 		public static string PercolatorType => Configuration.ElasticsearchVersion <= ElasticsearchVersion.GetOrAdd("5.0.0-alpha1")
 			? ".percolator"
 			: "query";

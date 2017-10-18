@@ -39,7 +39,7 @@ namespace Tests.Indices.Monitoring.IndicesStats
 			{
 				Types = new TypeName[] { typeof(Project) }
 			};
-			await GET($"/index1%2Cindex2/_stats/_all?types=project")
+			await GET($"/index1%2Cindex2/_stats/_all?types=doc")
 				.Fluent(c => c.IndicesStats(index, i=>i.Metric(metrics).Types(typeof(Project))))
 				.Request(c => c.IndicesStats(request))
 				.FluentAsync(c => c.IndicesStatsAsync(index, i => i.Metric(metrics).Types(typeof(Project))))

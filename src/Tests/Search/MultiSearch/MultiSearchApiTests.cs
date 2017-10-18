@@ -29,7 +29,7 @@ namespace Tests.Search.MultiSearch
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/project/_msearch";
+		protected override string UrlPath => "/project/doc/_msearch";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -46,7 +46,7 @@ namespace Tests.Search.MultiSearch
 			new { index = "queries", type = TestClient.PercolatorType },
 			new { query = new { percolate = new { document = Project.InstanceAnonymous, field = "query" } } },
 			new { index = "queries", type = TestClient.PercolatorType },
-			new { query = new { percolate = new { index = "project", type = "project", id = Project.First.Name, version = 1, field = "query" } } },
+			new { query = new { percolate = new { index = "project", type = "doc", id = Project.First.Name, version = 1, field = "query" } } },
 		};
 
 		protected override Func<MultiSearchDescriptor, IMultiSearchRequest> Fluent => ms => ms
