@@ -2,30 +2,94 @@
 
 namespace Nest
 {
+	/// <summary>
+	/// An item within a bulk response
+	/// </summary>
 	[JsonObject]
 	[JsonConverter(typeof(BulkResponseItemJsonConverter))]
-	public abstract class BulkResponseItemBase
+	public interface IBulkResponseItem
 	{
-		public abstract string Operation { get; internal set; }
+		/// <summary>
+		/// The type of bulk operation
+		/// </summary>
+		string Operation { get; }
 
+		/// <summary>
+		/// The index against which the bulk operation ran
+		/// </summary>
 		[JsonProperty("_index")]
-		public string Index { get; internal set; }
+		string Index { get; }
+
+		/// <summary>
+		/// The type against which the bulk operation ran
+		/// </summary>
 		[JsonProperty("_type")]
-		public string Type { get; internal set; }
+		string Type { get; }
+
+		/// <summary>
+		/// The id of the document for the bulk operation
+		/// </summary>
 		[JsonProperty("_id")]
-		public string Id { get; internal set; }
+		string Id { get; }
+
+		/// <summary>
+		/// The version of the document
+		/// </summary>
 		[JsonProperty("_version")]
-		public long Version { get; internal set; }
+		long Version { get; }
+
+		/// <summary>
+		/// The status of the bulk operation
+		/// </summary>
 		[JsonProperty("status")]
-		public int Status { get; internal set; }
+		int Status { get; }
+
+		/// <summary>
+		/// The error associated with the bulk operation
+		/// </summary>
 		[JsonProperty("error")]
-		public BulkError Error { get; internal set; }
+		BulkError Error { get; }
+
+		/// <summary>
+		/// The shards associated with the bulk operation
+		/// </summary>
 		[JsonProperty("_shards")]
-		public ShardsMetaData Shards { get; internal set; }
+		ShardsMetaData Shards { get; }
 
 		/// <summary>
 		/// Specifies wheter this particular bulk operation succeeded or not
 		/// </summary>
+		bool IsValid { get; }
+	}
+
+	/// <inheritdoc />
+	public abstract class BulkResponseItemBase : IBulkResponseItem
+	{
+		/// <inheritdoc />
+		public abstract string Operation { get; internal set; }
+
+		/// <inheritdoc />
+		public string Index { get; internal set; }
+
+		/// <inheritdoc />
+		public string Type { get; internal set; }
+
+		/// <inheritdoc />
+		public string Id { get; internal set; }
+
+		/// <inheritdoc />
+		public long Version { get; internal set; }
+
+		/// <inheritdoc />
+		public int Status { get; internal set; }
+
+		/// <inheritdoc />
+		public BulkError Error { get; internal set; }
+
+		/// <inheritdoc />
+		public ShardsMetaData Shards { get; internal set; }
+
+		/// <inheritdoc />
 		public bool IsValid
 		{
 			get
@@ -34,7 +98,7 @@ namespace Nest
 				switch (this.Operation.ToLowerInvariant())
 				{
 					case "delete": return this.Status == 200 || this.Status == 404;
-					case "update": 
+					case "update":
 					case "index":
 					case "create":
 						return this.Status == 200 || this.Status == 201;
