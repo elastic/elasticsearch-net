@@ -53,15 +53,12 @@ namespace Nest
 
 		public string Format
 		{
-			get
-			{
-				return !string.IsNullOrEmpty(_format) &&
-					!_format.Contains("date_optional_time") &&
-					ExtendedBounds != null
-					? _format + "||date_optional_time"
-					: _format;
-			}
-			set { _format = value; }
+			get => !string.IsNullOrEmpty(_format) &&
+			       !_format.Contains("date_optional_time") &&
+			       (ExtendedBounds != null || Missing.HasValue)
+				? _format + "||date_optional_time"
+				: _format;
+			set => _format = value;
 		}
 
 		public int? MinimumDocumentCount { get; set; }
@@ -94,15 +91,12 @@ namespace Nest
 
 		string IDateHistogramAggregation.Format
 		{
-			get
-			{
-				return !string.IsNullOrEmpty(_format) &&
-					!_format.Contains("date_optional_time") &&
-					Self.ExtendedBounds != null
-					? _format + "||date_optional_time"
-					: _format;
-			}
-			set { _format = value; }
+			get => !string.IsNullOrEmpty(_format) &&
+			       !_format.Contains("date_optional_time") &&
+			       (Self.ExtendedBounds != null || Self.Missing.HasValue)
+				? _format + "||date_optional_time"
+				: _format;
+			set => _format = value;
 		}
 
 		int? IDateHistogramAggregation.MinimumDocumentCount { get; set; }
