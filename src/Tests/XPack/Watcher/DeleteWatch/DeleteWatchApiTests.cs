@@ -29,7 +29,7 @@ namespace Tests.XPack.Watcher.DeleteWatch
 						)
 					)
 					.Actions(a => a
-						.Email("reminder_email", e => e 
+						.Email("reminder_email", e => e
 							.To("me@example.com")
 							.Subject("Something's strange in the neighbourhood")
 							.Body(b => b
@@ -76,6 +76,7 @@ namespace Tests.XPack.Watcher.DeleteWatch
 		}
 	}
 
+	[SkipVersion("6.0.0-rc1", "Delete document response on non existing index has changed")]
 	public class DeleteNonExistentWatchApiTests : ApiIntegrationTestBase<XPackCluster, IDeleteWatchResponse, IDeleteWatchRequest, DeleteWatchDescriptor, DeleteWatchRequest>
 	{
 		public DeleteNonExistentWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -101,8 +102,7 @@ namespace Tests.XPack.Watcher.DeleteWatch
 
 		protected override Func<DeleteWatchDescriptor, IDeleteWatchRequest> Fluent => p => p;
 
-		protected override DeleteWatchRequest Initializer =>
-			new DeleteWatchRequest(CallIsolatedValue);
+		protected override DeleteWatchRequest Initializer => new DeleteWatchRequest(CallIsolatedValue);
 
 		protected override void ExpectResponse(IDeleteWatchResponse response)
 		{
