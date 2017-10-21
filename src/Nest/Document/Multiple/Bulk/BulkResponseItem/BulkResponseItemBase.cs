@@ -56,9 +56,9 @@ namespace Nest
 		[JsonProperty("_shards")]
 		ShardsMetaData Shards { get; }
 		[JsonProperty("_seq_no")]
-		public long SequenceNumber { get; internal set; }
+		long SequenceNumber { get; }
 		[JsonProperty("_primary_term")]
-		public long PrimaryTerm { get; internal set; }
+		long PrimaryTerm { get; }
 
 		/// <summary>
 		/// Specifies wheter this particular bulk operation succeeded or not
@@ -92,6 +92,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ShardsMetaData Shards { get; internal set; }
+
+		/// <inheritdoc />
+		public long SequenceNumber { get; internal set; }
+
+		/// <inheritdoc />
+		public long PrimaryTerm { get; internal set; }
 
 		/// <inheritdoc />
 		public bool IsValid

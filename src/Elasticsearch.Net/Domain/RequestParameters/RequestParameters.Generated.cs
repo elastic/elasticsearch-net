@@ -6661,6 +6661,10 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
+		///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
+		public FlushJobRequestParameters SkipTime(string skip_time) => this.AddQueryString("skip_time", skip_time);
+		
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public FlushJobRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
 		

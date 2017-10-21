@@ -21,6 +21,7 @@ namespace Tests
 	// (See also https://github.com/elastic/elasticsearch-net/pull/2793)
 	// We provide an alternative StartupObject as part of the csproj for e.g `dotnet run` or executable output
 	// That will run the benchmarking/profiling.public class Program{ }
+	public class Program { }
 
 	public class BenchmarkProgram
 	{
