@@ -16,6 +16,11 @@ using Tests.Framework.Profiling.Timeline;
 
 namespace Tests
 {
+	// Microsoft test sdk injects a Main method for some reason into program
+	// (Relates to this issue: https://youtrack.jetbrains.com/issue/RSRP-464233)
+	// (See also https://github.com/elastic/elasticsearch-net/pull/2793)
+	// We provide an alternative StartupObject as part of the csproj for e.g `dotnet run` or executable output
+	// That will run the benchmarking/profiling.
 	public class Program { }
 	public class BenchmarkProgram
 	{
@@ -56,10 +61,8 @@ namespace Tests
 
 		private static  string SdkPath { get; }
 		private static  string OutputPath { get; }
-		// TODO: Renamed this from Main to TestMain because of a bug with Resharper and running unit tests
-		// in Visual Studio with .NET Core: https://youtrack.jetbrains.com/issue/RSRP-464233
-		// Once this is fixed, look at renaming back and removing additional packages. See https://github.com/elastic/elasticsearch-net/pull/2793
-		public static void TestMain(string[] args)
+
+		public static void Main(string[] args)
 		{
 			if (args.Length == 0)
 				Console.WriteLine("Must specify at least one argument: TestAssemblyPath, Profile or Benchmark ");
