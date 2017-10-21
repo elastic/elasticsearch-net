@@ -9,8 +9,8 @@ namespace Nest
 	{
 		long Took { get; }
 		bool Errors { get; }
-		IReadOnlyCollection<BulkResponseItemBase> Items { get; }
-		IEnumerable<BulkResponseItemBase> ItemsWithErrors { get; }
+		IReadOnlyCollection<IBulkResponseItem> Items { get; }
+		IEnumerable<IBulkResponseItem> ItemsWithErrors { get; }
 	}
 
 	[JsonObject]
@@ -32,11 +32,11 @@ namespace Nest
 		public bool Errors { get; internal set; }
 
 		[JsonProperty("items")]
-		public IReadOnlyCollection<BulkResponseItemBase> Items { get; internal set; } = EmptyReadOnly<BulkResponseItemBase>.Collection;
+		public IReadOnlyCollection<IBulkResponseItem> Items { get; internal set; } = EmptyReadOnly<IBulkResponseItem>.Collection;
 
 		[JsonIgnore]
-		public IEnumerable<BulkResponseItemBase> ItemsWithErrors => !this.Items.HasAny()
-			? Enumerable.Empty<BulkResponseItemBase>()
+		public IEnumerable<IBulkResponseItem> ItemsWithErrors => !this.Items.HasAny()
+			? Enumerable.Empty<IBulkResponseItem>()
 			: this.Items.Where(i => !i.IsValid);
 	}
 }
