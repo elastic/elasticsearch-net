@@ -5,6 +5,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 
@@ -416,9 +417,7 @@ namespace Tests.Aggregations.Bucket.Terms
 	 */
 	public class NumericTermsAggregationUsageTests : AggregationUsageTestBase
 	{
-		public NumericTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
-		{
-		}
+		public NumericTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{
@@ -427,7 +426,6 @@ namespace Tests.Aggregations.Bucket.Terms
 			{
 				commits = new
 				{
-
 					terms = new
 					{
 						field = "numberOfCommits",
@@ -440,6 +438,7 @@ namespace Tests.Aggregations.Bucket.Terms
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Size(0)
+			.Index(DefaultSeeder.ProjectsAliasFilter)
 			.Aggregations(a => a
 				.Terms<int>("commits", st => st
 					.Field(p => p.NumberOfCommits)
@@ -449,7 +448,7 @@ namespace Tests.Aggregations.Bucket.Terms
 			);
 
 		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+			new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
 			{
 				Size = 0,
 				Aggregations = new TermsAggregation<int>("commits")

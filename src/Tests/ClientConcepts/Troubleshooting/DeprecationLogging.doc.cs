@@ -19,7 +19,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 	{
 		public DeprecationLogging(ReadOnlyCluster cluster) : base(cluster) { }
 
-		[I] public void RequestWithMultipleWarning()
+		[I(Skip = "6.0.0-rc1")] public void RequestWithMultipleWarning()
 		{
 			//TODO come up with a new deprecation test since fielddata is gone
 			throw new NotImplementedException();
