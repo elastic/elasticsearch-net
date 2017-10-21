@@ -328,6 +328,16 @@ namespace Nest
 			this.Term(t => t.Field(field).Value(value).Boost(boost).Name(name));
 
 		/// <summary>
+		/// Helper method to easily filter on join relations
+		/// </summary>
+		public QueryContainer Join(Expression<Func<T, JoinField>> field, RelationName value) =>
+			this.Term(t => t.Field(field).Value(value));
+
+		/// <summary>Helper method to easily filter on join relations</summary>
+		public QueryContainer Join<TRelation>(Expression<Func<T, JoinField>> field) =>
+			this.Term(t => t.Field(field).Value(Infer.Relation<TRelation>()));
+
+		/// <summary>
 		/// Matches documents that have fields that contain a term (not analyzed).
 		/// The term query maps to Lucene TermQuery.
 		/// </summary>

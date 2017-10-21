@@ -3,6 +3,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 
@@ -31,6 +32,7 @@ namespace Tests.Search.Search.Collapsing
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Index(DefaultSeeder.ProjectsAliasFilter)
 			.Collapse(c => c
 				.Field(f => f.State)
 				.MaxConcurrentGroupSearches(1000)
@@ -41,7 +43,7 @@ namespace Tests.Search.Search.Collapsing
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>
+		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
 		{
 			Collapse = new FieldCollapse
 			{

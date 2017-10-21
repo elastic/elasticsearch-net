@@ -11,9 +11,9 @@ namespace Nest
 		public JoinField(Child child) : base(child) { }
 
 		public static JoinField Root<TParent>() => new Parent(typeof(TParent));
-		public static JoinField Root(TypeName parent) => new Parent(parent);
+		public static JoinField Root(RelationName parent) => new Parent(parent);
 
-		public static JoinField Link(TypeName childName, Id parentId) => new Child(childName, parentId);
+		public static JoinField Link(RelationName childName, Id parentId) => new Child(childName, parentId);
 		public static JoinField Link<TChild, TParentDocument>(TParentDocument parent) where TParentDocument : class =>
 			new Child(typeof(TChild), Id.From<TParentDocument>(parent));
 		public static JoinField Link<TChild>(Id parentId) => new Child(typeof(TChild), parentId);
@@ -24,9 +24,9 @@ namespace Nest
 
         public class Parent
         {
-            internal TypeName Name { get; }
+            internal RelationName Name { get; }
 
-            public Parent(TypeName name)
+            public Parent(RelationName name)
             {
                 Name = name;
             }
@@ -34,9 +34,9 @@ namespace Nest
         public class Child
         {
             internal Id Parent { get; }
-            internal TypeName Name { get; }
+            internal RelationName Name { get; }
 
-            public Child(TypeName name, Id parent)
+            public Child(RelationName name, Id parent)
             {
                 Name = name;
                 Parent = parent;

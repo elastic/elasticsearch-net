@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -45,13 +47,14 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			response.Accept(visitor);
 
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
-			visitor.CountsShouldContainKeyAndCountBe("object", 5);
+			visitor.CountsShouldContainKeyAndCountBe("join", 1);
+			visitor.CountsShouldContainKeyAndCountBe("object", 7);
 			visitor.CountsShouldContainKeyAndCountBe("date", 4);
-			visitor.CountsShouldContainKeyAndCountBe("text", 11);
-			visitor.CountsShouldContainKeyAndCountBe("keyword", 10);
-			visitor.CountsShouldContainKeyAndCountBe("ip", 1);
-			visitor.CountsShouldContainKeyAndCountBe("number", 3);
-			visitor.CountsShouldContainKeyAndCountBe("geo_point", 2);
+			visitor.CountsShouldContainKeyAndCountBe("text", 18);
+			visitor.CountsShouldContainKeyAndCountBe("keyword", 17);
+			visitor.CountsShouldContainKeyAndCountBe("ip", 2);
+			visitor.CountsShouldContainKeyAndCountBe("number", 7);
+			visitor.CountsShouldContainKeyAndCountBe("geo_point", 3);
 			visitor.CountsShouldContainKeyAndCountBe("completion", 2);
 			visitor.CountsShouldContainKeyAndCountBe("nested", 1);
 			visitor.CountsShouldContainKeyAndCountBe("date_range", 1);
@@ -122,8 +125,11 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 		public void CountsShouldContainKeyAndCountBe(string key, int count)
 		{
-			this.Counts.ContainsKey(key).Should().BeTrue();
-			this.Counts[key].Should().Be(count, $"because there should be {count} {key} properties");
+			this.Counts.ContainsKey(key).Should().BeTrue($"did not see {key}");
+			var sb = new StringBuilder()
+				.AppendLine($"because there should be {count} {key} properties");
+			var because = this.Counts.Aggregate(sb, (s, kv) => s.AppendLine($"{kv.Key} = {kv.Value}"), s=>s.ToString());
+			this.Counts[key].Should().Be(count, because);
 		}
 
 #pragma warning disable 618
