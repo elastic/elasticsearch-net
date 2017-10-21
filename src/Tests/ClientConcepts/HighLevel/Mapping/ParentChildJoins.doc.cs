@@ -174,7 +174,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			 */
 
 			Expect("myparent").WhenSerializing(JoinField.Root(typeof(MyParent)));
-			Expect("myparent").WhenSerializing(JoinField.Root(Type<MyParent>()));
+			Expect("myparent").WhenSerializing(JoinField.Root(Relation<MyParent>()));
 			Expect("myparent").WhenSerializing(JoinField.Root<MyParent>());
 			Expect("myparent").WhenSerializing(JoinField.Root("myparent"));
 

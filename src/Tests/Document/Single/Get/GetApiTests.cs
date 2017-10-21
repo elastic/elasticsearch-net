@@ -68,7 +68,7 @@ namespace Tests.Document.Single.Get
 		{
 			response.Found.Should().BeFalse();
 			response.Index.Should().Be("project");
-			response.Type.Should().Be("project");
+			response.Type.Should().Be("doc");
 			response.Id.Should().Be(this.CallIsolatedValue);
 		}
 	}
@@ -90,27 +90,29 @@ namespace Tests.Document.Single.Get
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/doc/{UrlEncode(this.CommitActivityId)}?parent={UrlEncode(this.CommitActivity.ProjectName)}";
+		protected override string UrlPath => $"/project/doc/{UrlEncode(this.CommitActivityId)}?routing={UrlEncode(this.CommitActivity.ProjectName)}";
 
 		protected override bool SupportsDeserialization => false;
 
 		protected override GetDescriptor<CommitActivity> NewDescriptor() => new GetDescriptor<CommitActivity>(CommitActivity);
 
 		protected override Func<GetDescriptor<CommitActivity>, IGetRequest> Fluent => g => g
-			.Parent(this.CommitActivity.ProjectName)
+			.Routing(this.CommitActivity.ProjectName)
 			;
 
 		protected override GetRequest<CommitActivity> Initializer => new GetRequest<CommitActivity>(this.CommitActivityId)
 		{
-			Parent = this.CommitActivity.ProjectName
+			Routing = this.CommitActivity.ProjectName
 		};
 
 		protected override void ExpectResponse(IGetResponse<CommitActivity> response)
 		{
 			response.Source.Should().NotBeNull();
 			response.Source.Id.Should().Be(CommitActivityId);
-			response.Parent.Should().NotBeNullOrEmpty();
 			response.Routing.Should().NotBeNullOrEmpty();
+#pragma warning disable 618
+			response.Parent.Should().BeNullOrEmpty();
+#pragma warning restore 618
 		}
 	}
 

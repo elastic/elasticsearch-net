@@ -6,6 +6,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
 using System.Collections.Generic;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 
 namespace Tests.Aggregations.Metric.ScriptedMetric
 {
@@ -48,6 +49,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Index(DefaultSeeder.ProjectsAliasFilter)
 			.Aggregations(a => a
 				.ScriptedMetric("sum_the_hard_way", sm => sm
 					.InitScript(ss => ss.Inline(Script.Init))
@@ -58,7 +60,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 			);
 
 		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+			new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
 			{
 				Aggregations = new ScriptedMetricAggregation("sum_the_hard_way")
 				{
@@ -183,6 +185,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Index(DefaultSeeder.ProjectsAliasFilter)
 			.Aggregations(a => a
 				.ScriptedMetric("by_state_total", sm => sm
 					.InitScript(ss => ss.Inline(First.Init).Lang(First.Language))
@@ -198,7 +201,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 			);
 
 		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+			new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
 			{
 				Aggregations =
 					new ScriptedMetricAggregation("by_state_total")

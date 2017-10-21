@@ -18,6 +18,7 @@ namespace Nest
 
 		string Id { get; }
 
+		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 6.x and up")]
 		string Parent { get; }
 
 		string Routing { get; }

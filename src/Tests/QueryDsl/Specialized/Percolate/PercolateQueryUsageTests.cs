@@ -178,7 +178,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 		{
 			percolate = new
 			{
-				type = "project",
+				type = "doc",
 				index = "project",
 				id = Project.Instance.Name,
 				field = "query"

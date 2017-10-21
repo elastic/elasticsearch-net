@@ -60,7 +60,7 @@ namespace Xunit
 			Console.WriteLine("--------");
 			var sb = new StringBuilder("build ");
 			if (runningIntegrations)
-				sb.Append("integrate")
+				sb.Append("integrate ")
 					.Append(TestClient.Configuration.ElasticsearchVersion)
 					.Append(" \"");
 			else sb.Append("test");
