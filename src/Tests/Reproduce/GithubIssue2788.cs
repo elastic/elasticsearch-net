@@ -34,7 +34,7 @@ namespace Tests.Reproduce
 			public TimeSpan EndTime { get; set; }
 		}
 
-		[I]
+		[SkipVersion("6.0.0-rc1", "inner hits will return to their old representation with rc2")]
 		public void CanDeserializeNumberToTimeSpanInInnerHits()
 		{
 			var indexName = "sample";

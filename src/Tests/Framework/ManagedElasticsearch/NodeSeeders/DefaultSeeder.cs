@@ -134,15 +134,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 				.Mappings(map => map
 					.Map<Project>(m => m
 						.AutoMap()
-						.Properties(p =>
-							ProjectProperties(p)
-								.Join(j => j
-									.Name(n => n.Join)
-									.Relations(r => r
-										.Join<Project, CommitActivity>()
-									)
-								)
-						)
+						.Properties(ProjectProperties)
 						.Properties<CommitActivity>(props => props
 							.Object<Developer>(o => o
 								.AutoMap()
@@ -206,6 +198,12 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 
 		public static PropertiesDescriptor<TProject> ProjectProperties<TProject>(PropertiesDescriptor<TProject> props)
 			where TProject : Project => props
+			.Join(j => j
+				.Name(n => n.Join)
+					.Relations(r => r
+					.Join<Project, CommitActivity>()
+				)
+			)
 			.Keyword(s => s
 				.Name(p => p.Name)
 				.Store()

@@ -223,7 +223,7 @@ namespace Tests.Search.Request
 			var option = suggest.Options.First();
 			option.Text.Should().NotBeNullOrEmpty();
 			option.Index.Should().Be("project");
-			option.Type.Should().Be("project");
+			option.Type.Should().Be("doc");
 			option.Id.Should().NotBeNull();
 			option.Source.Should().NotBeNull();
 			option.Source.Name.Should().NotBeNullOrWhiteSpace();

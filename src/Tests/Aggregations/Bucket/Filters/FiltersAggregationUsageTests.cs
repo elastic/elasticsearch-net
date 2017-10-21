@@ -6,6 +6,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 
@@ -52,6 +53,7 @@ namespace Tests.Aggregations.Bucket.Filters
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Index(DefaultSeeder.ProjectsAliasFilter)
 			.Aggregations(aggs => aggs
 				.Filters("projects_by_state", agg => agg
 					.OtherBucket()
@@ -68,7 +70,7 @@ namespace Tests.Aggregations.Bucket.Filters
 			);
 
 		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+			new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
 			{
 				Aggregations = new FiltersAggregation("projects_by_state")
 				{
@@ -117,9 +119,9 @@ namespace Tests.Aggregations.Bucket.Filters
 	/**[float]
 	*=== Anonymous filters
 	*/
-	public class AnonymousUsage : AggregationUsageTestBase
+	public class AnonymousFiltersUsage : AggregationUsageTestBase
 	{
-		public AnonymousUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public AnonymousFiltersUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{
@@ -145,6 +147,7 @@ namespace Tests.Aggregations.Bucket.Filters
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Index(DefaultSeeder.ProjectsAliasFilter)
 			.Aggregations(aggs => aggs
 				.Filters("projects_by_state", agg => agg
 					.OtherBucket()
@@ -160,7 +163,7 @@ namespace Tests.Aggregations.Bucket.Filters
 			);
 
 		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+			new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
 			{
 				Aggregations = new FiltersAggregation("projects_by_state")
 				{

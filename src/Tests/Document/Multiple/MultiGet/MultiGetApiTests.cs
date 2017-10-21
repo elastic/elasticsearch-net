@@ -204,7 +204,9 @@ namespace Tests.Document.Multiple.MultiGet
 				hit.Id.Should().NotBeNullOrWhiteSpace();
 				hit.Found.Should().BeTrue();
 				hit.Version.Should().Be(1);
-				hit.Parent.Should().NotBeNullOrEmpty();
+#pragma warning disable 618
+				hit.Parent.Should().BeNull();
+#pragma warning restore 618
 				hit.Routing.Should().NotBeNullOrEmpty();
 			}
 		}

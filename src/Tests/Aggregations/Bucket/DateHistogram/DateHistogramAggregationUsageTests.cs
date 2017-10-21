@@ -5,6 +5,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 
@@ -68,6 +69,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Index(DefaultSeeder.ProjectsAliasFilter)
 			.Size(0)
 			.Aggregations(aggs => aggs
 				.DateHistogram("projects_started_per_month", date => date
@@ -90,7 +92,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			);
 
 		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+			new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
 			{
 				Size = 0,
 				Aggregations = new DateHistogramAggregation("projects_started_per_month")

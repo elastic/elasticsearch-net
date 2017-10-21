@@ -12,6 +12,7 @@ namespace Nest
 		long? Version { get; }
 		string Routing { get; }
 		string Id { get; }
+		[Obsolete("No longer returned on indexes created in Elasticsearch 6.x and up")]
 		string Parent { get; }
 		T Source { get; }
 	}

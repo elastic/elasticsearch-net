@@ -30,6 +30,7 @@ namespace Nest
 		FieldValues Fields { get; }
 
 		[JsonProperty("_parent")]
+		[Obsolete("No longer returned on indices created in Elasticsearch 6.0")]
 		string Parent { get; }
 
 		[JsonProperty("_routing")]
