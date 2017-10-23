@@ -13,6 +13,8 @@ namespace Tests.Search.Search.Collapsing
 	 */
 	public class FieldCollapseUsageTests : SearchUsageTestBase
 	{
+		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search";
+
 		public FieldCollapseUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson => new
