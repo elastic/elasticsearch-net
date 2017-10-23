@@ -9,8 +9,20 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class RelationName : IEquatable<RelationName>, IUrlParameter
 	{
-		public string Name { get; set; }
-		public Type Type { get; set; }
+		private static int TypeHashCode { get; } = typeof(RelationName).GetHashCode();
+
+		public string Name { get; }
+		public Type Type { get; }
+
+		private RelationName(string type)
+		{
+			this.Name = type;
+		}
+
+		private RelationName(Type type)
+		{
+			this.Type = type;
+		}
 
 		internal string DebugDisplay => Type == null ? Name : $"{nameof(RelationName)} for typeof: {Type?.Name}";
 
@@ -18,18 +30,21 @@ namespace Nest
 
 		public static RelationName Create<T>() where T : class => GetRelationNameForType(typeof(T));
 
-		private static RelationName GetRelationNameForType(Type type) => new RelationName { Type = type };
+		private static RelationName GetRelationNameForType(Type type) => new RelationName(type);
 
 		public static implicit operator RelationName(string typeName) =>
-			typeName == null ? null : new RelationName { Name = typeName };
+			typeName == null ? null : new RelationName(typeName);
 
-		public static implicit operator RelationName(Type type) => type == null ? null : new RelationName { Type = type };
+		public static implicit operator RelationName(Type type) => type == null ? null : new RelationName(type);
 
 		public override int GetHashCode()
 		{
-			if (this.Name != null)
-				return this.Name.GetHashCode();
-			return this.Type?.GetHashCode() ?? 0;
+			unchecked
+			{
+				var result = TypeHashCode;
+				result = (result * 397) ^ (this.Name?.GetHashCode() ?? this.Type?.GetHashCode() ?? 0);
+				return result;
+			}
 		}
 
 		bool IEquatable<RelationName>.Equals(RelationName other) => Equals(other);
