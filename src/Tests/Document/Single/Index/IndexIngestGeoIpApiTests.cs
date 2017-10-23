@@ -93,6 +93,7 @@ namespace Tests.Document.Single.Index
 			new
 			{
 				name = CallIsolatedValue,
+				join = Document.Join,
 				leadDeveloper = new { iPAddress = "193.4.250.122", gender = "Male", id = 1 },
 				state = "Stable",
 				startedOn = FixedDate,

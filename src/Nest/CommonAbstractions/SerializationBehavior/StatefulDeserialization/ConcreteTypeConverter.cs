@@ -137,8 +137,10 @@ namespace Nest
 				Type = d._type,
 				Version = d._version,
 				Id = d._id,
+#pragma warning disable 618
 				Parent = d._parent,
-				Routing = d._routing,
+#pragma warning restore 618
+				Routing = d._routing ?? d._parent,
 				_Highlight = d.highlight is Dictionary<string, List<string>> ? d.highlight : null,
 				Explanation = d._explanation is Explanation ? d._explanation : null,
 				Nested = d._nested

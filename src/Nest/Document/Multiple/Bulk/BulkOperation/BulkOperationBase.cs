@@ -11,6 +11,7 @@ namespace Nest
 		public long? Version { get; set; }
 		public VersionType? VersionType { get; set; }
 		public string Routing { get; set; }
+		[Obsolete("This property is no longer available in indices created in Elasticsearch 6.x and up")]
 		public Id Parent { get; set; }
 		[Obsolete("This property is no longer returned on indices created in Elasticsearch 5.x and up")]
 		public long? Timestamp { get; set; }

@@ -415,7 +415,7 @@ namespace Tests.Aggregations.Bucket.Terms
 	 *
 	 * A terms aggregation on a numeric field
 	 */
-	public class NumericTermsAggregationUsageTests : AggregationUsageTestBase
+	public class NumericTermsAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		public NumericTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

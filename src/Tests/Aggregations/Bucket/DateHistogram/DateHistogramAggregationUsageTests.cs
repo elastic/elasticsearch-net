@@ -22,7 +22,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-datehistogram-aggregation.html[Date Histogram Aggregation].
 	*/
-	public class DateHistogramAggregationUsageTests : AggregationUsageTestBase
+	public class DateHistogramAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		public DateHistogramAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

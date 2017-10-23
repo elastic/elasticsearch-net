@@ -49,6 +49,7 @@ namespace Tests.Document.Single.Create
 			new
 			{
 				name = CallIsolatedValue,
+				join = Document.Join,
 				state = "Stable",
 				startedOn = FixedDate,
 				lastActivity = FixedDate,
