@@ -55,8 +55,10 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("_shards")]
 		ShardsMetaData Shards { get; }
+
 		[JsonProperty("_seq_no")]
 		long SequenceNumber { get; }
+		
 		[JsonProperty("_primary_term")]
 		long PrimaryTerm { get; }
 
