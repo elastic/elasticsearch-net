@@ -105,7 +105,11 @@ namespace Nest
 						Id = hit.Id,
 						Routing = hit.Routing,
 					};
-					if (hit.Parent != null) item.Parent = hit.Parent;
+#pragma warning disable 618
+					//if the source still has parent provide it as a routing key instead
+					if (hit.Parent != null)
+						item.Routing = hit.Parent;
+#pragma warning restore 618
 					bulk.AddOperation(item);
 				}
 			};

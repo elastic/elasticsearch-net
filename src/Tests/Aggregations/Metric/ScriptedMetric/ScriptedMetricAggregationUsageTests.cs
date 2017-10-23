@@ -10,7 +10,7 @@ using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 
 namespace Tests.Aggregations.Metric.ScriptedMetric
 {
-	public class ScriptedMetricAggregationUsageTests : AggregationUsageTestBase
+	public class ScriptedMetricAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		class Scripted
 		{
@@ -83,7 +83,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 	/// <summary>
 	/// Multiple scripted metric with dictionary result
 	/// </summary>
-	public class ScriptedMetricMultiAggregationTests : AggregationUsageTestBase
+	public class ScriptedMetricMultiAggregationTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		class Scripted
 		{

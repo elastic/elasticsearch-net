@@ -23,7 +23,7 @@ namespace Tests.Aggregations.Bucket.Filters
 	/**[float]
 	* === Named filters
 	*/
-	public class FiltersAggregationUsageTests : AggregationUsageTestBase
+	public class FiltersAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		public FiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -119,7 +119,7 @@ namespace Tests.Aggregations.Bucket.Filters
 	/**[float]
 	*=== Anonymous filters
 	*/
-	public class AnonymousFiltersUsage : AggregationUsageTestBase
+	public class AnonymousFiltersUsage : ProjectsOnlyAggregationUsageTestBase
 	{
 		public AnonymousFiltersUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

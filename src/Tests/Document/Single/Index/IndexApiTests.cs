@@ -25,9 +25,7 @@ namespace Tests.Document.Single.Index
 			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}},
 		};
 
-		public IndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public IndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Index<Project>(this.Document, f),
@@ -49,6 +47,7 @@ namespace Tests.Document.Single.Index
 			new
 			{
 				name = CallIsolatedValue,
+				join = Document.Join,
 				state = "Stable",
 				startedOn = FixedDate,
 				lastActivity = FixedDate,
