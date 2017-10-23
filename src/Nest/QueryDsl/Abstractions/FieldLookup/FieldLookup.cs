@@ -49,8 +49,8 @@ namespace Nest
 
 		public FieldLookupDescriptor()
 		{
-			Self.Type = new TypeName { Type = this._ClrType };
-			Self.Index = new IndexName { Type = this._ClrType };
+			Self.Type = this._ClrType;
+			Self.Index = this._ClrType;
 		}
 
 		public FieldLookupDescriptor<T> Index(IndexName index) => Assign(a => a.Index = index);
