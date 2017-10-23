@@ -157,11 +157,11 @@ namespace Tests.Document.Multiple.Reindex
 
 			var originalIndexCount = this._client.Count<CommitActivity>(c => c
 				.Index(IndexName)
-				.Query(q => q.Join<CommitActivity>(p => p.Join))
+				.Query(q => q.HasRelationName<CommitActivity>(p => p.Join))
 			);
 			var newIndexCount = this._client.Count<CommitActivity>(c => c
 				.Index(NewManyTypesIndexName)
-				.Query(q => q.Join<CommitActivity>(p => p.Join))
+				.Query(q => q.HasRelationName<CommitActivity>(p => p.Join))
 			);
 
 			originalIndexCount.Count.Should().BeGreaterThan(0).And.Be(newIndexCount.Count);
@@ -171,7 +171,7 @@ namespace Tests.Document.Multiple.Reindex
 				.Index(NewManyTypesIndexName)
 				.From(0)
 				.Size(100)
-				.Query(q => q.Join<CommitActivity>(p=>p.Join))
+				.Query(q => q.HasRelationName<CommitActivity>(p=>p.Join))
 				.Scroll(scroll)
 			);
 
@@ -201,12 +201,12 @@ namespace Tests.Document.Multiple.Reindex
 			var refresh = this._client.Refresh(NewProjectionIndex);
 			var originalIndexCount = this._client.Count<CommitActivity>(c => c
 				.Index(IndexName)
-				.Query(q=>q.Join<CommitActivity>(p => p.Join))
+				.Query(q=>q.HasRelationName<CommitActivity>(p => p.Join))
 			);
 
 			var newIndexSearch = this._client.Search<CommitActivity>(c => c
 				.Index(NewProjectionIndex)
-				.Query(q=>q.Join<CommitActivity>(p => p.Join))
+				.Query(q=>q.HasRelationName<CommitActivity>(p => p.Join))
 			);
 
 			originalIndexCount.Count.Should().BeGreaterThan(0).And.Be(newIndexSearch.Total);
