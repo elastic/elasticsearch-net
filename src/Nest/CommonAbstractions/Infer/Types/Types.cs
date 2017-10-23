@@ -37,8 +37,8 @@ namespace Nest
 			}
 		}
 
-		internal Types(Types.AllTypesMarker all) : base(all) { }
-		internal Types(Types.ManyTypes types) : base(types) { }
+		internal Types(AllTypesMarker all) : base(all) { }
+		internal Types(ManyTypes types) : base(types) { }
 		internal Types(IEnumerable<TypeName> types) : base(new ManyTypes(types)) { }
 
 		public static TypeName Type(TypeName type) => type;
