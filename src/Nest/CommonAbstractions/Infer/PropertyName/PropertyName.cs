@@ -10,6 +10,8 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class PropertyName : IEquatable<PropertyName>, IUrlParameter
 	{
+		private static int TypeHashCode { get; } = typeof(PropertyName).GetHashCode();
+
 		public string Name { get; }
 		public Expression Expression { get; }
 		public PropertyInfo Property { get; }
@@ -45,28 +47,20 @@ namespace Nest
 			_type = property.DeclaringType;
 		}
 
-		public static implicit operator PropertyName(string name)
-		{
-			return name == null ? null : new PropertyName(name);
-		}
+		public static implicit operator PropertyName(string name) => name == null ? null : new PropertyName(name);
 
-		public static implicit operator PropertyName(Expression expression)
-		{
-			return expression == null ? null : new PropertyName(expression);
-		}
+		public static implicit operator PropertyName(Expression expression) => expression == null ? null : new PropertyName(expression);
 
-		public static implicit operator PropertyName(PropertyInfo property)
-		{
-			return property == null ? null : new PropertyName(property);
-		}
+		public static implicit operator PropertyName(PropertyInfo property) => property == null ? null : new PropertyName(property);
 
 		public override int GetHashCode()
 		{
 			unchecked
 			{
-				var hashCode = _comparisonValue?.GetHashCode() ?? 0;
-				hashCode = (hashCode * 397) ^ (_type?.GetHashCode() ?? 0);
-				return hashCode;
+				var result = TypeHashCode;
+				result = (result * 397) ^ (_comparisonValue?.GetHashCode() ?? 0);
+				result = (result * 397) ^ (_type?.GetHashCode() ?? 0);
+				return result;
 			}
 		}
 
@@ -85,15 +79,9 @@ namespace Nest
 			return this.Equals(obj as PropertyName);
 		}
 
-		public static bool operator ==(PropertyName x, PropertyName y)
-		{
-			return Equals(x, y);
-		}
+		public static bool operator ==(PropertyName x, PropertyName y) => Equals(x, y);
 
-		public static bool operator !=(PropertyName x, PropertyName y)
-		{
-			return !(x == y);
-		}
+		public static bool operator !=(PropertyName x, PropertyName y) => !(x == y);
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{

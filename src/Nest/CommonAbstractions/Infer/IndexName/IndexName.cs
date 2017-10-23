@@ -8,17 +8,36 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class IndexName : IEquatable<IndexName>, IUrlParameter
 	{
+		private static int TypeHashCode { get; } = typeof(IndexName).GetHashCode();
+
 		private static readonly char[] ClusterSeparator = {':'};
 		internal string DebugDisplay => Type == null ? Name : $"{nameof(IndexName)} for typeof: {Type?.Name}";
 
-		//TODO 6.0 make setters private and use constructor
-		public string Cluster { get; set; }
-		public string Name { get; set; }
-		public Type Type { get; set; }
+		public string Cluster { get; }
+		public string Name { get; }
+		public Type Type { get; }
+
+		private IndexName(string index, string cluster = null)
+		{
+			this.Name = index?.Trim();
+			this.Cluster = cluster?.Trim();
+		}
+		private IndexName(Type type, string cluster = null)
+		{
+			this.Type = type;
+			this.Cluster = cluster?.Trim();
+		}
+		private IndexName(string index, Type type, string cluster = null)
+		{
+			this.Name = index;
+			this.Type = type;
+			this.Cluster = cluster?.Trim();
+		}
 
 		public static IndexName From<T>() => typeof(T);
 		public static IndexName From<T>(string clusterName) => From(typeof(T), clusterName);
-		private static IndexName From(Type t, string clusterName) => new IndexName { Type = t, Cluster = clusterName};
+		private static IndexName From(Type t, string clusterName) => new IndexName(t, clusterName);
+		public static IndexName Rebuild(string index, Type t, string clusterName = null) => new IndexName(index, t, clusterName);
 
 		public Indices And<T>() => new Indices(new[] { this, typeof(T) });
 		public Indices And<T>(string clusterName) => new Indices(new[] { this, From(typeof(T), clusterName) });
@@ -29,12 +48,12 @@ namespace Nest
 			if (string.IsNullOrWhiteSpace(indexName)) return null;
 			var tokens = indexName.Split(ClusterSeparator, 2, StringSplitOptions.RemoveEmptyEntries);
 			return tokens.Length == 1
-				? new IndexName { Name = tokens[0].Trim() }
-				: new IndexName { Name = tokens[1].Trim(), Cluster = tokens[0].Trim() };
+				? new IndexName(tokens[0])
+				: new IndexName(tokens[1],tokens[0]);
 		}
 
 		public static implicit operator IndexName(string indexName) => Parse(indexName);
-		public static implicit operator IndexName(Type type) => type == null ? null : new IndexName { Type = type };
+		public static implicit operator IndexName(Type type) => type == null ? null : new IndexName(type);
 
 		bool IEquatable<IndexName>.Equals(IndexName other) => EqualsMarker(other);
 
@@ -50,9 +69,10 @@ namespace Nest
 		{
 			unchecked
 			{
-				var hashCode = this.Name?.GetHashCode() ?? this.Type?.GetHashCode() ?? 0;
-				hashCode = (hashCode * 397) ^ (this.Cluster?.GetHashCode() ?? 0);
-				return hashCode;
+				var result = TypeHashCode;
+				result = (result * 397) ^ (this.Name?.GetHashCode() ?? this.Type?.GetHashCode() ?? 0);
+				result = (result * 397) ^ (this.Cluster?.GetHashCode() ?? 0);
+				return result;
 			}
 		}
 
@@ -65,12 +85,12 @@ namespace Nest
 		private string PrefixClusterName(string name) => PrefixClusterName(this, name);
 		private static string PrefixClusterName(IndexName i, string name) => i.Cluster.IsNullOrEmpty() ? name : $"{i.Cluster}:{name}";
 
-		public bool EqualsString(string other)
+		private bool EqualsString(string other)
 		{
 			return !other.IsNullOrEmpty() && other == PrefixClusterName(this.Name);
 		}
 
-		public bool EqualsMarker(IndexName other)
+		private bool EqualsMarker(IndexName other)
 		{
 			if (!this.Name.IsNullOrEmpty() && other != null && !other.Name.IsNullOrEmpty())
 				return EqualsString(PrefixClusterName(other,other.Name));
