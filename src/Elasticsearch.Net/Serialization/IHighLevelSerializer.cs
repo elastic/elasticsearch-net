@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Reflection;
 using System.Threading;
@@ -9,10 +10,12 @@ namespace Elasticsearch.Net
 	public interface IElasticsearchSerializer
 	{
 		T Deserialize<T>(Stream stream);
+		object Deserialize(Type type, Stream stream);
 
-		Task<T> DeserializeAsync<T>(Stream responseStream, CancellationToken cancellationToken = default(CancellationToken));
+		Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken));
+		Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken));
 
-		void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented);
+		void Serialize(object data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented);
 	}
 
 

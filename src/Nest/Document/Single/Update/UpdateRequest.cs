@@ -13,6 +13,7 @@ namespace Nest
 		IScript Script { get; set; }
 
 		[JsonProperty(PropertyName = "upsert")]
+		[JsonConverter(typeof(SourceConverter))]
 		TDocument Upsert { get; set; }
 
 		[JsonProperty(PropertyName = "doc_as_upsert")]
@@ -26,6 +27,7 @@ namespace Nest
 		bool? ScriptedUpsert { get; set; }
 
 		[JsonProperty(PropertyName = "doc")]
+		[JsonConverter(typeof(SourceConverter))]
 		TPartialDocument Doc { get; set; }
 
 		[JsonProperty(PropertyName = "detect_noop")]

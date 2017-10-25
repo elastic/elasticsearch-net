@@ -93,7 +93,7 @@ namespace Nest
 			var defaultSerializer = new JsonNetSerializer(this);
 			this._sourceSerializer = sourceSerializer ?? defaultSerializer;
 			this._requestResponseSerializer = defaultSerializer;
-			this._propertyMappingProvider = propertyMappingProvider ?? new PropertyMappingProvider(this);
+			this._propertyMappingProvider = propertyMappingProvider ?? new PropertyMappingProvider();
 
 			this._defaultTypeNameInferrer = (t => t.Name.ToLowerInvariant());
 			this._defaultFieldNameInferrer = (p => p.ToCamelCase());

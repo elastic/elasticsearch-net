@@ -15,7 +15,7 @@ namespace Tests.Framework
 {
 	public abstract class SerializationTestBase
 	{
-		protected virtual bool NoClientSerialize { get; }
+		protected virtual bool NoClientSerializeOfExpected { get; }
 		protected virtual object ExpectJson { get; }
 		protected virtual bool SupportsDeserialization { get; set; } = true;
 
@@ -24,31 +24,31 @@ namespace Tests.Framework
 		protected JToken _expectedJsonJObject;
 
 		protected Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier = null;
+		protected IPropertyMappingProvider _propertyMappingProvider;
 		protected IElasticsearchSerializer _sourceSerializer;
-		private static readonly JsonSerializerSettings NullValueSettings = new JsonSerializerSettings {NullValueHandling = NullValueHandling.Include};
+		protected static readonly JsonSerializerSettings NullValueSettings = new JsonSerializerSettings {NullValueHandling = NullValueHandling.Include};
 
 		protected IElasticsearchSerializer Serializer => Client.Serializer;
+		protected IElasticsearchSerializer RequestResponseSerializer => Client.ConnectionSettings.RequestResponseSerializer;
 
 		protected virtual IElasticClient Client =>
-			_connectionSettingsModifier == null && _sourceSerializer == null
+			_connectionSettingsModifier == null && _sourceSerializer == null && this._propertyMappingProvider == null
 			? TestClient.DefaultInMemoryClient
-			: TestClient.GetInMemoryClientWithSerializerFactory(_connectionSettingsModifier, _sourceSerializer);
+			: TestClient.GetInMemoryClientWithSourceSerializer(_connectionSettingsModifier, _sourceSerializer);
 
 		protected SerializationTestBase()
 		{
 			SetupSerialization();
 		}
 
-		protected SerializationTestBase(ClusterBase cluster)
-		{
-		}
+		protected SerializationTestBase(ClusterBase cluster) { }
 
 		protected TObject Deserialize<TObject>(string json) =>
-			Serializer.Deserialize<TObject>(new MemoryStream(Encoding.UTF8.GetBytes(json)));
+			RequestResponseSerializer.Deserialize<TObject>(new MemoryStream(Encoding.UTF8.GetBytes(json)));
 
 		protected string Serialize<TObject>(TObject o)
 		{
-			var bytes = Serializer.SerializeToBytes(o);
+			var bytes = RequestResponseSerializer.SerializeToBytes(o);
 			return Encoding.UTF8.GetString(bytes);
 		}
 
@@ -57,7 +57,7 @@ namespace Tests.Framework
 			var o = this.ExpectJson;
 			if (o == null) return;
 
-			this._expectedJsonString = this.NoClientSerialize
+			this._expectedJsonString = this.NoClientSerializeOfExpected
 				? JsonConvert.SerializeObject(o, Formatting.None, NullValueSettings)
 				: this.Serialize(o);
 			this._expectedJsonJObject = JToken.Parse(this._expectedJsonString);

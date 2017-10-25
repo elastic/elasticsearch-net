@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(IndexJsonConverter))]
+	[ContractJsonConverter(typeof(IndexJsonConverter))]
 	public partial interface IIndexRequest : IRequest<IndexRequestParameters>, IUntypedDocumentRequest { }
 
 	public partial interface IIndexRequest<TDocument> : IIndexRequest where TDocument : class

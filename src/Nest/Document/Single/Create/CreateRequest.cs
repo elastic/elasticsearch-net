@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CreateJsonConverter))]
+	[ContractJsonConverter(typeof(CreateJsonConverter))]
 	public interface ICreateRequest : IRequest<CreateRequestParameters>, IUntypedDocumentRequest {}
 
 	public partial interface ICreateRequest<TDocument> : ICreateRequest where TDocument : class

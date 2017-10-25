@@ -25,7 +25,7 @@ namespace Tests.Search
 	public class RoleMappingRulesTests : SerializationTestBase
 	{
 		//this serializes the expected json in a way that preserves null values
-		protected override bool NoClientSerialize => true;
+		protected override bool NoClientSerializeOfExpected => true;
 
 
         /**==== Rule Conjunction

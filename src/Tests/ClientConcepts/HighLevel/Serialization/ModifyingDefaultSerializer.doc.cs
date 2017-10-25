@@ -3,150 +3,186 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Tests.Framework;
 using Tests.Framework.MockData;
+using Xunit.Sdk;
+using static Tests.Framework.RoundTripper;
 
 namespace Tests.ClientConcepts.HighLevel.Serialization
 {
     public class ModifyingTheDefaultSerializer
     {
-        /**[[modifying-default-serializer]]
-         * === Modifying the default serializer
-         *
-         * In <<changing-serializers, Changing serializers>>, you saw how it is possible to provide your own serializer
-         * implementation to NEST. A more common scenario is the desire to change the settings on the default JSON.Net
-         * serializer.
-         *
-         * There are a couple of ways in which this can be done, depending on what it is you need to change.
-         *
-         * ==== Modifying settings using SerializerFactory
-         *
-         * The default implementation of `ISerializerFactory` allows a delegate to be passed that can change
-         * the settings for JSON.Net serializers created by the factory
-         *
-         */
-        public void ModifyingJsonNetSettings()
-        {
-            var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-            var connection = new HttpConnection();
-//            var connectionSettings =
-//                new ConnectionSettings(pool, connection, new SerializerFactory((settings, values) => // <1> delegate will be passed `JsonSerializerSettings` and `IConnectionSettingsValues`
-//                {
-//                    settings.NullValueHandling = NullValueHandling.Include;
-//                    settings.TypeNameHandling = TypeNameHandling.Objects;
-//                }));
-//
-//            var client = new ElasticClient(connectionSettings);
-        }
+	    public class CustomSerializer : IElasticsearchSerializer
+	    {
+			private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
+			protected virtual int BufferSize => 1024;
 
-        /**
-         * Here, the JSON.Net serializer is configured to *always* serialize `null` values and
-         * include the .NET type name when serializing to a JSON object structure.
-         *
-         * ==== Modifying settings using a custom ISerializerFactory
-         *
-         * If you need more control than passing a delegate to `SerializerFactory` provides, you can also
-         * implement your own `ISerializerFactory` and derive an `IElasticsearchSerializer` from the
-         * default `JsonNetSerializer`.
-         *
-         * Here's an example of doing so that effectively achieves the same configuration as in the previous example.
-         * First, the custom factory and serializer are implemented
-         */
-//        public class CustomJsonNetSerializerFactory : ISerializerFactory
-//        {
-//            public IHighLevelSerializer Create(IConnectionSettingsValues settings)
-//            {
-//                return new CustomJsonNetSerializer(settings);
-//            }
-//            public IHighLevelSerializer CreateStateful(IConnectionSettingsValues settings, JsonConverter converter)
-//            {
-//                return new CustomJsonNetSerializer(settings, converter);
-//            }
-//        }
-//
-//        public class CustomJsonNetSerializer : JsonNetSerializer
-//        {
-//            public CustomJsonNetSerializer(IConnectionSettingsValues settings) : base(settings)
-//            {
-//                base.OverwriteDefaultSerializers(ModifyJsonSerializerSettings);
-//            }
-//            public CustomJsonNetSerializer(IConnectionSettingsValues settings, JsonConverter statefulConverter) :
-//                base(settings, statefulConverter)
-//            {
-//                base.OverwriteDefaultSerializers(ModifyJsonSerializerSettings);
-//            }
-//
-//            private void ModifyJsonSerializerSettings(JsonSerializerSettings settings, IConnectionSettingsValues connectionSettings)
-//            {
-//                settings.NullValueHandling = NullValueHandling.Include;
-//                settings.TypeNameHandling = TypeNameHandling.Objects;
-//            }
-//        }
+		    private readonly JsonSerializer _serializer;
+		    private readonly JsonSerializer _collapsedSerializer;
 
-        /**
-         * Then, create a new instance of the factory to `ConnectionSettings`
-         */
-        public void ModifyingJsonNetSettingsWithCustomSerializer()
-        {
-//            var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-//            var connection = new HttpConnection();
-//            var connectionSettings =
-//                new ConnectionSettings(pool, connection, new CustomJsonNetSerializerFactory());
-//
-//            var client = new ElasticClient(connectionSettings);
-        }
+		    public CustomSerializer(Func<JsonSerializerSettings> settings)
+		    {
+			    var contract = new DefaultContractResolver();
+			    _serializer = CreateSerializer(settings, contract, SerializationFormatting.Indented);
+			    _collapsedSerializer = CreateSerializer(settings, contract, SerializationFormatting.None);
+		    }
 
-        /**[IMPORTANT]
-         * ====
-         * Any custom serializer that derives from `JsonNetSerializer` wishing to change the settings for the JSON.Net
-         * serializer, must do so using the `OverwriteDefaultSerializers` method in the constructor of the derived
-         * serializer.
-         *
-         * NEST includes many custom changes to the http://www.newtonsoft.com/json/help/html/ContractResolver.htm[`IContractResolver`] that the JSON.Net serializer uses to resolve
-         * serialization contracts for types. Examples of such changes are:
-         *
-         * - Allowing contracts for concrete types to be _inherited_ from interfaces that they implement
-         * - Special handling of dictionaries to ensure dictionary keys are serialized verbatim
-         * - Explicitly implemented interface properties are serialized in requests
-         *
-         * It's important therefore that these changes to `IContractResolver` are not overwritten by a serializer derived
-         * from `JsonNetSerializer`.
-         * ====
-         */
+		    private static JsonSerializer CreateSerializer(
+			    Func<JsonSerializerSettings> settings, IContractResolver contract, SerializationFormatting formatting)
+		    {
+			    var s = settings();
+			    s.Formatting = formatting == SerializationFormatting.Indented ? Formatting.Indented : Formatting.None;
+			    s.ContractResolver = contract;
+			    return JsonSerializer.Create(s);
+		    }
 
-         /**
-         * ==== Adding contract JsonConverters
-         *
-         * If you want to register custom json converters without attributing your classes you can register
-         * Functions that given a type return a JsonConverter. This is cached as part of the types json contract so once
-         * Json.NET knows a type has a certain converter it won't ask anymore for the duration of the application.
-         *
-         * Override `ContractConverters` getter property and have it return a list of these functions
-         */
-//        public class CustomContractsJsonNetSerializer : CustomJsonNetSerializer
-//        {
-//            public CustomContractsJsonNetSerializer(IConnectionSettingsValues settings) : base(settings) { }
-//            public CustomContractsJsonNetSerializer(IConnectionSettingsValues settings, JsonConverter statefulConverter)
-//	            : base(settings, statefulConverter) { }
-//
-//	        protected override IList<Func<Type, JsonConverter>> ContractConverters { get; } = new List<Func<Type, JsonConverter>>
-//	        {
-//		        ((t) => t == typeof(Project) ? new MyCustomJsonConverter() : null)
-//	        };
-//        }
-//
-//	    public class MyCustomJsonConverter : JsonConverter
-//	    {
-//		    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
-//
-//		    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) => null;
-//
-//		    public override bool CanConvert(Type objectType) => false;
-//	    }
-    }
+		    public T Deserialize<T>(Stream stream)
+		    {
+            	using (var streamReader = new StreamReader(stream))
+                using (var jsonTextReader = new JsonTextReader(streamReader))
+                    return _serializer.Deserialize<T>(jsonTextReader);
+		    }
+
+		    public object Deserialize(Type type, Stream stream)
+		    {
+            	using (var streamReader = new StreamReader(stream))
+                using (var jsonTextReader = new JsonTextReader(streamReader))
+                    return _serializer.Deserialize(jsonTextReader, type);
+		    }
+
+		    public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = new CancellationToken())
+		    {
+			    var o = this.Deserialize<T>(stream);
+			    return Task.FromResult(o);
+		    }
+
+		    public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = new CancellationToken())
+		    {
+			    var o = this.Deserialize(type, stream);
+			    return Task.FromResult(o);
+		    }
+
+		    public void Serialize(object data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented)
+		    {
+				using (var writer = new StreamWriter(stream, ExpectedEncoding, BufferSize, leaveOpen: true))
+				using (var jsonWriter = new JsonTextWriter(writer))
+					(formatting == SerializationFormatting.Indented ? _serializer : _collapsedSerializer)
+						.Serialize(jsonWriter, data);
+		    }
+	    }
+
+	    public class ADocument
+	    {
+		    public int Id { get; set; } = 1;
+		    public string Name { get; set; }
+	    }
+
+	    private object DefaultSerialized = new {id = 1};
+	    private Dictionary<string, object> IncludesNullAndSource = new Dictionary<string, object>
+	    {
+		    {"$type", $"{typeof(ADocument).FullName}, Tests"},
+		    {"Name", null},
+		    {"Id", 1},
+	    };
+
+	    private void CanAlterSource<T>(Func<IElasticClient, T> call, object usingDefaults, object withSourceSerializer)
+	    	where T : IResponse
+	    {
+			Expect(usingDefaults).FromRequest(call);
+
+		    var settings = new JsonSerializerSettings
+		    {
+			    TypeNameHandling = TypeNameHandling.All,
+			    NullValueHandling = NullValueHandling.Include
+		    };
+
+		    WithSourceSerializer(new CustomSerializer(() => settings))
+			    .Expect(withSourceSerializer)
+			    .FromRequest(call);
+	    }
+
+	    [U] public void IndexRequest()
+	    {
+		    CanAlterSource(
+			    r => r.Index(new ADocument()),
+			    usingDefaults: DefaultSerialized,
+			    withSourceSerializer: IncludesNullAndSource
+			);
+	    }
+
+	    [U] public void CreateRequest()
+	    {
+		    CanAlterSource(
+			    r => r.Create(new ADocument()),
+			    usingDefaults: DefaultSerialized,
+			    withSourceSerializer: IncludesNullAndSource
+			);
+
+	    }
+	    [U] public void UpdateRequest()
+	    {
+		    var doc = new ADocument();
+		    CanAlterSource(
+			    r => r.Update<ADocument>(doc, u => u
+					.Doc(doc)
+			    	.Upsert(doc)
+			   ),
+			    usingDefaults: new
+			    {
+				    doc = DefaultSerialized,
+				    upsert = DefaultSerialized,
+			    },
+			    withSourceSerializer: new
+			    {
+				    doc = IncludesNullAndSource,
+				    upsert = IncludesNullAndSource,
+			    }
+			);
+	    }
+	    [U] public void TermVectorRequest()
+	    {
+		    var doc = new ADocument();
+		    CanAlterSource(
+			    r => r.TermVectors<ADocument>(t => t
+					.Document(doc)
+			   ),
+			    usingDefaults: new { doc = DefaultSerialized },
+			    withSourceSerializer: new { doc = IncludesNullAndSource }
+			);
+	    }
+
+	    private static IEnumerable<object> ExpectBulk(object document)
+	    {
+		    yield return new { delete = new { _index = "default-index", _type = "adocument", _id = "1" } };
+		    yield return new { index = new { _index = "default-index", _type = "adocument", _id = "1" } };
+		    yield return document;
+		    yield return new { create = new { _index = "default-index", _type = "adocument", _id = "1" } };
+		    yield return document;
+		    yield return new { update = new { _index = "default-index", _type = "adocument", _id = "1" } };
+		    yield return new { doc = document, upsert = document };
+	    }
+
+	    [U] public void BulkRequest()
+	    {
+		    var doc = new ADocument();
+		    CanAlterSource(
+			    r => r.Bulk(b => b
+				    .Delete<ADocument>(i => i.Document(doc))
+				    .Index<ADocument>(i => i.Document(doc))
+				    .Create<ADocument>(i => i.Document(doc))
+				    .Update<ADocument>(i => i.Doc(doc).Upsert(doc))
+			    ),
+			    usingDefaults: ExpectBulk(DefaultSerialized).ToArray(),
+			    withSourceSerializer: ExpectBulk(IncludesNullAndSource).ToArray()
+			);
+	    }
+   }
 }
