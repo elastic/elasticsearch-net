@@ -39,8 +39,7 @@ namespace Tests.Document.Multiple.Bulk
 			_largeResponse = serializer.SerializeToBytes(ReturnBulkResponse(1000));
 			_hugeResponse = serializer.SerializeToBytes(ReturnBulkResponse(100000));
 
-			var property = typeof(JsonNetSerializer).GetProperty("Serializer", BindingFlags.NonPublic | BindingFlags.Instance);
-			_jsonSerializer = (JsonSerializer)property.GetValue(Client.Serializer);
+			_jsonSerializer = new JsonSerializer();
 		}
 
 		[Benchmark(Description = "deserialize 1 item in bulk response")]

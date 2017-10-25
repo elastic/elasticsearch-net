@@ -42,7 +42,7 @@ namespace Tests.ClientConcepts.Serializer
 		/// Unspecified = None
 		/// Utc = UTC Timezone identifier
 		/// Local = Local Timezone offset
-		/// Offset = Timezone offset specified 
+		/// Offset = Timezone offset specified
 		/// </remarks>
 		[U]
 		public void RoundTripKind()
@@ -105,7 +105,7 @@ namespace Tests.ClientConcepts.Serializer
 
 			// The deserialized local will be the UTC DateTime + the local timezone offset,
 			// and with a DateTimeKind of UTC when deserialized.
-			// 
+			//
 			// Calling .ToLocalTime() will return DepartureDateLocal with correct
 			// local datetime and DateTimeKind.Local
 			flight.DepartureDateLocal.Should().Be(departureDateLocalInUtc);
@@ -203,34 +203,36 @@ namespace Tests.ClientConcepts.Serializer
 
 		private string SerializeUsing(DateTimeZoneHandling handling)
 		{
-			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-			var settings = new ConnectionSettings(pool, new InMemoryConnection(), new SerializerFactory(
-					(serializerSettings, connectionSettings) =>
-					{
-						serializerSettings.DateTimeZoneHandling = handling;
-						serializerSettings.Formatting = Formatting.Indented;
-					}))
-				.DefaultFieldNameInferrer(p => p);
-
-			var client = new ElasticClient(settings);
-			return client.Serializer.SerializeToString(_flight);
+			throw new NotImplementedException();
+//			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+//			var settings = new ConnectionSettings(pool, new InMemoryConnection(), new SerializerFactory(
+//					(serializerSettings, connectionSettings) =>
+//					{
+//						serializerSettings.DateTimeZoneHandling = handling;
+//						serializerSettings.Formatting = Formatting.Indented;
+//					}))
+//				.DefaultFieldNameInferrer(p => p);
+//
+//			var client = new ElasticClient(settings);
+//			return client.Serializer.SerializeToString(_flight);
 		}
 
 		private Flight DeserializeUsing(string json, DateTimeZoneHandling handling)
 		{
-			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-			var settings = new ConnectionSettings(pool, new InMemoryConnection(), new SerializerFactory(
-					(serializerSettings, connectionSettings) =>
-					{
-						serializerSettings.DateTimeZoneHandling = handling;
-					}))
-				.DefaultFieldNameInferrer(p => p);
-
-			var client = new ElasticClient(settings);
-			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
-			{
-				return client.Serializer.Deserialize<Flight>(stream);
-			}
+			throw new NotImplementedException();
+//			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+//			var settings = new ConnectionSettings(pool, new InMemoryConnection(), new SerializerFactory(
+//					(serializerSettings, connectionSettings) =>
+//					{
+//						serializerSettings.DateTimeZoneHandling = handling;
+//					}))
+//				.DefaultFieldNameInferrer(p => p);
+//
+//			var client = new ElasticClient(settings);
+//			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+//			{
+//				return client.Serializer.Deserialize<Flight>(stream);
+//			}
 		}
 	}
 

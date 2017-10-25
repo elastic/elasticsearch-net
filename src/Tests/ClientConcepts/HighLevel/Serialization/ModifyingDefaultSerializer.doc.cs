@@ -34,14 +34,14 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
         {
             var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
             var connection = new HttpConnection();
-            var connectionSettings =
-                new ConnectionSettings(pool, connection, new SerializerFactory((settings, values) => // <1> delegate will be passed `JsonSerializerSettings` and `IConnectionSettingsValues`
-                {
-                    settings.NullValueHandling = NullValueHandling.Include;
-                    settings.TypeNameHandling = TypeNameHandling.Objects;
-                }));
-
-            var client = new ElasticClient(connectionSettings);
+//            var connectionSettings =
+//                new ConnectionSettings(pool, connection, new SerializerFactory((settings, values) => // <1> delegate will be passed `JsonSerializerSettings` and `IConnectionSettingsValues`
+//                {
+//                    settings.NullValueHandling = NullValueHandling.Include;
+//                    settings.TypeNameHandling = TypeNameHandling.Objects;
+//                }));
+//
+//            var client = new ElasticClient(connectionSettings);
         }
 
         /**
@@ -57,48 +57,48 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
          * Here's an example of doing so that effectively achieves the same configuration as in the previous example.
          * First, the custom factory and serializer are implemented
          */
-        public class CustomJsonNetSerializerFactory : ISerializerFactory
-        {
-            public IElasticsearchSerializer Create(IConnectionSettingsValues settings)
-            {
-                return new CustomJsonNetSerializer(settings);
-            }
-            public IElasticsearchSerializer CreateStateful(IConnectionSettingsValues settings, JsonConverter converter)
-            {
-                return new CustomJsonNetSerializer(settings, converter);
-            }
-        }
-
-        public class CustomJsonNetSerializer : JsonNetSerializer
-        {
-            public CustomJsonNetSerializer(IConnectionSettingsValues settings) : base(settings)
-            {
-                base.OverwriteDefaultSerializers(ModifyJsonSerializerSettings);
-            }
-            public CustomJsonNetSerializer(IConnectionSettingsValues settings, JsonConverter statefulConverter) :
-                base(settings, statefulConverter)
-            {
-                base.OverwriteDefaultSerializers(ModifyJsonSerializerSettings);
-            }
-
-            private void ModifyJsonSerializerSettings(JsonSerializerSettings settings, IConnectionSettingsValues connectionSettings)
-            {
-                settings.NullValueHandling = NullValueHandling.Include;
-                settings.TypeNameHandling = TypeNameHandling.Objects;
-            }
-        }
+//        public class CustomJsonNetSerializerFactory : ISerializerFactory
+//        {
+//            public IHighLevelSerializer Create(IConnectionSettingsValues settings)
+//            {
+//                return new CustomJsonNetSerializer(settings);
+//            }
+//            public IHighLevelSerializer CreateStateful(IConnectionSettingsValues settings, JsonConverter converter)
+//            {
+//                return new CustomJsonNetSerializer(settings, converter);
+//            }
+//        }
+//
+//        public class CustomJsonNetSerializer : JsonNetSerializer
+//        {
+//            public CustomJsonNetSerializer(IConnectionSettingsValues settings) : base(settings)
+//            {
+//                base.OverwriteDefaultSerializers(ModifyJsonSerializerSettings);
+//            }
+//            public CustomJsonNetSerializer(IConnectionSettingsValues settings, JsonConverter statefulConverter) :
+//                base(settings, statefulConverter)
+//            {
+//                base.OverwriteDefaultSerializers(ModifyJsonSerializerSettings);
+//            }
+//
+//            private void ModifyJsonSerializerSettings(JsonSerializerSettings settings, IConnectionSettingsValues connectionSettings)
+//            {
+//                settings.NullValueHandling = NullValueHandling.Include;
+//                settings.TypeNameHandling = TypeNameHandling.Objects;
+//            }
+//        }
 
         /**
          * Then, create a new instance of the factory to `ConnectionSettings`
          */
         public void ModifyingJsonNetSettingsWithCustomSerializer()
         {
-            var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-            var connection = new HttpConnection();
-            var connectionSettings =
-                new ConnectionSettings(pool, connection, new CustomJsonNetSerializerFactory());
-
-            var client = new ElasticClient(connectionSettings);
+//            var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+//            var connection = new HttpConnection();
+//            var connectionSettings =
+//                new ConnectionSettings(pool, connection, new CustomJsonNetSerializerFactory());
+//
+//            var client = new ElasticClient(connectionSettings);
         }
 
         /**[IMPORTANT]
@@ -128,25 +128,25 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
          *
          * Override `ContractConverters` getter property and have it return a list of these functions
          */
-        public class CustomContractsJsonNetSerializer : CustomJsonNetSerializer
-        {
-            public CustomContractsJsonNetSerializer(IConnectionSettingsValues settings) : base(settings) { }
-            public CustomContractsJsonNetSerializer(IConnectionSettingsValues settings, JsonConverter statefulConverter)
-	            : base(settings, statefulConverter) { }
-
-	        protected override IList<Func<Type, JsonConverter>> ContractConverters { get; } = new List<Func<Type, JsonConverter>>
-	        {
-		        ((t) => t == typeof(Project) ? new MyCustomJsonConverter() : null)
-	        };
-        }
-
-	    public class MyCustomJsonConverter : JsonConverter
-	    {
-		    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
-
-		    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) => null;
-
-		    public override bool CanConvert(Type objectType) => false;
-	    }
+//        public class CustomContractsJsonNetSerializer : CustomJsonNetSerializer
+//        {
+//            public CustomContractsJsonNetSerializer(IConnectionSettingsValues settings) : base(settings) { }
+//            public CustomContractsJsonNetSerializer(IConnectionSettingsValues settings, JsonConverter statefulConverter)
+//	            : base(settings, statefulConverter) { }
+//
+//	        protected override IList<Func<Type, JsonConverter>> ContractConverters { get; } = new List<Func<Type, JsonConverter>>
+//	        {
+//		        ((t) => t == typeof(Project) ? new MyCustomJsonConverter() : null)
+//	        };
+//        }
+//
+//	    public class MyCustomJsonConverter : JsonConverter
+//	    {
+//		    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
+//
+//		    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) => null;
+//
+//		    public override bool CanConvert(Type objectType) => false;
+//	    }
     }
 }

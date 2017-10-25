@@ -88,7 +88,7 @@ namespace Nest
 					var state = (JsonConverter)typeof(ConcreteTypeConverter<>).CreateGenericInstance(baseType, concreteTypeSelector);
 					if (state != null)
 					{
-						var elasticSerializer = this._settings.StatefulSerializer(state) as JsonNetSerializer;
+						var elasticSerializer = this._settings.CreateStateful(state);
 						if (elasticSerializer != null)
 						{
 							cachedDelegate(m, elasticSerializer.Serializer, response.Responses);

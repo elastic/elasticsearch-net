@@ -39,7 +39,7 @@ namespace Elasticsearch.Net
 			configurationValues.ThrowIfNull(nameof(configurationValues));
 			configurationValues.ConnectionPool.ThrowIfNull(nameof(configurationValues.ConnectionPool));
 			configurationValues.Connection.ThrowIfNull(nameof(configurationValues.Connection));
-			configurationValues.Serializer.ThrowIfNull(nameof(configurationValues.Serializer));
+			configurationValues.RequestResponseSerializer.ThrowIfNull(nameof(configurationValues.RequestResponseSerializer));
 
 			this.Settings = configurationValues;
 			this.PipelineProvider = pipelineProvider ?? new RequestPipelineFactory();

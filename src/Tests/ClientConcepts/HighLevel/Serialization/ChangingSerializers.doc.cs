@@ -50,13 +50,6 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
                 // provide a serialization implementation
                 throw new NotImplementedException();
             }
-
-            public IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
-            {
-                // provide an implementation, if the serializer can decide how properties should be mapped.
-				// Otherwise return null.
-                return null;
-            }
         }
 
         /**==== Changing serializers in Elasticsearch.Net
@@ -69,53 +62,10 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
             var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
             var connection = new HttpConnection();
             var connectionConfiguration =
-                new ConnectionConfiguration(pool, connection, configuration => new CustomSerializer()); // <1> delegate gets passed `ConnectionConfiguration` and creates a serializer.
+                new ConnectionConfiguration(pool, connection, new CustomSerializer()); // <1> delegate gets passed `ConnectionConfiguration` and creates a serializer.
 
 			var lowlevelClient = new ElasticLowLevelClient(connectionConfiguration);
         }
 
-        /**==== Changing serializers in NEST
-         *
-         * With NEST however, an implementation of `ISerializerFactory` in addition to an implementation
-         * of `IElasticsearchSerializer` is required.
-         */
-        public class CustomSerializerFactory : ISerializerFactory
-        {
-            public IElasticsearchSerializer Create(IConnectionSettingsValues settings) => new CustomSerializer();
-
-            public IElasticsearchSerializer CreateStateful(IConnectionSettingsValues settings, JsonConverter converter) =>
-                new CustomSerializer();
-        }
-
-        /**
-         * With an implementation of `ISerializerFactory` that can create instances of our custom serializer,
-         * hooking this into `ConnectionSettings` is straightfoward
-         */
-        public void ConnectionSettingsWithCustomSerializer()
-        {
-            var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-            var connection = new HttpConnection();
-            var connectionSettings =
-                new ConnectionSettings(pool, connection, new CustomSerializerFactory());
-
-            var client = new ElasticClient(connectionSettings);
-        }
-
-        /**[IMPORTANT]
-         * --
-         * The implementation for how custom serialization is configured within the client is subject to
-         * change in the next major release. NEST relies heavily on stateful deserializers that have access to details
-         * from the original request for specialized features such a covariant search results.
-         *
-         * You may have noticed that this requirement leaks into the `ISerializerFactory` abstraction in the form of
-         * the `CreateStateful` method signature. There are intentions to replace or at least internalize the usage of
-         * JSON.Net within NEST in the future and in the process, simplifying how custom serialization can
-         * be integrated.
-         * --
-         *
-         * This has provided you details on how to implement your own custom serialization, but a much more common scenario
-         * amongst NEST client users is the desire to change the serialization settings of the default JSON.Net serializer.
-         * Take a look at <<modifying-default-serializer, modifying the default serializer>> to see how this can be done.
-         */
     }
 }
