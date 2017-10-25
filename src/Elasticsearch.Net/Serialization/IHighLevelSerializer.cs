@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
+
 	public interface IElasticsearchSerializer
 	{
 		T Deserialize<T>(Stream stream);
@@ -12,9 +13,8 @@ namespace Elasticsearch.Net
 		Task<T> DeserializeAsync<T>(Stream responseStream, CancellationToken cancellationToken = default(CancellationToken));
 
 		void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented);
-
-		IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo);
 	}
+
 
 	public static class ElasticsearchSerializerExtensions
 	{

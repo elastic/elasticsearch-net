@@ -16,18 +16,17 @@ namespace Tests.Framework
 	{
 		protected override object ExpectJson { get; }
 
-		internal RoundTripper(
-			object expected,
+		internal RoundTripper(object expected,
 			Func<ConnectionSettings, ConnectionSettings> settings = null,
-			Func<ConnectionSettings, IElasticsearchSerializer> _serializerFactory = null
-			)
+			IElasticsearchSerializer sourceSerializer = null,
+			Func<ConnectionSettings, IPropertyMappingProvider> propertyMappingProviderFactory = null)
 		{
 			this.ExpectJson = expected;
 			this._connectionSettingsModifier = settings;
 
 			this._expectedJsonString = this.Serialize(expected);
 			this._expectedJsonJObject = JToken.Parse(this._expectedJsonString);
-			this._serializerFactory = _serializerFactory;
+			this._sourceSerializer = sourceSerializer;
 		}
 
 		public virtual void DeserializesTo<T>(Action<string, T> assert)
@@ -102,20 +101,26 @@ namespace Tests.Framework
 	public class IntermediateChangedSettings
 	{
 		private readonly Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier;
-		private Func<ConnectionSettings, IElasticsearchSerializer> _serializerFactory;
+		private IElasticsearchSerializer _sourceSerializer;
+		private Func<ConnectionSettings, IPropertyMappingProvider> _propertyMappingProvider;
 
 		internal IntermediateChangedSettings(Func<ConnectionSettings, ConnectionSettings> settings)
 		{
 			this._connectionSettingsModifier = settings;
 		}
-		public IntermediateChangedSettings WithSerializer(Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory)
+		public IntermediateChangedSettings WithSourceSerializer(IElasticsearchSerializer sourceSerializer)
 		{
-			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-			this._serializerFactory = serializerFactory;
+			this._sourceSerializer = sourceSerializer;
+			return this;
+		}
+		public IntermediateChangedSettings WithPropertyMappingProvider(Func<ConnectionSettings, IPropertyMappingProvider> propertyMappingProvider)
+		{
+			this._propertyMappingProvider = propertyMappingProvider;
 			return this;
 		}
 
-		public RoundTripper Expect(object expected) =>  new RoundTripper(expected, _connectionSettingsModifier, this._serializerFactory);
+		public RoundTripper Expect(object expected) =>
+			new RoundTripper(expected, _connectionSettingsModifier, this._sourceSerializer, this._propertyMappingProvider);
 	}
 
 	public class RoundTripper<T> : RoundTripper

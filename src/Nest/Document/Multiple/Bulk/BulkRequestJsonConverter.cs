@@ -14,7 +14,7 @@ namespace Nest
 		{
 			var bulk = value as IBulkRequest;
 			var settings = serializer?.GetConnectionSettings();
-			var elasticsearchSerializer = settings?.Serializer;
+			var elasticsearchSerializer = settings?.RequestResponseSerializer;
 			if (elasticsearchSerializer == null|| bulk?.Operations == null) return ;
 
 			foreach(var op in bulk.Operations)

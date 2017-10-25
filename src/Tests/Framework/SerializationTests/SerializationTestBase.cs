@@ -24,15 +24,15 @@ namespace Tests.Framework
 		protected JToken _expectedJsonJObject;
 
 		protected Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier = null;
-		protected Func<ConnectionSettings, IElasticsearchSerializer> _serializerFactory;
+		protected IElasticsearchSerializer _sourceSerializer;
 		private static readonly JsonSerializerSettings NullValueSettings = new JsonSerializerSettings {NullValueHandling = NullValueHandling.Include};
 
 		protected IElasticsearchSerializer Serializer => Client.Serializer;
 
 		protected virtual IElasticClient Client =>
-			_connectionSettingsModifier == null && _serializerFactory == null
+			_connectionSettingsModifier == null && _sourceSerializer == null
 			? TestClient.DefaultInMemoryClient
-			: TestClient.GetInMemoryClientWithSerializerFactory(_connectionSettingsModifier, _serializerFactory);
+			: TestClient.GetInMemoryClientWithSerializerFactory(_connectionSettingsModifier, _sourceSerializer);
 
 		protected SerializationTestBase()
 		{

@@ -42,7 +42,7 @@ namespace Nest
 				}
 				// Check against attribute mapping, CreatePropertyMapping caches.
 				// We do not have to take .Name into account from serializer PropertyName (kv.Key) already handles this
-				propertyMapping = settings.Serializer?.CreatePropertyMapping(propertyInfo);
+				propertyMapping = settings.PropertyMappingProvider?.CreatePropertyMapping(propertyInfo);
 				if (propertyMapping  == null || !propertyMapping.Ignore)
 					props.Add(kv.Key, kv.Value);
 			}

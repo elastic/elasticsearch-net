@@ -13,9 +13,9 @@ namespace Elasticsearch.Net
 		public Error Error { get; set; }
 		public int Status { get; set; }
 
-		public static ServerError Create(Stream stream) => ElasticsearchDefaultSerializer.Instance.Deserialize<ServerError>(stream);
+		public static ServerError Create(Stream stream) => LowLevelRequestResponseSerializer.Instance.Deserialize<ServerError>(stream);
 		public static Task<ServerError> CreateAsync(Stream stream, CancellationToken token) =>
-			ElasticsearchDefaultSerializer.Instance.DeserializeAsync<ServerError>(stream, token);
+			LowLevelRequestResponseSerializer.Instance.DeserializeAsync<ServerError>(stream, token);
 
 		/// <summary>
 		/// Creating the server error might fail in cases where a proxy returns an http response which is not json at all

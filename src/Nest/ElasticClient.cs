@@ -17,7 +17,7 @@ namespace Nest
 
 		private ITransport<IConnectionSettingsValues> Transport { get; }
 
-		public IElasticsearchSerializer Serializer => this.Transport.Settings.Serializer;
+		public IElasticsearchSerializer Serializer => this.Transport.Settings.SourceSerializer;
 		public Inferrer Infer => this.Transport.Settings.Inferrer;
 		public IConnectionSettingsValues ConnectionSettings => this.Transport.Settings;
 
@@ -32,7 +32,7 @@ namespace Nest
 		{
 			transport.ThrowIfNull(nameof(transport));
 			transport.Settings.ThrowIfNull(nameof(transport.Settings));
-			transport.Settings.Serializer.ThrowIfNull(nameof(transport.Settings.Serializer));
+			transport.Settings.RequestResponseSerializer.ThrowIfNull(nameof(transport.Settings.RequestResponseSerializer));
 			transport.Settings.Inferrer.ThrowIfNull(nameof(transport.Settings.Inferrer));
 
 			this.Transport = transport;

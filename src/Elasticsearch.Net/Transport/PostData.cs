@@ -90,7 +90,7 @@ namespace Elasticsearch.Net
 					else stream = writableStream;
 					foreach (var o in _enumerableOfObject)
 					{
-						settings.Serializer.Serialize(o, stream, SerializationFormatting.None);
+						settings.RequestResponseSerializer.Serialize(o, stream, SerializationFormatting.None);
 						stream.Write(NewLineByteArray, 0, 1);
 					}
 					break;
@@ -101,7 +101,7 @@ namespace Elasticsearch.Net
 						ms = new MemoryStream();
 						stream = ms;
 					}
-					settings.Serializer.Serialize(this._serializable, stream, indent);
+					settings.RequestResponseSerializer.Serialize(this._serializable, stream, indent);
 					break;
 			}
 			if (ms != null)
@@ -138,7 +138,7 @@ namespace Elasticsearch.Net
 					else stream = writableStream;
 					foreach (var o in _enumerableOfObject)
 					{
-						settings.Serializer.Serialize(o, stream, SerializationFormatting.None);
+						settings.RequestResponseSerializer.Serialize(o, stream, SerializationFormatting.None);
 						await stream.WriteAsync(NewLineByteArray, 0, 1, cancellationToken).ConfigureAwait(false);
 					}
 					break;
@@ -149,7 +149,7 @@ namespace Elasticsearch.Net
 						ms = new MemoryStream();
 						stream = ms;
 					}
-					settings.Serializer.Serialize(this._serializable, stream, indent);
+					settings.RequestResponseSerializer.Serialize(this._serializable, stream, indent);
 					break;
 			}
 			if (ms != null)

@@ -430,9 +430,9 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		/**
 		* Here we create a custom serializer that renames any property named `AskSerializer` to `ask`
 		*/
-		class CustomSerializer : JsonNetSerializer
+		class CustomPropertyMappingProvider : PropertyMappingProvider
 		{
-			public CustomSerializer(IConnectionSettingsValues settings) : base(settings) { }
+			public CustomPropertyMappingProvider(IConnectionSettingsValues settings) : base(settings) { }
 
 			public override IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
 			{
@@ -454,7 +454,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 					.Rename(p => p.RenamedOnConnectionSettings, "renamed")
 				)
 				.DefaultFieldNameInferrer(p => p.ToUpperInvariant())
-			).WithSerializer(s => new CustomSerializer(s));
+			).WithPropertyMappingProvider(s => new CustomPropertyMappingProvider(s));
 
 			usingSettings.Expect("renamed").ForField(Field<Precedence>(p => p.RenamedOnConnectionSettings));
 			usingSettings.Expect("nestAtt").ForField(Field<Precedence>(p => p.NestAttribute));

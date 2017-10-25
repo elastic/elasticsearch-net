@@ -12,9 +12,8 @@ using Newtonsoft.Json.Serialization;
 
 namespace Nest
 {
-	public class ElasticContractResolver : DefaultContractResolver
+	internal class ElasticContractResolver : DefaultContractResolver
 	{
-		private readonly IList<Func<Type, JsonConverter>> _contractConverters;
 		public static JsonSerializer Empty { get; } = new JsonSerializer();
 
 		/// <summary>
@@ -27,9 +26,8 @@ namespace Nest
 		/// </summary>
 		internal JsonConverterPiggyBackState PiggyBackState { get; set; }
 
-		public ElasticContractResolver(IConnectionSettingsValues connectionSettings, IList<Func<Type, JsonConverter>> contractConverters)
+		public ElasticContractResolver(IConnectionSettingsValues connectionSettings)
 		{
-			this._contractConverters = contractConverters;
 			this.ConnectionSettings = connectionSettings;
 		}
 
@@ -60,18 +58,6 @@ namespace Nest
 						 o == typeof(TimeSpan?))
 					contract.Converter = new TimeSpanConverter();
 
-				if (this._contractConverters.HasAny())
-				{
-					foreach (var c in this._contractConverters)
-					{
-						var converter = c(o);
-						if (converter == null)
-							continue;
-						contract.Converter = converter;
-						break;
-					}
-				}
-
 				if (!o.FullName.StartsWith("Nest.", StringComparison.OrdinalIgnoreCase)) return contract;
 				if (ApplyExactContractJsonAttribute(o, contract)) return contract;
 				if (ApplyContractJsonAttribute(o, contract)) return contract;
@@ -80,7 +66,7 @@ namespace Nest
 			});
 		}
 
-		private bool ApplyExactContractJsonAttribute(Type objectType, JsonContract contract)
+		private static bool ApplyExactContractJsonAttribute(Type objectType, JsonContract contract)
 		{
 			var attribute = (ExactContractJsonConverterAttribute)objectType.GetTypeInfo().GetCustomAttributes(typeof(ExactContractJsonConverterAttribute)).FirstOrDefault();
 			if (attribute?.Converter == null) return false;
@@ -88,9 +74,9 @@ namespace Nest
 			return true;
 		}
 
-		private bool ApplyContractJsonAttribute(Type objectType, JsonContract contract)
+		private static bool ApplyContractJsonAttribute(Type objectType, JsonContract contract)
 		{
-			foreach (var t in this.TypeWithInterfaces(objectType))
+			foreach (var t in TypeWithInterfaces(objectType))
 			{
 				var attribute = (ContractJsonConverterAttribute)t.GetTypeInfo().GetCustomAttributes(typeof(ContractJsonConverterAttribute), true).FirstOrDefault();
 				if (attribute?.Converter == null) continue;
@@ -100,7 +86,7 @@ namespace Nest
 			return false;
 		}
 
-		private IEnumerable<Type> TypeWithInterfaces(Type objectType)
+		private static IEnumerable<Type> TypeWithInterfaces(Type objectType)
 		{
 			yield return objectType;
 			foreach (var i in objectType.GetInterfaces()) yield return i;
@@ -205,7 +191,7 @@ namespace Nest
 			if (!this.ConnectionSettings.PropertyMappings.TryGetValue(member, out propertyMapping))
 				propertyMapping = ElasticsearchPropertyAttributeBase.From(member);
 
-			var serializerMapping = this.ConnectionSettings.Serializer?.CreatePropertyMapping(member);
+			var serializerMapping = this.ConnectionSettings.PropertyMappingProvider?.CreatePropertyMapping(member);
 
 			var nameOverride = propertyMapping?.Name ?? serializerMapping?.Name;
 			if (!nameOverride.IsNullOrEmpty()) property.PropertyName = nameOverride;
