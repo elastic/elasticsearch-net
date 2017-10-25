@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
-	public class ElasticsearchDefaultSerializer : IElasticsearchSerializer
+	public class LowLevelRequestResponseSerializer : IElasticsearchSerializer
 	{
 		private static readonly ElasticsearchNetJsonStrategy Strategy = new ElasticsearchNetJsonStrategy();
 		private const int BufferSize = 81920;
 
-		public static readonly ElasticsearchDefaultSerializer Instance = new ElasticsearchDefaultSerializer();
+		public static readonly LowLevelRequestResponseSerializer Instance = new LowLevelRequestResponseSerializer();
 
 		public T Deserialize<T>(Stream stream)
 		{
@@ -24,7 +24,7 @@ namespace Elasticsearch.Net
 				byte[] buffer = ms.ToArray();
 				if (buffer.Length <= 1)
 					return default(T);
-				return SimpleJson.DeserializeObject<T>(buffer.Utf8String(), ElasticsearchDefaultSerializer.Strategy);
+				return SimpleJson.DeserializeObject<T>(buffer.Utf8String(), LowLevelRequestResponseSerializer.Strategy);
 			}
 		}
 
@@ -40,14 +40,14 @@ namespace Elasticsearch.Net
 				var buffer = ms.ToArray();
 				if (buffer.Length <= 1)
 					return default(T);
-				var r = SimpleJson.DeserializeObject<T>(buffer.Utf8String(), ElasticsearchDefaultSerializer.Strategy);
+				var r = SimpleJson.DeserializeObject<T>(buffer.Utf8String(), LowLevelRequestResponseSerializer.Strategy);
 				return r;
 			}
 		}
 
 		public void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
 		{
-			var serialized = SimpleJson.SerializeObject(data, ElasticsearchDefaultSerializer.Strategy);
+			var serialized = SimpleJson.SerializeObject(data, LowLevelRequestResponseSerializer.Strategy);
 			if (formatting == SerializationFormatting.None)
 				serialized = RemoveNewLinesAndTabs(serialized);
 			using (var ms = new MemoryStream(serialized.Utf8Bytes()))
@@ -55,8 +55,6 @@ namespace Elasticsearch.Net
 				ms.CopyTo(writableStream);
 			}
 		}
-
-		public IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo) => null;
 
 		private static string RemoveNewLinesAndTabs(string input)
 		{

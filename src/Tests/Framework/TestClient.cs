@@ -135,14 +135,16 @@ namespace Tests.Framework
 			bool forceInMemory = false,
 			bool forceSsl = false,
 			Func<Uri, IConnectionPool> createPool = null,
-			Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory = null
+			IElasticsearchSerializer sourceSerializer = null
 		)
 		{
 			createPool = createPool ?? (u => new SingleNodeConnectionPool(u));
-#pragma warning disable CS0618 // Type or member is obsolete
-			var defaultSettings = DefaultSettings(new ConnectionSettings(createPool(CreateUri(port, forceSsl)),
-				CreateConnection(forceInMemory: forceInMemory), serializerFactory));
-#pragma warning restore CS0618 // Type or member is obsolete
+
+			var connectionPool = createPool(CreateUri(port, forceSsl));
+			var connection = CreateConnection(forceInMemory: forceInMemory);
+			var s = new ConnectionSettings(connectionPool, connection, sourceSerializer);
+
+			var defaultSettings = DefaultSettings(s);
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return settings;
 		}
@@ -152,8 +154,8 @@ namespace Tests.Framework
 
 		public static IElasticClient GetInMemoryClientWithSerializerFactory(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings,
-			Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory) =>
-			new ElasticClient(CreateSettings(modifySettings, forceInMemory: true, serializerFactory: serializerFactory));
+			IElasticsearchSerializer sourceSerializer) =>
+			new ElasticClient(CreateSettings(modifySettings, forceInMemory: true, sourceSerializer: sourceSerializer));
 
 		public static IElasticClient GetClient(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,

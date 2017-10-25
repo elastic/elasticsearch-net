@@ -18,7 +18,7 @@ namespace Elasticsearch.Net
 		IConnection Connection { get; }
 
 		/// <summary>The serializer to use to serialize requests and deserialize responses</summary>
-		IElasticsearchSerializer Serializer { get; }
+		IElasticsearchSerializer RequestResponseSerializer { get; }
 
 		/// <summary>
 		/// The timeout in milliseconds for each request to Elasticsearch

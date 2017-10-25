@@ -20,30 +20,30 @@ namespace Tests.ClientConcepts.Serializer
 	public class ModifySerializationSettingsTests : SerializationTestBase
 	{
 
-		public class MyCustomResolver : ElasticContractResolver
-		{
-			public MyCustomResolver(IConnectionSettingsValues connectionSettings, IList<Func<Type, JsonConverter>> contractConverters) : base(connectionSettings, contractConverters) { }
-
-			protected override string ResolvePropertyName(string fieldName)
-			{
-				return fieldName.ToUpperInvariant();
-			}
-		}
-
-		private sealed class LocalJsonNetSerializer : JsonNetSerializer
-		{
-			public LocalJsonNetSerializer(IConnectionSettingsValues settings) : base(settings)
-			{
-				OverwriteDefaultSerializers((s, cvs) =>
-					{
-						s.DateParseHandling = DateParseHandling.None;
-						s.MaxDepth = 1;
-						s.ContractResolver = new MyCustomResolver(this.Settings, null);
-						s.DateFormatHandling = DateFormatHandling.MicrosoftDateFormat;
-					}
-				);
-			}
-		}
+//		public class MyCustomResolver : ElasticContractResolver
+//		{
+//			public MyCustomResolver(IConnectionSettingsValues connectionSettings, IList<Func<Type, JsonConverter>> contractConverters) : base(connectionSettings, contractConverters) { }
+//
+//			protected override string ResolvePropertyName(string fieldName)
+//			{
+//				return fieldName.ToUpperInvariant();
+//			}
+//		}
+//
+//		private sealed class LocalJsonNetSerializer : JsonNetSerializer
+//		{
+//			public LocalJsonNetSerializer(IConnectionSettingsValues settings) : base(settings)
+//			{
+//				OverwriteDefaultSerializers((s, cvs) =>
+//					{
+//						s.DateParseHandling = DateParseHandling.None;
+//						s.MaxDepth = 1;
+//						s.ContractResolver = new MyCustomResolver(this.Settings, null);
+//						s.DateFormatHandling = DateFormatHandling.MicrosoftDateFormat;
+//					}
+//				);
+//			}
+//		}
 
 		public class HasDateString
 		{
@@ -53,15 +53,16 @@ namespace Tests.ClientConcepts.Serializer
 
 		public IElasticClient CreateClient(string jsonResponse)
 		{
-			var connection = new InMemoryConnection(Encoding.UTF8.GetBytes(jsonResponse));
-			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-#pragma warning disable CS0618 // Type or member is obsolete
-			var connectionSettings = new ConnectionSettings(connectionPool, connection, settings => new LocalJsonNetSerializer(settings
-				.DefaultIndex("default-index")
-			));
-#pragma warning restore CS0618 // Type or member is obsolete
-			var client = new ElasticClient(connectionSettings);
-			return client;
+			throw new NotImplementedException();
+//			var connection = new InMemoryConnection(Encoding.UTF8.GetBytes(jsonResponse));
+//			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+//#pragma warning disable CS0618 // Type or member is obsolete
+//			var connectionSettings = new ConnectionSettings(connectionPool, connection, settings => new LocalJsonNetSerializer(settings
+//				.DefaultIndex("default-index")
+//			));
+//#pragma warning restore CS0618 // Type or member is obsolete
+//			var client = new ElasticClient(connectionSettings);
+//			return client;
 		}
 
 		[U]

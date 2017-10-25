@@ -98,7 +98,7 @@ namespace Nest
 			if (att != null && !att.Name.IsNullOrEmpty())
 				return att.Name;
 
-			return _settings.Serializer?.CreatePropertyMapping(info)?.Name ?? _settings.DefaultFieldNameInferrer(name);
+			return _settings.PropertyMappingProvider?.CreatePropertyMapping(info)?.Name ?? _settings.DefaultFieldNameInferrer(name);
 		}
 
 		protected override Expression VisitMember(MemberExpression expression)

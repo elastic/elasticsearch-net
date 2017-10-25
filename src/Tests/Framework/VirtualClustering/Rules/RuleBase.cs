@@ -52,7 +52,7 @@ namespace Tests.Framework
 			byte[] r;
 			using (var ms = new MemoryStream())
 			{
-				new ElasticsearchDefaultSerializer().Serialize(response, ms);
+				new LowLevelRequestResponseSerializer().Serialize(response, ms);
 				r = ms.ToArray();
 			}
 			Self.ReturnResponse = r;

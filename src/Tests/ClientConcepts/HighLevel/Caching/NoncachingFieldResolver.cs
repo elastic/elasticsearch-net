@@ -116,7 +116,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				if (att != null && !string.IsNullOrEmpty(att.Name))
 					return att.Name;
 
-				return _settings.Serializer?.CreatePropertyMapping(info)?.Name ?? _settings.DefaultFieldNameInferrer(name);
+				return _settings.PropertyMappingProvider?.CreatePropertyMapping(info)?.Name ?? _settings.DefaultFieldNameInferrer(name);
 			}
 
 			protected override Expression VisitMember(MemberExpression expression)

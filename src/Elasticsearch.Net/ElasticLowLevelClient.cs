@@ -12,7 +12,7 @@ namespace Elasticsearch.Net
 		private readonly UrlFormatProvider _formatter;
 
 		public IConnectionConfigurationValues Settings => this.Transport.Settings;
-		public IElasticsearchSerializer Serializer => this.Transport.Settings.Serializer;
+		public IElasticsearchSerializer Serializer => this.Transport.Settings.RequestResponseSerializer;
 
 		protected ITransport<IConnectionConfigurationValues> Transport { get; set; }
 
@@ -31,7 +31,7 @@ namespace Elasticsearch.Net
 		{
 			transport.ThrowIfNull(nameof(transport));
 			transport.Settings.ThrowIfNull(nameof(transport.Settings));
-			transport.Settings.Serializer.ThrowIfNull(nameof(transport.Settings.Serializer));
+			transport.Settings.RequestResponseSerializer.ThrowIfNull(nameof(transport.Settings.RequestResponseSerializer));
 
 			this.Transport = transport;
 			this._formatter = new UrlFormatProvider(this.Transport.Settings);
