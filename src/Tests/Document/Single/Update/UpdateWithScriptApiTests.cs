@@ -11,7 +11,7 @@ namespace Tests.Document.Single.Update
 {
 	public class UpdateWithScriptApiTests : ApiIntegrationTestBase<WritableCluster, IUpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>, UpdateRequest<Project, Project>>
 	{
-		protected override bool NoClientSerialize => true;
+		protected override bool NoClientSerializeOfExpected => true;
 
 		public UpdateWithScriptApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

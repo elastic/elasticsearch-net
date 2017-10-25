@@ -40,14 +40,8 @@ namespace Nest
 
 	public class PropertyMappingProvider : IPropertyMappingProvider
 	{
-		private readonly IConnectionSettingsValues _settings;
-
 		protected readonly ConcurrentDictionary<string, IPropertyMapping> Properties = new ConcurrentDictionary<string, IPropertyMapping>();
 
-		public PropertyMappingProvider(IConnectionSettingsValues settings)
-		{
-			this._settings = settings;
-		}
 		public virtual IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
 		{
 			IPropertyMapping mapping;

@@ -135,14 +135,15 @@ namespace Tests.Framework
 			bool forceInMemory = false,
 			bool forceSsl = false,
 			Func<Uri, IConnectionPool> createPool = null,
-			IElasticsearchSerializer sourceSerializer = null
+			IElasticsearchSerializer sourceSerializer = null,
+			IPropertyMappingProvider propertyMappingProvider = null
 		)
 		{
 			createPool = createPool ?? (u => new SingleNodeConnectionPool(u));
 
 			var connectionPool = createPool(CreateUri(port, forceSsl));
 			var connection = CreateConnection(forceInMemory: forceInMemory);
-			var s = new ConnectionSettings(connectionPool, connection, sourceSerializer);
+			var s = new ConnectionSettings(connectionPool, connection, sourceSerializer, propertyMappingProvider);
 
 			var defaultSettings = DefaultSettings(s);
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
@@ -150,12 +151,16 @@ namespace Tests.Framework
 		}
 
 		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200) =>
-			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: true));
+			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: true).EnableDebugMode());
 
-		public static IElasticClient GetInMemoryClientWithSerializerFactory(
+		public static IElasticClient GetInMemoryClientWithSourceSerializer(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings,
-			IElasticsearchSerializer sourceSerializer) =>
-			new ElasticClient(CreateSettings(modifySettings, forceInMemory: true, sourceSerializer: sourceSerializer));
+			IElasticsearchSerializer sourceSerializer,
+			IPropertyMappingProvider propertyMappingProvider = null) =>
+			new ElasticClient(
+				CreateSettings(modifySettings, forceInMemory: true, sourceSerializer: sourceSerializer,
+					propertyMappingProvider: propertyMappingProvider)
+				);
 
 		public static IElasticClient GetClient(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,

@@ -12,6 +12,7 @@ namespace Nest
 		/// An optional document to get term vectors for instead of using an already indexed document
 		/// </summary>
 		[JsonProperty("doc")]
+		[JsonConverter(typeof(SourceConverter))]
 		TDocument Document { get; set; }
 
 		/// <summary>
@@ -32,7 +33,7 @@ namespace Nest
 	public partial class TermVectorsRequest<TDocument>
 		where TDocument : class
 	{
-		Elasticsearch.Net.HttpMethod IRequest.HttpMethod => (this.Document != null || this.Filter != null) ? Elasticsearch.Net.HttpMethod.POST : Elasticsearch.Net.HttpMethod.GET;
+		HttpMethod IRequest.HttpMethod => (this.Document != null || this.Filter != null) ? HttpMethod.POST : HttpMethod.GET;
 
 		/// <summary>
 		/// An optional document to get term vectors for instead of using an already indexed document
