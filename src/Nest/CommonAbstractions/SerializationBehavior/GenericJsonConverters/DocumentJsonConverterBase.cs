@@ -1,6 +1,8 @@
 using System;
+using System.IO;
 using System.Reflection;
 using Newtonsoft.Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -29,8 +31,10 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var v = (TRequest)value;
-			serializer.Serialize(writer, v.UntypedDocument);
+			var untypedDocumentRequest = (IUntypedDocumentRequest)value;
+			var o = untypedDocumentRequest.UntypedDocument;
+			var v = serializer.GetConnectionSettings().SourceSerializer.SerializeToString(o);
+			writer.WriteRawValue(v);
 		}
 	}
 }

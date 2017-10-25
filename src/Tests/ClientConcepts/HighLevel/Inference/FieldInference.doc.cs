@@ -432,8 +432,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		*/
 		class CustomPropertyMappingProvider : PropertyMappingProvider
 		{
-			public CustomPropertyMappingProvider(IConnectionSettingsValues settings) : base(settings) { }
-
 			public override IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
 			{
 				return memberInfo.Name == nameof(Precedence.AskSerializer)
@@ -454,7 +452,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 					.Rename(p => p.RenamedOnConnectionSettings, "renamed")
 				)
 				.DefaultFieldNameInferrer(p => p.ToUpperInvariant())
-			).WithPropertyMappingProvider(s => new CustomPropertyMappingProvider(s));
+			).WithPropertyMappingProvider(new CustomPropertyMappingProvider());
 
 			usingSettings.Expect("renamed").ForField(Field<Precedence>(p => p.RenamedOnConnectionSettings));
 			usingSettings.Expect("nestAtt").ForField(Field<Precedence>(p => p.NestAttribute));

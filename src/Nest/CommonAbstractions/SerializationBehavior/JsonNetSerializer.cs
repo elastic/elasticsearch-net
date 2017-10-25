@@ -70,22 +70,34 @@ namespace Nest
 			}
 		}
 
-		public virtual T Deserialize<T>(Stream stream)
+		public object Default(Type type) => type.IsValueType() ? type.CreateInstance() : null;
+
+		public virtual T Deserialize<T>(Stream stream) => (T) this.Deserialize(typeof(T), stream);
+
+		public virtual object Deserialize(Type type, Stream stream)
 		{
-			if (stream == null) return default(T);
+			if (stream == null) return Default(type);
 			//TODO why does Serialize specify leaveOpen but this does not?
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
-				var t = this._defaultSerializer.Deserialize<T>(jsonTextReader);
+				var t = this._defaultSerializer.Deserialize(jsonTextReader, type);
 				return t;
 			}
+
 		}
 
 		public virtual Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			//Json.NET does not support reading a stream asynchronously :(
+			//TODO result Json.NET 10.0.1 has async
 			var result = this.Deserialize<T>(stream);
+			return Task.FromResult(result);
+		}
+
+		public virtual Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+		{
+			//TODO result Json.NET 10.0.1 has async
+			var result = this.Deserialize(type, stream);
 			return Task.FromResult(result);
 		}
 

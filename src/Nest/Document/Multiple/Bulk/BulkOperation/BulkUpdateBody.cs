@@ -8,9 +8,11 @@ namespace Nest
 		where TPartialUpdate : class
 	{
 		[JsonProperty("doc")]
+		[JsonConverter(typeof(CollapsedSourceConverter))]
 		internal TPartialUpdate _PartialUpdate { get; set; }
 
 		[JsonProperty("upsert")]
+		[JsonConverter(typeof(CollapsedSourceConverter))]
 		internal TDocument _Upsert { get; set; }
 
 		[JsonProperty("doc_as_upsert")]

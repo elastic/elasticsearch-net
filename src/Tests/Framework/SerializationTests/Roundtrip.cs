@@ -14,24 +14,28 @@ namespace Tests.Framework
 {
 	public class RoundTripper : SerializationTestBase
 	{
+		protected override bool NoClientSerializeOfExpected => true;
 		protected override object ExpectJson { get; }
 
 		internal RoundTripper(object expected,
 			Func<ConnectionSettings, ConnectionSettings> settings = null,
 			IElasticsearchSerializer sourceSerializer = null,
-			Func<ConnectionSettings, IPropertyMappingProvider> propertyMappingProviderFactory = null)
+			IPropertyMappingProvider propertyMappingProvider = null)
 		{
 			this.ExpectJson = expected;
 			this._connectionSettingsModifier = settings;
 
-			this._expectedJsonString = this.Serialize(expected);
+			this._expectedJsonString = JsonConvert.SerializeObject(expected, NullValueSettings);
 			this._expectedJsonJObject = JToken.Parse(this._expectedJsonString);
 			this._sourceSerializer = sourceSerializer;
+			this._propertyMappingProvider = propertyMappingProvider;
 		}
 
 		public virtual void DeserializesTo<T>(Action<string, T> assert)
 		{
-			var json = (this.ExpectJson is string) ? (string) ExpectJson : JsonConvert.SerializeObject(this.ExpectJson);
+			var json = (this.ExpectJson is string)
+				? (string) ExpectJson
+				: JsonConvert.SerializeObject(this.ExpectJson, NullValueSettings);
 
 			T sut;
 			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
@@ -47,28 +51,48 @@ namespace Tests.Framework
 		}
 
 		public void FromRequest(IResponse response) => ToSerializeTo(response.ApiCall.RequestBodyInBytes);
+		public void FromRequest<T>(Func<IElasticClient, T> call) where T : IResponse => FromRequest(call(this.Client));
 		public void FromResponse(IResponse response) => ToSerializeTo(response.ApiCall.ResponseBodyInBytes);
+		public void FromResponse<T>(Func<IElasticClient, T> call) where T : IResponse => FromResponse(call(this.Client));
 		public void ToSerializeTo(byte[] json) => ToSerializeTo(Encoding.UTF8.GetString(json));
 		public void ToSerializeTo(string json)
 		{
-			var expected = JObject.FromObject(this.ExpectJson);
-			var actual = JObject.Parse(json);
+			if (this._expectedJsonJObject.Type != JTokenType.Array)
+				CompareToken(json, JToken.FromObject(this.ExpectJson));
+			else
+				CompareMultiJson(json);
+		}
+
+		private void CompareMultiJson(string json)
+		{
+			var jArray = this._expectedJsonJObject as JArray;
+			var lines = json.Split(new [] { '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+			var zipped = jArray.Children<JObject>().Zip(lines, (j, s) => new {j, s}).ToList();
+			foreach(var t in zipped)
+				CompareToken(t.s, t.j);
+			zipped.Count.Should().Be(lines.Count);
+		}
+
+		private void CompareToken(string json, JToken expected)
+		{
+			var actual = JToken.Parse(json);
 			var sameJson = JToken.DeepEquals(expected, actual);
 			if (sameJson) return;
 			expected.ToString().Diff(actual.ToString(), "Expected serialization differs:");
 		}
-
 
 		public virtual RoundTripper<T> WhenSerializing<T>(T actual)
 		{
 			var sut = this.AssertSerializesAndRoundTrips(actual);
 			return new RoundTripper<T>(this.ExpectJson, sut);
 		}
+
 		public RoundTripper WhenInferringIdOn<T>(T project) where T : class
 		{
 			this.Client.Infer.Id<T>(project).Should().Be((string)this.ExpectJson);
 			return this;
 		}
+
 		public RoundTripper ForField(Field field)
 		{
 			this.Client.Infer.Field(field).Should().Be((string)this.ExpectJson);
@@ -92,7 +116,11 @@ namespace Tests.Framework
 	        return this;
 	    }
 
-		public static IntermediateChangedSettings WithConnectionSettings(Func<ConnectionSettings, ConnectionSettings> settings) =>  new IntermediateChangedSettings(settings);
+		public static IntermediateChangedSettings WithConnectionSettings(Func<ConnectionSettings, ConnectionSettings> settings) =>
+			new IntermediateChangedSettings(settings);
+
+		public static IntermediateChangedSettings WithSourceSerializer(IElasticsearchSerializer serializer) =>
+			new IntermediateChangedSettings(s=>s.EnableDebugMode()).WithSourceSerializer(serializer);
 
 		public static RoundTripper Expect(object expected) =>  new RoundTripper(expected);
 
@@ -102,7 +130,7 @@ namespace Tests.Framework
 	{
 		private readonly Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier;
 		private IElasticsearchSerializer _sourceSerializer;
-		private Func<ConnectionSettings, IPropertyMappingProvider> _propertyMappingProvider;
+		private IPropertyMappingProvider _propertyMappingProvider;
 
 		internal IntermediateChangedSettings(Func<ConnectionSettings, ConnectionSettings> settings)
 		{
@@ -113,7 +141,7 @@ namespace Tests.Framework
 			this._sourceSerializer = sourceSerializer;
 			return this;
 		}
-		public IntermediateChangedSettings WithPropertyMappingProvider(Func<ConnectionSettings, IPropertyMappingProvider> propertyMappingProvider)
+		public IntermediateChangedSettings WithPropertyMappingProvider(IPropertyMappingProvider propertyMappingProvider)
 		{
 			this._propertyMappingProvider = propertyMappingProvider;
 			return this;
