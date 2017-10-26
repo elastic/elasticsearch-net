@@ -57,6 +57,7 @@ namespace Nest
 		IDynamicTemplateContainer DynamicTemplates { get; set; }
 
 		[JsonProperty("dynamic")]
+		[JsonConverter(typeof(UnionJsonConverter))]
 		Union<bool, DynamicMapping> Dynamic { get; set; }
 
 		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]

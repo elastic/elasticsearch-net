@@ -10,7 +10,7 @@ namespace Tests.Framework.MockData
 		public string OnlineHandle { get; set; }
 		public Gender Gender { get; set; }
 		public string PrivateValue { get; set; }
-		public string IPAddress { get; set; }
+		public string IpAddress { get; set; }
 
 		// not populated by generator. Used by ingest geoip test
 		public GeoIp GeoIp { get; set; }
@@ -25,7 +25,7 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.OnlineHandle, p => p.Internet.UserName())
 				.RuleFor(p => p.Gender, p => p.PickRandom<Gender>())
 				.RuleFor(p => p.PrivateValue, p => "THIS SHOULD NEVER BE INDEXED")
-				.RuleFor(p => p.IPAddress, p => p.Internet.Ip())
+				.RuleFor(p => p.IpAddress, p => p.Internet.Ip())
 			;
 
 		public static IList<Developer> Developers { get; } =

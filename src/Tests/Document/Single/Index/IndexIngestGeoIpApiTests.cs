@@ -36,7 +36,7 @@ namespace Tests.Document.Single.Index
 					},
 					new GeoIpProcessor
 					{
-						Field = "leadDeveloper.iPAddress",
+						Field = "leadDeveloper.ipAddress",
 						TargetField = "leadDeveloper.geoIp"
 					},
 					new RenameProcessor
@@ -67,7 +67,7 @@ namespace Tests.Document.Single.Index
 		{
 			State = StateOfBeing.Stable,
 			Name = CallIsolatedValue,
-			LeadDeveloper = new Developer { Gender = Gender.Male, Id  = 1, IPAddress = "193.4.250.122" },
+			LeadDeveloper = new Developer { Gender = Gender.Male, Id  = 1, IpAddress = "193.4.250.122" },
 			StartedOn = FixedDate,
 			LastActivity = FixedDate,
 			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}},
@@ -94,10 +94,11 @@ namespace Tests.Document.Single.Index
 			{
 				name = CallIsolatedValue,
 				join = Document.Join,
-				leadDeveloper = new { iPAddress = "193.4.250.122", gender = "Male", id = 1 },
+				leadDeveloper = new { ipAddress = "193.4.250.122", gender = "Male", id = 1 },
 				state = "Stable",
 				startedOn = FixedDate,
 				lastActivity = FixedDate,
+				notWrittenByDefaultSerializer = Dependant(null, "written"),
 				curatedTags = new[] {new {name = "x", added = FixedDate}},
 			};
 
