@@ -165,12 +165,14 @@ namespace Tests.Framework
 		public static IElasticClient GetClient(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
 			int port = 9200,
-			bool forceSsl = false) =>
-			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: false, forceSsl: forceSsl));
+			bool forceSsl = false,
+			IElasticsearchSerializer sourceSerializer = null) =>
+			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: false, forceSsl: forceSsl, sourceSerializer: sourceSerializer));
 
 		public static IElasticClient GetClient(
 			Func<Uri, IConnectionPool> createPool,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
+
 			int port = 9200) =>
 			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: false, createPool: createPool));
 
