@@ -27,8 +27,8 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		private readonly Dictionary<string, object> IncludesNullAndType = new Dictionary<string, object>
 		{
 			{"$type", $"{typeof(ADocument).FullName}, Tests"},
-			{"Name", null},
-			{"Id", 1},
+			{"name", null},
+			{"id", 1},
 		};
 
 		private static void CanAlterSource<T>(Func<IElasticClient, T> call, object usingDefaults, object withSourceSerializer)

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(JoinFieldJsonConverter))]
+	[ContractJsonConverter(typeof(JoinFieldJsonConverter))]
 	public class JoinField : Union<JoinField.Parent, JoinField.Child>
 	{
 		public JoinField(Parent parent) : base(parent) { }
@@ -24,7 +24,7 @@ namespace Nest
 
         public class Parent
         {
-            internal RelationName Name { get; }
+            public RelationName Name { get; }
 
             public Parent(RelationName name)
             {
@@ -33,8 +33,8 @@ namespace Nest
         }
         public class Child
         {
-            internal Id Parent { get; }
-            internal RelationName Name { get; }
+            public Id Parent { get; }
+            public RelationName Name { get; }
 
             public Child(RelationName name, Id parent)
             {

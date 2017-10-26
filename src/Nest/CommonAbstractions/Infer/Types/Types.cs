@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(TypesJsonConverter))]
+	[ContractJsonConverter(typeof(TypesJsonConverter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Types : Union<Types.AllTypesMarker, Types.ManyTypes>, IUrlParameter
 	{

@@ -28,7 +28,6 @@ namespace Tests.Framework
 		protected IElasticsearchSerializer _sourceSerializer;
 		protected static readonly JsonSerializerSettings NullValueSettings = new JsonSerializerSettings {NullValueHandling = NullValueHandling.Include};
 
-		protected IElasticsearchSerializer Serializer => Client.Serializer;
 		protected IElasticsearchSerializer RequestResponseSerializer => Client.ConnectionSettings.RequestResponseSerializer;
 
 		protected virtual IElasticClient Client =>
@@ -127,5 +126,7 @@ namespace Tests.Framework
 			this.SerializesAndMatches(oAgain, ++iteration,out serialized);
 			return oAgain;
 		}
+
+		protected object Dependant(object builtin, object source) => TestClient.Configuration.UsingCustomSourceSerializer ? source : builtin;
 	}
 }

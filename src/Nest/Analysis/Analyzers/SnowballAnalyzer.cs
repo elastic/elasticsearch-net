@@ -13,6 +13,7 @@ namespace Nest
 		SnowballLanguage? Language { get; set; }
 
 		[JsonProperty("stopwords")]
+		[JsonConverter(typeof(StopWordsJsonConverter))]
 		StopWords StopWords { get; set; }
 	}
 	/// <inheritdoc/>

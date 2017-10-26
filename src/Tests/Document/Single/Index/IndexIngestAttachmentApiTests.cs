@@ -95,7 +95,7 @@ namespace Tests.Document.Single.Index
 			fluentAsync: (client, f) => client.IndexAsync<IngestedAttachment>(this.Document, f),
 			request: (client, r) => client.Index(r),
 			requestAsync: (client, r) => client.IndexAsync(r)
-			);
+		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 201;
@@ -106,12 +106,14 @@ namespace Tests.Document.Single.Index
 
 		protected override bool SupportsDeserialization => false;
 
+		protected override bool NoClientSerializeOfExpected => (bool)Dependant(false, true);
+
 		protected override object ExpectJson =>
-			new
-			{
-				id = 1,
-				content = Content
-			};
+			Dependant(
+				new {id = 1, content = Content},
+				new {attachment = (object) null, id = 1, content = Content}
+			);
+
 
 		protected override IndexDescriptor<IngestedAttachment> NewDescriptor() => new IndexDescriptor<IngestedAttachment>(this.Document);
 

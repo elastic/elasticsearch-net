@@ -62,7 +62,7 @@ namespace Tests.Framework.MockData
 
 	    public static Project First { get; } = Projects.First();
 
-		public static Project Instance = new Project
+		public static readonly Project Instance = new Project
 		{
 			Name = Projects.First().Name,
 			LeadDeveloper = new Developer() { FirstName = "Martijn", LastName = "Laarman" },
@@ -71,10 +71,26 @@ namespace Tests.Framework.MockData
 			Location = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 }
 		};
 
-		public static object InstanceAnonymous = new
+		public static object InstanceAnonymous => TestClient.Configuration.UsingCustomSourceSerializer
+			? InstanceAnonymousSourceSerializer
+			: InstanceAnonymousDefault;
+
+		private static readonly object InstanceAnonymousDefault = new
 		{
 			name = Projects.First().Name,
 			join = Instance.Join,
+			state = "BellyUp",
+			startedOn = "2015-01-01T00:00:00",
+			lastActivity = "0001-01-01T00:00:00",
+			dateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+			leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
+			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon }
+		};
+		private static readonly object InstanceAnonymousSourceSerializer = new
+		{
+			name = Projects.First().Name,
+			join = Instance.Join,
+			notWrittenByDefaultSerializer = "written",
 			state = "BellyUp",
 			startedOn = "2015-01-01T00:00:00",
 			lastActivity = "0001-01-01T00:00:00",
