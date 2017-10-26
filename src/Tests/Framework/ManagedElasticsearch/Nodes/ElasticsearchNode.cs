@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
@@ -52,12 +54,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 		{
 			get
 			{
-				if (!this.Started && TestClient.Configuration.RunIntegrationTests)
-				{
-					var logFile = Path.Combine(this.FileSystem.LogsPath, $"{this._config.NodeName}.log");
-					throw new Exception($"cannot request a client from an ElasticsearchNode that hasn't started yet. " +
-					                    $"Check the log at {logFile} to see if there was an issue starting");
-				}
+				ThrowIfNotStarted();
 
 				if (this._client != null) return this._client;
 
@@ -71,6 +68,32 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 				}
 			}
 		}
+
+		private void ThrowIfNotStarted()
+		{
+			if (this.Started || !TestClient.Configuration.RunIntegrationTests) return;
+			var logFile = Path.Combine(this.FileSystem.LogsPath, $"{this._config.NodeName}.log");
+			throw new Exception($"cannot request a client from an ElasticsearchNode that hasn't started yet. " +
+			                    $"Check the log at {logFile} to see if there was an issue starting");
+		}
+
+		private ConcurrentDictionary<string, IElasticClient> NamedClients { get; } = new ConcurrentDictionary<string, IElasticClient>();
+
+		public IElasticClient GetNamedClient(
+			string name, Func<ConnectionSettings, ConnectionSettings> moreSettings, IElasticsearchSerializer sourceSerialzer)
+		{
+			moreSettings = moreSettings ?? (s => s);
+			return this.NamedClients.GetOrAdd(name, (n) =>
+			{
+				ThrowIfNotStarted();
+				var port = this.Started ? this.Port : 9200;
+				this._client = TestClient.GetClient(
+					s=>moreSettings(ComposeSettings(s)), port, forceSsl: this._config.EnableSsl, sourceSerializer: sourceSerialzer);
+				return this.Client;
+
+			});
+		}
+
 
 		public void Start(string[] settings, TimeSpan startTimeout)
 		{
