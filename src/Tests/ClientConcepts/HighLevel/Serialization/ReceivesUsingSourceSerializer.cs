@@ -6,6 +6,7 @@ using System.Reflection.Metadata;
 using Nest;
 using Newtonsoft.Json;
 using Tests.Framework;
+using Tests.Framework.ManagedElasticsearch.SourceSerializers;
 using Tests.Framework.MockData;
 using Xunit.Sdk;
 using static Tests.Framework.RoundTripper;
@@ -40,7 +41,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 				NullValueHandling = NullValueHandling.Include
 			};
 
-			WithSourceSerializer(new CustomSerializer(() => settings))
+			WithSourceSerializer(new CustomSourceSerializer(() => settings))
 				.Expect(withSourceSerializer)
 				.FromRequest(call);
 		}

@@ -6,11 +6,13 @@ using System.IO;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using Bogus;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.Configuration;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Process;
+using Tests.Framework.ManagedElasticsearch.SourceSerializers;
 using Tests.Framework.Versions;
 #if !DOTNETCORE
 using XplatManualResetEvent = System.Threading.ManualResetEvent;
@@ -38,13 +40,15 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 
 		private bool RunningOnCI { get; }
 
+		public bool UsingSourceSerializer { get; }
+
 		public ElasticsearchNode(NodeConfiguration config)
 		{
 			this._config = config;
 			this.FileSystem = config.FileSystem;
 			this.RunningOnCI = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TEAMCITY_VERSION"));
 			this.Port = config.DesiredPort;
-			if (this._config.RunIntegrationTests && !this._config.TestAgainstAlreadyRunningElasticsearch) return;
+			this.UsingSourceSerializer = config.UsingCustomSourceSerializer ;
 		}
 
 		private readonly object _lockGetClient = new object { };
@@ -63,7 +67,14 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 					if (this._client != null) return this._client;
 
 					var port = this.Started ? this.Port : 9200;
-					this._client = TestClient.GetClient(ComposeSettings, port, forceSsl: this._config.EnableSsl);
+					var sourceSerializer = this.UsingSourceSerializer ? CustomSourceSerializer.Default : null;
+
+					this._client = TestClient.GetClient(
+						ComposeSettings,
+						port,
+						forceSsl: this._config.EnableSsl,
+						sourceSerializer: sourceSerializer
+					);
 					return this.Client;
 				}
 			}
@@ -90,7 +101,6 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 				this._client = TestClient.GetClient(
 					s=>moreSettings(ComposeSettings(s)), port, forceSsl: this._config.EnableSsl, sourceSerializer: sourceSerialzer);
 				return this.Client;
-
 			});
 		}
 
