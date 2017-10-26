@@ -299,7 +299,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 				.TermVector(TermVectorOption.WithPositionsOffsetsPayloads)
 			)
 			.Ip(s => s
-				.Name(p => p.IPAddress)
+				.Name(p => p.IpAddress)
 			)
 			.GeoPoint(g => g
 				.Name(p => p.Location)

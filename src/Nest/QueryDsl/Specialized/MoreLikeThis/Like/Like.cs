@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(LikeJsonConverter))]
+	[ContractJsonConverter(typeof(LikeJsonConverter))]
 	public class Like : Union<string, ILikeDocument>
 	{
 		public Like(string item) : base(item) { }

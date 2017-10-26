@@ -51,6 +51,7 @@ namespace Tests.Document.Single.Index
 				state = "Stable",
 				startedOn = FixedDate,
 				lastActivity = FixedDate,
+				notWrittenByDefaultSerializer = Dependant(null, "written"),
 				curatedTags = new[] {new {name = "x", added = FixedDate}},
 			};
 
@@ -74,12 +75,9 @@ namespace Tests.Document.Single.Index
 
 	public class IndexIntegrationTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{
-		public IndexIntegrationTests(WritableCluster cluster) : base(cluster)
-		{
-		}
+		public IndexIntegrationTests(WritableCluster cluster) : base(cluster) { }
 
-		[I]
-		public void OpTypeCreate()
+		[I] public void OpTypeCreate()
 		{
 			var indexName = RandomString();
 			var project = Project.Generator.Generate(1).First();

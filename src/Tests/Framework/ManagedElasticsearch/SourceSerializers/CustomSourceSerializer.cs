@@ -8,6 +8,7 @@ using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
+using Tests.ClientConcepts.HighLevel.Caching;
 using Tests.ClientConcepts.HighLevel.Serialization;
 using Tests.Framework.MockData;
 
@@ -15,18 +16,33 @@ namespace Tests.Framework.ManagedElasticsearch.SourceSerializers
 {
 	public class CustomProjectJsonConverter : JsonConverter
 	{
+		private readonly JsonSerializer _serializer;
+
+		public CustomProjectJsonConverter()
+		{
+			var contract = new DefaultContractResolver {NamingStrategy = new CamelCaseNamingStrategy()};
+			var settings = new JsonSerializerSettings {ContractResolver = contract};
+			settings.NullValueHandling = NullValueHandling.Ignore;
+			settings.DefaultValueHandling = DefaultValueHandling.Include;
+			settings.Converters = new List<JsonConverter>
+			{
+				new TestJoinFieldJsonConverter()
+			};
+			this._serializer = JsonSerializer.Create(settings);
+		}
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var p = value as Project;
-			var o = JObject.FromObject(p);
-			o.Add(nameof(Project.NotWrittenByDefaultSerializer), "written");
+			var o = JObject.FromObject(p, this._serializer);
+			o.Add("notWrittenByDefaultSerializer", "written");
 			writer.WriteToken(o.CreateReader(), true);
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var o = JObject.ReadFrom(reader);
-			var p = o.ToObject<Project>();
+			var p = o.ToObject<Project>(this._serializer);
 			p.NotWrittenByDefaultSerializer = "written";
 			p.NotReadByDefaultSerializer = "read";
 			return p;
@@ -35,15 +51,15 @@ namespace Tests.Framework.ManagedElasticsearch.SourceSerializers
 		public override bool CanConvert(Type objectType) => objectType == typeof(Project);
 	}
 
-
 	public class CustomSourceSerializer : IElasticsearchSerializer
 	{
 		public static CustomSourceSerializer Default { get; } = new CustomSourceSerializer(
-			() => new JsonSerializerSettings{},
+			() => new JsonSerializerSettings(),
 			new List<JsonConverter>()
-		{
-			new CustomProjectJsonConverter()
-		});
+			{
+				new CustomProjectJsonConverter(),
+				new TestJoinFieldJsonConverter()
+			});
 
 		private readonly IList<JsonConverter> _converters;
 		private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
@@ -55,7 +71,7 @@ namespace Tests.Framework.ManagedElasticsearch.SourceSerializers
 		public CustomSourceSerializer(Func<JsonSerializerSettings> settings, IList<JsonConverter> converters = null)
 		{
 			_converters = converters;
-			var contract = new DefaultContractResolver();
+			var contract = new DefaultContractResolver {NamingStrategy = new CamelCaseNamingStrategy()};
 			_serializer = CreateSerializer(settings, contract, SerializationFormatting.Indented);
 			_collapsedSerializer = CreateSerializer(settings, contract, SerializationFormatting.None);
 		}

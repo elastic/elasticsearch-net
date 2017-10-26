@@ -121,7 +121,7 @@ namespace Nest
 			Set<bool?>(s, settings, UpdatableIndexSettings.BlocksMetadata, v => s.BlocksMetadata = v);
 			Set<int?>(s, settings, UpdatableIndexSettings.Priority, v => s.Priority = v);
 			Set<Union<int, RecoveryInitialShards>>(s, settings, UpdatableIndexSettings.RecoveryInitialShards,
-				v => s.RecoveryInitialShards = v);
+				v => s.RecoveryInitialShards = v, serializer);
 			Set<bool?>(s, settings, UpdatableIndexSettings.RequestsCacheEnable, v => s.RequestsCacheEnabled = v);
 			Set<int?>(s, settings, UpdatableIndexSettings.RoutingAllocationTotalShardsPerNode,
 				v => s.RoutingAllocationTotalShardsPerNode = v);

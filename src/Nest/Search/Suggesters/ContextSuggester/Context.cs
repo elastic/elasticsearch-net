@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ContextJsonConverter))]
+	[ContractJsonConverter(typeof(ContextJsonConverter))]
 	public class Context : Union<string, GeoLocation>
 	{
 		public Context(string category) : base(category) { }

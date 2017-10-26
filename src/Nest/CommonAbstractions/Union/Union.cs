@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(UnionJsonConverter))]
+	[ContractJsonConverter(typeof(UnionJsonConverter))]
 	public class Union<TFirst, TSecond>
 	{
 		internal readonly TFirst Item1;

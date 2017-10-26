@@ -96,7 +96,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						{
 							type = "long"
 						},
-						iPAddress = new
+						ipAddress = new
 						{
 							type = "text"
 						},
@@ -237,7 +237,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					.AutoMap()
 					.Properties(ps => ps
 						.Text(t => t.Name(dv => dv.FirstName))
-						.Text(t => t.Name(dv => dv.IPAddress))
+						.Text(t => t.Name(dv => dv.IpAddress))
 						.Text(t => t.Name(dv => dv.JobTitle))
 						.Text(t => t.Name(dv => dv.LastName))
 						.Text(t => t.Name(dv => dv.OnlineHandle))
@@ -302,7 +302,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 								{ p => p.FirstName, new TextProperty() },
 								{ p => p.Gender, new NumberProperty(NumberType.Integer) },
 								{ p => p.Id, new NumberProperty(NumberType.Long) },
-								{ p => p.IPAddress, new TextProperty() },
+								{ p => p.IpAddress, new TextProperty() },
 								{ p => p.JobTitle, new TextProperty() },
 								{ p => p.LastName, new TextProperty() },
 								{ p => p.Location, new GeoPointProperty() },

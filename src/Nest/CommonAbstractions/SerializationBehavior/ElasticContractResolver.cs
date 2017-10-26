@@ -165,9 +165,9 @@ namespace Nest
 		{
 			var property = base.CreateProperty(member, memberSerialization);
 			if (property.PropertyType == typeof(QueryContainer))
-				property.ShouldSerialize = o => ElasticContractResolver.ShouldSerializeQueryContainer(o, property);
+				property.ShouldSerialize = o => ShouldSerializeQueryContainer(o, property);
 			else if (property.PropertyType == typeof(IEnumerable<QueryContainer>))
-				property.ShouldSerialize = o => ElasticContractResolver.ShouldSerializeQueryContainers(o, property);
+				property.ShouldSerialize = o => ShouldSerializeQueryContainers(o, property);
 
 			// Skip serialization of empty collections that have DefaultValueHandling set to Ignore.
 			else if (property.DefaultValueHandling.HasValue

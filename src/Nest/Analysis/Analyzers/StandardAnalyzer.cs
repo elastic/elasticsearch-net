@@ -12,6 +12,7 @@ namespace Nest
 		/// A list of stopword to initialize the stop filter with. Defaults to the english stop words.
 		/// </summary>
 		[JsonProperty("stopwords")]
+		[JsonConverter(typeof(StopWordsJsonConverter))]
 		StopWords StopWords { get; set; }
 
 		/// <summary>
