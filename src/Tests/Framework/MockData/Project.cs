@@ -28,7 +28,9 @@ namespace Tests.Framework.MockData
 		public IEnumerable<string> Branches { get; set; }
 		public Ranges Ranges { get; set; }
 		[JsonIgnore]
-		public string UniqueToSourceSerializer { get; set; }
+		public string NotWrittenByDefaultSerializer { get; set; }
+		[JsonIgnore]
+		public string NotReadByDefaultSerializer { get; set; }
 
 		public static Faker<Project> Generator { get; } =
 			new Faker<Project>()

@@ -1,35 +1,72 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
+using Tests.ClientConcepts.HighLevel.Serialization;
+using Tests.Framework.MockData;
 
-namespace Tests.ClientConcepts.HighLevel.Serialization
+namespace Tests.Framework.ManagedElasticsearch.SourceSerializers
 {
-	public class CustomSerializer : IElasticsearchSerializer
+	public class CustomProjectJsonConverter : JsonConverter
 	{
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			var p = value as Project;
+			var o = JObject.FromObject(p);
+			o.Add(nameof(Project.NotWrittenByDefaultSerializer), "written");
+			writer.WriteToken(o.CreateReader(), true);
+		}
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			var o = JObject.ReadFrom(reader);
+			var p = o.ToObject<Project>();
+			p.NotWrittenByDefaultSerializer = "written";
+			p.NotReadByDefaultSerializer = "read";
+			return p;
+		}
+
+		public override bool CanConvert(Type objectType) => objectType == typeof(Project);
+	}
+
+
+	public class CustomSourceSerializer : IElasticsearchSerializer
+	{
+		public static CustomSourceSerializer Default { get; } = new CustomSourceSerializer(
+			() => new JsonSerializerSettings{},
+			new List<JsonConverter>()
+		{
+			new CustomProjectJsonConverter()
+		});
+
+		private readonly IList<JsonConverter> _converters;
 		private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
 		protected virtual int BufferSize => 1024;
 
 		private readonly JsonSerializer _serializer;
 		private readonly JsonSerializer _collapsedSerializer;
 
-		public CustomSerializer(Func<JsonSerializerSettings> settings)
+		public CustomSourceSerializer(Func<JsonSerializerSettings> settings, IList<JsonConverter> converters = null)
 		{
+			_converters = converters;
 			var contract = new DefaultContractResolver();
 			_serializer = CreateSerializer(settings, contract, SerializationFormatting.Indented);
 			_collapsedSerializer = CreateSerializer(settings, contract, SerializationFormatting.None);
 		}
 
-		private static JsonSerializer CreateSerializer(
+		private JsonSerializer CreateSerializer(
 			Func<JsonSerializerSettings> settings, IContractResolver contract, SerializationFormatting formatting)
 		{
 			var s = settings();
 			s.Formatting = formatting == SerializationFormatting.Indented ? Formatting.Indented : Formatting.None;
 			s.ContractResolver = contract;
+			s.Converters = _converters;
 			return JsonSerializer.Create(s);
 		}
 

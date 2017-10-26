@@ -16,6 +16,9 @@ namespace Tests.Framework.Configuration
 		bool ForceReseed { get; }
 		bool TestAgainstAlreadyRunningElasticsearch { get; }
 
+		bool UsingCustomSourceSerializer { get; }
+		int Seed { get; }
+
 		bool RunIntegrationTests { get; }
 		bool RunUnitTests { get; }
 	}
