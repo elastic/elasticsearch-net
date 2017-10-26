@@ -146,7 +146,8 @@ namespace Tests.Search
 				metadata = new
 				{
 					x = "y",
-					z = (object) null
+					//TODO test for null here again, limitation of Expect()
+					//z = (object) null
 				}
 			}).WhenSerializing(new PutRoleMappingRequest("x")
 			{
@@ -156,7 +157,7 @@ namespace Tests.Search
 				Metadata = new Dictionary<string, object>
 				{
 					{"x", "y"},
-					{"z", null}
+					//{"z", null}
 				}
 			});
 		}

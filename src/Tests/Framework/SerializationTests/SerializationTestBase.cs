@@ -34,7 +34,7 @@ namespace Tests.Framework
 		protected virtual IElasticClient Client =>
 			_connectionSettingsModifier == null && _sourceSerializer == null && this._propertyMappingProvider == null
 			? TestClient.DefaultInMemoryClient
-			: TestClient.GetInMemoryClientWithSourceSerializer(_connectionSettingsModifier, _sourceSerializer);
+			: TestClient.GetInMemoryClientWithSourceSerializer(_connectionSettingsModifier, _sourceSerializer, _propertyMappingProvider);
 
 		protected SerializationTestBase()
 		{

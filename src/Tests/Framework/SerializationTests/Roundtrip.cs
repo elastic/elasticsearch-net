@@ -57,6 +57,8 @@ namespace Tests.Framework
 		public void ToSerializeTo(byte[] json) => ToSerializeTo(Encoding.UTF8.GetString(json));
 		public void ToSerializeTo(string json)
 		{
+			if (this.ExpectJson == null) throw new Exception(json);
+
 			if (this._expectedJsonJObject.Type != JTokenType.Array)
 				CompareToken(json, JToken.FromObject(this.ExpectJson));
 			else
