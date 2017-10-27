@@ -19,7 +19,7 @@ namespace Tests.Framework
 
 		internal RoundTripper(object expected,
 			Func<ConnectionSettings, ConnectionSettings> settings = null,
-			IElasticsearchSerializer sourceSerializer = null,
+			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory = null,
 			IPropertyMappingProvider propertyMappingProvider = null)
 		{
 			this.ExpectJson = expected;
@@ -27,7 +27,7 @@ namespace Tests.Framework
 
 			this._expectedJsonString = JsonConvert.SerializeObject(expected, NullValueSettings);
 			this._expectedJsonJObject = JToken.Parse(this._expectedJsonString);
-			this._sourceSerializer = sourceSerializer;
+			this._sourceSerializerFactory = sourceSerializerFactory;
 			this._propertyMappingProvider = propertyMappingProvider;
 		}
 
@@ -121,8 +121,8 @@ namespace Tests.Framework
 		public static IntermediateChangedSettings WithConnectionSettings(Func<ConnectionSettings, ConnectionSettings> settings) =>
 			new IntermediateChangedSettings(settings);
 
-		public static IntermediateChangedSettings WithSourceSerializer(IElasticsearchSerializer serializer) =>
-			new IntermediateChangedSettings(s=>s.EnableDebugMode()).WithSourceSerializer(serializer);
+		public static IntermediateChangedSettings WithSourceSerializer(ConnectionSettings.SourceSerializerFactory factory) =>
+			new IntermediateChangedSettings(s=>s.EnableDebugMode()).WithSourceSerializer(factory);
 
 		public static RoundTripper Expect(object expected) =>  new RoundTripper(expected);
 
@@ -131,16 +131,16 @@ namespace Tests.Framework
 	public class IntermediateChangedSettings
 	{
 		private readonly Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier;
-		private IElasticsearchSerializer _sourceSerializer;
+		private ConnectionSettings.SourceSerializerFactory _sourceSerializerFactory;
 		private IPropertyMappingProvider _propertyMappingProvider;
 
 		internal IntermediateChangedSettings(Func<ConnectionSettings, ConnectionSettings> settings)
 		{
 			this._connectionSettingsModifier = settings;
 		}
-		public IntermediateChangedSettings WithSourceSerializer(IElasticsearchSerializer sourceSerializer)
+		public IntermediateChangedSettings WithSourceSerializer(ConnectionSettings.SourceSerializerFactory factory)
 		{
-			this._sourceSerializer = sourceSerializer;
+			this._sourceSerializerFactory = factory;
 			return this;
 		}
 		public IntermediateChangedSettings WithPropertyMappingProvider(IPropertyMappingProvider propertyMappingProvider)
@@ -150,7 +150,7 @@ namespace Tests.Framework
 		}
 
 		public RoundTripper Expect(object expected) =>
-			new RoundTripper(expected, _connectionSettingsModifier, this._sourceSerializer, this._propertyMappingProvider);
+			new RoundTripper(expected, _connectionSettingsModifier, this._sourceSerializerFactory, this._propertyMappingProvider);
 	}
 
 	public class RoundTripper<T> : RoundTripper

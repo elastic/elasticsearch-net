@@ -135,7 +135,7 @@ namespace Tests.Framework
 			bool forceInMemory = false,
 			bool forceSsl = false,
 			Func<Uri, IConnectionPool> createPool = null,
-			IElasticsearchSerializer sourceSerializer = null,
+			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory = null,
 			IPropertyMappingProvider propertyMappingProvider = null
 		)
 		{
@@ -143,7 +143,7 @@ namespace Tests.Framework
 
 			var connectionPool = createPool(CreateUri(port, forceSsl));
 			var connection = CreateConnection(forceInMemory: forceInMemory);
-			var s = new ConnectionSettings(connectionPool, connection, sourceSerializer, propertyMappingProvider);
+			var s = new ConnectionSettings(connectionPool, connection, sourceSerializerFactory, propertyMappingProvider);
 
 			var defaultSettings = DefaultSettings(s);
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
@@ -155,10 +155,10 @@ namespace Tests.Framework
 
 		public static IElasticClient GetInMemoryClientWithSourceSerializer(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings,
-			IElasticsearchSerializer sourceSerializer,
+			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory = null,
 			IPropertyMappingProvider propertyMappingProvider = null) =>
 			new ElasticClient(
-				CreateSettings(modifySettings, forceInMemory: true, sourceSerializer: sourceSerializer,
+				CreateSettings(modifySettings, forceInMemory: true, sourceSerializerFactory: sourceSerializerFactory,
 					propertyMappingProvider: propertyMappingProvider)
 				);
 
@@ -166,8 +166,10 @@ namespace Tests.Framework
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
 			int port = 9200,
 			bool forceSsl = false,
-			IElasticsearchSerializer sourceSerializer = null) =>
-			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: false, forceSsl: forceSsl, sourceSerializer: sourceSerializer));
+			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory = null) =>
+			new ElasticClient(
+				CreateSettings(modifySettings, port, forceInMemory: false, forceSsl: forceSsl, sourceSerializerFactory: sourceSerializerFactory)
+			);
 
 		public static IElasticClient GetClient(
 			Func<Uri, IConnectionPool> createPool,

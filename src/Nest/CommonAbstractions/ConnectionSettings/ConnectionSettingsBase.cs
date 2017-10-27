@@ -14,25 +14,23 @@ namespace Nest
 	/// </summary>
 	public class ConnectionSettings : ConnectionSettingsBase<ConnectionSettings>
 	{
+		public delegate IElasticsearchSerializer SourceSerializerFactory(IConnectionSettingsValues values, IElasticsearchSerializer builtIn);
+
 		public ConnectionSettings(Uri uri = null)
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
 
-		public ConnectionSettings(IConnectionPool connectionPool)
-			: this(connectionPool, null, null) { }
-
-		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection)
-			: this(connectionPool, connection, null) { }
-
-		public ConnectionSettings(IConnectionPool connectionPool, IElasticsearchSerializer sourceSerializer)
+		public ConnectionSettings(IConnectionPool connectionPool) : this(connectionPool, null, null) { }
+		public ConnectionSettings(IConnectionPool connectionPool, SourceSerializerFactory sourceSerializer)
 			: this(connectionPool, null, sourceSerializer) { }
 
-		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer sourceSerializer)
-			: base(connectionPool, connection, sourceSerializer, null) { }
+		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection) : this(connectionPool, connection, null) { }
+		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection, SourceSerializerFactory sourceSerializer)
+			: this(connectionPool, connection, sourceSerializer, null) { }
 
 		public ConnectionSettings(
 			IConnectionPool connectionPool,
 			IConnection connection,
-			IElasticsearchSerializer sourceSerializer,
+			SourceSerializerFactory sourceSerializer,
 			IPropertyMappingProvider propertyMappingProvider)
 			: base(connectionPool, connection, sourceSerializer, propertyMappingProvider) { }
 
@@ -73,7 +71,7 @@ namespace Nest
 		private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
 		FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
 
-		private readonly  IElasticsearchSerializer _sourceSerializer;
+		private readonly IElasticsearchSerializer _sourceSerializer;
 		IElasticsearchSerializer IConnectionSettingsValues.SourceSerializer => _sourceSerializer;
 
 		private readonly IPropertyMappingProvider _propertyMappingProvider;
@@ -85,13 +83,13 @@ namespace Nest
 		protected ConnectionSettingsBase(
 			IConnectionPool connectionPool,
 			IConnection connection,
-			IElasticsearchSerializer sourceSerializer,
+			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory,
 			IPropertyMappingProvider propertyMappingProvider
 			)
 			: base(connectionPool, connection, null)
 		{
 			var defaultSerializer = new JsonNetSerializer(this);
-			this._sourceSerializer = sourceSerializer ?? defaultSerializer;
+			this._sourceSerializer = sourceSerializerFactory?.Invoke(this, defaultSerializer) ?? defaultSerializer;
 			this.UseThisRequestResponseSerializer = defaultSerializer;
 			this._propertyMappingProvider = propertyMappingProvider ?? new PropertyMappingProvider();
 
