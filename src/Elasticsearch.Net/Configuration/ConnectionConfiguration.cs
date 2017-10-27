@@ -175,8 +175,8 @@ namespace Elasticsearch.Net
 		BasicAuthenticationCredentials _basicAuthCredentials;
 		BasicAuthenticationCredentials IConnectionConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
 
-		protected IElasticsearchSerializer _requestResponseSerializer;
-		IElasticsearchSerializer IConnectionConfigurationValues.RequestResponseSerializer => _requestResponseSerializer;
+		protected IElasticsearchSerializer UseThisRequestResponseSerializer { get; set; }
+		IElasticsearchSerializer IConnectionConfigurationValues.RequestResponseSerializer => UseThisRequestResponseSerializer;
 
 		private readonly IConnectionPool _connectionPool;
 		IConnectionPool IConnectionConfigurationValues.ConnectionPool => _connectionPool;
@@ -188,7 +188,7 @@ namespace Elasticsearch.Net
 		{
 			this._connectionPool = connectionPool;
 			this._connection = connection ?? new HttpConnection();
-			this._requestResponseSerializer = requestResponseSerializer ?? new LowLevelRequestResponseSerializer();
+			this.UseThisRequestResponseSerializer = requestResponseSerializer ?? new LowLevelRequestResponseSerializer();
 
 			this._connectionLimit = ConnectionConfiguration.DefaultConnectionLimit;
 			this._requestTimeout = ConnectionConfiguration.DefaultTimeout;

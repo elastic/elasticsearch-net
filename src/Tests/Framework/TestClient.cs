@@ -188,7 +188,7 @@ namespace Tests.Framework
 			string contentType = "application/json",
 			Exception exception = null)
 		{
-			var serializer = Default.Serializer;
+			var serializer = Default.RequestResponseSerializer;
 			var fixedResult = contentType == "application/json"
 				? serializer.SerializeToBytes(response)
 				: Encoding.UTF8.GetBytes(response.ToString());

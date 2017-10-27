@@ -12,8 +12,15 @@ namespace Nest
 
 		/// <summary>
 		/// Access the configured <see cref="IConnectionSettingsValues.SourceSerializer"/>
+		/// Out of the box <see cref="RequestResponseSerializer"/> and this point to the same instance
 		/// </summary>
-		IElasticsearchSerializer Serializer { get; }
+		IElasticsearchSerializer SourceSerializer { get; }
+
+		/// <summary>
+		/// Access the configured <see cref="IConnectionConfigurationValues.RequestResponseSerializer"/>
+		/// Out of the box <see cref="SourceSerializer"/> and this point to the same instance
+		/// </summary>
+		IElasticsearchSerializer RequestResponseSerializer { get; }
 
 		/// <summary>
 		/// An instance of the low level client that uses the serializers from the highlevel client.

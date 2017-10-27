@@ -33,7 +33,7 @@ namespace Tests.Document.Multiple.Bulk
 #pragma warning restore 618
 		public void Setup()
 		{
-			var serializer = Client.Serializer;
+			var serializer = Client.RequestResponseSerializer;
 			_tinyResponse = serializer.SerializeToBytes(ReturnBulkResponse(1));
 			_mediumResponse = serializer.SerializeToBytes(ReturnBulkResponse(100));
 			_largeResponse = serializer.SerializeToBytes(ReturnBulkResponse(1000));
@@ -46,28 +46,28 @@ namespace Tests.Document.Multiple.Bulk
 		public BulkResponse TinyResponse()
 		{
 			using (var ms = new MemoryStream(_tinyResponse))
-				return Client.Serializer.Deserialize<BulkResponse>(ms);
+				return Client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
 		}
 
 		[Benchmark(Description = "deserialize 100 items in bulk response")]
 		public BulkResponse MediumResponse()
 		{
 			using (var ms = new MemoryStream(_mediumResponse))
-				return Client.Serializer.Deserialize<BulkResponse>(ms);
+				return Client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
 		}
 
 		[Benchmark(Description = "deserialize 1,000 items in bulk response")]
 		public BulkResponse LargeResponse()
 		{
 			using (var ms = new MemoryStream(_largeResponse))
-				return Client.Serializer.Deserialize<BulkResponse>(ms);
+				return Client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
 		}
 
 		[Benchmark(Description = "deserialize 100,000 items in bulk response")]
 		public BulkResponse HugeResponse()
 		{
 			using (var ms = new MemoryStream(_hugeResponse))
-				return Client.Serializer.Deserialize<BulkResponse>(ms);
+				return Client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
 		}
 
 		[Benchmark(Description = "deserialize 100,000 items in bulk response")]

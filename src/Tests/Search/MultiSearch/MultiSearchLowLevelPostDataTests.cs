@@ -48,7 +48,7 @@ namespace Tests.Search.MultiSearch
 		[I] public void PostEnumerableOfStrings()
 		{
 			var listOfStrings = Search
-				.Select(s => this._client.Serializer.SerializeToString(s, SerializationFormatting.None))
+				.Select(s => this._client.RequestResponseSerializer.SerializeToString(s, SerializationFormatting.None))
 				.ToList();
 
 			var response = this._client.LowLevel.Msearch<dynamic>("project", "project", listOfStrings);
@@ -60,7 +60,7 @@ namespace Tests.Search.MultiSearch
 		[I] public void PostString()
 		{
 			var str = Search
-				.Select(s => this._client.Serializer.SerializeToString(s, SerializationFormatting.None))
+				.Select(s => this._client.RequestResponseSerializer.SerializeToString(s, SerializationFormatting.None))
 				.ToList()
 				.Aggregate(new StringBuilder(), (sb, s) => sb.Append(s + "\n"), sb => sb.ToString());
 
@@ -73,7 +73,7 @@ namespace Tests.Search.MultiSearch
 		[I] public void PostByteArray()
 		{
 			var str = Search
-				.Select(s => this._client.Serializer.SerializeToString(s, SerializationFormatting.None))
+				.Select(s => this._client.RequestResponseSerializer.SerializeToString(s, SerializationFormatting.None))
 				.ToList()
 				.Aggregate(new StringBuilder(), (sb, s) => sb.Append(s + "\n"), sb => sb.ToString());
 
