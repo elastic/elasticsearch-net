@@ -8,7 +8,6 @@ namespace Nest
 {
 	internal class QueryContainerJsonConverter: ReserializeJsonConverter<QueryContainer, IQueryContainer>
 	{
-
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType == JsonToken.StartObject)
@@ -25,7 +24,6 @@ namespace Nest
 				return base.ReadJson(escapedReader, objectType, existingValue, serializer);
 			}
 		}
-
 
 		protected override void SerializeJson(JsonWriter writer, object value, IQueryContainer castValue, JsonSerializer serializer)
 		{

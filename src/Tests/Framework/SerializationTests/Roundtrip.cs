@@ -39,13 +39,13 @@ namespace Tests.Framework
 
 			T sut;
 			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
-				sut = this.Client.Serializer.Deserialize<T>(stream);
+				sut = this.Client.RequestResponseSerializer.Deserialize<T>(stream);
 			sut.Should().NotBeNull();
 			assert("first deserialization", sut);
 
-			var serialized = this.Client.Serializer.SerializeToString(sut);
+			var serialized = this.Client.RequestResponseSerializer.SerializeToString(sut);
 			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(serialized)))
-				sut = this.Client.Serializer.Deserialize<T>(stream);
+				sut = this.Client.RequestResponseSerializer.Deserialize<T>(stream);
 			sut.Should().NotBeNull();
 			assert("second deserialization", sut);
 		}
