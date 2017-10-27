@@ -54,7 +54,6 @@ namespace Nest
 		/// A primary shard is only recovered only if there are
 		/// enough nodes available to allocate sufficient replicas to form a quorum.
 		/// </summary>
-		[JsonConverter(typeof(UnionJsonConverter))]
 		Union<int, RecoveryInitialShards> RecoveryInitialShards { get; set; }
 
 		/// <summary>
