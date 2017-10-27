@@ -16,7 +16,7 @@ namespace Tests.Document.Multiple.Bulk
 		{
 			var client = TestClient.GetInMemoryClient();
 			var count = 100000;
-			var bytes = client.Serializer.SerializeToBytes(ReturnBulkResponse(count));
+			var bytes = client.RequestResponseSerializer.SerializeToBytes(ReturnBulkResponse(count));
 			var x = Deserialize(bytes, client);
 			x.Items.Should().HaveCount(count).And.NotContain(i=>i == null);
 
@@ -24,7 +24,7 @@ namespace Tests.Document.Multiple.Bulk
 		private BulkResponse Deserialize(byte[] response, IElasticClient client)
 		{
 			using (var ms = new MemoryStream(response))
-				return client.Serializer.Deserialize<BulkResponse>(ms);
+				return client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
 		}
 
 		private static object BulkItemResponse() => new

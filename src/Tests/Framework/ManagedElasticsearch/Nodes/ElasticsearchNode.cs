@@ -88,23 +88,6 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 			                    $"Check the log at {logFile} to see if there was an issue starting");
 		}
 
-		private ConcurrentDictionary<string, IElasticClient> NamedClients { get; } = new ConcurrentDictionary<string, IElasticClient>();
-
-		public IElasticClient GetNamedClient(
-			string name, Func<ConnectionSettings, ConnectionSettings> moreSettings, IElasticsearchSerializer sourceSerialzer)
-		{
-			moreSettings = moreSettings ?? (s => s);
-			return this.NamedClients.GetOrAdd(name, (n) =>
-			{
-				ThrowIfNotStarted();
-				var port = this.Started ? this.Port : 9200;
-				this._client = TestClient.GetClient(
-					s=>moreSettings(ComposeSettings(s)), port, forceSsl: this._config.EnableSsl, sourceSerializer: sourceSerialzer);
-				return this.Client;
-			});
-		}
-
-
 		public void Start(string[] settings, TimeSpan startTimeout)
 		{
 			if (!this._config.RunIntegrationTests || this.Started) return;

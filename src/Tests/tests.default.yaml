@@ -5,7 +5,7 @@
 # tracked by git).
 
 # mode either u (unit test), i (integration test) or m (mixed mode)
-mode: u
+mode: i
 # the elasticsearch version that should be started
 # Can be a snapshot version of sonatype or "latest" to get the latest snapshot of sonatype
 elasticsearch_version: 6.0.0-rc1
@@ -18,4 +18,4 @@ force_reseed: true
 test_against_already_running_elasticsearch: true
 
 force_custom_source_serializer: true
-#seed: 1337
+seed: 90359

@@ -24,13 +24,13 @@ namespace Nest
 
 		private string DebugDisplay => Value?.ToString() ?? "Id from instance typeof: " + Document?.GetType().Name;
 
-		public string GetString(IConnectionConfigurationValues settings)
+		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{
 			var nestSettings = settings as IConnectionSettingsValues;
 			return GetString(nestSettings);
 		}
 
-		internal string GetString(IConnectionSettingsValues nestSettings)
+		private string GetString(IConnectionSettingsValues nestSettings)
 		{
 			if (this.Document != null)
 			{

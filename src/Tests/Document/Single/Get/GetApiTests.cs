@@ -38,6 +38,10 @@ namespace Tests.Document.Single.Get
 		{
 			response.Source.Should().NotBeNull();
 			response.Source.Name.Should().Be(ProjectId);
+
+			if (!UsingSourceSerializer) return;
+			response.Source.NotReadByDefaultSerializer.Should().Be("read");
+			response.Source.NotWrittenByDefaultSerializer.Should().Be("written");
 		}
 	}
 
@@ -113,6 +117,7 @@ namespace Tests.Document.Single.Get
 #pragma warning disable 618
 			response.Parent.Should().BeNullOrEmpty();
 #pragma warning restore 618
+
 		}
 	}
 

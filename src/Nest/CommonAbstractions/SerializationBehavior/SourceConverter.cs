@@ -22,7 +22,6 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			//TODO pooling of memory?
 			using (var ms = new MemoryStream(reader.ReadAsBytes()))
 				return serializer.GetConnectionSettings().SourceSerializer.Deserialize(objectType, ms);
 		}

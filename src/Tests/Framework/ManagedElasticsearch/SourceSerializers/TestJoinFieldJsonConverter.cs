@@ -53,7 +53,7 @@ namespace Tests.Framework.ManagedElasticsearch.SourceSerializers
 		}
 
 		private string GetName(RelationName relation) => TestClient.DefaultInMemoryClient.Infer.RelationName(relation);
-		private string GetId(Id id) => TestClient.DefaultInMemoryClient.Infer.Id(id);
+		private string GetId(IUrlParameter id) => id.GetString(TestClient.DefaultInMemoryClient.ConnectionSettings);
 
 		public static void WriteProperty(JsonWriter writer, JsonSerializer serializer, string propertyName, object value)
 		{
