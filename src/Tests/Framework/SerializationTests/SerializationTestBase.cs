@@ -25,15 +25,16 @@ namespace Tests.Framework
 
 		protected Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier = null;
 		protected IPropertyMappingProvider _propertyMappingProvider;
-		protected IElasticsearchSerializer _sourceSerializer;
+		protected ConnectionSettings.SourceSerializerFactory _sourceSerializerFactory;
 		protected static readonly JsonSerializerSettings NullValueSettings = new JsonSerializerSettings {NullValueHandling = NullValueHandling.Include};
 
 		protected IElasticsearchSerializer RequestResponseSerializer => Client.ConnectionSettings.RequestResponseSerializer;
 
 		protected virtual IElasticClient Client =>
-			_connectionSettingsModifier == null && _sourceSerializer == null && this._propertyMappingProvider == null
+			_connectionSettingsModifier == null && _sourceSerializerFactory == null && this._propertyMappingProvider == null
 			? TestClient.DefaultInMemoryClient
-			: TestClient.GetInMemoryClientWithSourceSerializer(_connectionSettingsModifier, _sourceSerializer, _propertyMappingProvider);
+			: TestClient.GetInMemoryClientWithSourceSerializer(
+					_connectionSettingsModifier, _sourceSerializerFactory, _propertyMappingProvider);
 
 		protected SerializationTestBase()
 		{

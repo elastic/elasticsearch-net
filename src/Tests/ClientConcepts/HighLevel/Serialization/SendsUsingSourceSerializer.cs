@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
+using Elasticsearch.Net;
 using Nest;
 using Newtonsoft.Json;
+using Tests.ClientConcepts.HighLevel.CovariantHits;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.SourceSerializers;
 using Tests.Framework.MockData;
@@ -31,18 +33,26 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			{"id", 1},
 		};
 
+		private class CustomSettingsSerializer : TestSourceSerializer
+		{
+			public CustomSettingsSerializer(IElasticsearchSerializer builtinSerializer) : base(builtinSerializer) { }
+
+			protected override JsonSerializerSettings CreateJsonSerializerSettings()
+			{
+				return new JsonSerializerSettings
+				{
+					TypeNameHandling = TypeNameHandling.All,
+					NullValueHandling = NullValueHandling.Include
+				};
+			}
+		}
+
 		private static void CanAlterSource<T>(Func<IElasticClient, T> call, object usingDefaults, object withSourceSerializer)
 			where T : IResponse
 		{
 			Expect(usingDefaults).FromRequest(call);
 
-			var settings = new JsonSerializerSettings
-			{
-				TypeNameHandling = TypeNameHandling.All,
-				NullValueHandling = NullValueHandling.Include
-			};
-
-			WithSourceSerializer(new CustomSourceSerializer(() => settings))
+			WithSourceSerializer((s, c) => new CustomSettingsSerializer(c))
 				.Expect(withSourceSerializer)
 				.FromRequest(call);
 		}

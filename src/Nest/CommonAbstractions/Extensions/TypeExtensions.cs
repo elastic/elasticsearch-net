@@ -27,7 +27,7 @@ namespace Nest
 		private static readonly ConcurrentDictionary<Type, IList<PropertyInfo>> CachedTypePropertyInfos =
 			new ConcurrentDictionary<Type, IList<PropertyInfo>>();
 
-		public delegate T ObjectActivator<out T>(params object[] args);
+		private delegate T ObjectActivator<out T>(params object[] args);
 
 		internal static object CreateGenericInstance(this Type t, Type closeOver, params object[] args)
 		{
