@@ -10,7 +10,6 @@ namespace Nest
 	public interface IObjectProperty : ICoreProperty
 	{
 		[JsonProperty("dynamic")]
-		[JsonConverter(typeof(UnionJsonConverter))]
 		Union<bool, DynamicMapping> Dynamic { get; set; }
 
 		[JsonProperty("enabled")]
