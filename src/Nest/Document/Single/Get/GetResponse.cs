@@ -24,6 +24,7 @@ namespace Nest
 		bool Found { get; }
 
 		[JsonProperty("_source")]
+		[JsonConverter(typeof(SourceConverter))]
 		T Source { get; }
 
 		[JsonProperty("fields")]

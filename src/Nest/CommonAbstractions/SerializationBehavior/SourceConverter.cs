@@ -1,7 +1,9 @@
 using System;
 using System.IO;
+using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
@@ -22,7 +24,8 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			using (var ms = new MemoryStream(reader.ReadAsBytes()))
+			var token = JToken.ReadFrom(reader);
+			using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(token.ToString())))
 				return serializer.GetConnectionSettings().SourceSerializer.Deserialize(objectType, ms);
 		}
 	}

@@ -27,10 +27,8 @@ namespace Tests.Framework.MockData
 		public CompletionField Suggest { get; set; }
 		public IEnumerable<string> Branches { get; set; }
 		public Ranges Ranges { get; set; }
-		[JsonIgnore]
-		public string NotWrittenByDefaultSerializer { get; set; }
-		[JsonIgnore]
-		public string NotReadByDefaultSerializer { get; set; }
+
+		public SourceOnlyObject SourceOnly { get; set; }
 
 		public static Faker<Project> Generator { get; } =
 			new Faker<Project>()
@@ -47,6 +45,8 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.NumberOfCommits, f => Gimme.Random.Number(1, 1000))
 				.RuleFor(p => p.NumberOfContributors, f => Gimme.Random.Number(1, 200))
 				.RuleFor(p => p.Ranges, f => Ranges.Generator.Generate())
+				.RuleFor(p => p.SourceOnly, f => TestClient.Configuration.UsingCustomSourceSerializer
+					? new SourceOnlyObject() : null)
 				.RuleFor(p => p.Suggest, f => new CompletionField
 					{
 						Input = new[] { f.Person.Company.Name },

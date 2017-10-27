@@ -15,29 +15,6 @@ using Tests.Framework.MockData;
 
 namespace Tests.Framework.ManagedElasticsearch.SourceSerializers
 {
-	public class CustomProjectJsonConverter : JsonConverter
-	{
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			var p = value as Project;
-			var o = JObject.FromObject(p, serializer);
-			o.Add("notWrittenByDefaultSerializer", "written");
-
-			writer.WriteToken(o.CreateReader(), true);
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			var o = JObject.ReadFrom(reader);
-			var p = o.ToObject<Project>(serializer);
-			p.NotWrittenByDefaultSerializer = "written";
-			p.NotReadByDefaultSerializer = "read";
-			return p;
-		}
-
-		public override bool CanConvert(Type objectType) => objectType == typeof(Project);
-	}
-
 	public class TestSourceSerializer : CustomJsonNetSourceSerializer
 	{
 		public TestSourceSerializer(IElasticsearchSerializer builtinSerializer)
@@ -54,7 +31,7 @@ namespace Tests.Framework.ManagedElasticsearch.SourceSerializers
 
 		protected override IEnumerable<JsonConverter> CreateJsonConverters()
 		{
-			yield return new CustomProjectJsonConverter();
+			yield return new SourceOnlyUsingBuiltInConverter();
 		}
 
 		protected override IContractResolver CreateContractResolver()
