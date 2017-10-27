@@ -9,6 +9,7 @@ using System.Reactive.Linq;
 using Bogus;
 using Elasticsearch.Net;
 using Nest;
+using Newtonsoft.Json;
 using Tests.Framework.Configuration;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Process;
@@ -67,13 +68,16 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 					if (this._client != null) return this._client;
 
 					var port = this.Started ? this.Port : 9200;
-					var sourceSerializer = this.UsingSourceSerializer ? CustomSourceSerializer.Default : null;
 
 					this._client = TestClient.GetClient(
 						ComposeSettings,
 						port,
 						forceSsl: this._config.EnableSsl,
-						sourceSerializer: sourceSerializer
+						sourceSerializerFactory: (settings, builtin) =>
+						{
+							var customSourceSerializer = new TestSourceSerializer(builtin);
+							return this.UsingSourceSerializer ? customSourceSerializer : null;
+						}
 					);
 					return this.Client;
 				}
