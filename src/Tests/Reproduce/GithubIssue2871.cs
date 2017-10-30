@@ -16,12 +16,12 @@ namespace Tests.Reproduce
 
 		public GithubIssue2871(WritableCluster cluster) => _cluster = cluster;
 
-		[I]
+		[I][SkipVersion("<5.0.0", "this fails the whole request with 400 in 2.x")]
 		public void IsValidFalseAndDeserializedErrorsWhenMultiGetDocHasErrors()
 		{
-			var index1 = "index1";
-			var index2 = "index2";
-			var alias = "my_alias";
+			var index1 = "index1-issue2871";
+			var index2 = "index2-issue2871";
+			var alias = "my_alias-issue2871";
 			var client = _cluster.Client;
 
 			client.CreateIndex(index1, c=> c
