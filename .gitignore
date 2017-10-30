@@ -39,6 +39,8 @@ _NCrunch*/
 .fake
 packages/*
 paket.exe
+paket-files/*.cached
+
 
 build/*
 !build/tools
