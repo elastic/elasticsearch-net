@@ -88,6 +88,7 @@ Target "Canary" <| fun _ ->
   ==> "Profile"
 
 "Clean" 
+  ==> "Restore"
   =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Benchmark"
 
@@ -96,6 +97,7 @@ Target "Canary" <| fun _ ->
   ==> "Canary"
 
 "Clean"
+  ==> "Restore"
   =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Integrate"
 
