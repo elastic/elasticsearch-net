@@ -40,7 +40,7 @@ namespace Elasticsearch.Net
 
 		public override string ToString()
 		{
-			var took = Started - Ended;
+			var took = Ended - Started;
 			return $"Node: {Node?.Uri}, Event: {Event.GetStringValue()} NodeAlive: {Node?.IsAlive}, Took: {took}";
 		}
 	}
