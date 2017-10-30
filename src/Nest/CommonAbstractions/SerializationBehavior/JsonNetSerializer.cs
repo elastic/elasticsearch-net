@@ -35,7 +35,7 @@ namespace Nest
 		/// The size of the buffer to use when writing the serialized request
 		/// to the request stream
 		/// </summary>
-		// Performance tests as part of https://github.com/elastic/elasticsearch-net/issues/1899 indicate this 
+		// Performance tests as part of https://github.com/elastic/elasticsearch-net/issues/1899 indicate this
 		// to be a good compromise buffer size for performance throughput and bytes allocated.
 		protected virtual int BufferSize => 1024;
 
@@ -44,7 +44,8 @@ namespace Nest
 
 		protected virtual IList<Func<Type, JsonConverter>> ContractConverters => null;
 
-		protected readonly ConcurrentDictionary<int, IPropertyMapping> Properties = new ConcurrentDictionary<int, IPropertyMapping>();
+		protected ConcurrentDictionary<int, IPropertyMapping> Properties => throw new Exception("subclass of JsonNetSerializer should not call this field");
+		protected readonly ConcurrentDictionary<string, IPropertyMapping> PropertiesFixed = new ConcurrentDictionary<string, IPropertyMapping>();
 
 		public JsonNetSerializer(IConnectionSettingsValues settings, Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier) : this(settings, null, settingsModifier) { }
 
@@ -102,9 +103,11 @@ namespace Nest
 		public virtual IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
 		{
 			IPropertyMapping mapping;
-			if (Properties.TryGetValue(memberInfo.GetHashCode(), out mapping)) return mapping;
+			var memberInfoString = $"{memberInfo.DeclaringType?.FullName}.{memberInfo.Name}";
+			if (PropertiesFixed.TryGetValue(memberInfoString, out mapping))
+				return mapping;
 			mapping =  PropertyMappingFromAttributes(memberInfo);
-			this.Properties.TryAdd(memberInfo.GetHashCode(), mapping);
+			this.PropertiesFixed.TryAdd(memberInfoString, mapping);
 			return mapping;
 		}
 
