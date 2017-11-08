@@ -219,9 +219,6 @@ namespace Elasticsearch.Net
 			}
 			requestMessage.Headers.Connection.Clear();
 			requestMessage.Headers.ConnectionClose = false;
-			requestMessage.Headers.Connection.Add("Keep-Alive");
-			//requestMessage.Headers.Connection;
-
 			requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestData.ContentType));
 
 			if (!requestData.RunAs.IsNullOrEmpty())
