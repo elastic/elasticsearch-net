@@ -59,9 +59,8 @@ namespace Elasticsearch.Net
 
 			request.Accept = requestData.Accept;
 			request.ContentType = requestData.ContentType;
-
 			request.MaximumResponseHeadersLength = -1;
-
+			request.AllowWriteStreamBuffering = false;
 			request.Pipelined = requestData.Pipelined;
 
 			if (requestData.HttpCompression)
