@@ -56,7 +56,6 @@ namespace Tests.Analysis.TokenFilters
 					hunspell = new
 					{
 						type = "hunspell",
-						ignore_case = true,
 						locale = "en_US",
 						dictionary = "path_to_dict",
 						dedup = true,
@@ -222,7 +221,6 @@ namespace Tests.Analysis.TokenFilters
 						synonyms_path = "analysis/stopwords.txt",
 						format = "wordnet",
 						synonyms = new[] {"x=>y", "z=>s"},
-						ignore_case = true,
 						expand = true,
 						tokenizer = "whitespace"
 					},
@@ -232,7 +230,6 @@ namespace Tests.Analysis.TokenFilters
 						synonyms_path = "analysis/stopwords.txt",
 						format = "wordnet",
 						synonyms = new[] {"x=>y", "z=>s"},
-						ignore_case = true,
 						expand = true,
 						tokenizer = "whitespace"
 					},
@@ -321,7 +318,6 @@ namespace Tests.Analysis.TokenFilters
 					.Hunspell("hunspell", t => t
 						.Dedup()
 						.Dictionary("path_to_dict")
-						.IgnoreCase()
 						.Locale("en_US")
 						.LongestOnly()
 					)
@@ -388,7 +384,6 @@ namespace Tests.Analysis.TokenFilters
 					.Synonym("syn", t => t
 						.Expand()
 						.Format(SynonymFormat.WordNet)
-						.IgnoreCase()
 						.SynonymsPath("analysis/stopwords.txt")
 						.Synonyms("x=>y", "z=>s")
 						.Tokenizer("whitespace")
@@ -396,7 +391,6 @@ namespace Tests.Analysis.TokenFilters
 					.SynonymGraph("syn_graph", t => t
 						.Expand()
 						.Format(SynonymFormat.WordNet)
-						.IgnoreCase()
 						.SynonymsPath("analysis/stopwords.txt")
 						.Synonyms("x=>y", "z=>s")
 						.Tokenizer("whitespace")
@@ -490,7 +484,6 @@ namespace Tests.Analysis.TokenFilters
 							{
 								Dedup = true,
 								Dictionary = "path_to_dict",
-								IgnoreCase = true,
 								Locale = "en_US",
 								LongestOnly = true
 							}
@@ -539,7 +532,6 @@ namespace Tests.Analysis.TokenFilters
 							{
 								Expand = true,
 								Format = SynonymFormat.WordNet,
-								IgnoreCase = true,
 								SynonymsPath = "analysis/stopwords.txt",
 								Synonyms = new[] {"x=>y", "z=>s"},
 								Tokenizer = "whitespace"
@@ -550,7 +542,6 @@ namespace Tests.Analysis.TokenFilters
 							{
 								Expand = true,
 								Format = SynonymFormat.WordNet,
-								IgnoreCase = true,
 								SynonymsPath = "analysis/stopwords.txt",
 								Synonyms = new[] {"x=>y", "z=>s"},
 								Tokenizer = "whitespace"
