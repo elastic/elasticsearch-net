@@ -41,11 +41,11 @@ namespace Tests.Aggregations.Bucket.Terms
 						missing = "n/a",
 						script = new
 						{
-							inline = "'State of Being: '+_value",
+							source = "'State of Being: '+_value",
 						},
 						order = new object[]
 						{
-							new {_term = "asc"},
+							new {_key = "asc"},
 							new {_count = "desc"}
 						}
 					}
@@ -63,7 +63,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					.ShardSize(100)
 					.ExecutionHint(TermsAggregationExecutionHint.Map)
 					.Missing("n/a")
-					.Script(ss => ss.Inline("'State of Being: '+_value"))
+					.Script(ss => ss.Source("'State of Being: '+_value"))
 					.Order(TermsOrder.TermAscending)
 					.Order(TermsOrder.CountDescending)
 					.Meta(m => m
@@ -152,7 +152,7 @@ namespace Tests.Aggregations.Bucket.Terms
 						include = "(Stable|VeryActive)",
 						order = new object[]
 						{
-							new {_term = "asc"},
+							new {_key = "asc"},
 							new {_count = "desc"}
 						}
 					}
@@ -259,7 +259,7 @@ namespace Tests.Aggregations.Bucket.Terms
 						include = new[] {"Stable", "VeryActive"},
 						order = new object[]
 						{
-							new {_term = "asc"},
+							new {_key = "asc"},
 							new {_count = "desc"}
 						}
 					}

@@ -46,6 +46,9 @@ namespace Nest
 
 		public IndexedScriptDescriptor Indexed(string id) => new IndexedScriptDescriptor(id);
 
+		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
 		public InlineScriptDescriptor Inline(string script) => new InlineScriptDescriptor(script);
+
+		public InlineScriptDescriptor Source(string script) => new InlineScriptDescriptor(script);
 	}
 }

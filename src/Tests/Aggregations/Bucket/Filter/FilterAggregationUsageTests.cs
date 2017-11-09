@@ -152,7 +152,7 @@ namespace Tests.Aggregations.Bucket.Filter
 					filter = new {
 						script = new {
 							script = new {
-								inline = _ctxNumberofCommits,
+								source = _ctxNumberofCommits,
 							}
 						}
 					}
@@ -165,7 +165,7 @@ namespace Tests.Aggregations.Bucket.Filter
 				.Filter(_aggName, date => date
 					.Filter(f => f
 						.Script(b => b
-							.Inline(_ctxNumberofCommits)
+							.Source(_ctxNumberofCommits)
 						)
 					)
 				)
@@ -178,8 +178,8 @@ namespace Tests.Aggregations.Bucket.Filter
 				{
 					Filter = new ScriptQuery
 					{
-						Inline = _ctxNumberofCommits,
-				}
+						Source = _ctxNumberofCommits
+					}
 				}
 			};
 

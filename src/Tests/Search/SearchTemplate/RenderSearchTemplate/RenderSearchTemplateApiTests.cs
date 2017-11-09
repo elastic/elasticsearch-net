@@ -42,7 +42,7 @@ namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 		private string[] statusValues = new[] { "pending", "published" };
 
 		protected override Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> Fluent => s=>s
-			.Inline(inlineSearchTemplate)
+			.Source(inlineSearchTemplate)
 			.Params(p=>p
 				.Add("status", statusValues)
 			);
@@ -50,7 +50,7 @@ namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 
 		protected override RenderSearchTemplateRequest Initializer => new RenderSearchTemplateRequest
 		{
-			Inline = inlineSearchTemplate,
+			Source = inlineSearchTemplate,
 			Params = new Dictionary<string, object>
 			{
 				{ "status", statusValues }

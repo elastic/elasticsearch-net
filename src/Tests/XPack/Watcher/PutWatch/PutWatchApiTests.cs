@@ -179,7 +179,7 @@ namespace Tests.XPack.Watcher.PutWatch
 						{
 							script = new
 							{
-								inline = "return [ 'time' : ctx.trigger.scheduled_time ]",
+								source = "return [ 'time' : ctx.trigger.scheduled_time ]",
 							}
 						}
 					}

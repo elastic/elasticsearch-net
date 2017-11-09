@@ -35,6 +35,7 @@ namespace Nest
 	{
 		protected override bool Conditionless => IsConditionless(this);
 		public string Source { get; set; }
+		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
 		public string Inline { get => this.Source; set => this.Source = value; }
 		public Id Id { get; set; }
 		public string File { get; set; }

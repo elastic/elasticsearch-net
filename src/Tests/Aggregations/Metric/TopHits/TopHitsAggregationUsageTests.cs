@@ -64,7 +64,7 @@ namespace Tests.Aggregations.Metric.TopHits
 									{
 										script = new
 										{
-											inline = "doc['numberOfCommits'].value * 2",
+											source = "doc['numberOfCommits'].value * 2",
 										}
 									}
 								}
@@ -106,7 +106,7 @@ namespace Tests.Aggregations.Metric.TopHits
 							)
 							.ScriptFields(sfs => sfs
 								.ScriptField("commit_factor", sf => sf
-									.Inline("doc['numberOfCommits'].value * 2")
+									.Source("doc['numberOfCommits'].value * 2")
 								)
 							)
 						)

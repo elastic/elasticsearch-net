@@ -25,6 +25,7 @@ namespace Nest
 	public partial class RenderSearchTemplateRequest
 	{
 		public string Source { get; set; }
+		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
 		public string Inline { get => this.Source; set => this.Source = value; }
 		public string File { get; set; }
 		public Dictionary<string, object> Params { get; set; }

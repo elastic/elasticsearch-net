@@ -65,7 +65,7 @@ namespace Tests.Document.Multiple.Bulk
 			new Dictionary<string, object>{ { "update", new { _type="doc", _id = Project.Instance.Name + "2" } } },
 			new Dictionary<string, object>{ { "script", new
 			{
-				inline= "ctx._source.numberOfCommits = params.commits",
+				source = "ctx._source.numberOfCommits = params.commits",
 				@params = new { commits = 30 },
 				lang = "painless"
 			} } },
@@ -82,7 +82,7 @@ namespace Tests.Document.Multiple.Bulk
 			.Update<Project>(b => b
 				.Id(Project.Instance.Name + "2")
 				.Script(s => s
-					.Inline("ctx._source.numberOfCommits = params.commits")
+					.Source("ctx._source.numberOfCommits = params.commits")
 					.Params(p => p.Add("commits", 30))
 					.Lang("painless")
 				)
