@@ -69,7 +69,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		*
 		* Both `Parent` and `Child` will need to have resolve to the same typename to be indexed into the same index.
 		*
-		* Therefor in 6.x we need a different type that translates a CLR type to a join relation. This can be configured seperately
+		* Therefore in 6.x we need a different type that translates a CLR type to a join relation. This can be configured seperately
 		* using `.RelationName()`
 		*/
 		[U] public void RelationNameConfiguration()
