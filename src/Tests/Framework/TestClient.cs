@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
@@ -64,6 +65,8 @@ namespace Tests.Framework
 			? x
 			: ConnectionConfiguration.DefaultConnectionLimit;
 
+		public static ConcurrentBag<string> SeenDeprecations { get; } = new ConcurrentBag<string>();
+
 		private static ConnectionSettings DefaultSettings(ConnectionSettings settings) => settings
 			.DefaultIndex("default-index")
 			.PrettyJson()
@@ -97,6 +100,15 @@ namespace Tests.Framework
 			//.PrettyJson()
 			//TODO make this random
 			//.EnableHttpCompression()
+			.OnRequestCompleted(r =>
+			{
+				if (!r.DeprecationWarnings.Any()) return;
+				var q = r.Uri.Query;
+				if (!string.IsNullOrWhiteSpace(q) && q.Contains("routing=ignoredefaultcompletedhandler")) return;
+
+				var method = ExpensiveTestNameForIntegrationTests();
+				foreach (var d in r.DeprecationWarnings) SeenDeprecations.Add($"{method}: {d}");
+			})
 			.OnRequestDataCreated(data => data.Headers.Add("TestMethod", ExpensiveTestNameForIntegrationTests()));
 
 		public static string PercolatorType => Configuration.ElasticsearchVersion <= ElasticsearchVersion.GetOrAdd("5.0.0-alpha1")
@@ -183,10 +195,10 @@ namespace Tests.Framework
 
 		private static string ExpensiveTestNameForIntegrationTests()
 		{
-			if (!(RunningFiddler && Configuration.RunIntegrationTests)) return "ignore";
+			if (!Configuration.RunIntegrationTests) return "ignore";
 
 #if DOTNETCORE
-			return "TODO: Work out how to get test name. Maybe Environment.StackTrace?";
+			return "UNKNOWN";
 #else
 			var st = new StackTrace();
 			var types = GetTypes(st);
