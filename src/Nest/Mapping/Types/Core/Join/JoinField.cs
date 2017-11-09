@@ -6,14 +6,14 @@ namespace Nest
 	[JsonConverter(typeof(JoinFieldJsonConverter))]
 	public class JoinField : Union<JoinField.Parent, JoinField.Child>
 	{
-		public JoinField(Parent parentName) : base(parentName) { }
+		public JoinField(Parent parent) : base(parent) { }
 
 		public JoinField(Child child) : base(child) { }
 
 		public static JoinField Root<TParent>() => new Parent(typeof(TParent));
 		public static JoinField Root(RelationName parent) => new Parent(parent);
 
-		public static JoinField Link(RelationName childName, Id parentId) => new Child(childName, parentId);
+		public static JoinField Link(RelationName child, Id parentId) => new Child(child, parentId);
 		public static JoinField Link<TChild, TParentDocument>(TParentDocument parent) where TParentDocument : class =>
 			new Child(typeof(TChild), Id.From<TParentDocument>(parent));
 		public static JoinField Link<TChild>(Id parentId) => new Child(typeof(TChild), parentId);
