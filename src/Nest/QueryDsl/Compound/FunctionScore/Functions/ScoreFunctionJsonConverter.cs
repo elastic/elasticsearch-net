@@ -50,11 +50,6 @@ namespace Nest
 			if (value == null) return false;
 			writer.WritePropertyName("script_score");
 			serializer.Serialize(writer, value.Script);
-			//writer.WriteStartObject();
-			//{
-			//	writer.WriteProperty(serializer, "script", value.Script);
-			//}
-			//writer.WriteEndObject();
 			return true;
 		}
 
@@ -65,6 +60,7 @@ namespace Nest
 			writer.WriteStartObject();
 			{
 				writer.WriteProperty(serializer, "seed", value.Seed);
+				writer.WriteProperty(serializer, "field", value.Field);
 			}
 			writer.WriteEndObject();
 			return true;
