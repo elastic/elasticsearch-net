@@ -104,10 +104,9 @@ namespace Tests.Framework
 			{
 				if (!r.DeprecationWarnings.Any()) return;
 				var q = r.Uri.Query;
+				//hack to prevent the deprecation warnings from the deprecation response test to be reported
 				if (!string.IsNullOrWhiteSpace(q) && q.Contains("routing=ignoredefaultcompletedhandler")) return;
-
-				var method = ExpensiveTestNameForIntegrationTests();
-				foreach (var d in r.DeprecationWarnings) SeenDeprecations.Add($"{method}: {d}");
+				foreach (var d in r.DeprecationWarnings) SeenDeprecations.Add(d);
 			})
 			.OnRequestDataCreated(data => data.Headers.Add("TestMethod", ExpensiveTestNameForIntegrationTests()));
 
