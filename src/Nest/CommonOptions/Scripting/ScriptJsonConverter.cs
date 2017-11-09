@@ -24,6 +24,11 @@ namespace Nest
 				var inline = dict["inline"].ToString();
 				script = new InlineScript(inline);
 			}
+			if (dict.ContainsKey("source"))
+			{
+				var inline = dict["source"].ToString();
+				script = new InlineScript(inline);
+			}
 			if (dict.ContainsKey("file"))
 			{
 				var file = dict["file"].ToString();

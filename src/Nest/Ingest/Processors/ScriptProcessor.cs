@@ -35,7 +35,11 @@ namespace Nest
 		/// <summary>
 		/// An inline script to be executed
 		/// </summary>
-		[JsonProperty("inline")]
+		[JsonProperty("source")]
+		string Source { get; set; }
+
+		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
+		[JsonIgnore]
 		string Inline { get; set; }
 
 		/// <summary>
@@ -68,10 +72,10 @@ namespace Nest
 		/// </summary>
 		public string Id { get; set; }
 
-		/// <summary>
-		/// An inline script to be executed
-		/// </summary>
-		public string Inline { get; set; }
+		/// <summary> An inline script to be executed </summary>
+		public string Source { get; set; }
+		/// <summary> An inline script to be executed </summary>
+		public string Inline { get => this.Source; set => this.Source = value; }
 
 		/// <summary>
 		/// Parameters for the script
@@ -90,7 +94,8 @@ namespace Nest
 		string IScriptProcessor.Lang { get; set; }
 		string IScriptProcessor.File{ get; set; }
 		string IScriptProcessor.Id{ get; set; }
-		string IScriptProcessor.Inline { get; set; }
+		string IScriptProcessor.Inline { get => Self.Source; set => Self.Source = value; }
+		string IScriptProcessor.Source { get; set; }
 		Dictionary<string, object> IScriptProcessor.Params { get; set; }
 
 		/// <summary>
@@ -111,7 +116,13 @@ namespace Nest
 		/// <summary>
 		/// An inline script to be executed
 		/// </summary>
+		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
 		public ScriptProcessorDescriptor Inline(string inline) => Assign(a => a.Inline = inline);
+
+		/// <summary>
+		/// An inline script to be executed
+		/// </summary>
+		public ScriptProcessorDescriptor Source(string source) => Assign(a => a.Source = source);
 
 		/// <summary>
 		/// Parameters for the script
