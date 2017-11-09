@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -22,6 +23,7 @@ namespace Nest
 		IEnumerable<string> Synonyms { get; set; }
 
 		[JsonProperty("ignore_case")]
+		[Obsolete("Will be removed in Elasticsearch 7.x, if you need to ignore case add a lowercase filter before this synonym filter")]
 		bool? IgnoreCase { get; set; }
 
 		[JsonProperty("expand")]
@@ -46,6 +48,7 @@ namespace Nest
 		public IEnumerable<string> Synonyms { get; set; }
 
 		/// <inheritdoc/>
+		[Obsolete("Will be removed in Elasticsearch 7.x, if you need to ignore case add a lowercase filter before this synonym filter")]
 		public bool? IgnoreCase { get; set; }
 
 		/// <inheritdoc/>
@@ -69,6 +72,7 @@ namespace Nest
 		IEnumerable<string> ISynonymGraphTokenFilter.Synonyms { get; set; }
 
 		///<inheritdoc/>
+		[Obsolete("Will be removed in Elasticsearch 7.x, if you need to ignore case add a lowercase filter before this synonym filter")]
 		public SynonymGraphTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(a => a.IgnoreCase = ignoreCase);
 
 		///<inheritdoc/>
