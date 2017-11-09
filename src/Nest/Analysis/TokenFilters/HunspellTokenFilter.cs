@@ -1,19 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	/// <summary>
-	/// Basic support for hunspell stemming. 
+	/// Basic support for hunspell stemming.
 	///<para> Hunspell dictionaries will be picked up from a dedicated hunspell directory on the filesystem.</para>
 	/// </summary>
 	public interface IHunspellTokenFilter : ITokenFilter
 	{
-		/// <summary>
-		/// If true, dictionary matching will be case insensitive.
-		/// </summary>
-		[JsonProperty("ignore_case")]
-		bool? IgnoreCase { get; set; }
-
 		/// <summary>
 		/// A locale for this filter. If this is unset, the lang or language are used instead - so one of these has to be set.
 		/// </summary>
@@ -21,7 +16,7 @@ namespace Nest
 		string Locale { get; set; }
 
 		/// <summary>
-		/// The name of a dictionary.The path to your hunspell dictionaries should be configured via 
+		/// The name of a dictionary.The path to your hunspell dictionaries should be configured via
 		/// `indices.analysis.hunspell.dictionary.location` before.
 		/// </summary>
 		[JsonProperty("dictionary")]
@@ -44,10 +39,7 @@ namespace Nest
 	/// <inheritdoc/>
 	public class HunspellTokenFilter : TokenFilterBase, IHunspellTokenFilter
 	{
-		public HunspellTokenFilter() : base("hunspell") { } 
-
-		/// <inheritdoc/>
-		public bool? IgnoreCase { get; set; }
+		public HunspellTokenFilter() : base("hunspell") { }
 
 		/// <inheritdoc/>
 		public string Locale { get; set; }
@@ -65,14 +57,13 @@ namespace Nest
 	}
 
 	///<inheritdoc/>
-	public class HunspellTokenFilterDescriptor 
+	public class HunspellTokenFilterDescriptor
 		: TokenFilterDescriptorBase<HunspellTokenFilterDescriptor, IHunspellTokenFilter>, IHunspellTokenFilter
 	{
 		protected override string Type => "hunspell";
 
 		bool? IHunspellTokenFilter.LongestOnly { get; set; }
 		bool? IHunspellTokenFilter.Dedup { get; set; }
-		bool? IHunspellTokenFilter.IgnoreCase { get; set; }
 		string IHunspellTokenFilter.Locale { get; set; }
 		string IHunspellTokenFilter.Dictionary { get; set; }
 
@@ -81,9 +72,6 @@ namespace Nest
 
 		///<inheritdoc/>
 		public HunspellTokenFilterDescriptor Dedup(bool? dedup = true) => Assign(a => a.Dedup = dedup);
-
-		///<inheritdoc/>
-		public HunspellTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(a => a.IgnoreCase = ignoreCase);
 
 		///<inheritdoc/>
 		public HunspellTokenFilterDescriptor Locale(string locale) => Assign(a => a.Locale = locale);
