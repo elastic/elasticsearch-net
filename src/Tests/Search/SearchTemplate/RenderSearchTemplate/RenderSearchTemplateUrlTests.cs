@@ -18,10 +18,10 @@ namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 				;
 
 			await POST("/_render/template")
-				.Fluent(c => c.RenderSearchTemplate(s=>s.Inline("")))
-				.Request(c=>c.RenderSearchTemplate(new RenderSearchTemplateRequest { Inline = "" }))
-				.FluentAsync(c => c.RenderSearchTemplateAsync(s=>s.Inline("")))
-				.RequestAsync(c=>c.RenderSearchTemplateAsync(new RenderSearchTemplateRequest { Inline = "" }))
+				.Fluent(c => c.RenderSearchTemplate(s=>s.Source("")))
+				.Request(c=>c.RenderSearchTemplate(new RenderSearchTemplateRequest { Source = "" }))
+				.FluentAsync(c => c.RenderSearchTemplateAsync(s=>s.Source("")))
+				.RequestAsync(c=>c.RenderSearchTemplateAsync(new RenderSearchTemplateRequest { Source = "" }))
 				;
 		}
 	}

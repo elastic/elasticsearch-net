@@ -24,7 +24,7 @@ namespace Tests.Reproduce
 		{
 			var client = _cluster.Client;
 			var response = client.UpdateByQuery<Project>(u => u
-				.Script(ss=>ss.Inline("invalid groovy").Lang("groovy"))
+				.Script(ss=>ss.Source("invalid groovy").Lang("groovy"))
 			);
 			response.ShouldNotBeValid();
 		}

@@ -32,6 +32,7 @@ namespace Nest
 		/// <summary> An inline script to be executed </summary>
 		public string Source { get; set; }
 		/// <summary> An inline script to be executed </summary>
+		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
 		public string Inline { get => this.Source; set => this.Source = value; }
 		public Id Id { get; set; }
 		public IDictionary<string, object> Params { get; set;}

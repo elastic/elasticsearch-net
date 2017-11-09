@@ -176,7 +176,7 @@ namespace Tests.Ingest.PutPipeline
 				{
 					script = new
 					{
-						inline = "ctx.numberOfCommits++"
+						source = "ctx.numberOfCommits++"
 					}
 				}
 			}
@@ -258,7 +258,7 @@ namespace Tests.Ingest.PutPipeline
 					.Field("field.withDots")
 				)
 				.Script(s => s
-					.Inline("ctx.numberOfCommits++")
+					.Source("ctx.numberOfCommits++")
 				)
 			);
 
@@ -355,7 +355,7 @@ namespace Tests.Ingest.PutPipeline
 				},
 				new ScriptProcessor
 				{
-					Inline = "ctx.numberOfCommits++"
+					Source = "ctx.numberOfCommits++"
 				}
 			}
 		};

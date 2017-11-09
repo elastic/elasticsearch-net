@@ -31,7 +31,7 @@ namespace Tests.QueryDsl.Specialized.Script
 				boost = 1.1,
 				script = new
 				{
-					inline = "doc['numberOfCommits'].value > param1",
+					source = "doc['numberOfCommits'].value > param1",
 					@params = new { param1 = 50 }
 				}
 			}
@@ -41,7 +41,7 @@ namespace Tests.QueryDsl.Specialized.Script
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Inline = _templateString,
+			Source = _templateString,
 			Params = new Dictionary<string, object>
 			{
 				{ "param1", 50 }
@@ -52,19 +52,19 @@ namespace Tests.QueryDsl.Specialized.Script
 			.Script(sn => sn
 				.Name("named_query")
 				.Boost(1.1)
-				.Inline(_templateString)
+				.Source(_templateString)
 				.Params(p=>p.Add("param1", 50))
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IScriptQuery>(a => a.Script)
 		{
 			q => {
-				q.Inline = "";
+				q.Source = "";
 				q.Id = null;
 				q.File = "";
 			},
 			q => {
-				q.Inline = null;
+				q.Source = null;
 				q.Id = null;
 				q.File = null;
 			}

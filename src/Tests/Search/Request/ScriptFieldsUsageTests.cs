@@ -30,14 +30,14 @@ namespace Tests.Search.Request
 				{
 					script = new
 					{
-						inline = "doc['my_field_name'].value * 2",
+						source = "doc['my_field_name'].value * 2",
 					}
 				},
 				test2 = new
 				{
 					script = new
 					{
-						inline = "doc['my_field_name'].value * params.factor",
+						source = "doc['my_field_name'].value * params.factor",
 						@params = new
 						{
 							factor = 2.0
@@ -50,10 +50,10 @@ namespace Tests.Search.Request
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.ScriptFields(sf => sf
 				.ScriptField("test1", sc => sc
-					.Inline("doc['my_field_name'].value * 2")
+					.Source("doc['my_field_name'].value * 2")
 				)
 				.ScriptField("test2", sc => sc
-					.Inline("doc['my_field_name'].value * params.factor")
+					.Source("doc['my_field_name'].value * params.factor")
 					.Params(p => p
 						.Add("factor", 2.0)
 					)

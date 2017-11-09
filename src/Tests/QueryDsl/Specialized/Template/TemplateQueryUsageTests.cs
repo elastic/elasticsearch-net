@@ -18,7 +18,7 @@ namespace Tests.QueryDsl.Specialized.Template
 			{
 				_name = "named_query",
 				boost = 1.1,
-				inline = _templateString,
+				source = _templateString,
 				@params = new
 				{
 					query_string = "all about search"
@@ -30,7 +30,7 @@ namespace Tests.QueryDsl.Specialized.Template
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Inline = _templateString,
+			Source = _templateString,
 			Params = new Dictionary<string, object>
 			{
 				{ "query_string", "all about search" }
@@ -42,7 +42,7 @@ namespace Tests.QueryDsl.Specialized.Template
 			.Template(sn => sn
 				.Name("named_query")
 				.Boost(1.1)
-				.Inline(_templateString)
+				.Source(_templateString)
 				.Params(p=>p.Add("query_string", "all about search"))
 			);
 #pragma warning restore 618
@@ -50,12 +50,12 @@ namespace Tests.QueryDsl.Specialized.Template
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITemplateQuery>(a => a.Template)
 		{
 			q => {
-				q.Inline = "";
+				q.Source = "";
 				q.Id = null;
 				q.File = "";
 			},
 			q => {
-				q.Inline = null;
+				q.Source = null;
 				q.Id = null;
 				q.File = null;
 			}

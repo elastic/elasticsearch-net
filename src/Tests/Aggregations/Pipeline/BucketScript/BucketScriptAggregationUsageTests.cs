@@ -67,7 +67,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 								},
 								script = new
 								{
-									inline = "params.stableCommits / params.totalCommits * 100",
+									source = "params.stableCommits / params.totalCommits * 100",
 								}
 							}
 						}
@@ -101,7 +101,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 								.Add("totalCommits", "commits")
 								.Add("stableCommits", "stable_state>commits")
 							)
-							.Script(ss =>ss.Inline("params.stableCommits / params.totalCommits * 100"))
+							.Script(ss =>ss.Source("params.stableCommits / params.totalCommits * 100"))
 						)
 					)
 				)
