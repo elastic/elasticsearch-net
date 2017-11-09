@@ -32,6 +32,8 @@ namespace Xunit
 						Console.WriteLine($"- {kv.Key}: {kv.Value.Elapsed}");
 					Console.WriteLine("--------");
 
+					DumpSeenDeprecations();
+
 					if (runner.FailedCollections.Count > 0)
 					{
 						Console.ForegroundColor = ConsoleColor.Red;
@@ -51,6 +53,16 @@ namespace Xunit
 				Console.WriteLine(e);
 				throw;
 			}
+		}
+
+		private static void DumpSeenDeprecations()
+		{
+			if (TestClient.SeenDeprecations.Count == 0) return;
+
+			Console.WriteLine("-------- SEEN DEPRECATIONS");
+			foreach (var d in TestClient.SeenDeprecations.Distinct())
+				Console.WriteLine(d);
+			Console.WriteLine("--------");
 		}
 
 		private static void DumpReproduceFilters(TestAssemblyRunner runner)

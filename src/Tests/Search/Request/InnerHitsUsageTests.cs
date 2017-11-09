@@ -198,7 +198,6 @@ namespace Tests.Search.Request
 	/**[float]
 	*=== Query Inner Hits
 	*/
-	[SkipVersion("6.0.0-rc1", "inner hits will return to their old representation with rc2")]
 	public class QueryInnerHitsApiTests : InnerHitsApiTestsBase<King>
 	{
 		public QueryInnerHitsApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
