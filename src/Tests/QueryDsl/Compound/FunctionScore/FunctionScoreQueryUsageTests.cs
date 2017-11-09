@@ -67,8 +67,8 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 							modifier = "ln"
 						}
 					},
-					new { random_score = new { seed = 1337 } },
-					new { random_score = new { seed = "randomstring" } },
+					new { random_score = new { seed = 1337, field = "_seq_no" } },
+					new { random_score = new { seed = "randomstring", field = "_seq_no" } },
 					new { weight = 1.0 },
 					new {
 						script_score = new {
@@ -106,8 +106,8 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 				{
 					Field = "x", Factor = 1.1,	Missing = 0.1, Modifier = FieldValueFactorModifier.Ln
 				},
-				new RandomScoreFunction { Seed = 1337 },
-				new RandomScoreFunction { Seed = "randomstring" },
+				new RandomScoreFunction { Seed = 1337, Field = "_seq_no" },
+				new RandomScoreFunction { Seed = "randomstring", Field = "_seq_no" },
 				new WeightFunction { Weight = 1.0},
 				new ScriptScoreFunction { Script = new ScriptQuery { File = "x" } }
 			}
@@ -127,8 +127,8 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 					.GaussDate(b => b.Field(p => p.LastActivity).Origin(DateMath.Now).Decay(0.5).Scale("1d"))
 					.LinearGeoLocation(b => b.Field(p => p.Location).Origin(new GeoLocation(70, -70)).Scale(Distance.Miles(1)).MultiValueMode(MultiValueMode.Average))
 					.FieldValueFactor(b => b.Field("x").Factor(1.1).Missing(0.1).Modifier(FieldValueFactorModifier.Ln))
-					.RandomScore(1337)
-					.RandomScore("randomstring")
+					.RandomScore(r=>r.Seed(1337).Field("_seq_no"))
+					.RandomScore(r=>r.Seed("randomstring").Field("_seq_no"))
 					.Weight(1.0)
 					.ScriptScore(ss => ss.Script(s => s.File("x")))
 				)
