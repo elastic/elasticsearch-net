@@ -423,7 +423,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 				{
 					script = new
 					{
-						inline = "ctx.payload.hits.total > 1"
+						source = "ctx.payload.hits.total > 1"
 					}
 				},
 				input = new

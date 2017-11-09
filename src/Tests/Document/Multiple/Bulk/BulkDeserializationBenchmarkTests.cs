@@ -28,7 +28,9 @@ namespace Tests.Document.Multiple.Bulk
 		private byte[] _hugeResponse;
 		private JsonSerializer _jsonSerializer;
 
+#pragma warning disable 618
 		[Setup]
+#pragma warning restore 618
 		public void Setup()
 		{
 			var serializer = Client.Serializer;

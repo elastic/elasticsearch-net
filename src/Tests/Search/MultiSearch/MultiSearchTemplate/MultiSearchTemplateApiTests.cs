@@ -46,7 +46,7 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 			.Index(typeof(Project))
 			.Type(typeof(Project))
 			.Template<Project>("inline", s => s
-				.Inline("{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}")
+				.Source("{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}")
 				.Params(p => p
 					.Add("state", "Stable")
 				)
@@ -59,7 +59,7 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 			{
 				{ "inline", new SearchTemplateRequest<Project>(typeof(Project))
 					{
-						Inline = "{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}",
+						Source = "{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}",
 						Params = new Dictionary<string, object>
 						{
 							{ "state", "Stable" }

@@ -30,7 +30,7 @@ namespace Tests.Aggregations.Metric.Average
 						missing = 10.0,
 						script = new
 						{
-							inline = "_value * 1.2",
+							source = "_value * 1.2",
 						}
 					}
 				}
@@ -45,7 +45,7 @@ namespace Tests.Aggregations.Metric.Average
 					)
 					.Field(p => p.NumberOfCommits)
 					.Missing(10)
-					.Script(ss=>ss.Inline("_value * 1.2"))
+					.Script(ss=>ss.Source("_value * 1.2"))
 				)
 			);
 
