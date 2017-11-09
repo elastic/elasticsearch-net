@@ -11,15 +11,15 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-
+	
 	///<summary>descriptor for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
 	public partial class BulkDescriptor  : RequestDescriptorBase<BulkDescriptor,BulkRequestParameters, IBulkRequest>, IBulkRequest
-	{
+	{ 
 		IndexName IBulkRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IBulkRequest.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/_bulk</summary>
 		public BulkDescriptor() : base(){}
-
+		
 
 			///<summary>Default index for items which don't provide one</summary>
 		public BulkDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -33,7 +33,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public BulkDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
-
+	
 		///<summary>Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public BulkDescriptor WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
 
@@ -48,7 +48,7 @@ namespace Nest
 
 		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
 		public BulkDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
-
+			
 		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
 		public BulkDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._Fields(fields));
@@ -58,14 +58,14 @@ namespace Nest
 
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceExclude(params string[] source_exclude) => AssignParam(p=>p.SourceExclude(source_exclude));
-
+			
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._SourceExclude(fields));
 
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceInclude(params string[] source_include) => AssignParam(p=>p.SourceInclude(source_include));
-
+			
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._SourceInclude(fields));
@@ -83,25 +83,25 @@ namespace Nest
 		public BulkDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public BulkDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public BulkDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public BulkDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
 	public partial class CatAliasesDescriptor  : RequestDescriptorBase<CatAliasesDescriptor,CatAliasesRequestParameters, ICatAliasesRequest>, ICatAliasesRequest
-	{
+	{ 
 		Names ICatAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_cat/aliases</summary>
 		public CatAliasesDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of alias names to return</summary>
 		public CatAliasesDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-
+	
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatAliasesDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -133,25 +133,25 @@ namespace Nest
 		public CatAliasesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatAliasesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatAliasesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatAliasesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
 	public partial class CatAllocationDescriptor  : RequestDescriptorBase<CatAllocationDescriptor,CatAllocationRequestParameters, ICatAllocationRequest>, ICatAllocationRequest
-	{
+	{ 
 		NodeIds ICatAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 			/// <summary>/_cat/allocation</summary>
 		public CatAllocationDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of node IDs or names to limit the returned information</summary>
 		public CatAllocationDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
 
-
+	
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatAllocationDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -186,20 +186,20 @@ namespace Nest
 		public CatAllocationDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatAllocationDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatAllocationDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatAllocationDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
 	public partial class CatCountDescriptor  : RequestDescriptorBase<CatCountDescriptor,CatCountRequestParameters, ICatCountRequest>, ICatCountRequest
-	{
+	{ 
 		Indices ICatCountRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_cat/count</summary>
 		public CatCountDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names to limit the returned information</summary>
 		public CatCountDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -210,7 +210,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatCountDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatCountDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -242,20 +242,20 @@ namespace Nest
 		public CatCountDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatCountDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatCountDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatCountDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
 	public partial class CatFielddataDescriptor  : RequestDescriptorBase<CatFielddataDescriptor,CatFielddataRequestParameters, ICatFielddataRequest>, ICatFielddataRequest
-	{
+	{ 
 		Fields ICatFielddataRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 			/// <summary>/_cat/fielddata</summary>
 		public CatFielddataDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of fields to return the fielddata size</summary>
 		public CatFielddataDescriptor Fields(Fields fields) => Assign(a=>a.RouteValues.Optional("fields", fields));
@@ -263,7 +263,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields to return the fielddata size</summary>
 		public CatFielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) => Assign(a => a.RouteValues.Optional("fields", (Fields)fields));
 
-
+	
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatFielddataDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -298,17 +298,17 @@ namespace Nest
 		public CatFielddataDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatFielddataDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatFielddataDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatFielddataDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
 	public partial class CatHealthDescriptor  : RequestDescriptorBase<CatHealthDescriptor,CatHealthRequestParameters, ICatHealthRequest>, ICatHealthRequest
-	{
-
+	{ 
+			
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatHealthDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -343,17 +343,17 @@ namespace Nest
 		public CatHealthDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatHealthDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatHealthDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatHealthDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
 	public partial class CatHelpDescriptor  : RequestDescriptorBase<CatHelpDescriptor,CatHelpRequestParameters, ICatHelpRequest>, ICatHelpRequest
-	{
-
+	{ 
+			
 		///<summary>Return help information</summary>
 		public CatHelpDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
 
@@ -370,20 +370,20 @@ namespace Nest
 		public CatHelpDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatHelpDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatHelpDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatHelpDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
 	public partial class CatIndicesDescriptor  : RequestDescriptorBase<CatIndicesDescriptor,CatIndicesRequestParameters, ICatIndicesRequest>, ICatIndicesRequest
-	{
+	{ 
 		Indices ICatIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_cat/indices</summary>
 		public CatIndicesDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names to limit the returned information</summary>
 		public CatIndicesDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -394,7 +394,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatIndicesDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatIndicesDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -435,17 +435,17 @@ namespace Nest
 		public CatIndicesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatIndicesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatIndicesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatIndicesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
 	public partial class CatMasterDescriptor  : RequestDescriptorBase<CatMasterDescriptor,CatMasterRequestParameters, ICatMasterRequest>, ICatMasterRequest
-	{
-
+	{ 
+			
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatMasterDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -477,17 +477,17 @@ namespace Nest
 		public CatMasterDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatMasterDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatMasterDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatMasterDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
 	public partial class CatNodeAttributesDescriptor  : RequestDescriptorBase<CatNodeAttributesDescriptor,CatNodeAttributesRequestParameters, ICatNodeAttributesRequest>, ICatNodeAttributesRequest
-	{
-
+	{ 
+			
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatNodeAttributesDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -519,17 +519,17 @@ namespace Nest
 		public CatNodeAttributesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatNodeAttributesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatNodeAttributesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatNodeAttributesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
 	public partial class CatNodesDescriptor  : RequestDescriptorBase<CatNodesDescriptor,CatNodesRequestParameters, ICatNodesRequest>, ICatNodesRequest
-	{
-
+	{ 
+			
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatNodesDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -564,17 +564,17 @@ namespace Nest
 		public CatNodesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatNodesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatNodesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatNodesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
 	public partial class CatPendingTasksDescriptor  : RequestDescriptorBase<CatPendingTasksDescriptor,CatPendingTasksRequestParameters, ICatPendingTasksRequest>, ICatPendingTasksRequest
-	{
-
+	{ 
+			
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatPendingTasksDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -606,17 +606,17 @@ namespace Nest
 		public CatPendingTasksDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatPendingTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatPendingTasksDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatPendingTasksDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatPlugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
 	public partial class CatPluginsDescriptor  : RequestDescriptorBase<CatPluginsDescriptor,CatPluginsRequestParameters, ICatPluginsRequest>, ICatPluginsRequest
-	{
-
+	{ 
+			
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatPluginsDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -648,20 +648,20 @@ namespace Nest
 		public CatPluginsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatPluginsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatPluginsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatPluginsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
 	public partial class CatRecoveryDescriptor  : RequestDescriptorBase<CatRecoveryDescriptor,CatRecoveryRequestParameters, ICatRecoveryRequest>, ICatRecoveryRequest
-	{
+	{ 
 		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_cat/recovery</summary>
 		public CatRecoveryDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names to limit the returned information</summary>
 		public CatRecoveryDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -672,7 +672,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatRecoveryDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatRecoveryDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -704,17 +704,17 @@ namespace Nest
 		public CatRecoveryDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatRecoveryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatRecoveryDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatRecoveryDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatRepositories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
 	public partial class CatRepositoriesDescriptor  : RequestDescriptorBase<CatRepositoriesDescriptor,CatRepositoriesRequestParameters, ICatRepositoriesRequest>, ICatRepositoriesRequest
-	{
-
+	{ 
+			
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatRepositoriesDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -746,20 +746,20 @@ namespace Nest
 		public CatRepositoriesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatRepositoriesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatRepositoriesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatRepositoriesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatSegments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
 	public partial class CatSegmentsDescriptor  : RequestDescriptorBase<CatSegmentsDescriptor,CatSegmentsRequestParameters, ICatSegmentsRequest>, ICatSegmentsRequest
-	{
+	{ 
 		Indices ICatSegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_cat/segments</summary>
 		public CatSegmentsDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names to limit the returned information</summary>
 		public CatSegmentsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -770,7 +770,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatSegmentsDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatSegmentsDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -796,20 +796,20 @@ namespace Nest
 		public CatSegmentsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatSegmentsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatSegmentsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatSegmentsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
 	public partial class CatShardsDescriptor  : RequestDescriptorBase<CatShardsDescriptor,CatShardsRequestParameters, ICatShardsRequest>, ICatShardsRequest
-	{
+	{ 
 		Indices ICatShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_cat/shards</summary>
 		public CatShardsDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names to limit the returned information</summary>
 		public CatShardsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -820,7 +820,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatShardsDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatShardsDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -852,27 +852,27 @@ namespace Nest
 		public CatShardsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatShardsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatShardsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatShardsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
 	public partial class CatSnapshotsDescriptor  : RequestDescriptorBase<CatSnapshotsDescriptor,CatSnapshotsRequestParameters, ICatSnapshotsRequest>, ICatSnapshotsRequest
-	{
+	{ 
 		Names ICatSnapshotsRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 			/// <summary>/_cat/snapshots</summary>
 		public CatSnapshotsDescriptor() : base(){}
-
+		
 
 		/// <summary>/_cat/snapshots/{repository}</summary>
 ///<param name="repository"> this parameter is required</param>
 		public CatSnapshotsDescriptor(Names repository) : base(r=>r.Required("repository", repository)){}
+		
 
-
-
+		
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatSnapshotsDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -904,17 +904,17 @@ namespace Nest
 		public CatSnapshotsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatSnapshotsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatSnapshotsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatSnapshotsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class CatTasksDescriptor  : RequestDescriptorBase<CatTasksDescriptor,CatTasksRequestParameters, ICatTasksRequest>, ICatTasksRequest
-	{
-
+	{ 
+			
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatTasksDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -955,25 +955,25 @@ namespace Nest
 		public CatTasksDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatTasksDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatTasksDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatTemplates <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
 	public partial class CatTemplatesDescriptor  : RequestDescriptorBase<CatTemplatesDescriptor,CatTemplatesRequestParameters, ICatTemplatesRequest>, ICatTemplatesRequest
-	{
+	{ 
 		Name ICatTemplatesRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_cat/templates</summary>
 		public CatTemplatesDescriptor() : base(){}
-
+		
 
 			///<summary>A pattern that returned template names must match</summary>
 		public CatTemplatesDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-
+	
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatTemplatesDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -1005,25 +1005,25 @@ namespace Nest
 		public CatTemplatesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatTemplatesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatTemplatesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatTemplatesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
 	public partial class CatThreadPoolDescriptor  : RequestDescriptorBase<CatThreadPoolDescriptor,CatThreadPoolRequestParameters, ICatThreadPoolRequest>, ICatThreadPoolRequest
-	{
+	{ 
 		Names ICatThreadPoolRequest.ThreadPoolPatterns => Self.RouteValues.Get<Names>("thread_pool_patterns");
 			/// <summary>/_cat/thread_pool</summary>
 		public CatThreadPoolDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of regular-expressions to filter the thread pools in the output</summary>
 		public CatThreadPoolDescriptor ThreadPoolPatterns(Names threadPoolPatterns) => Assign(a=>a.RouteValues.Optional("thread_pool_patterns", threadPoolPatterns));
 
-
+	
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatThreadPoolDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -1058,21 +1058,21 @@ namespace Nest
 		public CatThreadPoolDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatThreadPoolDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatThreadPoolDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatThreadPoolDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for ClearScroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
 	public partial class ClearScrollDescriptor  : RequestDescriptorBase<ClearScrollDescriptor,ClearScrollRequestParameters, IClearScrollRequest>, IClearScrollRequest
-	{
+	{ 
 			/// <summary>/_search/scroll</summary>
 		public ClearScrollDescriptor() : base(){}
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public ClearScrollDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -1083,17 +1083,17 @@ namespace Nest
 		public ClearScrollDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClearScrollDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClearScrollDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClearScrollDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for ClusterAllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
 	public partial class ClusterAllocationExplainDescriptor  : RequestDescriptorBase<ClusterAllocationExplainDescriptor,ClusterAllocationExplainRequestParameters, IClusterAllocationExplainRequest>, IClusterAllocationExplainRequest
-	{
-
+	{ 
+			
 		///<summary>Return &#39;YES&#39; decisions in explanation (default: false)</summary>
 		public ClusterAllocationExplainDescriptor IncludeYesDecisions(bool include_yes_decisions = true) => AssignParam(p=>p.IncludeYesDecisions(include_yes_decisions));
 
@@ -1110,17 +1110,17 @@ namespace Nest
 		public ClusterAllocationExplainDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterAllocationExplainDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterAllocationExplainDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClusterAllocationExplainDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterGetSettingsDescriptor  : RequestDescriptorBase<ClusterGetSettingsDescriptor,ClusterGetSettingsRequestParameters, IClusterGetSettingsRequest>, IClusterGetSettingsRequest
-	{
-
+	{ 
+			
 		///<summary>Return settings in flat format (default: false)</summary>
 		public ClusterGetSettingsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
@@ -1143,20 +1143,20 @@ namespace Nest
 		public ClusterGetSettingsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterGetSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterGetSettingsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClusterGetSettingsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
 	public partial class ClusterHealthDescriptor  : RequestDescriptorBase<ClusterHealthDescriptor,ClusterHealthRequestParameters, IClusterHealthRequest>, IClusterHealthRequest
-	{
+	{ 
 		Indices IClusterHealthRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_cluster/health</summary>
 		public ClusterHealthDescriptor() : base(){}
-
+		
 
 			///<summary>Limit the information returned to a specific index</summary>
 		public ClusterHealthDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -1167,7 +1167,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public ClusterHealthDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Specify the level of detail for returned information</summary>
 		public ClusterHealthDescriptor Level(Level level) => AssignParam(p=>p.Level(level));
 
@@ -1205,17 +1205,17 @@ namespace Nest
 		public ClusterHealthDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterHealthDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterHealthDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClusterHealthDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
 	public partial class ClusterPendingTasksDescriptor  : RequestDescriptorBase<ClusterPendingTasksDescriptor,ClusterPendingTasksRequestParameters, IClusterPendingTasksRequest>, IClusterPendingTasksRequest
-	{
-
+	{ 
+			
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterPendingTasksDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -1232,17 +1232,17 @@ namespace Nest
 		public ClusterPendingTasksDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterPendingTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterPendingTasksDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClusterPendingTasksDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterPutSettingsDescriptor  : RequestDescriptorBase<ClusterPutSettingsDescriptor,ClusterPutSettingsRequestParameters, IClusterPutSettingsRequest>, IClusterPutSettingsRequest
-	{
-
+	{ 
+			
 		///<summary>Return settings in flat format (default: false)</summary>
 		public ClusterPutSettingsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
@@ -1262,17 +1262,17 @@ namespace Nest
 		public ClusterPutSettingsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterPutSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterPutSettingsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClusterPutSettingsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
 	public partial class ClusterRerouteDescriptor  : RequestDescriptorBase<ClusterRerouteDescriptor,ClusterRerouteRequestParameters, IClusterRerouteRequest>, IClusterRerouteRequest
-	{
-
+	{ 
+			
 		///<summary>Simulate the operation only and return the resulting state</summary>
 		public ClusterRerouteDescriptor DryRun(bool dry_run = true) => AssignParam(p=>p.DryRun(dry_run));
 
@@ -1301,21 +1301,21 @@ namespace Nest
 		public ClusterRerouteDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterRerouteDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterRerouteDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClusterRerouteDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
 	public partial class ClusterStateDescriptor  : RequestDescriptorBase<ClusterStateDescriptor,ClusterStateRequestParameters, IClusterStateRequest>, IClusterStateRequest
-	{
+	{ 
 		Indices IClusterStateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Metrics IClusterStateRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 			/// <summary>/_cluster/state</summary>
 		public ClusterStateDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public ClusterStateDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -1329,7 +1329,7 @@ namespace Nest
 		///<summary>Limit the information returned to the specified metrics</summary>
 		public ClusterStateDescriptor Metric(ClusterStateMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
 
-
+	
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterStateDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -1358,25 +1358,25 @@ namespace Nest
 		public ClusterStateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterStateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterStateDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClusterStateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
 	public partial class ClusterStatsDescriptor  : RequestDescriptorBase<ClusterStatsDescriptor,ClusterStatsRequestParameters, IClusterStatsRequest>, IClusterStatsRequest
-	{
+	{ 
 		NodeIds IClusterStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 			/// <summary>/_cluster/stats</summary>
 		public ClusterStatsDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public ClusterStatsDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
 
-
+	
 		///<summary>Return settings in flat format (default: false)</summary>
 		public ClusterStatsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
@@ -1393,21 +1393,21 @@ namespace Nest
 		public ClusterStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterStatsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClusterStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
 	public partial class CountDescriptor<T>  : RequestDescriptorBase<CountDescriptor<T>,CountRequestParameters, ICountRequest>, ICountRequest
-	{
+	{ 
 		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ICountRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_count</summary>
 		public CountDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
-
+		
 
 			///<summary>A comma-separated list of indices to restrict the results</summary>
 		public CountDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -1427,7 +1427,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public CountDescriptor<T> AllTypes() => this.Type(Types.All);
 
-
+	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public CountDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
@@ -1474,28 +1474,28 @@ namespace Nest
 		public CountDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CountDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public CountDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CountDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public partial class CreateDescriptor<TDocument>  : RequestDescriptorBase<CreateDescriptor<TDocument>,CreateRequestParameters, ICreateRequest<TDocument>>, ICreateRequest<TDocument>
-	{
+	{ 
 		Id ICreateRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
 		IndexName ICreateRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName ICreateRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}/{id}/_create</summary>
-///<param name="index"> this parameter is required</param>
-///<param name="type"> this parameter is required</param>
+///<param name="index"> this parameter is required</param>		
+///<param name="type"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
 		public CreateDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
-
+		
 
 		/// <summary>/{index}/{type}/{id}/_create</summary>
-
+		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public CreateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
@@ -1512,7 +1512,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public CreateDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-
+	
 		///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public CreateDescriptor<TDocument> WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
 
@@ -1553,28 +1553,28 @@ namespace Nest
 		public CreateDescriptor<TDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CreateDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
+		public CreateDescriptor<TDocument> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CreateDescriptor<TDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
 	public partial class DeleteDescriptor<T>  : RequestDescriptorBase<DeleteDescriptor<T>,DeleteRequestParameters, IDeleteRequest>, IDeleteRequest
-	{
+	{ 
 		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IDeleteRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IDeleteRequest.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}/{id}</summary>
-///<param name="index"> this parameter is required</param>
-///<param name="type"> this parameter is required</param>
+///<param name="index"> this parameter is required</param>		
+///<param name="type"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
 		public DeleteDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
-
+		
 
 		/// <summary>/{index}/{type}/{id}</summary>
-
+		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public DeleteDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
@@ -1591,7 +1591,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public DeleteDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-
+	
 		///<summary>Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public DeleteDescriptor<T> WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
 
@@ -1623,22 +1623,22 @@ namespace Nest
 		public DeleteDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</pre></summary>
 	public partial class DeleteByQueryDescriptor<T>  : RequestDescriptorBase<DeleteByQueryDescriptor<T>,DeleteByQueryRequestParameters, IDeleteByQueryRequest>, IDeleteByQueryRequest
-	{
+	{ 
 		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IDeleteByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/{index}/_delete_by_query</summary>
 ///<param name="index"> this parameter is required</param>
 		public DeleteByQueryDescriptor(Indices index) : base(r=>r.Required("index", index).Required("type", (Types)typeof(T))){}
-
+		
 
 			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public DeleteByQueryDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
@@ -1658,7 +1658,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public DeleteByQueryDescriptor<T> AllTypes() => this.Type(Types.All);
 
-
+	
 		///<summary>The analyzer to use for the query string</summary>
 		public DeleteByQueryDescriptor<T> Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
 
@@ -1718,14 +1718,14 @@ namespace Nest
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public DeleteByQueryDescriptor<T> SourceExclude(params string[] source_exclude) => AssignParam(p=>p.SourceExclude(source_exclude));
-
+			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public DeleteByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceExclude(fields));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public DeleteByQueryDescriptor<T> SourceInclude(params string[] source_include) => AssignParam(p=>p.SourceInclude(source_include));
-
+			
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public DeleteByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceInclude(fields));
@@ -1773,27 +1773,29 @@ namespace Nest
 		public DeleteByQueryDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteByQueryDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteByQueryDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteByQueryDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for DeleteScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class DeleteScriptDescriptor  : RequestDescriptorBase<DeleteScriptDescriptor,DeleteScriptRequestParameters, IDeleteScriptRequest>, IDeleteScriptRequest
-	{
+	{ 
 		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_scripts/{id}</summary>
 ///<param name="id"> this parameter is required</param>
 		public DeleteScriptDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		
 
-
+		
 		///<summary>Explicit operation timeout</summary>
 		public DeleteScriptDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteScriptDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+
 		///<summary>Pretty format the returned JSON response.</summary>
 		public DeleteScriptDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -1804,27 +1806,28 @@ namespace Nest
 		public DeleteScriptDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteScriptDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteScriptDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteScriptDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
+	
 	///<summary>descriptor for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class DocumentExistsDescriptor<T>  : RequestDescriptorBase<DocumentExistsDescriptor<T>,DocumentExistsRequestParameters, IDocumentExistsRequest>, IDocumentExistsRequest
-	{
+	{ 
 		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IDocumentExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IDocumentExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}/{id}</summary>
-///<param name="index"> this parameter is required</param>
-///<param name="type"> this parameter is required</param>
+///<param name="index"> this parameter is required</param>		
+///<param name="type"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
 		public DocumentExistsDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
-
+		
 
 		/// <summary>/{index}/{type}/{id}</summary>
-
+		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public DocumentExistsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
@@ -1841,10 +1844,10 @@ namespace Nest
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public DocumentExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-
+	
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public DocumentExistsDescriptor<T> StoredFields(params string[] stored_fields) => AssignParam(p=>p.StoredFields(stored_fields));
-
+			
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public DocumentExistsDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._StoredFields(fields));
@@ -1869,14 +1872,14 @@ namespace Nest
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public DocumentExistsDescriptor<T> SourceExclude(params string[] source_exclude) => AssignParam(p=>p.SourceExclude(source_exclude));
-
+			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public DocumentExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceExclude(fields));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public DocumentExistsDescriptor<T> SourceInclude(params string[] source_include) => AssignParam(p=>p.SourceInclude(source_include));
-
+			
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public DocumentExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceInclude(fields));
@@ -1897,28 +1900,28 @@ namespace Nest
 		public DocumentExistsDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DocumentExistsDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public DocumentExistsDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DocumentExistsDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceExistsDescriptor<T>  : RequestDescriptorBase<SourceExistsDescriptor<T>,SourceExistsRequestParameters, ISourceExistsRequest>, ISourceExistsRequest
-	{
+	{ 
 		Id ISourceExistsRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName ISourceExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName ISourceExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}/{id}/_source</summary>
-///<param name="index"> this parameter is required</param>
-///<param name="type"> this parameter is required</param>
+///<param name="index"> this parameter is required</param>		
+///<param name="type"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
 		public SourceExistsDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
-
+		
 
 		/// <summary>/{index}/{type}/{id}/_source</summary>
-
+		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public SourceExistsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
@@ -1935,7 +1938,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public SourceExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-
+	
 		///<summary>The ID of the parent document</summary>
 		public SourceExistsDescriptor<T> Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
@@ -1956,14 +1959,14 @@ namespace Nest
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SourceExistsDescriptor<T> SourceExclude(params string[] source_exclude) => AssignParam(p=>p.SourceExclude(source_exclude));
-
+			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SourceExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceExclude(fields));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public SourceExistsDescriptor<T> SourceInclude(params string[] source_include) => AssignParam(p=>p.SourceInclude(source_include));
-
+			
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public SourceExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceInclude(fields));
@@ -1984,28 +1987,28 @@ namespace Nest
 		public SourceExistsDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SourceExistsDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public SourceExistsDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SourceExistsDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for Explain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
 	public partial class ExplainDescriptor<TDocument>  : RequestDescriptorBase<ExplainDescriptor<TDocument>,ExplainRequestParameters, IExplainRequest<TDocument>>, IExplainRequest<TDocument>
-	{
+	{ 
 		Id IExplainRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IExplainRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IExplainRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}/{id}/_explain</summary>
-///<param name="index"> this parameter is required</param>
-///<param name="type"> this parameter is required</param>
+///<param name="index"> this parameter is required</param>		
+///<param name="type"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
 		public ExplainDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
-
+		
 
 		/// <summary>/{index}/{type}/{id}/_explain</summary>
-
+		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public ExplainDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
@@ -2022,7 +2025,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public ExplainDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-
+	
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
 		public ExplainDescriptor<TDocument> AnalyzeWildcard(bool analyze_wildcard = true) => AssignParam(p=>p.AnalyzeWildcard(analyze_wildcard));
 
@@ -2037,7 +2040,7 @@ namespace Nest
 
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public ExplainDescriptor<TDocument> StoredFields(params string[] stored_fields) => AssignParam(p=>p.StoredFields(stored_fields));
-
+			
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public ExplainDescriptor<TDocument> StoredFields(params Expression<Func<TDocument, object>>[] fields)  =>
 			AssignParam(p=>p._StoredFields(fields));
@@ -2062,14 +2065,14 @@ namespace Nest
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public ExplainDescriptor<TDocument> SourceExclude(params string[] source_exclude) => AssignParam(p=>p.SourceExclude(source_exclude));
-
+			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public ExplainDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields)  =>
 			AssignParam(p=>p._SourceExclude(fields));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public ExplainDescriptor<TDocument> SourceInclude(params string[] source_include) => AssignParam(p=>p.SourceInclude(source_include));
-
+			
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public ExplainDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields)  =>
 			AssignParam(p=>p._SourceInclude(fields));
@@ -2084,20 +2087,20 @@ namespace Nest
 		public ExplainDescriptor<TDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ExplainDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
+		public ExplainDescriptor<TDocument> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ExplainDescriptor<TDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for FieldCaps <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
 	public partial class FieldCapabilitiesDescriptor  : RequestDescriptorBase<FieldCapabilitiesDescriptor,FieldCapabilitiesRequestParameters, IFieldCapabilitiesRequest>, IFieldCapabilitiesRequest
-	{
+	{ 
 		Indices IFieldCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_field_caps</summary>
 		public FieldCapabilitiesDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public FieldCapabilitiesDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -2108,10 +2111,10 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public FieldCapabilitiesDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>A comma-separated list of field names</summary>
 		public FieldCapabilitiesDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
-
+			
 		///<summary>A comma-separated list of field names</summary>
 		public FieldCapabilitiesDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._Fields(fields));
@@ -2135,27 +2138,28 @@ namespace Nest
 		public FieldCapabilitiesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public FieldCapabilitiesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public FieldCapabilitiesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public FieldCapabilitiesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
+	
 	///<summary>descriptor for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class GetDescriptor<T>  : RequestDescriptorBase<GetDescriptor<T>,GetRequestParameters, IGetRequest>, IGetRequest
-	{
+	{ 
 		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}/{id}</summary>
-///<param name="index"> this parameter is required</param>
-///<param name="type"> this parameter is required</param>
+///<param name="index"> this parameter is required</param>		
+///<param name="type"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
 		public GetDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
-
+		
 
 		/// <summary>/{index}/{type}/{id}</summary>
-
+		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public GetDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
@@ -2172,10 +2176,10 @@ namespace Nest
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public GetDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-
+	
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public GetDescriptor<T> StoredFields(params string[] stored_fields) => AssignParam(p=>p.StoredFields(stored_fields));
-
+			
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public GetDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._StoredFields(fields));
@@ -2200,14 +2204,14 @@ namespace Nest
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public GetDescriptor<T> SourceExclude(params string[] source_exclude) => AssignParam(p=>p.SourceExclude(source_exclude));
-
+			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceExclude(fields));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public GetDescriptor<T> SourceInclude(params string[] source_include) => AssignParam(p=>p.SourceInclude(source_include));
-
+			
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceInclude(fields));
@@ -2228,22 +2232,23 @@ namespace Nest
 		public GetDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public GetDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for GetScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class GetScriptDescriptor  : RequestDescriptorBase<GetScriptDescriptor,GetScriptRequestParameters, IGetScriptRequest>, IGetScriptRequest
-	{
+	{ 
 		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_scripts/{id}</summary>
 ///<param name="id"> this parameter is required</param>
 		public GetScriptDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		
 
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public GetScriptDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -2254,28 +2259,28 @@ namespace Nest
 		public GetScriptDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetScriptDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetScriptDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetScriptDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceDescriptor<T>  : RequestDescriptorBase<SourceDescriptor<T>,SourceRequestParameters, ISourceRequest>, ISourceRequest
-	{
+	{ 
 		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName ISourceRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName ISourceRequest.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}/{id}/_source</summary>
-///<param name="index"> this parameter is required</param>
-///<param name="type"> this parameter is required</param>
+///<param name="index"> this parameter is required</param>		
+///<param name="type"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
 		public SourceDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
-
+		
 
 		/// <summary>/{index}/{type}/{id}/_source</summary>
-
+		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public SourceDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
@@ -2292,7 +2297,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public SourceDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-
+	
 		///<summary>The ID of the parent document</summary>
 		public SourceDescriptor<T> Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
@@ -2313,14 +2318,14 @@ namespace Nest
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SourceDescriptor<T> SourceExclude(params string[] source_exclude) => AssignParam(p=>p.SourceExclude(source_exclude));
-
+			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceExclude(fields));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public SourceDescriptor<T> SourceInclude(params string[] source_include) => AssignParam(p=>p.SourceInclude(source_include));
-
+			
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceInclude(fields));
@@ -2341,26 +2346,27 @@ namespace Nest
 		public SourceDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SourceDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public SourceDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SourceDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
+	
 	///<summary>descriptor for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public partial class IndexDescriptor<TDocument>  : RequestDescriptorBase<IndexDescriptor<TDocument>,IndexRequestParameters, IIndexRequest<TDocument>>, IIndexRequest<TDocument>
-	{
+	{ 
 		Id IIndexRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IIndexRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IIndexRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}</summary>
-///<param name="index"> this parameter is required</param>
+///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>
 		public IndexDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)){}
-
+		
 
 		/// <summary>/{index}/{type}</summary>
-
+		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public IndexDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
@@ -2380,7 +2386,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public IndexDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-
+	
 		///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public IndexDescriptor<TDocument> WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
 
@@ -2424,20 +2430,20 @@ namespace Nest
 		public IndexDescriptor<TDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndexDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
+		public IndexDescriptor<TDocument> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public IndexDescriptor<TDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesAnalyzeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
 	public partial class AnalyzeDescriptor  : RequestDescriptorBase<AnalyzeDescriptor,AnalyzeRequestParameters, IAnalyzeRequest>, IAnalyzeRequest
-	{
+	{ 
 		IndexName IAnalyzeRequest.Index => Self.RouteValues.Get<IndexName>("index");
 			/// <summary>/_analyze</summary>
 		public AnalyzeDescriptor() : base(){}
-
+		
 
 			///<summary>The name of the index to scope the operation</summary>
 		public AnalyzeDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -2445,7 +2451,7 @@ namespace Nest
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public AnalyzeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
 
-
+	
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public AnalyzeDescriptor PreferLocal(bool prefer_local = true) => AssignParam(p=>p.PreferLocal(prefer_local));
 
@@ -2462,20 +2468,20 @@ namespace Nest
 		public AnalyzeDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public AnalyzeDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public AnalyzeDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public AnalyzeDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
 	public partial class ClearCacheDescriptor  : RequestDescriptorBase<ClearCacheDescriptor,ClearCacheRequestParameters, IClearCacheRequest>, IClearCacheRequest
-	{
+	{ 
 		Indices IClearCacheRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_cache/clear</summary>
 		public ClearCacheDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index name to limit the operation</summary>
 		public ClearCacheDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -2486,13 +2492,13 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public ClearCacheDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Clear field data</summary>
 		public ClearCacheDescriptor FieldData(bool field_data = true) => AssignParam(p=>p.FieldData(field_data));
 
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
 		public ClearCacheDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
-
+			
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
 		public ClearCacheDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._Fields(fields));
@@ -2528,21 +2534,21 @@ namespace Nest
 		public ClearCacheDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClearCacheDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClearCacheDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClearCacheDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesClose <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class CloseIndexDescriptor  : RequestDescriptorBase<CloseIndexDescriptor,CloseIndexRequestParameters, ICloseIndexRequest>, ICloseIndexRequest
-	{
+	{ 
 		Indices ICloseIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/{index}/_close</summary>
 ///<param name="index"> this parameter is required</param>
 		public CloseIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
-
+		
 
 			///<summary>A comma separated list of indices to close</summary>
 		public CloseIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
@@ -2553,7 +2559,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CloseIndexDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Explicit operation timeout</summary>
 		public CloseIndexDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
@@ -2579,21 +2585,21 @@ namespace Nest
 		public CloseIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CloseIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CloseIndexDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CloseIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</pre></summary>
 	public partial class CreateIndexDescriptor  : RequestDescriptorBase<CreateIndexDescriptor,CreateIndexRequestParameters, ICreateIndexRequest>, ICreateIndexRequest
-	{
+	{ 
 		IndexName ICreateIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 			/// <summary>/{index}</summary>
 ///<param name="index"> this parameter is required</param>
 		public CreateIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
-
+		
 
 			///<summary>The name of the index</summary>
 		public CreateIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
@@ -2601,7 +2607,7 @@ namespace Nest
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public CreateIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
-
+	
 		///<summary>Set the number of active shards to wait for before the operation returns.</summary>
 		public CreateIndexDescriptor WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
 
@@ -2624,21 +2630,21 @@ namespace Nest
 		public CreateIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CreateIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CreateIndexDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CreateIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
 	public partial class DeleteIndexDescriptor  : RequestDescriptorBase<DeleteIndexDescriptor,DeleteIndexRequestParameters, IDeleteIndexRequest>, IDeleteIndexRequest
-	{
+	{ 
 		Indices IDeleteIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/{index}</summary>
 ///<param name="index"> this parameter is required</param>
 		public DeleteIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
-
+		
 
 			///<summary>A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</summary>
 		public DeleteIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
@@ -2649,7 +2655,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public DeleteIndexDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Explicit operation timeout</summary>
 		public DeleteIndexDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
@@ -2675,23 +2681,23 @@ namespace Nest
 		public DeleteIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteIndexDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesDeleteAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class DeleteAliasDescriptor  : RequestDescriptorBase<DeleteAliasDescriptor,DeleteAliasRequestParameters, IDeleteAliasRequest>, IDeleteAliasRequest
-	{
+	{ 
 		Indices IDeleteAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IDeleteAliasRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/{index}/_alias/{name}</summary>
-///<param name="index"> this parameter is required</param>
+///<param name="index"> this parameter is required</param>		
 ///<param name="name"> this parameter is required</param>
 		public DeleteAliasDescriptor(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name)){}
-
+		
 
 			///<summary>A comma-separated list of index names (supports wildcards); use `_all` for all indices</summary>
 		public DeleteAliasDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
@@ -2702,7 +2708,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public DeleteAliasDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Explicit timestamp for the document</summary>
 		public DeleteAliasDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
@@ -2719,23 +2725,23 @@ namespace Nest
 		public DeleteAliasDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteAliasDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteAliasDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteAliasDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesDeleteTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class DeleteIndexTemplateDescriptor  : RequestDescriptorBase<DeleteIndexTemplateDescriptor,DeleteIndexTemplateRequestParameters, IDeleteIndexTemplateRequest>, IDeleteIndexTemplateRequest
-	{
+	{ 
 		Name IDeleteIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_template/{name}</summary>
 ///<param name="name"> this parameter is required</param>
 		public DeleteIndexTemplateDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		
 
-
-
+		
 		///<summary>Explicit operation timeout</summary>
 		public DeleteIndexTemplateDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
@@ -2752,21 +2758,21 @@ namespace Nest
 		public DeleteIndexTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteIndexTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteIndexTemplateDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteIndexTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</pre></summary>
 	public partial class IndexExistsDescriptor  : RequestDescriptorBase<IndexExistsDescriptor,IndexExistsRequestParameters, IIndexExistsRequest>, IIndexExistsRequest
-	{
+	{ 
 		Indices IIndexExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/{index}</summary>
 ///<param name="index"> this parameter is required</param>
 		public IndexExistsDescriptor(Indices index) : base(r=>r.Required("index", index)){}
-
+		
 
 			///<summary>A comma-separated list of index names</summary>
 		public IndexExistsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
@@ -2777,7 +2783,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public IndexExistsDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public IndexExistsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -2806,21 +2812,21 @@ namespace Nest
 		public IndexExistsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndexExistsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public IndexExistsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public IndexExistsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesExistsAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class AliasExistsDescriptor  : RequestDescriptorBase<AliasExistsDescriptor,AliasExistsRequestParameters, IAliasExistsRequest>, IAliasExistsRequest
-	{
+	{ 
 		Indices IAliasExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IAliasExistsRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_alias/{name}</summary>
 		public AliasExistsDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names to filter aliases</summary>
 		public AliasExistsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -2834,7 +2840,7 @@ namespace Nest
 		///<summary>A comma-separated list of alias names to return</summary>
 		public AliasExistsDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-
+	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public AliasExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
@@ -2857,23 +2863,23 @@ namespace Nest
 		public AliasExistsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public AliasExistsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public AliasExistsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public AliasExistsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class IndexTemplateExistsDescriptor  : RequestDescriptorBase<IndexTemplateExistsDescriptor,IndexTemplateExistsRequestParameters, IIndexTemplateExistsRequest>, IIndexTemplateExistsRequest
-	{
+	{ 
 		Names IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_template/{name}</summary>
 ///<param name="name"> this parameter is required</param>
 		public IndexTemplateExistsDescriptor(Names name) : base(r=>r.Required("name", name)){}
+		
 
-
-
+		
 		///<summary>Return settings in flat format (default: false)</summary>
 		public IndexTemplateExistsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
@@ -2893,23 +2899,23 @@ namespace Nest
 		public IndexTemplateExistsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndexTemplateExistsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public IndexTemplateExistsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public IndexTemplateExistsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesExistsType <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</pre></summary>
 	public partial class TypeExistsDescriptor  : RequestDescriptorBase<TypeExistsDescriptor,TypeExistsRequestParameters, ITypeExistsRequest>, ITypeExistsRequest
-	{
+	{ 
 		Indices ITypeExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ITypeExistsRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/{index}/_mapping/{type}</summary>
-///<param name="index"> this parameter is required</param>
+///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>
 		public TypeExistsDescriptor(Indices index, Types type) : base(r=>r.Required("index", index).Required("type", type)){}
-
+		
 
 			///<summary>A comma-separated list of index names; use `_all` to check the types across all indices</summary>
 		public TypeExistsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
@@ -2929,7 +2935,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public TypeExistsDescriptor AllTypes() => this.Type(Types.All);
 
-
+	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public TypeExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
@@ -2952,20 +2958,20 @@ namespace Nest
 		public TypeExistsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public TypeExistsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public TypeExistsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public TypeExistsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesFlushForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</pre></summary>
 	public partial class FlushDescriptor  : RequestDescriptorBase<FlushDescriptor,FlushRequestParameters, IFlushRequest>, IFlushRequest
-	{
+	{ 
 		Indices IFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_flush</summary>
 		public FlushDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</summary>
 		public FlushDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -2976,7 +2982,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public FlushDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
 		public FlushDescriptor Force(bool force = true) => AssignParam(p=>p.Force(force));
 
@@ -3002,20 +3008,20 @@ namespace Nest
 		public FlushDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public FlushDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public FlushDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public FlushDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesFlushSyncedForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
 	public partial class SyncedFlushDescriptor  : RequestDescriptorBase<SyncedFlushDescriptor,SyncedFlushRequestParameters, ISyncedFlushRequest>, ISyncedFlushRequest
-	{
+	{ 
 		Indices ISyncedFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_flush/synced</summary>
 		public SyncedFlushDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</summary>
 		public SyncedFlushDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -3026,7 +3032,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public SyncedFlushDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SyncedFlushDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
@@ -3046,20 +3052,20 @@ namespace Nest
 		public SyncedFlushDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SyncedFlushDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public SyncedFlushDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SyncedFlushDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesForcemergeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</pre></summary>
 	public partial class ForceMergeDescriptor  : RequestDescriptorBase<ForceMergeDescriptor,ForceMergeRequestParameters, IForceMergeRequest>, IForceMergeRequest
-	{
+	{ 
 		Indices IForceMergeRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_forcemerge</summary>
 		public ForceMergeDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public ForceMergeDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -3070,7 +3076,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public ForceMergeDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
 		public ForceMergeDescriptor Flush(bool flush = true) => AssignParam(p=>p.Flush(flush));
 
@@ -3105,21 +3111,21 @@ namespace Nest
 		public ForceMergeDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ForceMergeDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ForceMergeDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ForceMergeDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
 	public partial class GetIndexDescriptor  : RequestDescriptorBase<GetIndexDescriptor,GetIndexRequestParameters, IGetIndexRequest>, IGetIndexRequest
-	{
+	{ 
 		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/{index}</summary>
 ///<param name="index"> this parameter is required</param>
 		public GetIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
-
+		
 
 			///<summary>A comma-separated list of index names</summary>
 		public GetIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
@@ -3130,6 +3136,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public GetIndexDescriptor AllIndices() => this.Index(Indices.All);
 
+	
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -3158,21 +3165,21 @@ namespace Nest
 		public GetIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetIndexDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class GetAliasDescriptor  : RequestDescriptorBase<GetAliasDescriptor,GetAliasRequestParameters, IGetAliasRequest>, IGetAliasRequest
-	{
+	{ 
 		Indices IGetAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IGetAliasRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_alias</summary>
 		public GetAliasDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names to filter aliases</summary>
 		public GetAliasDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -3186,7 +3193,7 @@ namespace Nest
 		///<summary>A comma-separated list of alias names to return</summary>
 		public GetAliasDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-
+	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetAliasDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
@@ -3209,23 +3216,23 @@ namespace Nest
 		public GetAliasDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetAliasDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetAliasDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetAliasDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
 	public partial class GetFieldMappingDescriptor<T>  : RequestDescriptorBase<GetFieldMappingDescriptor<T>,GetFieldMappingRequestParameters, IGetFieldMappingRequest>, IGetFieldMappingRequest
-	{
+	{ 
 		Indices IGetFieldMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetFieldMappingRequest.Type => Self.RouteValues.Get<Types>("type");
 		Fields IGetFieldMappingRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 			/// <summary>/_mapping/field/{fields}</summary>
 ///<param name="fields"> this parameter is required</param>
 		public GetFieldMappingDescriptor(Fields fields) : base(r=>r.Required("fields", fields)){}
-
+		
 
 			///<summary>A comma-separated list of index names</summary>
 		public GetFieldMappingDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -3245,7 +3252,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public GetFieldMappingDescriptor<T> AllTypes() => this.Type(Types.All);
 
-
+	
 		///<summary>Whether the default mapping values should be returned as well</summary>
 		public GetFieldMappingDescriptor<T> IncludeDefaults(bool include_defaults = true) => AssignParam(p=>p.IncludeDefaults(include_defaults));
 
@@ -3271,21 +3278,21 @@ namespace Nest
 		public GetFieldMappingDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetFieldMappingDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public GetFieldMappingDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetFieldMappingDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
 	public partial class GetMappingDescriptor<T>  : RequestDescriptorBase<GetMappingDescriptor<T>,GetMappingRequestParameters, IGetMappingRequest>, IGetMappingRequest
-	{
+	{ 
 		Indices IGetMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetMappingRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_mapping</summary>
 		public GetMappingDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
-
+		
 
 			///<summary>A comma-separated list of index names</summary>
 		public GetMappingDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -3305,7 +3312,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public GetMappingDescriptor<T> AllTypes() => this.Type(Types.All);
 
-
+	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetMappingDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
@@ -3328,21 +3335,21 @@ namespace Nest
 		public GetMappingDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetMappingDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public GetMappingDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetMappingDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesGetSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
 	public partial class GetIndexSettingsDescriptor  : RequestDescriptorBase<GetIndexSettingsDescriptor,GetIndexSettingsRequestParameters, IGetIndexSettingsRequest>, IGetIndexSettingsRequest
-	{
+	{ 
 		Indices IGetIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IGetIndexSettingsRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_settings</summary>
 		public GetIndexSettingsDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public GetIndexSettingsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -3356,7 +3363,7 @@ namespace Nest
 		///<summary>The name of the settings that should be included</summary>
 		public GetIndexSettingsDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-
+	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetIndexSettingsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
@@ -3385,25 +3392,25 @@ namespace Nest
 		public GetIndexSettingsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetIndexSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetIndexSettingsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetIndexSettingsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesGetTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class GetIndexTemplateDescriptor  : RequestDescriptorBase<GetIndexTemplateDescriptor,GetIndexTemplateRequestParameters, IGetIndexTemplateRequest>, IGetIndexTemplateRequest
-	{
+	{ 
 		Names IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_template</summary>
 		public GetIndexTemplateDescriptor() : base(){}
-
+		
 
 			///<summary>The comma separated names of the index templates</summary>
 		public GetIndexTemplateDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-
+	
 		///<summary>Return settings in flat format (default: false)</summary>
 		public GetIndexTemplateDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
@@ -3423,20 +3430,20 @@ namespace Nest
 		public GetIndexTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetIndexTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetIndexTemplateDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetIndexTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesGetUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeStatusDescriptor  : RequestDescriptorBase<UpgradeStatusDescriptor,UpgradeStatusRequestParameters, IUpgradeStatusRequest>, IUpgradeStatusRequest
-	{
+	{ 
 		Indices IUpgradeStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_upgrade</summary>
 		public UpgradeStatusDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpgradeStatusDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -3447,7 +3454,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public UpgradeStatusDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public UpgradeStatusDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
@@ -3467,21 +3474,21 @@ namespace Nest
 		public UpgradeStatusDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpgradeStatusDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public UpgradeStatusDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public UpgradeStatusDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesOpen <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class OpenIndexDescriptor  : RequestDescriptorBase<OpenIndexDescriptor,OpenIndexRequestParameters, IOpenIndexRequest>, IOpenIndexRequest
-	{
+	{ 
 		Indices IOpenIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/{index}/_open</summary>
 ///<param name="index"> this parameter is required</param>
 		public OpenIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
-
+		
 
 			///<summary>A comma separated list of indices to open</summary>
 		public OpenIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
@@ -3492,7 +3499,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public OpenIndexDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Explicit operation timeout</summary>
 		public OpenIndexDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
@@ -3518,23 +3525,23 @@ namespace Nest
 		public OpenIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public OpenIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public OpenIndexDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public OpenIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesPutAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class PutAliasDescriptor  : RequestDescriptorBase<PutAliasDescriptor,PutAliasRequestParameters, IPutAliasRequest>, IPutAliasRequest
-	{
+	{ 
 		Indices IPutAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Name IPutAliasRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/{index}/_alias/{name}</summary>
-///<param name="index"> this parameter is required</param>
+///<param name="index"> this parameter is required</param>		
 ///<param name="name"> this parameter is required</param>
 		public PutAliasDescriptor(Indices index, Name name) : base(r=>r.Required("index", index).Required("name", name)){}
-
+		
 
 			///<summary>A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</summary>
 		public PutAliasDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
@@ -3545,7 +3552,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public PutAliasDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Explicit timestamp for the document</summary>
 		public PutAliasDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
@@ -3562,22 +3569,22 @@ namespace Nest
 		public PutAliasDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutAliasDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutAliasDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutAliasDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingDescriptor<T>  : RequestDescriptorBase<PutMappingDescriptor<T>,PutMappingRequestParameters, IPutMappingRequest>, IPutMappingRequest
-	{
+	{ 
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}/_mapping</summary>
 ///<param name="type"> this parameter is required</param>
 		public PutMappingDescriptor(TypeName type) : base(r=>r.Required("type", type)){}
-
+		
 
 			///<summary>A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</summary>
 		public PutMappingDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -3594,7 +3601,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public PutMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-
+	
 		///<summary>Explicit operation timeout</summary>
 		public PutMappingDescriptor<T> Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
@@ -3623,20 +3630,20 @@ namespace Nest
 		public PutMappingDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutMappingDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public PutMappingDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutMappingDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
 	public partial class UpdateIndexSettingsDescriptor  : RequestDescriptorBase<UpdateIndexSettingsDescriptor,UpdateIndexSettingsRequestParameters, IUpdateIndexSettingsRequest>, IUpdateIndexSettingsRequest
-	{
+	{ 
 		Indices IUpdateIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_settings</summary>
 		public UpdateIndexSettingsDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpdateIndexSettingsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -3647,7 +3654,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public UpdateIndexSettingsDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Specify timeout for connection to master</summary>
 		public UpdateIndexSettingsDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -3676,23 +3683,23 @@ namespace Nest
 		public UpdateIndexSettingsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateIndexSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public UpdateIndexSettingsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public UpdateIndexSettingsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesPutTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class PutIndexTemplateDescriptor  : RequestDescriptorBase<PutIndexTemplateDescriptor,PutIndexTemplateRequestParameters, IPutIndexTemplateRequest>, IPutIndexTemplateRequest
-	{
+	{ 
 		Name IPutIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_template/{name}</summary>
 ///<param name="name"> this parameter is required</param>
 		public PutIndexTemplateDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		
 
-
-
+		
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public PutIndexTemplateDescriptor Create(bool create = true) => AssignParam(p=>p.Create(create));
 
@@ -3715,20 +3722,20 @@ namespace Nest
 		public PutIndexTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutIndexTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutIndexTemplateDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutIndexTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesRecoveryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
 	public partial class RecoveryStatusDescriptor  : RequestDescriptorBase<RecoveryStatusDescriptor,RecoveryStatusRequestParameters, IRecoveryStatusRequest>, IRecoveryStatusRequest
-	{
+	{ 
 		Indices IRecoveryStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_recovery</summary>
 		public RecoveryStatusDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public RecoveryStatusDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -3739,7 +3746,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public RecoveryStatusDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Whether to display detailed information about shard recovery</summary>
 		public RecoveryStatusDescriptor Detailed(bool detailed = true) => AssignParam(p=>p.Detailed(detailed));
 
@@ -3756,20 +3763,20 @@ namespace Nest
 		public RecoveryStatusDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RecoveryStatusDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RecoveryStatusDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RecoveryStatusDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesRefreshForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</pre></summary>
 	public partial class RefreshDescriptor  : RequestDescriptorBase<RefreshDescriptor,RefreshRequestParameters, IRefreshRequest>, IRefreshRequest
-	{
+	{ 
 		Indices IRefreshRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_refresh</summary>
 		public RefreshDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public RefreshDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -3780,7 +3787,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public RefreshDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public RefreshDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
@@ -3800,26 +3807,27 @@ namespace Nest
 		public RefreshDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RefreshDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RefreshDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RefreshDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
 	}
-
+	
 	///<summary>descriptor for IndicesRolloverForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</pre></summary>
 	public partial class RolloverIndexDescriptor  : RequestDescriptorBase<RolloverIndexDescriptor,RolloverIndexRequestParameters, IRolloverIndexRequest>, IRolloverIndexRequest
-	{
+	{ 
 		Name IRolloverIndexRequest.Alias => Self.RouteValues.Get<Name>("alias");
 		IndexName IRolloverIndexRequest.NewIndex => Self.RouteValues.Get<IndexName>("new_index");
 			/// <summary>/{alias}/_rollover</summary>
 ///<param name="alias"> this parameter is required</param>
 		public RolloverIndexDescriptor(Name alias) : base(r=>r.Required("alias", alias)){}
-
+		
 
 			///<summary>The name of the rollover index</summary>
 		public RolloverIndexDescriptor NewIndex(IndexName newIndex) => Assign(a=>a.RouteValues.Optional("new_index", newIndex));
 
-
+	
 		///<summary>Explicit operation timeout</summary>
 		public RolloverIndexDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
@@ -3842,20 +3850,20 @@ namespace Nest
 		public RolloverIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RolloverIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RolloverIndexDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RolloverIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesSegmentsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</pre></summary>
 	public partial class SegmentsDescriptor  : RequestDescriptorBase<SegmentsDescriptor,SegmentsRequestParameters, ISegmentsRequest>, ISegmentsRequest
-	{
+	{ 
 		Indices ISegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_segments</summary>
 		public SegmentsDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SegmentsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -3866,7 +3874,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public SegmentsDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SegmentsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
@@ -3892,20 +3900,20 @@ namespace Nest
 		public SegmentsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SegmentsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public SegmentsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SegmentsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesShardStoresForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
 	public partial class IndicesShardStoresDescriptor  : RequestDescriptorBase<IndicesShardStoresDescriptor,IndicesShardStoresRequestParameters, IIndicesShardStoresRequest>, IIndicesShardStoresRequest
-	{
+	{ 
 		Indices IIndicesShardStoresRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_shard_stores</summary>
 		public IndicesShardStoresDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public IndicesShardStoresDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -3916,7 +3924,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public IndicesShardStoresDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
 		public IndicesShardStoresDescriptor Status(params string[] status) => AssignParam(p=>p.Status(status));
 
@@ -3942,23 +3950,23 @@ namespace Nest
 		public IndicesShardStoresDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndicesShardStoresDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public IndicesShardStoresDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public IndicesShardStoresDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesShrink <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
 	public partial class ShrinkIndexDescriptor  : RequestDescriptorBase<ShrinkIndexDescriptor,ShrinkIndexRequestParameters, IShrinkIndexRequest>, IShrinkIndexRequest
-	{
+	{ 
 		IndexName IShrinkIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		IndexName IShrinkIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
 			/// <summary>/{index}/_shrink/{target}</summary>
-///<param name="index"> this parameter is required</param>
+///<param name="index"> this parameter is required</param>		
 ///<param name="target"> this parameter is required</param>
 		public ShrinkIndexDescriptor(IndexName index, IndexName target) : base(r=>r.Required("index", index).Required("target", target)){}
-
+		
 
 			///<summary>The name of the source index to shrink</summary>
 		public ShrinkIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
@@ -3966,7 +3974,7 @@ namespace Nest
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public ShrinkIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
-
+	
 		///<summary>Explicit operation timeout</summary>
 		public ShrinkIndexDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
@@ -3986,21 +3994,21 @@ namespace Nest
 		public ShrinkIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ShrinkIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ShrinkIndexDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ShrinkIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
 	public partial class IndicesStatsDescriptor  : RequestDescriptorBase<IndicesStatsDescriptor,IndicesStatsRequestParameters, IIndicesStatsRequest>, IIndicesStatsRequest
-	{
+	{ 
 		Indices IIndicesStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Metrics IIndicesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 			/// <summary>/_stats</summary>
 		public IndicesStatsDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public IndicesStatsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -4014,24 +4022,24 @@ namespace Nest
 		///<summary>Limit the information returned the specific metrics.</summary>
 		public IndicesStatsDescriptor Metric(IndicesStatsMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
 
-
+	
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor CompletionFields(params string[] completion_fields) => AssignParam(p=>p.CompletionFields(completion_fields));
-
+			
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._CompletionFields(fields));
 
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor FielddataFields(params string[] fielddata_fields) => AssignParam(p=>p.FielddataFields(fielddata_fields));
-
+			
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._FielddataFields(fields));
 
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
-
+			
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._Fields(fields));
@@ -4055,17 +4063,17 @@ namespace Nest
 		public IndicesStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndicesStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public IndicesStatsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public IndicesStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesUpdateAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class BulkAliasDescriptor  : RequestDescriptorBase<BulkAliasDescriptor,BulkAliasRequestParameters, IBulkAliasRequest>, IBulkAliasRequest
-	{
-
+	{ 
+			
 		///<summary>Request timeout</summary>
 		public BulkAliasDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
@@ -4082,20 +4090,20 @@ namespace Nest
 		public BulkAliasDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public BulkAliasDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public BulkAliasDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public BulkAliasDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeDescriptor  : RequestDescriptorBase<UpgradeDescriptor,UpgradeRequestParameters, IUpgradeRequest>, IUpgradeRequest
-	{
+	{ 
 		Indices IUpgradeRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_upgrade</summary>
 		public UpgradeDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpgradeDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -4106,7 +4114,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public UpgradeDescriptor AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public UpgradeDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
 
@@ -4132,21 +4140,21 @@ namespace Nest
 		public UpgradeDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpgradeDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public UpgradeDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public UpgradeDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 	public partial class ValidateQueryDescriptor<T>  : RequestDescriptorBase<ValidateQueryDescriptor<T>,ValidateQueryRequestParameters, IValidateQueryRequest>, IValidateQueryRequest
-	{
+	{ 
 		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IValidateQueryRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_validate/query</summary>
 		public ValidateQueryDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
-
+		
 
 			///<summary>A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public ValidateQueryDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -4166,7 +4174,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public ValidateQueryDescriptor<T> AllTypes() => this.Type(Types.All);
 
-
+	
 		///<summary>Return detailed information about the error</summary>
 		public ValidateQueryDescriptor<T> Explain(bool explain = true) => AssignParam(p=>p.Explain(explain));
 
@@ -4216,17 +4224,17 @@ namespace Nest
 		public ValidateQueryDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ValidateQueryDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public ValidateQueryDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ValidateQueryDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for Info <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class RootNodeInfoDescriptor  : RequestDescriptorBase<RootNodeInfoDescriptor,RootNodeInfoRequestParameters, IRootNodeInfoRequest>, IRootNodeInfoRequest
-	{
-
+	{ 
+			
 		///<summary>Pretty format the returned JSON response.</summary>
 		public RootNodeInfoDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -4237,23 +4245,23 @@ namespace Nest
 		public RootNodeInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RootNodeInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RootNodeInfoDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RootNodeInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class DeletePipelineDescriptor  : RequestDescriptorBase<DeletePipelineDescriptor,DeletePipelineRequestParameters, IDeletePipelineRequest>, IDeletePipelineRequest
-	{
+	{ 
 		Id IDeletePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_ingest/pipeline/{id}</summary>
 ///<param name="id"> this parameter is required</param>
 		public DeletePipelineDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		
 
-
-
+		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeletePipelineDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -4270,25 +4278,25 @@ namespace Nest
 		public DeletePipelineDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeletePipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeletePipelineDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeletePipelineDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IngestGetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class GetPipelineDescriptor  : RequestDescriptorBase<GetPipelineDescriptor,GetPipelineRequestParameters, IGetPipelineRequest>, IGetPipelineRequest
-	{
+	{ 
 		Id IGetPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_ingest/pipeline</summary>
 		public GetPipelineDescriptor() : base(){}
-
+		
 
 			///<summary>Comma separated list of pipeline ids. Wildcards supported</summary>
 		public GetPipelineDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
-
+	
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public GetPipelineDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -4302,16 +4310,17 @@ namespace Nest
 		public GetPipelineDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetPipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetPipelineDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetPipelineDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
+	
 	///<summary>descriptor for IngestProcessorGrok <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class IngestProcessorGrokDescriptor  : RequestDescriptorBase<IngestProcessorGrokDescriptor,IngestProcessorGrokRequestParameters, IIngestProcessorGrokRequest>, IIngestProcessorGrokRequest
-	{
-
+	{ 
+			
 		///<summary>Pretty format the returned JSON response.</summary>
 		public IngestProcessorGrokDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -4322,25 +4331,26 @@ namespace Nest
 		public IngestProcessorGrokDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IngestProcessorGrokDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public IngestProcessorGrokDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public IngestProcessorGrokDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 
 		//TODO THIS METHOD IS UNMAPPED!
-
-
+		
+	
 	}
+	
 	///<summary>descriptor for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class PutPipelineDescriptor  : RequestDescriptorBase<PutPipelineDescriptor,PutPipelineRequestParameters, IPutPipelineRequest>, IPutPipelineRequest
-	{
+	{ 
 		Id IPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_ingest/pipeline/{id}</summary>
 ///<param name="id"> this parameter is required</param>
 		public PutPipelineDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		
 
-
-
+		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public PutPipelineDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -4357,25 +4367,25 @@ namespace Nest
 		public PutPipelineDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutPipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutPipelineDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutPipelineDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for IngestSimulate <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class SimulatePipelineDescriptor  : RequestDescriptorBase<SimulatePipelineDescriptor,SimulatePipelineRequestParameters, ISimulatePipelineRequest>, ISimulatePipelineRequest
-	{
+	{ 
 		Id ISimulatePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_ingest/pipeline/_simulate</summary>
 		public SimulatePipelineDescriptor() : base(){}
-
+		
 
 			///<summary>Pipeline ID</summary>
 		public SimulatePipelineDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
-
+	
 		///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
 		public SimulatePipelineDescriptor Verbose(bool verbose = true) => AssignParam(p=>p.Verbose(verbose));
 
@@ -4389,21 +4399,21 @@ namespace Nest
 		public SimulatePipelineDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SimulatePipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public SimulatePipelineDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SimulatePipelineDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for Mget <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
 	public partial class MultiGetDescriptor  : RequestDescriptorBase<MultiGetDescriptor,MultiGetRequestParameters, IMultiGetRequest>, IMultiGetRequest
-	{
+	{ 
 		IndexName IMultiGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IMultiGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/_mget</summary>
 		public MultiGetDescriptor() : base(){}
-
+		
 
 			///<summary>The name of the index</summary>
 		public MultiGetDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -4417,10 +4427,10 @@ namespace Nest
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public MultiGetDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
-
+	
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public MultiGetDescriptor StoredFields(params string[] stored_fields) => AssignParam(p=>p.StoredFields(stored_fields));
-
+			
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public MultiGetDescriptor StoredFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._StoredFields(fields));
@@ -4442,14 +4452,14 @@ namespace Nest
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public MultiGetDescriptor SourceExclude(params string[] source_exclude) => AssignParam(p=>p.SourceExclude(source_exclude));
-
+			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._SourceExclude(fields));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public MultiGetDescriptor SourceInclude(params string[] source_include) => AssignParam(p=>p.SourceInclude(source_include));
-
+			
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._SourceInclude(fields));
@@ -4464,21 +4474,21 @@ namespace Nest
 		public MultiGetDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiGetDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public MultiGetDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public MultiGetDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for Msearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
 	public partial class MultiSearchDescriptor  : RequestDescriptorBase<MultiSearchDescriptor,MultiSearchRequestParameters, IMultiSearchRequest>, IMultiSearchRequest
-	{
+	{ 
 		Indices IMultiSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IMultiSearchRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_msearch</summary>
 		public MultiSearchDescriptor() {}
-
+		
 
 			///<summary>A comma-separated list of index names to use as default</summary>
 		public MultiSearchDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -4498,7 +4508,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public MultiSearchDescriptor AllTypes() => this.Type(Types.All);
 
-
+	
 		///<summary>Search operation type</summary>
 		public MultiSearchDescriptor SearchType(SearchType search_type) => AssignParam(p=>p.SearchType(search_type));
 
@@ -4521,21 +4531,21 @@ namespace Nest
 		public MultiSearchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiSearchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public MultiSearchDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public MultiSearchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for MsearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</pre></summary>
 	public partial class MultiSearchTemplateDescriptor  : RequestDescriptorBase<MultiSearchTemplateDescriptor,MultiSearchTemplateRequestParameters, IMultiSearchTemplateRequest>, IMultiSearchTemplateRequest
-	{
+	{ 
 		Indices IMultiSearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IMultiSearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_msearch/template</summary>
 		public MultiSearchTemplateDescriptor() {}
-
+		
 
 			///<summary>A comma-separated list of index names to use as default</summary>
 		public MultiSearchTemplateDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -4555,7 +4565,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public MultiSearchTemplateDescriptor AllTypes() => this.Type(Types.All);
 
-
+	
 		///<summary>Search operation type</summary>
 		public MultiSearchTemplateDescriptor SearchType(SearchType search_type) => AssignParam(p=>p.SearchType(search_type));
 
@@ -4575,21 +4585,21 @@ namespace Nest
 		public MultiSearchTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiSearchTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public MultiSearchTemplateDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public MultiSearchTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for Mtermvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
 	public partial class MultiTermVectorsDescriptor  : RequestDescriptorBase<MultiTermVectorsDescriptor,MultiTermVectorsRequestParameters, IMultiTermVectorsRequest>, IMultiTermVectorsRequest
-	{
+	{ 
 		IndexName IMultiTermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IMultiTermVectorsRequest.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/_mtermvectors</summary>
 		public MultiTermVectorsDescriptor() : base(){}
-
+		
 
 			///<summary>The index in which the document resides.</summary>
 		public MultiTermVectorsDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -4603,7 +4613,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public MultiTermVectorsDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
-
+	
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor TermStatistics(bool term_statistics = true) => AssignParam(p=>p.TermStatistics(term_statistics));
 
@@ -4612,7 +4622,7 @@ namespace Nest
 
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
-
+			
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._Fields(fields));
@@ -4654,25 +4664,25 @@ namespace Nest
 		public MultiTermVectorsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiTermVectorsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public MultiTermVectorsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public MultiTermVectorsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for NodesHotThreadsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
 	public partial class NodesHotThreadsDescriptor  : RequestDescriptorBase<NodesHotThreadsDescriptor,NodesHotThreadsRequestParameters, INodesHotThreadsRequest>, INodesHotThreadsRequest
-	{
+	{ 
 		NodeIds INodesHotThreadsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 			/// <summary>/_cluster/nodes/hotthreads</summary>
 		public NodesHotThreadsDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public NodesHotThreadsDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
 
-
+	
 		///<summary>The interval for the second sampling of threads</summary>
 		public NodesHotThreadsDescriptor Interval(Time interval) => AssignParam(p=>p.Interval(interval.ToTimeSpan()));
 
@@ -4701,21 +4711,21 @@ namespace Nest
 		public NodesHotThreadsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public NodesHotThreadsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public NodesHotThreadsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public NodesHotThreadsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for NodesInfoForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
 	public partial class NodesInfoDescriptor  : RequestDescriptorBase<NodesInfoDescriptor,NodesInfoRequestParameters, INodesInfoRequest>, INodesInfoRequest
-	{
+	{ 
 		NodeIds INodesInfoRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 		Metrics INodesInfoRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 			/// <summary>/_nodes</summary>
 		public NodesInfoDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public NodesInfoDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
@@ -4723,7 +4733,7 @@ namespace Nest
 		///<summary>A comma-separated list of metrics you wish returned. Leave empty to return all.</summary>
 		public NodesInfoDescriptor Metric(NodesInfoMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
 
-
+	
 		///<summary>Return settings in flat format (default: false)</summary>
 		public NodesInfoDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
@@ -4740,22 +4750,22 @@ namespace Nest
 		public NodesInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public NodesInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public NodesInfoDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public NodesInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for NodesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
 	public partial class NodesStatsDescriptor  : RequestDescriptorBase<NodesStatsDescriptor,NodesStatsRequestParameters, INodesStatsRequest>, INodesStatsRequest
-	{
+	{ 
 		Metrics INodesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 		IndexMetrics INodesStatsRequest.IndexMetric => Self.RouteValues.Get<IndexMetrics>("index_metric");
 		NodeIds INodesStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 			/// <summary>/_nodes/stats</summary>
 		public NodesStatsDescriptor() : base(){}
-
+		
 
 			///<summary>Limit the information returned to the specified metrics</summary>
 		public NodesStatsDescriptor Metric(NodesStatsMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
@@ -4766,24 +4776,24 @@ namespace Nest
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public NodesStatsDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
 
-
+	
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor CompletionFields(params string[] completion_fields) => AssignParam(p=>p.CompletionFields(completion_fields));
-
+			
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._CompletionFields(fields));
 
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor FielddataFields(params string[] fielddata_fields) => AssignParam(p=>p.FielddataFields(fielddata_fields));
-
+			
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._FielddataFields(fields));
 
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
-
+			
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._Fields(fields));
@@ -4813,20 +4823,21 @@ namespace Nest
 		public NodesStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public NodesStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public NodesStatsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public NodesStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
+	
 	///<summary>descriptor for NodesUsageForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
 	public partial class NodesUsageDescriptor  : RequestDescriptorBase<NodesUsageDescriptor,NodesUsageRequestParameters, INodesUsageRequest>, INodesUsageRequest
-	{
+	{ 
 		Metrics INodesUsageRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 		NodeIds INodesUsageRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 			/// <summary>/_nodes/usage</summary>
 		public NodesUsageDescriptor() : base(){}
-
+		
 
 			///<summary>Limit the information returned to the specified metrics</summary>
 		public NodesUsageDescriptor Metric(NodesUsageMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
@@ -4834,7 +4845,7 @@ namespace Nest
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public NodesUsageDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
 
-
+	
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public NodesUsageDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
 
@@ -4848,19 +4859,20 @@ namespace Nest
 		public NodesUsageDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public NodesUsageDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public NodesUsageDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public NodesUsageDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 
 		//TODO THIS METHOD IS UNMAPPED!
-
-
+		
+	
 	}
+	
 	///<summary>descriptor for Ping <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class PingDescriptor  : RequestDescriptorBase<PingDescriptor,PingRequestParameters, IPingRequest>, IPingRequest
-	{
-
+	{ 
+			
 		///<summary>Pretty format the returned JSON response.</summary>
 		public PingDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -4871,22 +4883,23 @@ namespace Nest
 		public PingDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PingDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PingDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PingDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for PutScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class PutScriptDescriptor  : RequestDescriptorBase<PutScriptDescriptor,PutScriptRequestParameters, IPutScriptRequest>, IPutScriptRequest
-	{
+	{ 
 		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_scripts/{id}</summary>
 ///<param name="id"> this parameter is required</param>
 		public PutScriptDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		
 
-
+		
 		///<summary>Explicit operation timeout</summary>
 		public PutScriptDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
@@ -4895,6 +4908,7 @@ namespace Nest
 
 		///<summary>Context name to compile script against</summary>
 		public PutScriptDescriptor Context(string context) => AssignParam(p=>p.Context(context));
+
 		///<summary>Pretty format the returned JSON response.</summary>
 		public PutScriptDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -4905,16 +4919,17 @@ namespace Nest
 		public PutScriptDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutScriptDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutScriptDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutScriptDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
+	
 	///<summary>descriptor for Reindex <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public partial class ReindexOnServerDescriptor  : RequestDescriptorBase<ReindexOnServerDescriptor,ReindexOnServerRequestParameters, IReindexOnServerRequest>, IReindexOnServerRequest
-	{
-
+	{ 
+			
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public ReindexOnServerDescriptor Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
 
@@ -4944,21 +4959,21 @@ namespace Nest
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ReindexOnServerDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for ReindexRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public partial class ReindexRethrottleDescriptor  : RequestDescriptorBase<ReindexRethrottleDescriptor,ReindexRethrottleRequestParameters, IReindexRethrottleRequest>, IReindexRethrottleRequest
-	{
+	{ 
 		TaskId IReindexRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 			/// <summary>/_reindex/{task_id}/_rethrottle</summary>
 		public ReindexRethrottleDescriptor() : base(){}
-
+		
 
 			///<summary>The task id to rethrottle</summary>
 		public ReindexRethrottleDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
 
-
+	
 		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
 		public ReindexRethrottleDescriptor RequestsPerSecond(long requests_per_second) => AssignParam(p=>p.RequestsPerSecond(requests_per_second));
 
@@ -4972,17 +4987,17 @@ namespace Nest
 		public ReindexRethrottleDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ReindexRethrottleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ReindexRethrottleDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ReindexRethrottleDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for RemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
 	public partial class RemoteInfoDescriptor  : RequestDescriptorBase<RemoteInfoDescriptor,RemoteInfoRequestParameters, IRemoteInfoRequest>, IRemoteInfoRequest
-	{
-
+	{ 
+			
 		///<summary>Pretty format the returned JSON response.</summary>
 		public RemoteInfoDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -4993,25 +5008,25 @@ namespace Nest
 		public RemoteInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RemoteInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RemoteInfoDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RemoteInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for RenderSearchTemplate <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public partial class RenderSearchTemplateDescriptor  : RequestDescriptorBase<RenderSearchTemplateDescriptor,RenderSearchTemplateRequestParameters, IRenderSearchTemplateRequest>, IRenderSearchTemplateRequest
-	{
+	{ 
 		Id IRenderSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_render/template</summary>
 		public RenderSearchTemplateDescriptor() : base(){}
-
+		
 
 			///<summary>The id of the stored search template</summary>
 		public RenderSearchTemplateDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
-
+	
 		///<summary>Pretty format the returned JSON response.</summary>
 		public RenderSearchTemplateDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -5022,21 +5037,21 @@ namespace Nest
 		public RenderSearchTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RenderSearchTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RenderSearchTemplateDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RenderSearchTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
 	public partial class ScrollDescriptor<T>  : RequestDescriptorBase<ScrollDescriptor<T>,ScrollRequestParameters, IScrollRequest>, IScrollRequest
-	{
+	{ 
 			/// <summary>/_search/scroll</summary>
 		public ScrollDescriptor() : base(){}
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public ScrollDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -5047,21 +5062,21 @@ namespace Nest
 		public ScrollDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ScrollDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public ScrollDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ScrollDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchDescriptor<T>  : RequestDescriptorBase<SearchDescriptor<T>,SearchRequestParameters, ISearchRequest>, ISearchRequest
-	{
+	{ 
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_search</summary>
 		public SearchDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
-
+		
 
 			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SearchDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -5081,7 +5096,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public SearchDescriptor<T> AllTypes() => this.Type(Types.All);
 
-
+	
 		///<summary>The analyzer to use for the query string</summary>
 		public SearchDescriptor<T> Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
 
@@ -5096,7 +5111,7 @@ namespace Nest
 
 		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
 		public SearchDescriptor<T> DocvalueFields(params string[] docvalue_fields) => AssignParam(p=>p.DocvalueFields(docvalue_fields));
-
+			
 		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
 		public SearchDescriptor<T> DocvalueFields(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._DocvalueFields(fields));
@@ -5173,16 +5188,16 @@ namespace Nest
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SearchDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsDescriptor<T>  : RequestDescriptorBase<SearchShardsDescriptor<T>,SearchShardsRequestParameters, ISearchShardsRequest>, ISearchShardsRequest
-	{
+	{ 
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_search_shards</summary>
 		public SearchShardsDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SearchShardsDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -5193,7 +5208,7 @@ namespace Nest
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public SearchShardsDescriptor<T> AllIndices() => this.Index(Indices.All);
 
-
+	
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SearchShardsDescriptor<T> Preference(string preference) => AssignParam(p=>p.Preference(preference));
 
@@ -5222,21 +5237,21 @@ namespace Nest
 		public SearchShardsDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SearchShardsDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public SearchShardsDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SearchShardsDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for SearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
 	public partial class SearchTemplateDescriptor<T>  : RequestDescriptorBase<SearchTemplateDescriptor<T>,SearchTemplateRequestParameters, ISearchTemplateRequest>, ISearchTemplateRequest
-	{
+	{ 
 		Indices ISearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_search/template</summary>
 		public SearchTemplateDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
-
+		
 
 			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SearchTemplateDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -5256,7 +5271,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public SearchTemplateDescriptor<T> AllTypes() => this.Type(Types.All);
 
-
+	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchTemplateDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
@@ -5297,25 +5312,25 @@ namespace Nest
 		public SearchTemplateDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SearchTemplateDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public SearchTemplateDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SearchTemplateDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for SnapshotCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotDescriptor  : RequestDescriptorBase<SnapshotDescriptor,SnapshotRequestParameters, ISnapshotRequest>, ISnapshotRequest
-	{
+	{ 
 		Name ISnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name ISnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
 			/// <summary>/_snapshot/{repository}/{snapshot}</summary>
-///<param name="repository"> this parameter is required</param>
+///<param name="repository"> this parameter is required</param>		
 ///<param name="snapshot"> this parameter is required</param>
 		public SnapshotDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+		
 
-
-
+		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public SnapshotDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -5332,23 +5347,23 @@ namespace Nest
 		public SnapshotDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SnapshotDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public SnapshotDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SnapshotDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for SnapshotCreateRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class CreateRepositoryDescriptor  : RequestDescriptorBase<CreateRepositoryDescriptor,CreateRepositoryRequestParameters, ICreateRepositoryRequest>, ICreateRepositoryRequest
-	{
+	{ 
 		Name ICreateRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 			/// <summary>/_snapshot/{repository}</summary>
 ///<param name="repository"> this parameter is required</param>
 		public CreateRepositoryDescriptor(Name repository) : base(r=>r.Required("repository", repository)){}
+		
 
-
-
+		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CreateRepositoryDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -5368,25 +5383,25 @@ namespace Nest
 		public CreateRepositoryDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CreateRepositoryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CreateRepositoryDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CreateRepositoryDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for SnapshotDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class DeleteSnapshotDescriptor  : RequestDescriptorBase<DeleteSnapshotDescriptor,DeleteSnapshotRequestParameters, IDeleteSnapshotRequest>, IDeleteSnapshotRequest
-	{
+	{ 
 		Name IDeleteSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name IDeleteSnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
 			/// <summary>/_snapshot/{repository}/{snapshot}</summary>
-///<param name="repository"> this parameter is required</param>
+///<param name="repository"> this parameter is required</param>		
 ///<param name="snapshot"> this parameter is required</param>
 		public DeleteSnapshotDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+		
 
-
-
+		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeleteSnapshotDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -5400,23 +5415,23 @@ namespace Nest
 		public DeleteSnapshotDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteSnapshotDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteSnapshotDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteSnapshotDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for SnapshotDeleteRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class DeleteRepositoryDescriptor  : RequestDescriptorBase<DeleteRepositoryDescriptor,DeleteRepositoryRequestParameters, IDeleteRepositoryRequest>, IDeleteRepositoryRequest
-	{
+	{ 
 		Names IDeleteRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 			/// <summary>/_snapshot/{repository}</summary>
 ///<param name="repository"> this parameter is required</param>
 		public DeleteRepositoryDescriptor(Names repository) : base(r=>r.Required("repository", repository)){}
+		
 
-
-
+		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeleteRepositoryDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -5433,25 +5448,25 @@ namespace Nest
 		public DeleteRepositoryDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteRepositoryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteRepositoryDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteRepositoryDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for SnapshotGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetSnapshotDescriptor  : RequestDescriptorBase<GetSnapshotDescriptor,GetSnapshotRequestParameters, IGetSnapshotRequest>, IGetSnapshotRequest
-	{
+	{ 
 		Name IGetSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Names IGetSnapshotRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
 			/// <summary>/_snapshot/{repository}/{snapshot}</summary>
-///<param name="repository"> this parameter is required</param>
+///<param name="repository"> this parameter is required</param>		
 ///<param name="snapshot"> this parameter is required</param>
 		public GetSnapshotDescriptor(Name repository, Names snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+		
 
-
-
+		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public GetSnapshotDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -5471,25 +5486,25 @@ namespace Nest
 		public GetSnapshotDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetSnapshotDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetSnapshotDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetSnapshotDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for SnapshotGetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetRepositoryDescriptor  : RequestDescriptorBase<GetRepositoryDescriptor,GetRepositoryRequestParameters, IGetRepositoryRequest>, IGetRepositoryRequest
-	{
+	{ 
 		Names IGetRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 			/// <summary>/_snapshot</summary>
 		public GetRepositoryDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of repository names</summary>
 		public GetRepositoryDescriptor RepositoryName(Names repository) => Assign(a=>a.RouteValues.Optional("repository", repository));
 
-
+	
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public GetRepositoryDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -5506,25 +5521,25 @@ namespace Nest
 		public GetRepositoryDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetRepositoryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetRepositoryDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetRepositoryDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for SnapshotRestore <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class RestoreDescriptor  : RequestDescriptorBase<RestoreDescriptor,RestoreRequestParameters, IRestoreRequest>, IRestoreRequest
-	{
+	{ 
 		Name IRestoreRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name IRestoreRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
 			/// <summary>/_snapshot/{repository}/{snapshot}/_restore</summary>
-///<param name="repository"> this parameter is required</param>
+///<param name="repository"> this parameter is required</param>		
 ///<param name="snapshot"> this parameter is required</param>
 		public RestoreDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+		
 
-
-
+		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public RestoreDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -5541,21 +5556,21 @@ namespace Nest
 		public RestoreDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RestoreDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RestoreDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RestoreDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for SnapshotStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotStatusDescriptor  : RequestDescriptorBase<SnapshotStatusDescriptor,SnapshotStatusRequestParameters, ISnapshotStatusRequest>, ISnapshotStatusRequest
-	{
+	{ 
 		Name ISnapshotStatusRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Names ISnapshotStatusRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
 			/// <summary>/_snapshot/_status</summary>
 		public SnapshotStatusDescriptor() : base(){}
-
+		
 
 			///<summary>A repository name</summary>
 		public SnapshotStatusDescriptor RepositoryName(Name repository) => Assign(a=>a.RouteValues.Optional("repository", repository));
@@ -5563,7 +5578,7 @@ namespace Nest
 		///<summary>A comma-separated list of snapshot names</summary>
 		public SnapshotStatusDescriptor Snapshot(Names snapshot) => Assign(a=>a.RouteValues.Optional("snapshot", snapshot));
 
-
+	
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public SnapshotStatusDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -5580,23 +5595,23 @@ namespace Nest
 		public SnapshotStatusDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SnapshotStatusDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public SnapshotStatusDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SnapshotStatusDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for SnapshotVerifyRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class VerifyRepositoryDescriptor  : RequestDescriptorBase<VerifyRepositoryDescriptor,VerifyRepositoryRequestParameters, IVerifyRepositoryRequest>, IVerifyRepositoryRequest
-	{
+	{ 
 		Name IVerifyRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 			/// <summary>/_snapshot/{repository}/_verify</summary>
 ///<param name="repository"> this parameter is required</param>
 		public VerifyRepositoryDescriptor(Name repository) : base(r=>r.Required("repository", repository)){}
+		
 
-
-
+		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public VerifyRepositoryDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -5613,25 +5628,25 @@ namespace Nest
 		public VerifyRepositoryDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public VerifyRepositoryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public VerifyRepositoryDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public VerifyRepositoryDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for TasksCancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class CancelTasksDescriptor  : RequestDescriptorBase<CancelTasksDescriptor,CancelTasksRequestParameters, ICancelTasksRequest>, ICancelTasksRequest
-	{
+	{ 
 		TaskId ICancelTasksRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 			/// <summary>/_tasks/_cancel</summary>
 		public CancelTasksDescriptor() : base(){}
-
+		
 
 			///<summary>Cancel the task with specified task id (node_id:task_number)</summary>
 		public CancelTasksDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
 
-
+	
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
 		public CancelTasksDescriptor NodeId(params string[] node_id) => AssignParam(p=>p.NodeId(node_id));
 
@@ -5654,25 +5669,25 @@ namespace Nest
 		public CancelTasksDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CancelTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CancelTasksDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CancelTasksDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for TasksGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class GetTaskDescriptor  : RequestDescriptorBase<GetTaskDescriptor,GetTaskRequestParameters, IGetTaskRequest>, IGetTaskRequest
-	{
+	{ 
 		TaskId IGetTaskRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 			/// <summary>/_tasks/{task_id}</summary>
 		public GetTaskDescriptor() : base(){}
-
+		
 
 			///<summary>Return the task with specified id (node_id:task_number)</summary>
 		public GetTaskDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
 
-
+	
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public GetTaskDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
 
@@ -5686,17 +5701,17 @@ namespace Nest
 		public GetTaskDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetTaskDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetTaskDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetTaskDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for TasksList <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class ListTasksDescriptor  : RequestDescriptorBase<ListTasksDescriptor,ListTasksRequestParameters, IListTasksRequest>, IListTasksRequest
-	{
-
+	{ 
+			
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
 		public ListTasksDescriptor NodeId(params string[] node_id) => AssignParam(p=>p.NodeId(node_id));
 
@@ -5728,27 +5743,27 @@ namespace Nest
 		public ListTasksDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ListTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ListTasksDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ListTasksDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
 	public partial class TermVectorsDescriptor<TDocument>  : RequestDescriptorBase<TermVectorsDescriptor<TDocument>,TermVectorsRequestParameters, ITermVectorsRequest<TDocument>>, ITermVectorsRequest<TDocument>
-	{
+	{ 
 		IndexName ITermVectorsRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName ITermVectorsRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 		Id ITermVectorsRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/{index}/{type}/_termvectors</summary>
-///<param name="index"> this parameter is required</param>
+///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>
 		public TermVectorsDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)){}
-
+		
 
 		/// <summary>/{index}/{type}/_termvectors</summary>
-
+		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public TermVectorsDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
@@ -5768,7 +5783,7 @@ namespace Nest
 		///<summary>The id of the document, when not specified a doc param should be supplied.</summary>
 		public TermVectorsDescriptor<TDocument> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
-
+	
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public TermVectorsDescriptor<TDocument> TermStatistics(bool term_statistics = true) => AssignParam(p=>p.TermStatistics(term_statistics));
 
@@ -5777,7 +5792,7 @@ namespace Nest
 
 		///<summary>A comma-separated list of fields to return.</summary>
 		public TermVectorsDescriptor<TDocument> Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
-
+			
 		///<summary>A comma-separated list of fields to return.</summary>
 		public TermVectorsDescriptor<TDocument> Fields(params Expression<Func<TDocument, object>>[] fields)  =>
 			AssignParam(p=>p._Fields(fields));
@@ -5819,28 +5834,28 @@ namespace Nest
 		public TermVectorsDescriptor<TDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public TermVectorsDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
+		public TermVectorsDescriptor<TDocument> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public TermVectorsDescriptor<TDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
 	public partial class UpdateDescriptor<TDocument, TPartialDocument>  : RequestDescriptorBase<UpdateDescriptor<TDocument, TPartialDocument>,UpdateRequestParameters, IUpdateRequest<TDocument, TPartialDocument>>, IUpdateRequest<TDocument, TPartialDocument>
-	{
+	{ 
 		Id IUpdateRequest<TDocument, TPartialDocument>.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IUpdateRequest<TDocument, TPartialDocument>.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IUpdateRequest<TDocument, TPartialDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}/{id}/_update</summary>
-///<param name="index"> this parameter is required</param>
-///<param name="type"> this parameter is required</param>
+///<param name="index"> this parameter is required</param>		
+///<param name="type"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
 		public UpdateDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
-
+		
 
 		/// <summary>/{index}/{type}/{id}/_update</summary>
-
+		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public UpdateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
@@ -5857,7 +5872,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-
+	
 		///<summary>Sets the number of shard copies that must be active before proceeding with the update operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> WaitForActiveShards(string wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
 
@@ -5904,22 +5919,22 @@ namespace Nest
 		public UpdateDescriptor<TDocument, TPartialDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Source(string source) => AssignParam(p=>p.Source(source));
+		public UpdateDescriptor<TDocument, TPartialDocument> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</pre></summary>
 	public partial class UpdateByQueryDescriptor<T>  : RequestDescriptorBase<UpdateByQueryDescriptor<T>,UpdateByQueryRequestParameters, IUpdateByQueryRequest>, IUpdateByQueryRequest
-	{
+	{ 
 		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IUpdateByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/{index}/_update_by_query</summary>
 ///<param name="index"> this parameter is required</param>
 		public UpdateByQueryDescriptor(Indices index) : base(r=>r.Required("index", index).Required("type", (Types)typeof(T))){}
-
+		
 
 			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpdateByQueryDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
@@ -5939,7 +5954,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public UpdateByQueryDescriptor<T> AllTypes() => this.Type(Types.All);
 
-
+	
 		///<summary>The analyzer to use for the query string</summary>
 		public UpdateByQueryDescriptor<T> Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
 
@@ -6002,14 +6017,14 @@ namespace Nest
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public UpdateByQueryDescriptor<T> SourceExclude(params string[] source_exclude) => AssignParam(p=>p.SourceExclude(source_exclude));
-
+			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public UpdateByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceExclude(fields));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public UpdateByQueryDescriptor<T> SourceInclude(params string[] source_include) => AssignParam(p=>p.SourceInclude(source_include));
-
+			
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public UpdateByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceInclude(fields));
@@ -6060,22 +6075,22 @@ namespace Nest
 		public UpdateByQueryDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateByQueryDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public UpdateByQueryDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public UpdateByQueryDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackGraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public partial class GraphExploreDescriptor<T>  : RequestDescriptorBase<GraphExploreDescriptor<T>,GraphExploreRequestParameters, IGraphExploreRequest>, IGraphExploreRequest
-	{
+	{ 
 		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/{index}/_xpack/graph/_explore</summary>
 ///<param name="index"> this parameter is required</param>
 		public GraphExploreDescriptor(Indices index) : base(r=>r.Required("index", index)){}
-
+		
 
 			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public GraphExploreDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
@@ -6095,7 +6110,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public GraphExploreDescriptor<T> AllTypes() => this.Type(Types.All);
 
-
+	
 		///<summary>Specific routing value</summary>
 		public GraphExploreDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
@@ -6112,19 +6127,20 @@ namespace Nest
 		public GraphExploreDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GraphExploreDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public GraphExploreDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GraphExploreDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
+	
 	///<summary>descriptor for XpackDeprecationInfo <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
 	public partial class XpackDeprecationInfoDescriptor  : RequestDescriptorBase<XpackDeprecationInfoDescriptor,XpackDeprecationInfoRequestParameters, IXpackDeprecationInfoRequest>, IXpackDeprecationInfoRequest
-	{
+	{ 
 		IndexName IXpackDeprecationInfoRequest.Index => Self.RouteValues.Get<IndexName>("index");
 			/// <summary>/_xpack/migration/deprecations</summary>
 		public XpackDeprecationInfoDescriptor() : base(){}
-
+		
 
 			///<summary>Index pattern</summary>
 		public XpackDeprecationInfoDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
@@ -6132,7 +6148,7 @@ namespace Nest
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public XpackDeprecationInfoDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
 
-
+	
 		///<summary>Pretty format the returned JSON response.</summary>
 		public XpackDeprecationInfoDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6143,19 +6159,20 @@ namespace Nest
 		public XpackDeprecationInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XpackDeprecationInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public XpackDeprecationInfoDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public XpackDeprecationInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 
 		//TODO THIS METHOD IS UNMAPPED!
-
-
+		
+	
 	}
+	
 	///<summary>descriptor for XpackInfo <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
 	public partial class XPackInfoDescriptor  : RequestDescriptorBase<XPackInfoDescriptor,XPackInfoRequestParameters, IXPackInfoRequest>, IXPackInfoRequest
-	{
-
+	{ 
+			
 		///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
 		public XPackInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
 
@@ -6169,17 +6186,17 @@ namespace Nest
 		public XPackInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XPackInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public XPackInfoDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public XPackInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackUsage <pre>Retrieve information about xpack features usage</pre></summary>
 	public partial class XPackUsageDescriptor  : RequestDescriptorBase<XPackUsageDescriptor,XPackUsageRequestParameters, IXPackUsageRequest>, IXPackUsageRequest
-	{
-
+	{ 
+			
 		///<summary>Specify timeout for watch write operation</summary>
 		public XPackUsageDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -6193,17 +6210,17 @@ namespace Nest
 		public XPackUsageDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XPackUsageDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public XPackUsageDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public XPackUsageDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class DeleteLicenseDescriptor  : RequestDescriptorBase<DeleteLicenseDescriptor,DeleteLicenseRequestParameters, IDeleteLicenseRequest>, IDeleteLicenseRequest
-	{
-
+	{ 
+			
 		///<summary>Pretty format the returned JSON response.</summary>
 		public DeleteLicenseDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6214,17 +6231,17 @@ namespace Nest
 		public DeleteLicenseDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteLicenseDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteLicenseDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteLicenseDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackLicenseGet <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetLicenseDescriptor  : RequestDescriptorBase<GetLicenseDescriptor,GetLicenseRequestParameters, IGetLicenseRequest>, IGetLicenseRequest
-	{
-
+	{ 
+			
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetLicenseDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -6238,17 +6255,17 @@ namespace Nest
 		public GetLicenseDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetLicenseDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetLicenseDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetLicenseDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackLicensePost <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class PostLicenseDescriptor  : RequestDescriptorBase<PostLicenseDescriptor,PostLicenseRequestParameters, IPostLicenseRequest>, IPostLicenseRequest
-	{
-
+	{ 
+			
 		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public PostLicenseDescriptor Acknowledge(bool acknowledge = true) => AssignParam(p=>p.Acknowledge(acknowledge));
 
@@ -6262,23 +6279,23 @@ namespace Nest
 		public PostLicenseDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PostLicenseDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PostLicenseDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PostLicenseDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlCloseJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
 	public partial class CloseJobDescriptor  : RequestDescriptorBase<CloseJobDescriptor,CloseJobRequestParameters, ICloseJobRequest>, ICloseJobRequest
-	{
+	{ 
 		Id ICloseJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_close</summary>
 ///<param name="job_id"> this parameter is required</param>
 		public CloseJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
 
-
-
+		
 		///<summary>True if the job should be forcefully closed</summary>
 		public CloseJobDescriptor Force(bool force = true) => AssignParam(p=>p.Force(force));
 
@@ -6295,23 +6312,23 @@ namespace Nest
 		public CloseJobDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CloseJobDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CloseJobDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CloseJobDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlDeleteDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
 	public partial class DeleteDatafeedDescriptor  : RequestDescriptorBase<DeleteDatafeedDescriptor,DeleteDatafeedRequestParameters, IDeleteDatafeedRequest>, IDeleteDatafeedRequest
-	{
+	{ 
 		Id IDeleteDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
 ///<param name="datafeed_id"> this parameter is required</param>
 		public DeleteDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		
 
-
-
+		
 		///<summary>True if the datafeed should be forcefully deleted</summary>
 		public DeleteDatafeedDescriptor Force(bool force = true) => AssignParam(p=>p.Force(force));
 
@@ -6325,17 +6342,17 @@ namespace Nest
 		public DeleteDatafeedDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteDatafeedDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteDatafeedDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteDatafeedDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlDeleteExpiredData <pre></pre></summary>
 	public partial class DeleteExpiredDataDescriptor  : RequestDescriptorBase<DeleteExpiredDataDescriptor,DeleteExpiredDataRequestParameters, IDeleteExpiredDataRequest>, IDeleteExpiredDataRequest
-	{
-
+	{ 
+			
 		///<summary>Pretty format the returned JSON response.</summary>
 		public DeleteExpiredDataDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6346,23 +6363,23 @@ namespace Nest
 		public DeleteExpiredDataDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteExpiredDataDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteExpiredDataDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteExpiredDataDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlDeleteJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
 	public partial class DeleteJobDescriptor  : RequestDescriptorBase<DeleteJobDescriptor,DeleteJobRequestParameters, IDeleteJobRequest>, IDeleteJobRequest
-	{
+	{ 
 		Id IDeleteJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
 ///<param name="job_id"> this parameter is required</param>
 		public DeleteJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
 
-
-
+		
 		///<summary>True if the job should be forcefully deleted</summary>
 		public DeleteJobDescriptor Force(bool force = true) => AssignParam(p=>p.Force(force));
 
@@ -6376,25 +6393,25 @@ namespace Nest
 		public DeleteJobDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteJobDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteJobDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteJobDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlDeleteModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
 	public partial class DeleteModelSnapshotDescriptor  : RequestDescriptorBase<DeleteModelSnapshotDescriptor,DeleteModelSnapshotRequestParameters, IDeleteModelSnapshotRequest>, IDeleteModelSnapshotRequest
-	{
+	{ 
 		Id IDeleteModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IDeleteModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
-///<param name="job_id"> this parameter is required</param>
+///<param name="job_id"> this parameter is required</param>		
 ///<param name="snapshot_id"> this parameter is required</param>
 		public DeleteModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public DeleteModelSnapshotDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6405,23 +6422,23 @@ namespace Nest
 		public DeleteModelSnapshotDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteModelSnapshotDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteModelSnapshotDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteModelSnapshotDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlFlushJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
 	public partial class FlushJobDescriptor  : RequestDescriptorBase<FlushJobDescriptor,FlushJobRequestParameters, IFlushJobRequest>, IFlushJobRequest
-	{
+	{ 
 		Id IFlushJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_flush</summary>
 ///<param name="job_id"> this parameter is required</param>
 		public FlushJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
 
-
-
+		
 		///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
 		public FlushJobDescriptor SkipTime(string skip_time) => AssignParam(p=>p.SkipTime(skip_time));
 
@@ -6435,23 +6452,23 @@ namespace Nest
 		public FlushJobDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public FlushJobDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public FlushJobDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public FlushJobDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlGetBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
 	public partial class GetBucketsDescriptor  : RequestDescriptorBase<GetBucketsDescriptor,GetBucketsRequestParameters, IGetBucketsRequest>, IGetBucketsRequest
-	{
+	{ 
 		Id IGetBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/buckets</summary>
 ///<param name="job_id"> this parameter is required</param>
 		public GetBucketsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public GetBucketsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6462,27 +6479,27 @@ namespace Nest
 		public GetBucketsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetBucketsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetBucketsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetBucketsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public partial class GetCategoriesDescriptor  : RequestDescriptorBase<GetCategoriesDescriptor,GetCategoriesRequestParameters, IGetCategoriesRequest>, IGetCategoriesRequest
-	{
+	{ 
 		Id IGetCategoriesRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		CategoryId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<CategoryId>("category_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
 ///<param name="job_id"> this parameter is required</param>
 		public GetCategoriesDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-
+		
 
 			///<summary>The identifier of the category definition of interest</summary>
 		public GetCategoriesDescriptor CategoryId(CategoryId categoryId) => Assign(a=>a.RouteValues.Optional("category_id", categoryId));
 
-
+	
 		///<summary>Pretty format the returned JSON response.</summary>
 		public GetCategoriesDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6493,25 +6510,25 @@ namespace Nest
 		public GetCategoriesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetCategoriesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetCategoriesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetCategoriesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlGetDatafeeds <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
 	public partial class GetDatafeedsDescriptor  : RequestDescriptorBase<GetDatafeedsDescriptor,GetDatafeedsRequestParameters, IGetDatafeedsRequest>, IGetDatafeedsRequest
-	{
+	{ 
 		Id IGetDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
 		public GetDatafeedsDescriptor() : base(){}
-
+		
 
 			///<summary>The ID of the datafeeds to fetch</summary>
 		public GetDatafeedsDescriptor DatafeedId(Id datafeedId) => Assign(a=>a.RouteValues.Optional("datafeed_id", datafeedId));
 
-
+	
 		///<summary>Pretty format the returned JSON response.</summary>
 		public GetDatafeedsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6522,25 +6539,25 @@ namespace Nest
 		public GetDatafeedsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetDatafeedsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetDatafeedsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetDatafeedsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlGetDatafeedStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
 	public partial class GetDatafeedStatsDescriptor  : RequestDescriptorBase<GetDatafeedStatsDescriptor,GetDatafeedStatsRequestParameters, IGetDatafeedStatsRequest>, IGetDatafeedStatsRequest
-	{
+	{ 
 		Id IGetDatafeedStatsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_stats</summary>
 		public GetDatafeedStatsDescriptor() : base(){}
-
+		
 
 			///<summary>The ID of the datafeeds stats to fetch</summary>
 		public GetDatafeedStatsDescriptor DatafeedId(Id datafeedId) => Assign(a=>a.RouteValues.Optional("datafeed_id", datafeedId));
 
-
+	
 		///<summary>Pretty format the returned JSON response.</summary>
 		public GetDatafeedStatsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6551,23 +6568,23 @@ namespace Nest
 		public GetDatafeedStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetDatafeedStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetDatafeedStatsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetDatafeedStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlGetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
 	public partial class GetInfluencersDescriptor  : RequestDescriptorBase<GetInfluencersDescriptor,GetInfluencersRequestParameters, IGetInfluencersRequest>, IGetInfluencersRequest
-	{
+	{ 
 		Id IGetInfluencersRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/influencers</summary>
 ///<param name="job_id"> this parameter is required</param>
 		public GetInfluencersDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public GetInfluencersDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6578,25 +6595,25 @@ namespace Nest
 		public GetInfluencersDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetInfluencersDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetInfluencersDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetInfluencersDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlGetJobs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
 	public partial class GetJobsDescriptor  : RequestDescriptorBase<GetJobsDescriptor,GetJobsRequestParameters, IGetJobsRequest>, IGetJobsRequest
-	{
+	{ 
 		Id IGetJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
 		public GetJobsDescriptor() : base(){}
-
+		
 
 			///<summary>The ID of the jobs to fetch</summary>
 		public GetJobsDescriptor JobId(Id jobId) => Assign(a=>a.RouteValues.Optional("job_id", jobId));
 
-
+	
 		///<summary>Pretty format the returned JSON response.</summary>
 		public GetJobsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6607,25 +6624,25 @@ namespace Nest
 		public GetJobsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetJobsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetJobsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetJobsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlGetJobStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
 	public partial class GetJobStatsDescriptor  : RequestDescriptorBase<GetJobStatsDescriptor,GetJobStatsRequestParameters, IGetJobStatsRequest>, IGetJobStatsRequest
-	{
+	{ 
 		Id IGetJobStatsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/_stats</summary>
 		public GetJobStatsDescriptor() : base(){}
-
+		
 
 			///<summary>The ID of the jobs stats to fetch</summary>
 		public GetJobStatsDescriptor JobId(Id jobId) => Assign(a=>a.RouteValues.Optional("job_id", jobId));
 
-
+	
 		///<summary>Pretty format the returned JSON response.</summary>
 		public GetJobStatsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6636,27 +6653,27 @@ namespace Nest
 		public GetJobStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetJobStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetJobStatsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetJobStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlGetModelSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
 	public partial class GetModelSnapshotsDescriptor  : RequestDescriptorBase<GetModelSnapshotsDescriptor,GetModelSnapshotsRequestParameters, IGetModelSnapshotsRequest>, IGetModelSnapshotsRequest
-	{
+	{ 
 		Id IGetModelSnapshotsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IGetModelSnapshotsRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
 ///<param name="job_id"> this parameter is required</param>
 		public GetModelSnapshotsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-
+		
 
 			///<summary>The ID of the snapshot to fetch</summary>
 		public GetModelSnapshotsDescriptor SnapshotId(Id snapshotId) => Assign(a=>a.RouteValues.Optional("snapshot_id", snapshotId));
 
-
+	
 		///<summary>Pretty format the returned JSON response.</summary>
 		public GetModelSnapshotsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6667,23 +6684,23 @@ namespace Nest
 		public GetModelSnapshotsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetModelSnapshotsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetModelSnapshotsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetModelSnapshotsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlGetRecords <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
 	public partial class GetAnomalyRecordsDescriptor  : RequestDescriptorBase<GetAnomalyRecordsDescriptor,GetAnomalyRecordsRequestParameters, IGetAnomalyRecordsRequest>, IGetAnomalyRecordsRequest
-	{
+	{ 
 		Id IGetAnomalyRecordsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/records</summary>
 ///<param name="job_id"> this parameter is required</param>
 		public GetAnomalyRecordsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public GetAnomalyRecordsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6694,23 +6711,23 @@ namespace Nest
 		public GetAnomalyRecordsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetAnomalyRecordsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetAnomalyRecordsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetAnomalyRecordsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlOpenJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
 	public partial class OpenJobDescriptor  : RequestDescriptorBase<OpenJobDescriptor,OpenJobRequestParameters, IOpenJobRequest>, IOpenJobRequest
-	{
+	{ 
 		Id IOpenJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_open</summary>
 ///<param name="job_id"> this parameter is required</param>
 		public OpenJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public OpenJobDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6721,23 +6738,23 @@ namespace Nest
 		public OpenJobDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public OpenJobDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public OpenJobDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public OpenJobDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlPostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
 	public partial class PostJobDataDescriptor  : RequestDescriptorBase<PostJobDataDescriptor,PostJobDataRequestParameters, IPostJobDataRequest>, IPostJobDataRequest
-	{
+	{ 
 		Id IPostJobDataRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_data</summary>
 ///<param name="job_id"> this parameter is required</param>
 		public PostJobDataDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
 
-
-
+		
 		///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
 		public PostJobDataDescriptor ResetStart(DateTimeOffset reset_start) => AssignParam(p=>p.ResetStart(reset_start));
 
@@ -6754,23 +6771,23 @@ namespace Nest
 		public PostJobDataDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PostJobDataDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PostJobDataDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PostJobDataDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlPreviewDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
 	public partial class PreviewDatafeedDescriptor  : RequestDescriptorBase<PreviewDatafeedDescriptor,PreviewDatafeedRequestParameters, IPreviewDatafeedRequest>, IPreviewDatafeedRequest
-	{
+	{ 
 		Id IPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_preview</summary>
 ///<param name="datafeed_id"> this parameter is required</param>
 		public PreviewDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public PreviewDatafeedDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6781,23 +6798,23 @@ namespace Nest
 		public PreviewDatafeedDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PreviewDatafeedDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PreviewDatafeedDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PreviewDatafeedDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlPutDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
 	public partial class PutDatafeedDescriptor<T>  : RequestDescriptorBase<PutDatafeedDescriptor<T>,PutDatafeedRequestParameters, IPutDatafeedRequest>, IPutDatafeedRequest
-	{
+	{ 
 		Id IPutDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}. Will infer the index and type from the generic type</summary>
 ///<param name="datafeed_id"> this parameter is required</param>
 		public PutDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){ Self.Indices = typeof(T); Self.Types = typeof(T); }
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public PutDatafeedDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6808,23 +6825,23 @@ namespace Nest
 		public PutDatafeedDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutDatafeedDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public PutDatafeedDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutDatafeedDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlPutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
 	public partial class PutJobDescriptor<T>  : RequestDescriptorBase<PutJobDescriptor<T>,PutJobRequestParameters, IPutJobRequest>, IPutJobRequest
-	{
+	{ 
 		Id IPutJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
 ///<param name="job_id"> this parameter is required</param>
 		public PutJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public PutJobDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6835,25 +6852,25 @@ namespace Nest
 		public PutJobDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutJobDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public PutJobDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutJobDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlRevertModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
 	public partial class RevertModelSnapshotDescriptor  : RequestDescriptorBase<RevertModelSnapshotDescriptor,RevertModelSnapshotRequestParameters, IRevertModelSnapshotRequest>, IRevertModelSnapshotRequest
-	{
+	{ 
 		Id IRevertModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IRevertModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert</summary>
-///<param name="job_id"> this parameter is required</param>
+///<param name="job_id"> this parameter is required</param>		
 ///<param name="snapshot_id"> this parameter is required</param>
 		public RevertModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public RevertModelSnapshotDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6864,23 +6881,23 @@ namespace Nest
 		public RevertModelSnapshotDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RevertModelSnapshotDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RevertModelSnapshotDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RevertModelSnapshotDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlStartDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
 	public partial class StartDatafeedDescriptor  : RequestDescriptorBase<StartDatafeedDescriptor,StartDatafeedRequestParameters, IStartDatafeedRequest>, IStartDatafeedRequest
-	{
+	{ 
 		Id IStartDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_start</summary>
 ///<param name="datafeed_id"> this parameter is required</param>
 		public StartDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public StartDatafeedDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6891,23 +6908,23 @@ namespace Nest
 		public StartDatafeedDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public StartDatafeedDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public StartDatafeedDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public StartDatafeedDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlStopDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
 	public partial class StopDatafeedDescriptor  : RequestDescriptorBase<StopDatafeedDescriptor,StopDatafeedRequestParameters, IStopDatafeedRequest>, IStopDatafeedRequest
-	{
+	{ 
 		Id IStopDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_stop</summary>
 ///<param name="datafeed_id"> this parameter is required</param>
 		public StopDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public StopDatafeedDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6918,23 +6935,23 @@ namespace Nest
 		public StopDatafeedDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public StopDatafeedDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public StopDatafeedDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public StopDatafeedDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlUpdateDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
 	public partial class UpdateDatafeedDescriptor<T>  : RequestDescriptorBase<UpdateDatafeedDescriptor<T>,UpdateDatafeedRequestParameters, IUpdateDatafeedRequest>, IUpdateDatafeedRequest
-	{
+	{ 
 		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_update. Will infer the index and type from the generic type</summary>
 ///<param name="datafeed_id"> this parameter is required</param>
 		public UpdateDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){ Self.Indices = typeof(T); Self.Types = typeof(T); }
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public UpdateDatafeedDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6945,23 +6962,23 @@ namespace Nest
 		public UpdateDatafeedDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateDatafeedDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public UpdateDatafeedDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public UpdateDatafeedDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlUpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
 	public partial class UpdateJobDescriptor<T>  : RequestDescriptorBase<UpdateJobDescriptor<T>,UpdateJobRequestParameters, IUpdateJobRequest>, IUpdateJobRequest
-	{
+	{ 
 		Id IUpdateJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_update</summary>
 ///<param name="job_id"> this parameter is required</param>
 		public UpdateJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public UpdateJobDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6972,25 +6989,25 @@ namespace Nest
 		public UpdateJobDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateJobDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public UpdateJobDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public UpdateJobDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlUpdateModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
 	public partial class UpdateModelSnapshotDescriptor  : RequestDescriptorBase<UpdateModelSnapshotDescriptor,UpdateModelSnapshotRequestParameters, IUpdateModelSnapshotRequest>, IUpdateModelSnapshotRequest
-	{
+	{ 
 		Id IUpdateModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IUpdateModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update</summary>
-///<param name="job_id"> this parameter is required</param>
+///<param name="job_id"> this parameter is required</param>		
 ///<param name="snapshot_id"> this parameter is required</param>
 		public UpdateModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public UpdateModelSnapshotDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -7001,17 +7018,17 @@ namespace Nest
 		public UpdateModelSnapshotDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateModelSnapshotDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public UpdateModelSnapshotDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public UpdateModelSnapshotDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlValidate <pre></pre></summary>
 	public partial class ValidateJobDescriptor<T>  : RequestDescriptorBase<ValidateJobDescriptor<T>,ValidateJobRequestParameters, IValidateJobRequest>, IValidateJobRequest
-	{
-
+	{ 
+			
 		///<summary>Pretty format the returned JSON response.</summary>
 		public ValidateJobDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -7022,17 +7039,17 @@ namespace Nest
 		public ValidateJobDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ValidateJobDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public ValidateJobDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ValidateJobDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackMlValidateDetector <pre></pre></summary>
 	public partial class ValidateDetectorDescriptor<T>  : RequestDescriptorBase<ValidateDetectorDescriptor<T>,ValidateDetectorRequestParameters, IValidateDetectorRequest>, IValidateDetectorRequest
-	{
-
+	{ 
+			
 		///<summary>Pretty format the returned JSON response.</summary>
 		public ValidateDetectorDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -7043,17 +7060,17 @@ namespace Nest
 		public ValidateDetectorDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ValidateDetectorDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public ValidateDetectorDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ValidateDetectorDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
 	public partial class AuthenticateDescriptor  : RequestDescriptorBase<AuthenticateDescriptor,AuthenticateRequestParameters, IAuthenticateRequest>, IAuthenticateRequest
-	{
-
+	{ 
+			
 		///<summary>Pretty format the returned JSON response.</summary>
 		public AuthenticateDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -7064,25 +7081,25 @@ namespace Nest
 		public AuthenticateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public AuthenticateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public AuthenticateDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public AuthenticateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackSecurityChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
 	public partial class ChangePasswordDescriptor  : RequestDescriptorBase<ChangePasswordDescriptor,ChangePasswordRequestParameters, IChangePasswordRequest>, IChangePasswordRequest
-	{
+	{ 
 		Name IChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
 			/// <summary>/_xpack/security/user/{username}/_password</summary>
 		public ChangePasswordDescriptor() : base(){}
-
+		
 
 			///<summary>The username of the user to change the password for</summary>
 		public ChangePasswordDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
 
-
+	
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public ChangePasswordDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
@@ -7096,23 +7113,23 @@ namespace Nest
 		public ChangePasswordDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ChangePasswordDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ChangePasswordDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ChangePasswordDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackSecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
 	public partial class ClearCachedRealmsDescriptor  : RequestDescriptorBase<ClearCachedRealmsDescriptor,ClearCachedRealmsRequestParameters, IClearCachedRealmsRequest>, IClearCachedRealmsRequest
-	{
+	{ 
 		Names IClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
 			/// <summary>/_xpack/security/realm/{realms}/_clear_cache</summary>
 ///<param name="realms"> this parameter is required</param>
 		public ClearCachedRealmsDescriptor(Names realms) : base(r=>r.Required("realms", realms)){}
+		
 
-
-
+		
 		///<summary>Comma-separated list of usernames to clear from the cache</summary>
 		public ClearCachedRealmsDescriptor Usernames(params string[] usernames) => AssignParam(p=>p.Usernames(usernames));
 
@@ -7126,23 +7143,23 @@ namespace Nest
 		public ClearCachedRealmsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClearCachedRealmsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClearCachedRealmsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClearCachedRealmsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackSecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-clear-role-cache</pre></summary>
 	public partial class ClearCachedRolesDescriptor  : RequestDescriptorBase<ClearCachedRolesDescriptor,ClearCachedRolesRequestParameters, IClearCachedRolesRequest>, IClearCachedRolesRequest
-	{
+	{ 
 		Names IClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_xpack/security/role/{name}/_clear_cache</summary>
 ///<param name="name"> this parameter is required</param>
 		public ClearCachedRolesDescriptor(Names name) : base(r=>r.Required("name", name)){}
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public ClearCachedRolesDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -7153,23 +7170,23 @@ namespace Nest
 		public ClearCachedRolesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClearCachedRolesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClearCachedRolesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClearCachedRolesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackSecurityDeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-delete-role</pre></summary>
 	public partial class DeleteRoleDescriptor  : RequestDescriptorBase<DeleteRoleDescriptor,DeleteRoleRequestParameters, IDeleteRoleRequest>, IDeleteRoleRequest
-	{
+	{ 
 		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_xpack/security/role/{name}</summary>
 ///<param name="name"> this parameter is required</param>
 		public DeleteRoleDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		
 
-
-
+		
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DeleteRoleDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
@@ -7183,23 +7200,23 @@ namespace Nest
 		public DeleteRoleDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteRoleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteRoleDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteRoleDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackSecurityDeleteRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-delete-role-mapping</pre></summary>
 	public partial class DeleteRoleMappingDescriptor  : RequestDescriptorBase<DeleteRoleMappingDescriptor,DeleteRoleMappingRequestParameters, IDeleteRoleMappingRequest>, IDeleteRoleMappingRequest
-	{
+	{ 
 		Name IDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_xpack/security/role_mapping/{name}</summary>
 ///<param name="name"> this parameter is required</param>
 		public DeleteRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		
 
-
-
+		
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DeleteRoleMappingDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
@@ -7213,23 +7230,23 @@ namespace Nest
 		public DeleteRoleMappingDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteRoleMappingDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteRoleMappingDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteRoleMappingDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackSecurityDeleteUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-delete-user</pre></summary>
 	public partial class DeleteUserDescriptor  : RequestDescriptorBase<DeleteUserDescriptor,DeleteUserRequestParameters, IDeleteUserRequest>, IDeleteUserRequest
-	{
+	{ 
 		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
 			/// <summary>/_xpack/security/user/{username}</summary>
 ///<param name="username"> this parameter is required</param>
 		public DeleteUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
+		
 
-
-
+		
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DeleteUserDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
@@ -7243,25 +7260,25 @@ namespace Nest
 		public DeleteUserDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteUserDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteUserDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackSecurityDisableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-disable-user</pre></summary>
 	public partial class DisableUserDescriptor  : RequestDescriptorBase<DisableUserDescriptor,DisableUserRequestParameters, IDisableUserRequest>, IDisableUserRequest
-	{
+	{ 
 		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 			/// <summary>/_xpack/security/user/{username}/_disable</summary>
 		public DisableUserDescriptor() : base(){}
-
+		
 
 			///<summary>The username of the user to disable</summary>
 		public DisableUserDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
 
-
+	
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DisableUserDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
@@ -7275,25 +7292,25 @@ namespace Nest
 		public DisableUserDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DisableUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DisableUserDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DisableUserDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackSecurityEnableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-enable-user</pre></summary>
 	public partial class EnableUserDescriptor  : RequestDescriptorBase<EnableUserDescriptor,EnableUserRequestParameters, IEnableUserRequest>, IEnableUserRequest
-	{
+	{ 
 		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 			/// <summary>/_xpack/security/user/{username}/_enable</summary>
 		public EnableUserDescriptor() : base(){}
-
+		
 
 			///<summary>The username of the user to enable</summary>
 		public EnableUserDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
 
-
+	
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public EnableUserDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
@@ -7307,25 +7324,25 @@ namespace Nest
 		public EnableUserDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public EnableUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public EnableUserDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public EnableUserDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackSecurityGetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-get-role</pre></summary>
 	public partial class GetRoleDescriptor  : RequestDescriptorBase<GetRoleDescriptor,GetRoleRequestParameters, IGetRoleRequest>, IGetRoleRequest
-	{
+	{ 
 		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_xpack/security/role/{name}</summary>
 		public GetRoleDescriptor() : base(){}
-
+		
 
 			///<summary>Role name</summary>
 		public GetRoleDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-
+	
 		///<summary>Pretty format the returned JSON response.</summary>
 		public GetRoleDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -7336,25 +7353,25 @@ namespace Nest
 		public GetRoleDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetRoleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetRoleDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetRoleDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackSecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-get-role-mapping</pre></summary>
 	public partial class GetRoleMappingDescriptor  : RequestDescriptorBase<GetRoleMappingDescriptor,GetRoleMappingRequestParameters, IGetRoleMappingRequest>, IGetRoleMappingRequest
-	{
+	{ 
 		Name IGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_xpack/security/role_mapping/{name}</summary>
 		public GetRoleMappingDescriptor() : base(){}
-
+		
 
 			///<summary>Role-Mapping name</summary>
 		public GetRoleMappingDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-
+	
 		///<summary>Pretty format the returned JSON response.</summary>
 		public GetRoleMappingDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -7365,17 +7382,17 @@ namespace Nest
 		public GetRoleMappingDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetRoleMappingDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetRoleMappingDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetRoleMappingDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackSecurityGetToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-get-token</pre></summary>
 	public partial class GetUserAccessTokenDescriptor  : RequestDescriptorBase<GetUserAccessTokenDescriptor,GetUserAccessTokenRequestParameters, IGetUserAccessTokenRequest>, IGetUserAccessTokenRequest
-	{
-
+	{ 
+			
 		///<summary>Pretty format the returned JSON response.</summary>
 		public GetUserAccessTokenDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -7386,25 +7403,25 @@ namespace Nest
 		public GetUserAccessTokenDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetUserAccessTokenDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetUserAccessTokenDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetUserAccessTokenDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackSecurityGetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-get-user</pre></summary>
 	public partial class GetUserDescriptor  : RequestDescriptorBase<GetUserDescriptor,GetUserRequestParameters, IGetUserRequest>, IGetUserRequest
-	{
+	{ 
 		Names IGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
 			/// <summary>/_xpack/security/user/{username}</summary>
 		public GetUserDescriptor() : base(){}
-
+		
 
 			///<summary>A comma-separated list of usernames</summary>
 		public GetUserDescriptor Username(Names username) => Assign(a=>a.RouteValues.Optional("username", username));
 
-
+	
 		///<summary>Pretty format the returned JSON response.</summary>
 		public GetUserDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -7415,17 +7432,17 @@ namespace Nest
 		public GetUserDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetUserDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetUserDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackSecurityInvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-invalidate-token</pre></summary>
 	public partial class InvalidateUserAccessTokenDescriptor  : RequestDescriptorBase<InvalidateUserAccessTokenDescriptor,InvalidateUserAccessTokenRequestParameters, IInvalidateUserAccessTokenRequest>, IInvalidateUserAccessTokenRequest
-	{
-
+	{ 
+			
 		///<summary>Pretty format the returned JSON response.</summary>
 		public InvalidateUserAccessTokenDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -7436,23 +7453,23 @@ namespace Nest
 		public InvalidateUserAccessTokenDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public InvalidateUserAccessTokenDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public InvalidateUserAccessTokenDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public InvalidateUserAccessTokenDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackSecurityPutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-put-role</pre></summary>
 	public partial class PutRoleDescriptor  : RequestDescriptorBase<PutRoleDescriptor,PutRoleRequestParameters, IPutRoleRequest>, IPutRoleRequest
-	{
+	{ 
 		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_xpack/security/role/{name}</summary>
 ///<param name="name"> this parameter is required</param>
 		public PutRoleDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		
 
-
-
+		
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public PutRoleDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
@@ -7466,23 +7483,23 @@ namespace Nest
 		public PutRoleDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutRoleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutRoleDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutRoleDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackSecurityPutRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-put-role-mapping</pre></summary>
 	public partial class PutRoleMappingDescriptor  : RequestDescriptorBase<PutRoleMappingDescriptor,PutRoleMappingRequestParameters, IPutRoleMappingRequest>, IPutRoleMappingRequest
-	{
+	{ 
 		Name IPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_xpack/security/role_mapping/{name}</summary>
 ///<param name="name"> this parameter is required</param>
 		public PutRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		
 
-
-
+		
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public PutRoleMappingDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
@@ -7496,23 +7513,23 @@ namespace Nest
 		public PutRoleMappingDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutRoleMappingDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutRoleMappingDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutRoleMappingDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackSecurityPutUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-put-user</pre></summary>
 	public partial class PutUserDescriptor  : RequestDescriptorBase<PutUserDescriptor,PutUserRequestParameters, IPutUserRequest>, IPutUserRequest
-	{
+	{ 
 		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
 			/// <summary>/_xpack/security/user/{username}</summary>
 ///<param name="username"> this parameter is required</param>
 		public PutUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
+		
 
-
-
+		
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public PutUserDescriptor Refresh(Refresh refresh) => AssignParam(p=>p.Refresh(refresh));
 
@@ -7526,27 +7543,27 @@ namespace Nest
 		public PutUserDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutUserDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutUserDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackWatcherAckWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
 	public partial class AcknowledgeWatchDescriptor  : RequestDescriptorBase<AcknowledgeWatchDescriptor,AcknowledgeWatchRequestParameters, IAcknowledgeWatchRequest>, IAcknowledgeWatchRequest
-	{
+	{ 
 		Id IAcknowledgeWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
 		ActionIds IAcknowledgeWatchRequest.ActionId => Self.RouteValues.Get<ActionIds>("action_id");
 			/// <summary>/_xpack/watcher/watch/{watch_id}/_ack</summary>
 ///<param name="watch_id"> this parameter is required</param>
 		public AcknowledgeWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
-
+		
 
 			///<summary>A comma-separated list of the action ids to be acked</summary>
 		public AcknowledgeWatchDescriptor ActionId(ActionIds actionId) => Assign(a=>a.RouteValues.Optional("action_id", actionId));
 
-
+	
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public AcknowledgeWatchDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -7560,23 +7577,23 @@ namespace Nest
 		public AcknowledgeWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public AcknowledgeWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public AcknowledgeWatchDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public AcknowledgeWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackWatcherActivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
 	public partial class ActivateWatchDescriptor  : RequestDescriptorBase<ActivateWatchDescriptor,ActivateWatchRequestParameters, IActivateWatchRequest>, IActivateWatchRequest
-	{
+	{ 
 		Id IActivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
 			/// <summary>/_xpack/watcher/watch/{watch_id}/_activate</summary>
 ///<param name="watch_id"> this parameter is required</param>
 		public ActivateWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
+		
 
-
-
+		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public ActivateWatchDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -7590,23 +7607,23 @@ namespace Nest
 		public ActivateWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ActivateWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ActivateWatchDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ActivateWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackWatcherDeactivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
 	public partial class DeactivateWatchDescriptor  : RequestDescriptorBase<DeactivateWatchDescriptor,DeactivateWatchRequestParameters, IDeactivateWatchRequest>, IDeactivateWatchRequest
-	{
+	{ 
 		Id IDeactivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
 			/// <summary>/_xpack/watcher/watch/{watch_id}/_deactivate</summary>
 ///<param name="watch_id"> this parameter is required</param>
 		public DeactivateWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
+		
 
-
-
+		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeactivateWatchDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -7620,23 +7637,23 @@ namespace Nest
 		public DeactivateWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeactivateWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeactivateWatchDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeactivateWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackWatcherDeleteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
 	public partial class DeleteWatchDescriptor  : RequestDescriptorBase<DeleteWatchDescriptor,DeleteWatchRequestParameters, IDeleteWatchRequest>, IDeleteWatchRequest
-	{
+	{ 
 		Id IDeleteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_xpack/watcher/watch/{id}</summary>
 ///<param name="id"> this parameter is required</param>
 		public DeleteWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		
 
-
-
+		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeleteWatchDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -7650,25 +7667,25 @@ namespace Nest
 		public DeleteWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteWatchDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackWatcherExecuteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
 	public partial class ExecuteWatchDescriptor  : RequestDescriptorBase<ExecuteWatchDescriptor,ExecuteWatchRequestParameters, IExecuteWatchRequest>, IExecuteWatchRequest
-	{
+	{ 
 		Id IExecuteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_xpack/watcher/watch/{id}/_execute</summary>
 		public ExecuteWatchDescriptor() : base(){}
-
+		
 
 			///<summary>Watch ID</summary>
 		public ExecuteWatchDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
-
+	
 		///<summary>indicates whether the watch should execute in debug mode</summary>
 		public ExecuteWatchDescriptor Debug(bool debug = true) => AssignParam(p=>p.Debug(debug));
 
@@ -7682,23 +7699,23 @@ namespace Nest
 		public ExecuteWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ExecuteWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ExecuteWatchDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ExecuteWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackWatcherGetWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
 	public partial class GetWatchDescriptor  : RequestDescriptorBase<GetWatchDescriptor,GetWatchRequestParameters, IGetWatchRequest>, IGetWatchRequest
-	{
+	{ 
 		Id IGetWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_xpack/watcher/watch/{id}</summary>
 ///<param name="id"> this parameter is required</param>
 		public GetWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		
 
-
-
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public GetWatchDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -7709,23 +7726,23 @@ namespace Nest
 		public GetWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetWatchDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackWatcherPutWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
 	public partial class PutWatchDescriptor  : RequestDescriptorBase<PutWatchDescriptor,PutWatchRequestParameters, IPutWatchRequest>, IPutWatchRequest
-	{
+	{ 
 		Id IPutWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_xpack/watcher/watch/{id}</summary>
 ///<param name="id"> this parameter is required</param>
 		public PutWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		
 
-
-
+		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public PutWatchDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
@@ -7742,17 +7759,17 @@ namespace Nest
 		public PutWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutWatchDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackWatcherRestart <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-restart.html</pre></summary>
 	public partial class RestartWatcherDescriptor  : RequestDescriptorBase<RestartWatcherDescriptor,RestartWatcherRequestParameters, IRestartWatcherRequest>, IRestartWatcherRequest
-	{
-
+	{ 
+			
 		///<summary>Pretty format the returned JSON response.</summary>
 		public RestartWatcherDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -7763,17 +7780,17 @@ namespace Nest
 		public RestartWatcherDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RestartWatcherDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RestartWatcherDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RestartWatcherDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackWatcherStart <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
 	public partial class StartWatcherDescriptor  : RequestDescriptorBase<StartWatcherDescriptor,StartWatcherRequestParameters, IStartWatcherRequest>, IStartWatcherRequest
-	{
-
+	{ 
+			
 		///<summary>Pretty format the returned JSON response.</summary>
 		public StartWatcherDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -7784,25 +7801,25 @@ namespace Nest
 		public StartWatcherDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public StartWatcherDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public StartWatcherDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public StartWatcherDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackWatcherStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
 	public partial class WatcherStatsDescriptor  : RequestDescriptorBase<WatcherStatsDescriptor,WatcherStatsRequestParameters, IWatcherStatsRequest>, IWatcherStatsRequest
-	{
+	{ 
 		Metrics IWatcherStatsRequest.WatcherStatsMetric => Self.RouteValues.Get<Metrics>("watcher_stats_metric");
 			/// <summary>/_xpack/watcher/stats</summary>
 		public WatcherStatsDescriptor() : base(){}
-
+		
 
 			///<summary>Controls what additional stat metrics should be include in the response</summary>
 		public WatcherStatsDescriptor WatcherStatsMetric(WatcherStatsMetric watcherStatsMetric) => Assign(a=>a.RouteValues.Optional("watcher_stats_metric", (Metrics)watcherStatsMetric));
 
-
+	
 		///<summary>Pretty format the returned JSON response.</summary>
 		public WatcherStatsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -7813,17 +7830,17 @@ namespace Nest
 		public WatcherStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public WatcherStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public WatcherStatsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public WatcherStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
-
+	
 	///<summary>descriptor for XpackWatcherStop <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
 	public partial class StopWatcherDescriptor  : RequestDescriptorBase<StopWatcherDescriptor,StopWatcherRequestParameters, IStopWatcherRequest>, IStopWatcherRequest
-	{
-
+	{ 
+			
 		///<summary>Pretty format the returned JSON response.</summary>
 		public StopWatcherDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -7834,10 +7851,10 @@ namespace Nest
 		public StopWatcherDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public StopWatcherDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public StopWatcherDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public StopWatcherDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
+	
 	}
 }

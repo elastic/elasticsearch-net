@@ -10,7 +10,11 @@ namespace Nest
 		[JsonProperty("params")]
 		IDictionary<string, object> Params { get; set; }
 
-		[JsonProperty("inline")]
+		[JsonProperty("source")]
+		string Source { get; set; }
+
+		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
+		[JsonIgnore]
 		string Inline { get; set; }
 
 		[JsonProperty("id")]
@@ -27,7 +31,8 @@ namespace Nest
 
 	public partial class SearchTemplateRequest
 	{
-		public string Inline { get; set; }
+		public string Source { get; set; }
+		public string Inline { get => this.Source; set => this.Source = value; }
 		public string Id { get; set; }
 		public IDictionary<string, object> Params { get; set; }
 		protected Type ClrType { get; set; }
@@ -75,8 +80,12 @@ namespace Nest
 		/// </summary>
 		internal bool _Strict { get; set; }
 
-		string ISearchTemplateRequest.Inline { get; set; }
+		string ISearchTemplateRequest.Inline { get => Self.Source; set => Self.Source = value; }
+		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
 		public SearchTemplateDescriptor<T> Inline(string template) => Assign(a => a.Inline = template);
+
+		string ISearchTemplateRequest.Source { get; set; }
+		public SearchTemplateDescriptor<T> Source(string template) => Assign(a => a.Source = template);
 
 		string ISearchTemplateRequest.Id { get; set; }
 		public SearchTemplateDescriptor<T> Id(string id) => Assign(a => a.Id = id);

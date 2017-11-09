@@ -36,7 +36,7 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 		protected override object ExpectJson => new object[]
 		{
 			new {},
-			new { @params = new { state = "Stable" }, inline = "{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}" },
+			new { @params = new { state = "Stable" }, source = "{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}" },
 			new { index = "devs" },
 			new { id = "template-id"},
 			new { index = "devs"},
