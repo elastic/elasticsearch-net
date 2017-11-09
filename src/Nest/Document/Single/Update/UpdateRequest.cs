@@ -30,6 +30,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "detect_noop")]
 		bool? DetectNoop { get; set; }
+
+		[JsonProperty("_source")]
+		Union<bool, ISourceFilter> Source { get; set; }
 	}
 
 	public partial class UpdateRequest<TDocument, TPartialDocument>
@@ -48,12 +51,15 @@ namespace Nest
 		public bool? DetectNoop { get; set; }
 		/// <inheritdoc/>
 		public bool? ScriptedUpsert { get; set; }
+		/// <inheritdoc/>
+		public Union<bool, ISourceFilter> Source { get; set; }
 
 		/// <inheritdoc/>
+		[Obsolete("Removed in Elasticsearch 7.x, use source filtering instead")]
 		public Fields Fields
 		{
-			get { return Self.RequestParameters.GetQueryStringValue<Fields>("fields"); }
-			set { Self.RequestParameters.AddQueryString("fields", value); }
+			get => Self.RequestParameters.GetQueryStringValue<Fields>("fields");
+			set => Self.RequestParameters.AddQueryString("fields", value);
 		}
 	}
 
@@ -72,6 +78,8 @@ namespace Nest
 		bool? IUpdateRequest<TDocument, TPartialDocument>.DetectNoop { get; set; }
 
 		bool? IUpdateRequest<TDocument, TPartialDocument>.ScriptedUpsert { get; set; }
+
+		Union<bool, ISourceFilter> IUpdateRequest<TDocument, TPartialDocument>.Source { get; set; }
 
 		/// <summary>
 		/// The full document to be created if an existing document does not exist for a partial merge.
@@ -95,9 +103,16 @@ namespace Nest
 		public UpdateDescriptor<TDocument, TPartialDocument> Fields(Fields fields) =>
 			Assign(a => a.RequestParameters.AddQueryString("fields", fields));
 
+		public UpdateDescriptor<TDocument, TPartialDocument> Source(bool enabled = true) => Assign(a => a.Source = enabled);
+
+		public UpdateDescriptor<TDocument, TPartialDocument> Source(Func<SourceFilterDescriptor<TDocument>, ISourceFilter> selector) =>
+			Assign(a => a.Source = new Union<bool, ISourceFilter>(selector?.Invoke(new SourceFilterDescriptor<TDocument>())));
+
+		[Obsolete("Removed in Elasticsearch 7.x, use source filtering instead")]
 		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params Expression<Func<TPartialDocument, object>>[] typedPathLookups) =>
 			Assign(a => a.RequestParameters.AddQueryString("fields", typedPathLookups));
 
+		[Obsolete("Removed in Elasticsearch 7.x, use source filtering instead")]
 		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params string[] fields) =>
 			Assign(a => a.RequestParameters.AddQueryString("fields", fields));
 	}
