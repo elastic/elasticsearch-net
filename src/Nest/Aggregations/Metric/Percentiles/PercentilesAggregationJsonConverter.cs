@@ -40,7 +40,7 @@ namespace Nest
 			if (properties.ContainsKey("script"))
 			{
 				var scriptProps = JObject.FromObject(properties["script"]).Properties().ToDictionary(p => p.Name, p => p.Value);
-				if (scriptProps.ContainsKey("inline"))
+				if (scriptProps.ContainsKey("source") || scriptProps.ContainsKey("inline"))
 					metric.Script = properties["script"].ToObject<InlineScript>();
 				else if (scriptProps.ContainsKey("file"))
 					metric.Script = properties["script"].ToObject<FileScript>();

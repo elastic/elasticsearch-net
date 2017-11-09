@@ -50,7 +50,7 @@ namespace Nest
 		var tMethod = t == "Time" ? ".ToTimeSpan()" : "";
 		var tSuffix = (t == "bool") ? " = true" : "";
 		var m = kv.Key.ToPascalCase();
-		var mm = (m != "Type" && m != "Index" && m != "Script") ? m : m + "QueryString";
+		var mm = (m != "Type" && m != "Index" && m != "Source" && m != "Script") ? m : m + "QueryString";
 		var typed = !method.DescriptorTypeGeneric.IsNullOrEmpty();
 		var g = typed ? method.DescriptorTypeGeneric.Replace("<", "").Replace(">", "") : "T";
 		var mml = mm.ToLowerInvariant();

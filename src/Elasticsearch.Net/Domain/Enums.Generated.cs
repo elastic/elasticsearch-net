@@ -12,7 +12,7 @@ using System.Runtime.Serialization;
 
 namespace Elasticsearch.Net
 {
-
+	
 	public enum Refresh
 	{
 	[EnumMember(Value = "true")]
@@ -22,7 +22,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "wait_for")]
 		WaitFor
 	}
-
+	
 	public enum Bytes
 	{
 	[EnumMember(Value = "b")]
@@ -48,7 +48,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "pb")]
 		Pb
 	}
-
+	
 	public enum Health
 	{
 	[EnumMember(Value = "green")]
@@ -58,7 +58,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "red")]
 		Red
 	}
-
+	
 	public enum Size
 	{
 	[EnumMember(Value = "")]
@@ -74,7 +74,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "p")]
 		P
 	}
-
+	
 	public enum Level
 	{
 	[EnumMember(Value = "cluster")]
@@ -84,7 +84,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "shards")]
 		Shards
 	}
-
+	
 	public enum WaitForEvents
 	{
 	[EnumMember(Value = "immediate")]
@@ -100,7 +100,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "languid")]
 		Languid
 	}
-
+	
 	public enum WaitForStatus
 	{
 	[EnumMember(Value = "green")]
@@ -110,7 +110,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "red")]
 		Red
 	}
-
+	
 	public enum ExpandWildcards
 	{
 	[EnumMember(Value = "open")]
@@ -122,7 +122,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "all")]
 		All
 	}
-
+	
 	public enum DefaultOperator
 	{
 	[EnumMember(Value = "AND")]
@@ -130,7 +130,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "OR")]
 		Or
 	}
-
+	
 	public enum VersionType
 	{
 	[EnumMember(Value = "internal")]
@@ -142,7 +142,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "force")]
 		Force
 	}
-
+	
 	public enum Conflicts
 	{
 	[EnumMember(Value = "abort")]
@@ -150,7 +150,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "proceed")]
 		Proceed
 	}
-
+	
 	public enum SearchType
 	{
 	[EnumMember(Value = "query_then_fetch")]
@@ -158,7 +158,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "dfs_query_then_fetch")]
 		DfsQueryThenFetch
 	}
-
+	
 	public enum OpType
 	{
 	[EnumMember(Value = "index")]
@@ -166,7 +166,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "create")]
 		Create
 	}
-
+	
 	public enum Format
 	{
 	[EnumMember(Value = "detailed")]
@@ -174,7 +174,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "text")]
 		Text
 	}
-
+	
 	public enum ThreadType
 	{
 	[EnumMember(Value = "cpu")]
@@ -184,7 +184,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "block")]
 		Block
 	}
-
+	
 	public enum SuggestMode
 	{
 	[EnumMember(Value = "missing")]
@@ -194,7 +194,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "always")]
 		Always
 	}
-
+	
 	public enum GroupBy
 	{
 	[EnumMember(Value = "nodes")]
@@ -202,7 +202,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "parents")]
 		Parents
 	}
-
+	
 	[Flags]public enum ClusterStateMetric
 	{
 	[EnumMember(Value = "blocks")]
@@ -222,6 +222,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "_all")]
 		All = 1 << 7
 	}
+	
 	[Flags]public enum IndicesStatsMetric
 	{
 	[EnumMember(Value = "completion")]
@@ -257,7 +258,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "_all")]
 		All = 1 << 15
 	}
-
+	
 	[Flags]public enum NodesInfoMetric
 	{
 	[EnumMember(Value = "settings")]
@@ -279,7 +280,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "ingest")]
 		Ingest = 1 << 8
 	}
-
+	
 	[Flags]public enum NodesStatsMetric
 	{
 	[EnumMember(Value = "breaker")]
@@ -305,7 +306,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "_all")]
 		All = 1 << 10
 	}
-
+	
 	[Flags]public enum NodesStatsIndexMetric
 	{
 	[EnumMember(Value = "completion")]
@@ -341,7 +342,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "_all")]
 		All = 1 << 15
 	}
-
+	
 	[Flags]public enum NodesUsageMetric
 	{
 	[EnumMember(Value = "rest_actions")]
@@ -349,7 +350,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "_all")]
 		All = 1 << 1
 	}
-
+	
 	[Flags]public enum WatcherStatsMetric
 	{
 	[EnumMember(Value = "queued_watches")]
@@ -361,29 +362,29 @@ namespace Elasticsearch.Net
 	}
 
 	public static class KnownEnums
-    {
+    { 
         private class EnumDictionary : Dictionary<Enum, string>
-		{
+		{	
 			public EnumDictionary(int capacity) : base(capacity) {}
 			public Func<Enum, string> Resolver { get; set; }
-		}
+		}	
 
-
+		
 		public static string GetStringValue(this Refresh enumValue)
 		{
-
+		
 			switch (enumValue)
 			{
 				case Refresh.True: return "true";
 				case Refresh.False: return "false";
 				case Refresh.WaitFor: return "wait_for";
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Refresh'");
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Refresh'");		
 		}
-
+		
 		public static string GetStringValue(this Bytes enumValue)
 		{
-
+		
 			switch (enumValue)
 			{
 				case Bytes.B: return "b";
@@ -398,24 +399,24 @@ namespace Elasticsearch.Net
 				case Bytes.P: return "p";
 				case Bytes.Pb: return "pb";
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Bytes'");
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Bytes'");		
 		}
-
+		
 		public static string GetStringValue(this Health enumValue)
 		{
-
+		
 			switch (enumValue)
 			{
 				case Health.Green: return "green";
 				case Health.Yellow: return "yellow";
 				case Health.Red: return "red";
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Health'");
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Health'");		
 		}
-
+		
 		public static string GetStringValue(this Size enumValue)
 		{
-
+		
 			switch (enumValue)
 			{
 				case Size.Raw: return "";
@@ -425,24 +426,24 @@ namespace Elasticsearch.Net
 				case Size.T: return "t";
 				case Size.P: return "p";
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Size'");
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Size'");		
 		}
-
+		
 		public static string GetStringValue(this Level enumValue)
 		{
-
+		
 			switch (enumValue)
 			{
 				case Level.Cluster: return "cluster";
 				case Level.Indices: return "indices";
 				case Level.Shards: return "shards";
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Level'");
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Level'");		
 		}
-
+		
 		public static string GetStringValue(this WaitForEvents enumValue)
 		{
-
+		
 			switch (enumValue)
 			{
 				case WaitForEvents.Immediate: return "immediate";
@@ -452,24 +453,24 @@ namespace Elasticsearch.Net
 				case WaitForEvents.Low: return "low";
 				case WaitForEvents.Languid: return "languid";
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'WaitForEvents'");
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'WaitForEvents'");		
 		}
-
+		
 		public static string GetStringValue(this WaitForStatus enumValue)
 		{
-
+		
 			switch (enumValue)
 			{
 				case WaitForStatus.Green: return "green";
 				case WaitForStatus.Yellow: return "yellow";
 				case WaitForStatus.Red: return "red";
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'WaitForStatus'");
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'WaitForStatus'");		
 		}
-
+		
 		public static string GetStringValue(this ExpandWildcards enumValue)
 		{
-
+		
 			switch (enumValue)
 			{
 				case ExpandWildcards.Open: return "open";
@@ -477,23 +478,23 @@ namespace Elasticsearch.Net
 				case ExpandWildcards.None: return "none";
 				case ExpandWildcards.All: return "all";
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'ExpandWildcards'");
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'ExpandWildcards'");		
 		}
-
+		
 		public static string GetStringValue(this DefaultOperator enumValue)
 		{
-
+		
 			switch (enumValue)
 			{
 				case DefaultOperator.And: return "AND";
 				case DefaultOperator.Or: return "OR";
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'DefaultOperator'");
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'DefaultOperator'");		
 		}
-
+		
 		public static string GetStringValue(this VersionType enumValue)
 		{
-
+		
 			switch (enumValue)
 			{
 				case VersionType.Internal: return "internal";
@@ -501,91 +502,91 @@ namespace Elasticsearch.Net
 				case VersionType.ExternalGte: return "external_gte";
 				case VersionType.Force: return "force";
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'VersionType'");
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'VersionType'");		
 		}
-
+		
 		public static string GetStringValue(this Conflicts enumValue)
 		{
-
+		
 			switch (enumValue)
 			{
 				case Conflicts.Abort: return "abort";
 				case Conflicts.Proceed: return "proceed";
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Conflicts'");
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Conflicts'");		
 		}
-
+		
 		public static string GetStringValue(this SearchType enumValue)
 		{
-
+		
 			switch (enumValue)
 			{
 				case SearchType.QueryThenFetch: return "query_then_fetch";
 				case SearchType.DfsQueryThenFetch: return "dfs_query_then_fetch";
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'SearchType'");
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'SearchType'");		
 		}
-
+		
 		public static string GetStringValue(this OpType enumValue)
 		{
-
+		
 			switch (enumValue)
 			{
 				case OpType.Index: return "index";
 				case OpType.Create: return "create";
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'OpType'");
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'OpType'");		
 		}
-
+		
 		public static string GetStringValue(this Format enumValue)
 		{
-
+		
 			switch (enumValue)
 			{
 				case Format.Detailed: return "detailed";
 				case Format.Text: return "text";
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Format'");
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Format'");		
 		}
-
+		
 		public static string GetStringValue(this ThreadType enumValue)
 		{
-
+		
 			switch (enumValue)
 			{
 				case ThreadType.Cpu: return "cpu";
 				case ThreadType.Wait: return "wait";
 				case ThreadType.Block: return "block";
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'ThreadType'");
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'ThreadType'");		
 		}
-
+		
 		public static string GetStringValue(this SuggestMode enumValue)
 		{
-
+		
 			switch (enumValue)
 			{
 				case SuggestMode.Missing: return "missing";
 				case SuggestMode.Popular: return "popular";
 				case SuggestMode.Always: return "always";
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'SuggestMode'");
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'SuggestMode'");		
 		}
-
+		
 		public static string GetStringValue(this GroupBy enumValue)
 		{
-
+		
 			switch (enumValue)
 			{
 				case GroupBy.Nodes: return "nodes";
 				case GroupBy.Parents: return "parents";
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'GroupBy'");
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'GroupBy'");		
 		}
-
+		
 		public static string GetStringValue(this ClusterStateMetric enumValue)
 		{
-
+		
 	        if ((enumValue & ClusterStateMetric.All) != 0) return "_all";
 			var list = new List<string>();
 			if ((enumValue & ClusterStateMetric.Blocks) != 0) list.Add("blocks");
@@ -597,9 +598,10 @@ namespace Elasticsearch.Net
 			if ((enumValue & ClusterStateMetric.Version) != 0) list.Add("version");
 			return string.Join(",", list);
 		}
+		
 		public static string GetStringValue(this IndicesStatsMetric enumValue)
 		{
-
+		
 	        if ((enumValue & IndicesStatsMetric.All) != 0) return "_all";
 			var list = new List<string>();
 			if ((enumValue & IndicesStatsMetric.Completion) != 0) list.Add("completion");
@@ -619,10 +621,10 @@ namespace Elasticsearch.Net
 			if ((enumValue & IndicesStatsMetric.Suggest) != 0) list.Add("suggest");
 			return string.Join(",", list);
 		}
-
+		
 		public static string GetStringValue(this NodesInfoMetric enumValue)
 		{
-
+		
 			var list = new List<string>();
 			if ((enumValue & NodesInfoMetric.Settings) != 0) list.Add("settings");
 			if ((enumValue & NodesInfoMetric.Os) != 0) list.Add("os");
@@ -635,10 +637,10 @@ namespace Elasticsearch.Net
 			if ((enumValue & NodesInfoMetric.Ingest) != 0) list.Add("ingest");
 			return string.Join(",", list);
 		}
-
+		
 		public static string GetStringValue(this NodesStatsMetric enumValue)
 		{
-
+		
 	        if ((enumValue & NodesStatsMetric.All) != 0) return "_all";
 			var list = new List<string>();
 			if ((enumValue & NodesStatsMetric.Breaker) != 0) list.Add("breaker");
@@ -653,10 +655,10 @@ namespace Elasticsearch.Net
 			if ((enumValue & NodesStatsMetric.Discovery) != 0) list.Add("discovery");
 			return string.Join(",", list);
 		}
-
+		
 		public static string GetStringValue(this NodesStatsIndexMetric enumValue)
 		{
-
+		
 	        if ((enumValue & NodesStatsIndexMetric.All) != 0) return "_all";
 			var list = new List<string>();
 			if ((enumValue & NodesStatsIndexMetric.Completion) != 0) list.Add("completion");
@@ -676,19 +678,19 @@ namespace Elasticsearch.Net
 			if ((enumValue & NodesStatsIndexMetric.Suggest) != 0) list.Add("suggest");
 			return string.Join(",", list);
 		}
-
+		
 		public static string GetStringValue(this NodesUsageMetric enumValue)
 		{
-
+		
 	        if ((enumValue & NodesUsageMetric.All) != 0) return "_all";
 			var list = new List<string>();
 			if ((enumValue & NodesUsageMetric.RestActions) != 0) list.Add("rest_actions");
 			return string.Join(",", list);
 		}
-
+		
 		public static string GetStringValue(this WatcherStatsMetric enumValue)
 		{
-
+		
 	        if ((enumValue & WatcherStatsMetric.All) != 0) return "_all";
 			var list = new List<string>();
 			if ((enumValue & WatcherStatsMetric.QueuedWatches) != 0) list.Add("queued_watches");
@@ -729,7 +731,7 @@ namespace Elasticsearch.Net
 
 		public static string GetStringValue(this Enum e)
 		{
-			var type = e.GetType();
+			var type = e.GetType();		
 			var resolver = EnumStringResolvers.GetOrAdd(type, GetEnumStringResolver);
 			return resolver(e);
 		}
@@ -758,7 +760,7 @@ namespace Elasticsearch.Net
 			var isFlag = type.GetCustomAttributes(typeof(FlagsAttribute), false).Length > 0;
 #endif
 
-			return (e) =>
+			return (e) => 
 			{
 				if (isFlag)
 				{
