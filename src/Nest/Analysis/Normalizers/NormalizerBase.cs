@@ -5,10 +5,10 @@ namespace Nest
 	[ContractJsonConverter(typeof(NormalizerJsonConverter))]
 	public interface INormalizer
 	{
-		[JsonProperty(PropertyName = "version")]
+		[JsonProperty("version")]
 		string Version { get; set; }
 
-		[JsonProperty(PropertyName = "type")]
+		[JsonProperty("type")]
 		string Type { get; }
 	}
 
@@ -16,10 +16,7 @@ namespace Nest
 	{
 		internal NormalizerBase() { }
 
-		protected NormalizerBase(string type)
-		{
-			Type = type;
-		}
+		protected NormalizerBase(string type) => Type = type;
 
 		public string Version { get; set; }
 

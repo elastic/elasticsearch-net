@@ -18,7 +18,7 @@ namespace Tests.Analysis.TokenFilters
 					myAscii = new
 					{
 						type = "asciifolding",
-						preserveOriginal = true
+						preserve_original = true
 					},
 					myCommonGrams = new
 					{
