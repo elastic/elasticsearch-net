@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Nest
 {
-	public interface IPromise<out TValue> where TValue : class
+	public interface IPromise<out TValue>
 	{
 		TValue Value { get; }
 	}
