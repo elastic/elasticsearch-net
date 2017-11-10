@@ -3182,7 +3182,7 @@ namespace Nest
 			throw InvalidDispatch("XpackGraphExplore", p, new [] { GET, POST }, "/{index}/_xpack/graph/_explore", "/{index}/{type}/_xpack/graph/_explore");
 		}
 		
-		internal ElasticsearchResponse<T> XpackDeprecationInfoDispatch<T>(IRequest<XpackDeprecationInfoRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> XpackDeprecationInfoDispatch<T>(IRequest<DeprecationInfoRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3194,7 +3194,7 @@ namespace Nest
 			throw InvalidDispatch("XpackDeprecationInfo", p, new [] { GET }, "/_xpack/migration/deprecations", "/{index}/_xpack/migration/deprecations");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> XpackDeprecationInfoDispatchAsync<T>(IRequest<XpackDeprecationInfoRequestParameters> p , CancellationToken cancellationToken) where T : class
+		internal Task<ElasticsearchResponse<T>> XpackDeprecationInfoDispatchAsync<T>(IRequest<DeprecationInfoRequestParameters> p , CancellationToken cancellationToken) where T : class
 		{
 			switch(p.HttpMethod)
 			{
