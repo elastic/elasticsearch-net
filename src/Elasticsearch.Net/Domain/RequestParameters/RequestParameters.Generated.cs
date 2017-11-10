@@ -6295,28 +6295,28 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html
 	///</pre>
 	///</summary>
-	public class XpackDeprecationInfoRequestParameters : FluentRequestParameters<XpackDeprecationInfoRequestParameters> 
+	public class DeprecationInfoRequestParameters : FluentRequestParameters<DeprecationInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
 		///<summary>Pretty format the returned JSON response.</summary>
-		public XpackDeprecationInfoRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		public DeprecationInfoRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
 		
 		
 		///<summary>Return human readable values for statistics.</summary>
-		public XpackDeprecationInfoRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		public DeprecationInfoRequestParameters Human(bool human) => this.AddQueryString("human", human);
 		
 		
 		///<summary>Include the stack trace of returned errors.</summary>
-		public XpackDeprecationInfoRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		public DeprecationInfoRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
 		
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XpackDeprecationInfoRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public DeprecationInfoRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public XpackDeprecationInfoRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		public DeprecationInfoRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
