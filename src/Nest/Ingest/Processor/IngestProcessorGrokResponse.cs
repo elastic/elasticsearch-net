@@ -11,7 +11,7 @@ namespace Nest
 
 	public class IngestProcessorGrokResponse : ResponseBase, IIngestProcessorGrokResponse
 	{
-		[JsonProperty(PropertyName = "patterns")]
+		[JsonProperty("patterns")]
 		public IReadOnlyDictionary<string, string> Patterns { get; internal set; } = EmptyReadOnly<string, string>.Dictionary;
 	}
 }

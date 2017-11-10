@@ -18,10 +18,10 @@ namespace Tests.XPack.DeprecationInfo
 
 			response.ClusterName.Should().Be("my_cluster");
 
-			response.NodeMetadata.Should().NotBeNull();
-			response.NodeMetadata.Total.Should().Be(1);
-			response.NodeMetadata.Successful.Should().Be(1);
-			response.NodeMetadata.Failed.Should().Be(0);
+			response.NodesMetaData.Should().NotBeNull();
+			response.NodesMetaData.Total.Should().Be(1);
+			response.NodesMetaData.Successful.Should().Be(1);
+			response.NodesMetaData.Failed.Should().Be(0);
 
 			response.Nodes.Should().NotBeNull();
 			response.Nodes.Should().HaveCount(1);
@@ -29,12 +29,14 @@ namespace Tests.XPack.DeprecationInfo
 			const string nodeId = "pQHNt5rXTTWNvUgOrdynKg";
 
 			response.Nodes.Should().ContainKey(nodeId);
-			response.Nodes[nodeId].Timestamp.Should().Be(new DateTimeOffset(2017, 4, 18, 22, 19, 21, 812, TimeSpan.Zero));
-			response.Nodes[nodeId].Since.Should().Be(new DateTimeOffset(2017, 4, 18, 22, 18, 26, 606, TimeSpan.Zero));
-			response.Nodes[nodeId].RestActions.Should().NotBeNull();
-			response.Nodes[nodeId].RestActions.Should().HaveCount(5);
-			response.Nodes[nodeId].RestActions.Should().ContainKey("org.elasticsearch.rest.action.search.RestSearchAction");
-			response.Nodes[nodeId].RestActions["org.elasticsearch.rest.action.search.RestSearchAction"].Should().Be(19);
+
+			var node = response.Nodes[nodeId];
+			node.Timestamp.Should().Be(new DateTimeOffset(2017, 4, 18, 22, 19, 21, 812, TimeSpan.Zero));
+			node.Since.Should().Be(new DateTimeOffset(2017, 4, 18, 22, 18, 26, 606, TimeSpan.Zero));
+			node.RestActions.Should().NotBeNull();
+			node.RestActions.Should().HaveCount(5);
+			node.RestActions.Should().ContainKey("org.elasticsearch.rest.action.search.RestSearchAction");
+			node.RestActions["org.elasticsearch.rest.action.search.RestSearchAction"].Should().Be(19);
 		}
 	}
 }

@@ -5,10 +5,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
-	using System.Threading;
 	using NodesHotThreadConverter = Func<IApiCallDetails, Stream, NodesHotThreadsResponse>;
 
 	public partial interface IElasticClient

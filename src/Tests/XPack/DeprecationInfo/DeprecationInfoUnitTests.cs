@@ -31,12 +31,15 @@ namespace Tests.XPack.DeprecationInfo
 			response.IndexSettings.Should().HaveCount(1);
 
 			const string indexName = ".monitoring-es-6-2017.07.21";
+
 			response.IndexSettings.Should().ContainKey(indexName);
 			response.IndexSettings[indexName].Count.Should().Be(1);
-			response.IndexSettings[indexName].First().Details.Should().Be("<anchor id=\"type: doc\" xreflabel=\"field: spins]\"/>");
-			response.IndexSettings[indexName].First().Url.Should().Be("https://www.elastic.co/guide/en/elasticsearch/reference/6.0/breaking_60_mappings_changes.html#_coercion_of_boolean_fields");
-			response.IndexSettings[indexName].First().Message.Should().Be("Coercion of boolean fields");
-			response.IndexSettings[indexName].First().Level.Should().Be(DeprecationWarningLevel.Information);
+
+			var deprecationInfo = response.IndexSettings[indexName].First();
+			deprecationInfo.Details.Should().Be("<anchor id=\"type: doc\" xreflabel=\"field: spins]\"/>");
+			deprecationInfo.Url.Should().Be("https://www.elastic.co/guide/en/elasticsearch/reference/6.0/breaking_60_mappings_changes.html#_coercion_of_boolean_fields");
+			deprecationInfo.Message.Should().Be("Coercion of boolean fields");
+			deprecationInfo.Level.Should().Be(DeprecationWarningLevel.Information);
 		}
 	}
 }

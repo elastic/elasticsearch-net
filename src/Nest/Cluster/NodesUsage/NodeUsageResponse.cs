@@ -4,29 +4,29 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class NodeUsageMetadata
+	public class NodesMetaData
 	{
-		[JsonProperty(PropertyName = "total")]
+		[JsonProperty("total")]
 		public int Total { get; internal set; }
 
-		[JsonProperty(PropertyName = "successful")]
+		[JsonProperty("successful")]
 		public int Successful { get; internal set; }
 
-		[JsonProperty(PropertyName = "failed")]
+		[JsonProperty("failed")]
 		public int Failed { get; internal set; }
 	}
 
 	public class NodeUsageInformation
 	{
-		[JsonProperty(PropertyName = "timestamp")]
+		[JsonProperty("timestamp")]
 		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
 		public DateTimeOffset Timestamp { get; internal set; }
 
-		[JsonProperty(PropertyName = "since")]
+		[JsonProperty("since")]
 		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
 		public DateTimeOffset Since { get;  internal set; }
 
-		[JsonProperty(PropertyName = "rest_actions")]
+		[JsonProperty("rest_actions")]
 		public IReadOnlyDictionary<string, int> RestActions { get;  internal set; }
 	}
 
@@ -36,18 +36,18 @@ namespace Nest
 
 		IReadOnlyDictionary<string, NodeUsageInformation> Nodes { get; }
 
-		NodeUsageMetadata NodeMetadata { get; }
+		NodesMetaData NodesMetaData { get; }
 	}
 
 	public class NodesUsageResponse : ResponseBase, INodesUsageResponse
 	{
-		[JsonProperty(PropertyName = "cluster_name")]
+		[JsonProperty("cluster_name")]
 		public string ClusterName { get; internal set; }
 
-		[JsonProperty(PropertyName = "nodes")]
+		[JsonProperty("nodes")]
 		public IReadOnlyDictionary<string, NodeUsageInformation> Nodes { get; internal set; } = EmptyReadOnly<string, NodeUsageInformation>.Dictionary;
 
-		[JsonProperty(PropertyName = "_nodes")]
-		public NodeUsageMetadata NodeMetadata { get; internal set; }
+		[JsonProperty("_nodes")]
+		public NodesMetaData NodesMetaData { get; internal set; }
 	}
 }

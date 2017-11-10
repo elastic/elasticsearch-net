@@ -23,8 +23,6 @@ namespace Tests.Ingest.IngestProcessorGrok
 
 		protected override string UrlPath => $"/_ingest/processor/grok";
 
-		protected override IngestProcessorGrokDescriptor NewDescriptor() => new IngestProcessorGrokDescriptor();
-
 		protected override Func<IngestProcessorGrokDescriptor, IIngestProcessorGrokRequest> Fluent => d => d;
 
 		protected override IngestProcessorGrokRequest Initializer => new IngestProcessorGrokRequest();

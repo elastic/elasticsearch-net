@@ -1,17 +1,14 @@
 ﻿using System;
-using System.IO;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
-	using System.Threading;
-	using NodesHotThreadConverter = Func<IApiCallDetails, Stream, NodesHotThreadsResponse>;
-
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Retrieving which patterns which the grok processor is packaged with, useful as different versions are bundled with different processors.
+		/// Retrieving which patterns the grok processor is packaged with, useful as different versions are bundled with different processors.
 		/// <para> </para>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html
 		/// </summary>
 		/// <param name="selector">An optional descriptor to further describe the endpoint usage operation</param>

@@ -12,9 +12,9 @@ namespace Tests.XPack.DeprecationInfo
 		[U] public async Task Urls()
 		{
 			await GET("/_xpack/migration/deprecations")
-				.Fluent(c => c.DeprecationInfo(d => d))
+				.Fluent(c => c.DeprecationInfo())
 				.Request(c => c.DeprecationInfo(new DeprecationInfoRequest()))
-				.FluentAsync(c => c.DeprecationInfoAsync(d => d))
+				.FluentAsync(c => c.DeprecationInfoAsync())
 				.RequestAsync(c => c.DeprecationInfoAsync(new DeprecationInfoRequest()))
 				;
 

@@ -20,7 +20,7 @@ namespace Nest
 		Critical
 	}
 
-	public class DeprecationInfoItem
+	public class DeprecationInfo
 	{
 		[JsonProperty("level")]
 		public DeprecationWarningLevel Level { get; internal set;  }
@@ -38,19 +38,19 @@ namespace Nest
 	public interface IDeprecationInfoResponse : IResponse
 	{
 		[JsonProperty("cluster_settings")]
-		IReadOnlyCollection<DeprecationInfoItem> ClusterSettings { get; }
+		IReadOnlyCollection<DeprecationInfo> ClusterSettings { get; }
 
 		[JsonProperty("node_settings")]
-		IReadOnlyCollection<DeprecationInfoItem> NodeSettings { get; }
+		IReadOnlyCollection<DeprecationInfo> NodeSettings { get; }
 
 		[JsonProperty("index_settings")]
-		IReadOnlyDictionary<string, IReadOnlyCollection<DeprecationInfoItem>> IndexSettings { get; }
+		IReadOnlyDictionary<string, IReadOnlyCollection<DeprecationInfo>> IndexSettings { get; }
 	}
 
 	public class DeprecationInfoResponse : ResponseBase, IDeprecationInfoResponse
 	{
-		public IReadOnlyCollection<DeprecationInfoItem> ClusterSettings { get; internal set; } = EmptyReadOnly<DeprecationInfoItem>.Collection;
-		public IReadOnlyCollection<DeprecationInfoItem> NodeSettings { get; internal set; } = EmptyReadOnly<DeprecationInfoItem>.Collection;
-		public IReadOnlyDictionary<string, IReadOnlyCollection<DeprecationInfoItem>> IndexSettings { get; internal set; } = EmptyReadOnly<string, IReadOnlyCollection<DeprecationInfoItem>>.Dictionary;
+		public IReadOnlyCollection<DeprecationInfo> ClusterSettings { get; internal set; } = EmptyReadOnly<DeprecationInfo>.Collection;
+		public IReadOnlyCollection<DeprecationInfo> NodeSettings { get; internal set; } = EmptyReadOnly<DeprecationInfo>.Collection;
+		public IReadOnlyDictionary<string, IReadOnlyCollection<DeprecationInfo>> IndexSettings { get; internal set; } = EmptyReadOnly<string, IReadOnlyCollection<DeprecationInfo>>.Dictionary;
 	}
 }
