@@ -7,6 +7,7 @@ using Tests.Framework.MockData;
 using static Nest.Infer;
 using FluentAssertions;
 using System.Linq;
+using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Search.Request
@@ -227,6 +228,7 @@ namespace Tests.Search.Request
 			option.Id.Should().NotBeNull();
 			option.Source.Should().NotBeNull();
 			option.Source.Name.Should().NotBeNullOrWhiteSpace();
+			option.Source.ShouldAdhereToSourceSerializerWhenSet();
 			option.Score.Should().BeGreaterThan(0);
 			option.Contexts.Should().NotBeNull().And.NotBeEmpty();
 			option.Contexts.Should().ContainKey("color");
