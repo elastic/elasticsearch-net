@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 namespace Nest
 {
 	[JsonConverter(typeof(FieldValuesJsonConverter))]
-	public class FieldValues : IsADictionaryBase<string, object>
+	public class FieldValues : IsADictionaryBase<string, LazyDocument>
 	{
 		public static readonly FieldValues Empty = new FieldValues();
 
@@ -18,75 +18,76 @@ namespace Nest
 
 		protected FieldValues() : base() { }
 
-		public FieldValues(Inferrer inferrer, IDictionary<string, object> container)
+		internal FieldValues(Inferrer inferrer, IDictionary<string, LazyDocument> container)
 			: base(container)
 		{
 			_inferrer = inferrer;
 		}
 
-		public K Value<K>(Field field)
+		public TValue Value<TValue>(Field field)
 		{
-			var values = ValuesOf<K>(field);
+			var values = ValuesOf<TValue>(field);
 			return values != null
 				? values.FirstOrDefault()
-				: default(K);
+				: default(TValue);
 		}
 
-		public K ValueOf<T, K>(Expression<Func<T, K>> objectPath)
+		public TValue ValueOf<T, TValue>(Expression<Func<T, TValue>> objectPath)
 			where T : class
 		{
 			var values = Values(objectPath);
 			return values != null
 				? values.FirstOrDefault()
-				: default(K);
+				: default(TValue);
 		}
 
-		public K[] ValuesOf<K>(Field field)
+		public TValue[] ValuesOf<TValue>(Field field)
 		{
-			if (this._inferrer == null) return new K[0];
+			if (this._inferrer == null) return new TValue[0];
 			var path = this._inferrer.Field(field);
-			return this.FieldArray<K[]>(path);
+			return this.FieldArray<TValue>(path);
 		}
 
-		public K[] Values<T, K>(Expression<Func<T, K>> objectPath)
+		public TValue[] Values<T, TValue>(Expression<Func<T, TValue>> objectPath)
 			where T : class
 		{
-			if (this._inferrer == null) return new K[0];
+			if (this._inferrer == null) return new TValue[0];
 			var field = this._inferrer.Field(objectPath);
-			return this.FieldArray<K[]>(field);
+			return this.FieldArray<TValue>(field);
 		}
 
-
-		private static readonly JsonSerializer ForceNoDateInferrence = new JsonSerializer
+		private static readonly HashSet<Type> NumericTypes = new HashSet<Type>
 		{
-			DateParseHandling = DateParseHandling.None
+			typeof(int),  typeof(double),  typeof(decimal),
+			typeof(long), typeof(short),   typeof(sbyte),
+			typeof(byte), typeof(ulong),   typeof(ushort),
+			typeof(uint), typeof(float)
 		};
 
-		private K FieldArray<K>(string field)
+		public static bool IsNumeric(Type myType) => NumericTypes.Contains(Nullable.GetUnderlyingType(myType) ?? myType);
+		public static bool IsNullable(Type type) => type.IsGeneric() && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+
+		private TValue[] FieldArray<TValue>(string field)
 		{
-			object o;
-			if (this.BackingDictionary != null && this.BackingDictionary.TryGetValue(field, out o))
+			//unknown field
+			if (this.BackingDictionary == null || !this.BackingDictionary.TryGetValue(field, out var o))
+				return null;
+
+			//numerics are always returned as doubles by elasticsearch.
+			if (!IsNumeric(typeof(TValue)))
+				return o.As<TValue[]>();
+
+			//here we support casting to the desired numeric type whether its nullable or not.
+			if (!IsNullable(typeof(TValue)))
+				return o.As<double[]>().Select(d => (TValue) Convert.ChangeType(d, typeof(TValue))).ToArray();
+
+			var underlyingType = Nullable.GetUnderlyingType(typeof(TValue));
+			return o.As<double?[]>().Select(d=>
 			{
-				var t = typeof(K);
-				var jArray = o as JArray;
-				if (jArray != null && t.GetInterfaces().Contains(typeof(IEnumerable)))
-				{
-					if (typeof(K) == typeof(string[]) && jArray.Any(p=>p.Type == JTokenType.Date))
-					{
-						// https://github.com/elastic/elasticsearch-net/issues/2155
-						// o of type JArray has already decided the values are dates so there is no
-						// way around this.
-						// incredibly ugly and sad but the only way I found to cover this edgecase
-						var s = jArray.Root.ToString();
-						using (var sr = new StringReader(s))
-						using (var jr = new JsonTextReader(sr) { DateParseHandling = DateParseHandling.None })
-							return ForceNoDateInferrence.Deserialize<K>(jr);
-					}
-					return jArray.ToObject<K>();
-				}
-				return (K)Convert.ChangeType(o, typeof(K));
-			}
-			return default(K);
+				if (d == null) return default(TValue);
+				return (TValue) Convert.ChangeType(d, underlyingType);
+			}).ToArray();
+
 		}
 	}
 }

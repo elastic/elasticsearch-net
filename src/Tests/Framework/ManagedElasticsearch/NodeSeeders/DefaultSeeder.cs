@@ -268,10 +268,8 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 					)
 				)
 			)
-			.Number(n => n
-				.Name(p => p.NumberOfCommits)
-				.Store()
-			)
+			.Scalar(p => p.NumberOfCommits, n => n.Store())
+			.Scalar(p => p.NumberOfContributors, n => n.Store())
 			.Object<Dictionary<string, Metadata>>(o => o
 				.Name(p => p.Metadata)
 			);

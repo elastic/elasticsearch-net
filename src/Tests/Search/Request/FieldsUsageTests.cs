@@ -25,7 +25,7 @@ namespace Tests.Search.Request
 
 		protected override object ExpectJson => new
 		{
-			stored_fields = new[] { "name", "startedOn", "numberOfCommits", "dateString" }
+			stored_fields = new[] { "name", "startedOn", "numberOfCommits", "numberOfContributors", "dateString" }
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
@@ -33,6 +33,7 @@ namespace Tests.Search.Request
 				.Field(p => p.Name)
 				.Field(p => p.StartedOn)
 				.Field(p => p.NumberOfCommits)
+				.Field(p => p.NumberOfContributors)
 				.Field(p => p.DateString)
 			);
 
@@ -43,6 +44,7 @@ namespace Tests.Search.Request
 					p => p.Name,
 					p => p.StartedOn,
 					p => p.NumberOfCommits,
+					p => p.NumberOfContributors,
 					p => p.DateString)
 			};
 
@@ -52,17 +54,24 @@ namespace Tests.Search.Request
 			r.Fields.Count().Should().BeGreaterThan(0);
 			foreach (var fieldValues in r.Fields)
 			{
-				fieldValues.Count().Should().Be(4);
+				fieldValues.Count().Should().Be(5);
 				var name = fieldValues.Value<string>(Field<Project>(p => p.Name));
 				name.Should().NotBeNullOrWhiteSpace();
 
 
-				var numCommits = fieldValues.ValueOf<Project, int?>(p => p.NumberOfCommits);
-				numCommits.Should().BeGreaterThan(0);
+				var commits = fieldValues.ValueOf<Project, float?>(p => p.NumberOfCommits);
+				commits.Should().BeGreaterThan(0);
+
+				var commitsAsNullableInt = fieldValues.ValueOf<Project, int?>(p => p.NumberOfCommits);
+				commitsAsNullableInt.Should().BeGreaterThan(0);
+
+				var contributors = fieldValues.ValueOf<Project, int>(p => p.NumberOfContributors);
+				contributors.Should().BeGreaterThan(0);
 
 				var dateTime = fieldValues.ValueOf<Project, DateTime>(p => p.StartedOn);
 				dateTime.Should().BeAfter(default(DateTime));
 
+				//Date strings should come out verbatim
 				var dateTimeAsString = fieldValues.ValueOf<Project, string>(p => p.DateString);
 				dateTimeAsString.Should().NotContain("/")
 					.And.MatchRegex(@"^\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d.*$");
