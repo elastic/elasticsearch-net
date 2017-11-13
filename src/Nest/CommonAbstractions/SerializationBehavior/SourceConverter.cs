@@ -4,6 +4,7 @@ using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using static Elasticsearch.Net.SerializationFormatting;
 
 namespace Nest
 {
@@ -13,16 +14,14 @@ namespace Nest
 		public override bool CanWrite => true;
 		public override bool CanConvert(Type objectType) => true;
 
-		public virtual SerializationFormatting Formatting { get; } = SerializationFormatting.Indented;
+		public virtual SerializationFormatting? ForceFormatting { get; } = null;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var sourceSerializer = serializer.GetConnectionSettings().SourceSerializer;
-			var v = sourceSerializer.SerializeToBytes(value, Formatting);
-			using(var ms = new MemoryStream(v))
-			using(var streamReader = new StreamReader(ms))
-			using(var reader = new JsonTextReader(streamReader))
-				writer.WriteToken(reader);
+			var f = ForceFormatting ?? (writer.Formatting == Formatting.Indented ? Indented : None);
+			var v = sourceSerializer.SerializeToString(value, f);
+			writer.WriteRawValue(v);
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -35,7 +34,7 @@ namespace Nest
 
 	internal class CollapsedSourceConverter : SourceConverter
 	{
-		public override SerializationFormatting Formatting { get; } = SerializationFormatting.None;
+		public override SerializationFormatting? ForceFormatting { get; } = SerializationFormatting.None;
 	}
 
 }
