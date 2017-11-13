@@ -124,12 +124,12 @@ namespace Nest
 			dynamic d = jObject;
 			var fields = jObject["fields"];
 			var fieldsDictionary = fields?.ToObject<IDictionary<string, object>>();
-			var fieldValues = new FieldValues(settings.Inferrer, fieldsDictionary);
+			//var fieldValues = new FieldValues(settings.Inferrer, fieldsDictionary);
 
 			var hitDynamic = new Hit<dynamic>
 			{
 				//favor manual mapping over doing Populate twice.
-				Fields = fieldValues,
+				//Fields = fieldValues,
 				Source = d._source,
 				Index = d._index,
 				Score = d._score,
