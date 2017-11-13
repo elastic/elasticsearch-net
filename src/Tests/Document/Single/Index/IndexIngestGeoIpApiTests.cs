@@ -99,6 +99,7 @@ namespace Tests.Document.Single.Index
 				state = "Stable",
 				startedOn = FixedDate,
 				lastActivity = FixedDate,
+				numberOfContributors = 0,
 				curatedTags = new[] {new {name = "x", added = FixedDate}},
 				sourceOnly = Dependant(null, new { notWrittenByDefaultSerializer = "written" }),
 			};
