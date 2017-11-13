@@ -7,9 +7,7 @@ namespace Nest
 {
 	public class TopHitsAggregate : MetricAggregateBase
 	{
-		private readonly IEnumerable<JObject> _hits;
-
-		private readonly JsonSerializer _defaultSerializer;
+		private readonly IList<LazyDocument> _hits;
 
 		public long Total { get; set; }
 
@@ -17,32 +15,19 @@ namespace Nest
 
 		public TopHitsAggregate() { }
 
-		internal TopHitsAggregate(IEnumerable<JObject> hits)
+		internal TopHitsAggregate(IList<LazyDocument> hits)
 		{
-			_hits = hits ?? Enumerable.Empty<JObject>();
+			_hits = hits;
 		}
 
-		internal TopHitsAggregate(IEnumerable<JObject> hits, JsonSerializer serializer)
-		{
-			_hits = hits ?? Enumerable.Empty<JObject>();
-			_defaultSerializer = serializer;
-		}
+		private IEnumerable<Hit<TDocument>> ConvertHits<TDocument>()
+			where TDocument : class => _hits.Select(h => h.As<Hit<TDocument>>());
 
-		private IEnumerable<Hit<T>> ConvertHits<T>(JsonSerializer serializer = null)
-			where T : class
-		{
-			var s = serializer ?? _defaultSerializer;
+		public IReadOnlyCollection<Hit<TDocument>> Hits<TDocument>()
+			where TDocument : class =>
+			this.ConvertHits<TDocument>().ToList().AsReadOnly();
 
-			return s != null
-				? _hits.Select(h => h.ToObject<Hit<T>>(s))
-				: _hits.Select(h => h.ToObject<Hit<T>>());
-		}
-
-		public IReadOnlyCollection<Hit<T>> Hits<T>(JsonSerializer serializer = null)
-			where T : class =>
-			this.ConvertHits<T>(serializer).ToList().AsReadOnly();
-
-		public IReadOnlyCollection<T> Documents<T>(JsonSerializer serializer = null) where T : class =>
-			this.ConvertHits<T>(serializer).Select(h => h.Source).ToList().AsReadOnly();
+		public IReadOnlyCollection<TDocument> Documents<TDocument>() where TDocument : class =>
+			this.ConvertHits<TDocument>().Select(h => h.Source).ToList().AsReadOnly();
 	}
 }

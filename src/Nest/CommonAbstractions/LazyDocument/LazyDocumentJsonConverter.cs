@@ -22,11 +22,7 @@ namespace Nest
 		{
 			var sourceSerializer = serializer.GetConnectionSettings().SourceSerializer;
 			var token = JToken.ReadFrom(reader);
-			return new LazyDocument
-			{
-				Token = token,
-				SourceSerializer = sourceSerializer
-			};
+			return new LazyDocument(token, sourceSerializer);
 		}
 
 		public override bool CanConvert(Type objectType) => true;

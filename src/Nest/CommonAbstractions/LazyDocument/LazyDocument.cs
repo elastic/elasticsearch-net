@@ -27,21 +27,30 @@ namespace Nest
 
 	public class LazyDocument : ILazyDocument
 	{
-		internal JToken Token { get; set; }
-		internal IElasticsearchSerializer SourceSerializer { get; set; }
+		internal JToken Token { get; }
+
+		private readonly IElasticsearchSerializer _serializer;
+
+		internal LazyDocument(JToken token, IElasticsearchSerializer serializer)
+		{
+			Token = token;
+			_serializer = serializer;
+		}
 
 		/// <inheritdoc />
 		public T As<T>() where T : class
 		{
+			if (Token == null) return null;
 			using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(Token.ToString())))
-				return SourceSerializer.Deserialize<T>(ms);
+				return _serializer.Deserialize<T>(ms);
 		}
 
 		/// <inheritdoc />
 		public object As(Type objectType)
 		{
+			if (Token == null) return null;
 			using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(Token.ToString())))
-				return SourceSerializer.Deserialize(objectType, ms);
+				return _serializer.Deserialize(objectType, ms);
 		}
 	}
 }
