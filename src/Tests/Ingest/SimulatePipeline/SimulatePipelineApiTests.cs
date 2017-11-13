@@ -68,14 +68,14 @@ namespace Tests.Ingest.SimulatePipeline
 					_index = "project",
 					_type = "doc",
 					_id = Project.Instance.Name,
-					_source = Project.Instance
+					_source = Project.InstanceAnonymous
 				},
 				new
 				{
 					_index = "otherindex",
 					_type = "othertype",
 					_id = "otherid",
-					_source = Project.Instance
+					_source = Project.InstanceAnonymous
 				},
 				new
 				{
@@ -99,6 +99,7 @@ namespace Tests.Ingest.SimulatePipeline
 			var project = simulation.Document.Source.As<Project>();
 			project.Should().NotBeNull();
 			project.Name.Should().Be("BUZZ");
+			project.ShouldAdhereToSourceSerializerWhenSet();
 
 			simulation = response.Documents.FirstOrDefault(d => d.Document.Id == "otherid");
 			simulation.Should().NotBeNull();
@@ -151,7 +152,7 @@ namespace Tests.Ingest.SimulatePipeline
 				.Document(doc => doc
 					.Index("otherindex")
 					.Type("anotherType")
-					.Source(new AnotherType { Id = "2", Colors = new string[] { "red" } })
+					.Source(new AnotherType { Id = "2", Colors = new[] { "red" } })
 				)
 			);
 
@@ -178,7 +179,7 @@ namespace Tests.Ingest.SimulatePipeline
 					}
 				}
 			},
-			Documents = new SimulatePipelineDocument[]
+			Documents = new[]
 			{
 				new SimulatePipelineDocument
 				{

@@ -2,8 +2,8 @@
 
 namespace Nest
 {
-	public interface IUpdateResponse<T> : IResponse
-		where T : class
+	public interface IUpdateResponse<TDocument> : IResponse
+		where TDocument : class
 	{
 		[JsonProperty("_shards")]
 		ShardsMetadata ShardsHit { get; }
@@ -21,22 +21,22 @@ namespace Nest
 		long Version { get; }
 
 		[JsonProperty("get")]
-		InstantGet<T> Get { get; }
+		InstantGet<TDocument> Get { get; }
 
 		[JsonProperty("result")]
 		Result Result { get; }
 	}
 
 	[JsonObject]
-	public class UpdateResponse<T> : ResponseBase, IUpdateResponse<T>
-		where T : class
+	public class UpdateResponse<TDocument> : ResponseBase, IUpdateResponse<TDocument>
+		where TDocument : class
 	{
-		public ShardsMetadata ShardsHit { get; private set; }
-		public string Index { get; private set; }
-		public string Type { get; private set; }
-		public string Id { get; private set; }
-		public long Version { get; private set; }
-		public InstantGet<T> Get { get; private set; }
-		public Result Result { get; private set; }
+		public ShardsMetadata ShardsHit { get; internal set; }
+		public string Index { get; internal set; }
+		public string Type { get; internal set; }
+		public string Id { get; internal set; }
+		public long Version { get; internal set; }
+		public InstantGet<TDocument> Get { get; internal set; }
+		public Result Result { get; internal set; }
 	}
 }

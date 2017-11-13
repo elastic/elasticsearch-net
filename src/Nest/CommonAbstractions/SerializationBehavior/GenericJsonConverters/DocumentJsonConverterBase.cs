@@ -33,8 +33,12 @@ namespace Nest
 		{
 			var untypedDocumentRequest = (IUntypedDocumentRequest)value;
 			var o = untypedDocumentRequest.UntypedDocument;
-			var v = serializer.GetConnectionSettings().SourceSerializer.SerializeToString(o);
-			writer.WriteRawValue(v);
+			var v = serializer.GetConnectionSettings().SourceSerializer.SerializeToBytes(o);
+			using(var ms = new MemoryStream(v))
+			using(var streamReader = new StreamReader(ms))
+			using(var reader = new JsonTextReader(streamReader))
+				writer.WriteToken(reader);
+			//writer.WriteRawValue(v);
 		}
 	}
 }

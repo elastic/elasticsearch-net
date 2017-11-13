@@ -14,7 +14,7 @@ namespace Nest
 		where TDocument : class
 	{
 		protected override HttpMethod HttpMethod =>
-			RequestState.RequestParameters?.ContainsKey("_source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
+			RequestState.RequestParameters?.ContainsKey("source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
 
 		public QueryContainer Query { get; set; }
 	}
@@ -24,11 +24,11 @@ namespace Nest
 		where TDocument : class
 	{
 		protected override HttpMethod HttpMethod =>
-			RequestState.RequestParameters?.ContainsKey("_source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
+			RequestState.RequestParameters?.ContainsKey("source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
 
 		QueryContainer IExplainRequest<TDocument>.Query { get; set; }
 
-		public ExplainDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> querySelector) => 
+		public ExplainDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> querySelector) =>
 			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<TDocument>()));
 	}
 }

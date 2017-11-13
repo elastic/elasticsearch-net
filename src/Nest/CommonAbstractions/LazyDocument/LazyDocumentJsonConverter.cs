@@ -1,6 +1,10 @@
 using System;
+using System.IO;
+using System.Text;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using static Elasticsearch.Net.SerializationFormatting;
 
 namespace Nest
 {
@@ -9,22 +13,19 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var d = (LazyDocument)value;
-			if (d?._Value == null)
-			{
-				writer.WriteNull();
-				return;
-			}
+			if (d?.Token == null) return;
 
-			writer.WriteToken(d._Value.CreateReader());
+			writer.WriteToken(d.Token.CreateReader());
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var document = serializer.Deserialize(reader) as JToken;
+			var sourceSerializer = serializer.GetConnectionSettings().SourceSerializer;
+			var token = JToken.ReadFrom(reader);
 			return new LazyDocument
 			{
-				_Value = document,
-				_Serializer = serializer
+				Token = token,
+				SourceSerializer = sourceSerializer
 			};
 		}
 
