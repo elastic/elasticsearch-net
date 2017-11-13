@@ -83,6 +83,7 @@ namespace Tests.Framework.MockData
 			state = "BellyUp",
 			startedOn = "2015-01-01T00:00:00",
 			lastActivity = "0001-01-01T00:00:00",
+			numberOfContributors = 0,
 			dateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
 			leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
 			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon }
@@ -94,6 +95,7 @@ namespace Tests.Framework.MockData
 			state = "BellyUp",
 			startedOn = "2015-01-01T00:00:00",
 			lastActivity = "0001-01-01T00:00:00",
+			numberOfContributors = 0,
 			dateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
 			leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
 			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon },
