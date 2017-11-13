@@ -79,7 +79,7 @@ namespace Nest
 					return lambda.Compile();
 				});
 
-				cachedDelegate(m, serializer, response._Documents);
+				cachedDelegate(m, serializer, response.InternalHits);
 			}
 
 			return response;

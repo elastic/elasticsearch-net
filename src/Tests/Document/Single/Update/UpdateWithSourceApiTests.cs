@@ -43,7 +43,7 @@ namespace Tests.Document.Single.Update
 			doc = Project.InstanceAnonymous,
 			doc_as_upsert = true,
 			_source = new {
-				includes = new [] {"name"}
+				includes = new [] {"name", "sourceOnly"}
 			}
 		};
 
@@ -51,7 +51,7 @@ namespace Tests.Document.Single.Update
 
 		protected override Func<UpdateDescriptor<Project,Project>, IUpdateRequest<Project, Project>> Fluent => d=>d
 			.Doc(Project.Instance)
-			.Source(s=>s.Includes(f=>f.Field(p=>p.Name)))
+			.Source(s=>s.Includes(f=>f.Field(p=>p.Name).Field("sourceOnly")))
 			.DocAsUpsert();
 
 		protected override UpdateRequest<Project, Project> Initializer => new UpdateRequest<Project, Project>(CallIsolatedValue)
@@ -60,7 +60,7 @@ namespace Tests.Document.Single.Update
 			DocAsUpsert = true,
 			Source = new SourceFilter
 			{
-				Includes = Field<Project>(p=>p.Name)
+				Includes = Field<Project>(p=>p.Name).And("sourceOnly")
 			}
 		};
 
@@ -72,6 +72,7 @@ namespace Tests.Document.Single.Update
 			var name = Project.First.Name;
 			r.Get.Source.Name.Should().Be(name);
 			r.Get.Source.Description.Should().BeNullOrEmpty();
+			r.Get.Source.ShouldAdhereToSourceSerializerWhenSet();
 			r.Get.Fields.Should().BeNull();
 		});
 	}

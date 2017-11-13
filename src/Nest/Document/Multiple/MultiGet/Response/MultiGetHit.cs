@@ -4,9 +4,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IMultiGetHit<out T> where T : class
+	public interface IMultiGetHit<out TDocument> where TDocument : class
 	{
-		T Source { get; }
+		TDocument Source { get; }
 
 		string Index { get; }
 
@@ -33,13 +33,14 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class MultiGetHit<T> : IMultiGetHit<T>
-		where T : class
+	public class MultiGetHit<TDocument> : IMultiGetHit<TDocument>
+		where TDocument : class
 	{
 		public FieldValues Fields { get; internal set; }
 
 		[JsonProperty("_source")]
-		public T Source { get; internal set; }
+		[JsonConverter(typeof(SourceConverter))]
+		public TDocument Source { get; internal set; }
 
 		[JsonProperty("_index")]
 		public string Index { get; internal set; }

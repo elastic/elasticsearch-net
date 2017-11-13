@@ -18,8 +18,11 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var sourceSerializer = serializer.GetConnectionSettings().SourceSerializer;
-			var v = sourceSerializer.SerializeToString(value, Formatting);
-			writer.WriteRawValue(v);
+			var v = sourceSerializer.SerializeToBytes(value, Formatting);
+			using(var ms = new MemoryStream(v))
+			using(var streamReader = new StreamReader(ms))
+			using(var reader = new JsonTextReader(streamReader))
+				writer.WriteToken(reader);
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

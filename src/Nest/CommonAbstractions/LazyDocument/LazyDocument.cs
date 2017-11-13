@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using System.Text;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -24,21 +27,21 @@ namespace Nest
 
 	public class LazyDocument : ILazyDocument
 	{
-		internal JToken _Value { get; set; }
-		internal JsonSerializer _Serializer { get; set; }
+		internal JToken Token { get; set; }
+		internal IElasticsearchSerializer SourceSerializer { get; set; }
 
 		/// <inheritdoc />
 		public T As<T>() where T : class
 		{
-			var jToken = this._Value;
-			return jToken?.ToObject<T>(_Serializer);
+			using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(Token.ToString())))
+				return SourceSerializer.Deserialize<T>(ms);
 		}
 
 		/// <inheritdoc />
 		public object As(Type objectType)
 		{
-			var jToken = this._Value;
-			return jToken?.ToObject(objectType, _Serializer);
+			using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(Token.ToString())))
+				return SourceSerializer.Deserialize(objectType, ms);
 		}
 	}
 }
