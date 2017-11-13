@@ -34,7 +34,7 @@ namespace Nest
 
 	internal class CollapsedSourceConverter : SourceConverter
 	{
-		public override SerializationFormatting? ForceFormatting { get; } = SerializationFormatting.None;
+		public override SerializationFormatting? ForceFormatting { get; } = None;
 	}
 
 }

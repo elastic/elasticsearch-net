@@ -53,7 +53,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 		}
 
 		private readonly object _lockGetClient = new object { };
-		private IElasticClient _client;
+		private volatile IElasticClient _client;
 
 		public IElasticClient Client
 		{
@@ -79,8 +79,8 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 							return this.UsingSourceSerializer ? customSourceSerializer : null;
 						}
 					);
-					return this.Client;
 				}
+				return this._client;
 			}
 		}
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,26 +16,40 @@ namespace Tests.Framework
 {
 	public abstract class SerializationTestBase
 	{
-		protected virtual bool NoClientSerializeOfExpected { get; }
-		protected virtual object ExpectJson { get; }
+		protected virtual object ExpectJson { get; } = null;
+		protected virtual bool NoClientSerializeOfExpected { get; } = false;
 		protected virtual bool SupportsDeserialization { get; set; } = true;
 
 		protected DateTime FixedDate => new DateTime(2015, 06, 06, 12, 01, 02, 123);
 		protected string _expectedJsonString;
 		protected JToken _expectedJsonJObject;
 
-		protected Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier = null;
-		protected IPropertyMappingProvider _propertyMappingProvider;
-		protected ConnectionSettings.SourceSerializerFactory _sourceSerializerFactory;
+		protected Func<ConnectionSettings, ConnectionSettings> ConnectionSettingsModifier { get; set; }
+		protected IPropertyMappingProvider PropertyMappingProvider { get; set; }
+		protected ConnectionSettings.SourceSerializerFactory SourceSerializerFactory { get; set; }
+
 		protected static readonly JsonSerializerSettings NullValueSettings = new JsonSerializerSettings {NullValueHandling = NullValueHandling.Include};
 
 		protected IElasticsearchSerializer RequestResponseSerializer => Client.ConnectionSettings.RequestResponseSerializer;
 
-		protected virtual IElasticClient Client =>
-			_connectionSettingsModifier == null && _sourceSerializerFactory == null && this._propertyMappingProvider == null
-			? TestClient.DefaultInMemoryClient
-			: TestClient.GetInMemoryClientWithSourceSerializer(
-					_connectionSettingsModifier, _sourceSerializerFactory, _propertyMappingProvider);
+		private readonly object _clientLock = new object();
+		private volatile IElasticClient _client;
+		protected virtual IElasticClient Client
+		{
+			get
+			{
+				if (_client != null) return _client;
+				lock (_clientLock)
+				{
+					if (_client != null) return _client;
+					_client = ConnectionSettingsModifier == null && SourceSerializerFactory == null && this.PropertyMappingProvider == null
+						? TestClient.DefaultInMemoryClient
+						: TestClient.GetInMemoryClientWithSourceSerializer(
+							ConnectionSettingsModifier, SourceSerializerFactory, PropertyMappingProvider);
+				}
+				return _client;
+			}
+		}
 
 		protected SerializationTestBase()
 		{

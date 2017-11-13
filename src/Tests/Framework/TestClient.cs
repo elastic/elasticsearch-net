@@ -12,6 +12,7 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.Configuration;
 using Tests.Framework.ManagedElasticsearch.NodeSeeders;
+using Tests.Framework.ManagedElasticsearch.SourceSerializers;
 using Tests.Framework.MockData;
 using Tests.Framework.Versions;
 
@@ -23,8 +24,15 @@ namespace Tests.Framework
 
 		public static ITestConfiguration Configuration = LoadConfiguration();
 		public static ConnectionSettings GlobalDefaultSettings = CreateSettings();
-		public static IElasticClient Default = new ElasticClient(GlobalDefaultSettings);
-		public static IElasticClient DefaultInMemoryClient = GetInMemoryClient();
+		public static readonly IElasticClient Default = new ElasticClient(GlobalDefaultSettings);
+		public static readonly IElasticClient DefaultInMemoryClient = GetInMemoryClient();
+		public static readonly IElasticClient DefaultClientWithSourceSerializer = TestClient.GetInMemoryClientWithSourceSerializer(
+			modifySettings: s => s,
+			sourceSerializerFactory: (settings, builtin) =>
+			{
+				var customSourceSerializer = new TestSourceSerializer(builtin);
+				return TestClient.Configuration.UsingCustomSourceSerializer ? customSourceSerializer : null;
+			});
 
 		public static Uri CreateUri(int port = 9200, bool forceSsl = false) =>
 			new UriBuilder(forceSsl ? "https" : "http", Host, port).Uri;
