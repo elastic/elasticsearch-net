@@ -23,7 +23,7 @@ namespace Tests.Framework.MockData
 		public Dictionary<string, Metadata> Metadata { get; set; }
 		public SimpleGeoPoint Location { get; set; }
 		public int? NumberOfCommits { get; set; }
-		public int? NumberOfContributors { get; set; }
+		public int NumberOfContributors { get; set; }
 		public CompletionField Suggest { get; set; }
 		public IEnumerable<string> Branches { get; set; }
 		public Ranges Ranges { get; set; }
