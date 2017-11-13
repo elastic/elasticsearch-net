@@ -2136,7 +2136,7 @@ namespace Nest
 			throw InvalidDispatch("IngestGetPipeline", p, new [] { GET }, "/_ingest/pipeline", "/_ingest/pipeline/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> IngestProcessorGrokDispatch<T>(IRequest<IngestProcessorGrokRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> IngestProcessorGrokDispatch<T>(IRequest<GrokProcessorPatternsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2147,7 +2147,7 @@ namespace Nest
 			throw InvalidDispatch("IngestProcessorGrok", p, new [] { GET }, "/_ingest/processor/grok");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IngestProcessorGrokDispatchAsync<T>(IRequest<IngestProcessorGrokRequestParameters> p , CancellationToken cancellationToken) where T : class
+		internal Task<ElasticsearchResponse<T>> IngestProcessorGrokDispatchAsync<T>(IRequest<GrokProcessorPatternsRequestParameters> p , CancellationToken cancellationToken) where T : class
 		{
 			switch(p.HttpMethod)
 			{

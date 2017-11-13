@@ -4,12 +4,12 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IIngestProcessorGrokResponse : IResponse
+	public interface IGrokProcessorPatternsResponse : IResponse
 	{
 		IReadOnlyDictionary<string, string> Patterns { get; }
 	}
 
-	public class IngestProcessorGrokResponse : ResponseBase, IIngestProcessorGrokResponse
+	public class GrokProcessorPatternsResponse : ResponseBase, IGrokProcessorPatternsResponse
 	{
 		[JsonProperty("patterns")]
 		public IReadOnlyDictionary<string, string> Patterns { get; internal set; } = EmptyReadOnly<string, string>.Dictionary;

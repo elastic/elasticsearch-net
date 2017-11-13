@@ -4495,7 +4495,7 @@ namespace Elasticsearch.Net
 		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html </para>
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IngestProcessorGrok<T>(Func<IngestProcessorGrokRequestParameters, IngestProcessorGrokRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IngestProcessorGrok<T>(Func<GrokProcessorPatternsRequestParameters, GrokProcessorPatternsRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_ingest/processor/grok
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4507,7 +4507,7 @@ namespace Elasticsearch.Net
 		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html </para>
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IngestProcessorGrokAsync<T>(Func<IngestProcessorGrokRequestParameters, IngestProcessorGrokRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		Task<ElasticsearchResponse<T>> IngestProcessorGrokAsync<T>(Func<GrokProcessorPatternsRequestParameters, GrokProcessorPatternsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 		
 		///<summary>Represents a PUT on /_ingest/pipeline/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

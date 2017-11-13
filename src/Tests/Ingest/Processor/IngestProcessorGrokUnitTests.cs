@@ -3,9 +3,9 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 
-namespace Tests.XPack.IngestProcessorGrok
+namespace Tests.XPack.GrokProcessorPatterns
 {
-	public class IngestProcessorGrokUnitTests
+	public class GrokProcessorPatternsUnitTests
 	{
 		[U]
 		public void ShouldDeserialize()
@@ -14,7 +14,7 @@ namespace Tests.XPack.IngestProcessorGrok
 			var client = TestClient.GetFixedReturnClient(fixedResponse);
 
 			//warmup
-			var response = client.IngestProcessorGrok();
+			var response = client.GrokProcessorPatterns();
 			response.ShouldBeValid();
 
 			response.Patterns.Should().NotBeNull();

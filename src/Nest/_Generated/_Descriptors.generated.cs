@@ -4318,23 +4318,23 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for IngestProcessorGrok <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class IngestProcessorGrokDescriptor  : RequestDescriptorBase<IngestProcessorGrokDescriptor,IngestProcessorGrokRequestParameters, IIngestProcessorGrokRequest>, IIngestProcessorGrokRequest
+	public partial class GrokProcessorPatternsDescriptor  : RequestDescriptorBase<GrokProcessorPatternsDescriptor,GrokProcessorPatternsRequestParameters, IGrokProcessorPatternsRequest>, IGrokProcessorPatternsRequest
 	{ 
 			
 		///<summary>Pretty format the returned JSON response.</summary>
-		public IngestProcessorGrokDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+		public GrokProcessorPatternsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
 		///<summary>Return human readable values for statistics.</summary>
-		public IngestProcessorGrokDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+		public GrokProcessorPatternsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
 
 		///<summary>Include the stack trace of returned errors.</summary>
-		public IngestProcessorGrokDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+		public GrokProcessorPatternsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IngestProcessorGrokDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
+		public GrokProcessorPatternsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public IngestProcessorGrokDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public GrokProcessorPatternsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

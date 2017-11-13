@@ -6,25 +6,25 @@ using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 
-namespace Tests.Ingest.IngestProcessorGrok
+namespace Tests.Ingest.GrokProcessorPatterns
 {
-	public class IngestProcessorGrokApiTests : ApiTestBase<ReadOnlyCluster, IIngestProcessorGrokResponse, IIngestProcessorGrokRequest, IngestProcessorGrokDescriptor, IngestProcessorGrokRequest>
+	public class GrokProcessorPatternsApiTests : ApiTestBase<ReadOnlyCluster, IGrokProcessorPatternsResponse, IGrokProcessorPatternsRequest, GrokProcessorPatternsDescriptor, GrokProcessorPatternsRequest>
 	{
-		public IngestProcessorGrokApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GrokProcessorPatternsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.IngestProcessorGrok(f),
-			fluentAsync: (client, f) => client.IngestProcessorGrokAsync(f),
-			request: (client, r) => client.IngestProcessorGrok(r),
-			requestAsync: (client, r) => client.IngestProcessorGrokAsync(r)
+			fluent: (client, f) => client.GrokProcessorPatterns(f),
+			fluentAsync: (client, f) => client.GrokProcessorPatternsAsync(f),
+			request: (client, r) => client.GrokProcessorPatterns(r),
+			requestAsync: (client, r) => client.GrokProcessorPatternsAsync(r)
 		);
 
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		protected override string UrlPath => $"/_ingest/processor/grok";
 
-		protected override Func<IngestProcessorGrokDescriptor, IIngestProcessorGrokRequest> Fluent => d => d;
+		protected override Func<GrokProcessorPatternsDescriptor, IGrokProcessorPatternsRequest> Fluent => d => d;
 
-		protected override IngestProcessorGrokRequest Initializer => new IngestProcessorGrokRequest();
+		protected override GrokProcessorPatternsRequest Initializer => new GrokProcessorPatternsRequest();
 	}
 }

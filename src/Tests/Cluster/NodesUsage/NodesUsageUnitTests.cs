@@ -9,7 +9,8 @@ namespace Tests.XPack.DeprecationInfo
 		[U]
 		public void ShouldDeserialize()
 		{
-			const string fixedResponse = "{\"_nodes\": {\"total\": 1,\"successful\": 1,\"failed\": 0},\"cluster_name\": \"my_cluster\",\"nodes\": {\"pQHNt5rXTTWNvUgOrdynKg\": {\"timestamp\": 1492553961812,\"since\": 1492553906606,\"rest_actions\": {\"org.elasticsearch.rest.action.admin.cluster.RestNodesUsageAction\": 1,\"org.elasticsearch.rest.action.admin.indices.RestCreateIndexAction\": 1,\"org.elasticsearch.rest.action.document.RestGetAction\": 1,\"org.elasticsearch.rest.action.search.RestSearchAction\": 19,\"org.elasticsearch.rest.action.admin.cluster.RestNodesInfoAction\": 36}}}}";
+			const string nodeId = "pQHNt5rXTTWNvUgOrdynKg";
+			const string fixedResponse = "{\"_nodes\": {\"total\": 1,\"successful\": 1,\"failed\": 0},\"cluster_name\": \"my_cluster\",\"nodes\": {\"" + nodeId + "\": {\"timestamp\": 1492553961812,\"since\": 1492553906606,\"rest_actions\": {\"org.elasticsearch.rest.action.admin.cluster.RestNodesUsageAction\": 1,\"org.elasticsearch.rest.action.admin.indices.RestCreateIndexAction\": 1,\"org.elasticsearch.rest.action.document.RestGetAction\": 1,\"org.elasticsearch.rest.action.search.RestSearchAction\": 19,\"org.elasticsearch.rest.action.admin.cluster.RestNodesInfoAction\": 36}}}}";
 			var client = TestClient.GetFixedReturnClient(fixedResponse);
 
 			//warmup
@@ -25,8 +26,6 @@ namespace Tests.XPack.DeprecationInfo
 
 			response.Nodes.Should().NotBeNull();
 			response.Nodes.Should().HaveCount(1);
-
-			const string nodeId = "pQHNt5rXTTWNvUgOrdynKg";
 
 			response.Nodes.Should().ContainKey(nodeId);
 
