@@ -585,12 +585,16 @@ namespace Nest
 				return valueMetric;
 			}
 
-			var scriptedMetric = serializer.Deserialize(reader);
 
+			//var scriptedMetric = serializer.Deserialize(reader);
+			var scriptedMetric = JToken.ReadFrom(reader);
 
 			reader.Read();
 			if (scriptedMetric != null)
-				return new ScriptedMetricAggregate {_Value = scriptedMetric};
+			{
+				var s = serializer.GetConnectionSettings().SourceSerializer;
+				return new ScriptedMetricAggregate(new LazyDocument(scriptedMetric, s));
+			}
 
 			return valueMetric;
 		}

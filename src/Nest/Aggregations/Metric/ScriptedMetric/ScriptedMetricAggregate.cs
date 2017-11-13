@@ -6,7 +6,9 @@ namespace Nest
 {
 	public class ScriptedMetricAggregate : MetricAggregateBase
 	{
-		internal object _Value { get; set; }
+		private readonly object _value;
+		internal ScriptedMetricAggregate(object value) => _value = value;
+		public ScriptedMetricAggregate() { }
 
 		/// <summary>
 		/// Get the result of the scripted metric aggregation as T
@@ -14,10 +16,9 @@ namespace Nest
 		/// <typeparam name="T">The type that best represents the result of your scripted metric aggrgation</typeparam>
 		public T Value<T>()
 		{
-			var jToken = this._Value as JToken;
-			return jToken != null
-				? jToken.ToObject<T>()
-				: (T)Convert.ChangeType(this._Value, typeof(T));
+			return this._value is LazyDocument lazyDocument
+				? lazyDocument.As<T>()
+				: (T)Convert.ChangeType(this._value, typeof(T));
 		}
 	}
 }
