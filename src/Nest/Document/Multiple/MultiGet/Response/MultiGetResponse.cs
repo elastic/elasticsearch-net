@@ -7,7 +7,7 @@ namespace Nest
 {
 	public interface IMultiGetResponse : IResponse
 	{
-		IReadOnlyCollection<IMultiGetHit<object>> Documents { get; }
+		IReadOnlyCollection<IMultiGetHit<object>> Hits { get; }
 		MultiGetHit<T> Get<T>(string id) where T : class;
 		MultiGetHit<T> Get<T>(long id) where T : class;
 		T Source<T>(string id) where T : class;
@@ -25,15 +25,15 @@ namespace Nest
 	[ContractJsonConverter(typeof(MultiGetHitJsonConverter))]
 	public class MultiGetResponse : ResponseBase, IMultiGetResponse
 	{
-		public override bool IsValid => base.IsValid && !this._Documents.HasAny(d => d.Error != null);
+		public override bool IsValid => base.IsValid && !this.InternalHits.HasAny(d => d.Error != null);
 
-		internal ICollection<IMultiGetHit<object>> _Documents { get; set; } = new List<IMultiGetHit<object>>();
+		internal ICollection<IMultiGetHit<object>> InternalHits { get; set; } = new List<IMultiGetHit<object>>();
 
-		public IReadOnlyCollection<IMultiGetHit<object>> Documents => this._Documents.ToList().AsReadOnly();
+		public IReadOnlyCollection<IMultiGetHit<object>> Hits => this.InternalHits.ToList().AsReadOnly();
 
 		public MultiGetHit<T> Get<T>(string id) where T : class
 		{
-			return this.Documents.OfType<MultiGetHit<T>>().FirstOrDefault(m => m.Id == id);
+			return this.Hits.OfType<MultiGetHit<T>>().FirstOrDefault(m => m.Id == id);
 		}
 
 		public MultiGetHit<T> Get<T>(long id) where T : class
@@ -54,7 +54,7 @@ namespace Nest
 
 		public IEnumerable<T> SourceMany<T>(IEnumerable<string> ids) where T : class
 		{
-			var docs = this.Documents.OfType<IMultiGetHit<T>>();
+			var docs = this.Hits.OfType<IMultiGetHit<T>>();
 			return from d in docs
 				   join id in ids on d.Id equals id
 				   where d.Found
@@ -68,7 +68,7 @@ namespace Nest
 
 		public IEnumerable<IMultiGetHit<T>> GetMany<T>(IEnumerable<string> ids) where T : class
 		{
-			var docs = this.Documents.OfType<IMultiGetHit<T>>();
+			var docs = this.Hits.OfType<IMultiGetHit<T>>();
 			return from d in docs
 				   join id in ids on d.Id equals id
 				   select d;

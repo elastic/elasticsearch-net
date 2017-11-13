@@ -68,7 +68,8 @@ namespace Tests.Framework.MockData
 			LeadDeveloper = new Developer() { FirstName = "Martijn", LastName = "Laarman" },
 			StartedOn = new DateTime(2015, 1, 1),
 			DateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-			Location = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 }
+			Location = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 },
+			SourceOnly = TestClient.Configuration.UsingCustomSourceSerializer ? new SourceOnlyObject() : null
 		};
 
 		public static object InstanceAnonymous => TestClient.Configuration.UsingCustomSourceSerializer
@@ -90,13 +91,13 @@ namespace Tests.Framework.MockData
 		{
 			name = Projects.First().Name,
 			join = Instance.Join,
-			notWrittenByDefaultSerializer = "written",
 			state = "BellyUp",
 			startedOn = "2015-01-01T00:00:00",
 			lastActivity = "0001-01-01T00:00:00",
 			dateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
 			leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
-			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon }
+			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon },
+			sourceOnly = new { notWrittenByDefaultSerializer = "written" }
 		};
 	}
 

@@ -1,7 +1,4 @@
 using System;
-using System;
-using System.CodeDom;
-using Newtonsoft.Json;
 
 namespace Nest
 {

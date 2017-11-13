@@ -38,12 +38,7 @@ namespace Tests.Document.Single.Get
 		{
 			response.Source.Should().NotBeNull();
 			response.Source.Name.Should().Be(ProjectId);
-
-			if (!UsingSourceSerializer) return;
-
-			response.Source.SourceOnly.Should().NotBeNull();
-			response.Source.SourceOnly.NotWrittenByDefaultSerializer.Should().Be("written");
-			response.Source.SourceOnly.NotReadByDefaultSerializer.Should().Be("read");
+			response.Source.ShouldAdhereToSourceSerializerWhenSet();
 		}
 	}
 

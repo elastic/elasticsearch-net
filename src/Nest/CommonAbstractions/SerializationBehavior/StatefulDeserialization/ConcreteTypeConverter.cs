@@ -13,7 +13,7 @@ namespace Nest
 	//TODO rethink IHIT<T> deserialization where T is covariant
 	internal class DefaultHitJsonConverter : JsonConverter
 	{
-		private static readonly ConcurrentDictionary<Type, JsonConverter> _hitTypes = new ConcurrentDictionary<Type, JsonConverter>();
+		private static readonly ConcurrentDictionary<Type, JsonConverter> HitTypes = new ConcurrentDictionary<Type, JsonConverter>();
 
 		public override bool CanWrite => false;
 		public override bool CanRead => true;
@@ -21,14 +21,13 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			JsonConverter converter;
-			if (_hitTypes.TryGetValue(objectType, out converter))
+			if (HitTypes.TryGetValue(objectType, out var converter))
 				return converter.ReadJson(reader, objectType, existingValue, serializer);
 
 			var genericType = typeof(ConcreteTypeConverter<>);
 			var closedType = genericType.MakeGenericType(objectType.GetGenericArguments()[0]);
 			converter = (JsonConverter)closedType.CreateInstance();
-			_hitTypes.TryAdd(objectType, converter);
+			HitTypes.TryAdd(objectType, converter);
 			return converter.ReadJson(reader, objectType, existingValue, serializer);
 		}
 
@@ -38,10 +37,10 @@ namespace Nest
 		}
 	}
 
-	internal class ConcreteTypeConverter<T> : JsonConverter where T : class
+	internal class ConcreteTypeConverter<TDocument> : JsonConverter where TDocument : class
 	{
-		internal readonly Type _baseType;
-		internal readonly Func<dynamic, Hit<dynamic>, Type> _concreteTypeSelector;
+		internal Type BaseType { get; }
+		internal Func<dynamic, Hit<dynamic>, Type> ConcreteTypeSelector { get; }
 
 		public override bool CanWrite => false;
 		public override bool CanRead => true;
@@ -53,17 +52,17 @@ namespace Nest
 		{
 			concreteTypeSelector.ThrowIfNull(nameof(concreteTypeSelector));
 
-			this._baseType = typeof(T);
-			this._concreteTypeSelector = concreteTypeSelector;
+			this.BaseType = typeof(TDocument);
+			this.ConcreteTypeSelector = concreteTypeSelector;
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var realConverter = serializer.GetStatefulConverter<ConcreteTypeConverter<T>>();
+			var realConverter = serializer.GetStatefulConverter<ConcreteTypeConverter<TDocument>>();
 			if (realConverter != null)
-				return ConcreteTypeConverter.GetUsingConcreteTypeConverter<T>(reader, serializer, realConverter);
+				return ConcreteTypeConverter.GetUsingConcreteTypeConverter<TDocument>(reader, serializer, realConverter);
 
-			var instance = (Hit<T>)(typeof(Hit<T>).CreateInstance());
+			var instance = (Hit<TDocument>)(typeof(Hit<TDocument>).CreateInstance());
 			serializer.Populate(reader, instance);
 			instance.Fields = new FieldValues(serializer.GetConnectionSettings().Inferrer, instance.Fields);
 			return instance;
@@ -120,7 +119,7 @@ namespace Nest
 			where T: class
 		{
 			var settings = serializer.GetConnectionSettings();
-			var selector = realConcreteConverter._concreteTypeSelector;
+			var selector = realConcreteConverter.ConcreteTypeSelector;
 
 			dynamic d = jObject;
 			var fields = jObject["fields"];
