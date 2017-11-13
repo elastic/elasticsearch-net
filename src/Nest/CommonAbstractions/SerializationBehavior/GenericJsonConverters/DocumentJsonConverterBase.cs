@@ -1,8 +1,10 @@
 using System;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
+using static Elasticsearch.Net.SerializationFormatting;
 
 namespace Nest
 {
@@ -33,12 +35,10 @@ namespace Nest
 		{
 			var untypedDocumentRequest = (IUntypedDocumentRequest)value;
 			var o = untypedDocumentRequest.UntypedDocument;
-			var v = serializer.GetConnectionSettings().SourceSerializer.SerializeToBytes(o);
-			using(var ms = new MemoryStream(v))
-			using(var streamReader = new StreamReader(ms))
-			using(var reader = new JsonTextReader(streamReader))
-				writer.WriteToken(reader);
-			//writer.WriteRawValue(v);
+			var f = writer.Formatting == Formatting.Indented ? Indented : None;
+			var v = serializer.GetConnectionSettings().SourceSerializer.SerializeToString(o, f);
+			writer.WriteRawValue(v);
+
 		}
 	}
 }
