@@ -23,12 +23,12 @@ namespace Tests.Framework
 			IPropertyMappingProvider propertyMappingProvider = null)
 		{
 			this.ExpectJson = expected;
-			this._connectionSettingsModifier = settings;
+			this.ConnectionSettingsModifier = settings;
+			this.SourceSerializerFactory = sourceSerializerFactory;
+			this.PropertyMappingProvider = propertyMappingProvider;
 
 			this._expectedJsonString = JsonConvert.SerializeObject(expected, NullValueSettings);
 			this._expectedJsonJObject = JToken.Parse(this._expectedJsonString);
-			this._sourceSerializerFactory = sourceSerializerFactory;
-			this._propertyMappingProvider = propertyMappingProvider;
 		}
 
 		public virtual void DeserializesTo<T>(Action<string, T> assert)
