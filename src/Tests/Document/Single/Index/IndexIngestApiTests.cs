@@ -42,6 +42,7 @@ namespace Tests.Document.Single.Index
 			StartedOn = FixedDate,
 			LastActivity = FixedDate,
 			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}},
+			SourceOnly = TestClient.Configuration.UsingCustomSourceSerializer ? new SourceOnlyObject() : null
 		};
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -68,7 +69,7 @@ namespace Tests.Document.Single.Index
 				state = "Stable",
 				startedOn = FixedDate,
 				lastActivity = FixedDate,
-				notWrittenByDefaultSerializer = Dependant(null, "written"),
+				sourceOnly = Dependant(null, new { notWrittenByDefaultSerializer = "written" }),
 				curatedTags = new[] {new {name = "x", added = FixedDate}},
 			};
 
