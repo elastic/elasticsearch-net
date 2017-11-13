@@ -15,7 +15,7 @@ namespace Nest
 		/// <see cref="ILazyDocument"/> instance
 		/// </summary>
 		/// <typeparam name="T">The type</typeparam>
-		T As<T>() where T : class;
+		T As<T>();
 
 		/// <summary>
 		/// Creates an instance of <paramref name="objectType"/> from this
@@ -38,9 +38,9 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public T As<T>() where T : class
+		public T As<T>()
 		{
-			if (Token == null) return null;
+			if (Token == null) return default(T);
 			using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(Token.ToString())))
 				return _serializer.Deserialize<T>(ms);
 		}
