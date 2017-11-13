@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Text;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
+using Newtonsoft.Json.Linq;
 using static Elasticsearch.Net.SerializationFormatting;
 
 namespace Nest
@@ -23,12 +24,18 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			//not optimized but deserializing create requests is far from common practice
-			var genericType = objectType.GetTypeInfo().GenericTypeArguments[0];
-			var o = serializer.Deserialize(reader, genericType);
-			// index, type and id are optional parameters on _genericRequestType but need to be passed to construct through reflection
-			var x = _genericRequestType.CreateGenericInstance(genericType, typeof(DocumentPath<>).CreateGenericInstance(genericType, o), null, null, null);
-			return x;
+			var token = JToken.ReadFrom(reader);
+			using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(token.ToString())))
+			{
+                //not optimized but deserializing create requests is far from common practice
+                var genericType = objectType.GetTypeInfo().GenericTypeArguments[0];
+				var o = serializer.GetConnectionSettings().SourceSerializer.Deserialize(genericType, ms);
+				var path = typeof(DocumentPath<>).CreateGenericInstance(genericType, o);
+                // index, type and id are optional parameters on _genericRequestType but need to be passed to construct through reflection
+                var x = _genericRequestType.CreateGenericInstance(genericType, path, null, null, null);
+                return x;
+			}
+
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

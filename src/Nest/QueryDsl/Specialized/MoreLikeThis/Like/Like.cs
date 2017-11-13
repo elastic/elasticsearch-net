@@ -31,6 +31,7 @@ namespace Nest
 		}
 
 	}
+
 	internal class LikeJsonConverter :JsonConverter
 	{
 		public override bool CanRead => true;
@@ -40,10 +41,9 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var union = Unionconverter.ReadJson(reader, objectType, existingValue, serializer) as Union<string, ILikeDocument>;
-			if (union == null) return null;
-			if (union.Item1 != null) return new Like(union.Item1);
-			return new Like(union.Item2);
+			if (!(Unionconverter.ReadJson(reader, objectType, existingValue, serializer) is Union<string, ILikeDocument> union)) return null;
+
+			return union.Item1 != null ? new Like(union.Item1) : new Like(union.Item2);
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
