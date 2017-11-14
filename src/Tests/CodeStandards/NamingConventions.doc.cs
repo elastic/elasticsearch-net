@@ -120,13 +120,7 @@ namespace Tests.CodeStandards
 				typeof(IndicesShardStoresRequest),
 				typeof(RenderSearchTemplateRequest),
 				typeof(MultiSearchTemplateRequest),
-				typeof(CreateRequest<>),
-
-				//TODO ignored as part of new 6.0 beta 2 types that we need to add support for
-				typeof(IngestProcessorGrokRequest),
-				typeof(NodesUsageRequest),
-				typeof(XpackDeprecationInfoRequest),
-
+				typeof(CreateRequest<>)
 			};
 
 			var types = typeof(IRequest).Assembly().GetTypes();
