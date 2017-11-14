@@ -2136,7 +2136,7 @@ namespace Nest
 			throw InvalidDispatch("IngestGetPipeline", p, new [] { GET }, "/_ingest/pipeline", "/_ingest/pipeline/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> IngestProcessorGrokDispatch<T>(IRequest<IngestProcessorGrokRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> IngestProcessorGrokDispatch<T>(IRequest<GrokProcessorPatternsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2147,7 +2147,7 @@ namespace Nest
 			throw InvalidDispatch("IngestProcessorGrok", p, new [] { GET }, "/_ingest/processor/grok");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IngestProcessorGrokDispatchAsync<T>(IRequest<IngestProcessorGrokRequestParameters> p , CancellationToken cancellationToken) where T : class
+		internal Task<ElasticsearchResponse<T>> IngestProcessorGrokDispatchAsync<T>(IRequest<GrokProcessorPatternsRequestParameters> p , CancellationToken cancellationToken) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3182,7 +3182,7 @@ namespace Nest
 			throw InvalidDispatch("XpackGraphExplore", p, new [] { GET, POST }, "/{index}/_xpack/graph/_explore", "/{index}/{type}/_xpack/graph/_explore");
 		}
 		
-		internal ElasticsearchResponse<T> XpackDeprecationInfoDispatch<T>(IRequest<XpackDeprecationInfoRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> XpackDeprecationInfoDispatch<T>(IRequest<DeprecationInfoRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3194,7 +3194,7 @@ namespace Nest
 			throw InvalidDispatch("XpackDeprecationInfo", p, new [] { GET }, "/_xpack/migration/deprecations", "/{index}/_xpack/migration/deprecations");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> XpackDeprecationInfoDispatchAsync<T>(IRequest<XpackDeprecationInfoRequestParameters> p , CancellationToken cancellationToken) where T : class
+		internal Task<ElasticsearchResponse<T>> XpackDeprecationInfoDispatchAsync<T>(IRequest<DeprecationInfoRequestParameters> p , CancellationToken cancellationToken) where T : class
 		{
 			switch(p.HttpMethod)
 			{
