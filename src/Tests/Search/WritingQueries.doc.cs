@@ -460,13 +460,13 @@ namespace Tests.Search
             /**
              * `.Documents` is a convenient shorthand for
              */
-            searchResponse.HitsMetaData.Hits.Select(h => h.Source);
+            searchResponse.HitsMetadata.Hits.Select(h => h.Source);
 
             /**
              * and it's possible to retrieve other metadata about each hit from the hits collection. Here's
              * an example that retrieves the highlights for a hit, when using <<highlighting-usage, highlighting>>
              */
-            var highlights = searchResponse.HitsMetaData.Hits.Select(h => h
+            var highlights = searchResponse.HitsMetadata.Hits.Select(h => h
                 .Highlights // <1> Get the highlights for the hit, when using highlighting
             );
         }

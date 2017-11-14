@@ -5,10 +5,10 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IPhraseSuggestHighlight
 	{
-		[JsonProperty(PropertyName = "pre_tag")]
+		[JsonProperty("pre_tag")]
 		string PreTag { get; set; }
 
-		[JsonProperty(PropertyName = "post_tag")]
+		[JsonProperty("post_tag")]
 		string PostTag { get; set; }
 	}
 

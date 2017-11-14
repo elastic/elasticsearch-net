@@ -9,26 +9,26 @@ namespace Nest
 		where TDocument : class
 		where TPartialDocument : class
 	{
-		[JsonProperty(PropertyName = "script")]
+		[JsonProperty("script")]
 		IScript Script { get; set; }
 
-		[JsonProperty(PropertyName = "upsert")]
+		[JsonProperty("upsert")]
 		TDocument Upsert { get; set; }
 
-		[JsonProperty(PropertyName = "doc_as_upsert")]
+		[JsonProperty("doc_as_upsert")]
 		bool? DocAsUpsert { get; set; }
 
 		/// <summary>
 		/// If you would like your script to run regardless of whether the document exists or not — i.e. the script handles
 		/// initializing the document instead of the upsert element — then set scripted_upsert to true
 		/// </summary>
-		[JsonProperty(PropertyName = "scripted_upsert")]
+		[JsonProperty("scripted_upsert")]
 		bool? ScriptedUpsert { get; set; }
 
-		[JsonProperty(PropertyName = "doc")]
+		[JsonProperty("doc")]
 		TPartialDocument Doc { get; set; }
 
-		[JsonProperty(PropertyName = "detect_noop")]
+		[JsonProperty("detect_noop")]
 		bool? DetectNoop { get; set; }
 
 		[JsonProperty("_source")]

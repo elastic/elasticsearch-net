@@ -7,25 +7,25 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<LikeDocument<object>>))]
 	public interface ILikeDocument
 	{
-		[JsonProperty(PropertyName = "_index")]
+		[JsonProperty("_index")]
 		IndexName Index { get; set; }
 
-		[JsonProperty(PropertyName = "_type")]
+		[JsonProperty("_type")]
 		TypeName Type { get; set; }
 
-		[JsonProperty(PropertyName = "_id")]
+		[JsonProperty("_id")]
 		Id Id { get; set; }
 
-		[JsonProperty(PropertyName = "fields")]
+		[JsonProperty("fields")]
 		Fields Fields { get; set; }
 
-		[JsonProperty(PropertyName = "_routing")]
+		[JsonProperty("_routing")]
 		string Routing { get; set; }
 
-		[JsonProperty(PropertyName = "doc")]
+		[JsonProperty("doc")]
 		object Document { get; set; }
 
-		[JsonProperty(PropertyName = "per_field_analyzer")]
+		[JsonProperty("per_field_analyzer")]
 		IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
 
 		Type ClrType { get; }

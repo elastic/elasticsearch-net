@@ -12,7 +12,7 @@ namespace Nest
 		/// boosting into account, the norms_field needs to be provided in order to explicitly specify which
 		/// field the boosting will be done on (Note, this will result in slower execution time).
 		/// </summary>
-		[JsonProperty(PropertyName = "norm_field")]
+		[JsonProperty("norm_field")]
 		string NormField { get; set; }
 	}
 

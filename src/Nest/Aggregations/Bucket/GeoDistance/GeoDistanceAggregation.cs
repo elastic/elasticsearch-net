@@ -22,7 +22,7 @@ namespace Nest
 		[JsonProperty("distance_type")]
 		GeoDistanceType? DistanceType { get; set; }
 
-		[JsonProperty(PropertyName = "ranges")]
+		[JsonProperty("ranges")]
 #pragma warning disable 618
 		IEnumerable<IRange> Ranges { get; set; }
 #pragma warning restore 618

@@ -5,31 +5,31 @@ namespace Nest
 	[JsonObject]
 	public class GetStats
 	{
-		[JsonProperty(PropertyName = "current")]
+		[JsonProperty("current")]
 		public long Current { get; set; }
 
-		[JsonProperty(PropertyName = "exists_time")]
+		[JsonProperty("exists_time")]
 		public string ExistsTime { get; set; }
-		[JsonProperty(PropertyName = "exists_time_in_millis")]
+		[JsonProperty("exists_time_in_millis")]
 		public long ExistsTimeInMilliseconds { get; set; }
 
-		[JsonProperty(PropertyName = "exists_total")]
+		[JsonProperty("exists_total")]
 		public long ExistsTotal { get; set; }
 
-		[JsonProperty(PropertyName = "missing_time")]
+		[JsonProperty("missing_time")]
 		public string MissingTime { get; set; }
-		[JsonProperty(PropertyName = "missing_time_in_millis")]
+		[JsonProperty("missing_time_in_millis")]
 		public long MissingTimeInMilliseconds { get; set; }
 
-		[JsonProperty(PropertyName = "missing_total")]
+		[JsonProperty("missing_total")]
 		public long MissingTotal { get; set; }
 
-		[JsonProperty(PropertyName = "time")]
+		[JsonProperty("time")]
 		public string Time { get; set; }
-		[JsonProperty(PropertyName = "time_in_millis")]
+		[JsonProperty("time_in_millis")]
 		public long TimeInMilliseconds { get; set; }
 
-		[JsonProperty(PropertyName = "total")]
+		[JsonProperty("total")]
 		public long Total { get; set; }
 
 	}

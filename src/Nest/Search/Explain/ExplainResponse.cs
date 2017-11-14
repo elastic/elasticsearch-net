@@ -15,13 +15,13 @@ namespace Nest
 	public class ExplainResponse<T> : ResponseBase, IExplainResponse<T>
 		where T : class
 	{
-		[JsonProperty(PropertyName = "matched")]
+		[JsonProperty("matched")]
 		public bool Matched { get; internal set; }
 
-		[JsonProperty(PropertyName = "explanation")]
+		[JsonProperty("explanation")]
 		public ExplanationDetail Explanation { get; internal set; }
 
-		[JsonProperty(PropertyName = "get")]
+		[JsonProperty("get")]
 		public InstantGet<T> Get { get; internal set; }
 	}
 }
