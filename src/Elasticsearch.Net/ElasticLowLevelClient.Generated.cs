@@ -4826,7 +4826,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IngestProcessorGrok<T>(Func<IngestProcessorGrokRequestParameters, IngestProcessorGrokRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IngestProcessorGrok<T>(Func<GrokProcessorPatternsRequestParameters, GrokProcessorPatternsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"_ingest/processor/grok"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_ingest/processor/grok
@@ -4839,7 +4839,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IngestProcessorGrokAsync<T>(Func<IngestProcessorGrokRequestParameters, IngestProcessorGrokRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IngestProcessorGrokAsync<T>(Func<GrokProcessorPatternsRequestParameters, GrokProcessorPatternsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_ingest/processor/grok"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_ingest/pipeline/{id}
@@ -7794,7 +7794,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackDeprecationInfo<T>(Func<XpackDeprecationInfoRequestParameters, XpackDeprecationInfoRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackDeprecationInfo<T>(Func<DeprecationInfoRequestParameters, DeprecationInfoRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"_xpack/migration/deprecations"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/migration/deprecations
@@ -7807,7 +7807,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html </para>
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackDeprecationInfoAsync<T>(Func<XpackDeprecationInfoRequestParameters, XpackDeprecationInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackDeprecationInfoAsync<T>(Func<DeprecationInfoRequestParameters, DeprecationInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_xpack/migration/deprecations"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_xpack/migration/deprecations
@@ -7821,7 +7821,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="index">Index pattern</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackDeprecationInfo<T>(string index, Func<XpackDeprecationInfoRequestParameters, XpackDeprecationInfoRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackDeprecationInfo<T>(string index, Func<DeprecationInfoRequestParameters, DeprecationInfoRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_xpack/migration/deprecations"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_xpack/migration/deprecations
@@ -7835,7 +7835,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="index">Index pattern</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackDeprecationInfoAsync<T>(string index, Func<XpackDeprecationInfoRequestParameters, XpackDeprecationInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackDeprecationInfoAsync<T>(string index, Func<DeprecationInfoRequestParameters, DeprecationInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_xpack/migration/deprecations"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack

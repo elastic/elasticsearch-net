@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <DotNetCoreOnly Condition="'$(TRAVIS)'=='true'">1</DotNetCoreOnly>
     <DotNetCoreOnly Condition="'$(TRAVIS)'==''">
