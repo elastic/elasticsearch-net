@@ -5,10 +5,10 @@ namespace Nest
 	[JsonObject]
 	public class DocStats
 	{
-		[JsonProperty(PropertyName = "count")]
+		[JsonProperty("count")]
 		public long Count { get; set; }
 
-		[JsonProperty(PropertyName = "deleted")]
+		[JsonProperty("deleted")]
 		public long Deleted { get; set; }
 	}
 }

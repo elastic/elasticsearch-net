@@ -6,19 +6,19 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<FuzzySuggester>))]
 	public interface IFuzzySuggester
 	{
-		[JsonProperty(PropertyName = "transpositions")]
+		[JsonProperty("transpositions")]
 		bool? Transpositions { get; set; }
 
-		[JsonProperty(PropertyName = "min_length")]
+		[JsonProperty("min_length")]
 		int? MinLength { get; set; }
 
-		[JsonProperty(PropertyName = "prefix_length")]
+		[JsonProperty("prefix_length")]
 		int? PrefixLength { get; set; }
 
-		[JsonProperty(PropertyName = "fuzziness")]
+		[JsonProperty("fuzziness")]
 		IFuzziness Fuzziness { get; set; }
 
-		[JsonProperty(PropertyName = "unicode_aware")]
+		[JsonProperty("unicode_aware")]
 		bool? UnicodeAware { get; set; }
 	}
 
@@ -31,7 +31,7 @@ namespace Nest
 		public bool? UnicodeAware { get; set; }
 	}
 
-	public class FuzzySuggestDescriptor<T> : DescriptorBase<FuzzySuggestDescriptor<T>, IFuzzySuggester>,  IFuzzySuggester 
+	public class FuzzySuggestDescriptor<T> : DescriptorBase<FuzzySuggestDescriptor<T>, IFuzzySuggester>,  IFuzzySuggester
 		where T : class
 	{
 		bool? IFuzzySuggester.Transpositions { get; set; }

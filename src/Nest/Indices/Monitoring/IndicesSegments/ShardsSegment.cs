@@ -9,13 +9,13 @@ namespace Nest
 	[JsonConverter(typeof(ShardsSegment.Json))]
 	public class ShardsSegment
 	{
-		[JsonProperty(PropertyName = "num_committed_segments")]
+		[JsonProperty("num_committed_segments")]
 		public int CommittedSegments { get; internal set; }
 
-		[JsonProperty(PropertyName = "num_search_segments")]
+		[JsonProperty("num_search_segments")]
 		public int SearchSegments { get; internal set; }
 
-		[JsonProperty(PropertyName = "routing")]
+		[JsonProperty("routing")]
 		public ShardSegmentRouting Routing { get; internal set; }
 
 		[JsonProperty]

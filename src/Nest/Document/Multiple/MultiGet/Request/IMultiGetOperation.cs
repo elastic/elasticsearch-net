@@ -7,22 +7,22 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<MultiGetOperationDescriptor<object>>))]
 	public interface IMultiGetOperation
 	{
-		[JsonProperty(PropertyName = "_index")]
+		[JsonProperty("_index")]
 		IndexName Index { get; set; }
 
-		[JsonProperty(PropertyName = "_type")]
+		[JsonProperty("_type")]
 		TypeName Type { get; set; }
 
-		[JsonProperty(PropertyName = "_id")]
+		[JsonProperty("_id")]
 		Id Id { get; set; }
 
-		[JsonProperty(PropertyName = "stored_fields")]
+		[JsonProperty("stored_fields")]
 		Fields StoredFields { get; set; }
 
-		[JsonProperty(PropertyName = "_routing")]
+		[JsonProperty("_routing")]
 		string Routing { get; set; }
 
-		[JsonProperty(PropertyName = "_source")]
+		[JsonProperty("_source")]
 		Union<bool, ISourceFilter> Source { get; set; }
 
 		Type ClrType { get; }

@@ -263,12 +263,12 @@ namespace Nest
 
 		/// <summary>
 		/// Enables explanation for each hit on how its score was computed.
-		/// (Use .DocumentsWithMetaData on the return results)
+		/// (Use .DocumentsWithMetadata on the return results)
 		/// </summary>
 		public SearchDescriptor<T> Explain(bool explain = true) => Assign(a => a.Explain = explain);
 
 		/// <summary>
-		/// Returns a version for each search hit. (Use .DocumentsWithMetaData on the return results)
+		/// Returns a version for each search hit. (Use .DocumentsWithMetadata on the return results)
 		/// </summary>
 		public SearchDescriptor<T> Version(bool version = true) => Assign(a => a.Version = version);
 

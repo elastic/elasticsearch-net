@@ -12,13 +12,13 @@ namespace Nest
 	[JsonObject]
 	public class RootNodeInfoResponse : ResponseBase, IRootNodeInfoResponse
 	{
-		[JsonProperty(PropertyName = "name")]
+		[JsonProperty("name")]
 		public string Name { get; internal set; }
 
-		[JsonProperty(PropertyName = "tagline")]
+		[JsonProperty("tagline")]
 		public string Tagline { get; internal set; }
-		
-		[JsonProperty(PropertyName = "version")]
+
+		[JsonProperty("version")]
 		public ElasticsearchVersionInfo Version { get; internal set; }
 
 	}

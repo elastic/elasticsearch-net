@@ -7,27 +7,27 @@ namespace Nest
 	[JsonConverter(typeof (FieldNameQueryJsonConverter<CommonTermsQuery>))]
 	public interface ICommonTermsQuery : IFieldNameQuery
 	{
-		[JsonProperty(PropertyName = "query")]
+		[JsonProperty("query")]
 		string Query { get; set; }
 
-		[JsonProperty(PropertyName = "cutoff_frequency")]
+		[JsonProperty("cutoff_frequency")]
 		double? CutoffFrequency { get; set; }
 
-		[JsonProperty(PropertyName = "low_freq_operator")]
+		[JsonProperty("low_freq_operator")]
 		[JsonConverter(typeof (StringEnumConverter))]
 		Operator? LowFrequencyOperator { get; set; }
 
-		[JsonProperty(PropertyName = "high_freq_operator")]
+		[JsonProperty("high_freq_operator")]
 		[JsonConverter(typeof (StringEnumConverter))]
 		Operator? HighFrequencyOperator { get; set; }
 
-		[JsonProperty(PropertyName = "minimum_should_match")]
+		[JsonProperty("minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
-		[JsonProperty(PropertyName = "analyzer")]
+		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty(PropertyName = "disable_coord")]
+		[JsonProperty("disable_coord")]
 		bool? DisableCoord { get; set; }
 	}
 

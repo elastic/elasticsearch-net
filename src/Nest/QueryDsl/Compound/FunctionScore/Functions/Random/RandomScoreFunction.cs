@@ -8,10 +8,10 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<RandomScoreFunction>))]
 	public interface IRandomScoreFunction : IScoreFunction
 	{
-		[JsonProperty(PropertyName = "seed")]
+		[JsonProperty("seed")]
 		Union<long, string> Seed { get; set; }
 
-		[JsonProperty(PropertyName = "field")]
+		[JsonProperty("field")]
 		Field Field { get; set; }
 	}
 

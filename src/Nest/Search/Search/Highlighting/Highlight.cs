@@ -91,7 +91,7 @@ namespace Nest
 		[JsonProperty("tags_schema")]
 		string TagsSchema { get; set; }
 
-		[JsonProperty(PropertyName = "fields")]
+		[JsonProperty("fields")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Field, IHighlightField>))]
 		Dictionary<Field, IHighlightField> Fields { get; set; }
 

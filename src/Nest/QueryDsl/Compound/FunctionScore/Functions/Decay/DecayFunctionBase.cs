@@ -10,10 +10,10 @@ namespace Nest
 
 		Field Field { get; set; }
 
-		[JsonProperty(PropertyName = "decay")]
+		[JsonProperty("decay")]
 		double? Decay { get; set; }
 
-		[JsonProperty(PropertyName = "multi_value_mode")]
+		[JsonProperty("multi_value_mode")]
 		MultiValueMode? MultiValueMode { get; set; }
 
 
@@ -21,13 +21,13 @@ namespace Nest
 	public interface IDecayFunction<TOrigin, TScale> : IDecayFunction
 	{
 
-		[JsonProperty(PropertyName = "origin")]
+		[JsonProperty("origin")]
 		TOrigin Origin { get; set; }
 
-		[JsonProperty(PropertyName = "scale")]
+		[JsonProperty("scale")]
 		TScale Scale { get; set; }
 
-		[JsonProperty(PropertyName = "offset")]
+		[JsonProperty("offset")]
 		TScale Offset { get; set; }
 
 	}

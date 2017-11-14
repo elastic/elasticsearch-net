@@ -10,24 +10,24 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IScriptQuery : IQuery
 	{
-		[JsonProperty(PropertyName = "source")]
+		[JsonProperty("source")]
 		string Source { get; set; }
 
 		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
 		[JsonIgnore]
 		string Inline { get; set; }
 
-		[JsonProperty(PropertyName = "id")]
+		[JsonProperty("id")]
 		Id Id { get; set; }
 
 		[JsonProperty("file")]
 		string File { get; set; }
 
-		[JsonProperty(PropertyName = "params")]
+		[JsonProperty("params")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
 
-		[JsonProperty(PropertyName = "lang")]
+		[JsonProperty("lang")]
 		string Lang { get; set; }
 	}
 

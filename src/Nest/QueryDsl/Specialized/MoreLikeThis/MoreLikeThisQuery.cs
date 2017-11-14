@@ -9,46 +9,46 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<MoreLikeThisQueryDescriptor<object>>))]
 	public interface IMoreLikeThisQuery : IQuery
 	{
-		[JsonProperty(PropertyName = "fields")]
+		[JsonProperty("fields")]
 		Fields Fields { get; set; }
 
-		[JsonProperty(PropertyName = "like")]
+		[JsonProperty("like")]
 		IEnumerable<Like> Like { get; set; }
 
-		[JsonProperty(PropertyName = "unlike")]
+		[JsonProperty("unlike")]
 		IEnumerable<Like> Unlike { get; set; }
 
-		[JsonProperty(PropertyName = "max_query_terms")]
+		[JsonProperty("max_query_terms")]
 		int? MaxQueryTerms { get; set; }
 
-		[JsonProperty(PropertyName = "min_term_freq")]
+		[JsonProperty("min_term_freq")]
 		int? MinTermFrequency { get; set; }
 
-		[JsonProperty(PropertyName = "min_doc_freq")]
+		[JsonProperty("min_doc_freq")]
 		int? MinDocumentFrequency { get; set; }
 
-		[JsonProperty(PropertyName = "max_doc_freq")]
+		[JsonProperty("max_doc_freq")]
 		int? MaxDocumentFrequency { get; set; }
 
-		[JsonProperty(PropertyName = "min_word_len")]
+		[JsonProperty("min_word_len")]
 		int? MinWordLength { get; set; }
 
-		[JsonProperty(PropertyName = "max_word_len")]
+		[JsonProperty("max_word_len")]
 		int? MaxWordLength { get; set; }
 
-		[JsonProperty(PropertyName = "stop_words")]
+		[JsonProperty("stop_words")]
 		StopWords StopWords { get; set; }
 
-		[JsonProperty(PropertyName = "analyzer")]
+		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty(PropertyName = "minimum_should_match")]
+		[JsonProperty("minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
-		[JsonProperty(PropertyName = "boost_terms")]
+		[JsonProperty("boost_terms")]
 		double? BoostTerms { get; set; }
 
-		[JsonProperty(PropertyName = "include")]
+		[JsonProperty("include")]
 		bool? Include { get; set; }
 
 

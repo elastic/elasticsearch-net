@@ -9,10 +9,10 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<IdsQueryDescriptor>))]
 	public interface IIdsQuery : IQuery
 	{
-		[JsonProperty(PropertyName = "type")]
+		[JsonProperty("type")]
 		Types Types { get; set; }
 
-		[JsonProperty(PropertyName = "values")]
+		[JsonProperty("values")]
 		IEnumerable<Id> Values { get; set; }
 	}
 

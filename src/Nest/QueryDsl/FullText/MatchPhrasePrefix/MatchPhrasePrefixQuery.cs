@@ -7,16 +7,16 @@ namespace Nest
 	[JsonConverter(typeof(FieldNameQueryJsonConverter<MatchPhrasePrefixQuery>))]
 	public interface IMatchPhrasePrefixQuery : IFieldNameQuery
 	{
-		[JsonProperty(PropertyName = "query")]
+		[JsonProperty("query")]
 		string Query { get; set; }
 
-		[JsonProperty(PropertyName = "analyzer")]
+		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty(PropertyName = "max_expansions")]
+		[JsonProperty("max_expansions")]
 		int? MaxExpansions { get; set; }
 
-		[JsonProperty(PropertyName = "slop")]
+		[JsonProperty("slop")]
 		int? Slop { get; set; }
 	}
 

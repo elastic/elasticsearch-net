@@ -5,10 +5,10 @@ namespace Nest
 	[ContractJsonConverter(typeof(AnalyzerJsonConverter))]
 	public interface IAnalyzer
 	{
-		[JsonProperty(PropertyName = "version")]
+		[JsonProperty("version")]
 		string Version { get; set; }
 
-		[JsonProperty(PropertyName = "type")]
+		[JsonProperty("type")]
 		string Type { get; }
 	}
 

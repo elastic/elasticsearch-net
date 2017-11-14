@@ -5,52 +5,52 @@ namespace Nest
 	[JsonObject]
 	public class IndexStats
 	{
-		[JsonProperty(PropertyName = "docs")]
+		[JsonProperty("docs")]
 		public DocStats Documents { get; set; }
 
-		[JsonProperty(PropertyName = "store")]
+		[JsonProperty("store")]
 		public StoreStats Store { get; set; }
 
-		[JsonProperty(PropertyName = "indexing")]
+		[JsonProperty("indexing")]
 		public IndexingStats Indexing { get; set; }
 
-		[JsonProperty(PropertyName = "get")]
+		[JsonProperty("get")]
 		public GetStats Get { get; set; }
 
-		[JsonProperty(PropertyName = "search")]
+		[JsonProperty("search")]
 		public SearchStats Search { get; set; }
 
-		[JsonProperty(PropertyName = "merges")]
+		[JsonProperty("merges")]
 		public MergesStats Merges { get; set; }
 
-		[JsonProperty(PropertyName = "refresh")]
+		[JsonProperty("refresh")]
 		public RefreshStats Refresh { get; set; }
 
-		[JsonProperty(PropertyName = "flush")]
+		[JsonProperty("flush")]
 		public FlushStats Flush { get; set; }
 
-		[JsonProperty(PropertyName = "warmer")]
+		[JsonProperty("warmer")]
 		public WarmerStats Warmer { get; set; }
 
-		[JsonProperty(PropertyName = "query_cache")]
+		[JsonProperty("query_cache")]
 		public QueryCacheStats QueryCache { get; set; }
 
-		[JsonProperty(PropertyName = "fielddata")]
+		[JsonProperty("fielddata")]
 		public FielddataStats Fielddata { get; set; }
 
-		[JsonProperty(PropertyName = "completion")]
+		[JsonProperty("completion")]
 		public CompletionStats Completion { get; set; }
 
-		[JsonProperty(PropertyName = "segments")]
+		[JsonProperty("segments")]
 		public SegmentsStats Segments { get; set; }
 
-		[JsonProperty(PropertyName = "translog")]
+		[JsonProperty("translog")]
 		public TranslogStats Translog { get; set; }
 
-		[JsonProperty(PropertyName = "request_cache")]
+		[JsonProperty("request_cache")]
 		public RequestCacheStats RequestCache { get; set; }
 
-		[JsonProperty(PropertyName = "recovery")]
+		[JsonProperty("recovery")]
 		public RecoveryStats Recovery { get; set; }
 	}
 }

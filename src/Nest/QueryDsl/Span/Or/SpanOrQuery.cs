@@ -9,7 +9,7 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanOrQuery>))]
 	public interface ISpanOrQuery : ISpanSubQuery
 	{
-		[JsonProperty(PropertyName = "clauses")]
+		[JsonProperty("clauses")]
 		IEnumerable<ISpanQuery> Clauses { get; set; }
 	}
 
@@ -22,7 +22,7 @@ namespace Nest
 		internal static bool IsConditionless(ISpanOrQuery q) => !q.Clauses.HasAny() || q.Clauses.Cast<IQuery>().All(qq => qq.Conditionless);
 	}
 
-	public class SpanOrQueryDescriptor<T> 
+	public class SpanOrQueryDescriptor<T>
 		: QueryDescriptorBase<SpanOrQueryDescriptor<T>, ISpanOrQuery>
 		, ISpanOrQuery where T : class
 	{

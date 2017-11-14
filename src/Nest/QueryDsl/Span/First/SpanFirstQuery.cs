@@ -7,10 +7,10 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanFirstQueryDescriptor<object>>))]
 	public interface ISpanFirstQuery : ISpanSubQuery
 	{
-		[JsonProperty(PropertyName = "match")]
+		[JsonProperty("match")]
 		ISpanQuery Match { get; set; }
 
-		[JsonProperty(PropertyName = "end")]
+		[JsonProperty("end")]
 		int? End { get; set; }
 	}
 
@@ -24,11 +24,11 @@ namespace Nest
 		internal static bool IsConditionless(ISpanFirstQuery q) => q.Match == null || q.Match.Conditionless;
 	}
 
-	public class SpanFirstQueryDescriptor<T> 
+	public class SpanFirstQueryDescriptor<T>
 		: QueryDescriptorBase<SpanFirstQueryDescriptor<T>, ISpanFirstQuery>
 		, ISpanFirstQuery where T : class
 	{
-		protected override bool Conditionless => SpanFirstQuery.IsConditionless(this);	
+		protected override bool Conditionless => SpanFirstQuery.IsConditionless(this);
 		ISpanQuery ISpanFirstQuery.Match { get; set; }
 		int? ISpanFirstQuery.End { get; set; }
 

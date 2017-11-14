@@ -7,33 +7,33 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SimpleQueryStringQueryDescriptor<object>>))]
 	public interface ISimpleQueryStringQuery : IQuery
 	{
-		[JsonProperty(PropertyName = "fields")]
+		[JsonProperty("fields")]
 		Fields Fields { get; set; }
 
-		[JsonProperty(PropertyName = "query")]
+		[JsonProperty("query")]
 		string Query { get; set; }
 
-		[JsonProperty(PropertyName = "analyzer")]
+		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty(PropertyName = "default_operator")]
+		[JsonProperty("default_operator")]
 		Operator? DefaultOperator { get; set; }
 
-		[JsonProperty(PropertyName = "flags")]
+		[JsonProperty("flags")]
 		SimpleQueryStringFlags? Flags { get; set; }
 
-		[JsonProperty(PropertyName = "locale")]
+		[JsonProperty("locale")]
 		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
 		string Locale { get; set; }
 
-		[JsonProperty(PropertyName = "lowercase_expanded_terms")]
+		[JsonProperty("lowercase_expanded_terms")]
 		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
 		bool? LowercaseExpandedTerms { get; set; }
 
-		[JsonProperty(PropertyName = "lenient")]
+		[JsonProperty("lenient")]
 		bool? Lenient { get; set; }
 
-		[JsonProperty(PropertyName = "analyze_wildcard")]
+		[JsonProperty("analyze_wildcard")]
 		bool? AnalyzeWildcard { get; set; }
 
 		[JsonProperty("minimum_should_match")]

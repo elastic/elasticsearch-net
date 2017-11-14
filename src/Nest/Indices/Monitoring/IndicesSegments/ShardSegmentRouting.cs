@@ -5,13 +5,13 @@ namespace Nest
 	[JsonObject]
 	public class ShardSegmentRouting
 	{
-		[JsonProperty(PropertyName = "state")]
+		[JsonProperty("state")]
 		public string State { get; internal set; }
 
-		[JsonProperty(PropertyName = "primary")]
+		[JsonProperty("primary")]
 		public bool Primary { get; internal set; }
 
-		[JsonProperty(PropertyName = "node")]
+		[JsonProperty("node")]
 		public string Node { get; internal set; }
 	}
 }
