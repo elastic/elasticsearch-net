@@ -18,22 +18,22 @@ namespace Nest
 		[JsonProperty("size")]
 		int? Size { get; set; }
 
-		[JsonProperty(PropertyName = "sort")]
+		[JsonProperty("sort")]
 		IList<ISort> Sort { get; set; }
 
-		[JsonProperty(PropertyName = "highlight")]
+		[JsonProperty("highlight")]
 		IHighlight Highlight { get; set; }
 
-		[JsonProperty(PropertyName = "explain")]
+		[JsonProperty("explain")]
 		bool? Explain { get; set; }
 
-		[JsonProperty(PropertyName = "_source")]
+		[JsonProperty("_source")]
 		Union<bool, ISourceFilter> Source { get; set; }
 
-		[JsonProperty(PropertyName = "version")]
+		[JsonProperty("version")]
 		bool? Version { get; set; }
 
-		[JsonProperty(PropertyName = "script_fields")]
+		[JsonProperty("script_fields")]
 		IScriptFields ScriptFields { get; set; }
 	}
 

@@ -10,38 +10,38 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<DirectGenerator>))]
 	public interface IDirectGenerator
 	{
-		[JsonProperty(PropertyName = "field")]
+		[JsonProperty("field")]
 		Field Field { get; set; }
 
-		[JsonProperty(PropertyName = "size")]
+		[JsonProperty("size")]
 		int? Size { get; set; }
 
-		[JsonProperty(PropertyName = "prefix_length")]
+		[JsonProperty("prefix_length")]
 		int? PrefixLength { get; set; }
 
-		[JsonProperty(PropertyName = "suggest_mode")]
+		[JsonProperty("suggest_mode")]
 		[JsonConverter(typeof(StringEnumConverter))]
 		SuggestMode? SuggestMode { get; set; }
 
-		[JsonProperty(PropertyName = "min_word_length")]
+		[JsonProperty("min_word_length")]
 		int? MinWordLength { get; set; }
 
-		[JsonProperty(PropertyName = "max_edits")]
+		[JsonProperty("max_edits")]
 		int? MaxEdits { get; set; }
 
-		[JsonProperty(PropertyName = "max_inspections")]
+		[JsonProperty("max_inspections")]
 		decimal? MaxInspections { get; set; }
 
-		[JsonProperty(PropertyName = "min_doc_freq")]
+		[JsonProperty("min_doc_freq")]
 		decimal? MinDocFrequency { get; set; }
 
-		[JsonProperty(PropertyName = "max_term_freq")]
+		[JsonProperty("max_term_freq")]
 		decimal? MaxTermFrequency { get; set; }
 
-		[JsonProperty(PropertyName = "pre_filter")]
+		[JsonProperty("pre_filter")]
 		string PreFilter { get; set; }
 
-		[JsonProperty(PropertyName = "post_filter")]
+		[JsonProperty("post_filter")]
 		string PostFilter { get; set; }
 	}
 

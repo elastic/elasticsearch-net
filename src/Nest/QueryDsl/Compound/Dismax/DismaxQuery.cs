@@ -9,10 +9,10 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<DisMaxQuery>))]
 	public interface IDisMaxQuery : IQuery
 	{
-		[JsonProperty(PropertyName = "tie_breaker")]
+		[JsonProperty("tie_breaker")]
 		double? TieBreaker { get; set; }
 
-		[JsonProperty(PropertyName = "queries")]
+		[JsonProperty("queries")]
 		IEnumerable<QueryContainer> Queries { get; set; }
 	}
 

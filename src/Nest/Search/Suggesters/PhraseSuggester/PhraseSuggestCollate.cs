@@ -8,10 +8,10 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<PhraseSuggestCollate>))]
 	public interface IPhraseSuggestCollate
 	{
-		[JsonProperty(PropertyName = "query")]
+		[JsonProperty("query")]
 		ITemplateQuery Query { get; set; }
 
-		[JsonProperty(PropertyName = "prune")]
+		[JsonProperty("prune")]
 		bool? Prune { get; set; }
 	}
 

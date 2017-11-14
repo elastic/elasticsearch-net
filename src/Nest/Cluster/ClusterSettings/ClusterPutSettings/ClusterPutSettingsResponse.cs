@@ -5,13 +5,13 @@ namespace Nest
 {
 	public interface IClusterPutSettingsResponse : IResponse
 	{
-		[JsonProperty(PropertyName = "acknowledged")]
+		[JsonProperty("acknowledged")]
 		bool Acknowledged { get; }
 
-		[JsonProperty(PropertyName = "persistent")]
+		[JsonProperty("persistent")]
 		IReadOnlyDictionary<string, object> Persistent { get; }
 
-		[JsonProperty(PropertyName = "transient")]
+		[JsonProperty("transient")]
 		IReadOnlyDictionary<string, object> Transient { get; }
 	}
 

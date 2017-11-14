@@ -12,7 +12,7 @@ namespace Nest
         /// <summary>
         /// Null if Percolation was not requested while indexing this doc, otherwise returns the percolator _ids that matched (if any)
         /// </summary>
-        [JsonProperty(PropertyName = "matches")]
+        [JsonProperty("matches")]
         public IEnumerable<string> Matches { get; internal set; }
 	}
 }

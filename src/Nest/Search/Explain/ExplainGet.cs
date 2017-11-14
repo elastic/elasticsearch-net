@@ -6,13 +6,13 @@ namespace Nest
 	[JsonObject]
 	public class InstantGet<T> where T : class
 	{
-		[JsonProperty(PropertyName = "found")]
+		[JsonProperty("found")]
 		public bool Found { get; internal set; }
 
-		[JsonProperty(PropertyName = "_source")]
+		[JsonProperty("_source")]
 		public T Source { get; internal set; }
 
-		[JsonProperty(PropertyName = "fields")]
+		[JsonProperty("fields")]
 		public FieldValues Fields { get; internal set; }
 
 	}

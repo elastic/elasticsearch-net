@@ -9,7 +9,7 @@ namespace Nest
 		/// <summary>
 		///  A dictionary of nodeId => nodeinfo of nodes that verified the repository
 		/// </summary>
-		[JsonProperty(PropertyName = "nodes")]
+		[JsonProperty("nodes")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, CompactNodeInfo>))]
 		IReadOnlyDictionary<string, CompactNodeInfo> Nodes { get; }
 	}

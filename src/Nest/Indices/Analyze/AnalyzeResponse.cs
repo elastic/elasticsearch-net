@@ -11,7 +11,7 @@ namespace Nest
 	[JsonObject]
 	public class AnalyzeResponse : ResponseBase, IAnalyzeResponse
 	{
-		[JsonProperty(PropertyName = "tokens")]
+		[JsonProperty("tokens")]
 		public IReadOnlyCollection<AnalyzeToken> Tokens { get; internal set; } = EmptyReadOnly<AnalyzeToken>.Collection;
 	}
 }

@@ -4,17 +4,17 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public partial interface IClusterPutSettingsRequest 
+	public partial interface IClusterPutSettingsRequest
 	{
-		[JsonProperty(PropertyName = "persistent")]
+		[JsonProperty("persistent")]
 		IDictionary<string, object> Persistent { get; set; }
 
-		[JsonProperty(PropertyName = "transient")]
+		[JsonProperty("transient")]
 		IDictionary<string, object> Transient { get; set; }
 
 	}
-	
-	public partial class ClusterPutSettingsRequest 
+
+	public partial class ClusterPutSettingsRequest
 	{
 		public IDictionary<string, object> Persistent { get; set; }
 
@@ -22,7 +22,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("ClusterPutSettings")]
-	public partial class ClusterPutSettingsDescriptor 
+	public partial class ClusterPutSettingsDescriptor
 	{
 		IDictionary<string, object> IClusterPutSettingsRequest.Persistent { get; set; }
 

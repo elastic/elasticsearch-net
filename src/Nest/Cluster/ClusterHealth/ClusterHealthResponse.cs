@@ -22,31 +22,31 @@ namespace Nest
 	[JsonObject]
 	public class ClusterHealthResponse : ResponseBase, IClusterHealthResponse
 	{
-		[JsonProperty(PropertyName = "cluster_name")]
+		[JsonProperty("cluster_name")]
 		public string ClusterName { get; internal set; }
-		[JsonProperty(PropertyName = "status")]
+		[JsonProperty("status")]
 		public string Status { get; internal set; }
-		[JsonProperty(PropertyName = "timed_out")]
+		[JsonProperty("timed_out")]
 		public bool TimedOut { get; internal set; }
 
-		[JsonProperty(PropertyName = "number_of_nodes")]
+		[JsonProperty("number_of_nodes")]
 		public int NumberOfNodes { get; internal set; }
-		[JsonProperty(PropertyName = "number_of_data_nodes")]
+		[JsonProperty("number_of_data_nodes")]
 		public int NumberOfDataNodes { get; internal set; }
 
-		[JsonProperty(PropertyName = "active_primary_shards")]
+		[JsonProperty("active_primary_shards")]
 		public int ActivePrimaryShards { get; internal set; }
-		[JsonProperty(PropertyName = "active_shards")]
+		[JsonProperty("active_shards")]
 		public int ActiveShards { get; internal set; }
-		[JsonProperty(PropertyName = "relocating_shards")]
+		[JsonProperty("relocating_shards")]
 		public int RelocatingShards { get; internal set; }
-		[JsonProperty(PropertyName = "initializing_shards")]
+		[JsonProperty("initializing_shards")]
 		public int InitializingShards { get; internal set; }
-		[JsonProperty(PropertyName = "unassigned_shards")]
+		[JsonProperty("unassigned_shards")]
 		public int UnassignedShards { get; internal set; }
 		[JsonProperty(PropertyName="number_of_pending_tasks")]
 		public int NumberOfPendingTasks { get; internal set; }
-		[JsonProperty(PropertyName = "indices")]
+		[JsonProperty("indices")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndexHealthStats>))]
 		public IReadOnlyDictionary<string, IndexHealthStats> Indices { get; internal set; } = EmptyReadOnly<string, IndexHealthStats>.Dictionary;
 	}

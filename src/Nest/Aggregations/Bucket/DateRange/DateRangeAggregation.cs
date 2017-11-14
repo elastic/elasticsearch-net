@@ -16,10 +16,10 @@ namespace Nest
 		[JsonProperty("format")]
 		string Format { get; set; }
 
-		[JsonProperty(PropertyName = "ranges")]
+		[JsonProperty("ranges")]
 		IEnumerable<IDateRangeExpression> Ranges { get; set; }
 
-		[JsonProperty(PropertyName = "time_zone")]
+		[JsonProperty("time_zone")]
 		string TimeZone { get; set; }
 	}
 

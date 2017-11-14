@@ -5,16 +5,16 @@ namespace Nest
 	public interface IIndicesResponse : IResponse
 	{
 		bool Acknowledged { get; }
-		ShardsMetaData ShardsHit { get; }
+		ShardsMetadata ShardsHit { get; }
 	}
 
 	[JsonObject]
 	public abstract class IndicesResponseBase : ResponseBase, IIndicesResponse
 	{
-		[JsonProperty(PropertyName = "acknowledged")]
+		[JsonProperty("acknowledged")]
 		public bool Acknowledged { get; private set; }
 
-		[JsonProperty(PropertyName = "_shards")]
-		public ShardsMetaData ShardsHit { get; private set; }
+		[JsonProperty("_shards")]
+		public ShardsMetadata ShardsHit { get; private set; }
 	}
 }

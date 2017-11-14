@@ -5,9 +5,9 @@ namespace Nest
 	[JsonObject]
 	public class IndicesStats
 	{
-		[JsonProperty(PropertyName = "primaries")]
+		[JsonProperty("primaries")]
 		public IndexStats Primaries { get; set; }
-		[JsonProperty(PropertyName = "total")]
+		[JsonProperty("total")]
 		public IndexStats Total { get; set; }
 	}
 }

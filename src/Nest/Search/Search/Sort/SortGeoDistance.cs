@@ -10,10 +10,10 @@ namespace Nest
 		Field Field { get; set; }
 		IEnumerable<GeoLocation> Points { get; set; }
 
-		[JsonProperty(PropertyName = "unit")]
+		[JsonProperty("unit")]
 		DistanceUnit? GeoUnit { get; set; }
 
-		[JsonProperty(PropertyName = "distance_type")]
+		[JsonProperty("distance_type")]
 		GeoDistanceType? DistanceType { get; set; }
 	}
 
@@ -27,7 +27,7 @@ namespace Nest
 
 	}
 
-	public class SortGeoDistanceDescriptor<T> : SortDescriptorBase<SortGeoDistanceDescriptor<T>, IGeoDistanceSort, T>, IGeoDistanceSort 
+	public class SortGeoDistanceDescriptor<T> : SortDescriptorBase<SortGeoDistanceDescriptor<T>, IGeoDistanceSort, T>, IGeoDistanceSort
 		where T : class
 	{
 

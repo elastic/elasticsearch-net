@@ -5,7 +5,7 @@ namespace Nest
 	[JsonObject]
 	public class CompactNodeInfo
 	{
-		[JsonProperty(PropertyName = "name")]
+		[JsonProperty("name")]
 		public string Name { get; internal set; }
 	}
 }

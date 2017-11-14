@@ -4,15 +4,15 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<IpRange>))]
-	public interface IIpRange 
+	public interface IIpRange
 	{
-		[JsonProperty(PropertyName = "from")]
+		[JsonProperty("from")]
 		string From { get; set; }
 
-		[JsonProperty(PropertyName = "to")]
+		[JsonProperty("to")]
 		string To { get; set; }
 
-		[JsonProperty(PropertyName = "mask")]
+		[JsonProperty("mask")]
 		string Mask { get; set; }
 	}
 

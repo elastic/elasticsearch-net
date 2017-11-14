@@ -12,7 +12,7 @@ namespace Nest
 		[JsonProperty("flags")]
 		string Flags { get; set; }
 
-		[JsonProperty(PropertyName = "max_determinized_states")]
+		[JsonProperty("max_determinized_states")]
 		int? MaximumDeterminizedStates { get; set; }
 	}
 
@@ -27,7 +27,7 @@ namespace Nest
 		internal static bool IsConditionless(IRegexpQuery q) => q.Field.IsConditionless() || q.Value.IsNullOrEmpty();
 	}
 
-	public class RegexpQueryDescriptor<T> 
+	public class RegexpQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<RegexpQueryDescriptor<T>, IRegexpQuery, T>
 		, IRegexpQuery where T : class
 	{
