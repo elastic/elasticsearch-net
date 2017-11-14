@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(FieldNameQueryJsonConverter<MatchQuery>))]
 	public interface IMatchQuery : IFieldNameQuery
 	{
@@ -57,7 +56,6 @@ namespace Nest
 		internal static bool IsConditionless(IMatchQuery q) => q.Field.IsConditionless() || q.Query.IsNullOrEmpty();
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class MatchQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<MatchQueryDescriptor<T>, IMatchQuery, T>
 		, IMatchQuery where T : class

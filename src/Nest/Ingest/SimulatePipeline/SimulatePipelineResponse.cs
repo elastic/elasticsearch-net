@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface ISimulatePipelineResponse : IResponse
 	{
 		[JsonProperty("docs")]
@@ -19,7 +18,6 @@ namespace Nest
 		public IReadOnlyCollection<PipelineSimulation> Documents { get; internal set; } = EmptyReadOnly<PipelineSimulation>.Collection;
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	public class PipelineSimulation
 	{
 		[JsonProperty("processor_results")]
@@ -32,7 +30,6 @@ namespace Nest
 		public DocumentSimulation Document { get; internal set; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	public class DocumentSimulation
 	{
 		[JsonProperty("_index")]
@@ -57,7 +54,6 @@ namespace Nest
 		public Ingest Ingest { get; internal set; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	public class Ingest
 	{
 		[JsonProperty("timestamp")]

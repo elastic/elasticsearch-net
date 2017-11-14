@@ -13,7 +13,6 @@ namespace Nest
 		Multiplicative
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IHoltWintersModel : IMovingAverageModel
 	{
 		[JsonProperty("alpha")]
@@ -30,7 +29,7 @@ namespace Nest
 
 		[JsonProperty("type")]
 		HoltWintersType? Type { get; set; }
-		
+
 		[JsonProperty("pad")]
 		bool? Pad { get; set; }
 	}

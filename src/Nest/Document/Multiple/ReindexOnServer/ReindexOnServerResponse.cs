@@ -48,7 +48,6 @@ namespace Nest
 		IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	public class ReindexOnServerResponse : ResponseBase, IReindexOnServerResponse
 	{
 		public override bool IsValid => base.IsValid && !this.Failures.HasAny();

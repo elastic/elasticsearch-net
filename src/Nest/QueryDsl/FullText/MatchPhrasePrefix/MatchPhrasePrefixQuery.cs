@@ -3,7 +3,6 @@ using System;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(FieldNameQueryJsonConverter<MatchPhrasePrefixQuery>))]
 	public interface IMatchPhrasePrefixQuery : IFieldNameQuery
 	{

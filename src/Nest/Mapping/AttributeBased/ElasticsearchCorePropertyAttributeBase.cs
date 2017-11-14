@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[AttributeUsage(AttributeTargets.Property)]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public abstract class ElasticsearchCorePropertyAttributeBase : ElasticsearchPropertyAttributeBase, ICoreProperty
 	{
 		protected ElasticsearchCorePropertyAttributeBase(FieldType type) : base(type) { }

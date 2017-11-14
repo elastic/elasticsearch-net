@@ -5,7 +5,6 @@ namespace Nest
 	/// <summary>
 	/// An item within a bulk response
 	/// </summary>
-	[JsonObject]
 	[JsonConverter(typeof(BulkResponseItemJsonConverter))]
 	public interface IBulkResponseItem
 	{

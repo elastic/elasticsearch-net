@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IHDRHistogramMethod : IPercentilesMethod
 	{
 		[JsonProperty("number_of_significant_value_digits")]

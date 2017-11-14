@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface IRolloverIndexResponse : IAcknowledgedResponse
 	{
 		[JsonProperty("old_index")]

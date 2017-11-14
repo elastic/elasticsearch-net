@@ -38,7 +38,6 @@ namespace Nest
         }
     }
 
-    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class TermRangeQueryDescriptor<T>
         : FieldNameQueryDescriptorBase<TermRangeQueryDescriptor<T>, ITermRangeQuery, T>
         , ITermRangeQuery where T : class

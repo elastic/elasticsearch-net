@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface ILongRangeProperty : IRangeProperty { }
 
 	public class LongRangeProperty : RangePropertyBase, ILongRangeProperty

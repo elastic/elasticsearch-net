@@ -4,13 +4,12 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<ScriptedMetricAggregation>))]
 	public interface IScriptedMetricAggregation : IMetricAggregation
 	{
 		[JsonProperty("init_script")]
 		IScript InitScript { get; set; }
-		
+
 		[JsonProperty("map_script")]
 		IScript MapScript { get; set; }
 
@@ -50,19 +49,19 @@ namespace Nest
 		IDictionary<string, object> IScriptedMetricAggregation.Params { get; set; }
 
 		public ScriptedMetricAggregationDescriptor<T> InitScript(string script) => Assign(a => a.InitScript = (InlineScript)script);
-		public ScriptedMetricAggregationDescriptor<T> InitScript(Func<ScriptDescriptor, IScript> scriptSelector) => 
+		public ScriptedMetricAggregationDescriptor<T> InitScript(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(a => a.InitScript = scriptSelector?.Invoke(new ScriptDescriptor()));
 
 		public ScriptedMetricAggregationDescriptor<T> MapScript(string script) => Assign(a => a.MapScript = (InlineScript)script);
-		public ScriptedMetricAggregationDescriptor<T> MapScript(Func<ScriptDescriptor, IScript> scriptSelector) => 
+		public ScriptedMetricAggregationDescriptor<T> MapScript(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(a => a.MapScript = scriptSelector?.Invoke(new ScriptDescriptor()));
 
 		public ScriptedMetricAggregationDescriptor<T> CombineScript(string script) => Assign(a => a.CombineScript = (InlineScript)script);
-		public ScriptedMetricAggregationDescriptor<T> CombineScript(Func<ScriptDescriptor, IScript> scriptSelector) => 
+		public ScriptedMetricAggregationDescriptor<T> CombineScript(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(a => a.CombineScript = scriptSelector?.Invoke(new ScriptDescriptor()));
 
 		public ScriptedMetricAggregationDescriptor<T> ReduceScript(string script) => Assign(a => a.ReduceScript = (InlineScript)script);
-		public ScriptedMetricAggregationDescriptor<T> ReduceScript(Func<ScriptDescriptor, IScript> scriptSelector) => 
+		public ScriptedMetricAggregationDescriptor<T> ReduceScript(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(a => a.ReduceScript = scriptSelector?.Invoke(new ScriptDescriptor()));
 
 		public ScriptedMetricAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>

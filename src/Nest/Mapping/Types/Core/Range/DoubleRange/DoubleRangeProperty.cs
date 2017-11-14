@@ -7,7 +7,6 @@ namespace Nest
 	/// <summary>
 	/// A range of double-precision 64-bit IEEE 754 floating point values.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface IDoubleRangeProperty : IRangeProperty { }
 
 	/// <inheritdoc/>

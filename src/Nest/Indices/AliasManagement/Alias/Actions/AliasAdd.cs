@@ -3,8 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+
 	public interface IAliasAddAction : IAliasAction
 	{
 		[JsonProperty("add")]

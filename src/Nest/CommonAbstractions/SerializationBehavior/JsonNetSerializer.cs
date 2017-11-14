@@ -28,7 +28,6 @@ namespace Nest
 		/// </summary>
 		private ElasticContractResolver ContractResolver { get; }
 
-
 		/// <summary>
 		/// The size of the buffer to use when writing the serialized request
 		/// to the request stream
@@ -84,7 +83,6 @@ namespace Nest
 				var t = this._defaultSerializer.Deserialize(jsonTextReader, type);
 				return t;
 			}
-
 		}
 
 		public virtual Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
@@ -108,11 +106,11 @@ namespace Nest
 				Formatting = formatting == SerializationFormatting.Indented ? Formatting.Indented : Formatting.None,
 				ContractResolver = this.ContractResolver,
 				DefaultValueHandling = DefaultValueHandling.Include,
-				NullValueHandling = NullValueHandling.Ignore
+				NullValueHandling = NullValueHandling.Ignore,
+
 			};
 
-			var contract = settings.ContractResolver as ElasticContractResolver;
-			if (contract == null)
+			if (!(settings.ContractResolver is ElasticContractResolver))
 				throw new Exception($"NEST needs an instance of {nameof(ElasticContractResolver)} registered on Json.NET's JsonSerializerSettings");
 
 			return settings;

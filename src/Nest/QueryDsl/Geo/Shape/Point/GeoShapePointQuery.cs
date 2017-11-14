@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoShapePointQuery : IGeoShapeQuery
 	{
 		[JsonProperty("shape")]

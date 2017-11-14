@@ -5,7 +5,6 @@ using System.Linq;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<PercentilesBucketAggregation>))]
 	public interface IPercentilesBucketAggregation : IPipelineAggregation
 	{

@@ -5,7 +5,6 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IBulkOperation
 	{
 		string Operation { get; }

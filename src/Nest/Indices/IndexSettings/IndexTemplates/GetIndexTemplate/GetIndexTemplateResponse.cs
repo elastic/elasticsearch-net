@@ -8,7 +8,6 @@ namespace Nest
 		IReadOnlyDictionary<string, TemplateMapping> TemplateMappings { get; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetIndexTemplateResponse, string, TemplateMapping>))]
 	public class GetIndexTemplateResponse : DictionaryResponseBase<string, TemplateMapping>, IGetIndexTemplateResponse
 	{

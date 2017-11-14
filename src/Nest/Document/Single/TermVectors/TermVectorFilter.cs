@@ -8,7 +8,6 @@ namespace Nest
 	/// Filter terms returned based on their TF-IDF scores.
 	/// This can be useful in order find out a good characteristic vector of a document.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface ITermVectorFilter
 	{
 		/// <summary>

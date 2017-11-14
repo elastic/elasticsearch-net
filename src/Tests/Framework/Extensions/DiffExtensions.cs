@@ -24,8 +24,21 @@ namespace Tests.Framework
 			foreach (var prop in props.OrderBy(p => p.Name))
 			{
 				jObj.Add(prop);
-				var o = prop.Value as JObject;
-				o?.DeepSort();
+				if (prop.Value is JObject o) o.DeepSort();
+				if (prop.Value is JArray a) a.DeepSort();
+			}
+		}
+		public static void DeepSort(this JArray jArray)
+		{
+			var tokens = jArray.ToList();
+			foreach (var token in tokens)
+			{
+				token.Remove();
+			}
+			foreach (var token in tokens)
+			{
+				jArray.Add(token);
+				if (token is JObject o) o.DeepSort();
 			}
 		}
 
@@ -77,8 +90,7 @@ namespace Tests.Framework
 			approx = Regex.Replace(approx, @"^\s*\],?.*$", s => s.Value.Replace("]", "}"), RegexOptions.Multiline);
 			diff += approx + ";";
 
-
-			throw new Exception(diff.Substring(0, diff.Length > 4896 ? 4896 : diff.Length));
+			throw new Exception(diff.Substring(0, diff.Length > 10_000 ? 10_000 : diff.Length));
 		}
 
 	}

@@ -5,7 +5,6 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<TermSuggester>))]
 	public interface ITermSuggester : ISuggester
 	{

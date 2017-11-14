@@ -9,7 +9,6 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<RenameProcessor>))]
 	public interface IRenameProcessor : IProcessor
 	{

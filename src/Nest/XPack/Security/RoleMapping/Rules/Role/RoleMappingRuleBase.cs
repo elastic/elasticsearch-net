@@ -5,20 +5,34 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(RoleMappingRuleBaseJsonConverter))]
-	public abstract class RoleMappingRuleBase
+	public interface IRoleMappingRule
 	{
 		[JsonProperty("any")]
-		protected internal IEnumerable<RoleMappingRuleBase> AnyRules { get; set; }
+		IEnumerable<RoleMappingRuleBase> AnyRules { get; set; }
 
 		[JsonProperty("all")]
-		protected internal IEnumerable<RoleMappingRuleBase> AllRules { get; set; }
+		IEnumerable<RoleMappingRuleBase> AllRules { get; set; }
 
 		[JsonProperty("field")]
-		protected FieldRuleBase FieldRule { get; set; }
+		FieldRuleBase FieldRule { get; set; }
 
 		[JsonProperty("except")]
-		protected RoleMappingRuleBase ExceptRule { get; set; }
+		RoleMappingRuleBase ExceptRule { get; set; }
+	}
+
+
+	[JsonConverter(typeof(RoleMappingRuleBaseJsonConverter))]
+	public abstract class RoleMappingRuleBase : IRoleMappingRule
+	{
+		internal IRoleMappingRule Self => this;
+
+		IEnumerable<RoleMappingRuleBase> IRoleMappingRule.AnyRules { get; set; }
+
+		IEnumerable<RoleMappingRuleBase> IRoleMappingRule.AllRules { get; set; }
+
+		FieldRuleBase IRoleMappingRule.FieldRule { get; set; }
+
+		RoleMappingRuleBase IRoleMappingRule.ExceptRule { get; set; }
 
 		public static AnyRoleMappingRule operator |(RoleMappingRuleBase leftContainer, RoleMappingRuleBase rightContainer) =>
 			CombineAny(leftContainer, rightContainer);
@@ -48,17 +62,11 @@ namespace Nest
 			return new AllRoleMappingRule(l);
 		}
 
-		public static IEnumerable<RoleMappingRuleBase> AllOrSelf(RoleMappingRuleBase rule)
-		{
-			var all = rule as AllRoleMappingRule;
-			return all != null ? all.AllRules : new[] {rule};
-		}
+		public static IEnumerable<RoleMappingRuleBase> AllOrSelf(RoleMappingRuleBase rule) =>
+			rule is AllRoleMappingRule all ? all.Self.AllRules : new[] {rule};
 
-		public static IEnumerable<RoleMappingRuleBase> AnyOrSelf(RoleMappingRuleBase rule)
-		{
-			var all = rule as AnyRoleMappingRule;
-			return all != null ? all.AnyRules : new[] {rule};
-		}
+		public static IEnumerable<RoleMappingRuleBase> AnyOrSelf(RoleMappingRuleBase rule) =>
+			rule is AnyRoleMappingRule all ? all.Self.AnyRules : new[] {rule};
 
 		public static implicit operator RoleMappingRuleBase(UsernameRule rule) => new FieldRoleMappingRule(rule);
 		public static implicit operator RoleMappingRuleBase(DistinguishedNameRule rule) => new FieldRoleMappingRule(rule);

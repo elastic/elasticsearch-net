@@ -6,7 +6,6 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface IExecuteWatchResponse : IResponse
 	{
 		[JsonProperty("_id")]

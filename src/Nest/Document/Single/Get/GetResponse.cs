@@ -46,7 +46,6 @@ namespace Nest
 		long? Ttl { get; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	public class GetResponse<TDocument> : ResponseBase, IGetResponse<TDocument> where TDocument : class
 	{
 		public string Index { get; internal set; }

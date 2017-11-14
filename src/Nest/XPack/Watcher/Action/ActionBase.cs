@@ -7,7 +7,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface IAction
 	{
 		[JsonIgnore]

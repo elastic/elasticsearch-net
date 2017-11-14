@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ISimpleModel : IMovingAverageModel { }
 
 	public class SimpleModel : ISimpleModel

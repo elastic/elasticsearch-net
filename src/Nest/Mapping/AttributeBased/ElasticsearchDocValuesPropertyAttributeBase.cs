@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[AttributeUsage(AttributeTargets.Property)]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public abstract class ElasticsearchDocValuesPropertyAttributeBase : ElasticsearchCorePropertyAttributeBase, IDocValuesProperty
 	{
 		private IDocValuesProperty Self => this;

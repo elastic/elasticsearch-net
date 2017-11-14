@@ -15,16 +15,16 @@ namespace Nest
 		IEnumerable<string> Types { get; set; }
 	}
 	/// <inheritdoc/>
-	public class KeepTypesTokenFilter : TokenFilterBase
+	public class KeepTypesTokenFilter : TokenFilterBase, IKeepTypesTokenFilter
 	{
 		public KeepTypesTokenFilter() : base("keep_types") { }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IEnumerable<string> Types { get; set; }
 
 	}
 	///<inheritdoc/>
-	public class KeepTypesTokenFilterDescriptor 
+	public class KeepTypesTokenFilterDescriptor
 		: TokenFilterDescriptorBase<KeepTypesTokenFilterDescriptor, IKeepTypesTokenFilter>, IKeepTypesTokenFilter
 	{
 		protected override string Type => "keep_types";

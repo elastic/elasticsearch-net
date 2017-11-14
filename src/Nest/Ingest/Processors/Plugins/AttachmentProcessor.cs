@@ -13,7 +13,6 @@ namespace Nest
 	/// <remarks>
 	/// Requires the Ingest Attachment Processor Plugin to be installed on the cluster.
 	/// </remarks>
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<AttachmentProcessor>))]
 	public interface IAttachmentProcessor : IProcessor
 	{

@@ -6,7 +6,6 @@ namespace Nest
 	/// <summary>
 	/// Convenience class for use when indexing completion fields.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
 	public class CompletionField
 	{
 		[JsonProperty("input")]

@@ -11,7 +11,6 @@ namespace Nest
 	/// based index based on a date or timestamp field in a document
 	/// by using the date math index name support.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<DateIndexNameProcessor>))]
 	public interface IDateIndexNameProcessor : IProcessor
 	{
@@ -36,7 +35,7 @@ namespace Nest
 		/// <summary>
 		/// An array of the expected date formats for parsing
 		/// dates / timestamps in the document being preprocessed.
-		/// Default is yyyy-MM-dd’T'HH:mm:ss.SSSZ
+		/// Default is yyyy-MM-ddï¿½T'HH:mm:ss.SSSZ
 		/// </summary>
 		[JsonProperty("date_formats")]
 		IEnumerable<string> DateFormats { get; set; }
@@ -87,7 +86,7 @@ namespace Nest
 		/// <summary>
 		/// An array of the expected date formats for parsing
 		/// dates / timestamps in the document being preprocessed.
-		/// Default is yyyy-MM-dd’T'HH:mm:ss.SSSZ
+		/// Default is yyyy-MM-ddï¿½T'HH:mm:ss.SSSZ
 		/// </summary>
 		public IEnumerable<string> DateFormats { get; set; }
 
@@ -152,7 +151,7 @@ namespace Nest
 		/// <summary>
 		/// An array of the expected date formats for parsing
 		/// dates / timestamps in the document being preprocessed.
-		/// Default is yyyy-MM-dd’T'HH:mm:ss.SSSZ
+		/// Default is yyyy-MM-ddï¿½T'HH:mm:ss.SSSZ
 		/// </summary>
 		public DateIndexNameProcessorDescriptor<T> DateFormats(IEnumerable<string> dateFormats) =>
 			Assign(a => a.DateFormats = dateFormats);
@@ -160,7 +159,7 @@ namespace Nest
 		/// <summary>
 		/// An array of the expected date formats for parsing
 		/// dates / timestamps in the document being preprocessed.
-		/// Default is yyyy-MM-dd’T'HH:mm:ss.SSSZ
+		/// Default is yyyy-MM-ddï¿½T'HH:mm:ss.SSSZ
 		/// </summary>
 		public DateIndexNameProcessorDescriptor<T> DateFormats(params string[] dateFormats) =>
 			Assign(a => a.DateFormats = dateFormats);

@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<ExistsQuery>))]
 	public interface IExistsQuery : IQuery
 	{
@@ -21,7 +20,7 @@ namespace Nest
 		internal static bool IsConditionless(IExistsQuery q) => q.Field.IsConditionless();
 	}
 
-	public class ExistsQueryDescriptor<T> 
+	public class ExistsQueryDescriptor<T>
 		: QueryDescriptorBase<ExistsQueryDescriptor<T>, IExistsQuery>
 		, IExistsQuery where T : class
 	{

@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[AttributeUsage(AttributeTargets.Property)]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public abstract class ElasticsearchPropertyAttributeBase : Attribute, IProperty, IPropertyMapping
 	{
 		private IProperty Self => this;

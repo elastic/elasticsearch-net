@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(FieldNameQueryJsonConverter<SpanTermQuery>))]
 	public interface ISpanTermQuery : ITermQuery, ISpanSubQuery
 	{
@@ -16,7 +15,6 @@ namespace Nest
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.SpanTerm = this;
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SpanTermQueryDescriptor<T> : TermQueryDescriptorBase<SpanTermQueryDescriptor<T>, ISpanTermQuery, T>, ISpanTermQuery
 		where T : class
 	{

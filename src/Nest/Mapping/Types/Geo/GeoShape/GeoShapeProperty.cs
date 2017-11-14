@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface IGeoShapeProperty : IDocValuesProperty
 	{
 		[JsonProperty("tree")]

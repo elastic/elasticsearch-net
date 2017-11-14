@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface ICancelTasksResponse: IResponse
 	{
 		[JsonProperty("nodes")]

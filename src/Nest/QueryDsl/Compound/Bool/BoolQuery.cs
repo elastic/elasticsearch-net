@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<BoolQuery>))]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IBoolQuery : IQuery
 	{
 		/// <summary>

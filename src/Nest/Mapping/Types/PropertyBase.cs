@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(PropertyJsonConverter))]
 	public interface IProperty : IFieldMapping
 	{

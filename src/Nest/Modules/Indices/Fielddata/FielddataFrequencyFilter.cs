@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<FielddataFrequencyFilter>))]
 	public interface IFielddataFrequencyFilter
 	{

@@ -58,7 +58,6 @@ namespace Nest
 		public IScriptFields ScriptFields { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class InnerHitsDescriptor<T> : DescriptorBase<InnerHitsDescriptor<T>, IInnerHits>, IInnerHits where T : class
 	{
 		string IInnerHits.Name { get; set; }

@@ -45,12 +45,10 @@ namespace Tests.Reproduce
 				}]
 			}";
 
-			var bytes = Encoding.UTF8.GetBytes(nestedCausedByError);
-			var connection = new InMemoryConnection(bytes);
-			var settings = new ConnectionSettings(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), connection);
-			var client = new ElasticClient(settings);
+			var client = TestClient.GetFixedReturnClient(nestedCausedByError, 200);
 
-			var bulkResponse = client.Bulk(new BulkDescriptor());
+			var bulkResponse = client.Bulk(s => s);
+			bulkResponse.Took.Should().Be(4);
 
 			bulkResponse.Errors.Should().BeTrue();
 

@@ -7,7 +7,6 @@ namespace Nest
 {
 
 	[JsonConverter(typeof(ScriptQueryConverter))]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IScriptQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "source")]

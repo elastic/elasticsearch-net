@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof (FieldNameQueryJsonConverter<WildcardQuery>))]
 	public interface IWildcardQuery : ITermQuery
 	{

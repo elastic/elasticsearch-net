@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface ISearchShardsResponse : IResponse
 	{
 		[JsonProperty("shards")]
@@ -20,7 +19,6 @@ namespace Nest
 		public IReadOnlyDictionary<string, SearchNode> Nodes { get; internal set; } = EmptyReadOnly<string, SearchNode>.Dictionary;
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	public class SearchNode
 	{
 		[JsonProperty("name")]
@@ -30,7 +28,6 @@ namespace Nest
 		public string TransportAddress { get; internal set; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	public class SearchShard
 	{
 		[JsonProperty("state")]

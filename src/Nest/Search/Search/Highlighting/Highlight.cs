@@ -8,7 +8,6 @@ namespace Nest
 	//TODO 6.0 completely revisit how we mapped highlighters
 	//this is used in tophits/percolator AND in search highligher as the root
 	//Not all of these properties might make sense/valid there
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<Highlight>))]
 	public interface IHighlight
 	{

@@ -6,7 +6,9 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<HttpInputProxy>))]
 	public interface IHttpInputProxy
 	{
+		[JsonProperty("host")]
 		string Host { get; set; }
+		[JsonProperty("port")]
 		int? Port { get; set; }
 	}
 

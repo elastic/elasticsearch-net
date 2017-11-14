@@ -5,7 +5,9 @@ namespace Nest
 	[JsonConverter(typeof(KeyValueJsonConverter<TermsOrder, SortOrder>))]
 	public class TermsOrder
 	{
+		[JsonProperty("key")]
 		public string Key { get; set; }
+		[JsonProperty("value")]
 		public SortOrder Order { get; set; }
 
 		public static TermsOrder CountAscending => new TermsOrder { Key = "_count", Order = SortOrder.Ascending };

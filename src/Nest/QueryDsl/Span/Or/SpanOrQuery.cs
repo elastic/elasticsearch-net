@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanOrQuery>))]
 	public interface ISpanOrQuery : ISpanSubQuery
 	{
@@ -22,7 +21,7 @@ namespace Nest
 		internal static bool IsConditionless(ISpanOrQuery q) => !q.Clauses.HasAny() || q.Clauses.Cast<IQuery>().All(qq => qq.Conditionless);
 	}
 
-	public class SpanOrQueryDescriptor<T> 
+	public class SpanOrQueryDescriptor<T>
 		: QueryDescriptorBase<SpanOrQueryDescriptor<T>, ISpanOrQuery>
 		, ISpanOrQuery where T : class
 	{

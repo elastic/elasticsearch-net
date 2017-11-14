@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<FuzzySuggester>))]
 	public interface IFuzzySuggester
 	{
@@ -31,7 +30,7 @@ namespace Nest
 		public bool? UnicodeAware { get; set; }
 	}
 
-	public class FuzzySuggestDescriptor<T> : DescriptorBase<FuzzySuggestDescriptor<T>, IFuzzySuggester>,  IFuzzySuggester 
+	public class FuzzySuggestDescriptor<T> : DescriptorBase<FuzzySuggestDescriptor<T>, IFuzzySuggester>,  IFuzzySuggester
 		where T : class
 	{
 		bool? IFuzzySuggester.Transpositions { get; set; }

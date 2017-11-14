@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReserializeJsonConverter<InputContainer, IInputContainer>))]
 	public interface IInputContainer
 	{
@@ -20,7 +19,6 @@ namespace Nest
 		IChainInput Chain { get; set; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	public class InputContainer : IInputContainer, IDescriptor
 	{
 		IHttpInput IInputContainer.Http { get; set; }

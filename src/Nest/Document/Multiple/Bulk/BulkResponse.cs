@@ -7,13 +7,18 @@ namespace Nest
 {
 	public interface IBulkResponse : IResponse
 	{
+		[JsonProperty("took")]
 		long Took { get; }
+
+		[JsonProperty("errors")]
 		bool Errors { get; }
+
+		[JsonProperty("items")]
 		IReadOnlyCollection<IBulkResponseItem> Items { get; }
+
 		IEnumerable<IBulkResponseItem> ItemsWithErrors { get; }
 	}
 
-	[JsonObject]
 	public class BulkResponse : ResponseBase, IBulkResponse
 	{
 		public override bool IsValid => base.IsValid && !this.Errors && !this.ItemsWithErrors.HasAny();
@@ -25,16 +30,12 @@ namespace Nest
 				sb.AppendLine($"  operation[{i.i}]: {i.item}");
 		}
 
-		[JsonProperty("took")]
 		public long Took { get; internal set; }
 
-		[JsonProperty("errors")]
 		public bool Errors { get; internal set; }
 
-		[JsonProperty("items")]
 		public IReadOnlyCollection<IBulkResponseItem> Items { get; internal set; } = EmptyReadOnly<IBulkResponseItem>.Collection;
 
-		[JsonIgnore]
 		public IEnumerable<IBulkResponseItem> ItemsWithErrors => !this.Items.HasAny()
 			? Enumerable.Empty<IBulkResponseItem>()
 			: this.Items.Where(i => !i.IsValid);

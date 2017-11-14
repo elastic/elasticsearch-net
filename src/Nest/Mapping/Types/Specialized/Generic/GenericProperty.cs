@@ -8,7 +8,6 @@ namespace Nest
 	/// A generic property to map properties that may be of different types.
 	/// Not all methods are valid for all types.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface IGenericProperty : IDocValuesProperty
 	{
 		[JsonProperty("index")]

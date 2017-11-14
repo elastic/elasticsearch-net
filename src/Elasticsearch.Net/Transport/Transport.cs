@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Threading;
 using System;
+using System.Runtime.ExceptionServices;
 
 namespace Elasticsearch.Net
 {

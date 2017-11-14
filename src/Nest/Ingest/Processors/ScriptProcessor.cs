@@ -10,7 +10,6 @@ namespace Nest
 	/// <summary>
 	/// Allows inline, stored, and file scripts to be executed within ingest pipelines.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<ScriptProcessor>))]
 	public interface IScriptProcessor : IProcessor
 	{

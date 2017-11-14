@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReserializeJsonConverter<TransformContainer, ITransformContainer>))]
 	public interface ITransformContainer
 	{
@@ -17,7 +16,6 @@ namespace Nest
 		IChainTransform Chain { get; set; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	public class TransformContainer : ITransformContainer, IDescriptor
 	{
 		internal TransformContainer() {}

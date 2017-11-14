@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReserializeJsonConverter<SmoothingModelContainer, ISmoothingModelContainer>))]
 	public interface ISmoothingModelContainer
 	{
@@ -17,7 +16,6 @@ namespace Nest
 		ILinearInterpolationSmoothingModel LinearInterpolation { get; set; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	public class SmoothingModelContainer : ISmoothingModelContainer, IDescriptor
 	{
 		internal SmoothingModelContainer() {}

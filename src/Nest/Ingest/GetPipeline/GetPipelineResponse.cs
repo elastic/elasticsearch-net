@@ -5,7 +5,6 @@ using System;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface IGetPipelineResponse : IResponse
 	{
 		[JsonProperty("pipelines")]

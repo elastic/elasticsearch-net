@@ -4,14 +4,8 @@ namespace Nest
 {
 	public class AllRoleMappingRule : RoleMappingRuleBase
 	{
-		public IEnumerable<RoleMappingRuleBase> All => this.AllRules;
-		public AllRoleMappingRule(params RoleMappingRuleBase[] rules)
-		{
-			this.AllRules = rules;
-		}
-		public AllRoleMappingRule(IEnumerable<RoleMappingRuleBase> rules)
-		{
-			this.AllRules = rules;
-		}
+		public IEnumerable<RoleMappingRuleBase> All => Self.AllRules;
+		public AllRoleMappingRule(params RoleMappingRuleBase[] rules) => Self.AllRules = rules;
+		public AllRoleMappingRule(IEnumerable<RoleMappingRuleBase> rules) => Self.AllRules = rules;
 	}
 }

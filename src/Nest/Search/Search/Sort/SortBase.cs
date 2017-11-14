@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(SortJsonConverter))]
 	public interface ISort
 	{
@@ -37,8 +36,8 @@ namespace Nest
 		protected abstract Field SortKey { get; }
 	}
 
-	public abstract class SortDescriptorBase<TDescriptor, TInterface, T> : DescriptorBase<TDescriptor, TInterface>, ISort 
-		where T : class 
+	public abstract class SortDescriptorBase<TDescriptor, TInterface, T> : DescriptorBase<TDescriptor, TInterface>, ISort
+		where T : class
 		where TDescriptor : SortDescriptorBase<TDescriptor, TInterface, T>, TInterface, ISort
 		where TInterface : class, ISort
 	{

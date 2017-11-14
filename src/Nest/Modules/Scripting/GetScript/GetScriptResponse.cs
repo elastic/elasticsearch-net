@@ -7,7 +7,6 @@ namespace Nest
 		IStoredScript Script { get; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	public class GetScriptResponse : ResponseBase, IGetScriptResponse
 	{
 		[JsonProperty("script")]

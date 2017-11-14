@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<RescoreQuery>))]
 	public interface IRescoreQuery
 	{
@@ -19,7 +18,7 @@ namespace Nest
 		[JsonProperty("score_mode")]
 		ScoreMode? ScoreMode { get; set; }
 	}
-	
+
 	public class RescoreQuery : IRescoreQuery
 	{
 		public QueryContainer Query { get; set; }
@@ -28,7 +27,7 @@ namespace Nest
 		public ScoreMode? ScoreMode { get; set; }
 	}
 
-	public class RescoreQueryDescriptor<T> :  DescriptorBase<RescoreQueryDescriptor<T>, IRescoreQuery>, IRescoreQuery 
+	public class RescoreQueryDescriptor<T> :  DescriptorBase<RescoreQueryDescriptor<T>, IRescoreQuery>, IRescoreQuery
 		where T : class
 	{
 		QueryContainer IRescoreQuery.Query { get; set; }
@@ -45,6 +44,6 @@ namespace Nest
 
 		public virtual RescoreQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) =>
 			Assign(a => a.Query = query?.Invoke(new QueryContainerDescriptor<T>()));
-		
+
 	}
 }

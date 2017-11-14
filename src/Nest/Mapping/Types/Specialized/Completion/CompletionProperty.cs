@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface ICompletionProperty : IDocValuesProperty
 	{
 		[JsonProperty("search_analyzer")]
@@ -28,7 +27,6 @@ namespace Nest
 		IList<ISuggestContext> Contexts { get; set; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class CompletionProperty : DocValuesPropertyBase, ICompletionProperty
 	{

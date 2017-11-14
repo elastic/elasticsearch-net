@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public class QueryContainerDescriptor<T> : QueryContainer where T : class
 	{
 

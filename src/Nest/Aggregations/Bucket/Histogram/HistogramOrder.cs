@@ -5,7 +5,9 @@ namespace Nest
 	[JsonConverter(typeof(KeyValueJsonConverter<HistogramOrder, SortOrder>))]
 	public class HistogramOrder
 	{
+		[JsonProperty("key")]
 		public string Key { get; set; }
+		[JsonProperty("order")]
 		public SortOrder Order { get; set; }
 
 		public static HistogramOrder CountAscending => new HistogramOrder { Key = "_count", Order = SortOrder.Ascending };

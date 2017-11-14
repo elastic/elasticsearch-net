@@ -2,9 +2,8 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<IpRange>))]
-	public interface IIpRange 
+	public interface IIpRange
 	{
 		[JsonProperty(PropertyName = "from")]
 		string From { get; set; }

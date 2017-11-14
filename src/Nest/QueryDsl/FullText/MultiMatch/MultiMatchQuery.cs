@@ -4,7 +4,6 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<MultiMatchQueryDescriptor<object>>))]
 	public interface IMultiMatchQuery : IQuery
 	{
@@ -97,7 +96,6 @@ namespace Nest
 		internal static bool IsConditionless(IMultiMatchQuery q) => q.Fields.IsConditionless() || q.Query.IsNullOrEmpty();
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class MultiMatchQueryDescriptor<T>
 		: QueryDescriptorBase<MultiMatchQueryDescriptor<T>, IMultiMatchQuery>
 		, IMultiMatchQuery where T : class

@@ -98,7 +98,7 @@ namespace Tests.Framework
 
 		private bool ActualMatches(object o, JToken expectedJson, string expectedString, int iteration, out string serialized)
 		{
-			serialized = o is string? (string)o : this.Serialize(o);
+			serialized = o is string s ? s : this.Serialize(o);
 			return TokenMatches(expectedJson, expectedString, iteration, serialized);
 		}
 
@@ -108,8 +108,8 @@ namespace Tests.Framework
 			var matches = JToken.DeepEquals(expectedJson, actualJson);
 			if (matches) return true;
 
-			(actualJson as JObject)?.DeepSort();
 			(expectedJson as JObject)?.DeepSort();
+			(actualJson as JObject)?.DeepSort();
 
 			var sortedExpected = expectedJson.ToString();
 			var sortedActual = actualJson.ToString();

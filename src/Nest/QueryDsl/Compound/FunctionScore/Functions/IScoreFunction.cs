@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(ScoreFunctionJsonConverter))]
 	public interface IScoreFunction
 	{
@@ -22,9 +21,9 @@ namespace Nest
 	}
 
 	public class FunctionScoreFunctionDescriptor<T> : FunctionScoreFunctionDescriptorBase<FunctionScoreFunctionDescriptor<T>, IScoreFunction, T>
-		where T : class { } 
+		where T : class { }
 
-	public abstract class FunctionScoreFunctionDescriptorBase<TDescriptor, TInterface, T> : 
+	public abstract class FunctionScoreFunctionDescriptorBase<TDescriptor, TInterface, T> :
 		DescriptorBase<TDescriptor, TInterface>, IScoreFunction
 		where TDescriptor : FunctionScoreFunctionDescriptorBase<TDescriptor, TInterface, T>, TInterface, IScoreFunction
 		where TInterface : class, IScoreFunction

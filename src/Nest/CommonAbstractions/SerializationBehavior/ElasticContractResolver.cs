@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -31,8 +32,21 @@ namespace Nest
 			this.ConnectionSettings = connectionSettings;
 		}
 
+		private static bool TypeWeAreInterestedIn(Type o)
+		{
+			if ((typeof(IDictionary).IsAssignableFrom(o) || o.IsGenericDictionary()) && !typeof(IIsADictionary).IsAssignableFrom(o))
+				return true;
+			if (typeof(IEnumerable<QueryContainer>).IsAssignableFrom(o)) return true;
+			if (o == typeof(ServerError)) return true;
+			if (o == typeof(DateTime) || o == typeof(DateTime?)) return true;
+			if (o == typeof(TimeSpan) || o == typeof(TimeSpan?)) return true;
+			return o.IsNestType();
+		}
+
 		protected override JsonContract CreateContract(Type objectType)
 		{
+			if (!TypeWeAreInterestedIn(objectType)) return base.CreateContract(objectType);
+
 			// cache contracts per connection settings
 			return this.ConnectionSettings.Inferrer.Contracts.GetOrAdd(objectType, o =>
 			{
@@ -40,8 +54,7 @@ namespace Nest
 
 				if ((typeof(IDictionary).IsAssignableFrom(o) || o.IsGenericDictionary()) && !typeof(IIsADictionary).IsAssignableFrom(o))
 				{
-					Type[] genericArguments;
-					if (!o.TryGetGenericDictionaryArguments(out genericArguments))
+					if (!o.TryGetGenericDictionaryArguments(out var genericArguments))
 						contract.Converter = new VerbatimDictionaryKeysJsonConverter();
 					else
 						contract.Converter =
@@ -51,14 +64,12 @@ namespace Nest
 					contract.Converter = new QueryContainerCollectionJsonConverter();
 				else if (o == typeof(ServerError))
 					contract.Converter = new ServerErrorJsonConverter();
-				else if (o == typeof(DateTime) ||
-						 o == typeof(DateTime?))
+				else if (o == typeof(DateTime) || o == typeof(DateTime?))
 					contract.Converter = new IsoDateTimeConverter { Culture = CultureInfo.InvariantCulture };
-				else if (o == typeof(TimeSpan) ||
-						 o == typeof(TimeSpan?))
+				else if (o == typeof(TimeSpan) || o == typeof(TimeSpan?))
 					contract.Converter = new TimeSpanConverter();
 
-				if (!o.FullName.StartsWith("Nest.", StringComparison.OrdinalIgnoreCase)) return contract;
+				if (!o.IsNestType()) return contract;
 				if (ApplyExactContractJsonAttribute(o, contract)) return contract;
 				if (ApplyContractJsonAttribute(o, contract)) return contract;
 
@@ -76,7 +87,7 @@ namespace Nest
 
 		private static bool ApplyContractJsonAttribute(Type objectType, JsonContract contract)
 		{
-			foreach (var t in TypeWithInterfaces(objectType))
+			foreach (var t in objectType.AllInterfacesAndSelf())
 			{
 				var attribute = (ContractJsonConverterAttribute)t.GetTypeInfo().GetCustomAttributes(typeof(ContractJsonConverterAttribute), true).FirstOrDefault();
 				if (attribute?.Converter == null) continue;
@@ -86,80 +97,43 @@ namespace Nest
 			return false;
 		}
 
-		private static IEnumerable<Type> TypeWithInterfaces(Type objectType)
+		protected override List<MemberInfo> GetSerializableMembers(Type type)
 		{
-			yield return objectType;
-			foreach (var i in objectType.GetInterfaces()) yield return i;
+			var isNestType = type.IsNestType();
+			var members = !isNestType
+				? base.GetSerializableMembers(type)
+				: type.GetSerializeMembers().Select(m => m.MemberInfo).ToList();;
+
+			return members;
 		}
 
 		protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
 		{
-			// Only serialize explicitly implemented IProperty properties on attribute types
-			if (typeof(ElasticsearchPropertyAttributeBase).IsAssignableFrom(type))
-				return PropertiesOfInterface<IProperty>(type, memberSerialization);
-
-			// Descriptors implement properties explicitly, these are not picked up by default
-			if (typeof(IDescriptor).IsAssignableFrom(type))
-				return PropertiesOfAll(type, memberSerialization);
-
-			return base.CreateProperties(type, memberSerialization);
+			var isNestType = type.IsNestType();
+			var properties = !isNestType
+				? base.CreateProperties(type, memberSerialization)
+				: PropertiesOfAll(type, memberSerialization);
+			return properties;
 		}
 
-		public IList<JsonProperty> PropertiesOfAllInterfaces(Type t, MemberSerialization memberSerialization)
+		private static ConcurrentDictionary<Type, List<JsonProperty>> JsonPropertiesForType { get; }
+			= new ConcurrentDictionary<Type, List<JsonProperty>>();
+
+		public IList<JsonProperty> PropertiesOfAll(Type type, MemberSerialization memberSerialization)
 		{
-			return (
-				from i in t.GetInterfaces()
-				select base.CreateProperties(i, memberSerialization)
-				)
-				.SelectMany(interfaceProps => interfaceProps)
-				.DistinctBy(p => p.PropertyName)
-				.ToList();
+			if (JsonPropertiesForType.TryGetValue(type, out var list)) return list;
+			return JsonPropertiesForType.GetOrAdd(type, (t) =>
+			{
+				return type.GetSerializeMembers()
+					.Select(j => this.CreateProperty(j.MemberInfo, memberSerialization))
+					.ToList();
+			});
 		}
 
-		public IList<JsonProperty> PropertiesOfInterface<TInterface>(Type t, MemberSerialization memberSerialization)
-			where TInterface : class
-		{
-			return (
-				from i in t.GetInterfaces().Where(i => typeof(TInterface).IsAssignableFrom(i))
-				select base.CreateProperties(i, memberSerialization)
-				)
-				.SelectMany(interfaceProps => interfaceProps)
-				.DistinctBy(p => p.PropertyName)
-				.ToList();
-		}
-
-		public IList<JsonProperty> PropertiesOfAll(Type t, MemberSerialization memberSerialization)
-		{
-			return base.CreateProperties(t, memberSerialization)
-				.Concat(PropertiesOfAllInterfaces(t, memberSerialization))
-				.DistinctBy(p => p.PropertyName)
-				.ToList();
-		}
-
-		protected override string ResolvePropertyName(string fieldName)
-		{
-			if (this.ConnectionSettings.DefaultFieldNameInferrer != null)
-				return this.ConnectionSettings.DefaultFieldNameInferrer(fieldName);
-
-			return fieldName.ToCamelCase();
-		}
-
-		protected static bool ShouldSerializeQueryContainer(object o, JsonProperty prop)
-		{
-			if (o == null) return false;
-			var q = prop.ValueProvider.GetValue(o) as QueryContainer;
-			if (q == null) return false;
-			if (q.IsWritable) return true;
-			var nq = q as NoMatchQueryContainer;
-			return nq?.Shortcut != null;
-		}
-
-		protected static bool ShouldSerializeQueryContainers(object o, JsonProperty prop)
-		{
-			if (o == null) return false;
-			var q = prop.ValueProvider.GetValue(o) as IEnumerable<QueryContainer>;
-			return (q.AsInstanceOrToListOrNull()?.Any(qq=>qq != null && qq.IsWritable)).GetValueOrDefault(false);
-		}
+		protected override string ResolvePropertyName(string fieldName) =>
+			this.ConnectionSettings.DefaultFieldNameInferrer != null
+				? this.ConnectionSettings.DefaultFieldNameInferrer(fieldName)
+				: fieldName.ToCamelCase();
 
 		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
 		{
@@ -175,20 +149,19 @@ namespace Nest
 				&& !typeof(string).IsAssignableFrom(property.PropertyType)
 				&& typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
 			{
-				Predicate<object> shouldSerialize = obj =>
+				bool ShouldSerialize(object obj)
 				{
-					var collection = property.ValueProvider.GetValue(obj) as ICollection;
-					if (collection == null)
-					{
+					if (!(property.ValueProvider.GetValue(obj) is ICollection collection))
 						return true;
-					}
 					return collection.Count != 0 && collection.Cast<object>().Any(item => item != null);
-				};
-				property.ShouldSerialize = property.ShouldSerialize == null ? shouldSerialize : (o => property.ShouldSerialize(o) && shouldSerialize(o));
+				}
+
+				property.ShouldSerialize = property.ShouldSerialize == null
+					? (Predicate<object>) ShouldSerialize
+					: (o => property.ShouldSerialize(o) && ShouldSerialize(o));
 			}
 
-			IPropertyMapping propertyMapping = null;
-			if (!this.ConnectionSettings.PropertyMappings.TryGetValue(member, out propertyMapping))
+			if (!this.ConnectionSettings.PropertyMappings.TryGetValue(member, out var propertyMapping))
 				propertyMapping = ElasticsearchPropertyAttributeBase.From(member);
 
 			var serializerMapping = this.ConnectionSettings.PropertyMappingProvider?.CreatePropertyMapping(member);
@@ -202,5 +175,22 @@ namespace Nest
 
 			return property;
 		}
+
+		protected static bool ShouldSerializeQueryContainer(object o, JsonProperty prop)
+		{
+			if (o == null) return false;
+			if (!(prop.ValueProvider.GetValue(o) is QueryContainer q)) return false;
+			if (q.IsWritable) return true;
+			var nq = q as NoMatchQueryContainer;
+			return nq?.Shortcut != null;
+		}
+
+		protected static bool ShouldSerializeQueryContainers(object o, JsonProperty prop)
+		{
+			if (o == null) return false;
+			var q = prop.ValueProvider.GetValue(o) as IEnumerable<QueryContainer>;
+			return (q.AsInstanceOrToListOrNull()?.Any(qq=>qq != null && qq.IsWritable)).GetValueOrDefault(false);
+		}
+
 	}
 }

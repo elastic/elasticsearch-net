@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface IIpProperty : IDocValuesProperty
 	{
 		[JsonProperty("index")]

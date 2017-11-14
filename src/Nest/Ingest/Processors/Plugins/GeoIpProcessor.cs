@@ -14,7 +14,6 @@ namespace Nest
 	/// <remarks>
 	/// Requires the Ingest Geoip Processor Plugin to be installed on the cluster.
 	/// </remarks>
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<GeoIpProcessor>))]
 	public interface IGeoIpProcessor : IProcessor
 	{

@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof (FieldNameQueryJsonConverter<RegexpQuery>))]
 	public interface IRegexpQuery : IFieldNameQuery
 	{
@@ -27,7 +26,7 @@ namespace Nest
 		internal static bool IsConditionless(IRegexpQuery q) => q.Field.IsConditionless() || q.Value.IsNullOrEmpty();
 	}
 
-	public class RegexpQueryDescriptor<T> 
+	public class RegexpQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<RegexpQueryDescriptor<T>, IRegexpQuery, T>
 		, IRegexpQuery where T : class
 	{

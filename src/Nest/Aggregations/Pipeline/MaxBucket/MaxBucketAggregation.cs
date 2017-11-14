@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<MaxBucketAggregation>))]
 	public interface IMaxBucketAggregation : IPipelineAggregation { }
 

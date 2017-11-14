@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<BucketSelectorAggregation>))]
 	public interface IBucketSelectorAggregation : IPipelineAggregation
 	{

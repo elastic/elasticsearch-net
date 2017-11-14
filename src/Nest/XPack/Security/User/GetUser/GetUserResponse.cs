@@ -10,7 +10,6 @@ namespace Nest
 		IReadOnlyDictionary<string, XPackUser> Users { get; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetUserResponse, string, XPackUser>))]
 	public class GetUserResponse : DictionaryResponseBase<string, XPackUser>, IGetUserResponse
 	{

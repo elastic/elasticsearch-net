@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<FunctionScoreQueryDescriptor<object>>))]
 	public interface IFunctionScoreQuery : IQuery
 	{
@@ -39,11 +38,11 @@ namespace Nest
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.FunctionScore = this;
 
-		internal static bool IsConditionless(IFunctionScoreQuery q, bool force = false) => 
+		internal static bool IsConditionless(IFunctionScoreQuery q, bool force = false) =>
 			force || !q.Functions.HasAny();
 	}
 
-	public class FunctionScoreQueryDescriptor<T> 
+	public class FunctionScoreQueryDescriptor<T>
 		: QueryDescriptorBase<FunctionScoreQueryDescriptor<T>, IFunctionScoreQuery>
 		, IFunctionScoreQuery where T : class
 	{

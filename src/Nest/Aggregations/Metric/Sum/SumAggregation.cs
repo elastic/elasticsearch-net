@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<SumAggregation>))]
 	public interface ISumAggregation : IMetricAggregation { }
 
@@ -15,8 +14,8 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Sum = this;
 	}
 
-	public class SumAggregationDescriptor<T> 
+	public class SumAggregationDescriptor<T>
 		: MetricAggregationDescriptorBase<SumAggregationDescriptor<T>, ISumAggregation, T>
-			, ISumAggregation 
+			, ISumAggregation
 		where T : class { }
 }

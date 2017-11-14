@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof (FieldNameQueryJsonConverter<TermQuery>))]
 	public interface ITermQuery : IFieldNameQuery
 	{

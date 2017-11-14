@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof (FieldNameQueryJsonConverter<DateRangeQuery>))]
 	public interface IDateRangeQuery :  IRangeQuery
 	{
@@ -51,7 +50,6 @@ namespace Nest
 		}
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class DateRangeQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<DateRangeQueryDescriptor<T>, IDateRangeQuery, T>
 		, IDateRangeQuery where T : class

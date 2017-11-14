@@ -14,8 +14,7 @@ namespace Nest
 		public static KeyValueConversion Create<TContainer, TValue>() where TContainer : class, new()
 		{
 			var t = typeof(TContainer);
-			KeyValueConversion conversion;
-			if (KnownTypes.TryGetValue(t, out conversion)) return conversion;
+			if (KnownTypes.TryGetValue(t, out var conversion)) return conversion;
 
 			var properties = t.GetCachedObjectProperties(MemberSerialization.OptOut);
 			var keyProp = properties.FirstOrDefault(p => p.PropertyType != typeof(TValue));

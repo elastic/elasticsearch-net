@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanMultiTermQuery>))]
 	public interface ISpanMultiTermQuery : ISpanSubQuery
 	{
@@ -20,7 +19,7 @@ namespace Nest
 		internal static bool IsConditionless(ISpanMultiTermQuery q) => q.Match == null || q.Match.IsConditionless;
 	}
 
-	public class SpanMultiTermQueryDescriptor<T> 
+	public class SpanMultiTermQueryDescriptor<T>
 		: QueryDescriptorBase<SpanMultiTermQueryDescriptor<T>, ISpanMultiTermQuery>
 		, ISpanMultiTermQuery
 		where T : class

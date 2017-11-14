@@ -3,7 +3,6 @@
 namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<TypeQueryDescriptor>))]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ITypeQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "value")]
@@ -18,8 +17,8 @@ namespace Nest
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Type = this;
 		internal static bool IsConditionless(ITypeQuery q) => q.Value.IsConditionless();
 	}
-	
-	public class TypeQueryDescriptor 
+
+	public class TypeQueryDescriptor
 		: QueryDescriptorBase<TypeQueryDescriptor, ITypeQuery>
 		, ITypeQuery
 	{

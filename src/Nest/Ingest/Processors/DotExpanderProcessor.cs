@@ -9,7 +9,6 @@ namespace Nest
 	/// This processor allows fields with dots in the name to be accessible by other processors in the pipeline.
 	/// Otherwise these fields can’t be accessed by any processor.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<DotExpanderProcessor>))]
 	public interface IDotExpanderProcessor : IProcessor
 	{

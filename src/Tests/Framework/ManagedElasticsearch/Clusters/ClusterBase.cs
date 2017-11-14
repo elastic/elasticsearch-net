@@ -48,7 +48,9 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 				this.TaskRunner.ValidateAfterStart(this.Node.Client);
 			if (this.NodeConfiguration.RunIntegrationTests && this.Node.Port != this.DesiredPort)
 				throw new Exception($"The cluster that was started of type {this.GetType().Name} runs on {this.Node.Port} but this cluster wants {this.DesiredPort}");
-			this.SeedNode();
+
+			if (this.NodeConfiguration.RunIntegrationTests)
+				this.SeedNode();
 		}
 
 		public void Dispose()

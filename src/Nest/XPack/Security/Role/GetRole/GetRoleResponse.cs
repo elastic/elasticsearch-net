@@ -10,7 +10,6 @@ namespace Nest
 		IReadOnlyDictionary<string, XPackRole> Roles { get; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetRoleResponse, string, XPackRole>))]
 	public class GetRoleResponse : DictionaryResponseBase<string, XPackRole>, IGetRoleResponse
 	{

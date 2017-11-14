@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 namespace Nest
 {
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ICreateIndexResponse : IAcknowledgedResponse
 	{
 		[JsonProperty("shards_acknowledged")]

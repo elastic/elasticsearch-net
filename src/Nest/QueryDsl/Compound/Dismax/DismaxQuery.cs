@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<DisMaxQuery>))]
 	public interface IDisMaxQuery : IQuery
 	{

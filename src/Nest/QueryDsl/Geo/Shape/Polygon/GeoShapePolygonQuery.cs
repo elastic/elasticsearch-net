@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoShapePolygonQuery : IGeoShapeQuery
 	{
 		[JsonProperty("shape")]

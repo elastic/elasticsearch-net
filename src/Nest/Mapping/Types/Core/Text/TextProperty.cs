@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface ITextProperty : ICoreProperty
 	{
 		[JsonProperty("analyzer")]

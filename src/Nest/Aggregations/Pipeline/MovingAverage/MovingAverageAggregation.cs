@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(MovingAverageAggregationJsonConverter))]
 	public interface IMovingAverageAggregation : IPipelineAggregation
 	{

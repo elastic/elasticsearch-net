@@ -2,7 +2,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public class CatNodesRecord : ICatRecord
 	{
 		[JsonProperty("id")]

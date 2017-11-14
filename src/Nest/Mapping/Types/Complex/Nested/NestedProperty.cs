@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface INestedProperty : IObjectProperty
 	{
 		[JsonProperty("include_in_parent")]

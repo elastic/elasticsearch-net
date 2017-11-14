@@ -10,7 +10,6 @@ namespace Nest
 	/// <summary>
 	/// The parent_id query can be used to find child documents which belong to a particular parent.
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<ParentIdQuery>))]
 	public interface IParentIdQuery : IQuery
 	{
@@ -49,7 +48,6 @@ namespace Nest
 		public bool? IgnoreUnmapped { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class ParentIdQueryDescriptor<T>
 	: QueryDescriptorBase<ParentIdQueryDescriptor<T>, IParentIdQuery>
 	, IParentIdQuery where T : class

@@ -8,7 +8,6 @@ namespace Nest
 	/// <see cref="GeoDistanceAggregation"/>. If you are looking to store ranges as
 	/// part of your document please use explicit range class e.g DateRange, FloatRange etc
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<Range>))]
 	[Obsolete("Renamed to IAggregationRange scheduled for removal in 6.0")]
 	public interface IRange
@@ -28,7 +27,6 @@ namespace Nest
 	/// <see cref="GeoDistanceAggregation"/>. If you are looking to store ranges as
 	/// part of your document please use explicit range class e.g DateRange, FloatRange etc
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<AggregationRange>))]
 #pragma warning disable 618
 	public interface IAggregationRange : IRange {}

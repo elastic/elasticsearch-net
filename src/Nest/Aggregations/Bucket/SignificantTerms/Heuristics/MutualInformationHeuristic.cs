@@ -2,9 +2,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<MutualInformationHeuristic>))]
-	public interface IMutualInformationHeuristic 
+	public interface IMutualInformationHeuristic
 	{
 		[JsonProperty("include_negatives")]
 		bool? IncludeNegatives { get; set; }
@@ -19,7 +18,7 @@ namespace Nest
 		public bool? BackgroundIsSuperSet { get; set; }
 	}
 
-	public class MutualInformationHeuristicDescriptor 
+	public class MutualInformationHeuristicDescriptor
 		: DescriptorBase<MutualInformationHeuristicDescriptor, IMutualInformationHeuristic>, IMutualInformationHeuristic
 	{
 		bool? IMutualInformationHeuristic.IncludeNegatives { get; set; }

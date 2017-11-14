@@ -9,7 +9,6 @@ namespace Nest
 	/// will be sorted numerically, while arrays of strings or heterogeneous arrays
 	///  of strings and numbers will be sorted lexicographically.
 	/// </summary>
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<SortProcessor>))]
 	public interface ISortProcessor : IProcessor
 	{

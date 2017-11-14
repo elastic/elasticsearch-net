@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface IIndexedScriptTransform : IScriptTransform
 	{
 		[JsonProperty("id")]

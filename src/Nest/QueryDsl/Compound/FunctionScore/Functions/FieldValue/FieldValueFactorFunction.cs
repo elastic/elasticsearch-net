@@ -5,7 +5,6 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IFieldValueFactorFunction : IScoreFunction
 	{
 
@@ -36,7 +35,7 @@ namespace Nest
 
 	}
 
-	public class FieldValueFactorFunctionDescriptor<T> 
+	public class FieldValueFactorFunctionDescriptor<T>
 		: FunctionScoreFunctionDescriptorBase<FieldValueFactorFunctionDescriptor<T>, IFieldValueFactorFunction, T >, IFieldValueFactorFunction
 		where T : class
 	{

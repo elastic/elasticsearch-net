@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<IndicesQueryDescriptor<object>>))]
 	[Obsolete("Deprecated. You can specify _index on the query to target specific indices")]
 	public interface IIndicesQuery : IQuery

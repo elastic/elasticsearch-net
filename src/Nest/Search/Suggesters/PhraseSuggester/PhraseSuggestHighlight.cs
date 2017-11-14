@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IPhraseSuggestHighlight
 	{
 		[JsonProperty(PropertyName = "pre_tag")]

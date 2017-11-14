@@ -6,7 +6,6 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<DirectGenerator>))]
 	public interface IDirectGenerator
 	{

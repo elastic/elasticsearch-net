@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<MatrixStatsAggregation>))]
 	public interface IMatrixStatsAggregation : IMatrixAggregation
 	{

@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface IGeoPointFielddata : IFielddata
 	{
 		[JsonProperty("precision")]

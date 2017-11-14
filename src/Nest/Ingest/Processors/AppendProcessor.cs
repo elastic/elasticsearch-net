@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<AppendProcessor>))]
 	public interface IAppendProcessor : IProcessor
 	{

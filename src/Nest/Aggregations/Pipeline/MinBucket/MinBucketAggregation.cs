@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<MinBucketAggregation>))]
 	public interface IMinBucketAggregation : IPipelineAggregation { }
 

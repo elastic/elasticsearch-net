@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public interface ISimulatePipelineDocument
 	{
 		[JsonProperty("_index")]

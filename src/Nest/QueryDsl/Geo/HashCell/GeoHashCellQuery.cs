@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof (VariableFieldNameQueryJsonConverter<GeoHashCellQuery, IGeoHashCellQuery>))]
 	public interface IGeoHashCellQuery : IFieldNameQuery
 	{

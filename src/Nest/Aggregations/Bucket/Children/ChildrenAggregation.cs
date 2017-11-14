@@ -4,7 +4,6 @@
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<ChildrenAggregation>))]
 	public interface IChildrenAggregation : IBucketAggregation
 	{

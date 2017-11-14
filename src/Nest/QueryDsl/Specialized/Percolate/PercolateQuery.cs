@@ -7,7 +7,6 @@ namespace Nest
 	/// <summary>
 	/// The percolate query can be used to match queries stored in an index
 	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<PercolateQuery>))]
 	public interface IPercolateQuery : IQuery
 	{

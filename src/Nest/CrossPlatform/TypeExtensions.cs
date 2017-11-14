@@ -17,6 +17,15 @@ namespace Nest
 #endif
 		}
 
+		internal static Assembly GetAssembly(this Type type)
+		{
+#if DOTNETCORE
+			return type.GetTypeInfo().Assembly;
+#else
+			return type.Assembly;
+#endif
+		}
+
 		internal static bool IsGenericDictionary(this Type type)
 		{
 			return type.GetInterfaces().Any(t =>

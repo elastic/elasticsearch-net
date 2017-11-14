@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
 	public partial class QueryContainer : IQueryContainer, IDescriptor
 	{
 		private IBoolQuery _b;

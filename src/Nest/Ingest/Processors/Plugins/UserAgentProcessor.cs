@@ -14,7 +14,6 @@ namespace Nest
 	/// <remarks>
 	/// Requires the UserAgent Processor Plugin to be installed on the cluster.
 	/// </remarks>
-	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<UserAgentProcessor>))]
 	public interface IUserAgentProcessor : IProcessor
 	{
