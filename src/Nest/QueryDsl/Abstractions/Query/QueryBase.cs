@@ -9,10 +9,10 @@ namespace Nest
 		/// <summary>
 		/// The _name of the query. this allows you to retrieve for each document what part of the query it matched on
 		/// </summary>
-		[JsonProperty(PropertyName = "_name")]
+		[JsonProperty("_name")]
 		string Name { get; set; }
 
-		[JsonProperty(PropertyName = "boost")]
+		[JsonProperty("boost")]
 		double? Boost { get; set; }
 
 		[JsonIgnore]

@@ -7,10 +7,10 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanWithinQuery>))]
 	public interface ISpanWithinQuery : ISpanSubQuery
 	{
-		[JsonProperty(PropertyName = "little")]
+		[JsonProperty("little")]
 		ISpanQuery Little { get; set; }
 
-		[JsonProperty(PropertyName = "big")]
+		[JsonProperty("big")]
 		ISpanQuery Big { get; set; }
 
 	}

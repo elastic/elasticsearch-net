@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class NodesMetaData
+	public class NodesMetadata
 	{
 		[JsonProperty("total")]
 		public int Total { get; internal set; }
@@ -36,7 +36,7 @@ namespace Nest
 
 		IReadOnlyDictionary<string, NodeUsageInformation> Nodes { get; }
 
-		NodesMetaData NodesMetaData { get; }
+		NodesMetadata NodesMetadata { get; }
 	}
 
 	public class NodesUsageResponse : ResponseBase, INodesUsageResponse
@@ -48,6 +48,6 @@ namespace Nest
 		public IReadOnlyDictionary<string, NodeUsageInformation> Nodes { get; internal set; } = EmptyReadOnly<string, NodeUsageInformation>.Dictionary;
 
 		[JsonProperty("_nodes")]
-		public NodesMetaData NodesMetaData { get; internal set; }
+		public NodesMetadata NodesMetadata { get; internal set; }
 	}
 }

@@ -5,10 +5,10 @@ namespace Nest
 {
 	public interface INodesStatsResponse : IResponse
 	{
-		[JsonProperty(PropertyName = "cluster_name")]
+		[JsonProperty("cluster_name")]
 		string ClusterName { get; }
 
-		[JsonProperty(PropertyName = "nodes")]
+		[JsonProperty("nodes")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeStats>))]
 		IReadOnlyDictionary<string, NodeStats> Nodes { get; }
 	}

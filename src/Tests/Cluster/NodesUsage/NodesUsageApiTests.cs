@@ -29,10 +29,10 @@ namespace Tests.Cluster.NodesUsage
 		{
 			response.ClusterName.Should().NotBeEmpty();
 
-			response.NodesMetaData.Should().NotBeNull();
-			response.NodesMetaData.Total.Should().Be(1);
-			response.NodesMetaData.Successful.Should().Be(1);
-			response.NodesMetaData.Failed.Should().Be(0);
+			response.NodesMetadata.Should().NotBeNull();
+			response.NodesMetadata.Total.Should().Be(1);
+			response.NodesMetadata.Successful.Should().Be(1);
+			response.NodesMetadata.Failed.Should().Be(0);
 
 			response.Nodes.Should().NotBeNull();
 			response.Nodes.Should().HaveCount(1);

@@ -13,13 +13,13 @@ namespace Nest
 	[Obsolete("Renamed to IAggregationRange scheduled for removal in 6.0")]
 	public interface IRange
 	{
-		[JsonProperty(PropertyName = "from")]
+		[JsonProperty("from")]
 		double? From { get; set; }
 
-		[JsonProperty(PropertyName = "to")]
+		[JsonProperty("to")]
 		double? To { get; set; }
 
-		[JsonProperty(PropertyName = "key")]
+		[JsonProperty("key")]
 		string Key { get; set; }
 	}
 

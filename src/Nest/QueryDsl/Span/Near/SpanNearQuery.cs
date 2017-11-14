@@ -9,17 +9,17 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanNearQueryDescriptor<object>>))]
 	public interface ISpanNearQuery : ISpanSubQuery
 	{
-		[JsonProperty(PropertyName = "clauses")]
+		[JsonProperty("clauses")]
 		IEnumerable<ISpanQuery> Clauses { get; set; }
 
-		[JsonProperty(PropertyName = "slop")]
+		[JsonProperty("slop")]
 		int? Slop { get; set; }
 
-		[JsonProperty(PropertyName = "in_order")]
+		[JsonProperty("in_order")]
 		bool? InOrder { get; set; }
 
 #pragma warning disable 618
-		[JsonProperty(PropertyName = "collect_payloads")]
+		[JsonProperty("collect_payloads")]
 		[Obsolete("Payloads will be loaded when needed")]
 		bool? CollectPayloads { get; set; }
 #pragma warning restore 618
