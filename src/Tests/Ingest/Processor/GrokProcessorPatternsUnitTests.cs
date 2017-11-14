@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -10,7 +11,15 @@ namespace Tests.XPack.GrokProcessorPatterns
 		[U]
 		public void ShouldDeserialize()
 		{
-			const string fixedResponse = "{ \"patterns\" : { \"BACULA_CAPACITY\" : \"%{INT}{1,3}(,%{INT}{3})*\", \"PATH\" : \"(?:%{UNIXPATH}|%{WINPATH})\" } }";
+			var fixedResponse = new
+			{
+				patterns = new Dictionary<string, object>
+				{
+					{ "BACULA_CAPACITY" ,"%{INT}{1,3}(,%{INT}{3})*"},
+					{ "PATH", "(?:%{UNIXPATH}|%{WINPATH})"}
+				}
+			};
+
 			var client = TestClient.GetFixedReturnClient(fixedResponse);
 
 			//warmup

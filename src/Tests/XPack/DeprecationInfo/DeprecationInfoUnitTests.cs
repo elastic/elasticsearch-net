@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -10,7 +12,37 @@ namespace Tests.XPack.DeprecationInfo
 		[U]
 		public void ShouldDeserialize()
 		{
-			const string fixedResponse = "{ \"cluster_settings\" : [ { \"level\" : \"info\", \"message\" : \"Network settings changes\", \"url\" : \"https://www.elastic.co/guide/en/elasticsearch/reference/6.0/breaking_60_indices_changes.html#_index_templates_use_literal_index_patterns_literal_instead_of_literal_template_literal\", \"details\" : \"templates using <literal>template</literal> field: watches,.monitoring-alerts,.watch-history-6,.ml-notifications,security-index-template,triggered_watches,.monitoring-es,.ml-meta,.ml-state,.monitoring-logstash,.ml-anomalies-,.monitoring-kibana\" } ], \"node_settings\" : [ ], \"index_settings\" : { \".monitoring-es-6-2017.07.21\" : [ { \"level\" : \"info\", \"message\" : \"Coercion of boolean fields\", \"url\" : \"https://www.elastic.co/guide/en/elasticsearch/reference/6.0/breaking_60_mappings_changes.html#_coercion_of_boolean_fields\", \"details\" : \"<anchor id=\\\"type: doc\\\" xreflabel=\\\"field: spins]\\\"/>\" } ] } }";
+			const string indexName = ".monitoring-es-6-2017.07.21";
+
+			var fixedResponse = new
+			{
+				cluster_settings = new[]
+				{
+					new
+					{
+						level = "info",
+						message = "Network settings changes",
+						url = "https://www.elastic.co/guide/en/elasticsearch/reference/6.0/breaking_60_indices_changes.html#_index_templates_use_literal_index_patterns_literal_instead_of_literal_template_literal",
+						details = "templates using <literal>template</literal> field: watches,.monitoring-alerts,.watch-history-6,.ml-notifications,security-index-template,triggered_watches,.monitoring-es,.ml-meta,.ml-state,.monitoring-logstash,.ml-anomalies-,.monitoring-kibana"
+					}
+				},
+				node_settings = new object[0],
+				index_settings = new Dictionary<string, object>
+				{
+					{
+						indexName, new object[]
+						{
+							new {
+								level = "info",
+								message = "Coercion of boolean fields",
+								url = "https://www.elastic.co/guide/en/elasticsearch/reference/6.0/breaking_60_mappings_changes.html#_coercion_of_boolean_fields",
+								details = "<anchor id=\"type: doc\" xreflabel=\"field: spins]\"/>"
+							}
+						}
+					}
+				}
+			};
+
 			var client = TestClient.GetFixedReturnClient(fixedResponse);
 
 			//warmup
@@ -29,9 +61,6 @@ namespace Tests.XPack.DeprecationInfo
 
 			response.IndexSettings.Should().NotBeNull();
 			response.IndexSettings.Should().HaveCount(1);
-
-			const string indexName = ".monitoring-es-6-2017.07.21";
-
 			response.IndexSettings.Should().ContainKey(indexName);
 			response.IndexSettings[indexName].Count.Should().Be(1);
 
