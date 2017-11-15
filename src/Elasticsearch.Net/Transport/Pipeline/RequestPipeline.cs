@@ -253,7 +253,7 @@ namespace Elasticsearch.Net
 			var requestOverrides = new RequestConfiguration
 			{
 				PingTimeout = this.PingTimeout,
-				RequestTimeout = this.RequestTimeout,
+				RequestTimeout = this.PingTimeout,
 				BasicAuthenticationCredentials = this._settings.BasicAuthenticationCredentials,
 				EnableHttpPipelining = this.RequestConfiguration?.EnableHttpPipelining ?? this._settings.HttpPipeliningEnabled,
 				ForceNode = this.RequestConfiguration?.ForceNode
