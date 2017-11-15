@@ -34,7 +34,7 @@ namespace Nest
 		public IRemoteInfoResponse RemoteInfo(IRemoteInfoRequest request) =>
 			this.Dispatcher.Dispatch<IRemoteInfoRequest, RemoteInfoRequestParameters, RemoteInfoResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.RemoteInfoDispatch<RemoteInfoResponse>(p)
+				(p, d) => this.LowLevelDispatch.ClusterRemoteInfoDispatch<RemoteInfoResponse>(p)
 			);
 
 		/// <inheritdoc/>
@@ -46,7 +46,7 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<IRemoteInfoRequest, RemoteInfoRequestParameters, RemoteInfoResponse, IRemoteInfoResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.RemoteInfoDispatchAsync<RemoteInfoResponse>(p, c)
+				(p, d, c) => this.LowLevelDispatch.ClusterRemoteInfoDispatchAsync<RemoteInfoResponse>(p, c)
 			);
 	}
 }

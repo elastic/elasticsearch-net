@@ -27,10 +27,10 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 			var nodes = new []{  "node1", "node2" };
 			var actions = new[] { "*reindex" };
 			await POST($"/_tasks/_cancel?node_id=node1%2Cnode2&actions=%2Areindex")
-				.Fluent(c => c.CancelTasks(t => t.NodeId(nodes).Actions(actions)))
-				.Request(c => c.CancelTasks(new CancelTasksRequest { NodeId = nodes, Actions = actions }))
-				.FluentAsync(c => c.CancelTasksAsync(t => t.NodeId(nodes).Actions(actions)))
-				.RequestAsync(c => c.CancelTasksAsync(new CancelTasksRequest { NodeId = nodes, Actions = actions }))
+				.Fluent(c => c.CancelTasks(t => t.Nodes(nodes).Actions(actions)))
+				.Request(c => c.CancelTasks(new CancelTasksRequest { Nodes = nodes, Actions = actions }))
+				.FluentAsync(c => c.CancelTasksAsync(t => t.Nodes(nodes).Actions(actions)))
+				.RequestAsync(c => c.CancelTasksAsync(new CancelTasksRequest { Nodes = nodes, Actions = actions }))
 				;
 		}
 	}

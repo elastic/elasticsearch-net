@@ -1244,6 +1244,32 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> ClusterPutSettingsAsync<T>(PostData<object> body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_cluster/settings"), cancellationToken, body, _params(requestParameters));
 		
+		///<summary>Represents a GET on /_remote/info
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html </para>
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> ClusterRemoteInfo<T>(Func<RemoteInfoRequestParameters, RemoteInfoRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"_remote/info"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_remote/info
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html </para>
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> ClusterRemoteInfoAsync<T>(Func<RemoteInfoRequestParameters, RemoteInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_remote/info"), cancellationToken, null, _params(requestParameters));
+		
 		///<summary>Represents a POST on /_cluster/reroute
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6188,6 +6214,38 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> PutScriptAsync<T>(string id, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_scripts/{id.NotNull("id")}"), cancellationToken, body, _params(requestParameters));
 		
+		///<summary>Represents a PUT on /_scripts/{id}/{context}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html </para>
+	    ///</summary>
+		///<param name="id">Script ID</param>
+		///<param name="context">Script context</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> PutScript<T>(string id, string context, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(PUT, Url($"_scripts/{id.NotNull("id")}/{context.NotNull("context")}"), body, _params(requestParameters));
+		
+		///<summary>Represents a PUT on /_scripts/{id}/{context}
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html </para>
+	    ///</summary>
+		///<param name="id">Script ID</param>
+		///<param name="context">Script context</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> PutScriptAsync<T>(string id, string context, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(PUT, Url($"_scripts/{id.NotNull("id")}/{context.NotNull("context")}"), cancellationToken, body, _params(requestParameters));
+		
 		///<summary>Represents a POST on /_scripts/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6217,6 +6275,38 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> PutScriptPostAsync<T>(string id, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_scripts/{id.NotNull("id")}"), cancellationToken, body, _params(requestParameters));
+		
+		///<summary>Represents a POST on /_scripts/{id}/{context}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html </para>
+	    ///</summary>
+		///<param name="id">Script ID</param>
+		///<param name="context">Script context</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> PutScriptPost<T>(string id, string context, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(POST, Url($"_scripts/{id.NotNull("id")}/{context.NotNull("context")}"), body, _params(requestParameters));
+		
+		///<summary>Represents a POST on /_scripts/{id}/{context}
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html </para>
+	    ///</summary>
+		///<param name="id">Script ID</param>
+		///<param name="context">Script context</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> PutScriptPostAsync<T>(string id, string context, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class => this.DoRequestAsync<T>(POST, Url($"_scripts/{id.NotNull("id")}/{context.NotNull("context")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_reindex
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6273,32 +6363,6 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ReindexRethrottleAsync<T>(string task_id, Func<ReindexRethrottleRequestParameters, ReindexRethrottleRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_reindex/{task_id.NotNull("task_id")}/_rethrottle"), cancellationToken, null, _params(requestParameters));
-		
-		///<summary>Represents a GET on /_remote/info
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html </para>
-	    ///</summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> RemoteInfo<T>(Func<RemoteInfoRequestParameters, RemoteInfoRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_remote/info"), null, _params(requestParameters));
-		
-		///<summary>Represents a GET on /_remote/info
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html </para>
-	    ///</summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> RemoteInfoAsync<T>(Func<RemoteInfoRequestParameters, RemoteInfoRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_remote/info"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_render/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

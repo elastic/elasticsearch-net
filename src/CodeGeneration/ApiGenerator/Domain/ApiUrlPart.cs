@@ -46,6 +46,7 @@ namespace ApiGenerator.Domain
 					case "filter_id":
 					case "id": return this.Type == "string" ? "Id" : "Ids";
 					case "category_id": return "CategoryId";
+					case "nodes":
 					case "node_id": return this.Type == "string" ? "NodeId" : "NodeIds";
 					case "scroll_id": return this.Type == "string" ? "ScrollId" : "ScrollIds";
 					case "field":
@@ -64,9 +65,11 @@ namespace ApiGenerator.Domain
 					case "realm":
 					case "realms":
 					case "alias":
+					case "context":
 					case "name":
 					case "thread_pool_patterns":
 						return this.Type == "string" ? "Name" : "Names";
+					case "parent_task_id":
 					case "task_id": return "TaskId";
 					case "timestamp": return "Timestamp";
 					default: return this.Type + "_";

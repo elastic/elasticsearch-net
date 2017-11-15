@@ -774,6 +774,9 @@ namespace Nest
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatSegmentsDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
+		///<summary>The unit in which to display byte values</summary>
+		public CatSegmentsDescriptor Bytes(Bytes bytes) => AssignParam(p=>p.Bytes(bytes));
+
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatSegmentsDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
 
@@ -824,6 +827,9 @@ namespace Nest
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatShardsDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
+		///<summary>The unit in which to display byte values</summary>
+		public CatShardsDescriptor Bytes(Bytes bytes) => AssignParam(p=>p.Bytes(bytes));
+
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatShardsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -867,12 +873,10 @@ namespace Nest
 		public CatSnapshotsDescriptor() : base(){}
 		
 
-		/// <summary>/_cat/snapshots/{repository}</summary>
-///<param name="repository"> this parameter is required</param>
-		public CatSnapshotsDescriptor(Names repository) : base(r=>r.Required("repository", repository)){}
-		
+			///<summary>Name of repository from which to fetch the snapshot information</summary>
+		public CatSnapshotsDescriptor RepositoryName(Names repository) => Assign(a=>a.RouteValues.Optional("repository", repository));
 
-		
+	
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatSnapshotsDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -1269,6 +1273,27 @@ namespace Nest
 	
 	}
 	
+	///<summary>descriptor for ClusterRemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
+	public partial class RemoteInfoDescriptor  : RequestDescriptorBase<RemoteInfoDescriptor,RemoteInfoRequestParameters, IRemoteInfoRequest>, IRemoteInfoRequest
+	{ 
+			
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RemoteInfoDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public RemoteInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RemoteInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public RemoteInfoDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RemoteInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
 	///<summary>descriptor for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
 	public partial class ClusterRerouteDescriptor  : RequestDescriptorBase<ClusterRerouteDescriptor,ClusterRerouteRequestParameters, IClusterRerouteRequest>, IClusterRerouteRequest
 	{ 
@@ -1443,8 +1468,8 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public CountDescriptor<T> Preference(string preference) => AssignParam(p=>p.Preference(preference));
 
-		///<summary>Specific routing value</summary>
-		public CountDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+		///<summary>A comma-separated list of specific routing values</summary>
+		public CountDescriptor<T> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>Query in the Lucene query string syntax</summary>
 		public CountDescriptor<T> QueryOnQueryString(string query_on_query_string) => AssignParam(p=>p.QueryOnQueryString(query_on_query_string));
@@ -1463,6 +1488,9 @@ namespace Nest
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public CountDescriptor<T> Lenient(bool lenient = true) => AssignParam(p=>p.Lenient(lenient));
+
+		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
+		public CountDescriptor<T> TerminateAfter(long terminate_after) => AssignParam(p=>p.TerminateAfter(terminate_after));
 
 		///<summary>Pretty format the returned JSON response.</summary>
 		public CountDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
@@ -4888,20 +4916,21 @@ namespace Nest
 	public partial class PutScriptDescriptor  : RequestDescriptorBase<PutScriptDescriptor,PutScriptRequestParameters, IPutScriptRequest>, IPutScriptRequest
 	{ 
 		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
+		Name IPutScriptRequest.Context => Self.RouteValues.Get<Name>("context");
 			/// <summary>/_scripts/{id}</summary>
 ///<param name="id"> this parameter is required</param>
 		public PutScriptDescriptor(Id id) : base(r=>r.Required("id", id)){}
 		
 
-		
+			///<summary>Script context</summary>
+		public PutScriptDescriptor Context(Name context) => Assign(a=>a.RouteValues.Optional("context", context));
+
+	
 		///<summary>Explicit operation timeout</summary>
 		public PutScriptDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
 		///<summary>Specify timeout for connection to master</summary>
 		public PutScriptDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
-
-		///<summary>Context name to compile script against</summary>
-		public PutScriptDescriptor Context(string context) => AssignParam(p=>p.Context(context));
 
 		///<summary>Pretty format the returned JSON response.</summary>
 		public PutScriptDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
@@ -4985,27 +5014,6 @@ namespace Nest
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ReindexRethrottleDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
-	///<summary>descriptor for RemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
-	public partial class RemoteInfoDescriptor  : RequestDescriptorBase<RemoteInfoDescriptor,RemoteInfoRequestParameters, IRemoteInfoRequest>, IRemoteInfoRequest
-	{ 
-			
-		///<summary>Pretty format the returned JSON response.</summary>
-		public RemoteInfoDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
-
-		///<summary>Return human readable values for statistics.</summary>
-		public RemoteInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
-
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RemoteInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
-
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RemoteInfoDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RemoteInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5642,7 +5650,7 @@ namespace Nest
 
 	
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public CancelTasksDescriptor NodeId(params string[] node_id) => AssignParam(p=>p.NodeId(node_id));
+		public CancelTasksDescriptor Nodes(params string[] nodes) => AssignParam(p=>p.Nodes(nodes));
 
 		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
 		public CancelTasksDescriptor Actions(params string[] actions) => AssignParam(p=>p.Actions(actions));
@@ -5651,7 +5659,7 @@ namespace Nest
 		public CancelTasksDescriptor ParentNode(string parent_node) => AssignParam(p=>p.ParentNode(parent_node));
 
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
-		public CancelTasksDescriptor ParentTask(string parent_task) => AssignParam(p=>p.ParentTask(parent_task));
+		public CancelTasksDescriptor ParentTaskId(string parent_task_id) => AssignParam(p=>p.ParentTaskId(parent_task_id));
 
 		///<summary>Pretty format the returned JSON response.</summary>
 		public CancelTasksDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
@@ -5707,7 +5715,7 @@ namespace Nest
 	{ 
 			
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public ListTasksDescriptor NodeId(params string[] node_id) => AssignParam(p=>p.NodeId(node_id));
+		public ListTasksDescriptor Nodes(params string[] nodes) => AssignParam(p=>p.Nodes(nodes));
 
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
 		public ListTasksDescriptor Actions(params string[] actions) => AssignParam(p=>p.Actions(actions));
@@ -5719,7 +5727,7 @@ namespace Nest
 		public ListTasksDescriptor ParentNode(string parent_node) => AssignParam(p=>p.ParentNode(parent_node));
 
 		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
-		public ListTasksDescriptor ParentTask(string parent_task) => AssignParam(p=>p.ParentTask(parent_task));
+		public ListTasksDescriptor ParentTaskId(string parent_task_id) => AssignParam(p=>p.ParentTaskId(parent_task_id));
 
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public ListTasksDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
