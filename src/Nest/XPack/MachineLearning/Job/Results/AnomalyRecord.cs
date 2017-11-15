@@ -48,7 +48,7 @@ namespace Nest
 		public double InitialRecordScore { get; internal set; }
 
 		/// <summary>
-		/// The length of the bucket. This value matches the <see cref="Job.AnalysisConfig.BucketSpan"/> that is specified in the job.
+		/// The length of the bucket. This value matches the <see cref="AnalysisConfig.BucketSpan"/> that is specified in the job.
 		/// </summary>
 		[JsonProperty("bucket_span")]
 		public Time BucketSpan { get; internal set; }
