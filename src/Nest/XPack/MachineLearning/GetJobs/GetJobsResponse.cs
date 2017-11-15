@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// A response of the configuration for Machine Learning jobs.
+	/// A response of the configuration for machine learning jobs.
 	/// </summary>
 	public interface IGetJobsResponse : IResponse
 	{
@@ -15,7 +15,7 @@ namespace Nest
 		long Count { get; }
 
 		/// <summary>
-		/// The configuration of Machine Learning jobs
+		/// The configuration of machine learning jobs
 		/// </summary>
 		[JsonProperty("jobs")]
 		IReadOnlyCollection<Job> Jobs { get; }

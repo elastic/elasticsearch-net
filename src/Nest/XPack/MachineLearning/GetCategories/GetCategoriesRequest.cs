@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// A request to retrieve job results for one or more categories.
+	/// Retrieve job results for one or more categories.
 	/// </summary>
 	public partial interface IGetCategoriesRequest
 	{
@@ -26,6 +26,7 @@ namespace Nest
 	[DescriptorFor("XpackMlGetCategories")]
 	public partial class GetCategoriesDescriptor
 	{
+		/// <inheritdoc />
 		IPage IGetCategoriesRequest.Page { get; set; }
 
 		/// <inheritdoc />

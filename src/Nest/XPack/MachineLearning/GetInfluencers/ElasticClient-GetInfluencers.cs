@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Retrieves results for Machine Learning job influencers.
+		/// Retrieves results for machine learning job influencers.
 		/// </summary>
 		IGetInfluencersResponse GetInfluencers(Id jobId, Func<GetInfluencersDescriptor, IGetInfluencersRequest> selector = null);
 

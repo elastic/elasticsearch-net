@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Forces any buffered data to be processed by the Machine Learning job.
+		/// Forces any buffered data to be processed by the machine learning job.
 		/// </summary>
 		IFlushJobResponse FlushJob(Id jobId, Func<FlushJobDescriptor, IFlushJobRequest> selector = null);
 

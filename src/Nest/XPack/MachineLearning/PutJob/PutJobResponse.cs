@@ -6,22 +6,22 @@ namespace Nest
 	public interface IPutJobResponse : IResponse
 	{
 		/// <summary>
-		/// The unique identifier for the job
+		/// The unique identifier for the job.
 		/// </summary>
 		[JsonProperty("job_id")]
 		string JobId { get; }
 
 		/// <summary>
-		/// The job type
+		/// The job type.
 		/// </summary>
 		/// <remarks>
-		/// Reserved for future use
+		/// Reserved for future use.
 		/// </remarks>
 		[JsonProperty("job_type")]
 		string JobType { get; }
 
 		/// <summary>
-		/// An optional description of the job
+		/// An optional description of the job.
 		/// </summary>
 		[JsonProperty("description")]
 		string Description { get; }
@@ -58,7 +58,7 @@ namespace Nest
 		Time BackgroundPersistInterval { get; }
 
 		/// <summary>
-		/// Describes the format of the input data. This object is required, but it can be empty
+		/// Describes the format of the input data. This object is required, but it can be empty.
 		/// </summary>
 		[JsonProperty("data_description")]
 		IDataDescription DataDescription { get; }

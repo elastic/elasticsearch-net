@@ -6,7 +6,7 @@ namespace Nest
 	public interface IPostJobDataResponse : IResponse
 	{
 		/// <summary>
-		/// The unique identifier for the job
+		/// The unique identifier for the job.
 		/// </summary>
 		[JsonProperty("job_id")]
 		string JobId { get; }

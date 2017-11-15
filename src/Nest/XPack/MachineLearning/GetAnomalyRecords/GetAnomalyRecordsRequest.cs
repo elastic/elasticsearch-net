@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// A request to retrieve retrieve anomaly records for a Machine Learning job.
+	/// Retrieve anomaly records for a machine learning job.
 	/// </summary>
 	public partial interface IGetAnomalyRecordsRequest
 	{
@@ -40,7 +40,7 @@ namespace Nest
 		double? RecordScore { get; set; }
 
 		/// <summary>
-		/// Specifies the sort field for the requested records. By default, records are sorted by the record score value.
+		/// Specifies the sort field for the requested records. By default, records are sorted by the anomaly score value.
 		/// </summary>
 		[JsonProperty("sort")]
 		Field Sort { get; set; }

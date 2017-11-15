@@ -7,22 +7,22 @@ namespace Nest
 	public class Job
 	{
 		/// <summary>
-		/// The unique identifier for the job
+		/// The unique identifier for the job.
 		/// </summary>
 		[JsonProperty("job_id")]
 		public string JobId { get; set; }
 
 		/// <summary>
-		/// The job type
+		/// The job type.
 		/// </summary>
 		/// <remarks>
-		/// Reserved for future use
+		/// Reserved for future use.
 		/// </remarks>
 		[JsonProperty("job_type")]
 		public string JobType { get; set; }
 
 		/// <summary>
-		/// An optional description of the job
+		/// An optional description of the job.
 		/// </summary>
 		[JsonProperty("description")]
 		public string Description { get; set; }
@@ -59,14 +59,13 @@ namespace Nest
 		/// at exactly the same time. The smallest allowed value is 1 hour.
 		/// </summary>
 		/// <remarks>
-		/// For very large models (several GB), persistence could take 10-20 minutes,
-		/// so do not set the background_persist_interval value too low.
+		/// For very large models (several GB), persistence could take 10-20 minutes, so do not set the value too low.
 		/// </remarks>
 		[JsonProperty("background_persist_interval")]
 		public Time BackgroundPersistInterval { get; set; }
 
 		/// <summary>
-		/// Describes the format of the input data. This object is required, but it can be empty
+		/// Describes the format of the input data. This object is required, but it can be empty.
 		/// </summary>
 		[JsonProperty("data_description")]
 		public IDataDescription DataDescription { get; set; }
@@ -86,21 +85,21 @@ namespace Nest
 
 		/// <summary>
 		/// The name of the index in which to store the machine learning results.
-		/// The default value is shared, which corresponds to the index name .ml-anomalies-shared.
+		/// The default value is shared (which corresponds to the index name .ml-anomalies-shared).
 		/// </summary>
 		[JsonProperty("results_index_name")]
 		public string ResultsIndexName { get; set; }
 
 		/// <summary>
 		/// This advanced configuration option stores model information along with the results.
-		/// This adds overhead to the performance of the system and is not feasible for jobs with many entities
+		/// This adds overhead to the performance of the system and is not feasible for jobs with many entities.
 		/// </summary>
 		[JsonProperty("model_plot")]
 		public IModelPlotConfig ModelPlotConfig { get; set; }
 
 		/// <summary>
 		/// Advanced configuration option. The period over which adjustments to the score are applied, as new data
-		/// is seen. The default value is the longer of 30 days or 100 bucket_spans.
+		/// is seen. The default value is the longer of 30 days or 100 bucket spans.
 		/// </summary>
 		[JsonProperty("renormalization_window_days")]
 		public long? RenormalizationWindowDays { get; set; }

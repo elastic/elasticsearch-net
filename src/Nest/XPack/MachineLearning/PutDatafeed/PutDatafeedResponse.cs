@@ -3,18 +3,18 @@
 namespace Nest
 {
 	/// <summary>
-	/// The response from creating a datafeed
+	/// The response from creating a datafeed.
 	/// </summary>
 	public partial interface IPutDatafeedResponse : IResponse
 	{
 		/// <summary>
-		/// The datafeed id
+		/// The datafeed id.
 		/// </summary>
 		[JsonProperty("datafeed_id")]
 		string DatafeedId { get; }
 
 		/// <summary>
-		/// The aggregation searches to perform for the datafeed
+		/// The aggregation searches to perform for the datafeed.
 		/// </summary>
 		[JsonProperty("aggregations")]
 		AggregationDictionary Aggregations { get; }
@@ -33,7 +33,9 @@ namespace Nest
 		[JsonProperty("frequency")]
 		Time Frequency { get; }
 
-		///<summary>A list of index names to search within. Wildcards are supported</summary>
+		///<summary>
+		/// A list of index names to search within, wildcards are supported.
+		/// </summary>
 		[JsonProperty("indices")]
 		[JsonConverter(typeof(IndicesJsonConverter))]
 		Indices Indices { get; }
@@ -52,7 +54,7 @@ namespace Nest
 
 		/// <summary>
 		/// The number of seconds behind real time that data is queried.
-		/// For example, if data from 10:04 a.m. might not be searchable in Elasticsearch until 10:06 a.m.,
+		/// For example, if data from 10:04 a.m. might not be searchable until 10:06 a.m.,
 		/// set this property to 120 seconds. The default value is 60s.
 		/// </summary>
 		[JsonProperty("query_delay")]
@@ -66,7 +68,7 @@ namespace Nest
 		IScriptFields ScriptFields { get; }
 
 		/// <summary>
-		/// The size parameter that is used in Elasticsearch searches
+		/// The size parameter that used in searches
 		/// </summary>
 		[JsonProperty("scroll_size")]
 		int? ScrollSize { get; }

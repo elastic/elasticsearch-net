@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Updates a Machine Learning model snapshot.
+		/// Updates a machine learning model snapshot.
 		/// </summary>
 		IUpdateModelSnapshotResponse UpdateModelSnapshot(Id jobId, Id snapshotId, Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> selector = null);
 

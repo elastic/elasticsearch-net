@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Creates a Machine Learning datafeed.
+		/// Creates a machine learning datafeed.
 		/// You must create a job before you create a datafeed. You can associate only one datafeed to each job.
 		/// </summary>
 		IPutDatafeedResponse PutDatafeed<T>(Id datafeedId, Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null) where T : class;

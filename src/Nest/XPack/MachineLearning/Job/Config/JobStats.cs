@@ -3,7 +3,7 @@
 namespace Nest
 {
 	/// <summary>
-	/// Provides statistics about the operation progress of a Machine Learning job.
+	/// Provides statistics about the operation progress of a machine learning job.
 	/// </summary>
 	[JsonObject]
 	public class JobStats
@@ -33,7 +33,7 @@ namespace Nest
 		public ModelSizeStats ModelSizeStats { get; internal set; }
 
 		/// <summary>
-		/// The status of the job
+		/// The status of the job.
 		/// </summary>
 		[JsonProperty("state")]
 		public JobState State { get; internal set; }
