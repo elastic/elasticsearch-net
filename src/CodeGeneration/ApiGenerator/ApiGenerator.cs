@@ -41,6 +41,13 @@ namespace ApiGenerator
 			}
 		}
 
+		private static string[] IgnoredApis { get; } =
+		{
+			"xpack.ml.delete_filter.json",
+			"xpack.ml.get_filters.json",
+			"xpack.ml.put_filter.json",
+		};
+
 		private static RestApiSpec CreateRestApiSpecModel(string downloadBranch, string[] folders)
 		{
 			var directories = Directory.GetDirectories(CodeConfiguration.RestSpecificationFolder, "*", SearchOption.AllDirectories)
@@ -50,7 +57,12 @@ namespace ApiGenerator
 			var endpoints = new Dictionary<string, ApiEndpoint>();
 			using (var pbar = new ProgressBar(directories.Count, $"Listing {directories.Count} directories", new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray }))
 			{
-				foreach (var jsonFiles in directories.Select(dir => Directory.GetFiles(dir).Where(f => f.EndsWith(".json")).ToList()))
+				var folderFiles = directories.Select(dir =>
+					Directory.GetFiles(dir)
+					.Where(f => f.EndsWith(".json") && !IgnoredApis.Contains(new FileInfo(f).Name))
+					.ToList()
+				);
+				foreach (var jsonFiles in folderFiles)
 				{
 					using (var fileProgress = pbar.Spawn(jsonFiles.Count, $"Listing {jsonFiles.Count} files", new ProgressBarOptions { ProgressCharacter = '─', BackgroundColor = ConsoleColor.DarkGray }))
 					{

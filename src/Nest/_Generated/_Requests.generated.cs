@@ -9255,7 +9255,10 @@ namespace Nest
 		public WatcherStatsRequest(WatcherStatsMetric watcher_stats_metric) : base(r=>r.Optional("watcher_stats_metric", (Metrics)watcher_stats_metric)){}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
+			///<summary>Emits stack traces of currently running watches</summary>
+		public bool EmitStacktraces { get { return Q<bool>("emit_stacktraces"); } set { Q("emit_stacktraces", value); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
 		///<summary>Return human readable values for statistics.</summary>

@@ -8223,6 +8223,10 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
+		///<summary>Emits stack traces of currently running watches</summary>
+		public WatcherStatsRequestParameters EmitStacktraces(bool emit_stacktraces) => this.AddQueryString("emit_stacktraces", emit_stacktraces);
+		
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public WatcherStatsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
 		
