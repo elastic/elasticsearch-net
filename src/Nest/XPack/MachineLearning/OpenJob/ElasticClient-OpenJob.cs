@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Opens a Machine Learning job.
+		/// Opens a machine learning job.
 		/// A job must be opened in order for it to be ready to receive and analyze data.
 		/// A job can be opened and closed multiple times throughout its lifecycle.
 		/// </summary>

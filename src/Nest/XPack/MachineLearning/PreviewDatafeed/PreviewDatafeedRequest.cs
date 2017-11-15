@@ -1,5 +1,3 @@
-using Newtonsoft.Json;
-
 namespace Nest
 {
 	public partial interface IPreviewDatafeedRequest {}

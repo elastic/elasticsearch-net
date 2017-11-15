@@ -8,11 +8,10 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Deletes an existing Machine Learning model snapshot.
+		/// Deletes an existing machine learning model snapshot.
 		/// </summary>
 		/// <remarks>
-		/// You cannot delete the active model snapshot.
-		/// To delete that snapshot, first revert to a different one.
+		/// You cannot delete the active model snapshot, unless you first revert to a different one.
 		/// </remarks>
 		IDeleteModelSnapshotResponse DeleteModelSnapshot(Id jobId, Id snapshotId, Func<DeleteModelSnapshotDescriptor, IDeleteModelSnapshotRequest> selector = null);
 

@@ -8,7 +8,7 @@ using Tests.Framework.MockData;
 
 namespace Tests.XPack.MachineLearning
 {
-	[SkipVersion("<5.4.0", "Machine Learning does not exist in previous versions")]
+	[SkipVersion("<5.4.0", "machine learning does not exist in previous versions")]
 	public abstract class MachineLearningIntegrationTestBase<TResponse, TInterface, TDescriptor, TInitializer>
 		: ApiIntegrationTestBase<XPackMachineLearningCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		where TResponse : class, IResponse

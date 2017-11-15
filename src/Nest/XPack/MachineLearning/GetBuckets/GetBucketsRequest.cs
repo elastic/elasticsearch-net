@@ -5,7 +5,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	/// <summary>
-	/// A request to retrieve job results for one or more buckets.
+	/// Retrieve job results for one or more buckets.
 	/// </summary>
 	public partial interface IGetBucketsRequest
 	{

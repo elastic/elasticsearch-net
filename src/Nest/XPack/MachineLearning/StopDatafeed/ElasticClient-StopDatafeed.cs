@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Stop a Machine Learning data feed.
+		/// Stop a machine learning data feed.
 		/// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped multiple times throughout its lifecycle.
 		/// </summary>
 		IStopDatafeedResponse StopDatafeed(Id datafeedId, Func<StopDatafeedDescriptor, IStopDatafeedRequest> selector = null);

@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Sends data to a Machine Learning job for analysis.
+		/// Sends data to a machine learning job for analysis.
 		/// </summary>
 		IPostJobDataResponse PostJobData(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector);
 

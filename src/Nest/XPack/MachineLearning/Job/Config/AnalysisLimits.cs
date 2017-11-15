@@ -21,7 +21,7 @@ namespace Nest
 		long? CategorizationExamplesLimit { get; set; }
 
 		/// <summary>
-		///  The approximate maximum amount of memory resources that are required for analytical processing,
+		/// The approximate maximum amount of memory resources that are required for analytical processing,
 		/// in MiB. Once this limit is approached, data pruning becomes more aggressive.
 		/// Upon exceeding this limit, new entities are not modeled. The default value is 4096.
 		/// </summary>
@@ -60,7 +60,7 @@ namespace Nest
 	public interface IAnalysisMemoryLimit
 	{
 		/// <summary>
-		///  The approximate maximum amount of memory resources that are required for analytical processing,
+		/// The approximate maximum amount of memory resources that are required for analytical processing,
 		/// in MiB. Once this limit is approached, data pruning becomes more aggressive.
 		/// Upon exceeding this limit, new entities are not modeled. The default value is 4096.
 		/// </summary>
