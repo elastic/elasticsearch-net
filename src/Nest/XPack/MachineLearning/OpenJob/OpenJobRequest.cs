@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// A request to open a Machine Learning job.
+	/// Open a machine learning job.
 	/// </summary>
 	public partial interface IOpenJobRequest
 	{

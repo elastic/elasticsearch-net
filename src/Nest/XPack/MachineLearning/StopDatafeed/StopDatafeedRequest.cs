@@ -1,4 +1,3 @@
-using System;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -6,7 +5,7 @@ namespace Nest
 	public partial interface IStopDatafeedRequest
 	{
 		/// <summary>
-		/// Controls the amount of time to wait until a datafeed stops. 
+		/// Controls the amount of time to wait until a datafeed stops.
 		/// </summary>
 		[JsonProperty("timeout")]
 		Time Timeout { get; set; }

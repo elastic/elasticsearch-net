@@ -1,10 +1,7 @@
-using System;
-using Newtonsoft.Json;
-
 namespace Nest
 {
 	/// <summary>
-	/// A request to retrieve usage information for Machine Learning jobs.
+	/// Retrieve usage information for machine learning jobs.
 	/// </summary>
 	public partial interface IGetJobsRequest {}
 

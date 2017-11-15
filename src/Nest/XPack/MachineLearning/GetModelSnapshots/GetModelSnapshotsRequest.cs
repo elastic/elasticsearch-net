@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// A request to retrieve usage information for Machine Learning jobs.
+	/// Retrieve usage information for machine learning jobs.
 	/// </summary>
 	public partial interface IGetModelSnapshotsRequest
 	{
@@ -22,7 +22,7 @@ namespace Nest
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
-		/// Specifies pagination for the snapshots
+		/// Specifies pagination for the snapshots.
 		/// </summary>
 		[JsonProperty("page")]
 		IPage Page { get; set; }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Nest
 {
 	/// <summary>
-	/// Update a Machine Learning Job
+	/// Update a machine learning Job
 	/// </summary>
 	public partial interface IUpdateJobRequest
 	{

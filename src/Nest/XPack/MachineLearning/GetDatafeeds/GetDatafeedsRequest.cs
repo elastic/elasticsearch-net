@@ -1,10 +1,7 @@
-using System;
-using Newtonsoft.Json;
-
 namespace Nest
 {
 	/// <summary>
-	/// A request to retrieve configuration information for Machine Learning datafeeds.
+	/// Retrieve configuration information for machine learning datafeeds.
 	/// </summary>
 	public partial interface IGetDatafeedsRequest {}
 

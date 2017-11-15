@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Retrieves configuration information for Machine Learning datafeeds.
+		/// Retrieves configuration information for machine learning datafeeds.
 		/// </summary>
 		IGetDatafeedStatsResponse GetDatafeedStats(Func<GetDatafeedStatsDescriptor, IGetDatafeedStatsRequest> selector = null);
 

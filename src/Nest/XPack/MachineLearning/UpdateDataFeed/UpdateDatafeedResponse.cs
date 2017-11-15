@@ -8,13 +8,13 @@ namespace Nest
 	public partial interface IUpdateDatafeedResponse : IResponse
 	{
 		/// <summary>
-		/// The datafeed id
+		/// The datafeed id.
 		/// </summary>
 		[JsonProperty("datafeed_id")]
 		string DatafeedId { get; }
 
 		/// <summary>
-		/// The aggregation searches to perform for the datafeed
+		/// The aggregation searches to perform for the datafeed.
 		/// </summary>
 		[JsonProperty("aggregations")]
 		AggregationDictionary Aggregations { get; }
@@ -33,7 +33,7 @@ namespace Nest
 		[JsonProperty("frequency")]
 		Time Frequency { get; }
 
-		///<summary>A list of index names to search within. Wildcards are supported</summary>
+		///<summary>A list of index names to search within, wildcards are supported.</summary>
 		[JsonProperty("indices")]
 		[JsonConverter(typeof(IndicesJsonConverter))]
 		Indices Indices { get; }
@@ -52,15 +52,15 @@ namespace Nest
 
 		/// <summary>
 		/// The number of seconds behind real time that data is queried.
-		/// For example, if data from 10:04 a.m. might not be searchable in Elasticsearch until 10:06 a.m.,
+		/// For example, if data from 10:04 a.m. might not be searchable until 10:06 a.m.,
 		/// set this property to 120 seconds. The default value is 60s.
 		/// </summary>
 		[JsonProperty("query_delay")]
 		Time QueryDelay { get; }
 
 		/// <summary>
-		/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed. T
-		/// the detector configuration in a job can contain functions that use these script fields.
+		/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
+		/// The detector configuration in a job can contain functions that use these script fields.
 		/// </summary>
 		[JsonProperty("script_fields")]
 		IScriptFields ScriptFields { get; }

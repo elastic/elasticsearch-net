@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Closes a Machine Learning job.
+		/// Closes a machine learning job.
 		/// A closed job cannot receive data or perform analysis operations, but you can still explore and navigate results.
 		/// </summary>
 		ICloseJobResponse CloseJob(Id jobId, Func<CloseJobDescriptor, ICloseJobRequest> selector = null);

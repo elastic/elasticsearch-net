@@ -10,7 +10,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Preview a Machine Learning datafeed.
+		/// Preview a machine learning datafeed.
 		/// This preview shows the structure of the data that will be passed to the anomaly detection engine.
 		/// </summary>
 		IPreviewDatafeedResponse<T> PreviewDatafeed<T>(Id datafeedId, Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> selector = null);

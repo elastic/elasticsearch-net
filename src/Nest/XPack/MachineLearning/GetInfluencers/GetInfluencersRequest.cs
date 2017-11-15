@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// A request to retrieve results for Machine Learning job influencers.
+	/// Retrieve results for machine learning job influencers.
 	/// </summary>
 	public partial interface IGetInfluencersRequest
 	{
@@ -33,7 +33,7 @@ namespace Nest
 		double? InfluencerScore { get; set; }
 
 		/// <summary>
-		/// Specifies pagination for the influencers
+		/// Specifies pagination for the influencers.
 		/// </summary>
 		[JsonProperty("page")]
 		IPage Page { get; set; }

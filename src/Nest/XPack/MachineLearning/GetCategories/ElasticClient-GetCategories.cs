@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Retrieves Machine Learning job results for one or more categories.
+		/// Retrieves machine learning job results for one or more categories.
 		/// </summary>
 		IGetCategoriesResponse GetCategories(Id jobId, Func<GetCategoriesDescriptor, IGetCategoriesRequest> selector = null);
 

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// A request to update a Machine Learning model snapshot.
+	/// Update a machine learning model snapshot.
 	/// </summary>
 	public partial interface IUpdateModelSnapshotRequest
 	{
