@@ -7819,6 +7819,9 @@ namespace Nest
 		public WatcherStatsDescriptor WatcherStatsMetric(WatcherStatsMetric watcherStatsMetric) => Assign(a=>a.RouteValues.Optional("watcher_stats_metric", (Metrics)watcherStatsMetric));
 
 	
+		///<summary>Emits stack traces of currently running watches</summary>
+		public WatcherStatsDescriptor EmitStacktraces(bool emit_stacktraces = true) => AssignParam(p=>p.EmitStacktraces(emit_stacktraces));
+
 		///<summary>Pretty format the returned JSON response.</summary>
 		public WatcherStatsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
