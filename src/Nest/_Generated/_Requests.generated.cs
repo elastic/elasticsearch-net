@@ -6503,6 +6503,14 @@ namespace Nest
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
+		///<summary></summary>
+		[Obsolete("Scheduled to be removed in 6.0, calling this is a noop")]
+		public bool Force { get { return Q<bool>("force"); } set { Q("force", value); } }
+		
+		///<summary></summary>
+		[Obsolete("Scheduled to be removed in 6.0, calling this is a noop")]
+		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
+		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]

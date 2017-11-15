@@ -4140,6 +4140,16 @@ namespace Elasticsearch.Net
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RefreshRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
+		
+		///<summary></summary>
+		[Obsolete("Scheduled to be removed in 6.0, calling this is a noop")]
+		public RefreshRequestParameters Force(bool force) => this;
+		
+		
+		///<summary></summary>
+		[Obsolete("Scheduled to be removed in 6.0, calling this is a noop")]
+		public RefreshRequestParameters OperationThreading(string operation_threading) => this;
+		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesRolloverForAll

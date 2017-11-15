@@ -13,7 +13,7 @@ namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 	public class InvalidateUserAccessTokenApiTests : ApiIntegrationTestBase<XPackCluster, IInvalidateUserAccessTokenResponse, IInvalidateUserAccessTokenRequest,
 		InvalidateUserAccessTokenDescriptor, InvalidateUserAccessTokenRequest>
 	{
-		protected const string AccessTokenValueKey = "accestoken";
+		protected const string AccessTokenValueKey = "accesstoken";
 		protected override void OnBeforeCall(IElasticClient client)
 		{
 			var r = client.GetUserAccessToken(Admin.Username, Admin.Password);

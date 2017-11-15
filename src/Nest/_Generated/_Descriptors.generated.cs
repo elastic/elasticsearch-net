@@ -4044,6 +4044,12 @@ namespace Nest
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RefreshDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		///<summary></summary>
+		[Obsolete("Scheduled to be removed in 6.0, calling this is a noop")]		public RefreshDescriptor Force(bool force = true) => AssignParam(p=>p.Force(force));
+
+		///<summary></summary>
+		[Obsolete("Scheduled to be removed in 6.0, calling this is a noop")]		public RefreshDescriptor OperationThreading(string operation_threading) => AssignParam(p=>p.OperationThreading(operation_threading));
 	
 	}
 	
