@@ -52,6 +52,7 @@ namespace Nest
 					case "index_metric" :  return PrettyParam(key, request.RouteValues.IndexMetric);
 					case "lang" :  return PrettyParam(key, request.RouteValues.Lang);
 					case "metric" :  return PrettyParam(key, request.RouteValues.Metric);
+					case "nodes" :  return PrettyParam(key, request.RouteValues.NodeId);
 					case "node_id" :  return PrettyParam(key, request.RouteValues.NodeId);
 					case "repository" :  return PrettyParam(key, request.RouteValues.Repository);
 					case "scroll_id" :  return PrettyParam(key, request.RouteValues.ScrollId);

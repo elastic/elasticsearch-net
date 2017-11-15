@@ -919,6 +919,10 @@ namespace Elasticsearch.Net
 		public CatSegmentsRequestParameters Format(string format) => this.AddQueryString("format", format);
 		
 		
+		///<summary>The unit in which to display byte values</summary>
+		public CatSegmentsRequestParameters Bytes(Bytes bytes) => this.AddQueryString("bytes", bytes);
+		
+		
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatSegmentsRequestParameters H(params string[] h) => this.AddQueryString("h", h);
 		
@@ -967,6 +971,10 @@ namespace Elasticsearch.Net
 		
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatShardsRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
+		
+		///<summary>The unit in which to display byte values</summary>
+		public CatShardsRequestParameters Bytes(Bytes bytes) => this.AddQueryString("bytes", bytes);
 		
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -1522,6 +1530,36 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for ClusterRemoteInfo
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html
+	///</pre>
+	///</summary>
+	public class RemoteInfoRequestParameters : FluentRequestParameters<RemoteInfoRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RemoteInfoRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public RemoteInfoRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RemoteInfoRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public RemoteInfoRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RemoteInfoRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for ClusterReroute
 	///<pre>
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html
@@ -1697,8 +1735,8 @@ namespace Elasticsearch.Net
 		public CountRequestParameters Preference(string preference) => this.AddQueryString("preference", preference);
 		
 		
-		///<summary>Specific routing value</summary>
-		public CountRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
+		///<summary>A comma-separated list of specific routing values</summary>
+		public CountRequestParameters Routing(params string[] routing) => this.AddQueryString("routing", routing);
 		
 		
 		///<summary>Query in the Lucene query string syntax</summary>
@@ -1723,6 +1761,10 @@ namespace Elasticsearch.Net
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public CountRequestParameters Lenient(bool lenient) => this.AddQueryString("lenient", lenient);
+		
+		
+		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
+		public CountRequestParameters TerminateAfter(long terminate_after) => this.AddQueryString("terminate_after", terminate_after);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -5110,36 +5152,6 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for RemoteInfo
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html
-	///</pre>
-	///</summary>
-	public class RemoteInfoRequestParameters : FluentRequestParameters<RemoteInfoRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public RemoteInfoRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
-		
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public RemoteInfoRequestParameters Human(bool human) => this.AddQueryString("human", human);
-		
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RemoteInfoRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
-		
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RemoteInfoRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RemoteInfoRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
 	///<summary>Request parameters descriptor for RenderSearchTemplate
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
@@ -5802,7 +5814,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public CancelTasksRequestParameters NodeId(params string[] node_id) => this.AddQueryString("node_id", node_id);
+		public CancelTasksRequestParameters Nodes(params string[] nodes) => this.AddQueryString("nodes", nodes);
 		
 		
 		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
@@ -5814,7 +5826,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
-		public CancelTasksRequestParameters ParentTask(string parent_task) => this.AddQueryString("parent_task", parent_task);
+		public CancelTasksRequestParameters ParentTaskId(string parent_task_id) => this.AddQueryString("parent_task_id", parent_task_id);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -5882,7 +5894,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public ListTasksRequestParameters NodeId(params string[] node_id) => this.AddQueryString("node_id", node_id);
+		public ListTasksRequestParameters Nodes(params string[] nodes) => this.AddQueryString("nodes", nodes);
 		
 		
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
@@ -5898,7 +5910,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
-		public ListTasksRequestParameters ParentTask(string parent_task) => this.AddQueryString("parent_task", parent_task);
+		public ListTasksRequestParameters ParentTaskId(string parent_task_id) => this.AddQueryString("parent_task_id", parent_task_id);
 		
 		
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>

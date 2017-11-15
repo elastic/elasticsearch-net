@@ -334,7 +334,7 @@ namespace Nest
 		
 
 			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public  string[] NodeId { get { return Q< string[]>("node_id"); } set { Q("node_id", value); } }
+		public  string[] Nodes { get { return Q< string[]>("nodes"); } set { Q("nodes", value); } }
 		
 		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
 		public  string[] Actions { get { return Q< string[]>("actions"); } set { Q("actions", value); } }
@@ -343,7 +343,7 @@ namespace Nest
 		public string ParentNode { get { return Q<string>("parent_node"); } set { Q("parent_node", value); } }
 		
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
-		public string ParentTask { get { return Q<string>("parent_task"); } set { Q("parent_task", value); } }
+		public string ParentTaskId { get { return Q<string>("parent_task_id"); } set { Q("parent_task_id", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
@@ -1100,6 +1100,9 @@ namespace Nest
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
 		
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
+		
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
@@ -1151,6 +1154,9 @@ namespace Nest
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
 		
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
+		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
@@ -1201,8 +1207,8 @@ namespace Nest
 		
 
 		/// <summary>/_cat/snapshots/{repository}</summary>
-///<param name="repository">this parameter is required</param>
-		public CatSnapshotsRequest(Names repository) : base(r=>r.Required("repository", repository)){}
+///<param name="repository">Optional, accepts null</param>
+		public CatSnapshotsRequest(Names repository) : base(r=>r.Optional("repository", repository)){}
 		
 
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -2079,8 +2085,8 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		///<summary>A comma-separated list of specific routing values</summary>
+		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
@@ -2099,6 +2105,9 @@ namespace Nest
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
+		
+		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
+		public long TerminateAfter { get { return Q<long>("terminate_after"); } set { Q("terminate_after", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
@@ -2152,8 +2161,8 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		///<summary>A comma-separated list of specific routing values</summary>
+		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
@@ -2172,6 +2181,9 @@ namespace Nest
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
+		
+		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
+		public long TerminateAfter { get { return Q<long>("terminate_after"); } set { Q("terminate_after", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
@@ -5535,7 +5547,7 @@ namespace Nest
 	{
 		protected IListTasksRequest Self => this;
 				///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public  string[] NodeId { get { return Q< string[]>("node_id"); } set { Q("node_id", value); } }
+		public  string[] Nodes { get { return Q< string[]>("nodes"); } set { Q("nodes", value); } }
 		
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
 		public  string[] Actions { get { return Q< string[]>("actions"); } set { Q("actions", value); } }
@@ -5547,7 +5559,7 @@ namespace Nest
 		public string ParentNode { get { return Q<string>("parent_node"); } set { Q("parent_node", value); } }
 		
 		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
-		public string ParentTask { get { return Q<string>("parent_task"); } set { Q("parent_task", value); } }
+		public string ParentTaskId { get { return Q<string>("parent_task_id"); } set { Q("parent_task_id", value); } }
 		
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
@@ -6650,15 +6662,23 @@ namespace Nest
 	public partial interface IPutScriptRequest : IRequest<PutScriptRequestParameters> 
 	{
 		Id Id { get; }
+		Name Context { get; }
 	 } 
 	///<summary>Request parameters for PutScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class PutScriptRequest  : PlainRequestBase<PutScriptRequestParameters>, IPutScriptRequest
 	{
 		protected IPutScriptRequest Self => this;
 		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
+		Name IPutScriptRequest.Context => Self.RouteValues.Get<Name>("context");
 			/// <summary>/_scripts/{id}</summary>
 ///<param name="id">this parameter is required</param>
 		public PutScriptRequest(Id id) : base(r=>r.Required("id", id)){}
+		
+
+		/// <summary>/_scripts/{id}/{context}</summary>
+///<param name="id">this parameter is required</param>		
+///<param name="context">Optional, accepts null</param>
+		public PutScriptRequest(Id id, Name context) : base(r=>r.Required("id", id).Optional("context", context)){}
 		
 
 			///<summary>Explicit operation timeout</summary>
@@ -6666,9 +6686,6 @@ namespace Nest
 		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>Context name to compile script against</summary>
-		public string Context { get { return Q<string>("context"); } set { Q("context", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
@@ -6926,7 +6943,7 @@ namespace Nest
 	public partial interface IRemoteInfoRequest : IRequest<RemoteInfoRequestParameters> 
 	{
 	 } 
-	///<summary>Request parameters for RemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
+	///<summary>Request parameters for ClusterRemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
 	public partial class RemoteInfoRequest  : PlainRequestBase<RemoteInfoRequestParameters>, IRemoteInfoRequest
 	{
 		protected IRemoteInfoRequest Self => this;

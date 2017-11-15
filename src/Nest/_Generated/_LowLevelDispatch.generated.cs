@@ -427,7 +427,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSetNoFallback(p.RouteValues.Repository)) return _lowLevel.CatSnapshots<T>(p.RouteValues.Repository,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Repository)) return _lowLevel.CatSnapshots<T>(p.RouteValues.Repository,u => p.RequestParameters);
 					return _lowLevel.CatSnapshots<T>(u => p.RequestParameters);
 
 			}
@@ -439,7 +439,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSetNoFallback(p.RouteValues.Repository)) return _lowLevel.CatSnapshotsAsync<T>(p.RouteValues.Repository,u => p.RequestParameters,cancellationToken);
+					if (AllSet(p.RouteValues.Repository)) return _lowLevel.CatSnapshotsAsync<T>(p.RouteValues.Repository,u => p.RequestParameters,cancellationToken);
 					return _lowLevel.CatSnapshotsAsync<T>(u => p.RequestParameters,cancellationToken);
 
 			}
@@ -654,6 +654,28 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("ClusterPutSettings", p, new [] { PUT }, "/_cluster/settings");
+		}
+		
+		internal ElasticsearchResponse<T> ClusterRemoteInfoDispatch<T>(IRequest<RemoteInfoRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.ClusterRemoteInfo<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("ClusterRemoteInfo", p, new [] { GET }, "/_remote/info");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> ClusterRemoteInfoDispatchAsync<T>(IRequest<RemoteInfoRequestParameters> p , CancellationToken cancellationToken) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.ClusterRemoteInfoAsync<T>(u => p.RequestParameters,cancellationToken);
+
+			}
+			throw InvalidDispatch("ClusterRemoteInfo", p, new [] { GET }, "/_remote/info");
 		}
 		
 		internal ElasticsearchResponse<T> ClusterRerouteDispatch<T>(IRequest<ClusterRerouteRequestParameters> p , PostData<object> body) where T : class
@@ -2497,10 +2519,12 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
+					if (AllSet(p.RouteValues.Id, p.RouteValues.Context)) return _lowLevel.PutScript<T>(p.RouteValues.Id,p.RouteValues.Context,body,u => p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.PutScript<T>(p.RouteValues.Id,body,u => p.RequestParameters);
 					break;
 
 				case POST:
+					if (AllSet(p.RouteValues.Id, p.RouteValues.Context)) return _lowLevel.PutScriptPost<T>(p.RouteValues.Id,p.RouteValues.Context,body,u => p.RequestParameters);
 					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.PutScriptPost<T>(p.RouteValues.Id,body,u => p.RequestParameters);
 					break;
 
@@ -2513,10 +2537,12 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
+					if (AllSet(p.RouteValues.Id, p.RouteValues.Context)) return _lowLevel.PutScriptAsync<T>(p.RouteValues.Id,p.RouteValues.Context,body,u => p.RequestParameters,cancellationToken);
 					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.PutScriptAsync<T>(p.RouteValues.Id,body,u => p.RequestParameters,cancellationToken);
 					break;
 
 				case POST:
+					if (AllSet(p.RouteValues.Id, p.RouteValues.Context)) return _lowLevel.PutScriptPostAsync<T>(p.RouteValues.Id,p.RouteValues.Context,body,u => p.RequestParameters,cancellationToken);
 					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.PutScriptPostAsync<T>(p.RouteValues.Id,body,u => p.RequestParameters,cancellationToken);
 					break;
 
@@ -2568,28 +2594,6 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("ReindexRethrottle", p, new [] { POST }, "/_reindex/{task_id}/_rethrottle", "/_update_by_query/{task_id}/_rethrottle", "/_delete_by_query/{task_id}/_rethrottle");
-		}
-		
-		internal ElasticsearchResponse<T> RemoteInfoDispatch<T>(IRequest<RemoteInfoRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					return _lowLevel.RemoteInfo<T>(u => p.RequestParameters);
-
-			}
-			throw InvalidDispatch("RemoteInfo", p, new [] { GET }, "/_remote/info");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> RemoteInfoDispatchAsync<T>(IRequest<RemoteInfoRequestParameters> p , CancellationToken cancellationToken) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					return _lowLevel.RemoteInfoAsync<T>(u => p.RequestParameters,cancellationToken);
-
-			}
-			throw InvalidDispatch("RemoteInfo", p, new [] { GET }, "/_remote/info");
 		}
 		
 		internal ElasticsearchResponse<T> RenderSearchTemplateDispatch<T>(IRequest<RenderSearchTemplateRequestParameters> p , PostData<object> body) where T : class
