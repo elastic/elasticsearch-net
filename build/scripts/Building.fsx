@@ -12,6 +12,7 @@
 
 open System 
 open System.IO
+open System.Reflection
 open Fake 
 open FSharp.Data 
 open Mono.Cecil
@@ -96,20 +97,20 @@ module Build =
         let nestDll = sprintf "%s/%s.dll" folder nest.Name
         let nestRewrittenDll = sprintf "%s/%s-rewriten.dll" folder nest.Name
         use resolver = new CustomResolver(folder)
-        let readerParams = ReaderParameters( AssemblyResolver = resolver );
-        let nestAssembly = AssemblyDefinition.ReadAssembly(nestDll, readerParams);
+        let readerParams = ReaderParameters( AssemblyResolver = resolver, ReadWrite = true );
+        use nestAssembly = AssemblyDefinition.ReadAssembly(nestDll, readerParams);
+        
 
         for item in nestAssembly.MainModule.Types do
-            item.Namespace = 
+            item.Namespace <- 
                 match item.Namespace.StartsWith("Newtonsoft.Json") with
                 | false -> item.Namespace
                 | true -> item.Namespace.Replace("Newtonsoft.Json", "Nest.Json")
 
-        nestAssembly.Write(nestRewrittenDll) |> ignore;
-        nest
-        
-        DeleteFile nestDll
-        Rename nestRewrittenDll nestDll
+        let key = File.ReadAllBytes(Paths.Keys("keypair.snk"))
+        let kp = new StrongNameKeyPair(key)
+        let wp = new WriterParameters ( StrongNameKeyPair = kp);
+        nestAssembly.Write(wp) |> ignore;
 
     let ILRepack() = 
         for f in DotNetFramework.All do 
@@ -118,11 +119,10 @@ module Build =
             let nestDll = sprintf "%s/%s.dll" folder nest.Name
             let nestMergedDll = sprintf "%s/%s-merged.dll" folder nest.Name
             let jsonDll = sprintf "%s/Newtonsoft.Json.dll" folder
-            let keyFile =  Paths.Keys("keypair.snk");
+            let keyFile = Paths.Keys("keypair.snk");
             let options = 
                 [ 
                     "/keyfile:", keyFile;
-                    //"/ver:", Versioning.CurrentVersion.ToString();
                     "/internalize", "";
                     "/lib:", folder;
                     "/out:", nestDll;
