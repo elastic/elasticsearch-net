@@ -76,10 +76,11 @@ module Commandline =
         
     let needsClean =
         match (target, skipTests) with
-        | (_, true) -> true
+        | ("release", _) -> true
         //dotnet-xunit needs to a build of its own anyways
         | ("test", _)
-        | ("integrate", _) -> false
+        | ("integrate", _) 
+        | ("build", _) -> false
         | _ -> true
 
     let arguments =

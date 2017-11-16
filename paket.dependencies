@@ -5,7 +5,9 @@ group build
     source https://www.nuget.org/api/v2
 
     nuget FAKE prerelease
+    nuget ILRepack prerelease
     nuget FSharp.Data
+    nuget Mono.Cecil prerelease
 
     #Profiling.fsx uses this
     nuget Nest framework: net45

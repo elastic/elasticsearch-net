@@ -18,11 +18,9 @@
 		<dependencies>
 			<group targetFramework=".NETFramework4.5">
 				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
-				<dependency id="Newtonsoft.Json" version="[$jsonDotNetCurrentVersion$, $jsonDotNetNextVersion$)" />
 			</group>
 			<group targetFramework=".NETFramework4.6">
 				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
-				<dependency id="Newtonsoft.Json" version="[$jsonDotNetCurrentVersion$, $jsonDotNetNextVersion$)" />
 			</group>
 			<group targetFramework=".NETStandard1.3">
 				<dependency id="NETStandard.Library" version="[1.6.0, )" />
@@ -30,7 +28,12 @@
 				<dependency id="System.Reflection.TypeExtensions" version="[4.3.0, )" />
 				<dependency id="System.Linq.Queryable" version="[4.0.1, )" />
 				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
-				<dependency id="Newtonsoft.Json" version="[$jsonDotNetCurrentVersion$, $jsonDotNetNextVersion$)" />
+
+				<!-- since we no longer reference JSON.NET (internalized) we do need to ship with its System references -->
+				<dependency id="System.ComponentModel.TypeConverter" version="[4.3.0, )"/>
+				<dependency id="System.Runtime.Serialization.Formatters" version="[4.3.0, )"/>
+				<dependency id="System.Runtime.Serialization.Primitives" version="[4.3.0, )"/>
+				<dependency id="System.Xml.XmlDocument" version="[4.3.0, )"/>
 			</group>
 		</dependencies>
 	</metadata>

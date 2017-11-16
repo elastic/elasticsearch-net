@@ -7,6 +7,8 @@ NUGET
     FAKE (5.0.0-alpha010)
     FSharp.Data (2.3.2)
       Zlib.Portable (>= 1.11) - restriction: || (&& (< net40) (>= portable-net45+win8)) (&& (< net40) (>= portable-net45+win8+sl5) (< portable-net45+win8+wp8+wpa81)) (&& (< net40) (< portable-net45+win8+sl5) (>= portable-net45+win8+wp8+wpa81))
+    ILRepack (2.1.0-beta1)
+    Mono.Cecil (0.9.6.4)
     NEST (5.3) - restriction: == net45
       Elasticsearch.Net (>= 5.3 < 6.0) - restriction: || (&& (>= net45) (< netstandard1.3)) (&& (< net45) (>= netstandard1.3)) (>= net46)
       Newtonsoft.Json (>= 9.0 < 10.0) - restriction: || (&& (>= net45) (< netstandard1.3)) (&& (< net45) (>= netstandard1.3)) (>= net46)
