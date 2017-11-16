@@ -57,7 +57,9 @@ Target "Benchmark" <| fun _ ->
     let password = getBuildParam "password"
     Benchmarker.IndexResults (url, username, password)
 
-Target "InheritDoc"  InheritDoc.PatchInheritDocs
+Target "InternalizeDependencies" Build.ILRepack
+
+Target "InheritDoc" InheritDoc.PatchInheritDocs
 
 Target "Documentation" Documentation.Generate
 
@@ -82,6 +84,7 @@ Target "Canary" <| fun _ ->
   ==> "Restore"
   =?> ("FullBuild", Commandline.needsFullBuild)
   =?> ("Test", (not Commandline.skipTests))
+  ==> "InternalizeDependencies"
   ==> "InheritDoc"
   ==> "Documentation"
   ==> "Build"

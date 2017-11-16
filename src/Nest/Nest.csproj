@@ -1,8 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\build\Clients.Common.targets" />
   <PropertyGroup>
     <TargetFrameworks Condition="'$(DotNetCoreOnly)'==''">net45;net46;netstandard1.3</TargetFrameworks>
     <TargetFrameworks Condition="'$(DotNetCoreOnly)'=='1'">netstandard1.3</TargetFrameworks>
+    <CopyLocalLockFileAssemblies Condition="'$(TargetFramework)'=='netstandard1.3'">true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
