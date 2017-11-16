@@ -26,7 +26,7 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 
 			var nodes = new []{  "node1", "node2" };
 			var actions = new[] { "*reindex" };
-			await POST($"/_tasks/_cancel?node_id=node1%2Cnode2&actions=%2Areindex")
+			await POST($"/_tasks/_cancel?nodes=node1%2Cnode2&actions=%2Areindex")
 				.Fluent(c => c.CancelTasks(t => t.Nodes(nodes).Actions(actions)))
 				.Request(c => c.CancelTasks(new CancelTasksRequest { Nodes = nodes, Actions = actions }))
 				.FluentAsync(c => c.CancelTasksAsync(t => t.Nodes(nodes).Actions(actions)))
