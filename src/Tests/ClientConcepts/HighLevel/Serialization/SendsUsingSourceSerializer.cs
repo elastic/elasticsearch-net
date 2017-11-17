@@ -33,9 +33,9 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			{"id", 1},
 		};
 
-		private class CustomSettingsSerializer : TestSourceSerializer
+		private class CustomSettingsSerializerBase : TestSourceSerializerBase
 		{
-			public CustomSettingsSerializer(IElasticsearchSerializer builtinSerializer) : base(builtinSerializer) { }
+			public CustomSettingsSerializerBase(IElasticsearchSerializer builtinSerializer) : base(builtinSerializer) { }
 
 			protected override JsonSerializerSettings CreateJsonSerializerSettings()
 			{
@@ -52,7 +52,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		{
 			Expect(usingDefaults).FromRequest(call);
 
-			WithSourceSerializer((s, c) => new CustomSettingsSerializer(c))
+			WithSourceSerializer((s, c) => new CustomSettingsSerializerBase(c))
 				.Expect(withSourceSerializer)
 				.FromRequest(call);
 		}

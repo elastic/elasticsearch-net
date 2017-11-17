@@ -7,14 +7,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
-using Tests.ClientConcepts.HighLevel.Caching;
-using Tests.ClientConcepts.HighLevel.Serialization;
 
-namespace Tests.Framework.ManagedElasticsearch.SourceSerializers
+namespace Nest.JsonNetSerializer
 {
-	public abstract class CustomJsonNetSourceSerializer : IElasticsearchSerializer
+	public abstract class JsonNetSourceSerializerBase : IElasticsearchSerializer
 	{
 		protected IElasticsearchSerializer BuiltinSerializer { get; }
 		private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
@@ -23,7 +20,7 @@ namespace Tests.Framework.ManagedElasticsearch.SourceSerializers
 		private readonly JsonSerializer _serializer;
 		private readonly JsonSerializer _collapsedSerializer;
 
-		protected CustomJsonNetSourceSerializer(IElasticsearchSerializer builtinSerializer)
+		protected JsonNetSourceSerializerBase(IElasticsearchSerializer builtinSerializer)
 		{
 			BuiltinSerializer = builtinSerializer;
 			_serializer = CreateSerializer(SerializationFormatting.Indented);
