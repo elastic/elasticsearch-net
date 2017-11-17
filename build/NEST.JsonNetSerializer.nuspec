@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+	<metadata>
+		<id>NEST.JsonNetSerializer</id>
+		<version>$version$</version>
+		<title>Hook up your own Json.Net serializer in NEST in an isolated fashion</title>
+		<authors>Elastic and contributors</authors>
+		<owners>Elastic</owners>
+		<licenseUrl>https://github.com/elastic/elasticsearch-net/blob/master/license.txt</licenseUrl>
+		<projectUrl>https://github.com/elastic/elasticsearch-net</projectUrl>
+		<iconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</iconUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>NEST 6.x ships with an internalized Json.NET, this package opens the (de)serialization up for your own custom Json.NET serializer</description>
+		<summary>NEST 6.x ships with an internalized Json.NET, this package opens the (de)serialization up for your own custom Json.NET serializer</summary>
+		<releaseNotes>See https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
+		<copyright>2017-$year$ Elasticsearch BV</copyright>
+		<tags>elasticsearch,elastic,search,lucene,nest,serializer,json</tags>
+		<dependencies>
+			<group targetFramework=".NETFramework4.5">
+				<dependency id="NEST" version="[$version$, $nextMajorVersion$)" />
+				<dependency id="Newtonsoft.Json" version="[$jsonDotNetCurrentVersion$, $jsonDotNetNextVersion$)" />
+			</group>
+			<group targetFramework=".NETFramework4.6">
+				<dependency id="NEST" version="[$version$, $nextMajorVersion$)" />
+				<dependency id="Newtonsoft.Json" version="[$jsonDotNetCurrentVersion$, $jsonDotNetNextVersion$)" />
+			</group>
+			<group targetFramework=".NETStandard1.3">
+				<dependency id="NETStandard.Library" version="[1.6.0, )" />
+				<dependency id="NEST" version="[$version$, $nextMajorVersion$)" />
+				<dependency id="Newtonsoft.Json" version="[$jsonDotNetCurrentVersion$, $jsonDotNetNextVersion$)" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="output\Nest.JsonNetSerializer\net45\Nest.JsonNetSerializer.dll" target="lib\net45"/>
+		<file src="output\Nest.JsonNetSerializer\net45\Nest.JsonNetSerializer.XML" target="lib\net45"/>
+
+		<file src="output\Nest.JsonNetSerializer\net46\Nest.JsonNetSerializer.dll" target="lib\net46"/>
+		<file src="output\Nest.JsonNetSerializer\net46\Nest.JsonNetSerializer.XML" target="lib\net46"/>
+
+		<file src="output\Nest.JsonNetSerializer\netstandard1.3\Nest.JsonNetSerializer.dll" target="lib\netstandard1.3"/>
+		<file src="output\Nest.JsonNetSerializer\netstandard1.3\Nest.JsonNetSerializer.xml" target="lib\netstandard1.3"/>
+	</files>
+</package>

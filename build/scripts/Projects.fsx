@@ -29,6 +29,7 @@ module Projects =
     type Project =
         | Nest
         | ElasticsearchNet
+        | NestJsonNetSerializer
 
     type PrivateProject =
         | Tests
@@ -46,7 +47,8 @@ module Projects =
                 PrivateProject PrivateProject.Tests
             ]
 
-        static member AllPublishable = seq [Project Project.ElasticsearchNet; Project Project.Nest;] 
+        static member AllPublishable = 
+            seq [Project Project.ElasticsearchNet; Project Project.Nest; Project Project.NestJsonNetSerializer;] 
         static member Tests = seq [PrivateProject PrivateProject.Tests;] 
 
         member this.Name =
@@ -55,6 +57,7 @@ module Projects =
                 match p with
                 | Nest -> "Nest"
                 | ElasticsearchNet -> "Elasticsearch.Net"
+                | NestJsonNetSerializer -> "Nest.JsonNetSerializer"
             | PrivateProject p ->
                 match p with
                 | Tests -> "Tests"

@@ -23,11 +23,11 @@
 				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
 			</group>
 			<group targetFramework=".NETStandard1.3">
+				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
 				<dependency id="NETStandard.Library" version="[1.6.0, )" />
 				<dependency id="System.Collections.Specialized" version="[4.3.0, )" />
 				<dependency id="System.Reflection.TypeExtensions" version="[4.3.0, )" />
 				<dependency id="System.Linq.Queryable" version="[4.0.1, )" />
-				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
 
 				<!-- since we no longer reference JSON.NET (internalized) we do need to ship with its System references -->
 				<dependency id="System.ComponentModel.TypeConverter" version="[4.3.0, )"/>

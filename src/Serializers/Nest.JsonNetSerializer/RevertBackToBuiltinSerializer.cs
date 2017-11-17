@@ -3,11 +3,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Tests.Framework.ManagedElasticsearch.SourceSerializers
+namespace Nest.JsonNetSerializer
 {
 	internal class RevertBackToBuiltinSerializer : JsonConverter
 	{
@@ -34,11 +33,11 @@ namespace Tests.Framework.ManagedElasticsearch.SourceSerializers
 				return _builtInSerializer.Deserialize(objectType, ms);
 		}
 
-		private static Type[] TypesThatCanAppearInSource = {
+		private static readonly Type[] NestTypesThatCanAppearInSource = {
 			typeof(JoinField), typeof(QueryContainer)
 		};
 
-		public override bool CanConvert(Type objectType) => TypesThatCanAppearInSource.Contains(objectType);
+		public override bool CanConvert(Type objectType) => NestTypesThatCanAppearInSource.Contains(objectType);
 
 	}
 }

@@ -30,7 +30,7 @@ namespace Tests.Framework
 			modifySettings: s => s,
 			sourceSerializerFactory: (settings, builtin) =>
 			{
-				var customSourceSerializer = new TestSourceSerializer(builtin);
+				var customSourceSerializer = new TestSourceSerializerBase(builtin);
 				return TestClient.Configuration.UsingCustomSourceSerializer ? customSourceSerializer : null;
 			});
 
