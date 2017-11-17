@@ -28,7 +28,6 @@ namespace Nest
 		/// </summary>
 		private ElasticContractResolver ContractResolver { get; }
 
-
 		/// <summary>
 		/// The size of the buffer to use when writing the serialized request
 		/// to the request stream
