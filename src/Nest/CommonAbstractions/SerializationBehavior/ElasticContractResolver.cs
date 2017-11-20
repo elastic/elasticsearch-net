@@ -175,20 +175,19 @@ namespace Nest
 				&& !typeof(string).IsAssignableFrom(property.PropertyType)
 				&& typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
 			{
-				Predicate<object> shouldSerialize = obj =>
+				bool ShouldSerialize(object obj)
 				{
-					var collection = property.ValueProvider.GetValue(obj) as ICollection;
-					if (collection == null)
-					{
+					if (!(property.ValueProvider.GetValue(obj) is ICollection collection))
 						return true;
-					}
 					return collection.Count != 0 && collection.Cast<object>().Any(item => item != null);
-				};
-				property.ShouldSerialize = property.ShouldSerialize == null ? shouldSerialize : (o => property.ShouldSerialize(o) && shouldSerialize(o));
+				}
+
+				property.ShouldSerialize = property.ShouldSerialize == null
+					? (Predicate<object>) ShouldSerialize
+					: (o => property.ShouldSerialize(o) && ShouldSerialize(o));
 			}
 
-			IPropertyMapping propertyMapping = null;
-			if (!this.ConnectionSettings.PropertyMappings.TryGetValue(member, out propertyMapping))
+			if (!this.ConnectionSettings.PropertyMappings.TryGetValue(member, out var propertyMapping))
 				propertyMapping = ElasticsearchPropertyAttributeBase.From(member);
 
 			var serializerMapping = this.ConnectionSettings.PropertyMappingProvider?.CreatePropertyMapping(member);

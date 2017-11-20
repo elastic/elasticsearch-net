@@ -45,7 +45,7 @@ module Build =
                 "CurrentVersion", (Versioning.CurrentVersion.ToString());
                 "CurrentAssemblyVersion", (Versioning.CurrentAssemblyVersion.ToString());
                 "CurrentAssemblyFileVersion", (Versioning.CurrentAssemblyFileVersion.ToString());
-                "DoSourceLink", sourceLink;
+                //"DoSourceLink", sourceLink;
                 "DotNetCoreOnly", if buildingOnTravis then "1" else "";
                 "OutputPathBaseDir", Path.GetFullPath Paths.BuildOutput;
             ] 
@@ -106,6 +106,19 @@ module Build =
                 match item.Namespace.StartsWith("Newtonsoft.Json") with
                 | false -> item.Namespace
                 | true -> item.Namespace.Replace("Newtonsoft.Json", "Nest.Json")
+                
+        //touch custom attribute arguments (not updated automatically)
+        let touchAttributes (attributes :Mono.Collections.Generic.Collection<CustomAttribute>) = 
+            for attr in attributes do
+                if attr.HasConstructorArguments then
+                    for constArg in attr.ConstructorArguments do
+                        let isType = constArg.Type.Name = "Type"
+                        ignore()
+        
+        for t in nestAssembly.MainModule.Types do
+            touchAttributes t.CustomAttributes
+            for prop in t.Properties do 
+                touchAttributes prop.CustomAttributes
 
         let key = File.ReadAllBytes(Paths.Keys("keypair.snk"))
         let kp = new StrongNameKeyPair(key)
