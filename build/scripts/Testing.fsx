@@ -44,7 +44,7 @@ module Tests =
         let dotnet = Tooling.BuildTooling("dotnet")
         dotnet.ExecIn "src/Tests" command |> ignore
 
-    let RunReleaseUnitTests =
+    let RunReleaseUnitTests() =
         setLocalEnvVars()
         //xUnit always does its own build, this env var is picked up by Tests.csproj
         //if its set it will include the local package source (build/output/_packages)
@@ -55,7 +55,10 @@ module Tests =
         //This will download all packages but its the only way to make sure we reference the built
         //package and not one from cache...y
         setProcessEnvironVar "TestPackageVersion" (Versioning.CurrentVersion.ToString())
-        dotnetTest CommandLine.MultiTarget.All
+        let dotnet = Tooling.BuildTooling("dotnet")
+        dotnet.ExecIn "src/Tests" ["clean";] |> ignore
+        dotnet.ExecIn "src/Tests" ["restore";] |> ignore
+        dotnetTest Commandline.MultiTarget.All
 
     let RunUnitTests() =
         setLocalEnvVars()

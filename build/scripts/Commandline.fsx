@@ -152,6 +152,7 @@ module Commandline =
             setBuildParam "clusterfilter" "ConnectionReuse"
             setBuildParam "numberOfConnections" numberOfConnections
             
+        | ["temp"; ] -> ignore()
         | ["canary"; ] -> ignore()
         | ["canary"; apiKey ] ->
             setBuildParam "apiKey" apiKey

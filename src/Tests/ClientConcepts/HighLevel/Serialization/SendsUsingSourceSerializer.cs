@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Reflection.Metadata;
 using Elasticsearch.Net;
 using Nest;
 using Newtonsoft.Json;
-using Tests.ClientConcepts.HighLevel.CovariantHits;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.SourceSerializers;
-using Tests.Framework.MockData;
-using Xunit.Sdk;
 using static Tests.Framework.RoundTripper;
 
 namespace Tests.ClientConcepts.HighLevel.Serialization
