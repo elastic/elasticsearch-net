@@ -5,15 +5,17 @@
     <DotNetCoreOnly Condition="'$(TRAVIS)'==''">
     </DotNetCoreOnly>
     <OutputType>Exe</OutputType>
+    <DotNetCoreOnly>1</DotNetCoreOnly>
     <TargetFrameworks Condition="'$(DotNetCoreOnly)'==''">netcoreapp1.1;net45;net46</TargetFrameworks>
     <TargetFrameworks Condition="'$(DotNetCoreOnly)'=='1'">netcoreapp1.1</TargetFrameworks>
     <VersionPrefix>6.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
     <DefineConstants Condition="'$(TargetFramework)'=='netcoreapp1.1' OR '$(DotNetCoreOnly)'=='1'">$(DefineConstants);DOTNETCORE</DefineConstants>
     <StartupObject>Tests.BenchmarkProgram</StartupObject>
+    <TestPackageVersion>6.0.0</TestPackageVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TestPackageVersion)'!=''">
-    <RestoreSources>../build/output/_packages;https://api.nuget.org/v3/index.json</RestoreSources>
+    <RestoreSources>../../build/output/_packages;https://api.nuget.org/v3/index.json</RestoreSources>
   </PropertyGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0-beta1-build3642" />
@@ -29,7 +31,6 @@
   <ItemGroup>
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.0-beta1-build1309" />
     <PackageReference Include="Bogus" Version="11.0.5" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
     <PackageReference Include="FluentAssertions" Version="4.19.2" />
     <PackageReference Include="xunit" Version="2.3.0-beta1-build3642" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0-preview-20170810-02" />
