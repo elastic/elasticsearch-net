@@ -64,7 +64,7 @@ namespace Tests.Framework.MockData
 				})
 			);
 
-		public static IList<Project> Projects { get; } = Project.Generator.Generate(100).ToList();
+		public static IList<Project> Projects { get; } = Project.Generator.GenerateLocked(100).ToList();
 
 	    public static Project First { get; } = Projects.First();
 

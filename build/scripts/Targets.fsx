@@ -70,7 +70,9 @@ Target "Release" <| fun _ ->
     Release.NugetPack()   
     Versioning.ValidateArtifacts()
     StrongName.ValidateDllsInNugetPackage()
-    //Tests.RunReleaseUnitTests()
+
+Target "TestNugetPackage" <| fun _ -> 
+    Tests.RunReleaseUnitTests()
     
 Target "Temp" Tests.RunReleaseUnitTests 
 
@@ -104,6 +106,7 @@ Target "Canary" <| fun _ ->
 
 "Version"
   ==> "Release"
+  ==> "TestNugetPackage"
   ==> "Canary"
 
 "Start"
