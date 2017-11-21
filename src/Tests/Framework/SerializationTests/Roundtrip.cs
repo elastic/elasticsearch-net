@@ -14,7 +14,6 @@ namespace Tests.Framework
 {
 	public class RoundTripper : SerializationTestBase
 	{
-		protected override bool NoClientSerializeOfExpected => true;
 		protected override object ExpectJson { get; }
 
 		internal RoundTripper(object expected,
@@ -27,8 +26,8 @@ namespace Tests.Framework
 			this.SourceSerializerFactory = sourceSerializerFactory;
 			this.PropertyMappingProvider = propertyMappingProvider;
 
-			this._expectedJsonString = JsonConvert.SerializeObject(expected, NullValueSettings);
-			this._expectedJsonJObject = JToken.Parse(this._expectedJsonString);
+			var expectedString = JsonConvert.SerializeObject(expected, NullValueSettings);
+			this.ExpectedJsonJObject = JToken.Parse(expectedString);
 		}
 
 		public virtual void DeserializesTo<T>(Action<string, T> assert)
@@ -59,7 +58,7 @@ namespace Tests.Framework
 		{
 			if (this.ExpectJson == null) throw new Exception(json);
 
-			if (this._expectedJsonJObject.Type != JTokenType.Array)
+			if (this.ExpectedJsonJObject.Type != JTokenType.Array)
 				CompareToken(json, JToken.FromObject(this.ExpectJson));
 			else
 				CompareMultiJson(json);
@@ -67,7 +66,7 @@ namespace Tests.Framework
 
 		private void CompareMultiJson(string json)
 		{
-			var jArray = this._expectedJsonJObject as JArray;
+			var jArray = this.ExpectedJsonJObject as JArray;
 			var lines = json.Split(new [] { '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
 			var zipped = jArray.Children<JObject>().Zip(lines, (j, s) => new {j, s}).ToList();
 			foreach(var t in zipped)

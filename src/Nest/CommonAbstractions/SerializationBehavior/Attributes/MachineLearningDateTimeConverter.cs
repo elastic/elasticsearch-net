@@ -1,31 +1,9 @@
-using System;
-using Nest;
+﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Tests.Framework.MockData
+namespace Nest
 {
-	public class Metric
-	{
-		[Date(Name="@timestamp")]
-		[MachineLearningDateTime, JsonConverter(typeof(MachineLearningDateTimeConverter))]
-		public DateTime Timestamp { get; set; }
-
-		public long Accept { get; set; }
-
-		public long Deny { get; set; }
-
-		public string Host { get; set; }
-
-		public float Response { get; set; }
-
-		public string Service { get; set; }
-
-		public long Total { get; set; }
-	}
-
-	// Required as PreviewDatafeed API returns Timestamp values as epoch milliseconds, irrespective
-	// of the format in which it was originally indexed.
 	internal class MachineLearningDateTimeConverter : IsoDateTimeConverter
 	{
 		private static readonly DateTimeOffset Epoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);

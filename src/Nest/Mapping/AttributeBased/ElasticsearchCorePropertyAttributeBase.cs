@@ -25,18 +25,19 @@ namespace Nest
 
 		Union<SimilarityOption, string> ICoreProperty.Similarity { get; set; }
 
-		public string Similarity {
-			set { Self.Similarity = value; }
-			get
-			{
-				return Self.Similarity?.Match(f => f.GetStringValue(), str => str);
-			}
-		}
-		public bool Store { get { return Self.Store.GetValueOrDefault(); } set { Self.Store = value; } }
-
-		public new static ElasticsearchCorePropertyAttributeBase From(MemberInfo memberInfo)
+		public string Similarity
 		{
-			return memberInfo.GetCustomAttribute<ElasticsearchCorePropertyAttributeBase>(true);
+			set => Self.Similarity = value;
+			get => Self.Similarity?.Match(f => f.GetStringValue(), str => str);
 		}
+
+		public bool Store
+		{
+			get => Self.Store.GetValueOrDefault();
+			set => Self.Store = value;
+		}
+
+		public new static ElasticsearchCorePropertyAttributeBase From(MemberInfo memberInfo) =>
+			memberInfo.GetCustomAttribute<ElasticsearchCorePropertyAttributeBase>(true);
 	}
 }

@@ -29,6 +29,8 @@ namespace Tests.CodeStandards
 
 			var abstractClassesNotEndingInBase = typeof(IRequest).Assembly().GetTypes()
 				.Where(t => t.IsClass() && t.IsAbstract() && !t.IsSealed() && !exceptions.Contains(t))
+				//when testing nuget package against merged internalize json.net skip its types.
+				.Where(t => !t.Namespace.StartsWith("Nest.Json"))
 				.Where(t => !t.Name.Split('`')[0].EndsWith("Base"))
 				.Select(t => t.Name.Split('`')[0])
 				.ToList();
@@ -150,17 +152,21 @@ namespace Tests.CodeStandards
 
 			var exceptions = new List<Type>
 			{
-				nestAssembly.GetType("System.AssemblyVersionInformation"),
+				nestAssembly.GetType("System.AssemblyVersionInformation", throwOnError: false),
+				nestAssembly.GetType("System.Runtime.Serialization.Formatters.FormatterAssemblyStyle", throwOnError: false),
 #if DOTNETCORE
 				typeof(SynchronizedCollection<>),
-				nestAssembly.GetType("System.ComponentModel.Browsable")
+				nestAssembly.GetType("System.ComponentModel.Browsable", throwOnError: false)
 #endif
 			};
 
 			var types = nestAssembly.GetTypes();
 			var typesNotInNestNamespace = types
+				.Where(t => t != null)
 				.Where(t => !exceptions.Contains(t))
 				.Where(t => t.Namespace != "Nest")
+				//when testing nuget package against merged internalize json.net skip its types.
+				.Where(t => !string.IsNullOrWhiteSpace(t.Namespace) && !t.Namespace.StartsWith("Nest.Json"))
 				.Where(t => !t.Name.StartsWith("<"))
 				.Where(t => IsValidTypeNameOrIdentifier(t.Name, true))
 				.ToList();

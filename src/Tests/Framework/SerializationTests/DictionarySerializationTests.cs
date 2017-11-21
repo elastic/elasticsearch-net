@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Nest;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Tests.Framework
 {
@@ -42,10 +43,10 @@ namespace Tests.Framework
 
 	public class DictionarySerializationTests : SerializationTestBase
 	{
-		protected override object ExpectJson => new JObject
+		protected override object ExpectJson => new
 			{
-				{ "Key1", "value1" },
-				{ "Key2", "value2" },
+				Key1 = "value1",
+				Key2 ="value2",
 			};
 
 		[U]

@@ -16,6 +16,8 @@ namespace Tests.Document.Single.Index
 	public class IndexIngestGeoIpApiTests :
 		ApiIntegrationTestBase<IntrusiveOperationCluster, IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
+		protected override bool IncludeNullInExpected => false;
+
 		private static string PipelineId { get; } = "pipeline-" + Guid.NewGuid().ToString("N").Substring(0, 8);
 
 		public IndexIngestGeoIpApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
@@ -94,9 +96,10 @@ namespace Tests.Document.Single.Index
 			new
 			{
 				name = CallIsolatedValue,
-				join = Document.Join,
+				join = Document.Join.ToAnonymousObject(),
 				leadDeveloper = new { ipAddress = "193.4.250.122", gender = "Male", id = 1 },
 				state = "Stable",
+				visibility = "Public",
 				startedOn = FixedDate,
 				lastActivity = FixedDate,
 				numberOfContributors = 0,

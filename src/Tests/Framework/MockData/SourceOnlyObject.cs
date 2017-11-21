@@ -1,4 +1,6 @@
 using System;
+using System.Runtime.Serialization;
+using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -6,9 +8,9 @@ namespace Tests.Framework.MockData
 {
 	public class SourceOnlyObject
 	{
-		[JsonIgnore]
+		[Ignore, JsonIgnore]
 		public string NotWrittenByDefaultSerializer { get; set; }
-		[JsonIgnore]
+		[Ignore, JsonIgnore]
 		public string NotReadByDefaultSerializer { get; set; }
 	}
 
