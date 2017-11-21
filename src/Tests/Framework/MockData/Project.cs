@@ -5,6 +5,7 @@ using Bogus;
 using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Tests.Search;
 
 namespace Tests.Framework.MockData
 {
@@ -14,6 +15,10 @@ namespace Tests.Framework.MockData
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public StateOfBeing State { get; set; }
+
+        //the first applies when using internal source serializer the latter when using JsonNetSourceSerializer
+        [StringEnum, JsonConverter(typeof(StringEnumConverter))]
+		public Visibility Visibility { get; set; }
 		public DateTime StartedOn { get; set; }
 		public string DateString { get; set; }
 		public DateTime LastActivity { get; set; }
@@ -31,32 +36,33 @@ namespace Tests.Framework.MockData
 		public SourceOnlyObject SourceOnly { get; set; }
 
 		public static Faker<Project> Generator { get; } =
-			new Faker<Project>()
+			Gimme.Lock(() => new Faker<Project>()
 				.RuleFor(p => p.Name, f => f.Person.Company.Name)
 				.RuleFor(p => p.Description, f => f.Lorem.Paragraphs(3))
 				.RuleFor(p => p.State, f => f.PickRandom<StateOfBeing>())
+				.RuleFor(p => p.Visibility, f => f.PickRandom<Visibility>())
 				.RuleFor(p => p.StartedOn, p => p.Date.Past())
 				.RuleFor(p => p.DateString, (p, d) => d.StartedOn.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"))
 				.RuleFor(p => p.LastActivity, p => p.Date.Recent())
 				.RuleFor(p => p.LeadDeveloper, p => Developer.Developers[Gimme.Random.Number(0, Developer.Developers.Count -1)])
-				.RuleFor(p => p.Tags, f => Tag.Generator.Generate(Gimme.Random.Number(2, 50)))
-				.RuleFor(p => p.CuratedTags, f => Tag.Generator.Generate(Gimme.Random.Number(1, 5)).ToList())
-				.RuleFor(p => p.Location, f => SimpleGeoPoint.Generator.Generate())
+				.RuleFor(p => p.Tags, f => Tag.Generator.GenerateLocked(Gimme.Random.Number(2, 50)))
+				.RuleFor(p => p.CuratedTags, f => Tag.Generator.GenerateLocked(Gimme.Random.Number(1, 5)).ToList())
+				.RuleFor(p => p.Location, f => SimpleGeoPoint.Generator.GenerateLocked())
 				.RuleFor(p => p.NumberOfCommits, f => Gimme.Random.Number(1, 1000))
 				.RuleFor(p => p.NumberOfContributors, f => Gimme.Random.Number(1, 200))
-				.RuleFor(p => p.Ranges, f => Ranges.Generator.Generate())
-				.RuleFor(p => p.SourceOnly, f => TestClient.Configuration.UsingCustomSourceSerializer
-					? new SourceOnlyObject() : null)
-				.RuleFor(p => p.Suggest, f => new CompletionField
-					{
-						Input = new[] { f.Person.Company.Name },
-						Contexts = new Dictionary<string, IEnumerable<string>>
-						{
-							{ "color", new [] { "red", "blue", "green", "violet", "yellow" }.Take(Gimme.Random.Number(1, 4)) }
-						}
-				}
+				.RuleFor(p => p.Ranges, f => Ranges.Generator.GenerateLocked())
+				.RuleFor(p => p.SourceOnly, f =>
+					TestClient.Configuration.UsingCustomSourceSerializer ? new SourceOnlyObject() : null
 				)
-			;
+				.RuleFor(p => p.Suggest, f => new CompletionField
+				{
+					Input = new[] { f.Person.Company.Name },
+					Contexts = new Dictionary<string, IEnumerable<string>>
+					{
+						{ "color", new [] { "red", "blue", "green", "violet", "yellow" }.Take(Gimme.Random.Number(1, 4)) }
+					}
+				})
+			);
 
 		public static IList<Project> Projects { get; } = Project.Generator.Generate(100).ToList();
 
@@ -79,8 +85,9 @@ namespace Tests.Framework.MockData
 		private static readonly object InstanceAnonymousDefault = new
 		{
 			name = Projects.First().Name,
-			join = Instance.Join,
+			join = Instance.Join.ToAnonymousObject(),
 			state = "BellyUp",
+			visibility = "Public",
 			startedOn = "2015-01-01T00:00:00",
 			lastActivity = "0001-01-01T00:00:00",
 			numberOfContributors = 0,
@@ -91,8 +98,9 @@ namespace Tests.Framework.MockData
 		private static readonly object InstanceAnonymousSourceSerializer = new
 		{
 			name = Projects.First().Name,
-			join = Instance.Join,
+			join = Instance.Join.ToAnonymousObject(),
 			state = "BellyUp",
+			visibility = "Public",
 			startedOn = "2015-01-01T00:00:00",
 			lastActivity = "0001-01-01T00:00:00",
 			numberOfContributors = 0,
@@ -109,18 +117,25 @@ namespace Tests.Framework.MockData
 		public double Lon { get; set; }
 
 		public static Faker<SimpleGeoPoint> Generator { get; } =
-			new Faker<SimpleGeoPoint>()
+			Gimme.Lock(() => new Faker<SimpleGeoPoint>()
 				.RuleFor(p => p.Lat, f => f.Address.Latitude())
 				.RuleFor(p => p.Lon, f => f.Address.Longitude())
-			;
+			);
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+	//the first applies when using internal source serializer the latter when using JsonNetSourceSerializer
+	[StringEnum, JsonConverter(typeof(StringEnumConverter))]
 	public enum StateOfBeing
 	{
 		BellyUp,
 		Stable,
 		VeryActive
+	}
+
+	public enum Visibility
+	{
+		Public,
+		Private
 	}
 
 	public class Metadata

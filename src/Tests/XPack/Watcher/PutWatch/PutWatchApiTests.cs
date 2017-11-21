@@ -186,12 +186,12 @@ namespace Tests.XPack.Watcher.PutWatch
 				},
 				condition = new
 				{
-					array_compare = new JObject
+					array_compare = new Dictionary<string, object>
 					{
-						{ "ctx.payload.search.aggregations.top_project_tags.buckets", new JObject
+						{ "ctx.payload.search.aggregations.top_project_tags.buckets", new Dictionary<string, object>
 							{
 								{ "path", "doc_count" },
-								{ "gte", new JObject { { "value", 1 } } }
+								{ "gte", new Dictionary<string, object> { { "value", 1 } } }
 							}
 						}
 					}

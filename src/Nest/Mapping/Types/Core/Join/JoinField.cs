@@ -41,6 +41,17 @@ namespace Nest
 		public static implicit operator JoinField(string parentName) => new JoinField(new Parent(parentName));
 		public static implicit operator JoinField(Child child) => new JoinField(child);
 
+		public T Match<T>(Func<Parent, T> first, Func<Child,T> second)
+		{
+			switch (_tag)
+			{
+				case 0:
+					return first(this._parent);
+				case 1:
+					return second(this._child);
+				default: throw new Exception($"Unrecognized tag value: {_tag}");
+			}
+		}
 		public void Match(Action<Parent> first, Action<Child> second)
 		{
 			switch (_tag)

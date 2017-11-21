@@ -252,7 +252,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
             public bool IsManager { get; set; }
 
             [Nested]
-            [JsonProperty("empl")]
+            [Rename("empl"), JsonProperty("empl")]
             public List<Employee> Employees { get; set; }
         }
 

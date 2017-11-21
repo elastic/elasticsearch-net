@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,7 @@ using FluentAssertions;
 using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
@@ -16,19 +18,30 @@ namespace Tests.Framework
 {
 	public abstract class SerializationTestBase
 	{
+		protected SerializationTestBase() => SetupSerialization();
+		protected SerializationTestBase(ClusterBase cluster) { }
+
 		protected virtual object ExpectJson { get; } = null;
-		protected virtual bool NoClientSerializeOfExpected { get; } = false;
 		protected virtual bool SupportsDeserialization { get; set; } = true;
+		protected virtual bool IncludeNullInExpected => true;
 
 		protected DateTime FixedDate => new DateTime(2015, 06, 06, 12, 01, 02, 123);
-		protected string _expectedJsonString;
-		protected JToken _expectedJsonJObject;
+
+		protected JToken ExpectedJsonJObject;
 
 		protected Func<ConnectionSettings, ConnectionSettings> ConnectionSettingsModifier { get; set; }
 		protected IPropertyMappingProvider PropertyMappingProvider { get; set; }
 		protected ConnectionSettings.SourceSerializerFactory SourceSerializerFactory { get; set; }
 
 		protected static readonly JsonSerializerSettings NullValueSettings = new JsonSerializerSettings {NullValueHandling = NullValueHandling.Include};
+
+		protected virtual JsonSerializerSettings JsonSettingsExpected => new JsonSerializerSettings
+		{
+			ContractResolver = new DefaultContractResolver {NamingStrategy = new DefaultNamingStrategy()},
+			NullValueHandling = IncludeNullInExpected ? NullValueHandling.Include : NullValueHandling.Ignore,
+			//copied here because anonymyzing geocoordinates is too tedious
+			Converters = new List<JsonConverter> { new TestGeoCoordinateJsonConverter() }
+		};
 
 		protected IElasticsearchSerializer RequestResponseSerializer => Client.ConnectionSettings.RequestResponseSerializer;
 
@@ -51,13 +64,6 @@ namespace Tests.Framework
 			}
 		}
 
-		protected SerializationTestBase()
-		{
-			SetupSerialization();
-		}
-
-		protected SerializationTestBase(ClusterBase cluster) { }
-
 		protected TObject Deserialize<TObject>(string json) =>
 			RequestResponseSerializer.Deserialize<TObject>(new MemoryStream(Encoding.UTF8.GetBytes(json)));
 
@@ -72,37 +78,35 @@ namespace Tests.Framework
 			var o = this.ExpectJson;
 			if (o == null) return;
 
-			this._expectedJsonString = this.NoClientSerializeOfExpected
-				? JsonConvert.SerializeObject(o, Formatting.None, NullValueSettings)
-				: this.Serialize(o);
-			this._expectedJsonJObject = JToken.Parse(this._expectedJsonString);
+			var expectedJsonString = JsonConvert.SerializeObject(o, Formatting.None, JsonSettingsExpected);
+			this.ExpectedJsonJObject = JToken.Parse(expectedJsonString);
 
-			if (string.IsNullOrEmpty(this._expectedJsonString))
-				throw new ArgumentNullException(nameof(this._expectedJsonString));
+			if (string.IsNullOrEmpty(expectedJsonString))
+				throw new ArgumentNullException(nameof(expectedJsonString));
 		}
 
 		private bool SerializesAndMatches(object o, int iteration, out string serialized)
 		{
-			if (this._expectedJsonJObject.Type != JTokenType.Array)
-				return ActualMatches(o, this._expectedJsonJObject, this._expectedJsonString, iteration, out serialized);
+			if (this.ExpectedJsonJObject.Type != JTokenType.Array)
+				return ActualMatches(o, this.ExpectedJsonJObject, iteration, out serialized);
 
-			var jArray = this._expectedJsonJObject as JArray;
+			var jArray = this.ExpectedJsonJObject as JArray;
 			serialized = this.Serialize(o);
 			var lines = serialized.Split(new [] { '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
 			var zipped = jArray.Children<JObject>().Zip(lines, (j, s) => new {j, s});
-			var matches = zipped.Select((z, i) => this.TokenMatches(z.j, this.Serialize(z.j), iteration, z.s, i)).ToList();
+			var matches = zipped.Select((z, i) => TokenMatches(z.j, iteration, z.s, i)).ToList();
 			matches.Should().OnlyContain(b => b);
 			matches.Count.Should().Be(lines.Count);
 			return matches.All(b => b);
 		}
 
-		private bool ActualMatches(object o, JToken expectedJson, string expectedString, int iteration, out string serialized)
+		private bool ActualMatches(object o, JToken expectedJson, int iteration, out string serialized)
 		{
-			serialized = o is string? (string)o : this.Serialize(o);
-			return TokenMatches(expectedJson, expectedString, iteration, serialized);
+			serialized = o is string s? s : this.Serialize(o);
+			return TokenMatches(expectedJson, iteration, serialized);
 		}
 
-		private bool TokenMatches(JToken expectedJson, string expectedString,int iteration, string actual, int item = -1)
+		private static bool TokenMatches(JToken expectedJson, int iteration, string actual, int item = -1)
 		{
 			var actualJson = JToken.Parse(actual);
 			var matches = JToken.DeepEquals(expectedJson, actualJson);
@@ -126,12 +130,11 @@ namespace Tests.Framework
 
 		protected T AssertSerializesAndRoundTrips<T>(T o)
 		{
-			if (string.IsNullOrEmpty(this._expectedJsonString)) return default(T);
+			if (this.ExpectedJsonJObject == null) return default(T);
 
-			int iteration = 0;
+			var iteration = 0;
 			//first serialize to string and assert it looks like this.ExpectedJson
-			string serialized;
-			if (!this.SerializesAndMatches(o, iteration, out serialized)) return default(T);
+			if (!this.SerializesAndMatches(o, iteration, out var serialized)) return default(T);
 
 			if (!this.SupportsDeserialization) return default(T);
 

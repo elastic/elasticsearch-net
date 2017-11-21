@@ -2,7 +2,6 @@
 using System.Collections.Concurrent;
 using System.Reflection;
 using System.Collections;
-using System.Collections.Generic;
 
 namespace Nest
 {
@@ -34,8 +33,7 @@ namespace Nest
 		{
 			var properties = new Properties();
 
-			int seen;
-			if (seenTypes != null && seenTypes.TryGetValue(_type, out seen) && seen > maxRecursion)
+			if (seenTypes != null && seenTypes.TryGetValue(_type, out var seen) && seen > maxRecursion)
 				return properties;
 
 			foreach (var propertyInfo in _type.AllPropertiesCached())
@@ -45,8 +43,7 @@ namespace Nest
 					continue;
 
 				var property = GetProperty(propertyInfo, attribute);
-				var withCLrOrigin = property as IPropertyWithClrOrigin;
-				if (withCLrOrigin != null)
+				if (property is IPropertyWithClrOrigin withCLrOrigin)
 					withCLrOrigin.ClrOrigin = propertyInfo;
 				properties.Add(propertyInfo, property);
 			}
@@ -57,16 +54,14 @@ namespace Nest
 		private IProperty GetProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
 		{
 			var property = _visitor.Visit(propertyInfo, attribute);
-			if (property != null)
-				return property;
+			if (property != null) return property;
 
 			if (propertyInfo.GetGetMethod().IsStatic)
 				return null;
 
-			property = attribute ?? InferProperty(propertyInfo.PropertyType);
+			property = attribute ?? InferProperty(propertyInfo);
 
-			var objectProperty = property as IObjectProperty;
-			if (objectProperty != null)
+			if (property is IObjectProperty objectProperty)
 			{
 				var type = GetUnderlyingType(propertyInfo.PropertyType);
 				var seenTypes = new ConcurrentDictionary<Type, int>(_seenTypes);
@@ -80,9 +75,9 @@ namespace Nest
 			return property;
 		}
 
-		private IProperty InferProperty(Type type)
+		private static IProperty InferProperty(PropertyInfo propertyInfo)
 		{
-			type = GetUnderlyingType(type);
+			var type = GetUnderlyingType(propertyInfo.PropertyType);
 
 			if (type == typeof(string))
 				return new TextProperty
@@ -98,7 +93,13 @@ namespace Nest
 				};
 
 			if (type.IsEnumType())
+			{
+				if (type.GetTypeInfo().GetCustomAttribute<StringEnumAttribute>() != null
+				    || propertyInfo.GetCustomAttribute<StringEnumAttribute>() != null)
+					return new KeywordProperty();
+
 				return new NumberProperty(NumberType.Integer);
+			}
 
 			if (type.IsValue())
 			{

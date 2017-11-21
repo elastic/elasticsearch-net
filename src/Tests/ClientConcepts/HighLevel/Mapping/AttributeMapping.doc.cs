@@ -11,20 +11,20 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
     /**
     * [[attribute-mapping]]
 	* === Attribute mapping
-    * 
+    *
     * In <<auto-map, Auto mapping>>, you saw that the type mapping for a POCO can be inferred from the
     * properties of the POCO, using `.AutoMap()`. But what do you do when you want to map differently
     * to the inferred mapping? This is where attribute mapping can help.
-    * 
-	* It is possible to define your mappings using attributes on your POCO type and properties. With 
+    *
+	* It is possible to define your mappings using attributes on your POCO type and properties. With
     * attributes on properties and calling `.AutoMap()`, NEST will infer the mappings from the POCO property
     * types **and** take into account the mapping attributes.
-    * 
+    *
     * [IMPORTANT]
     * --
     * When you use attributes, you *must* also call `.AutoMap()` for the attributes to be applied.
     * --
-    * 
+    *
     * Here we define the same two types as before, but this time using attributes to define the mappings.
 	*/
     public class AttributeMapping
@@ -61,7 +61,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
             public bool IsManager { get; set; }
 
             [Nested]
-            [JsonProperty("empl")]
+            [Rename("empl"), JsonProperty("empl")]
             public List<Employee> Employees { get; set; }
         }
 
@@ -183,7 +183,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
         /**
          * Attribute mapping can be a convenient way to control how POCOs are mapped with minimal code, however
          * there are some mapping features that cannot be expressed with attributes, for example, <<multi-fields, Multi fields>>.
-         * In order to have the full power of mapping in NEST at your disposal, 
+         * In order to have the full power of mapping in NEST at your disposal,
          * take a look at <<fluent-mapping, Fluent Mapping>> next.
          */
 	}

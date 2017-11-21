@@ -16,6 +16,8 @@ namespace Tests.Document.Single.Create
 	public class CreateApiTests :
 		ApiIntegrationTestBase<WritableCluster, ICreateResponse, ICreateRequest<Project>, CreateDescriptor<Project>, CreateRequest<Project>>
 	{
+		protected override bool IncludeNullInExpected => false;
+
 		private Project Document => new Project
 		{
 			State = StateOfBeing.Stable,
@@ -50,8 +52,9 @@ namespace Tests.Document.Single.Create
 			new
 			{
 				name = CallIsolatedValue,
-				join = Document.Join,
+				join = Document.Join.ToAnonymousObject(),
 				state = "Stable",
+				visibility = "Public",
 				startedOn = FixedDate,
 				lastActivity = FixedDate,
 				numberOfContributors = 0,
@@ -83,7 +86,7 @@ namespace Tests.Document.Single.Create
 		public void CreateWithSameIndexTypeAndId()
 		{
 			var index = RandomString();
-			var project = Project.Generator.Generate(1).First();
+			var project = Project.Generator.GenerateLocked(1).First();
 			var createResponse = this.Client.Create(project, f => f
 				.Index(index)
 			);
