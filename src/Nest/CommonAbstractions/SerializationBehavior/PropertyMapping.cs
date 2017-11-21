@@ -22,14 +22,10 @@ namespace Nest
 	{
 		public static PropertyMapping Ignored = new PropertyMapping { Ignore = true };
 
-		/// <summary> Override the json property name of a type </summary>
+		/// <inheritdoc />
 		public string Name { get; set; }
 
-		/// <summary>
-		/// Ignore this property completely
-		/// <pre>- When mapping automatically using AutoMap()</pre>
-		/// <pre>- When Indexing this type do not serialize whatever this value hold</pre>
-		/// </summary>
+		/// <inheritdoc />
 		public bool Ignore { get; set; }
 	}
 
@@ -44,11 +40,10 @@ namespace Nest
 
 		public virtual IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
 		{
-			IPropertyMapping mapping;
 			var memberInfoString = $"{memberInfo.DeclaringType?.FullName}.{memberInfo.Name}";
-			if (Properties.TryGetValue(memberInfoString, out mapping))
-				return mapping;
-			mapping =  PropertyMappingFromAttributes(memberInfo);
+			if (Properties.TryGetValue(memberInfoString, out var mapping)) return mapping;
+
+			mapping = PropertyMappingFromAttributes(memberInfo);
 			this.Properties.TryAdd(memberInfoString, mapping);
 			return mapping;
 		}
@@ -56,9 +51,10 @@ namespace Nest
 		private static IPropertyMapping PropertyMappingFromAttributes(MemberInfo memberInfo)
 		{
 			var jsonProperty = memberInfo.GetCustomAttribute<JsonPropertyAttribute>(true);
-			var ignoreProperty = memberInfo.GetCustomAttribute<JsonIgnoreAttribute>(true);
-			if (jsonProperty == null && ignoreProperty == null) return null;
-			return new PropertyMapping {Name = jsonProperty?.PropertyName, Ignore = ignoreProperty != null};
+			var rename = memberInfo.GetCustomAttribute<RenameAttribute>(true);
+			var ignore = memberInfo.GetCustomAttribute<IgnoreAttribute>(true);
+			if (jsonProperty == null && ignore == null && rename == null) return null;
+			return new PropertyMapping {Name = rename?.Name ?? jsonProperty?.PropertyName, Ignore = ignore != null};
 		}
 	}
 

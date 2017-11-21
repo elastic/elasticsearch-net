@@ -13,7 +13,7 @@ namespace Tests.Framework.MockData
 		public LongRange Longs { get; set; }
 
 		//for deserialization
-		public  Ranges() { }
+		public Ranges() { }
 
 		private Ranges(Faker faker)
 		{
@@ -78,8 +78,8 @@ namespace Tests.Framework.MockData
 		}
 
 		public static Faker<Ranges> Generator { get; } =
-			new Faker<Ranges>()
+			Gimme.Lock(() => new Faker<Ranges>()
 				.CustomInstantiator((f) => new Ranges(f))
-			;
+			);
 	}
 }

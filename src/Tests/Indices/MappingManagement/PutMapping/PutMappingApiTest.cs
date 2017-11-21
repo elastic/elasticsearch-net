@@ -71,7 +71,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					properties = new
 					{
 						firstName = new { type = "text" },
-						gender = new { type = "integer" },
+						gender = new { type = "keyword" },
 						id = new { type = "long" },
 						ipAddress = new { type = "text" },
 						jobTitle = new { type = "text" },
@@ -101,7 +101,8 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				numberOfContributors = new { type = "integer" },
 				sourceOnly = new {properties = new { }, type = "object"},
 				startedOn = new {type = "date"},
-				state = new { type = "integer" },
+				state = new { type = "keyword" },
+				visibility = new { type = "keyword" },
 				suggest = new { type = "completion" },
 				ranges = new
 				{
@@ -227,7 +228,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						Properties = new Properties<Developer>
 						{
 							{p => p.FirstName, new TextProperty()},
-							{p => p.Gender, new NumberProperty(NumberType.Integer)},
+							{p => p.Gender, new KeywordProperty()},
 							{p => p.Id, new NumberProperty(NumberType.Long)},
 							{p => p.IpAddress, new TextProperty()},
 							{p => p.JobTitle, new TextProperty()},
@@ -259,7 +260,8 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					}
 				},
 				{p => p.StartedOn, new DateProperty()},
-				{p => p.State, new NumberProperty(NumberType.Integer)},
+				{p => p.State, new KeywordProperty()},
+				{p => p.Visibility, new KeywordProperty()},
 				{p => p.Suggest, new CompletionProperty()},
 				{
 					p => p.Ranges, new ObjectProperty

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -45,7 +46,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 		protected override bool SupportsDeserialization => false;
 		protected override PostJobDataDescriptor NewDescriptor() => new PostJobDataDescriptor(CallIsolatedValue);
 
-		protected override object ExpectJson => new JObject
+		protected override object ExpectJson => new Dictionary<string, object>
 		{
 			{ "@timestamp", new DateTime(2017, 9, 1) },
 			{ "accept", 36320 },
@@ -142,7 +143,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 		protected override bool SupportsDeserialization => false;
 		protected override PostJobDataDescriptor NewDescriptor() => new PostJobDataDescriptor(CallIsolatedValue);
 
-		protected override object ExpectJson => new JObject
+		protected override object ExpectJson => new Dictionary<string,object>
 		{
 			{ "@timestamp", new DateTime(2017, 9, 1) },
 			{ "accept", 36320 },
