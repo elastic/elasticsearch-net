@@ -13,7 +13,6 @@ namespace Nest
 		/// </summary>
 		int? NumberOfShards { get; set; }
 
-
 		//TODO remove pre note with 6.0
 		/// <summary>
 		/// By defaulting, routing resolves to a single shard. Use this settings to have it resolve to a set of shards instead.
@@ -32,6 +31,12 @@ namespace Nest
 		/// Settings associated with queries.
 		/// </summary>
 		IQueriesSettings Queries { get; set; }
+
+		/// <summary>
+		///  Settings associated with index sorting.
+		/// https://www.elastic.co/guide/en/elasticsearch/reference/6.0/index-modules-index-sorting.html
+		/// </summary>
+		ISortingSettings Sorting { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -51,6 +56,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IQueriesSettings Queries { get; set; }
+
+		/// <inheritdoc />
+		public ISortingSettings Sorting { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -72,6 +80,8 @@ namespace Nest
 
 		public IndexSettingsDescriptor Queries(Func<QueriesSettingsDescriptor, IQueriesSettings> selector) =>
 			Assign(a => a.Queries = selector?.Invoke(new QueriesSettingsDescriptor()));
-	}
 
+		public IndexSettingsDescriptor Sorting(Func<SortingSettingsDescriptor, ISortingSettings> selector) =>
+			Assign(a => a.Sorting = selector?.Invoke(new SortingSettingsDescriptor()));
+	}
 }

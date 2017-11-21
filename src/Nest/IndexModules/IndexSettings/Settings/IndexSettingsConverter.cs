@@ -77,14 +77,30 @@ namespace Nest
 			d[UpdatableIndexSettings.Analysis] = ds.Analysis;
 
 			var indexSettings = value as IIndexSettings;
-            d[FixedIndexSettings.NumberOfShards] = indexSettings?.NumberOfShards;
+
+			d[FixedIndexSettings.NumberOfShards] = indexSettings?.NumberOfShards;
             d[FixedIndexSettings.RoutingPartitionSize] = indexSettings?.RoutingPartitionSize;
             d[UpdatableIndexSettings.StoreType] = indexSettings?.FileSystemStorageImplementation;
             d[UpdatableIndexSettings.QueriesCacheEnabled] = indexSettings?.Queries?.Cache?.Enabled;
 
+			d[IndexSortSettings.Fields] = AsArrayOrSingleItem(indexSettings?.Sorting?.Fields);
+			d[IndexSortSettings.Order] = AsArrayOrSingleItem(indexSettings?.Sorting?.Order);
+			d[IndexSortSettings.Mode] = AsArrayOrSingleItem(indexSettings?.Sorting?.Mode);
+			d[IndexSortSettings.Missing] = AsArrayOrSingleItem(indexSettings?.Sorting?.Missing);
+
 			base.WriteJson(writer, d, serializer);
 		}
 
+		private object AsArrayOrSingleItem<T>(IEnumerable<T> items)
+		{
+			if (items == null || !items.Any())
+				return null;
+
+			if (items.Count() == 1)
+				return items.First();
+
+			return items;
+		}
 
 		public JObject Flatten(JObject original, string prefix = "", JObject newObject = null)
 		{
@@ -184,6 +200,12 @@ namespace Nest
 			Set<int?>(s, settings, FixedIndexSettings.RoutingPartitionSize, v => s.RoutingPartitionSize = v);
 			Set<FileSystemStorageImplementation?>(s, settings, UpdatableIndexSettings.StoreType, v => s.FileSystemStorageImplementation = v, serializer);
 
+			var sorting = s.Sorting = new SortingSettings();
+			SetArray<string[], string>(s, settings, IndexSortSettings.Fields, v => sorting.Fields = v, v => sorting.Fields = new [] { v });
+			SetArray<IndexSortOrder[], IndexSortOrder>(s, settings, IndexSortSettings.Order, v => sorting.Order = v, v => sorting.Order = new [] { v });
+			SetArray<IndexSortMode[], IndexSortMode>(s, settings, IndexSortSettings.Mode, v => sorting.Mode = v, v => sorting.Mode = new [] { v });
+			SetArray<IndexSortMissing[], IndexSortMissing>(s, settings, IndexSortSettings.Missing, v => sorting.Missing = v, v => sorting.Missing = new [] { v });
+
 			var queries = s.Queries = new QueriesSettings();
 			var queriesCache = s.Queries.Cache = new QueriesCacheSettings();
 			Set<bool?>(s, settings, UpdatableIndexSettings.QueriesCacheEnabled, v => queriesCache.Enabled = v);
@@ -205,9 +227,28 @@ namespace Nest
 		{
 			if (!settings.ContainsKey(key)) return;
 			var v = settings[key];
-			T value = serializer == null ? v.Value.ToObject<T>() : v.Value.ToObject<T>(serializer);
+			var value = serializer == null ? v.Value.ToObject<T>() : v.Value.ToObject<T>(serializer);
 			assign(value);
 			s.Add(key, value);
+			settings.Remove(key);
+		}
+
+		private static void SetArray<TArray, TItem>(IIndexSettings s, IDictionary<string, JProperty> settings, string key, Action<TArray> assign, Action<TItem> assign2, JsonSerializer serializer = null)
+		{
+			if (!settings.ContainsKey(key)) return;
+			var v = settings[key];
+			if (v.Value is JArray)
+			{
+				var value = serializer == null ? v.Value.ToObject<TArray>() : v.Value.ToObject<TArray>(serializer);
+				assign(value);
+				s.Add(key, value);
+			}
+			else
+			{
+				var value = serializer == null ? v.Value.ToObject<TItem>() : v.Value.ToObject<TItem>(serializer);
+				assign2(value);
+				s.Add(key, value);
+			}
 			settings.Remove(key);
 		}
 	}
