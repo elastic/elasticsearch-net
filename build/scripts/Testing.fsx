@@ -58,7 +58,7 @@ module Tests =
         let dotnet = Tooling.BuildTooling("dotnet")
         dotnet.ExecIn "src/Tests" ["clean";] |> ignore
         dotnet.ExecIn "src/Tests" ["restore";] |> ignore
-        dotnetTest Commandline.MultiTarget.All
+        dotnetTest Commandline.MultiTarget.One
 
     let RunUnitTests() =
         setLocalEnvVars()
