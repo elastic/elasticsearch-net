@@ -66,6 +66,12 @@ module Commandline =
         | Some t -> t.Replace("-all", "")
         | _ -> "build"
 
+    let validMonoTarget =
+        match target with
+        | "release"
+        | "canary" -> false
+        | _ -> true
+        
     let needsFullBuild =
         match (target, skipTests) with
         | (_, true) -> true

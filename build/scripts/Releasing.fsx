@@ -28,7 +28,7 @@ module Release =
             CreateDir Paths.NugetOutput
 
             let name = p.Name;
-            let nuspec = (sprintf @"build\%s.nuspec" name)
+            let nuspec = (sprintf @"build/%s.nuspec" name)
             let nugetOutFile =  Paths.Output(sprintf "%s.%s.nupkg" name (Versioning.CurrentVersion.ToString()))
 
             let nextMajorVersion = 

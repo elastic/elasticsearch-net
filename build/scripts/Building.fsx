@@ -33,7 +33,7 @@ module Build =
     let private buildingOnTravis = getEnvironmentVarAsBool "TRAVIS" 
 
     let private sln = sprintf "src/Elasticsearch%s.sln" (if buildingOnTravis then ".DotNetCoreOnly" else "")
-
+    
     let private compileCore incremental =
         if not (DotNetCli.isInstalled()) then failwith  "You need to install the dotnet command line SDK to build for .NET Core"
         let runningSdkVersion = DotNetCli.getVersion()
@@ -100,7 +100,6 @@ module Build =
         let readerParams = ReaderParameters( AssemblyResolver = resolver, ReadWrite = true );
         use nestAssembly = AssemblyDefinition.ReadAssembly(nestDll, readerParams);
         
-
         for item in nestAssembly.MainModule.Types do
             item.Namespace <- 
                 match item.Namespace.StartsWith("Newtonsoft.Json") with
@@ -121,12 +120,13 @@ module Build =
                 touchAttributes prop.CustomAttributes
 
         let key = File.ReadAllBytes(Paths.Keys("keypair.snk"))
-        let kp = new StrongNameKeyPair(key)
-        let wp = new WriterParameters ( StrongNameKeyPair = kp);
+        let kp = StrongNameKeyPair(key)
+        let wp = WriterParameters ( StrongNameKeyPair = kp);
         nestAssembly.Write(wp) |> ignore;
 
-    let ILRepack() = 
-        for f in DotNetFramework.All do 
+    let private ilRepackInternal() =
+        let fw = if isMono then [DotNetFramework.NetStandard1_3] else DotNetFramework.All
+        for f in fw do 
             let nest = Project Project.Nest
             let folder = Paths.ProjectOutputFolder nest f
             let nestDll = sprintf "%s/%s.dll" folder nest.Name
@@ -147,3 +147,9 @@ module Build =
             Tooling.ILRepack.Exec args |> ignore
             RewriteNamespace nest f |> ignore
     
+    let ILRepack() = 
+        //ilrepack on mono crashes pretty hard on my machine
+        match isMono with
+        | true -> ignore()
+        | false -> ilRepackInternal()
+         
