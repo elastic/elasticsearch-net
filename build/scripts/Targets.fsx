@@ -32,7 +32,10 @@ open Commandline
 Commandline.parse()
 
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
-Target "Start" <| fun _ -> traceHeader "STARTING BUILD"
+Target "Start" <| fun _ -> 
+    match (isMono, Commandline.validMonoTarget) with
+    | (true, false) -> failwithf "%s is not a valid target on mono because it can not call ILRepack" (Commandline.target)
+    | _ -> traceHeader "STARTING BUILD"
 
 Target "Clean" Build.Clean
 
@@ -74,8 +77,6 @@ Target "Release" <| fun _ ->
 Target "TestNugetPackage" <| fun _ -> 
     Tests.RunReleaseUnitTests()
     
-Target "Temp" Tests.RunReleaseUnitTests 
-
 Target "Canary" <| fun _ -> 
     trace "Running canary build" 
     let apiKey = (getBuildParam "apikey");
@@ -89,9 +90,9 @@ Target "Canary" <| fun _ ->
   ==> "Restore"
   =?> ("FullBuild", Commandline.needsFullBuild)
   =?> ("Test", (not Commandline.skipTests))
-  ==> "InternalizeDependencies"
+  =?> ("InternalizeDependencies", (not isMono))
   ==> "InheritDoc"
-  ==> "Documentation"
+  =?> ("Documentation", (not isMono))
   ==> "Build"
 
 "Start"
@@ -106,7 +107,7 @@ Target "Canary" <| fun _ ->
 
 "Version"
   ==> "Release"
-  ==> "TestNugetPackage"
+  =?> ("TestNugetPackage", (not isMono))
   ==> "Canary"
 
 "Start"
@@ -118,7 +119,5 @@ Target "Canary" <| fun _ ->
 "Build"
   ==> "Release"
   
-"Temp"
-
 RunTargetOrListTargets()
 
