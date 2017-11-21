@@ -45,7 +45,7 @@ module Build =
                 "CurrentVersion", (Versioning.CurrentVersion.ToString());
                 "CurrentAssemblyVersion", (Versioning.CurrentAssemblyVersion.ToString());
                 "CurrentAssemblyFileVersion", (Versioning.CurrentAssemblyFileVersion.ToString());
-                //"DoSourceLink", sourceLink;
+                "DoSourceLink", sourceLink;
                 "DotNetCoreOnly", if buildingOnTravis then "1" else "";
                 "OutputPathBaseDir", Path.GetFullPath Paths.BuildOutput;
             ] 
