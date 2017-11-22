@@ -21,7 +21,8 @@ namespace Tests.Aggregations.Metric.ExtendedStats
 				{
 					extended_stats = new
 					{
-						field = "numberOfCommits"
+						field = "numberOfCommits",
+						sigma = 1d
 					}
 				}
 			}
@@ -31,13 +32,14 @@ namespace Tests.Aggregations.Metric.ExtendedStats
 			.Aggregations(a => a
 				.ExtendedStats("commit_stats", es => es
 					.Field(p => p.NumberOfCommits)
+					.Sigma(1)
 				)
 			);
 
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Aggregations = new ExtendedStatsAggregation("commit_stats", Field<Project>(p => p.NumberOfCommits))
+				Aggregations = new ExtendedStatsAggregation("commit_stats", Field<Project>(p => p.NumberOfCommits)) { Sigma = 1 }
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
