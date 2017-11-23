@@ -16,10 +16,7 @@ namespace Nest
 	{
 		internal NormalizerBase() { }
 
-		protected NormalizerBase(string type)
-		{
-			Type = type;
-		}
+		protected NormalizerBase(string type) => Type = type;
 
 		public string Version { get; set; }
 

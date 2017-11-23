@@ -16,10 +16,7 @@ namespace Nest
 	{
 		internal AnalyzerBase() { }
 
-		protected AnalyzerBase(string type)
-		{
-			Type = type;
-		}
+		protected AnalyzerBase(string type) => Type = type;
 
 		public string Version { get; set; }
 
