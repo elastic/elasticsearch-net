@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
 namespace Nest.JsonNetSerializer
@@ -59,16 +60,24 @@ namespace Nest.JsonNetSerializer
 				return _serializer.Deserialize(jsonTextReader, type);
 		}
 
-		public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = new CancellationToken())
+		public virtual async Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			var o = this.Deserialize<T>(stream);
-			return Task.FromResult(o);
+			using (var streamReader = new StreamReader(stream))
+			using (var jsonTextReader = new JsonTextReader(streamReader))
+			{
+				var token = await JToken.LoadAsync(jsonTextReader, cancellationToken);
+				return token.ToObject<T>(this._serializer);
+			}
 		}
 
-		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = new CancellationToken())
+		public virtual async Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			var o = this.Deserialize(type, stream);
-			return Task.FromResult(o);
+			using (var streamReader = new StreamReader(stream))
+			using (var jsonTextReader = new JsonTextReader(streamReader))
+			{
+				var token = await JToken.LoadAsync(jsonTextReader, cancellationToken);
+				return token.ToObject(type, this._serializer);
+			}
 		}
 
 		public void Serialize(object data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented)

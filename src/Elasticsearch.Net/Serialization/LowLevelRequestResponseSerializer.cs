@@ -14,7 +14,6 @@ namespace Elasticsearch.Net
 
 		public static readonly LowLevelRequestResponseSerializer Instance = new LowLevelRequestResponseSerializer();
 
-
 		public object Default(Type type) => type.IsValueType() ? type.CreateInstance() : null;
 		public object Deserialize(Type type, Stream stream)
 		{
@@ -55,9 +54,8 @@ namespace Elasticsearch.Net
 
 		public void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
 		{
-			var serialized = SimpleJson.SerializeObject(data, LowLevelRequestResponseSerializer.Strategy);
-			if (formatting == SerializationFormatting.None)
-				serialized = RemoveNewLinesAndTabs(serialized);
+			var serialized = SimpleJson.SerializeObject(data, Strategy);
+			if (formatting == SerializationFormatting.None) serialized = RemoveNewLinesAndTabs(serialized);
 			using (var ms = new MemoryStream(serialized.Utf8Bytes()))
 			{
 				ms.CopyTo(writableStream);

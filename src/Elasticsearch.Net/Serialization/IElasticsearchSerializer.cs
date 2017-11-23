@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
-
 	public interface IElasticsearchSerializer
 	{
 		T Deserialize<T>(Stream stream);
@@ -18,6 +17,7 @@ namespace Elasticsearch.Net
 		Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken));
 
 		void Serialize(object data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented);
+
 	}
 
 
