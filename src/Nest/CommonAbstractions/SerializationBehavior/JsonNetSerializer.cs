@@ -61,6 +61,9 @@ namespace Nest
 				? _indentedSerializer
 				: _defaultSerializer;
 
+			//this leaveOpen is most likely here because in PostData when we serialize IEnumerable<object> as multi json
+			//we call this multiple times, it would be better to have a dedicated Serialize(IEnumerable<object>) on the
+			//IElasticsearchSerializer interface more explicitly
 			using (var writer = new StreamWriter(writableStream, ExpectedEncoding, BufferSize, leaveOpen: true))
 			using (var jsonWriter = new JsonTextWriter(writer))
 			{
@@ -70,6 +73,17 @@ namespace Nest
 			}
 		}
 
+		//we still support net45 so Task.Completed is not available
+		private static readonly Task CompletedTask = Task.FromResult(false);
+		public Task SerializeAsync(object data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
+			CancellationToken cancellationToken = default(CancellationToken))
+		{
+			//This makes no sense now but we need the async method on the interface in 6.x so we can start swapping this out
+			//for an implementation that does make sense without having to wait for 7.x
+			this.Serialize(data, stream, formatting);
+			return CompletedTask;
+		}
+
 		public object Default(Type type) => type.IsValueType() ? type.CreateInstance() : null;
 
 		public virtual T Deserialize<T>(Stream stream) => (T) this.Deserialize(typeof(T), stream);
@@ -77,7 +91,6 @@ namespace Nest
 		public virtual object Deserialize(Type type, Stream stream)
 		{
 			if (stream == null) return Default(type);
-			//TODO why does Serialize specify leaveOpen but this does not?
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{

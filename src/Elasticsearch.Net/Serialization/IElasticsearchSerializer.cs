@@ -18,6 +18,8 @@ namespace Elasticsearch.Net
 
 		void Serialize(object data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented);
 
+		Task SerializeAsync(object data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
+			CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 

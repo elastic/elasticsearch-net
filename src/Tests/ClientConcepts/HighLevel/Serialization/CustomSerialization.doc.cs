@@ -35,8 +35,6 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 	 */
 	public class GettingStarted
 	{
-		private IElasticClient client = new ElasticClient(new ConnectionSettings(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), new InMemoryConnection()));
-
 		/**[float]
 		 * === Injecting a new serializer
 		 *
@@ -54,14 +52,20 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		public class VanillaSerializer : IElasticsearchSerializer
 		{
 			public T Deserialize<T>(Stream stream) => throw new NotImplementedException();
+
 			public object Deserialize(Type type, Stream stream) => throw new NotImplementedException();
 
 			public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken)) =>
 				throw new NotImplementedException();
+
 			public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken)) =>
 				throw new NotImplementedException();
 
 			public void Serialize(object data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented) =>
+				throw new NotImplementedException();
+
+			public Task SerializeAsync(object data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
+				CancellationToken cancellationToken = default(CancellationToken)) =>
 				throw new NotImplementedException();
 		}
 
