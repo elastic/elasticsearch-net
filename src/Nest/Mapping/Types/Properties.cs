@@ -153,7 +153,7 @@ namespace Nest
 
 	internal static class PropertiesExtensions
 	{
-		internal static IProperties AutoMap<T>(this IProperties existingProperties, IPropertyVisitor visitor = null, int maxRecursion = 0)
+		internal static IProperties AutoMap<T>(this IProperties existingProperties, IPropertyVisitor visitor = null, int maxRecursion = 20)
 			where T : class
 		{
 			var properties = new Properties();

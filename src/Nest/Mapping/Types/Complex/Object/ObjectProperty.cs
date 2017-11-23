@@ -90,9 +90,25 @@ namespace Nest
 		public TDescriptor Properties(Func<PropertiesDescriptor<TChild>, IPromise<IProperties>> selector) =>
 			Assign(a => a.Properties = selector?.Invoke(new PropertiesDescriptor<TChild>(a.Properties))?.Value);
 
-		public TDescriptor AutoMap(IPropertyVisitor visitor = null, int maxRecursion = 0) =>
+		/// <summary>
+		/// Convenience method to map as much as it can based on <see cref="ElasticsearchTypeAttribute"/> attributes set on the type.
+		/// This particular overload is useful for automapping any children
+		/// <pre>This method also automatically sets up mappings for known values types (int, long, double, datetime, etc)</pre>
+		/// <pre>Class types default to object and Enums to int</pre>
+		/// <pre>Later calls can override whatever is set is by this call.</pre>
+		/// </summary>
+		/// <param name="visitor">Use a visitor implementation to control defaults</param>
+		/// <param name="maxRecursion">By default this will only recurse 20 levels deep to prevent circular references blowing up</param>
+		public TDescriptor AutoMap(IPropertyVisitor visitor = null, int maxRecursion = 20) =>
 			Assign(a => a.Properties = a.Properties.AutoMap<TChild>(visitor, maxRecursion));
 
+		/// <summary>
+		/// Convenience method to map as much as it can based on <see cref="ElasticsearchTypeAttribute"/> attributes set on the type.
+		/// <pre>This method also automatically sets up mappings for known values types (int, long, double, datetime, etc)</pre>
+		/// <pre>Class types default to object and Enums to int</pre>
+		/// <pre>Later calls can override whatever is set is by this call.</pre>
+		/// </summary>
+		/// <param name="maxRecursion">Limit how many levels we are allowed to recurse into</param>
 		public TDescriptor AutoMap(int maxRecursion) => AutoMap(null, maxRecursion);
 	}
 }

@@ -119,15 +119,23 @@ namespace Nest
 		ISourceField ITypeMapping.SourceField { get; set; }
 
 		/// <summary>
-		/// Convenience method to map as much as it can based on ElasticType attributes set on the type.
-		/// <pre>This method also automatically sets up mappings for known values types (int, long, double, datetime, etcetera)</pre>
+		/// Convenience method to map as much as it can based on <see cref="ElasticsearchTypeAttribute"/> attributes set on the type.
+		/// <pre>This method also automatically sets up mappings for known values types (int, long, double, datetime, etc)</pre>
 		/// <pre>Class types default to object and Enums to int</pre>
 		/// <pre>Later calls can override whatever is set is by this call.</pre>
 		/// </summary>
-		public PutMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null, int maxRecursion = 0) =>
+		/// <param name="visitor">Use a visitor implementation to control defaults</param>
+		/// <param name="maxRecursion">By default this will only recurse 20 levels deep to prevent circular references blowing up</param>
+		public PutMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null, int maxRecursion = 20) =>
 			Assign(a => a.Properties = a.Properties.AutoMap<T>(visitor, maxRecursion));
 
-		/// <inheritdoc/>
+		/// <summary>
+		/// Convenience method to map as much as it can based on <see cref="ElasticsearchTypeAttribute"/> attributes set on the type.
+		/// <pre>This method also automatically sets up mappings for known values types (int, long, double, datetime, etc)</pre>
+		/// <pre>Class types default to object and Enums to int</pre>
+		/// <pre>Later calls can override whatever is set is by this call.</pre>
+		/// </summary>
+		/// <param name="maxRecursion">Limit how many levels we are allowed to recurse into</param>
 		public PutMappingDescriptor<T> AutoMap(int maxRecursion) => AutoMap(null, maxRecursion);
 
 		/// <inheritdoc/>

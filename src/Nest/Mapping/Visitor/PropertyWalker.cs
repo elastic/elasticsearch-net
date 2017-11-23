@@ -13,7 +13,7 @@ namespace Nest
 		private readonly int _maxRecursion;
 		private readonly ConcurrentDictionary<Type, int> _seenTypes;
 
-		public PropertyWalker(Type type, IPropertyVisitor visitor, int maxRecursion = 0)
+		public PropertyWalker(Type type, IPropertyVisitor visitor, int maxRecursion = 20)
 		{
 			_type = GetUnderlyingType(type);
 			_visitor = visitor ?? new NoopPropertyVisitor();
@@ -30,7 +30,7 @@ namespace Nest
 			_seenTypes = seenTypes;
 		}
 
-		public IProperties GetProperties(ConcurrentDictionary<Type, int> seenTypes = null, int maxRecursion = 0)
+		public IProperties GetProperties(ConcurrentDictionary<Type, int> seenTypes = null, int maxRecursion = 20)
 		{
 			var properties = new Properties();
 
