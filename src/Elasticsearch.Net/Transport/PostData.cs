@@ -20,25 +20,42 @@ namespace Elasticsearch.Net
 		Serializable
 	}
 
-	public class PostData<T> : IPostData<T>
+	public abstract class PostData
 	{
-		private const int BufferSize = 81920;
-		private const string NewLineString = "\n";
-		private static readonly byte[] NewLineByteArray = { (byte)'\n' };
+		protected const int BufferSize = 81920;
+		protected static readonly byte[] NewLineByteArray = { (byte)'\n' };
+		protected const string NewLineString = "\n";
+
+		public bool? DisableDirectStreaming { get; set; }
+		public byte[] WrittenBytes { get; protected set; }
+		public PostType Type { get; protected set; }
+
+		public abstract void Write(Stream writableStream, IConnectionConfigurationValues settings);
+
+		public abstract Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken);
+
+		public static implicit operator PostData(byte[] byteArray) => PostData.Bytes(byteArray);
+		public static implicit operator PostData(string literalString) => PostData.String(literalString);
+
+		public static SerializableData<T> Serializable<T>(T o) => new SerializableData<T>(o);
+		public static PostData MultiJson(IEnumerable<string> listOfString) => new PostData<object>(listOfString);
+		public static PostData MultiJson(IEnumerable<object> listOfObjects) => new PostData<object>(listOfObjects);
+		public static PostData Bytes(byte[] bytes) => new PostData<object>(bytes);
+		public static PostData String(string serializedString) => new PostData<object>(serializedString);
+	}
+
+	public class PostData<T> : PostData, IPostData<T>
+	{
 		private readonly string _literalString;
 		private readonly IEnumerable<string> _enumurabeOfStrings;
 		private readonly IEnumerable<object> _enumerableOfObject;
 		private readonly T _serializable;
 
-		public bool? DisableDirectStreaming { get; set; }
-		public byte[] WrittenBytes { get; private set; }
-		public PostType Type { get; }
-
-		public PostData(byte[] item) { WrittenBytes = item; Type = PostType.ByteArray; }
-		public PostData(string item) { _literalString = item; Type = PostType.LiteralString; }
-		public PostData(IEnumerable<string> item) { _enumurabeOfStrings = item; Type = PostType.EnumerableOfString; }
-		public PostData(IEnumerable<object> item) { _enumerableOfObject = item; Type = PostType.EnumerableOfObject; }
-		public PostData(T item)
+		protected internal PostData(byte[] item) { WrittenBytes = item; Type = PostType.ByteArray; }
+		protected internal PostData(string item) { _literalString = item; Type = PostType.LiteralString; }
+		protected internal PostData(IEnumerable<string> item) { _enumurabeOfStrings = item; Type = PostType.EnumerableOfString; }
+		protected internal PostData(IEnumerable<object> item) { _enumerableOfObject = item; Type = PostType.EnumerableOfObject; }
+		private PostData(T item)
 		{
 			var boxedType = item.GetType();
 			if (typeof(byte[]).AssignableFrom(boxedType))
@@ -63,7 +80,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public void Write(Stream writableStream, IConnectionConfigurationValues settings)
+		public override void Write(Stream writableStream, IConnectionConfigurationValues settings)
 		{
 			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
 			MemoryStream ms = null;
@@ -113,7 +130,7 @@ namespace Elasticsearch.Net
 				this.WrittenBytes = ms?.ToArray();
 		}
 
-		public async Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken)
+		public override async Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken)
 		{
 			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
 			MemoryStream ms = null; Stream stream = null;
@@ -160,12 +177,5 @@ namespace Elasticsearch.Net
 			if (this.Type != 0)
 				this.WrittenBytes = ms?.ToArray();
 		}
-
-		public static implicit operator PostData<T>(byte[] byteArray) => new PostData<T>(byteArray);
-		public static implicit operator PostData<T>(string literalString) => new PostData<T>(literalString);
-		public static implicit operator PostData<T>(List<string> listOfStrings) => new PostData<T>(listOfStrings);
-		public static implicit operator PostData<T>(List<object> listOfObjects) => new PostData<T>(listOfObjects);
-		public static implicit operator PostData<T>(T @object) => new PostData<T>(@object);
 	}
-
 }

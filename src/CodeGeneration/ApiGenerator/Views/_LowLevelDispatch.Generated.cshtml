@@ -1,4 +1,5 @@
 @using System.Linq
+@using System.Text.RegularExpressions
 @using ApiGenerator.Domain
 @using ApiGenerator
 using System;
@@ -32,13 +33,19 @@ namespace Nest
 			<text>//NO METHOD FOR @endpoint.Url.Path</text>
 			continue;
 		}
+		var isGeneric = peek.InterfaceType.Contains("<");
+		var genericTypes = !isGeneric ? new string[] {} : Regex.Replace(peek.InterfaceType, @"^.+<(.+)>$", "$1").Split(',').Select(s => s.Trim()).ToArray();
+
+		var dispatchGeneric = !isGeneric ? "<T>" : ("<T," + string.Join(",", genericTypes) + ">");
+		var methodConstraints = "where T : class" + (string.Join("", genericTypes.Select(s => " where " + s + " : class")));
+		
 		var generate = new [] {
-			new { Name = endpoint.CsharpMethodName + "Dispatch<T>", Returns = "ElasticsearchResponse<T>" , Async = false},
-			new { Name = endpoint.CsharpMethodName + "DispatchAsync<T>", Returns = "Task<ElasticsearchResponse<T>>", Async = true },
+			new { Name = endpoint.CsharpMethodName + "Dispatch" + dispatchGeneric, Returns = "ElasticsearchResponse<T>" , Async = false},
+			new { Name = endpoint.CsharpMethodName + "DispatchAsync" + dispatchGeneric, Returns = "Task<ElasticsearchResponse<T>>", Async = true },
 		};
 		foreach(var gen in generate)
 		{
-		<text>internal @Raw(gen.Returns) @(Raw(gen.Name))(IRequest<@peek.QueryStringParamName> p @if (endpoint.Body != null) {<text>, @(Raw("PostData<object>")) body</text>}@(gen.Async ? ", CancellationToken cancellationToken" : string.Empty)) where T : class
+		<text>internal @Raw(gen.Returns) @(Raw(gen.Name))(IRequest<@peek.QueryStringParamName> p@{if (endpoint.Body != null) {<text>,@(Raw("SerializableData<"))@(Raw(peek.InterfaceType))@(Raw(">")) body</text>}}@(gen.Async ? ", CancellationToken ct" : string.Empty)) @methodConstraints
 		{
 			switch(p.HttpMethod)
 			{
@@ -60,7 +67,7 @@ namespace Nest
 						name += "Async<T>";
 						methodArguments = methodArguments.Concat(new[]
 						{
-							"cancellationToken"
+							"ct"
 						});
 					}
 					else

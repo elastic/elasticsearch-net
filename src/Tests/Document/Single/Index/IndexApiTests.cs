@@ -85,7 +85,7 @@ namespace Tests.Document.Single.Index
 		[I] public void OpTypeCreate()
 		{
 			var indexName = RandomString();
-			var project = Project.Generator.GenerateLocked(1).First();
+			var project = Project.Generator.Generate(1).First();
 			var indexResult = this.Client.Index(project, f => f
 				.Index(indexName)
 				.OpType(OpType.Create)

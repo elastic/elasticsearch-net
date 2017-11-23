@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.IO;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
@@ -23,14 +24,11 @@ namespace Nest
 	}
 
 	/// <summary>
-	/// A request that has an untyped document property
+	/// A request that that does not necessarily (de)serializes itself
 	/// </summary>
-	public interface IUntypedDocumentRequest : IRequest
+	public interface IProxyRequest : IRequest
 	{
-		/// <summary>
-		/// The untyped document
-		/// </summary>
-		object UntypedDocument { get; }
+		void WriteJson(IElasticsearchSerializer sourceSerializer, Stream s, SerializationFormatting serializationFormatting);
 	}
 
 	public abstract class RequestBase<TParameters> : IRequest<TParameters>

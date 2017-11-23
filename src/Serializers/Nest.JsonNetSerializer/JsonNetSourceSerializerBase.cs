@@ -80,7 +80,7 @@ namespace Nest.JsonNetSerializer
 			}
 		}
 
-		public void Serialize(object data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented)
+		public void Serialize<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented)
 		{
 			using (var writer = new StreamWriter(stream, ExpectedEncoding, BufferSize, leaveOpen: true))
 			using (var jsonWriter = new JsonTextWriter(writer))
@@ -90,7 +90,7 @@ namespace Nest.JsonNetSerializer
 
 		//we still support net45 so Task.Completed is not available
 		private static readonly Task CompletedTask = Task.FromResult(false);
-		public Task SerializeAsync(object data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
+		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
 			CancellationToken cancellationToken = default(CancellationToken))
 		{
 			//This makes no sense now but we need the async method on the interface in 6.x so we can start swapping this out

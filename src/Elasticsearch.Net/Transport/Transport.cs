@@ -47,7 +47,7 @@ namespace Elasticsearch.Net
 			this.MemoryStreamFactory = memoryStreamFactory ?? new MemoryStreamFactory();
 		}
 
-		public ElasticsearchResponse<TReturn> Request<TReturn>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+		public ElasticsearchResponse<TReturn> Request<TReturn>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
 			where TReturn : class
 		{
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
@@ -109,7 +109,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(HttpMethod method, string path, CancellationToken cancellationToken, PostData<object> data = null, IRequestParameters requestParameters = null)
+		public async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null, IRequestParameters requestParameters = null)
 			where TReturn : class
 		{
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))

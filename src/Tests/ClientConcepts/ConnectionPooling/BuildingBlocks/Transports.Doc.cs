@@ -12,7 +12,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 	{
 		/**=== Transports
 		*
-		* The `ITransport` interface can be seen as the motor block of the client. Its interface is 
+		* The `ITransport` interface can be seen as the motor block of the client. Its interface is
         * deceitfully simple, yet it's ultimately responsible for translating a client call to a response.
 		*
 		* If for some reason you do not agree with the way we wrote the internals of the client,
@@ -43,13 +43,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			var response = inMemoryTransport.Request<SearchResponse<Project>>(
 				HttpMethod.GET,
 				"/_search",
-				new { query = new { match_all = new { } } });
+				PostData.Serializable(new { query = new { match_all = new { } } }));
 
 			response = await inMemoryTransport.RequestAsync<SearchResponse<Project>>(
 				HttpMethod.GET,
 				"/_search",
 				default(CancellationToken),
-				new { query = new { match_all = new { } } });
+				PostData.Serializable(new { query = new { match_all = new { } } }));
 		}
 	}
 }

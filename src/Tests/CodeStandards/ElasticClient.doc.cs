@@ -113,6 +113,8 @@ namespace Tests.CodeStandards
 					(methodInfo.ReturnType.IsGenericType()
 					 && typeof(Task<>) == methodInfo.ReturnType.GetGenericTypeDefinition()
 					 && typeof(IResponse).IsAssignableFrom(methodInfo.ReturnType.GetGenericArguments()[0]))
+				where !methodInfo.Name.Contains("CreateDocument")
+				where !methodInfo.Name.Contains("IndexDocument")
 				let method = new MethodWithRequestParameter(methodInfo)
 				group method by method.Name into methodGroup
 				select methodGroup;

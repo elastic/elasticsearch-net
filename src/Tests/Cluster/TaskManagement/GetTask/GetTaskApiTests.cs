@@ -50,7 +50,7 @@ namespace Tests.Cluster.TaskManagement.GetTask
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			// get a suitable load of projects in order to get a decent task status out
-			var bulkResponse = client.IndexMany(Project.Generator.GenerateLocked(10000), "project-origin");
+			var bulkResponse = client.IndexMany(Project.Generator.Generate(10000), "project-origin");
 			if (!bulkResponse.IsValid)
 				throw new Exception("failure in setting up integration");
 

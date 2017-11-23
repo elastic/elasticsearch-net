@@ -52,9 +52,9 @@ namespace Tests.Reproduce
 			this.AssertRequestEquals(request, postData);
 		}
 
-		private PostData<object> CreatePostData(Exception e)
+		private PostData CreatePostData(Exception e)
 		{
-			PostData<object> postData = new List<object>
+			PostData postData = PostData.MultiJson(new List<object>
 			{
 				_bulkHeader,
 				new
@@ -62,7 +62,7 @@ namespace Tests.Reproduce
 					message = "My message",
 					exception = this.ExceptionJson(e).ToArray(),
 				}
-			};
+			});
 			return postData;
 		}
 
@@ -156,14 +156,14 @@ namespace Tests.Reproduce
 				_bulkHeader,
 				document
 			};
-			var response = this._client.Bulk<byte[]>(payload);
+			var response = this._client.Bulk<byte[]>(PostData.MultiJson(payload));
 
 
 			var request = Encoding.UTF8.GetString(response.RequestBodyInBytes);
 			return request;
 		}
 
-		private void AssertRequestEquals(string request, PostData<object> postData)
+		private void AssertRequestEquals(string request, PostData postData)
 		{
 			using (var ms = new MemoryStream())
 			{

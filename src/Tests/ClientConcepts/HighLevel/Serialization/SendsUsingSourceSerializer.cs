@@ -55,7 +55,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		[U] public void IndexRequest()
 		{
 			CanAlterSource(
-				r => r.Index(new ADocument()),
+				r => r.IndexDocument(new ADocument()),
 				usingDefaults: DefaultSerialized,
 				withSourceSerializer: IncludesNullAndType
 			);
@@ -64,7 +64,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		[U] public void CreateRequest()
 		{
 			CanAlterSource(
-				r => r.Create(new ADocument()),
+				r => r.CreateDocument(new ADocument()),
 				usingDefaults: DefaultSerialized,
 				withSourceSerializer: IncludesNullAndType
 			);

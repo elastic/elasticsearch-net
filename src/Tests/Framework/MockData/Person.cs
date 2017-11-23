@@ -16,15 +16,15 @@ namespace Tests.Framework.MockData
 		protected static int IdState = 0;
 
 		public static Faker<Person> Generator { get; } =
-			Gimme.Lock(() => new Faker<Person>()
+			new Faker<Person>()
 				.RuleFor(p => p.Id, p => IdState++)
 				.RuleFor(p => p.FirstName, p => p.Name.FirstName())
 				.RuleFor(p => p.LastName, p => p.Name.LastName())
 				.RuleFor(p => p.JobTitle, p => p.Name.JobTitle())
 				.RuleFor(p => p.Location, p => new GeoLocation(Gimme.Random.Number(-90, 90), Gimme.Random.Number(-180, 180)))
-			);
+			;
 
 		public static IList<Person> Persons { get; } =
-			Person.Generator.GenerateLocked(1000).ToList();
+			Person.Generator.Generate(1000).ToList();
 	}
 }

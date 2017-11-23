@@ -22,9 +22,9 @@ namespace Tests.Document.Single.Create
 				}));
 
 			await PUT("/project/doc/NEST/_create")
-				.Fluent(c => c.Create(project))
+				.Fluent(c => c.CreateDocument(project))
 				.Request(c => c.Create(new CreateRequest<Project>(project)))
-				.FluentAsync(c => c.CreateAsync(project))
+				.FluentAsync(c => c.CreateDocumentAsync(project))
 				.RequestAsync(c => c.CreateAsync(new CreateRequest<Project>(project)));
 
 			await PUT("/project/project/NEST/_create")

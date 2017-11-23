@@ -28,16 +28,14 @@ namespace Tests.Document.Single.Create
 			SourceOnly = TestClient.Configuration.UsingCustomSourceSerializer ? new SourceOnlyObject() : null
 		};
 
-		public CreateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public CreateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Create(this.Document, f),
 			fluentAsync: (client, f) => client.CreateAsync(this.Document, f),
 			request: (client, r) => client.Create(r),
 			requestAsync: (client, r) => client.CreateAsync(r)
-			);
+		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 201;
@@ -86,7 +84,7 @@ namespace Tests.Document.Single.Create
 		public void CreateWithSameIndexTypeAndId()
 		{
 			var index = RandomString();
-			var project = Project.Generator.GenerateLocked(1).First();
+			var project = Project.Generator.Generate(1).First();
 			var createResponse = this.Client.Create(project, f => f
 				.Index(index)
 			);

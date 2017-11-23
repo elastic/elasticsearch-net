@@ -39,7 +39,7 @@ namespace Tests.Framework.MockData
 		}
 
 		public static Faker<CommitActivity> Generator { get; } =
-			Gimme.Lock(() => new Faker<CommitActivity>()
+			new Faker<CommitActivity>()
 				.RuleFor(p => p.Id, p => Guid.NewGuid().ToString("N").Substring(0, 8))
 				.RuleFor(p => p.ProjectName, p => Project.Projects[Gimme.Random.Number(0, Project.Projects.Count -1)].Name)
 				.RuleFor(p => p.Committer, p => Developer.Developers[Gimme.Random.Number(0, Developer.Developers.Count -1)])
@@ -56,10 +56,9 @@ namespace Tests.Framework.MockData
 					TimeSpan.FromHours(4.23),
 					TimeSpan.FromDays(5),
 				}))
-			);
+			;
 
-		public static IList<CommitActivity> CommitActivities { get; } =
-			Generator.GenerateLocked(1000).ToList();
+		public static IList<CommitActivity> CommitActivities { get; } = Generator.Generate(1000).ToList();
 	}
 
 	internal class StringTimeSpanConverter : JsonConverter

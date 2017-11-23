@@ -28,7 +28,7 @@ namespace Tests.Cat.CatFielddata
 				.Query(q => q
 					.Terms(t => t
 						.Field(p => p.CuratedTags.First().Name)
-						.Terms(Tag.Generator.GenerateLocked(50).Select(ct => ct.Name))
+						.Terms(Tag.Generator.Generate(50).Select(ct => ct.Name))
 					)
 				)
 			);

@@ -29,8 +29,8 @@ namespace Tests.Search.Request
 		public string Name { get; set; }
 
 		public static Faker<TRoyal> Generator { get; } =
-			Gimme.Lock(() => new Faker<TRoyal>()
-				.RuleFor(p => p.Name, f => f.Person.Company.Name + IdState++));
+			new Faker<TRoyal>()
+				.RuleFor(p => p.Name, f => f.Person.Company.Name + IdState++);
 	}
 
 	public abstract class RoyalBase<TRoyal, TSubject> : RoyalBase<TRoyal>
@@ -103,10 +103,10 @@ namespace Tests.Search.Request
 					)
 				)
 			);
-			var kings = King.Generator.GenerateLocked(2)
+			var kings = King.Generator.Generate(2)
 				.Select(k =>
 				{
-					var foes = King.Generator.GenerateLocked(2).Select(f =>
+					var foes = King.Generator.Generate(2).Select(f =>
 					{
 						f.Join = null;
 						return f;
@@ -117,10 +117,10 @@ namespace Tests.Search.Request
 
 			var bulk = new BulkDescriptor();
 			IndexAll(bulk, () => kings, indexChildren: king =>
-				IndexAll(bulk, () => Prince.Generator.GenerateLocked(2), king, prince =>
-					IndexAll(bulk, () => Duke.Generator.GenerateLocked(3), prince, duke =>
-						IndexAll(bulk, () => Earl.Generator.GenerateLocked(5), duke, earl =>
-							IndexAll(bulk, () => Baron.Generator.GenerateLocked(1), earl)
+				IndexAll(bulk, () => Prince.Generator.Generate(2), king, prince =>
+					IndexAll(bulk, () => Duke.Generator.Generate(3), prince, duke =>
+						IndexAll(bulk, () => Earl.Generator.Generate(5), duke, earl =>
+							IndexAll(bulk, () => Baron.Generator.Generate(1), earl)
 						)
 					)
 				)
