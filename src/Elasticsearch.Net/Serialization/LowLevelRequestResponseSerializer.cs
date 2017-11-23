@@ -62,6 +62,17 @@ namespace Elasticsearch.Net
 			}
 		}
 
+		public async Task SerializeAsync(object data, Stream writableStream, SerializationFormatting formatting,
+			CancellationToken cancellationToken = default(CancellationToken))
+		{
+			var serialized = SimpleJson.SerializeObject(data, Strategy);
+			if (formatting == SerializationFormatting.None) serialized = RemoveNewLinesAndTabs(serialized);
+			using (var ms = new MemoryStream(serialized.Utf8Bytes()))
+			{
+				await ms.CopyToAsync(writableStream);
+			}
+		}
+
 		private static string RemoveNewLinesAndTabs(string input)
 		{
 			return new string(input

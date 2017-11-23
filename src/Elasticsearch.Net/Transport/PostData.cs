@@ -70,13 +70,13 @@ namespace Elasticsearch.Net
 			Stream stream = null;
 			switch (Type)
 			{
-				case PostType.ByteArray: 
+				case PostType.ByteArray:
 					ms = new MemoryStream(WrittenBytes);
 					break;
 				case PostType.LiteralString:
 					ms = !string.IsNullOrEmpty(_literalString) ? new MemoryStream(_literalString?.Utf8Bytes()) : null;
 					break;
-				case PostType.EnumerableOfString: 
+				case PostType.EnumerableOfString:
 					ms = _enumurabeOfStrings.HasAny() ? new MemoryStream((string.Join(NewLineString, _enumurabeOfStrings) + NewLineString).Utf8Bytes()) : null;
 					break;
 				case PostType.EnumerableOfObject:
@@ -94,7 +94,7 @@ namespace Elasticsearch.Net
 						stream.Write(NewLineByteArray, 0, 1);
 					}
 					break;
-				case PostType.Serializable: 
+				case PostType.Serializable:
 					stream = writableStream;
 					if (this.DisableDirectStreaming ?? settings.DisableDirectStreaming)
 					{
@@ -119,13 +119,13 @@ namespace Elasticsearch.Net
 			MemoryStream ms = null; Stream stream = null;
 			switch (Type)
 			{
-				case PostType.ByteArray: 
+				case PostType.ByteArray:
 					ms = new MemoryStream(WrittenBytes);
 					break;
-				case PostType.LiteralString: 
+				case PostType.LiteralString:
 					ms = !string.IsNullOrEmpty(_literalString) ? new MemoryStream(_literalString.Utf8Bytes()) : null;
 					break;
-				case PostType.EnumerableOfString: 
+				case PostType.EnumerableOfString:
 					ms = _enumurabeOfStrings.HasAny() ? new MemoryStream((string.Join(NewLineString, _enumurabeOfStrings) + NewLineString).Utf8Bytes()) : null;
 					break;
 				case PostType.EnumerableOfObject:
@@ -138,18 +138,18 @@ namespace Elasticsearch.Net
 					else stream = writableStream;
 					foreach (var o in _enumerableOfObject)
 					{
-						settings.RequestResponseSerializer.Serialize(o, stream, SerializationFormatting.None);
+						await settings.RequestResponseSerializer.SerializeAsync(o, stream, SerializationFormatting.None, cancellationToken);
 						await stream.WriteAsync(NewLineByteArray, 0, 1, cancellationToken).ConfigureAwait(false);
 					}
 					break;
-				case PostType.Serializable: 
+				case PostType.Serializable:
 					stream = writableStream;
 					if (this.DisableDirectStreaming ?? settings.DisableDirectStreaming)
 					{
 						ms = new MemoryStream();
 						stream = ms;
 					}
-					settings.RequestResponseSerializer.Serialize(this._serializable, stream, indent);
+					await settings.RequestResponseSerializer.SerializeAsync(this._serializable, stream, indent, cancellationToken);
 					break;
 			}
 			if (ms != null)
