@@ -11,8 +11,7 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var v = value as T;
-			if (v == null) return;
+			if (!(value is T v)) return;
 			this.WriteJson(writer, v, serializer);
 		}
 

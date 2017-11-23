@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
@@ -83,21 +84,26 @@ namespace Nest
 				var t = this._defaultSerializer.Deserialize(jsonTextReader, type);
 				return t;
 			}
-
 		}
 
-		public virtual Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+		public virtual async Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			//TODO result Json.NET 10.0.1 has async
-			var result = this.Deserialize<T>(stream);
-			return Task.FromResult(result);
+			using (var streamReader = new StreamReader(stream))
+			using (var jsonTextReader = new JsonTextReader(streamReader))
+			{
+				var token = await JToken.LoadAsync(jsonTextReader, cancellationToken);
+				return token.ToObject<T>(this._defaultSerializer);
+			}
 		}
 
-		public virtual Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+		public virtual async Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			//TODO result Json.NET 10.0.1 has async
-			var result = this.Deserialize(type, stream);
-			return Task.FromResult(result);
+			using (var streamReader = new StreamReader(stream))
+			using (var jsonTextReader = new JsonTextReader(streamReader))
+			{
+				var token = await JToken.LoadAsync(jsonTextReader, cancellationToken);
+				return token.ToObject(type, this._defaultSerializer);
+			}
 		}
 
 		private JsonSerializerSettings CreateSettings(SerializationFormatting formatting)
@@ -110,8 +116,7 @@ namespace Nest
 				NullValueHandling = NullValueHandling.Ignore
 			};
 
-			var contract = settings.ContractResolver as ElasticContractResolver;
-			if (contract == null)
+			if (!(settings.ContractResolver is ElasticContractResolver contract))
 				throw new Exception($"NEST needs an instance of {nameof(ElasticContractResolver)} registered on Json.NET's JsonSerializerSettings");
 
 			return settings;
