@@ -1,25 +1,28 @@
-﻿namespace Nest
+﻿using Newtonsoft.Json;
+
+namespace Nest
 {
 
 	/// <summary>
-	/// A token filter of type asciifolding that converts alphabetic, numeric, and symbolic Unicode characters which are 
+	/// A token filter of type asciifolding that converts alphabetic, numeric, and symbolic Unicode characters which are
 	/// <para> not in the first 127 ASCII characters (the “Basic Latin” Unicode block) into their ASCII equivalents, if one exists.</para>
 	/// </summary>
 	public interface IAsciiFoldingTokenFilter : ITokenFilter
 	{
+		[JsonProperty("preserve_original")]
 		bool? PreserveOriginal { get; set; }
 	}
 
 	///<inheritdoc/>
 	public class AsciiFoldingTokenFilter : TokenFilterBase, IAsciiFoldingTokenFilter
 	{
-		public AsciiFoldingTokenFilter() : base("asciifolding") { } 
+		public AsciiFoldingTokenFilter() : base("asciifolding") { }
 
 		public bool? PreserveOriginal { get; set; }
 	}
 
 	///<inheritdoc/>
-	public class AsciiFoldingTokenFilterDescriptor 
+	public class AsciiFoldingTokenFilterDescriptor
 		: TokenFilterDescriptorBase<AsciiFoldingTokenFilterDescriptor, IAsciiFoldingTokenFilter>, IAsciiFoldingTokenFilter
 	{
 		protected override string Type => "asciifolding";
