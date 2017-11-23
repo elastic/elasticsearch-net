@@ -31,7 +31,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Bulk<T>(PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Bulk<T>(PostData body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_bulk
@@ -45,7 +45,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> BulkAsync<T>(PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> BulkAsync<T>(PostData body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_bulk"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_bulk
@@ -60,7 +60,7 @@ namespace Elasticsearch.Net
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Bulk<T>(string index, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Bulk<T>(string index, PostData body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_bulk
@@ -75,7 +75,7 @@ namespace Elasticsearch.Net
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> BulkAsync<T>(string index, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> BulkAsync<T>(string index, PostData body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_bulk"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_bulk
@@ -91,7 +91,7 @@ namespace Elasticsearch.Net
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Bulk<T>(string index, string type, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Bulk<T>(string index, string type, PostData body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_bulk
@@ -107,7 +107,7 @@ namespace Elasticsearch.Net
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> BulkAsync<T>(string index, string type, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> BulkAsync<T>(string index, string type, PostData body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_bulk"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_bulk
@@ -121,7 +121,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> BulkPut<T>(PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> BulkPut<T>(PostData body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_bulk
@@ -135,7 +135,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> BulkPutAsync<T>(PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> BulkPutAsync<T>(PostData body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_bulk"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/_bulk
@@ -150,7 +150,7 @@ namespace Elasticsearch.Net
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> BulkPut<T>(string index, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> BulkPut<T>(string index, PostData body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/_bulk
@@ -165,7 +165,7 @@ namespace Elasticsearch.Net
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> BulkPutAsync<T>(string index, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> BulkPutAsync<T>(string index, PostData body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/_bulk"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type}/_bulk
@@ -181,7 +181,7 @@ namespace Elasticsearch.Net
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> BulkPut<T>(string index, string type, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> BulkPut<T>(string index, string type, PostData body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type}/_bulk
@@ -197,7 +197,7 @@ namespace Elasticsearch.Net
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> BulkPutAsync<T>(string index, string type, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> BulkPutAsync<T>(string index, string type, PostData body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_bulk"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cat/aliases
@@ -1039,7 +1039,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> ClearScroll<T>(PostData<object> body, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> ClearScroll<T>(PostData body, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(DELETE, Url($"_search/scroll"), body, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_search/scroll
@@ -1053,7 +1053,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> ClearScrollAsync<T>(PostData<object> body, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> ClearScrollAsync<T>(PostData body, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(DELETE, Url($"_search/scroll"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/allocation/explain
@@ -1093,7 +1093,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The index, shard, and primary flag to explain. Empty means &#39;explain the first unassigned shard&#39;</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> ClusterAllocationExplain<T>(PostData<object> body, Func<ClusterAllocationExplainRequestParameters, ClusterAllocationExplainRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> ClusterAllocationExplain<T>(PostData body, Func<ClusterAllocationExplainRequestParameters, ClusterAllocationExplainRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_cluster/allocation/explain"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_cluster/allocation/explain
@@ -1107,7 +1107,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The index, shard, and primary flag to explain. Empty means &#39;explain the first unassigned shard&#39;</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> ClusterAllocationExplainAsync<T>(PostData<object> body, Func<ClusterAllocationExplainRequestParameters, ClusterAllocationExplainRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> ClusterAllocationExplainAsync<T>(PostData body, Func<ClusterAllocationExplainRequestParameters, ClusterAllocationExplainRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_cluster/allocation/explain"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/settings
@@ -1227,7 +1227,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> ClusterPutSettings<T>(PostData<object> body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> ClusterPutSettings<T>(PostData body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_cluster/settings"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_cluster/settings
@@ -1241,7 +1241,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> ClusterPutSettingsAsync<T>(PostData<object> body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> ClusterPutSettingsAsync<T>(PostData body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_cluster/settings"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_remote/info
@@ -1281,7 +1281,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> ClusterReroute<T>(PostData<object> body, Func<ClusterRerouteRequestParameters, ClusterRerouteRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> ClusterReroute<T>(PostData body, Func<ClusterRerouteRequestParameters, ClusterRerouteRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_cluster/reroute"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_cluster/reroute
@@ -1295,7 +1295,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> ClusterRerouteAsync<T>(PostData<object> body, Func<ClusterRerouteRequestParameters, ClusterRerouteRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> ClusterRerouteAsync<T>(PostData body, Func<ClusterRerouteRequestParameters, ClusterRerouteRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_cluster/reroute"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/state
@@ -1447,7 +1447,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Count<T>(PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Count<T>(PostData body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_count"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_count
@@ -1461,7 +1461,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> CountAsync<T>(PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> CountAsync<T>(PostData body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_count"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_count
@@ -1476,7 +1476,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Count<T>(string index, PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Count<T>(string index, PostData body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_count"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_count
@@ -1491,7 +1491,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> CountAsync<T>(string index, PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> CountAsync<T>(string index, PostData body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_count"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_count
@@ -1507,7 +1507,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of types to restrict the results</param>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Count<T>(string index, string type, PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Count<T>(string index, string type, PostData body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_count"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_count
@@ -1523,7 +1523,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of types to restrict the results</param>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> CountAsync<T>(string index, string type, PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> CountAsync<T>(string index, string type, PostData body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_count"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_count
@@ -1624,7 +1624,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Document ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Create<T>(string index, string type, string id, PostData<object> body, Func<CreateRequestParameters, CreateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Create<T>(string index, string type, string id, PostData body, Func<CreateRequestParameters, CreateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_create"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type}/{id}/_create
@@ -1641,7 +1641,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Document ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> CreateAsync<T>(string index, string type, string id, PostData<object> body, Func<CreateRequestParameters, CreateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> CreateAsync<T>(string index, string type, string id, PostData body, Func<CreateRequestParameters, CreateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_create"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_create
@@ -1658,7 +1658,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Document ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> CreatePost<T>(string index, string type, string id, PostData<object> body, Func<CreateRequestParameters, CreateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> CreatePost<T>(string index, string type, string id, PostData body, Func<CreateRequestParameters, CreateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_create"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_create
@@ -1675,7 +1675,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Document ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> CreatePostAsync<T>(string index, string type, string id, PostData<object> body, Func<CreateRequestParameters, CreateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> CreatePostAsync<T>(string index, string type, string id, PostData body, Func<CreateRequestParameters, CreateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_create"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /{index}/{type}/{id}
@@ -1722,7 +1722,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> DeleteByQuery<T>(string index, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> DeleteByQuery<T>(string index, PostData body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_delete_by_query"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_delete_by_query
@@ -1737,7 +1737,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> DeleteByQueryAsync<T>(string index, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> DeleteByQueryAsync<T>(string index, PostData body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_delete_by_query"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_delete_by_query
@@ -1753,7 +1753,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> DeleteByQuery<T>(string index, string type, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> DeleteByQuery<T>(string index, string type, PostData body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_delete_by_query"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_delete_by_query
@@ -1769,7 +1769,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> DeleteByQueryAsync<T>(string index, string type, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> DeleteByQueryAsync<T>(string index, string type, PostData body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_delete_by_query"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_scripts/{id}
@@ -1910,7 +1910,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="body">The query definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Explain<T>(string index, string type, string id, PostData<object> body, Func<ExplainRequestParameters, ExplainRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Explain<T>(string index, string type, string id, PostData body, Func<ExplainRequestParameters, ExplainRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_explain"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_explain
@@ -1927,7 +1927,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="body">The query definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> ExplainAsync<T>(string index, string type, string id, PostData<object> body, Func<ExplainRequestParameters, ExplainRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> ExplainAsync<T>(string index, string type, string id, PostData body, Func<ExplainRequestParameters, ExplainRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_explain"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_field_caps
@@ -1995,7 +1995,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">Field json objects containing an array of field names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> FieldCaps<T>(PostData<object> body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> FieldCaps<T>(PostData body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_field_caps"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_field_caps
@@ -2009,7 +2009,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">Field json objects containing an array of field names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> FieldCapsAsync<T>(PostData<object> body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> FieldCapsAsync<T>(PostData body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_field_caps"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_field_caps
@@ -2024,7 +2024,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">Field json objects containing an array of field names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> FieldCaps<T>(string index, PostData<object> body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> FieldCaps<T>(string index, PostData body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_field_caps"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_field_caps
@@ -2039,7 +2039,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">Field json objects containing an array of field names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> FieldCapsAsync<T>(string index, PostData<object> body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> FieldCapsAsync<T>(string index, PostData body, Func<FieldCapabilitiesRequestParameters, FieldCapabilitiesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_field_caps"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}
@@ -2147,7 +2147,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Index<T>(string index, string type, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Index<T>(string index, string type, PostData body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}
@@ -2163,7 +2163,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndexAsync<T>(string index, string type, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndexAsync<T>(string index, string type, PostData body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}
@@ -2180,7 +2180,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Document ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Index<T>(string index, string type, string id, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Index<T>(string index, string type, string id, PostData body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}
@@ -2197,7 +2197,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Document ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndexAsync<T>(string index, string type, string id, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndexAsync<T>(string index, string type, string id, PostData body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type}
@@ -2213,7 +2213,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndexPut<T>(string index, string type, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndexPut<T>(string index, string type, PostData body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type}
@@ -2229,7 +2229,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndexPutAsync<T>(string index, string type, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndexPutAsync<T>(string index, string type, PostData body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type}/{id}
@@ -2246,7 +2246,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Document ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndexPut<T>(string index, string type, string id, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndexPut<T>(string index, string type, string id, PostData body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type}/{id}
@@ -2263,7 +2263,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Document ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndexPutAsync<T>(string index, string type, string id, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndexPutAsync<T>(string index, string type, string id, PostData body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_analyze
@@ -2331,7 +2331,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">Define analyzer/tokenizer parameters and the text on which the analysis should be performed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesAnalyzeForAll<T>(PostData<object> body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesAnalyzeForAll<T>(PostData body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_analyze"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_analyze
@@ -2345,7 +2345,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">Define analyzer/tokenizer parameters and the text on which the analysis should be performed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesAnalyzeForAllAsync<T>(PostData<object> body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesAnalyzeForAllAsync<T>(PostData body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_analyze"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_analyze
@@ -2360,7 +2360,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="body">Define analyzer/tokenizer parameters and the text on which the analysis should be performed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesAnalyze<T>(string index, PostData<object> body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesAnalyze<T>(string index, PostData body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_analyze"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_analyze
@@ -2375,7 +2375,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="body">Define analyzer/tokenizer parameters and the text on which the analysis should be performed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesAnalyzeAsync<T>(string index, PostData<object> body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesAnalyzeAsync<T>(string index, PostData body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_analyze"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_cache/clear
@@ -2526,7 +2526,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesCreate<T>(string index, PostData<object> body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesCreate<T>(string index, PostData body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}
@@ -2541,7 +2541,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesCreateAsync<T>(string index, PostData<object> body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesCreateAsync<T>(string index, PostData body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /{index}
@@ -3677,7 +3677,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesPutAlias<T>(string index, string name, PostData<object> body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutAlias<T>(string index, string name, PostData body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/_alias/{name}
@@ -3693,7 +3693,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesPutAliasAsync<T>(string index, string name, PostData<object> body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesPutAliasAsync<T>(string index, string name, PostData body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_alias/{name}
@@ -3709,7 +3709,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesPutAliasPost<T>(string index, string name, PostData<object> body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutAliasPost<T>(string index, string name, PostData body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_alias/{name}
@@ -3725,7 +3725,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesPutAliasPostAsync<T>(string index, string name, PostData<object> body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesPutAliasPostAsync<T>(string index, string name, PostData body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type}/_mapping
@@ -3741,7 +3741,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesPutMapping<T>(string index, string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutMapping<T>(string index, string type, PostData body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mapping"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type}/_mapping
@@ -3757,7 +3757,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesPutMappingAsync<T>(string index, string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesPutMappingAsync<T>(string index, string type, PostData body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mapping"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_mapping/{type}
@@ -3772,7 +3772,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesPutMappingForAll<T>(string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutMappingForAll<T>(string type, PostData body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_mapping/{type.NotNull("type")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_mapping/{type}
@@ -3787,7 +3787,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesPutMappingForAllAsync<T>(string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesPutMappingForAllAsync<T>(string type, PostData body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_mapping/{type.NotNull("type")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_mapping
@@ -3803,7 +3803,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesPutMappingPost<T>(string index, string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutMappingPost<T>(string index, string type, PostData body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mapping"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_mapping
@@ -3819,7 +3819,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesPutMappingPostAsync<T>(string index, string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesPutMappingPostAsync<T>(string index, string type, PostData body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mapping"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_mapping/{type}
@@ -3834,7 +3834,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesPutMappingPostForAll<T>(string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutMappingPostForAll<T>(string type, PostData body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_mapping/{type.NotNull("type")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_mapping/{type}
@@ -3849,7 +3849,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesPutMappingPostForAllAsync<T>(string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesPutMappingPostForAllAsync<T>(string type, PostData body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_mapping/{type.NotNull("type")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_settings
@@ -3863,7 +3863,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesPutSettingsForAll<T>(PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutSettingsForAll<T>(PostData body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_settings"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_settings
@@ -3877,7 +3877,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesPutSettingsForAllAsync<T>(PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesPutSettingsForAllAsync<T>(PostData body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_settings"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/_settings
@@ -3892,7 +3892,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesPutSettings<T>(string index, PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutSettings<T>(string index, PostData body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/_settings"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/_settings
@@ -3907,7 +3907,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesPutSettingsAsync<T>(string index, PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesPutSettingsAsync<T>(string index, PostData body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/_settings"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_template/{name}
@@ -3922,7 +3922,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesPutTemplateForAll<T>(string name, PostData<object> body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutTemplateForAll<T>(string name, PostData body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_template/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_template/{name}
@@ -3937,7 +3937,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesPutTemplateForAllAsync<T>(string name, PostData<object> body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesPutTemplateForAllAsync<T>(string name, PostData body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_template/{name.NotNull("name")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_template/{name}
@@ -3952,7 +3952,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesPutTemplatePostForAll<T>(string name, PostData<object> body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutTemplatePostForAll<T>(string name, PostData body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_template/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_template/{name}
@@ -3967,7 +3967,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesPutTemplatePostForAllAsync<T>(string name, PostData<object> body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesPutTemplatePostForAllAsync<T>(string name, PostData body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_template/{name.NotNull("name")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_recovery
@@ -4144,7 +4144,7 @@ namespace Elasticsearch.Net
 		///<param name="alias">The name of the alias to rollover</param>
 		///<param name="body">The conditions that needs to be met for executing rollover</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesRolloverForAll<T>(string alias, PostData<object> body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesRolloverForAll<T>(string alias, PostData body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{alias.NotNull("alias")}/_rollover"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{alias}/_rollover
@@ -4159,7 +4159,7 @@ namespace Elasticsearch.Net
 		///<param name="alias">The name of the alias to rollover</param>
 		///<param name="body">The conditions that needs to be met for executing rollover</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesRolloverForAllAsync<T>(string alias, PostData<object> body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesRolloverForAllAsync<T>(string alias, PostData body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{alias.NotNull("alias")}/_rollover"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{alias}/_rollover/{new_index}
@@ -4175,7 +4175,7 @@ namespace Elasticsearch.Net
 		///<param name="new_index">The name of the rollover index</param>
 		///<param name="body">The conditions that needs to be met for executing rollover</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesRolloverForAll<T>(string alias, string new_index, PostData<object> body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesRolloverForAll<T>(string alias, string new_index, PostData body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{alias.NotNull("alias")}/_rollover/{new_index.NotNull("new_index")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{alias}/_rollover/{new_index}
@@ -4191,7 +4191,7 @@ namespace Elasticsearch.Net
 		///<param name="new_index">The name of the rollover index</param>
 		///<param name="body">The conditions that needs to be met for executing rollover</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesRolloverForAllAsync<T>(string alias, string new_index, PostData<object> body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesRolloverForAllAsync<T>(string alias, string new_index, PostData body, Func<RolloverIndexRequestParameters, RolloverIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{alias.NotNull("alias")}/_rollover/{new_index.NotNull("new_index")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_segments
@@ -4315,7 +4315,7 @@ namespace Elasticsearch.Net
 		///<param name="target">The name of the target index to shrink into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesShrink<T>(string index, string target, PostData<object> body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesShrink<T>(string index, string target, PostData body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/_shrink/{target.NotNull("target")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/_shrink/{target}
@@ -4331,7 +4331,7 @@ namespace Elasticsearch.Net
 		///<param name="target">The name of the target index to shrink into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesShrinkAsync<T>(string index, string target, PostData<object> body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesShrinkAsync<T>(string index, string target, PostData body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/_shrink/{target.NotNull("target")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_shrink/{target}
@@ -4347,7 +4347,7 @@ namespace Elasticsearch.Net
 		///<param name="target">The name of the target index to shrink into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesShrinkPost<T>(string index, string target, PostData<object> body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesShrinkPost<T>(string index, string target, PostData body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_shrink/{target.NotNull("target")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_shrink/{target}
@@ -4363,7 +4363,7 @@ namespace Elasticsearch.Net
 		///<param name="target">The name of the target index to shrink into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesShrinkPostAsync<T>(string index, string target, PostData<object> body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesShrinkPostAsync<T>(string index, string target, PostData body, Func<ShrinkIndexRequestParameters, ShrinkIndexRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_shrink/{target.NotNull("target")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_stats
@@ -4489,7 +4489,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The definition of `actions` to perform</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesUpdateAliasesForAll<T>(PostData<object> body, Func<BulkAliasRequestParameters, BulkAliasRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesUpdateAliasesForAll<T>(PostData body, Func<BulkAliasRequestParameters, BulkAliasRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_aliases"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_aliases
@@ -4503,7 +4503,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The definition of `actions` to perform</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesUpdateAliasesForAllAsync<T>(PostData<object> body, Func<BulkAliasRequestParameters, BulkAliasRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesUpdateAliasesForAllAsync<T>(PostData body, Func<BulkAliasRequestParameters, BulkAliasRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_aliases"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_upgrade
@@ -4655,7 +4655,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesValidateQueryForAll<T>(PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesValidateQueryForAll<T>(PostData body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_validate/query"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_validate/query
@@ -4669,7 +4669,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesValidateQueryForAllAsync<T>(PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesValidateQueryForAllAsync<T>(PostData body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_validate/query"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_validate/query
@@ -4684,7 +4684,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesValidateQuery<T>(string index, PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesValidateQuery<T>(string index, PostData body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_validate/query"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_validate/query
@@ -4699,7 +4699,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesValidateQueryAsync<T>(string index, PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesValidateQueryAsync<T>(string index, PostData body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_validate/query"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_validate/query
@@ -4715,7 +4715,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesValidateQuery<T>(string index, string type, PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesValidateQuery<T>(string index, string type, PostData body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_validate/query"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_validate/query
@@ -4731,7 +4731,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesValidateQueryAsync<T>(string index, string type, PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IndicesValidateQueryAsync<T>(string index, string type, PostData body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_validate/query"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /
@@ -4880,7 +4880,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Pipeline ID</param>
 		///<param name="body">The ingest definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IngestPutPipeline<T>(string id, PostData<object> body, Func<PutPipelineRequestParameters, PutPipelineRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IngestPutPipeline<T>(string id, PostData body, Func<PutPipelineRequestParameters, PutPipelineRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_ingest/pipeline/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_ingest/pipeline/{id}
@@ -4895,7 +4895,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Pipeline ID</param>
 		///<param name="body">The ingest definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IngestPutPipelineAsync<T>(string id, PostData<object> body, Func<PutPipelineRequestParameters, PutPipelineRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IngestPutPipelineAsync<T>(string id, PostData body, Func<PutPipelineRequestParameters, PutPipelineRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_ingest/pipeline/{id.NotNull("id")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_ingest/pipeline/_simulate
@@ -4963,7 +4963,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The simulate definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IngestSimulate<T>(PostData<object> body, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IngestSimulate<T>(PostData body, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_ingest/pipeline/_simulate"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_ingest/pipeline/_simulate
@@ -4977,7 +4977,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The simulate definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IngestSimulateAsync<T>(PostData<object> body, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IngestSimulateAsync<T>(PostData body, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_ingest/pipeline/_simulate"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_ingest/pipeline/{id}/_simulate
@@ -4992,7 +4992,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Pipeline ID</param>
 		///<param name="body">The simulate definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IngestSimulate<T>(string id, PostData<object> body, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IngestSimulate<T>(string id, PostData body, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_ingest/pipeline/{id.NotNull("id")}/_simulate"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_ingest/pipeline/{id}/_simulate
@@ -5007,7 +5007,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Pipeline ID</param>
 		///<param name="body">The simulate definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IngestSimulateAsync<T>(string id, PostData<object> body, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> IngestSimulateAsync<T>(string id, PostData body, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_ingest/pipeline/{id.NotNull("id")}/_simulate"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mget
@@ -5105,7 +5105,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Mget<T>(PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Mget<T>(PostData body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_mget"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_mget
@@ -5119,7 +5119,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> MgetAsync<T>(PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> MgetAsync<T>(PostData body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_mget"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_mget
@@ -5134,7 +5134,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Mget<T>(string index, PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Mget<T>(string index, PostData body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_mget"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_mget
@@ -5149,7 +5149,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> MgetAsync<T>(string index, PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> MgetAsync<T>(string index, PostData body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_mget"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_mget
@@ -5165,7 +5165,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Mget<T>(string index, string type, PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Mget<T>(string index, string type, PostData body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mget"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_mget
@@ -5181,7 +5181,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> MgetAsync<T>(string index, string type, PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> MgetAsync<T>(string index, string type, PostData body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mget"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_msearch
@@ -5279,7 +5279,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Msearch<T>(PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Msearch<T>(PostData body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_msearch"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_msearch
@@ -5293,7 +5293,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> MsearchAsync<T>(PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> MsearchAsync<T>(PostData body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_msearch"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_msearch
@@ -5308,7 +5308,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Msearch<T>(string index, PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Msearch<T>(string index, PostData body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_msearch"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_msearch
@@ -5323,7 +5323,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> MsearchAsync<T>(string index, PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> MsearchAsync<T>(string index, PostData body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_msearch"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_msearch
@@ -5339,7 +5339,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Msearch<T>(string index, string type, PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Msearch<T>(string index, string type, PostData body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_msearch"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_msearch
@@ -5355,7 +5355,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> MsearchAsync<T>(string index, string type, PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> MsearchAsync<T>(string index, string type, PostData body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_msearch"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_msearch/template
@@ -5453,7 +5453,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> MsearchTemplate<T>(PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> MsearchTemplate<T>(PostData body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_msearch/template"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_msearch/template
@@ -5467,7 +5467,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> MsearchTemplateAsync<T>(PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> MsearchTemplateAsync<T>(PostData body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_msearch/template"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_msearch/template
@@ -5482,7 +5482,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> MsearchTemplate<T>(string index, PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> MsearchTemplate<T>(string index, PostData body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_msearch/template"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_msearch/template
@@ -5497,7 +5497,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> MsearchTemplateAsync<T>(string index, PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> MsearchTemplateAsync<T>(string index, PostData body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_msearch/template"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_msearch/template
@@ -5513,7 +5513,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> MsearchTemplate<T>(string index, string type, PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> MsearchTemplate<T>(string index, string type, PostData body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_msearch/template"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_msearch/template
@@ -5529,7 +5529,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> MsearchTemplateAsync<T>(string index, string type, PostData<object> body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> MsearchTemplateAsync<T>(string index, string type, PostData body, Func<MultiSearchTemplateRequestParameters, MultiSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_msearch/template"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mtermvectors
@@ -5627,7 +5627,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Mtermvectors<T>(PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Mtermvectors<T>(PostData body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_mtermvectors"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_mtermvectors
@@ -5641,7 +5641,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(PostData body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_mtermvectors"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_mtermvectors
@@ -5656,7 +5656,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Mtermvectors<T>(string index, PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Mtermvectors<T>(string index, PostData body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_mtermvectors"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_mtermvectors
@@ -5671,7 +5671,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(string index, PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(string index, PostData body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_mtermvectors"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_mtermvectors
@@ -5687,7 +5687,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document.</param>
 		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Mtermvectors<T>(string index, string type, PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Mtermvectors<T>(string index, string type, PostData body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mtermvectors"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_mtermvectors
@@ -5703,7 +5703,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document.</param>
 		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(string index, string type, PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(string index, string type, PostData body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mtermvectors"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/nodes/hotthreads
@@ -6196,7 +6196,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Script ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> PutScript<T>(string id, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> PutScript<T>(string id, PostData body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_scripts/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_scripts/{id}
@@ -6211,7 +6211,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Script ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> PutScriptAsync<T>(string id, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> PutScriptAsync<T>(string id, PostData body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_scripts/{id.NotNull("id")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_scripts/{id}/{context}
@@ -6227,7 +6227,7 @@ namespace Elasticsearch.Net
 		///<param name="context">Script context</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> PutScript<T>(string id, string context, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> PutScript<T>(string id, string context, PostData body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_scripts/{id.NotNull("id")}/{context.NotNull("context")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_scripts/{id}/{context}
@@ -6243,7 +6243,7 @@ namespace Elasticsearch.Net
 		///<param name="context">Script context</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> PutScriptAsync<T>(string id, string context, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> PutScriptAsync<T>(string id, string context, PostData body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_scripts/{id.NotNull("id")}/{context.NotNull("context")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_scripts/{id}
@@ -6258,7 +6258,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Script ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> PutScriptPost<T>(string id, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> PutScriptPost<T>(string id, PostData body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_scripts/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_scripts/{id}
@@ -6273,7 +6273,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Script ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> PutScriptPostAsync<T>(string id, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> PutScriptPostAsync<T>(string id, PostData body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_scripts/{id.NotNull("id")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_scripts/{id}/{context}
@@ -6289,7 +6289,7 @@ namespace Elasticsearch.Net
 		///<param name="context">Script context</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> PutScriptPost<T>(string id, string context, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> PutScriptPost<T>(string id, string context, PostData body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_scripts/{id.NotNull("id")}/{context.NotNull("context")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_scripts/{id}/{context}
@@ -6305,7 +6305,7 @@ namespace Elasticsearch.Net
 		///<param name="context">Script context</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> PutScriptPostAsync<T>(string id, string context, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> PutScriptPostAsync<T>(string id, string context, PostData body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_scripts/{id.NotNull("id")}/{context.NotNull("context")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_reindex
@@ -6319,7 +6319,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The search definition using the Query DSL and the prototype for the index request.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Reindex<T>(PostData<object> body, Func<ReindexOnServerRequestParameters, ReindexOnServerRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Reindex<T>(PostData body, Func<ReindexOnServerRequestParameters, ReindexOnServerRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_reindex"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_reindex
@@ -6333,7 +6333,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The search definition using the Query DSL and the prototype for the index request.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> ReindexAsync<T>(PostData<object> body, Func<ReindexOnServerRequestParameters, ReindexOnServerRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> ReindexAsync<T>(PostData body, Func<ReindexOnServerRequestParameters, ReindexOnServerRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_reindex"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_reindex/{task_id}/_rethrottle
@@ -6429,7 +6429,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> RenderSearchTemplate<T>(PostData<object> body, Func<RenderSearchTemplateRequestParameters, RenderSearchTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> RenderSearchTemplate<T>(PostData body, Func<RenderSearchTemplateRequestParameters, RenderSearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_render/template"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_render/template
@@ -6443,7 +6443,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> RenderSearchTemplateAsync<T>(PostData<object> body, Func<RenderSearchTemplateRequestParameters, RenderSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> RenderSearchTemplateAsync<T>(PostData body, Func<RenderSearchTemplateRequestParameters, RenderSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_render/template"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_render/template/{id}
@@ -6458,7 +6458,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The id of the stored search template</param>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> RenderSearchTemplate<T>(string id, PostData<object> body, Func<RenderSearchTemplateRequestParameters, RenderSearchTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> RenderSearchTemplate<T>(string id, PostData body, Func<RenderSearchTemplateRequestParameters, RenderSearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_render/template/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_render/template/{id}
@@ -6473,7 +6473,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The id of the stored search template</param>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> RenderSearchTemplateAsync<T>(string id, PostData<object> body, Func<RenderSearchTemplateRequestParameters, RenderSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> RenderSearchTemplateAsync<T>(string id, PostData body, Func<RenderSearchTemplateRequestParameters, RenderSearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_render/template/{id.NotNull("id")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_search/scroll
@@ -6513,7 +6513,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Scroll<T>(PostData<object> body, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Scroll<T>(PostData body, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_search/scroll"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search/scroll
@@ -6527,7 +6527,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> ScrollAsync<T>(PostData<object> body, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> ScrollAsync<T>(PostData body, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_search/scroll"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_search
@@ -6625,7 +6625,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Search<T>(PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Search<T>(PostData body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_search"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search
@@ -6639,7 +6639,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> SearchAsync<T>(PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> SearchAsync<T>(PostData body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_search"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_search
@@ -6654,7 +6654,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Search<T>(string index, PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Search<T>(string index, PostData body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_search"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_search
@@ -6669,7 +6669,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, PostData body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_search"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_search
@@ -6685,7 +6685,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Search<T>(string index, string type, PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Search<T>(string index, string type, PostData body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_search
@@ -6701,7 +6701,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, string type, PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, string type, PostData body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_search_shards
@@ -6907,7 +6907,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> SearchTemplate<T>(PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SearchTemplate<T>(PostData body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_search/template"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search/template
@@ -6921,7 +6921,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> SearchTemplateAsync<T>(PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> SearchTemplateAsync<T>(PostData body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_search/template"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_search/template
@@ -6936,7 +6936,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> SearchTemplate<T>(string index, PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SearchTemplate<T>(string index, PostData body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_search/template"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_search/template
@@ -6951,7 +6951,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> SearchTemplateAsync<T>(string index, PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> SearchTemplateAsync<T>(string index, PostData body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_search/template"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_search/template
@@ -6967,7 +6967,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> SearchTemplate<T>(string index, string type, PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SearchTemplate<T>(string index, string type, PostData body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/template"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_search/template
@@ -6983,7 +6983,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> SearchTemplateAsync<T>(string index, string type, PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> SearchTemplateAsync<T>(string index, string type, PostData body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/template"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_snapshot/{repository}/{snapshot}
@@ -6999,7 +6999,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A snapshot name</param>
 		///<param name="body">The snapshot definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> SnapshotCreate<T>(string repository, string snapshot, PostData<object> body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotCreate<T>(string repository, string snapshot, PostData body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_snapshot/{repository}/{snapshot}
@@ -7015,7 +7015,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A snapshot name</param>
 		///<param name="body">The snapshot definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> SnapshotCreateAsync<T>(string repository, string snapshot, PostData<object> body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> SnapshotCreateAsync<T>(string repository, string snapshot, PostData body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot}
@@ -7031,7 +7031,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A snapshot name</param>
 		///<param name="body">The snapshot definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> SnapshotCreatePost<T>(string repository, string snapshot, PostData<object> body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotCreatePost<T>(string repository, string snapshot, PostData body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot}
@@ -7047,7 +7047,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A snapshot name</param>
 		///<param name="body">The snapshot definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> SnapshotCreatePostAsync<T>(string repository, string snapshot, PostData<object> body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> SnapshotCreatePostAsync<T>(string repository, string snapshot, PostData body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_snapshot/{repository}
@@ -7062,7 +7062,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A repository name</param>
 		///<param name="body">The repository definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> SnapshotCreateRepository<T>(string repository, PostData<object> body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotCreateRepository<T>(string repository, PostData body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_snapshot/{repository.NotNull("repository")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_snapshot/{repository}
@@ -7077,7 +7077,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A repository name</param>
 		///<param name="body">The repository definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryAsync<T>(string repository, PostData<object> body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryAsync<T>(string repository, PostData body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_snapshot/{repository.NotNull("repository")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_snapshot/{repository}
@@ -7092,7 +7092,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A repository name</param>
 		///<param name="body">The repository definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> SnapshotCreateRepositoryPost<T>(string repository, PostData<object> body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotCreateRepositoryPost<T>(string repository, PostData body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_snapshot/{repository.NotNull("repository")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_snapshot/{repository}
@@ -7107,7 +7107,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A repository name</param>
 		///<param name="body">The repository definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryPostAsync<T>(string repository, PostData<object> body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryPostAsync<T>(string repository, PostData body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_snapshot/{repository.NotNull("repository")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_snapshot/{repository}/{snapshot}
@@ -7265,7 +7265,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A snapshot name</param>
 		///<param name="body">Details of what to restore</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> SnapshotRestore<T>(string repository, string snapshot, PostData<object> body, Func<RestoreRequestParameters, RestoreRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotRestore<T>(string repository, string snapshot, PostData body, Func<RestoreRequestParameters, RestoreRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}/_restore"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot}/_restore
@@ -7281,7 +7281,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A snapshot name</param>
 		///<param name="body">Details of what to restore</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> SnapshotRestoreAsync<T>(string repository, string snapshot, PostData<object> body, Func<RestoreRequestParameters, RestoreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> SnapshotRestoreAsync<T>(string repository, string snapshot, PostData body, Func<RestoreRequestParameters, RestoreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}/_restore"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_snapshot/_status
@@ -7579,7 +7579,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document.</param>
 		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Termvectors<T>(string index, string type, PostData<object> body, Func<TermVectorsRequestParameters, TermVectorsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Termvectors<T>(string index, string type, PostData body, Func<TermVectorsRequestParameters, TermVectorsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_termvectors"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_termvectors
@@ -7595,7 +7595,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document.</param>
 		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> TermvectorsAsync<T>(string index, string type, PostData<object> body, Func<TermVectorsRequestParameters, TermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> TermvectorsAsync<T>(string index, string type, PostData body, Func<TermVectorsRequestParameters, TermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_termvectors"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_termvectors
@@ -7612,7 +7612,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
 		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Termvectors<T>(string index, string type, string id, PostData<object> body, Func<TermVectorsRequestParameters, TermVectorsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Termvectors<T>(string index, string type, string id, PostData body, Func<TermVectorsRequestParameters, TermVectorsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_termvectors"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_termvectors
@@ -7629,7 +7629,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
 		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> TermvectorsAsync<T>(string index, string type, string id, PostData<object> body, Func<TermVectorsRequestParameters, TermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> TermvectorsAsync<T>(string index, string type, string id, PostData body, Func<TermVectorsRequestParameters, TermVectorsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_termvectors"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_update
@@ -7646,7 +7646,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Document ID</param>
 		///<param name="body">The request definition using either `script` or partial `doc`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Update<T>(string index, string type, string id, PostData<object> body, Func<UpdateRequestParameters, UpdateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Update<T>(string index, string type, string id, PostData body, Func<UpdateRequestParameters, UpdateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_update"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_update
@@ -7663,7 +7663,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Document ID</param>
 		///<param name="body">The request definition using either `script` or partial `doc`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> UpdateAsync<T>(string index, string type, string id, PostData<object> body, Func<UpdateRequestParameters, UpdateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> UpdateAsync<T>(string index, string type, string id, PostData body, Func<UpdateRequestParameters, UpdateRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_update"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_update_by_query
@@ -7678,7 +7678,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> UpdateByQuery<T>(string index, PostData<object> body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> UpdateByQuery<T>(string index, PostData body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_update_by_query"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_update_by_query
@@ -7693,7 +7693,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> UpdateByQueryAsync<T>(string index, PostData<object> body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> UpdateByQueryAsync<T>(string index, PostData body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_update_by_query"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_update_by_query
@@ -7709,7 +7709,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> UpdateByQuery<T>(string index, string type, PostData<object> body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> UpdateByQuery<T>(string index, string type, PostData body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_update_by_query"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_update_by_query
@@ -7725,7 +7725,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> UpdateByQueryAsync<T>(string index, string type, PostData<object> body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> UpdateByQueryAsync<T>(string index, string type, PostData body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_update_by_query"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_xpack/graph/_explore
@@ -7798,7 +7798,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">Graph Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackGraphExplore<T>(string index, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackGraphExplore<T>(string index, PostData body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_xpack/graph/_explore"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_xpack/graph/_explore
@@ -7813,7 +7813,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="body">Graph Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackGraphExploreAsync<T>(string index, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackGraphExploreAsync<T>(string index, PostData body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_xpack/graph/_explore"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_xpack/graph/_explore
@@ -7829,7 +7829,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">Graph Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackGraphExplore<T>(string index, string type, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackGraphExplore<T>(string index, string type, PostData body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_xpack/graph/_explore"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_xpack/graph/_explore
@@ -7845,7 +7845,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">Graph Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackGraphExploreAsync<T>(string index, string type, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackGraphExploreAsync<T>(string index, string type, PostData body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_xpack/graph/_explore"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/migration/deprecations
@@ -8017,7 +8017,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">licenses to be installed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackLicensePost<T>(PostData<object> body, Func<PostLicenseRequestParameters, PostLicenseRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackLicensePost<T>(PostData body, Func<PostLicenseRequestParameters, PostLicenseRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/license"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/license
@@ -8031,7 +8031,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">licenses to be installed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackLicensePostAsync<T>(PostData<object> body, Func<PostLicenseRequestParameters, PostLicenseRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackLicensePostAsync<T>(PostData body, Func<PostLicenseRequestParameters, PostLicenseRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/license"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/_close
@@ -8186,7 +8186,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The name of the job to flush</param>
 		///<param name="body">Flush parameters</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlFlushJob<T>(string job_id, PostData<object> body, Func<FlushJobRequestParameters, FlushJobRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlFlushJob<T>(string job_id, PostData body, Func<FlushJobRequestParameters, FlushJobRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/_flush"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/_flush
@@ -8201,7 +8201,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The name of the job to flush</param>
 		///<param name="body">Flush parameters</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlFlushJobAsync<T>(string job_id, PostData<object> body, Func<FlushJobRequestParameters, FlushJobRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlFlushJobAsync<T>(string job_id, PostData body, Func<FlushJobRequestParameters, FlushJobRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/_flush"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/results/buckets
@@ -8244,7 +8244,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">ID of the job to get bucket results from</param>
 		///<param name="body">Bucket selection details if not provided in URI</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlGetBuckets<T>(string job_id, PostData<object> body, Func<GetBucketsRequestParameters, GetBucketsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlGetBuckets<T>(string job_id, PostData body, Func<GetBucketsRequestParameters, GetBucketsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/results/buckets"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/results/buckets
@@ -8259,7 +8259,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">ID of the job to get bucket results from</param>
 		///<param name="body">Bucket selection details if not provided in URI</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlGetBucketsAsync<T>(string job_id, PostData<object> body, Func<GetBucketsRequestParameters, GetBucketsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlGetBucketsAsync<T>(string job_id, PostData body, Func<GetBucketsRequestParameters, GetBucketsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/results/buckets"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}
@@ -8333,7 +8333,7 @@ namespace Elasticsearch.Net
 		///<param name="category_id">The identifier of the category definition of interest</param>
 		///<param name="body">Category selection details if not provided in URI</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlGetCategories<T>(string job_id, long category_id, PostData<object> body, Func<GetCategoriesRequestParameters, GetCategoriesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlGetCategories<T>(string job_id, long category_id, PostData body, Func<GetCategoriesRequestParameters, GetCategoriesRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/results/categories/{category_id}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}
@@ -8349,7 +8349,7 @@ namespace Elasticsearch.Net
 		///<param name="category_id">The identifier of the category definition of interest</param>
 		///<param name="body">Category selection details if not provided in URI</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlGetCategoriesAsync<T>(string job_id, long category_id, PostData<object> body, Func<GetCategoriesRequestParameters, GetCategoriesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlGetCategoriesAsync<T>(string job_id, long category_id, PostData body, Func<GetCategoriesRequestParameters, GetCategoriesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/results/categories/{category_id}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/results/categories/
@@ -8364,7 +8364,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The name of the job</param>
 		///<param name="body">Category selection details if not provided in URI</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlGetCategories<T>(string job_id, PostData<object> body, Func<GetCategoriesRequestParameters, GetCategoriesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlGetCategories<T>(string job_id, PostData body, Func<GetCategoriesRequestParameters, GetCategoriesRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/results/categories/"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/results/categories/
@@ -8379,7 +8379,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The name of the job</param>
 		///<param name="body">Category selection details if not provided in URI</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlGetCategoriesAsync<T>(string job_id, PostData<object> body, Func<GetCategoriesRequestParameters, GetCategoriesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlGetCategoriesAsync<T>(string job_id, PostData body, Func<GetCategoriesRequestParameters, GetCategoriesRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/results/categories/"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/ml/datafeeds/{datafeed_id}
@@ -8530,7 +8530,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id"></param>
 		///<param name="body">Influencer selection criteria</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlGetInfluencers<T>(string job_id, PostData<object> body, Func<GetInfluencersRequestParameters, GetInfluencersRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlGetInfluencers<T>(string job_id, PostData body, Func<GetInfluencersRequestParameters, GetInfluencersRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/results/influencers"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/results/influencers
@@ -8545,7 +8545,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id"></param>
 		///<param name="body">Influencer selection criteria</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlGetInfluencersAsync<T>(string job_id, PostData<object> body, Func<GetInfluencersRequestParameters, GetInfluencersRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlGetInfluencersAsync<T>(string job_id, PostData body, Func<GetInfluencersRequestParameters, GetInfluencersRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/results/influencers"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}
@@ -8727,7 +8727,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot_id">The ID of the snapshot to fetch</param>
 		///<param name="body">Model snapshot selection criteria</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlGetModelSnapshots<T>(string job_id, string snapshot_id, PostData<object> body, Func<GetModelSnapshotsRequestParameters, GetModelSnapshotsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlGetModelSnapshots<T>(string job_id, string snapshot_id, PostData body, Func<GetModelSnapshotsRequestParameters, GetModelSnapshotsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/model_snapshots/{snapshot_id.NotNull("snapshot_id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}
@@ -8743,7 +8743,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot_id">The ID of the snapshot to fetch</param>
 		///<param name="body">Model snapshot selection criteria</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlGetModelSnapshotsAsync<T>(string job_id, string snapshot_id, PostData<object> body, Func<GetModelSnapshotsRequestParameters, GetModelSnapshotsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlGetModelSnapshotsAsync<T>(string job_id, string snapshot_id, PostData body, Func<GetModelSnapshotsRequestParameters, GetModelSnapshotsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/model_snapshots/{snapshot_id.NotNull("snapshot_id")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots
@@ -8758,7 +8758,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The ID of the job to fetch</param>
 		///<param name="body">Model snapshot selection criteria</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlGetModelSnapshots<T>(string job_id, PostData<object> body, Func<GetModelSnapshotsRequestParameters, GetModelSnapshotsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlGetModelSnapshots<T>(string job_id, PostData body, Func<GetModelSnapshotsRequestParameters, GetModelSnapshotsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/model_snapshots"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots
@@ -8773,7 +8773,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The ID of the job to fetch</param>
 		///<param name="body">Model snapshot selection criteria</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlGetModelSnapshotsAsync<T>(string job_id, PostData<object> body, Func<GetModelSnapshotsRequestParameters, GetModelSnapshotsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlGetModelSnapshotsAsync<T>(string job_id, PostData body, Func<GetModelSnapshotsRequestParameters, GetModelSnapshotsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/model_snapshots"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/ml/anomaly_detectors/{job_id}/results/records
@@ -8816,7 +8816,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id"></param>
 		///<param name="body">Record selection criteria</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlGetRecords<T>(string job_id, PostData<object> body, Func<GetAnomalyRecordsRequestParameters, GetAnomalyRecordsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlGetRecords<T>(string job_id, PostData body, Func<GetAnomalyRecordsRequestParameters, GetAnomalyRecordsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/results/records"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/results/records
@@ -8831,7 +8831,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id"></param>
 		///<param name="body">Record selection criteria</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlGetRecordsAsync<T>(string job_id, PostData<object> body, Func<GetAnomalyRecordsRequestParameters, GetAnomalyRecordsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlGetRecordsAsync<T>(string job_id, PostData body, Func<GetAnomalyRecordsRequestParameters, GetAnomalyRecordsRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/results/records"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/_open
@@ -8874,7 +8874,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The name of the job receiving the data</param>
 		///<param name="body">The data to process</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlPostData<T>(string job_id, PostData<object> body, Func<PostJobDataRequestParameters, PostJobDataRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlPostData<T>(string job_id, PostData body, Func<PostJobDataRequestParameters, PostJobDataRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/_data"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/_data
@@ -8889,7 +8889,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The name of the job receiving the data</param>
 		///<param name="body">The data to process</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlPostDataAsync<T>(string job_id, PostData<object> body, Func<PostJobDataRequestParameters, PostJobDataRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlPostDataAsync<T>(string job_id, PostData body, Func<PostJobDataRequestParameters, PostJobDataRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/_data"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/ml/datafeeds/{datafeed_id}/_preview
@@ -8932,7 +8932,7 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeed to create</param>
 		///<param name="body">The datafeed config</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlPutDatafeed<T>(string datafeed_id, PostData<object> body, Func<PutDatafeedRequestParameters, PutDatafeedRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlPutDatafeed<T>(string datafeed_id, PostData body, Func<PutDatafeedRequestParameters, PutDatafeedRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/ml/datafeeds/{datafeed_id.NotNull("datafeed_id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/ml/datafeeds/{datafeed_id}
@@ -8947,7 +8947,7 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeed to create</param>
 		///<param name="body">The datafeed config</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlPutDatafeedAsync<T>(string datafeed_id, PostData<object> body, Func<PutDatafeedRequestParameters, PutDatafeedRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlPutDatafeedAsync<T>(string datafeed_id, PostData body, Func<PutDatafeedRequestParameters, PutDatafeedRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/ml/datafeeds/{datafeed_id.NotNull("datafeed_id")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/ml/anomaly_detectors/{job_id}
@@ -8962,7 +8962,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The ID of the job to create</param>
 		///<param name="body">The job</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlPutJob<T>(string job_id, PostData<object> body, Func<PutJobRequestParameters, PutJobRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlPutJob<T>(string job_id, PostData body, Func<PutJobRequestParameters, PutJobRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/ml/anomaly_detectors/{job_id}
@@ -8977,7 +8977,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The ID of the job to create</param>
 		///<param name="body">The job</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlPutJobAsync<T>(string job_id, PostData<object> body, Func<PutJobRequestParameters, PutJobRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlPutJobAsync<T>(string job_id, PostData body, Func<PutJobRequestParameters, PutJobRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert
@@ -8993,7 +8993,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot_id">The ID of the snapshot to revert to</param>
 		///<param name="body">Reversion options</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlRevertModelSnapshot<T>(string job_id, string snapshot_id, PostData<object> body, Func<RevertModelSnapshotRequestParameters, RevertModelSnapshotRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlRevertModelSnapshot<T>(string job_id, string snapshot_id, PostData body, Func<RevertModelSnapshotRequestParameters, RevertModelSnapshotRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/model_snapshots/{snapshot_id.NotNull("snapshot_id")}/_revert"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert
@@ -9009,7 +9009,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot_id">The ID of the snapshot to revert to</param>
 		///<param name="body">Reversion options</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlRevertModelSnapshotAsync<T>(string job_id, string snapshot_id, PostData<object> body, Func<RevertModelSnapshotRequestParameters, RevertModelSnapshotRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlRevertModelSnapshotAsync<T>(string job_id, string snapshot_id, PostData body, Func<RevertModelSnapshotRequestParameters, RevertModelSnapshotRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/model_snapshots/{snapshot_id.NotNull("snapshot_id")}/_revert"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/datafeeds/{datafeed_id}/_start
@@ -9024,7 +9024,7 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeed to start</param>
 		///<param name="body">The start datafeed parameters</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlStartDatafeed<T>(string datafeed_id, PostData<object> body, Func<StartDatafeedRequestParameters, StartDatafeedRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlStartDatafeed<T>(string datafeed_id, PostData body, Func<StartDatafeedRequestParameters, StartDatafeedRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/ml/datafeeds/{datafeed_id.NotNull("datafeed_id")}/_start"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/datafeeds/{datafeed_id}/_start
@@ -9039,7 +9039,7 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeed to start</param>
 		///<param name="body">The start datafeed parameters</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlStartDatafeedAsync<T>(string datafeed_id, PostData<object> body, Func<StartDatafeedRequestParameters, StartDatafeedRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlStartDatafeedAsync<T>(string datafeed_id, PostData body, Func<StartDatafeedRequestParameters, StartDatafeedRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/ml/datafeeds/{datafeed_id.NotNull("datafeed_id")}/_start"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/datafeeds/{datafeed_id}/_stop
@@ -9082,7 +9082,7 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeed to update</param>
 		///<param name="body">The datafeed update settings</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlUpdateDatafeed<T>(string datafeed_id, PostData<object> body, Func<UpdateDatafeedRequestParameters, UpdateDatafeedRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlUpdateDatafeed<T>(string datafeed_id, PostData body, Func<UpdateDatafeedRequestParameters, UpdateDatafeedRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/ml/datafeeds/{datafeed_id.NotNull("datafeed_id")}/_update"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/datafeeds/{datafeed_id}/_update
@@ -9097,7 +9097,7 @@ namespace Elasticsearch.Net
 		///<param name="datafeed_id">The ID of the datafeed to update</param>
 		///<param name="body">The datafeed update settings</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlUpdateDatafeedAsync<T>(string datafeed_id, PostData<object> body, Func<UpdateDatafeedRequestParameters, UpdateDatafeedRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlUpdateDatafeedAsync<T>(string datafeed_id, PostData body, Func<UpdateDatafeedRequestParameters, UpdateDatafeedRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/ml/datafeeds/{datafeed_id.NotNull("datafeed_id")}/_update"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/_update
@@ -9112,7 +9112,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The ID of the job to create</param>
 		///<param name="body">The job update settings</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlUpdateJob<T>(string job_id, PostData<object> body, Func<UpdateJobRequestParameters, UpdateJobRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlUpdateJob<T>(string job_id, PostData body, Func<UpdateJobRequestParameters, UpdateJobRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/_update"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/_update
@@ -9127,7 +9127,7 @@ namespace Elasticsearch.Net
 		///<param name="job_id">The ID of the job to create</param>
 		///<param name="body">The job update settings</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlUpdateJobAsync<T>(string job_id, PostData<object> body, Func<UpdateJobRequestParameters, UpdateJobRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlUpdateJobAsync<T>(string job_id, PostData body, Func<UpdateJobRequestParameters, UpdateJobRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/_update"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update
@@ -9143,7 +9143,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot_id">The ID of the snapshot to update</param>
 		///<param name="body">The model snapshot properties to update</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlUpdateModelSnapshot<T>(string job_id, string snapshot_id, PostData<object> body, Func<UpdateModelSnapshotRequestParameters, UpdateModelSnapshotRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlUpdateModelSnapshot<T>(string job_id, string snapshot_id, PostData body, Func<UpdateModelSnapshotRequestParameters, UpdateModelSnapshotRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/model_snapshots/{snapshot_id.NotNull("snapshot_id")}/_update"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update
@@ -9159,7 +9159,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot_id">The ID of the snapshot to update</param>
 		///<param name="body">The model snapshot properties to update</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlUpdateModelSnapshotAsync<T>(string job_id, string snapshot_id, PostData<object> body, Func<UpdateModelSnapshotRequestParameters, UpdateModelSnapshotRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlUpdateModelSnapshotAsync<T>(string job_id, string snapshot_id, PostData body, Func<UpdateModelSnapshotRequestParameters, UpdateModelSnapshotRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/model_snapshots/{snapshot_id.NotNull("snapshot_id")}/_update"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/_validate
@@ -9173,7 +9173,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The job config</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlValidate<T>(PostData<object> body, Func<ValidateJobRequestParameters, ValidateJobRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlValidate<T>(PostData body, Func<ValidateJobRequestParameters, ValidateJobRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/ml/anomaly_detectors/_validate"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/_validate
@@ -9187,7 +9187,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The job config</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlValidateAsync<T>(PostData<object> body, Func<ValidateJobRequestParameters, ValidateJobRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlValidateAsync<T>(PostData body, Func<ValidateJobRequestParameters, ValidateJobRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/ml/anomaly_detectors/_validate"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/_validate/detector
@@ -9201,7 +9201,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The detector</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackMlValidateDetector<T>(PostData<object> body, Func<ValidateDetectorRequestParameters, ValidateDetectorRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackMlValidateDetector<T>(PostData body, Func<ValidateDetectorRequestParameters, ValidateDetectorRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/ml/anomaly_detectors/_validate/detector"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/ml/anomaly_detectors/_validate/detector
@@ -9215,7 +9215,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The detector</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackMlValidateDetectorAsync<T>(PostData<object> body, Func<ValidateDetectorRequestParameters, ValidateDetectorRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackMlValidateDetectorAsync<T>(PostData body, Func<ValidateDetectorRequestParameters, ValidateDetectorRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/ml/anomaly_detectors/_validate/detector"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/security/_authenticate
@@ -9256,7 +9256,7 @@ namespace Elasticsearch.Net
 		///<param name="username">The username of the user to change the password for</param>
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityChangePassword<T>(string username, PostData<object> body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackSecurityChangePassword<T>(string username, PostData body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/security/user/{username.NotNull("username")}/_password"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/security/user/{username}/_password
@@ -9271,7 +9271,7 @@ namespace Elasticsearch.Net
 		///<param name="username">The username of the user to change the password for</param>
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityChangePasswordAsync<T>(string username, PostData<object> body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackSecurityChangePasswordAsync<T>(string username, PostData body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/security/user/{username.NotNull("username")}/_password"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/security/user/_password
@@ -9285,7 +9285,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityChangePassword<T>(PostData<object> body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackSecurityChangePassword<T>(PostData body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/security/user/_password"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/security/user/_password
@@ -9299,7 +9299,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityChangePasswordAsync<T>(PostData<object> body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackSecurityChangePasswordAsync<T>(PostData body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/security/user/_password"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/security/user/{username}/_password
@@ -9314,7 +9314,7 @@ namespace Elasticsearch.Net
 		///<param name="username">The username of the user to change the password for</param>
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityChangePasswordPost<T>(string username, PostData<object> body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackSecurityChangePasswordPost<T>(string username, PostData body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/security/user/{username.NotNull("username")}/_password"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/security/user/{username}/_password
@@ -9329,7 +9329,7 @@ namespace Elasticsearch.Net
 		///<param name="username">The username of the user to change the password for</param>
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityChangePasswordPostAsync<T>(string username, PostData<object> body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackSecurityChangePasswordPostAsync<T>(string username, PostData body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/security/user/{username.NotNull("username")}/_password"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/security/user/_password
@@ -9343,7 +9343,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityChangePasswordPost<T>(PostData<object> body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackSecurityChangePasswordPost<T>(PostData body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/security/user/_password"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/security/user/_password
@@ -9357,7 +9357,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">the new password for the user</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityChangePasswordPostAsync<T>(PostData<object> body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackSecurityChangePasswordPostAsync<T>(PostData body, Func<ChangePasswordRequestParameters, ChangePasswordRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/security/user/_password"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/security/realm/{realms}/_clear_cache
@@ -9731,7 +9731,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The token request to get</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityGetToken<T>(PostData<object> body, Func<GetUserAccessTokenRequestParameters, GetUserAccessTokenRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackSecurityGetToken<T>(PostData body, Func<GetUserAccessTokenRequestParameters, GetUserAccessTokenRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/security/oauth2/token"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/security/oauth2/token
@@ -9745,7 +9745,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The token request to get</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityGetTokenAsync<T>(PostData<object> body, Func<GetUserAccessTokenRequestParameters, GetUserAccessTokenRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackSecurityGetTokenAsync<T>(PostData body, Func<GetUserAccessTokenRequestParameters, GetUserAccessTokenRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/security/oauth2/token"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/security/user/{username}
@@ -9813,7 +9813,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The token to invalidate</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityInvalidateToken<T>(PostData<object> body, Func<InvalidateUserAccessTokenRequestParameters, InvalidateUserAccessTokenRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackSecurityInvalidateToken<T>(PostData body, Func<InvalidateUserAccessTokenRequestParameters, InvalidateUserAccessTokenRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(DELETE, Url($"_xpack/security/oauth2/token"), body, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_xpack/security/oauth2/token
@@ -9827,7 +9827,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The token to invalidate</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityInvalidateTokenAsync<T>(PostData<object> body, Func<InvalidateUserAccessTokenRequestParameters, InvalidateUserAccessTokenRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackSecurityInvalidateTokenAsync<T>(PostData body, Func<InvalidateUserAccessTokenRequestParameters, InvalidateUserAccessTokenRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(DELETE, Url($"_xpack/security/oauth2/token"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/security/role/{name}
@@ -9842,7 +9842,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role name</param>
 		///<param name="body">The role to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityPutRole<T>(string name, PostData<object> body, Func<PutRoleRequestParameters, PutRoleRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackSecurityPutRole<T>(string name, PostData body, Func<PutRoleRequestParameters, PutRoleRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/security/role/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/security/role/{name}
@@ -9857,7 +9857,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role name</param>
 		///<param name="body">The role to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityPutRoleAsync<T>(string name, PostData<object> body, Func<PutRoleRequestParameters, PutRoleRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackSecurityPutRoleAsync<T>(string name, PostData body, Func<PutRoleRequestParameters, PutRoleRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/security/role/{name.NotNull("name")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/security/role/{name}
@@ -9872,7 +9872,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role name</param>
 		///<param name="body">The role to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityPutRolePost<T>(string name, PostData<object> body, Func<PutRoleRequestParameters, PutRoleRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackSecurityPutRolePost<T>(string name, PostData body, Func<PutRoleRequestParameters, PutRoleRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/security/role/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/security/role/{name}
@@ -9887,7 +9887,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role name</param>
 		///<param name="body">The role to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityPutRolePostAsync<T>(string name, PostData<object> body, Func<PutRoleRequestParameters, PutRoleRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackSecurityPutRolePostAsync<T>(string name, PostData body, Func<PutRoleRequestParameters, PutRoleRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/security/role/{name.NotNull("name")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/security/role_mapping/{name}
@@ -9902,7 +9902,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role-mapping name</param>
 		///<param name="body">The role to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityPutRoleMapping<T>(string name, PostData<object> body, Func<PutRoleMappingRequestParameters, PutRoleMappingRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackSecurityPutRoleMapping<T>(string name, PostData body, Func<PutRoleMappingRequestParameters, PutRoleMappingRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/security/role_mapping/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/security/role_mapping/{name}
@@ -9917,7 +9917,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role-mapping name</param>
 		///<param name="body">The role to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityPutRoleMappingAsync<T>(string name, PostData<object> body, Func<PutRoleMappingRequestParameters, PutRoleMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackSecurityPutRoleMappingAsync<T>(string name, PostData body, Func<PutRoleMappingRequestParameters, PutRoleMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/security/role_mapping/{name.NotNull("name")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/security/role_mapping/{name}
@@ -9932,7 +9932,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role-mapping name</param>
 		///<param name="body">The role to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityPutRoleMappingPost<T>(string name, PostData<object> body, Func<PutRoleMappingRequestParameters, PutRoleMappingRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackSecurityPutRoleMappingPost<T>(string name, PostData body, Func<PutRoleMappingRequestParameters, PutRoleMappingRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/security/role_mapping/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/security/role_mapping/{name}
@@ -9947,7 +9947,7 @@ namespace Elasticsearch.Net
 		///<param name="name">Role-mapping name</param>
 		///<param name="body">The role to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityPutRoleMappingPostAsync<T>(string name, PostData<object> body, Func<PutRoleMappingRequestParameters, PutRoleMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackSecurityPutRoleMappingPostAsync<T>(string name, PostData body, Func<PutRoleMappingRequestParameters, PutRoleMappingRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/security/role_mapping/{name.NotNull("name")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/security/user/{username}
@@ -9962,7 +9962,7 @@ namespace Elasticsearch.Net
 		///<param name="username">The username of the User</param>
 		///<param name="body">The user to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityPutUser<T>(string username, PostData<object> body, Func<PutUserRequestParameters, PutUserRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackSecurityPutUser<T>(string username, PostData body, Func<PutUserRequestParameters, PutUserRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/security/user/{username.NotNull("username")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/security/user/{username}
@@ -9977,7 +9977,7 @@ namespace Elasticsearch.Net
 		///<param name="username">The username of the User</param>
 		///<param name="body">The user to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityPutUserAsync<T>(string username, PostData<object> body, Func<PutUserRequestParameters, PutUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackSecurityPutUserAsync<T>(string username, PostData body, Func<PutUserRequestParameters, PutUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/security/user/{username.NotNull("username")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/security/user/{username}
@@ -9992,7 +9992,7 @@ namespace Elasticsearch.Net
 		///<param name="username">The username of the User</param>
 		///<param name="body">The user to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityPutUserPost<T>(string username, PostData<object> body, Func<PutUserRequestParameters, PutUserRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackSecurityPutUserPost<T>(string username, PostData body, Func<PutUserRequestParameters, PutUserRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/security/user/{username.NotNull("username")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/security/user/{username}
@@ -10007,7 +10007,7 @@ namespace Elasticsearch.Net
 		///<param name="username">The username of the User</param>
 		///<param name="body">The user to add</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityPutUserPostAsync<T>(string username, PostData<object> body, Func<PutUserRequestParameters, PutUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackSecurityPutUserPostAsync<T>(string username, PostData body, Func<PutUserRequestParameters, PutUserRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/security/user/{username.NotNull("username")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/watcher/watch/{watch_id}/_ack
@@ -10278,7 +10278,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Watch ID</param>
 		///<param name="body">Execution control</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackWatcherExecuteWatch<T>(string id, PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackWatcherExecuteWatch<T>(string id, PostData body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/watcher/watch/{id.NotNull("id")}/_execute"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/watcher/watch/{id}/_execute
@@ -10293,7 +10293,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Watch ID</param>
 		///<param name="body">Execution control</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackWatcherExecuteWatchAsync<T>(string id, PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackWatcherExecuteWatchAsync<T>(string id, PostData body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/watcher/watch/{id.NotNull("id")}/_execute"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/watcher/watch/_execute
@@ -10307,7 +10307,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">Execution control</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackWatcherExecuteWatch<T>(PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackWatcherExecuteWatch<T>(PostData body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/watcher/watch/_execute"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/watcher/watch/_execute
@@ -10321,7 +10321,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">Execution control</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackWatcherExecuteWatchAsync<T>(PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackWatcherExecuteWatchAsync<T>(PostData body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/watcher/watch/_execute"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/watcher/watch/{id}/_execute
@@ -10336,7 +10336,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Watch ID</param>
 		///<param name="body">Execution control</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackWatcherExecuteWatchPost<T>(string id, PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackWatcherExecuteWatchPost<T>(string id, PostData body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/watcher/watch/{id.NotNull("id")}/_execute"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/watcher/watch/{id}/_execute
@@ -10351,7 +10351,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Watch ID</param>
 		///<param name="body">Execution control</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackWatcherExecuteWatchPostAsync<T>(string id, PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackWatcherExecuteWatchPostAsync<T>(string id, PostData body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/watcher/watch/{id.NotNull("id")}/_execute"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/watcher/watch/_execute
@@ -10365,7 +10365,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">Execution control</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackWatcherExecuteWatchPost<T>(PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackWatcherExecuteWatchPost<T>(PostData body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/watcher/watch/_execute"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/watcher/watch/_execute
@@ -10379,7 +10379,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">Execution control</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackWatcherExecuteWatchPostAsync<T>(PostData<object> body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackWatcherExecuteWatchPostAsync<T>(PostData body, Func<ExecuteWatchRequestParameters, ExecuteWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/watcher/watch/_execute"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/watcher/watch/{id}
@@ -10422,7 +10422,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Watch ID</param>
 		///<param name="body">The watch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackWatcherPutWatch<T>(string id, PostData<object> body, Func<PutWatchRequestParameters, PutWatchRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackWatcherPutWatch<T>(string id, PostData body, Func<PutWatchRequestParameters, PutWatchRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/watcher/watch/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/watcher/watch/{id}
@@ -10437,7 +10437,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Watch ID</param>
 		///<param name="body">The watch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackWatcherPutWatchAsync<T>(string id, PostData<object> body, Func<PutWatchRequestParameters, PutWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackWatcherPutWatchAsync<T>(string id, PostData body, Func<PutWatchRequestParameters, PutWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/watcher/watch/{id.NotNull("id")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/watcher/watch/{id}
@@ -10452,7 +10452,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Watch ID</param>
 		///<param name="body">The watch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackWatcherPutWatchPost<T>(string id, PostData<object> body, Func<PutWatchRequestParameters, PutWatchRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackWatcherPutWatchPost<T>(string id, PostData body, Func<PutWatchRequestParameters, PutWatchRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/watcher/watch/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/watcher/watch/{id}
@@ -10467,7 +10467,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Watch ID</param>
 		///<param name="body">The watch</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackWatcherPutWatchPostAsync<T>(string id, PostData<object> body, Func<PutWatchRequestParameters, PutWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
+		public Task<ElasticsearchResponse<T>> XpackWatcherPutWatchPostAsync<T>(string id, PostData body, Func<PutWatchRequestParameters, PutWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/watcher/watch/{id.NotNull("id")}"), cancellationToken, body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/watcher/_restart

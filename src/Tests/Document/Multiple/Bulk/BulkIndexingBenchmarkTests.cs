@@ -48,7 +48,7 @@ namespace Tests.Document.Multiple.Bulk
 		[ProfilingSetup]
 		public void Setup()
 		{
-			_messages = Message.Generator.GenerateLocked(250000).Partition(1000).ToList();
+			_messages = Message.Generator.Generate(250000).Partition(1000).ToList();
 		}
 
 		[Benchmark]

@@ -61,10 +61,10 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken)) =>
 				throw new NotImplementedException();
 
-			public void Serialize(object data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented) =>
+			public void Serialize<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented) =>
 				throw new NotImplementedException();
 
-			public Task SerializeAsync(object data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
+			public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
 				CancellationToken cancellationToken = default(CancellationToken)) =>
 				throw new NotImplementedException();
 		}

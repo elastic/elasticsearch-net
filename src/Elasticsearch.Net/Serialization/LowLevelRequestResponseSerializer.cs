@@ -52,7 +52,7 @@ namespace Elasticsearch.Net
 			return (T) o;
 		}
 
-		public void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
+		public void Serialize<T>(T data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
 		{
 			var serialized = SimpleJson.SerializeObject(data, Strategy);
 			if (formatting == SerializationFormatting.None) serialized = RemoveNewLinesAndTabs(serialized);
@@ -62,7 +62,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public async Task SerializeAsync(object data, Stream writableStream, SerializationFormatting formatting,
+		public async Task SerializeAsync<T>(T data, Stream writableStream, SerializationFormatting formatting,
 			CancellationToken cancellationToken = default(CancellationToken))
 		{
 			var serialized = SimpleJson.SerializeObject(data, Strategy);

@@ -45,7 +45,7 @@ namespace Nest
 					var serializer = this.ConnectionSettings.CreateStateful(converter);
 					var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
 					request.RequestParameters.DeserializationOverride(creator);
-					return this.LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p, (object)p);
+					return this.LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p, new SerializableData<IMultiSearchRequest>(p));
 				}
 			);
 		}
@@ -67,7 +67,7 @@ namespace Nest
 					var serializer = this.ConnectionSettings.CreateStateful(converter);
 					var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
 					request.RequestParameters.DeserializationOverride(creator);
-					return this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, (object)p, c);
+					return this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, new SerializableData<IMultiSearchRequest>(p), c);
 				}
 			);
 		}

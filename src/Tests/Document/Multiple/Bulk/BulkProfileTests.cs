@@ -31,7 +31,7 @@ namespace Tests.Document.Multiple.Bulk
         public void Sync()
         {
             var bulkResponse = _client.Bulk(b => b
-                .IndexMany(Developer.Generator.GenerateLocked(1000), (bd, d) => bd
+                .IndexMany(Developer.Generator.Generate(1000), (bd, d) => bd
                     .Index(IndexName)
                     .Document(d)
                 ));
@@ -46,7 +46,7 @@ namespace Tests.Document.Multiple.Bulk
         public async Task Async()
         {
             var bulkResponse = await _client.BulkAsync(b => b
-                .IndexMany(Developer.Generator.GenerateLocked(1000), (bd, d) => bd
+                .IndexMany(Developer.Generator.Generate(1000), (bd, d) => bd
                     .Index(IndexName)
                     .Document(d)
                 )).ConfigureAwait(false);

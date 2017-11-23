@@ -158,7 +158,7 @@ namespace ApiGenerator.Domain
 							parts.Add(new ApiUrlPart
 							{
 								Name = "body",
-								Type = "PostData<object>",
+								Type = "PostData",
 								Description = this.Body.Description
 							});
 						}

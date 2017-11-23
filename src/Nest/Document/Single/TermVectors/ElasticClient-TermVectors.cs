@@ -43,7 +43,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<ITermVectorsRequest<T>, TermVectorsRequestParameters, TermVectorsResponse>(
 				request,
-				this.LowLevelDispatch.TermvectorsDispatch<TermVectorsResponse>
+				this.LowLevelDispatch.TermvectorsDispatch<TermVectorsResponse, T>
 			);
 		}
 
@@ -58,7 +58,7 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<ITermVectorsRequest<T>, TermVectorsRequestParameters, TermVectorsResponse, ITermVectorsResponse>(
 				request,
 				cancellationToken,
-				this.LowLevelDispatch.TermvectorsDispatchAsync<TermVectorsResponse>
+				this.LowLevelDispatch.TermvectorsDispatchAsync<TermVectorsResponse, T>
 			);
 	}
 }

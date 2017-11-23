@@ -73,7 +73,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 		{
 			this.Client.IndexMany(Project.Projects);
 			this.Client.IndexMany(Developer.Developers);
-			this.Client.Index(new ProjectPercolation
+			this.Client.IndexDocument(new ProjectPercolation
 			{
 				Id = "1",
 				Query = new MatchAllQuery()

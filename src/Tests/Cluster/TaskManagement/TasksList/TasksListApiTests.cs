@@ -81,7 +81,7 @@ namespace Tests.Cluster.TaskManagement.TasksList
 			seeder.SeedNode();
 
 			// get a suitable load of projects in order to get a decent task status out
-			var bulkResponse = client.IndexMany(Project.Generator.GenerateLocked(20000));
+			var bulkResponse = client.IndexMany(Project.Generator.Generate(20000));
 			if (!bulkResponse.IsValid)
 				throw new Exception("failure in setting up integration");
 

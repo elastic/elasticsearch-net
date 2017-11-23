@@ -8,20 +8,17 @@ namespace Elasticsearch.Net
 {
 	public interface IElasticsearchSerializer
 	{
+		object Deserialize(Type type, Stream stream);
 		T Deserialize<T>(Stream stream);
 
-		object Deserialize(Type type, Stream stream);
-
+		Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken));
 		Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken));
 
-		Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken));
+		void Serialize<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented);
 
-		void Serialize(object data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented);
-
-		Task SerializeAsync(object data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
+		Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
 			CancellationToken cancellationToken = default(CancellationToken));
 	}
-
 
 	public static class ElasticsearchSerializerExtensions
 	{

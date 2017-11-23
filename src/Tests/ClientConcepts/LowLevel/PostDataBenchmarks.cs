@@ -13,22 +13,22 @@ namespace Tests.ClientConcepts.LowLevel
 	[BenchmarkConfig(1000)]
 	public class PostDataBenchmarks
 	{
-		private readonly PostData<byte[]> _postDataOfBytes;
+		private readonly PostData _postDataOfBytes;
 
 
-		private readonly PostData<byte[]> _postDataOfBytesDisableDirectStreaming;
-		private readonly PostData<List<object>> _postDataOfCollectionOfComplexObjects;
-		private readonly PostData<List<object>> _postDataOfCollectionOfComplexObjectsDisableDirectStreaming;
-		private readonly PostData<List<object>> _postDataOfCollectionOfSimpleObjects;
-		private readonly PostData<List<object>> _postDataOfCollectionOfSimpleObjectsDisableDirectStreaming;
-		private readonly PostData<List<string>> _postDataOfCollectionOfStrings;
-		private readonly PostData<List<string>> _postDataOfCollectionOfStringsDisableDirectStreaming;
-		private readonly PostData<object> _postDataOfComplexObject;
-		private readonly PostData<object> _postDataOfComplexObjectDisableDirectStreaming;
-		private readonly PostData<object> _postDataOfSimpleObject;
-		private readonly PostData<object> _postDataOfSimpleObjectDisableDirectStreaming;
-		private readonly PostData<string> _postDataOfString;
-		private readonly PostData<string> _postDataOfStringDisableDirectStreaming;
+		private readonly PostData _postDataOfBytesDisableDirectStreaming;
+		private readonly PostData _postDataOfCollectionOfComplexObjects;
+		private readonly PostData _postDataOfCollectionOfComplexObjectsDisableDirectStreaming;
+		private readonly PostData _postDataOfCollectionOfSimpleObjects;
+		private readonly PostData _postDataOfCollectionOfSimpleObjectsDisableDirectStreaming;
+		private readonly PostData _postDataOfCollectionOfStrings;
+		private readonly PostData _postDataOfCollectionOfStringsDisableDirectStreaming;
+		private readonly PostData _postDataOfComplexObject;
+		private readonly PostData _postDataOfComplexObjectDisableDirectStreaming;
+		private readonly PostData _postDataOfSimpleObject;
+		private readonly PostData _postDataOfSimpleObjectDisableDirectStreaming;
+		private readonly PostData _postDataOfString;
+		private readonly PostData _postDataOfStringDisableDirectStreaming;
 		private readonly byte[] bytes = Encoding.UTF8.GetBytes("{my_property=\"value\"}");
 		private readonly List<object> collectionOfComplexObjects;
 		private readonly List<object> collectionOfSimpleObjects;
@@ -327,21 +327,26 @@ namespace Tests.ClientConcepts.LowLevel
 			collectionOfSimpleObjects = Enumerable.Range(0, 5).Select(i => simpleObject).ToList();
 			collectionOfComplexObjects = Enumerable.Range(0, 5).Select(i => complexObject).ToList();
 
-			_postDataOfString = new PostData<string>(@string);
-			_postDataOfBytes = new PostData<byte[]>(bytes);
-			_postDataOfCollectionOfStrings = new PostData<List<string>>(collectionOfStrings);
-			_postDataOfCollectionOfSimpleObjects = new PostData<List<object>>(collectionOfSimpleObjects);
-			_postDataOfCollectionOfComplexObjects = new PostData<List<object>>(collectionOfComplexObjects);
-			_postDataOfSimpleObject = new PostData<object>(simpleObject);
-			_postDataOfComplexObject = new PostData<object>(complexObject);
+			_postDataOfString = PostData.String(@string);
+			_postDataOfBytes = PostData.Bytes(bytes);
+			_postDataOfCollectionOfStrings = PostData.MultiJson(collectionOfStrings);
+			_postDataOfCollectionOfSimpleObjects = PostData.MultiJson(collectionOfSimpleObjects);
+			_postDataOfCollectionOfComplexObjects = PostData.MultiJson(collectionOfComplexObjects);
+			_postDataOfSimpleObject = PostData.Serializable(simpleObject);
+			_postDataOfComplexObject = PostData.Serializable(complexObject);
 
-			_postDataOfStringDisableDirectStreaming = new PostData<string>(@string) {DisableDirectStreaming = true};
-			_postDataOfBytesDisableDirectStreaming = new PostData<byte[]>(bytes) {DisableDirectStreaming = true};
-			_postDataOfCollectionOfStringsDisableDirectStreaming = new PostData<List<string>>(collectionOfStrings) {DisableDirectStreaming = true};
-			_postDataOfCollectionOfSimpleObjectsDisableDirectStreaming = new PostData<List<object>>(collectionOfSimpleObjects) {DisableDirectStreaming = true};
-			_postDataOfCollectionOfComplexObjectsDisableDirectStreaming = new PostData<List<object>>(collectionOfComplexObjects) {DisableDirectStreaming = true};
-			_postDataOfSimpleObjectDisableDirectStreaming = new PostData<object>(simpleObject) {DisableDirectStreaming = true};
-			_postDataOfComplexObjectDisableDirectStreaming = new PostData<object>(complexObject) {DisableDirectStreaming = true};
+			PostData DisableStreaming(PostData data)
+			{
+				data.DisableDirectStreaming = true;
+				return data;
+			}
+			_postDataOfStringDisableDirectStreaming = DisableStreaming(PostData.String(@string));
+			_postDataOfBytesDisableDirectStreaming = DisableStreaming(PostData.Bytes(bytes));
+			_postDataOfCollectionOfStringsDisableDirectStreaming = DisableStreaming(PostData.MultiJson(collectionOfStrings));
+			_postDataOfCollectionOfSimpleObjectsDisableDirectStreaming = DisableStreaming(PostData.MultiJson(collectionOfSimpleObjects));
+			_postDataOfCollectionOfComplexObjectsDisableDirectStreaming = DisableStreaming(PostData.MultiJson(collectionOfComplexObjects));
+			_postDataOfSimpleObjectDisableDirectStreaming = DisableStreaming(PostData.Serializable(simpleObject));
+			_postDataOfComplexObjectDisableDirectStreaming = DisableStreaming(PostData.Serializable(complexObject));
 		}
 
 		[Benchmark]

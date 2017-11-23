@@ -44,50 +44,67 @@ namespace Tests.ClientConcepts.LowLevel
 		{
 			/**[float]
 			* === Implicit Conversion
-			* Even though the argument for PostData on the low level client takes a `PostData<object>`,
-			* You can rely on implicit conversion to abstract the notion of PostData completely.
-			* You can implicitly convert from the following types
+			* Even though the argument for PostData on the low level client takes a `PostData`,
+			* You can rely on implicit conversion to abstract the notion of PostData for the most common two use cases:
 			*
 			* - A `string`
-			* - A collection of `string`
-			* - An `object`
-			* - A collection of `object`
 			* - A `byte[]` array
 			*
 			* Let's demonstrate each with some assertive examples
 			*/
 
-			PostData<object> fromString = @string;
-			PostData<object> fromByteArray = bytes;
-			PostData<object> fromListOfString = collectionOfStrings;
-			PostData<object> fromListOfObject = collectionOfObjects;
-			PostData<object> fromObject = @object;
+			PostData fromString = @string;
+			PostData fromByteArray = bytes;
 
 			fromByteArray.WrittenBytes.Should().BeSameAs(bytes); // <1> `WrittenBytes` will always be set if it originated from `byte[]`
 
 			/** The `Type` property is representative of the original type from which post data is constructed */
 			fromString.Type.Should().Be(PostType.LiteralString);
 			fromByteArray.Type.Should().Be(PostType.ByteArray);
-			fromListOfString.Type.Should().Be(PostType.EnumerableOfString);
-			fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
-			fromObject.Type.Should().Be(PostType.Serializable);
 
-			/** and passing a `PostData<object>` instance to a method that accepts `PostData<object>`
+			/** and passing a `PostData` instance to a method that accepts `PostData`
 			 * as an argument does not wrap it again
 			 */
 			fromString = MethodThatAcceptsPostData(fromString);
 			fromByteArray = MethodThatAcceptsPostData(fromByteArray);
+
+			fromString.Type.Should().Be(PostType.LiteralString);
+			fromByteArray.Type.Should().Be(PostType.ByteArray);
+		}
+		[U] public void ExplicitCreation()
+		{
+			/**[float]
+			* === Other types of PostData
+			*
+			* You can also pass the following objects directy to the low level client.
+			*
+			* - A Serializable `object`
+			* - A collection of `object` as multi line json
+			* - A collection of `string` as multi line json
+			*
+			* Let's demonstrate how to use the static helper on `PostData` for these:
+			*/
+
+			PostData fromObject = PostData.Serializable(@object);
+			PostData fromListOfString = PostData.MultiJson(collectionOfStrings);
+			PostData fromListOfObject = PostData.MultiJson(collectionOfObjects);
+
+			/** The `Type` property is representative of the original type from which post data is constructed */
+			fromListOfString.Type.Should().Be(PostType.EnumerableOfString);
+			fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
+			fromObject.Type.Should().Be(PostType.Serializable);
+
+			/** and passing a `PostData` instance to a method that accepts `PostData`
+			 * as an argument does not wrap it again
+			 */
 			fromListOfString = MethodThatAcceptsPostData(fromListOfString);
 			fromListOfObject = MethodThatAcceptsPostData(fromListOfObject);
 			fromObject = MethodThatAcceptsPostData(fromObject);
 
-			fromString.Type.Should().Be(PostType.LiteralString);
-			fromByteArray.Type.Should().Be(PostType.ByteArray);
 			fromListOfString.Type.Should().Be(PostType.EnumerableOfString);
 			fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
 			fromObject.Type.Should().Be(PostType.Serializable);
 		}
-
 		//hide
 		[U] public async Task WritesCorrectlyUsingBothLowAndHighLevelSettings()
 		{
@@ -116,19 +133,19 @@ namespace Tests.ClientConcepts.LowLevel
 			 * so joins each with newline feeds, ensuring there is a trailing linefeed. As with `string` and `byte[]`,
 			 * the `WrittenBytes` property is assigned the UTF-8 bytes of the collection of strings
 			 */
-			await Post(() => collectionOfStrings, writes: utf8BytesOfListOfStrings, writtenBytesIsSet: true, settings: settings);
+			await Post(() => PostData.MultiJson(collectionOfStrings), writes: utf8BytesOfListOfStrings, writtenBytesIsSet: true, settings: settings);
 
 			/**
 			* When passing a collection of `object`, the client assumes that it's a collection of objects
 			* that needs to be serialized individually to json and joined with newline feeds. As with the collection of strings, the client ensures that
 			* there is a trailing linefeed.
 			*/
-			await Post(() => collectionOfObjects, writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: false, settings: settings);
+			await Post(() => PostData.MultiJson(collectionOfObjects), writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: false, settings: settings);
 
 			/**
 			 * In all other cases, Post data is serialized as is and `WrittenBytes` is not assigned
 			 */
-			await Post(() => @object, writes: utf8ObjectBytes, writtenBytesIsSet: false, settings: settings);
+			await Post(() => PostData.Serializable(@object), writes: utf8ObjectBytes, writtenBytesIsSet: false, settings: settings);
 
 			/**
 			* ==== Forcing WrittenBytes to be set
@@ -138,22 +155,22 @@ namespace Tests.ClientConcepts.LowLevel
 			*/
 			settings = new ConnectionConfiguration().DisableDirectStreaming();
 
-			await Post(() => collectionOfObjects, writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: true, settings: settings);
+			await Post(() => PostData.MultiJson(collectionOfObjects), writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: true, settings: settings);
 
 			/** This behavior can also be observed when serializing a simple object using `DisableDirectStreaming` enabled
 			 */
-			await Post(() => @object, writes: utf8ObjectBytes, writtenBytesIsSet: true, settings: settings);
+			await Post(() => PostData.Serializable(@object), writes: utf8ObjectBytes, writtenBytesIsSet: true, settings: settings);
 		}
 
 		//hide
-		private static async Task Post(Func<PostData<object>> postData, byte[] writes, bool writtenBytesIsSet, IConnectionConfigurationValues settings)
+		private static async Task Post(Func<PostData> postData, byte[] writes, bool writtenBytesIsSet, IConnectionConfigurationValues settings)
 		{
 			PostAssert(postData(), writes, writtenBytesIsSet, settings);
 			await PostAssertAsync(postData(), writes, writtenBytesIsSet, settings);
 		}
 
 		//hide
-		private static void PostAssert(PostData<object> postData, byte[] writes, bool storesBytes, IConnectionConfigurationValues settings)
+		private static void PostAssert(PostData postData, byte[] writes, bool storesBytes, IConnectionConfigurationValues settings)
 		{
 			using (var ms = new MemoryStream())
 			{
@@ -168,7 +185,7 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		//hide
-		private static async Task PostAssertAsync(PostData<object> postData, byte[] writes, bool storesBytes, IConnectionConfigurationValues settings)
+		private static async Task PostAssertAsync(PostData postData, byte[] writes, bool storesBytes, IConnectionConfigurationValues settings)
 		{
 			using (var ms = new MemoryStream())
 			{
@@ -183,13 +200,10 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		//hide
-		private static byte[] Utf8Bytes(string s)
-		{
-			return string.IsNullOrEmpty(s) ? null : Encoding.UTF8.GetBytes(s);
-		}
+		private static byte[] Utf8Bytes(string s) => string.IsNullOrEmpty(s) ? null : Encoding.UTF8.GetBytes(s);
 
 		//hide
-		private PostData<object> MethodThatAcceptsPostData(PostData<object> postData) => postData;
+		private static PostData MethodThatAcceptsPostData(PostData postData) => postData;
 
 	}
 }

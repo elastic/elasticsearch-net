@@ -56,11 +56,11 @@ namespace Elasticsearch.Net
 			return requestParams;
 		}
 
-		public ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+		public ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
 			where T : class =>
 			this.Transport.Request<T>(method, path, data, requestParameters);
 
-		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, CancellationToken cancellationToken, PostData<object> data = null, IRequestParameters requestParameters = null)
+		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null, IRequestParameters requestParameters = null)
 			where T : class =>
 			this.Transport.RequestAsync<T>(method, path, cancellationToken, data, requestParameters);
 	}
