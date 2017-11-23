@@ -8,10 +8,13 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Deletes a Machine Learning job.
-		/// Before you can delete a job, you must delete the datafeeds that are associated with it, see DeleteDatafeed. Unless the force parameter is used the job must be closed before it can be deleted.
-		/// It is not currently possible to delete multiple jobs using wildcards or a comma separated list.
+		/// Deletes a machine learning job.
+		/// Before you can delete a job, you must delete the datafeeds that are associated with it, see DeleteDatafeed.
+		/// Unless the force parameter is used, the job must be closed before it can be deleted.
 		/// </summary>
+		/// <remarks>
+		/// It is not currently possible to delete multiple jobs, either using wildcards or a comma separated list.
+		/// </remarks>
 		IDeleteJobResponse DeleteJob(Id jobId, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null);
 
 		/// <inheritdoc/>

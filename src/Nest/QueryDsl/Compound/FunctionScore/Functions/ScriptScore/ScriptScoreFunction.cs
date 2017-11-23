@@ -6,7 +6,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IScriptScoreFunction : IScoreFunction
 	{
-		[JsonProperty(PropertyName = "script")]
+		[JsonProperty("script")]
 		IScriptQuery Script { get; set; }
 	}
 

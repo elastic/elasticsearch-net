@@ -20,55 +20,56 @@ namespace Nest
 		/// <summary>
 		/// The type / mapping of the document to percolate. This is a required parameter.
 		/// </summary>
-		[JsonProperty(PropertyName = "document_type")]
+		[JsonProperty("document_type")]
+		[Obsolete("Deprecated in 6.x, types are gone from indices created as of Elasticsearch 6.x")]
 		TypeName DocumentType { get; set; }
 
 		/// <summary>
 		/// The source of the document to percolate.
 		/// </summary>
-		[JsonProperty(PropertyName = "document")]
+		[JsonProperty("document")]
 		object Document { get; set; }
 
 		/// <summary>
 		/// The id of the document to fetch for percolation.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document"/>
 		/// </summary>
-		[JsonProperty(PropertyName = "id")]
+		[JsonProperty("id")]
 		Id Id { get; set; }
 
 		/// <summary>
 		/// The index the document resides in for percolation.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document"/>
 		/// </summary>
-		[JsonProperty(PropertyName = "index")]
+		[JsonProperty("index")]
 		IndexName Index { get; set; }
 
 		/// <summary>
 		/// The type of the document to fetch for percolation.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document"/>
 		/// </summary>
-		[JsonProperty(PropertyName = "type")]
+		[JsonProperty("type")]
 		TypeName Type { get; set; }
 
 		/// <summary>
 		/// Routing to be used to fetch the document to percolate.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document"/>
 		/// </summary>
-		[JsonProperty(PropertyName = "routing")]
+		[JsonProperty("routing")]
 		string Routing { get; set; }
 
 		/// <summary>
 		/// Preference to be used to fetch the document to percolate.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document"/>
 		/// </summary>
-		[JsonProperty(PropertyName = "preference")]
+		[JsonProperty("preference")]
 		string Preference { get; set; }
 
 		/// <summary>
 		/// The expected version of the document to be fetched for percolation.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document"/>
 		/// </summary>
-		[JsonProperty(PropertyName = "version")]
+		[JsonProperty("version")]
 		long? Version { get; set; }
 	}
 
@@ -83,15 +84,10 @@ namespace Nest
 
 		internal static bool IsConditionless(IPercolateQuery q)
 		{
-			var docFields = q.DocumentType.IsConditionless() || q.Document == null;
+			var docFields = q.Document == null;
+			if (!docFields) return false;
 
-			if (!docFields)
-			{
-				return false;
-			}
-
-			return q.DocumentType.IsConditionless() ||
-			       q.Type.IsConditionless() ||
+			return q.Type.IsConditionless() ||
 			       q.Index == null ||
 			       q.Id.IsConditionless() ||
 			       q.Field.IsConditionless();
@@ -105,6 +101,7 @@ namespace Nest
 		/// <summary>
 		/// The type / mapping of the document to percolate. This is a required parameter.
 		/// </summary>
+		[Obsolete("Deprecated in 6.x, types are gone from indices created as of Elasticsearch 6.x")]
 		public TypeName DocumentType { get; set; }
 
 		/// <summary>
@@ -186,11 +183,13 @@ namespace Nest
 		/// <summary>
 		/// The type / mapping of the document to percolate. This is a required parameter.
 		/// </summary>
+		[Obsolete("Deprecated in 6.x, types are gone from indices created as of Elasticsearch 6.x")]
 		public PercolateQueryDescriptor<T> DocumentType(TypeName type) => Assign(a => a.DocumentType = type);
 
 		/// <summary>
 		/// The type / mapping of the document to percolate. This is a required parameter.
 		/// </summary>
+		[Obsolete("Deprecated in 6.x, types are gone from indices created as of Elasticsearch 6.x")]
 		public PercolateQueryDescriptor<T> DocumentType<TDocument>() => Assign(a => a.DocumentType = typeof(TDocument));
 
 		/// <summary>

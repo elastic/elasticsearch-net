@@ -48,7 +48,7 @@ namespace Tests.Search.Request
 					  phrase = new {
 						collate = new {
 						  query = new {
-							inline = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
+							source = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
 							@params = new {
 						      field_name = "title"
 							}
@@ -121,7 +121,7 @@ namespace Tests.Search.Request
 				.Phrase("my-phrase-suggest", ph => ph
 					.Collate(c => c
 						.Query(q => q
-							.Inline("{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}")
+							.Source("{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}")
 							.Params(p => p.Add("field_name", "title"))
 						)
 						.Prune()
@@ -191,7 +191,7 @@ namespace Tests.Search.Request
 							{
 								Query = new TemplateQuery
 								{
-									Inline = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
+									Source = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
 									Params = new Dictionary<string, object>
 									{
 										{ "field_name", "title" }
@@ -223,7 +223,7 @@ namespace Tests.Search.Request
 			var option = suggest.Options.First();
 			option.Text.Should().NotBeNullOrEmpty();
 			option.Index.Should().Be("project");
-			option.Type.Should().Be("project");
+			option.Type.Should().Be("doc");
 			option.Id.Should().NotBeNull();
 			option.Source.Should().NotBeNull();
 			option.Source.Name.Should().NotBeNullOrWhiteSpace();

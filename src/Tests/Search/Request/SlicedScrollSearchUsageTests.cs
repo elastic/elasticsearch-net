@@ -12,10 +12,10 @@ namespace Tests.Search.Request
 
 		public SlicedScrollSearchUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override string UrlPath => "/project/project/_search?scroll=1m";
+		protected override string UrlPath => "/project/doc/_search?scroll=1m";
 
 		protected override object ExpectJson =>
-			new { slice = new { id = 0, max = 5 } }; 
+			new { slice = new { id = 0, max = 5 } };
 
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>()

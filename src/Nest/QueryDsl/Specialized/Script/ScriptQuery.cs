@@ -10,27 +10,33 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IScriptQuery : IQuery
 	{
-		[JsonProperty(PropertyName = "inline")]
+		[JsonProperty("source")]
+		string Source { get; set; }
+
+		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
+		[JsonIgnore]
 		string Inline { get; set; }
 
-		[JsonProperty(PropertyName = "id")]
+		[JsonProperty("id")]
 		Id Id { get; set; }
 
 		[JsonProperty("file")]
 		string File { get; set; }
 
-		[JsonProperty(PropertyName = "params")]
+		[JsonProperty("params")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
 
-		[JsonProperty(PropertyName = "lang")]
+		[JsonProperty("lang")]
 		string Lang { get; set; }
 	}
 
 	public class ScriptQuery : QueryBase, IScriptQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
-		public string Inline { get; set; }
+		public string Source { get; set; }
+		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
+		public string Inline { get => this.Source; set => this.Source = value; }
 		public Id Id { get; set; }
 		public string File { get; set; }
 		public Dictionary<string, object> Params { get; set; }
@@ -38,7 +44,7 @@ namespace Nest
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Script = this;
 		internal static bool IsConditionless(IScriptQuery q) =>
-			q.Inline.IsNullOrEmpty() && q.Id == null && q.File.IsNullOrEmpty();
+			q.Source.IsNullOrEmpty() && q.Id == null && q.File.IsNullOrEmpty();
 
 	}
 
@@ -47,20 +53,21 @@ namespace Nest
 		, IScriptQuery where T : class
 	{
 		protected override bool Conditionless => ScriptQuery.IsConditionless(this);
-		string IScriptQuery.Inline { get; set; }
+		string IScriptQuery.Inline { get => Self.Source; set => Self.Source = value; }
+		string IScriptQuery.Source { get; set; }
 		Id IScriptQuery.Id { get; set; }
 		string IScriptQuery.File { get; set; }
 		string IScriptQuery.Lang { get; set; }
 		Dictionary<string, object> IScriptQuery.Params { get; set; }
 
-		/// <summary>
-		/// Inline script to execute
-		/// </summary>
+		/// <summary> Inline script to execute </summary>
+		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
 		public ScriptQueryDescriptor<T> Inline(string script) => Assign(a => a.Inline = script);
 
-		/// <summary>
-		/// Id of an indexed script to execute
-		/// </summary>
+		/// <summary> Inline script to execute </summary>
+		public ScriptQueryDescriptor<T> Source(string script) => Assign(a => a.Source = script);
+
+		/// <summary> Id of an indexed script to execute </summary>
 		public ScriptQueryDescriptor<T> Id(string scriptId) => Assign(a => a.Id = scriptId);
 
 		/// <summary>

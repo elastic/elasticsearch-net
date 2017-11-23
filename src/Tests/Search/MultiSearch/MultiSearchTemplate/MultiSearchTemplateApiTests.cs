@@ -29,31 +29,29 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => false;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/project/_msearch/template";
+		protected override string UrlPath => "/project/doc/_msearch/template";
 
 		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson => new object[]
 		{
 			new {},
-			new { @params = new { state = "Stable" }, inline = "{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}" },
+			new { @params = new { state = "Stable" }, source = "{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}" },
 			new { index = "devs" },
 			new { id = "template-id"},
 			new { index = "devs"},
-			new { file = "template-file"}
 		};
 
 		protected override Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> Fluent => ms => ms
 			.Index(typeof(Project))
 			.Type(typeof(Project))
 			.Template<Project>("inline", s => s
-				.Inline("{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}")
+				.Source("{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}")
 				.Params(p => p
 					.Add("state", "Stable")
 				)
 			)
-			.Template<Project>("id", s => s.Index("devs").Id("template-id"))
-			.Template<Project>("file", s => s.Index("devs").File("template-file"));
+			.Template<Project>("id", s => s.Index("devs").Id("template-id"));
 
 		protected override MultiSearchTemplateRequest Initializer => new MultiSearchTemplateRequest(typeof(Project), typeof(Project))
 		{
@@ -61,7 +59,7 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 			{
 				{ "inline", new SearchTemplateRequest<Project>(typeof(Project))
 					{
-						Inline = "{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}",
+						Source = "{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}",
 						Params = new Dictionary<string, object>
 						{
 							{ "state", "Stable" }
@@ -69,8 +67,6 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 					}
 				},
 				{ "id", new SearchTemplateRequest<Project>("devs") { Id = "template-id" } },
-				{ "file", new SearchTemplateRequest<Project>("devs") { File = "template-file" } }
-
 			}
 		};
 
@@ -85,9 +81,6 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 			id.Should().NotBeNull();
 			id.ShouldNotBeValid();
 
-			var file = response.GetResponse<Project>("file");
-			file.Should().NotBeNull();
-			file.ShouldNotBeValid();
 		}
 	}
 }

@@ -3,15 +3,15 @@
 namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<DateRangeExpression>))]
-	public interface IDateRangeExpression 
+	public interface IDateRangeExpression
 	{
-		[JsonProperty(PropertyName = "from")]
+		[JsonProperty("from")]
 		DateMath From { get; set; }
 
-		[JsonProperty(PropertyName = "to")]
+		[JsonProperty("to")]
 		DateMath To { get; set; }
 
-		[JsonProperty(PropertyName = "key")]
+		[JsonProperty("key")]
 		string Key { get; set; }
 	}
 

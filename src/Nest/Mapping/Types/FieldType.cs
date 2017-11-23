@@ -86,5 +86,7 @@ namespace Nest
 		DoubleRange,
 		[EnumMember(Value = "date_range")]
 		DateRange,
+		[EnumMember(Value = "join")]
+		Join,
 	}
 }

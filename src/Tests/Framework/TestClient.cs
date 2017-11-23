@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
@@ -10,6 +11,7 @@ using System.Threading;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.Configuration;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.MockData;
 using Tests.Framework.Versions;
 
@@ -63,20 +65,28 @@ namespace Tests.Framework
 			? x
 			: ConnectionConfiguration.DefaultConnectionLimit;
 
+		public static ConcurrentBag<string> SeenDeprecations { get; } = new ConcurrentBag<string>();
+
 		private static ConnectionSettings DefaultSettings(ConnectionSettings settings) => settings
 			.DefaultIndex("default-index")
 			.PrettyJson()
-			.InferMappingFor<Project>(ProjectMapping)
+			.InferMappingFor<Project>(map=>map
+				.IndexName(DefaultSeeder.ProjectsIndex)
+				.IdProperty(p => p.Name)
+				.RelationName("project")
+				.TypeName("doc")
+			)
 			.InferMappingFor<CommitActivity>(map => map
-				.IndexName("project")
-				.TypeName("commits")
+				.IndexName(DefaultSeeder.ProjectsIndex)
+				.RelationName("commits")
+				.TypeName("doc")
 			)
 			.InferMappingFor<Developer>(map => map
 				.IndexName("devs")
 				.Ignore(p => p.PrivateValue)
 				.Rename(p => p.OnlineHandle, "nickname")
 			)
-			.InferMappingFor<PercolatedQuery>(map => map
+			.InferMappingFor<ProjectPercolation>(map => map
 				.IndexName("queries")
 				.TypeName(PercolatorType)
 			)
@@ -90,16 +100,16 @@ namespace Tests.Framework
 			//.PrettyJson()
 			//TODO make this random
 			//.EnableHttpCompression()
+			.OnRequestCompleted(r =>
+			{
+				if (!r.DeprecationWarnings.Any()) return;
+				var q = r.Uri.Query;
+				//hack to prevent the deprecation warnings from the deprecation response test to be reported
+				if (!string.IsNullOrWhiteSpace(q) && q.Contains("routing=ignoredefaultcompletedhandler")) return;
+				foreach (var d in r.DeprecationWarnings) SeenDeprecations.Add(d);
+			})
 			.OnRequestDataCreated(data => data.Headers.Add("TestMethod", ExpensiveTestNameForIntegrationTests()));
 
-		private static IClrTypeMapping<Project> ProjectMapping(ClrTypeMappingDescriptor<Project> m)
-		{
-			m.IndexName("project").IdProperty(p => p.Name);
-			//*_range type only available since 5.2.0 so we ignore them when running integration tests
-			if (VersionUnderTestSatisfiedBy("<5.2.0") && Configuration.RunIntegrationTests)
-				m.Ignore(p => p.Ranges);
-			return m;
-		}
 		public static string PercolatorType => Configuration.ElasticsearchVersion <= ElasticsearchVersion.GetOrAdd("5.0.0-alpha1")
 			? ".percolator"
 			: "query";
@@ -184,10 +194,10 @@ namespace Tests.Framework
 
 		private static string ExpensiveTestNameForIntegrationTests()
 		{
-			if (!(RunningFiddler && Configuration.RunIntegrationTests)) return "ignore";
+			if (!Configuration.RunIntegrationTests) return "ignore";
 
 #if DOTNETCORE
-			return "TODO: Work out how to get test name. Maybe Environment.StackTrace?";
+			return "UNKNOWN";
 #else
 			var st = new StackTrace();
 			var types = GetTypes(st);

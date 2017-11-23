@@ -62,7 +62,7 @@ See https://github.com/elastic/elasticsearch-net/issues/2336[github issue 2336]
 === String Property Mapping is obsolete
 
 See also:
-https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking_50_mapping_changes.html#_literal_string_literal_fields_replaced_by_literal_text_literal_literal_keyword_literal_fields[the Elasticsearch breaking changes documentation]
+https://www.elastic.co/guide/en/elasticsearch/reference/5.6/breaking_50_mapping_changes.html#_literal_string_literal_fields_replaced_by_literal_text_literal_literal_keyword_literal_fields[the Elasticsearch breaking changes documentation]
 
 This is also reflected in the attachment mappings
 
@@ -217,7 +217,7 @@ TPartialDocument>.Refresh* _Declaration changed (Breaking)_
 
 The default language is now painless! Also we no longer support the
 `1.x` inline syntax for scripts.
-https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking_50_scripting.html#_removed_1_x_script_and_template_syntax[the Elasticsearch breaking changes documentation]
+https://www.elastic.co/guide/en/elasticsearch/reference/5.6/breaking_50_scripting.html#_removed_1_x_script_and_template_syntax[the Elasticsearch breaking changes documentation]
 
 *public method Nest.BulkUpdateDescriptor<TDocument,
 TPartialDocument>.Script* _Declaration changed (Breaking)_
@@ -444,7 +444,7 @@ https://github.com/elastic/elasticsearch-net/pull/2320
 === Deprecated queries are now removed
 
 See also:
-https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking_50_search_changes.html#_deprecated_queries_removed[the Elasticsearch breaking changes documentation]
+https://www.elastic.co/guide/en/elasticsearch/reference/5.6/breaking_50_search_changes.html#_deprecated_queries_removed[the Elasticsearch breaking changes documentation]
 
 *public property Nest.IQueryContainer.Missing* _Removed (Breaking)_ +
 *public method Nest.Query<T>.Missing* _Removed (Breaking)_ +

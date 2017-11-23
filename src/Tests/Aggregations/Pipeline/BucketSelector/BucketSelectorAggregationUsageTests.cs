@@ -43,7 +43,7 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 								},
 								script = new
 								{
-									inline = "params.totalCommits >= 500",
+									source = "params.totalCommits >= 500",
 								}
 							}
 						}
@@ -66,7 +66,7 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 							.BucketsPath(bp => bp
 								.Add("totalCommits", "commits")
 							)
-							.Script(ss => ss.Inline("params.totalCommits >= 500"))
+							.Script(ss => ss.Source("params.totalCommits >= 500"))
 						)
 					)
 				)

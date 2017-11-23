@@ -5,11 +5,6 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using Xunit;
-using static Nest.Infer;
-using System.Threading.Tasks;
-using FluentAssertions;
-using System.Linq;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Document.Single.Update
@@ -36,7 +31,7 @@ namespace Tests.Document.Single.Update
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/project/{CallIsolatedValue}/_update";
+		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}/_update";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -45,7 +40,7 @@ namespace Tests.Document.Single.Update
 			scripted_upsert = true,
 			script = new
 			{
-				inline = "ctx._source.name = \"params.name\"",
+				source = "ctx._source.name = \"params.name\"",
 				lang = "painless",
 				@params = new {
 					name = "foo",
@@ -59,7 +54,7 @@ namespace Tests.Document.Single.Update
 		protected override Func<UpdateDescriptor<Project, Project>, IUpdateRequest<Project, Project>> Fluent => d => d
 			.ScriptedUpsert()
 			.Script(s => s
-				.Inline("ctx._source.name = \"params.name\"")
+				.Source("ctx._source.name = \"params.name\"")
 				.Lang("painless")
 				.Params(p => p
 					.Add("name", "foo")

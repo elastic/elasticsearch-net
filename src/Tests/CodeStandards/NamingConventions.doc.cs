@@ -121,10 +121,6 @@ namespace Tests.CodeStandards
 				typeof(RenderSearchTemplateRequest),
 				typeof(MultiSearchTemplateRequest),
 				typeof(CreateRequest<>)
-
-
-
-
 			};
 
 			var types = typeof(IRequest).Assembly().GetTypes();

@@ -24,9 +24,5 @@ namespace Nest
 
 		[EnumMember(Value = "mustache")]
 		Mustache,
-
-		[EnumMember(Value = "native")]
-		Native,
 	}
-
 }

@@ -11,24 +11,24 @@ namespace Tests.Search.Count
 		[U] public async Task Urls()
 		{
 			var hardcoded = "hardcoded";
-			await GET("/project/commits/_count")
-				.Fluent(c=>c.Count<CommitActivity>())
-				.Request(c=>c.Count<Project>(new CountRequest<CommitActivity>()))
-				.FluentAsync(c=>c.CountAsync<CommitActivity>())
-				.RequestAsync(c=>c.CountAsync<Project>(new CountRequest<CommitActivity>()))
+			await GET("/devs/developer/_count")
+				.Fluent(c=>c.Count<Developer>())
+				.Request(c=>c.Count<Project>(new CountRequest<Developer>()))
+				.FluentAsync(c=>c.CountAsync<Developer>())
+				.RequestAsync(c=>c.CountAsync<Project>(new CountRequest<Developer>()))
 				;
 
-			await GET("/project/commits/_count?q=querystring")
-				.Fluent(c=>c.Count<CommitActivity>(s=>s.QueryOnQueryString("querystring")))
-				.Request(c=>c.Count<Project>(new CountRequest<CommitActivity>() { QueryOnQueryString = "querystring" }))
-				.FluentAsync(c=>c.CountAsync<CommitActivity>(s=>s.QueryOnQueryString("querystring")))
-				.RequestAsync(c=>c.CountAsync<Project>(new CountRequest<CommitActivity>() { QueryOnQueryString = "querystring" }))
+			await GET("/devs/developer/_count?q=querystring")
+				.Fluent(c=>c.Count<Developer>(s=>s.QueryOnQueryString("querystring")))
+				.Request(c=>c.Count<Project>(new CountRequest<Developer>() { QueryOnQueryString = "querystring" }))
+				.FluentAsync(c=>c.CountAsync<Developer>(s=>s.QueryOnQueryString("querystring")))
+				.RequestAsync(c=>c.CountAsync<Project>(new CountRequest<Developer>() { QueryOnQueryString = "querystring" }))
 				;
-			await GET("/project/hardcoded/_count")
-				.Fluent(c=>c.Count<CommitActivity>(s=>s.Type(hardcoded)))
-				.Request(c=>c.Count<Project>(new CountRequest<CommitActivity>(typeof(Project), hardcoded)))
-				.FluentAsync(c=>c.CountAsync<CommitActivity>(s=>s.Type(hardcoded)))
-				.RequestAsync(c=>c.CountAsync<Project>(new CountRequest<CommitActivity>(typeof(Project), hardcoded)))
+			await GET($"/devs/{hardcoded}/_count")
+				.Fluent(c=>c.Count<Developer>(s=>s.Type(hardcoded)))
+				.Request(c=>c.Count<Project>(new CountRequest<Developer>(typeof(Developer), hardcoded)))
+				.FluentAsync(c=>c.CountAsync<Developer>(s=>s.Type(hardcoded)))
+				.RequestAsync(c=>c.CountAsync<Project>(new CountRequest<Developer>(typeof(Developer), hardcoded)))
 				;
 
 			await GET("/project/_count")
@@ -41,7 +41,7 @@ namespace Tests.Search.Count
 				.FluentAsync(c=>c.CountAsync<Project>(s=>s.AllTypes()))
 				;
 
-			await GET("/hardcoded/_count")
+			await GET($"/{hardcoded}/_count")
 				.Fluent(c=>c.Count<Project>(s=>s.Index(hardcoded).Type(Types.All)))
 				.Fluent(c=>c.Count<Project>(s=>s.Index(hardcoded).AllTypes()))
 				.Request(c=>c.Count<Project>(new CountRequest(hardcoded)))

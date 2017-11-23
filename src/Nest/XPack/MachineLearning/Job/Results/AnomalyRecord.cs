@@ -5,8 +5,8 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Detailed analyticial results of anomalous activity that has been identified in
-	/// the input data based on the detector configuration.
+	/// Detailed analyticial results of anomalous activity that has been
+	/// identified in the input data based on the detector configuration.
 	/// </summary>
 	[JsonObject]
 	public class AnomalyRecord
@@ -24,10 +24,11 @@ namespace Nest
 		public string ResultType { get; internal set; }
 
 		/// <summary>
-		/// The probability of the individual anomaly occurring, in the range 0 to 1. For example, 0.0000772031.
+		/// The probability of the individual anomaly occurring, in the range 0 to 1.
 		/// This value can be held to a high precision of over 300 decimal places, so the <see cref="RecordScore"/>
 		/// is provided as a human-readable and friendly interpretation of this.
 		/// </summary>
+		/// <example>0.0000772031</example>
 		[JsonProperty("probability")]
 		public double Probability { get; internal set; }
 
@@ -47,7 +48,7 @@ namespace Nest
 		public double InitialRecordScore { get; internal set; }
 
 		/// <summary>
-		/// The length of the bucket. This value matches the bucket_span that is specified in the job.
+		/// The length of the bucket. This value matches the <see cref="AnalysisConfig.BucketSpan"/> that is specified in the job.
 		/// </summary>
 		[JsonProperty("bucket_span")]
 		public Time BucketSpan { get; internal set; }
@@ -89,8 +90,8 @@ namespace Nest
 		/// </summary>
 		/// <remarks>
 		/// Additional record properties are added, depending on the fields being analyzed.
-		/// For example, if it’s analyzing hostname as a by field, then a field hostname is added to the result document.
-		/// This information enables you to filter the anomaly results more easily.
+		/// For example, if it’s analyzing hostname as a by field, then a field hostname is added to the
+		/// result document. This information enables you to filter the anomaly results more easily.
 		/// </remarks>
 		[JsonProperty("typical")]
 		public IReadOnlyCollection<double> Typical { get; internal set; } = EmptyReadOnly<double>.Collection;
@@ -124,7 +125,7 @@ namespace Nest
 		/// For population analysis, an over field must be specified in the detector.
 		/// This property contains an array of anomaly records that are the causes for the anomaly that has been
 		/// identified for the over field. If no over fields exist, this field is not present.
-		/// Contains the most anomalous records for the over_field_name. For scalability reasons,
+		/// Contains the most anomalous records for the <see cref="OverFieldName"/>. For scalability reasons,
 		/// a maximum of the 10 most significant causes of the anomaly are returned.
 		/// As part of the core analytical modeling, these low-level anomaly records are aggregated for their
 		/// parent over field record.
@@ -133,7 +134,7 @@ namespace Nest
 		public IReadOnlyCollection<AnomalyCause> Causes { get; internal set; } = EmptyReadOnly<AnomalyCause>.Collection;
 
 		/// <summary>
-		///  If influencers was specified in the detector configuration, then this
+		/// If influencers was specified in the detector configuration, then this
 		/// contains influencers that contributed to or were to blame for an anomaly.
 		/// </summary>
 		[JsonProperty("influencers")]

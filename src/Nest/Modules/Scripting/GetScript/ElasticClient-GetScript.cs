@@ -9,13 +9,13 @@ namespace Nest
 	{
 
 		/// <inheritdoc/>
-		IGetScriptResponse GetScript(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null);
+		IGetScriptResponse GetScript(Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null);
 
 		/// <inheritdoc/>
 		IGetScriptResponse GetScript(IGetScriptRequest request);
 
 		/// <inheritdoc/>
-		Task<IGetScriptResponse> GetScriptAsync(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetScriptResponse> GetScriptAsync(Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
 		Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest request, CancellationToken cancellationToken = default(CancellationToken));
@@ -25,8 +25,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IGetScriptResponse GetScript(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null) =>
-			this.GetScript(selector.InvokeOrDefault(new GetScriptDescriptor(language, id)));
+		public IGetScriptResponse GetScript(Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null) =>
+			this.GetScript(selector.InvokeOrDefault(new GetScriptDescriptor(id)));
 
 		/// <inheritdoc/>
 		public IGetScriptResponse GetScript(IGetScriptRequest request) =>
@@ -36,8 +36,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetScriptResponse> GetScriptAsync(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.GetScriptAsync(selector.InvokeOrDefault(new GetScriptDescriptor(language, id)), cancellationToken);
+		public Task<IGetScriptResponse> GetScriptAsync(Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.GetScriptAsync(selector.InvokeOrDefault(new GetScriptDescriptor(id)), cancellationToken);
 
 		/// <inheritdoc/>
 		public Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>

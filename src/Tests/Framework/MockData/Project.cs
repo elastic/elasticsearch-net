@@ -10,6 +10,7 @@ namespace Tests.Framework.MockData
 {
 	public class Project
 	{
+		public JoinField Join => JoinField.Root<Project>();
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public StateOfBeing State { get; set; }
@@ -69,6 +70,7 @@ namespace Tests.Framework.MockData
 		public static object InstanceAnonymous = new
 		{
 			name = Projects.First().Name,
+			join = Instance.Join,
 			state = "BellyUp",
 			startedOn = "2015-01-01T00:00:00",
 			lastActivity = "0001-01-01T00:00:00",

@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Threading.Tasks;
 using Tests.Framework;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Xunit;
 using Nest;
 using Newtonsoft.Json;
 using System.Text;
@@ -21,14 +17,11 @@ namespace Tests.ClientConcepts.Serializer
 	{
 		public class MyCystomResolver : ElasticContractResolver
 		{
-			public MyCystomResolver(IConnectionSettingsValues connectionSettings, IList<Func<Type, JsonConverter>> contractConverters) : base(connectionSettings, contractConverters)
-			{
-			}
+			public MyCystomResolver(IConnectionSettingsValues connectionSettings, IList<Func<Type, JsonConverter>> contractConverters)
+				: base(connectionSettings, contractConverters) { }
 
-			protected override string ResolvePropertyName(string fieldName)
-			{
-				return fieldName.ToUpperInvariant();
-			}
+			protected override string ResolvePropertyName(string fieldName) => fieldName.ToUpperInvariant();
+
 		}
 
 		private sealed class LocalJsonNetSerializer : JsonNetSerializer

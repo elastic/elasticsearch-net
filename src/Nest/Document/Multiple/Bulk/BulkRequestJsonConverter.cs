@@ -20,9 +20,9 @@ namespace Nest
 			foreach(var op in bulk.Operations)
 			{
 				op.Index = op.Index ?? bulk.Index ?? op.ClrType;
-				if (op.Index.EqualsMarker(bulk.Index)) op.Index = null;
+				if (op.Index.Equals(bulk.Index)) op.Index = null;
 				op.Type = op.Type ?? bulk.Type ?? op.ClrType;
-				if (op.Type.EqualsMarker(bulk.Type)) op.Type = null;
+				if (op.Type.Equals(bulk.Type)) op.Type = null;
 				op.Id = op.GetIdForOperation(settings.Inferrer);
 
 				var opJson = elasticsearchSerializer.SerializeToString(op, SerializationFormatting.None);

@@ -72,7 +72,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				.VersionType(VersionType.Internal)
 				.Routing(ReindexRouting.Discard)
 			)
-			.Script(ss => ss.Inline(PainlessScript))
+			.Script(ss => ss.Source(PainlessScript))
 			.Conflicts(Conflicts.Proceed)
 			.Refresh();
 
@@ -131,7 +131,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				},
 				script = new
 				{
-					inline = this.PainlessScript,
+					source = this.PainlessScript,
 				},
 				source = new
 				{

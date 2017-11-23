@@ -3,6 +3,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 
@@ -12,6 +13,8 @@ namespace Tests.Search.Search.Collapsing
 	 */
 	public class FieldCollapseUsageTests : SearchUsageTestBase
 	{
+		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search";
+
 		public FieldCollapseUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson => new
@@ -31,6 +34,7 @@ namespace Tests.Search.Search.Collapsing
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Index(DefaultSeeder.ProjectsAliasFilter)
 			.Collapse(c => c
 				.Field(f => f.State)
 				.MaxConcurrentGroupSearches(1000)
@@ -41,7 +45,7 @@ namespace Tests.Search.Search.Collapsing
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>
+		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
 		{
 			Collapse = new FieldCollapse
 			{
@@ -59,7 +63,7 @@ namespace Tests.Search.Search.Collapsing
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			var numberOfStates = Enum.GetValues(typeof(StateOfBeing)).Length;
-			response.HitsMetaData.Total.Should().BeGreaterThan(numberOfStates);
+			response.HitsMetadata.Total.Should().BeGreaterThan(numberOfStates);
 			response.Hits.Count.Should().Be(numberOfStates);
 			foreach (var hit in response.Hits)
 			{

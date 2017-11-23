@@ -7,23 +7,23 @@ namespace Nest
 	public interface IValidateQueryResponse : IResponse
 	{
 		bool Valid { get; }
-		ShardsMetaData Shards { get; }
+		ShardsMetadata Shards { get; }
 		IReadOnlyCollection<ValidationExplanation> Explanations { get; }
 	}
 
 	[JsonObject]
 	public class ValidateQueryResponse : ResponseBase, IValidateQueryResponse
 	{
-		[JsonProperty(PropertyName = "valid")]
+		[JsonProperty("valid")]
 		public bool Valid { get; internal set; }
 
-		[JsonProperty(PropertyName = "_shards")]
-		public ShardsMetaData Shards { get; internal set; }
+		[JsonProperty("_shards")]
+		public ShardsMetadata Shards { get; internal set; }
 
 		/// <summary>
 		/// Gets the explanations if Explain() was set.
 		/// </summary>
-		[JsonProperty(PropertyName = "explanations")]
+		[JsonProperty("explanations")]
 		public IReadOnlyCollection<ValidationExplanation> Explanations { get; internal set; } = EmptyReadOnly<ValidationExplanation>.Collection;
 	}
 }

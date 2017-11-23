@@ -92,9 +92,10 @@ namespace Tests.Aggregations.Bucket.Filter
 	[SkipVersion("6.0.0-alpha1", "https://github.com/elastic/elasticsearch/issues/17518 && 6.0 https://github.com/elastic/elasticsearch/pull/17542#issuecomment-300796197")]
 	public class EmptyFilterAggregationUsageTests : AggregationUsageTestBase
 	{
-		public EmptyFilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
-		{
-		}
+		public EmptyFilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override bool ExpectIsValid => false;
+		protected override int ExpectStatusCode => 400;
 
 		protected override object ExpectJson => new
 		{
@@ -132,8 +133,7 @@ namespace Tests.Aggregations.Bucket.Filter
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.ShouldBeValid();
-			response.Aggs.Filter("empty_filter").DocCount.Should().BeGreaterThan(0);
+			response.ShouldNotBeValid();
 		}
 	}
 
@@ -152,7 +152,7 @@ namespace Tests.Aggregations.Bucket.Filter
 					filter = new {
 						script = new {
 							script = new {
-								inline = _ctxNumberofCommits,
+								source = _ctxNumberofCommits,
 							}
 						}
 					}
@@ -165,7 +165,7 @@ namespace Tests.Aggregations.Bucket.Filter
 				.Filter(_aggName, date => date
 					.Filter(f => f
 						.Script(b => b
-							.Inline(_ctxNumberofCommits)
+							.Source(_ctxNumberofCommits)
 						)
 					)
 				)
@@ -178,8 +178,8 @@ namespace Tests.Aggregations.Bucket.Filter
 				{
 					Filter = new ScriptQuery
 					{
-						Inline = _ctxNumberofCommits,
-				}
+						Source = _ctxNumberofCommits
+					}
 				}
 			};
 

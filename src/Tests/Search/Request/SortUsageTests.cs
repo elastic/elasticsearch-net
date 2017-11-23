@@ -63,7 +63,7 @@ namespace Tests.Search.Request
 								@params = new {
 									factor = 1.1
 								},
-								inline = "doc['numberOfCommits'].value * params.factor",
+								source = "doc['numberOfCommits'].value * params.factor",
 							}
 						}
 					}
@@ -97,7 +97,7 @@ namespace Tests.Search.Request
 					.Type("number")
 					.Ascending()
 					.Script(script => script
-						.Inline("doc['numberOfCommits'].value * params.factor")
+						.Source("doc['numberOfCommits'].value * params.factor")
 						.Params(p => p.Add("factor", 1.1))
 					)
 				)

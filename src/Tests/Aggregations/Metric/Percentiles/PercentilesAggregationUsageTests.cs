@@ -29,7 +29,7 @@ namespace Tests.Aggregations.Metric.Percentiles
 						},
 						script = new
 						{
-							inline = "doc['numberOfCommits'].value * 1.2",
+							source = "doc['numberOfCommits'].value * 1.2",
 						},
 						missing = 0.0
 					}
@@ -47,7 +47,7 @@ namespace Tests.Aggregations.Metric.Percentiles
 							.NumberOfSignificantValueDigits(3)
 						)
 					)
-					.Script(ss => ss.Inline("doc['numberOfCommits'].value * 1.2"))
+					.Script(ss => ss.Source("doc['numberOfCommits'].value * 1.2"))
 					.Missing(0)
 				)
 			);

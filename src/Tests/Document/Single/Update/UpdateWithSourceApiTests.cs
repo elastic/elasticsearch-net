@@ -34,28 +34,34 @@ namespace Tests.Document.Single.Update
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/project/{CallIsolatedValue}/_update?fields=name%2C_source";
+		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}/_update";
 
 		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson { get; } = new
 		{
 			doc = Project.InstanceAnonymous,
-			doc_as_upsert = true
+			doc_as_upsert = true,
+			_source = new {
+				includes = new [] {"name"}
+			}
 		};
 
 		protected override UpdateDescriptor<Project, Project> NewDescriptor() => new UpdateDescriptor<Project, Project>(DocumentPath<Project>.Id(CallIsolatedValue));
 
 		protected override Func<UpdateDescriptor<Project,Project>, IUpdateRequest<Project, Project>> Fluent => d=>d
 			.Doc(Project.Instance)
-			.Fields(Field<Project>(p=>p.Name).And("_source"))
+			.Source(s=>s.Includes(f=>f.Field(p=>p.Name)))
 			.DocAsUpsert();
 
 		protected override UpdateRequest<Project, Project> Initializer => new UpdateRequest<Project, Project>(CallIsolatedValue)
 		{
 			Doc = Project.Instance,
 			DocAsUpsert = true,
-			Fields = Field<Project>(p=>p.Name).And("_source")
+			Source = new SourceFilter
+			{
+				Includes = Field<Project>(p=>p.Name)
+			}
 		};
 
 		[I] public Task ReturnsSourceAndFields() => this.AssertOnAllResponses(r =>
@@ -65,8 +71,8 @@ namespace Tests.Document.Single.Update
 			r.Get.Source.Should().NotBeNull();
 			var name = Project.First.Name;
 			r.Get.Source.Name.Should().Be(name);
-			r.Get.Fields.Should().NotBeEmpty().And.ContainKey("name");
-			r.Get.Fields.Value<string>("name").Should().Be(name);
+			r.Get.Source.Description.Should().BeNullOrEmpty();
+			r.Get.Fields.Should().BeNull();
 		});
 	}
 }

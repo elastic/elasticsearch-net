@@ -5,10 +5,10 @@ namespace Nest
 {
 	public interface IClusterGetSettingsResponse : IResponse
 	{
-		[JsonProperty(PropertyName = "persistent")]
+		[JsonProperty("persistent")]
 		IReadOnlyDictionary<string, object> Persistent { get; }
 
-		[JsonProperty(PropertyName = "transient")]
+		[JsonProperty("transient")]
 		IReadOnlyDictionary<string, object> Transient { get; }
 	}
 

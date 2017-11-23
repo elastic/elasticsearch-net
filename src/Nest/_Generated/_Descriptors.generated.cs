@@ -83,7 +83,7 @@ namespace Nest
 		public BulkDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public BulkDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public BulkDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public BulkDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -133,7 +133,7 @@ namespace Nest
 		public CatAliasesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatAliasesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatAliasesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatAliasesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -186,7 +186,7 @@ namespace Nest
 		public CatAllocationDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatAllocationDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatAllocationDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatAllocationDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -242,7 +242,7 @@ namespace Nest
 		public CatCountDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatCountDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatCountDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatCountDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -298,7 +298,7 @@ namespace Nest
 		public CatFielddataDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatFielddataDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatFielddataDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatFielddataDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -343,7 +343,7 @@ namespace Nest
 		public CatHealthDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatHealthDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatHealthDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatHealthDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -370,7 +370,7 @@ namespace Nest
 		public CatHelpDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatHelpDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatHelpDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatHelpDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -435,7 +435,7 @@ namespace Nest
 		public CatIndicesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatIndicesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatIndicesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatIndicesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -477,7 +477,7 @@ namespace Nest
 		public CatMasterDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatMasterDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatMasterDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatMasterDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -519,7 +519,7 @@ namespace Nest
 		public CatNodeAttributesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatNodeAttributesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatNodeAttributesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatNodeAttributesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -564,7 +564,7 @@ namespace Nest
 		public CatNodesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatNodesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatNodesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatNodesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -606,7 +606,7 @@ namespace Nest
 		public CatPendingTasksDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatPendingTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatPendingTasksDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatPendingTasksDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -648,7 +648,7 @@ namespace Nest
 		public CatPluginsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatPluginsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatPluginsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatPluginsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -704,7 +704,7 @@ namespace Nest
 		public CatRecoveryDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatRecoveryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatRecoveryDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatRecoveryDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -746,7 +746,7 @@ namespace Nest
 		public CatRepositoriesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatRepositoriesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatRepositoriesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatRepositoriesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -774,6 +774,9 @@ namespace Nest
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatSegmentsDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
+		///<summary>The unit in which to display byte values</summary>
+		public CatSegmentsDescriptor Bytes(Bytes bytes) => AssignParam(p=>p.Bytes(bytes));
+
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatSegmentsDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
 
@@ -796,7 +799,7 @@ namespace Nest
 		public CatSegmentsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatSegmentsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatSegmentsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatSegmentsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -823,6 +826,9 @@ namespace Nest
 	
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatShardsDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
+		///<summary>The unit in which to display byte values</summary>
+		public CatShardsDescriptor Bytes(Bytes bytes) => AssignParam(p=>p.Bytes(bytes));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatShardsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
@@ -852,7 +858,7 @@ namespace Nest
 		public CatShardsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatShardsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatShardsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatShardsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -867,12 +873,10 @@ namespace Nest
 		public CatSnapshotsDescriptor() : base(){}
 		
 
-		/// <summary>/_cat/snapshots/{repository}</summary>
-///<param name="repository"> this parameter is required</param>
-		public CatSnapshotsDescriptor(Names repository) : base(r=>r.Required("repository", repository)){}
-		
+			///<summary>Name of repository from which to fetch the snapshot information</summary>
+		public CatSnapshotsDescriptor RepositoryName(Names repository) => Assign(a=>a.RouteValues.Optional("repository", repository));
 
-		
+	
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatSnapshotsDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
@@ -904,7 +908,7 @@ namespace Nest
 		public CatSnapshotsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatSnapshotsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatSnapshotsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatSnapshotsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -955,7 +959,7 @@ namespace Nest
 		public CatTasksDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatTasksDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatTasksDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -1005,7 +1009,7 @@ namespace Nest
 		public CatTemplatesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatTemplatesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatTemplatesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatTemplatesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -1058,7 +1062,7 @@ namespace Nest
 		public CatThreadPoolDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatThreadPoolDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatThreadPoolDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CatThreadPoolDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -1083,7 +1087,7 @@ namespace Nest
 		public ClearScrollDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClearScrollDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClearScrollDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClearScrollDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -1110,7 +1114,7 @@ namespace Nest
 		public ClusterAllocationExplainDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterAllocationExplainDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterAllocationExplainDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClusterAllocationExplainDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -1143,7 +1147,7 @@ namespace Nest
 		public ClusterGetSettingsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterGetSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterGetSettingsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClusterGetSettingsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -1205,7 +1209,7 @@ namespace Nest
 		public ClusterHealthDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterHealthDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterHealthDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClusterHealthDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -1232,7 +1236,7 @@ namespace Nest
 		public ClusterPendingTasksDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterPendingTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterPendingTasksDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClusterPendingTasksDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -1262,10 +1266,31 @@ namespace Nest
 		public ClusterPutSettingsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterPutSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterPutSettingsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClusterPutSettingsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for ClusterRemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
+	public partial class RemoteInfoDescriptor  : RequestDescriptorBase<RemoteInfoDescriptor,RemoteInfoRequestParameters, IRemoteInfoRequest>, IRemoteInfoRequest
+	{ 
+			
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RemoteInfoDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public RemoteInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RemoteInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public RemoteInfoDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RemoteInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1301,7 +1326,7 @@ namespace Nest
 		public ClusterRerouteDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterRerouteDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterRerouteDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClusterRerouteDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -1358,7 +1383,7 @@ namespace Nest
 		public ClusterStateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterStateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterStateDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClusterStateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -1393,7 +1418,7 @@ namespace Nest
 		public ClusterStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterStatsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClusterStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -1443,8 +1468,8 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public CountDescriptor<T> Preference(string preference) => AssignParam(p=>p.Preference(preference));
 
-		///<summary>Specific routing value</summary>
-		public CountDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+		///<summary>A comma-separated list of specific routing values</summary>
+		public CountDescriptor<T> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>Query in the Lucene query string syntax</summary>
 		public CountDescriptor<T> QueryOnQueryString(string query_on_query_string) => AssignParam(p=>p.QueryOnQueryString(query_on_query_string));
@@ -1464,6 +1489,9 @@ namespace Nest
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public CountDescriptor<T> Lenient(bool lenient = true) => AssignParam(p=>p.Lenient(lenient));
 
+		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
+		public CountDescriptor<T> TerminateAfter(long terminate_after) => AssignParam(p=>p.TerminateAfter(terminate_after));
+
 		///<summary>Pretty format the returned JSON response.</summary>
 		public CountDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -1474,7 +1502,7 @@ namespace Nest
 		public CountDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CountDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public CountDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CountDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -1553,7 +1581,7 @@ namespace Nest
 		public CreateDescriptor<TDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CreateDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
+		public CreateDescriptor<TDocument> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CreateDescriptor<TDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -1623,7 +1651,7 @@ namespace Nest
 		public DeleteDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -1773,7 +1801,7 @@ namespace Nest
 		public DeleteByQueryDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteByQueryDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteByQueryDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteByQueryDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -1784,19 +1812,18 @@ namespace Nest
 	public partial class DeleteScriptDescriptor  : RequestDescriptorBase<DeleteScriptDescriptor,DeleteScriptRequestParameters, IDeleteScriptRequest>, IDeleteScriptRequest
 	{ 
 		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
-		Name IDeleteScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
-			/// <summary>/_scripts/{lang}</summary>
-///<param name="lang"> this parameter is required</param>
-		public DeleteScriptDescriptor(Name lang) : base(r=>r.Required("lang", lang)){}
-		
-
-		/// <summary>/_scripts/{lang}/{id}</summary>
-///<param name="lang"> this parameter is required</param>		
+			/// <summary>/_scripts/{id}</summary>
 ///<param name="id"> this parameter is required</param>
-		public DeleteScriptDescriptor(Name lang, Id id) : base(r=>r.Required("lang", lang).Required("id", id)){}
+		public DeleteScriptDescriptor(Id id) : base(r=>r.Required("id", id)){}
 		
 
 		
+		///<summary>Explicit operation timeout</summary>
+		public DeleteScriptDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+
+		///<summary>Specify timeout for connection to master</summary>
+		public DeleteScriptDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+
 		///<summary>Pretty format the returned JSON response.</summary>
 		public DeleteScriptDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -1807,37 +1834,10 @@ namespace Nest
 		public DeleteScriptDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteScriptDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteScriptDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteScriptDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
-	///<summary>descriptor for DeleteTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
-	public partial class DeleteSearchTemplateDescriptor  : RequestDescriptorBase<DeleteSearchTemplateDescriptor,DeleteSearchTemplateRequestParameters, IDeleteSearchTemplateRequest>, IDeleteSearchTemplateRequest
-	{ 
-		Id IDeleteSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_search/template/{id}</summary>
-///<param name="id"> this parameter is required</param>
-		public DeleteSearchTemplateDescriptor(Id id) : base(r=>r.Required("id", id)){}
-		
-
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteSearchTemplateDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
-
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteSearchTemplateDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
-
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteSearchTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
-
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteSearchTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteSearchTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1928,14 +1928,14 @@ namespace Nest
 		public DocumentExistsDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DocumentExistsDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public DocumentExistsDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DocumentExistsDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/5.5/docs-get.html</pre></summary>
+	///<summary>descriptor for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceExistsDescriptor<T>  : RequestDescriptorBase<SourceExistsDescriptor<T>,SourceExistsRequestParameters, ISourceExistsRequest>, ISourceExistsRequest
 	{ 
 		Id ISourceExistsRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -2015,7 +2015,7 @@ namespace Nest
 		public SourceExistsDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SourceExistsDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public SourceExistsDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SourceExistsDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -2115,14 +2115,14 @@ namespace Nest
 		public ExplainDescriptor<TDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ExplainDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
+		public ExplainDescriptor<TDocument> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ExplainDescriptor<TDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for FieldCaps <pre>http://www.elastic.co/guide/en/elasticsearch/reference/5.5/search-field-caps.html</pre></summary>
+	///<summary>descriptor for FieldCaps <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
 	public partial class FieldCapabilitiesDescriptor  : RequestDescriptorBase<FieldCapabilitiesDescriptor,FieldCapabilitiesRequestParameters, IFieldCapabilitiesRequest>, IFieldCapabilitiesRequest
 	{ 
 		Indices IFieldCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2166,57 +2166,10 @@ namespace Nest
 		public FieldCapabilitiesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public FieldCapabilitiesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public FieldCapabilitiesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public FieldCapabilitiesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
-	///<summary>descriptor for FieldStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</pre></summary>
-	public partial class FieldStatsDescriptor  : RequestDescriptorBase<FieldStatsDescriptor,FieldStatsRequestParameters, IFieldStatsRequest>, IFieldStatsRequest
-	{ 
-		Indices IFieldStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_field_stats</summary>
-		public FieldStatsDescriptor() : base(){}
-		
-
-			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public FieldStatsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public FieldStatsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
-		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public FieldStatsDescriptor AllIndices() => this.Index(Indices.All);
-
-	
-		///<summary>Defines if field stats should be returned on a per index level or on a cluster wide level</summary>
-		public FieldStatsDescriptor Level(Level level) => AssignParam(p=>p.Level(level));
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public FieldStatsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
-
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public FieldStatsDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public FieldStatsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
-
-		///<summary>Pretty format the returned JSON response.</summary>
-		public FieldStatsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
-
-		///<summary>Return human readable values for statistics.</summary>
-		public FieldStatsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
-
-		///<summary>Include the stack trace of returned errors.</summary>
-		public FieldStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
-
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public FieldStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public FieldStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2307,7 +2260,7 @@ namespace Nest
 		public GetDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public GetDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -2318,16 +2271,9 @@ namespace Nest
 	public partial class GetScriptDescriptor  : RequestDescriptorBase<GetScriptDescriptor,GetScriptRequestParameters, IGetScriptRequest>, IGetScriptRequest
 	{ 
 		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
-		Name IGetScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
-			/// <summary>/_scripts/{lang}</summary>
-///<param name="lang"> this parameter is required</param>
-		public GetScriptDescriptor(Name lang) : base(r=>r.Required("lang", lang)){}
-		
-
-		/// <summary>/_scripts/{lang}/{id}</summary>
-///<param name="lang"> this parameter is required</param>		
+			/// <summary>/_scripts/{id}</summary>
 ///<param name="id"> this parameter is required</param>
-		public GetScriptDescriptor(Name lang, Id id) : base(r=>r.Required("lang", lang).Required("id", id)){}
+		public GetScriptDescriptor(Id id) : base(r=>r.Required("id", id)){}
 		
 
 		
@@ -2341,7 +2287,7 @@ namespace Nest
 		public GetScriptDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetScriptDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetScriptDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetScriptDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -2428,37 +2374,10 @@ namespace Nest
 		public SourceDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SourceDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public SourceDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SourceDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
-	///<summary>descriptor for GetTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
-	public partial class GetSearchTemplateDescriptor  : RequestDescriptorBase<GetSearchTemplateDescriptor,GetSearchTemplateRequestParameters, IGetSearchTemplateRequest>, IGetSearchTemplateRequest
-	{ 
-		Id IGetSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_search/template/{id}</summary>
-///<param name="id"> this parameter is required</param>
-		public GetSearchTemplateDescriptor(Id id) : base(r=>r.Required("id", id)){}
-		
-
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetSearchTemplateDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
-
-		///<summary>Return human readable values for statistics.</summary>
-		public GetSearchTemplateDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
-
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetSearchTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
-
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetSearchTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetSearchTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2539,7 +2458,7 @@ namespace Nest
 		public IndexDescriptor<TDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndexDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
+		public IndexDescriptor<TDocument> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public IndexDescriptor<TDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -2577,7 +2496,7 @@ namespace Nest
 		public AnalyzeDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public AnalyzeDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public AnalyzeDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public AnalyzeDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -2643,7 +2562,7 @@ namespace Nest
 		public ClearCacheDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClearCacheDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClearCacheDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClearCacheDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -2694,7 +2613,7 @@ namespace Nest
 		public CloseIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CloseIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CloseIndexDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CloseIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -2739,7 +2658,7 @@ namespace Nest
 		public CreateIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CreateIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CreateIndexDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CreateIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -2771,6 +2690,15 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteIndexDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
+		///<summary>Ignore unavailable indexes (default: false)</summary>
+		public DeleteIndexDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
+
+		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
+		public DeleteIndexDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
+
+		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
+		public DeleteIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
+
 		///<summary>Pretty format the returned JSON response.</summary>
 		public DeleteIndexDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -2781,7 +2709,7 @@ namespace Nest
 		public DeleteIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteIndexDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -2825,7 +2753,7 @@ namespace Nest
 		public DeleteAliasDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteAliasDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteAliasDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteAliasDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -2858,7 +2786,7 @@ namespace Nest
 		public DeleteIndexTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteIndexTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteIndexTemplateDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteIndexTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -2912,7 +2840,7 @@ namespace Nest
 		public IndexExistsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndexExistsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public IndexExistsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public IndexExistsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -2963,7 +2891,7 @@ namespace Nest
 		public AliasExistsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public AliasExistsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public AliasExistsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public AliasExistsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -2999,7 +2927,7 @@ namespace Nest
 		public IndexTemplateExistsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndexTemplateExistsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public IndexTemplateExistsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public IndexTemplateExistsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3058,7 +2986,7 @@ namespace Nest
 		public TypeExistsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public TypeExistsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public TypeExistsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public TypeExistsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3108,7 +3036,7 @@ namespace Nest
 		public FlushDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public FlushDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public FlushDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public FlushDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3152,7 +3080,7 @@ namespace Nest
 		public SyncedFlushDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SyncedFlushDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public SyncedFlushDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SyncedFlushDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3211,7 +3139,7 @@ namespace Nest
 		public ForceMergeDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ForceMergeDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ForceMergeDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ForceMergeDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3222,7 +3150,6 @@ namespace Nest
 	public partial class GetIndexDescriptor  : RequestDescriptorBase<GetIndexDescriptor,GetIndexRequestParameters, IGetIndexRequest>, IGetIndexRequest
 	{ 
 		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Features IGetIndexRequest.Feature => Self.RouteValues.Get<Features>("feature");
 			/// <summary>/{index}</summary>
 ///<param name="index"> this parameter is required</param>
 		public GetIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
@@ -3236,9 +3163,6 @@ namespace Nest
 
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public GetIndexDescriptor AllIndices() => this.Index(Indices.All);
-
-		///<summary>A comma-separated list of features</summary>
-		public GetIndexDescriptor Feature(Features feature) => Assign(a=>a.RouteValues.Optional("feature", feature));
 
 	
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -3269,7 +3193,7 @@ namespace Nest
 		public GetIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetIndexDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3320,7 +3244,7 @@ namespace Nest
 		public GetAliasDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetAliasDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetAliasDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetAliasDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3382,7 +3306,7 @@ namespace Nest
 		public GetFieldMappingDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetFieldMappingDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public GetFieldMappingDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetFieldMappingDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3439,7 +3363,7 @@ namespace Nest
 		public GetMappingDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetMappingDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public GetMappingDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetMappingDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3496,7 +3420,7 @@ namespace Nest
 		public GetIndexSettingsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetIndexSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetIndexSettingsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetIndexSettingsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3534,7 +3458,7 @@ namespace Nest
 		public GetIndexTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetIndexTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetIndexTemplateDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetIndexTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3578,7 +3502,7 @@ namespace Nest
 		public UpgradeStatusDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpgradeStatusDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public UpgradeStatusDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public UpgradeStatusDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3629,7 +3553,7 @@ namespace Nest
 		public OpenIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public OpenIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public OpenIndexDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public OpenIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3673,7 +3597,7 @@ namespace Nest
 		public PutAliasDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutAliasDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutAliasDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutAliasDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3734,7 +3658,7 @@ namespace Nest
 		public PutMappingDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutMappingDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public PutMappingDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutMappingDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3787,7 +3711,7 @@ namespace Nest
 		public UpdateIndexSettingsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateIndexSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public UpdateIndexSettingsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public UpdateIndexSettingsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3826,7 +3750,7 @@ namespace Nest
 		public PutIndexTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutIndexTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutIndexTemplateDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutIndexTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3867,7 +3791,7 @@ namespace Nest
 		public RecoveryStatusDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RecoveryStatusDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RecoveryStatusDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RecoveryStatusDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3911,7 +3835,7 @@ namespace Nest
 		public RefreshDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RefreshDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RefreshDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RefreshDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -3954,7 +3878,7 @@ namespace Nest
 		public RolloverIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RolloverIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RolloverIndexDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RolloverIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4004,7 +3928,7 @@ namespace Nest
 		public SegmentsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SegmentsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public SegmentsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SegmentsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4054,7 +3978,7 @@ namespace Nest
 		public IndicesShardStoresDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndicesShardStoresDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public IndicesShardStoresDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public IndicesShardStoresDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4098,7 +4022,7 @@ namespace Nest
 		public ShrinkIndexDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ShrinkIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ShrinkIndexDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ShrinkIndexDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4167,7 +4091,7 @@ namespace Nest
 		public IndicesStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndicesStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public IndicesStatsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public IndicesStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4194,7 +4118,7 @@ namespace Nest
 		public BulkAliasDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public BulkAliasDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public BulkAliasDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public BulkAliasDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4244,7 +4168,7 @@ namespace Nest
 		public UpgradeDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpgradeDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public UpgradeDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public UpgradeDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4328,7 +4252,7 @@ namespace Nest
 		public ValidateQueryDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ValidateQueryDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public ValidateQueryDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ValidateQueryDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4349,7 +4273,7 @@ namespace Nest
 		public RootNodeInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RootNodeInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RootNodeInfoDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RootNodeInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4382,7 +4306,7 @@ namespace Nest
 		public DeletePipelineDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeletePipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeletePipelineDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeletePipelineDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4414,10 +4338,31 @@ namespace Nest
 		public GetPipelineDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetPipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetPipelineDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetPipelineDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for IngestProcessorGrok <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	public partial class GrokProcessorPatternsDescriptor  : RequestDescriptorBase<GrokProcessorPatternsDescriptor,GrokProcessorPatternsRequestParameters, IGrokProcessorPatternsRequest>, IGrokProcessorPatternsRequest
+	{ 
+			
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GrokProcessorPatternsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public GrokProcessorPatternsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GrokProcessorPatternsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public GrokProcessorPatternsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GrokProcessorPatternsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4447,7 +4392,7 @@ namespace Nest
 		public PutPipelineDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutPipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutPipelineDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutPipelineDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4479,7 +4424,7 @@ namespace Nest
 		public SimulatePipelineDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SimulatePipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public SimulatePipelineDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SimulatePipelineDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4554,7 +4499,7 @@ namespace Nest
 		public MultiGetDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiGetDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public MultiGetDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public MultiGetDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4598,6 +4543,9 @@ namespace Nest
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public MultiSearchDescriptor TypedKeys(bool typed_keys = true) => AssignParam(p=>p.TypedKeys(typed_keys));
 
+		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the&#160;number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it&#39;s rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
+		public MultiSearchDescriptor PreFilterShardSize(long pre_filter_shard_size) => AssignParam(p=>p.PreFilterShardSize(pre_filter_shard_size));
+
 		///<summary>Pretty format the returned JSON response.</summary>
 		public MultiSearchDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -4608,7 +4556,7 @@ namespace Nest
 		public MultiSearchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiSearchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public MultiSearchDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public MultiSearchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4662,7 +4610,7 @@ namespace Nest
 		public MultiSearchTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiSearchTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public MultiSearchTemplateDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public MultiSearchTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4741,7 +4689,7 @@ namespace Nest
 		public MultiTermVectorsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiTermVectorsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public MultiTermVectorsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public MultiTermVectorsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4788,7 +4736,7 @@ namespace Nest
 		public NodesHotThreadsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public NodesHotThreadsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public NodesHotThreadsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public NodesHotThreadsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4827,7 +4775,7 @@ namespace Nest
 		public NodesInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public NodesInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public NodesInfoDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public NodesInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4900,10 +4848,46 @@ namespace Nest
 		public NodesStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public NodesStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public NodesStatsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public NodesStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for NodesUsageForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
+	public partial class NodesUsageDescriptor  : RequestDescriptorBase<NodesUsageDescriptor,NodesUsageRequestParameters, INodesUsageRequest>, INodesUsageRequest
+	{ 
+		Metrics INodesUsageRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
+		NodeIds INodesUsageRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+			/// <summary>/_nodes/usage</summary>
+		public NodesUsageDescriptor() : base(){}
+		
+
+			///<summary>Limit the information returned to the specified metrics</summary>
+		public NodesUsageDescriptor Metric(NodesUsageMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
+
+		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
+		public NodesUsageDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
+
+	
+		///<summary>Whether to return time and byte values in human-readable format.</summary>
+		public NodesUsageDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Explicit operation timeout</summary>
+		public NodesUsageDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+
+		///<summary>Pretty format the returned JSON response.</summary>
+		public NodesUsageDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public NodesUsageDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public NodesUsageDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public NodesUsageDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4921,7 +4905,7 @@ namespace Nest
 		public PingDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PingDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PingDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PingDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -4932,19 +4916,22 @@ namespace Nest
 	public partial class PutScriptDescriptor  : RequestDescriptorBase<PutScriptDescriptor,PutScriptRequestParameters, IPutScriptRequest>, IPutScriptRequest
 	{ 
 		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
-		Name IPutScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
-			/// <summary>/_scripts/{lang}</summary>
-///<param name="lang"> this parameter is required</param>
-		public PutScriptDescriptor(Name lang) : base(r=>r.Required("lang", lang)){}
-		
-
-		/// <summary>/_scripts/{lang}/{id}</summary>
-///<param name="lang"> this parameter is required</param>		
+		Name IPutScriptRequest.Context => Self.RouteValues.Get<Name>("context");
+			/// <summary>/_scripts/{id}</summary>
 ///<param name="id"> this parameter is required</param>
-		public PutScriptDescriptor(Name lang, Id id) : base(r=>r.Required("lang", lang).Required("id", id)){}
+		public PutScriptDescriptor(Id id) : base(r=>r.Required("id", id)){}
 		
 
-		
+			///<summary>Script context</summary>
+		public PutScriptDescriptor Context(Name context) => Assign(a=>a.RouteValues.Optional("context", context));
+
+	
+		///<summary>Explicit operation timeout</summary>
+		public PutScriptDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+
+		///<summary>Specify timeout for connection to master</summary>
+		public PutScriptDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+
 		///<summary>Pretty format the returned JSON response.</summary>
 		public PutScriptDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -4955,37 +4942,10 @@ namespace Nest
 		public PutScriptDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutScriptDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutScriptDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutScriptDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
-	///<summary>descriptor for PutTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
-	public partial class PutSearchTemplateDescriptor  : RequestDescriptorBase<PutSearchTemplateDescriptor,PutSearchTemplateRequestParameters, IPutSearchTemplateRequest>, IPutSearchTemplateRequest
-	{ 
-		Id IPutSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_search/template/{id}</summary>
-///<param name="id"> this parameter is required</param>
-		public PutSearchTemplateDescriptor(Id id) : base(r=>r.Required("id", id)){}
-		
-
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutSearchTemplateDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
-
-		///<summary>Return human readable values for statistics.</summary>
-		public PutSearchTemplateDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
-
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutSearchTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
-
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutSearchTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutSearchTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5050,31 +5010,10 @@ namespace Nest
 		public ReindexRethrottleDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ReindexRethrottleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ReindexRethrottleDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ReindexRethrottleDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
-	///<summary>descriptor for RemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/5.5/cluster-remote-info.html</pre></summary>
-	public partial class RemoteInfoDescriptor  : RequestDescriptorBase<RemoteInfoDescriptor,RemoteInfoRequestParameters, IRemoteInfoRequest>, IRemoteInfoRequest
-	{ 
-			
-		///<summary>Pretty format the returned JSON response.</summary>
-		public RemoteInfoDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
-
-		///<summary>Return human readable values for statistics.</summary>
-		public RemoteInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
-
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RemoteInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
-
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RemoteInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RemoteInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -5100,7 +5039,7 @@ namespace Nest
 		public RenderSearchTemplateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RenderSearchTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RenderSearchTemplateDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RenderSearchTemplateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -5125,7 +5064,7 @@ namespace Nest
 		public ScrollDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ScrollDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public ScrollDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ScrollDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -5222,6 +5161,9 @@ namespace Nest
 		///<summary>The source text for which the suggestions should be returned</summary>
 		public SearchDescriptor<T> SuggestText(string suggest_text) => AssignParam(p=>p.SuggestText(suggest_text));
 
+		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
+		public SearchDescriptor<T> TrackTotalHits(bool track_total_hits = true) => AssignParam(p=>p.TrackTotalHits(track_total_hits));
+
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public SearchDescriptor<T> TypedKeys(bool typed_keys = true) => AssignParam(p=>p.TypedKeys(typed_keys));
 
@@ -5230,6 +5172,12 @@ namespace Nest
 
 		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
 		public SearchDescriptor<T> BatchedReduceSize(long batched_reduce_size) => AssignParam(p=>p.BatchedReduceSize(batched_reduce_size));
+
+		///<summary>The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
+		public SearchDescriptor<T> MaxConcurrentShardRequests(long max_concurrent_shard_requests) => AssignParam(p=>p.MaxConcurrentShardRequests(max_concurrent_shard_requests));
+
+		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the&#160;number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it&#39;s rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
+		public SearchDescriptor<T> PreFilterShardSize(long pre_filter_shard_size) => AssignParam(p=>p.PreFilterShardSize(pre_filter_shard_size));
 
 		///<summary>Pretty format the returned JSON response.</summary>
 		public SearchDescriptor<T> Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
@@ -5291,7 +5239,7 @@ namespace Nest
 		public SearchShardsDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SearchShardsDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public SearchShardsDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SearchShardsDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -5366,7 +5314,7 @@ namespace Nest
 		public SearchTemplateDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SearchTemplateDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public SearchTemplateDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SearchTemplateDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -5401,7 +5349,7 @@ namespace Nest
 		public SnapshotDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SnapshotDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public SnapshotDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SnapshotDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -5437,7 +5385,7 @@ namespace Nest
 		public CreateRepositoryDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CreateRepositoryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CreateRepositoryDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CreateRepositoryDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -5469,7 +5417,7 @@ namespace Nest
 		public DeleteSnapshotDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteSnapshotDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteSnapshotDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteSnapshotDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -5502,7 +5450,7 @@ namespace Nest
 		public DeleteRepositoryDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteRepositoryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteRepositoryDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteRepositoryDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -5540,7 +5488,7 @@ namespace Nest
 		public GetSnapshotDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetSnapshotDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetSnapshotDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetSnapshotDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -5575,7 +5523,7 @@ namespace Nest
 		public GetRepositoryDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetRepositoryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetRepositoryDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetRepositoryDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -5610,7 +5558,7 @@ namespace Nest
 		public RestoreDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RestoreDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RestoreDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RestoreDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -5649,7 +5597,7 @@ namespace Nest
 		public SnapshotStatusDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SnapshotStatusDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public SnapshotStatusDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SnapshotStatusDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -5682,7 +5630,7 @@ namespace Nest
 		public VerifyRepositoryDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public VerifyRepositoryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public VerifyRepositoryDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public VerifyRepositoryDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -5702,7 +5650,7 @@ namespace Nest
 
 	
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public CancelTasksDescriptor NodeId(params string[] node_id) => AssignParam(p=>p.NodeId(node_id));
+		public CancelTasksDescriptor Nodes(params string[] nodes) => AssignParam(p=>p.Nodes(nodes));
 
 		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
 		public CancelTasksDescriptor Actions(params string[] actions) => AssignParam(p=>p.Actions(actions));
@@ -5711,7 +5659,7 @@ namespace Nest
 		public CancelTasksDescriptor ParentNode(string parent_node) => AssignParam(p=>p.ParentNode(parent_node));
 
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
-		public CancelTasksDescriptor ParentTask(string parent_task) => AssignParam(p=>p.ParentTask(parent_task));
+		public CancelTasksDescriptor ParentTaskId(string parent_task_id) => AssignParam(p=>p.ParentTaskId(parent_task_id));
 
 		///<summary>Pretty format the returned JSON response.</summary>
 		public CancelTasksDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
@@ -5723,7 +5671,7 @@ namespace Nest
 		public CancelTasksDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CancelTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CancelTasksDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CancelTasksDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -5755,7 +5703,7 @@ namespace Nest
 		public GetTaskDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetTaskDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetTaskDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetTaskDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -5767,7 +5715,7 @@ namespace Nest
 	{ 
 			
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public ListTasksDescriptor NodeId(params string[] node_id) => AssignParam(p=>p.NodeId(node_id));
+		public ListTasksDescriptor Nodes(params string[] nodes) => AssignParam(p=>p.Nodes(nodes));
 
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
 		public ListTasksDescriptor Actions(params string[] actions) => AssignParam(p=>p.Actions(actions));
@@ -5779,7 +5727,7 @@ namespace Nest
 		public ListTasksDescriptor ParentNode(string parent_node) => AssignParam(p=>p.ParentNode(parent_node));
 
 		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
-		public ListTasksDescriptor ParentTask(string parent_task) => AssignParam(p=>p.ParentTask(parent_task));
+		public ListTasksDescriptor ParentTaskId(string parent_task_id) => AssignParam(p=>p.ParentTaskId(parent_task_id));
 
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public ListTasksDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
@@ -5797,7 +5745,7 @@ namespace Nest
 		public ListTasksDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ListTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ListTasksDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ListTasksDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -5888,7 +5836,7 @@ namespace Nest
 		public TermVectorsDescriptor<TDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public TermVectorsDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
+		public TermVectorsDescriptor<TDocument> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public TermVectorsDescriptor<TDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -5973,7 +5921,7 @@ namespace Nest
 		public UpdateDescriptor<TDocument, TPartialDocument> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Source(string source) => AssignParam(p=>p.Source(source));
+		public UpdateDescriptor<TDocument, TPartialDocument> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6129,19 +6077,19 @@ namespace Nest
 		public UpdateByQueryDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateByQueryDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public UpdateByQueryDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public UpdateByQueryDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackGraphExplore <pre>https://www.elastic.co/guide/en/graph/current/explore.html</pre></summary>
+	///<summary>descriptor for XpackGraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public partial class GraphExploreDescriptor<T>  : RequestDescriptorBase<GraphExploreDescriptor<T>,GraphExploreRequestParameters, IGraphExploreRequest>, IGraphExploreRequest
 	{ 
 		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_xpack/_graph/_explore</summary>
+			/// <summary>/{index}/_xpack/graph/_explore</summary>
 ///<param name="index"> this parameter is required</param>
 		public GraphExploreDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 		
@@ -6181,10 +6129,42 @@ namespace Nest
 		public GraphExploreDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GraphExploreDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public GraphExploreDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GraphExploreDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for XpackDeprecationInfo <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
+	public partial class DeprecationInfoDescriptor  : RequestDescriptorBase<DeprecationInfoDescriptor,DeprecationInfoRequestParameters, IDeprecationInfoRequest>, IDeprecationInfoRequest
+	{ 
+		IndexName IDeprecationInfoRequest.Index => Self.RouteValues.Get<IndexName>("index");
+			/// <summary>/_xpack/migration/deprecations</summary>
+		public DeprecationInfoDescriptor() : base(){}
+		
+
+			///<summary>Index pattern</summary>
+		public DeprecationInfoDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public DeprecationInfoDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+
+	
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeprecationInfoDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
+
+		///<summary>Return human readable values for statistics.</summary>
+		public DeprecationInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeprecationInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
+
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public DeprecationInfoDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeprecationInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -6205,7 +6185,7 @@ namespace Nest
 		public XPackInfoDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XPackInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public XPackInfoDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public XPackInfoDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6229,14 +6209,14 @@ namespace Nest
 		public XPackUsageDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XPackUsageDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public XPackUsageDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public XPackUsageDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	///<summary>descriptor for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class DeleteLicenseDescriptor  : RequestDescriptorBase<DeleteLicenseDescriptor,DeleteLicenseRequestParameters, IDeleteLicenseRequest>, IDeleteLicenseRequest
 	{ 
 			
@@ -6250,14 +6230,14 @@ namespace Nest
 		public DeleteLicenseDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteLicenseDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteLicenseDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteLicenseDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackLicenseGet <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	///<summary>descriptor for XpackLicenseGet <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetLicenseDescriptor  : RequestDescriptorBase<GetLicenseDescriptor,GetLicenseRequestParameters, IGetLicenseRequest>, IGetLicenseRequest
 	{ 
 			
@@ -6274,14 +6254,14 @@ namespace Nest
 		public GetLicenseDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetLicenseDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetLicenseDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetLicenseDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackLicensePost <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	///<summary>descriptor for XpackLicensePost <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class PostLicenseDescriptor  : RequestDescriptorBase<PostLicenseDescriptor,PostLicenseRequestParameters, IPostLicenseRequest>, IPostLicenseRequest
 	{ 
 			
@@ -6298,7 +6278,7 @@ namespace Nest
 		public PostLicenseDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PostLicenseDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PostLicenseDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PostLicenseDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6331,7 +6311,7 @@ namespace Nest
 		public CloseJobDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CloseJobDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CloseJobDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public CloseJobDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6361,7 +6341,7 @@ namespace Nest
 		public DeleteDatafeedDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteDatafeedDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteDatafeedDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteDatafeedDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6382,7 +6362,7 @@ namespace Nest
 		public DeleteExpiredDataDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteExpiredDataDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteExpiredDataDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteExpiredDataDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6412,7 +6392,7 @@ namespace Nest
 		public DeleteJobDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteJobDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteJobDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteJobDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6441,7 +6421,7 @@ namespace Nest
 		public DeleteModelSnapshotDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteModelSnapshotDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteModelSnapshotDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteModelSnapshotDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6458,6 +6438,9 @@ namespace Nest
 		
 
 		
+		///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
+		public FlushJobDescriptor SkipTime(string skip_time) => AssignParam(p=>p.SkipTime(skip_time));
+
 		///<summary>Pretty format the returned JSON response.</summary>
 		public FlushJobDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -6468,7 +6451,7 @@ namespace Nest
 		public FlushJobDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public FlushJobDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public FlushJobDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public FlushJobDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6495,7 +6478,7 @@ namespace Nest
 		public GetBucketsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetBucketsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetBucketsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetBucketsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6526,7 +6509,7 @@ namespace Nest
 		public GetCategoriesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetCategoriesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetCategoriesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetCategoriesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6555,7 +6538,7 @@ namespace Nest
 		public GetDatafeedsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetDatafeedsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetDatafeedsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetDatafeedsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6584,7 +6567,7 @@ namespace Nest
 		public GetDatafeedStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetDatafeedStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetDatafeedStatsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetDatafeedStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6611,7 +6594,7 @@ namespace Nest
 		public GetInfluencersDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetInfluencersDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetInfluencersDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetInfluencersDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6640,7 +6623,7 @@ namespace Nest
 		public GetJobsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetJobsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetJobsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetJobsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6669,7 +6652,7 @@ namespace Nest
 		public GetJobStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetJobStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetJobStatsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetJobStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6700,7 +6683,7 @@ namespace Nest
 		public GetModelSnapshotsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetModelSnapshotsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetModelSnapshotsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetModelSnapshotsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6727,7 +6710,7 @@ namespace Nest
 		public GetAnomalyRecordsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetAnomalyRecordsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetAnomalyRecordsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetAnomalyRecordsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6754,7 +6737,7 @@ namespace Nest
 		public OpenJobDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public OpenJobDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public OpenJobDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public OpenJobDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6787,7 +6770,7 @@ namespace Nest
 		public PostJobDataDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PostJobDataDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PostJobDataDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PostJobDataDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6814,7 +6797,7 @@ namespace Nest
 		public PreviewDatafeedDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PreviewDatafeedDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PreviewDatafeedDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PreviewDatafeedDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6841,7 +6824,7 @@ namespace Nest
 		public PutDatafeedDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutDatafeedDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public PutDatafeedDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutDatafeedDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6868,7 +6851,7 @@ namespace Nest
 		public PutJobDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutJobDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public PutJobDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutJobDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6897,7 +6880,7 @@ namespace Nest
 		public RevertModelSnapshotDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RevertModelSnapshotDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RevertModelSnapshotDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RevertModelSnapshotDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6924,7 +6907,7 @@ namespace Nest
 		public StartDatafeedDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public StartDatafeedDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public StartDatafeedDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public StartDatafeedDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6951,7 +6934,7 @@ namespace Nest
 		public StopDatafeedDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public StopDatafeedDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public StopDatafeedDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public StopDatafeedDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -6978,7 +6961,7 @@ namespace Nest
 		public UpdateDatafeedDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateDatafeedDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public UpdateDatafeedDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public UpdateDatafeedDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -7005,7 +6988,7 @@ namespace Nest
 		public UpdateJobDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateJobDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public UpdateJobDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public UpdateJobDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -7034,7 +7017,7 @@ namespace Nest
 		public UpdateModelSnapshotDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateModelSnapshotDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public UpdateModelSnapshotDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public UpdateModelSnapshotDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -7055,7 +7038,7 @@ namespace Nest
 		public ValidateJobDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ValidateJobDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public ValidateJobDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ValidateJobDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -7076,14 +7059,14 @@ namespace Nest
 		public ValidateDetectorDescriptor<T> ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ValidateDetectorDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public ValidateDetectorDescriptor<T> SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ValidateDetectorDescriptor<T> FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-authenticate.html</pre></summary>
+	///<summary>descriptor for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
 	public partial class AuthenticateDescriptor  : RequestDescriptorBase<AuthenticateDescriptor,AuthenticateRequestParameters, IAuthenticateRequest>, IAuthenticateRequest
 	{ 
 			
@@ -7097,14 +7080,14 @@ namespace Nest
 		public AuthenticateDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public AuthenticateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public AuthenticateDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public AuthenticateDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityChangePassword <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-change-password.html</pre></summary>
+	///<summary>descriptor for XpackSecurityChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
 	public partial class ChangePasswordDescriptor  : RequestDescriptorBase<ChangePasswordDescriptor,ChangePasswordRequestParameters, IChangePasswordRequest>, IChangePasswordRequest
 	{ 
 		Name IChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -7129,14 +7112,14 @@ namespace Nest
 		public ChangePasswordDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ChangePasswordDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ChangePasswordDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ChangePasswordDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/x-pack/current/security-api-clear-cache.html</pre></summary>
+	///<summary>descriptor for XpackSecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
 	public partial class ClearCachedRealmsDescriptor  : RequestDescriptorBase<ClearCachedRealmsDescriptor,ClearCachedRealmsRequestParameters, IClearCachedRealmsRequest>, IClearCachedRealmsRequest
 	{ 
 		Names IClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
@@ -7159,14 +7142,14 @@ namespace Nest
 		public ClearCachedRealmsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClearCachedRealmsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClearCachedRealmsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClearCachedRealmsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-clear-role-cache</pre></summary>
+	///<summary>descriptor for XpackSecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-clear-role-cache</pre></summary>
 	public partial class ClearCachedRolesDescriptor  : RequestDescriptorBase<ClearCachedRolesDescriptor,ClearCachedRolesRequestParameters, IClearCachedRolesRequest>, IClearCachedRolesRequest
 	{ 
 		Names IClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
@@ -7186,14 +7169,14 @@ namespace Nest
 		public ClearCachedRolesDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClearCachedRolesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClearCachedRolesDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ClearCachedRolesDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityDeleteRole <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-delete-role</pre></summary>
+	///<summary>descriptor for XpackSecurityDeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-delete-role</pre></summary>
 	public partial class DeleteRoleDescriptor  : RequestDescriptorBase<DeleteRoleDescriptor,DeleteRoleRequestParameters, IDeleteRoleRequest>, IDeleteRoleRequest
 	{ 
 		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -7216,14 +7199,14 @@ namespace Nest
 		public DeleteRoleDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteRoleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteRoleDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteRoleDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityDeleteRoleMapping <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-delete-role-mapping</pre></summary>
+	///<summary>descriptor for XpackSecurityDeleteRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-delete-role-mapping</pre></summary>
 	public partial class DeleteRoleMappingDescriptor  : RequestDescriptorBase<DeleteRoleMappingDescriptor,DeleteRoleMappingRequestParameters, IDeleteRoleMappingRequest>, IDeleteRoleMappingRequest
 	{ 
 		Name IDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -7246,14 +7229,14 @@ namespace Nest
 		public DeleteRoleMappingDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteRoleMappingDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteRoleMappingDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteRoleMappingDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityDeleteUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-delete-user</pre></summary>
+	///<summary>descriptor for XpackSecurityDeleteUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-delete-user</pre></summary>
 	public partial class DeleteUserDescriptor  : RequestDescriptorBase<DeleteUserDescriptor,DeleteUserRequestParameters, IDeleteUserRequest>, IDeleteUserRequest
 	{ 
 		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -7276,14 +7259,14 @@ namespace Nest
 		public DeleteUserDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteUserDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteUserDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityDisableUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-disable-user.html</pre></summary>
+	///<summary>descriptor for XpackSecurityDisableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-disable-user</pre></summary>
 	public partial class DisableUserDescriptor  : RequestDescriptorBase<DisableUserDescriptor,DisableUserRequestParameters, IDisableUserRequest>, IDisableUserRequest
 	{ 
 		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -7308,14 +7291,14 @@ namespace Nest
 		public DisableUserDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DisableUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DisableUserDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DisableUserDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityEnableUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-enable-user.html</pre></summary>
+	///<summary>descriptor for XpackSecurityEnableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-enable-user</pre></summary>
 	public partial class EnableUserDescriptor  : RequestDescriptorBase<EnableUserDescriptor,EnableUserRequestParameters, IEnableUserRequest>, IEnableUserRequest
 	{ 
 		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -7340,14 +7323,14 @@ namespace Nest
 		public EnableUserDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public EnableUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public EnableUserDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public EnableUserDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityGetRole <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-get-role</pre></summary>
+	///<summary>descriptor for XpackSecurityGetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-get-role</pre></summary>
 	public partial class GetRoleDescriptor  : RequestDescriptorBase<GetRoleDescriptor,GetRoleRequestParameters, IGetRoleRequest>, IGetRoleRequest
 	{ 
 		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -7369,14 +7352,14 @@ namespace Nest
 		public GetRoleDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetRoleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetRoleDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetRoleDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-get-role-mapping</pre></summary>
+	///<summary>descriptor for XpackSecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-get-role-mapping</pre></summary>
 	public partial class GetRoleMappingDescriptor  : RequestDescriptorBase<GetRoleMappingDescriptor,GetRoleMappingRequestParameters, IGetRoleMappingRequest>, IGetRoleMappingRequest
 	{ 
 		Name IGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -7398,14 +7381,14 @@ namespace Nest
 		public GetRoleMappingDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetRoleMappingDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetRoleMappingDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetRoleMappingDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityGetToken <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-get-token</pre></summary>
+	///<summary>descriptor for XpackSecurityGetToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-get-token</pre></summary>
 	public partial class GetUserAccessTokenDescriptor  : RequestDescriptorBase<GetUserAccessTokenDescriptor,GetUserAccessTokenRequestParameters, IGetUserAccessTokenRequest>, IGetUserAccessTokenRequest
 	{ 
 			
@@ -7419,14 +7402,14 @@ namespace Nest
 		public GetUserAccessTokenDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetUserAccessTokenDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetUserAccessTokenDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetUserAccessTokenDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityGetUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-get-user</pre></summary>
+	///<summary>descriptor for XpackSecurityGetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-get-user</pre></summary>
 	public partial class GetUserDescriptor  : RequestDescriptorBase<GetUserDescriptor,GetUserRequestParameters, IGetUserRequest>, IGetUserRequest
 	{ 
 		Names IGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
@@ -7448,14 +7431,14 @@ namespace Nest
 		public GetUserDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetUserDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetUserDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityInvalidateToken <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-invalidate-token</pre></summary>
+	///<summary>descriptor for XpackSecurityInvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-invalidate-token</pre></summary>
 	public partial class InvalidateUserAccessTokenDescriptor  : RequestDescriptorBase<InvalidateUserAccessTokenDescriptor,InvalidateUserAccessTokenRequestParameters, IInvalidateUserAccessTokenRequest>, IInvalidateUserAccessTokenRequest
 	{ 
 			
@@ -7469,14 +7452,14 @@ namespace Nest
 		public InvalidateUserAccessTokenDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public InvalidateUserAccessTokenDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public InvalidateUserAccessTokenDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public InvalidateUserAccessTokenDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityPutRole <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-put-role</pre></summary>
+	///<summary>descriptor for XpackSecurityPutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-put-role</pre></summary>
 	public partial class PutRoleDescriptor  : RequestDescriptorBase<PutRoleDescriptor,PutRoleRequestParameters, IPutRoleRequest>, IPutRoleRequest
 	{ 
 		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -7499,14 +7482,14 @@ namespace Nest
 		public PutRoleDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutRoleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutRoleDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutRoleDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityPutRoleMapping <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-put-role-mapping</pre></summary>
+	///<summary>descriptor for XpackSecurityPutRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-put-role-mapping</pre></summary>
 	public partial class PutRoleMappingDescriptor  : RequestDescriptorBase<PutRoleMappingDescriptor,PutRoleMappingRequestParameters, IPutRoleMappingRequest>, IPutRoleMappingRequest
 	{ 
 		Name IPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -7529,14 +7512,14 @@ namespace Nest
 		public PutRoleMappingDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutRoleMappingDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutRoleMappingDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutRoleMappingDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityPutUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-put-user</pre></summary>
+	///<summary>descriptor for XpackSecurityPutUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-put-user</pre></summary>
 	public partial class PutUserDescriptor  : RequestDescriptorBase<PutUserDescriptor,PutUserRequestParameters, IPutUserRequest>, IPutUserRequest
 	{ 
 		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -7559,7 +7542,7 @@ namespace Nest
 		public PutUserDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutUserDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutUserDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -7593,7 +7576,7 @@ namespace Nest
 		public AcknowledgeWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public AcknowledgeWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public AcknowledgeWatchDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public AcknowledgeWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -7623,7 +7606,7 @@ namespace Nest
 		public ActivateWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ActivateWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ActivateWatchDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ActivateWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -7653,7 +7636,7 @@ namespace Nest
 		public DeactivateWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeactivateWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeactivateWatchDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeactivateWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -7683,7 +7666,7 @@ namespace Nest
 		public DeleteWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteWatchDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -7715,7 +7698,7 @@ namespace Nest
 		public ExecuteWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ExecuteWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ExecuteWatchDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ExecuteWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -7742,7 +7725,7 @@ namespace Nest
 		public GetWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetWatchDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GetWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -7775,7 +7758,7 @@ namespace Nest
 		public PutWatchDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutWatchDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutWatchDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutWatchDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -7796,7 +7779,7 @@ namespace Nest
 		public RestartWatcherDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RestartWatcherDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RestartWatcherDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public RestartWatcherDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -7817,7 +7800,7 @@ namespace Nest
 		public StartWatcherDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public StartWatcherDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public StartWatcherDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public StartWatcherDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -7836,6 +7819,9 @@ namespace Nest
 		public WatcherStatsDescriptor WatcherStatsMetric(WatcherStatsMetric watcherStatsMetric) => Assign(a=>a.RouteValues.Optional("watcher_stats_metric", (Metrics)watcherStatsMetric));
 
 	
+		///<summary>Emits stack traces of currently running watches</summary>
+		public WatcherStatsDescriptor EmitStacktraces(bool emit_stacktraces = true) => AssignParam(p=>p.EmitStacktraces(emit_stacktraces));
+
 		///<summary>Pretty format the returned JSON response.</summary>
 		public WatcherStatsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 
@@ -7846,7 +7832,7 @@ namespace Nest
 		public WatcherStatsDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public WatcherStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public WatcherStatsDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public WatcherStatsDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));
@@ -7867,7 +7853,7 @@ namespace Nest
 		public StopWatcherDescriptor ErrorTrace(bool error_trace = true) => AssignParam(p=>p.ErrorTrace(error_trace));
 
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public StopWatcherDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public StopWatcherDescriptor SourceQueryString(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public StopWatcherDescriptor FilterPath(params string[] filter_path) => AssignParam(p=>p.FilterPath(filter_path));

@@ -212,6 +212,12 @@ namespace Nest
 							this.Accept(t.Fields);
 						});
 						break;
+					case FieldType.Join:
+						this.Visit<IJoinProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+						});
+						break;
 				}
 			}
 		}

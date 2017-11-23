@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Bogus;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -10,8 +8,6 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Search.Request
@@ -20,6 +16,7 @@ namespace Tests.Search.Request
 	public interface IRoyal
 	{
 		string Name { get; set; }
+		JoinField Join { get; set; }
 	}
 
 	[ElasticsearchType(IdProperty = "Name")]
@@ -27,16 +24,26 @@ namespace Tests.Search.Request
 		where TRoyal : class, IRoyal
 	{
 		protected static int IdState = 0;
+		public virtual JoinField Join { get; set; }
 		public string Name { get; set; }
+
 		public static Faker<TRoyal> Generator { get; } =
 			new Faker<TRoyal>()
 				.RuleFor(p => p.Name, f => f.Person.Company.Name + IdState++);
 	}
 
+	public abstract class RoyalBase<TRoyal, TSubject> : RoyalBase<TRoyal>
+		where TRoyal : class, IRoyal
+		where TSubject : class, IRoyal
+	{
+	}
+
 	public class King : RoyalBase<King>
 	{
+		public override JoinField Join { get; set; } = JoinField.Root<King>();
 		public List<King> Foes { get; set; }
 	}
+
 	public class Prince : RoyalBase<Prince> { }
 	public class Duke : RoyalBase<Duke> { }
 	public class Earl : RoyalBase<Earl> { }
@@ -48,56 +55,91 @@ namespace Tests.Search.Request
 		private readonly IElasticClient _client;
 		private readonly IndexName _index;
 
-		public RoyalSeeder(IElasticClient client, IndexName index) { this._client = client; this._index = index; }
+		public RoyalSeeder(IElasticClient client, IndexName index)
+		{
+			this._client = client;
+			this._index = index;
+		}
+
+		public static readonly string RoyalType = "royal";
+
+		private string AliasFor<TRoyal>() where TRoyal : IRoyal => $"{this._index}-{typeof(TRoyal).Name.ToLowerInvariant()}";
+
+		private IAlias AliasFilterFor<TRoyal>(AliasDescriptor a) where TRoyal : class, IRoyal =>
+			a.Filter<TRoyal>(f => f.Term(p => p.Join, Infer.Relation<TRoyal>()));
 
 		public void Seed()
 		{
-			var create = this._client.CreateIndex(this._index, c => c
+			var create = this._client.CreateIndex(_index, c => c
 				.Settings(s => s
 					.NumberOfReplicas(0)
 					.NumberOfShards(1)
-					.Setting("mapping.single_type", "false")
+				)
+				.Aliases(a => a
+					.Alias(AliasFor<King>(), AliasFilterFor<King>)
+					.Alias(AliasFor<Prince>(), AliasFilterFor<Prince>)
+					.Alias(AliasFor<Duke>(), AliasFilterFor<Duke>)
+					.Alias(AliasFor<Earl>(), AliasFilterFor<Earl>)
+					.Alias(AliasFor<Baron>(), AliasFilterFor<Baron>)
 				)
 				.Mappings(map => map
-					.Map<King>(m => m.AutoMap()
+					.Map<King>(RoyalType, m => m
+
+						.AutoMap()
 						.Properties(props =>
 							RoyalProps(props)
-							.Nested<King>(n => n.Name(p => p.Foes).AutoMap())
+								.Nested<King>(n => n.Name(p => p.Foes).AutoMap())
+								.Join(j => j
+									.Name(p => p.Join)
+									.Relations(r => r
+										.Join<King, Prince>()
+										.Join<Prince, Duke>()
+										.Join<Duke, Earl>()
+										.Join<Earl, Baron>()
+									)
+								)
 						)
 					)
-					.Map<Prince>(m => m.AutoMap().Properties(RoyalProps).Parent<King>())
-					.Map<Duke>(m => m.AutoMap().Properties(RoyalProps).Parent<Prince>())
-					.Map<Earl>(m => m.AutoMap().Properties(RoyalProps).Parent<Duke>())
-					.Map<Baron>(m => m.AutoMap().Properties(RoyalProps).Parent<Earl>())
-				 )
+				)
 			);
-
 			var kings = King.Generator.Generate(2)
 				.Select(k =>
 				{
-					k.Foes = King.Generator.Generate(2).ToList();
+					var foes = King.Generator.Generate(2).Select(f =>
+					{
+						f.Join = null;
+						return f;
+					}).ToList();
+					k.Foes = foes;
 					return k;
 				});
 
 			var bulk = new BulkDescriptor();
 			IndexAll(bulk, () => kings, indexChildren: king =>
-				 IndexAll(bulk, () => Prince.Generator.Generate(2), king.Name, prince =>
-					 IndexAll(bulk, () => Duke.Generator.Generate(3), prince.Name, duke =>
-						 IndexAll(bulk, () => Earl.Generator.Generate(5), duke.Name, earl =>
-							 IndexAll(bulk, () => Baron.Generator.Generate(1), earl.Name)
-						 )
-					 )
-				 )
+				IndexAll(bulk, () => Prince.Generator.Generate(2), king, prince =>
+					IndexAll(bulk, () => Duke.Generator.Generate(3), prince, duke =>
+						IndexAll(bulk, () => Earl.Generator.Generate(5), duke, earl =>
+							IndexAll(bulk, () => Baron.Generator.Generate(1), earl)
+						)
+					)
+				)
 			);
 			this._client.Bulk(bulk);
 			this._client.Refresh(this._index);
 		}
 
+
 		private PropertiesDescriptor<TRoyal> RoyalProps<TRoyal>(PropertiesDescriptor<TRoyal> props) where TRoyal : class, IRoyal =>
 			props.Keyword(s => s.Name(p => p.Name));
 
-		private void IndexAll<TRoyal>(BulkDescriptor bulk, Func<IEnumerable<TRoyal>> create, string parent = null, Action<TRoyal> indexChildren = null)
+		private void IndexAll<TRoyal>(BulkDescriptor bulk, Func<IEnumerable<TRoyal>> create, Action<TRoyal> indexChildren = null)
+			where TRoyal : class, IRoyal =>
+			IndexAll<TRoyal, TRoyal>(bulk, create, null, indexChildren);
+
+		private void IndexAll<TRoyal, TParent>(BulkDescriptor bulk, Func<IEnumerable<TRoyal>> create, TParent parent = null,
+			Action<TRoyal> indexChildren = null)
 			where TRoyal : class, IRoyal
+			where TParent : class, IRoyal
 		{
 			var current = create();
 			//looping twice horrible but easy to debug :)
@@ -105,7 +147,9 @@ namespace Tests.Search.Request
 			foreach (var royal in royals)
 			{
 				var royal1 = royal;
-				bulk.Index<TRoyal>(i => i.Document(royal1).Index(this._index).Parent(parent));
+				if (parent == null) royal.Join = JoinField.Root<TRoyal>();
+				if (royal.Join == null) royal.Join = JoinField.Link<TRoyal, TParent>(parent);
+				bulk.Index<TRoyal>(i => i.Document(royal1).Index(_index).Type(RoyalType).Routing(parent == null ? royal.Name : parent.Name));
 			}
 			if (indexChildren == null) return;
 			foreach (var royal in royals)
@@ -132,10 +176,13 @@ namespace Tests.Search.Request
 	*
 	* See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.html[Inner hits] for more detail.
 	*/
-	public abstract class InnerHitsApiTestsBase<TRoyal> : ApiIntegrationTestBase<IntrusiveOperationCluster, ISearchResponse<TRoyal>, ISearchRequest, SearchDescriptor<TRoyal>, SearchRequest<TRoyal>>
+	public abstract class InnerHitsApiTestsBase<TRoyal> : ApiIntegrationTestBase<IntrusiveOperationCluster, ISearchResponse<TRoyal>,
+		ISearchRequest, SearchDescriptor<TRoyal>, SearchRequest<TRoyal>>
 		where TRoyal : class, IRoyal
 	{
-		protected InnerHitsApiTestsBase(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected InnerHitsApiTestsBase(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+		}
 
 		protected abstract IndexName Index { get; }
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => new RoyalSeeder(this.Client, Index).Seed();
@@ -150,7 +197,7 @@ namespace Tests.Search.Request
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/{Index}/{this.Client.Infer.TypeName<TRoyal>()}/_search";
+		protected override string UrlPath => $"/{Index}/{RoyalSeeder.RoyalType}/_search";
 
 		protected override bool SupportsDeserialization => true;
 
@@ -162,7 +209,9 @@ namespace Tests.Search.Request
 	*/
 	public class QueryInnerHitsApiTests : InnerHitsApiTestsBase<King>
 	{
-		public QueryInnerHitsApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public QueryInnerHitsApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+		}
 
 		private static IndexName IndexName { get; } = RandomString();
 		protected override IndexName Index => QueryInnerHitsApiTests.IndexName;
@@ -173,28 +222,34 @@ namespace Tests.Search.Request
 			{
 				@bool = new
 				{
-					should = new object[] {
-					new {
-						has_child = new {
-							type = "prince",
-							query = new { match_all = new {} },
-							inner_hits = new { name = "princes" }
-						}
-					},
-					new {
-						nested = new {
-							query = new { match_all = new {} },
-							path = "foes",
-							inner_hits = new {}
+					should = new object[]
+					{
+						new
+						{
+							has_child = new
+							{
+								type = "prince",
+								query = new {match_all = new { }},
+								inner_hits = new {name = "princes"}
+							}
+						},
+						new
+						{
+							nested = new
+							{
+								query = new {match_all = new { }},
+								path = "foes",
+								inner_hits = new { }
+							}
 						}
 					}
-				}
 				}
 			}
 		};
 
 		protected override Func<SearchDescriptor<King>, ISearchRequest> Fluent => s => s
 			.Index(Index)
+			.Type(RoyalSeeder.RoyalType)
 			.Query(q =>
 				q.HasChild<Prince>(hc => hc
 					.Query(hcq => hcq.MatchAll())
@@ -206,13 +261,13 @@ namespace Tests.Search.Request
 				)
 			);
 
-		protected override SearchRequest<King> Initializer => new SearchRequest<King>(Index, typeof(King))
+		protected override SearchRequest<King> Initializer => new SearchRequest<King>(Index, RoyalSeeder.RoyalType)
 		{
 			Query = new HasChildQuery
 			{
 				Type = typeof(Prince),
 				Query = new MatchAllQuery(),
-				InnerHits = new InnerHits { Name = "princes" }
+				InnerHits = new InnerHits {Name = "princes"}
 			} || new NestedQuery
 			{
 				Path = Field<King>(p => p.Foes),
@@ -231,7 +286,7 @@ namespace Tests.Search.Request
 
 				var foes = hit.InnerHits["foes"].Documents<King>();
 				foes.Should().NotBeEmpty();
-			};
+			}
 		}
 	}
 }

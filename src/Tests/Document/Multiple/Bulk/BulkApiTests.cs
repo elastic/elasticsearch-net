@@ -53,19 +53,19 @@ namespace Tests.Document.Multiple.Bulk
 
 		protected override object ExpectJson => new object[]
 		{
-			new Dictionary<string, object>{ { "index", new {  _type = "project", _id = Project.Instance.Name, pipeline="pipeline" } } },
+			new Dictionary<string, object>{ { "index", new {  _type = "doc", _id = Project.Instance.Name, pipeline="pipeline" } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object>{ { "update", new { _type="project", _id = Project.Instance.Name } } },
+			new Dictionary<string, object>{ { "update", new { _type="doc", _id = Project.Instance.Name } } },
 			new { doc = new { leadDeveloper = new { firstName = "martijn" } } } ,
-			new Dictionary<string, object>{ { "create", new { _type="project", _id = Project.Instance.Name + "1" } } },
+			new Dictionary<string, object>{ { "create", new { _type="doc", _id = Project.Instance.Name + "1" } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object>{ { "delete", new { _type="project", _id = Project.Instance.Name + "1" } } },
-			new Dictionary<string, object>{ { "create", new { _type="project", _id = Project.Instance.Name + "2" } } },
+			new Dictionary<string, object>{ { "delete", new { _type="doc", _id = Project.Instance.Name + "1" } } },
+			new Dictionary<string, object>{ { "create", new { _type="doc", _id = Project.Instance.Name + "2" } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object>{ { "update", new { _type="project", _id = Project.Instance.Name + "2" } } },
+			new Dictionary<string, object>{ { "update", new { _type="doc", _id = Project.Instance.Name + "2" } } },
 			new Dictionary<string, object>{ { "script", new
 			{
-				inline= "ctx._source.numberOfCommits = params.commits",
+				source = "ctx._source.numberOfCommits = params.commits",
 				@params = new { commits = 30 },
 				lang = "painless"
 			} } },
@@ -82,7 +82,7 @@ namespace Tests.Document.Multiple.Bulk
 			.Update<Project>(b => b
 				.Id(Project.Instance.Name + "2")
 				.Script(s => s
-					.Inline("ctx._source.numberOfCommits = params.commits")
+					.Source("ctx._source.numberOfCommits = params.commits")
 					.Params(p => p.Add("commits", 30))
 					.Lang("painless")
 				)
@@ -128,7 +128,7 @@ namespace Tests.Document.Multiple.Bulk
 			foreach (var item in response.Items)
 			{
 				item.Index.Should().Be(CallIsolatedValue);
-				item.Type.Should().Be("project");
+				item.Type.Should().Be("doc");
 				item.Status.Should().BeGreaterThan(100);
 				item.Version.Should().BeGreaterThan(0);
 				item.Id.Should().NotBeNullOrWhiteSpace();
@@ -136,6 +136,8 @@ namespace Tests.Document.Multiple.Bulk
 				item.Shards.Should().NotBeNull();
 				item.Shards.Total.Should().BeGreaterThan(0);
 				item.Shards.Successful.Should().BeGreaterThan(0);
+				item.SequenceNumber.Should().BeGreaterOrEqualTo(0);
+				item.PrimaryTerm.Should().BeGreaterThan(0);
 			}
 
 			var project1 = this.Client.Source<Project>(Project.Instance.Name, p => p.Index(CallIsolatedValue));

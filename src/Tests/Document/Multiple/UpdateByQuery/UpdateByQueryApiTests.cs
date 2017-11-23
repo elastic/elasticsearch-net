@@ -161,13 +161,13 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			new
 			{
 				query = new { match = new { flag = new { query = "bar" } } },
-				script = new { inline = "ctx._source.text = 'x'" }
+				script = new { source = "ctx._source.text = 'x'" }
 			};
 
 		protected override Func<UpdateByQueryDescriptor<Test>, IUpdateByQueryRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
 			.Query(q => q.Match(m => m.Field(p => p.Flag).Query("bar")))
-			.Script(ss => ss.Inline(_script))
+			.Script(ss => ss.Source(_script))
 			;
 
 		protected override UpdateByQueryRequest Initializer => new UpdateByQueryRequest(CallIsolatedValue, Type<Test>())

@@ -11,39 +11,50 @@ namespace Nest
 		[JsonProperty("file")]
 		string File { get; set; }
 
-		[JsonProperty("inline")]
+		[JsonProperty("source")]
+		string Source { get; set; }
+
+		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
+		[JsonIgnore]
 		string Inline { get; set; }
 
 		[JsonProperty("id")]
 		Id Id { get; set; }
 
 		[JsonProperty("params")]
-		IDictionary<string, object> Params { get; set; } 
+		IDictionary<string, object> Params { get; set; }
 	}
 
 	public class TemplateQuery : QueryBase, ITemplateQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
 		public string File { get; set; }
-		public string Inline { get; set; }
+		/// <summary> An inline script to be executed </summary>
+		public string Source { get; set; }
+		/// <summary> An inline script to be executed </summary>
+		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
+		public string Inline { get => this.Source; set => this.Source = value; }
 		public Id Id { get; set; }
 		public IDictionary<string, object> Params { get; set;}
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Template = this;
-		internal static bool IsConditionless(ITemplateQuery q) => q.File.IsNullOrEmpty() && q.Id == null && q.Inline.IsNullOrEmpty();
+		internal static bool IsConditionless(ITemplateQuery q) => q.File.IsNullOrEmpty() && q.Id == null && q.Source.IsNullOrEmpty();
 	}
 
-	public class TemplateQueryDescriptor<T> 
+	public class TemplateQueryDescriptor<T>
 		: QueryDescriptorBase<TemplateQueryDescriptor<T>, ITemplateQuery>
 		, ITemplateQuery where T : class
 	{
 		protected override bool Conditionless => TemplateQuery.IsConditionless(this);
 		string ITemplateQuery.File { get; set; }
-		string ITemplateQuery.Inline { get; set; }
+		string ITemplateQuery.Source { get; set; }
+		string ITemplateQuery.Inline { get => Self.Source; set => Self.Source = value; }
 		Id ITemplateQuery.Id { get; set; }
 		IDictionary<string, object> ITemplateQuery.Params { get; set; }
 
+		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
 		public TemplateQueryDescriptor<T> Inline(string script) => Assign(a => a.Inline = script);
+		public TemplateQueryDescriptor<T> Source(string script) => Assign(a => a.Source = script);
 
 		public TemplateQueryDescriptor<T> File(string file) => Assign(a => a.File = file);
 

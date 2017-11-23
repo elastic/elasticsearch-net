@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Defines the format of the input data when you send data to the Machine Learning job.
+	/// Defines the format of the input data when you send data to the machine learning job.
 	/// Note that when configure a datafeed, these properties are automatically set.
 	/// </summary>
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<DataDescription>))]

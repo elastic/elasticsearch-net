@@ -5,7 +5,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	/// <summary>
-	/// The state of a Machine Learning job
+	/// The state of a machine learning job
 	/// </summary>
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum JobState

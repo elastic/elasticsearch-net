@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -33,7 +34,6 @@ namespace Tests.Reproduce
 			public TimeSpan EndTime { get; set; }
 		}
 
-		[I]
 		public void CanDeserializeNumberToTimeSpanInInnerHits()
 		{
 			var indexName = "sample";

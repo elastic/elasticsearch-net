@@ -223,16 +223,6 @@ namespace Elasticsearch.Net
 		All = 1 << 7
 	}
 	
-	[Flags]public enum Feature
-	{
-	[EnumMember(Value = "_settings")]
-		Settings = 1 << 0,
-		[EnumMember(Value = "_mappings")]
-		Mappings = 1 << 1,
-		[EnumMember(Value = "_aliases")]
-		Aliases = 1 << 2
-	}
-	
 	[Flags]public enum IndicesStatsMetric
 	{
 	[EnumMember(Value = "completion")]
@@ -351,6 +341,14 @@ namespace Elasticsearch.Net
 		Suggest = 1 << 14,
 		[EnumMember(Value = "_all")]
 		All = 1 << 15
+	}
+	
+	[Flags]public enum NodesUsageMetric
+	{
+	[EnumMember(Value = "rest_actions")]
+		RestActions = 1 << 0,
+		[EnumMember(Value = "_all")]
+		All = 1 << 1
 	}
 	
 	[Flags]public enum WatcherStatsMetric
@@ -601,16 +599,6 @@ namespace Elasticsearch.Net
 			return string.Join(",", list);
 		}
 		
-		public static string GetStringValue(this Feature enumValue)
-		{
-		
-			var list = new List<string>();
-			if ((enumValue & Feature.Settings) != 0) list.Add("_settings");
-			if ((enumValue & Feature.Mappings) != 0) list.Add("_mappings");
-			if ((enumValue & Feature.Aliases) != 0) list.Add("_aliases");
-			return string.Join(",", list);
-		}
-		
 		public static string GetStringValue(this IndicesStatsMetric enumValue)
 		{
 		
@@ -691,6 +679,15 @@ namespace Elasticsearch.Net
 			return string.Join(",", list);
 		}
 		
+		public static string GetStringValue(this NodesUsageMetric enumValue)
+		{
+		
+	        if ((enumValue & NodesUsageMetric.All) != 0) return "_all";
+			var list = new List<string>();
+			if ((enumValue & NodesUsageMetric.RestActions) != 0) list.Add("rest_actions");
+			return string.Join(",", list);
+		}
+		
 		public static string GetStringValue(this WatcherStatsMetric enumValue)
 		{
 		
@@ -724,11 +721,11 @@ namespace Elasticsearch.Net
 			EnumStringResolvers.TryAdd(typeof(SuggestMode), (e) => GetStringValue((SuggestMode)e));
 			EnumStringResolvers.TryAdd(typeof(GroupBy), (e) => GetStringValue((GroupBy)e));
 			EnumStringResolvers.TryAdd(typeof(ClusterStateMetric), (e) => GetStringValue((ClusterStateMetric)e));
-			EnumStringResolvers.TryAdd(typeof(Feature), (e) => GetStringValue((Feature)e));
 			EnumStringResolvers.TryAdd(typeof(IndicesStatsMetric), (e) => GetStringValue((IndicesStatsMetric)e));
 			EnumStringResolvers.TryAdd(typeof(NodesInfoMetric), (e) => GetStringValue((NodesInfoMetric)e));
 			EnumStringResolvers.TryAdd(typeof(NodesStatsMetric), (e) => GetStringValue((NodesStatsMetric)e));
 			EnumStringResolvers.TryAdd(typeof(NodesStatsIndexMetric), (e) => GetStringValue((NodesStatsIndexMetric)e));
+			EnumStringResolvers.TryAdd(typeof(NodesUsageMetric), (e) => GetStringValue((NodesUsageMetric)e));
 			EnumStringResolvers.TryAdd(typeof(WatcherStatsMetric), (e) => GetStringValue((WatcherStatsMetric)e));
 		}
 

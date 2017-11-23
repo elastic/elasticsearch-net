@@ -24,7 +24,7 @@ namespace Tests.Search.Validate
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/project/_validate/query";
+		protected override string UrlPath => "/project/doc/_validate/query";
 	}
 
 	public class ValidateInvalidQueryApiTests
@@ -61,7 +61,7 @@ namespace Tests.Search.Validate
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/project/_validate/query";
+		protected override string UrlPath => "/project/doc/_validate/query";
 
 		protected override void ExpectResponse(IValidateQueryResponse response)
 		{

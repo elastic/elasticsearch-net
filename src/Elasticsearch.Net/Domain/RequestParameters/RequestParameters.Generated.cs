@@ -919,6 +919,10 @@ namespace Elasticsearch.Net
 		public CatSegmentsRequestParameters Format(string format) => this.AddQueryString("format", format);
 		
 		
+		///<summary>The unit in which to display byte values</summary>
+		public CatSegmentsRequestParameters Bytes(Bytes bytes) => this.AddQueryString("bytes", bytes);
+		
+		
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatSegmentsRequestParameters H(params string[] h) => this.AddQueryString("h", h);
 		
@@ -967,6 +971,10 @@ namespace Elasticsearch.Net
 		
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatShardsRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
+		
+		///<summary>The unit in which to display byte values</summary>
+		public CatShardsRequestParameters Bytes(Bytes bytes) => this.AddQueryString("bytes", bytes);
 		
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -1522,6 +1530,36 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for ClusterRemoteInfo
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html
+	///</pre>
+	///</summary>
+	public class RemoteInfoRequestParameters : FluentRequestParameters<RemoteInfoRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public RemoteInfoRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public RemoteInfoRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public RemoteInfoRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public RemoteInfoRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public RemoteInfoRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for ClusterReroute
 	///<pre>
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html
@@ -1697,8 +1735,8 @@ namespace Elasticsearch.Net
 		public CountRequestParameters Preference(string preference) => this.AddQueryString("preference", preference);
 		
 		
-		///<summary>Specific routing value</summary>
-		public CountRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
+		///<summary>A comma-separated list of specific routing values</summary>
+		public CountRequestParameters Routing(params string[] routing) => this.AddQueryString("routing", routing);
 		
 		
 		///<summary>Query in the Lucene query string syntax</summary>
@@ -1723,6 +1761,10 @@ namespace Elasticsearch.Net
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public CountRequestParameters Lenient(bool lenient) => this.AddQueryString("lenient", lenient);
+		
+		
+		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
+		public CountRequestParameters TerminateAfter(long terminate_after) => this.AddQueryString("terminate_after", terminate_after);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -2041,6 +2083,14 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
+		///<summary>Explicit operation timeout</summary>
+		public DeleteScriptRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		
+		
+		///<summary>Specify timeout for connection to master</summary>
+		public DeleteScriptRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public DeleteScriptRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
 		
@@ -2059,36 +2109,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public DeleteScriptRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
-	///<summary>Request parameters descriptor for DeleteTemplate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html
-	///</pre>
-	///</summary>
-	public class DeleteSearchTemplateRequestParameters : FluentRequestParameters<DeleteSearchTemplateRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteSearchTemplateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
-		
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteSearchTemplateRequestParameters Human(bool human) => this.AddQueryString("human", human);
-		
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteSearchTemplateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
-		
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteSearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteSearchTemplateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2168,7 +2188,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for ExistsSource
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/5.5/docs-get.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html
 	///</pre>
 	///</summary>
 	public class SourceExistsRequestParameters : FluentRequestParameters<SourceExistsRequestParameters> 
@@ -2320,7 +2340,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for FieldCaps
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/5.5/search-field-caps.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html
 	///</pre>
 	///</summary>
 	public class FieldCapabilitiesRequestParameters : FluentRequestParameters<FieldCapabilitiesRequestParameters> 
@@ -2361,52 +2381,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public FieldCapabilitiesRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
-	///<summary>Request parameters descriptor for FieldStats
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html
-	///</pre>
-	///</summary>
-	public class FieldStatsRequestParameters : FluentRequestParameters<FieldStatsRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		
-		///<summary>Defines if field stats should be returned on a per index level or on a cluster wide level</summary>
-		public FieldStatsRequestParameters Level(Level level) => this.AddQueryString("level", level);
-		
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public FieldStatsRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
-		
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public FieldStatsRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
-		
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public FieldStatsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
-		
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public FieldStatsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
-		
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public FieldStatsRequestParameters Human(bool human) => this.AddQueryString("human", human);
-		
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public FieldStatsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
-		
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public FieldStatsRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public FieldStatsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2581,36 +2555,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public SourceRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
-	///<summary>Request parameters descriptor for GetTemplate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html
-	///</pre>
-	///</summary>
-	public class GetSearchTemplateRequestParameters : FluentRequestParameters<GetSearchTemplateRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetSearchTemplateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
-		
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public GetSearchTemplateRequestParameters Human(bool human) => this.AddQueryString("human", human);
-		
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetSearchTemplateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
-		
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetSearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetSearchTemplateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2911,6 +2855,18 @@ namespace Elasticsearch.Net
 		
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteIndexRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		
+		
+		///<summary>Ignore unavailable indexes (default: false)</summary>
+		public DeleteIndexRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
+		
+		
+		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
+		public DeleteIndexRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
+		
+		
+		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
+		public DeleteIndexRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -4522,6 +4478,36 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for IngestProcessorGrok
+	///<pre>
+	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html
+	///</pre>
+	///</summary>
+	public class GrokProcessorPatternsRequestParameters : FluentRequestParameters<GrokProcessorPatternsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public GrokProcessorPatternsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public GrokProcessorPatternsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public GrokProcessorPatternsRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public GrokProcessorPatternsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public GrokProcessorPatternsRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for IngestPutPipeline
 	///<pre>
 	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html
@@ -4675,6 +4661,10 @@ namespace Elasticsearch.Net
 		
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public MultiSearchRequestParameters TypedKeys(bool typed_keys) => this.AddQueryString("typed_keys", typed_keys);
+		
+		
+		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the&#160;number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it&#39;s rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
+		public MultiSearchRequestParameters PreFilterShardSize(long pre_filter_shard_size) => this.AddQueryString("pre_filter_shard_size", pre_filter_shard_size);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -4972,6 +4962,40 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for NodesUsageForAll
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html
+	///</pre>
+	///</summary>
+	public class NodesUsageRequestParameters : FluentRequestParameters<NodesUsageRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Whether to return time and byte values in human-readable format.</summary>
+		public NodesUsageRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Explicit operation timeout</summary>
+		public NodesUsageRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public NodesUsageRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public NodesUsageRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public NodesUsageRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public NodesUsageRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for Ping
 	///<pre>
 	///http://www.elastic.co/guide/
@@ -5011,6 +5035,18 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
+		///<summary>Explicit operation timeout</summary>
+		public PutScriptRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		
+		
+		///<summary>Specify timeout for connection to master</summary>
+		public PutScriptRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		
+		
+		///<summary>Context name to compile script against</summary>
+		public PutScriptRequestParameters Context(string context) => this.AddQueryString("context", context);
+		
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public PutScriptRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
 		
@@ -5029,36 +5065,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public PutScriptRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
-	///<summary>Request parameters descriptor for PutTemplate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html
-	///</pre>
-	///</summary>
-	public class PutSearchTemplateRequestParameters : FluentRequestParameters<PutSearchTemplateRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutSearchTemplateRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
-		
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public PutSearchTemplateRequestParameters Human(bool human) => this.AddQueryString("human", human);
-		
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutSearchTemplateRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
-		
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutSearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutSearchTemplateRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5143,36 +5149,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public ReindexRethrottleRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
-	///<summary>Request parameters descriptor for RemoteInfo
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/5.5/cluster-remote-info.html
-	///</pre>
-	///</summary>
-	public class RemoteInfoRequestParameters : FluentRequestParameters<RemoteInfoRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public RemoteInfoRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
-		
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public RemoteInfoRequestParameters Human(bool human) => this.AddQueryString("human", human);
-		
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RemoteInfoRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
-		
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RemoteInfoRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RemoteInfoRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -5317,6 +5293,10 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters SuggestText(string suggest_text) => this.AddQueryString("suggest_text", suggest_text);
 		
 		
+		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
+		public SearchRequestParameters TrackTotalHits(bool track_total_hits) => this.AddQueryString("track_total_hits", track_total_hits);
+		
+		
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public SearchRequestParameters TypedKeys(bool typed_keys) => this.AddQueryString("typed_keys", typed_keys);
 		
@@ -5327,6 +5307,14 @@ namespace Elasticsearch.Net
 		
 		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
 		public SearchRequestParameters BatchedReduceSize(long batched_reduce_size) => this.AddQueryString("batched_reduce_size", batched_reduce_size);
+		
+		
+		///<summary>The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
+		public SearchRequestParameters MaxConcurrentShardRequests(long max_concurrent_shard_requests) => this.AddQueryString("max_concurrent_shard_requests", max_concurrent_shard_requests);
+		
+		
+		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the&#160;number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it&#39;s rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
+		public SearchRequestParameters PreFilterShardSize(long pre_filter_shard_size) => this.AddQueryString("pre_filter_shard_size", pre_filter_shard_size);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -5826,7 +5814,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public CancelTasksRequestParameters NodeId(params string[] node_id) => this.AddQueryString("node_id", node_id);
+		public CancelTasksRequestParameters Nodes(params string[] nodes) => this.AddQueryString("nodes", nodes);
 		
 		
 		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
@@ -5838,7 +5826,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
-		public CancelTasksRequestParameters ParentTask(string parent_task) => this.AddQueryString("parent_task", parent_task);
+		public CancelTasksRequestParameters ParentTaskId(string parent_task_id) => this.AddQueryString("parent_task_id", parent_task_id);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -5906,7 +5894,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public ListTasksRequestParameters NodeId(params string[] node_id) => this.AddQueryString("node_id", node_id);
+		public ListTasksRequestParameters Nodes(params string[] nodes) => this.AddQueryString("nodes", nodes);
 		
 		
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
@@ -5922,7 +5910,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
-		public ListTasksRequestParameters ParentTask(string parent_task) => this.AddQueryString("parent_task", parent_task);
+		public ListTasksRequestParameters ParentTaskId(string parent_task_id) => this.AddQueryString("parent_task_id", parent_task_id);
 		
 		
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
@@ -6278,7 +6266,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackGraphExplore
 	///<pre>
-	///https://www.elastic.co/guide/en/graph/current/explore.html
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html
 	///</pre>
 	///</summary>
 	public class GraphExploreRequestParameters : FluentRequestParameters<GraphExploreRequestParameters> 
@@ -6311,6 +6299,36 @@ namespace Elasticsearch.Net
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public GraphExploreRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackDeprecationInfo
+	///<pre>
+	///http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html
+	///</pre>
+	///</summary>
+	public class DeprecationInfoRequestParameters : FluentRequestParameters<DeprecationInfoRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public DeprecationInfoRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
+		
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public DeprecationInfoRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public DeprecationInfoRequestParameters ErrorTrace(bool error_trace) => this.AddQueryString("error_trace", error_trace);
+		
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public DeprecationInfoRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public DeprecationInfoRequestParameters FilterPath(params string[] filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -6384,7 +6402,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackLicenseDelete
 	///<pre>
-	///https://www.elastic.co/guide/en/shield/current/license-management.html
+	///https://www.elastic.co/guide/en/x-pack/current/license-management.html
 	///</pre>
 	///</summary>
 	public class DeleteLicenseRequestParameters : FluentRequestParameters<DeleteLicenseRequestParameters> 
@@ -6414,7 +6432,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackLicenseGet
 	///<pre>
-	///https://www.elastic.co/guide/en/shield/current/license-management.html
+	///https://www.elastic.co/guide/en/x-pack/current/license-management.html
 	///</pre>
 	///</summary>
 	public class GetLicenseRequestParameters : FluentRequestParameters<GetLicenseRequestParameters> 
@@ -6448,7 +6466,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackLicensePost
 	///<pre>
-	///https://www.elastic.co/guide/en/shield/current/license-management.html
+	///https://www.elastic.co/guide/en/x-pack/current/license-management.html
 	///</pre>
 	///</summary>
 	public class PostLicenseRequestParameters : FluentRequestParameters<PostLicenseRequestParameters> 
@@ -6654,6 +6672,10 @@ namespace Elasticsearch.Net
 	public class FlushJobRequestParameters : FluentRequestParameters<FlushJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
+		public FlushJobRequestParameters SkipTime(string skip_time) => this.AddQueryString("skip_time", skip_time);
+		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public FlushJobRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
@@ -7346,7 +7368,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityAuthenticate
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-authenticate.html
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html
 	///</pre>
 	///</summary>
 	public class AuthenticateRequestParameters : FluentRequestParameters<AuthenticateRequestParameters> 
@@ -7376,7 +7398,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityChangePassword
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-change-password.html
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html
 	///</pre>
 	///</summary>
 	public class ChangePasswordRequestParameters : FluentRequestParameters<ChangePasswordRequestParameters> 
@@ -7410,7 +7432,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityClearCachedRealms
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/current/security-api-clear-cache.html
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html
 	///</pre>
 	///</summary>
 	public class ClearCachedRealmsRequestParameters : FluentRequestParameters<ClearCachedRealmsRequestParameters> 
@@ -7444,7 +7466,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityClearCachedRoles
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-clear-role-cache
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-clear-role-cache
 	///</pre>
 	///</summary>
 	public class ClearCachedRolesRequestParameters : FluentRequestParameters<ClearCachedRolesRequestParameters> 
@@ -7474,7 +7496,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityDeleteRole
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-delete-role
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-delete-role
 	///</pre>
 	///</summary>
 	public class DeleteRoleRequestParameters : FluentRequestParameters<DeleteRoleRequestParameters> 
@@ -7508,7 +7530,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityDeleteRoleMapping
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-delete-role-mapping
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-delete-role-mapping
 	///</pre>
 	///</summary>
 	public class DeleteRoleMappingRequestParameters : FluentRequestParameters<DeleteRoleMappingRequestParameters> 
@@ -7542,7 +7564,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityDeleteUser
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-delete-user
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-delete-user
 	///</pre>
 	///</summary>
 	public class DeleteUserRequestParameters : FluentRequestParameters<DeleteUserRequestParameters> 
@@ -7576,7 +7598,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityDisableUser
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-disable-user.html
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-disable-user
 	///</pre>
 	///</summary>
 	public class DisableUserRequestParameters : FluentRequestParameters<DisableUserRequestParameters> 
@@ -7610,7 +7632,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityEnableUser
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-enable-user.html
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-enable-user
 	///</pre>
 	///</summary>
 	public class EnableUserRequestParameters : FluentRequestParameters<EnableUserRequestParameters> 
@@ -7644,7 +7666,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityGetRole
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-get-role
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-get-role
 	///</pre>
 	///</summary>
 	public class GetRoleRequestParameters : FluentRequestParameters<GetRoleRequestParameters> 
@@ -7674,7 +7696,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityGetRoleMapping
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-get-role-mapping
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-get-role-mapping
 	///</pre>
 	///</summary>
 	public class GetRoleMappingRequestParameters : FluentRequestParameters<GetRoleMappingRequestParameters> 
@@ -7704,7 +7726,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityGetToken
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-get-token
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-get-token
 	///</pre>
 	///</summary>
 	public class GetUserAccessTokenRequestParameters : FluentRequestParameters<GetUserAccessTokenRequestParameters> 
@@ -7734,7 +7756,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityGetUser
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-get-user
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-get-user
 	///</pre>
 	///</summary>
 	public class GetUserRequestParameters : FluentRequestParameters<GetUserRequestParameters> 
@@ -7764,7 +7786,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityInvalidateToken
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-invalidate-token
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-invalidate-token
 	///</pre>
 	///</summary>
 	public class InvalidateUserAccessTokenRequestParameters : FluentRequestParameters<InvalidateUserAccessTokenRequestParameters> 
@@ -7794,7 +7816,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityPutRole
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-put-role
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-put-role
 	///</pre>
 	///</summary>
 	public class PutRoleRequestParameters : FluentRequestParameters<PutRoleRequestParameters> 
@@ -7828,7 +7850,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityPutRoleMapping
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-put-role-mapping
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-put-role-mapping
 	///</pre>
 	///</summary>
 	public class PutRoleMappingRequestParameters : FluentRequestParameters<PutRoleMappingRequestParameters> 
@@ -7862,7 +7884,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityPutUser
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-put-user
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-put-user
 	///</pre>
 	///</summary>
 	public class PutUserRequestParameters : FluentRequestParameters<PutUserRequestParameters> 
@@ -8200,6 +8222,10 @@ namespace Elasticsearch.Net
 	public class WatcherStatsRequestParameters : FluentRequestParameters<WatcherStatsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Emits stack traces of currently running watches</summary>
+		public WatcherStatsRequestParameters EmitStacktraces(bool emit_stacktraces) => this.AddQueryString("emit_stacktraces", emit_stacktraces);
+		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public WatcherStatsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);

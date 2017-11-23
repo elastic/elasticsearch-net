@@ -85,7 +85,7 @@ namespace Tests.Document.Single.Index
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
 		protected override string UrlPath
-			=> $"/project/project/{CallIsolatedValue}?refresh=true&pipeline={PipelineId}";
+			=> $"/project/doc/{CallIsolatedValue}?refresh=true&pipeline={PipelineId}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -93,6 +93,7 @@ namespace Tests.Document.Single.Index
 			new
 			{
 				name = CallIsolatedValue,
+				join = Document.Join,
 				leadDeveloper = new { iPAddress = "193.4.250.122", gender = "Male", id = 1 },
 				state = "Stable",
 				startedOn = FixedDate,

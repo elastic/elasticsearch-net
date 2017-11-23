@@ -13,35 +13,34 @@ namespace Tests.Modules.Scripting.PutScript
 	{
 		public PutScriptApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		private static readonly string _language = "groovy";
 		private static readonly string _name = "scrpt1";
 
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.PutScript(_language, _name, f),
-			fluentAsync: (client, f) => client.PutScriptAsync(_language, _name, f),
+			fluent: (client, f) => client.PutScript(_name, f),
+			fluentAsync: (client, f) => client.PutScriptAsync(_name, f),
 			request: (client, r) => client.PutScript(r),
 			requestAsync: (client, r) => client.PutScriptAsync(r)
 		);
 
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => $"/_scripts/{_language}/{_name}";
+		protected override string UrlPath => $"/_scripts/{_name}";
 
 		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson { get; } = new
 		{
-			script = "1+1"
+			script = new { lang = "painless", source = "1+1" }
 		};
 
-		protected override PutScriptDescriptor NewDescriptor() => new PutScriptDescriptor(_language, _name);
+		protected override PutScriptDescriptor NewDescriptor() => new PutScriptDescriptor(_name);
 
 		protected override Func<PutScriptDescriptor, IPutScriptRequest> Fluent => d => d
-			.Script("1+1");
+			.Painless("1+1");
 
-		protected override PutScriptRequest Initializer => new PutScriptRequest(_language, _name)
+		protected override PutScriptRequest Initializer => new PutScriptRequest(_name)
 		{
-			Script = "1+1"
+			Script = new PainlessScript("1+1")
 		};
 	}
 }

@@ -14,7 +14,7 @@ namespace Tests.Document.Single.Update
 		{
 			var document = new Project { Name = "foo" };
 
-			await POST($"/project/project/foo/_update")
+			await POST($"/project/doc/foo/_update")
 				.Fluent(c => c.Update<Project>(document, u => u))
 				.Request(c => c.Update(new UpdateRequest<Project, object>(document)))
 				.FluentAsync(c => c.UpdateAsync<Project>(document, u => u))
@@ -23,7 +23,7 @@ namespace Tests.Document.Single.Update
 
 			var otherId = "other-id";
 
-			await POST($"/project/project/{otherId}/_update")
+			await POST($"/project/doc/{otherId}/_update")
 				.Fluent(c => c.Update<Project>(otherId, u => u))
 				.Request(c => c.Update(new UpdateRequest<Project, object>(typeof(Project), typeof(Project), otherId)))
 				.FluentAsync(c => c.UpdateAsync<Project>(otherId, u => u))
@@ -32,7 +32,7 @@ namespace Tests.Document.Single.Update
 
 			var otherIndex = "other-index";
 
-			await POST($"/{otherIndex}/project/{otherId}/_update")
+			await POST($"/{otherIndex}/doc/{otherId}/_update")
 				.Fluent(c => c.Update<Project>(otherId, u => u.Index(otherIndex)))
 				.Request(c => c.Update(new UpdateRequest<Project, object>(otherIndex, typeof(Project), otherId)))
 				.FluentAsync(c => c.UpdateAsync<Project>(otherId, u => u.Index(otherIndex)))

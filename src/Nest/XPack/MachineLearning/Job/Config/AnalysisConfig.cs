@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// An analysis configuration for a Machine Learning job.
+	/// An analysis configuration for a machine learning job.
 	/// </summary>
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<AnalysisConfig>))]
 	public interface IAnalysisConfig

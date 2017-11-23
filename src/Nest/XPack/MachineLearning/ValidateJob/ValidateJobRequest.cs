@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Validates a Machine Learning Job
+	/// Validates a machine learning job
 	/// </summary>
 	public partial interface IValidateJobRequest
 	{
@@ -21,7 +21,7 @@ namespace Nest
 		IAnalysisLimits AnalysisLimits { get; set; }
 
 		/// <summary>
-		/// Describes the format of the input data. This object is required, but it can be empty
+		/// Describes the format of the input data. This object is required, but it can be empty.
 		/// </summary>
 		[JsonProperty("data_description")]
 		IDataDescription DataDescription { get; set; }
@@ -33,8 +33,8 @@ namespace Nest
 		string Description { get; set; }
 
 		/// <summary>
-		/// This advanced configuration option stores model information along with the results. T
-		/// his adds overhead to the performance of the system and is not feasible for jobs with many entities
+		/// This advanced configuration option stores model information along with the results.
+		/// This adds overhead to the performance of the system and is not feasible for jobs with many entities
 		/// </summary>
 		[JsonProperty("model_plot")]
 		IModelPlotConfig ModelPlotConfig { get; set; }

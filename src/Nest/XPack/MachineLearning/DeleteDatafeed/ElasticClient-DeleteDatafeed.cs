@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Deletes an existing datafeed for a Machine Learning job.
+		/// Deletes an existing datafeed for a machine learning job.
 		/// </summary>
 		IDeleteDatafeedResponse DeleteDatafeed(Id datafeedId, Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> selector = null);
 

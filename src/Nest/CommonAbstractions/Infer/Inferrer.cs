@@ -15,6 +15,7 @@ namespace Nest
 		private IdResolver IdResolver { get; }
 		private IndexNameResolver IndexNameResolver { get; }
 		private TypeNameResolver TypeNameResolver { get; }
+		private RelationNameResolver RelationNameResolver { get; }
 		private FieldResolver FieldResolver { get; }
 
 		internal ConcurrentDictionary<Type, JsonContract> Contracts { get; }
@@ -28,6 +29,7 @@ namespace Nest
 			this.IdResolver = new IdResolver(connectionSettings);
 			this.IndexNameResolver = new IndexNameResolver(connectionSettings);
 			this.TypeNameResolver = new TypeNameResolver(connectionSettings);
+			this.RelationNameResolver = new RelationNameResolver(connectionSettings);
 			this.FieldResolver = new FieldResolver(connectionSettings);
 
 			this.Contracts = new ConcurrentDictionary<Type, JsonContract>();
@@ -51,5 +53,9 @@ namespace Nest
 		public string TypeName<T>() where T : class => this.TypeNameResolver.Resolve<T>();
 
 		public string TypeName(TypeName type) => this.TypeNameResolver.Resolve(type);
+
+		public string RelationName<T>() where T : class => this.RelationNameResolver.Resolve<T>();
+
+		public string RelationName(RelationName type) => this.RelationNameResolver.Resolve(type);
 	}
 }

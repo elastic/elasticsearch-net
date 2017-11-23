@@ -12,18 +12,18 @@ namespace Tests.Search.Search
 		[U] public async Task Urls()
 		{
 			var hardcoded = "hardcoded";
-			await POST("/project/commits/_search")
-				.Fluent(c=>c.Search<CommitActivity>())
-				.Request(c=>c.Search<Project>(new SearchRequest<CommitActivity>()))
-				.FluentAsync(c=>c.SearchAsync<CommitActivity>())
-				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<CommitActivity>()))
+			await POST("/devs/developer/_search")
+				.Fluent(c=>c.Search<Developer>())
+				.Request(c=>c.Search<Project>(new SearchRequest<Developer>()))
+				.FluentAsync(c=>c.SearchAsync<Developer>())
+				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<Developer>()))
 				;
 
-			await POST("/project/hardcoded/_search")
-				.Fluent(c=>c.Search<CommitActivity>(s=>s.Type(hardcoded)))
-				.Request(c=>c.Search<Project>(new SearchRequest<CommitActivity>(typeof(Project), hardcoded)))
-				.FluentAsync(c=>c.SearchAsync<CommitActivity>(s=>s.Type(hardcoded)))
-				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<CommitActivity>(typeof(Project), hardcoded)))
+			await POST("/devs/hardcoded/_search")
+				.Fluent(c=>c.Search<Developer>(s=>s.Type(hardcoded)))
+				.Request(c=>c.Search<Project>(new SearchRequest<Developer>(typeof(Developer), hardcoded)))
+				.FluentAsync(c=>c.SearchAsync<Developer>(s=>s.Type(hardcoded)))
+				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<Developer>(typeof(Developer), hardcoded)))
 				;
 
 			await POST("/project/_search")

@@ -49,7 +49,6 @@ namespace Tests.Aggregations.Metric.TopHits
 								version = true,
 								track_scores = true,
 								explain = true,
-								fielddata_fields = new [] { "state", "numberOfCommits" },
 								stored_fields = new [] { "startedOn" },
 								highlight = new
 								{
@@ -65,7 +64,7 @@ namespace Tests.Aggregations.Metric.TopHits
 									{
 										script = new
 										{
-											inline = "doc['numberOfCommits'].value * 2",
+											source = "doc['numberOfCommits'].value * 2",
 										}
 									}
 								}
@@ -96,10 +95,6 @@ namespace Tests.Aggregations.Metric.TopHits
 							.Version()
 							.TrackScores()
 							.Explain()
-							.FielddataFields(fd => fd
-								.Field(p => p.State)
-								.Field(p => p.NumberOfCommits)
-							)
 							.StoredFields(f => f
 								.Field(p => p.StartedOn)
 							)
@@ -111,7 +106,7 @@ namespace Tests.Aggregations.Metric.TopHits
 							)
 							.ScriptFields(sfs => sfs
 								.ScriptField("commit_factor", sf => sf
-									.Inline("doc['numberOfCommits'].value * 2")
+									.Source("doc['numberOfCommits'].value * 2")
 								)
 							)
 						)
@@ -139,7 +134,6 @@ namespace Tests.Aggregations.Metric.TopHits
 						Version = true,
 						TrackScores = true,
 						Explain = true,
-						FielddataFields = new [] { "state", "numberOfCommits" },
 						StoredFields = new[] { "startedOn" },
 						Highlight = new Highlight
 						{
@@ -176,8 +170,6 @@ namespace Tests.Aggregations.Metric.TopHits
 				hits.Should().NotBeNullOrEmpty();
 				hits.All(h => h.Explanation != null).Should().BeTrue();
 				hits.All(h => h.Version.HasValue).Should().BeTrue();
-				hits.All(h => h.Fields.ValuesOf<StateOfBeing>("state").Any()).Should().BeTrue();
-				hits.All(h => h.Fields.ValuesOf<int>("numberOfCommits").Any()).Should().BeTrue();
 				hits.All(h => h.Fields.ValuesOf<int>("commit_factor").Any()).Should().BeTrue();
 				hits.All(h => h.Fields.ValuesOf<DateTime>("startedOn").Any()).Should().BeTrue();
 				var projects = topStateHits.Documents<Project>();

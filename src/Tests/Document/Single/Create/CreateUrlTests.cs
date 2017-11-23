@@ -12,24 +12,26 @@ namespace Tests.Document.Single.Create
 		{
 			var project = new Project { Name = "NEST" };
 
-			await PUT("/project/project/1/_create")
+			await PUT("/project/doc/1/_create")
 				.Fluent(c => c.Create<object>(new { }, i => i.Index(typeof(Project)).Type(typeof(Project)).Id(1)))
-				.Request(c => c.Create(new CreateRequest<object>("project", "project", 1) { Document = new { } }))
+				.Request(c => c.Create(new CreateRequest<object>("project", "doc", 1) { Document = new { } }))
 				.FluentAsync(c => c.CreateAsync<object>(new {}, i => i.Index(typeof(Project)).Type(typeof(Project)).Id(1)))
 				.RequestAsync(c => c.CreateAsync(new CreateRequest<object>(IndexName.From<Project>(), TypeName.From<Project>(), 1)
                 {
 					Document = new { }
-				}))
-				;
+				}));
 
-			await PUT("/project/project/NEST/_create")
+			await PUT("/project/doc/NEST/_create")
 				.Fluent(c => c.Create(project))
 				.Request(c => c.Create(new CreateRequest<Project>(project)))
-				.Request(c => c.Create(new CreateRequest<Project>(project, "project", "project", "NEST") { Document = project }))			
 				.FluentAsync(c => c.CreateAsync(project))
-				.RequestAsync(c => c.CreateAsync(new CreateRequest<Project>(project)))
-				.RequestAsync(c => c.CreateAsync(new CreateRequest<Project>(project, "project", "project", "NEST") { Document = project }))
-				;
+				.RequestAsync(c => c.CreateAsync(new CreateRequest<Project>(project)));
+
+			await PUT("/project/project/NEST/_create")
+				.Fluent(c => c.Create(project, cc=>cc.Index("project").Type("project")))
+				.Request(c => c.Create(new CreateRequest<Project>(project, "project", "project", "NEST") {Document = project}))
+				.RequestAsync(c => c.CreateAsync(new CreateRequest<Project>(project, "project", "project", "NEST") {Document = project}))
+				.FluentAsync(c => c.CreateAsync(project, cc=>cc.Index("project").Type("project")));
 
 			await PUT("/different-projects/project/elasticsearch/_create")
 				.Request(c => c.Create(new CreateRequest<Project>("different-projects", "project", "elasticsearch") { Document = project }))

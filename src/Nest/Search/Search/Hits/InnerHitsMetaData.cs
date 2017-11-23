@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class InnerHitsMetaData
+	public class InnerHitsMetadata
 	{
 		[JsonProperty("total")]
 		public long Total { get; internal set; }

@@ -207,9 +207,9 @@ namespace Tests.Aggregations
 	*
 	* This is better illustrated with an example. Let's imagine we make the following request
 	*/
-	public class AggsUsage : ChildrenAggregationUsageTests
+	public class ChildrenAggregationFluentAggsUsageTests : ChildrenAggregationUsageTests
 	{
-		public AggsUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public ChildrenAggregationFluentAggsUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(aggs => aggs

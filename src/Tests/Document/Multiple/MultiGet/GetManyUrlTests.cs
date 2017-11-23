@@ -32,11 +32,11 @@ namespace Tests.Document.Multiple.MultiGet
 				.RequestAsync(c => c.GetManyAsync<Project>(LongIds, "project"))
 				;
 
-			await POST("/project/project/_mget")
-				.Request(c => c.GetMany<Project>(StringIds, "project", "project"))
-				.Request(c => c.GetMany<Project>(LongIds, "project", "project"))
-				.RequestAsync(c => c.GetManyAsync<Project>(StringIds, "project", "project"))
-				.RequestAsync(c => c.GetManyAsync<Project>(LongIds, "project", "project"))
+			await POST("/project/sometype/_mget")
+				.Request(c => c.GetMany<Project>(StringIds, "project", "sometype"))
+				.Request(c => c.GetMany<Project>(LongIds, "project", "sometype"))
+				.RequestAsync(c => c.GetManyAsync<Project>(StringIds, "project", "sometype"))
+				.RequestAsync(c => c.GetManyAsync<Project>(LongIds, "project", "sometype"))
 				;
 		}
 	}

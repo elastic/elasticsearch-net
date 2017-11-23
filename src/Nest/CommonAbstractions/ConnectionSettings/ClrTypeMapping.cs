@@ -7,10 +7,10 @@ namespace Nest
 {
 	public interface IClrTypeMapping<T> where T : class
 	{
-		Type Type { get; } 
+		Type Type { get; }
 
 		/// <summary>
-		/// When specified dictates the default Elasticsearch index name for <typeparamref name="T"/> 
+		/// When specified dictates the default Elasticsearch index name for <typeparamref name="T"/>
 		/// </summary>
 		string IndexName { get; set; }
 
@@ -20,10 +20,15 @@ namespace Nest
 		string TypeName { get; set; }
 
 		/// <summary>
-		/// Allows you to set a default Id property on <typeparamref name="T" /> that NEST will evaluate 
+		/// When specified dictates the relation name for <typeparamref name="T" /> to resolve to.
+		/// </summary>
+		string RelationName { get; set; }
+
+		/// <summary>
+		/// Allows you to set a default Id property on <typeparamref name="T" /> that NEST will evaluate
 		/// </summary>
 		Expression<Func<T, object>> IdProperty { get; set; }
-		
+
 		/// <summary>
 		/// When specified allows you to ignore or rename certain properties of clr type <typeparamref name="T" />
 		/// </summary>
@@ -35,7 +40,7 @@ namespace Nest
 		public Type Type { get; } = typeof (T);
 
 		/// <summary>
-		/// When specified dictates the default Elasticsearch index name for <typeparamref name="T"/> 
+		/// When specified dictates the default Elasticsearch index name for <typeparamref name="T"/>
 		/// </summary>
 		public string IndexName { get; set; }
 
@@ -45,7 +50,12 @@ namespace Nest
 		public string TypeName { get; set; }
 
 		/// <summary>
-		/// Allows you to set a default Id property on <typeparamref name="T" /> that NEST will evaluate 
+		/// When specified dictates the relation name for <typeparamref name="T" /> to resolve to.
+		/// </summary>
+		public string RelationName { get; set; }
+
+		/// <summary>
+		/// Allows you to set a default Id property on <typeparamref name="T" /> that NEST will evaluate
 		/// </summary>
 		public Expression<Func<T, object>> IdProperty { get; set; }
 
@@ -58,11 +68,12 @@ namespace Nest
 		Type IClrTypeMapping<T>.Type { get; } = typeof (T);
 		string IClrTypeMapping<T>.IndexName { get; set; }
 		string IClrTypeMapping<T>.TypeName { get; set; }
+		string IClrTypeMapping<T>.RelationName { get; set; }
 		Expression<Func<T, object>> IClrTypeMapping<T>.IdProperty { get; set; }
 		IList<IClrTypePropertyMapping<T>> IClrTypeMapping<T>.Properties { get; set; } = new List<IClrTypePropertyMapping<T>>();
 
 		/// <summary>
-		/// When specified dictates the default Elasticsearch index name for <typeparamref name="T"/> 
+		/// When specified dictates the default Elasticsearch index name for <typeparamref name="T"/>
 		/// </summary>
 		public ClrTypeMappingDescriptor<T> IndexName(string indexName) => Assign(a => a.IndexName = indexName);
 
@@ -72,20 +83,25 @@ namespace Nest
 		public ClrTypeMappingDescriptor<T> TypeName(string typeName) => Assign(a => a.TypeName = typeName);
 
 		/// <summary>
-		/// Allows you to set a default Id property on <typeparamref name="T" /> that NEST will evaluate 
+		/// When specified dictates the relation name for <typeparamref name="T" /> to resolve to.
+		/// </summary>
+		public ClrTypeMappingDescriptor<T> RelationName(string relationName) => Assign(a => a.RelationName = relationName);
+
+		/// <summary>
+		/// Allows you to set a default Id property on <typeparamref name="T" /> that NEST will evaluate
 		/// </summary>
 		public ClrTypeMappingDescriptor<T> IdProperty(Expression<Func<T, object>> property) => Assign(a => a.IdProperty = property);
 
 		/// <summary>
 		/// When specified allows you to ignore <param name="property"></param> on clr type <typeparamref name="T" />
 		/// </summary>
-		public ClrTypeMappingDescriptor<T> Ignore(Expression<Func<T, object>> property) => 
+		public ClrTypeMappingDescriptor<T> Ignore(Expression<Func<T, object>> property) =>
 			Assign(a => a.Properties.Add(new IgnorePropertyMapping<T>(property)));
 
 		/// <summary>
 		/// When specified allows you to rename <param name="property"></param> on clr type <typeparamref name="T" />
 		/// </summary>
-		public ClrTypeMappingDescriptor<T> Rename(Expression<Func<T, object>> property, string newName) => 
+		public ClrTypeMappingDescriptor<T> Rename(Expression<Func<T, object>> property, string newName) =>
 			Assign(a => a.Properties.Add(new RenamePropertyMapping<T>(property, newName)));
 
 	}

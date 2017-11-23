@@ -70,7 +70,8 @@ namespace Tests.Search.Search.Rescoring
 									{
 										random_score = new
 										{
-											seed = 1337
+											seed = 1337,
+											field = "_seq_no"
 										}
 									}
 								}
@@ -110,7 +111,7 @@ namespace Tests.Search.Search.Rescoring
 						.Query(q => q
 							.FunctionScore(fs => fs
 								.Functions(f => f
-									.RandomScore(1337)
+									.RandomScore(rs=>rs.Seed(1337).Field("_seq_no"))
 								)
 							)
 						)
@@ -150,10 +151,7 @@ namespace Tests.Search.Search.Rescoring
 						{
 							Functions = new List<IScoreFunction>
 							{
-								new RandomScoreFunction
-								{
-									Seed = 1337
-								}
+								new RandomScoreFunction { Seed = 1337, Field = "_seq_no" },
 							}
 						}
 					}

@@ -11,20 +11,20 @@ namespace Tests.Search.Validate
 		[U] public async Task Urls()
 		{
 			var hardcoded = "hardcoded";
-			await POST("/project/commits/_validate/query")
-				.Fluent(c=>c.ValidateQuery<CommitActivity>(s=>s))
-				.Request(c=>c.ValidateQuery(new ValidateQueryRequest<CommitActivity>()))
-				.FluentAsync(c=>c.ValidateQueryAsync<CommitActivity>(s=>s))
-				.RequestAsync(c=>c.ValidateQueryAsync(new ValidateQueryRequest<CommitActivity>()))
+			await POST("/devs/developer/_validate/query")
+				.Fluent(c=>c.ValidateQuery<Developer>(s=>s))
+				.Request(c=>c.ValidateQuery(new ValidateQueryRequest<Developer>()))
+				.FluentAsync(c=>c.ValidateQueryAsync<Developer>(s=>s))
+				.RequestAsync(c=>c.ValidateQueryAsync(new ValidateQueryRequest<Developer>()))
 				;
 
-			await POST("/project/hardcoded/_validate/query")
-				.Fluent(c=>c.ValidateQuery<CommitActivity>(s=>s.Type(hardcoded)))
-				.Request(c=>c.ValidateQuery(new ValidateQueryRequest<CommitActivity>(typeof(Project), hardcoded)))
-				.Request(c=>c.ValidateQuery(new ValidateQueryRequest(typeof(Project), hardcoded)))
-				.FluentAsync(c=>c.ValidateQueryAsync<CommitActivity>(s=>s.Type(hardcoded)))
-				.RequestAsync(c=>c.ValidateQueryAsync(new ValidateQueryRequest<CommitActivity>(typeof(Project), hardcoded)))
-				.RequestAsync(c=>c.ValidateQueryAsync(new ValidateQueryRequest(typeof(Project), hardcoded)))
+			await POST("/devs/hardcoded/_validate/query")
+				.Fluent(c=>c.ValidateQuery<Developer>(s=>s.Type(hardcoded)))
+				.Request(c=>c.ValidateQuery(new ValidateQueryRequest<Project>(typeof(Developer), hardcoded)))
+				.Request(c=>c.ValidateQuery(new ValidateQueryRequest(typeof(Developer), hardcoded)))
+				.FluentAsync(c=>c.ValidateQueryAsync<Developer>(s=>s.Type(hardcoded)))
+				.RequestAsync(c=>c.ValidateQueryAsync(new ValidateQueryRequest<Project>(typeof(Developer), hardcoded)))
+				.RequestAsync(c=>c.ValidateQueryAsync(new ValidateQueryRequest(typeof(Developer), hardcoded)))
 				;
 
 			await POST("/project/_validate/query")

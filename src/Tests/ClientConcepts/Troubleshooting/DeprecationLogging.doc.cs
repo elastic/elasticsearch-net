@@ -1,8 +1,13 @@
-﻿using FluentAssertions;
+﻿using System;
+using System.Collections.Generic;
+using Elasticsearch.Net;
+using FluentAssertions;
+using Nest;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
 using Xunit;
+using static Nest.Infer;
 
 namespace Tests.ClientConcepts.Troubleshooting
 {
@@ -20,22 +25,32 @@ namespace Tests.ClientConcepts.Troubleshooting
 
 		[I] public void RequestWithMultipleWarning()
 		{
-			var response = this.Client.Search<Project>(s => s
-				.FielddataFields(fd => fd
-					.Field(p => p.State)
-					.Field(p => p.NumberOfCommits)
-				)
-				.ScriptFields(sfs => sfs
-					.ScriptField("commit_factor", sf => sf
-						.Inline("doc['numberOfCommits'].value * 2")
-						.Lang("groovy")
-					)
-				)
-			);
+			var request = new SearchRequest<Project>
+			{
+				Size = 0,
+				Routing = new [] { "ignoredefaultcompletedhandler" },
+				Aggregations = new TermsAggregation("states")
+				{
+					Field = Field<Project>(p => p.State.Suffix("keyword")),
+					Order = new List<TermsOrder>
+					{
+						new TermsOrder { Key = "_term", Order = SortOrder.Ascending },
+					}
+				},
+				Query = new FunctionScoreQuery()
+				{
+					Query = new MatchAllQuery { },
+					Functions = new List<IScoreFunction>
+					{
+						new RandomScoreFunction {Seed = 1337},
+					}
+				}
+			};
+			var response = this.Client.Search<Project>(request);
 
 			response.ApiCall.DeprecationWarnings.Should().NotBeNullOrEmpty();
-
-			response.DebugInformation.Should().Contain("Server indicated deprecations:"); // <1> `DebugInformation` also contains the deprecation warnings
+			response.ApiCall.DeprecationWarnings.Should().HaveCount(2);
+			response.DebugInformation.Should().Contain("Deprecated aggregation order key"); // <1> `DebugInformation` also contains the deprecation warnings
         }
 	}
 }

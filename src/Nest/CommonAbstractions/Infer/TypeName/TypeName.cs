@@ -1,75 +1,68 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using Elasticsearch.Net;
 
 namespace Nest
 {
 	[ContractJsonConverter(typeof(TypeNameJsonConverter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
-	public class TypeName : IEquatable<TypeName> , IUrlParameter
+	public class TypeName : IEquatable<TypeName>, IUrlParameter
 	{
-		public string Name { get; set; }
-		public Type Type { get; set; }
+		private static int TypeHashCode { get; } = typeof(TypeName).GetHashCode();
+
+		public string Name { get; }
+		public Type Type { get; }
+
+		private TypeName(string type)
+		{
+			this.Name = type;
+		}
+		private TypeName(Type type)
+		{
+			this.Type = type;
+		}
 
 		internal string DebugDisplay => Type == null ? Name : $"{nameof(TypeName)} for typeof: {Type?.Name}";
 
-		public static TypeName Create(Type type)
-		{
-			return GetTypeNameForType(type);
-		}
+		public static TypeName Create(Type type) => GetTypeNameForType(type);
 
-		public static TypeName Create<T>() where T : class
-		{
-			return GetTypeNameForType(typeof(T));
-		}
+		public static TypeName Create<T>() where T : class => GetTypeNameForType(typeof(T));
 
-		private static TypeName GetTypeNameForType(Type type)
-		{
-			return new TypeName { Type = type };
-		}
+		private static TypeName GetTypeNameForType(Type type) => new TypeName(type);
 
-		public static implicit operator TypeName(string typeName)
-		{
-			return typeName == null ? null : new TypeName { Name = typeName };
-		}
+		public static implicit operator TypeName(string typeName) => typeName == null ? null : new TypeName(typeName);
 
-		public static implicit operator TypeName(Type type)
-		{
-			return type == null ? null : new TypeName { Type = type };
-		}
+		public static implicit operator TypeName(Type type) => type == null ? null : new TypeName(type);
 
 		public override int GetHashCode()
 		{
-			if (this.Name != null)
-				return this.Name.GetHashCode();
-			return this.Type?.GetHashCode() ?? 0;
+			unchecked
+			{
+				var result = TypeHashCode;
+				result = (result * 397) ^ (this.Name?.GetHashCode() ?? this.Type?.GetHashCode() ?? 0);
+				return result;
+			}
 		}
 
-		bool IEquatable<TypeName>.Equals(TypeName other)
-		{
-			return Equals(other);
-		}
+		bool IEquatable<TypeName>.Equals(TypeName other) => Equals(other);
 
 		public override bool Equals(object obj)
 		{
 			var s = obj as string;
 			if (!s.IsNullOrEmpty()) return this.EqualsString(s);
 			var pp = obj as TypeName;
-			if (pp != null) return this.EqualsMarker(pp);
-
-			return base.Equals(obj);
+			return this.EqualsMarker(pp);
 		}
 
 		public override string ToString()
 		{
 			if (!this.Name.IsNullOrEmpty())
 				return this.Name;
-			if (this.Type != null)
-				return this.Type.Name;
-			return string.Empty;
+			return this.Type != null ? this.Type.Name : string.Empty;
 		}
 
-		public bool EqualsMarker(TypeName other)
+		private bool EqualsMarker(TypeName other)
 		{
 			if (!this.Name.IsNullOrEmpty() && other != null && !other.Name.IsNullOrEmpty())
 				return EqualsString(other.Name);
@@ -78,7 +71,7 @@ namespace Nest
 			return false;
 		}
 
-		public bool EqualsString(string other)
+		private bool EqualsString(string other)
 		{
 			return !other.IsNullOrEmpty() && other == this.Name;
 		}
@@ -96,5 +89,6 @@ namespace Nest
 
 		public Types And<T>() => new Types(new TypeName[] { this, typeof(T)});
 		public Types And(TypeName type) => new Types(new TypeName[] { this, type });
+		public Types And(TypeName[] types) => new Types(new TypeName[] { this }.Concat(types));
 	}
 }

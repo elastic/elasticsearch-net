@@ -5,6 +5,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 
@@ -40,11 +41,11 @@ namespace Tests.Aggregations.Bucket.Terms
 						missing = "n/a",
 						script = new
 						{
-							inline = "'State of Being: '+_value",
+							source = "'State of Being: '+_value",
 						},
 						order = new object[]
 						{
-							new {_term = "asc"},
+							new {_key = "asc"},
 							new {_count = "desc"}
 						}
 					}
@@ -62,7 +63,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					.ShardSize(100)
 					.ExecutionHint(TermsAggregationExecutionHint.Map)
 					.Missing("n/a")
-					.Script(ss => ss.Inline("'State of Being: '+_value"))
+					.Script(ss => ss.Source("'State of Being: '+_value"))
 					.Order(TermsOrder.TermAscending)
 					.Order(TermsOrder.CountDescending)
 					.Meta(m => m
@@ -151,7 +152,7 @@ namespace Tests.Aggregations.Bucket.Terms
 						include = "(Stable|VeryActive)",
 						order = new object[]
 						{
-							new {_term = "asc"},
+							new {_key = "asc"},
 							new {_count = "desc"}
 						}
 					}
@@ -258,7 +259,7 @@ namespace Tests.Aggregations.Bucket.Terms
 						include = new[] {"Stable", "VeryActive"},
 						order = new object[]
 						{
-							new {_term = "asc"},
+							new {_key = "asc"},
 							new {_count = "desc"}
 						}
 					}
@@ -414,11 +415,9 @@ namespace Tests.Aggregations.Bucket.Terms
 	 *
 	 * A terms aggregation on a numeric field
 	 */
-	public class NumericTermsAggregationUsageTests : AggregationUsageTestBase
+	public class NumericTermsAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
-		public NumericTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
-		{
-		}
+		public NumericTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{
@@ -427,7 +426,6 @@ namespace Tests.Aggregations.Bucket.Terms
 			{
 				commits = new
 				{
-
 					terms = new
 					{
 						field = "numberOfCommits",
@@ -440,6 +438,7 @@ namespace Tests.Aggregations.Bucket.Terms
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Size(0)
+			.Index(DefaultSeeder.ProjectsAliasFilter)
 			.Aggregations(a => a
 				.Terms<int>("commits", st => st
 					.Field(p => p.NumberOfCommits)
@@ -449,7 +448,7 @@ namespace Tests.Aggregations.Bucket.Terms
 			);
 
 		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+			new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
 			{
 				Size = 0,
 				Aggregations = new TermsAggregation<int>("commits")

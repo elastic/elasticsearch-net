@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Retrieves information about Machine Learning model snapshots.
+		/// Retrieves information about machine learning model snapshots.
 		/// </summary>
 		IGetModelSnapshotsResponse GetModelSnapshots(Id jobId, Func<GetModelSnapshotsDescriptor, IGetModelSnapshotsRequest> selector = null);
 

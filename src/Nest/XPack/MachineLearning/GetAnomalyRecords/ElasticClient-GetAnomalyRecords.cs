@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Retrieve anomaly records for a Machine Learning job.
+		/// Retrieve anomaly records for a machine learning job.
 		/// </summary>
 		IGetAnomalyRecordsResponse GetAnomalyRecords(Id jobId, Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null);
 

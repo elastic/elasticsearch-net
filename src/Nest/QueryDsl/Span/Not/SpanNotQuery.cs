@@ -7,19 +7,19 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanNotQuery>))]
 	public interface ISpanNotQuery : ISpanSubQuery
 	{
-		[JsonProperty(PropertyName = "include")]
+		[JsonProperty("include")]
 		ISpanQuery Include { get; set; }
 
-		[JsonProperty(PropertyName = "exclude")]
+		[JsonProperty("exclude")]
 		ISpanQuery Exclude { get; set; }
 
-		[JsonProperty(PropertyName = "pre")]
+		[JsonProperty("pre")]
 		int? Pre { get; set; }
 
-		[JsonProperty(PropertyName = "post")]
+		[JsonProperty("post")]
 		int? Post { get; set; }
 
-		[JsonProperty(PropertyName = "dist")]
+		[JsonProperty("dist")]
 		int? Dist { get; set; }
 
 	}

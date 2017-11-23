@@ -4,12 +4,12 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Creates a datafeed for a Machine Learning job
+	/// Creates a datafeed for a machine learning job.
 	/// </summary>
 	public partial interface IPutDatafeedRequest
 	{
 		/// <summary>
-		/// If set, the datafeed performs aggregation searches
+		/// If set, the datafeed performs aggregation searches.
 		/// </summary>
 		[JsonProperty("aggregations")]
 		AggregationDictionary Aggregations { get; set; }
@@ -28,7 +28,9 @@ namespace Nest
 		[JsonProperty("frequency")]
 		Time Frequency { get; set; }
 
-		///<summary>A list of index names to search within. Wildcards are supported</summary>
+		///<summary>
+		/// A list of index names to search within, wildcards are supported.
+		/// </summary>
 		[JsonProperty("indices")]
 		[JsonConverter(typeof(IndicesJsonConverter))]
 		Indices Indices { get; set; }
@@ -40,33 +42,35 @@ namespace Nest
 		Id JobId { get; set; }
 
 		/// <summary>
-		/// Describe the query to perform using a query descriptor lambda
+		/// Describe the query to perform using a query descriptor lambda.
 		/// </summary>
 		[JsonProperty("query")]
 		QueryContainer Query { get; set; }
 
 		/// <summary>
 		/// The number of seconds behind real time that data is queried.
-		/// For example, if data from 10:04 a.m. might not be searchable in Elasticsearch until 10:06 a.m.,
+		/// For example, if data from 10:04 a.m. might not be searchable until 10:06 a.m.,
 		/// set this property to 120 seconds. The default value is 60s.
 		/// </summary>
 		[JsonProperty("query_delay")]
 		Time QueryDelay { get; set; }
 
 		/// <summary>
-		/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed. T
-		/// he detector configuration in a job can contain functions that use these script fields.
+		/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
+		/// The detector configuration in a job can contain functions that use these script fields.
 		/// </summary>
 		[JsonProperty("script_fields")]
 		IScriptFields ScriptFields { get; set; }
 
 		/// <summary>
-		/// The size parameter that is used in Elasticsearch searches
+		/// The size parameter that is used in Elasticsearch searches.
 		/// </summary>
 		[JsonProperty("scroll_size")]
 		int? ScrollSize { get; set; }
 
-		///<summary>A list of types to search for within the specified indices</summary>
+		///<summary>
+		/// A list of types to search for within the specified indices.
+		/// </summary>
 		[JsonProperty("types")]
 		[JsonConverter(typeof(TypesJsonConverter))]
 		Types Types { get; set; }

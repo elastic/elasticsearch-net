@@ -1,10 +1,15 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	public interface IInlineScriptCondition : IScriptCondition
 	{
-		[JsonProperty("inline")]
+		[JsonProperty("source")]
+		string Source { get; set; }
+
+		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
+		[JsonIgnore]
 		string Inline { get; set; }
 	}
 
@@ -12,10 +17,11 @@ namespace Nest
 	{
 		public InlineScriptCondition(string script)
 		{
-			this.Inline = script;
+			this.Source = script;
 		}
 
-		public string Inline { get; set; }
+		public string Source { get; set; }
+		public string Inline { get => this.Source; set => this.Source = value; }
 	}
 
 	public class InlineScriptConditionDescriptor :
@@ -23,9 +29,10 @@ namespace Nest
 	{
 		public InlineScriptConditionDescriptor(string script)
 		{
-			Self.Inline = script;
+			Self.Source = script;
 		}
 
-		string IInlineScriptCondition.Inline { get; set; }
+		string IInlineScriptCondition.Inline { get => Self.Source; set => Self.Source = value; }
+		string IInlineScriptCondition.Source { get; set; }
 	}
 }

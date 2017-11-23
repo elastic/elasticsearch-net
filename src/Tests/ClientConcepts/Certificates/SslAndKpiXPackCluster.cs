@@ -14,31 +14,12 @@ namespace Tests.ClientConcepts.Certificates
 	[IntegrationOnly, RequiresPlugin(ElasticsearchPlugin.XPack)]
 	public abstract class SslAndKpiXPackCluster : XPackCluster
 	{
-		public override bool EnableSsl { get; } = true;
 		/// <summary>
 		/// Skipping bootstrap validation because they call out to elasticsearch and would force
-		/// The ServerCertificateValidationCallback to return true. Since i
+		/// The ServerCertificateValidationCallback to return true. Since its cached this would mess with later assertations.
 		/// </summary>
 		public override bool SkipValidation { get; } = true;
 
-		protected override InstallationTaskBase[] AdditionalInstallationTasks => new [] { new EnableSslAndKpiOnCluster() };
-
-		protected override string[] AdditionalServerSettings => new []
-		{
-			$"xpack.ssl.key={this.Node.FileSystem.NodePrivateKey}",
-			$"xpack.ssl.certificate={this.Node.FileSystem.NodeCertificate}",
-			$"xpack.ssl.certificate_authorities={this.Node.FileSystem.CaCertificate}",
-			"xpack.security.transport.ssl.enabled=true",
-			"xpack.security.http.ssl.enabled=true",
-		};
-
-		public override ConnectionSettings ClusterConnectionSettings(ConnectionSettings s) =>
-			this.ConnectionSettings(Authenticate(s));
-
-		public virtual ConnectionSettings Authenticate(ConnectionSettings s) =>
-			s.BasicAuthentication("es_admin", "es_admin");
-
-		protected abstract ConnectionSettings ConnectionSettings(ConnectionSettings s);
 	}
 
 	public class EnableSslAndKpiOnCluster : InstallationTaskBase

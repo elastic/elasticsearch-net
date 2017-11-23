@@ -6,12 +6,12 @@ namespace Nest
 	[JsonObject]
 	public class Explanation
 	{
-		[JsonProperty(PropertyName = "value")]
+		[JsonProperty("value")]
 		public float Value { get; internal set; }
-		[JsonProperty(PropertyName = "description")]
+		[JsonProperty("description")]
 		public string Description { get; internal set; }
 
-		[JsonProperty(PropertyName = "details")]
+		[JsonProperty("details")]
 		public IReadOnlyCollection<ExplanationDetail> Details { get; internal set; } = EmptyReadOnly<ExplanationDetail>.Collection;
 	}
 }

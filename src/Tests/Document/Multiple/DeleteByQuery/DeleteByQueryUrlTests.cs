@@ -18,11 +18,11 @@ namespace Tests.Document.Multiple.DeleteByQuery
 				.RequestAsync(c => c.DeleteByQueryAsync(new DeleteByQueryRequest<Project>("project")))
 				;
 
-			await POST("/project/project/_delete_by_query")
+			await POST("/project/doc/_delete_by_query")
 				.Fluent(c => c.DeleteByQuery<Project>(d => d))
-				.Request(c => c.DeleteByQuery(new DeleteByQueryRequest<Project>("project", "project")))
+				.Request(c => c.DeleteByQuery(new DeleteByQueryRequest<Project>("project", "doc")))
 				.FluentAsync(c => c.DeleteByQueryAsync<Project>(d => d))
-				.RequestAsync(c => c.DeleteByQueryAsync(new DeleteByQueryRequest<Project>("project", "project")))
+				.RequestAsync(c => c.DeleteByQueryAsync(new DeleteByQueryRequest<Project>("project", "doc")))
 				;
 		}
 	}

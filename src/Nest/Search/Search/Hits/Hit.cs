@@ -12,6 +12,7 @@ namespace Nest
 		long? Version { get; }
 		string Routing { get; }
 		string Id { get; }
+		[Obsolete("No longer returned on indexes created in Elasticsearch 6.x and up")]
 		string Parent { get; }
 		T Source { get; }
 	}
@@ -27,8 +28,10 @@ namespace Nest
 				Type = source.Type,
 				Index = source.Index,
 				Id = source.Id,
-				Routing = source.Routing,
+#pragma warning disable 618
+				Routing = source.Routing ?? source.Parent,
 				Parent = source.Parent,
+#pragma warning restore 618
 				Source = mapper(source.Source)
 			};
 		}
@@ -86,6 +89,7 @@ namespace Nest
 		public NestedIdentity Nested { get; internal set; }
 
 		[JsonProperty("_parent")]
+		[Obsolete("This property is no longer returned on indices created in Elasticsearch 6.0.0 and up")]
 		public string Parent { get; internal set; }
 
 		[JsonProperty("_routing")]

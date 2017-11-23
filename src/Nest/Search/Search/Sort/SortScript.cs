@@ -5,10 +5,10 @@ namespace Nest
 {
 	public interface IScriptSort : ISort
 	{
-		[JsonProperty(PropertyName = "type")]
+		[JsonProperty("type")]
 		string Type { get; set; }
 
-		[JsonProperty(PropertyName = "script")]
+		[JsonProperty("script")]
 		IScript Script { get; set; }
 
 	}
@@ -22,7 +22,7 @@ namespace Nest
 		public string Language { get; set; }
 	}
 
-	public class SortScriptDescriptor<T> : SortDescriptorBase<SortScriptDescriptor<T>, IScriptSort, T>, IScriptSort 
+	public class SortScriptDescriptor<T> : SortDescriptorBase<SortScriptDescriptor<T>, IScriptSort, T>, IScriptSort
 		where T : class
 	{
 		protected override Field SortKey => "_script";

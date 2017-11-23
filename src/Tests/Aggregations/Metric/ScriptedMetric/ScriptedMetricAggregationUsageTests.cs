@@ -6,10 +6,11 @@ using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
 using System.Collections.Generic;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 
 namespace Tests.Aggregations.Metric.ScriptedMetric
 {
-	public class ScriptedMetricAggregationUsageTests : AggregationUsageTestBase
+	public class ScriptedMetricAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		class Scripted
 		{
@@ -38,27 +39,28 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 				{
 					scripted_metric = new
 					{
-						init_script = new { inline = Script.Init },
-						map_script = new { inline = Script.Map },
-						combine_script = new { inline = Script.Combine },
-						reduce_script = new { inline = Script.Reduce }
+						init_script = new { source = Script.Init },
+						map_script = new { source = Script.Map },
+						combine_script = new { source = Script.Combine },
+						reduce_script = new { source = Script.Reduce }
 					}
 				}
 			}
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Index(DefaultSeeder.ProjectsAliasFilter)
 			.Aggregations(a => a
 				.ScriptedMetric("sum_the_hard_way", sm => sm
-					.InitScript(ss => ss.Inline(Script.Init))
-					.MapScript(ss => ss.Inline(Script.Map))
-					.CombineScript(ss => ss.Inline(Script.Combine))
-					.ReduceScript(ss => ss.Inline(Script.Reduce))
+					.InitScript(ss => ss.Source(Script.Init))
+					.MapScript(ss => ss.Source(Script.Map))
+					.CombineScript(ss => ss.Source(Script.Combine))
+					.ReduceScript(ss => ss.Source(Script.Reduce))
 				)
 			);
 
 		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+			new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
 			{
 				Aggregations = new ScriptedMetricAggregation("sum_the_hard_way")
 				{
@@ -81,7 +83,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 	/// <summary>
 	/// Multiple scripted metric with dictionary result
 	/// </summary>
-	public class ScriptedMetricMultiAggregationTests : AggregationUsageTestBase
+	public class ScriptedMetricMultiAggregationTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		class Scripted
 		{
@@ -138,17 +140,17 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 					{
 						init_script = new
 						{
-							inline = First.Init,
+							source = First.Init,
 							lang = First.Language
 						},
 						map_script = new
 						{
-							inline = First.Map,
+							source = First.Map,
 							lang = First.Language
 						},
 						reduce_script = new
 						{
-							inline = First.Reduce,
+							source = First.Reduce,
 							lang = First.Language
 						}
 					}
@@ -159,22 +161,22 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 					{
 						init_script = new
 						{
-							inline = Second.Init,
+							source = Second.Init,
 							lang = Second.Language
 						},
 						map_script = new
 						{
-							inline = Second.Map,
+							source = Second.Map,
 							lang = Second.Language
 						},
 						combine_script = new
 						{
-							inline = Second.Combine,
+							source = Second.Combine,
 							lang = Second.Language
 						},
 						reduce_script = new
 						{
-							inline = Second.Reduce,
+							source = Second.Reduce,
 							lang = Second.Language
 						}
 					}
@@ -183,22 +185,23 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Index(DefaultSeeder.ProjectsAliasFilter)
 			.Aggregations(a => a
 				.ScriptedMetric("by_state_total", sm => sm
-					.InitScript(ss => ss.Inline(First.Init).Lang(First.Language))
-					.MapScript(ss => ss.Inline(First.Map).Lang(First.Language))
-					.ReduceScript(ss => ss.Inline(First.Reduce).Lang(First.Language))
+					.InitScript(ss => ss.Source(First.Init).Lang(First.Language))
+					.MapScript(ss => ss.Source(First.Map).Lang(First.Language))
+					.ReduceScript(ss => ss.Source(First.Reduce).Lang(First.Language))
 				)
 				.ScriptedMetric("total_commits", sm => sm
-					.InitScript(ss => ss.Inline(Second.Init).Lang(Second.Language))
-					.MapScript(ss => ss.Inline(Second.Map).Lang(Second.Language))
-					.CombineScript(ss => ss.Inline(Second.Combine).Lang(Second.Language))
-					.ReduceScript(ss => ss.Inline(Second.Reduce).Lang(Second.Language))
+					.InitScript(ss => ss.Source(Second.Init).Lang(Second.Language))
+					.MapScript(ss => ss.Source(Second.Map).Lang(Second.Language))
+					.CombineScript(ss => ss.Source(Second.Combine).Lang(Second.Language))
+					.ReduceScript(ss => ss.Source(Second.Reduce).Lang(Second.Language))
 				)
 			);
 
 		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+			new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
 			{
 				Aggregations =
 					new ScriptedMetricAggregation("by_state_total")

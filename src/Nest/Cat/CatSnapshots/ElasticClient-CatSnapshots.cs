@@ -29,7 +29,7 @@ namespace Nest
 	{
 		/// <inheritdoc/>
 		public ICatResponse<CatSnapshotsRecord> CatSnapshots(Names repositories, Func<CatSnapshotsDescriptor, ICatSnapshotsRequest> selector = null) =>
-			this.CatSnapshots(selector.InvokeOrDefault(new CatSnapshotsDescriptor(repositories)));
+			this.CatSnapshots(selector.InvokeOrDefault(new CatSnapshotsDescriptor().RepositoryName(repositories)));
 
 		/// <inheritdoc/>
 		public ICatResponse<CatSnapshotsRecord> CatSnapshots(ICatSnapshotsRequest request) =>
@@ -40,7 +40,7 @@ namespace Nest
 			Names repositories,
 			Func<CatSnapshotsDescriptor, ICatSnapshotsRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
-		) => this.CatSnapshotsAsync(selector.InvokeOrDefault(new CatSnapshotsDescriptor(repositories)), cancellationToken);
+		) => this.CatSnapshotsAsync(selector.InvokeOrDefault(new CatSnapshotsDescriptor().RepositoryName(repositories)), cancellationToken);
 
 		/// <inheritdoc/>
 		public Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(ICatSnapshotsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>

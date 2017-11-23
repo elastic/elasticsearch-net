@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Reverts a specific snapshot for a Machine Learning job
+		/// Reverts a specific snapshot for a machine learning job
 		/// </summary>
 		IRevertModelSnapshotResponse RevertModelSnapshot(Id jobId, Id snapshotId, Func<RevertModelSnapshotDescriptor, IRevertModelSnapshotRequest> selector = null);
 

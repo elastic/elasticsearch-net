@@ -33,13 +33,13 @@ namespace Tests.Document.Multiple.Bulk
 
 		private IEnumerable<object> ProjectToBulkJson(Project p)
 		{
-			yield return new Dictionary<string, object> { { "update", new { _type = "project", _id = p.Name } } };
-			yield return new { script = new { inline = "_source.counter++" } };
+			yield return new Dictionary<string, object> { { "update", new { _type = "doc", _id = p.Name } } };
+			yield return new { script = new { source = "_source.counter++" } };
 		}
 
 		protected override Func<BulkDescriptor, IBulkRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
-			.UpdateMany(Updates, (b, u) => b.Script(s => s.Inline("_source.counter++")));
+			.UpdateMany(Updates, (b, u) => b.Script(s => s.Source("_source.counter++")));
 
 
 		protected override BulkRequest Initializer => new BulkRequest(CallIsolatedValue)

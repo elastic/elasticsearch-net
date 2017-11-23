@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Retrieves Machine Learning job results for one or more buckets.
+		/// Retrieves machine learning job results for one or more buckets.
 		/// </summary>
 		IGetBucketsResponse GetBuckets(Id jobId, Func<GetBucketsDescriptor, IGetBucketsRequest> selector = null);
 

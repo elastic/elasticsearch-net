@@ -19,11 +19,10 @@ Targets:
 * clean
   - cleans build output folders
 * test [testfilter]
-  - incremental build and unit test for .NET 4.5, [testfilter] allows you to do
-    a contains match on the tests to be run.
+  - incremental build and unit test for .NET 4.5, [testfilter] allows you to do a contains match on the tests to be run.
 * release <version>
   - 0 create a release worthy nuget packages for [version] under build\output
-* integrate <elasticsearch_versions> [clustername] [testfilter]  -
+* integrate <elasticsearch_versions> [clustername] [testfilter] 
   - run integration tests for <elasticsearch_versions> which is a semicolon separated list of
     elasticsearch versions to test or `latest`. Can filter tests by <clustername> and <testfilter>
 * canary [apikey] [feed]
@@ -51,6 +50,14 @@ module Commandline =
         | _ -> "build"
 
     let needsFullBuild =
+        match (target, skipTests) with
+        | (_, true) -> true
+        //dotnet-xunit needs to a build of its own anyways
+        | ("test", _)
+        | ("integrate", _) -> false
+        | _ -> true
+        
+    let needsClean =
         match (target, skipTests) with
         | (_, true) -> true
         //dotnet-xunit needs to a build of its own anyways

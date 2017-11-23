@@ -42,7 +42,9 @@ namespace Tests.Document.Multiple.Bulk
 			);
 		}
 
+#pragma warning disable 618
 		[Setup]
+#pragma warning restore 618
 		[ProfilingSetup]
 		public void Setup()
 		{

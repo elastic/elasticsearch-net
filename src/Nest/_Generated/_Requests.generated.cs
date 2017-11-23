@@ -51,7 +51,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -86,7 +86,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -138,7 +138,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -180,7 +180,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -191,7 +191,7 @@ namespace Nest
 	public partial interface IAuthenticateRequest : IRequest<AuthenticateRequestParameters> 
 	{
 	 } 
-	///<summary>Request parameters for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-authenticate.html</pre></summary>
+	///<summary>Request parameters for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
 	public partial class AuthenticateRequest  : PlainRequestBase<AuthenticateRequestParameters>, IAuthenticateRequest
 	{
 		protected IAuthenticateRequest Self => this;
@@ -205,7 +205,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -236,7 +236,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -307,7 +307,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -334,7 +334,7 @@ namespace Nest
 		
 
 			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public  string[] NodeId { get { return Q< string[]>("node_id"); } set { Q("node_id", value); } }
+		public  string[] Nodes { get { return Q< string[]>("nodes"); } set { Q("nodes", value); } }
 		
 		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
 		public  string[] Actions { get { return Q< string[]>("actions"); } set { Q("actions", value); } }
@@ -343,7 +343,7 @@ namespace Nest
 		public string ParentNode { get { return Q<string>("parent_node"); } set { Q("parent_node", value); } }
 		
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
-		public string ParentTask { get { return Q<string>("parent_task"); } set { Q("parent_task", value); } }
+		public string ParentTaskId { get { return Q<string>("parent_task_id"); } set { Q("parent_task_id", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
@@ -355,7 +355,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -412,7 +412,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -472,7 +472,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -529,7 +529,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -589,7 +589,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -638,7 +638,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -669,7 +669,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -735,7 +735,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -781,7 +781,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -827,7 +827,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -876,7 +876,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -922,7 +922,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -968,7 +968,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1025,7 +1025,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1071,7 +1071,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1100,6 +1100,9 @@ namespace Nest
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
 		
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
+		
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
@@ -1122,7 +1125,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1150,6 +1153,9 @@ namespace Nest
 
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>The unit in which to display byte values</summary>
+		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
@@ -1179,7 +1185,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1201,8 +1207,8 @@ namespace Nest
 		
 
 		/// <summary>/_cat/snapshots/{repository}</summary>
-///<param name="repository">this parameter is required</param>
-		public CatSnapshotsRequest(Names repository) : base(r=>r.Required("repository", repository)){}
+///<param name="repository">Optional, accepts null</param>
+		public CatSnapshotsRequest(Names repository) : base(r=>r.Optional("repository", repository)){}
 		
 
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -1236,7 +1242,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1291,7 +1297,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1348,7 +1354,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1408,7 +1414,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1420,7 +1426,7 @@ namespace Nest
 	{
 		Name Username { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityChangePassword <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-change-password.html</pre></summary>
+	///<summary>Request parameters for XpackSecurityChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
 	public partial class ChangePasswordRequest  : PlainRequestBase<ChangePasswordRequestParameters>, IChangePasswordRequest
 	{
 		protected IChangePasswordRequest Self => this;
@@ -1447,7 +1453,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1459,7 +1465,7 @@ namespace Nest
 	{
 		Names Realms { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/x-pack/current/security-api-clear-cache.html</pre></summary>
+	///<summary>Request parameters for XpackSecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
 	public partial class ClearCachedRealmsRequest  : PlainRequestBase<ClearCachedRealmsRequestParameters>, IClearCachedRealmsRequest
 	{
 		protected IClearCachedRealmsRequest Self => this;
@@ -1482,7 +1488,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1494,7 +1500,7 @@ namespace Nest
 	{
 		Names Name { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-clear-role-cache</pre></summary>
+	///<summary>Request parameters for XpackSecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-clear-role-cache</pre></summary>
 	public partial class ClearCachedRolesRequest  : PlainRequestBase<ClearCachedRolesRequestParameters>, IClearCachedRolesRequest
 	{
 		protected IClearCachedRolesRequest Self => this;
@@ -1514,7 +1520,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1577,7 +1583,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1602,7 +1608,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1649,7 +1655,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1687,7 +1693,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1718,7 +1724,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1755,7 +1761,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1818,7 +1824,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1849,7 +1855,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1883,7 +1889,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1926,7 +1932,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -1988,7 +1994,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2030,7 +2036,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2079,8 +2085,8 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		///<summary>A comma-separated list of specific routing values</summary>
+		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
@@ -2100,6 +2106,9 @@ namespace Nest
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
+		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
+		public long TerminateAfter { get { return Q<long>("terminate_after"); } set { Q("terminate_after", value); } }
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
@@ -2110,7 +2119,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2152,8 +2161,8 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		///<summary>A comma-separated list of specific routing values</summary>
+		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
@@ -2173,6 +2182,9 @@ namespace Nest
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
+		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
+		public long TerminateAfter { get { return Q<long>("terminate_after"); } set { Q("terminate_after", value); } }
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
@@ -2183,7 +2195,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2227,7 +2239,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2268,7 +2280,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2342,7 +2354,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2377,7 +2389,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2418,7 +2430,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2554,7 +2566,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2683,7 +2695,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2718,7 +2730,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2743,7 +2755,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2771,6 +2783,15 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
+		///<summary>Ignore unavailable indexes (default: false)</summary>
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
+		
+		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
+		
+		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
@@ -2781,7 +2802,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2819,7 +2840,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2854,7 +2875,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2865,7 +2886,7 @@ namespace Nest
 	public partial interface IDeleteLicenseRequest : IRequest<DeleteLicenseRequestParameters> 
 	{
 	 } 
-	///<summary>Request parameters for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	///<summary>Request parameters for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class DeleteLicenseRequest  : PlainRequestBase<DeleteLicenseRequestParameters>, IDeleteLicenseRequest
 	{
 		protected IDeleteLicenseRequest Self => this;
@@ -2879,7 +2900,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2914,7 +2935,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2952,7 +2973,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -2990,7 +3011,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3055,7 +3076,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3106,7 +3127,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3118,7 +3139,7 @@ namespace Nest
 	{
 		Name Name { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityDeleteRoleMapping <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-delete-role-mapping</pre></summary>
+	///<summary>Request parameters for XpackSecurityDeleteRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-delete-role-mapping</pre></summary>
 	public partial class DeleteRoleMappingRequest  : PlainRequestBase<DeleteRoleMappingRequestParameters>, IDeleteRoleMappingRequest
 	{
 		protected IDeleteRoleMappingRequest Self => this;
@@ -3141,7 +3162,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3153,7 +3174,7 @@ namespace Nest
 	{
 		Name Name { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityDeleteRole <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-delete-role</pre></summary>
+	///<summary>Request parameters for XpackSecurityDeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-delete-role</pre></summary>
 	public partial class DeleteRoleRequest  : PlainRequestBase<DeleteRoleRequestParameters>, IDeleteRoleRequest
 	{
 		protected IDeleteRoleRequest Self => this;
@@ -3176,7 +3197,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3187,26 +3208,24 @@ namespace Nest
 	public partial interface IDeleteScriptRequest : IRequest<DeleteScriptRequestParameters> 
 	{
 		Id Id { get; }
-		Name Lang { get; }
 	 } 
 	///<summary>Request parameters for DeleteScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class DeleteScriptRequest  : PlainRequestBase<DeleteScriptRequestParameters>, IDeleteScriptRequest
 	{
 		protected IDeleteScriptRequest Self => this;
 		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
-		Name IDeleteScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
-			/// <summary>/_scripts/{lang}</summary>
-///<param name="lang">this parameter is required</param>
-		public DeleteScriptRequest(Name lang) : base(r=>r.Required("lang", lang)){}
-		
-
-		/// <summary>/_scripts/{lang}/{id}</summary>
-///<param name="lang">this parameter is required</param>		
+			/// <summary>/_scripts/{id}</summary>
 ///<param name="id">this parameter is required</param>
-		public DeleteScriptRequest(Name lang, Id id) : base(r=>r.Required("lang", lang).Required("id", id)){}
+		public DeleteScriptRequest(Id id) : base(r=>r.Required("id", id)){}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
+			///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
 		///<summary>Return human readable values for statistics.</summary>
@@ -3216,39 +3235,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteSearchTemplateRequest : IRequest<DeleteSearchTemplateRequestParameters> 
-	{
-		Id Id { get; }
-	 } 
-	///<summary>Request parameters for DeleteTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
-	public partial class DeleteSearchTemplateRequest  : PlainRequestBase<DeleteSearchTemplateRequestParameters>, IDeleteSearchTemplateRequest
-	{
-		protected IDeleteSearchTemplateRequest Self => this;
-		Id IDeleteSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_search/template/{id}</summary>
-///<param name="id">this parameter is required</param>
-		public DeleteSearchTemplateRequest(Id id) : base(r=>r.Required("id", id)){}
-		
-
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3286,7 +3273,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3298,7 +3285,7 @@ namespace Nest
 	{
 		Name Username { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityDeleteUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-delete-user</pre></summary>
+	///<summary>Request parameters for XpackSecurityDeleteUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-delete-user</pre></summary>
 	public partial class DeleteUserRequest  : PlainRequestBase<DeleteUserRequestParameters>, IDeleteUserRequest
 	{
 		protected IDeleteUserRequest Self => this;
@@ -3321,7 +3308,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3356,7 +3343,43 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeprecationInfoRequest : IRequest<DeprecationInfoRequestParameters> 
+	{
+		IndexName Index { get; }
+	 } 
+	///<summary>Request parameters for XpackDeprecationInfo <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
+	public partial class DeprecationInfoRequest  : PlainRequestBase<DeprecationInfoRequestParameters>, IDeprecationInfoRequest
+	{
+		protected IDeprecationInfoRequest Self => this;
+		IndexName IDeprecationInfoRequest.Index => Self.RouteValues.Get<IndexName>("index");
+			/// <summary>/_xpack/migration/deprecations</summary>
+		public DeprecationInfoRequest() : base(){}
+		
+
+		/// <summary>/{index}/_xpack/migration/deprecations</summary>
+///<param name="index">Optional, accepts null</param>
+		public DeprecationInfoRequest(IndexName index) : base(r=>r.Optional("index", index)){}
+		
+
+			///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3368,7 +3391,7 @@ namespace Nest
 	{
 		Name Username { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityDisableUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-disable-user.html</pre></summary>
+	///<summary>Request parameters for XpackSecurityDisableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-disable-user</pre></summary>
 	public partial class DisableUserRequest  : PlainRequestBase<DisableUserRequestParameters>, IDisableUserRequest
 	{
 		protected IDisableUserRequest Self => this;
@@ -3391,7 +3414,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3468,7 +3491,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3531,7 +3554,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3543,7 +3566,7 @@ namespace Nest
 	{
 		Name Username { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityEnableUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-enable-user.html</pre></summary>
+	///<summary>Request parameters for XpackSecurityEnableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-enable-user</pre></summary>
 	public partial class EnableUserRequest  : PlainRequestBase<EnableUserRequestParameters>, IEnableUserRequest
 	{
 		protected IEnableUserRequest Self => this;
@@ -3566,7 +3589,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3605,7 +3628,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3688,7 +3711,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3700,7 +3723,7 @@ namespace Nest
 	{
 		Indices Index { get; }
 	 } 
-	///<summary>Request parameters for FieldCaps <pre>http://www.elastic.co/guide/en/elasticsearch/reference/5.5/search-field-caps.html</pre></summary>
+	///<summary>Request parameters for FieldCaps <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
 	public partial class FieldCapabilitiesRequest  : PlainRequestBase<FieldCapabilitiesRequestParameters>, IFieldCapabilitiesRequest
 	{
 		protected IFieldCapabilitiesRequest Self => this;
@@ -3736,55 +3759,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IFieldStatsRequest : IRequest<FieldStatsRequestParameters> 
-	{
-		Indices Index { get; }
-	 } 
-	///<summary>Request parameters for FieldStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</pre></summary>
-	public partial class FieldStatsRequest  : PlainRequestBase<FieldStatsRequestParameters>, IFieldStatsRequest
-	{
-		protected IFieldStatsRequest Self => this;
-		Indices IFieldStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_field_stats</summary>
-		public FieldStatsRequest() : base(){}
-		
-
-		/// <summary>/{index}/_field_stats</summary>
-///<param name="index">Optional, accepts null</param>
-		public FieldStatsRequest(Indices index) : base(r=>r.Optional("index", index)){}
-		
-
-			///<summary>Defines if field stats should be returned on a per index level or on a cluster wide level</summary>
-		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3806,7 +3781,10 @@ namespace Nest
 		public FlushJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
+			///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
+		public string SkipTime { get { return Q<string>("skip_time"); } set { Q("skip_time", value); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
 		///<summary>Return human readable values for statistics.</summary>
@@ -3816,7 +3794,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3867,7 +3845,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3927,7 +3905,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -3988,7 +3966,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4020,7 +3998,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4052,7 +4030,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4092,7 +4070,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4128,7 +4106,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4164,7 +4142,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4234,7 +4212,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4245,23 +4223,15 @@ namespace Nest
 	public partial interface IGetIndexRequest : IRequest<GetIndexRequestParameters> 
 	{
 		Indices Index { get; }
-		Features Feature { get; }
 	 } 
 	///<summary>Request parameters for IndicesGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
 	public partial class GetIndexRequest  : PlainRequestBase<GetIndexRequestParameters>, IGetIndexRequest
 	{
 		protected IGetIndexRequest Self => this;
 		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Features IGetIndexRequest.Feature => Self.RouteValues.Get<Features>("feature");
 			/// <summary>/{index}</summary>
 ///<param name="index">this parameter is required</param>
 		public GetIndexRequest(Indices index) : base(r=>r.Required("index", index)){}
-		
-
-		/// <summary>/{index}/{feature}</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="feature">Optional, accepts null</param>
-		public GetIndexRequest(Indices index, Features feature) : base(r=>r.Required("index", index).Optional("feature", feature)){}
 		
 
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -4292,7 +4262,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4359,7 +4329,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4404,7 +4374,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4436,7 +4406,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4472,7 +4442,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4508,7 +4478,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4519,7 +4489,7 @@ namespace Nest
 	public partial interface IGetLicenseRequest : IRequest<GetLicenseRequestParameters> 
 	{
 	 } 
-	///<summary>Request parameters for XpackLicenseGet <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	///<summary>Request parameters for XpackLicenseGet <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetLicenseRequest  : PlainRequestBase<GetLicenseRequestParameters>, IGetLicenseRequest
 	{
 		protected IGetLicenseRequest Self => this;
@@ -4536,7 +4506,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4597,7 +4567,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4637,7 +4607,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4676,7 +4646,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4718,7 +4688,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4795,7 +4765,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4858,7 +4828,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4870,7 +4840,7 @@ namespace Nest
 	{
 		Name Name { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-get-role-mapping</pre></summary>
+	///<summary>Request parameters for XpackSecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-get-role-mapping</pre></summary>
 	public partial class GetRoleMappingRequest  : PlainRequestBase<GetRoleMappingRequestParameters>, IGetRoleMappingRequest
 	{
 		protected IGetRoleMappingRequest Self => this;
@@ -4894,7 +4864,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4906,7 +4876,7 @@ namespace Nest
 	{
 		Name Name { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityGetRole <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-get-role</pre></summary>
+	///<summary>Request parameters for XpackSecurityGetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-get-role</pre></summary>
 	public partial class GetRoleRequest  : PlainRequestBase<GetRoleRequestParameters>, IGetRoleRequest
 	{
 		protected IGetRoleRequest Self => this;
@@ -4930,7 +4900,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -4941,23 +4911,15 @@ namespace Nest
 	public partial interface IGetScriptRequest : IRequest<GetScriptRequestParameters> 
 	{
 		Id Id { get; }
-		Name Lang { get; }
 	 } 
 	///<summary>Request parameters for GetScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class GetScriptRequest  : PlainRequestBase<GetScriptRequestParameters>, IGetScriptRequest
 	{
 		protected IGetScriptRequest Self => this;
 		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
-		Name IGetScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
-			/// <summary>/_scripts/{lang}</summary>
-///<param name="lang">this parameter is required</param>
-		public GetScriptRequest(Name lang) : base(r=>r.Required("lang", lang)){}
-		
-
-		/// <summary>/_scripts/{lang}/{id}</summary>
-///<param name="lang">this parameter is required</param>		
+			/// <summary>/_scripts/{id}</summary>
 ///<param name="id">this parameter is required</param>
-		public GetScriptRequest(Name lang, Id id) : base(r=>r.Required("lang", lang).Required("id", id)){}
+		public GetScriptRequest(Id id) : base(r=>r.Required("id", id)){}
 		
 
 			///<summary>Pretty format the returned JSON response.</summary>
@@ -4970,39 +4932,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetSearchTemplateRequest : IRequest<GetSearchTemplateRequestParameters> 
-	{
-		Id Id { get; }
-	 } 
-	///<summary>Request parameters for GetTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
-	public partial class GetSearchTemplateRequest  : PlainRequestBase<GetSearchTemplateRequestParameters>, IGetSearchTemplateRequest
-	{
-		protected IGetSearchTemplateRequest Self => this;
-		Id IGetSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_search/template/{id}</summary>
-///<param name="id">this parameter is required</param>
-		public GetSearchTemplateRequest(Id id) : base(r=>r.Required("id", id)){}
-		
-
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5046,7 +4976,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5081,7 +5011,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5092,7 +5022,7 @@ namespace Nest
 	public partial interface IGetUserAccessTokenRequest : IRequest<GetUserAccessTokenRequestParameters> 
 	{
 	 } 
-	///<summary>Request parameters for XpackSecurityGetToken <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-get-token</pre></summary>
+	///<summary>Request parameters for XpackSecurityGetToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-get-token</pre></summary>
 	public partial class GetUserAccessTokenRequest  : PlainRequestBase<GetUserAccessTokenRequestParameters>, IGetUserAccessTokenRequest
 	{
 		protected IGetUserAccessTokenRequest Self => this;
@@ -5106,7 +5036,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5118,7 +5048,7 @@ namespace Nest
 	{
 		Names Username { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityGetUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-get-user</pre></summary>
+	///<summary>Request parameters for XpackSecurityGetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-get-user</pre></summary>
 	public partial class GetUserRequest  : PlainRequestBase<GetUserRequestParameters>, IGetUserRequest
 	{
 		protected IGetUserRequest Self => this;
@@ -5142,7 +5072,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5174,7 +5104,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5187,18 +5117,18 @@ namespace Nest
 		Indices Index { get; }
 		Types Type { get; }
 	 } 
-	///<summary>Request parameters for XpackGraphExplore <pre>https://www.elastic.co/guide/en/graph/current/explore.html</pre></summary>
+	///<summary>Request parameters for XpackGraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public partial class GraphExploreRequest<T>  : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
 	{
 		protected IGraphExploreRequest Self => this;
 		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_xpack/_graph/_explore</summary>
+			/// <summary>/{index}/_xpack/graph/_explore</summary>
 ///<param name="index">this parameter is required</param>
 		public GraphExploreRequest(Indices index) : base(r=>r.Required("index", index)){}
 		
 
-		/// <summary>/{index}/{type}/_xpack/_graph/_explore</summary>
+		/// <summary>/{index}/{type}/_xpack/graph/_explore</summary>
 ///<param name="index">this parameter is required</param>		
 ///<param name="type">Optional, accepts null</param>
 		public GraphExploreRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
@@ -5220,24 +5150,24 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for XpackGraphExplore <pre>https://www.elastic.co/guide/en/graph/current/explore.html</pre></summary>
+	///<summary>Request parameters for XpackGraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public partial class GraphExploreRequest  : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
 	{
 		protected IGraphExploreRequest Self => this;
 		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_xpack/_graph/_explore</summary>
+			/// <summary>/{index}/_xpack/graph/_explore</summary>
 ///<param name="index">this parameter is required</param>
 		public GraphExploreRequest(Indices index) : base(r=>r.Required("index", index)){}
 		
 
-		/// <summary>/{index}/{type}/_xpack/_graph/_explore</summary>
+		/// <summary>/{index}/{type}/_xpack/graph/_explore</summary>
 ///<param name="index">this parameter is required</param>		
 ///<param name="type">Optional, accepts null</param>
 		public GraphExploreRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
@@ -5259,7 +5189,32 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGrokProcessorPatternsRequest : IRequest<GrokProcessorPatternsRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for IngestProcessorGrok <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	public partial class GrokProcessorPatternsRequest  : PlainRequestBase<GrokProcessorPatternsRequestParameters>, IGrokProcessorPatternsRequest
+	{
+		protected IGrokProcessorPatternsRequest Self => this;
+				///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Return human readable values for statistics.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5309,7 +5264,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5392,7 +5347,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5433,7 +5388,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5484,7 +5439,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5551,7 +5506,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5562,7 +5517,7 @@ namespace Nest
 	public partial interface IInvalidateUserAccessTokenRequest : IRequest<InvalidateUserAccessTokenRequestParameters> 
 	{
 	 } 
-	///<summary>Request parameters for XpackSecurityInvalidateToken <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-invalidate-token</pre></summary>
+	///<summary>Request parameters for XpackSecurityInvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-invalidate-token</pre></summary>
 	public partial class InvalidateUserAccessTokenRequest  : PlainRequestBase<InvalidateUserAccessTokenRequestParameters>, IInvalidateUserAccessTokenRequest
 	{
 		protected IInvalidateUserAccessTokenRequest Self => this;
@@ -5576,7 +5531,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5592,7 +5547,7 @@ namespace Nest
 	{
 		protected IListTasksRequest Self => this;
 				///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public  string[] NodeId { get { return Q< string[]>("node_id"); } set { Q("node_id", value); } }
+		public  string[] Nodes { get { return Q< string[]>("nodes"); } set { Q("nodes", value); } }
 		
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
 		public  string[] Actions { get { return Q< string[]>("actions"); } set { Q("actions", value); } }
@@ -5604,7 +5559,7 @@ namespace Nest
 		public string ParentNode { get { return Q<string>("parent_node"); } set { Q("parent_node", value); } }
 		
 		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
-		public string ParentTask { get { return Q<string>("parent_task"); } set { Q("parent_task", value); } }
+		public string ParentTaskId { get { return Q<string>("parent_task_id"); } set { Q("parent_task_id", value); } }
 		
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
@@ -5622,7 +5577,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5690,7 +5645,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5733,6 +5688,9 @@ namespace Nest
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool TypedKeys { get { return Q<bool>("typed_keys"); } set { Q("typed_keys", value); } }
 		
+		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the&#160;number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it&#39;s rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
+		public long PreFilterShardSize { get { return Q<long>("pre_filter_shard_size"); } set { Q("pre_filter_shard_size", value); } }
+		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
@@ -5743,7 +5701,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5796,7 +5754,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5876,7 +5834,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5930,7 +5888,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -5985,7 +5943,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6073,7 +6031,59 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface INodesUsageRequest : IRequest<NodesUsageRequestParameters> 
+	{
+		Metrics Metric { get; }
+		NodeIds NodeId { get; }
+	 } 
+	///<summary>Request parameters for NodesUsageForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
+	public partial class NodesUsageRequest  : PlainRequestBase<NodesUsageRequestParameters>, INodesUsageRequest
+	{
+		protected INodesUsageRequest Self => this;
+		Metrics INodesUsageRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
+		NodeIds INodesUsageRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+			/// <summary>/_nodes/usage</summary>
+		public NodesUsageRequest() : base(){}
+		
+
+		/// <summary>/_nodes/{node_id}/usage</summary>
+///<param name="node_id">Optional, accepts null</param>
+		public NodesUsageRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
+		
+
+		/// <summary>/_nodes/usage/{metric}</summary>
+///<param name="metric">Optional, accepts null</param>
+		public NodesUsageRequest(NodesUsageMetric metric) : base(r=>r.Optional("metric", (Metrics)metric)){}
+		
+
+		/// <summary>/_nodes/{node_id}/usage/{metric}</summary>
+///<param name="node_id">Optional, accepts null</param>		
+///<param name="metric">Optional, accepts null</param>
+		public NodesUsageRequest(NodeIds node_id, NodesUsageMetric metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", (Metrics)metric)){}
+		
+
+			///<summary>Whether to return time and byte values in human-readable format.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
+		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
+		
+		///<summary>Include the stack trace of returned errors.</summary>
+		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
+		
+		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6120,7 +6130,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6152,7 +6162,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6177,7 +6187,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6215,7 +6225,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6226,7 +6236,7 @@ namespace Nest
 	public partial interface IPostLicenseRequest : IRequest<PostLicenseRequestParameters> 
 	{
 	 } 
-	///<summary>Request parameters for XpackLicensePost <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	///<summary>Request parameters for XpackLicensePost <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class PostLicenseRequest  : PlainRequestBase<PostLicenseRequestParameters>, IPostLicenseRequest
 	{
 		protected IPostLicenseRequest Self => this;
@@ -6243,7 +6253,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6275,7 +6285,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6316,7 +6326,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6348,7 +6358,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6392,7 +6402,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6424,7 +6434,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6482,7 +6492,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6533,7 +6543,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6571,7 +6581,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6583,7 +6593,7 @@ namespace Nest
 	{
 		Name Name { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityPutRoleMapping <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-put-role-mapping</pre></summary>
+	///<summary>Request parameters for XpackSecurityPutRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-put-role-mapping</pre></summary>
 	public partial class PutRoleMappingRequest  : PlainRequestBase<PutRoleMappingRequestParameters>, IPutRoleMappingRequest
 	{
 		protected IPutRoleMappingRequest Self => this;
@@ -6606,7 +6616,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6618,7 +6628,7 @@ namespace Nest
 	{
 		Name Name { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityPutRole <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-put-role</pre></summary>
+	///<summary>Request parameters for XpackSecurityPutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-put-role</pre></summary>
 	public partial class PutRoleRequest  : PlainRequestBase<PutRoleRequestParameters>, IPutRoleRequest
 	{
 		protected IPutRoleRequest Self => this;
@@ -6641,7 +6651,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6652,26 +6662,32 @@ namespace Nest
 	public partial interface IPutScriptRequest : IRequest<PutScriptRequestParameters> 
 	{
 		Id Id { get; }
-		Name Lang { get; }
+		Name Context { get; }
 	 } 
 	///<summary>Request parameters for PutScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class PutScriptRequest  : PlainRequestBase<PutScriptRequestParameters>, IPutScriptRequest
 	{
 		protected IPutScriptRequest Self => this;
 		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
-		Name IPutScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
-			/// <summary>/_scripts/{lang}</summary>
-///<param name="lang">this parameter is required</param>
-		public PutScriptRequest(Name lang) : base(r=>r.Required("lang", lang)){}
-		
-
-		/// <summary>/_scripts/{lang}/{id}</summary>
-///<param name="lang">this parameter is required</param>		
+		Name IPutScriptRequest.Context => Self.RouteValues.Get<Name>("context");
+			/// <summary>/_scripts/{id}</summary>
 ///<param name="id">this parameter is required</param>
-		public PutScriptRequest(Name lang, Id id) : base(r=>r.Required("lang", lang).Required("id", id)){}
+		public PutScriptRequest(Id id) : base(r=>r.Required("id", id)){}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
+		/// <summary>/_scripts/{id}/{context}</summary>
+///<param name="id">this parameter is required</param>		
+///<param name="context">Optional, accepts null</param>
+		public PutScriptRequest(Id id, Name context) : base(r=>r.Required("id", id).Optional("context", context)){}
+		
+
+			///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
 		///<summary>Return human readable values for statistics.</summary>
@@ -6681,39 +6697,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutSearchTemplateRequest : IRequest<PutSearchTemplateRequestParameters> 
-	{
-		Id Id { get; }
-	 } 
-	///<summary>Request parameters for PutTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
-	public partial class PutSearchTemplateRequest  : PlainRequestBase<PutSearchTemplateRequestParameters>, IPutSearchTemplateRequest
-	{
-		protected IPutSearchTemplateRequest Self => this;
-		Id IPutSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_search/template/{id}</summary>
-///<param name="id">this parameter is required</param>
-		public PutSearchTemplateRequest(Id id) : base(r=>r.Required("id", id)){}
-		
-
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6725,7 +6709,7 @@ namespace Nest
 	{
 		Name Username { get; }
 	 } 
-	///<summary>Request parameters for XpackSecurityPutUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-put-user</pre></summary>
+	///<summary>Request parameters for XpackSecurityPutUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-put-user</pre></summary>
 	public partial class PutUserRequest  : PlainRequestBase<PutUserRequestParameters>, IPutUserRequest
 	{
 		protected IPutUserRequest Self => this;
@@ -6748,7 +6732,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6786,7 +6770,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6828,7 +6812,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6873,7 +6857,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6948,7 +6932,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -6959,7 +6943,7 @@ namespace Nest
 	public partial interface IRemoteInfoRequest : IRequest<RemoteInfoRequestParameters> 
 	{
 	 } 
-	///<summary>Request parameters for RemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/5.5/cluster-remote-info.html</pre></summary>
+	///<summary>Request parameters for ClusterRemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
 	public partial class RemoteInfoRequest  : PlainRequestBase<RemoteInfoRequestParameters>, IRemoteInfoRequest
 	{
 		protected IRemoteInfoRequest Self => this;
@@ -6973,7 +6957,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -7009,7 +6993,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -7034,7 +7018,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -7075,7 +7059,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -7110,7 +7094,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -7162,7 +7146,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -7187,7 +7171,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -7212,7 +7196,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -7300,6 +7284,9 @@ namespace Nest
 		///<summary>The source text for which the suggestions should be returned</summary>
 		public string SuggestText { get { return Q<string>("suggest_text"); } set { Q("suggest_text", value); } }
 		
+		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
+		public bool TrackTotalHits { get { return Q<bool>("track_total_hits"); } set { Q("track_total_hits", value); } }
+		
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool TypedKeys { get { return Q<bool>("typed_keys"); } set { Q("typed_keys", value); } }
 		
@@ -7308,6 +7295,12 @@ namespace Nest
 		
 		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
 		public long BatchedReduceSize { get { return Q<long>("batched_reduce_size"); } set { Q("batched_reduce_size", value); } }
+		
+		///<summary>The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
+		public long MaxConcurrentShardRequests { get { return Q<long>("max_concurrent_shard_requests"); } set { Q("max_concurrent_shard_requests", value); } }
+		
+		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the&#160;number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it&#39;s rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
+		public long PreFilterShardSize { get { return Q<long>("pre_filter_shard_size"); } set { Q("pre_filter_shard_size", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
@@ -7397,6 +7390,9 @@ namespace Nest
 		///<summary>The source text for which the suggestions should be returned</summary>
 		public string SuggestText { get { return Q<string>("suggest_text"); } set { Q("suggest_text", value); } }
 		
+		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
+		public bool TrackTotalHits { get { return Q<bool>("track_total_hits"); } set { Q("track_total_hits", value); } }
+		
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool TypedKeys { get { return Q<bool>("typed_keys"); } set { Q("typed_keys", value); } }
 		
@@ -7405,6 +7401,12 @@ namespace Nest
 		
 		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
 		public long BatchedReduceSize { get { return Q<long>("batched_reduce_size"); } set { Q("batched_reduce_size", value); } }
+		
+		///<summary>The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
+		public long MaxConcurrentShardRequests { get { return Q<long>("max_concurrent_shard_requests"); } set { Q("max_concurrent_shard_requests", value); } }
+		
+		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the&#160;number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it&#39;s rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
+		public long PreFilterShardSize { get { return Q<long>("pre_filter_shard_size"); } set { Q("pre_filter_shard_size", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
@@ -7467,7 +7469,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -7515,7 +7517,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -7589,7 +7591,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -7640,7 +7642,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -7684,7 +7686,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -7723,7 +7725,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -7764,7 +7766,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -7814,7 +7816,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -7828,7 +7830,7 @@ namespace Nest
 		IndexName Index { get; }
 		TypeName Type { get; }
 	 } 
-	///<summary>Request parameters for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/5.5/docs-get.html</pre></summary>
+	///<summary>Request parameters for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceExistsRequest<T>  : PlainRequestBase<SourceExistsRequestParameters>, ISourceExistsRequest
 	{
 		protected ISourceExistsRequest Self => this;
@@ -7888,13 +7890,13 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/5.5/docs-get.html</pre></summary>
+	///<summary>Request parameters for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceExistsRequest  : PlainRequestBase<SourceExistsRequestParameters>, ISourceExistsRequest
 	{
 		protected ISourceExistsRequest Self => this;
@@ -7948,7 +7950,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8022,7 +8024,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8082,7 +8084,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8114,7 +8116,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8139,7 +8141,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8171,7 +8173,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8196,7 +8198,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8241,7 +8243,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8327,7 +8329,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8374,7 +8376,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8516,7 +8518,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8651,7 +8653,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8683,7 +8685,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8737,7 +8739,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8769,7 +8771,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8804,7 +8806,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8884,7 +8886,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8935,7 +8937,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -8980,7 +8982,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -9005,7 +9007,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -9030,7 +9032,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -9113,7 +9115,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -9189,7 +9191,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -9227,7 +9229,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -9253,7 +9255,10 @@ namespace Nest
 		public WatcherStatsRequest(WatcherStatsMetric watcher_stats_metric) : base(r=>r.Optional("watcher_stats_metric", (Metrics)watcher_stats_metric)){}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
+			///<summary>Emits stack traces of currently running watches</summary>
+		public bool EmitStacktraces { get { return Q<bool>("emit_stacktraces"); } set { Q("emit_stacktraces", value); } }
+		
+		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
 		
 		///<summary>Return human readable values for statistics.</summary>
@@ -9263,7 +9268,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -9291,7 +9296,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
@@ -9319,7 +9324,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }

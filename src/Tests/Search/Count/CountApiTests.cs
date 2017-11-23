@@ -24,7 +24,7 @@ namespace Tests.Search.Count
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/project/_count";
+		protected override string UrlPath => "/project/doc/_count";
 
 		protected override object ExpectJson => new
 		{
