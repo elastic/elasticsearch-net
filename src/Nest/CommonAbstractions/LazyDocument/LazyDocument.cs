@@ -25,6 +25,7 @@ namespace Nest
 		object As(Type objectType);
 	}
 
+
 	public class LazyDocument : ILazyDocument
 	{
 		internal JToken Token { get; }

@@ -35,7 +35,9 @@ namespace Nest.JsonNetSerializer
 
 		private static readonly Type[] NestTypesThatCanAppearInSource = {
 			typeof(JoinField),
-			typeof(QueryContainer)
+			typeof(QueryContainer),
+			typeof(CompletionField),
+			typeof(Attachment)
 		};
 
 		public override bool CanConvert(Type objectType) => NestTypesThatCanAppearInSource.Contains(objectType);

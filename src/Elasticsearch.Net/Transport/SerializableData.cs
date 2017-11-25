@@ -45,7 +45,7 @@ namespace Elasticsearch.Net
 				ms = new MemoryStream();
 				stream = ms;
 			}
-			await settings.RequestResponseSerializer.SerializeAsync(this._serializable, stream, indent, cancellationToken);
+			await settings.RequestResponseSerializer.SerializeAsync(this._serializable, stream, indent, cancellationToken).ConfigureAwait(false);
 			if (ms != null)
 			{
 				ms.Position = 0;

@@ -8,3 +8,10 @@ env:
   global:     
     - DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
     - DOTNET_CLI_TELEMETRY_OPTOUT: 1
+addons:
+  apt:
+    sources:
+    - sourceline: 'deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-trusty-prod trusty main'
+      key_url: 'https://packages.microsoft.com/keys/microsoft.asc'
+    packages:
+    - dotnet-sharedframework-microsoft.netcore.app-1.1.2

@@ -69,7 +69,7 @@ namespace Elasticsearch.Net
 			if (formatting == SerializationFormatting.None) serialized = RemoveNewLinesAndTabs(serialized);
 			using (var ms = new MemoryStream(serialized.Utf8Bytes()))
 			{
-				await ms.CopyToAsync(writableStream);
+				await ms.CopyToAsync(writableStream).ConfigureAwait(false);
 			}
 		}
 

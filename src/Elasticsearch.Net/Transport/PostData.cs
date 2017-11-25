@@ -47,13 +47,13 @@ namespace Elasticsearch.Net
 	public class PostData<T> : PostData, IPostData<T>
 	{
 		private readonly string _literalString;
-		private readonly IEnumerable<string> _enumurabeOfStrings;
+		private readonly IEnumerable<string> _enumurableOfStrings;
 		private readonly IEnumerable<object> _enumerableOfObject;
 		private readonly T _serializable;
 
 		protected internal PostData(byte[] item) { WrittenBytes = item; Type = PostType.ByteArray; }
 		protected internal PostData(string item) { _literalString = item; Type = PostType.LiteralString; }
-		protected internal PostData(IEnumerable<string> item) { _enumurabeOfStrings = item; Type = PostType.EnumerableOfString; }
+		protected internal PostData(IEnumerable<string> item) { _enumurableOfStrings = item; Type = PostType.EnumerableOfString; }
 		protected internal PostData(IEnumerable<object> item) { _enumerableOfObject = item; Type = PostType.EnumerableOfObject; }
 		private PostData(T item)
 		{
@@ -68,7 +68,7 @@ namespace Elasticsearch.Net
 			}
 			else if (typeof(IEnumerable<string>).AssignableFrom(boxedType))
 			{
-				_enumurabeOfStrings = (IEnumerable<string>)item; Type = PostType.EnumerableOfString;
+				_enumurableOfStrings = (IEnumerable<string>)item; Type = PostType.EnumerableOfString;
 			}
 			else if (typeof(IEnumerable<object>).AssignableFrom(boxedType))
 			{
@@ -94,7 +94,7 @@ namespace Elasticsearch.Net
 					ms = !string.IsNullOrEmpty(_literalString) ? new MemoryStream(_literalString?.Utf8Bytes()) : null;
 					break;
 				case PostType.EnumerableOfString:
-					ms = _enumurabeOfStrings.HasAny() ? new MemoryStream((string.Join(NewLineString, _enumurabeOfStrings) + NewLineString).Utf8Bytes()) : null;
+					ms = _enumurableOfStrings.HasAny() ? new MemoryStream((string.Join(NewLineString, _enumurableOfStrings) + NewLineString).Utf8Bytes()) : null;
 					break;
 				case PostType.EnumerableOfObject:
 					if (!_enumerableOfObject.HasAny()) return;
@@ -143,7 +143,7 @@ namespace Elasticsearch.Net
 					ms = !string.IsNullOrEmpty(_literalString) ? new MemoryStream(_literalString.Utf8Bytes()) : null;
 					break;
 				case PostType.EnumerableOfString:
-					ms = _enumurabeOfStrings.HasAny() ? new MemoryStream((string.Join(NewLineString, _enumurabeOfStrings) + NewLineString).Utf8Bytes()) : null;
+					ms = _enumurableOfStrings.HasAny() ? new MemoryStream((string.Join(NewLineString, _enumurableOfStrings) + NewLineString).Utf8Bytes()) : null;
 					break;
 				case PostType.EnumerableOfObject:
 					if (!_enumerableOfObject.HasAny()) return;
