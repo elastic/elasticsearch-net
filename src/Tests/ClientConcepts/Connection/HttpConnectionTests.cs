@@ -2,12 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
+using HttpMethod = Elasticsearch.Net.HttpMethod;
 
 namespace Tests.ClientConcepts.Connection
 {
@@ -19,6 +21,8 @@ namespace Tests.ClientConcepts.Connection
 
 		    public int CallCount { get; private set; }
 
+		    public HttpClientHandler LastUsedHttpClientHandler { get; private set; }
+
 		    public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData)
 		    {
 			    CallCount++;
@@ -29,6 +33,12 @@ namespace Tests.ClientConcepts.Connection
 		    {
 			    CallCount++;
 			    return base.RequestAsync<TReturn>(requestData, cancellationToken);
+		    }
+
+		    protected override HttpClientHandler CreateHttpClientHandler(RequestData requestData)
+		    {
+			    LastUsedHttpClientHandler = base.CreateHttpClientHandler(requestData);
+			    return LastUsedHttpClientHandler;
 		    }
 	    }
 
@@ -111,6 +121,36 @@ namespace Tests.ClientConcepts.Connection
 			    Node = new Node(new Uri("http://localhost:9200"))
 		    };
 		    return requestData;
+	    }
+
+	    /// <summary>
+	    /// Setting HttpClientHandler.Proxy = null don't disable HttpClient automatic proxy detection.
+	    /// It is disabled by setting Proxy to non-null value or by setting UseProxy = false.
+	    /// </summary>
+	    [U]
+	    public async Task HttpClientUseProxyShouldBeFalseWhenDisabledAutoProxyDetection()
+	    {
+		    var connection = new TestableHttpConnection();
+		    var requestData = CreateRequestData(disableAutomaticProxyDetection: true);
+
+		    connection.Request<string>(requestData);
+		    connection.LastUsedHttpClientHandler.UseProxy.Should().BeFalse();
+
+		    await connection.RequestAsync<string>(requestData, CancellationToken.None).ConfigureAwait(false);
+		    connection.LastUsedHttpClientHandler.UseProxy.Should().BeFalse();
+	    }
+
+	    [U]
+	    public async Task HttpClientUseProxyShouldBeTrueWhenEnabledAutoProxyDetection()
+	    {
+		    var connection = new TestableHttpConnection();
+		    var requestData = CreateRequestData();
+
+		    connection.Request<string>(requestData);
+		    connection.LastUsedHttpClientHandler.UseProxy.Should().BeTrue();
+
+		    await connection.RequestAsync<string>(requestData, CancellationToken.None).ConfigureAwait(false);
+		    connection.LastUsedHttpClientHandler.UseProxy.Should().BeTrue();
 	    }
     }
 }
