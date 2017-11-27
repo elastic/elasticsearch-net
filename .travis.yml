@@ -6,7 +6,6 @@ mono: 4.6.2
 dotnet: 2.0.3
 env:
   global:     
-    - DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
     - DOTNET_CLI_TELEMETRY_OPTOUT: 1
 addons:
   apt:

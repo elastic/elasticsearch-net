@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <DotNetCoreOnly>1</DotNetCoreOnly>
+    <!--<DotNetCoreOnly>1</DotNetCoreOnly>-->
     <!--<TestPackageVersion>6.0.0</TestPackageVersion>-->
     <DotNetCoreOnly Condition="'$(TRAVIS)'=='true'">1</DotNetCoreOnly>
     <TargetFrameworks Condition="'$(DotNetCoreOnly)'==''">netcoreapp1.1;net45;net46</TargetFrameworks>
