@@ -81,7 +81,7 @@ namespace Nest
 		public IndexSettingsDescriptor Queries(Func<QueriesSettingsDescriptor, IQueriesSettings> selector) =>
 			Assign(a => a.Queries = selector?.Invoke(new QueriesSettingsDescriptor()));
 
-		public IndexSettingsDescriptor Sorting(Func<SortingSettingsDescriptor, ISortingSettings> selector) =>
-			Assign(a => a.Sorting = selector?.Invoke(new SortingSettingsDescriptor()));
+		public IndexSettingsDescriptor Sorting<T>(Func<SortingSettingsDescriptor<T>, ISortingSettings> selector) where T : class =>
+			Assign(a => a.Sorting = selector?.Invoke(new SortingSettingsDescriptor<T>()));
 	}
 }

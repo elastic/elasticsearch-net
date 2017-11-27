@@ -7,6 +7,11 @@ namespace Tests.IndexModules.IndexSettings.Sorting
 {
 	public class SortingSettingsSingleItem
 	{
+		private class TestClass
+		{
+			public string field1 { get; set; }
+		}
+
 		public class Usage : PromiseUsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest.IndexSettings>
 		{
 			protected override object ExpectJson => new Dictionary<string, object>
@@ -18,7 +23,7 @@ namespace Tests.IndexModules.IndexSettings.Sorting
 			};
 
 			protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => s => s
-				.Sorting(sl => sl
+				.Sorting<TestClass>(sl => sl
 					.Fields("field1")
 					.Order(IndexSortOrder.Ascending)
 					.Mode(IndexSortMode.Minimum)
@@ -41,6 +46,12 @@ namespace Tests.IndexModules.IndexSettings.Sorting
 
 	public class SortingSettingsArray
 	{
+		private class TestClass
+		{
+			public string field1 { get; set; }
+			public string field2 { get; set; }
+		}
+
 		public class Usage : PromiseUsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest.IndexSettings>
 		{
 			protected override object ExpectJson => new Dictionary<string, object>
@@ -52,8 +63,8 @@ namespace Tests.IndexModules.IndexSettings.Sorting
 			};
 
 			protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => s => s
-				.Sorting(sl => sl
-					.Fields("field1", "field2")
+				.Sorting<TestClass>(sl => sl
+					.Fields(f => f.Field(p => p.field1).Field("field2"))
 					.Order(IndexSortOrder.Ascending, IndexSortOrder.Descending)
 					.Mode(IndexSortMode.Minimum, IndexSortMode.Maximum)
 					.Missing(IndexSortMissing.First,IndexSortMissing.Last)

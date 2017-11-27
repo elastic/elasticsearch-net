@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -44,7 +45,7 @@ namespace Nest
 		/// <summary>
 		/// The list of fields used to sort the index. Only boolean, numeric, date and keyword fields with doc_values are allowed here.
 		/// </summary>
-		string[] Fields { get; set; }
+		Fields Fields { get; set; }
 
 		/// <summary>
 		/// The sort order to use for each field. The order option can have the following values: <see cref="IndexSortOrder.Ascending"/> and <see cref="IndexSortOrder.Descending"/>.
@@ -70,7 +71,7 @@ namespace Nest
 	public class SortingSettings : ISortingSettings
 	{
 		/// <inheritdoc/>
-		public string[] Fields { get; set; }
+		public Fields Fields { get; set; }
 
 		/// <inheritdoc/>
 		public IndexSortOrder[] Order { get; set; }
@@ -82,23 +83,21 @@ namespace Nest
 		public IndexSortMissing[] Missing { get; set; }
 	}
 
-	public class SortingSettingsDescriptor : DescriptorBase<SortingSettingsDescriptor, ISortingSettings>, ISortingSettings
+	public class SortingSettingsDescriptor<T> : DescriptorBase<SortingSettingsDescriptor<T>, ISortingSettings>, ISortingSettings where T : class
 	{
-		string[] ISortingSettings.Fields { get; set; }
+		Fields ISortingSettings.Fields { get; set; }
 		IndexSortOrder[] ISortingSettings.Order { get; set; }
 		IndexSortMode[] ISortingSettings.Mode { get; set; }
 		IndexSortMissing[] ISortingSettings.Missing { get; set; }
 
-		/// <inheritdoc/>
-		public SortingSettingsDescriptor Fields(params string[] fields) => Assign(a => a.Fields = fields);
+		public SortingSettingsDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) => Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		/// <inheritdoc/>
-		public SortingSettingsDescriptor Order(params IndexSortOrder[] order) => Assign(a => a.Order = order);
+		public SortingSettingsDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
 
-		/// <inheritdoc/>
-		public SortingSettingsDescriptor Mode(params IndexSortMode[] mode) => Assign(a => a.Mode = mode);
+		public SortingSettingsDescriptor<T> Order(params IndexSortOrder[] order) => Assign(a => a.Order = order);
 
-		/// <inheritdoc/>
-		public SortingSettingsDescriptor Missing(params IndexSortMissing[] missing) => Assign(a => a.Missing = missing);
+		public SortingSettingsDescriptor<T> Mode(params IndexSortMode[] mode) => Assign(a => a.Mode = mode);
+
+		public SortingSettingsDescriptor<T> Missing(params IndexSortMissing[] missing) => Assign(a => a.Missing = missing);
 	}
 }
