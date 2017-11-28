@@ -8,12 +8,13 @@ using Tests.Framework;
 
 namespace Tests.CodeStandards
 {
+	[ProjectReferenceOnly]
 	public class Analysis
 	{
 		/**
 		* Every analyzer interface should attribute properties with JsonPropertyAttribute
 		*/
-		[U]
+		[U()]
 		public void AnalyzerPropertiesAreAttributedWithJsonPropertyAttribute() =>
 			PropertiesOfTypeAreAttributedWithJsonPropertyAttribute(typeof(IAnalyzer));
 
