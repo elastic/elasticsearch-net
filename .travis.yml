@@ -15,4 +15,4 @@ addons:
       key_url: 'https://packages.microsoft.com/keys/microsoft.asc'
     packages:
     - dotnet-sharedframework-microsoft.netcore.app-1.1.2
-    - dotnet-sharedframework-microsoft.netcore.app-1.0.4
+    - dotnet-sharedframework-microsoft.netcore.app-1.0.5
