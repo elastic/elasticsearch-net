@@ -17,7 +17,7 @@ namespace Elasticsearch.Net
 
 		public HttpMethod Method { get; private set; }
 		public string Path { get; }
-		public PostData<object> PostData { get; }
+		public PostData PostData { get; }
 		public bool MadeItToResponse { get; set;}
 		public AuditEvent OnFailureAuditEvent => this.MadeItToResponse ? AuditEvent.BadResponse : AuditEvent.BadRequest;
 		public PipelineFailure OnFailurePipelineFailure => this.MadeItToResponse ? PipelineFailure.BadResponse : PipelineFailure.BadRequest;
@@ -48,7 +48,7 @@ namespace Elasticsearch.Net
 
 		public X509CertificateCollection ClientCertificates { get; set; }
 
-		public RequestData(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IRequestParameters local, IMemoryStreamFactory memoryStreamFactory)
+		public RequestData(HttpMethod method, string path, PostData data, IConnectionConfigurationValues global, IRequestParameters local, IMemoryStreamFactory memoryStreamFactory)
 			: this(method, path, data, global, local?.RequestConfiguration, memoryStreamFactory)
 		{
 			this.CustomConverter = local?.DeserializationOverride;
@@ -58,7 +58,7 @@ namespace Elasticsearch.Net
 		private RequestData(
 			HttpMethod method,
 			string path,
-			PostData<object> data,
+			PostData data,
 			IConnectionConfigurationValues global,
 			IRequestConfiguration local,
 			IMemoryStreamFactory memoryStreamFactory)

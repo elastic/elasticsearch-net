@@ -21,7 +21,7 @@ namespace Tests.Reproduce
             };
 
             var client = new ElasticClient();
-            var serializedDates = client.Serializer.SerializeToString(dates,SerializationFormatting.None);
+            var serializedDates = client.RequestResponseSerializer.SerializeToString(dates,SerializationFormatting.None);
 
             serializedDates.Should()
                 .Be("{\"dateTimeUtcKind\":\"2016-01-01T01:01:01Z\"," +
@@ -30,7 +30,7 @@ namespace Tests.Reproduce
 
             using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(serializedDates)))
             {
-                var deserializedDates = client.Serializer.Deserialize<Dates>(stream);
+                var deserializedDates = client.RequestResponseSerializer.Deserialize<Dates>(stream);
 
                 deserializedDates.DateTimeUtcKind.Should().Be(dates.DateTimeUtcKind);
                 deserializedDates.DateTimeUtcKind.Kind.Should().Be(dates.DateTimeUtcKind.Kind);

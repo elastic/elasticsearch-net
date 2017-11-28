@@ -24,7 +24,7 @@ namespace Tests.Framework
 		/// <param name="factory">The delegate that is invoked on a background thread to produce the value when it is needed.</param>
 		public AsyncLazy(Func<T> factory)
 		{
-			instance = new Lazy<Task<T>>(() => System.Threading.Tasks.Task.Run(factory));
+			instance = new Lazy<Task<T>>(() => Task.Run(factory));
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace Tests.Framework
 		/// <param name="factory">The asynchronous delegate that is invoked on a background thread to produce the value when it is needed.</param>
 		public AsyncLazy(Func<Task<T>> factory)
 		{
-			instance = new Lazy<Task<T>>(() => System.Threading.Tasks.Task.Run(factory));
+			instance = new Lazy<Task<T>>(() => Task.Run(factory));
 		}
 
 		/// <summary>
@@ -53,12 +53,12 @@ namespace Tests.Framework
 		}
 	}
 
-	public class LazyResponses : AsyncLazy<Dictionary<Integration.ClientMethod, IResponse>>
+	public class LazyResponses : AsyncLazy<Dictionary<ClientMethod, IResponse>>
 	{
-		public static LazyResponses Empty { get; } = new LazyResponses(() => new Dictionary<Integration.ClientMethod, IResponse> { });
+		public static LazyResponses Empty { get; } = new LazyResponses(() => new Dictionary<ClientMethod, IResponse>());
 
-		public LazyResponses(Func<Dictionary<Integration.ClientMethod, IResponse>> factory) : base(factory) { }
+		public LazyResponses(Func<Dictionary<ClientMethod, IResponse>> factory) : base(factory) { }
 
-		public LazyResponses(Func<Task<Dictionary<Integration.ClientMethod, IResponse>>> factory) : base(factory) { }
+		public LazyResponses(Func<Task<Dictionary<ClientMethod, IResponse>>> factory) : base(factory) { }
 	}
 }

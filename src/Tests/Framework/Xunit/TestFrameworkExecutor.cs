@@ -26,16 +26,20 @@ namespace Xunit
 				{
 					await runner.RunAsync();
 					Console.Out.Flush();
-					Console.WriteLine("--------");
-					Console.WriteLine("Individual cluster running times:");
-					foreach (var kv in runner.ClusterTotals)
-						Console.WriteLine($"- {kv.Key}: {kv.Value.Elapsed}");
-					Console.WriteLine("--------");
+					if (runner.ClusterTotals.Count > 0)
+					{
+						Console.WriteLine("--------");
+						Console.WriteLine("Individual cluster running times:");
+						foreach (var kv in runner.ClusterTotals)
+							Console.WriteLine($"- {kv.Key}: {kv.Value.Elapsed}");
+						Console.WriteLine("--------");
+					}
 
 					DumpSeenDeprecations();
 
 					if (runner.FailedCollections.Count > 0)
 					{
+						Console.WriteLine("--------");
 						Console.ForegroundColor = ConsoleColor.Red;
 						Console.WriteLine("Failed collections:");
 						foreach (var t in runner.FailedCollections.OrderBy(p => p.Item1).ThenBy(t => t.Item2))
@@ -43,8 +47,9 @@ namespace Xunit
 							var cluster = t.Item1;
 							Console.WriteLine($" - {cluster}: {t.Item2}");
 						}
-						DumpReproduceFilters(runner);
+						Console.WriteLine("--------");
 					}
+					DumpReproduceFilters(runner);
 					Console.ResetColor();
 				}
 			}
@@ -67,24 +72,30 @@ namespace Xunit
 
 		private static void DumpReproduceFilters(TestAssemblyRunner runner)
 		{
-			var runningIntegrations = TestClient.Configuration.RunIntegrationTests;
+			var config = TestClient.Configuration;
+			var runningIntegrations = config.RunIntegrationTests;
 			Console.ForegroundColor = ConsoleColor.Yellow;
 			Console.WriteLine("--------");
-			var sb = new StringBuilder("build ");
-			if (runningIntegrations)
-				sb.Append("integrate ")
-					.Append(TestClient.Configuration.ElasticsearchVersion)
-					.Append(" \"");
-			else sb.Append("test");
+			var sb = new StringBuilder("build ")
+				.Append($"seed:{config.Seed} ");
+			if (config.UsingCustomSourceSerializer)
+				sb.Append("source_serialization ");
 
 			if (runningIntegrations)
+				sb.Append("integrate ")
+					.Append(TestClient.Configuration.ElasticsearchVersion);
+
+			else sb.Append("test");
+
+			if (runningIntegrations && runner.FailedCollections.Count > 0)
 			{
                 var clusters = string.Join(",", runner.FailedCollections
                     .Select(c => c.Item1.ToLowerInvariant()).Distinct());
-                sb.Append(clusters);
+                sb.Append(" \"");
+				sb.Append(clusters);
                 sb.Append("\"");
 			}
-			if (!runningIntegrations || (runner.FailedCollections.Count < 30))
+			if ((!runningIntegrations || (runner.FailedCollections.Count < 30)) && runner.FailedCollections.Count > 0)
 			{
 				sb.Append(" \"");
 				var tests = string.Join(",", runner.FailedCollections

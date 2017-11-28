@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IHitMetadata<out T> where T : class
+	public interface IHitMetadata<out TDocument> where TDocument : class
 	{
 		string Index { get; }
 		string Type { get; }
@@ -14,13 +14,14 @@ namespace Nest
 		string Id { get; }
 		[Obsolete("No longer returned on indexes created in Elasticsearch 6.x and up")]
 		string Parent { get; }
-		T Source { get; }
+		[JsonConverter(typeof(SourceConverter))]
+		TDocument Source { get; }
 	}
 
 	internal static class HitMetadataConversionExtensions
 	{
-		public static IHitMetadata<TTarget> Copy<TSource, TTarget>(this IHitMetadata<TSource> source, Func<TSource, TTarget> mapper)
-			where TSource : class
+		public static IHitMetadata<TTarget> Copy<TDocument, TTarget>(this IHitMetadata<TDocument> source, Func<TDocument, TTarget> mapper)
+			where TDocument : class
 			where TTarget : class
 		{
 			return new Hit<TTarget>()
@@ -38,7 +39,7 @@ namespace Nest
 	}
 
 	[ContractJsonConverter(typeof(DefaultHitJsonConverter))]
-	public interface IHit<out T> : IHitMetadata<T> where T : class
+	public interface IHit<out TDocument> : IHitMetadata<TDocument> where TDocument : class
 	{
 		//technically metadata but we have no intention on preserving these
 		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
@@ -57,13 +58,13 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class Hit<T> : IHit<T> where T : class
+	public class Hit<TDocument> : IHit<TDocument> where TDocument : class
 	{
 		[JsonProperty("fields")]
 		public FieldValues Fields { get; internal set; }
 
 		[JsonProperty("_source")]
-		public T Source { get; internal set; }
+		public TDocument Source { get; internal set; }
 
 		[JsonProperty("_index")]
 		public string Index { get; internal set; }

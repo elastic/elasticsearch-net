@@ -16,6 +16,8 @@ namespace Tests.Document.Single.Create
 	public class CreateApiTests :
 		ApiIntegrationTestBase<WritableCluster, ICreateResponse, ICreateRequest<Project>, CreateDescriptor<Project>, CreateRequest<Project>>
 	{
+		protected override bool IncludeNullInExpected => false;
+
 		private Project Document => new Project
 		{
 			State = StateOfBeing.Stable,
@@ -23,18 +25,17 @@ namespace Tests.Document.Single.Create
 			StartedOn = FixedDate,
 			LastActivity = FixedDate,
 			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}},
+			SourceOnly = TestClient.Configuration.UsingCustomSourceSerializer ? new SourceOnlyObject() : null
 		};
 
-		public CreateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public CreateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Create(this.Document, f),
 			fluentAsync: (client, f) => client.CreateAsync(this.Document, f),
 			request: (client, r) => client.Create(r),
 			requestAsync: (client, r) => client.CreateAsync(r)
-			);
+		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 201;
@@ -49,10 +50,13 @@ namespace Tests.Document.Single.Create
 			new
 			{
 				name = CallIsolatedValue,
-				join = Document.Join,
+				join = Document.Join.ToAnonymousObject(),
 				state = "Stable",
+				visibility = "Public",
 				startedOn = FixedDate,
 				lastActivity = FixedDate,
+				numberOfContributors = 0,
+				sourceOnly = Dependant(null, new { notWrittenByDefaultSerializer = "written" }),
 				curatedTags = new[] {new {name = "x", added = FixedDate}},
 			};
 

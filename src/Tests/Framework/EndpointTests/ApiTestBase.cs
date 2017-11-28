@@ -8,6 +8,7 @@ using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.ManagedElasticsearch.SourceSerializers;
 using Xunit;
 
 namespace Tests.Framework
@@ -40,8 +41,10 @@ namespace Tests.Framework
 		protected virtual void OnAfterCall(IElasticClient client) { }
 
 		protected virtual TDescriptor NewDescriptor() => Activator.CreateInstance<TDescriptor>();
-		protected virtual Func<TDescriptor, TInterface> Fluent { get; }
-		protected virtual TInitializer Initializer { get; }
+		protected virtual Func<TDescriptor, TInterface> Fluent { get; } = null;
+		protected virtual TInitializer Initializer { get; } = null;
+
+		protected override IElasticClient Client => TestClient.DefaultClientWithSourceSerializer;
 
 		protected abstract LazyResponses ClientUsage();
 
@@ -112,13 +115,13 @@ namespace Tests.Framework
 				dict.Add(ClientMethod.InitializerAsync, await requestAsync(client, this.Initializer));
 				OnAfterCall(client);
 
-				if (TestClient.Configuration.RunIntegrationTests)
-				{
-					this.IntegrationTeardown(client, _uniqueValues);
-					this._usage.CalledTeardown = true;
-				}
+				if (!TestClient.Configuration.RunIntegrationTests) return dict;
+
+				this.IntegrationTeardown(client, _uniqueValues);
+				this._usage.CalledTeardown = true;
 
 				return dict;
+
 			});
 		}
 

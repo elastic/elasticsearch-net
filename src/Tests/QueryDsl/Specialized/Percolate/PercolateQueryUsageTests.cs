@@ -81,7 +81,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 						Query = "Martijn"
 					})
 				}, d => d.Index(percolationIndex));
-				this.Client.Index(Project.Instance);
+				this.Client.IndexDocument(Project.Instance);
 				this.Client.Refresh(Nest.Indices.Index(percolationIndex).And<Project>());
 			}
 		}

@@ -30,14 +30,31 @@ Targets:
     also pushes to upstream (myget)
 
 NOTE: both the `test` and `integrate` targets can be suffixed with `-all` to force the tests against all suported TFM's
+
+Execution hints can be provided anywhere on the command line
+- skiptests : skip running tests as part of the target chain
+- source_serialization : force tests to use a client with custom source serialization
+- seed:<N> : provide a seed to run the tests with.
 """
 
 module Commandline =
     type MultiTarget = All | One
 
     let private args = getBuildParamOrDefault "cmdline" "build" |> split ' '
+    
     let skipTests = args |> List.exists (fun x -> x = "skiptests")
-    let private filteredArgs = args |> List.filter (fun x -> x <> "skiptests")
+    let forceSourceSerialization = args |> List.exists (fun x -> x = "source_serialization")
+    let seed = 
+        match args |> List.tryFind (fun x -> x.StartsWith("seed:")) with
+        | Some t -> t.Replace("seed:", "")
+        | _ -> ""
+        
+    let private filteredArgs = 
+        args 
+        |> List.filter (
+            fun x -> 
+                x <> "skiptests" && x <> "source_serialization" && not (x.StartsWith("seed:"))
+        )
 
     let multiTarget =
         match (filteredArgs |> List.tryHead) with
@@ -49,6 +66,12 @@ module Commandline =
         | Some t -> t.Replace("-all", "")
         | _ -> "build"
 
+    let validMonoTarget =
+        match target with
+        | "release"
+        | "canary" -> false
+        | _ -> true
+        
     let needsFullBuild =
         match (target, skipTests) with
         | (_, true) -> true
@@ -59,10 +82,11 @@ module Commandline =
         
     let needsClean =
         match (target, skipTests) with
-        | (_, true) -> true
+        | ("release", _) -> true
         //dotnet-xunit needs to a build of its own anyways
         | ("test", _)
-        | ("integrate", _) -> false
+        | ("integrate", _) 
+        | ("build", _) -> false
         | _ -> true
 
     let arguments =
@@ -134,6 +158,7 @@ module Commandline =
             setBuildParam "clusterfilter" "ConnectionReuse"
             setBuildParam "numberOfConnections" numberOfConnections
             
+        | ["temp"; ] -> ignore()
         | ["canary"; ] -> ignore()
         | ["canary"; apiKey ] ->
             setBuildParam "apiKey" apiKey

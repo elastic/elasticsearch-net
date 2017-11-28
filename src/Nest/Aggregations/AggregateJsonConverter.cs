@@ -226,7 +226,14 @@ namespace Nest
 			var maxScore = o[Parser.MaxScore].ToObject<double?>();
 			var hits = o[Parser.Hits].Children().OfType<JObject>();
 			reader.Read();
-			return new TopHitsAggregate(hits, serializer) {Total = total, MaxScore = maxScore};
+			//using request/response serializer here because doc is wrapped in NEST's Hit<T>
+			var s = serializer.GetConnectionSettings().RequestResponseSerializer;
+			var lazyHits = hits.Select(h => new LazyDocument(h,s)).ToList();
+			return new TopHitsAggregate(lazyHits)
+			{
+				Total = total,
+				MaxScore = maxScore
+			};
 		}
 
 		private IAggregate GetGeoCentroidAggregate(JsonReader reader, JsonSerializer serializer)
@@ -578,12 +585,16 @@ namespace Nest
 				return valueMetric;
 			}
 
-			var scriptedMetric = serializer.Deserialize(reader);
 
+			//var scriptedMetric = serializer.Deserialize(reader);
+			var scriptedMetric = JToken.ReadFrom(reader);
 
 			reader.Read();
 			if (scriptedMetric != null)
-				return new ScriptedMetricAggregate {_Value = scriptedMetric};
+			{
+				var s = serializer.GetConnectionSettings().SourceSerializer;
+				return new ScriptedMetricAggregate(new LazyDocument(scriptedMetric, s));
+			}
 
 			return valueMetric;
 		}

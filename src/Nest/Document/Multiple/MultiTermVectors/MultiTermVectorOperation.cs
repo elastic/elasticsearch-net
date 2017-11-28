@@ -12,6 +12,7 @@ namespace Nest
 		[JsonProperty("_id")]
 		Id Id { get; set; }
 		[JsonProperty("doc")]
+		[JsonConverter(typeof(SourceConverter))]
 		object Document { get; set; }
 		[JsonProperty("fields")]
 		Fields StoredFields { get; set; }
@@ -73,6 +74,8 @@ namespace Nest
 		public MultiTermVectorOperationDescriptor<T> StoredFields(Fields fields) => Assign(a => a.StoredFields = fields);
 
 		public MultiTermVectorOperationDescriptor<T> Id(Id id) => Assign(a=>a.Id = id);
+
+		public MultiTermVectorOperationDescriptor<T> Document(T document) => Assign(a => a.Document = document);
 
 		public MultiTermVectorOperationDescriptor<T> Offsets(bool offsets = true) => Assign(a => a.Offsets = offsets);
 

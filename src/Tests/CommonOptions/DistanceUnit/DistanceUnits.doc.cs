@@ -43,7 +43,7 @@ namespace Tests.CommonOptions.DistanceUnit
 			Distance distanceString = "25";
 			Distance distanceStringWithUnits = "25m";
 
-			Expect(new Distance(25))
+			Expect("25.0m")
 				.WhenSerializing(distanceString)
 				.WhenSerializing(distanceStringWithUnits);
 		}

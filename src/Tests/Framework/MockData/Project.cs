@@ -5,6 +5,7 @@ using Bogus;
 using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Tests.Search;
 
 namespace Tests.Framework.MockData
 {
@@ -14,6 +15,10 @@ namespace Tests.Framework.MockData
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public StateOfBeing State { get; set; }
+
+        //the first applies when using internal source serializer the latter when using JsonNetSourceSerializer
+        [StringEnum, JsonConverter(typeof(StringEnumConverter))]
+		public Visibility Visibility { get; set; }
 		public DateTime StartedOn { get; set; }
 		public string DateString { get; set; }
 		public DateTime LastActivity { get; set; }
@@ -23,16 +28,19 @@ namespace Tests.Framework.MockData
 		public Dictionary<string, Metadata> Metadata { get; set; }
 		public SimpleGeoPoint Location { get; set; }
 		public int? NumberOfCommits { get; set; }
-		public int? NumberOfContributors { get; set; }
+		public int NumberOfContributors { get; set; }
 		public CompletionField Suggest { get; set; }
 		public IEnumerable<string> Branches { get; set; }
 		public Ranges Ranges { get; set; }
+
+		public SourceOnlyObject SourceOnly { get; set; }
 
 		public static Faker<Project> Generator { get; } =
 			new Faker<Project>()
 				.RuleFor(p => p.Name, f => f.Person.Company.Name)
 				.RuleFor(p => p.Description, f => f.Lorem.Paragraphs(3))
 				.RuleFor(p => p.State, f => f.PickRandom<StateOfBeing>())
+				.RuleFor(p => p.Visibility, f => f.PickRandom<Visibility>())
 				.RuleFor(p => p.StartedOn, p => p.Date.Past())
 				.RuleFor(p => p.DateString, (p, d) => d.StartedOn.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"))
 				.RuleFor(p => p.LastActivity, p => p.Date.Recent())
@@ -43,40 +51,63 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.NumberOfCommits, f => Gimme.Random.Number(1, 1000))
 				.RuleFor(p => p.NumberOfContributors, f => Gimme.Random.Number(1, 200))
 				.RuleFor(p => p.Ranges, f => Ranges.Generator.Generate())
-				.RuleFor(p => p.Suggest, f => new CompletionField
-					{
-						Input = new[] { f.Person.Company.Name },
-						Contexts = new Dictionary<string, IEnumerable<string>>
-						{
-							{ "color", new [] { "red", "blue", "green", "violet", "yellow" }.Take(Gimme.Random.Number(1, 4)) }
-						}
-				}
+				.RuleFor(p => p.SourceOnly, f =>
+					TestClient.Configuration.UsingCustomSourceSerializer ? new SourceOnlyObject() : null
 				)
+				.RuleFor(p => p.Suggest, f => new CompletionField
+				{
+					Input = new[] { f.Person.Company.Name },
+					Contexts = new Dictionary<string, IEnumerable<string>>
+					{
+						{ "color", new [] { "red", "blue", "green", "violet", "yellow" }.Take(Gimme.Random.Number(1, 4)) }
+					}
+				})
 			;
 
 		public static IList<Project> Projects { get; } = Project.Generator.Generate(100).ToList();
 
 	    public static Project First { get; } = Projects.First();
 
-		public static Project Instance = new Project
+		public static readonly Project Instance = new Project
 		{
 			Name = Projects.First().Name,
 			LeadDeveloper = new Developer() { FirstName = "Martijn", LastName = "Laarman" },
 			StartedOn = new DateTime(2015, 1, 1),
 			DateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-			Location = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 }
+			Location = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 },
+			SourceOnly = TestClient.Configuration.UsingCustomSourceSerializer ? new SourceOnlyObject() : null
 		};
 
-		public static object InstanceAnonymous = new
+		public static object InstanceAnonymous => TestClient.Configuration.UsingCustomSourceSerializer
+			? InstanceAnonymousSourceSerializer
+			: InstanceAnonymousDefault;
+
+		private static readonly object InstanceAnonymousDefault = new
 		{
 			name = Projects.First().Name,
-			join = Instance.Join,
+			join = Instance.Join.ToAnonymousObject(),
 			state = "BellyUp",
+			visibility = "Public",
 			startedOn = "2015-01-01T00:00:00",
 			lastActivity = "0001-01-01T00:00:00",
+			numberOfContributors = 0,
 			dateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
 			leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
 			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon }
+		};
+		private static readonly object InstanceAnonymousSourceSerializer = new
+		{
+			name = Projects.First().Name,
+			join = Instance.Join.ToAnonymousObject(),
+			state = "BellyUp",
+			visibility = "Public",
+			startedOn = "2015-01-01T00:00:00",
+			lastActivity = "0001-01-01T00:00:00",
+			numberOfContributors = 0,
+			dateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+			leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
+			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon },
+			sourceOnly = new { notWrittenByDefaultSerializer = "written" }
 		};
 	}
 
@@ -92,12 +123,19 @@ namespace Tests.Framework.MockData
 			;
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
+	//the first applies when using internal source serializer the latter when using JsonNetSourceSerializer
+	[StringEnum, JsonConverter(typeof(StringEnumConverter))]
 	public enum StateOfBeing
 	{
 		BellyUp,
 		Stable,
 		VeryActive
+	}
+
+	public enum Visibility
+	{
+		Public,
+		Private
 	}
 
 	public class Metadata

@@ -54,7 +54,7 @@ namespace Nest
 		private RecoveryStatusResponse DeserializeRecoveryStatusResponse(IApiCallDetails response, Stream stream)
 		{
 			if (!response.Success) return CreateInvalidInstance<RecoveryStatusResponse>(response);
-			var indices = this.Serializer.Deserialize<Dictionary<string, RecoveryStatus>>(stream);
+			var indices = this.RequestResponseSerializer.Deserialize<Dictionary<string, RecoveryStatus>>(stream);
 			return new RecoveryStatusResponse { Indices = indices };
 		}
 	}

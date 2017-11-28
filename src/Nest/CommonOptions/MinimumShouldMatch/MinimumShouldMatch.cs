@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(MinimumShouldMatchJsonConverter))]
+	[ContractJsonConverter(typeof(MinimumShouldMatchJsonConverter))]
 	public class MinimumShouldMatch : Union<int?, string>
 	{
 		public MinimumShouldMatch(int count) : base(count) { }
@@ -18,7 +18,7 @@ namespace Nest
 		public static implicit operator MinimumShouldMatch(double second) => Percentage(second);
 	}
 
-	internal class MinimumShouldMatchJsonConverter :JsonConverter 
+	internal class MinimumShouldMatchJsonConverter :JsonConverter
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => true;

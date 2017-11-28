@@ -16,60 +16,84 @@ namespace Tests.Framework
 	{
 		protected override object ExpectJson { get; }
 
-		internal RoundTripper(
-			object expected,
+		internal RoundTripper(object expected,
 			Func<ConnectionSettings, ConnectionSettings> settings = null,
-			Func<ConnectionSettings, IElasticsearchSerializer> _serializerFactory = null
-			)
+			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory = null,
+			IPropertyMappingProvider propertyMappingProvider = null)
 		{
 			this.ExpectJson = expected;
-			this._connectionSettingsModifier = settings;
+			this.ConnectionSettingsModifier = settings;
+			this.SourceSerializerFactory = sourceSerializerFactory;
+			this.PropertyMappingProvider = propertyMappingProvider;
 
-			this._expectedJsonString = this.Serialize(expected);
-			this._expectedJsonJObject = JToken.Parse(this._expectedJsonString);
-			this._serializerFactory = _serializerFactory;
+			var expectedString = JsonConvert.SerializeObject(expected, NullValueSettings);
+			this.ExpectedJsonJObject = JToken.Parse(expectedString);
 		}
 
 		public virtual void DeserializesTo<T>(Action<string, T> assert)
 		{
-			var json = (this.ExpectJson is string) ? (string) ExpectJson : JsonConvert.SerializeObject(this.ExpectJson);
+			var json = (this.ExpectJson is string)
+				? (string) ExpectJson
+				: JsonConvert.SerializeObject(this.ExpectJson, NullValueSettings);
 
 			T sut;
 			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
-				sut = this.Client.Serializer.Deserialize<T>(stream);
+				sut = this.Client.RequestResponseSerializer.Deserialize<T>(stream);
 			sut.Should().NotBeNull();
 			assert("first deserialization", sut);
 
-			var serialized = this.Client.Serializer.SerializeToString(sut);
+			var serialized = this.Client.RequestResponseSerializer.SerializeToString(sut);
 			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(serialized)))
-				sut = this.Client.Serializer.Deserialize<T>(stream);
+				sut = this.Client.RequestResponseSerializer.Deserialize<T>(stream);
 			sut.Should().NotBeNull();
 			assert("second deserialization", sut);
 		}
 
 		public void FromRequest(IResponse response) => ToSerializeTo(response.ApiCall.RequestBodyInBytes);
+		public void FromRequest<T>(Func<IElasticClient, T> call) where T : IResponse => FromRequest(call(this.Client));
 		public void FromResponse(IResponse response) => ToSerializeTo(response.ApiCall.ResponseBodyInBytes);
+		public void FromResponse<T>(Func<IElasticClient, T> call) where T : IResponse => FromResponse(call(this.Client));
 		public void ToSerializeTo(byte[] json) => ToSerializeTo(Encoding.UTF8.GetString(json));
 		public void ToSerializeTo(string json)
 		{
-			var expected = JObject.FromObject(this.ExpectJson);
-			var actual = JObject.Parse(json);
+			if (this.ExpectJson == null) throw new Exception(json);
+
+			if (this.ExpectedJsonJObject.Type != JTokenType.Array)
+				CompareToken(json, JToken.FromObject(this.ExpectJson));
+			else
+				CompareMultiJson(json);
+		}
+
+		private void CompareMultiJson(string json)
+		{
+			var jArray = this.ExpectedJsonJObject as JArray;
+			var lines = json.Split(new [] { '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+			var zipped = jArray.Children<JObject>().Zip(lines, (j, s) => new {j, s}).ToList();
+			foreach(var t in zipped)
+				CompareToken(t.s, t.j);
+			zipped.Count.Should().Be(lines.Count);
+		}
+
+		private void CompareToken(string json, JToken expected)
+		{
+			var actual = JToken.Parse(json);
 			var sameJson = JToken.DeepEquals(expected, actual);
 			if (sameJson) return;
 			expected.ToString().Diff(actual.ToString(), "Expected serialization differs:");
 		}
-
 
 		public virtual RoundTripper<T> WhenSerializing<T>(T actual)
 		{
 			var sut = this.AssertSerializesAndRoundTrips(actual);
 			return new RoundTripper<T>(this.ExpectJson, sut);
 		}
+
 		public RoundTripper WhenInferringIdOn<T>(T project) where T : class
 		{
 			this.Client.Infer.Id<T>(project).Should().Be((string)this.ExpectJson);
 			return this;
 		}
+
 		public RoundTripper ForField(Field field)
 		{
 			this.Client.Infer.Field(field).Should().Be((string)this.ExpectJson);
@@ -93,7 +117,11 @@ namespace Tests.Framework
 	        return this;
 	    }
 
-		public static IntermediateChangedSettings WithConnectionSettings(Func<ConnectionSettings, ConnectionSettings> settings) =>  new IntermediateChangedSettings(settings);
+		public static IntermediateChangedSettings WithConnectionSettings(Func<ConnectionSettings, ConnectionSettings> settings) =>
+			new IntermediateChangedSettings(settings);
+
+		public static IntermediateChangedSettings WithSourceSerializer(ConnectionSettings.SourceSerializerFactory factory) =>
+			new IntermediateChangedSettings(s=>s.EnableDebugMode()).WithSourceSerializer(factory);
 
 		public static RoundTripper Expect(object expected) =>  new RoundTripper(expected);
 
@@ -102,20 +130,26 @@ namespace Tests.Framework
 	public class IntermediateChangedSettings
 	{
 		private readonly Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier;
-		private Func<ConnectionSettings, IElasticsearchSerializer> _serializerFactory;
+		private ConnectionSettings.SourceSerializerFactory _sourceSerializerFactory;
+		private IPropertyMappingProvider _propertyMappingProvider;
 
 		internal IntermediateChangedSettings(Func<ConnectionSettings, ConnectionSettings> settings)
 		{
 			this._connectionSettingsModifier = settings;
 		}
-		public IntermediateChangedSettings WithSerializer(Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory)
+		public IntermediateChangedSettings WithSourceSerializer(ConnectionSettings.SourceSerializerFactory factory)
 		{
-			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-			this._serializerFactory = serializerFactory;
+			this._sourceSerializerFactory = factory;
+			return this;
+		}
+		public IntermediateChangedSettings WithPropertyMappingProvider(IPropertyMappingProvider propertyMappingProvider)
+		{
+			this._propertyMappingProvider = propertyMappingProvider;
 			return this;
 		}
 
-		public RoundTripper Expect(object expected) =>  new RoundTripper(expected, _connectionSettingsModifier, this._serializerFactory);
+		public RoundTripper Expect(object expected) =>
+			new RoundTripper(expected, _connectionSettingsModifier, this._sourceSerializerFactory, this._propertyMappingProvider);
 	}
 
 	public class RoundTripper<T> : RoundTripper

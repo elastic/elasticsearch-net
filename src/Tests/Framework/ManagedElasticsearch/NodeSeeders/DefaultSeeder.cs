@@ -73,7 +73,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 		{
 			this.Client.IndexMany(Project.Projects);
 			this.Client.IndexMany(Developer.Developers);
-			this.Client.Index(new ProjectPercolation
+			this.Client.IndexDocument(new ProjectPercolation
 			{
 				Id = "1",
 				Query = new MatchAllQuery()
@@ -268,10 +268,8 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 					)
 				)
 			)
-			.Number(n => n
-				.Name(p => p.NumberOfCommits)
-				.Store()
-			)
+			.Scalar(p => p.NumberOfCommits, n => n.Store())
+			.Scalar(p => p.NumberOfContributors, n => n.Store())
 			.Object<Dictionary<string, Metadata>>(o => o
 				.Name(p => p.Metadata)
 			);
@@ -299,7 +297,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 				.TermVector(TermVectorOption.WithPositionsOffsetsPayloads)
 			)
 			.Ip(s => s
-				.Name(p => p.IPAddress)
+				.Name(p => p.IpAddress)
 			)
 			.GeoPoint(g => g
 				.Name(p => p.Location)

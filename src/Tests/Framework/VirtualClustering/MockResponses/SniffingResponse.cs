@@ -19,7 +19,7 @@ namespace Tests.Framework.MockResponses
 			};
 			using (var ms = new MemoryStream())
 			{
-				new ElasticsearchDefaultSerializer().Serialize(response, ms);
+				new LowLevelRequestResponseSerializer().Serialize(response, ms);
 				return ms.ToArray();
 			}
 		}

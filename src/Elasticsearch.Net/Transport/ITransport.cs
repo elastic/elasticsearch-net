@@ -9,9 +9,9 @@ namespace Elasticsearch.Net
 	{
 		TConnectionSettings Settings { get; }
 
-		ElasticsearchResponse<T> Request<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+		ElasticsearchResponse<T> Request<T>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
 			where T : class;
-		Task<ElasticsearchResponse<T>> RequestAsync<T>(HttpMethod method, string path, CancellationToken cancellationToken, PostData<object> data = null, IRequestParameters requestParameters = null)
+		Task<ElasticsearchResponse<T>> RequestAsync<T>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null, IRequestParameters requestParameters = null)
 			where T : class;
 	}
 

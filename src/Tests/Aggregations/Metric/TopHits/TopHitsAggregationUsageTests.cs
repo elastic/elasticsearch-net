@@ -43,7 +43,7 @@ namespace Tests.Aggregations.Metric.TopHits
 								},
 								_source = new
 								{
-									includes = new [] { "name", "lastActivity" }
+									includes = new [] { "name", "lastActivity", "sourceOnly" }
 								},
 								size = 1,
 								version = true,
@@ -89,6 +89,7 @@ namespace Tests.Aggregations.Metric.TopHits
 								.Includes(fs => fs
 									.Field(p => p.Name)
 									.Field(p => p.LastActivity)
+									.Field(p => p.SourceOnly)
 								)
 							)
 							.Size(1)
@@ -128,7 +129,7 @@ namespace Tests.Aggregations.Metric.TopHits
 						},
 						Source = new SourceFilter
 						{
-							Includes = new [] { "name", "lastActivity" }
+							Includes = new [] { "name", "lastActivity", "sourceOnly" }
 						},
 						Size = 1,
 						Version = true,
@@ -176,6 +177,8 @@ namespace Tests.Aggregations.Metric.TopHits
 				projects.Should().NotBeEmpty();
 				projects.Should().OnlyContain(p=>!string.IsNullOrWhiteSpace(p.Name), "source filter included name");
 				projects.Should().OnlyContain(p=>string.IsNullOrWhiteSpace(p.Description), "source filter does NOT include description");
+				foreach (var project in projects)
+					project.ShouldAdhereToSourceSerializerWhenSet();
 			}
 		}
 	}

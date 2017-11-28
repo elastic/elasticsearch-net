@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	internal class CreateJsonConverter : DocumentJsonConverterBase<ICreateRequest>
+	internal class CreateJsonConverter : GenericProxyRequestConverterBase
 	{
 		public CreateJsonConverter() : base(typeof(CreateRequest<>)) { }
 	}

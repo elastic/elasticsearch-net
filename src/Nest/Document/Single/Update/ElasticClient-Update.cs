@@ -84,7 +84,7 @@ namespace Nest
 			where TPartialDocument : class =>
 			this.Dispatcher.Dispatch<IUpdateRequest<TDocument, TPartialDocument>, UpdateRequestParameters, UpdateResponse<TDocument>>(
 				request,
-				(p, d) => this.LowLevelDispatch.UpdateDispatch<UpdateResponse<TDocument>>(p, d)
+				this.LowLevelDispatch.UpdateDispatch<UpdateResponse<TDocument>, TDocument, TPartialDocument>
 			);
 
 		/// <inheritdoc/>
@@ -119,7 +119,7 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<IUpdateRequest<TDocument, TPartialDocument>, UpdateRequestParameters, UpdateResponse<TDocument>, IUpdateResponse<TDocument>>(
 				request,
 				cancellationToken,
-				this.LowLevelDispatch.UpdateDispatchAsync<UpdateResponse<TDocument>>
+				this.LowLevelDispatch.UpdateDispatchAsync<UpdateResponse<TDocument>, TDocument, TPartialDocument>
 			);
 	}
 }

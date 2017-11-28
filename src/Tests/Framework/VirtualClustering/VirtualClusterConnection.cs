@@ -216,7 +216,7 @@ namespace Tests.Framework
 			var response = DefaultResponse;
 			using (var ms = new MemoryStream())
 			{
-				new ElasticsearchDefaultSerializer().Serialize(response, ms);
+				new LowLevelRequestResponseSerializer().Serialize(response, ms);
 				DefaultResponseBytes = ms.ToArray();
 			}
 			return DefaultResponseBytes;

@@ -24,7 +24,7 @@ namespace Nest
 			var request = (IMultiSearchTemplateRequest)value;
 			if (request == null) return;
 			var settings = serializer.GetConnectionSettings();
-			var elasticsearchSerializer = settings.Serializer;
+			var elasticsearchSerializer = settings.RequestResponseSerializer;
 			if (elasticsearchSerializer == null) return;
 
 			if (request.Operations == null) return;

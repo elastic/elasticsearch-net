@@ -39,13 +39,13 @@ namespace Tests.Document.Multiple.MultiGet
 
 		protected override void ExpectResponse(IMultiGetResponse response)
 		{
-			response.Documents.Should().NotBeEmpty().And.HaveCount(10);
-			foreach (var hit in response.Documents)
+			response.Hits.Should().NotBeEmpty().And.HaveCount(10);
+			foreach (var document in response.Hits)
 			{
-				hit.Index.Should().NotBeNullOrWhiteSpace();
-				hit.Type.Should().NotBeNullOrWhiteSpace();
-				hit.Id.Should().NotBeNullOrWhiteSpace();
-				hit.Found.Should().BeTrue();
+				document.Index.Should().NotBeNullOrWhiteSpace();
+				document.Type.Should().NotBeNullOrWhiteSpace();
+				document.Id.Should().NotBeNullOrWhiteSpace();
+				document.Found.Should().BeTrue();
 			}
 		}
 
@@ -98,13 +98,17 @@ namespace Tests.Document.Multiple.MultiGet
 
 		protected override void ExpectResponse(IMultiGetResponse response)
 		{
-			response.Documents.Should().NotBeEmpty().And.HaveCount(10);
-			foreach (var hit in response.Documents)
+			response.Hits.Should().NotBeEmpty().And.HaveCount(10);
+			foreach (var hit in response.Hits)
 			{
 				hit.Index.Should().NotBeNullOrWhiteSpace();
 				hit.Type.Should().NotBeNullOrWhiteSpace();
 				hit.Id.Should().NotBeNullOrWhiteSpace();
 				hit.Found.Should().BeTrue();
+			}
+			foreach (var document in response.SourceMany<Project>(this._ids))
+			{
+				document.ShouldAdhereToSourceSerializerWhenSet();
 			}
 		}
 	}
@@ -146,7 +150,7 @@ namespace Tests.Document.Multiple.MultiGet
 
 		protected override void ExpectResponse(IMultiGetResponse response)
 		{
-			response.Documents.Should().NotBeEmpty().And.HaveCount(10);
+			response.Hits.Should().NotBeEmpty().And.HaveCount(10);
 
 			foreach (var hit in response.GetMany<Project>(_ids))
 			{
@@ -155,6 +159,7 @@ namespace Tests.Document.Multiple.MultiGet
 				hit.Id.Should().NotBeNullOrWhiteSpace();
 				hit.Found.Should().BeTrue();
 				hit.Version.Should().Be(1);
+				hit.Source.ShouldAdhereToSourceSerializerWhenSet();
 			}
 		}
 	}
@@ -195,7 +200,7 @@ namespace Tests.Document.Multiple.MultiGet
 
 		protected override void ExpectResponse(IMultiGetResponse response)
 		{
-			response.Documents.Should().NotBeEmpty().And.HaveCount(10);
+			response.Hits.Should().NotBeEmpty().And.HaveCount(10);
 
 			foreach (var hit in response.GetMany<CommitActivity>(_activities.Select(c => c.Id)))
 			{

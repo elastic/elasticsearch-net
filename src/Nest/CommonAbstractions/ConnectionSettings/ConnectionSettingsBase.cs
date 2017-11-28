@@ -6,7 +6,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -15,26 +14,25 @@ namespace Nest
 	/// </summary>
 	public class ConnectionSettings : ConnectionSettingsBase<ConnectionSettings>
 	{
+		public delegate IElasticsearchSerializer SourceSerializerFactory(IConnectionSettingsValues values, IElasticsearchSerializer builtIn);
+
 		public ConnectionSettings(Uri uri = null)
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
 
-		public ConnectionSettings(IConnectionPool connectionPool)
-			: this(connectionPool, null, new SerializerFactory()) { }
+		public ConnectionSettings(IConnectionPool connectionPool) : this(connectionPool, null, null) { }
+		public ConnectionSettings(IConnectionPool connectionPool, SourceSerializerFactory sourceSerializer)
+			: this(connectionPool, null, sourceSerializer) { }
 
-		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection)
-			: this(connectionPool, connection, new SerializerFactory()) { }
+		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection) : this(connectionPool, connection, null) { }
+		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection, SourceSerializerFactory sourceSerializer)
+			: this(connectionPool, connection, sourceSerializer, null) { }
 
-		public ConnectionSettings(IConnectionPool connectionPool, Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory)
-#pragma warning disable CS0618 // Type or member is obsolete
-			: this(connectionPool, null, serializerFactory) { }
-#pragma warning restore CS0618 // Type or member is obsolete
-
-		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection, ISerializerFactory serializerFactory)
-			: base(connectionPool, connection, serializerFactory, s => serializerFactory.Create(s)) { }
-
-		[Obsolete("Please use the constructor taking ISerializerFactory instead of a Func")]
-		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection, Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory)
-			: base(connectionPool, connection, null, s => serializerFactory?.Invoke(s)) { }
+		public ConnectionSettings(
+			IConnectionPool connectionPool,
+			IConnection connection,
+			SourceSerializerFactory sourceSerializer,
+			IPropertyMappingProvider propertyMappingProvider)
+			: base(connectionPool, connection, sourceSerializer, propertyMappingProvider) { }
 
 	}
 
@@ -73,42 +71,38 @@ namespace Nest
 		private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
 		FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
 
-		private readonly ISerializerFactory _serializerFactory;
-		ISerializerFactory IConnectionSettingsValues.SerializerFactory => _serializerFactory;
+		private readonly IElasticsearchSerializer _sourceSerializer;
+		IElasticsearchSerializer IConnectionSettingsValues.SourceSerializer => _sourceSerializer;
+
+		private readonly IPropertyMappingProvider _propertyMappingProvider;
+		IPropertyMappingProvider IConnectionSettingsValues.PropertyMappingProvider => _propertyMappingProvider;
+
+		//todo hacky
+		internal StatefulSerializerFactory SerializerFactory { get; }
 
 		protected ConnectionSettingsBase(
 			IConnectionPool connectionPool,
 			IConnection connection,
-			ISerializerFactory serializerFactory,
-			Func<TConnectionSettings, IElasticsearchSerializer> serializerFactoryFunc
+			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory,
+			IPropertyMappingProvider propertyMappingProvider
 			)
-			: base(connectionPool, connection, serializerFactoryFunc)
+			: base(connectionPool, connection, null)
 		{
+			var defaultSerializer = new JsonNetSerializer(this);
+			this._sourceSerializer = sourceSerializerFactory?.Invoke(this, defaultSerializer) ?? defaultSerializer;
+			this.UseThisRequestResponseSerializer = defaultSerializer;
+			this._propertyMappingProvider = propertyMappingProvider ?? new PropertyMappingProvider();
+
 			this._defaultTypeNameInferrer = (t => t.Name.ToLowerInvariant());
 			this._defaultFieldNameInferrer = (p => p.ToCamelCase());
 			this._defaultIndices = new FluentDictionary<Type, string>();
 			this._defaultTypeNames = new FluentDictionary<Type, string>();
 			this._defaultRelationNames = new FluentDictionary<Type, string>();
-			this._serializerFactory = serializerFactory ?? new SerializerFactory();
+
+			this.SerializerFactory = new StatefulSerializerFactory();
 
 			this._inferrer = new Inferrer(this);
 		}
-
-		protected ConnectionSettingsBase(
-			IConnectionPool connectionPool,
-			IConnection connection,
-			Func<TConnectionSettings, IElasticsearchSerializer> serializerFactoryFunc
-			)
-			: this(connectionPool, connection, null, serializerFactoryFunc) { }
-
-		IElasticsearchSerializer IConnectionSettingsValues.StatefulSerializer(JsonConverter converter) =>
-			this._serializerFactory.CreateStateful(this, converter);
-
-		/// <summary>
-		/// The default serializer for requests and responses
-		/// </summary>
-		/// <returns></returns>
-		protected override IElasticsearchSerializer DefaultSerializer(TConnectionSettings settings) => new JsonNetSerializer(settings);
 
 		/// <summary>
 		/// Pluralize type names when inferring from POCO type names.

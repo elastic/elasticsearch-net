@@ -82,7 +82,7 @@ namespace Elasticsearch.Net
 					if (!SetSpecialTypes(stream, response, bytes))
 					{
 						if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
-						else response.Body = this._requestData.ConnectionSettings.Serializer.Deserialize<TReturn>(stream);
+						else response.Body = this._requestData.ConnectionSettings.RequestResponseSerializer.Deserialize<TReturn>(stream);
 					}
 					if (response.AllowAllStatusCodes) 
 						ReadServerError(response, new MemoryStream(bytes), bytes);
@@ -110,7 +110,7 @@ namespace Elasticsearch.Net
 					if (!SetSpecialTypes(stream, response, bytes))
 					{
 						if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
-						else response.Body = await this._requestData.ConnectionSettings.Serializer.DeserializeAsync<TReturn>(stream, this._cancellationToken).ConfigureAwait(false);
+						else response.Body = await this._requestData.ConnectionSettings.RequestResponseSerializer.DeserializeAsync<TReturn>(stream, this._cancellationToken).ConfigureAwait(false);
 					}
 					if (response.AllowAllStatusCodes)
 						await ReadServerErrorAsync(response, new MemoryStream(bytes), bytes);

@@ -16,6 +16,7 @@ namespace Nest
 		IEnumerable<IIndicesPrivileges> Indices { get; set; }
 
 		[JsonProperty("metadata")]
+		[JsonConverter(typeof(VerbatimDictionaryKeysPreservingNullJsonConverter<string, object>))]
 		IDictionary<string, object> Metadata { get; set; }
 
 	}

@@ -442,10 +442,10 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 										{
 											new
 											{
-												range = new JObject
+												range = new Dictionary<string, object>
 												{
 													{
-														"@timestamp", new JObject
+														"@timestamp", new Dictionary<string, object>
 														{
 															{ "gte", "{{ctx.trigger.scheduled_time}}||-5m" },
 															{ "lte", "{{ctx.trigger.triggered_time}}" }

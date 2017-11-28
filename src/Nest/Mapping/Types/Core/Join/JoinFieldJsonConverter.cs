@@ -29,8 +29,7 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var join = value as JoinField;
-			if (join == null)
+			if (!(value is JoinField @join))
 			{
 				writer.WriteNull();
 				return;

@@ -17,7 +17,8 @@ namespace Nest
 
 		private ITransport<IConnectionSettingsValues> Transport { get; }
 
-		public IElasticsearchSerializer Serializer => this.Transport.Settings.Serializer;
+		public IElasticsearchSerializer SourceSerializer => this.Transport.Settings.SourceSerializer;
+		public IElasticsearchSerializer RequestResponseSerializer => this.Transport.Settings.RequestResponseSerializer;
 		public Inferrer Infer => this.Transport.Settings.Inferrer;
 		public IConnectionSettingsValues ConnectionSettings => this.Transport.Settings;
 
@@ -32,7 +33,7 @@ namespace Nest
 		{
 			transport.ThrowIfNull(nameof(transport));
 			transport.Settings.ThrowIfNull(nameof(transport.Settings));
-			transport.Settings.Serializer.ThrowIfNull(nameof(transport.Settings.Serializer));
+			transport.Settings.RequestResponseSerializer.ThrowIfNull(nameof(transport.Settings.RequestResponseSerializer));
 			transport.Settings.Inferrer.ThrowIfNull(nameof(transport.Settings.Inferrer));
 
 			this.Transport = transport;
@@ -42,13 +43,13 @@ namespace Nest
 
 		TResponse IHighLevelToLowLevelDispatcher.Dispatch<TRequest, TQueryString, TResponse>(
 			TRequest request,
-			Func<TRequest, PostData<object>,
+			Func<TRequest, SerializableData<TRequest>,
 			ElasticsearchResponse<TResponse>> dispatch
 			) => this.Dispatcher.Dispatch<TRequest,TQueryString,TResponse>(request, null, dispatch);
 
 		TResponse IHighLevelToLowLevelDispatcher.Dispatch<TRequest, TQueryString, TResponse>(
 			TRequest request, Func<IApiCallDetails, Stream, TResponse> responseGenerator,
-			Func<TRequest, PostData<object>, ElasticsearchResponse<TResponse>> dispatch
+			Func<TRequest, SerializableData<TRequest>, ElasticsearchResponse<TResponse>> dispatch
 			)
 		{
 			request.RouteValues.Resolve(this.ConnectionSettings);
@@ -61,14 +62,14 @@ namespace Nest
 		Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
 			TRequest descriptor,
 			CancellationToken cancellationToken,
-			Func<TRequest, PostData<object>, CancellationToken, Task<ElasticsearchResponse<TResponse>>> dispatch
+			Func<TRequest, SerializableData<TRequest>, CancellationToken, Task<ElasticsearchResponse<TResponse>>> dispatch
 			) => this.Dispatcher.DispatchAsync<TRequest,TQueryString,TResponse,TResponseInterface>(descriptor, cancellationToken, null, dispatch);
 
 		async Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
 			TRequest request,
 			CancellationToken cancellationToken,
 			Func<IApiCallDetails, Stream, TResponse> responseGenerator,
-			Func<TRequest, PostData<object>, CancellationToken, Task<ElasticsearchResponse<TResponse>>> dispatch
+			Func<TRequest, SerializableData<TRequest>, CancellationToken, Task<ElasticsearchResponse<TResponse>>> dispatch
 			)
 		{
 			request.RouteValues.Resolve(this.ConnectionSettings);

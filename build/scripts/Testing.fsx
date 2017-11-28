@@ -5,6 +5,7 @@
 #load @"Projects.fsx"
 #load @"Paths.fsx"
 #load @"Tooling.fsx"
+#load @"Versioning.fsx"
 
 open System.IO
 open Fake 
@@ -12,6 +13,8 @@ open Paths
 open Projects
 open Tooling
 open Commandline
+open Versioning
+
 
 module Tests =
     open System
@@ -22,9 +25,12 @@ module Tests =
         let clusterFilter =  getBuildParamOrDefault "clusterfilter" ""
         let testFilter = getBuildParamOrDefault "testfilter" ""
         let numberOfConnections = getBuildParamOrDefault "numberOfConnections" ""
+        let forceSource = if Commandline.forceSourceSerialization then "true" else "false";
         setProcessEnvironVar "NEST_INTEGRATION_CLUSTER" clusterFilter
         setProcessEnvironVar "NEST_TEST_FILTER" testFilter
         setProcessEnvironVar "NEST_NUMBER_OF_CONNECTIONS" numberOfConnections
+        setProcessEnvironVar "NEST_TEST_SEED" Commandline.seed
+        setProcessEnvironVar "NEST_SOURCE_SERIALIZER" forceSource
 
     let private dotnetTest (target: Commandline.MultiTarget) =
         CreateDir Paths.BuildOutput
@@ -37,6 +43,22 @@ module Tests =
 
         let dotnet = Tooling.BuildTooling("dotnet")
         dotnet.ExecIn "src/Tests" command |> ignore
+
+    let RunReleaseUnitTests() =
+        setLocalEnvVars()
+        //xUnit always does its own build, this env var is picked up by Tests.csproj
+        //if its set it will include the local package source (build/output/_packages)
+        //and references NEST and NEST.JsonNetSerializer by the current version
+        //this works by not including the local package cache (nay source) 
+        //in the project file via:
+        //<RestoreSources></RestoreSources>
+        //This will download all packages but its the only way to make sure we reference the built
+        //package and not one from cache...y
+        setProcessEnvironVar "TestPackageVersion" (Versioning.CurrentVersion.ToString())
+        let dotnet = Tooling.BuildTooling("dotnet")
+        dotnet.ExecIn "src/Tests" ["clean";] |> ignore
+        dotnet.ExecIn "src/Tests" ["restore";] |> ignore
+        dotnetTest Commandline.MultiTarget.One
 
     let RunUnitTests() =
         setLocalEnvVars()

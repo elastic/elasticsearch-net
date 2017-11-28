@@ -29,9 +29,9 @@ namespace Tests.Search.Request
 		{
 			query = new
 			{
-				match = new JObject
+				match = new Dictionary<string, object>
 				{
-					{ "name.standard", new JObject
+					{ "name.standard", new Dictionary<string, object>
 						{
 							{ "query", "Upton Sons Shield Rice Rowe Roberts" }
 						}
@@ -42,9 +42,9 @@ namespace Tests.Search.Request
 			{
 				pre_tags = new[] { "<tag1>" },
 				post_tags = new[] { "</tag1>" },
-				fields = new JObject
+				fields = new Dictionary<string, object>
 				{
-					{ "name.standard", new JObject
+					{ "name.standard", new Dictionary<string, object>
 						{
 							{ "type", "plain" },
 							{ "force_source", true},
@@ -54,17 +54,17 @@ namespace Tests.Search.Request
 							{ "no_match_size", 150 }
 						}
 					},
-					{ "leadDeveloper.firstName", new JObject
+					{ "leadDeveloper.firstName", new Dictionary<string, object>
 						{
 							{ "type", "fvh" },
 							{ "boundary_max_scan", 50 },
-							{ "pre_tags", new JArray { "<name>" } },
-							{ "post_tags", new JArray { "</name>" } },
-							{ "highlight_query", new JObject
+							{ "pre_tags", new [] { "<name>" } },
+							{ "post_tags", new [] { "</name>" } },
+							{ "highlight_query", new Dictionary<string, object>
 								{
-									{ "match", new JObject
+									{ "match", new Dictionary<string, object>
 										{
-											{ "leadDeveloper.firstName", new JObject
+											{ "leadDeveloper.firstName", new Dictionary<string, object>
 												{
 													{ "query", "Kurt Edgardo Naomi Dariana Justice Felton" }
 												}
@@ -75,16 +75,16 @@ namespace Tests.Search.Request
 							}
 						}
 					},
-					{ "leadDeveloper.lastName", new JObject
+					{ "leadDeveloper.lastName", new Dictionary<string, object>
 						{
 							{ "type", "unified" },
-							{ "pre_tags", new JArray { "<name>" } },
-							{ "post_tags", new JArray { "</name>" } },
-							{ "highlight_query", new JObject
+							{ "pre_tags", new [] { "<name>" } },
+							{ "post_tags", new [] { "</name>" } },
+							{ "highlight_query", new Dictionary<string, object>
 								{
-									{ "match", new JObject
+									{ "match", new Dictionary<string, object>
 										{
-											{ "leadDeveloper.lastName", new JObject
+											{ "leadDeveloper.lastName", new Dictionary<string, object>
 												{
 													{ "query", LastNameSearch }
 												}

@@ -78,7 +78,7 @@ namespace Tests.Framework
 			diff += approx + ";";
 
 
-			throw new Exception(diff);
+			throw new Exception(diff.Substring(0, diff.Length > 4896 ? 4896 : diff.Length));
 		}
 
 	}

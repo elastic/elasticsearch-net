@@ -16,6 +16,8 @@ namespace Tests.Document.Single.Index
 	public class IndexApiTests :
 		ApiIntegrationTestBase<WritableCluster, IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
+		protected override bool IncludeNullInExpected => false;
+
 		private Project Document => new Project
 		{
 			State = StateOfBeing.Stable,
@@ -23,6 +25,7 @@ namespace Tests.Document.Single.Index
 			StartedOn = FixedDate,
 			LastActivity = FixedDate,
 			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}},
+			SourceOnly = TestClient.Configuration.UsingCustomSourceSerializer ? new SourceOnlyObject() : null
 		};
 
 		public IndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -47,10 +50,13 @@ namespace Tests.Document.Single.Index
 			new
 			{
 				name = CallIsolatedValue,
-				join = Document.Join,
+				join = Document.Join.ToAnonymousObject(),
 				state = "Stable",
+				visibility = "Public",
 				startedOn = FixedDate,
 				lastActivity = FixedDate,
+				numberOfContributors = 0,
+				sourceOnly = Dependant(null, new { notWrittenByDefaultSerializer = "written" }),
 				curatedTags = new[] {new {name = "x", added = FixedDate}},
 			};
 
@@ -74,12 +80,9 @@ namespace Tests.Document.Single.Index
 
 	public class IndexIntegrationTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{
-		public IndexIntegrationTests(WritableCluster cluster) : base(cluster)
-		{
-		}
+		public IndexIntegrationTests(WritableCluster cluster) : base(cluster) { }
 
-		[I]
-		public void OpTypeCreate()
+		[I] public void OpTypeCreate()
 		{
 			var indexName = RandomString();
 			var project = Project.Generator.Generate(1).First();

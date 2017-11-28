@@ -37,7 +37,10 @@ module Paths =
     
     let ProjFile(project:DotNetProject) =
         match project with 
-        | Project p -> sprintf "%s/%s/%s.csproj" SourceFolder project.Name project.Name
+        | Project p -> 
+            match p with 
+            | NestJsonNetSerializer -> sprintf "%s/Serializers/%s/%s.csproj" SourceFolder project.Name project.Name
+            | _ -> sprintf "%s/%s/%s.csproj" SourceFolder project.Name project.Name
         | PrivateProject p ->
             match p with
             | Tests -> sprintf "%s/%s/%s.csproj" SourceFolder project.Name project.Name

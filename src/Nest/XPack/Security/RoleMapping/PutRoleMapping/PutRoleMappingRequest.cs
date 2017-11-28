@@ -10,6 +10,7 @@ namespace Nest
 		IEnumerable<string> RunAs { get; set; }
 
 		[JsonProperty("metadata")]
+		[JsonConverter(typeof(VerbatimDictionaryKeysPreservingNullJsonConverter<string, object>))]
 		IDictionary<string, object> Metadata { get; set; }
 
 		[JsonProperty("enabled")]

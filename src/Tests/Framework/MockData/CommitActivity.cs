@@ -31,11 +31,11 @@ namespace Tests.Framework.MockData
 		public TimeSpan? Duration { get; set; }
 
 		[Text]
-		[JsonConverter(typeof(StringTimeSpanConverter))]
+		[StringTimeSpan, JsonConverter(typeof(StringTimeSpanConverter))]
 		public TimeSpan? StringDuration
 		{
-			get { return Duration; }
-			set { Duration = value; }
+			get => Duration;
+			set => Duration = value;
 		}
 
 		public static Faker<CommitActivity> Generator { get; } =
@@ -58,8 +58,7 @@ namespace Tests.Framework.MockData
 				}))
 			;
 
-		public static IList<CommitActivity> CommitActivities { get; } =
-			Generator.Generate(1000).ToList();
+		public static IList<CommitActivity> CommitActivities { get; } = Generator.Generate(1000).ToList();
 	}
 
 	internal class StringTimeSpanConverter : JsonConverter
@@ -94,4 +93,5 @@ namespace Tests.Framework.MockData
 
 		public override bool CanConvert(Type objectType) => objectType == typeof(TimeSpan) || objectType == typeof(TimeSpan?);
 	}
+
 }

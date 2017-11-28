@@ -23,7 +23,7 @@ namespace Tests.Aggregations.Bucket.IpRange
 				{
 					ip_range = new
 					{
-						field = "leadDeveloper.iPAddress",
+						field = "leadDeveloper.ipAddress",
 						ranges = new object[]
 						{
 							new { to = "10.0.0.5" },
@@ -37,7 +37,7 @@ namespace Tests.Aggregations.Bucket.IpRange
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(a => a
 				.IpRange("ip_ranges", ip => ip
-					.Field(p => p.LeadDeveloper.IPAddress)
+					.Field(p => p.LeadDeveloper.IpAddress)
 					.Ranges(
 						r => r.To("10.0.0.5"),
 						r => r.From("10.0.0.5")
@@ -50,7 +50,7 @@ namespace Tests.Aggregations.Bucket.IpRange
 			{
 				Aggregations = new IpRangeAggregation("ip_ranges")
 				{
-					Field = Field((Project p) => p.LeadDeveloper.IPAddress),
+					Field = Field((Project p) => p.LeadDeveloper.IpAddress),
 					Ranges = new List<Nest.IpRange>
 					{
 						new Nest.IpRange { To = "10.0.0.5" },

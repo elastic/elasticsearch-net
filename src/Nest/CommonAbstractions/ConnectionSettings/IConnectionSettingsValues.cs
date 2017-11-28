@@ -18,8 +18,7 @@ namespace Nest
 		Func<string, string> DefaultFieldNameInferrer { get; }
 		Func<Type, string> DefaultTypeNameInferrer { get; }
 
-		ISerializerFactory SerializerFactory { get; }
-
-		IElasticsearchSerializer StatefulSerializer(JsonConverter converter);
+		IElasticsearchSerializer SourceSerializer { get; }
+		IPropertyMappingProvider PropertyMappingProvider { get; }
 	}
 }

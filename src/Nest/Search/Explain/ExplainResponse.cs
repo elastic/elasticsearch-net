@@ -3,17 +3,17 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IExplainResponse<T> : IResponse
-		where T : class
+	public interface IExplainResponse<TDocument> : IResponse
+		where TDocument : class
 	{
 		bool Matched { get; }
 		ExplanationDetail Explanation { get; }
-		InstantGet<T> Get { get; }
+		InstantGet<TDocument> Get { get; }
 	}
 
 	[JsonObject]
-	public class ExplainResponse<T> : ResponseBase, IExplainResponse<T>
-		where T : class
+	public class ExplainResponse<TDocument> : ResponseBase, IExplainResponse<TDocument>
+		where TDocument : class
 	{
 		[JsonProperty("matched")]
 		public bool Matched { get; internal set; }
@@ -22,6 +22,6 @@ namespace Nest
 		public ExplanationDetail Explanation { get; internal set; }
 
 		[JsonProperty("get")]
-		public InstantGet<T> Get { get; internal set; }
+		public InstantGet<TDocument> Get { get; internal set; }
 	}
 }

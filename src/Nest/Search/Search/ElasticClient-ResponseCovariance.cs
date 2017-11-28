@@ -35,7 +35,7 @@ namespace Nest
 			where TRequestParameters : IRequestParameters, new() =>
 			!response.Success
 				? null
-				: this.ConnectionSettings.StatefulSerializer(new ConcreteTypeConverter<TResult>(d.TypeSelector))
+				: this.ConnectionSettings.CreateStateful(new ConcreteTypeConverter<TResult>(d.TypeSelector))
 					.Deserialize<SearchResponse<TResult>>(stream);
 
 	}

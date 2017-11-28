@@ -12,7 +12,7 @@ namespace Elasticsearch.Net
 		private readonly UrlFormatProvider _formatter;
 
 		public IConnectionConfigurationValues Settings => this.Transport.Settings;
-		public IElasticsearchSerializer Serializer => this.Transport.Settings.Serializer;
+		public IElasticsearchSerializer Serializer => this.Transport.Settings.RequestResponseSerializer;
 
 		protected ITransport<IConnectionConfigurationValues> Transport { get; set; }
 
@@ -31,7 +31,7 @@ namespace Elasticsearch.Net
 		{
 			transport.ThrowIfNull(nameof(transport));
 			transport.Settings.ThrowIfNull(nameof(transport.Settings));
-			transport.Settings.Serializer.ThrowIfNull(nameof(transport.Settings.Serializer));
+			transport.Settings.RequestResponseSerializer.ThrowIfNull(nameof(transport.Settings.RequestResponseSerializer));
 
 			this.Transport = transport;
 			this._formatter = new UrlFormatProvider(this.Transport.Settings);
@@ -56,11 +56,11 @@ namespace Elasticsearch.Net
 			return requestParams;
 		}
 
-		public ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+		public ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
 			where T : class =>
 			this.Transport.Request<T>(method, path, data, requestParameters);
 
-		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, CancellationToken cancellationToken, PostData<object> data = null, IRequestParameters requestParameters = null)
+		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null, IRequestParameters requestParameters = null)
 			where T : class =>
 			this.Transport.RequestAsync<T>(method, path, cancellationToken, data, requestParameters);
 	}

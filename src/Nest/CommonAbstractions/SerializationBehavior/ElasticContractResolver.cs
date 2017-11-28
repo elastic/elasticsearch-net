@@ -12,9 +12,8 @@ using Newtonsoft.Json.Serialization;
 
 namespace Nest
 {
-	public class ElasticContractResolver : DefaultContractResolver
+	internal class ElasticContractResolver : DefaultContractResolver
 	{
-		private readonly IList<Func<Type, JsonConverter>> _contractConverters;
 		public static JsonSerializer Empty { get; } = new JsonSerializer();
 
 		/// <summary>
@@ -27,9 +26,8 @@ namespace Nest
 		/// </summary>
 		internal JsonConverterPiggyBackState PiggyBackState { get; set; }
 
-		public ElasticContractResolver(IConnectionSettingsValues connectionSettings, IList<Func<Type, JsonConverter>> contractConverters)
+		public ElasticContractResolver(IConnectionSettingsValues connectionSettings)
 		{
-			this._contractConverters = contractConverters;
 			this.ConnectionSettings = connectionSettings;
 		}
 
@@ -42,8 +40,7 @@ namespace Nest
 
 				if ((typeof(IDictionary).IsAssignableFrom(o) || o.IsGenericDictionary()) && !typeof(IIsADictionary).IsAssignableFrom(o))
 				{
-					Type[] genericArguments;
-					if (!o.TryGetGenericDictionaryArguments(out genericArguments))
+					if (!o.TryGetGenericDictionaryArguments(out var genericArguments))
 						contract.Converter = new VerbatimDictionaryKeysJsonConverter();
 					else
 						contract.Converter =
@@ -60,17 +57,7 @@ namespace Nest
 						 o == typeof(TimeSpan?))
 					contract.Converter = new TimeSpanConverter();
 
-				if (this._contractConverters.HasAny())
-				{
-					foreach (var c in this._contractConverters)
-					{
-						var converter = c(o);
-						if (converter == null)
-							continue;
-						contract.Converter = converter;
-						break;
-					}
-				}
+				ApplyBuildInSerializersForType(o, contract);
 
 				if (!o.FullName.StartsWith("Nest.", StringComparison.OrdinalIgnoreCase)) return contract;
 				if (ApplyExactContractJsonAttribute(o, contract)) return contract;
@@ -80,7 +67,7 @@ namespace Nest
 			});
 		}
 
-		private bool ApplyExactContractJsonAttribute(Type objectType, JsonContract contract)
+		private static bool ApplyExactContractJsonAttribute(Type objectType, JsonContract contract)
 		{
 			var attribute = (ExactContractJsonConverterAttribute)objectType.GetTypeInfo().GetCustomAttributes(typeof(ExactContractJsonConverterAttribute)).FirstOrDefault();
 			if (attribute?.Converter == null) return false;
@@ -88,9 +75,9 @@ namespace Nest
 			return true;
 		}
 
-		private bool ApplyContractJsonAttribute(Type objectType, JsonContract contract)
+		private static bool ApplyContractJsonAttribute(Type objectType, JsonContract contract)
 		{
-			foreach (var t in this.TypeWithInterfaces(objectType))
+			foreach (var t in TypeWithInterfaces(objectType))
 			{
 				var attribute = (ContractJsonConverterAttribute)t.GetTypeInfo().GetCustomAttributes(typeof(ContractJsonConverterAttribute), true).FirstOrDefault();
 				if (attribute?.Converter == null) continue;
@@ -100,7 +87,7 @@ namespace Nest
 			return false;
 		}
 
-		private IEnumerable<Type> TypeWithInterfaces(Type objectType)
+		private static IEnumerable<Type> TypeWithInterfaces(Type objectType)
 		{
 			yield return objectType;
 			foreach (var i in objectType.GetInterfaces()) yield return i;
@@ -161,8 +148,7 @@ namespace Nest
 		protected static bool ShouldSerializeQueryContainer(object o, JsonProperty prop)
 		{
 			if (o == null) return false;
-			var q = prop.ValueProvider.GetValue(o) as QueryContainer;
-			if (q == null) return false;
+			if (!(prop.ValueProvider.GetValue(o) is QueryContainer q)) return false;
 			if (q.IsWritable) return true;
 			var nq = q as NoMatchQueryContainer;
 			return nq?.Shortcut != null;
@@ -178,34 +164,48 @@ namespace Nest
 		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
 		{
 			var property = base.CreateProperty(member, memberSerialization);
-			if (property.PropertyType == typeof(QueryContainer))
-				property.ShouldSerialize = o => ElasticContractResolver.ShouldSerializeQueryContainer(o, property);
-			else if (property.PropertyType == typeof(IEnumerable<QueryContainer>))
-				property.ShouldSerialize = o => ElasticContractResolver.ShouldSerializeQueryContainers(o, property);
+			ApplyShouldSerializer(property);
+			ApplyPropertyOverrides(member, property);
+			ApplyBuildInSerializers(member, property);
+			return property;
+		}
 
-			// Skip serialization of empty collections that have DefaultValueHandling set to Ignore.
-			else if (property.DefaultValueHandling.HasValue
-				&& property.DefaultValueHandling.Value == DefaultValueHandling.Ignore
-				&& !typeof(string).IsAssignableFrom(property.PropertyType)
-				&& typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
-			{
-				Predicate<object> shouldSerialize = obj =>
-				{
-					var collection = property.ValueProvider.GetValue(obj) as ICollection;
-					if (collection == null)
-					{
-						return true;
-					}
-					return collection.Count != 0 && collection.Cast<object>().Any(item => item != null);
-				};
-				property.ShouldSerialize = property.ShouldSerialize == null ? shouldSerialize : (o => property.ShouldSerialize(o) && shouldSerialize(o));
-			}
+		private static readonly StringEnumConverter StringEnumConverter = new StringEnumConverter();
+		private static readonly StringTimeSpanConverter StringTimeSpanConverter = new StringTimeSpanConverter();
+		private static readonly MachineLearningDateTimeConverter MachineLearningDateTimeConverter = new MachineLearningDateTimeConverter();
+#pragma warning disable 618
+		private static readonly Type[] StringSignalTypes = {typeof(KeywordAttribute), typeof(StringAttribute), typeof(TextAttribute)};
+#pragma warning restore 618
+		private static void ApplyBuildInSerializers(MemberInfo member, JsonProperty property)
+		{
+			var attributes = member.GetCustomAttributes().ToList();
+			var stringy = attributes.Any(a => StringSignalTypes.Contains(a.GetType()));
+			if (attributes.OfType<StringEnumAttribute>().Any() || (property.PropertyType.IsEnumType() && stringy))
+				property.Converter = StringEnumConverter;
 
-			IPropertyMapping propertyMapping = null;
-			if (!this.ConnectionSettings.PropertyMappings.TryGetValue(member, out propertyMapping))
+			if ((property.PropertyType == typeof(TimeSpan) || property.PropertyType == typeof(TimeSpan?))
+			    && (attributes.OfType<StringTimeSpanAttribute>().Any() || stringy))
+				property.Converter = StringTimeSpanConverter;
+
+			if ((property.PropertyType == typeof(DateTime) || property.PropertyType == typeof(DateTime?))
+			    && (attributes.OfType<MachineLearningDateTimeAttribute>().Any()))
+				property.Converter = MachineLearningDateTimeConverter;
+
+		}
+
+		private static void ApplyBuildInSerializersForType(Type type, JsonContract contract)
+		{
+			if (type.GetTypeInfo().GetCustomAttribute<StringEnumAttribute>() != null)
+				contract.Converter = StringEnumConverter;
+		}
+
+		/// <summary> Renames/Ignores a property based on the connection settings mapping or custom attributes for the property </summary>
+		private void ApplyPropertyOverrides(MemberInfo member, JsonProperty property)
+		{
+			if (!this.ConnectionSettings.PropertyMappings.TryGetValue(member, out var propertyMapping))
 				propertyMapping = ElasticsearchPropertyAttributeBase.From(member);
 
-			var serializerMapping = this.ConnectionSettings.Serializer?.CreatePropertyMapping(member);
+			var serializerMapping = this.ConnectionSettings.PropertyMappingProvider?.CreatePropertyMapping(member);
 
 			var nameOverride = propertyMapping?.Name ?? serializerMapping?.Name;
 			if (!nameOverride.IsNullOrEmpty()) property.PropertyName = nameOverride;
@@ -213,8 +213,32 @@ namespace Nest
 			var overrideIgnore = propertyMapping?.Ignore ?? serializerMapping?.Ignore;
 			if (overrideIgnore.HasValue)
 				property.Ignored = overrideIgnore.Value;
+		}
 
-			return property;
+		private static void ApplyShouldSerializer(JsonProperty property)
+		{
+			if (property.PropertyType == typeof(QueryContainer))
+				property.ShouldSerialize = o => ShouldSerializeQueryContainer(o, property);
+			else if (property.PropertyType == typeof(IEnumerable<QueryContainer>))
+				property.ShouldSerialize = o => ShouldSerializeQueryContainers(o, property);
+
+			// Skip serialization of empty collections that have DefaultValueHandling set to Ignore.
+			else if (property.DefaultValueHandling.HasValue
+			         && property.DefaultValueHandling.Value == DefaultValueHandling.Ignore
+			         && !typeof(string).IsAssignableFrom(property.PropertyType)
+			         && typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
+			{
+				bool ShouldSerialize(object obj)
+				{
+					if (!(property.ValueProvider.GetValue(obj) is ICollection collection))
+						return true;
+					return collection.Count != 0 && collection.Cast<object>().Any(item => item != null);
+				}
+
+				property.ShouldSerialize = property.ShouldSerialize == null
+					? (Predicate<object>) ShouldSerialize
+					: (o => property.ShouldSerialize(o) && ShouldSerialize(o));
+			}
 		}
 	}
 }
