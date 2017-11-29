@@ -135,7 +135,11 @@ namespace Tests.XPack.Security.RoleMapping
 
 			mapping.Enabled.Should().BeFalse();
 			mapping.Roles.Should().BeEquivalentTo("admin");
-			mapping.Metadata.Should().HaveCount(1).And.ContainKeys("x");
+			//source serializer includes nulls on deserialize
+			if (TestClient.Configuration.UsingCustomSourceSerializer)
+				mapping.Metadata.Should().HaveCount(2).And.ContainKeys("x", "z");
+			else
+				mapping.Metadata.Should().HaveCount(1).And.ContainKeys("x");
 			mapping.Rules.Should().NotBeNull();
 
 			var allMapping = mapping.Rules as AllRoleMappingRule;
