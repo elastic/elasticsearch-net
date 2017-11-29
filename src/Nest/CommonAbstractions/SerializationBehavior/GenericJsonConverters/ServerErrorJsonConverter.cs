@@ -16,8 +16,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var token = JToken.Load(reader);
-			ServerError error = null;
-			token.TryParseServerError(serializer, out error);
+			token.TryParseServerError(serializer, out var error);
 			return error;
 		}
 	}

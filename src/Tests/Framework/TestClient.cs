@@ -28,9 +28,9 @@ namespace Tests.Framework
 		public static readonly IElasticClient DefaultInMemoryClient = GetInMemoryClient();
 		public static readonly IElasticClient DefaultClientWithSourceSerializer = TestClient.GetInMemoryClientWithSourceSerializer(
 			modifySettings: s => s,
-			sourceSerializerFactory: (settings, builtin) =>
+			sourceSerializerFactory: (builtin, settings) =>
 			{
-				var customSourceSerializer = new TestSourceSerializerBase(builtin);
+				var customSourceSerializer = new TestSourceSerializerBase(builtin, settings);
 				return TestClient.Configuration.UsingCustomSourceSerializer ? customSourceSerializer : null;
 			});
 

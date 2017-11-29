@@ -73,9 +73,9 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 						ComposeSettings,
 						port,
 						forceSsl: this._config.EnableSsl,
-						sourceSerializerFactory: (settings, builtin) =>
+						sourceSerializerFactory: (builtin, settings) =>
 						{
-							var customSourceSerializer = new TestSourceSerializerBase(builtin);
+							var customSourceSerializer = new TestSourceSerializerBase(builtin, settings);
 							return this.UsingSourceSerializer ? customSourceSerializer : null;
 						}
 					);

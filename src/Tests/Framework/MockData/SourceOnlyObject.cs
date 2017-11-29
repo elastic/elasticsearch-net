@@ -26,6 +26,12 @@ namespace Tests.Framework.MockData
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
+			//ignore json as provided
+			var depth = reader.Depth;
+			do
+			{
+				reader.Read();
+			} while (reader.Depth >= depth && reader.TokenType != JsonToken.EndObject);
 			var p = new SourceOnlyObject
 			{
 				NotWrittenByDefaultSerializer = "written",

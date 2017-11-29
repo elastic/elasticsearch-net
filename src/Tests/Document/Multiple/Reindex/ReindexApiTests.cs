@@ -126,7 +126,7 @@ namespace Tests.Document.Multiple.Reindex
 			CountdownEvent observableWait = null;
 			var reindexRoutines = new List<Action>
 			{
-				() => ReindexMany(GetSignal, Signal),
+				//() => ReindexMany(GetSignal, Signal),
 				() => ReindexSingleType(GetSignal, Signal),
 				() => ReindexProjection(GetSignal, Signal)
 			};

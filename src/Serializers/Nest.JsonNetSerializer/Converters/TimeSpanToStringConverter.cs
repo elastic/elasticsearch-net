@@ -1,13 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Reflection;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace Nest
+namespace Nest.JsonNetSerializer.Converters
 {
-	internal class TimeSpanConverter : JsonConverter
+	/// <summary>
+	/// Included for compatibility reasons
+	/// </summary>
+	internal class TimeSpanToStringConverter : JsonConverter
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
@@ -22,22 +21,12 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			if (reader.TokenType == JsonToken.Null)
+			switch (reader.TokenType)
 			{
-				if (!objectType.IsGeneric() || objectType.GetGenericTypeDefinition() != typeof (Nullable<>))
-					throw new JsonSerializationException($"Cannot convert null value to {objectType}.");
-
-				return null;
+				case JsonToken.Null: return null;
+				case JsonToken.String: return TimeSpan.Parse((string) reader.Value);
+				case JsonToken.Integer: return new TimeSpan((long) reader.Value);
 			}
-			if (reader.TokenType == JsonToken.String)
-			{
-				return TimeSpan.Parse((string) reader.Value);
-			}
-			if (reader.TokenType == JsonToken.Integer)
-			{
-				return new TimeSpan((long) reader.Value);
-			}
-
 			throw new JsonSerializationException($"Cannot convert token of type {reader.TokenType} to {objectType}.");
 		}
 

@@ -92,15 +92,67 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			public string Category { get; set; }
 		}
 
-		/**
-		 * Your `SourceSerializer` would not know how to serialize `QueryContainer`. Therefor we ship a separate `NEST.JsonNetSerializer`
-		 * package that helps in composing a custom `SourceSerializer` using `Json.NET` that is smart enough to hand back the
-		 * (de)serialization of known NEST types back to the builtin `RequestResponseSerializer`
+		/**[float]
+		 * === JsonNetSerializer
+		 *
+		 * A custom `SourceSerializer` would not know how to serialize `QueryContainer` or other NEST types that could appear as part of
+		 * the source. Therefor we ship a separate `NEST.JsonNetSerializer` package that helps in composing a custom `SourceSerializer`
+		 * using `Json.NET` that is smart enough to hand back the (de)serialization of known NEST types back to the builtin
+		 * `RequestResponseSerializer`. This package is also useful if you want to control how your documents and values are stored
+		 * and retreived from elasticsearch using `Json.NET` without intervering with the way NEST uses `Json.NET` internally.
+		 *
+		 * The easiest way to hook this custom source serializer is as followed:
 		 */
 
-		public class MyCustomJsonNetSerializer : JsonNetSourceSerializerBase
+		public void DefaultJsonNetSerializer()
 		{
-			public MyCustomJsonNetSerializer(IElasticsearchSerializer builtinSerializer) : base(builtinSerializer) { }
+			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			var connectionSettings =
+				new ConnectionSettings(pool, sourceSerializer: JsonNetSerializer.Default);
+			var client = new ElasticClient(connectionSettings);
+		}
+		/**
+		 * `JsonNetSerializer.Default` is just syntactic helper which is equivalent to doing:
+		 */
+
+		public void DefaultJsonNetSerializerUnsugared()
+		{
+			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			var connectionSettings =
+				new ConnectionSettings(pool, sourceSerializer: (b, s) => new JsonNetSerializer(b, s));
+			var client = new ElasticClient(connectionSettings);
+		}
+		/**
+		 * `JsonNetSerializer`'s constructor takes several methods that allow you to control the `JsonSerializerSettings` and modify
+		 * the contract resolver from `Json.NET`.
+		 */
+
+		public void DefaultJsonNetSerializerFactoryMethods()
+		{
+			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			var connectionSettings =
+				new ConnectionSettings(pool, sourceSerializer: (b, s) => new JsonNetSerializer(
+					b, s,
+					() => new JsonSerializerSettings { NullValueHandling = NullValueHandling.Include },
+					(resolver) => resolver.NamingStrategy = new SnakeCaseNamingStrategy()
+				));
+			var client = new ElasticClient(connectionSettings);
+		}
+
+		/**
+		 * You can also subclass `ConnectionAwareSerializerBase` for a more explicit implementation.
+		 *
+		 * Using this `MyCustomJsonNetSerializer` we can (de)serialize using a `NamingStrategy` that snake cases and `JsonSerializerSettings`
+		 * that include null properties, without affecting how NEST's own types are serialized.
+		 *
+		 * Furthermore because this serializer is aware of the builtin serializer we can automatically inject a `JsonConverter` to handle
+		 * known NEST types that could appear as part of the source such as the afformentioned `QueryContainer`.
+		 */
+
+		public class MyCustomJsonNetSerializer : ConnectionSettingsAwareSerializerBase
+		{
+			public MyCustomJsonNetSerializer(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
+				: base(builtinSerializer, connectionSettings) { }
 
 			protected override IEnumerable<JsonConverter> CreateJsonConverters() => Enumerable.Empty<JsonConverter>();
 
@@ -109,17 +161,17 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 				NullValueHandling = NullValueHandling.Include
 			};
 
-			protected override IContractResolver CreateContractResolver() => new DefaultContractResolver
+			protected override void ModifyContractResolver(ConnectionSettingsAwareContractResolver resolver)
 			{
-				NamingStrategy = new SnakeCaseNamingStrategy()
-			};
+				resolver.NamingStrategy = new SnakeCaseNamingStrategy();
+			}
 		}
 
 		public void UsingJsonNetSerializer()
 		{
 			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var connectionSettings =
-				new ConnectionSettings(pool, sourceSerializer: (settings, builtin) => new MyCustomJsonNetSerializer(builtin)); // <1> what the Func?
+				new ConnectionSettings(pool, sourceSerializer: (builtin, settings) => new MyCustomJsonNetSerializer(builtin, settings));
 			var client = new ElasticClient(connectionSettings);
 		}
 
@@ -127,13 +179,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		 * Using this `MyCustomJsonNetSerializer` we can (de)serialize using a `NamingStrategy` that snake cases and `JsonSerializerSettings`
 		 * that include null properties, without affecting how NEST's own types are serialized.
 		 *
-		 * Furthermore because this serializer is aware of the builtin serializer we can automatically inject a `JsonConverter` to handle
-		 * known NEST types that could appear as part of the source such as the afformentioned `QueryContainer`.
-		 *
-		 * The final remaining question might be why the reference to `settings` if `MyCustomJsonNetSerializer` does not need it?
-		 *
-		 * This is to future proof the contract to hopefully isolate the cases of NEST types even further so that e.g a JIL based
-		 * source serializer can simply call `QueryContainer.Serialize(stream, settings)`.
 		 */
+
 	}
 }

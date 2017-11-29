@@ -6,7 +6,7 @@ using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Nest.JsonNetSerializer
+namespace Nest.JsonNetSerializer.Converters
 {
 	internal class RevertBackToBuiltinSerializer : JsonConverter
 	{
@@ -41,6 +41,5 @@ namespace Nest.JsonNetSerializer
 		};
 
 		public override bool CanConvert(Type objectType) => NestTypesThatCanAppearInSource.Contains(objectType);
-
 	}
 }

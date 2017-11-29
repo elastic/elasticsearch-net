@@ -14,7 +14,7 @@ namespace Nest
 	/// </summary>
 	public class ConnectionSettings : ConnectionSettingsBase<ConnectionSettings>
 	{
-		public delegate IElasticsearchSerializer SourceSerializerFactory(IConnectionSettingsValues values, IElasticsearchSerializer builtIn);
+		public delegate IElasticsearchSerializer SourceSerializerFactory(IElasticsearchSerializer builtIn, IConnectionSettingsValues values);
 
 		public ConnectionSettings(Uri uri = null)
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
@@ -89,7 +89,7 @@ namespace Nest
 			: base(connectionPool, connection, null)
 		{
 			var defaultSerializer = new JsonNetSerializer(this);
-			this._sourceSerializer = sourceSerializerFactory?.Invoke(this, defaultSerializer) ?? defaultSerializer;
+			this._sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;
 			this.UseThisRequestResponseSerializer = defaultSerializer;
 			this._propertyMappingProvider = propertyMappingProvider ?? new PropertyMappingProvider();
 
@@ -212,7 +212,7 @@ namespace Nest
 						throw new ArgumentException($"Property mapping '{e}' on type {typeName} can not be ignored it already has a mapping to '{mappedAs}'");
 					throw new ArgumentException($"Property mapping '{e}' on type {typeName} can not be mapped to '{newName}' already mapped as '{mappedAs}'");
 				}
-				_propertyMappings.Add(memberInfo, mapping.ToPropertyMapping());
+				_propertyMappings[memberInfo] = mapping.ToPropertyMapping();
 			}
 		}
 

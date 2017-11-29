@@ -45,23 +45,24 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 			var visitor = new TestVisitor();
 			response.Accept(visitor);
+			var b = TestClient.Configuration.UsingCustomSourceSerializer;
 
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
-			visitor.CountsShouldContainKeyAndCountBe("join", 1);
-			visitor.CountsShouldContainKeyAndCountBe("object", 7);
-			visitor.CountsShouldContainKeyAndCountBe("date", 4);
-			visitor.CountsShouldContainKeyAndCountBe("text", 18);
-			visitor.CountsShouldContainKeyAndCountBe("keyword", 17);
-			visitor.CountsShouldContainKeyAndCountBe("ip", 2);
+			visitor.CountsShouldContainKeyAndCountBe("text", b ? 19 : 18);
+			visitor.CountsShouldContainKeyAndCountBe("keyword", b ? 19 : 18);
+			visitor.CountsShouldContainKeyAndCountBe("object", 8);
 			visitor.CountsShouldContainKeyAndCountBe("number", 7);
+			visitor.CountsShouldContainKeyAndCountBe("ip", 2);
 			visitor.CountsShouldContainKeyAndCountBe("geo_point", 3);
+			visitor.CountsShouldContainKeyAndCountBe("date", 4);
+			visitor.CountsShouldContainKeyAndCountBe("join", 1);
 			visitor.CountsShouldContainKeyAndCountBe("completion", 2);
-			visitor.CountsShouldContainKeyAndCountBe("nested", 1);
 			visitor.CountsShouldContainKeyAndCountBe("date_range", 1);
+			visitor.CountsShouldContainKeyAndCountBe("double_range", 1);
 			visitor.CountsShouldContainKeyAndCountBe("float_range", 1);
 			visitor.CountsShouldContainKeyAndCountBe("integer_range", 1);
-			visitor.CountsShouldContainKeyAndCountBe("double_range", 1);
 			visitor.CountsShouldContainKeyAndCountBe("long_range", 1);
+			visitor.CountsShouldContainKeyAndCountBe("nested", 1);
 		}
 	}
 

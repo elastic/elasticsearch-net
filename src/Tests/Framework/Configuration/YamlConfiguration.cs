@@ -39,8 +39,9 @@ namespace Tests.Framework.Configuration
 		    Randomizer.Seed = new Random(this.Seed);
 
 			var randomizer = new Randomizer();
-			this.UsingCustomSourceSerializer = (_config.TryGetValue("force_custom_source_serializer", out var v) && bool.Parse(v))
-				|| randomizer.Bool();
+			if (_config.TryGetValue("force_custom_source_serializer", out var v))
+				this.UsingCustomSourceSerializer =  bool.Parse(v);
+			else this.UsingCustomSourceSerializer = randomizer.Bool();
 		}
 
 

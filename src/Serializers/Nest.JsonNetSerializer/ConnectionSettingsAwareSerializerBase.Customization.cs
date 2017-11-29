@@ -1,50 +1,21 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
 
 namespace Nest.JsonNetSerializer
 {
-	public abstract class JsonNetSourceSerializerBase : IElasticsearchSerializer
+	public abstract partial class ConnectionSettingsAwareSerializerBase : IElasticsearchSerializer
 	{
-		protected IElasticsearchSerializer BuiltinSerializer { get; }
 		private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
 		protected virtual int BufferSize => 1024;
 
 		private readonly JsonSerializer _serializer;
 		private readonly JsonSerializer _collapsedSerializer;
-
-		protected JsonNetSourceSerializerBase(IElasticsearchSerializer builtinSerializer)
-		{
-			BuiltinSerializer = builtinSerializer;
-			_serializer = CreateSerializer(SerializationFormatting.Indented);
-			_collapsedSerializer = CreateSerializer(SerializationFormatting.None);
-		}
-
-		protected abstract JsonSerializerSettings CreateJsonSerializerSettings();
-		protected abstract IEnumerable<JsonConverter> CreateJsonConverters();
-		protected virtual IContractResolver CreateContractResolver() => new DefaultContractResolver();
-
-		private JsonSerializer CreateSerializer(SerializationFormatting formatting)
-		{
-			var s = CreateJsonSerializerSettings();
-			var converters = CreateJsonConverters() ?? Enumerable.Empty<JsonConverter>();
-			var contract = CreateContractResolver();
-			s.Formatting = formatting == SerializationFormatting.Indented ? Formatting.Indented : Formatting.None;
-			s.ContractResolver = contract;
-			s.Converters = converters.Concat(new List<JsonConverter>
-			{
-				new RevertBackToBuiltinSerializer(BuiltinSerializer)
-			}).ToList();
-			return JsonSerializer.Create(s);
-		}
 
 		public T Deserialize<T>(Stream stream)
 		{

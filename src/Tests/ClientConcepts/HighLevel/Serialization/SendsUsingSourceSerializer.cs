@@ -30,7 +30,8 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 
 		private class CustomSettingsSerializerBase : TestSourceSerializerBase
 		{
-			public CustomSettingsSerializerBase(IElasticsearchSerializer builtinSerializer) : base(builtinSerializer) { }
+			public CustomSettingsSerializerBase(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
+				: base(builtinSerializer, connectionSettings) { }
 
 			protected override JsonSerializerSettings CreateJsonSerializerSettings()
 			{
@@ -40,6 +41,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 					NullValueHandling = NullValueHandling.Include
 				};
 			}
+
 		}
 
 		private static void CanAlterSource<T>(Func<IElasticClient, T> call, object usingDefaults, object withSourceSerializer)
@@ -47,7 +49,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		{
 			Expect(usingDefaults).FromRequest(call);
 
-			WithSourceSerializer((s, c) => new CustomSettingsSerializerBase(c))
+			WithSourceSerializer((s, c) => new CustomSettingsSerializerBase(s, c))
 				.Expect(withSourceSerializer)
 				.FromRequest(call);
 		}

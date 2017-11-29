@@ -76,6 +76,7 @@ namespace Tests.Document.Single
 		[I] protected async Task DocumentIsUpdated() => await this.AssertOnGetAfterUpdate(r =>
 		{
 			r.Source.Should().NotBeNull();
+			r.Version.Should().BeGreaterThan(1);
 			r.Source.Description.Should().EndWith("updated");
 		});
 

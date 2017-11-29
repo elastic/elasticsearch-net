@@ -50,12 +50,10 @@ namespace Nest
 					contract.Converter = new QueryContainerCollectionJsonConverter();
 				else if (o == typeof(ServerError))
 					contract.Converter = new ServerErrorJsonConverter();
-				else if (o == typeof(DateTime) ||
-						 o == typeof(DateTime?))
+				else if (o == typeof(DateTime) || o == typeof(DateTime?))
 					contract.Converter = new IsoDateTimeConverter { Culture = CultureInfo.InvariantCulture };
-				else if (o == typeof(TimeSpan) ||
-						 o == typeof(TimeSpan?))
-					contract.Converter = new TimeSpanConverter();
+				else if (o == typeof(TimeSpan) || o == typeof(TimeSpan?))
+					contract.Converter = new TimeSpanToStringConverter();
 
 				ApplyBuildInSerializersForType(o, contract);
 
