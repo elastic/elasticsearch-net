@@ -13,11 +13,10 @@ namespace Nest
 		//Only here for ReadAsType new() constraint needs to be updated
 		internal CreateIndexRequest() { }
 
-		public CreateIndexRequest(IndexName index, IndexState state) : this(index)
+		public CreateIndexRequest(IndexName index, IIndexState state) : this(index)
 		{
 			this.Settings = state.Settings;
 			this.Mappings = state.Mappings;
-			this.Aliases = state.Aliases;
 			this.Similarity = state.Similarity;
 			CreateIndexRequest.RemoveReadOnlySettings(this.Settings);
 		}
@@ -27,6 +26,7 @@ namespace Nest
 			"index.creation_date",
 			"index.uuid",
 			"index.version.created",
+			"index.provided_name"
 		};
 
 		internal static void RemoveReadOnlySettings (IIndexSettings settings)

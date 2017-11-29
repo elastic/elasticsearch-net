@@ -2,12 +2,11 @@
 using System.IO;
 using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	[JsonConverter(typeof(LazyDocumentJsonConverter))]
+	[ContractJsonConverter(typeof(LazyDocumentJsonConverter))]
 	public interface ILazyDocument
 	{
 		/// <summary>

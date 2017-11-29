@@ -11,6 +11,7 @@ namespace Nest
 		[JsonProperty("pipeline")]
 		string Pipeline { get; set; }
 
+		[JsonConverter(typeof(SourceConverter))]
 		T Document { get; set; }
 	}
 

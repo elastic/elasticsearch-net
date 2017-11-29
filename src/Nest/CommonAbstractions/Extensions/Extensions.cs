@@ -244,6 +244,7 @@ namespace Nest
 			try
 			{
 				var tasks = new List<Task>();
+				int i = 0;
 				foreach (var item in lazyList)
 				{
 					tasks.Add(ProcessAsync(item, taskSelector, resultProcessor, semaphore, additionalRateLimitter, page++));
@@ -252,6 +253,7 @@ namespace Nest
 
 					var task = await Task.WhenAny(tasks);
 					tasks.Remove(task);
+					i++;
 				}
 
 				await Task.WhenAll(tasks);

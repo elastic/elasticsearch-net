@@ -62,7 +62,7 @@ namespace Tests.Document.Multiple.Reindex
 			// create a thousand commits and associate with the projects
 			var commits = CommitActivity.Generator.Generate(5000).ToList();
 			var bb = new BulkDescriptor();
-			for (int i = 0; i < commits.Count; i++)
+			for (var i = 0; i < commits.Count; i++)
 			{
 				var commit = commits[i];
 				var project = i % 2 == 0
@@ -70,12 +70,17 @@ namespace Tests.Document.Multiple.Reindex
 					: projects[1].Name;
 
 				bb.Index<CommitActivity>(bi => bi
-					.Document(commit)
+					.Document(UpdateJoin(commit, project))
 					.Index(IndexName)
 					.Id(commit.Id)
 					.Routing(project)
 				);
 			}
+            CommitActivity UpdateJoin(CommitActivity a, string p)
+            {
+                a.ProjectName = p;
+	            return a;
+            }
 
 			var bulkResult = this._client.Bulk(b => bb);
 			bulkResult.ShouldBeValid();
@@ -126,7 +131,7 @@ namespace Tests.Document.Multiple.Reindex
 			CountdownEvent observableWait = null;
 			var reindexRoutines = new List<Action>
 			{
-				//() => ReindexMany(GetSignal, Signal),
+				() => ReindexMany(GetSignal, Signal),
 				() => ReindexSingleType(GetSignal, Signal),
 				() => ReindexProjection(GetSignal, Signal)
 			};
@@ -148,7 +153,6 @@ namespace Tests.Document.Multiple.Reindex
 			);
 
 			this._reindexManyTypesResult.Subscribe(manyTypesObserver);
-			this._reindexManyTypesResult.Wait(TimeSpan.FromMinutes(3), r => { });
 		}
 
 		private void ReindexManyTypesCompleted(CountdownEvent handle)

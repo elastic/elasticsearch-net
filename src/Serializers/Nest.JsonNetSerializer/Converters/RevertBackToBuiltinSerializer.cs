@@ -30,6 +30,12 @@ namespace Nest.JsonNetSerializer.Converters
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var token = JToken.ReadFrom(reader);
+			//in place because JsonConverter.Deserialize() only works on full json objects.
+			//even though we pass type JSON.NET won't try the registered converter for that type
+			//even if it can handle string tokens :(
+			if (objectType == typeof(JoinField) && token.Type == JTokenType.String)
+				return JoinField.Root(token.ToString());
+
 			using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(token.ToString())))
 				return _builtInSerializer.Deserialize(objectType, ms);
 		}
@@ -38,7 +44,8 @@ namespace Nest.JsonNetSerializer.Converters
 			typeof(JoinField),
 			typeof(QueryContainer),
 			typeof(CompletionField),
-			typeof(Attachment)
+			typeof(Attachment),
+			typeof(ILazyDocument)
 		};
 
 		public override bool CanConvert(Type objectType) => NestTypesThatCanAppearInSource.Contains(objectType);

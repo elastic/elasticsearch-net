@@ -10,6 +10,7 @@ namespace Nest
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -47,6 +48,5 @@ namespace Nest
 			);
 		}
 
-		public override bool CanConvert(Type objectType) => true;
 	}
 }

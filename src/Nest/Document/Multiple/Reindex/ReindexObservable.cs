@@ -77,12 +77,10 @@ namespace Nest
 				.SelectMany(r => r.SearchResponse.Hits)
 				.Select(r=> r.Copy(this._reindexRequest.Map));
 
-
 			var observableBulk = this.BulkAll(scrollDocuments, backPressure, toIndex);
 
 			//by casting the observable can potentially store more meta data on the user provided observer
-			var moreInfoObserver = observer as BulkAllObserver;
-			if (moreInfoObserver != null)
+			if (observer is BulkAllObserver moreInfoObserver)
 				observableBulk.Subscribe(moreInfoObserver);
 			else observableBulk.Subscribe(observer);
 		}
@@ -93,6 +91,7 @@ namespace Nest
 			if (bulkAllRequest == null)
 				throw new Exception("BulkAll must set on ReindexRequest in order to get the target of a Reindex operation");
 
+			bulkAllRequest.Type = null;
 			bulkAllRequest.BackPressure = backPressure;
 			bulkAllRequest.BufferToBulk = (bulk, hits) =>
 			{
@@ -219,12 +218,6 @@ namespace Nest
 				originalIndexState = getIndexResponse.Indices[resolvedFrom];
 				if (this._reindexRequest.OmitIndexCreation)
 					return originalIndexState.Settings.NumberOfShards;
-
-				// Black list internal settings that cannot be copied over
-				// See https://github.com/elastic/elasticsearch/issues/21096
-				originalIndexState.Settings.Remove("index.provided_name");
-				originalIndexState.Settings.Remove("index.creation_date");
-				originalIndexState.Settings.Remove("index.version.created");
 			}
 
 			var createIndexRequest = this._reindexRequest.CreateIndexRequest ??
