@@ -59,7 +59,6 @@ namespace Elasticsearch.Net
 			request.Accept = requestData.ContentType;
 			request.ContentType = requestData.ContentType;
 			request.MaximumResponseHeadersLength = -1;
-			request.AllowWriteStreamBuffering = false;
 			request.Pipelined = requestData.Pipelined;
 
 			if (requestData.HttpCompression)
@@ -99,7 +98,6 @@ namespace Elasticsearch.Net
 			//this method only sets internal values and wont actually cause timers and such to be reset
 			//So it should be idempotent if called with the same parameters
 			requestServicePoint.SetTcpKeepAlive(true, requestData.KeepAliveTime, requestData.KeepAliveInterval);
-
 		}
 
 		protected virtual void SetProxyIfNeeded(HttpWebRequest request, RequestData requestData)
