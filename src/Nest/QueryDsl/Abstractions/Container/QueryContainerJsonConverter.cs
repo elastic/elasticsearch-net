@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	internal class QueryContainerJsonConverter: ReserializeJsonConverter<QueryContainer, IQueryContainer>
+	internal class QueryContainerJsonConverter : ReserializeJsonConverter<QueryContainer, IQueryContainer>
 	{
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -28,7 +28,7 @@ namespace Nest
 		protected override void SerializeJson(JsonWriter writer, object value, IQueryContainer castValue, JsonSerializer serializer)
 		{
 			var rawQuery = castValue.RawQuery;
-			if (!rawQuery?.Raw.IsNullOrEmpty() ?? false && rawQuery.IsWritable)
+			if ((!rawQuery?.Raw.IsNullOrEmpty() ?? false) && rawQuery.IsWritable)
 			{
 				writer.WriteRawValue(rawQuery.Raw);
 				return;

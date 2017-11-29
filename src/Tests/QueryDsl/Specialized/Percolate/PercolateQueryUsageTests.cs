@@ -75,11 +75,11 @@ namespace Tests.QueryDsl.Specialized.Percolate
 				this.Client.Index(new ProjectPercolation
 				{
 					Id = PercolatorId,
-					Query = new QueryContainer(new MatchQuery
+					Query = new MatchQuery
 					{
 						Field = Infer.Field<Project>(f => f.LeadDeveloper.FirstName),
 						Query = "Martijn"
-					})
+					}
 				}, d => d.Index(percolationIndex));
 				this.Client.IndexDocument(Project.Instance);
 				this.Client.Refresh(Nest.Indices.Index(percolationIndex).And<Project>());

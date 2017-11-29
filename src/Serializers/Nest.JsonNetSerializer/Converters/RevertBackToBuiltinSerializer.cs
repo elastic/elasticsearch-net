@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
@@ -41,5 +42,8 @@ namespace Nest.JsonNetSerializer.Converters
 		};
 
 		public override bool CanConvert(Type objectType) => NestTypesThatCanAppearInSource.Contains(objectType);
+
+
+
 	}
 }

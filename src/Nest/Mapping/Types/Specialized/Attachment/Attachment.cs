@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(AttachmentConverter))]
+	[ContractJsonConverter(typeof(AttachmentConverter))]
 	public class Attachment
 	{
 		/// <summary>

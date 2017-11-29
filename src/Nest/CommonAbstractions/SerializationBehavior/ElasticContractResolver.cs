@@ -188,7 +188,6 @@ namespace Nest
 			if ((property.PropertyType == typeof(DateTime) || property.PropertyType == typeof(DateTime?))
 			    && (attributes.OfType<MachineLearningDateTimeAttribute>().Any()))
 				property.Converter = MachineLearningDateTimeConverter;
-
 		}
 
 		private static void ApplyBuildInSerializersForType(Type type, JsonContract contract)
