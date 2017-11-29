@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(StopWordsJsonConverter))]
+	[ContractJsonConverter(typeof(StopWordsJsonConverter))]
 	public class StopWords : Union<string, IEnumerable<string>>
 	{
 		public StopWords(string item) : base(item) { }
@@ -15,7 +15,7 @@ namespace Nest
 		public static implicit operator StopWords(string[] second) => new StopWords(second);
 	}
 
-	internal class StopWordsJsonConverter :JsonConverter 
+	internal class StopWordsJsonConverter :JsonConverter
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => true;

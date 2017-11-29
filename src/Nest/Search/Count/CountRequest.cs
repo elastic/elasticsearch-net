@@ -19,7 +19,7 @@ namespace Nest
 	public partial class CountRequest
 	{
 		protected override HttpMethod HttpMethod =>
-			Self.RequestParameters.ContainsKey("_source") || Self.RequestParameters.ContainsKey("q") || Self.Query == null || Self.Query.IsConditionless()
+			Self.RequestParameters.ContainsKey("source") || Self.RequestParameters.ContainsKey("q") || Self.Query == null || Self.Query.IsConditionless()
 				? HttpMethod.GET : HttpMethod.POST;
 
 		public QueryContainer Query { get; set; }
@@ -29,7 +29,7 @@ namespace Nest
 	public partial class CountRequest<T>
 	{
 		protected override HttpMethod HttpMethod =>
-			Self.RequestParameters.ContainsKey("_source") || Self.RequestParameters.ContainsKey("q") || Self.Query == null || Self.Query.IsConditionless()
+			Self.RequestParameters.ContainsKey("source") || Self.RequestParameters.ContainsKey("q") || Self.Query == null || Self.Query.IsConditionless()
 				? HttpMethod.GET : HttpMethod.POST;
 
 		public QueryContainer Query { get; set; }
@@ -39,7 +39,7 @@ namespace Nest
 	public partial class CountDescriptor<T> where T : class
 	{
 		protected override HttpMethod HttpMethod =>
-			Self.RequestParameters.ContainsKey("_source") || Self.RequestParameters.ContainsKey("q") || Self.Query == null || Self.Query.IsConditionless()
+			Self.RequestParameters.ContainsKey("source") || Self.RequestParameters.ContainsKey("q") || Self.Query == null || Self.Query.IsConditionless()
 				? HttpMethod.GET : HttpMethod.POST;
 
 		QueryContainer ICountRequest.Query { get; set; }

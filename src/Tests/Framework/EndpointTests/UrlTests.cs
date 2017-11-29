@@ -104,7 +104,7 @@ namespace Tests.Framework
 		{
 			this.ExpectedHttpMethod = method;
 			this.ExpectedUrl = expectedUrl;
-			this._connectionSettingsModifier = (c => c
+			this.ConnectionSettingsModifier = (c => c
 				.PrettyJson(false)
 				.OnRequestCompleted(h => CallDetails = h));
 		}

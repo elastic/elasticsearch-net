@@ -8,6 +8,7 @@ using Tests.Framework;
 
 namespace Tests.CodeStandards
 {
+	[ProjectReferenceOnly]
 	public class QueriesStandards
 	{
 		protected static PropertyInfo[] QueryProperties = typeof(IQueryContainer).GetProperties();

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Nest;
 using Newtonsoft.Json.Linq;
 using Tests.Framework.Integration;
@@ -27,9 +28,9 @@ namespace Tests.QueryDsl.Joining.Nested
 				boost = 1.1,
 				query = new
 				{
-					terms = new JObject
+					terms = new Dictionary<string, object>
 					{
-						{ "curatedTags.name", new JArray("lorem", "ipsum") }
+						{ "curatedTags.name", new [] {"lorem", "ipsum"} }
 					}
 				},
 				ignore_unmapped = false,

@@ -8,6 +8,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.MockData;
 using static Nest.Infer;
 
 namespace Tests.Search.Request

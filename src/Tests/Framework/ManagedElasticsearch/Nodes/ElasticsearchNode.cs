@@ -1,14 +1,19 @@
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using Bogus;
 using Elasticsearch.Net;
 using Nest;
+using Newtonsoft.Json;
 using Tests.Framework.Configuration;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Process;
+using Tests.Framework.ManagedElasticsearch.SourceSerializers;
 using Tests.Framework.Versions;
 #if !DOTNETCORE
 using XplatManualResetEvent = System.Threading.ManualResetEvent;
@@ -36,28 +41,25 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 
 		private bool RunningOnCI { get; }
 
+		public bool UsingSourceSerializer { get; }
+
 		public ElasticsearchNode(NodeConfiguration config)
 		{
 			this._config = config;
 			this.FileSystem = config.FileSystem;
 			this.RunningOnCI = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TEAMCITY_VERSION"));
 			this.Port = config.DesiredPort;
-			if (this._config.RunIntegrationTests && !this._config.TestAgainstAlreadyRunningElasticsearch) return;
+			this.UsingSourceSerializer = config.UsingCustomSourceSerializer ;
 		}
 
 		private readonly object _lockGetClient = new object { };
-		private IElasticClient _client;
+		private volatile IElasticClient _client;
 
 		public IElasticClient Client
 		{
 			get
 			{
-				if (!this.Started && TestClient.Configuration.RunIntegrationTests)
-				{
-					var logFile = Path.Combine(this.FileSystem.LogsPath, $"{this._config.NodeName}.log");
-					throw new Exception($"cannot request a client from an ElasticsearchNode that hasn't started yet. " +
-					                    $"Check the log at {logFile} to see if there was an issue starting");
-				}
+				ThrowIfNotStarted();
 
 				if (this._client != null) return this._client;
 
@@ -66,10 +68,28 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 					if (this._client != null) return this._client;
 
 					var port = this.Started ? this.Port : 9200;
-					this._client = TestClient.GetClient(ComposeSettings, port, forceSsl: this._config.EnableSsl);
-					return this.Client;
+
+					this._client = TestClient.GetClient(
+						ComposeSettings,
+						port,
+						forceSsl: this._config.EnableSsl,
+						sourceSerializerFactory: (settings, builtin) =>
+						{
+							var customSourceSerializer = new TestSourceSerializerBase(builtin);
+							return this.UsingSourceSerializer ? customSourceSerializer : null;
+						}
+					);
 				}
+				return this._client;
 			}
+		}
+
+		private void ThrowIfNotStarted()
+		{
+			if (this.Started || !TestClient.Configuration.RunIntegrationTests) return;
+			var logFile = Path.Combine(this.FileSystem.LogsPath, $"{this._config.NodeName}.log");
+			throw new Exception($"cannot request a client from an ElasticsearchNode that hasn't started yet. " +
+			                    $"Check the log at {logFile} to see if there was an issue starting");
 		}
 
 		public void Start(string[] settings, TimeSpan startTimeout)

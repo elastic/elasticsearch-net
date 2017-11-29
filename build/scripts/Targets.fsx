@@ -32,7 +32,10 @@ open Commandline
 Commandline.parse()
 
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
-Target "Start" <| fun _ -> traceHeader "STARTING BUILD"
+Target "Start" <| fun _ -> 
+    match (isMono, Commandline.validMonoTarget) with
+    | (true, false) -> failwithf "%s is not a valid target on mono because it can not call ILRepack" (Commandline.target)
+    | _ -> traceHeader "STARTING BUILD"
 
 Target "Clean" Build.Clean
 
@@ -57,7 +60,9 @@ Target "Benchmark" <| fun _ ->
     let password = getBuildParam "password"
     Benchmarker.IndexResults (url, username, password)
 
-Target "InheritDoc"  InheritDoc.PatchInheritDocs
+Target "InternalizeDependencies" Build.ILRepack
+
+Target "InheritDoc" InheritDoc.PatchInheritDocs
 
 Target "Documentation" Documentation.Generate
 
@@ -69,6 +74,9 @@ Target "Release" <| fun _ ->
     Versioning.ValidateArtifacts()
     StrongName.ValidateDllsInNugetPackage()
 
+Target "TestNugetPackage" <| fun _ -> 
+    Tests.RunReleaseUnitTests()
+    
 Target "Canary" <| fun _ -> 
     trace "Running canary build" 
     let apiKey = (getBuildParam "apikey");
@@ -82,8 +90,9 @@ Target "Canary" <| fun _ ->
   ==> "Restore"
   =?> ("FullBuild", Commandline.needsFullBuild)
   =?> ("Test", (not Commandline.skipTests))
+  =?> ("InternalizeDependencies", (not isMono))
   ==> "InheritDoc"
-  ==> "Documentation"
+  =?> ("Documentation", (not isMono))
   ==> "Build"
 
 "Start"
@@ -98,6 +107,7 @@ Target "Canary" <| fun _ ->
 
 "Version"
   ==> "Release"
+  =?> ("TestNugetPackage", (not isMono))
   ==> "Canary"
 
 "Start"
@@ -108,6 +118,6 @@ Target "Canary" <| fun _ ->
 
 "Build"
   ==> "Release"
-
+  
 RunTargetOrListTargets()
 

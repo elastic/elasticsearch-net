@@ -22,7 +22,7 @@
     <FileVersion>$(CurrentAssemblyFileVersion)</FileVersion>
 
     <SignAssembly Condition="'$(DotNetCoreOnly)'==''">true</SignAssembly>
-    <AssemblyOriginatorKeyFile Condition="'$(DotNetCoreOnly)'==''">..\..\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile Condition="'$(DotNetCoreOnly)'==''">$(MSBuildThisFileDirectory)\keys\keypair.snk</AssemblyOriginatorKeyFile>
     <GenerateDocumentationFile Condition="'$(DotNetCoreOnly)'==''">true</GenerateDocumentationFile>
     <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>

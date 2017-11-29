@@ -20,7 +20,8 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var o = JObject.Load(reader);
-			var fields = o.Properties().ToDictionary(p => p.Name, p => p.Value.ToObject<object>());
+			var s = serializer.GetConnectionSettings().SourceSerializer;
+			var fields = o.Properties().ToDictionary(p => p.Name, p => new LazyDocument(p.Value, s));
 			var inferrer = serializer.GetConnectionSettings().Inferrer;
 			var fieldValues = new FieldValues(inferrer, fields);
 			return fieldValues;

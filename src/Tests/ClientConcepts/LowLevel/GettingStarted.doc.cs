@@ -107,10 +107,10 @@ namespace Tests.ClientConcepts.LowLevel
                 LastName = "Laarman"
             };
 
-            var indexResponse = lowlevelClient.Index<byte[]>("people", "person", "1", person); //<1> synchronous method that returns an `IIndexResponse`
+            var indexResponse = lowlevelClient.Index<byte[]>("people", "person", "1", PostData.Serializable(person)); //<1> synchronous method that returns an `IIndexResponse`
             byte[] responseBytes = indexResponse.Body;
 
-            var asyncIndexResponse = await lowlevelClient.IndexAsync<string>("people", "person", "1", person); //<2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
+            var asyncIndexResponse = await lowlevelClient.IndexAsync<string>("people", "person", "1", PostData.Serializable(person)); //<2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
             string responseString = asyncIndexResponse.Body;
         }
 
@@ -130,7 +130,7 @@ namespace Tests.ClientConcepts.LowLevel
 				LastName = "Laarman"
 			};
 
-			var indexResponse = await lowlevelClient.IndexAsync<Stream>("people", "person", "1", person);
+			var indexResponse = await lowlevelClient.IndexAsync<Stream>("people", "person", "1", PostData.Serializable(person));
 			Stream responseStream = indexResponse.Body; // <1> If returning a `Stream`, be sure to properly https://msdn.microsoft.com/en-us/library/b1yfkh5e(v=vs.110).aspx[dispose] of it when you are finished with it.
 		}
 
@@ -159,7 +159,7 @@ namespace Tests.ClientConcepts.LowLevel
 				new { FirstName = "Russ", LastName = "Cam" },
 		    };
 
-			var indexResponse = lowlevelClient.Bulk<Stream>(people);
+			var indexResponse = lowlevelClient.Bulk<Stream>(PostData.MultiJson(people));
 			Stream responseStream = indexResponse.Body;
 		}
 		/**
@@ -175,7 +175,7 @@ namespace Tests.ClientConcepts.LowLevel
 		*/
 		public void SearchingWithAnonymousTypes()
         {
-            var searchResponse = lowlevelClient.Search<string>("people", "person", new
+            var searchResponse = lowlevelClient.Search<string>("people", "person", PostData.Serializable(new
             {
                 from = 0,
                 size = 10,
@@ -187,7 +187,7 @@ namespace Tests.ClientConcepts.LowLevel
                         query = "Martijn"
                     }
                 }
-            });
+            }));
 
             var successful = searchResponse.Success;
             var responseJson = searchResponse.Body;
@@ -243,7 +243,7 @@ namespace Tests.ClientConcepts.LowLevel
         */
         public void ResponseProperties()
         {
-            var searchResponse = lowlevelClient.Search<byte[]>("people", "person", new { match_all = new {} });
+            var searchResponse = lowlevelClient.Search<byte[]>("people", "person", PostData.Serializable(new { match_all = new {} }));
 
             var success = searchResponse.Success; // <1> Response is in the 200 range, or an expected response for the given request
             var successOrKnownError = searchResponse.SuccessOrKnownError; // <2> Response is successful, or has a response code between 400-599 that indicates the request cannot be retried.

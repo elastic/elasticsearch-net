@@ -5,6 +5,7 @@ using Tests.Framework;
 using Tests.Framework.Configuration;
 using Xunit.Abstractions;
 using Xunit.Sdk;
+using static System.Console;
 
 namespace Xunit
 {
@@ -17,22 +18,27 @@ namespace Xunit
 		protected override ITestFrameworkExecutor CreateExecutor(AssemblyName assemblyName)
 		{
 			var config = TestClient.Configuration;
+		    Randomizer.Seed = new Random(config.Seed);
 
-		    Randomizer.Seed = new Random(1337);
 
-            Console.WriteLine("Starting tests using config:");
-			Console.WriteLine($" - {nameof(config.TestAgainstAlreadyRunningElasticsearch)}: {config.TestAgainstAlreadyRunningElasticsearch}");
-			Console.WriteLine($" - {nameof(config.ElasticsearchVersion)}: {config.ElasticsearchVersion}");
-			Console.WriteLine($" - {nameof(config.ForceReseed)}: {config.ForceReseed}");
-			Console.WriteLine($" - {nameof(config.Mode)}: {config.Mode.ToString()}");
+			WriteLine(new string('-', 20));
+            WriteLine("Starting tests using config:");
+			WriteLine($" - {nameof(config.TestAgainstAlreadyRunningElasticsearch)}: {config.TestAgainstAlreadyRunningElasticsearch}");
+			WriteLine($" - {nameof(config.ElasticsearchVersion)}: {config.ElasticsearchVersion}");
+			WriteLine($" - {nameof(config.ForceReseed)}: {config.ForceReseed}");
+			WriteLine($" - {nameof(config.Mode)}: {config.Mode}");
+			WriteLine($" - {nameof(config.Seed)}: {config.Seed}");
 			if (config.Mode == TestMode.Integration)
 			{
-				Console.WriteLine($" - {nameof(config.ClusterFilter)}: {config.ClusterFilter}");
-				Console.WriteLine($" - {nameof(config.TestFilter)}: {config.TestFilter}");
+				WriteLine($" - {nameof(config.ClusterFilter)}: {config.ClusterFilter}");
+				WriteLine($" - {nameof(config.TestFilter)}: {config.TestFilter}");
 
 			}
-			Console.WriteLine($" - {nameof(config.RunIntegrationTests)}: {config.RunIntegrationTests}");
-			Console.WriteLine($" - {nameof(config.RunUnitTests)}: {config.RunUnitTests}");
+			WriteLine($" - {nameof(config.RunIntegrationTests)}: {config.RunIntegrationTests}");
+			WriteLine($" - {nameof(config.RunUnitTests)}: {config.RunUnitTests}");
+			WriteLine($" - {nameof(config.UsingCustomSourceSerializer)}: {config.UsingCustomSourceSerializer}");
+			WriteLine(new string('-', 20));
+
 
 			return new TestFrameworkExecutor(assemblyName, SourceInformationProvider, DiagnosticMessageSink);
 		}

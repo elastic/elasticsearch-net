@@ -13,6 +13,8 @@ namespace Tests.Document.Single.Index
 	public class IndexIngestApiTests :
 		ApiIntegrationTestBase<IntrusiveOperationCluster, IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
+		protected override bool IncludeNullInExpected => false;
+
 		private static string PipelineId { get; } = "pipeline-" + Guid.NewGuid().ToString("N").Substring(0, 8);
 
 		public IndexIngestApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
@@ -42,6 +44,7 @@ namespace Tests.Document.Single.Index
 			StartedOn = FixedDate,
 			LastActivity = FixedDate,
 			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}},
+			SourceOnly = TestClient.Configuration.UsingCustomSourceSerializer ? new SourceOnlyObject() : null
 		};
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -64,10 +67,13 @@ namespace Tests.Document.Single.Index
 			new
 			{
 				name = CallIsolatedValue,
-				join = Document.Join,
+				join = Document.Join.ToAnonymousObject(),
 				state = "Stable",
+				visibility = "Public",
 				startedOn = FixedDate,
 				lastActivity = FixedDate,
+				numberOfContributors = 0,
+				sourceOnly = Dependant(null, new { notWrittenByDefaultSerializer = "written" }),
 				curatedTags = new[] {new {name = "x", added = FixedDate}},
 			};
 

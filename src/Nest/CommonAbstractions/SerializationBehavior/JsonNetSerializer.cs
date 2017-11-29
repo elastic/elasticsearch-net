@@ -8,17 +8,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	/// <summary>
-	/// A JSON serializer that uses Json.NET for serialization
-	/// </summary>
-	public class JsonNetSerializer : IElasticsearchSerializer
+
+	/// <summary> A JSON serializer that uses Json.NET for serialization </summary>
+	internal class JsonNetSerializer : IElasticsearchSerializer
 	{
 		private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
-		private JsonSerializer _defaultSerializer;
-		private JsonSerializer _indentedSerializer;
+		private readonly JsonSerializer _defaultSerializer;
+		private readonly JsonSerializer _indentedSerializer;
+		//TODO this internal smells
+		internal JsonSerializer Serializer => _defaultSerializer;
 
 		protected IConnectionSettingsValues Settings { get; }
 
@@ -26,9 +28,6 @@ namespace Nest
 		/// Resolves JsonContracts for types
 		/// </summary>
 		private ElasticContractResolver ContractResolver { get; }
-
-		//TODO this internal smells
-		internal JsonSerializer Serializer => _defaultSerializer;
 
 		/// <summary>
 		/// The size of the buffer to use when writing the serialized request
@@ -38,54 +37,33 @@ namespace Nest
 		// to be a good compromise buffer size for performance throughput and bytes allocated.
 		protected virtual int BufferSize => 1024;
 
-		protected virtual IList<Func<Type, JsonConverter>> ContractConverters => null;
-
-		protected readonly ConcurrentDictionary<string, IPropertyMapping> Properties = new ConcurrentDictionary<string, IPropertyMapping>();
-
-		public JsonNetSerializer(IConnectionSettingsValues settings, Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier) : this(settings, null, settingsModifier) { }
-
-		public JsonNetSerializer(IConnectionSettingsValues settings) : this(settings, null, null) { }
+		public JsonNetSerializer(IConnectionSettingsValues settings) : this(settings, null) { }
 
 		/// <summary>
 		/// this constructor is only here for stateful (de)serialization
 		/// </summary>
-		protected internal JsonNetSerializer(
-			IConnectionSettingsValues settings,
-			JsonConverter statefulConverter,
-			Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier = null
-			)
+		protected internal JsonNetSerializer(IConnectionSettingsValues settings, JsonConverter statefulConverter)
 		{
 			this.Settings = settings;
 			var piggyBackState = statefulConverter == null ? null : new JsonConverterPiggyBackState { ActualJsonConverter = statefulConverter };
-			// ReSharper disable once VirtualMemberCallInContructor
-			this.ContractResolver = new ElasticContractResolver(this.Settings, this.ContractConverters) { PiggyBackState = piggyBackState };
+			this.ContractResolver = new ElasticContractResolver(this.Settings) { PiggyBackState = piggyBackState };
 
-			OverwriteDefaultSerializers(settingsModifier ?? ((s, csv) => { }));
-		}
-
-		/// <summary>
-		/// If you subclass JsonNetSerializer and want to apply state passed in the constructor, call this to
-		/// overwrite the DefaultSerializers's JsonSerializerSettings and/or connectionSettings.
-		/// </summary>
-		/// <param name="settingsModifier">a delegate used to modify json serializer and connection settings</param>
-		protected void OverwriteDefaultSerializers(Action<JsonSerializerSettings, IConnectionSettingsValues> settingsModifier)
-		{
-			settingsModifier.ThrowIfNull(nameof(settingsModifier));
 			var collapsed = this.CreateSettings(SerializationFormatting.None);
 			var indented = this.CreateSettings(SerializationFormatting.Indented);
-			settingsModifier(collapsed, this.Settings);
-			settingsModifier(indented, this.Settings);
 
 			this._defaultSerializer = JsonSerializer.Create(collapsed);
 			this._indentedSerializer = JsonSerializer.Create(indented);
 		}
 
-		public virtual void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
+		public virtual void Serialize<T>(T data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
 		{
 			var serializer = formatting == SerializationFormatting.Indented
 				? _indentedSerializer
 				: _defaultSerializer;
 
+			//this leaveOpen is most likely here because in PostData when we serialize IEnumerable<object> as multi json
+			//we call this multiple times, it would be better to have a dedicated Serialize(IEnumerable<object>) on the
+			//IElasticsearchSerializer interface more explicitly
 			using (var writer = new StreamWriter(writableStream, ExpectedEncoding, BufferSize, leaveOpen: true))
 			using (var jsonWriter = new JsonTextWriter(writer))
 			{
@@ -95,41 +73,50 @@ namespace Nest
 			}
 		}
 
-		public virtual IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
+		//we still support net45 so Task.Completed is not available
+		private static readonly Task CompletedTask = Task.FromResult(false);
+		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
+			CancellationToken cancellationToken = default(CancellationToken))
 		{
-			IPropertyMapping mapping;
-			var memberInfoString = $"{memberInfo.DeclaringType?.FullName}.{memberInfo.Name}";
-			if (Properties.TryGetValue(memberInfoString, out mapping))
-				return mapping;
-			mapping =  PropertyMappingFromAttributes(memberInfo);
-			this.Properties.TryAdd(memberInfoString, mapping);
-			return mapping;
+			//This makes no sense now but we need the async method on the interface in 6.x so we can start swapping this out
+			//for an implementation that does make sense without having to wait for 7.x
+			this.Serialize(data, stream, formatting);
+			return CompletedTask;
 		}
 
-		private static IPropertyMapping PropertyMappingFromAttributes(MemberInfo memberInfo)
-		{
-			var jsonProperty = memberInfo.GetCustomAttribute<JsonPropertyAttribute>(true);
-			var ignoreProperty = memberInfo.GetCustomAttribute<JsonIgnoreAttribute>(true);
-			if (jsonProperty == null && ignoreProperty == null) return null;
-			return new PropertyMapping {Name = jsonProperty?.PropertyName, Ignore = ignoreProperty != null};
-		}
+		public object Default(Type type) => type.IsValueType() ? type.CreateInstance() : null;
 
-		public virtual T Deserialize<T>(Stream stream)
+		public virtual T Deserialize<T>(Stream stream) => (T) this.Deserialize(typeof(T), stream);
+
+		public virtual object Deserialize(Type type, Stream stream)
 		{
-			if (stream == null) return default(T);
+			if (stream == null) return Default(type);
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
-				var t = this._defaultSerializer.Deserialize<T>(jsonTextReader);
+				var t = this._defaultSerializer.Deserialize(jsonTextReader, type);
 				return t;
 			}
 		}
 
-		public virtual Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+		public virtual async Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			//Json.NET does not support reading a stream asynchronously :(
-			var result = this.Deserialize<T>(stream);
-			return Task.FromResult(result);
+			using (var streamReader = new StreamReader(stream))
+			using (var jsonTextReader = new JsonTextReader(streamReader))
+			{
+				var token = await JToken.LoadAsync(jsonTextReader, cancellationToken);
+				return token.ToObject<T>(this._defaultSerializer);
+			}
+		}
+
+		public virtual async Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+		{
+			using (var streamReader = new StreamReader(stream))
+			using (var jsonTextReader = new JsonTextReader(streamReader))
+			{
+				var token = await JToken.LoadAsync(jsonTextReader, cancellationToken);
+				return token.ToObject(type, this._defaultSerializer);
+			}
 		}
 
 		private JsonSerializerSettings CreateSettings(SerializationFormatting formatting)
@@ -142,8 +129,8 @@ namespace Nest
 				NullValueHandling = NullValueHandling.Ignore
 			};
 
-			var contract = settings.ContractResolver as ElasticContractResolver;
-			if (contract == null) throw new Exception($"NEST needs an instance of {nameof(ElasticContractResolver)} registered on Json.NET's JsonSerializerSettings");
+			if (!(settings.ContractResolver is ElasticContractResolver contract))
+				throw new Exception($"NEST needs an instance of {nameof(ElasticContractResolver)} registered on Json.NET's JsonSerializerSettings");
 
 			return settings;
 		}

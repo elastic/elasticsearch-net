@@ -62,7 +62,7 @@ namespace Nest
 			}
 
 			var settings = serializer.GetConnectionSettings();
-			var elasticsearchSerializer = settings.Serializer;
+			var elasticsearchSerializer = settings.RequestResponseSerializer;
 			foreach (var data in request.Data)
 			{
 				var bodyJson = elasticsearchSerializer.SerializeToString(data, SerializationFormatting.None);

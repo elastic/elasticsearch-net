@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Nest
 {
 	[JsonObject]
-	public class SuggestOption<T> where T : class
+	public class SuggestOption<TDocument> where TDocument : class
 	{
 		[JsonProperty("text")]
 		public string Text { get; internal set; }
@@ -49,7 +49,8 @@ namespace Nest
 		/// Completion suggester only, the source of the completed document
 		/// </summary>
 		[JsonProperty("_source")]
-		public T Source { get; internal set; }
+		[JsonConverter(typeof(SourceConverter))]
+		public TDocument Source { get; internal set; }
 
 		/// <summary>
 		/// Completion suggester only, the contexts associated with the completed document

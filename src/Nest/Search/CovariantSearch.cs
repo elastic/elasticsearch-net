@@ -26,11 +26,7 @@ namespace Nest
 				return;
 
 			var typeDictionary = types.ToDictionary(infer.TypeName, t => t.Type);
-			self.TypeSelector = (o, h) =>
-			{
-				Type t;
-				return !typeDictionary.TryGetValue(h.Type, out t) ? returnType : t;
-			};
+			self.TypeSelector = (o, h) => !typeDictionary.TryGetValue(h.Type, out var t) ? returnType : t;
 		}
 	}
 

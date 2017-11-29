@@ -39,7 +39,7 @@ namespace Elasticsearch.Net
 			configurationValues.ThrowIfNull(nameof(configurationValues));
 			configurationValues.ConnectionPool.ThrowIfNull(nameof(configurationValues.ConnectionPool));
 			configurationValues.Connection.ThrowIfNull(nameof(configurationValues.Connection));
-			configurationValues.Serializer.ThrowIfNull(nameof(configurationValues.Serializer));
+			configurationValues.RequestResponseSerializer.ThrowIfNull(nameof(configurationValues.RequestResponseSerializer));
 
 			this.Settings = configurationValues;
 			this.PipelineProvider = pipelineProvider ?? new RequestPipelineFactory();
@@ -47,7 +47,7 @@ namespace Elasticsearch.Net
 			this.MemoryStreamFactory = memoryStreamFactory ?? new MemoryStreamFactory();
 		}
 
-		public ElasticsearchResponse<TReturn> Request<TReturn>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+		public ElasticsearchResponse<TReturn> Request<TReturn>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
 			where TReturn : class
 		{
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
@@ -109,7 +109,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(HttpMethod method, string path, CancellationToken cancellationToken, PostData<object> data = null, IRequestParameters requestParameters = null)
+		public async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null, IRequestParameters requestParameters = null)
 			where TReturn : class
 		{
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))

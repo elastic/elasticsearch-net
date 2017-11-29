@@ -8,7 +8,7 @@ namespace Tests.Framework.MockData
 	public class Metric
 	{
 		[Date(Name="@timestamp")]
-		[JsonConverter(typeof(TimestampJsonConverter))]
+		[MachineLearningDateTime, JsonConverter(typeof(MachineLearningDateTimeConverter))]
 		public DateTime Timestamp { get; set; }
 
 		public long Accept { get; set; }
@@ -26,7 +26,7 @@ namespace Tests.Framework.MockData
 
 	// Required as PreviewDatafeed API returns Timestamp values as epoch milliseconds, irrespective
 	// of the format in which it was originally indexed.
-	internal class TimestampJsonConverter : IsoDateTimeConverter
+	internal class MachineLearningDateTimeConverter : IsoDateTimeConverter
 	{
 		private static readonly DateTimeOffset Epoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
 
@@ -36,18 +36,15 @@ namespace Tests.Framework.MockData
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			if (reader.TokenType == JsonToken.Integer)
-			{
-				var millisecondsSinceEpoch = Convert.ToDouble(reader.Value);
-				var dateTimeOffset = Epoch.AddMilliseconds(millisecondsSinceEpoch);
+			if (reader.TokenType != JsonToken.Integer) return base.ReadJson(reader, objectType, existingValue, serializer);
 
-				if (objectType == typeof(DateTimeOffset) || objectType == typeof(DateTimeOffset?))
-					return dateTimeOffset;
+			var millisecondsSinceEpoch = Convert.ToDouble(reader.Value);
+			var dateTimeOffset = Epoch.AddMilliseconds(millisecondsSinceEpoch);
 
-				return dateTimeOffset.DateTime;
-			}
+			if (objectType == typeof(DateTimeOffset) || objectType == typeof(DateTimeOffset?))
+				return dateTimeOffset;
 
-			return base.ReadJson(reader, objectType, existingValue, serializer);
+			return dateTimeOffset.DateTime;
 		}
 	}
 }

@@ -24,7 +24,7 @@ namespace Tests.Mapping.Types.Core.Object
 					include_in_all = true,
 					properties = new
 					{
-						iPAddress = new
+						ipAddress = new
 						{
 							type = "ip"
 						}
@@ -41,7 +41,7 @@ namespace Tests.Mapping.Types.Core.Object
 				.IncludeInAll()
 				.Properties(pps => pps
 					.Ip(i => i
-						.Name(p => p.IPAddress)
+						.Name(p => p.IpAddress)
 					)
 				)
 			);
@@ -55,7 +55,7 @@ namespace Tests.Mapping.Types.Core.Object
 						IncludeInAll = true,
 						Properties = new Properties
 						{
-							{ "iPAddress", new IpProperty () }
+							{ "ipAddress", new IpProperty () }
 						}
 					}
 				}

@@ -33,10 +33,10 @@ namespace Tests.Document.Single.Index
 				;
 
 			await PUT("/project/doc/NEST")
-				.Fluent(c => c.Index(project))
+				.Fluent(c => c.IndexDocument(project))
 				.Request(c => c.Index(new IndexRequest<Project>("project", "doc", "NEST") { Document = project }))
 				.Request(c => c.Index(new IndexRequest<Project>(project)))
-				.FluentAsync(c => c.IndexAsync(project))
+				.FluentAsync(c => c.IndexDocumentAsync(project))
 				.RequestAsync(c => c.IndexAsync(new IndexRequest<Project>(project)))
 				;
 		}

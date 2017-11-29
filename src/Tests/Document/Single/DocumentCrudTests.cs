@@ -15,7 +15,7 @@ namespace Tests.Document.Single
 
 		protected override bool SupportsDeletes => true;
 
-		protected override LazyResponses Create() => Calls<IndexDescriptor<Project>, IndexRequest<Project>, IIndexRequest, IIndexResponse>(
+		protected override LazyResponses Create() => Calls<IndexDescriptor<Project>, IndexRequest<Project>, IIndexRequest<Project>, IIndexResponse>(
 			CreateInitializer,
 			CreateFluent,
 			fluent: (s, c, f) => c.Index(Project.Instance, f),

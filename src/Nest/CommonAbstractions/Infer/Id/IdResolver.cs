@@ -9,7 +9,7 @@ namespace Nest
 		private readonly IConnectionSettingsValues _connectionSettings;
 		private readonly ConcurrentDictionary<Type, Func<object, string>> LocalIdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
 		private static readonly ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
-		private static readonly MethodInfo MakeDelegateMethodInfo = typeof(IdResolver).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
+		private static readonly MethodInfo MakeDelegateMethodInfo = typeof(IdResolver).GetMethod(nameof(IdResolver.MakeDelegate), BindingFlags.Static | BindingFlags.NonPublic);
 
 		PropertyInfo GetPropertyCaseInsensitive(Type type, string fieldName)
 			=> type.GetProperty(fieldName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
@@ -71,7 +71,7 @@ namespace Nest
 
 		private PropertyInfo GetInferredId(Type type)
 		{
-			// if the type specifies through ElasticAttribute what the id prop is 
+			// if the type specifies through ElasticAttribute what the id prop is
 			// use that no matter what
 
 			string propertyName;

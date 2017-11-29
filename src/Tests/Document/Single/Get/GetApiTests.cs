@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Linq;
 using Elasticsearch.Net;
 using Nest;
@@ -38,6 +38,7 @@ namespace Tests.Document.Single.Get
 		{
 			response.Source.Should().NotBeNull();
 			response.Source.Name.Should().Be(ProjectId);
+			response.Source.ShouldAdhereToSourceSerializerWhenSet();
 		}
 	}
 
@@ -113,6 +114,7 @@ namespace Tests.Document.Single.Get
 #pragma warning disable 618
 			response.Parent.Should().BeNullOrEmpty();
 #pragma warning restore 618
+
 		}
 	}
 

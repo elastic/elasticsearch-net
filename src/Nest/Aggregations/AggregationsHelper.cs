@@ -57,7 +57,7 @@ namespace Nest
 			var valueMetric = this.TryGet<ValueAggregate>(key);
 
 			return valueMetric != null
-				? new ScriptedMetricAggregate { _Value = valueMetric.Value, Meta = valueMetric.Meta }
+				? new ScriptedMetricAggregate(valueMetric.Value) { Meta = valueMetric.Meta }
 				: this.TryGet<ScriptedMetricAggregate>(key);
 		}
 

@@ -20,11 +20,12 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
     *
     * - Using an ignore attribute applied to the POCO property that is understood by
     * the `IElasticsearchSerializer` used, and inspected inside of the `CreatePropertyMapping()` on
-    * the serializer. In the case of the default `JsonNetSerializer`, this is the Json.NET `JsonIgnoreAttribute`
+    * the serializer. Using the builtin `SourceSerializer` this would be the `IgnoreProperty`
     *
     * This example demonstrates all ways, using the `Ignore` property on the attribute to ignore the property
     * `PropertyToIgnore`, the infer mapping to ignore the property `AnotherPropertyToIgnore` and the
-    * json serializer specific attribute  to ignore the property `JsonIgnoredProperty`
+    * json serializer specific attribute  to ignore the property either `IgnoreProperty` or `JsonIgnoredProperty` depending on which
+    * `SourceSerializer` we configured.
     */
     public class IgnoringProperties
 	{
@@ -38,7 +39,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 			public string AnotherPropertyToIgnore { get; set; }
 
-			[JsonIgnore]
+			[Ignore, JsonIgnore]
 			public string JsonIgnoredProperty { get; set; }
 		}
 

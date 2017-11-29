@@ -68,6 +68,11 @@ namespace Tests.Search.Search
 			response.Took.Should().BeGreaterThan(0);
 			var startDates = response.Aggs.Terms("startDates");
 			startDates.Should().NotBeNull();
+
+			foreach (var document in response.Documents)
+			{
+				document.ShouldAdhereToSourceSerializerWhenSet();
+			}
 		}
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s

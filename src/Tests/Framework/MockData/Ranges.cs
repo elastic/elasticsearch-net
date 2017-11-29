@@ -13,7 +13,7 @@ namespace Tests.Framework.MockData
 		public LongRange Longs { get; set; }
 
 		//for deserialization
-		public  Ranges() { }
+		public Ranges() { }
 
 		private Ranges(Faker faker)
 		{

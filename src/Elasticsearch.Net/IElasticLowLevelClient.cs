@@ -14,7 +14,7 @@ namespace Elasticsearch.Net
 		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
 		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
 		/// <returns>An ElasticsearchResponse of T where T represents the JSON response body</returns>
-		ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+		ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
 			where T : class;
 
 		/// <summary>
@@ -26,7 +26,7 @@ namespace Elasticsearch.Net
 		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
 		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
 		/// <returns>A task of ElasticsearchResponse of T where T represents the JSON response body</returns>
-		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, CancellationToken cancellationToken, PostData<object> data = null, IRequestParameters requestParameters = null)
+		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null, IRequestParameters requestParameters = null)
 			where T : class;
 	}
 }

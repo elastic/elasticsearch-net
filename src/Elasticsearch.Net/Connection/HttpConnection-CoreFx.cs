@@ -186,9 +186,10 @@ namespace Elasticsearch.Net
 				}
 				handler.Proxy = proxy;
 			}
-
-			if (requestData.DisableAutomaticProxyDetection)
-				handler.Proxy = null;
+			else if (requestData.DisableAutomaticProxyDetection)
+			{
+				handler.UseProxy = false;
+			}
 
 			var callback = requestData?.ConnectionSettings?.ServerCertificateValidationCallback;
 			if (callback != null && handler.ServerCertificateCustomValidationCallback == null)

@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	internal class IndexJsonConverter : DocumentJsonConverterBase<IIndexRequest>
+	internal class IndexJsonConverter : GenericProxyRequestConverterBase
 	{
 		public IndexJsonConverter() : base(typeof(IndexRequest<>)) { }
 	}

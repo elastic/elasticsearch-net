@@ -22,6 +22,8 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 		public string TestFilter { get; }
 		public NodeFileSystem FileSystem { get; }
 		public int DesiredPort { get; }
+		public int Seed { get; protected set; }
+		public bool UsingCustomSourceSerializer { get; protected set; }
 
 		public ElasticsearchPlugin[] RequiredPlugins { get; } = { };
 
@@ -52,6 +54,8 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 			this.RunUnitTests = configuration.RunUnitTests;
 			this.ClusterFilter = configuration.ClusterFilter;
 			this.TestFilter = configuration.TestFilter;
+			this.Seed = configuration.Seed;
+			this.UsingCustomSourceSerializer = configuration.UsingCustomSourceSerializer;
 			this.FileSystem = new NodeFileSystem(configuration.ElasticsearchVersion, this.ClusterName, this.NodeName);
 			this.DesiredPort = cluster.DesiredPort;
 

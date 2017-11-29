@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 
-	public class ContractJsonConverterAttribute : Attribute
+	internal class ContractJsonConverterAttribute : Attribute
 	{
 		public JsonConverter Converter { get; }
 
@@ -16,7 +16,7 @@ namespace Nest
 			}
 		}
 	}
-	public class ExactContractJsonConverterAttribute : Attribute
+	internal class ExactContractJsonConverterAttribute : Attribute
 	{
 		public JsonConverter Converter { get; }
 
