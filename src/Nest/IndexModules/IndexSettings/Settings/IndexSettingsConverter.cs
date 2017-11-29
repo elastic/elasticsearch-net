@@ -83,10 +83,13 @@ namespace Nest
             d[UpdatableIndexSettings.StoreType] = indexSettings?.FileSystemStorageImplementation;
             d[UpdatableIndexSettings.QueriesCacheEnabled] = indexSettings?.Queries?.Cache?.Enabled;
 
-			d[IndexSortSettings.Fields] = AsArrayOrSingleItem(indexSettings?.Sorting?.Fields);
-			d[IndexSortSettings.Order] = AsArrayOrSingleItem(indexSettings?.Sorting?.Order);
-			d[IndexSortSettings.Mode] = AsArrayOrSingleItem(indexSettings?.Sorting?.Mode);
-			d[IndexSortSettings.Missing] = AsArrayOrSingleItem(indexSettings?.Sorting?.Missing);
+			if (indexSettings?.Sorting != null)
+			{
+				d[IndexSortSettings.Fields] = AsArrayOrSingleItem(indexSettings.Sorting.Fields);
+				d[IndexSortSettings.Order] = AsArrayOrSingleItem(indexSettings.Sorting.Order);
+				d[IndexSortSettings.Mode] = AsArrayOrSingleItem(indexSettings.Sorting.Mode);
+				d[IndexSortSettings.Missing] = AsArrayOrSingleItem(indexSettings.Sorting.Missing);
+			}
 
 			base.WriteJson(writer, d, serializer);
 		}
