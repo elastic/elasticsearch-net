@@ -20,34 +20,49 @@ namespace Tests.Framework
 	{
 	    protected CrudWithNoDeleteTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override bool SupportsDeletes => false;
+		protected override bool SupportsExists => false;
 	}
 
 	public abstract class CrudTestBase<TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse>
-		: CrudTestBase<WritableCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse>
+		: CrudTestBase<WritableCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse, ExistsResponse>
 			where TCreateResponse : class, IResponse
 			where TReadResponse : class, IResponse
 			where TUpdateResponse : class, IResponse
 			where TDeleteResponse : class, IResponse
 	{
-		protected CrudTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		protected CrudTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected override bool SupportsExists => false;
 	}
-
-	public abstract class CrudTestBase<TCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse> : IClusterFixture<TCluster>
+	public abstract class CrudTestBase<TCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse>
+		: CrudTestBase<TCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse, ExistsResponse>
 			where TCluster : ClusterBase, new()
 			where TCreateResponse : class, IResponse
 			where TReadResponse : class, IResponse
 			where TUpdateResponse : class, IResponse
 			where TDeleteResponse : class, IResponse
 	{
+		protected CrudTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected override bool SupportsExists => false;
+	}
+
+	public abstract class CrudTestBase<TCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse, TExistsResponse>
+		: IClusterFixture<TCluster>
+			where TCluster : ClusterBase, new()
+			where TCreateResponse : class, IResponse
+			where TReadResponse : class, IResponse
+			where TUpdateResponse : class, IResponse
+			where TDeleteResponse : class, IResponse
+			where TExistsResponse : class, IResponse, IExistsResponse
+	{
 		private readonly EndpointUsage _usage;
 		private readonly LazyResponses _createResponse;
 		private readonly LazyResponses _createGetResponse;
+		private readonly LazyResponses _createExistsResponse;
 		private readonly LazyResponses _updateResponse;
 		private readonly LazyResponses _updateGetResponse;
 		private readonly LazyResponses _deleteResponse;
 		private readonly LazyResponses _deleteGetResponse;
+		private readonly LazyResponses _deleteExistsResponse;
 		private readonly LazyResponses _deleteNotFoundResponse;
 
 		private readonly ClusterBase _cluster;
@@ -60,15 +75,18 @@ namespace Tests.Framework
 			this.IntegrationPort = cluster.Node.Port;
 			this._createResponse = usage.CallOnce(this.Create, 1);
 			this._createGetResponse = usage.CallOnce(this.Read, 2);
-			this._updateResponse = usage.CallOnce(this.Update, 3);
-			this._updateGetResponse = usage.CallOnce(this.Read, 4);
-			this._deleteResponse = usage.CallOnce(this.Delete, 5);
-			this._deleteGetResponse = usage.CallOnce(this.Read, 6);
-			this._deleteNotFoundResponse = usage.CallOnce(this.Delete, 7);
+			this._createExistsResponse = usage.CallOnce(this.Exists, 3);
+			this._updateResponse = usage.CallOnce(this.Update, 4);
+			this._updateGetResponse = usage.CallOnce(this.Read, 5);
+			this._deleteResponse = usage.CallOnce(this.Delete, 6);
+			this._deleteGetResponse = usage.CallOnce(this.Read, 7);
+			this._deleteExistsResponse = usage.CallOnce(this.Exists, 8);
+			this._deleteNotFoundResponse = usage.CallOnce(this.Delete, 9);
 		}
 		protected abstract LazyResponses Create();
 		protected abstract LazyResponses Read();
 		protected abstract LazyResponses Update();
+		protected virtual LazyResponses Exists() => LazyResponses.Empty;
 		protected virtual LazyResponses Delete() => LazyResponses.Empty;
 
 		private static string RandomFluent { get; } = $"fluent-{RandomString()}";
@@ -77,6 +95,7 @@ namespace Tests.Framework
 		private static string RandomInitializerAsync { get; } = $"oisasync-{RandomString()}";
 
 		protected virtual bool SupportsDeletes => true;
+		protected virtual bool SupportsExists => true;
 
 		protected virtual void IntegrationSetup(IElasticClient client) { }
 
@@ -131,15 +150,17 @@ namespace Tests.Framework
 			//hack to make sure these are resolved in the right order, calling twice yields cached results so
 			//should be fast
 			await this._createResponse;
-			//this.WaitForYellow();
 			await this._createGetResponse;
+			if (this.SupportsExists)
+				await this._createExistsResponse;
 			await this._updateResponse;
-			//this.WaitForYellow();
 			await this._updateGetResponse;
 			if (this.SupportsDeletes)
 			{
 				await this._deleteResponse;
 				await this._deleteGetResponse;
+				if (this.SupportsExists)
+					await this._deleteExistsResponse;
 				await this._deleteNotFoundResponse;
 			}
 
@@ -175,6 +196,18 @@ namespace Tests.Framework
 			if (!this.SupportsDeletes) return;
 			await this.AssertOnAllResponses(this._deleteGetResponse, assert);
 		}
+
+		protected async Task AssertOnExistsAfterCreate(Action<TExistsResponse> assert)
+		{
+			if (!this.SupportsExists) return;
+			await this.AssertOnAllResponses(this._createExistsResponse, assert);
+		}
+		protected async Task AssertOnExistsAfterDelete(Action<TExistsResponse> assert)
+		{
+			if (!this.SupportsExists) return;
+			await this.AssertOnAllResponses(this._deleteExistsResponse, assert);
+		}
+
 		protected async Task AssertOnDeleteNotFoundAfterDelete(Action<TDeleteResponse> assert)
 		{
 			if (!this.SupportsDeletes) return;
@@ -182,13 +215,20 @@ namespace Tests.Framework
 		}
 
 		protected virtual void ExpectAfterCreate(TReadResponse response) { }
+		protected virtual void ExpectExistsAfterCreate(TExistsResponse response) { }
 		protected virtual void ExpectAfterUpdate(TReadResponse response) { }
 		protected virtual void ExpectDeleteNotFoundResponse(TDeleteResponse response) { }
+		protected virtual void ExpectExistsAfterDelete(TExistsResponse response) { }
 
 		[I] protected virtual async Task CreateCallIsValid() => await this.AssertOnCreate(r => r.ShouldBeValid());
 		[I] protected virtual async Task GetAfterCreateIsValid() => await this.AssertOnGetAfterCreate(r => {
 			r.ShouldBeValid();
 			ExpectAfterCreate(r);
+		});
+		[I] protected virtual async Task ExistsAfterCreateIsValid() => await this.AssertOnExistsAfterCreate(r => {
+			r.ShouldBeValid();
+			r.Exists.Should().BeTrue();
+			ExpectExistsAfterCreate(r);
 		});
 
 		[I] protected virtual async Task UpdateCallIsValid() => await this.AssertOnUpdate(r => r.ShouldBeValid());
@@ -200,6 +240,11 @@ namespace Tests.Framework
 
 		[I] protected virtual async Task DeleteCallIsValid() => await this.AssertOnDelete(r => r.ShouldBeValid());
 		[I] protected virtual async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r => r.ShouldNotBeValid());
+		[I] protected virtual async Task ExistsAfterDeleteIsValid() => await this.AssertOnExistsAfterDelete(r => {
+			r.ShouldBeValid();
+			r.Exists.Should().BeFalse();
+			ExpectExistsAfterDelete(r);
+		});
 		[I] protected virtual async Task DeleteNotFoundIsNotValid() => await this.AssertOnDeleteNotFoundAfterDelete(r =>
 		{
 			r.ShouldNotBeValid();
