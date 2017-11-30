@@ -13,7 +13,7 @@ namespace Nest
 	{
 		internal ExistsResponse(IApiCallDetails apiCallDetails)
 		{
-			this.Exists = apiCallDetails.Success & apiCallDetails.HttpStatusCode == 200;
+			this.Exists = apiCallDetails.Success && apiCallDetails.HttpStatusCode == 200;
 		}
 		public ExistsResponse()
 		{
