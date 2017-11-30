@@ -47,7 +47,6 @@ namespace Nest
 	{
 		[JsonProperty("missing")]
 		TFieldType Missing { get; set; }
-
 	}
 
 	public class TermsAggregation<TFieldType> : BucketAggregationBase, ITermsAggregation<TFieldType>
@@ -125,23 +124,8 @@ namespace Nest
 		public TermsAggregationDescriptor<T, TFieldType> ExecutionHint(TermsAggregationExecutionHint executionHint) =>
 			Assign(a => a.ExecutionHint = executionHint);
 
-		public TermsAggregationDescriptor<T, TFieldType> Order(TermsOrder order) => Assign(a =>
-		{
-			a.Order = a.Order ?? new List<TermsOrder>();
-			a.Order.Add(order);
-		});
-
-		public TermsAggregationDescriptor<T, TFieldType> OrderAscending(string key) => Assign(a =>
-		{
-			a.Order = a.Order ?? new List<TermsOrder>();
-			a.Order.Add(new TermsOrder { Key = key, Order = SortOrder.Ascending });
-		});
-
-		public TermsAggregationDescriptor<T, TFieldType> OrderDescending(string key) => Assign(a =>
-		{
-			a.Order = a.Order ?? new List<TermsOrder>();
-			a.Order.Add(new TermsOrder { Key = key, Order = SortOrder.Descending });
-		});
+		public TermsAggregationDescriptor<T, TFieldType> Order(Func<TermsOrderDescriptor<T>, IPromise<IList<TermsOrder>>> selector) =>
+			Assign(a => a.Order = selector?.Invoke(new TermsOrderDescriptor<T>())?.Value);
 
 		public TermsAggregationDescriptor<T, TFieldType> Include(long partition, long numberOfPartitions) =>
 			Assign(a => a.Include = new TermsInclude(partition, numberOfPartitions));

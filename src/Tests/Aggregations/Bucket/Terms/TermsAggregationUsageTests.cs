@@ -64,8 +64,10 @@ namespace Tests.Aggregations.Bucket.Terms
 					.ExecutionHint(TermsAggregationExecutionHint.Map)
 					.Missing("n/a")
 					.Script(ss => ss.Source("'State of Being: '+_value"))
-					.Order(TermsOrder.TermAscending)
-					.Order(TermsOrder.CountDescending)
+					.Order(o => o
+						.KeyAscending()
+						.CountDescending()
+					)
 					.Meta(m => m
 						.Add("foo", "bar")
 					)
@@ -87,7 +89,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					Script = new InlineScript("'State of Being: '+_value"),
 					Order = new List<TermsOrder>
 					{
-						TermsOrder.TermAscending,
+						TermsOrder.KeyAscending,
 						TermsOrder.CountDescending
 					},
 					Meta = new Dictionary<string, object>
@@ -171,8 +173,10 @@ namespace Tests.Aggregations.Bucket.Terms
 					.ExecutionHint(TermsAggregationExecutionHint.Map)
 					.Missing("n/a")
 					.Include("(Stable|VeryActive)")
-					.Order(TermsOrder.TermAscending)
-					.Order(TermsOrder.CountDescending)
+					.Order(o => o
+						.KeyAscending()
+						.CountDescending()
+					)
 					.Meta(m => m
 						.Add("foo", "bar")
 					)
@@ -194,7 +198,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					Include = new TermsInclude("(Stable|VeryActive)"),
 					Order = new List<TermsOrder>
 					{
-						TermsOrder.TermAscending,
+						TermsOrder.KeyAscending,
 						TermsOrder.CountDescending
 					},
 					Meta = new Dictionary<string, object>
@@ -278,8 +282,10 @@ namespace Tests.Aggregations.Bucket.Terms
 					.ExecutionHint(TermsAggregationExecutionHint.Map)
 					.Missing("n/a")
 					.Include(new[] {StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString()})
-					.Order(TermsOrder.TermAscending)
-					.Order(TermsOrder.CountDescending)
+					.Order(o => o
+						.KeyAscending()
+						.CountDescending()
+					)
 					.Meta(m => m
 						.Add("foo", "bar")
 					)
@@ -301,7 +307,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					Include = new TermsInclude(new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() }),
 					Order = new List<TermsOrder>
 					{
-						TermsOrder.TermAscending,
+						TermsOrder.KeyAscending,
 						TermsOrder.CountDescending
 					},
 					Meta = new Dictionary<string, object>
