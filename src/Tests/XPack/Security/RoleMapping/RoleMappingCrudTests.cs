@@ -24,7 +24,7 @@ namespace Tests.XPack.Security.RoleMapping
 		public RoleMappingCrudTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		//callisolated value can sometimes start with a digit which is not allowed for rolenames
-		private string CreateRoleMappingName(string s) => $"role-mapping-{s}";
+		private static string CreateRoleMappingName(string s) => $"role-mapping-{s}";
 
 		protected override LazyResponses Create() => Calls<PutRoleMappingDescriptor, PutRoleMappingRequest, IPutRoleMappingRequest, IPutRoleMappingResponse>(
 			CreateInitializer,
@@ -157,6 +157,12 @@ namespace Tests.XPack.Security.RoleMapping
 
 			var allMapping = mapping.Rules as AllRoleMappingRule;
 			allMapping.Should().NotBeNull("expect to get back an all role mapping rule");
+		}
+
+		protected override void ExpectDeleteNotFoundResponse(IDeleteRoleMappingResponse response)
+		{
+			response.Found.Should().BeFalse();
+			response.ServerError.Should().BeNull();
 		}
 	}
 }
