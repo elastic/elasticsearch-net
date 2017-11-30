@@ -21,20 +21,17 @@ namespace Tests.Modules.Scripting
 			requestAsync: (s, c, r) => c.PutScriptAsync(r)
 		);
 
-		protected PutScriptRequest CreateInitializer(string id) => new PutScriptRequest(id) { Script = new PainlessScript("1+1") };
-		protected IPutScriptRequest CreateFluent(string id, PutScriptDescriptor d) => d.Painless("1+1");
+		private PutScriptRequest CreateInitializer(string id) => new PutScriptRequest(id) { Script = new PainlessScript("1+1") };
+		private IPutScriptRequest CreateFluent(string id, PutScriptDescriptor d) => d.Painless("1+1");
 
 		protected override LazyResponses Read() => Calls<GetScriptDescriptor, GetScriptRequest, IGetScriptRequest, IGetScriptResponse>(
-			ReadInitializer,
-			ReadFluent,
+			id => new GetScriptRequest(id),
+			(id, d) => d,
 			fluent: (s, c, f) => c.GetScript(s, f),
 			fluentAsync: (s, c, f) => c.GetScriptAsync(s, f),
 			request: (s, c, r) => c.GetScript(r),
 			requestAsync: (s, c, r) => c.GetScriptAsync(r)
 		);
-
-		protected GetScriptRequest ReadInitializer(string id) => new GetScriptRequest(id);
-		protected IGetScriptRequest ReadFluent(string id, GetScriptDescriptor d) => d;
 
 		protected override LazyResponses Update() => Calls<PutScriptDescriptor, PutScriptRequest, IPutScriptRequest, IPutScriptResponse>(
 			UpdateInitializer,
@@ -47,20 +44,17 @@ namespace Tests.Modules.Scripting
 
 		private string _updatedScript = "2+2";
 
-		protected PutScriptRequest UpdateInitializer(string id) => new PutScriptRequest(id) { Script = new PainlessScript(_updatedScript) };
-		protected IPutScriptRequest UpdateFluent(string id, PutScriptDescriptor d) => d.Painless(_updatedScript);
+		private PutScriptRequest UpdateInitializer(string id) => new PutScriptRequest(id) { Script = new PainlessScript(_updatedScript) };
+		private IPutScriptRequest UpdateFluent(string id, PutScriptDescriptor d) => d.Painless(_updatedScript);
 
 		protected override LazyResponses Delete() => Calls<DeleteScriptDescriptor, DeleteScriptRequest, IDeleteScriptRequest, IDeleteScriptResponse>(
-			DeleteInitializer,
-			DeleteFluent,
+			id => new DeleteScriptRequest(id),
+			(id, d) => d,
 			fluent: (s, c, f) => c.DeleteScript(s, f),
 			fluentAsync: (s, c, f) => c.DeleteScriptAsync(s, f),
 			request: (s, c, r) => c.DeleteScript(r),
 			requestAsync: (s, c, r) => c.DeleteScriptAsync(r)
 		);
-
-		protected DeleteScriptRequest DeleteInitializer(string id) => new DeleteScriptRequest(id);
-		protected IDeleteScriptRequest DeleteFluent(string id, DeleteScriptDescriptor d) => d;
 
 		protected override void ExpectAfterUpdate(IGetScriptResponse response) => response.Script.Source.Should().Be(_updatedScript);
 

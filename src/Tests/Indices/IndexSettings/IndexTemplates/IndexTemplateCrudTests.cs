@@ -10,9 +10,18 @@ using Xunit;
 namespace Tests.Indices.IndexSettings.IndexTemplates
 {
 	public class IndexTemplateCrudTests
-		: CrudTestBase<IPutIndexTemplateResponse, IGetIndexTemplateResponse, IPutIndexTemplateResponse, IDeleteIndexTemplateResponse>
+		: CrudTestBase<WritableCluster, IPutIndexTemplateResponse, IGetIndexTemplateResponse, IPutIndexTemplateResponse, IDeleteIndexTemplateResponse, IExistsResponse>
 	{
 		public IndexTemplateCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override LazyResponses Exists() => Calls<IndexTemplateExistsDescriptor, IndexTemplateExistsRequest, IIndexTemplateExistsRequest, IExistsResponse>(
+			id => new IndexTemplateExistsRequest(id),
+			(id, d) => d,
+			fluent: (s, c, f) => c.IndexTemplateExists(s, f),
+			fluentAsync: (s, c, f) => c.IndexTemplateExistsAsync(s, f),
+			request: (s, c, r) => c.IndexTemplateExists(r),
+			requestAsync: (s, c, r) => c.IndexTemplateExistsAsync(r)
+		);
 
 		protected override LazyResponses Create() => Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, IPutIndexTemplateResponse>(
 			CreateInitializer,
@@ -23,7 +32,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			requestAsync: (s, c, r) => c.PutIndexTemplateAsync(r)
 		);
 
-		protected PutIndexTemplateRequest CreateInitializer(string name) => new PutIndexTemplateRequest(name)
+		private PutIndexTemplateRequest CreateInitializer(string name) => new PutIndexTemplateRequest(name)
 		{
 			IndexPatterns = new[] { "startingwiththis-*" },
 			Settings = new Nest.IndexSettings
@@ -32,23 +41,20 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			}
 		};
 
-		protected IPutIndexTemplateRequest CreateFluent(string name, PutIndexTemplateDescriptor d) => d
+		private IPutIndexTemplateRequest CreateFluent(string name, PutIndexTemplateDescriptor d) => d
 			.IndexPatterns("startingwiththis-*")
 			.Settings(s => s
 				.NumberOfShards(2)
 			);
 
 		protected override LazyResponses Read() => Calls<GetIndexTemplateDescriptor, GetIndexTemplateRequest, IGetIndexTemplateRequest, IGetIndexTemplateResponse>(
-			ReadInitializer,
-			ReadFluent,
+			name => new GetIndexTemplateRequest(name),
+			(name, d) => d.Name(name),
 			fluent: (s, c, f) => c.GetIndexTemplate(f),
 			fluentAsync: (s, c, f) => c.GetIndexTemplateAsync(f),
 			request: (s, c, r) => c.GetIndexTemplate(r),
 			requestAsync: (s, c, r) => c.GetIndexTemplateAsync(r)
 		);
-
-		protected GetIndexTemplateRequest ReadInitializer(string name) => new GetIndexTemplateRequest(name);
-		protected IGetIndexTemplateRequest ReadFluent(string name, GetIndexTemplateDescriptor d) => d.Name(name);
 
 		protected override void ExpectAfterCreate(IGetIndexTemplateResponse response)
 		{
@@ -67,7 +73,8 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			request: (s, c, r) => c.PutIndexTemplate(r),
 			requestAsync: (s, c, r) => c.PutIndexTemplateAsync(r)
 		);
-		protected PutIndexTemplateRequest PutInitializer(string name) => new PutIndexTemplateRequest(name)
+
+		private PutIndexTemplateRequest PutInitializer(string name) => new PutIndexTemplateRequest(name)
 		{
 			IndexPatterns = new[] { "startingwiththis-*" },
 			Settings = new Nest.IndexSettings
@@ -75,7 +82,8 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 				NumberOfShards = 1
 			}
 		};
-		protected IPutIndexTemplateRequest PutFluent(string name, PutIndexTemplateDescriptor d) => d
+
+		private IPutIndexTemplateRequest PutFluent(string name, PutIndexTemplateDescriptor d) => d
 			.IndexPatterns("startingwiththis-*")
 			.Settings(s=>s
 				.NumberOfShards(1)
@@ -91,16 +99,13 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 		}
 
 		protected override LazyResponses Delete() => Calls<DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequest, IDeleteIndexTemplateRequest, IDeleteIndexTemplateResponse>(
-			DeleteInitializer,
-			DeleteFluent,
+			name => new DeleteIndexTemplateRequest(name),
+			(name, d) => d,
 			fluent: (s, c, f) => c.DeleteIndexTemplate(s, f),
 			fluentAsync: (s, c, f) => c.DeleteIndexTemplateAsync(s, f),
 			request: (s, c, r) => c.DeleteIndexTemplate(r),
 			requestAsync: (s, c, r) => c.DeleteIndexTemplateAsync(r)
 		);
-
-		protected DeleteIndexTemplateRequest DeleteInitializer(string name) => new DeleteIndexTemplateRequest(name);
-		protected IDeleteIndexTemplateRequest DeleteFluent(string name, DeleteIndexTemplateDescriptor d) => d;
 
 		protected override async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r => r.ShouldNotBeValid());
 

@@ -52,7 +52,7 @@ namespace Tests.Ingest
 			set.Value.Should().NotBeNull();
 		}
 
-		protected PutPipelineRequest CreateInitializer(string pipelineId) => new PutPipelineRequest(pipelineId)
+		private PutPipelineRequest CreateInitializer(string pipelineId) => new PutPipelineRequest(pipelineId)
 		{
 			Description = "Project Pipeline",
 			Processors = new IProcessor[]
@@ -69,7 +69,7 @@ namespace Tests.Ingest
 			}
 		};
 
-		protected IPutPipelineRequest CreateFluent(string pipelineId, PutPipelineDescriptor d) => d
+		private IPutPipelineRequest CreateFluent(string pipelineId, PutPipelineDescriptor d) => d
 			.Description("Project Pipeline")
 			.Processors(ps => ps
 				.Uppercase<Project>(u => u
@@ -82,17 +82,13 @@ namespace Tests.Ingest
 			);
 
 		protected override LazyResponses Read() => Calls<GetPipelineDescriptor, GetPipelineRequest, IGetPipelineRequest, IGetPipelineResponse>(
-			GetInitializer,
-			GetFluent,
+			id => new GetPipelineRequest(id),
+			(id, d) => d.Id(id),
 			fluent: (s, c, f) => c.GetPipeline(f),
 			fluentAsync: (s, c, f) => c.GetPipelineAsync(f),
 			request: (s, c, r) => c.GetPipeline(r),
 			requestAsync: (s, c, r) => c.GetPipelineAsync(r)
 		);
-
-		protected GetPipelineRequest GetInitializer(string pipelineId) => new GetPipelineRequest(pipelineId);
-
-		protected IGetPipelineRequest GetFluent(string pipelineId, GetPipelineDescriptor d) => d.Id(pipelineId);
 
 		protected override LazyResponses Update() => Calls<PutPipelineDescriptor, PutPipelineRequest, IPutPipelineRequest, IPutPipelineResponse>(
 			UpdateInitializer,
@@ -103,7 +99,7 @@ namespace Tests.Ingest
 			requestAsync: (s, c, r) => c.PutPipelineAsync(r)
 		);
 
-		protected PutPipelineRequest UpdateInitializer(string pipelineId) => new PutPipelineRequest(pipelineId)
+		private PutPipelineRequest UpdateInitializer(string pipelineId) => new PutPipelineRequest(pipelineId)
 		{
 			Description = "Project Pipeline (updated)",
 			Processors = new IProcessor[]
@@ -125,7 +121,7 @@ namespace Tests.Ingest
 			}
 		};
 
-		protected IPutPipelineRequest UpdateFluent(string pipelineId, PutPipelineDescriptor d) => d
+		private IPutPipelineRequest UpdateFluent(string pipelineId, PutPipelineDescriptor d) => d
 			.Description("Project Pipeline (updated)")
 			.Processors(ps => ps
 				.Uppercase<Project>(u => u
@@ -171,16 +167,13 @@ namespace Tests.Ingest
 		}
 
 		protected override LazyResponses Delete() => Calls<DeletePipelineDescriptor, DeletePipelineRequest, IDeletePipelineRequest, IDeletePipelineResponse>(
-			DeleteInitializer,
-			DeleteFluent,
+			id => new DeletePipelineRequest(id),
+			(id, d) => d,
 			fluent: (s, c, f) => c.DeletePipeline(s, f),
 			fluentAsync: (s, c, f) => c.DeletePipelineAsync(s, f),
 			request: (s, c, r) => c.DeletePipeline(r),
 			requestAsync: (s, c, r) => c.DeletePipelineAsync(r)
 		);
 
-		protected DeletePipelineRequest DeleteInitializer(string pipelineId) => new DeletePipelineRequest(pipelineId);
-
-		protected IDeletePipelineRequest DeleteFluent(string pipelineId, DeletePipelineDescriptor d) => d;
 	}
 }

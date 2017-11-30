@@ -53,8 +53,17 @@ namespace Elasticsearch.Net
 
 		private ElasticsearchResponse<TReturn> Initialize(int? statusCode, Exception exception)
 		{
+			var success = false;
+			if (statusCode.HasValue)
+			{
+				var statusCodes = this._requestData.AllowedStatusCodes.ToList();
+				success = statusCode >= 200 && statusCode < 300
+				          || (this._requestData.Method == HttpMethod.HEAD && statusCode == 404)
+				          || statusCodes.Contains(statusCode.Value)
+				          || statusCodes.Contains(-1);
+			}
 			var response = statusCode.HasValue
-				? new ElasticsearchResponse<TReturn>(statusCode.Value, this._requestData.AllowedStatusCodes)
+				? new ElasticsearchResponse<TReturn>(statusCode.Value, success)
 				: new ElasticsearchResponse<TReturn>(exception);
 			response.RequestBodyInBytes = this._requestData.PostData?.WrittenBytes;
 			response.Uri = this._requestData.Uri;
@@ -71,7 +80,7 @@ namespace Elasticsearch.Net
 			{
 				var inMemoryStream = this._requestData.MemoryStreamFactory.Create();
 				stream.CopyTo(inMemoryStream, BufferSize);
-				bytes = this.SwapStreams(ref stream, ref inMemoryStream);
+				bytes = SwapStreams(ref stream, ref inMemoryStream);
 			}
 
 			var needsDispose = typeof(TReturn) != typeof(Stream);
@@ -99,7 +108,7 @@ namespace Elasticsearch.Net
 			{
 				var inMemoryStream = this._requestData.MemoryStreamFactory.Create();
 				await stream.CopyToAsync(inMemoryStream, BufferSize, this._cancellationToken).ConfigureAwait(false);
-				bytes = this.SwapStreams(ref stream, ref inMemoryStream);
+				bytes = SwapStreams(ref stream, ref inMemoryStream);
 			}
 
 			var needsDispose = typeof(TReturn) != typeof(Stream);
@@ -143,11 +152,10 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		private bool NeedsDoubleReadForError(ElasticsearchResponse<TReturn> response) =>
-			response.AllowAllStatusCodes //need to double read for error and TReturn
-			|| (_requestData.Method == HttpMethod.DELETE && response.HttpStatusCode == 404);
+		private bool NeedsDoubleReadForError(IApiCallDetails response) =>
+			_requestData.Method == HttpMethod.DELETE && response.HttpStatusCode == 404;
 
-		private bool NeedsToEagerReadStream(ElasticsearchResponse<TReturn> response) =>
+		private bool NeedsToEagerReadStream(IApiCallDetails response) =>
 			NeedsDoubleReadForError(response)
 			|| _disableDirectStreaming || typeof(TReturn) == typeof(string) || typeof(TReturn) == typeof(byte[]);
 
