@@ -2056,7 +2056,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Get<T>(string index, string type, string id, Func<GetRequestParameters, GetRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), null, _params(requestParameters, allow404: true));
+			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2072,7 +2072,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> GetAsync<T>(string index, string type, string id, Func<GetRequestParameters, GetRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
-			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), cancellationToken, null, _params(requestParameters, allow404: true));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_scripts/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -10394,7 +10394,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> XpackWatcherGetWatch<T>(string id, Func<GetWatchRequestParameters, GetWatchRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_xpack/watcher/watch/{id.NotNull("id")}"), null, _params(requestParameters, allow404: true));
+			where T : class => this.DoRequest<T>(GET, Url($"_xpack/watcher/watch/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_xpack/watcher/watch/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -10408,7 +10408,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Watch ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> XpackWatcherGetWatchAsync<T>(string id, Func<GetWatchRequestParameters, GetWatchRequestParameters> requestParameters = null, CancellationToken cancellationToken = default(CancellationToken))
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_xpack/watcher/watch/{id.NotNull("id")}"), cancellationToken, null, _params(requestParameters, allow404: true));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_xpack/watcher/watch/{id.NotNull("id")}"), cancellationToken, null, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_xpack/watcher/watch/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

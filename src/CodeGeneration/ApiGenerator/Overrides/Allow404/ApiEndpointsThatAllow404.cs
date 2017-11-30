@@ -8,8 +8,6 @@ namespace ApiGenerator.Overrides.Allow404
 	{
 		public static readonly IEnumerable<string> Endpoints = new List<string>
 		{
-			"Get",
-			"GetWatch",
 		};
 	}
 }
