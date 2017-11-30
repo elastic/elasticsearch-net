@@ -11,7 +11,7 @@ namespace Nest
 		Field SortKey { get; }
 
 		[JsonProperty("missing")]
-		string Missing { get; set; }
+		object Missing { get; set; }
 
 		[JsonProperty("order")]
 		SortOrder? Order { get; set; }
@@ -28,7 +28,7 @@ namespace Nest
 
 	public abstract class SortBase : ISort
 	{
-		public string Missing { get; set; }
+		public object Missing { get; set; }
 		public SortOrder? Order { get; set; }
 		public SortMode? Mode { get; set; }
 		public QueryContainer NestedFilter { get; set; }
@@ -37,14 +37,14 @@ namespace Nest
 		protected abstract Field SortKey { get; }
 	}
 
-	public abstract class SortDescriptorBase<TDescriptor, TInterface, T> : DescriptorBase<TDescriptor, TInterface>, ISort 
-		where T : class 
+	public abstract class SortDescriptorBase<TDescriptor, TInterface, T> : DescriptorBase<TDescriptor, TInterface>, ISort
+		where T : class
 		where TDescriptor : SortDescriptorBase<TDescriptor, TInterface, T>, TInterface, ISort
 		where TInterface : class, ISort
 	{
 		Field ISort.SortKey => this.SortKey;
 
-		string ISort.Missing { get; set; }
+		object ISort.Missing { get; set; }
 
 		SortOrder? ISort.Order { get; set; }
 
@@ -75,7 +75,7 @@ namespace Nest
 
 		public virtual TDescriptor MissingFirst() => Assign(a => a.Missing = "_first");
 
-		public virtual TDescriptor MissingValue(string value) => Assign(a => a.Missing = value);
+		public virtual TDescriptor Missing(object value) => Assign(a => a.Missing = value);
 
 	}
 }
