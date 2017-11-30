@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
-	public class ResponseBuilder<TReturn> 
+	public class ResponseBuilder<TReturn>
 		where TReturn : class
-		
+
 	{
 		private const int BufferSize = 81920;
 		private static readonly VoidResponse Void = new VoidResponse();
@@ -18,6 +18,7 @@ namespace Elasticsearch.Net
 		private readonly RequestData _requestData;
 		private readonly CancellationToken _cancellationToken;
 		private readonly bool _disableDirectStreaming;
+		private readonly bool _allows404;
 
 		public Exception Exception { get; set; }
 		public int? StatusCode { get; set; }
@@ -31,6 +32,7 @@ namespace Elasticsearch.Net
 			_cancellationToken = cancellationToken;
 			_disableDirectStreaming =
 				this._requestData.PostData?.DisableDirectStreaming ?? this._requestData.ConnectionSettings.DisableDirectStreaming;
+			_allows404 = _requestData.AllowedStatusCodes.Contains(404);
 		}
 
 		public ElasticsearchResponse<TReturn> ToResponse()
@@ -84,7 +86,7 @@ namespace Elasticsearch.Net
 						if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
 						else response.Body = this._requestData.ConnectionSettings.RequestResponseSerializer.Deserialize<TReturn>(stream);
 					}
-					if (response.AllowAllStatusCodes) 
+					if (NeedsDoubleReadForError(response))
 						ReadServerError(response, new MemoryStream(bytes), bytes);
 				}
 				else if (response.HttpStatusCode != null)
@@ -112,7 +114,7 @@ namespace Elasticsearch.Net
 						if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
 						else response.Body = await this._requestData.ConnectionSettings.RequestResponseSerializer.DeserializeAsync<TReturn>(stream, this._cancellationToken).ConfigureAwait(false);
 					}
-					if (response.AllowAllStatusCodes)
+					if (NeedsDoubleReadForError(response))
 						await ReadServerErrorAsync(response, new MemoryStream(bytes), bytes);
 				}
 				else if (response.HttpStatusCode != null)
@@ -122,8 +124,7 @@ namespace Elasticsearch.Net
 
 		private void ReadServerError(ElasticsearchResponse<TReturn> response, Stream stream, byte[] bytes)
 		{
-			ServerError serverError;
-			if (ServerError.TryCreate(stream, out serverError))
+			if (ServerError.TryCreate(stream, out var serverError))
 				response.ServerError = serverError;
 			if (_disableDirectStreaming)
 				response.ResponseBodyInBytes = bytes;
@@ -138,15 +139,18 @@ namespace Elasticsearch.Net
 
 		private void Finalize(ElasticsearchResponse<TReturn> response)
 		{
-			var passAlongConnectionStatus = response.Body as IBodyWithApiCallDetails;
-			if (passAlongConnectionStatus != null)
+			if (response.Body is IBodyWithApiCallDetails passAlongConnectionStatus)
 			{
 				passAlongConnectionStatus.ApiCall = response;
 			}
 		}
 
-		private bool NeedsToEagerReadStream(ElasticsearchResponse<TReturn> response) =>
+		private bool NeedsDoubleReadForError(ElasticsearchResponse<TReturn> response) =>
 			response.AllowAllStatusCodes //need to double read for error and TReturn
+			|| (_requestData.AllowedStatusCodes.Contains(404) && response.HttpStatusCode == 404);
+
+		private bool NeedsToEagerReadStream(ElasticsearchResponse<TReturn> response) =>
+			NeedsDoubleReadForError(response)
 			|| _disableDirectStreaming || typeof(TReturn) == typeof(string) || typeof(TReturn) == typeof(byte[]);
 
 		private byte[] SwapStreams(ref Stream responseStream, ref MemoryStream ms)

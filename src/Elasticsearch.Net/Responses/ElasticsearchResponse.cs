@@ -116,7 +116,6 @@ namespace Elasticsearch.Net
 			}
 		}
 
-
 		public override string ToString() =>  $"{(Success ? "S" : "Uns")}uccessful low level call on {HttpMethod.GetStringValue()}: {Uri.PathAndQuery}";
 	}
 }

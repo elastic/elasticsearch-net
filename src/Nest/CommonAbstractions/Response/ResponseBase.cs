@@ -38,7 +38,7 @@ namespace Nest
 		Exception OriginalException { get; }
 
         /// <summary>
-        /// A lazy human readable string representation of what happened during this request for both successful and 
+        /// A lazy human readable string representation of what happened during this request for both successful and
         /// failed requests, very useful while developing or to log when <see cref="IsValid"/> is false on responses.
         /// </summary>
         [JsonIgnore]
@@ -55,8 +55,7 @@ namespace Nest
 		/// <inheritdoc/>
 		protected virtual IApiCallDetails ApiCall => ((IBodyWithApiCallDetails)this).ApiCall;
 
-		/// <inheritdoc/>
-		public virtual ServerError ServerError => this.ApiCall?.ServerError;
+		public ServerError ServerError => this.ApiCall?.ServerError;
 
 		/// <inheritdoc/>
 		public Exception OriginalException => this.ApiCall?.OriginalException;
