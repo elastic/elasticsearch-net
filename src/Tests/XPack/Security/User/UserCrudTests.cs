@@ -94,5 +94,11 @@ namespace Tests.XPack.Security.User
 			user.Roles.Should().NotBeNullOrEmpty();
 			user.FullName.Should().NotBeNullOrWhiteSpace();
 		}
+
+		protected override void ExpectDeleteNotFoundResponse(IDeleteUserResponse response)
+		{
+			response.Found.Should().BeFalse();
+			response.ServerError.Should().BeNull();
+		}
 	}
 }

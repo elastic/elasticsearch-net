@@ -17,7 +17,7 @@ namespace Tests.XPack.Security.Role
 		public RoleCrudTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		//callisolated value can sometimes start with a digit which is not allowed for rolenames
-		private string CreateRoleName(string s) => $"role-{s}";
+		private static string CreateRoleName(string s) => $"role-{s}";
 
 		protected override LazyResponses Create() => Calls<PutRoleDescriptor, PutRoleRequest, IPutRoleRequest, IPutRoleResponse>(
 			CreateInitializer,
@@ -162,6 +162,12 @@ namespace Tests.XPack.Security.Role
 			indexPrivilege.Query.Should().NotBeNull();
 			var q = indexPrivilege.Query as IQueryContainer;
 			q.MatchAll.Should().NotBeNull();
+		}
+
+		protected override void ExpectDeleteNotFoundResponse(IDeleteRoleResponse response)
+		{
+			response.Found.Should().BeFalse();
+			response.ServerError.Should().BeNull();
 		}
 	}
 }

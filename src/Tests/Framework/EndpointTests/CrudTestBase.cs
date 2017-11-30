@@ -41,18 +41,21 @@ namespace Tests.Framework
 			where TUpdateResponse : class, IResponse
 			where TDeleteResponse : class, IResponse
 	{
+		private readonly EndpointUsage _usage;
 		private readonly LazyResponses _createResponse;
 		private readonly LazyResponses _createGetResponse;
 		private readonly LazyResponses _updateResponse;
 		private readonly LazyResponses _updateGetResponse;
 		private readonly LazyResponses _deleteResponse;
 		private readonly LazyResponses _deleteGetResponse;
+		private readonly LazyResponses _deleteNotFoundResponse;
 
 		private readonly ClusterBase _cluster;
 
 		[SuppressMessage("Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor", Justification = "Expected behaviour")]
 		protected CrudTestBase(ClusterBase cluster, EndpointUsage usage)
 		{
+			this._usage = usage;
 			this._cluster = cluster;
 			this.IntegrationPort = cluster.Node.Port;
 			this._createResponse = usage.CallOnce(this.Create, 1);
@@ -61,6 +64,7 @@ namespace Tests.Framework
 			this._updateGetResponse = usage.CallOnce(this.Read, 4);
 			this._deleteResponse = usage.CallOnce(this.Delete, 5);
 			this._deleteGetResponse = usage.CallOnce(this.Read, 6);
+			this._deleteNotFoundResponse = usage.CallOnce(this.Delete, 7);
 		}
 		protected abstract LazyResponses Create();
 		protected abstract LazyResponses Read();
@@ -73,6 +77,8 @@ namespace Tests.Framework
 		private static string RandomInitializerAsync { get; } = $"oisasync-{RandomString()}";
 
 		protected virtual bool SupportsDeletes => true;
+
+		protected virtual void IntegrationSetup(IElasticClient client) { }
 
 		protected LazyResponses Calls<TDescriptor, TInitializer, TInterface, TResponse>(
 			Func<string, TInitializer> initializerBody,
@@ -91,6 +97,12 @@ namespace Tests.Framework
 			return new LazyResponses(async () =>
 			{
 				var dict = new Dictionary<ClientMethod, IResponse>();
+
+				if (TestClient.Configuration.RunIntegrationTests)
+				{
+					this.IntegrationSetup(client);
+					this._usage.CalledSetup = true;
+				}
 
 				var sf = Sanitize(RandomFluent);
 				dict.Add(Integration.ClientMethod.Fluent, fluent(sf, client, f => fluentBody(sf, f)));
@@ -127,14 +139,13 @@ namespace Tests.Framework
 			if (this.SupportsDeletes)
 			{
 				await this._deleteResponse;
-				//this.WaitForYellow();
 				await this._deleteGetResponse;
+				await this._deleteNotFoundResponse;
 			}
 
 			foreach (var kv in await responses)
 			{
-				var response = kv.Value as TResponse;
-				if (response == null)
+				if (!(kv.Value is TResponse response))
 					throw new Exception($"{kv.Value.GetType()} is not expected response type {typeof(TResponse)}");
 				//try
 				//{
@@ -147,11 +158,6 @@ namespace Tests.Framework
 				//	throw new Exception($"asserting over the response from: {kv.Key} failed: {ex.Message}", ex);
 				//}
 			}
-		}
-
-		protected void WaitForYellow()
-		{
-			//this.Client.ClusterHealth(g => g.WaitForStatus(WaitForStatus.Yellow));
 		}
 
 		protected async Task AssertOnCreate(Action<TCreateResponse> assert) => await this.AssertOnAllResponses(this._createResponse, assert);
@@ -169,9 +175,15 @@ namespace Tests.Framework
 			if (!this.SupportsDeletes) return;
 			await this.AssertOnAllResponses(this._deleteGetResponse, assert);
 		}
+		protected async Task AssertOnDeleteNotFoundAfterDelete(Action<TDeleteResponse> assert)
+		{
+			if (!this.SupportsDeletes) return;
+			await this.AssertOnAllResponses(this._deleteNotFoundResponse, assert);
+		}
 
 		protected virtual void ExpectAfterCreate(TReadResponse response) { }
 		protected virtual void ExpectAfterUpdate(TReadResponse response) { }
+		protected virtual void ExpectDeleteNotFoundResponse(TDeleteResponse response) { }
 
 		[I] protected virtual async Task CreateCallIsValid() => await this.AssertOnCreate(r => r.ShouldBeValid());
 		[I] protected virtual async Task GetAfterCreateIsValid() => await this.AssertOnGetAfterCreate(r => {
@@ -188,5 +200,10 @@ namespace Tests.Framework
 
 		[I] protected virtual async Task DeleteCallIsValid() => await this.AssertOnDelete(r => r.ShouldBeValid());
 		[I] protected virtual async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r => r.ShouldNotBeValid());
+		[I] protected virtual async Task DeleteNotFoundIsNotValid() => await this.AssertOnDeleteNotFoundAfterDelete(r =>
+		{
+			r.ShouldNotBeValid();
+			ExpectDeleteNotFoundResponse(r);
+		});
 	}
 }

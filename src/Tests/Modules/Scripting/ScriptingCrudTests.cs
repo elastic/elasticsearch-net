@@ -63,5 +63,12 @@ namespace Tests.Modules.Scripting
 		protected IDeleteScriptRequest DeleteFluent(string id, DeleteScriptDescriptor d) => d;
 
 		protected override void ExpectAfterUpdate(IGetScriptResponse response) => response.Script.Source.Should().Be(_updatedScript);
+
+		protected override void ExpectDeleteNotFoundResponse(IDeleteScriptResponse response)
+		{
+			response.ServerError.Should().NotBeNull();
+			response.ServerError.Status.Should().Be(404);
+			response.ServerError.Error.Reason.Should().Contain("not exist");
+		}
 	}
 }

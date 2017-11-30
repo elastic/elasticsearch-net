@@ -104,5 +104,11 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 
 		protected override async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r => r.ShouldNotBeValid());
 
+		protected override void ExpectDeleteNotFoundResponse(IDeleteIndexTemplateResponse response)
+		{
+			response.ServerError.Should().NotBeNull();
+			response.ServerError.Status.Should().Be(404);
+			response.ServerError.Error.Reason.Should().Contain("missing");
+		}
 	}
 }

@@ -35,8 +35,6 @@ namespace Tests.Framework
 
 		[I] public async Task ReturnsExpectedResponse() => await this.AssertOnAllResponses(ExpectResponse);
 
-		protected bool UsingSourceSerializer => TestClient.Configuration.UsingCustomSourceSerializer;
-
 		protected override Task AssertOnAllResponses(Action<TResponse> assert)
 		{
 			if (!this.ExpectIsValid) return base.AssertOnAllResponses(assert);

@@ -129,5 +129,12 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			repository.Settings.Compress.Should().BeTrue();
 			repository.Settings.ConcurrentStreams.Should().Be(5);
 		}
+
+		protected override void ExpectDeleteNotFoundResponse(IDeleteRepositoryResponse response)
+		{
+			response.ServerError.Should().NotBeNull();
+			response.ServerError.Status.Should().Be(404);
+			response.ServerError.Error.Reason.Should().Contain("missing");
+		}
 	}
 }

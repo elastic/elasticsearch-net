@@ -18,7 +18,6 @@ namespace Elasticsearch.Net
 		private readonly RequestData _requestData;
 		private readonly CancellationToken _cancellationToken;
 		private readonly bool _disableDirectStreaming;
-		private readonly bool _allows404;
 
 		public Exception Exception { get; set; }
 		public int? StatusCode { get; set; }
@@ -32,7 +31,6 @@ namespace Elasticsearch.Net
 			_cancellationToken = cancellationToken;
 			_disableDirectStreaming =
 				this._requestData.PostData?.DisableDirectStreaming ?? this._requestData.ConnectionSettings.DisableDirectStreaming;
-			_allows404 = _requestData.AllowedStatusCodes.Contains(404);
 		}
 
 		public ElasticsearchResponse<TReturn> ToResponse()
@@ -147,7 +145,7 @@ namespace Elasticsearch.Net
 
 		private bool NeedsDoubleReadForError(ElasticsearchResponse<TReturn> response) =>
 			response.AllowAllStatusCodes //need to double read for error and TReturn
-			|| (_requestData.AllowedStatusCodes.Contains(404) && response.HttpStatusCode == 404);
+			|| (_requestData.Method == HttpMethod.DELETE && response.HttpStatusCode == 404);
 
 		private bool NeedsToEagerReadStream(ElasticsearchResponse<TReturn> response) =>
 			NeedsDoubleReadForError(response)
