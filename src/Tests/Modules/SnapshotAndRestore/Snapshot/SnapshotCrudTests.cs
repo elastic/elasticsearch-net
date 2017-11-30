@@ -19,7 +19,10 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 		public SnapshotCrudTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 			_repositoryLocation = Path.Combine(cluster.Node.FileSystem.RepositoryPath, RandomString());
+		}
 
+		protected override void IntegrationSetup(IElasticClient client)
+		{
 			var create = this.Client.CreateRepository(_repositoryName, cr => cr
 				.FileSystem(fs => fs
 					.Settings(_repositoryLocation)
@@ -89,6 +92,13 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 			response.Snapshots.Should().HaveCount(1);
 			var snapshot = response.Snapshots.FirstOrDefault();
 			snapshot.Should().NotBeNull();
+		}
+
+		protected override void ExpectDeleteNotFoundResponse(IDeleteSnapshotResponse response)
+		{
+			response.ServerError.Should().NotBeNull();
+			response.ServerError.Status.Should().Be(404);
+			response.ServerError.Error.Reason.Should().Contain("missing");
 		}
 	}
 }

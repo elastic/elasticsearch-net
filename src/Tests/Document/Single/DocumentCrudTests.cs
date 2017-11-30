@@ -87,5 +87,16 @@ namespace Tests.Document.Single
 		[I]protected override async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r =>
 			r.ShouldBeValid()
 		);
+
+		protected override void ExpectDeleteNotFoundResponse(IDeleteResponse response)
+		{
+			response.Index.Should().NotBeNullOrEmpty();
+			response.Type.Should().NotBeNullOrEmpty();
+			response.Id.Should().NotBeNullOrEmpty();
+			response.Version.Should().BeGreaterThan(0);
+			response.SequenceNumber.Should().BeGreaterThan(0);
+			response.Result.Should().Be(Result.NotFound);
+
+		}
 	}
 }

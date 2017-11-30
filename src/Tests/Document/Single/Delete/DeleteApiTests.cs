@@ -61,7 +61,7 @@ namespace Tests.Document.Single.Delete
 			requestAsync: (client, r) => client.DeleteAsync(r)
 		);
 
-		protected override bool ExpectIsValid => true;
+		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}";

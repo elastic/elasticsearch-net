@@ -22,7 +22,7 @@ namespace Nest
 		/// <summary>
 		/// The version of the deleted document.
 		/// </summary>
-		string Version { get; }
+		long Version { get; }
 
 		/// <summary>
 		/// The operation that was performed on the document.
@@ -48,7 +48,7 @@ namespace Nest
 		public string Id { get; internal set; }
 
 		[JsonProperty("_version")]
-		public string Version { get; internal set; }
+		public long Version { get; internal set; }
 
 		[JsonProperty("result")]
 		public Result Result { get; internal set; }
