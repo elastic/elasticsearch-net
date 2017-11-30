@@ -37,18 +37,16 @@ namespace Elasticsearch.Net
 			this._formatter = new UrlFormatProvider(this.Transport.Settings);
 		}
 
-		string Url(FormattableString formattable) => formattable.ToString(_formatter);
+		private string Url(FormattableString formattable) => formattable.ToString(_formatter);
 
-		private TRequestParams _params<TRequestParams>(Func<TRequestParams, TRequestParams> requestParameters, bool allow404 = false, string contentType = null, string accept = null)
+		private TRequestParams _params<TRequestParams>(Func<TRequestParams, TRequestParams> requestParameters, string contentType = null, string accept = null)
 			where TRequestParams : class, IRequestParameters, new()
 		{
 			var requestParams = requestParameters?.Invoke(new TRequestParams());
-			if (!allow404 && contentType.IsNullOrEmpty()) return requestParams;
+			if (contentType.IsNullOrEmpty()) return requestParams;
 
 			requestParams = requestParams ?? new TRequestParams();
 			if (requestParams.RequestConfiguration == null) requestParams.RequestConfiguration = new RequestConfiguration();
-			if (allow404)
-				requestParams.RequestConfiguration.AllowedStatusCodes = new[] { 404 };
 			if (!contentType.IsNullOrEmpty() && requestParams.RequestConfiguration.ContentType.IsNullOrEmpty())
 				requestParams.RequestConfiguration.ContentType = contentType;
 			if (!accept.IsNullOrEmpty() && requestParams.RequestConfiguration.Accept.IsNullOrEmpty())

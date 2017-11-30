@@ -153,7 +153,8 @@ namespace Elasticsearch.Net
 		}
 
 		private bool NeedsDoubleReadForError(IApiCallDetails response) =>
-			_requestData.Method == HttpMethod.DELETE && response.HttpStatusCode == 404;
+			(_requestData.Method == HttpMethod.DELETE || _requestData.Method == HttpMethod.GET)
+				&& response.HttpStatusCode == 404;
 
 		private bool NeedsToEagerReadStream(IApiCallDetails response) =>
 			NeedsDoubleReadForError(response)

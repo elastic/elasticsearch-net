@@ -50,6 +50,7 @@ namespace Nest.JsonNetSerializer
 
 		protected abstract JsonSerializerSettings CreateJsonSerializerSettings();
 
+		//TODO
 		protected abstract IEnumerable<JsonConverter> CreateJsonConverters();
 
 		protected virtual void ModifyContractResolver(ConnectionSettingsAwareContractResolver resolver) { }

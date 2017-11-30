@@ -47,7 +47,6 @@ namespace Nest
 	{
 		[JsonProperty("missing")]
 		TFieldType Missing { get; set; }
-
 	}
 
 	public class TermsAggregation<TFieldType> : BucketAggregationBase, ITermsAggregation<TFieldType>
