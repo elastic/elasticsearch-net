@@ -102,7 +102,7 @@ namespace Tests.Search.Request
 					.Order(SortOrder.Ascending)
 					.Unit(DistanceUnit.Centimeters)
 					.Mode(SortMode.Min)
-					.PinTo(new GeoLocation(70, -70), new GeoLocation(-12, 12))
+					.Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
 				)
 				.Script(sc => sc
 					.Type("number")

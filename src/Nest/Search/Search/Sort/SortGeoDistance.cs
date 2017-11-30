@@ -30,7 +30,6 @@ namespace Nest
 	public class SortGeoDistanceDescriptor<T> : SortDescriptorBase<SortGeoDistanceDescriptor<T>, IGeoDistanceSort, T>, IGeoDistanceSort
 		where T : class
 	{
-
 		protected override Field SortKey => "_geo_distance";
 
 		Field IGeoDistanceSort.Field { get; set; }
@@ -38,8 +37,9 @@ namespace Nest
 		DistanceUnit? IGeoDistanceSort.GeoUnit { get; set; }
 		GeoDistanceType? IGeoDistanceSort.DistanceType { get; set; }
 
-		public SortGeoDistanceDescriptor<T> PinTo(params GeoLocation[] geoLocations) => Assign(a => a.Points = geoLocations);
-		public SortGeoDistanceDescriptor<T> PinTo(IEnumerable<GeoLocation> geoLocations) => Assign(a => a.Points = geoLocations);
+		public SortGeoDistanceDescriptor<T> Points(params GeoLocation[] geoLocations) => Assign(a => a.Points = geoLocations);
+
+		public SortGeoDistanceDescriptor<T> Points(IEnumerable<GeoLocation> geoLocations) => Assign(a => a.Points = geoLocations);
 
 		public SortGeoDistanceDescriptor<T> Unit(DistanceUnit unit) => Assign(a => a.GeoUnit = unit);
 
