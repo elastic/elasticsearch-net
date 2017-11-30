@@ -77,7 +77,7 @@ namespace Elasticsearch.Net
 			var needsDispose = typeof(TReturn) != typeof(Stream);
 			using (needsDispose ? stream : EmptyDisposable)
 			{
-				if (response.Success || response.AllowAllStatusCodes)
+				if (response.Success || NeedsDoubleReadForError(response))
 				{
 					if (!SetSpecialTypes(stream, response, bytes))
 					{
@@ -105,7 +105,7 @@ namespace Elasticsearch.Net
 			var needsDispose = typeof(TReturn) != typeof(Stream);
 			using (needsDispose ? stream : EmptyDisposable)
 			{
-				if (response.Success || response.AllowAllStatusCodes)
+				if (response.Success || NeedsDoubleReadForError(response))
 				{
 					if (!SetSpecialTypes(stream, response, bytes))
 					{
