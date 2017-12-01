@@ -50,6 +50,8 @@ namespace Nest
 		public const string MergeSchedulerMaxThreadCount = "index.merge.scheduler.max_thread_count";
 		public const string MergeSchedulerAutoThrottle = "index.merge.scheduler.auto_throttle";
 
+		public const string Similarity = "similarity";
+
 		public const string SlowlogSearchThresholdQueryWarn = "index.search.slowlog.threshold.query.warn";
 		public const string SlowlogSearchThresholdQueryInfo = "index.search.slowlog.threshold.query.info";
 		public const string SlowlogSearchThresholdQueryDebug = "index.search.slowlog.threshold.query.debug";

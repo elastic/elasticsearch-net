@@ -75,6 +75,7 @@ namespace Nest
 			d[UpdatableIndexSettings.SlowlogIndexingSource] = indexing?.Source;
 
 			d[UpdatableIndexSettings.Analysis] = ds.Analysis;
+			d[UpdatableIndexSettings.Similarity] = ds.Similarity;
 
 			var indexSettings = value as IIndexSettings;
 
@@ -94,29 +95,6 @@ namespace Nest
 			base.WriteJson(writer, d, serializer);
 		}
 
-		private object AsArrayOrSingleItem<T>(IEnumerable<T> items)
-		{
-			if (items == null || !items.Any())
-				return null;
-
-			if (items.Count() == 1)
-				return items.First();
-
-			return items;
-		}
-
-		public JObject Flatten(JObject original, string prefix = "", JObject newObject = null)
-		{
-			newObject = newObject ?? new JObject();
-			foreach (var property in original.Properties())
-			{
-				if (property.Value is JObject && property.Name != UpdatableIndexSettings.Analysis)
-					Flatten(property.Value.Value<JObject>(), prefix + property.Name + ".", newObject);
-				else newObject.Add(prefix + property.Name, property.Value);
-			}
-			return newObject;
-		}
-
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var s = new IndexSettings();
@@ -127,7 +105,32 @@ namespace Nest
 			return request;
 		}
 
-		private void SetKnownIndexSettings(JsonReader reader, JsonSerializer serializer, IIndexSettings s)
+		private static object AsArrayOrSingleItem<T>(IEnumerable<T> items)
+		{
+			if (items == null || !items.Any())
+				return null;
+
+			if (items.Count() == 1)
+				return items.First();
+
+			return items;
+		}
+
+		private static JObject Flatten(JObject original, string prefix = "", JObject newObject = null)
+		{
+			newObject = newObject ?? new JObject();
+			foreach (var property in original.Properties())
+			{
+				if (property.Value is JObject &&
+				    property.Name != UpdatableIndexSettings.Analysis &&
+				    property.Name != UpdatableIndexSettings.Similarity)
+					Flatten(property.Value.Value<JObject>(), prefix + property.Name + ".", newObject);
+				else newObject.Add(prefix + property.Name, property.Value);
+			}
+			return newObject;
+		}
+
+		private static void SetKnownIndexSettings(JsonReader reader, JsonSerializer serializer, IIndexSettings s)
 		{
 			var settings = Flatten(JObject.Load(reader)).Properties().ToDictionary(kv => kv.Name);
 
@@ -219,6 +222,8 @@ namespace Nest
 				var setting = kv.Value;
 				if (kv.Key == UpdatableIndexSettings.Analysis || kv.Key == "index.analysis")
 					s.Analysis = setting.Value.Value<JObject>().ToObject<Analysis>(serializer);
+				if (kv.Key == UpdatableIndexSettings.Similarity || kv.Key == "index.similarity")
+					s.Similarity = setting.Value.Value<JObject>().ToObject<Similarities>(serializer);
 				else
 				{
 					dict?.Add(kv.Key, serializer.Deserialize(kv.Value.Value.CreateReader()));
