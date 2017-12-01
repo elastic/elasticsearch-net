@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using Elasticsearch.Net;
-using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.MockData;
-using Xunit;
-
-using static Nest.Infer;
 
 namespace Tests.Document.Single.SourceExists
 {
@@ -42,6 +36,7 @@ namespace Tests.Document.Single.SourceExists
 		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => null;
 		protected override SourceExistsRequest<Project> Initializer => new SourceExistsRequest<Project>(CallIsolatedValue);
 	}
+
 	public class SourceExistsNotFoundApiTests : ApiIntegrationTestBase<WritableCluster, IExistsResponse, ISourceExistsRequest, SourceExistsDescriptor<Project>, SourceExistsRequest<Project>>
 	{
 		public SourceExistsNotFoundApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -71,7 +66,7 @@ namespace Tests.Document.Single.SourceExists
 			requestAsync: (client, r) => client.SourceExistsAsync(r)
 		);
 
-		protected override bool ExpectIsValid => false;
+		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 		protected override string UrlPath => $"/{IndexWithNoSource.Name}/doc/{CallIsolatedValue}/_source";
@@ -80,5 +75,31 @@ namespace Tests.Document.Single.SourceExists
 
 		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => null;
 		protected override SourceExistsRequest<Project> Initializer => new SourceExistsRequest<Project>(Doc(CallIsolatedValue));
+	}
+
+
+	public class SourceExistsIndexNotFoundApiTests : ApiIntegrationTestBase<WritableCluster, IExistsResponse, ISourceExistsRequest, SourceExistsDescriptor<Project>, SourceExistsRequest<Project>>
+	{
+		public SourceExistsIndexNotFoundApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		private static IndexName IndexWithNoSource { get; } = "source-no-index";
+
+		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => null;
+		protected override SourceExistsRequest<Project> Initializer => new SourceExistsRequest<Project>(Doc(CallIsolatedValue));
+		private static DocumentPath<Project> Doc(string id) => new DocumentPath<Project>(id).Index(IndexWithNoSource);
+
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.SourceExists<Project>(Doc(CallIsolatedValue)),
+			fluentAsync: (client, f) => client.SourceExistsAsync<Project>(Doc(CallIsolatedValue)),
+			request: (client, r) => client.SourceExists(r),
+			requestAsync: (client, r) => client.SourceExistsAsync(r)
+		);
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 404;
+		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected override string UrlPath => $"/{IndexWithNoSource.Name}/doc/{CallIsolatedValue}/_source";
+		protected override bool SupportsDeserialization => false;
+
 	}
 }

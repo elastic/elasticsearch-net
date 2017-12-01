@@ -71,9 +71,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 	{
 		private string _nonExistentIndex = "non-existent-index";
 
-		public GetMappingNonExistentIndexApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public GetMappingNonExistentIndexApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.GetMapping<Project>(f),
@@ -101,6 +99,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		{
 			response.Mappings.Should().BeEmpty();
 			response.Mapping.Should().BeNull();
+			response.ServerError.Should().NotBeNull();
 		}
 	}
 

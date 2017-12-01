@@ -18,6 +18,8 @@ namespace Elasticsearch.Net
 		private readonly RequestData _requestData;
 		private readonly CancellationToken _cancellationToken;
 		private readonly bool _disableDirectStreaming;
+		private readonly bool _allowsAllStatusCodes;
+		private readonly List<int> _allowedStatusCodes;
 
 		public Exception Exception { get; set; }
 		public int? StatusCode { get; set; }
@@ -31,6 +33,9 @@ namespace Elasticsearch.Net
 			_cancellationToken = cancellationToken;
 			_disableDirectStreaming =
 				this._requestData.PostData?.DisableDirectStreaming ?? this._requestData.ConnectionSettings.DisableDirectStreaming;
+
+			this._allowedStatusCodes = this._requestData.AllowedStatusCodes.ToList();
+			this._allowsAllStatusCodes = _allowedStatusCodes.Contains(-1);
 		}
 
 		public ElasticsearchResponse<TReturn> ToResponse()
@@ -56,11 +61,10 @@ namespace Elasticsearch.Net
 			var success = false;
 			if (statusCode.HasValue)
 			{
-				var statusCodes = this._requestData.AllowedStatusCodes.ToList();
 				success = statusCode >= 200 && statusCode < 300
 				          || (this._requestData.Method == HttpMethod.HEAD && statusCode == 404)
-				          || statusCodes.Contains(statusCode.Value)
-				          || statusCodes.Contains(-1);
+				          || _allowedStatusCodes.Contains(statusCode.Value)
+				          || _allowsAllStatusCodes;
 			}
 			var response = statusCode.HasValue
 				? new ElasticsearchResponse<TReturn>(statusCode.Value, success)
@@ -153,8 +157,12 @@ namespace Elasticsearch.Net
 		}
 
 		private bool NeedsDoubleReadForError(IApiCallDetails response) =>
-			(_requestData.Method == HttpMethod.DELETE || _requestData.Method == HttpMethod.GET)
-				&& response.HttpStatusCode == 404;
+			_allowsAllStatusCodes ||
+			(
+				(_requestData.Method == HttpMethod.DELETE || _requestData.Method == HttpMethod.GET)
+				&& response.HttpStatusCode == 404
+			);
+
 
 		private bool NeedsToEagerReadStream(IApiCallDetails response) =>
 			NeedsDoubleReadForError(response)

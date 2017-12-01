@@ -50,9 +50,12 @@ namespace Tests.Document.Single.Delete
 		}
 	}
 
-	public class DeleteNonExistentDocumentApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IDeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>
+	public class DeleteNonExistentDocumentApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IDeleteResponse, IDeleteRequest,
+		DeleteDescriptor<Project>, DeleteRequest<Project>>
 	{
-		public DeleteNonExistentDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteNonExistentDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+		}
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Delete<Project>(CallIsolatedValue),
@@ -73,7 +76,7 @@ namespace Tests.Document.Single.Delete
 
 		protected override void ExpectResponse(IDeleteResponse response)
 		{
-			response.ShouldBeValid();
+			response.ShouldNotBeValid();
 			response.Result.Should().Be(Result.NotFound);
 			response.Index.Should().Be("project");
 			response.Type.Should().Be("doc");
@@ -82,6 +85,38 @@ namespace Tests.Document.Single.Delete
 			response.Shards.Successful.Should().BeGreaterOrEqualTo(1);
 			response.PrimaryTerm.Should().BeGreaterThan(0);
 			response.SequenceNumber.Should().BeGreaterThan(0);
+		}
+	}
+
+	public class DeleteNonExistentIndexDocumentApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IDeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>
+	{
+		public DeleteNonExistentIndexDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		private string BadIndex => CallIsolatedValue + "-bad-index";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.Delete<Project>(CallIsolatedValue, f),
+			fluentAsync: (client, f) => client.DeleteAsync<Project>(CallIsolatedValue, f),
+			request: (client, r) => client.Delete(r),
+			requestAsync: (client, r) => client.DeleteAsync(r)
+		);
+
+		protected override bool ExpectIsValid => false;
+		protected override int ExpectStatusCode => 404;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override string UrlPath => $"/{BadIndex}/doc/{CallIsolatedValue}";
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override Func<DeleteDescriptor<Project>, IDeleteRequest> Fluent => f => f.Index(BadIndex);
+		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(CallIsolatedValue, index: BadIndex);
+
+		protected override void ExpectResponse(IDeleteResponse response)
+		{
+			response.ShouldNotBeValid();
+			response.Result.Should().Be(Result.Error);
+			response.ServerError.Should().NotBeNull();
+			response.ServerError.Error.Reason.Should().Be("no such index");
 		}
 	}
 }

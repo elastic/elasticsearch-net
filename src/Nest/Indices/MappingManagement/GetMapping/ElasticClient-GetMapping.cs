@@ -59,8 +59,16 @@ namespace Nest
 
 		private GetMappingResponse DeserializeGetMappingResponse(IApiCallDetails response, IGetMappingRequest d, Stream stream)
 		{
+			if (!response.Success)
+				return TransferCallDetails(new GetMappingResponse(), response);
 			var dict = this.RequestResponseSerializer.Deserialize<GetRootObjectMappingWrapping>(stream);
-			return new GetMappingResponse(dict);
+			return TransferCallDetails(new GetMappingResponse(dict), response);
+		}
+
+		private GetMappingResponse TransferCallDetails(GetMappingResponse response, IApiCallDetails lowLevelResponse)
+		{
+			((IBodyWithApiCallDetails) response).ApiCall = lowLevelResponse;
+			return response;
 		}
 
 	}
