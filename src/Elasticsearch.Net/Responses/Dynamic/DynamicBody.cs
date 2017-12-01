@@ -1,4 +1,4 @@
-﻿//This is nancyfx's dynamicdictionary
+﻿﻿//This is nancyfx's dynamicdictionary
 //it is slightly modified to add the ability to chain dynamic property access of arbitrary depth
 //without binding on null ref errors in between.
 

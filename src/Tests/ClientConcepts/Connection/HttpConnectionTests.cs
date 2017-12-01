@@ -1,4 +1,4 @@
-﻿#if DOTNETCORE
+﻿﻿#if DOTNETCORE
 using System;
 using System.Net.Http;
 using System.Threading;

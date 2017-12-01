@@ -1,4 +1,4 @@
-﻿namespace Elasticsearch.Net
+﻿﻿namespace Elasticsearch.Net
 {
 	public class DynamicResponse : ElasticsearchResponse<dynamic>
 	{
