@@ -107,7 +107,7 @@ namespace Nest
 	public class SearchResponse<T> : ResponseBase, ISearchResponse<T> where T : class
 	{
 		internal ServerError MultiSearchError { get; set; }
-		protected override IApiCallDetails ApiCall => MultiSearchError != null ? new ApiCallDetailsOverride(base.ApiCall, MultiSearchError) : base.ApiCall;
+		public override IApiCallDetails ApiCall => MultiSearchError != null ? new ApiCallDetailsOverride(base.ApiCall, MultiSearchError) : base.ApiCall;
 
 		[JsonProperty("_shards")]
 		public ShardsMetadata Shards { get; internal set; }

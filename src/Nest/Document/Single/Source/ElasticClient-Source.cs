@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -40,7 +41,7 @@ namespace Nest
 		public T Source<T>(ISourceRequest request) where T : class
 		{
 			request.RouteValues.Resolve(ConnectionSettings);
-			var response = this.LowLevelDispatch.GetSourceDispatch<T>(request);
+			var response = this.LowLevelDispatch.GetSourceDispatch<ElasticsearchResponse<T>>(request);
 			return response.Body;
 		}
 
@@ -55,7 +56,7 @@ namespace Nest
 		public async Task<T> SourceAsync<T>(ISourceRequest request, CancellationToken cancellationToken = default(CancellationToken)) where T : class
 		{
 			request.RouteValues.Resolve(ConnectionSettings);
-			var response = await this.LowLevelDispatch.GetSourceDispatchAsync<T>(request, cancellationToken).ConfigureAwait(false);
+			var response = await this.LowLevelDispatch.GetSourceDispatchAsync<ElasticsearchResponse<T>>(request, cancellationToken).ConfigureAwait(false);
 			return response.Body;
 		}
 

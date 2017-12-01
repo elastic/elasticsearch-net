@@ -39,10 +39,9 @@ namespace Elasticsearch.Net
 
 		private string Url(FormattableString formattable) => formattable.ToString(_formatter);
 
-		private TRequestParams _params<TRequestParams>(Func<TRequestParams, TRequestParams> requestParameters, string contentType = null, string accept = null)
+		private TRequestParams _params<TRequestParams>(TRequestParams requestParams, string contentType = null, string accept = null)
 			where TRequestParams : class, IRequestParameters, new()
 		{
-			var requestParams = requestParameters?.Invoke(new TRequestParams());
 			if (contentType.IsNullOrEmpty()) return requestParams;
 
 			requestParams = requestParams ?? new TRequestParams();
@@ -54,12 +53,12 @@ namespace Elasticsearch.Net
 			return requestParams;
 		}
 
-		public ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
-			where T : class =>
-			this.Transport.Request<T>(method, path, data, requestParameters);
+		public TResponse DoRequest<TResponse>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse =>
+			this.Transport.Request<TResponse>(method, path, data, requestParameters);
 
-		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null, IRequestParameters requestParameters = null)
-			where T : class =>
-			this.Transport.RequestAsync<T>(method, path, cancellationToken, data, requestParameters);
+		public Task<TResponse> DoRequestAsync<TResponse>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null, IRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse =>
+			this.Transport.RequestAsync<TResponse>(method, path, cancellationToken, data, requestParameters);
 	}
 }

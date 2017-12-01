@@ -11,7 +11,7 @@ namespace Nest
 
 		[JsonProperty("settings")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
-		public DynamicResponse Settings { get; internal set; }
+		public DynamicBody Settings { get; internal set; }
 
 		[JsonProperty("mappings")]
 		public IMappings Mappings { get; internal set; }

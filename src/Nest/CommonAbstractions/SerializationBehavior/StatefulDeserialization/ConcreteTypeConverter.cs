@@ -148,7 +148,7 @@ namespace Nest
 			if (sorts != null)
 				hitDynamic.Sorts = new ReadOnlyCollection<object>(sorts.ToObject<IEnumerable<object>>().ToList());
 
-			object o = d._source ?? DynamicResponse.Create(fieldsDictionary) ?? new object();
+			object o = d._source ?? DynamicBody.Create(fieldsDictionary) ?? new object();
 			var concreteType = selector(o, hitDynamic);
 			return concreteType;
 		}

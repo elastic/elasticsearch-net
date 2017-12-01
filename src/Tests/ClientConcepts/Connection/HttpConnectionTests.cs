@@ -23,16 +23,16 @@ namespace Tests.ClientConcepts.Connection
 
 		    public HttpClientHandler LastUsedHttpClientHandler { get; private set; }
 
-		    public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData)
+		    public override TResponse Request<TResponse>(RequestData requestData)
 		    {
 			    CallCount++;
-			    return base.Request<TReturn>(requestData);
+			    return base.Request<TResponse>(requestData);
 		    }
 
-		    public override Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken)
+		    public override Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
 		    {
 			    CallCount++;
-			    return base.RequestAsync<TReturn>(requestData, cancellationToken);
+			    return base.RequestAsync<TResponse>(requestData, cancellationToken);
 		    }
 
 		    protected override HttpClientHandler CreateHttpClientHandler(RequestData requestData)
@@ -47,12 +47,12 @@ namespace Tests.ClientConcepts.Connection
 	    {
 			var connection = new TestableHttpConnection();
 		    var requestData = CreateRequestData(TimeSpan.FromMinutes(1));
-			connection.Request<string>(requestData);
+			connection.Request<StringResponse>(requestData);
 
 			connection.CallCount.Should().Be(1);
 		    connection.ClientCount.Should().Be(1);
 
-			await connection.RequestAsync<string>(requestData, CancellationToken.None).ConfigureAwait(false);
+			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
 
 			connection.CallCount.Should().Be(2);
 			connection.ClientCount.Should().Be(1);
@@ -86,13 +86,13 @@ namespace Tests.ClientConcepts.Connection
 	    {
 		    var connection = new TestableHttpConnection();
 		    var requestData = CreateRequestData();
-		    connection.Request<string>(requestData);
+		    connection.Request<StringResponse>(requestData);
 
 		    connection.CallCount.Should().Be(1);
 		    connection.ClientCount.Should().Be(1);
 
 		    requestData = differentRequestData();
-		    await connection.RequestAsync<string>(requestData, CancellationToken.None).ConfigureAwait(false);
+		    await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
 
 		    connection.CallCount.Should().Be(2);
 		    connection.ClientCount.Should().Be(2);
@@ -133,10 +133,10 @@ namespace Tests.ClientConcepts.Connection
 		    var connection = new TestableHttpConnection();
 		    var requestData = CreateRequestData(disableAutomaticProxyDetection: true);
 
-		    connection.Request<string>(requestData);
+		    connection.Request<StringResponse>(requestData);
 		    connection.LastUsedHttpClientHandler.UseProxy.Should().BeFalse();
 
-		    await connection.RequestAsync<string>(requestData, CancellationToken.None).ConfigureAwait(false);
+		    await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
 		    connection.LastUsedHttpClientHandler.UseProxy.Should().BeFalse();
 	    }
 
@@ -146,10 +146,10 @@ namespace Tests.ClientConcepts.Connection
 		    var connection = new TestableHttpConnection();
 		    var requestData = CreateRequestData();
 
-		    connection.Request<string>(requestData);
+		    connection.Request<StringResponse>(requestData);
 		    connection.LastUsedHttpClientHandler.UseProxy.Should().BeTrue();
 
-		    await connection.RequestAsync<string>(requestData, CancellationToken.None).ConfigureAwait(false);
+		    await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
 		    connection.LastUsedHttpClientHandler.UseProxy.Should().BeTrue();
 	    }
     }

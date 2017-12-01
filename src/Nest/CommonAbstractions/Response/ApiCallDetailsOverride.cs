@@ -11,6 +11,7 @@ namespace Nest
 		private readonly bool? _isValid;
 
 		public bool Success => _isValid ?? this._original.Success;
+		public bool SuccessOrKnownError => _isValid ?? this._original.SuccessOrKnownError;
 		public ServerError ServerError => this._error ?? this._original.ServerError;
 
 		public Exception OriginalException => this._original.OriginalException;
@@ -19,7 +20,13 @@ namespace Nest
 		public int? HttpStatusCode => this._original.HttpStatusCode;
 		public byte[] ResponseBodyInBytes => this._original.ResponseBodyInBytes;
 		public byte[] RequestBodyInBytes => this._original.RequestBodyInBytes;
-		public List<Audit> AuditTrail => this._original.AuditTrail;
+
+		public List<Audit> AuditTrail
+		{
+			get => this._original.AuditTrail;
+			set { }
+		}
+
 		public string DebugInformation => this._original.DebugInformation;
 		public IEnumerable<string> DeprecationWarnings => this._original.DeprecationWarnings;
 

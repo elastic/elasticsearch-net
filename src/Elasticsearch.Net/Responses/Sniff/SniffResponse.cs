@@ -24,40 +24,44 @@ namespace Elasticsearch.Net
 			return new Uri($"http{suffix}://{host}:{port}");
 		}
 	}
-	internal class SniffResponse
+	internal class SniffResponse : ElasticsearchResponse<SniffResponse.SniffBody>
 	{
-
-		// ReSharper disable InconsistentNaming
-		// this uses simplejsons bindings
-		public string cluster_name { get; set; }
-
-		public Dictionary<string, NodeInfo> nodes { get; set; }
-
-		public IEnumerable<Node> ToNodes(bool forceHttp = false)
+		internal class SniffBody
 		{
-			foreach (var kv in nodes.Where(n => n.Value.HttpEnabled))
-			{
-				var info = kv.Value;
-				var httpEndpoint = info.http?.publish_address;
-				if (string.IsNullOrWhiteSpace(httpEndpoint))
-					httpEndpoint = kv.Value.http?.bound_address.FirstOrDefault();
-				if (string.IsNullOrWhiteSpace(httpEndpoint))
-					continue;
+            // ReSharper disable InconsistentNaming
+            // this uses simplejsons bindings
+            public string cluster_name { get; set; }
 
-				var uri = SniffParser.ParseToUri(httpEndpoint, forceHttp);
-				var node = new Node(uri)
-				{
-					Name = info.name,
-					Id = kv.Key,
-					MasterEligible = info.MasterEligible,
-					HoldsData = info.HoldsData,
-					IngestEnabled = info.IngestEnabled,
-					HttpEnabled = info.HttpEnabled,
-					Settings = new ReadOnlyDictionary<string, string>(info.settings)
-				};
-				yield return node;
-			}
+            public Dictionary<string, NodeInfo> nodes { get; set; }
+
+            public IEnumerable<Node> ToNodes(bool forceHttp = false)
+            {
+                foreach (var kv in nodes.Where(n => n.Value.HttpEnabled))
+                {
+                    var info = kv.Value;
+                    var httpEndpoint = info.http?.publish_address;
+                    if (string.IsNullOrWhiteSpace(httpEndpoint))
+                        httpEndpoint = kv.Value.http?.bound_address.FirstOrDefault();
+                    if (string.IsNullOrWhiteSpace(httpEndpoint))
+                        continue;
+
+                    var uri = SniffParser.ParseToUri(httpEndpoint, forceHttp);
+                    var node = new Node(uri)
+                    {
+                        Name = info.name,
+                        Id = kv.Key,
+                        MasterEligible = info.MasterEligible,
+                        HoldsData = info.HoldsData,
+                        IngestEnabled = info.IngestEnabled,
+                        HttpEnabled = info.HttpEnabled,
+                        Settings = new ReadOnlyDictionary<string, string>(info.settings)
+                    };
+                    yield return node;
+                }
+            }
+
 		}
+
 	}
 
 	internal class NodeInfo

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -133,9 +134,13 @@ namespace Elasticsearch.Net
 				request.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
 		}
 
-		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class
+		public virtual TResponse Request<TResponse>(RequestData requestData)
+			where TResponse : class, IElasticsearchResponse
 		{
-			var builder = new ResponseBuilder<TReturn>(requestData);
+			int? statusCode = null;
+			IEnumerable<string> warnings = null;
+			Stream responseStream = null;
+			Exception ex = null;
 			try
 			{
 				var request = this.CreateHttpWebRequest(requestData);
@@ -159,21 +164,19 @@ namespace Elasticsearch.Net
 				//throw any errors if both are closed atleast one of them has to be Closed.
 				//Since we expose the stream we let closing the stream determining when to close the connection
 				var response = (HttpWebResponse) request.GetResponse();
-				builder.StatusCode = (int) response.StatusCode;
-				builder.Stream = response.GetResponseStream();
+				HandleResponse(response, out statusCode, out responseStream);
 
 				if (response.SupportsHeaders && response.Headers.HasKeys() && response.Headers.AllKeys.Contains("Warning"))
-					builder.DeprecationWarnings = response.Headers.GetValues("Warning");
-				// https://github.com/elastic/elasticsearch-net/issues/2311
-				// if stream is null call dispose on response instead.
-				if (builder.Stream == null || builder.Stream == Stream.Null) response.Dispose();
+					warnings = response.Headers.GetValues("Warning");
 			}
 			catch (WebException e)
 			{
-				HandleException(builder, e);
+                ex = e;
+				if (e.Response is HttpWebResponse response)
+					HandleResponse(response, out statusCode, out responseStream);
 			}
 
-			return builder.ToResponse();
+			return ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream);
 		}
 
 
@@ -195,11 +198,14 @@ namespace Elasticsearch.Net
 			(state as WebRequest)?.Abort();
 		}
 
-		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData,
-			CancellationToken cancellationToken) where TReturn : class
+		public virtual async Task<TResponse> RequestAsync<TResponse>(RequestData requestData,
+			CancellationToken cancellationToken) where TResponse : class, IElasticsearchResponse
 		{
-			var builder = new ResponseBuilder<TReturn>(requestData, cancellationToken);
 			Action unregisterWaitHandle = null;
+			int? statusCode = null;
+			IEnumerable<string> warnings = null;
+			Stream responseStream = null;
+			Exception ex = null;
 			try
 			{
 				var data = requestData.PostData;
@@ -231,37 +237,32 @@ namespace Elasticsearch.Net
 					unregisterWaitHandle = RegisterApmTaskTimeout(apmGetResponseTask, request, requestData);
 
 					var response = (HttpWebResponse) (await apmGetResponseTask.ConfigureAwait(false));
-					builder.StatusCode = (int) response.StatusCode;
-					builder.Stream = response.GetResponseStream();
+					HandleResponse(response, out statusCode, out responseStream);
 					if (response.SupportsHeaders && response.Headers.HasKeys() && response.Headers.AllKeys.Contains("Warning"))
-						builder.DeprecationWarnings = response.Headers.GetValues("Warning");
-					// https://github.com/elastic/elasticsearch-net/issues/2311
-					// if stream is null call dispose on response instead.
-					if (builder.Stream == null || builder.Stream == Stream.Null) response.Dispose();
+						warnings = response.Headers.GetValues("Warning");
 				}
 			}
 			catch (WebException e)
 			{
-				HandleException(builder, e);
+                ex = e;
+				if (e.Response is HttpWebResponse response)
+					HandleResponse(response, out statusCode, out responseStream);
 			}
 			finally
 			{
 				unregisterWaitHandle?.Invoke();
 			}
-			return await builder.ToResponseAsync().ConfigureAwait(false);
+			return await ResponseBuilder.ToResponseAsync<TResponse>(requestData, ex, statusCode, warnings, responseStream, cancellationToken)
+				.ConfigureAwait(false);
 		}
 
-		private static void HandleException<TReturn>(ResponseBuilder<TReturn> builder, WebException exception)
-			where TReturn : class
+		private static void HandleResponse(HttpWebResponse response, out int? statusCode, out Stream responseStream)
 		{
-			builder.Exception = exception;
-			var response = exception.Response as HttpWebResponse;
-			if (response == null) return;
-			builder.StatusCode = (int) response.StatusCode;
-			builder.Stream = response.GetResponseStream();
+			statusCode = (int) response.StatusCode;
+			responseStream = response.GetResponseStream();
 			// https://github.com/elastic/elasticsearch-net/issues/2311
 			// if stream is null call dispose on response instead.
-			if (builder.Stream == null || builder.Stream == Stream.Null) response.Dispose();
+			if (responseStream == null || responseStream == Stream.Null) response.Dispose();
 		}
 
 		void IDisposable.Dispose() => this.DisposeManagedResources();

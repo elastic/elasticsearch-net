@@ -37,7 +37,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IUpdateByQueryResponse UpdateByQuery(IUpdateByQueryRequest request) =>
 			this.Dispatcher.Dispatch<IUpdateByQueryRequest, UpdateByQueryRequestParameters, UpdateByQueryResponse>(
-				this.ForceConfiguration<IUpdateByQueryRequest, UpdateByQueryRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
+				ForceConfiguration<IUpdateByQueryRequest, UpdateByQueryRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
 				this.LowLevelDispatch.UpdateByQueryDispatch<UpdateByQueryResponse>
 			);
 
@@ -48,7 +48,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<IUpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IUpdateByQueryRequest, UpdateByQueryRequestParameters, UpdateByQueryResponse, IUpdateByQueryResponse>(
-				this.ForceConfiguration<IUpdateByQueryRequest, UpdateByQueryRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
+				ForceConfiguration<IUpdateByQueryRequest, UpdateByQueryRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
 				cancellationToken,
 				this.LowLevelDispatch.UpdateByQueryDispatchAsync<UpdateByQueryResponse>
 			);

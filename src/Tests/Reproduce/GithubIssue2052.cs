@@ -156,7 +156,7 @@ namespace Tests.Reproduce
 				_bulkHeader,
 				document
 			};
-			var response = this._client.Bulk<byte[]>(PostData.MultiJson(payload));
+			var response = this._client.Bulk<BytesResponse>(PostData.MultiJson(payload));
 
 
 			var request = Encoding.UTF8.GetString(response.RequestBodyInBytes);

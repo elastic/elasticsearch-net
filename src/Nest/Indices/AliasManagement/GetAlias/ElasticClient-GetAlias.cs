@@ -40,7 +40,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IGetAliasResponse GetAlias(IGetAliasRequest request) =>
 			this.Dispatcher.Dispatch<IGetAliasRequest, GetAliasRequestParameters, GetAliasResponse>(
-				this.ForceConfiguration<IGetAliasRequest, GetAliasRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
+				ForceConfiguration<IGetAliasRequest, GetAliasRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
 				(p, d) => this.LowLevelDispatch.IndicesGetAliasDispatch<GetAliasResponse>(p)
 			);
 
@@ -53,7 +53,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<IGetAliasResponse> GetAliasAsync(IGetAliasRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IGetAliasRequest, GetAliasRequestParameters, GetAliasResponse, IGetAliasResponse>(
-				this.ForceConfiguration<IGetAliasRequest, GetAliasRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
+				ForceConfiguration<IGetAliasRequest, GetAliasRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
 				cancellationToken,
 				(p, d, c) => this.LowLevelDispatch.IndicesGetAliasDispatchAsync<GetAliasResponse>(p, c)
 			);

@@ -67,7 +67,7 @@ namespace Nest
 
 		private GetMappingResponse TransferCallDetails(GetMappingResponse response, IApiCallDetails lowLevelResponse)
 		{
-			((IBodyWithApiCallDetails) response).ApiCall = lowLevelResponse;
+			((IElasticsearchResponse) response).ApiCall = lowLevelResponse;
 			return response;
 		}
 

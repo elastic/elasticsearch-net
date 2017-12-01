@@ -118,10 +118,10 @@ namespace Elasticsearch.Net
 
 		public override object DeserializeObject(object value, Type type)
 		{
-			if (type == typeof(DynamicResponse))
+			if (type == typeof(DynamicBody))
 			{
 				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
-				return dict == null ? null : DynamicResponse.Create(dict);
+				return dict == null ? null : DynamicBody.Create(dict);
 			}
 			if (type == typeof(ServerError))
 			{
