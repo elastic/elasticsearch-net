@@ -26,7 +26,6 @@ namespace ApiGenerator.Domain
 		public string Documentation { get; set; }
 		public string Path { get; set; }
 		public string Arguments { get; set; }
-		public bool Allow404 { get; set; }
 		public bool Unmapped { get; set; }
 		public IEnumerable<ApiUrlPart> Parts { get; set; }
 		public ApiUrl Url { get; set; }
@@ -37,7 +36,6 @@ namespace ApiGenerator.Domain
 		{
 			return new CsharpMethod
 			{
-				Allow404 = method.Allow404,
 				Path = method.Path,
 				RequestType = method.RequestType,
 				ReturnDescription = method.ReturnDescription,

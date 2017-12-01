@@ -23,7 +23,7 @@ namespace Tests.Reproduce
 			var client = _cluster.Client;
 			var response = client.Delete<Project>("non-existent-id");
 
-			response.ShouldBeValid();
+			response.ShouldNotBeValid();
 			response.Result.Should().Be(Result.NotFound);
 			response.Index.Should().Be("project");
 			response.Type.Should().Be("doc");

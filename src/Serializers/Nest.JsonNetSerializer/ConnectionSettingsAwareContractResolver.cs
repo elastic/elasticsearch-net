@@ -9,7 +9,7 @@ namespace Nest.JsonNetSerializer
 {
 	public class ConnectionSettingsAwareContractResolver : DefaultContractResolver
 	{
-		public IConnectionSettingsValues ConnectionSettings { get; }
+		protected IConnectionSettingsValues ConnectionSettings { get; }
 
 		public ConnectionSettingsAwareContractResolver(IConnectionSettingsValues connectionSettings)
 		{

@@ -161,7 +161,7 @@ namespace Tests.XPack.Watcher.GetWatch
 			requestAsync: (client, r) => client.GetWatchAsync(r)
 		);
 
-		protected override bool ExpectIsValid => true;
+		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 

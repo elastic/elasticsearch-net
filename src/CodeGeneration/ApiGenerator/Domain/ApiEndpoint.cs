@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using ApiGenerator.Overrides.Allow404;
 using ApiGenerator.Overrides.Descriptors;
 using CsQuery.ExtensionMethods.Internal;
 
@@ -356,22 +355,17 @@ namespace ApiGenerator.Domain
 				}
 			}
 
-			string manualOverride;
 			var key = method.QueryStringParamName.Replace("RequestParameters", "");
-			if (CodeConfiguration.MethodNameOverrides.TryGetValue(key, out manualOverride))
+			if (CodeConfiguration.MethodNameOverrides.TryGetValue(key, out var manualOverride))
 				method.QueryStringParamName = manualOverride + "RequestParameters";
 
 			method.DescriptorType = method.QueryStringParamName.Replace("RequestParameters", "Descriptor");
 			method.RequestType = method.QueryStringParamName.Replace("RequestParameters", "Request");
-			string requestGeneric;
-			if (CodeConfiguration.KnownRequests.TryGetValue("I" + method.RequestType, out requestGeneric))
+			if (CodeConfiguration.KnownRequests.TryGetValue("I" + method.RequestType, out var requestGeneric))
 				method.RequestTypeGeneric = requestGeneric;
 			else method.RequestTypeUnmapped = true;
 
-			method.Allow404 = ApiEndpointsThatAllow404.Endpoints.Contains(method.DescriptorType.Replace("Descriptor", ""));
-
-			string generic;
-			if (CodeConfiguration.KnownDescriptors.TryGetValue(method.DescriptorType, out generic))
+			if (CodeConfiguration.KnownDescriptors.TryGetValue(method.DescriptorType, out var generic))
 				method.DescriptorTypeGeneric = generic;
 			else method.Unmapped = true;
 
