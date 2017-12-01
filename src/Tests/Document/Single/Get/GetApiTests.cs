@@ -54,7 +54,7 @@ namespace Tests.Document.Single.Get
 			requestAsync: (client, r) => client.GetAsync<Project>(r)
 		);
 
-		protected override bool ExpectIsValid => true;
+		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"/project/doc/{UrlEncode(this.ProjectId)}";

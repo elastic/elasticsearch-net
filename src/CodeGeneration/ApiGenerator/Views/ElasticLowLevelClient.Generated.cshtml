@@ -60,7 +60,7 @@ namespace Elasticsearch.Net
 		{<text>		[Obsolete("Scheduled to be removed in 7.0, @method.ObsoleteMethodVersion removed this method from the rest specification")]
 </text>}
 		<text>public @Raw(method.ReturnType) @(method.FullName)@(Raw(method.ReturnTypeGeneric))(@Raw(method.Arguments))
-			where @method.CallTypeGeneric : class => this.@(requestMethod)@(Raw("<" + method.CallTypeGeneric +">"))(@method.HttpMethod, Url($"@(Raw(patchedUrl))"), @(method.FullName.Contains("Async") ? "cancellationToken, " : string.Empty)@(method.Parts.Any(pp=>pp.Name == "body") ? "body" : "null"), _params(requestParameters@(method.Allow404 ? ", allow404: true" :"")@(Raw(url.StartsWith("_cat") ? ", contentType: \"text/plain\", accept: \"text/plain\"" : ""))));
+			where @method.CallTypeGeneric : class => this.@(requestMethod)@(Raw("<" + method.CallTypeGeneric +">"))(@method.HttpMethod, Url($"@(Raw(patchedUrl))"), @(method.FullName.Contains("Async") ? "cancellationToken, " : string.Empty)@(method.Parts.Any(pp=>pp.Name == "body") ? "body" : "null"), _params(requestParameters@(Raw(url.StartsWith("_cat") ? ", contentType: \"text/plain\", accept: \"text/plain\"" : ""))));
 		</text>
 		}
 	}
