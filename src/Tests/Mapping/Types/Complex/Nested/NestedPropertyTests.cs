@@ -23,7 +23,6 @@ namespace Tests.Mapping.Types.Core.Nested
 					include_in_root = false,
 					dynamic = "strict",
 					enabled = true,
-					include_in_all = true,
 					properties = new
 					{
 						ipAddress = new
@@ -42,7 +41,6 @@ namespace Tests.Mapping.Types.Core.Nested
 					.IncludeInRoot(false)
 					.Dynamic(DynamicMapping.Strict)
 					.Enabled()
-					.IncludeInAll()
 					.Properties(pps => pps
 						.Ip(i => i
 							.Name(p => p.IpAddress)
@@ -58,7 +56,6 @@ namespace Tests.Mapping.Types.Core.Nested
 					IncludeInRoot = false,
 					Dynamic = DynamicMapping.Strict,
 					Enabled = true,
-					IncludeInAll = true,
 					Properties = new Properties
 					{
 						{ "ipAddress", new IpProperty () }

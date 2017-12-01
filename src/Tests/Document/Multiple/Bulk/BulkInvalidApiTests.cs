@@ -55,7 +55,6 @@ namespace Tests.Document.Multiple.Bulk
 			failedUpdate.IsValid.Should().BeFalse();
 
 			var failedDelete = response.Items.Last() as BulkDeleteResponseItem;
-			failedDelete.Found.Should().BeFalse();
 			failedDelete.IsValid.Should().BeTrue();
 		}
 

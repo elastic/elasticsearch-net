@@ -7,7 +7,5 @@ namespace Nest
 	public class BulkDeleteResponseItem : BulkResponseItemBase
 	{
 		public override string Operation { get; internal set; }
-		[JsonProperty("found")]
-		public bool Found { get; internal set; }
 	}
 }

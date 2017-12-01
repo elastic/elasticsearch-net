@@ -34,7 +34,6 @@ namespace Tests.Indices.MappingManagement.PutMapping
 
 		protected override object ExpectJson { get; } = new
 		{
-			include_in_all = true,
 			properties = new
 			{
 				branches = new
@@ -131,7 +130,6 @@ namespace Tests.Indices.MappingManagement.PutMapping
 
 		protected override Func<PutMappingDescriptor<Project>, IPutMappingRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
-			.IncludeInAll()
 			.AutoMap()
 			.Properties(prop => prop
 				.Join(join => join
@@ -183,7 +181,6 @@ namespace Tests.Indices.MappingManagement.PutMapping
 
 		protected override PutMappingRequest<Project> Initializer => new PutMappingRequest<Project>(CallIsolatedValue, Type<Project>())
 		{
-			IncludeInAll = true,
 			Properties = new Properties<Project>
 			{
 				{
