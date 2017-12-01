@@ -12,11 +12,13 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 	[RequiresPlugin(ElasticsearchPlugin.XPack)]
 	public class XPackMachineLearningCluster : XPackCluster
 	{
-		protected string[] XPackMachineLearningSettings => TestClient.VersionUnderTestSatisfiedBy(">=5.4.0")
+		private string[] XPackMachineLearningSettings => TestClient.VersionUnderTestSatisfiedBy(">=5.4.0")
 			? new[]
 			{
 				"xpack.ml.node_concurrent_job_allocations=4",
-				"node.attr.ml.max_open_jobs=30"
+				TestClient.VersionUnderTestSatisfiedBy("<6.0.0")
+					? "node.attr.ml.max_open_jobs=30"
+					: "xpack.ml.max_open_jobs=30"
 			}
 			: new string[] {} ;
 
@@ -33,9 +35,9 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 
 		protected override string[] AdditionalServerSettings => base.AdditionalServerSettings.Concat(this.XPackMachineLearningSettings).ToArray();
 
-		protected override InstallationTaskBase[] AdditionalInstallationTasks => new InstallationTaskBase[]
+		protected override InstallationTaskBase[] AdditionalInstallationTasks => base.AdditionalInstallationTasks.Concat(new InstallationTaskBase[]
 		{
 			new DownloadMachineLearningSampleDataDistribution()
-		};
+		}).ToArray();
 	}
 }

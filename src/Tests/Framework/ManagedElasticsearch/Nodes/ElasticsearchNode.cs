@@ -46,18 +46,13 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 		}
 
 		private readonly object _lockGetClient = new object { };
-		private IElasticClient _client;
+		private volatile IElasticClient _client;
 
 		public IElasticClient Client
 		{
 			get
 			{
-				if (!this.Started && TestClient.Configuration.RunIntegrationTests)
-				{
-					var logFile = Path.Combine(this.FileSystem.LogsPath, $"{this._config.NodeName}.log");
-					throw new Exception($"cannot request a client from an ElasticsearchNode that hasn't started yet. " +
-					                    $"Check the log at {logFile} to see if there was an issue starting");
-				}
+				ThrowIfNotStarted();
 
 				if (this._client != null) return this._client;
 
@@ -67,9 +62,18 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 
 					var port = this.Started ? this.Port : 9200;
 					this._client = TestClient.GetClient(ComposeSettings, port, forceSsl: this._config.EnableSsl);
-					return this.Client;
 				}
+
+				return this._client;
 			}
+		}
+
+		private void ThrowIfNotStarted()
+		{
+			if (this.Started || !TestClient.Configuration.RunIntegrationTests) return;
+			var logFile = Path.Combine(this.FileSystem.LogsPath, $"{this._config.ClusterName}.log");
+			throw new Exception($"cannot request a client from an ElasticsearchNode that hasn't started yet. " +
+			                    $"Check the log at {logFile} to see if there was an issue starting");
 		}
 
 		public void Start(string[] settings, TimeSpan startTimeout)
