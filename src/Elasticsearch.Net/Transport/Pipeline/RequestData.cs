@@ -42,11 +42,11 @@ namespace Elasticsearch.Net
 
 		public BasicAuthenticationCredentials BasicAuthorizationCredentials { get; }
 		public IEnumerable<int> AllowedStatusCodes { get; }
-		public Func<IApiCallDetails, Stream, object> CustomConverter { get; private set; }
+		public Func<IApiCallDetails, Stream, object> CustomConverter { get; }
 		public IConnectionConfigurationValues ConnectionSettings { get; }
 		public IMemoryStreamFactory MemoryStreamFactory { get; }
 
-		public X509CertificateCollection ClientCertificates { get; set; }
+		public X509CertificateCollection ClientCertificates { get; }
 
 		public RequestData(HttpMethod method, string path, PostData data, IConnectionConfigurationValues global, IRequestParameters local, IMemoryStreamFactory memoryStreamFactory)
 			: this(method, path, data, global, local?.RequestConfiguration, memoryStreamFactory)

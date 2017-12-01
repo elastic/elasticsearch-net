@@ -18,9 +18,7 @@ namespace Elasticsearch.Net
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
 		/// </summary>
 		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
-		public Transport(TConnectionSettings configurationValues)
-			: this(configurationValues, null, null, null)
-		{ }
+		public Transport(TConnectionSettings configurationValues) : this(configurationValues, null, null, null) { }
 
 		/// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
@@ -47,8 +45,8 @@ namespace Elasticsearch.Net
 			this.MemoryStreamFactory = memoryStreamFactory ?? new MemoryStreamFactory();
 		}
 
-		public ElasticsearchResponse<TReturn> Request<TReturn>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
-			where TReturn : class
+		public TResponse Request<TResponse>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse
 		{
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
 			{
@@ -56,7 +54,7 @@ namespace Elasticsearch.Net
 
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				this.Settings.OnRequestDataCreated?.Invoke(requestData);
-				ElasticsearchResponse<TReturn> response = null;
+				TResponse response = null;
 
 				var seenExceptions = new List<PipelineException>();
 				foreach (var node in pipeline.NextNode())
@@ -66,8 +64,8 @@ namespace Elasticsearch.Net
 					{
 						pipeline.SniffOnStaleCluster();
 						Ping(pipeline, node);
-						response = pipeline.CallElasticsearch<TReturn>(requestData);
-						if (!response.SuccessOrKnownError)
+						response = pipeline.CallElasticsearch<TResponse>(requestData);
+						if (!response.ApiCall.SuccessOrKnownError)
 						{
 							pipeline.MarkDead(node);
 							pipeline.SniffOnConnectionFailure();
@@ -89,28 +87,28 @@ namespace Elasticsearch.Net
 						throw new UnexpectedElasticsearchClientException(killerException, seenExceptions)
 						{
 							Request = requestData,
-							Response = response,
+							Response = response.ApiCall,
 							AuditTrail = pipeline?.AuditTrail
 						};
 					}
-					if (response == null || !response.SuccessOrKnownError) continue;
+					if (response == null || !response.ApiCall.SuccessOrKnownError) continue;
 					pipeline.MarkAlive(node);
 					break;
 				}
 				if (requestData.Node == null) //foreach never ran
 					pipeline.ThrowNoNodesAttempted(requestData, seenExceptions);
 
-				if (response == null || !response.Success)
+				if (response == null || !response.ApiCall.Success)
 					pipeline.BadResponse(ref response, requestData, seenExceptions);
 
-				this.Settings.OnRequestCompleted?.Invoke(response);
+				this.Settings.OnRequestCompleted?.Invoke(response.ApiCall);
 
 				return response;
 			}
 		}
 
-		public async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null, IRequestParameters requestParameters = null)
-			where TReturn : class
+		public async Task<TResponse> RequestAsync<TResponse>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null, IRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse
 		{
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
 			{
@@ -118,7 +116,7 @@ namespace Elasticsearch.Net
 
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				this.Settings.OnRequestDataCreated?.Invoke(requestData);
-				ElasticsearchResponse<TReturn> response = null;
+				TResponse response = null;
 
 				var seenExceptions = new List<PipelineException>();
 				foreach (var node in pipeline.NextNode())
@@ -128,8 +126,8 @@ namespace Elasticsearch.Net
 					{
 						await pipeline.SniffOnStaleClusterAsync(cancellationToken).ConfigureAwait(false);
 						await PingAsync(pipeline, node, cancellationToken).ConfigureAwait(false);
-						response = await pipeline.CallElasticsearchAsync<TReturn>(requestData, cancellationToken).ConfigureAwait(false);
-						if (!response.SuccessOrKnownError)
+						response = await pipeline.CallElasticsearchAsync<TResponse>(requestData, cancellationToken).ConfigureAwait(false);
+						if (!response.ApiCall.SuccessOrKnownError)
 						{
 							pipeline.MarkDead(node);
 							await pipeline.SniffOnConnectionFailureAsync(cancellationToken).ConfigureAwait(false);
@@ -151,7 +149,7 @@ namespace Elasticsearch.Net
 						throw new UnexpectedElasticsearchClientException(killerException, seenExceptions)
 						{
 							Request = requestData,
-							Response = response,
+							Response = response.ApiCall,
 							AuditTrail = pipeline.AuditTrail
 						};
 					}
@@ -160,17 +158,17 @@ namespace Elasticsearch.Net
 						pipeline.AuditCancellationRequested();
 						break;
 					}
-					if (response == null || !response.SuccessOrKnownError) continue;
+					if (response == null || !response.ApiCall.SuccessOrKnownError) continue;
 					pipeline.MarkAlive(node);
 					break;
 				}
 				if (requestData.Node == null) //foreach never ran
 					pipeline.ThrowNoNodesAttempted(requestData, seenExceptions);
 
-				if (response == null || !response.Success)
+				if (response == null || !response.ApiCall.Success)
 					pipeline.BadResponse(ref response, requestData, seenExceptions);
 
-				this.Settings.OnRequestCompleted?.Invoke(response);
+				this.Settings.OnRequestCompleted?.Invoke(response.ApiCall);
 
 				return response;
 			}

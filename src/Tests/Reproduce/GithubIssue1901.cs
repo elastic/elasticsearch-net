@@ -33,7 +33,7 @@ namespace Tests.Reproduce
 		[U] public async Task BadAuthResponseDoesNotThrowExceptionWhenAttemptingToDeserializeResponse()
 		{
 			var client = TestClient.GetFixedReturnClient(ProxyAuthResponse, 401, contentType: "text/html", exception: new Exception("problem with the request as a result of 401"));
-			var source = await client.LowLevel.GetSourceAsync<Example>("examples", "example", "1");
+			var source = await client.LowLevel.GetSourceAsync<ElasticsearchResponse<Example>>("examples", "example", "1");
 			source.Success.Should().BeFalse();
 		}
 
@@ -41,7 +41,7 @@ namespace Tests.Reproduce
 		{
 			var client = TestClient.GetFixedReturnClient(ProxyAuthResponse, 401, contentType: "text/html", exception: new Exception("problem with the request as a result of 401"),
 				modifySettings: (s) => s.DisableDirectStreaming());
-			var response = await client.LowLevel.GetAsync<Example>("examples", "example", "1");
+			var response = await client.LowLevel.GetAsync<ElasticsearchResponse<Example>>("examples", "example", "1");
 			response.Success.Should().BeFalse();
 			response.ResponseBodyInBytes.Should().NotBeNullOrEmpty();
 			response.HttpStatusCode.Should().Be(401);

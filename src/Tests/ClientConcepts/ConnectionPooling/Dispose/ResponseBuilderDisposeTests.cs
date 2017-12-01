@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -39,17 +40,17 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 			}
 		}
 
-		[U] public async Task ResponseWithHttpStatusCode() => await AssertRegularResponse(false, r => r.StatusCode = 1);
+		[U] public async Task ResponseWithHttpStatusCode() => await AssertRegularResponse(false, statusCode: 1);
 
 		[U] public async Task ResponseBuilderWithNoHttpStatusCode() => await AssertRegularResponse(false);
 
 		[U] public async Task ResponseWithHttpStatusCodeDisableDirectStreaming() =>
-			await AssertRegularResponse(true, r => r.StatusCode = 1);
+			await AssertRegularResponse(true, statusCode: 1);
 
 		[U] public async Task ResponseBuilderWithNoHttpStatusCodeDisableDirectStreaming() =>
 			await AssertRegularResponse(true);
 
-		private async Task AssertRegularResponse(bool disableDirectStreaming, Action<ResponseBuilder<RootNodeInfoResponse>> mutate = null)
+		private async Task AssertRegularResponse(bool disableDirectStreaming, int? statusCode = null)
 		{
 			var settings = disableDirectStreaming ? _settingsDisableDirectStream : _settings;
 			var memoryStreamFactory = new TrackMemoryStreamFactory();
@@ -58,15 +59,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				Node = new Node(new Uri("http://localhost:9200"))
 			};
 
-			var responseBuilder = new ResponseBuilder<RootNodeInfoResponse>(requestData)
-			{
-			};
-			mutate?.Invoke(responseBuilder);
-
 			var stream = new TrackDisposeStream();
-			responseBuilder.Stream = stream;
+			var response = ResponseBuilder.ToResponse<RootNodeInfoResponse>(requestData, null, statusCode, null, stream);
 
-			var response = responseBuilder.ToResponse();
 			memoryStreamFactory.Created.Count().Should().Be(disableDirectStreaming ? 1 : 0);
 			if (disableDirectStreaming)
 			{
@@ -77,8 +72,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 
 
 			stream = new TrackDisposeStream();
-			responseBuilder.Stream = stream;
-			response = await responseBuilder.ToResponseAsync();
+			var ct = new CancellationToken();
+			response = await ResponseBuilder.ToResponseAsync<RootNodeInfoResponse>(requestData, null, statusCode, null, stream, ct);
 			memoryStreamFactory.Created.Count().Should().Be(disableDirectStreaming ? 2 : 0);
 			if (disableDirectStreaming)
 			{
@@ -88,17 +83,17 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 			stream.IsDisposed.Should().BeTrue();
 		}
 
-		[U] public async Task StreamResponseWithHttpStatusCode() => await AssertStreamResponse(false, r => r.StatusCode = 200);
+		[U] public async Task StreamResponseWithHttpStatusCode() => await AssertStreamResponse(false, statusCode: 200);
 
 		[U] public async Task StreamResponseBuilderWithNoHttpStatusCode() => await AssertStreamResponse(false);
 
 		[U] public async Task StreamResponseWithHttpStatusCodeDisableDirectStreaming() =>
-			await AssertStreamResponse(true, r => r.StatusCode = 1);
+			await AssertStreamResponse(true, statusCode: 1);
 
 		[U] public async Task StreamResponseBuilderWithNoHttpStatusCodeDisableDirectStreaming() =>
 			await AssertStreamResponse(true);
 
-		private async Task AssertStreamResponse(bool disableDirectStreaming, Action<ResponseBuilder<Stream>> mutate = null)
+		private async Task AssertStreamResponse(bool disableDirectStreaming, int? statusCode = null)
 		{
 			var settings = disableDirectStreaming ? _settingsDisableDirectStream : _settings;
 			var memoryStreamFactory = new TrackMemoryStreamFactory();
@@ -108,22 +103,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				Node = new Node(new Uri("http://localhost:9200"))
 			};
 
-			var responseBuilder = new ResponseBuilder<Stream>(requestData)
-			{
-			};
-			mutate?.Invoke(responseBuilder);
-
 			var stream = new TrackDisposeStream();
-			responseBuilder.Stream = stream;
+			var response = ResponseBuilder.ToResponse<RootNodeInfoResponse>(requestData, null, statusCode, null, stream);
 
-			var response = responseBuilder.ToResponse();
 			memoryStreamFactory.Created.Count().Should().Be(disableDirectStreaming ? 1 : 0);
 			stream.IsDisposed.Should().Be(disableDirectStreaming ? true : false);
 
-
 			stream = new TrackDisposeStream();
-			responseBuilder.Stream = stream;
-			response = await responseBuilder.ToResponseAsync();
+			var ct = new CancellationToken();
+			response = await ResponseBuilder.ToResponseAsync<RootNodeInfoResponse>(requestData, null, statusCode, null, stream, ct);
 			memoryStreamFactory.Created.Count().Should().Be(disableDirectStreaming ? 2 : 0);
 			stream.IsDisposed.Should().Be(disableDirectStreaming ? true : false);
 		}

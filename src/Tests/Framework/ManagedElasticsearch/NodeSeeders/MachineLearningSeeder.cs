@@ -65,18 +65,18 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 				var metricsFile = Path.Combine(folder, $"server-metrics_{i}.json");
 				var bulkResponse = this.Client.LowLevel.Bulk<BulkResponse>(
 					File.ReadAllBytes(metricsFile),
-					r => r
+					new BulkRequestParameters()
 						.RequestConfiguration(rc => rc
 							.RequestTimeout(TimeSpan.FromMinutes(3)
 						)
 					)
 				);
 
-				if (!bulkResponse.Success || (bulkResponse.Body != null && !bulkResponse.Body.IsValid))
+				if (!bulkResponse.ApiCall.Success || (!bulkResponse.IsValid))
 				{
 					// only use the Audit trail as failed bulk items will be YUGE
 					var sb = new StringBuilder();
-					ResponseStatics.DebugAuditTrail(bulkResponse.AuditTrail, sb);
+					ResponseStatics.DebugAuditTrail(bulkResponse.ApiCall.AuditTrail, sb);
 					throw new Exception($"Problem seeding server-metrics data for machine learning: {sb}");
 				}
 

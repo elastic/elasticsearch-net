@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;
@@ -54,7 +55,7 @@ namespace Tests.Document.Single.Get
 				;
 
 			GET($"/project/doc/{escaped}?routing={escaped}")
-				.LowLevel(c => c.Get<dynamic>("project", "doc", urlId, s=>s.Routing(urlId)))
+				.LowLevel(c => c.Get<DynamicResponse>("project", "doc", urlId, new GetRequestParameters().Routing(urlId)))
 				;
 		}
 	}

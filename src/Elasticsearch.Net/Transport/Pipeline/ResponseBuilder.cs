@@ -7,205 +7,141 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
-	public class ResponseBuilder<TReturn>
-		where TReturn : class
+	public static class ResponseBuilder
 
 	{
 		private const int BufferSize = 81920;
-		private static readonly VoidResponse Void = new VoidResponse();
-		private static readonly IDisposable EmptyDisposable = new MemoryStream();
 
-		private readonly RequestData _requestData;
-		private readonly CancellationToken _cancellationToken;
-		private readonly bool _disableDirectStreaming;
-		private readonly bool _allowsAllStatusCodes;
-		private readonly List<int> _allowedStatusCodes;
+		internal static readonly IDisposable EmptyDisposable = new MemoryStream();
 
-		public Exception Exception { get; set; }
-		public int? StatusCode { get; set; }
-		public Stream Stream { get; set; }
-
-		public IEnumerable<string> DeprecationWarnings { get; set; }
-
-		public ResponseBuilder(RequestData requestData, CancellationToken cancellationToken = default(CancellationToken))
+		public static TResponse ToResponse<TResponse>(RequestData requestData, Exception ex, int? statusCode, IEnumerable<string> warnings, Stream responseStream)
+			where TResponse : class, IElasticsearchResponse
 		{
-			_requestData = requestData;
-			_cancellationToken = cancellationToken;
-			_disableDirectStreaming =
-				this._requestData.PostData?.DisableDirectStreaming ?? this._requestData.ConnectionSettings.DisableDirectStreaming;
-
-			this._allowedStatusCodes = this._requestData.AllowedStatusCodes.ToList();
-			this._allowsAllStatusCodes = _allowedStatusCodes.Contains(-1);
-		}
-
-		public ElasticsearchResponse<TReturn> ToResponse()
-		{
-			var response = Initialize(this.StatusCode, this.Exception);
-			if (this.Stream != null)
-				SetBody(response, this.Stream);
-			Finalize(response);
+			var details = Initialize(requestData, ex, statusCode, warnings);
+			var response = SetBody<TResponse>(details, requestData, responseStream);
+			response.ApiCall = details;
 			return response;
 		}
 
-		public async Task<ElasticsearchResponse<TReturn>> ToResponseAsync()
+		public static async Task<TResponse> ToResponseAsync<TResponse>(
+			RequestData requestData,
+			Exception ex,
+			int? statusCode,
+			IEnumerable<string> warnings,
+			Stream responseStream,
+			CancellationToken cancellationToken)
+			where TResponse : class, IElasticsearchResponse
 		{
-			var response = Initialize(this.StatusCode, this.Exception);
-			if (this.Stream != null)
-				await SetBodyAsync(response, this.Stream).ConfigureAwait(false);
-			Finalize(response);
+			var details = Initialize(requestData, ex, statusCode, warnings);
+			var response = await SetBodyAsync<TResponse>(details, requestData, responseStream, cancellationToken).ConfigureAwait(false);
+			response.ApiCall = details;
 			return response;
 		}
 
-		private ElasticsearchResponse<TReturn> Initialize(int? statusCode, Exception exception)
+		private static HttpDetails Initialize(RequestData requestData, Exception exception, int? statusCode, IEnumerable<string> warnings)
 		{
 			var success = false;
+			var allowedStatusCodes = requestData.AllowedStatusCodes.ToList();
 			if (statusCode.HasValue)
 			{
 				success = statusCode >= 200 && statusCode < 300
-				          || (this._requestData.Method == HttpMethod.HEAD && statusCode == 404)
-				          || _allowedStatusCodes.Contains(statusCode.Value)
-				          || _allowsAllStatusCodes;
+				          || (requestData.Method == HttpMethod.HEAD && statusCode == 404)
+				          || allowedStatusCodes.Contains(statusCode.Value)
+				          || allowedStatusCodes.Contains(-1);
 			}
-			var response = statusCode.HasValue
-				? new ElasticsearchResponse<TReturn>(statusCode.Value, success)
-				: new ElasticsearchResponse<TReturn>(exception);
-			response.RequestBodyInBytes = this._requestData.PostData?.WrittenBytes;
-			response.Uri = this._requestData.Uri;
-			response.HttpMethod = this._requestData.Method;
-			response.OriginalException = exception;
-			response.DeprecationWarnings = this.DeprecationWarnings ?? Enumerable.Empty<string>();
-			return response;
+			var httpCallDetails = new HttpDetails
+			{
+				Success = success,
+				OriginalException = exception,
+				HttpStatusCode = statusCode,
+				RequestBodyInBytes = requestData.PostData?.WrittenBytes,
+				Uri = requestData.Uri,
+				HttpMethod = requestData.Method,
+				DeprecationWarnings = warnings ?? Enumerable.Empty<string>()
+			};
+			return httpCallDetails;
 		}
 
-		private void SetBody(ElasticsearchResponse<TReturn> response, Stream stream)
+		private static TResponse SetBody<TResponse>(HttpDetails details, RequestData requestData, Stream stream)
+			where TResponse : class, IElasticsearchResponse
 		{
 			byte[] bytes = null;
-			if (NeedsToEagerReadStream(response))
+			var disableDirectStreaming = requestData.PostData?.DisableDirectStreaming ?? requestData.ConnectionSettings.DisableDirectStreaming;
+			if (disableDirectStreaming || NeedsToEagerReadStream<TResponse>())
 			{
-				var inMemoryStream = this._requestData.MemoryStreamFactory.Create();
+				var inMemoryStream = requestData.MemoryStreamFactory.Create();
 				stream.CopyTo(inMemoryStream, BufferSize);
 				bytes = SwapStreams(ref stream, ref inMemoryStream);
+				details.ResponseBodyInBytes = bytes;
 			}
 
-			var needsDispose = typeof(TReturn) != typeof(Stream);
+			var needsDispose = typeof(TResponse) != typeof(ElasticsearchResponse<Stream>);
 			using (needsDispose ? stream : EmptyDisposable)
 			{
-				if (response.Success || NeedsDoubleReadForError(response))
-				{
-					if (!SetSpecialTypes(stream, response, bytes))
-					{
-						if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
-						else response.Body = this._requestData.ConnectionSettings.RequestResponseSerializer.Deserialize<TReturn>(stream);
-					}
-					if (NeedsDoubleReadForError(response))
-						ReadServerError(response, new MemoryStream(bytes), bytes);
-				}
-				else if (response.HttpStatusCode != null)
-					ReadServerError(response, stream, bytes);
+				if (SetSpecialTypes<TResponse>(stream, bytes, out var r))
+					return r;
+
+				if (requestData.CustomConverter != null) return requestData.CustomConverter(details, stream) as TResponse;
+				return requestData.ConnectionSettings.RequestResponseSerializer.Deserialize<TResponse>(stream);
 			}
 		}
 
-		private async Task SetBodyAsync(ElasticsearchResponse<TReturn> response, Stream stream)
+		private static async Task<TResponse> SetBodyAsync<TResponse>(HttpDetails details, RequestData requestData, Stream stream, CancellationToken cancellationToken)
+			where TResponse : class, IElasticsearchResponse
 		{
 			byte[] bytes = null;
-			if (NeedsToEagerReadStream(response))
+			var disableDirectStreaming = requestData.PostData?.DisableDirectStreaming ?? requestData.ConnectionSettings.DisableDirectStreaming;
+			if (disableDirectStreaming || NeedsToEagerReadStream<TResponse>())
 			{
-				var inMemoryStream = this._requestData.MemoryStreamFactory.Create();
-				await stream.CopyToAsync(inMemoryStream, BufferSize, this._cancellationToken).ConfigureAwait(false);
+				var inMemoryStream = requestData.MemoryStreamFactory.Create();
+				await stream.CopyToAsync(inMemoryStream, BufferSize, cancellationToken).ConfigureAwait(false);
 				bytes = SwapStreams(ref stream, ref inMemoryStream);
+				details.ResponseBodyInBytes = bytes;
 			}
 
-			var needsDispose = typeof(TReturn) != typeof(Stream);
+			var needsDispose = typeof(TResponse) != typeof(ElasticsearchResponse<Stream>);
 			using (needsDispose ? stream : EmptyDisposable)
 			{
-				if (response.Success || NeedsDoubleReadForError(response))
-				{
-					if (!SetSpecialTypes(stream, response, bytes))
-					{
-						if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
-						else response.Body = await this._requestData.ConnectionSettings.RequestResponseSerializer.DeserializeAsync<TReturn>(stream, this._cancellationToken).ConfigureAwait(false);
-					}
-					if (NeedsDoubleReadForError(response))
-						await ReadServerErrorAsync(response, new MemoryStream(bytes), bytes);
-				}
-				else if (response.HttpStatusCode != null)
-					await ReadServerErrorAsync(response, stream, bytes);
+				if (SetSpecialTypes<TResponse>(stream, bytes, out var r)) return r;
+				if (requestData.CustomConverter != null) return requestData.CustomConverter(details, stream) as TResponse;
+				return await requestData.ConnectionSettings.RequestResponseSerializer.DeserializeAsync<TResponse>(stream, cancellationToken)
+					.ConfigureAwait(false);
 			}
 		}
 
-		private void ReadServerError(ElasticsearchResponse<TReturn> response, Stream stream, byte[] bytes)
+		private static readonly VoidResponse StaticVoid = new VoidResponse { Body = new VoidResponse.VoidBody() };
+		private static readonly Type[] SpecialTypes = {typeof(StringResponse), typeof(BytesResponse), typeof(VoidResponse), typeof(StreamResponse)};
+
+		private static bool SetSpecialTypes<TResponse>(Stream responseStream, byte[] bytes, out TResponse cs)
+			where TResponse : class, IElasticsearchResponse
 		{
-			if (ServerError.TryCreate(stream, out var serverError))
-				response.ServerError = serverError;
-			if (_disableDirectStreaming)
-				response.ResponseBodyInBytes = bytes;
+			cs = null;
+			var responseType = typeof(TResponse);
+			if (!SpecialTypes.Contains(responseType)) return false;
+
+			if (responseType == typeof(StringResponse))
+				cs = new StringResponse(bytes.Utf8String()) as TResponse;
+			else if (responseType == typeof(byte[]))
+				cs = new BytesResponse(bytes) as TResponse;
+			else if (responseType == typeof(VoidResponse))
+				cs = StaticVoid as TResponse;
+			else if (responseType == typeof(StreamResponse))
+				cs = new StreamResponse(responseStream) as TResponse;
+
+			return cs != null;
 		}
 
-		private async Task ReadServerErrorAsync(ElasticsearchResponse<TReturn> response, Stream stream, byte[] bytes)
-		{
-			response.ServerError = await ServerError.TryCreateAsync(stream, this._cancellationToken).ConfigureAwait(false);
-			if (_disableDirectStreaming)
-				response.ResponseBodyInBytes = bytes;
-		}
+		private static bool NeedsToEagerReadStream<TResponse>()
+			where TResponse : class, IElasticsearchResponse =>
+			typeof(TResponse) == typeof(StringResponse) || typeof(TResponse) == typeof(BytesResponse);
 
-		private void Finalize(ElasticsearchResponse<TReturn> response)
-		{
-			if (response.Body is IBodyWithApiCallDetails passAlongConnectionStatus)
-			{
-				passAlongConnectionStatus.ApiCall = response;
-			}
-		}
-
-		private bool NeedsDoubleReadForError(IApiCallDetails response) =>
-			_allowsAllStatusCodes ||
-			(
-				(_requestData.Method == HttpMethod.DELETE || _requestData.Method == HttpMethod.GET)
-				&& response.HttpStatusCode == 404
-			);
-
-
-		private bool NeedsToEagerReadStream(IApiCallDetails response) =>
-			NeedsDoubleReadForError(response)
-			|| _disableDirectStreaming || typeof(TReturn) == typeof(string) || typeof(TReturn) == typeof(byte[]);
-
-		private byte[] SwapStreams(ref Stream responseStream, ref MemoryStream ms)
+		private static byte[] SwapStreams(ref Stream responseStream, ref MemoryStream ms)
 		{
 			var bytes = ms.ToArray();
 			responseStream.Dispose();
 			responseStream = ms;
 			responseStream.Position = 0;
 			return bytes;
-		}
-
-		private bool SetSpecialTypes(Stream responseStream, ElasticsearchResponse<TReturn> cs, byte[] bytes)
-		{
-			var setSpecial = true;
-			if (_disableDirectStreaming)
-				cs.ResponseBodyInBytes = bytes;
-			var returnType = typeof(TReturn);
-			if (returnType == typeof(string))
-				this.SetStringResult(cs as ElasticsearchResponse<string>, bytes);
-			else if (returnType == typeof(byte[]))
-				this.SetByteResult(cs as ElasticsearchResponse<byte[]>, bytes);
-			else if (returnType == typeof(VoidResponse))
-				this.SetVoidResult(cs as ElasticsearchResponse<VoidResponse>, responseStream);
-			else if (returnType == typeof(Stream))
-				this.SetStreamResult(cs as ElasticsearchResponse<Stream>, responseStream);
-			else
-				setSpecial = false;
-			return setSpecial;
-		}
-
-		private void SetStringResult(ElasticsearchResponse<string> result, byte[] bytes) => result.Body = bytes.Utf8String();
-
-		private void SetByteResult(ElasticsearchResponse<byte[]> result, byte[] bytes) => result.Body = bytes;
-
-		private void SetStreamResult(ElasticsearchResponse<Stream> result, Stream response) => result.Body = response;
-
-		private void SetVoidResult(ElasticsearchResponse<VoidResponse> result, Stream response)
-		{
-			response.Dispose();
-			result.Body = Void;
 		}
 	}
 }

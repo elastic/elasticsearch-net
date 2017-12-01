@@ -6,10 +6,10 @@ namespace Elasticsearch.Net
 {
 	public interface IConnection : IDisposable
 	{
-		Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken)
-			where TReturn : class;
+		Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
+			where TResponse : class, IElasticsearchResponse;
 
-		ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData)
-			where TReturn : class;
+		TResponse Request<TResponse>(RequestData requestData)
+			where TResponse : class, IElasticsearchResponse;
 	}
 }

@@ -40,7 +40,7 @@ namespace Tests.Framework
 		public bool IsSniffRequest(RequestData requestData) => requestData.Path.StartsWith("_nodes/http,settings", StringComparison.Ordinal);
 		public bool IsPingRequest(RequestData requestData) => requestData.Path == "/" && requestData.Method == HttpMethod.HEAD;
 
-		public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData)
+		public override TResponse Request<TResponse>(RequestData requestData)
 		{
 			this.Calls.Should().ContainKey(requestData.Uri.Port);
 			try
@@ -49,7 +49,7 @@ namespace Tests.Framework
 				if (IsSniffRequest(requestData))
 				{
 					var sniffed = Interlocked.Increment(ref state.Sniffed);
-					return HandleRules<TReturn, ISniffRule>(
+					return HandleRules<TResponse, ISniffRule>(
 						requestData,
 						this._cluster.SniffingRules,
 						requestData.RequestTimeout,
@@ -60,7 +60,7 @@ namespace Tests.Framework
 				if (IsPingRequest(requestData))
 				{
 					var pinged = Interlocked.Increment(ref state.Pinged);
-					return HandleRules<TReturn, IRule>(
+					return HandleRules<TResponse, IRule>(
 						requestData,
 						this._cluster.PingingRules,
 						requestData.PingTimeout,
@@ -69,7 +69,7 @@ namespace Tests.Framework
 					);
 				}
 				var called = Interlocked.Increment(ref state.Called);
-				return HandleRules<TReturn, IClientCallRule>(
+				return HandleRules<TResponse, IClientCallRule>(
 					requestData,
 					this._cluster.ClientCallRules,
 					requestData.RequestTimeout,
@@ -83,19 +83,19 @@ namespace Tests.Framework
 			catch (WebException e)
 #endif
 			{
-				var builder = new ResponseBuilder<TReturn>(requestData);
-				builder.Exception = e;
-				return builder.ToResponse();
+				return ResponseBuilder.ToResponse<TResponse>(requestData, e, null, null, Stream.Null);
 			}
 		}
 
-		private ElasticsearchResponse<TReturn> HandleRules<TReturn, TRule>(
+		private TResponse HandleRules<TResponse, TRule>(
 			RequestData requestData,
 			IEnumerable<TRule> rules,
 			TimeSpan timeout,
 			Action<TRule> beforeReturn,
 			Func<TRule, byte[]> successResponse
-			) where TReturn : class where TRule : IRule
+			)
+			where TResponse : class, IElasticsearchResponse
+			where TRule : IRule
 		{
 			requestData.MadeItToResponse = true;
 
@@ -107,9 +107,9 @@ namespace Tests.Framework
 				if (rule.OnPort.Value == requestData.Uri.Port)
 				{
 					if (always)
-						return Always<TReturn, TRule>(requestData, timeout, beforeReturn, successResponse, rule);
+						return Always<TResponse, TRule>(requestData, timeout, beforeReturn, successResponse, rule);
 
-					return Sometimes<TReturn, TRule>(requestData, timeout, beforeReturn, successResponse, state, rule, times);
+					return Sometimes<TResponse, TRule>(requestData, timeout, beforeReturn, successResponse, state, rule, times);
 				}
 			}
 			foreach (var rule in rules.Where(s => !s.OnPort.HasValue))
@@ -117,15 +117,15 @@ namespace Tests.Framework
 				var always = rule.Times.Match(t => true, t => false);
 				var times = rule.Times.Match(t => -1, t => t);
 				if (always)
-					return Always<TReturn, TRule>(requestData, timeout, beforeReturn, successResponse, rule);
+					return Always<TResponse, TRule>(requestData, timeout, beforeReturn, successResponse, rule);
 
-				return Sometimes<TReturn, TRule>(requestData, timeout, beforeReturn, successResponse, state, rule, times);
+				return Sometimes<TResponse, TRule>(requestData, timeout, beforeReturn, successResponse, state, rule, times);
 			}
-			return this.ReturnConnectionStatus<TReturn>(requestData, successResponse(default(TRule)));
+			return this.ReturnConnectionStatus<TResponse>(requestData, successResponse(default(TRule)));
 		}
 
-		private ElasticsearchResponse<TReturn> Always<TReturn, TRule>(RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse, TRule rule)
-			where TReturn : class
+		private TResponse Always<TResponse, TRule>(RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse, TRule rule)
+			where TResponse : class, IElasticsearchResponse
 			where TRule : IRule
 		{
 			if (rule.Takes.HasValue)
@@ -141,13 +141,13 @@ namespace Tests.Framework
 			}
 
 			return rule.Succeeds
-				? Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule)
-				: Fail<TReturn, TRule>(requestData, rule);
+				? Success<TResponse, TRule>(requestData, beforeReturn, successResponse, rule)
+				: Fail<TResponse, TRule>(requestData, rule);
 		}
 
-		private ElasticsearchResponse<TReturn> Sometimes<TReturn, TRule>(
+		private TResponse Sometimes<TResponse, TRule>(
 			RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse, State state, TRule rule, int times)
-			where TReturn : class
+			where TResponse : class, IElasticsearchResponse
 			where TRule : IRule
 		{
 			if (rule.Takes.HasValue)
@@ -163,19 +163,19 @@ namespace Tests.Framework
 			}
 
 			if (rule.Succeeds && times >= state.Successes)
-				return Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
+				return Success<TResponse, TRule>(requestData, beforeReturn, successResponse, rule);
 			else if (rule.Succeeds)
 			{
-				return Fail<TReturn, TRule>(requestData, rule);
+				return Fail<TResponse, TRule>(requestData, rule);
 			}
 
 			if (!rule.Succeeds && times >= state.Failures)
-				return Fail<TReturn, TRule>(requestData, rule);
-			return Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
+				return Fail<TResponse, TRule>(requestData, rule);
+			return Success<TResponse, TRule>(requestData, beforeReturn, successResponse, rule);
 		}
 
-		private ElasticsearchResponse<TReturn> Fail<TReturn, TRule>(RequestData requestData, TRule rule, Union<Exception, int> returnOverride = null)
-			where TReturn : class
+		private TResponse Fail<TResponse, TRule>(RequestData requestData, TRule rule, Union<Exception, int> returnOverride = null)
+			where TResponse : class, IElasticsearchResponse
 			where TRule : IRule
 		{
 			var state = this.Calls[requestData.Uri.Port];
@@ -190,23 +190,23 @@ namespace Tests.Framework
 #endif
 			return ret.Match(
 				(e) => throw e,
-				(statusCode) => this.ReturnConnectionStatus<TReturn>(requestData, CallResponse(rule),
+				(statusCode) => this.ReturnConnectionStatus<TResponse>(requestData, CallResponse(rule),
 					//make sure we never return a valid status code in Fail responses because of a bad rule.
 					statusCode >= 200 && statusCode < 300 ? 502 : statusCode)
 			);
 		}
 
-		private ElasticsearchResponse<TReturn> Success<TReturn, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse, TRule rule)
-			where TReturn : class
+		private TResponse Success<TResponse, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse, TRule rule)
+			where TResponse : class, IElasticsearchResponse
 			where TRule : IRule
 		{
 			var state = this.Calls[requestData.Uri.Port];
 			var succeeded = Interlocked.Increment(ref state.Successes);
 			beforeReturn?.Invoke(rule);
-			return this.ReturnConnectionStatus<TReturn>(requestData, successResponse(rule));
+			return this.ReturnConnectionStatus<TResponse>(requestData, successResponse(rule));
 		}
 
-		private byte[] CallResponse<TRule>(TRule rule)
+		private static byte[] CallResponse<TRule>(TRule rule)
 			where TRule : IRule
 		{
 			if (rule?.ReturnResponse != null)
@@ -245,9 +245,9 @@ namespace Tests.Framework
 			}
 		}
 
-		public override Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken)
+		public override Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
 		{
-			return Task.FromResult(this.Request<TReturn>(requestData));
+			return Task.FromResult(this.Request<TResponse>(requestData));
 		}
 	}
 }

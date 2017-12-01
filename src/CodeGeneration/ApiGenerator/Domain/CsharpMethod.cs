@@ -227,8 +227,9 @@ namespace ApiGenerator.Domain
 				// Use generic T to set the Indices and Types by default in the ctor
 				if (m == "PutDatafeedDescriptor" || m == "UpdateDatafeedDescriptor")
 				{
+					var generic = "T";
 					doc = AppendToSummary(doc, ". Will infer the index and type from the generic type");
-					generated = $"public {m}({par}) : base({routing}){{ Self.Indices = typeof({this.CallTypeGeneric}); Self.Types = typeof({this.CallTypeGeneric}); }}";
+					generated = $"public {m}({par}) : base({routing}){{ Self.Indices = typeof({generic}); Self.Types = typeof({generic}); }}";
 				}
 
 				var c = new Constructor { Generated = generated, Description = doc };

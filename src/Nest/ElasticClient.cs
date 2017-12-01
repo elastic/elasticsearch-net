@@ -43,13 +43,13 @@ namespace Nest
 
 		TResponse IHighLevelToLowLevelDispatcher.Dispatch<TRequest, TQueryString, TResponse>(
 			TRequest request,
-			Func<TRequest, SerializableData<TRequest>,
-			ElasticsearchResponse<TResponse>> dispatch
+			Func<TRequest, SerializableData<TRequest>, TResponse> dispatch
 			) => this.Dispatcher.Dispatch<TRequest,TQueryString,TResponse>(request, null, dispatch);
 
 		TResponse IHighLevelToLowLevelDispatcher.Dispatch<TRequest, TQueryString, TResponse>(
-			TRequest request, Func<IApiCallDetails, Stream, TResponse> responseGenerator,
-			Func<TRequest, SerializableData<TRequest>, ElasticsearchResponse<TResponse>> dispatch
+			TRequest request,
+			Func<IApiCallDetails, Stream, TResponse> responseGenerator,
+			Func<TRequest, SerializableData<TRequest>, TResponse> dispatch
 			)
 		{
 			request.RouteValues.Resolve(this.ConnectionSettings);
@@ -62,14 +62,14 @@ namespace Nest
 		Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
 			TRequest descriptor,
 			CancellationToken cancellationToken,
-			Func<TRequest, SerializableData<TRequest>, CancellationToken, Task<ElasticsearchResponse<TResponse>>> dispatch
+			Func<TRequest, SerializableData<TRequest>, CancellationToken, Task<TResponse>> dispatch
 			) => this.Dispatcher.DispatchAsync<TRequest,TQueryString,TResponse,TResponseInterface>(descriptor, cancellationToken, null, dispatch);
 
 		async Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
 			TRequest request,
 			CancellationToken cancellationToken,
 			Func<IApiCallDetails, Stream, TResponse> responseGenerator,
-			Func<TRequest, SerializableData<TRequest>, CancellationToken, Task<ElasticsearchResponse<TResponse>>> dispatch
+			Func<TRequest, SerializableData<TRequest>, CancellationToken, Task<TResponse>> dispatch
 			)
 		{
 			request.RouteValues.Resolve(this.ConnectionSettings);
@@ -78,19 +78,19 @@ namespace Nest
 			return ResultsSelector(response);
 		}
 
-		private static TResponse ResultsSelector<TResponse>(ElasticsearchResponse<TResponse> c)
-			where TResponse : ResponseBase =>
-			c.Body ?? CreateInvalidInstance<TResponse>(c);
+		private static TResponse ResultsSelector<TResponse>(TResponse c)
+			where TResponse : ResponseBase => c;
+			//c.Body ?? CreateInvalidInstance<TResponse>(c);
 
 		private static TResponse CreateInvalidInstance<TResponse>(IApiCallDetails response)
 			where TResponse : ResponseBase
 		{
 			var r = typeof(TResponse).CreateInstance<TResponse>();
-			((IBodyWithApiCallDetails)r).ApiCall = response;
+			((IElasticsearchResponse)r).ApiCall = response;
 			return r;
 		}
 
-		private TRequest ForceConfiguration<TRequest, TParams>(TRequest request, Action<IRequestConfiguration> setter)
+		private static TRequest ForceConfiguration<TRequest, TParams>(TRequest request, Action<IRequestConfiguration> setter)
 			where TRequest : IRequest<TParams>
 			where TParams : IRequestParameters, new()
 		{
