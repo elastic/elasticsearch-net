@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
 	public static class ResponseBuilder
-
 	{
 		private const int BufferSize = 81920;
 
 		internal static readonly IDisposable EmptyDisposable = new MemoryStream();
 
 		public static TResponse ToResponse<TResponse>(RequestData requestData, Exception ex, int? statusCode, IEnumerable<string> warnings, Stream responseStream)
-			where TResponse : class, IElasticsearchResponse
+			where TResponse : class, IElasticsearchResponse, new()
 		{
+			responseStream.ThrowIfNull(nameof(responseStream));
 			var details = Initialize(requestData, ex, statusCode, warnings);
-			var response = SetBody<TResponse>(details, requestData, responseStream);
+			var response = SetBody<TResponse>(details, requestData, responseStream) ?? new TResponse();
 			response.ApiCall = details;
 			return response;
 		}
@@ -30,10 +31,12 @@ namespace Elasticsearch.Net
 			IEnumerable<string> warnings,
 			Stream responseStream,
 			CancellationToken cancellationToken)
-			where TResponse : class, IElasticsearchResponse
+			where TResponse : class, IElasticsearchResponse, new()
 		{
+			responseStream.ThrowIfNull(nameof(responseStream));
 			var details = Initialize(requestData, ex, statusCode, warnings);
-			var response = await SetBodyAsync<TResponse>(details, requestData, responseStream, cancellationToken).ConfigureAwait(false);
+			var response = (await SetBodyAsync<TResponse>(details, requestData, responseStream, cancellationToken).ConfigureAwait(false))
+				?? new TResponse();
 			response.ApiCall = details;
 			return response;
 		}
@@ -62,49 +65,56 @@ namespace Elasticsearch.Net
 			return httpCallDetails;
 		}
 
-		private static TResponse SetBody<TResponse>(HttpDetails details, RequestData requestData, Stream stream)
-			where TResponse : class, IElasticsearchResponse
+		private static TResponse SetBody<TResponse>(HttpDetails details, RequestData requestData, Stream responseStream)
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			byte[] bytes = null;
 			var disableDirectStreaming = requestData.PostData?.DisableDirectStreaming ?? requestData.ConnectionSettings.DisableDirectStreaming;
 			if (disableDirectStreaming || NeedsToEagerReadStream<TResponse>())
 			{
 				var inMemoryStream = requestData.MemoryStreamFactory.Create();
-				stream.CopyTo(inMemoryStream, BufferSize);
-				bytes = SwapStreams(ref stream, ref inMemoryStream);
+				responseStream.CopyTo(inMemoryStream, BufferSize);
+				bytes = SwapStreams(ref responseStream, ref inMemoryStream);
 				details.ResponseBodyInBytes = bytes;
 			}
 
 			var needsDispose = typeof(TResponse) != typeof(ElasticsearchResponse<Stream>);
-			using (needsDispose ? stream : EmptyDisposable)
+			using (needsDispose ? responseStream : EmptyDisposable)
 			{
-				if (SetSpecialTypes<TResponse>(stream, bytes, out var r))
+				if (SetSpecialTypes<TResponse>(responseStream, bytes, out var r))
 					return r;
 
-				if (requestData.CustomConverter != null) return requestData.CustomConverter(details, stream) as TResponse;
-				return requestData.ConnectionSettings.RequestResponseSerializer.Deserialize<TResponse>(stream);
+				if (details.HttpStatusCode.HasValue && requestData.SkipDeserializationForStatusCodes.Contains(details.HttpStatusCode.Value))
+					return null;
+
+				if (requestData.CustomConverter != null) return requestData.CustomConverter(details, responseStream) as TResponse;
+				return requestData.ConnectionSettings.RequestResponseSerializer.Deserialize<TResponse>(responseStream);
 			}
 		}
 
-		private static async Task<TResponse> SetBodyAsync<TResponse>(HttpDetails details, RequestData requestData, Stream stream, CancellationToken cancellationToken)
-			where TResponse : class, IElasticsearchResponse
+		private static async Task<TResponse> SetBodyAsync<TResponse>(HttpDetails details, RequestData requestData, Stream responseStream, CancellationToken cancellationToken)
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			byte[] bytes = null;
 			var disableDirectStreaming = requestData.PostData?.DisableDirectStreaming ?? requestData.ConnectionSettings.DisableDirectStreaming;
 			if (disableDirectStreaming || NeedsToEagerReadStream<TResponse>())
 			{
 				var inMemoryStream = requestData.MemoryStreamFactory.Create();
-				await stream.CopyToAsync(inMemoryStream, BufferSize, cancellationToken).ConfigureAwait(false);
-				bytes = SwapStreams(ref stream, ref inMemoryStream);
+				await responseStream.CopyToAsync(inMemoryStream, BufferSize, cancellationToken).ConfigureAwait(false);
+				bytes = SwapStreams(ref responseStream, ref inMemoryStream);
 				details.ResponseBodyInBytes = bytes;
 			}
 
 			var needsDispose = typeof(TResponse) != typeof(ElasticsearchResponse<Stream>);
-			using (needsDispose ? stream : EmptyDisposable)
+			using (needsDispose ? responseStream : EmptyDisposable)
 			{
-				if (SetSpecialTypes<TResponse>(stream, bytes, out var r)) return r;
-				if (requestData.CustomConverter != null) return requestData.CustomConverter(details, stream) as TResponse;
-				return await requestData.ConnectionSettings.RequestResponseSerializer.DeserializeAsync<TResponse>(stream, cancellationToken)
+				if (SetSpecialTypes<TResponse>(responseStream, bytes, out var r)) return r;
+
+				if (details.HttpStatusCode.HasValue && requestData.SkipDeserializationForStatusCodes.Contains(details.HttpStatusCode.Value))
+					return null;
+
+				if (requestData.CustomConverter != null) return requestData.CustomConverter(details, responseStream) as TResponse;
+				return await requestData.ConnectionSettings.RequestResponseSerializer.DeserializeAsync<TResponse>(responseStream, cancellationToken)
 					.ConfigureAwait(false);
 			}
 		}
@@ -113,7 +123,7 @@ namespace Elasticsearch.Net
 		private static readonly Type[] SpecialTypes = {typeof(StringResponse), typeof(BytesResponse), typeof(VoidResponse), typeof(StreamResponse)};
 
 		private static bool SetSpecialTypes<TResponse>(Stream responseStream, byte[] bytes, out TResponse cs)
-			where TResponse : class, IElasticsearchResponse
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			cs = null;
 			var responseType = typeof(TResponse);
@@ -132,7 +142,7 @@ namespace Elasticsearch.Net
 		}
 
 		private static bool NeedsToEagerReadStream<TResponse>()
-			where TResponse : class, IElasticsearchResponse =>
+			where TResponse : class, IElasticsearchResponse, new() =>
 			typeof(TResponse) == typeof(StringResponse) || typeof(TResponse) == typeof(BytesResponse);
 
 		private static byte[] SwapStreams(ref Stream responseStream, ref MemoryStream ms)

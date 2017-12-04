@@ -283,6 +283,7 @@ namespace Elasticsearch.Net
 					var response = (e as PipelineException)?.Response;
 					audit.Event = PingFailure;
 					audit.Exception = e;
+					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					throw new PipelineException(PipelineFailure.PingFailure, e) { Response = response };
 				}
 			}
@@ -307,14 +308,15 @@ namespace Elasticsearch.Net
 					var response = (e as PipelineException)?.Response;
 					audit.Event = PingFailure;
 					audit.Exception = e;
+					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					throw new PipelineException(PipelineFailure.PingFailure, e) { Response = response };
 				}
 			}
 		}
 
-		private void ThrowBadAuthPipelineExceptionWhenNeeded(IApiCallDetails response)
+		private static void ThrowBadAuthPipelineExceptionWhenNeeded(IApiCallDetails response)
 		{
-			if (response.HttpStatusCode == 401)
+			if (response?.HttpStatusCode == 401)
 				throw new PipelineException(PipelineFailure.BadAuthentication, response.OriginalException) { Response = response };
 		}
 
@@ -348,6 +350,7 @@ namespace Elasticsearch.Net
 		{
 			var path = this.SniffPath;
 			var exceptions = new List<Exception>();
+			SniffResponse response = null;
 			foreach (var node in this.SniffNodes)
 			{
 				using (var audit = this.Audit(SniffSuccess))
@@ -356,11 +359,11 @@ namespace Elasticsearch.Net
 					try
 					{
 						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, null, this._memoryStreamFactory) { Node = node };
-						var response = this._connection.Request<SniffResponse>(requestData);
+						response = this._connection.Request<SniffResponse>(requestData);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
 						if (!response.Success) throw new PipelineException(requestData.OnFailurePipelineFailure) { Response = response };
-						var nodes = response.Body.ToNodes(this._connectionPool.UsingSsl);
+						var nodes = response.ToNodes(this._connectionPool.UsingSsl);
 						this._connectionPool.Reseed(nodes);
 						this.Refresh = true;
 						return;
@@ -370,6 +373,7 @@ namespace Elasticsearch.Net
 						audit.Event = SniffFailure;
 						audit.Exception = e;
 						exceptions.Add(e);
+						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						continue;
 					}
 				}
@@ -381,6 +385,7 @@ namespace Elasticsearch.Net
 		{
 			var path = this.SniffPath;
 			var exceptions = new List<Exception>();
+			SniffResponse response = null;
 			foreach (var node in this.SniffNodes)
 			{
 				using (var audit = this.Audit(SniffSuccess))
@@ -389,11 +394,11 @@ namespace Elasticsearch.Net
 					try
 					{
 						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, null, this._memoryStreamFactory) { Node = node };
-						var response = await this._connection.RequestAsync<SniffResponse>(requestData, cancellationToken).ConfigureAwait(false);
+						response = await this._connection.RequestAsync<SniffResponse>(requestData, cancellationToken).ConfigureAwait(false);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
 						if (!response.Success) throw new PipelineException(requestData.OnFailurePipelineFailure) { Response = response };
-						this._connectionPool.Reseed(response.Body.ToNodes(this._connectionPool.UsingSsl));
+						this._connectionPool.Reseed(response.ToNodes(this._connectionPool.UsingSsl));
 						this.Refresh = true;
 						return;
 					}
@@ -402,6 +407,7 @@ namespace Elasticsearch.Net
 						audit.Event = SniffFailure;
 						audit.Exception = e;
 						exceptions.Add(e);
+						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						continue;
 					}
 				}
@@ -409,7 +415,8 @@ namespace Elasticsearch.Net
 			throw new PipelineException(PipelineFailure.SniffFailure, new AggregateException(exceptions));
 		}
 
-		public TResponse CallElasticsearch<TResponse>(RequestData requestData) where TResponse : class, IElasticsearchResponse
+		public TResponse CallElasticsearch<TResponse>(RequestData requestData)
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			using (var audit = this.Audit(HealthyResponse))
 			{
@@ -430,13 +437,14 @@ namespace Elasticsearch.Net
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = requestData.OnFailureAuditEvent;
 					audit.Exception = e;
+					ThrowBadAuthPipelineExceptionWhenNeeded(response?.ApiCall);
 					throw;
 				}
 			}
 		}
 
 		public async Task<TResponse> CallElasticsearchAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
-			where TResponse : class, IElasticsearchResponse
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			using (var audit = this.Audit(HealthyResponse))
 			{
@@ -457,15 +465,16 @@ namespace Elasticsearch.Net
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = requestData.OnFailureAuditEvent;
 					audit.Exception = e;
+					ThrowBadAuthPipelineExceptionWhenNeeded(response?.ApiCall);
 					throw;
 				}
 			}
 		}
 
 		public void BadResponse<TResponse>(ref TResponse response, RequestData data, List<PipelineException> pipelineExceptions)
-			where TResponse : class, IElasticsearchResponse
+			where TResponse : class, IElasticsearchResponse, new()
 		{
-			var callDetails = response.ApiCall ?? pipelineExceptions.LastOrDefault()?.Response;
+			var callDetails = response?.ApiCall ?? pipelineExceptions.LastOrDefault()?.Response;
 			var pipelineFailure = data.OnFailurePipelineFailure;
 			if (pipelineExceptions.HasAny())
 				pipelineFailure = pipelineExceptions.Last().FailureReason;
@@ -503,7 +512,12 @@ namespace Elasticsearch.Net
 			}
 
 			if (response == null)
-				response = ResponseBuilder.ToResponse<TResponse>(data, clientException, callDetails?.HttpStatusCode, null, Stream.Null);
+			{
+				//make sure we copy over the error body in case we disabled direct streaming.
+				var s = callDetails?.ResponseBodyInBytes == null ? Stream.Null : new MemoryStream(callDetails.ResponseBodyInBytes);
+				response = ResponseBuilder.ToResponse<TResponse>(data, clientException, callDetails?.HttpStatusCode, null, s);
+
+			}
 
 			response.ApiCall.AuditTrail = this.AuditTrail;
 		}

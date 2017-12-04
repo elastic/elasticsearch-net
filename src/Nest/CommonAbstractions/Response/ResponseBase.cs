@@ -47,15 +47,52 @@ namespace Nest
 
 	public abstract class ResponseBase : IResponse
 	{
-		IApiCallDetails IElasticsearchResponse.ApiCall { get; set; }
+		private IApiCallDetails _originalApiCall;
+		private ServerError _serverError;
+		private Error _error;
+		private int? _statusCode;
+
+		IApiCallDetails IElasticsearchResponse.ApiCall { get => _originalApiCall; set => _originalApiCall = value; }
+
+		public ServerError ServerError
+		{
+			get
+			{
+				if (_serverError != null) return _serverError;
+				if (Error == null) return null;
+				_serverError = new ServerError(Error, StatusCode);
+				return _serverError;
+			}
+		}
+
+		[JsonProperty("error")]
+		internal Error Error
+		{
+			get => _error;
+			set
+			{
+				_error = value;
+				_serverError = null;
+			}
+		}
+
+		[JsonProperty("status")]
+		internal int? StatusCode
+		{
+			get => _statusCode;
+			set
+			{
+				_statusCode = value;
+				_serverError = null;
+			}
+		}
 
 		/// <inheritdoc/>
 		public virtual bool IsValid => (this.ApiCall?.Success ?? false) && (this.ServerError == null);
 
 		/// <summary> Returns useful information about the request(s) that were part of this API call. </summary>
-		public virtual IApiCallDetails ApiCall => ((IElasticsearchResponse)this).ApiCall;
+		public virtual IApiCallDetails ApiCall => _originalApiCall;
 
-		public ServerError ServerError => this.ApiCall?.ServerError;
 
 		/// <inheritdoc/>
 		public Exception OriginalException => this.ApiCall?.OriginalException;
@@ -73,6 +110,7 @@ namespace Nest
 				return sb.ToString();
 			}
 		}
+		/// <summary>Subclasses can override this to provide more information on why a call is not valid.</summary>
 		protected virtual void DebugIsValid(StringBuilder sb) { }
 
 		public override string ToString() =>  $"{(!this.IsValid ? "Inv" : "V")}alid NEST response built from a {this.ApiCall?.ToString().ToCamelCase()}";

@@ -36,7 +36,7 @@ namespace Nest
 		var genericTypes = !isGeneric ? new string[] {} : Regex.Replace(peek.InterfaceType, @"^.+<(.+)>$", "$1").Split(',').Select(s => s.Trim()).ToArray();
 
 		var dispatchGeneric = !isGeneric ? "<TResponse>" : ("<TResponse," + string.Join(",", genericTypes) + ">");
-		var methodConstraints = "where TResponse : class, IElasticsearchResponse" + (string.Join("", genericTypes.Select(s => " where " + s + " : class")));
+		var methodConstraints = "where TResponse : class, IElasticsearchResponse, new()" + (string.Join("", genericTypes.Select(s => " where " + s + " : class")));
 		
 		var generate = new [] {
 			new { Name = endpoint.CsharpMethodName + "Dispatch" + dispatchGeneric, Returns = "TResponse" , Async = false},

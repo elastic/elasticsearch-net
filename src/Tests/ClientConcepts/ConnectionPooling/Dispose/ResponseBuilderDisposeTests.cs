@@ -107,13 +107,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 			var response = ResponseBuilder.ToResponse<RootNodeInfoResponse>(requestData, null, statusCode, null, stream);
 
 			memoryStreamFactory.Created.Count().Should().Be(disableDirectStreaming ? 1 : 0);
-			stream.IsDisposed.Should().Be(disableDirectStreaming ? true : false);
+			stream.IsDisposed.Should().Be(true);
 
 			stream = new TrackDisposeStream();
 			var ct = new CancellationToken();
 			response = await ResponseBuilder.ToResponseAsync<RootNodeInfoResponse>(requestData, null, statusCode, null, stream, ct);
 			memoryStreamFactory.Created.Count().Should().Be(disableDirectStreaming ? 2 : 0);
-			stream.IsDisposed.Should().Be(disableDirectStreaming ? true : false);
+			stream.IsDisposed.Should().Be(true);
 		}
 
 	}

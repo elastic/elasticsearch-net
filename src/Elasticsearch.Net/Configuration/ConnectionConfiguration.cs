@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -142,6 +144,9 @@ namespace Elasticsearch.Net
 
 		private bool _throwExceptions;
 		bool IConnectionConfigurationValues.ThrowExceptions => _throwExceptions;
+
+		private IReadOnlyCollection<int> _skipDeserializationForStatusCodes = new ReadOnlyCollection<int>(new int[] {});
+		IReadOnlyCollection<int> IConnectionConfigurationValues.SkipDeserializationForStatusCodes => _skipDeserializationForStatusCodes;
 
 		private static void DefaultCompletedRequestHandler(IApiCallDetails response) { }
 		Action<IApiCallDetails> _completedRequestHandler = DefaultCompletedRequestHandler;
@@ -451,6 +456,12 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T ClientCertificate(string certificatePath) =>
 			Assign(a => a._clientCertificates = new X509Certificate2Collection { new X509Certificate(certificatePath) });
+
+		/// <summary>
+		/// Configure the client to skip deserialization of certain status codes e.g: you run elasticsearch behind a proxy that returns a HTML for 401, 500
+		/// </summary>
+		public T SkipDeserializationForStatusCodes(params int[] statusCodes) =>
+			Assign(a => a._skipDeserializationForStatusCodes = new ReadOnlyCollection<int>(statusCodes));
 
 		void IDisposable.Dispose() => this.DisposeManagedResources();
 

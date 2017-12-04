@@ -101,8 +101,19 @@ namespace Nest
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
-				var token = await JToken.LoadAsync(jsonTextReader, cancellationToken);
-				return token.ToObject<T>(this._defaultSerializer);
+				//JsonSerializerInternalReader that's is used in `Deserialize()` from the synchronous codepath
+				// has the same try catch
+				// https://github.com/JamesNK/Newtonsoft.Json/blob/master/Src/Newtonsoft.Json/Serialization/JsonSerializerInternalReader.cs#L145
+				// :/
+				try
+				{
+					var token = await JToken.LoadAsync(jsonTextReader, cancellationToken);
+					return token.ToObject<T>(this._defaultSerializer);
+				}
+				catch
+				{
+					return await Task.FromResult(default(T));
+				}
 			}
 		}
 

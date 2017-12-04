@@ -102,11 +102,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 ");
 
 		/**
-		 * When a bad authentication response occurs, the client does not attempt to deserialize the response body returned;
-		 * The response may or may not have a body and even when it does, it may not even be JSON.
+		 * When a bad authentication response occurs, the client attempts to deserialize the response body returned;
+		 * If you are using a proxy the response may or may not have a body and even when it does, it may not even be JSON.
 		 *
 		 * In the following couple of examples, we set up a cluster that always returns a typical nginx HTML response body
-		 * with 401 response to client calls. In this first example, we assert that the failure is because of a 401 Bad Authentication
+		 * with 401 response to client calls. We configure the client to ignore serialization for 401 status codes because we know
+		 * in the current topology nginx will return html for 401's.
+		 *
+		 * In this first example, we assert that the failure is because of a 401 Bad Authentication
 		 * response but the response body is not captured on the response
 		 */
 		[U] public async Task BadAuthenticationHtmlResponseIsIgnored()
@@ -116,7 +119,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				.Ping(r => r.SucceedAlways())
 				.ClientCalls(r => r.FailAlways(401).ReturnResponse(HtmlNginx401Response)) // <1> Always return a 401 bad response with a HTML response on client calls
 				.StaticConnectionPool()
-				.AllDefaults()
+				.Settings(s=>s.SkipDeserializationForStatusCodes(401))
 			);
 
 			audit = await audit.TraceElasticsearchException(
@@ -144,7 +147,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				.Ping(r => r.SucceedAlways())
 				.ClientCalls(r => r.FailAlways(401).ReturnResponse(HtmlNginx401Response))
 				.StaticConnectionPool()
-				.Settings(s => s.DisableDirectStreaming())
+				.Settings(s => s.DisableDirectStreaming().SkipDeserializationForStatusCodes(401))
 			);
 
 			audit = await audit.TraceElasticsearchException(
@@ -172,7 +175,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				.Ping(r => r.SucceedAlways())
 				.ClientCalls(r => r.FailAlways(401).ReturnResponse(HtmlNginx401Response))
 				.StaticConnectionPool()
-				.Settings(s => s.DisableDirectStreaming().DefaultIndex("default-index"))
+				.Settings(s => s.DisableDirectStreaming().DefaultIndex("default-index").SkipDeserializationForStatusCodes(401))
 				.ClientProxiesTo(
 					(c, r) => c.Get<Project>("1", s=>s.RequestConfiguration(r)),
 					async (c, r) => await c.GetAsync<Project>("1", s=>s.RequestConfiguration(r)) as IResponse

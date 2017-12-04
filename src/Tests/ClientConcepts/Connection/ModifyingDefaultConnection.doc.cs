@@ -97,12 +97,12 @@ namespace Tests.ClientConcepts.Connection
             var settings = new ConnectionSettings(connectionPool, connection).DefaultIndex("project");
             var client = new ElasticClient(settings);
 
-            var searchResponse = client.Search<Project>(s => s.MatchAll());
+	        var searchResponse = client.Search<Project>(s => s.MatchAll());
 
-            /**
-             * We can now assert that the `searchResponse` is valid and contains documents deserialized
-             * from our fixed `InMemoryConnection` response
-             */
+	        /**
+	         * We can now assert that the `searchResponse` is valid and contains documents deserialized
+	         * from our fixed `InMemoryConnection` response
+	         */
             searchResponse.ShouldBeValid();
             searchResponse.Documents.Count.Should().Be(25);
         }

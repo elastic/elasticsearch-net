@@ -54,7 +54,7 @@ namespace Tests.Framework
 						this._cluster.SniffingRules,
 						requestData.RequestTimeout,
 						(r) => this.UpdateCluster(r.NewClusterState),
-						(r) => SniffResponse.Create(this._cluster.Nodes, this._cluster.PublishAddressOverride, this._cluster.SniffShouldReturnFqnd)
+						(r) => SniffResponseBytes.Create(this._cluster.Nodes, this._cluster.PublishAddressOverride, this._cluster.SniffShouldReturnFqnd)
 					);
 				}
 				if (IsPingRequest(requestData))
@@ -94,7 +94,7 @@ namespace Tests.Framework
 			Action<TRule> beforeReturn,
 			Func<TRule, byte[]> successResponse
 			)
-			where TResponse : class, IElasticsearchResponse
+			where TResponse : class, IElasticsearchResponse, new()
 			where TRule : IRule
 		{
 			requestData.MadeItToResponse = true;
@@ -125,7 +125,7 @@ namespace Tests.Framework
 		}
 
 		private TResponse Always<TResponse, TRule>(RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse, TRule rule)
-			where TResponse : class, IElasticsearchResponse
+			where TResponse : class, IElasticsearchResponse, new()
 			where TRule : IRule
 		{
 			if (rule.Takes.HasValue)
@@ -147,7 +147,7 @@ namespace Tests.Framework
 
 		private TResponse Sometimes<TResponse, TRule>(
 			RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse, State state, TRule rule, int times)
-			where TResponse : class, IElasticsearchResponse
+			where TResponse : class, IElasticsearchResponse, new()
 			where TRule : IRule
 		{
 			if (rule.Takes.HasValue)
@@ -175,7 +175,7 @@ namespace Tests.Framework
 		}
 
 		private TResponse Fail<TResponse, TRule>(RequestData requestData, TRule rule, Union<Exception, int> returnOverride = null)
-			where TResponse : class, IElasticsearchResponse
+			where TResponse : class, IElasticsearchResponse, new()
 			where TRule : IRule
 		{
 			var state = this.Calls[requestData.Uri.Port];
@@ -197,7 +197,7 @@ namespace Tests.Framework
 		}
 
 		private TResponse Success<TResponse, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse, TRule rule)
-			where TResponse : class, IElasticsearchResponse
+			where TResponse : class, IElasticsearchResponse, new()
 			where TRule : IRule
 		{
 			var state = this.Calls[requestData.Uri.Port];

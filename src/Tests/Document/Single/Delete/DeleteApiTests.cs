@@ -108,6 +108,9 @@ namespace Tests.Document.Single.Delete
 
 		protected override bool SupportsDeserialization => false;
 
+		protected override DeleteDescriptor<Project> NewDescriptor() =>
+			new DeleteDescriptor<Project>(DocumentPath<Project>.Id(CallIsolatedValue).Index(CallIsolatedValue));
+
 		protected override Func<DeleteDescriptor<Project>, IDeleteRequest> Fluent => f => f.Index(BadIndex);
 		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(CallIsolatedValue, index: BadIndex);
 

@@ -11,11 +11,11 @@ namespace Elasticsearch.Net
 		TConnectionSettings Settings { get; }
 
 		TResponse Request<TResponse>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse;
+			where TResponse : class, IElasticsearchResponse, new();
 
 		Task<TResponse> RequestAsync<TResponse>(
 			HttpMethod method, string path, CancellationToken ctx, PostData data = null, IRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse;
+			where TResponse : class, IElasticsearchResponse, new();
 
 	}
 

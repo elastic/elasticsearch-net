@@ -6,7 +6,7 @@ using Elasticsearch.Net;
 
 namespace Tests.Framework.MockResponses
 {
-	public static class SniffResponse
+	public static class SniffResponseBytes
 	{
 		private static string ClusterName => "elasticsearch-test-cluster";
 
@@ -30,7 +30,6 @@ namespace Tests.Framework.MockResponses
 			select new { id, name, node })
 			.ToDictionary(kv => kv.id, kv => CreateNodeResponse(kv.node, kv.name, publishAddressOverride, randomFqdn));
 
-		private static Random Random = new Random(1337);
 		private static object CreateNodeResponse(Node node, string name, string publishAddressOverride, bool randomFqdn)
 		{
 			var port = node.Uri.Port;

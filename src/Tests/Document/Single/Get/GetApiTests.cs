@@ -94,6 +94,9 @@ namespace Tests.Document.Single.Get
 
 		protected override bool SupportsDeserialization => false;
 
+		protected override GetDescriptor<Project> NewDescriptor() =>
+			new GetDescriptor<Project>(DocumentPath<Project>.Id(this.ProjectId).Index(BadIndex));
+
 		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => (g) => g.Index(BadIndex);
 
 		protected override GetRequest<Project> Initializer => new GetRequest<Project>(this.ProjectId, index: BadIndex);
