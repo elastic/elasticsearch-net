@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text;
-using System.Threading;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.Configuration;
@@ -26,13 +22,6 @@ namespace Tests.Framework
 		public static ConnectionSettings GlobalDefaultSettings = CreateSettings();
 		public static readonly IElasticClient Default = new ElasticClient(GlobalDefaultSettings);
 		public static readonly IElasticClient DefaultInMemoryClient = GetInMemoryClient();
-		public static readonly IElasticClient DefaultClientWithSourceSerializer = TestClient.GetInMemoryClientWithSourceSerializer(
-			modifySettings: s => s,
-			sourceSerializerFactory: (builtin, settings) =>
-			{
-				var customSourceSerializer = new TestSourceSerializerBase(builtin, settings);
-				return TestClient.Configuration.UsingCustomSourceSerializer ? customSourceSerializer : null;
-			});
 
 		public static Uri CreateUri(int port = 9200, bool forceSsl = false) =>
 			new UriBuilder(forceSsl ? "https" : "http", Host, port).Uri;
@@ -151,14 +140,23 @@ namespace Tests.Framework
 
 			var connectionPool = createPool(CreateUri(port, forceSsl));
 			var connection = CreateConnection(forceInMemory: forceInMemory);
-			var s = new ConnectionSettings(connectionPool, connection, sourceSerializerFactory, propertyMappingProvider);
+			var s = new ConnectionSettings(connectionPool, connection, (builtin, values) =>
+			{
+                return !Configuration.UsingCustomSourceSerializer
+                	? null
+	                : sourceSerializerFactory == null
+		                ? new TestSourceSerializerBase(builtin, values)
+		                : sourceSerializerFactory(builtin, values);
+			}, propertyMappingProvider);
 
 			var defaultSettings = DefaultSettings(s);
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return settings;
 		}
 
-		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200) =>
+		public static IElasticClient GetInMemoryClient() => new ElasticClient(GlobalDefaultSettings);
+
+		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings, int port = 9200) =>
 			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: true).EnableDebugMode());
 
 		public static IElasticClient GetInMemoryClientWithSourceSerializer(

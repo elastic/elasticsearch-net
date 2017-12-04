@@ -83,7 +83,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
         public void ChangingBuiltInAnalyzer()
         {
             // hide
-            var client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming().PrettyJson());
+	        var client = TestClient.DefaultInMemoryClient;
 
             var createIndexResponse = client.CreateIndex("my-index", c => c
                 .Settings(s => s
