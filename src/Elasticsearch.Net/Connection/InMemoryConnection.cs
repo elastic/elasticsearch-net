@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,6 +12,7 @@ namespace Elasticsearch.Net
 		private readonly byte[] _responseBody;
 		private readonly int _statusCode;
 		private readonly Exception _exception;
+		internal static readonly byte[] EmptyBody = Encoding.UTF8.GetBytes("");
 
 		/// <summary>
 		/// Every request will succeed with this overload, note that it won't actually return mocked responses
@@ -29,14 +31,15 @@ namespace Elasticsearch.Net
 		}
 
 		public virtual Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
-			where TResponse : class, IElasticsearchResponse =>
+			where TResponse : class, IElasticsearchResponse, new() =>
 			this.ReturnConnectionStatusAsync<TResponse>(requestData, cancellationToken);
 
-		public virtual TResponse Request<TResponse>(RequestData requestData) where TResponse : class, IElasticsearchResponse =>
+		public virtual TResponse Request<TResponse>(RequestData requestData)
+			where TResponse : class, IElasticsearchResponse, new() =>
 			this.ReturnConnectionStatus<TResponse>(requestData);
 
 		protected TResponse ReturnConnectionStatus<TResponse>(RequestData requestData, byte[] responseBody = null, int? statusCode = null)
-			where TResponse : class, IElasticsearchResponse
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			var body = responseBody ?? _responseBody;
 			var data = requestData.PostData;
@@ -53,12 +56,12 @@ namespace Elasticsearch.Net
 			}
 			requestData.MadeItToResponse = true;
 			var sc = statusCode ?? this._statusCode;
-			Stream s = (body != null) ? new MemoryStream(body) : null;
+			Stream s = (body != null) ? new MemoryStream(body) : new MemoryStream(EmptyBody);
 			return ResponseBuilder.ToResponse<TResponse>(requestData, _exception, sc, null, s);
 		}
 
 		protected async Task<TResponse> ReturnConnectionStatusAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken, byte[] responseBody = null, int? statusCode = null)
-			where TResponse : class, IElasticsearchResponse
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			var body = responseBody ?? _responseBody;
 			var data = requestData.PostData;
@@ -76,7 +79,7 @@ namespace Elasticsearch.Net
 			requestData.MadeItToResponse = true;
 
 			var sc = statusCode ?? this._statusCode;
-			Stream s = (body != null) ? new MemoryStream(body) : null;
+			Stream s = (body != null) ? new MemoryStream(body) : new MemoryStream(EmptyBody);
 			return await ResponseBuilder.ToResponseAsync<TResponse>(requestData, _exception, sc, null, s, cancellationToken)
 				.ConfigureAwait(false);
 		}

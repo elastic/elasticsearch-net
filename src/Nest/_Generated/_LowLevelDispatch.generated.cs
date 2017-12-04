@@ -17,7 +17,7 @@ namespace Nest
 	internal partial class LowLevelDispatch
 	{
 
-		internal TResponse BulkDispatch<TResponse>(IRequest<BulkRequestParameters> p,SerializableData<IBulkRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse BulkDispatch<TResponse>(IRequest<BulkRequestParameters> p,SerializableData<IBulkRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -35,7 +35,7 @@ namespace Nest
 			throw InvalidDispatch("Bulk", p, new [] { POST, PUT }, "/_bulk", "/{index}/_bulk", "/{index}/{type}/_bulk");
 		}
 		
-		internal Task<TResponse> BulkDispatchAsync<TResponse>(IRequest<BulkRequestParameters> p,SerializableData<IBulkRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> BulkDispatchAsync<TResponse>(IRequest<BulkRequestParameters> p,SerializableData<IBulkRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -53,7 +53,7 @@ namespace Nest
 			throw InvalidDispatch("Bulk", p, new [] { POST, PUT }, "/_bulk", "/{index}/_bulk", "/{index}/{type}/_bulk");
 		}
 		
-		internal TResponse CatAliasesDispatch<TResponse>(IRequest<CatAliasesRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatAliasesDispatch<TResponse>(IRequest<CatAliasesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -65,7 +65,7 @@ namespace Nest
 			throw InvalidDispatch("CatAliases", p, new [] { GET }, "/_cat/aliases", "/_cat/aliases/{name}");
 		}
 		
-		internal Task<TResponse> CatAliasesDispatchAsync<TResponse>(IRequest<CatAliasesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatAliasesDispatchAsync<TResponse>(IRequest<CatAliasesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -77,7 +77,7 @@ namespace Nest
 			throw InvalidDispatch("CatAliases", p, new [] { GET }, "/_cat/aliases", "/_cat/aliases/{name}");
 		}
 		
-		internal TResponse CatAllocationDispatch<TResponse>(IRequest<CatAllocationRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatAllocationDispatch<TResponse>(IRequest<CatAllocationRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -89,7 +89,7 @@ namespace Nest
 			throw InvalidDispatch("CatAllocation", p, new [] { GET }, "/_cat/allocation", "/_cat/allocation/{node_id}");
 		}
 		
-		internal Task<TResponse> CatAllocationDispatchAsync<TResponse>(IRequest<CatAllocationRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatAllocationDispatchAsync<TResponse>(IRequest<CatAllocationRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -101,7 +101,7 @@ namespace Nest
 			throw InvalidDispatch("CatAllocation", p, new [] { GET }, "/_cat/allocation", "/_cat/allocation/{node_id}");
 		}
 		
-		internal TResponse CatCountDispatch<TResponse>(IRequest<CatCountRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatCountDispatch<TResponse>(IRequest<CatCountRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -113,7 +113,7 @@ namespace Nest
 			throw InvalidDispatch("CatCount", p, new [] { GET }, "/_cat/count", "/_cat/count/{index}");
 		}
 		
-		internal Task<TResponse> CatCountDispatchAsync<TResponse>(IRequest<CatCountRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatCountDispatchAsync<TResponse>(IRequest<CatCountRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -125,7 +125,7 @@ namespace Nest
 			throw InvalidDispatch("CatCount", p, new [] { GET }, "/_cat/count", "/_cat/count/{index}");
 		}
 		
-		internal TResponse CatFielddataDispatch<TResponse>(IRequest<CatFielddataRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatFielddataDispatch<TResponse>(IRequest<CatFielddataRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -137,7 +137,7 @@ namespace Nest
 			throw InvalidDispatch("CatFielddata", p, new [] { GET }, "/_cat/fielddata", "/_cat/fielddata/{fields}");
 		}
 		
-		internal Task<TResponse> CatFielddataDispatchAsync<TResponse>(IRequest<CatFielddataRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatFielddataDispatchAsync<TResponse>(IRequest<CatFielddataRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -149,7 +149,7 @@ namespace Nest
 			throw InvalidDispatch("CatFielddata", p, new [] { GET }, "/_cat/fielddata", "/_cat/fielddata/{fields}");
 		}
 		
-		internal TResponse CatHealthDispatch<TResponse>(IRequest<CatHealthRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatHealthDispatch<TResponse>(IRequest<CatHealthRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -160,7 +160,7 @@ namespace Nest
 			throw InvalidDispatch("CatHealth", p, new [] { GET }, "/_cat/health");
 		}
 		
-		internal Task<TResponse> CatHealthDispatchAsync<TResponse>(IRequest<CatHealthRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatHealthDispatchAsync<TResponse>(IRequest<CatHealthRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -171,7 +171,7 @@ namespace Nest
 			throw InvalidDispatch("CatHealth", p, new [] { GET }, "/_cat/health");
 		}
 		
-		internal TResponse CatHelpDispatch<TResponse>(IRequest<CatHelpRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatHelpDispatch<TResponse>(IRequest<CatHelpRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -182,7 +182,7 @@ namespace Nest
 			throw InvalidDispatch("CatHelp", p, new [] { GET }, "/_cat");
 		}
 		
-		internal Task<TResponse> CatHelpDispatchAsync<TResponse>(IRequest<CatHelpRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatHelpDispatchAsync<TResponse>(IRequest<CatHelpRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -193,7 +193,7 @@ namespace Nest
 			throw InvalidDispatch("CatHelp", p, new [] { GET }, "/_cat");
 		}
 		
-		internal TResponse CatIndicesDispatch<TResponse>(IRequest<CatIndicesRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatIndicesDispatch<TResponse>(IRequest<CatIndicesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -205,7 +205,7 @@ namespace Nest
 			throw InvalidDispatch("CatIndices", p, new [] { GET }, "/_cat/indices", "/_cat/indices/{index}");
 		}
 		
-		internal Task<TResponse> CatIndicesDispatchAsync<TResponse>(IRequest<CatIndicesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatIndicesDispatchAsync<TResponse>(IRequest<CatIndicesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -217,7 +217,7 @@ namespace Nest
 			throw InvalidDispatch("CatIndices", p, new [] { GET }, "/_cat/indices", "/_cat/indices/{index}");
 		}
 		
-		internal TResponse CatMasterDispatch<TResponse>(IRequest<CatMasterRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatMasterDispatch<TResponse>(IRequest<CatMasterRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -228,7 +228,7 @@ namespace Nest
 			throw InvalidDispatch("CatMaster", p, new [] { GET }, "/_cat/master");
 		}
 		
-		internal Task<TResponse> CatMasterDispatchAsync<TResponse>(IRequest<CatMasterRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatMasterDispatchAsync<TResponse>(IRequest<CatMasterRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -239,7 +239,7 @@ namespace Nest
 			throw InvalidDispatch("CatMaster", p, new [] { GET }, "/_cat/master");
 		}
 		
-		internal TResponse CatNodeattrsDispatch<TResponse>(IRequest<CatNodeAttributesRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatNodeattrsDispatch<TResponse>(IRequest<CatNodeAttributesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -250,7 +250,7 @@ namespace Nest
 			throw InvalidDispatch("CatNodeattrs", p, new [] { GET }, "/_cat/nodeattrs");
 		}
 		
-		internal Task<TResponse> CatNodeattrsDispatchAsync<TResponse>(IRequest<CatNodeAttributesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatNodeattrsDispatchAsync<TResponse>(IRequest<CatNodeAttributesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -261,7 +261,7 @@ namespace Nest
 			throw InvalidDispatch("CatNodeattrs", p, new [] { GET }, "/_cat/nodeattrs");
 		}
 		
-		internal TResponse CatNodesDispatch<TResponse>(IRequest<CatNodesRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatNodesDispatch<TResponse>(IRequest<CatNodesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -272,7 +272,7 @@ namespace Nest
 			throw InvalidDispatch("CatNodes", p, new [] { GET }, "/_cat/nodes");
 		}
 		
-		internal Task<TResponse> CatNodesDispatchAsync<TResponse>(IRequest<CatNodesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatNodesDispatchAsync<TResponse>(IRequest<CatNodesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -283,7 +283,7 @@ namespace Nest
 			throw InvalidDispatch("CatNodes", p, new [] { GET }, "/_cat/nodes");
 		}
 		
-		internal TResponse CatPendingTasksDispatch<TResponse>(IRequest<CatPendingTasksRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatPendingTasksDispatch<TResponse>(IRequest<CatPendingTasksRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -294,7 +294,7 @@ namespace Nest
 			throw InvalidDispatch("CatPendingTasks", p, new [] { GET }, "/_cat/pending_tasks");
 		}
 		
-		internal Task<TResponse> CatPendingTasksDispatchAsync<TResponse>(IRequest<CatPendingTasksRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatPendingTasksDispatchAsync<TResponse>(IRequest<CatPendingTasksRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -305,7 +305,7 @@ namespace Nest
 			throw InvalidDispatch("CatPendingTasks", p, new [] { GET }, "/_cat/pending_tasks");
 		}
 		
-		internal TResponse CatPluginsDispatch<TResponse>(IRequest<CatPluginsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatPluginsDispatch<TResponse>(IRequest<CatPluginsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -316,7 +316,7 @@ namespace Nest
 			throw InvalidDispatch("CatPlugins", p, new [] { GET }, "/_cat/plugins");
 		}
 		
-		internal Task<TResponse> CatPluginsDispatchAsync<TResponse>(IRequest<CatPluginsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatPluginsDispatchAsync<TResponse>(IRequest<CatPluginsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -327,7 +327,7 @@ namespace Nest
 			throw InvalidDispatch("CatPlugins", p, new [] { GET }, "/_cat/plugins");
 		}
 		
-		internal TResponse CatRecoveryDispatch<TResponse>(IRequest<CatRecoveryRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatRecoveryDispatch<TResponse>(IRequest<CatRecoveryRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -339,7 +339,7 @@ namespace Nest
 			throw InvalidDispatch("CatRecovery", p, new [] { GET }, "/_cat/recovery", "/_cat/recovery/{index}");
 		}
 		
-		internal Task<TResponse> CatRecoveryDispatchAsync<TResponse>(IRequest<CatRecoveryRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatRecoveryDispatchAsync<TResponse>(IRequest<CatRecoveryRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -351,7 +351,7 @@ namespace Nest
 			throw InvalidDispatch("CatRecovery", p, new [] { GET }, "/_cat/recovery", "/_cat/recovery/{index}");
 		}
 		
-		internal TResponse CatRepositoriesDispatch<TResponse>(IRequest<CatRepositoriesRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatRepositoriesDispatch<TResponse>(IRequest<CatRepositoriesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -362,7 +362,7 @@ namespace Nest
 			throw InvalidDispatch("CatRepositories", p, new [] { GET }, "/_cat/repositories");
 		}
 		
-		internal Task<TResponse> CatRepositoriesDispatchAsync<TResponse>(IRequest<CatRepositoriesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatRepositoriesDispatchAsync<TResponse>(IRequest<CatRepositoriesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -373,7 +373,7 @@ namespace Nest
 			throw InvalidDispatch("CatRepositories", p, new [] { GET }, "/_cat/repositories");
 		}
 		
-		internal TResponse CatSegmentsDispatch<TResponse>(IRequest<CatSegmentsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatSegmentsDispatch<TResponse>(IRequest<CatSegmentsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -385,7 +385,7 @@ namespace Nest
 			throw InvalidDispatch("CatSegments", p, new [] { GET }, "/_cat/segments", "/_cat/segments/{index}");
 		}
 		
-		internal Task<TResponse> CatSegmentsDispatchAsync<TResponse>(IRequest<CatSegmentsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatSegmentsDispatchAsync<TResponse>(IRequest<CatSegmentsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -397,7 +397,7 @@ namespace Nest
 			throw InvalidDispatch("CatSegments", p, new [] { GET }, "/_cat/segments", "/_cat/segments/{index}");
 		}
 		
-		internal TResponse CatShardsDispatch<TResponse>(IRequest<CatShardsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatShardsDispatch<TResponse>(IRequest<CatShardsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -409,7 +409,7 @@ namespace Nest
 			throw InvalidDispatch("CatShards", p, new [] { GET }, "/_cat/shards", "/_cat/shards/{index}");
 		}
 		
-		internal Task<TResponse> CatShardsDispatchAsync<TResponse>(IRequest<CatShardsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatShardsDispatchAsync<TResponse>(IRequest<CatShardsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -421,7 +421,7 @@ namespace Nest
 			throw InvalidDispatch("CatShards", p, new [] { GET }, "/_cat/shards", "/_cat/shards/{index}");
 		}
 		
-		internal TResponse CatSnapshotsDispatch<TResponse>(IRequest<CatSnapshotsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatSnapshotsDispatch<TResponse>(IRequest<CatSnapshotsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -433,7 +433,7 @@ namespace Nest
 			throw InvalidDispatch("CatSnapshots", p, new [] { GET }, "/_cat/snapshots", "/_cat/snapshots/{repository}");
 		}
 		
-		internal Task<TResponse> CatSnapshotsDispatchAsync<TResponse>(IRequest<CatSnapshotsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatSnapshotsDispatchAsync<TResponse>(IRequest<CatSnapshotsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -445,7 +445,7 @@ namespace Nest
 			throw InvalidDispatch("CatSnapshots", p, new [] { GET }, "/_cat/snapshots", "/_cat/snapshots/{repository}");
 		}
 		
-		internal TResponse CatTasksDispatch<TResponse>(IRequest<CatTasksRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatTasksDispatch<TResponse>(IRequest<CatTasksRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -456,7 +456,7 @@ namespace Nest
 			throw InvalidDispatch("CatTasks", p, new [] { GET }, "/_cat/tasks");
 		}
 		
-		internal Task<TResponse> CatTasksDispatchAsync<TResponse>(IRequest<CatTasksRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatTasksDispatchAsync<TResponse>(IRequest<CatTasksRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -467,7 +467,7 @@ namespace Nest
 			throw InvalidDispatch("CatTasks", p, new [] { GET }, "/_cat/tasks");
 		}
 		
-		internal TResponse CatTemplatesDispatch<TResponse>(IRequest<CatTemplatesRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatTemplatesDispatch<TResponse>(IRequest<CatTemplatesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -479,7 +479,7 @@ namespace Nest
 			throw InvalidDispatch("CatTemplates", p, new [] { GET }, "/_cat/templates", "/_cat/templates/{name}");
 		}
 		
-		internal Task<TResponse> CatTemplatesDispatchAsync<TResponse>(IRequest<CatTemplatesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatTemplatesDispatchAsync<TResponse>(IRequest<CatTemplatesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -491,7 +491,7 @@ namespace Nest
 			throw InvalidDispatch("CatTemplates", p, new [] { GET }, "/_cat/templates", "/_cat/templates/{name}");
 		}
 		
-		internal TResponse CatThreadPoolDispatch<TResponse>(IRequest<CatThreadPoolRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse CatThreadPoolDispatch<TResponse>(IRequest<CatThreadPoolRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -503,7 +503,7 @@ namespace Nest
 			throw InvalidDispatch("CatThreadPool", p, new [] { GET }, "/_cat/thread_pool", "/_cat/thread_pool/{thread_pool_patterns}");
 		}
 		
-		internal Task<TResponse> CatThreadPoolDispatchAsync<TResponse>(IRequest<CatThreadPoolRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CatThreadPoolDispatchAsync<TResponse>(IRequest<CatThreadPoolRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -515,7 +515,7 @@ namespace Nest
 			throw InvalidDispatch("CatThreadPool", p, new [] { GET }, "/_cat/thread_pool", "/_cat/thread_pool/{thread_pool_patterns}");
 		}
 		
-		internal TResponse ClearScrollDispatch<TResponse>(IRequest<ClearScrollRequestParameters> p,SerializableData<IClearScrollRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse ClearScrollDispatch<TResponse>(IRequest<ClearScrollRequestParameters> p,SerializableData<IClearScrollRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -526,7 +526,7 @@ namespace Nest
 			throw InvalidDispatch("ClearScroll", p, new [] { DELETE }, "/_search/scroll");
 		}
 		
-		internal Task<TResponse> ClearScrollDispatchAsync<TResponse>(IRequest<ClearScrollRequestParameters> p,SerializableData<IClearScrollRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> ClearScrollDispatchAsync<TResponse>(IRequest<ClearScrollRequestParameters> p,SerializableData<IClearScrollRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -537,7 +537,7 @@ namespace Nest
 			throw InvalidDispatch("ClearScroll", p, new [] { DELETE }, "/_search/scroll");
 		}
 		
-		internal TResponse ClusterAllocationExplainDispatch<TResponse>(IRequest<ClusterAllocationExplainRequestParameters> p,SerializableData<IClusterAllocationExplainRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse ClusterAllocationExplainDispatch<TResponse>(IRequest<ClusterAllocationExplainRequestParameters> p,SerializableData<IClusterAllocationExplainRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -551,7 +551,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterAllocationExplain", p, new [] { GET, POST }, "/_cluster/allocation/explain");
 		}
 		
-		internal Task<TResponse> ClusterAllocationExplainDispatchAsync<TResponse>(IRequest<ClusterAllocationExplainRequestParameters> p,SerializableData<IClusterAllocationExplainRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> ClusterAllocationExplainDispatchAsync<TResponse>(IRequest<ClusterAllocationExplainRequestParameters> p,SerializableData<IClusterAllocationExplainRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -565,7 +565,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterAllocationExplain", p, new [] { GET, POST }, "/_cluster/allocation/explain");
 		}
 		
-		internal TResponse ClusterGetSettingsDispatch<TResponse>(IRequest<ClusterGetSettingsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse ClusterGetSettingsDispatch<TResponse>(IRequest<ClusterGetSettingsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -576,7 +576,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterGetSettings", p, new [] { GET }, "/_cluster/settings");
 		}
 		
-		internal Task<TResponse> ClusterGetSettingsDispatchAsync<TResponse>(IRequest<ClusterGetSettingsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> ClusterGetSettingsDispatchAsync<TResponse>(IRequest<ClusterGetSettingsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -587,7 +587,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterGetSettings", p, new [] { GET }, "/_cluster/settings");
 		}
 		
-		internal TResponse ClusterHealthDispatch<TResponse>(IRequest<ClusterHealthRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse ClusterHealthDispatch<TResponse>(IRequest<ClusterHealthRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -599,7 +599,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterHealth", p, new [] { GET }, "/_cluster/health", "/_cluster/health/{index}");
 		}
 		
-		internal Task<TResponse> ClusterHealthDispatchAsync<TResponse>(IRequest<ClusterHealthRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> ClusterHealthDispatchAsync<TResponse>(IRequest<ClusterHealthRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -611,7 +611,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterHealth", p, new [] { GET }, "/_cluster/health", "/_cluster/health/{index}");
 		}
 		
-		internal TResponse ClusterPendingTasksDispatch<TResponse>(IRequest<ClusterPendingTasksRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse ClusterPendingTasksDispatch<TResponse>(IRequest<ClusterPendingTasksRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -622,7 +622,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterPendingTasks", p, new [] { GET }, "/_cluster/pending_tasks");
 		}
 		
-		internal Task<TResponse> ClusterPendingTasksDispatchAsync<TResponse>(IRequest<ClusterPendingTasksRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> ClusterPendingTasksDispatchAsync<TResponse>(IRequest<ClusterPendingTasksRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -633,7 +633,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterPendingTasks", p, new [] { GET }, "/_cluster/pending_tasks");
 		}
 		
-		internal TResponse ClusterPutSettingsDispatch<TResponse>(IRequest<ClusterPutSettingsRequestParameters> p,SerializableData<IClusterPutSettingsRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse ClusterPutSettingsDispatch<TResponse>(IRequest<ClusterPutSettingsRequestParameters> p,SerializableData<IClusterPutSettingsRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -644,7 +644,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterPutSettings", p, new [] { PUT }, "/_cluster/settings");
 		}
 		
-		internal Task<TResponse> ClusterPutSettingsDispatchAsync<TResponse>(IRequest<ClusterPutSettingsRequestParameters> p,SerializableData<IClusterPutSettingsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> ClusterPutSettingsDispatchAsync<TResponse>(IRequest<ClusterPutSettingsRequestParameters> p,SerializableData<IClusterPutSettingsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -655,7 +655,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterPutSettings", p, new [] { PUT }, "/_cluster/settings");
 		}
 		
-		internal TResponse ClusterRemoteInfoDispatch<TResponse>(IRequest<RemoteInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse ClusterRemoteInfoDispatch<TResponse>(IRequest<RemoteInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -666,7 +666,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterRemoteInfo", p, new [] { GET }, "/_remote/info");
 		}
 		
-		internal Task<TResponse> ClusterRemoteInfoDispatchAsync<TResponse>(IRequest<RemoteInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> ClusterRemoteInfoDispatchAsync<TResponse>(IRequest<RemoteInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -677,7 +677,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterRemoteInfo", p, new [] { GET }, "/_remote/info");
 		}
 		
-		internal TResponse ClusterRerouteDispatch<TResponse>(IRequest<ClusterRerouteRequestParameters> p,SerializableData<IClusterRerouteRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse ClusterRerouteDispatch<TResponse>(IRequest<ClusterRerouteRequestParameters> p,SerializableData<IClusterRerouteRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -688,7 +688,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterReroute", p, new [] { POST }, "/_cluster/reroute");
 		}
 		
-		internal Task<TResponse> ClusterRerouteDispatchAsync<TResponse>(IRequest<ClusterRerouteRequestParameters> p,SerializableData<IClusterRerouteRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> ClusterRerouteDispatchAsync<TResponse>(IRequest<ClusterRerouteRequestParameters> p,SerializableData<IClusterRerouteRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -699,7 +699,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterReroute", p, new [] { POST }, "/_cluster/reroute");
 		}
 		
-		internal TResponse ClusterStateDispatch<TResponse>(IRequest<ClusterStateRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse ClusterStateDispatch<TResponse>(IRequest<ClusterStateRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -712,7 +712,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterState", p, new [] { GET }, "/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}");
 		}
 		
-		internal Task<TResponse> ClusterStateDispatchAsync<TResponse>(IRequest<ClusterStateRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> ClusterStateDispatchAsync<TResponse>(IRequest<ClusterStateRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -725,7 +725,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterState", p, new [] { GET }, "/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}");
 		}
 		
-		internal TResponse ClusterStatsDispatch<TResponse>(IRequest<ClusterStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse ClusterStatsDispatch<TResponse>(IRequest<ClusterStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -737,7 +737,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterStats", p, new [] { GET }, "/_cluster/stats", "/_cluster/stats/nodes/{node_id}");
 		}
 		
-		internal Task<TResponse> ClusterStatsDispatchAsync<TResponse>(IRequest<ClusterStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> ClusterStatsDispatchAsync<TResponse>(IRequest<ClusterStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -749,7 +749,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterStats", p, new [] { GET }, "/_cluster/stats", "/_cluster/stats/nodes/{node_id}");
 		}
 		
-		internal TResponse CountDispatch<TResponse>(IRequest<CountRequestParameters> p,SerializableData<ICountRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse CountDispatch<TResponse>(IRequest<CountRequestParameters> p,SerializableData<ICountRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -767,7 +767,7 @@ namespace Nest
 			throw InvalidDispatch("Count", p, new [] { POST, GET }, "/_count", "/{index}/_count", "/{index}/{type}/_count");
 		}
 		
-		internal Task<TResponse> CountDispatchAsync<TResponse>(IRequest<CountRequestParameters> p,SerializableData<ICountRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> CountDispatchAsync<TResponse>(IRequest<CountRequestParameters> p,SerializableData<ICountRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -785,7 +785,7 @@ namespace Nest
 			throw InvalidDispatch("Count", p, new [] { POST, GET }, "/_count", "/{index}/_count", "/{index}/{type}/_count");
 		}
 		
-		internal TResponse CreateDispatch<TResponse,TDocument>(IRequest<CreateRequestParameters> p,SerializableData<ICreateRequest<TDocument>> body) where TResponse : class, IElasticsearchResponse where TDocument : class
+		internal TResponse CreateDispatch<TResponse,TDocument>(IRequest<CreateRequestParameters> p,SerializableData<ICreateRequest<TDocument>> body) where TResponse : class, IElasticsearchResponse, new() where TDocument : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -801,7 +801,7 @@ namespace Nest
 			throw InvalidDispatch("Create", p, new [] { PUT, POST }, "/{index}/{type}/{id}/_create");
 		}
 		
-		internal Task<TResponse> CreateDispatchAsync<TResponse,TDocument>(IRequest<CreateRequestParameters> p,SerializableData<ICreateRequest<TDocument>> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse where TDocument : class
+		internal Task<TResponse> CreateDispatchAsync<TResponse,TDocument>(IRequest<CreateRequestParameters> p,SerializableData<ICreateRequest<TDocument>> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new() where TDocument : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -817,7 +817,7 @@ namespace Nest
 			throw InvalidDispatch("Create", p, new [] { PUT, POST }, "/{index}/{type}/{id}/_create");
 		}
 		
-		internal TResponse DeleteDispatch<TResponse>(IRequest<DeleteRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse DeleteDispatch<TResponse>(IRequest<DeleteRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -829,7 +829,7 @@ namespace Nest
 			throw InvalidDispatch("Delete", p, new [] { DELETE }, "/{index}/{type}/{id}");
 		}
 		
-		internal Task<TResponse> DeleteDispatchAsync<TResponse>(IRequest<DeleteRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> DeleteDispatchAsync<TResponse>(IRequest<DeleteRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -841,7 +841,7 @@ namespace Nest
 			throw InvalidDispatch("Delete", p, new [] { DELETE }, "/{index}/{type}/{id}");
 		}
 		
-		internal TResponse DeleteByQueryDispatch<TResponse>(IRequest<DeleteByQueryRequestParameters> p,SerializableData<IDeleteByQueryRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse DeleteByQueryDispatch<TResponse>(IRequest<DeleteByQueryRequestParameters> p,SerializableData<IDeleteByQueryRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -854,7 +854,7 @@ namespace Nest
 			throw InvalidDispatch("DeleteByQuery", p, new [] { POST }, "/{index}/_delete_by_query", "/{index}/{type}/_delete_by_query");
 		}
 		
-		internal Task<TResponse> DeleteByQueryDispatchAsync<TResponse>(IRequest<DeleteByQueryRequestParameters> p,SerializableData<IDeleteByQueryRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> DeleteByQueryDispatchAsync<TResponse>(IRequest<DeleteByQueryRequestParameters> p,SerializableData<IDeleteByQueryRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -867,7 +867,7 @@ namespace Nest
 			throw InvalidDispatch("DeleteByQuery", p, new [] { POST }, "/{index}/_delete_by_query", "/{index}/{type}/_delete_by_query");
 		}
 		
-		internal TResponse DeleteScriptDispatch<TResponse>(IRequest<DeleteScriptRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse DeleteScriptDispatch<TResponse>(IRequest<DeleteScriptRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -879,7 +879,7 @@ namespace Nest
 			throw InvalidDispatch("DeleteScript", p, new [] { DELETE }, "/_scripts/{id}");
 		}
 		
-		internal Task<TResponse> DeleteScriptDispatchAsync<TResponse>(IRequest<DeleteScriptRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> DeleteScriptDispatchAsync<TResponse>(IRequest<DeleteScriptRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -891,7 +891,7 @@ namespace Nest
 			throw InvalidDispatch("DeleteScript", p, new [] { DELETE }, "/_scripts/{id}");
 		}
 		
-		internal TResponse ExistsDispatch<TResponse>(IRequest<DocumentExistsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse ExistsDispatch<TResponse>(IRequest<DocumentExistsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -903,7 +903,7 @@ namespace Nest
 			throw InvalidDispatch("Exists", p, new [] { HEAD }, "/{index}/{type}/{id}");
 		}
 		
-		internal Task<TResponse> ExistsDispatchAsync<TResponse>(IRequest<DocumentExistsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> ExistsDispatchAsync<TResponse>(IRequest<DocumentExistsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -915,7 +915,7 @@ namespace Nest
 			throw InvalidDispatch("Exists", p, new [] { HEAD }, "/{index}/{type}/{id}");
 		}
 		
-		internal TResponse ExistsSourceDispatch<TResponse>(IRequest<SourceExistsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse ExistsSourceDispatch<TResponse>(IRequest<SourceExistsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -927,7 +927,7 @@ namespace Nest
 			throw InvalidDispatch("ExistsSource", p, new [] { HEAD }, "/{index}/{type}/{id}/_source");
 		}
 		
-		internal Task<TResponse> ExistsSourceDispatchAsync<TResponse>(IRequest<SourceExistsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> ExistsSourceDispatchAsync<TResponse>(IRequest<SourceExistsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -939,7 +939,7 @@ namespace Nest
 			throw InvalidDispatch("ExistsSource", p, new [] { HEAD }, "/{index}/{type}/{id}/_source");
 		}
 		
-		internal TResponse ExplainDispatch<TResponse,TDocument>(IRequest<ExplainRequestParameters> p,SerializableData<IExplainRequest<TDocument>> body) where TResponse : class, IElasticsearchResponse where TDocument : class
+		internal TResponse ExplainDispatch<TResponse,TDocument>(IRequest<ExplainRequestParameters> p,SerializableData<IExplainRequest<TDocument>> body) where TResponse : class, IElasticsearchResponse, new() where TDocument : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -955,7 +955,7 @@ namespace Nest
 			throw InvalidDispatch("Explain", p, new [] { GET, POST }, "/{index}/{type}/{id}/_explain");
 		}
 		
-		internal Task<TResponse> ExplainDispatchAsync<TResponse,TDocument>(IRequest<ExplainRequestParameters> p,SerializableData<IExplainRequest<TDocument>> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse where TDocument : class
+		internal Task<TResponse> ExplainDispatchAsync<TResponse,TDocument>(IRequest<ExplainRequestParameters> p,SerializableData<IExplainRequest<TDocument>> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new() where TDocument : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -971,7 +971,7 @@ namespace Nest
 			throw InvalidDispatch("Explain", p, new [] { GET, POST }, "/{index}/{type}/{id}/_explain");
 		}
 		
-		internal TResponse FieldCapsDispatch<TResponse>(IRequest<FieldCapabilitiesRequestParameters> p,SerializableData<IFieldCapabilitiesRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse FieldCapsDispatch<TResponse>(IRequest<FieldCapabilitiesRequestParameters> p,SerializableData<IFieldCapabilitiesRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -987,7 +987,7 @@ namespace Nest
 			throw InvalidDispatch("FieldCaps", p, new [] { GET, POST }, "/_field_caps", "/{index}/_field_caps");
 		}
 		
-		internal Task<TResponse> FieldCapsDispatchAsync<TResponse>(IRequest<FieldCapabilitiesRequestParameters> p,SerializableData<IFieldCapabilitiesRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> FieldCapsDispatchAsync<TResponse>(IRequest<FieldCapabilitiesRequestParameters> p,SerializableData<IFieldCapabilitiesRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1003,7 +1003,7 @@ namespace Nest
 			throw InvalidDispatch("FieldCaps", p, new [] { GET, POST }, "/_field_caps", "/{index}/_field_caps");
 		}
 		
-		internal TResponse GetDispatch<TResponse>(IRequest<GetRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse GetDispatch<TResponse>(IRequest<GetRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1015,7 +1015,7 @@ namespace Nest
 			throw InvalidDispatch("Get", p, new [] { GET }, "/{index}/{type}/{id}");
 		}
 		
-		internal Task<TResponse> GetDispatchAsync<TResponse>(IRequest<GetRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> GetDispatchAsync<TResponse>(IRequest<GetRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1027,7 +1027,7 @@ namespace Nest
 			throw InvalidDispatch("Get", p, new [] { GET }, "/{index}/{type}/{id}");
 		}
 		
-		internal TResponse GetScriptDispatch<TResponse>(IRequest<GetScriptRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse GetScriptDispatch<TResponse>(IRequest<GetScriptRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1039,7 +1039,7 @@ namespace Nest
 			throw InvalidDispatch("GetScript", p, new [] { GET }, "/_scripts/{id}");
 		}
 		
-		internal Task<TResponse> GetScriptDispatchAsync<TResponse>(IRequest<GetScriptRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> GetScriptDispatchAsync<TResponse>(IRequest<GetScriptRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1051,7 +1051,7 @@ namespace Nest
 			throw InvalidDispatch("GetScript", p, new [] { GET }, "/_scripts/{id}");
 		}
 		
-		internal TResponse GetSourceDispatch<TResponse>(IRequest<SourceRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse GetSourceDispatch<TResponse>(IRequest<SourceRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1063,7 +1063,7 @@ namespace Nest
 			throw InvalidDispatch("GetSource", p, new [] { GET }, "/{index}/{type}/{id}/_source");
 		}
 		
-		internal Task<TResponse> GetSourceDispatchAsync<TResponse>(IRequest<SourceRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> GetSourceDispatchAsync<TResponse>(IRequest<SourceRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1075,7 +1075,7 @@ namespace Nest
 			throw InvalidDispatch("GetSource", p, new [] { GET }, "/{index}/{type}/{id}/_source");
 		}
 		
-		internal TResponse IndexDispatch<TResponse,TDocument>(IRequest<IndexRequestParameters> p,SerializableData<IIndexRequest<TDocument>> body) where TResponse : class, IElasticsearchResponse where TDocument : class
+		internal TResponse IndexDispatch<TResponse,TDocument>(IRequest<IndexRequestParameters> p,SerializableData<IIndexRequest<TDocument>> body) where TResponse : class, IElasticsearchResponse, new() where TDocument : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1093,7 +1093,7 @@ namespace Nest
 			throw InvalidDispatch("Index", p, new [] { POST, PUT }, "/{index}/{type}", "/{index}/{type}/{id}");
 		}
 		
-		internal Task<TResponse> IndexDispatchAsync<TResponse,TDocument>(IRequest<IndexRequestParameters> p,SerializableData<IIndexRequest<TDocument>> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse where TDocument : class
+		internal Task<TResponse> IndexDispatchAsync<TResponse,TDocument>(IRequest<IndexRequestParameters> p,SerializableData<IIndexRequest<TDocument>> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new() where TDocument : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1111,7 +1111,7 @@ namespace Nest
 			throw InvalidDispatch("Index", p, new [] { POST, PUT }, "/{index}/{type}", "/{index}/{type}/{id}");
 		}
 		
-		internal TResponse IndicesAnalyzeDispatch<TResponse>(IRequest<AnalyzeRequestParameters> p,SerializableData<IAnalyzeRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesAnalyzeDispatch<TResponse>(IRequest<AnalyzeRequestParameters> p,SerializableData<IAnalyzeRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1127,7 +1127,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesAnalyze", p, new [] { GET, POST }, "/_analyze", "/{index}/_analyze");
 		}
 		
-		internal Task<TResponse> IndicesAnalyzeDispatchAsync<TResponse>(IRequest<AnalyzeRequestParameters> p,SerializableData<IAnalyzeRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesAnalyzeDispatchAsync<TResponse>(IRequest<AnalyzeRequestParameters> p,SerializableData<IAnalyzeRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1143,7 +1143,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesAnalyze", p, new [] { GET, POST }, "/_analyze", "/{index}/_analyze");
 		}
 		
-		internal TResponse IndicesClearCacheDispatch<TResponse>(IRequest<ClearCacheRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesClearCacheDispatch<TResponse>(IRequest<ClearCacheRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1159,7 +1159,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesClearCache", p, new [] { POST, GET }, "/_cache/clear", "/{index}/_cache/clear");
 		}
 		
-		internal Task<TResponse> IndicesClearCacheDispatchAsync<TResponse>(IRequest<ClearCacheRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesClearCacheDispatchAsync<TResponse>(IRequest<ClearCacheRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1175,7 +1175,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesClearCache", p, new [] { POST, GET }, "/_cache/clear", "/{index}/_cache/clear");
 		}
 		
-		internal TResponse IndicesCloseDispatch<TResponse>(IRequest<CloseIndexRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesCloseDispatch<TResponse>(IRequest<CloseIndexRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1187,7 +1187,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesClose", p, new [] { POST }, "/{index}/_close");
 		}
 		
-		internal Task<TResponse> IndicesCloseDispatchAsync<TResponse>(IRequest<CloseIndexRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesCloseDispatchAsync<TResponse>(IRequest<CloseIndexRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1199,7 +1199,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesClose", p, new [] { POST }, "/{index}/_close");
 		}
 		
-		internal TResponse IndicesCreateDispatch<TResponse>(IRequest<CreateIndexRequestParameters> p,SerializableData<ICreateIndexRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesCreateDispatch<TResponse>(IRequest<CreateIndexRequestParameters> p,SerializableData<ICreateIndexRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1211,7 +1211,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesCreate", p, new [] { PUT }, "/{index}");
 		}
 		
-		internal Task<TResponse> IndicesCreateDispatchAsync<TResponse>(IRequest<CreateIndexRequestParameters> p,SerializableData<ICreateIndexRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesCreateDispatchAsync<TResponse>(IRequest<CreateIndexRequestParameters> p,SerializableData<ICreateIndexRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1223,7 +1223,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesCreate", p, new [] { PUT }, "/{index}");
 		}
 		
-		internal TResponse IndicesDeleteDispatch<TResponse>(IRequest<DeleteIndexRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesDeleteDispatch<TResponse>(IRequest<DeleteIndexRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1235,7 +1235,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDelete", p, new [] { DELETE }, "/{index}");
 		}
 		
-		internal Task<TResponse> IndicesDeleteDispatchAsync<TResponse>(IRequest<DeleteIndexRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesDeleteDispatchAsync<TResponse>(IRequest<DeleteIndexRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1247,7 +1247,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDelete", p, new [] { DELETE }, "/{index}");
 		}
 		
-		internal TResponse IndicesDeleteAliasDispatch<TResponse>(IRequest<DeleteAliasRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesDeleteAliasDispatch<TResponse>(IRequest<DeleteAliasRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1259,7 +1259,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDeleteAlias", p, new [] { DELETE }, "/{index}/_alias/{name}", "/{index}/_aliases/{name}");
 		}
 		
-		internal Task<TResponse> IndicesDeleteAliasDispatchAsync<TResponse>(IRequest<DeleteAliasRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesDeleteAliasDispatchAsync<TResponse>(IRequest<DeleteAliasRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1271,7 +1271,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDeleteAlias", p, new [] { DELETE }, "/{index}/_alias/{name}", "/{index}/_aliases/{name}");
 		}
 		
-		internal TResponse IndicesDeleteTemplateDispatch<TResponse>(IRequest<DeleteIndexTemplateRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesDeleteTemplateDispatch<TResponse>(IRequest<DeleteIndexTemplateRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1283,7 +1283,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDeleteTemplate", p, new [] { DELETE }, "/_template/{name}");
 		}
 		
-		internal Task<TResponse> IndicesDeleteTemplateDispatchAsync<TResponse>(IRequest<DeleteIndexTemplateRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesDeleteTemplateDispatchAsync<TResponse>(IRequest<DeleteIndexTemplateRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1295,7 +1295,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDeleteTemplate", p, new [] { DELETE }, "/_template/{name}");
 		}
 		
-		internal TResponse IndicesExistsDispatch<TResponse>(IRequest<IndexExistsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesExistsDispatch<TResponse>(IRequest<IndexExistsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1307,7 +1307,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExists", p, new [] { HEAD }, "/{index}");
 		}
 		
-		internal Task<TResponse> IndicesExistsDispatchAsync<TResponse>(IRequest<IndexExistsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesExistsDispatchAsync<TResponse>(IRequest<IndexExistsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1319,7 +1319,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExists", p, new [] { HEAD }, "/{index}");
 		}
 		
-		internal TResponse IndicesExistsAliasDispatch<TResponse>(IRequest<AliasExistsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesExistsAliasDispatch<TResponse>(IRequest<AliasExistsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1332,7 +1332,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExistsAlias", p, new [] { HEAD }, "/_alias/{name}", "/{index}/_alias/{name}");
 		}
 		
-		internal Task<TResponse> IndicesExistsAliasDispatchAsync<TResponse>(IRequest<AliasExistsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesExistsAliasDispatchAsync<TResponse>(IRequest<AliasExistsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1345,7 +1345,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExistsAlias", p, new [] { HEAD }, "/_alias/{name}", "/{index}/_alias/{name}");
 		}
 		
-		internal TResponse IndicesExistsTemplateDispatch<TResponse>(IRequest<IndexTemplateExistsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesExistsTemplateDispatch<TResponse>(IRequest<IndexTemplateExistsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1357,7 +1357,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExistsTemplate", p, new [] { HEAD }, "/_template/{name}");
 		}
 		
-		internal Task<TResponse> IndicesExistsTemplateDispatchAsync<TResponse>(IRequest<IndexTemplateExistsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesExistsTemplateDispatchAsync<TResponse>(IRequest<IndexTemplateExistsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1369,7 +1369,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExistsTemplate", p, new [] { HEAD }, "/_template/{name}");
 		}
 		
-		internal TResponse IndicesExistsTypeDispatch<TResponse>(IRequest<TypeExistsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesExistsTypeDispatch<TResponse>(IRequest<TypeExistsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1381,7 +1381,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExistsType", p, new [] { HEAD }, "/{index}/_mapping/{type}");
 		}
 		
-		internal Task<TResponse> IndicesExistsTypeDispatchAsync<TResponse>(IRequest<TypeExistsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesExistsTypeDispatchAsync<TResponse>(IRequest<TypeExistsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1393,7 +1393,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExistsType", p, new [] { HEAD }, "/{index}/_mapping/{type}");
 		}
 		
-		internal TResponse IndicesFlushDispatch<TResponse>(IRequest<FlushRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesFlushDispatch<TResponse>(IRequest<FlushRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1409,7 +1409,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesFlush", p, new [] { POST, GET }, "/_flush", "/{index}/_flush");
 		}
 		
-		internal Task<TResponse> IndicesFlushDispatchAsync<TResponse>(IRequest<FlushRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesFlushDispatchAsync<TResponse>(IRequest<FlushRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1425,7 +1425,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesFlush", p, new [] { POST, GET }, "/_flush", "/{index}/_flush");
 		}
 		
-		internal TResponse IndicesFlushSyncedDispatch<TResponse>(IRequest<SyncedFlushRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesFlushSyncedDispatch<TResponse>(IRequest<SyncedFlushRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1441,7 +1441,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesFlushSynced", p, new [] { POST, GET }, "/_flush/synced", "/{index}/_flush/synced");
 		}
 		
-		internal Task<TResponse> IndicesFlushSyncedDispatchAsync<TResponse>(IRequest<SyncedFlushRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesFlushSyncedDispatchAsync<TResponse>(IRequest<SyncedFlushRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1457,7 +1457,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesFlushSynced", p, new [] { POST, GET }, "/_flush/synced", "/{index}/_flush/synced");
 		}
 		
-		internal TResponse IndicesForcemergeDispatch<TResponse>(IRequest<ForceMergeRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesForcemergeDispatch<TResponse>(IRequest<ForceMergeRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1469,7 +1469,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesForcemerge", p, new [] { POST }, "/_forcemerge", "/{index}/_forcemerge");
 		}
 		
-		internal Task<TResponse> IndicesForcemergeDispatchAsync<TResponse>(IRequest<ForceMergeRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesForcemergeDispatchAsync<TResponse>(IRequest<ForceMergeRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1481,7 +1481,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesForcemerge", p, new [] { POST }, "/_forcemerge", "/{index}/_forcemerge");
 		}
 		
-		internal TResponse IndicesGetDispatch<TResponse>(IRequest<GetIndexRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesGetDispatch<TResponse>(IRequest<GetIndexRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1493,7 +1493,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGet", p, new [] { GET }, "/{index}");
 		}
 		
-		internal Task<TResponse> IndicesGetDispatchAsync<TResponse>(IRequest<GetIndexRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesGetDispatchAsync<TResponse>(IRequest<GetIndexRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1505,7 +1505,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGet", p, new [] { GET }, "/{index}");
 		}
 		
-		internal TResponse IndicesGetAliasDispatch<TResponse>(IRequest<GetAliasRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesGetAliasDispatch<TResponse>(IRequest<GetAliasRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1519,7 +1519,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetAlias", p, new [] { GET }, "/_alias", "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias");
 		}
 		
-		internal Task<TResponse> IndicesGetAliasDispatchAsync<TResponse>(IRequest<GetAliasRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesGetAliasDispatchAsync<TResponse>(IRequest<GetAliasRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1533,7 +1533,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetAlias", p, new [] { GET }, "/_alias", "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias");
 		}
 		
-		internal TResponse IndicesGetFieldMappingDispatch<TResponse>(IRequest<GetFieldMappingRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesGetFieldMappingDispatch<TResponse>(IRequest<GetFieldMappingRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1548,7 +1548,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{fields}", "/{index}/_mapping/field/{fields}", "/_mapping/{type}/field/{fields}", "/{index}/_mapping/{type}/field/{fields}");
 		}
 		
-		internal Task<TResponse> IndicesGetFieldMappingDispatchAsync<TResponse>(IRequest<GetFieldMappingRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesGetFieldMappingDispatchAsync<TResponse>(IRequest<GetFieldMappingRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1563,7 +1563,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{fields}", "/{index}/_mapping/field/{fields}", "/_mapping/{type}/field/{fields}", "/{index}/_mapping/{type}/field/{fields}");
 		}
 		
-		internal TResponse IndicesGetMappingDispatch<TResponse>(IRequest<GetMappingRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesGetMappingDispatch<TResponse>(IRequest<GetMappingRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1577,7 +1577,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetMapping", p, new [] { GET }, "/_mapping", "/{index}/_mapping", "/_mapping/{type}", "/{index}/_mapping/{type}");
 		}
 		
-		internal Task<TResponse> IndicesGetMappingDispatchAsync<TResponse>(IRequest<GetMappingRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesGetMappingDispatchAsync<TResponse>(IRequest<GetMappingRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1591,7 +1591,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetMapping", p, new [] { GET }, "/_mapping", "/{index}/_mapping", "/_mapping/{type}", "/{index}/_mapping/{type}");
 		}
 		
-		internal TResponse IndicesGetSettingsDispatch<TResponse>(IRequest<GetIndexSettingsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesGetSettingsDispatch<TResponse>(IRequest<GetIndexSettingsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1605,7 +1605,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetSettings", p, new [] { GET }, "/_settings", "/{index}/_settings", "/{index}/_settings/{name}", "/_settings/{name}");
 		}
 		
-		internal Task<TResponse> IndicesGetSettingsDispatchAsync<TResponse>(IRequest<GetIndexSettingsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesGetSettingsDispatchAsync<TResponse>(IRequest<GetIndexSettingsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1619,7 +1619,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetSettings", p, new [] { GET }, "/_settings", "/{index}/_settings", "/{index}/_settings/{name}", "/_settings/{name}");
 		}
 		
-		internal TResponse IndicesGetTemplateDispatch<TResponse>(IRequest<GetIndexTemplateRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesGetTemplateDispatch<TResponse>(IRequest<GetIndexTemplateRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1631,7 +1631,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetTemplate", p, new [] { GET }, "/_template", "/_template/{name}");
 		}
 		
-		internal Task<TResponse> IndicesGetTemplateDispatchAsync<TResponse>(IRequest<GetIndexTemplateRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesGetTemplateDispatchAsync<TResponse>(IRequest<GetIndexTemplateRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1643,7 +1643,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetTemplate", p, new [] { GET }, "/_template", "/_template/{name}");
 		}
 		
-		internal TResponse IndicesGetUpgradeDispatch<TResponse>(IRequest<UpgradeStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesGetUpgradeDispatch<TResponse>(IRequest<UpgradeStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1655,7 +1655,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetUpgrade", p, new [] { GET }, "/_upgrade", "/{index}/_upgrade");
 		}
 		
-		internal Task<TResponse> IndicesGetUpgradeDispatchAsync<TResponse>(IRequest<UpgradeStatusRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesGetUpgradeDispatchAsync<TResponse>(IRequest<UpgradeStatusRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1667,7 +1667,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetUpgrade", p, new [] { GET }, "/_upgrade", "/{index}/_upgrade");
 		}
 		
-		internal TResponse IndicesOpenDispatch<TResponse>(IRequest<OpenIndexRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesOpenDispatch<TResponse>(IRequest<OpenIndexRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1679,7 +1679,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesOpen", p, new [] { POST }, "/{index}/_open");
 		}
 		
-		internal Task<TResponse> IndicesOpenDispatchAsync<TResponse>(IRequest<OpenIndexRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesOpenDispatchAsync<TResponse>(IRequest<OpenIndexRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1691,7 +1691,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesOpen", p, new [] { POST }, "/{index}/_open");
 		}
 		
-		internal TResponse IndicesPutAliasDispatch<TResponse>(IRequest<PutAliasRequestParameters> p,SerializableData<IPutAliasRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesPutAliasDispatch<TResponse>(IRequest<PutAliasRequestParameters> p,SerializableData<IPutAliasRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1707,7 +1707,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutAlias", p, new [] { PUT, POST }, "/{index}/_alias/{name}", "/{index}/_aliases/{name}");
 		}
 		
-		internal Task<TResponse> IndicesPutAliasDispatchAsync<TResponse>(IRequest<PutAliasRequestParameters> p,SerializableData<IPutAliasRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesPutAliasDispatchAsync<TResponse>(IRequest<PutAliasRequestParameters> p,SerializableData<IPutAliasRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1723,7 +1723,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutAlias", p, new [] { PUT, POST }, "/{index}/_alias/{name}", "/{index}/_aliases/{name}");
 		}
 		
-		internal TResponse IndicesPutMappingDispatch<TResponse>(IRequest<PutMappingRequestParameters> p,SerializableData<IPutMappingRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesPutMappingDispatch<TResponse>(IRequest<PutMappingRequestParameters> p,SerializableData<IPutMappingRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1741,7 +1741,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}");
 		}
 		
-		internal Task<TResponse> IndicesPutMappingDispatchAsync<TResponse>(IRequest<PutMappingRequestParameters> p,SerializableData<IPutMappingRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesPutMappingDispatchAsync<TResponse>(IRequest<PutMappingRequestParameters> p,SerializableData<IPutMappingRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1759,7 +1759,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}");
 		}
 		
-		internal TResponse IndicesPutSettingsDispatch<TResponse>(IRequest<UpdateIndexSettingsRequestParameters> p,SerializableData<IUpdateIndexSettingsRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesPutSettingsDispatch<TResponse>(IRequest<UpdateIndexSettingsRequestParameters> p,SerializableData<IUpdateIndexSettingsRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1771,7 +1771,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutSettings", p, new [] { PUT }, "/_settings", "/{index}/_settings");
 		}
 		
-		internal Task<TResponse> IndicesPutSettingsDispatchAsync<TResponse>(IRequest<UpdateIndexSettingsRequestParameters> p,SerializableData<IUpdateIndexSettingsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesPutSettingsDispatchAsync<TResponse>(IRequest<UpdateIndexSettingsRequestParameters> p,SerializableData<IUpdateIndexSettingsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1783,7 +1783,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutSettings", p, new [] { PUT }, "/_settings", "/{index}/_settings");
 		}
 		
-		internal TResponse IndicesPutTemplateDispatch<TResponse>(IRequest<PutIndexTemplateRequestParameters> p,SerializableData<IPutIndexTemplateRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesPutTemplateDispatch<TResponse>(IRequest<PutIndexTemplateRequestParameters> p,SerializableData<IPutIndexTemplateRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1799,7 +1799,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutTemplate", p, new [] { PUT, POST }, "/_template/{name}");
 		}
 		
-		internal Task<TResponse> IndicesPutTemplateDispatchAsync<TResponse>(IRequest<PutIndexTemplateRequestParameters> p,SerializableData<IPutIndexTemplateRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesPutTemplateDispatchAsync<TResponse>(IRequest<PutIndexTemplateRequestParameters> p,SerializableData<IPutIndexTemplateRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1815,7 +1815,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutTemplate", p, new [] { PUT, POST }, "/_template/{name}");
 		}
 		
-		internal TResponse IndicesRecoveryDispatch<TResponse>(IRequest<RecoveryStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesRecoveryDispatch<TResponse>(IRequest<RecoveryStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1827,7 +1827,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesRecovery", p, new [] { GET }, "/_recovery", "/{index}/_recovery");
 		}
 		
-		internal Task<TResponse> IndicesRecoveryDispatchAsync<TResponse>(IRequest<RecoveryStatusRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesRecoveryDispatchAsync<TResponse>(IRequest<RecoveryStatusRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1839,7 +1839,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesRecovery", p, new [] { GET }, "/_recovery", "/{index}/_recovery");
 		}
 		
-		internal TResponse IndicesRefreshDispatch<TResponse>(IRequest<RefreshRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesRefreshDispatch<TResponse>(IRequest<RefreshRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1855,7 +1855,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesRefresh", p, new [] { POST, GET }, "/_refresh", "/{index}/_refresh");
 		}
 		
-		internal Task<TResponse> IndicesRefreshDispatchAsync<TResponse>(IRequest<RefreshRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesRefreshDispatchAsync<TResponse>(IRequest<RefreshRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1871,7 +1871,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesRefresh", p, new [] { POST, GET }, "/_refresh", "/{index}/_refresh");
 		}
 		
-		internal TResponse IndicesRolloverDispatch<TResponse>(IRequest<RolloverIndexRequestParameters> p,SerializableData<IRolloverIndexRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesRolloverDispatch<TResponse>(IRequest<RolloverIndexRequestParameters> p,SerializableData<IRolloverIndexRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1884,7 +1884,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesRollover", p, new [] { POST }, "/{alias}/_rollover", "/{alias}/_rollover/{new_index}");
 		}
 		
-		internal Task<TResponse> IndicesRolloverDispatchAsync<TResponse>(IRequest<RolloverIndexRequestParameters> p,SerializableData<IRolloverIndexRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesRolloverDispatchAsync<TResponse>(IRequest<RolloverIndexRequestParameters> p,SerializableData<IRolloverIndexRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1897,7 +1897,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesRollover", p, new [] { POST }, "/{alias}/_rollover", "/{alias}/_rollover/{new_index}");
 		}
 		
-		internal TResponse IndicesSegmentsDispatch<TResponse>(IRequest<SegmentsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesSegmentsDispatch<TResponse>(IRequest<SegmentsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1909,7 +1909,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesSegments", p, new [] { GET }, "/_segments", "/{index}/_segments");
 		}
 		
-		internal Task<TResponse> IndicesSegmentsDispatchAsync<TResponse>(IRequest<SegmentsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesSegmentsDispatchAsync<TResponse>(IRequest<SegmentsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1921,7 +1921,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesSegments", p, new [] { GET }, "/_segments", "/{index}/_segments");
 		}
 		
-		internal TResponse IndicesShardStoresDispatch<TResponse>(IRequest<IndicesShardStoresRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesShardStoresDispatch<TResponse>(IRequest<IndicesShardStoresRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1933,7 +1933,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesShardStores", p, new [] { GET }, "/_shard_stores", "/{index}/_shard_stores");
 		}
 		
-		internal Task<TResponse> IndicesShardStoresDispatchAsync<TResponse>(IRequest<IndicesShardStoresRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesShardStoresDispatchAsync<TResponse>(IRequest<IndicesShardStoresRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1945,7 +1945,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesShardStores", p, new [] { GET }, "/_shard_stores", "/{index}/_shard_stores");
 		}
 		
-		internal TResponse IndicesShrinkDispatch<TResponse>(IRequest<ShrinkIndexRequestParameters> p,SerializableData<IShrinkIndexRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesShrinkDispatch<TResponse>(IRequest<ShrinkIndexRequestParameters> p,SerializableData<IShrinkIndexRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1961,7 +1961,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesShrink", p, new [] { PUT, POST }, "/{index}/_shrink/{target}");
 		}
 		
-		internal Task<TResponse> IndicesShrinkDispatchAsync<TResponse>(IRequest<ShrinkIndexRequestParameters> p,SerializableData<IShrinkIndexRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesShrinkDispatchAsync<TResponse>(IRequest<ShrinkIndexRequestParameters> p,SerializableData<IShrinkIndexRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1977,7 +1977,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesShrink", p, new [] { PUT, POST }, "/{index}/_shrink/{target}");
 		}
 		
-		internal TResponse IndicesStatsDispatch<TResponse>(IRequest<IndicesStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesStatsDispatch<TResponse>(IRequest<IndicesStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1991,7 +1991,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesStats", p, new [] { GET }, "/_stats", "/_stats/{metric}", "/{index}/_stats", "/{index}/_stats/{metric}");
 		}
 		
-		internal Task<TResponse> IndicesStatsDispatchAsync<TResponse>(IRequest<IndicesStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesStatsDispatchAsync<TResponse>(IRequest<IndicesStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2005,7 +2005,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesStats", p, new [] { GET }, "/_stats", "/_stats/{metric}", "/{index}/_stats", "/{index}/_stats/{metric}");
 		}
 		
-		internal TResponse IndicesUpdateAliasesDispatch<TResponse>(IRequest<BulkAliasRequestParameters> p,SerializableData<IBulkAliasRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesUpdateAliasesDispatch<TResponse>(IRequest<BulkAliasRequestParameters> p,SerializableData<IBulkAliasRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2016,7 +2016,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesUpdateAliases", p, new [] { POST }, "/_aliases");
 		}
 		
-		internal Task<TResponse> IndicesUpdateAliasesDispatchAsync<TResponse>(IRequest<BulkAliasRequestParameters> p,SerializableData<IBulkAliasRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesUpdateAliasesDispatchAsync<TResponse>(IRequest<BulkAliasRequestParameters> p,SerializableData<IBulkAliasRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2027,7 +2027,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesUpdateAliases", p, new [] { POST }, "/_aliases");
 		}
 		
-		internal TResponse IndicesUpgradeDispatch<TResponse>(IRequest<UpgradeRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesUpgradeDispatch<TResponse>(IRequest<UpgradeRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2039,7 +2039,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesUpgrade", p, new [] { POST }, "/_upgrade", "/{index}/_upgrade");
 		}
 		
-		internal Task<TResponse> IndicesUpgradeDispatchAsync<TResponse>(IRequest<UpgradeRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesUpgradeDispatchAsync<TResponse>(IRequest<UpgradeRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2051,7 +2051,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesUpgrade", p, new [] { POST }, "/_upgrade", "/{index}/_upgrade");
 		}
 		
-		internal TResponse IndicesValidateQueryDispatch<TResponse>(IRequest<ValidateQueryRequestParameters> p,SerializableData<IValidateQueryRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse IndicesValidateQueryDispatch<TResponse>(IRequest<ValidateQueryRequestParameters> p,SerializableData<IValidateQueryRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2069,7 +2069,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesValidateQuery", p, new [] { GET, POST }, "/_validate/query", "/{index}/_validate/query", "/{index}/{type}/_validate/query");
 		}
 		
-		internal Task<TResponse> IndicesValidateQueryDispatchAsync<TResponse>(IRequest<ValidateQueryRequestParameters> p,SerializableData<IValidateQueryRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IndicesValidateQueryDispatchAsync<TResponse>(IRequest<ValidateQueryRequestParameters> p,SerializableData<IValidateQueryRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2087,7 +2087,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesValidateQuery", p, new [] { GET, POST }, "/_validate/query", "/{index}/_validate/query", "/{index}/{type}/_validate/query");
 		}
 		
-		internal TResponse InfoDispatch<TResponse>(IRequest<RootNodeInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse InfoDispatch<TResponse>(IRequest<RootNodeInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2098,7 +2098,7 @@ namespace Nest
 			throw InvalidDispatch("Info", p, new [] { GET }, "/");
 		}
 		
-		internal Task<TResponse> InfoDispatchAsync<TResponse>(IRequest<RootNodeInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> InfoDispatchAsync<TResponse>(IRequest<RootNodeInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2109,7 +2109,7 @@ namespace Nest
 			throw InvalidDispatch("Info", p, new [] { GET }, "/");
 		}
 		
-		internal TResponse IngestDeletePipelineDispatch<TResponse>(IRequest<DeletePipelineRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IngestDeletePipelineDispatch<TResponse>(IRequest<DeletePipelineRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2121,7 +2121,7 @@ namespace Nest
 			throw InvalidDispatch("IngestDeletePipeline", p, new [] { DELETE }, "/_ingest/pipeline/{id}");
 		}
 		
-		internal Task<TResponse> IngestDeletePipelineDispatchAsync<TResponse>(IRequest<DeletePipelineRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IngestDeletePipelineDispatchAsync<TResponse>(IRequest<DeletePipelineRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2133,7 +2133,7 @@ namespace Nest
 			throw InvalidDispatch("IngestDeletePipeline", p, new [] { DELETE }, "/_ingest/pipeline/{id}");
 		}
 		
-		internal TResponse IngestGetPipelineDispatch<TResponse>(IRequest<GetPipelineRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IngestGetPipelineDispatch<TResponse>(IRequest<GetPipelineRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2145,7 +2145,7 @@ namespace Nest
 			throw InvalidDispatch("IngestGetPipeline", p, new [] { GET }, "/_ingest/pipeline", "/_ingest/pipeline/{id}");
 		}
 		
-		internal Task<TResponse> IngestGetPipelineDispatchAsync<TResponse>(IRequest<GetPipelineRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IngestGetPipelineDispatchAsync<TResponse>(IRequest<GetPipelineRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2157,7 +2157,7 @@ namespace Nest
 			throw InvalidDispatch("IngestGetPipeline", p, new [] { GET }, "/_ingest/pipeline", "/_ingest/pipeline/{id}");
 		}
 		
-		internal TResponse IngestProcessorGrokDispatch<TResponse>(IRequest<GrokProcessorPatternsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse IngestProcessorGrokDispatch<TResponse>(IRequest<GrokProcessorPatternsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2168,7 +2168,7 @@ namespace Nest
 			throw InvalidDispatch("IngestProcessorGrok", p, new [] { GET }, "/_ingest/processor/grok");
 		}
 		
-		internal Task<TResponse> IngestProcessorGrokDispatchAsync<TResponse>(IRequest<GrokProcessorPatternsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IngestProcessorGrokDispatchAsync<TResponse>(IRequest<GrokProcessorPatternsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2179,7 +2179,7 @@ namespace Nest
 			throw InvalidDispatch("IngestProcessorGrok", p, new [] { GET }, "/_ingest/processor/grok");
 		}
 		
-		internal TResponse IngestPutPipelineDispatch<TResponse>(IRequest<PutPipelineRequestParameters> p,SerializableData<IPutPipelineRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse IngestPutPipelineDispatch<TResponse>(IRequest<PutPipelineRequestParameters> p,SerializableData<IPutPipelineRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2191,7 +2191,7 @@ namespace Nest
 			throw InvalidDispatch("IngestPutPipeline", p, new [] { PUT }, "/_ingest/pipeline/{id}");
 		}
 		
-		internal Task<TResponse> IngestPutPipelineDispatchAsync<TResponse>(IRequest<PutPipelineRequestParameters> p,SerializableData<IPutPipelineRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IngestPutPipelineDispatchAsync<TResponse>(IRequest<PutPipelineRequestParameters> p,SerializableData<IPutPipelineRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2203,7 +2203,7 @@ namespace Nest
 			throw InvalidDispatch("IngestPutPipeline", p, new [] { PUT }, "/_ingest/pipeline/{id}");
 		}
 		
-		internal TResponse IngestSimulateDispatch<TResponse>(IRequest<SimulatePipelineRequestParameters> p,SerializableData<ISimulatePipelineRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse IngestSimulateDispatch<TResponse>(IRequest<SimulatePipelineRequestParameters> p,SerializableData<ISimulatePipelineRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2219,7 +2219,7 @@ namespace Nest
 			throw InvalidDispatch("IngestSimulate", p, new [] { GET, POST }, "/_ingest/pipeline/_simulate", "/_ingest/pipeline/{id}/_simulate");
 		}
 		
-		internal Task<TResponse> IngestSimulateDispatchAsync<TResponse>(IRequest<SimulatePipelineRequestParameters> p,SerializableData<ISimulatePipelineRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> IngestSimulateDispatchAsync<TResponse>(IRequest<SimulatePipelineRequestParameters> p,SerializableData<ISimulatePipelineRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2235,7 +2235,7 @@ namespace Nest
 			throw InvalidDispatch("IngestSimulate", p, new [] { GET, POST }, "/_ingest/pipeline/_simulate", "/_ingest/pipeline/{id}/_simulate");
 		}
 		
-		internal TResponse MgetDispatch<TResponse>(IRequest<MultiGetRequestParameters> p,SerializableData<IMultiGetRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse MgetDispatch<TResponse>(IRequest<MultiGetRequestParameters> p,SerializableData<IMultiGetRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2253,7 +2253,7 @@ namespace Nest
 			throw InvalidDispatch("Mget", p, new [] { GET, POST }, "/_mget", "/{index}/_mget", "/{index}/{type}/_mget");
 		}
 		
-		internal Task<TResponse> MgetDispatchAsync<TResponse>(IRequest<MultiGetRequestParameters> p,SerializableData<IMultiGetRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> MgetDispatchAsync<TResponse>(IRequest<MultiGetRequestParameters> p,SerializableData<IMultiGetRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2271,7 +2271,7 @@ namespace Nest
 			throw InvalidDispatch("Mget", p, new [] { GET, POST }, "/_mget", "/{index}/_mget", "/{index}/{type}/_mget");
 		}
 		
-		internal TResponse MsearchDispatch<TResponse>(IRequest<MultiSearchRequestParameters> p,SerializableData<IMultiSearchRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse MsearchDispatch<TResponse>(IRequest<MultiSearchRequestParameters> p,SerializableData<IMultiSearchRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2289,7 +2289,7 @@ namespace Nest
 			throw InvalidDispatch("Msearch", p, new [] { GET, POST }, "/_msearch", "/{index}/_msearch", "/{index}/{type}/_msearch");
 		}
 		
-		internal Task<TResponse> MsearchDispatchAsync<TResponse>(IRequest<MultiSearchRequestParameters> p,SerializableData<IMultiSearchRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> MsearchDispatchAsync<TResponse>(IRequest<MultiSearchRequestParameters> p,SerializableData<IMultiSearchRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2307,7 +2307,7 @@ namespace Nest
 			throw InvalidDispatch("Msearch", p, new [] { GET, POST }, "/_msearch", "/{index}/_msearch", "/{index}/{type}/_msearch");
 		}
 		
-		internal TResponse MsearchTemplateDispatch<TResponse>(IRequest<MultiSearchTemplateRequestParameters> p,SerializableData<IMultiSearchTemplateRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse MsearchTemplateDispatch<TResponse>(IRequest<MultiSearchTemplateRequestParameters> p,SerializableData<IMultiSearchTemplateRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2325,7 +2325,7 @@ namespace Nest
 			throw InvalidDispatch("MsearchTemplate", p, new [] { GET, POST }, "/_msearch/template", "/{index}/_msearch/template", "/{index}/{type}/_msearch/template");
 		}
 		
-		internal Task<TResponse> MsearchTemplateDispatchAsync<TResponse>(IRequest<MultiSearchTemplateRequestParameters> p,SerializableData<IMultiSearchTemplateRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> MsearchTemplateDispatchAsync<TResponse>(IRequest<MultiSearchTemplateRequestParameters> p,SerializableData<IMultiSearchTemplateRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2343,7 +2343,7 @@ namespace Nest
 			throw InvalidDispatch("MsearchTemplate", p, new [] { GET, POST }, "/_msearch/template", "/{index}/_msearch/template", "/{index}/{type}/_msearch/template");
 		}
 		
-		internal TResponse MtermvectorsDispatch<TResponse>(IRequest<MultiTermVectorsRequestParameters> p,SerializableData<IMultiTermVectorsRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse MtermvectorsDispatch<TResponse>(IRequest<MultiTermVectorsRequestParameters> p,SerializableData<IMultiTermVectorsRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2361,7 +2361,7 @@ namespace Nest
 			throw InvalidDispatch("Mtermvectors", p, new [] { GET, POST }, "/_mtermvectors", "/{index}/_mtermvectors", "/{index}/{type}/_mtermvectors");
 		}
 		
-		internal Task<TResponse> MtermvectorsDispatchAsync<TResponse>(IRequest<MultiTermVectorsRequestParameters> p,SerializableData<IMultiTermVectorsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> MtermvectorsDispatchAsync<TResponse>(IRequest<MultiTermVectorsRequestParameters> p,SerializableData<IMultiTermVectorsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2379,7 +2379,7 @@ namespace Nest
 			throw InvalidDispatch("Mtermvectors", p, new [] { GET, POST }, "/_mtermvectors", "/{index}/_mtermvectors", "/{index}/{type}/_mtermvectors");
 		}
 		
-		internal TResponse NodesHotThreadsDispatch<TResponse>(IRequest<NodesHotThreadsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse NodesHotThreadsDispatch<TResponse>(IRequest<NodesHotThreadsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2391,7 +2391,7 @@ namespace Nest
 			throw InvalidDispatch("NodesHotThreads", p, new [] { GET }, "/_cluster/nodes/hotthreads", "/_cluster/nodes/hot_threads", "/_cluster/nodes/{node_id}/hotthreads", "/_cluster/nodes/{node_id}/hot_threads", "/_nodes/hotthreads", "/_nodes/hot_threads", "/_nodes/{node_id}/hotthreads", "/_nodes/{node_id}/hot_threads");
 		}
 		
-		internal Task<TResponse> NodesHotThreadsDispatchAsync<TResponse>(IRequest<NodesHotThreadsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> NodesHotThreadsDispatchAsync<TResponse>(IRequest<NodesHotThreadsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2403,7 +2403,7 @@ namespace Nest
 			throw InvalidDispatch("NodesHotThreads", p, new [] { GET }, "/_cluster/nodes/hotthreads", "/_cluster/nodes/hot_threads", "/_cluster/nodes/{node_id}/hotthreads", "/_cluster/nodes/{node_id}/hot_threads", "/_nodes/hotthreads", "/_nodes/hot_threads", "/_nodes/{node_id}/hotthreads", "/_nodes/{node_id}/hot_threads");
 		}
 		
-		internal TResponse NodesInfoDispatch<TResponse>(IRequest<NodesInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse NodesInfoDispatch<TResponse>(IRequest<NodesInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2417,7 +2417,7 @@ namespace Nest
 			throw InvalidDispatch("NodesInfo", p, new [] { GET }, "/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}");
 		}
 		
-		internal Task<TResponse> NodesInfoDispatchAsync<TResponse>(IRequest<NodesInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> NodesInfoDispatchAsync<TResponse>(IRequest<NodesInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2431,7 +2431,7 @@ namespace Nest
 			throw InvalidDispatch("NodesInfo", p, new [] { GET }, "/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}");
 		}
 		
-		internal TResponse NodesStatsDispatch<TResponse>(IRequest<NodesStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse NodesStatsDispatch<TResponse>(IRequest<NodesStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2447,7 +2447,7 @@ namespace Nest
 			throw InvalidDispatch("NodesStats", p, new [] { GET }, "/_nodes/stats", "/_nodes/{node_id}/stats", "/_nodes/stats/{metric}", "/_nodes/{node_id}/stats/{metric}", "/_nodes/stats/{metric}/{index_metric}", "/_nodes/{node_id}/stats/{metric}/{index_metric}");
 		}
 		
-		internal Task<TResponse> NodesStatsDispatchAsync<TResponse>(IRequest<NodesStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> NodesStatsDispatchAsync<TResponse>(IRequest<NodesStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2463,7 +2463,7 @@ namespace Nest
 			throw InvalidDispatch("NodesStats", p, new [] { GET }, "/_nodes/stats", "/_nodes/{node_id}/stats", "/_nodes/stats/{metric}", "/_nodes/{node_id}/stats/{metric}", "/_nodes/stats/{metric}/{index_metric}", "/_nodes/{node_id}/stats/{metric}/{index_metric}");
 		}
 		
-		internal TResponse NodesUsageDispatch<TResponse>(IRequest<NodesUsageRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse NodesUsageDispatch<TResponse>(IRequest<NodesUsageRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2477,7 +2477,7 @@ namespace Nest
 			throw InvalidDispatch("NodesUsage", p, new [] { GET }, "/_nodes/usage", "/_nodes/{node_id}/usage", "/_nodes/usage/{metric}", "/_nodes/{node_id}/usage/{metric}");
 		}
 		
-		internal Task<TResponse> NodesUsageDispatchAsync<TResponse>(IRequest<NodesUsageRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> NodesUsageDispatchAsync<TResponse>(IRequest<NodesUsageRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2491,7 +2491,7 @@ namespace Nest
 			throw InvalidDispatch("NodesUsage", p, new [] { GET }, "/_nodes/usage", "/_nodes/{node_id}/usage", "/_nodes/usage/{metric}", "/_nodes/{node_id}/usage/{metric}");
 		}
 		
-		internal TResponse PingDispatch<TResponse>(IRequest<PingRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse PingDispatch<TResponse>(IRequest<PingRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2502,7 +2502,7 @@ namespace Nest
 			throw InvalidDispatch("Ping", p, new [] { HEAD }, "/");
 		}
 		
-		internal Task<TResponse> PingDispatchAsync<TResponse>(IRequest<PingRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> PingDispatchAsync<TResponse>(IRequest<PingRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2513,7 +2513,7 @@ namespace Nest
 			throw InvalidDispatch("Ping", p, new [] { HEAD }, "/");
 		}
 		
-		internal TResponse PutScriptDispatch<TResponse>(IRequest<PutScriptRequestParameters> p,SerializableData<IPutScriptRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse PutScriptDispatch<TResponse>(IRequest<PutScriptRequestParameters> p,SerializableData<IPutScriptRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2531,7 +2531,7 @@ namespace Nest
 			throw InvalidDispatch("PutScript", p, new [] { PUT, POST }, "/_scripts/{id}", "/_scripts/{id}/{context}");
 		}
 		
-		internal Task<TResponse> PutScriptDispatchAsync<TResponse>(IRequest<PutScriptRequestParameters> p,SerializableData<IPutScriptRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> PutScriptDispatchAsync<TResponse>(IRequest<PutScriptRequestParameters> p,SerializableData<IPutScriptRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2549,7 +2549,7 @@ namespace Nest
 			throw InvalidDispatch("PutScript", p, new [] { PUT, POST }, "/_scripts/{id}", "/_scripts/{id}/{context}");
 		}
 		
-		internal TResponse ReindexDispatch<TResponse>(IRequest<ReindexOnServerRequestParameters> p,SerializableData<IReindexOnServerRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse ReindexDispatch<TResponse>(IRequest<ReindexOnServerRequestParameters> p,SerializableData<IReindexOnServerRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2560,7 +2560,7 @@ namespace Nest
 			throw InvalidDispatch("Reindex", p, new [] { POST }, "/_reindex");
 		}
 		
-		internal Task<TResponse> ReindexDispatchAsync<TResponse>(IRequest<ReindexOnServerRequestParameters> p,SerializableData<IReindexOnServerRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> ReindexDispatchAsync<TResponse>(IRequest<ReindexOnServerRequestParameters> p,SerializableData<IReindexOnServerRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2571,7 +2571,7 @@ namespace Nest
 			throw InvalidDispatch("Reindex", p, new [] { POST }, "/_reindex");
 		}
 		
-		internal TResponse ReindexRethrottleDispatch<TResponse>(IRequest<ReindexRethrottleRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse ReindexRethrottleDispatch<TResponse>(IRequest<ReindexRethrottleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2583,7 +2583,7 @@ namespace Nest
 			throw InvalidDispatch("ReindexRethrottle", p, new [] { POST }, "/_reindex/{task_id}/_rethrottle", "/_update_by_query/{task_id}/_rethrottle", "/_delete_by_query/{task_id}/_rethrottle");
 		}
 		
-		internal Task<TResponse> ReindexRethrottleDispatchAsync<TResponse>(IRequest<ReindexRethrottleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> ReindexRethrottleDispatchAsync<TResponse>(IRequest<ReindexRethrottleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2595,7 +2595,7 @@ namespace Nest
 			throw InvalidDispatch("ReindexRethrottle", p, new [] { POST }, "/_reindex/{task_id}/_rethrottle", "/_update_by_query/{task_id}/_rethrottle", "/_delete_by_query/{task_id}/_rethrottle");
 		}
 		
-		internal TResponse RenderSearchTemplateDispatch<TResponse>(IRequest<RenderSearchTemplateRequestParameters> p,SerializableData<IRenderSearchTemplateRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse RenderSearchTemplateDispatch<TResponse>(IRequest<RenderSearchTemplateRequestParameters> p,SerializableData<IRenderSearchTemplateRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2611,7 +2611,7 @@ namespace Nest
 			throw InvalidDispatch("RenderSearchTemplate", p, new [] { GET, POST }, "/_render/template", "/_render/template/{id}");
 		}
 		
-		internal Task<TResponse> RenderSearchTemplateDispatchAsync<TResponse>(IRequest<RenderSearchTemplateRequestParameters> p,SerializableData<IRenderSearchTemplateRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> RenderSearchTemplateDispatchAsync<TResponse>(IRequest<RenderSearchTemplateRequestParameters> p,SerializableData<IRenderSearchTemplateRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2627,7 +2627,7 @@ namespace Nest
 			throw InvalidDispatch("RenderSearchTemplate", p, new [] { GET, POST }, "/_render/template", "/_render/template/{id}");
 		}
 		
-		internal TResponse ScrollDispatch<TResponse>(IRequest<ScrollRequestParameters> p,SerializableData<IScrollRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse ScrollDispatch<TResponse>(IRequest<ScrollRequestParameters> p,SerializableData<IScrollRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2641,7 +2641,7 @@ namespace Nest
 			throw InvalidDispatch("Scroll", p, new [] { GET, POST }, "/_search/scroll");
 		}
 		
-		internal Task<TResponse> ScrollDispatchAsync<TResponse>(IRequest<ScrollRequestParameters> p,SerializableData<IScrollRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> ScrollDispatchAsync<TResponse>(IRequest<ScrollRequestParameters> p,SerializableData<IScrollRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2655,7 +2655,7 @@ namespace Nest
 			throw InvalidDispatch("Scroll", p, new [] { GET, POST }, "/_search/scroll");
 		}
 		
-		internal TResponse SearchDispatch<TResponse>(IRequest<SearchRequestParameters> p,SerializableData<ISearchRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse SearchDispatch<TResponse>(IRequest<SearchRequestParameters> p,SerializableData<ISearchRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2673,7 +2673,7 @@ namespace Nest
 			throw InvalidDispatch("Search", p, new [] { GET, POST }, "/_search", "/{index}/_search", "/{index}/{type}/_search");
 		}
 		
-		internal Task<TResponse> SearchDispatchAsync<TResponse>(IRequest<SearchRequestParameters> p,SerializableData<ISearchRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> SearchDispatchAsync<TResponse>(IRequest<SearchRequestParameters> p,SerializableData<ISearchRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2691,7 +2691,7 @@ namespace Nest
 			throw InvalidDispatch("Search", p, new [] { GET, POST }, "/_search", "/{index}/_search", "/{index}/{type}/_search");
 		}
 		
-		internal TResponse SearchShardsDispatch<TResponse>(IRequest<SearchShardsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse SearchShardsDispatch<TResponse>(IRequest<SearchShardsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2707,7 +2707,7 @@ namespace Nest
 			throw InvalidDispatch("SearchShards", p, new [] { GET, POST }, "/_search_shards", "/{index}/_search_shards");
 		}
 		
-		internal Task<TResponse> SearchShardsDispatchAsync<TResponse>(IRequest<SearchShardsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> SearchShardsDispatchAsync<TResponse>(IRequest<SearchShardsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2723,7 +2723,7 @@ namespace Nest
 			throw InvalidDispatch("SearchShards", p, new [] { GET, POST }, "/_search_shards", "/{index}/_search_shards");
 		}
 		
-		internal TResponse SearchTemplateDispatch<TResponse>(IRequest<SearchTemplateRequestParameters> p,SerializableData<ISearchTemplateRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse SearchTemplateDispatch<TResponse>(IRequest<SearchTemplateRequestParameters> p,SerializableData<ISearchTemplateRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2741,7 +2741,7 @@ namespace Nest
 			throw InvalidDispatch("SearchTemplate", p, new [] { GET, POST }, "/_search/template", "/{index}/_search/template", "/{index}/{type}/_search/template");
 		}
 		
-		internal Task<TResponse> SearchTemplateDispatchAsync<TResponse>(IRequest<SearchTemplateRequestParameters> p,SerializableData<ISearchTemplateRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> SearchTemplateDispatchAsync<TResponse>(IRequest<SearchTemplateRequestParameters> p,SerializableData<ISearchTemplateRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2759,7 +2759,7 @@ namespace Nest
 			throw InvalidDispatch("SearchTemplate", p, new [] { GET, POST }, "/_search/template", "/{index}/_search/template", "/{index}/{type}/_search/template");
 		}
 		
-		internal TResponse SnapshotCreateDispatch<TResponse>(IRequest<SnapshotRequestParameters> p,SerializableData<ISnapshotRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse SnapshotCreateDispatch<TResponse>(IRequest<SnapshotRequestParameters> p,SerializableData<ISnapshotRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2775,7 +2775,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotCreate", p, new [] { PUT, POST }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal Task<TResponse> SnapshotCreateDispatchAsync<TResponse>(IRequest<SnapshotRequestParameters> p,SerializableData<ISnapshotRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> SnapshotCreateDispatchAsync<TResponse>(IRequest<SnapshotRequestParameters> p,SerializableData<ISnapshotRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2791,7 +2791,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotCreate", p, new [] { PUT, POST }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal TResponse SnapshotCreateRepositoryDispatch<TResponse>(IRequest<CreateRepositoryRequestParameters> p,SerializableData<ICreateRepositoryRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse SnapshotCreateRepositoryDispatch<TResponse>(IRequest<CreateRepositoryRequestParameters> p,SerializableData<ICreateRepositoryRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2807,7 +2807,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotCreateRepository", p, new [] { PUT, POST }, "/_snapshot/{repository}");
 		}
 		
-		internal Task<TResponse> SnapshotCreateRepositoryDispatchAsync<TResponse>(IRequest<CreateRepositoryRequestParameters> p,SerializableData<ICreateRepositoryRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> SnapshotCreateRepositoryDispatchAsync<TResponse>(IRequest<CreateRepositoryRequestParameters> p,SerializableData<ICreateRepositoryRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2823,7 +2823,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotCreateRepository", p, new [] { PUT, POST }, "/_snapshot/{repository}");
 		}
 		
-		internal TResponse SnapshotDeleteDispatch<TResponse>(IRequest<DeleteSnapshotRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse SnapshotDeleteDispatch<TResponse>(IRequest<DeleteSnapshotRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2835,7 +2835,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotDelete", p, new [] { DELETE }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal Task<TResponse> SnapshotDeleteDispatchAsync<TResponse>(IRequest<DeleteSnapshotRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> SnapshotDeleteDispatchAsync<TResponse>(IRequest<DeleteSnapshotRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2847,7 +2847,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotDelete", p, new [] { DELETE }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal TResponse SnapshotDeleteRepositoryDispatch<TResponse>(IRequest<DeleteRepositoryRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse SnapshotDeleteRepositoryDispatch<TResponse>(IRequest<DeleteRepositoryRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2859,7 +2859,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotDeleteRepository", p, new [] { DELETE }, "/_snapshot/{repository}");
 		}
 		
-		internal Task<TResponse> SnapshotDeleteRepositoryDispatchAsync<TResponse>(IRequest<DeleteRepositoryRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> SnapshotDeleteRepositoryDispatchAsync<TResponse>(IRequest<DeleteRepositoryRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2871,7 +2871,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotDeleteRepository", p, new [] { DELETE }, "/_snapshot/{repository}");
 		}
 		
-		internal TResponse SnapshotGetDispatch<TResponse>(IRequest<GetSnapshotRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse SnapshotGetDispatch<TResponse>(IRequest<GetSnapshotRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2883,7 +2883,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotGet", p, new [] { GET }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal Task<TResponse> SnapshotGetDispatchAsync<TResponse>(IRequest<GetSnapshotRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> SnapshotGetDispatchAsync<TResponse>(IRequest<GetSnapshotRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2895,7 +2895,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotGet", p, new [] { GET }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal TResponse SnapshotGetRepositoryDispatch<TResponse>(IRequest<GetRepositoryRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse SnapshotGetRepositoryDispatch<TResponse>(IRequest<GetRepositoryRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2907,7 +2907,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotGetRepository", p, new [] { GET }, "/_snapshot", "/_snapshot/{repository}");
 		}
 		
-		internal Task<TResponse> SnapshotGetRepositoryDispatchAsync<TResponse>(IRequest<GetRepositoryRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> SnapshotGetRepositoryDispatchAsync<TResponse>(IRequest<GetRepositoryRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2919,7 +2919,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotGetRepository", p, new [] { GET }, "/_snapshot", "/_snapshot/{repository}");
 		}
 		
-		internal TResponse SnapshotRestoreDispatch<TResponse>(IRequest<RestoreRequestParameters> p,SerializableData<IRestoreRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse SnapshotRestoreDispatch<TResponse>(IRequest<RestoreRequestParameters> p,SerializableData<IRestoreRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2931,7 +2931,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotRestore", p, new [] { POST }, "/_snapshot/{repository}/{snapshot}/_restore");
 		}
 		
-		internal Task<TResponse> SnapshotRestoreDispatchAsync<TResponse>(IRequest<RestoreRequestParameters> p,SerializableData<IRestoreRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> SnapshotRestoreDispatchAsync<TResponse>(IRequest<RestoreRequestParameters> p,SerializableData<IRestoreRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2943,7 +2943,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotRestore", p, new [] { POST }, "/_snapshot/{repository}/{snapshot}/_restore");
 		}
 		
-		internal TResponse SnapshotStatusDispatch<TResponse>(IRequest<SnapshotStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse SnapshotStatusDispatch<TResponse>(IRequest<SnapshotStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2956,7 +2956,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotStatus", p, new [] { GET }, "/_snapshot/_status", "/_snapshot/{repository}/_status", "/_snapshot/{repository}/{snapshot}/_status");
 		}
 		
-		internal Task<TResponse> SnapshotStatusDispatchAsync<TResponse>(IRequest<SnapshotStatusRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> SnapshotStatusDispatchAsync<TResponse>(IRequest<SnapshotStatusRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2969,7 +2969,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotStatus", p, new [] { GET }, "/_snapshot/_status", "/_snapshot/{repository}/_status", "/_snapshot/{repository}/{snapshot}/_status");
 		}
 		
-		internal TResponse SnapshotVerifyRepositoryDispatch<TResponse>(IRequest<VerifyRepositoryRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse SnapshotVerifyRepositoryDispatch<TResponse>(IRequest<VerifyRepositoryRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2981,7 +2981,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotVerifyRepository", p, new [] { POST }, "/_snapshot/{repository}/_verify");
 		}
 		
-		internal Task<TResponse> SnapshotVerifyRepositoryDispatchAsync<TResponse>(IRequest<VerifyRepositoryRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> SnapshotVerifyRepositoryDispatchAsync<TResponse>(IRequest<VerifyRepositoryRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2993,7 +2993,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotVerifyRepository", p, new [] { POST }, "/_snapshot/{repository}/_verify");
 		}
 		
-		internal TResponse TasksCancelDispatch<TResponse>(IRequest<CancelTasksRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse TasksCancelDispatch<TResponse>(IRequest<CancelTasksRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3005,7 +3005,7 @@ namespace Nest
 			throw InvalidDispatch("TasksCancel", p, new [] { POST }, "/_tasks/_cancel", "/_tasks/{task_id}/_cancel");
 		}
 		
-		internal Task<TResponse> TasksCancelDispatchAsync<TResponse>(IRequest<CancelTasksRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> TasksCancelDispatchAsync<TResponse>(IRequest<CancelTasksRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3017,7 +3017,7 @@ namespace Nest
 			throw InvalidDispatch("TasksCancel", p, new [] { POST }, "/_tasks/_cancel", "/_tasks/{task_id}/_cancel");
 		}
 		
-		internal TResponse TasksGetDispatch<TResponse>(IRequest<GetTaskRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse TasksGetDispatch<TResponse>(IRequest<GetTaskRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3029,7 +3029,7 @@ namespace Nest
 			throw InvalidDispatch("TasksGet", p, new [] { GET }, "/_tasks/{task_id}");
 		}
 		
-		internal Task<TResponse> TasksGetDispatchAsync<TResponse>(IRequest<GetTaskRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> TasksGetDispatchAsync<TResponse>(IRequest<GetTaskRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3041,7 +3041,7 @@ namespace Nest
 			throw InvalidDispatch("TasksGet", p, new [] { GET }, "/_tasks/{task_id}");
 		}
 		
-		internal TResponse TasksListDispatch<TResponse>(IRequest<ListTasksRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse TasksListDispatch<TResponse>(IRequest<ListTasksRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3052,7 +3052,7 @@ namespace Nest
 			throw InvalidDispatch("TasksList", p, new [] { GET }, "/_tasks");
 		}
 		
-		internal Task<TResponse> TasksListDispatchAsync<TResponse>(IRequest<ListTasksRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> TasksListDispatchAsync<TResponse>(IRequest<ListTasksRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3063,7 +3063,7 @@ namespace Nest
 			throw InvalidDispatch("TasksList", p, new [] { GET }, "/_tasks");
 		}
 		
-		internal TResponse TermvectorsDispatch<TResponse,TDocument>(IRequest<TermVectorsRequestParameters> p,SerializableData<ITermVectorsRequest<TDocument>> body) where TResponse : class, IElasticsearchResponse where TDocument : class
+		internal TResponse TermvectorsDispatch<TResponse,TDocument>(IRequest<TermVectorsRequestParameters> p,SerializableData<ITermVectorsRequest<TDocument>> body) where TResponse : class, IElasticsearchResponse, new() where TDocument : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3081,7 +3081,7 @@ namespace Nest
 			throw InvalidDispatch("Termvectors", p, new [] { GET, POST }, "/{index}/{type}/_termvectors", "/{index}/{type}/{id}/_termvectors");
 		}
 		
-		internal Task<TResponse> TermvectorsDispatchAsync<TResponse,TDocument>(IRequest<TermVectorsRequestParameters> p,SerializableData<ITermVectorsRequest<TDocument>> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse where TDocument : class
+		internal Task<TResponse> TermvectorsDispatchAsync<TResponse,TDocument>(IRequest<TermVectorsRequestParameters> p,SerializableData<ITermVectorsRequest<TDocument>> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new() where TDocument : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3099,7 +3099,7 @@ namespace Nest
 			throw InvalidDispatch("Termvectors", p, new [] { GET, POST }, "/{index}/{type}/_termvectors", "/{index}/{type}/{id}/_termvectors");
 		}
 		
-		internal TResponse UpdateDispatch<TResponse,TDocument,TPartialDocument>(IRequest<UpdateRequestParameters> p,SerializableData<IUpdateRequest<TDocument, TPartialDocument>> body) where TResponse : class, IElasticsearchResponse where TDocument : class where TPartialDocument : class
+		internal TResponse UpdateDispatch<TResponse,TDocument,TPartialDocument>(IRequest<UpdateRequestParameters> p,SerializableData<IUpdateRequest<TDocument, TPartialDocument>> body) where TResponse : class, IElasticsearchResponse, new() where TDocument : class where TPartialDocument : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3111,7 +3111,7 @@ namespace Nest
 			throw InvalidDispatch("Update", p, new [] { POST }, "/{index}/{type}/{id}/_update");
 		}
 		
-		internal Task<TResponse> UpdateDispatchAsync<TResponse,TDocument,TPartialDocument>(IRequest<UpdateRequestParameters> p,SerializableData<IUpdateRequest<TDocument, TPartialDocument>> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse where TDocument : class where TPartialDocument : class
+		internal Task<TResponse> UpdateDispatchAsync<TResponse,TDocument,TPartialDocument>(IRequest<UpdateRequestParameters> p,SerializableData<IUpdateRequest<TDocument, TPartialDocument>> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new() where TDocument : class where TPartialDocument : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3123,7 +3123,7 @@ namespace Nest
 			throw InvalidDispatch("Update", p, new [] { POST }, "/{index}/{type}/{id}/_update");
 		}
 		
-		internal TResponse UpdateByQueryDispatch<TResponse>(IRequest<UpdateByQueryRequestParameters> p,SerializableData<IUpdateByQueryRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse UpdateByQueryDispatch<TResponse>(IRequest<UpdateByQueryRequestParameters> p,SerializableData<IUpdateByQueryRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3136,7 +3136,7 @@ namespace Nest
 			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
 		}
 		
-		internal Task<TResponse> UpdateByQueryDispatchAsync<TResponse>(IRequest<UpdateByQueryRequestParameters> p,SerializableData<IUpdateByQueryRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> UpdateByQueryDispatchAsync<TResponse>(IRequest<UpdateByQueryRequestParameters> p,SerializableData<IUpdateByQueryRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3149,7 +3149,7 @@ namespace Nest
 			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
 		}
 		
-		internal TResponse XpackGraphExploreDispatch<TResponse>(IRequest<GraphExploreRequestParameters> p,SerializableData<IGraphExploreRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackGraphExploreDispatch<TResponse>(IRequest<GraphExploreRequestParameters> p,SerializableData<IGraphExploreRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3167,7 +3167,7 @@ namespace Nest
 			throw InvalidDispatch("XpackGraphExplore", p, new [] { GET, POST }, "/{index}/_xpack/graph/_explore", "/{index}/{type}/_xpack/graph/_explore");
 		}
 		
-		internal Task<TResponse> XpackGraphExploreDispatchAsync<TResponse>(IRequest<GraphExploreRequestParameters> p,SerializableData<IGraphExploreRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackGraphExploreDispatchAsync<TResponse>(IRequest<GraphExploreRequestParameters> p,SerializableData<IGraphExploreRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3185,7 +3185,7 @@ namespace Nest
 			throw InvalidDispatch("XpackGraphExplore", p, new [] { GET, POST }, "/{index}/_xpack/graph/_explore", "/{index}/{type}/_xpack/graph/_explore");
 		}
 		
-		internal TResponse XpackDeprecationInfoDispatch<TResponse>(IRequest<DeprecationInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackDeprecationInfoDispatch<TResponse>(IRequest<DeprecationInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3197,7 +3197,7 @@ namespace Nest
 			throw InvalidDispatch("XpackDeprecationInfo", p, new [] { GET }, "/_xpack/migration/deprecations", "/{index}/_xpack/migration/deprecations");
 		}
 		
-		internal Task<TResponse> XpackDeprecationInfoDispatchAsync<TResponse>(IRequest<DeprecationInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackDeprecationInfoDispatchAsync<TResponse>(IRequest<DeprecationInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3209,7 +3209,7 @@ namespace Nest
 			throw InvalidDispatch("XpackDeprecationInfo", p, new [] { GET }, "/_xpack/migration/deprecations", "/{index}/_xpack/migration/deprecations");
 		}
 		
-		internal TResponse XpackInfoDispatch<TResponse>(IRequest<XPackInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackInfoDispatch<TResponse>(IRequest<XPackInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3220,7 +3220,7 @@ namespace Nest
 			throw InvalidDispatch("XpackInfo", p, new [] { GET }, "/_xpack");
 		}
 		
-		internal Task<TResponse> XpackInfoDispatchAsync<TResponse>(IRequest<XPackInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackInfoDispatchAsync<TResponse>(IRequest<XPackInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3231,7 +3231,7 @@ namespace Nest
 			throw InvalidDispatch("XpackInfo", p, new [] { GET }, "/_xpack");
 		}
 		
-		internal TResponse XpackUsageDispatch<TResponse>(IRequest<XPackUsageRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackUsageDispatch<TResponse>(IRequest<XPackUsageRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3242,7 +3242,7 @@ namespace Nest
 			throw InvalidDispatch("XpackUsage", p, new [] { GET }, "/_xpack/usage");
 		}
 		
-		internal Task<TResponse> XpackUsageDispatchAsync<TResponse>(IRequest<XPackUsageRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackUsageDispatchAsync<TResponse>(IRequest<XPackUsageRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3253,7 +3253,7 @@ namespace Nest
 			throw InvalidDispatch("XpackUsage", p, new [] { GET }, "/_xpack/usage");
 		}
 		
-		internal TResponse XpackLicenseDeleteDispatch<TResponse>(IRequest<DeleteLicenseRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackLicenseDeleteDispatch<TResponse>(IRequest<DeleteLicenseRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3264,7 +3264,7 @@ namespace Nest
 			throw InvalidDispatch("XpackLicenseDelete", p, new [] { DELETE }, "/_xpack/license");
 		}
 		
-		internal Task<TResponse> XpackLicenseDeleteDispatchAsync<TResponse>(IRequest<DeleteLicenseRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackLicenseDeleteDispatchAsync<TResponse>(IRequest<DeleteLicenseRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3275,7 +3275,7 @@ namespace Nest
 			throw InvalidDispatch("XpackLicenseDelete", p, new [] { DELETE }, "/_xpack/license");
 		}
 		
-		internal TResponse XpackLicenseGetDispatch<TResponse>(IRequest<GetLicenseRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackLicenseGetDispatch<TResponse>(IRequest<GetLicenseRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3286,7 +3286,7 @@ namespace Nest
 			throw InvalidDispatch("XpackLicenseGet", p, new [] { GET }, "/_xpack/license");
 		}
 		
-		internal Task<TResponse> XpackLicenseGetDispatchAsync<TResponse>(IRequest<GetLicenseRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackLicenseGetDispatchAsync<TResponse>(IRequest<GetLicenseRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3297,7 +3297,7 @@ namespace Nest
 			throw InvalidDispatch("XpackLicenseGet", p, new [] { GET }, "/_xpack/license");
 		}
 		
-		internal TResponse XpackLicensePostDispatch<TResponse>(IRequest<PostLicenseRequestParameters> p,SerializableData<IPostLicenseRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackLicensePostDispatch<TResponse>(IRequest<PostLicenseRequestParameters> p,SerializableData<IPostLicenseRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3308,7 +3308,7 @@ namespace Nest
 			throw InvalidDispatch("XpackLicensePost", p, new [] { PUT }, "/_xpack/license");
 		}
 		
-		internal Task<TResponse> XpackLicensePostDispatchAsync<TResponse>(IRequest<PostLicenseRequestParameters> p,SerializableData<IPostLicenseRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackLicensePostDispatchAsync<TResponse>(IRequest<PostLicenseRequestParameters> p,SerializableData<IPostLicenseRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3319,7 +3319,7 @@ namespace Nest
 			throw InvalidDispatch("XpackLicensePost", p, new [] { PUT }, "/_xpack/license");
 		}
 		
-		internal TResponse XpackMlCloseJobDispatch<TResponse>(IRequest<CloseJobRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlCloseJobDispatch<TResponse>(IRequest<CloseJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3331,7 +3331,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlCloseJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_close");
 		}
 		
-		internal Task<TResponse> XpackMlCloseJobDispatchAsync<TResponse>(IRequest<CloseJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlCloseJobDispatchAsync<TResponse>(IRequest<CloseJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3343,7 +3343,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlCloseJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_close");
 		}
 		
-		internal TResponse XpackMlDeleteDatafeedDispatch<TResponse>(IRequest<DeleteDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlDeleteDatafeedDispatch<TResponse>(IRequest<DeleteDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3355,7 +3355,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlDeleteDatafeed", p, new [] { DELETE }, "/_xpack/ml/datafeeds/{datafeed_id}");
 		}
 		
-		internal Task<TResponse> XpackMlDeleteDatafeedDispatchAsync<TResponse>(IRequest<DeleteDatafeedRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlDeleteDatafeedDispatchAsync<TResponse>(IRequest<DeleteDatafeedRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3367,7 +3367,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlDeleteDatafeed", p, new [] { DELETE }, "/_xpack/ml/datafeeds/{datafeed_id}");
 		}
 		
-		internal TResponse XpackMlDeleteExpiredDataDispatch<TResponse>(IRequest<DeleteExpiredDataRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlDeleteExpiredDataDispatch<TResponse>(IRequest<DeleteExpiredDataRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3378,7 +3378,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlDeleteExpiredData", p, new [] { DELETE }, "/_xpack/ml/_delete_expired_data");
 		}
 		
-		internal Task<TResponse> XpackMlDeleteExpiredDataDispatchAsync<TResponse>(IRequest<DeleteExpiredDataRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlDeleteExpiredDataDispatchAsync<TResponse>(IRequest<DeleteExpiredDataRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3389,7 +3389,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlDeleteExpiredData", p, new [] { DELETE }, "/_xpack/ml/_delete_expired_data");
 		}
 		
-		internal TResponse XpackMlDeleteJobDispatch<TResponse>(IRequest<DeleteJobRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlDeleteJobDispatch<TResponse>(IRequest<DeleteJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3401,7 +3401,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlDeleteJob", p, new [] { DELETE }, "/_xpack/ml/anomaly_detectors/{job_id}");
 		}
 		
-		internal Task<TResponse> XpackMlDeleteJobDispatchAsync<TResponse>(IRequest<DeleteJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlDeleteJobDispatchAsync<TResponse>(IRequest<DeleteJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3413,7 +3413,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlDeleteJob", p, new [] { DELETE }, "/_xpack/ml/anomaly_detectors/{job_id}");
 		}
 		
-		internal TResponse XpackMlDeleteModelSnapshotDispatch<TResponse>(IRequest<DeleteModelSnapshotRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlDeleteModelSnapshotDispatch<TResponse>(IRequest<DeleteModelSnapshotRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3425,7 +3425,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlDeleteModelSnapshot", p, new [] { DELETE }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}");
 		}
 		
-		internal Task<TResponse> XpackMlDeleteModelSnapshotDispatchAsync<TResponse>(IRequest<DeleteModelSnapshotRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlDeleteModelSnapshotDispatchAsync<TResponse>(IRequest<DeleteModelSnapshotRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3437,7 +3437,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlDeleteModelSnapshot", p, new [] { DELETE }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}");
 		}
 		
-		internal TResponse XpackMlFlushJobDispatch<TResponse>(IRequest<FlushJobRequestParameters> p,SerializableData<IFlushJobRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlFlushJobDispatch<TResponse>(IRequest<FlushJobRequestParameters> p,SerializableData<IFlushJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3449,7 +3449,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlFlushJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_flush");
 		}
 		
-		internal Task<TResponse> XpackMlFlushJobDispatchAsync<TResponse>(IRequest<FlushJobRequestParameters> p,SerializableData<IFlushJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlFlushJobDispatchAsync<TResponse>(IRequest<FlushJobRequestParameters> p,SerializableData<IFlushJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3461,7 +3461,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlFlushJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_flush");
 		}
 		
-		internal TResponse XpackMlGetBucketsDispatch<TResponse>(IRequest<GetBucketsRequestParameters> p,SerializableData<IGetBucketsRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlGetBucketsDispatch<TResponse>(IRequest<GetBucketsRequestParameters> p,SerializableData<IGetBucketsRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3477,7 +3477,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetBuckets", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/buckets");
 		}
 		
-		internal Task<TResponse> XpackMlGetBucketsDispatchAsync<TResponse>(IRequest<GetBucketsRequestParameters> p,SerializableData<IGetBucketsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlGetBucketsDispatchAsync<TResponse>(IRequest<GetBucketsRequestParameters> p,SerializableData<IGetBucketsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3493,7 +3493,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetBuckets", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/buckets");
 		}
 		
-		internal TResponse XpackMlGetCategoriesDispatch<TResponse>(IRequest<GetCategoriesRequestParameters> p,SerializableData<IGetCategoriesRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlGetCategoriesDispatch<TResponse>(IRequest<GetCategoriesRequestParameters> p,SerializableData<IGetCategoriesRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3511,7 +3511,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetCategories", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}", "/_xpack/ml/anomaly_detectors/{job_id}/results/categories/");
 		}
 		
-		internal Task<TResponse> XpackMlGetCategoriesDispatchAsync<TResponse>(IRequest<GetCategoriesRequestParameters> p,SerializableData<IGetCategoriesRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlGetCategoriesDispatchAsync<TResponse>(IRequest<GetCategoriesRequestParameters> p,SerializableData<IGetCategoriesRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3529,7 +3529,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetCategories", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}", "/_xpack/ml/anomaly_detectors/{job_id}/results/categories/");
 		}
 		
-		internal TResponse XpackMlGetDatafeedsDispatch<TResponse>(IRequest<GetDatafeedsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlGetDatafeedsDispatch<TResponse>(IRequest<GetDatafeedsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3541,7 +3541,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetDatafeeds", p, new [] { GET }, "/_xpack/ml/datafeeds/{datafeed_id}", "/_xpack/ml/datafeeds");
 		}
 		
-		internal Task<TResponse> XpackMlGetDatafeedsDispatchAsync<TResponse>(IRequest<GetDatafeedsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlGetDatafeedsDispatchAsync<TResponse>(IRequest<GetDatafeedsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3553,7 +3553,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetDatafeeds", p, new [] { GET }, "/_xpack/ml/datafeeds/{datafeed_id}", "/_xpack/ml/datafeeds");
 		}
 		
-		internal TResponse XpackMlGetDatafeedStatsDispatch<TResponse>(IRequest<GetDatafeedStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlGetDatafeedStatsDispatch<TResponse>(IRequest<GetDatafeedStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3565,7 +3565,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetDatafeedStats", p, new [] { GET }, "/_xpack/ml/datafeeds/{datafeed_id}/_stats", "/_xpack/ml/datafeeds/_stats");
 		}
 		
-		internal Task<TResponse> XpackMlGetDatafeedStatsDispatchAsync<TResponse>(IRequest<GetDatafeedStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlGetDatafeedStatsDispatchAsync<TResponse>(IRequest<GetDatafeedStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3577,7 +3577,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetDatafeedStats", p, new [] { GET }, "/_xpack/ml/datafeeds/{datafeed_id}/_stats", "/_xpack/ml/datafeeds/_stats");
 		}
 		
-		internal TResponse XpackMlGetInfluencersDispatch<TResponse>(IRequest<GetInfluencersRequestParameters> p,SerializableData<IGetInfluencersRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlGetInfluencersDispatch<TResponse>(IRequest<GetInfluencersRequestParameters> p,SerializableData<IGetInfluencersRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3593,7 +3593,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetInfluencers", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/influencers");
 		}
 		
-		internal Task<TResponse> XpackMlGetInfluencersDispatchAsync<TResponse>(IRequest<GetInfluencersRequestParameters> p,SerializableData<IGetInfluencersRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlGetInfluencersDispatchAsync<TResponse>(IRequest<GetInfluencersRequestParameters> p,SerializableData<IGetInfluencersRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3609,7 +3609,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetInfluencers", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/influencers");
 		}
 		
-		internal TResponse XpackMlGetJobsDispatch<TResponse>(IRequest<GetJobsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlGetJobsDispatch<TResponse>(IRequest<GetJobsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3621,7 +3621,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetJobs", p, new [] { GET }, "/_xpack/ml/anomaly_detectors/{job_id}", "/_xpack/ml/anomaly_detectors/");
 		}
 		
-		internal Task<TResponse> XpackMlGetJobsDispatchAsync<TResponse>(IRequest<GetJobsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlGetJobsDispatchAsync<TResponse>(IRequest<GetJobsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3633,7 +3633,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetJobs", p, new [] { GET }, "/_xpack/ml/anomaly_detectors/{job_id}", "/_xpack/ml/anomaly_detectors/");
 		}
 		
-		internal TResponse XpackMlGetJobStatsDispatch<TResponse>(IRequest<GetJobStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlGetJobStatsDispatch<TResponse>(IRequest<GetJobStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3645,7 +3645,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetJobStats", p, new [] { GET }, "/_xpack/ml/anomaly_detectors/_stats", "/_xpack/ml/anomaly_detectors/{job_id}/_stats");
 		}
 		
-		internal Task<TResponse> XpackMlGetJobStatsDispatchAsync<TResponse>(IRequest<GetJobStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlGetJobStatsDispatchAsync<TResponse>(IRequest<GetJobStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3657,7 +3657,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetJobStats", p, new [] { GET }, "/_xpack/ml/anomaly_detectors/_stats", "/_xpack/ml/anomaly_detectors/{job_id}/_stats");
 		}
 		
-		internal TResponse XpackMlGetModelSnapshotsDispatch<TResponse>(IRequest<GetModelSnapshotsRequestParameters> p,SerializableData<IGetModelSnapshotsRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlGetModelSnapshotsDispatch<TResponse>(IRequest<GetModelSnapshotsRequestParameters> p,SerializableData<IGetModelSnapshotsRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3675,7 +3675,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetModelSnapshots", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots");
 		}
 		
-		internal Task<TResponse> XpackMlGetModelSnapshotsDispatchAsync<TResponse>(IRequest<GetModelSnapshotsRequestParameters> p,SerializableData<IGetModelSnapshotsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlGetModelSnapshotsDispatchAsync<TResponse>(IRequest<GetModelSnapshotsRequestParameters> p,SerializableData<IGetModelSnapshotsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3693,7 +3693,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetModelSnapshots", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots");
 		}
 		
-		internal TResponse XpackMlGetRecordsDispatch<TResponse>(IRequest<GetAnomalyRecordsRequestParameters> p,SerializableData<IGetAnomalyRecordsRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlGetRecordsDispatch<TResponse>(IRequest<GetAnomalyRecordsRequestParameters> p,SerializableData<IGetAnomalyRecordsRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3709,7 +3709,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetRecords", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/records");
 		}
 		
-		internal Task<TResponse> XpackMlGetRecordsDispatchAsync<TResponse>(IRequest<GetAnomalyRecordsRequestParameters> p,SerializableData<IGetAnomalyRecordsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlGetRecordsDispatchAsync<TResponse>(IRequest<GetAnomalyRecordsRequestParameters> p,SerializableData<IGetAnomalyRecordsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3725,7 +3725,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetRecords", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/records");
 		}
 		
-		internal TResponse XpackMlOpenJobDispatch<TResponse>(IRequest<OpenJobRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlOpenJobDispatch<TResponse>(IRequest<OpenJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3737,7 +3737,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlOpenJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_open");
 		}
 		
-		internal Task<TResponse> XpackMlOpenJobDispatchAsync<TResponse>(IRequest<OpenJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlOpenJobDispatchAsync<TResponse>(IRequest<OpenJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3749,7 +3749,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlOpenJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_open");
 		}
 		
-		internal TResponse XpackMlPostDataDispatch<TResponse>(IRequest<PostJobDataRequestParameters> p,SerializableData<IPostJobDataRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlPostDataDispatch<TResponse>(IRequest<PostJobDataRequestParameters> p,SerializableData<IPostJobDataRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3761,7 +3761,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlPostData", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_data");
 		}
 		
-		internal Task<TResponse> XpackMlPostDataDispatchAsync<TResponse>(IRequest<PostJobDataRequestParameters> p,SerializableData<IPostJobDataRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlPostDataDispatchAsync<TResponse>(IRequest<PostJobDataRequestParameters> p,SerializableData<IPostJobDataRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3773,7 +3773,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlPostData", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_data");
 		}
 		
-		internal TResponse XpackMlPreviewDatafeedDispatch<TResponse>(IRequest<PreviewDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlPreviewDatafeedDispatch<TResponse>(IRequest<PreviewDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3785,7 +3785,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlPreviewDatafeed", p, new [] { GET }, "/_xpack/ml/datafeeds/{datafeed_id}/_preview");
 		}
 		
-		internal Task<TResponse> XpackMlPreviewDatafeedDispatchAsync<TResponse>(IRequest<PreviewDatafeedRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlPreviewDatafeedDispatchAsync<TResponse>(IRequest<PreviewDatafeedRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3797,7 +3797,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlPreviewDatafeed", p, new [] { GET }, "/_xpack/ml/datafeeds/{datafeed_id}/_preview");
 		}
 		
-		internal TResponse XpackMlPutDatafeedDispatch<TResponse>(IRequest<PutDatafeedRequestParameters> p,SerializableData<IPutDatafeedRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlPutDatafeedDispatch<TResponse>(IRequest<PutDatafeedRequestParameters> p,SerializableData<IPutDatafeedRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3809,7 +3809,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlPutDatafeed", p, new [] { PUT }, "/_xpack/ml/datafeeds/{datafeed_id}");
 		}
 		
-		internal Task<TResponse> XpackMlPutDatafeedDispatchAsync<TResponse>(IRequest<PutDatafeedRequestParameters> p,SerializableData<IPutDatafeedRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlPutDatafeedDispatchAsync<TResponse>(IRequest<PutDatafeedRequestParameters> p,SerializableData<IPutDatafeedRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3821,7 +3821,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlPutDatafeed", p, new [] { PUT }, "/_xpack/ml/datafeeds/{datafeed_id}");
 		}
 		
-		internal TResponse XpackMlPutJobDispatch<TResponse>(IRequest<PutJobRequestParameters> p,SerializableData<IPutJobRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlPutJobDispatch<TResponse>(IRequest<PutJobRequestParameters> p,SerializableData<IPutJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3833,7 +3833,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlPutJob", p, new [] { PUT }, "/_xpack/ml/anomaly_detectors/{job_id}");
 		}
 		
-		internal Task<TResponse> XpackMlPutJobDispatchAsync<TResponse>(IRequest<PutJobRequestParameters> p,SerializableData<IPutJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlPutJobDispatchAsync<TResponse>(IRequest<PutJobRequestParameters> p,SerializableData<IPutJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3845,7 +3845,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlPutJob", p, new [] { PUT }, "/_xpack/ml/anomaly_detectors/{job_id}");
 		}
 		
-		internal TResponse XpackMlRevertModelSnapshotDispatch<TResponse>(IRequest<RevertModelSnapshotRequestParameters> p,SerializableData<IRevertModelSnapshotRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlRevertModelSnapshotDispatch<TResponse>(IRequest<RevertModelSnapshotRequestParameters> p,SerializableData<IRevertModelSnapshotRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3857,7 +3857,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlRevertModelSnapshot", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert");
 		}
 		
-		internal Task<TResponse> XpackMlRevertModelSnapshotDispatchAsync<TResponse>(IRequest<RevertModelSnapshotRequestParameters> p,SerializableData<IRevertModelSnapshotRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlRevertModelSnapshotDispatchAsync<TResponse>(IRequest<RevertModelSnapshotRequestParameters> p,SerializableData<IRevertModelSnapshotRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3869,7 +3869,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlRevertModelSnapshot", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert");
 		}
 		
-		internal TResponse XpackMlStartDatafeedDispatch<TResponse>(IRequest<StartDatafeedRequestParameters> p,SerializableData<IStartDatafeedRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlStartDatafeedDispatch<TResponse>(IRequest<StartDatafeedRequestParameters> p,SerializableData<IStartDatafeedRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3881,7 +3881,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlStartDatafeed", p, new [] { POST }, "/_xpack/ml/datafeeds/{datafeed_id}/_start");
 		}
 		
-		internal Task<TResponse> XpackMlStartDatafeedDispatchAsync<TResponse>(IRequest<StartDatafeedRequestParameters> p,SerializableData<IStartDatafeedRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlStartDatafeedDispatchAsync<TResponse>(IRequest<StartDatafeedRequestParameters> p,SerializableData<IStartDatafeedRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3893,7 +3893,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlStartDatafeed", p, new [] { POST }, "/_xpack/ml/datafeeds/{datafeed_id}/_start");
 		}
 		
-		internal TResponse XpackMlStopDatafeedDispatch<TResponse>(IRequest<StopDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlStopDatafeedDispatch<TResponse>(IRequest<StopDatafeedRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3905,7 +3905,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlStopDatafeed", p, new [] { POST }, "/_xpack/ml/datafeeds/{datafeed_id}/_stop");
 		}
 		
-		internal Task<TResponse> XpackMlStopDatafeedDispatchAsync<TResponse>(IRequest<StopDatafeedRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlStopDatafeedDispatchAsync<TResponse>(IRequest<StopDatafeedRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3917,7 +3917,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlStopDatafeed", p, new [] { POST }, "/_xpack/ml/datafeeds/{datafeed_id}/_stop");
 		}
 		
-		internal TResponse XpackMlUpdateDatafeedDispatch<TResponse>(IRequest<UpdateDatafeedRequestParameters> p,SerializableData<IUpdateDatafeedRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlUpdateDatafeedDispatch<TResponse>(IRequest<UpdateDatafeedRequestParameters> p,SerializableData<IUpdateDatafeedRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3929,7 +3929,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlUpdateDatafeed", p, new [] { POST }, "/_xpack/ml/datafeeds/{datafeed_id}/_update");
 		}
 		
-		internal Task<TResponse> XpackMlUpdateDatafeedDispatchAsync<TResponse>(IRequest<UpdateDatafeedRequestParameters> p,SerializableData<IUpdateDatafeedRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlUpdateDatafeedDispatchAsync<TResponse>(IRequest<UpdateDatafeedRequestParameters> p,SerializableData<IUpdateDatafeedRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3941,7 +3941,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlUpdateDatafeed", p, new [] { POST }, "/_xpack/ml/datafeeds/{datafeed_id}/_update");
 		}
 		
-		internal TResponse XpackMlUpdateJobDispatch<TResponse>(IRequest<UpdateJobRequestParameters> p,SerializableData<IUpdateJobRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlUpdateJobDispatch<TResponse>(IRequest<UpdateJobRequestParameters> p,SerializableData<IUpdateJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3953,7 +3953,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlUpdateJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_update");
 		}
 		
-		internal Task<TResponse> XpackMlUpdateJobDispatchAsync<TResponse>(IRequest<UpdateJobRequestParameters> p,SerializableData<IUpdateJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlUpdateJobDispatchAsync<TResponse>(IRequest<UpdateJobRequestParameters> p,SerializableData<IUpdateJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3965,7 +3965,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlUpdateJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_update");
 		}
 		
-		internal TResponse XpackMlUpdateModelSnapshotDispatch<TResponse>(IRequest<UpdateModelSnapshotRequestParameters> p,SerializableData<IUpdateModelSnapshotRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlUpdateModelSnapshotDispatch<TResponse>(IRequest<UpdateModelSnapshotRequestParameters> p,SerializableData<IUpdateModelSnapshotRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3977,7 +3977,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlUpdateModelSnapshot", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update");
 		}
 		
-		internal Task<TResponse> XpackMlUpdateModelSnapshotDispatchAsync<TResponse>(IRequest<UpdateModelSnapshotRequestParameters> p,SerializableData<IUpdateModelSnapshotRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlUpdateModelSnapshotDispatchAsync<TResponse>(IRequest<UpdateModelSnapshotRequestParameters> p,SerializableData<IUpdateModelSnapshotRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3989,7 +3989,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlUpdateModelSnapshot", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update");
 		}
 		
-		internal TResponse XpackMlValidateDispatch<TResponse>(IRequest<ValidateJobRequestParameters> p,SerializableData<IValidateJobRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlValidateDispatch<TResponse>(IRequest<ValidateJobRequestParameters> p,SerializableData<IValidateJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4000,7 +4000,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlValidate", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/_validate");
 		}
 		
-		internal Task<TResponse> XpackMlValidateDispatchAsync<TResponse>(IRequest<ValidateJobRequestParameters> p,SerializableData<IValidateJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlValidateDispatchAsync<TResponse>(IRequest<ValidateJobRequestParameters> p,SerializableData<IValidateJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4011,7 +4011,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlValidate", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/_validate");
 		}
 		
-		internal TResponse XpackMlValidateDetectorDispatch<TResponse>(IRequest<ValidateDetectorRequestParameters> p,SerializableData<IValidateDetectorRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackMlValidateDetectorDispatch<TResponse>(IRequest<ValidateDetectorRequestParameters> p,SerializableData<IValidateDetectorRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4022,7 +4022,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlValidateDetector", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/_validate/detector");
 		}
 		
-		internal Task<TResponse> XpackMlValidateDetectorDispatchAsync<TResponse>(IRequest<ValidateDetectorRequestParameters> p,SerializableData<IValidateDetectorRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackMlValidateDetectorDispatchAsync<TResponse>(IRequest<ValidateDetectorRequestParameters> p,SerializableData<IValidateDetectorRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4033,7 +4033,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlValidateDetector", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/_validate/detector");
 		}
 		
-		internal TResponse XpackSecurityAuthenticateDispatch<TResponse>(IRequest<AuthenticateRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackSecurityAuthenticateDispatch<TResponse>(IRequest<AuthenticateRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4044,7 +4044,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityAuthenticate", p, new [] { GET }, "/_xpack/security/_authenticate");
 		}
 		
-		internal Task<TResponse> XpackSecurityAuthenticateDispatchAsync<TResponse>(IRequest<AuthenticateRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackSecurityAuthenticateDispatchAsync<TResponse>(IRequest<AuthenticateRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4055,7 +4055,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityAuthenticate", p, new [] { GET }, "/_xpack/security/_authenticate");
 		}
 		
-		internal TResponse XpackSecurityChangePasswordDispatch<TResponse>(IRequest<ChangePasswordRequestParameters> p,SerializableData<IChangePasswordRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackSecurityChangePasswordDispatch<TResponse>(IRequest<ChangePasswordRequestParameters> p,SerializableData<IChangePasswordRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4071,7 +4071,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityChangePassword", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_password", "/_xpack/security/user/_password");
 		}
 		
-		internal Task<TResponse> XpackSecurityChangePasswordDispatchAsync<TResponse>(IRequest<ChangePasswordRequestParameters> p,SerializableData<IChangePasswordRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackSecurityChangePasswordDispatchAsync<TResponse>(IRequest<ChangePasswordRequestParameters> p,SerializableData<IChangePasswordRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4087,7 +4087,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityChangePassword", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_password", "/_xpack/security/user/_password");
 		}
 		
-		internal TResponse XpackSecurityClearCachedRealmsDispatch<TResponse>(IRequest<ClearCachedRealmsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackSecurityClearCachedRealmsDispatch<TResponse>(IRequest<ClearCachedRealmsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4099,7 +4099,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityClearCachedRealms", p, new [] { POST }, "/_xpack/security/realm/{realms}/_clear_cache");
 		}
 		
-		internal Task<TResponse> XpackSecurityClearCachedRealmsDispatchAsync<TResponse>(IRequest<ClearCachedRealmsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackSecurityClearCachedRealmsDispatchAsync<TResponse>(IRequest<ClearCachedRealmsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4111,7 +4111,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityClearCachedRealms", p, new [] { POST }, "/_xpack/security/realm/{realms}/_clear_cache");
 		}
 		
-		internal TResponse XpackSecurityClearCachedRolesDispatch<TResponse>(IRequest<ClearCachedRolesRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackSecurityClearCachedRolesDispatch<TResponse>(IRequest<ClearCachedRolesRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4123,7 +4123,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityClearCachedRoles", p, new [] { POST }, "/_xpack/security/role/{name}/_clear_cache");
 		}
 		
-		internal Task<TResponse> XpackSecurityClearCachedRolesDispatchAsync<TResponse>(IRequest<ClearCachedRolesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackSecurityClearCachedRolesDispatchAsync<TResponse>(IRequest<ClearCachedRolesRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4135,7 +4135,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityClearCachedRoles", p, new [] { POST }, "/_xpack/security/role/{name}/_clear_cache");
 		}
 		
-		internal TResponse XpackSecurityDeleteRoleDispatch<TResponse>(IRequest<DeleteRoleRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackSecurityDeleteRoleDispatch<TResponse>(IRequest<DeleteRoleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4147,7 +4147,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityDeleteRole", p, new [] { DELETE }, "/_xpack/security/role/{name}");
 		}
 		
-		internal Task<TResponse> XpackSecurityDeleteRoleDispatchAsync<TResponse>(IRequest<DeleteRoleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackSecurityDeleteRoleDispatchAsync<TResponse>(IRequest<DeleteRoleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4159,7 +4159,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityDeleteRole", p, new [] { DELETE }, "/_xpack/security/role/{name}");
 		}
 		
-		internal TResponse XpackSecurityDeleteRoleMappingDispatch<TResponse>(IRequest<DeleteRoleMappingRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackSecurityDeleteRoleMappingDispatch<TResponse>(IRequest<DeleteRoleMappingRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4171,7 +4171,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityDeleteRoleMapping", p, new [] { DELETE }, "/_xpack/security/role_mapping/{name}");
 		}
 		
-		internal Task<TResponse> XpackSecurityDeleteRoleMappingDispatchAsync<TResponse>(IRequest<DeleteRoleMappingRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackSecurityDeleteRoleMappingDispatchAsync<TResponse>(IRequest<DeleteRoleMappingRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4183,7 +4183,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityDeleteRoleMapping", p, new [] { DELETE }, "/_xpack/security/role_mapping/{name}");
 		}
 		
-		internal TResponse XpackSecurityDeleteUserDispatch<TResponse>(IRequest<DeleteUserRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackSecurityDeleteUserDispatch<TResponse>(IRequest<DeleteUserRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4195,7 +4195,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityDeleteUser", p, new [] { DELETE }, "/_xpack/security/user/{username}");
 		}
 		
-		internal Task<TResponse> XpackSecurityDeleteUserDispatchAsync<TResponse>(IRequest<DeleteUserRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackSecurityDeleteUserDispatchAsync<TResponse>(IRequest<DeleteUserRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4207,7 +4207,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityDeleteUser", p, new [] { DELETE }, "/_xpack/security/user/{username}");
 		}
 		
-		internal TResponse XpackSecurityDisableUserDispatch<TResponse>(IRequest<DisableUserRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackSecurityDisableUserDispatch<TResponse>(IRequest<DisableUserRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4223,7 +4223,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityDisableUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_disable");
 		}
 		
-		internal Task<TResponse> XpackSecurityDisableUserDispatchAsync<TResponse>(IRequest<DisableUserRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackSecurityDisableUserDispatchAsync<TResponse>(IRequest<DisableUserRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4239,7 +4239,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityDisableUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_disable");
 		}
 		
-		internal TResponse XpackSecurityEnableUserDispatch<TResponse>(IRequest<EnableUserRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackSecurityEnableUserDispatch<TResponse>(IRequest<EnableUserRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4255,7 +4255,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityEnableUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_enable");
 		}
 		
-		internal Task<TResponse> XpackSecurityEnableUserDispatchAsync<TResponse>(IRequest<EnableUserRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackSecurityEnableUserDispatchAsync<TResponse>(IRequest<EnableUserRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4271,7 +4271,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityEnableUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}/_enable");
 		}
 		
-		internal TResponse XpackSecurityGetRoleDispatch<TResponse>(IRequest<GetRoleRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackSecurityGetRoleDispatch<TResponse>(IRequest<GetRoleRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4283,7 +4283,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityGetRole", p, new [] { GET }, "/_xpack/security/role/{name}", "/_xpack/security/role");
 		}
 		
-		internal Task<TResponse> XpackSecurityGetRoleDispatchAsync<TResponse>(IRequest<GetRoleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackSecurityGetRoleDispatchAsync<TResponse>(IRequest<GetRoleRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4295,7 +4295,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityGetRole", p, new [] { GET }, "/_xpack/security/role/{name}", "/_xpack/security/role");
 		}
 		
-		internal TResponse XpackSecurityGetRoleMappingDispatch<TResponse>(IRequest<GetRoleMappingRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackSecurityGetRoleMappingDispatch<TResponse>(IRequest<GetRoleMappingRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4307,7 +4307,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityGetRoleMapping", p, new [] { GET }, "/_xpack/security/role_mapping/{name}", "/_xpack/security/role_mapping");
 		}
 		
-		internal Task<TResponse> XpackSecurityGetRoleMappingDispatchAsync<TResponse>(IRequest<GetRoleMappingRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackSecurityGetRoleMappingDispatchAsync<TResponse>(IRequest<GetRoleMappingRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4319,7 +4319,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityGetRoleMapping", p, new [] { GET }, "/_xpack/security/role_mapping/{name}", "/_xpack/security/role_mapping");
 		}
 		
-		internal TResponse XpackSecurityGetTokenDispatch<TResponse>(IRequest<GetUserAccessTokenRequestParameters> p,SerializableData<IGetUserAccessTokenRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackSecurityGetTokenDispatch<TResponse>(IRequest<GetUserAccessTokenRequestParameters> p,SerializableData<IGetUserAccessTokenRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4330,7 +4330,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityGetToken", p, new [] { POST }, "/_xpack/security/oauth2/token");
 		}
 		
-		internal Task<TResponse> XpackSecurityGetTokenDispatchAsync<TResponse>(IRequest<GetUserAccessTokenRequestParameters> p,SerializableData<IGetUserAccessTokenRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackSecurityGetTokenDispatchAsync<TResponse>(IRequest<GetUserAccessTokenRequestParameters> p,SerializableData<IGetUserAccessTokenRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4341,7 +4341,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityGetToken", p, new [] { POST }, "/_xpack/security/oauth2/token");
 		}
 		
-		internal TResponse XpackSecurityGetUserDispatch<TResponse>(IRequest<GetUserRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackSecurityGetUserDispatch<TResponse>(IRequest<GetUserRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4353,7 +4353,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityGetUser", p, new [] { GET }, "/_xpack/security/user/{username}", "/_xpack/security/user");
 		}
 		
-		internal Task<TResponse> XpackSecurityGetUserDispatchAsync<TResponse>(IRequest<GetUserRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackSecurityGetUserDispatchAsync<TResponse>(IRequest<GetUserRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4365,7 +4365,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityGetUser", p, new [] { GET }, "/_xpack/security/user/{username}", "/_xpack/security/user");
 		}
 		
-		internal TResponse XpackSecurityInvalidateTokenDispatch<TResponse>(IRequest<InvalidateUserAccessTokenRequestParameters> p,SerializableData<IInvalidateUserAccessTokenRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackSecurityInvalidateTokenDispatch<TResponse>(IRequest<InvalidateUserAccessTokenRequestParameters> p,SerializableData<IInvalidateUserAccessTokenRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4376,7 +4376,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityInvalidateToken", p, new [] { DELETE }, "/_xpack/security/oauth2/token");
 		}
 		
-		internal Task<TResponse> XpackSecurityInvalidateTokenDispatchAsync<TResponse>(IRequest<InvalidateUserAccessTokenRequestParameters> p,SerializableData<IInvalidateUserAccessTokenRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackSecurityInvalidateTokenDispatchAsync<TResponse>(IRequest<InvalidateUserAccessTokenRequestParameters> p,SerializableData<IInvalidateUserAccessTokenRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4387,7 +4387,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityInvalidateToken", p, new [] { DELETE }, "/_xpack/security/oauth2/token");
 		}
 		
-		internal TResponse XpackSecurityPutRoleDispatch<TResponse>(IRequest<PutRoleRequestParameters> p,SerializableData<IPutRoleRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackSecurityPutRoleDispatch<TResponse>(IRequest<PutRoleRequestParameters> p,SerializableData<IPutRoleRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4403,7 +4403,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityPutRole", p, new [] { PUT, POST }, "/_xpack/security/role/{name}");
 		}
 		
-		internal Task<TResponse> XpackSecurityPutRoleDispatchAsync<TResponse>(IRequest<PutRoleRequestParameters> p,SerializableData<IPutRoleRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackSecurityPutRoleDispatchAsync<TResponse>(IRequest<PutRoleRequestParameters> p,SerializableData<IPutRoleRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4419,7 +4419,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityPutRole", p, new [] { PUT, POST }, "/_xpack/security/role/{name}");
 		}
 		
-		internal TResponse XpackSecurityPutRoleMappingDispatch<TResponse>(IRequest<PutRoleMappingRequestParameters> p,SerializableData<IPutRoleMappingRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackSecurityPutRoleMappingDispatch<TResponse>(IRequest<PutRoleMappingRequestParameters> p,SerializableData<IPutRoleMappingRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4435,7 +4435,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityPutRoleMapping", p, new [] { PUT, POST }, "/_xpack/security/role_mapping/{name}");
 		}
 		
-		internal Task<TResponse> XpackSecurityPutRoleMappingDispatchAsync<TResponse>(IRequest<PutRoleMappingRequestParameters> p,SerializableData<IPutRoleMappingRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackSecurityPutRoleMappingDispatchAsync<TResponse>(IRequest<PutRoleMappingRequestParameters> p,SerializableData<IPutRoleMappingRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4451,7 +4451,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityPutRoleMapping", p, new [] { PUT, POST }, "/_xpack/security/role_mapping/{name}");
 		}
 		
-		internal TResponse XpackSecurityPutUserDispatch<TResponse>(IRequest<PutUserRequestParameters> p,SerializableData<IPutUserRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackSecurityPutUserDispatch<TResponse>(IRequest<PutUserRequestParameters> p,SerializableData<IPutUserRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4467,7 +4467,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityPutUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}");
 		}
 		
-		internal Task<TResponse> XpackSecurityPutUserDispatchAsync<TResponse>(IRequest<PutUserRequestParameters> p,SerializableData<IPutUserRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackSecurityPutUserDispatchAsync<TResponse>(IRequest<PutUserRequestParameters> p,SerializableData<IPutUserRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4483,7 +4483,7 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityPutUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}");
 		}
 		
-		internal TResponse XpackWatcherAckWatchDispatch<TResponse>(IRequest<AcknowledgeWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackWatcherAckWatchDispatch<TResponse>(IRequest<AcknowledgeWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4501,7 +4501,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherAckWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{watch_id}/_ack", "/_xpack/watcher/watch/{watch_id}/_ack/{action_id}");
 		}
 		
-		internal Task<TResponse> XpackWatcherAckWatchDispatchAsync<TResponse>(IRequest<AcknowledgeWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackWatcherAckWatchDispatchAsync<TResponse>(IRequest<AcknowledgeWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4519,7 +4519,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherAckWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{watch_id}/_ack", "/_xpack/watcher/watch/{watch_id}/_ack/{action_id}");
 		}
 		
-		internal TResponse XpackWatcherActivateWatchDispatch<TResponse>(IRequest<ActivateWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackWatcherActivateWatchDispatch<TResponse>(IRequest<ActivateWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4535,7 +4535,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherActivateWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{watch_id}/_activate");
 		}
 		
-		internal Task<TResponse> XpackWatcherActivateWatchDispatchAsync<TResponse>(IRequest<ActivateWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackWatcherActivateWatchDispatchAsync<TResponse>(IRequest<ActivateWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4551,7 +4551,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherActivateWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{watch_id}/_activate");
 		}
 		
-		internal TResponse XpackWatcherDeactivateWatchDispatch<TResponse>(IRequest<DeactivateWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackWatcherDeactivateWatchDispatch<TResponse>(IRequest<DeactivateWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4567,7 +4567,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherDeactivateWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{watch_id}/_deactivate");
 		}
 		
-		internal Task<TResponse> XpackWatcherDeactivateWatchDispatchAsync<TResponse>(IRequest<DeactivateWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackWatcherDeactivateWatchDispatchAsync<TResponse>(IRequest<DeactivateWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4583,7 +4583,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherDeactivateWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{watch_id}/_deactivate");
 		}
 		
-		internal TResponse XpackWatcherDeleteWatchDispatch<TResponse>(IRequest<DeleteWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackWatcherDeleteWatchDispatch<TResponse>(IRequest<DeleteWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4595,7 +4595,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherDeleteWatch", p, new [] { DELETE }, "/_xpack/watcher/watch/{id}");
 		}
 		
-		internal Task<TResponse> XpackWatcherDeleteWatchDispatchAsync<TResponse>(IRequest<DeleteWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackWatcherDeleteWatchDispatchAsync<TResponse>(IRequest<DeleteWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4607,7 +4607,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherDeleteWatch", p, new [] { DELETE }, "/_xpack/watcher/watch/{id}");
 		}
 		
-		internal TResponse XpackWatcherExecuteWatchDispatch<TResponse>(IRequest<ExecuteWatchRequestParameters> p,SerializableData<IExecuteWatchRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackWatcherExecuteWatchDispatch<TResponse>(IRequest<ExecuteWatchRequestParameters> p,SerializableData<IExecuteWatchRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4623,7 +4623,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherExecuteWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{id}/_execute", "/_xpack/watcher/watch/_execute");
 		}
 		
-		internal Task<TResponse> XpackWatcherExecuteWatchDispatchAsync<TResponse>(IRequest<ExecuteWatchRequestParameters> p,SerializableData<IExecuteWatchRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackWatcherExecuteWatchDispatchAsync<TResponse>(IRequest<ExecuteWatchRequestParameters> p,SerializableData<IExecuteWatchRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4639,7 +4639,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherExecuteWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{id}/_execute", "/_xpack/watcher/watch/_execute");
 		}
 		
-		internal TResponse XpackWatcherGetWatchDispatch<TResponse>(IRequest<GetWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackWatcherGetWatchDispatch<TResponse>(IRequest<GetWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4651,7 +4651,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherGetWatch", p, new [] { GET }, "/_xpack/watcher/watch/{id}");
 		}
 		
-		internal Task<TResponse> XpackWatcherGetWatchDispatchAsync<TResponse>(IRequest<GetWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackWatcherGetWatchDispatchAsync<TResponse>(IRequest<GetWatchRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4663,7 +4663,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherGetWatch", p, new [] { GET }, "/_xpack/watcher/watch/{id}");
 		}
 		
-		internal TResponse XpackWatcherPutWatchDispatch<TResponse>(IRequest<PutWatchRequestParameters> p,SerializableData<IPutWatchRequest> body) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackWatcherPutWatchDispatch<TResponse>(IRequest<PutWatchRequestParameters> p,SerializableData<IPutWatchRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4679,7 +4679,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherPutWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{id}");
 		}
 		
-		internal Task<TResponse> XpackWatcherPutWatchDispatchAsync<TResponse>(IRequest<PutWatchRequestParameters> p,SerializableData<IPutWatchRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackWatcherPutWatchDispatchAsync<TResponse>(IRequest<PutWatchRequestParameters> p,SerializableData<IPutWatchRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4695,7 +4695,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherPutWatch", p, new [] { PUT, POST }, "/_xpack/watcher/watch/{id}");
 		}
 		
-		internal TResponse XpackWatcherRestartDispatch<TResponse>(IRequest<RestartWatcherRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackWatcherRestartDispatch<TResponse>(IRequest<RestartWatcherRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4706,7 +4706,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherRestart", p, new [] { POST }, "/_xpack/watcher/_restart");
 		}
 		
-		internal Task<TResponse> XpackWatcherRestartDispatchAsync<TResponse>(IRequest<RestartWatcherRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackWatcherRestartDispatchAsync<TResponse>(IRequest<RestartWatcherRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4717,7 +4717,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherRestart", p, new [] { POST }, "/_xpack/watcher/_restart");
 		}
 		
-		internal TResponse XpackWatcherStartDispatch<TResponse>(IRequest<StartWatcherRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackWatcherStartDispatch<TResponse>(IRequest<StartWatcherRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4728,7 +4728,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherStart", p, new [] { POST }, "/_xpack/watcher/_start");
 		}
 		
-		internal Task<TResponse> XpackWatcherStartDispatchAsync<TResponse>(IRequest<StartWatcherRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackWatcherStartDispatchAsync<TResponse>(IRequest<StartWatcherRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4739,7 +4739,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherStart", p, new [] { POST }, "/_xpack/watcher/_start");
 		}
 		
-		internal TResponse XpackWatcherStatsDispatch<TResponse>(IRequest<WatcherStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackWatcherStatsDispatch<TResponse>(IRequest<WatcherStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4751,7 +4751,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherStats", p, new [] { GET }, "/_xpack/watcher/stats", "/_xpack/watcher/stats/{watcher_stats_metric}");
 		}
 		
-		internal Task<TResponse> XpackWatcherStatsDispatchAsync<TResponse>(IRequest<WatcherStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackWatcherStatsDispatchAsync<TResponse>(IRequest<WatcherStatsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4763,7 +4763,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherStats", p, new [] { GET }, "/_xpack/watcher/stats", "/_xpack/watcher/stats/{watcher_stats_metric}");
 		}
 		
-		internal TResponse XpackWatcherStopDispatch<TResponse>(IRequest<StopWatcherRequestParameters> p) where TResponse : class, IElasticsearchResponse
+		internal TResponse XpackWatcherStopDispatch<TResponse>(IRequest<StopWatcherRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4774,7 +4774,7 @@ namespace Nest
 			throw InvalidDispatch("XpackWatcherStop", p, new [] { POST }, "/_xpack/watcher/_stop");
 		}
 		
-		internal Task<TResponse> XpackWatcherStopDispatchAsync<TResponse>(IRequest<StopWatcherRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse
+		internal Task<TResponse> XpackWatcherStopDispatchAsync<TResponse>(IRequest<StopWatcherRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{

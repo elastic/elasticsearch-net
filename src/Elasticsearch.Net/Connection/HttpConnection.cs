@@ -135,7 +135,7 @@ namespace Elasticsearch.Net
 		}
 
 		public virtual TResponse Request<TResponse>(RequestData requestData)
-			where TResponse : class, IElasticsearchResponse
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			int? statusCode = null;
 			IEnumerable<string> warnings = null;
@@ -199,7 +199,8 @@ namespace Elasticsearch.Net
 		}
 
 		public virtual async Task<TResponse> RequestAsync<TResponse>(RequestData requestData,
-			CancellationToken cancellationToken) where TResponse : class, IElasticsearchResponse
+			CancellationToken cancellationToken)
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			Action unregisterWaitHandle = null;
 			int? statusCode = null;

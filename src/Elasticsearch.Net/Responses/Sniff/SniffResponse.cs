@@ -9,6 +9,7 @@ namespace Elasticsearch.Net
 	public static class SniffParser
 	{
 		public static Regex AddressRegex { get; } = new Regex(@"^((?<fqdn>[^/]+)/)?(?<ip>[^:]+|\[[\da-fA-F:\.]+\]):(?<port>\d+)$");
+
 		public static Uri ParseToUri(string boundAddress, bool forceHttp)
 		{
 			if (boundAddress == null) throw new ArgumentNullException(nameof(boundAddress));
@@ -24,44 +25,39 @@ namespace Elasticsearch.Net
 			return new Uri($"http{suffix}://{host}:{port}");
 		}
 	}
-	internal class SniffResponse : ElasticsearchResponse<SniffResponse.SniffBody>
+
+	internal class SniffResponse : ElasticsearchResponseBase
 	{
-		internal class SniffBody
+		// ReSharper disable InconsistentNaming
+		public string cluster_name { get; set; }
+
+		public Dictionary<string, NodeInfo> nodes { get; set; }
+
+		public IEnumerable<Node> ToNodes(bool forceHttp = false)
 		{
-            // ReSharper disable InconsistentNaming
-            // this uses simplejsons bindings
-            public string cluster_name { get; set; }
+			foreach (var kv in nodes.Where(n => n.Value.HttpEnabled))
+			{
+				var info = kv.Value;
+				var httpEndpoint = info.http?.publish_address;
+				if (string.IsNullOrWhiteSpace(httpEndpoint))
+					httpEndpoint = kv.Value.http?.bound_address.FirstOrDefault();
+				if (string.IsNullOrWhiteSpace(httpEndpoint))
+					continue;
 
-            public Dictionary<string, NodeInfo> nodes { get; set; }
-
-            public IEnumerable<Node> ToNodes(bool forceHttp = false)
-            {
-                foreach (var kv in nodes.Where(n => n.Value.HttpEnabled))
-                {
-                    var info = kv.Value;
-                    var httpEndpoint = info.http?.publish_address;
-                    if (string.IsNullOrWhiteSpace(httpEndpoint))
-                        httpEndpoint = kv.Value.http?.bound_address.FirstOrDefault();
-                    if (string.IsNullOrWhiteSpace(httpEndpoint))
-                        continue;
-
-                    var uri = SniffParser.ParseToUri(httpEndpoint, forceHttp);
-                    var node = new Node(uri)
-                    {
-                        Name = info.name,
-                        Id = kv.Key,
-                        MasterEligible = info.MasterEligible,
-                        HoldsData = info.HoldsData,
-                        IngestEnabled = info.IngestEnabled,
-                        HttpEnabled = info.HttpEnabled,
-                        Settings = new ReadOnlyDictionary<string, string>(info.settings)
-                    };
-                    yield return node;
-                }
-            }
-
+				var uri = SniffParser.ParseToUri(httpEndpoint, forceHttp);
+				var node = new Node(uri)
+				{
+					Name = info.name,
+					Id = kv.Key,
+					MasterEligible = info.MasterEligible,
+					HoldsData = info.HoldsData,
+					IngestEnabled = info.IngestEnabled,
+					HttpEnabled = info.HttpEnabled,
+					Settings = new ReadOnlyDictionary<string, string>(info.settings)
+				};
+				yield return node;
+			}
 		}
-
 	}
 
 	internal class NodeInfo
@@ -79,6 +75,7 @@ namespace Elasticsearch.Net
 		internal bool MasterEligible => this.roles?.Contains("master") ?? false;
 		internal bool HoldsData => this.roles?.Contains("data") ?? false;
 		internal bool IngestEnabled => this.roles?.Contains("ingest") ?? false;
+
 		internal bool HttpEnabled
 		{
 			get

@@ -61,7 +61,8 @@ namespace Elasticsearch.Net
 			return client;
 		}
 
-		public virtual TResponse Request<TResponse>(RequestData requestData) where TResponse : class, IElasticsearchResponse
+		public virtual TResponse Request<TResponse>(RequestData requestData)
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			//TODO remove Stream response support in 6.0, closing the stream is sufficient on desktop/mono
 			//but not on .NET core on linux HttpClient which proxies to curl.
@@ -96,6 +97,7 @@ namespace Elasticsearch.Net
 			{
 				ex = e;
 			}
+			responseStream = responseStream ?? Stream.Null;
 			var response = ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream);
 			//var response = builder.ToResponse();
 			//explicit dispose of response not needed (as documented on MSDN) on desktop CLR
@@ -106,7 +108,7 @@ namespace Elasticsearch.Net
 
 
 		public virtual async Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
-			where TResponse : class, IElasticsearchResponse
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			//TODO remove Stream response support in 6.0, closing the stream is sufficient on desktop/mono
 			//but not on .NET core on linux HttpClient which proxies to curl.
@@ -141,6 +143,7 @@ namespace Elasticsearch.Net
 			{
 				ex = e;
 			}
+			responseStream = responseStream ?? Stream.Null;
 			var response = await ResponseBuilder.ToResponseAsync<TResponse>(requestData, ex, statusCode, warnings, responseStream, cancellationToken)
 				.ConfigureAwait(false);
 			//explicit dispose of response not needed (as documented on MSDN) on desktop CLR

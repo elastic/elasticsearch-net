@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
@@ -191,5 +192,10 @@ namespace Elasticsearch.Net
 		/// request using <see cref="RequestConfiguration.ClientCertificates"/>
 		/// </summary>
 		X509CertificateCollection ClientCertificates { get; }
+
+		/// <summary>
+		/// Configure the client to skip deserialization of certain status codes e.g: you run elasticsearch behind a proxy that returns a HTML for 401, 500
+		/// </summary>
+		IReadOnlyCollection<int> SkipDeserializationForStatusCodes { get; }
 	}
 }

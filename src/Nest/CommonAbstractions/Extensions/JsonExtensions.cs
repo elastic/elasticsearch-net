@@ -38,19 +38,11 @@ namespace Nest
 			error = null;
 			if (jToken == null) return false;
 
-			var errorProperty = jToken.Children<JProperty>().FirstOrDefault(c => c.Name == "error");
-			var rootCauseProperty = jToken.Children<JProperty>().FirstOrDefault(c => c.Name == "root_cause");
-			if (errorProperty == null && rootCauseProperty == null) return false;
-
-			var j = jToken;
-			if (rootCauseProperty != null)
+			var o = new JObject
 			{
-				var o = new JObject
-				{
-					{"error", jToken}
-				};
-				j = o;
-			}
+				{"error", jToken}
+			};
+			JToken j = o;
 
 			using (var sw = new StringWriter())
 			using (var localWriter = new JsonTextWriter(sw))

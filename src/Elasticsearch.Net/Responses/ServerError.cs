@@ -10,10 +10,18 @@ namespace Elasticsearch.Net
 {
 	public class ServerError
 	{
-		public Error Error { get; set; }
-		public int Status { get; set; }
+		public ServerError(Error error, int? statusCode)
+		{
+			this.Error = error;
+			this.Status = statusCode.GetValueOrDefault();
+		}
 
-		public static ServerError Create(Stream stream) => LowLevelRequestResponseSerializer.Instance.Deserialize<ServerError>(stream);
+		public Error Error { get; private set; }
+		public int Status { get; private set; }
+
+		public static ServerError Create(Stream stream) =>
+			LowLevelRequestResponseSerializer.Instance.Deserialize<ServerError>(stream);
+
 		public static Task<ServerError> CreateAsync(Stream stream, CancellationToken token) =>
 			LowLevelRequestResponseSerializer.Instance.DeserializeAsync<ServerError>(stream, token);
 
@@ -41,26 +49,20 @@ namespace Elasticsearch.Net
 
 		internal static ServerError Create(IDictionary<string, object> dict, IJsonSerializerStrategy strategy)
 		{
-			object status, error;
-			int statusCode = -1;
+			var statusCode = -1;
 
-			if (dict.TryGetValue("status", out status))
+			if (dict.TryGetValue("status", out var status))
 				statusCode = Convert.ToInt32(status);
 
-			if (!dict.TryGetValue("error", out error)) return null;
+			if (!dict.TryGetValue("error", out var error)) return null;
 			Error err;
-			var s = error as string;
-			if (s != null)
+			if (error is string s)
 			{
 				err = new Error {Reason = s};
 			}
 			else err = (Error) strategy.DeserializeObject(error, typeof(Error));
 
-			return new ServerError
-			{
-				Status = statusCode,
-				Error = err
-			};
+			return new ServerError(err, statusCode);
 		}
 
 		public override string ToString()
@@ -97,15 +99,12 @@ namespace Elasticsearch.Net
 			var error = new Error();
 			error.FillValues(dict);
 
-			object causedBy;
-			if (dict.TryGetValue("caused_by", out causedBy))
+			if (dict.TryGetValue("caused_by", out var causedBy))
 				error.CausedBy = (CausedBy) strategy.DeserializeObject(causedBy, typeof(CausedBy));
 
-			object rootCause;
-			if (!dict.TryGetValue("root_cause", out rootCause)) return error;
+			if (!dict.TryGetValue("root_cause", out var rootCause)) return error;
 
-			var os = rootCause as object[];
-			if (os == null) return error;
+			if (!(rootCause is object[] os)) return error;
 			error.RootCause = os.Select(o => (RootCause)strategy.DeserializeObject(o, typeof(RootCause))).ToList().AsReadOnly();
 			return error;
 		}
@@ -124,12 +123,9 @@ namespace Elasticsearch.Net
 		internal static CausedBy Create(IDictionary<string, object> dict, IJsonSerializerStrategy strategy)
 		{
 			var causedBy = new CausedBy();
-			object reason;
-			if (dict.TryGetValue("reason", out reason)) causedBy.Reason = Convert.ToString(reason);
-			object type;
-			if (dict.TryGetValue("type", out type)) causedBy.Type = Convert.ToString(type);
-			object innerCausedBy;
-			if (dict.TryGetValue("caused_by", out innerCausedBy))
+			if (dict.TryGetValue("reason", out var reason)) causedBy.Reason = Convert.ToString(reason);
+			if (dict.TryGetValue("type", out var type)) causedBy.Type = Convert.ToString(type);
+			if (dict.TryGetValue("caused_by", out var innerCausedBy))
 				causedBy.InnerCausedBy = (CausedBy)strategy.DeserializeObject(innerCausedBy, typeof(CausedBy));
 
 			return causedBy;
@@ -163,16 +159,11 @@ namespace Elasticsearch.Net
 		public static void FillValues(this IRootCause rootCause, IDictionary<string, object> dict)
 		{
 			if (dict == null) return;
-			object index;
-			if (dict.TryGetValue("index", out index)) rootCause.Index = Convert.ToString(index);
-			object reason;
-			if (dict.TryGetValue("reason", out reason)) rootCause.Reason = Convert.ToString(reason);
-			object resourceId;
-			if (dict.TryGetValue("resource.id", out resourceId)) rootCause.ResourceId = Convert.ToString(resourceId);
-			object resourceType;
-			if (dict.TryGetValue("resource.type", out resourceType)) rootCause.ResourceType = Convert.ToString(resourceType);
-			object type;
-			if (dict.TryGetValue("type", out type)) rootCause.Type = Convert.ToString(type);
+			if (dict.TryGetValue("index", out var index)) rootCause.Index = Convert.ToString(index);
+			if (dict.TryGetValue("reason", out var reason)) rootCause.Reason = Convert.ToString(reason);
+			if (dict.TryGetValue("resource.id", out var resourceId)) rootCause.ResourceId = Convert.ToString(resourceId);
+			if (dict.TryGetValue("resource.type", out var resourceType)) rootCause.ResourceType = Convert.ToString(resourceType);
+			if (dict.TryGetValue("type", out var type)) rootCause.Type = Convert.ToString(type);
 		}
 	}
 }

@@ -18,21 +18,19 @@ namespace Nest
 
 	public class GetMappingResponse : ResponseBase, IGetMappingResponse
 	{
-		internal GetMappingResponse() { }
+		public GetMappingResponse() { }
 
 		internal GetMappingResponse(GetRootObjectMappingWrapping dict)
 		{
+			if (dict == null) return;
 			foreach (var index in dict)
 			{
-				Dictionary<string, TypeMapping> mappings;
-				if (index.Value != null && index.Value.TryGetValue("mappings", out mappings))
+				if (index.Value == null || !index.Value.TryGetValue("mappings", out var mappings)) continue;
+				this._mappings.Add(index.Key, new Dictionary<string, TypeMapping>());
+				foreach (var mapping in mappings)
 				{
-					this._mappings.Add(index.Key, new Dictionary<string, TypeMapping>());
-					foreach (var mapping in mappings)
-					{
-						if (mapping.Value == null) continue;
-						this._mappings[index.Key].Add(mapping.Key, mapping.Value);
-					}
+					if (mapping.Value == null) continue;
+					this._mappings[index.Key].Add(mapping.Key, mapping.Value);
 				}
 			}
 
@@ -45,7 +43,7 @@ namespace Nest
 		public IReadOnlyDictionary<string, IReadOnlyDictionary<string, TypeMapping>> Mappings => this._mappings
 			.ToDictionary(k=>k.Key, v=>(IReadOnlyDictionary<string, TypeMapping>)v.Value);
 
-		public TypeMapping Mapping { get; internal set; }
+		public TypeMapping Mapping { get; }
 
 		public void Accept(IMappingVisitor visitor)
 		{

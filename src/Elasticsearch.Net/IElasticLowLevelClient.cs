@@ -15,7 +15,7 @@ namespace Elasticsearch.Net
 		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
 		/// <returns>An ElasticsearchResponse of T where T represents the JSON response body</returns>
 		TResponse DoRequest<TResponse>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse;
+			where TResponse : class, IElasticsearchResponse, new();
 
 		/// <summary>
 		/// Perform any request you want over the configured IConnection asynchronously while taking advantage of the cluster failover.
@@ -27,6 +27,6 @@ namespace Elasticsearch.Net
 		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
 		/// <returns>A task of ElasticsearchResponse of T where T represents the JSON response body</returns>
 		Task<TResponse> DoRequestAsync<TResponse>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null, IRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse;
+			where TResponse : class, IElasticsearchResponse, new();
 	}
 }

@@ -33,6 +33,7 @@ namespace Elasticsearch.Net
 		public string ContentType { get; }
 		public string Accept { get; }
 		public string RunAs { get; }
+		public IReadOnlyCollection<int> SkipDeserializationForStatusCodes { get; }
 
 		public NameValueCollection Headers { get; }
 		public string ProxyAddress { get; }
@@ -79,6 +80,7 @@ namespace Elasticsearch.Net
 			this.Accept = local?.Accept ?? MimeType;
 			this.Headers = global.Headers != null ? new NameValueCollection(global.Headers) : new NameValueCollection();
 			this.RunAs = local?.RunAs;
+			this.SkipDeserializationForStatusCodes = global?.SkipDeserializationForStatusCodes;
 
 			this.RequestTimeout = local?.RequestTimeout ?? global.RequestTimeout;
 			this.PingTimeout =

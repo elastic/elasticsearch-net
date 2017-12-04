@@ -46,7 +46,7 @@ namespace Elasticsearch.Net
 		}
 
 		public TResponse Request<TResponse>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
 			{
@@ -87,7 +87,7 @@ namespace Elasticsearch.Net
 						throw new UnexpectedElasticsearchClientException(killerException, seenExceptions)
 						{
 							Request = requestData,
-							Response = response.ApiCall,
+							Response = response?.ApiCall,
 							AuditTrail = pipeline?.AuditTrail
 						};
 					}
@@ -108,7 +108,7 @@ namespace Elasticsearch.Net
 		}
 
 		public async Task<TResponse> RequestAsync<TResponse>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null, IRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
 			{
@@ -149,7 +149,7 @@ namespace Elasticsearch.Net
 						throw new UnexpectedElasticsearchClientException(killerException, seenExceptions)
 						{
 							Request = requestData,
-							Response = response.ApiCall,
+							Response = response?.ApiCall,
 							AuditTrail = pipeline.AuditTrail
 						};
 					}
