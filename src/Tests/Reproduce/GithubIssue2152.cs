@@ -55,6 +55,7 @@ namespace Tests.Reproduce
 			bulkResponse.Errors.Should().BeTrue();
 
 			var firstOperation = bulkResponse.ItemsWithErrors.First();
+			firstOperation.Status.Should().Be(400);
 
 			ShouldDeserialize(firstOperation.Error);
 			ShouldDeserialize(firstOperation.Error.CausedBy);
@@ -94,6 +95,7 @@ namespace Tests.Reproduce
 
 			searchResponse.ShouldNotBeValid();
 			var se = searchResponse.ServerError;
+			se.Status.Should().Be(400);
 			se.Should().NotBeNull();
 			ShouldDeserialize(se.Error);
 			ShouldDeserialize(se.Error.CausedBy);

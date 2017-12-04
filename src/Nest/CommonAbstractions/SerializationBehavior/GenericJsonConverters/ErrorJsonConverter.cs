@@ -1,11 +1,32 @@
 using System;
+using System.Collections.Generic;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	internal class ErrorJsonConverter : ErrorJsonConverter<Error> {}
+	internal class ErrorJsonConverter : ErrorJsonConverter<Error>
+	{
+		protected override bool ReadProperty(Error error, string propertyName, JsonReader reader, JsonSerializer serializer)
+		{
+			if (propertyName != "root_cause") return false;
+
+			reader.Read();
+			if (reader.TokenType != JsonToken.StartArray)
+				return false;
+
+			var rootCauses = new List<ErrorCause>();
+			var depth = reader.Depth;
+			do
+			{
+				var rootCause = ReadCausedBy(reader, serializer);
+				rootCauses.Add(rootCause);
+			} while (reader.Depth >= depth && reader.TokenType != JsonToken.EndArray);
+			error.RootCause = rootCauses;
+			return true;
+		}
+	}
 
 	internal class BulkErrorJsonConverter : ErrorJsonConverter<BulkError>
 	{
@@ -50,7 +71,7 @@ namespace Nest
 			return false;
 		}
 
-		private ErrorCause ReadCausedBy(JsonReader reader, JsonSerializer serializer)
+		protected ErrorCause ReadCausedBy(JsonReader reader, JsonSerializer serializer)
 		{
 			return ReadError<ErrorCause>(reader, serializer, (e, prop) =>
 			{
