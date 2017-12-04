@@ -131,17 +131,12 @@ namespace Elasticsearch.Net
 			if (type == typeof(Error))
 			{
 				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
-				return Error.Create(dict, this);
+				return Error.CreateError(dict, this);
 			}
-			if (type == typeof(RootCause))
+			if (type == typeof(ErrorCause))
 			{
 				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
-				return RootCause.Create(dict, this);
-			}
-			if (type == typeof(CausedBy))
-			{
-				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
-				return CausedBy.Create(dict, this);
+				return ErrorCause.CreateErrorCause(dict, this);
 			}
 			return base.DeserializeObject(value, type);
 		}
