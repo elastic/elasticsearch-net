@@ -1,3 +1,4 @@
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -15,45 +16,6 @@ namespace Nest
 		public string Node { get; internal set; }
 
 		[JsonProperty("reason")]
-		public ShardFailureReason Reason { get; internal set; }
-	}
-
-	[JsonObject]
-	public interface IFailureReason
-	{
-		[JsonProperty("type")]
-		string Type { get; }
-
-		[JsonProperty("reason")]
-		string Reason { get; }
-	}
-
-	public class ShardFailureReason : IFailureReason
-	{
-		public string Type { get; internal set; }
-
-		public string Reason { get; internal set; }
-
-		[JsonProperty("caused_by")]
-		public CausedBy CausedBy { get; internal set; }
-	}
-
-	public class CausedBy : IFailureReason
-	{
-		public string Type { get; internal set; }
-
-		public string Reason { get; internal set; }
-
-		[JsonProperty("caused_by")]
-		public CausedBy InnerCausedBy { get; internal set; }
-
-		public override string ToString()
-		{
-			var innerCause = (InnerCausedBy != null) ?
-				$" CausedBy:\n{InnerCausedBy}" :
-				string.Empty;
-
-			return $"Type: {Type} Reason: \"{Reason}\"{innerCause}";
-		}
+		public Error Reason { get; internal set; }
 	}
 }

@@ -1,3 +1,4 @@
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -27,12 +28,8 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class BulkIndexFailureCause : IFailureReason
+	public class BulkIndexFailureCause : Error
 	{
-		public string Type { get; internal set; }
-
-		public string Reason { get; internal set; }
-
 		[JsonProperty("index_uuid")]
 		public string IndexUniqueId { get; internal set; }
 
@@ -41,8 +38,5 @@ namespace Nest
 
 		[JsonProperty("index")]
 		public string Index { get; internal set; }
-
-		[JsonProperty("caused_by")]
-		public CausedBy CausedBy { get; internal set; }
 	}
 }
