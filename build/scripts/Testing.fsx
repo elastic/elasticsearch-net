@@ -42,7 +42,7 @@ module Tests =
             | _  -> p
 
         let dotnet = Tooling.BuildTooling("dotnet")
-        dotnet.ExecIn "src/Tests" command |> ignore
+        dotnet.ExecWithTimeoutIn "src/Tests" command (TimeSpan.FromMinutes 30.) |> ignore
 
     let RunReleaseUnitTests() =
         setLocalEnvVars()

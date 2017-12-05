@@ -94,7 +94,8 @@ module Tooling =
     type BuildTooling(path) =
         member this.Path = path
         member this.Exec arguments = execProcess this.Path arguments
-        member this.ExecIn workingDirectory arguments = execProcessInDirectory this.Path arguments workingDirectory
+        member this.ExecIn workingDirectory arguments = this.ExecWithTimeoutIn workingDirectory arguments defaultTimeout
+        member this.ExecWithTimeoutIn workingDirectory arguments timeout = execProcessWithTimeout this.Path arguments timeout workingDirectory
 
     let Nuget = new BuildTooling(nugetFile)
     let ILRepack = new BuildTooling("packages/build/ILRepack/tools/ILRepack.exe")
