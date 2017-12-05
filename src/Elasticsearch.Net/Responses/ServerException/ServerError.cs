@@ -15,8 +15,8 @@ namespace Elasticsearch.Net
 			this.Status = statusCode.GetValueOrDefault();
 		}
 
-		public Error Error { get; private set; }
-		public int Status { get; private set; }
+		public Error Error { get; }
+		public int Status { get; }
 
 		public static ServerError Create(Stream stream) =>
 			LowLevelRequestResponseSerializer.Instance.Deserialize<ServerError>(stream);

@@ -21,7 +21,6 @@ namespace Elasticsearch.Net
 			sb.AppendLine($"# Audit trail of this API call:");
 			var auditTrail = (r.AuditTrail ?? Enumerable.Empty<Audit>()).ToList();
 			DebugAuditTrail(auditTrail, sb);
-			if (r.ServerError != null) sb.AppendLine($"# ServerError: {r.ServerError}");
 			if (r.OriginalException != null) sb.AppendLine($"# OriginalException: {r.OriginalException}");
 			DebugAuditTrailExceptions(auditTrail, sb);
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -10,18 +11,41 @@ namespace Nest
 	{
 		protected override bool ReadProperty(Error error, string propertyName, JsonReader reader, JsonSerializer serializer)
 		{
-			if (propertyName != "root_cause") return false;
+			if (propertyName == "root_cause")
+				return ExtractRootCauses(error, reader, serializer);
 
+
+			if (propertyName == "headers")
+				return ExtractHeaders(error, reader, serializer);
+
+			return false;
+		}
+
+		private static bool ExtractHeaders(Error error, JsonReader reader, JsonSerializer serializer)
+		{
+			reader.Read();
+			if (reader.TokenType != JsonToken.StartObject)
+				return false;
+			var dict = serializer.Deserialize<Dictionary<string, string>>(reader);
+			if (dict == null) return false;
+			error.Headers = new ReadOnlyDictionary<string, string>(dict);
+			return true;
+		}
+
+		private bool ExtractRootCauses(Error error, JsonReader reader, JsonSerializer serializer)
+		{
 			reader.Read();
 			if (reader.TokenType != JsonToken.StartArray)
 				return false;
 
-			var rootCauses = new List<ErrorCause>();
 			var depth = reader.Depth;
+			var rootCauses = new List<ErrorCause>();
 			do
 			{
+				reader.Read();
 				var rootCause = ReadCausedBy(reader, serializer);
-				rootCauses.Add(rootCause);
+				if (rootCause != null)
+					rootCauses.Add(rootCause);
 			} while (reader.Depth >= depth && reader.TokenType != JsonToken.EndArray);
 			error.RootCause = rootCauses;
 			return true;
@@ -98,6 +122,9 @@ namespace Nest
 				{
 					case "type":
 						error.Type = reader.ReadAsString();
+						break;
+					case "stack_trace":
+						error.StackTrace = reader.ReadAsString();
 						break;
 					case "reason":
 						error.Reason = reader.ReadAsString();

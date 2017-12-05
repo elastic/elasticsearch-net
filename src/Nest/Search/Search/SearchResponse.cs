@@ -106,9 +106,8 @@ namespace Nest
 	[JsonObject]
 	public class SearchResponse<T> : ResponseBase, ISearchResponse<T> where T : class
 	{
+		//TODO REMOVE
 		internal ServerError MultiSearchError { get; set; }
-
-		public override IApiCallDetails ApiCall => MultiSearchError != null ? new ApiCallDetailsOverride(base.ApiCall, MultiSearchError) : base.ApiCall;
 
 		[JsonProperty("_shards")]
 		public ShardsMetadata Shards { get; internal set; }

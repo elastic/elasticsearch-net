@@ -347,9 +347,23 @@ namespace Elasticsearch.Net
 		public T PrettyJson(bool b = true) => Assign(a =>
 		{
 			this._prettyJson = b;
-			if (!b && this._queryString["pretty"] != null) this._queryString.Remove("pretty");
-			else if (b && this._queryString["pretty"] == null)
-				this.GlobalQueryStringParameters(new NameValueCollection { { "pretty", b.ToString().ToLowerInvariant() } });
+			const string key = "pretty";
+			if (!b && this._queryString[key] != null) this._queryString.Remove(key);
+			else if (b && this._queryString[key] == null)
+				this.GlobalQueryStringParameters(new NameValueCollection { { key, "true" } });
+		});
+
+		/// <summary>
+		/// Forces all requests to have ?error_trace=true querystring parameter appended,
+		/// causing Elasticsearch to return stack traces as part of serialized exceptions
+		/// Defaults to <c>false</c>
+		/// </summary>
+		public T IncludeServerStackTraceOnError(bool b = true) => Assign(a =>
+		{
+			const string key = "error_trace";
+			if (!b && this._queryString[key] != null) this._queryString.Remove(key);
+			else if (b && this._queryString[key] == null)
+				this.GlobalQueryStringParameters(new NameValueCollection { { key, "true" } });
 		});
 
 		/// <summary>
@@ -416,7 +430,8 @@ namespace Elasticsearch.Net
 		public T EnableDebugMode(Action<IApiCallDetails> onRequestCompleted = null)
 		{
 			this._disableDirectStreaming = true;
-			this._prettyJson = true;
+			this.PrettyJson(true);
+			this.IncludeServerStackTraceOnError(true);
 
 			var originalCompletedRequestHandler = this._completedRequestHandler;
 			var debugCompletedRequestHandler = onRequestCompleted ?? (d => Debug.WriteLine(d.DebugInformation));
@@ -425,6 +440,7 @@ namespace Elasticsearch.Net
 				originalCompletedRequestHandler?.Invoke(d);
 				debugCompletedRequestHandler?.Invoke(d);
 			};
+
 			return (T)this;
 		}
 

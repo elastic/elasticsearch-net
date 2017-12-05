@@ -247,8 +247,7 @@ namespace Tests.ClientConcepts.LowLevel
 
             var success = searchResponse.Success; // <1> Response is in the 200 range, or an expected response for the given request
             var successOrKnownError = searchResponse.SuccessOrKnownError; // <2> Response is successful, or has a response code between 400-599 that indicates the request cannot be retried.
-            var serverError = searchResponse.ServerError; // <3> Details of any error returned from Elasticsearch
-            var exception = searchResponse.OriginalException; // <4> If the response is unsuccessful, will hold the original exception.
+            var exception = searchResponse.OriginalException; // <3> If the response is unsuccessful, will hold the original exception.
         }
 
         /**
