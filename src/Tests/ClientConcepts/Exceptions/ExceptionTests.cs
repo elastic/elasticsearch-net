@@ -33,8 +33,6 @@ namespace Tests.ClientConcepts.Exceptions
 			exception.InnerException.Should().NotBeNull();
 #endif
 			exception.Response.Should().NotBeNull();
-			exception.Response.ServerError.Should().NotBeNull();
-			exception.Response.ServerError.Status.Should().BeGreaterThan(0);
 		}
 
 		//[I]
@@ -65,8 +63,6 @@ namespace Tests.ClientConcepts.Exceptions
 #else
 			response.ApiCall.OriginalException.Should().NotBeNull();
 #endif
-			response.ApiCall.ServerError.Should().NotBeNull();
-			response.ApiCall.ServerError.Status.Should().BeGreaterThan(0);
 		}
 
 		//[I]
@@ -81,7 +77,6 @@ namespace Tests.ClientConcepts.Exceptions
 #else
 			response.ApiCall.OriginalException.Should().NotBeNull();
 #endif
-			response.ApiCall.ServerError.Should().BeNull();
 		}
 
 		//TODO figure out a way to trigger this again

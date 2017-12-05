@@ -10,7 +10,7 @@ namespace Tests.Framework
 	{
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 
-		protected IElasticClient Client => TestClient.GetInMemoryClient();
+		protected IElasticClient Client => TestClient.DefaultInMemoryClient;
 
 	}
 

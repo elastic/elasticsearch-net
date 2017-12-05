@@ -53,7 +53,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
         public void AddAnalyzerToFieldMapping()
         {
             // hide
-            var client = TestClient.GetInMemoryClient();
+            var client = TestClient.DefaultInMemoryClient;
 
             var createIndexResponse = client.CreateIndex("my-index", c => c
                 .Mappings(m => m

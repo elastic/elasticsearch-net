@@ -16,18 +16,20 @@ namespace Tests.Framework
 {
 	public static class TestClient
 	{
-		public static bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
+		private static readonly bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
+		public static readonly ITestConfiguration Configuration = LoadConfiguration();
 
-		public static ITestConfiguration Configuration = LoadConfiguration();
-		public static ConnectionSettings GlobalDefaultSettings = CreateSettings();
+		public static readonly ConnectionSettings GlobalDefaultSettings = CreateSettings();
 		public static readonly IElasticClient Default = new ElasticClient(GlobalDefaultSettings);
 		public static readonly IElasticClient DefaultInMemoryClient = GetInMemoryClient();
+
+		public static ConcurrentBag<string> SeenDeprecations { get; } = new ConcurrentBag<string>();
 
 		public static Uri CreateUri(int port = 9200, bool forceSsl = false) =>
 			new UriBuilder(forceSsl ? "https" : "http", Host, port).Uri;
 
 		public static string DefaultHost => "localhost";
-		public static string Host => (RunningFiddler) ? "ipv4.fiddler" : DefaultHost;
+		private static string Host => (RunningFiddler) ? "ipv4.fiddler" : DefaultHost;
 
 		private static ITestConfiguration LoadConfiguration()
 		{
@@ -62,12 +64,9 @@ namespace Tests.Framework
 			? x
 			: ConnectionConfiguration.DefaultConnectionLimit;
 
-		public static ConcurrentBag<string> SeenDeprecations { get; } = new ConcurrentBag<string>();
-
 		private static ConnectionSettings DefaultSettings(ConnectionSettings settings) => settings
 			.DefaultIndex("default-index")
-			.PrettyJson()
-			.InferMappingFor<Project>(map=>map
+			.InferMappingFor<Project>(map => map
 				.IndexName(DefaultSeeder.ProjectsIndex)
 				.IdProperty(p => p.Name)
 				.RelationName("project")
@@ -92,9 +91,6 @@ namespace Tests.Framework
 				.TypeName("metric")
 			)
 			.ConnectionLimit(ConnectionLimitDefault)
-			//.Proxy(new Uri("http://127.0.0.1:8888"), "", "")
-			//.EnableTcpKeepAlive(TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(2))
-			//.PrettyJson()
 			//TODO make this random
 			//.EnableHttpCompression()
 			.OnRequestCompleted(r =>
@@ -111,7 +107,7 @@ namespace Tests.Framework
 			? ".percolator"
 			: "query";
 
-		public static bool VersionSatisfiedBy(string range, ElasticsearchVersion version)
+		private static bool VersionSatisfiedBy(string range, ElasticsearchVersion version)
 		{
 			var versionRange = new SemVer.Range(range);
 			var satisfied = versionRange.IsSatisfied(version.Version);
@@ -150,7 +146,20 @@ namespace Tests.Framework
 			}, propertyMappingProvider);
 
 			var defaultSettings = DefaultSettings(s);
-			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
+
+			modifySettings = modifySettings ?? ((m) =>
+			{
+
+				//only enable debug mode when running in DEBUG mode (always) or optionally wheter we are executing unit tests
+				//during RELEASE builds tests
+#if !DEBUG
+			if (TestClient.Configuration.RunUnitTests)
+#endif
+				m.EnableDebugMode();
+				return m;
+			});
+
+			var settings = modifySettings(defaultSettings);
 			return settings;
 		}
 
@@ -196,17 +205,29 @@ namespace Tests.Framework
 			string contentType = "application/json",
 			Exception exception = null)
 		{
+			var settings = GetFixedReturnSettings(response, statusCode, modifySettings, contentType, exception);
+			return new ElasticClient(settings);
+		}
+
+		public static ConnectionSettings GetFixedReturnSettings(
+			object response,
+			int statusCode = 200,
+			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
+			string contentType = "application/json",
+			Exception exception = null)
+		{
 			var serializer = Default.RequestResponseSerializer;
-			var fixedResult = contentType == "application/json"
-				? serializer.SerializeToBytes(response)
-				: Encoding.UTF8.GetBytes(response.ToString());
+			byte[] fixedResult = null;
+			if (response is string s) fixedResult = Encoding.UTF8.GetBytes(s);
+			else if (contentType == "application/json") fixedResult = serializer.SerializeToBytes(response);
+			else fixedResult = Encoding.UTF8.GetBytes(response.ToString());
 
 			var connection = new InMemoryConnection(fixedResult, statusCode, exception);
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var defaultSettings = new ConnectionSettings(connectionPool, connection)
 				.DefaultIndex("default-index");
 			var settings = (modifySettings != null) ? modifySettings(defaultSettings) : defaultSettings;
-			return new ElasticClient(settings);
+			return settings;
 		}
 
 		private static string ExpensiveTestNameForIntegrationTests()

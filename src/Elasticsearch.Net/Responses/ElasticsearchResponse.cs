@@ -28,8 +28,6 @@ namespace Elasticsearch.Net
 		/// <summary>The raw byte response message body, only set when DisableDirectStreaming() is set on Connection configuration</summary>
 		public byte[] ResponseBodyInBytes => this.ApiCall.ResponseBodyInBytes;
 
-		public ServerError ServerError => this.ApiCall.ServerError;
-
 		public string DebugInformation => this.ApiCall.DebugInformation;
 
 		public override string ToString() => this.ApiCall.ToString();

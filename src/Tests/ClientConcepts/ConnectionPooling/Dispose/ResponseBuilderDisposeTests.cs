@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
@@ -10,13 +9,14 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 
-namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
+namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 {
 	public class ResponseBuilderDisposeTests
 	{
-		private IConnectionSettingsValues _settings = TestClient.CreateSettings(forceInMemory: true);
+		private IConnectionSettingsValues _settings =
+			TestClient.CreateSettings(modifySettings: s=>s.DisableDirectStreaming(false), forceInMemory: true);
 		private IConnectionSettingsValues _settingsDisableDirectStream =
-			TestClient.CreateSettings(modifySettings: s=>s.DisableDirectStreaming(), forceInMemory: true);
+			TestClient.CreateSettings(modifySettings: s=>s.DisableDirectStreaming(true), forceInMemory: true);
 
 		private class TrackDisposeStream : MemoryStream
 		{
