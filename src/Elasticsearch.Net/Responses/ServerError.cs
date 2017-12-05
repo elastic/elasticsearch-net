@@ -89,6 +89,10 @@ namespace Elasticsearch.Net
 		public string ResourceId { get; set; }
 		public string ResourceType { get; set; }
 		public string Type { get; set; }
+		public string Phase { get; set; }
+		public bool? Grouped { get; set; }
+		public int? Line { get; set; }
+		public int? Col { get; set; }
 		public IReadOnlyCollection<RootCause> RootCause { get; set; }
 		public CausedBy CausedBy { get; set; }
 
