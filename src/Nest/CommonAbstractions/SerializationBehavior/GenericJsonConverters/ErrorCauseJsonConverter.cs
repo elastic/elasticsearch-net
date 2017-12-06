@@ -31,6 +31,11 @@ namespace Nest
 		private TInnerError ReadError<TInnerError>(JsonReader reader, JsonSerializer serializer, Action<TInnerError, string> readMore)
 			where TInnerError : ErrorCause, new()
 		{
+			if (reader.TokenType == JsonToken.String)
+			{
+				var reason = (string) reader.Value;
+				return new TInnerError { Reason = reason };
+			}
 			if (reader.TokenType != JsonToken.StartObject)
 			{
 				reader.Skip();
