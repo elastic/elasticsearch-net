@@ -70,9 +70,6 @@ namespace Nest
 		[JsonProperty("fields")]
 		Fields Fields { get; set; }
 
-		[JsonProperty("use_dis_max")]
-		bool? UseDisMax { get; set; }
-
 		[JsonProperty("tie_breaker")]
 		double? TieBreaker { get; set; }
 
@@ -120,7 +117,6 @@ namespace Nest
 		public bool? Lenient { get; set; }
 		public bool? AnalyzeWildcard { get; set; }
 		public bool? AutoGeneratePhraseQueries { get; set; }
-		public bool? UseDisMax { get; set; }
 		public double? TieBreaker { get; set; }
 		public int? MaximumDeterminizedStates { get; set; }
 		public bool? AllFields { get; set; }
@@ -157,7 +153,6 @@ namespace Nest
 		bool? IQueryStringQuery.Lenient { get; set; }
 		bool? IQueryStringQuery.AnalyzeWildcard { get; set; }
 		bool? IQueryStringQuery.AutoGeneratePhraseQueries { get; set; }
-		bool? IQueryStringQuery.UseDisMax { get; set; }
 		double? IQueryStringQuery.TieBreaker { get; set; }
 		int? IQueryStringQuery.MaximumDeterminizedStates { get; set; }
 		MultiTermQueryRewrite IQueryStringQuery.FuzzyRewrite { get; set; }
@@ -213,8 +208,6 @@ namespace Nest
 
 		public QueryStringQueryDescriptor<T> AutoGeneratePhraseQueries(bool? autoGeneratePhraseQueries = true) =>
 			Assign(a => a.AutoGeneratePhraseQueries = autoGeneratePhraseQueries);
-
-		public QueryStringQueryDescriptor<T> UseDisMax(bool? useDismax = true) => Assign(a => a.UseDisMax = useDismax);
 
 		public QueryStringQueryDescriptor<T> TieBreaker(double? tieBreaker) => Assign(a => a.TieBreaker = tieBreaker);
 

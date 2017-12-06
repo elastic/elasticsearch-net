@@ -63,7 +63,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 #pragma warning restore 618 // usage of lowercase_expanded_terms and locale
 			EnablePositionIncrements = true,
 			Escape = true,
-			UseDisMax = true,
 			FuzzyPrefixLength = 2,
 			FuzzyMaxExpansions = 3,
 			FuzzyRewrite = MultiTermQueryRewrite.ConstantScore,
@@ -73,7 +72,7 @@ namespace Tests.QueryDsl.FullText.QueryString
 			AnalyzeWildcard = true,
 			MinimumShouldMatch = 2,
 			QuoteFieldSuffix = "'",
-			Lenient = true,			
+			Lenient = true,
 			Timezone = "root"
 		};
 
@@ -94,7 +93,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 				.LowercaseExpandedTerms()
 				.EnablePositionIncrements()
 				.Escape()
-				.UseDisMax()
 				.FuzzyPrefixLength(2)
 				.FuzzyMaxExpansions(3)
 				.FuzzyRewrite(MultiTermQueryRewrite.ConstantScore)
