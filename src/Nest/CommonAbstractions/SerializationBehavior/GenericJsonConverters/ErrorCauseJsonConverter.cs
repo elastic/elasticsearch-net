@@ -7,6 +7,8 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
+	internal class ErrorCauseJsonConverter : ErrorCauseJsonConverter<ErrorCause> { }
+
 	internal class ErrorCauseJsonConverter<TErrorCause> : JsonConverter
 		where TErrorCause : ErrorCause, new()
 	{
@@ -125,9 +127,22 @@ namespace Nest
 				case "lang":
 					m.Language = reader.ReadAsString();
 					break;
+				case "failed_shards":
+					m.FailedShards = ExtractFailedShards(reader, serializer);
+					break;
 				default: return false;
 			}
 			return true;
+		}
+		private static readonly IReadOnlyCollection<ShardFailure> DefaultFailedShards =
+			new ReadOnlyCollection<ShardFailure>(new ShardFailure[0] { });
+
+		protected static IReadOnlyCollection<ShardFailure> ExtractFailedShards(JsonReader reader, JsonSerializer serializer)
+		{
+			reader.Read();
+			if (reader.TokenType != JsonToken.StartArray) return DefaultFailedShards;
+			var shardFailures = serializer.Deserialize<List<ShardFailure>>(reader);
+			return new ReadOnlyCollection<ShardFailure>(shardFailures);
 		}
 
 		private static IReadOnlyCollection<string> ReadArray(JsonReader reader)

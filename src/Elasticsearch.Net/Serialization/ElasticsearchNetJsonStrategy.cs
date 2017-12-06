@@ -128,6 +128,11 @@ namespace Elasticsearch.Net
 				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
 				return ServerError.Create(dict, this);
 			}
+			if (type == typeof(ShardFailure))
+			{
+				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
+				return ShardFailure.CreateShardFailure(dict, this);
+			}
 			if (type == typeof(Error))
 			{
                 if (value is string s)

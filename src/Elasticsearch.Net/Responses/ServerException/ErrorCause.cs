@@ -33,12 +33,17 @@ namespace Elasticsearch.Net
 			private static readonly IReadOnlyCollection<string> DefaultCollection =
 				new ReadOnlyCollection<string>(new string[0] { });
 
+			private static readonly IReadOnlyCollection<ShardFailure> DefaultFailedShards =
+				new ReadOnlyCollection<ShardFailure>(new ShardFailure[0] { });
+
 			public string LicensedExpiredFeature { get; set; }
 			public string Index { get; set; }
 			public string IndexUUID { get; set; }
 			public string ResourceType { get; set; }
 			public IReadOnlyCollection<string> ResourceId { get; set; } = DefaultCollection;
 			public int? Shard { get; set; }
+
+			public IReadOnlyCollection<ShardFailure> FailedShards { get; set; } = DefaultFailedShards;
 
 			public int? Line { get; set; }
 			public int? Column { get; set; }
@@ -73,12 +78,28 @@ namespace Elasticsearch.Net
 				if (dict.TryGetValue("script_stack", out var scriptStack)) m.ScriptStack = GetStringArray(scriptStack, strategy);
 				if (dict.TryGetValue("script", out var script)) m.Script = Convert.ToString(script);
 				if (dict.TryGetValue("lang", out var language)) m.Language = Convert.ToString(language);
+				if (dict.TryGetValue("failed_shards", out var failedShards))
+					m.FailedShards = GetShardFailures(failedShards, strategy);
                 return m;
             }
 
-			internal static IReadOnlyCollection<string> GetStringArray(object value,IJsonSerializerStrategy strategy)
+			private static IReadOnlyCollection<ShardFailure> GetShardFailures(object value,IJsonSerializerStrategy strategy)
 			{
-				if (value is string s) return new [] {s};
+				if (!(value is object[] objects))
+					return DefaultFailedShards;
+
+				var values = new List<ShardFailure>();
+				foreach (var v in objects)
+				{
+					var cause = (ShardFailure) strategy.DeserializeObject(v, typeof(ShardFailure));
+					if (cause != null) values.Add(cause);
+				}
+				return new ReadOnlyCollection<ShardFailure>(values.ToArray());
+			}
+
+			private static IReadOnlyCollection<string> GetStringArray(object value,IJsonSerializerStrategy strategy)
+			{
+				if (value is string s) return new ReadOnlyCollection<string>(new [] {s});
 				if (value is object[] objects)
 				{
 					var values = new List<string>();
@@ -86,7 +107,7 @@ namespace Elasticsearch.Net
 					{
 						if (v is string vs) values.Add(vs);
 					}
-					return values.ToArray();
+					return new ReadOnlyCollection<string>(values.ToArray());
 				}
 				return DefaultCollection;
 
