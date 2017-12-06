@@ -26,9 +26,6 @@ namespace Nest
 
 		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
-
-		[JsonProperty("disable_coord")]
-		bool? DisableCoord { get; set; }
 	}
 
 	public class CommonTermsQuery : FieldNameQueryBase, ICommonTermsQuery
@@ -40,7 +37,6 @@ namespace Nest
 		public Operator? HighFrequencyOperator { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public string Analyzer { get; set; }
-		public bool? DisableCoord { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.CommonTerms = this;
 		internal static bool IsConditionless(ICommonTermsQuery q) => q.Field.IsConditionless() || q.Query.IsNullOrEmpty();
@@ -60,7 +56,6 @@ namespace Nest
 		Operator? ICommonTermsQuery.HighFrequencyOperator { get; set; }
 		MinimumShouldMatch ICommonTermsQuery.MinimumShouldMatch { get; set; }
 		string ICommonTermsQuery.Analyzer { get; set; }
-		bool? ICommonTermsQuery.DisableCoord { get; set; }
 
 		///<inheritdoc/>
 		public CommonTermsQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
@@ -79,8 +74,5 @@ namespace Nest
 		///<inheritdoc/>
 		public CommonTermsQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch) =>
 			Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
-
-		///<inheritdoc/>
-		public CommonTermsQueryDescriptor<T> DisableCoord(bool? disable = true) => Assign(a => a.DisableCoord = disable);
 	}
 }
