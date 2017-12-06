@@ -28,7 +28,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 				fuzziness = "AUTO",
 				fuzzy_prefix_length = 2,
 				analyze_wildcard = true,
-				auto_generate_phrase_queries = true,
 				max_determinized_states = 2,
 				minimum_should_match = 2,
 				lenient = true,
@@ -55,7 +54,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 			Analyzer = "standard",
 			QuoteAnalyzer = "quote-an",
 			AllowLeadingWildcard = true,
-			AutoGeneratePhraseQueries = true,
 			MaximumDeterminizedStates = 2,
 #pragma warning disable 618 // usage of lowercase_expanded_terms and locale
 			LowercaseExpandedTerms = true,
@@ -88,7 +86,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 				.Analyzer("standard")
 				.QuoteAnalyzer("quote-an")
 				.AllowLeadingWildcard()
-				.AutoGeneratePhraseQueries()
 				.MaximumDeterminizedStates(2)
 				.LowercaseExpandedTerms()
 				.EnablePositionIncrements()

@@ -48,9 +48,6 @@ namespace Nest
 		[JsonProperty("analyze_wildcard")]
 		bool? AnalyzeWildcard { get; set; }
 
-		[JsonProperty("auto_generate_phrase_queries")]
-		bool? AutoGeneratePhraseQueries { get; set; }
-
 		[JsonProperty("max_determinized_states")]
 		int? MaximumDeterminizedStates { get; set; }
 
@@ -116,7 +113,6 @@ namespace Nest
 		public double? PhraseSlop { get; set; }
 		public bool? Lenient { get; set; }
 		public bool? AnalyzeWildcard { get; set; }
-		public bool? AutoGeneratePhraseQueries { get; set; }
 		public double? TieBreaker { get; set; }
 		public int? MaximumDeterminizedStates { get; set; }
 		public bool? AllFields { get; set; }
@@ -152,7 +148,6 @@ namespace Nest
 		MinimumShouldMatch IQueryStringQuery.MinimumShouldMatch { get; set; }
 		bool? IQueryStringQuery.Lenient { get; set; }
 		bool? IQueryStringQuery.AnalyzeWildcard { get; set; }
-		bool? IQueryStringQuery.AutoGeneratePhraseQueries { get; set; }
 		double? IQueryStringQuery.TieBreaker { get; set; }
 		int? IQueryStringQuery.MaximumDeterminizedStates { get; set; }
 		MultiTermQueryRewrite IQueryStringQuery.FuzzyRewrite { get; set; }
@@ -205,9 +200,6 @@ namespace Nest
 		public QueryStringQueryDescriptor<T> Lenient(bool? lenient = true) => Assign(a => a.Lenient = lenient);
 
 		public QueryStringQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Assign(a => a.AnalyzeWildcard = analyzeWildcard);
-
-		public QueryStringQueryDescriptor<T> AutoGeneratePhraseQueries(bool? autoGeneratePhraseQueries = true) =>
-			Assign(a => a.AutoGeneratePhraseQueries = autoGeneratePhraseQueries);
 
 		public QueryStringQueryDescriptor<T> TieBreaker(double? tieBreaker) => Assign(a => a.TieBreaker = tieBreaker);
 
