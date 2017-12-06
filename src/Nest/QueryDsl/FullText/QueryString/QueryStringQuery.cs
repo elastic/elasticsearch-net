@@ -81,9 +81,6 @@ namespace Nest
 
 		[JsonProperty("escape")]
 		bool? Escape { get; set; }
-
-		[JsonProperty("all_fields")]
-		bool? AllFields { get; set; }
 	}
 
 	public class QueryStringQuery : QueryBase, IQueryStringQuery
@@ -115,7 +112,6 @@ namespace Nest
 		public bool? AnalyzeWildcard { get; set; }
 		public double? TieBreaker { get; set; }
 		public int? MaximumDeterminizedStates { get; set; }
-		public bool? AllFields { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.QueryString = this;
 		internal static bool IsConditionless(IQueryStringQuery q) => q.Query.IsNullOrEmpty();
@@ -154,7 +150,6 @@ namespace Nest
 		MultiTermQueryRewrite IQueryStringQuery.Rewrite { get; set; }
 		string IQueryStringQuery.QuoteFieldSuffix { get; set; }
 		bool? IQueryStringQuery.Escape { get; set; }
-		bool? IQueryStringQuery.AllFields { get; set; }
 
 		public QueryStringQueryDescriptor<T> DefaultField(Field field) => Assign(a => a.DefaultField = field);
 		public QueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> field) => Assign(a => a.DefaultField = field);
@@ -213,7 +208,5 @@ namespace Nest
 			Assign(a => a.QuoteFieldSuffix = quoteFieldSuffix);
 
 		public QueryStringQueryDescriptor<T> Escape(bool? escape = true) => Assign(a => a.Escape = escape);
-
-		public QueryStringQueryDescriptor<T> AllFields(bool? allFields = true) => Assign(a => a.AllFields = allFields);
 	}
 }

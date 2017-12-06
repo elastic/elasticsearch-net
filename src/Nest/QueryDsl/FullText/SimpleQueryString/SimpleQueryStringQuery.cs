@@ -41,9 +41,6 @@ namespace Nest
 
 		[JsonProperty("quote_field_suffix")]
 		string QuoteFieldSuffix { get; set; }
-
-		[JsonProperty("all_fields")]
-		bool? AllFields { get; set; }
 	}
 
 	public class SimpleQueryStringQuery : QueryBase, ISimpleQueryStringQuery
@@ -62,7 +59,6 @@ namespace Nest
 		public bool? AnalyzeWildcard { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public string QuoteFieldSuffix { get; set; }
-		public bool? AllFields { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.SimpleQueryString = this;
 		internal static bool IsConditionless(ISimpleQueryStringQuery q) => q.Query.IsNullOrEmpty();
@@ -86,7 +82,6 @@ namespace Nest
 		bool? ISimpleQueryStringQuery.Lenient { get; set; }
 		MinimumShouldMatch ISimpleQueryStringQuery.MinimumShouldMatch { get; set; }
 		string ISimpleQueryStringQuery.QuoteFieldSuffix { get; set; }
-		bool? ISimpleQueryStringQuery.AllFields { get; set; }
 
 		public SimpleQueryStringQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
@@ -118,8 +113,5 @@ namespace Nest
 
 		public SimpleQueryStringQueryDescriptor<T> QuoteFieldSuffix(string quoteFieldSuffix) =>
 			Assign(a => a.QuoteFieldSuffix = quoteFieldSuffix);
-
-		public SimpleQueryStringQueryDescriptor<T> AllFields(bool? allFields = true) =>
-			Assign(a => a.AllFields = allFields);
 	}
 }
