@@ -130,11 +130,16 @@ namespace Elasticsearch.Net
 			}
 			if (type == typeof(Error))
 			{
+                if (value is string s)
+                    return new Error {Reason = s};
+
 				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
 				return Error.CreateError(dict, this);
 			}
 			if (type == typeof(ErrorCause))
 			{
+                if (value is string s)
+                    return new ErrorCause {Reason = s};
 				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
 				return ErrorCause.CreateErrorCause(dict, this);
 			}
