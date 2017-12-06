@@ -90,9 +90,6 @@ namespace Nest
 
 		[JsonProperty("all_fields")]
 		bool? AllFields { get; set; }
-
-		[JsonProperty("split_on_whitespace")]
-		bool? SplitOnWhitespace { get; set; }
 	}
 
 	public class QueryStringQuery : QueryBase, IQueryStringQuery
@@ -127,7 +124,6 @@ namespace Nest
 		public double? TieBreaker { get; set; }
 		public int? MaximumDeterminizedStates { get; set; }
 		public bool? AllFields { get; set; }
-		public bool? SplitOnWhitespace { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.QueryString = this;
 		internal static bool IsConditionless(IQueryStringQuery q) => q.Query.IsNullOrEmpty();
@@ -169,7 +165,6 @@ namespace Nest
 		string IQueryStringQuery.QuoteFieldSuffix { get; set; }
 		bool? IQueryStringQuery.Escape { get; set; }
 		bool? IQueryStringQuery.AllFields { get; set; }
-		bool? IQueryStringQuery.SplitOnWhitespace { get; set; }
 
 		public QueryStringQueryDescriptor<T> DefaultField(Field field) => Assign(a => a.DefaultField = field);
 		public QueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> field) => Assign(a => a.DefaultField = field);
@@ -235,8 +230,5 @@ namespace Nest
 		public QueryStringQueryDescriptor<T> Escape(bool? escape = true) => Assign(a => a.Escape = escape);
 
 		public QueryStringQueryDescriptor<T> AllFields(bool? allFields = true) => Assign(a => a.AllFields = allFields);
-
-		public QueryStringQueryDescriptor<T> SplitOnWhitespace(bool? splitOnWhitespace = true) =>
-			Assign(a => a.SplitOnWhitespace = splitOnWhitespace);
 	}
 }
