@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Elasticsearch.Net
 {
@@ -10,7 +11,6 @@ namespace Elasticsearch.Net
 		public ErrorCause CausedBy { get; set; }
 		public string StackTrace { get; set; }
 		public ErrorCauseMetadata Metadata { get; set; }
-
 
 		internal static ErrorCause CreateErrorCause(IDictionary<string, object> dict, IJsonSerializerStrategy strategy)
 		{
@@ -30,23 +30,26 @@ namespace Elasticsearch.Net
 
 		public class ErrorCauseMetadata
 		{
+			private static readonly IReadOnlyCollection<string> DefaultCollection =
+				new ReadOnlyCollection<string>(new string[0] { });
+
 			public string LicensedExpiredFeature { get; set; }
 			public string Index { get; set; }
 			public string IndexUUID { get; set; }
 			public string ResourceType { get; set; }
-			public string[] ResourceId { get; set; }
-			public int Shard { get; set; }
+			public IReadOnlyCollection<string> ResourceId { get; set; } = DefaultCollection;
+			public int? Shard { get; set; }
 
-			public int Line { get; set; }
-			public int Column { get; set; }
+			public int? Line { get; set; }
+			public int? Column { get; set; }
 
-			public long BytesWanted { get; set; }
-			public long BytesLimit { get; set; }
+			public long? BytesWanted { get; set; }
+			public long? BytesLimit { get; set; }
 
 			public string Phase { get; set; }
-			public bool Grouped { get; set; }
+			public bool? Grouped { get; set; }
 
-			public string[] ScriptStack { get; set; }
+			public IReadOnlyCollection<string> ScriptStack { get; set; } = DefaultCollection;
 			public string Script { get; set; }
 			public string Language { get; set; }
 
@@ -73,7 +76,7 @@ namespace Elasticsearch.Net
                 return m;
             }
 
-			internal static string[] GetStringArray(object value,IJsonSerializerStrategy strategy)
+			internal static IReadOnlyCollection<string> GetStringArray(object value,IJsonSerializerStrategy strategy)
 			{
 				if (value is string s) return new [] {s};
 				if (value is object[] objects)
@@ -85,7 +88,7 @@ namespace Elasticsearch.Net
 					}
 					return values.ToArray();
 				}
-				return null;
+				return DefaultCollection;
 
 			}
 		}

@@ -49,7 +49,7 @@ namespace Nest
 				else if (typeof(IEnumerable<QueryContainer>).IsAssignableFrom(o))
 					contract.Converter = new QueryContainerCollectionJsonConverter();
 				else if (o == typeof(Error))
-					contract.Converter = new ErrorJsonConverter();
+					contract.Converter = new ErrorConverter();
 				else if (o == typeof(DateTime) || o == typeof(DateTime?))
 					contract.Converter = new IsoDateTimeConverter { Culture = CultureInfo.InvariantCulture };
 				else if (o == typeof(TimeSpan) || o == typeof(TimeSpan?))

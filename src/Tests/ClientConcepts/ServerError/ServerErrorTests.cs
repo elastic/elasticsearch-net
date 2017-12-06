@@ -200,8 +200,10 @@ namespace Tests.ClientConcepts.ServerError
 	""caused_by"" : {
 		""type"" : ""parse_exception"",
 		""reason"" : ""failed to parse date field [-1m] with format [strict_date_optional_time||epoch_millis]"",
+		""index"" : null,
 		""resource.id"" : [""alias1"", ""alias2""],
 		""script_stack"" : [""alias1"", ""alias2""],
+		""unknown_prop"" : [""alias1"", ""alias2""],
 		""caused_by"" : {
 			""type"" : ""illegal_argument_exception"",
 			""reason"" : ""Parse failure at index [2] of [-1m]""
@@ -210,6 +212,8 @@ namespace Tests.ClientConcepts.ServerError
 	""license.expired.feature"" : ""ml"",
 	""index"" : ""index"",
 	""index_uuid"" : ""x9h1ks"",
+	""unknown_prop"" : {},
+	""unknown_prop2"" : false,
 	""resource.type"" : ""aliases"",
 	""resource.id"" : ""alias1"",
 	""shard"" : ""1"",

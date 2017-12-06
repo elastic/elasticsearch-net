@@ -4,14 +4,12 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[ContractJsonConverter(typeof(BulkErrorJsonConverter))]
+	[ContractJsonConverter(typeof(ErrorCauseJsonConverter<BulkError>))]
 	public class BulkError : Error
 	{
-		[JsonProperty("index")]
-		public string Index { get; internal set; }
+		public string Index => this.Metadata?.Index;
 
-		[JsonProperty("shard")]
-		public int Shard { get; internal set; }
+		public int Shard => this.Metadata.Shard.GetValueOrDefault();
 
 		public override string ToString()
 		{
