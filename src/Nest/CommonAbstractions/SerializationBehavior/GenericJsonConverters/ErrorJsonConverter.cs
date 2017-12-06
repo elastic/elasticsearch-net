@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	internal class ErrorConverter : ErrorCauseJsonConverter<Error>
+	internal class ErrorJsonConverter : ErrorCauseJsonConverter<Error>
 	{
 		protected override bool ReadProperty(Error error, string propertyName, JsonReader reader, JsonSerializer serializer)
 		{

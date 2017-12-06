@@ -1,4 +1,6 @@
-﻿using Elasticsearch.Net;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
 
@@ -23,6 +25,7 @@ namespace Tests.ClientConcepts.ServerError
 		""shard"" : 0,
 		""index"" : ""project"",
 		""node"" : ""Uo6PBln_QrmD8Y9o1NKdQw"",
+		""unknown_prop"" : ""x"",
 		""reason"" : {
 			""type"" : ""parse_exception"",
 			""reason"" : ""failed to parse date field [-1m] with format [strict_date_optional_time||epoch_millis]"",
@@ -30,7 +33,8 @@ namespace Tests.ClientConcepts.ServerError
 				""type"" : ""illegal_argument_exception"",
 				""reason"" : ""Parse failure at index [2] of [-1m]""
 			}
-		}
+		},
+		""status"" : ""x"",
 	}
 	],
 	""headers"" : {
@@ -100,6 +104,18 @@ namespace Tests.ClientConcepts.ServerError
 			errorMetadata.ScriptStack.Should().HaveCount(1, origin);
 			errorMetadata.Script.Should().NotBeNullOrWhiteSpace(origin);
 			errorMetadata.Language.Should().NotBeNullOrWhiteSpace(origin);
+			AssertFailedShards(origin, errorMetadata.FailedShards);
+		}
+
+		private static void AssertFailedShards(string origin, IReadOnlyCollection<ShardFailure> errorMetadataFailedShards)
+		{
+			errorMetadataFailedShards.Should().NotBeEmpty(origin).And.HaveCount(1, origin);
+			var f = errorMetadataFailedShards.First();
+			f.Index.Should().NotBeNullOrWhiteSpace(origin);
+			f.Node.Should().NotBeNullOrWhiteSpace(origin);
+			f.Status.Should().NotBeNullOrWhiteSpace(origin);
+			AssertCausedBy(origin, f.Reason);
+			f.Shard.Should().NotBeNull(origin);
 		}
 
 		private static void AssertCausedBy(string origin, ErrorCause causedBy)
