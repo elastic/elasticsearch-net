@@ -59,7 +59,7 @@ namespace Elasticsearch.Net
 			var request = (HttpWebRequest) WebRequest.Create(requestData.Uri);
 
 			request.Accept = requestData.Accept;
-			request.ContentType = requestData.ContentType;
+			request.ContentType = requestData.RequestMimeType;
 			request.MaximumResponseHeadersLength = -1;
 			request.Pipelined = requestData.Pipelined;
 
@@ -141,6 +141,7 @@ namespace Elasticsearch.Net
 			IEnumerable<string> warnings = null;
 			Stream responseStream = null;
 			Exception ex = null;
+			string mimeType = null;
 			try
 			{
 				var request = this.CreateHttpWebRequest(requestData);
@@ -164,7 +165,7 @@ namespace Elasticsearch.Net
 				//throw any errors if both are closed atleast one of them has to be Closed.
 				//Since we expose the stream we let closing the stream determining when to close the connection
 				var response = (HttpWebResponse) request.GetResponse();
-				HandleResponse(response, out statusCode, out responseStream);
+				HandleResponse(response, out statusCode, out responseStream, out mimeType);
 
 				if (response.SupportsHeaders && response.Headers.HasKeys() && response.Headers.AllKeys.Contains("Warning"))
 					warnings = response.Headers.GetValues("Warning");
@@ -173,10 +174,10 @@ namespace Elasticsearch.Net
 			{
                 ex = e;
 				if (e.Response is HttpWebResponse response)
-					HandleResponse(response, out statusCode, out responseStream);
+					HandleResponse(response, out statusCode, out responseStream, out mimeType);
 			}
 
-			return ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream);
+			return ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream, mimeType);
 		}
 
 
@@ -207,6 +208,7 @@ namespace Elasticsearch.Net
 			IEnumerable<string> warnings = null;
 			Stream responseStream = null;
 			Exception ex = null;
+			string mimeType = null;
 			try
 			{
 				var data = requestData.PostData;
@@ -238,29 +240,31 @@ namespace Elasticsearch.Net
 					unregisterWaitHandle = RegisterApmTaskTimeout(apmGetResponseTask, request, requestData);
 
 					var response = (HttpWebResponse) (await apmGetResponseTask.ConfigureAwait(false));
-					HandleResponse(response, out statusCode, out responseStream);
+					HandleResponse(response, out statusCode, out responseStream, out mimeType);
 					if (response.SupportsHeaders && response.Headers.HasKeys() && response.Headers.AllKeys.Contains("Warning"))
 						warnings = response.Headers.GetValues("Warning");
 				}
 			}
 			catch (WebException e)
 			{
-                ex = e;
+				ex = e;
 				if (e.Response is HttpWebResponse response)
-					HandleResponse(response, out statusCode, out responseStream);
+					HandleResponse(response, out statusCode, out responseStream, out mimeType);
 			}
 			finally
 			{
 				unregisterWaitHandle?.Invoke();
 			}
-			return await ResponseBuilder.ToResponseAsync<TResponse>(requestData, ex, statusCode, warnings, responseStream, cancellationToken)
-				.ConfigureAwait(false);
+			return await ResponseBuilder.ToResponseAsync<TResponse>
+					(requestData, ex, statusCode, warnings, responseStream, mimeType, cancellationToken)
+					.ConfigureAwait(false);
 		}
 
-		private static void HandleResponse(HttpWebResponse response, out int? statusCode, out Stream responseStream)
+		private static void HandleResponse(HttpWebResponse response, out int? statusCode, out Stream responseStream, out string mimeType)
 		{
 			statusCode = (int) response.StatusCode;
 			responseStream = response.GetResponseStream();
+			mimeType = response.ContentType;
 			// https://github.com/elastic/elasticsearch-net/issues/2311
 			// if stream is null call dispose on response instead.
 			if (responseStream == null || responseStream == Stream.Null) response.Dispose();

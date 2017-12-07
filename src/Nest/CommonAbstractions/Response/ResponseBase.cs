@@ -59,8 +59,8 @@ namespace Nest
 			get
 			{
 				if (_serverError != null) return _serverError;
-				if (Error == null) return null;
-				_serverError = new ServerError(Error, StatusCode);
+				if (_error == null) return null;
+				_serverError = new ServerError(_error, _statusCode);
 				return _serverError;
 			}
 		}

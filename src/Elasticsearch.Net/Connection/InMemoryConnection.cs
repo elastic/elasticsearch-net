@@ -12,6 +12,7 @@ namespace Elasticsearch.Net
 		private readonly byte[] _responseBody;
 		private readonly int _statusCode;
 		private readonly Exception _exception;
+		private readonly string _contentType;
 		internal static readonly byte[] EmptyBody = Encoding.UTF8.GetBytes("");
 
 		/// <summary>
@@ -23,11 +24,12 @@ namespace Elasticsearch.Net
 			_statusCode = 200;
 		}
 
-		public InMemoryConnection(byte[] responseBody, int statusCode = 200, Exception exception = null)
+		public InMemoryConnection(byte[] responseBody, int statusCode = 200, Exception exception = null, string contentType = RequestData.MimeType)
 		{
 			_responseBody = responseBody;
 			_statusCode = statusCode;
 			_exception = exception;
+			_contentType = contentType;
 		}
 
 		public virtual Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
@@ -55,9 +57,10 @@ namespace Elasticsearch.Net
 				}
 			}
 			requestData.MadeItToResponse = true;
+
 			var sc = statusCode ?? this._statusCode;
 			Stream s = (body != null) ? new MemoryStream(body) : new MemoryStream(EmptyBody);
-			return ResponseBuilder.ToResponse<TResponse>(requestData, _exception, sc, null, s);
+			return ResponseBuilder.ToResponse<TResponse>(requestData, _exception, sc, null, s, _contentType);
 		}
 
 		protected async Task<TResponse> ReturnConnectionStatusAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken, byte[] responseBody = null, int? statusCode = null)
@@ -80,7 +83,7 @@ namespace Elasticsearch.Net
 
 			var sc = statusCode ?? this._statusCode;
 			Stream s = (body != null) ? new MemoryStream(body) : new MemoryStream(EmptyBody);
-			return await ResponseBuilder.ToResponseAsync<TResponse>(requestData, _exception, sc, null, s, cancellationToken)
+			return await ResponseBuilder.ToResponseAsync<TResponse>(requestData, _exception, sc, null, s, _contentType, cancellationToken)
 				.ConfigureAwait(false);
 		}
 

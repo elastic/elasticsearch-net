@@ -75,13 +75,16 @@ namespace Elasticsearch.Net
 			IEnumerable<string> warnings = null;
 			Stream responseStream = null;
 			Exception ex = null;
+			string mimeType = null;
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
 				responseMessage = client.SendAsync(requestMessage).GetAwaiter().GetResult();
 				requestData.MadeItToResponse = true;
 				statusCode = (int) responseMessage.StatusCode;
+
 				responseMessage.Headers.TryGetValues("Warning", out warnings);
+				mimeType = responseMessage.Content.Headers.ContentType.ToString();
 
 				if (responseMessage.Content != null)
 					responseStream = responseMessage.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
@@ -98,7 +101,7 @@ namespace Elasticsearch.Net
 				ex = e;
 			}
 			responseStream = responseStream ?? Stream.Null;
-			var response = ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream);
+			var response = ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream, mimeType);
 			//var response = builder.ToResponse();
 			//explicit dispose of response not needed (as documented on MSDN) on desktop CLR
 			//but we can not guarantee this is true for all HttpMessageHandler implementations
@@ -121,11 +124,13 @@ namespace Elasticsearch.Net
 			IEnumerable<string> warnings = null;
 			Stream responseStream = null;
 			Exception ex = null;
+			string mimeType = null;
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
 				responseMessage = await client.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
 				requestData.MadeItToResponse = true;
+				mimeType = responseMessage.Content.Headers.ContentType?.MediaType;
 				statusCode = (int) responseMessage.StatusCode;
 				responseMessage.Headers.TryGetValues("Warning", out warnings);
 
@@ -144,8 +149,9 @@ namespace Elasticsearch.Net
 				ex = e;
 			}
 			responseStream = responseStream ?? Stream.Null;
-			var response = await ResponseBuilder.ToResponseAsync<TResponse>(requestData, ex, statusCode, warnings, responseStream, cancellationToken)
-				.ConfigureAwait(false);
+			var response = await ResponseBuilder.ToResponseAsync<TResponse>
+					(requestData, ex, statusCode, warnings, responseStream, mimeType, cancellationToken)
+					.ConfigureAwait(false);
 			//explicit dispose of response not needed (as documented on MSDN) on desktop CLR
 			//but we can not guarantee this is true for all HttpMessageHandler implementations
 			if (typeof(TResponse) != typeof(ElasticsearchResponse<Stream>)) responseMessage?.Dispose();
@@ -259,7 +265,7 @@ namespace Elasticsearch.Net
 				requestMessage.Content = new ByteArrayContent(new byte[0]);
 			}
 
-			requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.ContentType);
+			requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
 
 			return requestMessage;
 		}

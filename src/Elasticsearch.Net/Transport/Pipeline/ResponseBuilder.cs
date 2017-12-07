@@ -12,14 +12,21 @@ namespace Elasticsearch.Net
 	{
 		private const int BufferSize = 81920;
 
-		internal static readonly IDisposable EmptyDisposable = new MemoryStream();
+		private static readonly IDisposable EmptyDisposable = new MemoryStream();
 
-		public static TResponse ToResponse<TResponse>(RequestData requestData, Exception ex, int? statusCode, IEnumerable<string> warnings, Stream responseStream)
+		public static TResponse ToResponse<TResponse>(
+			RequestData requestData,
+			Exception ex,
+			int? statusCode,
+			IEnumerable<string> warnings,
+			Stream responseStream,
+			string mimeType = RequestData.MimeType
+			)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			responseStream.ThrowIfNull(nameof(responseStream));
-			var details = Initialize(requestData, ex, statusCode, warnings);
-			var response = SetBody<TResponse>(details, requestData, responseStream) ?? new TResponse();
+			var details = Initialize(requestData, ex, statusCode, warnings, mimeType);
+			var response = SetBody<TResponse>(details, requestData, responseStream, mimeType) ?? new TResponse();
 			response.ApiCall = details;
 			return response;
 		}
@@ -30,18 +37,22 @@ namespace Elasticsearch.Net
 			int? statusCode,
 			IEnumerable<string> warnings,
 			Stream responseStream,
-			CancellationToken cancellationToken)
+			string mimeType = RequestData.MimeType,
+			CancellationToken cancellationToken = default(CancellationToken)
+			)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			responseStream.ThrowIfNull(nameof(responseStream));
-			var details = Initialize(requestData, ex, statusCode, warnings);
-			var response = (await SetBodyAsync<TResponse>(details, requestData, responseStream, cancellationToken).ConfigureAwait(false))
+			var details = Initialize(requestData, ex, statusCode, warnings, mimeType);
+			var response = (await SetBodyAsync<TResponse>(details, requestData, responseStream, mimeType, cancellationToken)
+				               .ConfigureAwait(false))
 				?? new TResponse();
 			response.ApiCall = details;
 			return response;
 		}
 
-		private static HttpDetails Initialize(RequestData requestData, Exception exception, int? statusCode, IEnumerable<string> warnings)
+		private static ApiCallDetails Initialize(
+			RequestData requestData, Exception exception, int? statusCode, IEnumerable<string> warnings, string mimeType)
 		{
 			var success = false;
 			var allowedStatusCodes = requestData.AllowedStatusCodes.ToList();
@@ -52,7 +63,7 @@ namespace Elasticsearch.Net
 				          || allowedStatusCodes.Contains(statusCode.Value)
 				          || allowedStatusCodes.Contains(-1);
 			}
-			var httpCallDetails = new HttpDetails
+			var details = new ApiCallDetails
 			{
 				Success = success,
 				OriginalException = exception,
@@ -60,12 +71,13 @@ namespace Elasticsearch.Net
 				RequestBodyInBytes = requestData.PostData?.WrittenBytes,
 				Uri = requestData.Uri,
 				HttpMethod = requestData.Method,
-				DeprecationWarnings = warnings ?? Enumerable.Empty<string>()
+				DeprecationWarnings = warnings ?? Enumerable.Empty<string>(),
+				ResponseMimeType = mimeType
 			};
-			return httpCallDetails;
+			return details;
 		}
 
-		private static TResponse SetBody<TResponse>(HttpDetails details, RequestData requestData, Stream responseStream)
+		private static TResponse SetBody<TResponse>(ApiCallDetails details, RequestData requestData, Stream responseStream, string mimeType)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			byte[] bytes = null;
@@ -88,11 +100,14 @@ namespace Elasticsearch.Net
 					return null;
 
 				if (requestData.CustomConverter != null) return requestData.CustomConverter(details, responseStream) as TResponse;
-				return requestData.ConnectionSettings.RequestResponseSerializer.Deserialize<TResponse>(responseStream);
+				return mimeType == null || !mimeType.StartsWith(requestData.RequestMimeType, StringComparison.Ordinal)
+						? null
+					 	: requestData.ConnectionSettings.RequestResponseSerializer.Deserialize<TResponse>(responseStream);
 			}
 		}
 
-		private static async Task<TResponse> SetBodyAsync<TResponse>(HttpDetails details, RequestData requestData, Stream responseStream, CancellationToken cancellationToken)
+		private static async Task<TResponse> SetBodyAsync<TResponse>(
+			ApiCallDetails details, RequestData requestData, Stream responseStream, string mimeType, CancellationToken cancellationToken)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			byte[] bytes = null;
@@ -114,8 +129,11 @@ namespace Elasticsearch.Net
 					return null;
 
 				if (requestData.CustomConverter != null) return requestData.CustomConverter(details, responseStream) as TResponse;
-				return await requestData.ConnectionSettings.RequestResponseSerializer.DeserializeAsync<TResponse>(responseStream, cancellationToken)
-					.ConfigureAwait(false);
+				return mimeType == null || !mimeType.StartsWith(requestData.RequestMimeType, StringComparison.Ordinal)
+						? null
+					 	: await requestData.ConnectionSettings.RequestResponseSerializer
+							.DeserializeAsync<TResponse>(responseStream, cancellationToken)
+							.ConfigureAwait(false);
 			}
 		}
 

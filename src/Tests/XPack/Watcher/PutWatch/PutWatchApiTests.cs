@@ -226,7 +226,7 @@ namespace Tests.XPack.Watcher.PutWatch
 									http = new
 									{
 										inline = true,
-										content_type = "application/json",
+										content_type = RequestData.MimeType,
 										request = new
 										{
 											url = "http://localhost:8080/http_attachment"
@@ -437,7 +437,7 @@ namespace Tests.XPack.Watcher.PutWatch
 					.Attachments(ea => ea
 						.HttpAttachment("http_attachment", ha => ha
 							.Inline()
-							.ContentType("application/json")
+							.ContentType(RequestData.MimeType)
 							.Request(r => r
 								.Url("http://localhost:8080/http_attachment")
 							)
@@ -622,7 +622,7 @@ namespace Tests.XPack.Watcher.PutWatch
 								"http_attachment", new HttpAttachment
 								{
 									Inline = true,
-									ContentType = "application/json",
+									ContentType = RequestData.MimeType,
 									Request = new HttpInputRequest
 									{
 										Url = "http://localhost:8080/http_attachment"
