@@ -18,12 +18,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D55
 		..\license.txt = ..\license.txt
 		..\build\NEST.JsonNetSerializer.nuspec = ..\build\NEST.JsonNetSerializer.nuspec
 		..\build\NEST.nuspec = ..\build\NEST.nuspec
+		..\NuGet.config = ..\NuGet.config
 		..\paket.bat = ..\paket.bat
 		..\paket.dependencies = ..\paket.dependencies
 		..\readme.md = ..\readme.md
-		..\build\NEST.JsonNetSerializer.nuspec = ..\build\NEST.JsonNetSerializer.nuspec
-		..\appveyor.yml = ..\appveyor.yml
-		..\NuGet.config = ..\NuGet.config
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeGeneration", "CodeGeneration", "{93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}"

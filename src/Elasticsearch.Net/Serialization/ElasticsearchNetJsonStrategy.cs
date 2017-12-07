@@ -9,42 +9,32 @@ namespace Elasticsearch.Net
 {
 	internal class ElasticsearchNetJsonStrategy : PocoJsonSerializerStrategy
 	{
-		public static readonly ElasticsearchNetJsonStrategy Instance = new ElasticsearchNetJsonStrategy();
-
-
 		public override bool TrySerializeNonPrimitiveObject(object input, out object output)
 		{
-			if (input is Exception)
-			{
-				var e = input as Exception;
-				var exceptionsJson = this.FlattenExceptions(e).ToList();
-				var array = new JsonArray(exceptionsJson.Count);
-				array.AddRange(exceptionsJson);
-				output = array;
-				return true;
+			if (!(input is Exception))
+				return base.TrySerializeNonPrimitiveObject(input, out output);
 
-			}
-			return base.TrySerializeNonPrimitiveObject(input, out output);
+			var e = input as Exception;
+			var exceptionsJson = this.FlattenExceptions(e).ToList();
+			var array = new JsonArray(exceptionsJson.Count);
+			array.AddRange(exceptionsJson);
+			output = array;
+			return true;
 		}
-
 
 		private IEnumerable<JsonObject> FlattenExceptions(Exception e)
 		{
-			int depth = 0;
-			int maxExceptions = 20;
+			var depth = 0;
+			var maxExceptions = 20;
 			do
 			{
-				JsonObject o = ToExceptionJsonObject(e, depth);
+				var o = ToExceptionJsonObject(e, depth);
 				depth++;
 				yield return o;
 				e = e.InnerException;
-
 			}
 			while (depth < maxExceptions && e != null);
 		}
-
-
-
 
 		private JsonObject ToExceptionJsonObject(Exception e, int depth)
 		{
@@ -84,12 +74,12 @@ namespace Elasticsearch.Net
 			o.Add("HResult", hresult);
 			o.Add("HelpURL", helpUrl);
 #if !DOTNETCORE
-			this.WriteStructuredExceptionMethod(o, exceptionMethod);
+			WriteStructuredExceptionMethod(o, exceptionMethod);
 #endif
 			return o;
 		}
 
-		private void WriteStructuredExceptionMethod(JsonObject o, string exceptionMethodString)
+		private static void WriteStructuredExceptionMethod(JsonObject o, string exceptionMethodString)
 		{
 			if (string.IsNullOrWhiteSpace(exceptionMethodString)) return;
 
@@ -114,7 +104,6 @@ namespace Elasticsearch.Net
 			exceptionMethod.Add("MemberType", memberType);
 			o.Add("ExceptionMethod", exceptionMethod);
 		}
-
 
 		public override object DeserializeObject(object value, Type type)
 		{

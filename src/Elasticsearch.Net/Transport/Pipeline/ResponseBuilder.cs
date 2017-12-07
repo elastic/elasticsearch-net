@@ -138,7 +138,8 @@ namespace Elasticsearch.Net
 		}
 
 		private static readonly VoidResponse StaticVoid = new VoidResponse { Body = new VoidResponse.VoidBody() };
-		private static readonly Type[] SpecialTypes = {typeof(StringResponse), typeof(BytesResponse), typeof(VoidResponse), typeof(StreamResponse)};
+		private static readonly Type[] SpecialTypes =
+			{typeof(StringResponse), typeof(BytesResponse), typeof(VoidResponse), typeof(StreamResponse), typeof(DynamicResponse)};
 
 		private static bool SetSpecialTypes<TResponse>(Stream responseStream, byte[] bytes, out TResponse cs)
 			where TResponse : class, IElasticsearchResponse, new()
@@ -155,13 +156,22 @@ namespace Elasticsearch.Net
 				cs = StaticVoid as TResponse;
 			else if (responseType == typeof(StreamResponse))
 				cs = new StreamResponse(responseStream) as TResponse;
-
+			else if (responseType == typeof(DynamicResponse))
+			{
+				using (var ms = new MemoryStream(bytes))
+				{
+					var body = LowLevelRequestResponseSerializer.Instance.Deserialize<DynamicBody>(ms);
+					cs = new DynamicResponse(body) as TResponse;
+				}
+			}
 			return cs != null;
 		}
 
 		private static bool NeedsToEagerReadStream<TResponse>()
 			where TResponse : class, IElasticsearchResponse, new() =>
-			typeof(TResponse) == typeof(StringResponse) || typeof(TResponse) == typeof(BytesResponse);
+			typeof(TResponse) == typeof(StringResponse)
+			|| typeof(TResponse) == typeof(BytesResponse)
+			|| typeof(TResponse) == typeof(DynamicResponse);
 
 		private static byte[] SwapStreams(ref Stream responseStream, ref MemoryStream ms)
 		{

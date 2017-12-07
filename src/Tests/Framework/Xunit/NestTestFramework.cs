@@ -3,6 +3,7 @@ using System.Reflection;
 using Bogus;
 using Tests.Framework;
 using Tests.Framework.Configuration;
+using Tests.Framework.MockData;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 using static System.Console;
@@ -13,7 +14,9 @@ namespace Xunit
 	{
 		public NestTestFramework(IMessageSink messageSink)
 			: base(messageSink)
-		{ }
+		{
+			Generators.Initialize();
+		}
 
 		protected override ITestFrameworkExecutor CreateExecutor(AssemblyName assemblyName)
 		{

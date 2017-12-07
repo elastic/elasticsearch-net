@@ -9,12 +9,12 @@ namespace Elasticsearch.Net
 {
 	public class LowLevelRequestResponseSerializer : IElasticsearchSerializer
 	{
+		public static readonly LowLevelRequestResponseSerializer Instance = new LowLevelRequestResponseSerializer();
 		private static readonly ElasticsearchNetJsonStrategy Strategy = new ElasticsearchNetJsonStrategy();
+
 		private const int BufferSize = 81920;
 
-		public static readonly LowLevelRequestResponseSerializer Instance = new LowLevelRequestResponseSerializer();
-
-		public object Default(Type type) => type.IsValueType() ? type.CreateInstance() : null;
+		private static object Default(Type type) => type.IsValueType() ? type.CreateInstance() : null;
 		public object Deserialize(Type type, Stream stream)
 		{
 			if (stream == null) return Default(type);
