@@ -6,13 +6,15 @@ namespace Elasticsearch.Net
 	{
 		public PipelineFailure FailureReason { get; }
 
-		public IApiCallDetails Response { get; internal set; }
+		public IApiCallDetails ApiCall { get; internal set; }
 
 		public bool Recoverable =>
 			FailureReason == PipelineFailure.BadRequest
 			|| FailureReason == PipelineFailure.BadResponse
 			|| FailureReason == PipelineFailure.PingFailure;
-			//|| FailureReason == FailureReason.Unexpected;
+
+		public IElasticsearchResponse Response { get; internal set; }
+		//|| FailureReason == FailureReason.Unexpected;
 
 		public PipelineException(PipelineFailure failure)
 			: base(GetMessage(failure))
