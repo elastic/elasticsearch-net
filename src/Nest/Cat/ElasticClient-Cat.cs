@@ -26,8 +26,8 @@ namespace Nest
 			where TRequest : IRequest<TParams> =>
 			this.Dispatcher.Dispatch<TRequest, TParams, CatResponse<TCatRecord>>(
 				ForceConfiguration<TRequest, TParams>(request, c => {
-					c.Accept = "application/json";
-					c.ContentType = "application/json";
+					c.Accept = RequestData.MimeType;
+					c.ContentType = RequestData.MimeType;
 				}),
 				new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>),
 				(p, d) => dispatch(p)
@@ -44,8 +44,8 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<TRequest, TParams, CatResponse<TCatRecord>, ICatResponse<TCatRecord>>(
 				ForceConfiguration<TRequest, TParams>(request, c =>
 				{
-					c.Accept = "application/json";
-					c.ContentType = "application/json";
+					c.Accept = RequestData.MimeType;
+					c.ContentType = RequestData.MimeType;
 				}),
 				cancellationToken,
 				new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>),

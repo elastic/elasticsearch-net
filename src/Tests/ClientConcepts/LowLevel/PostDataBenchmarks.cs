@@ -236,7 +236,7 @@ namespace Tests.ClientConcepts.LowLevel
 									http = new
 									{
 										inline = true,
-										content_type = "application/json",
+										content_type = RequestData.MimeType,
 										request = new
 										{
 											url = "http://localhost:8080/http_attachment"

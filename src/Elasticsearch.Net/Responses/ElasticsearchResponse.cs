@@ -15,6 +15,7 @@ namespace Elasticsearch.Net
 		List<Audit> IApiCallDetails.AuditTrail { get; set; }
 
 		public bool Success => this.ApiCall.Success;
+		public string ResponseMimeType => this.ApiCall.ResponseMimeType;
 		public HttpMethod HttpMethod => this.ApiCall.HttpMethod;
 		public Uri Uri => this.ApiCall.Uri;
 		public int? HttpStatusCode => this.ApiCall.HttpStatusCode;

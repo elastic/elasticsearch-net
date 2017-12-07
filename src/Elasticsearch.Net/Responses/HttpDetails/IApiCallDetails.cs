@@ -11,6 +11,9 @@ namespace Elasticsearch.Net
 		/// </summary>
 		bool Success { get; }
 
+		/// <summary>The response mime type </summary>
+		string ResponseMimeType { get; }
+
 		/// <summary>
 		/// If <see cref="Success"/> is <c>false</c>, this will hold the original exception.
 		/// This will be the orginating CLR exception in most cases.

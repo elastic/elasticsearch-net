@@ -73,7 +73,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 
 			stream = new TrackDisposeStream();
 			var ct = new CancellationToken();
-			response = await ResponseBuilder.ToResponseAsync<RootNodeInfoResponse>(requestData, null, statusCode, null, stream, ct);
+			response = await ResponseBuilder.ToResponseAsync<RootNodeInfoResponse>(requestData, null, statusCode, null, stream, cancellationToken: ct);
 			memoryStreamFactory.Created.Count().Should().Be(disableDirectStreaming ? 2 : 0);
 			if (disableDirectStreaming)
 			{
@@ -111,7 +111,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 
 			stream = new TrackDisposeStream();
 			var ct = new CancellationToken();
-			response = await ResponseBuilder.ToResponseAsync<RootNodeInfoResponse>(requestData, null, statusCode, null, stream, ct);
+			response = await ResponseBuilder.ToResponseAsync<RootNodeInfoResponse>(requestData, null, statusCode, null, stream, cancellationToken: ct);
 			memoryStreamFactory.Created.Count().Should().Be(disableDirectStreaming ? 2 : 0);
 			stream.IsDisposed.Should().Be(true);
 		}

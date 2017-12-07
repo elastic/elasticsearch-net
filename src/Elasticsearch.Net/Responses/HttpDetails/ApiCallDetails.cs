@@ -4,9 +4,10 @@ using System.Text;
 
 namespace Elasticsearch.Net
 {
-	public class HttpDetails : IApiCallDetails
+	public class ApiCallDetails : IApiCallDetails
 	{
 		public bool Success { get; set; }
+		public string ResponseMimeType { get; set; }
 		public Exception OriginalException { get; set; }
 		public ServerError ServerError { get; set; }
 		public HttpMethod HttpMethod { get; set; }

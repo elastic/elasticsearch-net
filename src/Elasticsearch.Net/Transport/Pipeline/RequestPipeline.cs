@@ -515,8 +515,8 @@ namespace Elasticsearch.Net
 			{
 				//make sure we copy over the error body in case we disabled direct streaming.
 				var s = callDetails?.ResponseBodyInBytes == null ? Stream.Null : new MemoryStream(callDetails.ResponseBodyInBytes);
-				response = ResponseBuilder.ToResponse<TResponse>(data, clientException, callDetails?.HttpStatusCode, null, s);
-
+				var m = callDetails?.ResponseMimeType ?? RequestData.MimeType;
+				response = ResponseBuilder.ToResponse<TResponse>(data, clientException, callDetails?.HttpStatusCode, null, s, m);
 			}
 
 			response.ApiCall.AuditTrail = this.AuditTrail;

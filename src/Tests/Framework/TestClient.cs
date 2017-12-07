@@ -202,7 +202,7 @@ namespace Tests.Framework
 			object response,
 			int statusCode = 200,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
-			string contentType = "application/json",
+			string contentType = RequestData.MimeType,
 			Exception exception = null)
 		{
 			var settings = GetFixedReturnSettings(response, statusCode, modifySettings, contentType, exception);
@@ -213,16 +213,16 @@ namespace Tests.Framework
 			object response,
 			int statusCode = 200,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
-			string contentType = "application/json",
+			string contentType = RequestData.MimeType,
 			Exception exception = null)
 		{
 			var serializer = Default.RequestResponseSerializer;
 			byte[] fixedResult = null;
 			if (response is string s) fixedResult = Encoding.UTF8.GetBytes(s);
-			else if (contentType == "application/json") fixedResult = serializer.SerializeToBytes(response);
+			else if (contentType == RequestData.MimeType) fixedResult = serializer.SerializeToBytes(response);
 			else fixedResult = Encoding.UTF8.GetBytes(response.ToString());
 
-			var connection = new InMemoryConnection(fixedResult, statusCode, exception);
+			var connection = new InMemoryConnection(fixedResult, statusCode, exception, contentType);
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var defaultSettings = new ConnectionSettings(connectionPool, connection)
 				.DefaultIndex("default-index");

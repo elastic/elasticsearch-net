@@ -30,7 +30,7 @@ namespace Elasticsearch.Net
 
 		public bool Pipelined { get; }
 		public bool HttpCompression { get; }
-		public string ContentType { get; }
+		public string RequestMimeType { get; }
 		public string Accept { get; }
 		public string RunAs { get; }
 		public IReadOnlyCollection<int> SkipDeserializationForStatusCodes { get; }
@@ -76,7 +76,7 @@ namespace Elasticsearch.Net
 
 			this.Pipelined = local?.EnableHttpPipelining ?? global.HttpPipeliningEnabled;
 			this.HttpCompression = global.EnableHttpCompression;
-			this.ContentType = local?.ContentType ?? MimeType;
+			this.RequestMimeType = local?.ContentType ?? MimeType;
 			this.Accept = local?.Accept ?? MimeType;
 			this.Headers = global.Headers != null ? new NameValueCollection(global.Headers) : new NameValueCollection();
 			this.RunAs = local?.RunAs;
