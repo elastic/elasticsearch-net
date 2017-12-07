@@ -32,6 +32,7 @@ namespace Nest
 		[JsonProperty("roles")]
 		public List<NodeRole> Roles { get; internal set; }
 
+		//TODO why is this using DynamicBody
 		[JsonProperty("settings")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		public DynamicBody Settings { get; internal set; }

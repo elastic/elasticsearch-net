@@ -32,7 +32,6 @@ namespace Elasticsearch.Net
 		public string DebugInformation => this.ApiCall.DebugInformation;
 
 		public override string ToString() => this.ApiCall.ToString();
-
 	}
 
 	/// <summary>
