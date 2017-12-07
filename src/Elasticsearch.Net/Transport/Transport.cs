@@ -73,12 +73,14 @@ namespace Elasticsearch.Net
 					}
 					catch (PipelineException pipelineException) when (!pipelineException.Recoverable)
 					{
+						if (response == null) response = pipelineException.Response as TResponse;
 						pipeline.MarkDead(node);
 						seenExceptions.Add(pipelineException);
 						break;
 					}
 					catch (PipelineException pipelineException)
 					{
+						if (response == null) response = pipelineException.Response as TResponse;
 						pipeline.MarkDead(node);
 						seenExceptions.Add(pipelineException);
 					}
@@ -135,12 +137,14 @@ namespace Elasticsearch.Net
 					}
 					catch (PipelineException pipelineException) when (!pipelineException.Recoverable)
 					{
+						if (response == null) response = pipelineException.Response as TResponse;
 						pipeline.MarkDead(node);
 						seenExceptions.Add(pipelineException);
 						break;
 					}
 					catch (PipelineException pipelineException)
 					{
+						if (response == null) response = pipelineException.Response as TResponse;
 						pipeline.MarkDead(node);
 						seenExceptions.Add(pipelineException);
 					}
