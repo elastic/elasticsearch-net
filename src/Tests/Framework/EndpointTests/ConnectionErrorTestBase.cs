@@ -34,14 +34,14 @@ namespace Tests.Framework
 		{
 			var e = r.OriginalException;
 			e.Should().NotBeNull();
-			if (e is WebException) this.AssertException((WebException) e);
+			if (e is WebException) this.AssertWebException((WebException) e);
 			else if (e is System.Net.Http.HttpRequestException)
-				this.AssertException((System.Net.Http.HttpRequestException) e);
+				this.AssertHttpRequestException((System.Net.Http.HttpRequestException) e);
 			else throw new Exception("Response orginal exception is not one of the expected connection exception but" + e.GetType().FullName);
 		});
 
-		protected abstract void AssertException(WebException e);
-		protected abstract void AssertException(System.Net.Http.HttpRequestException e);
+		protected abstract void AssertWebException(WebException e);
+		protected abstract void AssertHttpRequestException(System.Net.Http.HttpRequestException e);
 
 	}
 }

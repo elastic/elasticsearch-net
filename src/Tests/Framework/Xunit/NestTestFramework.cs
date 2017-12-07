@@ -9,9 +9,9 @@ using static System.Console;
 
 namespace Xunit
 {
-	class TestFramework : XunitTestFramework
+	internal class NestTestFramework : XunitTestFramework
 	{
-		public TestFramework(IMessageSink messageSink)
+		public NestTestFramework(IMessageSink messageSink)
 			: base(messageSink)
 		{ }
 
