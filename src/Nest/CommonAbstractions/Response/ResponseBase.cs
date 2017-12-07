@@ -23,7 +23,7 @@ namespace Nest
 
 		/// <summary>
 		/// If the response results in an error on elasticsearch's side an <pre>error</pre> element will be returned, this is mapped to <see cref="ServerError"/> in NEST.
-		/// <para>This property is a shortcut to <see cref="IElasticsearchResponse.ApiCall"/>'s <see cref="IApiCallDetails.ServerError"/> and is possibly set when <see cref="IsValid"/> is false, depending on the cause of the error</para>
+		/// <para>Possibly set when <see cref="IsValid"/> is false, depending on the cause of the error</para>
 		/// <para>You can also configure the client to always throw an <see cref="ElasticsearchClientException"/> using <see cref="IConnectionConfigurationValues.ThrowExceptions"/> if the response is not valid</para>
 		/// </summary>
 		[JsonIgnore]

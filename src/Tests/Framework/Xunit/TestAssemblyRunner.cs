@@ -8,18 +8,13 @@ using Xunit.Sdk;
 using System.Reflection;
 using Tests.Framework;
 using System.Collections.Concurrent;
-using Tests.Framework.Integration;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Reactive.Disposables;
-using System.Reflection.Metadata.Ecma335;
-using System.Text.RegularExpressions;
-using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Xunit
 {
-	class TestAssemblyRunner : XunitTestAssemblyRunner
+	internal class TestAssemblyRunner : XunitTestAssemblyRunner
 	{
 		private readonly Dictionary<Type, object> _assemblyFixtureMappings = new Dictionary<Type, object>();
 		private readonly List<IGrouping<ClusterBase, GroupedByCluster>> _grouped;

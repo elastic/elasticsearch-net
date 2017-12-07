@@ -69,7 +69,6 @@ namespace Tests
 				Console.WriteLine("Must specify at least one argument: TestAssemblyPath, Profile or Benchmark ");
 
 			var arguments = args.Skip(1).ToArray();
-
 			if (args[0].Equals("Profile", StringComparison.OrdinalIgnoreCase))
 			{
 #if DOTNETCORE
