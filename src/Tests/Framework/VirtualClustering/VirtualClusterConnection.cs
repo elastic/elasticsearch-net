@@ -192,7 +192,7 @@ namespace Tests.Framework
 				(e) => throw e,
 				(statusCode) => this.ReturnConnectionStatus<TResponse>(requestData, CallResponse(rule),
 					//make sure we never return a valid status code in Fail responses because of a bad rule.
-					statusCode >= 200 && statusCode < 300 ? 502 : statusCode)
+					statusCode >= 200 && statusCode < 300 ? 502 : statusCode, rule.ReturnContentType)
 			);
 		}
 
@@ -203,7 +203,7 @@ namespace Tests.Framework
 			var state = this.Calls[requestData.Uri.Port];
 			var succeeded = Interlocked.Increment(ref state.Successes);
 			beforeReturn?.Invoke(rule);
-			return this.ReturnConnectionStatus<TResponse>(requestData, successResponse(rule));
+			return this.ReturnConnectionStatus<TResponse>(requestData, successResponse(rule), contentType: rule.ReturnContentType);
 		}
 
 		private static byte[] CallResponse<TRule>(TRule rule)
