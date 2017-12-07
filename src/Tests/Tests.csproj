@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <DotNetCoreOnly>1</DotNetCoreOnly>
+    <!--<DotNetCoreOnly>1</DotNetCoreOnly>-->
     <!--<TestPackageVersion>6.0.0</TestPackageVersion>-->
     <DotNetCoreOnly Condition="'$(TRAVIS)'=='true'">1</DotNetCoreOnly>
     <TargetFrameworks Condition="'$(DotNetCoreOnly)'==''">netcoreapp1.1;net45;net46</TargetFrameworks>
@@ -11,6 +11,7 @@
     <VersionSuffix>alpha</VersionSuffix>
     <DefineConstants Condition="'$(TargetFramework)'=='netcoreapp1.1' OR '$(DotNetCoreOnly)'=='1'">$(DefineConstants);DOTNETCORE</DefineConstants>
     <StartupObject>Tests.BenchmarkProgram</StartupObject>
+    <NoWarn>$(NoWarn);xUnit1013</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TestPackageVersion)'!=''">
     <RestoreSources>../../build/output/_packages;https://api.nuget.org/v3/index.json</RestoreSources>

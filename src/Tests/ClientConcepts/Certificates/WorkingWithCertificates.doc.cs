@@ -263,7 +263,7 @@ namespace Tests.ClientConcepts.Certificates
 			);
 
 		// hide
-		protected override void AssertException(WebException e)
+		protected override void AssertWebException(WebException e)
 		{
 			if (e.InnerException != null)
 				e.InnerException.Message.Should()
@@ -272,7 +272,7 @@ namespace Tests.ClientConcepts.Certificates
 				e.Message.Should().Contain("Could not create SSL/TLS secure channel");
 		}
 
-		protected override void AssertException(HttpRequestException e)
+		protected override void AssertHttpRequestException(HttpRequestException e)
 		{
 		}
 	}
