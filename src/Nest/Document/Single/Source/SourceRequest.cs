@@ -1,4 +1,6 @@
-﻿namespace Nest
+﻿using Elasticsearch.Net;
+
+namespace Nest
 {
 	public partial interface ISourceRequest { }
 
@@ -21,4 +23,5 @@
 			return this.Preference("_local");
 		}
 	}
+
 }

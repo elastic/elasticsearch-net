@@ -163,6 +163,10 @@ namespace Nest
 		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
 		{
 			var property = base.CreateProperty(member, memberSerialization);
+			//we don't have a chance to ignore this in the low level client
+			if (member.Name == nameof(IResponse.ApiCall) && typeof(IResponse).IsAssignableFrom(member.DeclaringType))
+				property.Ignored = true;
+
 			ApplyShouldSerializer(property);
 			ApplyPropertyOverrides(member, property);
 			ApplyBuildInSerializers(member, property);

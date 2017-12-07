@@ -52,6 +52,7 @@ namespace Nest
 		private Error _error;
 		private int? _statusCode;
 
+        [JsonIgnore]
 		IApiCallDetails IElasticsearchResponse.ApiCall { get => _originalApiCall; set => _originalApiCall = value; }
 
 		public ServerError ServerError

@@ -167,22 +167,13 @@ namespace ApiGenerator.Domain
 						}
 						queryStringParamName = this.CsharpMethodName + "RequestParameters";
 						var paraIndent = "\r\n\t\t///";
-						var explanationOfT =
-								paraIndent + "<para> - T, an object you own that the elasticsearch response will be deserialized to </para>"
-								+ paraIndent + "<para> - byte[], no deserialization, but the response stream will be closed </para>"
-								+ paraIndent + "<para> - Stream, no deserialization, response stream is your responsibility </para>"
-								+ paraIndent + "<para> - VoidResponse, no deserialization, response stream never read and closed </para>"
-								+ paraIndent + "<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>"
-							;
 						var apiMethod = new CsharpMethod
 						{
 							QueryStringParamName = queryStringParamName,
 							ReturnType = "TResponse",
 							ReturnTypeGeneric = "<TResponse>",
 							CallTypeGeneric = "TResponse",
-							ReturnDescription =
-								"ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:"
-								+ explanationOfT,
+							ReturnDescription = "",
 							FullName = methodName,
 							HttpMethod = method,
 							Documentation = this.Documentation,
@@ -213,9 +204,7 @@ namespace ApiGenerator.Domain
 							ReturnType = "Task<TResponse>",
 							ReturnTypeGeneric = "<TResponse>",
 							CallTypeGeneric = "TResponse",
-							ReturnDescription =
-								"A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:"
-								+ explanationOfT,
+							ReturnDescription = "",
 							FullName = methodName + "Async",
 							HttpMethod = method,
 							Documentation = this.Documentation,
