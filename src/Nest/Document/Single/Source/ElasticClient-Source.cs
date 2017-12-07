@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
@@ -41,8 +42,11 @@ namespace Nest
 		public T Source<T>(ISourceRequest request) where T : class
 		{
 			request.RouteValues.Resolve(ConnectionSettings);
-			var response = this.LowLevelDispatch.GetSourceDispatch<ElasticsearchResponse<T>>(request);
-			return response.Body;
+			return this.Dispatcher.Dispatch<ISourceRequest, SourceRequestParameters, SourceResponse<T>>(
+				request,
+				this.ToSourceResponse<T>,
+				(p, d) => this.LowLevelDispatch.GetSourceDispatch<SourceResponse<T>>(p)
+			).Body;
 		}
 
 		/// <inheritdoc/>
@@ -56,9 +60,28 @@ namespace Nest
 		public async Task<T> SourceAsync<T>(ISourceRequest request, CancellationToken cancellationToken = default(CancellationToken)) where T : class
 		{
 			request.RouteValues.Resolve(ConnectionSettings);
-			var response = await this.LowLevelDispatch.GetSourceDispatchAsync<ElasticsearchResponse<T>>(request, cancellationToken).ConfigureAwait(false);
-			return response.Body;
+			var result = await this.Dispatcher.DispatchAsync<ISourceRequest, SourceRequestParameters, SourceResponse<T>, ISourceResponse<T>>(
+				request,
+				cancellationToken,
+				this.ToSourceResponse<T>,
+				(p, d, c) => this.LowLevelDispatch.GetSourceDispatchAsync<SourceResponse<T>>(p, c)
+			);
+			return result.Body;
 		}
 
+		private SourceResponse<T> ToSourceResponse<T>(IApiCallDetails apiCallDetails, Stream stream) where T : class
+		{
+			var source = this.SourceSerializer.Deserialize<T>(stream);
+			return ToSourceBody(apiCallDetails, source);
+		}
+		private static SourceResponse<T> ToSourceBody<T>(IApiCallDetails apiCallDetails, T source) where T : class
+		{
+			var r = new SourceResponse<T>
+			{
+				Body = source,
+			};
+			((IElasticsearchResponse) r).ApiCall = apiCallDetails;
+			return r;
+		}
 	}
 }

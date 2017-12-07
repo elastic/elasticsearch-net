@@ -35,16 +35,10 @@ namespace Elasticsearch.Net
 	}
 
 	/// <summary>
-	/// A response from elasticsearch including details about the request/response life cycle
+	/// A response from elasticsearch including details about the request/response life cycle. Base class for the built in low level response
+	/// types: <see cref="StringResponse"/> <see cref="BytesResponse"/> <see cref="StreamResponse"/> and <see cref="DynamicResponse"/>
 	/// </summary>
-	/// <typeparam name="T">
-	/// <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-	/// <para> - byte[], no deserialization, but the response stream will be closed </para>
-	/// <para> - Stream, no deserialization, response stream is your responsibility </para>
-	/// <para> - VoidResponse, no deserialization, response stream never read and closed </para>
-	/// <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-	/// </typeparam>
-	public class ElasticsearchResponse<T> : ElasticsearchResponseBase
+	public abstract class ElasticsearchResponse<T> : ElasticsearchResponseBase
 	{
 		public T Body { get; protected internal set; }
 	}
