@@ -194,7 +194,7 @@ namespace Elasticsearch.Net
 		X509CertificateCollection ClientCertificates { get; }
 
 		/// <summary>
-		/// Configure the client to skip deserialization of certain status codes e.g: you run elasticsearch behind a proxy that returns a HTML for 401, 500
+		/// Configure the client to skip deserialization of certain status codes e.g: you run elasticsearch behind a proxy that returns an unexpected json format
 		/// </summary>
 		IReadOnlyCollection<int> SkipDeserializationForStatusCodes { get; }
 	}

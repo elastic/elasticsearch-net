@@ -138,11 +138,11 @@ namespace Tests.Framework
 			var connection = CreateConnection(forceInMemory: forceInMemory);
 			var s = new ConnectionSettings(connectionPool, connection, (builtin, values) =>
 			{
+				if (sourceSerializerFactory != null) return sourceSerializerFactory(builtin, values);
+
                 return !Configuration.UsingCustomSourceSerializer
                 	? null
-	                : sourceSerializerFactory == null
-		                ? new TestSourceSerializerBase(builtin, values)
-		                : sourceSerializerFactory(builtin, values);
+	                : new TestSourceSerializerBase(builtin, values);
 			}, propertyMappingProvider);
 
 			var defaultSettings = DefaultSettings(s);

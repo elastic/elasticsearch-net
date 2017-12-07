@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -10,22 +11,13 @@ namespace Nest
 	public interface IGetAliasResponse : IResponse
 	{
 		IReadOnlyDictionary<string, IReadOnlyList<AliasDefinition>> Indices { get; }
-		/// <summary>
-		/// An additional error message if an error occurs.
-		/// </summary>
-		/// <remarks>Applies to Elasticsearch 5.5.0+</remarks>
-		string Error { get; }
-		int? StatusCode { get; }
 	}
 
 	public class GetAliasResponse : ResponseBase, IGetAliasResponse
 	{
 		public IReadOnlyDictionary<string, IReadOnlyList<AliasDefinition>> Indices { get; internal set; } = EmptyReadOnly<string, IReadOnlyList<AliasDefinition>>.Dictionary;
 
-
 		public override bool IsValid => this.Indices.Count > 0;
-		public string Error { get; internal set; }
-		public int? StatusCode { get; internal set; }
 	}
 
 	internal class GetAliasResponseConverter : JsonConverter
@@ -78,7 +70,7 @@ namespace Nest
 				indices.Add(indexDict, aliases);
 			}
 
-			return new GetAliasResponse { Indices = indices, Error = error, StatusCode = statusCode};
+			return new GetAliasResponse { Indices = indices, Error = new Error { Reason = error }, StatusCode = statusCode};
 		}
 
 		public override bool CanConvert(Type objectType) => true;

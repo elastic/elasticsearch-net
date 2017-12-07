@@ -40,7 +40,7 @@ namespace Elasticsearch.Net
 			where TResponse : class, IElasticsearchResponse, new() =>
 			this.ReturnConnectionStatus<TResponse>(requestData);
 
-		protected TResponse ReturnConnectionStatus<TResponse>(RequestData requestData, byte[] responseBody = null, int? statusCode = null)
+		protected TResponse ReturnConnectionStatus<TResponse>(RequestData requestData, byte[] responseBody = null, int? statusCode = null, string contentType = null)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			var body = responseBody ?? _responseBody;
@@ -60,10 +60,10 @@ namespace Elasticsearch.Net
 
 			var sc = statusCode ?? this._statusCode;
 			Stream s = (body != null) ? new MemoryStream(body) : new MemoryStream(EmptyBody);
-			return ResponseBuilder.ToResponse<TResponse>(requestData, _exception, sc, null, s, _contentType);
+			return ResponseBuilder.ToResponse<TResponse>(requestData, _exception, sc, null, s, contentType ?? _contentType ?? RequestData.MimeType);
 		}
 
-		protected async Task<TResponse> ReturnConnectionStatusAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken, byte[] responseBody = null, int? statusCode = null)
+		protected async Task<TResponse> ReturnConnectionStatusAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken, byte[] responseBody = null, int? statusCode = null, string contentType = null)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			var body = responseBody ?? _responseBody;
@@ -83,7 +83,7 @@ namespace Elasticsearch.Net
 
 			var sc = statusCode ?? this._statusCode;
 			Stream s = (body != null) ? new MemoryStream(body) : new MemoryStream(EmptyBody);
-			return await ResponseBuilder.ToResponseAsync<TResponse>(requestData, _exception, sc, null, s, _contentType, cancellationToken)
+			return await ResponseBuilder.ToResponseAsync<TResponse>(requestData, _exception, sc, null, s, contentType ?? _contentType, cancellationToken)
 				.ConfigureAwait(false);
 		}
 
