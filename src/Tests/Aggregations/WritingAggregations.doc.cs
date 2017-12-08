@@ -146,7 +146,7 @@ namespace Tests.Aggregations
 		/**[float]
 		* === Mixed usage of object initializer and fluent
 		*
-		* Sometimes its useful to mix and match fluent and object initializer, the fluent Aggregations method therefor
+		* Sometimes its useful to mix and match fluent and object initializer, the fluent Aggregations method therefore
 		* also accepts `AggregationDictionary` directly.
 		*/
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
