@@ -106,9 +106,6 @@ namespace Nest
 	[JsonObject]
 	public class SearchResponse<T> : ResponseBase, ISearchResponse<T> where T : class
 	{
-		//TODO REMOVE
-		internal ServerError MultiSearchError { get; set; }
-
 		[JsonProperty("_shards")]
 		public ShardsMetadata Shards { get; internal set; }
 
