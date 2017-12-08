@@ -235,18 +235,18 @@ namespace Nest
 
 			try
 			{
-				var tasks = new List<Task>();
+				var tasks = new List<Task>(maxDegreeOfParallelism);
 				foreach (var item in lazyList)
 				{
 					tasks.Add(ProcessAsync(item, taskSelector, resultProcessor, semaphore, additionalRateLimitter, page++));
-					if (tasks.Count <= maxDegreeOfParallelism)
+					if (tasks.Count < maxDegreeOfParallelism)
 						continue;
 
-					var task = await Task.WhenAny(tasks);
+					var task = await Task.WhenAny(tasks).ConfigureAwait(false);
 					tasks.Remove(task);
 				}
 
-				await Task.WhenAll(tasks);
+				await Task.WhenAll(tasks).ConfigureAwait(false);
 				done(null);
 			}
 			catch (Exception e)
