@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
-	public class ResponseBuilder<TReturn> 
+	public class ResponseBuilder<TReturn>
 		where TReturn : class
-		
+
 	{
 		private const int BufferSize = 81920;
 		private static readonly VoidResponse Void = new VoidResponse();
@@ -105,10 +105,10 @@ namespace Elasticsearch.Net
 						else response.Body = await this._requestData.ConnectionSettings.Serializer.DeserializeAsync<TReturn>(stream, this._requestData.CancellationToken).ConfigureAwait(false);
 					}
 					if (response.AllowAllStatusCodes)
-						await ReadServerErrorAsync(response, new MemoryStream(bytes), bytes);
+						await ReadServerErrorAsync(response, new MemoryStream(bytes), bytes).ConfigureAwait(false);
 				}
 				else if (response.HttpStatusCode != null)
-					await ReadServerErrorAsync(response, stream, bytes);
+					await ReadServerErrorAsync(response, stream, bytes).ConfigureAwait(false);
 			}
 		}
 

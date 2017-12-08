@@ -195,11 +195,11 @@ namespace Nest
 						if (tasks.Count <= _semaphoreSize)
 							continue;
 
-						var task = await Task.WhenAny(tasks);
+						var task = await Task.WhenAny(tasks).ConfigureAwait(false);
 						tasks.Remove(task);
 					}
 
-					await Task.WhenAll(tasks);
+					await Task.WhenAll(tasks).ConfigureAwait(false);
 					done(null);
 				}
 				catch (Exception e)
