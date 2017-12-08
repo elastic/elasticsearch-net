@@ -5,7 +5,7 @@ namespace Nest
 {
 	public interface IIndicesStatsResponse : IResponse
 	{
-		ShardsMetadata Shards { get; }
+		ShardStatistics Shards { get; }
 		IndicesStats Stats { get;}
 		IReadOnlyDictionary<string, IndicesStats> Indices { get; }
 	}
@@ -15,7 +15,7 @@ namespace Nest
 	{
 
 		[JsonProperty("_shards")]
-		public ShardsMetadata Shards { get; internal set; }
+		public ShardStatistics Shards { get; internal set; }
 
 		[JsonProperty("_all")]
 		public IndicesStats Stats { get; internal set; }

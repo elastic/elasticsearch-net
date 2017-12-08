@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	public class ShardsMetadata
+	public class ShardStatistics
 	{
 		[JsonProperty]
 		public int Total { get; internal set; }

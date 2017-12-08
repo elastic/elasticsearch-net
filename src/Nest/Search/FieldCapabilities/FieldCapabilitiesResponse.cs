@@ -12,7 +12,7 @@ namespace Nest
 
 	public class FieldCapabilitiesResponse : ResponseBase, IFieldCapabilitiesResponse
 	{
-		public ShardsMetadata Shards { get; internal set; }
+		public ShardStatistics Shards { get; internal set; }
 		public IReadOnlyDictionary<string, FieldTypes> Fields { get; internal set; } = EmptyReadOnly<string, FieldTypes>.Dictionary;
 	}
 

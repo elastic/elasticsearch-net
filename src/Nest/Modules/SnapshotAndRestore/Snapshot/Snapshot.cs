@@ -32,7 +32,7 @@ namespace Nest
 		public long DurationInMilliseconds { get; internal set;  }
 
 		[JsonProperty("shards")]
-		public ShardsMetadata Shards { get; internal set; }
+		public ShardStatistics Shards { get; internal set; }
 
 		[JsonProperty("failures")]
 		public IReadOnlyCollection<SnapshotShardFailure> Failures { get; internal set; }

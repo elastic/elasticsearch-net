@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public interface IClusterStatsResponse : IResponse
+	public interface IClusterStatsResponse : INodesResponse
 	{
 		[JsonProperty("cluster_name")]
 		string ClusterName { get; }
@@ -20,7 +20,7 @@ namespace Nest
 		ClusterNodesStats Nodes { get; }
 	}
 
-	public class ClusterStatsResponse : ResponseBase, IClusterStatsResponse
+	public class ClusterStatsResponse : NodesResponseBase, IClusterStatsResponse
 	{
 		public string ClusterName { get; internal set; }
 

@@ -5,11 +5,11 @@ namespace Nest
 	public interface IUpgradeResponse : IResponse
 	{
 		[JsonProperty("_shards")]
-		ShardsMetadata Shards { get; }
+		ShardStatistics Shards { get; }
 	}
 
 	public class UpgradeResponse : ResponseBase, IUpgradeResponse
 	{
-		public ShardsMetadata Shards { get; internal set; }
+		public ShardStatistics Shards { get; internal set; }
 	}
 }
