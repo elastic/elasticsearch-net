@@ -107,12 +107,12 @@ namespace Nest
 				// :/
 				try
 				{
-					var token = await JToken.LoadAsync(jsonTextReader, cancellationToken);
+					var token = await JToken.LoadAsync(jsonTextReader, cancellationToken).ConfigureAwait(false);
 					return token.ToObject<T>(this._defaultSerializer);
 				}
 				catch
 				{
-					return await Task.FromResult(default(T));
+					return await Task.FromResult(default(T)).ConfigureAwait(false);
 				}
 			}
 		}
@@ -122,7 +122,7 @@ namespace Nest
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
-				var token = await JToken.LoadAsync(jsonTextReader, cancellationToken);
+				var token = await JToken.LoadAsync(jsonTextReader, cancellationToken).ConfigureAwait(false);
 				return token.ToObject(type, this._defaultSerializer);
 			}
 		}

@@ -48,7 +48,7 @@ namespace Elasticsearch.Net
 
 		public async Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			var o = await this.DeserializeAsync(typeof(T), stream, cancellationToken);
+			var o = await this.DeserializeAsync(typeof(T), stream, cancellationToken).ConfigureAwait(false);
 			return (T) o;
 		}
 
