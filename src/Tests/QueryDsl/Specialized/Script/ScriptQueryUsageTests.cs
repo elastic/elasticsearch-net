@@ -61,12 +61,10 @@ namespace Tests.QueryDsl.Specialized.Script
 			q => {
 				q.Source = "";
 				q.Id = null;
-				q.File = "";
 			},
 			q => {
 				q.Source = null;
 				q.Id = null;
-				q.File = null;
 			}
 		};
 	}

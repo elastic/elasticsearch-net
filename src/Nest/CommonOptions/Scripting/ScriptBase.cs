@@ -42,8 +42,9 @@ namespace Nest
 
 	public class ScriptDescriptor : DescriptorBase<ScriptDescriptor, IDescriptor>
 	{
-		public FileScriptDescriptor File(string file) => new FileScriptDescriptor(file);
+		public IndexedScriptDescriptor Id(string id) => new IndexedScriptDescriptor(id);
 
+		[Obsolete("Indexed() sets a property named id, this is confusing and thats why we intent to remove this in NEST 7.x please use Id()")]
 		public IndexedScriptDescriptor Indexed(string id) => new IndexedScriptDescriptor(id);
 
 		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]

@@ -27,11 +27,14 @@ namespace Nest
 
 	public class ScriptConditionDescriptor : DescriptorBase<ScriptConditionDescriptor, IDescriptor>
 	{
-		public FileScriptConditionDescriptor File(string file) => new FileScriptConditionDescriptor(file);
-
+		public IndexedScriptConditionDescriptor Id(string id) => new IndexedScriptConditionDescriptor(id);
+		[Obsolete("Indexed() sets a property named id, this is confusing and thats why we intent to remove this in NEST 7.x please use Id()")]
 		public IndexedScriptConditionDescriptor Indexed(string id) => new IndexedScriptConditionDescriptor(id);
 
+		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
 		public InlineScriptConditionDescriptor Inline(string script) => new InlineScriptConditionDescriptor(script);
+
+		public InlineScriptConditionDescriptor Source(string source) => new InlineScriptConditionDescriptor(source);
 	}
 
 	public abstract class ScriptConditionDescriptorBase<TDescriptor, TInterface>
@@ -76,11 +79,6 @@ namespace Nest
 			{
 				var inline = dict["source"].ToString();
 				scriptCondition = new InlineScriptCondition(inline);
-			}
-			if (dict.ContainsKey("file"))
-			{
-				var file = dict["file"].ToString();
-				scriptCondition = new FileScriptCondition(file);
 			}
 			if (dict.ContainsKey("id"))
 			{
