@@ -78,6 +78,9 @@ namespace Nest
 		public PercolateCountDescriptor<TDocument> Aggregations(Func<AggregationContainerDescriptor<TDocument>, IAggregationContainer> aggregationsSelector) =>
 			Assign(a => a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<TDocument>())?.Aggregations);
 
+		public PercolateCountDescriptor<TDocument> Aggregations(AggregationDictionary aggregations) =>
+			Assign(a => a.Aggregations = aggregations);
+
 		public PercolateCountDescriptor<TDocument> Sort(Func<SortDescriptor<TDocument>, IPromise<IList<ISort>>> selector) => Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<TDocument>())?.Value);
 
 		/// <summary>
