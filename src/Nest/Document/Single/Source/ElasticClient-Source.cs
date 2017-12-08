@@ -65,7 +65,7 @@ namespace Nest
 				cancellationToken,
 				this.ToSourceResponse<T>,
 				(p, d, c) => this.LowLevelDispatch.GetSourceDispatchAsync<SourceResponse<T>>(p, c)
-			);
+			).ConfigureAwait(false);
 			return result.Body;
 		}
 
