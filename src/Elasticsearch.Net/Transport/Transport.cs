@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Threading;
 using System;
+using System.Linq;
 
 namespace Elasticsearch.Net
 {
@@ -97,15 +98,7 @@ namespace Elasticsearch.Net
 					pipeline.MarkAlive(node);
 					break;
 				}
-				if (requestData.Node == null) //foreach never ran
-					pipeline.ThrowNoNodesAttempted(requestData, seenExceptions);
-
-				if (response == null || !response.ApiCall.Success)
-					pipeline.BadResponse(ref response, requestData, seenExceptions);
-
-				this.Settings.OnRequestCompleted?.Invoke(response.ApiCall);
-
-				return response;
+				return FinalizeResponse(requestData, pipeline, seenExceptions, response);
 			}
 		}
 
@@ -166,16 +159,41 @@ namespace Elasticsearch.Net
 					pipeline.MarkAlive(node);
 					break;
 				}
-				if (requestData.Node == null) //foreach never ran
-					pipeline.ThrowNoNodesAttempted(requestData, seenExceptions);
-
-				if (response == null || !response.ApiCall.Success)
-					pipeline.BadResponse(ref response, requestData, seenExceptions);
-
-				this.Settings.OnRequestCompleted?.Invoke(response.ApiCall);
-
-				return response;
+				return FinalizeResponse(requestData, pipeline, seenExceptions, response);
 			}
+		}
+
+		private TResponse FinalizeResponse<TResponse>(RequestData requestData, IRequestPipeline pipeline, List<PipelineException> seenExceptions,
+			TResponse response) where TResponse : class, IElasticsearchResponse, new()
+		{
+			if (requestData.Node == null) //foreach never ran
+				pipeline.ThrowNoNodesAttempted(requestData, seenExceptions);
+
+			var callDetails = GetMostRecentCallDetails(response, seenExceptions);
+			var clientException = pipeline.CreateClientException(callDetails, requestData, seenExceptions);
+
+			//if (response?.ApiCall == null || !response.ApiCall.Success)
+			if (response?.ApiCall == null)
+				pipeline.BadResponse(ref response, callDetails, requestData, clientException);
+
+			HandleElasticsearchClientException(clientException, response);
+			return response;
+		}
+
+		private static IApiCallDetails GetMostRecentCallDetails<TResponse>(TResponse response, IEnumerable<PipelineException> seenExceptions)
+			where TResponse : class, IElasticsearchResponse, new()
+		{
+			var callDetails = response?.ApiCall ?? seenExceptions.LastOrDefault(e=>e.ApiCall != null)?.ApiCall;
+			return callDetails;
+		}
+
+
+		private void HandleElasticsearchClientException(ElasticsearchClientException clientException, IElasticsearchResponse response)
+		{
+			if (clientException != null && response.ApiCall.OriginalException == null && response.ApiCall is ApiCallDetails a)
+				a.OriginalException = clientException;
+			this.Settings.OnRequestCompleted?.Invoke(response.ApiCall);
+			if (clientException != null && this.Settings.ThrowExceptions) throw clientException;
 		}
 
 		private static void Ping(IRequestPipeline pipeline, Node node)

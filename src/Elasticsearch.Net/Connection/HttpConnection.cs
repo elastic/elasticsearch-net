@@ -176,7 +176,7 @@ namespace Elasticsearch.Net
 				if (e.Response is HttpWebResponse response)
 					HandleResponse(response, out statusCode, out responseStream, out mimeType);
 			}
-
+			responseStream = responseStream ?? Stream.Null;
 			return ResponseBuilder.ToResponse<TResponse>(requestData, ex, statusCode, warnings, responseStream, mimeType);
 		}
 
@@ -255,6 +255,7 @@ namespace Elasticsearch.Net
 			{
 				unregisterWaitHandle?.Invoke();
 			}
+			responseStream = responseStream ?? Stream.Null;
 			return await ResponseBuilder.ToResponseAsync<TResponse>
 					(requestData, ex, statusCode, warnings, responseStream, mimeType, cancellationToken)
 					.ConfigureAwait(false);
