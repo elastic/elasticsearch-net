@@ -166,7 +166,6 @@ namespace ApiGenerator.Domain
 							this.Url.Params = new Dictionary<string, ApiQueryParameters>();
 						}
 						queryStringParamName = this.CsharpMethodName + "RequestParameters";
-						var paraIndent = "\r\n\t\t///";
 						var apiMethod = new CsharpMethod
 						{
 							QueryStringParamName = queryStringParamName,

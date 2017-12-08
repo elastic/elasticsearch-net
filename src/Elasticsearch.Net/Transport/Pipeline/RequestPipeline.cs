@@ -469,19 +469,30 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public void BadResponse<TResponse>(ref TResponse response, RequestData data, List<PipelineException> pipelineExceptions)
+		public void BadResponse<TResponse>(ref TResponse response, IApiCallDetails callDetails, RequestData data, ElasticsearchClientException exception)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			var callDetails = response?.ApiCall ?? pipelineExceptions.LastOrDefault()?.ApiCall;
+			if (response == null)
+			{
+				//make sure we copy over the error body in case we disabled direct streaming.
+				var s = callDetails?.ResponseBodyInBytes == null ? Stream.Null : new MemoryStream(callDetails.ResponseBodyInBytes);
+				var m = callDetails?.ResponseMimeType ?? RequestData.MimeType;
+				response = ResponseBuilder.ToResponse<TResponse>(data, exception, callDetails?.HttpStatusCode, null, s, m);
+			}
+
+			response.ApiCall.AuditTrail = this.AuditTrail;
+		}
+
+		public ElasticsearchClientException CreateClientException(IApiCallDetails callDetails, RequestData data, List<PipelineException> pipelineExceptions)
+		{
+			if (callDetails.Success) return null;
+			var innerException = pipelineExceptions.HasAny() ? new AggregateException(pipelineExceptions) : callDetails?.OriginalException;
+
+			var exceptionMessage = innerException?.Message ?? $"Request failed to execute";
+
 			var pipelineFailure = data.OnFailurePipelineFailure;
 			if (pipelineExceptions.HasAny())
 				pipelineFailure = pipelineExceptions.Last().FailureReason;
-
-			var innerException = pipelineExceptions.HasAny()
-				? new AggregateException(pipelineExceptions)
-				: callDetails?.OriginalException;
-
-			var exceptionMessage = innerException?.Message ?? "Could not complete the request to Elasticsearch.";
 
 			if (this.IsTakingTooLong)
 			{
@@ -503,21 +514,7 @@ namespace Elasticsearch.Net
 				AuditTrail = this.AuditTrail
 			};
 
-			if (_settings.ThrowExceptions)
-			{
-				this._settings.OnRequestCompleted?.Invoke(clientException.Response);
-				throw clientException;
-			}
-
-			if (response == null)
-			{
-				//make sure we copy over the error body in case we disabled direct streaming.
-				var s = callDetails?.ResponseBodyInBytes == null ? Stream.Null : new MemoryStream(callDetails.ResponseBodyInBytes);
-				var m = callDetails?.ResponseMimeType ?? RequestData.MimeType;
-				response = ResponseBuilder.ToResponse<TResponse>(data, clientException, callDetails?.HttpStatusCode, null, s, m);
-			}
-
-			response.ApiCall.AuditTrail = this.AuditTrail;
+			return clientException;
 		}
 
 		void IDisposable.Dispose() => this.Dispose();
