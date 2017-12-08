@@ -403,7 +403,7 @@ namespace Tests.XPack.Watcher.PutWatch
 					)
 					.Transform(ctt => ctt
 						.Script(st => st
-							.Inline("return [ 'time' : ctx.trigger.scheduled_time ]")
+							.Source("return [ 'time' : ctx.trigger.scheduled_time ]")
 						)
 					)
 				)

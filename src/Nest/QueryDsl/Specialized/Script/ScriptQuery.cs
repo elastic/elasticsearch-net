@@ -20,9 +20,6 @@ namespace Nest
 		[JsonProperty("id")]
 		Id Id { get; set; }
 
-		[JsonProperty("file")]
-		string File { get; set; }
-
 		[JsonProperty("params")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		Dictionary<string, object> Params { get; set; }
@@ -38,13 +35,12 @@ namespace Nest
 		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
 		public string Inline { get => this.Source; set => this.Source = value; }
 		public Id Id { get; set; }
-		public string File { get; set; }
 		public Dictionary<string, object> Params { get; set; }
 		public string Lang { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Script = this;
 		internal static bool IsConditionless(IScriptQuery q) =>
-			q.Source.IsNullOrEmpty() && q.Id == null && q.File.IsNullOrEmpty();
+			q.Source.IsNullOrEmpty() && q.Id == null;
 
 	}
 
@@ -56,7 +52,6 @@ namespace Nest
 		string IScriptQuery.Inline { get => Self.Source; set => Self.Source = value; }
 		string IScriptQuery.Source { get; set; }
 		Id IScriptQuery.Id { get; set; }
-		string IScriptQuery.File { get; set; }
 		string IScriptQuery.Lang { get; set; }
 		Dictionary<string, object> IScriptQuery.Params { get; set; }
 
@@ -69,11 +64,6 @@ namespace Nest
 
 		/// <summary> Id of an indexed script to execute </summary>
 		public ScriptQueryDescriptor<T> Id(string scriptId) => Assign(a => a.Id = scriptId);
-
-		/// <summary>
-		/// File name of a script to execute
-		/// </summary>
-		public ScriptQueryDescriptor<T> File(string scriptFile) => Assign(a => a.File = scriptFile);
 
 		/// <summary>
 		/// Scripts are compiled and cached for faster execution.

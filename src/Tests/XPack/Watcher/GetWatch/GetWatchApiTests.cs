@@ -55,7 +55,7 @@ namespace Tests.XPack.Watcher.GetWatch
 							)
 							.Transform(ctt => ctt
 								.Script(st => st
-									.Inline("return [ 'time' : ctx.trigger.scheduled_time ]")
+									.Source("return [ 'time' : ctx.trigger.scheduled_time ]")
 								)
 							)
 						)

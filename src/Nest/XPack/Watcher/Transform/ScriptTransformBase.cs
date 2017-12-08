@@ -44,11 +44,15 @@ namespace Nest
 
 	public class ScriptTransformDescriptor : DescriptorBase<ScriptTransformDescriptor, IDescriptor>
 	{
-		public FileScriptTransformDescriptor File(string file) => new FileScriptTransformDescriptor(file);
+		public IndexedScriptTransformDescriptor Id(string id) => new IndexedScriptTransformDescriptor(id);
 
+		[Obsolete("Indexed() sets a property named id, this is confusing and thats why we intent to remove this in NEST 7.x please use Id()")]
 		public IndexedScriptTransformDescriptor Indexed(string id) => new IndexedScriptTransformDescriptor(id);
 
+		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
 		public InlineScriptTransformDescriptor Inline(string script) => new InlineScriptTransformDescriptor(script);
+
+		public InlineScriptTransformDescriptor Source(string source) => new InlineScriptTransformDescriptor(source);
 	}
 
 	internal class ScriptTransformJsonConverter : JsonConverter
@@ -76,11 +80,6 @@ namespace Nest
 			{
 				var inline = dict["source"].ToString();
 				scriptTransform = new InlineScriptTransform(inline);
-			}
-			if (dict.ContainsKey("file"))
-			{
-				var file = dict["file"].ToString();
-				scriptTransform = new FileScriptTransform(file);
 			}
 			if (dict.ContainsKey("id"))
 			{

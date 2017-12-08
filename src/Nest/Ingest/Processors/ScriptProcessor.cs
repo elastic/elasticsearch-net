@@ -21,12 +21,6 @@ namespace Nest
 		string Lang { get; set; }
 
 		/// <summary>
-		/// The script file to refer to
-		/// </summary>
-		[JsonProperty("file")]
-		string File { get; set; }
-
-		/// <summary>
 		/// The stored script id to refer to
 		/// </summary>
 		[JsonProperty("id")]
@@ -63,11 +57,6 @@ namespace Nest
 		public string Lang { get; set; }
 
 		/// <summary>
-		/// The script file to refer to
-		/// </summary>
-		public string File { get; set; }
-
-		/// <summary>
 		/// The stored script id to refer to
 		/// </summary>
 		public string Id { get; set; }
@@ -93,7 +82,6 @@ namespace Nest
 		protected override string Name => "script";
 
 		string IScriptProcessor.Lang { get; set; }
-		string IScriptProcessor.File{ get; set; }
 		string IScriptProcessor.Id{ get; set; }
 		string IScriptProcessor.Inline { get => Self.Source; set => Self.Source = value; }
 		string IScriptProcessor.Source { get; set; }
@@ -103,11 +91,6 @@ namespace Nest
 		/// The scripting language. Defaults to painless
 		/// </summary>
 		public ScriptProcessorDescriptor Lang(string lang) => Assign(a => a.Lang = lang);
-
-		/// <summary>
-		/// The script file to refer to
-		/// </summary>
-		public ScriptProcessorDescriptor File(string file) => Assign(a => a.File = file);
 
 		/// <summary>
 		/// The stored script id to refer to

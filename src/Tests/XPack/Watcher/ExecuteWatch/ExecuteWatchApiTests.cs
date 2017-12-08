@@ -45,7 +45,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 					)
 					.Condition(c => c
 						.Script(ss => ss
-							.Inline("ctx.payload.hits.total > 1")
+							.Source("ctx.payload.hits.total > 1")
 						)
 					)
 					.Trigger(t => t
@@ -316,7 +316,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 					)
 					.Condition(c => c
 						.Script(ss => ss
-							.Inline("ctx.payload.hits.total > 1")
+							.Source("ctx.payload.hits.total > 1")
 						)
 					)
 					.Trigger(t => t
@@ -518,7 +518,7 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 				)
 				.Condition(c => c
 					.Script(ss => ss
-						.Inline("ctx.payload.hits.total > 1")
+						.Source("ctx.payload.hits.total > 1")
 					)
 				)
 				.Trigger(t => t
