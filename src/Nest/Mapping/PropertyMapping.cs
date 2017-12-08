@@ -8,7 +8,7 @@ namespace Nest
 	public class PropertyMappingDescriptor<TDocument> : DescriptorBase<PropertyMappingDescriptor<TDocument>, IDescriptor>
 		where TDocument : class
 	{
-		internal IList<IClrTypePropertyMapping<TDocument>> Mappings { get; } = new List<IClrTypePropertyMapping<TDocument>>();
+		internal IList<IPocoPropertyMapping<TDocument>> Mappings { get; } = new List<IPocoPropertyMapping<TDocument>>();
 
 		public PropertyMappingDescriptor<TDocument> Rename(Expression<Func<TDocument, object>> property, string field)
 		{

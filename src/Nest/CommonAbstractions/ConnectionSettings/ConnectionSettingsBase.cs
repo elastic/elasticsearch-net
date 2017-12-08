@@ -20,10 +20,12 @@ namespace Nest
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
 
 		public ConnectionSettings(IConnectionPool connectionPool) : this(connectionPool, null, null) { }
+
 		public ConnectionSettings(IConnectionPool connectionPool, SourceSerializerFactory sourceSerializer)
 			: this(connectionPool, null, sourceSerializer) { }
 
 		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection) : this(connectionPool, connection, null) { }
+
 		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection, SourceSerializerFactory sourceSerializer)
 			: this(connectionPool, connection, sourceSerializer, null) { }
 
@@ -33,7 +35,6 @@ namespace Nest
 			SourceSerializerFactory sourceSerializer,
 			IPropertyMappingProvider propertyMappingProvider)
 			: base(connectionPool, connection, sourceSerializer, propertyMappingProvider) { }
-
 	}
 
 	/// <summary>
@@ -85,7 +86,7 @@ namespace Nest
 			IConnection connection,
 			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory,
 			IPropertyMappingProvider propertyMappingProvider
-			)
+		)
 			: base(connectionPool, connection, null)
 		{
 			var defaultSerializer = new JsonNetSerializer(this);
@@ -113,7 +114,7 @@ namespace Nest
 		public TConnectionSettings PluralizeTypeNames()
 		{
 			this._defaultTypeNameInferrer = this.LowerCaseAndPluralizeTypeNameInferrer;
-			return (TConnectionSettings)this;
+			return (TConnectionSettings) this;
 		}
 
 		/// <summary>
@@ -125,7 +126,7 @@ namespace Nest
 		public TConnectionSettings DefaultIndex(string defaultIndex)
 		{
 			this._defaultIndex = defaultIndex;
-			return (TConnectionSettings)this;
+			return (TConnectionSettings) this;
 		}
 
 		private string LowerCaseAndPluralizeTypeNameInferrer(Type type)
@@ -143,7 +144,7 @@ namespace Nest
 		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer)
 		{
 			this._defaultFieldNameInferrer = fieldNameInferrer;
-			return (TConnectionSettings)this;
+			return (TConnectionSettings) this;
 		}
 
 		/// <summary>
@@ -155,17 +156,17 @@ namespace Nest
 		{
 			typeNameInferrer.ThrowIfNull(nameof(typeNameInferrer));
 			this._defaultTypeNameInferrer = typeNameInferrer;
-			return (TConnectionSettings)this;
+			return (TConnectionSettings) this;
 		}
 
-        /// <summary>
-        /// Specify which property on a given POCO should be used to infer the id of the document when
-        /// indexed in Elasticsearch.
-        /// </summary>
-        /// <typeparam name="TDocument">The type of the document.</typeparam>
-        /// <param name="objectPath">The object path.</param>
-        /// <returns></returns>
-        private TConnectionSettings MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
+		/// <summary>
+		/// Specify which property on a given POCO should be used to infer the id of the document when
+		/// indexed in Elasticsearch.
+		/// </summary>
+		/// <typeparam name="TDocument">The type of the document.</typeparam>
+		/// <param name="objectPath">The object path.</param>
+		/// <returns></returns>
+		private TConnectionSettings MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
 		{
 			objectPath.ThrowIfNull(nameof(objectPath));
 
@@ -175,17 +176,18 @@ namespace Nest
 			if (this._idProperties.ContainsKey(typeof(TDocument)))
 			{
 				if (this._idProperties[typeof(TDocument)].Equals(fieldName))
-					return (TConnectionSettings)this;
+					return (TConnectionSettings) this;
 
-				throw new ArgumentException($"Cannot map '{fieldName}' as the id property for type '{typeof(TDocument).Name}': it already has '{this._idProperties[typeof(TDocument)]}' mapped.");
+				throw new ArgumentException(
+					$"Cannot map '{fieldName}' as the id property for type '{typeof(TDocument).Name}': it already has '{this._idProperties[typeof(TDocument)]}' mapped.");
 			}
 
 			this._idProperties.Add(typeof(TDocument), fieldName);
 
-			return (TConnectionSettings)this;
+			return (TConnectionSettings) this;
 		}
 
-		private void ApplyPropertyMappings<TDocument>(IList<IClrTypePropertyMapping<TDocument>> mappings)
+		private void ApplyPropertyMappings<TDocument>(IList<IPocoPropertyMapping<TDocument>> mappings)
 			where TDocument : class
 		{
 			foreach (var mapping in mappings)
@@ -207,34 +209,35 @@ namespace Nest
 					if (mappedAs.IsNullOrEmpty() && newName.IsNullOrEmpty())
 						throw new ArgumentException($"Property mapping '{e}' on type is already ignored");
 					if (mappedAs.IsNullOrEmpty())
-						throw new ArgumentException($"Property mapping '{e}' on type {typeName} can not be mapped to '{newName}' it already has an ignore mapping");
+						throw new ArgumentException(
+							$"Property mapping '{e}' on type {typeName} can not be mapped to '{newName}' it already has an ignore mapping");
 					if (newName.IsNullOrEmpty())
 						throw new ArgumentException($"Property mapping '{e}' on type {typeName} can not be ignored it already has a mapping to '{mappedAs}'");
-					throw new ArgumentException($"Property mapping '{e}' on type {typeName} can not be mapped to '{newName}' already mapped as '{mappedAs}'");
+					throw new ArgumentException(
+						$"Property mapping '{e}' on type {typeName} can not be mapped to '{newName}' already mapped as '{mappedAs}'");
 				}
 				_propertyMappings[memberInfo] = mapping.ToPropertyMapping();
 			}
 		}
 
-        /// <summary>
-        /// Specify how the mapping is inferred for a given POCO type.
-        /// Can be used to infer the index, type, id property and properties for the POCO.
-        /// </summary>
-        /// <typeparam name="TDocument">The type of the document.</typeparam>
-        /// <param name="selector">The selector.</param>
-        /// <returns></returns>
-        public TConnectionSettings InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
+		/// <summary>
+		/// Specify how the mapping is inferred for a given POCO type. Can be used to infer the index, type and relation names.
+		/// The generic version also allows you to set a default id property and control serialization behavior for properties for the POCO.
+		/// </summary>
+		/// <typeparam name="TDocument">The type of the document.</typeparam>
+		/// <param name="selector">The selector.</param>
+		public TConnectionSettings InferMappingFor<TDocument>(Func<PocoMappingDescriptor<TDocument>, IPocoMapping<TDocument>> selector)
 			where TDocument : class
 		{
-			var inferMapping = selector(new ClrTypeMappingDescriptor<TDocument>());
+			var inferMapping = selector(new PocoMappingDescriptor<TDocument>());
 			if (!inferMapping.IndexName.IsNullOrEmpty())
-				this._defaultIndices.Add(inferMapping.Type, inferMapping.IndexName);
+				this._defaultIndices.Add(inferMapping.ClrType, inferMapping.IndexName);
 
 			if (!inferMapping.TypeName.IsNullOrEmpty())
-				this._defaultTypeNames.Add(inferMapping.Type, inferMapping.TypeName);
+				this._defaultTypeNames.Add(inferMapping.ClrType, inferMapping.TypeName);
 
 			if (!inferMapping.RelationName.IsNullOrEmpty())
-				this._defaultRelationNames.Add(inferMapping.Type, inferMapping.RelationName);
+				this._defaultRelationNames.Add(inferMapping.ClrType, inferMapping.RelationName);
 
 			if (inferMapping.IdProperty != null)
 				this.MapIdPropertyFor<TDocument>(inferMapping.IdProperty);
@@ -242,8 +245,50 @@ namespace Nest
 			if (inferMapping.Properties != null)
 				this.ApplyPropertyMappings<TDocument>(inferMapping.Properties);
 
-			return (TConnectionSettings)this;
+			return (TConnectionSettings) this;
 		}
 
+		/// <summary>
+		/// Specify how the mapping is inferred for a given POCO type. Can be used to infer the index, type, and relation names.
+		/// </summary>
+		/// <param name="documentType">The type of the POCO you wish to configure</param>
+		/// <param name="selector">describe the POCO configuration</param>
+		public TConnectionSettings InferMappingFor(Type documentType, Func<PocoMappingDescriptor, IPocoMapping> selector)
+		{
+			var inferMapping = selector(new PocoMappingDescriptor(documentType));
+			if (!inferMapping.IndexName.IsNullOrEmpty())
+				this._defaultIndices.Add(inferMapping.ClrType, inferMapping.IndexName);
+
+			if (!inferMapping.TypeName.IsNullOrEmpty())
+				this._defaultTypeNames.Add(inferMapping.ClrType, inferMapping.TypeName);
+
+			if (!inferMapping.RelationName.IsNullOrEmpty())
+				this._defaultRelationNames.Add(inferMapping.ClrType, inferMapping.RelationName);
+
+			return (TConnectionSettings) this;
+		}
+
+		/// <summary>
+		/// Specify how the mapping is inferred for a given POCO type. Can be used to infer the index, type, and relation names.
+		/// </summary>
+		/// <param name="documentType">The type of the POCO you wish to configure</param>
+		/// <param name="selector">describe the POCO configuration</param>
+		public TConnectionSettings InferMappings(IEnumerable<PocoMapping> typeMappings)
+		{
+			if (typeMappings == null) return (TConnectionSettings) this;
+			foreach (var inferMapping in typeMappings)
+			{
+				if (!inferMapping.IndexName.IsNullOrEmpty())
+					this._defaultIndices.Add(inferMapping.ClrType, inferMapping.IndexName);
+
+				if (!inferMapping.TypeName.IsNullOrEmpty())
+					this._defaultTypeNames.Add(inferMapping.ClrType, inferMapping.TypeName);
+
+				if (!inferMapping.RelationName.IsNullOrEmpty())
+					this._defaultRelationNames.Add(inferMapping.ClrType, inferMapping.RelationName);
+			}
+
+			return (TConnectionSettings) this;
+		}
 	}
 }
