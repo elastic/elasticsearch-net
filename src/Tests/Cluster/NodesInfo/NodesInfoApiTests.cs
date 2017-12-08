@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -28,6 +29,7 @@ namespace Tests.Cluster.NodesInfo
 		protected override void ExpectResponse(INodesInfoResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
+			Assert(response.NodeStatistics);
 			response.Nodes.Should().NotBeEmpty().And.HaveCount(1);
 			var kv = response.Nodes.FirstOrDefault();
 			kv.Key.Should().NotBeNullOrWhiteSpace();
@@ -40,6 +42,13 @@ namespace Tests.Cluster.NodesInfo
 			Assert(node.ThreadPool);
 			Assert(node.Transport);
 			Assert(node.Http);
+		}
+
+		private static void Assert(NodeStatistics nodesMetada)
+		{
+			nodesMetada.Should().NotBeNull();
+			nodesMetada.Total.Should().BeGreaterThan(0);
+			nodesMetada.Successful.Should().BeGreaterThan(0);
 		}
 
 		protected void Assert(Nest.NodeInfo node)
@@ -123,6 +132,53 @@ namespace Tests.Cluster.NodesInfo
 			http.Should().NotBeNull();
 			http.BoundAddress.Should().NotBeEmpty();
 			http.PublishAddress.Should().NotBeNullOrWhiteSpace();
+		}
+	}
+
+	public class NodesInfoMissingNodeApiTests : NodesInfoApiTests
+	{
+		public NodesInfoMissingNodeApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		private static readonly NodeIds Nodes = NodeIds.Parse("_local,x");
+
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.NodesInfo(f),
+			fluentAsync: (client, f) => client.NodesInfoAsync(f),
+			request: (client, r) => client.NodesInfo(r),
+			requestAsync: (client, r) => client.NodesInfoAsync(r)
+		);
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override string UrlPath => "/_nodes/_local%2Cx";
+
+		protected override NodesInfoRequest Initializer => new NodesInfoRequest(Nodes);
+		protected override Func<NodesInfoDescriptor, INodesInfoRequest> Fluent => n => n.NodeId(Nodes);
+
+		protected override void ExpectResponse(INodesInfoResponse response)
+		{
+			response.ClusterName.Should().NotBeNullOrWhiteSpace();
+			Assert(response.NodeStatistics);
+			response.Nodes.Should().NotBeEmpty().And.HaveCount(1);
+			var kv = response.Nodes.FirstOrDefault();
+			kv.Key.Should().NotBeNullOrWhiteSpace();
+			var node = kv.Value;
+			Assert(node);
+			Assert(node.OperatingSystem);
+			Assert(node.Plugins);
+			Assert(node.Process);
+			Assert(node.Jvm);
+			Assert(node.ThreadPool);
+			Assert(node.Transport);
+			Assert(node.Http);
+		}
+
+		private static void Assert(NodeStatistics nodesMetada)
+		{
+			nodesMetada.Should().NotBeNull();
+			nodesMetada.Total.Should().Be(1);
+			nodesMetada.Successful.Should().Be(1);
 		}
 	}
 }

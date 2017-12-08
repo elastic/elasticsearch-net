@@ -29,7 +29,7 @@ namespace Nest
 		/// </summary>
 		Result Result { get; }
 
-		ShardsMetadata Shards { get; }
+		ShardStatistics Shards { get; }
 		long SequenceNumber { get; }
 		long PrimaryTerm { get; }
 	}
@@ -54,7 +54,7 @@ namespace Nest
 		public Result Result { get; internal set; }
 
 		[JsonProperty("_shards")]
-		public ShardsMetadata Shards { get; internal set; }
+		public ShardStatistics Shards { get; internal set; }
 
 		[JsonProperty("_seq_no")]
 		public long SequenceNumber { get; internal set; }

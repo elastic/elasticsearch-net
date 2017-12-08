@@ -13,6 +13,6 @@ namespace Nest
 			EmptyReadOnly<IndexName>.Collection;
 
 		[JsonProperty("shards")]
-		public ShardsMetadata Shards { get; internal set;  }
+		public ShardStatistics Shards { get; internal set;  }
 	}
 }

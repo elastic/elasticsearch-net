@@ -5,7 +5,7 @@ namespace Nest
 	public interface ICountResponse : IResponse
 	{
 		long Count { get; }
-		ShardsMetadata Shards { get; }
+		ShardStatistics Shards { get; }
 	}
 
 	[JsonObject]
@@ -15,6 +15,6 @@ namespace Nest
 		public long Count { get; internal set; }
 
 		[JsonProperty("_shards")]
-		public ShardsMetadata Shards { get; internal set; }
+		public ShardStatistics Shards { get; internal set; }
 	}
 }
