@@ -68,6 +68,11 @@ namespace Nest
 		/// When set each bulk request will call <see cref="ProducerConsumerBackPressure.Release"/>
 		/// </summary>
 		ProducerConsumerBackPressure BackPressure { get; set; }
+
+		/// <summary>
+		/// A predicate which controls which documents should be retried, defaults to failed bulk items with status code 429
+		/// </summary>
+		Func<IBulkResponseItem, T, bool> RetryDocumentPredicate { get; set; }
 	}
 
 	public class BulkAllRequest<T>  : IBulkAllRequest<T>
@@ -104,6 +109,9 @@ namespace Nest
 		/// <inheritdoc />
 		public ProducerConsumerBackPressure BackPressure { get; set; }
 
+		/// <inheritdoc />
+		public Func<IBulkResponseItem, T, bool> RetryDocumentPredicate { get; set; }
+
 		public BulkAllRequest(IEnumerable<T> documents)
 		{
 			this.Documents = documents;
@@ -132,6 +140,7 @@ namespace Nest
 		string IBulkAllRequest<T>.Pipeline { get; set; }
 		Action<BulkDescriptor, IList<T>>  IBulkAllRequest<T>.BufferToBulk { get; set; }
 		ProducerConsumerBackPressure IBulkAllRequest<T>.BackPressure { get; set; }
+		Func<IBulkResponseItem, T, bool> IBulkAllRequest<T>.RetryDocumentPredicate { get; set; }
 
 		public BulkAllDescriptor(IEnumerable<T> documents)
 		{
@@ -183,6 +192,10 @@ namespace Nest
 
 		/// <inheritdoc />
 		public BulkAllDescriptor<T> BufferToBulk(Action<BulkDescriptor, IList<T>> modifier) => Assign(p => p.BufferToBulk = modifier);
+
+		/// <inheritdoc />
+		public BulkAllDescriptor<T> RetryDocumentPredicate(Func<IBulkResponseItem, T, bool> predicate) =>
+			Assign(p => p.RetryDocumentPredicate = predicate);
 
 		/// <summary>
 		/// Simple back pressure implementation that makes sure the minimum max concurrency between producer and consumer
