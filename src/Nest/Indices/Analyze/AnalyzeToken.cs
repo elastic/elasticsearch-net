@@ -12,15 +12,14 @@ namespace Nest
 		[JsonProperty("type")]
 		public string Type { get; internal set; }
 
-		//TODO change to long in 6.0... RC: (this is int in Elasticsearch codebase)
 		[JsonProperty("start_offset")]
-		public int StartOffset { get; internal set; }
+		public long StartOffset { get; internal set; }
 
 		[JsonProperty("end_offset")]
-		public int EndOffset { get; internal set; }
+		public long EndOffset { get; internal set; }
 
 		[JsonProperty("position")]
-		public int Position { get; internal set; }
+		public long Position { get; internal set; }
 
 		[JsonProperty("position_length")]
 		public long? PositionLength { get; internal set; }
