@@ -14,24 +14,40 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var t = value as ITermsQuery;
-			if (t == null) return;
+			if (!(value is ITermsQuery t)) return;
 
 			var settings = serializer.GetConnectionSettings();
 			var field = settings.Inferrer.Field(t.Field);
 
 			writer.WriteStartObject();
 			{
-				if (t.Terms.HasAny())
+				if (t.IsVerbatim)
 				{
-					writer.WritePropertyName(field);
-					serializer.Serialize(writer, t.Terms);
+                    if (t.TermsLookup != null)
+                    {
+                        writer.WritePropertyName(field);
+                        serializer.Serialize(writer, t.TermsLookup);
+                    }
+                    else if (t.Terms != null)
+                    {
+                        writer.WritePropertyName(field);
+                        serializer.Serialize(writer, t.Terms);
+                    }
 				}
-				else if (t.TermsLookup != null)
+				else
 				{
-					writer.WritePropertyName(field);
-					serializer.Serialize(writer, t.TermsLookup);
+                    if (t.Terms.HasAny())
+                    {
+                        writer.WritePropertyName(field);
+                        serializer.Serialize(writer, t.Terms);
+                    }
+                    else if (t.TermsLookup != null)
+                    {
+                        writer.WritePropertyName(field);
+                        serializer.Serialize(writer, t.TermsLookup);
+                    }
 				}
+
 				if (t.Boost.HasValue)
 				{
 					writer.WritePropertyName("boost");
