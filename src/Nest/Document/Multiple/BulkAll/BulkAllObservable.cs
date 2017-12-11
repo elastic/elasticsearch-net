@@ -20,6 +20,7 @@ namespace Nest
 
 		private readonly CancellationToken _compositeCancelToken;
 		private readonly CancellationTokenSource _compositeCancelTokenSource;
+		private readonly Func<IBulkResponseItem, T, bool> _retryPredicate;
 
 		public BulkAllObservable(
 			IElasticClient client,
@@ -32,8 +33,8 @@ namespace Nest
 			this._backOffRetries = this._partionedBulkRequest.BackOffRetries.GetValueOrDefault(CoordinatedRequestDefaults.BulkAllBackOffRetriesDefault);
 			this._backOffTime = (this._partionedBulkRequest?.BackOffTime?.ToTimeSpan() ?? CoordinatedRequestDefaults.BulkAllBackOffTimeDefault);
 			this._bulkSize = this._partionedBulkRequest.Size ?? CoordinatedRequestDefaults.BulkAllSizeDefault;
+			this._retryPredicate = this._partionedBulkRequest.RetryDocumentPredicate ?? RetryBulkActionPredicate;
 			this._maxDegreeOfParallelism = _partionedBulkRequest.MaxDegreeOfParallelism ?? CoordinatedRequestDefaults.BulkAllMaxDegreeOfParallelismDefault;
-
 			this._compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 			this._compositeCancelToken = this._compositeCancelTokenSource.Token;
 		}
@@ -114,19 +115,19 @@ namespace Nest
 				.ConfigureAwait(false);
 
 			this._compositeCancelToken.ThrowIfCancellationRequested();
-			if (!response.IsValid && backOffRetries < this._backOffRetries)
+
+			var retryDocuments = response.Items.Zip(buffer, (i, d) => new {i, d})
+				.Where(x=> !response.IsValid && this._retryPredicate(x.i, x.d))
+				.Select(x => x.d)
+				.ToList();
+
+			if (retryDocuments.Count > 0 && backOffRetries < this._backOffRetries)
 			{
 				this._incrementRetries();
-				//wait before or after fishing out retriable docs?
 				await Task.Delay(this._backOffTime, this._compositeCancelToken).ConfigureAwait(false);
-				var retryDocuments = response.Items.Zip(buffer, (i, d) => new {i, d})
-					.Where(x => x.i.Status == 429)
-					.Select(x => x.d)
-					.ToList();
-
 				return await this.BulkAsync(retryDocuments, page, ++backOffRetries).ConfigureAwait(false);
 			}
-			else if (!response.IsValid)
+			if (retryDocuments.Count > 0)
 			{
 				this._incrementFailed();
 				this._partionedBulkRequest.BackPressure?.Release();
@@ -135,6 +136,8 @@ namespace Nest
 			this._partionedBulkRequest.BackPressure?.Release();
 			return new BulkAllResponse {Retries = backOffRetries, Page = page};
 		}
+
+		private static bool RetryBulkActionPredicate(IBulkResponseItem bulkResponseItem, T d) => bulkResponseItem.Status == 429;
 
 		public bool IsDisposed { get; private set; }
 
