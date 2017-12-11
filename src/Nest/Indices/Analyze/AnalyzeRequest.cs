@@ -58,22 +58,22 @@ namespace Nest
 		public Union<string, ITokenizer> Tokenizer { get; set; }
 
 		/// <inheritdoc />
+		public Union<string, IAnalyzer> Analyzer { get; set; }
+
+		/// <inheritdoc />
 		public bool? Explain { get; set; }
 
 		/// <inheritdoc />
 		public IEnumerable<string> Attributes { get; set; }
 
-		/// <inheritdoc />
-		public Union<string, IAnalyzer> Analyzer { get; set; }
-
 	    /// <inheritdoc />
 		public AnalyzeCharFilters CharFilter { get; set; }
 
-		/// <inheritdoc />
-		public string Normalizer { get; set; }
-
 	    /// <inheritdoc />
 		public AnalyzeTokenFilters Filter { get; set; }
+
+		/// <inheritdoc />
+		public string Normalizer { get; set; }
 
 		/// <inheritdoc />
 		public Field Field { get; set; }
@@ -86,13 +86,13 @@ namespace Nest
 	[DescriptorFor("IndicesAnalyze")]
 	public partial class AnalyzeDescriptor
 	{
-		Union<string, ITokenizer> IAnalyzeRequest.Tokenizer { get; set; }
 		Union<string, IAnalyzer> IAnalyzeRequest.Analyzer { get; set; }
 		AnalyzeCharFilters IAnalyzeRequest.CharFilter { get; set; }
-		string IAnalyzeRequest.Normalizer { get; set; }
 		AnalyzeTokenFilters IAnalyzeRequest.Filter { get; set; }
+		string IAnalyzeRequest.Normalizer { get; set; }
 		Field IAnalyzeRequest.Field { get; set; }
 		IEnumerable<string> IAnalyzeRequest.Text { get; set; }
+		Union<string, ITokenizer> IAnalyzeRequest.Tokenizer { get; set; }
 		bool? IAnalyzeRequest.Explain { get; set; }
 		IEnumerable<string> IAnalyzeRequest.Attributes { get; set; }
 
@@ -124,9 +124,6 @@ namespace Nest
 		///<summary>A collection of character filters to use for the analysis</summary>
 		public AnalyzeDescriptor CharFilter(IEnumerable<string> charFilter) => Assign(a => a.CharFilter = charFilter.ToArray());
 
-		///<summary>The name of the normalizer to use</summary>
-		public AnalyzeDescriptor Normalizer(string normalizer) => Assign(a => a.Normalizer = normalizer);
-
 		///<summary>A collection of character filters to use for the analysis</summary>
 		public AnalyzeDescriptor CharFilter(Func<AnalyzeCharFiltersDescriptor, IPromise<AnalyzeCharFilters>> charFilters) =>
 			Assign(a => a.CharFilter = charFilters?.Invoke(new AnalyzeCharFiltersDescriptor())?.Value);
@@ -140,6 +137,9 @@ namespace Nest
 		///<summary>A collection of filters to use for the analysis</summary>
 		public AnalyzeDescriptor Filter(Func<AnalyzeTokenFiltersDescriptor, IPromise<AnalyzeTokenFilters>> tokenFilters) =>
 			Assign(a => a.Filter = tokenFilters?.Invoke(new AnalyzeTokenFiltersDescriptor())?.Value);
+
+		///<summary>The name of the normalizer to use</summary>
+		public AnalyzeDescriptor Normalizer(string normalizer) => Assign(a => a.Normalizer = normalizer);
 
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
 		public AnalyzeDescriptor Field(Field field) => Assign(a => a.Field = field);
@@ -161,5 +161,6 @@ namespace Nest
 
 		/// <inheritdoc cref="IAnalyzeRequst.Attributes" />
 		public AnalyzeDescriptor Attributes(IEnumerable<string> attributes) => Assign(a => a.Attributes = attributes);
+
 	}
 }
