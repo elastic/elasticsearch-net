@@ -80,7 +80,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		public IEnumerable<string> Text { get; set; }
-
 	}
 
 	[DescriptorFor("IndicesAnalyze")]
@@ -154,13 +153,12 @@ namespace Nest
 		public AnalyzeDescriptor Text(IEnumerable<string> text) => Assign(a => a.Text = text);
 
 		/// <inheritdoc cref="IAnalyzeRequst.Explain" />
-		public AnalyzeDescriptor Explain(bool? explain = true) => Assign(a => a.Explain = explain);
+		public AnalyzeDescriptor Explain(bool explain = true) => Assign(a => a.Explain = explain);
 
 		/// <inheritdoc cref="IAnalyzeRequst.Attributes" />
 		public AnalyzeDescriptor Attributes(params string[] attributes) => Assign(a => a.Attributes = attributes);
 
 		/// <inheritdoc cref="IAnalyzeRequst.Attributes" />
-		public AnalyzeDescriptor Attributes(IEnumerable<string> attributes) => Assign(a => a.Attributes = attributes);
-
+		public AnalyzeDescriptor Attributes(IEnumerable<string> attributes) => Assign(a => a.Attributes = attributes.ToArray());
 	}
 }

@@ -50,7 +50,7 @@ namespace Tests.Indices.Analyze
 
 	public class AnalyzeInlineApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
 	{
-		private const string TextToAnalyze = "F# is <b>THE SUPERIOR</b> language :) :gandalf: ";
+		protected const string TextToAnalyze = "F# is <b>THE SUPERIOR</b> language :) :gandalf: ";
 
 		public AnalyzeInlineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
