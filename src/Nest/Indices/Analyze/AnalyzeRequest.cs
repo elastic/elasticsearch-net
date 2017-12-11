@@ -152,7 +152,7 @@ namespace Nest
 		///<summary>The text on which the analysis should be performed</summary>
 		public AnalyzeDescriptor Text(IEnumerable<string> text) => Assign(a => a.Text = text);
 
-		/// <inheritdoc cref="IAnalyzeRequst.Explain" />
+		///<summary>Return more details, and output the analyzer chain per step in the process</summary>
 		public AnalyzeDescriptor Explain(bool explain = true) => Assign(a => a.Explain = explain);
 
 		/// <inheritdoc cref="IAnalyzeRequst.Attributes" />
