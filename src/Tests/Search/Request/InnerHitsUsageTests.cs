@@ -45,7 +45,10 @@ namespace Tests.Search.Request
 		public List<King> Foes { get; set; }
 	}
 
-	public class Prince : RoyalBase<Prince> { }
+	public class Prince : RoyalBase<Prince>
+	{
+		public string FullTextField { get; set; } = "default full text field text";
+	}
 	public class Duke : RoyalBase<Duke> { }
 	public class Earl : RoyalBase<Earl> { }
 	public class Baron : RoyalBase<Baron> { }
@@ -230,15 +233,25 @@ namespace Tests.Search.Request
 							has_child = new
 							{
 								type = "prince",
-								query = new {match_all = new { }},
-								inner_hits = new {name = "princes"}
+								query = new
+								{
+									match = new { fullTextField = new { query = "default" } }
+								},
+								inner_hits = new
+								{
+									name = "princes",
+									highlight = new
+									{
+										fields = new { fullTextField = new { } }
+									}
+								}
 							}
 						},
 						new
 						{
 							nested = new
 							{
-								query = new {match_all = new { }},
+								query = new { match_all = new { } },
 								path = "foes",
 								inner_hits = new { }
 							}
@@ -253,8 +266,12 @@ namespace Tests.Search.Request
 			.Type(RoyalSeeder.RoyalType)
 			.Query(q =>
 				q.HasChild<Prince>(hc => hc
-					.Query(hcq => hcq.MatchAll())
-					.InnerHits(ih => ih.Name("princes"))
+					.Query(hcq => hcq.Match(m => m.Field(p => p.FullTextField).Query("default")))
+					.InnerHits(ih => ih
+						.Name("princes")
+						.Highlight(h=>h.Fields(f=>f.Field(p=>p.FullTextField)))
+					)
+
 				) || q.Nested(n => n
 					.Path(p => p.Foes)
 					.Query(nq => nq.MatchAll())
@@ -267,8 +284,12 @@ namespace Tests.Search.Request
 			Query = new HasChildQuery
 			{
 				Type = typeof(Prince),
-				Query = new MatchAllQuery(),
-				InnerHits = new InnerHits {Name = "princes"}
+				Query = new MatchQuery { Field = Field<Prince>(p=>p.FullTextField), Query = "default" },
+				InnerHits = new InnerHits
+				{
+					Name = "princes",
+					Highlight = Highlight.Field(Field<Prince>(p=>p.FullTextField))
+				}
 			} || new NestedQuery
 			{
 				Path = Field<King>(p => p.Foes),
@@ -284,6 +305,15 @@ namespace Tests.Search.Request
 			{
 				var princes = hit.InnerHits["princes"].Documents<Prince>();
 				princes.Should().NotBeEmpty();
+				foreach (var princeHit in hit.InnerHits["princes"].Hits.Hits)
+				{
+					var highlights = princeHit.Highlights;
+					highlights.Should().NotBeNull("princes should have highlights");
+					highlights.Should().ContainKey("fullTextField", "we are highlighting this field");
+					var hl = highlights["fullTextField"];
+					hl.Highlights.Should().NotBeEmpty("all docs have the same text so should all highlight")
+						.And.Contain(s => s.Contains("<em>default</em>"), "default to be highlighted as its part of the query");
+				}
 
 				var foes = hit.InnerHits["foes"].Documents<King>();
 				foes.Should().NotBeEmpty();

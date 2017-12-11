@@ -170,6 +170,15 @@ namespace Nest
 		public string BoundaryScannerLocale { get; set; }
 		// <inheritdoc/>
 		public HighlighterFragmenter? Fragmenter { get; set; }
+
+		public static Highlight Field(Field field) => new Highlight
+		{
+			Fields = new Dictionary<Field, IHighlightField>
+			{
+				{field, new HighlightField()}
+			}
+		};
+
 	}
 
 	public class HighlightDescriptor<T> : DescriptorBase<HighlightDescriptor<T> ,IHighlight>, IHighlight
