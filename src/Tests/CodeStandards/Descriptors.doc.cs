@@ -11,30 +11,54 @@ namespace Tests.CodeStandards
 	public class Descriptors
 	{
 		/**
+		* A descriptor is fluent class that is used to build up state and should therefor return itself on each call.
 		* Every descriptor should inherit from `DescriptorBase`, this hides object members from the fluent interface
 		*/
 		[U]
 		public void DescriptorsHaveToBeMarkedWithIDescriptor()
 		{
-			var notDescriptors = new[] { typeof(ClusterProcessOpenFileDescriptors).Name, "DescriptorForAttribute" };
+			var notDescriptors = new[] {typeof(ClusterProcessOpenFileDescriptors).Name, "DescriptorForAttribute"};
 
-			var descriptors = from t in typeof(DescriptorBase<,>).Assembly().Types()
-							  where t.IsClass()
-								&& t.Name.Contains("Descriptor")
-								&& !notDescriptors.Contains(t.Name)
+			var descriptors =
+				from t in typeof(DescriptorBase<,>).Assembly().Types()
+				where t.IsClass()
+				      && t.Name.Contains("Descriptor")
+				      && !notDescriptors.Contains(t.Name)
 #if __MonoCS__
-								&& !t.FullName.Contains("c__AnonStore") //compiler generated
+				      && !t.FullName.Contains("c__AnonStore") //compiler generated
 #endif
-								&& t.GetInterfaces().All(i => i != typeof(IDescriptor))
-							  select t.FullName;
+				      && t.GetInterfaces().All(i => i != typeof(IDescriptor))
+				select t.FullName;
 			descriptors.Should().BeEmpty();
 		}
 
 		/**
+		* A selector is fluent class that is used to return state. Each method should return a completed state.
+		* Every selector should inherit from `ISelector`, this hides object members from the fluent interface
+		*/
+		[U]
+		public void SelectorsHaveToBeMarkedWithISelector()
+		{
+			var notSelectors = new[] {typeof(BucketSelectorAggregationDescriptor).Name, typeof(BucketSelectorAggregation).Name};
+			var selectors =
+				from t in typeof(SelectorBase<>).Assembly().Types()
+				where t.IsClass()
+				      && t.Name.Contains("Selector")
+				      && !notSelectors.Contains(t.Name)
+#if __MonoCS__
+				      && !t.FullName.Contains("c__AnonStore") //compiler generated
+#endif
+				      && t.GetInterfaces().All(i => i != typeof(ISelector))
+				select t.FullName;
+			selectors.Should().BeEmpty();
+		}
+
+		/**
+		* A descriptor is exposed as a selector func, taking a descriptor and returning the completed state.
 		* Methods taking a func should have that func return an interface
 		*/
 		[U]
-		public void SelectorsReturnInterface()
+		public void DescriptorSelectorsReturnInterface()
 		{
 			var descriptors =
 				from t in typeof(DescriptorBase<,>).Assembly().Types()
@@ -43,14 +67,14 @@ namespace Tests.CodeStandards
 
 			var exclusions = new Dictionary<Type, Type>
 			{
-				{ typeof(QueryContainerDescriptor<>), typeof(QueryContainer) },
-				{ typeof(ConditionDescriptor), typeof(ConditionContainer) },
-				{ typeof(TriggerDescriptor), typeof(TriggerContainer) },
-				{ typeof(TransformDescriptor), typeof(TransformContainer) },
-				{ typeof(SmoothingModelContainerDescriptor), typeof(SmoothingModelContainer) },
-				{ typeof(InputDescriptor), typeof(InputContainer) },
-				{ typeof(RoleMappingRuleDescriptor), typeof(RoleMappingRuleBase) },
-				{ typeof(FluentDictionary<,>), typeof(FluentDictionary<,>) }
+				{typeof(QueryContainerDescriptor<>), typeof(QueryContainer)},
+				{typeof(ConditionDescriptor), typeof(ConditionContainer)},
+				{typeof(TriggerDescriptor), typeof(TriggerContainer)},
+				{typeof(TransformDescriptor), typeof(TransformContainer)},
+				{typeof(SmoothingModelContainerDescriptor), typeof(SmoothingModelContainer)},
+				{typeof(InputDescriptor), typeof(InputContainer)},
+				{typeof(RoleMappingRuleDescriptor), typeof(RoleMappingRuleBase)},
+				{typeof(FluentDictionary<,>), typeof(FluentDictionary<,>)}
 			};
 
 			Func<Type, Type, bool> exclude = (first, second) =>
@@ -176,7 +200,5 @@ namespace Tests.CodeStandards
 		//Write a tests that all properties of type QueryContainer have the same json converters set
 
 		//TODO write tests that request expose QueryContainer/AggregationContainer not their interfaces
-
-
 	}
 }
