@@ -7,7 +7,7 @@ namespace Nest
 	public interface IValidateQueryResponse : IResponse
 	{
 		bool Valid { get; }
-		ShardsMetadata Shards { get; }
+		ShardStatistics Shards { get; }
 		IReadOnlyCollection<ValidationExplanation> Explanations { get; }
 	}
 
@@ -18,7 +18,7 @@ namespace Nest
 		public bool Valid { get; internal set; }
 
 		[JsonProperty("_shards")]
-		public ShardsMetadata Shards { get; internal set; }
+		public ShardStatistics Shards { get; internal set; }
 
 		/// <summary>
 		/// Gets the explanations if Explain() was set.

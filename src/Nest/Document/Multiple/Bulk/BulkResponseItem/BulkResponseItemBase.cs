@@ -54,7 +54,7 @@ namespace Nest
 		/// The shards associated with the bulk operation
 		/// </summary>
 		[JsonProperty("_shards")]
-		ShardsMetadata Shards { get; }
+		ShardStatistics Shards { get; }
 
 		[JsonProperty("_seq_no")]
 		long SequenceNumber { get; }
@@ -93,7 +93,7 @@ namespace Nest
 		public BulkError Error { get; internal set; }
 
 		/// <inheritdoc />
-		public ShardsMetadata Shards { get; internal set; }
+		public ShardStatistics Shards { get; internal set; }
 
 		/// <inheritdoc />
 		public long SequenceNumber { get; internal set; }

@@ -43,10 +43,10 @@ namespace Tests.XPack.DeprecationInfo
 
 			response.ClusterName.Should().Be("my_cluster");
 
-			response.NodesMetadata.Should().NotBeNull();
-			response.NodesMetadata.Total.Should().Be(1);
-			response.NodesMetadata.Successful.Should().Be(1);
-			response.NodesMetadata.Failed.Should().Be(0);
+			response.NodeStatistics.Should().NotBeNull();
+			response.NodeStatistics.Total.Should().Be(1);
+			response.NodeStatistics.Successful.Should().Be(1);
+			response.NodeStatistics.Failed.Should().Be(0);
 
 			response.Nodes.Should().NotBeNull();
 			response.Nodes.Should().HaveCount(1);

@@ -5,7 +5,6 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cluster.ClusterStats
 {
@@ -27,6 +26,7 @@ namespace Tests.Cluster.ClusterStats
 		protected override void ExpectResponse(IClusterStatsResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
+			response.NodeStatistics.Should().NotBeNull();
 			response.Status.Should().NotBe(ClusterStatus.Red);
 			response.Timestamp.Should().BeGreaterThan(0);
 			Assert(response.Nodes);

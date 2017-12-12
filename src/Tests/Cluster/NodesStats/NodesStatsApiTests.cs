@@ -29,6 +29,7 @@ namespace Tests.Cluster.NodesStats
 		protected override void ExpectResponse(INodesStatsResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
+			response.NodeStatistics.Should().NotBeNull();
 			response.Nodes.Should().NotBeEmpty().And.HaveCount(1);
 			var kv = response.Nodes.First();
 			kv.Key.Should().NotBeNullOrWhiteSpace();

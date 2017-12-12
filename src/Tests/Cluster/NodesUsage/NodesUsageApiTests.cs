@@ -6,7 +6,6 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cluster.NodesUsage
 {
@@ -29,10 +28,10 @@ namespace Tests.Cluster.NodesUsage
 		{
 			response.ClusterName.Should().NotBeEmpty();
 
-			response.NodesMetadata.Should().NotBeNull();
-			response.NodesMetadata.Total.Should().Be(1);
-			response.NodesMetadata.Successful.Should().Be(1);
-			response.NodesMetadata.Failed.Should().Be(0);
+			response.NodeStatistics.Should().NotBeNull();
+			response.NodeStatistics.Total.Should().Be(1);
+			response.NodeStatistics.Successful.Should().Be(1);
+			response.NodeStatistics.Failed.Should().Be(0);
 
 			response.Nodes.Should().NotBeNull();
 			response.Nodes.Should().HaveCount(1);
