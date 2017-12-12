@@ -46,10 +46,6 @@ namespace Nest
 		/// when no match for highlighting is found. Default behaviour is to not return anything when a match is not found.
 		/// The actual length may be shorter than specified as it tries to break on a word boundary.
 		/// </summary>
-		/// <remarks>
-		/// When using the postings highlighter, it is not possible to control the actual size of the snippet,
-		/// therefore the first sentence gets returned whenever no_match_size is greater than 0.
-		/// </remarks>
 		[JsonProperty("no_match_size")]
 		int? NoMatchSize { get; set; }
 

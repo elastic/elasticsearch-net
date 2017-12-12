@@ -15,7 +15,7 @@ namespace Tests.Search.Request
 {
 	/**
 	* Allows to highlight search results on one or more fields.
-	* The implementation uses either the lucene `highlighter`, `fast-vector-highlighter` or `postings-highlighter`.
+	* The implementation uses either the lucene `highlighter` or `fast-vector-highlighter`.
 	*
 	* See the Elasticsearch documentation on {ref_current}/search-request-highlighting.html[highlighting] for more detail.
 	*/
