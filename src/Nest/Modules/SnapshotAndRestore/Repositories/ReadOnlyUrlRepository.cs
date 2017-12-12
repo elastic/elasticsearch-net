@@ -58,7 +58,7 @@ namespace Nest
 			Assign(a => a.ConcurrentStreams = concurrentStreams);
 	}
 
-	public class ReadOnlyUrlRepositoryDescriptor 
+	public class ReadOnlyUrlRepositoryDescriptor
 		: DescriptorBase<ReadOnlyUrlRepositoryDescriptor, IReadOnlyUrlRepository>, IReadOnlyUrlRepository
 	{
 		string ISnapshotRepository.Type { get { return "url"; } }
