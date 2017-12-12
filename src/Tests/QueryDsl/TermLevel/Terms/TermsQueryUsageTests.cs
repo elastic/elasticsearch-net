@@ -71,5 +71,43 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			);
 	}
 
+	/**[float]
+	*== Verbatim terms query
+	 *
+	 * By default an empty terms array is conditionless so will be rewritten. Sometimes sending an empty an empty array to mean
+	 * match nothing makes sense. You can either use the `ConditionlessQuery` construct from NEST to provide a fallback or make the
+	 * query verbatim as followed:
+	*/
+	public class VerbatimTermsQueryUsageTests : TermsQueryUsageTests
+	{
+		public VerbatimTermsQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => null;
+		//when reading back the json the notion of is conditionless is lost
+		protected override bool SupportsDeserialization => false;
+
+		protected override object QueryJson => new
+		{
+			terms = new
+			{
+				description = new string[] {}
+			}
+		};
+
+		protected override QueryContainer QueryInitializer => new TermsQuery
+		{
+			IsVerbatim = true,
+			Field = "description",
+			Terms = new string[] {},
+		};
+
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
+			.Terms(c => c
+				.Verbatim()
+				.Field(p => p.Description)
+				.Terms(new string[] {})
+			);
+	}
+
 
 }
