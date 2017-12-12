@@ -15,6 +15,7 @@ namespace Tests.Framework.Configuration
 		string TestFilter { get; }
 		bool ForceReseed { get; }
 		bool TestAgainstAlreadyRunningElasticsearch { get; }
+		int Seed { get; }
 
 		bool RunIntegrationTests { get; }
 		bool RunUnitTests { get; }

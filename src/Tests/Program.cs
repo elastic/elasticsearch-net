@@ -16,9 +16,16 @@ using Tests.Framework.Profiling.Timeline;
 
 namespace Tests
 {
-	public class Program
+	// Microsoft test sdk injects a Main method for some reason into program
+	// (Relates to this issue: https://youtrack.jetbrains.com/issue/RSRP-464233)
+	// (See also https://github.com/elastic/elasticsearch-net/pull/2793)
+	// We provide an alternative StartupObject as part of the csproj for e.g `dotnet run` or executable output
+	// That will run the benchmarking/profiling.public class Program{ }
+	public class Program { }
+
+	public class BenchmarkProgram
 	{
-		static Program()
+		static BenchmarkProgram()
 		{
 			var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
 			if ((currentDirectory.Name == "Debug" || currentDirectory.Name == "Release") && currentDirectory.Parent.Name == "bin")
@@ -56,9 +63,6 @@ namespace Tests
 		private static  string SdkPath { get; }
 		private static  string OutputPath { get; }
 
-		// Rename to TestMain (instead of Main) if you'd like to run these tests within Visual Studio
-		// (Relates to this issue: https://youtrack.jetbrains.com/issue/RSRP-464233)
-		// (See also https://github.com/elastic/elasticsearch-net/pull/2793)
 		public static void Main(string[] args)
 		{
 			if (args.Length == 0)
