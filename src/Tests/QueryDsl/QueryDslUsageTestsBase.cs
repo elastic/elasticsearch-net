@@ -56,7 +56,7 @@ namespace Tests.QueryDsl
 
 		protected readonly QueryContainer ConditionlessQuery = new QueryContainer(new TermQuery { });
 
-		protected QueryContainer VerbatimQuery = new QueryContainer(new TermQuery { IsVerbatim = true });
+		protected readonly QueryContainer VerbatimQuery = new QueryContainer(new TermQuery { IsVerbatim = true });
 
 		[U] public void SeenByVisitor()
 		{
