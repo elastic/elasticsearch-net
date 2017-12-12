@@ -34,7 +34,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 				locale = "en_US",
 				time_zone = "root",
 				fields = new[] { "description", "myOtherField" },
-				use_dis_max = true,
 				tie_breaker = 1.2,
 				rewrite = "constant_score",
 				fuzzy_rewrite = "constant_score",
