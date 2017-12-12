@@ -29,6 +29,7 @@ namespace Tests.Framework.MockData
 
 		public static Faker<Project> Generator { get; } =
 			new Faker<Project>()
+				.UseSeed(TestClient.Configuration.Seed)
 				.RuleFor(p => p.Name, f => f.Person.Company.Name)
 				.RuleFor(p => p.Description, f => f.Lorem.Paragraphs(3))
 				.RuleFor(p => p.State, f => f.PickRandom<StateOfBeing>())
@@ -37,7 +38,7 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.LastActivity, p => p.Date.Recent())
 				.RuleFor(p => p.LeadDeveloper, p => Developer.Developers[Gimme.Random.Number(0, Developer.Developers.Count -1)])
 				.RuleFor(p => p.Tags, f => Tag.Generator.Generate(Gimme.Random.Number(2, 50)))
-				.RuleFor(p => p.CuratedTags, f => Tag.Generator.Generate(Gimme.Random.Number(1, 5)).ToList())
+				.RuleFor(p => p.CuratedTags, f => Tag.Generator.Generate(Gimme.Random.Number(1, 5)))
 				.RuleFor(p => p.Location, f => SimpleGeoPoint.Generator.Generate())
 				.RuleFor(p => p.NumberOfCommits, f => Gimme.Random.Number(1, 1000))
 				.RuleFor(p => p.NumberOfContributors, f => Gimme.Random.Number(1, 200))
@@ -53,7 +54,7 @@ namespace Tests.Framework.MockData
 				)
 			;
 
-		public static IList<Project> Projects { get; } = Project.Generator.Generate(100).ToList();
+		public static IList<Project> Projects { get; } = Project.Generator.Clone().Generate(100);
 
 	    public static Project First { get; } = Projects.First();
 
