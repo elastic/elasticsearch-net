@@ -58,7 +58,7 @@ namespace Nest
 		public string SnapshotBytesPerSecondMaximum { get; set; }
 	}
 
-	public class FileSystemRepositorySettingsDescriptor 
+	public class FileSystemRepositorySettingsDescriptor
 		: DescriptorBase<FileSystemRepositorySettingsDescriptor, IFileSystemRepositorySettings>, IFileSystemRepositorySettings
 	{
 		string IFileSystemRepositorySettings.Location { get; set; }
@@ -87,8 +87,8 @@ namespace Nest
 		public FileSystemRepositorySettingsDescriptor ConcurrentStreams(int concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
 
 		/// <summary>
-		/// Big files can be broken down into chunks during snapshotting if needed. 
-		/// The chunk size can be specified in bytes or by using size value notation, i.e. 1g, 10m, 5k. 
+		/// Big files can be broken down into chunks during snapshotting if needed.
+		/// The chunk size can be specified in bytes or by using size value notation, i.e. 1g, 10m, 5k.
 		/// Defaults to null (unlimited chunk size).
 		/// </summary>
 		/// <param name="chunkSize"></param>
@@ -102,14 +102,14 @@ namespace Nest
 			Assign(a => a.RestoreBytesPerSecondMaximum = maximumBytesPerSecond);
 
 		/// <summary>
-		/// Throttles per node snapshot rate. Defaults to 20mb per second. 
+		/// Throttles per node snapshot rate. Defaults to 20mb per second.
 		/// </summary>
 		/// <param name="maximumBytesPerSecond"></param>
 		public FileSystemRepositorySettingsDescriptor SnapshotBytesPerSecondMaximum(string maximumBytesPerSecond) =>
 			Assign(a => a.SnapshotBytesPerSecondMaximum = maximumBytesPerSecond);
 	}
 
-	public class FileSystemRepositoryDescriptor 
+	public class FileSystemRepositoryDescriptor
 		: DescriptorBase<FileSystemRepositoryDescriptor, IFileSystemRepository>, IFileSystemRepository
 	{
 		IFileSystemRepositorySettings IRepository<IFileSystemRepositorySettings>.Settings { get; set; }
