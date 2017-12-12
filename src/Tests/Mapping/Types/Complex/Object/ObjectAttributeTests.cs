@@ -11,8 +11,7 @@ namespace Tests.Mapping.Types.Complex.Object
 		}
 
 		[Object(
-			Enabled = true,
-			IncludeInAll = true)]
+			Enabled = true)]
 		public InnerObject Full { get; set; }
 
 		[Object]
@@ -29,7 +28,6 @@ namespace Tests.Mapping.Types.Complex.Object
 				{
 					type = "object",
 					enabled = true,
-					include_in_all = true,
 					properties = new
 					{
 						name = new

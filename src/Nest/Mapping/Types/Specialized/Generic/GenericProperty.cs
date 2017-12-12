@@ -35,9 +35,6 @@ namespace Nest
 		[JsonProperty("search_analyzer")]
 		string SearchAnalyzer { get; set; }
 
-		[JsonProperty("include_in_all")]
-		bool? IncludeInAll { get; set; }
-
 		[JsonProperty("ignore_above")]
 		int? IgnoreAbove { get; set; }
 
@@ -62,7 +59,6 @@ namespace Nest
 		public TermVectorOption? TermVector { get; set; }
 		public double? Boost { get; set; }
 		public string SearchAnalyzer { get; set; }
-		public bool? IncludeInAll { get; set; }
 		public int? IgnoreAbove { get; set; }
 		public int? PositionIncrementGap { get; set; }
 		public IStringFielddata Fielddata { get; set; }
@@ -91,7 +87,6 @@ namespace Nest
 		IndexOptions? IGenericProperty.IndexOptions { get; set; }
 		string IGenericProperty.Analyzer { get; set; }
 		string IGenericProperty.SearchAnalyzer { get; set; }
-		bool? IGenericProperty.IncludeInAll { get; set; }
 		int? IGenericProperty.IgnoreAbove { get; set; }
 		int? IGenericProperty.PositionIncrementGap { get; set; }
 		IStringFielddata IGenericProperty.Fielddata { get; set; }
@@ -105,8 +100,6 @@ namespace Nest
 		public GenericPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 
 		public GenericPropertyDescriptor<T> NullValue(string nullValue) => Assign(a => a.NullValue = nullValue);
-
-		public GenericPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 
 		public GenericPropertyDescriptor<T> NotAnalyzed() => Index(FieldIndexOption.NotAnalyzed);
 

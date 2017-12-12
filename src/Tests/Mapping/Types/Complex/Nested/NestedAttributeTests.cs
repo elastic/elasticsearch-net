@@ -13,8 +13,7 @@ namespace Tests.Mapping.Types.Complex.Nested
 		[Nested(
 			IncludeInParent = true,
 			IncludeInRoot = false,
-			Enabled = true,
-			IncludeInAll = true)]
+			Enabled = true)]
 		public InnerObject Full { get; set; }
 
 		[Nested]
@@ -33,7 +32,6 @@ namespace Tests.Mapping.Types.Complex.Nested
 					include_in_parent = true,
 					include_in_root = false,
 					enabled = true,
-					include_in_all = true,
 					properties = new
 					{
 						name = new

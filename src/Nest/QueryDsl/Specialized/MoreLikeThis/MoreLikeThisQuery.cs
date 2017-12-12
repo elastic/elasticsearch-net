@@ -30,10 +30,10 @@ namespace Nest
 		[JsonProperty("max_doc_freq")]
 		int? MaxDocumentFrequency { get; set; }
 
-		[JsonProperty("min_word_len")]
+		[JsonProperty("min_word_length")]
 		int? MinWordLength { get; set; }
 
-		[JsonProperty("max_word_len")]
+		[JsonProperty("max_word_length")]
 		int? MaxWordLength { get; set; }
 
 		[JsonProperty("stop_words")]

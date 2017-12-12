@@ -11,9 +11,6 @@ namespace Nest
 		[JsonProperty("size_in_bytes")]
 		public double SizeInBytes { get; set; }
 
-		[JsonProperty("throttle_time")]
-		public string ThrottleTime { get; set; }
-
 		[JsonProperty("throttle_time_in_millis")]
 		public long ThrottleTimeInMilliseconds { get; set; }
 	}

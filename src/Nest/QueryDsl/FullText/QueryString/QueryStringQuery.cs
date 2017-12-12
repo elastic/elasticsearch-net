@@ -48,9 +48,6 @@ namespace Nest
 		[JsonProperty("analyze_wildcard")]
 		bool? AnalyzeWildcard { get; set; }
 
-		[JsonProperty("auto_generate_phrase_queries")]
-		bool? AutoGeneratePhraseQueries { get; set; }
-
 		[JsonProperty("max_determinized_states")]
 		int? MaximumDeterminizedStates { get; set; }
 
@@ -70,9 +67,6 @@ namespace Nest
 		[JsonProperty("fields")]
 		Fields Fields { get; set; }
 
-		[JsonProperty("use_dis_max")]
-		bool? UseDisMax { get; set; }
-
 		[JsonProperty("tie_breaker")]
 		double? TieBreaker { get; set; }
 
@@ -87,12 +81,6 @@ namespace Nest
 
 		[JsonProperty("escape")]
 		bool? Escape { get; set; }
-
-		[JsonProperty("all_fields")]
-		bool? AllFields { get; set; }
-
-		[JsonProperty("split_on_whitespace")]
-		bool? SplitOnWhitespace { get; set; }
 	}
 
 	public class QueryStringQuery : QueryBase, IQueryStringQuery
@@ -122,12 +110,8 @@ namespace Nest
 		public double? PhraseSlop { get; set; }
 		public bool? Lenient { get; set; }
 		public bool? AnalyzeWildcard { get; set; }
-		public bool? AutoGeneratePhraseQueries { get; set; }
-		public bool? UseDisMax { get; set; }
 		public double? TieBreaker { get; set; }
 		public int? MaximumDeterminizedStates { get; set; }
-		public bool? AllFields { get; set; }
-		public bool? SplitOnWhitespace { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.QueryString = this;
 		internal static bool IsConditionless(IQueryStringQuery q) => q.Query.IsNullOrEmpty();
@@ -160,16 +144,12 @@ namespace Nest
 		MinimumShouldMatch IQueryStringQuery.MinimumShouldMatch { get; set; }
 		bool? IQueryStringQuery.Lenient { get; set; }
 		bool? IQueryStringQuery.AnalyzeWildcard { get; set; }
-		bool? IQueryStringQuery.AutoGeneratePhraseQueries { get; set; }
-		bool? IQueryStringQuery.UseDisMax { get; set; }
 		double? IQueryStringQuery.TieBreaker { get; set; }
 		int? IQueryStringQuery.MaximumDeterminizedStates { get; set; }
 		MultiTermQueryRewrite IQueryStringQuery.FuzzyRewrite { get; set; }
 		MultiTermQueryRewrite IQueryStringQuery.Rewrite { get; set; }
 		string IQueryStringQuery.QuoteFieldSuffix { get; set; }
 		bool? IQueryStringQuery.Escape { get; set; }
-		bool? IQueryStringQuery.AllFields { get; set; }
-		bool? IQueryStringQuery.SplitOnWhitespace { get; set; }
 
 		public QueryStringQueryDescriptor<T> DefaultField(Field field) => Assign(a => a.DefaultField = field);
 		public QueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> field) => Assign(a => a.DefaultField = field);
@@ -216,11 +196,6 @@ namespace Nest
 
 		public QueryStringQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Assign(a => a.AnalyzeWildcard = analyzeWildcard);
 
-		public QueryStringQueryDescriptor<T> AutoGeneratePhraseQueries(bool? autoGeneratePhraseQueries = true) =>
-			Assign(a => a.AutoGeneratePhraseQueries = autoGeneratePhraseQueries);
-
-		public QueryStringQueryDescriptor<T> UseDisMax(bool? useDismax = true) => Assign(a => a.UseDisMax = useDismax);
-
 		public QueryStringQueryDescriptor<T> TieBreaker(double? tieBreaker) => Assign(a => a.TieBreaker = tieBreaker);
 
 		public QueryStringQueryDescriptor<T> MaximumDeterminizedStates(int? maxDeterminizedStates) => Assign(a => a.MaximumDeterminizedStates = maxDeterminizedStates);
@@ -233,10 +208,5 @@ namespace Nest
 			Assign(a => a.QuoteFieldSuffix = quoteFieldSuffix);
 
 		public QueryStringQueryDescriptor<T> Escape(bool? escape = true) => Assign(a => a.Escape = escape);
-
-		public QueryStringQueryDescriptor<T> AllFields(bool? allFields = true) => Assign(a => a.AllFields = allFields);
-
-		public QueryStringQueryDescriptor<T> SplitOnWhitespace(bool? splitOnWhitespace = true) =>
-			Assign(a => a.SplitOnWhitespace = splitOnWhitespace);
 	}
 }

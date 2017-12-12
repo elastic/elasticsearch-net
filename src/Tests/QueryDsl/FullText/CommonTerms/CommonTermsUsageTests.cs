@@ -24,7 +24,6 @@ namespace Tests.QueryDsl.FullText.CommonTerms
 					high_freq_operator = "and",
 					minimum_should_match = 1,
 					analyzer = "standard",
-					disable_coord = true
 				}
 			}
 		};
@@ -35,7 +34,6 @@ namespace Tests.QueryDsl.FullText.CommonTerms
 			Analyzer = "standard",
 			Boost = 1.1,
 			CutoffFrequency = 0.001,
-			DisableCoord = true,
 			HighFrequencyOperator = Operator.And,
 			LowFrequencyOperator = Operator.Or,
 			MinimumShouldMatch = 1,
@@ -49,7 +47,6 @@ namespace Tests.QueryDsl.FullText.CommonTerms
 				.Analyzer("standard")
 				.Boost(1.1)
 				.CutoffFrequency(0.001)
-				.DisableCoord()
 				.HighFrequencyOperator(Operator.And)
 				.LowFrequencyOperator(Operator.Or)
 				.MinimumShouldMatch(1)

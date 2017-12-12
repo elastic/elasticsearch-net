@@ -21,7 +21,7 @@ namespace Nest
 		/// <summary>
 		/// A rewrite method that first translates each term into a should clause in a boolean query, and keeps the scores
 		///  as computed by the query. Note that typically such scores are meaningless to the user, and require non-trivial
-		///  CPU to compute, so it’s almost always better to use constant_score_auto. This rewrite method will hit too many
+		///  CPU to compute. This rewrite method will hit too many
 		///  clauses failure if it exceeds the boolean query limit (defaults to 1024).
 		/// </summary>
 		[EnumMember(Value = "scoring_boolean")]
@@ -114,7 +114,7 @@ namespace Nest
 		/// <summary>
 		/// A rewrite method that first translates each term into a should clause in a boolean query, and keeps the scores
 		///  as computed by the query. Note that typically such scores are meaningless to the user, and require non-trivial
-		///  CPU to compute, so it’s almost always better to use constant_score_auto. This rewrite method will hit too many
+		///  CPU to compute. This rewrite method will hit too many
 		///  clauses failure if it exceeds the boolean query limit (defaults to 1024).
 		/// </summary>
 		public static MultiTermQueryRewrite ScoringBoolean { get; } = new MultiTermQueryRewrite(RewriteMultiTerm.ScoringBoolean);

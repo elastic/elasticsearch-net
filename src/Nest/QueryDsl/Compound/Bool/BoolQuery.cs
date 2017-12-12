@@ -41,21 +41,12 @@ namespace Nest
 		[JsonProperty("minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
-		/// <summary>
-		/// Specifies if the coordination factor for the query should be disabled.
-		/// The coordination factor is used to reward documents that contain a higher
-		/// percentage of the query terms. The more query terms that appear in the document,
-		/// the greater the chances that the document is a good match for the query.
-		/// </summary>
-		[JsonProperty("disable_coord")]
-		bool? DisableCoord { get; set; }
-
 		bool Locked { get; }
 	}
 
 	public class BoolQuery : QueryBase, IBoolQuery
 	{
-		internal static bool Locked(IBoolQuery q) => !q.Name.IsNullOrEmpty() || q.Boost.HasValue || q.DisableCoord.HasValue || q.MinimumShouldMatch != null;
+		internal static bool Locked(IBoolQuery q) => !q.Name.IsNullOrEmpty() || q.Boost.HasValue || q.MinimumShouldMatch != null;
 		bool IBoolQuery.Locked => BoolQuery.Locked(this);
 
 		private IList<QueryContainer> _must;
@@ -103,14 +94,6 @@ namespace Nest
 		/// </summary>
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 
-		/// <summary>
-		/// Specifies if the coordination factor for the query should be disabled.
-		/// The coordination factor is used to reward documents that contain a higher
-		/// percentage of the query terms. The more query terms that appear in the document,
-		/// the greater the chances that the document is a good match for the query.
-		/// </summary>
-		public bool? DisableCoord { get; set; }
-
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Bool = this;
 
 		protected override bool Conditionless => IsConditionless(this);
@@ -147,16 +130,6 @@ namespace Nest
 			set { _filter = value.AsInstanceOrToListOrNull(); }
 		}
 		MinimumShouldMatch IBoolQuery.MinimumShouldMatch { get; set; }
-		bool? IBoolQuery.DisableCoord { get; set; }
-
-		/// <summary>
-		/// Specifies if the coordination factor for the query should be disabled.
-		/// The coordination factor is used to reward documents that contain a higher
-		/// percentage of the query terms. The more query terms that appear in the document,
-		/// the greater the chances that the document is a good match for the query.
-		/// </summary>
-		/// <returns></returns>
-		public BoolQueryDescriptor<T> DisableCoord(bool? disableCoord = true) => Assign(a => a.DisableCoord = disableCoord);
 
 		/// <summary>
 		/// Specifies a minimum number of the optional BooleanClauses which must be satisfied.

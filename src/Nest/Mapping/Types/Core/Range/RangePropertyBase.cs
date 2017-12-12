@@ -1,6 +1,4 @@
-﻿using System;
-using Elasticsearch.Net;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -21,12 +19,6 @@ namespace Nest
 		double? Boost { get; set; }
 
 		/// <summary>
-		/// Whether or not the field value should be included in the _all field? Accepts true or false. Defaults
-		/// to false if index is set to false, or if a parent object field sets include_in_all to false.
-		/// Otherwise defaults to true.
-		/// </summary>
-
-		/// <summary>
 		/// Should the field be searchable? Accepts true (default) and false.
 		/// </summary>
 		[JsonProperty("index")]
@@ -41,8 +33,6 @@ namespace Nest
 		public bool? Coerce { get; set; }
 		/// <inheritdoc/>
 		public double? Boost { get; set; }
-		/// <inheritdoc/>
-		public bool? IncludeInAll { get; set; }
 		/// <inheritdoc/>
 		public bool? Index { get; set; }
 	}

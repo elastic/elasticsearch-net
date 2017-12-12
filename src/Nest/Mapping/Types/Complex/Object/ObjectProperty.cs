@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Elasticsearch.Net;
 using System.Diagnostics;
 using Newtonsoft.Json;
@@ -14,9 +13,6 @@ namespace Nest
 
 		[JsonProperty("enabled")]
 		bool? Enabled { get; set; }
-
-		[JsonProperty("include_in_all")]
-		bool? IncludeInAll { get; set; }
 
 		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]
 		IProperties Properties { get; set; }
@@ -36,7 +32,6 @@ namespace Nest
 
 		public Union<bool, DynamicMapping> Dynamic { get; set; }
 		public bool? Enabled { get; set; }
-		public bool? IncludeInAll { get; set; }
 		public IProperties Properties { get; set; }
 	}
 
@@ -60,7 +55,6 @@ namespace Nest
 
 		Union<bool, DynamicMapping> IObjectProperty.Dynamic { get; set; }
 		bool? IObjectProperty.Enabled { get; set; }
-		bool? IObjectProperty.IncludeInAll { get; set; }
 		IProperties IObjectProperty.Properties { get; set; }
 
 		protected ObjectPropertyDescriptorBase() : this(FieldType.Object) { }
@@ -83,9 +77,6 @@ namespace Nest
 
 		public TDescriptor Enabled(bool enabled = true) =>
 			Assign(a => a.Enabled = enabled);
-
-		public TDescriptor IncludeInAll(bool includeInAll = true) =>
-			Assign(a => a.IncludeInAll = includeInAll);
 
 		public TDescriptor Properties(Func<PropertiesDescriptor<TChild>, IPromise<IProperties>> selector) =>
 			Assign(a => a.Properties = selector?.Invoke(new PropertiesDescriptor<TChild>(a.Properties))?.Value);

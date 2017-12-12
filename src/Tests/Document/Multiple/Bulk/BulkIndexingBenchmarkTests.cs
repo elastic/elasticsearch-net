@@ -30,8 +30,6 @@ namespace Tests.Document.Multiple.Bulk
 					.NumberOfReplicas(0)
 					.RefreshInterval("30s")
 					.Setting("index.store.type", "mmapfs")
-					.Setting("index.store.throttle.type", "none")
-					.Setting("indices.store.throttle.type", "none")
 					.Setting("indices.memory.index_buffer_size", "10%")
 					.Setting("index.translog.flush_threshold_size", "4g")
 					.Setting("index.translog.flush_threshold_ops", 500000)

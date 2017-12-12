@@ -390,8 +390,6 @@ namespace Nest
 			public string Mount { get; internal set; }
 			[JsonProperty("type")]
 			public string Type { get; internal set; }
-			[JsonProperty("spins")]
-			public bool? Spins { get; internal set; }
 			[JsonProperty("total")]
 			public string Total { get; internal set; }
 			[JsonProperty("total_in_bytes")]
