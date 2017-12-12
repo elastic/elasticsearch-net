@@ -17,6 +17,7 @@ namespace Tests.Framework.MockData
 
 		public new static Faker<Developer> Generator { get; } =
 			new Faker<Developer>()
+				.UseSeed(TestClient.Configuration.Seed)
 				.RuleFor(p => p.Id, p => IdState++)
 				.RuleFor(p => p.FirstName, p => p.Name.FirstName())
 				.RuleFor(p => p.LastName, p => p.Name.LastName())
@@ -28,6 +29,6 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.IpAddress, p => p.Internet.Ip())
 			;
 
-		public static IList<Developer> Developers { get; } = Developer.Generator.Generate(1000).ToList();
+		public static IList<Developer> Developers { get; } = Developer.Generator.Clone().Generate(1000);
 	}
 }

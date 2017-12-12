@@ -17,6 +17,7 @@ namespace Tests.Framework.MockData
 
 		public static Faker<Message> Generator { get; } =
 			new Faker<Message>()
+				.UseSeed(TestClient.Configuration.Seed)
 				.RuleFor(m => m.Id, m => Guid.NewGuid())
 				.RuleFor(m => m.Body, m => GetMessageText())
 				.RuleFor(m => m.Timestamp, m => DateTime.UtcNow)
