@@ -102,21 +102,21 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 ");
 
 		/**
-		 * When a bad authentication response occurs, the client does not attempt to deserialize the response body returned;
-		 * The response may or may not have a body and even when it does, it may not even be JSON.
+		 * When a bad authentication response occurs, the client attempts to deserialize the response body returned;
 		 *
-		 * In the following couple of examples, we set up a cluster that always returns a typical nginx HTML response body
-		 * with 401 response to client calls. In this first example, we assert that the failure is because of a 401 Bad Authentication
-		 * response but the response body is not captured on the response
+		 * In some setups you might be running behind a proxy and you might need to prevent the client from trying to deserialize
+		 * bad json. In the following example an HTML response is return but with an application/json content type. If the proxy is not
+		 * under your control you would need to be able to fix this in the client. Here we make the client aware that 401 responses
+		 * should never be deserialized by calling `SkipDeserializationForStatusCodes()` on `ConnectionSettings`.
 		 */
 		[U] public async Task BadAuthenticationHtmlResponseIsIgnored()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.Ping(r => r.SucceedAlways())
-				.ClientCalls(r => r.FailAlways(401).ReturnResponse(HtmlNginx401Response)) // <1> Always return a 401 bad response with a HTML response on client calls
+				.ClientCalls(r => r.FailAlways(401).ReturnByteResponse(HtmlNginx401Response, "application/json")) // <1> Always return a 401 bad response with a HTML response on client calls
 				.StaticConnectionPool()
-				.AllDefaults()
+				.Settings(s=>s.SkipDeserializationForStatusCodes(401))
 			);
 
 			audit = await audit.TraceElasticsearchException(
@@ -136,13 +136,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 		/**
 		 * Now in this example, by turning on `DisableDirectStreaming()` on `ConnectionSettings`, we see the same behaviour exhibited
 		 * as before, but this time however, the response body bytes are captured in the response and can be inspected.
+		 * Also note that in this example the 401 returns the correct mime type for html so the client wont try to deserialize to json and
+		 * we no longer need to set `SkipDeserializationForStatusCodes()`
 		 */
 		[U] public async Task BadAuthenticationHtmlResponseStillExposedWhenUsingDisableDirectStreaming()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.Ping(r => r.SucceedAlways())
-				.ClientCalls(r => r.FailAlways(401).ReturnResponse(HtmlNginx401Response))
+				.ClientCalls(r => r.FailAlways(401).ReturnByteResponse(HtmlNginx401Response, "text/html"))
 				.StaticConnectionPool()
 				.Settings(s => s.DisableDirectStreaming())
 			);
@@ -170,9 +172,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.Ping(r => r.SucceedAlways())
-				.ClientCalls(r => r.FailAlways(401).ReturnResponse(HtmlNginx401Response))
+				.ClientCalls(r => r.FailAlways(401).ReturnByteResponse(HtmlNginx401Response))
 				.StaticConnectionPool()
-				.Settings(s => s.DisableDirectStreaming().DefaultIndex("default-index"))
+				.Settings(s => s.DisableDirectStreaming().DefaultIndex("default-index").SkipDeserializationForStatusCodes(401))
 				.ClientProxiesTo(
 					(c, r) => c.Get<Project>("1", s=>s.RequestConfiguration(r)),
 					async (c, r) => await c.GetAsync<Project>("1", s=>s.RequestConfiguration(r)) as IResponse

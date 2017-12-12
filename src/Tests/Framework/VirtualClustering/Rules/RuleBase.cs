@@ -20,6 +20,7 @@ namespace Tests.Framework
 		Union<Exception, int> AfterSucceeds { get; set; }
 
 		byte[] ReturnResponse { get; set; }
+		string ReturnContentType { get; set; }
 	}
 
 	public abstract class RuleBase<TRule> : IRule
@@ -33,6 +34,7 @@ namespace Tests.Framework
 		Union<Exception, int> IRule.Return { get; set; }
 		Union<Exception, int> IRule.AfterSucceeds { get; set; }
 		byte[] IRule.ReturnResponse { get; set; }
+		string IRule.ReturnContentType { get; set; }
 
 		public TRule OnPort(int port)
 		{
@@ -56,12 +58,14 @@ namespace Tests.Framework
 				r = ms.ToArray();
 			}
 			Self.ReturnResponse = r;
+			Self.ReturnContentType = RequestData.MimeType;
 			return (TRule)this;
 		}
 
-		public TRule ReturnResponse(byte[] response)
+		public TRule ReturnByteResponse(byte[] response, string responseContentType = RequestData.MimeType)
 		{
 			Self.ReturnResponse = response;
+			Self.ReturnContentType = responseContentType;
 			return (TRule)this;
 		}
 	}

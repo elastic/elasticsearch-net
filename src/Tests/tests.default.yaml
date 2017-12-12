@@ -12,10 +12,10 @@ elasticsearch_version: 6.0.0
 # cluster filter allows you to only run the integration tests of a particular cluster (cluster suffix not needed)
 # cluster_filter:
 # whether we want to forcefully reseed on the node, if you are starting the tests with a node already running
-force_reseed: true
+#force_reseed: true
 # do not spawn nodes as part of the test setup if we find a node is already running
 # this is opt in during development in CI we never want to see our tests running against an already running node
 test_against_already_running_elasticsearch: true
 
 #force_custom_source_serializer: true
-seed: 22632
+seed: 69819

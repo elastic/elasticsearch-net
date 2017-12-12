@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Threading;
 using System;
+using System.Linq;
 
 namespace Elasticsearch.Net
 {
@@ -18,9 +19,7 @@ namespace Elasticsearch.Net
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
 		/// </summary>
 		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
-		public Transport(TConnectionSettings configurationValues)
-			: this(configurationValues, null, null, null)
-		{ }
+		public Transport(TConnectionSettings configurationValues) : this(configurationValues, null, null, null) { }
 
 		/// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
@@ -47,8 +46,8 @@ namespace Elasticsearch.Net
 			this.MemoryStreamFactory = memoryStreamFactory ?? new MemoryStreamFactory();
 		}
 
-		public ElasticsearchResponse<TReturn> Request<TReturn>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
-			where TReturn : class
+		public TResponse Request<TResponse>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
 			{
@@ -56,7 +55,7 @@ namespace Elasticsearch.Net
 
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				this.Settings.OnRequestDataCreated?.Invoke(requestData);
-				ElasticsearchResponse<TReturn> response = null;
+				TResponse response = null;
 
 				var seenExceptions = new List<PipelineException>();
 				foreach (var node in pipeline.NextNode())
@@ -66,8 +65,8 @@ namespace Elasticsearch.Net
 					{
 						pipeline.SniffOnStaleCluster();
 						Ping(pipeline, node);
-						response = pipeline.CallElasticsearch<TReturn>(requestData);
-						if (!response.SuccessOrKnownError)
+						response = pipeline.CallElasticsearch<TResponse>(requestData);
+						if (!response.ApiCall.SuccessOrKnownError)
 						{
 							pipeline.MarkDead(node);
 							pipeline.SniffOnConnectionFailure();
@@ -75,12 +74,14 @@ namespace Elasticsearch.Net
 					}
 					catch (PipelineException pipelineException) when (!pipelineException.Recoverable)
 					{
+						if (response == null) response = pipelineException.Response as TResponse;
 						pipeline.MarkDead(node);
 						seenExceptions.Add(pipelineException);
 						break;
 					}
 					catch (PipelineException pipelineException)
 					{
+						if (response == null) response = pipelineException.Response as TResponse;
 						pipeline.MarkDead(node);
 						seenExceptions.Add(pipelineException);
 					}
@@ -89,28 +90,20 @@ namespace Elasticsearch.Net
 						throw new UnexpectedElasticsearchClientException(killerException, seenExceptions)
 						{
 							Request = requestData,
-							Response = response,
+							Response = response?.ApiCall,
 							AuditTrail = pipeline?.AuditTrail
 						};
 					}
-					if (response == null || !response.SuccessOrKnownError) continue;
+					if (response == null || !response.ApiCall.SuccessOrKnownError) continue;
 					pipeline.MarkAlive(node);
 					break;
 				}
-				if (requestData.Node == null) //foreach never ran
-					pipeline.ThrowNoNodesAttempted(requestData, seenExceptions);
-
-				if (response == null || !response.Success)
-					pipeline.BadResponse(ref response, requestData, seenExceptions);
-
-				this.Settings.OnRequestCompleted?.Invoke(response);
-
-				return response;
+				return FinalizeResponse(requestData, pipeline, seenExceptions, response);
 			}
 		}
 
-		public async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null, IRequestParameters requestParameters = null)
-			where TReturn : class
+		public async Task<TResponse> RequestAsync<TResponse>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null, IRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
 			{
@@ -118,7 +111,7 @@ namespace Elasticsearch.Net
 
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				this.Settings.OnRequestDataCreated?.Invoke(requestData);
-				ElasticsearchResponse<TReturn> response = null;
+				TResponse response = null;
 
 				var seenExceptions = new List<PipelineException>();
 				foreach (var node in pipeline.NextNode())
@@ -128,8 +121,8 @@ namespace Elasticsearch.Net
 					{
 						await pipeline.SniffOnStaleClusterAsync(cancellationToken).ConfigureAwait(false);
 						await PingAsync(pipeline, node, cancellationToken).ConfigureAwait(false);
-						response = await pipeline.CallElasticsearchAsync<TReturn>(requestData, cancellationToken).ConfigureAwait(false);
-						if (!response.SuccessOrKnownError)
+						response = await pipeline.CallElasticsearchAsync<TResponse>(requestData, cancellationToken).ConfigureAwait(false);
+						if (!response.ApiCall.SuccessOrKnownError)
 						{
 							pipeline.MarkDead(node);
 							await pipeline.SniffOnConnectionFailureAsync(cancellationToken).ConfigureAwait(false);
@@ -137,12 +130,14 @@ namespace Elasticsearch.Net
 					}
 					catch (PipelineException pipelineException) when (!pipelineException.Recoverable)
 					{
+						if (response == null) response = pipelineException.Response as TResponse;
 						pipeline.MarkDead(node);
 						seenExceptions.Add(pipelineException);
 						break;
 					}
 					catch (PipelineException pipelineException)
 					{
+						if (response == null) response = pipelineException.Response as TResponse;
 						pipeline.MarkDead(node);
 						seenExceptions.Add(pipelineException);
 					}
@@ -151,7 +146,7 @@ namespace Elasticsearch.Net
 						throw new UnexpectedElasticsearchClientException(killerException, seenExceptions)
 						{
 							Request = requestData,
-							Response = response,
+							Response = response?.ApiCall,
 							AuditTrail = pipeline.AuditTrail
 						};
 					}
@@ -160,20 +155,45 @@ namespace Elasticsearch.Net
 						pipeline.AuditCancellationRequested();
 						break;
 					}
-					if (response == null || !response.SuccessOrKnownError) continue;
+					if (response == null || !response.ApiCall.SuccessOrKnownError) continue;
 					pipeline.MarkAlive(node);
 					break;
 				}
-				if (requestData.Node == null) //foreach never ran
-					pipeline.ThrowNoNodesAttempted(requestData, seenExceptions);
-
-				if (response == null || !response.Success)
-					pipeline.BadResponse(ref response, requestData, seenExceptions);
-
-				this.Settings.OnRequestCompleted?.Invoke(response);
-
-				return response;
+				return FinalizeResponse(requestData, pipeline, seenExceptions, response);
 			}
+		}
+
+		private TResponse FinalizeResponse<TResponse>(RequestData requestData, IRequestPipeline pipeline, List<PipelineException> seenExceptions,
+			TResponse response) where TResponse : class, IElasticsearchResponse, new()
+		{
+			if (requestData.Node == null) //foreach never ran
+				pipeline.ThrowNoNodesAttempted(requestData, seenExceptions);
+
+			var callDetails = GetMostRecentCallDetails(response, seenExceptions);
+			var clientException = pipeline.CreateClientException(callDetails, requestData, seenExceptions);
+
+			//if (response?.ApiCall == null || !response.ApiCall.Success)
+			if (response?.ApiCall == null)
+				pipeline.BadResponse(ref response, callDetails, requestData, clientException);
+
+			HandleElasticsearchClientException(clientException, response);
+			return response;
+		}
+
+		private static IApiCallDetails GetMostRecentCallDetails<TResponse>(TResponse response, IEnumerable<PipelineException> seenExceptions)
+			where TResponse : class, IElasticsearchResponse, new()
+		{
+			var callDetails = response?.ApiCall ?? seenExceptions.LastOrDefault(e=>e.ApiCall != null)?.ApiCall;
+			return callDetails;
+		}
+
+
+		private void HandleElasticsearchClientException(ElasticsearchClientException clientException, IElasticsearchResponse response)
+		{
+			if (clientException != null && response.ApiCall.OriginalException == null && response.ApiCall is ApiCallDetails a)
+				a.OriginalException = clientException;
+			this.Settings.OnRequestCompleted?.Invoke(response.ApiCall);
+			if (clientException != null && this.Settings.ThrowExceptions) throw clientException;
 		}
 
 		private static void Ping(IRequestPipeline pipeline, Node node)

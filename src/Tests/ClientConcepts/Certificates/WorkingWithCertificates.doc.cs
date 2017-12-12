@@ -71,10 +71,10 @@ namespace Tests.ClientConcepts.Certificates
 			[I]
 			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
 
-			protected override void AssertException(WebException e) =>
+			protected override void AssertWebException(WebException e) =>
 				e.Message.Should().Contain("Could not establish trust relationship for the SSL/TLS secure channel.");
 
-			protected override void AssertException(HttpRequestException e)
+			protected override void AssertHttpRequestException(HttpRequestException e)
 			{
 			}
 		}
@@ -157,11 +157,11 @@ namespace Tests.ClientConcepts.Certificates
 			[I]
 			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
 
-			protected override void AssertException(WebException e) =>
+			protected override void AssertWebException(WebException e) =>
 				e.Message.Should().Contain("Could not establish trust relationship for the SSL/TLS secure channel."); // <1> Exception is thrown, indicating that a secure connection could not be established
 
 			// hide
-			protected override void AssertException(HttpRequestException e)
+			protected override void AssertHttpRequestException(HttpRequestException e)
 			{
 			}
 		}
@@ -263,7 +263,7 @@ namespace Tests.ClientConcepts.Certificates
 			);
 
 		// hide
-		protected override void AssertException(WebException e)
+		protected override void AssertWebException(WebException e)
 		{
 			if (e.InnerException != null)
 				e.InnerException.Message.Should()
@@ -272,7 +272,7 @@ namespace Tests.ClientConcepts.Certificates
 				e.Message.Should().Contain("Could not create SSL/TLS secure channel");
 		}
 
-		protected override void AssertException(HttpRequestException e)
+		protected override void AssertHttpRequestException(HttpRequestException e)
 		{
 		}
 	}

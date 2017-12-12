@@ -14,7 +14,7 @@ namespace Tests.Document.Multiple.Bulk
 	{
 		[U] public void CanDeserialize()
 		{
-			var client = TestClient.GetInMemoryClient();
+			var client = TestClient.DefaultInMemoryClient;
 			var count = 100000;
 			var bytes = client.RequestResponseSerializer.SerializeToBytes(ReturnBulkResponse(count));
 			var x = Deserialize(bytes, client);

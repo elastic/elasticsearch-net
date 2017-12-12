@@ -30,9 +30,10 @@ namespace Elasticsearch.Net
 
 		public bool Pipelined { get; }
 		public bool HttpCompression { get; }
-		public string ContentType { get; }
+		public string RequestMimeType { get; }
 		public string Accept { get; }
 		public string RunAs { get; }
+		public IReadOnlyCollection<int> SkipDeserializationForStatusCodes { get; }
 
 		public NameValueCollection Headers { get; }
 		public string ProxyAddress { get; }
@@ -42,11 +43,11 @@ namespace Elasticsearch.Net
 
 		public BasicAuthenticationCredentials BasicAuthorizationCredentials { get; }
 		public IEnumerable<int> AllowedStatusCodes { get; }
-		public Func<IApiCallDetails, Stream, object> CustomConverter { get; private set; }
+		public Func<IApiCallDetails, Stream, object> CustomConverter { get; }
 		public IConnectionConfigurationValues ConnectionSettings { get; }
 		public IMemoryStreamFactory MemoryStreamFactory { get; }
 
-		public X509CertificateCollection ClientCertificates { get; set; }
+		public X509CertificateCollection ClientCertificates { get; }
 
 		public RequestData(HttpMethod method, string path, PostData data, IConnectionConfigurationValues global, IRequestParameters local, IMemoryStreamFactory memoryStreamFactory)
 			: this(method, path, data, global, local?.RequestConfiguration, memoryStreamFactory)
@@ -75,10 +76,11 @@ namespace Elasticsearch.Net
 
 			this.Pipelined = local?.EnableHttpPipelining ?? global.HttpPipeliningEnabled;
 			this.HttpCompression = global.EnableHttpCompression;
-			this.ContentType = local?.ContentType ?? MimeType;
+			this.RequestMimeType = local?.ContentType ?? MimeType;
 			this.Accept = local?.Accept ?? MimeType;
 			this.Headers = global.Headers != null ? new NameValueCollection(global.Headers) : new NameValueCollection();
 			this.RunAs = local?.RunAs;
+			this.SkipDeserializationForStatusCodes = global?.SkipDeserializationForStatusCodes;
 
 			this.RequestTimeout = local?.RequestTimeout ?? global.RequestTimeout;
 			this.PingTimeout =

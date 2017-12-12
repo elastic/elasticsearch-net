@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -38,6 +37,9 @@ namespace Nest
 			{
 				var contract = base.CreateContract(o);
 
+				if (o == typeof(Error)) contract.Converter = new ErrorJsonConverter();
+				else if (o == typeof(ErrorCause)) contract.Converter = new ErrorCauseJsonConverter();
+
 				if ((typeof(IDictionary).IsAssignableFrom(o) || o.IsGenericDictionary()) && !typeof(IIsADictionary).IsAssignableFrom(o))
 				{
 					if (!o.TryGetGenericDictionaryArguments(out var genericArguments))
@@ -46,14 +48,13 @@ namespace Nest
 						contract.Converter =
 							(JsonConverter)typeof(VerbatimDictionaryKeysJsonConverter<,>).CreateGenericInstance(genericArguments);
 				}
-				else if (typeof(IEnumerable<QueryContainer>).IsAssignableFrom(o))
-					contract.Converter = new QueryContainerCollectionJsonConverter();
-				else if (o == typeof(ServerError))
-					contract.Converter = new ServerErrorJsonConverter();
+
 				else if (o == typeof(DateTime) || o == typeof(DateTime?))
 					contract.Converter = new IsoDateTimeConverter { Culture = CultureInfo.InvariantCulture };
 				else if (o == typeof(TimeSpan) || o == typeof(TimeSpan?))
 					contract.Converter = new TimeSpanToStringConverter();
+				else if (typeof(IEnumerable<QueryContainer>).IsAssignableFrom(o))
+					contract.Converter = new QueryContainerCollectionJsonConverter();
 
 				ApplyBuildInSerializersForType(o, contract);
 
@@ -162,6 +163,10 @@ namespace Nest
 		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
 		{
 			var property = base.CreateProperty(member, memberSerialization);
+			//we don't have a chance to ignore this in the low level client
+			if (member.Name == nameof(IResponse.ApiCall) && typeof(IResponse).IsAssignableFrom(member.DeclaringType))
+				property.Ignored = true;
+
 			ApplyShouldSerializer(property);
 			ApplyPropertyOverrides(member, property);
 			ApplyBuildInSerializers(member, property);

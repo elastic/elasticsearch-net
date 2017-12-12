@@ -110,15 +110,10 @@ namespace Nest
 			public KeyValuePair<string, ICovariantSearchRequest> Descriptor { get; set; }
 		}
 
-		private static void CreateSearchResponse<T>(
-			SearchHitTuple tuple,
-			JsonSerializer serializer,
-			IDictionary<string, object> collection) where T : class
+		private static void CreateSearchResponse<T>(SearchHitTuple tuple, JsonSerializer serializer, IDictionary<string, object> collection)
+			where T : class
 		{
 			var response = tuple.Hit.ToObject<SearchResponse<T>>(serializer);
-
-			if (tuple.Hit.TryParseServerError(serializer, out var error))
-				response.MultiSearchError = error;
 
 			collection.Add(tuple.Descriptor.Key, response);
 		}

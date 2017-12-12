@@ -10,7 +10,7 @@ namespace Nest
 	{
 		TResponse Dispatch<TRequest, TQueryString, TResponse>(
 			TRequest descriptor,
-			Func<TRequest, SerializableData<TRequest>, ElasticsearchResponse<TResponse>> dispatch
+			Func<TRequest, SerializableData<TRequest>, TResponse> dispatch
 		)
 			where TQueryString : FluentRequestParameters<TQueryString>, new()
 			where TRequest : IRequest<TQueryString>
@@ -19,7 +19,7 @@ namespace Nest
 		TResponse Dispatch<TRequest, TQueryString, TResponse>(
 			TRequest descriptor,
 			Func<IApiCallDetails, Stream, TResponse> responseGenerator,
-			Func<TRequest, SerializableData<TRequest>, ElasticsearchResponse<TResponse>> dispatch
+			Func<TRequest, SerializableData<TRequest>, TResponse> dispatch
 			)
 			where TQueryString : FluentRequestParameters<TQueryString>, new()
 			where TRequest : IRequest<TQueryString>
@@ -28,7 +28,7 @@ namespace Nest
 		Task<TResponseInterface> DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
 			TRequest descriptor,
 			CancellationToken cancellationToken,
-			Func<TRequest, SerializableData<TRequest>, CancellationToken, Task<ElasticsearchResponse<TResponse>>> dispatch
+			Func<TRequest, SerializableData<TRequest>, CancellationToken, Task<TResponse>> dispatch
 			)
 			where TQueryString : FluentRequestParameters<TQueryString>, new()
 			where TRequest : IRequest<TQueryString>
@@ -39,7 +39,7 @@ namespace Nest
 			TRequest descriptor,
 			CancellationToken cancellationToken,
 			Func<IApiCallDetails, Stream, TResponse> responseGenerator,
-			Func<TRequest, SerializableData<TRequest>, CancellationToken, Task<ElasticsearchResponse<TResponse>>> dispatch
+			Func<TRequest, SerializableData<TRequest>, CancellationToken, Task<TResponse>> dispatch
 		)
 			where TQueryString : FluentRequestParameters<TQueryString>, new()
 			where TRequest : IRequest<TQueryString>

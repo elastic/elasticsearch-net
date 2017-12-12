@@ -6,7 +6,7 @@ namespace Nest
 		where TDocument : class
 	{
 		[JsonProperty("_shards")]
-		ShardsMetadata ShardsHit { get; }
+		ShardStatistics ShardsHit { get; }
 
 		[JsonProperty("_index")]
 		string Index { get; }
@@ -31,7 +31,7 @@ namespace Nest
 	public class UpdateResponse<TDocument> : ResponseBase, IUpdateResponse<TDocument>
 		where TDocument : class
 	{
-		public ShardsMetadata ShardsHit { get; internal set; }
+		public ShardStatistics ShardsHit { get; internal set; }
 		public string Index { get; internal set; }
 		public string Type { get; internal set; }
 		public string Id { get; internal set; }

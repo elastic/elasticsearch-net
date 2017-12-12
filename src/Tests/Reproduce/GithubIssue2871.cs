@@ -76,17 +76,17 @@ namespace Tests.Reproduce
 
 			var firstMultiGetHit = response.Hits.First();
 			firstMultiGetHit.Error.Should().NotBeNull();
-			firstMultiGetHit.Error.Error.Should().NotBeNull();
-			firstMultiGetHit.Error.Error.Type.Should().NotBeNullOrEmpty();
-			firstMultiGetHit.Error.Error.Reason.Should().NotBeNullOrEmpty();
-			firstMultiGetHit.Error.Error.RootCause.Should().NotBeNull().And.HaveCount(1);
+			firstMultiGetHit.Error.Should().NotBeNull();
+			firstMultiGetHit.Error.Type.Should().NotBeNullOrEmpty();
+			firstMultiGetHit.Error.Reason.Should().NotBeNullOrEmpty();
+			firstMultiGetHit.Error.RootCause.Should().NotBeNull().And.HaveCount(1);
 
 			var lastMultiGetHit = response.Hits.Last();
 			lastMultiGetHit.Error.Should().NotBeNull();
-			lastMultiGetHit.Error.Error.Should().NotBeNull();
-			lastMultiGetHit.Error.Error.Type.Should().NotBeNullOrEmpty();
-			lastMultiGetHit.Error.Error.Reason.Should().NotBeNullOrEmpty();
-			lastMultiGetHit.Error.Error.RootCause.Should().NotBeNull().And.HaveCount(1);
+			lastMultiGetHit.Error.Should().NotBeNull();
+			lastMultiGetHit.Error.Type.Should().NotBeNullOrEmpty();
+			lastMultiGetHit.Error.Reason.Should().NotBeNullOrEmpty();
+			lastMultiGetHit.Error.RootCause.Should().NotBeNull().And.HaveCount(1);
 		}
 	}
 }

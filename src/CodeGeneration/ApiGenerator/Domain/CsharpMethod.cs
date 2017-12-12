@@ -26,7 +26,6 @@ namespace ApiGenerator.Domain
 		public string Documentation { get; set; }
 		public string Path { get; set; }
 		public string Arguments { get; set; }
-		public bool Allow404 { get; set; }
 		public bool Unmapped { get; set; }
 		public IEnumerable<ApiUrlPart> Parts { get; set; }
 		public ApiUrl Url { get; set; }
@@ -37,7 +36,6 @@ namespace ApiGenerator.Domain
 		{
 			return new CsharpMethod
 			{
-				Allow404 = method.Allow404,
 				Path = method.Path,
 				RequestType = method.RequestType,
 				ReturnDescription = method.ReturnDescription,
@@ -229,8 +227,9 @@ namespace ApiGenerator.Domain
 				// Use generic T to set the Indices and Types by default in the ctor
 				if (m == "PutDatafeedDescriptor" || m == "UpdateDatafeedDescriptor")
 				{
+					var generic = "T";
 					doc = AppendToSummary(doc, ". Will infer the index and type from the generic type");
-					generated = $"public {m}({par}) : base({routing}){{ Self.Indices = typeof({this.CallTypeGeneric}); Self.Types = typeof({this.CallTypeGeneric}); }}";
+					generated = $"public {m}({par}) : base({routing}){{ Self.Indices = typeof({generic}); Self.Types = typeof({generic}); }}";
 				}
 
 				var c = new Constructor { Generated = generated, Description = doc };

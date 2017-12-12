@@ -5,7 +5,7 @@ namespace Nest
 	public interface IIndicesResponse : IResponse
 	{
 		bool Acknowledged { get; }
-		ShardsMetadata ShardsHit { get; }
+		ShardStatistics ShardsHit { get; }
 	}
 
 	[JsonObject]
@@ -15,6 +15,6 @@ namespace Nest
 		public bool Acknowledged { get; private set; }
 
 		[JsonProperty("_shards")]
-		public ShardsMetadata ShardsHit { get; private set; }
+		public ShardStatistics ShardsHit { get; private set; }
 	}
 }

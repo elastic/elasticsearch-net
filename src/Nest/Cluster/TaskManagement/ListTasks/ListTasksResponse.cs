@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -14,7 +15,7 @@ namespace Nest
 		IReadOnlyDictionary<string, TaskExecutingNode> Nodes { get; }
 
 		[JsonProperty("node_failures")]
-		IReadOnlyCollection<Throwable> NodeFailures { get; }
+		IReadOnlyCollection<ErrorCause> NodeFailures { get; }
 
 	}
 
@@ -23,7 +24,7 @@ namespace Nest
 		public override bool IsValid => base.IsValid && !this.NodeFailures.HasAny();
 
 		public IReadOnlyDictionary<string, TaskExecutingNode> Nodes { get; internal set; } = EmptyReadOnly<string, TaskExecutingNode>.Dictionary;
-		public IReadOnlyCollection<Throwable> NodeFailures { get; internal set; } = EmptyReadOnly<Throwable>.Collection;
+		public IReadOnlyCollection<ErrorCause> NodeFailures { get; internal set; } = EmptyReadOnly<ErrorCause>.Collection;
 	}
 
 	public class TaskExecutingNode

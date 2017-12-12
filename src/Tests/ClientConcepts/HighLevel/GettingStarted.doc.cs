@@ -268,7 +268,7 @@ namespace Tests.ClientConcepts.HighLevel
                 }
             }));
 
-            var responseJson = searchResponse.Body;
+            var responseJson = searchResponse;
         }
         /**
          * Here, the query is represented as an anonymous type, but the body of the response is a concrete

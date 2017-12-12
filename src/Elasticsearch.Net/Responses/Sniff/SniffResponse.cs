@@ -9,6 +9,7 @@ namespace Elasticsearch.Net
 	public static class SniffParser
 	{
 		public static Regex AddressRegex { get; } = new Regex(@"^((?<fqdn>[^/]+)/)?(?<ip>[^:]+|\[[\da-fA-F:\.]+\]):(?<port>\d+)$");
+
 		public static Uri ParseToUri(string boundAddress, bool forceHttp)
 		{
 			if (boundAddress == null) throw new ArgumentNullException(nameof(boundAddress));
@@ -24,11 +25,10 @@ namespace Elasticsearch.Net
 			return new Uri($"http{suffix}://{host}:{port}");
 		}
 	}
-	internal class SniffResponse
-	{
 
+	internal class SniffResponse : ElasticsearchResponseBase
+	{
 		// ReSharper disable InconsistentNaming
-		// this uses simplejsons bindings
 		public string cluster_name { get; set; }
 
 		public Dictionary<string, NodeInfo> nodes { get; set; }
@@ -75,6 +75,7 @@ namespace Elasticsearch.Net
 		internal bool MasterEligible => this.roles?.Contains("master") ?? false;
 		internal bool HoldsData => this.roles?.Contains("data") ?? false;
 		internal bool IngestEnabled => this.roles?.Contains("ingest") ?? false;
+
 		internal bool HttpEnabled
 		{
 			get

@@ -1,15 +1,11 @@
 ﻿using Nest;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Tests.Framework;
 using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Security.User.DisableUser
 {
-	class DisableUserUrlTests : IUrlTests
+	public class DisableUserUrlTests : IUrlTests
 	{
 		[U] public async Task Urls()
 		{

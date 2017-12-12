@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,6 +12,8 @@ namespace Elasticsearch.Net
 		private readonly byte[] _responseBody;
 		private readonly int _statusCode;
 		private readonly Exception _exception;
+		private readonly string _contentType;
+		internal static readonly byte[] EmptyBody = Encoding.UTF8.GetBytes("");
 
 		/// <summary>
 		/// Every request will succeed with this overload, note that it won't actually return mocked responses
@@ -21,21 +24,24 @@ namespace Elasticsearch.Net
 			_statusCode = 200;
 		}
 
-		public InMemoryConnection(byte[] responseBody, int statusCode = 200, Exception exception = null)
+		public InMemoryConnection(byte[] responseBody, int statusCode = 200, Exception exception = null, string contentType = RequestData.MimeType)
 		{
 			_responseBody = responseBody;
 			_statusCode = statusCode;
 			_exception = exception;
+			_contentType = contentType;
 		}
 
-		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken) where TReturn : class =>
-			await this.ReturnConnectionStatusAsync<TReturn>(requestData, cancellationToken).ConfigureAwait(false);
+		public virtual Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
+			where TResponse : class, IElasticsearchResponse, new() =>
+			this.ReturnConnectionStatusAsync<TResponse>(requestData, cancellationToken);
 
-		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class =>
-			this.ReturnConnectionStatus<TReturn>(requestData);
+		public virtual TResponse Request<TResponse>(RequestData requestData)
+			where TResponse : class, IElasticsearchResponse, new() =>
+			this.ReturnConnectionStatus<TResponse>(requestData);
 
-		protected ElasticsearchResponse<TReturn> ReturnConnectionStatus<TReturn>(RequestData requestData, byte[] responseBody = null, int? statusCode = null)
-			where TReturn : class
+		protected TResponse ReturnConnectionStatus<TResponse>(RequestData requestData, byte[] responseBody = null, int? statusCode = null, string contentType = null)
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			var body = responseBody ?? _responseBody;
 			var data = requestData.PostData;
@@ -52,18 +58,13 @@ namespace Elasticsearch.Net
 			}
 			requestData.MadeItToResponse = true;
 
-			var builder = new ResponseBuilder<TReturn>(requestData)
-			{
-				StatusCode = statusCode ?? this._statusCode,
-				Stream = (body != null) ? new MemoryStream(body) : null,
-				Exception = _exception
-			};
-			var cs = builder.ToResponse();
-			return cs;
+			var sc = statusCode ?? this._statusCode;
+			Stream s = (body != null) ? new MemoryStream(body) : new MemoryStream(EmptyBody);
+			return ResponseBuilder.ToResponse<TResponse>(requestData, _exception, sc, null, s, contentType ?? _contentType ?? RequestData.MimeType);
 		}
 
-		protected async Task<ElasticsearchResponse<TReturn>> ReturnConnectionStatusAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken, byte[] responseBody = null, int? statusCode = null)
-			where TReturn : class
+		protected async Task<TResponse> ReturnConnectionStatusAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken, byte[] responseBody = null, int? statusCode = null, string contentType = null)
+			where TResponse : class, IElasticsearchResponse, new()
 		{
 			var body = responseBody ?? _responseBody;
 			var data = requestData.PostData;
@@ -80,14 +81,10 @@ namespace Elasticsearch.Net
 			}
 			requestData.MadeItToResponse = true;
 
-			var builder = new ResponseBuilder<TReturn>(requestData)
-			{
-				StatusCode = statusCode ?? this._statusCode,
-				Stream = (body != null) ? new MemoryStream(body) : null,
-				Exception = _exception
-			};
-			var cs = await builder.ToResponseAsync().ConfigureAwait(false);
-			return cs;
+			var sc = statusCode ?? this._statusCode;
+			Stream s = (body != null) ? new MemoryStream(body) : new MemoryStream(EmptyBody);
+			return await ResponseBuilder.ToResponseAsync<TResponse>(requestData, _exception, sc, null, s, contentType ?? _contentType, cancellationToken)
+				.ConfigureAwait(false);
 		}
 
 		void IDisposable.Dispose() => DisposeManagedResources();

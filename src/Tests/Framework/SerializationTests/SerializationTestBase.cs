@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,15 +10,13 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework
 {
 	public abstract class SerializationTestBase
 	{
 		protected SerializationTestBase() => SetupSerialization();
-		protected SerializationTestBase(ClusterBase cluster) { }
+		protected SerializationTestBase(EndpointUsage usage) { }
 
 		protected virtual object ExpectJson { get; } = null;
 		protected virtual bool SupportsDeserialization { get; set; } = true;

@@ -69,6 +69,7 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			* Here we assume our response is valid and that we received the 100 documents
 			* we are expecting. Remember `result.Documents` is an `IReadOnlyCollection<ISearchResult>`
 			*/
+			result.ApiCall.Should().NotBeNull();
 			result.ShouldBeValid();
 			result.Documents.Count.Should().Be(100);
 

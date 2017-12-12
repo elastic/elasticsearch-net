@@ -21,7 +21,7 @@ namespace Tests.Document.Multiple.Bulk
 	[BenchmarkConfig]
 	public class BulkDeserializationBenchmarkTests
 	{
-		private static readonly IElasticClient Client = TestClient.GetInMemoryClient();
+		private static readonly IElasticClient Client = TestClient.DefaultInMemoryClient;
 		private byte[] _tinyResponse;
 		private byte[] _mediumResponse;
 		private byte[] _largeResponse;

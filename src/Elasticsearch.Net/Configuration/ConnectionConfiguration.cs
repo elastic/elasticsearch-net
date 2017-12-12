@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -142,6 +144,9 @@ namespace Elasticsearch.Net
 
 		private bool _throwExceptions;
 		bool IConnectionConfigurationValues.ThrowExceptions => _throwExceptions;
+
+		private IReadOnlyCollection<int> _skipDeserializationForStatusCodes = new ReadOnlyCollection<int>(new int[] {});
+		IReadOnlyCollection<int> IConnectionConfigurationValues.SkipDeserializationForStatusCodes => _skipDeserializationForStatusCodes;
 
 		private static void DefaultCompletedRequestHandler(IApiCallDetails response) { }
 		Action<IApiCallDetails> _completedRequestHandler = DefaultCompletedRequestHandler;
@@ -342,9 +347,23 @@ namespace Elasticsearch.Net
 		public T PrettyJson(bool b = true) => Assign(a =>
 		{
 			this._prettyJson = b;
-			if (!b && this._queryString["pretty"] != null) this._queryString.Remove("pretty");
-			else if (b && this._queryString["pretty"] == null)
-				this.GlobalQueryStringParameters(new NameValueCollection { { "pretty", b.ToString().ToLowerInvariant() } });
+			const string key = "pretty";
+			if (!b && this._queryString[key] != null) this._queryString.Remove(key);
+			else if (b && this._queryString[key] == null)
+				this.GlobalQueryStringParameters(new NameValueCollection { { key, "true" } });
+		});
+
+		/// <summary>
+		/// Forces all requests to have ?error_trace=true querystring parameter appended,
+		/// causing Elasticsearch to return stack traces as part of serialized exceptions
+		/// Defaults to <c>false</c>
+		/// </summary>
+		public T IncludeServerStackTraceOnError(bool b = true) => Assign(a =>
+		{
+			const string key = "error_trace";
+			if (!b && this._queryString[key] != null) this._queryString.Remove(key);
+			else if (b && this._queryString[key] == null)
+				this.GlobalQueryStringParameters(new NameValueCollection { { key, "true" } });
 		});
 
 		/// <summary>
@@ -411,7 +430,8 @@ namespace Elasticsearch.Net
 		public T EnableDebugMode(Action<IApiCallDetails> onRequestCompleted = null)
 		{
 			this._disableDirectStreaming = true;
-			this._prettyJson = true;
+			this.PrettyJson(true);
+			this.IncludeServerStackTraceOnError(true);
 
 			var originalCompletedRequestHandler = this._completedRequestHandler;
 			var debugCompletedRequestHandler = onRequestCompleted ?? (d => Debug.WriteLine(d.DebugInformation));
@@ -420,6 +440,7 @@ namespace Elasticsearch.Net
 				originalCompletedRequestHandler?.Invoke(d);
 				debugCompletedRequestHandler?.Invoke(d);
 			};
+
 			return (T)this;
 		}
 
@@ -451,6 +472,12 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T ClientCertificate(string certificatePath) =>
 			Assign(a => a._clientCertificates = new X509Certificate2Collection { new X509Certificate(certificatePath) });
+
+		/// <summary>
+		/// Configure the client to skip deserialization of certain status codes e.g: you run elasticsearch behind a proxy that returns a HTML for 401, 500
+		/// </summary>
+		public T SkipDeserializationForStatusCodes(params int[] statusCodes) =>
+			Assign(a => a._skipDeserializationForStatusCodes = new ReadOnlyCollection<int>(statusCodes));
 
 		void IDisposable.Dispose() => this.DisposeManagedResources();
 

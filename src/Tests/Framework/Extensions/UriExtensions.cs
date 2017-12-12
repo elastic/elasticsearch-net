@@ -20,7 +20,12 @@ namespace Tests
 			var expectedUri = new UriBuilder("http", "localhost", u.Port, path, "?" + query).Uri;
 
 			u.AbsolutePath.Should().Be(expectedUri.AbsolutePath, because);
-			u = new UriBuilder(u.Scheme, u.Host, u.Port, u.AbsolutePath, u.Query.Replace("pretty=true&", "").Replace("pretty=true", "")).Uri;
+			var sanitizedQuery = u.Query
+				.Replace("pretty=true&", "")
+				.Replace("pretty=true", "")
+				.Replace("error_trace=true&", "")
+				.Replace("error_trace=true", "");
+			u = new UriBuilder(u.Scheme, u.Host, u.Port, u.AbsolutePath, sanitizedQuery).Uri;
 
 			var queries = new[] { u.Query, expectedUri.Query };
 			if (queries.All(string.IsNullOrWhiteSpace)) return;

@@ -86,7 +86,7 @@ namespace Tests.XPack.Watcher.DeleteWatch
 			requestAsync: (client, r) => client.DeleteWatchAsync(r)
 		);
 
-		protected override bool ExpectIsValid => true;
+		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 

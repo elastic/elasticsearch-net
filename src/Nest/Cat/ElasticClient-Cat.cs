@@ -19,15 +19,15 @@ namespace Nest
 
 		private ICatResponse<TCatRecord> DoCat<TRequest, TParams, TCatRecord>(
 			TRequest request,
-			Func<IRequest<TParams>, ElasticsearchResponse<CatResponse<TCatRecord>>> dispatch
+			Func<IRequest<TParams>, CatResponse<TCatRecord>> dispatch
 			)
 			where TCatRecord : ICatRecord
 			where TParams : FluentRequestParameters<TParams>, new()
 			where TRequest : IRequest<TParams> =>
 			this.Dispatcher.Dispatch<TRequest, TParams, CatResponse<TCatRecord>>(
-				this.ForceConfiguration<TRequest, TParams>(request, c => {
-					c.Accept = "application/json";
-					c.ContentType = "application/json";
+				ForceConfiguration<TRequest, TParams>(request, c => {
+					c.Accept = RequestData.MimeType;
+					c.ContentType = RequestData.MimeType;
 				}),
 				new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>),
 				(p, d) => dispatch(p)
@@ -36,16 +36,16 @@ namespace Nest
 		private Task<ICatResponse<TCatRecord>> DoCatAsync<TRequest, TParams, TCatRecord>(
 			TRequest request,
 			CancellationToken cancellationToken,
-			Func<IRequest<TParams>, CancellationToken, Task<ElasticsearchResponse<CatResponse<TCatRecord>>>> dispatch
+			Func<IRequest<TParams>, CancellationToken, Task<CatResponse<TCatRecord>>> dispatch
 			)
 			where TCatRecord : ICatRecord
 			where TParams : FluentRequestParameters<TParams>, new()
 			where TRequest : IRequest<TParams> =>
 			this.Dispatcher.DispatchAsync<TRequest, TParams, CatResponse<TCatRecord>, ICatResponse<TCatRecord>>(
-				this.ForceConfiguration<TRequest, TParams>(request, c =>
+				ForceConfiguration<TRequest, TParams>(request, c =>
 				{
-					c.Accept = "application/json";
-					c.ContentType = "application/json";
+					c.Accept = RequestData.MimeType;
+					c.ContentType = RequestData.MimeType;
 				}),
 				cancellationToken,
 				new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>),

@@ -20,8 +20,11 @@ namespace Elasticsearch.Net
 		int Retried { get; }
 		int MaxRetries { get; }
 
-		ElasticsearchResponse<TReturn> CallElasticsearch<TReturn>(RequestData requestData) where TReturn : class;
-		Task<ElasticsearchResponse<TReturn>> CallElasticsearchAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken) where TReturn : class;
+		TResponse CallElasticsearch<TResponse>(RequestData requestData)
+			where TResponse : class, IElasticsearchResponse, new();
+
+		Task<TResponse> CallElasticsearchAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
+			where TResponse : class, IElasticsearchResponse, new();
 
 		void MarkAlive(Node node);
 		void MarkDead(Node node);
@@ -43,11 +46,13 @@ namespace Elasticsearch.Net
 		void SniffOnConnectionFailure();
 		Task SniffOnConnectionFailureAsync(CancellationToken cancellationToken);
 
-		void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData requestData, List<PipelineException> seenExceptions)
-			where TReturn : class;
+		void BadResponse<TResponse>(ref TResponse response, IApiCallDetails callDetails, RequestData data, ElasticsearchClientException exception)
+			where TResponse : class, IElasticsearchResponse, new();
 
 		void ThrowNoNodesAttempted(RequestData requestData, List<PipelineException> seenExceptions);
 
 		void AuditCancellationRequested();
+
+		ElasticsearchClientException CreateClientException(IApiCallDetails response, RequestData data, List<PipelineException> seenExceptions);
 	}
 }

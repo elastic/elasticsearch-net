@@ -32,34 +32,5 @@ namespace Nest
 			writer.WritePropertyName(propertyName);
 			serializer.Serialize(writer, value);
 		}
-
-		public static bool TryParseServerError(this JToken jToken, JsonSerializer serializer, out ServerError error)
-		{
-			error = null;
-			if (jToken == null) return false;
-
-			var errorProperty = jToken.Children<JProperty>().FirstOrDefault(c => c.Name == "error");
-			var rootCauseProperty = jToken.Children<JProperty>().FirstOrDefault(c => c.Name == "root_cause");
-			if (errorProperty == null && rootCauseProperty == null) return false;
-
-			var j = jToken;
-			if (rootCauseProperty != null)
-			{
-				var o = new JObject
-				{
-					{"error", jToken}
-				};
-				j = o;
-			}
-
-			using (var sw = new StringWriter())
-			using (var localWriter = new JsonTextWriter(sw))
-			{
-				serializer.Serialize(localWriter, j);
-				using (var ms = new MemoryStream(sw.ToString().Utf8Bytes()))
-					error = ServerError.Create(ms);
-			}
-			return true;
-		}
 	}
 }

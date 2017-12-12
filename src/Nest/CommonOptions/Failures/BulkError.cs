@@ -1,24 +1,15 @@
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject]
-	public class BulkError
+	[ContractJsonConverter(typeof(ErrorCauseJsonConverter<BulkError>))]
+	public class BulkError : Error
 	{
-		[JsonProperty("index")]
-		public string Index { get; internal set; }
+		public string Index => this.Metadata?.Index;
 
-		[JsonProperty("shard")]
-		public int Shard { get; internal set; }
-
-		[JsonProperty("type")]
-		public string Type { get; internal set; }
-
-		[JsonProperty("reason")]
-		public string Reason { get; internal set; }
-
-		[JsonProperty("caused_by")]
-		public CausedBy CausedBy { get; internal set; }
+		public int Shard => this.Metadata.Shard.GetValueOrDefault();
 
 		public override string ToString()
 		{

@@ -12,9 +12,7 @@ namespace Tests.Reproduce
 {
 	public class GithubIssue1901
 	{
-		private class Example
-		{
-		}
+		private class Example { }
 
 		private const string ProxyAuthResponse = @"<html>
 <head><title>401 Authorization Required</title></head>
@@ -32,19 +30,26 @@ namespace Tests.Reproduce
 
 		[U] public async Task BadAuthResponseDoesNotThrowExceptionWhenAttemptingToDeserializeResponse()
 		{
-			var client = TestClient.GetFixedReturnClient(ProxyAuthResponse, 401, contentType: "text/html", exception: new Exception("problem with the request as a result of 401"));
-			var source = await client.LowLevel.GetSourceAsync<Example>("examples", "example", "1");
-			source.Success.Should().BeFalse();
+			var client = TestClient.GetFixedReturnClient(ProxyAuthResponse, 401,
+				modifySettings: s => s.SkipDeserializationForStatusCodes(401),
+				contentType: "text/html",
+				exception: new Exception("problem with the request as a result of 401")
+			);
+			var source = await client.LowLevel.GetSourceAsync<GetResponse<Example>>("examples", "example", "1");
+			source.ApiCall.Success.Should().BeFalse();
 		}
 
 		[U] public async Task BadAuthCarriesStatusCodeAndResponseBodyOverToResponse()
 		{
-			var client = TestClient.GetFixedReturnClient(ProxyAuthResponse, 401, contentType: "text/html", exception: new Exception("problem with the request as a result of 401"),
-				modifySettings: (s) => s.DisableDirectStreaming());
-			var response = await client.LowLevel.GetAsync<Example>("examples", "example", "1");
-			response.Success.Should().BeFalse();
-			response.ResponseBodyInBytes.Should().NotBeNullOrEmpty();
-			response.HttpStatusCode.Should().Be(401);
+			var client = TestClient.GetFixedReturnClient(ProxyAuthResponse, 401,
+				modifySettings: s => s.DisableDirectStreaming().SkipDeserializationForStatusCodes(401),
+				contentType: "text/html",
+				exception: new Exception("problem with the request as a result of 401")
+			);
+			var response = await client.LowLevel.GetAsync<GetResponse<Example>>("examples", "example", "1");
+			response.ApiCall.Success.Should().BeFalse();
+			response.ApiCall.ResponseBodyInBytes.Should().NotBeNullOrEmpty();
+			response.ApiCall.HttpStatusCode.Should().Be(401);
 		}
 	}
 }

@@ -12,9 +12,7 @@ namespace Xunit
 {
 	class TestFrameworkExecutor : XunitTestFrameworkExecutor
 	{
-		public TestFrameworkExecutor(AssemblyName a, ISourceInformationProvider sip, IMessageSink d) : base(a, sip, d)
-		{
-		}
+		public TestFrameworkExecutor(AssemblyName a, ISourceInformationProvider sip, IMessageSink d) : base(a, sip, d) { }
 
 		protected override async void RunTestCases(
 			IEnumerable<IXunitTestCase> testCases, IMessageSink sink, ITestFrameworkExecutionOptions options

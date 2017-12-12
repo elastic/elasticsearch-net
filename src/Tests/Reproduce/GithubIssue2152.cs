@@ -55,11 +55,12 @@ namespace Tests.Reproduce
 			bulkResponse.Errors.Should().BeTrue();
 
 			var firstOperation = bulkResponse.ItemsWithErrors.First();
+			firstOperation.Status.Should().Be(400);
 
-			firstOperation.Error.Should().NotBeNull();
-			firstOperation.Error.CausedBy.Should().NotBeNull();
-			firstOperation.Error.CausedBy.InnerCausedBy.Should().NotBeNull();
-			firstOperation.Error.CausedBy.InnerCausedBy.InnerCausedBy.Should().NotBeNull();
+			ShouldDeserialize(firstOperation.Error);
+			ShouldDeserialize(firstOperation.Error.CausedBy);
+			ShouldDeserialize(firstOperation.Error.CausedBy.CausedBy, nullReason: true);
+			ShouldDeserialize(firstOperation.Error.CausedBy.CausedBy.CausedBy);
 		}
 
 		[U]
@@ -93,11 +94,23 @@ namespace Tests.Reproduce
 			var searchResponse = client.Search<object>(s => s.Index("index"));
 
 			searchResponse.ShouldNotBeValid();
-			searchResponse.ServerError.Should().NotBeNull();
-			searchResponse.ServerError.Error.Should().NotBeNull();
-			searchResponse.ServerError.Error.CausedBy.Should().NotBeNull();
-			searchResponse.ServerError.Error.CausedBy.InnerCausedBy.Should().NotBeNull();
-			searchResponse.ServerError.Error.CausedBy.InnerCausedBy.InnerCausedBy.Should().NotBeNull();
+			var se = searchResponse.ServerError;
+			se.Status.Should().Be(400);
+			se.Should().NotBeNull();
+			ShouldDeserialize(se.Error);
+			ShouldDeserialize(se.Error.CausedBy);
+			ShouldDeserialize(se.Error.CausedBy.CausedBy, nullReason: true);
+			ShouldDeserialize(se.Error.CausedBy.CausedBy.CausedBy);
+		}
+
+		private static void ShouldDeserialize(ErrorCause error,  bool nullReason = false)
+		{
+			error.Should().NotBeNull();
+			error.Type.Should().NotBeNullOrEmpty();
+			if (nullReason)
+				error.Reason.Should().BeNull();
+			else
+				error.Reason.Should().NotBeNullOrEmpty();
 		}
 	}
 }

@@ -249,5 +249,6 @@ namespace Elasticsearch.Net
 		/// <summary> Use the following client certificate to authenticate this request to Elasticsearch </summary>
 		public RequestConfigurationDescriptor ClientCertificate(string certificatePath) =>
 			this.ClientCertificates(new X509Certificate2Collection {new X509Certificate(certificatePath)});
+
 	}
 }

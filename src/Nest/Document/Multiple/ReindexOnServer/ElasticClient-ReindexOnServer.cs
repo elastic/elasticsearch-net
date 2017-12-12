@@ -31,7 +31,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IReindexOnServerResponse ReindexOnServer(IReindexOnServerRequest request) =>
 			this.Dispatcher.Dispatch<IReindexOnServerRequest, ReindexOnServerRequestParameters, ReindexOnServerResponse>(
-				this.ForceConfiguration<IReindexOnServerRequest, ReindexOnServerRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
+				ForceConfiguration<IReindexOnServerRequest, ReindexOnServerRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
 				this.LowLevelDispatch.ReindexDispatch<ReindexOnServerResponse>
 			);
 
@@ -42,7 +42,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IReindexOnServerRequest, ReindexOnServerRequestParameters, ReindexOnServerResponse, IReindexOnServerResponse>(
-				this.ForceConfiguration<IReindexOnServerRequest, ReindexOnServerRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
+				ForceConfiguration<IReindexOnServerRequest, ReindexOnServerRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
 				cancellationToken,
 				this.LowLevelDispatch.ReindexDispatchAsync<ReindexOnServerResponse>
 			);

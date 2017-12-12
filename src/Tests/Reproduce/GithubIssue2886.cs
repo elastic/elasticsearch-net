@@ -39,7 +39,7 @@ namespace Tests.Reproduce
 				  }
 				}";
 
-			var response = client.LowLevel.IndicesCreate<string>("common_words_token_filter", json);
+			var response = client.LowLevel.IndicesCreate<StringResponse>("common_words_token_filter", json);
 			response.Success.Should().BeTrue();
 
 			var settingsResponse = client.GetIndex("common_words_token_filter");

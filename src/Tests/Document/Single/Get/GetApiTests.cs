@@ -54,7 +54,7 @@ namespace Tests.Document.Single.Get
 			requestAsync: (client, r) => client.GetAsync<Project>(r)
 		);
 
-		protected override bool ExpectIsValid => true;
+		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"/project/doc/{UrlEncode(this.ProjectId)}";
@@ -71,6 +71,41 @@ namespace Tests.Document.Single.Get
 			response.Index.Should().Be("project");
 			response.Type.Should().Be("doc");
 			response.Id.Should().Be(this.CallIsolatedValue);
+		}
+	}
+
+	public class GetNonExistentIndexDocumentApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
+	{
+		protected string ProjectId => this.CallIsolatedValue;
+		protected string BadIndex => this.CallIsolatedValue + "-index";
+
+	    public GetNonExistentIndexDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.Get<Project>(this.ProjectId, f),
+			fluentAsync: (client, f) => client.GetAsync<Project>(this.ProjectId, f),
+			request: (client, r) => client.Get<Project>(r),
+			requestAsync: (client, r) => client.GetAsync<Project>(r)
+		);
+
+		protected override bool ExpectIsValid => false;
+		protected override int ExpectStatusCode => 404;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override string UrlPath => $"/{BadIndex}/doc/{UrlEncode(this.ProjectId)}";
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override GetDescriptor<Project> NewDescriptor() =>
+			new GetDescriptor<Project>(DocumentPath<Project>.Id(this.ProjectId).Index(BadIndex));
+
+		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => (g) => g.Index(BadIndex);
+
+		protected override GetRequest<Project> Initializer => new GetRequest<Project>(this.ProjectId, index: BadIndex);
+
+		protected override void ExpectResponse(IGetResponse<Project> response)
+		{
+			response.Found.Should().BeFalse();
+			response.Index.Should().BeNullOrWhiteSpace();
+			response.ServerError.Should().NotBeNull();
 		}
 	}
 

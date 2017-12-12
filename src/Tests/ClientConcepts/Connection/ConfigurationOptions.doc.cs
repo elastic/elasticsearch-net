@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.MockData;
@@ -45,6 +46,7 @@ namespace Tests.ClientConcepts.Connection
                 .RequestTimeout(TimeSpan.FromMinutes(2));
 
 			var lowLevelClient = new ElasticLowLevelClient(connectionConfiguration);
+
 
 			/**
 			 * And with the high level client

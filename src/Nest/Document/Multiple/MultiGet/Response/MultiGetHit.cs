@@ -23,7 +23,7 @@ namespace Nest
 
 		string Routing { get; }
 
-		ServerError Error { get; }
+		Error Error { get; }
 
 		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
 		long? Timestamp { get; }
@@ -64,7 +64,7 @@ namespace Nest
 		public string Routing { get; internal set; }
 
 		[JsonProperty("error")]
-		public ServerError Error { get; internal set; }
+		public Error Error { get; internal set; }
 
 		[JsonProperty("_timestamp")]
 		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]

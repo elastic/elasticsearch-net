@@ -1,7 +1,5 @@
 ﻿#if DOTNETCORE
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,16 +21,16 @@ namespace Tests.ClientConcepts.Connection
 
 		    public HttpClientHandler LastUsedHttpClientHandler { get; private set; }
 
-		    public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData)
+		    public override TResponse Request<TResponse>(RequestData requestData)
 		    {
 			    CallCount++;
-			    return base.Request<TReturn>(requestData);
+			    return base.Request<TResponse>(requestData);
 		    }
 
-		    public override Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken)
+		    public override Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
 		    {
 			    CallCount++;
-			    return base.RequestAsync<TReturn>(requestData, cancellationToken);
+			    return base.RequestAsync<TResponse>(requestData, cancellationToken);
 		    }
 
 		    protected override HttpClientHandler CreateHttpClientHandler(RequestData requestData)
@@ -42,42 +40,37 @@ namespace Tests.ClientConcepts.Connection
 		    }
 	    }
 
-	    [U]
-	    public async Task SingleInstanceOfHttpClient()
+	    [I] public async Task SingleInstanceOfHttpClient()
 	    {
 			var connection = new TestableHttpConnection();
-		    var requestData = CreateRequestData(TimeSpan.FromMinutes(1));
-			connection.Request<string>(requestData);
+		    var requestData = CreateRequestData();
+			connection.Request<StringResponse>(requestData);
 
 			connection.CallCount.Should().Be(1);
 		    connection.ClientCount.Should().Be(1);
 
-			await connection.RequestAsync<string>(requestData, CancellationToken.None).ConfigureAwait(false);
+			await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
 
 			connection.CallCount.Should().Be(2);
 			connection.ClientCount.Should().Be(1);
 		}
 
-	    [U]
-		public async Task MultipleInstancesOfHttpClientWhenRequestTimeoutChanges()
+	    [I] public async Task MultipleInstancesOfHttpClientWhenRequestTimeoutChanges()
 		{
 			await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(TimeSpan.FromSeconds(30)));
 		}
 
-		[U]
-		public async Task MultipleInstancesOfHttpClientWhenProxyChanges()
+		[I] public async Task MultipleInstancesOfHttpClientWhenProxyChanges()
 		{
 			await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(proxyAddress: new Uri("http://localhost:9400")));
 		}
 
-		[U]
-		public async Task MultipleInstancesOfHttpClientWhenAutomaticProxyDetectionChanges()
+		[I] public async Task MultipleInstancesOfHttpClientWhenAutomaticProxyDetectionChanges()
 		{
 			await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(disableAutomaticProxyDetection: true));
 		}
 
-		[U]
-		public async Task MultipleInstancesOfHttpClientWhenHttpCompressionChanges()
+		[I] public async Task MultipleInstancesOfHttpClientWhenHttpCompressionChanges()
 		{
 			await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(httpCompression: true));
 		}
@@ -86,13 +79,13 @@ namespace Tests.ClientConcepts.Connection
 	    {
 		    var connection = new TestableHttpConnection();
 		    var requestData = CreateRequestData();
-		    connection.Request<string>(requestData);
+		    connection.Request<StringResponse>(requestData);
 
 		    connection.CallCount.Should().Be(1);
 		    connection.ClientCount.Should().Be(1);
 
 		    requestData = differentRequestData();
-		    await connection.RequestAsync<string>(requestData, CancellationToken.None).ConfigureAwait(false);
+		    await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
 
 		    connection.CallCount.Should().Be(2);
 		    connection.ClientCount.Should().Be(2);
@@ -104,8 +97,7 @@ namespace Tests.ClientConcepts.Connection
 			bool disableAutomaticProxyDetection = false,
 			bool httpCompression = false)
 		{
-			if (requestTimeout == default(TimeSpan))
-				requestTimeout = TimeSpan.FromMinutes(1);
+			if (requestTimeout == default(TimeSpan)) requestTimeout = TimeSpan.FromSeconds(1);
 
 			var connectionSettings = new ConnectionSettings(new Uri("http://localhost:9200"))
 				.RequestTimeout(requestTimeout)
@@ -127,29 +119,27 @@ namespace Tests.ClientConcepts.Connection
 	    /// Setting HttpClientHandler.Proxy = null don't disable HttpClient automatic proxy detection.
 	    /// It is disabled by setting Proxy to non-null value or by setting UseProxy = false.
 	    /// </summary>
-	    [U]
-	    public async Task HttpClientUseProxyShouldBeFalseWhenDisabledAutoProxyDetection()
+	    [I] public async Task HttpClientUseProxyShouldBeFalseWhenDisabledAutoProxyDetection()
 	    {
 		    var connection = new TestableHttpConnection();
 		    var requestData = CreateRequestData(disableAutomaticProxyDetection: true);
 
-		    connection.Request<string>(requestData);
+		    connection.Request<StringResponse>(requestData);
 		    connection.LastUsedHttpClientHandler.UseProxy.Should().BeFalse();
 
-		    await connection.RequestAsync<string>(requestData, CancellationToken.None).ConfigureAwait(false);
+		    await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
 		    connection.LastUsedHttpClientHandler.UseProxy.Should().BeFalse();
 	    }
 
-	    [U]
-	    public async Task HttpClientUseProxyShouldBeTrueWhenEnabledAutoProxyDetection()
+	    [I] public async Task HttpClientUseProxyShouldBeTrueWhenEnabledAutoProxyDetection()
 	    {
 		    var connection = new TestableHttpConnection();
 		    var requestData = CreateRequestData();
 
-		    connection.Request<string>(requestData);
+		    connection.Request<StringResponse>(requestData);
 		    connection.LastUsedHttpClientHandler.UseProxy.Should().BeTrue();
 
-		    await connection.RequestAsync<string>(requestData, CancellationToken.None).ConfigureAwait(false);
+		    await connection.RequestAsync<StringResponse>(requestData, CancellationToken.None).ConfigureAwait(false);
 		    connection.LastUsedHttpClientHandler.UseProxy.Should().BeTrue();
 	    }
     }

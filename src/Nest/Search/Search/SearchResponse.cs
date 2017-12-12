@@ -11,7 +11,7 @@ namespace Nest
 		/// <summary>
 		/// Gets the meta data about the shards on which the search query was executed.
 		/// </summary>
-		ShardsMetadata Shards { get; }
+		ShardStatistics Shards { get; }
 
 		/// <summary>
 		/// Gets the meta data about the hits that match the search query criteria.
@@ -106,11 +106,8 @@ namespace Nest
 	[JsonObject]
 	public class SearchResponse<T> : ResponseBase, ISearchResponse<T> where T : class
 	{
-		internal ServerError MultiSearchError { get; set; }
-		protected override IApiCallDetails ApiCall => MultiSearchError != null ? new ApiCallDetailsOverride(base.ApiCall, MultiSearchError) : base.ApiCall;
-
 		[JsonProperty("_shards")]
-		public ShardsMetadata Shards { get; internal set; }
+		public ShardStatistics Shards { get; internal set; }
 
 		[JsonProperty("aggregations")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IAggregate>))]

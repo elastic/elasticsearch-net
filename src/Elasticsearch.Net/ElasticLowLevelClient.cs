@@ -37,18 +37,15 @@ namespace Elasticsearch.Net
 			this._formatter = new UrlFormatProvider(this.Transport.Settings);
 		}
 
-		string Url(FormattableString formattable) => formattable.ToString(_formatter);
+		private string Url(FormattableString formattable) => formattable.ToString(_formatter);
 
-		private TRequestParams _params<TRequestParams>(Func<TRequestParams, TRequestParams> requestParameters, bool allow404 = false, string contentType = null, string accept = null)
+		private TRequestParams _params<TRequestParams>(TRequestParams requestParams, string contentType = null, string accept = null)
 			where TRequestParams : class, IRequestParameters, new()
 		{
-			var requestParams = requestParameters?.Invoke(new TRequestParams());
-			if (!allow404 && contentType.IsNullOrEmpty()) return requestParams;
+			if (contentType.IsNullOrEmpty()) return requestParams;
 
 			requestParams = requestParams ?? new TRequestParams();
 			if (requestParams.RequestConfiguration == null) requestParams.RequestConfiguration = new RequestConfiguration();
-			if (allow404)
-				requestParams.RequestConfiguration.AllowedStatusCodes = new[] { 404 };
 			if (!contentType.IsNullOrEmpty() && requestParams.RequestConfiguration.ContentType.IsNullOrEmpty())
 				requestParams.RequestConfiguration.ContentType = contentType;
 			if (!accept.IsNullOrEmpty() && requestParams.RequestConfiguration.Accept.IsNullOrEmpty())
@@ -56,12 +53,12 @@ namespace Elasticsearch.Net
 			return requestParams;
 		}
 
-		public ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
-			where T : class =>
-			this.Transport.Request<T>(method, path, data, requestParameters);
+		public TResponse DoRequest<TResponse>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() =>
+			this.Transport.Request<TResponse>(method, path, data, requestParameters);
 
-		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null, IRequestParameters requestParameters = null)
-			where T : class =>
-			this.Transport.RequestAsync<T>(method, path, cancellationToken, data, requestParameters);
+		public Task<TResponse> DoRequestAsync<TResponse>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null, IRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() =>
+			this.Transport.RequestAsync<TResponse>(method, path, cancellationToken, data, requestParameters);
 	}
 }

@@ -15,16 +15,16 @@ namespace Tests.Framework
             this._waitTime = waitTime;
         }
 
-        public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData)
+        public override TResponse Request<TResponse>(RequestData requestData)
         {
             Thread.Sleep(_waitTime);
-            return base.Request<TReturn>(requestData);
+            return base.Request<TResponse>(requestData);
         }
 
-        public override async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken)
+        public override async Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
         {
             await Task.Delay(_waitTime, cancellationToken);
-            return await base.RequestAsync<TReturn>(requestData, cancellationToken);
+            return await base.RequestAsync<TResponse>(requestData, cancellationToken);
         }
     }
 }
