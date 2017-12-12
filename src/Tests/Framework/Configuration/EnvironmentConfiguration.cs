@@ -10,7 +10,7 @@ namespace Tests.Framework.Configuration
 {
 	public class EnvironmentConfiguration : TestConfigurationBase
 	{
-		private const string DefaultVersion = "5.5.0";
+		private const string DefaultVersion = "6.0.0";
 
 		public override bool TestAgainstAlreadyRunningElasticsearch { get; protected set; } = false;
 		public override bool ForceReseed { get; protected set; } = true;

@@ -45,7 +45,7 @@ namespace Nest
 
 		public void Add(string key, AggregationContainer value) => this.BackingDictionary.Add(ValidateKey(key), value);
 
-		public override string ValidateKey(string key)
+		protected override string ValidateKey(string key)
 		{
 			if (AggregateJsonConverter.AllReservedAggregationNames.Contains(key))
 				throw new ArgumentException(

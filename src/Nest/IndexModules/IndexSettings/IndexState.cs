@@ -13,9 +13,6 @@ namespace Nest
 
 		[JsonProperty("mappings")]
 		IMappings Mappings { get; set; }
-
-		[JsonProperty("similarity")]
-		ISimilarities Similarity { get; set; }
 	}
 
 	public class IndexState : IIndexState
@@ -25,7 +22,5 @@ namespace Nest
 		public IMappings Mappings { get; set; }
 
 		public IAliases Aliases { get; set; }
-
-		public ISimilarities Similarity { get; set; }
 	}
 }

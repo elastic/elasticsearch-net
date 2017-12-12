@@ -10,7 +10,7 @@ namespace Nest
 		protected Dictionary<TKey, TValue> BackingDictionary { get; }
 		private ICollection<KeyValuePair<TKey, TValue>> Self => BackingDictionary;
 
-		protected IsADictionaryBase() { this.BackingDictionary = new Dictionary<TKey, TValue>(); }
+		protected IsADictionaryBase() => this.BackingDictionary = new Dictionary<TKey, TValue>();
 
 		protected IsADictionaryBase(IDictionary<TKey, TValue> backingDictionary)
 		{
@@ -48,18 +48,18 @@ namespace Nest
 		bool IDictionary<TKey, TValue>.Remove(TKey key) => this.BackingDictionary.Remove(key);
 		bool IDictionary<TKey, TValue>.TryGetValue(TKey key, out TValue value) => this.BackingDictionary.TryGetValue(key, out value);
 
-		public virtual TKey ValidateKey(TKey key) => key;
+		protected virtual TKey ValidateKey(TKey key) => key;
 
 		TValue IDictionary<TKey, TValue>.this[TKey key]
 		{
-			get { return this.BackingDictionary[key]; }
-			set { this.BackingDictionary[ValidateKey(key)] = value; }
+			get => this.BackingDictionary[key];
+			set => this.BackingDictionary[ValidateKey(key)] = value;
 		}
 
 		public TValue this[TKey key]
 		{
-			get { return this.BackingDictionary[key]; }
-			set { this.BackingDictionary[ValidateKey(key)] = value; }
+			get => this.BackingDictionary[key];
+			set => this.BackingDictionary[ValidateKey(key)] = value;
 		}
 	}
 }
