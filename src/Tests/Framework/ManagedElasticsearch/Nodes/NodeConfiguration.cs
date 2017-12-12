@@ -22,6 +22,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 		public string TestFilter { get; }
 		public NodeFileSystem FileSystem { get; }
 		public int DesiredPort { get; }
+		public int Seed { get; }
 
 		public ElasticsearchPlugin[] RequiredPlugins { get; } = { };
 
@@ -46,6 +47,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 
 			var v = configuration.ElasticsearchVersion;
 			this.ElasticsearchVersion = v;
+			this.Seed = configuration.Seed;
 			this.ForceReseed = configuration.ForceReseed;
 			this.TestAgainstAlreadyRunningElasticsearch = configuration.TestAgainstAlreadyRunningElasticsearch;
 			this.RunIntegrationTests = configuration.RunIntegrationTests;

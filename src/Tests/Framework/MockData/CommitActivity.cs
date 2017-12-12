@@ -18,7 +18,6 @@ namespace Tests.Framework.MockData
 		public Developer Committer { get; set; }
 		public TimeSpan? Duration { get; set; }
 
-		[Text]
 		[JsonConverter(typeof(StringTimeSpanConverter))]
 		public TimeSpan? StringDuration
 		{

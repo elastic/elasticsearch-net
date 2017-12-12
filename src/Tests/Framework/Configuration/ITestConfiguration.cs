@@ -9,6 +9,7 @@ namespace Tests.Framework.Configuration
 {
 	public interface ITestConfiguration
 	{
+		int Seed { get; }
 		TestMode Mode { get; }
 		ElasticsearchVersion ElasticsearchVersion { get; }
 		string ClusterFilter { get; }
