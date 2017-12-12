@@ -47,7 +47,7 @@ namespace Nest
 			{
 				var field = kv.Value;
 				var type = field.Type;
-				var ft = type.Name.ToEnum<FieldType>();
+				var ft = type.ToEnum<FieldType>();
 				switch (ft)
 				{
 					case FieldType.Text:

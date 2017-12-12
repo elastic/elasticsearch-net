@@ -95,7 +95,7 @@ namespace Nest
 		protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
 		{
 			// Only serialize explicitly implemented IProperty properties on attribute types
-			if (typeof(ElasticsearchPropertyAttributeBase).IsAssignableFrom(type))
+			if (typeof(PropertyBase).IsAssignableFrom(type) || typeof(ElasticsearchPropertyAttributeBase).IsAssignableFrom(type))
 				return PropertiesOfInterface<IProperty>(type, memberSerialization);
 
 			// Descriptors implement properties explicitly, these are not picked up by default

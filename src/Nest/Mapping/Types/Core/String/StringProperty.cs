@@ -46,7 +46,7 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class StringProperty : DocValuesPropertyBase, IStringProperty
 	{
-		public StringProperty() : base("string") { }
+		public StringProperty() : base(FieldType.String) { }
 
 		public FieldIndexOption? Index { get; set; }
 		public TermVectorOption? TermVector { get; set; }
@@ -79,7 +79,7 @@ namespace Nest
 		int? IStringProperty.PositionIncrementGap { get; set; }
 		IStringFielddata IStringProperty.Fielddata { get; set; }
 
-		public StringPropertyDescriptor() : base("string") { }
+		public StringPropertyDescriptor() : base(FieldType.String) { }
 
 		/// <summary>
 		/// Shortcut into .Index(FieldIndexOption.NotAnalyzed)

@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
+	//TODO make this implement SelectorBase when that PR is moved
 	public class SingleMappingDescriptor<T> :
 		DescriptorBase<SingleMappingDescriptor<T>, IPropertiesDescriptor<T, IProperty>>, IPropertiesDescriptor<T, IProperty>
 		where T : class

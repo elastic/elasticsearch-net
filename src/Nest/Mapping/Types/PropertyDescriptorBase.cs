@@ -12,17 +12,14 @@ namespace Nest
 		where T : class
 	{
 		PropertyName IProperty.Name { get; set; }
-		TypeName IProperty.Type { get; set; }
+		private string _type;
+		protected string TypeOverride { set => _type = value; }
+		string IProperty.Type { get => _type; set => _type = value; }
 		IDictionary<string, object> IProperty.LocalMetadata { get; set; }
 
-		protected string DebugDisplay => $"Type: {Self.Type.DebugDisplay}, Name: {Self.Name.DebugDisplay} ";
+		protected string DebugDisplay => $"Type: {Self.Type ?? "<empty>"}, Name: {Self.Name.DebugDisplay} ";
 
-		[Obsolete("Please use overload taking FieldType")]
-		protected PropertyDescriptorBase(string type) { Self.Type = type; }
-
-#pragma warning disable 618
-		protected PropertyDescriptorBase(FieldType type) : this(type.GetStringValue()){}
-#pragma warning restore 618
+		protected PropertyDescriptorBase(FieldType type) { Self.Type = type.GetStringValue(); }
 
 		public TDescriptor Name(PropertyName name) => Assign(a => a.Name = name);
 

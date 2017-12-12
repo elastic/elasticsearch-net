@@ -14,12 +14,7 @@ namespace Nest
 		Fields ICoreProperty.CopyTo { get; set; }
 		IProperties ICoreProperty.Fields { get; set; }
 
-		[Obsolete("Please use overload taking FieldType")]
-		protected CorePropertyDescriptorBase(string type) : base(type) {}
-
-#pragma warning disable 618
-		protected CorePropertyDescriptorBase(FieldType type) : this(type.GetStringValue()) {}
-#pragma warning restore 618
+		protected CorePropertyDescriptorBase(FieldType type) : base(type) {}
 
 		public TDescriptor Store(bool store = true) => Assign(a => a.Store = store);
 

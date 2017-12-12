@@ -2,7 +2,6 @@
 using Nest;
 using Elasticsearch.Net;
 using Tests.Framework;
-using static Tests.Framework.RoundTripper;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;

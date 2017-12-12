@@ -11,10 +11,7 @@ namespace Nest
 		private INumberProperty Self => this;
 
 		public NumberAttribute() : base(FieldType.Float) { }
-		public NumberAttribute(NumberType type) : base(type.ToFieldType()) { }
-#pragma warning disable 618
-		protected NumberAttribute(string type) : base(type) { }
-#pragma warning restore 618
+		protected NumberAttribute(NumberType type) : base(type.ToFieldType()) { }
 
 		bool? INumberProperty.Index { get; set; }
 		double? INumberProperty.Boost { get; set; }
@@ -24,12 +21,12 @@ namespace Nest
 		INumericFielddata INumberProperty.Fielddata { get; set; }
 		double? INumberProperty.ScalingFactor { get; set; }
 
-		public bool Index { get { return Self.Index.GetValueOrDefault(); } set { Self.Index = value; } }
-		public double Boost { get { return Self.Boost.GetValueOrDefault(); } set { Self.Boost = value; } }
-		public double NullValue { get { return Self.NullValue.GetValueOrDefault(); } set { Self.NullValue = value; } }
-		public bool IgnoreMalformed { get { return Self.IgnoreMalformed.GetValueOrDefault(); } set { Self.IgnoreMalformed = value; } }
-		public bool Coerce { get { return Self.Coerce.GetValueOrDefault(); } set { Self.Coerce = value; } }
-		public double ScalingFactor { get { return Self.ScalingFactor.GetValueOrDefault(); } set { Self.ScalingFactor = value; } }
+		public bool Index { get => Self.Index.GetValueOrDefault(); set => Self.Index = value; }
+		public double Boost { get => Self.Boost.GetValueOrDefault(); set => Self.Boost = value; }
+		public double NullValue { get => Self.NullValue.GetValueOrDefault(); set => Self.NullValue = value; }
+		public bool IgnoreMalformed { get => Self.IgnoreMalformed.GetValueOrDefault(); set => Self.IgnoreMalformed = value; }
+		public bool Coerce { get => Self.Coerce.GetValueOrDefault(); set => Self.Coerce = value; }
+		public double ScalingFactor { get => Self.ScalingFactor.GetValueOrDefault(); set => Self.ScalingFactor = value; }
 
 	}
 }

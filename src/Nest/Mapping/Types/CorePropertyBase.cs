@@ -25,8 +25,6 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay}")]
 	public abstract class CorePropertyBase : PropertyBase, ICoreProperty
 	{
-		[Obsolete("Please use overload taking FieldType")]
-		protected CorePropertyBase(TypeName typeName) : base(typeName) { }
 		protected CorePropertyBase(FieldType type) : base(type) { }
 
 

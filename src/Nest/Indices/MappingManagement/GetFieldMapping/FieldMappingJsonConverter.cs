@@ -22,8 +22,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var r = new Dictionary<string, IFieldMapping>();
-
-			JObject o = JObject.Load(reader);
+			var o = JObject.Load(reader);
 
 			foreach (var p in o.Properties())
 			{
@@ -46,8 +45,7 @@ namespace Nest
 				}
 				if (mapping == null) continue;
 
-				var esType = mapping as IProperty;
-				if (esType != null)
+				if (mapping is IProperty esType)
 					esType.Name = name;
 
 				r.Add(name, mapping);

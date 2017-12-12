@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -19,8 +17,7 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var dict = value as IDictionary<PropertyName, IProperty>;
-			if (dict == null) return;
+			if (!(value is IDictionary<PropertyName, IProperty> dict)) return;
 			var settings = serializer.GetConnectionSettings();
 			var props = new Properties();
 			foreach (var kv in dict)
@@ -33,8 +30,7 @@ namespace Nest
 					continue;
 				}
 				// Check against connection settings mappings
-                IPropertyMapping propertyMapping;
-				if (settings.PropertyMappings.TryGetValue(propertyInfo, out propertyMapping))
+				if (settings.PropertyMappings.TryGetValue(propertyInfo, out var propertyMapping))
 				{
 					if (propertyMapping.Ignore) continue;
 					props.Add(propertyMapping.Name, kv.Value);

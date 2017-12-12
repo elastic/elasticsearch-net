@@ -54,8 +54,7 @@ namespace Nest
 	{
 		protected NumberPropertyDescriptorBase() : base(FieldType.Float) { }
 
-		[Obsolete("Please use overload taking FieldType")]
-		protected NumberPropertyDescriptorBase(string type) : base(type) { }
+		protected NumberPropertyDescriptorBase(FieldType type) : base(type) { }
 
 		bool? INumberProperty.Index { get; set; }
 		double? INumberProperty.Boost { get; set; }
@@ -83,8 +82,7 @@ namespace Nest
 		public TDescriptor ScalingFactor(double scalingFactor) => Assign(a => a.ScalingFactor = scalingFactor);
 	}
 
-	public class NumberPropertyDescriptor<T>
-		: NumberPropertyDescriptorBase<NumberPropertyDescriptor<T>, INumberProperty, T>, INumberProperty
+	public class NumberPropertyDescriptor<T> : NumberPropertyDescriptorBase<NumberPropertyDescriptor<T>, INumberProperty, T>
 		where T : class
 	{
 	}

@@ -14,7 +14,7 @@ namespace Nest
 		PropertyName Name { get; set; }
 
 		[JsonProperty("type")]
-		TypeName Type { get; set; }
+		string Type { get; set; }
 
 		/// <summary>
 		/// Local property metadata that will NOT be stored in Elasticsearch with the mappings
@@ -31,25 +31,27 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay}")]
 	public abstract class PropertyBase : IProperty, IPropertyWithClrOrigin
 	{
-		[Obsolete("Please use overload taking FieldType")]
-		protected PropertyBase(TypeName typeName)
+		private string _type;
+		protected string TypeOverride
 		{
-			Type = typeName;
+			get => _type;
+			set => _type = value;
 		}
 
-#pragma warning disable 618
-		protected PropertyBase(FieldType type) : this(type.GetStringValue()) { }
-#pragma warning restore 618
+		string IProperty.Type { get => _type; set => _type = value; }
 
-		protected string DebugDisplay => $"Type: {Type?.DebugDisplay}, Name: {Name?.DebugDisplay} ";
-
-		public PropertyName Name { get; set; }
-		public virtual TypeName Type { get; set; }
 		PropertyInfo IPropertyWithClrOrigin.ClrOrigin { get; set; }
 
-		/// <summary>
-		/// Local property metadata that will NOT be stored in Elasticsearch with the mappings
-		/// </summary>
+		protected PropertyBase(FieldType type)
+		{
+			((IProperty)this).Type = type.GetStringValue();
+		}
+
+		protected string DebugDisplay => $"Type: {((IProperty)this).Type ?? "<empty>"}, Name: {Name.DebugDisplay} ";
+
+		public PropertyName Name { get; set; }
+
+		/// <inheritdoc />
 		public IDictionary<string, object> LocalMetadata { get; set; }
 	}
 }
