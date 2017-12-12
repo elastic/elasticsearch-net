@@ -38,6 +38,12 @@ namespace Tests.Search.Request
 						}
 					},
 					new {
+						numberOfCommits = new {
+							missing = -1,
+							order = "desc"
+						}
+					},
+					new {
 						_geo_distance = new {
 							location = new [] {
 								new {
@@ -85,13 +91,18 @@ namespace Tests.Search.Request
 					.NestedPath(p => p.Tags)
 					.NestedFilter(q => q.MatchAll())
 				)
+				.Field(f => f
+					.Field(p => p.NumberOfCommits)
+					.Order(SortOrder.Descending)
+					.Missing(-1)
+				)
 				.GeoDistance(g => g
 					.Field(p => p.Location)
 					.DistanceType(GeoDistanceType.Arc)
 					.Order(SortOrder.Ascending)
 					.Unit(DistanceUnit.Centimeters)
 					.Mode(SortMode.Min)
-					.PinTo(new GeoLocation(70, -70), new GeoLocation(-12, 12))
+					.Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
 				)
 				.Script(sc => sc
 					.Type("number")
@@ -121,6 +132,12 @@ namespace Tests.Search.Request
 						Mode = SortMode.Average,
 						NestedPath = Field<Project>(p=>p.Tags),
 						NestedFilter = new MatchAllQuery(),
+					},
+					new SortField
+					{
+						Field = Field<Project>(p=>p.NumberOfCommits),
+						Order = SortOrder.Descending,
+						Missing = -1
 					},
 					new GeoDistanceSort
 					{

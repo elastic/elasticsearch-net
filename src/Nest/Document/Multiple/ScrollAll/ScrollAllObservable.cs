@@ -88,7 +88,7 @@ namespace Nest
 			while (searchResult.IsValid && searchResult.Documents.HasAny())
 			{
 				if (this._backPressure != null)
-					await this._backPressure.WaitAsync(_compositeCancelToken);
+					await this._backPressure.WaitAsync(_compositeCancelToken).ConfigureAwait(false);
 
 				observer.OnNext(new ScrollAllResponse<T>()
 				{

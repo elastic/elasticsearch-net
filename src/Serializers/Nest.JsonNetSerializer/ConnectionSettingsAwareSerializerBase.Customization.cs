@@ -36,7 +36,7 @@ namespace Nest.JsonNetSerializer
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
-				var token = await JToken.LoadAsync(jsonTextReader, cancellationToken);
+				var token = await JToken.LoadAsync(jsonTextReader, cancellationToken).ConfigureAwait(false);
 				return token.ToObject<T>(this._serializer);
 			}
 		}
@@ -46,7 +46,7 @@ namespace Nest.JsonNetSerializer
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
-				var token = await JToken.LoadAsync(jsonTextReader, cancellationToken);
+				var token = await JToken.LoadAsync(jsonTextReader, cancellationToken).ConfigureAwait(false);
 				return token.ToObject(type, this._serializer);
 			}
 		}

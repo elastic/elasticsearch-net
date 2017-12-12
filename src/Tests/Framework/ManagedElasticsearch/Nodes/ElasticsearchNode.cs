@@ -87,7 +87,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 		private void ThrowIfNotStarted()
 		{
 			if (this.Started || !TestClient.Configuration.RunIntegrationTests) return;
-			var logFile = Path.Combine(this.FileSystem.LogsPath, $"{this._config.NodeName}.log");
+			var logFile = Path.Combine(this.FileSystem.LogsPath, $"{this._config.ClusterName}.log");
 			throw new Exception($"cannot request a client from an ElasticsearchNode that hasn't started yet. " +
 			                    $"Check the log at {logFile} to see if there was an issue starting");
 		}

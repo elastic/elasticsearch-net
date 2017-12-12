@@ -229,6 +229,9 @@ namespace Nest
 		public SearchDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
 			Assign(a => a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations);
 
+		public SearchDescriptor<T> Aggregations(AggregationDictionary aggregations) =>
+			Assign(a => a.Aggregations = aggregations);
+
 		public SearchDescriptor<T> Source(bool enabled = true) => Assign(a => a.Source = enabled);
 
 		public SearchDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> selector) =>
