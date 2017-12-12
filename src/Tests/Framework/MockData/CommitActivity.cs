@@ -59,6 +59,6 @@ namespace Tests.Framework.MockData
 				}))
 			;
 
-		public static List<CommitActivity> CommitActivities { get; } = Generator.Clone().Generate(1000);
+		public static IList<CommitActivity> CommitActivities { get; } = Generator.Clone().Generate(1000);
 	}
 }

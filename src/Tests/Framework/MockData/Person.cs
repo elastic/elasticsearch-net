@@ -24,6 +24,6 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.Location, p => new GeoLocation(Gimme.Random.Number(-90, 90), Gimme.Random.Number(-180, 180)))
 			;
 
-		public static IList<Person> Persons { get; } = Person.Generator.Clone().Generate(1000);
+		public static IList<Person> People { get; } = Person.Generator.Clone().Generate(1000);
 	}
 }
