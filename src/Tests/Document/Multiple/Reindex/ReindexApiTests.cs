@@ -41,11 +41,11 @@ namespace Tests.Document.Multiple.Reindex
 			this._client = cluster.Client;
 
 			// create a couple of projects
-			var projects = Project.Generator.Generate(2).ToList();
+			var projects = Project.Generator.Generate(2);
 			var indexProjectsResponse = this._client.IndexMany(projects, IndexName);
 
 			// create a thousand commits and associate with the projects
-			var commits = CommitActivity.CommitActivities;
+			var commits = CommitActivity.Generator.Generate(5000);
 			var bb = new BulkDescriptor();
 			for (int index = 0; index < commits.Count; index++)
 			{
