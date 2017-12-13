@@ -13,11 +13,9 @@ namespace Nest
 		/// </summary>
 		int? NumberOfShards { get; set; }
 
-		//TODO remove pre note with 6.0
 		/// <summary>
 		/// By defaulting, routing resolves to a single shard. Use this settings to have it resolve to a set of shards instead.
 		/// This mitigates creating hotspots and very large shards if you have a few routing keys generating the significant data.
-		/// <pre>Added in Elasticsearch 5.3.0</pre>
 		/// </summary>
 		int? RoutingPartitionSize { get; set; }
 
