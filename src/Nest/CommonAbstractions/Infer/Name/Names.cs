@@ -26,11 +26,10 @@ namespace Nest
 			return new Names(nameList);
 		}
 
-		//TODO to explicit private implemenation
-		public string GetString(IConnectionConfigurationValues settings) =>
-			string.Join(",", this._names.Select(n => n.GetString(settings)));
+		string IUrlParameter.GetString(IConnectionConfigurationValues settings) =>
+			string.Join(",", this._names.Cast<IUrlParameter>().Select(n => n.GetString(settings)));
 
-		private string DebugDisplay => GetString(null);
+		private string DebugDisplay => ((IUrlParameter)this).GetString(null);
 
 		public static implicit operator Names(Name name) => new Names(new[] { name });
 
