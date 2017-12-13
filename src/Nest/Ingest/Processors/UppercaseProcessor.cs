@@ -23,18 +23,17 @@ namespace Nest
 		public Field Field { get; set; }
 	}
 
-	//TODO RENAME TO PROCESSOR AND WRITE A CODE STANDARDS TEST FOR THIS
-	public class UppercaseProcessDescriptor<T>
-		: ProcessorDescriptorBase<UppercaseProcessDescriptor<T>, IUppercaseProcessor>, IUppercaseProcessor
+	public class UppercaseProcessorDescriptor<T>
+		: ProcessorDescriptorBase<UppercaseProcessorDescriptor<T>, IUppercaseProcessor>, IUppercaseProcessor
 		where T : class
 	{
 		protected override string Name => "uppercase";
 
 		Field IUppercaseProcessor.Field { get; set; }
 
-		public UppercaseProcessDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public UppercaseProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
-		public UppercaseProcessDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
+		public UppercaseProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
 			Assign(a => a.Field = objectPath);
 	}
 }
