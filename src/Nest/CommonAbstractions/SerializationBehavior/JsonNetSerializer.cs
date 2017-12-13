@@ -14,10 +14,8 @@ namespace Nest
 	internal class JsonNetSerializer : IElasticsearchSerializer
 	{
 		private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
-		private readonly JsonSerializer _defaultSerializer;
 		private readonly JsonSerializer _indentedSerializer;
-		//TODO this internal smells
-		internal JsonSerializer Serializer => _defaultSerializer;
+		internal JsonSerializer Serializer { get; }
 
 		protected IConnectionSettingsValues Settings { get; }
 
@@ -48,7 +46,7 @@ namespace Nest
 			var collapsed = this.CreateSettings(SerializationFormatting.None);
 			var indented = this.CreateSettings(SerializationFormatting.Indented);
 
-			this._defaultSerializer = JsonSerializer.Create(collapsed);
+			this.Serializer = JsonSerializer.Create(collapsed);
 			this._indentedSerializer = JsonSerializer.Create(indented);
 		}
 
@@ -56,7 +54,7 @@ namespace Nest
 		{
 			var serializer = formatting == SerializationFormatting.Indented
 				? _indentedSerializer
-				: _defaultSerializer;
+				: Serializer;
 
 			//this leaveOpen is most likely here because in PostData when we serialize IEnumerable<object> as multi json
 			//we call this multiple times, it would be better to have a dedicated Serialize(IEnumerable<object>) on the
@@ -91,7 +89,7 @@ namespace Nest
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
-				var t = this._defaultSerializer.Deserialize(jsonTextReader, type);
+				var t = this.Serializer.Deserialize(jsonTextReader, type);
 				return t;
 			}
 		}
@@ -108,7 +106,7 @@ namespace Nest
 				try
 				{
 					var token = await JToken.LoadAsync(jsonTextReader, cancellationToken).ConfigureAwait(false);
-					return token.ToObject<T>(this._defaultSerializer);
+					return token.ToObject<T>(this.Serializer);
 				}
 				catch
 				{
@@ -123,7 +121,7 @@ namespace Nest
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
 				var token = await JToken.LoadAsync(jsonTextReader, cancellationToken).ConfigureAwait(false);
-				return token.ToObject(type, this._defaultSerializer);
+				return token.ToObject(type, this.Serializer);
 			}
 		}
 
