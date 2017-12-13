@@ -38,6 +38,12 @@ namespace Tests.Search.Request
 						}
 					},
 					new {
+						numberOfCommits = new {
+							missing = -1,
+							order = "desc"
+						}
+					},
+					new {
 						_geo_distance = new {
 							location = new [] {
 								new {
@@ -86,6 +92,11 @@ namespace Tests.Search.Request
 					.NestedPath(p => p.Tags)
 					.NestedFilter(q => q.MatchAll())
 				)
+				.Field(f => f
+					.Field(p => p.NumberOfCommits)
+					.Order(SortOrder.Descending)
+					.Missing(-1)
+				)
 				.GeoDistance(g => g
 					.Field(p => p.Location)
 					.DistanceType(GeoDistanceType.Arc)
@@ -118,11 +129,17 @@ namespace Tests.Search.Request
 					{
 						Field = Field<Project>(p=>p.LastActivity),
 						Order = SortOrder.Descending,
-						Missing = "_last",
+						MissingValue = "_last",
 						UnmappedType = FieldType.Date,
 						Mode = SortMode.Average,
 						NestedPath = Field<Project>(p=>p.Tags),
 						NestedFilter = new MatchAllQuery(),
+					},
+					new SortField
+					{
+						Field = Field<Project>(p=>p.NumberOfCommits),
+						Order = SortOrder.Descending,
+						MissingValue = -1
 					},
 					new GeoDistanceSort
 					{
