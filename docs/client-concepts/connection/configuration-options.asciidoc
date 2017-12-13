@@ -33,6 +33,10 @@ Basic Authentication credentials to send with all requests to Elasticsearch
 
 Use the following certificate to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`
 
+`ClientCertificate`::
+
+Use the following certificate to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`
+
 `ClientCertificates`::
 
 Use the following certificates to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`
@@ -95,6 +99,10 @@ A collection of headers that will be sent with every request. Useful in situatio
 
 A collection of query string parameters that will be sent with every request. Useful in situations where you always need to pass a parameter e.g. an API key.
 
+`IncludeServerStackTraceOnError`::
+
+Forces all requests to have ?error_trace=true querystring parameter appended, causing Elasticsearch to return stack traces as part of serialized exceptions Defaults to `false`
+
 `MaxDeadTimeout`::
 
 Sets the maximum time a node can be marked dead. Different implementations of `IConnectionPool` may choose a different default.
@@ -127,7 +135,7 @@ Sets the default ping timeout in milliseconds for ping requests, which are used 
 
 `PrettyJson`::
 
-Forces all requests to have ?pretty=true querystring parameter appended,  causing Elasticsearch to return formatted JSON. Also forces the client to send out formatted JSON. Defaults to `false`
+Forces all requests to have ?pretty=true querystring parameter appended, causing Elasticsearch to return formatted JSON. Also forces the client to send out formatted JSON. Defaults to `false`
 
 `Proxy`::
 
@@ -171,7 +179,7 @@ The following is a list of available connection configuration options on `Connec
 
 Specify how field names are inferred from POCO property names.
 +
-By default, NEST camel cases property names  e.g. EmailAddress POCO property => "emailAddress" Elasticsearch document field name
+By default, NEST camel cases property names e.g. EmailAddress POCO property => "emailAddress" Elasticsearch document field name
 
 `DefaultIndex`::
 
@@ -179,29 +187,13 @@ The default index to use when no index is specified.
 
 `DefaultTypeNameInferrer`::
 
-Specify how type names are inferred from POCO types.  By default, type names are inferred by calling `ToLowerInvariant` on the type's name.
-
-`MapDefaultTypeIndices`::
-
-Specify the default index names for a given POCO type.  Takes precedence over the global `DefaultIndex`
-
-`MapDefaultTypeNames`::
-
-Specify the default type names for a given POCO type.  Takes precedence over the global `DefaultTypeNameInferrer`
-
-`MapIdPropertyFor`::
-
-Specify which property on a given POCO should be used to infer the id of the document when  indexed in Elasticsearch. The type of the document.
-
-`MapPropertiesFor`::
-
-Specify how the properties are mapped for a given POCO type. The type of the document.
+Specify how type names are inferred from POCO types. By default, type names are inferred by calling `ToLowerInvariant` on the type's name.
 
 `PluralizeTypeNames`::
 
 Pluralize type names when inferring from POCO type names.
 +
-This calls `DefaultTypeNameInferrer` with an implementation that will pluralize type names.              This used to be the default prior to Nest 0.90
+This calls `DefaultTypeNameInferrer` with an implementation that will pluralize type names.             This used to be the default prior to Nest 0.90
 
 :xml-docs: Nest:ConnectionSettingsBase`1
 

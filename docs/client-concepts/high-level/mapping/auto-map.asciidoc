@@ -26,15 +26,19 @@ different types, and itself has a collection of `Employee` types.
 
 [source,csharp]
 ----
-public class Company
+public abstract class Document
+{
+    public JoinField Join { get; set; }
+}
+
+public class Company : Document
 {
     public string Name { get; set; }
     public List<Employee> Employees { get; set; }
 }
 
-public class Employee
+public class Employee : Document
 {
-    public string FirstName { get; set; }
     public string LastName { get; set; }
     public int Salary { get; set; }
     public DateTime Birthday { get; set; }
@@ -45,26 +49,32 @@ public class Employee
 ----
 
 Auto mapping can take the pain out of having to define a manual mapping for all properties
-on the POCO
+on the POCO. In this case we want to index two subclasses into a single index. We call Map
+for the base class and then call AutoMap foreach of the types we want it it the implement
 
 [source,csharp]
 ----
 var descriptor = new CreateIndexDescriptor("myindex")
     .Mappings(ms => ms
-        .Map<Company>(m => m.AutoMap()) <1>
-        .Map<Employee>(m => m.AutoMap()) <2>
+        .Map<Document>(m => m
+            .AutoMap<Company>() <1>
+            .AutoMap<Employee>() <1>
+        )
     );
 ----
 <1> Auto map `Company`
 
-<2> Auto map `Employee`
+<1> Auto map `Employee`
 
 [source,javascript]
 ----
 {
   "mappings": {
-    "company": {
+    "document": {
       "properties": {
+        "birthday": {
+          "type": "date"
+        },
         "employees": {
           "properties": {
             "birthday": {
@@ -74,26 +84,21 @@ var descriptor = new CreateIndexDescriptor("myindex")
               "properties": {},
               "type": "object"
             },
-            "firstName": {
-              "fields": {
-                "keyword": {
-                  "type": "keyword",
-                  "ignore_above": 256
-                }
-              },
-              "type": "text"
-            },
             "hours": {
               "type": "long"
             },
             "isManager": {
               "type": "boolean"
             },
+            "join": {
+              "properties": {},
+              "type": "object"
+            },
             "lastName": {
               "fields": {
                 "keyword": {
-                  "type": "keyword",
-                  "ignore_above": 256
+                  "ignore_above": 256,
+                  "type": "keyword"
                 }
               },
               "type": "text"
@@ -104,46 +109,30 @@ var descriptor = new CreateIndexDescriptor("myindex")
           },
           "type": "object"
         },
-        "name": {
-          "fields": {
-            "keyword": {
-              "type": "keyword",
-              "ignore_above": 256
-            }
-          },
-          "type": "text"
-        }
-      }
-    },
-    "employee": {
-      "properties": {
-        "birthday": {
-          "type": "date"
-        },
-        "employees": {
-          "properties": {},
-          "type": "object"
-        },
-        "firstName": {
-          "fields": {
-            "keyword": {
-              "type": "keyword",
-              "ignore_above": 256
-            }
-          },
-          "type": "text"
-        },
         "hours": {
           "type": "long"
         },
         "isManager": {
           "type": "boolean"
         },
+        "join": {
+          "properties": {},
+          "type": "object"
+        },
         "lastName": {
           "fields": {
             "keyword": {
-              "type": "keyword",
-              "ignore_above": 256
+              "ignore_above": 256,
+              "type": "keyword"
+            }
+          },
+          "type": "text"
+        },
+        "name": {
+          "fields": {
+            "keyword": {
+              "ignore_above": 256,
+              "type": "keyword"
             }
           },
           "type": "text"

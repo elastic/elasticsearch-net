@@ -42,8 +42,8 @@ A index name can be mapped for CLR types using `.MapDefaultTypeIndices()` on `Co
 [source,csharp]
 ----
 var settings = new ConnectionSettings()
-    .MapDefaultTypeIndices(m => m
-        .Add(typeof(Project), "projects")
+    .InferMappingFor<Project>(m => m
+        .IndexName("projects")
     );
 var resolver = new IndexNameResolver(settings);
 var index = resolver.Resolve<Project>();
@@ -72,8 +72,8 @@ index is specified, and a specific index to use for different POCO types.
 ----
 var settings = new ConnectionSettings()
     .DefaultIndex("defaultindex")
-    .MapDefaultTypeIndices(m => m
-        .Add(typeof(Project), "projects")
+    .InferMappingFor<Project>(m => m
+        .IndexName("projects")
     );
 var resolver = new IndexNameResolver(settings);
 var index = resolver.Resolve<Project>();
@@ -105,8 +105,8 @@ index name and any index name specified for the POCO type using `.MapDefaultType
 var client = TestClient.GetInMemoryClient(s=>
     new ConnectionSettings()
         .DefaultIndex("defaultindex")
-        .MapDefaultTypeIndices(m => m
-            .Add(typeof(Project), "projects")
+        .InferMappingFor<Project>(m => m
+            .IndexName("projects")
         )
 );
 

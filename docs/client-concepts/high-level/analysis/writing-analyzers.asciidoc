@@ -121,7 +121,7 @@ var createIndexResponse = client.CreateIndex("my-index", c => c
     }
   },
   "mappings": {
-    "project": {
+    "doc": {
       "properties": {
         "name": {
           "type": "text",

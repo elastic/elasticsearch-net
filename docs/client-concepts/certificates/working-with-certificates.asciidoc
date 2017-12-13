@@ -133,7 +133,7 @@ You can set Client Certificates to use on all connections on `ConnectionSettings
 ----
 public class PkiCluster : CertgenCaCluster
 {
-    public override ConnectionSettings Authenticate(ConnectionSettings s) => s <1>
+    protected override ConnectionSettings Authenticate(ConnectionSettings s) => s <1>
         .ClientCertificate(
             ClientCertificate.LoadWithPrivateKey(
                 this.Node.FileSystem.ClientCertificate, <2>

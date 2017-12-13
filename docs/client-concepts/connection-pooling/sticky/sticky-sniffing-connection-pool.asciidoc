@@ -1,0 +1,156 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/ClientConcepts/ConnectionPooling/Sticky/StickySniffingConnectionPool.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[sticky-sniffing-connection-pool]]
+=== Sticky Sniffing Connection Pool
+
+Sticky sniffing connection pool
+
+This pool is a is an extended StickyConnectionPool that supports sniffing and sorting
+the nodes a sniff returns.
+
+[source,csharp]
+----
+var numberOfNodes = 10;
+var uris = Enumerable.Range(9200, numberOfNodes).Select(p => new Uri("http://localhost:" + p));
+var pool = new Elasticsearch.Net.StickySniffingConnectionPool(uris, (n)=>0f);
+----
+
+Here we have setup a sticky connection pool seeded with 10 nodes all weighted the same.
+So what order we expect? Imagine the following:
+
+Thread A calls `.CreateView()` and gets returned the first live node
+Thread B calls `.CreateView()` and gets returned the same node, since the first
+node is still good
+
+[source,csharp]
+----
+var startingPositions = Enumerable.Range(0, numberOfNodes)
+    .Select(i => pool.CreateView().First())
+    .Select(n => n.Uri.Port)
+    .ToList();
+
+var expectedOrder = Enumerable.Repeat(9200, numberOfNodes);
+startingPositions.Should().ContainInOrder(expectedOrder);
+
+IEnumerable<Node> Nodes(int start) => Enumerable.Range(start, 4)
+    .Select(i => new Uri($"http://localhost:{9200 + i}"))
+    .Select((u, i) => new Node(u)
+    {
+        Settings = new Dictionary<string, string> {{"rack", $"rack_{u.Port - 9200}"}}
+    });
+----
+
+We set up a cluster with 4 nodes all having a different rack id
+				our Sticky Sniffing Connection Pool gives the most weight to rack_2 and rack_11.
+				We initially only seed nodes `9200-9203` in racks 0 to 3. So we should be sticky on rack_2.
+				We setup node 9202 to fail after two client calls in which case we sniff and find nodes
+			 `9210-9213` in which case we should become sticky on rack_11.
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(Nodes(0))
+    .ClientCalls(p => p.OnPort(9202).Succeeds(Twice).ThrowsAfterSucceeds())
+    .ClientCalls(p => p.FailAlways())
+    .Sniff(s=>s.SucceedAlways(Framework.Cluster
+        .Nodes(Nodes(10))
+        .ClientCalls(p => p.SucceedAlways()))
+    )
+    .StickySniffingConnectionPool(n=>
+        (n.Settings.TryGetValue("rack", out string v) && v == "rack_2" ? 10 : 0)
+        +(n.Settings.TryGetValue("rack", out string r) && r == "rack_11" ? 10 : 0)
+    )
+    .Settings(p => p.DisablePing().SniffOnStartup(false))
+);
+----
+
+Our first call happens on 9202 because we sorted that to the top as its on rack_2
+After two succesful calls our sticky node throws an exception and we sniff and failover.
+Sniffing happens on the next node in order (9200) and the sniffing response returns nodes
+9210 to 9213. We should now be stick on 9211 as its on rack_11
+
+[source,csharp]
+----
+await audit.TraceCalls(
+    new ClientCall { { HealthyResponse, 9202} },
+    new ClientCall { { HealthyResponse, 9202} },
+    new ClientCall {
+        { BadResponse, 9202 },
+        { SniffOnFail },
+        { SniffSuccess, 9200 },
+        { HealthyResponse, 9211},
+    },
+    /** Now we are sticky on 9211 onwards */
+    new ClientCall { { HealthyResponse, 9211 } },
+    new ClientCall { { HealthyResponse, 9211 } },
+    new ClientCall { { HealthyResponse, 9211 } },
+    new ClientCall { { HealthyResponse, 9211 } },
+    new ClientCall { { HealthyResponse, 9211 } },
+    new ClientCall { { HealthyResponse, 9211 } },
+    new ClientCall { { HealthyResponse, 9211 } }
+);
+
+IEnumerable<Node> Nodes(int start) => Enumerable.Range(start, 4)
+    .Select(i => new Uri($"http://localhost:{9200 + i}"))
+    .Select((u, i) => new Node(u)
+    {
+        Settings = new Dictionary<string, string> {{"rack", $"rack_{u.Port - 9200}"}}
+    });
+----
+
+We seed a cluster with an array of 4 Uri's starting at port 9200.
+Our sniffing sorted connection pool is set up to favor nodes in rack_2
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(4)
+    .ClientCalls(p => p.SucceedAlways())
+    .Sniff(s=>s.SucceedAlways(Framework.Cluster
+        .Nodes(Nodes(0))
+        .ClientCalls(p => p.SucceedAlways()))
+    )
+    .StickySniffingConnectionPool(n=>
+        (n.Settings.TryGetValue("rack", out string v) && v == "rack_2" ? 10 : 0)
+    )
+    .Settings(p => p.DisablePing())
+);
+----
+
+Sniff happens on 9200 because our seed has no knowledge of rack ids
+However when we reseed the nodes from the sniff response we sort 9202 to to top
+because it lives in rack_2
+
+[source,csharp]
+----
+await audit.TraceCalls(
+    new ClientCall
+    {
+        { SniffOnStartup },
+        { SniffSuccess, 9200 },
+        { HealthyResponse, 9202},
+    },
+    /** We are sticky on 9202 for as long as it keeps returning valid responses */
+    new ClientCall { { HealthyResponse, 9202} },
+    new ClientCall { { HealthyResponse, 9202} },
+    new ClientCall { { HealthyResponse, 9202} },
+    new ClientCall { { HealthyResponse, 9202} },
+    new ClientCall { { HealthyResponse, 9202} },
+    new ClientCall { { HealthyResponse, 9202} },
+    new ClientCall { { HealthyResponse, 9202} },
+    new ClientCall { { HealthyResponse, 9202} }
+);
+----
+

@@ -15,7 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 [[sticky]]
 === Sticky
 
-Sticky
+Sticky Connection Pool
 Each connection pool returns the first `live` node so that it is sticky between requests
 
 [source,csharp]
