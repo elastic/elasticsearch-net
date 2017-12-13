@@ -64,11 +64,6 @@ namespace Elasticsearch.Net
 		public virtual TResponse Request<TResponse>(RequestData requestData)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			//TODO remove Stream response support in 6.0, closing the stream is sufficient on desktop/mono
-			//but not on .NET core on linux HttpClient which proxies to curl.
-			if (typeof(TResponse) == typeof(ElasticsearchResponse<Stream>) && ConnectionConfiguration.IsCurlHandler)
-				throw new Exception(CanNotUseStreamResponsesWithCurlHandler);
-
 			var client = this.GetClient(requestData);
 			HttpResponseMessage responseMessage = null;
 			int? statusCode = null;
@@ -113,11 +108,6 @@ namespace Elasticsearch.Net
 		public virtual async Task<TResponse> RequestAsync<TResponse>(RequestData requestData, CancellationToken cancellationToken)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			//TODO remove Stream response support in 6.0, closing the stream is sufficient on desktop/mono
-			//but not on .NET core on linux HttpClient which proxies to curl.
-			if (typeof(TResponse) == typeof(ElasticsearchResponse<Stream>) && ConnectionConfiguration.IsCurlHandler)
-				throw new Exception(CanNotUseStreamResponsesWithCurlHandler);
-
 			var client = this.GetClient(requestData);
 			HttpResponseMessage responseMessage = null;
 			int? statusCode = null;

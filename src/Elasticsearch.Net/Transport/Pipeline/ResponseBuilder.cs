@@ -12,8 +12,6 @@ namespace Elasticsearch.Net
 	{
 		private const int BufferSize = 81920;
 
-		private static readonly IDisposable EmptyDisposable = new MemoryStream();
-
 		public static TResponse ToResponse<TResponse>(
 			RequestData requestData,
 			Exception ex,
@@ -90,10 +88,9 @@ namespace Elasticsearch.Net
 				details.ResponseBodyInBytes = bytes;
 			}
 
-			var needsDispose = typeof(TResponse) != typeof(ElasticsearchResponse<Stream>);
-			using (needsDispose ? responseStream : EmptyDisposable)
+			using (responseStream)
 			{
-				if (SetSpecialTypes<TResponse>(responseStream, bytes, out var r))
+				if (SetSpecialTypes<TResponse>(bytes, out var r))
 					return r;
 
 				if (details.HttpStatusCode.HasValue && requestData.SkipDeserializationForStatusCodes.Contains(details.HttpStatusCode.Value))
@@ -120,10 +117,9 @@ namespace Elasticsearch.Net
 				details.ResponseBodyInBytes = bytes;
 			}
 
-			var needsDispose = typeof(TResponse) != typeof(ElasticsearchResponse<Stream>);
-			using (needsDispose ? responseStream : EmptyDisposable)
+			using (responseStream)
 			{
-				if (SetSpecialTypes<TResponse>(responseStream, bytes, out var r)) return r;
+				if (SetSpecialTypes<TResponse>(bytes, out var r)) return r;
 
 				if (details.HttpStatusCode.HasValue && requestData.SkipDeserializationForStatusCodes.Contains(details.HttpStatusCode.Value))
 					return null;
@@ -139,9 +135,9 @@ namespace Elasticsearch.Net
 
 		private static readonly VoidResponse StaticVoid = new VoidResponse { Body = new VoidResponse.VoidBody() };
 		private static readonly Type[] SpecialTypes =
-			{typeof(StringResponse), typeof(BytesResponse), typeof(VoidResponse), typeof(StreamResponse), typeof(DynamicResponse)};
+			{typeof(StringResponse), typeof(BytesResponse), typeof(VoidResponse), typeof(DynamicResponse)};
 
-		private static bool SetSpecialTypes<TResponse>(Stream responseStream, byte[] bytes, out TResponse cs)
+		private static bool SetSpecialTypes<TResponse>(byte[] bytes, out TResponse cs)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			cs = null;
@@ -154,8 +150,6 @@ namespace Elasticsearch.Net
 				cs = new BytesResponse(bytes) as TResponse;
 			else if (responseType == typeof(VoidResponse))
 				cs = StaticVoid as TResponse;
-			else if (responseType == typeof(StreamResponse))
-				cs = new StreamResponse(responseStream) as TResponse;
 			else if (responseType == typeof(DynamicResponse))
 			{
 				using (var ms = new MemoryStream(bytes))

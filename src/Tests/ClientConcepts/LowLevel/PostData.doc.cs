@@ -16,9 +16,9 @@ namespace Tests.ClientConcepts.LowLevel
 	{
 		/**[[post-data]]
          * === Post data
+		 *
 		 * The low level client allows you to post a `string` or `byte[]` array directly. On top of this,
-		 * if you pass a collection of `string` or `object` they will be serialized
-		 * using Elasticsearch's special bulk/multi format.
+		 * if you pass a collection of `string` or `object` they will be serialized using Elasticsearch's special bulk/multi format.
 		 */
 		private readonly string @string = "fromString";
 		private readonly byte[] bytes = Utf8Bytes("fromByteArray");
@@ -44,6 +44,7 @@ namespace Tests.ClientConcepts.LowLevel
 		{
 			/**[float]
 			* === Implicit Conversion
+			*
 			* Even though the argument for PostData on the low level client takes a `PostData`,
 			* You can rely on implicit conversion to abstract the notion of PostData for the most common two use cases:
 			*
@@ -94,9 +95,7 @@ namespace Tests.ClientConcepts.LowLevel
 			fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
 			fromObject.Type.Should().Be(PostType.Serializable);
 
-			/** and passing a `PostData` instance to a method that accepts `PostData`
-			 * as an argument does not wrap it again
-			 */
+			/** and passing a `PostData` instance to a method that accepts `PostData`  as an argument does not wrap it again */
 			fromListOfString = MethodThatAcceptsPostData(fromListOfString);
 			fromListOfObject = MethodThatAcceptsPostData(fromListOfObject);
 			fromObject = MethodThatAcceptsPostData(fromObject);
@@ -142,9 +141,7 @@ namespace Tests.ClientConcepts.LowLevel
 			*/
 			await Post(() => PostData.MultiJson(collectionOfObjects), writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: false, settings: settings);
 
-			/**
-			 * In all other cases, Post data is serialized as is and `WrittenBytes` is not assigned
-			 */
+			/** In all other cases, Post data is serialized as is and `WrittenBytes` is not assigned */
 			await Post(() => PostData.Serializable(@object), writes: utf8ObjectBytes, writtenBytesIsSet: false, settings: settings);
 
 			/**

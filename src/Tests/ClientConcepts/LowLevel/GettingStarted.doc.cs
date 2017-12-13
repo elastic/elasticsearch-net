@@ -130,17 +130,18 @@ namespace Tests.ClientConcepts.LowLevel
 				LastName = "Laarman"
 			};
 
-			var indexResponse = await lowlevelClient.IndexAsync<StreamResponse>("people", "person", "1", PostData.Serializable(person));
-			Stream responseStream = indexResponse.Body; // <1> If returning a `Stream`, be sure to properly https://msdn.microsoft.com/en-us/library/b1yfkh5e(v=vs.110).aspx[dispose] of it when you are finished with it.
+			var indexResponse = await lowlevelClient.IndexAsync<BytesResponse>("people", "person", "1", PostData.Serializable(person));
+			byte[] responseStream = indexResponse.Body;
 		}
 
 		/**
+		* For API's that take a body you can send the body as an (anonymous) object, byte[], string, stream. Additionally for API's that
+		* take multilined json you can also send a list of objects or a list of bytes to help you format this. These are all encapsulated
+		* by `PostData` and you can use the static methods on that class to send the body in whatever form you have it.
+		* Check out the documentation on <<post-data, Post Data>> to see all of these permutations in action.
 		*
-		* Whether you use an instance of a class, anonymous type, `string`, etc. they all are implicitly converted to an instance of `PostData<T>` that
-		* the method accepts. Check out the documentation on <<post-data, Post Data>> to see the other types that are supported.
-		*
-		* The generic type parameter on the method specifies the type of the response body. In the last example, we return the response stream
-		* from Elasticsearch, forgoing any deserialization.
+		* The generic type parameter on the method specifies the type of the response body. In the last example, we return the response as a
+		* string from Elasticsearch, forgoing any deserialization.
 		*
 		* [float]
 		* ==== Bulk indexing
@@ -159,8 +160,8 @@ namespace Tests.ClientConcepts.LowLevel
 				new { FirstName = "Russ", LastName = "Cam" },
 		    };
 
-			var indexResponse = lowlevelClient.Bulk<StreamResponse>(PostData.MultiJson(people));
-			Stream responseStream = indexResponse.Body;
+			var indexResponse = lowlevelClient.Bulk<StringResponse>(PostData.MultiJson(people));
+			string responseStream = indexResponse.Body;
 		}
 		/**
 		* The client will serialize each item seperately and join items up using the `\n` character as required by the Bulk API. Refer to the
