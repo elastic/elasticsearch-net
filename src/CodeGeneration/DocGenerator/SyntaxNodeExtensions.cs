@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
@@ -15,7 +16,7 @@ namespace DocGenerator
         /// Determines if the node should be hidden i.e. not included in the documentation,
         /// based on the precedence of a //hide single line comment
         /// </summary>
-        public static bool ShouldBeHidden(this SyntaxNode node) => 
+        public static bool ShouldBeHidden(this SyntaxNode node) =>
             node.HasLeadingTrivia && ShouldBeHidden(node, node.GetLeadingTrivia());
 
         public static bool ShouldBeHidden(this SyntaxNode node, SyntaxTriviaList leadingTrivia) =>
@@ -26,7 +27,7 @@ namespace DocGenerator
         /// Determines if the node should be json serialized based on the precedence of
         /// a //json single line comment
         /// </summary>
-        public static bool ShouldBeConvertedToJson(this SyntaxNode node) => 
+        public static bool ShouldBeConvertedToJson(this SyntaxNode node) =>
             node.HasLeadingTrivia && ShouldBeConvertedToJson(node, node.GetLeadingTrivia());
 
         /// <summary>
@@ -58,7 +59,7 @@ namespace DocGenerator
         /// Determines if the node is preceded by any multiline documentation.
         /// </summary>
         /// <param name="node">The node.</param>
-        public static bool HasMultiLineDocumentationCommentTrivia(this SyntaxNode node) => 
+        public static bool HasMultiLineDocumentationCommentTrivia(this SyntaxNode node) =>
             node.HasLeadingTrivia &&
 	        node.GetLeadingTrivia().Any(c => c.IsKind(SyntaxKind.MultiLineDocumentationCommentTrivia));
 
@@ -87,7 +88,7 @@ namespace DocGenerator
         /// </summary>
         /// <param name="node">The node.</param>
         /// <returns></returns>
-        public static int StartingLine(this SyntaxNode node) => 
+        public static int StartingLine(this SyntaxNode node) =>
             node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
 
 	    public static SyntaxNode WithLeadingEndOfLineTrivia(this SyntaxNode node)
@@ -101,5 +102,16 @@ namespace DocGenerator
 
 	        return node;
 	    }
+
+		/// <summary>
+		/// Gets the text representation of a syntax node without #pragma directives
+		/// </summary>
+		/// <param name="node">The node.</param>
+		/// <returns></returns>
+		public static string ToFullStringWithoutPragmaWarningDirectiveTrivia(this SyntaxNode node)
+		{
+			var pragma = node.DescendantTrivia(s => true, true).Where(t => t.IsKind(SyntaxKind.PragmaWarningDirectiveTrivia));
+			return node.ReplaceTrivia(pragma, (s, r) => default(SyntaxTrivia)).ToFullString();
+		}
     }
 }
