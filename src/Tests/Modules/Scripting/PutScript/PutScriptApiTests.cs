@@ -30,7 +30,7 @@ namespace Tests.Modules.Scripting.PutScript
 
 		protected override object ExpectJson { get; } = new
 		{
-			script = new { lang = "painless", source = "1+1" }
+			script = new { source = "1+1" }
 		};
 
 		protected override PutScriptDescriptor NewDescriptor() => new PutScriptDescriptor(_name);
