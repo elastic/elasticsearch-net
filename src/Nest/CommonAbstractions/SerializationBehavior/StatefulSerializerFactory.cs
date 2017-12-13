@@ -1,15 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
-	internal class StatefulSerializerFactory
+	internal static class StatefulSerializerFactory
 	{
-		public JsonNetSerializer CreateStateful(IConnectionSettingsValues settings, JsonConverter converter) =>
+		public static JsonNetSerializer CreateStateful(IConnectionSettingsValues settings, JsonConverter converter) =>
 			new JsonNetSerializer(settings, converter);
 	}
 }

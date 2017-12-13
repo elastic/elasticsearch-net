@@ -11,7 +11,7 @@ namespace Nest
 			var s = (settings as ConnectionSettings)
 				?? throw new NullReferenceException($"Stateful serializer expected {nameof(IConnectionSettingsValues)} to be {nameof(ConnectionSettings)}");
 
-			return s.SerializerFactory.CreateStateful(s, converter);
+			return StatefulSerializerFactory.CreateStateful(s, converter);
 		}
 	}
 }
