@@ -85,6 +85,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 	/// </summary>
 	public class ScriptedMetricMultiAggregationTests : ProjectsOnlyAggregationUsageTestBase
 	{
+		// hide
 		class Scripted
 		{
 			public string Language { get; set; }

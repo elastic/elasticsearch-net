@@ -16,17 +16,17 @@ namespace DocGenerator.Documentation.Files
         private readonly Document _document;
         private readonly Dictionary<string, Project> _projects;
 
-        public CSharpDocumentationFile(Document document, Dictionary<string, Project> projects) 
+        public CSharpDocumentationFile(Document document, Dictionary<string, Project> projects)
             : base(new FileInfo(document.FilePath))
         {
             _document = document;
             _projects = projects;
         }
 
-        public override async Task SaveToDocumentationFolderAsync()
+	    public override async Task SaveToDocumentationFolderAsync()
         {
             var converter = new DocConverter();
-            var blocks = await converter.ConvertAsync(_document).ConfigureAwait(false);
+	        var blocks = await converter.ConvertAsync(_document).ConfigureAwait(false);
 
             if (!blocks.Any()) return;
 
@@ -36,7 +36,7 @@ namespace DocGenerator.Documentation.Files
                 foreach (var block in blocks)
                     await writer.WriteLineAsync(block.ToAsciiDoc()).ConfigureAwait(false);
             }
-         
+
             var destination = this.CreateDocumentationLocation();
 
             // Now add Asciidoc headers, rearrange sections, etc.

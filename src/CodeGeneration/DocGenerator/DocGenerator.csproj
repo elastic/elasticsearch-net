@@ -9,6 +9,8 @@
     <VersionSuffix>alpha</VersionSuffix>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic" Version="2.3.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.2" />
     <ProjectReference Include="..\..\Nest\Nest.csproj" />
     <PackageReference Include="AsciiDocNet" Version="1.0.0-alpha5" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.3.2" />
