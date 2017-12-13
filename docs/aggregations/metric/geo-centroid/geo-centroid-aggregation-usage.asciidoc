@@ -133,7 +133,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 
 var projects = response.Aggs.Terms("projects");
 

@@ -38,6 +38,7 @@ s => s
             r => r.To(DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour)),
             r => r.From(DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m"))
         )
+        .TimeZone("CET")
         .Aggregations(childAggs => childAggs
             .Terms("project_tags", avg => avg.Field(p => p.Tags))
         )
@@ -60,6 +61,7 @@ new SearchRequest<Project>
             new DateRangeExpression { To = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour) },
             new DateRangeExpression { From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m") }
         },
+        TimeZone = "CET",
         Aggregations =
             new TermsAggregation("project_tags") { Field = Field<Project>(p => p.Tags) }
     }
@@ -85,7 +87,8 @@ new SearchRequest<Project>
           {
             "from": "2012-05-05||+1d-1m"
           }
-        ]
+        ],
+        "time_zone": "CET"
       },
       "aggs": {
         "project_tags": {

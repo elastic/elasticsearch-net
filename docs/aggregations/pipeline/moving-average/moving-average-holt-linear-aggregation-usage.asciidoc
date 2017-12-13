@@ -63,7 +63,7 @@ new SearchRequest<Project>()
                 Model = new HoltLinearModel
                 {
                     Alpha = 0.5f,
-                    Beta = 0.5f,
+                    Beta = 0.5f
                 }
             }
     }

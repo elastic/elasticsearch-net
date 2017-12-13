@@ -78,3 +78,44 @@ q
 )
 ----
 
+[float]
+== Verbatim terms query
+
+By default an empty terms array is conditionless so will be rewritten. Sometimes sending an empty an empty array to mean
+match nothing makes sense. You can either use the `ConditionlessQuery` construct from NEST to provide a fallback or make the
+query verbatim as followed:
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new TermsQuery
+{
+    IsVerbatim = true,
+    Field = "description",
+    Terms = new string[] {},
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "terms": {
+    "description": []
+  }
+}
+----
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Terms(c => c
+    .Verbatim()
+    .Field(p => p.Description)
+    .Terms(new string[] {})
+)
+----
+

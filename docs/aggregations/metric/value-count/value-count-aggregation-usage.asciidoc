@@ -57,7 +57,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 var commitCount = response.Aggs.ValueCount("commit_count");
 commitCount.Should().NotBeNull();
 commitCount.Value.Should().BeGreaterThan(0);

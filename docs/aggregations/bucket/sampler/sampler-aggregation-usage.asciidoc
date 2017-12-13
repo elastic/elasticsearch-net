@@ -82,5 +82,8 @@ var sample = response.Aggs.Sampler("sample");
 sample.Should().NotBeNull();
 var sigTags = sample.SignificantTerms("significant_names");
 sigTags.Should().NotBeNull();
+sigTags.DocCount.Should().BeGreaterThan(0);
+if (TestClient.VersionUnderTestSatisfiedBy(">=5.5.0"))
+    sigTags.BgCount.Should().BeGreaterThan(0);
 ----
 

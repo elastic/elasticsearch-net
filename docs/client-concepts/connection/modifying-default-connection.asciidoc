@@ -103,7 +103,7 @@ from our fixed `InMemoryConnection` response
 
 [source,csharp]
 ----
-searchResponse.IsValid.Should().BeTrue();
+searchResponse.ShouldBeValid();
 searchResponse.Documents.Count.Should().Be(25);
 ----
 

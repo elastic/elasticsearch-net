@@ -95,6 +95,8 @@ the `Exists` requests.
 ----
 var exceptions = new[] <1>
 {
+    typeof(SourceExistsRequest),
+    typeof(SourceExistsRequest<>),
     typeof(DocumentExistsRequest),
     typeof(DocumentExistsRequest<>),
     typeof(AliasExistsRequest),

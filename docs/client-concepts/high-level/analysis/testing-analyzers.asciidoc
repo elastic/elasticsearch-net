@@ -20,7 +20,7 @@ please modify the original csharp file found at the link and submit the PR with 
 When <<writing-analyzers, building your own analyzers>>, it's useful to test that the analyzer
 does what we expect it to. This is where the {ref_current}/indices-analyze.html[Analyze API] comes in.
 
-==== Testing built-in analyzers
+==== Testing in-built analyzers
 
 To get started with the Analyze API, we can test to see how a built-in analyzer will analyze
 a piece of text
