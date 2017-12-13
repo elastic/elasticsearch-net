@@ -4,9 +4,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using DocGenerator.Buildalyzer;
 using DocGenerator.Documentation.Files;
+using Microsoft.Build.Framework;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.MSBuild;
+using Microsoft.Extensions.Logging;
 
 namespace DocGenerator
 {
@@ -47,22 +50,21 @@ namespace DocGenerator
 		{
 			//.NET core csprojects are not supported all that well.
 			// https://github.com/dotnet/roslyn/issues/21660 :sadpanda:
+			// Use Buildalyzer to get a workspace from the solution.
+			var analyzer = new AnalyzerManager(Path.Combine(Program.InputDirPath, "Elasticsearch.DotNetCoreOnly.sln"));
+			var workspace = analyzer.GetWorkspace();
 
-			var workspace = MSBuildWorkspace.Create();
 			workspace.WorkspaceFailed += (s, e) =>
 			{
 				Console.Error.WriteLine(e.Diagnostic.Message);
 			};
-            var testProject = workspace.OpenProjectAsync(GetProjectFile("Tests"));
-            var nestProject = workspace.OpenProjectAsync(GetProjectFile("Nest"));
-            var elasticSearchNetProject = workspace.OpenProjectAsync(GetProjectFile("Elasticsearch.Net"));
 
-		    var projects = new []
-		    {
-		        await testProject,
-		        await nestProject,
-		        await elasticSearchNetProject
-		    }.ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);
+			// Buildalyzer, similar to MsBuildWorkspace with the new csproj file format, does
+			// not pick up source documents in the project directory. Manually add them
+			AddDocumentsToWorkspace(workspace);
+
+		    var projects = workspace.CurrentSolution.Projects
+			    .ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);
 
             foreach (var file in GetDocumentFiles(projects).SelectMany(s => s))
 			{
@@ -77,6 +79,33 @@ namespace DocGenerator
 			{
 				Console.WriteLine("Press any key to continue...");
 				Console.ReadKey();
+			}
+		}
+
+		private static void AddDocumentsToWorkspace(AdhocWorkspace workspace)
+		{
+			// we only need source for the Tests project.
+			var projects = workspace.CurrentSolution.Projects.Where(p => p.Name == "Tests").ToList();
+
+			for (var i = 0; i < projects.Count; i++)
+			{
+				var project = projects[i];
+				var files = (from f in Directory.GetFiles(Path.GetDirectoryName(project.FilePath), "*.cs", SearchOption.AllDirectories)
+					let dir = new DirectoryInfo(f)
+					where dir?.Parent != null && !SkipFolders.Contains(dir.Parent.Name)
+					select new FileInfo(f)).ToList();
+
+				for (var index = 0; index < files.Count; index++)
+				{
+					var file = files[index];
+					var document = project.AddDocument(file.Name, File.ReadAllText(file.FullName), filePath: file.FullName);
+					project = document.Project;
+				}
+
+				if (!workspace.TryApplyChanges(project.Solution))
+				{
+					Console.WriteLine($"failed to apply changes to workspace from project {project.Name}");
+				}
 			}
 		}
 	}

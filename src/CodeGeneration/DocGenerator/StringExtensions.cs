@@ -31,8 +31,8 @@ namespace DocGenerator
 		public static string LowercaseHyphenToPascal(this string lowercaseHyphenatedInput)
 		{
 			return Regex.Replace(
-                lowercaseHyphenatedInput.Replace("-", " "), 
-                @"\b([a-z])", 
+                lowercaseHyphenatedInput.Replace("-", " "),
+                @"\b([a-z])",
                 m => m.Captures[0].Value.ToUpper());
 		}
 
@@ -76,7 +76,7 @@ namespace DocGenerator
 		}
 
         ///<summary>
-        /// Removes the specified number of tabs (or spaces, assuming 4 spaces = 1 tab) 
+        /// Removes the specified number of tabs (or spaces, assuming 4 spaces = 1 tab)
         /// from each line of the input
         /// </summary>
         public static string RemoveNumberOfLeadingTabsOrSpacesAfterNewline(this string input, int numberOfTabs)
@@ -146,7 +146,16 @@ namespace DocGenerator
 			{ "_ctxNumberofCommits", "\"_source.numberOfCommits > 0\"" },
 			{ "Project.First.Name", "\"Lesch Group\"" },
 			{ "Project.First.NumberOfCommits", "775" },
-			{ "LastNameSearch", "\"Stokes\"" }
+			{ "LastNameSearch", "\"Stokes\"" },
+			{ "First.Language", "\"painless\"" },
+			{ "First.Init", "\"params._agg.map = [:]\"" },
+			{ "First.Map", "\"if (params._agg.map.containsKey(doc['state'].value)) params._agg.map[doc['state'].value] += 1 else params._agg.map[doc['state'].value] = 1;\"" },
+			{ "First.Reduce", "\"def reduce = [:]; for (agg in params._aggs) { for (entry in agg.map.entrySet()) { if (reduce.containsKey(entry.getKey())) reduce[entry.getKey()] += entry.getValue(); else reduce[entry.getKey()] = entry.getValue(); } } return reduce;\"" },
+			{ "Second.Language", "\"painless\"" },
+			{ "Second.Combine", "\"def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum\"" },
+			{ "Second.Init", "\"params._agg.commits = []\"" },
+			{ "Second.Map", "\"if (doc['state'].value == \\\"Stable\\\") { params._agg.commits.add(doc['numberOfCommits'].value) }\"" },
+			{ "Second.Reduce", "\"def sum = 0.0; for (a in params._aggs) { sum += a } return sum\"" },
 		};
 
 		public static bool TryGetJsonForAnonymousType(this string anonymousTypeString, out string json)

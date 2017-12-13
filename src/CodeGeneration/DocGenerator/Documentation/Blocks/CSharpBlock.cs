@@ -16,7 +16,7 @@ namespace DocGenerator.Documentation.Blocks
         private List<string> Callouts { get; } = new List<string>();
 
         public CSharpBlock(SyntaxNode node, int depth, string memberName = null)
-            : base(node.WithoutLeadingTrivia().ToFullString(),
+            : base(node.WithoutLeadingTrivia().ToFullStringWithoutPragmaWarningDirectiveTrivia(),
                 node.StartingLine(),
                 node.IsKind(SyntaxKind.ClassDeclaration) ? depth : depth + 2,
                 "csharp",
@@ -24,7 +24,7 @@ namespace DocGenerator.Documentation.Blocks
         {
         }
 
-        public void AddNode(SyntaxNode node) => Lines.Add(node.WithLeadingEndOfLineTrivia().ToFullString());
+        public void AddNode(SyntaxNode node) => Lines.Add(node.WithLeadingEndOfLineTrivia().ToFullStringWithoutPragmaWarningDirectiveTrivia());
 
         public override string ToAsciiDoc()
         {
@@ -52,7 +52,7 @@ namespace DocGenerator.Documentation.Blocks
 
         /// <summary>
         /// Extracts the callouts from code. The callout comment is defined inline within
-        /// source code to play nicely with C# semantics, but needs to be extracted and placed after the 
+        /// source code to play nicely with C# semantics, but needs to be extracted and placed after the
         /// source block delimiter to be valid asciidoc.
         /// </summary>
         private string ExtractCallOutsFromCode(string value)
