@@ -9,10 +9,9 @@ namespace Nest
 		private readonly string _name;
 		public Name(string name) { this._name = name; }
 
-		//TODO to explicit private implemenation
-		public string GetString(IConnectionConfigurationValues settings) => _name;
+		string IUrlParameter.GetString(IConnectionConfigurationValues settings) => _name;
 
-		private string DebugDisplay => GetString(null);
+		private string DebugDisplay => _name;
 
 		public static implicit operator Name(string name) => new Name(name);
 	}
