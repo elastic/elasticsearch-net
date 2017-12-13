@@ -74,16 +74,12 @@ namespace Elasticsearch.Net
 					}
 					catch (PipelineException pipelineException) when (!pipelineException.Recoverable)
 					{
-						if (response == null) response = pipelineException.Response as TResponse;
-						pipeline.MarkDead(node);
-						seenExceptions.Add(pipelineException);
+						HandlePipelineException(ref response, pipelineException, pipeline, node, seenExceptions);
 						break;
 					}
 					catch (PipelineException pipelineException)
 					{
-						if (response == null) response = pipelineException.Response as TResponse;
-						pipeline.MarkDead(node);
-						seenExceptions.Add(pipelineException);
+						HandlePipelineException(ref response, pipelineException, pipeline, node, seenExceptions);
 					}
 					catch (Exception killerException)
 					{
@@ -130,16 +126,12 @@ namespace Elasticsearch.Net
 					}
 					catch (PipelineException pipelineException) when (!pipelineException.Recoverable)
 					{
-						if (response == null) response = pipelineException.Response as TResponse;
-						pipeline.MarkDead(node);
-						seenExceptions.Add(pipelineException);
+						HandlePipelineException(ref response, pipelineException, pipeline, node, seenExceptions);
 						break;
 					}
 					catch (PipelineException pipelineException)
 					{
-						if (response == null) response = pipelineException.Response as TResponse;
-						pipeline.MarkDead(node);
-						seenExceptions.Add(pipelineException);
+						HandlePipelineException(ref response, pipelineException, pipeline, node, seenExceptions);
 					}
 					catch (Exception killerException)
 					{
@@ -161,6 +153,15 @@ namespace Elasticsearch.Net
 				}
 				return FinalizeResponse(requestData, pipeline, seenExceptions, response);
 			}
+		}
+
+		private static void HandlePipelineException<TResponse>(
+			ref TResponse response, PipelineException ex, IRequestPipeline pipeline, Node node, List<PipelineException> seenExceptions)
+			where TResponse : class, IElasticsearchResponse, new()
+		{
+			if (response == null) response = ex.Response as TResponse;
+			pipeline.MarkDead(node);
+			seenExceptions.Add(ex);
 		}
 
 		private TResponse FinalizeResponse<TResponse>(RequestData requestData, IRequestPipeline pipeline, List<PipelineException> seenExceptions,
