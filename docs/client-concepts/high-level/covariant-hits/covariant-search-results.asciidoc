@@ -29,27 +29,29 @@ public interface ISearchResult
 {
     string Name { get; set; }
 }
+
+public abstract class BaseX : ISearchResult
+{
+    public string Name { get; set; }
+}
 ----
 
 We have three implementations of `ISearchResult` namely `A`, `B` and `C`
 
 [source,csharp]
 ----
-public class A : ISearchResult
+public class A : BaseX
 {
-    public string Name { get; set; }
     public int PropertyOnA { get; set; }
 }
 
-public class B : ISearchResult
+public class B : BaseX
 {
-    public string Name { get; set; }
     public int PropertyOnB { get; set; }
 }
 
-public class C : ISearchResult
+public class C : BaseX
 {
-    public string Name { get; set; }
     public int PropertyOnC { get; set; }
 }
 ----
@@ -242,6 +244,30 @@ and assume that properties that only exist on the subclass itself are properly f
 
 [source,csharp]
 ----
+aDocuments.Should().OnlyContain(a => a.PropertyOnA > 0);
+bDocuments.Should().OnlyContain(a => a.PropertyOnB > 0);
+cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);
+----
+
+Covariance also works over subclasses not just interfaces
+
+[source,csharp]
+----
+var result = this._client.Search<BaseX>(s => s
+    .Type(Types.Type(typeof(A), typeof(B), typeof(C)))
+    .Size(100)
+);
+result.ShouldBeValid();
+result.Documents.Count.Should().Be(100);
+
+var aDocuments = result.Documents.OfType<A>();
+var bDocuments = result.Documents.OfType<B>();
+var cDocuments = result.Documents.OfType<C>();
+
+aDocuments.Count().Should().Be(25);
+bDocuments.Count().Should().Be(25);
+cDocuments.Count().Should().Be(50);
+
 aDocuments.Should().OnlyContain(a => a.PropertyOnA > 0);
 bDocuments.Should().OnlyContain(a => a.PropertyOnB > 0);
 cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);

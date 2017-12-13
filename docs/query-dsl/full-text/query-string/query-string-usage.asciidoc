@@ -71,6 +71,7 @@ new QueryStringQuery
     AutoGeneratePhraseQueries = true,
     MaximumDeterminizedStates = 2,
     LowercaseExpendedTerms = true,
+    Locale = "en_US",
     EnablePositionIncrements = true,
     Escape = true,
     UseDisMax = true,
@@ -83,8 +84,7 @@ new QueryStringQuery
     AnalyzeWildcard = true,
     MinimumShouldMatch = 2,
     QuoteFieldSuffix = "'",
-    Lenient = true,
-    Locale = "en_US",
+    Lenient = true,            
     Timezone = "root"
 }
 ----

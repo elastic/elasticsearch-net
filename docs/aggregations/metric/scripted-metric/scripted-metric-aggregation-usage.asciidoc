@@ -24,10 +24,10 @@ please modify the original csharp file found at the link and submit the PR with 
 s => s
 .Aggregations(a => a
     .ScriptedMetric("sum_the_hard_way", sm => sm
-        .InitScript(ss=>ss.Inline("_agg['commits'] = []").Lang("groovy"))
-        .MapScript(ss=>ss.Inline("if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }").Lang("groovy"))
-        .CombineScript(ss=>ss.Inline("sum = 0; for (c in _agg.commits) { sum += c }; return sum").Lang("groovy"))
-        .ReduceScript(ss=>ss.Inline("sum = 0; for (a in _aggs) { sum += a }; return sum").Lang("groovy"))
+        .InitScript(ss => ss.Inline("_agg['commits'] = []").Lang("groovy"))
+        .MapScript(ss => ss.Inline("if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }").Lang("groovy"))
+        .CombineScript(ss => ss.Inline("sum = 0; for (c in _agg.commits) { sum += c }; return sum").Lang("groovy"))
+        .ReduceScript(ss => ss.Inline("sum = 0; for (a in _aggs) { sum += a }; return sum").Lang("groovy"))
     )
 )
 ----
@@ -40,10 +40,10 @@ new SearchRequest<Project>
 {
     Aggregations = new ScriptedMetricAggregation("sum_the_hard_way")
     {
-        InitScript = new InlineScript("_agg['commits'] = []") { Lang = "groovy" },
-        MapScript = new InlineScript("if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }"){ Lang = "groovy" },
-        CombineScript = new InlineScript("sum = 0; for (c in _agg.commits) { sum += c }; return sum"){ Lang = "groovy" },
-        ReduceScript = new InlineScript("sum = 0; for (a in _aggs) { sum += a }; return sum"){ Lang = "groovy" }
+        InitScript = new InlineScript("_agg['commits'] = []") {Lang = "groovy"},
+        MapScript = new InlineScript("if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }") {Lang = "groovy"},
+        CombineScript = new InlineScript("sum = 0; for (c in _agg.commits) { sum += c }; return sum") {Lang = "groovy"},
+        ReduceScript = new InlineScript("sum = 0; for (a in _aggs) { sum += a }; return sum") {Lang = "groovy"}
     }
 }
 ----
@@ -85,5 +85,108 @@ response.ShouldBeValid();
 var sumTheHardWay = response.Aggs.ScriptedMetric("sum_the_hard_way");
 sumTheHardWay.Should().NotBeNull();
 sumTheHardWay.Value<int>().Should().BeGreaterThan(0);
+----
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .ScriptedMetric("by_state_total", sm => sm
+        .InitScript(ss => ss.Inline(First.Init).Lang(First.Language))
+        .MapScript(ss => ss.Inline(First.Map).Lang(First.Language))
+        .ReduceScript(ss => ss.Inline(First.Reduce).Lang(First.Language))
+    )
+    .ScriptedMetric("total_commits", sm => sm
+        .InitScript(ss => ss.Inline(Second.Init).Lang(Second.Language))
+        .MapScript(ss => ss.Inline(Second.Map).Lang(Second.Language))
+        .CombineScript(ss => ss.Inline(Second.Combine).Lang(Second.Language))
+        .ReduceScript(ss => ss.Inline(Second.Reduce).Lang(Second.Language))
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations =
+        new ScriptedMetricAggregation("by_state_total")
+        {
+            InitScript = new InlineScript(First.Init) {Lang = First.Language},
+            MapScript = new InlineScript(First.Map) {Lang = First.Language},
+            ReduceScript = new InlineScript(First.Reduce) {Lang = First.Language}
+        } &&
+        new ScriptedMetricAggregation("total_commits")
+        {
+            InitScript = new InlineScript(Second.Init) {Lang = Second.Language},
+            MapScript = new InlineScript(Second.Map) {Lang = Second.Language},
+            CombineScript = new InlineScript(Second.Combine) {Lang = Second.Language},
+            ReduceScript = new InlineScript(Second.Reduce) {Lang = Second.Language}
+        }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "by_state_total": {
+      "scripted_metric": {
+        "init_script": {
+          "inline": "params._agg.map = [:]",
+          "lang": "painless"
+        },
+        "map_script": {
+          "inline": "if (params._agg.map.containsKey(doc['state'].value)) params._agg.map[doc['state'].value] += 1 else params._agg.map[doc['state'].value] = 1;",
+          "lang": "painless"
+        },
+        "reduce_script": {
+          "inline": "def reduce = [:]; for (agg in params._aggs) { for (entry in agg.map.entrySet()) { if (reduce.containsKey(entry.getKey())) reduce[entry.getKey()] += entry.getValue(); else reduce[entry.getKey()] = entry.getValue(); } } return reduce;",
+          "lang": "painless"
+        }
+      }
+    },
+    "total_commits": {
+      "scripted_metric": {
+        "init_script": {
+          "inline": "params._agg.commits = []",
+          "lang": "painless"
+        },
+        "map_script": {
+          "inline": "if (doc['state'].value == \"Stable\") { params._agg.commits.add(doc['numberOfCommits'].value) }",
+          "lang": "painless"
+        },
+        "combine_script": {
+          "inline": "def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum",
+          "lang": "painless"
+        },
+        "reduce_script": {
+          "inline": "def sum = 0.0; for (a in params._aggs) { sum += a } return sum",
+          "lang": "painless"
+        }
+      }
+    }
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+var by_state_total = response.Aggs.ScriptedMetric("by_state_total");
+var total_commits = response.Aggs.ScriptedMetric("total_commits");
+
+by_state_total.Should().NotBeNull();
+total_commits.Should().NotBeNull();
+
+by_state_total.Value<IDictionary<string, int>>().Should().NotBeNull();
+total_commits.Value<int>().Should().BeGreaterThan(0);
 ----
 

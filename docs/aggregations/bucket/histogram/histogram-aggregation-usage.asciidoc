@@ -28,6 +28,7 @@ s => s
         .Interval(100)
         .Missing(0)
         .Order(HistogramOrder.KeyDescending)
+        .Offset(1.1)
     )
 )
 ----
@@ -43,7 +44,8 @@ new SearchRequest<Project>
         Field = Field<Project>(p => p.NumberOfCommits),
         Interval = 100,
         Missing = 0,
-        Order = HistogramOrder.KeyDescending
+        Order = HistogramOrder.KeyDescending,
+        Offset = 1.1
     }
 }
 ----
@@ -60,7 +62,8 @@ new SearchRequest<Project>
         "missing": 0.0,
         "order": {
           "_key": "desc"
-        }
+        },
+        "offset": 1.1
       }
     }
   }
