@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DocGenerator.Documentation.Blocks;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace DocGenerator.Walkers
 {
@@ -13,33 +14,34 @@ namespace DocGenerator.Walkers
         public async Task<IList<IDocumentationBlock>> ConvertAsync(Document document)
         {
             var node = await document.GetSyntaxRootAsync().ConfigureAwait(false);
-            IList<IDocumentationBlock> blocks = new List<IDocumentationBlock>();
+	        string fileName = document.Name;
+	        IList<IDocumentationBlock> blocks = new List<IDocumentationBlock>();
 
-            // use different walking rules for different source files
-            if (document.Name.EndsWith("UsageTests.cs", StringComparison.OrdinalIgnoreCase) ||
-                document.Name.Equals("WritingAggregations.doc.cs", StringComparison.OrdinalIgnoreCase))
-            {
-                var walker = new UsageTestsWalker(blocks);
-                walker.Visit(node);
+	        // use different walking rules for different source files
+	        if (fileName.EndsWith("UsageTests.cs", StringComparison.OrdinalIgnoreCase) ||
+	            fileName.Equals("WritingAggregations.doc.cs", StringComparison.OrdinalIgnoreCase))
+	        {
+		        var walker = new UsageTestsWalker(blocks);
+		        walker.Visit(node);
 
-                // apply the usage conventions to writing aggregations,
-                // but don't rearrange any blocks
-                if (!document.Name.Equals("WritingAggregations.doc.cs", StringComparison.OrdinalIgnoreCase))
-                {
-                    blocks = RearrangeCodeBlocks(blocks);
-                }
-            }
-            else
-            {
-                var walker = new CSharpDocumentationFileWalker(blocks);
-                walker.Visit(node);
-                blocks = CondenseCodeBlocks(blocks);
-            }
-           
-            return blocks;
+		        // apply the usage conventions to writing aggregations,
+		        // but don't rearrange any blocks
+		        if (!fileName.Equals("WritingAggregations.doc.cs", StringComparison.OrdinalIgnoreCase))
+		        {
+			        blocks = RearrangeCodeBlocks(blocks);
+		        }
+	        }
+	        else
+	        {
+		        var walker = new CSharpDocumentationFileWalker(blocks);
+		        walker.Visit(node);
+		        blocks = CondenseCodeBlocks(blocks);
+	        }
+
+	        return blocks;
         }
 
-        private IList<IDocumentationBlock> CondenseCodeBlocks(IList<IDocumentationBlock> blocks)
+	    private IList<IDocumentationBlock> CondenseCodeBlocks(IList<IDocumentationBlock> blocks)
         {
             var newBlocks = new List<IDocumentationBlock>(blocks.Count);
             for (int i = 0; i < blocks.Count; i++)
@@ -52,8 +54,7 @@ namespace DocGenerator.Walkers
                     continue;
                 }
 
-                var previousBlock = newBlocks.LastOrDefault() as CodeBlock;
-                if (previousBlock != null && previousBlock.Language == codeBlock.Language)
+	            if (newBlocks.LastOrDefault() is CodeBlock previousBlock && previousBlock.Language == codeBlock.Language)
                 {
                     previousBlock.AddLine(Environment.NewLine);
                     previousBlock.AddLine(codeBlock.Value);

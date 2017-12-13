@@ -20,7 +20,7 @@ module Documentation =
         ExecProcess (fun p ->
             p.WorkingDirectory <- Paths.Source("CodeGeneration") @@ docGenerator.Name
             p.FileName <- generator
-        ) (TimeSpan.FromMinutes 1.) |> ignore
+        ) (TimeSpan.FromMinutes 2.) |> ignore
 
     // TODO: hook documentation validation into the process
     let Validate() = 

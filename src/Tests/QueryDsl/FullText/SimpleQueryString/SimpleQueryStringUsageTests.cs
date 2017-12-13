@@ -39,7 +39,7 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 			Analyzer = "standard",
 			DefaultOperator = Operator.Or,
 			Flags = SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near,
-#pragma warning disable 618 // usage of lowercase_expanded_terms and locale
+#pragma warning disable 618
 			Locale = "en_US",
 			LowercaseExpendedTerms = true,
 #pragma warning restore 618
@@ -49,7 +49,7 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-#pragma warning disable 618 // usage of lowercase_expanded_terms and locale
+#pragma warning disable 618
 			.SimpleQueryString(c => c
 				.Name("named_query")
 				.Boost(1.1)
