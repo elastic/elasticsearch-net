@@ -148,6 +148,6 @@ Expect("week").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Week);
 Expect("year").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Year);
 
 Expect("2d").WhenSerializing<Union<DateInterval, Time>>((Time)"2d");
-Expect("1.16w").WhenSerializing<Union<DateInterval, Time>>((Time)TimeSpan.FromDays(8.1));
+Expect("1.15714285714286w").WhenSerializing<Union<DateInterval, Time>>((Time)TimeSpan.FromDays(8.1));
 ----
 

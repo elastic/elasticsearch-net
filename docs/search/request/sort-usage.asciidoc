@@ -40,6 +40,11 @@ s => s
         .NestedPath(p => p.Tags)
         .NestedFilter(q => q.MatchAll())
     )
+    .Field(f => f
+        .Field(p => p.NumberOfCommits)
+        .Order(SortOrder.Descending)
+        .Missing(-1)
+    )
     .GeoDistance(g => g
         .Field(p => p.Location)
         .DistanceType(GeoDistanceType.Arc)
@@ -76,11 +81,17 @@ new SearchRequest<Project>
         {
             Field = Field<Project>(p=>p.LastActivity),
             Order = SortOrder.Descending,
-            Missing = "_last",
+            MissingValue = "_last",
             UnmappedType = FieldType.Date,
             Mode = SortMode.Average,
             NestedPath = Field<Project>(p=>p.Tags),
             NestedFilter = new MatchAllQuery(),
+        },
+        new SortField
+        {
+            Field = Field<Project>(p=>p.NumberOfCommits),
+            Order = SortOrder.Descending,
+            MissingValue = -1
         },
         new GeoDistanceSort
         {
@@ -142,6 +153,12 @@ new SearchRequest<Project>
         },
         "nested_path": "tags",
         "unmapped_type": "date"
+      }
+    },
+    {
+      "numberOfCommits": {
+        "missing": -1,
+        "order": "desc"
       }
     },
     {

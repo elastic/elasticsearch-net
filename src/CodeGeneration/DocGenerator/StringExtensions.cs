@@ -148,6 +148,7 @@ namespace DocGenerator
 			{ "LastNameSearch", "\"Stokes\"" },
 			{ "First.Language", "\"painless\"" },
 			{ "First.Init", "\"params._agg.map = [:]\"" },
+			{ "First.Combine", "\"sum = 0; for (c in _agg.commits) { sum += c }; return sum\""},
 			{ "First.Map", "\"if (params._agg.map.containsKey(doc['state'].value)) params._agg.map[doc['state'].value] += 1 else params._agg.map[doc['state'].value] = 1;\"" },
 			{ "First.Reduce", "\"def reduce = [:]; for (agg in params._aggs) { for (entry in agg.map.entrySet()) { if (reduce.containsKey(entry.getKey())) reduce[entry.getKey()] += entry.getValue(); else reduce[entry.getKey()] = entry.getValue(); } } return reduce;\"" },
 			{ "Second.Language", "\"painless\"" },

@@ -39,7 +39,7 @@ InitializerExample
     "filter": {
       "myAscii": {
         "type": "asciifolding",
-        "preserveOriginal": true
+        "preserve_original": true
       },
       "myCommonGrams": {
         "type": "common_grams",
