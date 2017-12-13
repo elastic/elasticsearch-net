@@ -57,7 +57,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				.Mappings(ms => ms
 					.Map<Document>(m => m
 						.AutoMap<Company>() // <1> Auto map `Company`
-						.AutoMap<Employee>() // <1> Auto map `Employee`
+						.AutoMap<Employee>() // <2> Auto map `Employee`
 					)
 				);
 
