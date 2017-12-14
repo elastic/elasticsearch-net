@@ -11,7 +11,7 @@ namespace Nest
 	{
 		///<summary>The name of the analyzer to use</summary>
 		[JsonProperty("analyzer")]
-		Union<string, IAnalyzer> Analyzer { get; set; }
+		string Analyzer { get; set; }
 
 		///<summary>The name of the normalizer to use</summary>
 		[JsonProperty("normalizer")]
@@ -58,7 +58,7 @@ namespace Nest
 		public Union<string, ITokenizer> Tokenizer { get; set; }
 
 		/// <inheritdoc />
-		public Union<string, IAnalyzer> Analyzer { get; set; }
+		public string Analyzer { get; set; }
 
 		/// <inheritdoc />
 		public bool? Explain { get; set; }
@@ -85,7 +85,7 @@ namespace Nest
 	[DescriptorFor("IndicesAnalyze")]
 	public partial class AnalyzeDescriptor
 	{
-		Union<string, IAnalyzer> IAnalyzeRequest.Analyzer { get; set; }
+		string IAnalyzeRequest.Analyzer { get; set; }
 		AnalyzeCharFilters IAnalyzeRequest.CharFilter { get; set; }
 		AnalyzeTokenFilters IAnalyzeRequest.Filter { get; set; }
 		string IAnalyzeRequest.Normalizer { get; set; }
@@ -108,14 +108,6 @@ namespace Nest
 
 		///<summary>The name of the analyzer to use</summary>
 		public AnalyzeDescriptor Analyzer(string analyser) => Assign(a => a.Analyzer = analyser);
-
-		///<summary>An inline definition of an analyzer</summary>
-		public AnalyzeDescriptor Analyzer(Func<AnalyzersDescriptor, IAnalyzer> analyzer) =>
-			Assign(a =>
-			{
-				var v = analyzer?.Invoke(new AnalyzersDescriptor());
-				if (v != null) a.Analyzer = new Union<string, IAnalyzer>(v);
-			});
 
 		///<summary>A collection of character filters to use for the analysis</summary>
 		public AnalyzeDescriptor CharFilter(params string[] charFilter) => Assign(a => a.CharFilter = charFilter);
@@ -155,10 +147,10 @@ namespace Nest
 		///<summary>Return more details, and output the analyzer chain per step in the process</summary>
 		public AnalyzeDescriptor Explain(bool explain = true) => Assign(a => a.Explain = explain);
 
-		/// <inheritdoc cref="IAnalyzeRequst.Attributes" />
+		///<summary>Filter only certain token attributes to be returned</summary>
 		public AnalyzeDescriptor Attributes(params string[] attributes) => Assign(a => a.Attributes = attributes);
 
-		/// <inheritdoc cref="IAnalyzeRequst.Attributes" />
+		///<summary>Filter only certain token attributes to be returned</summary>
 		public AnalyzeDescriptor Attributes(IEnumerable<string> attributes) => Assign(a => a.Attributes = attributes.ToArray());
 	}
 }

@@ -48,11 +48,12 @@ namespace Tests.Indices.Analyze
 		};
 	}
 
-	public class AnalyzeInlineApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
+	public class AnalyzeInlineAnalyzerApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
 	{
 		protected const string TextToAnalyze = "F# is <b>THE SUPERIOR</b> language :) :gandalf: ";
 
-		public AnalyzeInlineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public AnalyzeInlineAnalyzerApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Analyze(f),
 			fluentAsync: (client, f) => client.AnalyzeAsync(f),
@@ -118,7 +119,68 @@ namespace Tests.Indices.Analyze
 		}
 	}
 
-	public class AnalyzeExplainApiTests : AnalyzeInlineApiTests
+	public class AnalyzeInlineNormalizerApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
+	{
+		private const string TextToAnalyze = "F# is <b>THE SUPERIOR</b> language :) :gandalf: ";
+
+		public AnalyzeInlineNormalizerApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.Analyze(f),
+			fluentAsync: (client, f) => client.AnalyzeAsync(f),
+			request: (client, r) => client.Analyze(r),
+			requestAsync: (client, r) => client.AnalyzeAsync(r)
+		);
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override string UrlPath => $"/_analyze";
+
+		protected override object ExpectJson => new
+		{
+			text = new[] { TextToAnalyze },
+			char_filter = new object[]
+			{
+				new { type = "mapping", mappings = new[] { "F# => fsharp" } }
+			},
+			filter = new object[]
+			{
+				"lowercase"
+			}
+		};
+
+		protected override Func<AnalyzeDescriptor, IAnalyzeRequest> Fluent => d => d
+			.Text(TextToAnalyze)
+			.CharFilter(c => c
+				.Mapping(m => m.Mappings("F# => fsharp"))
+			)
+			.Filter(t => t
+				.Name("lowercase")
+			);
+
+		protected override AnalyzeRequest Initializer => new AnalyzeRequest
+		{
+			Text = new[] { TextToAnalyze },
+			CharFilter = new AnalyzeCharFilters
+			{
+				new MappingCharFilter { Mappings = new[] { "F# => fsharp"}}
+			},
+			Filter = new AnalyzeTokenFilters
+			{
+				"lowercase"
+			}
+		};
+
+		protected override void ExpectResponse(IAnalyzeResponse response)
+		{
+			response.Tokens.Should().HaveCount(1);
+			var token = response.Tokens.Single().Token;
+			token.Should().Be("fsharp is <b>the superior</b> language :) :gandalf: ");
+		}
+	}
+
+	public class AnalyzeExplainApiTests : AnalyzeInlineAnalyzerApiTests
 	{
 		public AnalyzeExplainApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
