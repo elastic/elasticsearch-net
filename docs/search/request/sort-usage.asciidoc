@@ -38,20 +38,24 @@ s => s
         .NestedPath(p => p.Tags)
         .NestedFilter(q => q.MatchAll())
     )
+    .Field(f => f
+        .Field(p => p.NumberOfCommits)
+        .Order(SortOrder.Descending)
+        .Missing(-1)
+    )
     .GeoDistance(g => g
         .Field(p => p.Location)
         .DistanceType(GeoDistanceType.Arc)
         .Order(SortOrder.Ascending)
         .Unit(DistanceUnit.Centimeters)
         .Mode(SortMode.Min)
-        .PinTo(new GeoLocation(70, -70), new GeoLocation(-12, 12))
+        .Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
     )
     .Script(sc => sc
         .Type("number")
         .Ascending()
         .Script(script => script
-            .Inline("doc['numberOfCommits'].value * factor")
-            .Lang("groovy")
+            .Source("doc['numberOfCommits'].value * params.factor")
             .Params(p => p.Add("factor", 1.1))
         )
     )
@@ -81,6 +85,12 @@ new SearchRequest<Project>
             NestedPath = Field<Project>(p=>p.Tags),
             NestedFilter = new MatchAllQuery(),
         },
+        new SortField
+        {
+            Field = Field<Project>(p=>p.NumberOfCommits),
+            Order = SortOrder.Descending,
+            Missing = -1
+        },
         new GeoDistanceSort
         {
             Field = "location",
@@ -94,9 +104,8 @@ new SearchRequest<Project>
         {
             Type = "number",
             Order = SortOrder.Ascending,
-            Script =  new InlineScript("doc['numberOfCommits'].value * factor")
+            Script =  new InlineScript("doc['numberOfCommits'].value * params.factor")
             {
-                Lang = "groovy",
                 Params = new Dictionary<string, object>
                 {
                     { "factor", 1.1 }
@@ -145,6 +154,12 @@ new SearchRequest<Project>
       }
     },
     {
+      "numberOfCommits": {
+        "missing": -1,
+        "order": "desc"
+      }
+    },
+    {
       "_geo_distance": {
         "location": [
           {
@@ -170,8 +185,7 @@ new SearchRequest<Project>
           "params": {
             "factor": 1.1
           },
-          "inline": "doc['numberOfCommits'].value * factor",
-          "lang": "groovy"
+          "source": "doc['numberOfCommits'].value * params.factor"
         }
       }
     }

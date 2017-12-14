@@ -27,7 +27,7 @@ s => s
         )
         .Field(p => p.NumberOfCommits)
         .Missing(10)
-        .Script(ss=>ss.Inline("_value * 1.2").Lang("groovy"))
+        .Script(ss=>ss.Source("_value * 1.2"))
     )
 )
 ----
@@ -45,7 +45,7 @@ new SearchRequest<Project>
             { "foo", "bar" }
         },
         Missing = 10,
-        Script = new InlineScript("_value * 1.2") { Lang = "groovy" }
+        Script = new InlineScript("_value * 1.2")
     }
 }
 ----
@@ -63,8 +63,7 @@ new SearchRequest<Project>
         "field": "numberOfCommits",
         "missing": 10.0,
         "script": {
-          "inline": "_value * 1.2",
-          "lang": "groovy"
+          "source": "_value * 1.2"
         }
       }
     }

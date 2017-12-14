@@ -33,7 +33,7 @@ s => s
                 .BucketsPath(bp => bp
                     .Add("totalCommits", "commits")
                 )
-                .Script(ss => ss.Inline("totalCommits >= 500").Lang("groovy"))
+                .Script(ss => ss.Source("params.totalCommits >= 500"))
             )
         )
     )
@@ -58,7 +58,7 @@ new SearchRequest<Project>()
                     { "totalCommits", "commits" },
                 })
             {
-                Script = new InlineScript("totalCommits >= 500") { Lang = "groovy" }
+                Script = new InlineScript("params.totalCommits >= 500")
             }
     }
 }
@@ -87,8 +87,7 @@ new SearchRequest<Project>()
               "totalCommits": "commits"
             },
             "script": {
-              "inline": "totalCommits >= 500",
-              "lang": "groovy"
+              "source": "params.totalCommits >= 500"
             }
           }
         }

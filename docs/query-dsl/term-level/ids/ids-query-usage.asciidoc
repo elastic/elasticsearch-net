@@ -48,8 +48,8 @@ new IdsQuery
   "ids": {
     "_name": "named_query",
     "boost": 1.1,
-    "types": [
-      "project",
+    "type": [
+      "doc",
       "developer"
     ],
     "values": [

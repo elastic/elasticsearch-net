@@ -92,11 +92,15 @@ own serializer, or by modifying how NEST's serializer behaves.
 
 * <<changing-serializers,Changing Serializers>>
 
+* <<custom-serialization,Custom Serialization>>
+
 * <<modifying-default-serializer,Modifying Default Serializer>>
 
 :includes-from-dirs: client-concepts/high-level/serialization
 
 include::client-concepts/high-level/serialization/changing-serializers.asciidoc[]
+
+include::client-concepts/high-level/serialization/custom-serialization.asciidoc[]
 
 include::client-concepts/high-level/serialization/modifying-default-serializer.asciidoc[]
 
@@ -232,6 +236,8 @@ include::client-concepts/high-level/inference/index-name-inference.asciidoc[]
 include::client-concepts/high-level/inference/indices-paths.asciidoc[]
 
 include::client-concepts/high-level/inference/property-inference.asciidoc[]
+
+include::client-concepts/high-level/inference/types-and-relations-inference.asciidoc[]
 
 [[common-types]]
 == Common Types

@@ -148,8 +148,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.ShouldBeValid();
-response.Aggs.Filter("empty_filter").DocCount.Should().BeGreaterThan(0);
+response.ShouldNotBeValid();
 ----
 
 ==== Fluent DSL example
@@ -161,8 +160,7 @@ s => s
     .Filter(_aggName, date => date
         .Filter(f => f
             .Script(b => b
-                .Inline(_ctxNumberofCommits)
-                .Lang("groovy")
+                .Source(_ctxNumberofCommits)
             )
         )
     )
@@ -179,9 +177,8 @@ new SearchRequest<Project>
     {
         Filter = new ScriptQuery
         {
-            Inline = _ctxNumberofCommits,
-            Lang = "groovy"
-    }
+            Source = _ctxNumberofCommits
+        }
     }
 }
 ----
@@ -195,8 +192,7 @@ new SearchRequest<Project>
       "filter": {
         "script": {
           "script": {
-            "inline": "_source.numberOfCommits > 0",
-            "lang": "groovy"
+            "source": "_source.numberOfCommits > 0"
           }
         }
       }

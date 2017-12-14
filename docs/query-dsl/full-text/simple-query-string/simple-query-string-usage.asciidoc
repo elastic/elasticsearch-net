@@ -29,7 +29,7 @@ q
     .DefaultOperator(Operator.Or)
     .Flags(SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near)
     .Locale("en_US")
-    .LowercaseExpendedTerms()
+    .LowercaseExpandedTerms()
     .Lenient()
     .AnalyzeWildcard()
     .MinimumShouldMatch("30%")
@@ -50,7 +50,7 @@ new SimpleQueryStringQuery
     DefaultOperator = Operator.Or,
     Flags = SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near,
     Locale = "en_US",
-    LowercaseExpendedTerms = true,
+    LowercaseExpandedTerms = true,
     Lenient = true,
     AnalyzeWildcard = true,
     MinimumShouldMatch = "30%"

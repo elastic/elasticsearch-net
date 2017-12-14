@@ -20,6 +20,7 @@ please modify the original csharp file found at the link and submit the PR with 
 [source,csharp]
 ----
 s => s
+.Index(DefaultSeeder.ProjectsAliasFilter)
 .Collapse(c => c
     .Field(f => f.State)
     .MaxConcurrentGroupSearches(1000)
@@ -35,7 +36,7 @@ s => s
 
 [source,csharp]
 ----
-new SearchRequest<Project>
+new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
 {
     Collapse = new FieldCollapse
     {
@@ -72,7 +73,7 @@ new SearchRequest<Project>
 [source,csharp]
 ----
 var numberOfStates = Enum.GetValues(typeof(StateOfBeing)).Length;
-response.HitsMetaData.Total.Should().BeGreaterThan(numberOfStates);
+response.HitsMetadata.Total.Should().BeGreaterThan(numberOfStates);
 response.Hits.Count.Should().Be(numberOfStates);
 foreach (var hit in response.Hits)
 {

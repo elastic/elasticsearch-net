@@ -30,12 +30,10 @@ q
     .Analyzer("standard")
     .QuoteAnalyzer("quote-an")
     .AllowLeadingWildcard()
-    .AutoGeneratePhraseQueries()
     .MaximumDeterminizedStates(2)
-    .LowercaseExpendedTerms()
+    .LowercaseExpandedTerms()
     .EnablePositionIncrements()
     .Escape()
-    .UseDisMax()
     .FuzzyPrefixLength(2)
     .FuzzyMaxExpansions(3)
     .FuzzyRewrite(MultiTermQueryRewrite.ConstantScore)
@@ -66,12 +64,11 @@ new QueryStringQuery
     Analyzer = "standard",
     QuoteAnalyzer = "quote-an",
     AllowLeadingWildcard = true,
-    AutoGeneratePhraseQueries = true,
     MaximumDeterminizedStates = 2,
-    LowercaseExpendedTerms = true,
+    LowercaseExpandedTerms = true,
+    Locale = "en_US",
     EnablePositionIncrements = true,
     Escape = true,
-    UseDisMax = true,
     FuzzyPrefixLength = 2,
     FuzzyMaxExpansions = 3,
     FuzzyRewrite = MultiTermQueryRewrite.ConstantScore,
@@ -82,7 +79,6 @@ new QueryStringQuery
     MinimumShouldMatch = 2,
     QuoteFieldSuffix = "'",
     Lenient = true,
-    Locale = "en_US",
     Timezone = "root"
 }
 ----
@@ -106,7 +102,6 @@ new QueryStringQuery
     "fuzziness": "AUTO",
     "fuzzy_prefix_length": 2,
     "analyze_wildcard": true,
-    "auto_generate_phrase_queries": true,
     "max_determinized_states": 2,
     "minimum_should_match": 2,
     "lenient": true,
@@ -116,7 +111,6 @@ new QueryStringQuery
       "description",
       "myOtherField"
     ],
-    "use_dis_max": true,
     "tie_breaker": 1.2,
     "rewrite": "constant_score",
     "fuzzy_rewrite": "constant_score",

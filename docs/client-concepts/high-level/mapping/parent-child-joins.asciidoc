@@ -1,0 +1,200 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/ClientConcepts/HighLevel/Mapping/ParentChildJoins.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[parent-child-joins]]
+=== Parent Child joins using the join mapping
+
+Prior to Elasticsearch 6.x you could have multiple types in a single index. Through the special _parent field mapping of a given type
+one could create 1 to N relationship of parent => children documents. This worked because when indexing children you passed a`_parent` id which would act as the routing key making sure a parent and its (grand)children all lived on the same shard.
+
+Starting with 6.x indices, you may no longer have multiple types in a single index. One reason for this is that if for instance
+two types * have the same `name` property they need to be mapped exactly the same but all the API's acted as if you could map
+them individually which often lead to confusion.
+
+So how do you create a parent join now that indices no longer allow you store different types in the same index and therefor also
+not on the same shard?
+
+[source,csharp]
+----
+public abstract class MyDocument
+{
+    public int Id { get; set; }
+    public JoinField MyJoinField { get; set; }
+}
+
+public class MyParent : MyDocument
+{
+    [Text]
+    public string ParentProperty { get; set; }
+}
+
+public class MyChild : MyDocument
+{
+    [Text]
+    public string ChildProperty { get; set; }
+}
+----
+
+==== Default mapping for String properties
+
+When using <<auto-map, Auto Mapping>>, the inferred mapping for a `string`
+POCO type is a `text` datatype with multi fields including a `keyword` sub field
+
+[source,csharp]
+----
+var connectionSettings = new ConnectionSettings()
+    .InferMappingFor<MyDocument>(m => m.IndexName("index").TypeName("doc"))
+    .InferMappingFor<MyChild>(m => m.IndexName("index").TypeName("doc"))
+    .InferMappingFor<MyParent>(m => m.IndexName("index").TypeName("doc").RelationName("parent"));
+
+var descriptor = new CreateIndexDescriptor(Index<MyDocument>())
+    .Mappings(ms => ms
+        .Map<MyDocument>(m => m
+            .AutoMap<MyParent>() <1>
+            .AutoMap<MyChild>() <2>
+            .Properties(props => props
+                .Join(j => j <3>
+                    .Name(p=>p.MyJoinField)
+                    .Relations(r => r
+                        .Join<MyDocument, MyChild>()
+                    )
+                )
+            )
+        )
+    );
+----
+<1> Map all of the MyParent properties
+
+<2> Map all of the MyChild properties
+
+<3> Automap does not automatically translate `JoinField` since we are only allowed to have one.
+
+[source,javascript]
+----
+{
+  "mappings": {
+    "mydocument": {
+      "properties": {
+        "parentProperty": {
+          "type": "text"
+        },
+        "childProperty": {
+          "type": "text"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "myJoinField": {
+          "type": "join",
+          "relations": {
+            "mydocument": "mychild"
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+Now that we have our join field set up we'll index our two subclasses under the same type `mydocument`
+
+[source,csharp]
+----
+var parentDocument = new MyParent
+{
+    Id = 1,
+    ParentProperty = "a parent prop",
+    MyJoinField = JoinField.Root<MyParent>() <1>
+};
+var indexParent = client.IndexDocument<MyDocument>(parentDocument);
+----
+<1> this lets the join data type know this is a root document of type `myparent`
+
+[source,javascript]
+----
+{
+  "id": 1,
+  "parentProperty": "a parent prop",
+  "myJoinField": "myparent"
+}
+----
+
+[source,csharp]
+----
+Expect(expected).FromRequest(indexParent);
+----
+
+Note: you can simply implicitly convert from string to indicate the root name for the join field
+
+[source,csharp]
+----
+JoinField parentJoinField = "aparent";
+----
+
+Linking the child document to its parent follows a similar pattern.
+Here we create a link by inferring the id from our parent instance `parentDocument`
+
+[source,csharp]
+----
+var indexChild = client.IndexDocument<MyDocument>(new MyChild
+{
+    MyJoinField = JoinField.Link<MyChild, MyParent>(parentDocument)
+});
+----
+
+or here we are simply stating this document is of type `mychild` and should be linked
+to parent id 1 from `parentDocument`.
+
+[source,csharp]
+----
+indexChild = client.IndexDocument<MyDocument>(new MyChild
+{
+    Id = 2,
+    MyJoinField = JoinField.Link<MyChild>(1)
+});
+----
+
+[source,javascript]
+----
+{
+  "id": 2,
+  "myJoinField": {
+    "name": "mychild",
+    "parent": "1"
+  }
+}
+----
+
+[source,csharp]
+----
+Expect(childJson).FromRequest(indexChild);
+----
+
+The mapping already links `myparent` as the parent type so we only need to suply the parent id.
+In fact there are many ways to create join field:
+
+[source,csharp]
+----
+Expect("myparent").WhenSerializing(JoinField.Root(typeof(MyParent)));
+Expect("myparent").WhenSerializing(JoinField.Root(Relation<MyParent>()));
+Expect("myparent").WhenSerializing(JoinField.Root<MyParent>());
+Expect("myparent").WhenSerializing(JoinField.Root("myparent"));
+
+var childLink = new {name = "mychild", parent = "1"};
+Expect(childLink).WhenSerializing(JoinField.Link<MyChild>(1));
+Expect(childLink).WhenSerializing(JoinField.Link<MyChild, MyParent>(parentDocument));
+Expect(childLink).WhenSerializing(JoinField.Link("mychild", 1));
+Expect(childLink).WhenSerializing(JoinField.Link(typeof(MyChild), 1));
+----
+

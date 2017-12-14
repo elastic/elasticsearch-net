@@ -68,7 +68,7 @@ new GeoIndexedShapeQuery
       "boost": 1.1,
       "indexed_shape": {
         "id": 2,
-        "type": "project",
+        "type": "doc",
         "index": "project",
         "path": "location"
       },

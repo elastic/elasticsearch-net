@@ -25,7 +25,6 @@ q
     .Analyzer("standard")
     .Boost(1.1)
     .CutoffFrequency(0.001)
-    .DisableCoord()
     .HighFrequencyOperator(Operator.And)
     .LowFrequencyOperator(Operator.Or)
     .MinimumShouldMatch(1)
@@ -44,7 +43,6 @@ new CommonTermsQuery()
     Analyzer = "standard",
     Boost = 1.1,
     CutoffFrequency = 0.001,
-    DisableCoord = true,
     HighFrequencyOperator = Operator.And,
     LowFrequencyOperator = Operator.Or,
     MinimumShouldMatch = 1,
@@ -66,8 +64,7 @@ new CommonTermsQuery()
       "low_freq_operator": "or",
       "high_freq_operator": "and",
       "minimum_should_match": 1,
-      "analyzer": "standard",
-      "disable_coord": true
+      "analyzer": "standard"
     }
   }
 }

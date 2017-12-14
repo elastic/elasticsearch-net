@@ -27,7 +27,7 @@ q
 .Script(sn => sn
     .Name("named_query")
     .Boost(1.1)
-    .Inline(_templateString)
+    .Source(_templateString)
     .Params(p=>p.Add("param1", 50))
 )
 ----
@@ -40,7 +40,7 @@ new ScriptQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Inline = _templateString,
+    Source = _templateString,
     Params = new Dictionary<string, object>
     {
         { "param1", 50 }
@@ -56,7 +56,7 @@ new ScriptQuery
     "_name": "named_query",
     "boost": 1.1,
     "script": {
-      "inline": "doc['numberOfCommits'].value > param1",
+      "source": "doc['numberOfCommits'].value > param1",
       "params": {
         "param1": 50
       }

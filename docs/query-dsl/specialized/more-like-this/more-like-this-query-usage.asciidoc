@@ -94,15 +94,15 @@ new MoreLikeThisQuery
     "max_query_terms": 12,
     "min_doc_freq": 1,
     "max_doc_freq": 12,
-    "min_word_len": 10,
-    "max_word_len": 300,
+    "min_word_length": 10,
+    "max_word_length": 300,
     "boost_terms": 1.1,
     "analyzer": "some_analyzer",
     "include": true,
     "like": [
       {
         "_index": "project",
-        "_type": "project",
+        "_type": "doc",
         "_id": "Durgan LLC"
       },
       "some long text"
