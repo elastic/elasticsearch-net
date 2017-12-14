@@ -63,6 +63,7 @@ var descriptor = new CreateIndexDescriptor("myindex")
     );
 ----
 <1> Auto map `Company`
+
 <2> Auto map `Employee`
 
 [source,javascript]
