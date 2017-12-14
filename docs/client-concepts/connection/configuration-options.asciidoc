@@ -189,6 +189,14 @@ The default index to use when no index is specified.
 
 Specify how type names are inferred from POCO types. By default, type names are inferred by calling `ToLowerInvariant` on the type's name.
 
+`InferMappingFor`::
+
+Specify how the mapping is inferred for a given POCO type. Can be used to infer the index, type and relation names. The generic version also allows you to set a default id property and control serialization behavior for properties for the POCO. The type of the document.
+
+`InferMappingFor`::
+
+Specify how the mapping is inferred for a given POCO type. Can be used to infer the index, type, and relation names.
+
 `PluralizeTypeNames`::
 
 Pluralize type names when inferring from POCO type names.

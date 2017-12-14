@@ -139,7 +139,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 				else
 				{
 					movingAverage.Should().NotBeNull();
-					movingAverage.Value.Should().BeGreaterThan(0);
+					movingAverage.Value.Should().HaveValue();
 				}
 			}
 		}

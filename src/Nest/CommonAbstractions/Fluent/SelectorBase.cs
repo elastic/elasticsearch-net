@@ -3,23 +3,10 @@ using System.ComponentModel;
 
 namespace Nest
 {
-	public interface IDescriptor { }
+	public interface ISelector { }
 
-	public abstract class DescriptorBase<TDescriptor, TInterface> : IDescriptor
-		where TDescriptor : DescriptorBase<TDescriptor, TInterface>, TInterface
-		where TInterface : class
+	public abstract class SelectorBase<TInterface> : ISelector where TInterface : class
 	{
-		private readonly TDescriptor _self;
-
-		protected DescriptorBase()
-		{
-			_self = (TDescriptor)this;
-		}
-
-		protected TInterface Self => _self;
-
-		protected TDescriptor Assign(Action<TInterface> assigner) => Fluent.Assign(_self, assigner);
-
 		/// <summary>
 		/// Hides the <see cref="Equals"/> method.
 		/// </summary>
