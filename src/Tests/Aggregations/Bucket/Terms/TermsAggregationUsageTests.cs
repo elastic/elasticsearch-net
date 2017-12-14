@@ -515,7 +515,10 @@ namespace Tests.Aggregations.Bucket.Terms
 				.Terms<int>("commits", st => st
 					.Field(p => p.NumberOfCommits)
 					.Aggregations(aggs=>aggs
-						.Terms("state", t => t.Field(p => p.State))
+						.Terms("state", t => t
+							.Meta(m => m.Add("x", "y"))
+							.Field(p => p.State)
+						)
 					)
 				)
 			);
@@ -529,6 +532,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					Field = Field<Project>(p => p.NumberOfCommits),
 					Aggregations = new TermsAggregation<string>("state")
 					{
+						Meta = new Dictionary<string, object> { { "x", "y"} },
 						Field = Field<Project>(p => p.State),
 				}
 				}
@@ -549,15 +553,14 @@ namespace Tests.Aggregations.Bucket.Terms
 				item.DocCount.Should().BeGreaterOrEqualTo(1);
 				var states = item.Terms("state");
 				states.Should().NotBeNull();
-				states.Count.Should().BeGreaterThan(0);
 				states.Buckets.Should().NotBeEmpty();
+				states.Meta.Should().NotBeEmpty("meta").And.ContainKey("x");
 				foreach (var b in states.Buckets)
 				{
 					b.DocCount.Should().BeGreaterThan(0);
 					b.Key.Should().NotBeNullOrEmpty();
 				}
 			}
-			commits.Buckets.Should().Contain(b => b.DocCountErrorUpperBound.HasValue);
 		}
 	}
 }

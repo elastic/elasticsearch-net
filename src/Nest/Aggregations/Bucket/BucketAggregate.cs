@@ -19,11 +19,11 @@ namespace Nest
 		public long DocCount { get; internal set; }
 	}
 
-	public class MultiBucketAggregate<TBucket> : BucketAggregateBase
+	public class MultiBucketAggregate<TBucket> : IAggregate
 		where TBucket : IBucket
 	{
-		public MultiBucketAggregate() : base(EmptyReadOnly<string, IAggregate>.Dictionary) { }
-
+		public IReadOnlyDictionary<string, object> Meta { get; set; }
+		
 		public IReadOnlyCollection<TBucket> Buckets { get; set; } = EmptyReadOnly<TBucket>.Collection;
 	}
 

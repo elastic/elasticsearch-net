@@ -7,7 +7,7 @@ namespace Nest
 	/// Represents an aggregation on the request
 	/// </summary>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IAggregation 
+	public interface IAggregation
 	{
 		string Name { get; set; }
 		IDictionary<string, object> Meta { get; set; }
@@ -16,7 +16,7 @@ namespace Nest
 	public abstract class AggregationBase : IAggregation
 	{
 		string IAggregation.Name { get; set; }
-		
+
 		public IDictionary<string, object> Meta { get; set; }
 
 		internal AggregationBase() { }
@@ -27,7 +27,7 @@ namespace Nest
 		}
 
 		internal abstract void WrapInContainer(AggregationContainer container);
-		
+
 		//always evaluate to false so that each side of && equation is evaluated
 		public static bool operator false(AggregationBase a) => false;
 
