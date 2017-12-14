@@ -215,7 +215,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 					.DisablePing() // <1> for testing simplicity, disable pings
 					.NodePredicate(node => // <2> We only want to execute API calls to nodes in rack_one
 						node.Settings.ContainsKey(setting) &&
-						node.Settings[setting] == value
+						node.Settings[setting].ToString() == value
 					)
 				)
 			)

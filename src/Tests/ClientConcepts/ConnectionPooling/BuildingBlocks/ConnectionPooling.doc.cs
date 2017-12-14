@@ -200,8 +200,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 
 			var pool = new StickySniffingConnectionPool(uris, n =>
 				(n.ClientNode ? 10 : 0)
-				+ (n.Settings.TryGetValue("node.attr.rack_id", out string rackId)
-				   		&& rackId == "rack_one" ? 10 : 0));
+				+ (n.Settings.TryGetValue("node.attr.rack_id", out var rackId)
+				   		&& rackId.ToString() == "rack_one" ? 10 : 0));
 
 			pool.SupportsReseeding.Should().BeTrue();
 			pool.SupportsPinging.Should().BeTrue();
