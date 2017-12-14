@@ -1,9 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Nest
 {
+	internal class AggregateDictionaryConverter : VerbatimDictionaryKeysJsonConverter<string, IAggregate>
+	{
+		public override bool CanRead => true;
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			var dict = serializer.Deserialize<IDictionary<string, IAggregate>>(reader);
+			return new AggregateDictionary(dict);
+		}
+	}
+	[JsonConverter(typeof(AggregateDictionaryConverter))]
 	public class AggregateDictionary : IsAReadOnlyDictionaryBase<string, IAggregate>
 	{
 		public static AggregateDictionary Default { get; } = new AggregateDictionary(EmptyReadOnly<string, IAggregate>.Dictionary);

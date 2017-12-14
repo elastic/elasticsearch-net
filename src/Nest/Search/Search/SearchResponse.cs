@@ -106,7 +106,6 @@ namespace Nest
 		public ShardStatistics Shards { get; internal set; }
 
 		[JsonProperty("aggregations")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IAggregate>))]
 		public AggregateDictionary Aggregations { get; internal set; } = AggregateDictionary.Default;
 
 		[JsonIgnore]
