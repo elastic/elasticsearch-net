@@ -48,7 +48,7 @@ namespace Tests.Aggregations.Metric.Cardinality
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var projectCount = response.Aggs.Cardinality("state_count");
+			var projectCount = response.Aggregations.Cardinality("state_count");
 			projectCount.Should().NotBeNull();
 			projectCount.Value.Should().Be(3);
         }

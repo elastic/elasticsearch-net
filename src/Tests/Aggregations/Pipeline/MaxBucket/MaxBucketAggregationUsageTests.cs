@@ -78,12 +78,12 @@ namespace Tests.Aggregations.Pipeline.MaxBucket
 		{
 			response.ShouldBeValid();
 
-			var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
+			var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
 			projectsPerMonth.Should().NotBeNull();
 			projectsPerMonth.Buckets.Should().NotBeNull();
 			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
-			var maxCommits = response.Aggs.MaxBucket("max_commits_per_month");
+			var maxCommits = response.Aggregations.MaxBucket("max_commits_per_month");
 			maxCommits.Should().NotBeNull();
 			maxCommits.Value.Should().BeGreaterThan(0);
 			maxCommits.Keys.Should().NotBeNull();

@@ -43,7 +43,7 @@ namespace Tests.Aggregations.Metric.Min
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var min = response.Aggs.Min("min_last_activity");
+			var min = response.Aggregations.Min("min_last_activity");
 			min.Should().NotBeNull();
 			min.Value.Should().BeGreaterThan(0);
 			min.ValueAsString.Should().NotBeNullOrEmpty();

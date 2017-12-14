@@ -127,7 +127,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			*/
 			response.ShouldBeValid();
 
-			var dateHistogram = response.Aggs.DateHistogram("projects_started_per_month");
+			var dateHistogram = response.Aggregations.DateHistogram("projects_started_per_month");
 			dateHistogram.Should().NotBeNull();
 			dateHistogram.Buckets.Should().NotBeNull();
 			dateHistogram.Buckets.Count.Should().BeGreaterThan(10);

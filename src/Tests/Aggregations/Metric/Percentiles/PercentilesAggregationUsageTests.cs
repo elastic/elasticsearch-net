@@ -70,7 +70,7 @@ namespace Tests.Aggregations.Metric.Percentiles
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var commitsOutlier = response.Aggs.Percentiles("commits_outlier");
+			var commitsOutlier = response.Aggregations.Percentiles("commits_outlier");
 			commitsOutlier.Should().NotBeNull();
 			commitsOutlier.Items.Should().NotBeNullOrEmpty();
 			foreach (var item in commitsOutlier.Items)

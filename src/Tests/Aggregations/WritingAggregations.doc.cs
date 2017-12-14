@@ -287,7 +287,7 @@ namespace Tests.Aggregations
 		{
 			response.ShouldBeValid();
 
-			var childAggregation = response.Aggs.Children("name_of_child_agg");
+			var childAggregation = response.Aggregations.Children("name_of_child_agg");
 
 			var averagePerChild = childAggregation.Average("average_per_child");
 

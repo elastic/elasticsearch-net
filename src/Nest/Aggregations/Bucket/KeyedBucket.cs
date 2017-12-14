@@ -7,8 +7,7 @@ namespace Nest
 {
 	public class KeyedBucket<TKey> : BucketBase
 	{
-		public KeyedBucket() { }
-		public KeyedBucket(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
+		public KeyedBucket(IReadOnlyDictionary<string, IAggregate> dict) : base(dict) { }
 
 		public TKey Key { get; set; }
 		public string KeyAsString { get; set; }

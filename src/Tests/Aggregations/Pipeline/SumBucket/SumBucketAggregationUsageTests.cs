@@ -78,12 +78,12 @@ namespace Tests.Aggregations.Pipeline.SumBucket
 		{
 			response.ShouldBeValid();
 
-			var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
+			var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
 			projectsPerMonth.Should().NotBeNull();
 			projectsPerMonth.Buckets.Should().NotBeNull();
 			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
-			var commitsSum = response.Aggs.SumBucket("sum_of_commits");
+			var commitsSum = response.Aggregations.SumBucket("sum_of_commits");
 			commitsSum.Should().NotBeNull();
 			commitsSum.Value.Should().BeGreaterThan(0);
 		}

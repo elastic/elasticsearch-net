@@ -2,10 +2,6 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-	public interface IIsADictionary {}
-
-	public interface IIsADictionary<TKey, TValue> : IDictionary<TKey, TValue>, IIsADictionary {}
-
 	public abstract class IsADictionaryDescriptorBase<TDescriptor, TInterface, TKey, TValue>
 		: DescriptorPromiseBase<TDescriptor, TInterface>
 		where TDescriptor : IsADictionaryDescriptorBase<TDescriptor, TInterface, TKey, TValue>

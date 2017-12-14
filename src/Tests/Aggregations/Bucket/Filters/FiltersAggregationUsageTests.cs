@@ -95,7 +95,7 @@ namespace Tests.Aggregations.Bucket.Filters
 			*/
 			response.ShouldBeValid();
 
-			var filterAgg = response.Aggs.Filters("projects_by_state");
+			var filterAgg = response.Aggregations.Filters("projects_by_state");
 			filterAgg.Should().NotBeNull();
 
 			var namedResult = filterAgg.NamedBucket("belly_up");
@@ -187,7 +187,7 @@ namespace Tests.Aggregations.Bucket.Filters
 			*/
 			response.ShouldBeValid();
 
-			var filterAgg = response.Aggs.Filters("projects_by_state");
+			var filterAgg = response.Aggregations.Filters("projects_by_state");
 			filterAgg.Should().NotBeNull();
 			var results = filterAgg.AnonymousBuckets();
 			results.Count.Should().Be(4);
@@ -241,7 +241,7 @@ namespace Tests.Aggregations.Bucket.Filters
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			response.Aggs.Filters("empty_filters").Buckets.Should().BeEmpty();
+			response.Aggregations.Filters("empty_filters").Buckets.Should().BeEmpty();
 		}
 	}
 
@@ -289,7 +289,7 @@ namespace Tests.Aggregations.Bucket.Filters
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			response.Aggs.Filters("conditionless_filters").Buckets.Should().BeEmpty();
+			response.Aggregations.Filters("conditionless_filters").Buckets.Should().BeEmpty();
 		}
 	}
 }

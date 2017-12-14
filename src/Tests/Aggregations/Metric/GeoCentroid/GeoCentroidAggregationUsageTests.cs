@@ -49,7 +49,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var centroid = response.Aggs.GeoCentroid("centroid");
+			var centroid = response.Aggregations.GeoCentroid("centroid");
 			centroid.Should().NotBeNull();
 			centroid.Count.Should().BeGreaterThan(0);
 			centroid.Location.Should().NotBeNull();
@@ -120,7 +120,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 		{
 			response.ShouldBeValid();
 
-			var projects = response.Aggs.Terms("projects");
+			var projects = response.Aggregations.Terms("projects");
 
 			foreach (var bucket in projects.Buckets)
 			{
