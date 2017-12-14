@@ -11,17 +11,25 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var dict = serializer.Deserialize<IDictionary<string, IAggregate>>(reader);
+			var dict = serializer.Deserialize<Dictionary<string, IAggregate>>(reader);
 			return new AggregateDictionary(dict);
 		}
 	}
-	[JsonConverter(typeof(AggregateDictionaryConverter))]
+
+	[ContractJsonConverter(typeof(AggregateDictionaryConverter))]
 	public class AggregateDictionary : IsAReadOnlyDictionaryBase<string, IAggregate>
 	{
 		public static AggregateDictionary Default { get; } = new AggregateDictionary(EmptyReadOnly<string, IAggregate>.Dictionary);
 
 		public AggregateDictionary(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary) { }
-		public AggregateDictionary(IDictionary<string, IAggregate> backingDictionary) : base(backingDictionary) { }
+
+		private static readonly char[] TypedKeysSeparator = {'#'};
+		protected override string Sanitize(string key)
+		{
+			//typed_keys = true on results in aggregation keys being returned as "<type>#<name>"
+			var tokens = key.Split(TypedKeysSeparator, 2, StringSplitOptions.RemoveEmptyEntries);
+			return tokens.Length > 1 ? tokens[1] : tokens[0];
+		}
 
 		public ValueAggregate Min(string key) => this.TryGet<ValueAggregate>(key);
 
