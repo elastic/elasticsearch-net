@@ -50,7 +50,7 @@ namespace Tests.Indices.Analyze
 
 	public class AnalyzeInlineApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
 	{
-		private const string TextToAnalyze = "F# is <b>THE SUPERIOR</b> language :) :gandalf: ";
+		protected const string TextToAnalyze = "F# is <b>THE SUPERIOR</b> language :) :gandalf: ";
 
 		public AnalyzeInlineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
@@ -115,6 +115,68 @@ namespace Tests.Indices.Analyze
 			response.Tokens.Should().HaveCount(6);
 			var tokens = response.Tokens.Select(t => t.Token).ToList();
 			tokens.Should().Contain("fsharp", "gandalf");
+		}
+	}
+
+	public class AnalyzeExplainApiTests : AnalyzeInlineApiTests
+	{
+		public AnalyzeExplainApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson => new
+		{
+			text = new[] { TextToAnalyze },
+			tokenizer = new { max_token_length = 7, type = "standard" },
+			char_filter = new object[]
+			{
+				"html_strip",
+				new { type = "mapping", mappings = new[] { "F# => fsharp" } }
+			},
+			filter = new object[]
+			{
+				"lowercase",
+				new { type = "stop", stopwords = new[] { "_english_", "the" } }
+			},
+			explain = true
+		};
+
+		protected override Func<AnalyzeDescriptor, IAnalyzeRequest> Fluent => d => base.Fluent(d.Explain());
+
+		protected override AnalyzeRequest Initializer
+		{
+			get
+			{
+				var r = base.Initializer;
+				r.Explain = true;
+				return r;
+			}
+		}
+
+		protected override void ExpectResponse(IAnalyzeResponse response)
+		{
+			response.Tokens.Should().HaveCount(0);
+			response.Detail.Should().NotBeNull("details should not be null because explain was specified");
+			response.Detail.CustomAnalyzer.Should().BeTrue();
+			response.Detail.CharFilters.Should().NotBeEmpty();
+			foreach (var c in response.Detail.CharFilters)
+			{
+				c.Name.Should().NotBeNullOrWhiteSpace();
+				c.FilteredText.Should().NotBeEmpty();
+			}
+			response.Detail.Filters.Should().NotBeEmpty();
+			foreach (var c in response.Detail.Filters)
+				AssertTokenDetail(c);
+
+			response.Detail.Tokenizer.Should().NotBeNull();
+			AssertTokenDetail(response.Detail.Tokenizer);
+		}
+
+		private static void AssertTokenDetail(TokenDetail c)
+		{
+			c.Name.Should().NotBeNullOrWhiteSpace();
+			foreach (var t in c.Tokens)
+			{
+				t.Token.Should().NotBeNullOrWhiteSpace();
+			}
 		}
 	}
 }

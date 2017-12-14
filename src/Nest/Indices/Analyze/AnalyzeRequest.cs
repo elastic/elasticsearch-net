@@ -31,11 +31,19 @@ namespace Nest
 
 		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
 		[JsonProperty("text")]
-		string[] Text { get; set; }
+		IEnumerable<string> Text { get; set; }
 
 		///<summary>The name of the tokenizer to use for the analysis</summary>
 		[JsonProperty("tokenizer")]
 		Union<string, ITokenizer> Tokenizer { get; set; }
+
+		///<summary>Return more details, and output the analyzer chain per step in the process</summary>
+		[JsonProperty("explain")]
+		bool? Explain { get; set; }
+
+		///<summary>Filter only certain token attributes to be returned</summary>
+		[JsonProperty("attributes")]
+		IEnumerable<string> Attributes { get; set; }
 	}
 
 	public partial class AnalyzeRequest
@@ -50,13 +58,19 @@ namespace Nest
 		public Union<string, ITokenizer> Tokenizer { get; set; }
 
 		/// <inheritdoc />
-		public Union<string, IAnalyzer> Analyzer { get; set; }
+		public bool? Explain { get; set; }
 
 		/// <inheritdoc />
-		public string Normalizer { get; set; }
+		public IEnumerable<string> Attributes { get; set; }
+
+		/// <inheritdoc />
+		public Union<string, IAnalyzer> Analyzer { get; set; }
 
 	    /// <inheritdoc />
 		public AnalyzeCharFilters CharFilter { get; set; }
+
+		/// <inheritdoc />
+		public string Normalizer { get; set; }
 
 	    /// <inheritdoc />
 		public AnalyzeTokenFilters Filter { get; set; }
@@ -65,7 +79,7 @@ namespace Nest
 		public Field Field { get; set; }
 
 		/// <inheritdoc />
-		public string[] Text { get; set; }
+		public IEnumerable<string> Text { get; set; }
 
 	}
 
@@ -74,11 +88,13 @@ namespace Nest
 	{
 		Union<string, ITokenizer> IAnalyzeRequest.Tokenizer { get; set; }
 		Union<string, IAnalyzer> IAnalyzeRequest.Analyzer { get; set; }
-		string IAnalyzeRequest.Normalizer { get; set; }
 		AnalyzeCharFilters IAnalyzeRequest.CharFilter { get; set; }
+		string IAnalyzeRequest.Normalizer { get; set; }
 		AnalyzeTokenFilters IAnalyzeRequest.Filter { get; set; }
 		Field IAnalyzeRequest.Field { get; set; }
-		string[] IAnalyzeRequest.Text { get; set; }
+		IEnumerable<string> IAnalyzeRequest.Text { get; set; }
+		bool? IAnalyzeRequest.Explain { get; set; }
+		IEnumerable<string> IAnalyzeRequest.Attributes { get; set; }
 
 		///<summary>The name of the tokenizer to use for the analysis</summary>
 		public AnalyzeDescriptor Tokenizer(string tokenizer) => Assign(a => a.Tokenizer = tokenizer);
@@ -94,9 +110,6 @@ namespace Nest
 		///<summary>The name of the analyzer to use</summary>
 		public AnalyzeDescriptor Analyzer(string analyser) => Assign(a => a.Analyzer = analyser);
 
-		///<summary>The name of the normalizer to use</summary>
-		public AnalyzeDescriptor Normalizer(string normalizer) => Assign(a => a.Normalizer = normalizer);
-
 		///<summary>An inline definition of an analyzer</summary>
 		public AnalyzeDescriptor Analyzer(Func<AnalyzersDescriptor, IAnalyzer> analyzer) =>
 			Assign(a =>
@@ -110,6 +123,9 @@ namespace Nest
 
 		///<summary>A collection of character filters to use for the analysis</summary>
 		public AnalyzeDescriptor CharFilter(IEnumerable<string> charFilter) => Assign(a => a.CharFilter = charFilter.ToArray());
+
+		///<summary>The name of the normalizer to use</summary>
+		public AnalyzeDescriptor Normalizer(string normalizer) => Assign(a => a.Normalizer = normalizer);
 
 		///<summary>A collection of character filters to use for the analysis</summary>
 		public AnalyzeDescriptor CharFilter(Func<AnalyzeCharFiltersDescriptor, IPromise<AnalyzeCharFilters>> charFilters) =>
@@ -135,7 +151,15 @@ namespace Nest
 		public AnalyzeDescriptor Text(params string[] text) => Assign(a => a.Text = text);
 
 		///<summary>The text on which the analysis should be performed</summary>
-		public AnalyzeDescriptor Text(IEnumerable<string> text) => Assign(a => a.Text = text.ToArray());
+		public AnalyzeDescriptor Text(IEnumerable<string> text) => Assign(a => a.Text = text);
 
+		/// <inheritdoc cref="IAnalyzeRequst.Explain" />
+		public AnalyzeDescriptor Explain(bool? explain = true) => Assign(a => a.Explain = explain);
+
+		/// <inheritdoc cref="IAnalyzeRequst.Attributes" />
+		public AnalyzeDescriptor Attributes(params string[] attributes) => Assign(a => a.Attributes = attributes);
+
+		/// <inheritdoc cref="IAnalyzeRequst.Attributes" />
+		public AnalyzeDescriptor Attributes(IEnumerable<string> attributes) => Assign(a => a.Attributes = attributes);
 	}
 }
