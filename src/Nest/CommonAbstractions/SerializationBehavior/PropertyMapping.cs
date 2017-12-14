@@ -4,20 +4,20 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	/// <summary> This class allows a serializer to report back on a properties behavior </summary>
+	/// <summary>Determines how a POCO property maps to the property on a JSON object when serialized</summary>
 	public interface IPropertyMapping
 	{
-		/// <summary> Override the json property name of a type </summary>
+		/// <summary> Override the property name serialized to JSON for this property</summary>
 		string Name { get; set; }
 		/// <summary>
 		/// Ignore this property completely
-		/// <pre>- When mapping automatically using AutoMap()</pre>
-		/// <pre>- When Indexing this type do not serialize whatever this value hold</pre>
+		/// <para>- When mapping automatically using <see cref="TypeMappingDescriptor{T}.AutoMap{TDocument}"/></para>
+		/// <para>- When Indexing this type do not serialize this property and its value</para>
 		/// </summary>
 		bool Ignore { get; set; }
 	}
 
-	/// <summary> This class allows a serializer to report back on a properties behavior </summary>
+	/// <inheritdoc/>
 	public class PropertyMapping : IPropertyMapping
 	{
 		public static PropertyMapping Ignored = new PropertyMapping { Ignore = true };
@@ -29,15 +29,23 @@ namespace Nest
 		public bool Ignore { get; set; }
 	}
 
+	/// <summary>
+	/// Provides mappings for POCO properties
+	/// </summary>
 	public interface IPropertyMappingProvider
 	{
+		/// <summary>
+		/// Creates an <see cref="IPropertyMapping"/> for a <see cref="MemberInfo"/>
+		/// </summary>
 		IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo);
 	}
 
+	/// <inheritdoc/>
 	public class PropertyMappingProvider : IPropertyMappingProvider
 	{
 		protected readonly ConcurrentDictionary<string, IPropertyMapping> Properties = new ConcurrentDictionary<string, IPropertyMapping>();
 
+		/// <inheritdoc/>
 		public virtual IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
 		{
 			var memberInfoString = $"{memberInfo.DeclaringType?.FullName}.{memberInfo.Name}";
