@@ -32,7 +32,6 @@ contains a `match` query.
 ----
 q
 .Percolate(p => p
-    .DocumentType(typeof(Project))
     .Document(Project.Instance)
     .Field(f => f.Query)
 )
@@ -44,9 +43,8 @@ q
 ----
 new PercolateQuery
 {
-    DocumentType = typeof(Project),
     Document = Project.Instance,
-    Field = Infer.Field<PercolatedQuery>(f => f.Query)
+    Field = Infer.Field<ProjectPercolation>(f => f.Query)
 }
 ----
 
@@ -55,7 +53,6 @@ new PercolateQuery
 ----
 {
   "percolate": {
-    "document_type": "project",
     "document": {
       "name": "Koch, Collier and Mohr",
       "state": "BellyUp",
@@ -119,10 +116,8 @@ q
     .Index<Project>()
     .Id(Project.Instance.Name)
     .Field(f => f.Query)
-    .DocumentType<Project>() <1>
 )
 ----
-<1> specify the `type`, `index`, `id`, `field`, `document_type` of the document to fetch, to percolate.
 
 ==== Object Initializer syntax example
 
@@ -133,8 +128,7 @@ new PercolateQuery
     Type = typeof(Project),
     Index = IndexName.From<Project>(),
     Id = Project.Instance.Name,
-    DocumentType = typeof(Project),
-    Field = Infer.Field<PercolatedQuery>(f => f.Query)
+    Field = Infer.Field<ProjectPercolation>(f => f.Query)
 }
 ----
 
@@ -143,10 +137,9 @@ new PercolateQuery
 ----
 {
   "percolate": {
-    "type": "project",
+    "type": "doc",
     "index": "project",
     "id": "Durgan LLC",
-    "document_type": "project",
     "field": "query"
   }
 }

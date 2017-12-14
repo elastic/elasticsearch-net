@@ -1,0 +1,82 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/QueryDsl/Specialized/MoreLikeThis/MoreLikeThisFullDocumentQueryUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[more-like-this-full-document-query-usage]]
+=== More Like This Full Document Query Usage
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.MoreLikeThis(sn => sn
+    .Fields(f=>f.Field(p=>p.Name))
+    .Like(l=>l
+        .Document(d=>d.Document(Project.Instance))
+        .Text("some long text")
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new MoreLikeThisQuery
+{
+    Fields = Fields<Project>(p=>p.Name),
+    Like = new List<Like>
+    {
+        new LikeDocument<Project>(Project.Instance),
+        "some long text"
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "more_like_this": {
+    "fields": [
+      "name"
+    ],
+    "like": [
+      {
+        "_index": "project",
+        "_type": "doc",
+        "_id": "Durgan LLC",
+        "doc": {
+          "name": "Koch, Collier and Mohr",
+          "state": "BellyUp",
+          "startedOn": "2015-01-01T00:00:00",
+          "lastActivity": "0001-01-01T00:00:00",
+          "leadDeveloper": {
+            "gender": "Male",
+            "id": 0,
+            "firstName": "Martijn",
+            "lastName": "Laarman"
+          },
+          "location": {
+            "lat": 42.1523,
+            "lon": -80.321
+          }
+        }
+      },
+      "some long text"
+    ]
+  }
+}
+----
+

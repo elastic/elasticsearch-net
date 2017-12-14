@@ -29,6 +29,7 @@ Be sure to read the Elasticsearch documentation {ref_current}/search-aggregation
 [source,csharp]
 ----
 s => s
+.Index(DefaultSeeder.ProjectsAliasFilter)
 .Aggregations(aggs => aggs
     .Filters("projects_by_state", agg => agg
         .OtherBucket()
@@ -49,7 +50,7 @@ s => s
 
 [source,csharp]
 ----
-new SearchRequest<Project>
+new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
 {
     Aggregations = new FiltersAggregation("projects_by_state")
     {
@@ -149,6 +150,7 @@ namedResult.DocCount.Should().Be(0);
 [source,csharp]
 ----
 s => s
+.Index(DefaultSeeder.ProjectsAliasFilter)
 .Aggregations(aggs => aggs
     .Filters("projects_by_state", agg => agg
         .OtherBucket()
@@ -168,7 +170,7 @@ s => s
 
 [source,csharp]
 ----
-new SearchRequest<Project>
+new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
 {
     Aggregations = new FiltersAggregation("projects_by_state")
     {

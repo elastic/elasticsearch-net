@@ -40,6 +40,7 @@ See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.h
 ----
 s => s
 .Index(Index)
+.Type(RoyalSeeder.RoyalType)
 .Query(q =>
     q.HasChild<Prince>(hc => hc
         .Query(hcq => hcq.MatchAll())
@@ -57,13 +58,13 @@ s => s
 
 [source,csharp]
 ----
-new SearchRequest<King>(Index, typeof(King))
+new SearchRequest<King>(Index, RoyalSeeder.RoyalType)
 {
     Query = new HasChildQuery
     {
         Type = typeof(Prince),
         Query = new MatchAllQuery(),
-        InnerHits = new InnerHits { Name = "princes" }
+        InnerHits = new InnerHits {Name = "princes"}
     } || new NestedQuery
     {
         Path = Field<King>(p => p.Foes),
@@ -119,6 +120,6 @@ foreach (var hit in response.Hits)
 
     var foes = hit.InnerHits["foes"].Documents<King>();
     foes.Should().NotBeEmpty();
-};
+}
 ----
 

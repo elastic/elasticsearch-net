@@ -16,7 +16,7 @@ please modify the original csharp file found at the link and submit the PR with 
 == Highlighting Usage
 
 Allows to highlight search results on one or more fields.
-The implementation uses either the lucene `highlighter`, `fast-vector-highlighter` or `postings-highlighter`.
+The implementation uses either the lucene `highlighter` or `fast-vector-highlighter`.
 
 See the Elasticsearch documentation on {ref_current}/search-request-highlighting.html[highlighting] for more detail.
 
@@ -41,6 +41,7 @@ s => s
             .Type("plain")
             .ForceSource()
             .FragmentSize(150)
+            .Fragmenter(HighlighterFragmenter.Span)
             .NumberOfFragments(3)
             .NoMatchSize(150),
         fs => fs
@@ -64,20 +65,6 @@ s => s
                 .Match(m => m
                     .Field(p => p.LeadDeveloper.LastName)
                     .Query(LastNameSearch)
-                )
-            ),
-        fs => fs
-            .Field(p => p.State.Suffix("offsets"))
-            .Type(HighlighterType.Postings)
-            .PreTags("<state>")
-            .PostTags("</state>")
-            .HighlightQuery(q => q
-                .Terms(t => t
-                    .Field(f => f.State.Suffix("offsets"))
-                    .Terms(
-                        StateOfBeing.Stable.ToString().ToLowerInvariant(),
-                        StateOfBeing.BellyUp.ToString().ToLowerInvariant()
-                    )
                 )
             )
     )
@@ -107,6 +94,7 @@ new SearchRequest<Project>
                     Type = HighlighterType.Plain,
                     ForceSource = true,
                     FragmentSize = 150,
+                    Fragmenter = HighlighterFragmenter.Span,
                     NumberOfFragments = 3,
                     NoMatchSize = 150
                 }
@@ -133,18 +121,6 @@ new SearchRequest<Project>
                     {
                         Field = "leadDeveloper.lastName",
                         Query = LastNameSearch
-                    }
-                }
-            },
-            { "state.offsets", new HighlightField
-                {
-                    Type = HighlighterType.Postings,
-                    PreTags = new[] { "<state>"},
-                    PostTags = new[] { "</state>"},
-                    HighlightQuery = new TermsQuery
-                    {
-                        Field = "state.offsets",
-                        Terms = new [] { "stable", "bellyup" }
                     }
                 }
             }
@@ -176,6 +152,7 @@ new SearchRequest<Project>
         "type": "plain",
         "force_source": true,
         "fragment_size": 150,
+        "fragmenter": "span",
         "number_of_fragments": 3,
         "no_match_size": 150
       },
@@ -209,23 +186,6 @@ new SearchRequest<Project>
             "leadDeveloper.lastName": {
               "query": "Stokes"
             }
-          }
-        }
-      },
-      "state.offsets": {
-        "type": "postings",
-        "pre_tags": [
-          "<state>"
-        ],
-        "post_tags": [
-          "</state>"
-        ],
-        "highlight_query": {
-          "terms": {
-            "state.offsets": [
-              "stable",
-              "bellyup"
-            ]
           }
         }
       }
@@ -267,14 +227,6 @@ foreach (var highlightsInEachHit in response.Hits.Select(d=>d.Highlights))
             {
                 highlight.Should().Contain("<name>");
                 highlight.Should().Contain("</name>");
-            }
-        }
-        else if (highlightField.Key == "state.offsets")
-        {
-            foreach (var highlight in highlightField.Value.Highlights)
-            {
-                highlight.Should().Contain("<state>");
-                highlight.Should().Contain("</state>");
             }
         }
         else

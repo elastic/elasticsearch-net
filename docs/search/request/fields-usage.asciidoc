@@ -33,6 +33,7 @@ s => s
     .Field(p => p.Name)
     .Field(p => p.StartedOn)
     .Field(p => p.NumberOfCommits)
+    .Field(p => p.NumberOfContributors)
     .Field(p => p.DateString)
 )
 ----
@@ -48,6 +49,7 @@ new SearchRequest<Project>
         p => p.Name,
         p => p.StartedOn,
         p => p.NumberOfCommits,
+        p => p.NumberOfContributors,
         p => p.DateString)
 }
 ----
@@ -60,6 +62,7 @@ new SearchRequest<Project>
     "name",
     "startedOn",
     "numberOfCommits",
+    "numberOfContributors",
     "dateString"
   ]
 }

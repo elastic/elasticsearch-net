@@ -61,7 +61,7 @@ s => s
     .Phrase("my-phrase-suggest", ph => ph
         .Collate(c => c
             .Query(q => q
-                .Inline("{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}")
+                .Source("{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}")
                 .Params(p => p.Add("field_name", "title"))
             )
             .Prune()
@@ -136,7 +136,7 @@ new SearchRequest<Project>
                 {
                     Query = new TemplateQuery
                     {
-                        Inline = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
+                        Source = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
                         Params = new Dictionary<string, object>
                         {
                             { "field_name", "title" }
@@ -189,7 +189,7 @@ new SearchRequest<Project>
       "phrase": {
         "collate": {
           "query": {
-            "inline": "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
+            "source": "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
             "params": {
               "field_name": "title"
             }
@@ -242,10 +242,11 @@ suggest.Length.Should().BeGreaterThan(0);
 var option = suggest.Options.First();
 option.Text.Should().NotBeNullOrEmpty();
 option.Index.Should().Be("project");
-option.Type.Should().Be("project");
+option.Type.Should().Be("doc");
 option.Id.Should().NotBeNull();
 option.Source.Should().NotBeNull();
 option.Source.Name.Should().NotBeNullOrWhiteSpace();
+option.Source.ShouldAdhereToSourceSerializerWhenSet();
 option.Score.Should().BeGreaterThan(0);
 option.Contexts.Should().NotBeNull().And.NotBeEmpty();
 option.Contexts.Should().ContainKey("color");

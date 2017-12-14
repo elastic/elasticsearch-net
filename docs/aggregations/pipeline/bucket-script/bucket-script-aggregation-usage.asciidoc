@@ -44,7 +44,7 @@ s => s
                     .Add("totalCommits", "commits")
                     .Add("stableCommits", "stable_state>commits")
                 )
-                .Script(ss =>ss.Inline("stableCommits / totalCommits * 100").Lang("groovy"))
+                .Script(ss =>ss.Source("params.stableCommits / params.totalCommits * 100"))
             )
         )
     )
@@ -79,7 +79,7 @@ new SearchRequest<Project>()
                     { "stableCommits", "stable_state>commits" }
                 })
             {
-                Script = new InlineScript("stableCommits / totalCommits * 100") { Lang = "groovy" }
+                Script = new InlineScript("params.stableCommits / params.totalCommits * 100")
             }
     }
 }
@@ -125,8 +125,7 @@ new SearchRequest<Project>()
               "stableCommits": "stable_state>commits"
             },
             "script": {
-              "inline": "stableCommits / totalCommits * 100",
-              "lang": "groovy"
+              "source": "params.stableCommits / params.totalCommits * 100"
             }
           }
         }

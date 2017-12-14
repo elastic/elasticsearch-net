@@ -23,6 +23,7 @@ s => s
 .Aggregations(a => a
     .ExtendedStats("commit_stats", es => es
         .Field(p => p.NumberOfCommits)
+        .Sigma(1)
     )
 )
 ----
@@ -33,7 +34,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
-    Aggregations = new ExtendedStatsAggregation("commit_stats", Field<Project>(p => p.NumberOfCommits))
+    Aggregations = new ExtendedStatsAggregation("commit_stats", Field<Project>(p => p.NumberOfCommits)) {  Sigma = 1 }
 }
 ----
 
@@ -44,7 +45,8 @@ new SearchRequest<Project>
   "aggs": {
     "commit_stats": {
       "extended_stats": {
-        "field": "numberOfCommits"
+        "field": "numberOfCommits",
+        "sigma": 1.0
       }
     }
   }

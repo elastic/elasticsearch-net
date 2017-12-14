@@ -277,7 +277,9 @@ var searchResponse = client.Search<Project>(s => s
 );
 ----
 <1> match documents where lead developer first name contains Russ
+
 <2> ...and where the lead developer last name contains Cam
+
 <3> ...and where the project started in 2017
 
 which yields the following query JSON
@@ -352,6 +354,7 @@ searchResponse = client.Search<Project>(s => s
 );
 ----
 <1> combine queries using the binary `&&` operator
+
 <2> wrap a query in a `bool` query filter clause using the unary `+` operator and combine using the binary `&&` operator
 
 Take a look at the dedicated section on <<bool-queries, writing `bool` queries>> for more detail
@@ -383,7 +386,7 @@ var projects = searchResponse.Documents;
 
 [source,csharp]
 ----
-searchResponse.HitsMetaData.Hits.Select(h => h.Source);
+searchResponse.HitsMetadata.Hits.Select(h => h.Source);
 ----
 
 and it's possible to retrieve other metadata about each hit from the hits collection. Here's
@@ -391,7 +394,7 @@ an example that retrieves the highlights for a hit, when using <<highlighting-us
 
 [source,csharp]
 ----
-var highlights = searchResponse.HitsMetaData.Hits.Select(h => h
+var highlights = searchResponse.HitsMetadata.Hits.Select(h => h
     .Highlights <1>
 );
 ----

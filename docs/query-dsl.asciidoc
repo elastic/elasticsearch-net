@@ -307,6 +307,8 @@ Specialized types of queries that do not fit into other groups
 
 :anchor-list: query-dsl/specialized
 
+* <<more-like-this-full-document-query-usage,More Like This Full Document Query Usage>>
+
 * <<more-like-this-query-usage,More Like This Query Usage>>
 
 * <<percolate-query-usage,Percolate Query Usage>>
@@ -318,6 +320,8 @@ Specialized types of queries that do not fit into other groups
 See the Elasticsearch documentation on {ref_current}/specialized-queries.html[Specialized queries] for more details.
 
 :includes-from-dirs: query-dsl/specialized
+
+include::query-dsl/specialized/more-like-this/more-like-this-full-document-query-usage.asciidoc[]
 
 include::query-dsl/specialized/more-like-this/more-like-this-query-usage.asciidoc[]
 

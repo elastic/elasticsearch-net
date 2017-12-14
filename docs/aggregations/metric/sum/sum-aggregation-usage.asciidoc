@@ -55,7 +55,7 @@ new SearchRequest<Project>
 
 [source,csharp]
 ----
-response.IsValid.Should().BeTrue();
+response.ShouldBeValid();
 var commitsSum = response.Aggs.Sum("commits_sum");
 commitsSum.Should().NotBeNull();
 commitsSum.Value.Should().BeGreaterThan(0);

@@ -1,0 +1,171 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/ClientConcepts/HighLevel/Serialization/CustomSerialization.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[custom-serialization]]
+== Custom Serialization
+
+Starting with 6.0 NEST ships with a shaded Json.NET dependency. Meaning we merged it into Nest's dll
+internalized all Json.NET's types and changed their namespace from `Newtonsoft.Json` to `Nest.Json`.
+
+NEST has always isolated Json.NET as best as it could but this meant that we had to mandate some things.
+For instance NEST heavily relied on the fact that the `ContractConverter` was an instance of `ElasticContractConverter`
+
+If you wanted to deserialize your `_source` or `_fields` using your own `ContractConverter` you were out of luck.
+
+So what did we do in 6.x and how does it affect you?
+
+The `NEST` nuget package from 6.0.0 onwards on its own will use the internal Json.NET serializer and will in affect behave the same
+as it did in previous releases.
+
+If you previously configured a custom Json.NET serializer with custom `JsonSerializerSettings`, `ContractConverter` things
+will change a bit, but for the better!
+
+[float]
+=== Injecting a new serializer
+
+Starting with NEST 6.x you can inject a serializer that is isolated to only be called
+for the (de)serialization of `_source` `_fields` and where ever a user provided value is expected
+to be written and returned.
+
+Internally we call this the `RequestResponseSerializer` and the `SourceSerializer`
+
+If left unconfigured the internal `RequestResponseSerializer` is the `SourceSerializer` as well.
+
+Implementing `IElasticsearchSerializer` is technically enough to inject your own `SourceSerialzier`
+
+[source,csharp]
+----
+public class VanillaSerializer : IElasticsearchSerializer
+{
+    public T Deserialize<T>(Stream stream) => throw new NotImplementedException();
+
+    public object Deserialize(Type type, Stream stream) => throw new NotImplementedException();
+
+    public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken)) =>
+        throw new NotImplementedException();
+
+    public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken)) =>
+        throw new NotImplementedException();
+
+    public void Serialize<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented) =>
+        throw new NotImplementedException();
+
+    public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
+        CancellationToken cancellationToken = default(CancellationToken)) =>
+        throw new NotImplementedException();
+}
+
+var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+var connectionSettings =
+        new ConnectionSettings(pool, sourceSerializer: (settings, builtin) => new VanillaSerializer()); <1>
+var client = new ElasticClient(connectionSettings);
+----
+<1> what the Func?
+
+If implementing `IElasticsearchSerializer` is enough why do we need to provide its instance wrapped in a factory `Func`?
+
+There are various cases where you need to provide a `_source` with `Nest` data type as part of that `_source`.
+
+An example if you want to use percolation you need to store queries on your document which means you need to have something like
+this:
+
+[source,csharp]
+----
+public class MyPercolationDocument
+{
+    public QueryContainer Query { get; set; }
+    public string Category { get; set; }
+}
+----
+
+[float]
+=== JsonNetSerializer
+
+A custom `SourceSerializer` would not know how to serialize `QueryContainer` or other NEST types that could appear as part of
+the source. Therefor we ship a separate `NEST.JsonNetSerializer` package that helps in composing a custom `SourceSerializer`
+using `Json.NET` that is smart enough to hand back the (de)serialization of known NEST types back to the builtin`RequestResponseSerializer`. This package is also useful if you want to control how your documents and values are stored
+and retreived from elasticsearch using `Json.NET` without intervering with the way NEST uses `Json.NET` internally.
+
+The easiest way to hook this custom source serializer is as followed:
+
+[source,csharp]
+----
+var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+var connectionSettings =
+    new ConnectionSettings(pool, sourceSerializer: JsonNetSerializer.Default);
+var client = new ElasticClient(connectionSettings);
+----
+
+`JsonNetSerializer.Default` is just syntactic helper which is equivalent to doing:
+
+[source,csharp]
+----
+var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+var connectionSettings =
+    new ConnectionSettings(pool, sourceSerializer: (b, s) => new JsonNetSerializer(b, s));
+var client = new ElasticClient(connectionSettings);
+----
+
+`JsonNetSerializer`'s constructor takes several methods that allow you to control the `JsonSerializerSettings` and modify
+the contract resolver from `Json.NET`.
+
+[source,csharp]
+----
+var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+var connectionSettings =
+    new ConnectionSettings(pool, sourceSerializer: (b, s) => new JsonNetSerializer(
+        b, s,
+        () => new JsonSerializerSettings { NullValueHandling = NullValueHandling.Include },
+        (resolver) => resolver.NamingStrategy = new SnakeCaseNamingStrategy()
+    ));
+var client = new ElasticClient(connectionSettings);
+----
+
+You can also subclass `ConnectionAwareSerializerBase` for a more explicit implementation.
+
+Using this `MyCustomJsonNetSerializer` we can (de)serialize using a `NamingStrategy` that snake cases and `JsonSerializerSettings`
+that include null properties, without affecting how NEST's own types are serialized.
+
+Furthermore because this serializer is aware of the builtin serializer we can automatically inject a `JsonConverter` to handle
+known NEST types that could appear as part of the source such as the afformentioned `QueryContainer`.
+
+[source,csharp]
+----
+public class MyCustomJsonNetSerializer : ConnectionSettingsAwareSerializerBase
+{
+    public MyCustomJsonNetSerializer(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
+        : base(builtinSerializer, connectionSettings) { }
+
+    protected override IEnumerable<JsonConverter> CreateJsonConverters() => Enumerable.Empty<JsonConverter>();
+
+    protected override JsonSerializerSettings CreateJsonSerializerSettings() => new JsonSerializerSettings()
+    {
+        NullValueHandling = NullValueHandling.Include
+    };
+
+    protected override void ModifyContractResolver(ConnectionSettingsAwareContractResolver resolver)
+    {
+        resolver.NamingStrategy = new SnakeCaseNamingStrategy();
+    }
+}
+
+var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+var connectionSettings =
+        new ConnectionSettings(pool, sourceSerializer: (builtin, settings) => new MyCustomJsonNetSerializer(builtin, settings));
+var client = new ElasticClient(connectionSettings);
+----
+
+Using this `MyCustomJsonNetSerializer` we can (de)serialize using a `NamingStrategy` that snake cases and `JsonSerializerSettings`
+that include null properties, without affecting how NEST's own types are serialized.
+

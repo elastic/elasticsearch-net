@@ -19,8 +19,8 @@ A multi-bucket aggregation similar to the histogram except it can only be applie
 From a functionality perspective, this histogram supports the same features as the normal histogram.
 The main difference is that the interval can be specified by date/time expressions.
 
-NOTE: When specifying a `format` **and** `extended_bounds`, in order for Elasticsearch to be able to parse
-the serialized `DateTime` of `extended_bounds` correctly, the `date_optional_time` format is included
+NOTE: When specifying a `format` **and** `extended_bounds` or `missing`, in order for Elasticsearch to be able to parse
+the serialized `DateTime` of `extended_bounds` or `missing` correctly, the `date_optional_time` format is included
 as part of the `format` value.
 
 Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-datehistogram-aggregation.html[Date Histogram Aggregation].
@@ -30,6 +30,7 @@ Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregat
 [source,csharp]
 ----
 s => s
+.Index(DefaultSeeder.ProjectsAliasFilter)
 .Size(0)
 .Aggregations(aggs => aggs
     .DateHistogram("projects_started_per_month", date => date
@@ -56,7 +57,7 @@ s => s
 
 [source,csharp]
 ----
-new SearchRequest<Project>
+new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
 {
     Size = 0,
     Aggregations = new DateHistogramAggregation("projects_started_per_month")
@@ -65,7 +66,7 @@ new SearchRequest<Project>
         Interval = DateInterval.Month,
         MinimumDocumentCount = 2,
         Format = "yyyy-MM-dd'T'HH:mm:ss",
-        ExtendedBounds = new ExtendedBounds<DateTime>
+        ExtendedBounds = new ExtendedBounds<DateMath>
         {
             Minimum = FixedDate.AddYears(-1),
             Maximum = FixedDate.AddYears(1),
