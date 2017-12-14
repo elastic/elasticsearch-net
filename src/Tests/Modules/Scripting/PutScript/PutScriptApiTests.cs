@@ -1,5 +1,6 @@
 ﻿using System;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -9,12 +10,11 @@ using Xunit;
 namespace Tests.Modules.Scripting.PutScript
 {
 	public class PutScriptApiTests
-		: ApiTestBase<ReadOnlyCluster, IPutScriptResponse, IPutScriptRequest, PutScriptDescriptor, PutScriptRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IPutScriptResponse, IPutScriptRequest, PutScriptDescriptor, PutScriptRequest>
 	{
 		public PutScriptApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private static readonly string _name = "scrpt1";
-
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.PutScript(_name, f),
@@ -25,12 +25,18 @@ namespace Tests.Modules.Scripting.PutScript
 
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override string UrlPath => $"/_scripts/{_name}";
+		protected override int ExpectStatusCode => 200;
+		protected override bool ExpectIsValid => true;
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override object ExpectJson { get; } = new
+		protected override object ExpectJson => new
 		{
-			script = new { lang = "painless", source = "1+1" }
+			script = new
+			{
+				lang = "painless",
+				source = "1+1"
+			}
 		};
 
 		protected override PutScriptDescriptor NewDescriptor() => new PutScriptDescriptor(_name);
@@ -42,5 +48,11 @@ namespace Tests.Modules.Scripting.PutScript
 		{
 			Script = new PainlessScript("1+1")
 		};
+
+		protected override void ExpectResponse(IPutScriptResponse response)
+		{
+			response.ShouldBeValid();
+			response.Acknowledged.Should().BeTrue();
+		}
 	}
 }

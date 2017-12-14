@@ -1,33 +1,50 @@
-﻿using System.Collections.Generic;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// A Stored script
+	/// </summary>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<StoredScript>))]
 	public interface IStoredScript
 	{
+		/// <summary>
+		/// The script language
+		/// </summary>
 		[JsonProperty("lang")]
 		string Lang { get; set; }
 
+		/// <summary>
+		/// The script source
+		/// </summary>
 		[JsonProperty("source")]
 		string Source { get; set; }
 	}
+
+	/// <inheritdoc />
 	public class StoredScript : IStoredScript
 	{
 		[JsonProperty("lang")]
 		string IStoredScript.Lang { get; set; }
+
 		[JsonProperty("source")]
 		string IStoredScript.Source { get; set; }
 
 		//used for deserialization
-		internal StoredScript() { }
+		internal StoredScript() {}
 
+		/// <summary>
+		/// Instantiates a new instance of <see cref="StoredScript"/>
+		/// </summary>
+		/// <param name="lang">Script language</param>
+		/// <param name="source">Script source</param>
 		protected StoredScript(string lang, string source)
 		{
-			((IStoredScript) this).Lang = lang;
-			((IStoredScript) this).Source = source;
+			IStoredScript self = this;
+			self.Lang = lang;
+			self.Source = source;
 		}
 	}
 
@@ -36,39 +53,28 @@ namespace Nest
 		private static readonly string Lang = ScriptLang.Painless.GetStringValue();
 		public PainlessScript(string source) : base(Lang, source) { }
 	}
-	public class GroovyScript : StoredScript
-	{
-		private static readonly string Lang = ScriptLang.Groovy.GetStringValue();
-		public GroovyScript(string source) : base(Lang, source) { }
-	}
-	public class JavaScriptScript : StoredScript
-	{
-		private static readonly string Lang = ScriptLang.JS.GetStringValue();
-		public JavaScriptScript(string source) : base(Lang, source) { }
-	}
-	public class PythonScript : StoredScript
-	{
-		private static readonly string Lang = ScriptLang.Python.GetStringValue();
-		public PythonScript(string source) : base(Lang, source) { }
-	}
+
 	public class LuceneExpressionScript : StoredScript
 	{
 		private static readonly string Lang = ScriptLang.Expression.GetStringValue();
 		public LuceneExpressionScript(string source) : base(Lang, source) { }
 	}
+
 	public class MustacheScript : StoredScript
 	{
 		private static readonly string Lang = ScriptLang.Mustache.GetStringValue();
-		public MustacheScript(string source) : base(Lang, source) { }
+	 	public MustacheScript(string source) : base(Lang, source) { }
 	}
 
 	public class StoredScriptDescriptor : DescriptorBase<StoredScriptDescriptor, IStoredScript>, IStoredScript
 	{
-		string IStoredScript.Lang { get; set; }
 		string IStoredScript.Source { get; set; }
+		string IStoredScript.Lang { get; set; }
+
+		public StoredScriptDescriptor Source(string source) => Assign(a => a.Source = source);
 
 		public StoredScriptDescriptor Lang(string lang) => Assign(a => a.Lang = lang);
 
-		public StoredScriptDescriptor Source(string source) => Assign(a => a.Source = source);
+		public StoredScriptDescriptor Lang(ScriptLang lang) => Assign(a => a.Lang = lang.GetStringValue());
 	}
 }
