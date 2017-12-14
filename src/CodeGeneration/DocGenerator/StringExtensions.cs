@@ -156,6 +156,11 @@ namespace DocGenerator
 			{ "Second.Init", "\"params._agg.commits = []\"" },
 			{ "Second.Map", "\"if (doc['state'].value == \\\"Stable\\\") { params._agg.commits.add(doc['numberOfCommits'].value) }\"" },
 			{ "Second.Reduce", "\"def sum = 0.0; for (a in params._aggs) { sum += a } return sum\"" },
+			{ "Script.Lang", "\"painless\"" },
+			{ "Script.Init", "\"params._agg.commits = []\"" },
+			{ "Script.Map", "\"if (doc['state'].value == \\\"Stable\\\") { params._agg.commits.add(doc['numberOfCommits'].value) }\"" },
+			{ "Script.Combine", "\"def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum\"" },
+			{ "Script.Reduce", "\"def sum = 0.0; for (a in params._aggs) { sum += a } return sum\"" },
 		};
 
 		public static bool TryGetJsonForAnonymousType(this string anonymousTypeString, out string json)
