@@ -10,15 +10,6 @@ namespace Nest
 		[EnumMember(Value = "painless")]
 		Painless,
 
-		[EnumMember(Value = "groovy")]
-		Groovy,
-
-		[EnumMember(Value = "js")]
-		JS,
-
-		[EnumMember(Value = "python")]
-		Python,
-
 		[EnumMember(Value = "expression")]
 		Expression,
 

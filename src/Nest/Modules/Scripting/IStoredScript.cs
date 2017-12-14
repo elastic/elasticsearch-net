@@ -3,17 +3,27 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// A Stored script
+	/// </summary>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<StoredScript>))]
 	public interface IStoredScript
 	{
+		/// <summary>
+		/// The script language
+		/// </summary>
 		[JsonProperty("lang")]
 		string Lang { get; set; }
 
+		/// <summary>
+		/// The script source
+		/// </summary>
 		[JsonProperty("source")]
 		string Source { get; set; }
 	}
 
+	/// <inheritdoc />
 	public class StoredScript : IStoredScript
 	{
 		[JsonProperty("lang")]
@@ -23,27 +33,25 @@ namespace Nest
 		string IStoredScript.Source { get; set; }
 
 		//used for deserialization
-		internal StoredScript()
-		{
-		}
+		internal StoredScript() {}
 
 		/// <summary>
-		/// Stored Script constructor
+		/// Instantiates a new instance of <see cref="StoredScript"/>
 		/// </summary>
-		/// <param name="lang">Used only for Mustache and Lucene Expression templates.</param>
+		/// <param name="lang">Script language</param>
 		/// <param name="source">Script source</param>
 		protected StoredScript(string lang, string source)
 		{
-			((IStoredScript) this).Lang = lang;
-			((IStoredScript) this).Source = source;
+			IStoredScript self = this;
+			self.Lang = lang;
+			self.Source = source;
 		}
 	}
 
 	public class PainlessScript : StoredScript
 	{
-		public PainlessScript(string source) : base(null, source)
-		{
-		}
+		private static readonly string Lang = ScriptLang.Painless.GetStringValue();
+		public PainlessScript(string source) : base(Lang, source) { }
 	}
 
 	public class LuceneExpressionScript : StoredScript
@@ -64,5 +72,9 @@ namespace Nest
 		string IStoredScript.Lang { get; set; }
 
 		public StoredScriptDescriptor Source(string source) => Assign(a => a.Source = source);
+
+		public StoredScriptDescriptor Lang(string lang) => Assign(a => a.Lang = lang);
+
+		public StoredScriptDescriptor Lang(ScriptLang lang) => Assign(a => a.Lang = lang.GetStringValue());
 	}
 }
