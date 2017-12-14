@@ -26,7 +26,7 @@ namespace Nest
 		/// Upon exceeding this limit, new entities are not modeled. The default value is 4096.
 		/// </summary>
 		[JsonProperty("model_memory_limit")]
-		long? ModelMemoryLimit { get; set; }
+		string ModelMemoryLimit { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -35,21 +35,21 @@ namespace Nest
 		/// <inheritdoc />
 		public long? CategorizationExamplesLimit { get; set; }
 		/// <inheritdoc />
-		public long? ModelMemoryLimit { get; set; }
+		public string ModelMemoryLimit { get; set; }
 	}
 
 	/// <inheritdoc />
 	public class AnalysisLimitsDescriptor : DescriptorBase<AnalysisLimitsDescriptor, IAnalysisLimits>, IAnalysisLimits
 	{
 		long? IAnalysisLimits.CategorizationExamplesLimit { get; set; }
-		long? IAnalysisLimits.ModelMemoryLimit { get; set; }
+		string IAnalysisLimits.ModelMemoryLimit { get; set; }
 
 		/// <inheritdoc />
 		public AnalysisLimitsDescriptor CategorizationExamplesLimit(long categorizationExamplesLimit) =>
 			Assign(a => a.CategorizationExamplesLimit = categorizationExamplesLimit);
 
 		/// <inheritdoc />
-		public AnalysisLimitsDescriptor ModelMemoryLimit(long modelMemoryLimit) =>
+		public AnalysisLimitsDescriptor ModelMemoryLimit(string modelMemoryLimit) =>
 			Assign(a => a.ModelMemoryLimit = modelMemoryLimit);
 	}
 
@@ -65,23 +65,23 @@ namespace Nest
 		/// Upon exceeding this limit, new entities are not modeled. The default value is 4096.
 		/// </summary>
 		[JsonProperty("model_memory_limit")]
-		long? ModelMemoryLimit { get; set; }
+		string ModelMemoryLimit { get; set; }
 	}
 
 	/// <inheritdoc />
 	public class AnalysisMemoryLimit : IAnalysisMemoryLimit
 	{
 		/// <inheritdoc />
-		public long? ModelMemoryLimit { get; set; }
+		public string ModelMemoryLimit { get; set; }
 	}
 
 	/// <inheritdoc />
 	public class AnalysisMemoryLimitDescriptor : DescriptorBase<AnalysisMemoryLimitDescriptor, IAnalysisMemoryLimit>, IAnalysisMemoryLimit
 	{
-		long? IAnalysisMemoryLimit.ModelMemoryLimit { get; set; }
+		string IAnalysisMemoryLimit.ModelMemoryLimit { get; set; }
 
 		/// <inheritdoc />
-		public AnalysisMemoryLimitDescriptor ModelMemoryLimit(long modelMemoryLimit) =>
+		public AnalysisMemoryLimitDescriptor ModelMemoryLimit(string modelMemoryLimit) =>
 			Assign(a => a.ModelMemoryLimit = modelMemoryLimit);
 	}
 }
