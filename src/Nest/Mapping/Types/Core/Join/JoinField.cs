@@ -2,13 +2,14 @@ using System;
 
 namespace Nest
 {
-	/// This does not extend from Union because its intended to be used on folk's _source's
-	/// And the union serialization will bleed into their own JSON.NET serializer should they
-	/// have one configured and then it will blow up because their contractresolver do not extend ours
-	/// from which we can snoop ConnectionSettings.
-	///
-	/// ContractJsonResolverAttribute works as well but I rather keep this class contained as much as possible
-	///
+	// This does not extend from Union because its intended to be used on folk's _source's
+	// And the union serialization will bleed into their own JSON.NET serializer should they
+	// have one configured and then it will blow up because their contractresolver do not extend ours
+	// from which we can snoop ConnectionSettings.
+	//
+	// ContractJsonResolverAttribute works as well but I rather keep this class contained as much as possible
+	/// <summary>
+	/// The field on which a parent-child relationship is joined
 	/// </summary>
 	[ContractJsonConverter(typeof(JoinFieldJsonConverter))]
 	public class JoinField

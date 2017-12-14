@@ -12,14 +12,14 @@ using static Nest.Infer;
 
 namespace Tests.ClientConcepts.HighLevel.Mapping
 {
-	/**[[multi-fields]]
+	/**[[parent-child-joins]]
 	* === Parent Child joins using the join mapping
 	*
 	* Prior to Elasticsearch 6.x you could have multiple types in a single index. Through the special _parent field mapping of a given type
 	* one could create 1 to N relationship of parent => children documents. This worked because when indexing children you passed a
 	* `_parent` id which would act as the routing key making sure a parent and its (grand)children all lived on the same shard.
 	*
-	* Starting with 6.x indices you may no longer have multiple types in a single index. One reason for this is that if for instance
+	* Starting with 6.x indices, you may no longer have multiple types in a single index. One reason for this is that if for instance
 	* two types * have the same `name` property they need to be mapped exactly the same but all the API's acted as if you could map
 	* them individually which often lead to confusion.
 	*
@@ -27,7 +27,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	* not on the same shard?
 	*
 	*/
-
 	public class ParentChildJoins : DocumentationTestBase
 	{
 		public abstract class MyDocument
@@ -79,8 +78,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 					)
 				);
 
-			/**
-			 */
 			//json
 			var expected = new
 			{
