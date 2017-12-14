@@ -187,7 +187,7 @@ namespace Nest
 			return (TConnectionSettings) this;
 		}
 
-		private void ApplyPropertyMappings<TDocument>(IList<IPocoPropertyMapping<TDocument>> mappings)
+		private void ApplyPropertyMappings<TDocument>(IList<IClrPropertyMapping<TDocument>> mappings)
 			where TDocument : class
 		{
 			foreach (var mapping in mappings)
@@ -226,10 +226,10 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="TDocument">The type of the document.</typeparam>
 		/// <param name="selector">The selector.</param>
-		public TConnectionSettings InferMappingFor<TDocument>(Func<PocoMappingDescriptor<TDocument>, IPocoMapping<TDocument>> selector)
+		public TConnectionSettings InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
 			where TDocument : class
 		{
-			var inferMapping = selector(new PocoMappingDescriptor<TDocument>());
+			var inferMapping = selector(new ClrTypeMappingDescriptor<TDocument>());
 			if (!inferMapping.IndexName.IsNullOrEmpty())
 				this._defaultIndices.Add(inferMapping.ClrType, inferMapping.IndexName);
 
@@ -253,9 +253,9 @@ namespace Nest
 		/// </summary>
 		/// <param name="documentType">The type of the POCO you wish to configure</param>
 		/// <param name="selector">describe the POCO configuration</param>
-		public TConnectionSettings InferMappingFor(Type documentType, Func<PocoMappingDescriptor, IPocoMapping> selector)
+		public TConnectionSettings InferMappingFor(Type documentType, Func<ClrTypeMappingDescriptor, IClrTypeMapping> selector)
 		{
-			var inferMapping = selector(new PocoMappingDescriptor(documentType));
+			var inferMapping = selector(new ClrTypeMappingDescriptor(documentType));
 			if (!inferMapping.IndexName.IsNullOrEmpty())
 				this._defaultIndices.Add(inferMapping.ClrType, inferMapping.IndexName);
 
@@ -273,7 +273,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="documentType">The type of the POCO you wish to configure</param>
 		/// <param name="selector">describe the POCO configuration</param>
-		public TConnectionSettings InferMappings(IEnumerable<PocoMapping> typeMappings)
+		public TConnectionSettings InferMappings(IEnumerable<ClrTypeMapping> typeMappings)
 		{
 			if (typeMappings == null) return (TConnectionSettings) this;
 			foreach (var inferMapping in typeMappings)
