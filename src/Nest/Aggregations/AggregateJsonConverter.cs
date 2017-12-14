@@ -68,8 +68,8 @@ namespace Nest
 			public const string Meta = "meta";
 		}
 
-		public static string[] AllReservedAggregationNames { get; private set; }
-		public static string UsingReservedAggNameFormat { get; private set; }
+		public static string[] AllReservedAggregationNames { get; }
+		public static string UsingReservedAggNameFormat { get; }
 
 		static AggregateJsonConverter()
 		{
@@ -313,7 +313,6 @@ namespace Nest
 		{
 			reader.Read();
 			var docCount = (reader.Value as long?).GetValueOrDefault(0);
-			var bucket = new SingleBucketAggregate {DocCount = docCount};
 			reader.Read();
 			long? bgCount = null;
 			if ((string)reader.Value == Parser.BgCount)
@@ -333,11 +332,15 @@ namespace Nest
 				{
 					BgCount = bgCount,
 					DocCount = docCount,
-					Items = b.Items
+					Items = b?.Items ?? EmptyReadOnly<IBucket>.Collection
 				};
 			}
 
-			bucket.Aggregations = this.GetSubAggregates(reader, serializer);
+			var nestedAggregations = this.GetSubAggregates(reader, serializer);
+			var bucket = new SingleBucketAggregate(nestedAggregations)
+			{
+				DocCount = docCount
+			};
 
 			return bucket;
 		}
@@ -451,7 +454,7 @@ namespace Nest
 			return extendedStatsMetric;
 		}
 
-		private IReadOnlyDictionary<string, IAggregate> GetSubAggregates(JsonReader reader, JsonSerializer serializer)
+		private Dictionary<string, IAggregate> GetSubAggregates(JsonReader reader, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.PropertyName)
 				return null;
@@ -645,7 +648,9 @@ namespace Nest
 				}
 			}
 
-			var bucket = new RangeBucket
+			var nestedAggregations = this.GetSubAggregates(reader, serializer);
+
+			var bucket = new RangeBucket(nestedAggregations)
 			{
 				Key = key,
 				From = fromDouble,
@@ -653,7 +658,6 @@ namespace Nest
 				DocCount = docCount.GetValueOrDefault(),
 				FromAsString = fromAsString,
 				ToAsString = toAsString,
-				Aggregations = this.GetSubAggregates(reader, serializer)
 			};
 
 			return bucket;
@@ -670,12 +674,13 @@ namespace Nest
 			var docCount = (reader.Value as long?).GetValueOrDefault(0);
 			reader.Read();
 
-			var dateHistogram = new DateHistogramBucket
+			var nestedAggregations = this.GetSubAggregates(reader, serializer);
+
+			var dateHistogram = new DateHistogramBucket(nestedAggregations)
 			{
 				Key = key,
 				KeyAsString = keyAsString,
 				DocCount = docCount,
-				Aggregations = this.GetSubAggregates(reader, serializer)
 			};
 
 			return dateHistogram;
@@ -690,61 +695,69 @@ namespace Nest
 			if (propertyName == Parser.From || propertyName == Parser.To)
 				return GetRangeBucket(reader, serializer, key as string);
 
-			var bucket = new KeyedBucket<object> {Key = key};
+			string keyAsString = null;
 
 			if (propertyName == Parser.KeyAsString)
 			{
-				bucket.KeyAsString = reader.ReadAsString();
+				keyAsString = reader.ReadAsString();
 				reader.Read();
 			}
 
 			reader.Read(); //doc_count;
 			var docCount = reader.Value as long?;
-			bucket.DocCount = docCount.GetValueOrDefault(0);
 			reader.Read();
 
 			var nextProperty = (string) reader.Value;
 			if (nextProperty == Parser.Score)
-				return GetSignificantTermsBucket(reader, serializer, bucket);
+				return GetSignificantTermsBucket(reader, serializer, key, keyAsString, docCount);
 
+			long? docCountErrorUpperBound = null;
 			if (nextProperty == Parser.DocCountErrorUpperBound)
 			{
 				reader.Read();
-				bucket.DocCountErrorUpperBound = reader.Value as long?;
+				docCountErrorUpperBound = reader.Value as long?;
 				reader.Read();
 			}
-			bucket.Aggregations = this.GetSubAggregates(reader, serializer);
+			var nestedAgregates = this.GetSubAggregates(reader, serializer);
+			var bucket = new KeyedBucket<object>(nestedAgregates)
+			{
+				Key = key,
+				KeyAsString = keyAsString,
+				DocCount = docCount.GetValueOrDefault(0),
+				DocCountErrorUpperBound = docCountErrorUpperBound
+			};
 			return bucket;
 		}
 
-		private IBucket GetSignificantTermsBucket(JsonReader reader, JsonSerializer serializer, KeyedBucket<object> keyItem)
+		private IBucket GetSignificantTermsBucket(JsonReader reader, JsonSerializer serializer, object key, string keyAsString, long? docCount)
 		{
 			reader.Read();
 			var score = reader.Value as double?;
 			reader.Read();
 			reader.Read();
 			var bgCount = reader.Value as long?;
-			var significantTermItem = new SignificantTermsBucket()
+			reader.Read();
+			var nestedAggregations = this.GetSubAggregates(reader, serializer);
+			var significantTermItem = new SignificantTermsBucket(nestedAggregations)
 			{
-				Key = keyItem.Key as string,
-				DocCount = keyItem.DocCount.GetValueOrDefault(0),
+				Key = key as string,
+				DocCount = docCount.GetValueOrDefault(0),
 				BgCount = bgCount.GetValueOrDefault(0),
 				Score = score.GetValueOrDefault(0)
 			};
-			reader.Read();
-			significantTermItem.Aggregations = this.GetSubAggregates(reader, serializer);
 			return significantTermItem;
 		}
 
 		private IBucket GetFiltersBucket(JsonReader reader, JsonSerializer serializer)
 		{
 			reader.Read();
-			var filtersBucketItem = new FiltersBucketItem
-			{
-				DocCount = (reader.Value as long?).GetValueOrDefault(0)
-			};
+			var docCount = (reader.Value as long?).GetValueOrDefault(0);
 			reader.Read();
-			filtersBucketItem.Aggregations = this.GetSubAggregates(reader, serializer);
+			var nestedAggregations = this.GetSubAggregates(reader, serializer);
+			var filtersBucketItem = new FiltersBucketItem(nestedAggregations)
+			{
+				DocCount = docCount
+			};
 			return filtersBucketItem;
 		}
 	}

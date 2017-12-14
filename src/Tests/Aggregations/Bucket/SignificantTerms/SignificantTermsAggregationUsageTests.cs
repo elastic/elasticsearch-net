@@ -14,11 +14,11 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 	 *
 	 * [WARNING]
 	 * --
-	 * The significant_terms aggregation can be very heavy when run on large indices. Work is in progress 
-	 * to provide more lightweight sampling techniques. 
+	 * The significant_terms aggregation can be very heavy when run on large indices. Work is in progress
+	 * to provide more lightweight sampling techniques.
 	 * As a result, the API for this feature may change in non-backwards compatible ways
 	 * --
-	 * 
+	 *
 	 * See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-significantterms-aggregation.html[significant terms aggregation] for more detail.
 	 */
 	public class SignificantTermsAggregationUsageTests : AggregationUsageTestBase
@@ -75,7 +75,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var sigNames = response.Aggs.SignificantTerms("significant_names");
+			var sigNames = response.Aggregations.SignificantTerms("significant_names");
 			sigNames.Should().NotBeNull();
 			sigNames.DocCount.Should().BeGreaterThan(0);
 		}
@@ -85,7 +85,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 	 * [float]
 	 * [[significant-terms-pattern-filter]]
 	 * == Filtering with a regular expression pattern
-	 * 
+	 *
 	 * Using significant terms aggregation with filtering to include values using a regular expression pattern
 	 */
 	public class SignificantTermsIncludePatternAggregationUsageTests : AggregationUsageTestBase
@@ -145,7 +145,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var sigNames = response.Aggs.SignificantTerms("significant_names");
+			var sigNames = response.Aggregations.SignificantTerms("significant_names");
 			sigNames.Should().NotBeNull();
 			sigNames.DocCount.Should().BeGreaterThan(0);
 		}
@@ -155,7 +155,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 	 * [float]
 	 * [[significant-terms-exact-value-filter]]
 	 * == Filtering with exact values
-	 * 
+	 *
 	 * Using significant terms aggregation with filtering to exclude specific values
 	 */
 	public class SignificantTermsExcludeExactValuesAggregationUsageTests : AggregationUsageTestBase
@@ -215,7 +215,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var sigNames = response.Aggs.SignificantTerms("significant_names");
+			var sigNames = response.Aggregations.SignificantTerms("significant_names");
 			sigNames.Should().NotBeNull();
 			sigNames.DocCount.Should().BeGreaterThan(0);
 		}

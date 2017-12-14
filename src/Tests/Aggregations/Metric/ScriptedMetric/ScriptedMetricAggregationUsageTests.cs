@@ -74,7 +74,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var sumTheHardWay = response.Aggs.ScriptedMetric("sum_the_hard_way");
+			var sumTheHardWay = response.Aggregations.ScriptedMetric("sum_the_hard_way");
 			sumTheHardWay.Should().NotBeNull();
 			sumTheHardWay.Value<int>().Should().BeGreaterThan(0);
 		}
@@ -223,8 +223,8 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var by_state_total = response.Aggs.ScriptedMetric("by_state_total");
-			var total_commits = response.Aggs.ScriptedMetric("total_commits");
+			var by_state_total = response.Aggregations.ScriptedMetric("by_state_total");
+			var total_commits = response.Aggregations.ScriptedMetric("total_commits");
 
 			by_state_total.Should().NotBeNull();
 			total_commits.Should().NotBeNull();

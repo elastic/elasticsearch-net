@@ -3,30 +3,30 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-	public abstract class BucketAggregateBase : AggregationsHelper, IAggregate
+	public abstract class BucketAggregateBase : AggregateDictionary , IAggregate
 	{
-		protected BucketAggregateBase() { }
-		protected BucketAggregateBase(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
+		protected BucketAggregateBase(IReadOnlyDictionary<string, IAggregate> aggregations) : base(aggregations) { }
 
 		public IReadOnlyDictionary<string, object> Meta { get; set; } = EmptyReadOnly<string, object>.Dictionary;
+	}
+
+	public class SingleBucketAggregate : BucketAggregateBase
+	{
+		public SingleBucketAggregate(IReadOnlyDictionary<string, IAggregate> aggregations) : base(aggregations) { }
+
+		public AggregateDictionary Aggregations { get; protected internal set; }
+
+		public long DocCount { get; internal set; }
 	}
 
 	public class MultiBucketAggregate<TBucket> : BucketAggregateBase
 		where TBucket : IBucket
 	{
-		public MultiBucketAggregate() { }
-		public MultiBucketAggregate(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
+		public MultiBucketAggregate() : base(EmptyReadOnly<string, IAggregate>.Dictionary) { }
 
 		public IReadOnlyCollection<TBucket> Buckets { get; set; } = EmptyReadOnly<TBucket>.Collection;
 	}
 
-	public class SingleBucketAggregate : BucketAggregateBase
-	{
-		public SingleBucketAggregate() { }
-		public SingleBucketAggregate(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
-
-		public long DocCount { get; internal set; }
-	}
 
 	// Intermediate object used for deserialization
 	public class BucketAggregate : IAggregate

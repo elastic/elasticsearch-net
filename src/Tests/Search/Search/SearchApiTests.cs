@@ -66,7 +66,7 @@ namespace Tests.Search.Search
 			response.Hits.First().Source.Should().NotBeNull();
 			response.Aggregations.Count.Should().BeGreaterThan(0);
 			response.Took.Should().BeGreaterThan(0);
-			var startDates = response.Aggs.Terms("startDates");
+			var startDates = response.Aggregations.Terms("startDates");
 			startDates.Should().NotBeNull();
 
 			foreach (var document in response.Documents)
@@ -186,7 +186,7 @@ namespace Tests.Search.Search
 			response.Hits.First().Fields.ValueOf<Project, string>(p => p.Name).Should().NotBeNullOrEmpty();
 			response.Hits.First().Fields.ValueOf<Project, int?>(p => p.NumberOfCommits).Should().BeGreaterThan(0);
 			response.Aggregations.Count.Should().BeGreaterThan(0);
-			var startDates = response.Aggs.Terms("startDates");
+			var startDates = response.Aggregations.Terms("startDates");
 			startDates.Should().NotBeNull();
 		}
 	}

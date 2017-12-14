@@ -4,8 +4,7 @@ namespace Nest
 {
 	public class SignificantTermsBucket : BucketBase, IBucket
 	{
-		public SignificantTermsBucket() { }
-		public SignificantTermsBucket(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
+		public SignificantTermsBucket(IDictionary<string, IAggregate> dict) : base(dict) { }
 
 		public string Key { get; set; }
 		public long BgCount { get; set; }

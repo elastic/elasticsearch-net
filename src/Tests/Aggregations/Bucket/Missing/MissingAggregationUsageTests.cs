@@ -46,7 +46,7 @@ namespace Tests.Aggregations.Bucket.Missing
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var projectsWithoutDesc = response.Aggs.Missing("projects_without_a_description");
+			var projectsWithoutDesc = response.Aggregations.Missing("projects_without_a_description");
 			projectsWithoutDesc.Should().NotBeNull();
 		}
 	}

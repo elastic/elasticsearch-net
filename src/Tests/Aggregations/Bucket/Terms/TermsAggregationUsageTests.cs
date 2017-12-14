@@ -102,7 +102,7 @@ namespace Tests.Aggregations.Bucket.Terms
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var states = response.Aggs.Terms("states");
+			var states = response.Aggregations.Terms("states");
 			states.Should().NotBeNull();
 			states.DocCountErrorUpperBound.Should().HaveValue();
 			states.SumOtherDocCount.Should().HaveValue();
@@ -211,7 +211,7 @@ namespace Tests.Aggregations.Bucket.Terms
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var states = response.Aggs.Terms("states");
+			var states = response.Aggregations.Terms("states");
 			states.Should().NotBeNull();
 			states.DocCountErrorUpperBound.Should().HaveValue();
 			states.SumOtherDocCount.Should().HaveValue();
@@ -320,7 +320,7 @@ namespace Tests.Aggregations.Bucket.Terms
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var states = response.Aggs.Terms("states");
+			var states = response.Aggregations.Terms("states");
 			states.Should().NotBeNull();
 			states.DocCountErrorUpperBound.Should().HaveValue();
 			states.SumOtherDocCount.Should().HaveValue();
@@ -401,7 +401,7 @@ namespace Tests.Aggregations.Bucket.Terms
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var commits = response.Aggs.Terms<int>("commits");
+			var commits = response.Aggregations.Terms<int>("commits");
 			commits.Should().NotBeNull();
 			commits.DocCountErrorUpperBound.Should().HaveValue();
 			commits.SumOtherDocCount.Should().HaveValue();
@@ -468,7 +468,7 @@ namespace Tests.Aggregations.Bucket.Terms
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var commits = response.Aggs.Terms<int>("commits");
+			var commits = response.Aggregations.Terms<int>("commits");
 			commits.Should().NotBeNull();
 			commits.DocCountErrorUpperBound.Should().HaveValue();
 			commits.SumOtherDocCount.Should().HaveValue();
@@ -478,6 +478,84 @@ namespace Tests.Aggregations.Bucket.Terms
 			{
 				item.Key.Should().BeGreaterThan(0);
 				item.DocCount.Should().BeGreaterOrEqualTo(1);
+			}
+			commits.Buckets.Should().Contain(b => b.DocCountErrorUpperBound.HasValue);
+		}
+	}
+
+	/**
+	 * [float]
+	 * == Nested terms aggregations
+	 *
+	 * A terms aggregation returns buckets that can contain more aggregations
+	 */
+	public class NestedTermsAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
+	{
+		public NestedTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override object ExpectJson => new
+		{
+			size = 0,
+			aggs = new
+			{
+				commits = new
+				{
+					terms = new
+					{
+						field = "numberOfCommits",
+					}
+				}
+			}
+		};
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Size(0)
+			.Index(DefaultSeeder.ProjectsAliasFilter)
+			.Aggregations(a => a
+				.Terms<int>("commits", st => st
+					.Field(p => p.NumberOfCommits)
+					.Aggregations(aggs=>aggs
+						.Terms("state", t => t.Field(p => p.State))
+					)
+				)
+			);
+
+		protected override SearchRequest<Project> Initializer =>
+			new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
+			{
+				Size = 0,
+				Aggregations = new TermsAggregation<int>("commits")
+				{
+					Field = Field<Project>(p => p.NumberOfCommits),
+					Aggregations = new TermsAggregation<string>("state")
+					{
+						Field = Field<Project>(p => p.State),
+				}
+				}
+			};
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.ShouldBeValid();
+			var commits = response.Aggregations.Terms<int>("commits");
+			commits.Should().NotBeNull();
+			commits.DocCountErrorUpperBound.Should().HaveValue();
+			commits.SumOtherDocCount.Should().HaveValue();
+			commits.Buckets.Should().NotBeNull();
+			commits.Buckets.Count.Should().BeGreaterThan(0);
+			foreach (var item in commits.Buckets)
+			{
+				item.Key.Should().BeGreaterThan(0);
+				item.DocCount.Should().BeGreaterOrEqualTo(1);
+				var states = item.Terms("state");
+				states.Should().NotBeNull();
+				states.Count.Should().BeGreaterThan(0);
+				states.Buckets.Should().NotBeEmpty();
+				foreach (var b in states.Buckets)
+				{
+					b.DocCount.Should().BeGreaterThan(0);
+					b.Key.Should().NotBeNullOrEmpty();
+				}
 			}
 			commits.Buckets.Should().Contain(b => b.DocCountErrorUpperBound.HasValue);
 		}

@@ -43,7 +43,7 @@ namespace Tests.Aggregations.Metric.Sum
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var commitsSum = response.Aggs.Sum("commits_sum");
+			var commitsSum = response.Aggregations.Sum("commits_sum");
 			commitsSum.Should().NotBeNull();
 			commitsSum.Value.Should().BeGreaterThan(0);
 		}

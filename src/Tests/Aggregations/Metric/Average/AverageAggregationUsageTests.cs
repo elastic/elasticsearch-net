@@ -66,7 +66,7 @@ namespace Tests.Aggregations.Metric.Average
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var commitsAvg = response.Aggs.Average("average_commits");
+			var commitsAvg = response.Aggregations.Average("average_commits");
 			commitsAvg.Should().NotBeNull();
 			commitsAvg.Value.Should().BeGreaterThan(0);
 			commitsAvg.Meta.Should().NotBeNull().And.HaveCount(1);

@@ -90,7 +90,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 			*/
 			response.ShouldBeValid();
 
-			var dateHistogram = response.Aggs.DateRange("projects_date_ranges");
+			var dateHistogram = response.Aggregations.DateRange("projects_date_ranges");
 			dateHistogram.Should().NotBeNull();
 			dateHistogram.Buckets.Should().NotBeNull();
 

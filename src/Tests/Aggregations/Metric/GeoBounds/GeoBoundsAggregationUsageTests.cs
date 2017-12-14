@@ -48,7 +48,7 @@ namespace Tests.Aggregations.Metric.GeoBounds
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var viewport = response.Aggs.GeoBounds("viewport");
+			var viewport = response.Aggregations.GeoBounds("viewport");
 			viewport.Should().NotBeNull();
 			viewport.Bounds.Should().NotBeNull();
 

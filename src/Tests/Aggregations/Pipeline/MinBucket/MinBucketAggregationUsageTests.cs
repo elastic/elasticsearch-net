@@ -78,12 +78,12 @@ namespace Tests.Aggregations.Pipeline.MinBucket
 		{
 			response.ShouldBeValid();
 
-			var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
+			var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
 			projectsPerMonth.Should().NotBeNull();
 			projectsPerMonth.Buckets.Should().NotBeNull();
 			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
-			var minCommits = response.Aggs.MinBucket("min_commits_per_month");
+			var minCommits = response.Aggregations.MinBucket("min_commits_per_month");
 			minCommits.Should().NotBeNull();
 			minCommits.Value.Should().BeGreaterThan(0);
 			minCommits.Keys.Should().NotBeNull();

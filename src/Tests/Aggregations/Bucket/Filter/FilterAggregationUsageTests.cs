@@ -75,7 +75,7 @@ namespace Tests.Aggregations.Bucket.Filter
 			*/
 			response.ShouldBeValid();
 
-			var filterAgg = response.Aggs.Filter("bethels_projects");
+			var filterAgg = response.Aggregations.Filter("bethels_projects");
 			filterAgg.Should().NotBeNull();
 			filterAgg.DocCount.Should().BeGreaterThan(0);
 			var tags = filterAgg.Terms("project_tags");
@@ -186,7 +186,7 @@ namespace Tests.Aggregations.Bucket.Filter
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			response.Aggs.Filter(_aggName).DocCount.Should().BeGreaterThan(0);
+			response.Aggregations.Filter(_aggName).DocCount.Should().BeGreaterThan(0);
 		}
 	}
 }

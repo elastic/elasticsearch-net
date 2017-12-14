@@ -43,7 +43,7 @@ namespace Tests.Aggregations.Metric.ValueCount
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var commitCount = response.Aggs.ValueCount("commit_count");
+			var commitCount = response.Aggregations.ValueCount("commit_count");
 			commitCount.Should().NotBeNull();
 			commitCount.Value.Should().BeGreaterThan(0);
 		}
