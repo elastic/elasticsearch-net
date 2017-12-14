@@ -563,4 +563,31 @@ namespace Tests.Aggregations.Bucket.Terms
 			}
 		}
 	}
+	/**
+	 * [float]
+	 * == Typed Keys aggregations
+	 *
+	 * Starting with Elasticsearch 6.x you can provide a `typed_keys` parameter which will prefix all the aggregation names
+	 * with the type of aggregation that is returned. The following modifies the previous nested terms aggregation and sends it again
+	 * but this time with the `typed_keys` option set. The client should treat this in a an opaque fashion so let's assert that it does.
+	 */
+
+	public class TypedKeysTermsAggregationUsageTests : NestedTermsAggregationUsageTests
+	{
+		public TypedKeysTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search?typed_keys=true";
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => f => base.Fluent(f.TypedKeys());
+
+		protected override SearchRequest<Project> Initializer
+		{
+			get
+			{
+				var r = base.Initializer;
+				r.TypedKeys = true;
+				return r;
+			}
+		}
+	}
 }

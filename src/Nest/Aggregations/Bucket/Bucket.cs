@@ -9,7 +9,6 @@ namespace Nest
 
 	public abstract class BucketBase : AggregateDictionary, IBucket
 	{
-		protected BucketBase(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
 		protected BucketBase(IReadOnlyDictionary<string, IAggregate> aggregations) : base(aggregations) { }
 	}
 }

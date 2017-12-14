@@ -8,17 +8,20 @@ namespace Nest
 	{
 		protected internal IReadOnlyDictionary<TKey, TValue> BackingDictionary { get; } = EmptyReadOnly<TKey, TValue>.Dictionary;
 
-		protected IsAReadOnlyDictionaryBase(IReadOnlyDictionary<TKey, TValue> backingDictionary) =>
-			this.BackingDictionary = backingDictionary ?? EmptyReadOnly<TKey, TValue>.Dictionary;
-		protected IsAReadOnlyDictionaryBase(IDictionary<TKey, TValue> backingDictionary)
+		protected IsAReadOnlyDictionaryBase(IReadOnlyDictionary<TKey, TValue> backingDictionary)
 		{
 			if (backingDictionary == null) return;
 
-			foreach (var key in backingDictionary.Keys) ValidateKey(key);
+			var dictionary = new Dictionary<TKey, TValue>();
+			foreach (var key in backingDictionary.Keys)
+				// ReSharper disable once VirtualMemberCallInConstructor
+				// expect all implementations of Sanitize to be pure
+				dictionary[Sanitize(key)] = backingDictionary[key];
 
-			this.BackingDictionary = new ReadOnlyDictionary<TKey, TValue>(backingDictionary);
+			this.BackingDictionary = dictionary;
 		}
-		protected virtual TKey ValidateKey(TKey key) => key;
+
+		protected virtual TKey Sanitize(TKey key) => key;
 
 		IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() =>
 			this.BackingDictionary.GetEnumerator();
