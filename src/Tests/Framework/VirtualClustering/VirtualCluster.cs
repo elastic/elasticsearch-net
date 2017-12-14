@@ -56,7 +56,7 @@ namespace Tests.Framework
 		public VirtualCluster HasSetting(string key, string value, params int[] ports)
 		{
 			foreach (var node in this._nodes.Where(n => ports.Contains(n.Uri.Port)))
-				node.Settings = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>{{key, value}});
+				node.Settings = new ReadOnlyDictionary<string, object>(new Dictionary<string, object>{{key, value}});
 			return this;
 		}
 		public VirtualCluster HttpDisabled(params int[] ports)

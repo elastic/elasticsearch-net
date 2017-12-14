@@ -50,7 +50,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 				.Select(i => new Uri($"http://localhost:{9200 + i}"))
 				.Select((u, i) => new Node(u)
 				{
-					Settings = new Dictionary<string, string> {{"rack", $"rack_{u.Port - 9200}"}}
+					Settings = new Dictionary<string, object> {{"rack", $"rack_{u.Port - 9200}"}}
 				});
 
 			/** We set up a cluster with 4 nodes all having a different rack id
@@ -68,8 +68,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 					.ClientCalls(p => p.SucceedAlways()))
 				)
 				.StickySniffingConnectionPool(n=>
-					(n.Settings.TryGetValue("rack", out string v) && v == "rack_2" ? 10 : 0)
-					+(n.Settings.TryGetValue("rack", out string r) && r == "rack_11" ? 10 : 0)
+					(n.Settings.TryGetValue("rack", out var v) && v.ToString() == "rack_2" ? 10 : 0)
+					+(n.Settings.TryGetValue("rack", out var r) && r.ToString() == "rack_11" ? 10 : 0)
 				)
 				.Settings(p => p.DisablePing().SniffOnStartup(false))
 			);
@@ -105,7 +105,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 				.Select(i => new Uri($"http://localhost:{9200 + i}"))
 				.Select((u, i) => new Node(u)
 				{
-					Settings = new Dictionary<string, string> {{"rack", $"rack_{u.Port - 9200}"}}
+					Settings = new Dictionary<string, object> {{"rack", $"rack_{u.Port - 9200}"}}
 				});
 
 			/** We seed a cluster with an array of 4 Uri's starting at port 9200.
@@ -119,7 +119,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 					.ClientCalls(p => p.SucceedAlways()))
 				)
 				.StickySniffingConnectionPool(n=>
-					(n.Settings.TryGetValue("rack", out string v) && v == "rack_2" ? 10 : 0)
+					(n.Settings.TryGetValue("rack", out var v) && v.ToString() == "rack_2" ? 10 : 0)
 				)
 				.Settings(p => p.DisablePing())
 			);

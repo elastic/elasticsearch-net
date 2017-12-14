@@ -47,8 +47,8 @@ namespace Elasticsearch.Net
 		/// <summary>The name of the node, defaults to null when unknown/unspecified</summary>
 		public string Name { get; set; }
 
-		private static readonly IReadOnlyDictionary<string, string> EmptySettings = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>());
-		public IReadOnlyDictionary<string, string> Settings { get; set; } = EmptySettings;
+		private static readonly IReadOnlyDictionary<string, object> EmptySettings = new ReadOnlyDictionary<string, object>(new Dictionary<string, object>());
+		public IReadOnlyDictionary<string, object> Settings { get; set; } = EmptySettings;
 
 		/// <summary> The number of failed attempts trying to use this node, resets when a node is marked alive</summary>
 		public int FailedAttempts { get; private set; }

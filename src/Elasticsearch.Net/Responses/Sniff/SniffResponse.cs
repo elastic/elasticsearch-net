@@ -53,7 +53,7 @@ namespace Elasticsearch.Net
 					HoldsData = info.HoldsData,
 					IngestEnabled = info.IngestEnabled,
 					HttpEnabled = info.HttpEnabled,
-					Settings = new ReadOnlyDictionary<string, string>(info.settings)
+					Settings = new ReadOnlyDictionary<string, object>(info.settings)
 				};
 				yield return node;
 			}
@@ -70,7 +70,7 @@ namespace Elasticsearch.Net
 		public string build_hash { get; set; }
 		public IList<string> roles { get; set; }
 		public NodeInfoHttp http { get; set; }
-		public IDictionary<string, string> settings { get; set; }
+		public IDictionary<string, object> settings { get; set; }
 
 		internal bool MasterEligible => this.roles?.Contains("master") ?? false;
 		internal bool HoldsData => this.roles?.Contains("data") ?? false;
