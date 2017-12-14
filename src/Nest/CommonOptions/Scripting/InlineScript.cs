@@ -9,17 +9,14 @@ namespace Nest
 		[JsonProperty("source")]
 		string Source { get; set; }
 
-		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
+		[Obsolete("Use Source. Inline is deprecated and scheduled to be removed in Elasticsearch 7.0")]
 		[JsonIgnore]
 		string Inline { get; set; }
 	}
 
 	public class InlineScript : ScriptBase, IInlineScript
 	{
-		public InlineScript(string script)
-		{
-			this.Source = script;
-		}
+		public InlineScript(string script) => this.Source = script;
 
 		public string Source { get; set; }
 		public string Inline { get => this.Source; set => this.Source = value; }
@@ -33,15 +30,13 @@ namespace Nest
 		string IInlineScript.Inline { get => Self.Source; set => Self.Source = value; }
 		string IInlineScript.Source { get; set; }
 
-		public InlineScriptDescriptor() {}
+		public InlineScriptDescriptor() { }
 
-		public InlineScriptDescriptor(string script)
-		{
-			Self.Source = script;
-		}
+		public InlineScriptDescriptor(string script) => Self.Source = script;
 
-		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
+		[Obsolete("Use Source(). Inline() is deprecated and scheduled to be removed in Elasticsearch 7.0")]
 		public InlineScriptDescriptor Inline(string script) => Assign(a => a.Source = script);
+
 		public InlineScriptDescriptor Source(string script) => Assign(a => a.Source = script);
 	}
 }
