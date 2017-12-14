@@ -4,8 +4,7 @@ namespace Nest
 {
 	public class RangeBucket : BucketBase, IBucket
 	{
-		public RangeBucket() { }
-		public RangeBucket(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
+		public RangeBucket(IDictionary<string, IAggregate> dict) : base(dict) { }
 
 		public string Key { get; set; }
 		public double? From { get; set; }

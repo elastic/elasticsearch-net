@@ -55,7 +55,7 @@ namespace Tests.Aggregations.Bucket.GeoHashGrid
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var myGeoHashGrid = response.Aggs.GeoHash("my_geohash_grid");
+			var myGeoHashGrid = response.Aggregations.GeoHash("my_geohash_grid");
 			myGeoHashGrid.Should().NotBeNull();
 		}
 	}

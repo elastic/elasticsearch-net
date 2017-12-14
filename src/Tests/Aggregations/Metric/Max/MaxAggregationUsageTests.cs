@@ -43,7 +43,7 @@ namespace Tests.Aggregations.Metric.Max
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var max = response.Aggs.Max("max_commits");
+			var max = response.Aggregations.Max("max_commits");
 			max.Should().NotBeNull();
 			max.Value.Should().BeGreaterThan(0);
 		}

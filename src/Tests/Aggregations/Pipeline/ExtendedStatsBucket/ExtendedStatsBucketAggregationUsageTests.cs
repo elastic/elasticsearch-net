@@ -83,12 +83,12 @@ namespace Tests.Aggregations.Pipeline.ExtendedStatsBucket
 		{
 			response.ShouldBeValid();
 
-			var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
+			var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
 			projectsPerMonth.Should().NotBeNull();
 			projectsPerMonth.Buckets.Should().NotBeNull();
 			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
-			var commitsStats = response.Aggs.ExtendedStatsBucket("extended_stats_commits_per_month");
+			var commitsStats = response.Aggregations.ExtendedStatsBucket("extended_stats_commits_per_month");
 			commitsStats.Should().NotBeNull();
 			commitsStats.Average.Should().BeGreaterThan(0);
 			commitsStats.Max.Should().BeGreaterThan(0);

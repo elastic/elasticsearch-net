@@ -60,7 +60,7 @@ namespace Tests.Aggregations.Bucket.Global
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var allProjects = response.Aggs.Global("all_projects");
+			var allProjects = response.Aggregations.Global("all_projects");
 			allProjects.Should().NotBeNull();
 			var names = allProjects.Terms("names");
 			names.Should().NotBeNull();

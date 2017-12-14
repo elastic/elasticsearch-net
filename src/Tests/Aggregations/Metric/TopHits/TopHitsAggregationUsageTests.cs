@@ -186,7 +186,7 @@ namespace Tests.Aggregations.Metric.TopHits
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var states = response.Aggs.Terms("states");
+			var states = response.Aggregations.Terms("states");
 			states.Should().NotBeNull();
 			states.Buckets.Should().NotBeNullOrEmpty();
 			foreach(var state in states.Buckets)

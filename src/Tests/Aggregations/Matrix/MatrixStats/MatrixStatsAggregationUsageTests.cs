@@ -78,7 +78,7 @@ namespace Tests.Aggregations.Matrix.MatrixStats
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var matrix = response.Aggs.MatrixStats("matrixstats");
+			var matrix = response.Aggregations.MatrixStats("matrixstats");
 			matrix.Should().NotBeNull();
 			matrix.Fields.Should().NotBeNull().And.HaveCount(2);
 

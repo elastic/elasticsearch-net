@@ -64,7 +64,7 @@ namespace Tests.Aggregations.Bucket.AdjacencyMatrix
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var interactions = response.Aggs.AdjacencyMatrix("interactions");
+			var interactions = response.Aggregations.AdjacencyMatrix("interactions");
 			interactions.Should().NotBeNull();
 			var buckets = interactions.Buckets;
 			buckets.Should().NotBeNullOrEmpty();

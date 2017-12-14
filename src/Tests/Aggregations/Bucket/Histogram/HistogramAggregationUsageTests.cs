@@ -61,7 +61,7 @@ namespace Tests.Aggregations.Bucket.Histogram
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var commits = response.Aggs.Histogram("commits");
+			var commits = response.Aggregations.Histogram("commits");
 			commits.Should().NotBeNull();
 			commits.Buckets.Should().NotBeNull();
 			commits.Buckets.Count.Should().BeGreaterThan(0);

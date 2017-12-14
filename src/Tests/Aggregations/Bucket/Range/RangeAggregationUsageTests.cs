@@ -65,7 +65,7 @@ namespace Tests.Aggregations.Bucket.Range
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var commitRanges = response.Aggs.Range("commit_ranges");
+			var commitRanges = response.Aggregations.Range("commit_ranges");
 			commitRanges.Should().NotBeNull();
 			commitRanges.Buckets.Count.Should().Be(3);
 			commitRanges.Buckets.FirstOrDefault(r => r.Key == "*-100.0").Should().NotBeNull();

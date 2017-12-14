@@ -1,26 +1,15 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Nest
 {
-	public class AggregationsHelper
+	public class AggregateDictionary : IsAReadOnlyDictionaryBase<string, IAggregate>
 	{
-		public IReadOnlyDictionary<string, IAggregate> Aggregations { get; protected internal set; } = EmptyReadOnly<string, IAggregate>.Dictionary;
+		public static AggregateDictionary Default { get; } = new AggregateDictionary(EmptyReadOnly<string, IAggregate>.Dictionary);
 
-		public AggregationsHelper() { }
-
-		protected AggregationsHelper(IDictionary<string, IAggregate> aggregations)
-		{
-			this.Aggregations = aggregations != null ?
-				new Dictionary<string, IAggregate>(aggregations)
-				: EmptyReadOnly<string, IAggregate>.Dictionary;
-		}
-		public AggregationsHelper(IReadOnlyDictionary<string, IAggregate> aggregations)
-		{
-			this.Aggregations = aggregations ?? EmptyReadOnly<string, IAggregate>.Dictionary;
-		}
+		public AggregateDictionary(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary) { }
+		public AggregateDictionary(IDictionary<string, IAggregate> backingDictionary) : base(backingDictionary) { }
 
 		public ValueAggregate Min(string key) => this.TryGet<ValueAggregate>(key);
 
@@ -159,7 +148,7 @@ namespace Nest
 			where TAggregate : class, IAggregate
 		{
 			IAggregate agg;
-			return this.Aggregations.TryGetValue(key, out agg) ? agg as TAggregate : null;
+			return this.BackingDictionary.TryGetValue(key, out agg) ? agg as TAggregate : null;
 		}
 
 		private MultiBucketAggregate<TBucket> GetMultiBucketAggregate<TBucket>(string key)
@@ -191,15 +180,15 @@ namespace Nest
 
 			foreach (var bucket in buckets)
 			{
-				yield return new KeyedBucket<TKey>
+				yield return new KeyedBucket<TKey>(bucket.BackingDictionary)
 				{
 					Key = (TKey)Convert.ChangeType(bucket.Key, typeof(TKey)),
 					KeyAsString = bucket.KeyAsString,
-					Aggregations = bucket.Aggregations,
 					DocCount = bucket.DocCount,
 					DocCountErrorUpperBound = bucket.DocCountErrorUpperBound
 				};
 			}
 		}
+
 	}
 }

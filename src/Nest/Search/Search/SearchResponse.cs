@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -21,19 +20,16 @@ namespace Nest
 		/// <summary>
 		/// Gets the collection of aggregations
 		/// </summary>
-		IReadOnlyDictionary<string, IAggregate> Aggregations { get; }
+		AggregateDictionary Aggregations { get; }
+
+		[Obsolete("Aggs has been renamed to Aggregations and will be removed in NEST 7.x")]
+		AggregateDictionary Aggs { get; }
 
 		/// <summary>
 		/// Gets the results of profiling the search query. Has a value only when
 		/// <see cref="ISearchRequest.Profile"/> is set to <c>true</c> on the search request.
 		/// </summary>
 		Profile Profile { get; }
-
-		/// <summary>
-		/// Gets the aggregations helper that can be used to more easily handle aggregation
-		/// results.
-		/// </summary>
-		AggregationsHelper Aggs { get; }
 
 		/// <summary>
 		/// Gets the suggester results.
@@ -111,15 +107,13 @@ namespace Nest
 
 		[JsonProperty("aggregations")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IAggregate>))]
-		public IReadOnlyDictionary<string, IAggregate> Aggregations { get; internal set; } = EmptyReadOnly<string, IAggregate>.Dictionary;
+		public AggregateDictionary Aggregations { get; internal set; } = AggregateDictionary.Default;
+
+		[JsonIgnore]
+		public AggregateDictionary Aggs => this.Aggregations;
 
 		[JsonProperty("profile")]
 		public Profile Profile { get; internal set; }
-
-		private AggregationsHelper _agg;
-
-		[JsonIgnore]
-		public AggregationsHelper Aggs => _agg ?? (_agg = new AggregationsHelper(this.Aggregations));
 
 		[JsonProperty("suggest")]
 		public IReadOnlyDictionary<string, Suggest<T>[]> Suggest { get; internal set; } =

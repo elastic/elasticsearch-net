@@ -65,7 +65,7 @@ namespace Tests.Aggregations.Bucket.Sampler
 		{
 			response.ShouldBeValid();
 
-			var sample = response.Aggs.Sampler("sample");
+			var sample = response.Aggregations.Sampler("sample");
 			sample.Should().NotBeNull();
 			var sigTags = sample.SignificantTerms("significant_names");
 			sigTags.Should().NotBeNull();

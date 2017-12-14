@@ -299,7 +299,7 @@ namespace Tests.ClientConcepts.HighLevel
 				)
 			);
 
-			var termsAggregation = searchResponse.Aggs.Terms("last_names");
+			var termsAggregation = searchResponse.Aggregations.Terms("last_names");
 		}
 
 		/**

@@ -83,12 +83,12 @@ namespace Tests.Aggregations.Pipeline.PercentilesBucket
 		{
 			response.ShouldBeValid();
 
-			var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
+			var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
 			projectsPerMonth.Should().NotBeNull();
 			projectsPerMonth.Buckets.Should().NotBeNull();
 			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
-			var commitsOutlier = response.Aggs.PercentilesBucket("commits_outlier");
+			var commitsOutlier = response.Aggregations.PercentilesBucket("commits_outlier");
 			commitsOutlier.Should().NotBeNull();
 			commitsOutlier.Items.Should().NotBeNullOrEmpty();
 			foreach (var item in commitsOutlier.Items)

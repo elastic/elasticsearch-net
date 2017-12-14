@@ -287,7 +287,7 @@ namespace Tests.Search.Hits
 
 			var response = this.Deserialize<SearchResponse<Person>>(json);
 
-			var nestedChildrenAggregation = response.Aggs.Nested("children");
+			var nestedChildrenAggregation = response.Aggregations.Nested("children");
 			nestedChildrenAggregation.Should().NotBeNull();
 
 			var nestedGrandChildrenAggregation = nestedChildrenAggregation.Nested("grand_children");

@@ -72,7 +72,7 @@ namespace Tests.Aggregations.Bucket.GeoDistance
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var ringsAroundAmsterdam = response.Aggs.GeoDistance("rings_around_amsterdam");
+			var ringsAroundAmsterdam = response.Aggregations.GeoDistance("rings_around_amsterdam");
 			ringsAroundAmsterdam.Should().NotBeNull();
 			ringsAroundAmsterdam.Buckets.FirstOrDefault(r => r.Key == "*-100.0").Should().NotBeNull();
 			ringsAroundAmsterdam.Buckets.FirstOrDefault(r => r.Key == "100.0-300.0").Should().NotBeNull();
