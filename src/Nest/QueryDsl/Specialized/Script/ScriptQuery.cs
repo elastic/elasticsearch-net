@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
 	[JsonConverter(typeof(ScriptQueryConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IScriptQuery : IQuery
@@ -13,7 +12,7 @@ namespace Nest
 		[JsonProperty("source")]
 		string Source { get; set; }
 
-		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
+		[Obsolete("Use Source. Inline is deprecated and scheduled to be removed in Elasticsearch 7.0")]
 		[JsonIgnore]
 		string Inline { get; set; }
 
@@ -32,7 +31,7 @@ namespace Nest
 	{
 		protected override bool Conditionless => IsConditionless(this);
 		public string Source { get; set; }
-		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
+		[Obsolete("Use Source. Inline is deprecated and scheduled to be removed in Elasticsearch 7.0")]
 		public string Inline { get => this.Source; set => this.Source = value; }
 		public Id Id { get; set; }
 		public Dictionary<string, object> Params { get; set; }
@@ -56,7 +55,7 @@ namespace Nest
 		Dictionary<string, object> IScriptQuery.Params { get; set; }
 
 		/// <summary> Inline script to execute </summary>
-		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
+		[Obsolete("Use Source(). Inline() is deprecated and scheduled to be removed in Elasticsearch 7.0")]
 		public ScriptQueryDescriptor<T> Inline(string script) => Assign(a => a.Inline = script);
 
 		/// <summary> Inline script to execute </summary>
@@ -74,10 +73,10 @@ namespace Nest
 		///	    script: "doc['num1'].value &gt; param1"
 		///		param: "param1" = 5
 		/// </example>
-		/// <param name="paramDictionary">param</param>
+		/// <param name="paramsDictionary">param</param>
 		/// <returns>this</returns>
-		public ScriptQueryDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary) =>
-			Assign(a => a.Params = paramDictionary(new FluentDictionary<string, object>()));
+		public ScriptQueryDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsDictionary) =>
+			Assign(a => a.Params = paramsDictionary?.Invoke(new FluentDictionary<string, object>()));
 
 		/// <summary>
 		/// Language of script.
