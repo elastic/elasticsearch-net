@@ -23,5 +23,7 @@ namespace Nest
 			Assign(a => a.Script = selector?.Invoke(new StoredScriptDescriptor()));
 
 		public PutScriptDescriptor Painless(string source) => Assign(a => a.Script = new PainlessScript(source));
+		public PutScriptDescriptor LuceneExpression(string source) => Assign(a => a.Script = new LuceneExpressionScript(source));
+		public PutScriptDescriptor Mustache(string source) => Assign(a => a.Script = new MustacheScript(source));
 	}
 }
