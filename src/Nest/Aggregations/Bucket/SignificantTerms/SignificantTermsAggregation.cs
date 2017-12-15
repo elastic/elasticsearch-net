@@ -35,7 +35,16 @@ namespace Nest
 		/// number of hits
 		/// </summary>
 		[JsonProperty("min_doc_count")]
-		int? MinimumDocumentCount { get; set; }
+		long? MinimumDocumentCount { get; set; }
+
+		/// <summary>
+		/// Regulates the certainty a shard has if the term should actually be added to the candidate
+		/// list or not with respect to the <see cref="MinimumDocumentCount"/>.
+		/// Terms will only be considered if their local shard frequency within
+		/// the set is higher than the <see cref="ShardMinimumDocumentCount"/>.
+		/// </summary>
+		[JsonProperty("shard_min_doc_count")]
+		long? ShardMinimumDocumentCount { get; set; }
 
 		/// <summary>
 		/// Determines the mechanism by which aggregations are executed
@@ -97,7 +106,6 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("background_filter")]
 		QueryContainer BackgroundFilter { get; set; }
-
 	}
 
 	public class SignificantTermsAggregation : BucketAggregationBase, ISignificantTermsAggregation
@@ -109,13 +117,13 @@ namespace Nest
 		/// <inheritdoc />
 		public int? ShardSize { get; set; }
 		/// <inheritdoc />
-		public int? MinimumDocumentCount { get; set; }
+		public long? MinimumDocumentCount { get; set; }
+		/// <inheritdoc />
+		public long? ShardMinimumDocumentCount { get; set; }
 		/// <inheritdoc />
 		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
-
 		/// <inheritdoc />
 		public SignificantTermsIncludeExclude Include { get; set; }
-
 		/// <inheritdoc />
 		public SignificantTermsIncludeExclude Exclude { get; set; }
 		/// <inheritdoc />
@@ -149,7 +157,9 @@ namespace Nest
 
 		int? ISignificantTermsAggregation.ShardSize { get; set; }
 
-		int? ISignificantTermsAggregation.MinimumDocumentCount { get; set; }
+		long? ISignificantTermsAggregation.MinimumDocumentCount { get; set; }
+
+		long? ISignificantTermsAggregation.ShardMinimumDocumentCount { get; set; }
 
 		TermsAggregationExecutionHint? ISignificantTermsAggregation.ExecutionHint { get; set; }
 
@@ -201,8 +211,12 @@ namespace Nest
 		public SignificantTermsAggregationDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
 
 		/// <inheritdoc />
-		public SignificantTermsAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
+		public SignificantTermsAggregationDescriptor<T> MinimumDocumentCount(long minimumDocumentCount) =>
 			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
+
+		/// <inheritdoc />
+		public SignificantTermsAggregationDescriptor<T> ShardMinimumDocumentCount(long shardMinimumDocumentCount) =>
+			Assign(a => a.ShardMinimumDocumentCount = shardMinimumDocumentCount);
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> MutualInformation(Func<MutualInformationHeuristicDescriptor, IMutualInformationHeuristic> mutualInformationSelector = null) =>
