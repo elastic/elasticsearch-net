@@ -2,15 +2,29 @@
 
 namespace Nest
 {
-
+	/// <summary>
+	/// Information based model similarity.
+	/// The algorithm is based on the concept that the information content in any symbolic distribution sequence
+	/// is primarily determined by the repetitive usage of its basic elements.
+	/// For written texts this challenge would correspond to comparing the writing styles of different authors.
+	/// </summary>
 	public interface IIBSimilarity : ISimilarity
 	{
+		/// <summary>
+		/// The distribution
+		/// </summary>
 		[JsonProperty("distribution")]
 		IBDistribution? Distribution { get; set; }
 
+		/// <summary>
+		/// The lambda
+		/// </summary>
 		[JsonProperty("lambda")]
 		IBLambda? Lambda { get; set; }
 
+		/// <summary>
+		/// The normalization
+		/// </summary>
 		[JsonProperty("normalization")]
 		Normalization? Normalization { get; set; }
 
@@ -38,25 +52,35 @@ namespace Nest
 		[JsonProperty("normalization.z.z")]
 		double? NormalizationZZ { get; set; }
 	}
+
+	/// <inheritdoc/>
 	public class IBSimilarity : IIBSimilarity
 	{
 		public string Type => "IB";
 
+		/// <inheritdoc/>
 		public IBDistribution? Distribution { get; set; }
 
+		/// <inheritdoc/>
 		public IBLambda? Lambda { get; set; }
 
+		/// <inheritdoc/>
 		public Normalization? Normalization { get; set; }
 
+		/// <inheritdoc/>
 		public double? NormalizationH1C { get; set; }
 
+		/// <inheritdoc/>
 		public double? NormalizationH2C { get; set; }
 
+		/// <inheritdoc/>
 		public double? NormalizationH3C { get; set; }
 
+		/// <inheritdoc/>
 		public double? NormalizationZZ { get; set; }
 	}
 
+	/// <inheritdoc/>
 	public class IBSimilarityDescriptor
 		: DescriptorBase<IBSimilarityDescriptor, IIBSimilarity>, IIBSimilarity
 	{
@@ -69,8 +93,13 @@ namespace Nest
 		double? IIBSimilarity.NormalizationH3C { get; set; }
 		double? IIBSimilarity.NormalizationZZ { get; set; }
 
+		/// <inheritdoc/>
 		public IBSimilarityDescriptor Distribution(IBDistribution? distribution) => Assign(a => a.Distribution = distribution);
+
+		/// <inheritdoc/>
 		public IBSimilarityDescriptor Lambda(IBLambda? lambda) => Assign(a => a.Lambda = lambda);
+
+		/// <inheritdoc/>
 		public IBSimilarityDescriptor NoNormalization() => Assign(a => a.Normalization = Normalization.No);
 
 		/// <summary>

@@ -91,6 +91,11 @@ namespace Nest
 		/// Configure analysis
 		/// </summary>
 		IAnalysis Analysis { get; set; }
+
+		/// <summary>
+		/// Configure similarity
+		/// </summary>
+		ISimilarities Similarity { get; set; }
 	}
 
 	public class DynamicIndexSettings : IsADictionaryBase<string, object>, IDynamicIndexSettings
@@ -146,6 +151,9 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public IAnalysis Analysis { get; set; }
+
+		/// <inheritdoc/>
+		public ISimilarities Similarity { get; set; }
 
 		/// <summary>
 		/// Add any setting to the index
@@ -227,7 +235,12 @@ namespace Nest
 		public TDescriptor UnassignedNodeLeftDelayedTimeout(Time time) =>
 			Assign(a => a.UnassignedNodeLeftDelayedTimeout = time);
 
+		/// <inheritdoc/>
 		public TDescriptor Analysis(Func<AnalysisDescriptor, IAnalysis> selector) =>
 			Assign(a => a.Analysis = selector?.Invoke(new AnalysisDescriptor()));
+
+		/// <inheritdoc/>
+		public TDescriptor Similarity(Func<SimilaritiesDescriptor, IPromise<ISimilarities>> selector) =>
+			Assign(a => a.Similarity = selector?.Invoke(new SimilaritiesDescriptor())?.Value);
 	}
 }

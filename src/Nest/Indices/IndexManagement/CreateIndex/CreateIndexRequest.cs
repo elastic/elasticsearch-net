@@ -18,8 +18,7 @@ namespace Nest
 			this.Settings = state.Settings;
 			this.Mappings = state.Mappings;
 			this.Aliases = state.Aliases;
-			this.Similarity = state.Similarity;
-			CreateIndexRequest.RemoveReadOnlySettings(this.Settings);
+			RemoveReadOnlySettings(this.Settings);
 		}
 
 		private static readonly string[] ReadOnlySettings =
@@ -45,6 +44,8 @@ namespace Nest
 
 		public IAliases Aliases { get; set; }
 
+		[Obsolete("Use Similarity within Settings. Removed in NEST 6.x")]
+		[JsonIgnore]
 		public ISimilarities Similarity { get; set; }
 	}
 
@@ -57,6 +58,7 @@ namespace Nest
 
 		IAliases IIndexState.Aliases { get; set; }
 
+		[Obsolete("Use Similarity within Settings. Removed in NEST 6.x")]
 		ISimilarities IIndexState.Similarity { get; set; }
 
 		public CreateIndexDescriptor InitializeUsing(IIndexState indexSettings) => Assign(a =>
@@ -64,7 +66,6 @@ namespace Nest
 			a.Settings = indexSettings.Settings;
 			a.Mappings = indexSettings.Mappings;
 			a.Aliases = indexSettings.Aliases;
-			a.Similarity = indexSettings.Similarity;
 			CreateIndexRequest.RemoveReadOnlySettings(a.Settings);
 		});
 
@@ -77,6 +78,7 @@ namespace Nest
 		public CreateIndexDescriptor Aliases(Func<AliasesDescriptor, IPromise<IAliases>> selector) =>
 			Assign(a => a.Aliases = selector?.Invoke(new AliasesDescriptor())?.Value);
 
+		[Obsolete("Use Similarity within Settings. Removed in NEST 6.x")]
 		public CreateIndexDescriptor Similarity(Func<SimilaritiesDescriptor, IPromise<ISimilarities>> selector) =>
 			Assign(a => a.Similarity = selector?.Invoke(new SimilaritiesDescriptor())?.Value);
 	}
