@@ -42,6 +42,7 @@ namespace Tests.Search.Request
 			{
 				pre_tags = new[] { "<tag1>" },
 				post_tags = new[] { "</tag1>" },
+				encoder = "html",
 				fields = new Dictionary<string, object>
 				{
 					{ "name.standard", new Dictionary<string, object>
@@ -57,6 +58,7 @@ namespace Tests.Search.Request
 					{ "leadDeveloper.firstName", new Dictionary<string, object>
 						{
 							{ "type", "fvh" },
+							{ "phrase_limit", 10 },
 							{ "boundary_max_scan", 50 },
 							{ "pre_tags", new [] { "<name>" } },
 							{ "post_tags", new [] { "</name>" } },
@@ -109,6 +111,7 @@ namespace Tests.Search.Request
 			.Highlight(h => h
 				.PreTags("<tag1>")
 				.PostTags("</tag1>")
+				.Encoder(HighlighterEncoder.Html)
 				.Fields(
 					fs => fs
 						.Field(p => p.Name.Suffix("standard"))
@@ -124,6 +127,7 @@ namespace Tests.Search.Request
 						.PreTags("<name>")
 						.PostTags("</name>")
 						.BoundaryMaxScan(50)
+						.PhraseLimit(10)
 						.HighlightQuery(q => q
 							.Match(m => m
 								.Field(p => p.LeadDeveloper.FirstName)
@@ -156,6 +160,7 @@ namespace Tests.Search.Request
 				{
 					PreTags = new[] { "<tag1>" },
 					PostTags = new[] { "</tag1>" },
+					Encoder = HighlighterEncoder.Html,
 					Fields = new Dictionary<Field, IHighlightField>
 					{
 						{ "name.standard", new HighlightField
@@ -171,6 +176,7 @@ namespace Tests.Search.Request
 						{ "leadDeveloper.firstName", new HighlightField
 							{
 								Type = "fvh",
+								PhraseLimit = 10,
 								BoundaryMaxScan = 50,
 								PreTags = new[] { "<name>"},
 								PostTags = new[] { "</name>"},

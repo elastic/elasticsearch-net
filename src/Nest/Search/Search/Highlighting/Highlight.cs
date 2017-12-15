@@ -54,10 +54,6 @@ namespace Nest
 		[JsonProperty("fragment_offset")]
 		int? FragmentOffset { get; set; }
 
-		[Obsolete("Bad mapping use BoundaryMaxScan instead")]
-		[JsonProperty("boundary_max_size")]
-		int? BoundaryMaxSize { get; set; }
-
 		/// <summary>
 		/// Controls how far to look for boundary characters. Defaults to 20.
 		/// </summary>
@@ -69,13 +65,13 @@ namespace Nest
 		/// It can be either default (no encoding) or html (will escape html, if you use html highlighting tags).
 		/// </summary>
 		[JsonProperty("encoder")]
-		string Encoder { get; set; }
+		HighlighterEncoder? Encoder { get; set; }
 
 		/// <summary>
 		/// The order in which highlighted fragments are sorted
 		/// </summary>
 		[JsonProperty("order")]
-		string Order { get; set; }
+		HighlighterOrder? Order { get; set; }
 
 		/// <summary>
 		/// Use a specific "tag" schemas.
@@ -88,7 +84,7 @@ namespace Nest
 		/// &lt;em class="hlt10"&gt;
 		/// </remarks>
 		[JsonProperty("tags_schema")]
-		string TagsSchema { get; set; }
+		HighlighterTagsSchema? TagsSchema { get; set; }
 
 		[JsonProperty("fields")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Field, IHighlightField>))]
@@ -147,21 +143,17 @@ namespace Nest
 		// <inheritdoc/>
 		public int? FragmentSize { get; set; }
 		// <inheritdoc/>
-		public string TagsSchema { get; set; }
+		public HighlighterTagsSchema? TagsSchema { get; set; }
 		// <inheritdoc/>
 		public int? NumberOfFragments { get; set; }
 		// <inheritdoc/>
 		public int? FragmentOffset { get; set; }
 		// <inheritdoc/>
-		[Obsolete("Bad mapping use BoundaryMaxScan instead")]
-		// <inheritdoc/>
-		public int? BoundaryMaxSize { get; set; }
-		// <inheritdoc/>
 		public int? BoundaryMaxScan { get; set; }
 		// <inheritdoc/>
-		public string Encoder { get; set; }
+		public HighlighterEncoder? Encoder { get; set; }
 		// <inheritdoc/>
-		public string Order { get; set; }
+		public HighlighterOrder? Order { get; set; }
 		// <inheritdoc/>
 		public Dictionary<Field, IHighlightField> Fields { get; set; }
 		// <inheritdoc/>
@@ -187,13 +179,12 @@ namespace Nest
 		IEnumerable<string> IHighlight.PreTags { get; set; }
 		IEnumerable<string> IHighlight.PostTags { get; set; }
 		int? IHighlight.FragmentSize { get; set; }
-		string IHighlight.TagsSchema { get; set; }
+		HighlighterTagsSchema? IHighlight.TagsSchema { get; set; }
 		int? IHighlight.NumberOfFragments { get; set; }
 		int? IHighlight.FragmentOffset { get; set; }
-		int? IHighlight.BoundaryMaxSize { get; set; }
 		int? IHighlight.BoundaryMaxScan { get; set; }
-		string IHighlight.Encoder { get; set; }
-		string IHighlight.Order { get; set; }
+		HighlighterEncoder? IHighlight.Encoder { get; set; }
+		HighlighterOrder? IHighlight.Order { get; set; }
 		Dictionary<Field, IHighlightField> IHighlight.Fields { get; set; }
 		bool? IHighlight.RequireFieldMatch { get; set; }
 		string IHighlight.BoundaryChars { get; set; }
@@ -215,13 +206,13 @@ namespace Nest
 			);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> TagsSchema(string schema = "styled") => Assign(a => a.TagsSchema = schema);
+		public HighlightDescriptor<T> TagsSchema(HighlighterTagsSchema? schema) => Assign(a => a.TagsSchema = schema);
 
 		// <inheritdoc/>
 		public HighlightDescriptor<T> PreTags(string preTags) => this.PreTags(new[] {preTags});
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> PostTags(string postTags)=> this.PostTags(new[] {postTags});
+		public HighlightDescriptor<T> PostTags(string postTags) => this.PostTags(new[] {postTags});
 
 		// <inheritdoc/>
 		public HighlightDescriptor<T> PreTags(IEnumerable<string> preTags) => Assign(a => a.PreTags = preTags.ToListOrNullIfEmpty());
@@ -239,19 +230,17 @@ namespace Nest
 		public HighlightDescriptor<T> FragmentOffset(int fragmentOffset) => Assign(a => a.FragmentOffset = fragmentOffset);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> Encoder(string encoder) => Assign(a => a.Encoder = encoder);
+		public HighlightDescriptor<T> Encoder(HighlighterEncoder? encoder) => Assign(a => a.Encoder = encoder);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> Order(string order) => Assign(a => a.Order = order);
+		public HighlightDescriptor<T> Order(HighlighterOrder? order) => Assign(a => a.Order = order);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> RequireFieldMatch(bool requireFieldMatch) => Assign(a => a.RequireFieldMatch = requireFieldMatch);
+		public HighlightDescriptor<T> RequireFieldMatch(bool requireFieldMatch = true) => Assign(a => a.RequireFieldMatch = requireFieldMatch);
 
 		// <inheritdoc/>
 		public HighlightDescriptor<T> BoundaryCharacters(string boundaryCharacters) => Assign(a => a.BoundaryChars = boundaryCharacters);
 
-		[Obsolete("Bad mapping use BoundaryMaxScan instead")]
-		public HighlightDescriptor<T> BoundaryMaxSize(int boundaryMaxSize) => Assign(a => a.BoundaryMaxSize = boundaryMaxSize);
 		// <inheritdoc/>
 		public HighlightDescriptor<T> BoundaryMaxScan(int boundaryMaxScan) => Assign(a => a.BoundaryMaxScan = boundaryMaxScan);
 
