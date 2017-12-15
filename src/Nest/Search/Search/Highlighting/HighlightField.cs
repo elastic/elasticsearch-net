@@ -68,17 +68,10 @@ namespace Nest
 		int? BoundaryMaxScan { get; set; }
 
 		/// <summary>
-		/// Define how highlighted text will be encoded.
-		/// It can be either default (no encoding) or html (will escape html, if you use html highlighting tags).
-		/// </summary>
-		[JsonProperty("encoder")]
-		string Encoder { get; set; }
-
-		/// <summary>
-		/// The order in which highlighted fragments are sorted
+		/// The order in which highlighted fragments are sorted. Only valid for the unified highlighter.
 		/// </summary>
 		[JsonProperty("order")]
-		string Order { get; set; }
+		HighlighterOrder? Order { get; set; }
 
 		/// <summary>
 		/// Use a specific "tag" schemas.
@@ -91,7 +84,7 @@ namespace Nest
 		/// &lt;em class="hlt10"&gt;
 		/// </remarks>
 		[JsonProperty("tags_schema")]
-		string TagsSchema { get; set; }
+		HighlighterTagsSchema? TagsSchema { get; set; }
 
 		/// <summary>
 		/// Determines if only fields that hold a query match will be highlighted. Set to <c>false</c>
@@ -129,6 +122,7 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("fragmenter")]
 		HighlighterFragmenter? Fragmenter { get; set; }
+
 		/// <summary>
 		/// The type of highlighter to use. Can be a defined or custom highlighter
 		/// </summary>
@@ -155,6 +149,15 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("highlight_query")]
 		QueryContainer HighlightQuery { get; set; }
+
+		/// <summary>
+		/// Controls the number of matching phrases in a document that are considered. Prevents the
+		/// <see cref="HighlighterType.Fvh"/> highlighter from analyzing too many phrases and consuming too much memory.
+		/// When using matched_fields, <see cref="PhraseLimit"/> phrases per matched field are considered. Raising the limit increases query time
+		/// and consumes more memory. Only supported by the <see cref="HighlighterType.Fvh"/> highlighter. Defaults to 256.
+		/// </summary>
+		[JsonProperty("phrase_limit")]
+		int? PhraseLimit { get; set; }
 	}
 
 	public class HighlightField : IHighlightField
@@ -176,11 +179,9 @@ namespace Nest
 		/// <inheritdoc/>
 		public int? BoundaryMaxScan { get; set; }
 		/// <inheritdoc/>
-		public string Encoder { get; set; }
+		public HighlighterOrder? Order { get; set; }
 		/// <inheritdoc/>
-		public string Order { get; set; }
-		/// <inheritdoc/>
-		public string TagsSchema { get; set; }
+		public HighlighterTagsSchema? TagsSchema { get; set; }
 		/// <inheritdoc/>
 		public bool? RequireFieldMatch { get; set; }
 		/// <inheritdoc/>
@@ -201,6 +202,8 @@ namespace Nest
 		public Fields MatchedFields { get; set; }
 		/// <inheritdoc/>
 		public QueryContainer HighlightQuery { get; set; }
+		/// <inheritdoc/>
+		public int? PhraseLimit { get; set; }
 	}
 
 	public class HighlightFieldDescriptor<T> : DescriptorBase<HighlightFieldDescriptor<T>,IHighlightField>, IHighlightField
@@ -214,9 +217,8 @@ namespace Nest
 		int? IHighlightField.NumberOfFragments { get; set; }
 		int? IHighlightField.FragmentOffset { get; set; }
 		int? IHighlightField.BoundaryMaxScan { get; set; }
-		string IHighlightField.Encoder { get; set; }
-		string IHighlightField.Order { get; set; }
-		string IHighlightField.TagsSchema { get; set; }
+		HighlighterOrder? IHighlightField.Order { get; set; }
+		HighlighterTagsSchema? IHighlightField.TagsSchema { get; set; }
 		bool? IHighlightField.RequireFieldMatch { get; set; }
 		string IHighlightField.BoundaryChars { get; set; }
 		int? IHighlightField.MaxFragmentLength { get; set; }
@@ -227,6 +229,7 @@ namespace Nest
 		bool? IHighlightField.ForceSource { get; set; }
 		Fields IHighlightField.MatchedFields { get; set; }
 		QueryContainer IHighlightField.HighlightQuery { get; set; }
+		int? IHighlightField.PhraseLimit { get; set; }
 
 		/// <inheritdoc/>
 		public HighlightFieldDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
@@ -238,7 +241,7 @@ namespace Nest
 		public HighlightFieldDescriptor<T> AllField() => this.Field("_all");
 
 		/// <inheritdoc/>
-		public HighlightFieldDescriptor<T> TagsSchema(string schema = "styled") => Assign(a => a.TagsSchema = schema);
+		public HighlightFieldDescriptor<T> TagsSchema(HighlighterTagsSchema? schema) => Assign(a => a.TagsSchema = schema);
 
 		/// <inheritdoc/>
 		public HighlightFieldDescriptor<T> ForceSource(bool? force = true) => Assign(a => a.ForceSource = force);
@@ -274,10 +277,7 @@ namespace Nest
 		public HighlightFieldDescriptor<T> FragmentOffset(int? fragmentOffset) => Assign(a => a.FragmentOffset = fragmentOffset);
 
 		/// <inheritdoc/>
-		public HighlightFieldDescriptor<T> Encoder(string encoder) => Assign(a => a.Encoder = encoder);
-
-		/// <inheritdoc/>
-		public HighlightFieldDescriptor<T> Order(string order) => Assign(a => a.Order = order);
+		public HighlightFieldDescriptor<T> Order(HighlighterOrder? order) => Assign(a => a.Order = order);
 
 		/// <inheritdoc/>
 		public HighlightFieldDescriptor<T> RequireFieldMatch(bool? requireFieldMatch = true) => Assign(a => a.RequireFieldMatch = requireFieldMatch);
@@ -307,5 +307,8 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public HighlightFieldDescriptor<T> Fragmenter(HighlighterFragmenter? fragmenter) => Assign(a => a.Fragmenter = fragmenter);
+
+		/// <inheritdoc/>
+		public HighlightFieldDescriptor<T> PhraseLimit(int phraseLimit) => Assign(a => a.PhraseLimit = phraseLimit);
 	}
 }
