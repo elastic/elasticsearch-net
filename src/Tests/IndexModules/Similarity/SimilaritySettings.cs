@@ -24,21 +24,26 @@ namespace Tests.IndexModules.Similarity
 				def = new
 				{
 					discount_overlaps = true,
-					type = "default"
+					type = "classic"
+				},
+				dfi = new
+				{
+					independence_measure = "chisquared",
+					type = "DFI"
 				},
 				dfr = new Dictionary<string, object>{
 					{ "basic_model", "d" },
-					{"after_effect", "b" },
-					{"normalization", "h1" },
-					{"normalization.h1.c", 1.1 },
-					{"type", "DFR" }
+					{ "after_effect", "b" },
+					{ "normalization", "h1" },
+					{ "normalization.h1.c", 1.1 },
+					{ "type", "DFR" }
 				},
 				ib = new Dictionary<string, object> {
 					{ "distribution", "ll" },
-					{"lambda", "df" },
-					{"normalization", "h1" },
-					{"normalization.h1.c", 1.2 },
-					{"type", "IB" }
+					{ "lambda", "df" },
+					{ "normalization", "h1" },
+					{ "normalization.h1.c", 1.2 },
+					{ "type", "IB" }
 				},
 				lmd = new
 				{
@@ -66,7 +71,10 @@ namespace Tests.IndexModules.Similarity
 					.K1(1.1)
 					.DiscountOverlaps()
 				)
-				.Default("def", d => d.DiscountOverlaps())
+				.Classic("def", d => d.DiscountOverlaps())
+				.DFI("dfi", d => d
+					.IndependenceMeasure(DFIIndependenceMeasure.ChiSquared)
+				)
 				.DFR("dfr", d => d
 					.AfterEffect(DFRAfterEffect.B)
 					.BasicModel(DFRBasicModel.D)
@@ -87,27 +95,54 @@ namespace Tests.IndexModules.Similarity
 			protected override Similarities Initializer =>
 				new Similarities
 				{
-					{ "bm25", new BM25Similarity { B = 1.0, K1 = 1.1, DiscountOverlaps = true } },
-					{ "def", new DefaultSimilarity { DiscountOverlaps = true } },
+					{ "bm25", new BM25Similarity
+						{
+							B = 1.0,
+							K1 = 1.1,
+							DiscountOverlaps = true
+						}
+					},
+					{ "def", new ClassicSimilarity
+						{
+							DiscountOverlaps = true
+						}
+					},
+					{ "dfi", new DFISimilarity
+						{
+							IndependenceMeasure = DFIIndependenceMeasure.ChiSquared
+						}
+					},
 					{ "dfr", new DFRSimilarity
-					{
-						AfterEffect = DFRAfterEffect.B,
-						BasicModel = DFRBasicModel.D,
-						Normalization = Normalization.H1,
-						NormalizationH1C = 1.1
-					}},
+						{
+							AfterEffect = DFRAfterEffect.B,
+							BasicModel = DFRBasicModel.D,
+							Normalization = Normalization.H1,
+							NormalizationH1C = 1.1
+						}
+					},
 					{ "ib", new IBSimilarity
-					{
-						Distribution = IBDistribution.LogLogistic,
-						Lambda = IBLambda.DocumentFrequency,
-						Normalization = Normalization.H1,
-						NormalizationH1C = 1.2
-					} },
-					{ "lmd", new LMDirichletSimilarity { Mu = 2 } },
-					{ "lmj", new LMJelinekMercerSimilarity { Lambda = 2.0 } },
-					{ "my_name", new CustomSimilarity("plugin_sim") {
-						{ "some_property", "some value" }
-					} }
+						{
+							Distribution = IBDistribution.LogLogistic,
+							Lambda = IBLambda.DocumentFrequency,
+							Normalization = Normalization.H1,
+							NormalizationH1C = 1.2
+						}
+					},
+					{ "lmd", new LMDirichletSimilarity
+						{
+							Mu = 2
+						}
+					},
+					{ "lmj", new LMJelinekMercerSimilarity
+						{
+							Lambda = 2.0
+						}
+					},
+					{ "my_name", new CustomSimilarity("plugin_sim")
+						{
+							{ "some_property", "some value" }
+						}
+					}
 				};
 		}
 	}
