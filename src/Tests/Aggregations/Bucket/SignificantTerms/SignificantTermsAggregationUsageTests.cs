@@ -25,50 +25,42 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 	{
 		public SignificantTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			significant_names = new
 			{
-				significant_names = new
+				significant_terms = new
 				{
-					significant_terms = new
+					field = "name",
+					min_doc_count = 10,
+					mutual_information = new
 					{
-						field = "name",
-						min_doc_count = 10,
-						mutual_information = new
-						{
-							background_is_superset = true,
-							include_negatives = true
-						}
+						background_is_superset = true,
+						include_negatives = true
 					}
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.SignificantTerms("significant_names", st => st
-					.Field(p => p.Name)
-					.MinimumDocumentCount(10)
-					.MutualInformation(mi => mi
-						.BackgroundIsSuperSet()
-						.IncludeNegatives()
-					)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.SignificantTerms("significant_names", st => st
+				.Field(p => p.Name)
+				.MinimumDocumentCount(10)
+				.MutualInformation(mi => mi
+					.BackgroundIsSuperSet()
+					.IncludeNegatives()
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new SignificantTermsAggregation("significant_names")
 			{
-				Aggregations = new SignificantTermsAggregation("significant_names")
+				Field = Field<Project>(p => p.Name),
+				MinimumDocumentCount = 10,
+				MutualInformation = new MutualInformationHeuristic
 				{
-					Field = Field<Project>(p => p.Name),
-					MinimumDocumentCount = 10,
-					MutualInformation = new MutualInformationHeuristic
-					{
-						BackgroundIsSuperSet = true,
-						IncludeNegatives = true
-					}
+					BackgroundIsSuperSet = true,
+					IncludeNegatives = true
 				}
 			};
 
@@ -92,54 +84,46 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 	{
 		public SignificantTermsIncludePatternAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			significant_names = new
 			{
-				significant_names = new
+				significant_terms = new
 				{
-					significant_terms = new
+					field = "name",
+					min_doc_count = 10,
+					mutual_information = new
 					{
-						field = "name",
-						min_doc_count = 10,
-						mutual_information = new
-						{
-							background_is_superset = true,
-							include_negatives = true
-						},
-						include = "pi*"
-					}
+						background_is_superset = true,
+						include_negatives = true
+					},
+					include = "pi*"
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.SignificantTerms("significant_names", st => st
-					.Field(p => p.Name)
-					.MinimumDocumentCount(10)
-					.MutualInformation(mi => mi
-						.BackgroundIsSuperSet()
-						.IncludeNegatives()
-					)
-					.Include("pi*")
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.SignificantTerms("significant_names", st => st
+				.Field(p => p.Name)
+				.MinimumDocumentCount(10)
+				.MutualInformation(mi => mi
+					.BackgroundIsSuperSet()
+					.IncludeNegatives()
 				)
+				.Include("pi*")
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new SignificantTermsAggregation("significant_names")
 			{
-				Aggregations = new SignificantTermsAggregation("significant_names")
+				Field = Field<Project>(p => p.Name),
+				MinimumDocumentCount = 10,
+				MutualInformation = new MutualInformationHeuristic
 				{
-					Field = Field<Project>(p => p.Name),
-					MinimumDocumentCount = 10,
-					MutualInformation = new MutualInformationHeuristic
-					{
-						BackgroundIsSuperSet = true,
-						IncludeNegatives = true
-					},
-					Include = new SignificantTermsIncludeExclude("pi*")
-				}
+					BackgroundIsSuperSet = true,
+					IncludeNegatives = true
+				},
+				Include = new SignificantTermsIncludeExclude("pi*")
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
@@ -162,54 +146,46 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 	{
 		public SignificantTermsExcludeExactValuesAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			significant_names = new
 			{
-				significant_names = new
+				significant_terms = new
 				{
-					significant_terms = new
+					field = "name",
+					min_doc_count = 10,
+					mutual_information = new
 					{
-						field = "name",
-						min_doc_count = 10,
-						mutual_information = new
-						{
-							background_is_superset = true,
-							include_negatives = true
-						},
-						exclude = new[] { "pierce" }
-					}
+						background_is_superset = true,
+						include_negatives = true
+					},
+					exclude = new[] {"pierce"}
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.SignificantTerms("significant_names", st => st
-					.Field(p => p.Name)
-					.MinimumDocumentCount(10)
-					.MutualInformation(mi => mi
-						.BackgroundIsSuperSet()
-						.IncludeNegatives()
-					)
-					.Exclude(new [] { "pierce" })
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.SignificantTerms("significant_names", st => st
+				.Field(p => p.Name)
+				.MinimumDocumentCount(10)
+				.MutualInformation(mi => mi
+					.BackgroundIsSuperSet()
+					.IncludeNegatives()
 				)
+				.Exclude(new[] {"pierce"})
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new SignificantTermsAggregation("significant_names")
 			{
-				Aggregations = new SignificantTermsAggregation("significant_names")
+				Field = Field<Project>(p => p.Name),
+				MinimumDocumentCount = 10,
+				MutualInformation = new MutualInformationHeuristic
 				{
-					Field = Field<Project>(p => p.Name),
-					MinimumDocumentCount = 10,
-					MutualInformation = new MutualInformationHeuristic
-					{
-						BackgroundIsSuperSet = true,
-						IncludeNegatives = true
-					},
-					Exclude = new SignificantTermsIncludeExclude(new[] { "pierce" })
-				}
+					BackgroundIsSuperSet = true,
+					IncludeNegatives = true
+				},
+				Exclude = new SignificantTermsIncludeExclude(new[] {"pierce"})
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)

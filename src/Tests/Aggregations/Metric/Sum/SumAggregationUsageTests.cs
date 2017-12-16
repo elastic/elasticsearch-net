@@ -13,32 +13,24 @@ namespace Tests.Aggregations.Metric.Sum
 	{
 		public SumAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			commits_sum = new
 			{
-				commits_sum = new
+				sum = new
 				{
-					sum = new
-					{
-						field = "numberOfCommits"
-					}
+					field = "numberOfCommits"
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.Sum("commits_sum", sm => sm
-					.Field(p => p.NumberOfCommits)
-				)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Sum("commits_sum", sm => sm
+				.Field(p => p.NumberOfCommits)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
-			{
-				Aggregations = new SumAggregation("commits_sum", Field<Project>(p => p.NumberOfCommits))
-			};
+		protected override AggregationDictionary InitializerAggs =>
+			new SumAggregation("commits_sum", Field<Project>(p => p.NumberOfCommits));
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{

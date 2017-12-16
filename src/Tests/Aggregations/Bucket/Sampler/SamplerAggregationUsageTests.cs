@@ -12,52 +12,44 @@ namespace Tests.Aggregations.Bucket.Sampler
 	{
 		public SamplerAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			sample = new
 			{
-				sample = new
+				sampler = new
 				{
-					sampler = new
+					shard_size = 200
+				},
+				aggs = new
+				{
+					significant_names = new
 					{
-						shard_size = 200
-					},
-					aggs = new
-					{
-						significant_names = new
+						significant_terms = new
 						{
-							significant_terms = new
-							{
-								field = "name"
-							}
+							field = "name"
 						}
 					}
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(aggs => aggs
-				.Sampler("sample", sm => sm
-					.ShardSize(200)
-					.Aggregations(aa => aa
-						.SignificantTerms("significant_names", st => st
-							.Field(p => p.Name)
-						)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Sampler("sample", sm => sm
+				.ShardSize(200)
+				.Aggregations(aa => aa
+					.SignificantTerms("significant_names", st => st
+						.Field(p => p.Name)
 					)
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new SamplerAggregation("sample")
 			{
-				Aggregations = new SamplerAggregation("sample")
+				ShardSize = 200,
+				Aggregations = new SignificantTermsAggregation("significant_names")
 				{
-					ShardSize = 200,
-					Aggregations = new SignificantTermsAggregation("significant_names")
-					{
-						Field = "name"
-					}
+					Field = "name"
 				}
 			};
 

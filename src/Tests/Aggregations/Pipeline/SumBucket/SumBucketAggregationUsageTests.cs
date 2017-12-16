@@ -12,67 +12,57 @@ namespace Tests.Aggregations.Pipeline.SumBucket
 	{
 		public SumBucketAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			size = 0,
-			aggs = new
+			projects_started_per_month = new
 			{
-				projects_started_per_month = new
+				date_histogram = new
 				{
-					date_histogram = new
+					field = "startedOn",
+					interval = "month",
+				},
+				aggs = new
+				{
+					commits = new
 					{
-						field = "startedOn",
-						interval = "month",
-					},
-					aggs = new
-					{
-						commits = new
+						sum = new
 						{
-							sum = new
-							{
-								field = "numberOfCommits"
-							}
+							field = "numberOfCommits"
 						}
 					}
-				},
-				sum_of_commits = new
+				}
+			},
+			sum_of_commits = new
+			{
+				sum_bucket = new
 				{
-					sum_bucket = new
-					{
-						buckets_path = "projects_started_per_month>commits"
-					}
+					buckets_path = "projects_started_per_month>commits"
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Size(0)
-			.Aggregations(a => a
-				.DateHistogram("projects_started_per_month", dh => dh
-					.Field(p => p.StartedOn)
-					.Interval(DateInterval.Month)
-					.Aggregations(aa => aa
-						.Sum("commits", sm => sm
-							.Field(p => p.NumberOfCommits)
-						)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.DateHistogram("projects_started_per_month", dh => dh
+				.Field(p => p.StartedOn)
+				.Interval(DateInterval.Month)
+				.Aggregations(aa => aa
+					.Sum("commits", sm => sm
+						.Field(p => p.NumberOfCommits)
 					)
 				)
-				.SumBucket("sum_of_commits", aaa => aaa
-					.BucketsPath("projects_started_per_month>commits")
-				)
+			)
+			.SumBucket("sum_of_commits", aaa => aaa
+				.BucketsPath("projects_started_per_month>commits")
 			);
 
-		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
-		{
-			Size = 0,
-			Aggregations = new DateHistogramAggregation("projects_started_per_month")
+		protected override AggregationDictionary InitializerAggs =>
+			new DateHistogramAggregation("projects_started_per_month")
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
 				Aggregations = new SumAggregation("commits", "numberOfCommits")
 			}
-			&& new SumBucketAggregation("sum_of_commits", "projects_started_per_month>commits")
-		};
+			&& new SumBucketAggregation("sum_of_commits", "projects_started_per_month>commits");
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{

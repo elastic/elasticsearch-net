@@ -5,6 +5,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// Describes aggregations that we would like to execute on elasticsearch. In NEST `Aggregation` always refers to an aggregation
+	/// going to elasticsearch and an `Aggregate` describes an aggregation going out.
+	/// </summary>
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IAggregationContainer>))]
 	public class AggregationDictionary : IsADictionaryBase<string, IAggregationContainer>
 	{

@@ -16,53 +16,45 @@ namespace Tests.Aggregations.Bucket.Children
 	{
 		public ChildrenAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			name_of_child_agg = new
 			{
-				name_of_child_agg = new
+				children = new {type = "commits"},
+				aggs = new
 				{
-					children = new { type = "commits" },
-					aggs = new
+					average_per_child = new
 					{
-						average_per_child = new
-						{
-							avg = new { field = "confidenceFactor" }
-						},
-						max_per_child = new
-						{
-							max = new { field = "confidenceFactor" }
-						},
-						min_per_child = new
-						{
-							min = new { field = "confidenceFactor" }
-						}
+						avg = new {field = "confidenceFactor"}
+					},
+					max_per_child = new
+					{
+						max = new {field = "confidenceFactor"}
+					},
+					min_per_child = new
+					{
+						min = new {field = "confidenceFactor"}
 					}
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(aggs => aggs
-				.Children<CommitActivity>("name_of_child_agg", child => child
-					.Aggregations(childAggs => childAggs
-						.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-						.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-						.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-					)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Children<CommitActivity>("name_of_child_agg", child => child
+				.Aggregations(childAggs => childAggs
+					.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+					.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+					.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
 			{
-				Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
-				{
-					Aggregations =
-						new AverageAggregation("average_per_child", "confidenceFactor")
-						&& new MaxAggregation("max_per_child", "confidenceFactor")
-						&& new MinAggregation("min_per_child", "confidenceFactor")
-				}
+				Aggregations =
+					new AverageAggregation("average_per_child", "confidenceFactor")
+					&& new MaxAggregation("max_per_child", "confidenceFactor")
+					&& new MinAggregation("min_per_child", "confidenceFactor")
 			};
 	}
 }

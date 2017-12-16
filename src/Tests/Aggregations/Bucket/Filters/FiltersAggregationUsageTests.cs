@@ -27,64 +27,52 @@ namespace Tests.Aggregations.Bucket.Filters
 	{
 		public FiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
+			filters = new
+			{
+				other_bucket = true,
+				other_bucket_key = "other_states_of_being",
+				filters = new
+				{
+					belly_up = new {term = new {state = new {value = "BellyUp"}}},
+					stable = new {term = new {state = new {value = "Stable"}}},
+					very_active = new {term = new {state = new {value = "VeryActive"}}},
+				}
+			},
 			aggs = new
 			{
-				projects_by_state = new
-				{
-					filters = new
-					{
-						other_bucket = true,
-						other_bucket_key = "other_states_of_being",
-						filters = new
-						{
-							belly_up = new { term = new { state = new { value = "BellyUp" } } },
-							stable = new { term = new { state = new { value = "Stable" } } },
-							very_active = new { term = new { state = new { value = "VeryActive" } } },
-						}
-					},
-					aggs = new
-					{
-						project_tags = new { terms = new { field = "curatedTags.name.keyword" } }
-					}
-				}
+				project_tags = new {terms = new {field = "curatedTags.name.keyword"}}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Index(DefaultSeeder.ProjectsAliasFilter)
-			.Aggregations(aggs => aggs
-				.Filters("projects_by_state", agg => agg
-					.OtherBucket()
-					.OtherBucketKey("other_states_of_being")
-					.NamedFilters(filters => filters
-						.Filter("belly_up", f => f.Term(p => p.State, StateOfBeing.BellyUp))
-						.Filter("stable", f => f.Term(p => p.State, StateOfBeing.Stable))
-						.Filter("very_active", f => f.Term(p => p.State, StateOfBeing.VeryActive))
-					)
-					.Aggregations(childAggs => childAggs
-						.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name.Suffix("keyword")))
-					)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Filters("projects_by_state", agg => agg
+				.OtherBucket()
+				.OtherBucketKey("other_states_of_being")
+				.NamedFilters(filters => filters
+					.Filter("belly_up", f => f.Term(p => p.State, StateOfBeing.BellyUp))
+					.Filter("stable", f => f.Term(p => p.State, StateOfBeing.Stable))
+					.Filter("very_active", f => f.Term(p => p.State, StateOfBeing.VeryActive))
+				)
+				.Aggregations(childAggs => childAggs
+					.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name.Suffix("keyword")))
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
+		protected override AggregationDictionary InitializerAggs =>
+			new FiltersAggregation("projects_by_state")
 			{
-				Aggregations = new FiltersAggregation("projects_by_state")
+				OtherBucket = true,
+				OtherBucketKey = "other_states_of_being",
+				Filters = new NamedFiltersContainer
 				{
-					OtherBucket = true,
-					OtherBucketKey = "other_states_of_being",
-					Filters = new NamedFiltersContainer
-					{
-							{ "belly_up", Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) },
-							{ "stable", Query<Project>.Term(p=>p.State, StateOfBeing.Stable) },
-							{ "very_active", Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive) }
-					},
-					Aggregations =
-						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
-				}
+					{"belly_up", Query<Project>.Term(p => p.State, StateOfBeing.BellyUp)},
+					{"stable", Query<Project>.Term(p => p.State, StateOfBeing.Stable)},
+					{"very_active", Query<Project>.Term(p => p.State, StateOfBeing.VeryActive)}
+				},
+				Aggregations =
+					new TermsAggregation("project_tags") {Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword"))}
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
@@ -123,60 +111,49 @@ namespace Tests.Aggregations.Bucket.Filters
 	{
 		public AnonymousFiltersUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
+			filters = new
+			{
+				other_bucket = true,
+				filters = new[]
+				{
+					new {term = new {state = new {value = "BellyUp"}}},
+					new {term = new {state = new {value = "Stable"}}},
+					new {term = new {state = new {value = "VeryActive"}}},
+				}
+			},
 			aggs = new
 			{
-				projects_by_state = new
-				{
-					filters = new
-					{
-						other_bucket = true,
-						filters = new[] {
-								new { term = new { state = new { value = "BellyUp" } }},
-								new { term = new { state = new { value = "Stable" } }},
-								new { term = new { state = new { value = "VeryActive" } }},
-							}
-					},
-					aggs = new
-					{
-						project_tags = new { terms = new { field = "curatedTags.name.keyword" } }
-					}
-				}
+				project_tags = new {terms = new {field = "curatedTags.name.keyword"}}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Index(DefaultSeeder.ProjectsAliasFilter)
-			.Aggregations(aggs => aggs
-				.Filters("projects_by_state", agg => agg
-					.OtherBucket()
-					.AnonymousFilters(
-						f => f.Term(p => p.State, StateOfBeing.BellyUp),
-						f => f.Term(p => p.State, StateOfBeing.Stable),
-						f => f.Term(p => p.State, StateOfBeing.VeryActive)
-					)
-					.Aggregations(childAggs => childAggs
-						.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name.Suffix("keyword")))
-					)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Filters("projects_by_state", agg => agg
+				.OtherBucket()
+				.AnonymousFilters(
+					f => f.Term(p => p.State, StateOfBeing.BellyUp),
+					f => f.Term(p => p.State, StateOfBeing.Stable),
+					f => f.Term(p => p.State, StateOfBeing.VeryActive)
+				)
+				.Aggregations(childAggs => childAggs
+					.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name.Suffix("keyword")))
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
+		protected override AggregationDictionary InitializerAggs =>
+			new FiltersAggregation("projects_by_state")
 			{
-				Aggregations = new FiltersAggregation("projects_by_state")
+				OtherBucket = true,
+				Filters = new List<QueryContainer>
 				{
-					OtherBucket = true,
-					Filters = new List<QueryContainer>
-					{
-							 Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) ,
-							 Query<Project>.Term(p=>p.State, StateOfBeing.Stable) ,
-							 Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive)
-					},
-					Aggregations =
-						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
-				}
+					Query<Project>.Term(p => p.State, StateOfBeing.BellyUp),
+					Query<Project>.Term(p => p.State, StateOfBeing.Stable),
+					Query<Project>.Term(p => p.State, StateOfBeing.VeryActive)
+				},
+				Aggregations =
+					new TermsAggregation("project_tags") {Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword"))}
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
@@ -208,34 +185,26 @@ namespace Tests.Aggregations.Bucket.Filters
 	{
 		public EmptyFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			empty_filters = new
 			{
-				empty_filters = new
+				filters = new
 				{
-					filters = new
-					{
-						filters = new object[] {}
-					}
+					filters = new object[] { }
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(aggs => aggs
-				.Filters("empty_filters", agg => agg
-					.AnonymousFilters()
-				)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Filters("empty_filters", agg => agg
+				.AnonymousFilters()
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new FiltersAggregation("empty_filters")
 			{
-				Aggregations = new FiltersAggregation("empty_filters")
-				{
-					Filters = new List<QueryContainer>()
-				}
+				Filters = new List<QueryContainer>()
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
@@ -251,38 +220,30 @@ namespace Tests.Aggregations.Bucket.Filters
 	{
 		public ConditionlessFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			conditionless_filters = new
 			{
-				conditionless_filters = new
+				filters = new
 				{
-					filters = new
-					{
-						filters = new object[] {}
-					}
+					filters = new object[] { }
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(aggs => aggs
-				.Filters("conditionless_filters", agg => agg
-					.AnonymousFilters(
-						q => new QueryContainer()
-					)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Filters("conditionless_filters", agg => agg
+				.AnonymousFilters(
+					q => new QueryContainer()
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new FiltersAggregation("conditionless_filters")
 			{
-				Aggregations = new FiltersAggregation("conditionless_filters")
+				Filters = new List<QueryContainer>
 				{
-					Filters = new List<QueryContainer>
-					{
-						new QueryContainer()
-					}
+					new QueryContainer()
 				}
 			};
 

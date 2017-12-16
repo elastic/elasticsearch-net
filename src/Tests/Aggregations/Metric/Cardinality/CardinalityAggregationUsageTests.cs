@@ -13,36 +13,28 @@ namespace Tests.Aggregations.Metric.Cardinality
 	{
 		public CardinalityAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			state_count = new
 			{
-				state_count = new
+				cardinality = new
 				{
-					cardinality = new
-					{
-						field = "state",
-						precision_threshold = 100
-					}
+					field = "state",
+					precision_threshold = 100
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.Cardinality("state_count", c => c
-					.Field(p => p.State)
-					.PrecisionThreshold(100)
-				)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Cardinality("state_count", c => c
+				.Field(p => p.State)
+				.PrecisionThreshold(100)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new CardinalityAggregation("state_count", Field<Project>(p => p.State))
 			{
-				Aggregations = new CardinalityAggregation("state_count", Field<Project>(p => p.State))
-				{
-					PrecisionThreshold = 100
-				}
+				PrecisionThreshold = 100
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)

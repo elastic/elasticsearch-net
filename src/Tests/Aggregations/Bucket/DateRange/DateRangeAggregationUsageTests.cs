@@ -23,63 +23,55 @@ namespace Tests.Aggregations.Bucket.DateRange
 	{
 		public DateRangeAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			projects_date_ranges = new
 			{
-				projects_date_ranges = new
+				date_range = new
 				{
-					date_range = new
+					field = "startedOn",
+					ranges = new object[]
 					{
-						field = "startedOn",
-						ranges = new object[]
-						{
-							new { to = "now", from = "2015-06-06T12:01:02.123||+2d" },
-							new { to = "now+1d-30m/h" },
-							new { from = "2012-05-05||+1d-1m" },
-						},
-						time_zone = "CET"
+						new {to = "now", from = "2015-06-06T12:01:02.123||+2d"},
+						new {to = "now+1d-30m/h"},
+						new {from = "2012-05-05||+1d-1m"},
 					},
-					aggs = new
-					{
-						project_tags = new { terms = new { field = "tags" } }
-					}
+					time_zone = "CET"
+				},
+				aggs = new
+				{
+					project_tags = new {terms = new {field = "tags"}}
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(aggs => aggs
-				.DateRange("projects_date_ranges", date => date
-					.Field(p => p.StartedOn)
-					.Ranges(
-						r => r.From(DateMath.Anchored(FixedDate).Add("2d")).To(DateMath.Now),
-						r => r.To(DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour)),
-						r => r.From(DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m"))
-					)
-					.TimeZone("CET")
-					.Aggregations(childAggs => childAggs
-						.Terms("project_tags", avg => avg.Field(p => p.Tags))
-					)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.DateRange("projects_date_ranges", date => date
+				.Field(p => p.StartedOn)
+				.Ranges(
+					r => r.From(DateMath.Anchored(FixedDate).Add("2d")).To(DateMath.Now),
+					r => r.To(DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour)),
+					r => r.From(DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m"))
+				)
+				.TimeZone("CET")
+				.Aggregations(childAggs => childAggs
+					.Terms("project_tags", avg => avg.Field(p => p.Tags))
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new DateRangeAggregation("projects_date_ranges")
 			{
-				Aggregations = new DateRangeAggregation("projects_date_ranges")
+				Field = Field<Project>(p => p.StartedOn),
+				Ranges = new List<DateRangeExpression>
 				{
-					Field = Field<Project>(p => p.StartedOn),
-					Ranges = new List<DateRangeExpression>
-					{
-						new DateRangeExpression { From = DateMath.Anchored(FixedDate).Add("2d"), To = DateMath.Now},
-						new DateRangeExpression { To = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour) },
-						new DateRangeExpression { From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m") }
-					},
-					TimeZone = "CET",
-					Aggregations =
-						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.Tags) }
-				}
+					new DateRangeExpression {From = DateMath.Anchored(FixedDate).Add("2d"), To = DateMath.Now},
+					new DateRangeExpression {To = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour)},
+					new DateRangeExpression {From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m")}
+				},
+				TimeZone = "CET",
+				Aggregations =
+					new TermsAggregation("project_tags") {Field = Field<Project>(p => p.Tags)}
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)

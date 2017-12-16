@@ -15,70 +15,67 @@ namespace Tests.Aggregations.Metric.TopHits
 	{
 		public TopHitsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			states = new
 			{
-				states = new
+				terms = new
 				{
-					terms = new
+					field = "state",
+				},
+				aggs = new
+				{
+					top_state_hits = new
 					{
-						field = "state",
-					},
-					aggs = new
-					{
-						top_state_hits = new
+						top_hits = new
 						{
-							top_hits = new
+							sort = new object[]
 							{
-								sort = new object[]
+								new
 								{
-									new
+									startedOn = new
 									{
-										startedOn = new
-										{
-											order = "desc"
-										}
-									},
-									new
-									{
-										_script = new
-										{
-											type = "number",
-											script = new
-											{
-												lang = "painless",
-												source = "Math.sin(34*(double)doc['numberOfCommits'].value)"
-											},
-											order = "desc"
-										}
+										order = "desc"
 									}
 								},
-								_source = new
+								new
 								{
-									includes = new [] { "name", "lastActivity", "sourceOnly" }
-								},
-								size = 1,
-								version = true,
-								track_scores = true,
-								explain = true,
-								stored_fields = new [] { "startedOn" },
-								highlight = new
-								{
-									fields = new
+									_script = new
 									{
-										tags = new { },
-										description = new { }
-									}
-								},
-								script_fields = new
-								{
-									commit_factor = new
-									{
+										type = "number",
 										script = new
 										{
-											source = "doc['numberOfCommits'].value * 2",
-										}
+											lang = "painless",
+											source = "Math.sin(34*(double)doc['numberOfCommits'].value)"
+										},
+										order = "desc"
+									}
+								}
+							},
+							_source = new
+							{
+								includes = new[] {"name", "lastActivity", "sourceOnly"}
+							},
+							size = 1,
+							version = true,
+							track_scores = true,
+							explain = true,
+							stored_fields = new[] {"startedOn"},
+							highlight = new
+							{
+								fields = new
+								{
+									tags = new { },
+									description = new { }
+								}
+							},
+							script_fields = new
+							{
+								commit_factor = new
+								{
+									script = new
+									{
+										source = "doc['numberOfCommits'].value * 2",
 									}
 								}
 							}
@@ -88,8 +85,7 @@ namespace Tests.Aggregations.Metric.TopHits
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs =>a => a
 				.Terms("states", t => t
 					.Field(p => p.State)
 					.Aggregations(aa => aa
@@ -97,8 +93,7 @@ namespace Tests.Aggregations.Metric.TopHits
 							.Sort(srt => srt
 								.Field(sf => sf
 									.Field(p => p.StartedOn)
-									.Order(SortOrder.Descending)
-								)
+								.Order(SortOrder.Descending))
 								.Script(ss => ss
 									.Type("number")
 									.Script(sss => sss
@@ -131,31 +126,29 @@ namespace Tests.Aggregations.Metric.TopHits
 							.ScriptFields(sfs => sfs
 								.ScriptField("commit_factor", sf => sf
 									.Source("doc['numberOfCommits'].value * 2")
-								)
+
 							)
 						)
 					)
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new TermsAggregation("states")
 			{
-				Aggregations = new TermsAggregation("states")
-				{
+
 					Field = Field<Project>(p => p.State),
 					Aggregations = new TopHitsAggregation("top_state_hits")
 					{
 						Sort = new List<ISort>
 						{
 							new SortField { Field = Field<Project>(p => p.StartedOn), Order = SortOrder.Descending },
-							new ScriptSort
+						new ScriptSort
 							{
 								Type = "number",
 								Script = new InlineScript("Math.sin(34*(double)doc['numberOfCommits'].value)") { Lang = "painless" },
 								Order = SortOrder.Descending
-							},
-						},
+							},},
 						Source = new SourceFilter
 						{
 							Includes = new [] { "name", "lastActivity", "sourceOnly" }
@@ -167,17 +160,18 @@ namespace Tests.Aggregations.Metric.TopHits
 						StoredFields = new[] { "startedOn" },
 						Highlight = new Highlight
 						{
-							Fields = new Dictionary<Nest.Field, IHighlightField>
+							Fields = new Dictionary<Field, IHighlightField>
 							{
 								{ Field<Project>(p => p.Tags), new HighlightField() },
 								{ Field<Project>(p => p.Description), new HighlightField() }
 							}
 						},
-						ScriptFields = new ScriptFields
+						ScriptFields = new ScriptFields{
 						{
-							{ "commit_factor", new ScriptField {
+							"commit_factor", new ScriptField
+							{
 								Script = new InlineScript("doc['numberOfCommits'].value * 2")
-							} }
+							}
 						}
 					}
 				}

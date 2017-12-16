@@ -13,32 +13,24 @@ namespace Tests.Aggregations.Metric.Stats
 	{
 		public StatsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			commit_stats = new
 			{
-				commit_stats = new
+				stats = new
 				{
-					stats = new
-					{
-						field = "numberOfCommits"
-					}
+					field = "numberOfCommits"
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.Stats("commit_stats", st => st
-					.Field(p => p.NumberOfCommits)
-				)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Stats("commit_stats", st => st
+				.Field(p => p.NumberOfCommits)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
-			{
-				Aggregations = new StatsAggregation("commit_stats", Field<Project>(p => p.NumberOfCommits))
-			};
+		protected override AggregationDictionary InitializerAggs =>
+			new StatsAggregation("commit_stats", Field<Project>(p => p.NumberOfCommits));
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
