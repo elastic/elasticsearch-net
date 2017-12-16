@@ -12,62 +12,53 @@ namespace Tests.Aggregations.Pipeline.PercentilesBucket
 	{
 		public PercentilesBucketAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			size = 0,
-			aggs = new
+			projects_started_per_month = new
 			{
-				projects_started_per_month = new
+				date_histogram = new
 				{
-					date_histogram = new
+					field = "startedOn",
+					interval = "month",
+				},
+				aggs = new
+				{
+					commits = new
 					{
-						field = "startedOn",
-						interval = "month",
-					},
-					aggs = new
-					{
-						commits = new
+						sum = new
 						{
-							sum = new
-							{
-								field = "numberOfCommits"
-							}
+							field = "numberOfCommits"
 						}
 					}
-				},
-				commits_outlier = new
+				}
+			},
+			commits_outlier = new
+			{
+				percentiles_bucket = new
 				{
-					percentiles_bucket = new
-					{
-						buckets_path = "projects_started_per_month>commits",
-						percents = new[] { 95.0, 99.0, 99.9 }
-					}
+					buckets_path = "projects_started_per_month>commits",
+					percents = new[] {95.0, 99.0, 99.9}
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Size(0)
-			.Aggregations(a => a
-				.DateHistogram("projects_started_per_month", dh => dh
-					.Field(p => p.StartedOn)
-					.Interval(DateInterval.Month)
-					.Aggregations(aa => aa
-						.Sum("commits", sm => sm
-							.Field(p => p.NumberOfCommits)
-						)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.DateHistogram("projects_started_per_month", dh => dh
+				.Field(p => p.StartedOn)
+				.Interval(DateInterval.Month)
+				.Aggregations(aa => aa
+					.Sum("commits", sm => sm
+						.Field(p => p.NumberOfCommits)
 					)
 				)
-				.PercentilesBucket("commits_outlier", aaa => aaa
-					.BucketsPath("projects_started_per_month>commits")
-					.Percents(95, 99, 99.9)
-				)
+			)
+			.PercentilesBucket("commits_outlier", aaa => aaa
+				.BucketsPath("projects_started_per_month>commits")
+				.Percents(95, 99, 99.9)
 			);
 
-		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
-		{
-			Size = 0,
-			Aggregations = new DateHistogramAggregation("projects_started_per_month")
+		protected override AggregationDictionary InitializerAggs =>
+			new DateHistogramAggregation("projects_started_per_month")
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
@@ -75,9 +66,8 @@ namespace Tests.Aggregations.Pipeline.PercentilesBucket
 			}
 			&& new PercentilesBucketAggregation("commits_outlier", "projects_started_per_month>commits")
 			{
-				Percents = new[] { 95, 99, 99.9 }
-			}
-		};
+				Percents = new[] {95, 99, 99.9}
+			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{

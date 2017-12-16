@@ -13,38 +13,26 @@ namespace Tests.Aggregations.Bucket.ReverseNested
 	{
 		public ReverseNestedAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			tags = new
 			{
-				tags = new
+				nested = new { path = "tags", },
+				aggs = new
 				{
-					nested = new
+					tag_names = new
 					{
-						path = "tags",
-					},
-					aggs = new
-					{
-						tag_names = new
+						terms = new { field = "tags.name" },
+						aggs = new
 						{
-							terms = new
+							tags_to_project = new
 							{
-								field = "tags.name"
-							},
-							aggs = new
-							{
-								tags_to_project = new
+								reverse_nested = new { },
+								aggs = new
 								{
-									reverse_nested = new {},
-									aggs = new
+									top_projects_per_tag = new
 									{
-										top_projects_per_tag = new
-										{
-											terms = new
-											{
-												field = "name"
-											}
-										}
+										terms = new { field = "name" }
 									}
 								}
 							}
@@ -54,19 +42,17 @@ namespace Tests.Aggregations.Bucket.ReverseNested
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.Nested("tags", n => n
-					.Path(p => p.Tags)
-					.Aggregations(aa => aa
-						.Terms("tag_names", t => t
-							.Field(p => p.Tags.Suffix("name"))
-							.Aggregations(aaa => aaa
-								.ReverseNested("tags_to_project", r => r
-									.Aggregations(aaaa => aaaa
-										.Terms("top_projects_per_tag", tt => tt
-											.Field(p => p.Name)
-										)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Nested("tags", n => n
+				.Path(p => p.Tags)
+				.Aggregations(aa => aa
+					.Terms("tag_names", t => t
+						.Field(p => p.Tags.Suffix("name"))
+						.Aggregations(aaa => aaa
+							.ReverseNested("tags_to_project", r => r
+								.Aggregations(aaaa => aaaa
+									.Terms("top_projects_per_tag", tt => tt
+										.Field(p => p.Name)
 									)
 								)
 							)
@@ -75,21 +61,18 @@ namespace Tests.Aggregations.Bucket.ReverseNested
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new NestedAggregation("tags")
 			{
-				Aggregations = new NestedAggregation("tags")
+				Path = "tags",
+				Aggregations = new TermsAggregation("tag_names")
 				{
-					Path = "tags",
-					Aggregations = new TermsAggregation("tag_names")
+					Field = "tags.name",
+					Aggregations = new ReverseNestedAggregation("tags_to_project")
 					{
-						Field = "tags.name",
-						Aggregations = new ReverseNestedAggregation("tags_to_project")
+						Aggregations = new TermsAggregation("top_projects_per_tag")
 						{
-							Aggregations = new TermsAggregation("top_projects_per_tag")
-							{
-								Field = Field<Project>(p => p.Name)
-							}
+							Field = Field<Project>(p => p.Name)
 						}
 					}
 				}

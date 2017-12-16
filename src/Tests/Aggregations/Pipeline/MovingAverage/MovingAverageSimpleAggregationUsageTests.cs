@@ -14,82 +14,72 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 	{
 		public MovingAverageSimpleAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			size = 0,
-			aggs = new
+			projects_started_per_month = new
 			{
-				projects_started_per_month = new
+				date_histogram = new
 				{
-					date_histogram = new
+					field = "startedOn",
+					interval = "month",
+				},
+				aggs = new
+				{
+					commits = new
 					{
-						field = "startedOn",
-						interval = "month",
+						sum = new
+						{
+							field = "numberOfCommits"
+						}
 					},
-					aggs = new
+					commits_moving_avg = new
 					{
-						commits = new
+						moving_avg = new
 						{
-							sum = new
-							{
-								field = "numberOfCommits"
-							}
-						},
-						commits_moving_avg = new
-						{
-							moving_avg = new
-							{
-								buckets_path = "commits",
-								model = "simple",
-								window = 30,
-								predict = 10,
-								settings = new {}
-							}
+							buckets_path = "commits",
+							model = "simple",
+							window = 30,
+							predict = 10,
+							settings = new { }
 						}
 					}
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Size(0)
-			.Aggregations(a => a
-				.DateHistogram("projects_started_per_month", dh => dh
-					.Field(p => p.StartedOn)
-					.Interval(DateInterval.Month)
-					.Aggregations(aa => aa
-						.Sum("commits", sm => sm
-							.Field(p => p.NumberOfCommits)
-						)
-						.MovingAverage("commits_moving_avg", mv => mv
-							.BucketsPath("commits")
-							.Window(30)
-							.Predict(10)
-							.Model(m => m
-								.Simple()
-							)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.DateHistogram("projects_started_per_month", dh => dh
+				.Field(p => p.StartedOn)
+				.Interval(DateInterval.Month)
+				.Aggregations(aa => aa
+					.Sum("commits", sm => sm
+						.Field(p => p.NumberOfCommits)
+					)
+					.MovingAverage("commits_moving_avg", mv => mv
+						.BucketsPath("commits")
+						.Window(30)
+						.Predict(10)
+						.Model(m => m
+							.Simple()
 						)
 					)
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
-		{
-			Size = 0,
-			Aggregations = new DateHistogramAggregation("projects_started_per_month")
+		protected override AggregationDictionary InitializerAggs =>
+			new DateHistogramAggregation("projects_started_per_month")
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
 				Aggregations =
-					new SumAggregation("commits", "numberOfCommits") &&
-					new MovingAverageAggregation("commits_moving_avg", "commits")
+					new SumAggregation("commits", "numberOfCommits")
+					&& new MovingAverageAggregation("commits_moving_avg", "commits")
 					{
 						Window = 30,
 						Predict = 10,
 						Model = new SimpleModel()
 					}
-			}
-		};
+			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{

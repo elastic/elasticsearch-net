@@ -26,41 +26,37 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 	{
 		public DateHistogramAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			size = 0,
-			aggs = new
+			projects_started_per_month = new
 			{
-				projects_started_per_month = new
+				date_histogram = new
 				{
-					date_histogram = new
+					field = "startedOn",
+					interval = "month",
+					min_doc_count = 2,
+					format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time", //<1> Note the inclusion of `date_optional_time` to `format`
+					order = new {_count = "asc"},
+					extended_bounds = new
 					{
-						field = "startedOn",
-						interval = "month",
-						min_doc_count = 2,
-						format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time", //<1> Note the inclusion of `date_optional_time` to `format`
-						order = new { _count = "asc" },
-						extended_bounds = new
-						{
-							min = FixedDate.AddYears(-1),
-							max = FixedDate.AddYears(1)
-						},
-						missing = FixedDate
+						min = FixedDate.AddYears(-1),
+						max = FixedDate.AddYears(1)
 					},
-					aggs = new
+					missing = FixedDate
+				},
+				aggs = new
+				{
+					project_tags = new
 					{
-						project_tags = new
+						nested = new
 						{
-							nested = new
+							path = "tags"
+						},
+						aggs = new
+						{
+							tags = new
 							{
-								path = "tags"
-							},
-							aggs = new
-							{
-								tags = new
-								{
-									terms = new { field = "tags.name" }
-								}
+								terms = new {field = "tags.name"}
 							}
 						}
 					}
@@ -68,53 +64,45 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Index(DefaultSeeder.ProjectsAliasFilter)
-			.Size(0)
-			.Aggregations(aggs => aggs
-				.DateHistogram("projects_started_per_month", date => date
-					.Field(p => p.StartedOn)
-					.Interval(DateInterval.Month)
-					.MinimumDocumentCount(2)
-					.Format("yyyy-MM-dd'T'HH:mm:ss")
-					.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
-					.Order(HistogramOrder.CountAscending)
-					.Missing(FixedDate)
-					.Aggregations(childAggs => childAggs
-						.Nested("project_tags", n => n
-							.Path(p => p.Tags)
-							.Aggregations(nestedAggs => nestedAggs
-								.Terms("tags", avg => avg.Field(p => p.Tags.First().Name))
-							)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.DateHistogram("projects_started_per_month", date => date
+				.Field(p => p.StartedOn)
+				.Interval(DateInterval.Month)
+				.MinimumDocumentCount(2)
+				.Format("yyyy-MM-dd'T'HH:mm:ss")
+				.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
+				.Order(HistogramOrder.CountAscending)
+				.Missing(FixedDate)
+				.Aggregations(childAggs => childAggs
+					.Nested("project_tags", n => n
+						.Path(p => p.Tags)
+						.Aggregations(nestedAggs => nestedAggs
+							.Terms("tags", avg => avg.Field(p => p.Tags.First().Name))
 						)
 					)
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
+		protected override AggregationDictionary InitializerAggs =>
+			new DateHistogramAggregation("projects_started_per_month")
 			{
-				Size = 0,
-				Aggregations = new DateHistogramAggregation("projects_started_per_month")
+				Field = Field<Project>(p => p.StartedOn),
+				Interval = DateInterval.Month,
+				MinimumDocumentCount = 2,
+				Format = "yyyy-MM-dd'T'HH:mm:ss",
+				ExtendedBounds = new ExtendedBounds<DateMath>
 				{
-					Field = Field<Project>(p => p.StartedOn),
-					Interval = DateInterval.Month,
-					MinimumDocumentCount = 2,
-					Format = "yyyy-MM-dd'T'HH:mm:ss",
-					ExtendedBounds = new ExtendedBounds<DateMath>
+					Minimum = FixedDate.AddYears(-1),
+					Maximum = FixedDate.AddYears(1),
+				},
+				Order = HistogramOrder.CountAscending,
+				Missing = FixedDate,
+				Aggregations = new NestedAggregation("project_tags")
+				{
+					Path = Field<Project>(p => p.Tags),
+					Aggregations = new TermsAggregation("tags")
 					{
-						Minimum = FixedDate.AddYears(-1),
-						Maximum = FixedDate.AddYears(1),
-					},
-					Order = HistogramOrder.CountAscending,
-					Missing = FixedDate,
-					Aggregations = new NestedAggregation("project_tags")
-					{
-						Path = Field<Project>(p => p.Tags),
-						Aggregations = new TermsAggregation("tags")
-						{
-							Field = Field<Project>(p => p.Tags.First().Name)
-						}
+						Field = Field<Project>(p => p.Tags.First().Name)
 					}
 				}
 			};

@@ -13,36 +13,28 @@ namespace Tests.Aggregations.Metric.GeoBounds
 	{
 		public GeoBoundsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			viewport = new
 			{
-				viewport = new
+				geo_bounds = new
 				{
-					geo_bounds = new
-					{
-						field = "location",
-						wrap_longitude = true
-					}
+					field = "location",
+					wrap_longitude = true
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.GeoBounds("viewport", gb => gb
-					.Field(p => p.Location)
-					.WrapLongitude(true)
-				)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.GeoBounds("viewport", gb => gb
+				.Field(p => p.Location)
+				.WrapLongitude(true)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new GeoBoundsAggregation("viewport", Field<Project>(p => p.Location))
 			{
-				Aggregations = new GeoBoundsAggregation("viewport", Field<Project>(p => p.Location))
-				{
-					WrapLongitude = true
-				}
+				WrapLongitude = true
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)

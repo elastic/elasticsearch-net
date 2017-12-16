@@ -13,33 +13,29 @@ namespace Tests.Aggregations.Pipeline.Derivative
 	{
 		public DerivativeAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			size = 0,
-			aggs = new
+			projects_started_per_month = new
 			{
-				projects_started_per_month = new
+				date_histogram = new
 				{
-					date_histogram = new
+					field = "startedOn",
+					interval = "month",
+				},
+				aggs = new
+				{
+					commits = new
 					{
-						field = "startedOn",
-						interval = "month",
+						sum = new
+						{
+							field = "numberOfCommits"
+						}
 					},
-					aggs = new
+					commits_derivative = new
 					{
-						commits = new
+						derivative = new
 						{
-							sum = new
-							{
-								field = "numberOfCommits"
-							}
-						},
-						commits_derivative = new
-						{
-							derivative = new
-							{
-								buckets_path = "commits"
-							}
+							buckets_path = "commits"
 						}
 					}
 				}
@@ -64,34 +60,28 @@ namespace Tests.Aggregations.Pipeline.Derivative
 			}
 		}
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Size(0)
-			.Aggregations(a => a
-				.DateHistogram("projects_started_per_month", dh => dh
-					.Field(p => p.StartedOn)
-					.Interval(DateInterval.Month)
-					.Aggregations(aa => aa
-						.Sum("commits", sm => sm
-							.Field(p => p.NumberOfCommits)
-						)
-						.Derivative("commits_derivative", d => d
-							.BucketsPath("commits")
-						)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.DateHistogram("projects_started_per_month", dh => dh
+				.Field(p => p.StartedOn)
+				.Interval(DateInterval.Month)
+				.Aggregations(aa => aa
+					.Sum("commits", sm => sm
+						.Field(p => p.NumberOfCommits)
+					)
+					.Derivative("commits_derivative", d => d
+						.BucketsPath("commits")
 					)
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>
-		{
-			Size = 0,
-			Aggregations = new DateHistogramAggregation("projects_started_per_month")
+		protected override AggregationDictionary InitializerAggs =>
+			new DateHistogramAggregation("projects_started_per_month")
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
 				Aggregations =
 					new SumAggregation("commits", "numberOfCommits") &&
 					new DerivativeAggregation("commits_derivative", "commits")
-			}
-		};
+			};
 	}
 }

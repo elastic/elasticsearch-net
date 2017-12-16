@@ -15,57 +15,54 @@ namespace Tests.Aggregations.Metric.TopHits
 	{
 		public TopHitsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			states = new
 			{
-				states = new
+				terms = new
 				{
-					terms = new
+					field = "state",
+				},
+				aggs = new
+				{
+					top_state_hits = new
 					{
-						field = "state",
-					},
-					aggs = new
-					{
-						top_state_hits = new
+						top_hits = new
 						{
-							top_hits = new
+							sort = new object[]
 							{
-								sort = new object[]
+								new
 								{
-									new
+									startedOn = new
 									{
-										startedOn = new
-										{
-											order = "desc"
-										}
+										order = "desc"
 									}
-								},
-								_source = new
+								}
+							},
+							_source = new
+							{
+								includes = new[] {"name", "lastActivity", "sourceOnly"}
+							},
+							size = 1,
+							version = true,
+							track_scores = true,
+							explain = true,
+							stored_fields = new[] {"startedOn"},
+							highlight = new
+							{
+								fields = new
 								{
-									includes = new [] { "name", "lastActivity", "sourceOnly" }
-								},
-								size = 1,
-								version = true,
-								track_scores = true,
-								explain = true,
-								stored_fields = new [] { "startedOn" },
-								highlight = new
+									tags = new { },
+									description = new { }
+								}
+							},
+							script_fields = new
+							{
+								commit_factor = new
 								{
-									fields = new
+									script = new
 									{
-										tags = new { },
-										description = new { }
-									}
-								},
-								script_fields = new
-								{
-									commit_factor = new
-									{
-										script = new
-										{
-											source = "doc['numberOfCommits'].value * 2",
-										}
+										source = "doc['numberOfCommits'].value * 2",
 									}
 								}
 							}
@@ -75,80 +72,78 @@ namespace Tests.Aggregations.Metric.TopHits
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.Terms("states", t => t
-					.Field(p => p.State)
-					.Aggregations(aa => aa
-						.TopHits("top_state_hits", th => th
-							.Sort(srt => srt
-								.Field(p => p.StartedOn)
-								.Order(SortOrder.Descending)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Terms("states", t => t
+				.Field(p => p.State)
+				.Aggregations(aa => aa
+					.TopHits("top_state_hits", th => th
+						.Sort(srt => srt
+							.Field(p => p.StartedOn)
+							.Order(SortOrder.Descending)
+						)
+						.Source(src => src
+							.Includes(fs => fs
+								.Field(p => p.Name)
+								.Field(p => p.LastActivity)
+								.Field(p => p.SourceOnly)
 							)
-							.Source(src => src
-								.Includes(fs => fs
-									.Field(p => p.Name)
-									.Field(p => p.LastActivity)
-									.Field(p => p.SourceOnly)
-								)
+						)
+						.Size(1)
+						.Version()
+						.TrackScores()
+						.Explain()
+						.StoredFields(f => f
+							.Field(p => p.StartedOn)
+						)
+						.Highlight(h => h
+							.Fields(
+								hf => hf.Field(p => p.Tags),
+								hf => hf.Field(p => p.Description)
 							)
-							.Size(1)
-							.Version()
-							.TrackScores()
-							.Explain()
-							.StoredFields(f => f
-								.Field(p => p.StartedOn)
-							)
-							.Highlight(h => h
-								.Fields(
-									hf => hf.Field(p => p.Tags),
-									hf => hf.Field(p => p.Description)
-								)
-							)
-							.ScriptFields(sfs => sfs
-								.ScriptField("commit_factor", sf => sf
-									.Source("doc['numberOfCommits'].value * 2")
-								)
+						)
+						.ScriptFields(sfs => sfs
+							.ScriptField("commit_factor", sf => sf
+								.Source("doc['numberOfCommits'].value * 2")
 							)
 						)
 					)
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new TermsAggregation("states")
 			{
-				Aggregations = new TermsAggregation("states")
+				Field = Field<Project>(p => p.State),
+				Aggregations = new TopHitsAggregation("top_state_hits")
 				{
-					Field = Field<Project>(p => p.State),
-					Aggregations = new TopHitsAggregation("top_state_hits")
+					Sort = new List<ISort>
 					{
-						Sort = new List<ISort>
+						new SortField {Field = Field<Project>(p => p.StartedOn), Order = SortOrder.Descending}
+					},
+					Source = new SourceFilter
+					{
+						Includes = new[] {"name", "lastActivity", "sourceOnly"}
+					},
+					Size = 1,
+					Version = true,
+					TrackScores = true,
+					Explain = true,
+					StoredFields = new[] {"startedOn"},
+					Highlight = new Highlight
+					{
+						Fields = new Dictionary<Field, IHighlightField>
 						{
-							new SortField { Field = Field<Project>(p => p.StartedOn), Order = SortOrder.Descending }
-						},
-						Source = new SourceFilter
+							{Field<Project>(p => p.Tags), new HighlightField()},
+							{Field<Project>(p => p.Description), new HighlightField()}
+						}
+					},
+					ScriptFields = new ScriptFields
+					{
 						{
-							Includes = new [] { "name", "lastActivity", "sourceOnly" }
-						},
-						Size = 1,
-						Version = true,
-						TrackScores = true,
-						Explain = true,
-						StoredFields = new[] { "startedOn" },
-						Highlight = new Highlight
-						{
-							Fields = new Dictionary<Nest.Field, IHighlightField>
+							"commit_factor", new ScriptField
 							{
-								{ Field<Project>(p => p.Tags), new HighlightField() },
-								{ Field<Project>(p => p.Description), new HighlightField() }
-							}
-						},
-						ScriptFields = new ScriptFields
-						{
-							{ "commit_factor", new ScriptField {
 								Script = new InlineScript("doc['numberOfCommits'].value * 2")
-							} }
+							}
 						}
 					}
 				}
