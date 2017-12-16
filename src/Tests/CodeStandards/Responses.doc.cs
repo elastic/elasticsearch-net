@@ -43,6 +43,8 @@ namespace Tests.CodeStandards
 			ruleBreakers.Should().BeEmpty();
 		}
 
+		private static readonly Type[] ResponseDictionaries = {typeof(AggregateDictionary)};
+
 		private static void FindPropertiesBreakingRule(Type type, HashSet<PropertyInfo> exceptions, HashSet<Type> seenTypes, List<string> ruleBreakers)
 		{
 			if (seenTypes.Add(type))
@@ -70,8 +72,11 @@ namespace Tests.CodeStandards
 							ruleBreakers.Add($"{type.FullName}.{propertyInfo.Name} is of type {propertyInfo.PropertyType.Name}");
 						}
 					}
-					else if (propertyInfo.PropertyType.IsClass() && (propertyInfo.PropertyType.Namespace.StartsWith("Nest") ||
-					                                                 propertyInfo.PropertyType.Namespace.StartsWith("Elasticsearch.Net")))
+					else if (propertyInfo.PropertyType.IsClass() &&
+					         (propertyInfo.PropertyType.Namespace.StartsWith("Nest") || propertyInfo.PropertyType.Namespace.StartsWith("Elasticsearch.Net"))
+					         //Do not traverse known response dictionaries
+					         && !ResponseDictionaries.Contains(propertyInfo.PropertyType)
+					)
 					{
 						FindPropertiesBreakingRule(propertyInfo.PropertyType, exceptions, seenTypes, ruleBreakers);
 					}

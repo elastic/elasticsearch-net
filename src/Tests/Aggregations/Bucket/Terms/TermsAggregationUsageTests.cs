@@ -390,14 +390,14 @@ namespace Tests.Aggregations.Bucket.Terms
 		};
 
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
-			.Terms<int>("commits", st => st
+			.Terms("commits", st => st
 				.Field(p => p.NumberOfCommits)
 				.Missing(-1)
 				.ShowTermDocCountError()
 			);
 
 		protected override AggregationDictionary InitializerAggs =>
-			new TermsAggregation<int>("commits")
+			new TermsAggregation("commits")
 			{
 				Field = Field<Project>(p => p.NumberOfCommits),
 				ShowTermDocCountError = true,
@@ -436,15 +436,20 @@ namespace Tests.Aggregations.Bucket.Terms
 		{
 			commits = new
 			{
-				terms = new
-				{
-					field = "numberOfCommits",
-				}
+				terms = new { field = "numberOfCommits", },
+				 aggs = new
+				 {
+					state = new
+					{
+						meta = new { x = "y" },
+						terms = new { field = "state" }
+					}
+				},
 			}
 		};
 
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
-			.Terms<int>("commits", st => st
+			.Terms("commits", st => st
 				.Field(p => p.NumberOfCommits)
 				.Aggregations(aggs => aggs
 					.Terms("state", t => t
@@ -455,10 +460,10 @@ namespace Tests.Aggregations.Bucket.Terms
 			);
 
 		protected override AggregationDictionary InitializerAggs =>
-			new TermsAggregation<int>("commits")
+			new TermsAggregation("commits")
 			{
 				Field = Field<Project>(p => p.NumberOfCommits),
-				Aggregations = new TermsAggregation<string>("state")
+				Aggregations = new TermsAggregation("state")
 				{
 					Meta = new Dictionary<string, object> {{"x", "y"}},
 					Field = Field<Project>(p => p.State),

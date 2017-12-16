@@ -521,11 +521,7 @@ namespace Nest
 			_SetInnerAggregation(name, selector, (a, d) => a.Sum = d);
 
 		public AggregationContainerDescriptor<T> Terms(string name,
-			Func<TermsAggregationDescriptor<T, string>, ITermsAggregation<string>> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Terms = d);
-
-		public AggregationContainerDescriptor<T> Terms<TFieldType>(string name,
-			Func<TermsAggregationDescriptor<T, TFieldType>, ITermsAggregation<TFieldType>> selector) =>
+			Func<TermsAggregationDescriptor<T>, ITermsAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Terms = d);
 
 		public AggregationContainerDescriptor<T> SignificantTerms(string name,
