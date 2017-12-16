@@ -264,19 +264,17 @@ namespace Tests.Aggregations
 	{
 		public ChildrenAggregationFluentAggsUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(aggs => aggs
-				.Children<CommitActivity>("name_of_child_agg", child => child
-					.Aggregations(childAggs => childAggs
-						.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-						.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-						.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-					)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Children<CommitActivity>("name_of_child_agg", child => child
+				.Aggregations(childAggs => childAggs
+					.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+					.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+					.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
 				)
 			);
 
 		/**
-		* Now, using `.Aggs`, we can easily get the `Children` aggregation response out and from that,
+		* Now, using `.Aggregations`, we can easily get the `Children` aggregation response out and from that,
 		* the `Average` and `Max` sub aggregations.
 		*/
 		protected override void ExpectResponse(ISearchResponse<Project> response)

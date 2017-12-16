@@ -6,6 +6,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.MockData;
+using static Nest.Infer;
 using Xunit;
 
 namespace Tests.Aggregations
@@ -33,20 +34,21 @@ namespace Tests.Aggregations
 			$"/project/doc/_search?typed_keys={AggregationsTests.UsesTypedKeys.ToString().ToLowerInvariant()}";
 
 		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>(this.AgainstIndex)
+			new SearchRequest<Project>(this.AgainstIndex, Type<Project>())
 			{
 				Size =  0,
 				TypedKeys = AggregationsTests.UsesTypedKeys,
 				Aggregations = InitializerAggs
 			};
 
-		protected virtual Nest.Indices AgainstIndex { get; }
+		protected virtual Nest.Indices AgainstIndex { get; } = Index<Project>();
 
 		protected abstract AggregationDictionary InitializerAggs { get; }
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Size(0)
 			.Index(AgainstIndex)
+			.Type<Project>()
 			.TypedKeys(AggregationsTests.UsesTypedKeys)
 			.Aggregations(this.FluentAggs);
 
