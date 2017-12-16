@@ -12,39 +12,35 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 	{
 		public BucketSelectorAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			size = 0,
-			aggs = new
+			projects_started_per_month = new
 			{
-				projects_started_per_month = new
+				date_histogram = new
 				{
-					date_histogram = new
+					field = "startedOn",
+					interval = "month",
+				},
+				aggs = new
+				{
+					commits = new
 					{
-						field = "startedOn",
-						interval = "month",
+						sum = new
+						{
+							field = "numberOfCommits"
+						}
 					},
-					aggs = new
+					commits_bucket_filter = new
 					{
-						commits = new
+						bucket_selector = new
 						{
-							sum = new
+							buckets_path = new
 							{
-								field = "numberOfCommits"
-							}
-						},
-						commits_bucket_filter = new
-						{
-							bucket_selector = new
+								totalCommits = "commits"
+							},
+							script = new
 							{
-								buckets_path = new
-								{
-									totalCommits = "commits"
-								},
-								script = new
-								{
-									source = "params.totalCommits >= 500",
-								}
+								source = "params.totalCommits >= 500",
 							}
 						}
 					}
@@ -52,44 +48,38 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Size(0)
-			.Aggregations(a => a
-				.DateHistogram("projects_started_per_month", dh => dh
-					.Field(p => p.StartedOn)
-					.Interval(DateInterval.Month)
-					.Aggregations(aa => aa
-						.Sum("commits", sm => sm
-							.Field(p => p.NumberOfCommits)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.DateHistogram("projects_started_per_month", dh => dh
+				.Field(p => p.StartedOn)
+				.Interval(DateInterval.Month)
+				.Aggregations(aa => aa
+					.Sum("commits", sm => sm
+						.Field(p => p.NumberOfCommits)
+					)
+					.BucketSelector("commits_bucket_filter", bs => bs
+						.BucketsPath(bp => bp
+							.Add("totalCommits", "commits")
 						)
-						.BucketSelector("commits_bucket_filter", bs => bs
-							.BucketsPath(bp => bp
-								.Add("totalCommits", "commits")
-							)
-							.Script(ss => ss.Source("params.totalCommits >= 500"))
-						)
+						.Script(ss => ss.Source("params.totalCommits >= 500"))
 					)
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
-		{
-			Size = 0,
-			Aggregations = new DateHistogramAggregation("projects_started_per_month")
+		protected override AggregationDictionary InitializerAggs =>
+			new DateHistogramAggregation("projects_started_per_month")
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
 				Aggregations =
 					new SumAggregation("commits", "numberOfCommits") &&
 					new BucketSelectorAggregation("commits_bucket_filter", new MultiBucketsPath
-						{
-							{ "totalCommits", "commits" },
-						})
+					{
+						{"totalCommits", "commits"},
+					})
 					{
 						Script = new InlineScript("params.totalCommits >= 500")
 					}
-			}
-		};
+			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{

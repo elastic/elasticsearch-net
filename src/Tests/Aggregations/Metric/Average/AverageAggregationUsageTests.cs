@@ -14,53 +14,45 @@ namespace Tests.Aggregations.Metric.Average
 	{
 		public AverageAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			average_commits = new
 			{
-				average_commits = new
+				meta = new
 				{
-					meta = new
+					foo = "bar"
+				},
+				avg = new
+				{
+					field = "numberOfCommits",
+					missing = 10.0,
+					script = new
 					{
-						foo = "bar"
-					},
-					avg = new
-					{
-						field = "numberOfCommits",
-						missing = 10.0,
-						script = new
-						{
-							source = "_value * 1.2",
-						}
+						source = "_value * 1.2",
 					}
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.Average("average_commits", avg => avg
-					.Meta(m => m
-						.Add("foo", "bar")
-					)
-					.Field(p => p.NumberOfCommits)
-					.Missing(10)
-					.Script(ss=>ss.Source("_value * 1.2"))
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Average("average_commits", avg => avg
+				.Meta(m => m
+					.Add("foo", "bar")
 				)
+				.Field(p => p.NumberOfCommits)
+				.Missing(10)
+				.Script(ss => ss.Source("_value * 1.2"))
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new AverageAggregation("average_commits", Field<Project>(p => p.NumberOfCommits))
 			{
-				Aggregations = new AverageAggregation("average_commits", Field<Project>(p => p.NumberOfCommits))
+				Meta = new Dictionary<string, object>
 				{
-					Meta = new Dictionary<string, object>
-					{
-						{ "foo", "bar" }
-					},
-					Missing = 10,
-					Script = new InlineScript("_value * 1.2")
-				}
+					{"foo", "bar"}
+				},
+				Missing = 10,
+				Script = new InlineScript("_value * 1.2")
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)

@@ -252,21 +252,17 @@ namespace Tests.Aggregations
 
 	//todo own documentation file (aggregation responses?)
 	/**[float]
-	* [[aggs-vs-aggregations]]
-	*=== Aggs vs. Aggregations
+	* [[Aggregate]]
+	*=== Handling aggregate response
 	*
-	* The response exposes both `.Aggregations` and `.Aggs` properties for handling aggregations. Why two properties you ask?
-	* Well, the former is a dictionary of aggregation names to `IAggregate` types, a common interface for
-	* aggregation responses (termed __Aggregates__ in NEST), and the latter is a convenience helper to get the right type
-	* of aggregation response out of the dictionary based on a key name.
+	* The `SearchResponse` exposes an `AggregateDictionary` which is specialized dictionary over `<string, IAggregate>` that also
+	* exposes handy helper methods that automatically cast `IAggregate` to the expected aggregate response.
 	*
-	* This is better illustrated with an example. Let's imagine we make the following request
+	* Let's see this in action:
 	*/
 	public class ChildrenAggregationFluentAggsUsageTests : ChildrenAggregationUsageTests
 	{
-		public ChildrenAggregationFluentAggsUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
-		{
-		}
+		public ChildrenAggregationFluentAggsUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(aggs => aggs

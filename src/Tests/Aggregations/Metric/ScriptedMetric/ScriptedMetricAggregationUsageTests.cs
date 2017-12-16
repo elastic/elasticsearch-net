@@ -31,44 +31,35 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 			Reduce = "def sum = 0.0; for (a in params._aggs) { sum += a } return sum",
 		};
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			sum_the_hard_way = new
 			{
-				sum_the_hard_way = new
+				scripted_metric = new
 				{
-					scripted_metric = new
-					{
-						init_script = new { source = Script.Init },
-						map_script = new { source = Script.Map },
-						combine_script = new { source = Script.Combine },
-						reduce_script = new { source = Script.Reduce }
-					}
+					init_script = new {source = Script.Init},
+					map_script = new {source = Script.Map},
+					combine_script = new {source = Script.Combine},
+					reduce_script = new {source = Script.Reduce}
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Index(DefaultSeeder.ProjectsAliasFilter)
-			.Aggregations(a => a
-				.ScriptedMetric("sum_the_hard_way", sm => sm
-					.InitScript(ss => ss.Source(Script.Init))
-					.MapScript(ss => ss.Source(Script.Map))
-					.CombineScript(ss => ss.Source(Script.Combine))
-					.ReduceScript(ss => ss.Source(Script.Reduce))
-				)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.ScriptedMetric("sum_the_hard_way", sm => sm
+				.InitScript(ss => ss.Source(Script.Init))
+				.MapScript(ss => ss.Source(Script.Map))
+				.CombineScript(ss => ss.Source(Script.Combine))
+				.ReduceScript(ss => ss.Source(Script.Reduce))
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
+		protected override AggregationDictionary InitializerAggs =>
+			new ScriptedMetricAggregation("sum_the_hard_way")
 			{
-				Aggregations = new ScriptedMetricAggregation("sum_the_hard_way")
-				{
-					InitScript = new InlineScript(Script.Init),
-					MapScript = new InlineScript(Script.Map),
-					CombineScript = new InlineScript(Script.Combine),
-					ReduceScript = new InlineScript(Script.Reduce)
-				}
+				InitScript = new InlineScript(Script.Init),
+				MapScript = new InlineScript(Script.Map),
+				CombineScript = new InlineScript(Script.Combine),
+				ReduceScript = new InlineScript(Script.Reduce)
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
@@ -131,106 +122,97 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 
 		public ScriptedMetricMultiAggregationTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			by_state_total = new
 			{
-				by_state_total = new
+				scripted_metric = new
 				{
-					scripted_metric = new
+					init_script = new
 					{
-						init_script = new
-						{
-							source = First.Init,
-							lang = First.Language
-						},
-						map_script = new
-						{
-							source = First.Map,
-							lang = First.Language
-						},
-						reduce_script = new
-						{
-							source = First.Reduce,
-							lang = First.Language
-						}
+						source = First.Init,
+						lang = First.Language
+					},
+					map_script = new
+					{
+						source = First.Map,
+						lang = First.Language
+					},
+					reduce_script = new
+					{
+						source = First.Reduce,
+						lang = First.Language
 					}
-				},
-				total_commits = new
+				}
+			},
+			total_commits = new
+			{
+				scripted_metric = new
 				{
-					scripted_metric = new
+					init_script = new
 					{
-						init_script = new
-						{
-							source = Second.Init,
-							lang = Second.Language
-						},
-						map_script = new
-						{
-							source = Second.Map,
-							lang = Second.Language
-						},
-						combine_script = new
-						{
-							source = Second.Combine,
-							lang = Second.Language
-						},
-						reduce_script = new
-						{
-							source = Second.Reduce,
-							lang = Second.Language
-						}
+						source = Second.Init,
+						lang = Second.Language
+					},
+					map_script = new
+					{
+						source = Second.Map,
+						lang = Second.Language
+					},
+					combine_script = new
+					{
+						source = Second.Combine,
+						lang = Second.Language
+					},
+					reduce_script = new
+					{
+						source = Second.Reduce,
+						lang = Second.Language
 					}
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Index(DefaultSeeder.ProjectsAliasFilter)
-			.Aggregations(a => a
-				.ScriptedMetric("by_state_total", sm => sm
-					.InitScript(ss => ss.Source(First.Init).Lang(First.Language))
-					.MapScript(ss => ss.Source(First.Map).Lang(First.Language))
-					.ReduceScript(ss => ss.Source(First.Reduce).Lang(First.Language))
-				)
-				.ScriptedMetric("total_commits", sm => sm
-					.InitScript(ss => ss.Source(Second.Init).Lang(Second.Language))
-					.MapScript(ss => ss.Source(Second.Map).Lang(Second.Language))
-					.CombineScript(ss => ss.Source(Second.Combine).Lang(Second.Language))
-					.ReduceScript(ss => ss.Source(Second.Reduce).Lang(Second.Language))
-				)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.ScriptedMetric("by_state_total", sm => sm
+				.InitScript(ss => ss.Source(First.Init).Lang(First.Language))
+				.MapScript(ss => ss.Source(First.Map).Lang(First.Language))
+				.ReduceScript(ss => ss.Source(First.Reduce).Lang(First.Language))
+			)
+			.ScriptedMetric("total_commits", sm => sm
+				.InitScript(ss => ss.Source(Second.Init).Lang(Second.Language))
+				.MapScript(ss => ss.Source(Second.Map).Lang(Second.Language))
+				.CombineScript(ss => ss.Source(Second.Combine).Lang(Second.Language))
+				.ReduceScript(ss => ss.Source(Second.Reduce).Lang(Second.Language))
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
+		protected override AggregationDictionary InitializerAggs =>
+
+			new ScriptedMetricAggregation("by_state_total")
 			{
-				Aggregations =
-					new ScriptedMetricAggregation("by_state_total")
-					{
-						InitScript = new InlineScript(First.Init) {Lang = First.Language},
-						MapScript = new InlineScript(First.Map) {Lang = First.Language},
-						ReduceScript = new InlineScript(First.Reduce) {Lang = First.Language}
-					} &&
-					new ScriptedMetricAggregation("total_commits")
-					{
-						InitScript = new InlineScript(Second.Init) {Lang = Second.Language},
-						MapScript = new InlineScript(Second.Map) {Lang = Second.Language},
-						CombineScript = new InlineScript(Second.Combine) {Lang = Second.Language},
-						ReduceScript = new InlineScript(Second.Reduce) {Lang = Second.Language}
-					}
+				InitScript = new InlineScript(First.Init) {Lang = First.Language},
+				MapScript = new InlineScript(First.Map) {Lang = First.Language},
+				ReduceScript = new InlineScript(First.Reduce) {Lang = First.Language}
+			}
+			&& new ScriptedMetricAggregation("total_commits")
+			{
+				InitScript = new InlineScript(Second.Init) {Lang = Second.Language},
+				MapScript = new InlineScript(Second.Map) {Lang = Second.Language},
+				CombineScript = new InlineScript(Second.Combine) {Lang = Second.Language},
+				ReduceScript = new InlineScript(Second.Reduce) {Lang = Second.Language}
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
-			var by_state_total = response.Aggregations.ScriptedMetric("by_state_total");
-			var total_commits = response.Aggregations.ScriptedMetric("total_commits");
+			var byStateTotal = response.Aggregations.ScriptedMetric("by_state_total");
+			var totalCommits = response.Aggregations.ScriptedMetric("total_commits");
 
-			by_state_total.Should().NotBeNull();
-			total_commits.Should().NotBeNull();
+			byStateTotal.Should().NotBeNull();
+			totalCommits.Should().NotBeNull();
 
-			by_state_total.Value<IDictionary<string, int>>().Should().NotBeNull();
-			total_commits.Value<int>().Should().BeGreaterThan(0);
+			byStateTotal.Value<IDictionary<string, int>>().Should().NotBeNull();
+			totalCommits.Value<int>().Should().BeGreaterThan(0);
 		}
 	}
 }

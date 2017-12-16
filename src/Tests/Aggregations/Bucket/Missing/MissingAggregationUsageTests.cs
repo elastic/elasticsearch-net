@@ -13,34 +13,26 @@ namespace Tests.Aggregations.Bucket.Missing
 	{
 		public MissingAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			projects_without_a_description = new
 			{
-				projects_without_a_description = new
+				missing = new
 				{
-					missing = new
-					{
-						field = "description.keyword"
-					}
+					field = "description.keyword"
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.Missing("projects_without_a_description", m => m
-					.Field(p => p.Description.Suffix("keyword"))
-				)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Missing("projects_without_a_description", m => m
+				.Field(p => p.Description.Suffix("keyword"))
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new MissingAggregation("projects_without_a_description")
 			{
-				Aggregations = new MissingAggregation("projects_without_a_description")
-				{
-					Field = Field<Project>(p => p.Description.Suffix("keyword"))
-				}
+				Field = Field<Project>(p => p.Description.Suffix("keyword"))
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)

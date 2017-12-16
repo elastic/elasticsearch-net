@@ -12,73 +12,63 @@ namespace Tests.Aggregations.Pipeline.SerialDifferencing
 	{
 		public SerialDifferencingAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			size = 0,
-			aggs = new
+			projects_started_per_month = new
 			{
-				projects_started_per_month = new
+				date_histogram = new
 				{
-					date_histogram = new
+					field = "startedOn",
+					interval = "month"
+				},
+				aggs = new
+				{
+					commits = new
 					{
-						field = "startedOn",
-						interval = "month"
+						sum = new
+						{
+							field = "numberOfCommits"
+						}
 					},
-					aggs = new
+					second_difference = new
 					{
-						commits = new
+						serial_diff = new
 						{
-							sum = new
-							{
-								field = "numberOfCommits"
-							}
-						},
-						second_difference = new
-						{
-							serial_diff = new
-							{
-								buckets_path = "commits",
-								lag = 2
-							}
+							buckets_path = "commits",
+							lag = 2
 						}
 					}
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Size(0)
-			.Aggregations(a => a
-				.DateHistogram("projects_started_per_month", dh => dh
-					.Field(p => p.StartedOn)
-					.Interval(DateInterval.Month)
-					.Aggregations(aa => aa
-						.Sum("commits", sm => sm
-							.Field(p => p.NumberOfCommits)
-						)
-						.SerialDifferencing("second_difference", d => d
-							.BucketsPath("commits")
-							.Lag(2)
-						)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.DateHistogram("projects_started_per_month", dh => dh
+				.Field(p => p.StartedOn)
+				.Interval(DateInterval.Month)
+				.Aggregations(aa => aa
+					.Sum("commits", sm => sm
+						.Field(p => p.NumberOfCommits)
+					)
+					.SerialDifferencing("second_difference", d => d
+						.BucketsPath("commits")
+						.Lag(2)
 					)
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>
-		{
-			Size = 0,
-			Aggregations = new DateHistogramAggregation("projects_started_per_month")
+		protected override AggregationDictionary InitializerAggs =>
+			new DateHistogramAggregation("projects_started_per_month")
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
 				Aggregations =
-					new SumAggregation("commits", "numberOfCommits") &&
-					new SerialDifferencingAggregation("second_difference", "commits")
+					new SumAggregation("commits", "numberOfCommits")
+					&& new SerialDifferencingAggregation("second_difference", "commits")
 					{
 						Lag = 2
 					}
-			}
-		};
+			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{

@@ -12,52 +12,44 @@ namespace Tests.Aggregations.Bucket.Nested
 	{
 		public NestedAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			tags = new
 			{
-				tags = new
+				nested = new
 				{
-					nested = new
+					path = "tags",
+				},
+				aggs = new
+				{
+					tag_names = new
 					{
-						path = "tags",
-					},
-					aggs = new
-					{
-						tag_names = new
+						terms = new
 						{
-							terms = new
-							{
-								field = "tags.name"
-							}
+							field = "tags.name"
 						}
 					}
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.Nested("tags", n => n
-					.Path(p => p.Tags)
-					.Aggregations(aa => aa
-						.Terms("tag_names", t => t
-							.Field(p => p.Tags.Suffix("name"))
-						)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Nested("tags", n => n
+				.Path(p => p.Tags)
+				.Aggregations(aa => aa
+					.Terms("tag_names", t => t
+						.Field(p => p.Tags.Suffix("name"))
 					)
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new NestedAggregation("tags")
 			{
-				Aggregations = new NestedAggregation("tags")
+				Path = "tags",
+				Aggregations = new TermsAggregation("tag_names")
 				{
-					Path = "tags",
-					Aggregations = new TermsAggregation("tag_names")
-					{
-						Field = "tags.name"
-					}
+					Field = "tags.name"
 				}
 			};
 

@@ -13,32 +13,24 @@ namespace Tests.Aggregations.Metric.Max
 	{
 		public MaxAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			max_commits = new
 			{
-				max_commits = new
+				max = new
 				{
-					max = new
-					{
-						field = "numberOfCommits"
-					}
+					field = "numberOfCommits"
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.Max("max_commits", m => m
-					.Field(p => p.NumberOfCommits)
-				)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Max("max_commits", m => m
+				.Field(p => p.NumberOfCommits)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
-			{
-				Aggregations = new MaxAggregation("max_commits", Field<Project>(p => p.NumberOfCommits))
-			};
+		protected override AggregationDictionary InitializerAggs =>
+			new MaxAggregation("max_commits", Field<Project>(p => p.NumberOfCommits));
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{

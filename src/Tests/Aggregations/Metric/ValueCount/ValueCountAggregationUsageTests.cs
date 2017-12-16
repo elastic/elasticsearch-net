@@ -13,32 +13,24 @@ namespace Tests.Aggregations.Metric.ValueCount
 	{
 		public ValueCountAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			commit_count = new
 			{
-				commit_count = new
+				value_count = new
 				{
-					value_count = new
-					{
-						field = "numberOfCommits"
-					}
+					field = "numberOfCommits"
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.ValueCount("commit_count", c => c
-					.Field(p => p.NumberOfCommits)
-				)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.ValueCount("commit_count", c => c
+				.Field(p => p.NumberOfCommits)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
-			{
-				Aggregations = new ValueCountAggregation("commit_count", Field<Project>(p => p.NumberOfCommits))
-			};
+		protected override AggregationDictionary InitializerAggs =>
+			new ValueCountAggregation("commit_count", Field<Project>(p => p.NumberOfCommits));
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{

@@ -10,54 +10,41 @@ namespace Tests.Aggregations.Bucket.AdjacencyMatrix
 {
 	public class AdjacencyMatrixUsageTests : AggregationUsageTestBase
 	{
-		public AdjacencyMatrixUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public AdjacencyMatrixUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			size = 0,
-			aggs = new
+			interactions = new
 			{
-				interactions = new
+				adjacency_matrix = new
 				{
-					adjacency_matrix = new
+					filters = new
 					{
-						filters = new
-						{
-							grpA = new { term = new { state = new { value = "BellyUp"} } },
-							grpB = new { term = new { state = new { value = "Stable"} } },
-							grpC = new { term = new { state = new { value = "VeryActive"} } }
-						}
+						grpA = new {term = new {state = new {value = "BellyUp"}}},
+						grpB = new {term = new {state = new {value = "Stable"}}},
+						grpC = new {term = new {state = new {value = "VeryActive"}}}
 					}
 				}
 			}
 		};
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new AdjacencyMatrixAggregation("interactions")
 			{
-				Size =  0,
-				Aggregations = new AdjacencyMatrixAggregation("interactions")
+				Filters = new NamedFiltersContainer
 				{
-					Filters = new NamedFiltersContainer
-					{
-						{ "grpA", new TermQuery { Field = "state", Value = StateOfBeing.BellyUp } },
-						{ "grpB", new TermQuery { Field = "state", Value = StateOfBeing.Stable } },
-						{ "grpC", new TermQuery { Field = "state", Value = StateOfBeing.VeryActive } },
-					}
+					{"grpA", new TermQuery {Field = "state", Value = StateOfBeing.BellyUp}},
+					{"grpB", new TermQuery {Field = "state", Value = StateOfBeing.Stable}},
+					{"grpC", new TermQuery {Field = "state", Value = StateOfBeing.VeryActive}},
 				}
 			};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Size(0)
-			.Aggregations(aggs => aggs
-				.AdjacencyMatrix("interactions", am => am
-					.Filters(fs => fs
-						.Filter("grpA", f => f.Term(p => p.State, StateOfBeing.BellyUp))
-						.Filter("grpB", f => f.Term(p => p.State, StateOfBeing.Stable))
-						.Filter("grpC", f => f.Term(p => p.State, StateOfBeing.VeryActive))
-					)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.AdjacencyMatrix("interactions", am => am
+				.Filters(fs => fs
+					.Filter("grpA", f => f.Term(p => p.State, StateOfBeing.BellyUp))
+					.Filter("grpB", f => f.Term(p => p.State, StateOfBeing.Stable))
+					.Filter("grpC", f => f.Term(p => p.State, StateOfBeing.VeryActive))
 				)
 			);
 

@@ -13,43 +13,39 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 	{
 		public MovingAverageHoltWintersUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			size = 0,
-			aggs = new
+			projects_started_per_month = new
 			{
-				projects_started_per_month = new
+				date_histogram = new
 				{
-					date_histogram = new
+					field = "startedOn",
+					interval = "month"
+				},
+				aggs = new
+				{
+					commits = new
 					{
-						field = "startedOn",
-						interval = "month"
+						sum = new
+						{
+							field = "numberOfCommits"
+						}
 					},
-					aggs = new
+					commits_moving_avg = new
 					{
-						commits = new
+						moving_avg = new
 						{
-							sum = new
+							buckets_path = "commits",
+							window = 4,
+							model = "holt_winters",
+							settings = new
 							{
-								field = "numberOfCommits"
-							}
-						},
-						commits_moving_avg = new
-						{
-							moving_avg = new
-							{
-								buckets_path = "commits",
-								window = 4,
-								model = "holt_winters",
-								settings = new
-								{
-									type = "mult",
-									alpha = 0.5,
-									beta = 0.5,
-									gamma = 0.5,
-									period = 2,
-									pad = false
-								}
+								type = "mult",
+								alpha = 0.5,
+								beta = 0.5,
+								gamma = 0.5,
+								period = 2,
+								pad = false
 							}
 						}
 					}
@@ -57,44 +53,39 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Size(0)
-			.Aggregations(a => a
-				.DateHistogram("projects_started_per_month", dh => dh
-					.Field(p => p.StartedOn)
-					.Interval(DateInterval.Month)
-					.Aggregations(aa => aa
-						.Sum("commits", sm => sm
-							.Field(p => p.NumberOfCommits)
-						)
-						.MovingAverage("commits_moving_avg", mv => mv
-							.BucketsPath("commits")
-							.Window(4)
-							.Model(m => m
-								.HoltWinters(hw => hw
-									.Type(HoltWintersType.Multiplicative)
-									.Alpha(0.5f)
-									.Beta(0.5f)
-									.Gamma(0.5f)
-									.Period(2)
-									.Pad(false)
-								)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.DateHistogram("projects_started_per_month", dh => dh
+				.Field(p => p.StartedOn)
+				.Interval(DateInterval.Month)
+				.Aggregations(aa => aa
+					.Sum("commits", sm => sm
+						.Field(p => p.NumberOfCommits)
+					)
+					.MovingAverage("commits_moving_avg", mv => mv
+						.BucketsPath("commits")
+						.Window(4)
+						.Model(m => m
+							.HoltWinters(hw => hw
+								.Type(HoltWintersType.Multiplicative)
+								.Alpha(0.5f)
+								.Beta(0.5f)
+								.Gamma(0.5f)
+								.Period(2)
+								.Pad(false)
 							)
 						)
 					)
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
-		{
-			Size = 0,
-			Aggregations = new DateHistogramAggregation("projects_started_per_month")
+		protected override AggregationDictionary InitializerAggs =>
+			new DateHistogramAggregation("projects_started_per_month")
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
 				Aggregations =
-					new SumAggregation("commits", "numberOfCommits") &&
-					new MovingAverageAggregation("commits_moving_avg", "commits")
+					new SumAggregation("commits", "numberOfCommits")
+					&& new MovingAverageAggregation("commits_moving_avg", "commits")
 					{
 						Window = 4,
 						Model = new HoltWintersModel
@@ -107,8 +98,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 							Pad = false
 						}
 					}
-			}
-		};
+			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{

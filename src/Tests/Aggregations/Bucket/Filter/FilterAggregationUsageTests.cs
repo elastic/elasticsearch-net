@@ -19,52 +19,42 @@ namespace Tests.Aggregations.Bucket.Filter
 	*/
 	public class FilterAggregationUsageTests : AggregationUsageTestBase
 	{
-		public FilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
-		{
-		}
+		public FilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		public static string FirstNameToFind = Project.First.LeadDeveloper.FirstName.ToLowerInvariant();
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			bethels_projects = new
 			{
-				bethels_projects = new
+				filter = new
 				{
-					filter = new
+					term = new Dictionary<string, object>
 					{
-						term = new Dictionary<string, object>
-						{
-							{"leadDeveloper.firstName", new {value = FirstNameToFind}}
-						}
-					},
-					aggs = new
-					{
-						project_tags = new {terms = new {field = "curatedTags.name.keyword"}}
+						{"leadDeveloper.firstName", new {value = FirstNameToFind}}
 					}
+				},
+				aggs = new
+				{
+					project_tags = new {terms = new {field = "curatedTags.name.keyword"}}
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(aggs => aggs
-				.Filter("bethels_projects", date => date
-					.Filter(q => q.Term(p => p.LeadDeveloper.FirstName, FirstNameToFind))
-					.Aggregations(childAggs => childAggs
-						.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name.Suffix("keyword")))
-					)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Filter("bethels_projects", date => date
+				.Filter(q => q.Term(p => p.LeadDeveloper.FirstName, FirstNameToFind))
+				.Aggregations(childAggs => childAggs
+					.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name.Suffix("keyword")))
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new FilterAggregation("bethels_projects")
 			{
-				Aggregations = new FilterAggregation("bethels_projects")
-				{
-					Filter = new TermQuery {Field = Field<Project>(p => p.LeadDeveloper.FirstName), Value = FirstNameToFind},
-					Aggregations =
-						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
-				}
+				Filter = new TermQuery {Field = Field<Project>(p => p.LeadDeveloper.FirstName), Value = FirstNameToFind},
+				Aggregations =
+					new TermsAggregation("project_tags") {Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword"))}
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
@@ -97,37 +87,29 @@ namespace Tests.Aggregations.Bucket.Filter
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 400;
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			empty_filter = new
 			{
-				empty_filter = new
-				{
-					filter = new {}
-				}
+				filter = new { }
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(aggs => aggs
-				.Filter("empty_filter", date => date
-					.Filter(f => f
-						.Bool(b => b
-							.Filter(new QueryContainer[0])
-						)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Filter("empty_filter", date => date
+				.Filter(f => f
+					.Bool(b => b
+						.Filter(new QueryContainer[0])
 					)
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new FilterAggregation("empty_filter")
 			{
-				Aggregations = new FilterAggregation("empty_filter")
+				Filter = new BoolQuery
 				{
-					Filter = new BoolQuery
-					{
-						Filter = new List<QueryContainer>()
-					}
+					Filter = new List<QueryContainer>()
 				}
 			};
 
@@ -145,41 +127,38 @@ namespace Tests.Aggregations.Bucket.Filter
 
 		public InlineScriptFilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new {
-				script_filter = new {
-					filter = new {
-						script = new {
-							script = new {
-								source = _ctxNumberofCommits,
-							}
+			script_filter = new
+			{
+				filter = new
+				{
+					script = new
+					{
+						script = new
+						{
+							source = _ctxNumberofCommits,
 						}
 					}
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(aggs => aggs
-				.Filter(_aggName, date => date
-					.Filter(f => f
-						.Script(b => b
-							.Source(_ctxNumberofCommits)
-						)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Filter(_aggName, date => date
+				.Filter(f => f
+					.Script(b => b
+						.Source(_ctxNumberofCommits)
 					)
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new FilterAggregation(_aggName)
 			{
-				Aggregations = new FilterAggregation(_aggName)
+				Filter = new ScriptQuery
 				{
-					Filter = new ScriptQuery
-					{
-						Source = _ctxNumberofCommits
-					}
+					Source = _ctxNumberofCommits
 				}
 			};
 

@@ -15,64 +15,57 @@ namespace Tests.Aggregations.Matrix.MatrixStats
 	{
 		public MatrixStatsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			matrixstats = new
 			{
-				matrixstats = new
+				meta = new
 				{
-					meta = new
+					foo = "bar"
+				},
+				matrix_stats = new
+				{
+					fields = new[] {"numberOfCommits", "numberOfContributors"},
+					missing = new
 					{
-						foo = "bar"
+						numberOfCommits = 0.0,
+						numberOfContributors = 1.0
 					},
-					matrix_stats = new
-					{
-						fields = new[] { "numberOfCommits", "numberOfContributors" },
-						missing = new {
-							numberOfCommits = 0.0,
-							numberOfContributors = 1.0
-						},
-						mode = "median"
-					}
+					mode = "median"
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.MatrixStats("matrixstats", ms => ms
-					.Meta(m => m
-						.Add("foo", "bar")
-					)
-					.Fields(fs => fs
-						.Field(p => p.NumberOfCommits)
-						.Field(p => p.NumberOfContributors)
-					)
-					.Missing(m => m
-						.Add(Field<Project>(p => p.NumberOfCommits), 0)
-						.Add(Field<Project>(p => p.NumberOfContributors), 1)
-					)
-					.Mode(MatrixStatsMode.Median)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.MatrixStats("matrixstats", ms => ms
+				.Meta(m => m
+					.Add("foo", "bar")
 				)
+				.Fields(fs => fs
+					.Field(p => p.NumberOfCommits)
+					.Field(p => p.NumberOfContributors)
+				)
+				.Missing(m => m
+					.Add(Field<Project>(p => p.NumberOfCommits), 0)
+					.Add(Field<Project>(p => p.NumberOfContributors), 1)
+				)
+				.Mode(MatrixStatsMode.Median)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new MatrixStatsAggregation("matrixstats", Field<Project>(p => p.NumberOfCommits))
 			{
-				Aggregations = new MatrixStatsAggregation("matrixstats", Field<Project>(p => p.NumberOfCommits))
+				Meta = new Dictionary<string, object>
 				{
-					Meta = new Dictionary<string, object>
-					{
-						{ "foo", "bar" }
-					},
-					Missing = new Dictionary<Field, double>
-					{
-						{ "numberOfCommits", 0.0 },
-						{ "numberOfContributors", 1.0 },
-					},
-					Mode = MatrixStatsMode.Median,
-					Fields = Field<Project>(p => p.NumberOfCommits).And("numberOfContributors")
-				}
+					{"foo", "bar"}
+				},
+				Missing = new Dictionary<Field, double>
+				{
+					{"numberOfCommits", 0.0},
+					{"numberOfContributors", 1.0},
+				},
+				Mode = MatrixStatsMode.Median,
+				Fields = Field<Project>(p => p.NumberOfCommits).And("numberOfContributors")
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)

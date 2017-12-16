@@ -15,47 +15,39 @@ namespace Tests.Aggregations.Bucket.IpRange
 	{
 		public IpRangeAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object ExpectJson => new
+		protected override object AggregationJson => new
 		{
-			aggs = new
+			ip_ranges = new
 			{
-				ip_ranges = new
+				ip_range = new
 				{
-					ip_range = new
+					field = "leadDeveloper.ipAddress",
+					ranges = new object[]
 					{
-						field = "leadDeveloper.ipAddress",
-						ranges = new object[]
-						{
-							new { to = "10.0.0.5" },
-							new { from = "10.0.0.5" }
-						}
+						new {to = "10.0.0.5"},
+						new {from = "10.0.0.5"}
 					}
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.IpRange("ip_ranges", ip => ip
-					.Field(p => p.LeadDeveloper.IpAddress)
-					.Ranges(
-						r => r.To("10.0.0.5"),
-						r => r.From("10.0.0.5")
-					)
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.IpRange("ip_ranges", ip => ip
+				.Field(p => p.LeadDeveloper.IpAddress)
+				.Ranges(
+					r => r.To("10.0.0.5"),
+					r => r.From("10.0.0.5")
 				)
 			);
 
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
+		protected override AggregationDictionary InitializerAggs =>
+			new IpRangeAggregation("ip_ranges")
 			{
-				Aggregations = new IpRangeAggregation("ip_ranges")
+				Field = Field((Project p) => p.LeadDeveloper.IpAddress),
+				Ranges = new List<Nest.IpRange>
 				{
-					Field = Field((Project p) => p.LeadDeveloper.IpAddress),
-					Ranges = new List<Nest.IpRange>
-					{
-						new Nest.IpRange { To = "10.0.0.5" },
-						new Nest.IpRange { From = "10.0.0.5" }
-					}
+					new Nest.IpRange {To = "10.0.0.5"},
+					new Nest.IpRange {From = "10.0.0.5"}
 				}
 			};
 
