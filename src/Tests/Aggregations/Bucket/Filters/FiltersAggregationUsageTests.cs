@@ -29,20 +29,23 @@ namespace Tests.Aggregations.Bucket.Filters
 
 		protected override object AggregationJson => new
 		{
-			filters = new
+			projects_by_state = new
 			{
-				other_bucket = true,
-				other_bucket_key = "other_states_of_being",
 				filters = new
 				{
-					belly_up = new {term = new {state = new {value = "BellyUp"}}},
-					stable = new {term = new {state = new {value = "Stable"}}},
-					very_active = new {term = new {state = new {value = "VeryActive"}}},
+					other_bucket = true,
+					other_bucket_key = "other_states_of_being",
+					filters = new
+					{
+						belly_up = new {term = new {state = new {value = "BellyUp"}}},
+						stable = new {term = new {state = new {value = "Stable"}}},
+						very_active = new {term = new {state = new {value = "VeryActive"}}},
+					}
+				},
+				aggs = new
+				{
+					project_tags = new {terms = new {field = "curatedTags.name.keyword"}}
 				}
-			},
-			aggs = new
-			{
-				project_tags = new {terms = new {field = "curatedTags.name.keyword"}}
 			}
 		};
 
@@ -113,19 +116,22 @@ namespace Tests.Aggregations.Bucket.Filters
 
 		protected override object AggregationJson => new
 		{
-			filters = new
+			projects_by_state = new
 			{
-				other_bucket = true,
-				filters = new[]
+				filters = new
 				{
-					new {term = new {state = new {value = "BellyUp"}}},
-					new {term = new {state = new {value = "Stable"}}},
-					new {term = new {state = new {value = "VeryActive"}}},
+					other_bucket = true,
+					filters = new[]
+					{
+						new {term = new {state = new {value = "BellyUp"}}},
+						new {term = new {state = new {value = "Stable"}}},
+						new {term = new {state = new {value = "VeryActive"}}},
+					}
+				},
+				aggs = new
+				{
+					project_tags = new {terms = new {field = "curatedTags.name.keyword"}}
 				}
-			},
-			aggs = new
-			{
-				project_tags = new {terms = new {field = "curatedTags.name.keyword"}}
 			}
 		};
 
