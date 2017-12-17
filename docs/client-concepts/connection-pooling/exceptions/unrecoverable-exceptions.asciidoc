@@ -1,6 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
 
-:xpack_current: https://www.elastic.co/guide/en/x-pack/5.3
+:xpack_current: https://www.elastic.co/guide/en/x-pack/5.6
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -68,6 +68,7 @@ var audit = new Auditor(() => Framework.Cluster
 );
 ----
 <1> Always succeed on ping
+
 <2> ...but always fail on calls with a 401 Bad Authentication response
 
 Now, let's make a client call. We'll see that the first audit event is a successful ping
@@ -88,7 +89,9 @@ audit = await audit.TraceElasticsearchException(
 );
 ----
 <1> First call results in a successful ping
+
 <2> Second call results in a bad response
+
 <3> The reason for the bad response is Bad Authentication
 
 When a bad authentication response occurs, the client does not attempt to deserialize the response body returned;
@@ -122,6 +125,7 @@ audit = await audit.TraceElasticsearchException(
 );
 ----
 <1> Always return a 401 bad response with a HTML response on client calls
+
 <2> Assert that the response body bytes are null
 
 Now in this example, by turning on `DisableDirectStreaming()` on `ConnectionSettings`, we see the same behaviour exhibited
@@ -154,5 +158,6 @@ audit = await audit.TraceElasticsearchException(
 );
 ----
 <1> Response bytes are set on the response
+
 <2> Assert that the response contains `"nginx/"`
 

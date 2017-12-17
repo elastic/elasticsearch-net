@@ -1,6 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
 
-:xpack_current: https://www.elastic.co/guide/en/x-pack/5.3
+:xpack_current: https://www.elastic.co/guide/en/x-pack/5.6
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -73,6 +73,7 @@ public class DisableDocValuesPropertyVisitor : NoopPropertyVisitor
 }
 ----
 <1> Override the `Visit` method on `INumberProperty` and set `DocValues = false`
+
 <2> Similarily, override the `Visit` method on `IBooleanProperty` and set `DocValues = false`
 
 Now we can pass an instance of our custom visitor to `.AutoMap()` 

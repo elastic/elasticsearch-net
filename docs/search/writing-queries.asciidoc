@@ -1,6 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
 
-:xpack_current: https://www.elastic.co/guide/en/x-pack/5.3
+:xpack_current: https://www.elastic.co/guide/en/x-pack/5.6
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -279,7 +279,9 @@ var searchResponse = client.Search<Project>(s => s
 );
 ----
 <1> match documents where lead developer first name contains Russ
+
 <2> ...and where the lead developer last name contains Cam
+
 <3> ...and where the project started in 2017
 
 which yields the following query JSON
@@ -354,6 +356,7 @@ searchResponse = client.Search<Project>(s => s
 );
 ----
 <1> combine queries using the binary `&&` operator
+
 <2> wrap a query in a `bool` query filter clause using the unary `+` operator and combine using the binary `&&` operator
 
 Take a look at the dedicated section on <<bool-queries, writing `bool` queries>> for more detail
