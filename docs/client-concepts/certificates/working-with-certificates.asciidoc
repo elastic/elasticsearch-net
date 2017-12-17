@@ -1,6 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
 
-:xpack_current: https://www.elastic.co/guide/en/x-pack/5.3
+:xpack_current: https://www.elastic.co/guide/en/x-pack/5.6
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -152,8 +152,11 @@ public class PkiCluster : CertgenCaCluster
 }
 ----
 <1> Set the client certificate on `ConnectionSettings`
+
 <2> The path to the `.cer` file
+
 <3> The path to the `.key` file
+
 <4> The password for the private key
 
 Or per request on `RequestConfiguration` which will take precedence over the ones defined on `ConnectionConfiguration`

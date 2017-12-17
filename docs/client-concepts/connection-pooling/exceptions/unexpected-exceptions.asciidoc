@@ -1,6 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
 
-:xpack_current: https://www.elastic.co/guide/en/x-pack/5.3
+:xpack_current: https://www.elastic.co/guide/en/x-pack/5.6
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -60,8 +60,11 @@ audit = await audit.TraceUnexpectedException(
 );
 ----
 <1> set up a cluster with 10 nodes
+
 <2> where node 2 on port 9201 always throws an exception
+
 <3> The first call to 9200 returns a healthy response
+
 <4> ...but the second call, to 9201, returns a bad response
 
 Sometimes, an unexpected exception happens further down in the pipeline. In this scenario, we
@@ -100,7 +103,9 @@ audit = await audit.TraceUnexpectedException(
 );
 ----
 <1> calls on 9200 set up to throw a `WebException`
+
 <2> calls on 9201 set up to throw an `Exception`
+
 <3> Assert that the audit trail for the client call includes the bad response from 9200 and 9201
 
 An unexpected hard exception on ping and sniff is something we *do* try to recover from and failover to retrying on the next node.
@@ -145,6 +150,8 @@ audit = await audit.TraceUnexpectedException(
 );
 ----
 <1> `InnerException` is the exception that brought the request down
+
 <2> The hard exception that happened on ping is still available though
+
 <3> An exception can be hard to relate back to a point in time, so the exception is also available on the audit trail
 
