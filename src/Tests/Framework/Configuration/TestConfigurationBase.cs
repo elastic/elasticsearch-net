@@ -15,10 +15,12 @@ namespace Tests.Framework.Configuration
 		public abstract TestMode Mode { get; protected set; }
 		public abstract string ClusterFilter { get; protected set; }
 		public abstract string TestFilter { get; protected set; }
-		public abstract bool UsingCustomSourceSerializer { get; protected set; }
-		public abstract int Seed { get; protected set; }
+
 
 		public virtual bool RunIntegrationTests => Mode == TestMode.Mixed || Mode == TestMode.Integration;
 		public virtual bool RunUnitTests => Mode == TestMode.Mixed || Mode == TestMode.Unit;
+
+		public abstract int Seed { get; protected set; }
+		public RandomConfiguration Random { get; protected set; }
 	}
 }

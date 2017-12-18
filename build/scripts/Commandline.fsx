@@ -43,17 +43,21 @@ module Commandline =
     let private args = getBuildParamOrDefault "cmdline" "build" |> split ' '
     
     let skipTests = args |> List.exists (fun x -> x = "skiptests")
-    let forceSourceSerialization = args |> List.exists (fun x -> x = "source_serialization")
     let seed = 
         match args |> List.tryFind (fun x -> x.StartsWith("seed:")) with
         | Some t -> t.Replace("seed:", "")
         | _ -> ""
         
+    let randomArgs = 
+        args 
+        |> List.filter (fun x -> (x.StartsWith("random:")))
+        |> List.map (fun x -> (x.Replace("random:", "")))
+        
     let private filteredArgs = 
         args 
         |> List.filter (
             fun x -> 
-                x <> "skiptests" && x <> "source_serialization" && not (x.StartsWith("seed:"))
+                x <> "skiptests" && x <> "source_serialization" && not (x.StartsWith("seed:")) && not (x.StartsWith("random:"))
         )
 
     let multiTarget =

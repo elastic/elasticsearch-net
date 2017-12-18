@@ -53,7 +53,7 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.NumberOfContributors, f => Gimme.Random.Number(1, 200))
 				.RuleFor(p => p.Ranges, f => Ranges.Generator.Generate())
 				.RuleFor(p => p.SourceOnly, f =>
-					TestClient.Configuration.UsingCustomSourceSerializer ? new SourceOnlyObject() : null
+					TestClient.Configuration.Random.SourceSerializer ? new SourceOnlyObject() : null
 				)
 				.RuleFor(p => p.Suggest, f => new CompletionField
 				{
@@ -76,10 +76,10 @@ namespace Tests.Framework.MockData
 			StartedOn = new DateTime(2015, 1, 1),
 			DateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
 			Location = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 },
-			SourceOnly = TestClient.Configuration.UsingCustomSourceSerializer ? new SourceOnlyObject() : null
+			SourceOnly = TestClient.Configuration.Random.SourceSerializer ? new SourceOnlyObject() : null
 		};
 
-		public static object InstanceAnonymous => TestClient.Configuration.UsingCustomSourceSerializer
+		public static object InstanceAnonymous => TestClient.Configuration.Random.SourceSerializer
 			? InstanceAnonymousSourceSerializer
 			: InstanceAnonymousDefault;
 

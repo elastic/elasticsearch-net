@@ -18,7 +18,7 @@ namespace Tests.Framework
 
 		public static void ShouldAdhereToSourceSerializerWhenSet(this Project project)
 		{
-			var usingSourceSerializer = TestClient.Configuration.UsingCustomSourceSerializer;
+			var usingSourceSerializer = TestClient.Configuration.Random.SourceSerializer;
 			project.Should().NotBeNull();
 			if (!usingSourceSerializer)
 			{

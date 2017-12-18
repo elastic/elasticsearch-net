@@ -45,7 +45,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 			var visitor = new TestVisitor();
 			response.Accept(visitor);
-			var b = TestClient.Configuration.UsingCustomSourceSerializer;
+			var b = TestClient.Configuration.Random.SourceSerializer;
 
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
 			visitor.CountsShouldContainKeyAndCountBe("text", b ? 19 : 18);
