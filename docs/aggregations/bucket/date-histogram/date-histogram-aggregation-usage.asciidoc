@@ -1,6 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
 
-:xpack_current: https://www.elastic.co/guide/en/x-pack/5.3
+:xpack_current: https://www.elastic.co/guide/en/x-pack/5.6
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -39,7 +39,7 @@ s => s
         .Interval(DateInterval.Month)
         .MinimumDocumentCount(2)
         .Format("yyyy-MM-dd'T'HH:mm:ss")
-        .ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
+        .ExtendedBoundsDateMath(FixedDate.AddYears(-1), FixedDate.AddYears(1))
         .Order(HistogramOrder.CountAscending)
         .Missing(FixedDate)
         .Aggregations(childAggs => childAggs
@@ -67,7 +67,7 @@ new SearchRequest<Project>
         Interval = DateInterval.Month,
         MinimumDocumentCount = 2,
         Format = "yyyy-MM-dd'T'HH:mm:ss",
-        ExtendedBounds = new ExtendedBounds<DateTime>
+        ExtendedBoundsDateMath = new ExtendedBounds<DateMath>
         {
             Minimum = FixedDate.AddYears(-1),
             Maximum = FixedDate.AddYears(1),

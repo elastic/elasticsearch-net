@@ -137,6 +137,9 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 								.Name(p => p.ProjectName)
 								.Index(false)
 							)
+							.Keyword(t => t
+								.Name(p => p.StringDuration)
+							)
 						)
 					)
 				)

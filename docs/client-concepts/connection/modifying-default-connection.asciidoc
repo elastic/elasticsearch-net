@@ -1,6 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
 
-:xpack_current: https://www.elastic.co/guide/en/x-pack/5.3
+:xpack_current: https://www.elastic.co/guide/en/x-pack/5.6
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -139,7 +139,7 @@ var settings = new ConnectionSettings(connectionPool, connection);
 var client = new ElasticClient(settings);
 ----
 
-The Connection limit has been increased from the default 80 to much higher and https://en.wikipedia.org/wiki/Nagle's_algorithm[nagling] has been enabled, which is disabled by default in the client.
+The Connection limit has been increased from the default 80 to much higher and https://en.wikipedia.org/wiki/Nagle%27s_algorithm[nagling] has been enabled, which is disabled by default in the client.
 
 NOTE: The client reuses TCP connections through .NET's internal connection pooling,
 so changing the connection limit to something really high should only be done with careful

@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
+using M = System.Collections.Generic.Dictionary<string, object>;
 using static Nest.Infer;
 
 namespace Tests.Cluster.RemoteInfo
@@ -17,14 +17,14 @@ namespace Tests.Cluster.RemoteInfo
 		{
 			var enableRemoteClusters = client.ClusterPutSettings(new ClusterPutSettingsRequest
 			{
-				Transient = new Dictionary<string, object>
+				Transient = new M
 				{
-					{ "search", new Dictionary<string, object> {
-						{ "remote", new Dictionary<string, object> {
-							{ "cluster_one", new Dictionary<string, object> {
+					{ "search", new M {
+						{ "remote", new M {
+							{ "cluster_one", new M {
 								{"seeds", new[] {"127.0.0.1:9300", "127.0.0.1:9301"}}
 							}},
-							{ "cluster_two", new Dictionary<string, object> {
+							{ "cluster_two", new M {
 								{"seeds", new[] {"127.0.0.1:9300"}}
 							}}
 						}}
