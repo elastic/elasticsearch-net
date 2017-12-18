@@ -17,7 +17,6 @@ namespace Tests.Framework.Configuration
 		public sealed override string ClusterFilter { get; protected set; }
 		public sealed override string TestFilter { get; protected set; }
 		public sealed override int Seed { get; protected set; }
-		public sealed override bool UsingCustomSourceSerializer { get; protected set; }
 
 		public YamlConfiguration(string configurationFile)
 		{
@@ -37,13 +36,16 @@ namespace Tests.Framework.Configuration
 
 			this.Seed = _config.TryGetValue("seed", out var seed) ? int.Parse(seed) : 1337;
 		    Randomizer.Seed = new Random(this.Seed);
-
 			var randomizer = new Randomizer();
-			if (_config.TryGetValue("force_custom_source_serializer", out var v))
-				this.UsingCustomSourceSerializer =  bool.Parse(v);
-			else this.UsingCustomSourceSerializer = randomizer.Bool();
+			this.Random = new RandomConfiguration
+			{
+				SourceSerializer = BoolConfig("source_serializer", randomizer),
+				TypedKeys = BoolConfig("typed_keys", randomizer)
+			};
 		}
 
+		private bool BoolConfig(string key, Randomizer randomizer) =>
+			_config.TryGetValue($"random_{key}", out var v) ? bool.Parse(v) : randomizer.Bool();
 
 		private static string ConfigName(string configLine) => Parse(configLine, 0);
 		private static string ConfigValue(string configLine) => Parse(configLine, 1);

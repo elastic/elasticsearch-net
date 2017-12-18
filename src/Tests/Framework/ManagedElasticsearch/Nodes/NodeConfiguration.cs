@@ -18,14 +18,14 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 		public bool TestAgainstAlreadyRunningElasticsearch { get; }
 		public bool RunIntegrationTests { get; }
 		public bool RunUnitTests { get; }
+		public RandomConfiguration Random { get; }
 		public string ClusterFilter { get; }
 		public string TestFilter { get; }
 		public NodeFileSystem FileSystem { get; }
 		public int DesiredPort { get; }
-		public int Seed { get; protected set; }
-		public bool UsingCustomSourceSerializer { get; protected set; }
+		public int Seed { get; }
 
-		public ElasticsearchPlugin[] RequiredPlugins { get; } = { };
+		public ElasticsearchPlugin[] RequiredPlugins { get; }
 
 		public bool XPackEnabled => this.RequiredPlugins.Contains(ElasticsearchPlugin.XPack);
 		public bool EnableSsl { get; }
@@ -45,6 +45,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 
 			this.RequiredPlugins = ClusterRequiredPlugins(cluster);
 			this.Mode = configuration.Mode;
+			this.Random = configuration.Random;
 
 			var v = configuration.ElasticsearchVersion;
 			this.ElasticsearchVersion = v;
@@ -55,7 +56,6 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 			this.ClusterFilter = configuration.ClusterFilter;
 			this.TestFilter = configuration.TestFilter;
 			this.Seed = configuration.Seed;
-			this.UsingCustomSourceSerializer = configuration.UsingCustomSourceSerializer;
 			this.FileSystem = new NodeFileSystem(configuration.ElasticsearchVersion, this.ClusterName, this.NodeName);
 			this.DesiredPort = cluster.DesiredPort;
 

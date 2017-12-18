@@ -49,7 +49,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 			this.FileSystem = config.FileSystem;
 			this.RunningOnCI = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TEAMCITY_VERSION"));
 			this.Port = config.DesiredPort;
-			this.UsingSourceSerializer = config.UsingCustomSourceSerializer ;
+			this.UsingSourceSerializer = config.Random.SourceSerializer ;
 		}
 
 		private readonly object _lockGetClient = new object { };

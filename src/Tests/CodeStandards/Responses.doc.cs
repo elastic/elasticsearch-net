@@ -47,39 +47,38 @@ namespace Tests.CodeStandards
 
 		private static void FindPropertiesBreakingRule(Type type, HashSet<PropertyInfo> exceptions, HashSet<Type> seenTypes, List<string> ruleBreakers)
 		{
-			if (seenTypes.Add(type))
-			{
-				var properties = type.GetProperties();
-				foreach (var propertyInfo in properties)
-				{
-					if (exceptions.Contains(propertyInfo))
-						continue;
+			if (!seenTypes.Add(type)) return;
 
-					if (typeof(IDictionary).IsAssignableFrom(propertyInfo.PropertyType) ||
-						typeof(ICollection).IsAssignableFrom(propertyInfo.PropertyType))
+			var properties = type.GetProperties();
+			foreach (var propertyInfo in properties)
+			{
+				if (exceptions.Contains(propertyInfo))
+					continue;
+
+				if (typeof(IDictionary).IsAssignableFrom(propertyInfo.PropertyType) ||
+				    typeof(ICollection).IsAssignableFrom(propertyInfo.PropertyType))
+				{
+					ruleBreakers.Add($"{type.FullName}.{propertyInfo.Name} is of type {propertyInfo.PropertyType.Name}");
+				}
+				else if (propertyInfo.PropertyType.IsGenericType())
+				{
+					var genericTypeDefinition = propertyInfo.PropertyType.GetGenericTypeDefinition();
+					if (genericTypeDefinition == typeof(IDictionary<,>) ||
+					    genericTypeDefinition == typeof(Dictionary<,>) ||
+					    genericTypeDefinition == typeof(IEnumerable<>) ||
+					    genericTypeDefinition == typeof(IList<>) ||
+					    genericTypeDefinition == typeof(ICollection<>))
 					{
 						ruleBreakers.Add($"{type.FullName}.{propertyInfo.Name} is of type {propertyInfo.PropertyType.Name}");
 					}
-					else if (propertyInfo.PropertyType.IsGenericType())
-					{
-						var genericTypeDefinition = propertyInfo.PropertyType.GetGenericTypeDefinition();
-						if (genericTypeDefinition == typeof(IDictionary<,>) ||
-						    genericTypeDefinition == typeof(Dictionary<,>) ||
-						    genericTypeDefinition == typeof(IEnumerable<>) ||
-							genericTypeDefinition == typeof(IList<>) ||
-							genericTypeDefinition == typeof(ICollection<>))
-						{
-							ruleBreakers.Add($"{type.FullName}.{propertyInfo.Name} is of type {propertyInfo.PropertyType.Name}");
-						}
-					}
-					else if (propertyInfo.PropertyType.IsClass() &&
-					         (propertyInfo.PropertyType.Namespace.StartsWith("Nest") || propertyInfo.PropertyType.Namespace.StartsWith("Elasticsearch.Net"))
-					         //Do not traverse known response dictionaries
-					         && !ResponseDictionaries.Contains(propertyInfo.PropertyType)
-					)
-					{
-						FindPropertiesBreakingRule(propertyInfo.PropertyType, exceptions, seenTypes, ruleBreakers);
-					}
+				}
+				else if (propertyInfo.PropertyType.IsClass() &&
+				         (propertyInfo.PropertyType.Namespace.StartsWith("Nest") || propertyInfo.PropertyType.Namespace.StartsWith("Elasticsearch.Net"))
+				         //Do not traverse known response dictionaries
+				         && !ResponseDictionaries.Contains(propertyInfo.PropertyType)
+				)
+				{
+					FindPropertiesBreakingRule(propertyInfo.PropertyType, exceptions, seenTypes, ruleBreakers);
 				}
 			}
 		}

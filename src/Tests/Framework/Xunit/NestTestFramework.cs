@@ -39,7 +39,9 @@ namespace Xunit
 			}
 			WriteLine($" - {nameof(config.RunIntegrationTests)}: {config.RunIntegrationTests}");
 			WriteLine($" - {nameof(config.RunUnitTests)}: {config.RunUnitTests}");
-			WriteLine($" - {nameof(config.UsingCustomSourceSerializer)}: {config.UsingCustomSourceSerializer}");
+			WriteLine($" - Random:");
+			WriteLine($" \t- {nameof(config.Random.SourceSerializer)}: {config.Random.SourceSerializer}");
+			WriteLine($" \t- {nameof(config.Random.TypedKeys)}: {config.Random.TypedKeys}");
 			WriteLine(new string('-', 20));
 
 

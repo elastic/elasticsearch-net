@@ -76,8 +76,9 @@ namespace Xunit
 			Console.WriteLine("--------");
 			var sb = new StringBuilder("build ")
 				.Append($"seed:{config.Seed} ");
-			if (config.UsingCustomSourceSerializer)
-				sb.Append("source_serialization ");
+
+			AppendExplictConfig("SourceSerializer", sb);
+			AppendExplictConfig("TypedKeys", sb);
 
 			if (runningIntegrations)
 				sb.Append("integrate ")
@@ -108,6 +109,22 @@ namespace Xunit
 			}
 			Console.WriteLine(sb.ToString());
 			Console.WriteLine("--------");
+		}
+
+		/// <summary>
+		/// Append random overwrite to reproduce line only if one was provided explicitly
+		/// </summary>
+		private static void AppendExplictConfig(string key, StringBuilder sb)
+		{
+			if (!TryGetExplicitRandomConfig(key, out var b)) return;
+			sb.Append($"random:SourceSerializer{(b ? "" : ":false")} ");
+		}
+
+		private static bool TryGetExplicitRandomConfig(string key, out bool value)
+		{
+			value = false;
+			var v = Environment.GetEnvironmentVariable($"NEST_RANDOM_{key.ToUpper()}");
+			return !string.IsNullOrWhiteSpace(v) && bool.TryParse(v, out value);
 		}
 	}
 }

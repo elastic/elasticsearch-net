@@ -143,6 +143,6 @@ namespace Tests.Framework
 			return oAgain;
 		}
 
-		protected object Dependant(object builtin, object source) => TestClient.Configuration.UsingCustomSourceSerializer ? source : builtin;
+		protected object Dependant(object builtin, object source) => TestClient.Configuration.Random.SourceSerializer ? source : builtin;
 	}
 }
