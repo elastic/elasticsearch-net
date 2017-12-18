@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using FluentAssertions;
-using Nest;
 using Tests.Framework;
 
-namespace Tests.XPack.GrokProcessorPatterns
+namespace Tests.Ingest.Processor
 {
 	public class GrokProcessorPatternsUnitTests
 	{
