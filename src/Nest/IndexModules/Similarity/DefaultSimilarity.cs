@@ -1,13 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
+	[Obsolete("Use IClassicSimilarity for TF/IDF model. Removed in NEST 6.x")]
 	public interface IDefaultSimilarity : ISimilarity
 	{
 		[JsonProperty("discount_overlaps")]
 		bool? DiscountOverlaps { get; set; }
 	}
 
+	[Obsolete("Use ClassicSimilarity for TF/IDF model. Removed in NEST 6.x")]
 	public class DefaultSimilarity : IDefaultSimilarity
 	{
 		public string Type => "default";
@@ -15,7 +18,8 @@ namespace Nest
 		public bool? DiscountOverlaps { get; set; }
 	}
 
-	public class DefaultSimilarityDescriptor 
+	[Obsolete("Use ClassicSimilarityDescriptor for TF/IDF model. Removed in NEST 6.x")]
+	public class DefaultSimilarityDescriptor
 		: DescriptorBase<DefaultSimilarityDescriptor, IDefaultSimilarity>, IDefaultSimilarity
 	{
 		string ISimilarity.Type => "default";
