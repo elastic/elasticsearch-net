@@ -100,6 +100,8 @@ namespace Nest
 		protected override HttpMethod HttpMethod =>
 			RequestState.RequestParameters?.ContainsKey("source") == true || RequestState.RequestParameters?.ContainsKey("q") == true ? HttpMethod.GET : HttpMethod.POST;
 
+		protected sealed override void Initialize() => this.TypedKeys = true;
+
 		public string Timeout { get; set; }
 		public int? From { get; set; }
 		public int? Size { get; set; }
@@ -143,6 +145,8 @@ namespace Nest
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 		protected override HttpMethod HttpMethod =>
 			RequestState.RequestParameters?.ContainsKey("source") == true || RequestState.RequestParameters?.ContainsKey("q") == true ? HttpMethod.GET : HttpMethod.POST;
+
+		protected sealed override void Initialize() => this.TypedKeys = true;
 
 		public string Timeout { get; set; }
 		public int? From { get; set; }
@@ -191,6 +195,8 @@ namespace Nest
 		Func<dynamic, Hit<dynamic>, Type> ICovariantSearchRequest.TypeSelector { get; set; }
 		protected override HttpMethod HttpMethod =>
 			RequestState.RequestParameters?.ContainsKey("source") == true || RequestState.RequestParameters?.ContainsKey("q") == true ? HttpMethod.GET : HttpMethod.POST;
+
+		protected sealed override void Initialize() => this.TypedKeys();
 
 		SearchType? ISearchRequest.SearchType => RequestState.RequestParameters.GetQueryStringValue<SearchType?>("search_type");
 

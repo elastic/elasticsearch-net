@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nest
 {
@@ -15,18 +12,22 @@ namespace Nest
 
 	public partial class MultiSearchTemplateRequest
 	{
+		protected sealed override void Initialize() => this.TypedKeys = true;
+
 		public IDictionary<string, ISearchTemplateRequest> Operations { get; set; }
 	}
 
 	[DescriptorFor("MsearchTemplate")]
 	public partial class MultiSearchTemplateDescriptor
 	{
+		protected sealed override void Initialize() => this.TypedKeys();
+
 		internal IDictionary<string, ISearchTemplateRequest> _operations = new Dictionary<string, ISearchTemplateRequest>();
 
 		IDictionary<string, ISearchTemplateRequest> IMultiSearchTemplateRequest.Operations
 		{
-			get { return _operations; }
-			set { _operations = value; }
+			get => _operations;
+			set => _operations = value;
 		}
 
 		public MultiSearchTemplateDescriptor Template<T>(string name, Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector) where T : class

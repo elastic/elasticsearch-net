@@ -31,7 +31,6 @@ namespace Nest
 		public Dictionary<string, object> Params { get; set; }
 	}
 
-
 	public partial class RenderSearchTemplateDescriptor
 	{
 		string IRenderSearchTemplateRequest.Inline { get => Self.Source; set => Self.Source = value; }

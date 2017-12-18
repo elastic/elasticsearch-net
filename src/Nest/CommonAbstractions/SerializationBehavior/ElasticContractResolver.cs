@@ -39,8 +39,11 @@ namespace Nest
 
 				if (o == typeof(Error)) contract.Converter = new ErrorJsonConverter();
 				else if (o == typeof(ErrorCause)) contract.Converter = new ErrorCauseJsonConverter();
+				else if (o.IsGeneric() && o.GetGenericTypeDefinition() == typeof(SuggestDictionary<>))
+					contract.Converter =
+						(JsonConverter)typeof(SuggestDictionaryConverter<>).CreateGenericInstance(o.GetGenericArguments());
 
-				if ((typeof(IDictionary).IsAssignableFrom(o) || o.IsGenericDictionary()) && !typeof(IIsADictionary).IsAssignableFrom(o))
+				else if ((typeof(IDictionary).IsAssignableFrom(o) || o.IsGenericDictionary()) && !typeof(IIsADictionary).IsAssignableFrom(o))
 				{
 					if (!o.TryGetGenericDictionaryArguments(out var genericArguments))
 						contract.Converter = new VerbatimDictionaryKeysJsonConverter();
