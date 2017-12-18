@@ -221,13 +221,13 @@ namespace Nest
 		public HighlightDescriptor<T> PostTags(IEnumerable<string> postTags) => Assign(a => a.PostTags = postTags.ToListOrNullIfEmpty());
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> FragmentSize(int fragmentSize) => Assign(a => a.FragmentSize = fragmentSize);
+		public HighlightDescriptor<T> FragmentSize(int? fragmentSize) => Assign(a => a.FragmentSize = fragmentSize);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> NumberOfFragments(int numberOfFragments) => Assign(a => a.NumberOfFragments = numberOfFragments);
+		public HighlightDescriptor<T> NumberOfFragments(int? numberOfFragments) => Assign(a => a.NumberOfFragments = numberOfFragments);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> FragmentOffset(int fragmentOffset) => Assign(a => a.FragmentOffset = fragmentOffset);
+		public HighlightDescriptor<T> FragmentOffset(int? fragmentOffset) => Assign(a => a.FragmentOffset = fragmentOffset);
 
 		// <inheritdoc/>
 		public HighlightDescriptor<T> Encoder(HighlighterEncoder? encoder) => Assign(a => a.Encoder = encoder);
@@ -236,13 +236,13 @@ namespace Nest
 		public HighlightDescriptor<T> Order(HighlighterOrder? order) => Assign(a => a.Order = order);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> RequireFieldMatch(bool requireFieldMatch = true) => Assign(a => a.RequireFieldMatch = requireFieldMatch);
+		public HighlightDescriptor<T> RequireFieldMatch(bool? requireFieldMatch = true) => Assign(a => a.RequireFieldMatch = requireFieldMatch);
 
 		// <inheritdoc/>
 		public HighlightDescriptor<T> BoundaryCharacters(string boundaryCharacters) => Assign(a => a.BoundaryChars = boundaryCharacters);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> BoundaryMaxScan(int boundaryMaxScan) => Assign(a => a.BoundaryMaxScan = boundaryMaxScan);
+		public HighlightDescriptor<T> BoundaryMaxScan(int? boundaryMaxScan) => Assign(a => a.BoundaryMaxScan = boundaryMaxScan);
 
 		// <inheritdoc/>
 		public HighlightDescriptor<T> MaxFragmentLength(int? maxFragmentLength) => Assign(a => a.MaxFragmentLength = maxFragmentLength);
