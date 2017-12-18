@@ -6717,7 +6717,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackGraphExplore
 	///<pre>
-	///https://www.elastic.co/guide/en/graph/current/explore.html
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html
 	///</pre>
 	///</summary>
 	public class GraphExploreRequestParameters : FluentRequestParameters<GraphExploreRequestParameters> 
@@ -6823,7 +6823,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackLicenseDelete
 	///<pre>
-	///https://www.elastic.co/guide/en/shield/current/license-management.html
+	///https://www.elastic.co/guide/en/x-pack/current/license-management.html
 	///</pre>
 	///</summary>
 	public class DeleteLicenseRequestParameters : FluentRequestParameters<DeleteLicenseRequestParameters> 
@@ -6853,7 +6853,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackLicenseGet
 	///<pre>
-	///https://www.elastic.co/guide/en/shield/current/license-management.html
+	///https://www.elastic.co/guide/en/x-pack/current/license-management.html
 	///</pre>
 	///</summary>
 	public class GetLicenseRequestParameters : FluentRequestParameters<GetLicenseRequestParameters> 
@@ -6887,7 +6887,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackLicensePost
 	///<pre>
-	///https://www.elastic.co/guide/en/shield/current/license-management.html
+	///https://www.elastic.co/guide/en/x-pack/current/license-management.html
 	///</pre>
 	///</summary>
 	public class PostLicenseRequestParameters : FluentRequestParameters<PostLicenseRequestParameters> 
@@ -7785,7 +7785,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityAuthenticate
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-authenticate.html
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html
 	///</pre>
 	///</summary>
 	public class AuthenticateRequestParameters : FluentRequestParameters<AuthenticateRequestParameters> 
@@ -7815,7 +7815,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityChangePassword
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-change-password.html
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html
 	///</pre>
 	///</summary>
 	public class ChangePasswordRequestParameters : FluentRequestParameters<ChangePasswordRequestParameters> 
@@ -7849,7 +7849,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityClearCachedRealms
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/current/security-api-clear-cache.html
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html
 	///</pre>
 	///</summary>
 	public class ClearCachedRealmsRequestParameters : FluentRequestParameters<ClearCachedRealmsRequestParameters> 
@@ -7883,7 +7883,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityClearCachedRoles
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-clear-role-cache
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-clear-role-cache
 	///</pre>
 	///</summary>
 	public class ClearCachedRolesRequestParameters : FluentRequestParameters<ClearCachedRolesRequestParameters> 
@@ -7913,7 +7913,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityDeleteRole
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-delete-role
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-delete-role
 	///</pre>
 	///</summary>
 	public class DeleteRoleRequestParameters : FluentRequestParameters<DeleteRoleRequestParameters> 
@@ -7947,7 +7947,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityDeleteRoleMapping
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-delete-role-mapping
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-delete-role-mapping
 	///</pre>
 	///</summary>
 	public class DeleteRoleMappingRequestParameters : FluentRequestParameters<DeleteRoleMappingRequestParameters> 
@@ -7981,7 +7981,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityDeleteUser
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-delete-user
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-delete-user
 	///</pre>
 	///</summary>
 	public class DeleteUserRequestParameters : FluentRequestParameters<DeleteUserRequestParameters> 
@@ -8015,7 +8015,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityDisableUser
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-disable-user.html
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-disable-user
 	///</pre>
 	///</summary>
 	public class DisableUserRequestParameters : FluentRequestParameters<DisableUserRequestParameters> 
@@ -8049,7 +8049,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityEnableUser
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-enable-user.html
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-enable-user
 	///</pre>
 	///</summary>
 	public class EnableUserRequestParameters : FluentRequestParameters<EnableUserRequestParameters> 
@@ -8083,7 +8083,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityGetRole
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-get-role
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-get-role
 	///</pre>
 	///</summary>
 	public class GetRoleRequestParameters : FluentRequestParameters<GetRoleRequestParameters> 
@@ -8113,7 +8113,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityGetRoleMapping
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-get-role-mapping
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-get-role-mapping
 	///</pre>
 	///</summary>
 	public class GetRoleMappingRequestParameters : FluentRequestParameters<GetRoleMappingRequestParameters> 
@@ -8143,7 +8143,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityGetToken
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-get-token
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-get-token
 	///</pre>
 	///</summary>
 	public class GetUserAccessTokenRequestParameters : FluentRequestParameters<GetUserAccessTokenRequestParameters> 
@@ -8173,7 +8173,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityGetUser
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-get-user
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-get-user
 	///</pre>
 	///</summary>
 	public class GetUserRequestParameters : FluentRequestParameters<GetUserRequestParameters> 
@@ -8203,7 +8203,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityInvalidateToken
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-invalidate-token
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-invalidate-token
 	///</pre>
 	///</summary>
 	public class InvalidateUserAccessTokenRequestParameters : FluentRequestParameters<InvalidateUserAccessTokenRequestParameters> 
@@ -8233,7 +8233,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityPutRole
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-put-role
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-put-role
 	///</pre>
 	///</summary>
 	public class PutRoleRequestParameters : FluentRequestParameters<PutRoleRequestParameters> 
@@ -8267,7 +8267,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityPutRoleMapping
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-put-role-mapping
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-put-role-mapping
 	///</pre>
 	///</summary>
 	public class PutRoleMappingRequestParameters : FluentRequestParameters<PutRoleMappingRequestParameters> 
@@ -8301,7 +8301,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for XpackSecurityPutUser
 	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-put-user
+	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-put-user
 	///</pre>
 	///</summary>
 	public class PutUserRequestParameters : FluentRequestParameters<PutUserRequestParameters> 
@@ -8639,6 +8639,10 @@ namespace Elasticsearch.Net
 	public class WatcherStatsRequestParameters : FluentRequestParameters<WatcherStatsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Emits stack traces of currently running watches</summary>
+		public WatcherStatsRequestParameters EmitStacktraces(bool emit_stacktraces) => this.AddQueryString("emit_stacktraces", emit_stacktraces);
+		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public WatcherStatsRequestParameters Pretty(bool pretty) => this.AddQueryString("pretty", pretty);
