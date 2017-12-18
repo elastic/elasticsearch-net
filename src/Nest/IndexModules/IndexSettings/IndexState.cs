@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -17,24 +18,21 @@ namespace Nest
 		[JsonProperty("mappings")]
 		IMappings Mappings { get; set; }
 
-		[JsonProperty("similarity")]
+		[JsonIgnore]
+		[Obsolete("Use Similarity within Settings. Removed in NEST 6.x")]
 		ISimilarities Similarity { get; set; }
 	}
 	public class IndexState : IIndexState
 	{
 		public IIndexSettings Settings { get; set; }
-		
+
 		public IMappings Mappings { get; set; }
 
 		public IAliases Aliases { get; set; }
-			
+
 		public IWarmers Warmers { get; set; }
 
+		[Obsolete("Use Similarity within Settings. Removed in NEST 6.x")]
 		public ISimilarities Similarity { get; set; }
 	}
-
-
-
-
-
 }

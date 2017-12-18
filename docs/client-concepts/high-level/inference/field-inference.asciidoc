@@ -473,9 +473,13 @@ class Precedence
 }
 ----
 <1> Even though this property has a NEST property mapping _and_ a `JsonProperty` attribute, We are going to provide a hard rename for it on ConnectionSettings later that should win.
+
 <2> This property has both a NEST attribute and a `JsonProperty`, NEST should win.
+
 <3> We should take the json property into account by itself
+
 <4> This property we are going to special case in our custom serializer to resolve to ask
+
 <5> We are going to register a DefaultFieldNameInferrer on ConnectionSettings that will uppercase all properties.
 
 Here we create a custom serializer that renames any property named `AskSerializer` to `ask`

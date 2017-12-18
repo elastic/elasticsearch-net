@@ -15,7 +15,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 	public abstract class InstallationTaskBase
 	{
 		public abstract void Run(NodeConfiguration config, NodeFileSystem fileSystem);
-		
+
 		private static bool IsMono { get; } = Type.GetType("Mono.Runtime") != null;
 		protected string BinarySuffix => IsMono || Path.PathSeparator == '/' ? "" : ".bat";
 
@@ -35,7 +35,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 			Console.WriteLine($"Preparing to execute: {description} ...");
 			var timeout = TimeSpan.FromSeconds(420);
 			var handle = new XplatManualResetEvent(false);
-			Task.Run(() =>
+			var task = Task.Run(() =>
 			{
 				using (var p = new ObservableProcess(binary, arguments))
 				{
@@ -57,8 +57,12 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 						throw new Exception($"Timeout while executing {description} exceeded {timeout}");
 				}
 			});
+
 			if (!handle.WaitOne(timeout, true))
 				throw new Exception($"Timeout while executing {description} exceeded {timeout}");
+
+			if (task.Exception != null)
+				throw task.Exception;
 		}
 	}
 }
