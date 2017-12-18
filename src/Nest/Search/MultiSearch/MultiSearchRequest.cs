@@ -13,6 +13,9 @@ namespace Nest
 	public partial class MultiSearchRequest
 	{
 		public IDictionary<string, ISearchRequest> Operations { get; set; }
+
+		protected sealed override void Initialize() => this.TypedKeys = true;
+
 	}
 
 	[DescriptorFor("Msearch")]
@@ -25,6 +28,8 @@ namespace Nest
 			get { return _operations; }
 			set { _operations = value; }
 		}
+
+		protected sealed override void Initialize() => this.TypedKeys();
 
 		public MultiSearchDescriptor Search<T>(string name, Func<SearchDescriptor<T>, ISearchRequest> searchSelector) where T : class
 		{

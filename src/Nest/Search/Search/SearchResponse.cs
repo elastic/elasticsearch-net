@@ -34,7 +34,7 @@ namespace Nest
 		/// <summary>
 		/// Gets the suggester results.
 		/// </summary>
-		IReadOnlyDictionary<string, Suggest<T>[]> Suggest { get; }
+		SuggestDictionary<T> Suggest { get; }
 
 		/// <summary>
 		/// Time in milliseconds for Elasticsearch to execute the search
@@ -115,8 +115,7 @@ namespace Nest
 		public Profile Profile { get; internal set; }
 
 		[JsonProperty("suggest")]
-		public IReadOnlyDictionary<string, Suggest<T>[]> Suggest { get; internal set; } =
-			EmptyReadOnly<string, Suggest<T>[]>.Dictionary;
+		public SuggestDictionary<T> Suggest { get; internal set; } = SuggestDictionary<T>.Default;
 
 		[JsonProperty("took")]
 		public long Took { get; internal set; }

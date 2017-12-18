@@ -117,7 +117,7 @@ namespace Xunit
 		private static void AppendExplictConfig(string key, StringBuilder sb)
 		{
 			if (!TryGetExplicitRandomConfig(key, out var b)) return;
-			sb.Append($"random:SourceSerializer{(b ? "" : ":false")} ");
+			sb.Append($"random:{key}{(b ? "" : ":false")} ");
 		}
 
 		private static bool TryGetExplicitRandomConfig(string key, out bool value)
