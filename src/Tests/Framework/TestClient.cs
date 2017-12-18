@@ -141,7 +141,7 @@ namespace Tests.Framework
 			{
 				if (sourceSerializerFactory != null) return sourceSerializerFactory(builtin, values);
 
-                return !Configuration.UsingCustomSourceSerializer
+                return !Configuration.Random.SourceSerializer
                 	? null
 	                : new TestSourceSerializerBase(builtin, values);
 			}, propertyMappingProvider);

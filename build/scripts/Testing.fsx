@@ -25,12 +25,17 @@ module Tests =
         let clusterFilter =  getBuildParamOrDefault "clusterfilter" ""
         let testFilter = getBuildParamOrDefault "testfilter" ""
         let numberOfConnections = getBuildParamOrDefault "numberOfConnections" ""
-        let forceSource = if Commandline.forceSourceSerialization then "true" else "false";
         setProcessEnvironVar "NEST_INTEGRATION_CLUSTER" clusterFilter
         setProcessEnvironVar "NEST_TEST_FILTER" testFilter
         setProcessEnvironVar "NEST_NUMBER_OF_CONNECTIONS" numberOfConnections
         setProcessEnvironVar "NEST_TEST_SEED" Commandline.seed
-        setProcessEnvironVar "NEST_SOURCE_SERIALIZER" forceSource
+        for random in Commandline.randomArgs do 
+            let tokens = random.Split [|':'|]
+            let key = tokens.[0].ToUpper()
+            let b = if tokens.Length = 1 then true else (bool.Parse (tokens.[1]))
+            let v = sprintf "NEST_RANDOM_%s" key
+            setProcessEnvironVar v (if b then "true" else "false")
+        ignore()
 
     let private dotnetTest (target: Commandline.MultiTarget) =
         CreateDir Paths.BuildOutput

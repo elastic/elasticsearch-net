@@ -25,7 +25,7 @@ namespace Tests.Document.Single.Create
 			StartedOn = FixedDate,
 			LastActivity = FixedDate,
 			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}},
-			SourceOnly = TestClient.Configuration.UsingCustomSourceSerializer ? new SourceOnlyObject() : null
+			SourceOnly = TestClient.Configuration.Random.SourceSerializer ? new SourceOnlyObject() : null
 		};
 
 		public CreateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
