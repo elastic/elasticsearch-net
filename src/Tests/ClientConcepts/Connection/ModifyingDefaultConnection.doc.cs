@@ -141,7 +141,7 @@ namespace Tests.ClientConcepts.Connection
         }
         /**
         * The Connection limit has been increased from the default 80 to much higher and
-        * https://en.wikipedia.org/wiki/Nagle's_algorithm[nagling] has been enabled, which is disabled by default in the client.
+        * https://en.wikipedia.org/wiki/Nagle%27s_algorithm[nagling] has been enabled, which is disabled by default in the client.
         *
         * NOTE: The client reuses TCP connections through .NET's internal connection pooling,
 		* so changing the connection limit to something really high should only be done with careful
