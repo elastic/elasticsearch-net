@@ -4,11 +4,10 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
-namespace Tests.Ingest.GrokProcessorPatterns
+namespace Tests.Ingest.Processor
 {
-	public class GrokProcessorPatternsApiTests : ApiTestBase<ReadOnlyCluster, IGrokProcessorPatternsResponse, IGrokProcessorPatternsRequest, GrokProcessorPatternsDescriptor, GrokProcessorPatternsRequest>
+	public class GrokProcessorPatternsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGrokProcessorPatternsResponse, IGrokProcessorPatternsRequest, GrokProcessorPatternsDescriptor, GrokProcessorPatternsRequest>
 	{
 		public GrokProcessorPatternsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -20,8 +19,9 @@ namespace Tests.Ingest.GrokProcessorPatterns
 		);
 
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-
 		protected override string UrlPath => $"/_ingest/processor/grok";
+		protected override int ExpectStatusCode => 200;
+		protected override bool ExpectIsValid => true;
 
 		protected override Func<GrokProcessorPatternsDescriptor, IGrokProcessorPatternsRequest> Fluent => d => d;
 

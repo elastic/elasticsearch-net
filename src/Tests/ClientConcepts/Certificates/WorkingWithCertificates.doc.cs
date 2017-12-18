@@ -177,7 +177,7 @@ namespace Tests.ClientConcepts.Certificates
 		 *
 		 * X-Pack also allows you to configure a {xpack_current}/pki-realm.html[PKI realm] to enable user authentication
 		 * through client certificates. The `certgen` tool included with X-Pack allows you to
-		 * {xpack_current}/ssl-tls.html#CO13-4[generate client certificates as well] and assign the distinguished name (DN) of the
+		 * {ref_current}/certgen.html[generate client certificates as well] and assign the distinguished name (DN) of the
 		 * certificate to a user with a certain role.
 		 *
 		 * certgen by default only generates a public certificate (`.cer`) and a private key `.key`. To authenticate with client certificates, you need to present both
