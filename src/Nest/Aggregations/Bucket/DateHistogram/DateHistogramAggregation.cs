@@ -36,8 +36,12 @@ namespace Nest
 		[JsonProperty("order")]
 		HistogramOrder Order { get; set; }
 
-		[JsonProperty("extended_bounds")]
+		[JsonIgnore]
+		[Obsolete("Use ExtendedBoundsDateMath that accepts DateMath expressions. Fixed in NEST 6.x")]
 		ExtendedBounds<DateTime> ExtendedBounds { get; set; }
+
+		[JsonProperty("extended_bounds")]
+		ExtendedBounds<DateMath> ExtendedBoundsDateMath { get; set; }
 
 		[JsonProperty("missing")]
 		DateTime? Missing { get; set; }
@@ -46,6 +50,7 @@ namespace Nest
 	public class DateHistogramAggregation : BucketAggregationBase, IDateHistogramAggregation
 	{
 		private string _format;
+		private ExtendedBounds<DateTime> _extendedBounds;
 		public Field Field { get; set; }
 		public IScript Script { get; set; }
 		public IDictionary<string, object> Params { get; set; }
@@ -55,7 +60,7 @@ namespace Nest
 		{
 			get => !string.IsNullOrEmpty(_format) &&
 			       !_format.Contains("date_optional_time") &&
-			       (ExtendedBounds != null || Missing.HasValue)
+			       (ExtendedBoundsDateMath != null || Missing.HasValue)
 				? _format + "||date_optional_time"
 				: _format;
 			set => _format = value;
@@ -65,7 +70,24 @@ namespace Nest
 		public string TimeZone { get; set; }
 		public string Offset { get; set; }
 		public HistogramOrder Order { get; set; }
-		public ExtendedBounds<DateTime> ExtendedBounds { get; set; }
+
+		[Obsolete("Use ExtendedBoundsDateMath that accepts DateMath expressions. Fixed in NEST 6.x")]
+		public ExtendedBounds<DateTime> ExtendedBounds
+		{
+			get => _extendedBounds;
+			set
+			{
+				_extendedBounds = value;
+				ExtendedBoundsDateMath = new ExtendedBounds<DateMath>
+				{
+					Minimum = value.Minimum,
+					Maximum = value.Maximum
+				};
+			}
+		}
+
+		public ExtendedBounds<DateMath> ExtendedBoundsDateMath { get; set; }
+
 		public DateTime? Missing { get; set; }
 
 		internal DateHistogramAggregation() { }
@@ -81,6 +103,7 @@ namespace Nest
 		where T : class
 	{
 		private string _format;
+		private ExtendedBounds<DateTime> _extendedBounds;
 		Field IDateHistogramAggregation.Field { get; set; }
 
 		IScript IDateHistogramAggregation.Script { get; set; }
@@ -93,7 +116,7 @@ namespace Nest
 		{
 			get => !string.IsNullOrEmpty(_format) &&
 			       !_format.Contains("date_optional_time") &&
-			       (Self.ExtendedBounds != null || Self.Missing.HasValue)
+			       (Self.ExtendedBoundsDateMath != null || Self.Missing.HasValue)
 				? _format + "||date_optional_time"
 				: _format;
 			set => _format = value;
@@ -107,7 +130,22 @@ namespace Nest
 
 		HistogramOrder IDateHistogramAggregation.Order { get; set; }
 
-		ExtendedBounds<DateTime> IDateHistogramAggregation.ExtendedBounds { get; set; }
+		[Obsolete("Use ExtendedBoundsDateMath that accepts DateMath expressions. Fixed in NEST 6.x")]
+		ExtendedBounds<DateTime> IDateHistogramAggregation.ExtendedBounds
+		{
+			get => _extendedBounds;
+			set
+			{
+				_extendedBounds = value;
+				Self.ExtendedBoundsDateMath = new ExtendedBounds<DateMath>
+				{
+					Minimum = value.Minimum,
+					Maximum = value.Maximum
+				};
+			}
+		}
+
+		ExtendedBounds<DateMath> IDateHistogramAggregation.ExtendedBoundsDateMath { get; set; }
 
 		DateTime? IDateHistogramAggregation.Missing { get; set; }
 
@@ -142,8 +180,12 @@ namespace Nest
 		public DateHistogramAggregationDescriptor<T> OrderDescending(string key) =>
 			Assign(a => a.Order = new HistogramOrder { Key = key, Order = SortOrder.Descending });
 
+		[Obsolete("Use ExtendedBoundsDateMath() that accepts DateMath expressions. Fixed in NEST 6.x")]
 		public DateHistogramAggregationDescriptor<T> ExtendedBounds(DateTime min, DateTime max) =>
 			Assign(a=>a.ExtendedBounds = new ExtendedBounds<DateTime> { Minimum = min, Maximum = max });
+
+		public DateHistogramAggregationDescriptor<T> ExtendedBoundsDateMath(DateMath min, DateMath max) =>
+			Assign(a=>a.ExtendedBoundsDateMath = new ExtendedBounds<DateMath> { Minimum = min, Maximum = max });
 
 		public DateHistogramAggregationDescriptor<T> Missing(DateTime missing) => Assign(a => a.Missing = missing);
 	}

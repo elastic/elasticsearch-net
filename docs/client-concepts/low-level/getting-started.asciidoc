@@ -1,6 +1,6 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
 
-:xpack_current: https://www.elastic.co/guide/en/x-pack/5.3
+:xpack_current: https://www.elastic.co/guide/en/x-pack/5.6
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -108,6 +108,7 @@ var asyncIndexResponse = await lowlevelClient.IndexAsync<string>("people", "pers
 string responseString = asyncIndexResponse.Body;
 ----
 <1> synchronous method that returns an `IIndexResponse`
+
 <2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
 
 NOTE: All available methods within Elasticsearch.Net are exposed as both synchronous and asynchronous versions,
@@ -243,8 +244,11 @@ var serverError = searchResponse.ServerError; <3>
 var exception = searchResponse.OriginalException; <4>
 ----
 <1> Response is in the 200 range, or an expected response for the given request
+
 <2> Response is successful, or has a response code between 400-599 that indicates the request cannot be retried.
+
 <3> Details of any error returned from Elasticsearch
+
 <4> If the response is unsuccessful, will hold the original exception.
 
 Using these details, it is possible to make decisions around what should be done in your application.
